@@ -1,0 +1,146 @@
+/* ============================================================
+   CAT OS — base.css
+   Reset + element defaults + the shell layout + motion
+   foundation. No component-specific rules here.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Evidence jumps land below the sticky session bar, never under it. */
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent; /* we provide our own press feedback */
+  /* Reading is vertical; sideways rubber-banding is never useful. */
+  overscroll-behavior-x: none;
+  /* Theme switching feels intentional, not jarring */
+  transition: background-color var(--duration) var(--ease-out),
+              color var(--duration) var(--ease-out);
+}
+
+h1, h2, h3 {
+  line-height: var(--leading-tight);
+  margin: 0 0 var(--space-3);
+  text-wrap: balance;
+}
+h1 { font-size: var(--text-xl); font-weight: var(--weight-bold); }
+h2 { font-size: var(--text-lg); font-weight: var(--weight-semibold); }
+p  { margin: 0 0 var(--space-3); }
+
+a { color: var(--color-accent); text-underline-offset: 2px; }
+a:hover { color: var(--color-accent-hover); }
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  min-height: var(--tap-target);
+  touch-action: manipulation; /* no 300ms delay, no double-tap zoom */
+}
+
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Focus: visible, consistent, never removed — only replaced */
+:focus { outline: none; }
+:focus-visible {
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+::selection { background: var(--color-accent-subtle); }
+
+.muted  { color: var(--color-ink-2); }
+.hint   { color: var(--color-ink-3); font-size: var(--text-xs); }
+
+/* ---------- Shell layout ----------
+   Header / scrolling view / fixed bottom nav, with iPhone
+   safe areas on every edge. */
+
+.shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell__header {
+  padding: calc(env(safe-area-inset-top) + var(--space-3))
+           calc(env(safe-area-inset-right) + var(--space-4))
+           var(--space-3)
+           calc(env(safe-area-inset-left) + var(--space-4));
+}
+
+.wordmark {
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.shell__view {
+  flex: 1;
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: var(--space-2)
+           calc(env(safe-area-inset-right) + var(--space-4))
+           calc(var(--nav-height) + env(safe-area-inset-bottom) + var(--space-6))
+           calc(env(safe-area-inset-left) + var(--space-4));
+  outline: none; /* focus is programmatic on route change */
+}
+
+/* Landscape phones: reclaim vertical space */
+@media (orientation: landscape) and (max-height: 480px) {
+  .shell__header { padding-top: var(--space-2); padding-bottom: var(--space-1); }
+}
+
+/* ---------- Motion foundation ----------
+   One orchestrated entrance: the screen rises gently, and its
+   cards follow in a quiet stagger. Nothing else moves on load. */
+
+.screen {
+  animation: screen-in var(--duration-slow) var(--ease-out) both;
+}
+
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Staggered children: screens opt in by using .card / .list-item
+   directly under the screen. Delays are capped — content is never
+   made to wait for choreography. */
+.screen > .card, .screen > .list-item, .screen > .stat-grid {
+  animation: screen-in var(--duration-slow) var(--ease-out) both;
+}
+.screen > :nth-child(2) { animation-delay: 40ms; }
+.screen > :nth-child(3) { animation-delay: 80ms; }
+.screen > :nth-child(4) { animation-delay: 120ms; }
+.screen > :nth-child(n+5) { animation-delay: 150ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

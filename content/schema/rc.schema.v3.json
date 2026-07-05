@@ -1,0 +1,242 @@
+{
+  "$id": "rc.schema.v3",
+  "title": "CAT OS Reading Comprehension content item, schema v3",
+  "description": "Schema v3 = v2 plus the Reading Experience layer (app 0.6.0): every question's explanation must teach one transferable reading habit (explanation.reading_habit), and every mentor block must explain why students misread the passage (mentor.misunderstanding). v1/v2 files remain valid under their own schemas; versions are appended, never edited. Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": ["schema_version", "meta", "passage", "questions", "vocabulary", "mentor"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 3 },
+
+    "meta": {
+      "type": "object",
+      "required": [
+        "id", "type", "version", "status", "quality_score",
+        "genre", "difficulty", "difficulty_numeric", "stage", "skills",
+        "word_count", "question_count", "question_types",
+        "theme", "estimated_time_min", "source",
+        "date_added", "batch_id", "prompt_version",
+        "reviewer_notes", "vocab_extracted"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id":      { "type": "string", "pattern": "^rc-[0-9]{4}$" },
+        "type":    { "const": "rc" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status":  { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "quality_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "genre": {
+          "enum": [
+            "philosophy", "economics", "political-theory", "history",
+            "science", "sociology", "arts-culture", "literature-theory",
+            "psychology", "anthropology", "technology-ethics", "environment"
+          ]
+        },
+        "difficulty": { "enum": ["easy", "medium", "hard"] },
+        "difficulty_numeric": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "stage": { "enum": ["foundation", "developing", "intermediate", "advanced", "elite"] },
+        "skills": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": {
+            "enum": [
+              "main-idea-extraction", "inference", "tone-detection",
+              "argument-tracking", "trap-recognition", "vocabulary-in-context",
+              "structure-mapping", "evidence-anchoring"
+            ]
+          }
+        },
+        "word_count": { "type": "integer", "minimum": 400, "maximum": 700 },
+        "question_count": { "type": "integer", "minimum": 3, "maximum": 5 },
+        "question_types": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "enum": [
+              "main_idea", "inference", "tone", "vocabulary_in_context",
+              "logical_structure", "specific_detail", "title_selection",
+              "paragraph_function", "author_purpose", "strengthen_weaken"
+            ]
+          }
+        },
+        "theme": { "type": "string", "minLength": 3 },
+        "estimated_time_min": { "type": "number", "minimum": 1 },
+        "source": {
+          "type": "object",
+          "required": ["publication", "url", "author", "date_accessed", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication":   { "type": "string", "minLength": 1 },
+            "url":           { "type": ["string", "null"] },
+            "author":        { "type": ["string", "null"] },
+            "date_accessed": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+            "usage_note":    { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id": { "type": "string", "pattern": "^batch-rc-[0-9]{3}$" },
+        "prompt_version": { "type": "string", "minLength": 1 },
+        "reviewer_notes": { "type": "string" },
+        "vocab_extracted": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "passage": {
+      "type": "object",
+      "required": ["title", "paragraphs", "reading_time_min"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 3 },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["id", "text"],
+            "additionalProperties": false,
+            "properties": {
+              "id":   { "type": "string", "pattern": "^rc-[0-9]{4}-p[0-9]+$" },
+              "text": { "type": "string", "minLength": 40 }
+            }
+          }
+        },
+        "reading_time_min": { "type": "number", "minimum": 1 }
+      }
+    },
+
+    "questions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "stem", "options", "correct", "estimated_time_sec", "explanation"],
+        "additionalProperties": false,
+        "properties": {
+          "id":   { "type": "string", "pattern": "^rc-[0-9]{4}-q[0-9]+$" },
+          "type": {
+            "enum": [
+              "main_idea", "inference", "tone", "vocabulary_in_context",
+              "logical_structure", "specific_detail", "title_selection",
+              "paragraph_function", "author_purpose", "strengthen_weaken"
+            ]
+          },
+          "stem": { "type": "string", "minLength": 10 },
+          "options": {
+            "type": "object",
+            "required": ["A", "B", "C", "D"],
+            "additionalProperties": false,
+            "properties": {
+              "A": { "type": "string", "minLength": 1 },
+              "B": { "type": "string", "minLength": 1 },
+              "C": { "type": "string", "minLength": 1 },
+              "D": { "type": "string", "minLength": 1 }
+            }
+          },
+          "correct": { "enum": ["A", "B", "C", "D"] },
+          "estimated_time_sec": { "type": "integer", "minimum": 20 },
+          "explanation": {
+            "type": "object",
+            "required": ["correct_reasoning", "passage_anchor", "question_type_note", "reading_habit", "distractors"],
+            "additionalProperties": false,
+            "properties": {
+              "correct_reasoning": { "type": "string", "minLength": 20 },
+              "passage_anchor":    { "type": "string", "minLength": 2 },
+              "question_type_note": { "type": "string", "minLength": 10 },
+              "reading_habit": { "type": "string", "minLength": 15,
+                "description": "One transferable habit of expert readers that this question practices, phrased as advice the student can apply to ANY passage. Shown as 'Make it a habit'." },
+              "distractors": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "object",
+                  "required": ["option", "trap_type", "why_wrong", "seductive_element"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "option": { "enum": ["A", "B", "C", "D"] },
+                    "trap_type": {
+                      "enum": [
+                        "out_of_scope", "true_but_irrelevant",
+                        "passage_language_shifted", "opposite_direction",
+                        "too_broad", "too_narrow", "wrong_structural_role",
+                        "half_right", "extreme_language", "near_synonym_confusion"
+                      ]
+                    },
+                    "why_wrong":         { "type": "string", "minLength": 10 },
+                    "seductive_element": { "type": "string", "minLength": 5 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "vocabulary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["word", "passage_use", "meaning_here", "difficulty"],
+        "additionalProperties": false,
+        "properties": {
+          "word":         { "type": "string", "minLength": 2 },
+          "passage_use":  { "type": "string", "minLength": 5 },
+          "meaning_here": { "type": "string", "minLength": 5 },
+          "difficulty":   { "enum": ["easy", "medium", "hard"] }
+        }
+      }
+    },
+
+    "mentor": {
+      "type": "object",
+      "required": [
+        "challenge", "main_idea", "author_intention", "paragraph_journey",
+        "tone_progression", "key_transitions", "misunderstanding",
+        "traps_summary", "real_world", "takeaway"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "challenge": { "type": "string", "minLength": 20,
+          "description": "Shown BEFORE reading: one sentence on what will test the reader. No spoilers of answers." },
+        "main_idea": { "type": "string", "minLength": 30,
+          "description": "The whole passage in one or two plain sentences." },
+        "author_intention": { "type": "string", "minLength": 30,
+          "description": "What the author is trying to do to the reader, in plain words." },
+        "paragraph_journey": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["paragraph_id", "role", "note"],
+            "additionalProperties": false,
+            "properties": {
+              "paragraph_id": { "type": "string", "pattern": "^rc-[0-9]{4}-p[0-9]+$" },
+              "role": { "type": "string", "minLength": 3,
+                "description": "Two-to-four word structural role, e.g. 'Sets the puzzle'." },
+              "note": { "type": "string", "minLength": 20,
+                "description": "One or two sentences in VERY simple language: what this paragraph does, explained as to a friend." }
+            }
+          }
+        },
+        "tone_progression": { "type": "string", "minLength": 20,
+          "description": "How the voice moves across the passage, in one or two sentences." },
+        "key_transitions": {
+          "type": "array", "minItems": 1, "maxItems": 3,
+          "items": { "type": "string", "minLength": 15 },
+          "description": "The hinge moments where the argument turns, quoted or located plainly."
+        },
+        "misunderstanding": { "type": "string", "minLength": 30,
+          "description": "Why students genuinely misread THIS passage: the specific wrong mental model a hurried reader builds, and what causes it. Shown as 'Why readers misread it'." },
+        "traps_summary": { "type": "string", "minLength": 30,
+          "description": "The distractor patterns this passage used, as advice for next time." },
+        "real_world": { "type": "string", "minLength": 30,
+          "description": "Where the reader will meet this idea outside the exam." },
+        "takeaway": { "type": "string", "minLength": 20,
+          "description": "One memorable sentence to keep." }
+      }
+    }
+  }
+}

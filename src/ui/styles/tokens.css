@@ -1,0 +1,220 @@
+/* ============================================================
+   CAT OS — design tokens (tokens.css)
+   The complete design language and single source of visual
+   truth. Components and screens consume ONLY these variables;
+   no raw hex values, sizes, or durations elsewhere.
+
+   Direction (PRODUCT_BLUEPRINT.md): premium through restraint.
+   Paper, ink, and one study-lamp green. The reading experience
+   is the product; the chrome stays out of its way.
+
+   0.6.0 (The Reading Experience) adds the reading-surface
+   tokens: a dedicated display size, paragraph rhythm, a
+   book-width measure, chrome veil for sticky bars, and an XL
+   reading size. All earlier token names are preserved.
+   ============================================================ */
+
+:root {
+  /* ==================== COLOR ==================== */
+
+  /* Surfaces — warm paper, never sterile white-on-white */
+  --color-bg:         #F7F6F3;   /* the desk */
+  --color-surface:    #FFFFFF;   /* cards, sheets */
+  --color-surface-2:  #EFEDE8;   /* wells, pressed fills, tracks */
+  --color-surface-3:  #E7E4DD;   /* deeper wells (segmented track) */
+
+  /* Ink — three deliberate levels of hierarchy */
+  --color-ink:        #1C1D1F;   /* primary text */
+  --color-ink-2:      #5D6167;   /* secondary text */
+  --color-ink-3:      #8A8E94;   /* captions, hints, disabled text */
+
+  /* Lines */
+  --color-line:        #E6E4DE;  /* hairline borders */
+  --color-line-strong: #D8D5CD;  /* interactive borders */
+
+  /* Accent — the study lamp. Actions, active states, nothing else. */
+  --color-accent:        #2F5D4F;
+  --color-accent-hover:  #274F42;
+  --color-accent-ink:    #FFFFFF;
+  --color-accent-subtle: #EDF3F0; /* quiet accent fills (active nav, info wells) */
+
+  /* Chrome veil — translucent sticky bars over scrolling text */
+  --color-veil: rgba(247, 246, 243, 0.88);
+
+  /* Semantic states — muted, never alarming */
+  --color-success:      #2F5D4F;
+  --color-success-bg:   #E4EEE9;
+  --color-warning:      #8A6116;
+  --color-warning-bg:   #F6EDD8;
+  --color-danger:       #9C3B2E;
+  --color-danger-bg:    #F4E3DF;
+  --color-danger-ink:   #FFFFFF;  /* text on solid danger */
+  --color-info:         #33586E;
+  --color-info-bg:      #E3EDF3;
+
+  /* Answer feedback (aliases of semantic tokens; M2 names kept) */
+  --color-correct-bg:  var(--color-success-bg);
+  --color-correct-ink: #24523F;
+  --color-wrong-bg:    var(--color-danger-bg);
+  --color-wrong-ink:   #7C2E22;
+
+  /* ==================== TYPE ==================== */
+  /* System stacks by design (TECH_STACK durability): nothing to
+     vendor or rot; on iOS the serif resolves to New York. */
+  --font-ui:      system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-reading: ui-serif, "New York", Georgia, "Times New Roman", serif;
+
+  /* Scale — chosen sizes, not a blind ratio */
+  --text-2xs:  0.75rem;    /* 12 — overlines, tabular captions */
+  --text-xs:   0.8125rem;  /* 13 — captions, nav labels, hints */
+  --text-sm:   0.9375rem;  /* 15 — secondary text, options */
+  --text-base: 1.0625rem;  /* 17 — UI body */
+  --text-read: 1.125rem;   /* 18 — passage body (reading comfort first) */
+  --text-lg:   1.25rem;    /* 20 — section titles */
+  --text-xl:   1.5rem;     /* 24 — screen titles */
+  --text-2xl:  1.875rem;   /* 30 — the greeting */
+  --text-3xl:  2.125rem;   /* 34 — passage titles on the reading surface */
+
+  --leading-tight:   1.2;
+  --leading-body:    1.55;
+  --leading-reading: 1.78;
+
+  --tracking-tight: -0.01em;  /* serif display */
+  --tracking-wide:   0.06em;  /* overlines/eyebrows */
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     650;
+
+  /* ==================== SPACE (4px scale) ==================== */
+  --space-1: 0.25rem;   /*  4 */
+  --space-2: 0.5rem;    /*  8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 3rem;      /* 48 */
+  --space-8: 4rem;      /* 64 */
+
+  /* Reading rhythm — the vertical breath between paragraphs.
+     Scales with the reading size (see data-reading blocks). */
+  --para-space: 1.35em;
+
+  /* ==================== SHAPE ==================== */
+  --radius-xs: 6px;     /* badges, chips */
+  --radius-sm: 8px;     /* focus rings, inputs */
+  --radius-md: 12px;    /* buttons, options */
+  --radius-lg: 16px;    /* cards, list items */
+  --radius-xl: 20px;    /* hero cards, reflection sheet */
+  --radius-full: 999px; /* pills, tracks */
+
+  /* ==================== ELEVATION ==================== */
+  --shadow-0: none;
+  --shadow-1: 0 1px 2px rgba(28, 29, 31, 0.05),
+              0 1px 3px rgba(28, 29, 31, 0.06);     /* resting cards */
+  --shadow-2: 0 2px 6px rgba(28, 29, 31, 0.07),
+              0 8px 24px rgba(28, 29, 31, 0.08);    /* raised: toast, lift */
+
+  /* ==================== MOTION ==================== */
+  --duration-fast:   120ms;   /* press feedback, state flips */
+  --duration:        200ms;   /* most transitions */
+  --duration-slow:   320ms;   /* screen entrances, drawn success */
+  --duration-slower: 560ms;   /* self-drawing artwork, one-time reveals */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --press-scale: 0.98;      /* uniform button press */
+
+  /* ==================== STATES ==================== */
+  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent);
+  --opacity-disabled: 0.45;
+  --opacity-dim: 0.55;
+
+  /* ==================== LAYOUT ==================== */
+  --measure:      42rem;    /* max content width */
+  --measure-read: 36rem;    /* passage column — ~64 characters at 18px serif */
+  --nav-height:   3.5rem;
+  --tap-target:   2.75rem;  /* 44px minimum touch target */
+
+  /* Reading size is a user preference (Settings → Appearance),
+     persisted through the StorageAdapter and applied as
+     html[data-reading="s|m|l|xl"]. Medium is the default above. */
+
+  /* ---- M2 compatibility aliases (older embedded styles) ---- */
+  --color-ink-muted: var(--color-ink-2);
+  --shadow-soft: var(--shadow-1);
+}
+
+/* ==================== DARK THEME ====================
+   Automatic when preference is "system" + OS dark, or explicit via
+   data-theme="dark" (persisted through the StorageAdapter). */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:         #151618;
+    --color-surface:    #1E2023;
+    --color-surface-2:  #26282C;
+    --color-surface-3:  #2D3035;
+    --color-ink:        #E9E7E2;
+    --color-ink-2:      #A4A7AC;
+    --color-ink-3:      #7B7F85;
+    --color-line:        #2C2E32;
+    --color-line-strong: #3A3D42;
+    --color-accent:        #74AC98;
+    --color-accent-hover:  #86BBA8;
+    --color-accent-ink:    #0F211B;
+    --color-accent-subtle: #22312B;
+    --color-veil: rgba(21, 22, 24, 0.85);
+    --color-success:     #74AC98;
+    --color-success-bg:  #21322B;
+    --color-warning:     #C9A25C;
+    --color-warning-bg:  #332B1B;
+    --color-danger:      #C86B5C;
+    --color-danger-bg:   #38241F;
+    --color-danger-ink:  #1E120F;
+    --color-info:        #7FA9C2;
+    --color-info-bg:     #1F2B33;
+    --color-correct-ink: #9CC8B6;
+    --color-wrong-ink:   #DE9A8C;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg:         #151618;
+  --color-surface:    #1E2023;
+  --color-surface-2:  #26282C;
+  --color-surface-3:  #2D3035;
+  --color-ink:        #E9E7E2;
+  --color-ink-2:      #A4A7AC;
+  --color-ink-3:      #7B7F85;
+  --color-line:        #2C2E32;
+  --color-line-strong: #3A3D42;
+  --color-accent:        #74AC98;
+  --color-accent-hover:  #86BBA8;
+  --color-accent-ink:    #0F211B;
+  --color-accent-subtle: #22312B;
+  --color-veil: rgba(21, 22, 24, 0.85);
+  --color-success:     #74AC98;
+  --color-success-bg:  #21322B;
+  --color-warning:     #C9A25C;
+  --color-warning-bg:  #332B1B;
+  --color-danger:      #C86B5C;
+  --color-danger-bg:   #38241F;
+  --color-danger-ink:  #1E120F;
+  --color-info:        #7FA9C2;
+  --color-info-bg:     #1F2B33;
+  --color-correct-ink: #9CC8B6;
+  --color-wrong-ink:   #DE9A8C;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ==================== READING SIZE ====================
+   Kindle-style comfort control. Only the reading surface scales;
+   the UI around it stays put. Leading loosens slightly as type
+   grows — larger text needs more air, not less. */
+:root[data-reading="s"]  { --text-read: 1rem;      --leading-reading: 1.72; }
+:root[data-reading="l"]  { --text-read: 1.25rem;   --leading-reading: 1.82; }
+:root[data-reading="xl"] { --text-read: 1.375rem;  --leading-reading: 1.86; }

@@ -1,0 +1,281 @@
+{
+  "schema_version": 3,
+  "meta": {
+    "id": "rc-0004",
+    "type": "rc",
+    "version": 3,
+    "status": "accepted",
+    "quality_score": 82,
+    "genre": "sociology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "structure-mapping",
+      "main-idea-extraction",
+      "evidence-anchoring"
+    ],
+    "word_count": 458,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "paragraph_function",
+      "specific_detail"
+    ],
+    "theme": "measurement distorts the behaviour it measures",
+    "estimated_time_min": 6.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-02",
+      "usage_note": "Original composition in CAT register for CAT OS. The idea that targets distort behaviour is a well-known theme in social science; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-02",
+    "batch_id": "batch-rc-001",
+    "prompt_version": "in-repo authored (Milestone 2); RC_MASTER_GENERATION_PROMPT.v1 criteria applied",
+    "reviewer_notes": "Authored during Milestone 2 build; self-scored against Pipeline §6. Owner review pending. Mentor layer added in Reading Mentor milestone (v2); reading-habit + misunderstanding layer added in Reading Experience milestone (v3). Owner review pending for all layers.",
+    "vocab_extracted": [
+      "proxy",
+      "perverse",
+      "salient"
+    ]
+  },
+  "passage": {
+    "title": "The Measured and the Managed",
+    "reading_time_min": 2.3,
+    "paragraphs": [
+      {
+        "id": "rc-0004-p1",
+        "text": "Institutions measure what they cannot directly see. A hospital cannot observe health, so it counts readmissions; a school cannot observe learning, so it scores tests; a police force cannot observe safety, so it tallies arrests. Each number is a proxy — a visible stand-in for an invisible quantity that actually matters. For as long as the proxy is treated as a rough indicator, consulted alongside judgment, the arrangement is harmless and often useful. The trouble begins when the proxy stops being an indicator and becomes a target."
+      },
+      {
+        "id": "rc-0004-p2",
+        "text": "The moment a measure carries real consequences — funding, promotion, survival — the people measured acquire a powerful interest in the number rather than in the thing it was meant to track. And numbers, unlike the qualities they represent, can almost always be moved directly. A hospital penalised for readmissions can turn returning patients away at the emergency door; a school rewarded for test scores can teach the test and quietly counsel weak students to stay home on examination day. In each case the proxy improves while the underlying good it was chosen to represent stagnates or declines. The indicator and the reality, once loosely coupled, come apart precisely because the indicator now matters."
+      },
+      {
+        "id": "rc-0004-p3",
+        "text": "It is tempting to treat this as a failure of honesty, curable by catching and punishing the gamers. But the pattern is too regular to be a matter of individual character. It appears wherever a single salient number is made to bear weight it was never designed to carry, among conscientious people as reliably as among cynical ones, because the incentive operates below the level of intention: it reshapes what counts as doing the job well. The problem is structural, not moral, and moral exhortation is therefore close to useless against it."
+      },
+      {
+        "id": "rc-0004-p4",
+        "text": "If the distortion cannot be scolded away, it can sometimes be designed against. Measures can be rotated so that none becomes worth gaming for long; several imperfect indicators can be balanced so that improving one at the expense of the rest is visibly self-defeating; and the number can be kept, deliberately, as one input to human judgment rather than a substitute for it. None of these is a cure. Each is a way of keeping the map from being mistaken for the territory — of remembering that the point was never the measure, but the thing the measure was always too small to contain."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0004-q1",
+      "type": "main_idea",
+      "stem": "Which statement best expresses the main idea of the passage?",
+      "options": {
+        "A": "Institutions should stop using numerical proxies, since these inevitably fail to capture what matters.",
+        "B": "When a proxy measure is made a high-stakes target, behaviour shifts toward the number rather than the underlying good, and because the problem is structural it must be designed against rather than scolded away.",
+        "C": "Gaming of performance measures is a failure of honesty that can be corrected by catching and punishing those responsible.",
+        "D": "Rotating measures and balancing several indicators can cure the distortions that arise when institutions rely on proxies."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The passage develops one thesis: proxies distort behaviour once they become targets (p1–p2), the distortion is structural rather than moral (p3), and the response is design, not exhortation (p4). Option B captures all three beats at the right generality.",
+        "passage_anchor": "rc-0004-p3",
+        "question_type_note": "The best main-idea option threads the whole argument, including its diagnosis (structural) and its prescription (design), not just the opening phenomenon.",
+        "reading_habit": "When a passage ends with advice, the main idea must include it — an option that stops at the diagnosis while the author prescribed a response is always too narrow.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "P1 says proxies are 'harmless and often useful' as indicators; the passage objects to targets, not to measurement itself.",
+            "seductive_element": "It sounds like the strong version of the author's caution."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P3 explicitly rejects the honesty diagnosis and calls punishment-based cures near useless.",
+            "seductive_element": "It restates the tempting view the author sets up in order to refute."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "P4 offers these as mitigations but stresses 'None of these is a cure'; calling them a cure contradicts the text.",
+            "seductive_element": "It accurately lists the author's proposed measures, omitting the crucial 'not a cure.'"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0004-q2",
+      "type": "specific_detail",
+      "stem": "The passage attributes the decoupling of a measure from the underlying reality to the fact that",
+      "options": {
+        "A": "the people measured are typically more cynical than conscientious",
+        "B": "numbers can usually be moved directly, whereas the qualities they represent cannot",
+        "C": "institutions cannot directly observe the qualities they care about",
+        "D": "consequences such as funding and promotion are distributed unfairly"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "P2 states the mechanism: once a measure carries consequences, 'numbers, unlike the qualities they represent, can almost always be moved directly,' so the proxy improves while the good stagnates. Option B reproduces this reason.",
+        "passage_anchor": "rc-0004-p2",
+        "question_type_note": "The decoupling has a specific stated cause; distractors offer nearby true facts (unobservability, incentives) that are conditions of the setup, not the cause of decoupling.",
+        "reading_habit": "For 'because' questions, find the sentence where the author states the cause — background conditions from earlier paragraphs are the classic decoys for stated-cause questions.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P3 says the pattern appears 'among conscientious people as reliably as among cynical ones,' denying that cynicism is the driver.",
+            "seductive_element": "Blaming cynics is the intuitive explanation for gaming."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Unobservability (p1) is why proxies are used at all; it is not what makes an established proxy decouple once it becomes a target.",
+            "seductive_element": "It is a true, prominent claim from p1."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never claims the consequences are distributed unfairly; the issue is the direction of effort, not fairness.",
+            "seductive_element": "Funding and promotion are mentioned, so unfairness feels adjacent."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0004-q3",
+      "type": "paragraph_function",
+      "stem": "The third paragraph functions primarily to",
+      "options": {
+        "A": "provide additional examples of institutions gaming their performance measures",
+        "B": "reject a tempting explanation of the phenomenon and relocate its cause from character to structure",
+        "C": "propose the design-based remedies that the passage goes on to detail",
+        "D": "concede that moral exhortation can sometimes reduce the gaming of measures"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "P3 opens with the tempting 'failure of honesty' explanation, rejects it ('too regular to be a matter of individual character'), and reassigns the cause: 'The problem is structural, not moral.' Its function is precisely this rejection-and-relocation.",
+        "passage_anchor": "rc-0004-p3",
+        "question_type_note": "Paragraph-function questions test the paragraph's job in the argument; a paragraph that raises then dismisses an explanation is doing rebuttal, not illustration.",
+        "reading_habit": "When a paragraph opens with 'It is tempting to think…', expect demolition — authors introduce comfortable views mainly to take them away. Read for the swerve, not the setup.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The examples live in p2; p3 offers analysis, not new cases.",
+            "seductive_element": "The passage is example-rich, so 'more examples' feels plausible."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The remedies appear in p4; p3 diagnoses the cause and sets up the need for them.",
+            "seductive_element": "P3 does pave the way for p4, blurring the boundary."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P3 says moral exhortation is 'close to useless,' the opposite of conceding it can help.",
+            "seductive_element": "It inverts a claim the paragraph actually makes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0004-q4",
+      "type": "inference",
+      "stem": "The passage's closing reference to \"the map\" and \"the territory\" is used to convey that",
+      "options": {
+        "A": "measures should be discarded once they diverge from reality",
+        "B": "a measure is a necessarily incomplete representation that must not be confused with the reality it represents",
+        "C": "human judgment is as fallible as the numbers it is meant to check",
+        "D": "institutions should collect more measures until the map matches the territory exactly"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The map/territory image caps p4's point about keeping 'the map from being mistaken for the territory' — the measure is 'always too small to contain' the thing it tracks. It conveys incompleteness plus the danger of confusion, i.e. option B.",
+        "passage_anchor": "rc-0004-p4",
+        "question_type_note": "A closing metaphor usually restates the essay's thesis compactly; read it against what the final paragraph has just argued, not in the abstract.",
+        "reading_habit": "Decode a closing metaphor against the paragraph it caps — it compresses the thesis just argued, and options that take the image literally or absolutely always overreach.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "P4 keeps the number 'as one input to human judgment'; the counsel is not to discard measures but not to mistake them for reality.",
+            "seductive_element": "Divergence between map and territory can suggest throwing the map away."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage recommends judgment as a corrective and never claims it is as fallible as the metric.",
+            "seductive_element": "It sounds like an even-handed, cautious observation."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The metaphor's point is that no map equals the territory; expecting an exact match contradicts it.",
+            "seductive_element": "'More measures' echoes p4's balancing-of-indicators idea, misapplied."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "proxy",
+      "passage_use": "Each number is a proxy — a visible stand-in for an invisible quantity",
+      "meaning_here": "a substitute that stands in for something that cannot be measured directly",
+      "difficulty": "medium"
+    },
+    {
+      "word": "salient",
+      "passage_use": "a single salient number is made to bear weight",
+      "meaning_here": "prominent; standing out as most noticeable",
+      "difficulty": "medium"
+    },
+    {
+      "word": "perverse",
+      "passage_use": "(theme) incentives that produce perverse effects",
+      "meaning_here": "producing an effect opposite to the one intended",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The passage tells a familiar story — people gaming targets — and then removes the comfortable explanation for it. Hold on to where the blame actually lands.",
+    "main_idea": "When a measurement becomes a target with consequences, people start improving the number instead of the thing it stood for — and this happens to honest people too, because the problem lives in the setup, not in character. So the fix is design, not scolding.",
+    "author_intention": "To pull the reader past the easy diagnosis ('punish the cheaters') toward a structural one, and to leave behind a design toolkit instead of a moral lecture.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0004-p1",
+        "role": "Defines the setup",
+        "note": "Institutions measure stand-ins for what they cannot see. Harmless — until the stand-in becomes a target. The last sentence loads the whole passage."
+      },
+      {
+        "paragraph_id": "rc-0004-p2",
+        "role": "Shows the mechanism",
+        "note": "Numbers can be moved directly; the qualities behind them cannot. Hospitals and schools improve their figures while the real good stalls — indicator and reality come apart because the indicator now matters."
+      },
+      {
+        "paragraph_id": "rc-0004-p3",
+        "role": "Removes the easy answer",
+        "note": "Not a character problem: it happens to the conscientious too, because the target quietly redefines what doing the job well means. Structural, not moral."
+      },
+      {
+        "paragraph_id": "rc-0004-p4",
+        "role": "Offers the repair kit",
+        "note": "Rotate measures, balance several, keep numbers as inputs to judgment — no cure, but ways to stop mistaking the map for the territory."
+      }
+    ],
+    "tone_progression": "Neutral and explanatory for two paragraphs, briefly sharp when dismissing the moral explanation, then calm and practical for the remedies.",
+    "key_transitions": [
+      "'The trouble begins when the proxy stops being an indicator and becomes a target.' (end of paragraph 1) — the thesis in one sentence.",
+      "'But the pattern is too regular to be a matter of individual character.' (paragraph 3) — the passage swerves away from the explanation you expected."
+    ],
+    "misunderstanding": "The trap here is agreeing too quickly. Everyone has watched targets being gamed, so readers nod along and assume the passage says the familiar thing — 'people cheat metrics; catch them.' Paragraph 3 exists to break exactly that assumption: the distortion happens without dishonesty. Readers who miss the swerve answer the questions from their own experience of the topic instead of from the author's stranger, structural claim.",
+    "traps_summary": "The options here tested whether you caught two denials: the author does NOT blame dishonesty, and does NOT call the remedies a cure. Passages that reject a view mid-way always spawn options selling that rejected view back to you.",
+    "real_world": "Exam rank itself is a proxy — chase the score in ways that skip understanding, and you have re-enacted this passage. It also explains hollow KPIs at work and why 'teaching to the test' is a system problem, not a teacher problem.",
+    "takeaway": "When a measure becomes a target, it stops measuring — design around that, don't moralize at it."
+  }
+}

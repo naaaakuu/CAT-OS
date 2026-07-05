@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    CAT OS — app shell.
+    Rules that apply to this file (see docs/PROJECT_RULES.md):
+    - No build step: plain HTML + ES modules only.
+    - All URLs are RELATIVE (./...) so the app works from a GitHub Pages
+      subpath (e.g. https://user.github.io/CAT-OS/) and from any static host.
+    - No runtime CDN links, ever. Everything is served from this repo.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>CAT OS</title>
+  <meta name="description" content="A calm, offline-first personal environment for CAT VARC preparation." />
+
+  <!-- PWA / install -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#F7F6F3" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#151618" media="(prefers-color-scheme: dark)" />
+  <!-- iOS install support -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="CAT OS" />
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+  <link rel="icon" href="./assets/icons/icon-192.png" type="image/png" />
+
+  <!-- Styles: tokens first (variables), then base, then components -->
+  <link rel="stylesheet" href="./src/ui/styles/tokens.css" />
+  <link rel="stylesheet" href="./src/ui/styles/base.css" />
+  <link rel="stylesheet" href="./src/ui/styles/components.css" />
+</head>
+<body>
+  <!-- The shell: a header, a view outlet the router renders into, bottom nav. -->
+  <div class="shell" id="shell">
+    <header class="shell__header">
+      <span class="wordmark">CAT&nbsp;OS</span>
+    </header>
+
+    <main class="shell__view" id="view" tabindex="-1" aria-live="polite">
+      <!-- Router renders the active screen here. -->
+      <section class="screen screen--loading">
+        <p class="muted">Loading…</p>
+      </section>
+    </main>
+
+    <cat-nav></cat-nav>
+  </div>
+
+  <noscript>
+    <div style="padding:2rem;font-family:system-ui">
+      CAT OS needs JavaScript to run. Enable JavaScript and reload.
+    </div>
+  </noscript>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

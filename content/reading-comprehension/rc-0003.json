@@ -1,0 +1,332 @@
+{
+  "schema_version": 3,
+  "meta": {
+    "id": "rc-0003",
+    "type": "rc",
+    "version": 3,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "tone-detection",
+      "argument-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 566,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "author_purpose",
+      "tone",
+      "specific_detail"
+    ],
+    "theme": "replication and the epistemic status of a single result",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-02",
+      "usage_note": "Original composition in CAT register for CAT OS discussing the replication debate in general terms; no specific study or article is adapted. Personal study only."
+    },
+    "date_added": "2026-07-02",
+    "batch_id": "batch-rc-001",
+    "prompt_version": "in-repo authored (Milestone 2); RC_MASTER_GENERATION_PROMPT.v1 criteria applied",
+    "reviewer_notes": "Authored during Milestone 2 build; hard item with 5 questions. Self-scored against Pipeline §6. Owner review pending; verify difficulty feels genuinely hard, not obscure. Mentor layer added in Reading Mentor milestone (v2); reading-habit + misunderstanding layer added in Reading Experience milestone (v3). Owner review pending for all layers.",
+    "vocab_extracted": [
+      "provenance",
+      "spurious",
+      "vindicate",
+      "artefact"
+    ]
+  },
+  "passage": {
+    "title": "The Weight of One Result",
+    "reading_time_min": 2.8,
+    "paragraphs": [
+      {
+        "id": "rc-0003-p1",
+        "text": "For most of its public life, a scientific finding has been treated as a discrete thing: an object, produced by an experiment, that either exists or does not. A study is run, a result emerges, it clears peer review, and thereafter it is spoken of as something science has found. The grammar is telling. We say the experiment showed, as though the showing were finished and the object handed over. What the recent reckoning over replication has forced into view is that this grammar was always a convenience, and sometimes a costly one."
+      },
+      {
+        "id": "rc-0003-p2",
+        "text": "A single result, considered in isolation, is remarkably weak evidence. Any experiment can produce an effect by chance; the conventional thresholds that certify a result as unlikely-to-be-chance are thresholds, not guarantees, and across a discipline running thousands of studies, a predictable fraction of striking findings will be flukes. Worse, the fraction is not random. Findings that are surprising, publishable, and career-making are precisely the ones most likely to be either flukes or the product of the many small, defensible choices — which cases to exclude, when to stop collecting data — that quietly bend a result toward significance. The literature, filtered by what journals will print, is therefore enriched for exactly the results least likely to survive a second look."
+      },
+      {
+        "id": "rc-0003-p3",
+        "text": "Replication reframes the finding from object to claim. On this account, an experiment does not deliver a fact; it makes a bet — that the same procedure, run again by other hands, will yield the same effect. The bet is settled not by the original study's elegance but by whether the effect recurs. A result that replicates across laboratories, materials, and populations has earned a standing that no single study, however clean, can confer on its own. A result that does not replicate is not thereby proven false, but its provenance is revealed: it was a claim mistaken for a finding, and the mistake was in the grammar all along."
+      },
+      {
+        "id": "rc-0003-p4",
+        "text": "It would be a misreading to take this as a counsel of despair, a warning that nothing is known. The opposite is nearer the truth. The reforms the reckoning has produced — pre-registering hypotheses before data are seen, publishing null results, sharing data so that others can re-analyse it — do not weaken science; they are the machinery by which it distinguishes the durable from the spurious. What looked like a crisis of results was in fact a crisis of a metaphor. Treating findings as objects concealed the work that turns a promising effect into knowledge; treating them as claims awaiting replication makes that work visible, and demands that it be done."
+      },
+      {
+        "id": "rc-0003-p5",
+        "text": "None of this vindicates the cynic who concludes that scientific claims are merely opinion. The whole apparatus of replication is an argument to the contrary: it exists precisely because some claims can be made to answer to reality more rigorously than others, and because the difference is worth the enormous trouble of establishing. A field that publishes its failures and re-runs its successes is not confessing weakness. It is doing the one thing that entitles it to be believed."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0003-q1",
+      "type": "main_idea",
+      "stem": "The central claim of the passage is that",
+      "options": {
+        "A": "most published scientific findings are flukes and should not be trusted until replicated",
+        "B": "the replication reckoning is best understood as correcting a mistaken metaphor — findings as objects — and thereby making visible the work that turns effects into knowledge",
+        "C": "scientific findings are claims rather than facts, which shows that scientific knowledge is closer to opinion than is usually admitted",
+        "D": "reforms such as pre-registration and data sharing are necessary because conventional significance thresholds are set too leniently"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "The passage's throughline is the shift from 'object' to 'claim' (p3) framed explicitly as a correction of grammar/metaphor (p1, p4: 'a crisis of a metaphor'), with p4–p5 arguing this strengthens rather than weakens science. Option B captures that unifying move and its upshot.",
+        "passage_anchor": "rc-0003-p4",
+        "question_type_note": "For a passage built on a single controlling metaphor, the main idea is the reframing itself plus its consequence, not any one supporting statistic or reform.",
+        "reading_habit": "When a passage runs on one controlling image, track what the image replaces — the main idea of a metaphor-driven passage is the correction it performs, not any statistic inside it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "P2 says a predictable fraction of striking findings are flukes, not that most published findings are; and p4–p5 resist the distrustful reading.",
+            "seductive_element": "It sounds like the natural cynical takeaway from p2's warnings."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P5 exists specifically to reject the opinion conclusion; the object-to-claim shift is meant to show why some claims answer to reality more rigorously.",
+            "seductive_element": "It correctly uses the object/claim distinction, then draws the exact conclusion the author denies."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "Thresholds and reforms are supporting detail; the passage's claim is about the metaphor, and it never says thresholds are simply too lenient.",
+            "seductive_element": "It names real content from p2 and p4."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0003-q2",
+      "type": "specific_detail",
+      "stem": "The passage states that the published literature is \"enriched for exactly the results least likely to survive a second look\" because",
+      "options": {
+        "A": "journals apply significance thresholds that are guarantees rather than mere thresholds",
+        "B": "surprising, publishable findings are the ones most likely to be flukes or to reflect choices that bend results toward significance",
+        "C": "researchers deliberately exclude cases and stop data collection early in order to fabricate effects",
+        "D": "a predictable fraction of all studies in any discipline will produce effects by chance"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "P2 gives the reason directly: the findings that are 'surprising, publishable, and career-making are precisely the ones most likely to be either flukes or the product of ... small, defensible choices' — and journals filter for these. Option B reproduces that causal claim.",
+        "passage_anchor": "rc-0003-p2",
+        "question_type_note": "Detail questions with a 'because' turn on locating the stated cause; watch for options that overstate ('deliberately fabricate') what the text carefully qualifies ('defensible choices').",
+        "reading_habit": "Match the text's quantifiers and qualifiers exactly — 'a predictable fraction' is not 'most', and 'defensible choices' is not 'fraud'. Quantifier drift is how detail traps are manufactured.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says thresholds are 'thresholds, not guarantees' — the opposite of this option.",
+            "seductive_element": "It uses the exact threshold/guarantee pair from the text, inverted."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "P2 calls the choices 'small, defensible,' explicitly not deliberate fabrication; the enrichment arises without intent to deceive.",
+            "seductive_element": "The excluded cases and early stopping are named in the passage, making fraud feel like a small step."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Chance flukes are real but are the general background; the enrichment is specifically explained by the publication filter on surprising results.",
+            "seductive_element": "It is a true statement from the same paragraph."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0003-q3",
+      "type": "inference",
+      "stem": "It can be inferred that the author would regard a single, methodologically elegant study whose effect has not yet been replicated as",
+      "options": {
+        "A": "a finding whose elegance entitles it to provisional acceptance",
+        "B": "a claim that has been made but not yet settled, whatever its methodological quality",
+        "C": "most likely a fluke, given that surprising results usually fail to replicate",
+        "D": "false until independent laboratories confirm it"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "P3 states that the bet 'is settled not by the original study's elegance but by whether the effect recurs,' and that no single study 'however clean' can confer replicated standing. So an unreplicated elegant study is a made-but-unsettled claim. Option B follows directly.",
+        "passage_anchor": "rc-0003-p3",
+        "question_type_note": "Inference must track the author's exact standard; here elegance is explicitly denied evidential weight, so options crediting elegance or asserting falsity both overreach.",
+        "reading_habit": "Note what the author explicitly denies weight to — denials ('not settled by elegance', 'not thereby false') are exactly where inference questions hunt for wrong answers.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage denies that elegance settles the bet, so elegance cannot entitle acceptance.",
+            "seductive_element": "Rewarding a clean study feels intuitively reasonable."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The author says a fraction of surprising results are flukes, not that surprising results 'usually' fail; and would not prejudge a specific study as most likely a fluke.",
+            "seductive_element": "It generalizes p2's genuine warning into a sweeping verdict."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "P3 explicitly says a non-replicating result 'is not thereby proven false'; an unsettled claim is not a false one.",
+            "seductive_element": "It sounds appropriately rigorous and demanding."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0003-q4",
+      "type": "author_purpose",
+      "stem": "The author's primary purpose in the fourth and fifth paragraphs is to",
+      "options": {
+        "A": "propose specific reforms that journals and researchers should adopt",
+        "B": "pre-empt the misreading that the replication reckoning shows scientific knowledge to be unreliable or merely opinion",
+        "C": "concede that the replication crisis has genuinely weakened confidence in scientific results",
+        "D": "compare scientific claims with opinions in order to show what the two have in common"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "P4 opens 'It would be a misreading to take this as a counsel of despair' and p5 opens 'None of this vindicates the cynic.' Both paragraphs are structured as rebuttals to a distrustful interpretation — their purpose is to pre-empt it. Option B names that purpose.",
+        "passage_anchor": "rc-0003-p5",
+        "question_type_note": "Purpose questions ask what the author is doing with a passage stretch; explicit 'it would be a misreading' / 'none of this vindicates' signposts a pre-emptive rebuttal.",
+        "reading_habit": "Treat phrases like 'it would be a misreading' as purpose signposts — they mean the author has switched from arguing the claim to defending it from interpretations of it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "The reforms are mentioned in p4, but as evidence for the rebuttal, not as the paragraphs' purpose; nothing is framed as a proposal to adopt.",
+            "seductive_element": "The reforms are genuinely listed, so 'proposing reforms' feels close."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author argues the reckoning strengthens science; conceding weakened confidence is the reading these paragraphs exist to refute.",
+            "seductive_element": "It matches the popular framing of a 'crisis.'"
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P5 contrasts claims with opinion to separate them, not to find common ground.",
+            "seductive_element": "The words 'claim' and 'opinion' both appear, inviting a comparison reading."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0003-q5",
+      "type": "tone",
+      "stem": "The author's attitude toward the replication reforms is best described as",
+      "options": {
+        "A": "cautiously alarmed",
+        "B": "approving, treating them as what entitles a field to be believed",
+        "C": "detached and purely descriptive",
+        "D": "sceptical of their sufficiency"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "The closing sentences call publishing failures and re-running successes 'the one thing that entitles it to be believed,' and p4 calls the reforms 'the machinery by which it distinguishes the durable from the spurious.' The stance is clearly approving.",
+        "passage_anchor": "rc-0003-p5",
+        "question_type_note": "Tone is fixed by evaluative words; 'entitles it to be believed' and 'machinery' used admiringly settle it toward approval, not alarm or detachment.",
+        "reading_habit": "Judge tone only from evaluative words the author actually uses — topic words like 'crisis' set the subject, never the attitude. Collect the author's verdict-words as you read.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author explicitly rejects alarm ('not a counsel of despair'); the reforms are welcomed, not feared.",
+            "seductive_element": "The word 'crisis' throughout the topic invites an alarmed reading."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "Much of the passage is descriptive, but the final paragraphs are overtly evaluative and favourable, so 'purely descriptive' is wrong.",
+            "seductive_element": "The measured style can read as neutral."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The author never questions whether the reforms are sufficient; that doubt is absent from the text.",
+            "seductive_element": "Scepticism sounds like a sophisticated, safe answer."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "provenance",
+      "passage_use": "its provenance is revealed: it was a claim mistaken for a finding",
+      "meaning_here": "origin or source — here, the true evidential status of a result",
+      "difficulty": "hard"
+    },
+    {
+      "word": "spurious",
+      "passage_use": "distinguishes the durable from the spurious",
+      "meaning_here": "false or illegitimate despite a plausible appearance",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vindicate",
+      "passage_use": "None of this vindicates the cynic",
+      "meaning_here": "to justify or prove right",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Five questions, one controlling metaphor, and an author who spends two paragraphs blocking the cynical misreading you may be tempted toward. Precision about what the author does NOT claim will decide your score.",
+    "main_idea": "A single experiment does not hand science a fact; it places a bet that the result will happen again. Replication settles the bet. The 'crisis' was really the collapse of a bad metaphor — findings as finished objects — and fixing the metaphor makes science stronger, not weaker.",
+    "author_intention": "To reframe how the reader thinks about the word 'finding', and to block, in advance, the cynic's conclusion that science is just opinion.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0003-p1",
+        "role": "Exposes the grammar",
+        "note": "We talk as if experiments hand over finished objects — 'the study showed'. The passage flags this everyday language as the hidden mistake."
+      },
+      {
+        "paragraph_id": "rc-0003-p2",
+        "role": "Shows the damage",
+        "note": "One result is weak evidence, and journals prefer the surprising ones — which are exactly the likeliest to be flukes. The published record is tilted toward fragile findings."
+      },
+      {
+        "paragraph_id": "rc-0003-p3",
+        "role": "Makes the reframe",
+        "note": "From object to claim: an experiment is a bet that others, repeating it, will get the same thing. Elegance does not settle the bet; recurrence does."
+      },
+      {
+        "paragraph_id": "rc-0003-p4",
+        "role": "Blocks despair",
+        "note": "'It would be a misreading...' — the reforms (pre-registration, sharing data, publishing nulls) are the machinery that sorts durable from spurious. The crisis was of a metaphor, not of knowledge."
+      },
+      {
+        "paragraph_id": "rc-0003-p5",
+        "role": "Blocks cynicism",
+        "note": "Replication exists because some claims answer to reality better than others. Publishing failures is the source of the right to be believed, not an admission of weakness."
+      }
+    ],
+    "tone_progression": "Cool and diagnostic while exposing the problem; quietly constructive at the reframe; firm, almost protective, in the last two paragraphs as it walls off despair and cynicism.",
+    "key_transitions": [
+      "'Replication reframes the finding from object to claim.' (paragraph 3) — the thesis arrives.",
+      "'It would be a misreading to take this as a counsel of despair.' (paragraph 4) — the author turns to fight interpretations of the thesis rather than defend the thesis itself."
+    ],
+    "misunderstanding": "Readers arrive carrying the headline version of this story — 'science is broken' — and paragraph 2's warnings seem to confirm it, so they stop updating. But the author spends the final two paragraphs explicitly forbidding that reading. The subtler misreading is treating 'claim' as a demotion: in this passage a claim is not weaker than a fact — it is what a fact looks like before the work of replication is done.",
+    "traps_summary": "Advanced passages are lost to overstatement. The wrong options here stretched 'a predictable fraction are flukes' into 'most findings are false', or rode the object-to-claim reframe straight into 'science is opinion' — the exact conclusion paragraph 5 forbids. Mark what the author fences off, not just what the author asserts.",
+    "real_world": "Next time a headline says 'study finds', you will hear it differently: a bet has been placed, not a fact delivered. Ask whether anyone has repeated it — that one question is most of scientific literacy.",
+    "takeaway": "One study is a bet; replication is the payout. Never confuse the wager with the winnings."
+  }
+}

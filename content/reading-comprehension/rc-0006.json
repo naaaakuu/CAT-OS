@@ -1,0 +1,281 @@
+{
+  "schema_version": 3,
+  "meta": {
+    "id": "rc-0006",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 82,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 410,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "specific_detail",
+      "inference",
+      "paragraph_function"
+    ],
+    "theme": "procedural versus declarative memory, and why understanding is not ability",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-05",
+      "usage_note": "Original composition in CAT register for CAT OS; the declarative/procedural distinction is textbook psychology, but no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-05",
+    "batch_id": "batch-rc-002",
+    "prompt_version": "in-repo authored (Reading Experience milestone); RC_MASTER_GENERATION_PROMPT.v1 criteria applied",
+    "reviewer_notes": "Authored in the Reading Experience milestone as the journey's opening passage: deliberately concrete, warm, and unintimidating. Self-scored against Pipeline §6. Owner review pending.",
+    "vocab_extracted": [
+      "declarative",
+      "procedural",
+      "durability"
+    ]
+  },
+  "passage": {
+    "title": "What the Hand Remembers",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0006-p1",
+        "text": "Anyone who has tried to type a familiar password on an unfamiliar keyboard has met the puzzle. Asked to say the password aloud, you hesitate; you may genuinely not know it. Yet seat your hands on your own keyboard and the word pours out, faultless, at speed. The knowledge exists — somewhere. It simply does not live where we usually look for knowledge, in the part of the mind that explains itself in words. It lives in the hands, or rather in whatever quiet system moves them, and that system does not answer questions. It only performs."
+      },
+      {
+        "id": "rc-0006-p2",
+        "text": "Psychologists mark this boundary with a pair of terms. Declarative memory holds facts and events — the capital of France, what you ate this morning — and it reports to consciousness on demand. Procedural memory holds skills: riding a bicycle, tying a shoelace, signing your name. The two are not merely different filing cabinets; they are different systems, learned differently and lost differently. A fact can be acquired in a single reading, but no one has ever learned to swim from a paragraph. A skill enters memory only through repetition — attempt, error, correction, again — until the sequence no longer needs its owner's attention."
+      },
+      {
+        "id": "rc-0006-p3",
+        "text": "The systems also fail in opposite ways. A forgotten fact tends to vanish cleanly: the name is simply gone, and you know it is gone. A neglected skill decays gracefully. The pianist who has not played for a decade does not sit down as a beginner; the first minutes are clumsy, then something returns that was never really absent. This is why the common phrase is exactly right: it is like riding a bicycle. What the hand has learned thoroughly, it keeps in a form that rusts but rarely shatters — a durability declarative memory can only envy."
+      },
+      {
+        "id": "rc-0006-p4",
+        "text": "The practical lesson is easy to state and hard to accept: we underrate practice because we experience learning as understanding. To read a clear explanation of a skill — a tennis serve, long division, the solving of a puzzle — is to feel the skill almost acquired; the feeling is genuine, and it is false. Understanding a description and possessing a procedure are different achievements, stored by different systems, and only one of them is built by reading. The head can be persuaded in an afternoon. The hand must be taught on its own schedule, and it accepts only one currency. This is why 'I understood the chapter' and 'I can do the problems' are such different claims."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0006-q1",
+      "type": "main_idea",
+      "stem": "The passage's central point is that",
+      "options": {
+        "A": "procedural memory is more durable than declarative memory, which is why practice matters more than reading",
+        "B": "people forget facts more easily than skills because facts are learned in a single reading",
+        "C": "facts and skills are held by different memory systems that learn and fail differently, so understanding a skill's description is not the same as possessing the skill",
+        "D": "learning through repetition is superior to learning through explanation"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "The passage builds one arc: the puzzle (p1), the two systems and how they learn (p2), how they fail (p3), and the lesson — understanding a description is not possessing a procedure (p4). Option C carries the whole arc, including the final lesson, at the right strength.",
+        "passage_anchor": "rc-0006-p4",
+        "question_type_note": "A main-idea answer must include the passage's concluding lesson when there is one; options that stop at a supporting contrast are too narrow, and options that add rankings are too strong.",
+        "reading_habit": "Say the passage's point in one sentence of your own before reading the options — on easy passages, the traps are rankings and absolutes quietly added to a claim the author kept modest.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "Durability is one paragraph's contrast, and the passage never says practice 'matters more' than reading — it says the two build different things.",
+            "seductive_element": "Both halves sound like the passage; the ranking is smuggled in between them."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Single-reading acquisition describes how facts are learned, not why they are forgotten more easily; the passage never gives this causal link.",
+            "seductive_element": "It reuses two true details, joined by a 'because' the text never wrote."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The author calls the two kinds of learning different achievements, not better and worse ones; explanation persuades the head perfectly well.",
+            "seductive_element": "It compresses the final paragraph's advice into a stronger rule than the author states."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0006-q2",
+      "type": "specific_detail",
+      "stem": "According to the passage, a neglected skill differs from a forgotten fact in that the skill",
+      "options": {
+        "A": "disappears completely but can be relearned more quickly",
+        "B": "decays gradually and returns with use, rather than vanishing cleanly",
+        "C": "is lost without its owner ever becoming aware of the loss",
+        "D": "survives only if it was learned in childhood, like riding a bicycle"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "correct_reasoning": "P3 states the contrast directly: a forgotten fact 'tends to vanish cleanly,' while a neglected skill 'decays gracefully' — the pianist is clumsy for minutes, 'then something returns that was never really absent.' Option B restates exactly this.",
+        "passage_anchor": "rc-0006-p3",
+        "question_type_note": "Contrast details are answered by keeping each side's properties in its own column; wrong options usually swap a property across the contrast or add a condition the text never set.",
+        "reading_habit": "For contrast details, build a tiny two-column table in your head — how X fails versus how Y fails — and test every option against the correct column before answering.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Complete disappearance is the fact's fate, not the skill's; the skill is described as never really absent.",
+            "seductive_element": "Quick relearning sounds close to the pianist's quick recovery."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage says of the forgotten fact that 'you know it is gone'; it never discusses unawareness of losing a skill.",
+            "seductive_element": "It sounds like the kind of subtle psychological point such a passage might make."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The bicycle is an example of thorough learning, not a claim that only childhood skills survive; the pianist learned as no child.",
+            "seductive_element": "It borrows the passage's own bicycle image and attaches a rule to it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0006-q3",
+      "type": "inference",
+      "stem": "The author would most likely say that a student who has just read a clear textbook chapter on solving a type of problem",
+      "options": {
+        "A": "has acquired the skill, provided the explanation was genuinely clear",
+        "B": "has wasted effort that would have been better spent practising",
+        "C": "will be unable to solve any such problem without further instruction",
+        "D": "may honestly feel prepared and still be unable to solve the problems"
+      },
+      "correct": "D",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "correct_reasoning": "P4 says reading a clear explanation makes one 'feel the skill almost acquired,' and 'the feeling is genuine, and it is false.' So the student's confidence is honest and the ability may still be missing — exactly option D. The other options all exceed what the text licenses.",
+        "passage_anchor": "rc-0006-p4",
+        "question_type_note": "Inference options must be forced by the text; here the author asserts a gap between felt understanding and ability, not the uselessness of reading or the impossibility of solving.",
+        "reading_habit": "Pick the inference the author's sentences force, and distrust any option that is stronger than the sentences themselves — 'may still be unable' is defensible where 'cannot' is not.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage's whole point is that clarity of explanation cannot deliver a procedure; the feeling of acquisition is called false.",
+            "seductive_element": "It rewards the intuitive link between clear teaching and learning."
+          },
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "Reading persuades the head, which the author treats as a real achievement — different from ability, not a waste.",
+            "seductive_element": "It sounds like the tough-minded version of the author's advice."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage claims a gap may exist, not that solving is impossible without instruction; practice, not instruction, is its missing currency.",
+            "seductive_element": "It converts the author's caution into a confident prediction of failure."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0006-q4",
+      "type": "paragraph_function",
+      "stem": "The example of the pianist in the third paragraph serves to",
+      "options": {
+        "A": "illustrate how a thoroughly learned skill decays gracefully rather than disappearing",
+        "B": "show that musical training creates stronger memories than other kinds of practice",
+        "C": "prove that skills, once learned, can never be completely lost",
+        "D": "contrast expert performers with beginners who are still acquiring a skill"
+      },
+      "correct": "A",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "correct_reasoning": "The pianist appears immediately after 'a neglected skill decays gracefully' and embodies it: clumsy first minutes, then a return of 'something ... that was never really absent.' The example carries that one claim — graceful decay, not disappearance.",
+        "passage_anchor": "rc-0006-p3",
+        "question_type_note": "Function questions ask what claim an example was hired to carry; the answer is the sentence the example sits beside, not a larger or smaller claim it could also touch.",
+        "reading_habit": "When you meet an example, ask what claim it serves before reading on — examples exist to carry claims, and function questions simply ask you to name the cargo.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No comparison among kinds of practice is made anywhere; music is incidental to the example.",
+            "seductive_element": "Musical memory is a famous topic, so the claim feels familiar."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says skills rust 'but rarely shatter' — rarely is not never, and the example illustrates decay, not immortality.",
+            "seductive_element": "It stretches the comforting image one step further than the text goes."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The paragraph explicitly denies the pianist is a beginner again; the contrast drawn is between two ways of forgetting, not two levels of expertise.",
+            "seductive_element": "The word 'beginner' does appear in the example's sentence."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "declarative",
+      "passage_use": "Declarative memory holds facts and events",
+      "meaning_here": "capable of being stated in words; here, the memory system for facts",
+      "difficulty": "medium"
+    },
+    {
+      "word": "procedural",
+      "passage_use": "Procedural memory holds skills",
+      "meaning_here": "relating to how something is done; here, the memory system for skills",
+      "difficulty": "easy"
+    },
+    {
+      "word": "durability",
+      "passage_use": "a durability declarative memory can only envy",
+      "meaning_here": "the quality of lasting without breaking down",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Your opening passage is about something your own body already knows. The test is precision: can you state exactly what the author claims — and resist the stronger claims the author never makes?",
+    "main_idea": "Facts and skills live in different memory systems. Facts can arrive in one reading and vanish cleanly; skills arrive only through repetition and fade slowly. So understanding a skill's explanation is not the same as being able to perform it.",
+    "author_intention": "To take a familiar everyday oddity — hands that remember what the mouth cannot say — and use it to gently correct how the reader thinks about learning itself.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0006-p1",
+        "role": "Opens with the puzzle",
+        "note": "You can type your password but not say it aloud. Some knowledge lives in the hands, not in words. The passage begins from this everyday strangeness."
+      },
+      {
+        "paragraph_id": "rc-0006-p2",
+        "role": "Names the two systems",
+        "note": "Declarative memory holds facts and can speak on demand. Procedural memory holds skills and is built only by repetition — nobody has learned to swim from a paragraph."
+      },
+      {
+        "paragraph_id": "rc-0006-p3",
+        "role": "Compares how they fail",
+        "note": "Facts vanish cleanly; skills rust but rarely shatter. The out-of-practice pianist is clumsy for a few minutes, not a beginner again."
+      },
+      {
+        "paragraph_id": "rc-0006-p4",
+        "role": "Draws the lesson",
+        "note": "We confuse understanding with ability because reading an explanation feels like gaining the skill. The feeling is real — and false. Only practice teaches the hand."
+      }
+    ],
+    "tone_progression": "Curious and concrete at the start, patiently explanatory through the middle, gently insistent at the end — a teacher's voice, never a scold's.",
+    "key_transitions": [
+      "'Psychologists mark this boundary with a pair of terms.' (start of paragraph 2) — the everyday puzzle becomes a concept.",
+      "'The practical lesson is easy to state and hard to accept...' (start of paragraph 4) — description turns into advice."
+    ],
+    "misunderstanding": "Two small misreadings are common here. Some readers turn the comparison into a ranking — 'skills matter more than facts' — which the passage never says; the systems are different, not unequal. Others miss that the final paragraph's warning applies to them right now: feeling you understood this passage is declarative; answering its questions correctly is the skill.",
+    "traps_summary": "Gentle passages still carry precise claims. The wrong options here exaggerated ('never lost', 'wasted effort'), invented reasons the text never gives (childhood learning), or ranked what the author only contrasted. Match the exact strength of the claim, especially when the reading feels easy.",
+    "real_world": "Every 'I watched the tutorial but couldn't do it myself' moment is this passage in action. So is CAT preparation: reading about reading is declarative; your accuracy under a timer is procedural. Solve — don't only study.",
+    "takeaway": "Understanding is not ability: the head learns from explanations, the hand only from repetitions."
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "schema_version": 3,
+  "meta": {
+    "id": "rc-0001",
+    "type": "rc",
+    "version": 3,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "evidence-anchoring",
+      "vocabulary-in-context"
+    ],
+    "word_count": 484,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "logical_structure",
+      "vocabulary_in_context"
+    ],
+    "theme": "epistemic deference and intellectual autonomy",
+    "estimated_time_min": 6.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-02",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-07-02",
+    "batch_id": "batch-rc-001",
+    "prompt_version": "in-repo authored (Milestone 2); RC_MASTER_GENERATION_PROMPT.v1 criteria applied",
+    "reviewer_notes": "Authored during Milestone 2 build; self-scored against Pipeline §6 rubric. Owner review pending — adjust status if any item fails owner reading. Mentor layer added in Reading Mentor milestone (v2); reading-habit + misunderstanding layer added in Reading Experience milestone (v3). Owner review pending for all layers.",
+    "vocab_extracted": [
+      "abdication",
+      "provisional",
+      "credulity"
+    ]
+  },
+  "passage": {
+    "title": "The Discipline of Deferring",
+    "reading_time_min": 2.4,
+    "paragraphs": [
+      {
+        "id": "rc-0001-p1",
+        "text": "A familiar picture of intellectual virtue casts the autonomous thinker as one who accepts nothing on authority. On this view, every belief adopted because an expert holds it is a small abdication — a transfer of one's cognitive duties to someone else. The picture flatters us, and it contains a grain of truth: uncritical credulity really is a vice. But as a portrait of how responsible thinkers actually operate, it is close to unusable, for the domains in which any individual can evaluate the primary evidence are vanishingly few."
+      },
+      {
+        "id": "rc-0001-p2",
+        "text": "Consider what it would take to assess, from first principles, the safety of a vaccine, the age of a rock stratum, or the soundness of a bridge design. Each requires years of training, access to instruments and data, and immersion in a community that has already made and corrected thousands of errors. The autonomous thinker of the familiar picture, forbidden to defer, is not thereby freed; he is merely condemned either to suspend judgment on almost everything or to improvise conclusions with tools inadequate to the task. Neither outcome looks like intellectual virtue."
+      },
+      {
+        "id": "rc-0001-p3",
+        "text": "The better view is that deference is itself a skill, and an exercise of autonomy rather than its surrender. The skilled deferrer does not evaluate the expert's evidence — that is precisely what she cannot do — but she can evaluate the expert: the track record of the field, the presence of institutional mechanisms for catching error, the alignment or misalignment of the expert's incentives with the truth, and the degree of consensus among those positioned to disagree. These are assessments a non-specialist can responsibly make, and making them well is cognitive work of a high order."
+      },
+      {
+        "id": "rc-0001-p4",
+        "text": "None of this licenses treating expert pronouncements as final. Deference, properly practised, is provisional: it is calibrated to the strength of the indicators and withdrawn when they weaken — when a field's incentives corrupt, when dissent is suppressed rather than answered, when predictions repeatedly fail. What distinguishes the skilled deferrer from the credulous one is not that she believes experts less, but that she knows exactly why she believes them, and therefore knows the conditions under which she would stop. Autonomy, on this account, is not the refusal to trust; it is the ownership of one's reasons for trusting."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0001-q1",
+      "type": "main_idea",
+      "stem": "Which of the following best captures the central argument of the passage?",
+      "options": {
+        "A": "Since individuals cannot evaluate primary evidence in most domains, they should suspend judgment on technical questions.",
+        "B": "Deferring to experts, when done by assessing the experts rather than their evidence, is an exercise of intellectual autonomy, not its abandonment.",
+        "C": "The ideal of the autonomous thinker is flawed because expert communities are better at catching errors than individuals are.",
+        "D": "Intellectual autonomy requires believing experts less and demanding that they answer dissent rather than suppress it."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The passage moves from criticizing the never-defer picture (p1–p2) to its positive thesis in p3: deference is 'itself a skill, and an exercise of autonomy rather than its surrender,' then qualifies it in p4. Option B states exactly this reframing, including the key mechanism — evaluating the expert, not the evidence.",
+        "passage_anchor": "rc-0001-p3",
+        "question_type_note": "Main-idea questions reward the option that covers the whole passage's arc — critique, thesis, qualification — at the right level of generality, not a single paragraph's claim.",
+        "reading_habit": "Before judging any main-idea option, compress the passage's arc into three words as you finish reading — here 'critique, claim, caveat' — then demand that the winning option cover all three.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage presents suspending judgment on almost everything as one of two bad outcomes of refusing to defer, not as its recommendation.",
+            "seductive_element": "It reuses the passage's true premise that individuals cannot evaluate primary evidence."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "Error-catching by communities is one indicator the skilled deferrer checks, not the reason the autonomous-thinker ideal fails; the diagnosis in p1–p2 is the impossibility of first-principles evaluation.",
+            "seductive_element": "It sounds critical of the same ideal the author criticizes."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "P4 explicitly denies that the skilled deferrer 'believes experts less'; the difference is owning one's reasons, not lowering trust.",
+            "seductive_element": "It borrows p4's language about dissent being answered rather than suppressed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0001-q2",
+      "type": "inference",
+      "stem": "It can be inferred that the author would regard a person who trusts a scientific consensus without being able to state any reason for that trust as",
+      "options": {
+        "A": "autonomous, since the consensus she trusts is in fact reliable",
+        "B": "closer to the credulous believer than to the skilled deferrer, whatever the consensus's reliability",
+        "C": "guilty of the abdication that the familiar picture of autonomy warns against",
+        "D": "rational only if the consensus later turns out to be correct"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "P4 locates the distinction between skilled and credulous deference in knowing 'exactly why she believes' and the conditions for withdrawal. A truster with no stateable reasons lacks precisely this, regardless of whether the trusted consensus happens to be reliable — so she falls on the credulous side.",
+        "passage_anchor": "rc-0001-p4",
+        "question_type_note": "Inference questions ask what follows from the author's stated criteria applied to a new case; the right answer must be forced by the passage, not merely compatible with it.",
+        "reading_habit": "Apply the author's stated test to a new case mechanically, like a rule — inference questions are settled by the author's criteria, never by what seems sensible to you.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The reliability of the consensus is irrelevant to the author's criterion, which concerns the believer's ownership of her reasons, not the outcome.",
+            "seductive_element": "In everyday terms, trusting a reliable consensus seems obviously fine."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The 'abdication' charge belongs to the familiar picture the author rejects; the author's own critical vocabulary for this case is credulity, not abdication.",
+            "seductive_element": "It uses the passage's own word from p1."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never makes rationality retrospective or outcome-dependent; calibration is assessed by present indicators.",
+            "seductive_element": "It sounds like a hard-headed, evidence-based standard."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0001-q3",
+      "type": "logical_structure",
+      "stem": "What role does the second paragraph play in the passage's argument?",
+      "options": {
+        "A": "It concedes an objection to the author's thesis before answering it in the third paragraph.",
+        "B": "It supplies the examples that the fourth paragraph's withdrawal conditions are later applied to.",
+        "C": "It develops the opening critique by showing that the no-deference ideal leads to a dilemma with no acceptable horn.",
+        "D": "It shifts the passage from describing a view to prescribing a method for evaluating experts."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "P2 takes p1's claim that the familiar picture is 'close to unusable' and demonstrates it: refusing deference forces either suspension of judgment or improvised conclusions, and 'neither outcome looks like intellectual virtue' — a dilemma both of whose horns are unacceptable.",
+        "passage_anchor": "rc-0001-p2",
+        "question_type_note": "Structure questions test the function of a part within the whole — what work it does for the argument, not what it says.",
+        "reading_habit": "As you finish each paragraph, silently label the job it just did — set up, attack, replace, qualify. Structure questions become free marks once labelling is automatic.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "P2 attacks the opposing picture; it does not concede anything against the author's own thesis.",
+            "seductive_element": "Concede-then-answer is a common essay structure, so it feels plausible."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "P2 does supply examples, but p4's withdrawal conditions (corrupted incentives, suppressed dissent, failed predictions) are never applied to the vaccine, stratum, or bridge cases.",
+            "seductive_element": "The examples genuinely appear in p2, making the link tempting."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The shift to prescribing evaluation of experts happens in p3, not p2.",
+            "seductive_element": "It correctly names a shift that occurs in the passage — one paragraph later."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0001-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the final paragraph, \"provisional\" most nearly means",
+      "options": {
+        "A": "supplied on the condition that services are returned",
+        "B": "held tentatively and subject to withdrawal if supporting indicators weaken",
+        "C": "lacking sufficient evidence to be believed at all",
+        "D": "arranged temporarily until a formal arrangement replaces it"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "The sentence itself glosses the word: deference is 'calibrated to the strength of the indicators and withdrawn when they weaken.' In this context, provisional means held subject to revision — tentative, condition-dependent belief.",
+        "passage_anchor": "rc-0001-p4",
+        "question_type_note": "Vocabulary-in-context rewards the meaning the sentence forces, not the most common dictionary sense; the surrounding clause usually contains the gloss.",
+        "reading_habit": "Re-read the full sentence around any tested word before looking at options — writers usually plant the word's working definition in the same clause.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This confuses 'provisional' with 'provision' in the sense of supplying goods or services; nothing in the context involves exchange.",
+            "seductive_element": "Shared root with 'provide' invites the confusion."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The author's deferrer does believe the experts; provisional qualifies how the belief is held, not whether it is held.",
+            "seductive_element": "It exaggerates the tentativeness the word genuinely carries."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The 'temporary arrangement' sense (as in a provisional government) imports a formal-replacement structure absent from the context of belief.",
+            "seductive_element": "It is a correct dictionary sense of the word — just not the one used here."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "abdication",
+      "passage_use": "every belief adopted because an expert holds it is a small abdication",
+      "meaning_here": "a giving up or renunciation of one's own duty or responsibility",
+      "difficulty": "medium"
+    },
+    {
+      "word": "credulity",
+      "passage_use": "uncritical credulity really is a vice",
+      "meaning_here": "a disposition to believe too readily, without adequate grounds",
+      "difficulty": "medium"
+    },
+    {
+      "word": "provisional",
+      "passage_use": "Deference, properly practised, is provisional",
+      "meaning_here": "held tentatively, subject to revision or withdrawal",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "The author attacks a view you may quietly hold, then replaces it. Your job is to track exactly where the replacement happens and what survives of the old view.",
+    "main_idea": "Trusting experts is not giving up thinking for yourself. Done well, it is a skill: you cannot judge the expert's evidence, but you can judge the expert — and knowing why you trust is what keeps you in charge.",
+    "author_intention": "To take a flattering belief many readers hold ('real thinkers accept nothing on authority'), show it cannot actually be lived, and hand back a more workable idea of independence.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0001-p1",
+        "role": "Sets up the target",
+        "note": "Introduces the never-defer picture of the independent thinker, grants it one small truth, then calls it unusable — signalling the attack to come."
+      },
+      {
+        "paragraph_id": "rc-0001-p2",
+        "role": "Breaks the target",
+        "note": "Shows that refusing all deference leaves only two options — judge nothing, or guess badly — and neither looks like wisdom. This is the argument's demolition step."
+      },
+      {
+        "paragraph_id": "rc-0001-p3",
+        "role": "Builds the replacement",
+        "note": "The turn of the passage: deference itself becomes a skill. You judge the expert (track record, incentives, error-checking), not the evidence."
+      },
+      {
+        "paragraph_id": "rc-0001-p4",
+        "role": "Adds the safety catch",
+        "note": "Trust stays provisional: know why you trust, and you will know when to stop. Independence is owning your reasons, not refusing to trust."
+      }
+    ],
+    "tone_progression": "Starts gently ironic about the flattering picture, turns firm while dismantling it, and ends measured and constructive — critique first, repair after.",
+    "key_transitions": [
+      "'But as a portrait of how responsible thinkers actually operate...' (end of paragraph 1) — the concession flips into attack.",
+      "'The better view is that deference is itself a skill...' (start of paragraph 3) — demolition ends, the author's own claim begins."
+    ],
+    "misunderstanding": "Hurried readers stop absorbing at paragraph 2 and file this as 'an essay against trusting experts' — the exact opposite of its claim. The opening picture is presented so sympathetically that many carry it through the whole passage, never noticing that paragraph 3's 'better view' is the author finally speaking. If your one-line summary contains 'don't defer', you summarized the target, not the thesis.",
+    "traps_summary": "This passage punishes half-reading: options that reuse its true premises to reach the wrong conclusion, and options that quote its vocabulary ('abdication', 'believes experts less') against its actual claims. Whenever an option sounds like the passage, check which side of the turn it comes from.",
+    "real_world": "Every time you decide whether to believe a doctor, a news report, or a friend's confident claim about markets, you are doing what paragraph 3 describes — judging the source, not the evidence. Noticing that makes you harder to fool.",
+    "takeaway": "You cannot check everything, so learn to check the checkers — and always know why you trust."
+  }
+}

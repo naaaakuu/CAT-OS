@@ -1,0 +1,283 @@
+{
+  "schema_version": 3,
+  "meta": {
+    "id": "rc-0007",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 83,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "main-idea-extraction",
+      "inference",
+      "evidence-anchoring"
+    ],
+    "word_count": 448,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "specific_detail",
+      "inference",
+      "author_purpose"
+    ],
+    "theme": "the weekend as a negotiated invention rather than a natural rhythm",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-05",
+      "usage_note": "Original composition in CAT register for CAT OS. The history of the weekend ('Saint Monday', the Saturday half-holiday, the spread of the five-day week) is well-documented social history discussed in general terms; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-05",
+    "batch_id": "batch-rc-002",
+    "prompt_version": "in-repo authored (Reading Experience milestone); RC_MASTER_GENERATION_PROMPT.v1 criteria applied",
+    "reviewer_notes": "Authored in the Reading Experience milestone to give the intermediate stage a second passage and the library its first history item. Self-scored against Pipeline §6. Owner review pending.",
+    "vocab_extracted": [
+      "beachhead",
+      "absenteeism",
+      "seeps"
+    ]
+  },
+  "passage": {
+    "title": "The Invention of the Weekend",
+    "reading_time_min": 2.3,
+    "paragraphs": [
+      {
+        "id": "rc-0007-p1",
+        "text": "Few arrangements feel more natural than the weekend. The week tightens, the days count down, and then — as if by planetary rotation — the world pauses for two days. Yet nothing about a five-day working week is natural. The seven-day week itself is an ancient convention, but the weekend as we know it, that guaranteed pair of days belonging to the worker rather than the employer, is barely a century old. It was not discovered, like a season, nor granted, like a holiday. It was assembled, piece by piece, out of religion, industrial conflict, and arithmetic."
+      },
+      {
+        "id": "rc-0007-p2",
+        "text": "The pieces did not fit easily. Religious rest supplied the first day, but different faiths kept different days, and in industrial cities employers found their workforce observing both — one by devotion, the other by absenteeism so regular it earned a name, 'Saint Monday'. Workers drank, rested, or simply failed to appear, and production stuttered at the week's start. The early compromise was a half-holiday: Saturday afternoon off in exchange for a sober, punctual Monday. Reformers liked the bargain for its morals, employers for its output, and workers took it as a beachhead. Once half a Saturday belonged to the worker, the question was no longer whether free time was owed, but how much."
+      },
+      {
+        "id": "rc-0007-p3",
+        "text": "The full two-day weekend arrived when the arithmetic changed sides. Unions had long argued that shorter hours meant fresher workers; by the early twentieth century, some large employers began to believe them, discovering that output did not fall in proportion to hours cut — and that workers with leisure became customers with time to spend. What conscience had failed to win, payroll calculations delivered. The weekend spread not because industrialists softened but because rest had been re-described in a language they accepted: productivity and demand. Each party, it turned out, wanted a different weekend — the preacher a pious one, the worker a free one, the merchant a spending one — and the institution that emerged had to be vague enough to hold all three."
+      },
+      {
+        "id": "rc-0007-p4",
+        "text": "There is a general lesson in the particular one. Institutions that feel like nature — the weekend, retirement, the eight-hour day — are usually the frozen record of negotiations nobody now remembers, kept in place less by law than by habit. Forgetting this has a price. What was assembled can be disassembled, and the process rarely announces itself: it arrives as flexibility, as apps that make Saturday just another inbox, as work that seeps because nothing any longer marks the container's edge. The weekend's history is not an argument against change. It is a reminder that the boundary between work and life was drawn by effort, holds by agreement, and will be redrawn — by whoever shows up to the negotiation."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0007-q1",
+      "type": "main_idea",
+      "stem": "Which of the following best states the central idea of the passage?",
+      "options": {
+        "A": "The weekend arose from religious observance and was later secularized by industrial employers.",
+        "B": "The weekend, though it feels natural, was assembled through negotiation among parties with different aims — and what was negotiated can quietly come apart.",
+        "C": "Employers granted the weekend once unions proved that shorter working hours always increase productivity.",
+        "D": "Institutions like the weekend must be defended against flexible work arrangements that erode them."
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "P1 announces the thesis ('assembled, piece by piece'), p2–p3 narrate the negotiation among preacher, worker, and merchant, and p4 generalizes it — including the warning that assembly implies possible disassembly. Option B spans the whole arc: the invention and its modern fragility.",
+        "passage_anchor": "rc-0007-p4",
+        "question_type_note": "When a history passage ends by zooming out, the main idea is the generalization the story was built to carry, plus the story — not either alone.",
+        "reading_habit": "In narrative passages, watch for the zoom-out paragraph — the main idea usually lives in the general claim the story was hired to carry, so check the last paragraph before committing.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "Religion supplies only the first piece in p2; the passage's point is the three-party assembly and its lesson, not a religious-to-secular handover.",
+            "seductive_element": "It sounds like a tidy historical summary of the opening pieces."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "Employers 'began to believe' that output did not fall proportionally — the passage never says shorter hours always raise productivity, nor that this was proven.",
+            "seductive_element": "It compresses p3's genuine causal story into a stronger claim."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P4 says explicitly that the history 'is not an argument against change'; the author counsels awareness and participation, not defence of the status quo.",
+            "seductive_element": "The closing paragraph's warning tone invites a protective reading."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0007-q2",
+      "type": "specific_detail",
+      "stem": "According to the passage, the Saturday half-holiday was initially offered in exchange for",
+      "options": {
+        "A": "a full day of religious observance on Sunday",
+        "B": "higher output across the whole working week",
+        "C": "a sober and punctual Monday",
+        "D": "employers' promises of higher wages"
+      },
+      "correct": "C",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "correct_reasoning": "P2 states the bargain in one sentence: 'The early compromise was a half-holiday: Saturday afternoon off in exchange for a sober, punctual Monday' — the compromise aimed squarely at 'Saint Monday' absenteeism. Option C is the stated other side of the trade.",
+        "passage_anchor": "rc-0007-p2",
+        "question_type_note": "Exchange details have two sides; the wrong options offer things traded elsewhere in the passage or never traded at all.",
+        "reading_habit": "Anchor exchange details — 'in exchange for', 'in return' — precisely as you read; trade questions test whether you kept both sides of the bargain straight.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Religious rest is the origin of the first free day, not what workers gave up for the Saturday half-holiday.",
+            "seductive_element": "Sunday observance sits in the same paragraph as the bargain."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The output discovery belongs to p3's later story about the full weekend; the half-holiday's stated price was Monday punctuality.",
+            "seductive_element": "Employers liking the bargain 'for its output' makes this feel close."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Wages are never mentioned anywhere in the passage; the negotiation is entirely about time.",
+            "seductive_element": "Wage bargains are the default image of labour negotiation."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0007-q3",
+      "type": "inference",
+      "stem": "The sentence \"What conscience had failed to win, payroll calculations delivered\" most strongly implies that",
+      "options": {
+        "A": "moral arguments for rest had been less effective with employers than arguments framed in terms of profit",
+        "B": "employers who adopted the two-day weekend did so insincerely",
+        "C": "unions abandoned moral arguments once economic ones became available",
+        "D": "the weekend would have arrived sooner if workers had spent more freely"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The sentence contrasts two kinds of persuasion aimed at employers: appeals to conscience, which 'failed to win', and payroll arithmetic, which 'delivered'. The forced implication is comparative effectiveness — profit-framed arguments succeeded where moral ones had not. Option A says exactly this, and no more.",
+        "passage_anchor": "rc-0007-p3",
+        "question_type_note": "Rhetorical antitheses compress a comparison; the inference is the comparison itself, not judgments about sincerity or counterfactual histories.",
+        "reading_habit": "Translate rhetorical sentences into plain claims before judging options — 'conscience failed, payroll delivered' is simply 'profit arguments worked where moral ones had not'.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage assesses which arguments moved employers, not the sincerity of their eventual conversion; 'began to believe' even suggests genuine belief.",
+            "seductive_element": "Cynicism about employers feels sophisticated and safely critical."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It was employers who changed which language they accepted; the unions' productivity argument had been made 'long' before. No one is said to abandon moral claims.",
+            "seductive_element": "It reuses the two kinds of argument, attached to the wrong party."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never speculates about an earlier weekend; consumer spending is one discovered motive, not a lever workers failed to pull.",
+            "seductive_element": "It extends p3's customers-with-time observation into a plausible counterfactual."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0007-q4",
+      "type": "author_purpose",
+      "stem": "In the final paragraph, the author's primary purpose is to",
+      "options": {
+        "A": "warn that flexible work arrangements are a deliberate attempt to abolish the weekend",
+        "B": "argue that the weekend, once won, should never be altered",
+        "C": "summarize the historical stages by which the weekend was achieved",
+        "D": "generalize the weekend's story into a claim about institutions that feel natural, and note that such settlements can erode unannounced"
+      },
+      "correct": "D",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "P4 opens by announcing the move — 'There is a general lesson in the particular one' — then applies it: natural-feeling institutions are frozen negotiations, erosion 'rarely announces itself', and boundaries are redrawn by participants. That is a generalization plus a caution, i.e. option D.",
+        "passage_anchor": "rc-0007-p4",
+        "question_type_note": "Final-paragraph purpose questions usually turn on the paragraph's job for the whole passage — here converting a story into a claim; options that stay inside the story or overstate the caution both miss the job.",
+        "reading_habit": "For purpose questions on closing paragraphs, ask what the paragraph does to the whole passage — most often it converts the story into a claim, and options that keep it inside the story are wrong.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "Erosion is described as unannounced and structural — 'work that seeps' — not as anyone's deliberate plot; 'flexibility' is how it arrives, not a conspiracy.",
+            "seductive_element": "The examples (apps, inboxes) are contemporary enough to feel accusatory."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author states the history 'is not an argument against change' — the point is participation in renegotiation, not preservation.",
+            "seductive_element": "A warning about erosion is easily misread as a plea for permanence."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The stages live in paragraphs 2 and 3; paragraph 4 adds no history and instead draws the general lesson.",
+            "seductive_element": "Closing paragraphs often do summarize, so the role feels plausible."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "beachhead",
+      "passage_use": "workers took it as a beachhead",
+      "meaning_here": "a first secured position from which further advances are made",
+      "difficulty": "hard"
+    },
+    {
+      "word": "absenteeism",
+      "passage_use": "absenteeism so regular it earned a name",
+      "meaning_here": "the habitual practice of staying away from work",
+      "difficulty": "easy"
+    },
+    {
+      "word": "seeps",
+      "passage_use": "work that seeps because nothing any longer marks the container's edge",
+      "meaning_here": "spreads slowly and quietly into every available space",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A history passage with a modern sting in its tail. Three parties wanted three different weekends — the questions will test whether you kept their motives separate.",
+    "main_idea": "The weekend feels like nature but is a negotiated invention, barely a century old: religion supplied a day, labour conflict won half a Saturday, and employers' own arithmetic delivered the rest. Because it was assembled by agreement, it can also be quietly disassembled.",
+    "author_intention": "To use one familiar institution to install a way of seeing: behind anything that feels 'natural' in social life, look for the forgotten negotiation that built it — and notice who is renegotiating it now.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0007-p1",
+        "role": "Breaks the illusion",
+        "note": "The weekend feels as natural as the seasons — and is not. It is about a century old, and it was assembled from religion, conflict, and arithmetic. That one word, 'assembled', is the thesis."
+      },
+      {
+        "paragraph_id": "rc-0007-p2",
+        "role": "Tells the messy start",
+        "note": "Faiths rested on different days, and workers added 'Saint Monday' by simply not turning up. The first deal: Saturday afternoon off, in exchange for a sober, punctual Monday. Half a Saturday changed the question from whether to how much."
+      },
+      {
+        "paragraph_id": "rc-0007-p3",
+        "role": "Follows the money",
+        "note": "The full weekend came when employers' own numbers turned: cutting hours did not cut output in proportion, and rested workers became spending customers. Moral appeals had failed; payroll arithmetic worked. Everyone wanted a different weekend, so the institution stayed vague enough to hold all three."
+      },
+      {
+        "paragraph_id": "rc-0007-p4",
+        "role": "Zooms out",
+        "note": "Anything that feels natural — weekends, retirement — is a frozen negotiation. It erodes quietly, arriving as 'flexibility'. The author refuses to oppose change; the point is that boundaries hold by agreement and are redrawn by whoever shows up."
+      }
+    ],
+    "tone_progression": "Wry and myth-puncturing at the open, briskly narrative through the history, and quietly cautionary — never alarmist — at the close.",
+    "key_transitions": [
+      "'It was not discovered, like a season, nor granted, like a holiday.' (paragraph 1) — the thesis arrives: assembled, not natural.",
+      "'The full two-day weekend arrived when the arithmetic changed sides.' (paragraph 3) — the causal engine switches from morals to money.",
+      "'There is a general lesson in the particular one.' (paragraph 4) — the story becomes a claim."
+    ],
+    "misunderstanding": "Readers tend to file this as either a labour-triumph story ('workers won the weekend') or a cynical one ('employers only did it for profit'). The passage is deliberately neither: it insists the weekend needed all three motives at once, and that its vagueness was the price of holding them together. The end is misread too — the author warns about erosion yet explicitly refuses to argue against change.",
+    "traps_summary": "Multi-party passages breed attribution traps: options that hand one party's motive to another, or that harden 'less effective than' into 'never worked'. Keep a small ledger of who wanted what as you read, and audit every option against the ledger.",
+    "real_world": "Remote-work debates, four-day-week pilots, the job chat that pings on Saturday — each is the weekend's negotiation reopened. When someone calls an arrangement natural or impossible, ask who assembled it, and who benefits from that being forgotten.",
+    "takeaway": "What feels like nature in social life is usually a settlement — drawn by effort, held by agreement, always renegotiable."
+  }
+}

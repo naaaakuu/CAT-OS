@@ -1,0 +1,432 @@
+# CHANGELOG
+
+> Every meaningful change, newest first. Format: version — date — what and why.
+> Versions here are app releases; they map onto the capability milestones in
+> `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
+
+## 0.7.0 — 2026-07-05 — The Personal Reading Mentor
+
+The milestone that gives CAT OS its voice. Success criterion: a student
+should finish a session thinking "this app understands how I read" — never
+"here is my list of errors." The Mistake Notebook the roadmap planned is
+deliberately **subsumed, not built**: every miss is still captured (attempts
+since M2, one lesson per session from today), but the product surface is a
+mentor and a growth story, never a ledger of failure.
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** this release takes the
+0.7.0 slot the notebook held. Its learning goals — capture, resurface,
+retire — ship here in mentor form: lessons captured per session, resurfaced
+as twenty-second recalls, retired ("absorbed") after three successful
+recalls. Spaced repetition (1.2) inherits this loop instead of a notebook.
+
+### The mentor core (`src/core/mentor/` — pure, deterministic, offline)
+- `voice.js` — every sentence the mentor can say, in one reviewable file:
+  opening lines by situation, ten named trap patterns (each with the pull,
+  how to notice it, and a twenty-second recall seed), question-type advice,
+  Reading-DNA copy. Deterministic variety (seeded pick, never random). The
+  vocabulary of failure is machine-banned: verify lints every string
+  against BANNED_WORDS (wrong/failure/mistake/poor/weak/bad…).
+- `dna.js` — **Reading DNA**: evidence-gated observations derived from
+  stored sessions + content, never stored, never judged. Detectors: trap
+  affinities ("the pull of certainty"), traps gone quiet (growth,
+  celebrated first), question-type strengths and frictions, sitting long
+  without accuracy, ending rush, fast first pass, late-session dip. Every
+  detector sits behind explicit minimum-evidence FLOORS — the mentor stays
+  silent rather than pretend noise is a pattern.
+- `lesson.js` — the **One Lesson Rule**: after every session, exactly one
+  teaching — the miss that matches the reader's characteristic pull, or the
+  way into a skipped question, or (clean read) the understanding worth
+  keeping, including "an old pull, walked past" when a known pattern was
+  present and avoided. Plus `pickRecall`: tomorrow's single twenty-second
+  recall (never today's lesson, never twice a day, retired after 3).
+- `records.js` — lessons and recall state in the `learning` store (shipped
+  0.6.0; no migration), through the StorageAdapter only.
+
+### The mentor moment (session end, rebuilt)
+Sessions no longer end on a scoreboard. The mentor opens ("Today I noticed
+something…"), teaches the one lesson — the moment, why the brain goes
+there, how to notice it next time — with the question itself one fold away,
+then a single quiet line: "6 of 8 landed — the numbers matter less than the
+noticing." Full numbers, XP, recap, and the review link live in a
+"Session details" fold: honesty one tap deep, judgment nowhere.
+Milestone celebrations (levels, achievements, best streaks) unchanged.
+
+### Twenty-second recall (before reading)
+Opening a new passage first offers one tiny card from a previous lesson:
+think → reveal → "Got it" → it collapses and the reading begins. Revision
+that barely feels like revision; skippable by simply reading on.
+
+### Growth (new screen, new tab)
+`/growth` — the anti-notebook, first extracted shell screen
+(`src/shell/growth.js`). Three sections, no marks anywhere: **How you
+read** (DNA observations as calm cards — growth first, then strengths,
+then watches, each with its evidence sentence), **Concepts you've
+collected** (one per session, Fresh → Recalled n of 3 → Absorbed), and
+**In your own words** (the latest reflection, quoted). Beautiful empty
+state before the first session; "still listening" card until evidence
+clears the floors. Bottom nav gains a fourth item (sprout icon) — still
+under the five-tab ceiling.
+
+### Verification & plumbing
+- verify.mjs section 9 — mentor dry run: voice lint against BANNED_WORDS
+  (walks every exported string and template output), a teaching pattern +
+  recall must exist for **every** trap_type the schema allows, seeded-pick
+  and DNA determinism, evidence floors gate below-threshold histories, one
+  lesson per messy session (kind watch), mastery lesson on clean sessions,
+  recall rules (not today's lesson, once per day, retire at 3).
+- `loadRCPassages(ids)` added to the content loader (shared by mentor and
+  Growth — no duplicated loading logic).
+- Service worker: shell cache v7; five new modules precached (content
+  cache untouched at v3 — no content changed).
+
+## 0.6.0 — 2026-07-05 — The Reading Experience
+
+The milestone that makes CAT OS feel like the best reading application a
+CAT aspirant has ever used. Success criterion: a student should *enjoy
+reading here*, not merely solve questions.
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** this owner-directed
+release takes the 0.6.0 slot; the Mistake Notebook moves to 0.7.0 and
+subsequent ladder versions shift by one.
+
+### The reading surface, rebuilt
+- `cat-passage` redesigned against the best reading software (Kindle,
+  Apple Books, Medium, Readwise Reader): a true book measure (~64
+  characters), scaled serif title, paragraph rhythm via a dedicated
+  `--para-space` token, `text-wrap: pretty`, hyphenation on narrow
+  phones only, margin-hung numerals, and a quiet end-mark (◆) so the
+  reader always knows the text is finished.
+- Reading size grows to four steps (S/M/L/XL) — XL for late-night and
+  accessibility reading; leading loosens as type grows.
+- While reading: a sticky, veiled session bar (backdrop blur, safe-area
+  aware, notch-painting `::before`), a scroll-driven progress hairline,
+  and a Kindle-style "~N min left" that counts down as you scroll.
+- Paragraphs carry `scroll-margin-top` so evidence jumps land clear of
+  the sticky bar.
+
+### Real difficulty progression (foundation → elite, every rung real)
+- Three new fully-authored v3 passages (batch-rc-002): **rc-0006 "What
+  the Hand Remembers"** (foundation/easy 2 — the journey's deliberately
+  gentle first step), **rc-0007 "The Invention of the Weekend"**
+  (intermediate/medium 5, first history item), **rc-0008 "The Authority
+  of the Original"** (elite/hard 9, first elite passage, 5 questions).
+- Registry now carries `difficulty_numeric` for every item, so
+  within-stage ordering is genuine, not id-accidental. The library
+  ladder is 2→3 / 5→6 / 5→6 / 8 / 9 across five populated stages.
+- The library screen became "Your reading journey": overall progress
+  bar, stages that introduce themselves (one reviewable voice in
+  `journey.js` → `STAGE_INFO`), per-stage read counts, difficulty shown
+  as a calm dot, and the recommended passage carrying an accent edge
+  with its reason.
+
+### Content schema v3 (appended; v1/v2 files remain valid)
+- Every question's explanation must now teach one transferable
+  **reading habit** (`explanation.reading_habit`) — shown as "Make it a
+  habit" — and every mentor block must explain **why students misread
+  this passage** (`mentor.misunderstanding`).
+- All five existing passages upgraded to v3 with authored habits and
+  misunderstanding notes (owner review pending, as recorded since M2).
+
+### The Learning Page, redesigned (the signature)
+- A theme illustration per passage — monochrome inline SVG drawn for
+  *this* passage's idea (a balance for deference, a nib for muscle
+  memory, a calendar with two freed days…), self-drawing on arrival,
+  with genre fallbacks for future content.
+- Chapter sections renamed into a mentor's voice: What was this
+  actually about? (recall-first) · What was the author doing? · The
+  journey, paragraph by paragraph (now with each paragraph's opening
+  words as a memory anchor) · Where the argument turns · How the voice
+  moves · **Why readers misread it** (new) · The traps, as advice ·
+  Words worth keeping (margin-note vocabulary cards) · **Keep this
+  forever** (the page's one pull-quote) · Where life will show you this
+  again.
+
+### Reading reflection (new, optional, local)
+- After the Learning Page: `<cat-reflection>` — sentence starters ("I
+  never realised…", "My biggest takeaway…", "What surprised me…"), an
+  auto-growing serif textarea, saved per passage and editable later.
+- First use of the new **`learning` object store** (IndexedDB v2,
+  additive; the store the notebook will share). Backup format v2
+  exports it; v1 backups still import cleanly.
+
+### Explanations that teach thinking
+- `cat-explanation` rebuilt as a reading lesson: plain verdict line →
+  "How a strong reader gets there" with an evidence pill (¶ Re-read the
+  evidence) → distractor teardown cards with trap-type labels and
+  "feels right because" → the reading-habit callout.
+- Review mode uses the same verdict language (duplicate chips removed);
+  each reviewed question is numbered.
+
+### Visual identity & mobile polish
+- Bottom nav: matched inline-SVG stroke icons (home/book/sliders) on a
+  veiled, blurred bar; nav labels tightened.
+- New tokens: `--text-3xl`, `--para-space`, `--radius-xl`,
+  `--duration-slower`, `--color-veil`; reading measure corrected to
+  36rem; empty-state glyphs sit in quiet circles; skeleton variants for
+  lines/titles; quiet `.btn--quiet`; difficulty dots.
+- Forced light/dark theme now recolors the iOS status bar
+  (`theme-color` metas kept in sync); `overscroll-behavior-x: none`;
+  progress bar advances when a question is answered (not one behind);
+  screen-scoped event listeners (no accumulation across navigations).
+
+### Verification (`tools/verify.mjs`)
+- **Fixed:** dynamic imports now use `pathToFileURL` — the tool
+  previously could not run on Windows at all.
+- New checks: registry↔file agreement extended to stage /
+  difficulty_numeric / estimated_time_min / word_count; journey must
+  cover every stage and start foundation-easy-minimum; **module-graph
+  resolution** (every import reachable from app.js exists **and is
+  precached** — offline breakage is now unshippable); backup round-trip
+  of the learning store incl. v1-file compatibility.
+- Service worker: shell cache v6, content cache v3; schema v3, three
+  new passages, `cat-reflection.js` precached.
+
+## 0.5.0 — 2026-07-04 — The Reading Mentor
+
+The milestone that shifts the product's center of gravity from scoring to
+understanding. Success criterion: a student who completes one passage should
+be a better reader than twenty minutes earlier.
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** this release displaces
+the Mistake Notebook, which moves from 0.5.0 to 0.6.0; subsequent ladder
+versions shift by one. Rationale: the mentor layer changes what a "mistake"
+links back to (the Learning Page), so building it first makes the notebook
+better, not later.
+
+### Content becomes a curriculum (schema v2 — appended, v1 untouched)
+- `content/schema/rc.schema.v2.json`: adds `meta.stage` (foundation →
+  elite), `meta.skills` (reading skills practiced), and a required `mentor`
+  block: challenge (pre-read), main idea, author's intention, per-paragraph
+  journey (role + note, mirrored 1:1 against paragraphs and enforced by the
+  loader), tone progression, key transitions, traps-as-advice, real-world
+  relevance, one takeaway.
+- All five passages upgraded to v2 with fully authored mentor layers
+  (meta.version 2; owner review pending, as recorded since M2). Registry
+  carries stages.
+
+### The Learning Page (`/rc/mentor/:id`) — the signature
+A book chapter, not a dashboard: the app's only artwork (one monochrome
+inline-SVG motif per genre, offline by construction), recall-before-reveal
+on the main idea (generation effect), the Paragraph Journey rail, tone and
+transitions, traps converted into next-passage advice, vocabulary worth
+keeping, real-world relevance, one line to keep — then "What you learned
+today," derived from this passage and this session, never generic.
+
+### Learning progression (`src/core/learning/journey.js`)
+Stage ladder with grouping for the library; recommendations always carry a
+plain-English reason; balance rules are legible: never two hard passages in
+a row, consolidate a stage after a rough session, and when the library is
+read, resurface the weakest passage. Nothing is ever locked — stages
+recommend, they do not gate.
+
+### Reading experience
+- Reading-size preference (S/M/L) in Settings, persisted through the
+  StorageAdapter, scaling only the reading surface via tokens.
+- Pre-reading briefing card: stage, genre, difficulty, time, key-word
+  count, skills practiced, and the passage's challenge — five seconds of
+  mental preparation before the first sentence.
+- Evidence jumps: every explanation's anchor is now a control that opens
+  the passage and flashes the exact source paragraph, in session and review.
+
+### Changed
+- Browser → "Your reading journey," grouped by stage, with a reasoned
+  "Next for you"; dashboard Continue card is journey-driven and states why.
+- Result screen's primary action is now "Understand this passage."
+- Service worker: shell v5, content v2 (passages changed), schema v2 and
+  three new files precached.
+- `tools/verify.mjs`: resolves schemas per item version; journey dry run
+  (ladder order, grouping, balance rules, re-read fallback); loader enforces
+  mentor↔paragraph mirroring.
+
+## 0.4.0 — 2026-07-03 — Milestone 4: Engagement system
+
+Premium motivation, not gamification: XP, streaks, achievements, a motivational
+dashboard, and whisper-level feedback — all derived from data the app already
+stores, all offline, all inside the existing architecture.
+
+### Core (`src/core/engagement/` — pure logic, no DOM, no storage writes*)
+- `xp.js` — legible XP rules (+10 correct, +2 wrong, +5 session, +25 perfect)
+  and a predictable level curve (100, 150, 200… per level).
+- `streaks.js` — daily/best/perfect/accuracy streaks derived from session
+  dates on the device's local calendar; humane recovery framing (a streak is
+  alive through yesterday; the UI invites, never scolds).
+- `stats.js` — the single aggregation point every surface derives from.
+- `achievements.js` — declarative registry (11 achievements across firsts /
+  consistency / volume / mastery); adding one = adding one object.
+- `feedback.js` — haptics (navigator.vibrate, silent no-op on iOS) and tiny
+  synthesized WebAudio cues (no audio files). *Persists only two settings
+  records (haptics, sounds) plus the celebrated-ids record, via StorageAdapter.
+- `messages.js` — the app's whole motivational vocabulary in one reviewable
+  file; information over judgment, never manipulative.
+
+### UI
+- `cat-xp-bar` (animated fill + reduced-motion-safe XP count-up),
+  `cat-week-strip` (last 7 days as quiet bars), `cat-celebration` (the ONE
+  celebration surface: a calm sheet with a self-drawing medal).
+- Dashboard: date eyebrow, greeting + one honest motivational line, a Today
+  card (goal · streak badge · XP bar · week strip), six-stat grid (sessions,
+  answered, accuracy, time studied, best streak, level), Continue learning,
+  Achievements (n of 11 + three most recent), Recent practice.
+- Session result: XP earned with count-up, level progress, one performance
+  line; celebration only for level-ups, new unlocks, or a new best streak —
+  never for ordinary answers.
+- Settings: Feedback card (Haptics default ON where supported; Sounds default
+  OFF, opt-in) with an immediate demo cue on toggle.
+
+### Decisions (recorded in STATUS.md)
+- Derived-first engagement: XP/levels/streaks/stats are computed from stored
+  sessions — no new object stores, no DB migration, backups already cover it.
+- "Vocabulary Explorer" deferred honestly (no vocab interaction data exists);
+  "Complete Library" takes its slot until the Vocabulary module lands.
+- Sounds default OFF: iOS hardware-mute behavior for WebAudio is not reliably
+  consistent — verify on device; volumes are whisper-level regardless.
+
+### Changed
+- `service-worker.js` → shell cache v4; nine new files precached.
+- `tools/verify.mjs` → engagement dry run (XP curve monotonicity + exact
+  thresholds, perfect-bonus formula, streak derivation incl. recovery state,
+  7-day strip shape, achievement gating against celebrated ids).
+
+## 0.3.0 — 2026-07-03 — Milestone 3: Experience pass
+
+Experience only: no new features, no architecture changes, no functionality
+touched. The same app, made to feel calm, fast, and intentional.
+
+### Design system (tokens.css rebuilt as the full design language)
+- Three-level ink hierarchy (`--color-ink/-2/-3`), surface scale, line scale.
+- Semantic colors: success / warning / danger / info (+ dark equivalents);
+  answer-feedback colors now alias the semantic tokens.
+- Complete scales: spacing (4px), typography (12→30 with a dedicated 18px
+  reading size), radius (xs→full), elevation (`--shadow-0/1/2`), motion
+  (`--duration-fast/default/slow`, eases, `--press-scale`), state tokens
+  (focus ring, disabled/dim opacities), and a tighter reading measure.
+
+### Motion (all `prefers-reduced-motion`-safe)
+- One orchestrated entrance: screens rise gently; top-level cards follow in a
+  capped 40ms stagger. Nothing else animates on load.
+- Uniform press feedback (scale 0.98) on buttons, options, nav, list items.
+- Explanations fade in; the results screen draws a small check; toasts settle
+  in with a spring-less rise; theme switching cross-fades background/color.
+- Skeleton shimmer for the passage list (static fill under reduced motion).
+
+### Screens
+- **Home → dashboard:** date eyebrow, serif greeting, stat grid (sessions /
+  answered / accuracy), a Continue-practicing card that surfaces the next
+  unread passage, and Recent practice with per-session review links.
+- **Settings → grouped premium page:** Appearance / Your data / About cards
+  with consistent leading icons, descriptions per row, storage usage via
+  `navigator.storage.estimate()` (honest fallback text), and the app version.
+- **Empty states** for 404 and the passage browser — direction, not mood.
+- RC reading surface: passage column tightened to a reading measure, body
+  raised to 18px/1.75, paragraph numerals hang in the margin on wide screens.
+
+### Mobile & accessibility
+- Safe-area padding on all four edges; landscape-phone header compaction;
+  `touch-action: manipulation`; tap-highlight replaced by our press feedback.
+- Consistent two-layer focus ring token applied via `:focus-visible`;
+  hover styles gated behind `(hover: hover)` so touch devices never stick.
+- `aria-busy` during list loading; labeled review links; decorative glyphs
+  `aria-hidden`.
+
+### Performance
+- Animations restricted to `transform`/`opacity` (compositor-friendly);
+  transitions declare specific properties, never `all`; hover lift avoided on
+  touch; no new network work; offline behavior unchanged (shell cache → v3).
+
+### Unchanged by design
+Engine, scoring, loader, validator, storage, router, module contracts, all
+content, and every user-facing behavior.
+
+## 0.2.0 — 2026-07-02 — Milestone 2: Reading Comprehension module
+
+The first fully working VARC module: an end-to-end, offline learning loop —
+read a passage, answer its questions, see exactly why each option is right or
+wrong, and review the attempt later — with every attempt persisted through the
+existing StorageAdapter. Nothing from Milestone 1 was rebuilt.
+
+### Added
+- **RC content schema v1** — `content/schema/rc.schema.v1.json`, the mechanical
+  form of CONTENT_DATABASE_SCHEMA.md's RC model (paragraph array, per-question
+  distractor analysis, difficulty at two granularities, estimated times).
+- **Content pipeline (app side)** — `core/content-loader/validator.js` (a small
+  dependency-free JSON-Schema-subset validator) and `core/content-loader/loader.js`
+  (fetch + schema-validate + cross-field consistency checks at the boundary).
+- **Session engine** — `core/engine/session.js` (pure, DOM-free walk through a
+  passage's questions with per-question timing) and `core/engine/scoring.js`
+  (accuracy + clearly-labeled CAT-style +3/−1 marks).
+- **RC module** — `src/modules/reading-comprehension/`: passage browser, the
+  three-phase session screen (reading → question-by-question with immediate
+  explanations → result), and review mode. Registered via `registerRC(router,
+  context)`; app.js stays a thin wiring layer.
+- **UI components** — `cat-passage` (reading-first, numbered paragraphs),
+  `cat-option`, `cat-question-card`, `cat-explanation` (trap-type + why-seductive
+  per distractor), `cat-progress-bar`, `cat-timer`, `cat-result-summary`.
+- **Persistence** — sessions → `sessions` store, per-question attempts →
+  `attempts` store, all through the StorageAdapter (Rule 6). Home shows a quiet
+  aggregate; the browser shows per-passage status.
+- **Starter content** — five original CAT-register passages (rc-0001…rc-0005),
+  21 questions total, across philosophy / economics / science / sociology /
+  arts-culture and easy→hard, each with full explanations, distractor analysis,
+  estimated times, and vocabulary. Registry populated to match.
+- **Verification tool** — `tools/verify.mjs`, run with plain Node, reusing the
+  app's own validator and consistency rules so tool and runtime cannot drift.
+  Checks schema validity, registry↔file agreement, service-worker precache↔disk,
+  and does an engine dry run.
+
+### Changed
+- `service-worker.js` → shell cache **v2** (all new module + component files
+  precached) plus a **separate content cache v1** precaching the schema, registry,
+  and five passages; new content is cached on first use as the library grows.
+- `src/ui/styles/tokens.css` — added reading line-height and answer-feedback
+  colors (light + dark). Additive; no existing token changed.
+- `src/ui/styles/components.css` — added practice-flow patterns (badges, list
+  items, session bar, verdicts). Additive.
+- `src/app.js` — registers the RC module and renders module list on Practice;
+  Home now shows aggregate progress. Shell screens and Backup/Restore unchanged.
+- `src/modules/README.md` — documents the now-established module pattern.
+
+### Fixed (during verification, before release)
+- Passage `meta` blocks were missing the schema-required
+  `meta.estimated_time_min`; added to all five and now enforced by the tool.
+- Session screen timers now count from the true session start rather than
+  resetting between phases.
+
+### Decisions
+Recorded in `STATUS.md` → "Recorded decisions (Milestone 2)": paragraph-array
+passage shape (schema authority over the prompt template, which is flagged for a
+v2 update), array-shaped distractor analysis, the two time fields, the
+no-dependency validator, the separate content cache, and CAT-style (not official)
+marks. Content provenance policy (original vs. sourced passages) logged as an
+open owner decision.
+
+## 0.1.0 — 2026-07-02 — Milestone 1: Walking Skeleton
+
+The first shippable state: an installable, offline, no-build PWA shell with
+working local persistence. No practice content yet — by design.
+
+### Added
+- App shell: `index.html`, bottom navigation (`<cat-nav>`), Home / Practice /
+  Settings / Not-found screens.
+- PWA: `manifest.webmanifest`, full icon set (192/512/maskable/apple-touch),
+  `service-worker.js` with versioned cache-first shell caching and offline
+  navigation fallback.
+- Design system: `tokens.css` (light/dark, single accent, type/space scales),
+  `base.css`, `components.css`. Motion respects `prefers-reduced-motion`;
+  visible keyboard focus throughout.
+- Core: hash `Router` with param routes and 404; `StorageAdapter` interface
+  (Rule 6) + `IndexedDBAdapter` (DB `cat-os` v1; stores `settings`,
+  `attempts`, `sessions`); `backup.js` export/import with versioned file
+  format and explicit merge/replace.
+- Settings: theme preference (system/light/dark) persisted through the
+  StorageAdapter; working Backup & Restore.
+- Error handling: global `error`/`unhandledrejection` handlers surfacing
+  through a single `<cat-toast>` component.
+- Repo hygiene: accurate `README.md`, `STATUS.md`, this changelog,
+  `content/index.json` (empty registry), `.nojekyll`, `src/modules/README.md`.
+
+### Fixed
+- Replaced the incorrect README, which described an unrelated hobby kernel OS.
+
+### Decisions
+- Recorded in `STATUS.md`: relative-path constraint, system font stacks, no
+  empty stubs for later-version files, DB naming and keying.

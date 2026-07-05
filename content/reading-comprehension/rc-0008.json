@@ -1,0 +1,333 @@
+{
+  "schema_version": 3,
+  "meta": {
+    "id": "rc-0008",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "stage": "elite",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "vocabulary-in-context",
+      "tone-detection",
+      "trap-recognition"
+    ],
+    "word_count": 588,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "logical_structure",
+      "inference",
+      "vocabulary_in_context",
+      "tone"
+    ],
+    "theme": "translation as interpretation made answerable, and the relocated authority of the original",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-05",
+      "usage_note": "Original composition in CAT register for CAT OS engaging the long-standing translation-theory debate in general terms; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-05",
+    "batch_id": "batch-rc-002",
+    "prompt_version": "in-repo authored (Reading Experience milestone); RC_MASTER_GENERATION_PROMPT.v1 criteria applied",
+    "reviewer_notes": "Authored in the Reading Experience milestone as the library's first elite passage: the hardest register the journey offers, with 5 questions. Self-scored against Pipeline §6; verify difficulty feels earned, not obscure. Owner review pending.",
+    "vocab_extracted": [
+      "indeterminacy",
+      "custodial",
+      "construal"
+    ]
+  },
+  "passage": {
+    "title": "The Authority of the Original",
+    "reading_time_min": 2.9,
+    "paragraphs": [
+      {
+        "id": "rc-0008-p1",
+        "text": "That something is always lost in translation is among the few claims about literature that circulate as common sense. The original, on this view, is a completed and self-sufficient object; the translation, an unavoidably leaky vessel into which as much of the original as possible is decanted. Whatever fails to survive the pouring — a rhythm, a pun, the weather of a particular word — is mourned as loss, and the translator is cast in advance as a well-intentioned traitor. The picture has the durability of all flattering pictures: it honours the writer, pities the translator, and asks nothing of the reader. It is also, in nearly every particular, misleading."
+      },
+      {
+        "id": "rc-0008-p2",
+        "text": "Begin with the object itself. The self-sufficient original is a surprisingly recent invention, an artifact of print, copyright, and the romance of the solitary author. For most of literary history, texts circulated as swarms of variants — copied by hand, altered in performance, revised by editors with their own designs — and what we now print as 'the' text is often a scholarly reconstruction, one editor's settlement of disagreements the manuscripts refuse to settle themselves. The stable original against which every translation is convicted of infidelity is thus, in many cases, itself an edition: a made thing, assembled according to arguable preferences. The court that tries the translator sits, so to speak, in a borrowed building."
+      },
+      {
+        "id": "rc-0008-p3",
+        "text": "The deeper error, however, concerns not the original's stability but the nature of the translator's act. A reader may glide past an ambiguity without noticing it; a critic may note it and leave it standing; a translator can do neither. Where the source language permits a sentence to mean two things at once, the target language will usually demand a choice, and the translator must make it — publicly, permanently, in print. Translation is, in this sense, reading made answerable: an interpretation that cannot hedge, delivered under oath. Every rendering is therefore an argument about the text, conducted word by word, and the sum of those arguments is the most complete account of a reading that anyone ever gives. The scholar's essay discusses a book; the translation enacts an entire construal of it."
+      },
+      {
+        "id": "rc-0008-p4",
+        "text": "Reframed this way, the famous loss changes character. What a translation cannot preserve is, above all, indeterminacy: the original's capacity to hold several meanings in suspension and delay the choosing. What it purchases with that loss is commitment — a reading pursued to its consequences and exposed to objection at every line. This is why translations of a rich text disagree with one another, and why the disagreement is not scandal but evidence: the versions differ as strong critical readings differ, because the text underdetermines them. To ask which translation is 'faithful' is often to ask, without admitting it, which interpretation one prefers. Fidelity, in the singular, presumes the original speaks with one voice — the very assumption rich texts exist to defeat."
+      },
+      {
+        "id": "rc-0008-p5",
+        "text": "None of this dissolves the original's authority; it relocates it. A great text commands translation the way a serious question commands answers — not by containing them in advance but by making them worth the labour of formulating. Its authority is generative, not custodial: measured less by what it forbids its translators than by what it keeps demanding of them. A text that continues to provoke unlike renderings, generation after generation, is not being serially betrayed. It is being read — attentively, answerably, in public — which is the only homage language has ever really had to offer. What is lost in translation is the luxury of not deciding; what survives is whatever made deciding worthwhile."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0008-q1",
+      "type": "main_idea",
+      "stem": "Which of the following best captures the passage's central argument?",
+      "options": {
+        "A": "Translations inevitably lose the original's meaning, and serious readers should therefore prefer originals wherever possible.",
+        "B": "Because most 'originals' are editorial reconstructions, the distinction between original and translation has no real basis.",
+        "C": "Translators should be regarded as critics, since both produce interpretations of texts that others may dispute.",
+        "D": "Translation is best understood not as failed copying but as interpretation made answerable, so an original's authority lies in generating unlike readings rather than in forbidding them."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "correct_reasoning": "The passage dismantles the copying picture (p1–p2), redefines translation as 'reading made answerable' (p3), reprices the loss as indeterminacy-for-commitment (p4), and relocates the original's authority as 'generative, not custodial' (p5). Option D joins the redefinition to the relocation — the two moves that structure the whole argument.",
+        "passage_anchor": "rc-0008-p5",
+        "question_type_note": "In staged arguments, the main idea is the final reframe plus the claim it rests on; options that state one stage, or push a stage past the author's qualification, fail.",
+        "reading_habit": "In staged arguments, assemble the main idea from what each stage replaced, then check it against the final paragraph — the thesis is the closing reframe, not the loudest early sentence.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the common-sense picture the passage calls 'in nearly every particular, misleading'; the author never advises preferring originals.",
+            "seductive_element": "It restates the famous claim the passage opens with, in reasonable-sounding form."
+          },
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "P2 says the stable original is 'in many cases' an edition — a qualification — and p5 insists the original's authority is relocated, not dissolved; the distinction survives.",
+            "seductive_element": "It rides the momentum of the demolition one step past where the author stops."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "The critic comparison is one strand of p3–p4; it omits both the 'answerable' asymmetry (critics may hedge; translators cannot) and the relocated-authority conclusion.",
+            "seductive_element": "It is genuinely close to p4's claim that versions differ as critical readings differ."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0008-q2",
+      "type": "logical_structure",
+      "stem": "The second paragraph functions primarily to",
+      "options": {
+        "A": "establish the passage's central claim about the nature of the translator's act",
+        "B": "undermine a presupposition of the common-sense view — the stable, self-sufficient original — before the passage turns to what it calls the deeper error",
+        "C": "demonstrate that editorial reconstruction is itself a form of translation",
+        "D": "concede that translations are fairly convicted of infidelity whenever the original text is stable"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "P2 opens 'Begin with the object itself' and attacks the assumed stable original ('itself an edition ... a borrowed building'). P3 then explicitly redirects: 'The deeper error, however, concerns not the original's stability but the nature of the translator's act.' So p2 clears a presupposition; the central claim arrives afterwards — exactly option B.",
+        "passage_anchor": "rc-0008-p2",
+        "question_type_note": "Structure questions in staged arguments turn on which target a paragraph attacks; the author's own signpost ('the deeper error, however') fixes p2 as preliminary ground-clearing.",
+        "reading_habit": "Distinguish attacks on a view's presuppositions from attacks on the view itself — dense passages often clear the ground a full paragraph before the real engagement begins.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The central claim about the translator's act is made in p3, which explicitly marks p2's concern (stability) as not the deeper issue.",
+            "seductive_element": "P2 is forceful enough to feel like the thesis."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage calls the printed text an edition and a made thing; it never claims editing is translation — the analogy is left undrawn.",
+            "seductive_element": "The two activities sit suggestively close in the paragraph."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P2 questions the tribunal itself ('a borrowed building'); nothing concedes the fairness of infidelity verdicts under any condition.",
+            "seductive_element": "Its conditional phrasing sounds like careful argumentative bookkeeping."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0008-q3",
+      "type": "inference",
+      "stem": "It can be inferred that the author regards disagreement among translations of a rich text as",
+      "options": {
+        "A": "an expected consequence of the text underdetermining its readings, comparable to disagreement among strong critical readings",
+        "B": "evidence that at most one of the disagreeing translations can be faithful",
+        "C": "a defect that better editorial scholarship should eventually resolve",
+        "D": "proof that the original text has no determinate meaning at all"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "P4 says translations of a rich text disagree 'as strong critical readings differ, because the text underdetermines them,' and that this disagreement 'is not scandal but evidence.' The inference is that disagreement is expected and interpretive in kind — option A, at exactly the text's strength.",
+        "passage_anchor": "rc-0008-p4",
+        "question_type_note": "The author's quantifiers set the ceiling: 'underdetermines' allows several readings without allowing all or none; options that harden it either way overreach.",
+        "reading_habit": "When an author says a text 'underdetermines' its readings, hold the claim at exactly that strength — several readings licensed is not all readings licensed, and not none.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P4 argues that singular fidelity presumes the one-voiced original that rich texts 'exist to defeat'; the author rejects the at-most-one picture.",
+            "seductive_element": "It sounds like rigorous logic about contradictory versions."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Editorial settlement belongs to p2's discussion of originals; p4 calls the translations' disagreement evidence, not a defect awaiting repair.",
+            "seductive_element": "It stitches together two genuine strands of the passage."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "Underdetermination means the text permits several readings, not that it determines nothing; p5's generative authority requires the text to constrain and demand.",
+            "seductive_element": "It feels like the bold conclusion the argument is building toward."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0008-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the third paragraph, \"answerable\" most nearly means",
+      "options": {
+        "A": "capable of being answered or resolved",
+        "B": "willing to respond politely to questions",
+        "C": "accountable — obliged to stand behind one's choices and face objections",
+        "D": "corresponding exactly to something else"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "The appositive supplies the gloss: 'reading made answerable: an interpretation that cannot hedge, delivered under oath' — and p4 adds 'exposed to objection at every line.' The sense is accountability for public, permanent choices, i.e. option C.",
+        "passage_anchor": "rc-0008-p3",
+        "question_type_note": "In dense prose the phrase after a colon or dash is usually the author's own definition; vocabulary questions reward reading the appositive before the options.",
+        "reading_habit": "For vocabulary in dense prose, trust the appositive — the phrase after the colon or dash is usually the exact definition the author intends.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "That sense would make the READING something one answers; here it is the reader who must answer for choices — agency runs the other way.",
+            "seductive_element": "It is the most common everyday sense of the word."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Politeness and responsiveness have no footing in a context of oaths, print, and objection.",
+            "seductive_element": "It reads naturally if one skims 'answer' and guesses socially."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The older 'answerable to' = 'corresponding' sense would describe the translation matching the original — precisely the copying picture the paragraph is replacing.",
+            "seductive_element": "It is a genuine dictionary sense, and it flatters the fidelity intuition."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0008-q5",
+      "type": "tone",
+      "stem": "The author's attitude toward the common-sense picture described in the first paragraph is best characterized as",
+      "options": {
+        "A": "sympathetic, since the picture rightly honours the writer's achievement",
+        "B": "critical of its accuracy while acknowledging the sources of its appeal",
+        "C": "openly contemptuous of the readers who hold it",
+        "D": "neutral, presenting it only as historical background"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The verdict is plain — 'in nearly every particular, misleading' — but the author first explains why the picture endures: it 'honours the writer, pities the translator, and asks nothing of the reader,' with 'the durability of all flattering pictures.' Criticism of accuracy, plus a diagnosis of appeal: option B.",
+        "passage_anchor": "rc-0008-p1",
+        "question_type_note": "Attitude questions often live in the gap between what an author concedes about a view's appeal and the verdict on its truth; both halves must appear in the right answer.",
+        "reading_habit": "Separate what the author concedes about a view's appeal from the verdict on its truth — attitude questions are usually asked exactly in that gap.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "The author notes that the picture honours the writer as an explanation of its durability, not as an endorsement; the verdict is 'misleading'.",
+            "seductive_element": "It quotes the concession and stops before the verdict."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The irony is aimed at the picture, not at people; 'common sense' and 'flattering' diagnose, they do not sneer at holders.",
+            "seductive_element": "The passage's confidence can read as disdain if tone-words are skimmed."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "A paragraph that ends by calling a view misleading is evaluative by construction; nothing here is neutral scene-setting.",
+            "seductive_element": "The measured cadence of the prose can be mistaken for neutrality."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "indeterminacy",
+      "passage_use": "What a translation cannot preserve is, above all, indeterminacy",
+      "meaning_here": "the state of being open to several meanings at once, with the choice not yet forced",
+      "difficulty": "hard"
+    },
+    {
+      "word": "custodial",
+      "passage_use": "Its authority is generative, not custodial",
+      "meaning_here": "concerned with guarding and keeping something unchanged",
+      "difficulty": "hard"
+    },
+    {
+      "word": "construal",
+      "passage_use": "the translation enacts an entire construal of it",
+      "meaning_here": "a particular way of interpreting or understanding something",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "This is the hardest register the exam uses: abstract claims, long qualifications, a thesis that arrives in stages. Read slowly, and track what replaces what — the questions all live near the author's careful limits.",
+    "main_idea": "Translation is not failed copying. Because a translator must decide wherever the original allows several meanings, a translation is an interpretation made answerable — a complete reading, published and exposed to objection. What is lost is the original's undecidedness; what is gained is commitment; and the original's authority lies in provoking unlike readings, not forbidding them.",
+    "author_intention": "To dismantle the 'lost in translation' cliché in stages — first its assumed stable original, then its picture of what translating is — and to leave the reader holding the reversed image: translation as the deepest, most accountable form of reading.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0008-p1",
+        "role": "States the target",
+        "note": "The familiar picture: original as perfect object, translation as leaky copy, translator as well-meaning traitor. The author explains why the picture is loved — it flatters everyone — and then calls it misleading. Demolition is announced."
+      },
+      {
+        "paragraph_id": "rc-0008-p2",
+        "role": "Removes a pillar",
+        "note": "The 'stable original' is often itself a made thing — one editor's settlement of disagreeing manuscripts. The court that convicts translators of infidelity sits in a borrowed building. Note: this attacks an assumption, not yet the main error."
+      },
+      {
+        "paragraph_id": "rc-0008-p3",
+        "role": "Makes the real claim",
+        "note": "A translator cannot glide past ambiguity the way readers and critics can; the new language forces a choice, in print, forever. Translation is reading made answerable — an argument about the text conducted word by word."
+      },
+      {
+        "paragraph_id": "rc-0008-p4",
+        "role": "Reprices the loss",
+        "note": "What is truly lost is indeterminacy — the text's power to delay choosing. What is bought is commitment. Unlike translations disagree the way strong critics disagree; asking 'which is faithful?' usually means 'which reading do I prefer?'"
+      },
+      {
+        "paragraph_id": "rc-0008-p5",
+        "role": "Relocates authority",
+        "note": "The crucial qualification: the original's authority is not dissolved but moved. A great text commands translations the way a serious question commands answers. Being endlessly re-translated is not betrayal — it is being read."
+      }
+    ],
+    "tone_progression": "Ironic toward the cliché at the open, forensic through the middle paragraphs, and quietly elevated — almost celebratory — by the close.",
+    "key_transitions": [
+      "'It is also, in nearly every particular, misleading.' (end of paragraph 1) — the demolition is announced.",
+      "'The deeper error, however, concerns not the original's stability but the nature of the translator's act.' (paragraph 3) — ground-clearing ends; the passage builds.",
+      "'None of this dissolves the original's authority; it relocates it.' (paragraph 5) — the qualification that blocks every extreme reading."
+    ],
+    "misunderstanding": "Elite passages are misread by momentum. After two paragraphs of demolition, readers assume the conclusion must be the mirror image — 'there is no real original', 'fidelity is meaningless'. Paragraph 5 exists to block exactly that: authority is relocated, not dissolved. The second misreading is structural: paragraph 2 attacks a presupposition (the stable original) while paragraph 3 attacks the deeper error (what translating is) — two different targets, in sequence, and the questions test whether you kept them apart.",
+    "traps_summary": "Every trap in this set is an overshoot: 'underdetermines' hardened into 'has no meaning', 'often an edition' into 'no original exists', measured irony into contempt. In dense passages the correct option is usually the most carefully limited one — precision beats strength, every time.",
+    "real_world": "Whenever you compare two renderings of one thing — two news summaries of a speech, two film adaptations of a novel, two friends' accounts of the same quarrel — you are watching interpretations made answerable, and their differences map the source's ambiguities.",
+    "takeaway": "A translation is a reading that signed its name; what dies is only the luxury of not deciding."
+  }
+}
