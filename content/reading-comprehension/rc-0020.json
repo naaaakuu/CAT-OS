@@ -1,0 +1,288 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0020",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "literature-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 507,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "paragraph_function",
+      "vocabulary_in_context"
+    ],
+    "theme": "whether an author's intention fixes a text's meaning, and where interpretation's limits lie",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The debate over authorial intention and the 'intentional fallacy' is central to literary theory; no specific essay is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Literature-theory with a two-sided thesis: intention doesn't govern meaning, but interpretation isn't unlimited. The central trap is the 'anything goes' overshoot. Owner review pending.",
+    "vocab_extracted": [
+      "intention",
+      "arbiter",
+      "constraint"
+    ]
+  },
+  "passage": {
+    "title": "Who Owns a Poem's Meaning",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0020-p1",
+        "text": "When a poem puzzles us, the instinct is to ask what the poet meant. Behind the question lies a natural theory: that a text is a message, that the author encoded a meaning into it, and that to interpret is to recover what was placed there. On this view the author is the meaning's rightful owner, and a reading is correct insofar as it matches the intention behind the words. It is the theory we apply to ordinary messages — a friend's text, a set of instructions — and it seems only fair to extend it to poems."
+      },
+      {
+        "id": "rc-0020-p2",
+        "text": "Yet the theory runs into trouble the moment we try to use it. The author's intention, as a private mental event, is not available to us; it is gone, and even the author's later report of it is just one more interpretation, made after the fact and no more authoritative than anyone's. Worse, poems routinely mean things their authors did not consciously intend — a pattern of images the poet never planned, an ambiguity that opens a reading the poet would disavow. If such meanings are really in the poem, and they seem to be, then meaning cannot be identical to intention. The words, once written, carry significances the writer neither foresaw nor controls."
+      },
+      {
+        "id": "rc-0020-p3",
+        "text": "This suggests a different picture. A poem is not a sealed message but a public object made of language, and language means by shared convention, not by private decree. Once released, the poem belongs to its readers, who bring it to life by reading, and its meaning is the work of that encounter rather than a treasure buried by the author for retrieval. The poet, on this account, is not the owner of the poem's meaning but its first reader, with no special authority over what the words, set loose in a common language, can be found to say."
+      },
+      {
+        "id": "rc-0020-p4",
+        "text": "It is tempting to slide from here into the claim that a poem can mean anything a reader likes, but the argument does not license that, and its better advocates resist it. If meaning came from private intention, we lost one master; we did not thereby abolish all constraint. The words still mean what they mean in the shared language; a reading must answer to the text, to what its words and structures can bear, even as it declines to answer to the author's biography. Freedom from the author is not freedom from the poem. Interpretation is released from one false authority only to be held, more strictly, to another — the public language of the work itself."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0020-q1",
+      "type": "main_idea",
+      "stem": "The central claim of the passage is that a poem's meaning",
+      "options": {
+        "A": "is fixed by the author's intention, which skilled readers can recover",
+        "B": "is not determined by the author's intention but is still constrained by the shared language of the text",
+        "C": "can be whatever any individual reader decides it is",
+        "D": "cannot be known at all, since the author's intention is unavailable"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "The passage rejects intention as the source of meaning (p2), relocates meaning to the reader's encounter with a public object (p3), but explicitly denies 'anything goes', insisting a reading 'must answer to the text' (p4). Option B holds both halves: not intention-governed, yet language-constrained.",
+        "passage_anchor": "rc-0020-p4",
+        "question_type_note": "This is a two-sided thesis; the main-idea answer must include both the rejection of intention and the retention of textual constraint.",
+        "reading_habit": "When paragraph 4 begins 'It is tempting to slide into… but', expect the thesis to be the balanced position that resists the slide — capture both sides.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the 'natural theory' the passage sets out to refute in paragraph 2; the author denies that intention fixes meaning or can even be recovered.",
+            "seductive_element": "It is the common-sense view most readers begin with, stated confidently in paragraph 1."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "Paragraph 4 explicitly rejects this: the argument 'does not license' anything-goes, and a reading must answer to what the words 'can bear'.",
+            "seductive_element": "Once the author is dethroned, 'the reader decides everything' feels like the natural next step."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says intention is unavailable, but meaning is not thereby unknowable — it lives in the public language and the reader's encounter. Unknowable intention does not mean unknowable meaning.",
+            "seductive_element": "It borrows the true premise (intention is unavailable) and draws a false, despairing conclusion the passage avoids."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0020-q2",
+      "type": "inference",
+      "stem": "It can be inferred that, on the author's view, a poet's later statement 'what I really meant was…' should be treated as",
+      "options": {
+        "A": "the final and authoritative settlement of the poem's meaning",
+        "B": "one interpretation among others, with no special authority over the text",
+        "C": "irrelevant to the poem and safely ignored by every reader",
+        "D": "proof that the poem has no stable meaning at all"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 says the author's later report of intention 'is just one more interpretation, made after the fact and no more authoritative than anyone's', and paragraph 3 casts the poet as merely 'the first reader'. So a poet's later gloss is one interpretation among others — option B.",
+        "passage_anchor": "rc-0020-p2 and rc-0020-p3",
+        "question_type_note": "The inference restates the author's precise demotion of authorial testimony to a non-privileged interpretation.",
+        "reading_habit": "Match the inference to the passage's exact strength: 'no more authoritative than anyone's' means one voice among many, not 'irrelevant' and not 'authoritative'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage strips the author of special authority; a later statement cannot 'settle' meaning, since it is itself just an after-the-fact interpretation.",
+            "seductive_element": "We instinctively defer to creators' explanations of their own work."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage demotes the author's statement to one interpretation, not to irrelevance; as the 'first reader', the poet's view still counts as a reading, just not a ruling.",
+            "seductive_element": "'No special authority' can be over-read as 'no value, ignore it'."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage affirms meaning is real and constrained by language; a poet's gloss being non-authoritative does not show the poem lacks stable meaning.",
+            "seductive_element": "Disagreement about intention can suggest instability, which the option overstates."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0020-q3",
+      "type": "paragraph_function",
+      "stem": "The fourth paragraph functions chiefly to",
+      "options": {
+        "A": "abandon the passage's argument in favour of the author's original authority",
+        "B": "prevent an over-reading of the argument by insisting the text still constrains interpretation",
+        "C": "introduce a new example of a poem with multiple meanings",
+        "D": "concede that readers cannot understand poems without knowing the poet's life"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 guards against the slide to 'a poem can mean anything a reader likes', insisting 'the words still mean what they mean' and a reading 'must answer to the text'. Its function is to block the over-reading and re-impose textual constraint — option B.",
+        "passage_anchor": "rc-0020-p4",
+        "question_type_note": "Function questions ask what a paragraph does; this one is a guardrail against misapplying the argument.",
+        "reading_habit": "A final paragraph beginning 'it is tempting to slide into… but' is almost always fencing the thesis against its own exaggeration.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph reaffirms freedom 'from the author'; it explicitly declines to answer to 'the author's biography'. It does not restore authorial authority.",
+            "seductive_element": "Re-imposing constraint can look like retreating to the author, though the constraint is the language, not the author."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "No new example appears; the paragraph is corrective and conceptual, refining the claim's limits rather than illustrating it.",
+            "seductive_element": "Earlier paragraphs used examples, so a reader may expect another."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph frees interpretation from the author's biography; it is the reverse of conceding that the poet's life is needed to understand a poem.",
+            "seductive_element": "Talk of 'constraint' can be misheard as a concession back to biographical reading."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0020-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the third paragraph, 'decree' most nearly means",
+      "options": {
+        "A": "a formal legal document",
+        "B": "an authoritative command that settles a matter by will",
+        "C": "a widely shared custom",
+        "D": "a reasoned argument"
+      },
+      "correct": "B",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "correct_reasoning": "The phrase contrasts 'shared convention' with 'private decree': language means by collective agreement, not because any single will commands it. 'Decree' here is an authoritative command that would settle meaning by an individual's will — option B — which the passage says language does not obey.",
+        "passage_anchor": "rc-0020-p3",
+        "question_type_note": "Vocabulary-in-context turns on the contrast the sentence draws: convention (shared) versus decree (individual command).",
+        "reading_habit": "When a word sits inside an explicit contrast, define it as the opposite of the term it is paired against — here 'decree' opposes 'shared convention'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "A 'decree' can be a legal instrument, but here it means the act of commanding by will, contrasted with convention; the legal-document sense misses the point.",
+            "seductive_element": "'Decree' has a strong legal flavour in everyday use."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "A shared custom is precisely 'convention', the term 'decree' is set against; the two are opposites in the sentence.",
+            "seductive_element": "Both words concern how meaning is established, so a hurried reader may equate them."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "A decree settles by authority, not by reasoning; the contrast is command-versus-convention, and 'reasoned argument' fits neither side.",
+            "seductive_element": "In a passage about interpretation, 'argument' sounds contextually appropriate."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "intention",
+      "passage_use": "a reading is correct insofar as it matches the intention behind the words",
+      "meaning_here": "what the author consciously meant to convey",
+      "difficulty": "easy"
+    },
+    {
+      "word": "arbiter",
+      "passage_use": "the author is the meaning's rightful owner",
+      "meaning_here": "one with the authority to decide or settle a matter (the role the passage denies the author)",
+      "difficulty": "hard"
+    },
+    {
+      "word": "constraint",
+      "passage_use": "we did not thereby abolish all constraint",
+      "meaning_here": "a limit that restricts what is permissible",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage dethrones the author — then stops you from crowning the reader as an absolute replacement. The test is to follow it to a precise middle: intention doesn't fix meaning, but the text still does constrain it. Miss the second half and you fall for 'anything goes'.",
+    "one_sentence_summary": "A poem's meaning is not fixed by the author's private intention, but neither is it whatever a reader likes: freed from the author, interpretation is held all the more strictly to the shared public language of the text itself.",
+    "main_idea": "The natural idea that a poem means what its author intended breaks down, because intention is unavailable and poems mean things authors never planned. Meaning lives instead in the reader's encounter with a public object made of language — but that does not make meaning limitless: a reading must still answer to what the words can bear.",
+    "simple_explanation": "When a poem confuses us, we instinctively ask 'what did the poet mean?' Behind that is a natural theory: a text is a message, the author packed a meaning into it, and interpreting means digging that meaning back out. On this view the author owns the meaning, and your reading is right if it matches what they intended — the same way you'd read a friend's text or a set of instructions.\n\nBut this theory falls apart as soon as you use it. The author's intention was a private mental event — it's gone, and even if the author tells you later 'here's what I meant', that's just one more interpretation, made after the fact, no more authoritative than anyone else's. And poems constantly mean things their authors never consciously intended: a pattern of images the poet didn't plan, an ambiguity that opens a reading the poet would reject. If those meanings are really in the poem — and they seem to be — then meaning can't be the same thing as intention. Once written, words carry significances the writer never foresaw or controlled.\n\nSo here's a different picture. A poem isn't a sealed message; it's a public object made of language, and language means by shared convention, not by one person's private command. Once released, the poem belongs to its readers, who bring it to life by reading it. Its meaning is made in that encounter, not buried by the author for retrieval. The poet isn't the owner of the poem's meaning — just its first reader, with no special authority over what the words, set loose in a common language, can be found to say.\n\nNow the crucial catch. It's tempting to jump from here to 'a poem can mean anything a reader wants' — but the argument doesn't allow that, and its best defenders refuse it. Losing the author as master doesn't abolish all limits. The words still mean what they mean in the shared language; a reading must answer to the text — to what its words and structures can bear — even while it stops answering to the author's biography. Freedom from the author is not freedom from the poem. Interpretation escapes one false authority only to be held, more strictly, to another: the public language of the work itself.",
+    "why_difficult": "The passage moves through three positions — author owns meaning, reader makes meaning, meaning is constrained by language — and it's easy to stop one step too early or one step too late. Stop at paragraph 1 and you keep the author; run past paragraph 3 and you land on 'anything goes'. The correct view is the balanced one paragraph 4 fights to establish, and it demands holding a rejection (of intention) and a constraint (the text) together.",
+    "author_intention": "To dislodge a comfortable assumption about who controls meaning, and then, crucially, to prevent the reader from overshooting into relativism — replacing one master (the author) with a discipline (the language), not with the reader's whim.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0020-p1",
+        "role": "The natural theory",
+        "note": "A poem is a message; the author encoded a meaning; interpreting means recovering it. The author owns the meaning. It's how we read texts and instructions, so we extend it to poems."
+      },
+      {
+        "paragraph_id": "rc-0020-p2",
+        "role": "The theory breaks",
+        "note": "Intention is gone and unavailable; the author's later account is just one more interpretation. And poems mean things authors never intended. So meaning isn't the same as intention."
+      },
+      {
+        "paragraph_id": "rc-0020-p3",
+        "role": "The new picture",
+        "note": "A poem is a public object made of language, which means by shared convention. Once released, it belongs to readers; the poet is only its first reader, with no special authority."
+      },
+      {
+        "paragraph_id": "rc-0020-p4",
+        "role": "The guardrail",
+        "note": "But this isn't 'anything goes'. Losing the author doesn't abolish limits. A reading must answer to the text and what its words can bear. Freedom from the author isn't freedom from the poem."
+      }
+    ],
+    "tone_progression": "It begins sympathetically with the common-sense view, grows analytical as that view unravels, becomes almost liberating in the reader-centred turn, and ends firm and disciplined, reining the argument back from excess.",
+    "key_transitions": [
+      "'Yet the theory runs into trouble the moment we try to use it.' (start of paragraph 2) — the natural theory begins to fail.",
+      "'This suggests a different picture.' (start of paragraph 3) — meaning is relocated from author to the public encounter.",
+      "'It is tempting to slide from here into the claim that a poem can mean anything a reader likes, but the argument does not license that…' (start of paragraph 4) — the thesis is fenced against its own exaggeration."
+    ],
+    "misunderstanding": "The two mirror errors: keeping the author (meaning = intention, recoverable by clever reading) or over-freeing the reader (meaning = whatever anyone likes). The passage rejects both. It removes the author's authority yet insists the text constrains interpretation, and readers who don't reach — or who overshoot — paragraph 4 miss this balance.",
+    "traps_summary": "The distractors here offer the discarded first view (intention fixes meaning), the overshoot (anything goes), or a despairing leap (meaning is unknowable because intention is). Track the passage to its precise landing — not intention, not whim, but the public language of the text — and answer at that exact strength.",
+    "reading_lesson": "When an argument dethrones one authority, watch for the guardrail that stops the reader from installing an opposite extreme in its place. Passages that remove a constraint almost always re-impose a subtler one, and the thesis is the balanced middle, not either endpoint. Read to the 'but it does not license that' sentence, and let the fenced, two-sided position — not the exciting overshoot — govern your answers.",
+    "real_world": "This is the everyday battleground of 'but that's not what the author meant' versus 'the text clearly says' — in courtrooms reading statutes, in classrooms reading novels, in arguments over song lyrics and scripture. It offers a usable rule: a creator's stated intention is a reading, not a ruling, and the fair check on any interpretation is what the words themselves can bear.",
+    "takeaway": "Freedom from the author is not freedom from the text: lose one master and you answer, more strictly, to the language itself.",
+    "reflection_question": "When you insist a book, film, or law 'really means' something, are you answering to the maker's intention, to your own preference, or to what the words can actually bear?"
+  }
+}

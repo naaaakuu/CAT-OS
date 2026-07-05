@@ -634,6 +634,66 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   text-wrap: balance;
 }
 
+/* v4 Learning Page — the reveal opens with the one honest sentence,
+   the line a reader checks their own summary against. */
+.mentor__reveal { margin-top: var(--space-3); }
+.mentor__one-line {
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-3);
+  text-wrap: balance;
+}
+.mentor__one-line:last-child { margin-bottom: 0; }
+
+/* "The passage, explained simply" — lucid book prose a beginner can follow. */
+.mentor__plain p {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  margin-bottom: var(--para-space);
+}
+.mentor__plain p:last-child { margin-bottom: 0; }
+
+/* "The reading lesson" — the one permanent habit, held in a quiet card. */
+.mentor__lesson {
+  padding: var(--space-5);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+}
+.mentor__lesson p {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  margin: 0;
+}
+
+/* "A question to sit with" — a reflective prompt above the notebook line. */
+.mentor__reflect-q {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-accent);
+}
+.mentor__reflect-eyebrow {
+  display: block;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  margin-bottom: var(--space-1);
+}
+.mentor__reflect-q p {
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  text-wrap: balance;
+}
+
 /* End-of-chapter actions sit inside the reading measure. */
 .mentor-actions {
   max-width: var(--measure-read);

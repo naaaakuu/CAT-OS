@@ -1,0 +1,288 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0014",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "political-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 498,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "the losing side's willing consent as the hidden mechanism of democracy",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The idea that democratic stability rests on the losers' consent is a recognised theme in political theory; no specific essay is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Reframing passage: the visible act (voting) is demoted, the invisible one (losers' consent) promoted. Main-idea trap keeps the reader on the winners. Owner review pending.",
+    "vocab_extracted": [
+      "acquiesce",
+      "legitimacy",
+      "provisional"
+    ]
+  },
+  "passage": {
+    "title": "The Consent of the Defeated",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0014-p1",
+        "text": "When we picture democracy, we picture the winners: the raised hands, the concession graciously received, the new government taking office. Elections are imagined as machines for producing majorities, and the drama belongs to the side that assembles the larger number. But a moment's thought reveals that the majority's victory is the easy part. Winners are always content to be governed by a result they produced. The genuinely astonishing thing an election achieves is on the other side of the tally — in the behaviour of the people who lost."
+      },
+      {
+        "id": "rc-0014-p2",
+        "text": "Consider what the defeated are asked to do. Having argued that the other side's programme is mistaken, perhaps dangerous, they are asked to hand it power, to obey its laws, and to confine their opposition to speech and the next campaign rather than to force. They do this not because they have been persuaded — they still think they were right — but because they accept the procedure that produced the outcome. This is a strange and demanding form of consent: agreement not with the decision but with the way the decision was reached. Where it holds, power changes hands without bloodshed. Where it fails, the ballot is merely a prelude to other means."
+      },
+      {
+        "id": "rc-0014-p3",
+        "text": "Seen this way, an election is less a method for discovering the popular will than a ritual for manufacturing losers who will consent to lose. Its real product is not the winning coalition, which needs no persuading, but a defeated minority that treats its defeat as legitimate and therefore temporary. The vote count is the visible tip of an invisible agreement: that today's loser will be tomorrow's permitted challenger, and that the winner will one day submit to the same discipline should the numbers turn. The whole arrangement rests on a promise about the future exchanged between adversaries who distrust each other in the present."
+      },
+      {
+        "id": "rc-0014-p4",
+        "text": "This reframing carries a warning. If the deep achievement of democracy is the losers' consent, then the gravest danger is anything that makes losing feel permanent or intolerable — a majority that pledges to entrench itself, a contest whose fairness is credibly doubted, stakes so high that no side can afford to lose. Under such conditions the defeated have no reason to accept the result, and the machinery that looked so solid dissolves, because it was never held together by the counting of votes. It was held together by the willingness of the counted to abide by the count. That willingness is a habit, not a law of nature, and habits can be unlearned."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0014-q1",
+      "type": "main_idea",
+      "stem": "The central claim of the passage is that",
+      "options": {
+        "A": "the essential achievement of a democratic election is the losing side's willingness to accept defeat as legitimate",
+        "B": "elections are the most reliable method humans have devised for discovering the popular will",
+        "C": "winning coalitions must govern graciously if they wish to retain power at the next election",
+        "D": "democracies collapse whenever elections are held under unfair or high-stakes conditions"
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "The passage repeatedly relocates democracy's core from the winners to the losers: the astonishing thing is 'on the other side of the tally' (p1), a 'strange and demanding form of consent' (p2), the 'real product' is a consenting minority (p3), and the deepest danger is anything that makes losing intolerable (p4). Option A names this thesis.",
+        "passage_anchor": "rc-0014-p3",
+        "question_type_note": "When a passage explicitly reframes where the important action lies, the main idea is that relocation, not the familiar view it displaces.",
+        "reading_habit": "If an author says the obvious part is 'the easy part' and points elsewhere, your one-sentence summary should be about the elsewhere.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 3 explicitly demotes this view: an election is 'less a method for discovering the popular will than a ritual for manufacturing losers who will consent'. The passage sets this idea up to move past it.",
+            "seductive_element": "It is the standard textbook account of elections and sounds authoritative."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "Gracious governance by winners is a minor implication; the passage's focus is the losers' consent, and winners 'need no persuading'.",
+            "seductive_element": "It keeps attention on the winners, where our default picture of democracy lives."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "Paragraph 4 warns that such conditions endanger consent, not that democracies 'collapse whenever' they occur. The claim is about risk and habit, not an automatic law.",
+            "seductive_element": "It borrows the passage's warning and hardens 'grave danger' into inevitability."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0014-q2",
+      "type": "inference",
+      "stem": "It can be inferred that, in the author's view, a defeated party that accepts an election result does so primarily because it",
+      "options": {
+        "A": "has been convinced by the winners' arguments that it was wrong",
+        "B": "regards the process that produced the result as legitimate",
+        "C": "fears the legal punishment that resistance would bring",
+        "D": "expects to win the very next election it contests"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 is explicit: the defeated obey 'not because they have been persuaded — they still think they were right — but because they accept the procedure that produced the outcome'. The consent is procedural. Option B restates this directly.",
+        "passage_anchor": "rc-0014-p2",
+        "question_type_note": "This inference confirms the passage's stated reason and rejects tempting alternatives it explicitly excludes.",
+        "reading_habit": "When the text says 'not because X but because Y', any option offering X is pre-refuted — cross it off on sight.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the losers 'still think they were right'; persuasion is exactly the reason it rules out.",
+            "seductive_element": "We assume people who comply must have been convinced, so this feels intuitive."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Fear of punishment is never given as the motive; the passage grounds consent in accepting the procedure, and even contrasts consent with the use of 'force'.",
+            "seductive_element": "Obedience to law can look like fear of penalty, a common real-world explanation."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says losers treat defeat as 'temporary' and expect to be a 'permitted challenger', but not that they expect to win the very next election; the consent does not depend on imminent victory.",
+            "seductive_element": "It picks up the passage's real theme of 'tomorrow' and sharpens it into a specific prediction the text never makes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0014-q3",
+      "type": "author_purpose",
+      "stem": "The author opens the passage with the image of raised hands and a graciously received concession primarily in order to",
+      "options": {
+        "A": "celebrate the dignity of peaceful transfers of power",
+        "B": "establish the familiar picture that the rest of the passage will displace",
+        "C": "argue that concession speeches are the true heart of democracy",
+        "D": "show that winners behave better than losers after an election"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The opening paints the conventional winner-centred image, then immediately pivots: 'the majority's victory is the easy part… The genuinely astonishing thing… is on the other side of the tally.' The image exists to be the familiar view the passage then displaces onto the losers.",
+        "passage_anchor": "rc-0014-p1",
+        "question_type_note": "Purpose questions about openings often reveal a setup-to-subvert structure; the image is a foil, not the author's own emphasis.",
+        "reading_habit": "Ask why an author begins with a familiar picture — usually to knock it aside; the thesis is what replaces it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The image is vivid, but its role is structural — to set up the reframing — not to celebrate transfers of power for their own sake.",
+            "seductive_element": "The scene really is dignified, so 'celebrate' feels like a fair description of its mood."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage locates the heart of democracy in the losers' consent, not the concession ceremony; the winners 'need no persuading'.",
+            "seductive_element": "The concession is mentioned in the opening image, so it can seem to be highlighted as central."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage does not rank the manners of winners against losers; it contrasts the ease of winning with the difficulty of consenting to lose.",
+            "seductive_element": "The graciousness in the image invites a comparison of behaviour the passage never makes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0014-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the third paragraph, describing the loser's defeat as 'legitimate and therefore temporary' implies that 'legitimate' most nearly means",
+      "options": {
+        "A": "legally required by written statute",
+        "B": "produced by a process one accepts as rightful",
+        "C": "morally admirable in its outcome",
+        "D": "widely popular among the public"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "Throughout, the losers' acceptance rests on the procedure being one they 'accept' as valid (p2); a defeat is 'legitimate' when it issues from a process regarded as rightful, which is why it can be borne and treated as 'temporary'. Option B matches this procedural sense.",
+        "passage_anchor": "rc-0014-p2 and rc-0014-p3",
+        "question_type_note": "Vocabulary-in-context here must track the passage's own definition of consent as agreement with the procedure, not the decision.",
+        "reading_habit": "Fix a keyword's sense from how the passage has been using the surrounding idea, not from its broadest dictionary range.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Legitimacy here is about accepted rightful procedure, not statutory compulsion; the passage grounds consent in willing acceptance, not legal force.",
+            "seductive_element": "'Legitimate' shares a root with 'legal', so the statutory sense tempts."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The losers still think the outcome mistaken, even dangerous; they do not find it morally admirable, only procedurally acceptable.",
+            "seductive_element": "'Legitimate' can carry a moral glow in casual use."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Popularity is what the winners have; the loser's sense of legitimacy is precisely not about being popular but about accepting the process.",
+            "seductive_element": "Elections and popularity are closely linked, so the substitution feels on-topic."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "acquiesce",
+      "passage_use": "the willingness of the counted to abide by the count",
+      "meaning_here": "to accept or comply with something, often reluctantly, without protest",
+      "difficulty": "hard"
+    },
+    {
+      "word": "legitimacy",
+      "passage_use": "a defeated minority that treats its defeat as legitimate",
+      "meaning_here": "the quality of being accepted as rightful or valid, especially of authority",
+      "difficulty": "medium"
+    },
+    {
+      "word": "provisional",
+      "passage_use": "treats its defeat as legitimate and therefore temporary",
+      "meaning_here": "arranged for the present, expected to change; not permanent (sense of 'temporary' here)",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage moves the spotlight. You expect democracy to be about winners; the author insists it is really about losers. Your task is to follow that relocation and not let the familiar picture drag your answers back to the winning side.",
+    "one_sentence_summary": "The real and astonishing achievement of a democratic election is not the majority's victory but the losing side's willingness to accept defeat as legitimate — a fragile habit, not a law of nature, that lets power change hands without force.",
+    "main_idea": "Winners never need convincing; the hard, remarkable thing an election accomplishes is getting the losers to hand over power and confine their opposition to words and the next campaign. Democracy therefore rests on the losers' procedural consent, and its gravest danger is anything that makes losing feel permanent or intolerable.",
+    "simple_explanation": "When we imagine democracy, we picture the winners — raised hands, a gracious concession, a new government. We think elections are machines for building majorities, and the excitement belongs to the bigger side. But winning is the easy part. Of course the winners are happy to be governed by the result they created. The truly astonishing thing happens on the other side of the tally: among the people who lost.\n\nThink about what losers are asked to do. They argued the other side was wrong, maybe dangerous — and now they must hand that side power, obey its laws, and limit their fight to speech and the next election instead of force. And they do it even though they still believe they were right. Why? Not because they were persuaded, but because they accept the procedure that produced the result. That's a strange kind of consent: agreeing not with the decision but with how it was reached. Where that consent holds, power changes hands without bloodshed. Where it breaks, the ballot is just the opening move before other methods.\n\nSo the author flips the usual view: an election isn't mainly a way to discover 'the popular will' — it's a ritual for producing losers who will consent to lose. Its real product isn't the winning side (which needs no persuading) but a defeated minority that treats its loss as legitimate and therefore temporary. The vote count is just the visible tip of an invisible bargain: today's loser gets to be tomorrow's allowed challenger, and today's winner promises to accept the same discipline when the numbers turn.\n\nThe ending is a warning. If the losers' consent is what really holds democracy together, then the biggest threat is anything that makes losing feel permanent or unbearable: a majority that vows to lock itself in, an election whose fairness is doubted, stakes so high no side can afford to lose. Then the defeated have no reason to accept the outcome, and the whole solid-looking machine dissolves — because it was never held together by counting votes, but by the willingness of the counted to abide by the count. And that willingness is a habit, which can be unlearned.",
+    "why_difficult": "The passage argues against a picture you already hold, so your defaults keep pulling you back to the winners and to 'the popular will' — the very view the author demotes. The consent it describes is also subtle: agreement with the procedure while still disagreeing with the decision. Miss that and options about persuasion, fear, or imminent victory start to look right.",
+    "author_intention": "To defamiliarise elections — to make the reader see that the quiet, almost invisible act of a loser accepting defeat is the load-bearing wall of the whole structure, and thus how it might fall.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0014-p1",
+        "role": "Sets up the familiar view",
+        "note": "We picture the winners. But winning is easy — of course the majority accepts a result it made. The amazing thing is on the losing side."
+      },
+      {
+        "paragraph_id": "rc-0014-p2",
+        "role": "Defines the hard consent",
+        "note": "Losers must hand over power and fight only with words, though they still think they were right. They obey because they accept the procedure, not the decision."
+      },
+      {
+        "paragraph_id": "rc-0014-p3",
+        "role": "Reframes the election",
+        "note": "So an election mainly manufactures consenting losers. The count is the visible tip of an invisible promise: today's loser is tomorrow's permitted challenger, and winners will submit in turn."
+      },
+      {
+        "paragraph_id": "rc-0014-p4",
+        "role": "Draws the warning",
+        "note": "The gravest danger is making loss feel permanent or intolerable. Then consent vanishes and the machine dissolves — it ran on a habit, not a law, and habits can be unlearned."
+      }
+    ],
+    "tone_progression": "It begins in familiar, almost ceremonial imagery, turns analytical and quietly surprising as it relocates the drama, and ends grave and cautionary — a warning delivered evenly, without alarm.",
+    "key_transitions": [
+      "'The genuinely astonishing thing an election achieves is on the other side of the tally…' (end of paragraph 1) — the spotlight swings from winners to losers.",
+      "'Seen this way, an election is less a method for discovering the popular will than a ritual for manufacturing losers who will consent to lose.' (start of paragraph 3) — the reframing is stated outright.",
+      "'This reframing carries a warning.' (start of paragraph 4) — analysis turns to consequence."
+    ],
+    "misunderstanding": "Readers keep the emphasis on winners, or take the passage to endorse the 'popular will' account it actually sidelines. The consent is also misread as persuasion or fear, when the passage says explicitly it is neither — it is acceptance of the process while still disagreeing with the outcome.",
+    "traps_summary": "The distractors here restore the displaced view (elections discover the popular will), keep the reader on the winners, or supply a motive the passage rules out (persuasion, fear, next-election victory). Track where the author has moved the spotlight and answer from there, honouring every 'not because X but because Y'.",
+    "reading_lesson": "Learn to follow a reframing. When an author says 'seen this way' or calls the obvious reading 'the easy part', they are shifting where the important action lies — and every correct answer will sit on the new location, while the strongest distractors sit on the old one. Consciously move your attention to the author's new focus and answer from there, not from the familiar picture you walked in with.",
+    "real_world": "This is why peaceful concession speeches matter more than they seem, why doubts about election fairness are so corrosive, and why 'winner takes all, forever' politics is dangerous even to the winners. The next time a losing side accepts a result it hates, you are watching the hardest and most fragile thing democracy does.",
+    "takeaway": "Democracy is held together not by the counting of votes but by the willingness of the counted to abide by the count.",
+    "reflection_question": "What would have to be true for you to accept a decision you were certain was wrong, simply because of how it was reached?"
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0013",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "evidence-anchoring",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 431,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "specific_detail",
+      "inference",
+      "paragraph_function"
+    ],
+    "theme": "familiarity itself, apart from quality, makes us like things more",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The mere-exposure effect is a standard finding in social psychology (associated with Robert Zajonc); no specific article is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Foundation-stage psychology: one clean finding developed concretely. Distractors train the separation of 'familiarity' from 'quality' and from 'conscious recognition'. Owner review pending.",
+    "vocab_extracted": [
+      "disposition",
+      "fluency",
+      "novelty"
+    ]
+  },
+  "passage": {
+    "title": "The Comfort of the Familiar",
+    "reading_time_min": 2.2,
+    "paragraphs": [
+      {
+        "id": "rc-0013-p1",
+        "text": "A song you disliked on first hearing has a way of becoming, after the tenth playing, oddly pleasant. A word in a foreign language that once looked like a jumble of letters comes to feel almost friendly. Something similar happens with faces, tunes, shapes, and even nonsense syllables invented in a laboratory. In each case the object has not changed; you have simply met it more often. Psychologists call this the mere-exposure effect, and the word 'mere' is doing careful work: it insists that nothing has been added except repetition itself."
+      },
+      {
+        "id": "rc-0013-p2",
+        "text": "The finding is more surprising than it first appears, because we usually assume our preferences track the qualities of things. We like a melody, we think, because it is beautiful, or a person because they are kind. The mere-exposure effect shows that a large part of liking can come from a source that has nothing to do with quality at all — from the sheer number of times a thing has crossed our path. In controlled studies, people shown a shape more frequently rate it as more appealing than shapes they have seen only once, even when they cannot recall having seen any of them before."
+      },
+      {
+        "id": "rc-0013-p3",
+        "text": "That last detail matters. The effect does not depend on remembering the earlier encounters. It appears to work beneath awareness, which is one reason it is so easy to mistake for genuine judgement. When a familiar thing feels good, the good feeling arrives without a label explaining where it came from, and the mind, disliking unexplained feelings, supplies a reason: the song is a fine song, the face a trustworthy face. Repetition builds a warmth that we then attribute to the object, crediting to its merits what we owe merely to having met it before."
+      },
+      {
+        "id": "rc-0013-p4",
+        "text": "None of this means familiarity is a trick to be resisted at every turn. A preference for the known has plainly been useful: what has proved harmless before is a reasonable bet to be harmless again, and a creature that warmed only to the certified-excellent would starve while deliberating. But the effect has a cooler lesson too. It explains part of why advertising repeats a name it cannot honestly praise, why we defend the familiar against the better, and why a second look at what we were sure we disliked is so often worth taking. Some of our tastes are not verdicts on the world; they are records of where we have already been."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0013-q1",
+      "type": "main_idea",
+      "stem": "The passage is primarily concerned with showing that",
+      "options": {
+        "A": "repeated exposure to something can increase our liking for it independently of its actual qualities",
+        "B": "people are poor judges of beauty and should distrust all of their preferences",
+        "C": "advertising works by repeating brand names until consumers are persuaded",
+        "D": "familiar things are usually safer and therefore genuinely more valuable than unfamiliar ones"
+      },
+      "correct": "A",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "correct_reasoning": "The passage introduces the mere-exposure effect (p1), stresses that liking can come from repetition rather than quality (p2), explains how it hides beneath awareness (p3), and draws balanced lessons (p4). Option A states the core finding at its correct strength — liking rises with exposure, independent of quality.",
+        "passage_anchor": "rc-0013-p2",
+        "question_type_note": "The main-idea answer names the central finding the whole passage develops, not one application or one caution within it.",
+        "reading_habit": "State the passage's finding in one line before scanning options; applications (advertising) and cautions (safety) are supporting points, not the main idea.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage never says people should distrust ALL preferences; paragraph 4 explicitly says familiarity is not 'a trick to be resisted at every turn'. It qualifies preference, not condemns it.",
+            "seductive_element": "The passage does unsettle our confidence in preferences, so a sweeping version feels like the point."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "Advertising is one example in paragraph 4, not the passage's subject. The finding is general; the ad is an illustration of it.",
+            "seductive_element": "It picks up a concrete, memorable example and mistakes it for the thesis."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The safety point is a concession in paragraph 4 about why the disposition is useful, not the central claim; and the passage separates 'useful bet' from 'genuinely more valuable'.",
+            "seductive_element": "It restates a sentence the passage really does contain, so it feels supported."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0013-q2",
+      "type": "specific_detail",
+      "stem": "According to the passage, one especially surprising feature of the mere-exposure effect is that it",
+      "options": {
+        "A": "works only for objects a person finds beautiful to begin with",
+        "B": "can occur even when people do not remember their earlier encounters with the object",
+        "C": "grows weaker each time an object is seen again",
+        "D": "applies to shapes and faces but not to sounds or words"
+      },
+      "correct": "B",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 reports that people rate frequently seen shapes as more appealing 'even when they cannot recall having seen any of them before', and paragraph 3 calls this the detail that 'matters': the effect does not depend on remembering. Option B states exactly this.",
+        "passage_anchor": "rc-0013-p2 and rc-0013-p3",
+        "question_type_note": "Detail questions reward matching the text's own emphasis; here the passage flags the no-memory feature as the surprising one.",
+        "reading_habit": "When a passage says a detail 'matters', mark it — questions often target exactly the point the author underlined.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The effect works on neutral and even initially disliked things (a song 'you disliked on first hearing'), not only on things already found beautiful.",
+            "seductive_element": "It sounds plausible that we warm most to what we already admire."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage describes liking growing WITH repetition, not weakening; more exposure yields more appeal.",
+            "seductive_element": "'Weaker each time' echoes the real idea of habituation, a nearby concept the passage does not invoke."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Paragraph 1 lists songs, words, faces, tunes, shapes, and nonsense syllables; the effect spans sound and language too.",
+            "seductive_element": "It uses items the passage actually names, but falsely restricts the range."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0013-q3",
+      "type": "inference",
+      "stem": "It can be inferred that when a familiar song 'feels good,' the listener is likely to",
+      "options": {
+        "A": "recall the specific earlier occasions on which they heard it",
+        "B": "credit the good feeling to the quality of the song itself",
+        "C": "become suspicious that the feeling is caused by mere repetition",
+        "D": "prefer it to any song they have heard fewer times"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "Paragraph 3 says the good feeling 'arrives without a label', so the mind 'supplies a reason: the song is a fine song'. The listener attributes to the song's merit what is owed to repetition. Option B is that one-step inference.",
+        "passage_anchor": "rc-0013-p3",
+        "question_type_note": "This inference restates the mechanism paragraph 3 describes: unexplained warmth gets re-credited to the object.",
+        "reading_habit": "For inference on a described mechanism, follow the passage's causal sentence to its stated outcome, not to a more dramatic one.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage stresses the effect works 'beneath awareness' and does not depend on memory; recalling the occasions is precisely what the listener does not do.",
+            "seductive_element": "It seems natural that a good feeling about a song would come with memories of hearing it."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the mind 'dislikes unexplained feelings' and invents a merit-based reason; becoming suspicious of repetition is the opposite of the described response.",
+            "seductive_element": "A reader who has just learned the lesson may project that new suspicion onto the ordinary listener."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage claims familiarity raises liking, not that a person prefers a familiar song to every less-heard song without exception. The universal 'any' overshoots the finding.",
+            "seductive_element": "It sounds like a tidy, strong version of 'more exposure, more liking'."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0013-q4",
+      "type": "paragraph_function",
+      "stem": "The main function of the fourth paragraph is to",
+      "options": {
+        "A": "prove that familiarity is always more reliable than novelty",
+        "B": "qualify the finding by noting its usefulness while drawing its practical lessons",
+        "C": "introduce a competing theory that overturns the mere-exposure effect",
+        "D": "argue that advertising is dishonest and should be regulated"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 balances the account: it concedes that a preference for the known 'has plainly been useful' (a survival bet), then draws the 'cooler lesson' — advertising, defending the familiar against the better, and re-examining dislikes. Its function is to qualify and apply, not to overturn. Option B captures this two-sided role.",
+        "passage_anchor": "rc-0013-p4",
+        "question_type_note": "Paragraph-function questions ask what a paragraph DOES; this one tempers the finding and extends it to practice.",
+        "reading_habit": "A closing paragraph that starts 'None of this means…' is almost always qualifying the claim — read it as balance, not reversal.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The paragraph calls familiarity a 'reasonable bet', not always more reliable; it also warns we 'defend the familiar against the better', which concedes familiarity can mislead.",
+            "seductive_element": "The paragraph's opening defence of familiarity can be over-read as a blanket endorsement."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No competing theory appears; the paragraph accepts the effect and discusses its value and consequences.",
+            "seductive_element": "Final paragraphs sometimes introduce a twist, so a reader may expect a rival idea."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "Advertising is one clause among several lessons; the paragraph makes no claim about dishonesty warranting regulation.",
+            "seductive_element": "The mention of advertising repeating a name 'it cannot honestly praise' hints at a critique the option then overstates."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "disposition",
+      "passage_use": "A preference for the known has plainly been useful",
+      "meaning_here": "a natural tendency or inclination to act or feel a certain way",
+      "difficulty": "medium"
+    },
+    {
+      "word": "fluency",
+      "passage_use": "the good feeling arrives without a label",
+      "meaning_here": "the ease with which the mind processes something familiar (the sense underlying the described warmth)",
+      "difficulty": "hard"
+    },
+    {
+      "word": "novelty",
+      "passage_use": "more reliable than novelty",
+      "meaning_here": "the quality of being new or unfamiliar",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "An easy, friendly passage with one precise idea. The test is to keep three things apart that feel the same: familiarity, quality, and conscious memory. The traps live exactly where those three blur.",
+    "one_sentence_summary": "Simply meeting something more often makes us like it more, independently of its quality and even without remembering the earlier encounters, so some of our tastes record where we have been rather than judge what is good.",
+    "main_idea": "The mere-exposure effect is the finding that repetition alone increases liking. Because the warmth of familiarity arrives without a label, we mistake it for a genuine judgement about an object's quality — which is why a second look at something we 'disliked' is often worth taking.",
+    "simple_explanation": "You know how a song you didn't like at first can start to feel pleasant after you've heard it ten times? Or how a foreign word stops looking like a jumble and starts to feel friendly? The thing itself hasn't changed. You've just met it more often. Psychologists call this the mere-exposure effect, and the word 'mere' is important: nothing has been added except the repetition.\n\nWhy is that surprising? Because we assume we like things for their qualities — a tune because it's beautiful, a person because they're kind. But this effect shows a big part of liking can come from something with nothing to do with quality: just how many times the thing has crossed our path. In experiments, people rate shapes they've seen more often as more appealing — even when they don't remember seeing any of them.\n\nThat 'don't remember' part is the key. The effect works below awareness. So when a familiar thing feels good, the good feeling shows up with no explanation attached, and the mind — which hates unexplained feelings — invents a reason: 'it's a fine song', 'a trustworthy face'. We credit the object's merits for warmth we actually owe just to having met it before.\n\nThe passage ends fairly, not cynically. Liking the familiar has been useful: what was safe before is a good bet to be safe again, and a creature that only warmed to the certified-excellent would starve while it deliberated. But there's a cooler lesson too: it's why ads just repeat a name, why we defend the familiar against something better, and why re-examining what we were sure we disliked so often pays off. Some tastes aren't verdicts about the world; they're records of where we've already been.",
+    "why_difficult": "It isn't hard to read, but it is easy to answer carelessly, because the passage keeps distinguishing things that ordinarily feel identical: familiarity from quality, and the effect from conscious memory. Several distractors quietly re-merge them — crediting memory, or restricting the effect to things we already find beautiful — and a reader who blurs the three will pick them.",
+    "author_intention": "To make the reader slightly suspicious of their own likes in a gentle, non-preachy way — by naming a real mechanism and showing how naturally it disguises itself as good judgement.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0013-p1",
+        "role": "Names the effect",
+        "note": "Songs, foreign words, faces, shapes — meet them more and you like them more, though they haven't changed. This is the mere-exposure effect, and 'mere' means: only repetition."
+      },
+      {
+        "paragraph_id": "rc-0013-p2",
+        "role": "Why it's surprising",
+        "note": "We think we like things for their qualities. But studies show liking rises with frequency even for shapes people can't remember seeing — quality isn't doing the work."
+      },
+      {
+        "paragraph_id": "rc-0013-p3",
+        "role": "How it hides",
+        "note": "It works below awareness. The warm feeling arrives without a label, so the mind invents a merit-based reason and credits the object for what repetition did."
+      },
+      {
+        "paragraph_id": "rc-0013-p4",
+        "role": "The balanced lesson",
+        "note": "Familiarity isn't a trick to always resist — preferring the safe-and-known has helped us survive. But it also explains ad repetition and why re-examining a dislike is worth it."
+      }
+    ],
+    "tone_progression": "Warm and observational at the start, mildly surprised in the middle, and thoughtfully even-handed at the end — a gentle unsettling, never a scolding.",
+    "key_transitions": [
+      "'That last detail matters.' (start of paragraph 3) — the author underlines the no-memory feature as the crux.",
+      "'None of this means familiarity is a trick to be resisted at every turn.' (start of paragraph 4) — the passage turns from finding to balanced judgement."
+    ],
+    "misunderstanding": "The common slip is to smuggle memory or quality back in: readers assume the good feeling comes with recollection of past encounters, or that the effect only strengthens likes we already had. The passage insists on the opposite — no memory needed, and even initially disliked things warm up — so options that re-attach memory or quality are wrong by design.",
+    "traps_summary": "The wrong options here inflated a qualified claim into a sweeping one ('distrust all preferences', 'prefer it to any song'), mistook an example (advertising) for the thesis, or reversed a stated feature (memory, growing liking). Match the passage's exact, modest claim and keep familiarity, quality, and memory in separate boxes.",
+    "reading_lesson": "Keep the author's distinctions physically separate as you read — here, familiarity ≠ quality ≠ memory. When a passage's whole point is that two things people usually conflate are actually different, the test will offer options that re-conflate them. Naming the distinction to yourself ('liking can come from repetition, not merit') is the single move that defeats those distractors.",
+    "real_world": "This is why brands pay simply to be seen, why the incumbent song, candidate, or habit has an unearned edge, and why 'give it another try' is real advice. It also quietly warns you: the comfort you feel toward an idea may be a measure of how often you've heard it, not how true it is.",
+    "takeaway": "Some of what we call taste is just a map of where we have already been.",
+    "reflection_question": "Which of your strong likes or dislikes might be less a judgement than a record of sheer repetition?"
+  }
+}

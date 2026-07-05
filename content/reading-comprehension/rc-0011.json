@@ -1,0 +1,287 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0011",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 512,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "specific_detail",
+      "author_purpose"
+    ],
+    "theme": "why labour-intensive services grow costlier as an economy grows more productive",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The phenomenon described (rising relative cost of labour-intensive services) is a standard idea in economics, associated with William Baumol; no specific article is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Counter-intuitive economics with a mechanism the reader must hold across paragraphs; the main-idea trap inflates a relative claim into a claim about absolute decline. Owner review pending.",
+    "vocab_extracted": [
+      "productivity",
+      "stagnant",
+      "paradoxically"
+    ]
+  },
+  "passage": {
+    "title": "Why the Quartet Costs More",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0011-p1",
+        "text": "A string quartet playing Beethoven today uses exactly as many musicians, and takes exactly as long, as it did in 1800. In almost every other field, this would be a scandal of inefficiency. The weaver, the farmer, the clerk — each now produces many times what a predecessor produced in an hour, because machines, methods, and organisation have multiplied the output of an hour's labour. The quartet has received no such gift. Four players are still required for a piece written for four, and the adagio cannot be taken at double speed to save on wages. Some kinds of work, it turns out, are structurally resistant to being made faster."
+      },
+      {
+        "id": "rc-0011-p2",
+        "text": "From this small observation an economist drew a large and durable conclusion. In a growing economy, wages tend to rise across the board, because they are pulled upward by the sectors where productivity is climbing: a factory that makes twice as much per worker can afford to pay more, and to keep its workers it must. But musicians, teachers, nurses, and barbers compete in the same labour market. If they are not paid comparably, they will drift toward the more productive sectors. So their wages rise too — even though their output per hour has not budged. The cost of an hour of their work therefore climbs, decade after decade, for a reason that has nothing to do with how well they do it."
+      },
+      {
+        "id": "rc-0011-p3",
+        "text": "This is why, paradoxically, the very success of an economy makes its labour-intensive services grow relatively more expensive. A haircut buys less manufacturing than it used to; a year of schooling or a hospital stay swallows a larger share of national income than a century of technological triumph would lead one to expect. The effect is easy to misread as decline — as bloat, waste, or the failure of a sector to modernise. But the arithmetic is the reverse of decline. Services look costlier precisely because everything else has become so much cheaper to produce; they are the still points against which the acceleration everywhere else is measured."
+      },
+      {
+        "id": "rc-0011-p4",
+        "text": "The uncomfortable implication is that the sectors a wealthy society cares about most — caring for the sick, teaching the young, sustaining the arts — are exactly the ones whose relative cost is destined to rise, not because they are failing but because they cannot be automated without being changed into something else. A society can respond by paying the rising bill, by letting these services decay, or by quietly redefining them so that they can be mechanised: larger classes, shorter consultations, recorded performance in place of live. Each response is a choice about what a productive society is ultimately for. The economics only clarifies that pretending the bill will fall of its own accord is the one option not available."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0011-q1",
+      "type": "main_idea",
+      "stem": "The central argument of the passage is that",
+      "options": {
+        "A": "labour-intensive services grow more expensive relative to goods precisely because productivity rises elsewhere, not because those services are failing",
+        "B": "musicians, teachers, and nurses are underpaid relative to the true social value of their work",
+        "C": "the arts and caring professions have failed to modernise and must now be automated to remain affordable",
+        "D": "economic growth eventually makes all services, including automated ones, unaffordable for most people"
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "The passage builds a mechanism: some work resists speed-up (p1); wages rise economy-wide, pulling up even stagnant-productivity sectors (p2); so their relative cost climbs though their quality has not changed (p3); with uncomfortable implications for exactly the sectors society values (p4). Option A states the whole mechanism and its key correction — 'not because those services are failing'.",
+        "passage_anchor": "rc-0011-p3",
+        "question_type_note": "The main-idea answer must carry the passage's central causal claim, including its explicit denial that rising cost means decline.",
+        "reading_habit": "When a passage repeatedly corrects a misreading ('easy to misread as decline… the reverse of decline'), that correction usually IS the thesis — put it in your one-sentence summary.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage explains why these workers' cost rises; it never argues about whether their pay matches their social value. Fair pay is a different claim the text does not make.",
+            "seductive_element": "Sympathy for underpaid nurses and teachers is a familiar frame, and the passage's subject invites it."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage insists these sectors have NOT failed and warns that automating them changes them 'into something else'. It presents automation as one costly choice, not a prescription.",
+            "seductive_element": "Paragraph 4 mentions mechanising as an option, so a hurried reader takes it as the passage's recommendation."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The claim is about the RELATIVE cost of labour-intensive services, not the affordability of 'all services'. Automated goods and services become cheaper — that is the engine of the whole argument.",
+            "seductive_element": "It sounds like a dramatic economic prophecy, and the passage's talk of rising bills gives it plausibility."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0011-q2",
+      "type": "inference",
+      "stem": "It can be inferred that musicians' wages rise over the decades chiefly because",
+      "options": {
+        "A": "audiences are willing to pay steadily more for live classical performance",
+        "B": "they must be paid enough to keep them from leaving for more productive sectors",
+        "C": "the difficulty of performing older music increases as standards rise",
+        "D": "governments subsidise the arts to protect them from market forces"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 states the mechanism directly: musicians 'compete in the same labour market'; if not paid comparably they 'will drift toward the more productive sectors'; 'so their wages rise too'. The cause of the wage rise is competition for labour, not anything about the music or the audience. Option B restates this.",
+        "passage_anchor": "rc-0011-p2",
+        "question_type_note": "This inference simply makes explicit the causal chain the paragraph lays out; the wrong options substitute plausible but untstated causes.",
+        "reading_habit": "For 'chiefly because' questions, trace the passage's own causal arrow rather than supplying the most familiar real-world explanation.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never mentions audience willingness to pay; the wage mechanism runs through the labour market, not through ticket demand.",
+            "seductive_element": "It is a natural real-world guess for why performers earn more, so it feels safe."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage stresses that the quartet's output per hour 'has not budged'; the work has not become harder or more skilled, which is precisely the point.",
+            "seductive_element": "It offers a merit-based reason that flatters the musicians and sounds reasonable."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Subsidy appears nowhere in the wage explanation; paragraph 4 lists paying the bill as a societal choice, but that is not why market wages rise.",
+            "seductive_element": "Arts subsidies are real and topical, so importing them feels informed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0011-q3",
+      "type": "specific_detail",
+      "stem": "According to the passage, which of the following is true of the string quartet?",
+      "options": {
+        "A": "It has slowly reduced the number of players needed through better training",
+        "B": "Its output per hour of labour has remained essentially unchanged since 1800",
+        "C": "It has become more efficient but is paid as though it had not",
+        "D": "It is the only kind of work that resists being made faster"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "Paragraph 1 is explicit: the quartet 'uses exactly as many musicians, and takes exactly as long, as it did in 1800', and 'has received no such gift' of rising productivity. Its output per hour is unchanged — option B.",
+        "passage_anchor": "rc-0011-p1",
+        "question_type_note": "Detail questions reward matching an explicit statement; distractors here contradict or overstate what paragraph 1 says.",
+        "reading_habit": "Confirm detail answers against the exact sentence, and be wary of options that quietly add a change ('reduced', 'more efficient') the text denies.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says four players are still required and no efficiency gift arrived; player count has not fallen.",
+            "seductive_element": "'Better training' sounds like the kind of progress every field makes."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The quartet has NOT become more efficient; that is the whole premise. Its wages rise for external reasons, but its efficiency is flat, not hidden.",
+            "seductive_element": "It echoes the passage's theme of pay disconnected from output, but misattributes efficiency to the quartet."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The quartet is an example; the passage names teachers, nurses, and barbers as similar cases, so it is not 'the only' such work.",
+            "seductive_element": "The quartet opens the passage and is its emblem, so 'only' feels close to right."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0011-q4",
+      "type": "author_purpose",
+      "stem": "In the final paragraph, the author lists larger classes, shorter consultations, and recorded performance primarily to",
+      "options": {
+        "A": "recommend practical ways to keep valued services affordable",
+        "B": "show that these services have always been inefficient",
+        "C": "illustrate that mechanising such services means changing what they are",
+        "D": "criticise societies that refuse to fund the arts and healthcare"
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The list follows the claim that these services 'cannot be automated without being changed into something else'. Larger classes, shorter consultations, and recordings are precisely instances of redefining the service so it can be mechanised — the examples carry that point, that mechanisation alters the thing itself.",
+        "passage_anchor": "rc-0011-p4",
+        "question_type_note": "Purpose questions ask what claim the examples serve; here they demonstrate the cost of mechanising, not a recommendation.",
+        "reading_habit": "Attach a list of examples to the sentence just before it; the author's purpose is almost always to make that sentence concrete.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "These are presented as what redefinition looks like, with an undertone of loss ('in place of live'), not as recommendations. The author withholds prescription and calls each response 'a choice'.",
+            "seductive_element": "They read like a policy menu, so they can look like advice."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage argues these services are not inefficient at all; their rising cost is 'the reverse of decline'.",
+            "seductive_element": "The words 'larger' and 'shorter' suggest cutting corners, which pattern-matches to inefficiency."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The list illustrates a mechanism, not a moral indictment; the author explicitly frames the three responses neutrally as choices, criticising only the illusion that the bill falls by itself.",
+            "seductive_element": "The passage's sympathy for caring professions can be read as anger at underfunding."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "productivity",
+      "passage_use": "pulled upward by the sectors where productivity is climbing",
+      "meaning_here": "the amount of output produced per hour of labour",
+      "difficulty": "easy"
+    },
+    {
+      "word": "stagnant",
+      "passage_use": "pulling up even stagnant-productivity sectors",
+      "meaning_here": "not increasing; staying at the same level",
+      "difficulty": "medium"
+    },
+    {
+      "word": "paradoxically",
+      "passage_use": "This is why, paradoxically, the very success of an economy makes its labour-intensive services grow relatively more expensive",
+      "meaning_here": "in a way that seems self-contradictory but is nonetheless true",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A genuinely counter-intuitive claim hides here: success makes some things costlier. Your task is to hold a two-step mechanism in mind and resist turning a claim about relative cost into a claim about failure.",
+    "one_sentence_summary": "In a growing economy, labour-intensive services like music, teaching, and nursing grow relatively more expensive not because they get worse but because rising productivity everywhere else pulls their wages up while their output per hour stays the same.",
+    "main_idea": "Some kinds of work can't be sped up, yet their workers' wages still rise because they compete in the same labour market as high-productivity industries. So these services keep getting relatively more expensive — and this is a sign of the economy's success, not of the services' failure.",
+    "simple_explanation": "Start with a strange fact: a string quartet needs the same four players and the same amount of time to play Beethoven as it did in 1800. Almost everywhere else — farming, weaving, clerical work — one hour of labour now produces far more than it used to, thanks to machines and better methods. But you can't play the music with fewer people or at double speed. Some work simply can't be made faster.\n\nNow the clever part. When an economy grows, wages rise everywhere. Why? The productive sectors (say, a factory making twice as much per worker) can pay more, and to keep their workers they do. But musicians and nurses and teachers are hiring from the same pool of people. If they paid the old wages, their workers would leave for the factory. So they must raise wages too — even though a music lesson or a nursing shift produces exactly what it always did.\n\nThe result looks like a paradox: the more successful the economy, the more expensive these hands-on services become compared to manufactured goods. A haircut 'buys' less stuff than it once did. It's tempting to call this waste or failure. But it's the opposite. Services only look costlier because everything else got so cheap to make.\n\nThe hard part is the ending: the services a rich society values most — healing, teaching, art — are exactly the ones whose relative cost is bound to rise, because you can't automate them without turning them into something else (bigger classes, shorter doctor visits, recordings instead of live music). Society can pay the bill, let the services decay, or redefine them. What it cannot do is wait for the bill to shrink on its own.",
+    "why_difficult": "The passage asks you to hold a chain of reasoning — resistant-to-speed-up work, economy-wide wage rises, competition for labour, rising relative cost — and then to keep the conclusion at exactly the right strength: RELATIVE cost, not absolute decline. Every wrong option tempts you to drop a link or inflate the claim, and the sympathetic subject (nurses, teachers, artists) invites you to import feelings the argument never states.",
+    "author_intention": "To take a fact that looks like inefficiency and reveal it as a consequence of success, so the reader stops blaming the wrong thing and sees the real, unavoidable choice underneath.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0011-p1",
+        "role": "The strange fact",
+        "note": "A quartet needs the same players and time as in 1800, while everyone else's hourly output has multiplied. Some work resists being sped up."
+      },
+      {
+        "paragraph_id": "rc-0011-p2",
+        "role": "The mechanism",
+        "note": "Wages rise across the whole economy because productive sectors pay more. Musicians must be paid comparably or they'll leave — so their pay rises though their output hasn't."
+      },
+      {
+        "paragraph_id": "rc-0011-p3",
+        "role": "The paradox stated",
+        "note": "So services grow relatively costlier the more successful the economy is. This looks like decline but is the reverse: services are the still point against which everything else's speed is measured."
+      },
+      {
+        "paragraph_id": "rc-0011-p4",
+        "role": "The uncomfortable choice",
+        "note": "The most valued services — care, teaching, art — are exactly the ones destined to cost relatively more. Society can pay, let them decay, or redefine them; only pretending the bill will fall is ruled out."
+      }
+    ],
+    "tone_progression": "Curious and slightly playful at the opening fact, precise and explanatory through the mechanism, and soberly clear-eyed at the close, where the author names a choice without pretending it is easy.",
+    "key_transitions": [
+      "'From this small observation an economist drew a large and durable conclusion.' (start of paragraph 2) — a single example becomes a general economic law.",
+      "'This is why, paradoxically…' (start of paragraph 3) — the mechanism resolves into the counter-intuitive thesis, and the crucial word is 'relatively'."
+    ],
+    "misunderstanding": "Readers misread the passage as saying services are failing, bloated, or wasteful — the very reading paragraph 3 exists to refute. The cause is the word 'expensive': rising cost pattern-matches to decline. But the passage's claim is about RELATIVE price rising while quality holds, driven entirely by what happens outside these sectors.",
+    "traps_summary": "The distractors here inflate 'relative cost' into 'unaffordable', flip the author's neutral menu into a recommendation to automate, or import outside themes (fair pay, subsidies) the argument never uses. Fix the exact strength ('relatively more expensive') and the exact cause (labour-market competition) before choosing.",
+    "reading_lesson": "Track qualifiers as load-bearing words, not decoration. 'Relatively', 'tends to', 'not because… but because' are the hinges an argument turns on, and CAT's strongest distractors are made by quietly removing them. Read the qualifier, keep the qualifier, and answer at the passage's own strength — never one notch stronger.",
+    "real_world": "This is why healthcare, higher education, and live performance eat an ever-larger share of budgets in every rich country, and why 'why does college cost so much?' has an answer that isn't mainly about greed. Recognising the mechanism changes how you read those headlines.",
+    "takeaway": "When everything else speeds up, the things that can't are what start to look expensive — and that is a measure of progress, not decay.",
+    "reflection_question": "Which valuable things in your own life resist being made faster or cheaper — and what do you give up when you try to speed them up anyway?"
+  }
+}

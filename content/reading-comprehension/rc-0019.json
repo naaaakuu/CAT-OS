@@ -1,0 +1,288 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0019",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "arts-culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "vocabulary-in-context"
+    ],
+    "word_count": 503,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "why a perfect copy does not replace an original: value as history, not appearance",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The discussion of 'aura' and mechanical reproduction descends from Walter Benjamin's essay; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Arts-culture with a clean but non-obvious thesis (value as history, not appearance). Main-idea trap keeps the reader on visual fidelity. Owner review pending.",
+    "vocab_extracted": [
+      "provenance",
+      "indistinguishable",
+      "reverence"
+    ]
+  },
+  "passage": {
+    "title": "The Original and Its Ghost",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0019-p1",
+        "text": "Imagine a copy of a famous painting so exact that no eye, and no instrument, could tell it from the original — the same craquelure in the varnish, the same weave in the canvas, the same molecules of pigment laid in the same order. Stand the two side by side and shuffle them, and not even the curator could say which is which. It seems to follow that the two must be worth the same, since value could hardly rest on a difference that cannot, even in principle, be detected. And yet almost no one believes it. Tell a visitor that the picture before them is the copy, not the master's own, and their attention cools at once."
+      },
+      {
+        "id": "rc-0019-p2",
+        "text": "This reaction is easy to mock as superstition, but it repays a second look. What the visitor values, it turns out, is not only what the object looks like but what it is — its history, the fact that this very surface was worked by the artist's own hand, that it has travelled from that studio to this wall through time. The copy, however perfect, has a different history: it began yesterday, in imitation. The two are identical in every visible respect and different in the one respect that cannot be seen at all — their past. Value here attaches not to appearance but to origin."
+      },
+      {
+        "id": "rc-0019-p3",
+        "text": "Seen this way, the visitor is not confused but discriminating. We routinely care about the histories of objects, not merely their looks. A wedding ring melted down and recast from identical gold is not the same ring; a letter in a lover's hand is not replaced by a flawless photocopy; a rebuilt cathedral, stone for stone, is a reconstruction and known to be one. In each case the thing's meaning lies partly in an unbroken line back to some origin, a line the copy breaks even as it reproduces every feature. What we revere is presence — the object's being the one that was actually there."
+      },
+      {
+        "id": "rc-0019-p4",
+        "text": "The lesson is not that appearance does not matter, but that it was never the whole of what we meant by the value of a made thing. This has consequences in an age of perfect reproduction, when images can be copied without loss and circulated without end. Such copying does not destroy the original's value; if anything it sharpens the distinction, making us newly aware that what the reproduction cannot carry across is precisely the history that made the original matter. The endlessly copied image may spread a painting's fame while leaving untouched the strange, stubborn worth of the one canvas that the artist actually touched."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0019-q1",
+      "type": "main_idea",
+      "stem": "The passage principally argues that",
+      "options": {
+        "A": "a perfect copy is worth as much as the original, since value cannot rest on an undetectable difference",
+        "B": "our valuing of an original over an identical copy reflects that the value of a made thing lies in its history, not only its appearance",
+        "C": "people are irrationally superstitious about original artworks",
+        "D": "mechanical reproduction has destroyed the value of original paintings"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The passage begins with the puzzle of the undetectable copy (p1), argues the visitor values the object's history and origin (p2), generalises with rings, letters, and cathedrals (p3), and concludes that appearance 'was never the whole' of value (p4). Option B states the thesis: value lies in history, not only appearance.",
+        "passage_anchor": "rc-0019-p2 and rc-0019-p4",
+        "question_type_note": "The main idea is the resolution the passage reaches, not the puzzle it opens with or the reaction it starts by describing.",
+        "reading_habit": "When a passage opens with a puzzle ('it seems to follow… and yet'), the thesis is the resolution in the later paragraphs, not the tempting logic of the opening.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the opening inference the passage sets up in order to reject; paragraph 2 onward explains why the two are not equal in value despite being visually identical.",
+            "seductive_element": "Paragraph 1 argues it so cleanly ('value could hardly rest on a difference that cannot be detected') that it feels like the passage's own view."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage explicitly says the reaction is 'not confusion but discrimination' and 'repays a second look'; it defends the visitor rather than calling them superstitious.",
+            "seductive_element": "Paragraph 2 names the 'superstition' charge, which a hurried reader may take as the author's verdict."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 4 says copying 'does not destroy the original's value; if anything it sharpens the distinction'. The claim is the reverse of destruction.",
+            "seductive_element": "It sounds like the expected worry about reproduction and mass images."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0019-q2",
+      "type": "inference",
+      "stem": "It can be inferred that, in the author's view, if a visitor learns that a displayed painting is the perfect copy rather than the original, their cooling interest is",
+      "options": {
+        "A": "an irrational response they should learn to overcome",
+        "B": "a reasonable reaction to a real difference in the object's history",
+        "C": "caused by a visible flaw they had not previously noticed",
+        "D": "evidence that appearance is all that people truly care about"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "The passage insists the visitor is 'not confused but discriminating' (p3) and that the copy differs 'in the one respect that cannot be seen at all — their past' (p2). The cooling interest is therefore a reasonable response to a real, if invisible, difference in history — option B.",
+        "passage_anchor": "rc-0019-p2 and rc-0019-p3",
+        "question_type_note": "The inference tracks the author's evaluation of the reaction as discriminating rather than superstitious.",
+        "reading_habit": "When an author reframes a reaction as reasonable, infer that they endorse it as tracking something real — not that it is a flaw to correct.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage defends the reaction as discriminating; it does not counsel overcoming it.",
+            "seductive_element": "Paragraph 2's 'easy to mock as superstition' can be mistaken for agreement."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The premise is that the copy is visually indistinguishable; there is no visible flaw. The difference is in history, not appearance.",
+            "seductive_element": "It supplies a familiar reason for losing interest — spotting a defect — that the setup rules out."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The cooling shows the opposite: that appearance is NOT all people care about, since the looks are unchanged and interest still falls.",
+            "seductive_element": "The word 'appearance' appears throughout, tempting a reader to attach the reaction to it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0019-q3",
+      "type": "author_purpose",
+      "stem": "The author lists the recast wedding ring, the handwritten letter, and the rebuilt cathedral primarily to",
+      "options": {
+        "A": "show that some copies are easier to detect than others",
+        "B": "demonstrate that the valuing of origin over appearance extends well beyond paintings",
+        "C": "argue that old objects are always more valuable than new ones",
+        "D": "prove that reconstructions should never be attempted"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The three examples follow the claim that 'we routinely care about the histories of objects, not merely their looks', each showing a perfect physical duplicate that is nonetheless not the same thing because its history differs. Their purpose is to generalise the painting case into a broad human tendency — option B.",
+        "passage_anchor": "rc-0019-p3",
+        "question_type_note": "Purpose questions ask what a set of examples establishes; here they broaden the thesis from art to objects in general.",
+        "reading_habit": "When examples pile up after a general claim, their job is usually to show the claim's reach — read them as 'this happens everywhere', not as new separate points.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Detectability is not the point; these copies may be physically identical. The examples concern history, not how easily copies are spotted.",
+            "seductive_element": "The opening's talk of undetectable copies can carry over into reading these as a detection point."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage values unbroken origin, not age as such; a new object with the right history could matter, and the claim is not that old always beats new.",
+            "seductive_element": "Rings, letters, and cathedrals feel like heirlooms, suggesting an 'older is better' theme."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The cathedral example notes a reconstruction is 'known to be one'; it makes a point about meaning, not a prohibition on rebuilding.",
+            "seductive_element": "Calling a rebuild a mere 'reconstruction' can sound like disapproval of rebuilding."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0019-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the passage, the word 'presence' (in 'What we revere is presence') most nearly means",
+      "options": {
+        "A": "an impressive or commanding manner",
+        "B": "the object's being the very one that was actually there",
+        "C": "the current physical location of the artwork",
+        "D": "the attention a viewer pays to a work"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "The sentence defines the term for us: 'presence — the object's being the one that was actually there.' Throughout, the valued property is the unbroken line back to the origin, this very object having been present at its making. Option B matches the passage's own gloss.",
+        "passage_anchor": "rc-0019-p3",
+        "question_type_note": "Vocabulary-in-context is easiest when the passage supplies its own definition; the task is to select the sense the text stipulates.",
+        "reading_habit": "When a passage defines a term with a dash right after it, use that definition — not the word's more common everyday meaning.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "'Stage presence' or a 'commanding presence' is a common sense, but the passage explicitly defines presence as the object's having been the one actually there.",
+            "seductive_element": "'Presence' most often describes a person's charisma, so that meaning springs to mind."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Present location is not the point; a copy shares the same wall. The valued 'presence' is historical — having been there at the origin — not spatial.",
+            "seductive_element": "'Presence' can suggest 'where it is now', and the painting is on a wall."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The viewer's attention is a separate idea; 'presence' here is a property of the object's history, not of the viewer's focus.",
+            "seductive_element": "The passage discusses visitors' attention, so attaching 'presence' to it feels plausible."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "provenance",
+      "passage_use": "its history, the fact that this very surface was worked by the artist's own hand",
+      "meaning_here": "the record of an object's origin and ownership over time",
+      "difficulty": "hard"
+    },
+    {
+      "word": "indistinguishable",
+      "passage_use": "no eye, and no instrument, could tell it from the original",
+      "meaning_here": "impossible to tell apart from something else",
+      "difficulty": "medium"
+    },
+    {
+      "word": "reverence",
+      "passage_use": "What we revere is presence",
+      "meaning_here": "deep respect bordering on awe",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A clean thought experiment with a hidden turn. The opening logic — identical objects must be worth the same — is seductive, and the passage exists to overturn it. Your task is to follow the turn and locate value where the author finally puts it: in history, not appearance.",
+    "one_sentence_summary": "We value an original over a perfect, indistinguishable copy because the worth of a made thing lies partly in its history — its unbroken line back to the moment and hand that made it — which no copy can carry across, however faithfully it reproduces the appearance.",
+    "main_idea": "A copy so exact that no test could detect the difference still isn't worth what the original is, and this isn't superstition: what we value is the object's history — that this very surface was worked by the artist and has travelled through time. Appearance was never the whole of value; origin and presence are part of it, which is why endless reproduction sharpens rather than erases the original's worth.",
+    "simple_explanation": "Picture a copy of a famous painting so perfect that no eye and no instrument could tell it from the original — same cracks in the varnish, same canvas weave, same pigment molecules in the same order. Shuffle the two and even the curator couldn't say which is which. Logically, they should be worth the same: how can value rest on a difference nobody can ever detect? And yet almost nobody believes it. Tell a visitor the picture in front of them is the copy, and their interest cools instantly.\n\nIt's easy to mock that as superstition — but look again. What the visitor values isn't only what the object looks like, but what it IS: its history, the fact that this exact surface was worked by the artist's own hand and has travelled from that studio to this wall across time. The copy has a different history — it began yesterday, in imitation. The two are identical in everything you can see and different in the one thing you can't: their past. Value here attaches to origin, not appearance.\n\nSeen this way, the visitor isn't confused — they're discriminating. We care about the histories of objects all the time. A wedding ring melted down and recast from the same gold isn't the same ring. A letter in a lover's handwriting isn't replaced by a flawless photocopy. A cathedral rebuilt stone for stone is a reconstruction, and everyone knows it. In each case the meaning lies partly in an unbroken line back to an origin — a line the copy breaks even as it reproduces every feature. What we revere is 'presence': the object's being the very one that was actually there.\n\nThe lesson isn't that appearance doesn't matter — it's that appearance was never the whole of what we meant by the value of a made thing. And in an age when images can be copied perfectly and shared endlessly, this matters more, not less. Such copying doesn't destroy the original's value; it sharpens the distinction, reminding us that what a reproduction can't carry across is exactly the history that made the original matter. The endlessly shared image spreads a painting's fame while leaving untouched the strange, stubborn worth of the one canvas the artist actually touched.",
+    "why_difficult": "The opening argument is deliberately persuasive — 'value can't rest on an undetectable difference' — and a reader who accepts it answers the whole set wrong. The passage's real claim requires separating two kinds of value (appearance vs history) that we normally blur, and holding that an invisible property (an object's past) can be a real basis for worth. Distractors exploit both the seductive opening and the pull toward 'appearance is what matters'.",
+    "author_intention": "To defend an ordinary intuition against a clever argument — to show that our preference for originals tracks something genuine (history and presence), and thereby to enrich what we mean by the 'value' of any made thing.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0019-p1",
+        "role": "The puzzle",
+        "note": "A copy so perfect no test detects it 'should' be worth the same — yet tell a visitor it's the copy and their interest cools. The logic and the reaction collide."
+      },
+      {
+        "paragraph_id": "rc-0019-p2",
+        "role": "The resolution",
+        "note": "The visitor values the object's history — this surface worked by the artist, travelling through time. Identical in appearance, different in the one unseen thing: their past."
+      },
+      {
+        "paragraph_id": "rc-0019-p3",
+        "role": "The generalisation",
+        "note": "This isn't superstition but discrimination. Rings, letters, cathedrals: we care about unbroken origin everywhere. What we revere is 'presence' — being the one actually there."
+      },
+      {
+        "paragraph_id": "rc-0019-p4",
+        "role": "The consequence",
+        "note": "Appearance was never the whole of value. Perfect reproduction doesn't destroy the original — it sharpens the distinction, spreading fame while leaving the touched canvas's worth intact."
+      }
+    ],
+    "tone_progression": "It opens playful and provocative with the thought experiment, turns thoughtful and defending as it takes the 'superstition' seriously, and closes with quiet appreciation for the 'strange, stubborn worth' of the original.",
+    "key_transitions": [
+      "'And yet almost no one believes it.' (end of paragraph 1) — the clean logic meets the stubborn reaction that the rest of the passage explains.",
+      "'This reaction is easy to mock as superstition, but it repays a second look.' (start of paragraph 2) — the author turns from puzzle to defence.",
+      "'Seen this way, the visitor is not confused but discriminating.' (start of paragraph 3) — the reaction is reframed as good judgement, not error."
+    ],
+    "misunderstanding": "Readers accept the opening argument and conclude the copy is worth as much — the exact view the passage refutes. Others hear the word 'superstition' and think the author agrees the reaction is irrational, missing that paragraph 3 calls it 'discrimination'. Both misreadings come from stopping before the passage completes its turn.",
+    "traps_summary": "The distractors here reinstate the opening logic (identical = equal value), take the 'superstition' framing as the author's verdict, or attach value to appearance and detectability rather than history. Follow the passage past its setup to where it actually lands — value as origin and presence — and answer from there.",
+    "reading_lesson": "Distinguish the view a passage sets up from the view it holds. Argumentative essays often open with a clever, tempting line of reasoning precisely in order to complicate or overturn it; if you answer from paragraph 1, you answer from the foil. Read to the resolution — usually signalled by 'and yet', 'but', or 'seen this way' — and let the author's final position, not the seductive opening, decide your answers.",
+    "real_world": "This is why an autograph outsells a printout of the same signature, why 'the actual dress she wore' commands a price no replica can, and why NFTs tried (contentiously) to manufacture provenance for digital files. It also reframes the anxiety about AI-generated and endlessly copied images: what reproduction can't copy is the history that made a thing matter.",
+    "takeaway": "What we cherish in a made thing is not only how it looks but the unbroken line back to the hand and moment that made it.",
+    "reflection_question": "Which object would you refuse to swap for a perfect, indistinguishable copy — and what exactly would be lost in the trade?"
+  }
+}

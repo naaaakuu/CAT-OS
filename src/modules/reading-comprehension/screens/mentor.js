@@ -97,6 +97,73 @@ const THEME_ART = {
     <path ${S} d="M14 24 h12 M14 30 h12 M14 36 h8"/>
     <path ${S} d="M46 36 h12 M46 42 h12 M46 48 h8"/>
     <path ${S} data-draw d="M30 30 C38 30 34 42 42 42"/>`,
+  /* The ethics of looking: the gaze, and what it rests upon. */
+  'rc-0009': `
+    <path ${S} data-draw d="M12 36 C22 24 50 24 60 36 C50 48 22 48 12 36 Z"/>
+    <circle ${S} cx="36" cy="36" r="7"/>
+    <circle cx="36" cy="36" r="2.4" fill="currentColor"/>`,
+  /* Small talk: two speakers, and the sound that bridges them. */
+  'rc-0010': `
+    <circle ${S} cx="18" cy="42" r="8"/>
+    <circle ${S} cx="54" cy="42" r="8"/>
+    <path ${S} data-draw d="M26 38 C34 27 38 27 46 38"/>
+    <circle cx="36" cy="31" r="1.7" fill="currentColor"/>`,
+  /* The quartet's cost: a single note that cannot be hurried. */
+  'rc-0011': `
+    <path ${S} data-draw d="M30 49 L30 17 C38 18 48 20 48 14"/>
+    <ellipse cx="24" cy="50" rx="6.5" ry="4.5" fill="currentColor" transform="rotate(-20 24 50)"/>`,
+  /* Emergence: parts below, a pattern that appears only above them. */
+  'rc-0012': `
+    <g fill="currentColor">
+      <circle cx="16" cy="52" r="2"/><circle cx="26" cy="52" r="2"/><circle cx="36" cy="52" r="2"/>
+      <circle cx="46" cy="52" r="2"/><circle cx="56" cy="52" r="2"/>
+    </g>
+    <path ${S} data-draw d="M14 34 C24 20 30 42 36 32 C42 22 48 42 58 28"/>`,
+  /* Mere exposure: repetition, arc on arc, warming toward a point. */
+  'rc-0013': `
+    <path ${S} d="M24 47 A18 18 0 0 1 24 25"/>
+    <path ${S} d="M32 49 A22 22 0 0 1 32 23"/>
+    <path ${S} data-draw d="M40 51 A26 26 0 0 1 40 21"/>
+    <circle cx="50" cy="36" r="2.4" fill="currentColor"/>`,
+  /* Consent of the defeated: the ballot lowered into the box. */
+  'rc-0014': `
+    <path ${S} d="M16 36 H56 V56 H16 Z"/>
+    <path ${S} d="M30 36 V32 H42 V36"/>
+    <path ${S} data-draw d="M36 12 L36 30 M30 24 L36 30 L42 24"/>`,
+  /* The outsourced conscience: the judgement handed away. */
+  'rc-0015': `
+    <circle ${S} cx="44" cy="26" r="9"/>
+    <path ${S} d="M44 13 v-2 M44 39 v2 M57 26 h2 M31 26 h-2 M53 17 l1.5 -1.5 M35 35 l-1.5 1.5 M53 35 l1.5 1.5 M35 17 l-1.5 -1.5"/>
+    <circle cx="44" cy="26" r="3" fill="currentColor"/>
+    <path ${S} data-draw d="M12 56 C17 47 26 45 31 50 L37 44"/>`,
+  /* Weak ties: two tight clusters, joined by a single bridge. */
+  'rc-0016': `
+    <g fill="currentColor">
+      <circle cx="16" cy="30" r="2"/><circle cx="23" cy="40" r="2"/><circle cx="14" cy="45" r="2"/>
+      <circle cx="56" cy="30" r="2"/><circle cx="49" cy="40" r="2"/><circle cx="58" cy="45" r="2"/>
+    </g>
+    <path ${S} d="M16 30 L23 40 L14 45 Z M56 30 L49 40 L58 45 Z"/>
+    <path ${S} data-draw d="M23 38 C34 30 38 30 49 38"/>`,
+  /* Railway time: the clock, detached from the sun. */
+  'rc-0017': `
+    <circle ${S} cx="40" cy="40" r="16"/>
+    <path ${S} d="M40 40 V30 M40 40 L48 44"/>
+    <circle ${S} data-draw cx="17" cy="19" r="5"/>
+    <path ${S} d="M17 9 v-3 M17 29 v3 M7 19 h-3 M27 19 h3"/>`,
+  /* Wilderness as a drawn line: the range inside its frame. */
+  'rc-0018': `
+    <path ${S} d="M8 54 H64 V16 H8 Z" stroke-dasharray="4 4"/>
+    <path ${S} data-draw d="M14 50 L28 32 L38 42 L48 26 L60 50"/>`,
+  /* The original and its ghost: two frames, one with an aura. */
+  'rc-0019': `
+    <rect ${S} x="12" y="22" width="22" height="30" rx="2"/>
+    <rect ${S} x="40" y="22" width="22" height="30" rx="2"/>
+    <path ${S} data-draw d="M23 32 l3 6 l-6 0 Z"/>
+    <path ${S} d="M51 14 l1.3 3 l3 0.4 l-2.1 2.1 l0.5 3 l-2.7 -1.5 l-2.7 1.5 l0.5 -3 l-2.1 -2.1 l3 -0.4 Z"/>`,
+  /* A poem's meaning: the open book, and the reading that lifts from it. */
+  'rc-0020': `
+    <path ${S} d="M36 27 C30 23 20 23 14 26 L14 50 C20 47 30 47 36 51 C42 47 52 47 58 50 L58 26 C52 23 42 23 36 27 Z M36 27 V51"/>
+    <path ${S} data-draw d="M36 21 L36 12 M28 17 L24 10 M44 17 L48 10"/>`,
 };
 
 const GENRE_ART = {
@@ -108,6 +175,10 @@ const GENRE_ART = {
   history: `<circle ${S} cx="36" cy="36" r="20"/><path ${S} data-draw d="M36 24 V36 L45 42"/>`,
   psychology: `<path ${S} data-draw d="M24 52 C14 46 12 32 20 24 C28 16 44 16 50 24 C58 22 62 30 58 36 C62 42 56 50 48 48 C44 54 32 56 24 52 Z"/>`,
   'literature-theory': `<path ${S} data-draw d="M20 14 H52 A4 4 0 0 1 56 18 V58 L36 48 L16 58 V18 A4 4 0 0 1 20 14 Z"/>`,
+  anthropology: `<path ${S} d="M24 20 H48 M26 30 H46"/><path ${S} data-draw d="M28 20 C22 30 22 45 32 51 L40 51 C50 45 50 30 44 20"/>`,
+  'political-theory': `<path ${S} d="M18 22 H54 M20 50 H52 M14 55 H58"/><path ${S} data-draw d="M27 22 V50 M36 22 V50 M45 22 V50"/>`,
+  'technology-ethics': `<circle ${S} cx="36" cy="22" r="5"/><circle ${S} cx="20" cy="48" r="5"/><circle ${S} cx="52" cy="48" r="5"/><path ${S} data-draw d="M33 26 L23 44 M39 26 L49 44 M25 48 H47"/>`,
+  environment: `<path ${S} data-draw d="M36 14 C50 22 50 44 36 56 C22 44 22 22 36 14 Z"/><path ${S} d="M36 20 V50"/>`,
 };
 const ART_FALLBACK = `<circle ${S} data-draw cx="36" cy="36" r="20"/>`;
 
@@ -130,6 +201,17 @@ function opening(text, words = 7) {
   const parts = String(text).split(/\s+/);
   const head = parts.slice(0, words).join(' ');
   return parts.length > words ? `${head}…` : head;
+}
+
+/** Render a multi-paragraph block (split on blank lines) as escaped <p>s,
+ *  so the v4 "explained simply" retelling reads like book prose. */
+function prose(text) {
+  return String(text)
+    .split(/\n\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p>${escapeHTML(p)}</p>`)
+    .join('');
 }
 
 export async function renderMentor(outlet, { storage }, params) {
@@ -202,8 +284,15 @@ export async function renderMentor(outlet, { storage }, params) {
         ${section('What was this actually about?', `
           <details class="mentor__recall">
             <summary>First, try to say it in your own words — then open</summary>
-            <p style="margin-top: var(--space-3)">${escapeHTML(mentor.main_idea)}</p>
+            <div class="mentor__reveal">
+              ${mentor.one_sentence_summary
+                ? `<p class="mentor__one-line">${escapeHTML(mentor.one_sentence_summary)}</p>` : ''}
+              <p>${escapeHTML(mentor.main_idea)}</p>
+            </div>
           </details>`)}
+
+        ${mentor.simple_explanation ? section('The passage, explained simply', `
+          <div class="mentor__plain">${prose(mentor.simple_explanation)}</div>`) : ''}
 
         ${section('What was the author doing?', `<p>${escapeHTML(mentor.author_intention)}</p>`)}
 
@@ -222,10 +311,16 @@ export async function renderMentor(outlet, { storage }, params) {
 
         ${section('How the voice moves', `<p>${escapeHTML(mentor.tone_progression)}</p>`)}
 
+        ${mentor.why_difficult ? section('Why this passage was difficult', `
+          <p>${escapeHTML(mentor.why_difficult)}</p>`) : ''}
+
         ${mentor.misunderstanding ? section('Why readers misread it', `
           <p>${escapeHTML(mentor.misunderstanding)}</p>`) : ''}
 
         ${section('The traps, as advice', `<p>${escapeHTML(mentor.traps_summary)}</p>`)}
+
+        ${mentor.reading_lesson ? section('The reading lesson', `
+          <div class="mentor__lesson"><p>${escapeHTML(mentor.reading_lesson)}</p></div>`) : ''}
 
         ${vocab.length ? section('Words worth keeping', `
           <div class="vocab">
@@ -257,6 +352,12 @@ export async function renderMentor(outlet, { storage }, params) {
               </div>
             </div>`).join('')}
         </div>
+
+        ${mentor.reflection_question ? `
+          <div class="mentor__reflect-q">
+            <span class="mentor__reflect-eyebrow">A question to sit with</span>
+            <p>${escapeHTML(mentor.reflection_question)}</p>
+          </div>` : ''}
 
         <cat-reflection></cat-reflection>
 

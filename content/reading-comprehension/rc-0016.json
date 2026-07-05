@@ -1,0 +1,287 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0016",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "sociology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "evidence-anchoring"
+    ],
+    "word_count": 489,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "specific_detail",
+      "author_purpose"
+    ],
+    "theme": "why loose acquaintances, not close friends, are the bridges that carry new information",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The 'strength of weak ties' is a landmark idea in sociology (associated with Mark Granovetter); no specific article is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Counter-intuitive sociology; the reader must grasp that the argument is about the structural POSITION of weak ties, not their emotional warmth. Owner review pending.",
+    "vocab_extracted": [
+      "redundant",
+      "bridge",
+      "cohesive"
+    ]
+  },
+  "passage": {
+    "title": "The Strength of Weak Ties",
+    "reading_time_min": 2.4,
+    "paragraphs": [
+      {
+        "id": "rc-0016-p1",
+        "text": "Ask people how they found their job, and a striking number will name not a close friend but someone they barely knew — a former colleague, a friend of a friend, an acquaintance encountered twice a year. This is mildly surprising, since we assume that the people who care about us most will do the most for us. Our close friends know us intimately and wish us well; surely they, if anyone, are the ones who open doors. Yet in the specific matter of learning about opportunities, they often turn out to be the least useful people we know."
+      },
+      {
+        "id": "rc-0016-p2",
+        "text": "The explanation lies not in how much our contacts like us but in where they stand. Close friends tend to form a tight cluster: they know one another, move in the same circles, and are exposed to much the same information as we are. Whatever a close friend hears about, we have probably heard about too. Their knowledge overlaps with ours, which makes their goodwill, however sincere, informationally redundant. The acquaintance is differently placed. Precisely because we are not close, they inhabit a different cluster, hear different news, and know different people. What reaches them has often not reached us."
+      },
+      {
+        "id": "rc-0016-p3",
+        "text": "A weak tie, then, does its work not by being strong but by being a bridge. It links two dense pockets of people that would otherwise have no connection, and across that bridge travels everything the two pockets do not share — job openings, rumours, techniques, names. Remove the weak ties from a social map and it fractures into isolated islands, each recycling its own information. The counter-intuitive lesson is that the ties we value least, and invest in least, are the ones that carry the most novelty into our lives, for the same reason that a distant country's newspaper tells us more that is new than our neighbour's does."
+      },
+      {
+        "id": "rc-0016-p4",
+        "text": "It would be a misreading to conclude that weak ties matter more than strong ones, or that friendship is overrated. Strong ties do other, deeper work — they provide support, trust, and the willingness to take real trouble on our behalf, none of which an acquaintance offers. The point is narrower and more precise: for the particular task of spreading information across a society, the weak tie is structurally superior, not because it tries harder but because of where it sits. Value depends on the job. The friend who would lend you a kidney may be the last to hear of the opening you need, and the acquaintance who would not lend you bus fare may be the first."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0016-q1",
+      "type": "main_idea",
+      "stem": "The central idea of the passage is that",
+      "options": {
+        "A": "weak ties are more valuable to us overall than our close friendships",
+        "B": "acquaintances spread new information more effectively than close friends because of their different position in the social structure",
+        "C": "close friends are unwilling to help us find opportunities because they see us as rivals",
+        "D": "people should invest more effort in maintaining distant acquaintances than in deepening friendships"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The passage explains that acquaintances carry new information because they sit in different clusters and act as bridges (p2-p3), while carefully denying that weak ties matter more overall (p4). Option B states the precise structural claim — effectiveness at spreading information owing to position — which is exactly the thesis the author affirms and guards.",
+        "passage_anchor": "rc-0016-p3 and rc-0016-p4",
+        "question_type_note": "The main idea is the narrow, position-based claim the author explicitly distinguishes from the broader misreadings.",
+        "reading_habit": "When a passage says 'the point is narrower and more precise', copy that narrower point into your summary word for word — it is the thesis, and the broader version is a trap.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "Paragraph 4 explicitly rejects this: it 'would be a misreading to conclude that weak ties matter more than strong ones'. Strong ties do 'deeper work'.",
+            "seductive_element": "The title and the surprising thesis push toward a bold 'weak beats strong' summary."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never says close friends are unwilling or see us as rivals; their goodwill is 'sincere' but 'redundant'. The reason is overlap of information, not rivalry.",
+            "seductive_element": "It offers a dramatic human motive to explain why friends don't help, which feels like a satisfying story."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage does not advise reallocating effort; it explains a structural fact. Paragraph 4 in fact preserves the value of deepening friendship for its 'deeper work'.",
+            "seductive_element": "It sounds like the practical takeaway of 'weak ties are useful', turning analysis into life advice the text avoids."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0016-q2",
+      "type": "specific_detail",
+      "stem": "According to the passage, the information a close friend possesses tends to be 'redundant' because",
+      "options": {
+        "A": "close friends are reluctant to share what they know",
+        "B": "close friends move in the same circles and hear much the same news as we do",
+        "C": "close friends forget to pass along opportunities in time",
+        "D": "close friends know fewer people than acquaintances do"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 states it directly: close friends 'know one another, move in the same circles, and are exposed to much the same information as we are… Their knowledge overlaps with ours, which makes their goodwill… informationally redundant.' Option B paraphrases this overlap.",
+        "passage_anchor": "rc-0016-p2",
+        "question_type_note": "Detail questions reward the text's stated reason; the redundancy is about overlap, not willingness or memory.",
+        "reading_habit": "Anchor a 'because' answer to the passage's causal sentence; distractors substitute unstated human failings for the stated structural cause.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage stresses friends' sincere goodwill; reluctance to share is not the issue — overlap of what they know is.",
+            "seductive_element": "'Redundant help' can be misread as 'withheld help'."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Timing and forgetfulness are never mentioned; the redundancy is about the content overlapping, not being delivered late.",
+            "seductive_element": "It offers a plausible everyday reason friends fail to help."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage does not compare the number of people friends versus acquaintances know; it contrasts the OVERLAP of their information with ours.",
+            "seductive_element": "It gestures at the network theme with a numerical claim the text never makes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0016-q3",
+      "type": "inference",
+      "stem": "It can be inferred that if all the weak ties were removed from a community's social network, the community would",
+      "options": {
+        "A": "become more trusting and supportive of its members",
+        "B": "break into separate groups, each circulating only its own information",
+        "C": "lose its close friendships along with its acquaintances",
+        "D": "continue to receive novel information through its strong ties"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "Paragraph 3 says removing weak ties makes a social map 'fracture into isolated islands, each recycling its own information'. The inference simply applies this: without bridges, groups separate and only recycle internal information — option B.",
+        "passage_anchor": "rc-0016-p3",
+        "question_type_note": "This inference draws the direct consequence the passage itself states, then rejects options that ignore the bridging role.",
+        "reading_habit": "For 'what if we removed X' questions, find where the passage describes X's function and negate it — the answer is the loss of that function.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage links trust and support to strong ties, and never suggests removing weak ties increases them; it predicts fragmentation, not warmth.",
+            "seductive_element": "One might guess that losing distant contacts draws a group inward and closer."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Removing weak ties leaves strong ties in place — indeed that is why the islands remain internally connected; friendships are not lost.",
+            "seductive_element": "It conflates removing one kind of tie with removing all ties."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Strong ties are 'informationally redundant'; the passage's whole point is that novelty travels on weak ties, so their removal cuts off novelty rather than preserving it.",
+            "seductive_element": "It reassuringly suggests the network keeps working through friends, which is exactly what the passage denies."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0016-q4",
+      "type": "author_purpose",
+      "stem": "The author's comparison to 'a distant country's newspaper' primarily serves to",
+      "options": {
+        "A": "argue that foreign news is more reliable than local news",
+        "B": "illustrate why a more distant source delivers more that is genuinely new",
+        "C": "suggest that people should pay more attention to international affairs",
+        "D": "show that neighbours are poor sources of information about the world"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "The comparison closes paragraph 3's point that weak ties 'carry the most novelty', likening it to how a distant paper 'tells us more that is new than our neighbour's does'. The analogy transfers one property: greater distance, greater novelty. Option B names that function.",
+        "passage_anchor": "rc-0016-p3",
+        "question_type_note": "Purpose questions on analogies ask which single property is being carried over — here, distance yields novelty.",
+        "reading_habit": "Reduce an analogy to the one trait it lends the argument; options that borrow other traits (reliability, importance) are distractors.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Reliability is not the point; the analogy concerns novelty of information, not its trustworthiness.",
+            "seductive_element": "'Newspaper' invites thoughts of reliability and accuracy."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The analogy is about why distant sources bring novelty, not a recommendation to follow international affairs; it makes a structural point, not a prescription.",
+            "seductive_element": "It draws a reasonable-sounding life lesson from the image."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The neighbour's lower novelty is only half the comparison; its purpose is to highlight, by contrast, the distant source's novelty — not to disparage neighbours as sources.",
+            "seductive_element": "The neighbour really is cast as less novel, so focusing on that half feels textually grounded."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "redundant",
+      "passage_use": "makes their goodwill, however sincere, informationally redundant",
+      "meaning_here": "adding nothing new because it duplicates what is already known",
+      "difficulty": "medium"
+    },
+    {
+      "word": "bridge",
+      "passage_use": "does its work not by being strong but by being a bridge",
+      "meaning_here": "a connection linking two otherwise separate groups",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cohesive",
+      "passage_use": "Close friends tend to form a tight cluster",
+      "meaning_here": "closely united; forming a tightly connected whole (the property of the friend-cluster)",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A counter-intuitive claim — the people who help you least are the ones who love you most, at least for one specific task. Your job is to catch that the argument is about POSITION in a network, not about warmth, and to keep the claim as narrow as the author makes it.",
+    "one_sentence_summary": "Loose acquaintances spread new information better than close friends not because they care more but because they sit in different parts of the social network and act as bridges between otherwise separate groups.",
+    "main_idea": "Close friends share our circles and therefore our information, so their help, however sincere, is redundant; acquaintances stand elsewhere and bring what we haven't heard. For the specific job of spreading news across a society, weak ties are structurally superior — but strong ties still do the deeper work of trust and support.",
+    "simple_explanation": "Ask people how they found their job and, oddly, many name someone they barely knew — an old colleague, a friend of a friend. That's surprising, because we assume the people who love us most will do the most for us. Our close friends know us well and want the best for us, so surely they're the ones who open doors. But for the narrow task of hearing about opportunities, they're often the least useful people we know.\n\nWhy? Not because of how much they like us, but because of where they stand. Close friends form a tight cluster — they know each other, move in the same circles, and hear the same news we do. So whatever a close friend learns, we've probably already learned. Their knowledge overlaps with ours, which makes their goodwill 'redundant': warm, but adding nothing new. An acquaintance is different. Precisely because we're not close, they live in a different circle, hear different news, and know different people. What reaches them often hasn't reached us.\n\nSo a weak tie works not by being strong but by being a bridge — it connects two dense pockets of people who'd otherwise never meet, and across that bridge travels everything the two pockets don't share: openings, rumours, techniques, names. Remove the weak ties and the social map shatters into islands, each recycling its own information. The strange lesson: the ties we value and invest in least carry the most novelty — like how a distant country's newspaper tells you more that's new than your neighbour's does.\n\nBut don't overshoot. It's a misreading to say weak ties matter MORE than strong ones, or that friendship is overrated. Strong ties do deeper work: support, trust, the willingness to take real trouble for you — things an acquaintance won't. The point is narrow: for spreading information across a society, the weak tie wins, not by trying harder but by where it sits. Value depends on the job. The friend who'd lend you a kidney may be the last to hear of the job you need; the acquaintance who wouldn't lend you bus fare may be the first.",
+    "why_difficult": "The claim is counter-intuitive and easy to over-state. Once a reader grasps 'weak ties bring new information', the mind slides to 'weak ties are more valuable', which paragraph 4 explicitly forbids. The argument is also structural, not emotional — it's about network POSITION and information overlap — so distractors that explain friends' unhelpfulness by warmth, rivalry, or forgetfulness feel plausible while missing the mechanism entirely.",
+    "author_intention": "To replace a warmth-based intuition (the people who care most help most) with a structural one (position determines who brings novelty), while carefully preventing the reader from over-generalising the surprise into 'weak ties beat strong ties'.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0016-p1",
+        "role": "The surprise",
+        "note": "People often find jobs through people they barely know, not close friends. That's odd, since we expect those who care most to help most."
+      },
+      {
+        "paragraph_id": "rc-0016-p2",
+        "role": "The mechanism",
+        "note": "It's about position, not affection. Close friends share our circles, so their information overlaps ours — redundant. Acquaintances sit elsewhere and hear different news."
+      },
+      {
+        "paragraph_id": "rc-0016-p3",
+        "role": "The bridge idea",
+        "note": "A weak tie works by bridging two separate groups; across it travels what neither shares. Remove weak ties and society fractures into islands recycling their own news."
+      },
+      {
+        "paragraph_id": "rc-0016-p4",
+        "role": "The careful limit",
+        "note": "But weak ties don't matter MORE overall. Strong ties give trust and support. The claim is narrow: for spreading information, the weak tie's position makes it superior."
+      }
+    ],
+    "tone_progression": "Curious at the opening surprise, explanatory and precise through the mechanism, and carefully qualifying at the close — the voice of someone excited by a finding but determined not to let the reader over-claim it.",
+    "key_transitions": [
+      "'The explanation lies not in how much our contacts like us but in where they stand.' (start of paragraph 2) — the passage shifts from affection to structural position.",
+      "'It would be a misreading to conclude that weak ties matter more than strong ones…' (start of paragraph 4) — the author fences the claim against over-generalisation."
+    ],
+    "misunderstanding": "Readers turn 'weak ties bring novelty' into 'weak ties are more valuable than friends', the exact conclusion paragraph 4 blocks. Others explain the friends' unhelpfulness with a human motive — rivalry, reluctance, forgetfulness — when the passage's reason is purely structural: their information overlaps ours.",
+    "traps_summary": "The distractors here inflate a narrow structural claim into a sweeping ranking, or replace the stated cause (information overlap, network position) with invented human failings. Keep the claim task-specific ('for spreading information') and structural ('because of where they sit'), and the traps fall away.",
+    "reading_lesson": "When a passage delivers a counter-intuitive finding and then adds 'but the point is narrower', treat that narrowing as the real thesis and refuse to carry the exciting over-statement out of the passage. The most seductive distractor on a surprising passage is almost always the bold generalisation the author took care to rule out; answer at the qualified strength, not the headline strength.",
+    "real_world": "This is why networking events full of near-strangers actually produce job leads, why diverse teams surface more new ideas than close-knit ones, and why staying loosely in touch with people from old chapters of your life pays off unexpectedly. It reframes 'who should I keep in touch with?' as a question about reach, not just closeness.",
+    "takeaway": "The ties you value least often carry the most that is new — because novelty travels across distance, not affection.",
+    "reflection_question": "Whose news reaches you from a different world than your own — and how much of what's new in your life arrived across one of those bridges?"
+  }
+}

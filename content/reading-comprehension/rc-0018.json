@@ -1,0 +1,345 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0018",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "environment",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "stage": "elite",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "tone-detection",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 592,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "tone",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "wilderness as a cultural construction whose idealisation distorts conservation",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The argument that 'wilderness' is a cultural construction that can hinder environmental thought is associated with the environmental historian William Cronon; no specific essay is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Elite environmental-humanities passage; the thesis criticises an idea beloved by environmentalists, and the central trap is to read it as anti-environmental. Owner review pending.",
+    "vocab_extracted": [
+      "pristine",
+      "sublime",
+      "abdication",
+      "construct"
+    ]
+  },
+  "passage": {
+    "title": "The Trouble with the Pristine",
+    "reading_time_min": 3.0,
+    "paragraphs": [
+      {
+        "id": "rc-0018-p1",
+        "text": "No idea is more central to modern environmentalism than wilderness: unspoiled nature, untouched by human hands, valuable precisely because we have kept ourselves out of it. To love the earth, on this understanding, is to love the places where we are not, and the work of conservation is to draw a line around such places and defend it. The impulse is generous, and the landscapes it has preserved are real. Yet the idea deserves more suspicion than it usually receives, because the very purity it prizes is, on inspection, something we have made rather than found."
+      },
+      {
+        "id": "rc-0018-p2",
+        "text": "Consider that the wildernesses most revered today were, until recently, inhabited. The valleys and forests later designated as pristine had for centuries been hunted, burned, farmed, and shaped by people who were removed, sometimes forcibly, so that the land could be presented as empty. What looks like nature before humanity is often nature after a particular set of humans has been cleared away and the traces of their dwelling allowed to fade. The emptiness is not the absence of a human past; it is the erasure of one. To call such a place 'untouched' is already to have forgotten who touched it."
+      },
+      {
+        "id": "rc-0018-p3",
+        "text": "The idea has a history, too, and a short one. For most of recorded time, wild country was not sublime but frightening — a wasteland to be crossed, not a cathedral to be entered. Only in the last few centuries did the mountain and the forest become objects of awe rather than dread, as the growing comfort and ugliness of industrial life made the remote and the empty newly precious. Wilderness, in other words, is a taste, and a recent one, held most strongly by those whose lives are least wild. The wealthy urban admirer, not the person who must wrest a living from the land, is the idea's natural home."
+      },
+      {
+        "id": "rc-0018-p4",
+        "text": "None of this is an argument against protecting wild places, and it would be a serious misreading to take it as one. The danger the critique identifies is subtler: that by locating true nature only in the pristine and faraway, we license ourselves to neglect the nature close at hand — the city park, the farmed valley, the ordinary landscape where most people actually live. If nature is by definition the place without us, then everywhere we are becomes, by definition, not nature, and therefore not our concern. The wilderness ideal can thus become a permission slip for ruining everywhere else, an ethic that cares for the earth only where it can pretend humanity is absent."
+      },
+      {
+        "id": "rc-0018-p5",
+        "text": "What the critique asks for is not less care but a wider one: an environmentalism that does not depend on the fantasy of human absence, that finds obligation in the used and inhabited world rather than only in the roped-off remnant. The point is not that the sequoia deserves no protection, but that the roadside weed, the working farm, and the river running through the town deserve it also — and that a love of nature which begins by defining humanity as nature's opposite has quietly conceded the very ground on which most of the fight for the earth must be waged."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0018-q1",
+      "type": "main_idea",
+      "stem": "Which of the following best expresses the passage's central argument?",
+      "options": {
+        "A": "Wild places are not worth protecting, since the idea of wilderness is a modern invention",
+        "B": "The ideal of pristine wilderness is a recent cultural construction whose idealisation can lead us to neglect the inhabited nature where we actually live",
+        "C": "Environmentalism should focus its resources on cities and farms rather than on remote wild areas",
+        "D": "Indigenous peoples were wrongly removed from lands that were later declared wilderness"
+      },
+      "correct": "B",
+      "estimated_time_sec": 105,
+      "explanation": {
+        "correct_reasoning": "The passage argues wilderness is something 'we have made rather than found' (p1), historically inhabited (p2) and a recent 'taste' (p3), and warns that idealising it 'license[s] us to neglect the nature close at hand' (p4), asking for 'a wider' care (p5). Option B states both halves: the construction and the danger of neglecting inhabited nature.",
+        "passage_anchor": "rc-0018-p4 and rc-0018-p5",
+        "question_type_note": "The main idea must hold the critique together with its constructive aim; options that keep only the debunking half misrepresent it.",
+        "reading_habit": "When a passage criticises an idea but explicitly says it still values the underlying goal, your summary must include both the critique and the preserved goal.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says explicitly this 'would be a serious misreading'; it insists 'the sequoia' still deserves protection. It attacks an idea, not the protection of wild places.",
+            "seductive_element": "A passage that debunks 'wilderness' can look like it is debunking the value of wild places themselves."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage asks for a WIDER care that includes both the sequoia AND the roadside weed; it does not propose reallocating focus away from wild areas.",
+            "seductive_element": "The emphasis on neglected everyday nature can be pushed into 'focus there instead'."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The removal of inhabitants is one piece of evidence in paragraph 2, not the passage's thesis, which is about the wilderness ideal and its consequences.",
+            "seductive_element": "It restates a striking, morally charged detail and mistakes the evidence for the conclusion."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0018-q2",
+      "type": "inference",
+      "stem": "The author's claim that wilderness is 'a taste, and a recent one' most directly implies that",
+      "options": {
+        "A": "the reverence for wild nature is a historically contingent attitude rather than a universal human response",
+        "B": "people in the past were incapable of appreciating natural beauty",
+        "C": "wild landscapes only became beautiful once industry had transformed them",
+        "D": "rural people have always valued wilderness more than city dwellers"
+      },
+      "correct": "A",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "correct_reasoning": "Paragraph 3 says wild country was long 'frightening… not sublime', becoming an object of awe 'only in the last few centuries'. Calling this reverence 'a taste, and a recent one' implies it is a historically contingent attitude, not a universal or natural response — option A.",
+        "passage_anchor": "rc-0018-p3",
+        "question_type_note": "This inference reads the consequence of 'recent taste': the attitude could have been, and was, otherwise — it is contingent.",
+        "reading_habit": "When an author dates an attitude ('only in the last few centuries'), infer contingency — that it is cultural and could differ — not a claim about people's capacities.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says wild country was seen as frightening, not that people 'could not appreciate natural beauty'. It is about a specific attitude to wilderness, not a general incapacity.",
+            "seductive_element": "'They didn't revere it' slides easily into 'they couldn't appreciate beauty', which sounds like the same thing."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Industry did not transform the wild landscapes; it made them 'newly precious' by contrast. The change was in viewers' tastes, not in the mountains.",
+            "seductive_element": "Industry is named as the cause of the shift, so a reader may attribute the change to the land rather than the attitude."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the ideal is held 'most strongly by those whose lives are least wild' — the wealthy urban admirer, not the rural labourer. This reverses the claim.",
+            "seductive_element": "One might romantically assume country people love wilderness most."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0018-q3",
+      "type": "tone",
+      "stem": "The author's attitude toward the wilderness ideal is best characterized as",
+      "options": {
+        "A": "scornful of those who value wild places",
+        "B": "critical of the idea while sympathetic to the concern for nature that motivates it",
+        "C": "nostalgic for a time when wilderness was feared",
+        "D": "neutral, merely reporting the history of an idea"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "The author calls the impulse 'generous' and the preserved landscapes 'real', insists the critique is 'not an argument against protecting wild places', and asks for 'not less care but a wider one'. The stance is a critique of the idea paired with sympathy for the underlying environmental concern — option B.",
+        "passage_anchor": "rc-0018-p1 and rc-0018-p5",
+        "question_type_note": "CAT tone answers are moderate; here the author criticises an idea without turning against the people or the goal behind it.",
+        "reading_habit": "Separate criticism of an IDEA from hostility to the people who hold it — the correct tone often keeps warmth toward the motive while questioning the concept.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "'Scornful' contradicts the author's explicit generosity toward the impulse and respect for the landscapes it saved. The critique is warm, not contemptuous.",
+            "seductive_element": "Because the author critiques a cherished idea, a reader who reads the passage as an attack reaches for a hostile word."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The author notes wilderness was once feared but expresses no longing for that fear; the historical point serves the argument about contingency, not nostalgia.",
+            "seductive_element": "Paragraph 3's history of dread can be misread as a wish to return to it."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The author does report history but is far from neutral — the passage argues a pointed thesis and issues a warning. Neutrality names only the reporting and misses the argument.",
+            "seductive_element": "The measured, essayistic tone can be mistaken for detached reportage."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0018-q4",
+      "type": "author_purpose",
+      "stem": "The author describes the wilderness ideal as potentially 'a permission slip for ruining everywhere else' in order to",
+      "options": {
+        "A": "accuse conservationists of deliberately destroying inhabited land",
+        "B": "identify the specific harm that follows from locating real nature only in the pristine and faraway",
+        "C": "argue that no land should be legally protected as wilderness",
+        "D": "praise the wilderness ideal for concentrating protection where it is most needed"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "correct_reasoning": "The phrase follows the reasoning that if nature is 'the place without us', then everywhere we are becomes 'not nature, and therefore not our concern'. The vivid phrase names the danger: idealising the pristine licenses neglect of everywhere inhabited. Its purpose is to make that specific harm sharp — option B.",
+        "passage_anchor": "rc-0018-p4",
+        "question_type_note": "Purpose questions ask what work a vivid phrase does; here it dramatizes the consequence the paragraph has just argued.",
+        "reading_habit": "Attach a striking phrase to the argument it caps; the author's purpose is almost always to crystallise the point just made, not to launch a new accusation.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The harm described is a licensing effect of an idea, not deliberate destruction by conservationists; the author calls their impulse 'generous'.",
+            "seductive_element": "'Permission slip for ruining' sounds like an accusation of intent."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage supports protecting the sequoia and merely wants protection extended; it does not oppose legal wilderness.",
+            "seductive_element": "A critique of the wilderness IDEA can be misread as opposition to wilderness LAW."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The phrase is a criticism, not praise; the author faults the ideal for narrowing concern, not commends it for concentrating protection.",
+            "seductive_element": "'Concentrating protection where most needed' is a charitable spin the phrase's negative force rules out."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0018-q5",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the final paragraph, the phrase 'conceded the very ground' most nearly means",
+      "options": {
+        "A": "given up the territory on which the main struggle must occur",
+        "B": "admitted a point in a friendly debate",
+        "C": "physically surrendered a piece of protected land",
+        "D": "agreed to compromise on a minor issue"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The sentence says a love of nature that defines humanity as nature's opposite 'has quietly conceded the very ground on which most of the fight for the earth must be waged'. 'Ground' is the inhabited world where the real struggle happens, and 'conceded' means surrendered it in advance. Option A captures this figurative sense of giving up the crucial terrain.",
+        "passage_anchor": "rc-0018-p5",
+        "question_type_note": "Vocabulary-in-context here rewards reading 'ground' figuratively as the arena of struggle, consistent with the war metaphor ('fight… waged').",
+        "reading_habit": "Let a controlling metaphor fix a phrase's sense: 'fight… waged' turns 'ground' into a battlefield, so 'conceded the ground' means surrendering the decisive terrain.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "'Concede a point' is a real idiom, but here 'ground' is the terrain of the whole fight, not a debating point; the metaphor is military, not conversational.",
+            "seductive_element": "'Conceded' commonly appears in the phrase 'concede a point', pulling toward the debate sense."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The 'ground' is figurative — the inhabited world where the struggle occurs — not a literal parcel of land surrendered.",
+            "seductive_element": "The passage is about land, so a literal reading of 'ground' feels natural."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The passage describes surrendering the decisive terrain — 'most of the fight' — not a minor compromise.",
+            "seductive_element": "'Conceded' can suggest a small give-and-take, understating the scale the sentence intends."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "pristine",
+      "passage_use": "designated as pristine had for centuries been hunted, burned, farmed",
+      "meaning_here": "in an original, unspoiled, untouched condition",
+      "difficulty": "medium"
+    },
+    {
+      "word": "sublime",
+      "passage_use": "wild country was not sublime but frightening",
+      "meaning_here": "inspiring awe and grandeur, often mixed with a sense of vastness",
+      "difficulty": "hard"
+    },
+    {
+      "word": "abdication",
+      "passage_use": "an ethic that cares for the earth only where it can pretend humanity is absent",
+      "meaning_here": "a giving up of responsibility (the sense of the 'permission slip' to neglect)",
+      "difficulty": "hard"
+    },
+    {
+      "word": "construct",
+      "passage_use": "something we have made rather than found",
+      "meaning_here": "an idea built by a culture rather than discovered in nature",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage criticises an idea that environmentalists hold dear — and the single biggest trap is to hear the critique as anti-environmental. Watch how carefully the author defends the goal even while attacking the concept, and keep those two apart.",
+    "one_sentence_summary": "The ideal of pristine, human-free wilderness is a recent cultural invention, and idealising it can license us to neglect the inhabited, everyday nature where most people live — so the essay asks for a wider environmentalism, not a smaller one.",
+    "main_idea": "'Wilderness' as untouched nature is something we made, not found: the revered wild places were once inhabited, and the awe we feel is a recent taste of the comfortable and urban. The real danger is that by locating true nature only in the pristine and faraway, we excuse ourselves from caring about the parks, farms, and towns we actually inhabit — so the critique calls for extending care, never withdrawing it from wild places.",
+    "simple_explanation": "No idea sits closer to the heart of modern environmentalism than wilderness: unspoiled nature, untouched by people, precious exactly because we've stayed out of it. On this view, to love the earth is to love the places we're absent from, and conservation means drawing a line around them and defending it. The impulse is generous, and it really has saved beautiful places. But the author says the idea deserves more suspicion than it gets — because the very 'purity' it prizes turns out to be something we made, not found.\n\nHere's the first piece of evidence. The wildernesses we most revere were, until recently, lived in. Valleys and forests later called 'pristine' had been hunted, burned, and farmed for centuries — and the people were removed, sometimes by force, so the land could look empty. That emptiness isn't the absence of a human past; it's the erasure of one. Calling such a place 'untouched' means you've forgotten who touched it.\n\nSecond, the idea is recent. For most of history, wild country wasn't holy — it was frightening, a wasteland to cross, not a cathedral to enter. Only in the last few centuries did mountains and forests become objects of awe, once industrial life grew comfortable and ugly enough to make the remote and empty feel precious. So reverence for wilderness is a taste, and a recent one — held most strongly by people whose own lives are least wild. Its natural home is the wealthy city-dweller, not the person scraping a living from the land.\n\nNow the crucial guardrail: none of this is an argument against protecting wild places, and reading it that way is a serious mistake. The subtler danger is this — if 'real nature' is only the pristine and faraway, we give ourselves permission to neglect the nature close at hand: the city park, the farmed valley, the ordinary places where most people live. If nature is by definition the place without us, then everywhere we are becomes 'not nature' and 'not our concern'. The wilderness ideal can turn into a permission slip for ruining everywhere else.\n\nSo the essay asks not for less care but for a wider one: an environmentalism that doesn't rely on the fantasy of human absence, that finds duty in the used, inhabited world too. The sequoia still deserves protecting — but so do the roadside weed, the working farm, and the river through the town. A love of nature that starts by making humanity nature's opposite has quietly surrendered the very ground where most of the fight for the earth has to happen.",
+    "why_difficult": "The thesis is delicate and runs against the reader's expectations twice. First, it attacks a concept (wilderness) that the reader associates with the good cause (the environment), so the mind wants to file the whole passage as either pro- or anti-environment — and it is neither in the simple sense. Second, the argument is about an idea's consequences, not about the value of wild places, so distractors that oppose protection, or that reallocate focus away from wilderness, feel like the passage's drift while actually being the misreadings it names.",
+    "author_intention": "To rescue environmental concern from a self-defeating idea — to show that the cult of the pristine, however well-meaning, quietly abandons most of the inhabited earth, and to argue for a care that includes where we actually live.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0018-p1",
+        "role": "States the cherished idea",
+        "note": "Wilderness = untouched nature, loved because we've stayed out. The author grants the impulse is generous and the saved places real — then says the purity it prizes is made, not found."
+      },
+      {
+        "paragraph_id": "rc-0018-p2",
+        "role": "Evidence: it was inhabited",
+        "note": "Revered 'pristine' lands were hunted and farmed for centuries; people were removed so the land could look empty. 'Untouched' means forgetting who touched it."
+      },
+      {
+        "paragraph_id": "rc-0018-p3",
+        "role": "Evidence: it's recent",
+        "note": "Wild country was long feared, not adored; awe for it is a taste of the last few centuries, strongest among the comfortable and urban, not those who live off the land."
+      },
+      {
+        "paragraph_id": "rc-0018-p4",
+        "role": "The real danger",
+        "note": "Guardrail: this is NOT anti-protection. The harm is that defining nature as 'the place without us' excuses neglect of the inhabited world — a 'permission slip for ruining everywhere else'."
+      },
+      {
+        "paragraph_id": "rc-0018-p5",
+        "role": "The constructive aim",
+        "note": "It asks for a WIDER care: protect the sequoia AND the roadside weed and the river through town. A nature-love that makes humanity nature's opposite surrenders the ground the fight needs."
+      }
+    ],
+    "tone_progression": "Generous toward the impulse it will criticise, then increasingly pointed as it exposes the idea's history and hidden cost, and finally constructive — issuing a correction and an appeal rather than a condemnation.",
+    "key_transitions": [
+      "'Yet the idea deserves more suspicion than it usually receives…' (end of paragraph 1) — praise turns to critique.",
+      "'None of this is an argument against protecting wild places, and it would be a serious misreading to take it as one.' (start of paragraph 4) — the author blocks the obvious misreading and names the real danger.",
+      "'What the critique asks for is not less care but a wider one…' (start of paragraph 5) — the passage turns from diagnosis to its positive proposal."
+    ],
+    "misunderstanding": "The dominant misreading is 'this passage is against protecting wilderness'. Paragraph 4 exists precisely to forbid it, and paragraph 5 insists the sequoia still deserves protection. A second misreading over-corrects into 'focus on cities and farms instead of wild areas', when the author asks to protect both. The passage criticises an idea and its side-effects, not the protection of nature.",
+    "traps_summary": "Nearly every distractor here weaponises the pro-/anti-environment frame: opposing protection, reallocating away from wilderness, accusing conservationists of intent, or hardening a dated attitude into an incapacity. The cure is to hold the two halves together — the idea is criticised, the goal is preserved and widened — and to keep the tone warm toward the motive.",
+    "reading_lesson": "When an author criticises an idea associated with a cause they support, track the line between attacking the concept and attacking the cause — and never let a critique of the idea collapse into opposition to the goal. The strongest distractors on such passages sit on the wrong side of that line (here, 'wild places aren't worth protecting'); the correct answers keep the author's real target (the idea and its consequences) precisely in view.",
+    "real_world": "This debate shapes real policy: whether conservation means only fencing off remote reserves, or also greening cities, restoring farmland, and cleaning the rivers people live beside. It also names a habit of mind well beyond ecology — how idealising a pure, faraway version of something (nature, virtue, community) can excuse neglect of the imperfect real thing in front of us.",
+    "takeaway": "A love of nature that defines humanity as nature's opposite has surrendered the ground where most of the fight for the earth must be waged.",
+    "reflection_question": "Where do you reserve your care for a pure, faraway ideal while neglecting the imperfect, inhabited version of it right in front of you?"
+  }
+}

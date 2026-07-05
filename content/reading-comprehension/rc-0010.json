@@ -1,0 +1,288 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0010",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "anthropology",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "structure-mapping",
+      "evidence-anchoring"
+    ],
+    "word_count": 424,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "specific_detail",
+      "inference",
+      "paragraph_function"
+    ],
+    "theme": "small talk as connective ritual rather than information exchange",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. 'Phatic communion' is a standard, textbook anthropological concept (coined by Bronisław Malinowski); no specific essay is adapted. Personal study only.",
+      "author": null
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Foundation-stage passage: one concept, concrete evidence, a warm register; the traps train the information-vs-function distinction. Owner review pending.",
+    "vocab_extracted": [
+      "phatic",
+      "ritual",
+      "cargo"
+    ]
+  },
+  "passage": {
+    "title": "Words That Do No Work",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0010-p1",
+        "text": "Several times a day you take part in an exchange that transmits almost nothing. 'How are you?' 'Fine — you?' 'Fine.' Nobody has learned anything, and nobody expected to. If conversation is a device for moving information from one head to another, such talk is spectacularly inefficient: we remark on weather the other person can plainly see, ask questions whose answers we do not wait for, and repeat formulas our grandparents used in the same situations. A visitor from a purely logical planet would conclude that half of human speech is broken."
+      },
+      {
+        "id": "rc-0010-p2",
+        "text": "Anthropologists long ago gave this apparently broken speech a name — phatic communion — and a defence. The purpose of such talk, they argued, is not to inform but to connect. The words work less like envelopes carrying messages and more like touch. Many primates maintain their alliances by grooming one another for hours; human beings, living in groups far too large for that, may accomplish a good part of the same work with sound. On this view, what matters is not what the words say but that they pass between us at all."
+      },
+      {
+        "id": "rc-0010-p3",
+        "text": "The clearest evidence for this reading is what happens when the ritual is skipped. A colleague who walks past without the usual half-sentence has, strictly, deprived you of no information — and yet something has unmistakably been said. Silence between strangers in a lift is not experienced as neutral; it must be managed, endured, sometimes broken by a remark about the slowness of lifts. And this explains why the formulas survive unchanged for generations. A phrase whose content mattered would need constant updating. A phrase that exists in order to be exchanged, like a handshake, needs only to be recognisable."
+      },
+      {
+        "id": "rc-0010-p4",
+        "text": "None of this convicts small talk of emptiness — rather the reverse. Judged by its real function, chatter about nothing is skilled social work: it signals attention, willingness, and harmlessness, and it keeps a channel open at low cost so that the channel exists when something must travel down it. People who say they hate small talk usually mean they have measured it against the wrong standard, as one might fault a handshake for carrying no cargo. The measure of such talk is not what it transmits but what it maintains; and what it maintains, quietly and daily, is the ground on which the more serious conversations later stand."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0010-q1",
+      "type": "main_idea",
+      "stem": "The passage's central point is that",
+      "options": {
+        "A": "small talk appears pointless only when judged as information exchange; its real work is creating and maintaining social connection",
+        "B": "human conversation evolved directly from the grooming behaviour of primates",
+        "C": "small talk is an inefficient use of speech that survives mainly out of habit and politeness",
+        "D": "all human conversation is ultimately about social bonding rather than the exchange of information"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "The passage sets up the puzzle (talk that transmits nothing, p1), names its resolution (phatic communion: connection, not information, p2), gives evidence (the cost of skipping it, p3), and re-values small talk by its true function (p4). Option A carries that whole arc, including the key move — the change of standard from 'what it transmits' to 'what it maintains'.",
+        "passage_anchor": "rc-0010-p2 and rc-0010-p4",
+        "question_type_note": "Main-idea options must be judged by coverage and strength: the right answer spans all four paragraphs without claiming more than the author does.",
+        "reading_habit": "When a passage rescues something that looked silly or broken, state the rescue in one line — 'X looks like a failure of A, but it is a success of B' — and match options against that line.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The grooming comparison is offered cautiously ('may accomplish a good part of the same work') as an analogy for function, not as a claim about evolutionary descent.",
+            "seductive_element": "It reuses the passage's most striking image and sounds like the scientific version of the argument."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage argues small talk only looks inefficient under the wrong standard; paragraph 4 explicitly calls it 'skilled social work', not a habit to be excused.",
+            "seductive_element": "Paragraph 1 says exactly this — a reader who anchored to the setup, not the resolution, chooses it."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The claim concerns phatic talk, not all conversation; paragraph 4 in fact reserves a place for 'the more serious conversations' where content does travel.",
+            "seductive_element": "It sounds like the passage's idea, generalised into a grander theory — and grander theories feel like main ideas."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0010-q2",
+      "type": "specific_detail",
+      "stem": "According to the passage, the formulas of small talk survive unchanged for generations because",
+      "options": {
+        "A": "they were fixed at a time when social hierarchies were more rigid",
+        "B": "their purpose is to be exchanged and recognised, so their content never needs updating",
+        "C": "people fear that altering them would give offence",
+        "D": "language as a whole changes far more slowly than social customs do"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "correct_reasoning": "Paragraph 3 states the reason directly: 'A phrase whose content mattered would need constant updating. A phrase that exists in order to be exchanged, like a handshake, needs only to be recognisable.' Option B is a faithful paraphrase of exactly this contrast.",
+        "passage_anchor": "rc-0010-p3",
+        "question_type_note": "Detail questions reward returning to the text and matching the stated reason — not a plausible reason the passage never gives.",
+        "reading_habit": "For 'because' questions, find the passage's own causal sentence before reading the options; three of the four options usually offer causes the text never states.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Social hierarchies are never mentioned; the passage's explanation concerns the function of the phrases, not the era of their origin.",
+            "seductive_element": "Talk of grandparents and unchanged formulas gives the option a plausible historical flavour."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Fear of giving offence appears nowhere; the passage explains persistence by function, not by social anxiety.",
+            "seductive_element": "It fits everyday experience of politeness, so it reads as common sense."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage implies content-bearing phrases would change ('need constant updating'); it is the special function of phatic phrases, not the general slowness of language, that preserves them.",
+            "seductive_element": "It sounds like a sober linguistic generalisation, and the passage is partly about language."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0010-q3",
+      "type": "inference",
+      "stem": "The author would most likely say that a person who answers 'How are you?' with a detailed account of their health has",
+      "options": {
+        "A": "restored the question to its original and proper use",
+        "B": "behaved rudely and damaged the relationship",
+        "C": "violated an unspoken social law that exists in every culture",
+        "D": "mistaken a connective ritual for a request for information"
+      },
+      "correct": "D",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "correct_reasoning": "The passage's core distinction is between speech that informs and speech that connects, and 'How are you?' is its opening example of the latter ('nobody expected to' learn anything, p1). Treating it as a genuine question is therefore, in one step, mistaking the exchange's kind — precisely option D. The other options push further than the text allows.",
+        "passage_anchor": "rc-0010-p1 and rc-0010-p2",
+        "question_type_note": "Inference questions reward the smallest conclusion the passage forces; options that add judgments (rudeness) or universality (every culture) exceed the licence.",
+        "reading_habit": "When applying a passage's distinction to a new case, carry over only the distinction — resist adding the moral or social judgment the passage never made.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage never suggests the question was 'originally' informational and later degraded; its whole point is that such phrases function as ritual, so the detailed answer misreads, not restores.",
+            "seductive_element": "It flatters the intuition that literal answers are the honest, correct ones."
+          },
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage analyses what such talk does; it never grades individual missteps as rude or relationship-damaging. The mistake is conceptual, not a social offence the text convicts anyone of.",
+            "seductive_element": "Everyday etiquette agrees with it, so it feels like the passage's practical upshot."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "'Every culture' claims a universality the passage never asserts; it speaks of the ritual's function where it exists, with hedges like 'may accomplish', not of an exceptionless law.",
+            "seductive_element": "Anthropological framing invites the leap from 'humans do this' to 'all humans everywhere must'."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0010-q4",
+      "type": "paragraph_function",
+      "stem": "The comparison with primate grooming in the second paragraph serves to",
+      "options": {
+        "A": "prove that small talk is a biological instinct rather than a learned custom",
+        "B": "explain why human groups grew too large to maintain bonds by touch",
+        "C": "illustrate how connection can be maintained by an activity whose content is beside the point",
+        "D": "suggest that speech is a poor substitute for physical closeness"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "The grooming image appears immediately after the claim that phatic words 'work less like envelopes… and more like touch'. Grooming maintains alliances though it carries no message — exactly the property the paragraph attributes to small talk. The example carries that one claim: connection without content.",
+        "passage_anchor": "rc-0010-p2",
+        "question_type_note": "Function questions ask what claim an example was hired to carry; the answer sits in the sentence the example serves, not in stronger claims it might suggest.",
+        "reading_habit": "When you meet an analogy, name the single property being borrowed ('like touch: bonding without message') — options that borrow any other property of the analogy are traps.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The paragraph offers a hedged functional parallel ('may accomplish a good part of the same work'), not a proof, and says nothing about instinct versus learning.",
+            "seductive_element": "Evolutionary comparisons often are used to argue for instinct, so the move feels familiar."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Group size is mentioned in passing to set up the analogy, but the example's purpose is to illuminate what small talk does, not to explain human demography.",
+            "seductive_element": "The detail genuinely appears in the same sentence, so it matches memory."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage treats talk as successfully doing grooming's work at scale — an achievement, not a poor substitute.",
+            "seductive_element": "Calling words a substitute for touch invites a ranking, and rankings feel insightful."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "phatic",
+      "passage_use": "gave this apparently broken speech a name — phatic communion",
+      "meaning_here": "serving to create social connection rather than to convey information",
+      "difficulty": "hard"
+    },
+    {
+      "word": "ritual",
+      "passage_use": "what happens when the ritual is skipped",
+      "meaning_here": "a fixed, repeated social exchange whose form matters more than its content",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cargo",
+      "passage_use": "as one might fault a handshake for carrying no cargo",
+      "meaning_here": "a load of content or information (used figuratively)",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A gentle passage with one sharp move: it changes the standard by which something is judged. Watch for the moment the measuring stick is swapped — the questions live there.",
+    "one_sentence_summary": "Small talk looks broken only when measured as information exchange; measured by what it actually does — maintain connection — it is skilled and necessary social work.",
+    "main_idea": "Phrases like 'How are you?' carry almost no information, and that is not a defect: their job is to connect people, not inform them. Judged by that real function, small talk quietly maintains the ground serious conversation later stands on.",
+    "simple_explanation": "The passage starts with a puzzle. Every day we say things like 'How are you?' — 'Fine' without exchanging any real information. If talking is supposed to move facts between heads, this kind of talk looks useless.\n\nThen the author gives the answer anthropologists proposed: this speech has a different job. It is called phatic communion — talk whose purpose is connection, not content. The words are like touch. Monkeys and apes keep their friendships by grooming each other; humans, living in groups far too big for that, seem to do much of the same bonding with little exchanges of sound.\n\nHow do we know this is the right explanation? Look at what happens when the ritual is skipped. A colleague who passes you silently has given you zero information — yet you feel that something was said. And notice that these phrases never change across generations: a phrase that carried real content would need updating, but a phrase that exists just to be exchanged, like a handshake, only needs to be recognisable.\n\nSo the ending flips the usual complaint. Small talk is not empty; it is skilled work that keeps a channel open cheaply, so the channel exists when something important must travel through it. People who hate small talk are grading it by the wrong exam.",
+    "why_difficult": "The difficulty is not the vocabulary — it is that the passage swaps standards midway. Paragraph 1 honestly voices the 'small talk is useless' view, and readers who anchor there answer every question from the setup instead of the resolution. The other struggle is strength: the author hedges ('may accomplish'), while the tempting options speak of instincts, laws, and every culture.",
+    "author_intention": "To take a daily behaviour the reader half-despises and show that, judged by its true function, it deserves respect — teaching, along the way, that 'what is this for?' matters more than 'what does this contain?'",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0010-p1",
+        "role": "The puzzle",
+        "note": "Half of daily speech transmits nothing — 'How are you?' 'Fine.' If talk is for moving information, this talk looks broken. The author states the complaint at full strength."
+      },
+      {
+        "paragraph_id": "rc-0010-p2",
+        "role": "Names the answer",
+        "note": "Anthropologists call it phatic communion: speech that connects rather than informs. Words as touch — the way grooming bonds primates, small exchanges may bond us."
+      },
+      {
+        "paragraph_id": "rc-0010-p3",
+        "role": "The evidence",
+        "note": "Skip the ritual and feel the difference: the silent colleague, the lift. And the formulas never change because they only need to be recognisable, like a handshake."
+      },
+      {
+        "paragraph_id": "rc-0010-p4",
+        "role": "The re-valuation",
+        "note": "Small talk is skilled work: it keeps a cheap channel open so serious things can travel later. Those who hate it are measuring it against the wrong standard."
+      }
+    ],
+    "tone_progression": "Playful and puzzled at the start (the visitor from a logical planet), calmly explanatory in the middle, and warmly appreciative by the end — the voice of someone defending an underdog.",
+    "key_transitions": [
+      "'Anthropologists long ago gave this apparently broken speech a name — and a defence.' (start of paragraph 2) — the puzzle acquires its answer, and the passage's real standard is introduced.",
+      "'None of this convicts small talk of emptiness — rather the reverse.' (start of paragraph 4) — the author turns explanation into re-valuation."
+    ],
+    "misunderstanding": "The classic misreading is to remember the complaint instead of the defence: 'small talk is inefficient' is stated so vividly in paragraph 1 that hurried readers report it as the thesis. A second misreading upgrades the grooming analogy into a claim about evolution — the passage borrows one property from grooming (bonding without content), nothing more.",
+    "traps_summary": "This passage's wrong options either froze at paragraph 1 (the complaint), stretched a hedged analogy into a biological claim, or inflated a local point into a law about all conversation in every culture. The recurring cure: note what standard the author finally applies, and at what strength.",
+    "reading_lesson": "When an author defends something that looks pointless, find the sentence where the measuring stick changes — 'the purpose is not X but Y'. From then on, judge every claim and every option by Y. Grading the passage's subject (or its options) by the standard the author rejected is the single most common way to lose these questions.",
+    "real_world": "Every 'nice weather today' to a neighbour, every 'reached safely' text that conveys nothing new, every emoji reply — these are channel maintenance, not information. Knowing this changes how you open meetings, emails, and difficult conversations: connection first, cargo after.",
+    "takeaway": "Some words are handshakes: judge them by the grip, not the cargo.",
+    "reflection_question": "Which small ritual in your day looks pointless but would be missed the moment it stopped?"
+  }
+}

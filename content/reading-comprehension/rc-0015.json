@@ -1,0 +1,345 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0015",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "tone-detection",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 571,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "tone",
+      "paragraph_function",
+      "strengthen_weaken"
+    ],
+    "theme": "the erosion of moral skill when judgment is delegated to automated systems",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The concern with 'moral deskilling' through automation is discussed in technology ethics (e.g., the work of Shannon Vallor); no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Hard technology-ethics with a subtle thesis (not that machines decide badly, but that our capacity to decide atrophies). Includes a strengthen/weaken item on the load-bearing assumption. Owner review pending.",
+    "vocab_extracted": [
+      "atrophy",
+      "delegate",
+      "prudence",
+      "salient"
+    ]
+  },
+  "passage": {
+    "title": "The Outsourced Conscience",
+    "reading_time_min": 2.9,
+    "paragraphs": [
+      {
+        "id": "rc-0015-p1",
+        "text": "Most worries about handing decisions to machines take the form of a question about the machine: is its judgement good? Will the algorithm that screens loan applicants, or the system that flags which parolees to release, decide wisely and without bias? These are serious questions, and they have generated a serious literature. But they share an assumption worth noticing — that the thing at stake is the quality of the decision. There is a different worry, quieter and harder to measure, which concerns not the decision but the decider. It asks what happens to us when the decisions are no longer ours to make."
+      },
+      {
+        "id": "rc-0015-p2",
+        "text": "The analogy is with practical skills, which are known to atrophy when machines assume them. A generation raised on satellite navigation is, by several accounts, worse at building the mental maps that earlier travellers formed as a matter of course; the capacity was never lost by anyone who kept exercising it, but it was never built by those who did not have to. Moral capacities, on this view, are also skills — the ability to weigh competing goods, to notice what a situation demands, to feel the pull of another's need — and like other skills they are acquired only by repeated exercise. A person who has never had to decide whom to help, because a system always assigned the duty, may simply never develop the judgement that deciding builds."
+      },
+      {
+        "id": "rc-0015-p3",
+        "text": "It is important to state the claim carefully, because a careless version is false. The worry is not that automated systems make us behave worse in the moment; often they make us behave better, applying a consistency no tired human matches. Nor is it that any single delegated decision damages us; one outsourced choice is nothing. The claim is developmental and cumulative: a life in which the morally salient choices are increasingly pre-made is a life with fewer of the occasions on which moral perception is trained, and a faculty that is never trained does not arrive. The danger is not a wrong turn but an unbuilt capacity — an absence that, by its nature, its owner is poorly placed to notice."
+      },
+      {
+        "id": "rc-0015-p4",
+        "text": "This last feature makes the erosion peculiarly difficult to resist. A deskilled navigator at least discovers the loss the moment the signal drops. But moral deskilling removes the very faculty by which one might perceive that something is missing; the person who cannot weigh a hard case does not experience a gap where the weighing should be, only a smooth deference to whatever the system recommends. The situation is not hopeless — skills can be deliberately cultivated, and a society can choose to reserve certain decisions for human hands precisely in order to keep the capacity alive. But it requires seeing the value of a decision not only in its outcome but in what making it does to the one who makes it, which is not how efficiency teaches us to think."
+      },
+      {
+        "id": "rc-0015-p5",
+        "text": "Perhaps the deepest difficulty is that the argument cuts against a genuine good. Relieving people of hard choices is often a kindness, and the systems that do it frequently deliver fairer results than the humans they replace. To insist on preserving occasions for moral effort can sound like insisting on preserving hardship for its own sake. The reply is that some hardships are the exercise that builds an organ, and that a world arranged to spare us every difficult judgement may be arranging, with the best intentions, for a population that can no longer make one."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0015-q1",
+      "type": "main_idea",
+      "stem": "The passage is primarily concerned with arguing that",
+      "options": {
+        "A": "automated decision systems are usually more biased than the humans they replace",
+        "B": "delegating morally significant choices to machines may, over time, erode our own capacity for moral judgement",
+        "C": "individual automated decisions cause measurable moral harm each time they are made",
+        "D": "societies should abandon automated systems in favour of human decision-making"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "The passage shifts the worry from the decision to the decider (p1), argues moral capacities are skills that atrophy if unexercised (p2), states the claim as 'developmental and cumulative' (p3), and warns the loss is self-concealing (p4-p5). Option B captures this cumulative erosion-of-capacity thesis at the right strength ('may, over time').",
+        "passage_anchor": "rc-0015-p3",
+        "question_type_note": "The main idea here is the carefully-qualified developmental claim the author is at pains to distinguish from cruder versions.",
+        "reading_habit": "When an author spends a paragraph saying 'the careless version is false; the real claim is narrower', let that narrower claim be your main idea.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage grants that systems 'frequently deliver fairer results' and 'make us behave better'; bias of the machine is the OTHER worry it sets aside to make its point.",
+            "seductive_element": "Algorithmic bias is the famous debate, so a reader expects it to be the thesis."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 3 explicitly denies this: 'one outsourced choice is nothing'; the harm is cumulative, not per-decision.",
+            "seductive_element": "It uses the passage's vocabulary of harm and delegation while contradicting its key qualification."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The author calls the situation 'not hopeless' and recommends reserving SOME decisions for humans, not abandoning automation; paragraph 5 concedes the systems' genuine benefits.",
+            "seductive_element": "It sounds like the natural policy upshot of a worry about machines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0015-q2",
+      "type": "inference",
+      "stem": "The comparison with satellite navigation is used to support the inference that",
+      "options": {
+        "A": "moral judgement, like spatial skill, may fail to develop in those who never have to exercise it",
+        "B": "people who use satellite navigation are also worse at moral reasoning",
+        "C": "technologies that assist us always leave our underlying abilities intact",
+        "D": "moral skills, unlike navigation, cannot be regained once they are lost"
+      },
+      "correct": "A",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 draws the parallel precisely: a capacity 'was never built by those who did not have to' exercise it, and 'Moral capacities, on this view, are also skills' acquired 'only by repeated exercise'. The navigation case licenses the inference that unexercised moral judgement may never develop — option A.",
+        "passage_anchor": "rc-0015-p2",
+        "question_type_note": "This inference reads the single property the analogy transfers: skills unbuilt by disuse, applied from spatial to moral.",
+        "reading_habit": "With an analogy, carry across only the property the author names — here 'a skill that must be exercised to develop', nothing more.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage never claims that satnav users are morally worse; navigation is an analogy for how skills atrophy, not a claim that the two skills rise and fall together in the same people.",
+            "seductive_element": "It fuses the two examples into a single empirical claim, which sounds like a direct reading of the analogy."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The satnav point is that assistance can leave abilities UNBUILT; the analogy shows the opposite of 'always leave intact'.",
+            "seductive_element": "It states a comforting general view of helpful technology that the passage is arguing against."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage says skills 'can be deliberately cultivated' (p4); it never claims moral skills, once lost, are unrecoverable, still less that they differ from navigation in this respect.",
+            "seductive_element": "It adds a dramatic asymmetry that a reader might expect from a passage about irreversible loss."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0015-q3",
+      "type": "tone",
+      "stem": "The author's stance toward automated decision systems is best described as",
+      "options": {
+        "A": "alarmed and calling for their removal",
+        "B": "concerned about a specific long-term cost while acknowledging their real benefits",
+        "C": "enthusiastic about their fairness and consistency",
+        "D": "indifferent, treating the issue as merely theoretical"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "correct_reasoning": "The author repeatedly concedes the systems' virtues — they 'make us behave better', deliver 'fairer results', relieving choice is 'often a kindness' — while pressing one particular, cumulative danger and calling the situation 'not hopeless'. That is targeted concern with acknowledgement, exactly option B.",
+        "passage_anchor": "rc-0015-p5",
+        "question_type_note": "CAT tone answers are moderate; here the author balances a genuine worry against genuine goods, which rules out both alarm and enthusiasm.",
+        "reading_habit": "When an author keeps conceding the other side's merits, the correct tone is 'concerned but fair', never the strongest negative option.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The author explicitly calls the situation 'not hopeless' and recommends reserving only 'certain decisions' for humans, not removing the systems. 'Alarmed' overshoots the measured register.",
+            "seductive_element": "Because the passage warns of an erosion of conscience, a reader who reads it as a warning cry reaches for alarm."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The author does acknowledge fairness and consistency, but the passage's thrust is a warning; enthusiasm names only the conceded half and drops the central concern.",
+            "seductive_element": "The genuine praise of the systems' consistency can be mistaken for the author's overall verdict."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author treats the issue as urgent and practically important, offering remedies; 'indifferent' contradicts the whole passage.",
+            "seductive_element": "The measured, unshrill tone can be misread as detachment."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0015-q4",
+      "type": "paragraph_function",
+      "stem": "The third paragraph ('It is important to state the claim carefully…') functions chiefly to",
+      "options": {
+        "A": "concede that the author's worry is ultimately unfounded",
+        "B": "narrow the thesis by ruling out cruder versions and fixing it as developmental and cumulative",
+        "C": "introduce statistical evidence that automation harms moral behaviour",
+        "D": "restate the opening worry about biased machine decisions"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "correct_reasoning": "Paragraph 3 explicitly guards the claim: it is 'not that automated systems make us behave worse in the moment', 'nor… that any single delegated decision damages us'; rather 'the claim is developmental and cumulative'. Its function is to fence off false versions and pin the real one — option B.",
+        "passage_anchor": "rc-0015-p3",
+        "question_type_note": "Function questions ask what a paragraph does for the argument; this one sharpens scope by eliminating misreadings.",
+        "reading_habit": "A paragraph built from 'not this, nor this, but that' is defining the thesis by exclusion — its function is precision, and its final clause is the real claim.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph strengthens the worry by making it defensible; it concedes weaker claims are false only to preserve the real one, not to abandon it.",
+            "seductive_element": "The self-critical opening ('a careless version is false') can look like the author backing down."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No statistics appear; the paragraph reasons about the developmental structure of the claim, not empirical data.",
+            "seductive_element": "'Cumulative' and 'measure' hint at data the paragraph never actually supplies."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The bias-of-machines worry was raised in paragraph 1 precisely to set it aside; paragraph 3 refines the DIFFERENT worry about the decider, not the machine.",
+            "seductive_element": "Both paragraphs discuss automated decisions, so their roles can blur in memory."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0015-q5",
+      "type": "strengthen_weaken",
+      "stem": "Which of the following, if true, would most weaken the author's central argument?",
+      "options": {
+        "A": "Automated systems occasionally produce decisions that a careful human would reject",
+        "B": "Moral judgement is a fixed trait largely set in early childhood and unaffected by how often adults exercise it",
+        "C": "Many people report feeling relieved when a system makes a hard choice for them",
+        "D": "Some societies already reserve certain sensitive decisions for human officials"
+      },
+      "correct": "B",
+      "estimated_time_sec": 110,
+      "explanation": {
+        "correct_reasoning": "The argument rests on one load-bearing assumption: that moral judgement is a SKILL, built and maintained by exercise (p2-p3). If moral judgement were instead a fixed trait set in childhood and unaffected by adult exercise, then removing occasions for it would not erode it — the mechanism of the whole argument collapses. Option B strikes exactly this assumption.",
+        "passage_anchor": "rc-0015-p2 and rc-0015-p3",
+        "question_type_note": "A weakener must hit the argument's load-bearing assumption; here that assumption is that moral judgement behaves like a trainable, atrophiable skill.",
+        "reading_habit": "To weaken an argument, find the unstated premise the conclusion cannot survive without, then look for the option that denies it — not one that merely dislikes the conclusion.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The author already grants that machines err occasionally; the argument is not about decision quality but about the atrophy of the decider's capacity, which this leaves untouched.",
+            "seductive_element": "It sounds like a criticism of automation, and criticising automation feels aligned with weakening a pro-automation claim — but the author is not pro-automation in that sense."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Relief is consistent with the argument — the author says relieving people of hard choices is 'often a kindness'. Feeling relieved does not show the capacity is preserved.",
+            "seductive_element": "It seems to defend the systems, so it can look like a rebuttal."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Reserving decisions for humans is the author's own proposed remedy; far from weakening the argument, it presupposes the argument is right.",
+            "seductive_element": "It mentions a real practice and sounds like evidence about the world, which can feel like it bears against the worry."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "atrophy",
+      "passage_use": "practical skills, which are known to atrophy when machines assume them",
+      "meaning_here": "to waste away or weaken from lack of use",
+      "difficulty": "hard"
+    },
+    {
+      "word": "delegate",
+      "passage_use": "any single delegated decision",
+      "meaning_here": "to hand over a task or responsibility to another agent",
+      "difficulty": "medium"
+    },
+    {
+      "word": "prudence",
+      "passage_use": "the ability to weigh competing goods, to notice what a situation demands",
+      "meaning_here": "practical wisdom in judging what to do (the capacity the passage says is trained)",
+      "difficulty": "hard"
+    },
+    {
+      "word": "salient",
+      "passage_use": "the morally salient choices are increasingly pre-made",
+      "meaning_here": "most noticeable or important; standing out as significant",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The famous worry about machines is 'do they decide well?' This passage sets that aside for a subtler one — 'what happens to us when we stop deciding?' Your task is to keep those two worries apart, because almost every trap swaps one for the other.",
+    "one_sentence_summary": "Beyond the familiar question of whether automated systems decide well lies a quieter one: if machines increasingly make our morally significant choices for us, the human capacity for moral judgement — a skill built only by exercise — may gradually fail to develop, a loss we are especially unable to notice.",
+    "main_idea": "Moral judgement is a skill that grows only through practice. As automated systems take over more of our morally significant decisions, we lose the occasions that build that skill — so the real danger is not bad machine decisions but an unbuilt human capacity, an erosion that hides itself because the faculty needed to notice it is the very one being lost.",
+    "simple_explanation": "When people worry about letting machines make decisions, they usually ask about the machine: is it fair, is it biased, does it choose well? Those are good questions. But notice they all assume the thing that matters is the quality of the decision. This passage raises a different worry — about the decider, not the decision. What happens to us when the choices stop being ours?\n\nThink about practical skills. People raised on satnav are, by many accounts, worse at forming mental maps — not because anyone lost the skill, but because those who never had to navigate never built it. The author says moral capacities are like this too: weighing competing goods, sensing what a situation needs, feeling another person's need — these are skills you develop only by exercising them. Someone who never had to decide whom to help, because a system always assigned it, may simply never grow the judgement that deciding builds.\n\nNow the careful part, because a sloppy version is false. The worry is NOT that machines make us behave worse right now — often they make us behave better, more consistently than any tired human. And it's NOT that one outsourced choice harms you — one is nothing. The claim is about development over time: a life where the important moral choices are increasingly pre-made is a life with fewer chances to train moral perception, and a faculty that's never trained never arrives. The danger isn't a wrong turn; it's a capacity that was never built.\n\nAnd here's the cruel twist: this loss hides itself. A driver who forgot how to navigate notices the moment the signal drops. But losing moral skill removes the very faculty you'd use to notice the loss — you don't feel a gap where judgement should be, just a smooth willingness to go along with whatever the system says. It's not hopeless: we can deliberately cultivate these skills and reserve some decisions for human hands. But that means valuing a decision not just for its outcome but for what making it does to the person who makes it — which is not how 'efficiency' teaches us to think.\n\nThe deepest problem, the author admits, is that the argument fights a real good. Sparing people hard choices is often kind, and the systems are often fairer than the humans they replace. Insisting on keeping hard choices can sound like insisting on pointless hardship. The reply: some hardships are the exercise that builds an organ — and a world designed to spare us every hard judgement may be quietly producing people who can no longer make one.",
+    "why_difficult": "The thesis is subtle and easy to coarsen. The author is not saying machines decide badly (they often decide better), nor that any one delegated choice hurts us. The real claim is developmental, cumulative, and self-concealing — three qualifications a hurried reader drops. The passage even shares vocabulary (harm, bias, delegation) with the cruder worries it sets aside, so options that voice those cruder worries feel textually supported.",
+    "author_intention": "To redirect the ethics of automation from the output of decisions to their effect on the deciders — and to do so honestly, conceding the systems' real benefits so the remaining worry is undeniable.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0015-p1",
+        "role": "Shifts the question",
+        "note": "The usual worry is 'does the machine decide well?' The author sets that aside for a quieter one: what happens to us when the decisions are no longer ours?"
+      },
+      {
+        "paragraph_id": "rc-0015-p2",
+        "role": "The skill analogy",
+        "note": "Satnav users never build the mental maps earlier travellers formed. Moral capacities are skills too, built only by exercise — so someone who never has to decide may never develop the judgement deciding builds."
+      },
+      {
+        "paragraph_id": "rc-0015-p3",
+        "role": "States the claim precisely",
+        "note": "Not that machines make us act worse now (often better), not that one choice harms us (nothing). The claim is developmental and cumulative: fewer occasions, an unbuilt faculty."
+      },
+      {
+        "paragraph_id": "rc-0015-p4",
+        "role": "The self-hiding loss",
+        "note": "Unlike a lost sense of direction, moral deskilling removes the faculty that would notice it. Remedy exists — reserve some decisions for humans — but only if we value what deciding does to the decider."
+      },
+      {
+        "paragraph_id": "rc-0015-p5",
+        "role": "The honest tension",
+        "note": "The argument cuts against a real good: sparing hard choices is kind and often fairer. But some hardships are the exercise that builds an organ; a world that spares us every judgement may leave us unable to make one."
+      }
+    ],
+    "tone_progression": "Measured throughout: it opens by calmly reframing, turns careful and self-correcting in the middle as it fences off false versions, and ends candid about the cost of its own conclusion — worried, fair, never shrill.",
+    "key_transitions": [
+      "'There is a different worry, quieter and harder to measure, which concerns not the decision but the decider.' (paragraph 1) — the whole passage's pivot from machine to human.",
+      "'It is important to state the claim carefully, because a careless version is false.' (start of paragraph 3) — the thesis is narrowed and protected.",
+      "'Perhaps the deepest difficulty is that the argument cuts against a genuine good.' (start of paragraph 5) — the author turns the knife on their own case."
+    ],
+    "misunderstanding": "Readers collapse the passage into the familiar 'machines are biased / machines decide badly' debate — which the author explicitly sets aside — or into 'each automated decision harms us', which paragraph 3 denies. The passage's claim is narrower and stranger: a cumulative failure of a skill to develop, concealed from the very person it happens to.",
+    "traps_summary": "The distractors here voice the cruder worries the author rejected (machine bias, per-decision harm), harden the measured tone into alarm, or, in the weaken question, attack the conclusion instead of the load-bearing 'moral judgement is a trainable skill' assumption. Separate decision-quality from decider-capacity, and answer at the passage's careful strength.",
+    "reading_lesson": "In evaluative questions, find the argument's load-bearing assumption — the unstated premise the conclusion cannot survive without — and judge strengthen/weaken options by whether they touch it. Objections that merely dislike the conclusion, or that attack a claim the author never made, are the classic traps; the real weakener denies the hidden premise (here, that moral judgement is a skill built by exercise).",
+    "real_world": "Think of GPS and your own sense of direction, autocorrect and your spelling, recommendation feeds and your taste — then apply it to consequential judgement: credit, hiring, medical triage, moderation. The passage asks a question worth carrying into every 'let the system handle it': what is this decision building or unbuilding in me?",
+    "takeaway": "Some hardships are the exercise that builds an organ; spare people every hard judgement and you may leave them unable to make one.",
+    "reflection_question": "Which judgements do you now let a system make for you — and are you keeping, or quietly losing, the ability to make them yourself?"
+  }
+}

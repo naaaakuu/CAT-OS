@@ -9,7 +9,7 @@
  * - CONTENT cache: passages, the registry, and schemas. Versioned
  *   independently (CONTENT_VERSION) so shipping new app code never
  *   evicts downloaded content, and new content never forces an app
- *   re-download. At today's library size (5 passages) everything is
+ *   re-download. At today's library size (20 passages) everything is
  *   precached; when the library grows large, this cache switches to
  *   cache-on-first-use without touching the shell strategy.
  *
@@ -20,8 +20,8 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 7;
-const CONTENT_VERSION = 3;
+const CACHE_VERSION = 8;
+const CONTENT_VERSION = 4;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
 const KEEP = [SHELL_CACHE, CONTENT_CACHE];
@@ -86,6 +86,7 @@ const CONTENT_FILES = [
   './content/schema/rc.schema.v1.json',
   './content/schema/rc.schema.v2.json',
   './content/schema/rc.schema.v3.json',
+  './content/schema/rc.schema.v4.json',
   './content/reading-comprehension/rc-0001.json',
   './content/reading-comprehension/rc-0002.json',
   './content/reading-comprehension/rc-0003.json',
@@ -94,6 +95,18 @@ const CONTENT_FILES = [
   './content/reading-comprehension/rc-0006.json',
   './content/reading-comprehension/rc-0007.json',
   './content/reading-comprehension/rc-0008.json',
+  './content/reading-comprehension/rc-0009.json',
+  './content/reading-comprehension/rc-0010.json',
+  './content/reading-comprehension/rc-0011.json',
+  './content/reading-comprehension/rc-0012.json',
+  './content/reading-comprehension/rc-0013.json',
+  './content/reading-comprehension/rc-0014.json',
+  './content/reading-comprehension/rc-0015.json',
+  './content/reading-comprehension/rc-0016.json',
+  './content/reading-comprehension/rc-0017.json',
+  './content/reading-comprehension/rc-0018.json',
+  './content/reading-comprehension/rc-0019.json',
+  './content/reading-comprehension/rc-0020.json',
 ];
 
 /* Install: precache shell + content, then take over promptly. */

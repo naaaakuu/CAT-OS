@@ -1,0 +1,345 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0012",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "tone-detection",
+      "structure-mapping",
+      "vocabulary-in-context"
+    ],
+    "word_count": 583,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "tone",
+      "logical_structure",
+      "vocabulary_in_context"
+    ],
+    "theme": "emergence and the limits of reductive explanation",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The debate over emergence and reductionism is a live topic in the philosophy of science; no specific essay is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Elite-register science-ideas passage with an understated thesis that occupies a middle position; the central near-tie is between the author's qualified emergentism and a stronger anti-reductionism the author declines. Owner review pending.",
+    "vocab_extracted": [
+      "reductive",
+      "tractable",
+      "constituents",
+      "vindicated"
+    ]
+  },
+  "passage": {
+    "title": "More Than the Sum",
+    "reading_time_min": 2.9,
+    "paragraphs": [
+      {
+        "id": "rc-0012-p1",
+        "text": "There is a confident story science tells about itself. Every phenomenon, however grand, is in the end the behaviour of its smallest parts; to explain the whole, decompose it, understand the pieces, and the whole follows. On this view a living cell is chemistry, chemistry is physics, and physics bottoms out in a handful of particles obeying a handful of laws. The programme has been spectacularly fruitful, and its defenders take its successes as evidence that the story is not merely a method but the literal architecture of the world. Nothing, they say, is added when parts combine; there is only more of the same, arranged."
+      },
+      {
+        "id": "rc-0012-p2",
+        "text": "Against this, a persistent intuition holds that certain wholes possess properties their parts do not, properties that appear only at a certain scale of organisation. A single water molecule is neither wet nor turbulent; wetness and turbulence are behaviours of many molecules together. Temperature is not a property any one particle has. Consciousness, whatever it is, is not obviously a property of a neuron. Such properties are called emergent, and the word marks a genuine puzzle: they depend entirely on the parts — remove the molecules and the wetness is gone — yet they cannot be located in, or read off from, any part considered alone."
+      },
+      {
+        "id": "rc-0012-p3",
+        "text": "It is tempting to treat this as a decisive refutation of the reductive story, and some have. But the careful emergentist claims something narrower and harder to dismiss. The claim is not that emergent properties float free of their physical basis — nothing in the passage of heat or the onset of turbulence violates a law of physics. The claim is about explanation, not about substance. Even granting that the whole is nothing but its parts arranged, it does not follow that the behaviour of the whole can be predicted, or even usefully described, from the laws governing the parts. The bridge from particles to turbulence may exist in principle and be permanently untraceable in practice, defeating not our physics but our arithmetic."
+      },
+      {
+        "id": "rc-0012-p4",
+        "text": "This distinction is easy to lose and worth holding. To say that a system is reducible in principle is to make a claim about the world: that no new force enters when the parts assemble. To say that it is reducible in practice is to make a claim about us: that we can actually run the derivation. The reductive story conflates the two, sliding from the first, which is plausible, to the second, which is often false. The strongest emergentism concedes the first entirely and attacks only the second — and in doing so it turns out to be not a piece of mysticism but a sober observation about the limits of tractable computation in a universe of staggering combinatorial size."
+      },
+      {
+        "id": "rc-0012-p5",
+        "text": "What follows is modest but real. Higher-level sciences — biology, meteorology, economics, the study of mind — are not merely provisional placeholders, waiting to be dissolved into physics once our instruments improve. Their concepts earn their keep by capturing regularities that are invisible at the level of particles and would remain invisible even to a demon who knew the position of every one. The reductionist was right that the world has no extra ingredients. He was wrong to conclude that the smallest scale is therefore the only one at which the world can be understood. Both halves of that sentence, held together, are the whole of the matter."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0012-q1",
+      "type": "main_idea",
+      "stem": "Which of the following best states the author's central position?",
+      "options": {
+        "A": "Emergent properties prove that wholes contain forces or ingredients not present in their parts",
+        "B": "The reductive programme in science has been so fruitful that talk of emergence is a distraction",
+        "C": "Even if wholes are nothing but their arranged parts, their behaviour often cannot be derived from the laws of those parts, so higher-level sciences are genuinely explanatory",
+        "D": "Since particle physics underlies everything, higher-level sciences are provisional and will eventually be absorbed into it"
+      },
+      "correct": "C",
+      "estimated_time_sec": 105,
+      "explanation": {
+        "correct_reasoning": "The author threads a middle path: conceding that the world has 'no extra ingredients' (p4, p5) while denying that everything is derivable from the parts in practice (p3, p4). The conclusion (p5) affirms higher-level sciences as genuinely explanatory, not provisional. Option C captures both halves — the concession and the limit — which the final sentence insists must be 'held together'.",
+        "passage_anchor": "rc-0012-p4 and rc-0012-p5",
+        "question_type_note": "When a passage stakes out a middle position, the main-idea answer must include BOTH the concession and the counter-claim; options that keep only one half are traps.",
+        "reading_habit": "For a passage that says 'X was right about this but wrong about that', your one-sentence summary must contain the whole sentence — the two halves together are the thesis.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "This is the strong anti-reductionism the author explicitly declines: paragraph 3 says nothing 'violates a law of physics' and paragraph 4 concedes 'no new force enters'. The author's emergentism is about explanation, not extra ingredients.",
+            "seductive_element": "It is the intuitive meaning of 'emergent' and the position paragraph 2 seems to be building toward, so a reader who stops at p2 chooses it."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the reductionist voice of paragraph 1, which the author spends the rest of the passage qualifying. The author takes emergence seriously, not as a distraction.",
+            "seductive_element": "Paragraph 1 states it confidently and grants the programme real success, which the author does not deny."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 5 directly rejects this: higher-level sciences are 'not merely provisional placeholders, waiting to be dissolved into physics'. The option asserts what the passage denies.",
+            "seductive_element": "It sounds like rigorous scientific humility — deferring to the most fundamental level."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0012-q2",
+      "type": "inference",
+      "stem": "The reference to 'a demon who knew the position of every particle' most directly supports the claim that",
+      "options": {
+        "A": "complete knowledge of the parts would still leave certain higher-level regularities unaccounted for",
+        "B": "no being, however powerful, could ever know the state of every particle",
+        "C": "higher-level sciences rely on approximations that a perfect calculator would discard",
+        "D": "the laws of physics are incomplete and require supplementation at higher scales"
+      },
+      "correct": "A",
+      "estimated_time_sec": 110,
+      "explanation": {
+        "correct_reasoning": "The demon is invoked to say that higher-level concepts 'capture regularities that are invisible at the level of particles and would remain invisible even to a demon who knew the position of every one'. The point is that even total particle-knowledge would miss those regularities — option A. The demon is a thought experiment about the sufficiency of particle knowledge, not about whether such knowledge is attainable.",
+        "passage_anchor": "rc-0012-p5",
+        "question_type_note": "This inference reads the function of a hypothetical: it exists to isolate what particle-level knowledge cannot deliver, even in the best case.",
+        "reading_habit": "When an author grants an impossible best case ('even a demon who knew everything'), they are conceding the strongest opposing assumption to make a point survive it — track what the concession is meant to prove.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The demon is granted omniscience precisely so the argument does not depend on the limits of knowledge; the point is that even WITH full knowledge, the regularities stay invisible. This option reverses the device's purpose.",
+            "seductive_element": "'Demon' and 'every particle' invite the familiar objection that such knowledge is impossible — but that is not the passage's move."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage does not say higher-level sciences use approximations a perfect calculator would discard; it says their regularities are real and invisible at the particle scale, which is the opposite of dispensable approximation.",
+            "seductive_element": "'Approximation' sounds like the sort of thing higher-level models do, so it feels technically informed."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 3 and 4 concede that no law of physics is violated and no new force enters; the physics is not incomplete. The gap is in derivation, not in the laws.",
+            "seductive_element": "If particle knowledge is insufficient, it can seem to follow that the laws are missing something — but the author locates the gap in tractability, not law."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0012-q3",
+      "type": "tone",
+      "stem": "The author's attitude toward the reductive story is best described as",
+      "options": {
+        "A": "dismissive of its claims and impatient with its defenders",
+        "B": "accepting of its metaphysics while rejecting its overreach about explanation",
+        "C": "enthusiastically supportive, treating its successes as decisive",
+        "D": "uncertain, unable to decide whether it is true or false"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "The author grants the reductive metaphysics — 'the world has no extra ingredients', 'no new force enters' — while charging it with sliding illegitimately from reducible-in-principle to reducible-in-practice (p4). The attitude is therefore acceptance of the substance-claim paired with rejection of the explanatory overreach. That is a precise, measured stance, exactly option B.",
+        "passage_anchor": "rc-0012-p4",
+        "question_type_note": "CAT tone answers are usually moderate and specific; here the author neither dismisses nor endorses the reductive story but accepts part and rejects part.",
+        "reading_habit": "When an author agrees with an opponent on one point and disagrees on another, the correct tone names that split precisely — avoid options that flatten it into pure approval or pure hostility.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "'Dismissive' and 'impatient' overstate it; the author calls the programme 'spectacularly fruitful' and concedes its central metaphysical claim. The critique is targeted, not contemptuous.",
+            "seductive_element": "Because the author ultimately corrects the reductionist, a reader who has decided the tone is 'against' reaches for the strongest negative word."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author explicitly denies that the successes are decisive for the strong claim, accusing defenders of conflating two senses of reducibility. Enthusiastic endorsement is the position being criticised.",
+            "seductive_element": "Paragraph 1's admiring description of the programme's fruitfulness can be mistaken for the author's own verdict."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The author is not undecided; a clear position is reached and defended in paragraphs 4-5. The care and hedging concern the scope of the claim, not the author's confidence in it.",
+            "seductive_element": "The passage's careful, qualified prose can read as fence-sitting rather than precision."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0012-q4",
+      "type": "logical_structure",
+      "stem": "The distinction drawn in the fourth paragraph between reducibility 'in principle' and 'in practice' functions in the argument to",
+      "options": {
+        "A": "concede that emergent properties violate physical law under certain conditions",
+        "B": "separate a claim about the world, which the author grants, from a claim about our abilities, which the author disputes",
+        "C": "introduce a new objection that the rest of the passage leaves unanswered",
+        "D": "show that the reductive and emergentist positions are ultimately identical"
+      },
+      "correct": "B",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 states the distinction as exactly this split: in-principle reducibility is 'a claim about the world' (no new force), which the author concedes; in-practice reducibility is 'a claim about us' (we can run the derivation), which the author disputes and says the reductive story falsely assumes. The distinction is the structural hinge that lets the author agree and disagree at once.",
+        "passage_anchor": "rc-0012-p4",
+        "question_type_note": "Structure questions ask what a move DOES for the argument; this distinction is the device that makes the author's middle position coherent.",
+        "reading_habit": "When an author draws an explicit distinction, ask which side they keep and which they attack — that allocation is usually the backbone of the whole argument.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage repeatedly denies any violation of physical law; the distinction exists precisely to preserve the laws while limiting derivation.",
+            "seductive_element": "'Emergent' carries a whiff of the lawless or magical, which this option exploits."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The distinction is not a loose new objection; it is the resolution the passage has been building toward, and paragraph 5 draws its consequence. It answers rather than opens.",
+            "seductive_element": "Late-appearing distinctions can look like afterthoughts rather than the argument's keystone."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The distinction shows the positions differ on one precise point (in-practice derivability), not that they are identical. The author agrees with reductionism on substance only.",
+            "seductive_element": "The author's conciliatory move toward reductionism can be over-read as collapsing the two views together."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0012-q5",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the third paragraph, \"tractable\" most nearly means",
+      "options": {
+        "A": "obedient to authority",
+        "B": "capable of being actually carried out or computed",
+        "C": "easily bent or physically pliable",
+        "D": "open to more than one interpretation"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "The passage contrasts a bridge from particles to turbulence that 'may exist in principle' but is 'permanently untraceable in practice, defeating not our physics but our arithmetic'. 'Tractable' here (and in paragraph 4's 'tractable computation') describes a derivation we can actually perform — feasible to compute. Option B fits this precise sense.",
+        "passage_anchor": "rc-0012-p3 and rc-0012-p4",
+        "question_type_note": "Vocabulary-in-context rewards the sense the argument requires; 'tractable' has everyday senses that do not fit this technical use about computation.",
+        "reading_habit": "Let the surrounding argument, not the word's most common meaning, fix a term's sense — here 'arithmetic' and 'computation' pin 'tractable' to feasibility.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "'Tractable' can mean docile in describing people or animals, but nothing here concerns obedience; the context is computation and derivation.",
+            "seductive_element": "'Tractable' most commonly means compliant in everyday usage, so the familiar sense tempts."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The pliable sense belongs to materials; the passage is about whether a calculation can be performed, not physical bendability.",
+            "seductive_element": "The Latin root shares ground with 'malleable', suggesting physical flexibility."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Multiple interpretation is not at issue; the contrast is exists-in-principle versus computable-in-practice, not clear versus ambiguous.",
+            "seductive_element": "In a passage about explanation, 'open to interpretation' sounds vaguely relevant."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "reductive",
+      "passage_use": "a decisive refutation of the reductive story",
+      "meaning_here": "explaining a whole entirely in terms of its smallest parts",
+      "difficulty": "medium"
+    },
+    {
+      "word": "tractable",
+      "passage_use": "the limits of tractable computation",
+      "meaning_here": "able to be actually carried out or calculated in practice",
+      "difficulty": "hard"
+    },
+    {
+      "word": "constituents",
+      "passage_use": "properties their parts do not",
+      "meaning_here": "the component parts that make up a whole",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vindicated",
+      "passage_use": "the reductionist was right that the world has no extra ingredients",
+      "meaning_here": "shown to be correct or justified (sense evoked by the passage's partial defence of reductionism)",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage stakes out a middle position between two tempting extremes. Your whole task is to resist collapsing it into either one — the author agrees with reductionism about the world and disagrees about what we can explain, and both halves must survive.",
+    "one_sentence_summary": "Even if every whole is just its parts arranged with no extra ingredients, the behaviour of the whole often cannot be derived in practice from the laws of the parts, so higher-level sciences explain something real rather than standing in for a physics we haven't finished.",
+    "main_idea": "The author accepts the reductionist claim that nothing new is physically added when parts combine, but denies the further claim that everything can therefore be explained from the parts. Because some large-scale regularities can't be computed from particles even in principle-made-actual, sciences like biology and meteorology are genuinely explanatory, not temporary.",
+    "simple_explanation": "Science often tells a confident story: everything is really just its tiny parts, so to explain anything, break it down — cells are chemistry, chemistry is physics, physics is a few particles following a few laws. Nothing is 'added' when parts combine; there's just more of the same, arranged.\n\nBut there's a nagging counter-thought. Some properties only show up when many parts act together. One water molecule isn't wet or turbulent; wetness and turbulence belong to many molecules at once. A single neuron isn't conscious. These are called emergent properties: they depend completely on the parts, yet you can't find them in any single part. That's a real puzzle.\n\nNow comes the passage's careful move — and it's the whole point. It's tempting to say 'so reductionism is wrong, wholes have magic ingredients'. The careful emergentist says something much narrower. Nothing here breaks any law of physics. The claim isn't about substance; it's about explanation. Even if the whole is nothing but arranged parts, it doesn't follow that we can predict or even usefully describe the whole from the laws of the parts. The bridge from particles to turbulence might exist in theory and be forever impossible to actually compute.\n\nThe key distinction: 'reducible in principle' is a claim about the world (no new forces appear). 'Reducible in practice' is a claim about us (we can actually run the calculation). The reductionist quietly slides from the first — which is fair — to the second — which is often false. The strongest emergentism agrees with the first completely and only attacks the second. That's not mysticism; it's a sober point about how impossibly huge the computations would be.\n\nSo the modest, real conclusion: biology, weather science, economics, the study of the mind aren't just placeholders waiting to become physics. They catch patterns invisible at the particle level — invisible even to an imaginary demon who knew where every particle was. The reductionist was right that the world has no extra ingredients, and wrong that the smallest scale is the only one where the world can be understood. Both halves, together, are the point.",
+    "why_difficult": "The difficulty is entirely in the middle position. The passage first voices strong reductionism (p1), then strong emergentism (p2), and a hurried reader grabs whichever they read last. But the author holds neither: they concede reductionism's metaphysics and reject only its claim about explanation. The pivot rests on a fine distinction — 'in principle' versus 'in practice', a claim about the world versus a claim about us — that is easy to read past and impossible to answer the questions without.",
+    "author_intention": "To rescue a genuine insight (emergence) from an overstatement (magic ingredients), by relocating the whole dispute from what the world is made of to what we can compute — and thereby to defend the higher sciences without denying physics.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0012-p1",
+        "role": "The confident story",
+        "note": "Reductionism at full strength: explain the whole by decomposing it into parts; nothing is added when parts combine. The author lays it out fairly, even admiringly."
+      },
+      {
+        "paragraph_id": "rc-0012-p2",
+        "role": "The counter-intuition",
+        "note": "Some properties appear only at scale — wetness, turbulence, temperature, maybe consciousness. They depend on the parts but can't be found in any single part. This is 'emergence'."
+      },
+      {
+        "paragraph_id": "rc-0012-p3",
+        "role": "The careful correction",
+        "note": "Don't overclaim. Emergence breaks no physical law. The real claim is about explanation: the whole may be underivable in practice from the parts, defeating our arithmetic, not our physics."
+      },
+      {
+        "paragraph_id": "rc-0012-p4",
+        "role": "The key distinction",
+        "note": "'Reducible in principle' (about the world: no new force) versus 'reducible in practice' (about us: we can do the derivation). Reductionism slides from the true first to the often-false second."
+      },
+      {
+        "paragraph_id": "rc-0012-p5",
+        "role": "The modest conclusion",
+        "note": "Higher sciences aren't temporary stand-ins; they catch real regularities invisible even to a particle-omniscient demon. The world has no extra ingredients, but the smallest scale isn't the only one that explains."
+      }
+    ],
+    "tone_progression": "It opens generously toward reductionism, turns thoughtful and qualifying at the counter-intuition, grows precise and firm at the central distinction, and lands with quiet, balanced confidence — measured throughout, never polemical.",
+    "key_transitions": [
+      "'Against this, a persistent intuition holds that certain wholes possess properties their parts do not…' (start of paragraph 2) — the reductive story meets its challenge.",
+      "'It is tempting to treat this as a decisive refutation… But the careful emergentist claims something narrower.' (start of paragraph 3) — the author refuses the easy win and defines the real, defensible claim.",
+      "'The reductionist was right that the world has no extra ingredients. He was wrong to conclude…' (paragraph 5) — the two-part thesis stated in one breath."
+    ],
+    "misunderstanding": "Readers collapse the middle into an extreme. Some finish thinking the author proved wholes have special non-physical ingredients (the paragraph-2 reading); others think the author defended reductionism against distracting emergence-talk (the paragraph-1 reading). Both miss the distinction in paragraph 4, which is exactly why the author agrees with one half of reductionism and rejects the other.",
+    "traps_summary": "Almost every distractor here offers one half of the thesis as the whole, or swaps the author's target: in-practice attacked as if in-principle, explanation confused with substance, careful hedging read as indecision. Before answering, name what the author concedes and what the author denies — and keep both.",
+    "reading_lesson": "Learn to recognise the middle-position passage and refuse the two extremes it displays. When an author says 'the strong version is tempting but the defensible claim is narrower', the narrower claim is the thesis, and the correct answers will always match its exact scope. Hold both halves of a 'right about X, wrong about Y' sentence together; dropping either half is how the passage's best distractors are built.",
+    "real_world": "This is the quiet logic behind why we still need economists even though economies are made of atoms, and why 'it's all just neurons' explains less about the mind than it promises. Whenever someone says a field is 'really just' a more fundamental one, ask whether they mean in principle or in practice — the slide between them powers a great deal of overconfident argument.",
+    "takeaway": "The world may have no extra ingredients and still refuse to be understood at its smallest scale alone.",
+    "reflection_question": "Where in your own thinking do you assume that explaining the parts would explain the whole — and is that a claim about the world, or about what you could actually work out?"
+  }
+}
