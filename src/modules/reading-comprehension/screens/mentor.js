@@ -445,8 +445,8 @@ export async function renderMentor(outlet, { storage }, params) {
     try {
       const record = await saveReflection(storage, item.meta.id, e.detail);
       reflectionEl.reflection = record;
-      cue('tap');
-      toast('Kept — it stays on this device.');
+      cue('reflect'); // a warm confirmation — the reflection is kept
+      toast('Kept — it stays on this device.', 'info', { mute: true });
     } catch (err) {
       console.error('[CAT OS]', err);
       toast('Could not save the reflection.', 'error');

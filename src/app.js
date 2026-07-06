@@ -17,7 +17,8 @@ import { listRCItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
 import { evaluate } from './core/engagement/achievements.js';
 import { dashboardLine } from './core/engagement/messages.js';
-import { initFeedback, feedbackPrefs, setFeedbackPref, cue } from './core/engagement/feedback.js';
+import { initFeedback, feedbackPrefs, setFeedbackPref, cue, installGlobalFeedback } from './core/engagement/feedback.js';
+import { playSound } from './core/engagement/audio.js';
 import { formatDuration } from './core/utils/format.js';
 import { recommendNext } from './core/learning/journey.js';
 import { renderGrowth } from './shell/growth.js';
@@ -42,7 +43,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.8.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.9.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -289,7 +290,7 @@ function renderSettings(outlet) {
               <div class="row__hint">Subtle vibration where your device supports it</div>
             </div>
           </div>
-          <div class="segmented" id="haptics-picker" role="group" aria-label="Haptics">
+          <div class="segmented" id="haptics-picker" role="group" aria-label="Haptics" data-sfx="off">
             <button class="segmented__option" data-haptics="true" aria-pressed="false">On</button>
             <button class="segmented__option" data-haptics="false" aria-pressed="false">Off</button>
           </div>
@@ -302,10 +303,21 @@ function renderSettings(outlet) {
               <div class="row__hint">Tiny cues for answers and milestones — off by default</div>
             </div>
           </div>
-          <div class="segmented" id="sounds-picker" role="group" aria-label="Sounds">
+          <div class="segmented" id="sounds-picker" role="group" aria-label="Sounds" data-sfx="off">
             <button class="segmented__option" data-sounds="true" aria-pressed="false">On</button>
             <button class="segmented__option" data-sounds="false" aria-pressed="false">Off</button>
           </div>
+        </div>
+        <div class="row" id="volume-row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">◑</span>
+            <div>
+              <div class="row__label">Sound volume</div>
+              <div class="row__hint">Master level for every sound</div>
+            </div>
+          </div>
+          <input class="range" id="volume-slider" type="range" min="0" max="100" step="1"
+                 value="70" aria-label="Sound volume" data-sfx="off" />
         </div>
       </div>
 
@@ -403,7 +415,11 @@ function renderSettings(outlet) {
   });
   syncReading();
 
-  // --- Feedback toggles (haptics / sounds) ---
+  // --- Feedback toggles (haptics / sounds) + master volume ---
+  // These pickers carry data-sfx="off" so the global press delegation
+  // stays out of their way — each gives its own honest demo instead.
+  const volumeSlider = outlet.querySelector('#volume-slider');
+  const volumeRow = outlet.querySelector('#volume-row');
   const syncFeedback = () => {
     const prefs = feedbackPrefs();
     for (const b of outlet.querySelectorAll('[data-haptics]')) {
@@ -412,27 +428,40 @@ function renderSettings(outlet) {
     for (const b of outlet.querySelectorAll('[data-sounds]')) {
       b.setAttribute('aria-pressed', String((b.dataset.sounds === 'true') === prefs.sounds));
     }
+    // Volume only means something while sound is on — dim it otherwise.
+    volumeSlider.value = String(Math.round(prefs.volume * 100));
+    volumeSlider.disabled = !prefs.sounds;
+    volumeRow.style.opacity = prefs.sounds ? '' : 'var(--opacity-dim)';
   };
   outlet.querySelector('#haptics-picker').addEventListener('click', async (e) => {
     const b = e.target.closest('[data-haptics]');
     if (!b) return;
     await setFeedbackPref(storage, 'haptics', b.dataset.haptics === 'true');
     syncFeedback();
-    cue('tap'); // immediate, honest demo of the new setting
+    cue('toggle'); // feel + hear the new setting, honestly
   });
   outlet.querySelector('#sounds-picker').addEventListener('click', async (e) => {
     const b = e.target.closest('[data-sounds]');
     if (!b) return;
-    await setFeedbackPref(storage, 'sounds', b.dataset.sounds === 'true');
+    const on = b.dataset.sounds === 'true';
+    await setFeedbackPref(storage, 'sounds', on);
     syncFeedback();
-    cue('tap');
+    if (on) playSound('open'); // the welcome chime confirms sound is awake
+  });
+  // Master volume: preview a tick at the new level as the user drags.
+  let volPreview = 0;
+  volumeSlider.addEventListener('input', async () => {
+    await setFeedbackPref(storage, 'volume', Number(volumeSlider.value) / 100);
+    const now = Date.now();
+    if (now - volPreview > 90) { volPreview = now; playSound('tap'); }
   });
   syncFeedback();
 
   // --- Backup & Restore ---
   outlet.querySelector('#backup-export').addEventListener('click', async () => {
     await downloadBackup(storage);
-    toast('Backup saved');
+    cue('backupOk'); // a tiny reassuring confirmation
+    toast('Backup saved', 'info', { mute: true });
   });
 
   const fileInput = outlet.querySelector('#backup-file');
@@ -454,7 +483,9 @@ function renderSettings(outlet) {
     );
     try {
       const written = await importAll(storage, backup, replace ? 'replace' : 'merge');
-      toast(`Backup imported — ${written} records`);
+      await initFeedback(storage); // imported feedback prefs take effect now
+      cue('restore'); // a warm "rebuilt" confirmation
+      toast(`Backup imported — ${written} records`, 'info', { mute: true });
       applyTheme(await loadTheme()); // imported theme takes effect immediately
     } catch (err) {
       toast(err.message, 'error');
@@ -492,6 +523,12 @@ async function boot() {
     toast('Local storage is unavailable. Nothing will be saved.', 'error');
   }
 
+  // Audio identity: one place installs press / toggle / paper feedback for
+  // every button, and unlocks audio (autoplay policy) + plays the opening
+  // chime on the first gesture. Installed unconditionally so it works even
+  // if storage init failed (sound simply stays at its OFF default).
+  installGlobalFeedback();
+
   // 2. Router: shell routes + module routes. Modules receive a
   //    context object (today: storage) rather than importing globals,
   //    keeping them testable and island-shaped (Rule 5).
@@ -507,16 +544,35 @@ async function boot() {
 
   router.start();
 
-  // Navigation feedback: one whisper-light tap on nav links.
-  document.querySelector('cat-nav')?.addEventListener('click', (e) => {
-    if (e.target.closest('a')) cue('tap');
-  });
+  // (Nav taps are covered by installGlobalFeedback's press delegation.)
 
   // 3. Service worker — relative path so it works from a GitHub Pages
   //    subpath. Registration failure is non-fatal (e.g. plain HTTP).
+  //
+  // This is a hash-routed SPA (core/router/router.js never triggers a
+  // full navigation), and a browser only re-checks service-worker.js
+  // for changes on registration, i.e. on a real page load. A tab left
+  // open across a deploy would otherwise keep its original content
+  // cache forever, no matter how many times CONTENT_VERSION bumps —
+  // so we check for updates explicitly and reload once a new worker
+  // actually takes control (not on the very first install: `hadController`
+  // guards that so a fresh visit doesn't get an extra reload).
   if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('./service-worker.js');
+      const hadController = !!navigator.serviceWorker.controller;
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!hadController || refreshing) return;
+        refreshing = true;
+        window.location.reload();
+      });
+
+      const registration = await navigator.serviceWorker.register('./service-worker.js');
+      registration.update();
+      setInterval(() => registration.update(), 30 * 60 * 1000);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') registration.update();
+      });
     } catch (err) {
       console.warn('[CAT OS] service worker registration failed:', err);
     }

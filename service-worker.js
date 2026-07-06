@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 9;
+const CACHE_VERSION = 10;
 const CONTENT_VERSION = 5;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -45,6 +45,7 @@ const SHELL_FILES = [
   './src/core/engagement/stats.js',
   './src/core/engagement/achievements.js',
   './src/core/engagement/feedback.js',
+  './src/core/engagement/audio.js',
   './src/core/engagement/messages.js',
   './src/core/learning/journey.js',
   './src/core/mentor/voice.js',

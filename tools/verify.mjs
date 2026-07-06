@@ -461,6 +461,48 @@ console.log('\n9. Mentor dry run (voice · DNA · one-lesson rule · recall)');
   }
 }
 
+console.log('\n10. Audio identity (sound language ↔ cue map)');
+{
+  // audio.js and feedback.js must be import-safe with no AudioContext:
+  // synthesis is lazy, so the whole family loads under plain Node.
+  const audio = await mod('src/core/engagement/audio.js');
+  const feedback = await mod('src/core/engagement/feedback.js');
+  const names = new Set(audio.SOUND_NAMES);
+
+  // The complete family designed for this milestone — every named sound
+  // must exist in the engine (one entry per Audio Identity requirement).
+  const REQUIRED = ['open', 'tap', 'toggle', 'cardOpen', 'correct', 'wrong',
+    'sparkle', 'reflect', 'lessonComplete', 'levelUp', 'achievement', 'streak',
+    'mentor', 'xp', 'celebrate', 'dailyGoal', 'notify', 'backupOk', 'restore', 'error'];
+  for (const n of REQUIRED) if (!names.has(n)) bad(`audio: sound "${n}" missing from the engine`);
+  if (names.size !== REQUIRED.length) bad(`audio: expected ${REQUIRED.length} sounds, engine has ${names.size}`);
+
+  // Every cue must resolve to a real sound — feedback.js and audio.js
+  // can never drift apart (a stale cue would silently break a moment).
+  for (const [kind, soundName] of Object.entries(feedback.CUE_SOUND_MAP)) {
+    if (!names.has(soundName)) bad(`audio: cue "${kind}" maps to unknown sound "${soundName}"`);
+  }
+
+  // Public API is present…
+  for (const fn of ['playSound', 'xpTick', 'configureAudio', 'unlockAudio', 'queueWelcome']) {
+    if (typeof audio[fn] !== 'function') bad(`audio: missing export ${fn}()`);
+  }
+  // …and the disabled play path is a pure no-op that never throws and never
+  // needs an AudioContext (there is none in Node) — feedback is never worth
+  // an error, and sound defaults OFF.
+  try {
+    audio.configureAudio({ enabled: false, volume: 0.7 });
+    audio.playSound('correct');
+    audio.xpTick(3);
+    audio.unlockAudio();
+  } catch (e) {
+    bad(`audio: disabled play path threw — ${e.message}`);
+  }
+  if (problems.filter((p) => p.startsWith('audio')).length === 0) {
+    ok(`${names.size} synthesized sounds, cue map coherent, disabled path is a safe no-op`);
+  }
+}
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');

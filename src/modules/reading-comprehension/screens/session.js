@@ -26,6 +26,7 @@ import { sessionXP } from '../../../core/engagement/xp.js';
 import { deriveEngagement } from '../../../core/engagement/stats.js';
 import { newlyUnlocked } from '../../../core/engagement/achievements.js';
 import { cue } from '../../../core/engagement/feedback.js';
+import { playSound } from '../../../core/engagement/audio.js';
 import { dayKey } from '../../../core/engagement/streaks.js';
 import { deriveDNA } from '../../../core/mentor/dna.js';
 import { chooseLesson, lessonRecord, pickRecall } from '../../../core/mentor/lesson.js';
@@ -108,7 +109,6 @@ export async function renderSession(outlet, { storage }, params) {
           <button class="btn btn--quiet" id="recall-done">Got it</button>`;
         slot.querySelector('#recall-done').addEventListener('click', async () => {
           try { await markRecalled(storage, recall); } catch { /* non-fatal */ }
-          cue('tap');
           const card = slot.querySelector('#recall-card');
           card.classList.add('recall--done');
           setTimeout(() => slot.remove(), 450);
@@ -148,7 +148,6 @@ export async function renderSession(outlet, { storage }, params) {
   }
 
   outlet.querySelector('#to-questions').addEventListener('click', () => {
-    cue('tap');
     session.markQuestionShown();
     renderQuestionPhase();
     window.scrollTo(0, 0);
@@ -187,6 +186,7 @@ export async function renderSession(outlet, { storage }, params) {
       if (!a) return;
       rereadFold.open = true;
       outlet.querySelector('cat-passage').highlight(a.dataset.anchor);
+      cue('sparkle'); // the small reward of finding the evidence
     });
 
     const card = outlet.querySelector('cat-question-card');
@@ -295,13 +295,16 @@ export async function renderSession(outlet, { storage }, params) {
       const unlocks = newlyUnlocked(after, celebratedIds);
       const leveledUp = after.level.level > before.level.level;
       const streakRecord = after.streaks.best > before.streaks.best && after.streaks.best >= 3;
+      // The daily goal is "one session today"; it is newly met the moment
+      // today flips from not-practiced to practiced.
+      const dailyGoalJustDone = !before.streaks.practicedToday && after.streaks.practicedToday;
       if (unlocks.length) {
         await storage.put(STORES.SETTINGS, {
           id: 'engagement:celebrated',
           value: [...celebratedIds, ...unlocks.map((u) => u.id)],
         });
       }
-      engagement = { after, gained: sessionXP(s), unlocks, leveledUp, streakRecord };
+      engagement = { after, gained: sessionXP(s), unlocks, leveledUp, streakRecord, dailyGoalJustDone };
     } catch (err) {
       console.error('[CAT OS] engagement derive failed:', err); // the moment still renders
     }
@@ -410,6 +413,11 @@ export async function renderSession(outlet, { storage }, params) {
       ex.data = { question: lessonQuestion, chosen: lessonAnswer?.chosen ?? null };
     }
 
+    // The reading mentor appears: its calm signature as the moment settles.
+    // (Every session ends here, milestone or not.) The signature is soft and
+    // low; any reward below layers over it consonantly by design.
+    cue('mentor');
+
     if (engagement) {
       const bar = outlet.querySelector('cat-xp-bar');
       if (bar) {
@@ -422,11 +430,24 @@ export async function renderSession(outlet, { storage }, params) {
       for (const u of engagement.unlocks) lines.push(`Achievement — ${u.title}: ${u.description}`);
       if (engagement.streakRecord) lines.push(`New best streak: ${engagement.after.streaks.best} days.`);
       if (lines.length) {
-        cue(engagement.leveledUp ? 'levelup' : 'achievement');
+        // One reward sound, chosen by the biggest milestone, landing a beat
+        // after the mentor signature and synced to the rising sheet. Stacked
+        // milestones add a sparkle shower ("confetti") beneath it.
+        const reward = engagement.leveledUp ? 'levelup'
+          : engagement.unlocks.length ? 'achievement'
+            : 'streak';
+        const stacked = Number(engagement.leveledUp) + engagement.unlocks.length
+          + Number(engagement.streakRecord) > 1;
+        cue(reward, { delay: 0.2 });
+        if (stacked) playSound('celebrate', { delay: 0.36 });
         await celebrate({
           title: engagement.leveledUp ? `Level ${engagement.after.level.level}` : 'Milestone',
           lines,
         });
+      } else if (engagement.dailyGoalJustDone) {
+        // No sheet: the day's-goal melody is a warm, audio-only closer — the
+        // sound users come to associate with finishing for the day.
+        setTimeout(() => cue('dailyGoal'), 500);
       }
     }
   }

@@ -4,6 +4,108 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.9.0 — 2026-07-07 — Audio Identity
+
+A complete, coherent sound language, synthesized live — so studying feels
+satisfying, calm, and premium rather than noisy. Success criterion: the
+sounds read as one family (a recurring motif, one tonal world), never feel
+childish or arcade-like, and hold up over a long study session without
+fatigue. Everything is Web Audio; no mp3/wav assets are added, nothing new
+to download, cache, or license (the durability rule holds).
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** Audio Identity is
+inserted at 0.9.0; the Para Summary module shifts by one (→ 0.10.0). The
+module order behind it (PS → PJ → OOO → Vocab) is unchanged.
+
+### The sound engine (`src/core/engagement/audio.js`, new)
+- One **tonal world**: every pitched sound is drawn from a single C-major
+  **pentatonic** scale, so any two grains that overlap are always
+  consonant — layering (with haptics, or with another sound) can never
+  turn ugly, and nothing ever sounds "wrong". This is what makes the
+  family cohere and what keeps hours of study fatigue-free.
+- One **motif**: a rising C–E–G "bloom" (the major triad) is the reward
+  signature, stated more completely as the reward grows (lessonComplete →
+  levelUp → dailyGoal). Hearing a fragment predicts reward; the fuller
+  statements resolve it (reward prediction, anticipation → resolution).
+- One **mentor colour**: a soft Cmaj9 (adds the 9th) — lush and
+  "thoughtful" without dissonance — is the mentor's recurring voice, also
+  hinted in the opening chime so the app's welcome and its mentor rhyme.
+- Three **timbre families**: CLICKS (filtered-noise ticks — buttons,
+  toggles), PAPER (band-passed noise sweeps — cards/pages), and CHIMES
+  (soft sine/triangle voices — every cue and reward).
+- **Master chain**: gain → gentle compressor (a soft limiter so overlaps
+  never bite) → low-pass (warmth, removes fatiguing fizz) → destination.
+  One shared 1-second noise buffer feeds every click (tiny, reused).
+- Psychoacoustics applied throughout: **variable reinforcement** (the
+  "correct" tone picks its resolving top note and a few cents of detune at
+  random — never mechanical, always pentatonic), pleasant intervals
+  (fifths, thirds, octaves), and low levels with short envelopes.
+
+### The twenty sounds, and where they live
+- App open → a soft welcome chime (armed once, sounds on the first
+  gesture, because autoplay policy blocks sound before any interaction).
+- Button press → a tiny click; Toggle/segmented/answer-pick → a wooden
+  tick; a `<details>` card opening → a paper sweep — all wired **once** as
+  app-wide delegation (`installGlobalFeedback`), so every control feels
+  alive without per-screen plumbing.
+- Correct → a satisfying-but-subtle rising resolve; Incorrect → a warm,
+  low settle to the tonic (helpful, never a punishment sting); Evidence
+  re-anchor ("¶ Re-read the evidence") → a small sparkle (the reward of
+  finding the proof — the "excellent explanation" moment, user-initiated
+  so it never fatigues).
+- Reflection kept → a warm confirmation; Session end → the **mentor
+  signature** (every session); Lesson complete / Level up / Achievement /
+  new-best Streak → the reward tier, one sound chosen by the biggest
+  milestone, landing a beat after the mentor and synced to the rising
+  celebration sheet. **Stacked** milestones add a layered sparkle shower
+  ("confetti" — layered light, never a cheer).
+- **Daily goal** (first session of the day) → the memorable success
+  melody, a warm phrase with a dip-then-lift hook and a bell resolve; it
+  is audio-only (no sheet) and reserved for the day's goal so it stays
+  special. (Where a new-best streak coincides it escalates to the streak
+  tone; documented so the two daily-ish sounds never double-fire.)
+- XP counting → tiny ascending pentatonic notes synchronized with the
+  count-up; the XP bar now reveals on scroll-into-view (Intersection
+  Observer) so the run accompanies a *visible* climb and never collides
+  with the mentor/reward audio from inside a collapsed fold.
+- Toasts → a soft, unobtrusive `notify`; Backup saved → a tiny reassuring
+  confirmation; Restore complete → a warm "rebuilding" arpeggio; Error →
+  a short, deliberately NEUTRAL double-pulse (F, outside the reward world,
+  so it reads as information — attention, not alarm).
+
+### Preferences & Settings
+- New **master volume** control (a token-styled, accessible native range;
+  persisted as `sound-volume`, default 0.7) beside the existing Sounds
+  toggle, which is unchanged and **still defaults OFF** (opt-in). Enabling
+  Sounds replays the welcome chime as an honest demo; dragging the volume
+  previews a tick at the new level.
+- `feedback.js` becomes the orchestration layer: a single **cue table**
+  maps each semantic moment to a haptic pattern + a named sound (haptics
+  and sound layer naturally, fired together). `tools/verify.mjs` §10
+  cross-checks every cue against the engine's registry so the two files
+  can never drift, and confirms the disabled play-path is a safe no-op.
+
+### Accessibility & honesty
+- **Reduced-motion** is respected: the XP run collapses to one soft note,
+  and the sparkle/confetti showers thin to a few grains — less rapid
+  stimulation for sensitive users (sound is never muted outright; it isn't
+  motion).
+- Sound never plays while the tab is **hidden**, and never fires from
+  reading or scrolling — reading is never interrupted.
+- HONESTY NOTE retained: whether the iOS hardware-mute switch silences Web
+  Audio varies by version/context and can't be reliably detected — hence
+  the OFF default, the toggle, the master volume, and the no-background
+  rule, rather than a false promise of respecting system mute.
+
+### Plumbing and verification
+- Service worker precaches `src/core/engagement/audio.js`; shell
+  `CACHE_VERSION` 9 → 10 (content cache untouched). The module-graph +
+  precache-coverage check proves the new module is reachable and cached,
+  so offline can't break. `APP_VERSION` → 0.9.0.
+- No design tokens changed; the volume range styles are token-only
+  additions to `components.css`. No content, schema, or engine logic
+  changed.
+
 ## 0.8.0 — 2026-07-06 — The Premium Reading Library
 
 The milestone that turns a starter shelf into a library. Success criterion:

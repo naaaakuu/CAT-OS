@@ -123,6 +123,48 @@
   box-shadow: var(--shadow-1);
 }
 
+/* ---------- Range (master sound volume) ---------- */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: min(11rem, 48vw);
+  height: var(--tap-target);
+  background: transparent;
+  cursor: pointer;
+  accent-color: var(--color-accent); /* durable native fallback + correct fill */
+}
+.range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-3);
+}
+.range::-moz-range-track {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-3);
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -7px; /* centre a 20px thumb on the 6px track */
+  width: 20px; height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  border: 2px solid var(--color-surface);
+  box-shadow: var(--shadow-1);
+}
+.range::-moz-range-thumb {
+  width: 20px; height: 20px;
+  border: 2px solid var(--color-surface);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  box-shadow: var(--shadow-1);
+}
+.range:focus-visible { outline: none; }
+.range:focus-visible::-webkit-slider-thumb { box-shadow: var(--focus-ring); }
+.range:focus-visible::-moz-range-thumb { box-shadow: var(--focus-ring); }
+.range:disabled { cursor: default; }
+
 /* ---------- Titles, eyebrows, greeting ---------- */
 .screen__eyebrow {
   font-size: var(--text-2xs);

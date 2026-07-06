@@ -9,7 +9,13 @@
  * Usage: import { toast } from '.../cat-toast.js';
  *        toast('Backup saved');
  *        toast('Could not save. Check free space and try again.', 'error');
+ *
+ * Sound (Audio Identity): a soft, unobtrusive 'notify' cue for info and a
+ * short neutral 'error' tone for errors — the app's audible toast. Callers
+ * that play their own, more specific sound pass `{ mute: true }`.
  */
+
+import { playSound } from '../../core/engagement/audio.js';
 
 class CatToast extends HTMLElement {
   #timer = null;
@@ -43,12 +49,18 @@ class CatToast extends HTMLElement {
     `;
   }
 
-  /** @param {'info'|'error'} kind */
-  show(message, kind = 'info') {
+  /**
+   * @param {string} message
+   * @param {'info'|'error'} kind
+   * @param {{mute?: boolean}} [opts]  mute the built-in sound (a specific
+   *        sound is played elsewhere)
+   */
+  show(message, kind = 'info', opts = {}) {
     clearTimeout(this.#timer);
     this.querySelector('span').textContent = message;
     this.classList.toggle('is-error', kind === 'error');
     this.classList.add('is-open');
+    if (!opts.mute) playSound(kind === 'error' ? 'error' : 'notify');
     this.#timer = setTimeout(() => this.classList.remove('is-open'),
       kind === 'error' ? 6000 : 3000);
   }
@@ -57,12 +69,12 @@ class CatToast extends HTMLElement {
 customElements.define('cat-toast', CatToast);
 
 /** Convenience: lazily create one shared toast and show a message. */
-export function toast(message, kind = 'info') {
+export function toast(message, kind = 'info', opts = {}) {
   let el = document.querySelector('cat-toast');
   if (!el) {
     el = document.createElement('cat-toast');
     document.body.appendChild(el);
   }
   // connectedCallback runs synchronously for upgraded elements, but be safe:
-  queueMicrotask(() => el.show(message, kind));
+  queueMicrotask(() => el.show(message, kind, opts));
 }
