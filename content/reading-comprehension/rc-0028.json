@@ -1,0 +1,287 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0028",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 500,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "the logical asymmetry between confirming and refuting a general claim",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The asymmetry between confirmation and refutation, and falsifiability as a mark of science, are associated with Karl Popper; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Philosophy-of-science passage on the confirm/refute asymmetry; the crux is that a theory earns credit by surviving tests meant to kill it, not by accumulating confirmations. Owner review pending.",
+    "vocab_extracted": [
+      "asymmetry",
+      "corroborate",
+      "immunize"
+    ]
+  },
+  "passage": {
+    "title": "The Swan and the Test",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0028-p1",
+        "text": "Suppose you wish to establish that all swans are white. You go out and find a white swan, then another, then a thousand more, and your confidence grows with each sighting. Yet notice how little each new white swan actually adds. A million white swans do not prove the claim, for the million-and-first, or some swan on a continent you have not visited, may be black. No number of confirming instances can close the gap between 'every swan I have seen' and 'every swan there is.' The general claim reaches infinitely further than the evidence for it can."
+      },
+      {
+        "id": "rc-0028-p2",
+        "text": "Now notice the reverse. A single black swan settles the matter at once — not that the claim is probably false, but that it is false, decisively and forever. Here lies a deep asymmetry in logic: no quantity of confirmations can establish a universal claim, but one genuine counter-instance can demolish it. Confirmation is weak and refutation is strong. This imbalance, easy to overlook, has been taken by some philosophers as the key to what makes an inquiry scientific at all."
+      },
+      {
+        "id": "rc-0028-p3",
+        "text": "The proposal is that a scientific claim is one that forbids something — that sticks its neck out by ruling certain observations out of bounds, so that if those observations occur, the claim is dead. A theory earns its standing not by how much evidence agrees with it, which is cheap, but by surviving determined attempts to refute it, which is not. The best experiments are therefore not those designed to confirm a favoured theory but those designed to kill it; a theory we have tried hard to destroy and failed is one we have some right to trust, precisely because we gave it every chance to fail and it did not."
+      },
+      {
+        "id": "rc-0028-p4",
+        "text": "The sharpest consequence concerns what should worry us, not reassure us. A theory that can accommodate any possible observation — that no conceivable finding could ever contradict — is not thereby strong but empty, for it forbids nothing and so risks nothing. When defenders of an idea respond to every apparent refutation by adding an adjustment that explains the awkward result away, they may feel they are protecting a powerful theory; in fact they are draining it of content, immunizing it against the only thing that could have given it worth. What cannot fail cannot inform. A claim earns the right to be believed only by remaining exposed to the possibility of defeat."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0028-q1",
+      "type": "main_idea",
+      "stem": "The central idea of the passage is that",
+      "options": {
+        "A": "collecting more confirming evidence is the surest way to prove a scientific theory",
+        "B": "because refutation is logically stronger than confirmation, a theory earns trust by surviving genuine attempts to disprove it",
+        "C": "all universal claims, such as 'all swans are white,' are ultimately false",
+        "D": "scientists should avoid making general claims that could be contradicted by evidence"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "The passage establishes that confirmations cannot prove a universal claim while one counter-instance refutes it (p1-p2), proposes that science consists in claims that could be refuted (p3), and warns that a theory immune to refutation is empty (p4). Option B captures the thesis — the asymmetry and its upshot, that surviving disproof earns trust.",
+        "passage_anchor": "rc-0028-p2 and rc-0028-p3",
+        "question_type_note": "The main idea joins the logical asymmetry to its methodological consequence, not the swan example alone.",
+        "reading_habit": "When a passage builds from a logical point to a rule for practice, your summary should carry both: the asymmetry AND 'trust what survives testing'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage argues confirmations are 'weak' and 'cheap' and cannot prove a universal claim; piling them up is exactly what it says does not establish a theory.",
+            "seductive_element": "It matches the intuitive scientific method of gathering supporting evidence."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The swan claim is an illustration of the logic, not a thesis that all universal claims are false; the passage says such claims can be refuted, not that they always are.",
+            "seductive_element": "The black-swan example dwells on how universal claims fall, suggesting they all do."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage praises claims that 'stick their neck out' by forbidding observations; avoiding contradictable claims is the emptiness it warns against.",
+            "seductive_element": "If contradiction kills claims, avoiding contradiction can seem prudent — the reverse of the passage's point."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0028-q2",
+      "type": "inference",
+      "stem": "It can be inferred that, on the passage's view, a theory compatible with every possible observation is",
+      "options": {
+        "A": "especially strong, because nothing can refute it",
+        "B": "empty, because by forbidding nothing it tells us nothing",
+        "C": "the ultimate goal of scientific inquiry",
+        "D": "true, since no evidence contradicts it"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 states that a theory 'that no conceivable finding could ever contradict is not thereby strong but empty, for it forbids nothing and so risks nothing', and 'what cannot fail cannot inform.' The inference is option B: compatibility with everything drains the theory of content.",
+        "passage_anchor": "rc-0028-p4",
+        "question_type_note": "The inference restates the paragraph's counter-intuitive verdict: unfalsifiable equals empty, not strong.",
+        "reading_habit": "Follow the passage's inversion: where intuition says 'refutable = weak', the argument says 'irrefutable = empty'. Infer with the author's logic, not the intuition.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage explicitly denies this: being unrefutable is 'not thereby strong but empty'. Immunity to refutation is a defect, not a strength.",
+            "seductive_element": "It sounds intuitive that a theory nothing can disprove must be very robust."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The goal in the passage is a theory that risks refutation and survives; an unfalsifiable theory is the opposite of the ideal.",
+            "seductive_element": "'Compatible with everything' can sound like comprehensive explanatory power, a scientific virtue."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage ties worth to risking refutation, not to the absence of contradiction; a claim no evidence contradicts because it forbids nothing is empty, not true.",
+            "seductive_element": "It borrows the logic of confirmation ('no evidence against it') and misreads emptiness as truth."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0028-q3",
+      "type": "author_purpose",
+      "stem": "The author contrasts the accumulation of white swans with the discovery of a single black swan mainly to",
+      "options": {
+        "A": "show that observing nature is an unreliable way to gain knowledge",
+        "B": "illustrate the logical asymmetry between confirming and refuting a universal claim",
+        "C": "argue that rare events matter more than common ones in daily life",
+        "D": "demonstrate that swans are a poor subject for scientific study"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The white swans show that no number of confirmations proves a universal claim (p1); the single black swan shows one counter-instance refutes it decisively (p2). The contrast is the vehicle for the 'deep asymmetry in logic' the passage names — option B.",
+        "passage_anchor": "rc-0028-p1 and rc-0028-p2",
+        "question_type_note": "Purpose questions ask what a contrast establishes; here it demonstrates the confirm/refute asymmetry.",
+        "reading_habit": "Tie a vivid contrast to the abstract principle it serves; here the swans exist to make 'confirmation weak, refutation strong' concrete.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage does not disparage observation; observation of the black swan is what delivers decisive knowledge. The point is about the logic of general claims, not the unreliability of seeing.",
+            "seductive_element": "The limits of confirming instances can be misread as a knock on observation itself."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The importance of rare events is a possible life-lesson but not the contrast's purpose, which is a specific logical point about universal claims.",
+            "seductive_element": "The black swan is rare and decisive, suggesting a general 'rare things matter' moral."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Swans are merely the example; the passage makes no claim about their suitability for study.",
+            "seductive_element": "Taking the illustration literally invites a comment on swans themselves."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0028-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the final paragraph, 'immunizing' most nearly means",
+      "options": {
+        "A": "strengthening a theory with additional supporting evidence",
+        "B": "shielding a theory from any possible refutation, and so from testable content",
+        "C": "vaccinating researchers against bias",
+        "D": "simplifying a theory so more people can understand it"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "The paragraph describes defenders who answer every apparent refutation with an adjustment that 'explains the awkward result away', thereby 'draining it of content, immunizing it against the only thing that could have given it worth.' 'Immunizing' means shielding the theory from refutation — and thus from testable content. Option B.",
+        "passage_anchor": "rc-0028-p4",
+        "question_type_note": "Vocabulary-in-context: the medical metaphor is used negatively — making a theory immune to test is draining, not protecting, it.",
+        "reading_habit": "Read a metaphor by the passage's evaluation of it; here 'immunizing' is framed as harmful (draining content), not as beneficial protection.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says such moves drain the theory of content; they do not strengthen it with evidence. Immunizing here weakens, in the passage's terms.",
+            "seductive_element": "Adjusting a theory to fit results can superficially look like reinforcing it."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The medical sense is a metaphor for the theory, not literal vaccination of researchers; bias is not the subject.",
+            "seductive_element": "'Immunize' literally concerns people and disease, pulling toward a human reading."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Simplification for accessibility is unrelated; immunizing here concerns removing a theory's exposure to refutation, not clarifying it.",
+            "seductive_element": "'Draining' could be loosely associated with stripping down or simplifying."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "asymmetry",
+      "passage_use": "Here lies a deep asymmetry in logic",
+      "meaning_here": "an imbalance between two things, here between confirmation and refutation",
+      "difficulty": "medium"
+    },
+    {
+      "word": "corroborate",
+      "passage_use": "surviving determined attempts to refute it",
+      "meaning_here": "to support or lend credit to (the standing a theory earns by surviving tests)",
+      "difficulty": "hard"
+    },
+    {
+      "word": "immunize",
+      "passage_use": "immunizing it against the only thing that could have given it worth",
+      "meaning_here": "to make immune, here to shield a theory from any possible refutation",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage inverts an intuition you probably hold — that evidence in favour is what makes a theory strong. Its whole argument is that surviving attempts to DISPROVE it is what counts. Your task is to reason with the inversion, not against it.",
+    "one_sentence_summary": "Because no number of confirming instances can prove a universal claim while a single counter-instance can refute it, a theory earns trust not by accumulating supporting evidence but by sticking its neck out and surviving genuine attempts to disprove it — and a theory nothing could refute is empty, not strong.",
+    "main_idea": "There is a logical asymmetry: confirmation is weak (a million white swans can't prove all swans are white) but refutation is strong (one black swan settles it). So a scientific claim is one that forbids some observations and could therefore be refuted, and it earns standing by surviving hard attempts to kill it. The corollary is counter-intuitive: a theory compatible with every possible observation forbids nothing, risks nothing, and is therefore empty.",
+    "simple_explanation": "Say you want to prove that all swans are white. You find a white swan, then another, then a thousand. Your confidence rises — but notice how little each new white swan really adds. A million white swans still don't prove the claim, because the next one, or some swan on a continent you've never visited, might be black. No pile of confirming cases can close the gap between 'every swan I've seen' and 'every swan there is'. The general claim reaches infinitely further than your evidence for it ever can.\n\nNow flip it. A single black swan settles the matter instantly — not 'probably false', but false, decisively and forever. That's a deep asymmetry in logic: no amount of confirmation can establish a universal claim, but one real counter-example can destroy it. Confirmation is weak; refutation is strong. And some philosophers have taken this imbalance to be the key to what makes an inquiry scientific in the first place.\n\nThe idea is this: a scientific claim is one that FORBIDS something — that sticks its neck out and rules certain observations out of bounds, so that if those observations show up, the claim is dead. A theory earns its standing not by how much evidence agrees with it (that's cheap) but by surviving determined attempts to refute it (that's not). So the best experiments aren't the ones designed to confirm your favourite theory — they're the ones designed to KILL it. A theory you've tried hard to destroy and failed to is one you have some right to trust, precisely because you gave it every chance to fail and it didn't.\n\nThe sharpest consequence is about what should WORRY us. A theory that can absorb any possible observation — that no conceivable finding could ever contradict — isn't strong; it's empty, because it forbids nothing and so risks nothing. When defenders of an idea meet every awkward result by adding an adjustment that explains it away, they think they're protecting a powerful theory. Really they're draining it of content, making it immune to the one thing that could have given it worth. What cannot fail cannot inform. A claim earns the right to be believed only by staying exposed to the possibility of defeat.",
+    "why_difficult": "The whole passage runs against intuition, and the intuition keeps reasserting itself. We naturally think supporting evidence proves theories and that a theory nothing can refute must be rock-solid; the passage argues the exact opposite on both counts. Answering well means reasoning from the author's asymmetry (confirmation weak, refutation strong) even when it feels backwards — and every strongest distractor is simply the intuition the passage overturned.",
+    "author_intention": "To replace a comfortable picture of science (pile up evidence until a theory is proven) with a sterner and more accurate one (expose a theory to attack and trust only what survives), and to expose the emptiness of ideas that dodge every test.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0028-p1",
+        "role": "Confirmation is weak",
+        "note": "A million white swans still can't prove all swans are white — the next one might be black. Confirming instances never close the gap to a universal claim."
+      },
+      {
+        "paragraph_id": "rc-0028-p2",
+        "role": "Refutation is strong",
+        "note": "But one black swan refutes it instantly and forever. That's the asymmetry: no confirmations prove a universal claim, one counter-instance demolishes it. Some call this the mark of science."
+      },
+      {
+        "paragraph_id": "rc-0028-p3",
+        "role": "The method",
+        "note": "So a scientific claim forbids something and could be refuted. A theory earns trust by surviving attempts to KILL it — the best experiments try to destroy the theory, not confirm it."
+      },
+      {
+        "paragraph_id": "rc-0028-p4",
+        "role": "The warning",
+        "note": "A theory nothing could contradict is empty, not strong — it forbids and risks nothing. Explaining away every awkward result immunizes a theory, draining its worth. What cannot fail cannot inform."
+      }
+    ],
+    "tone_progression": "Patient and demonstrative at the start, building through a clean logical point to a firm, almost bracing conclusion — the voice of a teacher walking you into a conclusion that overturns your expectations.",
+    "key_transitions": [
+      "'Now notice the reverse.' (start of paragraph 2) — the passage pivots from weak confirmation to strong refutation, stating the asymmetry.",
+      "'The sharpest consequence concerns what should worry us, not reassure us.' (start of paragraph 4) — the argument turns to its counter-intuitive punchline: unfalsifiable means empty."
+    ],
+    "misunderstanding": "Readers keep the everyday view of science — evidence in favour proves a theory, and a theory nothing can refute is invincible — which is exactly what the passage inverts. From that come the wrong answers: 'gather more confirmations', 'unrefutable = strong', 'avoid contradictable claims'. The passage's logic is the reverse on every point.",
+    "traps_summary": "Every distractor here is the intuition the passage overturned: confirmation proves, unfalsifiable is strong, avoid refutable claims, immunizing protects. Reason from the asymmetry the author establishes, and treat the intuitive-sounding option as the likely trap on this passage.",
+    "reading_lesson": "When a passage argues against a strong intuition, consciously adopt its logic and answer from there — the most natural-sounding option is usually the very view being refuted. Mark the author's inversion in one line ('confirmation weak, refutation strong; unfalsifiable = empty') and run each option through it; here, as often in CAT, the comfortable answer is the trap and the uncomfortable one is correct.",
+    "real_world": "This is the difference between a claim you can test ('this drug lowers blood pressure in trials') and one you can't ('everything happens for a reason'), and it's the standard by which we sniff out pseudoscience, conspiracy theories, and horoscopes — systems that explain every outcome and so predict none. It also sharpens ordinary thinking: an opinion you'd never let any evidence change isn't strong conviction; it's an empty one.",
+    "takeaway": "A belief that no possible evidence could ever overturn tells you nothing — worth is earned by staying exposed to defeat.",
+    "reflection_question": "Which of your own beliefs would you be unable to name any evidence that could change — and what does that reveal about them?"
+  }
+}

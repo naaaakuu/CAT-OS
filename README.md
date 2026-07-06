@@ -45,11 +45,13 @@ and storage info are in Settings.
 The interface follows a complete token-driven design language (see
 `src/ui/styles/tokens.css`) with reduced-motion-safe animation throughout.
 
-Ships with eight reading passages across eight genres (philosophy,
-economics, science, sociology, arts-culture, psychology, history,
-literature-theory), staged foundation→elite so the first passage never
-overwhelms. See `STATUS.md` for the precise shipped/designed breakdown and
-`CHANGELOG.md` for history.
+Ships with 32 reading passages (136 questions) spanning all twelve genres
+(philosophy, economics, science, sociology, arts-culture, psychology, history,
+literature-theory, anthropology, political-theory, technology-ethics,
+environment), staged foundation→elite so the first passage never overwhelms.
+Each passage carries a full Learning Page — a plain-English retelling, the one
+reading habit it builds, and a question to sit with. See `STATUS.md` for the
+precise shipped/designed breakdown and `CHANGELOG.md` for history.
 
 ## Running it
 

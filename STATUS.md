@@ -4,14 +4,14 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-07-05 — Personal Reading Mentor milestone complete. App version 0.7.0._
+_Last updated: 2026-07-06 — Premium Reading Library milestone complete. App version 0.8.0._
 
 ## Application
 
 | System | State | Notes |
 |---|---|---|
 | PWA shell (index.html, manifest, icons) | **shipped** | Installable; relative paths → GitHub Pages subpath safe |
-| Service worker / offline caching | **shipped** | Two caches: shell (v2) + content (v1), cache-first; content cached on first use as the library grows |
+| Service worker / offline caching | **shipped** | Two caches: shell (v9) + content (v5), cache-first; content cached on first use as the library grows |
 | Design tokens + base styles | **shipped** | Light/dark; system fonts; reading leading + answer-feedback colors added in M2 |
 | Hash router | **shipped** | Param routes (`/:id`); 404; modules register their own routes |
 | `StorageAdapter` interface | **shipped** | `src/core/storage/storage-adapter.js` |
@@ -23,7 +23,7 @@ _Last updated: 2026-07-05 — Personal Reading Mentor milestone complete. App ve
 | Growth screen (`/growth`) | **shipped** | How you read · Concepts collected (Fresh→Recalled→Absorbed) · In your own words; no marks anywhere; the notebook's goals, subsumed |
 | **Reading Comprehension module** | **shipped** | Journey library → briefing → session (read → answer → explain, with evidence jumps) → result → Learning Page → review |
 | Reading surface (0.6.0) | **shipped** | Book measure, paragraph rhythm token, sticky veiled session bar, scroll progress + "~N min left", end-mark, hyphenation on narrow screens |
-| Learning Page (Passage Mentor) | **shipped** | `/rc/mentor/:id`; v3 mentor content; theme illustration per passage (self-drawing); recall-before-reveal; misread section; pull-quote takeaway |
+| Learning Page (Passage Mentor) | **shipped** | `/rc/mentor/:id`; **v4 Learning Page** — one-sentence summary, plain-English retelling, why-it-was-hard, the reading lesson, reflection question — layered over v3 mentor content; self-drawing theme illustration per passage; recall-before-reveal; pull-quote takeaway |
 | Reading reflection | **shipped** | Optional per-passage line, sentence starters, saved to the `learning` store, editable; covered by backup |
 | Explanations as reading lessons | **shipped** | Verdict → expert reasoning + evidence pill → distractor teardown → "Make it a habit" (v3 `reading_habit`) |
 | Learning progression (stages + journey) | **shipped** | `core/learning/journey.js`; all five stages populated (8 passages, numeric ladder 2→9); STAGE_INFO voice; recommends with reasons; never locks |
@@ -46,10 +46,10 @@ _Last updated: 2026-07-05 — Personal Reading Mentor milestone complete. App ve
 
 | System | State | Notes |
 |---|---|---|
-| Registry (`content/index.json`) | **shipped** | 8 RC items; agrees with files incl. stage/difficulty_numeric/time/word_count (checked by tools/verify.mjs) |
-| RC content schema files | **shipped** | v1 + v2 (mentor layer) + v3 (reading_habit per question, misunderstanding per mentor); loader resolves per item |
-| Content library | **shipped (starter)** | 8 RC passages, 34 questions; every journey stage populated (foundation→elite, numeric 2→9); 8 genres |
-| Verification tool (`tools/verify.mjs`) | **shipped** | Reuses the app's own validator; module-graph + precache-coverage, journey-progression, and backup round-trip checks; runs on Windows (pathToFileURL fix); run before every release |
+| Registry (`content/index.json`) | **shipped** | 32 RC items; agrees with files incl. stage/difficulty_numeric/time/word_count (checked by tools/verify.mjs); rebuilt from files by a scripted mirror |
+| RC content schema files | **shipped** | v1 + v2 (mentor layer) + v3 (reading_habit per question, misunderstanding per mentor) + **v4 (full Learning Page: one_sentence_summary, simple_explanation, why_difficult, reading_lesson, reflection_question)**; loader resolves per item |
+| Content library | **shipped** | 32 RC passages, 136 questions; every journey stage populated (foundation→elite, numeric 2→9); all 12 genres represented twice over (24 new across batch-rc-003 + batch-rc-004, split 6 easy / 12 medium / 6 hard, no two hard adjacent) |
+| Verification tool (`tools/verify.mjs`) | **shipped** | Reuses the app's own validator; module-graph + precache-coverage (every schema version), journey-progression, and backup round-trip checks; mentor-voice lint targets newest schema; runs on Windows (pathToFileURL fix); run before every release |
 | Content schemas for PS/PJ/OOO/Vocab | designed | Author with each module |
 | RC master generation prompt | shipped (v1, docs) | See "Decisions" re: passage shape flag |
 | Pipeline scaffolding (log, balance dashboard) | designed | Create with the first *generated* (not authored) batch |
@@ -62,13 +62,14 @@ _Last updated: 2026-07-05 — Personal Reading Mentor milestone complete. App ve
    conflict once runtime AI (network + paid API) is on the table. Recommended:
    record the docs' identity as canonical for V1–V2 in `MASTER_CONTEXT.md`; treat
    "general OS" as an explicit V3+ re-scoping question. **Unchanged from M1.**
-3. **Content provenance** — all eight passages (five from M2, three from the
-   Reading Experience batch) are ORIGINAL compositions in CAT register
-   (`source.publication: "original"`), not adaptations of real essays,
-   because live source URLs can't be verified from the build environment and
-   fabricating citations is disallowed. When the real pipeline runs, `source`
-   should carry genuine, verified publications/URLs. Owner: confirm this policy or
-   supply sourced passages.
+3. **Content provenance** — all thirty-two passages (eight from M2 and the
+   earlier milestones, twenty-four from `batch-rc-003` and `batch-rc-004`) are
+   ORIGINAL compositions in CAT register (`source.publication: "original"`), not
+   adaptations of real essays, because live source URLs can't be verified from the
+   build environment and fabricating citations is disallowed. When the real
+   pipeline runs, `source` should carry genuine, verified publications/URLs.
+   Owner: confirm this policy or supply sourced passages. **Unchanged in policy
+   from 0.7.0; both 0.8.0 batches follow it.**
 
 ## Recorded decisions (Milestone 2)
 
@@ -96,6 +97,25 @@ _Last updated: 2026-07-05 — Personal Reading Mentor milestone complete. App ve
   convention, but the official scheme is announced per exam cycle; the result
   screen says so and shows accuracy as the primary honest signal.
 
+- **Premium Reading Library (0.8.0):** schema **v4** appended (v1–v3 files
+  stay valid) adds five mentor fields that turn the Learning Page from coaching
+  notes into a complete lesson — `one_sentence_summary`, `simple_explanation`
+  (plain-English retelling), `why_difficult`, `reading_lesson` (one transferable
+  habit), and `reflection_question` (schema-enforced to end with "?"). Twenty-four
+  new passages — `batch-rc-003` (rc-0009…rc-0020) and `batch-rc-004`
+  (rc-0021…rc-0032) — give every one of the 12 schema genres exactly two
+  passages, at the mission's 6 easy / 12 medium / 6 hard split (25/50/25) with no
+  two hard passages adjacent by id, so the journey ladder never spikes. The
+  registry is now rebuilt FROM the passage
+  files by a scripted mirror, so file and registry cannot drift (verify still
+  enforces the mirror). Theme illustrations remain code in `mentor.js` keyed by
+  passage id (content JSON stays pure data — the 0.6.0 decision, extended to all
+  24 new passages plus fallback motifs for the four new genres). verify.mjs
+  gained schema-precache coverage for EVERY version and points its mentor-voice
+  lint at the newest schema, so a forgotten schema precache or a stale trap enum
+  is unshippable. Roadmap ladder shifts by one (Para Summary → 0.9.0), recorded
+  in CHANGELOG per ROADMAP_V2's maintenance rule; ROADMAP_V2 §1/§10 justify
+  putting library growth ahead of the next module.
 - **Personal Reading Mentor (0.7.0):** the notebook is subsumed, not
   built — recorded as a product decision, not a deferral: a ledger of
   failures contradicts the product's emotional design, while its learning

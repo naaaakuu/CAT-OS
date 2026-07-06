@@ -1,0 +1,287 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0030",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "technology-ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 505,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "when attention is the product, engagement diverges from the user's interest",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The 'attention economy' critique of engagement-optimised design is widely discussed in technology ethics; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Attention-economy passage; the crux is the divergence between engagement and the user's interest. Distractors moralize the companies or over-claim manipulation. Owner review pending.",
+    "vocab_extracted": [
+      "commodity",
+      "engagement",
+      "solicitous"
+    ]
+  },
+  "passage": {
+    "title": "When You Are the Product",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0030-p1",
+        "text": "A useful rule for understanding a service is to ask who pays for it and what they are buying. When a product is offered free of charge, the user is rarely the customer; more often the user is the product, and the paying customer is the advertiser, purchasing something the user unknowingly supplies. What is sold, in the case of most free digital platforms, is attention — the user's time and focus, gathered in bulk and auctioned to whoever wishes to reach it. The service is not a gift. It is a device for harvesting a resource the user did not know they were producing."
+      },
+      {
+        "id": "rc-0030-p2",
+        "text": "Once this is seen, the design of such services becomes legible. A platform paid in attention has one overriding incentive: to maximize the time users spend engaged with it. Every feature that keeps a user scrolling, refreshing, and returning is, from the platform's standpoint, a success, and every feature that lets a user leave satisfied is, in the same terms, a failure. The metrics that matter are measures of engagement — minutes on the app, clicks, returns — and these have no necessary connection to whether the user is informed, enriched, or content. The system is optimized for a quantity that is not the same as the user's good."
+      },
+      {
+        "id": "rc-0030-p3",
+        "text": "The trouble is that engagement and well-being often pull apart. The content that most reliably captures attention is not the content that most benefits the person attending to it: outrage holds the eye better than nuance, novelty better than depth, the endless feed better than the finished article. A design honestly aimed at the user's interest would sometimes tell them they had seen enough and should log off. A design aimed at engagement can never say this, for a satisfied user who leaves is, by its own measure, lost revenue. The conflict is not occasional but built into the arrangement."
+      },
+      {
+        "id": "rc-0030-p4",
+        "text": "It would be too simple to cast this as a tale of wicked companies preying on helpless users; the people who build these systems are mostly not villains, and users are not merely passive. The point is structural, and therefore harder to fix than villainy would be: given who pays and for what, the incentives point away from the user's interest even when everyone involved is decent. To change the behaviour, one would have to change the arrangement — the source of payment, the measure of success — not merely appeal to better intentions. Understanding whom a service serves is the first defense of the served, and often the only one available to them."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0030-q1",
+      "type": "main_idea",
+      "stem": "The central argument of the passage is that",
+      "options": {
+        "A": "free digital platforms are run by dishonest companies that deceive their users",
+        "B": "because free platforms sell users' attention, their design is structurally driven to maximize engagement, which often diverges from the user's own good",
+        "C": "users should simply exercise more willpower to avoid wasting time online",
+        "D": "advertising is an inefficient way to fund digital services"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "The passage argues that free services sell attention (p1), so their design maximizes engagement (p2), which pulls apart from well-being (p3), and that this is structural rather than a matter of villainy (p4). Option B captures the whole argument — the attention business model and its structural divergence from the user's interest.",
+        "passage_anchor": "rc-0030-p2 and rc-0030-p4",
+        "question_type_note": "The main idea holds the mechanism (attention sold → engagement maximized → diverges from good) and its structural framing.",
+        "reading_habit": "When a passage says its point is 'structural, not villainy', build that into your summary — it is the author's chosen frame and rules out the moralizing options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 4 explicitly rejects this: the builders 'are mostly not villains'; the problem is structural, not deception by wicked companies.",
+            "seductive_element": "A critique of platforms is easily heard as an accusation of corporate malice."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage locates the problem in incentives and design, not in users' willpower; it even says users 'are not merely passive' but does not prescribe willpower.",
+            "seductive_element": "'Just log off' feels like the practical takeaway of a passage about time online."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The passage analyzes what the ad-funded model does to design, not whether advertising is efficient; efficiency is never the issue.",
+            "seductive_element": "Advertising is central to the passage, so a claim about it sounds on-topic."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0030-q2",
+      "type": "inference",
+      "stem": "It can be inferred that a design 'honestly aimed at the user's interest' would differ from an engagement-driven design in that it would",
+      "options": {
+        "A": "show users even more content to keep them informed",
+        "B": "sometimes encourage users to stop and log off when they had seen enough",
+        "C": "remove all advertising from the platform",
+        "D": "measure success purely by the number of returns per day"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "Paragraph 3 says 'A design honestly aimed at the user's interest would sometimes tell them they had seen enough and should log off', whereas an engagement design 'can never say this'. The inferred difference is exactly option B.",
+        "passage_anchor": "rc-0030-p3",
+        "question_type_note": "The inference contrasts the two designs on the passage's own decisive example: telling a satisfied user to leave.",
+        "reading_habit": "When the passage draws a direct contrast between two designs, read the correct inference straight off the difference it names.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Showing more content to prolong attention is the engagement strategy; a user-interested design would sometimes show less and let the user leave.",
+            "seductive_element": "'Keeping users informed' sounds benevolent, blurring it with the user's good."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never says a user-interested design removes all advertising; the fix it names is changing incentives and success measures, not banning ads outright.",
+            "seductive_element": "Since ads fund the model, removing them can seem the natural user-friendly move."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Measuring success by returns is the engagement metric the passage criticizes; a user-interested design would not judge itself by that number.",
+            "seductive_element": "It uses the passage's own metric vocabulary, which feels textually grounded."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0030-q3",
+      "type": "author_purpose",
+      "stem": "The author's main purpose in stating that the people who build these systems 'are mostly not villains' is to",
+      "options": {
+        "A": "excuse the platforms from any responsibility for their effects",
+        "B": "locate the problem in the structure of incentives rather than in bad intentions, which makes it harder to fix",
+        "C": "argue that users are entirely to blame for their own overuse",
+        "D": "suggest that better-intentioned employees would solve the problem"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 uses the 'not villains' point to make its structural argument: 'the incentives point away from the user's interest even when everyone involved is decent', so fixing it requires changing 'the arrangement… not merely appeal to better intentions.' The purpose is to relocate the problem from intentions to structure — option B.",
+        "passage_anchor": "rc-0030-p4",
+        "question_type_note": "Purpose questions ask what a concession accomplishes; here disclaiming villainy sets up the structural, and harder, diagnosis.",
+        "reading_habit": "When an author says 'this isn't about bad people', expect them to be shifting the cause to structure — read the move as a reframing, not an excuse.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The point is not to excuse anyone but to explain why good intentions are insufficient; the passage still holds the arrangement responsible for the harm.",
+            "seductive_element": "'Not villains' can sound like letting the companies off the hook."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says users 'are not merely passive', but it does not blame them; it faults the structure, not the users.",
+            "seductive_element": "Denying company villainy can seem to shift blame onto users by elimination."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says appealing to better intentions is exactly what will NOT work; the fix is structural, not better-intentioned staff.",
+            "seductive_element": "'Not villains' can suggest that nicer people inside would fix things."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0030-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the first paragraph, the statement that the user is 'the product' most nearly means that the user",
+      "options": {
+        "A": "is a loyal customer whom the platform tries hard to please",
+        "B": "is the thing being sold — their attention is packaged and sold to advertisers",
+        "C": "manufactures the content that appears on the platform",
+        "D": "pays a hidden fee for using the service"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "Paragraph 1 explains that when a service is free 'the user is the product, and the paying customer is the advertiser', with attention 'gathered in bulk and auctioned'. To be 'the product' means to be the thing sold — one's attention packaged for advertisers. Option B matches this.",
+        "passage_anchor": "rc-0030-p1",
+        "question_type_note": "Vocabulary-in-context: 'the product' is defined by the paragraph's who-pays framing — the user is what is sold, not who buys.",
+        "reading_habit": "Let the passage's own framing define a loaded phrase; here 'the product' is fixed by 'the paying customer is the advertiser'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the user is 'rarely the customer'; being the product is the opposite of being a courted customer.",
+            "seductive_element": "Platforms do seem eager to please users, blurring product with customer."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The user supplies attention, not necessarily content; the resource sold is 'time and focus', not the platform's posts.",
+            "seductive_element": "Users do create content on many platforms, so 'manufactures content' sounds plausible."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The service is free of monetary charge; the user pays in attention, not a hidden fee. 'The product' is about being sold, not about paying.",
+            "seductive_element": "'You pay somehow' is a common gloss on 'free' services, but not what 'the product' means here."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "commodity",
+      "passage_use": "a resource the user did not know they were producing",
+      "meaning_here": "something bought and sold; here, attention treated as a saleable resource",
+      "difficulty": "medium"
+    },
+    {
+      "word": "engagement",
+      "passage_use": "The metrics that matter are measures of engagement",
+      "meaning_here": "the amount of user activity and time spent on a platform",
+      "difficulty": "easy"
+    },
+    {
+      "word": "solicitous",
+      "passage_use": "every feature that keeps a user scrolling, refreshing, and returning",
+      "meaning_here": "attentive to keeping the user engaged (the platform's eager pursuit of the user's time)",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage explains a business model and then draws a careful conclusion from it. The test is to keep the diagnosis structural — the author insists this is not a story of wicked companies — and not to slide into either moral outrage or 'just use more willpower'.",
+    "one_sentence_summary": "When a digital service is free, the user is not the customer but the product, whose attention is sold to advertisers — so the design is driven to maximize engagement, a goal that often diverges from the user's own good, and the problem is structural rather than a matter of bad intentions.",
+    "main_idea": "Free platforms sell users' attention to advertisers, which gives them one overriding incentive: maximize engagement. But engagement (minutes, clicks, returns) has no necessary link to whether users are informed or content, and the content that captures attention often isn't the content that benefits them. The conflict is built into the arrangement, so it persists even when the people involved are decent — fixing it means changing the incentives, not appealing to better intentions.",
+    "simple_explanation": "Here's a useful rule for understanding any service: ask who pays, and what they're buying. When something is offered free, the user usually isn't the customer — the user is the PRODUCT, and the paying customer is the advertiser, buying something the user unknowingly supplies. For most free digital platforms, what's sold is attention: your time and focus, gathered in bulk and auctioned to whoever wants to reach it. The service isn't a gift. It's a machine for harvesting a resource you didn't know you were producing.\n\nOnce you see that, the design of these services suddenly makes sense. A platform paid in attention has one overriding incentive: maximize the time users spend engaged. Every feature that keeps you scrolling, refreshing, and coming back is, to the platform, a success — and every feature that lets you leave satisfied is, in the same terms, a failure. The numbers that matter are engagement metrics — minutes on the app, clicks, returns — and those have no necessary connection to whether you're informed, enriched, or happy. The system is optimized for a quantity that isn't the same as your good.\n\nAnd here's the problem: engagement and well-being often pull in opposite directions. The content that most reliably grabs attention isn't the content that most benefits the person paying attention. Outrage holds the eye better than nuance; novelty better than depth; the endless feed better than the finished article. A design honestly aimed at your interest would sometimes tell you you've seen enough and should log off. A design aimed at engagement can never say that — because a satisfied user who leaves is, by its own measure, lost revenue. The conflict isn't occasional; it's built into the arrangement.\n\nBut don't turn this into a simple story of evil companies preying on helpless users. The people who build these systems mostly aren't villains, and users aren't just passive. The point is STRUCTURAL — and that makes it harder to fix than villainy would be. Given who pays and for what, the incentives point away from the user's interest even when everyone involved is decent. To change the behaviour, you'd have to change the arrangement — the source of payment, the measure of success — not just ask people to have better intentions. Understanding whom a service actually serves is the first defence of the served, and often the only one they've got.",
+    "why_difficult": "The passage makes a sharp critique but frames it carefully, and the two natural over-readings are both tempting. One is moral outrage — 'these companies are deceiving/exploiting us' — which paragraph 4 explicitly disowns. The other is the individualistic fix — 'users should just have more willpower' — which the structural framing rules out. Holding the author's precise, blame-free, structural diagnosis against both pulls is the challenge.",
+    "author_intention": "To give the reader a diagnostic tool — ask who pays and for what — and to show that the harms of attention-driven design flow from incentives, not malice, so that outrage and willpower both miss the real target: the arrangement itself.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0030-p1",
+        "role": "Who pays, what's sold",
+        "note": "When a service is free, you're not the customer — you're the product. Advertisers pay for your attention, harvested in bulk. The service is a device for gathering a resource you didn't know you produced."
+      },
+      {
+        "paragraph_id": "rc-0030-p2",
+        "role": "The incentive",
+        "note": "A platform paid in attention has one goal: maximize your time engaged. Features that keep you scrolling are successes; ones that let you leave satisfied are failures. Engagement isn't the same as your good."
+      },
+      {
+        "paragraph_id": "rc-0030-p3",
+        "role": "The divergence",
+        "note": "Engagement and well-being pull apart: outrage beats nuance, the endless feed beats the finished article. An honest design would sometimes say 'log off'. An engagement design never can."
+      },
+      {
+        "paragraph_id": "rc-0030-p4",
+        "role": "Structural, not villainous",
+        "note": "Not a tale of evil companies — the builders mostly aren't villains, users aren't passive. The problem is structural: incentives point away from your interest even when everyone's decent. Fix the arrangement, not the intentions."
+      }
+    ],
+    "tone_progression": "Analytical and clear-eyed throughout, sharpening into a pointed diagnosis in paragraph 3, then deliberately fair in paragraph 4 — refusing easy villains while holding the structure firmly to account.",
+    "key_transitions": [
+      "'Once this is seen, the design of such services becomes legible.' (start of paragraph 2) — the business model becomes a key that decodes the design.",
+      "'It would be too simple to cast this as a tale of wicked companies preying on helpless users…' (start of paragraph 4) — the author refuses moralizing and fixes the structural frame."
+    ],
+    "misunderstanding": "The two misreadings mirror each other: moral outrage ('wicked companies deceiving users') and individual blame ('users just need willpower'). Paragraph 4 rejects the first outright and reframes the whole issue as structural, which also rules out the second. The passage's point is that decent people and non-passive users can still produce harm because of the incentives.",
+    "traps_summary": "The distractors here moralize the companies, shift blame to users' willpower, over-claim (remove all ads), or reuse the passage's engagement metrics as if they were user-friendly. Keep the diagnosis structural and the conclusion at the author's careful strength: incentives, not intentions, are the target.",
+    "reading_lesson": "When an author explicitly says 'this is structural, not a matter of bad people', treat that as a load-bearing instruction and reject every option that reintroduces villains or personal blame. Distinguishing structural causes (incentives, who-pays) from moral ones (good vs evil actors) is a recurring CAT move, and the strongest distractors are the moralizing readings the author took care to disown. Answer from the structure the author built, not the outrage the topic invites.",
+    "real_world": "This is the logic behind infinite scroll, autoplay, streaks, and notification badges, and behind the advice to notice which apps are free and ask what they're really selling. Its deeper lesson generalizes: whenever you use something without paying money for it, ask who is paying and what they're buying — the answer usually explains the design better than any judgement of the designers' character.",
+    "takeaway": "If you're not the customer, you're the product — and the design will serve whoever actually pays.",
+    "reflection_question": "For the free services you use most, who is really paying, and what are they buying that you supply?"
+  }
+}

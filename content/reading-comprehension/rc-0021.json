@@ -1,0 +1,345 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0021",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "structure-mapping",
+      "trap-recognition",
+      "evidence-anchoring"
+    ],
+    "word_count": 574,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "logical_structure",
+      "strengthen_weaken",
+      "vocabulary_in_context"
+    ],
+    "theme": "how asymmetric information can unravel a market entirely",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The 'market for lemons' analysis of adverse selection is a landmark idea in economics (George Akerlof, 1970); no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Hard economics with a self-reinforcing mechanism (adverse selection) the reader must track step by step; includes a strengthen/weaken item on the load-bearing information assumption. Owner review pending.",
+    "vocab_extracted": [
+      "asymmetry",
+      "unravel",
+      "warranty",
+      "adverse"
+    ]
+  },
+  "passage": {
+    "title": "The Market That Ate Itself",
+    "reading_time_min": 2.9,
+    "paragraphs": [
+      {
+        "id": "rc-0021-p1",
+        "text": "Consider the market for second-hand cars, and the awkward fact that the seller knows something the buyer does not. Having lived with the car, the seller knows whether it is sound or a lemon; the buyer, however carefully he inspects, cannot fully know. This gap in knowledge — the seller informed, the buyer guessing — seems at first a minor friction, the sort of thing a shrewd buyer discounts for. It is in fact the seed of a striking result: under the right conditions, the gap can hollow out the market until almost nothing is left to trade."
+      },
+      {
+        "id": "rc-0021-p2",
+        "text": "The logic runs as follows. Unable to tell a good car from a bad one, the buyer will pay only a price that reflects the average quality on offer — neither the high price a sound car deserves nor the low price a lemon is worth, but something in between. Now watch what that single price does to sellers. To the owner of a genuinely good car, the average price is an insult; it undervalues what he has, and he withdraws, keeping his car or selling privately. To the owner of a lemon, the same price is a windfall, worth more than the car, and he rushes in. The buyer's fair, sensible offer has quietly sorted the sellers, driving out the good and attracting the bad."
+      },
+      {
+        "id": "rc-0021-p3",
+        "text": "But the process does not stop there, and its second turn is what makes it remarkable. As the good cars leave, the actual average quality of what remains falls. The buyer, no fool, revises his estimate downward and lowers his offer accordingly. That lower price now insults the owners of the merely mediocre cars, who withdraw in their turn, dropping the average again, prompting a still lower offer. Each round of reasonable behaviour worsens the pool, in a descending spiral that can, in the limit, leave only the worst cars — or destroy the market altogether, so that cars which buyers would gladly purchase and sellers would gladly sell go untraded, for want of a price at which both can trust the exchange."
+      },
+      {
+        "id": "rc-0021-p4",
+        "text": "What is arresting about this outcome is that no one in it behaves foolishly or dishonestly. Every party reasons correctly from what they know; the buyer's caution and the sellers' responses are each individually sensible. The failure is not moral but structural, a property of the information, not of the people. This is why the phenomenon so unsettled the discipline: it showed that a market could fail not through monopoly, or greed, or state interference — the usual suspects — but through the mere fact that one side knew more than the other."
+      },
+      {
+        "id": "rc-0021-p5",
+        "text": "Seen in this light, a whole range of familiar institutions look less like ornaments on the market and more like its load-bearing walls. Warranties, brand reputations, professional certifications, the mechanic's inspection, the very existence of dealerships that stake their name on what they sell — each is a device for closing, or bridging, the gap in information that would otherwise dissolve the trade. They are not frictions added to an otherwise smooth market; they are the costly machinery that lets certain markets exist at all. Where such machinery cannot be built, the theory predicts, the market will be thin or absent, however much both sides might wish to deal."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0021-q1",
+      "type": "main_idea",
+      "stem": "The central idea of the passage is that",
+      "options": {
+        "A": "second-hand cars are usually of poor quality because sellers are dishonest",
+        "B": "when one side of a market knows more than the other, reasonable behaviour by all parties can shrink or destroy the market, and many institutions exist to counter this",
+        "C": "buyers of used goods should always assume they are being cheated",
+        "D": "markets fail primarily because of monopoly power and government interference"
+      },
+      "correct": "B",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "correct_reasoning": "The passage traces how a gap in information (p1) leads, through a spiral of individually sensible choices (p2-p3), to a market that can hollow out (p3), with no dishonesty involved (p4), which is why institutions exist to bridge the gap (p5). Option B states this whole arc — asymmetric information, rational unravelling, and the institutions that counter it.",
+        "passage_anchor": "rc-0021-p3 and rc-0021-p5",
+        "question_type_note": "The main idea must span the mechanism and its consequence, including the institutional coda, not just the car example.",
+        "reading_habit": "For a passage that runs an example into a general principle, put the principle — not the example — at the centre of your one-sentence summary.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 4 stresses that 'no one behaves dishonestly'; the failure is structural, from information, not from dishonest sellers. This misreads the whole point.",
+            "seductive_element": "'Lemon' and 'the seller knows more' suggest sharp practice, the intuitive villain of a used-car story."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is a practical scrap of advice, not the argument; the passage explains a market-level phenomenon and its institutional remedies, not a buyer's mindset.",
+            "seductive_element": "It sounds like a sensible lesson to draw from a story about hidden defects."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 4 explicitly contrasts this failure with 'monopoly, or greed, or state interference — the usual suspects'; the passage's point is a DIFFERENT cause. The option names the very causes it sets aside.",
+            "seductive_element": "Monopoly and interference are the familiar textbook causes of market failure, so they feel authoritative."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0021-q2",
+      "type": "inference",
+      "stem": "It can be inferred that the owner of a genuinely good car withdraws from the market because",
+      "options": {
+        "A": "he is unable to prove the car's quality and so is offered only a price reflecting average quality",
+        "B": "he suspects that all buyers in the market are dishonest",
+        "C": "he prefers to keep his car for sentimental reasons",
+        "D": "the law prevents him from advertising the car's true condition"
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 explains that the buyer, unable to tell good from bad, offers only the average price, which 'undervalues' the good car; so its owner 'withdraws'. The inference is that, unable to establish the car's quality to the buyer, he is offered only the average price — option A, which paragraph 5 confirms by noting warranties and certifications exist to prove quality.",
+        "passage_anchor": "rc-0021-p2",
+        "question_type_note": "The inference makes explicit why the average price drives out the good car: the seller can't credibly signal quality.",
+        "reading_habit": "Trace a withdrawal or exit in an argument back to the incentive the passage gives it, not to a motive the passage never mentions.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage attributes buyer behaviour to ignorance, not dishonesty, and never says sellers suspect buyers of cheating. The exit is about price, not distrust of buyers.",
+            "seductive_element": "Once 'asymmetry' is in play, suspicion of the other side feels like a natural motive."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Sentiment is never mentioned; the good car's owner withdraws because the average price undervalues a sound car, a purely economic reason.",
+            "seductive_element": "People do keep cars for sentimental reasons in real life, so it reads as plausible."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No legal barrier appears; the problem is that quality cannot be credibly verified, not that truthful advertising is forbidden.",
+            "seductive_element": "It supplies a concrete external obstacle where the passage's obstacle is informational."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0021-q3",
+      "type": "logical_structure",
+      "stem": "The phrase 'the process does not stop there' at the start of the third paragraph marks the point at which the argument",
+      "options": {
+        "A": "abandons the car example for an unrelated market",
+        "B": "turns from a one-time sorting of sellers to a self-reinforcing downward spiral",
+        "C": "concedes that the earlier reasoning was mistaken",
+        "D": "introduces the moral failings of the participants"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 establishes a single sorting (average price drives out good cars). Paragraph 3's 'the process does not stop there' escalates it: departing good cars lower the average, prompting a lower offer, driving out mediocre cars, and so on 'in a descending spiral'. The phrase marks the shift from one-time sorting to a self-reinforcing loop — option B.",
+        "passage_anchor": "rc-0021-p3",
+        "question_type_note": "Structure questions ask what a transition does; here it escalates a static effect into a dynamic spiral.",
+        "reading_habit": "When you meet 'but it doesn't stop there', expect an escalation — the author is turning a single effect into a repeating or compounding one.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The car example continues throughout paragraph 3; no new market is introduced there. The escalation stays within the same case.",
+            "seductive_element": "A dramatic transition can be misread as a change of subject."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph extends the earlier reasoning rather than retracting it; the first sorting was correct and the spiral builds on it.",
+            "seductive_element": "'Does not stop there' can be misheard as 'the earlier account was incomplete and therefore wrong'."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Paragraph 4, not 3, addresses morality — and only to deny it plays a role. The third paragraph adds a mechanism, not a moral charge.",
+            "seductive_element": "A worsening 'pool' can sound like a comment on the participants' character."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0021-q4",
+      "type": "strengthen_weaken",
+      "stem": "Which of the following, if true, would most weaken the passage's explanation of why the market unravels?",
+      "options": {
+        "A": "Some sellers of good cars are emotionally attached to them",
+        "B": "Buyers can cheaply and reliably verify each car's true quality before purchase",
+        "C": "The number of used cars for sale varies from year to year",
+        "D": "A few buyers are willing to pay more than the average price out of generosity"
+      },
+      "correct": "B",
+      "estimated_time_sec": 110,
+      "explanation": {
+        "correct_reasoning": "The unravelling depends on one load-bearing premise: the buyer CANNOT tell good cars from bad and so offers only an average price (p1-p2). If buyers could cheaply and reliably verify quality, they would pay each car its true worth, good cars would not be underpriced, and the spiral would never begin. Option B removes the informational asymmetry that drives the whole result.",
+        "passage_anchor": "rc-0021-p1 and rc-0021-p2",
+        "question_type_note": "The weakener must strike the argument's load-bearing assumption — here, the buyer's inability to verify quality.",
+        "reading_habit": "To weaken a mechanism, find the single premise that starts the chain and ask what would remove it — not what merely adds a minor exception.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Sentiment might keep a few cars off the market, but it does not touch the core mechanism — the average price still underprices good cars and drives them out. It nibbles at the edge, not the engine.",
+            "seductive_element": "It seems to give good-car owners an extra reason to withdraw, which sounds like it supports rather than weakens — but either way it leaves the mechanism intact."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Year-to-year variation in supply is irrelevant to whether asymmetric information sorts quality; the spiral operates regardless of the market's overall size.",
+            "seductive_element": "It sounds like a real-world economic factor and so feels pertinent."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "A few generous buyers do not change the average-price logic that governs the market; the mechanism runs on the typical buyer's rational offer, not on rare exceptions.",
+            "seductive_element": "Higher prices seem to help good-car sellers, so it looks like it could halt the spiral."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0021-q5",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the final paragraph, 'load-bearing walls' most nearly describes institutions that",
+      "options": {
+        "A": "add unnecessary weight and cost to transactions",
+        "B": "are decorative features that could be removed without consequence",
+        "C": "are structurally essential to the market's very existence",
+        "D": "physically protect goods from damage during trade"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "The paragraph contrasts 'ornaments on the market' with 'load-bearing walls', then says warranties and certifications 'let certain markets exist at all' and are not 'frictions' but 'costly machinery'. 'Load-bearing walls' therefore means structurally essential — remove them and the market collapses. Option C matches this architectural metaphor.",
+        "passage_anchor": "rc-0021-p5",
+        "question_type_note": "Vocabulary-in-context turns on the explicit contrast the paragraph draws: ornament (removable) versus load-bearing (essential).",
+        "reading_habit": "Read a metaphor through the contrast it is set against — 'load-bearing' is defined here precisely by its opposition to 'ornaments'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage explicitly denies these institutions are mere added weight: 'not frictions added to an otherwise smooth market'. Load-bearing means essential, not burdensome.",
+            "seductive_element": "Warranties and certifications do cost money, so 'unnecessary cost' sounds plausible."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "'Ornaments… that could be removed' is exactly what the paragraph says these institutions are NOT; load-bearing walls are the opposite of decorative.",
+            "seductive_element": "It borrows the paragraph's own word 'ornaments', which the author uses only to reject it."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The metaphor is architectural (structural support), not literal physical protection of goods; the walls support the market's existence, not the cargo.",
+            "seductive_element": "'Walls' can suggest physical protection, and trade involves goods."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "asymmetry",
+      "passage_use": "the seller informed, the buyer guessing",
+      "meaning_here": "an imbalance in which one side has more information than the other",
+      "difficulty": "hard"
+    },
+    {
+      "word": "unravel",
+      "passage_use": "the gap can hollow out the market until almost nothing is left",
+      "meaning_here": "to come apart progressively until it fails",
+      "difficulty": "medium"
+    },
+    {
+      "word": "warranty",
+      "passage_use": "Warranties, brand reputations, professional certifications",
+      "meaning_here": "a seller's guarantee of quality that bridges the information gap",
+      "difficulty": "medium"
+    },
+    {
+      "word": "adverse",
+      "passage_use": "driving out the good and attracting the bad",
+      "meaning_here": "unfavourable; here, the selection that favours low-quality goods",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage runs a machine: a small gap in knowledge, fed through several rounds of perfectly reasonable choices, eats a whole market. Your task is to track the spiral step by step and to hold onto its punchline — no one here is a villain.",
+    "one_sentence_summary": "When sellers know a product's quality and buyers don't, the single average price buyers offer drives out good goods and attracts bad ones, and each round of this sensible behaviour lowers quality further until the market shrinks or disappears — a failure caused by information, not dishonesty.",
+    "main_idea": "Because buyers can't tell good used cars from lemons, they offer only an average price; that price underpays good cars (so they leave) and overpays lemons (so they flood in), which lowers average quality, which lowers the next offer, in a self-reinforcing spiral. The failure is structural, not moral, and many institutions — warranties, brands, certifications — exist precisely to bridge the information gap and keep such markets alive.",
+    "simple_explanation": "Think about buying a used car. The seller has driven it for years, so he knows if it's solid or a lemon. You, the buyer, can inspect it but can never be sure. That gap — seller knows, buyer guesses — looks like a small nuisance. It turns out to be the seed of something dramatic: under the right conditions it can hollow out the whole market.\n\nHere's the logic. Since you can't tell good cars from bad, you'll only offer a price based on the AVERAGE quality out there — more than a lemon is worth, less than a good car deserves. Now see what that one price does. To the owner of a genuinely good car, the average price is an insult, so he keeps his car or sells privately — he leaves. To the owner of a lemon, that same price is a gift, more than the car is worth, so he rushes in. Your perfectly fair offer has quietly sorted the sellers: it pushes out the good and pulls in the bad.\n\nAnd it doesn't stop there — this is the remarkable part. As the good cars leave, the real average quality of what's left drops. You're no fool, so you lower your offer to match. But that lower price now insults the owners of the merely okay cars, so THEY withdraw, dropping the average again, so you offer even less... Each round of reasonable behaviour makes the pool worse, spiralling down until, in the extreme, only the worst cars remain — or the market collapses entirely, and cars that buyers would happily buy and sellers would happily sell simply go untraded, because there's no price both can trust.\n\nWhat's striking is that nobody acts foolishly or dishonestly. Everyone reasons correctly from what they know. The failure isn't moral — it's structural, a property of the information, not the people. That's what unsettled economists: a market can fail not through the usual suspects (monopoly, greed, government meddling) but simply because one side knows more than the other.\n\nSeen this way, a lot of everyday institutions look different. Warranties, brand reputations, professional certifications, the trusted mechanic, dealerships that stake their name on what they sell — these aren't decorations on the market. They're load-bearing walls: costly machinery that bridges the information gap and lets certain markets exist at all. Where that machinery can't be built, the theory predicts, the market will be thin or missing — no matter how much both sides would like to deal.",
+    "why_difficult": "The difficulty is a chain of reasoning with a twist in the middle. Paragraph 2 gives a one-time sorting; paragraph 3 turns it into a repeating spiral, and readers who don't register that escalation answer the structure question wrongly. The bigger trap is the moral one: everything about 'lemons' and 'hidden quality' primes you to blame dishonest sellers, but the passage's whole punchline (p4) is that no one is dishonest. Holding a mechanical, blame-free reading against that pull is the real test.",
+    "author_intention": "To show that a market can destroy itself through nothing but a gap in information — and thereby to reveal the humble institutions of commerce (warranties, brands, certifications) as the essential machinery that makes trust, and therefore trade, possible.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0021-p1",
+        "role": "The gap",
+        "note": "The seller knows the car's quality; the buyer can't. This looks like a minor friction — it's actually the seed of a market that can hollow itself out."
+      },
+      {
+        "paragraph_id": "rc-0021-p2",
+        "role": "The first sorting",
+        "note": "Not knowing good from bad, the buyer offers an average price. That underpays good cars (owners leave) and overpays lemons (owners rush in). The fair offer sorts the sellers."
+      },
+      {
+        "paragraph_id": "rc-0021-p3",
+        "role": "The spiral",
+        "note": "It doesn't stop. Good cars leaving lowers the average, so the offer drops, so mediocre cars leave, dropping the average again — a descending spiral that can gut the market."
+      },
+      {
+        "paragraph_id": "rc-0021-p4",
+        "role": "The punchline",
+        "note": "No one is foolish or dishonest; everyone reasons correctly. The failure is structural — a property of information, not people. A market can fail without monopoly, greed, or the state."
+      },
+      {
+        "paragraph_id": "rc-0021-p5",
+        "role": "The institutions",
+        "note": "Warranties, brands, certifications, trusted dealers — not ornaments but load-bearing walls. They bridge the information gap and let markets exist. Where they can't be built, the market thins or vanishes."
+      }
+    ],
+    "tone_progression": "Coolly analytical throughout, with a note of genuine intellectual surprise at the spiral in paragraph 3 and at the blame-free failure in paragraph 4 — the voice of someone showing you a clean, unsettling result.",
+    "key_transitions": [
+      "'Now watch what that single price does to sellers.' (paragraph 2) — the buyer's offer becomes a force that sorts the market.",
+      "'But the process does not stop there, and its second turn is what makes it remarkable.' (start of paragraph 3) — one-time sorting escalates into a self-reinforcing spiral.",
+      "'The failure is not moral but structural…' (paragraph 4) — the passage names its real thesis, refusing the blame the topic invites."
+    ],
+    "misunderstanding": "The strongest pull is to read this as a story about dishonest sellers hiding defects — the ordinary morality of a used-car lot. Paragraph 4 exists precisely to block that: everyone behaves honestly and sensibly. A second slip is to treat paragraph 2's sorting as the whole result and miss that paragraph 3 turns it into a spiral. Both misreadings feed the wrong options.",
+    "traps_summary": "The distractors here reach for the moral villain (dishonest sellers, distrustful owners), for the familiar textbook causes the passage explicitly excludes (monopoly, the state), and, in the weaken question, for minor exceptions rather than the load-bearing premise (buyers can't verify quality). Read the mechanism as blame-free and strike its starting premise to weaken it.",
+    "reading_lesson": "In a passage that builds a mechanism, identify the single premise the whole chain rests on — here, 'the buyer cannot verify quality'. That premise is where strengthen/weaken questions live, and naming it also protects you from moral or causal distractors that the topic invites but the argument excludes. Track the machine, find the first domino, and answer from the structure rather than from the story the subject matter tempts you to tell.",
+    "real_world": "This explains why used goods sell at a discount, why 'certified pre-owned', star ratings, escrow, insurance underwriting, and professional licences exist, and why brand-new markets (early online sales, novel financial products) struggle until trust machinery is built. It also warns that where quality can't be verified — some insurance and credit markets — good options can be priced out entirely, leaving everyone worse off.",
+    "takeaway": "A market can eat itself with nobody misbehaving — all it takes is for one side to know more than the other.",
+    "reflection_question": "Where in your own choices do you pay an 'average price' because you can't tell the good option from the bad — and what would let you tell them apart?"
+  }
+}

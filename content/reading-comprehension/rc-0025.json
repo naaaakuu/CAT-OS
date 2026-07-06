@@ -1,0 +1,345 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0025",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "stage": "elite",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "structure-mapping",
+      "trap-recognition",
+      "evidence-anchoring"
+    ],
+    "word_count": 561,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "logical_structure",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "the boundary problem: democracy cannot democratically decide who belongs to the people",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The 'boundary problem' or 'democratic paradox' of constituting the demos is a recognised puzzle in democratic theory; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Elite political theory built on a self-referential paradox; the main trap is a proposed 'solution' the author shows only relocates the problem. Owner review pending.",
+    "vocab_extracted": [
+      "demos",
+      "presuppose",
+      "circular",
+      "franchise"
+    ]
+  },
+  "passage": {
+    "title": "Who Are the People?",
+    "reading_time_min": 2.8,
+    "paragraphs": [
+      {
+        "id": "rc-0025-p1",
+        "text": "Democracy promises that the people shall rule themselves. The promise is stirring until one asks the obvious question it conceals: who are the people? A decision counts as democratic when those bound by it have had their say. But before any such decision can be taken, someone must already have settled who is to be counted among the deciders — where the boundary of the political community falls, whose votes are gathered and whose are not. That prior act of inclusion and exclusion is the most consequential political decision of all, and it is one the democratic idea seems unable to make on its own terms."
+      },
+      {
+        "id": "rc-0025-p2",
+        "text": "The difficulty is that any democratic answer to the question presupposes its own answer. Suppose we say the people should decide who the people are. Then we must ask which people are to take that decision — and we are back where we started, needing a bounded group before we can hold the vote that is supposed to establish the bounded group. The rule 'let those affected decide' fares no better, for the affected have not yet been constituted into a body that could decide anything. Every attempt to draw the line democratically must borrow, in advance, a line it has not yet drawn. The reasoning circles, and the circle has no natural opening."
+      },
+      {
+        "id": "rc-0025-p3",
+        "text": "This is not a merely academic knot. The boundaries of actual peoples were fixed not by the consent of those enclosed but by conquest, inheritance, treaty, and accident — the hard residue of history rather than the outcome of any vote. A citizen of a modern state did not agree to the borders that make her a citizen of that state and not another; those borders were given to her, and the democratic life she then enjoys takes place inside a container democracy did not itself produce. The most fundamental fact about her political membership was decided before democracy could speak, and by means democracy would never endorse."
+      },
+      {
+        "id": "rc-0025-p4",
+        "text": "It is tempting to answer that the boundary should include all and only those whose interests a decision affects. This has the ring of a principle, but it dissolves on contact. Almost every significant decision affects outsiders — a nation's trade policy, its emissions, its wars reach far beyond its borders — so the 'all affected' rule would dissolve every bounded people into a single global electorate that varies with each issue, an arrangement no functioning democracy could be. Narrow the rule to make it workable and you smuggle back in a prior boundary; keep it pure and you abolish the very thing whose membership you were trying to fix. The principle does not solve the problem; it only shows how deep the problem goes."
+      },
+      {
+        "id": "rc-0025-p5",
+        "text": "The lesson is not that democracy is a fraud, but that it is less self-sufficient than its promise implies. It can govern a people magnificently; it cannot, by its own procedures, conjure that people into being. Every democracy therefore rests on a foundation it did not lay and cannot fully justify in its own language — a boundary inherited, imposed, or improvised, and then, only afterward, filled with the machinery of consent. To see this is not to despair of self-rule but to hold it more honestly, aware that the grandest of political ideals begins, necessarily, with a question it cannot answer."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0025-q1",
+      "type": "main_idea",
+      "stem": "The central claim of the passage is that",
+      "options": {
+        "A": "democracy is fundamentally a fraud because its borders were set by conquest",
+        "B": "democracy cannot, by its own procedures, decide who belongs to the people, and so rests on a boundary it did not democratically create",
+        "C": "the boundaries of nations should be redrawn by including all those affected by their decisions",
+        "D": "modern citizens ought to be allowed to vote on the borders of their own states"
+      },
+      "correct": "B",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "correct_reasoning": "The passage poses 'who are the people?' (p1), shows any democratic answer presupposes itself (p2), notes real boundaries came from history not consent (p3), dismantles the 'all affected' fix (p4), and concludes democracy 'cannot, by its own procedures, conjure that people into being' (p5). Option B states this — the boundary problem and its consequence.",
+        "passage_anchor": "rc-0025-p2 and rc-0025-p5",
+        "question_type_note": "The main idea is the self-referential limit the passage identifies, not the historical detail or the rejected fix.",
+        "reading_habit": "For a passage built on a paradox, your summary should name the paradox itself, not any of the escape routes the author closes.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "Paragraph 5 explicitly denies this: 'The lesson is not that democracy is a fraud.' The passage says democracy is less self-sufficient, not fraudulent.",
+            "seductive_element": "The talk of conquest and imposition can be pushed into a blanket debunking of democracy."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The 'all affected' rule is the proposed solution paragraph 4 dismantles, not the passage's claim; the author shows it dissolves every bounded people.",
+            "seductive_element": "It sounds like a principled, inclusive fix and appears prominently in the passage."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is a policy proposal the passage never endorses; indeed paragraph 2 shows voting on your own boundary is circular, since you'd need the boundary first.",
+            "seductive_element": "It seems the natural democratic remedy to the problem the passage raises."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0025-q2",
+      "type": "inference",
+      "stem": "The passage's reasoning implies that a vote in which a community decides who may belong to it is problematic because",
+      "options": {
+        "A": "such votes are usually decided by a narrow and unfair margin",
+        "B": "it must already assume a bounded community in order to hold the vote at all",
+        "C": "outsiders will always refuse to accept the community's decision",
+        "D": "history shows such votes have never actually been held"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 spells out the circularity: to let the people decide who the people are, we must first know 'which people are to take that decision', so we need 'a bounded group before we can hold the vote that is supposed to establish the bounded group'. The problem is this presupposition — option B.",
+        "passage_anchor": "rc-0025-p2",
+        "question_type_note": "The inference restates the self-reference: the procedure presupposes what it is meant to produce.",
+        "reading_habit": "When an author says an answer 'presupposes its own answer', the defect to infer is circularity — the method needs its own conclusion in advance.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The problem is logical (circularity), not about voting margins; margins are never mentioned.",
+            "seductive_element": "Close, contested votes are a familiar real-world concern about legitimacy."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Outsiders' acceptance is not the issue; the defect is that the deciding body cannot be constituted without presupposing the boundary.",
+            "seductive_element": "The theme of inclusion/exclusion suggests outsiders might object."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says boundaries were set by conquest and treaty, not that membership votes 'have never been held'; the flaw is conceptual, not a historical absence.",
+            "seductive_element": "It borrows the history theme of paragraph 3 and misapplies it to the logical point."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0025-q3",
+      "type": "logical_structure",
+      "stem": "The fourth paragraph, on the 'all affected' principle, functions in the argument as",
+      "options": {
+        "A": "the passage's own proposed solution to the boundary problem",
+        "B": "a promising candidate solution that the author tests and shows to fail, deepening the problem",
+        "C": "a digression unrelated to the main argument",
+        "D": "historical evidence that boundaries were set by conquest"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 raises the 'all affected' rule as tempting ('the ring of a principle'), then shows it 'dissolves on contact' — either abolishing bounded peoples or smuggling a prior boundary back in — and ends 'it only shows how deep the problem goes.' It is a candidate solution tested and defeated, which deepens the problem — option B.",
+        "passage_anchor": "rc-0025-p4",
+        "question_type_note": "Structure questions ask a paragraph's role; this one is a refuted proposal, not the author's answer.",
+        "reading_habit": "When a paragraph opens 'it is tempting to answer…', expect a candidate about to be tested and usually rejected — not the author's own position.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author rejects the 'all affected' rule; it is not the passage's solution but a proposal shown to fail.",
+            "seductive_element": "It is stated as a principle and could be mistaken for the author's recommendation."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Far from a digression, it is central: testing the most attractive fix is how the passage shows the problem's depth.",
+            "seductive_element": "A paragraph exploring a rejected idea can feel like a detour."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The historical evidence is in paragraph 3; paragraph 4 is a conceptual test of a principle, not historical illustration.",
+            "seductive_element": "Both paragraphs support the same thesis, so their distinct roles can blur."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0025-q4",
+      "type": "author_purpose",
+      "stem": "The author emphasizes that a citizen 'did not agree to the borders that make her a citizen' primarily to",
+      "options": {
+        "A": "argue that all existing borders are illegitimate and should be abolished",
+        "B": "show concretely that the most basic fact of political membership was settled by means democracy itself did not provide",
+        "C": "encourage citizens to emigrate to states with fairer borders",
+        "D": "prove that democracies are less stable than other forms of government"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "correct_reasoning": "The point makes the abstract circularity concrete: the citizen's borders were 'given to her', so 'the most fundamental fact about her political membership was decided before democracy could speak, and by means democracy would never endorse.' Its purpose is to show membership rests on a non-democratic foundation — option B.",
+        "passage_anchor": "rc-0025-p3",
+        "question_type_note": "Purpose questions ask what a concrete case is for; here it grounds the paradox in the real situation of an ordinary citizen.",
+        "reading_habit": "Attach a concrete example to the abstract claim it illustrates; here the citizen's inherited borders make the boundary problem tangible.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage does not call borders illegitimate or demand abolition; paragraph 5 says the lesson 'is not that democracy is a fraud'. It diagnoses a limit, not a call to abolish.",
+            "seductive_element": "Noting borders were imposed by conquest can be pushed into a demand to tear them down."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Emigration is never mentioned; the example illustrates the non-consensual origin of membership, not advice to relocate.",
+            "seductive_element": "Talk of 'this state and not another' can suggest choosing a different one."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Stability relative to other regimes is not the topic; the point concerns the origin of boundaries, not comparative durability.",
+            "seductive_element": "Foundations 'not laid by democracy' can loosely suggest fragility."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0025-q5",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the second paragraph, 'presupposes' most nearly means",
+      "options": {
+        "A": "openly declares in advance",
+        "B": "takes for granted as already settled",
+        "C": "predicts will happen later",
+        "D": "argues against on principle"
+      },
+      "correct": "B",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "correct_reasoning": "The sentence says any democratic answer 'presupposes its own answer' — it must already assume a bounded group before the vote that is meant to establish one. 'Presupposes' here means takes for granted as already settled, which is what generates the circularity. Option B fits.",
+        "passage_anchor": "rc-0025-p2",
+        "question_type_note": "Vocabulary-in-context: the term names the logical move (assuming in advance) that produces the paradox.",
+        "reading_habit": "Define a key logical term by the work it does in the argument; 'presupposes' here must mean 'assumes beforehand', since that is what makes the reasoning circle.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "To presuppose is to assume silently in advance, not to declare openly; the whole problem is that the assumption is hidden and unearned.",
+            "seductive_element": "'Pre-' suggests 'stated up front', close to 'declares in advance'."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Presupposing looks backward to an assumed condition, not forward to a prediction; the circularity is about what must already be true.",
+            "seductive_element": "'Pre-' can misleadingly suggest something about the future."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Presupposing is assuming, not opposing; the answer relies on its own conclusion rather than arguing against anything.",
+            "seductive_element": "In a passage full of problems and objections, 'argues against' sounds contextually active."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "demos",
+      "passage_use": "who belongs to the people",
+      "meaning_here": "the body of people who make up a political community and rule in a democracy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "presuppose",
+      "passage_use": "any democratic answer to the question presupposes its own answer",
+      "meaning_here": "to assume beforehand as already settled",
+      "difficulty": "hard"
+    },
+    {
+      "word": "circular",
+      "passage_use": "The reasoning circles, and the circle has no natural opening",
+      "meaning_here": "using as a premise the very thing one is trying to establish",
+      "difficulty": "medium"
+    },
+    {
+      "word": "franchise",
+      "passage_use": "whose votes are gathered and whose are not",
+      "meaning_here": "the right to vote; membership in the deciding body (the idea at stake in the boundary)",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage sets a trap made of logic: democracy is supposed to let the people decide, but it cannot decide who the people are without already knowing. Your task is to hold the circle, and to notice that the attractive 'solution' the author raises is one they demolish.",
+    "one_sentence_summary": "Democracy cannot use its own procedures to decide who counts as 'the people', because any such vote must already assume the very boundary it is meant to establish — so every democracy rests on a boundary it inherited or imposed rather than democratically created.",
+    "main_idea": "The question 'who are the people?' can't be answered democratically: to vote on membership you must already have a bounded group of voters, which is exactly what's in question. Real boundaries were set by conquest, treaty, and accident, not consent; and the tempting 'include all who are affected' fix either abolishes bounded peoples or sneaks a prior boundary back in. The lesson isn't that democracy is a fraud, but that it is less self-sufficient than its promise implies — it governs a people well but cannot conjure that people into being.",
+    "simple_explanation": "Democracy promises that the people will rule themselves. It sounds wonderful — until you ask the question it hides: who are 'the people'? A decision is democratic when everyone bound by it gets a say. But before you can take any such decision, somebody must already have settled who counts as a decider — where the community's boundary falls, whose votes are collected and whose aren't. That prior act of including some and excluding others is the biggest political decision of all, and democracy seems unable to make it on its own terms.\n\nWhy? Because any democratic answer assumes its own answer. Say 'the people should decide who the people are'. Fine — but WHICH people take that decision? You're back to needing a bounded group before you can hold the vote that's supposed to create the bounded group. Try 'let all those affected decide' — but the affected haven't yet been formed into any body that could decide. Every attempt to draw the line democratically has to borrow, in advance, a line it hasn't drawn yet. The reasoning goes in a circle with no natural opening.\n\nThis isn't just an academic knot. Real countries' borders were fixed by conquest, inheritance, treaty, and accident — the leftovers of history, not the result of a vote. A citizen never agreed to the borders that make her a citizen of this country and not another; they were handed to her, and the democratic life she then lives happens inside a container democracy did not build. The most basic fact about her political membership was settled before democracy could even speak, and by means democracy would never approve.\n\nIt's tempting to answer: the boundary should include exactly those whose interests a decision affects. That sounds like a principle — but it falls apart on contact. Almost every big decision affects outsiders (trade, emissions, wars reach past borders), so 'all affected' would melt every bounded people into a single global electorate that changes with each issue — which no working democracy could be. Narrow the rule to make it practical and you've quietly reintroduced a prior boundary; keep it pure and you abolish the very people whose membership you were trying to fix. The principle doesn't solve the problem; it shows how deep it goes.\n\nThe lesson isn't that democracy is a fraud — it's that democracy is less self-sufficient than its promise suggests. It can govern a people brilliantly; it just can't, by its own procedures, bring that people into existence. Every democracy rests on a foundation it didn't lay and can't fully justify in its own language — a boundary inherited, imposed, or improvised, and only THEN filled with the machinery of consent. Seeing this isn't cause for despair; it's a way to hold self-rule more honestly, knowing the grandest political ideal begins with a question it cannot answer.",
+    "why_difficult": "The core is a self-referential paradox — the procedure presupposes its own product — which is abstract and easy to half-grasp. The passage compounds this by raising a genuinely attractive fix (the 'all affected' principle) in paragraph 4, and a hurried reader files it as the author's solution rather than a refuted candidate. And the strong historical language (conquest, imposition) tempts the reader toward the extreme 'democracy is a fraud / borders are illegitimate' reading that paragraph 5 explicitly disowns.",
+    "author_intention": "To reveal a hidden limit inside democracy's founding promise — not to debunk democracy, but to show it depends on something it cannot itself supply, and to counsel honesty rather than despair about that dependence.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0025-p1",
+        "role": "The hidden question",
+        "note": "Democracy says the people rule — but who are the people? Someone must fix the community's boundary before any vote, and democracy seems unable to make that choice on its own terms."
+      },
+      {
+        "paragraph_id": "rc-0025-p2",
+        "role": "The circle",
+        "note": "Any democratic answer assumes its own answer: to vote on who the people are, you already need a bounded group of voters. 'Let the affected decide' fails too — they're not yet a body. The reasoning circles."
+      },
+      {
+        "paragraph_id": "rc-0025-p3",
+        "role": "Made concrete",
+        "note": "Real borders came from conquest, treaty, accident — not consent. A citizen never agreed to the borders that made her one; democracy runs inside a container it didn't build."
+      },
+      {
+        "paragraph_id": "rc-0025-p4",
+        "role": "The tempting fix, refuted",
+        "note": "'Include all who are affected' sounds principled but dissolves: nearly everything affects outsiders, so it abolishes bounded peoples — or you narrow it and smuggle a boundary back in. It deepens the problem."
+      },
+      {
+        "paragraph_id": "rc-0025-p5",
+        "role": "The honest lesson",
+        "note": "Not that democracy is a fraud, but that it's not self-sufficient. It governs a people well but can't conjure one into being. It rests on an inherited boundary — seen honestly, not in despair."
+      }
+    ],
+    "tone_progression": "It opens by admiring the promise, then turns rigorous and probing as the paradox tightens, unflinching at the historical facts, and lands measured and humane — declining both celebration and cynicism.",
+    "key_transitions": [
+      "'The promise is stirring until one asks the obvious question it conceals: who are the people?' (paragraph 1) — the hidden question is exposed.",
+      "'It is tempting to answer that the boundary should include all and only those whose interests a decision affects… but it dissolves on contact.' (paragraph 4) — the most attractive fix is raised and defeated.",
+      "'The lesson is not that democracy is a fraud, but that it is less self-sufficient than its promise implies.' (paragraph 5) — the author fixes the exact, non-cynical conclusion."
+    ],
+    "misunderstanding": "Two errors dominate. First, taking the 'all affected' principle as the author's solution, when paragraph 4 exists to demolish it. Second, over-reading the historical facts (conquest, imposition) into 'democracy is a fraud / borders are illegitimate', which paragraph 5 explicitly rejects. The real claim is narrower: democracy is not self-sufficient about its own boundary.",
+    "traps_summary": "The distractors here promote the refuted 'all affected' fix, inflate the diagnosis into a debunking ('fraud', 'abolish all borders'), or convert the logical circularity into unrelated worries (voting margins, outsiders' acceptance, emigration). Hold the paradox, treat the tempting principle as a tested-and-failed candidate, and keep the conclusion at the author's careful, non-cynical strength.",
+    "reading_lesson": "When a paragraph begins 'it is tempting to answer…', read what follows as a candidate on trial, not the author's verdict — and watch whether the author acquits or convicts it. Pairing that with the passage's explicit 'the lesson is not that…' sentence lets you fix the thesis precisely between the naive promise and the cynical debunking. Distinguish the solutions an author raises to defeat from the position an author actually holds; the strongest distractors are always the refuted candidates dressed as conclusions.",
+    "real_world": "The boundary problem is alive in every fight over who gets to vote, over secession and independence referendums (who is even allowed to vote in them?), over immigration and citizenship, and over whether people harmed by another country's emissions or wars deserve a say. It won't tell you where to draw a line, but it exposes a bluff: no line can be drawn on purely democratic grounds, so appeals to 'let the people decide' always rest on a prior, non-democratic choice about who the people are.",
+    "takeaway": "Democracy can govern a people superbly, but it cannot, in its own language, say who the people are.",
+    "reflection_question": "When a group claims to 'let everyone affected decide', who quietly drew the line around 'everyone' — and on what authority?"
+  }
+}

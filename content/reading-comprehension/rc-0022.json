@@ -1,0 +1,287 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0022",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "tone-detection"
+    ],
+    "word_count": 494,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "tone",
+      "author_purpose"
+    ],
+    "theme": "why history is continually rewritten without thereby being unreliable",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The provisional, question-driven nature of historical knowledge is a standard theme in historiography; no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Historiography passage with a careful middle position: history is revised, but this is not relativism. Main-idea trap is the cynical 'history is just opinion' overshoot. Owner review pending.",
+    "vocab_extracted": [
+      "revision",
+      "vantage",
+      "relativism"
+    ]
+  },
+  "passage": {
+    "title": "Why the Past Keeps Changing",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0022-p1",
+        "text": "To the outsider, it can look like a scandal that history is forever being rewritten. The events, after all, are over and cannot alter; the battle was won on the day it was won, the treaty signed when it was signed. Yet every generation of historians produces new accounts of the same fixed past, and the accounts differ, sometimes sharply. If the facts do not move, the suspicion runs, then all this revising must be the intrusion of fashion or bias into what ought to be settled — history as a mirror that shows each age mainly its own face."
+      },
+      {
+        "id": "rc-0022-p2",
+        "text": "The suspicion mistakes what a history is. A history is not a list of everything that happened — such a list would be infinite and useless — but an answer to a question asked of the past. Which events matter, which causes count, what the story is about: none of this is given by the events themselves. It is supplied by the historian's question, and questions change. An age preoccupied with kings asks who ruled and produces a history of reigns; an age alert to ordinary life asks how people ate and worked and produces a history of the everyday. Neither has falsified the past. They have interrogated it differently, and been answered differently."
+      },
+      {
+        "id": "rc-0022-p3",
+        "text": "This is why new vantage points genuinely enlarge historical knowledge rather than merely colouring it. Standing where earlier historians could not, a later age can see patterns invisible from the older ground — the long consequences of a decision whose effects had not yet unfolded, the significance of a group the sources ignored, the shape of a process too slow to be visible up close. The past does not change, but our position relative to it does, and from a new position genuinely new things about it can be seen. Distance, here, is not only a source of distortion; it is also a source of sight."
+      },
+      {
+        "id": "rc-0022-p4",
+        "text": "None of this collapses into the comfortable cynicism that history is simply whatever each age wishes to believe. A question freely chosen still receives an answer constrained by the evidence, and an account that mistakes the record — that has the treaty signed in the wrong year, or attributes to a cause what the documents rule out — is wrong, revisable, and will be revised. What changes is which questions are asked, not whether the answers must square with what the sources permit. History is provisional in the manner of a science, always open to a better account, and disciplined, like a science, by a reality it does not invent. That it is never finished is not its weakness but the very sign that it is still being done honestly."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0022-q1",
+      "type": "main_idea",
+      "stem": "The passage primarily argues that history is rewritten because",
+      "options": {
+        "A": "historians are unavoidably biased and each age simply projects its own prejudices onto the past",
+        "B": "new questions and vantage points let later historians see genuinely new things, while accounts remain constrained by the evidence",
+        "C": "the facts of the past themselves change as new events unfold",
+        "D": "historical knowledge is ultimately a matter of fashion with no claim to truth"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "The passage explains that a history answers a question (p2), that new vantage points reveal genuinely new patterns (p3), and — crucially — that this is not cynicism because accounts stay 'constrained by the evidence' (p4). Option B holds both halves: changing questions enlarge knowledge, yet answers must square with the sources.",
+        "passage_anchor": "rc-0022-p2 and rc-0022-p4",
+        "question_type_note": "The main idea of a middle-position passage must carry both the revising and the constraint that keeps it from relativism.",
+        "reading_habit": "When a passage spends its last paragraph saying 'this is NOT mere relativism', include that guardrail in your summary — it is half the thesis.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 4 explicitly rejects this: revision is disciplined by evidence, and a mistaken account 'is wrong, revisable, and will be revised'. The passage denies that rewriting is mere prejudice.",
+            "seductive_element": "It voices the 'scandal' of paragraph 1, which a reader who stops early takes as the conclusion."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage insists the past is fixed — 'the events are over and cannot alter'. What changes is our questions and position, not the facts.",
+            "seductive_element": "It offers a tidy literal reason 'the past keeps changing', matching the title's surface."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "This is the 'comfortable cynicism' paragraph 4 sets out to refute; the passage affirms history has a truth-claim disciplined by sources.",
+            "seductive_element": "Once revision is granted, 'it's all just fashion' feels like the bold, worldly conclusion."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0022-q2",
+      "type": "inference",
+      "stem": "It can be inferred that two historians who reach very different accounts of the same period",
+      "options": {
+        "A": "must include at least one who has falsified the evidence",
+        "B": "may both be sound if they were answering different questions of the past",
+        "C": "prove that historical knowledge cannot progress",
+        "D": "will always eventually converge on a single correct account"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 gives exactly this case: the history of reigns and the history of the everyday differ, yet 'neither has falsified the past' — 'they have interrogated it differently, and been answered differently.' So differing accounts can both be sound when they answer different questions — option B.",
+        "passage_anchor": "rc-0022-p2",
+        "question_type_note": "The inference generalises the paragraph's paired example: difference of account need not mean error.",
+        "reading_habit": "Carry the passage's own example forward as a rule; if the text shows two differing accounts both valid, infer that difference alone does not convict either.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage's core point is that differing accounts can BOTH be legitimate when the questions differ; difference does not require falsification.",
+            "seductive_element": "It seems logical that if two accounts differ, one must be false — the everyday assumption the passage overturns."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 3 says new vantage points 'genuinely enlarge historical knowledge'; differing accounts are compatible with progress, not proof against it.",
+            "seductive_element": "Endless revision can look like going in circles rather than advancing."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says history is 'never finished' and 'always open to a better account'; it does not promise convergence on one final account.",
+            "seductive_element": "The comparison to science can suggest an eventual single settled truth."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0022-q3",
+      "type": "tone",
+      "stem": "The author's attitude toward the continual rewriting of history is best described as",
+      "options": {
+        "A": "anxious that it undermines the reliability of the discipline",
+        "B": "approving of it as a sign of honest, ongoing inquiry",
+        "C": "indifferent to whether history is revised or not",
+        "D": "resigned to it as an unavoidable flaw"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "The passage reframes rewriting as enlargement (p3) and ends: 'That it is never finished is not its weakness but the very sign that it is still being done honestly.' The tone is approving — revision is a virtue of honest inquiry, not a defect. Option B.",
+        "passage_anchor": "rc-0022-p4",
+        "question_type_note": "Tone follows the author's evaluation; the closing sentence turns a supposed weakness into a mark of integrity.",
+        "reading_habit": "Let the final evaluative sentence set the tone — here 'not its weakness but the very sign… done honestly' is unmistakably approving.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The anxiety belongs to the 'outsider' of paragraph 1, whose suspicion the author dismantles. The author is reassured, not anxious.",
+            "seductive_element": "Paragraph 1 voices the anxiety vividly, and a reader may attribute it to the author."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author cares a great deal, arguing a clear thesis and celebrating revision; indifference contradicts the whole passage.",
+            "seductive_element": "The measured, explanatory tone can be misread as detachment."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "'Resigned to a flaw' concedes revision is a defect one must tolerate; the author denies it is a flaw at all, calling it a sign of honesty.",
+            "seductive_element": "Acceptance of endless revision can be mistaken for reluctant resignation."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0022-q4",
+      "type": "author_purpose",
+      "stem": "The author contrasts a 'history of reigns' with a 'history of the everyday' mainly to",
+      "options": {
+        "A": "argue that social history is superior to political history",
+        "B": "show that different questions asked of the same past yield different, equally legitimate histories",
+        "C": "demonstrate that earlier historians were less rigorous than later ones",
+        "D": "illustrate how the facts of the past have been disputed"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The contrast sits inside paragraph 2's claim that a history answers a question. The age asking about kings and the age asking about ordinary life produce different histories, yet 'neither has falsified the past.' The example's purpose is to show that different questions yield different but legitimate histories — option B.",
+        "passage_anchor": "rc-0022-p2",
+        "question_type_note": "Purpose questions ask what the contrast establishes; here it demonstrates the question-driven nature of history.",
+        "reading_habit": "Tie a contrast to the claim it illustrates; this one serves 'a history is an answer to a question', not a ranking of the two histories.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage ranks neither history above the other; it says 'neither has falsified the past', treating them as equally legitimate answers to different questions.",
+            "seductive_element": "The everyday-life history is described warmly, which can suggest a preference."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No claim about rigour is made; the earlier historians asked different questions, not worse ones. Rigour is addressed separately in paragraph 4.",
+            "seductive_element": "'Earlier could not see' can be misheard as 'earlier were sloppier'."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The contrast is about differing questions, not disputed facts; the passage insists the facts are fixed and both accounts respect them.",
+            "seductive_element": "It borrows the passage's theme of differing accounts and misattributes the difference to the facts."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "revision",
+      "passage_use": "all this revising must be the intrusion of fashion or bias",
+      "meaning_here": "the act of producing a new, altered account",
+      "difficulty": "easy"
+    },
+    {
+      "word": "vantage",
+      "passage_use": "new vantage points genuinely enlarge historical knowledge",
+      "meaning_here": "a position that affords a particular view or perspective",
+      "difficulty": "medium"
+    },
+    {
+      "word": "relativism",
+      "passage_use": "the comfortable cynicism that history is simply whatever each age wishes to believe",
+      "meaning_here": "the view that truth is merely relative to a viewpoint, with no external check (the position the passage rejects)",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage defends a middle position between two easy extremes: 'history is objective fact' and 'history is just opinion'. Your task is to land exactly where the author does — revision is real AND disciplined by evidence — and refuse both the naive and the cynical reading.",
+    "one_sentence_summary": "History is continually rewritten not because the facts change or because bias rules, but because each age asks new questions and stands in new positions that reveal genuinely new things — while every account remains constrained by the evidence, which is why constant revision is a mark of honesty, not unreliability.",
+    "main_idea": "A history is an answer to a question asked of the past, and questions change with each age, so the same fixed past yields different, equally legitimate accounts and new vantage points reveal real new patterns. But this is not relativism: accounts must still square with the sources, so history is provisional like a science and disciplined by a reality it doesn't invent.",
+    "simple_explanation": "From the outside it can seem scandalous that history keeps getting rewritten. The events are over and can't change — the battle was won when it was won. So if the facts don't move, why do historians keep producing new, clashing accounts? The suspicious answer: it must be fashion and bias creeping in, history as a mirror showing each age its own face.\n\nBut that suspicion misunderstands what a history is. A history isn't a list of everything that happened — that list would be infinite and useless. It's an answer to a QUESTION asked of the past. Which events matter, which causes count, what the story is even about — none of that comes from the events themselves. It comes from the historian's question, and questions change. An age obsessed with kings asks who ruled and writes a history of reigns; an age curious about ordinary life asks how people ate and worked and writes a history of the everyday. Neither has falsified anything. They asked the past different things and got different answers.\n\nThat's also why new viewpoints genuinely add to knowledge rather than just tinting it. Standing where earlier historians couldn't, a later age can see patterns invisible before — the long-run consequences of a decision, the importance of a group the old sources ignored, a process too slow to notice up close. The past doesn't change; our position relative to it does, and from a new spot you can genuinely see new things. Distance isn't only distortion; it's also sight.\n\nAnd here's the crucial guardrail: none of this means history is just whatever each age wants to believe. A freely chosen question still gets an answer constrained by the evidence. An account that gets the record wrong — the treaty signed in the wrong year, a cause the documents rule out — is simply wrong, and will be corrected. What changes is which questions we ask, not whether the answers must fit the sources. History is provisional the way science is: always open to a better account, and disciplined by a reality it doesn't invent. That it's never finished isn't a weakness — it's the sign it's still being done honestly.",
+    "why_difficult": "The passage sits between two comfortable extremes, and both pull hard. Paragraph 1 states the naive view (fixed facts, so revision = bias) so vividly that readers carry it out as the thesis; paragraph 4 warns against the opposite cynical view (it's all fashion), which feels like the sophisticated take once revision is granted. The correct reading is the disciplined middle — revision is real but evidence-constrained — and holding it requires resisting the sentence that reads most like a bold conclusion.",
+    "author_intention": "To defuse a false scandal — that rewriting means unreliability — by showing that history changes with its questions and vantage points while staying answerable to evidence, and thus to recast endless revision as a sign of the discipline's honesty.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0022-p1",
+        "role": "The apparent scandal",
+        "note": "The facts are fixed, yet historians keep rewriting — so it must be bias, history as a mirror of each age. The author states the suspicion at full force."
+      },
+      {
+        "paragraph_id": "rc-0022-p2",
+        "role": "Reframes what history is",
+        "note": "A history isn't a list of everything; it's an answer to a question. Different ages ask different questions (kings vs everyday life) and get different, equally valid answers."
+      },
+      {
+        "paragraph_id": "rc-0022-p3",
+        "role": "Revision as enlargement",
+        "note": "New vantage points reveal real new patterns — long consequences, ignored groups, slow processes. The past is fixed; our position moves, and distance can be sight, not just distortion."
+      },
+      {
+        "paragraph_id": "rc-0022-p4",
+        "role": "The guardrail",
+        "note": "But this isn't 'anything goes'. Answers must fit the evidence; wrong accounts get corrected. History is provisional like science, disciplined by a reality it doesn't invent — never finished, and honest for it."
+      }
+    ],
+    "tone_progression": "It opens by voicing an outsider's suspicion, turns patiently explanatory as it reframes history, grows almost appreciative at the idea of distance-as-sight, and ends warmly affirming — revision as integrity.",
+    "key_transitions": [
+      "'The suspicion mistakes what a history is.' (start of paragraph 2) — the author turns from the scandal to its dissolution.",
+      "'None of this collapses into the comfortable cynicism…' (start of paragraph 4) — the passage fences its argument against relativism, fixing the precise middle position."
+    ],
+    "misunderstanding": "Readers land on one of two extremes. Some keep paragraph 1's view — revision proves bias, history is unreliable. Others overshoot into paragraph 4's rejected cynicism — history is just each age's opinion. The passage holds neither: revision is real and knowledge-enlarging, yet every account is disciplined by evidence.",
+    "traps_summary": "The distractors here offer the naive scandal (revision = bias), the cynical overshoot (history is just fashion), and a literal misread (the facts themselves change). Fix the middle: questions change, vantage points enlarge, but answers must square with the sources — and let the approving final sentence set the tone.",
+    "reading_lesson": "When a passage argues a middle position, watch for the paragraph that begins 'none of this means…' — it marks the guardrail that fixes the thesis's exact strength and rules out the tempting extreme. Hold both the claim (history is revised) and its limit (revision is evidence-constrained) together; the correct answers always respect both, while the strongest distractors keep only one and drop the other.",
+    "real_world": "This is why textbooks change, why 'revisionist history' is not automatically an insult, and why debates over how to remember a war or a founder are often debates about which questions to ask, not which facts to accept. It offers a usable distinction for any contested account: has someone changed the question, or misreported the record?",
+    "takeaway": "The past is fixed, but our questions about it are not — and a history that is never finished is one still being done honestly.",
+    "reflection_question": "When you revisit a memory or a period of your own life and 'see it differently', have the facts changed — or has the question you're asking of them?"
+  }
+}

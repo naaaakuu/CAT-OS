@@ -1,0 +1,345 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0023",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "tone-detection",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 566,
+    "question_count": 5,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "author_purpose",
+      "logical_structure",
+      "vocabulary_in_context"
+    ],
+    "theme": "the paradox of moral luck and the limits of the control principle",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The problem of moral luck was named by Bernard Williams and Thomas Nagel; no specific essay is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Hard philosophy: a paradox the author leaves unresolved. The main trap is to read a resolution the author declines to offer; tone must catch the deliberate discomfort. Owner review pending.",
+    "vocab_extracted": [
+      "culpable",
+      "arbitrary",
+      "intuition",
+      "verdict"
+    ]
+  },
+  "passage": {
+    "title": "The Fortunes of the Guilty",
+    "reading_time_min": 2.8,
+    "paragraphs": [
+      {
+        "id": "rc-0023-p1",
+        "text": "Two drivers leave the same party equally drunk and equally careless, and each takes the same corner too fast. On the first road a child happens to be crossing, and the driver, unable to stop, kills her. On the second road there is no child, and the driver arrives home having harmed no one. We judge the first driver a killer, hound him with a severity we reserve for the gravest wrongs, and he judges himself the same way. The second we count merely reckless, a fool who got away with it. Yet the only difference between them is the presence of a child on one road and not the other — a fact wholly outside the control of either man."
+      },
+      {
+        "id": "rc-0023-p2",
+        "text": "Set against this everyday practice is a principle we hold just as firmly: that people can be morally assessed only for what lies within their control. We do not blame someone for the weather, or for the country of their birth, or for a reflex they could not check. Blame, on this principle, must attach to the will, to what a person does rather than to what merely befalls them. The two drivers willed exactly the same thing; the divergence in outcome was authored by luck. By the control principle, then, they are equally culpable, and our fierce distinction between them is a mistake."
+      },
+      {
+        "id": "rc-0023-p3",
+        "text": "The trouble is that we cannot bring ourselves to believe it. However firmly we affirm the principle in the abstract, we do not, in practice, judge the two drivers alike, and it is not obvious we are wrong to refuse. The driver who killed did something the other did not do: he killed. To insist that the death makes no moral difference — that a life ended is, for the assessment of the agent, on a par with a lucky empty road — strains against a conviction as deep as the principle it contradicts. We are left holding two commitments that cannot both be honoured, each compelling, each apparently non-negotiable."
+      },
+      {
+        "id": "rc-0023-p4",
+        "text": "What makes the problem genuinely hard, rather than a puzzle awaiting a clever solution, is that the luck does not stay politely at the edges. Widen the lens and it reaches everywhere. Whether one ever faces the temptation that would reveal one's cowardice, whether the situation that would expose a latent cruelty ever arises, even the temperament and upbringing from which one's choices flow — all of these are matters of fortune, and all of them shape what we praise and blame. Strip away everything a person did not control and the self that remains, the pure will to which alone responsibility was supposed to attach, seems to shrink toward a vanishing point."
+      },
+      {
+        "id": "rc-0023-p5",
+        "text": "The honest conclusion is not a resolution but a recognition. Our ordinary moral judgements and our reflective principle about control are both indispensable and mutually incompatible, and no account yet offered dissolves the tension without quietly abandoning one side of it. The value of seeing this clearly is not that it tells us how to judge, but that it shows how much of what we confidently do rests on ground we cannot fully justify — and teaches a certain humility toward the verdicts, including our own, that fortune has helped to write."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0023-q1",
+      "type": "main_idea",
+      "stem": "The central point of the passage is that",
+      "options": {
+        "A": "drunk drivers who kill deserve harsher punishment than those who do not",
+        "B": "our moral judgements and our principle that people are responsible only for what they control are both compelling yet cannot be reconciled",
+        "C": "luck plays no real role in how we ought to assign moral blame",
+        "D": "the principle that we are responsible only for what we control should be abandoned in favour of judging by outcomes"
+      },
+      "correct": "B",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "correct_reasoning": "The passage sets our outcome-based judgements (p1) against the control principle (p2), shows we cannot give up either (p3), argues luck pervades everything (p4), and concludes with 'not a resolution but a recognition' that both are 'indispensable and mutually incompatible' (p5). Option B states exactly this unresolved tension.",
+        "passage_anchor": "rc-0023-p5",
+        "question_type_note": "For a passage that ends in an admitted paradox, the main idea is the tension itself, not a resolution of it.",
+        "reading_habit": "When the final paragraph says the conclusion is 'not a resolution but a recognition', the main idea is the unresolved conflict — do not supply the answer the author withholds.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The drivers are an illustration opening the problem, not the thesis; the passage is about a general conflict between two moral commitments, not a claim about sentencing.",
+            "seductive_element": "The vivid driver case is the most memorable part and states a judgement the passage does report us making."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage argues luck pervasively shapes praise and blame (p4); it does not deny luck's role but shows we cannot consistently accommodate it.",
+            "seductive_element": "It sounds like the tidy defence of the control principle, which the passage takes seriously but does not endorse as the last word."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage refuses to abandon either side; it says no account dissolves the tension 'without quietly abandoning one side of it', treating such abandonment as the failure, not the solution.",
+            "seductive_element": "Having shown the control principle in trouble, a reader expects the passage to pick the other side."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0023-q2",
+      "type": "inference",
+      "stem": "It can be inferred that the author introduces the two-drivers case in order to show that",
+      "options": {
+        "A": "drunk driving is among the most serious of moral wrongs",
+        "B": "we do in fact let factors outside a person's control shape our moral judgements",
+        "C": "outcomes are irrelevant to how we should judge an agent",
+        "D": "the second driver is secretly more blameworthy than he appears"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "The two drivers will the same thing; the only difference is 'a fact wholly outside the control of either man', yet we judge them very differently. The case is built to demonstrate that our actual judgements are swayed by uncontrolled outcomes — option B — which then collides with the control principle in paragraph 2.",
+        "passage_anchor": "rc-0023-p1 and rc-0023-p2",
+        "question_type_note": "The inference reads the case's function: it exhibits luck influencing blame, setting up the paradox.",
+        "reading_habit": "Ask what a case is engineered to prove; here the identical wills and differing verdicts are designed to expose luck's grip on judgement.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Drunk driving's seriousness is incidental; the case would work with any equally reckless act. The point is the luck of the outcome, not the vice chosen.",
+            "seductive_element": "The example genuinely involves a grave wrong, so its gravity feels like the point."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The case shows we DO treat outcomes as relevant (we judge the killer more harshly); it dramatizes the tension, not a verdict that outcomes are irrelevant.",
+            "seductive_element": "It states the control principle's implication, which the case is meant to test rather than confirm."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never claims the second driver is secretly worse; it says the two willed the same, and only luck separated their fates.",
+            "seductive_element": "The phrase 'got away with it' can hint at hidden guilt the passage does not assert."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0023-q3",
+      "type": "author_purpose",
+      "stem": "The fourth paragraph, which extends luck to temperament, upbringing, and the situations one happens to face, functions to",
+      "options": {
+        "A": "offer a solution by locating a core self that luck cannot reach",
+        "B": "deepen the problem by showing that removing all luck leaves almost no self to hold responsible",
+        "C": "concede that the control principle was never really plausible",
+        "D": "shift the discussion from moral philosophy to psychology"
+      },
+      "correct": "B",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 says what makes the problem 'genuinely hard' is that luck 'does not stay politely at the edges' but 'reaches everywhere'; stripping away all a person did not control makes 'the self that remains… shrink toward a vanishing point.' Its function is to deepen the paradox by threatening the very self the control principle relies on — option B.",
+        "passage_anchor": "rc-0023-p4",
+        "question_type_note": "Structure/purpose questions ask what a paragraph does; this one escalates the problem rather than resolving it.",
+        "reading_habit": "When an author says a move shows the problem is 'genuinely hard, rather than a puzzle awaiting a solution', expect that paragraph to widen the difficulty, not close it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph does the reverse: it shows the pure will 'shrinks toward a vanishing point', dissolving rather than securing a luck-proof self.",
+            "seductive_element": "A reader hoping for rescue may read the search for the pure will as finding it."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The passage keeps the control principle 'indispensable' (p5); it never concedes it was implausible, only that it cannot be fully honoured alongside our judgements.",
+            "seductive_element": "Showing the principle in deep trouble can look like conceding it was wrong."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The paragraph remains moral philosophy — about responsibility and the self as a locus of blame — not an empirical psychology of temperament.",
+            "seductive_element": "Mentioning temperament and upbringing sounds psychological."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0023-q4",
+      "type": "logical_structure",
+      "stem": "Which of the following best describes how the passage is organized?",
+      "options": {
+        "A": "It presents a thesis, defends it with evidence, and rebuts objections",
+        "B": "It sets two firmly held commitments against each other, widens the conflict, and concludes that it cannot be resolved",
+        "C": "It surveys competing theories and endorses the strongest one",
+        "D": "It narrates a sequence of events and draws a practical lesson"
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "correct_reasoning": "The structure is: an everyday practice of outcome-based judgement (p1), the opposing control principle (p2), the demonstration that we cannot surrender either (p3), the widening of luck to everything (p4), and the recognition that the tension is irresolvable (p5). That is 'two commitments set against each other, the conflict widened, no resolution' — option B.",
+        "passage_anchor": "rc-0023-p3 and rc-0023-p5",
+        "question_type_note": "This maps the whole architecture; the passage is a collision of two principles, not a thesis-and-defence.",
+        "reading_habit": "Track a passage's shape by asking whether it is building to a claim or staging a conflict; the 'both compelling, both non-negotiable' pattern signals the latter.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "There is no single defended thesis with rebutted objections; both principles are upheld, and the passage ends without choosing between them.",
+            "seductive_element": "Most argumentative passages do fit thesis-defence, so it is the default guess."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No survey of named theories occurs, and nothing is endorsed; the passage says 'no account yet offered' succeeds.",
+            "seductive_element": "Philosophy passages often survey positions, so this feels typical."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The drivers are one illustrative case, not a narrative the passage is built on, and its lesson is philosophical humility, not a practical procedure.",
+            "seductive_element": "The vivid opening story can make the passage feel like a narrative with a moral."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0023-q5",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the final paragraph, 'verdicts' most nearly means",
+      "options": {
+        "A": "legal sentences handed down by a court",
+        "B": "moral judgements we reach about agents",
+        "C": "predictions about future behaviour",
+        "D": "opinions offered without evidence"
+      },
+      "correct": "B",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "correct_reasoning": "The passage is about how we morally assess agents, and the final sentence urges 'humility toward the verdicts, including our own, that fortune has helped to write' — i.e., the moral judgements we pass on people (and ourselves). 'Verdicts' here means moral judgements, option B, extending the passage's assessment vocabulary ('judge', 'blame', 'culpable').",
+        "passage_anchor": "rc-0023-p5",
+        "question_type_note": "Vocabulary-in-context: 'verdict' is used figuratively for moral judgement, not the literal courtroom sense.",
+        "reading_habit": "Read a legal-sounding word by the passage's actual subject — here moral assessment — rather than defaulting to its courtroom meaning.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "'Verdict' literally belongs to courts, but the passage is about moral, not legal, assessment; it speaks of self-judgement ('including our own'), which courts do not deliver.",
+            "seductive_element": "'Verdict' most strongly evokes a courtroom, and driving deaths involve law."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Verdicts here are backward-looking assessments of what agents did, not predictions of future conduct.",
+            "seductive_element": "Judgement can loosely suggest anticipating behaviour."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage treats these judgements as deeply held convictions, not baseless opinions; the point is that they are compelling yet luck-influenced.",
+            "seductive_element": "'Humility toward the verdicts' can be misread as dismissing them as mere opinion."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "culpable",
+      "passage_use": "they are equally culpable",
+      "meaning_here": "deserving of blame",
+      "difficulty": "hard"
+    },
+    {
+      "word": "arbitrary",
+      "passage_use": "the divergence in outcome was authored by luck",
+      "meaning_here": "determined by chance rather than by reason or the will (the character of the luck here)",
+      "difficulty": "medium"
+    },
+    {
+      "word": "intuition",
+      "passage_use": "strains against a conviction as deep as the principle it contradicts",
+      "meaning_here": "a strongly felt judgement not derived from argument (the 'conviction' the passage relies on)",
+      "difficulty": "medium"
+    },
+    {
+      "word": "verdict",
+      "passage_use": "humility toward the verdicts, including our own",
+      "meaning_here": "a considered moral judgement about an agent",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage builds a genuine paradox and — unusually — refuses to solve it. Your hardest task is to resist supplying the resolution the author deliberately withholds, and to feel the tone of productive discomfort rather than triumph.",
+    "one_sentence_summary": "We judge people partly by outcomes they did not control, yet we also firmly believe people can be blamed only for what they control; these two commitments are both compelling and cannot both be honoured, and the honest response is to recognise the tension rather than pretend to resolve it.",
+    "main_idea": "The two drivers case shows we let luck shape our moral judgements, which clashes with the principle that we are responsible only for what we control. We can give up neither, and when we notice that luck pervades temperament, upbringing, and the situations we face, the very self that the control principle would hold responsible nearly vanishes. The author concludes not with a solution but with a recognition — and a call for humility about judgements that fortune helped to write.",
+    "simple_explanation": "Two drivers leave a party equally drunk, equally careless, and each takes a corner too fast. On one road a child is crossing and gets killed; on the other road, no child, and the driver just gets home. We treat the first as a killer and hound him; he sees himself that way too. The second we call merely reckless — a fool who got lucky. But the ONLY difference between them is whether a child happened to be on the road, something neither man controlled.\n\nNow set that against a principle we also hold firmly: you can only be morally judged for what's within your control. We don't blame people for the weather, or where they were born, or a reflex they couldn't stop. Blame should attach to the will — to what you do, not what merely happens to you. But the two drivers willed exactly the same thing; only luck made the outcomes differ. So by the control principle, they're equally to blame, and our fierce distinction between them is a mistake.\n\nThe trouble is we simply can't believe that. No matter how firmly we affirm the principle in the abstract, we don't actually judge the two drivers alike — and it's not clear we're wrong to refuse, because the first driver really did something the other didn't: he killed a person. Saying a dead child makes no moral difference — that it's on a par with a lucky empty road — clashes with a conviction as deep as the principle itself. We're stuck holding two commitments that can't both be satisfied.\n\nAnd here's what makes it truly hard rather than a riddle waiting for a clever fix: the luck doesn't stay at the edges. Widen the lens and it's everywhere. Whether you ever face the temptation that would reveal your cowardice, whether the situation that would expose a hidden cruelty ever comes up, even the temperament and upbringing your choices flow from — all luck, and all of it shapes what we praise and blame. Strip away everything you didn't control, and the 'pure will' that responsibility was supposed to attach to shrinks toward nothing.\n\nSo the honest ending isn't a solution — it's a recognition. Our everyday moral judgements and our reflective principle about control are both indispensable and flatly incompatible, and no theory dissolves the tension without secretly dropping one side. The value of seeing this clearly isn't that it tells us how to judge; it's that it shows how much of what we confidently do rests on ground we can't fully justify — and it teaches humility toward all our verdicts, including the ones we pass on ourselves, that luck helped write.",
+    "why_difficult": "Two things make this hard. First, the passage is a collision of two principles you hold simultaneously, so whichever one you're reading feels right, and you have to keep both alive without choosing. Second, and more testing, the passage deliberately does NOT resolve the paradox — it ends in 'recognition, not resolution' — so the natural desire for an answer pushes you toward options that pick a side, all of which are wrong. Add the pervasiveness argument in paragraph 4, which dissolves the self rather than saving it, and every instinct to tidy the problem leads astray.",
+    "author_intention": "To make the reader feel a real, unresolved conflict in their own moral thinking — not to sell a theory — and to draw from it a lesson in humility about how much of our confident judging rests on luck.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0023-p1",
+        "role": "The unsettling case",
+        "note": "Two identically reckless drivers; one kills a child, one doesn't, purely by luck of the road. Yet we judge them utterly differently."
+      },
+      {
+        "paragraph_id": "rc-0023-p2",
+        "role": "The opposing principle",
+        "note": "But we also believe you're only responsible for what you control. The drivers willed the same thing, so this principle says they're equally to blame — and our distinction is a mistake."
+      },
+      {
+        "paragraph_id": "rc-0023-p3",
+        "role": "The deadlock",
+        "note": "We can't actually believe they're alike — the killer did kill. Both the principle and our judgement are non-negotiable, and they contradict each other."
+      },
+      {
+        "paragraph_id": "rc-0023-p4",
+        "role": "The problem widens",
+        "note": "Luck isn't at the edges — it's everywhere: temperament, upbringing, which temptations you face. Strip out all you didn't control and the responsible 'self' nearly vanishes."
+      },
+      {
+        "paragraph_id": "rc-0023-p5",
+        "role": "Recognition, not resolution",
+        "note": "The honest conclusion: both commitments are indispensable and incompatible, and no theory fixes it cleanly. The payoff is humility toward verdicts luck helped write — including our own."
+      }
+    ],
+    "tone_progression": "Vivid and concrete at the case, then increasingly reflective and troubled as the paradox tightens, ending grave and humane — the voice of someone who has looked hard at a problem and honestly reports that it does not close.",
+    "key_transitions": [
+      "'Set against this everyday practice is a principle we hold just as firmly…' (start of paragraph 2) — the collision is set up: practice versus principle.",
+      "'The trouble is that we cannot bring ourselves to believe it.' (start of paragraph 3) — neither side can be surrendered; the deadlock is fixed.",
+      "'The honest conclusion is not a resolution but a recognition.' (start of paragraph 5) — the author explicitly declines to solve the problem."
+    ],
+    "misunderstanding": "Readers try to make the passage pick a side — either 'outcomes should count, punish the killer more' or 'only control matters, so judge them alike'. The passage refuses both; it holds the two in unresolved tension. The other slip is to read paragraph 4 as finding a luck-proof self, when it does the opposite — dissolving the self toward a vanishing point.",
+    "traps_summary": "Every distractor here offers a resolution the author withholds: endorse outcome-based punishment, defend the control principle, abandon one side, or locate a rescued self. The passage's whole discipline is to hold the paradox open. Answer for the tension, not for either horn of it, and read the closing tone as humility rather than victory.",
+    "reading_lesson": "Some passages present a problem they deliberately do not solve, and the reader's job is to resist resolving it for them. When the text says its conclusion is 'not a resolution but a recognition', treat every option that picks a side or supplies an answer as a trap — the correct answers describe and preserve the unresolved conflict. Notice when an author is staging a paradox rather than defending a thesis, and let your answers honour the openness the author intends.",
+    "real_world": "Moral luck runs under everyday life: the same texting-while-driving is a private embarrassment or a manslaughter charge depending on who was crossing; the reckless founder is a visionary or a fraud depending on whether the market turned; we admire people who were never tested and condemn those who were. Noticing luck's hand is not an excuse for anyone, but it is a genuine reason for humility in how we judge others — and ourselves.",
+    "takeaway": "Much of what we confidently praise and blame rests on fortune we did not control — a reason less for excuse than for humility.",
+    "reflection_question": "Whom have you judged harshly for an outcome that, but for luck, could just as easily have been yours?"
+  }
+}

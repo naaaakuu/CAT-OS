@@ -1,0 +1,287 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0026",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "anthropology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "vocabulary-in-context"
+    ],
+    "word_count": 492,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "the gift as a binding social obligation rather than a free transfer",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. The analysis of the gift as obligatory exchange descends from Marcel Mauss's 'The Gift' (1925); no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "Anthropology of exchange; the crux is that gifts BIND rather than being free. Distractors read the gift as pure altruism or as disguised market trade. Owner review pending.",
+    "vocab_extracted": [
+      "reciprocity",
+      "obligation",
+      "disinterested"
+    ]
+  },
+  "passage": {
+    "title": "No Such Thing as a Free Gift",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0026-p1",
+        "text": "We like to imagine the gift as the one exchange untouched by calculation: freely given, expecting nothing back, the pure opposite of the market's cold arithmetic. A great deal of anthropology suggests this image, though comforting, is largely a modern fiction. In most societies that have been studied, gifts are not free at all. They arrive trailing obligations as strong as any contract, and the receiver who imagines the transfer complete has misunderstood what has just happened to him."
+      },
+      {
+        "id": "rc-0026-p2",
+        "text": "Three obligations, it has been argued, hold the whole system together. There is the obligation to give, for to withhold generosity is to refuse relationship and to lose standing. There is the obligation to receive, for to decline a gift is to reject the giver, an insult that can amount to a declaration of hostility. And there is the obligation, at the proper interval, to repay — not immediately, which would look like barter, and not never, which would be theft, but later, and ideally with a little more. A gift, in this account, is less a thing handed over than the opening move in a relationship that both parties are now bound to continue."
+      },
+      {
+        "id": "rc-0026-p3",
+        "text": "This is why the timing and disguise of return matter so much. The counter-gift must be delayed, so that the exchange does not collapse into an obvious swap; it must appear spontaneous, a fresh act of generosity rather than the settling of a debt. The elaborate etiquette surrounding gifts — the protests that one should not have, the concealment of the price, the insistence that it is 'nothing' — is not empty ceremony but the very machinery that keeps a binding transaction from looking like one. The fiction of the free gift is, paradoxically, essential to the obligation the gift creates."
+      },
+      {
+        "id": "rc-0026-p4",
+        "text": "None of this makes gift-giving cynical or reduces it to trade by other means, and it would be a crude misreading to conclude so. The obligations it creates are precisely what a market transaction is designed to avoid: where a sale ends a relationship — debt paid, strangers quits — a gift begins or sustains one, binding giver and receiver into a continuing tie of mutual dependence. The gift is not a disguised sale; it is something the sale can never be. What looks like the absence of self-interest is in fact the presence of a subtler and more durable interest: not in the object, but in the bond the object leaves behind."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0026-q1",
+      "type": "main_idea",
+      "stem": "The passage mainly argues that gifts",
+      "options": {
+        "A": "are a purer form of exchange than market transactions because they expect nothing in return",
+        "B": "are bound up with strong obligations and function to create and sustain social relationships",
+        "C": "are simply disguised market trades in which value is exchanged for equal value",
+        "D": "should be given without any expectation of etiquette or ceremony"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The passage argues the free gift is 'largely a modern fiction' (p1), governed by obligations to give, receive, and repay (p2), whose etiquette keeps a binding transaction from looking like one (p3), and which creates relationships a sale cannot (p4). Option B captures this — gifts carry obligations and build social bonds.",
+        "passage_anchor": "rc-0026-p2 and rc-0026-p4",
+        "question_type_note": "The main idea holds the passage's two-sided claim: gifts are obligatory, yet not mere trade.",
+        "reading_habit": "When a passage both attacks one view (free gift) and distinguishes itself from another (disguised sale), the main idea sits between them — capture both moves.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage calls the 'free gift' image 'a modern fiction'; gifts carry obligations 'as strong as any contract'. This is the view being dismantled.",
+            "seductive_element": "It is the comforting everyday picture of gifts stated attractively in paragraph 1."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 4 explicitly denies this: the gift 'is not a disguised sale' and does the opposite of what a market transaction does. It sustains a relationship rather than ending one.",
+            "seductive_element": "'Obligation to repay' can sound like proof that gifts are really trades."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage treats etiquette as 'the very machinery' of the gift, essential rather than dispensable; it never advises giving without ceremony.",
+            "seductive_element": "The critique of the 'free gift' myth can be misread as a call to strip away ritual."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0026-q2",
+      "type": "inference",
+      "stem": "It can be inferred that a counter-gift returned immediately and openly, matched exactly in value, would",
+      "options": {
+        "A": "best honour the obligations the gift creates",
+        "B": "undermine the gift by making it look like a barter or sale",
+        "C": "be required whenever the original gift was expensive",
+        "D": "strengthen the bond more than a delayed return would"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 says repayment must come 'not immediately, which would look like barter', and paragraph 3 says the return must be delayed and appear spontaneous 'so that the exchange does not collapse into an obvious swap'. An immediate, open, exactly-matched return would do exactly what the gift must avoid — look like a sale. Option B follows.",
+        "passage_anchor": "rc-0026-p2 and rc-0026-p3",
+        "question_type_note": "The inference negates the gift's stated conditions (delay, disguise) and reads off the result.",
+        "reading_habit": "To infer the effect of violating a rule the passage states, apply the passage's own reasoning about why the rule exists.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Immediate, exact return violates the delay-and-disguise requirement; it would damage, not honour, the gift relationship.",
+            "seductive_element": "Prompt, equal repayment sounds scrupulously fair, which feels like honouring an obligation."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage never ties immediacy to the gift's expense; the timing rule is about disguise, not cost thresholds.",
+            "seductive_element": "It sounds like a plausible norm about repaying valuable gifts quickly."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage says the return should be delayed; an immediate swap weakens the bond by exposing it as a transaction, not strengthens it.",
+            "seductive_element": "Faster reciprocation can intuitively seem more bonding."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0026-q3",
+      "type": "author_purpose",
+      "stem": "The author describes the etiquette of gifts — the protests, the concealment of price, the insistence that it is 'nothing' — in order to",
+      "options": {
+        "A": "criticize such rituals as dishonest and hypocritical",
+        "B": "show that this etiquette is the mechanism that keeps a binding exchange from appearing to be one",
+        "C": "prove that gift-giving is a waste of social effort",
+        "D": "argue that only expensive gifts require such ceremony"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The etiquette is introduced as 'not empty ceremony but the very machinery that keeps a binding transaction from looking like one', with 'the fiction of the free gift… essential to the obligation'. Its purpose in the argument is to show ritual does real work — disguising the binding nature of the exchange. Option B.",
+        "passage_anchor": "rc-0026-p3",
+        "question_type_note": "Purpose questions ask what a description establishes; here the etiquette demonstrates the necessary disguise of obligation.",
+        "reading_habit": "When a passage calls something 'not empty ceremony but the very machinery', read the following description as revealing a hidden function, not as decoration or critique.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage treats the etiquette as functional and essential, not hypocritical; it explains rather than condemns the 'fiction' of the free gift.",
+            "seductive_element": "Calling the free gift a 'fiction' can sound like an accusation of dishonesty."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Far from a waste, the etiquette is 'the very machinery' that makes the gift work; the passage credits it with holding the system together.",
+            "seductive_element": "Elaborate ritual can look like pointless fuss to a modern reader."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage does not restrict ceremony to expensive gifts; it presents the etiquette as general to gift exchange.",
+            "seductive_element": "Concealing 'the price' hints at costly gifts, inviting the false restriction."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0026-q4",
+      "type": "vocabulary_in_context",
+      "stem": "As used in the passage, the phrase 'disinterested' (in the idea that the gift shows an absence of self-interest) is best understood by the author to mean",
+      "options": {
+        "A": "genuinely free of any interest, as the gift appears to be",
+        "B": "apparently free of self-interest while in fact serving a subtler interest in the bond",
+        "C": "bored or indifferent toward the exchange",
+        "D": "uninformed about the value of what is given"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "correct_reasoning": "Paragraph 4 reframes the apparent selflessness: 'What looks like the absence of self-interest is in fact the presence of a subtler and more durable interest… in the bond the object leaves behind.' So the gift's disinterestedness is only apparent; a deeper interest is at work. Option B captures the author's meaning.",
+        "passage_anchor": "rc-0026-p4",
+        "question_type_note": "Vocabulary-in-context: the author redefines apparent 'disinterest' as concealed interest in the relationship.",
+        "reading_habit": "Read an evaluative word through the author's twist on it; here 'disinterested' is precisely what the passage argues the gift only seems to be.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage denies the gift is genuinely free of interest; that appearance is exactly what paragraph 4 corrects.",
+            "seductive_element": "It matches the surface meaning of 'disinterested' the passage sets up in order to overturn."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "'Disinterested' means impartial or without stake, not 'uninterested/bored'; and the giver is deeply invested in the bond, not indifferent.",
+            "seductive_element": "'Disinterested' is commonly confused with 'uninterested'."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The word concerns motive (interest in the bond), not knowledge of the object's value; ignorance is never at issue.",
+            "seductive_element": "The concealment of 'the price' can suggest something about not knowing value."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "reciprocity",
+      "passage_use": "the obligation, at the proper interval, to repay",
+      "meaning_here": "the practice of returning a gift or favour so as to sustain a mutual relationship",
+      "difficulty": "medium"
+    },
+    {
+      "word": "obligation",
+      "passage_use": "gifts are not free at all. They arrive trailing obligations as strong as any contract",
+      "meaning_here": "a binding social duty to act, here to give, receive, or repay",
+      "difficulty": "easy"
+    },
+    {
+      "word": "disinterested",
+      "passage_use": "What looks like the absence of self-interest",
+      "meaning_here": "free of self-interest (which the passage argues the gift only appears to be)",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage sits a gift between two familiar pictures and rejects both: it is neither pure selfless giving nor a disguised sale. Your task is to hold that precise middle — gifts bind, and binding is exactly what makes them different from trade.",
+    "one_sentence_summary": "The 'free gift' is largely a modern fiction: gifts carry strong obligations to give, receive, and repay, and the etiquette that disguises this binds giver and receiver into a lasting relationship — which is precisely what a market sale is designed to avoid.",
+    "main_idea": "In most studied societies, gifts are not free; they come with obligations as strong as contracts, and their delayed, disguised return keeps the exchange from looking like barter. But this does not make gifts disguised sales — it makes them the opposite: where a sale ends a relationship, a gift creates and sustains one. The apparent selflessness masks a subtler interest, not in the object, but in the bond it leaves behind.",
+    "simple_explanation": "We love to think of the gift as the one exchange free of calculation: freely given, expecting nothing back, the warm opposite of the cold marketplace. Anthropology suggests that comforting picture is mostly a modern invention. In most societies studied, gifts aren't free at all. They come trailing obligations as strong as any contract, and a receiver who thinks the transfer is 'done' has misread what just happened to him.\n\nThree obligations hold the whole system together. First, the obligation to GIVE: to withhold generosity is to refuse a relationship and lose standing. Second, the obligation to RECEIVE: to decline a gift is to reject the giver — an insult that can amount to hostility. Third, the obligation to REPAY, at the right interval — not immediately (that looks like barter), not never (that's theft), but later, and ideally with a little extra. So a gift isn't really a thing handed over; it's the opening move in a relationship both parties are now bound to continue.\n\nThat's why timing and disguise matter so much. The return gift must be delayed, so the exchange doesn't collapse into an obvious swap, and it must look spontaneous — a fresh act of generosity, not the paying of a debt. All the fuss around gifts — 'oh, you shouldn't have', hiding the price, insisting 'it's nothing' — isn't empty ceremony. It's the machinery that keeps a binding transaction from looking like one. Paradoxically, the fiction of the free gift is essential to the obligation the gift creates.\n\nNone of this makes gift-giving cynical or just trade in disguise — that would be a crude misreading. The obligations a gift creates are exactly what a market sale is built to avoid. Where a sale ENDS a relationship (debt paid, strangers part), a gift BEGINS or sustains one, tying giver and receiver into ongoing mutual dependence. The gift isn't a hidden sale; it's something a sale can never be. What looks like the absence of self-interest is really the presence of a subtler, more durable interest — not in the object, but in the bond the object leaves behind.",
+    "why_difficult": "The passage threads between two intuitive readings and rejects both, so whichever one you're near feels right. Read paragraph 1 and you carry away 'gifts are pure and free' — the myth being dismantled. Notice the 'obligation to repay' and you slide to 'so gifts are really just trades' — which paragraph 4 explicitly denies. The correct view is the precise middle: gifts are obligatory AND non-market, binding people in a way sales are designed not to.",
+    "author_intention": "To dissolve the sentimental myth of the free gift without falling into cynicism — showing that the obligations a gift creates are not a flaw or a disguise but its whole social point: the making of a lasting bond.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0026-p1",
+        "role": "Punctures the myth",
+        "note": "We imagine the gift as free and calculation-free. Anthropology says that's mostly a modern fiction — gifts carry obligations as strong as contracts."
+      },
+      {
+        "paragraph_id": "rc-0026-p2",
+        "role": "The three obligations",
+        "note": "Give (or lose standing), receive (or insult the giver), and repay later with a little more. A gift is the opening move of a relationship both must continue."
+      },
+      {
+        "paragraph_id": "rc-0026-p3",
+        "role": "Why disguise matters",
+        "note": "The return must be delayed and look spontaneous, or the exchange becomes an obvious swap. The etiquette ('it's nothing') is the machinery hiding the obligation — and the fiction is essential to it."
+      },
+      {
+        "paragraph_id": "rc-0026-p4",
+        "role": "Not a disguised sale",
+        "note": "But this isn't cynical trade. A sale ends a relationship; a gift begins one. The apparent selflessness hides a deeper interest — not in the object, but in the bond it leaves."
+      }
+    ],
+    "tone_progression": "It begins by gently puncturing a sentimental image, turns analytical and precise through the three obligations, and ends appreciative — reclaiming the gift's dignity as a bond-maker rather than exposing it as a swindle.",
+    "key_transitions": [
+      "'A great deal of anthropology suggests this image, though comforting, is largely a modern fiction.' (paragraph 1) — the free-gift myth is named and rejected.",
+      "'None of this makes gift-giving cynical or reduces it to trade by other means…' (start of paragraph 4) — the author fences the argument against the disguised-sale misreading."
+    ],
+    "misunderstanding": "Readers land on one of two extremes: the sentimental 'gifts are free and selfless' (paragraph 1's myth) or the cynical 'gifts are just trades in disguise' (paragraph 4's rejected reading). The passage holds neither — gifts are obligatory yet fundamentally unlike sales, because they bind rather than settle.",
+    "traps_summary": "The distractors here restore the free-gift myth, collapse the gift into a market swap, or treat the essential etiquette as hypocrisy or waste. Keep both of the author's moves: gifts DO carry binding obligations, and that binding is exactly what makes them NOT sales.",
+    "reading_lesson": "When a passage rejects two opposing views to stake out a middle, name both rejections explicitly — 'not a free gift' and 'not a disguised sale' — and check every option against both. The most tempting distractors are the two extremes the author took care to refute, dressed as the main idea; the correct answer preserves the precise, two-sided position between them.",
+    "real_world": "This is why a returned dinner invitation shouldn't arrive the very next day, why 'you didn't have to!' is part of the ritual, why business gifts blur into obligation, and why a wedding-gift registry sits uneasily between gift and transaction. It reframes generosity: much of it is relationship-building, and the discomfort of an unreciprocated favour is the obligation the gift quietly created.",
+    "takeaway": "A gift is not a thing you hand over but a bond you begin — its generosity real, and its obligation just as real.",
+    "reflection_question": "When someone gives you something and insists 'it's nothing', what is actually being created between you?"
+  }
+}

@@ -164,6 +164,73 @@ const THEME_ART = {
   'rc-0020': `
     <path ${S} d="M36 27 C30 23 20 23 14 26 L14 50 C20 47 30 47 36 51 C42 47 52 47 58 50 L58 26 C52 23 42 23 36 27 Z M36 27 V51"/>
     <path ${S} data-draw d="M36 21 L36 12 M28 17 L24 10 M44 17 L48 10"/>`,
+  /* The market for lemons: a price tag with a hidden flaw. */
+  'rc-0021': `
+    <path ${S} data-draw d="M20 18 H44 L58 32 L38 52 L18 32 Z"/>
+    <circle cx="28" cy="28" r="2.4" fill="currentColor"/>
+    <path ${S} d="M40 30 l-4 6 l5 3 l-3 5"/>`,
+  /* Rewritten history: layered pages, the same past re-read. */
+  'rc-0022': `
+    <path ${S} d="M18 24 H44 V54 H18 Z"/>
+    <path ${S} d="M26 16 H52 V46"/>
+    <path ${S} data-draw d="M23 32 H39 M23 39 H39 M23 46 H33"/>`,
+  /* Moral luck: the die whose fall no one controls. */
+  'rc-0023': `
+    <rect ${S} data-draw x="20" y="20" width="32" height="32" rx="5"/>
+    <g fill="currentColor">
+      <circle cx="29" cy="29" r="2"/><circle cx="43" cy="29" r="2"/>
+      <circle cx="36" cy="36" r="2"/>
+      <circle cx="29" cy="43" r="2"/><circle cx="43" cy="43" r="2"/>
+    </g>`,
+  /* Cognitive dissonance: two arrows pulling against each other. */
+  'rc-0024': `
+    <path ${S} data-draw d="M16 28 H50 M42 20 L52 28 L42 36"/>
+    <path ${S} d="M56 44 H22 M30 36 L20 44 L30 52"/>`,
+  /* Who are the people: a boundary drawn around the enclosed. */
+  'rc-0025': `
+    <circle ${S} data-draw cx="34" cy="36" r="22"/>
+    <g fill="currentColor">
+      <circle cx="28" cy="32" r="2"/><circle cx="40" cy="32" r="2"/>
+      <circle cx="28" cy="42" r="2"/><circle cx="40" cy="42" r="2"/>
+      <circle cx="34" cy="37" r="2"/>
+    </g>
+    <path ${S} d="M52 22 l8 -6"/>`,
+  /* The gift: a wrapped box whose ribbon loops back. */
+  'rc-0026': `
+    <rect ${S} x="16" y="30" width="40" height="24" rx="2"/>
+    <path ${S} d="M16 38 H56 M36 30 V54"/>
+    <path ${S} data-draw d="M36 30 C30 22 22 24 26 30 M36 30 C42 22 50 24 46 30"/>`,
+  /* Moral panic: a small mouth, an amplified alarm. */
+  'rc-0027': `
+    <path ${S} data-draw d="M16 32 L34 26 V46 L16 40 Z"/>
+    <path ${S} d="M34 30 C40 32 40 40 34 42"/>
+    <path ${S} d="M44 26 C52 30 52 42 44 46"/>
+    <path ${S} d="M50 22 C62 28 62 44 50 50"/>`,
+  /* Falsification: the single black swan that settles it. */
+  'rc-0028': `
+    <path ${S} data-draw d="M22 50 C18 40 26 34 34 36 C30 28 34 20 40 20 C40 26 44 28 44 32 C52 34 54 44 46 50 Z"/>
+    <circle cx="40" cy="24" r="1" fill="currentColor"/>
+    <path ${S} d="M14 54 H58"/>`,
+  /* The freedom of the form: fourteen lines inside their frame. */
+  'rc-0029': `
+    <rect ${S} x="18" y="14" width="36" height="46" rx="2"/>
+    <path ${S} data-draw d="M24 22 H48 M24 28 H48 M24 34 H44 M24 40 H48 M24 46 H40 M24 52 H46"/>`,
+  /* The attention economy: a screen and its endless scroll. */
+  'rc-0030': `
+    <rect ${S} x="24" y="12" width="24" height="44" rx="4"/>
+    <path ${S} data-draw d="M36 40 C30 40 30 32 36 32 C44 32 44 44 34 44 C22 44 24 26 40 26"/>`,
+  /* The paradox of fiction: the mask, and its single tear. */
+  'rc-0031': `
+    <path ${S} data-draw d="M20 22 C20 44 28 54 36 54 C44 54 52 44 52 22 C44 26 28 26 20 22 Z"/>
+    <path ${S} d="M28 32 q3 -3 6 0 M38 32 q3 -3 6 0"/>
+    <path ${S} d="M31 40 C33 44 39 44 41 40"/>
+    <path ${S} d="M30 36 C30 42 27 44 27 47"/>`,
+  /* The price of a forest: the tree with a tag hung on it. */
+  'rc-0032': `
+    <path ${S} data-draw d="M36 16 C46 24 46 34 40 36 C48 38 48 48 38 48 H34 C24 48 24 38 32 36 C26 34 26 24 36 16 Z"/>
+    <path ${S} d="M36 48 V56"/>
+    <path ${S} d="M44 40 l8 6 l-3 4 l-8 -6 Z"/>
+    <circle cx="49" cy="45" r="1" fill="currentColor"/>`,
 };
 
 const GENRE_ART = {

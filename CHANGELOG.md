@@ -4,6 +4,77 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.8.0 — 2026-07-06 — The Premium Reading Library
+
+The milestone that turns a starter shelf into a library. Success criterion:
+after finishing a passage's questions, a student should think "now I finally
+understand what I just read." The content library — the actual product —
+grows from 8 passages to 32, and the Learning Page becomes a complete,
+book-like lesson rather than a set of coaching notes.
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** this release is a
+content-and-learning-surface milestone inserted at 0.8.0 ahead of the Para
+Summary module (which shifts by one). Rationale: ROADMAP_V2 §1 names the thin
+content library as "the binding constraint on daily-use value, ahead of any
+feature", and §10's steering sentence is "grow the library" first. The module
+work (PS/PJ/OOO/Vocab) is unchanged in order behind it.
+
+### Content — 24 new premium RC passages (rc-0009 … rc-0032)
+- Two reviewed batches (`batch-rc-003` = rc-0009…rc-0020, `batch-rc-004` =
+  rc-0021…rc-0032) covering **all 12 genres exactly twice**, at the mission's
+  **6 easy / 12 medium / 6 hard** split (25/50/25), with **no two hard
+  passages adjacent in id order** so the journey ladder never spikes.
+- New genres given their first passages: anthropology, political-theory,
+  technology-ethics, environment — every genre in the schema is now represented
+  (each with a foundation/developing/intermediate/advanced/elite spread).
+- Each passage is authored to the `CAT_VARC_BIBLE` craft rules: an argument
+  (not a topic), a discernible author with a contestable stance, qualified
+  claims, every distractor a named trap with an articulated seductive element,
+  and correct answers that are the defensible survivor rather than the most
+  satisfying option. Several passages deliberately withhold a resolution
+  (moral luck, the boundary problem) so the correct answers describe a tension
+  rather than dissolve it. Provenance stays honest — original compositions in
+  CAT register (`source.publication: "original"`), never fabricated citations.
+- 102 new questions (library now **136**) carry full distractor teardowns and a
+  transferable `reading_habit`; every passage extracts vocabulary-in-context,
+  and hard passages run 5 questions including strengthen/weaken items.
+
+### Schema v4 — the full Learning Page (appended; v1–v3 files stay valid)
+- `content/schema/rc.schema.v4.json` extends the mentor block with five
+  fields that make the Learning Page a complete lesson: `one_sentence_summary`
+  (the honest one-line the reader checks their own summary against),
+  `simple_explanation` (the whole passage retold in lucid, beginner-readable
+  English), `why_difficult` (where readers genuinely struggle, named without
+  blame), `reading_lesson` (the ONE permanent reading habit the passage
+  builds), and `reflection_question` (one question worth sitting with; the
+  schema enforces it ends with "?").
+- Versions are appended, never edited: the loader still resolves each file to
+  its own schema version, and the eight existing v3 passages are untouched.
+
+### The Learning Page, rebuilt (`/rc/mentor/:id`)
+- New sections render in a calm, book-like order: the recall reveal now opens
+  with the one-sentence summary; "The passage, explained simply" renders the
+  retelling as real paragraphs; "Why this passage was difficult", "The reading
+  lesson" (held in a quiet card), and "A question to sit with" (above the
+  reflection line) all ship. Every new section is guarded, so v3 passages
+  render exactly as before.
+- Each of the 12 new passages gets its own self-drawing, monochrome theme
+  illustration (keyed by id in `mentor.js`, content JSON stays pure data), and
+  the four previously-uncovered genres gain fallback motifs.
+- New styles are token-only additions to `components.css`; no design tokens
+  were changed and the existing look is preserved.
+
+### Plumbing and verification
+- Registry rebuilt from the passage files themselves (a scripted, idempotent
+  mirror), so `content/index.json` and the files cannot disagree.
+- Service worker: schema v4 and the 24 passages added to the content precache;
+  `CONTENT_VERSION` 3 → 5 and `CACHE_VERSION` 7 → 9 across the milestone (both
+  content and shell changed as the two batches and the renderer shipped).
+- `tools/verify.mjs` extended for v4: the mentor-voice trap lint now targets
+  the newest schema on disk, and the schema-precache check now covers every
+  version present (not just v1), so a forgotten schema precache is unshippable.
+  Full verify is green; edited DOM modules pass `node --check`.
+
 ## 0.7.0 — 2026-07-05 — The Personal Reading Mentor
 
 The milestone that gives CAT OS its voice. Success criterion: a student

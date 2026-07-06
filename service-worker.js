@@ -9,7 +9,7 @@
  * - CONTENT cache: passages, the registry, and schemas. Versioned
  *   independently (CONTENT_VERSION) so shipping new app code never
  *   evicts downloaded content, and new content never forces an app
- *   re-download. At today's library size (20 passages) everything is
+ *   re-download. At today's library size (32 passages) everything is
  *   precached; when the library grows large, this cache switches to
  *   cache-on-first-use without touching the shell strategy.
  *
@@ -20,8 +20,8 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 8;
-const CONTENT_VERSION = 4;
+const CACHE_VERSION = 9;
+const CONTENT_VERSION = 5;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
 const KEEP = [SHELL_CACHE, CONTENT_CACHE];
@@ -107,6 +107,18 @@ const CONTENT_FILES = [
   './content/reading-comprehension/rc-0018.json',
   './content/reading-comprehension/rc-0019.json',
   './content/reading-comprehension/rc-0020.json',
+  './content/reading-comprehension/rc-0021.json',
+  './content/reading-comprehension/rc-0022.json',
+  './content/reading-comprehension/rc-0023.json',
+  './content/reading-comprehension/rc-0024.json',
+  './content/reading-comprehension/rc-0025.json',
+  './content/reading-comprehension/rc-0026.json',
+  './content/reading-comprehension/rc-0027.json',
+  './content/reading-comprehension/rc-0028.json',
+  './content/reading-comprehension/rc-0029.json',
+  './content/reading-comprehension/rc-0030.json',
+  './content/reading-comprehension/rc-0031.json',
+  './content/reading-comprehension/rc-0032.json',
 ];
 
 /* Install: precache shell + content, then take over promptly. */

@@ -1,0 +1,288 @@
+{
+  "schema_version": 4,
+  "meta": {
+    "id": "rc-0024",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 496,
+    "question_count": 4,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "specific_detail",
+      "author_purpose"
+    ],
+    "theme": "how we revise beliefs to justify actions we have already taken",
+    "estimated_time_min": 7.0,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-06",
+      "usage_note": "Original composition in CAT register for CAT OS. Cognitive dissonance is a foundational idea in social psychology (Leon Festinger); no specific text is adapted. Personal study only."
+    },
+    "date_added": "2026-07-06",
+    "batch_id": "batch-rc-004",
+    "prompt_version": "in-repo authored (Premium Reading Library milestone); RC_MASTER_GENERATION_PROMPT.v1 + CAT_VARC_BIBLE craft rules applied",
+    "reviewer_notes": "The counter-intuitive direction (action shapes belief, not only belief action) is the crux; distractors reverse it or over-generalise. Owner review pending.",
+    "vocab_extracted": [
+      "dissonance",
+      "retroactively",
+      "coherence"
+    ]
+  },
+  "passage": {
+    "title": "Believing What We Have Done",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0024-p1",
+        "text": "The commonsense picture of a person has beliefs coming first and actions following: we decide that something is good and then pursue it, judge something wrong and then avoid it. Belief steers; conduct obeys. A large body of psychological work suggests this picture is at best half the story, and that the arrow often runs the other way — that having acted, we adjust our beliefs to fit what we have already done. The mind, it turns out, is not only a chooser of actions but a tireless justifier of them."
+      },
+      {
+        "id": "rc-0024-p2",
+        "text": "The engine of this is discomfort. Holding a belief while acting against it, or holding two beliefs that clash, produces a tension the mind is strongly motivated to reduce. Since the action, once taken, cannot be undone, the cheaper repair is to revise the belief. A person who has made a difficult, irreversible choice will tend, afterwards, to see the option chosen as better and the rejected one as worse than they judged them at the moment of choosing — not through fresh evidence, but through the pressure to make the choice feel wise. The rearrangement is quiet and feels entirely like ordinary reasoning."
+      },
+      {
+        "id": "rc-0024-p3",
+        "text": "This explains a pattern that the belief-first picture cannot. Consider that people often become more committed to a group, a cause, or a purchase after it has cost them dearly, not less. On a straightforward accounting, a painful initiation or a wasted expense should sour us on the thing. Instead it frequently deepens our attachment, because the alternative — conceding that we suffered or paid for something not worth it — is precisely the belief the mind is loath to hold. We resolve the discomfort by inflating the value of what we sacrificed for, retroactively making the sacrifice make sense."
+      },
+      {
+        "id": "rc-0024-p4",
+        "text": "It would be too much to say that reason is merely a servant of prior action; sometimes we do change our conduct to fit our convictions, which is the whole basis of integrity. The claim is narrower and stranger: that a powerful current runs in the reverse direction, usually unnoticed, and that some of our firmest beliefs are less the causes of our behaviour than its consequences. To know this is not to escape it — the mechanism operates on those who study it too — but it does license a useful suspicion. When we find ourselves most certain that a costly path was the right one, that is exactly the moment the certainty deserves a second look."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0024-q1",
+      "type": "main_idea",
+      "stem": "The passage is chiefly concerned with arguing that",
+      "options": {
+        "A": "people always act rationally on the basis of carefully considered beliefs",
+        "B": "we often revise our beliefs after acting, to justify what we have already done",
+        "C": "painful initiations should be avoided because they distort our judgement",
+        "D": "reason is nothing more than a servant of our prior actions"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "correct_reasoning": "The passage argues the arrow 'often runs the other way' — having acted, we adjust beliefs to fit (p1), driven by the discomfort of inconsistency (p2), which explains deepened commitment after costly sacrifice (p3), while conceding conduct sometimes does follow conviction (p4). Option B states this central claim at the passage's own strength ('often').",
+        "passage_anchor": "rc-0024-p1 and rc-0024-p2",
+        "question_type_note": "The main idea is the counter-intuitive direction the passage adds — action shaping belief — held at the qualified strength the author uses.",
+        "reading_habit": "State the surprising direction of the causal arrow in your summary; here it is action → belief, the reverse of common sense.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the belief-first commonsense picture the passage says is 'at best half the story'; the passage complicates it rather than affirming it.",
+            "seductive_element": "It is the intuitive view of ourselves as rational choosers, stated confidently."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "The costly-initiation case is one illustration in paragraph 3, not the thesis, and the passage draws no 'avoid initiations' recommendation.",
+            "seductive_element": "It fixes on a vivid example and turns it into practical advice."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "Paragraph 4 explicitly denies this: 'It would be too much to say that reason is merely a servant of prior action'; sometimes conduct does follow conviction. The claim is 'narrower and stranger'.",
+            "seductive_element": "It sounds like the bold, cynical version of the passage's finding."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0024-q2",
+      "type": "specific_detail",
+      "stem": "According to the passage, after making a difficult, irreversible choice a person tends to",
+      "options": {
+        "A": "regret the choice as new evidence comes to light",
+        "B": "view the chosen option as better and the rejected one as worse than before, without new evidence",
+        "C": "become indifferent to both the chosen and the rejected options",
+        "D": "reverse the decision as soon as discomfort arises"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "correct_reasoning": "Paragraph 2 states it directly: after a difficult, irreversible choice a person will 'see the option chosen as better and the rejected one as worse than they judged them at the moment of choosing — not through fresh evidence, but through the pressure to make the choice feel wise.' Option B restates this.",
+        "passage_anchor": "rc-0024-p2",
+        "question_type_note": "A detail question keyed to the paragraph's explicit description of post-choice belief revision.",
+        "reading_habit": "Anchor the answer to the passage's exact wording, especially the crucial 'not through fresh evidence' clause that rules out evidence-based options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage describes increased confidence in the choice, not regret, and explicitly says the shift is 'not through fresh evidence'.",
+            "seductive_element": "Regret after a hard choice is a familiar experience, so it feels natural."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The person becomes more polarized (chosen better, rejected worse), not indifferent; indifference would leave the dissonance unreduced.",
+            "seductive_element": "'Moving on' from a decision can be loosely imagined as indifference."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The action 'cannot be undone', so the mind revises the belief instead of reversing the decision; reversal is exactly what the passage says does not happen.",
+            "seductive_element": "It uses the passage's theme of discomfort but attaches the wrong response to it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0024-q3",
+      "type": "inference",
+      "stem": "It can be inferred that, on the passage's account, a person who endured a costly initiation to join a group is likely to value membership more because",
+      "options": {
+        "A": "the initiation gave them useful skills that increase the group's value",
+        "B": "admitting the cost was not worth it is a belief the mind resists holding",
+        "C": "groups with painful initiations are objectively more valuable",
+        "D": "the discomfort of the initiation fades quickly once membership begins"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "correct_reasoning": "Paragraph 3 explains that deepened attachment follows costly sacrifice because 'the alternative — conceding that we suffered or paid for something not worth it — is precisely the belief the mind is loath to hold', so we 'inflate the value of what we sacrificed for'. The inference is option B: valuing membership more avoids the resisted belief that the cost was wasted.",
+        "passage_anchor": "rc-0024-p3",
+        "question_type_note": "The inference restates the dissonance mechanism as applied to the initiation case.",
+        "reading_habit": "Trace deepened commitment back to the belief the mind is avoiding, which is the passage's stated cause — not to any real merit of the group.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage attributes the raised valuation to belief-revision, not to skills gained; it says the shift is not driven by the thing's actual merits.",
+            "seductive_element": "It offers a rational, real-world reason initiations might add value."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage's point is that the value is inflated by the mind, not that costly-initiation groups are objectively better; the attachment is a psychological artefact.",
+            "seductive_element": "It converts the felt increase in value into a claim about objective worth."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing about the discomfort fading is offered; the mechanism is resolving dissonance by revaluing, not by forgetting the pain.",
+            "seductive_element": "It supplies a plausible-sounding emotional explanation the passage never gives."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0024-q4",
+      "type": "author_purpose",
+      "stem": "In the final paragraph, the author's main purpose in conceding that 'sometimes we do change our conduct to fit our convictions' is to",
+      "options": {
+        "A": "abandon the passage's central claim as overstated",
+        "B": "keep the claim precise by denying the extreme view that action always determines belief",
+        "C": "argue that integrity is more common than self-justification",
+        "D": "suggest that the two directions of influence are equally strong"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "correct_reasoning": "The concession guards against overreach: 'It would be too much to say that reason is merely a servant of prior action.' The author grants that conduct sometimes follows conviction precisely to keep the real claim 'narrower and stranger' — a powerful reverse current, not a universal law. Its purpose is precision, option B.",
+        "passage_anchor": "rc-0024-p4",
+        "question_type_note": "Purpose questions ask what a concession accomplishes; here it fences the thesis against the extreme reading.",
+        "reading_habit": "Read a concession as scope-setting: the author gives ground on the extreme to hold the exact, defensible claim.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The author does not abandon the claim; the same paragraph restates it as a 'powerful current' running 'usually unnoticed'. The concession refines, not retracts.",
+            "seductive_element": "Any concession can look like backing down."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage makes no claim about which is more common; it concedes integrity exists without weighing its frequency against self-justification.",
+            "seductive_element": "Mentioning integrity invites a comparison the passage never draws."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The passage stresses the reverse current is 'powerful' and 'usually unnoticed', not that both directions are equal; it emphasizes the under-recognized one.",
+            "seductive_element": "Acknowledging both directions can be misread as calling them balanced."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "dissonance",
+      "passage_use": "Holding two beliefs that clash, produces a tension",
+      "meaning_here": "the mental discomfort of holding conflicting beliefs or acting against a belief",
+      "difficulty": "hard"
+    },
+    {
+      "word": "retroactively",
+      "passage_use": "retroactively making the sacrifice make sense",
+      "meaning_here": "acting backward in effect, on something already done",
+      "difficulty": "medium"
+    },
+    {
+      "word": "coherence",
+      "passage_use": "the pressure to make the choice feel wise",
+      "meaning_here": "internal consistency among one's beliefs and actions (the state the mind seeks)",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "This passage reverses an arrow you take for granted — that beliefs cause actions. Its whole point is that action often causes belief. Your task is to hold that reversed direction firmly and at the right strength, resisting both the commonsense view and the cynical overshoot.",
+    "one_sentence_summary": "Because holding a belief that clashes with what we have already done is uncomfortable, we often quietly revise the belief to justify the action — so some of our firmest convictions are less the causes of our behaviour than its consequences.",
+    "main_idea": "Common sense says belief comes first and action follows, but a powerful, usually unnoticed current runs the other way: after acting, we adjust our beliefs to make the action feel wise, because inconsistency is uncomfortable and the deed can't be undone. This explains why costly sacrifice deepens rather than weakens commitment — though the author is careful to say conduct sometimes does follow conviction, so the claim is a strong reverse current, not a universal law.",
+    "simple_explanation": "We usually picture people this way: you form a belief, then act on it. You decide something is good and pursue it; you judge something wrong and avoid it. Belief steers, action obeys. But a lot of psychology says that's at best half the story — and that the arrow often points the other way. Having acted, we adjust our beliefs to fit what we've already done. The mind isn't just a chooser of actions; it's a tireless justifier of them.\n\nWhat drives this is discomfort. Holding a belief while acting against it, or holding two clashing beliefs, creates a tension we're strongly motivated to reduce. And since an action, once taken, can't be undone, the cheaper repair is to change the belief. So after a hard, irreversible choice, people tend to see the option they picked as better and the one they rejected as worse than they judged them at the moment of choosing — not because of new evidence, but because of the pressure to make the choice feel wise. And it all feels like perfectly ordinary reasoning.\n\nThis explains something the belief-first picture can't. People often become MORE committed to a group, a cause, or a purchase after it has cost them dearly, not less. On plain accounting, a painful initiation or a wasted expense should turn us off. Instead it usually deepens our attachment — because the alternative belief ('I suffered or paid for something not worth it') is exactly the one the mind hates to hold. So we resolve the discomfort by inflating the value of whatever we sacrificed for, making the sacrifice make sense after the fact.\n\nThe author is careful not to overclaim. It would be too much to say reason is merely a servant of prior action — sometimes we really do change our conduct to fit our convictions, and that's the whole basis of integrity. The claim is narrower and stranger: a powerful current runs the reverse way, usually unnoticed, so some of our firmest beliefs are consequences of our behaviour rather than its causes. Knowing this doesn't free you from it — it works on the people who study it too — but it earns a useful suspicion: the moment you're most certain a costly path was the right one is exactly when that certainty deserves a second look.",
+    "why_difficult": "The difficulty is directional and quantitative. Directional: you must hold the counter-intuitive arrow (action → belief) against the lifelong habit of thinking belief → action, and several distractors quietly flip it back. Quantitative: the author states the claim carefully ('often', 'a powerful current', 'too much to say… merely'), and the tempting wrong options either weaken it to the commonsense view or inflate it to 'reason is just a servant of action'. Answering well means matching the exact strength and direction.",
+    "author_intention": "To unsettle our flattering self-image as rational choosers by revealing a hidden justifying machinery — and to hand the reader a practical suspicion of their own strongest post-hoc certainties.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0024-p1",
+        "role": "Flips the arrow",
+        "note": "Common sense: belief first, action follows. The passage says the arrow often runs the other way — we adjust beliefs to fit what we've already done."
+      },
+      {
+        "paragraph_id": "rc-0024-p2",
+        "role": "The mechanism",
+        "note": "Inconsistency is uncomfortable; the action can't be undone, so the mind revises the belief. After a hard choice we rate the chosen option better and the rejected worse — without new evidence."
+      },
+      {
+        "paragraph_id": "rc-0024-p3",
+        "role": "The telling case",
+        "note": "Costly initiations and wasted expenses deepen commitment, not weaken it — because admitting the cost was wasted is the belief the mind avoids. We inflate the value to justify the sacrifice."
+      },
+      {
+        "paragraph_id": "rc-0024-p4",
+        "role": "The careful limit",
+        "note": "Not everything is post-hoc justification — sometimes conduct follows conviction (integrity). The claim is narrower: a strong reverse current, usually unnoticed. Knowing it earns a healthy suspicion."
+      }
+    ],
+    "tone_progression": "Measured and analytical, with a note of wry candour — especially at the end, where the author admits the mechanism catches even those who study it and turns the finding into gentle self-advice.",
+    "key_transitions": [
+      "'A large body of psychological work suggests this picture is at best half the story, and that the arrow often runs the other way…' (paragraph 1) — the commonsense direction is reversed.",
+      "'This explains a pattern that the belief-first picture cannot.' (start of paragraph 3) — the theory earns its keep on a case common sense can't handle.",
+      "'It would be too much to say that reason is merely a servant of prior action…' (start of paragraph 4) — the claim is fenced against the cynical extreme."
+    ],
+    "misunderstanding": "Two mirror errors. Some readers snap back to the commonsense view (we act on our beliefs), missing that the passage's whole news is the reverse current. Others overshoot into cynicism (reason is just a servant of action), which paragraph 4 explicitly rejects. The passage lives in between: a powerful, under-noticed reverse current alongside genuine belief-led conduct.",
+    "traps_summary": "The distractors here flip the arrow back to common sense, inflate the claim to 'reason is merely a servant', mistake a vivid example (initiation) for the thesis, or attribute the raised valuation to real merit rather than dissonance. Fix the direction (action shapes belief) and the strength ('often', not 'always'), and answer from the mechanism.",
+    "reading_lesson": "When a passage reverses a familiar causal arrow, keep the new direction fixed in mind and check every option against it — the most natural-sounding distractors quietly restore the original direction. Then watch the qualifiers: an author who says 'it would be too much to say X' is marking the exact edge of the claim, and the correct answers sit inside that edge, never at the extreme the author just disowned.",
+    "real_world": "This is behind buyer's remorse turning into brand loyalty, hazing deepening group bonds, sunk-cost persistence in jobs and relationships, and the way we defend a choice more fiercely the more it cost us. The practical takeaway is precise: your strongest justification of an expensive decision is where to look first for motivated reasoning — including in yourself.",
+    "takeaway": "Some of our firmest beliefs are not the reasons we acted but the excuses we built afterward.",
+    "reflection_question": "Which of your strong convictions might be justifications you constructed after a costly choice, rather than the reasons you made it?"
+  }
+}

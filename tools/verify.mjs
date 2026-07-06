@@ -52,6 +52,9 @@ const schemas = {};
 for (const f of readdirSync(join(root, 'content/schema'))) {
   if (f.startsWith('rc.schema.v')) schemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
 }
+/* Schema-shape checks (e.g. the mentor voice lint in §9) target the NEWEST
+   schema on disk, so appending a version (v4 …) keeps them in step. */
+const latestSchemaV = String(Math.max(...Object.keys(schemas).map(Number)));
 const rcDir = 'content/reading-comprehension';
 const rcFiles = readdirSync(join(root, rcDir)).filter((f) => f.endsWith('.json')).sort();
 
@@ -123,7 +126,12 @@ for (const file of rcFiles) {
   if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
 }
 if (!listed.includes('./content/index.json')) bad('registry not precached');
-if (!listed.includes('./content/schema/rc.schema.v1.json')) bad('schema not precached');
+// Every schema version on disk must be precached — offline validation needs it.
+for (const f of readdirSync(join(root, 'content/schema'))) {
+  if (f.startsWith('rc.schema.v') && !listed.includes(`./content/schema/${f}`)) {
+    bad(`schema not precached: ${f}`);
+  }
+}
 if (problems.filter((p) => p.includes('service worker') || p.includes('precache')).length === 0) {
   ok(`${listed.length} precache entries all exist on disk`);
 }
@@ -346,7 +354,7 @@ console.log('\n9. Mentor dry run (voice · DNA · one-lesson rule · recall)');
     }
     if (offenders.length) offenders.forEach((o) => bad(`mentor voice uses judgment language — ${o}`));
     // Every trap type the schema allows must have a pattern the mentor can teach.
-    const trapEnum = schemas['3'].properties.questions.items.properties.explanation
+    const trapEnum = schemas[latestSchemaV].properties.questions.items.properties.explanation
       .properties.distractors.items.properties.trap_type.enum;
     for (const t of trapEnum) {
       if (!voice.TRAP_PATTERNS[t]) bad(`mentor voice: no pattern for trap_type "${t}"`);
