@@ -21,7 +21,7 @@
  */
 
 const CACHE_VERSION = 10;
-const CONTENT_VERSION = 5;
+const CONTENT_VERSION = 6;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
 const KEEP = [SHELL_CACHE, CONTENT_CACHE];
