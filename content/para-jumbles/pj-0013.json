@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0013",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Reader Finishes the Book",
+    "theme": "why a text's meaning is completed by the reader, not fixed by the writer",
+    "estimated_time_sec": 170,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "former_latter", "stance_continuity"],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": ["competing_opener", "misleading_connective"],
+    "dna_traits": ["global_tracking", "inference_implicit", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 3,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "refuse a plausible mandatory pair when the whole argument requires the pair to break",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Reader-response criticism is a recognised tradition in literary theory; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "CAT-tier item with an engineered anchor pair (B-D share writer/reader vocabulary and read smoothly adjacent) that the true order splits. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The same page of a novel yields a different book at twenty and at fifty, though not a word on it has changed.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "A writer, on this view, does not deliver a finished meaning but sets down a score, which stays silent until a reader performs it.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "We tend to speak as though a book contains its meaning the way a jar contains water, waiting to be poured into any reader who opens it.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "What the page supplies is fixed; what the reader brings, memories, losses, the particular evening of the reading, is not, and meaning is made where the two meet.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["C", "B", "A", "D"],
+  "links": [
+    {
+      "from": "C",
+      "to": "B",
+      "device": "contrast_signal",
+      "reliability": "medium",
+      "explanation": "C states the everyday view, meaning sits inside the book like water in a jar. B answers \"on this view\" with the rival picture, the writer as composer of a score. The turn is real, but no explicit however marks it; the clash of images does."
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "B says the reader performs the silent score. A proves it: the same page becomes a different book at twenty and fifty. The claim about performance hands off to the evidence of two performances."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "A shows page fixed, reader changed. D states the principle behind it: what the page supplies is fixed, what the reader brings is not, and meaning is made where they meet. The instance resolves into the thesis."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "An argument that replaces one picture with another: the common view, the rival view, evidence for the rival, the principle stated. The paragraph plants a pair, B and D, that share vocabulary and read smoothly side by side, but the true order splits them so the evidence can sit between.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C sets up the view to be overturned, meaning as water in a jar. It needs no prior sentence, and its \"we tend to speak as though\" signals a belief about to be corrected."
+      },
+      {
+        "label": "B",
+        "why_here": "B offers the rival picture and flags the pivot with \"on this view\": the writer sets a score, silent until performed. It answers C directly, so it must follow it."
+      },
+      {
+        "label": "A",
+        "why_here": "A supplies the evidence for B's performance metaphor: one page, two ages, two books. Evidence follows the claim it supports."
+      },
+      {
+        "label": "D",
+        "why_here": "D states the governing principle and closes: fixed page, changing reader, meaning made where they meet. A summation this complete can only end the paragraph."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CBDA",
+        "trap_type": "anchor_pair",
+        "why_tempting": "B and D both talk about the writer, the page, and the reader in the same abstract register, and read fluently back to back, so they feel like a mandatory pair, the theory stated in two connected sentences.",
+        "where_it_breaks": "Lock B to D and the evidence A gets stranded at the end, where it explains nothing and reads as an afterthought to a finished argument. But A is the proof of B's claim and must sit between the claim and its principle. The B-D pairing is merely possible, not necessary; the paragraph needs the pair to break so evidence can do its work. A mandatory pair must be forced by the text, not merely comfortable."
+      },
+      {
+        "order": "ACBD",
+        "trap_type": "competing_opener",
+        "why_tempting": "A is a striking, self-contained aphorism, a different book at twenty and at fifty, and aphorisms feel like openings.",
+        "where_it_breaks": "A is evidence, and evidence for a claim not yet made explains nothing at the top of a paragraph. Open on A and the reader meets a proof before the thing it proves. C, the common view, is what the whole paragraph is answering, so C opens."
+      }
+    ],
+    "trap_named": "The anchor pair: B and D are written to look inseparable because they share vocabulary and glide together. But a pair is only mandatory if the argument forces it, and here the argument forces the opposite, that the evidence A must come between them. Before you weld two smooth sentences together, ask whether anything must sit between them. A comfortable pair is a hypothesis, not a hinge.",
+    "solving_habit": "When two sentences feel made for each other, test the pair against the whole. Ask what the paragraph still needs to say. If a third sentence has to go between them, the pair was a decoy, however smoothly it read."
+  },
+  "mentor": {
+    "challenge": "Two sentences slide together so naturally you will want to lock them. The argument needs them apart. Trust the whole, not the pair.",
+    "paragraph_plain": "The author challenges a habit of speech. We talk as if a book holds its meaning the way a jar holds water, ready to pour into anyone who opens it. Not so, the author says. A writer does not hand over finished meaning; a writer sets down a score that stays silent until a reader performs it. The proof is ordinary: the same page of a novel gives you a different book at twenty than at fifty, though not one word has changed. So what the page supplies is fixed, but what the reader brings, memories, losses, the particular evening of the reading, is not. Meaning is made where the two meet.",
+    "takeaway": "A mandatory pair must be forced by the text, not merely comfortable to read."
+  }
+}

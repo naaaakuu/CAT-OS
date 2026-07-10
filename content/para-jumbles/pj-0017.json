@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0017",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Bias in the Mirror",
+    "theme": "why a neutral algorithm can still inherit an unjust past",
+    "estimated_time_sec": 200,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "article_given_new", "pronoun_ref"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["anchor_pair", "competing_ending"],
+    "dna_traits": ["global_tracking", "wm_long_chain", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 4,
+      "competing_openings": 2,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "carry a long referential chain and resolve a pronoun that two nouns can claim",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Algorithmic bias from historical training data is a standard topic in technology ethics; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "99-percentile item with a five-link dependency chain and a pronoun (it) that the system and the past both plausibly claim. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A hiring model trained on a decade of a company's decisions learns, with perfect obedience, to prefer exactly the kind of candidate that company has always preferred.",
+      "role": "example"
+    },
+    {
+      "label": "B",
+      "text": "The fix, therefore, is not merely to strip names and photographs from the data, but to ask the harder question of which past the machine should be allowed to learn from at all.",
+      "role": "answer"
+    },
+    {
+      "label": "C",
+      "text": "We reach for algorithms partly because they seem to promise a judgment untainted by human prejudice.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "But a model has no access to the world except through the data we feed it, and that data is a record of the very past whose prejudices we hoped to escape.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "D", "A", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "D",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "C states the hope: algorithms promise judgment free of prejudice. D opens \"But a model has no access to the world except through the data we feed it\", turning that hope against itself. The But opposes exactly C's promise."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "D states the general problem: data is a record of the prejudiced past. A makes it concrete with the hiring model that learns the company's old preferences. General mechanism to specific instance; no connective, so meaning carries it."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "A shows the model obediently reproducing past preferences. B opens \"The fix, therefore\", drawing the remedy from that diagnosis. Therefore caps the problem A has just made vivid."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A hope, the flaw in the hope, the flaw made concrete, and the remedy. The paragraph runs a long referential chain, algorithms to model to data to past, and hides a pronoun that two nouns can claim, so you must carry the whole chain and resolve the pronoun by sense.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C states why we turn to algorithms: the promise of judgment without human prejudice. It opens because it is the hope the whole paragraph will complicate."
+      },
+      {
+        "label": "D",
+        "why_here": "D punctures the hope with But: a model only knows the world through our data, and that data records the prejudiced past. It must follow the promise it undercuts."
+      },
+      {
+        "label": "A",
+        "why_here": "A grounds D's abstraction in the hiring model that faithfully learns a company's old preferences. The example follows the general claim it illustrates."
+      },
+      {
+        "label": "B",
+        "why_here": "B draws the remedy with therefore: not just scrubbing names, but choosing which past the machine may learn from. The solution can only follow the fully drawn problem."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CADB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "A is a crisp concrete example and can seem to follow C's mention of algorithms directly, with D's abstract But then read as a comment on the hiring case, so C, A, D, B feels like example-then-analysis.",
+        "where_it_breaks": "D's But opposes the hope in C, not the example in A, and D's \"the data we feed it\" introduces the mechanism that A presupposes; A's hiring model is an instance of D's general point, so it must come after D, not before. Read CADB and the concrete case arrives before the mechanism that explains why it goes wrong, and D's But contradicts a sentence, A, that was already conceding the problem. The general flaw D precedes its instance A."
+      },
+      {
+        "order": "CDBA",
+        "trap_type": "competing_ending",
+        "why_tempting": "D ends on the prejudiced past and B talks about which past to learn from, so the shared idea of the past pulls D and B together, and A's punchy image of a model preferring exactly whom the company always preferred feels like a closing line, tempting a solver to state the remedy early and end on the example.",
+        "where_it_breaks": "B opens \"The fix, therefore\", and therefore needs the problem at full, concrete strength, which only arrives once A has shown the hiring model obeying the past. Put B before A and the remedy is prescribed before the disease is fully shown, and A's example then trails after the conclusion as an afterthought. The therefore in B is the tell: solutions close, and the vivid example is the setup, not the finish. The example A must complete the problem before B's remedy can fire."
+      }
+    ],
+    "trap_named": "The false pronoun binding, at elite difficulty, inside a long chain. D's clauses invite you to attach its But and its data to the nearby example rather than to the distant hope, and the chain algorithms-model-data-past is long enough that a hurried reader loses the thread. Resolve each reference by what it can actually mean, not by what sits closest, and hold the whole chain from the hope to the remedy.",
+    "solving_habit": "On a long-chain jumble, name the chain explicitly, here hope, flaw, example, fix, and place each sentence by its role in that chain. When a connective or pronoun could attach to a near or a far sentence, choose the attachment the argument requires, not the one proximity suggests."
+  },
+  "mentor": {
+    "challenge": "A long chain of references and one pronoun that two nouns want to own. Hold the whole chain, and give each reference to the sentence the argument demands.",
+    "paragraph_plain": "The author examines why algorithms can disappoint us. We reach for them partly because they seem to promise judgment free of human prejudice. But a model only knows the world through the data we give it, and that data is a record of the very past whose prejudices we hoped to escape. Concretely: a hiring model trained on ten years of a company's decisions learns, with perfect obedience, to favour exactly the sort of candidate that company always favoured. So the fix is not just to remove names and photos from the data. It is to ask the harder question of which past the machine should be allowed to learn from at all.",
+    "takeaway": "Resolve every reference by what the argument requires, not by what sits nearest."
+  }
+}

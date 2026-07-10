@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0012",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Tyranny of Small Decisions",
+    "theme": "how individually rational choices produce a collectively irrational result",
+    "estimated_time_sec": 170,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "article_given_new", "synonym_hypernym"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["lexical_decoy", "competing_ending"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 3,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "hold a whole abstract argument in mind when two openers and two endings compete",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The collective-action problem is a standard concept in political economy; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "CAT-tier item: abstract topic, implicit relations, two plausible openers and two plausible endings, several locally coherent orders. Only the full arc resolves it. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Each commuter who takes the car makes a sensible choice, saving time and travelling in comfort, and none of them intends the wall of traffic that results.",
+      "role": "example"
+    },
+    {
+      "label": "B",
+      "text": "The remedy, then, cannot be an appeal to individuals to behave better, since each is already behaving well by the only measure available to them.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Some of the hardest problems in politics arise not from people acting badly but from people acting perfectly reasonably.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "The gridlock is a structure no one chose, assembled from thousands of choices each of which was, on its own, entirely defensible.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "C makes the abstract claim, that reasonable action can cause hard problems, and A gives the first concrete case: the commuter. The general statement calls for an example; A answers. No connective marks it, so the meaning carries the join."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "A ends on \"the wall of traffic that results\". D names that outcome again as \"The gridlock... a structure no one chose\", generalising the single case into a pattern. Old information, the traffic, carries the new point, that it is unchosen structure."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "B opens \"The remedy, then\", drawing a consequence from D's diagnosis: if the gridlock is structural, appeals to individuals cannot fix it. \"Then\" caps the argument that precedes it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A general claim, one vivid instance, the instance generalised into a diagnosis, and the practical conclusion. General to specific and back to a general remedy. Two sentences look like openers and two look like endings, so only holding the whole argument keeps you right.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C is the thesis at full altitude: hard political problems can come from reasonable behaviour, not bad behaviour. It needs nothing before it and frames every sentence after."
+      },
+      {
+        "label": "A",
+        "why_here": "A grounds the thesis in the commuter who chooses the car. It is the example C's abstraction demands, and it introduces the traffic the next sentence will name."
+      },
+      {
+        "label": "D",
+        "why_here": "D lifts the single case into a structural claim: the gridlock is a thing no one chose. It depends on A's traffic and sets up why individuals cannot be the fix."
+      },
+      {
+        "label": "B",
+        "why_here": "B draws the remedy, and its \"then\" leans on D. Since everyone already acts well, the answer cannot be moral exhortation. The practical conclusion lands last."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ACDB",
+        "trap_type": "competing_opener",
+        "why_tempting": "A is concrete and self-contained, a full little scene, and vivid scenes feel like openings. Starting on the commuter reads smoothly.",
+        "where_it_breaks": "Open on A and C becomes an odd interruption: after a concrete example, C's sweeping general claim reads as a summary dropped into second place, and the example precedes the point it is meant to illustrate. Examples serve claims. The claim, C, states the pattern; A shows it. Put the illustration first and the reader meets a case with no idea what it is a case of."
+      },
+      {
+        "order": "CABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "D is a strong, quotable line, a structure no one chose, and would make a resonant final sentence, so ending on D and lifting the remedy B up a slot feels satisfying.",
+        "where_it_breaks": "B begins \"The remedy, then\", which can only follow the diagnosis it answers. Put B before D and the remedy is stated before the structural diagnosis that motivates it, so B's \"then\" reaches back to nothing, and the paragraph closes on D's problem with the answer already spent. The diagnosis (D) must precede the remedy (B). A resonant line is not automatically the closing line."
+      }
+    ],
+    "trap_named": "This item stacks a competing opener (A vs C) with a competing ending (D vs B) and a lexical decoy between them. No single heuristic survives all three. The defence is the same each time: name the argument's shape first, general claim then example then structural diagnosis then remedy, and let that arc, not any one surface cue, place every sentence.",
+    "solving_habit": "On a hard jumble, write the argument's spine in four words before touching the sentences: claim, example, diagnosis, remedy. Then each sentence has one obvious slot, and competing openers and endings stop competing."
+  },
+  "mentor": {
+    "challenge": "Two sentences want to open and two want to close. Only the whole argument, held at once, tells you which is which.",
+    "paragraph_plain": "The author makes an uncomfortable point about politics: some of the worst problems come not from people behaving badly but from people behaving perfectly reasonably. Take traffic. Each commuter who drives makes a sensible choice, saving time and travelling in comfort, and none of them wants the jam that results. Yet the gridlock is a structure nobody chose, built from thousands of individually defensible decisions. So the fix cannot be to ask people to behave better, because by the only measure they have, each is already behaving well. The problem is the structure, not the people, and only a change to the structure can solve it.",
+    "takeaway": "Name the argument's spine before ordering. The spine places sentences that surface cues cannot."
+  }
+}

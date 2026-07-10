@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0016",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Map and the Territory",
+    "theme": "why a model's usefulness depends on what it leaves out",
+    "estimated_time_sec": 200,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "article_given_new", "stance_continuity"],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": ["competing_opener", "competing_ending", "misleading_connective"],
+    "dna_traits": ["global_tracking", "inference_implicit", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "verify a full assembled order against the argument when many local links are legal",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The map-territory distinction (after Korzybski) is a classic idea in the philosophy of modelling; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "99-percentile item: abstract, implicit relations, multiple locally coherent orders. Only reading each candidate whole to check the given-new spine resolves it. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A map that reproduced every stone and puddle would be the size of the land itself, and so would help no traveller at all.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "The temptation, especially as models grow more detailed and more expensive, is to forget this and to mistake the richer map for a truer one.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "Every model of the world earns its usefulness precisely by what it dares to leave out.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "Its value lies not in resembling the territory but in discarding almost all of it, keeping only the few features that bear on where you are trying to go.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "low",
+      "explanation": "C makes the abstract claim: a model earns its use by what it leaves out. A gives the concrete illustration, the full-size map that helps no one. Claim to example, but nothing on the surface forces A over D here; only the movement from abstract claim to concrete case does."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "A shows the useless full-size map. D opens \"Its value lies not in resembling the territory but in discarding almost all of it\", where the its is the map and discarding answers A's failed reproduction. The example's lesson is stated as principle."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "B opens \"The temptation... is to forget this\". The this is D's principle, that value comes from discarding. Only after the principle is stated can the temptation to forget it be named."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim, an illustration, the illustration turned into a principle, and the warning that we forget the principle. Almost every join here is legal locally, so several orders read smoothly. Only checking the whole assembled paragraph against the given-new spine, and the reference in this, singles out the right one.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C is the thesis at the highest altitude: models earn use by leaving out. It needs nothing before it, and it is the only sentence general enough to govern the other three."
+      },
+      {
+        "label": "A",
+        "why_here": "A illustrates with the full-size map that helps no traveller. It makes C's abstraction vivid and gives D something concrete to generalise from."
+      },
+      {
+        "label": "D",
+        "why_here": "D converts the example into principle: value lies in discarding, not resembling. \"Its\" points at A's map, so D follows A, and D states the this that B will invoke."
+      },
+      {
+        "label": "B",
+        "why_here": "B is the warning: we forget this and mistake the richer map for the truer one. \"This\" needs D's principle, so B closes the paragraph."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDAB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "C and D are the two most abstract sentences and share the exact vocabulary of value and leaving out, so they feel like a mandatory pair, the claim and its restatement, with the map example and the warning arranged around them.",
+        "where_it_breaks": "D's \"Its value\" needs an it, and the only concrete referent is A's map. Lock C to D and D's Its reaches back to model in C, which works loosely, but then A's vivid example arrives after the principle it was meant to motivate, and B's \"forget this\" still needs D right before it, which CDAB denies by putting A between D and B. Read CDAB whole and the example explains a principle already stated, then the warning points back over the example to reach its this. The smooth abstract pair is a decoy; A must sit between C and D."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "competing_opener",
+        "why_tempting": "A is a striking, self-contained image, the map as big as the land, and images feel like openings, so starting on A and following with the abstract sentences reads well.",
+        "where_it_breaks": "A is evidence for a claim not yet made. Open on A and the reader meets a paradoxical picture with no thesis to attach it to, and C's general claim then arrives as a caption. The claim C must precede its illustration A. An arresting image is bait for the opener slot; the governing claim opens."
+      },
+      {
+        "order": "CABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "D reads as a polished thesis statement and would make a resonant final line, so ending on D and lifting the warning B into third place tempts a solver who wants to close on the principle.",
+        "where_it_breaks": "B's \"The temptation... is to forget this\" must follow the this it forgets, which is D's principle, so B has to come after D, not before it. Place B in third and its demonstrative this points forward at a principle not yet stated, and the paragraph closes on D's principle without the human warning that is its actual point. The warning B closes; the principle D sets it up."
+      }
+    ],
+    "trap_named": "The anchor pair at elite level: the two abstract sentences C and D share so much vocabulary that welding them together feels inevitable, and doing so still produces a paragraph that almost reads. The only defence is verification, reading the full assembled order and checking that every this and its and every abstract-to-concrete step actually lands. Here that check forces the concrete example A between the claim and the principle, breaking the comfortable pair.",
+    "solving_habit": "When several orders read smoothly, stop trusting local links and verify globally: read the whole paragraph start to finish and confirm every pronoun and demonstrative has already met its referent, and that examples sit beside the claims they serve. The order that survives that read is the answer."
+  },
+  "mentor": {
+    "challenge": "Several orders here will read almost fine. Only one survives a slow read-back where every this and its must already have its owner. Do the read-back.",
+    "paragraph_plain": "The author's point is about models of any kind. A model earns its usefulness by what it dares to leave out. Think of a map: one that reproduced every stone and puddle would be as big as the land itself and would help no traveller at all. Its value lies not in resembling the territory but in throwing almost all of it away, keeping only the few features that matter for where you are going. The temptation, especially as models get more detailed and more expensive, is to forget this, and to mistake the richer map for the truer one. Detail is not the same as truth.",
+    "takeaway": "When many orders read smoothly, the read-back decides. Verify every reference has already met its owner."
+  }
+}

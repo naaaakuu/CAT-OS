@@ -908,6 +908,258 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .growth-quote__starter { color: var(--color-ink-3); font-style: italic; }
 
+/* ============================================================
+   Para Jumbles (0.10.0) — the ordering journey.
+   ============================================================ */
+
+/* ---------- The introduction: a page that breathes ---------- */
+.pj-intro {
+  max-width: var(--measure-read);
+  margin: 0 auto;
+}
+.pj-intro__hero {
+  text-align: center;
+  padding: var(--space-4) 0 var(--space-6);
+}
+.pj-intro__art {
+  display: flex;
+  justify-content: center;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+.pj-intro__art svg { width: 5rem; height: 5rem; }
+.pj-intro__art--hero svg { width: 6.5rem; height: 6.5rem; }
+.pj-intro__art [data-draw] {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: art-draw calc(var(--duration-slower) * 2) var(--ease-out) 120ms forwards;
+}
+.pj-intro__h1 {
+  font-family: var(--font-reading);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  margin: var(--space-2) 0;
+}
+.pj-intro__lede {
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  max-width: 28rem;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+.pj-intro__section {
+  margin-bottom: var(--space-7);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--duration-slower) var(--ease-out),
+              transform var(--duration-slower) var(--ease-out);
+}
+.pj-intro__section.is-seen { opacity: 1; transform: none; }
+.pj-intro__title {
+  font-family: var(--font-reading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-4);
+}
+.pj-intro__section p {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  text-align: left;
+  margin-bottom: var(--para-space);
+}
+.pj-intro__section p:last-child { margin-bottom: 0; }
+.pj-intro__aside {
+  font-size: var(--text-xs) !important;
+  font-family: var(--font-ui) !important;
+  color: var(--color-ink-3);
+  border-left: 2px solid var(--color-line-strong);
+  padding-left: var(--space-3);
+}
+.pj-intro__cta { padding-bottom: var(--space-4); }
+.pj-intro__closing {
+  font-family: var(--font-reading);
+  font-style: italic;
+  color: var(--color-ink-2);
+  text-align: center !important;
+}
+
+/* ---------- The solving surface ---------- */
+.pj-challenge {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  border-left: 2px solid var(--color-accent);
+  padding-left: var(--space-3);
+  margin: 0 0 var(--space-3);
+}
+.pj-readback {
+  margin: var(--space-4) 0 var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-subtle);
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.pj-readback__eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-2);
+}
+.pj-readback__text {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  margin: 0 0 var(--space-2);
+}
+.pj-readback__nudge {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ---------- The teaching layer (four layers, Bible §11) ---------- */
+.pjx-verdict {
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  margin: var(--space-4) 0 var(--space-2);
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.pjx-verdict.is-correct { color: var(--color-correct-ink); }
+.pjx-verdict.is-wrong   { color: var(--color-wrong-ink); }
+.pjx-partial {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  margin: 0 0 var(--space-2);
+}
+.pjx {
+  font-size: var(--text-sm);
+  margin-top: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.pjx__block { margin-bottom: var(--space-5); }
+.pjx__block > p { margin-bottom: var(--space-2); }
+.pjx__block > p:last-child { margin-bottom: 0; }
+.pjx__label {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  margin-bottom: var(--space-2);
+}
+.pjx__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+.pjx__chip--trap { background: var(--color-warning-bg); color: var(--color-warning); }
+.pjx__paragraph {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  margin: 0 0 var(--space-2);
+}
+.pjx__sequence {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+.pjx__link, .pjx__tempt {
+  padding: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-2);
+  background: var(--color-surface);
+}
+.pjx__link.is-had { border-color: var(--color-correct-ink); }
+.pjx__tempt.is-yours {
+  border-color: var(--color-wrong-ink);
+  background: var(--color-wrong-bg);
+}
+.pjx__link p, .pjx__tempt p { margin: 0 0 var(--space-1); }
+.pjx__link p:last-child, .pjx__tempt p:last-child { margin-bottom: 0; }
+.pjx__link-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+.pjx__pair {
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+.pjx__device {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+.pjx__had {
+  margin-left: auto;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-correct-ink);
+}
+.pjx__yours {
+  margin-left: auto;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-wrong-ink);
+}
+.pjx__reliability {
+  font-size: var(--text-2xs);
+  color: var(--color-ink-3);
+  font-style: italic;
+}
+.pjx__habit {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-accent-subtle);
+  margin-bottom: var(--space-5);
+}
+.pjx__habit-glyph {
+  flex: none;
+  width: 1.9rem; height: 1.9rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: var(--text-xs);
+}
+.pjx__habit-label {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 2px;
+}
+.pjx__habit p { margin: 0; font-size: var(--text-sm); color: var(--color-ink); }
+
 /* ---------- Anchor flash: explanation → source paragraph ---------- */
 .anchor-link {
   background: none;

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0001",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "beginner",
+    "title": "The Machine That Taught Europe to Read",
+    "theme": "how the printing press made reading ordinary",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["pronoun_ref", "temporal_sequence", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "none",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["ending_judgement"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 1,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 1,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 1,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 1
+    },
+    "num_plausible_orderings": 1,
+    "heuristic_adversarial": false,
+    "nucleus": "B",
+    "learning_objective": "follow time markers and a pronoun to rebuild a simple story",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Standard history of the Gutenberg press; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "The journey's opening jumble: a clean chronology with one pronoun and one explicit closer. Deliberately gentle; teaches the spine-first habit. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "As printed books became cheaper, ordinary families could own them, and reading stopped being a privilege of priests and princes.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "B",
+      "text": "In the middle of the fifteenth century, a German goldsmith named Johannes Gutenberg began experimenting with metal type that could be rearranged and reused.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "Finally, with so many people reading, new ideas began to travel faster than any king or church could control.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "Within a few decades, his printing press had spread to cities across Europe, and books that once took months to copy by hand could be produced in days.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "D says \"his printing press\". The word \"his\" needs an owner, and only B has introduced one: Gutenberg. A pronoun cannot arrive before its person, so D must follow B."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "causal_chain",
+      "reliability": "medium",
+      "explanation": "D ends with books being produced in days instead of months. A begins with books becoming cheaper. Fast production causes low prices. The effect follows its cause."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "temporal_marker",
+      "reliability": "high",
+      "explanation": "C opens with \"Finally\", the author's own signpost for the last step. And its \"so many people reading\" only makes sense after A has put books into ordinary homes."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "This is a story told in time order. One invention appears, spreads, changes daily life, and then changes the world of ideas. Each sentence is one step of that timeline, so your job is to find the timeline, not to match words.",
+    "movement": [
+      {
+        "label": "B",
+        "why_here": "B sets the scene. It gives a time, a place, and a person. It needs nothing before it, and everything after it depends on the man it introduces."
+      },
+      {
+        "label": "D",
+        "why_here": "D moves the clock forward with \"Within a few decades\" and rides on B's introduction: \"his printing press\" is Gutenberg's press. The invention now spreads."
+      },
+      {
+        "label": "A",
+        "why_here": "A gives the consequence of that spread. Books produced in days become cheap books, and cheap books reach ordinary families. The story moves from machines to people."
+      },
+      {
+        "label": "C",
+        "why_here": "C closes the arc, and says so itself with \"Finally\". Once many people read, ideas escape control. The story ends at its widest point."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDCA",
+        "trap_type": "competing_ending",
+        "why_tempting": "A also sounds like an ending. \"Reading stopped being a privilege\" has a satisfying, final ring to it, so placing it last feels natural.",
+        "where_it_breaks": "C says \"with so many people reading\". Who are these many people? Only A creates them, by putting books into ordinary homes. Read BDCA aloud and C arrives before its own cause. The author even marked the true ending with \"Finally\"."
+      }
+    ],
+    "trap_named": "Two sentences here sound final, and that is the little test inside this jumble. A closing tone is not proof of a closing position. When two sentences both sound conclusive, ask which one the other depends on. The dependent one comes second.",
+    "solving_habit": "In a story paragraph, time is the spine. Find the words that measure time, put those sentences on a timeline first, and hang everything else on it."
+  },
+  "mentor": {
+    "challenge": "Four sentences tell one story across many years. Find where the clock starts, and let the time words carry you.",
+    "paragraph_plain": "The paragraph tells a simple story. Around 1450, Gutenberg invented reusable metal type. Over the next decades his press spread across Europe and made books fast to produce. Fast production made books cheap, so normal families could finally own and read them. And once many people could read, new ideas spread too quickly for kings or the church to stop them. One machine, four steps, a changed world.",
+    "takeaway": "When a paragraph tells a story, time words are the spine. Place the spine first."
+  }
+}

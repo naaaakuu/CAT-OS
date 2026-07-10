@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0005",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 83,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Oldest Air Conditioner",
+    "theme": "urban trees as the cheapest answer to city heat",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["demonstrative", "connective_explicit", "synonym_hypernym", "article_given_new"],
+    "primary_trap": "none",
+    "secondary_traps": ["lexical_decoy"],
+    "dna_traits": ["surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 1,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 2,
+      "competing_openings": 1,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "A",
+    "learning_objective": "spot a synonym bridge: the same idea returning in new words",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Urban heat islands and tree canopy cooling are standard environmental science; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Easy-tier problem-solution with a synonym bridge (trees to canopy) as the key join. Gentle heat-cool decoy included. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The cheapest remedy is also the oldest one, and it is not a machine at all: it is trees.",
+      "role": "answer"
+    },
+    {
+      "label": "B",
+      "text": "Summer heat has become the deadliest weather hazard many cities face, and concrete makes it worse by soaking up the sun all day and releasing it all night.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "This cooling is not spread fairly, however; the neighbourhoods that need it most usually have the fewest trees, which makes planting them a question of justice as well as comfort.",
+      "role": "contrast"
+    },
+    {
+      "label": "D",
+      "text": "A mature canopy can cool a street by several degrees, partly through shade and partly because leaves release water vapour that works like a city-scale sweat.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["B", "A", "D", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "A speaks of \"The cheapest remedy\". A remedy only makes sense once there is something to remedy, and B has just supplied it: deadly summer heat. The problem hands off to its answer."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "medium",
+      "explanation": "A names trees. D never repeats the word; it says \"a mature canopy\", which is trees in new clothing. Authors often link true neighbours with a synonym rather than a repeat. This is the join to learn here."
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "C opens with \"This cooling\". The only cooling in the paragraph is the several degrees D just measured. The demonstrative wraps D's fact and turns to who receives it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A clean problem and solution arc: the danger, the answer, the proof the answer works, and then a twist on who actually gets the answer. Name that arc first and the sentences fall into their seats.",
+    "movement": [
+      {
+        "label": "B",
+        "why_here": "B states the problem at full width: heat kills, and cities make heat worse. It needs no introduction and everything after it is a response to it."
+      },
+      {
+        "label": "A",
+        "why_here": "A answers the problem, and it is written as a reveal: the remedy is old, cheap, and not a machine. A reveal must come before the thing revealed gets discussed."
+      },
+      {
+        "label": "D",
+        "why_here": "D backs the reveal with numbers and mechanism, and it calls trees \"a mature canopy\". The idea continues; the vocabulary changes. That is how real prose moves."
+      },
+      {
+        "label": "C",
+        "why_here": "C complicates the happy ending: the cooling exists, but not where it is needed most. A qualification that lands after the evidence closes the paragraph with its real point."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDAC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "B is about heat and D is about cooling a street. Heat then cooling feels like a natural pair, so D wants to jump the queue.",
+        "where_it_breaks": "Read B then D. A canopy of what? Trees have not entered the paragraph yet. Then A arrives late and announces trees as a discovery the reader has already met. The reveal collapses. The author names the remedy first, then measures it."
+      }
+    ],
+    "trap_named": "The bait was the direct jump from heat to cooling. It skips the sentence that introduces the answer. When two sentences seem to match head-on, check whether a third sentence is needed to introduce what one of them takes for granted.",
+    "solving_habit": "When you cannot find a repeated word between two sentences, look for the same idea wearing new words. Trees becoming a canopy is a stronger join than any repetition."
+  },
+  "mentor": {
+    "challenge": "The key join in this paragraph repeats no words at all. Watch for one idea returning in a new costume.",
+    "paragraph_plain": "The paragraph starts with a real danger: summer heat now kills more city dwellers than storms do, and concrete makes nights worse by releasing the day's stored sun. The answer, says the author, is almost embarrassingly simple: trees. A full grown canopy cools a street by several degrees, through shade and through the water vapour leaves breathe out, which works like sweat for a whole city. Then comes the sting. The cool streets and the bare ones are not distributed fairly. The neighbourhoods that suffer most have the fewest trees, so planting becomes a matter of justice, not just comfort.",
+    "takeaway": "Ideas link sentences even when words do not repeat. Follow the idea, not the vocabulary."
+  }
+}

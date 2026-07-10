@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0007",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Fight in Slogans",
+    "theme": "what research actually says about the minimum wage",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["connective_explicit", "connective_implicit", "parallelism", "lexical_repetition", "article_given_new"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": [],
+    "dna_traits": ["opener_heuristic", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 2,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 2,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "break an opener tie by reading each candidate forward, not by surface rules",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The minimum wage research summary reflects the well-known post-Card-Krueger consensus in broad strokes; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "First engineered competing opener: the vivid slogans sentence is built to look like a first line. A pure surface solver opens with it and loses. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "So the honest question was never whether to raise the wage, but how far, how fast, and where.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "Raise the wage, says one side, and struggling families finally earn enough to live on; raise it too far, says the other, and small employers cut the very jobs those families depend on.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "For decades, the minimum wage debate has been fought in slogans.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "The research that was supposed to settle the fight has instead complicated it, finding that modest increases rarely cost jobs while very large ones sometimes do.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "B", "D", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "C promises slogans; B delivers them, one from each side. The frame comes first, then what it frames. Note that B could stand alone, which is exactly why this join needs the meaning, not just the surface."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "D speaks of \"the fight\" that research was supposed to settle. The fight is the exchange B just staged. No connective marks this join; the reference carries it."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "A opens with \"So\", drawing the conclusion from D's finding: size and speed matter, direction does not. A connective this explicit usually caps the sentence right before it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A classic argument shape: two positions stated, evidence weighed, resolution drawn. Position, counter, evidence, verdict. The trick is that the paragraph frames the fight before staging it, and the frame is the quietest sentence on the board.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C is short and unglamorous, which is why it is easy to overlook as the opener. But it does the opener's exact job: it names the topic, sets a time span, and promises slogans that the next sentence will deliver."
+      },
+      {
+        "label": "B",
+        "why_here": "B is the promised pair of slogans, one voice for each side, built in deliberate parallel. It illustrates C; it does not need to precede it."
+      },
+      {
+        "label": "D",
+        "why_here": "D brings in the referee. \"The fight\" points back at B's exchange, and the finding replaces both slogans with something quieter and truer."
+      },
+      {
+        "label": "A",
+        "why_here": "A converts the finding into the real question. Its \"So\" leans on D, and its calm, deflationary tone is the author's actual voice arriving."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BCDA",
+        "trap_type": "competing_opener",
+        "why_tempting": "B is vivid, self-contained, and dramatic. Big quotable sentences feel like openings, and B needs no earlier sentence to be understood.",
+        "where_it_breaks": "Put B first and read on. C now says the debate has been fought in slogans right after you watched the slogans fight. It becomes a caption under a picture you already saw, and captions do not need whole sentences. The author wrote C as a promise, not a caption. Frames come before what they frame."
+      }
+    ],
+    "trap_named": "This is the competing opener, built on purpose. The rule of thumb says pick the self-contained sentence, and here two sentences pass that test. The tie-breaker is never a rule; it is a forward read. Open with each candidate and listen to what the second sentence becomes. The true opener makes the next sentence feel wanted. The false one makes it feel repeated.",
+    "solving_habit": "When two sentences could both open, read each version forward two sentences. Keep the version where the second sentence adds something the first one asked for."
+  },
+  "mentor": {
+    "challenge": "Two sentences here could begin the paragraph. Only one of them makes the next sentence feel necessary.",
+    "paragraph_plain": "The author looks at the minimum wage debate and finds it stuck in slogans. One side says raise the wage and poor families can finally live on their pay. The other says raise it too far and small businesses cut the very jobs those families need. Research was supposed to declare a winner. Instead it complicated things: modest raises rarely destroy jobs, but very large ones sometimes do. So the real question was never a yes or no. It is how far, how fast, and in which places.",
+    "takeaway": "The loudest sentence is rarely the first one. Frames come before what they frame."
+  }
+}
