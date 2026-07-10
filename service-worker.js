@@ -20,8 +20,8 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 10;
-const CONTENT_VERSION = 6;
+const CACHE_VERSION = 11;
+const CONTENT_VERSION = 7;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
 const KEEP = [SHELL_CACHE, CONTENT_CACHE];
@@ -37,6 +37,7 @@ const SHELL_FILES = [
   './src/core/storage/backup.js',
   './src/core/engine/session.js',
   './src/core/engine/scoring.js',
+  './src/core/engine/pj-session.js',
   './src/core/content-loader/loader.js',
   './src/core/content-loader/validator.js',
   './src/core/utils/format.js',
@@ -52,6 +53,9 @@ const SHELL_FILES = [
   './src/core/mentor/dna.js',
   './src/core/mentor/lesson.js',
   './src/core/mentor/records.js',
+  './src/core/mentor/pj-voice.js',
+  './src/core/mentor/pj-dna.js',
+  './src/core/mentor/pj-lesson.js',
   './src/shell/growth.js',
   './src/modules/reading-comprehension/index.js',
   './src/modules/reading-comprehension/logic/store.js',
@@ -59,7 +63,16 @@ const SHELL_FILES = [
   './src/modules/reading-comprehension/screens/session.js',
   './src/modules/reading-comprehension/screens/review.js',
   './src/modules/reading-comprehension/screens/mentor.js',
+  './src/modules/para-jumbles/index.js',
+  './src/modules/para-jumbles/logic/tiers.js',
+  './src/modules/para-jumbles/logic/store.js',
+  './src/modules/para-jumbles/logic/teach.js',
+  './src/modules/para-jumbles/screens/intro.js',
+  './src/modules/para-jumbles/screens/browser.js',
+  './src/modules/para-jumbles/screens/session.js',
+  './src/modules/para-jumbles/screens/learn.js',
   './src/ui/components/cat-nav.js',
+  './src/ui/components/cat-jumble-board.js',
   './src/ui/components/cat-toast.js',
   './src/ui/components/cat-passage.js',
   './src/ui/components/cat-option.js',
@@ -88,6 +101,7 @@ const CONTENT_FILES = [
   './content/schema/rc.schema.v2.json',
   './content/schema/rc.schema.v3.json',
   './content/schema/rc.schema.v4.json',
+  './content/schema/pj.schema.v1.json',
   './content/reading-comprehension/rc-0001.json',
   './content/reading-comprehension/rc-0002.json',
   './content/reading-comprehension/rc-0003.json',
@@ -120,6 +134,25 @@ const CONTENT_FILES = [
   './content/reading-comprehension/rc-0030.json',
   './content/reading-comprehension/rc-0031.json',
   './content/reading-comprehension/rc-0032.json',
+  './content/para-jumbles/pj-0001.json',
+  './content/para-jumbles/pj-0002.json',
+  './content/para-jumbles/pj-0003.json',
+  './content/para-jumbles/pj-0004.json',
+  './content/para-jumbles/pj-0005.json',
+  './content/para-jumbles/pj-0006.json',
+  './content/para-jumbles/pj-0007.json',
+  './content/para-jumbles/pj-0008.json',
+  './content/para-jumbles/pj-0009.json',
+  './content/para-jumbles/pj-0010.json',
+  './content/para-jumbles/pj-0011.json',
+  './content/para-jumbles/pj-0012.json',
+  './content/para-jumbles/pj-0013.json',
+  './content/para-jumbles/pj-0014.json',
+  './content/para-jumbles/pj-0015.json',
+  './content/para-jumbles/pj-0016.json',
+  './content/para-jumbles/pj-0017.json',
+  './content/para-jumbles/pj-0018.json',
+  './content/para-jumbles/pj-0019.json',
 ];
 
 /* Install: precache shell + content, then take over promptly. */

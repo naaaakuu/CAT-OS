@@ -99,6 +99,119 @@ export async function loadRCPassage(id) {
   return item;
 }
 
+/* ------------------------------------------------------------------ */
+/* Para Jumbles (pj-*) — same boundary discipline as RC: schema        */
+/* validation + cross-field consistency before anything renders.       */
+/* ------------------------------------------------------------------ */
+
+/** Registry entries for practicable PJ items (accepted or in review). */
+export async function listPJItems() {
+  const registry = await loadRegistry();
+  return (registry.items ?? []).filter(
+    (i) => i.type === 'pj' && (i.status === 'accepted' || i.status === 'review')
+  );
+}
+
+/**
+ * Load several PJ items at once → Map(id → item). Ids that fail to
+ * load are absent from the Map, so mentor/DNA reasoning only ever
+ * rests on evidence that can still be shown.
+ */
+export async function loadPJItems(ids) {
+  const map = new Map();
+  await Promise.all([...new Set(ids)].map(async (id) => {
+    try { map.set(id, await loadPJItem(id)); } catch { /* skip */ }
+  }));
+  return map;
+}
+
+/** Load one PJ item by id, schema-validate it, and run consistency checks. */
+export async function loadPJItem(id) {
+  if (!/^pj-[0-9]{4}$/.test(id)) {
+    throw new ContentError(`"${id}" is not a valid PJ content id.`);
+  }
+  const item = await fetchJSON(`content/para-jumbles/${id}.json`);
+
+  const schema = await loadSchema(`pj.schema.v${item.schema_version ?? 1}.json`);
+  const { valid, errors } = validate(schema, item);
+  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+
+  const issues = pjConsistencyIssues(id, item);
+  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+
+  return item;
+}
+
+/** PJ cross-field truths the schema can't express. Exported so
+ *  tools/verify.mjs applies the identical rules. */
+export function pjConsistencyIssues(id, item) {
+  const issues = [];
+  if (item.meta.id !== id) issues.push(`meta.id "${item.meta.id}" ≠ file id "${id}"`);
+
+  const labels = item.sentences.map((s) => s.label);
+  if (new Set(labels).size !== labels.length) issues.push('duplicate sentence labels');
+  if (labels.length !== item.meta.format.sentence_count) {
+    issues.push(`format.sentence_count ${item.meta.format.sentence_count} ≠ ${labels.length} sentences`);
+  }
+
+  // correct_order must be a permutation of the labels, never the identity
+  // presentation order (a jumble shown already solved is defective).
+  const order = item.correct_order;
+  if (order.length !== labels.length
+      || [...labels].sort().join('') !== [...order].sort().join('')) {
+    issues.push('correct_order is not a permutation of the sentence labels');
+  } else if (order.every((l, i) => l === labels[i])) {
+    issues.push('correct_order equals the presentation order (nothing is jumbled)');
+  }
+
+  // Bible/CAT_VARC_BIBLE §22: one documentable link per consecutive pair.
+  if (item.links.length !== order.length - 1) {
+    issues.push(`links has ${item.links.length} entries for ${order.length - 1} consecutive pairs`);
+  } else {
+    item.links.forEach((l, i) => {
+      if (l.from !== order[i] || l.to !== order[i + 1]) {
+        issues.push(`links[${i}] is ${l.from}→${l.to}, expected ${order[i]}→${order[i + 1]}`);
+      }
+    });
+  }
+
+  // Explanation layer 2 walks the correct order, one entry per sentence.
+  const movement = item.explanation.movement.map((m) => m.label);
+  if (movement.join('') !== order.join('')) {
+    issues.push(`explanation.movement covers ${movement.join('')}, expected ${order.join('')}`);
+  }
+
+  // Layer 3: tempting orders must be real permutations, and never correct.
+  for (const t of item.explanation.tempting_orders) {
+    const seq = t.order.split('');
+    if ([...seq].sort().join('') !== [...labels].sort().join('')) {
+      issues.push(`tempting order "${t.order}" is not a permutation of the labels`);
+    }
+    if (t.order === order.join('')) {
+      issues.push(`tempting order "${t.order}" equals the correct order`);
+    }
+  }
+
+  // The nucleus must name a real sentence.
+  if (!labels.includes(item.meta.nucleus)) {
+    issues.push(`nucleus "${item.meta.nucleus}" is not a sentence label`);
+  }
+
+  // Difficulty label ↔ numeric mapping (schema doc §3.4).
+  const n = item.meta.difficulty_numeric;
+  const label = n <= 3 ? 'easy' : n <= 6 ? 'medium' : 'hard';
+  if (item.meta.difficulty !== label) {
+    issues.push(`difficulty "${item.meta.difficulty}" ≠ numeric ${n} (maps to "${label}")`);
+  }
+
+  // Bible §10: medium+ items must defeat a pure surface-heuristic solver.
+  if (n >= 4 && !item.meta.heuristic_adversarial) {
+    issues.push('medium+ item is not heuristic-adversarial (Bible Recommendation 4)');
+  }
+
+  return issues;
+}
+
 /** Cross-field truths the schema can't express. Exported so the
  *  offline verification tool applies the identical rules. */
 export function consistencyIssues(id, item) {

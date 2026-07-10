@@ -17,8 +17,9 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-import { loadRCPassages, listRCItems } from '../core/content-loader/loader.js';
+import { loadRCPassages, listRCItems, loadPJItems } from '../core/content-loader/loader.js';
 import { deriveDNA } from '../core/mentor/dna.js';
+import { derivePJDNA } from '../core/mentor/pj-dna.js';
 import { listLessons, listReflections } from '../core/mentor/records.js';
 import { RECALL_RETIRED_AFTER } from '../core/mentor/lesson.js';
 import { escapeHTML, formatDate } from '../core/utils/format.js';
@@ -71,8 +72,20 @@ export async function renderGrowth(outlet, { storage }) {
     return;
   }
 
-  const passages = await loadRCPassages(sessions.map((s) => s.passage_id));
-  const dna = deriveDNA(sessions, passages);
+  const rcSessions = sessions.filter((s) => s.module !== 'pj');
+  const pjSessions = sessions.filter((s) => s.module === 'pj');
+  const passages = await loadRCPassages(rcSessions.map((s) => s.passage_id));
+  const dna = deriveDNA(rcSessions, passages);
+  const pjItems = await loadPJItems(pjSessions.flatMap((s) => s.item_ids ?? []));
+  const pjDNA = derivePJDNA(pjSessions, pjItems);
+
+  const dnaCard = (o) => `
+    <div class="dna dna--${o.kind}">
+      <div class="dna__kind">${KIND_LABEL[o.kind]}</div>
+      <div class="dna__title">${escapeHTML(o.title)}</div>
+      <p class="dna__body">${escapeHTML(o.body)}</p>
+      <p class="dna__evidence">${escapeHTML(o.evidence)}</p>
+    </div>`;
 
   /* ---- How you read ---- */
   const dnaHTML = dna.observations.length === 0 ? `
@@ -80,13 +93,17 @@ export async function renderGrowth(outlet, { storage }) {
       <p class="muted" style="margin:0">The mentor is still listening. Patterns
       only appear here once there is enough evidence to be fair about them —
       usually after a few more sessions. Nothing is being missed.</p>
-    </div>` : dna.observations.map((o) => `
-    <div class="dna dna--${o.kind}">
-      <div class="dna__kind">${KIND_LABEL[o.kind]}</div>
-      <div class="dna__title">${escapeHTML(o.title)}</div>
-      <p class="dna__body">${escapeHTML(o.body)}</p>
-      <p class="dna__evidence">${escapeHTML(o.evidence)}</p>
-    </div>`).join('');
+    </div>` : dna.observations.map(dnaCard).join('');
+
+  /* ---- How you order (Para Jumbles DNA) ---- */
+  const pjDnaHTML = pjSessions.length === 0 ? '' : `
+    <div class="stage-head"><h2>How you order</h2><div class="rule"></div></div>
+    ${pjDNA.observations.length === 0 ? `
+      <div class="card">
+        <p class="muted" style="margin:0">Your jumble solving is being watched
+        with the same fairness: patterns appear only once the evidence clears
+        the floor. Keep solving.</p>
+      </div>` : pjDNA.observations.map(dnaCard).join('')}`;
 
   /* ---- Concepts you've collected ---- */
   const recent = lessons.slice(0, 8);
@@ -95,6 +112,11 @@ export async function renderGrowth(outlet, { storage }) {
   ` : `
     ${recent.map((l) => {
       const absorbed = (l.recall_count ?? 0) >= RECALL_RETIRED_AFTER;
+      const isPJ = l.module === 'pj';
+      const lessonHref = isPJ
+        ? (l.item_id ? `#/pj/learn/${escapeHTML(l.item_id)}` : '#/pj')
+        : `#/rc/mentor/${escapeHTML(l.passage_id)}`;
+      const lessonPlace = isPJ ? 'Para Jumbles' : (titles.get(l.passage_id) ?? l.passage_id);
       return `
       <div class="row">
         <div class="row__lead">
@@ -102,7 +124,7 @@ export async function renderGrowth(outlet, { storage }) {
           <div>
             <div class="row__label">${escapeHTML(l.title)}</div>
             <div class="row__hint">${escapeHTML(formatDate(l.created_at))} ·
-              <a href="#/rc/mentor/${escapeHTML(l.passage_id)}">${escapeHTML(titles.get(l.passage_id) ?? l.passage_id)}</a></div>
+              <a href="${lessonHref}">${escapeHTML(lessonPlace)}</a></div>
           </div>
         </div>
         ${absorbed
@@ -133,6 +155,8 @@ export async function renderGrowth(outlet, { storage }) {
 
     <div class="stage-head"><h2>How you read</h2><div class="rule"></div></div>
     ${dnaHTML}
+
+    ${pjDnaHTML}
 
     <div class="stage-head"><h2>Concepts you've collected</h2><div class="rule"></div></div>
     <div class="card">${lessonsHTML}</div>

@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0014",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "The Clock in the Cell",
+    "theme": "why the body's internal clock resists sudden change",
+    "estimated_time_sec": 185,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "lexical_repetition", "article_given_new"],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": ["false_pronoun_binding", "competing_ending"],
+    "dna_traits": ["surface_matching", "wm_long_chain", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 2,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "hold a pronoun and a keyword decoy in mind at once and let the mechanism decide",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Circadian rhythm and jet lag are standard chronobiology; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "CAT+ item stacking a lexical decoy (light/clock repeats) with a false pronoun binding (they). Two ending candidates. Only the mechanism resolves it. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "They do adjust, but slowly, by roughly an hour a day, which is why a traveller who crosses eight time zones spends the better part of a week feeling wrong.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "Every cell in the body keeps a rough daily rhythm, and a small cluster of neurons above the eyes acts as the conductor that keeps these millions of clocks in time.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "The conductor takes its cue chiefly from light, which is why a bright morning steadies the rhythm and a glowing screen at midnight unsettles it.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "The lesson written into our physiology is patience: the body can be moved to a new schedule, but only at the pace of biology, never at the pace of a plane.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["B", "C", "A", "D"],
+  "links": [
+    {
+      "from": "B",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "B introduces \"the conductor\", the cluster of neurons. C opens \"The conductor takes its cue chiefly from light\", taking that now-known conductor and adding what steers it. First mention in B, second mention in C."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "C explains that light steadies or unsettles the rhythm. A picks up with \"They do adjust, but slowly\", where the they are the body's clocks trying to follow a shifted light schedule. The mechanism of adjustment follows the mechanism of cueing."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "A shows adjustment crawling at an hour a day, so a week of jet lag. D draws the moral: the body moves at the pace of biology, not of a plane. The slow fact resolves into the counsel of patience."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A mechanism explained, then its limitation, then the practical moral: the body keeps time, light sets it, resetting is slow, so be patient. The paragraph stacks two traps, a repeated keyword and a stray pronoun, so you must follow the biological mechanism rather than any surface cue.",
+    "movement": [
+      {
+        "label": "B",
+        "why_here": "B introduces the whole system: cellular clocks and the neural conductor. It needs nothing before it and it names the conductor the next sentence will use."
+      },
+      {
+        "label": "C",
+        "why_here": "C tells us what drives the conductor, light. \"The conductor\" is old news from B, so C must follow B; the new fact is the role of light."
+      },
+      {
+        "label": "A",
+        "why_here": "A explains what happens when the light schedule jumps: the clocks adjust, but only an hour a day. Its \"They\" are the clocks, and the jet-lag consequence follows the cueing mechanism."
+      },
+      {
+        "label": "D",
+        "why_here": "D draws the moral of patience. A verdict about the pace of biology can only follow the slow adjustment A has just measured."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BACD",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "B ends on \"clocks\" and A is about clocks adjusting, so the keyword pulls A up to sit right after B, before C.",
+        "where_it_breaks": "A's \"They do adjust\" presupposes a schedule change to adjust to, and only C, with light steadying or unsettling the rhythm, sets up why the clocks would need to adjust at all. Put A before C and the adjustment answers a question not yet asked, and C's \"The conductor\" still demands B right before it anyway. The repeated word clocks points across a gap the mechanism forbids."
+      },
+      {
+        "order": "BCDA",
+        "trap_type": "competing_ending",
+        "why_tempting": "A ends on the vivid image of a jet-lagged traveller feeling wrong for a week, which sounds like a natural closing beat, so ending on A and lifting D earlier tempts.",
+        "where_it_breaks": "D begins \"The lesson written into our physiology\", an explicit moral that can only follow the facts it distils, and A supplies the key fact, the hour-a-day pace, that D's patience depends on. End on A and the moral D arrives before its evidence. The lesson sentence closes; the vivid image is its setup, not its finish."
+      }
+    ],
+    "trap_named": "Two traps at once. The keyword clocks tugs A up next to B, and the pronoun they tempts you to bind A to the nearest plural in C. Both are answered the same way: by the mechanism. Ask what can physically adjust (the clocks, not the light) and what has to be set up before adjustment makes sense (the light cue in C). When surface cues pull two directions, the underlying process is the tie-breaker.",
+    "solving_habit": "On a dense science jumble, order by the causal mechanism: what sets up what. A repeated noun and a loose pronoun will both point wrong sometimes; the chain of cause and effect will not."
+  },
+  "mentor": {
+    "challenge": "A repeated word pulls one way and a loose pronoun pulls another. Follow the biology, and both let go.",
+    "paragraph_plain": "The author explains the body clock. Every cell keeps a rough daily rhythm, and a small cluster of neurons above the eyes acts like a conductor keeping millions of these clocks in time. The conductor takes its main cue from light, which is why a bright morning steadies you and a glowing screen at midnight throws you off. When you cross time zones, the clocks do adjust to the new light, but slowly, about an hour a day, so eight zones means most of a week feeling wrong. The lesson built into our biology is patience: you can move the body to a new schedule, but only at the body's pace, never at the plane's.",
+    "takeaway": "When surface cues disagree, the causal mechanism is the tie-breaker."
+  }
+}

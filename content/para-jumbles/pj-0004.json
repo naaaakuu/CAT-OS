@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0004",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Loop That Runs You",
+    "theme": "how habits take over from conscious choice",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["article_given_new", "demonstrative", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "none",
+    "secondary_traps": ["competing_opener"],
+    "dna_traits": ["opener_heuristic"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 2,
+      "competing_openings": 2,
+      "competing_endings": 1,
+      "lexical_decoys": 1,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "D",
+    "learning_objective": "read a and the as signals of what is new and what is already given",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The cue-routine-reward loop is standard habit psychology; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Easy-tier item teaching the article rule honestly: a introduces, the continues. One gentle competing opener. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "That smoothness is the whole point, and the whole problem: the brain saves effort by handing the wheel to the pattern, whether the pattern serves us or not.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "With enough repetitions, the loop runs so smoothly that the cue alone sets it off, before any conscious choice can interfere.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "Most of what we do each day is not decided at all; it is simply repeated from the day before.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "A habit begins as a loop: a cue triggers a routine, and the routine ends in a small reward.",
+      "role": "definition"
+    }
+  ],
+  "correct_order": ["C", "D", "B", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "C says our days run on repetition. D explains what that repetition is made of: a habit, defined as a loop. Notice the small words. D says \"a habit\", \"a cue\", \"a routine\". Everything is arriving for the first time."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "B says \"the loop\" and \"the cue\". The word \"the\" means these things are already on the table, and only D put them there. First mention takes \"a\"; second mention takes \"the\"."
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "A opens with \"That smoothness\". The only smoothness anywhere is B's loop running \"so smoothly\". A demonstrative like that reaches back one step and wraps it up."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph narrows step by step: a broad claim about daily life, then the definition of the thing behind it, then how that thing gains power, then the verdict on what its power means. General to specific is CAT's favourite shape. Watch how each sentence is one size smaller than the last.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C is the widest sentence: all of daily life, one observation. It needs nothing before it and it opens the question the rest will answer: what does all this repeating?"
+      },
+      {
+        "label": "D",
+        "why_here": "D answers with a definition, and its articles prove its position. \"A habit\", \"a cue\", \"a routine\": three first meetings. Definitions that introduce everything sit early."
+      },
+      {
+        "label": "B",
+        "why_here": "B picks up \"the loop\" and \"the cue\" as old friends, which they now are, and adds the new fact: repetition makes the loop automatic."
+      },
+      {
+        "label": "A",
+        "why_here": "A judges what B described. \"That smoothness\" gathers the automation and weighs it: efficient, and dangerous. A verdict on the whole loop can only come last."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DCBA",
+        "trap_type": "competing_opener",
+        "why_tempting": "D looks like a perfect first sentence. It is self-contained, it defines the topic, and definitions feel like beginnings.",
+        "where_it_breaks": "Read D then C. C steps backward to a wider claim that adds nothing D needs, and it separates D from B, whose \"the loop\" wants its introduction fresh. The author starts wide on purpose: C creates the puzzle that D's definition solves. A definition can open a textbook entry. This paragraph opens with a reason to care."
+      }
+    ],
+    "trap_named": "The test here is the opener. Two sentences could begin: the wide claim and the tidy definition. The tie-breaker is purpose. Ask what question each sentence answers. C raises a question and D answers it, so C must speak first. An opener is not just self-contained. It is the sentence that makes the next one wanted.",
+    "solving_habit": "Track the small words \"a\" and \"the\". A writer says \"a cue\" when the cue is new and \"the cue\" once it is known. Those two letters often settle which sentence came first."
+  },
+  "mentor": {
+    "challenge": "Two sentences could start this paragraph. The little words \"a\" and \"the\" know which one the author chose.",
+    "paragraph_plain": "The author starts with something slightly unsettling: most of what we do every day is not chosen, just repeated. Then comes the machinery. A habit is a loop with three parts: a cue sets off a routine, and the routine ends in a small reward. Repeat the loop enough times and it becomes so smooth that the cue alone fires it before you can think. And that smoothness cuts both ways. The brain saves effort by letting the pattern drive, and the pattern drives whether it is taking you somewhere good or not.",
+    "takeaway": "First mention says a. Second mention says the. Two letters can order a paragraph."
+  }
+}

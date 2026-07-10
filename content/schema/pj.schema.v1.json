@@ -1,0 +1,279 @@
+{
+  "$id": "pj.schema.v1",
+  "title": "CAT OS Para Jumbles content item, schema v1",
+  "description": "One parajumble: a coherent paragraph written first, then scrambled (PARA_JUMBLES_BIBLE §10). Modern CAT default: four sentences, TITA response, no fixed opener or closer, no negative marking — carried as CONFIGURATION in meta.format, never hard-coded (Bible Recommendation 1). The metadata implements Bible §12: the twelve-dimension difficulty vector (§6), discourse macro pattern (§3), cohesion signals present (§4), engineered traps (§5), Reading-DNA traits exercised (§8), num_plausible_orderings (the master difficulty variable), and the heuristic_adversarial flag (§10: a pure surface-heuristic solve must FAIL on medium+ items). The explanation implements the four layers of Bible §11: macro pattern first, the author's movement sentence by sentence, the most tempting wrong orders walked to their breaking point, and the trap named as a reusable defense. links documents one identifiable device per consecutive pair (CAT_VARC_BIBLE §22) WITH its reliability, because every signal is a local heuristic that can be weaponized (Bible §4). Device enum extends CONTENT_DATABASE_SCHEMA §10.2's six with given_new_flow, demonstrative_reference, lexical_bridge and parallel_structure, per Bible §4 — additive, on a new schema file. Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": ["schema_version", "meta", "sentences", "correct_order", "links", "explanation", "mentor"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+
+    "meta": {
+      "type": "object",
+      "required": [
+        "id", "type", "version", "status", "quality_score",
+        "genre", "difficulty", "difficulty_numeric", "tier",
+        "title", "theme", "estimated_time_sec", "format",
+        "macro_pattern", "cohesion_signals", "primary_trap", "secondary_traps",
+        "dna_traits", "difficulty_vector", "num_plausible_orderings",
+        "heuristic_adversarial", "nucleus", "learning_objective",
+        "source", "date_added", "batch_id", "prompt_version", "reviewer_notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id":      { "type": "string", "pattern": "^pj-[0-9]{4}$" },
+        "type":    { "const": "pj" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status":  { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "quality_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "genre": {
+          "enum": [
+            "philosophy", "economics", "political-theory", "history",
+            "science", "sociology", "arts-culture", "literature-theory",
+            "psychology", "anthropology", "technology-ethics", "environment"
+          ]
+        },
+        "difficulty": { "enum": ["easy", "medium", "hard"] },
+        "difficulty_numeric": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "tier": {
+          "enum": [
+            "beginner", "easy", "medium", "advanced",
+            "cat", "cat-plus", "ninety-nine", "premium"
+          ]
+        },
+        "title": { "type": "string", "minLength": 3,
+          "description": "A quiet display name for lists and the Learning Page. Must never hint at the order." },
+        "theme": { "type": "string", "minLength": 3 },
+        "estimated_time_sec": { "type": "integer", "minimum": 30, "maximum": 300,
+          "description": "Band-linked estimate (Bible §12: easy 60–90, medium 90–150, elite 150–210). An estimate, to be replaced by empirical timing." },
+        "format": {
+          "type": "object",
+          "required": ["sentence_count", "response", "opener_given", "closer_given", "format_verified"],
+          "additionalProperties": false,
+          "properties": {
+            "sentence_count": { "type": "integer", "minimum": 4, "maximum": 6 },
+            "response":       { "enum": ["TITA", "MCQ"] },
+            "opener_given":   { "type": "boolean" },
+            "closer_given":   { "type": "boolean" },
+            "format_verified": { "type": "string", "minLength": 4,
+              "description": "When and against what the format defaults were last verified (Bible Recommendation 1). Surface this; never present format as timeless fact." }
+          }
+        },
+        "macro_pattern": {
+          "enum": [
+            "general_to_specific", "specific_to_general", "abstract_to_concrete",
+            "problem_solution", "claim_evidence", "hypothesis_support",
+            "argumentative", "narrative_chronological", "question_answer"
+          ]
+        },
+        "cohesion_signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "pronoun_ref", "demonstrative", "former_latter", "article_given_new",
+              "connective_explicit", "connective_implicit", "temporal_sequence",
+              "lexical_repetition", "synonym_hypernym", "substitution_ellipsis",
+              "parallelism", "tense_continuity", "stance_continuity"
+            ]
+          }
+        },
+        "primary_trap": {
+          "enum": [
+            "anchor_pair", "competing_opener", "competing_ending", "lexical_decoy",
+            "generic_the", "false_pronoun_binding", "misleading_connective", "none"
+          ]
+        },
+        "secondary_traps": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "anchor_pair", "competing_opener", "competing_ending", "lexical_decoy",
+              "generic_the", "false_pronoun_binding", "misleading_connective"
+            ]
+          }
+        },
+        "dna_traits": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "surface_matching", "global_tracking", "wm_long_chain",
+              "premature_closure", "inference_implicit", "opener_heuristic",
+              "ending_judgement"
+            ]
+          }
+        },
+        "difficulty_vector": {
+          "type": "object",
+          "required": [
+            "vocabulary_load", "inference_load", "syntactic_complexity",
+            "reference_density", "concept_abstractness", "dependency_chain_length",
+            "transition_ambiguity", "competing_openings", "competing_endings",
+            "lexical_decoys", "topic_unfamiliarity", "plausible_orderings"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "vocabulary_load":         { "type": "integer", "minimum": 1, "maximum": 5 },
+            "inference_load":          { "type": "integer", "minimum": 1, "maximum": 5 },
+            "syntactic_complexity":    { "type": "integer", "minimum": 1, "maximum": 5 },
+            "reference_density":       { "type": "integer", "minimum": 1, "maximum": 5 },
+            "concept_abstractness":    { "type": "integer", "minimum": 1, "maximum": 5 },
+            "dependency_chain_length": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "transition_ambiguity":    { "type": "integer", "minimum": 1, "maximum": 5 },
+            "competing_openings":      { "type": "integer", "minimum": 1, "maximum": 5 },
+            "competing_endings":       { "type": "integer", "minimum": 1, "maximum": 5 },
+            "lexical_decoys":          { "type": "integer", "minimum": 1, "maximum": 5 },
+            "topic_unfamiliarity":     { "type": "integer", "minimum": 1, "maximum": 5 },
+            "plausible_orderings":     { "type": "integer", "minimum": 1, "maximum": 5 }
+          }
+        },
+        "num_plausible_orderings": { "type": "integer", "minimum": 1, "maximum": 24,
+          "description": "How many orderings are locally coherent though globally wrong, plus the right one. The master difficulty variable (Bible §6, dimension 12)." },
+        "heuristic_adversarial": { "type": "boolean",
+          "description": "true = a solver playing only surface heuristics (no-pronoun opener, follow the repeated word) gets this item WRONG. Must be true for medium and harder tiers (Bible §10)." },
+        "nucleus": { "enum": ["A", "B", "C", "D", "E", "F"],
+          "description": "Presentation label of the RST nucleus — the sentence carrying the author's central claim (Bible §3)." },
+        "learning_objective": { "type": "string", "minLength": 10 },
+        "source": {
+          "type": "object",
+          "required": ["publication", "url", "author", "date_accessed", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication":   { "type": "string", "minLength": 1 },
+            "url":           { "type": ["string", "null"] },
+            "author":        { "type": ["string", "null"] },
+            "date_accessed": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+            "usage_note":    { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id": { "type": "string", "pattern": "^batch-pj-[0-9]{3}$" },
+        "prompt_version": { "type": "string", "minLength": 1 },
+        "reviewer_notes": { "type": "string" }
+      }
+    },
+
+    "sentences": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 6,
+      "description": "In PRESENTATION order — the scrambled order the learner sees. Labels are display identity only; ids never encode the answer.",
+      "items": {
+        "type": "object",
+        "required": ["label", "text", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "label": { "enum": ["A", "B", "C", "D", "E", "F"] },
+          "text":  { "type": "string", "minLength": 40 },
+          "role":  {
+            "enum": [
+              "topic", "background", "development", "example", "contrast",
+              "concession", "evidence", "cause_effect", "definition",
+              "conclusion", "restatement", "question", "answer"
+            ],
+            "description": "The sentence's discourse move (Bible §3): nucleus vs satellite roles, named."
+          }
+        }
+      }
+    },
+
+    "correct_order": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 6,
+      "items": { "enum": ["A", "B", "C", "D", "E", "F"] },
+      "description": "The unique best order, as presentation labels. Must be a permutation of every label, never the identity order."
+    },
+
+    "links": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "description": "Exactly sentence_count − 1 entries, one per consecutive pair of the correct order, each naming the device AND its reliability — signals are taught as hypotheses, never as rules (Bible §4).",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "device", "reliability", "explanation"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "enum": ["A", "B", "C", "D", "E", "F"] },
+          "to":   { "enum": ["A", "B", "C", "D", "E", "F"] },
+          "device": {
+            "enum": [
+              "pronoun_reference", "demonstrative_reference", "former_latter_reference",
+              "logical_connector", "thematic_development", "causal_chain", "temporal_marker",
+              "contrast_signal", "given_new_flow", "lexical_bridge", "parallel_structure"
+            ]
+          },
+          "reliability": { "enum": ["high", "medium", "low"] },
+          "explanation": { "type": "string", "minLength": 20 }
+        }
+      }
+    },
+
+    "explanation": {
+      "type": "object",
+      "required": ["macro_pattern_note", "movement", "tempting_orders", "trap_named", "solving_habit"],
+      "additionalProperties": false,
+      "properties": {
+        "macro_pattern_note": { "type": "string", "minLength": 40,
+          "description": "Layer 1 (Bible §11): name the discourse structure in plain words before any sentence-level reasoning." },
+        "movement": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 6,
+          "description": "Layer 2: the author's movement, one entry per sentence IN CORRECT ORDER — why each sentence does what it does, tied to the meaning relation, not just the token.",
+          "items": {
+            "type": "object",
+            "required": ["label", "why_here"],
+            "additionalProperties": false,
+            "properties": {
+              "label":    { "enum": ["A", "B", "C", "D", "E", "F"] },
+              "why_here": { "type": "string", "minLength": 30 }
+            }
+          }
+        },
+        "tempting_orders": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "description": "Layer 3: the most tempting wrong order(s), each walked to the exact point where global coherence breaks, tagged with the trap that makes it tempting (this tag also powers precise Reading-DNA diagnosis).",
+          "items": {
+            "type": "object",
+            "required": ["order", "trap_type", "why_tempting", "where_it_breaks"],
+            "additionalProperties": false,
+            "properties": {
+              "order": { "type": "string", "pattern": "^[A-F]{4,6}$" },
+              "trap_type": {
+                "enum": [
+                  "anchor_pair", "competing_opener", "competing_ending", "lexical_decoy",
+                  "generic_the", "false_pronoun_binding", "misleading_connective"
+                ]
+              },
+              "why_tempting":    { "type": "string", "minLength": 30 },
+              "where_it_breaks": { "type": "string", "minLength": 30 }
+            }
+          }
+        },
+        "trap_named": { "type": "string", "minLength": 40,
+          "description": "Layer 4: the trap that was set, named plainly, with the reusable defense — so the learner builds a defense, not a memory of one item." },
+        "solving_habit": { "type": "string", "minLength": 30,
+          "description": "One transferable habit of strong solvers this item practices, phrased for ANY future jumble. Shown as 'Make it a habit'." }
+      }
+    },
+
+    "mentor": {
+      "type": "object",
+      "required": ["challenge", "paragraph_plain", "takeaway"],
+      "additionalProperties": false,
+      "properties": {
+        "challenge": { "type": "string", "minLength": 20,
+          "description": "Shown BEFORE solving: one sentence on what will test the solver. No spoilers of the order." },
+        "paragraph_plain": { "type": "string", "minLength": 80,
+          "description": "What the assembled paragraph actually says, retold in very plain English — so the learner leaves understanding the author, not just the sequence." },
+        "takeaway": { "type": "string", "minLength": 20,
+          "description": "One memorable sentence to keep." }
+      }
+    }
+  }
+}

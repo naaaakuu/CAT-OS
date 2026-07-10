@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0002",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "beginner",
+    "title": "What the Sleeping Brain Is Busy Doing",
+    "theme": "sleep as an active part of learning",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["demonstrative", "connective_explicit", "lexical_repetition", "article_given_new"],
+    "primary_trap": "none",
+    "secondary_traps": ["anchor_pair"],
+    "dna_traits": ["global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 1,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 1,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 1,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 1
+    },
+    "num_plausible_orderings": 1,
+    "heuristic_adversarial": false,
+    "nucleus": "C",
+    "learning_objective": "learn the claim, reason, proof, verdict shape of an argument paragraph",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Sleep-and-memory consolidation is textbook cognitive science; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Beginner claim-evidence shape with an explicit demonstrative closer. Teaches that reasons come before proofs. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "During deep sleep, the brain replays the day's experiences, strengthening the connections that new memories depend on.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "That is why a night of rest before an exam often does more for your score than a night of revision.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Sleep is not a pause in learning but a part of it.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "In one well-known experiment, students who slept after memorising a list recalled far more of it than students who stayed awake.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "C makes the claim: sleep is part of learning. A takes \"sleep\", now old information, and adds the new part: what the brain actually does during it. Old carries new."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "A explains the mechanism in general. D shows it working in one specific experiment. Authors usually give the reason first and the proof second."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "B opens with \"That is why\". The \"that\" wraps up everything before it, the mechanism and the experiment together, and turns them into practical advice."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "This paragraph is an argument with a classic shape: a claim, then the reason it is true, then one piece of proof, then the everyday verdict. Claim, reason, proof, verdict. Once you name that shape, the sentences almost sort themselves.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C is the claim, and it is the only sentence that stands with no support needed. Short, general, and self-contained. Everything else exists to back it up."
+      },
+      {
+        "label": "A",
+        "why_here": "A answers the reader's first question: how can sleep be learning? It gives the mechanism, the brain replaying the day. Reasons come right after claims."
+      },
+      {
+        "label": "D",
+        "why_here": "D answers the second question: says who? It offers one concrete experiment. Proof follows the reason it is proving."
+      },
+      {
+        "label": "B",
+        "why_here": "B cashes the whole argument into advice, and its \"That is why\" openly points backward at all of it. Nothing could follow B; it has spent the paragraph."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDAB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Claim then example feels like a natural pair, and D's \"memorising\" echoes C's \"learning\". So C and D want to lock together.",
+        "where_it_breaks": "Read C then D and a question goes unanswered: why would sleeping help memory at all? A holds that answer, and A begins \"During deep sleep\", which continues C's idea, not D's result. The experiment lands harder once you know what it is demonstrating."
+      }
+    ],
+    "trap_named": "The pull here is to lock the claim to the example because they share vocabulary. Hold pairs loosely. A pair is only real if the paragraph still flows when you read the whole thing back, and here the flow needs the reason in between.",
+    "solving_habit": "In an argument paragraph, expect this order: the claim, the reason, the proof, the verdict. Find the claim first. It is the sentence that needs nothing before it."
+  },
+  "mentor": {
+    "challenge": "This paragraph argues something about sleep. Find the claim, then let it earn its proof in the right order.",
+    "paragraph_plain": "The author's point is simple: sleep is not time off from learning, it is part of learning. While you sleep deeply, your brain replays what happened during the day and strengthens the connections that memories are made of. One famous experiment showed it: students who slept after memorising a list remembered much more than students who stayed awake. So the practical advice writes itself. The night before an exam, sleep helps your score more than one more round of revision.",
+    "takeaway": "Claims come with a shape: claim, reason, proof, verdict. Learn the shape and the order follows."
+  }
+}

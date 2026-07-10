@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0009",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "medium",
+    "title": "The Face That Was Never Told",
+    "theme": "the misinformation effect and the fragility of memory",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["demonstrative", "pronoun_ref", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["wm_long_chain", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 2,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "resolve a pronoun by tracking the author's true subject across a long chain",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The misinformation effect reflects the well-known eyewitness-memory research tradition; no specific study is quoted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Medium item with a false pronoun binding: it could attach to memory or to the experiment; the author's subject decides. Long reference chain. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Afterward, a casual question mentioned a barn that had never appeared in the film, and a week later many of them recalled it clearly.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "Memory feels like a recording we play back, but it behaves more like a story we retell, quietly edited each time.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "It does not overwrite the past so much as blend new suggestions into it, until the seam between what happened and what was merely said disappears.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "In a famous line of studies, volunteers watched a short film of a car accident and were then questioned about what they had seen.",
+      "role": "background"
+    }
+  ],
+  "correct_order": ["B", "C", "D", "A"],
+  "links": [
+    {
+      "from": "B",
+      "to": "C",
+      "device": "pronoun_reference",
+      "reliability": "medium",
+      "explanation": "C begins \"It does not overwrite the past\". Overwriting is what memory does or fails to do, and B's whole subject is memory. The pronoun belongs to the author's topic, not to any experiment, which has not appeared yet."
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "C makes the abstract claim that suggestions blend into memory. D moves to prove it, opening a specific study. Claim first, demonstration next; no connective, so the meaning carries the join."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "temporal_marker",
+      "reliability": "high",
+      "explanation": "A opens with \"Afterward\", and its \"a casual question\" continues D's questioning. The barn that was only mentioned becomes the barn people remember. The demonstration completes itself."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim about how memory works, refined, then proved by one study walked start to finish. The paragraph hides a pronoun that could grab the wrong owner, so the skill is holding the author's real subject in mind while you order.",
+    "movement": [
+      {
+        "label": "B",
+        "why_here": "B is the thesis and the widest sentence: memory is less a recording than a retold story. It introduces the subject the whole paragraph, and one slippery pronoun, will lean on."
+      },
+      {
+        "label": "C",
+        "why_here": "C sharpens B with a mechanism: new suggestions blend in until the seam vanishes. Its \"It\" is memory, carried straight from B. This is where the pronoun trap lives."
+      },
+      {
+        "label": "D",
+        "why_here": "D turns from claim to evidence, setting up the famous film-and-questions study. It is background for the result that follows."
+      },
+      {
+        "label": "A",
+        "why_here": "A delivers the result: a barn only spoken of becomes a barn remembered. \"Afterward\" and the reused questioning bolt it to D, and the vivid proof lands the paragraph."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DACB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "D and A are a tidy pair, the study and its result, and reading them first is satisfying. Then C's \"It does not overwrite the past\" seems to describe the experiment you just read, so C feels like it belongs after A.",
+        "where_it_breaks": "C's \"It\" needs a single clear owner, and \"the experiment\" cannot overwrite a past; only memory can. The real owner is B's memory. Placed after A, C's pronoun reaches for the nearest noun, the study, and says something the study cannot do. B must come first so the pronoun has its true home, and the paragraph must open on the idea, not the evidence."
+      },
+      {
+        "order": "BCAD",
+        "trap_type": "competing_ending",
+        "why_tempting": "D is a calm, framing sentence and could sound like a wrap. Placing the result A in the middle and D last keeps the two claim sentences together up front.",
+        "where_it_breaks": "A opens with \"Afterward\" and refers to questioning that D introduces. Put A before D and \"afterward\" has no earlier moment, and the questioning is mentioned before it is set up. The evidence has to run D then A, in that order."
+      }
+    ],
+    "trap_named": "The false pronoun binding: C's \"It\" will happily attach to the nearest noun, the experiment, if you let the study sit just before it. But a pronoun belongs to the author's subject, and the author's subject is memory. When a pronoun could point two ways, hand it to the topic the paragraph is actually about, not to the closest word.",
+    "solving_habit": "Before ordering, name the paragraph's true subject in one word. When a pronoun appears, give it to that subject unless the sentence forces otherwise. Nearest is not the same as owner."
+  },
+  "mentor": {
+    "challenge": "A small word, \"it\", could point at two different things. The author has one subject in mind the whole time. Keep hold of it.",
+    "paragraph_plain": "The author's claim is that memory is not a recording. It is more like a story we retell, and quietly edit, every time. Rather than overwriting the past, memory blends new suggestions into it, until you can no longer tell what you saw from what you were merely told. The proof is a famous set of studies. People watched a film of a car crash, then answered questions. One question casually mentioned a barn that was never in the film. A week later, many of them clearly remembered the barn. The suggestion had become a memory.",
+    "takeaway": "A pronoun belongs to the author's subject, not to the nearest noun."
+  }
+}

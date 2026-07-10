@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0003",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 83,
+    "genre": "sociology",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "beginner",
+    "title": "The Quiet Rules of Waiting in Line",
+    "theme": "queues as unspoken social contracts",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["demonstrative", "connective_explicit", "lexical_repetition", "stance_continuity"],
+    "primary_trap": "none",
+    "secondary_traps": ["lexical_decoy"],
+    "dna_traits": ["surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 1,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 1
+    },
+    "num_plausible_orderings": 1,
+    "heuristic_adversarial": false,
+    "nucleus": "B",
+    "learning_objective": "see that a repeated word is a hint to check, not a rule to follow",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The queue-as-norm observation is standard sociology of everyday life; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Beginner general-to-specific with a first, gentle taste of the repeated-word decoy. The demonstrative resolves it cleanly. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "This is why a queue-jumper draws instant anger from complete strangers, who feel a rule has been broken even though no law has.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "B",
+      "text": "Underneath, though, it is a small social contract, an agreement that time spent waiting will be respected.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "The next time a line forms quietly at a bus stop, notice how much cooperation is happening without a word being spoken.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "A queue looks like the simplest thing in the world: people standing in a line, waiting their turn.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "B", "A", "C"],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "D shows the surface: a queue looks simple. B turns against that surface with \"Underneath, though\", and its \"it\" points straight back at the queue."
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "A opens with \"This is why\". The \"this\" needs an idea to wrap up, and the idea is B's social contract. Anger at queue-jumpers only makes sense once the contract exists."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "A ends on rules that are real without being laws. C sends you out into the world to notice that invisible cooperation yourself. An invitation like that closes a paragraph; nothing can follow it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph moves from general to specific: a familiar everyday thing, then what is really going on underneath it, then the specific behaviour that proves it, then a small invitation to go and see. It is the most common CAT shape, and this is its friendly version.",
+    "movement": [
+      {
+        "label": "D",
+        "why_here": "D introduces the topic as anyone would see it: a queue is simple. It needs no prior context, and it sets up the surface the next sentence will look under."
+      },
+      {
+        "label": "B",
+        "why_here": "B is the paragraph's real claim. The word \"though\" turns against D's simple picture, and \"it\" leans on D's queue. Neither works if B comes first."
+      },
+      {
+        "label": "A",
+        "why_here": "A gives the consequence that proves the contract is real: strangers get angry when it is broken. Its \"This is why\" openly wraps up B's idea."
+      },
+      {
+        "label": "C",
+        "why_here": "C steps out of the argument and hands it to your own eyes. Forward-looking sentences like \"the next time...\" are natural enders."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DABC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "D talks about a queue and A talks about a queue-jumper. The shared word makes D and A feel like neighbours.",
+        "where_it_breaks": "A begins \"This is why\", so it must explain something already said. D offers only a simple picture; there is nothing in it that explains anger. The missing piece is B's contract. Follow the repeated word here and you skip the very sentence the paragraph is about."
+      }
+    ],
+    "trap_named": "Here is your first meeting with the most common jumble decoy: the repeated word. Two sentences share \"queue\", but the true neighbour is connected by meaning, not vocabulary. A repeated word is an invitation to check the idea, never a licence to skip the checking.",
+    "solving_habit": "When a sentence starts with \"this is why\" or \"that is how\", stop and ask exactly what the this or that is. Find the sentence that contains that idea. It is the one that comes right before."
+  },
+  "mentor": {
+    "challenge": "A very ordinary thing hides a small agreement. Watch what the word \"this\" is pointing at.",
+    "paragraph_plain": "The author looks at something we never think about: standing in a queue. It seems like the simplest thing in the world. But really, a queue is a tiny unwritten deal between strangers: everyone's waiting time will be respected. That deal explains why people get so angry at queue-jumpers, even though jumping a queue breaks no law. It breaks the deal. The author ends by asking you to watch a quiet line at a bus stop and see how much silent cooperation is really happening.",
+    "takeaway": "Meaning links sentences. Vocabulary only decorates them."
+  }
+}

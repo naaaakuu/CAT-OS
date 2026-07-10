@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0018",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "history",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Silence in the Archive",
+    "theme": "why the gaps in a historical record are themselves evidence",
+    "estimated_time_sec": 210,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "article_given_new", "stance_continuity"],
+    "primary_trap": "generic_the",
+    "secondary_traps": ["competing_opener", "anchor_pair", "competing_ending"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "inference_implicit", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 5,
+      "reference_density": 4,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 4,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "hold every surface signal as a hypothesis and let only the whole argument decide",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The idea that archival silences are themselves historical evidence is a recognised theme in historiography; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Premium item: a generic-the opener, an anchor pair of tonally matched abstract sentences, and two plausible closers, all at once. Every heuristic is tested; only the full argument resolves. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The temptation is to read such a record straight, as if the surviving papers were a fair sample of the lives once lived.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "But a ledger that lists the ship's cargo and not the names of those chained in its hold is not silent by accident, and the omission is a fact about power as surely as any entry is a fact about trade.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "The archive that historians inherit was assembled by the winners, the literate, and the propertied, who kept the documents that served them and discarded or never made the rest.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "To read the past well, then, is to read its silences as carefully as its statements, and to treat every gap as a question rather than an emptiness.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["C", "A", "B", "D"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "medium",
+      "explanation": "C describes the archive the propertied left behind. A opens \"The temptation is to read such a record straight\", where such a record is C's biased archive. The demonstrative such reaches back to the collection C has just characterised."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "contrast_signal",
+      "reliability": "medium",
+      "explanation": "A names the temptation to trust the record as a fair sample. B answers \"But a ledger that lists the cargo and not the names... is not silent by accident\", refuting the fair-sample assumption with a concrete case. The But opposes A's temptation, not C."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "B shows an omission that is itself a fact about power. D opens \"To read the past well, then\", drawing the method from that insight: read silences as carefully as statements. Then caps the argument."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A characterisation of the archive, the naive way to read it, the correction with a concrete case, and the method that follows. This premium item tests every heuristic at once: the true opener starts with The, two abstract sentences tempt you to pair them, and two sentences sound like conclusions. Only the argument's shape resolves it.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C characterises the inherited archive: assembled by winners, kept because it served them. It opens the paragraph though it begins with The, because the archive that historians inherit identifies itself and needs no prior sentence. It is the subject everything else discusses."
+      },
+      {
+        "label": "A",
+        "why_here": "A names the naive response: read the biased record as a fair sample. \"Such a record\" points back at C, so A follows C, and A states the temptation B will refute."
+      },
+      {
+        "label": "B",
+        "why_here": "B refutes the temptation with the ledger that lists cargo but not the enslaved, an omission that is itself evidence of power. Its But opposes A, and its concrete force sets up the method."
+      },
+      {
+        "label": "D",
+        "why_here": "D draws the method with then: read silences as carefully as statements, treat every gap as a question. A prescription this general can only close the argument that earned it."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ACBD",
+        "trap_type": "generic_the",
+        "why_tempting": "C begins with The archive, and the rule that a The sentence cannot open pushes a solver to reject C as the opener and start on A, which reads as a general observation and feels self-contained.",
+        "where_it_breaks": "A's \"such a record\" is a demonstrative with no referent unless C has already described the record, so A cannot open. And C's The is the generic, self-identifying kind: the archive that historians inherit introduces itself completely. The mechanical article rule misfires exactly here. C opens; A's such needs C first."
+      },
+      {
+        "order": "CBAD",
+        "trap_type": "anchor_pair",
+        "why_tempting": "A and D are the two most abstract, sententious sentences and share a reflective register about how to read the past, so they feel like a matched pair that should sit together at the end, with the two concrete sentences C and B grouped first.",
+        "where_it_breaks": "B's \"But\" refutes the temptation named in A, so B must come after A, not before it; and A's \"such a record\" read straight makes no sense once B has already exposed the record as biased. Pair A with D at the end and B's refutation lands before the temptation it refutes, inverting the argument. The tonal twins A and D must be separated, by B, because B answers A."
+      },
+      {
+        "order": "CADB",
+        "trap_type": "competing_ending",
+        "why_tempting": "B ends on a resonant antithesis, the omission is a fact about power as surely as any entry is a fact about trade, which sounds like a closing flourish, tempting a solver to end on B and lift the method D into third place.",
+        "where_it_breaks": "D opens \"To read the past well, then\", and its then must follow the insight it distils, which is B's ledger. Put D before B and the method is stated before the evidence that justifies it, while B's flourish, though resonant, leaves the prescription dangling ahead of it. And D's \"then\" placed after A's temptation draws a method from a temptation, not from evidence. The method D closes; B's antithesis is the premise, not the finish."
+      }
+    ],
+    "trap_named": "This item weaponises three heuristics simultaneously: the generic The disqualifies the true opener, the anchor pair welds the two tonal twins A and D, and a resonant line B masquerades as the ending. No single rule survives. The only defence is to treat every surface signal as a hypothesis and let the argument's shape, characterisation, temptation, refutation, method, be the sole authority. Read the whole thing back and each sentence has exactly one lawful home.",
+    "solving_habit": "At the top of difficulty, trust no surface cue on its own: not the article, not tonal kinship, not a resonant closing ring. Name the argument's four moves, then verify the assembled order by reading it whole, checking that every demonstrative and connective lands on the sentence the argument requires."
+  },
+  "mentor": {
+    "challenge": "Every trick you have learned is tested here at once: a The that can still open, two twins that must be split, two endings that both ring true. Let only the argument decide.",
+    "paragraph_plain": "The author writes about how history is preserved. The archive historians inherit was put together by the winners, the literate, and the propertied, who kept the documents that served them and let the rest vanish. The temptation is to read that record straight, as if the surviving papers were a fair sample of the lives once lived. But a ledger that lists a ship's cargo and not the names of those chained in its hold is not silent by accident. That omission is a fact about power just as surely as any entry is a fact about trade. So to read the past well is to read its silences as carefully as its statements, and to treat every gap as a question rather than an emptiness.",
+    "takeaway": "At the hardest level, every surface signal is a hypothesis. Only the whole argument is authority."
+  }
+}
