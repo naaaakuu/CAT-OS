@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0005",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "sociology",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "The Verdict in the Applause",
+    "theme": "how a critic reads standing ovations as a claim about audiences, not about plays",
+    "estimated_time_sec": 95,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "A",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 3,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B: the outlier is given a pronoun and a shared keyword so it hooks locally onto a neighbour, while its stance shifts from the author's argument to a plain report of public opinion."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "connective_reading"],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice when a sentence swaps the author's argument for a neutral report of what people think",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General cultural sociology of theatre audiences; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Medium, first Trap B. The core is a critic's argument that ovations measure audiences, not plays. The outlier reports, neutrally, that many theatregoers enjoy giving ovations, hooked on by a pronoun and the word ovation. Stance shift from argument to reportage. Outlier at C. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The standing ovation, the critic argued, has become so routine that it now measures the audience's mood far better than the play's merit."
+    },
+    {
+      "label": "B",
+      "text": "A crowd that has paid a great deal and travelled a long way is, he noted, strongly inclined to rise, if only to justify the evening to itself."
+    },
+    {
+      "label": "C",
+      "text": "Surveys find that most theatregoers say they enjoy taking part in an ovation, whatever they privately thought of the performance."
+    },
+    {
+      "label": "D",
+      "text": "Once a few near the front stand, moreover, those behind rise almost against their will, unwilling to be the only ones still seated."
+    },
+    {
+      "label": "E",
+      "text": "By the time the whole house is on its feet, then, the gesture has certified nothing about the stage and a great deal about the seats."
+    }
+  ],
+  "outlier": "C",
+  "core_order": ["A", "B", "D", "E"],
+  "builder": {
+    "prompt": "Build the critic's four sentence argument that the ovation measures the audience, not the play. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences build one argument in the critic's voice. A states the claim, that the ovation measures the audience rather than the play. B and D give two reasons the audience rises anyway, the cost of the evening and the pressure to conform. E concludes that the whole house standing certifies the seats, not the stage. Claim, two supports, conclusion.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It states the critic's thesis, and the phrase the critic argued marks the whole paragraph as his case, not a survey report."
+      },
+      {
+        "label": "B",
+        "role": "evidence",
+        "why_here": "It gives the first reason the audience rises regardless of merit, the sunk cost of a long, expensive evening."
+      },
+      {
+        "label": "D",
+        "role": "evidence",
+        "why_here": "It adds the second reason with moreover, the social pressure of a rising crowd, stacking support under the thesis."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It closes the argument with then, drawing the thesis to its point: the ovation certifies the seats, not the stage."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "B's he noted keeps the critic's voice from A, and the crowd it describes is the audience A's thesis is about."
+      },
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "conjunction",
+        "explanation": "D opens with moreover, explicitly adding a second reason to the first, both supporting the same claim."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with then, gathering both reasons into the conclusion the argument has been driving toward."
+      }
+    ],
+    "violation_named": "Sentence C is a stance shift. The core is the critic's argument, a case with a claim, reasons and a conclusion, all in his evaluating voice. C drops that voice for a flat report of survey findings about what theatregoers say they enjoy. It describes public opinion where the paragraph argues against the meaning of that opinion.",
+    "why_it_breaks": "The critic's argument needs each sentence to push toward the conclusion that ovations are worthless as verdicts. C simply records that people like ovations, which neither supports nor advances that claim; it merely reports a fact about preferences. B and D explain why people rise despite the play. C explains nothing; it is reportage sitting inside an argument, and the argument has no seat for a sentence that only describes.",
+    "trap_exposed": "C is built to look like it belongs. It shares the exact word ovation with A and E, and its clause whatever they privately thought echoes the core's theme that applause hides real opinion. Those hooks are the bait. But look at the voice: A, B, D and E are all the critic reasoning toward a verdict, while C is a neutral survey result with no verdict in it. The keyword matches; the stance does not.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reads as a broad opening generalisation, so a reader deciding early might treat it as a frame rather than the thesis.",
+        "what_breaks": "Without A the paragraph has no claim: B and D give reasons for a conclusion that was never stated, and E's certified nothing lands on nothing."
+      },
+      {
+        "label": "B",
+        "mistake_type": "local_smoothness",
+        "why_tempting": "It flows so naturally into D's crowd behaviour that the two can feel like one unit, tempting a reader to cut the standalone looking one.",
+        "what_breaks": "Without B the argument loses its first and strongest reason, the sunk cost, and rests on conformity alone."
+      },
+      {
+        "label": "D",
+        "mistake_type": "connective_assumption",
+        "why_tempting": "Its opening moreover makes it feel like an add on, as though the argument were already complete without it.",
+        "what_breaks": "Without D the second reason is gone, and E's whole house on its feet arrives with no explanation of how the standing spread."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its epigrammatic close, about the stage and the seats, has a polished register that stands apart from the plainer reasons.",
+        "what_breaks": "Without E the argument states its claim and its reasons but never lands its point, leaving the case unresolved."
+      }
+    ],
+    "detection_habit": "Fix the paragraph's voice before judging any sentence. When four sentences argue a case and one merely reports what people think, the reporter is standing in the wrong paragraph, however familiar its words."
+  },
+  "mentor": {
+    "challenge": "One sentence here quotes a survey. The others make a case. Notice which voice each sentence speaks in before you decide.",
+    "takeaway": "Shared keywords are not shared stance. An argument cannot use a sentence that only describes."
+  }
+}

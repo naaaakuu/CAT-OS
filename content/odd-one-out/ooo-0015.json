@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0015",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "psychology",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "The Expert Who Forgot How to Explain",
+    "theme": "why growing expertise can make a skill harder, not easier, to teach",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "A",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "Both traps. Trap B: the intruder shares expert, novice and skill and opens with a demonstrative, but swaps the explanatory stance for a practical recommendation to employers. Trap A: a belonging sentence is dressed with an abrupt one word opener."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "ambiguity_tolerance"],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "distinguish an explanatory argument from an is becomes ought recommendation carrying the same terms",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General psychology of expertise and the curse of knowledge; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "CAT+ both traps. The core explains why expertise dulls teaching; the intruder recommends what firms should do, an is to ought stance shift. A belonging sentence wears a blunt one word opener as decoy. Outlier at C. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "As a skill deepens, its steps sink below awareness, until the expert performs in one smooth motion what the beginner must climb one careful rung at a time."
+    },
+    {
+      "label": "B",
+      "text": "That very smoothness is what disqualifies the expert as a guide, for the rungs the novice needs are exactly the ones the master no longer sees."
+    },
+    {
+      "label": "C",
+      "text": "Firms should therefore pair each new hire with a mid level mentor rather than a star, since the recently trained still remember the climb."
+    },
+    {
+      "label": "D",
+      "text": "Asked how, the master answers you simply feel it, which is true, and useless, because the feeling is the compressed residue of a thousand forgotten steps."
+    },
+    {
+      "label": "E",
+      "text": "So expertise and the ability to teach it can pull apart, and the finest performer of a skill may be the last person able to hand it on."
+    }
+  ],
+  "outlier": "C",
+  "core_order": ["A", "B", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence explanation of why mastery can dull teaching, from how skill deepens to the paradox. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences explain one paradox. A describes how a skill sinks below awareness with mastery. B draws the consequence, that smoothness disqualifies the expert as a guide. D shows it in the master's useless you simply feel it. E states the paradox, expertise and teaching pulling apart. Mechanism, consequence, illustration, paradox, all explaining why the thing happens.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It opens the explanation with the mechanism, a deepening skill sinking its steps below awareness."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It draws the consequence of A, the very smoothness that marks mastery disqualifying the expert as a guide."
+      },
+      {
+        "label": "D",
+        "role": "example",
+        "why_here": "It illustrates B with the master's you simply feel it, true and useless, the forgotten steps compressed into a feeling."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the explanation to its paradox with so, the finest performer being the last able to teach the skill."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "B's that very smoothness points straight back at the one smooth motion A described, turning mechanism into consequence."
+      },
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "given_new",
+        "explanation": "B's claim that the master no longer sees the rungs is D's given, and D adds the master's useless answer as proof."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with so, gathering the mechanism, consequence and illustration into the concluding paradox."
+      }
+    ],
+    "violation_named": "Sentence C is a stance shift, an is turned into an ought. The core explains why expertise can dull teaching, a describing, analytic argument. C stops explaining and recommends, telling firms what they should do, pairing hires with mid level mentors. It prescribes a policy where the paragraph analyses a phenomenon.",
+    "why_it_breaks": "The argument's job is to account for the paradox, not to fix it. Every core sentence explains: mechanism, consequence, illustration, paradox. C acts on the explanation instead of advancing it, and it introduces new actors, firms and new hires, that the analysis never discusses. Nothing sets up the workplace, and E's paradox takes up C's advice not at all. An explanatory paragraph has no seat for a sentence that switches to prescribing.",
+    "trap_exposed": "Both traps are live. The intruder C is disguised: it shares expert, novice and skill, opens with therefore as if it followed logically from B, and reads like the argument's practical payoff, so a reader keeps it. But therefore should introduce a conclusion of the same kind, and C's kind is a recommendation, not an explanation. Meanwhile D is dressed to look odd, opening with the blunt fragment Asked how, which tempts a shortcut cut. Run the removal test: remove C and the explanation stands whole; remove D and the argument loses its sharpest illustration. Only removing C leaves a coherent paragraph.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its long contrast between expert and beginner is the densest sentence, so its role as the opening mechanism is unclear before building.",
+        "what_breaks": "Without A the explanation has no mechanism, and B's that very smoothness refers to a motion the paragraph never described."
+      },
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Read alone it can seem to state the whole point, tempting a reader to treat the rest as repetition and mistrust one of them.",
+        "what_breaks": "Without B the consequence is missing, and D's useless answer illustrates a claim the paragraph never made."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "This is the decoy: its clipped opener Asked how gives it a fragmented shape unlike the flowing sentences around it.",
+        "what_breaks": "Without D the argument states its consequence but never shows it, and E's paradox rests on no concrete case."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "E and C both step outside the mechanism to say what follows from it, so a hurried read may hold both and skip the removal test.",
+        "what_breaks": "Without E the explanation never lands its paradox, that the finest performer may be the last able to hand the skill on."
+      }
+    ],
+    "detection_habit": "Check whether the paragraph describes or prescribes, and hold that against every sentence. A therefore that introduces advice rather than a conclusion has switched the paragraph from explaining to recommending, and the removal test will confirm it."
+  },
+  "mentor": {
+    "challenge": "One sentence explains the paradox and one recommends a fix for it, and one of the explaining sentences is wearing a blunt disguise. Remove, do not guess.",
+    "takeaway": "An explanation cannot use a recommendation. When two sentences both look loose, the removal test names the real one."
+  }
+}

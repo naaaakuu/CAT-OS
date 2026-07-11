@@ -39,7 +39,7 @@ function readJSON(rel) {
 
 /* ---- import the app's real validation code ---- */
 const { validate } = await mod('src/core/content-loader/validator.js');
-const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues } = await mod('src/core/content-loader/loader.js');
+const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues, oooConsistencyIssues } = await mod('src/core/content-loader/loader.js');
 const { PracticeSession } = await mod('src/core/engine/session.js');
 const { sessionXP, totalXP, levelFromXP, xpForNext } = await mod('src/core/engagement/xp.js');
 const { deriveStreaks, weekActivity, dayKey } = await mod('src/core/engagement/streaks.js');
@@ -142,14 +142,65 @@ if (psFiles.length >= 8) {
   }
 }
 
+/* Odd One Out content: same boundary discipline via ooo.schema + the
+   app's own oooConsistencyIssues (loader.js), so tool and browser agree. */
+console.log('\n1d. Odd One Out JSON: schema + consistency');
+const oooSchemas = {};
+for (const f of readdirSync(join(root, 'content/schema'))) {
+  if (f.startsWith('ooo.schema.v')) oooSchemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+}
+const oooDir = 'content/odd-one-out';
+const oooFiles = existsSync(join(root, oooDir))
+  ? readdirSync(join(root, oooDir)).filter((f) => f.endsWith('.json')).sort() : [];
+for (const file of oooFiles) {
+  const id = file.replace('.json', '');
+  let item;
+  try { item = readJSON(`${oooDir}/${file}`); }
+  catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+  const schema = oooSchemas[String(item.schema_version ?? 1)];
+  if (!schema) { bad(`${file}: no OOO schema for version ${item.schema_version}`); continue; }
+  const { valid, errors } = validate(schema, item);
+  if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+  const issues = oooConsistencyIssues(id, item);
+  if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+  ok(`${file} (${item.meta.tier}/${item.meta.difficulty}, ${item.meta.violation_type}, outlier ${item.outlier})`);
+}
+/* Batch-level fairness (Bible §5/§10): because OOO is TITA with no options,
+   the correct sentence must not concentrate on one label (an answer-position
+   leak), and the seven violation types must genuinely vary across the bank. */
+if (oooFiles.length >= 8) {
+  const items = oooFiles.map((f) => readJSON(`${oooDir}/${f}`));
+  const byLetter = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+  for (const it of items) byLetter[it.outlier] += 1;
+  for (const [letter, n] of Object.entries(byLetter)) {
+    if (n / items.length > 0.35) bad(`ooo batch: outlier sits at ${letter} in ${n} of ${items.length} items (answer position leaks)`);
+  }
+  const violations = new Set(items.map((it) => it.meta.violation_type));
+  if (violations.size < 5) bad(`ooo batch: only ${violations.size} violation types used; vary the outlier's crime (Bible §4)`);
+  // Every practicable medium+ item must be heuristic-adversarial (Bible §10),
+  // so a pure surface-heuristic solver cannot farm the bank.
+  const ADV = ['medium', 'advanced', 'cat', 'cat-plus', 'ninety-nine', 'premium'];
+  for (const it of items) {
+    if (ADV.includes(it.meta.tier) && it.meta.validation.heuristic_adversarial !== 'pass') {
+      bad(`ooo batch: ${it.meta.id} (${it.meta.tier}) is not heuristic-adversarial (Bible §10)`);
+    }
+  }
+  const missions = new Set(items.map((it) => it.meta.mission));
+  if (problems.filter((p) => p.startsWith('ooo batch')).length === 0) {
+    ok(`batch balance: outlier positions ${Object.values(byLetter).join('/')}, ${violations.size} violation types, ${missions.size} missions`);
+  }
+}
+
 console.log('\n2. Registry ↔ files agreement');
 const registry = readJSON('content/index.json');
 const rcRegIds = registry.items.filter((i) => i.type === 'rc').map((i) => i.id).sort();
 const pjRegIds = registry.items.filter((i) => i.type === 'pj').map((i) => i.id).sort();
 const psRegIds = registry.items.filter((i) => i.type === 'ps').map((i) => i.id).sort();
+const oooRegIds = registry.items.filter((i) => i.type === 'ooo').map((i) => i.id).sort();
 const fileIds = rcFiles.map((f) => f.replace('.json', ''));
 const pjFileIds = pjFiles.map((f) => f.replace('.json', ''));
 const psFileIds = psFiles.map((f) => f.replace('.json', ''));
+const oooFileIds = oooFiles.map((f) => f.replace('.json', ''));
 for (const id of rcRegIds) {
   if (!fileIds.includes(id)) bad(`registry lists RC ${id} but no file exists`);
 }
@@ -167,6 +218,12 @@ for (const id of psRegIds) {
 }
 for (const id of psFileIds) {
   if (!psRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+for (const id of oooRegIds) {
+  if (!oooFileIds.includes(id)) bad(`registry lists OOO ${id} but no file exists`);
+}
+for (const id of oooFileIds) {
+  if (!oooRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
 }
 // PS registry fields must mirror the file (title, difficulty, tier, time).
 for (const entry of registry.items.filter((i) => i.type === 'ps')) {
@@ -190,6 +247,20 @@ for (const entry of registry.items.filter((i) => i.type === 'pj')) {
   if (entry.difficulty !== item.meta.difficulty) bad(`${entry.id}: registry difficulty ≠ file`);
   if (entry.difficulty_numeric !== item.meta.difficulty_numeric) bad(`${entry.id}: registry difficulty_numeric ≠ file`);
   if (entry.tier !== item.meta.tier) bad(`${entry.id}: registry tier ${entry.tier} ≠ file ${item.meta.tier}`);
+  const mins = Math.round(item.meta.estimated_time_sec / 60 * 10) / 10;
+  if (entry.estimated_time_min !== mins) bad(`${entry.id}: registry estimated_time_min ${entry.estimated_time_min} ≠ ${mins}`);
+}
+// OOO registry fields must mirror the file (title, difficulty, tier, time, tags).
+for (const entry of registry.items.filter((i) => i.type === 'ooo')) {
+  if (!oooFileIds.includes(entry.id)) continue;
+  const item = readJSON(`${oooDir}/${entry.id}.json`);
+  if (entry.title !== item.meta.title) bad(`${entry.id}: registry title ≠ file meta.title`);
+  if (entry.difficulty !== item.meta.difficulty) bad(`${entry.id}: registry difficulty ≠ file`);
+  if (entry.difficulty_numeric !== item.meta.difficulty_numeric) bad(`${entry.id}: registry difficulty_numeric ≠ file`);
+  if (entry.tier !== item.meta.tier) bad(`${entry.id}: registry tier ${entry.tier} ≠ file ${item.meta.tier}`);
+  if (entry.spine_type !== item.meta.spine_type) bad(`${entry.id}: registry spine_type ≠ file`);
+  if (entry.violation_type !== item.meta.violation_type) bad(`${entry.id}: registry violation_type ≠ file`);
+  if (entry.mission !== item.meta.mission) bad(`${entry.id}: registry mission ≠ file`);
   const mins = Math.round(item.meta.estimated_time_sec / 60 * 10) / 10;
   if (entry.estimated_time_min !== mins) bad(`${entry.id}: registry estimated_time_min ${entry.estimated_time_min} ≠ ${mins}`);
 }
@@ -219,7 +290,7 @@ for (const entry of registry.items) {
     bad(`${entry.id}: registry word_count ${entry.word_count} ≠ file ${item.meta.word_count}`);
   }
 }
-if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS items agree with registry`);
+if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS + ${oooRegIds.length} OOO items agree with registry`);
 
 console.log('\n3. Service worker precache ↔ disk');
 const sw = readFileSync(join(root, 'service-worker.js'), 'utf8');
@@ -241,10 +312,14 @@ for (const file of psFiles) {
   const path = `./${psDir}/${file}`;
   if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
 }
+for (const file of oooFiles) {
+  const path = `./${oooDir}/${file}`;
+  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+}
 if (!listed.includes('./content/index.json')) bad('registry not precached');
 // Every schema version on disk must be precached — offline validation needs it.
 for (const f of readdirSync(join(root, 'content/schema'))) {
-  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v'))
+  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v') || f.startsWith('ooo.schema.v'))
       && !listed.includes(`./content/schema/${f}`)) {
     bad(`schema not precached: ${f}`);
   }
@@ -950,6 +1025,189 @@ if (psFiles.length === 0) {
 
   if (problems.filter((p) => p.startsWith('ps')).length === 0) {
     ok('scoring, module-tagged records, taxonomy-complete voice, missions, think coach, DNA floors, one lesson per set');
+  }
+}
+
+console.log('\n13. Odd One Out dry run (engine · voice · missions · think · DNA · one lesson)');
+if (oooFiles.length === 0) {
+  ok('no OOO content yet — skipped');
+} else {
+  const { OOOSession, computeOOOScore, evaluateBuild } = await mod('src/core/engine/ooo-session.js');
+  const oooVoice = await mod('src/core/mentor/ooo-voice.js');
+  const rcVoice = await mod('src/core/mentor/voice.js');
+  const { deriveOOODNA, oooDominantMistake, enrichOOOAnswers, OOO_FLOORS } = await mod('src/core/mentor/ooo-dna.js');
+  const { chooseOOOLesson, oooLessonRecord } = await mod('src/core/mentor/ooo-lesson.js');
+  const { thinkQuestions } = await mod('src/modules/odd-one-out/logic/think.js');
+  const { teachDepth } = await mod('src/modules/odd-one-out/logic/teach.js');
+  const oooLatestSchema = oooSchemas[String(Math.max(...Object.keys(oooSchemas).map(Number)))];
+
+  /* -- The OOO mentor never judges either: lint its whole vocabulary. -- */
+  {
+    const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
+    const offenders = [];
+    const walk = (value, path) => {
+      if (typeof value === 'string') {
+        for (const re of banned) if (re.test(value)) offenders.push(`${path}: "${value.slice(0, 60)}…"`);
+      } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${path}[${i}]`));
+      else if (value && typeof value === 'object') {
+        for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
+      } else if (typeof value === 'function') {
+        try { walk(value('the pattern', 3, 2), `${path}()`); } catch { /* signature mismatch is fine */ }
+      }
+    };
+    for (const [name, exported] of Object.entries(oooVoice)) {
+      if (name === 'pick') continue;
+      walk(exported, name);
+    }
+    if (offenders.length) offenders.forEach((o) => bad(`ooo: mentor voice uses judgment language — ${o}`));
+
+    // Every §7 mistake_type the schema can name must have a solver pattern
+    // with a recall, so the taxonomy is teachable end to end.
+    const mistakeEnum = oooLatestSchema.properties.explanation.properties.exclusion_analysis
+      .items.properties.mistake_type.enum;
+    for (const t of mistakeEnum) {
+      const p = oooVoice.OOO_TRAP_PATTERNS[t];
+      if (!p) bad(`ooo: no mentor pattern for mistake_type "${t}"`);
+      else if (!p.recall?.question) bad(`ooo: no recall for mistake_type "${t}"`);
+    }
+    // Every §4 violation_type must have a violation pattern the teach layer names.
+    const violationEnum = oooLatestSchema.properties.meta.properties.violation_type.enum;
+    for (const v of violationEnum) {
+      if (!oooVoice.OOO_VIOLATION_PATTERNS[v]?.name) bad(`ooo: no violation pattern for "${v}"`);
+    }
+    // Every mission must have Today's Mission copy and its own Think questions.
+    const missionEnum = oooLatestSchema.properties.meta.properties.mission.enum;
+    for (const m of missionEnum) {
+      if (!oooVoice.OOO_MISSIONS[m]?.title) bad(`ooo: no mission copy for "${m}"`);
+      if (!(oooVoice.OOO_THINK.byMission[m]?.length >= 1)) bad(`ooo: no think questions for mission "${m}"`);
+    }
+  }
+
+  /* -- Think coach: deterministic, never empty, never answer-shaped. -- */
+  {
+    const item = readJSON(`${oooDir}/${oooFiles[0]}`);
+    const qs = thinkQuestions(item);
+    if (qs.length !== 4) bad(`ooo think: expected 4 questions, got ${qs.length}`);
+    if (JSON.stringify(thinkQuestions(item)) !== JSON.stringify(qs)) bad('ooo think: not deterministic');
+    if (new Set(qs).size !== qs.length) bad('ooo think: repeated questions in one sheet');
+  }
+
+  /* -- Teach depth: richer with tier, never below the floor. -- */
+  {
+    if (teachDepth('foundation') !== 1) bad('ooo teach: foundation depth should be 1');
+    if (teachDepth('medium') !== 2) bad('ooo teach: medium depth should be 2');
+    if (teachDepth('cat') !== 3) bad('ooo teach: cat depth should be 3');
+    if (teachDepth('premium') !== 4) bad('ooo teach: premium depth should be 4');
+  }
+
+  /* -- Engine: TITA scoring, build evaluation, module-tagged records. -- */
+  const item = readJSON(`${oooDir}/${oooFiles[0]}`);
+  {
+    // Build evaluation counts author joins the learner had.
+    const perfect = evaluateBuild(item.core_order, item.core_order);
+    if (perfect.links_correct !== 3 || perfect.positions_correct !== 4) bad('ooo engine: perfect build not fully recognized');
+    const swapped = evaluateBuild([item.core_order[1], item.core_order[0], item.core_order[2], item.core_order[3]], item.core_order);
+    if (swapped.links_correct !== 1) bad(`ooo engine: expected 1 join after a head swap, got ${swapped.links_correct}`);
+
+    let t = 1000;
+    const s = new OOOSession([item], 'ooo-set:test', { now: () => (t += 1000) });
+    s.markItemShown();
+    const verdict = s.answer(item.outlier, { built: item.core_order, think_opened: true, read_back_ms: 8000 });
+    if (!verdict.is_correct) bad('ooo session: correct exclusion not recognized');
+    if (verdict.links_correct !== 3) bad('ooo session: build links not reported on the verdict');
+    const { session, attempts } = s.finish();
+    if (session.module !== 'ooo') bad('ooo session: record missing module tag');
+    if (session.score.correct !== 1 || session.score.marks !== 3) bad('ooo session: score wrong');
+    if (attempts.length !== 1 || attempts[0].module !== 'ooo') bad('ooo session: attempt shape wrong');
+    if (!Array.isArray(session.item_ids) || session.item_ids[0] !== item.meta.id) bad('ooo session: item_ids missing');
+    if (session.answers[0].think_opened !== true || session.answers[0].build_links_correct !== 3) {
+      bad('ooo session: builder/think behavior fields lost');
+    }
+    const sc = computeOOOScore([{ is_correct: true }, { is_correct: false }, { is_correct: null }]);
+    if (sc.marks !== 3) bad(`ooo scoring: TITA marks should be +3/0, got ${sc.marks}`);
+    if (Math.abs(sc.accuracy - 0.5) > 1e-9) bad('ooo scoring: accuracy wrong');
+  }
+
+  /* -- DNA: a repeated solver pattern across enough items is named; floors hold. -- */
+  {
+    const all = oooFiles.map((f) => readJSON(`${oooDir}/${f}`));
+    // Find a mistake_type shared by two distinct items, and pick the core
+    // sentence carrying that pattern in each (a wrong exclusion of it).
+    const byMistake = new Map();
+    for (const it of all) {
+      for (const e of it.explanation.exclusion_analysis) {
+        if (!byMistake.has(e.mistake_type)) byMistake.set(e.mistake_type, []);
+        byMistake.get(e.mistake_type).push({ it, label: e.label });
+      }
+    }
+    const repeated = [...byMistake.entries()]
+      .map(([mistake, arr]) => {
+        const seen = new Set();
+        return [mistake, arr.filter(({ it }) => !seen.has(it.meta.id) && seen.add(it.meta.id))];
+      })
+      .find(([, arr]) => arr.length >= 2);
+    if (repeated) {
+      const [mistake, entries] = repeated;
+      const items = new Map(entries.slice(0, 2).map(({ it }) => [it.meta.id, it]));
+      const mkOOOSession = (n, es) => ({
+        id: `ooo-s-${n}`, module: 'ooo', passage_id: 'ooo-set:test',
+        item_ids: es.map((e) => e.it.meta.id),
+        started_at: new Date(2026, 6, n, 10).toISOString(),
+        finished_at: new Date(2026, 6, n, 10, 3).toISOString(),
+        duration_ms: 3 * 60000,
+        score: { total: es.length, correct: 0, wrong: es.length, skipped: 0,
+          attempted: es.length, accuracy: 0, marks: 0, max_marks: 3 * es.length },
+        answers: es.map((e) => ({
+          item_id: e.it.meta.id, question_id: e.it.meta.id, chosen: e.label,
+          is_correct: false, built: null, build_links_correct: 0,
+          think_opened: false, revised: false, read_back_ms: 0, time_ms: 60000 })),
+      });
+      const [e1, e2] = entries;
+      const history = [mkOOOSession(1, [e1]), mkOOOSession(2, [e2]), mkOOOSession(3, [e1])];
+      const dna = deriveOOODNA(history, items);
+      const hasPattern = dna.observations.some((o) => o.pattern_id === mistake);
+      if (!hasPattern) bad(`ooo dna: repeated pattern "${mistake}" (3 hits / 2 items) should be named`);
+      if (oooDominantMistake(enrichOOOAnswers(history, items))?.mistake !== mistake) {
+        bad('ooo dna: dominant pattern not detected');
+      }
+      if (JSON.stringify(deriveOOODNA(history, items)) !== JSON.stringify(dna)) {
+        bad('ooo dna: not deterministic');
+      }
+      // Below the floor (2 hits) → silence. Fairness is a feature.
+      const thin = deriveOOODNA(history.slice(0, 2), items);
+      if (thin.observations.some((o) => o.pattern_id === mistake)) {
+        bad('ooo dna: named a pattern below the evidence floor');
+      }
+      // One lesson out, deterministic, teaching the pull.
+      const lesson = chooseOOOLesson({ session: history[2], items,
+        dna: deriveOOODNA(history.slice(0, 2), items), priorSessions: 2 });
+      if (!lesson || Array.isArray(lesson)) bad('ooo lesson: must return exactly one lesson');
+      if (!lesson.teach?.pull || !lesson.teach?.notice) bad('ooo lesson: must teach pull + notice');
+      if (!lesson.recall?.question) bad('ooo lesson: must seed a recall');
+      const rec = oooLessonRecord(lesson, history[2], '2026-07-11');
+      if (rec.module !== 'ooo' || rec.kind !== 'lesson') bad('ooo lesson: record shape drifted');
+      const again = chooseOOOLesson({ session: history[2], items,
+        dna: deriveOOODNA(history.slice(0, 2), items), priorSessions: 2 });
+      if (JSON.stringify(again) !== JSON.stringify(lesson)) bad('ooo lesson: not deterministic');
+    }
+    // A clean set teaches mastery.
+    const cleanItems = new Map([[item.meta.id, item]]);
+    const cleanSession = {
+      id: 'ooo-clean', module: 'ooo', passage_id: 'ooo-set:test', item_ids: [item.meta.id],
+      started_at: new Date().toISOString(), finished_at: new Date().toISOString(), duration_ms: 60000,
+      score: { total: 1, correct: 1, wrong: 0, skipped: 0, attempted: 1, accuracy: 1, marks: 3, max_marks: 3 },
+      answers: [{ item_id: item.meta.id, question_id: item.meta.id, chosen: item.outlier,
+        is_correct: true, built: item.core_order, build_links_correct: 3,
+        think_opened: false, revised: false, read_back_ms: 9000, time_ms: 60000 }],
+    };
+    const mastery = chooseOOOLesson({ session: cleanSession, items: cleanItems,
+      dna: { dominant: null, observations: [] }, priorSessions: 1 });
+    if (mastery.lesson_kind !== 'mastery') bad('ooo lesson: clean set should teach mastery');
+    if (!mastery.recall?.question) bad('ooo lesson: mastery still seeds a recall');
+  }
+
+  if (problems.filter((p) => p.startsWith('ooo')).length === 0) {
+    ok('TITA scoring, build eval, module-tagged records, taxonomy-complete voice, missions, think coach, DNA floors, one lesson per set');
   }
 }
 

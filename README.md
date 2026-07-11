@@ -37,6 +37,15 @@ previous lesson; three successful recalls quietly retire it. A **Growth**
 tab shows your Reading DNA (evidence-gated observations about how you
 read — growth first, never judgment), the concepts you've collected, and
 your own reflections. Every attempt is saved locally.
+Alongside Reading Comprehension, three verbal-ability journeys share the
+same calm shell, the same mentor voice, and the same local storage:
+**Para Jumbles** (rebuild the author's paragraph), **Para Summary** (find
+the author's point and protect it), and **Odd One Out** (build the
+paragraph, and the sentence that never belonged reveals itself). Each is
+an eight-tier journey with its own first-time introduction, a Today's
+Mission before every item, a floating Think coach that asks questions
+rather than giving hints, layered teaching that names the exact trap,
+and one mentor lesson per set.
 Progress is motivating without being loud: XP and levels, daily streaks,
 achievements, a weekly activity strip, and optional whisper-level haptics and
 sound — all derived from your stored sessions, all offline.
@@ -90,9 +99,9 @@ Run it before every release.
 | `src/core/` | Logic with no UI: storage adapter, router, content loader + validator, session engine, scoring, engagement, learning journey, the reading mentor (`core/mentor/`), utils |
 | `src/shell/` | Extracted shell screens (Growth); app.js still hosts the rest |
 | `src/ui/` | Design tokens, base styles, reusable Web Components |
-| `src/modules/reading-comprehension/` | The first VARC module (browser / session / review) |
-| `content/schema/` | Versioned JSON schemas (`rc.schema.v1/v2/v3.json`; appended, never edited) |
-| `content/reading-comprehension/` | RC passages as JSON; `content/index.json` is the registry |
+| `src/modules/` | The four VARC modules: `reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/` (each: browser / session / learn, plus its own logic) |
+| `content/schema/` | Versioned JSON schemas (`rc.schema.v1–v4`, `pj/ps/ooo.schema.v1`; appended, never edited) |
+| `content/` | Content as JSON by type (`reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`); `content/index.json` is the registry |
 | `tools/verify.mjs` | Offline repository self-check |
 | The documentation corpus | The project's permanent memory — **read `AI_OPERATING_MANUAL.md` first**, then `MASTER_CONTEXT.md` |
 | `STATUS.md` | What actually exists right now (designed / building / shipped) |
@@ -105,7 +114,7 @@ The non-negotiables: no build step; content never hardcoded; storage only
 through the `StorageAdapter`; modules never import each other; stable IDs
 forever; docs updated with every structural change.
 
-Adding the next module (Para Summary, V1.x): copy the
+Adding the next module (Vocabulary, V1.x): copy the
 `src/modules/reading-comprehension/` shape, write its screens against the shared
 `src/ui/` components, register it in `src/app.js`, and add its files to the
 service worker's precache list. No existing module changes.

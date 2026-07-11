@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0013",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Wage That Rises With the Robot",
+    "theme": "why automation can raise the wages of the very workers it fails to replace",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B: the intruder shares automation, wages and worker and opens with a connective, but attaches to no defensible relation, raising a distinct question about retraining that the wage argument never poses."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "detect an on topic sentence that raises a different question and cannot attach to the argument's chain",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General labour economics of automation and complementarity; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "CAT tier topically alien under high overlap. The intruder shares the automation and wage vocabulary but opens a different question, retraining and displacement, that the complementarity argument never engages. Outlier at A. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "When a machine takes over a task, the displaced workers must often retrain for months before they can find comparable work elsewhere in the economy."
+    },
+    {
+      "label": "B",
+      "text": "It is tempting to assume that a machine which does part of a worker's job must lower the value, and so the pay, of the worker it did not replace."
+    },
+    {
+      "label": "C",
+      "text": "Yet the opposite often holds: by taking the routine half of the task, the machine leaves the worker doing only the judgement half, where an hour is worth far more."
+    },
+    {
+      "label": "D",
+      "text": "The clerk who once filed and also advised now only advises, and the advice, no longer diluted by filing, commands a higher rate than before."
+    },
+    {
+      "label": "E",
+      "text": "So automation can lift the wage of the survivor even as it erases the task, because what it removes is precisely the cheapest part of the work."
+    }
+  ],
+  "outlier": "A",
+  "core_order": ["B", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument that automation can raise a surviving worker's wage, from the tempting assumption to the reason. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences argue one counterintuitive claim. B states the tempting assumption, that a machine lowers the surviving worker's pay. C reverses it, the machine takes the routine half and leaves the valuable judgement. D gives the concrete case, the clerk who now only advises. E concludes, automation lifts the survivor's wage by removing the cheapest part. Assumption, reversal, example, conclusion.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It opens the argument with the intuitive claim the paragraph exists to overturn, that automation lowers the survivor's pay."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It reverses B with yet, the paragraph's central move, that the machine leaves the worker the more valuable half."
+      },
+      {
+        "label": "D",
+        "role": "example",
+        "why_here": "It makes C concrete with the clerk, showing advice commanding more once the cheap filing is stripped away."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the argument to its point with so, automation raising the survivor's wage by removing the cheapest work."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "C opens with yet, turning directly against B's tempting assumption, the reversal the whole argument turns on."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "given_new",
+        "explanation": "C's idea that the routine half is stripped away is D's given, and D adds the concrete clerk who now only advises."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with so, gathering the example and the reversal into the argument's concluding point about wages."
+      }
+    ],
+    "violation_named": "Sentence A is topically related but structurally alien. The core argues one thing, that automation can raise the pay of the worker it does not replace, by removing the cheap part of the task. A raises a different matter entirely, the retraining that displaced workers must undergo to find new jobs elsewhere. It is squarely about automation and workers, and it fits no relation in this argument's chain.",
+    "why_it_breaks": "The argument is about the survivor, the worker still doing the job, whose wage rises. A is about the displaced, the worker whose task is gone, who must retrain. These are different people and a different question. No core sentence sets up displacement or retraining, and E's survivor is the argument's whole concern. A shares the topic and could open a paragraph on labour churn, but there is no discourse relation by which it attaches to a claim about the surviving worker's wage.",
+    "trap_exposed": "A is on theme and well placed to deceive. It shares machine, task, worker and the economy with the core, and as an opening it looks like a natural premise about automation's effects. The overlap and the opening position are the bait. But trace the argument's subject: every core sentence is about the worker who stays and grows more valuable, while A is about the worker who leaves and must retrain. Same topic, different question, no join. On topic is not in structure.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states a view the paragraph rejects, so a reader who takes it for the author's claim may cut it as mistaken.",
+        "what_breaks": "Without B there is no assumption to reverse: C's yet turns against a claim the paragraph never made."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its two part contrast, routine half against judgement half, is the densest sentence, so its seat is hard to fix before building.",
+        "what_breaks": "Without C the reversal is gone, and D's clerk illustrates a point the paragraph never actually turned to."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "D and A both give a worker level picture of automation, so a hurried read may hold both as candidates and guess.",
+        "what_breaks": "Without D the argument loses its only concrete illustration, and E's abstract conclusion rests on no shown case."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its neat closing paradox, lifting the wage even as it erases the task, has a polished register unlike the plainer sentences.",
+        "what_breaks": "Without E the argument states its reversal and its example but never lands its point about the survivor's wage."
+      }
+    ],
+    "detection_habit": "Name the exact question the argument answers, then check each sentence answers the same one. An intruder can share every keyword and still ask a different question, and a different question is a different paragraph."
+  },
+  "mentor": {
+    "challenge": "One sentence here is about workers who lose the job. The others are about the worker who keeps it. Same topic, different question. Find the branch.",
+    "takeaway": "A sentence can share every word and still ask a different question. The question decides the paragraph, not the vocabulary."
+  }
+}

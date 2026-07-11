@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0003",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Ice That Remembers the Air",
+    "theme": "how bubbles trapped in glacial ice record ancient atmospheres",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "B",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 2,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 1
+    },
+    "traps": {
+      "primary": "none",
+      "secondary": "none",
+      "description": "No engineered trap. The outlier is a true, general definitional statement about the scientific method that sits above the specific ice core narrative the four sentences build."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "candidate_model_maintenance", "coherence_monitoring"],
+    "mission": "notice_topic_stability",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "tell a general definitional claim apart from the specific process a paragraph is describing",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General earth science of ice cores; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Easy tier: a specific expository account of how ice cores preserve air. The outlier is a correct, textbook generalisation about how science works, dropped into the specific process. Teaches general versus specific. Outlier at A. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Science advances by testing predictions against evidence, and a hypothesis survives only as long as the data allow it to."
+    },
+    {
+      "label": "B",
+      "text": "Each winter's snowfall settles on a glacier and is slowly pressed into ice by the weight of the snow that falls above it."
+    },
+    {
+      "label": "C",
+      "text": "As the snow compacts, it traps tiny pockets of the air that surrounded it, sealing a sample of that year's atmosphere inside the ice."
+    },
+    {
+      "label": "D",
+      "text": "Drill a core down through such a glacier, and you recover those pockets layer by layer, oldest at the bottom, most recent near the top."
+    },
+    {
+      "label": "E",
+      "text": "Measuring the gases in each bubble, researchers can read the composition of the air from thousands of years before any instrument existed to record it."
+    }
+  ],
+  "outlier": "A",
+  "core_order": ["B", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence account of how ice remembers ancient air, from snowfall to reading the past. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences describe one specific process in sequence. B lays the snow down and presses it into ice, C traps the air inside it, D recovers those pockets by drilling, and E reads the ancient atmosphere from them. Formation, capture, retrieval, reading.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It begins the physical process everything else follows, the annual snow becoming glacial ice."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It follows directly from the compaction in B, adding the crucial step: the ice traps a sample of that year's air."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "It moves from nature's work to the scientist's, recovering the trapped pockets in order by drilling a core."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It states the payoff the whole process was building toward: reading an atmosphere older than any instrument."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "given_new",
+        "explanation": "B's compaction is C's given, and C adds the new fact: as the snow compacts, it seals air inside."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "D's those pockets points straight back at the trapped air C just described, moving from capture to retrieval."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "given_new",
+        "explanation": "D's recovered bubbles become E's given, and E adds what measuring them yields: the ancient air's composition."
+      }
+    ],
+    "violation_named": "Sentence A is a general statement inside a specific narrative. The four sentences trace one concrete process, snow to ice to trapped air to reading it. A makes a broad, true claim about how science works in general, at a completely different level of abstraction from the process the paragraph is describing.",
+    "why_it_breaks": "A talks about hypotheses and evidence in the abstract; the core never states a hypothesis, tests a prediction, or discusses one surviving. Every core sentence is a physical step in one method. A floats above all of them, connected to none, because it describes science as a whole rather than this particular way of reading the past.",
+    "trap_exposed": "A sounds authoritative and it shares the word evidence with the spirit of the passage, so it can feel like a fitting opening line. That is the pull of a true general statement: correctness is mistaken for belonging. But the core is specific throughout, and a sentence that could open almost any science paragraph belongs to none in particular.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the plainest sentence, describing weather rather than science, so it can look too ordinary to be load bearing.",
+        "what_breaks": "Without B the process has no beginning: there is no ice for C to trap air in, and the account starts mid step."
+      },
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Read alone it looks like a restatement of B, as though the compaction point were simply being repeated.",
+        "what_breaks": "Without C the crucial mechanism is gone, the trapping of air, and D recovers pockets the paragraph never said were there."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "D and A both mention the work of science, so a hurried read may hold both as candidates for the odd one.",
+        "what_breaks": "Without D there is no retrieval, and E reads gases from bubbles that were never brought up out of the glacier."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the longest sentence and the only one that reaches thousands of years back, so its scale feels different.",
+        "what_breaks": "Without E the process has no purpose stated: the core is drilled and the bubbles recovered, but nothing is ever read from them."
+      }
+    ],
+    "detection_habit": "When one sentence speaks in general truths and the others describe a specific process, suspect the general one. A paragraph settles at one level of abstraction, and the sentence flying above it rarely belongs."
+  },
+  "mentor": {
+    "challenge": "One sentence is true of all science. The others are true of one glacier. Only one of those two kinds of sentence builds this paragraph.",
+    "takeaway": "A general truth can be correct and still be in the wrong paragraph. Match the altitude, not just the topic."
+  }
+}

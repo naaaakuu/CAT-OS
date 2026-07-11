@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0008",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Promise That Binds Tomorrow",
+    "theme": "why a promise creates an obligation that mere prediction does not",
+    "estimated_time_sec": 115,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "A",
+      "secondary": "none",
+      "description": "Trap A: a genuinely belonging core sentence (E) is dressed oddly, opening with a bare and and shifting to the second person, to lure a shortcut reader into excluding it instead of the true definitional intruder."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "ambiguity_tolerance", "coherence_monitoring"],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "resist excluding a belonging sentence for a surface oddity while a general definition hides in plain sight",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General moral philosophy of promising; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Advanced, first Trap A. The core argues why a promise binds where prediction does not; the outlier A is a broad general definition of obligation. Meanwhile the belonging sentence E is dressed with a bare and and a second person shift to draw the eye. Outlier at A. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "An obligation, in the broadest sense, is any consideration that counts in favour of acting one way rather than another."
+    },
+    {
+      "label": "B",
+      "text": "If I merely predict that I will help you move house, I have told you something about the future that may simply turn out false."
+    },
+    {
+      "label": "C",
+      "text": "But if I promise to help, I have done something stranger: I have reached into tomorrow and placed a claim there that you may now hold against me."
+    },
+    {
+      "label": "D",
+      "text": "The prediction leaves me free to change; the promise does not, for breaking it is not being mistaken but wronging the person I bound myself to."
+    },
+    {
+      "label": "E",
+      "text": "And so the words, once said, are no longer only yours, for you have handed the other person a small piece of your own future to keep."
+    }
+  ],
+  "outlier": "A",
+  "core_order": ["B", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument for how a promise differs from a prediction, from the contrast to its point. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences argue one contrast. B gives the prediction, a claim about the future that can simply be false. C gives the promise, which places a claim in tomorrow that another may hold. D sharpens the difference, breaking a promise is wronging someone, not being mistaken. E draws the point, the words become partly the other person's. Prediction, promise, difference, point.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It opens the contrast with the first term, a prediction, which every later sentence measures the promise against."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It introduces the second term with but if I promise, setting the promise directly against B's prediction."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "It states the crux of the contrast, that breaking a promise wrongs a person where a false prediction merely errs."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the argument to its point, that a promise hands part of your future to another to keep."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "C opens with but if I promise, explicitly turning against the prediction B set up, the contrast the argument runs on."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "substitution",
+        "explanation": "D's the prediction and the promise stand in for the two cases B and C described, weighing them against each other."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with and so, drawing D's difference to the conclusion, the promised words becoming partly the other's."
+      }
+    ],
+    "violation_named": "Sentence A is a general definition inside a specific argument. The core argues one focused contrast, the promise against the prediction, in the first person, with a claim, a distinction and a point. A defines obligation in the broadest sense, a textbook generalisation that stands above the particular contrast the four sentences are making.",
+    "why_it_breaks": "The argument never needs a definition of obligation in general; it needs the difference between two specific speech acts. A's broad definition connects to nothing: no core sentence takes up the abstract notion of a consideration counting in favour of acting. It could open a general essay on ethics. This paragraph is a tight case about promising, and a definition pitched at the whole field has no join within it.",
+    "trap_exposed": "Two things are happening. The true intruder A is disguised as a dignified opening line, the kind of definition a philosophy paragraph often begins with, so its generality reads as a frame rather than a fault. Meanwhile the belonging sentence E is dressed to look odd, opening with a bare and so and switching to you, giving a shortcut reader a surface reason to cut it. Resist both. E carries the argument's point and joins D by substitution; A defines a whole field and joins nothing.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its everyday example of helping someone move can look too casual to belong beside the abstract sentences.",
+        "what_breaks": "Without B the contrast has only one term: C's but if I promise turns against a prediction the paragraph never made."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its dense image of reaching into tomorrow is the most abstract sentence, and its exact place is hard to fix before building.",
+        "what_breaks": "Without C the promise itself is missing, and D contrasts the prediction with a claim the paragraph never introduced."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "D and A both make general statements about obligation, so a hurried read may hold both as candidates and guess.",
+        "what_breaks": "Without D the sharp difference between wronging and erring is gone, and E's conclusion rests on a distinction never drawn."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "This is the planted decoy: its bare opening and its switch to you make it feel tonally out of step with the rest.",
+        "what_breaks": "Without E the argument states its difference but never lands its point, that a promise gives part of your future away."
+      }
+    ],
+    "detection_habit": "A surface oddity is a costume, not a verdict, and a dignified general definition is often the real intruder. Build the argument first, then keep the sentence that carries its point and cut the one that defines the whole field."
+  },
+  "mentor": {
+    "challenge": "One sentence here dresses oddly but does real work. Another dresses respectably and does none. Judge by the work, not the dress.",
+    "takeaway": "The odd looking sentence often belongs, and the textbook definition often does not. Structure hides under style."
+  }
+}

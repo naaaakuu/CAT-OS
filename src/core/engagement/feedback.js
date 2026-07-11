@@ -26,7 +26,7 @@
  */
 
 import { STORES } from '../storage/storage-adapter.js';
-import { configureAudio, playSound, unlockAudio, queueWelcome } from './audio.js';
+import { configureAudio, playSound, unlockAudio, queueWelcome, configureFocusNoise } from './audio.js';
 
 /*
  * The cue table — the single source of truth mapping a semantic moment
@@ -67,26 +67,35 @@ const state = {
   haptics: true,
   sounds: false,
   volume: DEFAULT_VOLUME,
+  focusNoise: false,
+  focusVolume: 0.35,
   installed: false,
   welcomeArmed: false, // the opening chime is queued at most once per app load
 };
 
 export async function initFeedback(storage) {
   try {
-    const [h, s, v] = await Promise.all([
+    const [h, s, v, fn, fv] = await Promise.all([
       storage.get(STORES.SETTINGS, 'haptics'),
       storage.get(STORES.SETTINGS, 'sounds'),
       storage.get(STORES.SETTINGS, 'sound-volume'),
+      storage.get(STORES.SETTINGS, 'focus-noise'),
+      storage.get(STORES.SETTINGS, 'focus-volume'),
     ]);
     if (typeof h?.value === 'boolean') state.haptics = h.value;
     if (typeof s?.value === 'boolean') state.sounds = s.value;
     if (typeof v?.value === 'number' && Number.isFinite(v.value)) {
       state.volume = Math.max(0, Math.min(1, v.value));
     }
+    if (typeof fn?.value === 'boolean') state.focusNoise = fn.value;
+    if (typeof fv?.value === 'number' && Number.isFinite(fv.value)) {
+      state.focusVolume = Math.max(0, Math.min(1, fv.value));
+    }
   } catch {
     /* defaults stand; feedback is never worth an error */
   }
   configureAudio({ enabled: state.sounds, volume: state.volume });
+  configureFocusNoise({ enabled: state.focusNoise, volume: state.focusVolume });
   // The opening chime sounds on the first gesture — armed once per load, so
   // re-reading prefs (e.g. after a backup import) never replays it.
   if (state.sounds && !state.welcomeArmed) {
@@ -96,7 +105,13 @@ export async function initFeedback(storage) {
 }
 
 export function feedbackPrefs() {
-  return { haptics: state.haptics, sounds: state.sounds, volume: state.volume };
+  return { 
+    haptics: state.haptics, 
+    sounds: state.sounds, 
+    volume: state.volume,
+    focusNoise: state.focusNoise,
+    focusVolume: state.focusVolume
+  };
 }
 
 export async function setFeedbackPref(storage, key, value) {
@@ -111,6 +126,14 @@ export async function setFeedbackPref(storage, key, value) {
     state.volume = Math.max(0, Math.min(1, Number(value) || 0));
     configureAudio({ volume: state.volume });
     await storage.put(STORES.SETTINGS, { id: 'sound-volume', value: state.volume });
+  } else if (key === 'focusNoise') {
+    state.focusNoise = !!value;
+    configureFocusNoise({ enabled: state.focusNoise });
+    await storage.put(STORES.SETTINGS, { id: 'focus-noise', value: state.focusNoise });
+  } else if (key === 'focusVolume') {
+    state.focusVolume = Math.max(0, Math.min(1, Number(value) || 0));
+    configureFocusNoise({ volume: state.focusVolume });
+    await storage.put(STORES.SETTINGS, { id: 'focus-volume', value: state.focusVolume });
   }
 }
 

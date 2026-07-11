@@ -4,6 +4,118 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.12.0 — 2026-07-11 — Odd One Out
+
+The fourth VARC module, built faithfully to `ODD_MAN_OUT_BIBLE.md`. The
+durable skill is **structural reading over elimination tricks**: the
+outlier is on-topic but out-of-structure, defined by the discourse
+relation it cannot enter, never by the topic it is about (Bible §4).
+This is not an Odd One Out question bank; it is a complete learning
+system that trains a reader to build the paragraph first and let the
+stranger reveal itself.
+
+### The learning journey (not a question bank)
+- **A first-time introduction** (`/ooo` on first open, then `/ooo/about`
+  forever, resettable from Settings → Learning): no questions until the
+  learner understands what Odd One Out is, why CAT asks it, why beginners
+  give away marks by hunting for a faulty sentence, why building the
+  paragraph first is the whole method, and how paragraphs naturally
+  develop ideas (old information carrying new). Calm, illustrated,
+  progressive-reveal sections in very simple English.
+- **An eight-tier ladder** — Foundation, Easy, Medium, Advanced, CAT,
+  CAT+, 99 Percentile, Premium — each tier **teaches one structural
+  reading skill** before the next raises the pressure (see the paragraph
+  inside the five → build before you judge → same words different job →
+  test the ties not the tone → hold the whole paragraph → both traps at
+  once → the finest branch → everything at once). The primary difficulty
+  lever is topical overlap between outlier and core (Bible §6). Tiers
+  recommend; nothing locks.
+- **The Paragraph Builder**: at the first three tiers the learner does
+  not hunt the odd sentence at all. They arrange the four connected
+  sentences on the shared `<cat-jumble-board>` (placing four of five),
+  and the sentence left out becomes the answer — **construction before
+  elimination** (Bible §7 remediation), until the protocol is a reflex.
+  From Advanced up the surface is the exam's (tap the sentence that
+  stands apart), with a read-back before locking at every tier.
+- **Today's Mission before every item** ("Protect paragraph continuity.",
+  "Find the logical branch.", "Build the paragraph before eliminating.",
+  …) — eight missions, rotated intelligently because each item declares
+  the skill its design foregrounds.
+- **The Think button**: a floating coach available while solving. It
+  never hints — it asks the coaching questions strong structural readers
+  ask themselves (which four belong together, does one sentence begin a
+  different discussion, is it broken or simply from another paragraph),
+  two tuned to the item's mission plus a deterministic core.
+
+### Teaching, not marking (the §12 answer experience)
+Never a bare verdict. Every answer teaches in layers: **the paragraph
+the four sentences build** (the four gently join into readable prose,
+its spine named), **each sentence doing its job** (the discourse role
+rail, with the cohesive tie between each pair of neighbours named),
+**why one sentence stands apart** (the outlier visibly separates, its
+§4 violation type named, and the reason it cannot attach), **the trap
+exposed** (why the outlier looked like it belonged, and when the learner
+excluded a belonging sentence, the exact §7 way-of-reading that produced
+the pick), and **make it a habit**. Explanations grow richer with tier —
+tie names from Medium, the cohesion and locus anatomy from Advanced,
+the full difficulty anatomy at the elite tiers.
+
+### The mentor and Reading DNA (the bounded §8 extension)
+- An Odd-One-Out **Reading DNA** (`core/mentor/ooo-dna.js`) exposes
+  exactly the four new traits the Bible sanctions and no more:
+  coherence-monitoring (the local vs global locus split),
+  relatedness-vs-belonging (the topical-overlap split),
+  candidate-model-maintenance (build quality and quick exclusions that
+  did not hold), and ambiguity-tolerance (the Trap A decoy). Every wrong
+  pick is a core sentence carrying its own §7 tag, so misses aggregate by
+  named solver pattern with no approximation. All evidence-floored and
+  banned-word-linted, exactly like the RC, PJ and PS mentors. Growth
+  gains a "How you detect" section.
+- One lesson per set (`core/mentor/ooo-lesson.js`), same learning-store
+  shape, so a coherence-monitoring insight can open tomorrow's reading
+  session as a twenty-second recall (the Bible frames Odd One Out as
+  comprehension monitoring, the metacognitive layer of all reading).
+
+### Content: 20 items, all eight tiers, Bible-governed
+`content/schema/ooo.schema.v1.json` encodes the Bible's §13 metadata:
+the five sentences, the outlier and the core order, `spine_type` and
+`nucleus`, the §4 a–g `violation_type` taxonomy, the §6
+`difficulty_vector` with `topical_overlap` as the primary lever and
+`violation_locus` (local/global/mixed), the two engineered `traps`
+(A = belonging-looks-odd, B = outlier-looks-belonging), the Halliday &
+Hasan `cohesion_signals`, and the §11 `validation` gates (uniqueness,
+reconstruction, heuristic-adversarial, trap audit) which all pass to
+ship. The bank: 20 original five-sentence items across 12 genres and all
+seven violation types, outlier positions balanced exactly 5/5/5/5/5 (no
+answer-position leak on a TITA type), and heuristic-adversarial from the
+medium tier up (a pure surface-heuristic solver gets those items wrong,
+Bible §10). Format (5 sentences, TITA, +3/0) is carried as configuration
+with a `format_verified` note, never a constant. All enforced
+mechanically — loader consistency checks + batch-level fairness checks.
+
+### Reuse, not duplication
+- OOO sessions/attempts persist to the **same** stores as RC, PJ and PS
+  (`module: "ooo"`), so streaks, XP, levels, achievements, backup and
+  restore cover detection with **zero** storage changes.
+- Reuses `<cat-jumble-board>` (extended additively with an optional
+  `maxPlaced` cap and an `excluded` reveal state — PJ passes neither and
+  behaves exactly as before), the progress/timer/XP components, the
+  celebration surface, and the existing audio language (**no new
+  sounds**). Intro, mission, Think and teaching CSS shared with PJ/PS via
+  grouped selectors — no component duplicated, no working file renamed.
+- Reading Comprehension, Para Jumbles and Para Summary are untouched
+  except for shared, additive surfaces (Growth section, Practice list,
+  Settings row, Home recent-practice label, loader + verify extensions).
+- `tools/verify.mjs` extended: OOO schema + consistency, registry
+  mirror, precache coverage, batch fairness (outlier-position spread,
+  violation-type variety, adversarial-flag enforcement), and a full OOO
+  engine/voice/missions/think/DNA/lesson dry run.
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** Odd One Out ships at
+0.12.0, reusing the sentence-ordering interaction that Para Jumbles
+introduced (as the 0.7.0 plan anticipated). Vocabulary remains the last
+module in the V1.x ladder.
+
 ## 0.11.0 — 2026-07-11 — Para Summary
 
 The third VARC module, built faithfully to `PARA SUMMARY BIBLE.md`. The

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0011",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Map That Edits the City",
+    "theme": "how navigation apps quietly reshape the streets they claim only to describe",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B: the intruder joins one neighbour smoothly by a shared demonstrative and the shared word route, but switches the thread from the app reshaping streets to the app protecting privacy, a purpose no other sentence takes up."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "candidate_model_maintenance", "relatedness_vs_belonging"],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "catch an intruder that joins one sentence smoothly yet serves no purpose the whole paragraph is building",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General technology ethics of navigation apps; no specific product or figure is asserted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "CAT tier, local smoothness. The intruder D reads perfectly after C via a shared demonstrative, but its purpose, privacy, is a thread the paragraph never runs. Only the global purpose test convicts it. Outlier at D. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A navigation app presents itself as a neutral mirror, a picture of the roads exactly as they are, offered to whoever asks the way."
+    },
+    {
+      "label": "B",
+      "text": "But the mirror is consulted by millions at once, and when it names one street the fastest, it sends a flood of cars that the street was never built to hold."
+    },
+    {
+      "label": "C",
+      "text": "So the description changes the thing described: the quiet lane becomes a thoroughfare, the model updates, and tomorrow's map now advises against the road today's map created."
+    },
+    {
+      "label": "D",
+      "text": "That route data, moreover, is carefully anonymised before it leaves the phone, so that no single journey can be traced back to the person who made it."
+    },
+    {
+      "label": "E",
+      "text": "The mirror, in other words, is a hand, and every driver who trusts it to read the city is also, unknowingly, helping to rewrite it."
+    }
+  ],
+  "outlier": "D",
+  "core_order": ["A", "B", "C", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument that the map reshapes the city it claims only to show, from mirror to hand. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences argue one idea. A gives the app's claim, a neutral mirror of the roads. B undercuts it, the mirror moves millions and floods a street. C states the crux, the description changes the thing described. E lands the point, the mirror is a hand and every driver helps rewrite the city. Claim, undercut, crux, point, one continuous thread about description becoming action.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It sets the claim the whole argument dismantles, the app as a neutral mirror of the roads as they are."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It turns against A with but, showing the mirror is consulted at a scale that changes what it shows."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It states the crux the paragraph is built on, the description altering the described, and its so ties it to B."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the thread to its point, the mirror is a hand, echoing A's image to close the argument."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "B opens with but, turning against A's neutral mirror to begin the argument that it is nothing of the kind."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "C opens with so, drawing the crux directly from B's flood of cars, the description now changing the described."
+      },
+      {
+        "from": "C",
+        "to": "E",
+        "tie": "substitution",
+        "explanation": "E's the mirror, in other words restates the whole argument's figure, gathering C's crux into the closing point."
+      }
+    ],
+    "violation_named": "Sentence D is a thread break disguised by a smooth local join. The core runs one thread, the map reshaping the streets it claims only to describe. D switches to an entirely different concern, privacy, explaining that the route data is anonymised so journeys cannot be traced. The subject is still the navigation app, but the thread is no longer reshaping; it is protection of identity.",
+    "why_it_breaks": "The argument moves claim, undercut, crux, point, all about description becoming action. D's anonymisation serves none of that; whether journeys can be traced is irrelevant to whether the map rewrites the city. Nothing before D raises privacy and nothing after takes it up. Read alone against C it flows, because it borrows C's phrasing and topic, but held against the whole paragraph it does different work, and the argument has no seat for it.",
+    "trap_exposed": "D is the hardest kind of intruder: locally smooth, globally alien. It opens with that route data, moreover, whose demonstrative reaches back to C's road and route and whose moreover promises more of the same argument, so the join to C feels seamless. That seamless join is exactly the trap. One good local link is the cheapest thing a setter can build. Step back and ask the paragraph's purpose, description becoming action, and D's privacy point serves none of it. Hold the whole paragraph, not the neighbour.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its calm claim of neutrality can read as scene setting, so a reader deciding early may treat it as skippable.",
+        "what_breaks": "Without A the argument has nothing to overturn: B's but turns against a claim of neutrality the paragraph never voiced."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It carries two ideas, scale and overload, so before building, its single place in the chain is hard to pin.",
+        "what_breaks": "Without B the crux in C has no cause: the description changes the described, but the flood that drives the change is missing."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "C and D both open by referring back to the previous sentence and both concern route data, so both can seem candidate intruders.",
+        "what_breaks": "Without C the paragraph loses its crux entirely, and E's mirror is a hand restates a point the argument never made."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its aphoristic close, the mirror is a hand, has a heightened register that stands apart from the plainer sentences.",
+        "what_breaks": "Without E the argument states its crux but never lands its point, that every trusting driver helps rewrite the city."
+      }
+    ],
+    "detection_habit": "After a sentence joins smoothly to its neighbour, zoom out and name the paragraph's purpose. An intruder can pass the neighbour test and still fail the paragraph test, and only the second test is decisive."
+  },
+  "mentor": {
+    "challenge": "One sentence follows its neighbour perfectly and serves the paragraph not at all. A single good join is not membership. Ask what the whole is doing.",
+    "takeaway": "Local fit is necessary, never sufficient. The whole paragraph, not the nearest sentence, decides who belongs."
+  }
+}

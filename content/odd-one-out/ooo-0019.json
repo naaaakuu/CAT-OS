@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0019",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 94,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Silence That Consents",
+    "theme": "why a theory of tacit consent struggles to bind those who never chose",
+    "estimated_time_sec": 175,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "B",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 5,
+      "violation_locus": "global",
+      "abstractness_vocab": 5,
+      "length_syntax_load": 5,
+      "core_structure_strength": 4,
+      "decoy_load": 4
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "Both traps at the finest grain. Trap B: the intruder shifts from the author's critical stance to a neutral report of what the theory's defenders say, sharing every term and a connective. Trap A: a belonging critical sentence is dressed with a lone Latin tag that draws the eye."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "ambiguity_tolerance"],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "detect a micro shift from the author's own critical argument to a neutral report of others' defence",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General political philosophy of consent theory; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Premium stance shift at maximal subtlety. The core is the author's own critique of tacit consent; the intruder reports, neutrally, how defenders answer the critique, an owner and stance shift. A belonging critical sentence wears a Latin tag as decoy. Outlier at D. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The theory holds that by staying within a state's borders and enjoying its roads and its peace, a person tacitly consents to obey its laws."
+    },
+    {
+      "label": "B",
+      "text": "But consent worth the name must be refusable, and a person born inside a border, with no other habitable country freely open, has been given no genuine chance to decline."
+    },
+    {
+      "label": "C",
+      "text": "To call mere residence a choice, in this light, is to drain the word consent of the very thing that made it morally weighty, the live possibility of no."
+    },
+    {
+      "label": "D",
+      "text": "Defenders reply that the option to emigrate, however costly, preserves a real if demanding exit, and so keeps the consent authentic after all."
+    },
+    {
+      "label": "E",
+      "text": "The silence of the governed, then, may signal not agreement but entrapment, and a theory that reads it as assent mistakes a locked door for an open one, ipso facto."
+    }
+  ],
+  "outlier": "D",
+  "core_order": ["A", "B", "C", "E"],
+  "builder": {
+    "prompt": "Build the four sentence critique of tacit consent, from the theory to the verdict. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences make one critical argument in the author's voice. A states the theory to be criticised. B raises the objection, real consent must be refusable and the native born cannot refuse. C sharpens it, calling residence consent drains the word of meaning. E delivers the verdict, silence may signal entrapment, not assent. Theory, objection, sharpening, verdict, one critical voice throughout.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It states the theory the whole paragraph criticises, that remaining in a state tacitly consents to its laws."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It raises the author's objection with but, that consent must be refusable and the native born cannot decline."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It sharpens the objection, and its in this light builds on B, calling residence consent an emptying of the word."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It delivers the verdict with then, that the silence of the governed may signal entrapment rather than assent."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "B opens with but, turning the author against the theory A has just stated, beginning the critique."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "substitution",
+        "explanation": "C's in this light stands in for B's whole objection about refusability, carrying it into the sharpening."
+      },
+      {
+        "from": "C",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with then, drawing the verdict from the sharpened objection, silence as entrapment rather than assent."
+      }
+    ],
+    "violation_named": "Sentence D is a stance shift so fine it changes only the owner of the claim. The core is the author's own critique, one continuous voice objecting to the theory. D steps out of that voice to report, neutrally, what the theory's defenders reply, that emigration preserves a real exit. It is reportage of the other side, dropped into an argument that is entirely the author's own case against the theory.",
+    "why_it_breaks": "The critique moves theory, objection, sharpening, verdict, each step the author's own. D introduces a counter voice the paragraph neither answers nor absorbs; E's verdict follows straight from C's sharpening, not from D's defence, and nowhere does the author rebut the emigration reply. A critical argument can quote an opponent, but only to turn on it, and the core never turns on D. Left standing, D asserts the defenders' conclusion, and so keeps the consent authentic after all, which flatly contradicts the verdict E reaches. It is the other side's voice with no reply, and the argument has no seat for it.",
+    "trap_exposed": "This is the subtlest disguise in the set. D shares consent, exit and the theory's every term, and its defenders reply reads like the natural next beat of a philosophical argument, weighing an objection. That expectation is the trap: we assume the author raises the reply to answer it. But read the direction of the voice. A, B, C and E are one continuous critique; D alone speaks for the defence and is never answered. Meanwhile E is dressed with a lone Latin tag, ipso facto, that tempts a shortcut cut. Track ownership: whose claim is each sentence. Four are the author's. D is the opponents', unanswered, and its conclusion contradicts the paragraph's own.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states the view the paragraph attacks, so a reader who takes it for the author's own claim may cut it as the misfit position.",
+        "what_breaks": "Without A there is no theory to criticise, and B's but objects to a claim the paragraph never set down."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its long objection, refusability and no open country, packs two ideas, so its single seat is hard to fix before building.",
+        "what_breaks": "Without B the critique has no objection, and C's in this light sharpens a point the paragraph never raised."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "C and D both comment on whether residence counts as consent, so a hurried read may hold both and guess.",
+        "what_breaks": "Without C the objection is never sharpened, and E's verdict about a locked door rests on a claim about meaning the paragraph never made."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "This is the decoy: its closing Latin tag, ipso facto, gives it a flourish unlike the plainer sentences around it.",
+        "what_breaks": "Without E the critique states its objection but never lands its verdict, that silence may signal entrapment rather than assent."
+      }
+    ],
+    "detection_habit": "Tag every claim with its owner as you read: the author's, or a view being reported. In a one sided critique, the sentence that speaks for the other side without being answered, however matched its terms, is standing in the wrong paragraph."
+  },
+  "mentor": {
+    "challenge": "Four sentences are the author arguing. One is the other side replying, and no one answers it. Track whose voice speaks in each sentence, not what the sentence is about.",
+    "takeaway": "Whose claim is it decides belonging. An unanswered reply from the other side has no home in a one sided argument."
+  }
+}

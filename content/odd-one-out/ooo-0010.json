@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0010",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "anthropology",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Gift That Demands a Return",
+    "theme": "why a gift in many societies obliges the receiver rather than freeing them",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "A",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B: the intruder shares gift, giver and obligation and opens with a demonstrative, but shifts from the anthropologist's analytic stance to a modern moralising complaint about consumer culture."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "connective_reading"],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice a stance shift from analytic description to moral complaint under shared vocabulary",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General anthropology of gift exchange; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Advanced stance shift. The core describes gift exchange analytically; the outlier moralises about modern consumerism, sharing heavy vocabulary. Outlier at C. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "In many societies a gift is not the opposite of an exchange but a slower, subtler form of it, binding giver and receiver in a debt that time alone cannot cancel."
+    },
+    {
+      "label": "B",
+      "text": "To accept is therefore to be placed under obligation, for the object arrives carrying something of the giver that the receiver must one day answer."
+    },
+    {
+      "label": "C",
+      "text": "Today, of course, we have cheapened all this, drowning one another in thoughtless purchases that mean nothing and bind no one to anybody."
+    },
+    {
+      "label": "D",
+      "text": "A return gift too prompt looks like repayment and insults the bond; one too delayed looks like forgetting and strains it, so the timing itself carries meaning."
+    },
+    {
+      "label": "E",
+      "text": "The circle of giving, in short, is less a transfer of things than a way of keeping people tied to one another across the seasons of a life."
+    }
+  ],
+  "outlier": "C",
+  "core_order": ["A", "B", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence analysis of how the gift binds people together, from the debt to the circle. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences make one analytic argument about gift exchange. A states the thesis, a gift is a slow form of exchange that binds. B draws the obligation, accepting places you in debt. D shows the subtlety, even the timing of a return carries meaning. E concludes, the circle of giving keeps people tied across a life. Thesis, obligation, subtlety, conclusion, all in a describing, analysing voice.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It states the paragraph's thesis, the gift as a binding form of exchange, which every later sentence develops."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It draws the immediate consequence with therefore, that to accept a gift is to be placed under obligation."
+      },
+      {
+        "label": "D",
+        "role": "evidence",
+        "why_here": "It shows how fine the obligation is, the timing of a return carrying meaning, deepening B's claim with a concrete case."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It gathers the analysis into its point, the circle of giving as a way of keeping people tied across a life."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "B opens with therefore, drawing the obligation directly from A's thesis that a gift binds giver and receiver."
+      },
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "given_new",
+        "explanation": "B's obligation to answer is D's given, and D adds the new subtlety, that even the timing of the answer signifies."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with in short, gathering the analysis of obligation and timing into its concluding image of the circle."
+      }
+    ],
+    "violation_named": "Sentence C is a stance shift. The core analyses gift exchange in a describing, anthropological voice, neutral and explanatory throughout. C breaks into a moralising complaint about modern life, we have cheapened all this, thoughtless purchases that mean nothing. It judges where the paragraph explains, and it judges a different society, the modern consumer one, than the analysis describes.",
+    "why_it_breaks": "Every core sentence advances the analysis of how gifts bind; the voice never evaluates, it accounts for. C evaluates, and it evaluates our own consumer culture, which the core never discusses. It is a lament, not a link. Nothing in the analysis sets up modern purchasing, and E's circle of giving takes up C's complaint not at all. An analysing paragraph has no seat for a sentence that stops analysing to disapprove.",
+    "trap_exposed": "C is well disguised. It shares gift, cheapened and bind with the core, and its of course and today make it sound like a natural aside continuing the thought. Those are the hooks. But watch the direction of the voice: A, B, D and E describe and explain, while C complains and condemns. The words overlap; the stance reverses. A sentence that moralises inside an analysis has changed what the paragraph is doing, whatever vocabulary it carries.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the longest and most abstract sentence, so before building, its role as the thesis rather than a summary is unclear.",
+        "what_breaks": "Without A the paragraph has no thesis: B's therefore draws a consequence from a claim that was never made."
+      },
+      {
+        "label": "B",
+        "mistake_type": "connective_assumption",
+        "why_tempting": "Its opening therefore can make it feel like a mere restatement of A, easy to think the paragraph could spare.",
+        "what_breaks": "Without B the key idea of obligation is gone, and D's talk of returns and bonds rests on a debt the paragraph never established."
+      },
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its detailed rules about timing can read as an elaboration the argument does not strictly need.",
+        "what_breaks": "Without D the analysis loses its finest observation, the meaning carried by timing, and thins to a general claim."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "E and C both step back to comment on gift giving as a whole, so a hurried read may hold both and guess.",
+        "what_breaks": "Without E the analysis never lands its point, that the circle of giving keeps people tied across the seasons of a life."
+      }
+    ],
+    "detection_habit": "Decide in one word what the paragraph is doing, describing or judging, and hold it against every sentence. A sentence that switches from analysis to complaint has left the paragraph, however much of its vocabulary it keeps."
+  },
+  "mentor": {
+    "challenge": "Four sentences explain the gift. One disapproves of how we give today. Notice the moment the voice stops explaining.",
+    "takeaway": "An analysis cannot use a sentence that moralises. Track what the paragraph does, not only what it discusses."
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0016",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Molecule That Would Not Leave",
+    "theme": "what a study of persistent chemicals revealed about their reach into the body",
+    "estimated_time_sec": 155,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "B",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 5,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 5,
+      "core_structure_strength": 4,
+      "decoy_load": 4
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "Both traps at maximal camouflage. Trap B: the intruder reads like a finding but reports a sampling choice, sharing every keyword and a causal connective. Trap A: a belonging finding sentence is dressed with a parenthetical aside that draws the eye."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "candidate_model_maintenance"],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "detect a methodological choice disguised as a finding under total vocabulary overlap",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General environmental health of persistent chemicals; no specific study, chemical, or figure is asserted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Elite method versus finding, the PFAS style definitional intruder recast. The core narrates the reach of persistent chemicals; the intruder reports which tissues the team chose to sample, dressed as a result. Subtlety 5. Outlier at D. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The compounds were designed to resist heat, water, and grease, and the same stability that made them useful is what keeps them from ever breaking down."
+    },
+    {
+      "label": "B",
+      "text": "Once loose in the environment, they turned up first in rivers, then in the fish, and at last, in a recent survey, in the blood of nearly everyone tested."
+    },
+    {
+      "label": "C",
+      "text": "What alarmed the researchers was not the presence alone but the distribution: the molecules had settled into organs the body has no way to flush."
+    },
+    {
+      "label": "D",
+      "text": "To build the fullest picture, the team chose to sample liver, kidney, and brain tissue rather than blood alone, since those organs were expected to hold the most."
+    },
+    {
+      "label": "E",
+      "text": "So a chemistry meant to last a working lifetime in a pan had, in the end, taken up a far longer residence in the people who used it."
+    }
+  ],
+  "outlier": "D",
+  "core_order": ["A", "B", "C", "E"],
+  "builder": {
+    "prompt": "Build the four sentence story of how a lasting chemistry ended up lodged in the body, from design to residence. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences narrate one reach. A explains why the compounds never break down. B traces where they spread, ending in nearly everyone's blood. C states what alarmed the researchers, the molecules lodged where the body cannot flush them. E draws the point, a chemistry meant to last in a pan lasting instead in people. Design, spread, alarm, point.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "background",
+        "why_here": "It opens the narrative with the property that drives everything, the stability that keeps the compounds from breaking down."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It traces the spread that A's persistence makes possible, from rivers to fish to human blood."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It sharpens the finding, and its what alarmed the researchers marks the real result, the molecules lodged where nothing flushes them."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the narrative to its point with so, the lasting chemistry taking up residence in the people who used it."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "B's they refers to A's compounds, and its once loose carries A's persistence into the story of where they spread."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "given_new",
+        "explanation": "B's presence in the blood is C's given, and C adds the new alarm, not the presence but the distribution into unflushable organs."
+      },
+      {
+        "from": "C",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with so, gathering the persistence and the lodging into the concluding image of a long residence in people."
+      }
+    ],
+    "violation_named": "Sentence D is a method versus finding shift at its most subtle. The core narrates what was found, design, spread, alarming distribution, point. D reports a methodological choice, that the team decided to sample liver, kidney, and brain rather than blood alone. It answers how did they look, not what did they find, and it sits right beside C, whose finding is about those very organs, so the shift is almost invisible.",
+    "why_it_breaks": "C reports that the molecules had settled into organs the body cannot flush; that is the finding. D reports that the team chose to sample those organs; that is procedure. The two are a hair apart in wording and a world apart in kind. Nothing in a findings narrative is served by knowing which tissues were selected, and E's residence in people follows from C's lodging, not from D's sampling plan. D belongs in a methods section; here it is a choice masquerading as a result.",
+    "trap_exposed": "This is maximal camouflage. D shares every keyword with the core, molecules, organs, the team, tissue, and it opens with to build the fullest picture, echoing C's alarm about distribution so closely that it reads as the next beat of the finding. That near identity to C is the trap. Meanwhile C itself is dressed with a colon and a striking aside, which can draw a shortcut reader to cut it. Ask the question each sentence answers: C answers what was found, D answers how they chose to look. Remove D and the narrative stands; remove C and the finding vanishes.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its talk of heat and grease resistance can read as product description rather than the narrative's first cause.",
+        "what_breaks": "Without A the spread has no engine, and B's persistence in the environment rests on a stability the paragraph never named."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It compresses a long journey, rivers to fish to blood, into one sentence, so its single seat is hard to fix before building.",
+        "what_breaks": "Without B the story skips from a durable chemical to alarm in the organs, with the entire path into the body missing."
+      },
+      {
+        "label": "C",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "This is the decoy: its colon and its emphatic not the presence alone give it a rhetorical shape unlike the plainer sentences.",
+        "what_breaks": "Without C the real finding is gone, and E's long residence in people rests on spread alone, never on the lodging that alarmed anyone."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "E and D both round off the account of where the molecules ended up, so a hurried read may hold both and guess.",
+        "what_breaks": "Without E the narrative reaches its alarm but never lands its point, the lasting chemistry residing in the people who used it."
+      }
+    ],
+    "detection_habit": "When two adjacent sentences name the same organs, ask which reports a finding and which reports a choice. A sampling decision dressed in the vocabulary of a result is the subtlest method intruder, and only the question it answers gives it away."
+  },
+  "mentor": {
+    "challenge": "Two sentences here name the same organs, one telling you what was found there and one telling you why the team looked there. A hair apart in words, a world apart in kind.",
+    "takeaway": "A choice about where to look is not a finding about what is there. Under total overlap, the question a sentence answers is the only tell."
+  }
+}

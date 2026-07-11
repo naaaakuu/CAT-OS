@@ -19,7 +19,7 @@ src/modules/<type>/
 `context` currently carries `{ storage }` (the StorageAdapter). Modules
 receive it — they never construct adapters or import app globals.
 
-Three modules exist today, all following this shape:
+Four modules exist today, all following this shape:
 - `reading-comprehension/` — the reference implementation (Milestone 2).
 - `para-jumbles/` — the sentence-ordering journey (0.10.0). It adds one
   shared component (`ui/components/cat-jumble-board.js`) and its own core
@@ -31,8 +31,15 @@ Three modules exist today, all following this shape:
   intro/teaching CSS), brings its own core services
   (`core/engine/ps-session.js`, `core/mentor/ps-*.js`), and tags its
   records `module: "ps"` in the same stores.
+- `odd-one-out/` — the detection journey (0.12.0). It **reuses**
+  `cat-jumble-board` (extended additively with a `maxPlaced` cap and an
+  `excluded` reveal state — PJ passes neither and is unchanged) for its
+  Paragraph Builder mode, adds no other component (shares the intro,
+  mission, Think and teaching CSS with PJ/PS via grouped selectors),
+  brings its own core services (`core/engine/ooo-session.js`,
+  `core/mentor/ooo-*.js`), and tags its records `module: "ooo"` in the
+  same stores.
 
-Adding the next module (Odd One Out / Vocabulary) is: copy this shape,
-write its screens against `ui/` components, register it in `app.js`,
-add its files to the service worker's shell list. Odd One Out should
-reuse `cat-jumble-board`. No existing module changes.
+Adding the next module (Vocabulary) is: copy this shape, write its
+screens against `ui/` components, register it in `app.js`, add its files
+to the service worker's shell list. No existing module changes.

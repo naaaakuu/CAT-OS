@@ -378,6 +378,163 @@ export function psConsistencyIssues(id, item) {
   return issues;
 }
 
+/* ------------------------------------------------------------------ */
+/* Odd One Out (ooo-*) — same boundary discipline as RC, PJ and PS:    */
+/* schema validation + cross-field consistency before anything renders.*/
+/* ------------------------------------------------------------------ */
+
+/** Registry entries for practicable OOO items (accepted or in review). */
+export async function listOOOItems() {
+  const registry = await loadRegistry();
+  return (registry.items ?? []).filter(
+    (i) => i.type === 'ooo' && (i.status === 'accepted' || i.status === 'review')
+  );
+}
+
+/**
+ * Load several OOO items at once → Map(id → item). Ids that fail to
+ * load are absent from the Map, so mentor/DNA reasoning only ever
+ * rests on evidence that can still be shown.
+ */
+export async function loadOOOItems(ids) {
+  const map = new Map();
+  await Promise.all([...new Set(ids)].map(async (id) => {
+    try { map.set(id, await loadOOOItem(id)); } catch { /* skip */ }
+  }));
+  return map;
+}
+
+/** Load one OOO item by id, schema-validate it, and run consistency checks. */
+export async function loadOOOItem(id) {
+  if (!/^ooo-[0-9]{4}$/.test(id)) {
+    throw new ContentError(`"${id}" is not a valid OOO content id.`);
+  }
+  const item = await fetchJSON(`content/odd-one-out/${id}.json`);
+
+  const schema = await loadSchema(`ooo.schema.v${item.schema_version ?? 1}.json`);
+  const { valid, errors } = validate(schema, item);
+  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+
+  const issues = oooConsistencyIssues(id, item);
+  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+
+  return item;
+}
+
+/* Which tiers count as elite for the Bible's hardest-regime contract
+ * (§6: maximal camouflage; §9: the finest violations). */
+const OOO_ELITE_TIERS = ['ninety-nine', 'premium'];
+/* Tiers from which a pure surface-heuristic solver must fail (§10). */
+const OOO_ADVERSARIAL_TIERS = ['medium', 'advanced', 'cat', 'cat-plus', 'ninety-nine', 'premium'];
+
+/** OOO cross-field truths the schema can't express. Exported so
+ *  tools/verify.mjs applies the identical rules. */
+export function oooConsistencyIssues(id, item) {
+  const issues = [];
+  const m = item.meta;
+  if (m.id !== id) issues.push(`meta.id "${m.id}" ≠ file id "${id}"`);
+
+  const labels = item.sentences.map((s) => s.label);
+  if (new Set(labels).size !== labels.length) issues.push('duplicate sentence labels');
+
+  // The outlier is one of the five; the core is exactly the other four,
+  // never in presentation order start-to-finish by accident of authoring.
+  if (!labels.includes(item.outlier)) {
+    issues.push(`outlier "${item.outlier}" is not a sentence label`);
+  }
+  const coreSet = new Set(item.core_order);
+  if (coreSet.size !== 4) issues.push('core_order repeats a label');
+  if (coreSet.has(item.outlier)) issues.push('core_order contains the outlier');
+  const expectedCore = labels.filter((l) => l !== item.outlier).sort().join('');
+  if ([...coreSet].sort().join('') !== expectedCore) {
+    issues.push('core_order does not cover exactly the four non-outlier sentences');
+  }
+
+  // The nucleus is a core sentence (Bible §3): the outlier competing
+  // with the nucleus is a violation, not an identity.
+  if (!coreSet.has(m.nucleus)) {
+    issues.push(`nucleus "${m.nucleus}" is not a core sentence`);
+  }
+
+  // §12 layer 2 walks the core order, one entry per core sentence.
+  const roleLabels = item.explanation.core_roles.map((r) => r.label);
+  if (roleLabels.join('') !== item.core_order.join('')) {
+    issues.push(`core_roles covers ${roleLabels.join('')}, expected ${item.core_order.join('')}`);
+  }
+
+  // The three joins mirror consecutive core pairs, in order.
+  item.explanation.links.forEach((l, i) => {
+    if (l.from !== item.core_order[i] || l.to !== item.core_order[i + 1]) {
+      issues.push(`links[${i}] is ${l.from}→${l.to}, expected ${item.core_order[i]}→${item.core_order[i + 1]}`);
+    }
+  });
+
+  // Exclusion analysis covers exactly the four core sentences (the
+  // uniqueness test taught per sentence), never the outlier.
+  const exLabels = item.explanation.exclusion_analysis.map((e) => e.label);
+  if (new Set(exLabels).size !== exLabels.length) issues.push('exclusion_analysis repeats a label');
+  if (exLabels.includes(item.outlier)) issues.push('exclusion_analysis includes the outlier');
+  if ([...exLabels].sort().join('') !== expectedCore) {
+    issues.push('exclusion_analysis does not cover exactly the four core sentences');
+  }
+
+  // Difficulty label ↔ numeric mapping (same rule as RC/PJ/PS).
+  const n = m.difficulty_numeric;
+  const label = n <= 3 ? 'easy' : n <= 6 ? 'medium' : 'hard';
+  if (m.difficulty !== label) {
+    issues.push(`difficulty "${m.difficulty}" ≠ numeric ${n} (maps to "${label}")`);
+  }
+
+  // §11 hard gates: a shipped item passes every validator.
+  if (m.status === 'accepted' || m.status === 'review') {
+    for (const gate of ['uniqueness_of_answer', 'reconstruction_check', 'trap_audit']) {
+      if (m.validation[gate] !== 'pass') issues.push(`validation.${gate} is not "pass"`);
+    }
+  }
+
+  // §10: from medium up, surface heuristics must fail, which requires
+  // real camouflage: the adversarial gate AND meaningful overlap.
+  if (OOO_ADVERSARIAL_TIERS.includes(m.tier)) {
+    if (m.validation.heuristic_adversarial !== 'pass') {
+      issues.push(`tier "${m.tier}" requires validation.heuristic_adversarial "pass" (Bible §10)`);
+    }
+    if (m.difficulty_vector.topical_overlap < 3) {
+      issues.push(`tier "${m.tier}" needs topical_overlap ≥ 3; the outlier must be camouflaged (Bible §6)`);
+    }
+  }
+
+  // Elite contract (§6, §9): maximal camouflage and the finest violations.
+  if (OOO_ELITE_TIERS.includes(m.tier)) {
+    if (m.difficulty_vector.topical_overlap < 4) {
+      issues.push('elite item needs topical_overlap ≥ 4 (Bible §9)');
+    }
+    if (m.difficulty_vector.violation_subtlety < 4) {
+      issues.push('elite item needs violation_subtlety ≥ 4 (Bible §9)');
+    }
+  }
+
+  // Trap consistency: a planted Trap B is exactly high-overlap camouflage;
+  // a planted Trap A needs a visible decoy load to be real.
+  const traps = [m.traps.primary, m.traps.secondary];
+  if (traps.includes('B') && m.difficulty_vector.topical_overlap < 3) {
+    issues.push('Trap B declared but topical_overlap < 3 (the outlier is not camouflaged)');
+  }
+  if (traps.includes('A') && m.difficulty_vector.decoy_load < 2) {
+    issues.push('Trap A declared but decoy_load < 2 (no decoy is actually planted)');
+  }
+  if (m.traps.primary === 'none' && m.traps.secondary !== 'none') {
+    issues.push('traps.secondary set while traps.primary is "none"');
+  }
+
+  // A fair core is a strong core (Bible §5): below 3 the remaining four
+  // do not form a uniquely coherent paragraph and the item is ambiguous.
+  if (m.difficulty_vector.core_structure_strength < 3) {
+    issues.push('core_structure_strength < 3 risks a multi-answer item (Bible §5 uniqueness)');
+  }
+
+  return issues;
+}
+
 /** Cross-field truths the schema can't express. Exported so the
  *  offline verification tool applies the identical rules. */
 export function consistencyIssues(id, item) {

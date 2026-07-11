@@ -12,6 +12,12 @@
  * and makes the learner COMMIT position by position, which is where
  * the thinking happens. Tap a sentence to give it the next position;
  * tap it again to take it back (later positions close up).
+ *
+ * 0.12.0 (Odd One Out, additive): `maxPlaced` caps how many sentences
+ * can be placed (OOO builds four of five — the sentence left out IS
+ * the exclusion), and `reveal` accepts an optional `excluded` label,
+ * painted as "left out" rather than given a position. PJ passes
+ * neither and behaves exactly as before.
  */
 
 import { escapeHTML } from '../../core/utils/format.js';
@@ -20,12 +26,19 @@ class CatJumbleBoard extends HTMLElement {
   #sentences = null;
   #order = [];
   #reveal = null;
+  #maxPlaced = null;
 
   set sentences(list) {
     this.#sentences = list;
     this.#order = [];
     this.#reveal = null;
     this.#render();
+  }
+
+  /** Cap on how many sentences may hold a position (default: all). */
+  set maxPlaced(n) {
+    this.#maxPlaced = Number.isInteger(n) ? n : null;
+    this.#sync();
   }
 
   get order() { return [...this.#order]; }
@@ -50,10 +63,11 @@ class CatJumbleBoard extends HTMLElement {
 
   #toggle(label) {
     if (this.#reveal) return;
+    const cap = this.#maxPlaced ?? this.#sentences.length;
     const at = this.#order.indexOf(label);
     let action;
     if (at === -1) {
-      if (this.#order.length >= this.#sentences.length) return;
+      if (this.#order.length >= cap) return;
       this.#order.push(label);
       action = 'place';
     } else {
@@ -176,6 +190,22 @@ class CatJumbleBoard extends HTMLElement {
 
       if (this.#reveal) {
         card.setAttribute('disabled', '');
+        if (label === this.#reveal.excluded) {
+          // OOO: this sentence has no seat in the paragraph. A hit is
+          // the learner also leaving it out (or naming it directly).
+          const hit = placedAt === -1;
+          card.classList.add(hit ? 'is-hit' : 'is-miss');
+          slot.textContent = '·';
+          card.setAttribute('aria-label',
+            `Sentence ${label}: this one stands apart from the paragraph${hit ? ', as you judged' : `, but you placed it ${placedAt + 1}`}`);
+          if (!hit) {
+            const yours = document.createElement('span');
+            yours.className = 'yours';
+            yours.textContent = `You placed this ${placedAt + 1}`;
+            card.querySelector('.text').appendChild(yours);
+          }
+          continue;
+        }
         const correctAt = this.#reveal.correct_order.indexOf(label);
         const hit = placedAt === correctAt;
         card.classList.add(hit ? 'is-hit' : 'is-miss');
