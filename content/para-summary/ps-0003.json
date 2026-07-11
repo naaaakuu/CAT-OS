@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0003",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "Quiet Air Conditioners",
+    "theme": "how street trees appear to cool cities beyond their shade",
+    "estimated_time_sec": 70,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "Street trees seem to cool city streets by more than their shade explains, probably because water evaporating from their leaves draws heat out of the air.",
+      "scope": "City streets with trees; the mechanism is offered as the researchers' suspicion, not settled fact.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 1,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 1,
+      "qualifier_density": 2,
+      "domain_load": 1
+    },
+    "load_bearing": ["appear to", "suspect", "seem to"],
+    "separating_element": null,
+    "dna_traits": ["certainty_reading", "main_idea_detection", "language_precision"],
+    "mission": "notice_certainty",
+    "learning_objective": "carry a hedged claim into the summary at exactly the author's strength",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General urban ecology of tree cooling; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "The journey's first certainty item: every hedge is load bearing, and the strongest distractor simply asserts what the author only suspects. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Street trees appear to cool city neighbourhoods by more than shade alone can explain.",
+        "role": "thesis"
+      },
+      {
+        "text": "Measurements in several cities found tree-lined blocks noticeably cooler than bare ones nearby, a gap larger than their shadows could account for.",
+        "role": "evidence"
+      },
+      {
+        "text": "Researchers suspect the difference comes from water evaporating through leaves, which draws heat out of the surrounding air.",
+        "role": "support"
+      },
+      {
+        "text": "The evidence is still growing, but trees seem to work as quiet air conditioners, not just as parasols.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Trees seem to cool city streets by more than their shade explains, probably because water evaporating from their leaves removes heat from the air.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say trees do to city temperatures, and how surely does it say it?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence carry both parts, the cooling beyond shade and the likely reason?",
+        "kept": "Good. The claim and its suspected mechanism travel together here; the last sentence binds them into one idea.",
+        "drifted": "The paragraph offers a claim and a suspected cause. A sentence with only one of the two has compressed past the point where the meaning survives."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did your sentence keep the author's hedges, the appear, suspect, and seem?",
+        "kept": "Exactly right. The author never asserts the mechanism; researchers suspect it, and the evidence is still growing. Your sentence spoke at the author's own volume.",
+        "drifted": "Turning appear and suspect into plain statements makes the claim yours, not the author's. If the author hedged, the summary hedges in the same place."
+      },
+      {
+        "id": "addition",
+        "ask": "Is every part of your sentence in the paragraph, with no policy or extra facts added?",
+        "kept": "Right. The paragraph reports a finding and a suspicion, nothing more.",
+        "drifted": "Anything about what cities should plant or require comes from outside the text. True in the world is not the same as said by the author."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Trees seem to cool city streets by more than their shade explains, probably because water evaporating from leaves removes heat.",
+      "B": "Trees cool city streets well beyond what their shade achieves, because evaporation from their leaves removes heat from the air.",
+      "C": "In several cities, blocks lined with mature trees measured noticeably cooler than nearby streets that had no trees at all.",
+      "D": "Trees appear to cool streets beyond their shade, which is why many cities now require new developments to plant them."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "The paragraph says tree-lined streets are cooler than their shade alone would make them, that measurements in several cities back this up, and that researchers think the extra cooling probably comes from water evaporating through leaves, like gentle air conditioning. It says all this carefully: appear, suspect, seem. The evidence is promising but still growing.",
+      "correct_reasoning": "Option A restates the whole claim at exactly the author's volume. Seem and probably preserve the hedges; the evaporation mechanism stays a likelihood, not a fact. This is the sentence the author would sign without wincing.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "Every hedge has been removed: trees cool, evaporation removes heat, stated as settled fact. The author wrote appear, suspect and seem, and those words are part of the claim.",
+          "seductive_element": "It is the same content spoken more confidently, and confidence reads as quality.",
+          "thinking_mistake": "Certainty inflation: reporting a suspected mechanism as an established one."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This reports the measurements, which the paragraph offers as support. The point those measurements serve, that trees cool beyond shade and probably by evaporation, has gone missing.",
+          "seductive_element": "It is specific, verifiable, and sounds rigorous.",
+          "thinking_mistake": "Evidence as thesis: summarising the data instead of the claim the data carries."
+        },
+        {
+          "option": "D",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The first half is faithful, but the paragraph says nothing about city requirements or planting rules. That fact arrived from outside the text.",
+          "seductive_element": "The addition is plausible and flatters what a reader may already know about urban policy.",
+          "thinking_mistake": "Outside knowledge import: completing the paragraph with the world instead of with the author."
+        }
+      ],
+      "reading_habit": "Underline the force words as you read: appear, suspect, seem, may. The right option speaks at exactly that volume, and any option that speaks louder has changed the claim."
+    }
+  },
+  "mentor": {
+    "challenge": "This author is careful. Notice exactly how sure each sentence is, because one option will pretend to be surer.",
+    "takeaway": "If the author whispers, the summary must not shout."
+  }
+}

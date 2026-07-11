@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0012",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "literature-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Second Reading",
+    "theme": "why rereading is when a novel's craft becomes visible",
+    "estimated_time_sec": 105,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Rereading a novel is not a redundant luxury: it is when the book's construction becomes visible, once plot no longer commands attention.",
+      "scope": "Novels and their rereading; the claim corrects the dismissal in the opening sentence.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 2
+    },
+    "load_bearing": ["it is often said"],
+    "separating_element": null,
+    "dna_traits": ["author_intent", "scope_preservation", "inference_control"],
+    "mission": "watch_the_turn",
+    "learning_objective": "refuse a reported opening view, and keep the corrected claim at its stated category",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General literary theory of rereading; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "A marked turn, but the opening view is owned by it is often said, so the trap teaches owner tracking as well as turn finding. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "It is often said that rereading a novel is a luxury for people with too much time, since a story already known can hold no more surprises.",
+        "role": "concession"
+      },
+      {
+        "text": "But surprise was never the deepest thing a novel offers, and the second reading is where its real work begins.",
+        "role": "thesis"
+      },
+      {
+        "text": "Freed from the pull of what happens next, a reader starts to see how the book is made: the preparations, the echoes, the sentences doing quiet double duty.",
+        "role": "support"
+      },
+      {
+        "text": "The first reading belongs to the plot; the later ones belong to the writing.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Far from being wasted time, rereading is when a novel's construction becomes visible, once the pull of plot no longer commands the reader's attention.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph claim rereading actually does?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Is your sentence about what the second reading reveals, rather than about rereading being a luxury?",
+        "kept": "Good. The luxury view is quoted to be corrected. Your sentence stands with the author, after the but.",
+        "drifted": "The opening view belongs to it is often said, not to the author. The claim arrives after the but, and the summary lives there."
+      },
+      {
+        "id": "scope",
+        "ask": "Did your sentence stay with novels and reading, without widening to all art or all experience?",
+        "kept": "Well held. The paragraph's claim is about novels reread. Its category is part of its meaning.",
+        "drifted": "Returning to any artwork may reward attention too, but the author only claimed novels. Keeping the author's category is keeping the author's claim."
+      },
+      {
+        "id": "addition",
+        "ask": "Did you avoid advising readers how many books to read or revisit?",
+        "kept": "Right. The paragraph describes what rereading offers. It prescribes nothing.",
+        "drifted": "Advice about reading habits is a natural next step, and precisely the step the author never takes. A summary must not take it either."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Rereading novels is an indulgence for readers with time to spare, because a story already known can no longer offer surprises.",
+      "B": "Returning to any work of art a second time reveals how it was made, once its surface excitement has worn away for the viewer.",
+      "C": "Far from being wasted time, rereading is when a novel's construction becomes visible, once plot no longer commands attention.",
+      "D": "Because a novel's craft appears only on rereading, serious readers ought to read fewer new books and revisit more familiar ones."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "The paragraph quotes a common dismissal: rereading wastes time because the surprises are spent. Then it turns. Surprise was never the point. On a second reading, with the plot's pull gone, you finally see the making of the book, the planted preparations, the echoes, the sentences working twice. First readings consume the story; later readings meet the writer.",
+      "correct_reasoning": "Option C carries the corrected claim with its mechanism: construction becomes visible once plot loosens its grip. It keeps the author's category, novels, and the corrective energy of the turn, and it adds no advice. The author would sign it as fair.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the often-said view the paragraph exists to overturn. It is faithful to the opening clause and to a common belief, and it is the position the author argues against.",
+          "seductive_element": "It appears first, reads plainly, and matches what many people already think about rereading.",
+          "thinking_mistake": "Owner confusion: crediting the author with a view the author quoted in order to reject."
+        },
+        {
+          "option": "B",
+          "archetype": "category_shift",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph claims this of novels reread, where the pull of plot is the specific obstacle. Any work of art is a wider category with no plot to be freed from, and the author never went there.",
+          "seductive_element": "The generalized version sounds wiser and more complete, as broad statements often do.",
+          "thinking_mistake": "Category inflation: novels quietly become all art, and the claim becomes someone else's."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph describes what rereading reveals. It never tells readers to read fewer books or revisit more. The recommendation is the option's invention, and only on rereading also overstates the text.",
+          "seductive_element": "It converts the insight into usable advice, which feels like the paragraph's practical upshot.",
+          "thinking_mistake": "Descriptive to prescriptive: turning the author's is into an ought the author never wrote."
+        }
+      ],
+      "reading_habit": "Phrases like it is often said hang a view at arm's length. Track who owns each claim as you read, and summarise only what the author holds."
+    }
+  },
+  "mentor": {
+    "challenge": "The first sentence belongs to other people. Notice who is speaking before you decide what was said.",
+    "takeaway": "It is often said means the author is about to say otherwise."
+  }
+}

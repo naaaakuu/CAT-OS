@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0015",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "sociology",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "The Queue That Buys Nothing",
+    "theme": "credential inflation as a trap of composition",
+    "estimated_time_sec": 125,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "Credential inflation is a trap of composition: choices that are rational for each person combine into an outcome no one would choose together.",
+      "scope": "Credential inflation as the case; the composition point is what the case is said to exemplify.",
+      "certainty": "asserted",
+      "stance": "critical"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 2,
+      "domain_load": 3
+    },
+    "load_bearing": ["often", "in this sense"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "inference_control", "compression_skill"],
+    "mission": "add_nothing",
+    "learning_objective": "summarise an abstract diagnosis without converting it into advice or widening its case",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General sociology of credentialism; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Abstract diagnosis item: the summary must hold both the case and the composition idea. Traps convert to policy, stop at the mechanism, or widen to all collective action. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Jobs that once required a school certificate now often demand a degree, frequently for duties that have barely changed.",
+        "role": "setup"
+      },
+      {
+        "text": "When employers cannot easily observe skill, a credential works as a filter, and as more candidates hold one, its power to filter fades.",
+        "role": "support"
+      },
+      {
+        "text": "Each individual therefore acts sensibly in studying longer, while the queue as a whole simply grows more expensive for everyone standing in it.",
+        "role": "support"
+      },
+      {
+        "text": "Credential inflation is, in this sense, a trap of composition: choices that are rational one by one produce an outcome no one would choose together.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Rising credential requirements show how choices that make sense for each person can combine into a costly outcome that nobody would collectively choose.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say credential inflation is an example of?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence connect the individual sense of studying longer with the collective outcome nobody wants?",
+        "kept": "Good. The claim is exactly that junction: individually rational, collectively costly. Both sides must appear.",
+        "drifted": "The point is not that credentials fade or that studying is sensible. It is what those two facts make together: a trap built out of reasonable choices."
+      },
+      {
+        "id": "addition",
+        "ask": "Did your sentence stay free of solutions, blame, or advice to employers?",
+        "kept": "Right. The paragraph names a trap; it does not open the exit. Any fix belongs to the reader, not the summary.",
+        "drifted": "The author never says who should act or how. A summary that reforms hiring or education has begun writing a different paragraph."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep credential inflation as the case, without turning the claim into a law about all collective behaviour?",
+        "kept": "Well held. The composition idea is stated through this case, with in this sense holding it to the case.",
+        "drifted": "The paragraph offers one trap of composition, not a theory that societies always work this way. Keep the claim wearing its example."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Rising credential requirements show how choices that make sense for each person can combine into a costly outcome nobody wanted.",
+      "B": "Employers should stop using degrees as filters for hiring, since requiring them only makes education more expensive for everyone.",
+      "C": "When many candidates hold degrees, a degree loses its power to help employers sort skilled applicants from unskilled ones.",
+      "D": "Modern societies consistently drift into outcomes nobody wants whenever individuals are left free to choose for themselves."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "The paragraph explains a self-defeating spiral. Employers who cannot see skill directly use credentials as a filter. As more people acquire the credential, it filters less, so each sensible person studies even longer, and the whole queue pays more for the same places in line. The closing sentence names the pattern: a trap of composition, where individually rational choices add up to a collectively unwanted result.",
+      "correct_reasoning": "Option A holds the diagnosis together: the case (rising requirements) and the composition point (individually sensible, collectively costly, chosen by no one). It stays descriptive, at the paragraph's width, and would be signed by the author as the point, whole.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph diagnoses a trap; it prescribes nothing and blames no one. Telling employers what to do converts an analysis into a policy the author never argued for.",
+          "seductive_element": "It reads like the actionable version of the paragraph, and usefulness masquerades as fidelity.",
+          "thinking_mistake": "Descriptive to prescriptive: answering what should be done when the author only said what happens."
+        },
+        {
+          "option": "C",
+          "archetype": "setup_as_payoff",
+          "secondary_archetype": null,
+          "why_wrong": "Accurate, and only a step of the analysis. The fading filter explains why the spiral turns; the paragraph's claim is the trap the spiral builds. This option stops one floor below the point.",
+          "seductive_element": "It is the mechanism, precise and verifiable, and mechanisms feel like conclusions to careful readers.",
+          "thinking_mistake": "Setup as payoff: summarising the machinery instead of what the machinery was shown to produce."
+        },
+        {
+          "option": "D",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "One trap of composition becomes a standing law about modern societies and free choice. The paragraph asserts nothing that wide, and consistently makes it wider still.",
+          "seductive_element": "Grand generalities sound like the moral a summary should extract.",
+          "thinking_mistake": "Over-generalization: promoting a single diagnosed case into a theory of society."
+        }
+      ],
+      "reading_habit": "Compress an analytic paragraph by keeping its junction: the two facts the author rubs together and the spark they make. Drop either fact or add a fix, and the claim is gone."
+    }
+  },
+  "mentor": {
+    "challenge": "Every sentence here is a gear. The claim is what the gears make together, and two options will hand you just one gear.",
+    "takeaway": "Sensible for each, costly for all: hold both halves or hold nothing."
+  }
+}

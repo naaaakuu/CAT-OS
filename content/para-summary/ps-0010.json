@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0010",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Myth of the Debtless Mind",
+    "theme": "originality as transformation of inherited thought",
+    "estimated_time_sec": 110,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Originality in thought is not owing nothing to others but the distinctive transformation of what a thinker inherits.",
+      "scope": "Argued from the record of philosophy; the claim is about what originality actually consists in.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 3,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 3
+    },
+    "load_bearing": ["almost always"],
+    "separating_element": null,
+    "dna_traits": ["author_intent", "main_idea_detection", "certainty_reading"],
+    "mission": "watch_the_turn",
+    "learning_objective": "find the thesis after an unmarked turn, and refuse the opening view it corrects",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General philosophy of intellectual originality; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "First soft-turn item: the turn is carried by tells a different story, not by a however. The concession trap states the familiar ideal of self-made genius. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "We tend to praise thinkers for their originality, as if the highest achievement were to owe nothing to anyone.",
+        "role": "concession"
+      },
+      {
+        "text": "The record of philosophy tells a different story: its landmark ideas are almost always transformations of borrowed material.",
+        "role": "thesis"
+      },
+      {
+        "text": "What distinguishes the great figures is not the absence of debts but the use they make of them, the pressure they put on an inherited thought until it yields something its lender never saw.",
+        "role": "support"
+      },
+      {
+        "text": "Originality, on this view, is less a starting point than a way of handling what one receives.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Original thought is best understood not as owing nothing to others but as the distinctive transformation of what a thinker inherits.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say originality actually is?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence give the corrected view, transformation of inherited material, rather than the praised ideal it opens with?",
+        "kept": "Good. The opening ideal is there to be corrected. Your sentence stands where the author ends, not where the author starts.",
+        "drifted": "The first sentence is the view the paragraph pushes against. The claim arrives with the record of philosophy tells a different story, and the summary belongs after that turn."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep almost always, or an equivalent, rather than making every idea borrowed?",
+        "kept": "Well held. Almost always leaves room, and that room is part of the claim.",
+        "drifted": "Almost always is not always. Hardening it claims an exceptionless history the author did not assert."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence carry the correction, not just describe a debate about originality?",
+        "kept": "Right. The author takes a side: the debtless ideal misdescribes originality. A summary must take the same side.",
+        "drifted": "The paragraph is an argument, not a survey. A sentence that only says views differ has flattened the author's position out of it."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The highest intellectual achievement is the kind of thinking that stands on its own and owes nothing substantial to anyone else.",
+      "B": "All of philosophy's landmark ideas, without exception, are transformations of material that their authors borrowed from others.",
+      "C": "Great thinkers are distinguished by the use they make of borrowed ideas, which is why philosophy no longer values originality.",
+      "D": "Original thought is best understood not as owing nothing to others but as the distinctive transformation of what a thinker inherits."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "The paragraph opens with a flattering picture: the original thinker as someone who owes nobody anything. Then it turns, without a however, on the phrase tells a different story. Philosophy's great ideas are almost always reworkings of borrowed ones, and greatness lies in the reworking, in pressing an inherited thought until it gives up something new. Originality is redefined: not a debt-free starting point, but a way of handling what you receive.",
+      "correct_reasoning": "Option D states the post-turn claim with the correction intact: not the absence of debts, but their transformation. It keeps the author's corrective stance and adds no history the paragraph does not contain. It is the redefinition, compressed.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the picture the paragraph exists to correct. It appears first and it matches a widely held ideal, which makes it feel both familiar and verifiable, but the author raises it only to turn against it.",
+          "seductive_element": "It is stated plainly at the start and agrees with what most readers already believe about genius.",
+          "thinking_mistake": "Concession as thesis: summarising the view before the turn instead of the claim after it."
+        },
+        {
+          "option": "B",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The author says almost always. Without exception makes the history exceptionless, a stronger claim the paragraph deliberately avoids, and it also drops the redefinition of originality that the claim serves.",
+          "seductive_element": "Its firmness reads as clarity, and clarity reads as correctness.",
+          "thinking_mistake": "Tendency to law: converting a near-universal pattern into an absolute one."
+        },
+        {
+          "option": "C",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "The opening clause is the author's own point. The tail then claims philosophy no longer values originality, when the paragraph redefines originality precisely to keep valuing it.",
+          "seductive_element": "A verified first half buys trust that the unexamined second half quietly spends.",
+          "thinking_mistake": "The poisoned tail: accepting an option on the strength of its opening clause."
+        }
+      ],
+      "reading_habit": "Not every turn announces itself with however. Watch for quieter hinges, tells a different story, in fact, the truth is, and treat everything before the hinge as scaffolding."
+    }
+  },
+  "mentor": {
+    "challenge": "There is a turn in this paragraph, and it never says however. Find the hinge before you trust any sentence.",
+    "takeaway": "The claim lives after the turn, even when the turn whispers."
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0017",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "history",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "bible_level": "elite",
+    "title": "The Concrete That Heals",
+    "theme": "Roman marine concrete and the limits of a striking claim",
+    "estimated_time_sec": 140,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "Roman concrete appears to repair itself in seawater, so for marine construction at least, the Romans may have solved a durability problem we still pay to manage.",
+      "scope": "Marine construction explicitly; the paragraph's final clause limits the mastery to the sea.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 4,
+      "domain_load": 3
+    },
+    "load_bearing": ["appears", "may", "for marine construction at least"],
+    "separating_element": "Whether the mastery reaches beyond the sea. The paragraph limits its claim with for marine construction at least, and the nearest rival quietly extends Roman durability to engineering in general.",
+    "dna_traits": ["scope_preservation", "certainty_reading", "language_precision"],
+    "mission": "protect_scope",
+    "learning_objective": "separate two finalists by a single domain limiter",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General materials history of Roman marine concrete; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "First near-miss finalist of the ladder: option A keeps the hedge and the healing but drops the marine limiter. The separating element is named in meta. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Some Roman harbour walls have stood in seawater for two thousand years, while modern concrete piers can crumble within decades.",
+        "role": "setup"
+      },
+      {
+        "text": "Analyses of the ancient mortar point to an unusual recipe: volcanic ash and lime that react with seawater, knitting new minerals into every crack the ocean opens.",
+        "role": "evidence"
+      },
+      {
+        "text": "The material, in effect, appears to heal where modern mixtures merely erode.",
+        "role": "support"
+      },
+      {
+        "text": "For marine construction at least, the Romans may have solved a problem we are still paying to manage.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Roman concrete appears to repair itself in seawater, suggesting that for marine construction at least, the Romans may have solved a durability problem we still struggle with.",
+  "builder": {
+    "prompt": "In one sentence: what may the Romans have achieved, and exactly where?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence carry the healing idea, that the material seems to repair rather than merely resist?",
+        "kept": "Good. The self-repair is what separates this from ordinary durability, and the paragraph's claim rests on it.",
+        "drifted": "The claim is not that Roman concrete is strong but that it appears to heal. Without the healing, the two thousand years are just a curiosity."
+      },
+      {
+        "id": "scope",
+        "ask": "Did the marine limiter survive, for marine construction at least?",
+        "kept": "Exactly right. The author confines the mastery to the sea, and that clause is where this item is decided.",
+        "drifted": "Drop the marine clause and the Romans have beaten modern engineering everywhere, a claim the author carefully did not make. The limiter is the claim's edge."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did appears and may survive into your sentence?",
+        "kept": "Well held. The analyses point and suggest; nothing here is settled, and the author says so twice.",
+        "drifted": "Appears and may are the author's chosen strength. A summary that proves the healing has outrun the analyses it reports."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Thanks to mortar that knits its own cracks closed, Roman builders may have achieved a durability that modern engineering still lacks.",
+      "B": "Roman concrete appears to repair itself in seawater, suggesting the Romans may have mastered marine durability in a way we have not.",
+      "C": "Roman harbour concrete heals itself in seawater, proof that Roman engineers understood durability at sea better than we do today.",
+      "D": "Ancient Roman harbour walls have survived two thousand years of seawater while many modern concrete piers crumble within decades."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "Roman harbour walls outlast modern piers by centuries, and analyses of the old mortar suggest why: its volcanic ash and lime react with seawater, growing new minerals into each crack the sea opens. The material seems to heal itself where ours only wears away. The author draws the conclusion carefully and fences it: for building in the sea, at least, the Romans may have solved a problem that still costs us money.",
+      "correct_reasoning": "Option B is the only sentence that keeps all three load bearing pieces at once: the healing (appears to repair), the hedge (may), and the fence (marine durability, not durability in general). That last piece is the separating element, and only B holds it.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "near_miss",
+          "secondary_archetype": null,
+          "why_wrong": "Almost everything survives: the healing mortar, the may, the comparison with modern engineering. What has quietly gone is the fence. The paragraph claims mastery for marine construction at least; this option extends it to durability wherever engineering goes.",
+          "seductive_element": "It is a genuine finalist, faithful in mechanism and hedged in tone, and it reads as elegantly as the correct answer.",
+          "thinking_mistake": "Domain-limiter drop: the single clause that bounds the claim is the single thing this option loses."
+        },
+        {
+          "option": "C",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "Heals and proof replace appears and may. The domain is right, but the analyses point and suggest; they do not prove, and the author never says they do.",
+          "seductive_element": "It keeps the correct scope, which makes its overconfidence easy to overlook.",
+          "thinking_mistake": "Certainty inflation: a suggestive analysis reported as a demonstrated fact."
+        },
+        {
+          "option": "D",
+          "archetype": "setup_as_payoff",
+          "secondary_archetype": null,
+          "why_wrong": "This is the opening observation, fully accurate and merely the puzzle. The paragraph's claim is the solution the puzzle received, healing mortar and a possible Roman mastery of marine building, none of which appears here.",
+          "seductive_element": "It is the most concrete and startling fact in the paragraph.",
+          "thinking_mistake": "Setup as payoff: summarising the phenomenon and leaving the significance behind."
+        }
+      ],
+      "reading_habit": "When two options both feel right, stop comparing each to the paragraph and compare them to each other. Name the one element they differ on, then check which version the author actually wrote."
+    }
+  },
+  "mentor": {
+    "challenge": "Two of these options will survive your first read. The author left one clause to separate them. Find that clause before you choose.",
+    "takeaway": "At the top level, one limiter is the whole answer. Find the fence."
+  }
+}

@@ -912,43 +912,45 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    Para Jumbles (0.10.0) — the ordering journey.
    ============================================================ */
 
-/* ---------- The introduction: a page that breathes ---------- */
-.pj-intro {
+/* ---------- The introduction: a page that breathes ----------
+   Shared by the PJ and PS introductions (same art language, same
+   rhythm); each module keeps its own class prefix for legibility. */
+.pj-intro, .ps-intro {
   max-width: var(--measure-read);
   margin: 0 auto;
 }
-.pj-intro__hero {
+.pj-intro__hero, .ps-intro__hero {
   text-align: center;
   padding: var(--space-4) 0 var(--space-6);
 }
-.pj-intro__art {
+.pj-intro__art, .ps-intro__art {
   display: flex;
   justify-content: center;
   color: var(--color-accent);
   margin-bottom: var(--space-4);
 }
-.pj-intro__art svg { width: 5rem; height: 5rem; }
-.pj-intro__art--hero svg { width: 6.5rem; height: 6.5rem; }
-.pj-intro__art [data-draw] {
+.pj-intro__art svg, .ps-intro__art svg { width: 5rem; height: 5rem; }
+.pj-intro__art--hero svg, .ps-intro__art--hero svg { width: 6.5rem; height: 6.5rem; }
+.pj-intro__art [data-draw], .ps-intro__art [data-draw] {
   stroke-dasharray: 260;
   stroke-dashoffset: 260;
   animation: art-draw calc(var(--duration-slower) * 2) var(--ease-out) 120ms forwards;
 }
-.pj-intro__h1 {
+.pj-intro__h1, .ps-intro__h1 {
   font-family: var(--font-reading);
   font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-tight);
   margin: var(--space-2) 0;
 }
-.pj-intro__lede {
+.pj-intro__lede, .ps-intro__lede {
   font-size: var(--text-sm);
   color: var(--color-ink-2);
   max-width: 28rem;
   margin: 0 auto;
   text-wrap: balance;
 }
-.pj-intro__section {
+.pj-intro__section, .ps-intro__section {
   margin-bottom: var(--space-7);
   text-align: center;
   opacity: 0;
@@ -956,31 +958,31 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   transition: opacity var(--duration-slower) var(--ease-out),
               transform var(--duration-slower) var(--ease-out);
 }
-.pj-intro__section.is-seen { opacity: 1; transform: none; }
-.pj-intro__title {
+.pj-intro__section.is-seen, .ps-intro__section.is-seen { opacity: 1; transform: none; }
+.pj-intro__title, .ps-intro__title {
   font-family: var(--font-reading);
   font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-4);
 }
-.pj-intro__section p {
+.pj-intro__section p, .ps-intro__section p {
   font-family: var(--font-reading);
   font-size: var(--text-read);
   line-height: var(--leading-reading);
   text-align: left;
   margin-bottom: var(--para-space);
 }
-.pj-intro__section p:last-child { margin-bottom: 0; }
-.pj-intro__aside {
+.pj-intro__section p:last-child, .ps-intro__section p:last-child { margin-bottom: 0; }
+.pj-intro__aside, .ps-intro__aside {
   font-size: var(--text-xs) !important;
   font-family: var(--font-ui) !important;
   color: var(--color-ink-3);
   border-left: 2px solid var(--color-line-strong);
   padding-left: var(--space-3);
 }
-.pj-intro__cta { padding-bottom: var(--space-4); }
-.pj-intro__closing {
+.pj-intro__cta, .ps-intro__cta { padding-bottom: var(--space-4); }
+.pj-intro__closing, .ps-intro__closing {
   font-family: var(--font-reading);
   font-style: italic;
   color: var(--color-ink-2);
@@ -988,6 +990,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 
 /* ---------- The solving surface ---------- */
+.ps-challenge,
 .pj-challenge {
   font-family: var(--font-reading);
   font-size: var(--text-sm);
@@ -1024,32 +1027,34 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   margin: 0;
 }
 
-/* ---------- The teaching layer (four layers, Bible §11) ---------- */
-.pjx-verdict {
+/* ---------- The teaching layer (four layers, Bible §11) ----------
+   The .pjx/.psx pairs share one visual language: PJ and PS teach in
+   the same voice, so their surfaces rhyme by construction. */
+.pjx-verdict, .psx-verdict {
   font-weight: var(--weight-bold);
   font-size: var(--text-sm);
   color: var(--color-ink-2);
   margin: var(--space-4) 0 var(--space-2);
   animation: explanation-in var(--duration-slow) var(--ease-out) both;
 }
-.pjx-verdict.is-correct { color: var(--color-correct-ink); }
-.pjx-verdict.is-wrong   { color: var(--color-wrong-ink); }
+.pjx-verdict.is-correct, .psx-verdict.is-correct { color: var(--color-correct-ink); }
+.pjx-verdict.is-wrong, .psx-verdict.is-wrong   { color: var(--color-wrong-ink); }
 .pjx-partial {
   font-size: var(--text-xs);
   color: var(--color-ink-2);
   margin: 0 0 var(--space-2);
 }
-.pjx {
+.pjx, .psx {
   font-size: var(--text-sm);
   margin-top: var(--space-3);
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-line);
   animation: explanation-in var(--duration-slow) var(--ease-out) both;
 }
-.pjx__block { margin-bottom: var(--space-5); }
-.pjx__block > p { margin-bottom: var(--space-2); }
-.pjx__block > p:last-child { margin-bottom: 0; }
-.pjx__label {
+.pjx__block, .psx__block { margin-bottom: var(--space-5); }
+.pjx__block > p, .psx__block > p { margin-bottom: var(--space-2); }
+.pjx__block > p:last-child, .psx__block > p:last-child { margin-bottom: 0; }
+.pjx__label, .psx__label {
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
@@ -1057,7 +1062,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-ink-3);
   margin-bottom: var(--space-2);
 }
-.pjx__chip {
+.pjx__chip, .psx__chip {
   display: inline-flex;
   align-items: center;
   padding: 2px var(--space-3);
@@ -1083,7 +1088,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-variant-numeric: tabular-nums;
   margin: 0;
 }
-.pjx__link, .pjx__tempt {
+.pjx__link, .pjx__tempt, .psx__distractor {
   padding: var(--space-3);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
@@ -1091,13 +1096,13 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   background: var(--color-surface);
 }
 .pjx__link.is-had { border-color: var(--color-correct-ink); }
-.pjx__tempt.is-yours {
+.pjx__tempt.is-yours, .psx__distractor.is-yours {
   border-color: var(--color-wrong-ink);
   background: var(--color-wrong-bg);
 }
-.pjx__link p, .pjx__tempt p { margin: 0 0 var(--space-1); }
-.pjx__link p:last-child, .pjx__tempt p:last-child { margin-bottom: 0; }
-.pjx__link-head {
+.pjx__link p, .pjx__tempt p, .psx__distractor p { margin: 0 0 var(--space-1); }
+.pjx__link p:last-child, .pjx__tempt p:last-child, .psx__distractor p:last-child { margin-bottom: 0; }
+.pjx__link-head, .psx__link-head {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1109,7 +1114,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-size: var(--text-xs);
   font-variant-numeric: tabular-nums;
 }
-.pjx__device {
+.pjx__device, .psx__device {
   font-size: var(--text-2xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
@@ -1122,7 +1127,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-weight: var(--weight-semibold);
   color: var(--color-correct-ink);
 }
-.pjx__yours {
+.pjx__yours, .psx__yours {
   margin-left: auto;
   font-size: var(--text-2xs);
   font-weight: var(--weight-semibold);
@@ -1133,7 +1138,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-ink-3);
   font-style: italic;
 }
-.pjx__habit {
+.pjx__habit, .psx__habit {
   display: flex;
   gap: var(--space-3);
   padding: var(--space-4);
@@ -1141,7 +1146,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   background: var(--color-accent-subtle);
   margin-bottom: var(--space-5);
 }
-.pjx__habit-glyph {
+.pjx__habit-glyph, .psx__habit-glyph {
   flex: none;
   width: 1.9rem; height: 1.9rem;
   display: inline-flex; align-items: center; justify-content: center;
@@ -1150,7 +1155,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-accent-ink);
   font-size: var(--text-xs);
 }
-.pjx__habit-label {
+.pjx__habit-label, .psx__habit-label {
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
@@ -1158,7 +1163,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-accent);
   margin-bottom: 2px;
 }
-.pjx__habit p { margin: 0; font-size: var(--text-sm); color: var(--color-ink); }
+.pjx__habit p, .psx__habit p { margin: 0; font-size: var(--text-sm); color: var(--color-ink); }
 
 /* ---------- Anchor flash: explanation → source paragraph ---------- */
 .anchor-link {
@@ -1180,3 +1185,398 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   0%   { background: var(--color-accent-subtle); box-shadow: 0 0 0 6px var(--color-accent-subtle); }
   100% { background: transparent; box-shadow: 0 0 0 6px transparent; }
 }
+
+/* ============================================================
+   Para Summary (0.11.0) — the summary journey.
+   Shares the intro and teaching language above (.ps-intro, .psx);
+   below are the surfaces only this module has.
+   ============================================================ */
+
+/* The one skill each tier teaches, named in the journey. */
+.ps-skill {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent);
+  margin: 0 0 var(--space-1);
+}
+
+/* ---------- Today's Mission: a small vow before reading ---------- */
+.ps-mission {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-subtle);
+  margin-bottom: var(--space-4);
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.ps-mission__eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-1);
+}
+.ps-mission__title {
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-1);
+}
+.ps-mission__line {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  margin: 0;
+}
+
+/* ---------- The paragraph: a true reading surface ---------- */
+.ps-paragraph {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  margin-bottom: var(--space-5);
+  animation: explanation-in var(--duration-slow) var(--ease-out) 120ms both;
+}
+
+/* ---------- The Summary Builder: say it yourself first ---------- */
+.ps-builder {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.ps-builder__prompt {
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  margin: 0 0 var(--space-3);
+}
+.ps-builder__input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  resize: vertical;
+}
+.ps-builder__input:focus-visible { box-shadow: var(--focus-ring); }
+
+/* The learner's sentence, held while they choose. */
+.ps-yours {
+  margin: var(--space-2) 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--color-accent);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+}
+.ps-yours__eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  margin: 0 0 2px;
+}
+.ps-yours__text {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ---------- The Think button: a coach, one thumb away ---------- */
+.ps-think {
+  position: fixed;
+  right: calc(env(safe-area-inset-right) + var(--space-4));
+  bottom: calc(var(--nav-height) + env(safe-area-inset-bottom) + var(--space-4));
+  z-index: 12;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-2);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent);
+  transition: transform var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out);
+}
+.ps-think:active { transform: scale(var(--press-scale)); }
+@media (hover: hover) {
+  .ps-think:hover { background: var(--color-surface-2); }
+}
+.ps-think__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem; height: 1.4rem;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+}
+
+.ps-think-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.ps-think-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  animation: explanation-in var(--duration) var(--ease-out) both;
+}
+.ps-think-sheet__panel {
+  position: relative;
+  width: 100%;
+  max-width: var(--measure-read);
+  max-height: 75dvh;
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-5)
+           calc(env(safe-area-inset-bottom) + var(--space-5));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-2);
+  animation: ps-sheet-up var(--duration-slow) var(--ease-out) both;
+}
+@keyframes ps-sheet-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+.ps-think-sheet__eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 var(--space-1);
+}
+.ps-think-sheet__lead {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  margin: 0 0 var(--space-3);
+}
+.ps-think-sheet__list {
+  margin: 0 0 var(--space-4);
+  padding: 0 0 0 var(--space-4);
+}
+.ps-think-sheet__list li {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  margin-bottom: var(--space-3);
+}
+
+/* ---------- Your sentence against the author's ---------- */
+.ps-compare {
+  margin: var(--space-4) 0;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.ps-compare__yours {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  font-style: italic;
+  margin: 0 0 var(--space-2);
+}
+.ps-compare__ideal {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  border-left: 2px solid var(--color-accent);
+  padding-left: var(--space-3);
+  margin: 0 0 var(--space-3);
+}
+.ps-compare__lead {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  margin: 0 0 var(--space-3);
+}
+.ps-check {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-line);
+}
+.ps-check__ask {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-2);
+}
+.ps-check__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.ps-check__actions .btn--quiet {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+}
+.ps-check__note {
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  animation: explanation-in var(--duration) var(--ease-out) both;
+}
+.ps-check__note.is-kept {
+  background: var(--color-correct-bg);
+  color: var(--color-correct-ink);
+}
+.ps-check__note.is-drifted {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+/* ---------- The teaching layer: PS-only pieces ---------- */
+/* The paragraph, its thesis lit, compressing into one line. */
+.psx__paragraph {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  margin: 0 0 var(--space-2);
+}
+.psx__sentence--thesis {
+  background: linear-gradient(transparent 62%, var(--color-accent-subtle) 62%);
+  animation: ps-thesis-in calc(var(--duration-slower) * 2) var(--ease-out) both;
+}
+@keyframes ps-thesis-in {
+  from { background-size: 0% 100%; }
+  to   { background-size: 100% 100%; }
+}
+.psx__sentence--thesis { background-repeat: no-repeat; background-size: 100% 100%; }
+.psx__role {
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  white-space: nowrap;
+  margin: 0 var(--space-2) 0 var(--space-1);
+  vertical-align: super;
+}
+.psx__implicit {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  font-style: italic;
+}
+.psx__compress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+  color: var(--color-accent);
+  animation: ps-compress-in var(--duration-slower) var(--ease-out) 300ms both;
+}
+@keyframes ps-compress-in {
+  from { opacity: 0; transform: translateY(-6px) scaleX(0.8); }
+  to   { opacity: 1; transform: none; }
+}
+.psx__compress-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-line-strong);
+}
+.psx__compress-glyph { font-size: var(--text-sm); line-height: 1; }
+.psx__ideal {
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  border-left: 2px solid var(--color-accent);
+  padding-left: var(--space-3);
+  margin: 0 0 var(--space-3);
+  animation: explanation-in var(--duration-slower) var(--ease-out) 500ms both;
+}
+.psx__meaning {
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+}
+
+/* Why the best answer holds. */
+.psx__best {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3);
+  border: 1px solid var(--color-correct-ink);
+  border-radius: var(--radius-md);
+  background: var(--color-correct-bg);
+  margin-bottom: var(--space-2);
+}
+.psx__best-letter {
+  flex: none;
+  width: 1.6rem; height: 1.6rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-correct-ink);
+  color: var(--color-correct-bg);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+}
+.psx__best-text {
+  font-size: var(--text-sm);
+  color: var(--color-correct-ink);
+  margin: 0;
+}
+.psx__test {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  font-style: italic;
+}
+
+/* The wrong options, each with its distortion named. */
+.psx__distractor-letter {
+  flex: none;
+  width: 1.4rem; height: 1.4rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+}
+.psx__distractor.is-yours .psx__distractor-letter {
+  background: var(--color-wrong-ink);
+  color: var(--color-wrong-bg);
+}
+.psx__lure {
+  color: var(--color-ink-3);
+  font-size: var(--text-xs);
+}
+.psx__thinking {
+  color: var(--color-ink-3);
+  font-size: var(--text-xs);
+  font-style: italic;
+}
+
+/* The separating element (elite) and the shape underneath. */
+.psx__separating {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  border-left: 2px solid var(--color-warning);
+  padding-left: var(--space-3);
+}
+.psx__apexline {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+}
+.psx__loadbearing {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+}
+.psx__word {
+  display: inline-flex;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.psx__takeaway { margin-top: var(--space-2); }

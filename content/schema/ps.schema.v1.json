@@ -1,0 +1,325 @@
+{
+  "$id": "ps.schema.v1",
+  "title": "CAT OS Para Summary content item, schema v1",
+  "description": "One Para Summary item: a source paragraph of three to six sentences and four candidate summaries, exactly one of which survives the meaning-preservation test (PARA SUMMARY BIBLE §8, the one-answer guarantee). The metadata implements the Bible's operational core: the apex claim with its scope, certainty and stance fixed BEFORE options were written (§3, §10), the paragraph architecture (§2), the eight difficulty dials (§5), and the Bible's five levels carried as bible_level alongside the eight-step product tier. Every wrong option carries exactly one named distortion archetype from the §7 palette (a second, subtle one is permitted only at elite level), and each archetype maps 1:1 to a mentor pattern in src/core/mentor/ps-voice.js, so the §6 error taxonomy is the shared vocabulary of feedback, Mistake diagnosis and Reading DNA (§13). ideal_summary and builder power the Summary Builder mode: the learner writes their own one sentence summary, then checks it against the ideal on the item's own checks (core idea, scope, certainty, additions, stance). format is CONFIGURATION with a verification note, never a constant, because CAT's Para Summary format changes per cycle (Bible, format assumption). Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": ["schema_version", "meta", "paragraph", "ideal_summary", "builder", "question", "mentor"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+
+    "meta": {
+      "type": "object",
+      "required": [
+        "id", "type", "version", "status", "quality_score",
+        "genre", "difficulty", "difficulty_numeric", "tier", "bible_level",
+        "title", "theme", "estimated_time_sec", "format",
+        "architecture", "apex", "turn", "difficulty_dials",
+        "load_bearing", "separating_element", "dna_traits", "mission",
+        "learning_objective", "source", "date_added", "batch_id",
+        "prompt_version", "reviewer_notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id":      { "type": "string", "pattern": "^ps-[0-9]{4}$" },
+        "type":    { "const": "ps" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status":  { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "quality_score": { "type": "integer", "minimum": 0, "maximum": 100,
+          "description": "The Bible §11 rubric score. Items below 85 do not ship; automatic-fail conditions override any score." },
+        "genre": {
+          "enum": [
+            "philosophy", "economics", "political-theory", "history",
+            "science", "sociology", "arts-culture", "literature-theory",
+            "psychology", "anthropology", "technology-ethics", "environment"
+          ]
+        },
+        "difficulty": { "enum": ["easy", "medium", "hard"] },
+        "difficulty_numeric": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "tier": {
+          "enum": [
+            "foundation", "easy", "medium", "advanced",
+            "cat", "cat-plus", "ninety-nine", "premium"
+          ]
+        },
+        "bible_level": {
+          "enum": ["foundation", "intermediate", "advanced", "cat", "elite"],
+          "description": "The Bible §5 level this item is calibrated to. The eight product tiers map onto these five levels; the loader enforces the mapping."
+        },
+        "title": { "type": "string", "minLength": 3,
+          "description": "A quiet display name for lists and the Learning Page. Must never hint at the answer." },
+        "theme": { "type": "string", "minLength": 3 },
+        "estimated_time_sec": { "type": "integer", "minimum": 45, "maximum": 240 },
+        "format": {
+          "type": "object",
+          "required": ["option_count", "response", "negative_marking", "format_verified"],
+          "additionalProperties": false,
+          "properties": {
+            "option_count":     { "const": 4 },
+            "response":         { "enum": ["MCQ", "TITA"] },
+            "negative_marking": { "type": "boolean" },
+            "format_verified":  { "type": "string", "minLength": 4,
+              "description": "When and against what the format defaults were last verified (Bible: confirm the current format against a recent official paper). Never present format as timeless fact." }
+          }
+        },
+        "architecture": {
+          "enum": [
+            "claim_support_restatement", "concession_turn_thesis",
+            "problem_analysis_implication", "two_views_adjudication",
+            "cause_effect_conclusion", "observation_explanation_generalization",
+            "phenomenon_mechanism_significance"
+          ],
+          "description": "The paragraph's shape (Bible §2). Vary across a batch; over-using concession_turn_thesis teaches however-hunting and defeats the skill (§14)."
+        },
+        "apex": {
+          "type": "object",
+          "required": ["claim", "scope", "certainty", "stance"],
+          "additionalProperties": false,
+          "properties": {
+            "claim":     { "type": "string", "minLength": 30,
+              "description": "The apex claim, stated plainly. Fixed before any option was written (§10, first Always rule)." },
+            "scope":     { "type": "string", "minLength": 15,
+              "description": "How far the claim reaches, with its limiters named." },
+            "certainty": { "enum": ["asserted", "hedged", "attributed", "mixed"] },
+            "stance":    { "enum": ["neutral", "approving", "critical", "corrective", "skeptical", "cautionary"] }
+          }
+        },
+        "turn": {
+          "type": "object",
+          "required": ["present", "marker"],
+          "additionalProperties": false,
+          "properties": {
+            "present": { "type": "boolean" },
+            "marker":  { "type": ["string", "null"],
+              "description": "The turn word if the turn is marked (but, however, yet). null when the turn is unmarked or absent." }
+          }
+        },
+        "difficulty_dials": {
+          "type": "object",
+          "required": [
+            "abstraction", "syntax", "turn_subtlety", "distractor_closeness",
+            "live_options", "stance_subtlety", "qualifier_density", "domain_load"
+          ],
+          "additionalProperties": false,
+          "description": "The Bible §5 dials. Difficulty is a setting across all of them, never one number.",
+          "properties": {
+            "abstraction":          { "type": "integer", "minimum": 1, "maximum": 5 },
+            "syntax":               { "type": "integer", "minimum": 1, "maximum": 5 },
+            "turn_subtlety":        { "type": "integer", "minimum": 1, "maximum": 5 },
+            "distractor_closeness": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "live_options":         { "type": "integer", "minimum": 1, "maximum": 3,
+              "description": "How many options are genuinely plausible to a prepared reader. 2 or more from CAT level up; elite items end with two near-identical finalists." },
+            "stance_subtlety":      { "type": "integer", "minimum": 1, "maximum": 5 },
+            "qualifier_density":    { "type": "integer", "minimum": 0, "maximum": 5 },
+            "domain_load":          { "type": "integer", "minimum": 1, "maximum": 5 }
+          }
+        },
+        "load_bearing": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 2 },
+          "description": "The exact scope and certainty words a faithful summary must carry (only, may, tends to, where fares stayed low). Empty at foundation is allowed; the closed class of function words that decide items (§13, vocabulary)."
+        },
+        "separating_element": {
+          "type": ["string", "null"],
+          "description": "Elite items only: the single element separating the correct answer from its nearest rival, named in one sentence (§5, §7). If a generator cannot name it, the item is ambiguous, not elite. null below elite."
+        },
+        "dna_traits": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "main_idea_detection", "scope_preservation", "certainty_reading",
+              "author_intent", "evidence_vs_thesis", "compression_skill",
+              "surface_matching", "pattern_matching", "inference_control",
+              "language_precision"
+            ]
+          }
+        },
+        "mission": {
+          "enum": [
+            "find_the_thesis", "protect_scope", "ignore_examples",
+            "notice_certainty", "evidence_vs_conclusion", "hold_the_stance",
+            "watch_the_turn", "add_nothing", "keep_qualifiers",
+            "match_ideas_not_words"
+          ],
+          "description": "The one reading skill this item foregrounds. Shown as Today's Mission before solving; copy lives in src/core/mentor/ps-voice.js."
+        },
+        "learning_objective": { "type": "string", "minLength": 10 },
+        "source": {
+          "type": "object",
+          "required": ["publication", "url", "author", "date_accessed", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication":   { "type": "string", "minLength": 1 },
+            "url":           { "type": ["string", "null"] },
+            "author":        { "type": ["string", "null"] },
+            "date_accessed": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+            "usage_note":    { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id": { "type": "string", "pattern": "^batch-ps-[0-9]{3}$" },
+        "prompt_version": { "type": "string", "minLength": 1 },
+        "reviewer_notes": { "type": "string" }
+      }
+    },
+
+    "paragraph": {
+      "type": "object",
+      "required": ["sentences"],
+      "additionalProperties": false,
+      "properties": {
+        "sentences": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 6,
+          "description": "The source paragraph, one entry per sentence, each labeled with its function (Bible §2). At most one sentence carries role thesis; when none does, the apex is implicit and the summary must assemble it without adding anything.",
+          "items": {
+            "type": "object",
+            "required": ["text", "role"],
+            "additionalProperties": false,
+            "properties": {
+              "text": { "type": "string", "minLength": 30 },
+              "role": {
+                "enum": [
+                  "thesis", "support", "evidence", "example", "concession",
+                  "setup", "conclusion", "restatement", "qualification", "question"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "ideal_summary": {
+      "type": "string",
+      "minLength": 40,
+      "description": "The faithful compression of the apex: exact scope, exact certainty, the author's stance, nothing added (§8). The correct option paraphrases this; the Summary Builder compares the learner's own sentence against it."
+    },
+
+    "builder": {
+      "type": "object",
+      "required": ["prompt", "checks"],
+      "additionalProperties": false,
+      "properties": {
+        "prompt": { "type": "string", "minLength": 20,
+          "description": "The one line inviting the learner to write their own summary before seeing options." },
+        "checks": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "description": "The guided comparison after the reveal: each check asks one honest question about the learner's sentence, then teaches from either answer. Together they apply the meaning-preservation test (§3) to the learner's own writing.",
+          "items": {
+            "type": "object",
+            "required": ["id", "ask", "kept", "drifted"],
+            "additionalProperties": false,
+            "properties": {
+              "id":      { "enum": ["core", "scope", "certainty", "addition", "stance"] },
+              "ask":     { "type": "string", "minLength": 15 },
+              "kept":    { "type": "string", "minLength": 20,
+                "description": "Shown when the learner says their sentence held this element. Confirms WHY it matters, never just congratulates." },
+              "drifted": { "type": "string", "minLength": 20,
+                "description": "Shown when the learner says their sentence drifted. Teaches the fix in this item's own terms." }
+            }
+          }
+        }
+      }
+    },
+
+    "question": {
+      "type": "object",
+      "required": ["stem", "options", "correct", "explanation"],
+      "additionalProperties": false,
+      "properties": {
+        "stem": { "type": "string", "minLength": 20 },
+        "options": {
+          "type": "object",
+          "required": ["A", "B", "C", "D"],
+          "additionalProperties": false,
+          "properties": {
+            "A": { "type": "string", "minLength": 40 },
+            "B": { "type": "string", "minLength": 40 },
+            "C": { "type": "string", "minLength": 40 },
+            "D": { "type": "string", "minLength": 40 }
+          }
+        },
+        "correct": { "enum": ["A", "B", "C", "D"] },
+        "explanation": {
+          "type": "object",
+          "required": ["paragraph_meaning", "correct_reasoning", "distractors", "reading_habit"],
+          "additionalProperties": false,
+          "properties": {
+            "paragraph_meaning": { "type": "string", "minLength": 80,
+              "description": "What the paragraph actually means, retold in very plain English. Layer one of the answer experience; also the Learning Page retelling." },
+            "correct_reasoning": { "type": "string", "minLength": 60,
+              "description": "Why the correct option preserves the apex at the same scope and certainty. Framed as the meaning-preservation test, applied." },
+            "distractors": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "description": "One entry per wrong option. Each carries exactly one named distortion (§7, single-distortion rule); secondary_archetype may name a second, subtle one at elite level only.",
+              "items": {
+                "type": "object",
+                "required": ["option", "archetype", "secondary_archetype", "why_wrong", "seductive_element", "thinking_mistake"],
+                "additionalProperties": false,
+                "properties": {
+                  "option": { "enum": ["A", "B", "C", "D"] },
+                  "archetype": {
+                    "enum": [
+                      "scope_broadening", "scope_narrowing", "category_shift",
+                      "certainty_inflation", "certainty_deflation", "tendency_to_universal",
+                      "concession_as_thesis", "example_as_thesis", "evidence_as_thesis",
+                      "setup_as_payoff", "assumption_as_thesis",
+                      "information_addition", "implication_addition", "prescriptive_swap",
+                      "stance_flip", "stance_flattening", "owner_swap",
+                      "cause_effect_reversal", "correlation_causation_swap",
+                      "necessary_sufficient_swap", "contrast_collapse",
+                      "verbatim_lure", "extreme_language", "half_truth",
+                      "near_miss"
+                    ]
+                  },
+                  "secondary_archetype": {
+                    "enum": [
+                      "scope_broadening", "scope_narrowing", "category_shift",
+                      "certainty_inflation", "certainty_deflation", "tendency_to_universal",
+                      "concession_as_thesis", "example_as_thesis", "evidence_as_thesis",
+                      "setup_as_payoff", "assumption_as_thesis",
+                      "information_addition", "implication_addition", "prescriptive_swap",
+                      "stance_flip", "stance_flattening", "owner_swap",
+                      "cause_effect_reversal", "correlation_causation_swap",
+                      "necessary_sufficient_swap", "contrast_collapse",
+                      "verbatim_lure", "extreme_language", "half_truth",
+                      "near_miss",
+                      null
+                    ]
+                  },
+                  "why_wrong": { "type": "string", "minLength": 40,
+                    "description": "Where this option fails the meaning-preservation test, in this paragraph's own terms." },
+                  "seductive_element": { "type": "string", "minLength": 20,
+                    "description": "What makes a real reader choose it (§4: lexical overlap, partial truth, belief confirmation, apparent strength, apparent generality)." },
+                  "thinking_mistake": { "type": "string", "minLength": 20,
+                    "description": "The §6 reader error that produces this choice, named as a way of reading, never as a verdict on the reader." }
+                }
+              }
+            },
+            "reading_habit": { "type": "string", "minLength": 30,
+              "description": "One transferable habit of strong summarisers this item practices, phrased for ANY future paragraph. Shown as Make it a habit." }
+          }
+        }
+      }
+    },
+
+    "mentor": {
+      "type": "object",
+      "required": ["challenge", "takeaway"],
+      "additionalProperties": false,
+      "properties": {
+        "challenge": { "type": "string", "minLength": 20,
+          "description": "Shown before solving, under the mission: one sentence on what will test the reader. No spoilers of the answer." },
+        "takeaway": { "type": "string", "minLength": 20,
+          "description": "One memorable sentence to keep." }
+      }
+    }
+  }
+}

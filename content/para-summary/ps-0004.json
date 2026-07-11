@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0004",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "sociology",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "bible_level": "foundation",
+    "title": "The Corner Store Effect",
+    "theme": "how losing everyday gathering places thins a street's cooperation",
+    "estimated_time_sec": 75,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "As neighbourhoods lose their everyday gathering places, the casual acquaintanceships formed there thin out, and the street's everyday cooperation tends to erode.",
+      "scope": "Neighbourhoods losing their ordinary gathering places; the conclusion is a tendency, not a law.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 1,
+      "qualifier_density": 1,
+      "domain_load": 1
+    },
+    "load_bearing": ["tends to"],
+    "separating_element": null,
+    "dna_traits": ["evidence_vs_thesis", "certainty_reading", "inference_control"],
+    "mission": "evidence_vs_conclusion",
+    "learning_objective": "summarise the causal conclusion, not the survey finding that supports it",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General sociology of third places and weak ties; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "First cause-and-effect chain of the ladder: the summary must keep the whole chain and the tends to, while the traps offer the survey finding, a universal law, and a policy the author never urged. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "When a neighbourhood loses its everyday gathering spots, its cafes, barbershops and corner stores, people lose the places where casual acquaintance is made.",
+        "role": "setup"
+      },
+      {
+        "text": "Surveys of such neighbourhoods find residents naming fewer people they trust on their street within a few years of the closures.",
+        "role": "evidence"
+      },
+      {
+        "text": "These weak ties, the familiar faces short of friendship, turn out to carry much of a street's everyday cooperation, from borrowed tools to watched houses.",
+        "role": "support"
+      },
+      {
+        "text": "The quiet closure of such places, then, tends to erode the cooperation a street depends on.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "As neighbourhoods lose their ordinary gathering places, the casual ties formed there thin out, and everyday street cooperation tends to erode.",
+  "builder": {
+    "prompt": "In one sentence: what does losing these places do to a street, according to the paragraph?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence carry the whole chain, from lost places to thinner ties to eroded cooperation?",
+        "kept": "Good. The paragraph is a chain, and the conclusion only makes sense with its links in place.",
+        "drifted": "The paragraph moves in steps: places close, casual ties thin, cooperation erodes. A sentence that stops at the survey finding has summarised a link, not the chain."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep tends to, or an equivalent softener?",
+        "kept": "Well held. The author claims a tendency, not an iron law. That word is doing real work.",
+        "drifted": "Without tends to, the claim covers every neighbourhood without exception, which is more than the author said."
+      },
+      {
+        "id": "addition",
+        "ask": "Did your sentence describe what happens, without recommending that anyone protect anything?",
+        "kept": "Right. The author diagnoses; the author does not prescribe.",
+        "drifted": "The paragraph never tells cities or residents what to do. A recommendation, however sensible, is an addition to the author's claim."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Within a few years of local shops and cafes closing, residents of a neighbourhood name fewer people on their street whom they trust.",
+      "B": "A neighbourhood that loses its gathering places will lose the everyday cooperation among residents that daily life depends on.",
+      "C": "As neighbourhoods lose their ordinary gathering places, the casual ties formed there thin out, and street cooperation tends to erode.",
+      "D": "Cities ought to protect cafes, barbershops and corner stores, since these places create the trust a neighbourhood runs on."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "The paragraph traces a quiet chain. Cafes, barbershops and corner stores are where neighbours become familiar faces. When those places close, surveys show people soon trust fewer neighbours. And because those loose, friendly ties carry a street's everyday helpfulness, their thinning tends to wear down the cooperation the street runs on.",
+      "correct_reasoning": "Option C keeps the full chain and the author's exact strength: closures thin the ties, and cooperation tends to erode. Nothing is promoted from support to point, and no advice is smuggled in. It passes the meaning test whole.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the survey finding, offered in the paragraph as support. The conclusion the finding serves, about eroding cooperation, is the actual point and it is missing here.",
+          "seductive_element": "It is precise, checkable, and feels like the paragraph's hardest fact.",
+          "thinking_mistake": "Evidence as thesis: reporting the study instead of the claim it was carrying."
+        },
+        {
+          "option": "B",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The author says closures tend to erode cooperation. This option says a neighbourhood will lose it, a certainty about every case that the paragraph deliberately avoided claiming.",
+          "seductive_element": "It sounds firmer and cleaner than the hedged original.",
+          "thinking_mistake": "Tendency to law: deleting the softener and hardening a pattern into a guarantee."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph describes a process; it never urges protection or any other policy. The ought was added by the option.",
+          "seductive_element": "It feels like the natural lesson of the paragraph, the thing a concerned reader would conclude.",
+          "thinking_mistake": "Descriptive to prescriptive: converting the author's diagnosis into a recommendation the author never made."
+        }
+      ],
+      "reading_habit": "In a cause-and-effect paragraph, find the last link of the chain and check the summary carries the chain to it, at the author's strength, without adding a moral."
+    }
+  },
+  "mentor": {
+    "challenge": "This paragraph moves in steps. Follow the chain to its final link, because two options will stop short of it and one will step past it.",
+    "takeaway": "Facts carry the conclusion. The summary is the conclusion, carried whole."
+  }
+}

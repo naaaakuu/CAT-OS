@@ -17,9 +17,10 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-import { loadRCPassages, listRCItems, loadPJItems } from '../core/content-loader/loader.js';
+import { loadRCPassages, listRCItems, loadPJItems, loadPSItems } from '../core/content-loader/loader.js';
 import { deriveDNA } from '../core/mentor/dna.js';
 import { derivePJDNA } from '../core/mentor/pj-dna.js';
+import { derivePSDNA } from '../core/mentor/ps-dna.js';
 import { listLessons, listReflections } from '../core/mentor/records.js';
 import { RECALL_RETIRED_AFTER } from '../core/mentor/lesson.js';
 import { escapeHTML, formatDate } from '../core/utils/format.js';
@@ -72,12 +73,15 @@ export async function renderGrowth(outlet, { storage }) {
     return;
   }
 
-  const rcSessions = sessions.filter((s) => s.module !== 'pj');
+  const rcSessions = sessions.filter((s) => s.module !== 'pj' && s.module !== 'ps');
   const pjSessions = sessions.filter((s) => s.module === 'pj');
+  const psSessions = sessions.filter((s) => s.module === 'ps');
   const passages = await loadRCPassages(rcSessions.map((s) => s.passage_id));
   const dna = deriveDNA(rcSessions, passages);
   const pjItems = await loadPJItems(pjSessions.flatMap((s) => s.item_ids ?? []));
   const pjDNA = derivePJDNA(pjSessions, pjItems);
+  const psItems = await loadPSItems(psSessions.flatMap((s) => s.item_ids ?? []));
+  const psDNA = derivePSDNA(psSessions, psItems);
 
   const dnaCard = (o) => `
     <div class="dna dna--${o.kind}">
@@ -105,6 +109,16 @@ export async function renderGrowth(outlet, { storage }) {
         the floor. Keep solving.</p>
       </div>` : pjDNA.observations.map(dnaCard).join('')}`;
 
+  /* ---- How you summarise (Para Summary DNA) ---- */
+  const psDnaHTML = psSessions.length === 0 ? '' : `
+    <div class="stage-head"><h2>How you summarise</h2><div class="rule"></div></div>
+    ${psDNA.observations.length === 0 ? `
+      <div class="card">
+        <p class="muted" style="margin:0">Your summarising is being watched
+        with the same fairness: patterns appear only once the evidence clears
+        the floor. Keep going.</p>
+      </div>` : psDNA.observations.map(dnaCard).join('')}`;
+
   /* ---- Concepts you've collected ---- */
   const recent = lessons.slice(0, 8);
   const lessonsHTML = recent.length === 0 ? `
@@ -113,10 +127,15 @@ export async function renderGrowth(outlet, { storage }) {
     ${recent.map((l) => {
       const absorbed = (l.recall_count ?? 0) >= RECALL_RETIRED_AFTER;
       const isPJ = l.module === 'pj';
+      const isPS = l.module === 'ps';
       const lessonHref = isPJ
         ? (l.item_id ? `#/pj/learn/${escapeHTML(l.item_id)}` : '#/pj')
-        : `#/rc/mentor/${escapeHTML(l.passage_id)}`;
-      const lessonPlace = isPJ ? 'Para Jumbles' : (titles.get(l.passage_id) ?? l.passage_id);
+        : isPS
+          ? (l.item_id ? `#/ps/learn/${escapeHTML(l.item_id)}` : '#/ps')
+          : `#/rc/mentor/${escapeHTML(l.passage_id)}`;
+      const lessonPlace = isPJ ? 'Para Jumbles'
+        : isPS ? 'Para Summary'
+          : (titles.get(l.passage_id) ?? l.passage_id);
       return `
       <div class="row">
         <div class="row__lead">
@@ -157,6 +176,8 @@ export async function renderGrowth(outlet, { storage }) {
     ${dnaHTML}
 
     ${pjDnaHTML}
+
+    ${psDnaHTML}
 
     <div class="stage-head"><h2>Concepts you've collected</h2><div class="rule"></div></div>
     <div class="card">${lessonsHTML}</div>

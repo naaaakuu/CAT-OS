@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0018",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "bible_level": "elite",
+    "title": "Hope, Not a Claim",
+    "theme": "what repentance changes about forgiveness",
+    "estimated_time_sec": 150,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Repentance can make forgiveness appropriate, perhaps even admirable, without ever making it owed: the repentant may hope for forgiveness but cannot claim it.",
+      "scope": "Forgiveness after sincere repentance; the author's position sits between duty and pure gift.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 4,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 4,
+      "domain_load": 3
+    },
+    "load_bearing": ["can make", "perhaps even", "without ever making it owed", "hope for", "not to claim"],
+    "separating_element": "Hope against claim. The paragraph gives the repentant standing to hope for forgiveness while expressly denying them any claim to it; the nearest rival hands them the claim and keeps everything else.",
+    "dna_traits": ["language_precision", "certainty_reading", "author_intent"],
+    "mission": "keep_qualifiers",
+    "learning_objective": "hold a between-positions claim precisely, where one word separates the finalists",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General moral philosophy of forgiveness; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Elite adjudication: the near miss converts standing to hope into a claim, which the final sentence expressly denies. Both finalists are otherwise faithful. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Some philosophers treat forgiveness as a duty, owed to any offender who sincerely repents.",
+        "role": "setup"
+      },
+      {
+        "text": "Others insist it must remain a gift, meaningful precisely because no one can demand it.",
+        "role": "concession"
+      },
+      {
+        "text": "The more careful position lies between: repentance can make forgiveness appropriate, perhaps even admirable, without ever making it owed.",
+        "role": "thesis"
+      },
+      {
+        "text": "On this view, the repentant have standing to hope for forgiveness, but not to claim it.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "On the more careful view, sincere repentance can make forgiving appropriate and even admirable without ever making it owed: the repentant may hope for forgiveness but cannot claim it.",
+  "builder": {
+    "prompt": "In one sentence: what exactly does repentance change about forgiveness, on the author's view?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence sit between the two opening views, neither duty nor untouchable gift?",
+        "kept": "Good. The author's position is the between: repentance matters, and yet nothing becomes owed.",
+        "drifted": "Both opening views are rejected. If your sentence makes forgiveness a duty, or makes repentance irrelevant, it has joined a camp the author left."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did the graded language survive, can make, perhaps even, without ever?",
+        "kept": "Well held. The claim is built from calibrated words, and each one is deliberate.",
+        "drifted": "This paragraph is precision work. Can make appropriate is not makes obligatory; perhaps even admirable is not admirable. The grade of each word is the claim."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep hope and refuse claim, the distinction the last sentence draws?",
+        "kept": "Exactly right. That is the finest cut in the paragraph, and the one an option will try to blur.",
+        "drifted": "Standing to hope is not a claim. The final sentence separates them on purpose, and a summary that hands the repentant a claim reverses the author's most careful sentence."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The careful position holds that sincere repentance gives the offender a claim on forgiveness, though never a guarantee of receiving it.",
+      "B": "Whenever an offender sincerely repents, forgiving becomes the appropriate and admirable response for the person who was harmed.",
+      "C": "Because forgiveness must remain a gift, an offender's sincere repentance has no bearing on whether forgiving them is appropriate.",
+      "D": "On the more careful view, sincere repentance can make forgiving fitting without ever turning it into something the offender is owed."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "Two positions frame the question: forgiveness as a duty triggered by repentance, and forgiveness as a gift no one may demand. The author declines both and builds a middle: repentance genuinely changes the situation, it can make forgiving appropriate, maybe admirable, but it never creates a debt. The last sentence draws the finest line in the paragraph: the repentant may hope, and only hope.",
+      "correct_reasoning": "Option D holds the between-position with its calibrations intact: can make fitting, never owed. Nothing is upgraded to duty, nothing downgraded to irrelevance, and the author's carefully graded strength survives the compression. It is the only option the final sentence does not contradict.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "near_miss",
+          "secondary_archetype": null,
+          "why_wrong": "A true finalist: between the camps, properly graded, almost the author's sentence. But it gives the repentant a claim on forgiveness, and the paragraph's last sentence exists to deny exactly that. Hope, not claim, and the two are different in kind, not degree.",
+          "seductive_element": "It reads as the sophisticated middle position, and every phrase but one is faithful.",
+          "thinking_mistake": "Synonym drift at the decisive word: claim quietly substituted for standing to hope."
+        },
+        {
+          "option": "B",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "Can make appropriate, perhaps even admirable becomes becomes appropriate and admirable, whenever. Every hedge has been cashed in, and the position slides back toward the duty view the author set aside.",
+          "seductive_element": "It is the author's vocabulary at a confident volume, and confidence flatters a summary.",
+          "thinking_mistake": "Certainty inflation: graded possibilities hardened into a standing rule."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The author holds that repentance does bear on forgiveness, it can make forgiving appropriate. This option, borrowing the gift camp's premise, says repentance changes nothing, reversing the adjudication.",
+          "seductive_element": "It sounds principled and echoes the second camp's genuine words about gifts.",
+          "thinking_mistake": "Stance reversal: the author's yes, but never owed misread as a flat no."
+        }
+      ],
+      "reading_habit": "In finely graded arguments, find the sentence written to prevent a misreading, here the hope but not claim line, and test every surviving option against it. That sentence is the author's own answer key."
+    }
+  },
+  "mentor": {
+    "challenge": "The author built this claim word by word: can, perhaps, never, hope. One option changes a single one of those words. Find it.",
+    "takeaway": "At this level the finalists differ by one word, and the author has already told you which."
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0006",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "arts-culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Invention of Silence",
+    "theme": "how concert-hall silence became a norm",
+    "estimated_time_sec": 80,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "The reverent silence of the modern concert hall is not timeless etiquette but a recent invention that audiences had to be trained into.",
+      "scope": "Concert-hall listening norms specifically, not manners in the arts generally.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 1
+    },
+    "load_bearing": ["recent"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "scope_preservation", "inference_control"],
+    "mission": "find_the_thesis",
+    "learning_objective": "locate the claim when the paragraph opens with colourful background instead of the point",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. Standard history of concert etiquette; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "The opening sentence is deliberately the most colourful and the least central: a setup trap, a cause invention, and a category stretch guard the thesis. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Audiences at nineteenth century concerts clapped between movements, called for encores in the middle of symphonies, and talked freely while the orchestra played.",
+        "role": "setup"
+      },
+      {
+        "text": "The reverent silence of today's concert hall, far from being timeless etiquette, is a recent invention.",
+        "role": "thesis"
+      },
+      {
+        "text": "It took decades of campaigning by conductors and critics to train audiences into stillness.",
+        "role": "support"
+      },
+      {
+        "text": "What feels like the natural way to hear music is, in fact, a learned and historically new behaviour.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "The silence expected at classical concerts is not an age-old norm but a recently invented habit that audiences had to be taught over decades.",
+  "builder": {
+    "prompt": "In one sentence: what is the paragraph claiming about concert-hall silence?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Is your sentence about the silence being recent and learned, rather than about how rowdy old audiences were?",
+        "kept": "Good. The rowdy audiences are the colour; the claim is what today's silence turns out to be.",
+        "drifted": "The nineteenth century scene is background, painted so the claim lands harder. The claim itself is about the silence we have now: invented, recent, taught."
+      },
+      {
+        "id": "scope",
+        "ask": "Did your sentence stay with concert listening, without widening to manners or the arts in general?",
+        "kept": "Well held. The paragraph is about one norm in one setting. Its width is part of its meaning.",
+        "drifted": "The author claims nothing about etiquette at large. Widening from the concert hall to all audiences everywhere is a bigger claim than the text supports."
+      },
+      {
+        "id": "addition",
+        "ask": "Did you avoid explaining why the silence was invented?",
+        "kept": "Right. The paragraph says who campaigned for stillness, but never why audiences accepted it. No cause, no motive, is given.",
+        "drifted": "The paragraph never gives the reason silence won. Supplying one, however plausible, explains a claim the author only stated."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Nineteenth century concert audiences applauded between movements, demanded encores mid-performance, and chatted during the music.",
+      "B": "Concert silence is a recent invention, adopted once audiences came to believe that great music deserves undivided attention.",
+      "C": "Etiquette in the arts is never really timeless; the manners expected of audiences everywhere are recent, learned inventions.",
+      "D": "The silence expected at classical concerts is not an age-old norm but a recently created habit audiences had to be taught."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "The paragraph contrasts two worlds. In the nineteenth century, concert audiences clapped, shouted and chatted. Today they sit in silence, and we assume that silence is how music was always heard. The author's point is that the silence is new: an invention pushed by conductors and critics over decades, a learned habit wearing the costume of timeless etiquette.",
+      "correct_reasoning": "Option D carries the exact claim, that the norm is recent and taught, at the paragraph's width, one norm in one setting, and with the author's corrective edge intact: not age-old, but created. Nothing from the colourful setup is promoted, and no motive is invented.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "setup_as_payoff",
+          "secondary_archetype": null,
+          "why_wrong": "Entirely true and entirely background. The rowdy audiences exist to set up the claim about today's silence; a summary of them stops before the paragraph arrives at its point.",
+          "seductive_element": "It is the most vivid sentence in the paragraph and everything in it checks out against the text.",
+          "thinking_mistake": "First-sentence anchoring: assuming the paragraph's point is wherever it starts."
+        },
+        {
+          "option": "B",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The first clause is faithful, but the paragraph never says why silence took hold, only that campaigners trained audiences into it. The belief about music deserving attention is a cause the option invented.",
+          "seductive_element": "The invented reason is exactly the explanation a reader expects, so it feels like comprehension.",
+          "thinking_mistake": "Cause invention: supplying a motive the author never gave."
+        },
+        {
+          "option": "C",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph makes a claim about one norm, concert silence. This option turns it into a rule about all manners in all arts, a reach the text never attempts.",
+          "seductive_element": "Broader statements feel more like summaries, as though generality were the same as importance.",
+          "thinking_mistake": "Over-generalization: mistaking a wider claim for a more complete one."
+        }
+      ],
+      "reading_habit": "When a paragraph opens with colour, ask what the colour is for. The claim it serves usually sits one or two sentences later, wearing plainer clothes."
+    }
+  },
+  "mentor": {
+    "challenge": "The loudest sentence here is scenery. The claim arrives quietly, one line later. Keep them apart.",
+    "takeaway": "Background makes a claim land. It is not the claim."
+  }
+}

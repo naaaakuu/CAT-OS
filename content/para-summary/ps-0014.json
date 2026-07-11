@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0014",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "What Sleep Is For",
+    "theme": "the repair and memory accounts of sleep as one interlocking story",
+    "estimated_time_sec": 120,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "The findings increasingly suggest the repair account and the cognitive account of sleep describe interdependent processes rather than rival explanations.",
+      "scope": "The two research accounts of sleep's function; the reconciliation is what the evidence increasingly suggests, not a settled result.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": ["increasingly suggest", "appear to", "one camp holds", "another argues"],
+    "separating_element": null,
+    "dna_traits": ["certainty_reading", "author_intent", "evidence_vs_thesis"],
+    "mission": "notice_certainty",
+    "learning_objective": "keep a hedged reconciliation hedged, and keep reported views owned by their camps",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General sleep science; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Certainty and ownership together: the correct option must stay at increasingly suggests, while traps assert the reconciliation, adopt camp one, or poison a faithful tail. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "One camp of researchers holds that sleep exists chiefly to repair the body's tissues and replenish its energy stores.",
+        "role": "setup"
+      },
+      {
+        "text": "Another argues its primary work is cognitive: the overnight sorting and stabilising of what was learned during the day.",
+        "role": "concession"
+      },
+      {
+        "text": "The findings increasingly suggest the two accounts are not rivals, since the repair and the sorting appear to run on the same nightly cycles, each depending on the other.",
+        "role": "thesis"
+      },
+      {
+        "text": "What no serious account now claims is that sleep is idle time, a mere pause between the hours that matter.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Research increasingly suggests that the repair account and the memory account of sleep describe interdependent processes rather than competing explanations.",
+  "builder": {
+    "prompt": "In one sentence: what does the evidence increasingly say about the two accounts of sleep?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Is your sentence about the two accounts fitting together, rather than about either account alone?",
+        "kept": "Good. The point is the reconciliation. Either account alone is a camp's view, not the author's claim.",
+        "drifted": "The paragraph's claim is that the rivalry is dissolving: repair and sorting interlock. A sentence championing one camp reports a view the author only displayed."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the reconciliation at increasingly suggests and appear, rather than established?",
+        "kept": "Well held. The convergence is a direction of travel in the findings, not a finished result, and the author says so twice.",
+        "drifted": "Increasingly suggest and appear to are the author's exact commitments. Promoting them to has shown settles a question the paragraph leaves live."
+      },
+      {
+        "id": "stance",
+        "ask": "Did each view stay with its owner, the camps holding and arguing, the author only reporting?",
+        "kept": "Right. The author referees; the camps play. Confusing the two changes whose claim is whose.",
+        "drifted": "One camp holds and another argues are ownership tags. A summary that hands either view to the author has mixed up the referee and the players."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Research has established that sleep's bodily repair and its memory work are a single interdependent process that runs each night.",
+      "B": "Sleep exists chiefly to repair the body's tissues, though it also stabilises and sorts what a person learned during the day.",
+      "C": "No serious account now treats sleep as idle time, and the oldest view of sleep, bodily repair, has at last been abandoned too.",
+      "D": "Research increasingly suggests the repair account and the memory account of sleep describe interlocking processes, not rival ones."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "Two research camps are introduced: sleep as bodily repair, and sleep as overnight memory work. The author's point is what the accumulating findings increasingly indicate, that these are not competing explanations at all. The repair and the sorting appear to share the same nightly cycles and to need each other. The one position nobody serious defends anymore is that sleep is simply time off.",
+      "correct_reasoning": "Option D reports the reconciliation at exactly the author's strength: increasingly suggests, interlocking rather than rival. Neither camp's view is adopted, and the open, still-accumulating character of the evidence survives. It is the adjudicating sentence, compressed without hardening.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "Has established replaces increasingly suggests, and a single process replaces two interdependent ones. The content is nearly right; the epistemic volume is wrong, and at this level the volume is the claim.",
+          "seductive_element": "It is the most confident and complete-sounding option on the page.",
+          "thinking_mistake": "Certainty inflation: promoting a strengthening trend in the evidence to a settled scientific fact."
+        },
+        {
+          "option": "B",
+          "archetype": "owner_swap",
+          "secondary_archetype": null,
+          "why_wrong": "Sleep exists chiefly to repair is camp one's position, which the author reports without endorsing. Presenting it as the conclusion, with memory work demoted to a side effect, hands the author a view the author never took.",
+          "seductive_element": "It sounds like a balanced synthesis because it mentions both functions.",
+          "thinking_mistake": "Owner confusion: a reported camp's claim summarised as the author's own verdict."
+        },
+        {
+          "option": "C",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "The first clause is straight from the paragraph. The tail then abandons the repair view, which the paragraph does the opposite of: repair is kept and woven together with memory work.",
+          "seductive_element": "The verified opening clause invites the reader to wave the rest through.",
+          "thinking_mistake": "The poisoned tail: a faithful start hauling a contradiction across the line."
+        }
+      ],
+      "reading_habit": "Fix two things before any option: how sure the author is, and who owns each view. The right answer must match on both, and most traps fall at one of the two."
+    }
+  },
+  "mentor": {
+    "challenge": "Two camps, one referee, and a verdict delivered softly. Match the softness, and remember who said what.",
+    "takeaway": "Increasingly suggests is a claim about direction, not arrival. Keep it moving."
+  }
+}

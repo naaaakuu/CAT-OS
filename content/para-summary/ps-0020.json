@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0020",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "Where Help Turns Into Hindrance",
+    "theme": "patents, thresholds, and the price of the next idea",
+    "estimated_time_sec": 180,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Some patent protection clearly helps innovation, but past a moderate level, extending it appears to slow innovation, and the evidence hints the turn comes earlier than the patent system assumes.",
+      "scope": "Patent protection and innovation; the claim holds two things at once, help below a threshold and apparent hindrance beyond it.",
+      "certainty": "mixed",
+      "stance": "skeptical"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 5,
+      "turn_subtlety": 4,
+      "distractor_closeness": 5,
+      "live_options": 3,
+      "stance_subtlety": 3,
+      "qualifier_density": 5,
+      "domain_load": 4
+    },
+    "load_bearing": ["past a moderate level", "appears", "some protection clearly helps", "hints", "earlier than the patent system assumes"],
+    "separating_element": "The threshold. The paragraph holds two things at once, that some protection helps and that past a moderate level it appears to hinder; the nearest rival keeps the hindrance and silently drops the help and its threshold.",
+    "dna_traits": ["scope_preservation", "certainty_reading", "author_intent", "language_precision"],
+    "mission": "watch_the_turn",
+    "learning_objective": "hold a two-sided, threshold-shaped claim against finalists that keep only one side",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General innovation economics of patent breadth; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "The signature Premium item: an unmarked turn against a plausible opening, a threshold claim with dense qualifiers, a near miss dropping the threshold, a layered concession lure (elite layering, both subtle), and a necessary-sufficient swap. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "It seems obvious that stronger patents must mean more innovation, since inventors invest only when their returns are protected.",
+        "role": "concession"
+      },
+      {
+        "text": "The economic record is far less obliging: past a moderate level of protection, extending patents appears to slow the very innovation it is meant to reward.",
+        "role": "thesis"
+      },
+      {
+        "text": "Every invention is also an input into the next one, and each strengthening of exclusive rights raises the price of the materials the next inventor needs.",
+        "role": "support"
+      },
+      {
+        "text": "Some protection clearly helps; the argument is over where help turns into hindrance, and the evidence hints that the turn comes earlier than the patent system assumes.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Some patent protection helps innovation, but beyond a moderate level extending it appears to hinder innovation, and the evidence hints that this turn comes earlier than the patent system assumes.",
+  "builder": {
+    "prompt": "In one sentence: what is the paragraph's full position on patents and innovation?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence hold both sides, the help below the threshold and the apparent hindrance beyond it?",
+        "kept": "Good. The claim is a curve, not a line. Cutting either side flattens it into a position the author does not hold.",
+        "drifted": "Some protection clearly helps is not a courtesy, it is half the claim. A summary that only slows or only helps has traded the curve for a slogan."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did appears and hints survive, with the record described rather than settled?",
+        "kept": "Well held. The paragraph reads the evidence as pointing, not proving, twice over.",
+        "drifted": "Appears to slow and the evidence hints are exact commitments. Proves and shows are different, larger ones."
+      },
+      {
+        "id": "scope",
+        "ask": "Did the threshold survive, past a moderate level, with its placement earlier than assumed?",
+        "kept": "Exactly right. Where the turn sits is the live question the paragraph ends on, and the summary must keep the turn located.",
+        "drifted": "Without past a moderate level, the claim indicts all patents, which the paragraph explicitly does not. The threshold is the architecture of the claim."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Extending patents appears to slow the innovation they are meant to reward, since exclusive rights raise the price of what later inventors need.",
+      "B": "Inventors invest only when their returns are protected, so stronger patent systems remain the surest route a society has to more innovation.",
+      "C": "Some patent protection helps innovation, but beyond a moderate level more protection appears to hinder it, sooner than the system assumes.",
+      "D": "Moderate patent protection is enough to guarantee innovation, and any further extension merely raises prices for the inventors who follow."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "The paragraph opens with the intuitive case for patents: no protected returns, no investment. Then the record disagrees, quietly. Beyond a moderate level, more protection seems to slow innovation, because every invention is also raw material for the next one, and stronger exclusive rights make that raw material dearer. The author's full position is a curve: some protection clearly helps, more eventually hinders, and the hint from the evidence is that the bend comes earlier than the system believes.",
+      "correct_reasoning": "Option C is the whole curve in one sentence: the help, the threshold, the apparent hindrance beyond it, and the early bend, each at the author's exact strength. Every other option keeps a piece of the curve and presents the piece as the shape.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "near_miss",
+          "secondary_archetype": null,
+          "why_wrong": "A real finalist: the hindrance, the hedge, and the input mechanism are all faithful. But the paragraph holds two things at once, and this option holds one. Some protection clearly helps, past a moderate level, has vanished, turning a threshold claim into a blanket indictment.",
+          "seductive_element": "It is elegantly phrased, properly hedged, and carries the paragraph's most memorable mechanism.",
+          "thinking_mistake": "Half-summary: one of two load bearing elements kept, and the claim's architecture lost with the other."
+        },
+        {
+          "option": "B",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": "verbatim_lure",
+          "why_wrong": "This is the seems-obvious view the record then refuses, rebuilt from the opening sentence's own words. It is where the paragraph starts, and precisely what the paragraph spends three sentences unseating.",
+          "seductive_element": "It opens the paragraph, matches the reader's prior intuition about incentives, and borrows the text's own phrasing, three comforts stacked together.",
+          "thinking_mistake": "First-sentence anchoring reinforced by keyword match: the rejected view, wearing the paragraph's clothes."
+        },
+        {
+          "option": "D",
+          "archetype": "necessary_sufficient_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says some protection clearly helps, a needed ingredient. This option says moderate protection is enough to guarantee innovation, a sufficiency the author never asserts, and merely raises prices also understates the slowing the record suggests.",
+          "seductive_element": "It sounds like the same threshold claim, restated with confidence.",
+          "thinking_mistake": "Necessary and sufficient confused: help required for innovation reported as enough to guarantee it."
+        }
+      ],
+      "reading_habit": "When a paragraph holds two truths in tension, write both down before the options, joined by the author's but. Any option that resolves the tension in either direction is not a summary; it is a simplification."
+    }
+  },
+  "mentor": {
+    "challenge": "This author believes two things at once, and every wrong option will offer you the comfort of believing only one. Hold both.",
+    "takeaway": "The hardest summaries are curves. Keep the bend, keep the claim."
+  }
+}

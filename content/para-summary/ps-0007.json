@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0007",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "The Price of a Parking Space",
+    "theme": "how parking requirements reshaped urban cost and form",
+    "estimated_time_sec": 90,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "Rules that required buildings to include parking quietly raised costs for all residents and reshaped the physical form of cities.",
+      "scope": "Parking minimums specifically, with two distinct effects: costs spread to everyone and urban form changed.",
+      "certainty": "asserted",
+      "stance": "critical"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 3,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 2
+    },
+    "load_bearing": ["every new building", "even residents who never owned a car"],
+    "separating_element": null,
+    "dna_traits": ["surface_matching", "main_idea_detection", "compression_skill"],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "resist an option built from the paragraph's own vocabulary with the logic rearranged",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General urban economics of parking minimums; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "The first verbatim lure of the ladder: option B reuses the paragraph's phrases with the mechanisms crossed. The correct answer paraphrases. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "For decades, most cities required every new building to include a fixed number of parking spaces.",
+        "role": "setup"
+      },
+      {
+        "text": "Builders passed the considerable cost of those spaces into rents and prices, so even residents who never owned a car paid for parking.",
+        "role": "support"
+      },
+      {
+        "text": "The requirements also spread buildings apart, since land given to cars cannot hold homes, making the walkable neighbourhoods many residents wanted effectively illegal to build.",
+        "role": "support"
+      },
+      {
+        "text": "Parking minimums, meant as a convenience, quietly reshaped both the cost and the shape of urban life.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Rules forcing buildings to include parking quietly raised living costs for everyone and changed the physical shape cities could take.",
+  "builder": {
+    "prompt": "In one sentence: what did parking requirements do, according to the paragraph?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence carry both effects, the costs spread to everyone and the changed shape of cities?",
+        "kept": "Good. The closing sentence binds the two effects into one claim, and a faithful summary needs both.",
+        "drifted": "The paragraph's point has two halves, cost and shape. A sentence with only one half is a half-summary, true but incomplete."
+      },
+      {
+        "id": "scope",
+        "ask": "Did your sentence stay with parking requirements, not regulation in general?",
+        "kept": "Well held. The author indicts one specific rule, not city regulation at large.",
+        "drifted": "Parking minimums are the subject. Widening to construction rules in general claims far more than the paragraph does."
+      },
+      {
+        "id": "addition",
+        "ask": "If you reused the paragraph's phrases, does your sentence still connect them the way the author did?",
+        "kept": "Good instinct to check. Familiar words are safe only when the logic underneath them is also the author's.",
+        "drifted": "Borrowed phrases can quietly rewire the argument. Say the idea in your own words once, then check the connections survive."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Rules that forced buildings to include parking quietly raised costs for all residents and changed how cities are physically arranged.",
+      "B": "Land given to cars cannot hold homes, so the cost of parking spaces spread buildings apart and passed into rents and prices.",
+      "C": "Because parking spaces are costly to build, residents who never owned cars ended up paying for parking through rents and prices.",
+      "D": "Regulations on new construction have raised living costs for residents and reshaped the physical form of modern cities."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "The paragraph explains what a single rule did. Cities made builders include parking. The cost of those spaces flowed into rents and prices, so everyone paid, drivers or not. And because land used for cars cannot hold homes, buildings spread out, quietly outlawing the compact, walkable neighbourhoods people wanted. One convenience rule ended up shaping both what city life costs and what it looks like.",
+      "correct_reasoning": "Option A restates the closing claim in fresh words: parking rules raised costs for all and rearranged the city. Both effects survive, the subject stays parking minimums, and the quiet, unintended character of the change is kept. It is the author's sentence, paraphrased rather than echoed.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "verbatim_lure",
+          "secondary_archetype": null,
+          "why_wrong": "Every phrase is the paragraph's own, but the wiring is crossed: in the text, the cost of spaces raised rents, and the land they occupied spread buildings apart. Here one mechanism is made to do the other's work.",
+          "seductive_element": "The heavy overlap with the paragraph's own vocabulary reads as safety.",
+          "thinking_mistake": "Keyword match: verifying the words of an option instead of the connections between them."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "True, and only half the story. The cost mechanism is one of two supports; the paragraph's point needs the reshaped city too, and this option never reaches it.",
+          "seductive_element": "It is fully verifiable against one sentence of the text and feels rigorous for that reason.",
+          "thinking_mistake": "Half-summary: capturing one load bearing element of the claim and stopping."
+        },
+        {
+          "option": "D",
+          "archetype": "category_shift",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph indicts parking minimums. This option swaps that specific rule for construction regulation in general, a much wider category the author never blamed.",
+          "seductive_element": "The wider category is what a reader already associates with costly housing, so the swap slips past.",
+          "thinking_mistake": "Category inflation: replacing the author's exact subject with its bigger neighbour."
+        }
+      ],
+      "reading_habit": "When an option reuses the paragraph's phrases, slow down and trace what leads to what. Familiar vocabulary is a reason to check the logic, never a reason to trust it."
+    }
+  },
+  "mentor": {
+    "challenge": "One option here is stitched from the paragraph's own words. Read for the connections, not the vocabulary.",
+    "takeaway": "Words can match while the logic has been rewired. Summaries are about the wiring."
+  }
+}

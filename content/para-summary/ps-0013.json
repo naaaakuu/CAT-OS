@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0013",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "What Small Loans Actually Do",
+    "theme": "microcredit as amplifier rather than escape hatch",
+    "estimated_time_sec": 120,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "The evidence suggests microcredit works less as a general escape from poverty than as a tool that amplifies businesses that already exist.",
+      "scope": "Small loans to poor households across the countries studied; the helpful effect is conditional on an existing business.",
+      "certainty": "hedged",
+      "stance": "skeptical"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 4,
+      "domain_load": 3
+    },
+    "load_bearing": ["the evidence suggests", "often", "where borrowers already ran a business", "a minority"],
+    "separating_element": null,
+    "dna_traits": ["scope_preservation", "certainty_reading", "language_precision"],
+    "mission": "keep_qualifiers",
+    "learning_objective": "carry a conditional, hedged research finding without dropping its where clause",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General development economics of microcredit evaluations; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "CAT-level qualifier item: the domain limiter (already ran a business) is the whole game, and the strongest trap deletes exactly that clause. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Careful evaluations of small loans to poor households have now accumulated across many countries.",
+        "role": "setup"
+      },
+      {
+        "text": "Where borrowers already ran a business, modest loans often helped it grow; where they did not, the money tended to smooth household consumption rather than create new enterprises.",
+        "role": "evidence"
+      },
+      {
+        "text": "Average incomes in lending areas moved little, though a minority of habitual entrepreneurs did substantially better.",
+        "role": "evidence"
+      },
+      {
+        "text": "Microcredit, the evidence suggests, works less as a general escape from poverty than as a tool that amplifies businesses that already exist.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "The evidence suggests small loans mostly strengthen businesses that already exist rather than offering poor households a general escape from poverty.",
+  "builder": {
+    "prompt": "In one sentence: what do these studies say microcredit does and does not do?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence carry both halves, what microcredit is not (a general escape) and what it is (an amplifier of existing businesses)?",
+        "kept": "Good. The conclusion is a contrast, and both of its sides are load bearing.",
+        "drifted": "The claim has a shape: less this, more that. Keeping only one side reports half the finding as if it were the whole."
+      },
+      {
+        "id": "scope",
+        "ask": "Did the condition survive, that the loans helped where a business already existed?",
+        "kept": "Well held. That where clause is the most important phrase in the paragraph. Without it, the finding becomes the opposite of itself.",
+        "drifted": "Deleting where borrowers already ran a business turns a conditional result into a general endorsement, exactly the reading the studies undercut."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the finding at the evidence suggests, not at proves?",
+        "kept": "Right. The paragraph reports accumulating evidence, not a settled verdict.",
+        "drifted": "Suggests is the author's chosen strength. A summary that settles the question outruns the research it reports."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Studies suggest that small loans help poor households build businesses and raise their incomes across the many countries examined.",
+      "B": "The evidence suggests small loans mostly strengthen businesses that already exist rather than lifting poor households out of poverty generally.",
+      "C": "Habitual entrepreneurs do substantially better than their neighbours because microcredit programmes concentrate their lending on them.",
+      "D": "Small loans often help existing businesses grow, and average incomes in lending areas rise substantially as a consequence of that growth."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "The paragraph reports what careful studies of microcredit have found. The loans helped where a borrower already had a business to grow. Where there was none, the money mostly smoothed daily consumption instead of creating enterprises. Neighbourhood incomes barely moved, though a small group of born entrepreneurs gained a lot. The conclusion is deliberately modest: microcredit looks less like a general way out of poverty and more like an amplifier for businesses that already exist.",
+      "correct_reasoning": "Option B keeps the finding's whole architecture: the hedge (suggests), the contrast (amplifier, not general escape), and the condition (businesses that already exist). It is the closing sentence with every qualifier still attached, which at this level is precisely what the question is testing.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The where clause is gone. The studies found help only where a business already ran; this option offers the help to poor households in general, and adds income gains the paragraph says did not appear on average.",
+          "seductive_element": "It keeps the word suggests and the study framing, so it sounds properly cautious while claiming far more.",
+          "thinking_mistake": "Domain-limiter drop: deleting the condition that defines where the claim is true."
+        },
+        {
+          "option": "C",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says a minority of habitual entrepreneurs did better; it never says programmes concentrate lending on them. That mechanism is invented, and it explains a fact the author left unexplained.",
+          "seductive_element": "It supplies the missing why, and a filled gap feels like understanding.",
+          "thinking_mistake": "Cause invention: giving a reason the paragraph never gave."
+        },
+        {
+          "option": "D",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "The first clause is exactly the text. The tail then claims average incomes rise substantially, which the paragraph directly contradicts: incomes in lending areas moved little.",
+          "seductive_element": "Verifying the faithful opening buys trust the false ending spends.",
+          "thinking_mistake": "The poisoned tail: the swerve arrives after checking has stopped."
+        }
+      ],
+      "reading_habit": "In research paragraphs, the where and only clauses are the finding. Read the options once just for the qualifiers, striking any option in which one has quietly died."
+    }
+  },
+  "mentor": {
+    "challenge": "One clause in this paragraph decides everything. Find it, and count which options keep it alive.",
+    "takeaway": "A condition dropped is a claim changed. The where clause is the finding."
+  }
+}

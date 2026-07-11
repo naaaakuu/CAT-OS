@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0001",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Task That Would Not Close",
+    "theme": "why unfinished tasks stay active in memory",
+    "estimated_time_sec": 60,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "The mind holds unfinished tasks in memory more tightly than finished ones, and completing a task is what allows the mind to release it.",
+      "scope": "A general claim about how memory treats unfinished versus finished tasks.",
+      "certainty": "asserted",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 1,
+      "syntax": 1,
+      "turn_subtlety": 1,
+      "distractor_closeness": 1,
+      "live_options": 1,
+      "stance_subtlety": 1,
+      "qualifier_density": 0,
+      "domain_load": 1
+    },
+    "load_bearing": [],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "certainty_reading"],
+    "mission": "find_the_thesis",
+    "learning_objective": "tell the paragraph's claim apart from the story told to illustrate it",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General psychology of task memory; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "The journey's opening item: one plainly stated claim, one vivid example built to tempt, one obvious inflation, one added fact. Teaches the claim-versus-topic habit gently. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "The human mind holds on to unfinished tasks far more tightly than to completed ones.",
+        "role": "thesis"
+      },
+      {
+        "text": "Waiters in a famous set of observations could recall long, complicated orders perfectly until the bill was paid, after which the details simply vanished.",
+        "role": "evidence"
+      },
+      {
+        "text": "An open task seems to keep a small mental file active, nagging quietly for attention until it can be closed.",
+        "role": "support"
+      },
+      {
+        "text": "Completion, in other words, is what allows the mind to let go.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "The mind keeps unfinished tasks active in memory and releases them only once they are completed.",
+  "builder": {
+    "prompt": "In one sentence: what does this paragraph claim about how the mind treats tasks?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence state what the mind does with unfinished tasks, rather than just naming the topic of memory?",
+        "kept": "Good. A summary needs a claim with a predicate, not a topic. Saying the paragraph is about memory and tasks would state nothing the author committed to.",
+        "drifted": "The most common first habit: summarising the topic instead of the claim. The paragraph does not merely discuss memory. It asserts that unfinished tasks are held more tightly and released on completion."
+      },
+      {
+        "id": "addition",
+        "ask": "Is everything in your sentence actually in the paragraph, with no advice or extra explanation added?",
+        "kept": "Exactly right. The paragraph describes what the mind does. It never recommends anything or explains further, and neither should the summary.",
+        "drifted": "Adding a natural next thought, like advice about to-do lists, feels helpful but changes the claim. A summary restates what the author said and stops there."
+      },
+      {
+        "id": "scope",
+        "ask": "Did the waiters stay out of your sentence?",
+        "kept": "Well judged. The waiters are the paragraph's most memorable sentence, and they are there to illustrate the claim, not to be it.",
+        "drifted": "The waiters are the illustration. If they appear in your sentence, the example has stolen the stage from the idea it was serving."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Waiters can remember long and complicated orders in full detail while they are open, and forget them as soon as the bill is settled.",
+      "B": "The mind holds on to tasks that remain incomplete, and it lets go of them only once they have been finished.",
+      "C": "An unfinished task will always dominate a person's attention until the moment it is finally closed and put away.",
+      "D": "The mind keeps unfinished tasks active, which is why writing tasks down helps people stop worrying about them."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "The paragraph makes one claim: your mind grips tasks that are still open and relaxes its grip once they are done. The waiters are the proof it offers, remembering orders perfectly while the order is live, then losing the details the moment the bill closes the task. The last sentence restates the idea: completion is what lets the mind release.",
+      "correct_reasoning": "Option B restates the claim at the author's own strength and reach: unfinished tasks are held, finished ones are released. It carries no example, adds nothing, and says exactly as much as the paragraph does. The author would sign it.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "Every word of this is in the paragraph, but the waiters exist to illustrate the claim about unfinished tasks. A summary of the example is a summary of the servant, not the master.",
+          "seductive_element": "It is the most concrete and memorable sentence in the paragraph, and it can be verified against the text word for word.",
+          "thinking_mistake": "Concreteness bias: letting the most picturable sentence stand in for the idea it was brought in to illustrate."
+        },
+        {
+          "option": "C",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the mind holds unfinished tasks more tightly and that they nag quietly. This option turns a quiet grip into total domination with the word always, a far stronger claim than the author made.",
+          "seductive_element": "It sounds decisive, and decisive statements read like strong summaries.",
+          "thinking_mistake": "Certainty inflation: rewarding an option for confidence the author never expressed."
+        },
+        {
+          "option": "D",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The first half is faithful, but the paragraph never mentions writing tasks down or any way of managing the effect. That advice was added from outside the text.",
+          "seductive_element": "The addition is sensible and matches what many readers already believe about to-do lists.",
+          "thinking_mistake": "Outside knowledge import: treating something true about the topic as something said by the author."
+        }
+      ],
+      "reading_habit": "Before looking at any option, point to the one sentence the others serve. If a sentence tells a story or paints a picture, it is serving the claim, not making it."
+    }
+  },
+  "mentor": {
+    "challenge": "One sentence here does the claiming. The others tell a story about it. Find the claimer before the options try to choose for you.",
+    "takeaway": "A vivid story is never the point. It is the servant of the point."
+  }
+}
