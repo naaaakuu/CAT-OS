@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0014",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "The Narrator Who Cannot Be Trusted",
+    "theme": "how a story lets a reader see past the very narrator telling it",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 4
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "Both traps at once. Trap B: the intruder is a general definition of fiction sharing narrator and reader, dressed as a thesis. Trap A: a belonging sentence is disguised with a lone present tense address to the reader, luring the shortcut cut."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "ambiguity_tolerance", "coherence_monitoring"],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "separate a camouflaged general definition from a costumed belonging sentence using the removal test",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General narrative theory of unreliable narration; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "CAT+ both traps. Intruder B is a general definition of fiction; decoy D wears a present tense reader address. Only removing each and reading the remainder separates them. Outlier at B. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The unreliable narrator poses a puzzle: if every word of the story comes through one flawed voice, how can a reader ever learn what that voice will not admit?"
+    },
+    {
+      "label": "B",
+      "text": "Fiction, after all, is the art of arranging invented events into a sequence a reader will follow with belief, whatever its distance from fact."
+    },
+    {
+      "label": "C",
+      "text": "The answer is that the writer plants evidence the narrator reports without grasping, small facts whose weight the reader feels and the teller does not."
+    },
+    {
+      "label": "D",
+      "text": "You notice the servant's fear, the guest's quick exit, the letter left unopened, and you assemble from them a truth the narrator never states."
+    },
+    {
+      "label": "E",
+      "text": "So the story tells two versions at once, the one the narrator believes and the one the reader builds behind his back, and the gap between them is the whole design."
+    }
+  ],
+  "outlier": "B",
+  "core_order": ["A", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument about how a reader sees past an unreliable narrator, from the puzzle to the design. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences argue one specific claim about narrative technique. A poses the puzzle, how can a reader see past a flawed narrator. C answers it, the writer plants evidence the narrator misses. D shows it working, the reader assembling a truth from small facts. E states the design, two versions told at once. Puzzle, answer, illustration, design.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "question",
+        "why_here": "It poses the specific puzzle the whole argument solves, how a reader learns what an unreliable narrator will not admit."
+      },
+      {
+        "label": "C",
+        "role": "answer",
+        "why_here": "It answers A directly, the writer plants evidence the narrator reports without grasping, and its the answer is names it as the reply."
+      },
+      {
+        "label": "D",
+        "role": "example",
+        "why_here": "It makes C concrete, the reader noticing small facts and assembling a truth the narrator never states."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the argument to its point with so, the story telling two versions, the gap between them being the design."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "substitution",
+        "explanation": "C's the answer stands in for a reply to the exact question A posed, binding the two as puzzle and solution."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "given_new",
+        "explanation": "C's planted evidence the narrator misses is D's given, and D adds the reader noticing and assembling it."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with so, gathering the planted evidence and the reader's assembly into the conclusion about the double story."
+      }
+    ],
+    "violation_named": "Sentence B is a general definition inside a specific argument. The core solves one focused puzzle about unreliable narration, question, answer, example, design. B defines fiction as a whole, the art of arranging invented events into a believable sequence. It is a textbook generalisation about all fiction, pitched far above the particular technique the paragraph analyses.",
+    "why_it_breaks": "The argument needs no definition of fiction in general; it needs the mechanism by which a reader outreads a narrator. B's broad definition connects to nothing in the chain: A's puzzle, C's answer, D's example and E's design never engage the question of what fiction is or its relation to fact. B could open an essay on the novel as such. This paragraph is a tight case about one device, and a definition of the whole art has no seat in it.",
+    "trap_exposed": "This item sets both traps. The true intruder B is disguised as a thesis: its after all and its authoritative sweep make a general definition sound like the paragraph's central claim, so a reader keeps it. Meanwhile D is dressed to look odd, breaking into the present tense and addressing you directly, which tempts a shortcut reader to cut it as tonally out of place. The removal test settles it: remove B and the puzzle, answer, example and design stand as a whole; remove D and the argument loses its one concrete illustration. Only one removal leaves a coherent paragraph.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its opening is a question, not a claim, so a reader deciding early may treat it as a rhetorical frame rather than the load bearing puzzle.",
+        "what_breaks": "Without A there is no puzzle: C's the answer replies to a question the paragraph never asked."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the argument's pivot and the most abstract sentence, so before building, its exact seat is the hardest to fix.",
+        "what_breaks": "Without C the puzzle has no solution, and D's noticing illustrates a mechanism the paragraph never named."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "This is the planted decoy: its present tense and its direct you make it feel tonally apart from the analytic sentences.",
+        "what_breaks": "Without D the argument states its answer but never shows it working, and E's two versions rest on no concrete case."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "E and B both make broad statements about how fiction works, so a hurried read may hold both and skip the removal test.",
+        "what_breaks": "Without E the argument analyses the technique but never lands its point, that the gap between the two versions is the design."
+      }
+    ],
+    "detection_habit": "When two sentences both look excludable, remove each in turn and read the four that remain. A fair paragraph survives exactly one of those readings, and the removal that leaves coherence names the true intruder."
+  },
+  "mentor": {
+    "challenge": "One sentence defines all of fiction and hides as the thesis. Another wears an odd costume and belongs. Do not choose. Remove each and read what is left.",
+    "takeaway": "Two suspects, one test: remove each and read the remainder. Exactly one removal leaves a paragraph standing."
+  }
+}

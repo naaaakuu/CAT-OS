@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0006",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "arts-culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Blue That Cost a Kingdom",
+    "theme": "how the scarcity of ultramarine shaped where painters dared to use it",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "B",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B: the outlier shares ultramarine and the technical vocabulary of pigment, and opens with a connective, but switches the thread from economics of scarcity to chemistry of manufacture."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "candidate_model_maintenance"],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice when a sentence switches the dimension of the story while staying on the same subject",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General art history of ultramarine pigment; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Medium thread break. The core narrates how ultramarine's cost governed its use and meaning. The outlier switches to how the pigment was chemically made, sharing heavy vocabulary and a connective. Outlier at D. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Ground from lapis lazuli carried overland from a single mountain range, ultramarine cost more by weight than gold for much of the Renaissance."
+    },
+    {
+      "label": "B",
+      "text": "Because of that price, a patron's contract often specified the blue by name, reserving it for the robe of the Virgin and little else."
+    },
+    {
+      "label": "C",
+      "text": "To spend it elsewhere on the panel was to waste a fortune, so painters filled their skies and seas with cheaper blues that few would question."
+    },
+    {
+      "label": "D",
+      "text": "The stone itself, moreover, had to be kneaded for days in wax and resin before the purest blue would separate from the dull grey rock around it."
+    },
+    {
+      "label": "E",
+      "text": "So the pigment's rarity became a kind of grammar, and a viewer learned to read where the blue fell as a sign of what the picture held most sacred."
+    }
+  ],
+  "outlier": "D",
+  "core_order": ["A", "B", "C", "E"],
+  "builder": {
+    "prompt": "Build the four sentence story of how ultramarine's cost shaped its meaning, from price to grammar. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences follow one thread, the economics of scarcity turning into meaning. A establishes the extraordinary cost, B shows patrons reserving the blue for the Virgin, C shows painters economising everywhere else, and E draws the consequence, the pigment's placement becoming a language of the sacred. Cost, reservation, economy, meaning.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It opens the thread the paragraph follows: the sheer cost of ultramarine, which every later sentence traces the effects of."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It gives the first effect of the cost, and its because of that price ties it straight to A's expense."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It gives the second effect, painters using cheaper blues elsewhere, following naturally from B's reservation of the costly one."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the whole thread to its point, the rarity becoming a grammar of the sacred that viewers learned to read."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "B opens with because of that price, taking A's cost as its cause and carrying the thread forward."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "given_new",
+        "explanation": "B's reservation of the blue for the Virgin is C's given, and C adds the new consequence: cheaper blues everywhere else."
+      },
+      {
+        "from": "C",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with so, gathering the pattern of reservation and economy into its conclusion about meaning."
+      }
+    ],
+    "violation_named": "Sentence D is a thread break. The core narrates one dimension of ultramarine, how its cost governed where it was used and what that use came to mean. D switches to a different dimension, the chemistry of how the pigment was manufactured from the raw stone. Same subject, a different thread entirely.",
+    "why_it_breaks": "The core moves cost to reservation to economy to meaning; every sentence is about value and its consequences. D describes kneading the stone in wax and resin, a process step that has nothing to do with the economic thread. It would sit perfectly in a paragraph about how ultramarine was made. In this paragraph, about what its cost meant, D's manufacturing detail connects to nothing before or after it.",
+    "trap_exposed": "D is heavily camouflaged. It names the stone, the blue and the grey rock, so its vocabulary overlaps the core more than any other sentence, and it opens with moreover, a connective that promises the argument is simply continuing. Both are bait. The connective points at nothing the thread was building, and the shared words describe the pigment's making, not its meaning. Follow the thread, not the vocabulary, and D steps off it.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is dense with geography and cost, so before the paragraph is built it can read as an isolated fact rather than the opening.",
+        "what_breaks": "Without A the thread has no origin: B's because of that price refers to an expense the paragraph never established."
+      },
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Judged alone it looks like a narrow historical detail about contracts, easy to take for an aside.",
+        "what_breaks": "Without B the reservation of the blue for the sacred is gone, and E's grammar of what a picture held most sacred has no basis."
+      },
+      {
+        "label": "C",
+        "mistake_type": "local_smoothness",
+        "why_tempting": "It reads smoothly after both B and D, so a reader who accepts D's local fit may cut C to keep the manufacturing sentence.",
+        "what_breaks": "Without C the paragraph loses the contrast that gives the blue its meaning, the cheap blues everywhere against the precious blue in one place."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its abstract talk of grammar and reading has a different register from the concrete sentences around it.",
+        "what_breaks": "Without E the story stops at painters economising and never states its point, that scarcity turned placement into meaning."
+      }
+    ],
+    "detection_habit": "Name the paragraph's thread in a few words, then test each sentence against it. A sentence can stay on the subject and still leave the thread, and the one that changes the dimension is the one that does not belong."
+  },
+  "mentor": {
+    "challenge": "Every sentence here is about the same blue. Only four are about the same thing that blue is doing. Find where the thread turns.",
+    "takeaway": "Same subject, different thread, is still the odd one. Follow what the paragraph is tracing, not what it mentions."
+  }
+}

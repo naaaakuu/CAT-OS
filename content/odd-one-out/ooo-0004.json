@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0004",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "economics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Harbour That Priced Itself",
+    "theme": "how a single crowded fishing harbour rationed its berths by price",
+    "estimated_time_sec": 80,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 4,
+      "decoy_load": 1
+    },
+    "traps": {
+      "primary": "none",
+      "secondary": "none",
+      "description": "No engineered decoy. The outlier is right on the topic of prices and scarcity but pitched at a global, economy wide scope, while the core is a tight case study of one harbour."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice when a sentence widens from a specific case to a claim about the whole economy",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General microeconomics of congestion pricing; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Easy tier, first modest overlap. The core is a single harbour case study; the outlier makes a sweeping claim about prices across a whole economy. Same topic, wrong scope. Outlier at B. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "For years the small fishing harbour ran on a first come rule, and by dawn every good berth near the market was already taken."
+    },
+    {
+      "label": "B",
+      "text": "Across an entire economy, prices coordinate millions of separate decisions that no planner could ever gather in one place."
+    },
+    {
+      "label": "C",
+      "text": "So the harbour master tried something new: he auctioned the dozen best berths each morning to whoever bid highest for them."
+    },
+    {
+      "label": "D",
+      "text": "Almost at once the crush at dawn eased, because a skipper now weighed the fee against the day's likely catch before racing in."
+    },
+    {
+      "label": "E",
+      "text": "The berths went, in the end, to the boats that could turn them into the most value, which was exactly what the crush had hidden."
+    }
+  ],
+  "outlier": "B",
+  "core_order": ["A", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument about the harbour, from the problem to what pricing revealed. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences argue one case from start to finish. A sets the problem, a harbour rationed by racing rather than value. C introduces the fix, a morning auction. D shows the immediate effect, the dawn crush easing. E draws the conclusion, the berths going to the boats that valued them most. Problem, intervention, effect, point.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It states the specific problem the whole paragraph solves: a harbour where first come wasted the best berths."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It supplies the intervention that answers A, the harbour master's auction, and its opening so ties it to the problem."
+      },
+      {
+        "label": "D",
+        "role": "cause_effect",
+        "why_here": "It reports what the auction changed, and its because clause explains the mechanism, skippers now weighing fee against catch."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It states what the episode demonstrates, the berths reaching the boats that could use them best."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "C opens with so, marking itself as the harbour master's response to the exact problem A has just laid out."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "given_new",
+        "explanation": "The auction introduced in C is D's given, and D adds the new consequence: the dawn crush easing."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "E's the berths and the crush point back to the same harbour and the same problem, closing the case D advanced."
+      }
+    ],
+    "violation_named": "Sentence B is right topic at the wrong scope. The core is a tight case study of one harbour and its dozen berths. B makes a sweeping claim about how prices coordinate an entire economy, millions of decisions no planner could gather. The subject, prices and scarcity, matches. The reach does not.",
+    "why_it_breaks": "Every core sentence stays inside the harbour: this master, these berths, that dawn. B leaves the harbour entirely for the whole economy and never returns. It is the kind of grand statement a textbook might use to frame the story, but the paragraph the four sentences build is the story itself, not its frame, and there is no join where a claim about millions of decisions can attach to a claim about twelve berths.",
+    "trap_exposed": "B shares the core's vocabulary of prices, coordination and scarcity, and it is entirely true, so it feels like the paragraph's thesis stated grandly. That is the pull of a right topic, wrong scope sentence: its truth and its keywords hide the change in altitude. But the four core sentences never rise above one harbour, and a claim about the whole economy simply looks down from too high to join them.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reads like scene setting, so a reader judging sentence by sentence may treat it as skippable background.",
+        "what_breaks": "Without A there is no problem for the auction to solve, and C's so answers a question the paragraph never asked."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It sits in the middle of the causal chain, so before the paragraph is built its exact position is the least obvious.",
+        "what_breaks": "Without C the intervention vanishes: the crush eases in D for no stated reason, and the argument loses its cause."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "D and B both explain how prices guide behaviour, so a hurried read holds both as candidates and guesses.",
+        "what_breaks": "Without D the auction has no visible effect, and E's conclusion about value rests on a change the paragraph never showed."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its closing phrase, which the crush had hidden, has a reflective register that stands out from the plainer sentences.",
+        "what_breaks": "Without E the paragraph stops at a practical result and never states its point, that pricing revealed which boats valued the berths."
+      }
+    ],
+    "detection_habit": "Fix the scope of the paragraph before judging any sentence. When four sentences stay inside one case and a fifth speaks for the whole world, the world sized sentence is usually the one that does not belong."
+  },
+  "mentor": {
+    "challenge": "One sentence here is the biggest, truest claim of the five. Ask whether this paragraph is that big.",
+    "takeaway": "The widest and truest sentence can still be the odd one. Belonging is about reach, not grandeur."
+  }
+}

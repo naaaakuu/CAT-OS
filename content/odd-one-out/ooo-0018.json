@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0018",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "history",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Coffeehouse That Argued Back",
+    "theme": "how the early coffeehouse turned reading from a private act into a public argument",
+    "estimated_time_sec": 160,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "example_no_claim",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 5,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B at high camouflage: the intruder is a vivid, period accurate example about the price and ritual of coffee, sharing every keyword and a demonstrative, but it illustrates a claim, the sensory novelty of coffee, that the core never makes."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "detect a vivid example whose implied claim is absent from an argument that shares its every keyword",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General social history of the coffeehouse; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Elite example without a claim. The core argues that the coffeehouse made reading public and argumentative; the intruder is a vivid aside about coffee as a costly sensory novelty, a claim the argument never makes. Subtlety 4, overlap 5. Outlier at E. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Before the coffeehouse, a pamphlet was mostly read alone, its argument meeting no reply but the silent agreement or doubt of a single reader."
+    },
+    {
+      "label": "B",
+      "text": "The new rooms changed that at a stroke, for a paper read aloud across a shared table was a paper that could be answered on the spot."
+    },
+    {
+      "label": "C",
+      "text": "Reading became a move in a conversation rather than a private absorption, and an author now wrote knowing his claims would be contested before the ink was dry."
+    },
+    {
+      "label": "D",
+      "text": "The house that charged a penny at the door was, in this way, selling not the drink but the argument, and the loudest tables drew the largest crowds."
+    },
+    {
+      "label": "E",
+      "text": "The coffee itself, bitter and strange to palates raised on ale, was a costly novelty that patrons sipped slowly to make the expensive cup last."
+    }
+  ],
+  "outlier": "E",
+  "core_order": ["A", "B", "C", "D"],
+  "builder": {
+    "prompt": "Build the four sentence argument that the coffeehouse turned reading into public argument, from the solitary pamphlet to the penny at the door. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences argue one claim. A gives the before, reading alone with no reply. B gives the change, a paper read aloud could be answered. C states the thesis, reading became a move in a conversation. D closes, the house sold the argument, not the drink. Before, change, thesis, point, all about reading becoming public and contestable.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "background",
+        "why_here": "It sets the before state the argument transforms, a pamphlet read alone, meeting no reply."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It gives the change, a paper read aloud across a table that could be answered, and its that changed ties it to A."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It states the thesis, reading as a move in a conversation, authors now writing to be contested."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "It draws the argument to its point, the house selling the argument rather than the drink, and its in this way ties it to C."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "B's changed that points back at A's solitary reading, marking the shift the argument turns on."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "given_new",
+        "explanation": "B's paper that could be answered is C's given, and C adds the new claim, reading becoming a move in a conversation."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "substitution",
+        "explanation": "D's in this way stands in for the whole thesis of contested reading, carrying it into the conclusion about selling the argument."
+      }
+    ],
+    "violation_named": "Sentence E is an example with no claim to serve. The core argues that the coffeehouse made reading public and argumentative. E vividly describes the coffee itself, bitter, strange, costly, sipped slowly. It illustrates a claim about coffee as a sensory and economic novelty, a claim the core never makes; the argument is about reading and argument, not about taste and price.",
+    "why_it_breaks": "Every core sentence advances the reading argument, before, change, thesis, point. E advances none of it; the taste and cost of the drink bear on nothing the argument claims. D even says the house sold not the drink but the argument, so the drink's own qualities are precisely what the core sets aside. E would sit perfectly in a paragraph about coffee as a consumer novelty. In this paragraph, about reading made public, its vivid detail illustrates a generalisation that is simply not here.",
+    "trap_exposed": "E is a beautiful decoy. It is period accurate, richly sensory, and shares coffee, cup and patrons with the core, making it the most vivid and most on theme sentence of the five. That vividness is the pull; a memorable sentence feels central. But an example earns its place only by serving a claim, and the claim E serves, coffee as a costly novelty, appears nowhere in the argument. Worse, D explicitly discounts the drink in favour of the argument, so E works against the core's own point. Follow the argument's claim, not the sentence's colour.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It describes an absence, reading with no reply, so a reader deciding early may treat it as mood setting rather than the argument's baseline.",
+        "what_breaks": "Without A there is no before, and B's changed that transforms a solitary reading the paragraph never established."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It carries the hinge of the argument in a single clause, so before building, its exact seat between before and thesis is hard to fix.",
+        "what_breaks": "Without B the argument leaps from solitary reading to contested reading with no mechanism, the paper read aloud, to connect them."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "C and E both make a general statement about what the coffeehouse was, so a hurried read may hold both as candidates and guess.",
+        "what_breaks": "Without C the thesis is gone, and D's selling the argument concludes a claim about contested reading the paragraph never made."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its wry epigram about the penny and the loudest tables has a knowing register that stands apart from the plainer sentences.",
+        "what_breaks": "Without D the argument states its thesis but never lands its point, that the house was selling the argument rather than the drink."
+      }
+    ],
+    "detection_habit": "For the most vivid sentence, name the claim it illustrates, then find that claim in the paragraph. When the claim is absent, the example is decoration, and the argument that discounts the very thing it describes has no seat for it."
+  },
+  "mentor": {
+    "challenge": "The most vivid, most period perfect sentence here illustrates a point the argument never makes, and even argues against. Ask which claim each example serves.",
+    "takeaway": "A vivid example still needs a claim to stand under. When the claim is missing, colour is not membership."
+  }
+}

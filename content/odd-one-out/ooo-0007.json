@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0007",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Signal from the Silent Deep",
+    "theme": "what a survey of the deep seafloor discovered about oxygen far from sunlight",
+    "estimated_time_sec": 105,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "C",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B: the outlier reports how the research was carried out, sharing the exact instruments and seafloor vocabulary and opening with a pronoun, while every core sentence reports what was discovered."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "candidate_model_maintenance"],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice when a sentence reports how research was done inside a paragraph reporting what it found",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General marine science of seafloor oxygen; no specific text adapted, and no specific study or figure is asserted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Medium method versus finding, the Bible's §4 e/f prototype. The core narrates what was discovered about oxygen on the deep seafloor; the outlier reports how the survey was conducted, richly camouflaged. Outlier at E. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Textbooks had long held that oxygen in the sea comes only from the surface, where sunlight lets tiny plants make it."
+    },
+    {
+      "label": "B",
+      "text": "So a reading of oxygen rising from the pitch dark seafloor, kilometres below the last light, was not supposed to be possible at all."
+    },
+    {
+      "label": "C",
+      "text": "Yet that is what a recent survey reported, a faint but steady supply of the gas welling up from the mud far beyond the reach of the sun."
+    },
+    {
+      "label": "D",
+      "text": "The likeliest source, researchers proposed, was the metal rich nodules littering the plain, splitting seawater with a trickle of natural current."
+    },
+    {
+      "label": "E",
+      "text": "To gather the readings, the team lowered sealed chambers onto the mud and left them for hours, measuring how the trapped water changed."
+    }
+  ],
+  "outlier": "E",
+  "core_order": ["A", "B", "C", "D"],
+  "builder": {
+    "prompt": "Build the four sentence story of what the deep sea survey discovered, from the old rule to the proposed cause. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences narrate one discovery. A gives the settled belief, oxygen comes only from the sunlit surface. B states what that belief rules out, oxygen from the dark seafloor. C reports the finding that broke the rule, and D offers the proposed explanation, current splitting seawater at metal nodules. Belief, implication, finding, cause, all about what was discovered.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "background",
+        "why_here": "It sets the settled understanding the discovery will overturn, the surface only source of ocean oxygen."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It draws out what A implies, and its so ties it to A: deep dark oxygen should be impossible."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It delivers the finding that contradicts B, and its yet marks the reversal at the heart of the discovery."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "It closes the discovery narrative with the proposed cause, still reporting what was found and how it might work."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "B opens with so, drawing its impossibility directly from the surface only rule A has just stated."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "C opens with yet, marking the finding as the exact contradiction of what B said could not happen."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "D's the likeliest source points back to the oxygen C reported, moving from the finding to its explanation."
+      }
+    ],
+    "violation_named": "Sentence E is a method versus finding shift. The core narrates what was discovered, an old rule, its implication, the finding that broke it, and the proposed cause. E reports how the research was done, the chambers lowered onto the mud and left for hours. It answers how did they measure it rather than what did they find, a different question from the one the paragraph is telling.",
+    "why_it_breaks": "Every core sentence advances the discovery: the belief, the impossibility, the observed oxygen, its likely source. E advances none of that; it steps out of the story to describe procedure. A discovery narrative can note a method, but here nothing sets up or takes up the chambers, so E sits beside the story rather than inside it. It belongs in a methods paragraph, not in this one about what the deep sea turned out to hold.",
+    "trap_exposed": "E is the most camouflaged sentence here. It shares readings, mud, seafloor and the team with the core, and it opens with to gather the readings, which promises to continue the same account. That promise is the bait. But the core is about what was found; E is about how it was measured. When a paragraph reports findings and one sentence reports methodology, matching vocabulary hides a change of question, and the question is what decides belonging.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reads like a textbook aside, so a reader judging early may treat it as background that could be spared.",
+        "what_breaks": "Without A there is no rule to break: B's so and C's yet both refer to an expectation the paragraph never set."
+      },
+      {
+        "label": "B",
+        "mistake_type": "connective_assumption",
+        "why_tempting": "Its opening so makes it feel like a mere restatement of A, as though it added nothing new.",
+        "what_breaks": "Without B the finding in C loses its force, because the paragraph never says the deep oxygen was supposed to be impossible."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "C and E both centre on the seafloor readings, so a hurried read may hold both as the odd candidate and guess.",
+        "what_breaks": "Without C the discovery itself vanishes: the paragraph sets up an impossibility and then offers a cause for a finding it never reported."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its technical talk of nodules and current splitting seawater has the densest vocabulary, so its register stands out.",
+        "what_breaks": "Without D the narrative stops at the bare finding and never reaches its point, the proposed explanation for the deep oxygen."
+      }
+    ],
+    "detection_habit": "Ask what question each sentence answers. In a paragraph of findings, the sentence that answers how did they do it, however matched its words, is reporting method where the others report result."
+  },
+  "mentor": {
+    "challenge": "Four of these sentences tell you what the deep sea holds. One tells you how the instruments were placed. Hold the paragraph's purpose while you read.",
+    "takeaway": "How it was found is a different question from what was found. A findings paragraph has no seat for a method sentence."
+  }
+}

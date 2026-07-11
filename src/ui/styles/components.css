@@ -915,42 +915,42 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 /* ---------- The introduction: a page that breathes ----------
    Shared by the PJ and PS introductions (same art language, same
    rhythm); each module keeps its own class prefix for legibility. */
-.pj-intro, .ps-intro {
+.pj-intro, .ps-intro, .ooo-intro {
   max-width: var(--measure-read);
   margin: 0 auto;
 }
-.pj-intro__hero, .ps-intro__hero {
+.pj-intro__hero, .ps-intro__hero, .ooo-intro__hero {
   text-align: center;
   padding: var(--space-4) 0 var(--space-6);
 }
-.pj-intro__art, .ps-intro__art {
+.pj-intro__art, .ps-intro__art, .ooo-intro__art {
   display: flex;
   justify-content: center;
   color: var(--color-accent);
   margin-bottom: var(--space-4);
 }
-.pj-intro__art svg, .ps-intro__art svg { width: 5rem; height: 5rem; }
-.pj-intro__art--hero svg, .ps-intro__art--hero svg { width: 6.5rem; height: 6.5rem; }
-.pj-intro__art [data-draw], .ps-intro__art [data-draw] {
+.pj-intro__art svg, .ps-intro__art svg, .ooo-intro__art svg { width: 5rem; height: 5rem; }
+.pj-intro__art--hero svg, .ps-intro__art--hero svg, .ooo-intro__art--hero svg { width: 6.5rem; height: 6.5rem; }
+.pj-intro__art [data-draw], .ps-intro__art [data-draw], .ooo-intro__art [data-draw] {
   stroke-dasharray: 260;
   stroke-dashoffset: 260;
   animation: art-draw calc(var(--duration-slower) * 2) var(--ease-out) 120ms forwards;
 }
-.pj-intro__h1, .ps-intro__h1 {
+.pj-intro__h1, .ps-intro__h1, .ooo-intro__h1 {
   font-family: var(--font-reading);
   font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-tight);
   margin: var(--space-2) 0;
 }
-.pj-intro__lede, .ps-intro__lede {
+.pj-intro__lede, .ps-intro__lede, .ooo-intro__lede {
   font-size: var(--text-sm);
   color: var(--color-ink-2);
   max-width: 28rem;
   margin: 0 auto;
   text-wrap: balance;
 }
-.pj-intro__section, .ps-intro__section {
+.pj-intro__section, .ps-intro__section, .ooo-intro__section {
   margin-bottom: var(--space-7);
   text-align: center;
   opacity: 0;
@@ -958,31 +958,31 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   transition: opacity var(--duration-slower) var(--ease-out),
               transform var(--duration-slower) var(--ease-out);
 }
-.pj-intro__section.is-seen, .ps-intro__section.is-seen { opacity: 1; transform: none; }
-.pj-intro__title, .ps-intro__title {
+.pj-intro__section.is-seen, .ps-intro__section.is-seen, .ooo-intro__section.is-seen { opacity: 1; transform: none; }
+.pj-intro__title, .ps-intro__title, .ooo-intro__title {
   font-family: var(--font-reading);
   font-size: var(--text-xl);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-4);
 }
-.pj-intro__section p, .ps-intro__section p {
+.pj-intro__section p, .ps-intro__section p, .ooo-intro__section p {
   font-family: var(--font-reading);
   font-size: var(--text-read);
   line-height: var(--leading-reading);
   text-align: left;
   margin-bottom: var(--para-space);
 }
-.pj-intro__section p:last-child, .ps-intro__section p:last-child { margin-bottom: 0; }
-.pj-intro__aside, .ps-intro__aside {
+.pj-intro__section p:last-child, .ps-intro__section p:last-child, .ooo-intro__section p:last-child { margin-bottom: 0; }
+.pj-intro__aside, .ps-intro__aside, .ooo-intro__aside {
   font-size: var(--text-xs) !important;
   font-family: var(--font-ui) !important;
   color: var(--color-ink-3);
   border-left: 2px solid var(--color-line-strong);
   padding-left: var(--space-3);
 }
-.pj-intro__cta, .ps-intro__cta { padding-bottom: var(--space-4); }
-.pj-intro__closing, .ps-intro__closing {
+.pj-intro__cta, .ps-intro__cta, .ooo-intro__cta { padding-bottom: var(--space-4); }
+.pj-intro__closing, .ps-intro__closing, .ooo-intro__closing {
   font-family: var(--font-reading);
   font-style: italic;
   color: var(--color-ink-2);
@@ -991,7 +991,8 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 
 /* ---------- The solving surface ---------- */
 .ps-challenge,
-.pj-challenge {
+.pj-challenge,
+.ooo-challenge {
   font-family: var(--font-reading);
   font-size: var(--text-sm);
   line-height: var(--leading-body);
@@ -999,14 +1000,14 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   padding-left: var(--space-3);
   margin: 0 0 var(--space-3);
 }
-.pj-readback {
+.pj-readback, .ooo-readback {
   margin: var(--space-4) 0 var(--space-2);
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-lg);
   background: var(--color-accent-subtle);
   animation: explanation-in var(--duration-slow) var(--ease-out) both;
 }
-.pj-readback__eyebrow {
+.pj-readback__eyebrow, .ooo-readback__eyebrow {
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
@@ -1014,13 +1015,13 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-accent);
   margin: 0 0 var(--space-2);
 }
-.pj-readback__text {
+.pj-readback__text, .ooo-readback__text {
   font-family: var(--font-reading);
   font-size: var(--text-sm);
   line-height: var(--leading-body);
   margin: 0 0 var(--space-2);
 }
-.pj-readback__nudge {
+.pj-readback__nudge, .ooo-readback__nudge {
   font-size: var(--text-xs);
   color: var(--color-ink-2);
   font-style: italic;
@@ -1030,31 +1031,31 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 /* ---------- The teaching layer (four layers, Bible §11) ----------
    The .pjx/.psx pairs share one visual language: PJ and PS teach in
    the same voice, so their surfaces rhyme by construction. */
-.pjx-verdict, .psx-verdict {
+.pjx-verdict, .psx-verdict, .oox-verdict {
   font-weight: var(--weight-bold);
   font-size: var(--text-sm);
   color: var(--color-ink-2);
   margin: var(--space-4) 0 var(--space-2);
   animation: explanation-in var(--duration-slow) var(--ease-out) both;
 }
-.pjx-verdict.is-correct, .psx-verdict.is-correct { color: var(--color-correct-ink); }
-.pjx-verdict.is-wrong, .psx-verdict.is-wrong   { color: var(--color-wrong-ink); }
-.pjx-partial {
+.pjx-verdict.is-correct, .psx-verdict.is-correct, .oox-verdict.is-correct { color: var(--color-correct-ink); }
+.pjx-verdict.is-wrong, .psx-verdict.is-wrong, .oox-verdict.is-wrong { color: var(--color-wrong-ink); }
+.pjx-partial, .oox-partial {
   font-size: var(--text-xs);
   color: var(--color-ink-2);
   margin: 0 0 var(--space-2);
 }
-.pjx, .psx {
+.pjx, .psx, .oox {
   font-size: var(--text-sm);
   margin-top: var(--space-3);
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-line);
   animation: explanation-in var(--duration-slow) var(--ease-out) both;
 }
-.pjx__block, .psx__block { margin-bottom: var(--space-5); }
-.pjx__block > p, .psx__block > p { margin-bottom: var(--space-2); }
-.pjx__block > p:last-child, .psx__block > p:last-child { margin-bottom: 0; }
-.pjx__label, .psx__label {
+.pjx__block, .psx__block, .oox__block { margin-bottom: var(--space-5); }
+.pjx__block > p, .psx__block > p, .oox__block > p { margin-bottom: var(--space-2); }
+.pjx__block > p:last-child, .psx__block > p:last-child, .oox__block > p:last-child { margin-bottom: 0; }
+.pjx__label, .psx__label, .oox__label {
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
@@ -1062,7 +1063,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-ink-3);
   margin-bottom: var(--space-2);
 }
-.pjx__chip, .psx__chip {
+.pjx__chip, .psx__chip, .oox__chip {
   display: inline-flex;
   align-items: center;
   padding: 2px var(--space-3);
@@ -1076,19 +1077,19 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   margin-bottom: var(--space-2);
 }
 .pjx__chip--trap { background: var(--color-warning-bg); color: var(--color-warning); }
-.pjx__paragraph {
+.pjx__paragraph, .oox__paragraph {
   font-family: var(--font-reading);
   font-size: var(--text-read);
   line-height: var(--leading-reading);
   margin: 0 0 var(--space-2);
 }
-.pjx__sequence {
+.pjx__sequence, .oox__sequence {
   font-size: var(--text-xs);
   color: var(--color-ink-3);
   font-variant-numeric: tabular-nums;
   margin: 0;
 }
-.pjx__link, .pjx__tempt, .psx__distractor {
+.pjx__link, .pjx__tempt, .psx__distractor, .oox__outlier, .oox__pick {
   padding: var(--space-3);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
@@ -1096,13 +1097,13 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   background: var(--color-surface);
 }
 .pjx__link.is-had { border-color: var(--color-correct-ink); }
-.pjx__tempt.is-yours, .psx__distractor.is-yours {
+.pjx__tempt.is-yours, .psx__distractor.is-yours, .oox__pick.is-yours {
   border-color: var(--color-wrong-ink);
   background: var(--color-wrong-bg);
 }
-.pjx__link p, .pjx__tempt p, .psx__distractor p { margin: 0 0 var(--space-1); }
-.pjx__link p:last-child, .pjx__tempt p:last-child, .psx__distractor p:last-child { margin-bottom: 0; }
-.pjx__link-head, .psx__link-head {
+.pjx__link p, .pjx__tempt p, .psx__distractor p, .oox__outlier p, .oox__pick p { margin: 0 0 var(--space-1); }
+.pjx__link p:last-child, .pjx__tempt p:last-child, .psx__distractor p:last-child, .oox__outlier p:last-child, .oox__pick p:last-child { margin-bottom: 0; }
+.pjx__link-head, .psx__link-head, .oox__link-head {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1114,20 +1115,20 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-size: var(--text-xs);
   font-variant-numeric: tabular-nums;
 }
-.pjx__device, .psx__device {
+.pjx__device, .psx__device, .oox__device {
   font-size: var(--text-2xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-ink-3);
 }
-.pjx__had {
+.pjx__had, .oox__had {
   margin-left: auto;
   font-size: var(--text-2xs);
   font-weight: var(--weight-semibold);
   color: var(--color-correct-ink);
 }
-.pjx__yours, .psx__yours {
+.pjx__yours, .psx__yours, .oox__yours {
   margin-left: auto;
   font-size: var(--text-2xs);
   font-weight: var(--weight-semibold);
@@ -1138,7 +1139,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-ink-3);
   font-style: italic;
 }
-.pjx__habit, .psx__habit {
+.pjx__habit, .psx__habit, .oox__habit {
   display: flex;
   gap: var(--space-3);
   padding: var(--space-4);
@@ -1146,7 +1147,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   background: var(--color-accent-subtle);
   margin-bottom: var(--space-5);
 }
-.pjx__habit-glyph, .psx__habit-glyph {
+.pjx__habit-glyph, .psx__habit-glyph, .oox__habit-glyph {
   flex: none;
   width: 1.9rem; height: 1.9rem;
   display: inline-flex; align-items: center; justify-content: center;
@@ -1155,7 +1156,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-accent-ink);
   font-size: var(--text-xs);
 }
-.pjx__habit-label, .psx__habit-label {
+.pjx__habit-label, .psx__habit-label, .oox__habit-label {
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
@@ -1163,7 +1164,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-accent);
   margin-bottom: 2px;
 }
-.pjx__habit p, .psx__habit p { margin: 0; font-size: var(--text-sm); color: var(--color-ink); }
+.pjx__habit p, .psx__habit p, .oox__habit p { margin: 0; font-size: var(--text-sm); color: var(--color-ink); }
 
 /* ---------- Anchor flash: explanation → source paragraph ---------- */
 .anchor-link {
@@ -1201,14 +1202,14 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 
 /* ---------- Today's Mission: a small vow before reading ---------- */
-.ps-mission {
+.ps-mission, .ooo-mission {
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-lg);
   background: var(--color-accent-subtle);
   margin-bottom: var(--space-4);
   animation: explanation-in var(--duration-slow) var(--ease-out) both;
 }
-.ps-mission__eyebrow {
+.ps-mission__eyebrow, .ooo-mission__eyebrow {
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
@@ -1216,14 +1217,14 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-accent);
   margin: 0 0 var(--space-1);
 }
-.ps-mission__title {
+.ps-mission__title, .ooo-mission__title {
   font-family: var(--font-reading);
   font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-tight);
   margin: 0 0 var(--space-1);
 }
-.ps-mission__line {
+.ps-mission__line, .ooo-mission__line {
   font-size: var(--text-xs);
   color: var(--color-ink-2);
   margin: 0;
@@ -1286,7 +1287,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 
 /* ---------- The Think button: a coach, one thumb away ---------- */
-.ps-think {
+.ps-think, .ooo-think {
   position: fixed;
   right: calc(env(safe-area-inset-right) + var(--space-4));
   bottom: calc(var(--nav-height) + env(safe-area-inset-bottom) + var(--space-4));
@@ -1305,11 +1306,11 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   transition: transform var(--duration-fast) var(--ease-out),
               background-color var(--duration-fast) var(--ease-out);
 }
-.ps-think:active { transform: scale(var(--press-scale)); }
+.ps-think:active, .ooo-think:active { transform: scale(var(--press-scale)); }
 @media (hover: hover) {
-  .ps-think:hover { background: var(--color-surface-2); }
+  .ps-think:hover, .ooo-think:hover { background: var(--color-surface-2); }
 }
-.ps-think__glyph {
+.ps-think__glyph, .ooo-think__glyph {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1321,7 +1322,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-weight: var(--weight-bold);
 }
 
-.ps-think-sheet {
+.ps-think-sheet, .ooo-think-sheet {
   position: fixed;
   inset: 0;
   z-index: 25;
@@ -1329,13 +1330,13 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   align-items: flex-end;
   justify-content: center;
 }
-.ps-think-sheet__backdrop {
+.ps-think-sheet__backdrop, .ooo-think-sheet__backdrop {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.35);
   animation: explanation-in var(--duration) var(--ease-out) both;
 }
-.ps-think-sheet__panel {
+.ps-think-sheet__panel, .ooo-think-sheet__panel {
   position: relative;
   width: 100%;
   max-width: var(--measure-read);
@@ -1352,7 +1353,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: none; }
 }
-.ps-think-sheet__eyebrow {
+.ps-think-sheet__eyebrow, .ooo-think-sheet__eyebrow {
   font-size: var(--text-2xs);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
@@ -1360,16 +1361,16 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-accent);
   margin: 0 0 var(--space-1);
 }
-.ps-think-sheet__lead {
+.ps-think-sheet__lead, .ooo-think-sheet__lead {
   font-size: var(--text-xs);
   color: var(--color-ink-3);
   margin: 0 0 var(--space-3);
 }
-.ps-think-sheet__list {
+.ps-think-sheet__list, .ooo-think-sheet__list {
   margin: 0 0 var(--space-4);
   padding: 0 0 0 var(--space-4);
 }
-.ps-think-sheet__list li {
+.ps-think-sheet__list li, .ooo-think-sheet__list li {
   font-family: var(--font-reading);
   font-size: var(--text-sm);
   line-height: var(--leading-body);
@@ -1533,7 +1534,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 
 /* The wrong options, each with its distortion named. */
-.psx__distractor-letter {
+.psx__distractor-letter, .oox__outlier-letter {
   flex: none;
   width: 1.4rem; height: 1.4rem;
   display: inline-flex; align-items: center; justify-content: center;
@@ -1580,3 +1581,156 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-variant-numeric: tabular-nums;
 }
 .psx__takeaway { margin-top: var(--space-2); }
+
+/* ============================================================
+   Odd One Out (0.12.0) — the detection journey.
+   Shares the intro, mission, Think and teaching language above
+   (.ooo-intro, .ooo-mission, .ooo-think, .oox); below are the
+   surfaces only this module has.
+   ============================================================ */
+
+/* ---------- Exclude mode: five sentences, one to set apart ---------- */
+.ooo-sent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-2);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out),
+              opacity var(--duration) var(--ease-out);
+}
+@media (hover: hover) {
+  .ooo-sent:not([disabled]):hover { border-color: var(--color-line-strong); }
+}
+.ooo-sent:not([disabled]):active { transform: scale(var(--press-scale)); }
+.ooo-sent[disabled] { cursor: default; }
+.ooo-sent__slot {
+  flex: none;
+  width: 1.7rem; height: 1.7rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1.5px dashed var(--color-line-strong);
+  background: transparent;
+  color: var(--color-ink-3);
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  transition: background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+.ooo-sent__tag {
+  flex: none;
+  align-self: flex-start;
+  margin-top: 2px;
+  font-family: var(--font-ui);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink-3);
+  letter-spacing: var(--tracking-wide);
+}
+/* The learner's current exclusion: held apart, calmly (accent, never alarm). */
+.ooo-sent.is-excluded {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+.ooo-sent.is-excluded .ooo-sent__slot {
+  border-style: solid;
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+.ooo-sent.is-excluded .ooo-sent__slot::before { content: "·"; }
+/* Reveal states: the true outlier, the learner's miss, the quiet core. */
+.ooo-sent.is-apart {
+  border-color: var(--color-correct-ink);
+  background: var(--color-correct-bg);
+}
+.ooo-sent.is-apart .ooo-sent__slot {
+  border-style: solid;
+  border-color: var(--color-correct-ink);
+  background: var(--color-correct-bg);
+  color: var(--color-correct-ink);
+}
+.ooo-sent.is-apart .ooo-sent__slot::before { content: "·"; }
+.ooo-sent.is-missed {
+  border-color: var(--color-wrong-ink);
+  background: var(--color-wrong-bg);
+}
+.ooo-sent.is-missed .ooo-sent__slot {
+  border-style: solid;
+  border-color: var(--color-wrong-ink);
+  background: var(--color-wrong-bg);
+  color: var(--color-wrong-ink);
+}
+.ooo-sent.is-missed .ooo-sent__slot::before { content: "×"; }
+.ooo-sent.is-core { opacity: var(--opacity-dim); }
+.ooo-sent.is-core .ooo-sent__slot { border-style: solid; }
+.ooo-sent.is-core .ooo-sent__slot::before { content: "✓"; }
+
+/* ---------- The read back: the candidate paragraph, held ---------- */
+.ooo-readback__apart {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  border-top: 1px solid var(--color-line);
+  padding-top: var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+
+/* ---------- The teaching layer: OOO-only pieces ---------- */
+/* The four core sentences gently join into one paragraph. */
+.oox__joined {
+  animation: ooo-join var(--duration-slower) var(--ease-out) both;
+}
+@keyframes ooo-join {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: none; }
+}
+/* The odd sentence naturally separates: a quiet slide apart. */
+.oox__outlier {
+  border-style: dashed;
+  animation: ooo-separate var(--duration-slower) var(--ease-out) 200ms both;
+}
+@keyframes ooo-separate {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+.oox__outlier.is-yours-right { border-color: var(--color-correct-ink); }
+.oox__outlier-text, .oox__pick-text {
+  font-family: var(--font-reading);
+  font-style: italic;
+}
+/* The tie between two neighbours, named on the role rail. */
+.oox__tie {
+  font-size: var(--text-2xs);
+  color: var(--color-accent);
+  border-left: 2px solid var(--color-accent-subtle);
+  padding-left: var(--space-2);
+  margin: 0 0 var(--space-2);
+}
+.oox__thinking {
+  color: var(--color-ink-3);
+  font-size: var(--text-xs);
+  font-style: italic;
+}
+/* The anatomy underneath (elite tiers). */
+.oox__anatomy-line {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+}
+.oox__dots {
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  font-size: var(--text-2xs);
+}
+.oox__takeaway { margin-top: var(--space-2); }

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0002",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "The Clocks That Tamed the Town",
+    "theme": "how public clocks changed the rhythm of medieval town life",
+    "estimated_time_sec": 70,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "D",
+    "violation_type": "example_no_claim",
+    "difficulty_vector": {
+      "topical_overlap": 2,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 1,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 1
+    },
+    "traps": {
+      "primary": "none",
+      "secondary": "none",
+      "description": "No engineered trap. The outlier is a vivid, on topic aside about bells in village churches that serves no claim the core makes, teaching the example needs a claim principle plainly."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["candidate_model_maintenance", "given_new_tracking", "coherence_monitoring"],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice when a vivid, on topic sentence serves no claim the paragraph actually makes",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General history of mechanical clocks and town life; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Foundation narrative: a chronological account of public clocks reshaping work. The outlier is warmer and more picturable than the core, an aside about church bells and weddings that no claim employs. Teaches that vivid and relevant sounding is not employed. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Within a generation, guild contracts began to specify hours rather than tasks, and the working day acquired edges it had never had before."
+    },
+    {
+      "label": "B",
+      "text": "When the first mechanical clocks appeared on town belfries in the fourteenth century, most people could not read a dial and did not need to."
+    },
+    {
+      "label": "C",
+      "text": "By the time wages were tied to the clock, the tower had quietly become the town's real authority, and everyone below it kept its time."
+    },
+    {
+      "label": "D",
+      "text": "What mattered was the striking of the hours, a public sound that gave every trade in earshot one shared measure of the day."
+    },
+    {
+      "label": "E",
+      "text": "In small villages, church bells also rang for weddings and funerals, and people could tell from the pattern of the ringing whose news it was."
+    }
+  ],
+  "outlier": "E",
+  "core_order": ["B", "D", "A", "C"],
+  "builder": {
+    "prompt": "Build the four sentence story of how the tower clock changed working life, from its arrival to its authority. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences tell one story in time order. B brings the clocks to the belfries, D explains what actually mattered about them, the shared striking of hours, A shows work reorganising around those hours, and C closes with the tower as the town's quiet authority. Arrival, meaning, consequence, ending.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It opens the story: the clocks arrive, and the detail that nobody could read a dial sets up why the sound would matter."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "It resolves the small puzzle B planted. If the dial was unreadable, the striking of the hours is what did the work."
+      },
+      {
+        "label": "A",
+        "role": "cause_effect",
+        "why_here": "It shows the shared measure taking hold of daily life: contracts and working days reshaped around hours."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "It gathers the whole story into its landing point, the tower as the authority everyone now obeys."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "D's what mattered answers the expectation B created, picking up the clocks nobody could read and telling us what they were actually for."
+      },
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "given_new",
+        "explanation": "The shared measure of the day established in D becomes the ground A builds on: hours are now a thing contracts can name."
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "C opens by the time wages were tied to the clock, a time marker that carries A's change forward to its conclusion."
+      }
+    ],
+    "violation_named": "Sentence E is an example with no claim to serve. The core makes one specific argument, that the public striking of hours reorganised work and authority in towns. E offers a warm picture of village bells announcing weddings and funerals, and no sentence in the core makes any claim about announcements, villages, or news.",
+    "why_it_breaks": "Every core sentence advances the work and authority story: arrival, shared measure, contracts, obedience. E's bells measure nothing and govern nobody; they carry news. It illustrates a generalisation this paragraph never makes, so there is no claim it can stand under and no join it can occupy.",
+    "trap_exposed": "E is the most picturable sentence of the five, and it shares bells and ringing with the core's world, so it feels at home. That warmth is the pull. But notice what each core sentence does: each one moves the work story forward. E decorates the same world without moving anything, and a sentence with no job is the one with no seat.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its aside that most people could not read a dial can feel like trivia beside the weightier sentences about wages and authority.",
+        "what_breaks": "Without B the story has no beginning: the clocks never arrive, and D's answer about the striking of hours answers a question nobody asked."
+      },
+      {
+        "label": "D",
+        "mistake_type": "lexical_pull",
+        "why_tempting": "D and the bells sentence share the world of public sound, so whichever is kept can make the other look disposable.",
+        "what_breaks": "Without D the paragraph never says what the clocks actually gave the town, and the leap from unreadable dials to hour based contracts goes unexplained."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It names neither clocks nor towers, so until the paragraph is built it can look like a loose sentence about labour.",
+        "what_breaks": "Without A the consequence is missing: the shared measure never touches anyone's working day, and C's tied wages arrive from nowhere."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "C and the bells sentence both give bell towers a human meaning, so a hurried read keeps both in play and guesses between them.",
+        "what_breaks": "Without C the story stops mid stride: work has reorganised, but the point of the whole account, the tower's quiet authority, is never stated."
+      }
+    ],
+    "detection_habit": "For every vivid sentence, ask which claim employs it. An example without a claim to serve is decoration, and decoration is what this question type asks you to remove."
+  },
+  "mentor": {
+    "challenge": "One of these five is the most charming sentence here, and charm is exactly what it is relying on. Ask what work each sentence does.",
+    "takeaway": "A sentence earns its seat by serving the paragraph's claim, not by painting its world beautifully."
+  }
+}

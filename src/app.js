@@ -15,13 +15,15 @@ import { formatPercent, formatDate } from './core/utils/format.js';
 import { registerRC } from './modules/reading-comprehension/index.js';
 import { registerPJ } from './modules/para-jumbles/index.js';
 import { registerPS } from './modules/para-summary/index.js';
+import { registerOOO } from './modules/odd-one-out/index.js';
 import { resetPSIntro } from './modules/para-summary/logic/store.js';
+import { resetOOOIntro } from './modules/odd-one-out/logic/store.js';
 import { listRCItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
 import { evaluate } from './core/engagement/achievements.js';
 import { dashboardLine } from './core/engagement/messages.js';
 import { initFeedback, feedbackPrefs, setFeedbackPref, cue, installGlobalFeedback } from './core/engagement/feedback.js';
-import { playSound } from './core/engagement/audio.js';
+import { playSound, stopFocusNoise, startFocusNoise } from './core/engagement/audio.js';
 import { formatDuration } from './core/utils/format.js';
 import { recommendNext } from './core/learning/journey.js';
 import { renderGrowth } from './shell/growth.js';
@@ -46,7 +48,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.11.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.12.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -196,13 +198,16 @@ async function renderHome(outlet) {
       ${recent.map((s) => {
         const isPJ = s.module === 'pj';
         const isPS = s.module === 'ps';
+        const isOOO = s.module === 'ooo';
         const count = s.item_ids?.length ?? s.score.total;
         const label = isPJ
           ? `Para Jumbles · ${count} jumble${count === 1 ? '' : 's'}`
           : isPS
             ? `Para Summary · ${count} paragraph${count === 1 ? '' : 's'}`
-            : (titles.get(s.passage_id) ?? s.passage_id);
-        const href = isPJ ? '#/pj' : isPS ? '#/ps' : `#/rc/review/${s.passage_id}`;
+            : isOOO
+              ? `Odd One Out · ${count} item${count === 1 ? '' : 's'}`
+              : (titles.get(s.passage_id) ?? s.passage_id);
+        const href = isPJ ? '#/pj' : isPS ? '#/ps' : isOOO ? '#/ooo' : `#/rc/review/${s.passage_id}`;
         return `
         <div class="row">
           <div class="row__lead">
@@ -212,7 +217,7 @@ async function renderHome(outlet) {
               <div class="row__hint">${formatDate(s.finished_at)} · ${s.score.correct}/${s.score.total} correct</div>
             </div>
           </div>
-          <a class="hint" href="${href}" aria-label="Review ${label}">${(isPJ || isPS) ? 'Journey' : 'Review'}</a>
+          <a class="hint" href="${href}" aria-label="Review ${label}">${(isPJ || isPS || isOOO) ? 'Journey' : 'Review'}</a>
         </div>`;
       }).join('')}
     </div>`;
@@ -259,7 +264,14 @@ function renderPractice(outlet) {
           <span>Find the author's point and protect it — an eight-tier journey from Foundation to Premium</span>
         </div>
       </a>
-      ${['Odd One Out', 'Vocabulary'].map((name) => `
+      <a class="list-item" href="#/ooo">
+        <div class="list-item__title">Odd One Out</div>
+        <div class="list-item__meta">
+          <span class="badge badge--success">Available</span>
+          <span>Build the paragraph, and the stranger reveals itself — an eight-tier journey from Foundation to Premium</span>
+        </div>
+      </a>
+      ${['Vocabulary'].map((name) => `
         <div class="list-item" aria-disabled="true" style="opacity: var(--opacity-dim)">
           <div class="list-item__title">${name}</div>
           <div class="list-item__meta"><span class="badge">Coming in V1.x</span></div>
@@ -350,6 +362,34 @@ function renderSettings(outlet) {
       </div>
 
       <div class="card">
+        <h2>Focus Sound</h2>
+        <div class="row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">◎</span>
+            <div>
+              <div class="row__label">Brown noise</div>
+              <div class="row__hint">A warm ambient tone for reading sessions — off by default</div>
+            </div>
+          </div>
+          <div class="segmented" id="focus-noise-picker" role="group" aria-label="Focus noise" data-sfx="off">
+            <button class="segmented__option" data-focus-noise="true" aria-pressed="false">On</button>
+            <button class="segmented__option" data-focus-noise="false" aria-pressed="false">Off</button>
+          </div>
+        </div>
+        <div class="row" id="focus-volume-row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">◑</span>
+            <div>
+              <div class="row__label">Focus volume</div>
+              <div class="row__hint">Level for the ambient noise</div>
+            </div>
+          </div>
+          <input class="range" id="focus-volume-slider" type="range" min="0" max="100" step="1"
+                 value="35" aria-label="Focus volume" data-sfx="off" />
+        </div>
+      </div>
+
+      <div class="card">
         <h2>Learning</h2>
         <div class="row">
           <div class="row__lead">
@@ -360,6 +400,16 @@ function renderSettings(outlet) {
             </div>
           </div>
           <button class="btn" id="ps-intro-reset">Show again</button>
+        </div>
+        <div class="row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">⊘</span>
+            <div>
+              <div class="row__label">Odd One Out introduction</div>
+              <div class="row__hint">Show the first-time introduction again</div>
+            </div>
+          </div>
+          <button class="btn" id="ooo-intro-reset">Show again</button>
         </div>
       </div>
 
@@ -499,12 +549,63 @@ function renderSettings(outlet) {
   });
   syncFeedback();
 
+  // --- Focus Sound toggles and volume ---
+  const focusVolumeSlider = outlet.querySelector('#focus-volume-slider');
+  const focusVolumeRow = outlet.querySelector('#focus-volume-row');
+  const syncFocusNoise = () => {
+    const prefs = feedbackPrefs();
+    for (const b of outlet.querySelectorAll('[data-focus-noise]')) {
+      b.setAttribute('aria-pressed', String((b.dataset.focusNoise === 'true') === prefs.focusNoise));
+    }
+    focusVolumeSlider.value = String(Math.round(prefs.focusVolume * 100));
+    focusVolumeSlider.disabled = !prefs.focusNoise;
+    focusVolumeRow.style.opacity = prefs.focusNoise ? '' : 'var(--opacity-dim)';
+  };
+  outlet.querySelector('#focus-noise-picker').addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-focus-noise]');
+    if (!b) return;
+    const on = b.dataset.focusNoise === 'true';
+    await setFeedbackPref(storage, 'focusNoise', on);
+    syncFocusNoise();
+    cue('toggle');
+    if (on) {
+      startFocusNoise();
+      setTimeout(stopFocusNoise, 1000); // 1-second preview
+    } else {
+      stopFocusNoise();
+    }
+  });
+  let focusVolPreview = 0;
+  focusVolumeSlider.addEventListener('input', async () => {
+    await setFeedbackPref(storage, 'focusVolume', Number(focusVolumeSlider.value) / 100);
+    const now = Date.now();
+    // Re-start preview if dragging
+    if (now - focusVolPreview > 250) { 
+      focusVolPreview = now; 
+      startFocusNoise(); 
+      setTimeout(stopFocusNoise, 500); 
+    }
+  });
+  syncFocusNoise();
+
   // --- Learning: bring the Para Summary introduction back ---
   outlet.querySelector('#ps-intro-reset').addEventListener('click', async () => {
     try {
       await resetPSIntro(storage);
       cue('toggle');
       toast('The introduction will greet you on your next visit to Para Summary.', 'info', { mute: true });
+    } catch (err) {
+      toast('Could not reset the introduction.', 'error');
+      console.error('[CAT OS]', err);
+    }
+  });
+
+  // --- Learning: bring the Odd One Out introduction back ---
+  outlet.querySelector('#ooo-intro-reset').addEventListener('click', async () => {
+    try {
+      await resetOOOIntro(storage);
+      cue('toggle');
+      toast('The introduction will greet you on your next visit to Odd One Out.', 'info', { mute: true });
     } catch (err) {
       toast('Could not reset the introduction.', 'error');
       console.error('[CAT OS]', err);
@@ -597,8 +698,21 @@ async function boot() {
   registerRC(router, { storage });
   registerPJ(router, { storage });
   registerPS(router, { storage });
+  registerOOO(router, { storage });
 
   router.start();
+
+  // Stop focus noise automatically when navigating away from a session screen.
+  // We check the hash to see if it's one of the session routes.
+  window.addEventListener('hashchange', () => {
+    const h = location.hash;
+    const isSession = h.startsWith('#/rc/session') || h.startsWith('#/rc/mentor') ||
+                      h.startsWith('#/pj/session') || h.startsWith('#/ps/session') ||
+                      h.startsWith('#/ooo/session');
+    if (!isSession) {
+      stopFocusNoise();
+    }
+  });
 
   // (Nav taps are covered by installGlobalFeedback's press delegation.)
 

@@ -20,8 +20,8 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 12;
-const CONTENT_VERSION = 8;
+const CACHE_VERSION = 13;
+const CONTENT_VERSION = 9;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
 const KEEP = [SHELL_CACHE, CONTENT_CACHE];
@@ -39,6 +39,7 @@ const SHELL_FILES = [
   './src/core/engine/scoring.js',
   './src/core/engine/pj-session.js',
   './src/core/engine/ps-session.js',
+  './src/core/engine/ooo-session.js',
   './src/core/content-loader/loader.js',
   './src/core/content-loader/validator.js',
   './src/core/utils/format.js',
@@ -60,6 +61,9 @@ const SHELL_FILES = [
   './src/core/mentor/ps-voice.js',
   './src/core/mentor/ps-dna.js',
   './src/core/mentor/ps-lesson.js',
+  './src/core/mentor/ooo-voice.js',
+  './src/core/mentor/ooo-dna.js',
+  './src/core/mentor/ooo-lesson.js',
   './src/shell/growth.js',
   './src/modules/reading-comprehension/index.js',
   './src/modules/reading-comprehension/logic/store.js',
@@ -84,6 +88,15 @@ const SHELL_FILES = [
   './src/modules/para-summary/screens/browser.js',
   './src/modules/para-summary/screens/session.js',
   './src/modules/para-summary/screens/learn.js',
+  './src/modules/odd-one-out/index.js',
+  './src/modules/odd-one-out/logic/tiers.js',
+  './src/modules/odd-one-out/logic/store.js',
+  './src/modules/odd-one-out/logic/teach.js',
+  './src/modules/odd-one-out/logic/think.js',
+  './src/modules/odd-one-out/screens/intro.js',
+  './src/modules/odd-one-out/screens/browser.js',
+  './src/modules/odd-one-out/screens/session.js',
+  './src/modules/odd-one-out/screens/learn.js',
   './src/ui/components/cat-nav.js',
   './src/ui/components/cat-jumble-board.js',
   './src/ui/components/cat-toast.js',
@@ -116,6 +129,7 @@ const CONTENT_FILES = [
   './content/schema/rc.schema.v4.json',
   './content/schema/pj.schema.v1.json',
   './content/schema/ps.schema.v1.json',
+  './content/schema/ooo.schema.v1.json',
   './content/reading-comprehension/rc-0001.json',
   './content/reading-comprehension/rc-0002.json',
   './content/reading-comprehension/rc-0003.json',
@@ -187,6 +201,26 @@ const CONTENT_FILES = [
   './content/para-summary/ps-0018.json',
   './content/para-summary/ps-0019.json',
   './content/para-summary/ps-0020.json',
+  './content/odd-one-out/ooo-0001.json',
+  './content/odd-one-out/ooo-0002.json',
+  './content/odd-one-out/ooo-0003.json',
+  './content/odd-one-out/ooo-0004.json',
+  './content/odd-one-out/ooo-0005.json',
+  './content/odd-one-out/ooo-0006.json',
+  './content/odd-one-out/ooo-0007.json',
+  './content/odd-one-out/ooo-0008.json',
+  './content/odd-one-out/ooo-0009.json',
+  './content/odd-one-out/ooo-0010.json',
+  './content/odd-one-out/ooo-0011.json',
+  './content/odd-one-out/ooo-0012.json',
+  './content/odd-one-out/ooo-0013.json',
+  './content/odd-one-out/ooo-0014.json',
+  './content/odd-one-out/ooo-0015.json',
+  './content/odd-one-out/ooo-0016.json',
+  './content/odd-one-out/ooo-0017.json',
+  './content/odd-one-out/ooo-0018.json',
+  './content/odd-one-out/ooo-0019.json',
+  './content/odd-one-out/ooo-0020.json',
 ];
 
 /* Install: precache shell + content, then take over promptly. */

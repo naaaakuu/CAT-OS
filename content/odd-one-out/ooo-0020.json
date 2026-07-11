@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0020",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 94,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Model That Ate Its Own Signal",
+    "theme": "why a forecast widely acted upon can undo the very regularity it relied on",
+    "estimated_time_sec": 175,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 5,
+      "violation_locus": "global",
+      "abstractness_vocab": 5,
+      "length_syntax_load": 5,
+      "core_structure_strength": 4,
+      "decoy_load": 4
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "Both traps at maximal grain. Trap B: the intruder is a general methodological maxim about all models, sharing every term and a connective, dressed as the argument's thesis. Trap A: a belonging step is disguised with a lone equation like phrasing that draws the eye."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "ambiguity_tolerance"],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "detect a general methodological maxim posing as the thesis of a specific self defeating prophecy argument",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General economics of reflexivity and self defeating forecasts; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Premium general versus specific at maximal subtlety. The core builds one specific self defeating prophecy argument; the intruder is a broad maxim about all models being simplifications, dressed as the thesis. A belonging step wears an equation like clause as decoy. Outlier at B. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A forecasting model finds that firms which cut prices each autumn reliably win the season, and it publishes the pattern as a dependable edge."
+    },
+    {
+      "label": "B",
+      "text": "Every model, of course, is a simplification, a deliberate stripping away of detail so that the few forces held to matter can be seen and measured at all."
+    },
+    {
+      "label": "C",
+      "text": "But once the edge is public, every firm cuts in autumn, and an advantage that depended on others not cutting dissolves the moment they all do."
+    },
+    {
+      "label": "D",
+      "text": "The signal, call it S, held only while S was scarce; broadcast it, and the very acting on it drives the correlation the model measured to zero."
+    },
+    {
+      "label": "E",
+      "text": "So a forecast that is believed and obeyed can consume the regularity it fed on, and the more perfectly it is trusted, the faster it makes itself false."
+    }
+  ],
+  "outlier": "B",
+  "core_order": ["A", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument for how a trusted forecast undoes itself, from the discovered edge to the paradox. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences build one specific argument about a self defeating forecast. A gives the discovered edge, autumn price cuts win the season. C shows the undoing, once public, everyone cuts and the edge dissolves. D generalises the mechanism to the signal S, scarce then broadcast then worthless. E states the paradox, a trusted forecast consumes the regularity it fed on. Edge, undoing, mechanism, paradox.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It opens the argument with the concrete case, a model finding a dependable autumn edge and publishing it."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It shows the undoing with but, the public edge drawing every firm in and dissolving the advantage."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "It abstracts the mechanism, the signal S worthless once broadcast, and its the signal ties it to C's edge."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It states the paradox with so, a trusted forecast consuming its own regularity, the more trusted the faster false."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "C opens with but once the edge is public, turning A's published pattern into the start of its own undoing."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "substitution",
+        "explanation": "D's the signal, call it S, stands in for C's public edge, restating the same dissolution in general terms."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with so, drawing the paradox from the mechanism D described, the acting on S driving its value to zero."
+      }
+    ],
+    "violation_named": "Sentence B is a general methodological maxim inside a specific argument. The core builds one focused case, how a trusted forecast destroys the regularity it relied on. B states a broad truth about all models, that every model is a simplification stripping away detail. It is a textbook generalisation about modelling as such, at a level far above the particular self defeating mechanism the paragraph traces.",
+    "why_it_breaks": "The argument moves edge, undoing, mechanism, paradox, every step about acting on a forecast erasing its signal. B's point, that models simplify, is true and famous and bears on none of that; the self defeat in the core has nothing to do with simplification and everything to do with the signal being acted upon. No core sentence takes up detail, stripping away, or the forces held to matter. B would open a general essay on the nature of models. This paragraph is a specific paradox, and a maxim about all models has no join in its chain.",
+    "trap_exposed": "B is the hardest general intruder to catch. It shares model, measured and signal with the core, opens with of course as if continuing a shared thought, and states exactly the kind of sober generalisation that reads as a thesis, so a reader keeps it as the paragraph's central insight. But a thesis must be the claim the other sentences develop, and A, C, D and E develop the self defeat of a forecast, not the simplifying nature of models. Meanwhile D is dressed with the equation like call it S, tempting a shortcut cut. Hold the paragraph's purpose: the specific paradox. B states a different, general truth, and remove it and the argument stands whole.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its concrete example of autumn price cuts can read as a warm up illustration rather than the argument's first term.",
+        "what_breaks": "Without A there is no edge to undo, and C's once the edge is public refers to a pattern the paragraph never discovered."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It carries the whole reversal in one sentence, so before building, its seat between the edge and the abstraction is hard to fix.",
+        "what_breaks": "Without C the undoing is missing, and D's signal driven to zero abstracts a dissolution the paragraph never showed."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "This is the decoy: its algebraic call it S and drives to zero give it a formal register unlike the prose around it.",
+        "what_breaks": "Without D the argument loses the general mechanism, and E's paradox generalises from a single case with no bridge."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "E and B both make a broad statement about models and forecasts, so a hurried read may hold both and guess.",
+        "what_breaks": "Without E the argument states its mechanism but never lands its paradox, that the more a forecast is trusted the faster it makes itself false."
+      }
+    ],
+    "detection_habit": "When one sentence states a famous general maxim and the others build a specific mechanism, suspect the maxim. A true generalisation about the whole field is often the intruder dressed as the thesis, and the removal test will keep the specific argument whole without it."
+  },
+  "mentor": {
+    "challenge": "One sentence states a truth about all models and hides as the thesis. The others build one specific paradox. Hold the paragraph's purpose against the famous general line.",
+    "takeaway": "The most quotable, most general sentence is often the intruder in disguise. A maxim about the field is not the thesis of the case."
+  }
+}

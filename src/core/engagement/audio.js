@@ -73,6 +73,11 @@ const state = {
   noiseBuf: null, // one shared 1s white-noise buffer (tiny, reused)
   welcomePending: false, // a queued opening chime, played on first gesture
   installed: false, // global-listener guard (set by feedback.js caller)
+  focusEnabled: false,
+  focusVolume: 0.35,
+  brownBuf: null,
+  focusNode: null, // the GainNode for the active focus noise
+  focusSrc: null, // the active BufferSource for focus noise
 };
 
 function reduced() {
@@ -94,6 +99,21 @@ export function configureAudio({ enabled, volume } = {}) {
     const t = state.ctx.currentTime;
     state.master.gain.cancelScheduledValues(t);
     state.master.gain.setTargetAtTime(state.volume, t, 0.02);
+  }
+}
+
+export function configureFocusNoise({ enabled, volume } = {}) {
+  if (typeof enabled === 'boolean') {
+    state.focusEnabled = enabled;
+    if (!enabled && state.focusNode) stopFocusNoise();
+  }
+  if (typeof volume === 'number' && Number.isFinite(volume)) {
+    state.focusVolume = Math.max(0, Math.min(1, volume));
+    if (state.focusNode && state.ctx) {
+      const t = state.ctx.currentTime;
+      state.focusNode.gain.cancelScheduledValues(t);
+      state.focusNode.gain.setTargetAtTime(state.focusVolume * 0.15, t, 0.02);
+    }
   }
 }
 
@@ -134,9 +154,37 @@ function ensureGraph() {
   const data = buf.getChannelData(0);
   for (let i = 0; i < data.length; i += 1) data[i] = Math.random() * 2 - 1;
 
+  // Four seconds of brown noise (integrated white noise with a leak).
+  const brownLen = ctx.sampleRate * 4;
+  const bBuf = ctx.createBuffer(1, brownLen, ctx.sampleRate);
+  const bData = bBuf.getChannelData(0);
+  let lastOut = 0;
+  for (let i = 0; i < brownLen; i += 1) {
+    const white = Math.random() * 2 - 1;
+    // 0.98 leak factor prevents DC drift and bounds the signal
+    bData[i] = (lastOut * 0.98) + (white * 0.02);
+    lastOut = bData[i];
+  }
+  // Normalize the brown noise to [-1, 1] for maximum dynamic range before gain
+  let max = 0;
+  for (let i = 0; i < brownLen; i += 1) {
+    if (Math.abs(bData[i]) > max) max = Math.abs(bData[i]);
+  }
+  if (max > 0) {
+    for (let i = 0; i < brownLen; i += 1) bData[i] /= max;
+  }
+
+  // Ensure focus noise never loops silently if the tab is hidden
+  if (typeof document !== 'undefined') {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopFocusNoise();
+    });
+  }
+
   state.ctx = ctx;
   state.master = master;
   state.noiseBuf = buf;
+  state.brownBuf = bBuf;
   return true;
 }
 
@@ -461,4 +509,77 @@ export function xpTick(step) {
  *  choose calmer variants — e.g. xp-bar plays one note, not a run). */
 export function audioReducedMotion() {
   return reduced();
+}
+
+/**
+ * Start the brown noise ambient loop. Returns silently if audio is unavailable
+ * or focus noise is disabled.
+ */
+export function startFocusNoise() {
+  try {
+    if (!state.focusEnabled || state.focusNode) return;
+    if (typeof document !== 'undefined' && document.hidden) return;
+    if (!ensureGraph()) return;
+    if (state.ctx.state === 'suspended') state.ctx.resume();
+
+    const c = state.ctx;
+    const src = c.createBufferSource();
+    src.buffer = state.brownBuf;
+    src.loop = true;
+
+    // A low-pass filter specifically to deepen the brown noise, rolling off
+    // higher frequencies to make it purely ambient and non-fatiguing.
+    const f = c.createBiquadFilter();
+    f.type = 'lowpass';
+    f.frequency.value = 250;
+    f.Q.value = 0.5;
+
+    // Gain node for the focus noise (separate from the main volume but feeds into it).
+    // The fixed attenuation (0.15) keeps it beneath the UI sounds.
+    const g = c.createGain();
+    const targetGain = state.focusVolume * 0.15;
+    g.gain.setValueAtTime(0, c.currentTime);
+    g.gain.setTargetAtTime(targetGain, c.currentTime, 0.5); // 0.5s fade in
+
+    src.connect(f).connect(g).connect(state.master);
+    src.start();
+
+    state.focusNode = g;
+    state.focusSrc = src;
+  } catch {
+    /* silently fine */
+  }
+}
+
+/**
+ * Stop the brown noise ambient loop with a smooth fade out.
+ */
+export function stopFocusNoise() {
+  if (!state.focusNode || !state.ctx) return;
+  const g = state.focusNode;
+  const src = state.focusSrc;
+  
+  state.focusNode = null;
+  state.focusSrc = null;
+
+  try {
+    const t = state.ctx.currentTime;
+    g.gain.cancelScheduledValues(t);
+    g.gain.setTargetAtTime(0, t, 0.06); // ~60ms fade out to avoid clicks
+
+    // Disconnect after the fade completes
+    setTimeout(() => {
+      try {
+        src.stop();
+        src.disconnect();
+        g.disconnect();
+      } catch { /* already stopped */ }
+    }, 200);
+  } catch {
+    /* silently fine */
+  }
+}
+
+export function isFocusNoisePlaying() {
+  return !!state.focusNode;
 }

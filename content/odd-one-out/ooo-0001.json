@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0001",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "The Room That Empties Your Hands",
+    "theme": "the doorway effect and how the mind files experience by location",
+    "estimated_time_sec": 60,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "A",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 1,
+      "violation_subtlety": 1,
+      "violation_locus": "global",
+      "abstractness_vocab": 1,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 1
+    },
+    "traps": {
+      "primary": "none",
+      "secondary": "none",
+      "description": "No trap is planted. The outlier shares the field of memory but visibly begins a different discussion, so the item can teach the build first protocol gently."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": false,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["candidate_model_maintenance", "relatedness_vs_belonging", "given_new_tracking"],
+    "mission": "build_before_eliminating",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "learn that the odd sentence is found by building the paragraph, not by judging sentences one at a time",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General cognitive psychology of the doorway effect; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "The journey's opening item: a clean expository core about one phenomenon, and an outlier from the same field that plainly begins a different discussion. Deliberately low overlap; a topic matcher succeeds here, and the tiers above take that comfort away. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Psychologists call it the doorway effect: the odd experience of arriving in a room with no idea what you came for."
+    },
+    {
+      "label": "B",
+      "text": "The forgetting, it turns out, is not a glitch but a feature of a mind that files experience scene by scene."
+    },
+    {
+      "label": "C",
+      "text": "During deep sleep, the brain replays the day's events and moves the most important ones into long term storage."
+    },
+    {
+      "label": "D",
+      "text": "In one series of experiments, people who walked through a doorway forgot the objects they were carrying far more often than people who walked the same distance within a single room."
+    },
+    {
+      "label": "E",
+      "text": "Crossing a boundary, researchers suggest, signals that one scene has ended, so the mind archives that scene's details to make room for the next."
+    }
+  ],
+  "outlier": "C",
+  "core_order": ["A", "D", "E", "B"],
+  "builder": {
+    "prompt": "Build the four sentence story of the doorway effect, from naming it to understanding it. The sentence you leave out becomes your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences form one clean explanation. A names the everyday puzzle, D shows the experiment that pinned it down, E gives the reason the mind does it, and B closes by turning the puzzle into a design feature. Name the effect, show the evidence, explain it, land the point.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It introduces the phenomenon everything else examines, and gives it the name the paragraph keeps using."
+      },
+      {
+        "label": "D",
+        "role": "evidence",
+        "why_here": "It answers the natural question after A, which is how anyone knows this effect is real, with the doorway experiment."
+      },
+      {
+        "label": "E",
+        "role": "cause_effect",
+        "why_here": "It takes the finding from D and supplies the mechanism, why crossing a boundary should erase anything at all."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "It steps back and states what the whole explanation adds up to: the forgetting is the filing system working."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "D",
+        "tie": "lexical",
+        "explanation": "The doorway named in A returns as the experimental doorway in D, the same idea moving from anecdote to evidence."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "given_new",
+        "explanation": "D's finding becomes E's given: crossing a boundary is now established, and E adds the new material, the reason it wipes the slate."
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "B's phrase the forgetting points straight back at the loss E just explained, and closes the account of it."
+      }
+    ],
+    "violation_named": "Sentence C is on the topic of memory but structurally alien to this paragraph. The four build one specific account of location triggered forgetting; C opens an entirely different discussion, how sleep strengthens memory, and no sentence here asks or answers that question.",
+    "why_it_breaks": "Nothing in the core sets up sleep, and nothing returns to it. C receives no idea from any sentence and passes none on, so there is no join it could occupy. It would sit comfortably in a paragraph about memory consolidation. This paragraph is not that one.",
+    "trap_exposed": "The only camouflage here is the shared field. C talks about the brain and memory, so a reader matching topics might hold on to it. But topic is the cheapest thing sentences can share. The four core sentences share something stronger: each one hands its idea to the next, and C never joins that chain.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Judged alone, it reads like a textbook definition floating above the story the others tell.",
+        "what_breaks": "Without A nothing names the effect, so D's experiment and E's mechanism explain a phenomenon the paragraph never introduced."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the longest sentence and the only one describing an experiment, so its register feels different from the rest.",
+        "what_breaks": "Without D the claim loses its only evidence, and E explains a finding the paragraph no longer contains."
+      },
+      {
+        "label": "E",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the most abstract of the five, and deciding exactly where it sits takes the most effort.",
+        "what_breaks": "Without E the paragraph jumps from an experimental result straight to a conclusion, with the reason for the forgetting missing entirely."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "B and the sleep sentence both make calm general claims about the mind, so a hurried read holds both as candidates and guesses.",
+        "what_breaks": "Without B the explanation ends on mechanism with no meaning drawn, and the paragraph trails off instead of landing."
+      }
+    ],
+    "detection_habit": "Build the four sentence paragraph before judging anything. The odd one is not the sentence that sounds different. It is the sentence the finished paragraph has no seat for."
+  },
+  "mentor": {
+    "challenge": "All five sentences live in the world of memory. Only four live in this paragraph. Build first, and the difference will show itself.",
+    "takeaway": "Same field is not same paragraph. A sentence belongs to a structure, not to a subject."
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0012",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "environment",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Forest That Talks Through the Soil",
+    "theme": "what researchers found about trees sharing resources through underground fungal networks",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "B",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B: the intruder shares the isotope, seedling and fungal vocabulary densely and opens with a pronoun, but reports how the tracing was done, a method, inside a paragraph reporting what was found."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "candidate_model_maintenance"],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "separate a method sentence from a findings paragraph under maximal shared vocabulary",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General forest ecology of mycorrhizal networks; no specific study or figure is asserted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "CAT tier method versus finding at overlap 5. The intruder reports the isotope labelling procedure inside a paragraph about what the sharing means. Very high camouflage. Outlier at E. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "For a long time a forest looked like a crowd of individuals, each tree competing with its neighbours for light, water, and root room."
+    },
+    {
+      "label": "B",
+      "text": "Then researchers found that carbon can move from tree to tree underground, flowing from a sunlit giant toward a shaded seedling that has little of its own."
+    },
+    {
+      "label": "C",
+      "text": "The couriers, it turned out, were fungi threading between the roots, forming a living web that links trees no branch of the canopy ever touches."
+    },
+    {
+      "label": "D",
+      "text": "So the competing crowd began to look more like a community, one in which a struggling young tree can be carried for years by the surplus of its elders."
+    },
+    {
+      "label": "E",
+      "text": "To follow the carbon, the team fed one tree air laced with a heavy isotope and later traced where that labelled carbon surfaced in the seedlings nearby."
+    }
+  ],
+  "outlier": "E",
+  "core_order": ["A", "B", "C", "D"],
+  "builder": {
+    "prompt": "Build the four sentence story of what the forest turned out to be, from a crowd of rivals to a community. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences narrate one changing picture. A gives the old view, a forest of competing individuals. B reports the finding that broke it, carbon moving from tree to tree. C identifies the couriers, fungal threads linking the roots. D draws the new picture, a community carrying its young. Old view, finding, mechanism, meaning, all about what the forest turned out to be.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "background",
+        "why_here": "It sets the settled picture the discovery overturns, the forest as a crowd of competing individuals."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It delivers the finding that breaks A, and its then marks the turn from the old view to the new evidence."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It explains the finding, naming the fungal couriers that carry the carbon, deepening what B reported."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "It draws the whole narrative to its point, the competing crowd revealed as a community, and its so ties it to C."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "B opens with then, marking the moment the old picture of pure competition gives way to a new finding."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "C's the couriers points back to the carbon movement B described, moving from the finding to its mechanism."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "conjunction",
+        "explanation": "D opens with so, drawing the community conclusion from the linked, sharing forest C has just revealed."
+      }
+    ],
+    "violation_named": "Sentence E is a method versus finding shift under heavy camouflage. The core narrates what the forest turned out to be, old view, finding, mechanism, community. E reports how the carbon was traced, feeding a tree a heavy isotope and following where it surfaced. It answers how did they show it, not what does it mean, a different question from the paragraph's.",
+    "why_it_breaks": "Every core sentence advances the changing picture of the forest; the payoff is the community in D. E advances none of that. Whether an isotope was used to trace the carbon does not touch what the sharing reveals about the forest, and no core sentence sets up or takes up the isotope procedure. A findings narrative can mention a method, but here nothing anchors the chambers of technique, and the story runs whole without it. It belongs in a methods paragraph, not this one.",
+    "trap_exposed": "E is the most camouflaged intruder in the set. It shares carbon, tree, seedlings and the team densely with the core, more than any belonging sentence, and it opens with to follow the carbon, promising to continue B and C's account. That promise is the bait, and the dense overlap is the disguise. But the paragraph reports findings and their meaning; E reports procedure. When words match completely, the deciding question is which question each sentence answers, and E answers a different one.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its familiar image of trees competing can read as a truism the argument does not really need.",
+        "what_breaks": "Without A there is no old view to overturn, and B's then marks a turn from a picture the paragraph never showed."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "B and E both centre on carbon moving to the seedlings, so a hurried read may hold both as the odd candidate and guess.",
+        "what_breaks": "Without B the finding itself is gone: C names couriers for a movement the paragraph never reported, and D's community has no basis."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its shift from carbon to fungi introduces a new agent, so before building, its exact seat is the hardest to fix.",
+        "what_breaks": "Without C the mechanism is missing, and the leap from carbon moving to a caring community goes unexplained."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its warm words, community and carried, give it an interpretive register different from the plainer factual sentences.",
+        "what_breaks": "Without D the narrative stops at a mechanism and never lands its point, the forest reframed from crowd to community."
+      }
+    ],
+    "detection_habit": "When vocabulary matches completely, stop comparing words and compare questions. In a findings paragraph, the sentence answering how did they measure it is the method that does not belong, no matter how perfectly it echoes the rest."
+  },
+  "mentor": {
+    "challenge": "One sentence tells you how the carbon was traced. The others tell you what the tracing revealed. Under this much shared vocabulary, hold the paragraph's purpose.",
+    "takeaway": "Maximum overlap is maximum camouflage. Ask what question a sentence answers, not how familiar its words are."
+  }
+}

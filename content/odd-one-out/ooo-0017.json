@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0017",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Freedom to End It",
+    "theme": "a philosophical argument that the freedom to die gives shape to the freedom to live",
+    "estimated_time_sec": 160,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 5,
+      "violation_locus": "global",
+      "abstractness_vocab": 5,
+      "length_syntax_load": 5,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "none",
+      "description": "Trap B at maximal camouflage: the intruder shares freedom, death and choice and joins one neighbour by a demonstrative, but shifts from the philosophical argument to the historical and sociological causes of attitudes toward death, a different dimension the core never runs."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["coherence_monitoring", "relatedness_vs_belonging", "candidate_model_maintenance"],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "detect a shift from a conceptual argument to a historical or sociological one under maximal overlap",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General philosophy of freedom and mortality; no specific text adapted. Modelled on the Bible's cited assisted-dying prototype without reproducing it. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Elite thread break, the assisted-dying prototype (Bible §4a). The core builds a conceptual argument; the intruder discusses the historical, sociological causes of modern attitudes to death, a different dimension. Subtlety 5. Outlier at A. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "It is only in the last century, as medicine learned to prolong dying, that societies began to argue in earnest about a right to choose the hour of death."
+    },
+    {
+      "label": "B",
+      "text": "Consider first what it means to call a life one's own: to own a thing is, at the least, to hold some say over how and when it ends."
+    },
+    {
+      "label": "C",
+      "text": "A life from which the final exit had been sealed off would be, in this exact sense, a life one did not fully possess but only occupied on loan."
+    },
+    {
+      "label": "D",
+      "text": "The freedom to leave, then, need never be used to do its work; it is enough that the door is unlocked for the room to feel like one's own."
+    },
+    {
+      "label": "E",
+      "text": "So the case for that freedom rests not on a wish to die but on what the mere possibility gives back to the living, a life held rather than merely inhabited."
+    }
+  ],
+  "outlier": "A",
+  "core_order": ["B", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument that the freedom to die shapes the freedom to live, from ownership to the conclusion. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences build one conceptual argument. B sets the premise, to own a life is to have a say over how it ends. C draws the consequence, a life with the exit sealed is only held on loan. D refines it, the freedom need never be used, only available. E concludes, the case rests on what the possibility gives the living. Premise, consequence, refinement, conclusion, all conceptual.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It opens the argument with its premise, that to own a life is to hold some say over how and when it ends."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It draws the consequence of B, a life with the exit sealed being only occupied on loan, and its in this exact sense ties it to B."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "It refines the claim, the freedom needing never to be used, only unlocked, and its then follows from C's ownership point."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the argument to its point with so, the case resting on what the possibility gives back to the living."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "substitution",
+        "explanation": "C's in this exact sense stands in for B's whole idea of ownership, carrying the premise into its consequence."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "conjunction",
+        "explanation": "D opens with then, drawing its refinement from C's picture of a life held only on loan."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "E opens with so, gathering the ownership argument and its refinement into the concluding claim about the living."
+      }
+    ],
+    "violation_named": "Sentence A is a thread break of the finest kind. The core argues a conceptual point about ownership and freedom, timeless and abstract. A shifts to the historical and sociological dimension, when and why societies began to debate a right to die, as medicine learned to prolong dying. Same subject, the freedom over death, but a different thread entirely, causes and history rather than concept and justification.",
+    "why_it_breaks": "The argument runs premise, consequence, refinement, conclusion, never once resting on history or causes. A explains why the debate arose in the last century; the core explains why the freedom matters in principle. These are different questions, and no core sentence takes up medicine, the last century, or the rise of the debate. A would open a paragraph on the social history of dying. This paragraph justifies a claim conceptually, and a historical origin story has no join in its chain.",
+    "trap_exposed": "A is camouflaged to the maximum. It shares death, choice and the right with the core, and as an opening it reads like natural context, the kind of scene setting a philosophical paragraph often begins with, so its generality passes for a frame. But test what the argument does: B, C, D and E reason from a concept of ownership to a justification, while A narrates how a debate came to be. The overlap is total; the thread is different. When every keyword matches, ask what dimension each sentence works in, concept or history, and A steps onto the wrong one.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its move to define owning a life can read as a preliminary aside rather than the argument's load bearing premise.",
+        "what_breaks": "Without B the argument has no premise, and C's in this exact sense refers to an idea of ownership the paragraph never stated."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its abstract image of a life held on loan is the densest sentence, so its exact seat is the hardest to fix before building.",
+        "what_breaks": "Without C the consequence is missing, and D's freedom to leave refines a claim the paragraph never reached."
+      },
+      {
+        "label": "D",
+        "mistake_type": "local_smoothness",
+        "why_tempting": "It reads smoothly after A's talk of a right to choose, so a reader who lets A stand may cut D to keep the historical opener.",
+        "what_breaks": "Without D the argument loses its crucial refinement, that the freedom works unused, and E's mere possibility has nothing to rest on."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "E and A both make broad statements framing the whole debate about dying, so a hurried read may hold both and guess.",
+        "what_breaks": "Without E the argument states its refinement but never lands its point, that the possibility gives the living a life held rather than inhabited."
+      }
+    ],
+    "detection_habit": "Ask what dimension each sentence works in, concept, history, cause, or consequence. An argument about why something matters in principle has no seat for a sentence about when and why it came to be discussed, however matched their words."
+  },
+  "mentor": {
+    "challenge": "One sentence tells you when this debate arose. The others tell you why the freedom matters. History and justification are different threads. Test which each sentence runs.",
+    "takeaway": "Why it matters and why it arose are different arguments. Under total overlap, the dimension a sentence works in decides its home."
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ooo-0009",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "political-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Census That Made a Nation",
+    "theme": "how the practice of counting a population helped bring the nation into being",
+    "estimated_time_sec": 115,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-07: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "Trap B: the intruder shares census and counting and opens with a demonstrative, but narrows to one country's particular history where the core argues at the general level. Trap A: a belonging sentence carries a lone rhetorical question that draws the eye."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "ambiguity_tolerance"],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice a scope shift from a general argument down to one particular case, past a shared demonstrative",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General political theory of state formation and enumeration; no specific country or figure is asserted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ooo-001",
+    "prompt_version": "in-repo authored (Odd One Out milestone); ODD_MAN_OUT_BIBLE frameworks applied",
+    "reviewer_notes": "Advanced wrong scope, inverted from ooo-0004: here the core is general and the intruder narrows to a single country. Both traps present. Outlier at B. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "To govern a population, a state must first imagine it as a single countable thing, a total that can be tallied, taxed, and compared year on year."
+    },
+    {
+      "label": "B",
+      "text": "This is why one such empire, having counted its provinces, spent the following decade quarrelling over which of them had been undercounted and by how much."
+    },
+    {
+      "label": "C",
+      "text": "The census, in this sense, does not simply record a nation that already exists; it helps summon one into being by giving it an edge and a number."
+    },
+    {
+      "label": "D",
+      "text": "For how can millions of strangers feel themselves one people, unless some instrument first gathers them under a single figure they can all be part of?"
+    },
+    {
+      "label": "E",
+      "text": "The count, once published, becomes a fact the counted then live inside, arguing over its shares and defending its borders as if it had always been there."
+    }
+  ],
+  "outlier": "B",
+  "core_order": ["A", "C", "D", "E"],
+  "builder": {
+    "prompt": "Build the four sentence argument that counting a population helps create a nation, from imagining it to living inside the count. The sentence left out is your answer."
+  },
+  "explanation": {
+    "spine_note": "The four sentences argue one general claim. A states the precondition, a state must imagine its people as countable. C makes the central move, the census helps summon a nation rather than merely record it. D supports it with a rhetorical question, how else could strangers feel like one people. E closes, the published count becomes a reality the counted live inside. Precondition, thesis, support, consequence, all at the level of nations in general.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It opens the general argument with the precondition of governing, imagining a population as one countable total."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "It states the paragraph's thesis, and its in this sense builds directly on A's idea of the population as a number."
+      },
+      {
+        "label": "D",
+        "role": "evidence",
+        "why_here": "It defends the thesis with a rhetorical question, arguing that only a shared figure lets strangers feel like one people."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "It draws the argument to its consequence, the published count becoming a fact the counted then live inside."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "substitution",
+        "explanation": "C's in this sense stands in for A's whole idea of the countable total, carrying it into the thesis about summoning a nation."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "conjunction",
+        "explanation": "D opens with for how, offering the reason the thesis in C should be believed, a support bound to it by argument."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "given_new",
+        "explanation": "D's shared figure that unites strangers is E's given, and E adds what becomes of that figure once published."
+      }
+    ],
+    "violation_named": "Sentence B is right topic at the wrong scope, the mirror of an outlier that goes too broad. The core argues in general about what a census does to any nation. B drops to one particular empire's quarrel over undercounting in one decade. Same subject, counting a population, but a specific historical episode dropped into a general argument.",
+    "why_it_breaks": "The argument moves at the level of nations as such, precondition, thesis, support, consequence. B's specific empire and its decade of quarrelling illustrate nothing the argument claims; the core never descends to a case, and no sentence takes B's empire up again. It reads like an example, but the argument it would exemplify, that counts provoke disputes, is not the argument the core is making, which is that counts create nations. A particular case has no join in a paragraph arguing a general principle.",
+    "trap_exposed": "B is doubly disguised. It shares census, counted and provinces with the core and opens with this is why, a connective that promises to explain the previous sentence, so it feels like natural support. But this is why points at nothing C established; C is about summoning a nation, not about provinces quarrelling. Meanwhile D carries a lone rhetorical question that makes it look like the odd one out. Test the ties: D's for how genuinely answers C, while B's this is why answers a claim the paragraph never made.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its practical talk of tax and tallies can read as administrative background rather than the argument's first premise.",
+        "what_breaks": "Without A the argument has no precondition, and C's in this sense refers back to an idea the paragraph never set down."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the pivot of the argument and the most abstract sentence, so its exact seat is the hardest to fix before building.",
+        "what_breaks": "Without C the thesis is gone: A's precondition and D's question support a claim the paragraph never actually states."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "This is the decoy: its lone rhetorical question gives it a different shape from the declarative sentences around it.",
+        "what_breaks": "Without D the thesis loses its defence, and the leap from summoning a nation to living inside a count goes unargued."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "E and B both describe people arguing over a count, so a hurried read may hold both as candidates and guess.",
+        "what_breaks": "Without E the argument never lands its consequence, that the count becomes a reality the counted defend as always there."
+      }
+    ],
+    "detection_habit": "When a sentence opens with this is why or so, check that it truly explains the sentence before it. A connective is a claim about a relation, and an intruder often borrows the connective while pointing at nothing."
+  },
+  "mentor": {
+    "challenge": "One sentence drops from the idea of nations to a single empire's rough decade. Its connective says it belongs. Test the connective.",
+    "takeaway": "A borrowed connective is the commonest disguise. Check the anchor, not the signpost."
+  }
+}

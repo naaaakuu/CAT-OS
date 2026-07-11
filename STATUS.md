@@ -4,14 +4,14 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-07-11 — Para Summary module complete. App version 0.11.0._
+_Last updated: 2026-07-11 — Odd One Out module complete. App version 0.12.0._
 
 ## Application
 
 | System | State | Notes |
 |---|---|---|
 | PWA shell (index.html, manifest, icons) | **shipped** | Installable; relative paths → GitHub Pages subpath safe |
-| Service worker / offline caching | **shipped** | Two caches: shell (v12) + content (v8), cache-first; content cached on first use as the library grows |
+| Service worker / offline caching | **shipped** | Two caches: shell (v13) + content (v9), cache-first; content cached on first use as the library grows |
 | Design tokens + base styles | **shipped** | Light/dark; system fonts; reading leading + answer-feedback colors added in M2 |
 | Hash router | **shipped** | Param routes (`/:id`); 404; modules register their own routes |
 | `StorageAdapter` interface | **shipped** | `src/core/storage/storage-adapter.js` |
@@ -24,6 +24,7 @@ _Last updated: 2026-07-11 — Para Summary module complete. App version 0.11.0._
 | **Reading Comprehension module** | **shipped** | Journey library → briefing → session (read → answer → explain, with evidence jumps) → result → Learning Page → review |
 | **Para Jumbles module** | **shipped (0.10.0)** | Second module island; built to `PARA_JUMBLES_BIBLE.md`. First-time introduction → eight-tier journey (Beginner→Premium) → solve (tap-to-order) → mandatory read-back → four-layer teaching (Bible §11) → mentor moment. TITA scoring (+3/0); Para-Jumbles Reading DNA (`core/mentor/pj-dna.js`, evidence-floored, banned-word-linted); `<cat-jumble-board>` (select-to-order). Sessions/attempts share the RC stores tagged `module:"pj"`; RC untouched |
 | **Para Summary module** | **shipped (0.11.0)** | Third module island; built to `PARA SUMMARY BIBLE.md`. First-time introduction (resettable from Settings → Learning) → eight-tier journey (Foundation→Premium, each tier teaching one skill) → Today's Mission → paragraph → **Summary Builder** (write your own sentence, then compare on item-specific checks) → options with the **Think** coach (questions, never hints) → layered teaching (paragraph compresses into the ideal summary; every distractor's §7 archetype and §6 thinking pattern named; richness grows with tier) → mentor moment. +3/0 CAT-style marks; Para-Summary Reading DNA (`core/mentor/ps-dna.js`, family-aggregated, evidence-floored, banned-word-linted). Sessions/attempts share the same stores tagged `module:"ps"`; RC and PJ untouched |
+| **Odd One Out module** | **shipped (0.12.0)** | Fourth module island; built to `ODD_MAN_OUT_BIBLE.md`. First-time introduction (resettable from Settings → Learning) → eight-tier journey (Foundation→Premium, each tier teaching one structural reading skill) → Today's Mission → the five sentences → **Paragraph Builder** at the first three tiers (arrange four of five on `<cat-jumble-board>`; the one left out is the exclusion — construction before elimination, §7) then the exam surface (name the sentence that stands apart) from Advanced up → read-back → the **Think** coach (coaching questions, never hints) → §12 layered teaching (the four join into the paragraph; the outlier separates; its §4 violation and the §7 trap are named) → mentor moment. +3/0 CAT-style marks (TITA); Odd-One-Out Reading DNA (`core/mentor/ooo-dna.js`, the bounded §8 four-trait extension, evidence-floored, banned-word-linted). Sessions/attempts share the same stores tagged `module:"ooo"`; RC, PJ and PS untouched |
 | Reading surface (0.6.0) | **shipped** | Book measure, paragraph rhythm token, sticky veiled session bar, scroll progress + "~N min left", end-mark, hyphenation on narrow screens |
 | Learning Page (Passage Mentor) | **shipped** | `/rc/mentor/:id`; **v4 Learning Page** — one-sentence summary, plain-English retelling, why-it-was-hard, the reading lesson, reflection question — layered over v3 mentor content; self-drawing theme illustration per passage; recall-before-reveal; pull-quote takeaway |
 | Reading reflection | **shipped** | Optional per-passage line, sentence starters, saved to the `learning` store, editable; covered by backup |
@@ -41,20 +42,21 @@ _Last updated: 2026-07-11 — Para Summary module complete. App version 0.11.0._
 | Engagement: haptics + sound | **shipped** | Haptics default on (no-op on iOS); sounds default off, synthesized, no assets |
 | Engagement: celebration surface | **shipped** | One sheet, milestones only |
 | Mistake notebook | **subsumed (0.7.0)** | Deliberately never built as a surface. Its goals ship as the mentor: misses captured (attempts + one lesson/session), resurfaced (twenty-second recall), retired (absorbed after 3 recalls). Attempt-history browser: still designed, V1.x |
-| Odd One Out / Vocabulary | designed | V1.x — copy the module pattern; Odd One Out reuses `<cat-jumble-board>` |
+| Vocabulary | designed | V1.x — copy the module pattern; the last module in the V1.x ladder |
 | Analytics, spaced repetition, cloud sync | designed | V2.0+ |
 
 ## Content system
 
 | System | State | Notes |
 |---|---|---|
-| Registry (`content/index.json`) | **shipped** | 32 RC + 19 PJ + 20 PS items; type-aware agreement with files (checked by tools/verify.mjs); rebuilt from files by a scripted mirror |
+| Registry (`content/index.json`) | **shipped** | 32 RC + 19 PJ + 20 PS + 20 OOO items; type-aware agreement with files (checked by tools/verify.mjs); rebuilt from files by a scripted mirror |
 | RC content schema files | **shipped** | v1 + v2 (mentor layer) + v3 (reading_habit per question, misunderstanding per mentor) + **v4 (full Learning Page: one_sentence_summary, simple_explanation, why_difficult, reading_lesson, reflection_question)**; loader resolves per item |
 | **PJ content schema file** | **shipped (0.10.0)** | `content/schema/pj.schema.v1.json`; implements PARA_JUMBLES_BIBLE §12 metadata (twelve-axis difficulty vector, macro pattern, cohesion signals, traps, `num_plausible_orderings`, `heuristic_adversarial`), the §11 four-layer explanation, and one reliability-tagged link per consecutive pair. Format carried as configuration, not constant |
 | **PS content schema file** | **shipped (0.11.0)** | `content/schema/ps.schema.v1.json`; implements the PARA SUMMARY BIBLE's operational core: apex (claim/scope/certainty/stance) fixed before options (§10), architecture (§2), the eight difficulty dials (§5), load-bearing words, elite `separating_element`, per-distractor §7 archetypes (single distortion; layering elite-only), Summary-Builder checks, missions, and format as configuration. Loader enforces cross-field truths incl. three error families per item and the tier↔bible_level map |
-| Content library | **shipped** | 32 RC passages (136 questions; foundation→elite, all 12 genres) + 19 Para Jumbles (all 8 tiers Beginner→Premium, difficulty_numeric 1→10, paragraph-first then scrambled, adversarial from Medium up) + **20 Para Summary items (all 8 tiers Foundation→Premium, 12 genres, 7 architectures with concession-turn capped at 20%, correct positions 5/5/5/5, near-miss finalists with named separating elements at elite)** |
-| Verification tool (`tools/verify.mjs`) | **shipped** | Reuses the app's own validators (RC + PJ + PS); type-aware registry agreement, module-graph + precache-coverage (every schema version), journey-progression, backup round-trip, PJ and PS engine/voice/DNA/lesson dry runs, and PS batch-fairness checks (position spread, architecture variety, concession-turn cap); mentor-voice lint covers all three mentors; runs on Windows (pathToFileURL fix); run before every release |
-| Content schemas for OOO/Vocab | designed | Author with each module |
+| **OOO content schema file** | **shipped (0.12.0)** | `content/schema/ooo.schema.v1.json`; implements the ODD_MAN_OUT_BIBLE §13 metadata: five sentences, outlier + core order, `spine_type`/`nucleus`, the §4 a–g `violation_type` taxonomy, the §6 `difficulty_vector` with `topical_overlap` as primary lever and `violation_locus`, the two engineered `traps` (A/B, §5), Halliday & Hasan `cohesion_signals` (§3), the §12 explanation (core reconstruction, roles, ties, violation naming, trap exposure, per-core `exclusion_analysis` tagged with §7 mistake types), and the §11 `validation` gates. Loader enforces cross-field truths incl. outlier↔core partition, nucleus-in-core, adversarial-from-medium-up, and the elite camouflage floor |
+| Content library | **shipped** | 32 RC passages (136 questions; foundation→elite, all 12 genres) + 19 Para Jumbles (all 8 tiers Beginner→Premium, difficulty_numeric 1→10, paragraph-first then scrambled, adversarial from Medium up) + 20 Para Summary items (all 8 tiers Foundation→Premium, 12 genres, 7 architectures with concession-turn capped at 20%, correct positions 5/5/5/5, near-miss finalists with named separating elements at elite) + **20 Odd One Out items (all 8 tiers Foundation→Premium, 12 genres, all 7 violation types, outlier positions balanced 5/5/5/5/5, heuristic-adversarial from Medium up, construct-mode at the first three tiers)** |
+| Verification tool (`tools/verify.mjs`) | **shipped** | Reuses the app's own validators (RC + PJ + PS + OOO); type-aware registry agreement, module-graph + precache-coverage (every schema version), journey-progression, backup round-trip, PJ/PS/OOO engine/voice/DNA/lesson dry runs, and batch-fairness checks (PS position/architecture/concession-turn; OOO outlier-position spread, violation-type variety, adversarial-flag enforcement); mentor-voice lint covers all four mentors; runs on Windows (pathToFileURL fix); run before every release |
+| Content schema for Vocab | designed | Author with the module |
 | RC master generation prompt | shipped (v1, docs) | See "Decisions" re: passage shape flag |
 | Pipeline scaffolding (log, balance dashboard) | designed | Create with the first *generated* (not authored) batch |
 
@@ -101,6 +103,24 @@ _Last updated: 2026-07-11 — Para Summary module complete. App version 0.11.0._
   convention, but the official scheme is announced per exam cycle; the result
   screen says so and shows accuracy as the primary honest signal.
 
+- **Odd One Out (0.12.0):** the fourth module, built to `ODD_MAN_OUT_BIBLE.md`.
+  Central design decision, straight from the Bible: the module teaches
+  **structural reading, not elimination tricks** — the outlier is on-topic but
+  out-of-structure, so the product leads with a **Paragraph Builder** (build
+  the four, and the fifth excludes itself) at the first three tiers before the
+  exam surface appears. This reuses `<cat-jumble-board>` extended additively
+  (`maxPlaced` cap, `excluded` reveal state) rather than a new component, so PJ
+  is untouched. The Reading DNA is a **bounded** extension: exactly the four
+  §8 traits (coherence-monitoring, candidate-model-maintenance,
+  relatedness-vs-belonging, ambiguity-tolerance), no invented fifth, each
+  mapped to a `difficulty_vector` split so it is derived, not stored. Content
+  is TITA, so the batch check guards the **answer-position spread** (outliers
+  5/5/5/5/5) the way the PS check guards the correct-option spread. The §11
+  validation gates ship as data on every item and are enforced by the loader
+  for any accepted/review item (uniqueness, reconstruction, trap audit pass;
+  heuristic-adversarial pass from Medium up). No new sounds, no DB migration,
+  `module:"ooo"` in the same stores; RC/PJ/PS untouched. Roadmap ladder note in
+  CHANGELOG per ROADMAP_V2's maintenance rule (Vocabulary remains last).
 - **Premium Reading Library (0.8.0):** schema **v4** appended (v1–v3 files
   stay valid) adds five mentor fields that turn the Learning Page from coaching
   notes into a complete lesson — `one_sentence_summary`, `simple_explanation`
