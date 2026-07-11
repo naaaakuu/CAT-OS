@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0009",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "anthropology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "The Debt That Keeps Us Close",
+    "theme": "gift exchange as relationship weaving in small communities",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "In the small communities studied, exchange often works less to move goods than to weave and maintain lasting relationships.",
+      "scope": "Limited to the small communities anthropologists have studied, and stated as what often happens.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 1,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": ["in many small communities", "often", "rarely"],
+    "separating_element": null,
+    "dna_traits": ["scope_preservation", "evidence_vs_thesis", "inference_control"],
+    "mission": "protect_scope",
+    "learning_objective": "keep a community-limited, often-qualified claim at exactly its stated width",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General anthropology of gift exchange; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Scope is the whole game here: the strongest trap simply extends the claim to every society. A means-end reversal and the fisherman example complete the set. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "In many small communities studied by anthropologists, a gift is rarely a free act; it quietly obliges the receiver to return something later.",
+        "role": "setup"
+      },
+      {
+        "text": "The delay matters: an immediate repayment would close the relationship like a purchase, while a debt left open keeps the two parties tied to each other.",
+        "role": "support"
+      },
+      {
+        "text": "A fisherman who shares his catch expects no payment that evening, but he has bound his neighbour to him against a leaner day.",
+        "role": "example"
+      },
+      {
+        "text": "In such communities, exchange often works less to move goods than to weave lasting relationships.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "In the small communities studied, giving often serves less to transfer goods than to keep people bound to one another over time.",
+  "builder": {
+    "prompt": "In one sentence: what is exchange really doing in these communities, according to the paragraph?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what exchange does, weaving relationships rather than moving goods?",
+        "kept": "Good. That reversal of the obvious purpose of exchange is the paragraph's entire point.",
+        "drifted": "The claim is a reframing: exchange here is social technology, not logistics. A sentence about gifts or obligation alone misses the reframe."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the claim inside the small communities studied?",
+        "kept": "Well held. The paragraph never claims this for markets, cities, or humanity at large. Its width is part of its meaning.",
+        "drifted": "In such communities is a wall the author built on purpose. Extending the claim to every society steps over it and asserts something the text never does."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did often survive into your sentence?",
+        "kept": "Right. Exchange often works this way, not always. The pattern has room for exceptions and the summary should too.",
+        "drifted": "Dropping often converts a frequent pattern into the rule of these societies, a stronger claim than the author's."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "In every society, giving ultimately serves less to transfer goods than to weave lasting relationships among the people involved.",
+      "B": "In the small communities studied, giving often serves less to move goods than to keep people bound to each other over time.",
+      "C": "A fisherman who shares his catch receives nothing that evening, but gains a neighbour obliged to help him on a leaner day.",
+      "D": "In small communities, people keep their relationships alive mainly so that goods can be exchanged when times turn lean."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "The paragraph describes how gifts work in many small, studied communities. A gift is not free: it creates a gentle debt. The debt is left open on purpose, because settling it at once would end the relationship the way a purchase does. The fisherman shows the logic: sharing tonight binds a neighbour for the lean day. So in these places, exchanging things is often really about keeping people connected.",
+      "correct_reasoning": "Option B holds the claim at its exact width, the communities studied, keeps often, and performs the reframe: exchange as relationship weaving rather than goods moving. It is the closing sentence, paraphrased with every limiter intact.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph claims this for many small communities studied by anthropologists. This option extends it to every society, a reach the author carefully avoided.",
+          "seductive_element": "The wider claim feels more profound, more like the moral of the paragraph.",
+          "thinking_mistake": "Over-generalization: dropping the community limiter and letting the claim cover the world."
+        },
+        {
+          "option": "C",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The fisherman is the illustration, and this option retells him accurately. But the paragraph's claim is about what exchange does in general in these communities, not about one man's catch.",
+          "seductive_element": "It is the paragraph's most human and pictured moment.",
+          "thinking_mistake": "Example as thesis: promoting the illustration above the pattern it illustrates."
+        },
+        {
+          "option": "D",
+          "archetype": "cause_effect_reversal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says exchange serves relationships. This option says relationships serve exchange, kept alive so goods can flow. The same elements, with the arrow of purpose reversed.",
+          "seductive_element": "It uses the paragraph's own ingredients, so it reads as a faithful economy-minded restatement.",
+          "thinking_mistake": "Means and ends swapped: reporting what serves what in the wrong direction."
+        }
+      ],
+      "reading_habit": "Before the options, say the claim's exact width aloud: who is it about, and how often does it hold? Then reject any option that is wider, narrower, or more certain than that."
+    }
+  },
+  "mentor": {
+    "challenge": "This claim has walls: certain communities, and often. One option will knock the walls down and call itself a summary.",
+    "takeaway": "A claim's limits are part of the claim. Guard the walls."
+  }
+}

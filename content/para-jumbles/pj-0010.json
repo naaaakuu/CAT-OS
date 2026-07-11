@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0010",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Ship That Was Rebuilt",
+    "theme": "identity and the paradox of gradual replacement",
+    "estimated_time_sec": 150,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["connective_implicit", "demonstrative", "synonym_hypernym", "stance_continuity"],
+    "primary_trap": "misleading_connective",
+    "secondary_traps": ["anchor_pair"],
+    "dna_traits": ["inference_implicit", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "order by the shape of an argument when connectives no longer mark the joins",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The Ship of Theseus is a classical philosophical puzzle in the public domain; no specific modern text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Advanced item: implicit relations, an abstract topic, and a however that could attach to more than one sentence. Ordering must come from the argument's shape. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The puzzle dissolves, some argue, once we notice that identity over time is not a fact we discover but a decision we make about which changes count.",
+      "role": "answer"
+    },
+    {
+      "label": "B",
+      "text": "A wooden ship has a plank replaced each year, and after a lifetime not one original board remains, yet the crew has called it the same ship throughout.",
+      "role": "background"
+    },
+    {
+      "label": "C",
+      "text": "The unease is not really about ships; it is about ourselves, whose cells and convictions are quietly swapped out over a life while we go on saying I.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "The trouble is that we would say the same of a ship rebuilt all at once, and few of us are willing to call a thing identical to what has entirely replaced it.",
+      "role": "contrast"
+    }
+  ],
+  "correct_order": ["B", "D", "C", "A"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "contrast_signal",
+      "reliability": "medium",
+      "explanation": "B lets us comfortably call the slowly rebuilt ship the same ship. D answers \"The trouble is\", exposing why that comfort is shaky. The contrast is real, but the word trouble does not say which claim it opposes; only B sets up the comfort D disturbs."
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "D leaves the ship puzzle unresolved. C widens it: the unease \"is not really about ships\" but about us. The move from object to self is the argument climbing, not a connective."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "C raises the stakes to personal identity; A offers the resolution, that identity is a decision, not a discovery. Problem reaches its widest point, then the answer arrives. No linking word marks it; the shape does."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A problem that deepens before it resolves: a familiar case, a complication, the case widened to ourselves, then a proposed dissolution. Almost none of the joins are marked by connectives, so you must order by the argument's shape, not its signposts.",
+    "movement": [
+      {
+        "label": "B",
+        "why_here": "B lays out the classic case plainly and needs nothing before it. It gives us the comfortable intuition, same ship throughout, that the rest of the paragraph will trouble."
+      },
+      {
+        "label": "D",
+        "why_here": "D is the complication. \"The trouble is\" turns against B's comfort by pointing out we would not say the same of an all-at-once rebuild. It sharpens rather than resolves."
+      },
+      {
+        "label": "C",
+        "why_here": "C escalates from ships to selves, which is the paragraph's real target. It has to follow the ship puzzle and precede the resolution, because the resolution is about identity in general."
+      },
+      {
+        "label": "A",
+        "why_here": "A dissolves the whole thing: identity is a decision about which changes count. A resolution this general can only land after the problem has reached its widest, most personal form in C."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BADC",
+        "trap_type": "misleading_connective",
+        "why_tempting": "D says \"The trouble is\", which sounds like it should follow a proposed solution, so it feels natural to state B, then jump to A's resolution, then have D raise trouble with it.",
+        "where_it_breaks": "Read A then D. A says identity is a decision, and D's \"trouble\" then reads as an objection to A. But D's content, the all-at-once rebuild, is trouble for B's easy intuition, not for A's sophisticated resolution. A already accounts for D. Put D after A and the resolution arrives before the problem it resolves, and then a fresh problem is raised and simply abandoned. The connective told you contrast; it did not tell you against what."
+      },
+      {
+        "order": "BDAC",
+        "trap_type": "anchor_pair",
+        "why_tempting": "C and A both feel conclusive and both mention selves and decisions, so pairing them at the end, with A last, seems tidy.",
+        "where_it_breaks": "A is the resolution and C is the escalation of the problem. Put A before C and the paragraph resolves the puzzle, then re-opens it about ourselves and stops. The problem must reach us (C) before the answer (A) can feel earned. Order is problem-widened then answer, not answer then a lingering worry."
+      }
+    ],
+    "trap_named": "The misleading connective: D's \"The trouble is\" flags a contrast but hides its target. A hurried solver attaches it to whichever sentence sits nearby, often the resolution. A connective fixes the kind of relation, never the specific neighbour. Decide what D actually troubles, B's comfort, by reading for meaning, and the abstract signpost stops steering you.",
+    "solving_habit": "When connectives are scarce or ambiguous, order by the argument's shape instead. Ask each sentence one question: does this raise the problem, deepen it, or resolve it? Problems widen before answers land."
+  },
+  "mentor": {
+    "challenge": "Barely a linking word in sight, and the one that appears points nowhere obvious. Order this by the shape of the thought.",
+    "paragraph_plain": "The author starts with an old puzzle. A ship has one plank replaced every year until none of the original wood is left, yet everyone still calls it the same ship. The trouble is that we would say the same about a ship rebuilt all at once, and almost nobody would call that identical to the original. Then the author turns the knife: the real unease is not about ships at all. It is about us. Our cells and even our beliefs get swapped out over a lifetime while we keep saying I. The proposed way out is this: identity over time is not something we find in the world. It is a decision we make about which changes count.",
+    "takeaway": "When the signposts go quiet, read the shape of the argument. Problems widen before answers arrive."
+  }
+}

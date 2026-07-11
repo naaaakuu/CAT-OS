@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0016",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "psychology",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "Alone First, Together Later",
+    "theme": "what research finds about brainstorming and solitude",
+    "estimated_time_sec": 135,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "People produce more and better ideas working alone first; the real value of groups comes later, in combining and testing what solitude has produced.",
+      "scope": "Idea generation in organisations, per decades of studies; groups keep a role, but a later one.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "though" },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["decades of studies", "first alone", "but later"],
+    "separating_element": null,
+    "dna_traits": ["author_intent", "main_idea_detection", "compression_skill"],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep a two-part corrective claim whole: solitude first, and the group's later role",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General research on brainstorming and idea generation; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "CAT+ half-summary pressure: the final qualification (groups matter, later) is load bearing, and the flattened and cynical options are both live for hurried readers. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Brainstorming in groups remains the default way organisations hunt for ideas, prized for its energy and its air of inclusiveness.",
+        "role": "concession"
+      },
+      {
+        "text": "Decades of studies, though, find that the same people produce more ideas, and more original ones, when they first work alone.",
+        "role": "thesis"
+      },
+      {
+        "text": "In a group, early suggestions anchor everyone's thinking, speaking turns are scarce, and the quiet defer to the confident.",
+        "role": "support"
+      },
+      {
+        "text": "Groups still matter, but later: for combining, testing and sharpening what solitude has produced.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "People generate more and better ideas alone than in groups, whose real value comes later, in combining and testing what individuals produce.",
+  "builder": {
+    "prompt": "In one sentence: what do the studies say about where ideas come from and what groups are for?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence keep both parts, solitude for generating and groups for the later work?",
+        "kept": "Good. The final sentence is not decoration; it is half the claim. Solitude generates, groups refine.",
+        "drifted": "Stopping at groups produce fewer ideas keeps only half the finding. The paragraph also assigns groups their real job, later in the process."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence correct the default, rather than just describe a debate about brainstorming?",
+        "kept": "Right. The author sides with the studies against the default practice. The summary should feel like that correction.",
+        "drifted": "The paragraph is not a neutral tour of opinions. It says the default is misplaced and where the group's value actually lies."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you avoid turning the finding into a rule that groups never produce ideas?",
+        "kept": "Well held. The studies compare and find solitude stronger; they do not declare groups barren.",
+        "drifted": "More and more original is a comparison, not an annihilation. Never is a bigger claim than the studies made."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Researchers have long studied whether organisations gain more original ideas from group brainstorming or from individual work.",
+      "B": "Group brainstorming never produces original ideas, because early suggestions anchor thinking and the quiet defer to the confident.",
+      "C": "People generate ideas better alone than in groups, whose real value comes later, in combining and testing what individuals produce.",
+      "D": "Organisations keep brainstorming because its energy and inclusiveness matter more to them than the quality of the ideas produced."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "Organisations still reach for group brainstorming by default. Decades of research point the other way: the same people generate more ideas, and more original ones, starting alone, because groups anchor thinking to early suggestions, ration speaking time, and let confidence outrank quality. The paragraph does not banish groups; it reschedules them, to the later work of combining and testing what individuals bring in.",
+      "correct_reasoning": "Option C carries the whole two-part claim: solitude wins the generating, and the group's genuine value arrives afterwards. The corrective stance survives, no camp is flattened, and the studies' comparison is not hardened into a ban on groups.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "stance_flattening",
+          "secondary_archetype": null,
+          "why_wrong": "True and toothless. The paragraph does not report an open question; it reports an answer, and assigns groups a different job. Removing the verdict removes the point.",
+          "seductive_element": "It is impossible to contradict from the text, and safety attracts a hurrying reader.",
+          "thinking_mistake": "Stance flattening: describing what the paragraph is about instead of what it concludes."
+        },
+        {
+          "option": "B",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The studies say people produce more and better ideas alone, a comparison. Never produces original ideas is an absolute the paragraph does not state, and it also erases the group's later role.",
+          "seductive_element": "It sounds like the research finding, delivered with maximum force.",
+          "thinking_mistake": "Tendency to law: a comparative result inflated into an absolute prohibition."
+        },
+        {
+          "option": "D",
+          "archetype": "assumption_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph notes what brainstorming is prized for; it never asserts that organisations value ritual over quality. That motive is an inference beneath the text, presented here as the text's own claim.",
+          "seductive_element": "It feels like the shrewd reading, the thing the paragraph is really implying.",
+          "thinking_mistake": "Assumption as thesis: promoting an unstated premise to the author's conclusion."
+        }
+      ],
+      "reading_habit": "Check whether the claim has a second half. Qualifications that arrive last, groups still matter, but later, are usually load bearing, and half-summaries are how strong readers lose these marks."
+    }
+  },
+  "mentor": {
+    "challenge": "The last sentence is not a footnote. Watch what it adds to the claim, because two options will pretend it was never written.",
+    "takeaway": "Some claims come in two halves. Carry both or carry neither."
+  }
+}

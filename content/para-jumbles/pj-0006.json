@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0006",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "economics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "Ends Sunday",
+    "theme": "how deadlines manufacture desire in retail",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["demonstrative", "article_given_new", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "none",
+    "secondary_traps": ["anchor_pair"],
+    "dna_traits": ["global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 1,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "D",
+    "learning_objective": "trace a reference like the same lever back to the exact sentence that set it up",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Scarcity and urgency in retail psychology are standard behavioural economics; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Easy-tier closer: a reference chain (the discovery, the same lever, none of this) that must be walked in order. First taste of the false pair. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Online stores push the same lever harder, with countdown clocks and warnings that only two seats remain at this price.",
+      "role": "example"
+    },
+    {
+      "label": "B",
+      "text": "None of this changes what the product is worth; it changes how the decision feels, and by the time the feeling fades, the receipt is already printed.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "A deadline converts a mild interest into a small emergency, which is why the sign says the offer ends on Sunday rather than that it ends eventually.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "Retail sales are engineered around a simple discovery about human beings: we want things more when we might lose the chance to have them.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "C", "A", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "D states the discovery: fear of losing a chance sharpens desire. C shows the tool built on it. A deadline is exactly a chance that will be lost. The principle hands off to its instrument."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "A says online stores push \"the same lever\" harder. A lever has to exist before it can be the same one. C built it: the deadline. This reference settles A's position almost by itself."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "B opens with \"None of this\". The \"this\" gathers the whole toolkit, signs and clocks and warnings together, and delivers the verdict on all of it. A wrap-up that wide comes last."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "One discovery about people, then the tool built on it, then the tool sharpened, then the verdict on the whole machine. The paragraph is a chain of references: the discovery, the same lever, none of this. Each link picks up the one before it.",
+    "movement": [
+      {
+        "label": "D",
+        "why_here": "D is the foundation: a general truth about human wanting. It mentions nothing that needs a prior sentence, and every other sentence spends what it earns."
+      },
+      {
+        "label": "C",
+        "why_here": "C turns the truth into a mechanism. The deadline is the discovery weaponised, and the Sunday sign makes it concrete."
+      },
+      {
+        "label": "A",
+        "why_here": "A escalates. \"The same lever\" openly points back at C's deadline, and the countdown clock is the deadline with the volume turned up."
+      },
+      {
+        "label": "B",
+        "why_here": "B steps back and judges everything at once. \"None of this\" needs a full toolkit to point at, so B can only close."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DACB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "D talks about retail sales and A talks about online stores. Shops with shops feels like a pair, so A wants to sit right after D.",
+        "where_it_breaks": "A leans on \"the same lever\", and after D alone there is no lever, only a discovery. The lever is C's deadline. Lock D and A together and A's central reference points at nothing. A pair that feels natural is still only a guess until the whole chain holds."
+      }
+    ],
+    "trap_named": "The pull was to pair the two shop sentences because they share a topic. Topics do not order sentences; references do. Before you lock any pair, find the exact word that ties them, and check that nothing else is needed in between.",
+    "solving_habit": "When a sentence says \"the same X\", stop and find the sentence that built X. It must come somewhere before, and usually right before."
+  },
+  "mentor": {
+    "challenge": "This paragraph is a chain with three links. Each sentence picks up something the one before it left. Find the chain.",
+    "paragraph_plain": "The author explains a trick every shopper has felt. Sales are built on one discovery: we want things more when the chance to get them might disappear. The deadline is that discovery turned into a tool. A sign saying the offer ends Sunday turns mild interest into a small emergency. Online shops crank the same tool harder, with countdown clocks and warnings that only two seats are left. And here is the verdict: none of it changes what the product is worth. It changes how deciding feels. By the time the feeling passes, you have already paid.",
+    "takeaway": "Topics group sentences. References order them."
+  }
+}

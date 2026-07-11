@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0019",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Cost You Cannot See",
+    "theme": "why the true price of a choice is the option it forecloses",
+    "estimated_time_sec": 210,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "lexical_repetition", "former_latter", "article_given_new"],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": ["competing_opener", "false_pronoun_binding", "anchor_pair"],
+    "dna_traits": ["surface_matching", "global_tracking", "inference_implicit", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 5,
+      "reference_density": 4,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "defeat a dense keyword decoy by ordering strictly on the argument's logic",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Opportunity cost is a foundational concept in economics; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Premium item: the word cost repeats across nearly every sentence as a dense decoy, while the true joins run on logic and a former/latter reference. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The student who spends an evening on economics pays not in money but in the history essay that evening might have become.",
+      "role": "example"
+    },
+    {
+      "label": "B",
+      "text": "The mistake, once you see it, is everywhere: we count what we spend and forget what we forgo, treating a free afternoon or a paid-off asset as costless simply because no invoice arrives.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "The real cost of any choice is not the money it takes but the best alternative it takes off the table.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "The latter cost never appears on a receipt, which is exactly why it is so easy to spend a life ignoring it.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "low",
+      "explanation": "C defines real cost as the best alternative given up, not the money. A illustrates with the student whose evening on economics costs the history essay it might have been. The definition calls for an instance; A supplies it. The shared word cost is not what joins them, the abstract-to-concrete move is."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "former_latter_reference",
+      "reliability": "high",
+      "explanation": "C set two costs against each other, the money and the alternative. A gives an instance of the alternative. D opens \"The latter cost never appears on a receipt\", and the latter of C's two costs is precisely the alternative, which A has just made concrete. Former and latter fix the reference across the sentences."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "D says the hidden cost never shows on a receipt, so it is easy to ignore. B generalises the ignoring into the universal mistake: we count what we spend and forget what we forgo. The specific blindness becomes the general error, closing the paragraph."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A definition, a concrete example, the example's key term pinned by former and latter, and the general moral. The word cost is planted in almost every sentence as a decoy; the real joins run on the logic of the argument and one precise former or latter reference.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C defines the idea: the real cost of a choice is the best alternative it forecloses, not the money. It is the governing claim and opens the paragraph; it also introduces the two costs that former and latter will later sort."
+      },
+      {
+        "label": "A",
+        "why_here": "A makes the definition concrete: the student's evening on economics costs the history essay it might have been. The example follows the claim it illustrates and embodies the alternative cost D will name."
+      },
+      {
+        "label": "D",
+        "why_here": "D pins the reference: \"the latter cost\" is C's second cost, the alternative, freshly illustrated by A. It explains why that cost is ignored, and its former/latter needs both costs already in view."
+      },
+      {
+        "label": "B",
+        "why_here": "B draws the universal moral: everywhere, we count what we spend and forget what we forgo. A generalisation this wide can only close, after the mechanism of the blindness has been shown."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CBAD",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The word cost appears in C, B, and D, and money and spend in C, A, and B, so the keyword glow makes almost any adjacency feel linked, and B, dense with cost and spend and forgo, seems to belong right beside C's definition of cost.",
+        "where_it_breaks": "Follow the keyword and you pull B up next to C, but B is the universal moral, we count what we spend and forget what we forgo, and it must come last, after D has explained why the hidden cost is ignored. Placed second, B concludes before anything has been shown, and D's \"the latter cost\" then closes the paragraph on a reference whose example (A) sits awkwardly before it rather than the moral it earns. The repeated word cost joins nothing; it is sprayed across the paragraph to mislead. Order by the logic and the glow stops steering you."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "competing_opener",
+        "why_tempting": "A is a vivid, self-contained scene, the student trading a history essay for an economics evening, and vivid scenes feel like openings, so starting on A and following with the definition reads smoothly.",
+        "where_it_breaks": "A is an instance of C's definition, and an instance with no stated rule is just an anecdote; open on A and the reader meets a trade-off with no concept to file it under. Worse, D's \"the latter cost\" needs C's two-cost contrast, money versus alternative, already in place, and only C provides it. The definition C opens; the example A serves it, so C must precede A."
+      }
+    ],
+    "trap_named": "A dense lexical decoy: the word cost is deliberately repeated across nearly every sentence so that keyword-matching lights up everywhere and guides nothing. The true joins are logical, definition to example, and a single precise former/latter reference that only works when the two costs from C are already in view. When a keyword saturates a paragraph, stop using it as a signal entirely and order strictly on the argument.",
+    "solving_habit": "When one word appears in almost every sentence, treat it as noise, not signal, and build the order from the logic alone: which sentence defines, which illustrates, which refers back, which concludes. Confirm any former or latter has a real pair before you trust it."
+  },
+  "mentor": {
+    "challenge": "One word is sprayed across every sentence to blind you. Ignore it entirely and order by the argument. Then check that latter really has its pair.",
+    "paragraph_plain": "The author explains opportunity cost. The real cost of any choice is not the money it takes but the best alternative it removes from the table. Take a student who spends an evening on economics: the price paid is not money but the history essay that evening might have become. That second kind of cost, the alternative given up, never shows up on a receipt, which is exactly why it is so easy to spend a whole life ignoring it. And the mistake, once you notice it, is everywhere. We carefully count what we spend and quietly forget what we give up, treating a free afternoon or a paid-off asset as costless just because no invoice ever arrives.",
+    "takeaway": "When a word saturates the paragraph, it is noise. Order by the logic, not the echo."
+  }
+}

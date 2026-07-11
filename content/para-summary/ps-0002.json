@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0002",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "What the Roads Remember",
+    "theme": "what infrastructure reveals about its builders' priorities",
+    "estimated_time_sec": 65,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "What a society builds often records whose needs its builders placed first, as the military design of Roman roads shows.",
+      "scope": "A general observation qualified by often; drawn from the Roman case but not limited to roads.",
+      "certainty": "asserted",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 1,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 1,
+      "qualifier_density": 1,
+      "domain_load": 1
+    },
+    "load_bearing": ["often"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "scope_preservation"],
+    "mission": "ignore_examples",
+    "learning_objective": "summarise the generalization a particular case was building toward, at its stated strength",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. Standard history of Roman road design; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Foundation item on the observation-to-generalization shape: the summary is the closing generalization at its stated strength, not the Roman particulars. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Roman roads famously ran in straight lines, climbing hills head-on rather than winding gently around them.",
+        "role": "setup"
+      },
+      {
+        "text": "A merchant's cart would have preferred the easier slopes, but a marching legion cared most about speed and predictability.",
+        "role": "example"
+      },
+      {
+        "text": "The roads were laid out by and for the army, and their design followed military needs rather than civilian comfort.",
+        "role": "support"
+      },
+      {
+        "text": "What a society builds often records, in stone, whose needs came first.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "The design of what a society builds often records whose needs its builders put first, as the military straightness of Roman roads shows.",
+  "builder": {
+    "prompt": "In one sentence: what larger point are the Roman roads being used to make?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence reach the general point about societies and building, not just the Roman facts?",
+        "kept": "Good. The Romans are the case; the claim is the generalization the case was building toward. Your sentence followed the paragraph to where it was going.",
+        "drifted": "The paragraph spends three sentences on Rome to earn one general sentence. The summary belongs to that last step. Staying with the legions summarises the setup, not the point."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the word often, or something like it?",
+        "kept": "Well held. The author claims that buildings often record priorities, not that they always do. That one word is the difference between the author's claim and a law the author never stated.",
+        "drifted": "Dropping often turns a frequent pattern into a universal rule. The author chose the softer word deliberately, and a faithful summary keeps it."
+      },
+      {
+        "id": "addition",
+        "ask": "Did your sentence stay descriptive, without telling anyone what to study or do?",
+        "kept": "Right. The paragraph observes; it never recommends. A summary that starts giving advice has changed the kind of claim being made.",
+        "drifted": "The paragraph describes what buildings record. It never says what historians or cities should do about it. Recommendations are additions, however sensible."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Marching legions valued speed and predictability, which is why Roman roads climbed hills directly instead of winding around them.",
+      "B": "Whatever a society builds always records whose needs came first, in every age and in every kind of construction it attempts.",
+      "C": "Because infrastructure records the priorities of its builders, historians should study a society's roads before its documents.",
+      "D": "What a society constructs often shows whose needs its builders served first; Roman roads answered to the army, not to travellers."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "The paragraph starts with a curious fact: Roman roads ran dead straight, even uphill, though carts would have preferred gentle curves. The explanation is that armies built them for armies, valuing speed over comfort. Then comes the real point, in the last sentence: what gets built tends to record whose needs mattered most to the people who built it.",
+      "correct_reasoning": "Option D states the closing generalization at exactly the author's strength, keeping often, and lets the Roman case stand as the illustration it was. Nothing is added and nothing the author claimed is missing.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is true and fully in the text, but it summarises the Roman particulars. The paragraph used those particulars to earn a general claim about societies and building, and that claim is the point.",
+          "seductive_element": "It is the most detailed and verifiable material in the paragraph, and it feels satisfyingly complete.",
+          "thinking_mistake": "Detail fixation: elevating the vivid case over the generalization it was built to support."
+        },
+        {
+          "option": "B",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The author says buildings often record their builders' priorities. This option converts that pattern into a law covering every age and every construction, which the paragraph never claims.",
+          "seductive_element": "Universal statements sound like stronger, more summary-like conclusions.",
+          "thinking_mistake": "Tendency to law: dropping the typicality word and letting a pattern become a rule."
+        },
+        {
+          "option": "C",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph describes what buildings record. It gives no advice to historians or anyone else. The recommendation was added by the option, not drawn from the author.",
+          "seductive_element": "An ought feels like a more useful conclusion than an is, so the advice reads as depth.",
+          "thinking_mistake": "Descriptive to prescriptive: turning what happens into what should be done."
+        }
+      ],
+      "reading_habit": "When a paragraph moves from a particular case to a general sentence, the summary lives in the general sentence, kept at exactly the strength the author gave it."
+    }
+  },
+  "mentor": {
+    "challenge": "Three sentences of Rome, one sentence of everything. Notice which one the paragraph was building toward.",
+    "takeaway": "The case earns the claim. The summary belongs to the claim."
+  }
+}

@@ -13,6 +13,9 @@ import { Router } from './core/router/router.js';
 import { toast } from './ui/components/cat-toast.js';
 import { formatPercent, formatDate } from './core/utils/format.js';
 import { registerRC } from './modules/reading-comprehension/index.js';
+import { registerPJ } from './modules/para-jumbles/index.js';
+import { registerPS } from './modules/para-summary/index.js';
+import { resetPSIntro } from './modules/para-summary/logic/store.js';
 import { listRCItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
 import { evaluate } from './core/engagement/achievements.js';
@@ -43,7 +46,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.9.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.11.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -185,22 +188,33 @@ async function renderHome(outlet) {
         </div>`).join('')}
     </div>`;
 
-  /* ---- Recent practice ---- */
+  /* ---- Recent practice (RC and PJ sessions share the store) ---- */
   const recent = [...sessions].sort((a, b) => b.finished_at.localeCompare(a.finished_at)).slice(0, 3);
   const recentHTML = recent.length === 0 ? '' : `
     <div class="card">
       <h2>Recent practice</h2>
-      ${recent.map((s) => `
+      ${recent.map((s) => {
+        const isPJ = s.module === 'pj';
+        const isPS = s.module === 'ps';
+        const count = s.item_ids?.length ?? s.score.total;
+        const label = isPJ
+          ? `Para Jumbles · ${count} jumble${count === 1 ? '' : 's'}`
+          : isPS
+            ? `Para Summary · ${count} paragraph${count === 1 ? '' : 's'}`
+            : (titles.get(s.passage_id) ?? s.passage_id);
+        const href = isPJ ? '#/pj' : isPS ? '#/ps' : `#/rc/review/${s.passage_id}`;
+        return `
         <div class="row">
           <div class="row__lead">
             <span class="row__icon" aria-hidden="true">${s.score.accuracy >= 0.5 ? '✓' : '·'}</span>
             <div>
-              <div class="row__label">${titles.get(s.passage_id) ?? s.passage_id}</div>
+              <div class="row__label">${label}</div>
               <div class="row__hint">${formatDate(s.finished_at)} · ${s.score.correct}/${s.score.total} correct</div>
             </div>
           </div>
-          <a class="hint" href="#/rc/review/${s.passage_id}" aria-label="Review ${titles.get(s.passage_id) ?? s.passage_id}">Review</a>
-        </div>`).join('')}
+          <a class="hint" href="${href}" aria-label="Review ${label}">${(isPJ || isPS) ? 'Journey' : 'Review'}</a>
+        </div>`;
+      }).join('')}
     </div>`;
 
   outlet.innerHTML = `
@@ -231,7 +245,21 @@ function renderPractice(outlet) {
           <span>A staged journey of passages, each with its own Learning Page</span>
         </div>
       </a>
-      ${['Para Summary', 'Para Jumbles', 'Odd One Out', 'Vocabulary'].map((name) => `
+      <a class="list-item" href="#/pj">
+        <div class="list-item__title">Para Jumbles</div>
+        <div class="list-item__meta">
+          <span class="badge badge--success">Available</span>
+          <span>Rebuild the author's paragraph — an eight-tier journey from Beginner to Premium</span>
+        </div>
+      </a>
+      <a class="list-item" href="#/ps">
+        <div class="list-item__title">Para Summary</div>
+        <div class="list-item__meta">
+          <span class="badge badge--success">Available</span>
+          <span>Find the author's point and protect it — an eight-tier journey from Foundation to Premium</span>
+        </div>
+      </a>
+      ${['Odd One Out', 'Vocabulary'].map((name) => `
         <div class="list-item" aria-disabled="true" style="opacity: var(--opacity-dim)">
           <div class="list-item__title">${name}</div>
           <div class="list-item__meta"><span class="badge">Coming in V1.x</span></div>
@@ -318,6 +346,20 @@ function renderSettings(outlet) {
           </div>
           <input class="range" id="volume-slider" type="range" min="0" max="100" step="1"
                  value="70" aria-label="Sound volume" data-sfx="off" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Learning</h2>
+        <div class="row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">§</span>
+            <div>
+              <div class="row__label">Para Summary introduction</div>
+              <div class="row__hint">Show the first-time introduction again</div>
+            </div>
+          </div>
+          <button class="btn" id="ps-intro-reset">Show again</button>
         </div>
       </div>
 
@@ -457,6 +499,18 @@ function renderSettings(outlet) {
   });
   syncFeedback();
 
+  // --- Learning: bring the Para Summary introduction back ---
+  outlet.querySelector('#ps-intro-reset').addEventListener('click', async () => {
+    try {
+      await resetPSIntro(storage);
+      cue('toggle');
+      toast('The introduction will greet you on your next visit to Para Summary.', 'info', { mute: true });
+    } catch (err) {
+      toast('Could not reset the introduction.', 'error');
+      console.error('[CAT OS]', err);
+    }
+  });
+
   // --- Backup & Restore ---
   outlet.querySelector('#backup-export').addEventListener('click', async () => {
     await downloadBackup(storage);
@@ -541,6 +595,8 @@ async function boot() {
     .registerNotFound({ title: 'Not found', render: renderNotFound });
 
   registerRC(router, { storage });
+  registerPJ(router, { storage });
+  registerPS(router, { storage });
 
   router.start();
 

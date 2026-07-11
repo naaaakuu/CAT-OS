@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0008",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "technology-ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "Anonymous Until Connected",
+    "theme": "why anonymity is a property of linkages, not datasets",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "Stripping names does not make data anonymous, because anonymity depends on what other information can be connected to it.",
+      "scope": "Datasets released as anonymous; the claim reframes what anonymity is rather than measuring harm.",
+      "certainty": "asserted",
+      "stance": "skeptical"
+    },
+    "turn": { "present": true, "marker": "Yet" },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 2
+    },
+    "load_bearing": ["frequently", "less a property of a dataset than a claim"],
+    "separating_element": null,
+    "dna_traits": ["inference_control", "main_idea_detection", "language_precision"],
+    "mission": "add_nothing",
+    "learning_objective": "restate an implication the author drew without drawing any further one",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General privacy research on re-identification; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Problem-analysis-implication shape where the implication is conceptual: the summary must reframe anonymity without adding the policy verdict the strongest trap supplies. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Companies often release datasets stripped of names and addresses, describing them as anonymous.",
+        "role": "setup"
+      },
+      {
+        "text": "Yet a handful of ordinary facts, a birth date, a postcode, a pair of recorded visits, is frequently enough to pick one person out of millions.",
+        "role": "support"
+      },
+      {
+        "text": "The more such releases exist, the easier the matching becomes, since each new dataset can be joined to the others.",
+        "role": "support"
+      },
+      {
+        "text": "Anonymity of this kind is therefore less a property of a dataset than a claim about what others cannot yet connect to it.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Removing names does not make data truly anonymous, because anonymity depends on what other information can be connected to it.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say anonymity really is?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence make the reframing move, that anonymity is about what can be connected, not about the dataset itself?",
+        "kept": "Good. The last sentence redefines the word, and the summary must perform that redefinition, not just report the risk.",
+        "drifted": "The paragraph's point is a redefinition: anonymity is a claim about linkages, not a property of a file. A sentence about re-identification risk alone stops one step short."
+      },
+      {
+        "id": "addition",
+        "ask": "Did your sentence stay clear of any verdict about whether data should be released?",
+        "kept": "Exactly right. The paragraph diagnoses what anonymity is. It never weighs releases as good or harmful, and neither should the summary.",
+        "drifted": "The author draws no conclusion about whether releasing data is wise. Any verdict on that question is a step the paragraph deliberately does not take."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the strength honest, frequently enough rather than always enough?",
+        "kept": "Well held. The matching works frequently, not infallibly, and the summary should not harden it.",
+        "drifted": "Frequently is the author's word. A summary where a few facts always identify anyone claims more than the text."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Since supposedly anonymous data can usually be re-identified, releasing datasets to the public causes more harm than it prevents.",
+      "B": "A few ordinary facts can identify one person among millions, which is why companies no longer describe their datasets as anonymous.",
+      "C": "Removing names does not make data truly anonymous, because anonymity depends on what other information can be connected to it.",
+      "D": "Companies regularly publish datasets with names and addresses removed, and they present these releases to the public as anonymous."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "The paragraph takes apart a comfortable word. Companies strip names and call the data anonymous. But a birth date, a postcode and a couple of visits are frequently enough to find one person in millions, and every new release makes cross-matching easier. So anonymity, as used here, is not something a dataset has. It is a bet about what other people cannot yet connect to it.",
+      "correct_reasoning": "Option C performs the paragraph's actual move: it denies that name-stripping produces anonymity and gives the author's reason, that anonymity lives in what can be linked. No policy verdict is added, and the redefinition, which is the point, survives intact.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph never weighs harm against benefit or takes a position on whether data should be released. That verdict is a further step the author did not take, however naturally it seems to follow.",
+          "seductive_element": "It goes one step further, and readers reward options that seem to complete the thought.",
+          "thinking_mistake": "Implication addition: drawing a conclusion the paragraph builds no case for."
+        },
+        {
+          "option": "B",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "The first clause is faithful. The tail is false to the text: the paragraph says companies do describe such releases as anonymous, which is exactly the practice being examined.",
+          "seductive_element": "Having verified the strong opening, a reader relaxes before the swerve at the end.",
+          "thinking_mistake": "The poisoned tail: checking the start of an option and skimming its finish."
+        },
+        {
+          "option": "D",
+          "archetype": "setup_as_payoff",
+          "secondary_archetype": null,
+          "why_wrong": "This is the practice the paragraph opens with, reported accurately and completely, and it is only the setup. The point is what that practice fails to deliver, which this option never reaches.",
+          "seductive_element": "Everything in it is verifiably true and it reads as a tidy, neutral report.",
+          "thinking_mistake": "Setup as payoff: summarising the situation the paragraph describes instead of the claim it makes about that situation."
+        }
+      ],
+      "reading_habit": "After choosing, reread your option and ask: did the author take this step? A summary may never travel further than the paragraph did, even in a direction the paragraph seems to point."
+    }
+  },
+  "mentor": {
+    "challenge": "This paragraph redefines a comfortable word. One option completes the thought for the author. Do not let it.",
+    "takeaway": "A summary walks exactly as far as the author walked, and not one step further."
+  }
+}

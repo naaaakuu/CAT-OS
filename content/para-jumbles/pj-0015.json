@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0015",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "anthropology",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "The Debt That Came Before Money",
+    "theme": "why obligation, not barter, was the origin of economic life",
+    "estimated_time_sec": 185,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["demonstrative", "connective_explicit", "connective_implicit", "stance_continuity"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["misleading_connective", "anchor_pair"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 3,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "distinguish a reported view from the author's view when both open like a thesis",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The critique of the barter-origin myth reflects a recognised strand of economic anthropology; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "CAT+ item where the vivid reported view (A, the textbook barter story) is written to look like the thesis, and a however (C) could attach to two sentences. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The textbook story is tidy: before money, people bartered, swapping a surplus of grain for a needed axe, until coins arrived to spare everyone the trouble of the double coincidence of wants.",
+      "role": "background"
+    },
+    {
+      "label": "B",
+      "text": "What they find instead is neighbours who simply give, keeping a running mental tally of who owes whom, so that generosity and obligation, not haggling, hold the community together.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "However, when anthropologists actually visit societies without money, they almost never find people bartering in this way.",
+      "role": "contrast"
+    },
+    {
+      "label": "D",
+      "text": "Economic life, this suggests, did not begin with the cold arithmetic of exchange at all, but with the older and warmer bookkeeping of debt.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["A", "C", "B", "D"],
+  "links": [
+    {
+      "from": "A",
+      "to": "C",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "A tells the tidy barter story. C opens \"However, when anthropologists actually visit...\", turning against exactly that story. The however contrasts with A's account, not with anything else, because A is the only claim on the table for it to oppose."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "C says researchers \"almost never find people bartering\". B opens \"What they find instead\", the they being C's anthropologists and instead answering C's absence directly. The pair is tightly bound and correctly adjacent."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "B reports the finding, gift and tally rather than haggling. D opens \"this suggests\", drawing the conclusion from that finding: economic life began with debt, not exchange. The inference caps the evidence."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A reported view set up to be knocked down, the contrary evidence, and the author's own conclusion. The danger is that the reported view (the barter story) is the most vivid sentence and reads like a thesis, and the however could seem to oppose more than one thing.",
+    "movement": [
+      {
+        "label": "A",
+        "why_here": "A lays out the textbook barter story. It is background the author will overturn, not the author's own belief, and it must come first because everything after it reacts to it."
+      },
+      {
+        "label": "C",
+        "why_here": "C is the pivot, marked with However: when researchers actually look, they do not find barter. It can only follow the story it contradicts."
+      },
+      {
+        "label": "B",
+        "why_here": "B says what they find instead, gift and running tally. \"Instead\" bolts it to C's absence of barter, so B follows C without a gap."
+      },
+      {
+        "label": "D",
+        "why_here": "D is the author's conclusion, flagged by \"this suggests\": economic life began with debt, not exchange. The inference lands last."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DACB",
+        "trap_type": "competing_opener",
+        "why_tempting": "D is the crisp thesis, economic life began with debt, and A is a vivid scene. A solver hunting for the main claim may open on D as the thesis and treat the rest as support, or open on the colourful A as the hook.",
+        "where_it_breaks": "D begins \"this suggests\", an inference that must follow its evidence; it cannot open a paragraph, because there is nothing yet for this to point at. And A, though vivid, is the view being refuted, not asserted. The paragraph opens on the reported story (A) precisely so that C's however has something to overturn. Mistake the reported view for the thesis and the whole argument inverts."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "C's absence of barter and D's this suggests both feel like the argument's turn, so a solver locks C to D, reads the conclusion straight off the absence, and leaves B's warm finding to trail at the end.",
+        "where_it_breaks": "D's \"this suggests\" needs the positive finding, not just the absence of barter. C only says researchers do not see bartering; what they do see, gift and running tally, is in B. Put D before B and the conclusion rests on a blank where its evidence should be, while B's \"What they find instead\" dangles after the paragraph has already concluded. The inference must follow the finding: C, then B, then D."
+      }
+    ],
+    "trap_named": "The reported view dressed as the thesis. A is the vivid textbook story, and vividness plus first-person tidiness makes it feel like the author's claim, while the real claim, D, hides behind an inference marker. Before crediting any sentence as the thesis, ask whose view it states: the author's, or the one the author built up to tear down. The barter story is set up to fall.",
+    "solving_habit": "In an argument, separate the view being reported from the view being held. The sentence that opens with a contrast (however) usually turns against a reported view stated just before it, and the author's real thesis often arrives last, behind words like this suggests."
+  },
+  "mentor": {
+    "challenge": "The most confident sentence here is the one the author disagrees with. Find whose view each sentence carries before you order them.",
+    "paragraph_plain": "The author takes on a story we all learned. The tidy version says that before money, people bartered, trading spare grain for a needed axe, until coins came along to make it easier. But when anthropologists actually visit societies without money, they hardly ever see people bartering like that. Instead they find neighbours who simply give, each keeping a mental tally of who owes whom, so that generosity and obligation, not haggling, hold the group together. This suggests, the author concludes, that economic life did not start with the cold arithmetic of exchange at all. It started with the older, warmer bookkeeping of debt.",
+    "takeaway": "The most vivid sentence is often the view being refuted, not the one being held."
+  }
+}

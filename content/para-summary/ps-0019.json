@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0019",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "bible_level": "elite",
+    "title": "The Second Pair of Eyes",
+    "theme": "how reliable diagnostic tools erode the judgment that guards them",
+    "estimated_time_sec": 155,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "Reliable diagnostic tools erode physicians' judgment indirectly: as clinicians defer to them, they lose the practice that keeps independent judgment sharp, the very skill needed to catch the tools' rare misses.",
+      "scope": "Diagnostic software in clinical practice; the erosion is driven precisely by the tools' growing reliability.",
+      "certainty": "asserted",
+      "stance": "cautionary"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": ["when the software is right often enough", "the more reliable the tool becomes", "not outright"],
+    "separating_element": "Reliability as the engine. The paragraph's claim is that it is precisely the tool's growing reliability that drives the erosion of judgment; the nearest rival keeps the erosion but loses that engine.",
+    "dna_traits": ["pattern_matching", "surface_matching", "main_idea_detection"],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "keep a circular causal claim intact against reversed and rearranged rivals",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General automation-and-skill literature applied to clinical software; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Elite causal item: a near miss missing the reliability engine, a full arrow reversal, and a verbatim lure that flips who catches whose misses. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Hospitals that adopt diagnostic software usually present it as a second pair of eyes for the physician.",
+        "role": "setup"
+      },
+      {
+        "text": "In practice, when the software is right often enough, clinicians begin to defer to it, and the habit of forming an independent judgment quietly falls away.",
+        "role": "support"
+      },
+      {
+        "text": "The danger is circular: the more reliable the tool becomes, the fewer chances doctors have to practise the very skill needed to catch its rare misses.",
+        "role": "support"
+      },
+      {
+        "text": "Such tools do not replace physicians' judgment outright; they erode the conditions under which that judgment stays sharp.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Reliable diagnostic tools erode clinical judgment indirectly: deferring to them costs doctors the practice that keeps the skill sharp, and the more reliable the tool, the faster that practice disappears.",
+  "builder": {
+    "prompt": "In one sentence: how exactly does the paragraph say these tools endanger judgment?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence keep the indirect route, erosion through lost practice rather than outright replacement?",
+        "kept": "Good. The final sentence rules out the crude reading. The tools do not take judgment away; they starve what keeps it alive.",
+        "drifted": "The paragraph is explicit: not outright replacement. The danger runs through deference and lost practice, and the summary must run the same way."
+      },
+      {
+        "id": "scope",
+        "ask": "Is reliability doing the driving in your sentence, as it does in the paragraph?",
+        "kept": "Exactly right. The paradox is the point: the better the tool, the stronger the erosion. Without that engine the claim goes generic.",
+        "drifted": "The paragraph's sharpest idea is circular: it is precisely when the software is right often enough that deference begins. Lose that, and you have a weaker, different claim."
+      },
+      {
+        "id": "addition",
+        "ask": "Did you stop short of telling hospitals what to do about it?",
+        "kept": "Right. The paragraph names a danger. It proposes nothing, bans nothing, recommends nothing.",
+        "drifted": "No policy appears in the paragraph. A summary that starts fixing the problem has left the text behind."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Reliable diagnostic tools erode physicians' judgment indirectly: deferring to them costs doctors the practice that keeps judgment sharp.",
+      "B": "Diagnostic software gradually erodes clinicians' independent judgment, as doctors who lean on it stop exercising the skill themselves.",
+      "C": "Doctors whose diagnostic judgment has faded come to depend on software, which hospitals then present as a second pair of eyes.",
+      "D": "Diagnostic software offers physicians a second pair of eyes, catching the rare misses that even sharp independent judgment lets through."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Diagnostic software arrives as a helper, a second pair of eyes. But once it is right often enough, doctors start deferring to it, and the daily exercise of judging for themselves withers. The paragraph's sharpest point is the circle: the more trustworthy the tool, the less practice doctors get at the one skill that could catch the tool's rare misses. So the tools do not seize judgment; they dry up the conditions that keep judgment sharp.",
+      "correct_reasoning": "Option A keeps the whole causal architecture: reliability leads to deference, deference costs practice, lost practice dulls judgment, and the erosion is indirect rather than a replacement. It is the only option in which the tool's reliability is doing the driving, which is the claim's engine.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "near_miss",
+          "secondary_archetype": null,
+          "why_wrong": "A genuine finalist: the erosion, the deference, the lost exercise are all here and correctly connected. What is missing is the engine, that the erosion is driven precisely by the software's growing reliability, the circular danger the paragraph is built around. Without it, this is a generic worry about leaning on machines.",
+          "seductive_element": "It is faithful in direction and tone, and nothing in it contradicts the text.",
+          "thinking_mistake": "Over-compression: one load bearing element, the reliability paradox, cut away in the shortening."
+        },
+        {
+          "option": "C",
+          "archetype": "cause_effect_reversal",
+          "secondary_archetype": null,
+          "why_wrong": "The arrow runs backwards. In the paragraph, deference to reliable software erodes judgment; here, already-faded judgment causes the dependence. Same elements, opposite causation, different claim entirely.",
+          "seductive_element": "It reuses the paragraph's pieces in a sequence that sounds equally plausible.",
+          "thinking_mistake": "Cause and effect reversal: checking that the elements match without checking which way the arrow points."
+        },
+        {
+          "option": "D",
+          "archetype": "verbatim_lure",
+          "secondary_archetype": null,
+          "why_wrong": "Second pair of eyes, rare misses, sharp independent judgment: the vocabulary is all the paragraph's, and the logic is upside down. In the text, human judgment is what catches the software's rare misses; here the software catches the human's. This is the hospital's sales pitch, not the author's claim.",
+          "seductive_element": "Maximum word overlap with the text, arranged into the comfortable story the paragraph opened with.",
+          "thinking_mistake": "Keyword match: trusting familiar phrases while the relation between them has been inverted."
+        }
+      ],
+      "reading_habit": "For any causal paragraph, write the arrow before the options: what drives what, through what. Then demand the arrow, the driver and the route all survive in the option you choose."
+    }
+  },
+  "mentor": {
+    "challenge": "Every option here is built from the paragraph's own parts. Only one keeps the machine assembled the way the author built it.",
+    "takeaway": "The engine of a claim is part of the claim. A summary that idles without it is a different vehicle."
+  }
+}

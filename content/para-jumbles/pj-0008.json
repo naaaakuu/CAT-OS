@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0008",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Word That Went Missing",
+    "theme": "how a single mistranslation built a myth about spinach",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["lexical_repetition", "synonym_hypernym", "temporal_sequence", "demonstrative"],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": ["anchor_pair"],
+    "dna_traits": ["surface_matching", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "resist a planted keyword repeat and follow the true causal thread",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. The spinach-iron decimal-point story is a widely retold (and itself debated) science anecdote, used here in broad strokes; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Engineered lexical decoy: iron and spinach repeat across a non-adjacent pair; the true neighbour links by cause. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "For decades afterward, parents and cartoons alike urged children to eat spinach for its supposedly extraordinary iron.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "The lesson is not really about vegetables at all: a number repeated confidently enough can outlive the correction that should have killed it.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "One of the most stubborn nutrition myths began, the story goes, with a misplaced decimal point.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "An early analysis of spinach recorded its iron content as ten times the true figure, and the error slipped into reference tables that others copied without rechecking.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": ["C", "D", "A", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "D",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "C promises a myth born from \"a misplaced decimal point\". D is that decimal point in action: an iron figure recorded ten times too high. The abstract claim hands off to its concrete event."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "temporal_marker",
+      "reliability": "high",
+      "explanation": "A opens with \"For decades afterward\". Afterward needs a moment to come after, and D supplies it: the error entering the tables. Time marches from the mistake to its long life."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "B opens with \"The lesson\", the moral drawn from the whole story just told. A moral that sweeping can only arrive once the story is complete."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "This is a story with a moral: a myth is announced, its origin is shown, its long life is traced, and the lesson is drawn. Watch the timeline and the causes, because the paragraph plants a matching keyword to pull you off both.",
+    "movement": [
+      {
+        "label": "C",
+        "why_here": "C announces the whole story in one line and names its cause: a decimal point. It needs no setup, and \"the story goes\" signals a tale about to be told."
+      },
+      {
+        "label": "D",
+        "why_here": "D is the origin event. It turns C's abstract decimal point into a specific tenfold error copied from table to table. Cause before consequence."
+      },
+      {
+        "label": "A",
+        "why_here": "A is the consequence over time, marked plainly with \"For decades afterward\". The myth, now loose, shapes parents and cartoons."
+      },
+      {
+        "label": "B",
+        "why_here": "B lifts out of spinach entirely to state what the story was really about. A conclusion that says \"not really about vegetables at all\" can only follow the vegetables."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CADB",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "C names a myth, A names spinach and iron, D names spinach and iron again. The keyword iron pulls A and D together, and A right after C keeps the topic humming.",
+        "where_it_breaks": "A begins \"For decades afterward\". After what? Placed right after C, there is no event yet for the decades to follow. The event is D's tenfold error, and D must therefore come before A. The repeated word iron sits across a pair the timeline forbids. Follow the word and the clock runs backward."
+      }
+    ],
+    "trap_named": "The lexical decoy: the exact word iron gleams across two sentences that the timeline keeps apart. The true neighbour of A is D, joined by cause and by the word afterward, not by a shared noun. When a repeated word tempts you, check the timeline and the causes first; the repeat is often the bait.",
+    "solving_habit": "In a story, let the time words and the causes lay the track. Treat a repeated keyword as a suspect, not a signpost, until the sequence of events agrees with it."
+  },
+  "mentor": {
+    "challenge": "Two sentences share a shiny word. The order of events does not care about shiny words. Follow the clock.",
+    "paragraph_plain": "The author tells the story of a nutrition myth. It began, supposedly, with a misplaced decimal point. An early lab wrote down spinach's iron as ten times its real amount, and that wrong number got copied into reference books nobody rechecked. For decades afterward, parents and cartoons pushed spinach on children for iron it never really had in those quantities. The real lesson, the author says, is not about vegetables. It is that a confident number can outlive the correction that should have ended it.",
+    "takeaway": "A repeated word is a suspect, not a signpost. Let the events set the order."
+  }
+}

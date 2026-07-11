@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0011",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "political-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "What Compromise May Trade",
+    "theme": "when political compromise is defensible and when it is not",
+    "estimated_time_sec": 110,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Compromise is neither a vice nor a virtue in itself: it is defensible when it trades ambitions and indefensible when it trades away the standing of persons.",
+      "scope": "Political compromise; the author carves a third position between two traditions.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 3,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 2,
+      "domain_load": 3
+    },
+    "load_bearing": ["defensible when", "indefensible when"],
+    "separating_element": null,
+    "dna_traits": ["author_intent", "main_idea_detection", "inference_control"],
+    "mission": "hold_the_stance",
+    "learning_objective": "summarise the author's adjudication, not either of the two views being judged",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General political theory of compromise; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Two-views shape: the flattened option is true but stance-free, and one view is dressed as the verdict. The correct answer must carry the author's own line between interests and persons. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "One tradition treats political compromise as a moral defeat, the abandonment of principle for convenience.",
+        "role": "setup"
+      },
+      {
+        "text": "Another celebrates it as the very essence of democratic life, proof that no faction rules alone.",
+        "role": "concession"
+      },
+      {
+        "text": "Both views miss what compromise actually asks of us: it is defensible when it trades ambitions, and indefensible when it trades away the standing of persons.",
+        "role": "thesis"
+      },
+      {
+        "text": "A budget can be split; a citizen's basic dignity cannot, and the art lies in telling the two apart.",
+        "role": "support"
+      }
+    ]
+  },
+  "ideal_summary": "Compromise is neither shameful nor admirable in itself: it is acceptable when interests are traded and unacceptable when people's basic standing is.",
+  "builder": {
+    "prompt": "In one sentence: where does the author come down on compromise?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence give the author's own line, interests may be traded, persons' standing may not?",
+        "kept": "Good. The paragraph's point is that distinction. Both opening traditions exist to be corrected by it.",
+        "drifted": "The two traditions are the setup. The author's claim is the line between what compromise may trade and what it may not, and the summary must draw that line."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence take the author's side rather than reporting a disagreement?",
+        "kept": "Right. The author adjudicates. A summary that merely says thinkers disagree has removed the verdict, which is the point.",
+        "drifted": "This paragraph does not sit on the fence, it builds a third position. Reporting only the debate flattens an argument into a topic."
+      },
+      {
+        "id": "addition",
+        "ask": "Did you avoid adding any measure of democratic health or advice to politicians?",
+        "kept": "Well held. The author distinguishes; the author does not grade democracies or counsel anyone.",
+        "drifted": "The paragraph offers no test of democratic health and no advice. Additions like these feel conclusive but belong to the option, not the author."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Compromise is neither shameful nor admirable in itself; it is acceptable when interests are traded, and unacceptable when people's basic standing is.",
+      "B": "Political thinkers have long disagreed over whether compromise betrays principle or expresses the essence of democratic life.",
+      "C": "Compromise is the essence of democratic life, the standing proof that no single faction is ever in a position to rule alone.",
+      "D": "Compromise is defensible when it trades ambitions, which is why a democracy's health is measured by how often its factions compromise."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Two traditions are laid on the table: compromise as moral defeat, and compromise as democracy's crowning habit. The author rejects the question both share, whether compromise is good or evil in itself, and replaces it with a distinction. Trading ambitions, like splitting a budget, is fair game. Trading away a person's basic standing is not. The skill of politics is telling those apart.",
+      "correct_reasoning": "Option A reproduces the adjudication: no blanket verdict on compromise, and the author's exact line between interests and persons. Both halves of the distinction survive, and the option takes the author's side rather than describing the dispute.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "stance_flattening",
+          "secondary_archetype": null,
+          "why_wrong": "Nothing in this is false, which is its danger. The paragraph does not report a disagreement; it resolves one. Removing the author's verdict leaves the topic and loses the point.",
+          "seductive_element": "It cannot be contradicted by anything in the text, and cautious readers reach for uncontradictable options.",
+          "thinking_mistake": "Stance flattening: summarising an argument as if it were a neutral description of a debate."
+        },
+        {
+          "option": "C",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the second of the two traditions, stated as the conclusion. The author explicitly says both views miss the point, this one included.",
+          "seductive_element": "It is stated warmly in the paragraph and matches a familiar civic ideal.",
+          "thinking_mistake": "Owner confusion: adopting a view the author displays but does not hold."
+        },
+        {
+          "option": "D",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "The opening clause is the author's own. The tail then invents a measure of democratic health that appears nowhere in the paragraph, and quietly drops the indefensible half of the distinction.",
+          "seductive_element": "A true beginning carries the invented ending past a reader who has stopped checking.",
+          "thinking_mistake": "The poisoned tail: an option front-loaded with truth and back-loaded with invention."
+        }
+      ],
+      "reading_habit": "When a paragraph weighs two views, find the sentence where the author stops describing and starts judging. The summary is that judgment, with both of its halves."
+    }
+  },
+  "mentor": {
+    "challenge": "Two views walk in. The author sends both away and builds a third. Summarise the third, not the visitors.",
+    "takeaway": "In a paragraph of views, the summary belongs to the verdict."
+  }
+}

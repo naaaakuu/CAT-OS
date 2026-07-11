@@ -4,6 +4,172 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.11.0 — 2026-07-11 — Para Summary
+
+The third VARC module, built faithfully to `PARA SUMMARY BIBLE.md`. The
+durable skill is **hierarchical reading**: find the apex claim, fix its
+scope and certainty, hold the author's stance, and compress without
+changing any of the three. Every item, option, explanation and
+Reading-DNA signal is engineered to train exactly that — a learning
+system, not a question bank.
+
+### The learning journey (not a question bank)
+- **A first-time introduction** (`/ps` on first open, then `/ps/about`
+  forever, resettable from Settings → Learning): no questions until the
+  learner understands what a summary question is, why CAT asks it, how
+  beginners and experts read differently, and why "sounds good" is not
+  the test — the meaning-preservation test is. Calm, illustrated,
+  progressive-reveal sections in very simple English.
+- **An eight-tier ladder** — Foundation, Easy, Medium, Advanced, CAT,
+  CAT+, 99 Percentile, Premium — each tier **teaches one reading skill**
+  before the next raises the pressure (claim vs topic → resisting the
+  example → evidence vs claim → finding the turn → keeping qualifiers →
+  holding stance → the one-word finalists → everything at once), mapped
+  onto the Bible's five levels (§5 dials). Tiers recommend; nothing locks.
+- **Today's Mission before every paragraph** ("Protect the author's
+  scope.", "Ignore the examples.", …) — ten missions, rotated
+  intelligently because each item declares the skill its design
+  foregrounds.
+- **The Summary Builder**: before the options, the learner writes the
+  author's point in one sentence of their own, then walks an honest,
+  item-specific comparison against the ideal summary (core idea, scope,
+  certainty, additions, stance) — generation before recognition. Their
+  sentences persist (learning store, `kind: "summary"`) and reappear on
+  the Learning Page.
+- **The Think button**: a floating coach available while solving. It
+  never hints — it asks the questions expert readers ask themselves
+  (Bible §3), two tuned to the item's mission plus a deterministic core.
+
+### Teaching, not marking
+Never a bare verdict. Every answer teaches in layers: **what the
+paragraph actually says** (the paragraph gently compresses into the
+ideal summary, thesis sentence highlighted), **why the best answer
+holds** (the meaning-preservation test, applied), **why each option was
+built to tempt you** (its §7 distortion archetype named, plus the §6
+way-of-reading that produces it), and **make it a habit**. Explanations
+grow richer with tier — sentence anatomy from Advanced, the separating
+element at the elite tiers — never overwhelming beginners.
+
+### The mentor and Reading DNA
+- A Para-Summary **Reading DNA** (`core/mentor/ps-dna.js`): every wrong
+  pick carries the taxonomy tag of the distortion that rewarded it, so
+  misses aggregate by family (scope, certainty, structure, addition,
+  stance, logic, language, precision) into the learner's dominant
+  pattern — "scope pulls keep finding you" — plus qualifier-density and
+  unmarked-turn splits, finalist strength, pace watches, and growth
+  observations. All evidence-floored and banned-word-linted, exactly
+  like the RC and PJ mentors. Growth gains a "How you summarise" section.
+- One lesson per set (`core/mentor/ps-lesson.js`), same learning-store
+  shape, so a summary insight can open tomorrow's reading session as a
+  twenty-second recall.
+
+### Content: 20 items, all eight tiers, Bible-governed
+`content/schema/ps.schema.v1.json` encodes the Bible's operational core:
+apex (claim/scope/certainty/stance) fixed before options, architecture
+(§2), the eight difficulty dials (§5), load-bearing words, the elite
+`separating_element`, and per-distractor archetypes (§7 palette,
+single-distortion rule; layering elite-only). The bank: 20 original
+paragraphs across 12 genres and 7 architectures (concession-turn capped
+at 20%, §14), correct positions balanced 5/5/5/5, option lengths banded,
+three error families per item, near-miss finalists with nameable
+separating elements at the elite tiers. All enforced mechanically —
+loader consistency checks + batch-level fairness checks in verify.
+
+### Reuse, not duplication
+- PS sessions/attempts persist to the **same** stores as RC and PJ
+  (`module: "ps"`), so streaks, XP, levels, achievements, backup and
+  restore cover summaries with **zero** storage changes.
+- Reuses `<cat-question-card>`/`<cat-option>`, the progress/timer/XP
+  components, the celebration surface, and the existing audio language
+  (no new sounds). Intro and teaching CSS shared with PJ via grouped
+  selectors — no component duplicated, no working file renamed.
+- Reading Comprehension and Para Jumbles are untouched except for
+  shared, additive surfaces (Growth section, Practice list, Settings
+  row, loader + verify extensions).
+- `tools/verify.mjs` extended: PS schema + consistency, registry
+  mirror, precache coverage, batch fairness (position spread,
+  architecture variety, concession-turn cap), and a full PS
+  engine/voice/missions/think/DNA/lesson dry run. All 83 checks pass.
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** Para Summary ships
+at 0.11.0. Odd One Out and Vocabulary remain next in the module ladder.
+
+## 0.10.0 — 2026-07-10 — Para Jumbles
+
+The second VARC module, and the first that teaches a genuinely new skill:
+rebuilding a scrambled paragraph into the order its author wrote. Built
+faithfully to the new `PARA_JUMBLES_BIBLE.md` — the durable skill is
+**global coherence tracking over local pattern-matching**, and every item,
+explanation, and Reading-DNA signal is engineered to train exactly that.
+
+### The learning journey (not a question bank)
+- **A first-time introduction** (`/pj` on first open, then `/pj/about`
+  forever): no questions until the learner understands what a jumble is,
+  why CAT asks it, why memorised tricks fail, and how authors build
+  paragraphs (old information carrying new). Calm, illustrated, sections
+  that reveal as they scroll, written in very simple English — the learner
+  should finish excited, not scared.
+- **An eight-tier ladder** — Beginner, Easy, Medium, Advanced, CAT, CAT+,
+  99 Percentile, Premium — each with a distinct design contract from the
+  Bible's §6 difficulty bands, so every step *feels* different. The decisive
+  local-linking → macro-structure plateau (Bible §9, level 2→3) is crossed
+  between Medium and Advanced by design. Tiers recommend; nothing locks.
+- **The solving surface**: tap sentences into order, then a mandatory
+  **read-back** — the assembled paragraph appears as prose before you can
+  lock in (Bible Recommendation 6, defeating premature closure). The time
+  spent on that read-back is recorded and read by the DNA.
+
+### Teaching, not marking (the four-layer explanation, Bible §11)
+Every attempt, right or wrong, is taught in four layers: **the shape**
+(name the macro pattern first), **the author's moves** (why each sentence
+sits where it does, tied to meaning), **the order that tempted you** (your
+exact wrong order walked to the point it breaks, with the trap named), and
+**the trap as a reusable defense** plus one transferable habit. Signals are
+always taught *with their reliability* — never as rules — because the Bible's
+core lesson is that every surface cue can be weaponised.
+
+### The mentor and Reading DNA
+- A Para-Jumbles **Reading DNA** (`core/mentor/pj-dna.js`) profiles how you
+  rebuild paragraphs: surface-matching, opener/ending judgement,
+  global-coherence tracking (accuracy vs number of plausible orderings),
+  working memory for long chains, implicit-inference gaps, and premature
+  closure (quick locks that did not hold). Every observation is
+  evidence-gated behind explicit floors — the mentor never sees a pattern in
+  noise — and the language is banned-word-linted for judgment, exactly like
+  the reading mentor. Growth's "How you order" section surfaces it.
+- One lesson per set (`core/mentor/pj-lesson.js`), in the same learning-store
+  shape the reading mentor uses, so a jumble insight can open tomorrow's
+  reading session as a twenty-second recall.
+
+### Content: 19 authentic items, all eight tiers
+Each written paragraph-first then scrambled (Bible §10), single defensible
+order, one documentable link per consecutive pair with its reliability, the
+full §12 metadata (twelve-axis difficulty vector, macro pattern, cohesion
+signals, engineered traps, `num_plausible_orderings`, and a
+`heuristic_adversarial` flag that is **true from Medium up** — a pure
+surface-heuristic solver gets those items wrong). Format (4 sentences, TITA,
++3/0 no negatives) is carried as *configuration* with a "last verified" flag,
+never hard-coded, per the Bible's volatility warning.
+
+### Reuse, not duplication
+- TITA scoring engine (`core/engine/pj-session.js`, +3/0). PJ sessions and
+  attempts persist to the **same** stores as RC (records tagged
+  `module: "pj"`), so streaks, XP, levels, achievements, backup and restore
+  cover jumbles with **zero** storage changes.
+- One new shared component, `<cat-jumble-board>` (select-to-order, not
+  drag — reliable on small screens and keyboard-friendly, per ROADMAP_V2's
+  0.7.0 decision). No new sounds: every cue reuses the existing audio
+  language. Reading Comprehension is untouched; the module registers itself.
+- `tools/verify.mjs` extended: PJ schema + consistency (permutation checks,
+  links-per-pair, adversarial-flag enforcement), registry agreement,
+  precache coverage, and a full PJ engine/voice/DNA/lesson dry run. All
+  checks pass.
+
+**Roadmap note (per ROADMAP_V2 maintenance rule):** Para Jumbles ships at
+0.10.0, ahead of Odd One Out. It shares the sentence-ordering interaction
+that Odd One Out (originally paired with it at 0.7.0) will reuse. Module
+order behind is unchanged.
+
 ## 0.9.0 — 2026-07-07 — Audio Identity
 
 A complete, coherent sound language, synthesized live — so studying feels

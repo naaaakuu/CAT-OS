@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "ps-0005",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "Seeing Without Eyes",
+    "theme": "what octopus camouflage hints about where sensing happens",
+    "estimated_time_sec": 80,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-07: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "The colour-matching ability of the colour-blind octopus hints that, in some animals, sensing light may not be confined to the eyes.",
+      "scope": "Some animals, argued from the octopus case; the significance is offered as a suggestion.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 1,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": ["seems", "suggests", "may", "in some creatures"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "scope_preservation", "compression_skill"],
+    "mission": "ignore_examples",
+    "learning_objective": "summarise the significance of a phenomenon, not its most vivid demonstration",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-11",
+      "usage_note": "Original composition in CAT register for CAT OS. General cephalopod biology; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-11",
+    "batch_id": "batch-ps-001",
+    "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
+    "reviewer_notes": "Phenomenon-mechanism-significance shape: the summary is the hedged significance, while the demonstration, an extreme overreach, and the bare mechanism wait as traps. Owner review pending."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "An octopus can match the colour of almost any surface it settles on, though its eyes, by every test yet devised, cannot see colour at all.",
+        "role": "setup"
+      },
+      {
+        "text": "In one demonstration, an animal placed against printed seaweed vanished into the pattern within seconds.",
+        "role": "example"
+      },
+      {
+        "text": "Part of the answer seems to lie in the skin itself, which carries light-sensing proteins of the kind normally found in eyes.",
+        "role": "support"
+      },
+      {
+        "text": "The octopus suggests that seeing, in some creatures, may not be confined to the eyes.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "The colour matching of the colour-blind octopus, aided by light-sensing proteins in its skin, hints that in some animals sensing light may not belong to the eyes alone.",
+  "builder": {
+    "prompt": "In one sentence: what bigger idea does the octopus point to, according to the paragraph?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence reach the general idea about where seeing can happen, not just the octopus trick?",
+        "kept": "Good. The octopus is the case; the paragraph closes on what the case suggests about sensing in animals generally.",
+        "drifted": "The disappearing act is the demonstration. The paragraph's last sentence tells you what it was demonstrating, and the summary belongs there."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the reach modest, some creatures rather than all animals?",
+        "kept": "Well held. In some creatures is the exact width of the claim. Wider would be a different assertion.",
+        "drifted": "The paragraph claims this for some creatures, suggested by one animal. Extending it to animals in general stretches the author's reach."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did your sentence stay at suggests and may, rather than proves?",
+        "kept": "Right. The paragraph is a hint, offered carefully. Your sentence kept it a hint.",
+        "drifted": "Suggests and may are part of the claim. A summary that proves what the author only suspects has changed the science."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Set against printed seaweed, an octopus can blend into the pattern so completely that it disappears within a few seconds.",
+      "B": "The colour matching of an octopus that cannot see colour hints that, in some animals, sensing light may not belong to the eyes alone.",
+      "C": "The octopus proves that animals never need eyes to sense light, since its skin alone can register every colour around it.",
+      "D": "Light-sensing proteins in its skin appear to help the octopus match the colours of the surfaces on which it settles."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "The paragraph presents a puzzle: octopuses match colours their eyes cannot see. A demonstration makes the puzzle vivid, and part of the likely answer is that their skin carries light-sensing proteins of the sort eyes use. The closing sentence draws the careful significance: perhaps, in some creatures, seeing is not only an eye's job.",
+      "correct_reasoning": "Option B keeps the puzzle, the modest reach of some animals, and the hedged force of hints and may. It is the paragraph's significance stated at the paragraph's own confidence, which is what the closing sentence asked the whole passage to mean.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the demonstration, the paragraph's most vivid moment. It illustrates the ability; it says nothing about what the ability suggests, which is the point the paragraph ends on.",
+          "seductive_element": "It is the easiest sentence to picture and the most fun to remember.",
+          "thinking_mistake": "Concreteness bias: the disappearing octopus is more memorable than the idea it demonstrates."
+        },
+        {
+          "option": "C",
+          "archetype": "extreme_language",
+          "secondary_archetype": null,
+          "why_wrong": "Proves, never, every: the paragraph speaks in suggests and may about some creatures. This option converts a careful hint into an absolute biology the author would not recognise.",
+          "seductive_element": "Absolutes sound conclusive, and a conclusive sentence feels like a summary.",
+          "thinking_mistake": "The absolute word: reading maximum confidence as maximum quality."
+        },
+        {
+          "option": "D",
+          "archetype": "scope_narrowing",
+          "secondary_archetype": null,
+          "why_wrong": "True and properly hedged, but it stops at the mechanism inside the octopus. The paragraph's claim is one step wider: what this case may mean for seeing in some animals at all.",
+          "seductive_element": "It sounds careful and scientific, and everything in it is verifiable in the text.",
+          "thinking_mistake": "Over restriction: summarising the mechanism and dropping the significance it was building toward."
+        }
+      ],
+      "reading_habit": "In a phenomenon and mechanism paragraph, ask what the final sentence does. If it widens the lens, the summary must widen with it, at the same careful strength."
+    }
+  },
+  "mentor": {
+    "challenge": "A puzzle, a demonstration, a suspected mechanism, and one careful conclusion. Only one of those four is the point.",
+    "takeaway": "The demonstration dazzles. The significance, stated softly, is the point."
+  }
+}

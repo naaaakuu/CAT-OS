@@ -39,7 +39,7 @@ function readJSON(rel) {
 
 /* ---- import the app's real validation code ---- */
 const { validate } = await mod('src/core/content-loader/validator.js');
-const { consistencyIssues } = await mod('src/core/content-loader/loader.js');
+const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues } = await mod('src/core/content-loader/loader.js');
 const { PracticeSession } = await mod('src/core/engine/session.js');
 const { sessionXP, totalXP, levelFromXP, xpForNext } = await mod('src/core/engagement/xp.js');
 const { deriveStreaks, weekActivity, dayKey } = await mod('src/core/engagement/streaks.js');
@@ -75,18 +75,126 @@ for (const file of rcFiles) {
   ok(`${file} (v${item.schema_version} ${item.meta.stage ?? '-'}/${item.meta.difficulty}, ${item.questions.length} Q${item.mentor ? ', mentor' : ''})`);
 }
 
+/* Para Jumbles content: same boundary discipline via pj.schema + the
+   app's own pjConsistencyIssues (loader.js), so tool and browser agree. */
+console.log('\n1b. Para Jumbles JSON: schema + consistency');
+const pjSchemas = {};
+for (const f of readdirSync(join(root, 'content/schema'))) {
+  if (f.startsWith('pj.schema.v')) pjSchemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+}
+const pjDir = 'content/para-jumbles';
+const pjFiles = existsSync(join(root, pjDir))
+  ? readdirSync(join(root, pjDir)).filter((f) => f.endsWith('.json')).sort() : [];
+for (const file of pjFiles) {
+  const id = file.replace('.json', '');
+  let item;
+  try { item = readJSON(`${pjDir}/${file}`); }
+  catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+  const schema = pjSchemas[String(item.schema_version ?? 1)];
+  if (!schema) { bad(`${file}: no PJ schema for version ${item.schema_version}`); continue; }
+  const { valid, errors } = validate(schema, item);
+  if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+  const issues = pjConsistencyIssues(id, item);
+  if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+  ok(`${file} (${item.meta.tier}/${item.meta.difficulty}, ${item.sentences.length} sentences, ${item.explanation.tempting_orders.length} traps walked)`);
+}
+
+/* Para Summary content: same boundary discipline via ps.schema + the
+   app's own psConsistencyIssues (loader.js), so tool and browser agree. */
+console.log('\n1c. Para Summary JSON: schema + consistency');
+const psSchemas = {};
+for (const f of readdirSync(join(root, 'content/schema'))) {
+  if (f.startsWith('ps.schema.v')) psSchemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+}
+const psDir = 'content/para-summary';
+const psFiles = existsSync(join(root, psDir))
+  ? readdirSync(join(root, psDir)).filter((f) => f.endsWith('.json')).sort() : [];
+for (const file of psFiles) {
+  const id = file.replace('.json', '');
+  let item;
+  try { item = readJSON(`${psDir}/${file}`); }
+  catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+  const schema = psSchemas[String(item.schema_version ?? 1)];
+  if (!schema) { bad(`${file}: no PS schema for version ${item.schema_version}`); continue; }
+  const { valid, errors } = validate(schema, item);
+  if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+  const issues = psConsistencyIssues(id, item);
+  if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+  ok(`${file} (${item.meta.tier}/${item.meta.difficulty}, ${item.meta.architecture}, correct ${item.question.correct})`);
+}
+/* Batch-level fairness (Bible §8/§10): the correct position must not
+   concentrate, architectures must vary, and concession-turn must not
+   dominate the bank (§14 warns it teaches however-hunting). */
+if (psFiles.length >= 8) {
+  const items = psFiles.map((f) => readJSON(`${psDir}/${f}`));
+  const byLetter = { A: 0, B: 0, C: 0, D: 0 };
+  for (const it of items) byLetter[it.question.correct] += 1;
+  for (const [letter, n] of Object.entries(byLetter)) {
+    if (n / items.length > 0.4) bad(`ps batch: correct answer sits at ${letter} in ${n} of ${items.length} items (position leaks)`);
+  }
+  const architectures = new Set(items.map((it) => it.meta.architecture));
+  if (architectures.size < 4) bad(`ps batch: only ${architectures.size} architectures used; vary the shapes (Bible §9)`);
+  const turnShare = items.filter((it) => it.meta.architecture === 'concession_turn_thesis').length / items.length;
+  if (turnShare > 0.4) bad(`ps batch: ${Math.round(turnShare * 100)}% concession-turn paragraphs (Bible §14 cap)`);
+  const missions = new Set(items.map((it) => it.meta.mission));
+  if (problems.filter((p) => p.startsWith('ps batch')).length === 0) {
+    ok(`batch balance: positions ${Object.values(byLetter).join('/')}, ${architectures.size} architectures, ${missions.size} missions, ${Math.round(turnShare * 100)}% concession-turn`);
+  }
+}
+
 console.log('\n2. Registry ↔ files agreement');
 const registry = readJSON('content/index.json');
-const regIds = registry.items.map((i) => i.id).sort();
+const rcRegIds = registry.items.filter((i) => i.type === 'rc').map((i) => i.id).sort();
+const pjRegIds = registry.items.filter((i) => i.type === 'pj').map((i) => i.id).sort();
+const psRegIds = registry.items.filter((i) => i.type === 'ps').map((i) => i.id).sort();
 const fileIds = rcFiles.map((f) => f.replace('.json', ''));
-for (const id of regIds) {
-  if (!fileIds.includes(id)) bad(`registry lists ${id} but no file exists`);
+const pjFileIds = pjFiles.map((f) => f.replace('.json', ''));
+const psFileIds = psFiles.map((f) => f.replace('.json', ''));
+for (const id of rcRegIds) {
+  if (!fileIds.includes(id)) bad(`registry lists RC ${id} but no file exists`);
 }
 for (const id of fileIds) {
-  if (!regIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+  if (!rcRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+for (const id of pjRegIds) {
+  if (!pjFileIds.includes(id)) bad(`registry lists PJ ${id} but no file exists`);
+}
+for (const id of pjFileIds) {
+  if (!pjRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+for (const id of psRegIds) {
+  if (!psFileIds.includes(id)) bad(`registry lists PS ${id} but no file exists`);
+}
+for (const id of psFileIds) {
+  if (!psRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+// PS registry fields must mirror the file (title, difficulty, tier, time).
+for (const entry of registry.items.filter((i) => i.type === 'ps')) {
+  if (!psFileIds.includes(entry.id)) continue;
+  const item = readJSON(`${psDir}/${entry.id}.json`);
+  if (entry.title !== item.meta.title) bad(`${entry.id}: registry title ≠ file meta.title`);
+  if (entry.difficulty !== item.meta.difficulty) bad(`${entry.id}: registry difficulty ≠ file`);
+  if (entry.difficulty_numeric !== item.meta.difficulty_numeric) bad(`${entry.id}: registry difficulty_numeric ≠ file`);
+  if (entry.tier !== item.meta.tier) bad(`${entry.id}: registry tier ${entry.tier} ≠ file ${item.meta.tier}`);
+  if (entry.bible_level !== item.meta.bible_level) bad(`${entry.id}: registry bible_level ≠ file`);
+  if (entry.mission !== item.meta.mission) bad(`${entry.id}: registry mission ≠ file`);
+  if (entry.architecture !== item.meta.architecture) bad(`${entry.id}: registry architecture ≠ file`);
+  const mins = Math.round(item.meta.estimated_time_sec / 60 * 10) / 10;
+  if (entry.estimated_time_min !== mins) bad(`${entry.id}: registry estimated_time_min ${entry.estimated_time_min} ≠ ${mins}`);
+}
+// PJ registry fields must mirror the file (title, difficulty, tier, time).
+for (const entry of registry.items.filter((i) => i.type === 'pj')) {
+  if (!pjFileIds.includes(entry.id)) continue;
+  const item = readJSON(`${pjDir}/${entry.id}.json`);
+  if (entry.title !== item.meta.title) bad(`${entry.id}: registry title ≠ file meta.title`);
+  if (entry.difficulty !== item.meta.difficulty) bad(`${entry.id}: registry difficulty ≠ file`);
+  if (entry.difficulty_numeric !== item.meta.difficulty_numeric) bad(`${entry.id}: registry difficulty_numeric ≠ file`);
+  if (entry.tier !== item.meta.tier) bad(`${entry.id}: registry tier ${entry.tier} ≠ file ${item.meta.tier}`);
+  const mins = Math.round(item.meta.estimated_time_sec / 60 * 10) / 10;
+  if (entry.estimated_time_min !== mins) bad(`${entry.id}: registry estimated_time_min ${entry.estimated_time_min} ≠ ${mins}`);
 }
 for (const entry of registry.items) {
-  if (!fileIds.includes(entry.id)) continue;
+  if (entry.type !== 'rc' || !fileIds.includes(entry.id)) continue;
   const item = readJSON(`${rcDir}/${entry.id}.json`);
   if (entry.question_count !== item.meta.question_count) {
     bad(`${entry.id}: registry question_count ${entry.question_count} ≠ file ${item.meta.question_count}`);
@@ -111,7 +219,7 @@ for (const entry of registry.items) {
     bad(`${entry.id}: registry word_count ${entry.word_count} ≠ file ${item.meta.word_count}`);
   }
 }
-if (problems.length === 0) ok(`${regIds.length} items agree with registry`);
+if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS items agree with registry`);
 
 console.log('\n3. Service worker precache ↔ disk');
 const sw = readFileSync(join(root, 'service-worker.js'), 'utf8');
@@ -125,10 +233,19 @@ for (const file of rcFiles) {
   const path = `./${rcDir}/${file}`;
   if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
 }
+for (const file of pjFiles) {
+  const path = `./${pjDir}/${file}`;
+  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+}
+for (const file of psFiles) {
+  const path = `./${psDir}/${file}`;
+  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+}
 if (!listed.includes('./content/index.json')) bad('registry not precached');
 // Every schema version on disk must be precached — offline validation needs it.
 for (const f of readdirSync(join(root, 'content/schema'))) {
-  if (f.startsWith('rc.schema.v') && !listed.includes(`./content/schema/${f}`)) {
+  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v'))
+      && !listed.includes(`./content/schema/${f}`)) {
     bad(`schema not precached: ${f}`);
   }
 }
@@ -242,7 +359,9 @@ console.log('\n7. Journey dry run (pure logic)');
 {
   const { journeyOrder, groupByStage, recommendNext, STAGES } = await mod('src/core/learning/journey.js');
   const registry = readJSON('content/index.json');
-  const items = registry.items;
+  // The RC journey only ever receives RC items (listRCItems); PJ items
+  // live in their own tier ladder (src/modules/para-jumbles/logic/tiers.js).
+  const items = registry.items.filter((i) => i.type === 'rc');
   const ordered = journeyOrder(items);
   let lastIdx = -1;
   for (const i of ordered) {
@@ -500,6 +619,337 @@ console.log('\n10. Audio identity (sound language ↔ cue map)');
   }
   if (problems.filter((p) => p.startsWith('audio')).length === 0) {
     ok(`${names.size} synthesized sounds, cue map coherent, disabled path is a safe no-op`);
+  }
+}
+
+console.log('\n11. Para Jumbles dry run (engine · voice · DNA · one lesson)');
+if (pjFiles.length === 0) {
+  ok('no PJ content yet — skipped');
+} else {
+  const { PJSession, evaluateSequence, computePJScore } = await mod('src/core/engine/pj-session.js');
+  const pjVoice = await mod('src/core/mentor/pj-voice.js');
+  const rcVoice = await mod('src/core/mentor/voice.js');
+  const { derivePJDNA, pjDominantTrap, enrichPJAnswers, PJ_FLOORS } = await mod('src/core/mentor/pj-dna.js');
+  const { choosePJLesson, pjLessonRecord } = await mod('src/core/mentor/pj-lesson.js');
+
+  /* -- The PJ mentor never judges either: lint its whole vocabulary. -- */
+  {
+    const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
+    const offenders = [];
+    const walk = (value, path) => {
+      if (typeof value === 'string') {
+        for (const re of banned) if (re.test(value)) offenders.push(`${path}: "${value.slice(0, 60)}…"`);
+      } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${path}[${i}]`));
+      else if (value && typeof value === 'object') {
+        for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
+      } else if (typeof value === 'function') {
+        try { walk(value('the pattern', 3, 2), `${path}()`); } catch { /* signature mismatch is fine */ }
+      }
+    };
+    for (const [name, exported] of Object.entries(pjVoice)) {
+      if (name === 'pick') continue;
+      walk(exported, name);
+    }
+    if (offenders.length) offenders.forEach((o) => bad(`pj: mentor voice uses judgment language — ${o}`));
+    // Every PJ trap the schema can name must have a pattern with a recall.
+    const pjTrapEnum = pjSchemas[String(Math.max(...Object.keys(pjSchemas).map(Number)))]
+      .properties.meta.properties.primary_trap.enum.filter((t) => t !== 'none');
+    for (const t of pjTrapEnum) {
+      if (!pjVoice.PJ_TRAP_PATTERNS[t]) bad(`pj: no mentor pattern for trap "${t}"`);
+      else if (!pjVoice.PJ_TRAP_PATTERNS[t].recall?.question) bad(`pj: no recall for trap "${t}"`);
+    }
+  }
+
+  /* -- Engine: TITA scoring (+3/0), partial links, deterministic. -- */
+  {
+    const v = evaluateSequence(['C', 'A', 'D', 'B'], ['C', 'A', 'D', 'B']);
+    if (!v.is_correct || v.links_correct !== 3) bad('pj engine: exact match not fully recognized');
+    const w = evaluateSequence(['C', 'A', 'B', 'D'], ['C', 'A', 'D', 'B']);
+    if (w.is_correct) bad('pj engine: wrong order marked correct');
+    if (w.positions_correct !== 2) bad(`pj engine: expected 2 positions correct, got ${w.positions_correct}`);
+    const sc = computePJScore([{ is_correct: true }, { is_correct: false }, { is_correct: null }]);
+    if (sc.marks !== 3) bad(`pj scoring: TITA marks should be +3/0, got ${sc.marks}`);
+    if (Math.abs(sc.accuracy - 0.5) > 1e-9) bad('pj scoring: accuracy wrong');
+  }
+
+  /* -- Session produces module-tagged records the stores accept. -- */
+  const item = readJSON(`${pjDir}/${pjFiles[0]}`);
+  {
+    let t = 1000;
+    const s = new PJSession([item], 'pj-set:test', { now: () => (t += 1000) });
+    s.markItemShown();
+    const verdict = s.answer([...item.correct_order], { revised: false, read_back_ms: 8000 });
+    if (!verdict.is_correct) bad('pj session: correct sequence not recognized');
+    const { session, attempts } = s.finish();
+    if (session.module !== 'pj') bad('pj session: record missing module tag');
+    if (session.score.correct !== 1 || session.score.marks !== 3) bad('pj session: score wrong');
+    if (attempts.length !== 1 || attempts[0].module !== 'pj') bad('pj session: attempt shape wrong');
+    if (!Array.isArray(session.item_ids) || session.item_ids[0] !== item.meta.id) bad('pj session: item_ids missing');
+  }
+
+  /* -- DNA: a repeated trap across enough items is named; floors hold. -- */
+  {
+    const trapItems = pjFiles.map((f) => readJSON(`${pjDir}/${f}`))
+      .filter((it) => it.meta.primary_trap !== 'none' && it.explanation.tempting_orders.length);
+    if (trapItems.length >= 2) {
+      // Two distinct items, same trap: enter each item's first tempting order.
+      const chosen = [];
+      const seenTraps = new Map();
+      for (const it of trapItems) {
+        const t = it.explanation.tempting_orders[0];
+        if (!seenTraps.has(t.trap_type)) seenTraps.set(t.trap_type, []);
+        seenTraps.get(t.trap_type).push({ it, order: t.order });
+      }
+      const repeated = [...seenTraps.values()].find((arr) => arr.length >= 2);
+      if (repeated) {
+        const items = new Map(repeated.map(({ it }) => [it.meta.id, it]));
+        const mkPJSession = (n, entries) => ({
+          id: `pj-s-${n}`, module: 'pj', passage_id: 'pj-set:test',
+          item_ids: entries.map((e) => e.it.meta.id),
+          started_at: new Date(2026, 6, n, 10).toISOString(),
+          finished_at: new Date(2026, 6, n, 10, 3).toISOString(),
+          duration_ms: 3 * 60000,
+          score: { total: entries.length, correct: 0, wrong: entries.length, skipped: 0,
+            attempted: entries.length, accuracy: 0, marks: 0, max_marks: 3 * entries.length },
+          answers: entries.map((e) => ({
+            item_id: e.it.meta.id, question_id: e.it.meta.id, entered: e.order.split(''),
+            is_correct: false, positions_correct: 0, links_correct: 0,
+            revised: false, read_back_ms: 9000, time_ms: 60000 })),
+        });
+        // Three misses across the two items → clears TRAP_MIN=3, ITEMS=2.
+        const history = [
+          mkPJSession(1, [repeated[0]]),
+          mkPJSession(2, [repeated[1]]),
+          mkPJSession(3, [repeated[0]]),
+        ];
+        const dna = derivePJDNA(history, items);
+        const trap = repeated[0].it.explanation.tempting_orders[0].trap_type;
+        if (!dna.observations.some((o) => o.pattern_id === trap)) {
+          bad(`pj dna: repeated trap "${trap}" (3 hits / 2 items) should be named`);
+        }
+        if (JSON.stringify(derivePJDNA(history, items)) !== JSON.stringify(dna)) {
+          bad('pj dna: not deterministic');
+        }
+        // Below the floor (2 hits) → silence.
+        const thin = derivePJDNA(history.slice(0, 2), items);
+        if (thin.observations.some((o) => o.pattern_id === trap)) {
+          bad('pj dna: named a trap below the evidence floor');
+        }
+        // One lesson out, deterministic, teaching the pull.
+        const lesson = choosePJLesson({ session: history[2], items,
+          dna: derivePJDNA(history.slice(0, 2), items), priorSessions: 2 });
+        if (!lesson || Array.isArray(lesson)) bad('pj lesson: must return exactly one lesson');
+        if (!lesson.teach?.pull || !lesson.teach?.notice) bad('pj lesson: must teach pull + notice');
+        const rec = pjLessonRecord(lesson, history[2], '2026-07-03');
+        if (rec.module !== 'pj' || rec.kind !== 'lesson') bad('pj lesson: record shape drifted');
+        const again = choosePJLesson({ session: history[2], items,
+          dna: derivePJDNA(history.slice(0, 2), items), priorSessions: 2 });
+        if (JSON.stringify(again) !== JSON.stringify(lesson)) bad('pj lesson: not deterministic');
+      }
+    }
+    // A clean set teaches mastery.
+    const cleanItems = new Map([[item.meta.id, item]]);
+    const cleanSession = {
+      id: 'pj-clean', module: 'pj', passage_id: 'pj-set:test', item_ids: [item.meta.id],
+      started_at: new Date().toISOString(), finished_at: new Date().toISOString(), duration_ms: 60000,
+      score: { total: 1, correct: 1, wrong: 0, skipped: 0, attempted: 1, accuracy: 1, marks: 3, max_marks: 3 },
+      answers: [{ item_id: item.meta.id, question_id: item.meta.id, entered: [...item.correct_order],
+        is_correct: true, positions_correct: item.correct_order.length,
+        links_correct: item.correct_order.length - 1, revised: false, read_back_ms: 9000, time_ms: 60000 }],
+    };
+    const mastery = choosePJLesson({ session: cleanSession, items: cleanItems,
+      dna: { dominant: null, observations: [] }, priorSessions: 1 });
+    if (mastery.lesson_kind !== 'mastery') bad('pj lesson: clean set should teach mastery');
+    if (!mastery.recall?.question) bad('pj lesson: mastery still seeds a recall');
+  }
+
+  if (problems.filter((p) => p.startsWith('pj')).length === 0) {
+    ok('TITA scoring, module-tagged records, calm voice, DNA floors, one lesson per set');
+  }
+}
+
+console.log('\n12. Para Summary dry run (engine · voice · missions · DNA · one lesson)');
+if (psFiles.length === 0) {
+  ok('no PS content yet — skipped');
+} else {
+  const { PSSession, computePSScore } = await mod('src/core/engine/ps-session.js');
+  const psVoice = await mod('src/core/mentor/ps-voice.js');
+  const rcVoice = await mod('src/core/mentor/voice.js');
+  const { derivePSDNA, psDominantFamily, enrichPSAnswers, PS_FLOORS } = await mod('src/core/mentor/ps-dna.js');
+  const { choosePSLesson, psLessonRecord } = await mod('src/core/mentor/ps-lesson.js');
+  const { thinkQuestions } = await mod('src/modules/para-summary/logic/think.js');
+  const { teachDepth } = await mod('src/modules/para-summary/logic/teach.js');
+  const psLatestSchema = psSchemas[String(Math.max(...Object.keys(psSchemas).map(Number)))];
+
+  /* -- The PS mentor never judges either: lint its whole vocabulary. -- */
+  {
+    const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
+    const offenders = [];
+    const walk = (value, path) => {
+      if (typeof value === 'string') {
+        for (const re of banned) if (re.test(value)) offenders.push(`${path}: "${value.slice(0, 60)}…"`);
+      } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${path}[${i}]`));
+      else if (value && typeof value === 'object') {
+        for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
+      } else if (typeof value === 'function') {
+        try { walk(value('the pattern', 3, 2), `${path}()`); } catch { /* signature mismatch is fine */ }
+      }
+    };
+    for (const [name, exported] of Object.entries(psVoice)) {
+      if (name === 'pick') continue;
+      walk(exported, name);
+    }
+    if (offenders.length) offenders.forEach((o) => bad(`ps: mentor voice uses judgment language — ${o}`));
+
+    // Every archetype the schema can name must have a pattern with a
+    // family and a recall, so the taxonomy is teachable end to end.
+    const archetypeEnum = psLatestSchema.properties.question.properties.explanation
+      .properties.distractors.items.properties.archetype.enum;
+    for (const a of archetypeEnum) {
+      const p = psVoice.PS_TRAP_PATTERNS[a];
+      if (!p) bad(`ps: no mentor pattern for archetype "${a}"`);
+      else {
+        if (!p.recall?.question) bad(`ps: no recall for archetype "${a}"`);
+        if (!psVoice.PS_FAMILY_LABELS[p.family]) bad(`ps: archetype "${a}" names unknown family "${p.family}"`);
+      }
+    }
+    // Every mission the schema can name must have Today's Mission copy
+    // and at least one Think question of its own.
+    const missionEnum = psLatestSchema.properties.meta.properties.mission.enum;
+    for (const m of missionEnum) {
+      if (!psVoice.PS_MISSIONS[m]?.title) bad(`ps: no mission copy for "${m}"`);
+      if (!(psVoice.PS_THINK.byMission[m]?.length >= 1)) bad(`ps: no think questions for mission "${m}"`);
+    }
+    // The loader's family table must agree with the mentor's (the two
+    // encode the same taxonomy and must never drift).
+    const sampleItem = readJSON(`${psDir}/${psFiles[0]}`);
+    for (const d of sampleItem.question.explanation.distractors) {
+      if (!psVoice.PS_TRAP_PATTERNS[d.archetype]) bad(`ps: content archetype "${d.archetype}" unknown to the mentor`);
+    }
+  }
+
+  /* -- Think coach: deterministic, never empty, never answer-shaped. -- */
+  {
+    const item = readJSON(`${psDir}/${psFiles[0]}`);
+    const qs = thinkQuestions(item);
+    if (qs.length !== 4) bad(`ps think: expected 4 questions, got ${qs.length}`);
+    if (JSON.stringify(thinkQuestions(item)) !== JSON.stringify(qs)) bad('ps think: not deterministic');
+    if (new Set(qs).size !== qs.length) bad('ps think: repeated questions in one sheet');
+  }
+
+  /* -- Teach depth: richer with tier, never below the floor. -- */
+  {
+    if (teachDepth('foundation') !== 1) bad('ps teach: foundation depth should be 1');
+    if (teachDepth('medium') !== 2) bad('ps teach: medium depth should be 2');
+    if (teachDepth('cat') !== 3) bad('ps teach: cat depth should be 3');
+    if (teachDepth('premium') !== 4) bad('ps teach: premium depth should be 4');
+  }
+
+  /* -- Engine: scoring, module-tagged records, behavior fields. -- */
+  const item = readJSON(`${psDir}/${psFiles[0]}`);
+  {
+    let t = 1000;
+    const s = new PSSession([item], 'ps-set:test', { now: () => (t += 1000) });
+    s.markItemShown();
+    const verdict = s.answer(item.question.correct, { summary_written: true, summary_text: 'my line', think_opened: true });
+    if (!verdict.is_correct) bad('ps session: correct option not recognized');
+    const { session, attempts } = s.finish();
+    if (session.module !== 'ps') bad('ps session: record missing module tag');
+    if (session.score.correct !== 1 || session.score.marks !== 3) bad('ps session: score wrong');
+    if (attempts.length !== 1 || attempts[0].module !== 'ps') bad('ps session: attempt shape wrong');
+    if (!Array.isArray(session.item_ids) || session.item_ids[0] !== item.meta.id) bad('ps session: item_ids missing');
+    if (session.answers[0].summary_written !== true || session.answers[0].think_opened !== true) {
+      bad('ps session: builder/think behavior fields lost');
+    }
+    const sc = computePSScore([{ is_correct: true }, { is_correct: false }, { is_correct: null }]);
+    if (sc.marks !== 3) bad(`ps scoring: marks should be +3/0, got ${sc.marks}`);
+    if (Math.abs(sc.accuracy - 0.5) > 1e-9) bad('ps scoring: accuracy wrong');
+  }
+
+  /* -- DNA: a repeated family across enough items is named; floors hold. -- */
+  {
+    const all = psFiles.map((f) => readJSON(`${psDir}/${f}`));
+    // Find two items sharing a distractor family, and pick the letter
+    // of that family's distractor in each.
+    const familyOf = (it, letter) => it.question.explanation.distractors
+      .find((d) => d.option === letter)?.archetype;
+    const byFamily = new Map();
+    for (const it of all) {
+      for (const d of it.question.explanation.distractors) {
+        const fam = psVoice.PS_TRAP_PATTERNS[d.archetype]?.family;
+        if (!fam) continue;
+        if (!byFamily.has(fam)) byFamily.set(fam, []);
+        byFamily.get(fam).push({ it, letter: d.option });
+      }
+    }
+    const repeated = [...byFamily.values()]
+      .map((arr) => {
+        const seen = new Set();
+        return arr.filter(({ it }) => !seen.has(it.meta.id) && seen.add(it.meta.id));
+      })
+      .find((arr) => arr.length >= 2);
+    if (repeated) {
+      const items = new Map(repeated.slice(0, 2).map(({ it }) => [it.meta.id, it]));
+      const mkPSSession = (n, entries) => ({
+        id: `ps-s-${n}`, module: 'ps', passage_id: 'ps-set:test',
+        item_ids: entries.map((e) => e.it.meta.id),
+        started_at: new Date(2026, 6, n, 10).toISOString(),
+        finished_at: new Date(2026, 6, n, 10, 3).toISOString(),
+        duration_ms: 3 * 60000,
+        score: { total: entries.length, correct: 0, wrong: entries.length, skipped: 0,
+          attempted: entries.length, accuracy: 0, marks: 0, max_marks: 3 * entries.length },
+        answers: entries.map((e) => ({
+          item_id: e.it.meta.id, question_id: e.it.meta.id, chosen: e.letter,
+          is_correct: false, summary_written: false, summary_text: null,
+          think_opened: false, time_ms: 60000 })),
+      });
+      const [e1, e2] = repeated;
+      const history = [mkPSSession(1, [e1]), mkPSSession(2, [e2]), mkPSSession(3, [e1])];
+      const dna = derivePSDNA(history, items);
+      const fam = psVoice.PS_TRAP_PATTERNS[familyOf(e1.it, e1.letter)].family;
+      if (!dna.observations.some((o) => o.id === `ps-family:${fam}`)) {
+        bad(`ps dna: repeated family "${fam}" (3 hits / 2 items) should be named`);
+      }
+      if (psDominantFamily(enrichPSAnswers(history, items))?.family !== fam) {
+        bad('ps dna: dominant family not detected');
+      }
+      if (JSON.stringify(derivePSDNA(history, items)) !== JSON.stringify(dna)) {
+        bad('ps dna: not deterministic');
+      }
+      // Below the floor (2 hits) → silence. Fairness is a feature.
+      const thin = derivePSDNA(history.slice(0, 2), items);
+      if (thin.observations.some((o) => o.id === `ps-family:${fam}`)) {
+        bad('ps dna: named a family below the evidence floor');
+      }
+      // One lesson out, deterministic, teaching the pull.
+      const lesson = choosePSLesson({ session: history[2], items,
+        dna: derivePSDNA(history.slice(0, 2), items), priorSessions: 2 });
+      if (!lesson || Array.isArray(lesson)) bad('ps lesson: must return exactly one lesson');
+      if (!lesson.teach?.pull || !lesson.teach?.notice) bad('ps lesson: must teach pull + notice');
+      if (!lesson.recall?.question) bad('ps lesson: must seed a recall');
+      const rec = psLessonRecord(lesson, history[2], '2026-07-11');
+      if (rec.module !== 'ps' || rec.kind !== 'lesson') bad('ps lesson: record shape drifted');
+      const again = choosePSLesson({ session: history[2], items,
+        dna: derivePSDNA(history.slice(0, 2), items), priorSessions: 2 });
+      if (JSON.stringify(again) !== JSON.stringify(lesson)) bad('ps lesson: not deterministic');
+    }
+    // A clean set teaches mastery.
+    const cleanItems = new Map([[item.meta.id, item]]);
+    const cleanSession = {
+      id: 'ps-clean', module: 'ps', passage_id: 'ps-set:test', item_ids: [item.meta.id],
+      started_at: new Date().toISOString(), finished_at: new Date().toISOString(), duration_ms: 60000,
+      score: { total: 1, correct: 1, wrong: 0, skipped: 0, attempted: 1, accuracy: 1, marks: 3, max_marks: 3 },
+      answers: [{ item_id: item.meta.id, question_id: item.meta.id, chosen: item.question.correct,
+        is_correct: true, summary_written: true, summary_text: 'mine', think_opened: false, time_ms: 60000 }],
+    };
+    const mastery = choosePSLesson({ session: cleanSession, items: cleanItems,
+      dna: { dominant: null, observations: [] }, priorSessions: 1 });
+    if (mastery.lesson_kind !== 'mastery') bad('ps lesson: clean set should teach mastery');
+    if (!mastery.recall?.question) bad('ps lesson: mastery still seeds a recall');
+  }
+
+  if (problems.filter((p) => p.startsWith('ps')).length === 0) {
+    ok('scoring, module-tagged records, taxonomy-complete voice, missions, think coach, DNA floors, one lesson per set');
   }
 }
 

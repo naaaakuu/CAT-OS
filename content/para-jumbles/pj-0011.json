@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pj-0011",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "arts-culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Colour That Cost a Fortune",
+    "theme": "how the scarcity of a pigment shaped what art could say",
+    "estimated_time_sec": 150,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-07: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "specific_to_general",
+    "cohesion_signals": ["demonstrative", "connective_implicit", "lexical_repetition", "article_given_new"],
+    "primary_trap": "generic_the",
+    "secondary_traps": ["competing_opener"],
+    "dna_traits": ["opener_heuristic", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "reject the the is not first rule when the noun is one everyone already knows",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-07-10",
+      "usage_note": "Original composition in CAT register for CAT OS. Ultramarine's origin in lapis lazuli and its costliness are standard art history; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-07-10",
+    "batch_id": "batch-pj-001",
+    "prompt_version": "in-repo authored (Para Jumbles milestone); PARA_JUMBLES_BIBLE frameworks applied",
+    "reviewer_notes": "Advanced item engineering the generic-the trap: the true opener begins with The, defeating the mechanical article heuristic. Owner review pending."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "So a colour we now squeeze thoughtlessly from a tube was once a statement of devotion and expense, reserved for the holiest figure a painting could hold.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "Ground into ultramarine, the world's most brilliant blue, it cost more by weight than gold, and painters used it as sparingly as a jeweller uses diamonds.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "That expense is why, in so many old paintings, the vivid blue is saved for the robe of the Virgin, a silent signal of how much she was worth to the painter's patron.",
+      "role": "example"
+    },
+    {
+      "label": "D",
+      "text": "The deepest blue available to medieval painters came from a single stone, lapis lazuli, carried by caravan from mines in what is now Afghanistan.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "B", "C", "A"],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "B begins \"Ground into ultramarine... it cost more than gold\". The \"it\" is the stone, lapis lazuli, which only D has introduced. You cannot grind a stone the paragraph has not yet named."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "C opens \"That expense\". The expense is B's cost-more-than-gold. The demonstrative reaches back exactly one sentence and turns the price into its consequence in painting."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "A opens with \"So\", drawing the general moral from C's specific example: the once-precious blue is now thoughtless. A conclusion word this strong caps the sentence it follows."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph rises from one specific thing to a general reflection: a stone, the pigment made from it, how that pigment was used, and finally what the whole story means. Specific to general. The catch is that the true opener starts with the word The, which the usual rule wrongly forbids.",
+    "movement": [
+      {
+        "label": "D",
+        "why_here": "D introduces the concrete subject, the stone, with everything a first sentence needs: no backward reference, a new entity, a place. It begins with The, but the deepest blue available to medieval painters is a phrase that identifies itself; nothing earlier is required."
+      },
+      {
+        "label": "B",
+        "why_here": "B takes the stone as \"it\" and turns it into ultramarine, adding the crucial new fact: its ruinous cost. The pronoun proves B cannot come first."
+      },
+      {
+        "label": "C",
+        "why_here": "C picks up \"That expense\" and shows its effect, the blue saved for the Virgin's robe. Consequence follows cause."
+      },
+      {
+        "label": "A",
+        "why_here": "A pulls back to the general point with \"So\": a colour once precious is now thoughtless. The widest, most reflective sentence closes the climb."
+      }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDCA",
+        "trap_type": "generic_the",
+        "why_tempting": "B and D both look like they could open. A solver applying the the is not first rule rejects D, which begins with The, and reaches for B instead, which opens with a participle and feels like a strong first line.",
+        "where_it_breaks": "B's \"it\" has no owner if B comes first, because the stone has not been named. And D's The is the harmless kind: The deepest blue available to medieval painters points at nothing earlier, it simply describes. The mechanical rule misfires here exactly as it was designed to. D opens; B needs D."
+      },
+      {
+        "order": "DBAC",
+        "trap_type": "competing_opener",
+        "why_tempting": "A ends on a satisfying general note and C is a specific example, so it is tempting to close on C and treat A as a mid-paragraph pivot.",
+        "where_it_breaks": "A begins with \"So\", a conclusion drawn from the example in C, and C begins with \"That expense\", which needs B right before it. Put A before C and the moral arrives before its evidence, and C's \"That expense\" loses the sentence it points to. The example must precede the moral."
+      }
+    ],
+    "trap_named": "The generic the: the rule says a sentence starting with The cannot open, so a heuristic solver eliminates the real opener on sight. But The marks old information only when the noun needed a prior mention. The deepest blue available to medieval painters introduces itself. Before you disqualify a The sentence as an opener, ask whether its noun is already known to the reader. If it names itself, The proves nothing.",
+    "solving_habit": "Do not reject an opener just because it starts with The. Check whether the noun is uniquely identifiable on its own. If the phrase after The tells you exactly what is meant, it can begin a paragraph."
+  },
+  "mentor": {
+    "challenge": "One rule says a sentence starting with The cannot come first. This paragraph was built to punish that rule. Read for meaning.",
+    "paragraph_plain": "The author tells how one colour shaped art. The deepest blue medieval painters could get came from a single stone, lapis lazuli, hauled by caravan from mines in what is now Afghanistan. Ground into the pigment ultramarine, it cost more than gold, so painters used it as carefully as a jeweller uses diamonds. That is why, in old paintings, the vivid blue is reserved for the Virgin's robe, a quiet signal of her value to the patron who paid. So a colour we now squeeze carelessly from a tube was once an act of devotion and expense, saved for the holiest figure on the canvas.",
+    "takeaway": "The blocks the opener only when the noun needed introducing. Some nouns introduce themselves."
+  }
+}
