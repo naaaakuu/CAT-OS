@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0003",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "phil",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF. Parts, glosses, context sentences and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-lg-001",
+    "reviewer_notes": "phil appears at the front (philosophy, philanthropy) and the back (bibliophile, anglophile) of its members, deliberately, so the plant teaches that a root's position can move. ology recurs from lg-0002 (chron)."
+  },
+  "root": {
+    "label": "phil",
+    "origin_language": "Greek",
+    "core_meaning": "love",
+    "mentor_note": "phil turns up in the middle of a word as often as at the front of one."
+  },
+  "attempt": {
+    "direction_prompt": "Does she love books, or avoid them?",
+    "options": [
+      { "text": "Avoids them", "correct": false },
+      { "text": "Loves them", "correct": true }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0011",
+      "held_out": false,
+      "parts": [
+        { "text": "biblio", "gloss": "book", "is_root": false },
+        { "text": "phile", "gloss": "lover of", "is_root": true }
+      ],
+      "context_sentences": [
+        "As a lifelong bibliophile, she judged any new city by the quality of its secondhand bookshops.",
+        "The estate sale drew bibliophiles from three counties, all hoping for a first edition."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0012",
+      "held_out": false,
+      "parts": [
+        { "text": "phil", "gloss": "love", "is_root": true },
+        { "text": "osophy", "gloss": "wisdom", "is_root": false }
+      ],
+      "context_sentences": [
+        "His philosophy held that a comfortable answer was usually the wrong one.",
+        "The department's philosophy of teaching changed completely under its new, more demanding chair."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0013",
+      "held_out": false,
+      "parts": [
+        { "text": "phil", "gloss": "love", "is_root": true },
+        { "text": "anthropy", "gloss": "mankind", "is_root": false }
+      ],
+      "context_sentences": [
+        "Her philanthropy quietly rebuilt three of the city's crumbling public libraries.",
+        "The foundation's philanthropy was deliberate, favouring long, unglamorous projects over one-time gifts."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0014",
+      "held_out": true,
+      "parts": [
+        { "text": "phil", "gloss": "love", "is_root": true },
+        { "text": "ology", "gloss": "study of", "is_root": false }
+      ],
+      "context_sentences": [
+        "Her training in philology let her date the manuscript from its spelling alone.",
+        "Philology, more than archaeology, first convinced scholars that the two languages shared a common ancestor."
+      ],
+      "construct_options": [
+        { "text": "A deep, scholarly love of language and its history", "correct": true },
+        { "text": "A love of long, philosophical arguments", "correct": false, "trap": "literal_only" },
+        { "text": "A talent for learning to speak many languages quickly", "correct": false, "trap": "wrong_root" }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0015",
+      "held_out": true,
+      "parts": [
+        { "text": "anglo", "gloss": "English", "is_root": false },
+        { "text": "phile", "gloss": "lover of", "is_root": true }
+      ],
+      "context_sentences": [
+        "An unapologetic anglophile, he timed his holidays around the English cricket season.",
+        "The professor's students teased him for being an anglophile who had never once visited London."
+      ],
+      "construct_options": [
+        { "text": "Someone who greatly admires England and its culture", "correct": true },
+        { "text": "Someone who studies the English language professionally", "correct": false, "trap": "literal_only" },
+        { "text": "Someone who dislikes anything unfamiliar or foreign", "correct": false, "trap": "wrong_root" }
+      ]
+    }
+  ]
+}

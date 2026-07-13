@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0002",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "chron",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF. Parts, glosses, context sentences and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-lg-001",
+    "reviewer_notes": "chron is the Bible's own Journal example (§11: 'chron, Greek time: chronic, anachronism, synchronise, chronology'). asynchronous reuses the a- and syn- prefixes so the same pieces resurface across families."
+  },
+  "root": {
+    "label": "chron",
+    "origin_language": "Greek",
+    "core_meaning": "time",
+    "mentor_note": "chron hides inside more ordinary words than it first seems to."
+  },
+  "attempt": {
+    "direction_prompt": "A brief episode, or a lasting condition?",
+    "options": [
+      { "text": "A brief episode", "correct": false },
+      { "text": "A lasting condition", "correct": true }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0006",
+      "held_out": false,
+      "parts": [
+        { "text": "chron", "gloss": "time", "is_root": true },
+        { "text": "ic", "gloss": "relating to", "is_root": false }
+      ],
+      "context_sentences": [
+        "The disease had become chronic, resisting every treatment the doctors attempted that year.",
+        "Chronic underfunding, not any single bad decision, was what had hollowed out the library system."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0007",
+      "held_out": false,
+      "parts": [
+        { "text": "chron", "gloss": "time", "is_root": true },
+        { "text": "ology", "gloss": "study of", "is_root": false }
+      ],
+      "context_sentences": [
+        "The museum arranged the artefacts in a strict chronology, from the earliest tools to the latest coins.",
+        "Historians still disagree about the exact chronology of events in the weeks before the treaty."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0008",
+      "held_out": false,
+      "parts": [
+        { "text": "chron", "gloss": "time", "is_root": true },
+        { "text": "ometer", "gloss": "measure", "is_root": true }
+      ],
+      "context_sentences": [
+        "The ship's captain trusted the chronometer more than any other instrument on board.",
+        "A single faulty chronometer was enough to send the entire survey team off course."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0009",
+      "held_out": true,
+      "parts": [
+        { "text": "a", "gloss": "without", "is_root": false },
+        { "text": "syn", "gloss": "together", "is_root": false },
+        { "text": "chron", "gloss": "time", "is_root": true },
+        { "text": "ous", "gloss": "characterised by", "is_root": false }
+      ],
+      "context_sentences": [
+        "The two departments worked in an asynchronous rhythm, one always finishing hours after the other had begun.",
+        "Because the meeting was asynchronous, colleagues on three continents could each reply in their own evening."
+      ],
+      "construct_options": [
+        { "text": "Not happening together in time", "correct": true },
+        { "text": "Happening extremely quickly, without delay", "correct": false, "trap": "literal_only" },
+        { "text": "Happening in exactly the wrong order", "correct": false, "trap": "wrong_root" }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0010",
+      "held_out": true,
+      "parts": [
+        { "text": "chron", "gloss": "time", "is_root": true },
+        { "text": "ograph", "gloss": "something that records", "is_root": false }
+      ],
+      "context_sentences": [
+        "The old chronograph on his wrist could time a race down to a fifth of a second.",
+        "Collectors still pay a premium for a chronograph built before the war."
+      ],
+      "construct_options": [
+        { "text": "A device that records time with great precision", "correct": true },
+        { "text": "A drawing that shows how something changes over a year", "correct": false, "trap": "literal_only" },
+        { "text": "A calendar used to plan future events", "correct": false, "trap": "wrong_root" }
+      ]
+    }
+  ]
+}

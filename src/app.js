@@ -17,16 +17,19 @@ import { registerPJ } from './modules/para-jumbles/index.js';
 import { registerPS } from './modules/para-summary/index.js';
 import { registerOOO } from './modules/odd-one-out/index.js';
 import { registerWD } from './modules/word-dna/index.js';
+import { registerLanguageGarden } from './modules/language-garden/index.js';
 import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
 import { resetPSIntro, latestByItem as latestPSByItem } from './modules/para-summary/logic/store.js';
 import { resetOOOIntro, latestByItem as latestOOOByItem } from './modules/odd-one-out/logic/store.js';
-import { resetWDIntro, latestByItem as latestWDByItem } from './modules/word-dna/logic/store.js';
+import { resetWDIntro } from './modules/word-dna/logic/store.js';
 import { recommendNextPJ } from './modules/para-jumbles/logic/tiers.js';
 import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
 import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
-import { recommendNextWD } from './modules/word-dna/logic/tree.js';
-import { WD_LINES } from './core/mentor/wd-voice.js';
-import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem } from './core/content-loader/loader.js';
+import { listGardenSessions, gardenAmbienceEnabled, setGardenAmbience } from './modules/language-garden/logic/store.js';
+import { deriveGroveScene } from './modules/language-garden/logic/scene.js';
+import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio } from './modules/language-garden/logic/audio.js';
+import { EMPTY_DAY_LINES, pick as pickGardenLine } from './core/mentor/garden-voice.js';
+import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem, listLGItems, loadLGItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
 import { evaluate } from './core/engagement/achievements.js';
 import { dashboardLine } from './core/engagement/messages.js';
@@ -56,7 +59,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.13.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.14.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -116,6 +119,10 @@ async function saveReadingSize(size) {
    RC sessions carry no `module` field, so an absent/unrecognized
    value returns null and renderHome falls through to the original
    RC-only card below — no change for RC-only learners. */
+/* Word DNA soft-hidden here (0.14.0): the Language Garden is the
+   vocabulary surface now (owner decision — keep WD's routes, code and
+   data fully intact, just stop advertising it from Home/Practice).
+   Re-adding a `wd:` entry (see git history) is the one-line revert. */
 const CONTINUE_INFO = {
   pj: { noun: 'Para Jumbles journey', verb: 'Solve it now', prefix: '/pj',
     list: listPJItems, latest: latestPJByItem, recommend: recommendNextPJ },
@@ -123,8 +130,6 @@ const CONTINUE_INFO = {
     list: listPSItems, latest: latestPSByItem, recommend: recommendNextPS },
   ooo: { noun: 'Odd One Out journey', verb: 'Try it now', prefix: '/ooo',
     list: listOOOItems, latest: latestOOOByItem, recommend: recommendNextOOO },
-  wd: { noun: 'Word DNA journey', verb: 'Meet it now', prefix: '/wd',
-    list: listWDItems, latest: latestWDByItem, recommend: recommendNextWD },
 };
 
 async function recommendContinue(sessions) {
@@ -161,6 +166,47 @@ async function todaysDiscovery() {
     return { unitId: chosen.id, word: taught[dayNum % taught.length] };
   } catch {
     return null; // offline/uncached: Home simply omits the widget
+  }
+}
+// Soft-hidden (0.14.0, owner decision): todaysDiscovery() above is kept
+// fully intact and correct, but Home no longer calls it or renders its
+// card — the Language Garden is the vocabulary surface now. Wiring it
+// back in is calling it once more and re-adding its card to the template.
+
+/* One calm, quiet line about the garden — never a score, never a list
+   (LANGUAGE_GARDEN_BIBLE §6.5). Distinct on purpose from the achievement-
+   flavoured "Continue your X journey" cards above: the garden earns its
+   own register even on Home. */
+async function gardenHomeCard() {
+  try {
+    const registry = await listLGItems();
+    if (registry.length === 0) return '';
+    const loaded = await loadLGItems(registry.map((i) => i.id));
+    const families = registry.map((i) => loaded.get(i.id)).filter(Boolean);
+    const sessions = await listGardenSessions(storage);
+    const scene = deriveGroveScene(families, sessions);
+    const seed = `home-garden:${new Date().toDateString()}`;
+
+    let line;
+    if (scene.askingId) {
+      const asking = families.find((f) => f.meta.id === scene.askingId);
+      line = EMPTY_DAY_LINES.onePlantAsking(asking.root.label, seed);
+    } else if (sessions.length === 0) {
+      line = 'Your first plant is waiting.';
+    } else if (scene.openSeedId) {
+      line = pickGardenLine(seed, EMPTY_DAY_LINES.oneSeedReady);
+    } else {
+      line = pickGardenLine(seed, EMPTY_DAY_LINES.standAndClose);
+    }
+
+    return `
+      <div class="card">
+        <h2>Your garden</h2>
+        <p class="muted" style="margin-bottom: var(--space-3)">${line}</p>
+        <a class="btn btn--primary btn--block" href="#/garden">Open the grove</a>
+      </div>`;
+  } catch {
+    return ''; // offline/uncached: Home simply omits the widget
   }
 }
 
@@ -241,15 +287,8 @@ async function renderHome(outlet) {
       <a class="btn btn--primary btn--block" href="#/rc">Open the library</a>
     </div>`;
 
-  /* ---- Today's Discovery: one Word DNA word, then it steps aside ---- */
-  const discovery = await todaysDiscovery();
-  const discoveryHTML = !discovery ? '' : `
-    <div class="card">
-      <p class="screen__eyebrow">${WD_LINES.todaysDiscoveryEyebrow}</p>
-      <p class="wd-discovery__word">${discovery.word.word}</p>
-      <p class="wd-discovery__meaning">${discovery.word.meaning}</p>
-      <p class="hint" style="margin-top: var(--space-2)"><a href="#/wd/learn/${discovery.unitId}">See where it comes from</a></p>
-    </div>`;
+  /* ---- Your garden: one calm line, never a score (Bible §6.5) ---- */
+  const gardenHTML = await gardenHomeCard();
 
   /* ---- Achievements — unlocked count + the three most recent tiers ---- */
   const evaluated = evaluate(stats);
@@ -315,7 +354,7 @@ async function renderHome(outlet) {
       ${todayHTML}
       ${statsHTML}
       ${continueHTML}
-      ${discoveryHTML}
+      ${gardenHTML}
       ${achievementsHTML}
       ${recentHTML}
     </section>
@@ -357,11 +396,11 @@ function renderPractice(outlet) {
           <span>Build the paragraph, and the stranger reveals itself — an eight-tier journey from Foundation to Premium</span>
         </div>
       </a>
-      <a class="list-item" href="#/wd">
-        <div class="list-item__title">Word DNA</div>
+      <a class="list-item" href="#/garden">
+        <div class="list-item__title">Language Garden</div>
         <div class="list-item__meta">
           <span class="badge badge--success">Available</span>
-          <span>Learn how English is built — roots, prefixes, suffixes, and foreign words, on one Language Tree</span>
+          <span>Tend a living root grove. Decompose real words, and construct ones nobody taught you</span>
         </div>
       </a>
     </section>
@@ -474,6 +513,23 @@ function renderSettings(outlet) {
           </div>
           <input class="range" id="focus-volume-slider" type="range" min="0" max="100" step="1"
                  value="35" aria-label="Focus volume" data-sfx="off" />
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Language Garden</h2>
+        <div class="row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">⚘</span>
+            <div>
+              <div class="row__label">Ambience</div>
+              <div class="row__hint">Soft birds and breeze while you tend the grove — off by default</div>
+            </div>
+          </div>
+          <div class="segmented" id="garden-ambience-picker" role="group" aria-label="Garden ambience" data-sfx="off">
+            <button class="segmented__option" data-garden-ambience="true" aria-pressed="false">On</button>
+            <button class="segmented__option" data-garden-ambience="false" aria-pressed="false">Off</button>
+          </div>
         </div>
       </div>
 
@@ -696,6 +752,29 @@ function renderSettings(outlet) {
   });
   syncFocusNoise();
 
+  // --- Language Garden: ambience toggle ---
+  const syncGardenAmbience = async () => {
+    const on = await gardenAmbienceEnabled(storage);
+    for (const b of outlet.querySelectorAll('[data-garden-ambience]')) {
+      b.setAttribute('aria-pressed', String((b.dataset.gardenAmbience === 'true') === on));
+    }
+  };
+  outlet.querySelector('#garden-ambience-picker').addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-garden-ambience]');
+    if (!b) return;
+    const on = b.dataset.gardenAmbience === 'true';
+    await setGardenAmbience(storage, on);
+    await syncGardenAmbience();
+    cue('toggle');
+    if (on) {
+      startGardenAmbience();
+      setTimeout(stopGardenAmbience, 1400); // a brief preview, same idea as Focus Sound's
+    } else {
+      stopGardenAmbience();
+    }
+  });
+  syncGardenAmbience();
+
   // --- Learning: bring the Para Jumbles introduction back ---
   outlet.querySelector('#pj-intro-reset').addEventListener('click', async () => {
     try {
@@ -831,7 +910,8 @@ async function boot() {
   registerPJ(router, { storage });
   registerPS(router, { storage });
   registerOOO(router, { storage });
-  registerWD(router, { storage });
+  registerWD(router, { storage }); // soft-hidden from nav (see CONTINUE_INFO); routes stay live
+  registerLanguageGarden(router, { storage });
 
   router.start();
 
@@ -847,7 +927,27 @@ async function boot() {
     }
   });
 
+  // Garden ambience: plays while browsing the grove/plant/journal, stays
+  // quiet during an actual session (Bible §7 — a session keeps to just
+  // its two named sounds, never a competing ambient bed).
+  window.addEventListener('hashchange', async () => {
+    const h = location.hash;
+    const isBrowsingGarden = (h === '#/garden' || h.startsWith('#/garden/plant') || h.startsWith('#/garden/journal'));
+    if (isBrowsingGarden && await gardenAmbienceEnabled(storage)) {
+      startGardenAmbience();
+    } else {
+      stopGardenAmbience();
+    }
+  });
+
   // (Nav taps are covered by installGlobalFeedback's press delegation.)
+  // A separate, minimal unlock for the garden's own audio graph — mirrors
+  // installGlobalFeedback's early-gesture unlock for the shell's sound,
+  // but stays a module-local concern (Rule 5) rather than teaching core/
+  // engagement code about a specific module. Deliberately NOT {once:true}:
+  // the first gesture may land before sound is even turned on in Settings,
+  // and unlockGardenAudio() is a cheap no-op once the context is running.
+  window.addEventListener('pointerdown', unlockGardenAudio, { capture: true });
 
   // 3. Service worker — relative path so it works from a GitHub Pages
   //    subpath. Registration failure is non-fatal (e.g. plain HTTP).

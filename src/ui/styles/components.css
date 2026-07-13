@@ -1986,3 +1986,284 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   color: var(--color-ink-2);
   margin: 0;
 }
+
+/* ============================================================
+   Language Garden — the Root Grove (0.14.0)
+   Deliberately its OWN visual register: quiet, unbordered, plant
+   art carries the weight instead of cards/badges/borders. No red,
+   no scores, no progress chrome (LANGUAGE_GARDEN_BIBLE §8, §13).
+   ============================================================ */
+
+.grove-scene {
+  position: relative;
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) var(--space-4) var(--space-5);
+  overflow: hidden;
+  background: var(--garden-sky-day);
+  transition: background-color var(--duration-slow) var(--ease-out);
+}
+.grove-scene[data-time="dusk"] { background: var(--garden-sky-dusk); }
+.grove-scene[data-time="night"] { background: var(--garden-sky-night); }
+
+.grove-horizon {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 55%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  pointer-events: none;
+}
+.grove-horizon cat-plant { width: 30%; height: 100%; }
+
+.grove-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.grove-visitor {
+  position: absolute;
+  font-size: 1.1rem;
+  color: var(--color-ink-2);
+  opacity: 0;
+}
+.grove-visitor--bird {
+  top: 14%; left: 0;
+  animation: grove-bird-fly 6s var(--ease-in-out) both;
+}
+.grove-visitor--butterfly {
+  top: 40%; left: 0;
+  color: var(--garden-review);
+  animation: grove-butterfly-flit 7.5s var(--ease-in-out) both;
+}
+.grove-visitor--firefly {
+  top: 55%; left: 48%;
+  color: var(--garden-discovery);
+  text-shadow: 0 0 6px var(--garden-discovery);
+  animation: grove-firefly-glow 5s ease-in-out both;
+}
+.grove-visitor--petal {
+  top: -5%; left: 30%;
+  color: var(--garden-review);
+  animation: grove-petal-fall 8s linear both;
+}
+.grove-visitor--leaf-stir {
+  top: 30%; left: 60%;
+  color: var(--garden-inleaf);
+  animation: grove-leaf-stir 4s ease-in-out both;
+}
+@keyframes grove-bird-fly {
+  0% { opacity: 0; transform: translate(-10%, 20%) scale(0.85); }
+  15%, 80% { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(340%, -60%) scale(1); }
+}
+@keyframes grove-butterfly-flit {
+  0% { opacity: 0; transform: translate(0, 40%) rotate(-6deg); }
+  15% { opacity: 0.9; }
+  40% { transform: translate(80%, 0%) rotate(6deg); }
+  65% { transform: translate(160%, 30%) rotate(-6deg); }
+  85% { opacity: 0.9; transform: translate(230%, 10%) rotate(6deg); }
+  100% { opacity: 0; transform: translate(280%, 20%) rotate(0deg); }
+}
+@keyframes grove-firefly-glow {
+  0%, 100% { opacity: 0; }
+  15%, 85% { opacity: 0.85; }
+  50% { opacity: 0.25; transform: translate(6px, -10px); }
+}
+@keyframes grove-petal-fall {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(30px, 480%) rotate(200deg); }
+}
+@keyframes grove-leaf-stir {
+  0%, 100% { opacity: 0; transform: rotate(0deg); }
+  50% { opacity: 0.6; transform: rotate(10deg); }
+}
+
+.grove-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+.grove-plant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-2);
+  border-radius: var(--radius-lg);
+  min-height: calc(var(--tap-target) * 2.4);
+  position: relative;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.grove-plant:active { transform: scale(var(--press-scale)); }
+.grove-plant__art { width: 72%; max-width: 6.5rem; aspect-ratio: 1 / 1.08; }
+.grove-plant__label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-2);
+}
+.grove-plant--asking::before,
+.grove-plant--invite::before {
+  content: "";
+  position: absolute;
+  inset: 4% 8%;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(closest-side, var(--garden-review) 0%, transparent 72%);
+  opacity: 0.22;
+  animation: pl-catch-light 5s ease-in-out infinite;
+  z-index: -1;
+}
+.grove-plant--invite::before {
+  background: radial-gradient(closest-side, var(--garden-discovery) 0%, transparent 72%);
+  opacity: 0.16;
+}
+@media (prefers-reduced-motion: reduce) {
+  .grove-plant--asking::before, .grove-plant--invite::before { animation: none; }
+}
+
+.grove-links { margin-top: var(--space-4); text-align: center; }
+.grove-note {
+  text-align: center;
+  color: var(--color-ink-3);
+  font-size: var(--text-sm);
+  margin-top: var(--space-4);
+}
+
+/* ---------- Plant detail ---------- */
+.lg-plant__hero { width: 55%; max-width: 11rem; margin: 0 auto var(--space-3); aspect-ratio: 1 / 1.08; }
+.lg-plant__key {
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-2);
+}
+.lg-plant__leaves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 var(--space-5);
+}
+.lg-leaf {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  text-align: left;
+  max-width: 100%;
+}
+.lg-leaf__word { font-weight: var(--weight-medium); }
+.lg-leaf__meaning { display: block; color: var(--color-ink-2); font-size: var(--text-xs); margin-top: var(--space-1); }
+/* A plain class rule beats the UA stylesheet's [hidden] default, which
+   would otherwise force every meaning open and delete the one-tap
+   recall interaction entirely (Bible §10: "opening a single line of
+   recall" — recall implies retrieving BEFORE checking, not reading). */
+.lg-leaf__meaning[hidden] { display: none; }
+
+/* ---------- Journal ---------- */
+.lg-journal__capability {
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  margin-bottom: var(--space-3);
+}
+.lg-journal__sightings .row:first-child { padding-top: 0; }
+
+/* ---------- Session: the six beats ---------- */
+.lgx { display: flex; flex-direction: column; min-height: calc(100dvh - var(--nav-height) - env(safe-area-inset-bottom) - var(--space-6)); }
+.lgx__close {
+  align-self: flex-end;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  font-size: var(--text-lg);
+  color: var(--color-ink-3);
+  border-radius: var(--radius-full);
+}
+.lgx__plant {
+  width: 34%;
+  max-width: 7rem;
+  aspect-ratio: 1 / 1.08;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+/* Top-anchored, not vertically centered: the Reach beat accumulates
+   content (parts → joined word → quiz → an optional hint/retry), and a
+   centered flex block visibly jumps as each piece is appended. A fixed
+   top offset also reads as composed on short beats (Key, Growth)
+   instead of leaving the content stranded in a void mid-screen. */
+.lgx__stage { flex: 1; display: flex; flex-direction: column; padding-top: min(10vh, var(--space-8)); }
+.lgx-beat { width: 100%; }
+
+.lgx-sentence {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  margin-bottom: var(--space-4);
+}
+.lgx-sentence mark {
+  background: var(--garden-discovery);
+  color: var(--color-ink);
+  padding: 0 0.15em;
+  border-radius: 3px;
+}
+.lgx-prompt {
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-3);
+}
+
+.lgx-beat--key { text-align: center; }
+.lgx-key {
+  font-family: var(--font-reading);
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-tight);
+  margin: var(--space-5) 0 var(--space-6);
+}
+
+.lgx-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  margin: var(--space-5) 0;
+}
+.lgx-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  transition: transform var(--duration) var(--ease-out), border-color var(--duration) var(--ease-out), background-color var(--duration) var(--ease-out);
+}
+.lgx-part:active { transform: scale(var(--press-scale)); }
+.lgx-part.is-revealed { border-color: var(--garden-inleaf); background: var(--color-accent-subtle); }
+.lgx-part.is-joined { transform: scale(0.92); opacity: 0.85; }
+.lgx-part__gloss { font-size: var(--text-2xs); font-family: var(--font-ui); color: var(--color-ink-2); }
+
+.lgx-joined { text-align: center; margin-top: var(--space-5); animation: screen-in var(--duration-slow) var(--ease-out) both; }
+.lgx-joined__word {
+  font-family: var(--font-reading);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-1);
+}
+.lgx-joined__meaning { color: var(--color-ink-2); margin-bottom: var(--space-4); }
+
+.lgx-landed { text-align: center; font-weight: var(--weight-medium); margin: var(--space-4) 0; }
+.lgx-hint { text-align: center; color: var(--color-ink-2); margin: var(--space-4) 0; }
+
+.lgx-beat--growth { text-align: center; }
+.lgx-growth-art { width: 60%; max-width: 12rem; margin: 0 auto var(--space-5); aspect-ratio: 1 / 1.08; }
+.lgx-growth-line {
+  font-family: var(--font-reading);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-6);
+}

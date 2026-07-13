@@ -58,6 +58,23 @@
   --color-wrong-bg:    var(--color-danger-bg);
   --color-wrong-ink:   #7C2E22;
 
+  /* Language Garden (0.14.0) — a small, separate palette (LANGUAGE_GARDEN_BIBLE
+     §8): greens map to maturity, gold is discovery (Key/Reach), amber is the
+     warm invitation to revisit, never red, never brown, never "dead". */
+  --garden-sprout:      #A8D5A2;
+  --garden-sapling:     #7CBB74;
+  --garden-inleaf:      #4F9A5C;
+  --garden-evergreen:   #2B5D3F;
+  --garden-discovery:   #EFC463;  /* dawn gold — Key, Reach */
+  --garden-review:      #D68A3E;  /* autumn amber — the invitation to revisit */
+  --garden-bare-branch: #B8AC98;  /* bare with buds: a branch, never a wound */
+  --garden-bud:         #C9DDBE;
+  --garden-trunk:       #8B7355;
+  --garden-soil:        #D9CFC0;
+  --garden-sky-day:     #EAF1E6;
+  --garden-sky-dusk:    #F3DCC0;
+  --garden-sky-night:   #23324A;
+
   /* ==================== TYPE ==================== */
   /* System stacks by design (TECH_STACK durability): nothing to
      vendor or rot; on iOS the serif resolves to New York. */
@@ -178,6 +195,21 @@
     --color-wrong-ink:   #DE9A8C;
     --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
+
+    /* Dusk, not inversion (§8): deeper, warmer, gold still reads as gold. */
+    --garden-sprout:      #6FA26A;
+    --garden-sapling:     #4F8B52;
+    --garden-inleaf:      #3C6F44;
+    --garden-evergreen:   #2E5439;
+    --garden-discovery:   #E0B563;
+    --garden-review:      #C98A52;
+    --garden-bare-branch: #5C5648;
+    --garden-bud:         #7FA07A;
+    --garden-trunk:       #6B5642;
+    --garden-soil:        #3A3428;
+    --garden-sky-day:     #26302A;
+    --garden-sky-dusk:    #3A2E28;
+    --garden-sky-night:   #12141C;
   }
 }
 
@@ -209,6 +241,20 @@
   --color-wrong-ink:   #DE9A8C;
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
+
+  --garden-sprout:      #6FA26A;
+  --garden-sapling:     #4F8B52;
+  --garden-inleaf:      #3C6F44;
+  --garden-evergreen:   #2E5439;
+  --garden-discovery:   #E0B563;
+  --garden-review:      #C98A52;
+  --garden-bare-branch: #5C5648;
+  --garden-bud:         #7FA07A;
+  --garden-trunk:       #6B5642;
+  --garden-soil:        #3A3428;
+  --garden-sky-day:     #26302A;
+  --garden-sky-dusk:    #3A2E28;
+  --garden-sky-night:   #12141C;
 }
 
 /* ==================== READING SIZE ====================

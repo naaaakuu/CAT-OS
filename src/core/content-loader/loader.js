@@ -654,6 +654,158 @@ export function wdConsistencyIssues(id, item) {
   return issues;
 }
 
+/* ------------------------------------------------------------------ */
+/* Vocabulary (vocab-*) — the shared word substrate every garden       */
+/* references by id (LANGUAGE_GARDEN_BIBLE §10). Same boundary         */
+/* discipline: schema validation + a trivial consistency check.        */
+/* ------------------------------------------------------------------ */
+
+/** Load one vocabulary word by id, schema-validated. */
+export async function loadVocabItem(id) {
+  if (!/^vocab-[0-9]{4}$/.test(id)) {
+    throw new ContentError(`"${id}" is not a valid vocabulary content id.`);
+  }
+  const item = await fetchJSON(`content/vocabulary/${id}.json`);
+  const schema = await loadSchema(`vocab.schema.v${item.schema_version ?? 1}.json`);
+  const { valid, errors } = validate(schema, item);
+  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  const issues = vocabConsistencyIssues(id, item);
+  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  return item;
+}
+
+/** Load several vocabulary words at once → Map(id → item). Ids that
+ *  fail to load are absent from the Map (same fail-open discipline as
+ *  every other loadXItems here). */
+export async function loadVocabItems(ids) {
+  const map = new Map();
+  await Promise.all([...new Set(ids)].map(async (id) => {
+    try { map.set(id, await loadVocabItem(id)); } catch { /* skip */ }
+  }));
+  return map;
+}
+
+/** Vocab cross-field truths the schema can't express. */
+export function vocabConsistencyIssues(id, item) {
+  const issues = [];
+  if (item.meta.id !== id) issues.push(`meta.id "${item.meta.id}" ≠ file id "${id}"`);
+  return issues;
+}
+
+/* ------------------------------------------------------------------ */
+/* Language Garden (lg-*) — one plant (a root family, Root Grove's     */
+/* content). A plant never inlines a word: each member is a vocab_id   */
+/* reference, resolved and merged here so every screen sees a member   */
+/* with .word/.meaning/.part_of_speech already attached, and no word   */
+/* fact is ever duplicated between a plant file and the dictionary     */
+/* (PROJECT_RULES Rule 3). Same boundary discipline as every other     */
+/* content type: schema validation + cross-field consistency before    */
+/* anything renders.                                                   */
+/* ------------------------------------------------------------------ */
+
+/** Registry entries for practicable Language Garden plants. */
+export async function listLGItems() {
+  const registry = await loadRegistry();
+  return (registry.items ?? []).filter(
+    (i) => i.type === 'lg' && (i.status === 'accepted' || i.status === 'review')
+  );
+}
+
+/**
+ * Load one Language Garden plant by id: schema-validate the family
+ * file, resolve every member's vocab_id against the vocabulary store,
+ * merge {word, meaning, part_of_speech} onto each member, then run
+ * cross-file consistency checks.
+ */
+export async function loadLGItem(id) {
+  if (!/^lg-[0-9]{4}$/.test(id)) {
+    throw new ContentError(`"${id}" is not a valid Language Garden content id.`);
+  }
+  const item = await fetchJSON(`content/language-garden/${id}.json`);
+
+  const schema = await loadSchema(`lg.schema.v${item.schema_version ?? 1}.json`);
+  const { valid, errors } = validate(schema, item);
+  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+
+  const vocabIds = item.members.map((m) => m.vocab_id);
+  const vocabById = await loadVocabItems(vocabIds);
+  const missing = vocabIds.filter((v) => !vocabById.has(v));
+  if (missing.length) {
+    throw new ContentError(`${id} references vocabulary that failed to load.`, missing);
+  }
+
+  const resolved = {
+    ...item,
+    members: item.members.map((m) => {
+      const v = vocabById.get(m.vocab_id);
+      return { ...m, word: v.word, meaning: v.meaning, part_of_speech: v.part_of_speech ?? null };
+    }),
+  };
+
+  const issues = lgConsistencyIssues(id, resolved);
+  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+
+  return resolved;
+}
+
+/**
+ * Load several plants at once → Map(id → resolved item). Ids that fail
+ * to load are absent from the Map (same fail-open discipline as every
+ * other loadXItems here).
+ */
+export async function loadLGItems(ids) {
+  const map = new Map();
+  await Promise.all([...new Set(ids)].map(async (id) => {
+    try { map.set(id, await loadLGItem(id)); } catch { /* skip */ }
+  }));
+  return map;
+}
+
+/** LG cross-field truths the schema can't express. Exported so
+ *  tools/verify.mjs applies the identical rules. Runs against the
+ *  RESOLVED item (members already carry word/meaning). */
+export function lgConsistencyIssues(id, item) {
+  const issues = [];
+  if (item.meta.id !== id) issues.push(`meta.id "${item.meta.id}" ≠ file id "${id}"`);
+
+  const taught = item.members.filter((m) => !m.held_out);
+  const reach = item.members.filter((m) => m.held_out);
+  // Spread walks 2 or 3 members in one session (Bible §5); at least 2
+  // reach words are reserved (§6.1).
+  if (taught.length < 2 || taught.length > 3) {
+    issues.push(`${taught.length} taught members; Spread needs 2 or 3 (Bible §5)`);
+  }
+  if (reach.length < 2) issues.push(`${reach.length} held_out members; at least 2 required (Bible §6.1)`);
+
+  // Reach members must carry construct_options with exactly one correct;
+  // taught members must NOT (Spread reveals, it never grades).
+  for (const m of item.members) {
+    const has = Array.isArray(m.construct_options);
+    if (m.held_out && !has) issues.push(`"${m.word}": held_out member needs construct_options`);
+    if (!m.held_out && has) issues.push(`"${m.word}": taught member must not carry construct_options`);
+    if (has) {
+      const n = m.construct_options.filter((o) => o.correct).length;
+      if (n !== 1) issues.push(`"${m.word}": construct_options has ${n} correct options; exactly 1 required`);
+    }
+  }
+
+  // The attempt's options carry exactly one correct answer.
+  const attemptCorrect = item.attempt.options.filter((o) => o.correct).length;
+  if (attemptCorrect !== 1) issues.push(`attempt.options has ${attemptCorrect} correct options; exactly 1 required`);
+
+  // Every part's is_root chunk should actually be a substring of the
+  // word it composes, or the tap-to-join UI would be pointing at nothing.
+  for (const m of item.members) {
+    const joined = m.parts.map((p) => p.text).join('').toLowerCase();
+    const word = m.word.toLowerCase().replace(/[^a-z]/g, '');
+    if (joined !== word) {
+      issues.push(`"${m.word}": parts join to "${joined}", not the word itself`);
+    }
+  }
+
+  return issues;
+}
+
 /** Cross-field truths the schema can't express. Exported so the
  *  offline verification tool applies the identical rules. */
 export function consistencyIssues(id, item) {

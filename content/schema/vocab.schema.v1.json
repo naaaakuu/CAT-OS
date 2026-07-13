@@ -1,0 +1,39 @@
+{
+  "$id": "vocab.schema.v1",
+  "title": "CAT OS Vocabulary word, schema v1",
+  "description": "One standalone word: the shared substrate MASTER_CONTEXT.md reserves the `vocab` prefix for. Every garden in LANGUAGE_GARDEN_BIBLE.md (Root Grove today; the Vine Walk, Orchard, Wildflower Meadow and Twin Patch later) references words by vocab-NNNN id rather than inlining them, so the same word can be met from more than one direction without being authored twice (Rule 3). This file carries only the dictionary fact (word, meaning, part of speech); which root it belongs to, its parts, and its context sentences are the family's teaching layer, authored in content/language-garden/. `word`/`meaning` are transcribed faithfully from the owner-supplied source PDFs (99_REFERENCE/), never invented.",
+  "type": "object",
+  "required": ["schema_version", "meta", "word", "meaning"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+
+    "meta": {
+      "type": "object",
+      "required": ["id", "type", "version", "status", "source", "date_added", "batch_id"],
+      "additionalProperties": false,
+      "properties": {
+        "id":      { "type": "string", "pattern": "^vocab-[0-9]{4}$" },
+        "type":    { "const": "vocab" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status":  { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "source": {
+          "type": "object",
+          "required": ["publication", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication": { "type": "string", "minLength": 1 },
+            "usage_note":  { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id":   { "type": "string", "pattern": "^batch-vocab-[0-9]{3}$" }
+      }
+    },
+
+    "word":    { "type": "string", "minLength": 1 },
+    "meaning": { "type": "string", "minLength": 1, "maxLength": 140,
+      "description": "One line (LANGUAGE_GARDEN_BIBLE §9: 'Definitions are one line')." },
+    "part_of_speech": { "enum": ["noun", "verb", "adjective", "adverb"] }
+  }
+}
