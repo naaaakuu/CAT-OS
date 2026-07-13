@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0006",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "prefix",
+    "title": "anti-",
+    "estimated_time_sec": 90,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "Deliberately follows ante- (wd-0005) so the predict step can name the exact confusion between the two prefixes while it is still fresh, rather than treat them as unrelated. Owner review pending."
+  },
+  "unit": {
+    "kind": "prefix",
+    "label": "anti-",
+    "origin_language": "Greek",
+    "core_meaning": "against",
+    "mentor_note": "Anti and ante sound almost the same and mean almost opposite things. That single letter is worth slowing down for."
+  },
+  "members": [
+    { "word": "antidote", "meaning": "a remedy against a poison or disease", "part_of_speech": "noun", "held_out": false },
+    { "word": "antipathy", "meaning": "a dislike or aversion toward something", "part_of_speech": "noun", "held_out": false },
+    { "word": "antipyretic", "meaning": "effective against fever", "part_of_speech": "adjective", "held_out": false },
+    { "word": "antiseptic", "meaning": "preventing infection", "part_of_speech": "adjective", "held_out": false },
+    { "word": "antigen", "meaning": "a substance that stimulates the production of antibodies against it", "part_of_speech": "noun", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share, and how is it different from ante- (before)?",
+    "predict_options": [
+      { "text": "Against", "correct": true },
+      { "text": "Before", "correct": false },
+      { "text": "Without", "correct": false }
+    ],
+    "understand_note": "Anti- means against. An antidote works against a poison. Antiseptic works against infection. Antipathy is a feeling held against someone. It shares almost every letter with ante- (before), and none of the meaning.",
+    "applies": [
+      {
+        "held_out_word": "antigen",
+        "prompt": "Knowing anti- means against, what do you think an antigen does?",
+        "options": [
+          { "text": "It triggers the body's defenses to act against it", "correct": true },
+          { "text": "It removes the body's need to defend itself", "correct": false, "trap": "context_mismatch" },
+          { "text": "It existed in the body before any illness arrived", "correct": false, "trap": "wrong_root" }
+        ]
+      }
+    ]
+  }
+}

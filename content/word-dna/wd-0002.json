@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0002",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "root",
+    "title": "phil",
+    "estimated_time_sec": 120,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "philatelist is held out here and reappears taught in wd-0007 (-ist): the source itself derives it from both roots, so the cross-link is faithful, not invented. Owner review pending."
+  },
+  "unit": {
+    "kind": "root",
+    "label": "phil",
+    "origin_language": "Greek",
+    "core_meaning": "to love",
+    "mentor_note": "Phil never announces itself loudly. It just quietly means someone loves the thing standing beside it."
+  },
+  "members": [
+    { "word": "philology", "meaning": "love of language and words", "part_of_speech": "noun", "held_out": false },
+    { "word": "philosophy", "meaning": "love of wisdom", "part_of_speech": "noun", "held_out": false },
+    { "word": "philanthropy", "meaning": "love of mankind", "part_of_speech": "noun", "held_out": false },
+    { "word": "Philadelphia", "meaning": "city of brotherly love", "part_of_speech": "noun", "held_out": false },
+    { "word": "philharmonic", "meaning": "love of music or harmony", "part_of_speech": "adjective", "held_out": false },
+    { "word": "bibliophile", "meaning": "a lover of books", "part_of_speech": "noun", "held_out": false },
+    { "word": "Anglophile", "meaning": "an admirer of British culture and people", "part_of_speech": "noun", "held_out": false },
+    { "word": "philatelist", "meaning": "one who collects or studies stamps", "part_of_speech": "noun", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      { "text": "To love", "correct": true },
+      { "text": "To know", "correct": false },
+      { "text": "To help", "correct": false }
+    ],
+    "understand_note": "Phil means to love, and it always attaches to the thing being loved. Philosophy is love of wisdom, philanthropy is love of humanity, a bibliophile loves books, an Anglophile loves British culture. The root never changes; only the object of its affection does.",
+    "applies": [
+      {
+        "held_out_word": "philatelist",
+        "prompt": "Knowing phil- means to love, what do you think a philatelist loves?",
+        "options": [
+          { "text": "Collecting and studying stamps", "correct": true },
+          { "text": "Foreign languages", "correct": false, "trap": "wrong_root" },
+          { "text": "Ancient philosophy", "correct": false, "trap": "literal_only" }
+        ]
+      }
+    ]
+  }
+}

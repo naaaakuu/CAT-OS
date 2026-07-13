@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0007",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ist",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "philatelist is taught here (having been held out for transfer in wd-0002, phil) so the two units reinforce each other exactly as the source's own overlap intends. numismatist held out as the obscure transfer test. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ist",
+    "origin_language": "Greek",
+    "core_meaning": "one who performs an action, is an expert in a field, or holds a belief",
+    "mentor_note": "This one suffix quietly names hundreds of professions. Once you know it, a job title stops being a mystery and starts being a clue."
+  },
+  "members": [
+    { "word": "verbalist", "meaning": "an expert in words", "part_of_speech": "noun", "held_out": false },
+    { "word": "purist", "meaning": "an expert in or strict adherent to traditions", "part_of_speech": "noun", "held_out": false },
+    { "word": "geneticist", "meaning": "an expert in heredity", "part_of_speech": "noun", "held_out": false },
+    { "word": "arborist", "meaning": "an expert in tree care", "part_of_speech": "noun", "held_out": false },
+    { "word": "agronomist", "meaning": "an expert in crop production", "part_of_speech": "noun", "held_out": false },
+    { "word": "entomologist", "meaning": "an expert in insects", "part_of_speech": "noun", "held_out": false },
+    { "word": "philatelist", "meaning": "one who collects or studies stamps", "part_of_speech": "noun", "held_out": false },
+    { "word": "toxicologist", "meaning": "an expert in poison", "part_of_speech": "noun", "held_out": false },
+    { "word": "semanticist", "meaning": "an expert in word meanings", "part_of_speech": "noun", "held_out": false },
+    { "word": "meteorologist", "meaning": "an expert in weather", "part_of_speech": "noun", "held_out": false },
+    { "word": "numismatist", "meaning": "an expert in or collector of coins", "part_of_speech": "noun", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      { "text": "Someone who specializes in or studies something", "correct": true },
+      { "text": "Someone who invented something", "correct": false },
+      { "text": "Someone who opposes something", "correct": false }
+    ],
+    "understand_note": "Ist marks a person defined by their subject: a geneticist studies genetics, an arborist cares for trees, a meteorologist studies weather. Swap in almost any field, and -ist names its expert.",
+    "applies": [
+      {
+        "held_out_word": "numismatist",
+        "prompt": "Knowing -ist marks someone who specializes in something, what do you think a numismatist studies or collects?",
+        "options": [
+          { "text": "Coins", "correct": true },
+          { "text": "Numbers and mathematics", "correct": false, "trap": "literal_only" },
+          { "text": "Ancient manuscripts", "correct": false, "trap": "context_mismatch" }
+        ]
+      }
+    ]
+  }
+}

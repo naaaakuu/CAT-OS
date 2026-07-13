@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0008",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-dom",
+    "estimated_time_sec": 75,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "The batch's first Germanic-origin suffix, deliberately placed after two Greek/Latin ones so the Tree already feels like more than one language by this point. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-dom",
+    "origin_language": "Germanic",
+    "core_meaning": "a state, condition, or domain of",
+    "mentor_note": "The smallest suffixes often carry the oldest ideas. This one has been naming domains and conditions for a thousand years."
+  },
+  "members": [
+    { "word": "freedom", "meaning": "the state of being free", "part_of_speech": "noun", "held_out": false },
+    { "word": "kingdom", "meaning": "a state or territory ruled by a king", "part_of_speech": "noun", "held_out": false },
+    { "word": "officialdom", "meaning": "the collective state or domain of officials", "part_of_speech": "noun", "held_out": false },
+    { "word": "dukedom", "meaning": "the territory or rank belonging to a duke", "part_of_speech": "noun", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      { "text": "A state, condition, or domain of", "correct": true },
+      { "text": "A group of people who dislike something", "correct": false },
+      { "text": "An old or outdated version of something", "correct": false }
+    ],
+    "understand_note": "Dom names a state or a domain. Freedom is the state of being free. A kingdom is the domain a king rules. Officialdom is the whole condition of being run by officials.",
+    "applies": [
+      {
+        "held_out_word": "dukedom",
+        "prompt": "Knowing -dom names a state or domain, what do you think a dukedom is?",
+        "options": [
+          { "text": "The territory or rank belonging to a duke", "correct": true },
+          { "text": "A formal title given only to kings", "correct": false, "trap": "context_mismatch" },
+          { "text": "A group of people who admire a duke", "correct": false, "trap": "wrong_root" }
+        ]
+      }
+    ]
+  }
+}

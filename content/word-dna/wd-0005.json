@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0005",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "prefix",
+    "title": "ante-",
+    "estimated_time_sec": 90,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "Held out ante meridiem deliberately: decoding it reveals what AM has meant the whole time, the exact 'I can understand this now' moment the brief asks for. Owner review pending."
+  },
+  "unit": {
+    "kind": "prefix",
+    "label": "ante-",
+    "origin_language": "Latin",
+    "core_meaning": "before",
+    "mentor_note": "This prefix is easy to confuse with one that looks almost identical and means almost the opposite. Meet it carefully now, and anti- (next) will be easier, not harder."
+  },
+  "members": [
+    { "word": "antecedent", "meaning": "preceding; that which comes before", "part_of_speech": "noun", "held_out": false },
+    { "word": "antediluvian", "meaning": "before the flood; ancient", "part_of_speech": "adjective", "held_out": false },
+    { "word": "antenatal", "meaning": "of care given before birth, during pregnancy", "part_of_speech": "adjective", "held_out": false },
+    { "word": "anterior", "meaning": "to the front; before", "part_of_speech": "adjective", "held_out": false },
+    { "word": "ante meridiem", "meaning": "before noon", "part_of_speech": "phrase", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      { "text": "Before", "correct": true },
+      { "text": "Above", "correct": false },
+      { "text": "Against", "correct": false }
+    ],
+    "understand_note": "Ante- means before. An antecedent comes before. Antenatal care happens before birth. Antediluvian stretches the idea to its widest reach: before the flood, before recorded memory.",
+    "applies": [
+      {
+        "held_out_word": "ante meridiem",
+        "prompt": "Knowing ante- means before, what do you think ante meridiem marks?",
+        "options": [
+          { "text": "The hours before midday", "correct": true },
+          { "text": "The hours right after sunset", "correct": false, "trap": "context_mismatch" },
+          { "text": "A period long before recorded history", "correct": false, "trap": "literal_only" }
+        ]
+      }
+    ]
+  }
+}

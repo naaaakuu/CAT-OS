@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0009",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "foreign",
+    "title": "German words",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; context sentences and the teaching layer are authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "The batch's first foreign-word unit; carries the WORD_DNA_BIBLE §3a honesty note that borrowed words are met, not decoded. Complete German list from the source, seven of seven words. Owner review pending."
+  },
+  "unit": {
+    "kind": "foreign",
+    "label": "German",
+    "origin_language": "German",
+    "core_meaning": null,
+    "mentor_note": "These aren't patterns to crack. They're words English simply borrowed from German, whole. Meeting them is the whole skill."
+  },
+  "members": [
+    { "word": "pumpernickel", "meaning": "a dark, dense, sour bread", "part_of_speech": "noun", "context_sentence": "She packed thick slices of pumpernickel for the picnic.", "held_out": false },
+    { "word": "kindergarten", "meaning": "a school or class for young children", "part_of_speech": "noun", "context_sentence": "The children in the kindergarten class are learning their letters.", "held_out": false },
+    { "word": "hoodlum", "meaning": "a petty criminal", "part_of_speech": "noun", "context_sentence": "A group of hoodlums had been breaking streetlights all week.", "held_out": false },
+    { "word": "delicatessen", "meaning": "a shop selling prepared and imported foods", "part_of_speech": "noun", "context_sentence": "We bought smoked fish and olives from the delicatessen on the corner.", "held_out": false },
+    { "word": "glisten", "meaning": "to shine", "part_of_speech": "verb", "context_sentence": "Dew made the grass glisten in the early morning light.", "held_out": false },
+    { "word": "loafers", "meaning": "a casual leather slip-on shoe", "part_of_speech": "noun", "context_sentence": "He kicked off his loafers and walked barefoot on the sand.", "held_out": true },
+    { "word": "glitch", "meaning": "a minor and usually temporary malfunction", "part_of_speech": "noun", "context_sentence": "There was a strange glitch in the software, so the screen froze for a second.", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "English borrowed every one of these words from German. Read each one in its sentence, then guess before the reveal.",
+    "predict_options": [
+      { "text": "A school or class for young children", "correct": true },
+      { "text": "A large garden used for growing vegetables", "correct": false },
+      { "text": "A German dessert made with fruit", "correct": false }
+    ],
+    "understand_note": "Kinder means children and garten means garden in German. English borrowed the whole phrase and narrowed it to one specific use: a class for young children, the same warm image, a smaller frame.",
+    "applies": [
+      {
+        "held_out_word": "loafers",
+        "prompt": "\"He kicked off his loafers and walked barefoot on the sand.\" What are loafers?",
+        "options": [
+          { "text": "A casual style of slip-on shoe", "correct": true },
+          { "text": "A type of lazy, unemployed person", "correct": false, "trap": "context_mismatch" },
+          { "text": "Fresh bread rolls", "correct": false, "trap": "literal_only" }
+        ]
+      },
+      {
+        "held_out_word": "glitch",
+        "prompt": "\"There was a strange glitch in the software, so the screen froze for a second.\" What does glitch mean here?",
+        "options": [
+          { "text": "A small, temporary malfunction or fault", "correct": true },
+          { "text": "A deliberate feature added by the designer", "correct": false, "trap": "context_mismatch" },
+          { "text": "A loud, sudden noise", "correct": false, "trap": "literal_only" }
+        ]
+      }
+    ]
+  }
+}

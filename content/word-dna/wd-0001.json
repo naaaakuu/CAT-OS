@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0001",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "root",
+    "title": "chron",
+    "estimated_time_sec": 90,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "The journey's opening root: a clean, well-known Greek family with one compound (asynchronous) held out for transfer. Owner review pending."
+  },
+  "unit": {
+    "kind": "root",
+    "label": "chron",
+    "origin_language": "Greek",
+    "core_meaning": "time",
+    "mentor_note": "Time hides inside more everyday words than it seems. Once you can see chron, you start noticing it everywhere."
+  },
+  "members": [
+    { "word": "chronology", "meaning": "arrangement of events in order of occurrence", "part_of_speech": "noun", "held_out": false },
+    { "word": "chronicle", "meaning": "a historical record", "part_of_speech": "noun", "held_out": false },
+    { "word": "chronograph", "meaning": "a stop watch that records time with great accuracy", "part_of_speech": "noun", "held_out": false },
+    { "word": "chronic", "meaning": "lasting a long time, of an illness", "part_of_speech": "adjective", "held_out": false },
+    { "word": "chronometer", "meaning": "an instrument for measuring time precisely", "part_of_speech": "noun", "held_out": false },
+    { "word": "asynchronous", "meaning": "not occurring at the same time as something else", "part_of_speech": "adjective", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      { "text": "Time", "correct": true },
+      { "text": "Order or sequence", "correct": false },
+      { "text": "Measurement", "correct": false }
+    ],
+    "understand_note": "Chron means time, and it never hides far from the surface. Chronology arranges events across time. Chronic means an illness has settled in for a long stretch of time. A chronometer measures time down to the instant. Different words, same root, same idea underneath.",
+    "applies": [
+      {
+        "held_out_word": "asynchronous",
+        "prompt": "Knowing chron- means time, what do you think asynchronous describes?",
+        "options": [
+          { "text": "Not happening at the same time as something else", "correct": true },
+          { "text": "Happening very quickly, without any delay", "correct": false, "trap": "literal_only" },
+          { "text": "Impossible to measure accurately", "correct": false, "trap": "wrong_root" }
+        ]
+      }
+    ]
+  }
+}

@@ -535,6 +535,125 @@ export function oooConsistencyIssues(id, item) {
   return issues;
 }
 
+/* ------------------------------------------------------------------ */
+/* Word DNA (wd-*) — same boundary discipline as RC, PJ, PS and OOO:   */
+/* schema validation + cross-field consistency before anything renders.*/
+/* ------------------------------------------------------------------ */
+
+/** Registry entries for practicable Word DNA units (accepted or in review). */
+export async function listWDItems() {
+  const registry = await loadRegistry();
+  return (registry.items ?? []).filter(
+    (i) => i.type === 'wd' && (i.status === 'accepted' || i.status === 'review')
+  );
+}
+
+/**
+ * Load several Word DNA units at once → Map(id → item). Ids that fail
+ * to load are absent from the Map, so mentor/DNA reasoning only ever
+ * rests on evidence that can still be shown.
+ */
+export async function loadWDItems(ids) {
+  const map = new Map();
+  await Promise.all([...new Set(ids)].map(async (id) => {
+    try { map.set(id, await loadWDItem(id)); } catch { /* skip */ }
+  }));
+  return map;
+}
+
+/** Load one Word DNA unit by id, schema-validate it, and run consistency checks. */
+export async function loadWDItem(id) {
+  if (!/^wd-[0-9]{4}$/.test(id)) {
+    throw new ContentError(`"${id}" is not a valid Word DNA content id.`);
+  }
+  const item = await fetchJSON(`content/word-dna/${id}.json`);
+
+  const schema = await loadSchema(`wd.schema.v${item.schema_version ?? 1}.json`);
+  const { valid, errors } = validate(schema, item);
+  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+
+  const issues = wdConsistencyIssues(id, item);
+  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+
+  return item;
+}
+
+/* Kinds with no shared meaning across members (WORD_DNA_BIBLE §3a):
+ * core_meaning must be null, and each held-out member gets its own
+ * apply challenge rather than one shared root/prefix/suffix transfer. */
+const WD_NO_SHARED_MEANING = ['foreign', 'cat_vocab', 'confused'];
+
+/** WD cross-field truths the schema can't express. Exported so
+ *  tools/verify.mjs applies the identical rules. */
+export function wdConsistencyIssues(id, item) {
+  const issues = [];
+  const m = item.meta;
+  const u = item.unit;
+  if (m.id !== id) issues.push(`meta.id "${m.id}" ≠ file id "${id}"`);
+  if (m.kind !== u.kind) issues.push(`meta.kind "${m.kind}" ≠ unit.kind "${u.kind}"`);
+
+  const sharesMeaning = !WD_NO_SHARED_MEANING.includes(u.kind);
+  if (sharesMeaning && (typeof u.core_meaning !== 'string' || u.core_meaning.length === 0)) {
+    issues.push(`kind "${u.kind}" must state unit.core_meaning (WORD_DNA_BIBLE §4)`);
+  }
+  if (!sharesMeaning && u.core_meaning !== null) {
+    issues.push(`kind "${u.kind}" has no shared meaning; unit.core_meaning must be null (WORD_DNA_BIBLE §3a)`);
+  }
+
+  // Exactly one held-out member for root/prefix/suffix; exactly two for
+  // foreign/cat_vocab (WORD_DNA_BIBLE §3/§3a) — never zero, never every member.
+  const heldOut = item.members.filter((mem) => mem.held_out);
+  const expectedHeldOut = sharesMeaning ? 1 : 2;
+  if (heldOut.length !== expectedHeldOut) {
+    issues.push(`kind "${u.kind}" needs exactly ${expectedHeldOut} held_out member(s), found ${heldOut.length}`);
+  }
+  if (heldOut.length >= item.members.length) {
+    issues.push('every member is held_out; at least one must be taught before Apply');
+  }
+
+  // discovery.applies walks the held-out members in the same order,
+  // one challenge per member, each naming its own word exactly.
+  const applies = item.discovery.applies;
+  if (applies.length !== heldOut.length) {
+    issues.push(`discovery.applies has ${applies.length} entries for ${heldOut.length} held_out members`);
+  } else {
+    heldOut.forEach((mem, i) => {
+      if (applies[i]?.held_out_word !== mem.word) {
+        issues.push(`discovery.applies[${i}].held_out_word "${applies[i]?.held_out_word}" ≠ held_out member "${mem.word}"`);
+      }
+    });
+  }
+
+  // Every choice set — predict and each apply — carries exactly one
+  // correct option, never zero (unanswerable) and never two (ambiguous).
+  const oneCorrect = (options, label) => {
+    const n = options.filter((o) => o.correct).length;
+    if (n !== 1) issues.push(`${label} has ${n} correct options; exactly 1 required`);
+  };
+  oneCorrect(item.discovery.predict_options, 'discovery.predict_options');
+  item.discovery.applies.forEach((a, i) => oneCorrect(a.options ?? [], `discovery.applies[${i}].options`));
+
+  // Foreign/cat_vocab members lean on their context_sentence in place of
+  // a shared root (WORD_DNA_BIBLE §3a); it must actually use the word.
+  // Matched by stem (first 5 letters, or the whole word if shorter) so a
+  // natural inflection ("abating" for "abate") still counts as faithful
+  // usage rather than forcing every sentence into the dictionary form.
+  if (!sharesMeaning) {
+    for (const mem of item.members) {
+      if (!mem.context_sentence) {
+        issues.push(`"${mem.word}": kind "${u.kind}" requires a context_sentence`);
+        continue;
+      }
+      const stem = mem.word.toLowerCase().split(' ')[0].slice(0, 4);
+      if (!mem.context_sentence.toLowerCase().includes(stem)) {
+        issues.push(`"${mem.word}": context_sentence does not appear to use the word`);
+      }
+    }
+  }
+
+  return issues;
+}
+
 /** Cross-field truths the schema can't express. Exported so the
  *  offline verification tool applies the identical rules. */
 export function consistencyIssues(id, item) {

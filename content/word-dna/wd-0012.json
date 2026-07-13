@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0012",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "cat_vocab",
+    "title": "High Frequency, A (ii)",
+    "estimated_time_sec": 240,
+    "source": {
+      "publication": "Section 1: Vocabulary, Word List I — High Frequency Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word, definition, synonym, and antonym transcribed faithfully continuing directly from wd-0011; context sentences and the teaching layer are authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "Continues the source's High Frequency list from where wd-0011 stopped (accost through adroit), in the source's own order. Owner review pending."
+  },
+  "unit": {
+    "kind": "cat_vocab",
+    "label": "High Frequency, A (ii)",
+    "origin_language": null,
+    "core_meaning": null,
+    "mentor_note": "Twenty words in, and none of them share a root. That is the other half of vocabulary: some words are simply worth meeting once, carefully, on their own terms."
+  },
+  "members": [
+    { "word": "accost", "meaning": "to approach and speak to, often aggressively", "part_of_speech": "verb", "synonyms": ["greet"], "antonyms": ["shun", "avoid"], "context_sentence": "A stranger accosted her on the street, asking for directions in an urgent voice.", "held_out": false },
+    { "word": "accredit", "meaning": "to approve or certify officially", "part_of_speech": "verb", "context_sentence": "The university was officially accredited to award medical degrees.", "held_out": false },
+    { "word": "accomplice", "meaning": "a partner in crime", "part_of_speech": "noun", "context_sentence": "The getaway driver was charged as an accomplice to the robbery.", "held_out": false },
+    { "word": "acquaint", "meaning": "to inform; to make familiar", "part_of_speech": "verb", "context_sentence": "Let me acquaint you with the rest of the team before the meeting starts.", "held_out": false },
+    { "word": "acquit", "meaning": "to clear a person of a charge", "part_of_speech": "verb", "context_sentence": "The jury chose to acquit the defendant after just two hours of deliberation.", "held_out": false },
+    { "word": "acrid", "meaning": "sharp or bitter, as in smell or speech", "part_of_speech": "adjective", "context_sentence": "An acrid smell of burning plastic filled the hallway.", "held_out": false },
+    { "word": "acrimony", "meaning": "bitterness or harshness of speech or manner", "part_of_speech": "noun", "context_sentence": "Years of acrimony between the two families made the reunion tense.", "held_out": false },
+    { "word": "acronym", "meaning": "a word formed from the initial letters of a group of words", "part_of_speech": "noun", "context_sentence": "NASA is an acronym for the National Aeronautics and Space Administration.", "held_out": true },
+    { "word": "acumen", "meaning": "keenness of mind; insight", "part_of_speech": "noun", "context_sentence": "Her business acumen helped the small shop grow into a national chain.", "held_out": false },
+    { "word": "adage", "meaning": "an old saying; a proverb", "part_of_speech": "noun", "context_sentence": "As the old adage goes, patience is a virtue.", "held_out": false },
+    { "word": "adamant", "meaning": "inflexible; unwilling to change one's mind", "part_of_speech": "adjective", "context_sentence": "He was adamant that he had locked the door before leaving.", "held_out": false },
+    { "word": "addle", "meaning": "to become confused, or to spoil", "part_of_speech": "verb", "context_sentence": "The constant noise from the construction site began to addle her thoughts.", "held_out": false },
+    { "word": "adduce", "meaning": "to offer as example, reason, or proof", "part_of_speech": "verb", "context_sentence": "The lawyer adduced three pieces of evidence to support her claim.", "held_out": false },
+    { "word": "adjudicate", "meaning": "to settle judicially", "part_of_speech": "verb", "context_sentence": "An independent panel was brought in to adjudicate the dispute.", "held_out": false },
+    { "word": "adjure", "meaning": "to beg; to appeal earnestly", "part_of_speech": "verb", "context_sentence": "She adjured him to reconsider before signing the contract.", "held_out": false },
+    { "word": "admonish", "meaning": "to warn; to reprove mildly", "part_of_speech": "verb", "synonyms": ["censure", "rebuke"], "antonyms": ["applaud", "praise", "compliment"], "context_sentence": "The coach admonished the team for arriving late to practice.", "held_out": false },
+    { "word": "admonitory", "meaning": "containing a warning", "part_of_speech": "adjective", "context_sentence": "He raised an admonitory finger before the child could reach for the stove.", "held_out": false },
+    { "word": "ado", "meaning": "fuss; trouble", "part_of_speech": "noun", "synonyms": ["bustle", "commotion"], "context_sentence": "Without further ado, let's begin the ceremony.", "held_out": false },
+    { "word": "adorn", "meaning": "to add beauty to; to decorate", "part_of_speech": "verb", "context_sentence": "Fresh flowers adorned every table at the wedding.", "held_out": false },
+    { "word": "adroit", "meaning": "skillful and clever", "part_of_speech": "adjective", "synonyms": ["proficient", "dextrous"], "antonyms": ["awkward", "dull"], "context_sentence": "The adroit negotiator settled the dispute in less than an hour.", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "More words worth meeting on their own terms. Read each one in its sentence, then guess before the reveal.",
+    "predict_options": [
+      { "text": "To approach and speak to someone, often aggressively", "correct": true },
+      { "text": "To ignore someone completely", "correct": false },
+      { "text": "To follow someone secretly without being seen", "correct": false }
+    ],
+    "understand_note": "Accost carries a little tension that a plain word like approach doesn't. Notice how much of a word's meaning lives in its tone, not only its dictionary line.",
+    "applies": [
+      {
+        "held_out_word": "acronym",
+        "prompt": "\"NASA is an acronym for the National Aeronautics and Space Administration.\" What does acronym mean here?",
+        "options": [
+          { "text": "A word formed from the first letters of a group of words", "correct": true },
+          { "text": "A word borrowed directly from another language", "correct": false, "trap": "wrong_root" },
+          { "text": "An old-fashioned or outdated term", "correct": false, "trap": "context_mismatch" }
+        ]
+      },
+      {
+        "held_out_word": "adroit",
+        "prompt": "\"The adroit negotiator settled the dispute in less than an hour.\" What does adroit mean here?",
+        "options": [
+          { "text": "Skillful and clever", "correct": true },
+          { "text": "Slow and overly cautious", "correct": false, "trap": "context_mismatch" },
+          { "text": "Dishonest and manipulative", "correct": false, "trap": "context_mismatch" }
+        ]
+      }
+    ]
+  }
+}

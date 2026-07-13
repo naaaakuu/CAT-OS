@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0003",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "root",
+    "title": "cede / ceed / cess",
+    "estimated_time_sec": 120,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "Three spellings, one root: a deliberate early lesson that a root's letters can shift while its meaning holds. recession held out as the least obviously movement-related member. Owner review pending."
+  },
+  "unit": {
+    "kind": "root",
+    "label": "cede / ceed / cess",
+    "origin_language": "Latin",
+    "core_meaning": "to go, or movement",
+    "mentor_note": "Movement is the oldest idea hiding in this root. Once you see it, words that felt unrelated start pointing the same way."
+  },
+  "members": [
+    { "word": "precede", "meaning": "to come before", "part_of_speech": "verb", "held_out": false },
+    { "word": "proceeding", "meaning": "a course of action", "part_of_speech": "noun", "held_out": false },
+    { "word": "process", "meaning": "a method of doing something", "part_of_speech": "noun", "held_out": false },
+    { "word": "succeed", "meaning": "to go ahead, to be successful", "part_of_speech": "verb", "held_out": false },
+    { "word": "proceed", "meaning": "to go before, to go forward", "part_of_speech": "verb", "held_out": false },
+    { "word": "exceed", "meaning": "to go ahead of, to go beyond", "part_of_speech": "verb", "held_out": false },
+    { "word": "recede", "meaning": "to go back", "part_of_speech": "verb", "held_out": false },
+    { "word": "recession", "meaning": "a depression in economic activity", "part_of_speech": "noun", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      { "text": "To go or move", "correct": true },
+      { "text": "To finish completely", "correct": false },
+      { "text": "To agree", "correct": false }
+    ],
+    "understand_note": "Cede, ceed, and cess are three spellings of one root: to go, or movement. Precede goes before. Proceed goes forward. Exceed goes beyond a limit. Recede goes back. The spelling shifts with the word around it; the movement never does.",
+    "applies": [
+      {
+        "held_out_word": "recession",
+        "prompt": "Knowing cede/cess means to go or move, what do you think a recession is?",
+        "options": [
+          { "text": "A period when economic activity is moving backward, or declining", "correct": true },
+          { "text": "A formal ceremony where territory is handed over", "correct": false, "trap": "wrong_root" },
+          { "text": "A sudden and complete stop in all activity", "correct": false, "trap": "literal_only" }
+        ]
+      }
+    ]
+  }
+}

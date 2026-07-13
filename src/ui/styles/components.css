@@ -1734,3 +1734,255 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-size: var(--text-2xs);
 }
 .oox__takeaway { margin-top: var(--space-2); }
+
+/* ============================================================
+   Word DNA — the decoding journey.
+   Mirrors the pj-intro/ps-intro/ooo-intro pattern under its own
+   prefix (WORD_DNA_BIBLE §2); a new section rather than joining the
+   shared selector list above, so this module stays a clean diff.
+   ============================================================ */
+
+/* ---------- The introduction: a page that breathes ---------- */
+.wd-intro {
+  max-width: var(--measure-read);
+  margin: 0 auto;
+}
+.wd-intro__hero {
+  text-align: center;
+  padding: var(--space-4) 0 var(--space-6);
+}
+.wd-intro__art {
+  display: flex;
+  justify-content: center;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+.wd-intro__art svg { width: 5rem; height: 5rem; }
+.wd-intro__art--hero svg { width: 6.5rem; height: 6.5rem; }
+.wd-intro__art [data-draw] {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: art-draw calc(var(--duration-slower) * 2) var(--ease-out) 120ms forwards;
+}
+.wd-intro__h1 {
+  font-family: var(--font-reading);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  margin: var(--space-2) 0;
+}
+.wd-intro__lede {
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  max-width: 28rem;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+.wd-intro__section {
+  margin-bottom: var(--space-7);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--duration-slower) var(--ease-out),
+              transform var(--duration-slower) var(--ease-out);
+}
+.wd-intro__section.is-seen { opacity: 1; transform: none; }
+.wd-intro__title {
+  font-family: var(--font-reading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-4);
+}
+.wd-intro__section p {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-reading);
+  text-align: left;
+  margin-bottom: var(--para-space);
+}
+.wd-intro__section p:last-child { margin-bottom: 0; }
+.wd-intro__aside {
+  font-size: var(--text-xs) !important;
+  font-family: var(--font-ui) !important;
+  color: var(--color-ink-3);
+  border-left: 2px solid var(--color-line-strong);
+  padding-left: var(--space-3);
+}
+.wd-intro__cta { padding-bottom: var(--space-4); }
+.wd-intro__closing {
+  font-family: var(--font-reading);
+  font-style: italic;
+  color: var(--color-ink-2);
+  text-align: center !important;
+}
+
+/* ---------- The Tree: branch header + unit cards ----------
+   Reuses .stage-head, .list-item and .journey-track wholesale — the
+   Tree is structurally the same "grouped, ordered list" every other
+   journey uses; only the grouping key (branch, not tier) differs. */
+.wd-branch-desc {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  margin: 0 0 var(--space-3);
+}
+
+/* ---------- Notice: the shared fragment, lit without a tap ---------- */
+.wd-notice {
+  margin-bottom: var(--space-4);
+}
+.wd-notice__word {
+  font-family: var(--font-reading);
+  font-size: var(--text-read);
+  line-height: var(--leading-body);
+  margin-bottom: var(--space-2);
+}
+.wd-notice__word mark {
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  border-radius: var(--radius-xs);
+  padding: 0 0.2em;
+  font-weight: var(--weight-semibold);
+}
+.wd-notice__sentence {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  margin-bottom: var(--space-2);
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--color-line-strong);
+}
+.wd-notice__sentence mark {
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  border-radius: var(--radius-xs);
+  padding: 0 0.2em;
+  font-style: normal;
+  font-weight: var(--weight-semibold);
+}
+
+/* ---------- Understand: the one place --color-info gets to lead ----------
+   WORD_DNA_BIBLE §7: blue is understanding, and this is the only
+   surface in the whole app built around that token as its star. */
+.wd-understand {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-info-bg);
+  border-left: 3px solid var(--color-info);
+  margin: var(--space-4) 0;
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.wd-understand__eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-info);
+  margin: 0 0 var(--space-2);
+}
+.wd-understand p {
+  font-family: var(--font-reading);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+/* ---------- Apply: the transfer challenge ---------- */
+.wd-apply {
+  margin: var(--space-4) 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+}
+.wd-apply__eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-warning);
+  margin: 0 0 var(--space-2);
+}
+.wd-apply__prompt {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  margin: 0 0 var(--space-3);
+}
+
+/* ---------- The teaching layer (revealed verdict + notes) ---------- */
+.wdx-verdict {
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  margin: var(--space-4) 0 var(--space-2);
+  animation: explanation-in var(--duration-slow) var(--ease-out) both;
+}
+.wdx-verdict.is-correct { color: var(--color-correct-ink); }
+.wdx-verdict.is-wrong   { color: var(--color-wrong-ink); }
+.wdx__habit {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-accent-subtle);
+  margin: var(--space-4) 0;
+}
+.wdx__habit-glyph {
+  flex: none;
+  width: 1.9rem; height: 1.9rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: var(--text-xs);
+}
+.wdx__habit-label {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 2px;
+}
+.wdx__habit p { margin: 0; font-size: var(--text-sm); color: var(--color-ink); }
+
+/* ---------- Word Garden ---------- */
+.wd-garden-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+}
+.wd-garden-item + .wd-garden-item { border-top: 1px solid var(--color-line); }
+.wd-garden-item__word {
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+.wd-garden-item__meaning {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  margin: 2px 0 0;
+}
+.wd-garden-item__source {
+  flex: none;
+  font-size: var(--text-2xs);
+  color: var(--color-ink-3);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- Today's Discovery (Home widget) ---------- */
+.wd-discovery__word {
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-1);
+}
+.wd-discovery__meaning {
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  margin: 0;
+}
