@@ -65,7 +65,7 @@ export async function renderSession(outlet, { storage }, params) {
   outlet.innerHTML = `
     <section class="screen">
       <div class="session-bar">
-        <a href="#/rc">← Library</a>
+        <a href="#/rc">← Journey</a>
         <span class="hint" id="min-left"></span>
         <cat-timer></cat-timer>
         <div class="read-progress" aria-hidden="true">
@@ -215,8 +215,8 @@ export async function renderSession(outlet, { storage }, params) {
     function syncActions(mode) {
       if (mode === 'answering') {
         actions.innerHTML = `
-          <button class="btn" id="skip">Skip</button>
-          <button class="btn btn--primary" id="submit" ${selected ? '' : 'disabled'}>Submit</button>
+          <button class="btn" id="skip">Set aside</button>
+          <button class="btn btn--primary" id="submit" ${selected ? '' : 'disabled'}>Lock it in</button>
         `;
         actions.querySelector('#submit').addEventListener('click', onSubmit);
         actions.querySelector('#skip').addEventListener('click', onSkip);
@@ -329,7 +329,7 @@ export async function renderSession(outlet, { storage }, params) {
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">
-          <a href="#/rc">← Library</a>
+          <a href="#/rc">← Journey</a>
           <a href="#/rc/mentor/${passage.meta.id}">Learning Page</a>
         </div>
 

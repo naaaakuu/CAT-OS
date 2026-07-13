@@ -42,7 +42,7 @@ export async function renderReview(outlet, { storage }, params) {
   outlet.innerHTML = `
     <section class="screen">
       <div class="session-bar">
-        <a href="#/rc">← Library</a>
+        <a href="#/rc">← Journey</a>
         <span>Attempt of ${escapeHTML(formatDate(last.finished_at))} · ${formatDuration(last.duration_ms)}</span>
       </div>
       <cat-passage></cat-passage>

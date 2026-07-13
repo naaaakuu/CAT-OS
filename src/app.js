@@ -16,9 +16,13 @@ import { registerRC } from './modules/reading-comprehension/index.js';
 import { registerPJ } from './modules/para-jumbles/index.js';
 import { registerPS } from './modules/para-summary/index.js';
 import { registerOOO } from './modules/odd-one-out/index.js';
-import { resetPSIntro } from './modules/para-summary/logic/store.js';
-import { resetOOOIntro } from './modules/odd-one-out/logic/store.js';
-import { listRCItems } from './core/content-loader/loader.js';
+import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
+import { resetPSIntro, latestByItem as latestPSByItem } from './modules/para-summary/logic/store.js';
+import { resetOOOIntro, latestByItem as latestOOOByItem } from './modules/odd-one-out/logic/store.js';
+import { recommendNextPJ } from './modules/para-jumbles/logic/tiers.js';
+import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
+import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
+import { listRCItems, listPJItems, listPSItems, listOOOItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
 import { evaluate } from './core/engagement/achievements.js';
 import { dashboardLine } from './core/engagement/messages.js';
@@ -48,7 +52,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.12.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.12.1'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -99,6 +103,38 @@ async function saveReadingSize(size) {
 /* ------------------------------------------------------------------ */
 /* Shell screens                                                       */
 /* ------------------------------------------------------------------ */
+
+/* Home's "Continue" card follows whichever journey the learner is
+   actually in, not just Reading Comprehension: it reads the most
+   recent session's module and asks that module's OWN recommender
+   (the same one its browser page already uses), so the app's most
+   prominent CTA never contradicts what the learner was just doing.
+   RC sessions carry no `module` field, so an absent/unrecognized
+   value returns null and renderHome falls through to the original
+   RC-only card below — no change for RC-only learners. */
+const CONTINUE_INFO = {
+  pj: { noun: 'Para Jumbles journey', verb: 'Solve it now', prefix: '/pj' },
+  ps: { noun: 'Para Summary journey', verb: 'Try it now', prefix: '/ps' },
+  ooo: { noun: 'Odd One Out journey', verb: 'Try it now', prefix: '/ooo' },
+};
+
+async function recommendContinue(sessions) {
+  const lastModule = [...sessions].sort((a, b) => b.finished_at.localeCompare(a.finished_at))[0]?.module;
+  const info = CONTINUE_INFO[lastModule];
+  if (!info) return null;
+  try {
+    const [items, latest] = lastModule === 'pj' ? await Promise.all([listPJItems(), latestPJByItem(storage)])
+      : lastModule === 'ps' ? await Promise.all([listPSItems(), latestPSByItem(storage)])
+        : await Promise.all([listOOOItems(), latestOOOByItem(storage)]);
+    const solvedIds = new Set([...latest.entries()].filter(([, a]) => a.is_correct === true).map(([id]) => id));
+    const triedIds = new Set([...latest.entries()].filter(([, a]) => a.is_correct !== null).map(([id]) => id));
+    const recommend = lastModule === 'pj' ? recommendNextPJ : lastModule === 'ps' ? recommendNextPS : recommendNextOOO;
+    const next = recommend(items, solvedIds, triedIds);
+    return next ? { info, next } : null;
+  } catch {
+    return null; // offline/uncached: Home falls back to the RC card
+  }
+}
 
 async function renderHome(outlet) {
   const now = new Date();
@@ -151,12 +187,19 @@ async function renderHome(outlet) {
 
   /* ---- Continue learning (journey-aware, reason stated) ---- */
   const next = recommendNext(items, sessions);
+  const continuing = stats.sessions > 0 ? await recommendContinue(sessions) : null;
   const continueHTML = stats.sessions === 0 ? `
     <div class="card">
       <h2>Reading Comprehension</h2>
       <p class="muted">Read deeply, answer carefully, and learn exactly why each
       option is right or wrong. Everything works offline and stays on your device.</p>
       <a class="btn btn--primary btn--block" href="#/rc">Start practicing</a>
+    </div>` : continuing ? `
+    <div class="card">
+      <h2>Continue your ${continuing.info.noun}</h2>
+      <p class="muted"><em>${continuing.next.item.title}</em> — ${continuing.next.tier.label}, ${continuing.next.item.difficulty}, ~${continuing.next.item.estimated_time_min} min.</p>
+      <p class="hint" style="margin-bottom: var(--space-3)">${continuing.next.reason}</p>
+      <a class="btn btn--primary btn--block" href="#${continuing.info.prefix}/session/${continuing.next.item.id}">${continuing.info.verb}</a>
     </div>` : next ? `
     <div class="card">
       <h2>Continue your journey</h2>
@@ -393,6 +436,16 @@ function renderSettings(outlet) {
         <h2>Learning</h2>
         <div class="row">
           <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">⇅</span>
+            <div>
+              <div class="row__label">Para Jumbles introduction</div>
+              <div class="row__hint">Show the first-time introduction again</div>
+            </div>
+          </div>
+          <button class="btn" id="pj-intro-reset">Show again</button>
+        </div>
+        <div class="row">
+          <div class="row__lead">
             <span class="row__icon" aria-hidden="true">§</span>
             <div>
               <div class="row__label">Para Summary introduction</div>
@@ -587,6 +640,18 @@ function renderSettings(outlet) {
     }
   });
   syncFocusNoise();
+
+  // --- Learning: bring the Para Jumbles introduction back ---
+  outlet.querySelector('#pj-intro-reset').addEventListener('click', async () => {
+    try {
+      await resetPJIntro(storage);
+      cue('toggle');
+      toast('The introduction will greet you on your next visit to Para Jumbles.', 'info', { mute: true });
+    } catch (err) {
+      toast('Could not reset the introduction.', 'error');
+      console.error('[CAT OS]', err);
+    }
+  });
 
   // --- Learning: bring the Para Summary introduction back ---
   outlet.querySelector('#ps-intro-reset').addEventListener('click', async () => {

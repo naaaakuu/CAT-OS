@@ -334,7 +334,7 @@ export async function renderMentor(outlet, { storage }, params) {
   outlet.innerHTML = `
     <section class="screen">
       <div class="session-bar">
-        <a href="#/rc">← Library</a>
+        <a href="#/rc">← Journey</a>
         ${last ? `<a href="#/rc/review/${item.meta.id}">Your answers</a>` : ''}
       </div>
 

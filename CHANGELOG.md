@@ -4,6 +4,50 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.12.1 — 2026-07-13 — Product audit: four cross-module fixes
+
+A full screen-by-screen audit of every flow in the app (Home, Practice,
+Growth, Settings, and all four module journeys), looking specifically for
+places a first-time CAT aspirant could hesitate or feel lost. No new
+features; four concrete fixes, each confirmed in a real browser against
+live IndexedDB state before shipping.
+
+- **Home's "Continue" card is now module-aware.** It previously asked
+  `core/learning/journey.js`'s RC-only recommender no matter what the
+  learner actually last practiced, so a learner deep in Para Jumbles kept
+  being nudged back to Reading Comprehension by the app's single most
+  prominent call to action. Home now reads the most recent session's
+  `module` and asks that module's own recommender (the same one its
+  browser page already uses via `recommendNextPJ`/`PS`/`OOO`), so the
+  card always says "Continue your Para Jumbles journey" (etc.) and links
+  straight into the right session. RC-only learners see no change.
+- **Para Jumbles introduction now has a Settings row.** Para Summary and
+  Odd One Out both shipped a "Show again" row for their first-time
+  introduction (`resetPSIntro`, `resetOOOIntro`); Para Jumbles had the
+  identical `markPJIntroSeen`/`hasSeenPJIntro` mechanic but no
+  `resetPJIntro` and no Settings row, an asymmetry left over from before
+  the "Settings can reset it" pattern existed. Added `resetPJIntro`
+  (`modules/para-jumbles/logic/store.js`) and wired it in, matching PS/OOO
+  exactly.
+- **RC's session screens now say "Journey," matching RC's own name for
+  itself.** RC's browser page has always titled itself "Your reading
+  journey," but its session, mentor-moment, and review screens said
+  "← Library" (RC's own inconsistency, four places), while Para Jumbles,
+  Para Summary, and Odd One Out all said "← Journey" (six places,
+  matching their own browser titles). Renamed RC's four to "← Journey."
+- **RC's action verbs now match the other three modules.** RC still said
+  "Skip" and "Submit"; Para Jumbles, Para Summary, and Odd One Out had
+  since converged on "Set aside" and "Lock it in" for the identical two
+  actions. A learner moving between modules met two vocabularies for the
+  same actions. Aligned RC's session screen to the newer, established pair.
+
+Verified: `tools/verify.mjs` (all 13 checks), full ES module graph
+resolves cleanly under Node, and a scripted Chromium pass through Home →
+RC session → Settings → Para Jumbles first-time intro → solve → Home
+again, with zero console errors and the "Continue your Para Jumbles
+journey" card confirmed on screen. `CACHE_VERSION` bumped to 14 (five
+precached files changed).
+
 ## 0.12.0 — 2026-07-11 — Odd One Out
 
 The fourth VARC module, built faithfully to `ODD_MAN_OUT_BIBLE.md`. The

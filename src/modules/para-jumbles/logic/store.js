@@ -41,7 +41,7 @@ export async function latestByItem(storage) {
 
 /* ---------------- First-time introduction ----------------
    One settings flag: the introduction shows once, then lives one tap
-   away ("How this journey works") forever. */
+   away ("How this journey works") forever. Settings can reset it. */
 
 export async function hasSeenPJIntro(storage) {
   const record = await storage.get(STORES.SETTINGS, 'pj:intro-seen');
@@ -50,4 +50,9 @@ export async function hasSeenPJIntro(storage) {
 
 export function markPJIntroSeen(storage) {
   return storage.put(STORES.SETTINGS, { id: 'pj:intro-seen', value: true });
+}
+
+/** Settings: show the introduction again on the next visit to /pj. */
+export function resetPJIntro(storage) {
+  return storage.put(STORES.SETTINGS, { id: 'pj:intro-seen', value: false });
 }

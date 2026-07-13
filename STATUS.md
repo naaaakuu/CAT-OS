@@ -4,7 +4,7 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-07-11 — Odd One Out module complete. App version 0.12.0._
+_Last updated: 2026-07-13 — Product audit pass. App version 0.12.1._
 
 ## Application
 
@@ -103,6 +103,31 @@ _Last updated: 2026-07-11 — Odd One Out module complete. App version 0.12.0._
   convention, but the official scheme is announced per exam cycle; the result
   screen says so and shows accuracy as the primary honest signal.
 
+- **Product audit (0.12.1):** a full screen-by-screen pass over every
+  shell and module screen, looking for places a first-time CAT aspirant
+  could hesitate. No new features (the brief explicitly excluded them);
+  four fixes, all confirmed in a scripted Chromium pass against live
+  IndexedDB before shipping, not just `verify.mjs`. The headline finding:
+  Home's "Continue" card (the app's single most prominent call to action)
+  asked the RC-only recommender regardless of which module the learner
+  actually last practiced, so a Para-Jumbles-focused learner was
+  perpetually nudged back to Reading Comprehension. Home now asks
+  whichever module's own recommender matches the most recent session,
+  reusing each module's existing `recommendNext{PJ,PS,OOO}` rather than
+  inventing new logic. The other three fixes are straight consistency
+  bugs inherited from RC shipping before the PJ/PS/OOO vocabulary
+  converged: RC alone said "← Library" (its own browser page has always
+  called itself "Your reading journey") and "Skip"/"Submit" where the
+  three newer modules settled on "← Journey" and "Set aside"/"Lock it
+  in"; and Para Jumbles alone was missing the Settings → Learning "Show
+  again" row that Para Summary and Odd One Out both have. Several other
+  observations (the RC Learning Page's length, Para Summary's longer
+  per-item loop, the module intros' length) were deliberately left
+  untouched: each is either a documented, deliberate pedagogical design
+  (Bible-mandated) or a signature surface iterated across several prior
+  milestones, so changing it is a call for the owner, not an audit
+  autopilot. `CACHE_VERSION` → 14 (five precached files changed); no DB
+  migration, no new files, no module touches another module's files.
 - **Odd One Out (0.12.0):** the fourth module, built to `ODD_MAN_OUT_BIBLE.md`.
   Central design decision, straight from the Bible: the module teaches
   **structural reading, not elimination tricks** — the outlier is on-topic but
