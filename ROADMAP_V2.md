@@ -175,6 +175,15 @@ order logic; notebook integration; interaction passes keyboard-only use.
 
 ### 0.8.0 — Vocabulary
 
+> **Superseded by what actually shipped.** This sketch (vocab drawn from
+> passage `vocabulary` arrays) was not what was built. Word DNA (0.13.0)
+> shipped the module instead, as pattern-transfer through roots/prefixes/
+> suffixes/foreign words/CAT vocabulary; the Language Garden (0.14.0,
+> `LANGUAGE_GARDEN_BIBLE.md`) then replaced Word DNA's Home/Practice
+> presence with a living-garden model built around no score at all
+> (Word DNA is soft-hidden, not removed — see STATUS.md). Left here for
+> history; do not use this section to plan further vocabulary work.
+
 **Objective:** activate the vocabulary data already shipping inside every
 passage.
 **Features:** vocab practice drawn from the `vocabulary` arrays of studied

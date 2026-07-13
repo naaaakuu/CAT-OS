@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0004",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "cred",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF. Parts, glosses, context sentences and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-lg-001",
+    "reviewer_notes": "cred is the closing plant: a family built entirely around one axis of doubt and trust, quietly setting up the Orchard's future doubt cluster (Bible §5.2 names credulous/incredulous directly) without any code coupling to it."
+  },
+  "root": {
+    "label": "cred",
+    "origin_language": "Latin",
+    "core_meaning": "to believe",
+    "mentor_note": "cred is the one root behind an entire family of doubt and trust."
+  },
+  "attempt": {
+    "direction_prompt": "Is he doubting, or believing too easily?",
+    "options": [
+      { "text": "Doubting", "correct": false },
+      { "text": "Believing too easily", "correct": true }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0016",
+      "held_out": false,
+      "parts": [
+        { "text": "cred", "gloss": "believe", "is_root": true },
+        { "text": "ulous", "gloss": "tending to", "is_root": false }
+      ],
+      "context_sentences": [
+        "The credulous investor accepted every promise the scheme's founder made, without once demanding evidence.",
+        "Even the usually credulous crowd grew suspicious once the second envelope arrived empty."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0017",
+      "held_out": false,
+      "parts": [
+        { "text": "cred", "gloss": "believe", "is_root": true },
+        { "text": "ible", "gloss": "able to be", "is_root": false }
+      ],
+      "context_sentences": [
+        "The witness gave a credible account, consistent in every detail with the earlier report.",
+        "Without a credible source, the newspaper refused to run the story at all."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0018",
+      "held_out": false,
+      "parts": [
+        { "text": "in", "gloss": "not", "is_root": false },
+        { "text": "cred", "gloss": "believe", "is_root": true },
+        { "text": "ible", "gloss": "able to be", "is_root": false }
+      ],
+      "context_sentences": [
+        "The rescue seemed incredible until the footage confirmed every detail of it.",
+        "She described an incredible coincidence that even her closest friends struggled to accept."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0019",
+      "held_out": true,
+      "parts": [
+        { "text": "in", "gloss": "not", "is_root": false },
+        { "text": "cred", "gloss": "believe", "is_root": true },
+        { "text": "ulous", "gloss": "tending to", "is_root": false }
+      ],
+      "context_sentences": [
+        "The professor stayed incredulous even after being shown the original document twice.",
+        "His incredulous stare told the class exactly what he thought of the excuse."
+      ],
+      "construct_options": [
+        { "text": "Unable or unwilling to believe something", "correct": true },
+        { "text": "Impossible to believe under any circumstance", "correct": false, "trap": "literal_only" },
+        { "text": "Certain that something is completely true", "correct": false, "trap": "wrong_root" }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0020",
+      "held_out": true,
+      "parts": [
+        { "text": "cred", "gloss": "believe", "is_root": true },
+        { "text": "ential", "gloss": "relating to", "is_root": false }
+      ],
+      "context_sentences": [
+        "No one questioned her credential once the certificate was produced.",
+        "The committee asked every applicant to present a credential proving the claimed experience."
+      ],
+      "construct_options": [
+        { "text": "Proof of someone's ability or trustworthiness", "correct": true },
+        { "text": "A firm belief that cannot be shaken", "correct": false, "trap": "literal_only" },
+        { "text": "A formal accusation that must be answered", "correct": false, "trap": "wrong_root" }
+      ]
+    }
+  ]
+}

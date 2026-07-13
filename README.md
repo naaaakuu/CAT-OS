@@ -55,7 +55,24 @@ replaces tiers; a derived **Word Garden** collects every word earned
 through a correct transfer; **Today's Discovery** offers one word a day
 without being asked. The first content batch is small but complete
 end to end; the schema is designed so future batches are pure content,
-no code changes.
+no code changes. (Word DNA's Home/Practice presence is soft-hidden as of
+0.14.0, in favour of the Language Garden below; its routes and data are
+untouched.)
+
+A sixth space, the **Language Garden**, is not a journey at all. It is a
+small living root grove the learner tends instead of a question type to
+practise: no score, no XP, no streak, ever, inside it. The first open
+hands straight to a real sentence and a strange word — no tutorial. Six
+beats teach one root family by construction (tap a word's parts, watch
+them join, then build the meaning of a word nobody taught you), and a
+later visit is pure retrieval on the same family. A quiet spacing
+scheduler decides, from session history alone, when a plant is ready to
+be revisited, and a small vector-art `<cat-plant>` shows exactly what it
+knows: Seed, Sprout, Sapling, In leaf, or Evergreen, gold when a review
+is welcome, softly bare with buds when it has waited a while — never
+red, never "due," never a debt. Currently ships four hand-authored root
+families (`content/language-garden/`) over a small shared word substrate
+(`content/vocabulary/`) every future garden will reuse.
 Progress is motivating without being loud: XP and levels, daily streaks,
 achievements, a weekly activity strip, and optional whisper-level haptics and
 sound — all derived from your stored sessions, all offline.
@@ -109,9 +126,9 @@ Run it before every release.
 | `src/core/` | Logic with no UI: storage adapter, router, content loader + validator, session engine, scoring, engagement, learning journey, the reading mentor (`core/mentor/`), utils |
 | `src/shell/` | Extracted shell screens (Growth); app.js still hosts the rest |
 | `src/ui/` | Design tokens, base styles, reusable Web Components |
-| `src/modules/` | The five VARC modules: `reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/` (each: browser / session / learn, plus its own logic) |
-| `content/schema/` | Versioned JSON schemas (`rc.schema.v1–v4`, `pj/ps/ooo/wd.schema.v1`; appended, never edited) |
-| `content/` | Content as JSON by type (`reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/`); `content/index.json` is the registry |
+| `src/modules/` | The five VARC modules: `reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/` (each: browser / session / learn, plus its own logic), plus the sixth, differently-shaped `language-garden/` (grove / plant / session / journal, no score anywhere) |
+| `content/schema/` | Versioned JSON schemas (`rc.schema.v1–v4`, `pj/ps/ooo/wd/vocab/lg.schema.v1`; appended, never edited) |
+| `content/` | Content as JSON by type (`reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/`, `vocabulary/`, `language-garden/`); `content/index.json` is the registry |
 | `tools/verify.mjs` | Offline repository self-check |
 | The documentation corpus | The project's permanent memory — **read `AI_OPERATING_MANUAL.md` first**, then `MASTER_CONTEXT.md` |
 | `STATUS.md` | What actually exists right now (designed / building / shipped) |

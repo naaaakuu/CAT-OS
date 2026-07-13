@@ -20,8 +20,8 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 15;
-const CONTENT_VERSION = 10;
+const CACHE_VERSION = 16;
+const CONTENT_VERSION = 11;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
 const KEEP = [SHELL_CACHE, CONTENT_CACHE];
@@ -41,6 +41,7 @@ const SHELL_FILES = [
   './src/core/engine/ps-session.js',
   './src/core/engine/ooo-session.js',
   './src/core/engine/wd-session.js',
+  './src/core/engine/garden-session.js',
   './src/core/content-loader/loader.js',
   './src/core/content-loader/validator.js',
   './src/core/utils/format.js',
@@ -68,6 +69,7 @@ const SHELL_FILES = [
   './src/core/mentor/wd-voice.js',
   './src/core/mentor/wd-dna.js',
   './src/core/mentor/wd-lesson.js',
+  './src/core/mentor/garden-voice.js',
   './src/shell/growth.js',
   './src/modules/reading-comprehension/index.js',
   './src/modules/reading-comprehension/logic/store.js',
@@ -110,7 +112,18 @@ const SHELL_FILES = [
   './src/modules/word-dna/screens/session.js',
   './src/modules/word-dna/screens/learn.js',
   './src/modules/word-dna/screens/garden.js',
+  './src/modules/language-garden/index.js',
+  './src/modules/language-garden/logic/store.js',
+  './src/modules/language-garden/logic/scene.js',
+  './src/modules/language-garden/logic/journal.js',
+  './src/modules/language-garden/logic/ambient.js',
+  './src/modules/language-garden/logic/audio.js',
+  './src/modules/language-garden/screens/grove.js',
+  './src/modules/language-garden/screens/plant.js',
+  './src/modules/language-garden/screens/session.js',
+  './src/modules/language-garden/screens/journal.js',
   './src/ui/components/cat-nav.js',
+  './src/ui/components/cat-plant.js',
   './src/ui/components/cat-jumble-board.js',
   './src/ui/components/cat-toast.js',
   './src/ui/components/cat-passage.js',
@@ -144,6 +157,8 @@ const CONTENT_FILES = [
   './content/schema/ps.schema.v1.json',
   './content/schema/ooo.schema.v1.json',
   './content/schema/wd.schema.v1.json',
+  './content/schema/vocab.schema.v1.json',
+  './content/schema/lg.schema.v1.json',
   './content/reading-comprehension/rc-0001.json',
   './content/reading-comprehension/rc-0002.json',
   './content/reading-comprehension/rc-0003.json',
@@ -247,6 +262,30 @@ const CONTENT_FILES = [
   './content/word-dna/wd-0010.json',
   './content/word-dna/wd-0011.json',
   './content/word-dna/wd-0012.json',
+  './content/vocabulary/vocab-0001.json',
+  './content/vocabulary/vocab-0002.json',
+  './content/vocabulary/vocab-0003.json',
+  './content/vocabulary/vocab-0004.json',
+  './content/vocabulary/vocab-0005.json',
+  './content/vocabulary/vocab-0006.json',
+  './content/vocabulary/vocab-0007.json',
+  './content/vocabulary/vocab-0008.json',
+  './content/vocabulary/vocab-0009.json',
+  './content/vocabulary/vocab-0010.json',
+  './content/vocabulary/vocab-0011.json',
+  './content/vocabulary/vocab-0012.json',
+  './content/vocabulary/vocab-0013.json',
+  './content/vocabulary/vocab-0014.json',
+  './content/vocabulary/vocab-0015.json',
+  './content/vocabulary/vocab-0016.json',
+  './content/vocabulary/vocab-0017.json',
+  './content/vocabulary/vocab-0018.json',
+  './content/vocabulary/vocab-0019.json',
+  './content/vocabulary/vocab-0020.json',
+  './content/language-garden/lg-0001.json',
+  './content/language-garden/lg-0002.json',
+  './content/language-garden/lg-0003.json',
+  './content/language-garden/lg-0004.json',
 ];
 
 /* Install: precache shell + content, then take over promptly. */

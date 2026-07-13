@@ -39,7 +39,7 @@ function readJSON(rel) {
 
 /* ---- import the app's real validation code ---- */
 const { validate } = await mod('src/core/content-loader/validator.js');
-const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues, oooConsistencyIssues, wdConsistencyIssues } = await mod('src/core/content-loader/loader.js');
+const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues, oooConsistencyIssues, wdConsistencyIssues, vocabConsistencyIssues, lgConsistencyIssues } = await mod('src/core/content-loader/loader.js');
 const { PracticeSession } = await mod('src/core/engine/session.js');
 const { sessionXP, totalXP, levelFromXP, xpForNext } = await mod('src/core/engagement/xp.js');
 const { deriveStreaks, weekActivity, dayKey } = await mod('src/core/engagement/streaks.js');
@@ -219,6 +219,73 @@ if (wdFiles.length > 0) {
   }
 }
 
+/* Vocabulary content: the shared word substrate every Language Garden
+   plant references by id (LANGUAGE_GARDEN_BIBLE §10). */
+console.log('\n1f. Vocabulary JSON: schema + consistency');
+const vocabSchemas = {};
+for (const f of readdirSync(join(root, 'content/schema'))) {
+  if (f.startsWith('vocab.schema.v')) vocabSchemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+}
+const vocabDir = 'content/vocabulary';
+const vocabFiles = existsSync(join(root, vocabDir))
+  ? readdirSync(join(root, vocabDir)).filter((f) => f.endsWith('.json')).sort() : [];
+const vocabById = new Map();
+for (const file of vocabFiles) {
+  const id = file.replace('.json', '');
+  let item;
+  try { item = readJSON(`${vocabDir}/${file}`); }
+  catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+  const schema = vocabSchemas[String(item.schema_version ?? 1)];
+  if (!schema) { bad(`${file}: no vocab schema for version ${item.schema_version}`); continue; }
+  const { valid, errors } = validate(schema, item);
+  if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+  const issues = vocabConsistencyIssues(id, item);
+  if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+  vocabById.set(id, item);
+  ok(`${file} (${item.word})`);
+}
+
+/* Language Garden (lg-*) plants: schema-validate the family file, then
+   manually resolve each member's vocab_id (NOT via loadLGItem — that
+   loader calls fetch(), which has no meaning against the filesystem
+   under plain Node; every other section here reads files the same way)
+   before running the cross-file consistency checks. */
+console.log('\n1g. Language Garden JSON: schema + consistency');
+const lgSchemas = {};
+for (const f of readdirSync(join(root, 'content/schema'))) {
+  if (f.startsWith('lg.schema.v')) lgSchemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+}
+const lgDir = 'content/language-garden';
+const lgFiles = existsSync(join(root, lgDir))
+  ? readdirSync(join(root, lgDir)).filter((f) => f.endsWith('.json')).sort() : [];
+const lgResolved = new Map();
+for (const file of lgFiles) {
+  const id = file.replace('.json', '');
+  let item;
+  try { item = readJSON(`${lgDir}/${file}`); }
+  catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+  const schema = lgSchemas[String(item.schema_version ?? 1)];
+  if (!schema) { bad(`${file}: no Language Garden schema for version ${item.schema_version}`); continue; }
+  const { valid, errors } = validate(schema, item);
+  if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+
+  const missingVocab = item.members.map((m) => m.vocab_id).filter((v) => !vocabById.has(v));
+  if (missingVocab.length) { bad(`${file}: references unknown vocabulary ${missingVocab.join(', ')}`); continue; }
+  const resolved = {
+    ...item,
+    members: item.members.map((m) => {
+      const v = vocabById.get(m.vocab_id);
+      return { ...m, word: v.word, meaning: v.meaning, part_of_speech: v.part_of_speech ?? null };
+    }),
+  };
+  const issues = lgConsistencyIssues(id, resolved);
+  if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+  lgResolved.set(id, resolved);
+  const taught = resolved.members.filter((m) => !m.held_out).length;
+  const reach = resolved.members.length - taught;
+  ok(`${file} (${resolved.root.label}, ${taught} taught, ${reach} reach)`);
+}
+
 console.log('\n2. Registry ↔ files agreement');
 const registry = readJSON('content/index.json');
 const rcRegIds = registry.items.filter((i) => i.type === 'rc').map((i) => i.id).sort();
@@ -338,7 +405,41 @@ for (const entry of registry.items) {
     bad(`${entry.id}: registry word_count ${entry.word_count} ≠ file ${item.meta.word_count}`);
   }
 }
-if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS + ${oooRegIds.length} OOO + ${wdRegIds.length} Word DNA items agree with registry`);
+
+// Vocabulary + Language Garden: same mutual-existence + field-mirror discipline.
+const vocabRegIds = registry.items.filter((i) => i.type === 'vocab').map((i) => i.id).sort();
+const lgRegIds = registry.items.filter((i) => i.type === 'lg').map((i) => i.id).sort();
+const vocabFileIds = vocabFiles.map((f) => f.replace('.json', ''));
+const lgFileIds = lgFiles.map((f) => f.replace('.json', ''));
+for (const id of vocabRegIds) {
+  if (!vocabFileIds.includes(id)) bad(`registry lists vocabulary ${id} but no file exists`);
+}
+for (const id of vocabFileIds) {
+  if (!vocabRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+for (const id of lgRegIds) {
+  if (!lgFileIds.includes(id)) bad(`registry lists Language Garden ${id} but no file exists`);
+}
+for (const id of lgFileIds) {
+  if (!lgRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+for (const entry of registry.items.filter((i) => i.type === 'vocab')) {
+  if (!vocabById.has(entry.id)) continue;
+  if (entry.word !== vocabById.get(entry.id).word) bad(`${entry.id}: registry word ≠ file word`);
+}
+for (const entry of registry.items.filter((i) => i.type === 'lg')) {
+  if (!lgResolved.has(entry.id)) continue;
+  const item = lgResolved.get(entry.id);
+  if (entry.title !== item.meta.title) bad(`${entry.id}: registry title ≠ file meta.title`);
+  if (entry.garden !== item.meta.garden) bad(`${entry.id}: registry garden ≠ file`);
+  if (entry.member_count !== item.members.length) {
+    bad(`${entry.id}: registry member_count ${entry.member_count} ≠ ${item.members.length} members`);
+  }
+  const mins = Math.round(item.meta.estimated_time_sec / 60 * 10) / 10;
+  if (entry.estimated_time_min !== mins) bad(`${entry.id}: registry estimated_time_min ${entry.estimated_time_min} ≠ ${mins}`);
+}
+
+if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS + ${oooRegIds.length} OOO + ${wdRegIds.length} Word DNA + ${vocabRegIds.length} vocab + ${lgRegIds.length} Language Garden items agree with registry`);
 
 console.log('\n3. Service worker precache ↔ disk');
 const sw = readFileSync(join(root, 'service-worker.js'), 'utf8');
@@ -368,10 +469,19 @@ for (const file of wdFiles) {
   const path = `./${wdDir}/${file}`;
   if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
 }
+for (const file of vocabFiles) {
+  const path = `./${vocabDir}/${file}`;
+  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+}
+for (const file of lgFiles) {
+  const path = `./${lgDir}/${file}`;
+  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+}
 if (!listed.includes('./content/index.json')) bad('registry not precached');
 // Every schema version on disk must be precached — offline validation needs it.
 for (const f of readdirSync(join(root, 'content/schema'))) {
-  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v') || f.startsWith('ooo.schema.v') || f.startsWith('wd.schema.v'))
+  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v') || f.startsWith('ooo.schema.v') || f.startsWith('wd.schema.v')
+       || f.startsWith('vocab.schema.v') || f.startsWith('lg.schema.v'))
       && !listed.includes(`./content/schema/${f}`)) {
     bad(`schema not precached: ${f}`);
   }
@@ -1405,6 +1515,157 @@ if (wdFiles.length === 0) {
   // earlier sections) must never mask this section's own "wd:"/"wd X:" checks.
   if (problems.filter((p) => p.startsWith('wd:') || p.startsWith('wd ')).length === 0) {
     ok('plain accuracy scoring, module-tagged records, calm voice, DNA floors, one lesson per set');
+  }
+}
+
+console.log('\n15. Language Garden dry run (voice · scheduler · session · audio identity)');
+if (lgFiles.length === 0) {
+  ok('no Language Garden content yet — skipped');
+} else {
+  const gardenVoice = await mod('src/core/mentor/garden-voice.js');
+  const rcVoice = await mod('src/core/mentor/voice.js');
+  const { computePlantState, GardenSession, RUNG_INTERVALS_MS, GOLD_WINDOW_MS, EVERGREEN_AT_REVISITS } = await mod('src/core/engine/garden-session.js');
+
+  /* -- The garden's mentor never judges either: lint its whole vocabulary. -- */
+  {
+    const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
+    const offenders = [];
+    const walk = (value, path) => {
+      if (typeof value === 'string') {
+        for (const re of banned) if (re.test(value)) offenders.push(`${path}: "${value.slice(0, 60)}…"`);
+        if (value.includes('!')) offenders.push(`${path}: exclamation mark in "${value.slice(0, 60)}…"`);
+      } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${path}[${i}]`));
+      else if (value && typeof value === 'object') {
+        for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
+      } else if (typeof value === 'function') {
+        try { walk(value('cede', 'seed-a'), `${path}()`); } catch { /* signature mismatch is fine */ }
+      }
+    };
+    for (const [name, exported] of Object.entries(gardenVoice)) {
+      if (name === 'pick') continue;
+      walk(exported, name);
+    }
+    if (offenders.length) offenders.forEach((o) => bad(`garden: mentor voice uses judgment language or "!" — ${o}`));
+  }
+
+  /* -- Scheduler: computePlantState is a pure, deterministic function of
+     history + now, and never demotes. -- */
+  {
+    const seed = computePlantState([], 1_000_000);
+    if (seed.stage !== 'seed' || seed.due !== 'none') bad('garden scheduler: empty history must be Seed, never due');
+
+    const plantedAt = new Date(2026, 0, 1, 10, 0, 0).getTime();
+    const grow = { session_type: 'grow', finished_at: new Date(plantedAt).toISOString() };
+
+    const justGrown = computePlantState([grow], plantedAt + 60_000); // 1 minute later
+    if (justGrown.stage !== 'sprout') bad(`garden scheduler: fresh grow should be Sprout, got ${justGrown.stage}`);
+
+    const settled = computePlantState([grow], plantedAt + RUNG_INTERVALS_MS[0] + 1000);
+    if (settled.stage !== 'sapling') bad(`garden scheduler: past rung 0 with no revisit should be Sapling, got ${settled.stage}`);
+    if (settled.due !== 'gold') bad(`garden scheduler: just past its first interval should be Gold, got ${settled.due}`);
+
+    const longNeglected = computePlantState([grow], plantedAt + RUNG_INTERVALS_MS[0] + GOLD_WINDOW_MS + 1000);
+    if (longNeglected.due !== 'bare') bad(`garden scheduler: long past the gold window should be Bare with buds, got ${longNeglected.due}`);
+
+    // Four CLEAN revisits, each exactly at its own next_review_at, reach evergreen.
+    let history = [grow];
+    let t = plantedAt;
+    for (let i = 0; i < EVERGREEN_AT_REVISITS; i += 1) {
+      const state = computePlantState(history, t + 5000);
+      t = new Date(state.nextReviewAt).getTime();
+      history = [...history, { session_type: 'revisit', finished_at: new Date(t).toISOString(), clean: true }];
+    }
+    const evergreen = computePlantState(history, t + 1000);
+    if (evergreen.stage !== 'evergreen') bad(`garden scheduler: ${EVERGREEN_AT_REVISITS} clean revisits should reach Evergreen, got ${evergreen.stage}`);
+    if (!evergreen.evergreenAt) bad('garden scheduler: evergreenAt must be set once evergreen');
+
+    // A rocky (non-clean) revisit still regrows (stage advances) but must
+    // NOT shrink the interval on the next round — never a demotion.
+    const rockyHistory = [grow, { session_type: 'revisit', finished_at: new Date(plantedAt + RUNG_INTERVALS_MS[0] + 1000).toISOString(), clean: false }];
+    const afterRocky = computePlantState(rockyHistory, plantedAt + RUNG_INTERVALS_MS[0] + 2000);
+    if (afterRocky.stage !== 'in_leaf') bad('garden scheduler: a completed rocky revisit should still regrow to In leaf');
+    if (afterRocky.rung !== 0) bad('garden scheduler: a rocky revisit must not advance the rung (never a demotion, but never a shortcut either)');
+
+    if (JSON.stringify(computePlantState(history, t + 1000)) !== JSON.stringify(evergreen)) {
+      bad('garden scheduler: computePlantState is not deterministic');
+    }
+  }
+
+  /* -- GardenSession: a real Grow session end to end, on real content. -- */
+  {
+    const cede = lgResolved.get('lg-0001');
+    if (!cede) {
+      ok('lg-0001 (cede) not present — GardenSession dry run skipped');
+    } else {
+      const siblings = [...lgResolved.values()]
+        .filter((f) => f.meta.id !== cede.meta.id)
+        .map((f) => ({ id: f.meta.id, label: f.root.label, core_meaning: f.root.core_meaning }));
+
+      let t = 2_000_000;
+      const session = new GardenSession(cede, 'grow', siblings, { now: () => (t += 1000) });
+
+      const attemptOpts = session.attemptOptions();
+      if (attemptOpts.filter((o) => o.correct).length !== 1) bad('garden session: attemptOptions must carry exactly one correct option');
+      const correctAttemptIdx = attemptOpts.findIndex((o) => o.correct);
+      if (!session.answerAttempt(correctAttemptIdx).is_correct) bad('garden session: answerAttempt did not recognize the correct option it just offered');
+
+      for (let i = 0; i < session.taught.length; i += 1) session.confirmSpreadMember(i);
+
+      const reachOpts = session.reachOptions(0, 1);
+      if (reachOpts.filter((o) => o.correct).length !== 1) bad('garden session: reachOptions must carry exactly one correct option');
+      const correctReachIdx = reachOpts.findIndex((o) => o.correct);
+      if (!session.answerReach(0, correctReachIdx, 1).is_correct) bad('garden session: answerReach did not recognize the correct option it just offered');
+
+      const record = session.finish();
+      if (record.module !== 'lg' || record.kind !== 'garden-session' || record.garden !== 'root_grove') {
+        bad('garden session: record missing module/kind/garden tags');
+      }
+      if (record.session_type !== 'grow' || record.family_id !== cede.meta.id) bad('garden session: record family/type wrong');
+      if (record.spread.length !== session.taught.length || record.spread.some((s) => !s.walked)) {
+        bad('garden session: spread record incomplete');
+      }
+      if (record.reach?.is_correct !== true) bad('garden session: reach record did not carry the correct verdict');
+      if ('score' in record || 'marks' in record) bad('garden session: no score of any kind may exist on a garden-session record');
+
+      // Determinism: the SAME session id must reshuffle to the SAME order
+      // on a second call (so a re-render never contradicts itself), and a
+      // different attempt number must be free to reshuffle differently.
+      if (JSON.stringify(session.attemptOptions()) !== JSON.stringify(attemptOpts)) bad('garden session: attemptOptions is not stable within one session');
+
+      // A revisit, on the same content, exercises the key/member-check path.
+      let t2 = 3_000_000;
+      const revisit = new GardenSession(cede, 'revisit', siblings, { now: () => (t2 += 1000) });
+      const keyOpts = revisit.keyRetrievalOptions();
+      if (keyOpts.length !== 3 || keyOpts.filter((o) => o.correct).length !== 1) bad('garden session: keyRetrievalOptions must offer 3 options, exactly 1 correct');
+      const [ia, ib] = revisit.memberCheckIndices(0);
+      const memberOpts = revisit.memberCheckOptions(ia);
+      if (memberOpts.filter((o) => o.correct).length !== 1) bad('garden session: memberCheckOptions must carry exactly one correct option');
+      revisit.answerKeyRetrieval(keyOpts.findIndex((o) => o.correct));
+      revisit.answerMemberCheck(ia, memberOpts.findIndex((o) => o.correct));
+      revisit.answerMemberCheck(ib, revisit.memberCheckOptions(ib).findIndex((o) => o.correct));
+      const revisitRecord = revisit.finish();
+      if (revisitRecord.session_type !== 'revisit') bad('garden session: revisit record has wrong session_type');
+      if (revisitRecord.clean !== null && typeof revisitRecord.clean !== 'boolean') bad('garden session: revisit record must carry a boolean clean flag');
+    }
+  }
+
+  /* -- Audio identity: import-safe under Node, disabled path is a no-op. -- */
+  {
+    const audio = await mod('src/modules/language-garden/logic/audio.js');
+    const REQUIRED = ['key', 'growth', 'leafTap', 'bloom'];
+    for (const n of REQUIRED) if (!audio.GARDEN_SOUND_NAMES.includes(n)) bad(`garden audio: sound "${n}" missing from the engine`);
+    try {
+      audio.playGardenSound('key');
+      audio.unlockGardenAudio();
+      audio.startGardenAmbience();
+      audio.stopGardenAmbience();
+    } catch (e) {
+      bad(`garden audio: disabled play path threw — ${e.message}`);
+    }
+  }
+
+  if (problems.filter((p) => p.startsWith('garden')).length === 0) {
+    ok('calm voice, honest scheduler (never demotes), a real Grow + Revisit session, no score anywhere, audio import-safe');
   }
 }
 

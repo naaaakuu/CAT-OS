@@ -1,0 +1,129 @@
+{
+  "$id": "lg.schema.v1",
+  "title": "CAT OS Language Garden plant (family), schema v1",
+  "description": "One plant: a root family in the Root Grove today (LANGUAGE_GARDEN_BIBLE §6.1), the grouping layer the Bible asks for above vocab-NNNN word content. `garden` names which of the five gardens this plant belongs to (only 'root_grove' ships content in this first vertical slice; the other four are reserved exactly as WORD_DNA_BIBLE reserved 'confused' before that content existed). A plant never inlines a word: every member is `vocab_id` + the teaching layer authored specifically for this family (its morpheme parts, their glosses, and two context sentences — one for first meeting the family, one 'fresh' sentence for later revisits, so recognition attaches to the word, not a memorised sentence, per Bible §6.6). Exactly the taught (non held_out) members are walked in the session's Spread beat; held_out members are the Reach reserve (Bible §6.1: 'at least two reserved untaught words'), each carrying its own construct_options so the Reach beat can be scored as a construction, never a graded guess (Bible §5.5).",
+  "type": "object",
+  "required": ["schema_version", "meta", "root", "attempt", "members"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+
+    "meta": {
+      "type": "object",
+      "required": [
+        "id", "type", "version", "status", "garden", "title",
+        "estimated_time_sec", "source", "date_added", "batch_id", "reviewer_notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id":   { "type": "string", "pattern": "^lg-[0-9]{4}$" },
+        "type": { "const": "lg" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status":  { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "garden": {
+          "enum": ["root_grove", "vine_walk", "orchard", "meadow", "twin_patch"],
+          "description": "The garden this plant lives in (LANGUAGE_GARDEN_BIBLE §4). Only root_grove ships content yet."
+        },
+        "title": { "type": "string", "minLength": 1,
+          "description": "The root itself, e.g. \"cede\" — the plant's name on the Grove screen." },
+        "estimated_time_sec": { "type": "integer", "minimum": 60, "maximum": 240 },
+        "source": {
+          "type": "object",
+          "required": ["publication", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication": { "type": "string", "minLength": 1 },
+            "usage_note":  { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id":   { "type": "string", "pattern": "^batch-lg-[0-9]{3}$" },
+        "reviewer_notes": { "type": "string" }
+      }
+    },
+
+    "root": {
+      "type": "object",
+      "required": ["label", "origin_language", "core_meaning"],
+      "additionalProperties": false,
+      "properties": {
+        "label":           { "type": "string", "minLength": 1 },
+        "origin_language": { "enum": ["Latin", "Greek"] },
+        "core_meaning":    { "type": "string", "minLength": 1, "maxLength": 40,
+          "description": "One or two words — the Key beat reads verbatim as '{label}. {origin_language}. {core_meaning}.' (Bible §5.1)." },
+        "mentor_note": { "type": "string", "maxLength": 160,
+          "description": "Optional, one quiet sentence, shown only on the plant detail page, never inside a session (Bible §7: one idea per screen)." }
+      }
+    },
+
+    "attempt": {
+      "type": "object",
+      "required": ["direction_prompt", "options"],
+      "additionalProperties": false,
+      "description": "The opening Encounter+Attempt (Bible §5.1): a directional read on members[0]'s teach sentence, never a definition guess.",
+      "properties": {
+        "direction_prompt": { "type": "string", "minLength": 4, "maxLength": 60 },
+        "options": {
+          "type": "array", "minItems": 2, "maxItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["text", "correct"],
+            "additionalProperties": false,
+            "properties": {
+              "text":    { "type": "string", "minLength": 1, "maxLength": 30 },
+              "correct": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+
+    "members": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 8,
+      "description": "Taught (non held_out) members are walked in Spread, 2 or 3 of them (Bible §5). held_out members are the Reach reserve, at least 2.",
+      "items": {
+        "type": "object",
+        "required": ["vocab_id", "held_out", "parts", "context_sentences"],
+        "additionalProperties": false,
+        "properties": {
+          "vocab_id":  { "type": "string", "pattern": "^vocab-[0-9]{4}$" },
+          "held_out":  { "type": "boolean" },
+          "parts": {
+            "type": "array", "minItems": 1, "maxItems": 5,
+            "items": {
+              "type": "object",
+              "required": ["text", "gloss", "is_root"],
+              "additionalProperties": false,
+              "properties": {
+                "text":    { "type": "string", "minLength": 1 },
+                "gloss":   { "type": "string", "minLength": 1, "maxLength": 40 },
+                "is_root": { "type": "boolean" }
+              }
+            }
+          },
+          "context_sentences": {
+            "type": "array", "minItems": 2, "maxItems": 2,
+            "description": "[0] the teaching sentence (Grow), [1] a fresh sentence reused across revisits (Bible §6.6).",
+            "items": { "type": "string", "minLength": 15, "maxLength": 220 }
+          },
+          "construct_options": {
+            "type": "array", "minItems": 3, "maxItems": 3,
+            "description": "held_out members only: the Reach beat's construction choices, exactly one correct.",
+            "items": {
+              "type": "object",
+              "required": ["text", "correct"],
+              "additionalProperties": false,
+              "properties": {
+                "text":    { "type": "string", "minLength": 1, "maxLength": 90 },
+                "correct": { "type": "boolean" },
+                "trap":    { "enum": ["literal_only", "wrong_root", "context_mismatch"] }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

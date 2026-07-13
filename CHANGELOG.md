@@ -4,6 +4,106 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.14.0 — 2026-07-14 — Language Garden (Root Grove)
+
+The sixth module island, and the first not built around a question-and-answer
+loop at all. Built to a new `LANGUAGE_GARDEN_BIBLE.md`, which explicitly
+replaces the old idea of a "vocabulary module": Word DNA (0.13.0) taught
+roots through notice/predict/apply, scored, XP'd, and celebrated like every
+other module. The Language Garden throws that model out on purpose.
+Vocabulary stops being content to consume and becomes a small living place —
+a grove of root-family trees the learner tends — where growth is never faked
+and nothing is ever scored. This release ships only the first vertical
+slice: the **Root Grove** (Latin and Greek roots, the "decompose" engine of
+the Bible's four; Vine Walk, Orchard, Wildflower Meadow and Twin Patch are
+reserved in the schema but ship no content yet), four hand-authored root
+families, deliberately small — "quality, not quantity" was the owner's
+explicit brief.
+
+### The session, honestly scored by nothing
+- **Six beats, one shape**: Encounter+Attempt (a directional guess on a real
+  sentence, before anything is explained) → Key (the root, its origin, its
+  meaning, one line) → Spread (tap each morpheme to reveal its gloss, watch
+  the parts join into the taught word) → Reach (the SAME tap-and-join
+  mechanic on a word never taught, then construct its meaning from three
+  options) → Growth (one line, one animation, back to the garden). A later
+  visit runs a shorter retrieval-only shape instead: a bare-root Key quiz,
+  two taught members re-tested in fresh context sentences, then one Reach.
+- **The Reach beat cannot be failed.** A wrong first guess gets one pointing
+  line ("Look at the first part.") and a second try; either way the
+  construction lands and the copy is the same: "No one taught you that
+  word." Getting there is the point, not getting it right immediately.
+- **No red, anywhere.** LANGUAGE_GARDEN_BIBLE §8 is explicit that removing
+  red "removes the flinch that makes people avoid review" — an incorrect
+  pick gets the same neutral dimming as every other non-answer, never the
+  shared `cat-option` red state the rest of the app uses freely.
+- **No score, anywhere.** Not a percentage, not a streak, not XP. Garden
+  sessions persist to `STORES.LEARNING` (`kind: 'garden-session'`), not
+  `STORES.SESSIONS` — a deliberate choice so growing a tree can never
+  silently earn XP or streak credit through the shell's existing engagement
+  system, which the Bible names outright as "a second reward economy."
+
+### A spacing scheduler that never demotes
+`core/engine/garden-session.js` derives a plant's life stage (Seed → Sprout
+→ Sapling → In leaf → Evergreen) and whether it is due purely from its
+session history — nothing is ever stored as a conclusion, only recomputed.
+A conservative rung ladder (10 minutes, then 1/3/8/21 days) grows the
+interval only after a CLEAN revisit; a rocky one still regrows the plant
+(canopy fuller, a real animation) but simply doesn't buy a longer interval
+next time. The garden itself enforces "at most one plant asking per visit"
+even when several are technically due (guilt containment, Bible §6.4), and
+offers exactly one open seed to plant on a day nothing is due — never a list,
+never a queue, never copy that references absence.
+
+### A grove that feels alive, cheaply
+`<cat-plant>` draws every life stage and the Gold / Bare-with-buds overlays
+as a small, fixed set of layered vector states (deterministic ring-layout
+math, never Math.random(), never per-leaf simulation) — a garden full of
+evergreens costs the same frame budget as an empty one. A grove visit has a
+~45% chance of one quiet ambient visitor (a bird, a butterfly, a firefly at
+night, a drifting petal), time-of-day sky tinting from the real clock, and —
+purely derived from timestamps already in history — a small nest that
+appears in an evergreen's canopy once it has held that stage for two weeks.
+Sound is a second, deliberately smaller synthesis identity
+(`logic/audio.js`, module-local, not a reuse of the shell's reward sounds):
+two named session sounds (a soft note at the Key, a warm chime at Growth),
+two tap-mechanic grains, and an optional off-by-default ambient bed of
+breeze and distant chirps that reads the shell's own master Sounds
+preference before ever making a sound.
+
+### Content: a new shared substrate, and four plants
+`vocab-NNNN` is the shared word substrate `MASTER_CONTEXT.md` already
+reserved a prefix for: every future garden references words by id instead
+of inlining them. `lg-NNNN` is the grouping layer — a plant's root, its
+opening directional Attempt, and its members' morpheme parts, glosses, and
+two context sentences each (one to teach, one "fresh" sentence every
+revisit reuses, so recognition attaches to the word and not a memorised
+sentence). The loader cross-validates that a member's parts actually
+concatenate to its own word — a real authoring bug (three members were
+missing a connecting vowel: chronometer, chronograph, philosophy) was
+caught by this check before it ever reached a screen. Four families ship:
+**cede** (Bible's own worked example throughout), **chron** (the Bible's
+own Journal example), **phil**, and **cred**.
+
+### Product decision: Word DNA soft-hidden, not removed
+The Bible frames the Garden as replacing "the old vocabulary module," which
+is Word DNA in every practical sense. Owner decision: keep Word DNA's
+routes, code, and data fully intact (nothing here touches
+`src/modules/word-dna/`), but stop advertising it — removed from Home's
+Continue card, Home's daily word widget, and the Practice hub, replaced by
+a correspondingly calm "Your garden" card and a Language Garden Practice
+row. `#/wd` still works for anyone who navigates there directly; restoring
+its Home presence is a one-line revert (see `CONTINUE_INFO` in `app.js`).
+
+No DB migration (the `learning` store already existed, 0.6.0; a new `kind`
+value is additive). Two new content schemas (`vocab.schema.v1.json`,
+`lg.schema.v1.json`), 20 vocabulary words, 4 root families, one new UI
+component (`cat-plant`), one new mentor voice
+(`core/mentor/garden-voice.js`, banned-word-linted like every other
+mentor but deliberately carrying none of the DNA-trait/one-lesson
+apparatus the Bible abolishes for this module). `CACHE_VERSION` → 16,
+`CONTENT_VERSION` → 11.
+
 ## 0.13.0 — 2026-07-13 — Word DNA
 
 The fifth module, and the first not to imitate a CAT question format at

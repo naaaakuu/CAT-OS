@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0001",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "cede",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF. Parts, glosses, context sentences and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-lg-001",
+    "reviewer_notes": "The garden's opening plant: the Bible's own worked example (§5.1, §10). secede is the anchor; intercede is the Bible's own Reach word."
+  },
+  "root": {
+    "label": "cede",
+    "origin_language": "Latin",
+    "core_meaning": "to go",
+    "mentor_note": "cede shows up wherever something moves, yields, or gives way, often quietly."
+  },
+  "attempt": {
+    "direction_prompt": "Are they staying, or leaving?",
+    "options": [
+      { "text": "Staying", "correct": false },
+      { "text": "Leaving", "correct": true }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0001",
+      "held_out": false,
+      "parts": [
+        { "text": "se", "gloss": "apart", "is_root": false },
+        { "text": "cede", "gloss": "go", "is_root": true }
+      ],
+      "context_sentences": [
+        "Several provinces threatened to secede after the ruling divided the coalition beyond repair.",
+        "By the following spring, two more member states had voted to secede from the union entirely."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0002",
+      "held_out": false,
+      "parts": [
+        { "text": "pre", "gloss": "before", "is_root": false },
+        { "text": "cede", "gloss": "go", "is_root": true }
+      ],
+      "context_sentences": [
+        "A long and quiet negotiation would precede any public announcement of the merger.",
+        "In the manuscript, a short preface always seemed to precede the author's more difficult chapters."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0003",
+      "held_out": false,
+      "parts": [
+        { "text": "re", "gloss": "back", "is_root": false },
+        { "text": "cede", "gloss": "go", "is_root": true }
+      ],
+      "context_sentences": [
+        "As the drought continued, the shoreline began to recede further from the old fishing docks.",
+        "Her doubts started to recede once the committee finally published its full report."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0004",
+      "held_out": true,
+      "parts": [
+        { "text": "inter", "gloss": "between", "is_root": false },
+        { "text": "cede", "gloss": "go", "is_root": true }
+      ],
+      "context_sentences": [
+        "The junior diplomat chose to intercede quietly before the dispute reached the ambassador's desk.",
+        "No one expected the retired judge to intercede on behalf of a stranger."
+      ],
+      "construct_options": [
+        { "text": "To step in between two sides, on someone's behalf", "correct": true },
+        { "text": "To go far ahead of everyone else", "correct": false, "trap": "literal_only" },
+        { "text": "To refuse to go along with a decision", "correct": false, "trap": "wrong_root" }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0005",
+      "held_out": true,
+      "parts": [
+        { "text": "con", "gloss": "completely", "is_root": false },
+        { "text": "cede", "gloss": "go", "is_root": true }
+      ],
+      "context_sentences": [
+        "After an hour of resistance, the committee finally chose to concede the point.",
+        "It took real courage for the senator to concede that the earlier forecast had been wrong."
+      ],
+      "construct_options": [
+        { "text": "To fully give way and admit something is true", "correct": true },
+        { "text": "To go somewhere together with a large group", "correct": false, "trap": "literal_only" },
+        { "text": "To leave a place for good", "correct": false, "trap": "wrong_root" }
+      ]
+    }
+  ]
+}
