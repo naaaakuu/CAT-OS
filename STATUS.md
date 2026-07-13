@@ -4,14 +4,14 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-07-13 — Product audit pass. App version 0.12.1._
+_Last updated: 2026-07-13 — Word DNA module. App version 0.13.0._
 
 ## Application
 
 | System | State | Notes |
 |---|---|---|
 | PWA shell (index.html, manifest, icons) | **shipped** | Installable; relative paths → GitHub Pages subpath safe |
-| Service worker / offline caching | **shipped** | Two caches: shell (v13) + content (v9), cache-first; content cached on first use as the library grows |
+| Service worker / offline caching | **shipped** | Two caches: shell (v15) + content (v10), cache-first; content cached on first use as the library grows |
 | Design tokens + base styles | **shipped** | Light/dark; system fonts; reading leading + answer-feedback colors added in M2 |
 | Hash router | **shipped** | Param routes (`/:id`); 404; modules register their own routes |
 | `StorageAdapter` interface | **shipped** | `src/core/storage/storage-adapter.js` |
@@ -25,6 +25,7 @@ _Last updated: 2026-07-13 — Product audit pass. App version 0.12.1._
 | **Para Jumbles module** | **shipped (0.10.0)** | Second module island; built to `PARA_JUMBLES_BIBLE.md`. First-time introduction → eight-tier journey (Beginner→Premium) → solve (tap-to-order) → mandatory read-back → four-layer teaching (Bible §11) → mentor moment. TITA scoring (+3/0); Para-Jumbles Reading DNA (`core/mentor/pj-dna.js`, evidence-floored, banned-word-linted); `<cat-jumble-board>` (select-to-order). Sessions/attempts share the RC stores tagged `module:"pj"`; RC untouched |
 | **Para Summary module** | **shipped (0.11.0)** | Third module island; built to `PARA SUMMARY BIBLE.md`. First-time introduction (resettable from Settings → Learning) → eight-tier journey (Foundation→Premium, each tier teaching one skill) → Today's Mission → paragraph → **Summary Builder** (write your own sentence, then compare on item-specific checks) → options with the **Think** coach (questions, never hints) → layered teaching (paragraph compresses into the ideal summary; every distractor's §7 archetype and §6 thinking pattern named; richness grows with tier) → mentor moment. +3/0 CAT-style marks; Para-Summary Reading DNA (`core/mentor/ps-dna.js`, family-aggregated, evidence-floored, banned-word-linted). Sessions/attempts share the same stores tagged `module:"ps"`; RC and PJ untouched |
 | **Odd One Out module** | **shipped (0.12.0)** | Fourth module island; built to `ODD_MAN_OUT_BIBLE.md`. First-time introduction (resettable from Settings → Learning) → eight-tier journey (Foundation→Premium, each tier teaching one structural reading skill) → Today's Mission → the five sentences → **Paragraph Builder** at the first three tiers (arrange four of five on `<cat-jumble-board>`; the one left out is the exclusion — construction before elimination, §7) then the exam surface (name the sentence that stands apart) from Advanced up → read-back → the **Think** coach (coaching questions, never hints) → §12 layered teaching (the four join into the paragraph; the outlier separates; its §4 violation and the §7 trap are named) → mentor moment. +3/0 CAT-style marks (TITA); Odd-One-Out Reading DNA (`core/mentor/ooo-dna.js`, the bounded §8 four-trait extension, evidence-floored, banned-word-linted). Sessions/attempts share the same stores tagged `module:"ooo"`; RC, PJ and PS untouched |
+| **Word DNA module** | **shipped (0.13.0)** | Fifth module island; built to `WORD_DNA_BIBLE.md`. Teaches roots, prefixes, suffixes, foreign words and CAT vocabulary through pattern transfer, never memorising. First-time introduction (resettable from Settings → Learning) → a browsable **Language Tree** (no tiers — the five kinds are branches, not a ladder) → per family: **Notice** the shared piece (or a word-in-context for foreign/cat_vocab, §3a) → **Predict** its meaning → **Reveal** + **Understand** why it threads every taught word → **Apply** it to one or two words never taught at all (the transfer challenges accumulate on screen rather than replacing one another, so a learner still sees their own correct transfer once the next appears) → mentor moment. Plain accuracy, no CAT-style marks ("Word DNA imitates no exam format"); a derived, evidence-floored, bounded four-trait Word DNA (`core/mentor/wd-dna.js`: root_recognition, meaning_transfer, context_calibration, family_fluency). A derived **Word Garden** (`logic/garden.js`, held-out words earned via a correct Apply, no new storage) and a deterministic **Today's Discovery** on Home (one word/day, foreign/cat_vocab only). Sessions/attempts share the same stores tagged `module:"wd"`; RC/PJ/PS/OOO untouched. First content batch: 12 families across all five branches, transcribed verbatim from the two source PDFs; schema designed so future batches are content-only |
 | Reading surface (0.6.0) | **shipped** | Book measure, paragraph rhythm token, sticky veiled session bar, scroll progress + "~N min left", end-mark, hyphenation on narrow screens |
 | Learning Page (Passage Mentor) | **shipped** | `/rc/mentor/:id`; **v4 Learning Page** — one-sentence summary, plain-English retelling, why-it-was-hard, the reading lesson, reflection question — layered over v3 mentor content; self-drawing theme illustration per passage; recall-before-reveal; pull-quote takeaway |
 | Reading reflection | **shipped** | Optional per-passage line, sentence starters, saved to the `learning` store, editable; covered by backup |
@@ -42,21 +43,20 @@ _Last updated: 2026-07-13 — Product audit pass. App version 0.12.1._
 | Engagement: haptics + sound | **shipped** | Haptics default on (no-op on iOS); sounds default off, synthesized, no assets |
 | Engagement: celebration surface | **shipped** | One sheet, milestones only |
 | Mistake notebook | **subsumed (0.7.0)** | Deliberately never built as a surface. Its goals ship as the mentor: misses captured (attempts + one lesson/session), resurfaced (twenty-second recall), retired (absorbed after 3 recalls). Attempt-history browser: still designed, V1.x |
-| Vocabulary | designed | V1.x — copy the module pattern; the last module in the V1.x ladder |
 | Analytics, spaced repetition, cloud sync | designed | V2.0+ |
 
 ## Content system
 
 | System | State | Notes |
 |---|---|---|
-| Registry (`content/index.json`) | **shipped** | 32 RC + 19 PJ + 20 PS + 20 OOO items; type-aware agreement with files (checked by tools/verify.mjs); rebuilt from files by a scripted mirror |
+| Registry (`content/index.json`) | **shipped** | 32 RC + 19 PJ + 20 PS + 20 OOO + 12 Word DNA items; type-aware agreement with files (checked by tools/verify.mjs); rebuilt from files by a scripted mirror |
 | RC content schema files | **shipped** | v1 + v2 (mentor layer) + v3 (reading_habit per question, misunderstanding per mentor) + **v4 (full Learning Page: one_sentence_summary, simple_explanation, why_difficult, reading_lesson, reflection_question)**; loader resolves per item |
 | **PJ content schema file** | **shipped (0.10.0)** | `content/schema/pj.schema.v1.json`; implements PARA_JUMBLES_BIBLE §12 metadata (twelve-axis difficulty vector, macro pattern, cohesion signals, traps, `num_plausible_orderings`, `heuristic_adversarial`), the §11 four-layer explanation, and one reliability-tagged link per consecutive pair. Format carried as configuration, not constant |
 | **PS content schema file** | **shipped (0.11.0)** | `content/schema/ps.schema.v1.json`; implements the PARA SUMMARY BIBLE's operational core: apex (claim/scope/certainty/stance) fixed before options (§10), architecture (§2), the eight difficulty dials (§5), load-bearing words, elite `separating_element`, per-distractor §7 archetypes (single distortion; layering elite-only), Summary-Builder checks, missions, and format as configuration. Loader enforces cross-field truths incl. three error families per item and the tier↔bible_level map |
 | **OOO content schema file** | **shipped (0.12.0)** | `content/schema/ooo.schema.v1.json`; implements the ODD_MAN_OUT_BIBLE §13 metadata: five sentences, outlier + core order, `spine_type`/`nucleus`, the §4 a–g `violation_type` taxonomy, the §6 `difficulty_vector` with `topical_overlap` as primary lever and `violation_locus`, the two engineered `traps` (A/B, §5), Halliday & Hasan `cohesion_signals` (§3), the §12 explanation (core reconstruction, roles, ties, violation naming, trap exposure, per-core `exclusion_analysis` tagged with §7 mistake types), and the §11 `validation` gates. Loader enforces cross-field truths incl. outlier↔core partition, nucleus-in-core, adversarial-from-medium-up, and the elite camouflage floor |
-| Content library | **shipped** | 32 RC passages (136 questions; foundation→elite, all 12 genres) + 19 Para Jumbles (all 8 tiers Beginner→Premium, difficulty_numeric 1→10, paragraph-first then scrambled, adversarial from Medium up) + 20 Para Summary items (all 8 tiers Foundation→Premium, 12 genres, 7 architectures with concession-turn capped at 20%, correct positions 5/5/5/5, near-miss finalists with named separating elements at elite) + **20 Odd One Out items (all 8 tiers Foundation→Premium, 12 genres, all 7 violation types, outlier positions balanced 5/5/5/5/5, heuristic-adversarial from Medium up, construct-mode at the first three tiers)** |
-| Verification tool (`tools/verify.mjs`) | **shipped** | Reuses the app's own validators (RC + PJ + PS + OOO); type-aware registry agreement, module-graph + precache-coverage (every schema version), journey-progression, backup round-trip, PJ/PS/OOO engine/voice/DNA/lesson dry runs, and batch-fairness checks (PS position/architecture/concession-turn; OOO outlier-position spread, violation-type variety, adversarial-flag enforcement); mentor-voice lint covers all four mentors; runs on Windows (pathToFileURL fix); run before every release |
-| Content schema for Vocab | designed | Author with the module |
+| **WD content schema file** | **shipped (0.13.0)** | `content/schema/wd.schema.v1.json`; implements WORD_DNA_BIBLE's unit shape: `meta.kind` (root/prefix/suffix/foreign/cat_vocab/confused), a `unit` (origin language + core meaning for shared-meaning kinds), `members[]` transcribed verbatim from source (word/meaning/synonyms/antonyms/context_sentence, each flaggable `held_out`), and `discovery` (notice prompt, three-option predict, understand note, one or two `applies[]` transfer challenges each tagged with a `trap` type). Loader enforces held-out counts (1 for root/prefix/suffix, 2 for foreign/cat_vocab), applies↔held-out alignment, exactly-one-correct per option set, and a context-sentence stem check |
+| Content library | **shipped** | 32 RC passages (136 questions; foundation→elite, all 12 genres) + 19 Para Jumbles (all 8 tiers Beginner→Premium, difficulty_numeric 1→10, paragraph-first then scrambled, adversarial from Medium up) + 20 Para Summary items (all 8 tiers Foundation→Premium, 12 genres, 7 architectures with concession-turn capped at 20%, correct positions 5/5/5/5, near-miss finalists with named separating elements at elite) + 20 Odd One Out items (all 8 tiers Foundation→Premium, 12 genres, all 7 violation types, outlier positions balanced 5/5/5/5/5, heuristic-adversarial from Medium up, construct-mode at the first three tiers) + **12 Word DNA families (batch-wd-001; spans root/prefix/suffix/foreign/cat_vocab — all five active Language Tree branches; transcribed verbatim from the two owner-supplied source PDFs, "Frequently Confused Words" reserved as an empty sixth branch for later content)** |
+| Verification tool (`tools/verify.mjs`) | **shipped** | Reuses the app's own validators (RC + PJ + PS + OOO + WD); type-aware registry agreement, module-graph + precache-coverage (every schema version), journey-progression, backup round-trip, PJ/PS/OOO/WD engine/voice/DNA/lesson dry runs, and batch-fairness checks (PS position/architecture/concession-turn; OOO outlier-position spread, violation-type variety, adversarial-flag enforcement; WD branch-span across the batch); mentor-voice lint covers all five mentors; runs on Windows (pathToFileURL fix); run before every release |
 | RC master generation prompt | shipped (v1, docs) | See "Decisions" re: passage shape flag |
 | Pipeline scaffolding (log, balance dashboard) | designed | Create with the first *generated* (not authored) batch |
 
@@ -103,6 +103,47 @@ _Last updated: 2026-07-13 — Product audit pass. App version 0.12.1._
   convention, but the official scheme is announced per exam cycle; the result
   screen says so and shows accuracy as the primary honest signal.
 
+- **Word DNA (0.13.0):** the fifth module, and deliberately not called
+  "Vocabulary" — the product's whole thesis is that understanding a
+  word's shared parts beats memorising a list. Built to the new
+  `WORD_DNA_BIBLE.md`, using two owner-supplied PDFs as the exclusive,
+  non-negotiable source of truth for every word/meaning transcribed
+  (never invented, rewritten, or simplified); the surrounding teaching
+  layer, screens, and mentor voice are original design reusing existing
+  tokens, sounds, and components only. Central IA decision: a
+  **Language Tree** (root → prefix → suffix → foreign words → CAT
+  vocabulary, with a sixth "Frequently Confused Words" branch reserved
+  empty for later content) replaces the eight-tier ladder every other
+  module uses — Word DNA isn't difficulty-staged, so it doesn't pretend
+  to be. Every family runs the same loop: Notice the shared piece →
+  Predict its meaning → Reveal + Understand why it threads every taught
+  word → Apply it to one or two words never taught at all, the actual
+  proof of transfer. Foreign words and CAT vocabulary have no shared
+  root to notice, so they honestly swap the shared-piece Notice for a
+  word-in-context Notice instead (Bible §3a) rather than forcing a
+  pattern that isn't there. The Reading-DNA-style trait system is a
+  **bounded** four, chosen from seven candidates the Bible considered
+  and rejected three of by name (§5): root_recognition,
+  meaning_transfer (the signature trait), context_calibration, and
+  family_fluency — evidence-floored and banned-word-linted like every
+  other mentor. A derived **Word Garden** (words earned via a correct
+  Apply, no new storage) and a deterministic **Today's Discovery** (one
+  word a day, stops itself, foreign/cat_vocab only) give the module a
+  reason to open on a day without a full session. Scoring is plain
+  accuracy with no CAT-style marks, on purpose — "Word DNA imitates no
+  exam format." Ships with 12 families (batch-wd-001) spanning all five
+  active branches, transcribed verbatim from the source PDFs; the
+  schema and registry are designed so every future batch is pure
+  content, no code or UI changes. One real bug caught in browser
+  verification before shipping: the two-Apply flow (foreign/cat_vocab
+  families) was replacing the whole Apply region on the second
+  challenge, silently erasing the learner's own first correct transfer
+  the instant the second appeared — fixed to accumulate, matching the
+  accumulate-don't-replace pattern Notice/Predict/Understand already
+  use. No new DB store, no new sounds, no new colors (`--color-info` is
+  the one surface where blue is the star, reused exactly); `module:"wd"`
+  in the existing sessions/attempts/learning stores; RC/PJ/PS/OOO
+  untouched. `CACHE_VERSION` → 15, `CONTENT_VERSION` → 10.
 - **Product audit (0.12.1):** a full screen-by-screen pass over every
   shell and module screen, looking for places a first-time CAT aspirant
   could hesitate. No new features (the brief explicitly excluded them);

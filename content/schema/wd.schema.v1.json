@@ -1,0 +1,134 @@
+{
+  "$id": "wd.schema.v1",
+  "title": "CAT OS Word DNA content item, schema v1",
+  "description": "One Word DNA unit: a root, a prefix, a suffix, a foreign-word group, or a CAT-register vocabulary set (WORD_DNA_BIBLE §4). Every word, meaning, synonym, antonym, and origin note in `members` is transcribed faithfully from the owner's source PDFs (99_REFERENCE/); nothing there is invented. The only authored content is the teaching layer: `unit.mentor_note`, `discovery.notice_prompt`, `discovery.understand_note`, and the prompts/options in `discovery`, exactly as every other module's teach.js authors commentary around fixed content. Exactly one member is held out for root/prefix/suffix kinds (the Apply/transfer word, WORD_DNA_BIBLE §3 step 4); exactly two are held out for foreign/cat_vocab kinds (WORD_DNA_BIBLE §3a, since those kinds have no shared root to transfer and instead use a second in-context recognition item). Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": ["schema_version", "meta", "unit", "members", "discovery"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+
+    "meta": {
+      "type": "object",
+      "required": [
+        "id", "type", "version", "status", "kind", "title",
+        "estimated_time_sec", "source", "date_added", "batch_id",
+        "prompt_version", "reviewer_notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id":   { "type": "string", "pattern": "^wd-[0-9]{4}$" },
+        "type": { "const": "wd" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status":  { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "kind": {
+          "enum": ["root", "prefix", "suffix", "foreign", "cat_vocab", "confused"],
+          "description": "The Language Tree branch this unit belongs to (WORD_DNA_BIBLE §2). \"confused\" is reserved for a future Frequently Confused Words batch; no content ships under it yet."
+        },
+        "title": { "type": "string", "minLength": 2,
+          "description": "Display name for the Tree card, e.g. \"chron\", \"ante-\", \"German words\", \"High Frequency, A (i)\"." },
+        "estimated_time_sec": { "type": "integer", "minimum": 30, "maximum": 300 },
+        "source": {
+          "type": "object",
+          "required": ["publication", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication": { "type": "string", "minLength": 1,
+              "description": "Which of the two owner-supplied PDFs this unit was transcribed from." },
+            "usage_note":  { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added":  { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id":    { "type": "string", "pattern": "^batch-wd-[0-9]{3}$" },
+        "prompt_version": { "type": "string", "minLength": 1 },
+        "reviewer_notes": { "type": "string" }
+      }
+    },
+
+    "unit": {
+      "type": "object",
+      "required": ["kind", "label", "origin_language", "core_meaning", "mentor_note"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["root", "prefix", "suffix", "foreign", "cat_vocab", "confused"] },
+        "label": { "type": "string", "minLength": 1,
+          "description": "The root/prefix/suffix itself (\"chron\", \"ante-\"), or the group name (\"German\", \"High Frequency, A (i)\")." },
+        "origin_language": { "type": ["string", "null"],
+          "description": "\"Greek\" | \"Latin\" | \"Germanic\" | the borrowing language for foreign groups | null for cat_vocab, which has no single origin." },
+        "core_meaning": { "type": ["string", "null"],
+          "description": "The shared meaning every member inherits, e.g. \"time\" for chron-. Null for foreign/cat_vocab kinds, which have no shared meaning to state (WORD_DNA_BIBLE §3a) — enforced in the loader, not just here." },
+        "mentor_note": { "type": "string", "minLength": 20,
+          "description": "One authored sentence on why this family/group matters, or — for the first foreign-word unit — the honesty note that borrowed words are met, not decoded." }
+      }
+    },
+
+    "members": {
+      "type": "array",
+      "minItems": 3,
+      "description": "Every word this unit teaches, source-faithful. Exactly one is held_out for root/prefix/suffix kinds; exactly two for foreign/cat_vocab kinds (WORD_DNA_BIBLE §3/§3a).",
+      "items": {
+        "type": "object",
+        "required": ["word", "meaning", "held_out"],
+        "additionalProperties": false,
+        "properties": {
+          "word":    { "type": "string", "minLength": 1 },
+          "meaning": { "type": "string", "minLength": 1 },
+          "part_of_speech": { "enum": ["noun", "verb", "adjective", "adverb", "phrase", "idiom", "conjunction"] },
+          "synonyms": { "type": "array", "items": { "type": "string" } },
+          "antonyms": { "type": "array", "items": { "type": "string" } },
+          "context_sentence": { "type": "string", "minLength": 10,
+            "description": "Authored teaching layer (never source content): a sentence using the word correctly, so foreign/cat_vocab members can be met in context per CAT_VARC_BIBLE §21's own vocabulary-in-context philosophy." },
+          "held_out": { "type": "boolean" }
+        }
+      }
+    },
+
+    "discovery": {
+      "type": "object",
+      "required": ["notice_prompt", "predict_options", "understand_note", "applies"],
+      "additionalProperties": false,
+      "properties": {
+        "notice_prompt": { "type": "string", "minLength": 10,
+          "description": "The curiosity-gap opener shown with the taught (non-held-out) members, e.g. \"What do these words share?\"" },
+        "predict_options": {
+          "type": "array", "minItems": 3, "maxItems": 3,
+          "description": "Three chips for the Notice+Predict step, exactly one correct. For root/prefix/suffix, guesses unit.core_meaning; for foreign/cat_vocab, guesses the first taught member's meaning in context.",
+          "items": {
+            "type": "object",
+            "required": ["text", "correct"],
+            "additionalProperties": false,
+            "properties": { "text": { "type": "string", "minLength": 1 }, "correct": { "type": "boolean" } }
+          }
+        },
+        "understand_note": { "type": "string", "minLength": 20,
+          "description": "Authored: why the meaning threads through every taught member, or (foreign/cat_vocab) one line of context/etymology worth keeping." },
+        "applies": {
+          "type": "array", "minItems": 1, "maxItems": 2,
+          "description": "The transfer/apply challenge(s): one per held_out member, same order. Root/prefix/suffix carry exactly 1; foreign/cat_vocab carry exactly 2 (WORD_DNA_BIBLE §3/§3a).",
+          "items": {
+            "type": "object",
+            "required": ["held_out_word", "prompt", "options"],
+            "additionalProperties": false,
+            "properties": {
+              "held_out_word": { "type": "string", "minLength": 1 },
+              "prompt": { "type": "string", "minLength": 10 },
+              "options": {
+                "type": "array", "minItems": 3, "maxItems": 4,
+                "items": {
+                  "type": "object",
+                  "required": ["text", "correct"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "text": { "type": "string", "minLength": 1 },
+                    "correct": { "type": "boolean" },
+                    "trap": { "enum": ["literal_only", "wrong_root", "context_mismatch"] }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

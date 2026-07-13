@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0004",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "root",
+    "title": "vert",
+    "estimated_time_sec": 75,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "The smallest family in the batch: three words only, exactly as the source gives them. Two taught, one (ambivert) held out for transfer, combining vert with the already-introduced idea of ambi- meaning both sides. Owner review pending."
+  },
+  "unit": {
+    "kind": "root",
+    "label": "vert",
+    "origin_language": "Latin",
+    "core_meaning": "to turn",
+    "mentor_note": "Three words, one small choreography of turning one way, the other way, or both."
+  },
+  "members": [
+    { "word": "introvert", "meaning": "to turn your thoughts inwards", "part_of_speech": "noun", "held_out": false },
+    { "word": "extrovert", "meaning": "to turn your thoughts outward", "part_of_speech": "noun", "held_out": false },
+    { "word": "ambivert", "meaning": "to turn your thoughts in both directions", "part_of_speech": "noun", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      { "text": "To turn", "correct": true },
+      { "text": "To think", "correct": false },
+      { "text": "To speak", "correct": false }
+    ],
+    "understand_note": "Vert means to turn. An introvert turns their attention inward; an extrovert turns it outward. The root describes a direction, not a personality on its own.",
+    "applies": [
+      {
+        "held_out_word": "ambivert",
+        "prompt": "Knowing vert means to turn, and ambi- means both sides, what do you think an ambivert is?",
+        "options": [
+          { "text": "Someone whose attention turns both inward and outward, depending on the moment", "correct": true },
+          { "text": "Someone who never turns their attention anywhere", "correct": false, "trap": "literal_only" },
+          { "text": "Someone who turns away from other people entirely", "correct": false, "trap": "wrong_root" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0011",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "cat_vocab",
+    "title": "High Frequency, A (i)",
+    "estimated_time_sec": 240,
+    "source": {
+      "publication": "Section 1: Vocabulary, Word List I — High Frequency Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word, definition, synonym, and antonym transcribed faithfully from the source's opening entries; context sentences and the teaching layer are authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "The first twenty entries of the source's High Frequency list (abandon through accolade), taken in the source's own order rather than cherry-picked. One PDF column-wrap artifact under \"abase\" (a stray, ungrammatical fragment) was dropped as a scanning defect, not as an edit to content; its real definition and synonym/antonym pairs are intact. Owner review pending."
+  },
+  "unit": {
+    "kind": "cat_vocab",
+    "label": "High Frequency, A (i)",
+    "origin_language": null,
+    "core_meaning": null,
+    "mentor_note": "Some words don't share a hidden pattern. They're simply worth meeting once, carefully, the way you'd meet someone whose name you want to remember."
+  },
+  "members": [
+    { "word": "abandon", "meaning": "to give up", "part_of_speech": "verb", "synonyms": ["desert", "forsake", "leave"], "context_sentence": "The sailors had to abandon ship when it began to sink.", "held_out": false },
+    { "word": "abase", "meaning": "to lower in dignity; to humiliate", "part_of_speech": "verb", "synonyms": ["scorn", "belittle", "degrade"], "antonyms": ["exalt", "cherish"], "context_sentence": "He refused to abase himself by begging for forgiveness in public.", "held_out": false },
+    { "word": "abate", "meaning": "to lessen; to subside", "part_of_speech": "verb", "context_sentence": "The storm showed no sign of abating even after midnight.", "held_out": false },
+    { "word": "abbreviate", "meaning": "to shorten", "part_of_speech": "verb", "synonyms": ["abridge", "condense"], "antonyms": ["expand", "prolong"], "context_sentence": "Doctors often abbreviate long medical terms into short codes.", "held_out": false },
+    { "word": "abdicate", "meaning": "to give up formally", "part_of_speech": "verb", "synonyms": ["resign", "renounce"], "antonyms": ["retain", "uphold"], "context_sentence": "The king chose to abdicate the throne rather than change the law.", "held_out": false },
+    { "word": "abdication", "meaning": "the giving up of control or authority", "part_of_speech": "noun", "context_sentence": "The abdication surprised the entire nation.", "held_out": false },
+    { "word": "aberration", "meaning": "a straying away from what is normal", "part_of_speech": "noun", "context_sentence": "The scientist dismissed the strange reading as a minor aberration.", "held_out": false },
+    { "word": "abet", "meaning": "to assist, normally in a crime", "part_of_speech": "verb", "synonyms": ["conspire", "connive"], "antonyms": ["dissuade", "deter"], "context_sentence": "The driver was charged with aiding and abetting the robbery.", "held_out": false },
+    { "word": "abhor", "meaning": "to hate; to detest", "part_of_speech": "verb", "context_sentence": "She has always abhorred cruelty of any kind.", "held_out": false },
+    { "word": "abide", "meaning": "to be faithful; to endure", "part_of_speech": "verb", "context_sentence": "He could not abide the sound of chewing at the dinner table.", "held_out": false },
+    { "word": "abjure", "meaning": "to promise or swear to give up", "part_of_speech": "verb", "context_sentence": "The soldier was made to abjure his allegiance to the old king.", "held_out": false },
+    { "word": "ablution", "meaning": "washing", "part_of_speech": "noun", "context_sentence": "Before entering the temple, worshippers perform a simple ablution.", "held_out": false },
+    { "word": "abridgement", "meaning": "a short summary", "part_of_speech": "noun", "synonyms": ["outline", "abbreviation", "summary", "abstract"], "antonyms": ["enlargement", "expansion"], "context_sentence": "The library only had an abridgement of the original three-volume novel.", "held_out": false },
+    { "word": "abscond", "meaning": "to go away suddenly, especially to avoid arrest", "part_of_speech": "verb", "context_sentence": "The clerk absconded with the company's funds overnight.", "held_out": false },
+    { "word": "abstruse", "meaning": "difficult to comprehend; obscure", "part_of_speech": "adjective", "context_sentence": "The professor's lecture on quantum mechanics was so abstruse that half the class gave up taking notes.", "held_out": true },
+    { "word": "abysmal", "meaning": "extremely bad", "part_of_speech": "adjective", "context_sentence": "Ticket sales for the film were abysmal in its opening week.", "held_out": false },
+    { "word": "abyss", "meaning": "a bottomless pit; anything too deep to measure", "part_of_speech": "noun", "synonyms": ["chasm"], "antonyms": ["summit", "elevation"], "context_sentence": "Looking over the cliff, she felt she was staring into an abyss.", "held_out": false },
+    { "word": "accede", "meaning": "to agree to", "part_of_speech": "verb", "synonyms": ["assent", "concur"], "antonyms": ["refuse", "dissent"], "context_sentence": "The committee finally acceded to the workers' demands.", "held_out": false },
+    { "word": "acclaimed", "meaning": "welcomed with shouts and approval", "part_of_speech": "adjective", "context_sentence": "The acclaimed director accepted the award to a standing ovation.", "held_out": false },
+    { "word": "accolade", "meaning": "praise; approval", "part_of_speech": "noun", "context_sentence": "Winning the national award was the greatest accolade of her career.", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "English is full of words that carry real weight. Read each one in its sentence, then guess before the reveal.",
+    "predict_options": [
+      { "text": "To give up completely, or leave behind", "correct": true },
+      { "text": "To repair or fix something quickly", "correct": false },
+      { "text": "To celebrate an achievement", "correct": false }
+    ],
+    "understand_note": "Abandon carries more weight than a plain give up, whether it's a ship, a plan, or a belief. Once you notice a word like this, you start seeing it standing in for a dozen smaller, softer phrases.",
+    "applies": [
+      {
+        "held_out_word": "abstruse",
+        "prompt": "\"The professor's lecture on quantum mechanics was so abstruse that half the class gave up taking notes.\" What does abstruse mean here?",
+        "options": [
+          { "text": "Difficult to understand; obscure", "correct": true },
+          { "text": "Extremely boring and repetitive", "correct": false, "trap": "context_mismatch" },
+          { "text": "Delivered too quickly to follow", "correct": false, "trap": "context_mismatch" }
+        ]
+      },
+      {
+        "held_out_word": "accolade",
+        "prompt": "\"Winning the national award was the greatest accolade of her career.\" What does accolade mean here?",
+        "options": [
+          { "text": "An expression of praise or honor", "correct": true },
+          { "text": "A large sum of prize money", "correct": false, "trap": "context_mismatch" },
+          { "text": "A formal apology", "correct": false, "trap": "context_mismatch" }
+        ]
+      }
+    ]
+  }
+}

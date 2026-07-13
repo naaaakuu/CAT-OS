@@ -5,7 +5,7 @@
  * draws itself, and it leaves when told. No confetti, no shake:
  * elegance is the brief.
  *
- * Usage: celebrate({ title, lines: ['Achievement — Perfect RC'] })
+ * Usage: celebrate({ title, lines: ['Achievement — Perfect Set'] })
  * Returns after the user dismisses it.
  */
 

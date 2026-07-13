@@ -39,7 +39,7 @@ function readJSON(rel) {
 
 /* ---- import the app's real validation code ---- */
 const { validate } = await mod('src/core/content-loader/validator.js');
-const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues, oooConsistencyIssues } = await mod('src/core/content-loader/loader.js');
+const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues, oooConsistencyIssues, wdConsistencyIssues } = await mod('src/core/content-loader/loader.js');
 const { PracticeSession } = await mod('src/core/engine/session.js');
 const { sessionXP, totalXP, levelFromXP, xpForNext } = await mod('src/core/engagement/xp.js');
 const { deriveStreaks, weekActivity, dayKey } = await mod('src/core/engagement/streaks.js');
@@ -191,16 +191,46 @@ if (oooFiles.length >= 8) {
   }
 }
 
+console.log('\n1e. Word DNA JSON: schema + consistency');
+const wdSchemas = {};
+for (const f of readdirSync(join(root, 'content/schema'))) {
+  if (f.startsWith('wd.schema.v')) wdSchemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+}
+const wdDir = 'content/word-dna';
+const wdFiles = existsSync(join(root, wdDir))
+  ? readdirSync(join(root, wdDir)).filter((f) => f.endsWith('.json')).sort() : [];
+for (const file of wdFiles) {
+  const id = file.replace('.json', '');
+  let item;
+  try { item = readJSON(`${wdDir}/${file}`); }
+  catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+  const schema = wdSchemas[String(item.schema_version ?? 1)];
+  if (!schema) { bad(`${file}: no Word DNA schema for version ${item.schema_version}`); continue; }
+  const { valid, errors } = validate(schema, item);
+  if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+  const issues = wdConsistencyIssues(id, item);
+  if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+  ok(`${file} (${item.meta.kind}, ${item.unit.label}, ${item.members.length} words)`);
+}
+if (wdFiles.length > 0) {
+  const kinds = new Set(wdFiles.map((f) => readJSON(`${wdDir}/${f}`).meta.kind));
+  if (problems.filter((p) => wdFiles.some((f) => p.startsWith(f))).length === 0) {
+    ok(`batch spans ${kinds.size} Language Tree branches: ${[...kinds].join(', ')}`);
+  }
+}
+
 console.log('\n2. Registry ↔ files agreement');
 const registry = readJSON('content/index.json');
 const rcRegIds = registry.items.filter((i) => i.type === 'rc').map((i) => i.id).sort();
 const pjRegIds = registry.items.filter((i) => i.type === 'pj').map((i) => i.id).sort();
 const psRegIds = registry.items.filter((i) => i.type === 'ps').map((i) => i.id).sort();
 const oooRegIds = registry.items.filter((i) => i.type === 'ooo').map((i) => i.id).sort();
+const wdRegIds = registry.items.filter((i) => i.type === 'wd').map((i) => i.id).sort();
 const fileIds = rcFiles.map((f) => f.replace('.json', ''));
 const pjFileIds = pjFiles.map((f) => f.replace('.json', ''));
 const psFileIds = psFiles.map((f) => f.replace('.json', ''));
 const oooFileIds = oooFiles.map((f) => f.replace('.json', ''));
+const wdFileIds = wdFiles.map((f) => f.replace('.json', ''));
 for (const id of rcRegIds) {
   if (!fileIds.includes(id)) bad(`registry lists RC ${id} but no file exists`);
 }
@@ -224,6 +254,24 @@ for (const id of oooRegIds) {
 }
 for (const id of oooFileIds) {
   if (!oooRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+for (const id of wdRegIds) {
+  if (!wdFileIds.includes(id)) bad(`registry lists Word DNA ${id} but no file exists`);
+}
+for (const id of wdFileIds) {
+  if (!wdRegIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+}
+// Word DNA registry fields must mirror the file (title, kind, member count, time).
+for (const entry of registry.items.filter((i) => i.type === 'wd')) {
+  if (!wdFileIds.includes(entry.id)) continue;
+  const item = readJSON(`${wdDir}/${entry.id}.json`);
+  if (entry.title !== item.meta.title) bad(`${entry.id}: registry title ≠ file meta.title`);
+  if (entry.kind !== item.meta.kind) bad(`${entry.id}: registry kind ≠ file`);
+  if (entry.member_count !== item.members.length) {
+    bad(`${entry.id}: registry member_count ${entry.member_count} ≠ ${item.members.length} members`);
+  }
+  const mins = Math.round(item.meta.estimated_time_sec / 60 * 10) / 10;
+  if (entry.estimated_time_min !== mins) bad(`${entry.id}: registry estimated_time_min ${entry.estimated_time_min} ≠ ${mins}`);
 }
 // PS registry fields must mirror the file (title, difficulty, tier, time).
 for (const entry of registry.items.filter((i) => i.type === 'ps')) {
@@ -290,7 +338,7 @@ for (const entry of registry.items) {
     bad(`${entry.id}: registry word_count ${entry.word_count} ≠ file ${item.meta.word_count}`);
   }
 }
-if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS + ${oooRegIds.length} OOO items agree with registry`);
+if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS + ${oooRegIds.length} OOO + ${wdRegIds.length} Word DNA items agree with registry`);
 
 console.log('\n3. Service worker precache ↔ disk');
 const sw = readFileSync(join(root, 'service-worker.js'), 'utf8');
@@ -316,10 +364,14 @@ for (const file of oooFiles) {
   const path = `./${oooDir}/${file}`;
   if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
 }
+for (const file of wdFiles) {
+  const path = `./${wdDir}/${file}`;
+  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+}
 if (!listed.includes('./content/index.json')) bad('registry not precached');
 // Every schema version on disk must be precached — offline validation needs it.
 for (const f of readdirSync(join(root, 'content/schema'))) {
-  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v') || f.startsWith('ooo.schema.v'))
+  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v') || f.startsWith('ooo.schema.v') || f.startsWith('wd.schema.v'))
       && !listed.includes(`./content/schema/${f}`)) {
     bad(`schema not precached: ${f}`);
   }
@@ -1208,6 +1260,151 @@ if (oooFiles.length === 0) {
 
   if (problems.filter((p) => p.startsWith('ooo')).length === 0) {
     ok('TITA scoring, build eval, module-tagged records, taxonomy-complete voice, missions, think coach, DNA floors, one lesson per set');
+  }
+}
+
+console.log('\n14. Word DNA dry run (engine · voice · DNA · one lesson)');
+if (wdFiles.length === 0) {
+  ok('no Word DNA content yet — skipped');
+} else {
+  const { WDSession, computeWDScore, evaluateChoice } = await mod('src/core/engine/wd-session.js');
+  const wdVoice = await mod('src/core/mentor/wd-voice.js');
+  const rcVoice = await mod('src/core/mentor/voice.js');
+  const { deriveWDDNA, enrichWDAnswers, WD_FLOORS } = await mod('src/core/mentor/wd-dna.js');
+  const { chooseWDLesson, wdLessonRecord, TRAP_NOTES } = await mod('src/core/mentor/wd-lesson.js');
+  const wdLatestSchema = wdSchemas[String(Math.max(...Object.keys(wdSchemas).map(Number)))];
+
+  /* -- The Word DNA mentor never judges either: lint its whole vocabulary. -- */
+  {
+    const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
+    const offenders = [];
+    const walk = (value, path) => {
+      if (typeof value === 'string') {
+        for (const re of banned) if (re.test(value)) offenders.push(`${path}: "${value.slice(0, 60)}…"`);
+      } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${path}[${i}]`));
+      else if (value && typeof value === 'object') {
+        for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
+      } else if (typeof value === 'function') {
+        try { walk(value('an example', 3, 2), `${path}()`); } catch { /* signature mismatch is fine */ }
+      }
+    };
+    for (const [name, exported] of Object.entries(wdVoice)) {
+      if (name === 'pick') continue;
+      walk(exported, name);
+    }
+    if (offenders.length) offenders.forEach((o) => bad(`wd: mentor voice uses judgment language — ${o}`));
+
+    // Every trap the schema can name in an apply option must have mentor
+    // copy explaining the pull (WORD_DNA_BIBLE §4's closed three-value set).
+    const trapEnum = wdLatestSchema.properties.discovery.properties.applies.items
+      .properties.options.items.properties.trap.enum;
+    for (const t of trapEnum) {
+      if (!TRAP_NOTES[t]) bad(`wd: no mentor note for apply trap "${t}"`);
+    }
+  }
+
+  const item = readJSON(`${wdDir}/${wdFiles[0]}`);
+
+  /* -- Engine: plain accuracy (no CAT-style marks), module-tagged records. -- */
+  {
+    const correctIdx = item.discovery.predict_options.findIndex((o) => o.correct);
+    const wrongIdx = item.discovery.predict_options.findIndex((o) => !o.correct);
+    const verdict = evaluateChoice(item.discovery.predict_options, correctIdx);
+    if (!verdict.is_correct) bad('wd engine: correct predict option not recognized');
+    if (evaluateChoice(item.discovery.predict_options, wrongIdx).is_correct) {
+      bad('wd engine: wrong predict option marked correct');
+    }
+
+    let t = 1000;
+    const s = new WDSession([item], 'wd-set:test', { now: () => (t += 1000) });
+    s.markItemShown();
+    s.answerPredict(correctIdx);
+    item.discovery.applies.forEach((a, i) => {
+      s.answerApply(i, a.options.findIndex((o) => o.correct));
+    });
+    const { session, attempts } = s.finish();
+    if (session.module !== 'wd') bad('wd session: record missing module tag');
+    if (session.score.correct !== 1 || session.score.attempted !== 1) bad('wd session: score wrong for a fully-correct unit');
+    if ('marks' in session.score) bad('wd session: score should have no CAT-style marks field');
+    if (attempts.length !== 1 || attempts[0].module !== 'wd') bad('wd session: attempt shape wrong');
+    if (!Array.isArray(session.item_ids) || session.item_ids[0] !== item.meta.id) bad('wd session: item_ids missing');
+    if (session.answers[0].is_correct !== true) bad('wd session: fully-correct unit not marked correct');
+
+    const sc = computeWDScore([{ is_correct: true }, { is_correct: false }, { is_correct: null }]);
+    if (Math.abs(sc.accuracy - 0.5) > 1e-9) bad('wd scoring: accuracy wrong');
+    if ('marks' in sc) bad('wd scoring: computeWDScore should carry no CAT-style marks');
+  }
+
+  /* -- DNA: Meaning Transfer (the signature trait) names itself once the
+     floor clears, and stays silent below it. -- */
+  {
+    const sharedKind = ['root', 'prefix', 'suffix'];
+    const sharedFiles = wdFiles.map((f) => readJSON(`${wdDir}/${f}`)).filter((it) => sharedKind.includes(it.meta.kind));
+    if (sharedFiles.length === 0) {
+      ok('no root/prefix/suffix content yet — DNA transfer check skipped');
+    } else {
+      const items = new Map(sharedFiles.map((it) => [it.meta.id, it]));
+      const mkSession = (n, correct) => ({
+        id: `wd-s-${n}`, module: 'wd', passage_id: 'wd-set:test',
+        item_ids: sharedFiles.map((it) => it.meta.id),
+        started_at: new Date(2026, 6, n, 10).toISOString(),
+        finished_at: new Date(2026, 6, n, 10, 3).toISOString(),
+        duration_ms: 3 * 60000,
+        score: { total: sharedFiles.length, correct: correct ? sharedFiles.length : 0,
+          wrong: correct ? 0 : sharedFiles.length, skipped: 0, attempted: sharedFiles.length,
+          accuracy: correct ? 1 : 0 },
+        answers: sharedFiles.map((it) => ({
+          item_id: it.meta.id, question_id: it.meta.id,
+          predict: { chosen_index: it.discovery.predict_options.findIndex((o) => correct ? o.correct : !o.correct), is_correct: correct },
+          applies: it.discovery.applies.map((a) => ({
+            held_out_word: a.held_out_word,
+            chosen_index: a.options.findIndex((o) => correct ? o.correct : !o.correct),
+            is_correct: correct,
+          })),
+          is_correct: correct, time_ms: 60000,
+        })),
+      });
+      const history = [mkSession(1, true), mkSession(2, true), mkSession(3, true)];
+      const dna = deriveWDDNA(history, items);
+      const appliesCount = sharedFiles.reduce((n, it) => n + it.discovery.applies.length, 0) * history.length;
+      if (appliesCount >= WD_FLOORS.TRANSFER_MIN) {
+        if (!dna.observations.some((o) => o.pattern_id === 'meaning_transfer' && o.kind === 'strength')) {
+          bad('wd dna: perfect transfer across enough evidence should be named a strength');
+        }
+      }
+      if (JSON.stringify(deriveWDDNA(history, items)) !== JSON.stringify(dna)) bad('wd dna: not deterministic');
+
+      // Below the floor (fewer sessions) → silence is a feature, not a bug.
+      const oneSessionApplies = sharedFiles.reduce((n, it) => n + it.discovery.applies.length, 0);
+      if (oneSessionApplies < WD_FLOORS.TRANSFER_MIN) {
+        const thin = deriveWDDNA(history.slice(0, 1), items);
+        if (thin.observations.some((o) => o.pattern_id === 'meaning_transfer')) {
+          bad('wd dna: named a pattern below the evidence floor');
+        }
+      }
+
+      // One lesson out of a session with a missed apply, deterministic.
+      const missedSession = mkSession(4, false);
+      const lesson = chooseWDLesson({ session: missedSession, items, dna, priorSessions: 3 });
+      if (!lesson || Array.isArray(lesson)) bad('wd lesson: must return exactly one lesson');
+      if (!lesson.teach?.pull) bad('wd lesson: must teach the pull');
+      const rec = wdLessonRecord(lesson, missedSession, '2026-07-13');
+      if (rec.module !== 'wd' || rec.kind !== 'lesson') bad('wd lesson: record shape drifted');
+      if (!rec.recall?.question || !rec.recall?.answer) bad('wd lesson: must seed a recall');
+      const again = chooseWDLesson({ session: missedSession, items, dna, priorSessions: 3 });
+      if (JSON.stringify(again) !== JSON.stringify(lesson)) bad('wd lesson: not deterministic');
+
+      // A clean set teaches mastery.
+      const cleanSession = mkSession(5, true);
+      const mastery = chooseWDLesson({ session: cleanSession, items, dna: { observations: [] }, priorSessions: 1 });
+      if (mastery.lesson_kind !== 'mastery') bad('wd lesson: clean set should teach mastery');
+    }
+  }
+
+  // Precise prefixes only: "wd-00NN:" (registry/content problems from
+  // earlier sections) must never mask this section's own "wd:"/"wd X:" checks.
+  if (problems.filter((p) => p.startsWith('wd:') || p.startsWith('wd ')).length === 0) {
+    ok('plain accuracy scoring, module-tagged records, calm voice, DNA floors, one lesson per set');
   }
 }
 

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0010",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "foreign",
+    "title": "Japanese words",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully (including the source's own spelling \"Bonzai\" for the battle-cry word); context sentences and the teaching layer are authored for CAT OS."
+    },
+    "date_added": "2026-07-13",
+    "batch_id": "batch-wd-001",
+    "prompt_version": "in-repo authored (Word DNA milestone); WORD_DNA_BIBLE frameworks applied",
+    "reviewer_notes": "Complete Japanese list from the source, ten of ten words. bonzai (the patriotic battle cry, as spelled in the source) and bonsai (the miniature-tree art) are kept as two distinct entries exactly as given, a genuine near-homonym pair worth noticing on its own. Owner review pending."
+  },
+  "unit": {
+    "kind": "foreign",
+    "label": "Japanese",
+    "origin_language": "Japanese",
+    "core_meaning": null,
+    "mentor_note": "Ten words, one country, one small proof that English keeps reaching outward for exactly the word it is missing."
+  },
+  "members": [
+    { "word": "tsunami", "meaning": "a large, destructive ocean wave", "part_of_speech": "noun", "context_sentence": "A powerful tsunami struck the coastline after the undersea earthquake.", "held_out": false },
+    { "word": "tycoon", "meaning": "a powerful and wealthy businessman", "part_of_speech": "noun", "context_sentence": "The shipping tycoon owned more vessels than the national navy.", "held_out": false },
+    { "word": "bonsai", "meaning": "the art of growing miniature trees", "part_of_speech": "noun", "context_sentence": "He spent thirty years shaping a single bonsai in a shallow clay pot.", "held_out": false },
+    { "word": "bonzai", "meaning": "a patriotic battle cry or shout", "part_of_speech": "noun", "context_sentence": "The soldiers raised their cry of bonzai as they charged forward.", "held_out": false },
+    { "word": "origami", "meaning": "the Japanese art of paper folding", "part_of_speech": "noun", "context_sentence": "She folded a small paper crane using a traditional origami pattern.", "held_out": false },
+    { "word": "samurai", "meaning": "a member of the former Japanese warrior class", "part_of_speech": "noun", "context_sentence": "The museum displayed a suit of armor once worn by a samurai.", "held_out": false },
+    { "word": "karate", "meaning": "a traditional Japanese form of unarmed combat", "part_of_speech": "noun", "context_sentence": "She has practiced karate every Tuesday evening since she was seven.", "held_out": false },
+    { "word": "kimono", "meaning": "a traditional Japanese garment", "part_of_speech": "noun", "context_sentence": "Her grandmother still wears a silk kimono at New Year gatherings.", "held_out": false },
+    { "word": "shogun", "meaning": "a hereditary military commander in feudal Japan", "part_of_speech": "noun", "context_sentence": "For centuries, the shogun held more real power in Japan than the emperor did.", "held_out": true },
+    { "word": "hibachi", "meaning": "a portable charcoal grill or heater", "part_of_speech": "noun", "context_sentence": "They cooked the vegetables over a small hibachi on the porch.", "held_out": true }
+  ],
+  "discovery": {
+    "notice_prompt": "English borrowed every one of these words from Japanese. Read each one in its sentence, then guess before the reveal.",
+    "predict_options": [
+      { "text": "A large, destructive ocean wave", "correct": true },
+      { "text": "A tropical storm with heavy rain", "correct": false },
+      { "text": "An undersea earthquake itself", "correct": false }
+    ],
+    "understand_note": "Tsu means harbor and nami means wave in Japanese. English borrowed the word whole because no existing English word captured a wave born from the sea floor itself, only from the wind above it.",
+    "applies": [
+      {
+        "held_out_word": "shogun",
+        "prompt": "\"For centuries, the shogun held more real power in Japan than the emperor did.\" What is a shogun?",
+        "options": [
+          { "text": "A hereditary military commander who ruled in the emperor's name", "correct": true },
+          { "text": "A religious leader who advised the emperor", "correct": false, "trap": "context_mismatch" },
+          { "text": "A wandering warrior loyal to no lord", "correct": false, "trap": "wrong_root" }
+        ]
+      },
+      {
+        "held_out_word": "hibachi",
+        "prompt": "\"They cooked the vegetables over a small hibachi on the porch.\" What is a hibachi?",
+        "options": [
+          { "text": "A portable charcoal grill or heater", "correct": true },
+          { "text": "A traditional Japanese sword", "correct": false, "trap": "wrong_root" },
+          { "text": "A ceremonial tea set", "correct": false, "trap": "context_mismatch" }
+        ]
+      }
+    ]
+  }
+}

@@ -16,13 +16,17 @@ import { registerRC } from './modules/reading-comprehension/index.js';
 import { registerPJ } from './modules/para-jumbles/index.js';
 import { registerPS } from './modules/para-summary/index.js';
 import { registerOOO } from './modules/odd-one-out/index.js';
+import { registerWD } from './modules/word-dna/index.js';
 import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
 import { resetPSIntro, latestByItem as latestPSByItem } from './modules/para-summary/logic/store.js';
 import { resetOOOIntro, latestByItem as latestOOOByItem } from './modules/odd-one-out/logic/store.js';
+import { resetWDIntro, latestByItem as latestWDByItem } from './modules/word-dna/logic/store.js';
 import { recommendNextPJ } from './modules/para-jumbles/logic/tiers.js';
 import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
 import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
-import { listRCItems, listPJItems, listPSItems, listOOOItems } from './core/content-loader/loader.js';
+import { recommendNextWD } from './modules/word-dna/logic/tree.js';
+import { WD_LINES } from './core/mentor/wd-voice.js';
+import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
 import { evaluate } from './core/engagement/achievements.js';
 import { dashboardLine } from './core/engagement/messages.js';
@@ -52,7 +56,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.12.1'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.13.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -113,9 +117,14 @@ async function saveReadingSize(size) {
    value returns null and renderHome falls through to the original
    RC-only card below — no change for RC-only learners. */
 const CONTINUE_INFO = {
-  pj: { noun: 'Para Jumbles journey', verb: 'Solve it now', prefix: '/pj' },
-  ps: { noun: 'Para Summary journey', verb: 'Try it now', prefix: '/ps' },
-  ooo: { noun: 'Odd One Out journey', verb: 'Try it now', prefix: '/ooo' },
+  pj: { noun: 'Para Jumbles journey', verb: 'Solve it now', prefix: '/pj',
+    list: listPJItems, latest: latestPJByItem, recommend: recommendNextPJ },
+  ps: { noun: 'Para Summary journey', verb: 'Try it now', prefix: '/ps',
+    list: listPSItems, latest: latestPSByItem, recommend: recommendNextPS },
+  ooo: { noun: 'Odd One Out journey', verb: 'Try it now', prefix: '/ooo',
+    list: listOOOItems, latest: latestOOOByItem, recommend: recommendNextOOO },
+  wd: { noun: 'Word DNA journey', verb: 'Meet it now', prefix: '/wd',
+    list: listWDItems, latest: latestWDByItem, recommend: recommendNextWD },
 };
 
 async function recommendContinue(sessions) {
@@ -123,16 +132,35 @@ async function recommendContinue(sessions) {
   const info = CONTINUE_INFO[lastModule];
   if (!info) return null;
   try {
-    const [items, latest] = lastModule === 'pj' ? await Promise.all([listPJItems(), latestPJByItem(storage)])
-      : lastModule === 'ps' ? await Promise.all([listPSItems(), latestPSByItem(storage)])
-        : await Promise.all([listOOOItems(), latestOOOByItem(storage)]);
+    const [items, latest] = await Promise.all([info.list(), info.latest(storage)]);
     const solvedIds = new Set([...latest.entries()].filter(([, a]) => a.is_correct === true).map(([id]) => id));
     const triedIds = new Set([...latest.entries()].filter(([, a]) => a.is_correct !== null).map(([id]) => id));
-    const recommend = lastModule === 'pj' ? recommendNextPJ : lastModule === 'ps' ? recommendNextPS : recommendNextOOO;
-    const next = recommend(items, solvedIds, triedIds);
+    const next = info.recommend(items, solvedIds, triedIds);
     return next ? { info, next } : null;
   } catch {
     return null; // offline/uncached: Home falls back to the RC card
+  }
+}
+
+/* Today's Discovery: one word, chosen deterministically from today's
+   date (never random, so it stays the same across every open today,
+   and never server-driven, since the app is offline-first). Only
+   foreign/cat_vocab units qualify — these are words met, not roots to
+   practice — and it is a companion habit, surfaced below Continue,
+   never a replacement for the learner's primary journey
+   (WORD_DNA_BIBLE §9). */
+async function todaysDiscovery() {
+  try {
+    const items = (await listWDItems()).filter((i) => i.kind === 'foreign' || i.kind === 'cat_vocab');
+    if (items.length === 0) return null;
+    const dayNum = Number(new Date().toISOString().slice(0, 10).replaceAll('-', ''));
+    const chosen = items[dayNum % items.length];
+    const full = await loadWDItem(chosen.id);
+    const taught = full.members.filter((m) => !m.held_out);
+    if (taught.length === 0) return null;
+    return { unitId: chosen.id, word: taught[dayNum % taught.length] };
+  } catch {
+    return null; // offline/uncached: Home simply omits the widget
   }
 }
 
@@ -197,7 +225,7 @@ async function renderHome(outlet) {
     </div>` : continuing ? `
     <div class="card">
       <h2>Continue your ${continuing.info.noun}</h2>
-      <p class="muted"><em>${continuing.next.item.title}</em> — ${continuing.next.tier.label}, ${continuing.next.item.difficulty}, ~${continuing.next.item.estimated_time_min} min.</p>
+      <p class="muted"><em>${continuing.next.item.title}</em> — ${continuing.next.tier.label}${continuing.next.item.difficulty ? `, ${continuing.next.item.difficulty}` : ''}, ~${continuing.next.item.estimated_time_min} min.</p>
       <p class="hint" style="margin-bottom: var(--space-3)">${continuing.next.reason}</p>
       <a class="btn btn--primary btn--block" href="#${continuing.info.prefix}/session/${continuing.next.item.id}">${continuing.info.verb}</a>
     </div>` : next ? `
@@ -211,6 +239,16 @@ async function renderHome(outlet) {
       <h2>The library is read</h2>
       <p class="muted">New passages arrive through the content pipeline.</p>
       <a class="btn btn--primary btn--block" href="#/rc">Open the library</a>
+    </div>`;
+
+  /* ---- Today's Discovery: one Word DNA word, then it steps aside ---- */
+  const discovery = await todaysDiscovery();
+  const discoveryHTML = !discovery ? '' : `
+    <div class="card">
+      <p class="screen__eyebrow">${WD_LINES.todaysDiscoveryEyebrow}</p>
+      <p class="wd-discovery__word">${discovery.word.word}</p>
+      <p class="wd-discovery__meaning">${discovery.word.meaning}</p>
+      <p class="hint" style="margin-top: var(--space-2)"><a href="#/wd/learn/${discovery.unitId}">See where it comes from</a></p>
     </div>`;
 
   /* ---- Achievements — unlocked count + the three most recent tiers ---- */
@@ -242,6 +280,7 @@ async function renderHome(outlet) {
         const isPJ = s.module === 'pj';
         const isPS = s.module === 'ps';
         const isOOO = s.module === 'ooo';
+        const isWD = s.module === 'wd';
         const count = s.item_ids?.length ?? s.score.total;
         const label = isPJ
           ? `Para Jumbles · ${count} jumble${count === 1 ? '' : 's'}`
@@ -249,8 +288,11 @@ async function renderHome(outlet) {
             ? `Para Summary · ${count} paragraph${count === 1 ? '' : 's'}`
             : isOOO
               ? `Odd One Out · ${count} item${count === 1 ? '' : 's'}`
-              : (titles.get(s.passage_id) ?? s.passage_id);
-        const href = isPJ ? '#/pj' : isPS ? '#/ps' : isOOO ? '#/ooo' : `#/rc/review/${s.passage_id}`;
+              : isWD
+                ? `Word DNA · ${count} famil${count === 1 ? 'y' : 'ies'}`
+                : (titles.get(s.passage_id) ?? s.passage_id);
+        const href = isPJ ? '#/pj' : isPS ? '#/ps' : isOOO ? '#/ooo' : isWD ? '#/wd' : `#/rc/review/${s.passage_id}`;
+        const isJourney = isPJ || isPS || isOOO || isWD;
         return `
         <div class="row">
           <div class="row__lead">
@@ -260,7 +302,7 @@ async function renderHome(outlet) {
               <div class="row__hint">${formatDate(s.finished_at)} · ${s.score.correct}/${s.score.total} correct</div>
             </div>
           </div>
-          <a class="hint" href="${href}" aria-label="Review ${label}">${(isPJ || isPS || isOOO) ? 'Journey' : 'Review'}</a>
+          <a class="hint" href="${href}" aria-label="Review ${label}">${isJourney ? 'Journey' : 'Review'}</a>
         </div>`;
       }).join('')}
     </div>`;
@@ -273,6 +315,7 @@ async function renderHome(outlet) {
       ${todayHTML}
       ${statsHTML}
       ${continueHTML}
+      ${discoveryHTML}
       ${achievementsHTML}
       ${recentHTML}
     </section>
@@ -314,11 +357,13 @@ function renderPractice(outlet) {
           <span>Build the paragraph, and the stranger reveals itself — an eight-tier journey from Foundation to Premium</span>
         </div>
       </a>
-      ${['Vocabulary'].map((name) => `
-        <div class="list-item" aria-disabled="true" style="opacity: var(--opacity-dim)">
-          <div class="list-item__title">${name}</div>
-          <div class="list-item__meta"><span class="badge">Coming in V1.x</span></div>
-        </div>`).join('')}
+      <a class="list-item" href="#/wd">
+        <div class="list-item__title">Word DNA</div>
+        <div class="list-item__meta">
+          <span class="badge badge--success">Available</span>
+          <span>Learn how English is built — roots, prefixes, suffixes, and foreign words, on one Language Tree</span>
+        </div>
+      </a>
     </section>
   `;
 }
@@ -463,6 +508,16 @@ function renderSettings(outlet) {
             </div>
           </div>
           <button class="btn" id="ooo-intro-reset">Show again</button>
+        </div>
+        <div class="row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">⋔</span>
+            <div>
+              <div class="row__label">Word DNA introduction</div>
+              <div class="row__hint">Show the first-time introduction again</div>
+            </div>
+          </div>
+          <button class="btn" id="wd-intro-reset">Show again</button>
         </div>
       </div>
 
@@ -677,6 +732,18 @@ function renderSettings(outlet) {
     }
   });
 
+  // --- Learning: bring the Word DNA introduction back ---
+  outlet.querySelector('#wd-intro-reset').addEventListener('click', async () => {
+    try {
+      await resetWDIntro(storage);
+      cue('toggle');
+      toast('The introduction will greet you on your next visit to Word DNA.', 'info', { mute: true });
+    } catch (err) {
+      toast('Could not reset the introduction.', 'error');
+      console.error('[CAT OS]', err);
+    }
+  });
+
   // --- Backup & Restore ---
   outlet.querySelector('#backup-export').addEventListener('click', async () => {
     await downloadBackup(storage);
@@ -764,6 +831,7 @@ async function boot() {
   registerPJ(router, { storage });
   registerPS(router, { storage });
   registerOOO(router, { storage });
+  registerWD(router, { storage });
 
   router.start();
 
@@ -773,7 +841,7 @@ async function boot() {
     const h = location.hash;
     const isSession = h.startsWith('#/rc/session') || h.startsWith('#/rc/mentor') ||
                       h.startsWith('#/pj/session') || h.startsWith('#/ps/session') ||
-                      h.startsWith('#/ooo/session');
+                      h.startsWith('#/ooo/session') || h.startsWith('#/wd/session');
     if (!isSession) {
       stopFocusNoise();
     }

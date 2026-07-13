@@ -4,6 +4,94 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.13.0 — 2026-07-13 — Word DNA
+
+The fifth module, and the first not to imitate a CAT question format at
+all. Built to a new `WORD_DNA_BIBLE.md`, using two owner-supplied PDFs
+(`SECTION 1- Vocabulary.pdf`, `Section 4 Roots, Prefixes,.pdf`) as the
+exclusive, non-negotiable source of truth for every word, meaning, and
+example transcribed — never invented, rewritten, or simplified. The
+durable idea, and the reason it isn't called "Vocabulary": **understanding
+a word's shared parts beats memorising a list.** A learner who has met
+"chron" once should be able to work out a chron-word they've never seen;
+memorising a list doesn't transfer, noticing a pattern does.
+
+### The learning journey (not a word list)
+- **A first-time introduction** (`/wd` on first open, then `/wd/about`
+  forever, resettable from Settings → Learning): what Word DNA is, why so
+  many words repeat their parts, why understanding beats memorising, how
+  one root unlocks fifty words, and how the journey teaches — five
+  progressive-reveal sections, calm and concrete.
+- **The Language Tree, not a ladder.** Every other module stages
+  difficulty across eight tiers; Word DNA doesn't, because there's no
+  difficulty curve to a root — there's only "met" or "not met yet." The
+  Tree browses five branches (root, prefix, suffix, foreign words, CAT
+  vocabulary) plus a sixth, **Frequently Confused Words**, shown as a
+  disabled "Coming later" row rather than skipped silently: the source
+  chapter for it wasn't available this pass, and the architecture should
+  say so honestly instead of pretending the branch doesn't exist.
+- **One loop, every family: Notice → Predict → Reveal → Understand →
+  Apply.** Notice shows the shared fragment across several taught words
+  (highlighted exactly, hyphens stripped, every spelling of a
+  multi-spelling root tried in turn — `cede`/`ceed`/`cess` all light up).
+  Predict asks what it means before revealing anything. Understand
+  explains why the piece threads every taught word. Apply is the actual
+  test: one or two words the learner was never taught, each decoded from
+  the pattern alone — this is where transfer, not recall, gets proven.
+  Foreign words and CAT vocabulary have no shared root to notice, so they
+  honestly swap the shared-piece Notice for a word-in-context Notice
+  instead (Bible §3a) — meeting a borrowed word is the whole skill, and
+  the module says so rather than manufacturing a pattern that isn't there.
+- **A bounded, four-trait Word DNA** (`core/mentor/wd-dna.js`): root
+  recognition, meaning transfer (the signature trait — the one that
+  actually measures whether a pattern generalized), context calibration,
+  and family fluency. Chosen from seven candidate traits the Bible
+  considered; three were merged or dropped by name (§5) rather than
+  shipped as a padded list. Evidence-floored and banned-word-linted like
+  every other module's DNA.
+- **A derived Word Garden** (`/wd/garden`, `logic/garden.js`): every word
+  earned through a correct Apply — never the taught words themselves,
+  since those were given, not earned. No new storage; entirely computed
+  from stored sessions.
+- **Today's Discovery**: Home offers one word a day (foreign or CAT
+  vocabulary only, deterministic by calendar day) without being asked — a
+  reason to open the app even on a day with no time for a full set. It
+  stops itself; there's no streak to protect and no guilt for skipping it.
+- Plain accuracy, no CAT-style marks. Word DNA isn't a CAT question type,
+  so the result screen says so instead of inventing a scoring convention
+  to imitate one.
+
+Content: 12 families (`batch-wd-001`), spanning all five active branches,
+transcribed verbatim from the two source PDFs. This is deliberately a
+small but *complete* first batch, not the full corpus — every screen,
+interaction, and system is fully experienceable today; the schema and
+registry are designed so every future batch is pure content (more JSON
+files), never a code or UI change.
+
+One real bug caught during browser verification, before shipping: for
+the two-Apply families (foreign words, CAT vocabulary), the second Apply
+challenge was replacing the entire Apply region instead of joining it,
+silently erasing the learner's own first correct transfer — the exact
+moment the module exists to reward — the instant the second challenge
+appeared. Fixed to accumulate, the same pattern Notice/Predict/Understand
+already use, so both transfers stay visible with their verdicts through
+to the mentor moment.
+
+No new component, no new sound, no new color (`--color-info` — blue — is
+reused for the Understand block, the one surface where it's the star);
+`module:"wd"` in the existing sessions/attempts/learning stores; no
+existing module changed. `CACHE_VERSION` → 15, `CONTENT_VERSION` → 10.
+
+Verified: `tools/verify.mjs` (all 14 sections, up from 13 — a new Word
+DNA schema+consistency section and a new engine/voice/DNA/lesson dry run
+section), 217 precached files all resolve, 94 modules reachable from
+app.js all exist and are precached, and two full scripted Chromium passes
+with zero console errors: the root/prefix/suffix path (intro → Tree → a
+full four-family Roots set → mentor moment → Word Garden → Learning Page
+revisit → Growth → Home) and the foreign-word path specifically
+(context-sentence Notice → both Apply challenges → mentor moment), the
+second written to confirm the two-Apply accumulation fix.
+
 ## 0.12.1 — 2026-07-13 — Product audit: four cross-module fixes
 
 A full screen-by-screen audit of every flow in the app (Home, Practice,

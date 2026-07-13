@@ -17,11 +17,12 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-import { loadRCPassages, listRCItems, loadPJItems, loadPSItems, loadOOOItems } from '../core/content-loader/loader.js';
+import { loadRCPassages, listRCItems, loadPJItems, loadPSItems, loadOOOItems, loadWDItems } from '../core/content-loader/loader.js';
 import { deriveDNA } from '../core/mentor/dna.js';
 import { derivePJDNA } from '../core/mentor/pj-dna.js';
 import { derivePSDNA } from '../core/mentor/ps-dna.js';
 import { deriveOOODNA } from '../core/mentor/ooo-dna.js';
+import { deriveWDDNA } from '../core/mentor/wd-dna.js';
 import { listLessons, listReflections } from '../core/mentor/records.js';
 import { RECALL_RETIRED_AFTER } from '../core/mentor/lesson.js';
 import { escapeHTML, formatDate } from '../core/utils/format.js';
@@ -74,10 +75,11 @@ export async function renderGrowth(outlet, { storage }) {
     return;
   }
 
-  const rcSessions = sessions.filter((s) => s.module !== 'pj' && s.module !== 'ps' && s.module !== 'ooo');
+  const rcSessions = sessions.filter((s) => s.module !== 'pj' && s.module !== 'ps' && s.module !== 'ooo' && s.module !== 'wd');
   const pjSessions = sessions.filter((s) => s.module === 'pj');
   const psSessions = sessions.filter((s) => s.module === 'ps');
   const oooSessions = sessions.filter((s) => s.module === 'ooo');
+  const wdSessions = sessions.filter((s) => s.module === 'wd');
   const passages = await loadRCPassages(rcSessions.map((s) => s.passage_id));
   const dna = deriveDNA(rcSessions, passages);
   const pjItems = await loadPJItems(pjSessions.flatMap((s) => s.item_ids ?? []));
@@ -86,6 +88,8 @@ export async function renderGrowth(outlet, { storage }) {
   const psDNA = derivePSDNA(psSessions, psItems);
   const oooItems = await loadOOOItems(oooSessions.flatMap((s) => s.item_ids ?? []));
   const oooDNA = deriveOOODNA(oooSessions, oooItems);
+  const wdItems = await loadWDItems(wdSessions.flatMap((s) => s.item_ids ?? []));
+  const wdDNA = deriveWDDNA(wdSessions, wdItems);
 
   const dnaCard = (o) => `
     <div class="dna dna--${o.kind}">
@@ -133,6 +137,17 @@ export async function renderGrowth(outlet, { storage }) {
         the floor. Keep going.</p>
       </div>` : oooDNA.observations.map(dnaCard).join('')}`;
 
+  /* ---- How you decode (Word DNA) ---- */
+  const wdDnaHTML = wdSessions.length === 0 ? '' : `
+    <div class="stage-head"><h2>How you decode</h2><div class="rule"></div></div>
+    ${wdDNA.observations.length === 0 ? `
+      <div class="card">
+        <p class="muted" style="margin:0">Your decoding is being watched with
+        the same fairness: patterns appear only once the evidence clears the
+        floor. Keep meeting families.</p>
+      </div>` : wdDNA.observations.map(dnaCard).join('')}
+    <p class="hint" style="margin: 0 0 var(--space-3)"><a href="#/wd/garden">Open your Word Garden</a></p>`;
+
   /* ---- Concepts you've collected ---- */
   const recent = lessons.slice(0, 8);
   const lessonsHTML = recent.length === 0 ? `
@@ -143,17 +158,21 @@ export async function renderGrowth(outlet, { storage }) {
       const isPJ = l.module === 'pj';
       const isPS = l.module === 'ps';
       const isOOO = l.module === 'ooo';
+      const isWD = l.module === 'wd';
       const lessonHref = isPJ
         ? (l.item_id ? `#/pj/learn/${escapeHTML(l.item_id)}` : '#/pj')
         : isPS
           ? (l.item_id ? `#/ps/learn/${escapeHTML(l.item_id)}` : '#/ps')
           : isOOO
             ? (l.item_id ? `#/ooo/learn/${escapeHTML(l.item_id)}` : '#/ooo')
-            : `#/rc/mentor/${escapeHTML(l.passage_id)}`;
+            : isWD
+              ? (l.item_id ? `#/wd/learn/${escapeHTML(l.item_id)}` : '#/wd')
+              : `#/rc/mentor/${escapeHTML(l.passage_id)}`;
       const lessonPlace = isPJ ? 'Para Jumbles'
         : isPS ? 'Para Summary'
           : isOOO ? 'Odd One Out'
-            : (titles.get(l.passage_id) ?? l.passage_id);
+            : isWD ? 'Word DNA'
+              : (titles.get(l.passage_id) ?? l.passage_id);
       return `
       <div class="row">
         <div class="row__lead">
@@ -198,6 +217,8 @@ export async function renderGrowth(outlet, { storage }) {
     ${psDnaHTML}
 
     ${oooDnaHTML}
+
+    ${wdDnaHTML}
 
     <div class="stage-head"><h2>Concepts you've collected</h2><div class="rule"></div></div>
     <div class="card">${lessonsHTML}</div>

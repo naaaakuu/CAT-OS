@@ -20,8 +20,8 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 14;
-const CONTENT_VERSION = 9;
+const CACHE_VERSION = 15;
+const CONTENT_VERSION = 10;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
 const KEEP = [SHELL_CACHE, CONTENT_CACHE];
@@ -40,6 +40,7 @@ const SHELL_FILES = [
   './src/core/engine/pj-session.js',
   './src/core/engine/ps-session.js',
   './src/core/engine/ooo-session.js',
+  './src/core/engine/wd-session.js',
   './src/core/content-loader/loader.js',
   './src/core/content-loader/validator.js',
   './src/core/utils/format.js',
@@ -64,6 +65,9 @@ const SHELL_FILES = [
   './src/core/mentor/ooo-voice.js',
   './src/core/mentor/ooo-dna.js',
   './src/core/mentor/ooo-lesson.js',
+  './src/core/mentor/wd-voice.js',
+  './src/core/mentor/wd-dna.js',
+  './src/core/mentor/wd-lesson.js',
   './src/shell/growth.js',
   './src/modules/reading-comprehension/index.js',
   './src/modules/reading-comprehension/logic/store.js',
@@ -97,6 +101,15 @@ const SHELL_FILES = [
   './src/modules/odd-one-out/screens/browser.js',
   './src/modules/odd-one-out/screens/session.js',
   './src/modules/odd-one-out/screens/learn.js',
+  './src/modules/word-dna/index.js',
+  './src/modules/word-dna/logic/tree.js',
+  './src/modules/word-dna/logic/store.js',
+  './src/modules/word-dna/logic/garden.js',
+  './src/modules/word-dna/screens/intro.js',
+  './src/modules/word-dna/screens/tree.js',
+  './src/modules/word-dna/screens/session.js',
+  './src/modules/word-dna/screens/learn.js',
+  './src/modules/word-dna/screens/garden.js',
   './src/ui/components/cat-nav.js',
   './src/ui/components/cat-jumble-board.js',
   './src/ui/components/cat-toast.js',
@@ -130,6 +143,7 @@ const CONTENT_FILES = [
   './content/schema/pj.schema.v1.json',
   './content/schema/ps.schema.v1.json',
   './content/schema/ooo.schema.v1.json',
+  './content/schema/wd.schema.v1.json',
   './content/reading-comprehension/rc-0001.json',
   './content/reading-comprehension/rc-0002.json',
   './content/reading-comprehension/rc-0003.json',
@@ -221,6 +235,18 @@ const CONTENT_FILES = [
   './content/odd-one-out/ooo-0018.json',
   './content/odd-one-out/ooo-0019.json',
   './content/odd-one-out/ooo-0020.json',
+  './content/word-dna/wd-0001.json',
+  './content/word-dna/wd-0002.json',
+  './content/word-dna/wd-0003.json',
+  './content/word-dna/wd-0004.json',
+  './content/word-dna/wd-0005.json',
+  './content/word-dna/wd-0006.json',
+  './content/word-dna/wd-0007.json',
+  './content/word-dna/wd-0008.json',
+  './content/word-dna/wd-0009.json',
+  './content/word-dna/wd-0010.json',
+  './content/word-dna/wd-0011.json',
+  './content/word-dna/wd-0012.json',
 ];
 
 /* Install: precache shell + content, then take over promptly. */
