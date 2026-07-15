@@ -2016,6 +2016,38 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .grove-horizon cat-plant { width: 30%; height: 100%; }
 
+/* The Ground (§4.3, Roadmap 3.2): the Effort Ledger made visible. Never
+   random, never reversing — more of the same fixed set of marks reveals
+   itself as lifetime effort accumulates (see logic/effort.js). Kept low
+   in the scene so it never competes with a plant. */
+.grove-ground {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.grove-mark {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.grove-mark--moss {
+  width: 1.1rem; height: 0.6rem;
+  background: var(--garden-moss);
+  opacity: 0.4;
+  border-radius: 50%;
+}
+.grove-mark--wildflower {
+  width: 0.3rem; height: 0.3rem;
+  background: var(--garden-wildflower);
+  opacity: 0.85;
+}
+.grove-mark--fern {
+  width: 0.4rem; height: 0.9rem;
+  background: var(--garden-fern);
+  opacity: 0.55;
+  border-radius: 50% 50% 50% 0;
+}
+
 .grove-ambient {
   position: absolute;
   inset: 0;
@@ -2244,11 +2276,35 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .vl-terrace-step { fill: none; stroke: var(--garden-soil); stroke-width: 2; opacity: 0.5; }
 .vl-thicket { fill: var(--garden-thicket); }
 .vl-orchard { fill: var(--garden-grove); opacity: 0.55; }
-.vl-stream { fill: none; stroke: var(--garden-water); stroke-width: 6; stroke-linecap: round; }
-.vl-stream--under { stroke-width: 11; opacity: 0.4; }
+.vl-stream { fill: none; stroke: var(--garden-water); stroke-width: 6; stroke-linecap: round; transition: stroke-width var(--duration-slow) var(--ease-out), opacity var(--duration-slow) var(--ease-out); }
+.vl-stream--under { stroke-width: 11; opacity: 0.4; transition: opacity var(--duration-slow) var(--ease-out); }
 .vl-pond { fill: var(--garden-water); }
 .vl-pond-sky { fill: var(--garden-sky-day); opacity: 0.35; }
 .valley[data-time="night"] .vl-pond-sky { fill: var(--garden-sky-night); opacity: 0.5; }
+
+/* The Stream is the streak (§3.1, §4.2, §8.4): level, brightness, and sound
+   reflect RECENT tending only — a smooth decay with a hard floor, never a
+   number shown to the learner. Absence quiets it; it never runs dry. */
+.valley[data-stream="low"]  .vl-stream       { stroke-width: 3.5; opacity: 0.55; }
+.valley[data-stream="low"]  .vl-stream--under { opacity: 0.2; }
+.valley[data-stream="mid"]  .vl-stream       { stroke-width: 5; opacity: 0.8; }
+.valley[data-stream="mid"]  .vl-stream--under { opacity: 0.32; }
+.valley[data-stream="high"] .vl-stream       { stroke-width: 6.5; opacity: 1; animation: vl-stream-glint 4.5s ease-in-out infinite; }
+.valley[data-stream="high"] .vl-stream--under { opacity: 0.5; }
+@keyframes vl-stream-glint { 0%, 100% { opacity: 1; } 50% { opacity: 0.82; } }
+@media (prefers-reduced-motion: reduce) { .valley[data-stream="high"] .vl-stream { animation: none; } }
+
+/* The Ground and the Path (§4.3–4.4, Roadmap 3.2): the Effort Ledger made
+   visible on the valley floor. Marks only ever accumulate (never random,
+   never reversed — logic/effort.js); the path only ever softens with moss,
+   never breaks (Bible: "there is no state in which a path is... lost"). */
+.vl-mark--moss       { fill: var(--garden-moss); opacity: 0.4; }
+.vl-mark--wildflower { fill: var(--garden-wildflower); opacity: 0.85; }
+.vl-mark--fern       { fill: var(--garden-fern); opacity: 0.55; }
+.vl-path { fill: none; stroke-linecap: round; transition: stroke var(--duration-slow) var(--ease-out), opacity var(--duration-slow) var(--ease-out); }
+.vl-path--worn     { stroke: var(--garden-path); stroke-width: 4; opacity: 0.55; }
+.vl-path--settling { stroke: var(--garden-path); stroke-width: 3; stroke-dasharray: 7 6; opacity: 0.4; }
+.vl-path--mossy    { stroke: var(--garden-moss); stroke-width: 2.5; stroke-dasharray: 2 8; opacity: 0.4; }
 
 /* The Rootwood, from a distance: simple canopies, one lit if it is asking. */
 .vl-canopy-trunk { stroke: var(--garden-trunk); stroke-width: 2.4; stroke-linecap: round; }

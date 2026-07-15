@@ -1605,6 +1605,38 @@ if (lgFiles.length === 0) {
     }
   }
 
+  /* -- Effort Ledger: Stream / Ground / Paths (Roadmap Phase 3, 3.1-3.2).
+     Pure functions of history + now: the Stream never touches zero, the
+     Ground only ever moves forward as lifetime sessions accumulate, and a
+     Path is always "mossy" at worst, never broken or gone. -- */
+  {
+    const { computeStreamLevel, streamBand, computeGroundTier, computePathWear, STREAM_FLOOR, GROUND_TIERS } = await mod('src/modules/language-garden/logic/effort.js');
+
+    if (computeStreamLevel([]) !== STREAM_FLOOR) bad('garden effort: an empty history must sit at the Stream floor, never below it');
+    const now = Date.now();
+    const justTended = computeStreamLevel([{ finished_at: new Date(now).toISOString() }], now);
+    if (justTended < 0.9) bad(`garden effort: a session just now should read a near-full Stream, got ${justTended}`);
+    const monthAgo = computeStreamLevel([{ finished_at: new Date(now - 30 * 24 * 60 * 60 * 1000).toISOString() }], now);
+    if (Math.abs(monthAgo - STREAM_FLOOR) > 0.01) bad(`garden effort: a month of silence should settle back to the floor, got ${monthAgo}`);
+    if (streamBand(0) !== 'low' || streamBand(0.5) !== 'mid' || streamBand(1) !== 'high') {
+      bad('garden effort: streamBand thresholds do not match its own bands');
+    }
+
+    const sessionsAt = (n) => Array.from({ length: n }, (_, i) => ({ finished_at: new Date(now - i * 1000).toISOString() }));
+    if (computeGroundTier([]).tier !== 'bare') bad('garden effort: no sessions ever must be Bare ground');
+    let lastTierIndex = -1;
+    for (const count of [0, 8, 25, 60, 120]) {
+      const tier = computeGroundTier(sessionsAt(count)).tier;
+      const idx = GROUND_TIERS.findIndex((t) => t.tier === tier);
+      if (idx < lastTierIndex) bad(`garden effort: Ground tier must never move backwards as effort accumulates (n=${count})`);
+      lastTierIndex = idx;
+    }
+    if (computeGroundTier(sessionsAt(120)).tier !== 'lush') bad('garden effort: 120 lifetime sessions should read Lush ground');
+
+    if (computePathWear([]) !== 'mossy') bad('garden effort: a never-walked path must be mossy, never "broken" or "gone"');
+    if (computePathWear(sessionsAt(10), now) !== 'worn') bad('garden effort: ten recent visits should read a worn path');
+  }
+
   /* -- GardenSession: a real Grow session end to end, on real content. -- */
   {
     const cede = lgResolved.get('lg-0001');

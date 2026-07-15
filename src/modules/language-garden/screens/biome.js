@@ -16,6 +16,7 @@ import { listGardenSessions } from '../logic/store.js';
 import { deriveBiomeScene } from '../logic/scene.js';
 import { biomeBySlug } from '../logic/biomes.js';
 import { pickAmbientEvent, hasNest } from '../logic/ambient.js';
+import { computeGroundTier } from '../logic/effort.js';
 import { EMPTY_DAY_LINES, VALLEY_LINES, pick } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-plant.js';
@@ -49,13 +50,16 @@ export async function renderBiome(outlet, context, params) {
   }
 
   const scene = deriveBiomeScene(families, sessions, biome.slug);
-  renderSceneHTML(outlet, biome, scene);
+  const ground = computeGroundTier(sessions);
+  renderSceneHTML(outlet, biome, scene, ground);
 }
 
-function renderSceneHTML(outlet, biome, scene) {
+function renderSceneHTML(outlet, biome, scene, ground) {
   const { plants, askingId, openSeedId } = scene;
   const sessionSeed = `biome:${biome.slug}:${new Date().toDateString()}`;
-  const event = pickAmbientEvent();
+  const bloomingCount = plants.filter((p) => p.state.stage === 'mature' || p.state.stage === 'ancient').length;
+  const ancientCount = plants.filter((p) => p.state.stage === 'ancient').length;
+  const event = pickAmbientEvent({ bloomingCount, ancientCount, groundTier: ground.tier });
 
   const foreground = plants.filter((p) => p.state.stage !== 'ancient');
   const horizon = plants.filter((p) => p.state.stage === 'ancient');
@@ -68,6 +72,7 @@ function renderSceneHTML(outlet, biome, scene) {
 
       <div class="grove-scene" data-time="${timeClass()}">
         <button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>
+        <div class="grove-ground grove-ground--${ground.tier}" aria-hidden="true">${groundMarkup(ground.tier)}</div>
         ${horizon.length ? `<div class="grove-horizon" aria-hidden="true">
           ${horizon.map(() => `<cat-plant size="horizon" stage="ancient"></cat-plant>`).join('')}
         </div>` : ''}
@@ -174,6 +179,30 @@ function timeClass() {
   if (h < 6 || h >= 20) return 'night';
   if (h >= 17) return 'dusk';
   return 'day';
+}
+
+/** The Ground (§4.3, Roadmap 3.2): a fixed, never-random set of positions
+ *  so the floor looks the same on every visit, and MARK_COUNT_BY_TIER just
+ *  reveals more of the same list as lifetime effort accumulates — nothing
+ *  ever rearranges, it only thickens. Positions are percentages of the
+ *  scene, kept low and to the sides so they never sit under a plant. */
+const GROUND_MARKS = [
+  { x: 8, y: 88, kind: 'moss' },
+  { x: 91, y: 85, kind: 'moss' },
+  { x: 18, y: 94, kind: 'wildflower' },
+  { x: 80, y: 92, kind: 'wildflower' },
+  { x: 4, y: 78, kind: 'fern' },
+  { x: 95, y: 76, kind: 'fern' },
+  { x: 30, y: 96, kind: 'wildflower' },
+  { x: 66, y: 95, kind: 'moss' },
+];
+const MARK_COUNT_BY_TIER = { bare: 0, tended: 2, growing: 4, flourishing: 6, lush: 8 };
+
+function groundMarkup(tier) {
+  const n = MARK_COUNT_BY_TIER[tier] ?? 0;
+  return GROUND_MARKS.slice(0, n)
+    .map((m) => `<span class="grove-mark grove-mark--${m.kind}" style="left:${m.x}%; top:${m.y}%"></span>`)
+    .join('');
 }
 
 function ambientMarkup(event) {

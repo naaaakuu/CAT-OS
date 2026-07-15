@@ -27,6 +27,7 @@ import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
 import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
 import { listGardenSessions, gardenAmbienceEnabled, setGardenAmbience } from './modules/language-garden/logic/store.js';
 import { deriveValleyScene } from './modules/language-garden/logic/scene.js';
+import { computeStreamLevel } from './modules/language-garden/logic/effort.js';
 import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio } from './modules/language-garden/logic/audio.js';
 import { EMPTY_DAY_LINES, pick as pickGardenLine } from './core/mentor/garden-voice.js';
 import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem, listLGItems, loadLGItems } from './core/content-loader/loader.js';
@@ -947,7 +948,10 @@ async function boot() {
     const h = location.hash;
     const isBrowsingGarden = (h === '#/garden' || h.startsWith('#/garden/biome') || h.startsWith('#/garden/plant') || h.startsWith('#/garden/journal'));
     if (isBrowsingGarden && await gardenAmbienceEnabled(storage)) {
-      startGardenAmbience();
+      // The breeze bed's gain reflects the Stream (§3.1, §8.4): a
+      // recently-tended valley runs a little louder with water.
+      const sessions = await listGardenSessions(storage);
+      startGardenAmbience(computeStreamLevel(sessions));
     } else {
       stopGardenAmbience();
     }

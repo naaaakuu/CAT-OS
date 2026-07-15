@@ -256,8 +256,17 @@ function scheduleChirp() {
 
 /** Starts the breeze + chirp loop. A no-op if the shell's master Sounds
  *  preference is off — the garden's Ambience toggle can be left on
- *  without ever surprising a learner who muted the app. */
-export function startGardenAmbience() {
+ *  without ever surprising a learner who muted the app.
+ *
+ *  @param {number} [streamLevel] 0..1, from logic/effort.js
+ *         computeStreamLevel() — "the audio bed whose gain = consistency"
+ *         (Roadmap 3.1). The breeze bed itself never changes shape, only
+ *         how present it is: a well-tended valley is a little louder with
+ *         running water, a quiet one a little quieter, and it never goes
+ *         fully silent (the Stream's own hard floor, §4.2). Defaults to 1
+ *         (full presence) so every existing caller that does not know
+ *         about the Stream keeps its exact prior behaviour. */
+export function startGardenAmbience(streamLevel = 1) {
   try {
     if (state.ambienceOn || gardenGain() <= 0) return;
     if (!ensureGraph()) return;
@@ -274,8 +283,9 @@ export function startGardenAmbience() {
     f.frequency.value = 900;
     f.Q.value = 0.4;
     const g = c.createGain();
+    const level = Math.max(0, Math.min(1, streamLevel));
     g.gain.setValueAtTime(0, c.currentTime);
-    g.gain.setTargetAtTime(0.028 * gardenGain(), c.currentTime, 1.2);
+    g.gain.setTargetAtTime(0.028 * gardenGain() * (0.5 + 0.5 * level), c.currentTime, 1.2);
     src.connect(f).connect(g).connect(state.master);
     src.start();
 

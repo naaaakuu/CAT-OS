@@ -26,6 +26,7 @@ import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js
 import { listGardenSessions } from '../logic/store.js';
 import { deriveValleyScene } from '../logic/scene.js';
 import { biomeBySlug } from '../logic/biomes.js';
+import { computeStreamLevel, streamBand, computeGroundTier, computePathWear } from '../logic/effort.js';
 import { VALLEY_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-plant.js';
@@ -66,7 +67,14 @@ export async function renderOverlook(outlet, context) {
   }
 
   const scene = deriveValleyScene(families, sessions);
-  renderValley(outlet, scene);
+  const rootwoodSessions = (scene.byBiome.get('rootwood') ?? []).flatMap((p) => p.history);
+  const level = computeStreamLevel(sessions);
+  const effort = {
+    streamBand: streamBand(level),
+    ground: computeGroundTier(sessions),
+    rootwoodPathWear: computePathWear(rootwoodSessions),
+  };
+  renderValley(outlet, scene, effort);
 }
 
 /* ------------------------------------------------------------------ */
@@ -77,7 +85,7 @@ export async function renderOverlook(outlet, context) {
 /* that turns it into ground.                                          */
 /* ------------------------------------------------------------------ */
 
-function renderValley(outlet, scene) {
+function renderValley(outlet, scene, effort) {
   const rootwood = biomeBySlug('rootwood');
   const rootwoodPlants = (scene.byBiome.get('rootwood') ?? [])
     .filter((p) => p.state.stage !== 'open_ground' && p.state.stage !== 'seed');
@@ -85,9 +93,11 @@ function renderValley(outlet, scene) {
 
   outlet.innerHTML = `
     <section class="screen valley-screen" aria-label="${escapeHTML(VALLEY_LINES.overlookLabel)}">
-      <div class="valley" data-time="${timeClass()}">
+      <div class="valley" data-time="${timeClass()}" data-stream="${effort.streamBand}">
         <svg class="valley__svg" viewBox="0 0 360 560" preserveAspectRatio="xMidYMid slice">
           ${landforms()}
+          ${groundMarks(effort.ground.tier)}
+          ${path(effort.rootwoodPathWear)}
           ${stream()}
           ${rootwoodCanopy(rootwoodPlants, litInRootwood)}
           <!-- The one living region is the only interactive shape on the valley.
@@ -155,6 +165,39 @@ function landforms() {
     <!-- North / centre: the living Rootwood ground, richer and the clear heart. -->
     <ellipse class="vl-grove vl-grove--rim" cx="180" cy="236" rx="132" ry="86"/>
     <ellipse class="vl-grove" cx="180" cy="236" rx="126" ry="80"/>`;
+}
+
+/** The Ground (§4.3, Roadmap 3.2): the Effort Ledger made visible, drawn
+ *  in a fixed safe band just south of the Rootwood grove where it never
+ *  collides with a region shape or a canopy. Never random — MARK_COUNT_BY_TIER
+ *  reveals more of the same fixed set as lifetime effort accumulates; nothing
+ *  ever rearranges, it only thickens (mirrors logic/effort.js exactly). */
+const GROUND_MARKS = [
+  { x: 112, y: 332, kind: 'moss' },
+  { x: 250, y: 330, kind: 'moss' },
+  { x: 135, y: 340, kind: 'wildflower' },
+  { x: 225, y: 342, kind: 'wildflower' },
+  { x: 160, y: 328, kind: 'fern' },
+  { x: 200, y: 334, kind: 'fern' },
+  { x: 180, y: 344, kind: 'wildflower' },
+  { x: 120, y: 338, kind: 'moss' },
+];
+const MARK_COUNT_BY_TIER = { bare: 0, tended: 2, growing: 4, flourishing: 6, lush: 8 };
+
+function groundMarks(tier) {
+  const n = MARK_COUNT_BY_TIER[tier] ?? 0;
+  return GROUND_MARKS.slice(0, n).map((m) => {
+    if (m.kind === 'moss') return `<ellipse class="vl-mark vl-mark--moss" cx="${m.x}" cy="${m.y}" rx="9" ry="4"/>`;
+    if (m.kind === 'fern') return `<path class="vl-mark vl-mark--fern" d="M${m.x},${m.y + 5} Q${m.x - 4},${m.y - 1} ${m.x},${m.y - 6} Q${m.x + 4},${m.y - 1} ${m.x},${m.y + 5} Z"/>`;
+    return `<circle class="vl-mark vl-mark--wildflower" cx="${m.x}" cy="${m.y}" r="2.1"/>`;
+  }).join('');
+}
+
+/** The one visible Path (§4.4): from the valley's edge up to the Rootwood,
+ *  the only region walked today. Wear never erases it — a neglected path is
+ *  softened by moss, never broken (logic/effort.js computePathWear()). */
+function path(wear) {
+  return `<path class="vl-path vl-path--${wear}" d="M235,540 C222,470 210,400 205,345"/>`;
 }
 
 /** The Mirror Pond and the Stream that threads the valley. The stream runs
