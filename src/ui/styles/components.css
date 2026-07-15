@@ -2190,8 +2190,10 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
   cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
 }
 @media (hover: hover) { .biome__ascend:hover { color: var(--color-ink); } }
+.biome__ascend:active { opacity: var(--opacity-dim); }
 .biome .grove-scene {
   min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 8rem);
   display: flex;
@@ -2325,7 +2327,11 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-size: var(--text-lg);
   color: var(--color-ink-3);
   border-radius: var(--radius-full);
+  transition: background-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
 }
+.lgx__close:active { transform: scale(var(--press-scale)); }
+@media (hover: hover) { .lgx__close:hover { background: var(--color-surface-2); } }
 .lgx__plant {
   width: 34%;
   max-width: 7rem;
@@ -2412,6 +2418,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   transition: transform var(--duration) var(--ease-out), border-color var(--duration) var(--ease-out), background-color var(--duration) var(--ease-out);
 }
 .lgx-part:active { transform: scale(var(--press-scale)); }
+@media (hover: hover) {
+  .lgx-part:not(.is-revealed):hover { border-color: var(--color-line-strong); }
+}
 .lgx-part.is-revealed { border-color: var(--garden-inleaf); background: var(--color-accent-subtle); }
 .lgx-part.is-joined { transform: scale(0.92); opacity: 0.85; }
 .lgx-part__gloss { font-size: var(--text-2xs); font-family: var(--font-ui); color: var(--color-ink-2); }

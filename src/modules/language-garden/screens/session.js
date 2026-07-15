@@ -28,6 +28,17 @@ function prefersReducedMotion() {
   catch { return false; }
 }
 
+/** A true one-shot click: fires at most once and disables the control the
+ *  instant it fires, so a rapid double-tap on a Continue-style button can
+ *  never re-enter the beat that just completed. Session navigation must be
+ *  idempotent — every beat advances exactly once per tap, however fast. */
+function onceClick(el, handler) {
+  el.addEventListener('click', (e) => {
+    el.disabled = true;
+    handler(e);
+  }, { once: true });
+}
+
 function markWord(sentence, word) {
   const stem = word.toLowerCase().slice(0, Math.max(4, word.length - 2));
   const at = sentence.toLowerCase().indexOf(stem);
@@ -74,6 +85,12 @@ export async function renderGardenSession(outlet, context, params) {
   outlet.querySelector('#lgx-close').addEventListener('click', () => { location.hash = biomeHome; });
   const stage = outlet.querySelector('#lgx-stage');
 
+  // Defense in depth alongside the onceClick guards below: this session may
+  // finish exactly once. Even if some future entry point ever reached
+  // grow_growth/revisit_growth twice, the Memory Ledger record it writes
+  // must never be written twice for one real session.
+  let sessionEnded = false;
+
   /* ---------------- shared: a quiet quick-pick beat ----------------
      `readFirst` splits Encounter from Attempt (Bible §5.1, §3.1): when a
      sentence is present, the learner is given a moment to READ it before the
@@ -106,10 +123,12 @@ export async function renderGardenSession(outlet, context, params) {
       for (const opt of optSlot.querySelectorAll('cat-option')) {
         const oi = LETTERS.indexOf(opt.getAttribute('letter'));
         opt.setAttribute('disabled', '');
-        // No red anywhere in the garden (Bible §8, §13): the option that
-        // was picked gets no special "wrong" callout, just the same
-        // neutral dimming as every other non-correct option.
-        opt.setAttribute('state', options[oi].correct ? 'correct' : 'dimmed');
+        // No red anywhere in the garden (Bible §8, §13): a wrong pick never
+        // gets the shell's red "wrong" callout. But the learner's own
+        // choice must never silently vanish into the same dimming as an
+        // option they never touched — "picked" marks it, neutrally, so
+        // what they chose stays visible right up to the reveal.
+        opt.setAttribute('state', options[oi].correct ? 'correct' : oi === idx ? 'picked' : 'dimmed');
       }
       // A beat to let the choice settle and be read, then move on.
       setTimeout(() => onAnswer(idx, verdict.correct), 460);
@@ -170,7 +189,7 @@ export async function renderGardenSession(outlet, context, params) {
       `;
       stage.querySelector('#lgx-joined').appendChild(joined);
       joined.scrollIntoView({ block: 'nearest' });
-      joined.querySelector('#lgx-next').addEventListener('click', onJoined);
+      onceClick(joined.querySelector('#lgx-next'), onJoined);
     }
   }
 
@@ -200,7 +219,7 @@ export async function renderGardenSession(outlet, context, params) {
       </div>
     `;
     playGardenSound('key');
-    stage.querySelector('#lgx-next').addEventListener('click', () => grow_spread(0));
+    onceClick(stage.querySelector('#lgx-next'), () => grow_spread(0));
   }
 
   function grow_spread(memberIndex) {
@@ -221,6 +240,8 @@ export async function renderGardenSession(outlet, context, params) {
   }
 
   async function grow_growth() {
+    if (sessionEnded) return;
+    sessionEnded = true;
     const record = session.finish();
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
     const postState = computePlantState([...history, record], Date.parse(record.finished_at));
@@ -273,6 +294,8 @@ export async function renderGardenSession(outlet, context, params) {
   }
 
   async function revisit_growth() {
+    if (sessionEnded) return;
+    sessionEnded = true;
     const record = session.finish();
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
     const postState = computePlantState([...history, record], Date.parse(record.finished_at));
@@ -318,10 +341,10 @@ export async function renderGardenSession(outlet, context, params) {
       for (const opt of slot.querySelectorAll('cat-option')) {
         const oi = LETTERS.indexOf(opt.getAttribute('letter'));
         opt.setAttribute('disabled', '');
-        // No red anywhere in the garden (Bible §8, §13): the option that
-        // was picked gets no special "wrong" callout, just the same
-        // neutral dimming as every other non-correct option.
-        opt.setAttribute('state', options[oi].correct ? 'correct' : 'dimmed');
+        // Same rule as the choice beats above: no red, but the learner's
+        // own pick still has to stay visible, not dissolve into the dimmed
+        // options they never touched.
+        opt.setAttribute('state', options[oi].correct ? 'correct' : oi === idx ? 'picked' : 'dimmed');
       }
       if (verdict.is_correct || attempt >= 2) {
         setTimeout(() => {
@@ -332,7 +355,7 @@ export async function renderGardenSession(outlet, context, params) {
           const next = document.createElement('button');
           next.className = 'btn btn--primary btn--block';
           next.textContent = GARDEN_LINES.continueLabel;
-          next.addEventListener('click', onDone);
+          onceClick(next, onDone);
           slot.appendChild(next);
         }, 500);
       } else {
@@ -344,7 +367,7 @@ export async function renderGardenSession(outlet, context, params) {
           const again = document.createElement('button');
           again.className = 'btn btn--primary btn--block';
           again.textContent = GARDEN_LINES.continueLabel;
-          again.addEventListener('click', () => reachChoice(slot, { poolIndex, attempt: attempt + 1, member, onDone }));
+          onceClick(again, () => reachChoice(slot, { poolIndex, attempt: attempt + 1, member, onDone }));
           slot.appendChild(again);
         }, 500);
       }

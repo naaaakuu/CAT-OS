@@ -5,7 +5,13 @@
  * a `cat-option-select` event out. It never knows which answer is
  * correct — the screen tells it what state to show.
  *
- * States: "" (idle) · "selected" · "correct" · "wrong" · "dimmed"
+ * States: "" (idle) · "selected" · "correct" · "wrong" · "picked" · "dimmed"
+ *
+ * "picked" is a neutral (non-red) marker for "this is what you chose" when
+ * the choice turned out wrong — used by rooms like the Language Garden
+ * that never use "wrong" (its red is banned by design), but still must
+ * never let a learner's own answer disappear into the same dimming as
+ * every option they never touched.
  */
 
 import { escapeHTML } from '../../core/utils/format.js';
@@ -61,6 +67,8 @@ class CatOption extends HTMLElement {
         cat-option[state="correct"] .letter { background: var(--color-correct-ink); color: var(--color-correct-bg); }
         cat-option[state="wrong"] button { background: var(--color-wrong-bg); border-color: var(--color-wrong-ink); color: var(--color-wrong-ink); }
         cat-option[state="wrong"] .letter { background: var(--color-wrong-ink); color: var(--color-wrong-bg); }
+        cat-option[state="picked"] button { border-color: var(--color-ink-2); background: var(--color-surface); }
+        cat-option[state="picked"] .letter { background: var(--color-ink-2); color: var(--color-surface); }
         cat-option[state="dimmed"] button { opacity: var(--opacity-dim); }
         cat-option[disabled] button { cursor: default; }
       </style>

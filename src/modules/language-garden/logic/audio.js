@@ -44,11 +44,16 @@ const state = {
   chirpTimer: null,
 };
 
-/** The garden stays a little quieter than the shell even at the same
- *  master volume — 0 whenever the shell's own Sounds preference is off. */
+/** Tracks the shell's own master volume 1:1 — 0 whenever the shell's Sounds
+ *  preference is off. An earlier pass held this back to 0.82x "to stay a
+ *  little quieter than the shell," but on a real phone speaker at the
+ *  Bible's own 40-50% target that made several events (Commitment, the
+ *  assembly tick, Bloom) sit below the threshold of being reliably heard.
+ *  Warmth and restraint now come entirely from each sound's own envelope
+ *  and the compressor/lowpass glue below, not from an extra gain penalty. */
 function gardenGain() {
   const prefs = feedbackPrefs();
-  return prefs.sounds ? prefs.volume * 0.82 : 0;
+  return prefs.sounds ? prefs.volume : 0;
 }
 
 function ensureGraph() {
@@ -72,8 +77,8 @@ function ensureGraph() {
   glue.release.value = 0.2;
   const warm = ctx.createBiquadFilter();
   warm.type = 'lowpass';
-  warm.frequency.value = 4600; // below the 2–4 kHz band that turns tinny/harsh on small phone speakers
-  warm.Q.value = 0.6;
+  warm.frequency.value = 4900; // clears the 2–4 kHz band that turns tinny/harsh, but leaves enough
+  warm.Q.value = 0.6;          // presence through for the quieter events to still read on a phone speaker
   master.connect(glue).connect(warm).connect(ctx.destination);
 
   const buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
@@ -150,41 +155,41 @@ const SOUNDS = {
    *  identical for a right and a wrong answer (Law 7). One warm note with a
    *  soft octave of body underneath, quiet enough to be a touch, not an event. */
   commit(t, m) {
-    tone(t, { freq: C4, type: 'sine', peak: 0.030 * m, a: 0.012, d: 0.20 });
-    tone(t, { freq: C3, type: 'sine', peak: 0.014 * m, a: 0.020, d: 0.26 });
+    tone(t, { freq: C4, type: 'sine', peak: 0.042 * m, a: 0.012, d: 0.20 });
+    tone(t, { freq: C3, type: 'sine', peak: 0.020 * m, a: 0.020, d: 0.26 });
   },
   /** The Key (§10.5 #2): something opening. A low body, a warm mid note, and
    *  a gentle rise settling a fifth above — a small question finding its answer. */
   key(t, m) {
-    tone(t, { freq: A3, type: 'sine', peak: 0.020 * m, a: 0.03, hold: 0.05, d: 0.55 });
-    tone(t, { freq: A4, type: 'sine', peak: 0.044 * m, a: 0.02, d: 0.42 });
-    tone(t + 0.16, { freq: D5, type: 'sine', peak: 0.030 * m, a: 0.03, d: 0.5 });
+    tone(t, { freq: A3, type: 'sine', peak: 0.026 * m, a: 0.03, hold: 0.05, d: 0.55 });
+    tone(t, { freq: A4, type: 'sine', peak: 0.052 * m, a: 0.02, d: 0.42 });
+    tone(t + 0.16, { freq: D5, type: 'sine', peak: 0.036 * m, a: 0.03, d: 0.5 });
   },
   /** Growth (§10.5 #4): the peak, and the ONLY sound with harmony. A warm low
    *  body, a sustained fifth held gently underneath (the harmony), and a rising
    *  pentatonic figure that blooms and resolves on a long, ringing tail — the
    *  sound you pause and smile at. Kept in a warm register (nothing above C5). */
   growth(t, m) {
-    tone(t,        { freq: C3, type: 'sine', peak: 0.040 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
-    tone(t + 0.02, { freq: G3, type: 'sine', peak: 0.024 * m, a: 0.09, hold: 0.26, d: 1.3, pan: -0.14 }); // harmony
-    tone(t + 0.02, { freq: C4, type: 'sine', peak: 0.022 * m, a: 0.09, hold: 0.26, d: 1.3, pan: 0.14 });
-    tone(t,        { freq: E4, type: 'sine', peak: 0.030 * m, a: 0.035, d: 0.70 });  // the figure blooms…
-    tone(t + 0.17, { freq: G4, type: 'sine', peak: 0.034 * m, a: 0.035, d: 0.85 });
-    tone(t + 0.36, { freq: C5, type: 'sine', peak: 0.046 * m, a: 0.04,  d: 1.20 });  // …and resolves, ringing
+    tone(t,        { freq: C3, type: 'sine', peak: 0.050 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
+    tone(t + 0.02, { freq: G3, type: 'sine', peak: 0.030 * m, a: 0.09, hold: 0.26, d: 1.3, pan: -0.14 }); // harmony
+    tone(t + 0.02, { freq: C4, type: 'sine', peak: 0.028 * m, a: 0.09, hold: 0.26, d: 1.3, pan: 0.14 });
+    tone(t,        { freq: E4, type: 'sine', peak: 0.038 * m, a: 0.035, d: 0.70 });  // the figure blooms…
+    tone(t + 0.17, { freq: G4, type: 'sine', peak: 0.042 * m, a: 0.035, d: 0.85 });
+    tone(t + 0.36, { freq: C5, type: 'sine', peak: 0.054 * m, a: 0.04,  d: 1.20 });  // …and resolves, ringing
   },
   /** A tapped word-part (§10.5 #3, assembly): a soft pitched tick that RISES
    *  with each part, so assembling a three-part word is a small climbing figure.
    *  A hair of woody grain gives it body without a UI-click edge. */
   leafTap(t, m, { step = 0 } = {}) {
     const f = ASSEMBLY_STEPS[Math.min(step, ASSEMBLY_STEPS.length - 1)];
-    tone(t, { freq: f, type: 'sine', peak: 0.022 * m, a: 0.006, d: 0.18 });
-    grain(t, { peak: 0.009 * m, a: 0.003, d: 0.04, freq: 1400, q: 1.4 });
+    tone(t, { freq: f, type: 'sine', peak: 0.032 * m, a: 0.006, d: 0.18 });
+    grain(t, { peak: 0.014 * m, a: 0.003, d: 0.04, freq: 1400, q: 1.4 });
   },
   /** Parts joining into the whole word: a warm, round settle, a step above the
    *  last tap — the figure landing. */
   bloom(t, m) {
-    tone(t, { freq: G4, type: 'sine', peak: 0.030 * m, a: 0.012, d: 0.24 });
-    tone(t + 0.05, { freq: C5, type: 'sine', peak: 0.024 * m, a: 0.016, d: 0.30 });
+    tone(t, { freq: G4, type: 'sine', peak: 0.040 * m, a: 0.012, d: 0.24 });
+    tone(t + 0.05, { freq: C5, type: 'sine', peak: 0.032 * m, a: 0.016, d: 0.30 });
   },
 };
 
