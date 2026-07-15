@@ -24,20 +24,16 @@
  * state, never a motor for the next tap).
  */
 
-export function timeOfDay(date = new Date()) {
-  const h = date.getHours();
-  if (h < 6) return 'night';
-  if (h < 9) return 'dawn';
-  if (h < 17) return 'day';
-  if (h < 20) return 'dusk';
-  return 'night';
-}
+import { timeOfDay } from './atmosphere.js';
+
+export { timeOfDay };
 
 const BASE_EVENTS_BY_TIME = Object.freeze({
-  dawn:  ['bird', 'leaf-stir'],
-  day:   ['bird', 'leaf-stir'],
-  dusk:  ['bird', 'leaf-stir'],
-  night: ['leaf-stir'],
+  dawn:      ['bird', 'leaf-stir'],   // birdsong at its densest (§4.5)
+  morning:   ['bird', 'leaf-stir'],
+  afternoon: ['bird', 'leaf-stir'],
+  dusk:      ['bird', 'leaf-stir'],   // everything quieting
+  night:     ['leaf-stir'],
 });
 
 /** How often ANY visitor appears at all, scaled by the Ground's effort
@@ -52,10 +48,13 @@ const DENSITY_BY_GROUND_TIER = Object.freeze({
 function poolFor(time, { bloomingCount = 0, ancientCount = 0 }) {
   const pool = [...BASE_EVENTS_BY_TIME[time]];
   if (bloomingCount > 0) {
-    if (time === 'day' || time === 'dawn') pool.push('butterfly');
+    if (time === 'dawn' || time === 'morning' || time === 'afternoon') pool.push('butterfly');
     if (time === 'dusk') pool.push('petal');
   }
-  if (ancientCount > 0 && time === 'night') pool.push('firefly', 'firefly'); // a nested firefly-glow bias
+  if (ancientCount > 0) {
+    if (time === 'night') pool.push('firefly', 'firefly'); // a nested firefly-glow bias
+    if (time === 'dusk') pool.push('firefly');             // "the first fireflies" (§4.5)
+  }
   return pool;
 }
 

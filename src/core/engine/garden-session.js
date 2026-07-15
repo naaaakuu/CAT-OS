@@ -61,10 +61,9 @@ export const GOLD_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
  *  exactly one place. Ordered lowest → highest.
  *
  *  open_ground  Nothing planted. Bare earth. Never a padlock, never a price.
- *  seed         Planted, not begun. Sits quietly, never nags. (Reached by a
- *               future "plant without growing" action — see PLANT_SEED note
- *               below; no family enters it yet, but the model and art are
- *               ready so the day it lands nothing here changes.)
+ *  seed         Planted, not begun. Sits quietly, never nags. Reached by
+ *               carrying a word back through the Gate from real reading
+ *               (§19.2 — core/engine/garden-gate.js plantSeed()).
  *  sprout       First session complete, the key is known. The "small green
  *               thing" of the onboarding (§3.1).
  *  young        All members met; established, now asking for its first spaced
@@ -100,12 +99,13 @@ export function computePlantState(records, now = Date.now()) {
   const grows = records.filter((r) => r.session_type === 'grow').sort(byFinishedAsc);
   const revisits = records.filter((r) => r.session_type === 'revisit').sort(byFinishedAsc);
 
-  // No grow yet: this is Open ground (§6.2 stage 0 — absence, not a stage).
-  // A future "plant a seed without growing" action (PLANT_SEED) would persist
-  // intent and surface `seed` here instead; until then a family is either
-  // uncultivated ground or growing.
+  // No grow yet: Open ground (§6.2 stage 0 — absence, not a stage) — unless
+  // a seed was carried back through the Gate (§19.2, the PLANT_SEED action,
+  // landed in Phase 3): planted intent, not growth. A seed sits quietly and
+  // never nags — no due state, no schedule, until its first Grow session.
   if (grows.length === 0) {
-    return { stage: 'open_ground', due: 'none', nextReviewAt: null, revisitCount: 0, rung: 0, plantedAt: null, lastVisitedAt: null, ancientAt: null };
+    const seeded = records.some((r) => r.kind === 'garden-seed');
+    return { stage: seeded ? 'seed' : 'open_ground', due: 'none', nextReviewAt: null, revisitCount: 0, rung: 0, plantedAt: null, lastVisitedAt: null, ancientAt: null };
   }
 
   const plantedAt = grows[0].finished_at;

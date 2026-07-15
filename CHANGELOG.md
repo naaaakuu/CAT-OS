@@ -4,6 +4,86 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.15.0 — 2026-07-15 — The Language Garden becomes a place (Phases 1–3)
+
+Three phases of the `LANGUAGE GARDEN — IMPLEMENTATION ROADMAP.md` (v1.4.0,
+subordinate to the Bible), landed as one release: the world's skeleton, the
+loop's feel, and the environment that makes the Two Ledgers true.
+
+### Phase 1 — Foundational (2026-07-14)
+- **The Overlook** (`/garden`): the whole valley from above — the Wilds ridge,
+  seven regions from the Bible's compass, the stream through the Mirror Pond,
+  the Rootwood as the living heart with grown plants as distant canopies (at
+  most one glowing: the single valley-wide invitation). Tapping the Rootwood
+  descends with a zoom. First-ever open drops straight into the opening
+  session (§3.1) — no splash, no tour.
+- **Three named-principle violations fixed**: no "1 of 3" Spread counter, no
+  stage-as-a-word anywhere (form conveys stage), no tap-to-reveal answers on
+  the Plant screen (word-only capability chips, P22).
+- **Immersive chrome**: `data-immersive` hides the shell header and nav on
+  every `/garden*` route; every garden screen carries its own quiet way out.
+- **The six stages** (`open_ground · seed · sprout · young · in_leaf · mature
+  · ancient`) with a real Mature stage; horizon and nest key off Ancient.
+- **The biome/engine seam** (`logic/biomes.js`): seven biomes, seven engines,
+  `living` vs `wild`; screens and routing dispatch on the seam so the next
+  biome changes content, not code.
+
+### Phase 2 — Interaction (2026-07-15)
+- **The growth animation**: anticipation → extension (a base-anchored rise
+  out of the soil, not a uniform scale) → one organic settle → rest, ~1.4s,
+  composite-only; the line and button stay veiled until motion stops (§11.4);
+  first viewing sacred, skippable from the second (§11.2); reduced motion
+  gets before→after with the chime and haptic (§11.5).
+- **The two haptics** (12ms commitment tick, identical right or wrong; a
+  warm growth thump) and **the Commitment sound** (soft low C, identical for
+  right and wrong, P87), inside a rebuilt warm mix: soft-knee compressor,
+  4.6kHz ceiling, sine voices, growth re-voiced as the one unmistakable peak,
+  assembly taps rising a step per part (§10.5); the shell's global click is
+  suppressed inside the Garden (§10.6).
+- **Encounter split from Attempt** (sentence alone first, question after a
+  beat of reading or a tap — §5.1) and **long-press peek** (hold a plant to
+  see its key and members; release and it is gone — §14.2).
+
+### Phase 3 — Environmental (2026-07-15)
+- **The Stream** (`logic/effort.js`): consistency as water — 3-day half-life
+  decay, hard floor, never dry; three render bands (width/brightness/glint)
+  and the ambience bed's gain follow it (§8.4).
+- **The Ground and Paths**: lifetime, monotonic effort tiers revealing a
+  fixed set of moss/wildflower/fern marks (a failed session still thickens
+  the soil — Law 2); the one walked path wears and softens to mossy, never
+  breaks (§4.3–4.4).
+- **State-driven ambient life**: butterflies need an actual bloom, fireflies
+  weight up with Ancient trees, density scales with the Ground tier — a
+  mirror of true state, never a coin flip (Law 8). Dragonflies honestly wait
+  for the Mirror Pond (Phase 4.5+).
+- **Five real times of day + seeded weather** (`logic/atmosphere.js`, new):
+  dawn/morning/afternoon/dusk/night skies with a composed light filter;
+  weather (clear/rain/fog/wind/snow) generated from the calendar and a seed
+  only — deterministic, season-weighted, never behavioural, never mechanical
+  (§4.5–4.6). **Night is the best-looking state** (§12.6): a fixed
+  constellation, a crescent moon, silver water — the exhausted 11:40pm
+  learner gets the most beautiful version, in light theme too.
+- **World seasons**: calendar-driven palette/light shift (spring fresh,
+  summer warm, autumn amber, winter near-monochrome) over the drawn world
+  only — text contrast untouched, and the one asking plant still reads
+  everywhere because it catches light, which no season reproduces (§4.7,
+  §12.5, §12.7).
+- **The Gate + Sightings/Seeds** (`core/engine/garden-gate.js`, new — in
+  core because module islands never import each other): the Gate is now a
+  drawn, tappable place at the valley's edge and leaving through it is a
+  small journey (§16.9). Outward: finishing an RC passage that contains a
+  grown garden word records a silent **sighting** (word-boundary,
+  same-word-inflection tolerant), shown in the Journal's new Sightings
+  section with where it was seen (§19.2, §16.6) — no toast, no XP, ever.
+  Inward: the RC Learning Page quietly offers "Carry it back to the garden"
+  for words matching an unplanted family; the **seed** arrives with a note
+  about where it came from, activating the Seed stage Phase 1 architected.
+  Today's passages and families do not yet overlap, so the loop is live but
+  dormant until content grows — nothing is faked.
+- `CACHE_VERSION` → 19; verify.mjs gains atmosphere-determinism and
+  Gate-honesty assertions; driven end-to-end in Chrome (15/15 checks, zero
+  console errors).
+
 ## 0.14.0 — 2026-07-14 — Language Garden (Root Grove)
 
 The sixth module island, and the first not built around a question-and-answer

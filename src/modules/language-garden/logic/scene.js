@@ -16,11 +16,15 @@ import { computePlantState } from '../../../core/engine/garden-session.js';
 import { biomeForFamily, biomeBySlug } from './biomes.js';
 import { sessionsForFamily } from './store.js';
 
-/** Build the per-plant view: content + derived state + its biome. */
-function plantsFor(families, allSessions, now) {
+/** Build the per-plant view: content + derived state + its biome. Seeds
+ *  (carried back through the Gate, §19.2) shape the STATE but are never
+ *  part of the session history — a seed is intent, not effort, so it
+ *  must not thicken the Ground or wear a Path. */
+function plantsFor(families, allSessions, now, seeds = []) {
   return families.map((family) => {
     const history = sessionsForFamily(allSessions, family.meta.id);
-    return { family, state: computePlantState(history, now), history, biome: biomeForFamily(family) };
+    const familySeeds = seeds.filter((s) => s.family_id === family.meta.id);
+    return { family, state: computePlantState([...history, ...familySeeds], now), history, biome: biomeForFamily(family) };
   });
 }
 
@@ -43,8 +47,8 @@ function pickOpenSeed(plants, asking) {
  * @returns {{plants, byBiome: Map<string, Array>, askingId, askingBiomeSlug,
  *            openSeedId, openSeedBiomeSlug}}
  */
-export function deriveValleyScene(families, allSessions, now = Date.now()) {
-  const plants = plantsFor(families, allSessions, now);
+export function deriveValleyScene(families, allSessions, now = Date.now(), seeds = []) {
+  const plants = plantsFor(families, allSessions, now, seeds);
   const asking = pickAsking(plants);
   const openSeed = pickOpenSeed(plants, asking);
 
@@ -70,9 +74,9 @@ export function deriveValleyScene(families, allSessions, now = Date.now()) {
  * One biome, for the biome screen (the Rootwood today).
  * @returns {{biome, plants, askingId, openSeedId}}
  */
-export function deriveBiomeScene(families, allSessions, biomeSlug, now = Date.now()) {
+export function deriveBiomeScene(families, allSessions, biomeSlug, now = Date.now(), seeds = []) {
   const inBiome = families.filter((f) => biomeForFamily(f)?.slug === biomeSlug);
-  const plants = plantsFor(inBiome, allSessions, now);
+  const plants = plantsFor(inBiome, allSessions, now, seeds);
   const asking = pickAsking(plants);
   const openSeed = pickOpenSeed(plants, asking);
   return {

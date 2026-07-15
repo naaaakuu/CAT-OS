@@ -12,11 +12,13 @@
  */
 
 import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
-import { listGardenSessions } from '../logic/store.js';
+import { listGardenSessions, listGardenSeeds } from '../logic/store.js';
 import { deriveBiomeScene } from '../logic/scene.js';
 import { biomeBySlug } from '../logic/biomes.js';
 import { pickAmbientEvent, hasNest } from '../logic/ambient.js';
 import { computeGroundTier } from '../logic/effort.js';
+import { atmosphereFor } from '../logic/atmosphere.js';
+import { weatherLayerHTML } from './atmosphere-art.js';
 import { EMPTY_DAY_LINES, VALLEY_LINES, pick } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-plant.js';
@@ -36,12 +38,13 @@ export async function renderBiome(outlet, context, params) {
     </section>
   `;
 
-  let families, sessions;
+  let families, sessions, seeds;
   try {
     const registry = await listLGItems();
     const loaded = await loadLGItems(registry.map((i) => i.id));
     families = registry.map((i) => loaded.get(i.id)).filter(Boolean);
     sessions = await listGardenSessions(context.storage);
+    seeds = await listGardenSeeds(context.storage);
   } catch (err) {
     outlet.innerHTML = `<section class="screen"><h1>${escapeHTML(biome.name)} will not open</h1>
       <div class="card"><p>${escapeHTML(err.message)}</p>
@@ -49,13 +52,14 @@ export async function renderBiome(outlet, context, params) {
     return;
   }
 
-  const scene = deriveBiomeScene(families, sessions, biome.slug);
+  const scene = deriveBiomeScene(families, sessions, biome.slug, Date.now(), seeds);
   const ground = computeGroundTier(sessions);
   renderSceneHTML(outlet, biome, scene, ground);
 }
 
 function renderSceneHTML(outlet, biome, scene, ground) {
   const { plants, askingId, openSeedId } = scene;
+  const atmo = atmosphereFor();
   const sessionSeed = `biome:${biome.slug}:${new Date().toDateString()}`;
   const bloomingCount = plants.filter((p) => p.state.stage === 'mature' || p.state.stage === 'ancient').length;
   const ancientCount = plants.filter((p) => p.state.stage === 'ancient').length;
@@ -70,8 +74,9 @@ function renderSceneHTML(outlet, biome, scene, ground) {
         <span aria-hidden="true">↑</span> ${escapeHTML(VALLEY_LINES.toValley)}
       </button>
 
-      <div class="grove-scene" data-time="${timeClass()}">
+      <div class="grove-scene" data-time="${atmo.time}" data-season="${atmo.season}" data-weather="${atmo.weather}">
         <button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>
+        ${weatherLayerHTML(atmo.weather)}
         <div class="grove-ground grove-ground--${ground.tier}" aria-hidden="true">${groundMarkup(ground.tier)}</div>
         ${horizon.length ? `<div class="grove-horizon" aria-hidden="true">
           ${horizon.map(() => `<cat-plant size="horizon" stage="ancient"></cat-plant>`).join('')}
@@ -172,13 +177,6 @@ function plantSlotHTML(p, askingId, openSeedId) {
       <span class="grove-plant__label">${escapeHTML(p.family.root.label)}</span>
     </button>
   `;
-}
-
-function timeClass() {
-  const h = new Date().getHours();
-  if (h < 6 || h >= 20) return 'night';
-  if (h >= 17) return 'dusk';
-  return 'day';
 }
 
 /** The Ground (§4.3, Roadmap 3.2): a fixed, never-random set of positions

@@ -25,7 +25,7 @@ import { resetWDIntro } from './modules/word-dna/logic/store.js';
 import { recommendNextPJ } from './modules/para-jumbles/logic/tiers.js';
 import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
 import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
-import { listGardenSessions, gardenAmbienceEnabled, setGardenAmbience } from './modules/language-garden/logic/store.js';
+import { listGardenSessions, listGardenSeeds, gardenAmbienceEnabled, setGardenAmbience } from './modules/language-garden/logic/store.js';
 import { deriveValleyScene } from './modules/language-garden/logic/scene.js';
 import { computeStreamLevel } from './modules/language-garden/logic/effort.js';
 import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio } from './modules/language-garden/logic/audio.js';
@@ -60,7 +60,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.14.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.15.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -185,7 +185,8 @@ async function gardenHomeCard() {
     const loaded = await loadLGItems(registry.map((i) => i.id));
     const families = registry.map((i) => loaded.get(i.id)).filter(Boolean);
     const sessions = await listGardenSessions(storage);
-    const scene = deriveValleyScene(families, sessions);
+    const gateSeeds = await listGardenSeeds(storage);
+    const scene = deriveValleyScene(families, sessions, Date.now(), gateSeeds);
     const seed = `home-garden:${new Date().toDateString()}`;
 
     let line;

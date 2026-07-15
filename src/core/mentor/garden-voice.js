@@ -80,10 +80,11 @@ export const GARDEN_LINES = Object.freeze({
 export const VALLEY_LINES = Object.freeze({
   journal: 'Journal',
   settings: 'Settings',
-  leave: 'Leave the valley',   // stands in for the Gate until §19.2 is built
+  gate: 'Through the Gate',    // the way out is a place, not a nav item (§16.9)
   toValley: 'The valley',      // ascend from a biome to the Overlook
   // Accessible names for the wordless world (screen readers only).
   overlookLabel: 'The valley, seen from above',
+  gateLabel: 'The Gate, leading out of the valley',
   enterBiome: (name) => `Enter ${name}`,
   wildBiome: (name) => `${name}, still wild`,
 });
@@ -123,6 +124,22 @@ export const ATTEMPT_LINES = Object.freeze({
 export const JOURNAL_LINES = Object.freeze({
   heading: 'What you can read now',
   emptyHeading: 'Your first plant is still growing',
-  sightingsHeading: 'Wild sightings',
-  emptySightings: 'Every word you construct in a Reach settles here.',
+  reachHeading: 'Words you reached for',
+  emptyReach: 'Every word you construct in a Reach settles here.',
+  // True sightings (§16.6, §19.2): a grown word, met out in real reading.
+  sightingsHeading: 'Sightings',
+  emptySightings: 'Words from your garden, met again in real reading, settle here.',
+  sightingLine: (title) => `seen in ${title}`,
+});
+
+/* ------------------------------------------------------------------ */
+/* The Gate's inward traffic (§19.2) — a word met in real reading,     */
+/* carried back and planted as a seed with a note about where it came  */
+/* from. The offer is quiet; the confirmation is quieter.              */
+/* ------------------------------------------------------------------ */
+
+export const SEED_LINES = Object.freeze({
+  carryBack: 'Carry it back to the garden',
+  carried: 'A seed now waits in the valley.',
+  arrivedFrom: (title) => `Carried back from ${title}.`,
 });

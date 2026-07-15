@@ -1637,6 +1637,98 @@ if (lgFiles.length === 0) {
     if (computePathWear(sessionsAt(10), now) !== 'worn') bad('garden effort: ten recent visits should read a worn path');
   }
 
+  /* -- Atmosphere (Roadmap 3.4, 3.6): the sky is a function of the clock
+     and the calendar ONLY — deterministic, never behaviour-driven, snow
+     never outside winter, and every hour of the day belongs to exactly
+     one of the five real time states. -- */
+  {
+    const { timeOfDay, worldSeason, weatherFor, TIMES_OF_DAY, WEATHERS, atmosphereFor } = await mod('src/modules/language-garden/logic/atmosphere.js');
+
+    for (let h = 0; h < 24; h += 1) {
+      const t = timeOfDay(new Date(2026, 3, 10, h, 30));
+      if (!TIMES_OF_DAY.includes(t)) bad(`garden atmosphere: hour ${h} maps to unknown time "${t}"`);
+    }
+    if (timeOfDay(new Date(2026, 3, 10, 23, 40)) !== 'night') bad('garden atmosphere: 11:40pm must be night — the learner it is designed for');
+    if (timeOfDay(new Date(2026, 3, 10, 6, 0)) !== 'dawn') bad('garden atmosphere: 6am should be dawn');
+
+    const seasonOf = (m) => worldSeason(new Date(2026, m, 15));
+    if (seasonOf(3) !== 'spring' || seasonOf(6) !== 'summer' || seasonOf(9) !== 'autumn' || seasonOf(0) !== 'winter') {
+      bad('garden atmosphere: worldSeason does not follow the calendar');
+    }
+
+    // Weather: deterministic (same date+window → same sky), always a known
+    // kind, and snow belongs to winter alone (§12.5).
+    for (let day = 1; day <= 60; day += 1) {
+      for (const month of [0, 3, 6, 9]) {
+        const d = new Date(2026, month, 1 + (day % 27), 10, 0);
+        const w = weatherFor(d);
+        if (!WEATHERS.includes(w)) bad(`garden atmosphere: unknown weather "${w}"`);
+        if (weatherFor(new Date(d)) !== w) bad('garden atmosphere: weather is not deterministic for the same date');
+        if (w === 'snow' && worldSeason(d) !== 'winter') bad('garden atmosphere: snow outside winter');
+      }
+    }
+    // Within one time window the sky must not flicker (§4.6 seed+calendar).
+    const morningA = weatherFor(new Date(2026, 4, 20, 8, 5));
+    const morningB = weatherFor(new Date(2026, 4, 20, 11, 55));
+    if (morningA !== morningB) bad('garden atmosphere: weather changed mid-window');
+    const atmo = atmosphereFor(new Date(2026, 4, 20, 8, 5));
+    if (!atmo.time || !atmo.season || !atmo.weather) bad('garden atmosphere: atmosphereFor is missing a field');
+  }
+
+  /* -- The Gate (Roadmap 3.5, §19.2): seeds and sightings are honest.
+     A sighting needs a GROWN word actually present in the passage text;
+     a held-out Reach word only counts once it was constructed; a seed
+     offer only exists for truly open ground; and a seed record makes the
+     stage read "seed" without ever counting as effort. -- */
+  {
+    const gate = await mod('src/core/engine/garden-gate.js');
+    const { computePlantState } = await mod('src/core/engine/garden-session.js');
+
+    if (!gate.textContainsWord('They chose to secede from the union.', 'secede')) bad('garden gate: word-boundary match missed a present word');
+    if (!gate.textContainsWord('Two states seceded that year.', 'secede')) bad('garden gate: an inflection of the same word is that word, met in the wild');
+    if (!gate.textContainsWord('The waters were receding.', 'recede')) bad('garden gate: drop-final-e inflection missed');
+    if (gate.textContainsWord('The secession was loud.', 'secede')) bad('garden gate: matched a DIFFERENT derived word (secession is not secede)');
+    if (gate.textContainsWord('He interceded.', 'cede')) bad('garden gate: matched inside a longer word (boundary broken)');
+
+    const family = {
+      meta: { id: 'lg-test' },
+      root: { label: 'cede' },
+      members: [
+        { vocab_id: 'v1', word: 'secede', held_out: false },
+        { vocab_id: 'v2', word: 'intercede', held_out: true },
+      ],
+    };
+    const passage = {
+      meta: { id: 'rc-test' },
+      passage: { title: 'T', paragraphs: [{ text: 'To secede is one thing; to intercede another.' }] },
+    };
+    const grow = { kind: 'garden-session', session_type: 'grow', family_id: 'lg-test', finished_at: new Date().toISOString() };
+
+    // Unplanted family: nothing to sight, but the word is seedable.
+    if (gate.findSightings(passage, [family], []).length !== 0) bad('garden gate: sighted a word from an unplanted family');
+    const seedable = gate.findSeedable([{ word: 'Secede' }], [family], []);
+    if (seedable.length !== 1 || seedable[0].familyId !== 'lg-test') bad('garden gate: an open-ground family member should be seedable (case-insensitive)');
+
+    // Planted family: the taught word is sighted; the unconstructed
+    // held-out word is not; and nothing is seedable any more.
+    const sighted = gate.findSightings(passage, [family], [grow]);
+    if (!sighted.some((s) => s.word === 'secede')) bad('garden gate: a grown word in the passage must be a sighting');
+    if (sighted.some((s) => s.word === 'intercede')) bad('garden gate: a never-constructed held-out word must not be a sighting');
+    if (gate.findSeedable([{ word: 'secede' }], [family], [grow]).length !== 0) bad('garden gate: a planted family must not be seedable');
+
+    // Once the Reach landed, the held-out word counts.
+    const reached = { ...grow, reach: { vocab_id: 'v2', is_correct: true } };
+    if (!gate.findSightings(passage, [family], [reached]).some((s) => s.word === 'intercede')) {
+      bad('garden gate: a constructed Reach word should be sightable');
+    }
+
+    // A seed record surfaces the Seed stage; a grow still wins over it.
+    const seed = { kind: 'garden-seed', family_id: 'lg-test', planted_at: new Date().toISOString() };
+    if (computePlantState([seed]).stage !== 'seed') bad('garden gate: a carried-back seed must surface the Seed stage');
+    if (computePlantState([seed]).due !== 'none') bad('garden gate: a seed must never be due — it sits quietly and never nags');
+    if (computePlantState([seed, grow]).stage === 'seed') bad('garden gate: a grown family must not read as a seed');
+  }
+
   /* -- GardenSession: a real Grow session end to end, on real content. -- */
   {
     const cede = lgResolved.get('lg-0001');

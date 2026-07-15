@@ -41,6 +41,14 @@ export function sessionsForFamily(sessions, familyId) {
   return sessions.filter((s) => s.family_id === familyId);
 }
 
+/* ---------------- The Gate's traffic (§19.2, Roadmap 3.5) ----------------
+   Seeds carried back from real reading, and sightings of grown words met
+   out in real passages. The records themselves are written by
+   core/engine/garden-gate.js (the RC module calls it — module islands
+   never import each other); the garden only ever reads them. */
+
+export { listGardenSeeds, listGardenSightings } from '../../../core/engine/garden-gate.js';
+
 /* ---------------- First-time introduction ----------------
    One settings flag, same pattern as every other module: the
    introduction shows once, then lives one tap away forever. */

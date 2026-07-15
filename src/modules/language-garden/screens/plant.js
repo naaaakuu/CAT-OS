@@ -14,18 +14,19 @@
  */
 
 import { loadLGItem } from '../../../core/content-loader/loader.js';
-import { listGardenSessions, sessionsForFamily } from '../logic/store.js';
+import { listGardenSessions, listGardenSeeds, sessionsForFamily } from '../logic/store.js';
 import { computePlantState } from '../../../core/engine/garden-session.js';
 import { biomeForFamily } from '../logic/biomes.js';
-import { GARDEN_LINES } from '../../../core/mentor/garden-voice.js';
+import { GARDEN_LINES, SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 
 export async function renderPlant(outlet, context, params) {
-  let family, history;
+  let family, history, seed;
   try {
     family = await loadLGItem(params.id);
     const all = await listGardenSessions(context.storage);
     history = sessionsForFamily(all, params.id);
+    seed = (await listGardenSeeds(context.storage)).find((s) => s.family_id === params.id) ?? null;
   } catch (err) {
     outlet.innerHTML = `<section class="screen"><h1>This plant will not open</h1>
       <div class="card"><p>${escapeHTML(err.message)}</p>
@@ -36,7 +37,7 @@ export async function renderPlant(outlet, context, params) {
   const biome = biomeForFamily(family);
   const biomeHome = biome ? `#/garden/biome/${biome.slug}` : '#/garden';
 
-  const state = computePlantState(history);
+  const state = computePlantState(seed ? [...history, seed] : history);
   const reachedWords = new Set(history.filter((s) => s.reach?.is_correct).map((s) => s.reach.vocab_id));
   const known = !['open_ground', 'seed'].includes(state.stage);
 
@@ -46,10 +47,14 @@ export async function renderPlant(outlet, context, params) {
       ? `<button class="btn btn--primary btn--block" id="plant-action">${GARDEN_LINES.revisitAction}</button>`
       : '';
 
+  // A seed carried back through the Gate arrives with a note about where
+  // it came from (§19.2) — the one thing a seed is allowed to say.
   const keyHTML = known ? `
     <p class="lg-plant__key">${escapeHTML(family.root.label)}. ${escapeHTML(family.root.origin_language)}.
       ${escapeHTML(family.root.core_meaning[0].toUpperCase() + family.root.core_meaning.slice(1))}.</p>
     ${family.root.mentor_note ? `<p class="hint">${escapeHTML(family.root.mentor_note)}</p>` : ''}
+  ` : state.stage === 'seed' && seed?.source?.title ? `
+    <p class="muted">${escapeHTML(SEED_LINES.arrivedFrom(seed.source.title))}</p>
   ` : `<p class="muted">This root has not opened yet.</p>`;
 
   // Members appear as the words you can now read. A held-out Reach word only

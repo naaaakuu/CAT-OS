@@ -20,6 +20,7 @@
 
 import { loadRCPassage, loadRCPassages } from '../../../core/content-loader/loader.js';
 import { PracticeSession } from '../../../core/engine/session.js';
+import { recordPassageSightings } from '../../../core/engine/garden-gate.js';
 import { saveResults } from '../logic/store.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
 import { sessionXP } from '../../../core/engagement/xp.js';
@@ -279,6 +280,15 @@ export async function renderSession(outlet, { storage }, params) {
       console.error('[CAT OS]', err);
       toast('Session finished but could not be saved.', 'error');
     }
+
+    // The Gate, outward (LANGUAGE_GARDEN_BIBLE §19.2): if a word grown in
+    // the Garden appeared in this passage and the reading was finished
+    // without stalling — the session completed — the Journal quietly
+    // records a sighting. Silent by design: no toast, no XP, no sound.
+    // The learner discovers it later, sitting on the bench.
+    recordPassageSightings(storage, passage).catch((err) => {
+      console.error('[CAT OS] garden sightings failed:', err); // never blocks the mentor moment
+    });
 
     const { session: s } = results;
 

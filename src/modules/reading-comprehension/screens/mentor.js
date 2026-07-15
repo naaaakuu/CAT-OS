@@ -24,6 +24,8 @@
 
 import { loadRCPassage } from '../../../core/content-loader/loader.js';
 import { latestSessionFor, getReflection, saveReflection } from '../logic/store.js';
+import { findSeedableForPassage, plantSeed } from '../../../core/engine/garden-gate.js';
+import { SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { cue } from '../../../core/engagement/feedback.js';
@@ -315,6 +317,19 @@ export async function renderMentor(outlet, { storage }, params) {
   }
 
   const vocab = item.vocabulary ?? [];
+
+  // The Gate, inward (LANGUAGE_GARDEN_BIBLE §19.2): a word met here that
+  // matches a garden family still open ground can be carried back and
+  // planted as a seed, with a note about where it came from. The offer is
+  // quiet, per-word, and disappears once nothing is left to carry.
+  let seedable = [];
+  try {
+    seedable = await findSeedableForPassage(storage, vocab);
+  } catch (err) {
+    console.error('[CAT OS] garden seed lookup failed:', err); // the page renders without the offer
+  }
+  const seedableByWord = new Map(seedable.map((s) => [s.word.toLowerCase(), s]));
+
   const skills = item.meta.skills ?? [];
   const skillLabel = (s) => s.replaceAll('-', ' ');
   const paragraphsById = new Map(item.passage.paragraphs.map((p) => [p.id, p]));
@@ -391,12 +406,17 @@ export async function renderMentor(outlet, { storage }, params) {
 
         ${vocab.length ? section('Words worth keeping', `
           <div class="vocab">
-            ${vocab.map((v) => `
+            ${vocab.map((v) => {
+              const seed = seedableByWord.get(v.word.toLowerCase());
+              return `
               <div class="vocab__item">
                 <div class="vocab__word">${escapeHTML(v.word)}</div>
                 <p class="vocab__use">“${escapeHTML(v.passage_use)}”</p>
                 <p class="vocab__meaning">${escapeHTML(v.meaning_here)}</p>
-              </div>`).join('')}
+                ${seed ? `<button class="vocab__carry" data-carry-family="${escapeHTML(seed.familyId)}"
+                    data-carry-word="${escapeHTML(seed.word)}">${escapeHTML(SEED_LINES.carryBack)}</button>` : ''}
+              </div>`;
+            }).join('')}
           </div>`) : ''}
 
         ${section('Keep this forever', `
@@ -437,6 +457,28 @@ export async function renderMentor(outlet, { storage }, params) {
       </div>
     </section>
   `;
+
+  /* Carrying a word back through the Gate: one tap, one seed, one quiet
+     confirmation in place. No celebration — a seed is intent, not an
+     achievement (LANGUAGE_GARDEN_BIBLE §19.2, Law 5). */
+  for (const btn of outlet.querySelectorAll('.vocab__carry')) {
+    btn.addEventListener('click', async () => {
+      try {
+        await plantSeed(storage, {
+          familyId: btn.dataset.carryFamily,
+          word: btn.dataset.carryWord,
+          source: { module: 'rc', item_id: item.meta.id, title: item.passage.title },
+        });
+        const note = document.createElement('p');
+        note.className = 'vocab__carried';
+        note.textContent = SEED_LINES.carried;
+        btn.replaceWith(note);
+      } catch (err) {
+        console.error('[CAT OS]', err);
+        toast('Could not carry the word back.', 'error');
+      }
+    });
+  }
 
   /* Reflection: presentation in the component, persistence here (Rule 6). */
   const reflectionEl = outlet.querySelector('cat-reflection');

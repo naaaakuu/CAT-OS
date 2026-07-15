@@ -16,17 +16,20 @@
  * They arrive at the Overlook for the first time ninety seconds later,
  * and it already has something growing in it.
  *
- * The Stream is drawn here as the valley's water, at a calm default. Its
- * LEVEL, brightness, and sound are the consistency signal (§8.4) and are
- * wired in a later phase; the streambed is the honest, permanent
- * geography that behaviour will one day move. (Extension point below.)
+ * The Stream's level, brightness, and sound are the consistency signal
+ * (§8.4, Roadmap 3.1); the Ground and Paths carry the Effort Ledger
+ * (§4.3–4.4, 3.2); the sky carries the five-state clock, the calendar's
+ * season, and the seeded weather (§4.5–§4.7, 3.4/3.6); and the Gate at
+ * the valley's edge leads out to the rest of CAT OS (§16.9, 3.5).
  */
 
 import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
-import { listGardenSessions } from '../logic/store.js';
+import { listGardenSessions, listGardenSeeds } from '../logic/store.js';
 import { deriveValleyScene } from '../logic/scene.js';
 import { biomeBySlug } from '../logic/biomes.js';
 import { computeStreamLevel, streamBand, computeGroundTier, computePathWear } from '../logic/effort.js';
+import { atmosphereFor } from '../logic/atmosphere.js';
+import { weatherLayerHTML, nightSkySVG } from './atmosphere-art.js';
 import { VALLEY_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-plant.js';
@@ -36,13 +39,14 @@ export async function renderOverlook(outlet, context) {
     <div class="skeleton" style="height: 72vh; border-radius: var(--radius-xl)"></div>
   </section>`;
 
-  let families, sessions;
+  let families, sessions, seeds;
   try {
     const registry = await listLGItems();
     const loaded = await loadLGItems(registry.map((i) => i.id));
     families = registry.map((i) => loaded.get(i.id)).filter(Boolean)
       .sort((a, b) => a.meta.id.localeCompare(b.meta.id));
     sessions = await listGardenSessions(context.storage);
+    seeds = await listGardenSeeds(context.storage);
   } catch (err) {
     outlet.innerHTML = `<section class="screen"><h1>The valley will not open</h1>
       <div class="card"><p>${escapeHTML(err.message)}</p></div></section>`;
@@ -66,7 +70,7 @@ export async function renderOverlook(outlet, context) {
     return;
   }
 
-  const scene = deriveValleyScene(families, sessions);
+  const scene = deriveValleyScene(families, sessions, Date.now(), seeds);
   const rootwoodSessions = (scene.byBiome.get('rootwood') ?? []).flatMap((p) => p.history);
   const level = computeStreamLevel(sessions);
   const effort = {
@@ -91,26 +95,35 @@ function renderValley(outlet, scene, effort) {
     .filter((p) => p.state.stage !== 'open_ground' && p.state.stage !== 'seed');
   const litInRootwood = scene.askingBiomeSlug === 'rootwood' ? scene.askingId : null;
 
+  const atmo = atmosphereFor();
   outlet.innerHTML = `
     <section class="screen valley-screen" aria-label="${escapeHTML(VALLEY_LINES.overlookLabel)}">
-      <div class="valley" data-time="${timeClass()}" data-stream="${effort.streamBand}">
+      <div class="valley" data-time="${atmo.time}" data-season="${atmo.season}"
+           data-weather="${atmo.weather}" data-stream="${effort.streamBand}">
         <svg class="valley__svg" viewBox="0 0 360 560" preserveAspectRatio="xMidYMid slice">
           ${landforms()}
+          ${atmo.time === 'night' ? nightSkySVG() : ''}
           ${groundMarks(effort.ground.tier)}
           ${path(effort.rootwoodPathWear)}
           ${stream()}
+          ${gate()}
           ${rootwoodCanopy(rootwoodPlants, litInRootwood)}
-          <!-- The one living region is the only interactive shape on the valley.
-               It lives inside the SVG so it always lines up with the drawn wood,
-               whatever the crop. The rest is land, not controls. -->
+          <!-- The living region and the Gate are the only interactive shapes
+               on the valley. They live inside the SVG so they always line up
+               with the drawn world, whatever the crop. The rest is land, not
+               controls. -->
           <ellipse class="vl-hit" id="enter-rootwood" cx="180" cy="236" rx="130" ry="84"
                    role="button" tabindex="0"
                    aria-label="${escapeHTML(VALLEY_LINES.enterBiome(rootwood.name))}"></ellipse>
+          <rect class="vl-hit" id="leave-gate" x="206" y="486" width="60" height="58"
+                role="button" tabindex="0"
+                aria-label="${escapeHTML(VALLEY_LINES.gateLabel)}"></rect>
         </svg>
+        ${weatherLayerHTML(atmo.weather)}
       </div>
 
       <nav class="valley__marks" aria-label="Garden">
-        <a class="valley__mark" href="#/home">${escapeHTML(VALLEY_LINES.leave)}</a>
+        <button class="valley__mark" id="gate-mark">${escapeHTML(VALLEY_LINES.gate)}</button>
         <a class="valley__mark" href="#/garden/journal">${escapeHTML(VALLEY_LINES.journal)}</a>
         <a class="valley__mark" href="#/settings">${escapeHTML(VALLEY_LINES.settings)}</a>
       </nav>
@@ -132,6 +145,22 @@ function renderValley(outlet, scene, effort) {
   hit.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); descend(); }
   });
+
+  // Leaving through the Gate (§16.9, §19.2): a small journey rather than a
+  // tab switch — the view drifts down toward the gate at the valley's edge,
+  // then the rest of CAT OS. No dialog, no confirmation (§14.6).
+  const leave = () => {
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { location.hash = '#/home'; return; }
+    valley.classList.add('is-leaving');
+    setTimeout(() => { location.hash = '#/home'; }, 420);
+  };
+  const gateHit = outlet.querySelector('#leave-gate');
+  gateHit.addEventListener('click', leave);
+  gateHit.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); leave(); }
+  });
+  outlet.querySelector('#gate-mark').addEventListener('click', leave);
 }
 
 /** The permanent geography: the distant Wilds ridge, the valley basin, and
@@ -201,9 +230,9 @@ function path(wear) {
 }
 
 /** The Mirror Pond and the Stream that threads the valley. The stream runs
- *  from the Rootwood, through the pond, and out to the west (§4.2).
- *  EXTENSION POINT (Phase 3, §8.4): the stream's width / brightness / sound
- *  become the consistency signal. Here it is drawn at a calm default. */
+ *  from the Rootwood, through the pond, and out to the west (§4.2). Its
+ *  width, brightness, and sound are the consistency signal (§8.4), carried
+ *  by the [data-stream] band on .valley (Roadmap 3.1). */
 function stream() {
   return `
     <path class="vl-stream vl-stream--under" d="M186,196 C176,250 150,300 180,372
@@ -213,6 +242,18 @@ function stream() {
     <!-- The Mirror Pond, still, at the low centre. -->
     <ellipse class="vl-pond" cx="180" cy="372" rx="46" ry="25"/>
     <ellipse class="vl-pond-sky" cx="180" cy="368" rx="31" ry="14"/>`;
+}
+
+/** The Gate (§4.9, §16.9): at the valley's edge, where the path leaves.
+ *  Two posts and a lintel, low contrast, warm stone — a place, drawn as
+ *  part of the world, that happens to lead out. */
+function gate() {
+  return `
+    <g class="vl-gate" aria-hidden="true">
+      <path class="vl-gate-post" d="M227,540 L227,521"/>
+      <path class="vl-gate-post" d="M243,540 L243,521"/>
+      <path class="vl-gate-lintel" d="M223,521 Q235,514 247,521"/>
+    </g>`;
 }
 
 /** The Rootwood, from a distance: a small cluster of simplified canopies,
@@ -241,11 +282,4 @@ function rootwoodCanopy(plants, litId) {
 
 function canopyRadius(stage) {
   return { sprout: 4, young: 7, in_leaf: 9, mature: 11, ancient: 13 }[stage] ?? 7;
-}
-
-function timeClass() {
-  const h = new Date().getHours();
-  if (h < 6 || h >= 20) return 'night';
-  if (h >= 17) return 'dusk';
-  return 'day';
 }
