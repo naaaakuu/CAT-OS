@@ -58,6 +58,24 @@ export function resetGardenIntro(storage) {
   return storage.put(STORES.SETTINGS, { id: 'lg:intro-seen', value: false });
 }
 
+/* ---------------- Growth animation: first-view is sacred ----------------
+   The growth moment plays in full the first time, always; from the second
+   viewing onward it is skippable by tap (Bible §11.2). One settings flag,
+   set the first time a plant grows. */
+
+export async function hasSeenGardenGrowth(storage) {
+  try {
+    const record = await storage.get(STORES.SETTINGS, 'lg:growth-seen');
+    return record?.value === true;
+  } catch {
+    return false;
+  }
+}
+
+export function markGardenGrowthSeen(storage) {
+  return storage.put(STORES.SETTINGS, { id: 'lg:growth-seen', value: true });
+}
+
 /* ---------------- Ambience preference ---------------- */
 
 export async function gardenAmbienceEnabled(storage) {

@@ -45,8 +45,8 @@ export const GROWTH_LINES = Object.freeze({
     `${label} is still growing.`,
     `${label} keeps its footing.`,
   ]),
-  /** The revisit that carries the plant to evergreen. */
-  evergreen: (label, seed) => pick(seed, [
+  /** The revisit that carries the plant to Ancient — the old growth. */
+  ancient: (label, seed) => pick(seed, [
     `${label} has joined the old growth.`,
     `${label} keeps its leaves through every season now.`,
   ]),
@@ -69,6 +69,23 @@ export const GARDEN_LINES = Object.freeze({
   growAction: 'Grow',
   revisitAction: 'Revisit',
   plantedOn: (dateStr) => `Planted ${dateStr}`,
+});
+
+/* ------------------------------------------------------------------ */
+/* The valley chrome — the few quiet marks the wordless world is       */
+/* allowed (Bible §13.4, §16.1). Kept here so the banned-word lint     */
+/* sweeps them like every other string.                                */
+/* ------------------------------------------------------------------ */
+
+export const VALLEY_LINES = Object.freeze({
+  journal: 'Journal',
+  settings: 'Settings',
+  leave: 'Leave the valley',   // stands in for the Gate until §19.2 is built
+  toValley: 'The valley',      // ascend from a biome to the Overlook
+  // Accessible names for the wordless world (screen readers only).
+  overlookLabel: 'The valley, seen from above',
+  enterBiome: (name) => `Enter ${name}`,
+  wildBiome: (name) => `${name}, still wild`,
 });
 
 /* ------------------------------------------------------------------ */

@@ -11,10 +11,10 @@
 import { computePlantState } from '../../../core/engine/garden-session.js';
 import { sessionsForFamily } from './store.js';
 
-/** Families mature enough to read as a capability: Bible §11 point 1
- *  says "In leaf" or better — a plant that has survived at least one
- *  real retrieval, not merely been introduced. */
-const MATURE_STAGES = new Set(['in_leaf', 'evergreen']);
+/** Families settled enough to read as a capability: Bible §16.6 — "In
+ *  leaf" or better, a plant that has survived at least one real spaced
+ *  retrieval, not merely been introduced. */
+const MATURE_STAGES = new Set(['in_leaf', 'mature', 'ancient']);
 
 /**
  * @returns {Array<{familyId, label, originLanguage, coreMeaning, words: string[]}>}

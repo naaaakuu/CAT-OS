@@ -55,8 +55,34 @@ export const RUNG_INTERVALS_MS = Object.freeze([
  *  buds (Bible §6.4: both are honest, neither is ever "damaged"). */
 export const GOLD_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
 
-/** Successful revisits before a plant joins the old growth horizon. */
-export const EVERGREEN_AT_REVISITS = 4;
+/** The six growth stages (Bible §6.2), plus Open ground (stage 0, which is
+ *  absence, not a stage). One canonical vocabulary, used by the scheduler,
+ *  the plant art (cat-plant), and every screen — so a stage is renamed in
+ *  exactly one place. Ordered lowest → highest.
+ *
+ *  open_ground  Nothing planted. Bare earth. Never a padlock, never a price.
+ *  seed         Planted, not begun. Sits quietly, never nags. (Reached by a
+ *               future "plant without growing" action — see PLANT_SEED note
+ *               below; no family enters it yet, but the model and art are
+ *               ready so the day it lands nothing here changes.)
+ *  sprout       First session complete, the key is known. The "small green
+ *               thing" of the onboarding (§3.1).
+ *  young        All members met; established, now asking for its first spaced
+ *               retrieval.
+ *  in_leaf      First successful spaced retrieval — days passed, still held.
+ *  mature       Several retrievals across expanding intervals. Full canopy,
+ *               and the first quiet blossom.
+ *  ancient      A retrieval survived after a long interval. Taller than its
+ *               neighbours; takes its place on the horizon; birds nest in it. */
+export const STAGES = Object.freeze(['open_ground', 'seed', 'sprout', 'young', 'in_leaf', 'mature', 'ancient']);
+
+/** Successful revisits at which a plant enters Mature, and Ancient. Mature
+ *  begins once "several" retrievals have accrued; Ancient once the memory has
+ *  survived to the top of the interval ladder. Count-based by design: the rung
+ *  only advances on CLEAN revisits, so reaching these counts already implies
+ *  expanding intervals were survived (never a demotion — §6.4). */
+export const MATURE_AT_REVISITS = 2;
+export const ANCIENT_AT_REVISITS = 4;
 
 const byFinishedAsc = (a, b) => a.finished_at.localeCompare(b.finished_at);
 
@@ -64,18 +90,22 @@ const byFinishedAsc = (a, b) => a.finished_at.localeCompare(b.finished_at);
  * @param {Array} records  this family's garden-session records only
  *                         (kind: 'garden-session'), any order
  * @param {number} [now]   epoch ms, injectable for tests
- * @returns {{stage: 'seed'|'sprout'|'sapling'|'in_leaf'|'evergreen',
+ * @returns {{stage: typeof STAGES[number],
  *            due: 'none'|'gold'|'bare', nextReviewAt: string|null,
  *            revisitCount: number, rung: number,
  *            plantedAt: string|null, lastVisitedAt: string|null,
- *            evergreenAt: string|null}}
+ *            ancientAt: string|null}}
  */
 export function computePlantState(records, now = Date.now()) {
   const grows = records.filter((r) => r.session_type === 'grow').sort(byFinishedAsc);
   const revisits = records.filter((r) => r.session_type === 'revisit').sort(byFinishedAsc);
 
+  // No grow yet: this is Open ground (§6.2 stage 0 — absence, not a stage).
+  // A future "plant a seed without growing" action (PLANT_SEED) would persist
+  // intent and surface `seed` here instead; until then a family is either
+  // uncultivated ground or growing.
   if (grows.length === 0) {
-    return { stage: 'seed', due: 'none', nextReviewAt: null, revisitCount: 0, rung: 0, plantedAt: null, lastVisitedAt: null, evergreenAt: null };
+    return { stage: 'open_ground', due: 'none', nextReviewAt: null, revisitCount: 0, rung: 0, plantedAt: null, lastVisitedAt: null, ancientAt: null };
   }
 
   const plantedAt = grows[0].finished_at;
@@ -97,24 +127,29 @@ export function computePlantState(records, now = Date.now()) {
   if (revisits.length === 0) {
     // Sprout for the first rung-0 window after planting (Bible's own
     // onboarding text: "within two minutes they own a sprout"), then it
-    // settles into Sapling once old enough to be asking for its first
-    // revisit — a real, honest boundary, not a cosmetic timer.
-    stage = now < new Date(plantedAt).getTime() + RUNG_INTERVALS_MS[0] ? 'sprout' : 'sapling';
-  } else if (revisits.length < EVERGREEN_AT_REVISITS) {
+    // settles into Young plant once old enough to be asking for its first
+    // revisit — a real, honest boundary, not a cosmetic timer. (Grow teaches
+    // the whole small family in one sitting, so "key known" and "all members
+    // met" — Sprout and Young — land together for this content; a larger
+    // family would split them across sittings, which this engine allows.)
+    stage = now < new Date(plantedAt).getTime() + RUNG_INTERVALS_MS[0] ? 'sprout' : 'young';
+  } else if (revisits.length < MATURE_AT_REVISITS) {
     stage = 'in_leaf';
+  } else if (revisits.length < ANCIENT_AT_REVISITS) {
+    stage = 'mature';
   } else {
-    stage = 'evergreen';
+    stage = 'ancient';
   }
 
-  // The exact moment the plant crossed into evergreen, purely so a much
-  // later feature (a nest quietly appearing after evergreen "has existed
-  // for some time") can be computed honestly from real elapsed time
+  // The exact moment the plant crossed into Ancient, purely so a much later
+  // feature (a nest quietly appearing after an Ancient tree "has existed for
+  // some time" — §6.5) can be computed honestly from real elapsed time
   // instead of guessed — never stored, always re-derived.
-  const evergreenAt = revisits.length >= EVERGREEN_AT_REVISITS
-    ? revisits[EVERGREEN_AT_REVISITS - 1].finished_at
+  const ancientAt = revisits.length >= ANCIENT_AT_REVISITS
+    ? revisits[ANCIENT_AT_REVISITS - 1].finished_at
     : null;
 
-  return { stage, due, nextReviewAt, revisitCount: revisits.length, rung, plantedAt, lastVisitedAt: anchor, evergreenAt };
+  return { stage, due, nextReviewAt, revisitCount: revisits.length, rung, plantedAt, lastVisitedAt: anchor, ancientAt };
 }
 
 /** Evaluate a chosen index against a {text, correct}[] option set. */

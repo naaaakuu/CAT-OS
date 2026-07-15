@@ -2117,21 +2117,167 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   animation: pl-catch-light 5s ease-in-out infinite;
   z-index: -1;
 }
+/* An open patch of ground is offered quietly, never as a beacon (§16.1):
+   no pulse, and off the reserved colours (gold is Key/Reach, amber is
+   review — §12.2). Just a soft, still lift in the ground's own green. */
 .grove-plant--invite::before {
-  background: radial-gradient(closest-side, var(--garden-discovery) 0%, transparent 72%);
-  opacity: 0.16;
+  background: radial-gradient(closest-side, var(--garden-sprout) 0%, transparent 70%);
+  opacity: 0.10;
+  animation: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .grove-plant--asking::before, .grove-plant--invite::before { animation: none; }
+  .grove-plant--asking::before { animation: none; }
 }
 
-.grove-links { margin-top: var(--space-4); text-align: center; }
 .grove-note {
   text-align: center;
   color: var(--color-ink-3);
   font-size: var(--text-sm);
   margin-top: var(--space-4);
 }
+
+/* Long-press peek (§14.2): a quiet card above the held plant, gone on
+   release. A look, not a menu. Non-interactive; the hold owns the gesture. */
+.grove-peek {
+  position: absolute;
+  bottom: calc(100% - var(--space-2));
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 8.5rem;
+  max-width: 14rem;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+  text-align: center;
+  pointer-events: none;
+  z-index: 5;
+  animation: grove-peek-in 160ms var(--ease-out) both;
+}
+@keyframes grove-peek-in {
+  from { opacity: 0; transform: translate(-50%, 4px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .grove-peek { animation: none; } }
+.grove-peek__key { font-family: var(--font-reading); font-size: var(--text-sm); }
+.grove-peek__words {
+  font-family: var(--font-reading);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  margin-top: var(--space-1);
+  line-height: var(--leading-body);
+}
+
+/* ---------- A biome (the Rootwood today) ----------
+   Entered from the Overlook with a brief zoom, so descending reads as
+   walking down a hill (Bible §4.1), not loading a page. */
+.biome { position: relative; }
+.biome--enter { animation: biome-descend var(--duration-slow) var(--ease-out) both; transform-origin: 50% 42%; }
+@keyframes biome-descend {
+  from { opacity: 0; transform: scale(1.06); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .biome--enter { animation: none; } }
+.biome__ascend {
+  display: block;
+  margin: 0 auto var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: none; border: none;
+  color: var(--color-ink-3);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+}
+@media (hover: hover) { .biome__ascend:hover { color: var(--color-ink); } }
+.biome .grove-scene {
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.biome .grove-grid { position: relative; z-index: 1; }
+/* The upper sky taps to ascend to the valley (§14.2). Sits behind the plants,
+   so a plant tap always wins; only empty sky returns you. */
+.grove-sky {
+  position: absolute; inset: 0 0 42% 0;
+  margin: 0; padding: 0;
+  background: none; border: none;
+  cursor: pointer;
+  z-index: 0;
+}
+
+/* ---------- The Overlook: the valley from above (§16.1) ---------- */
+.valley {
+  position: relative;
+  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 5rem);
+  min-height: 20rem;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transform-origin: 50% 44%;
+}
+.valley__svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+.vl-hit { pointer-events: auto; fill: transparent; cursor: pointer; }
+.vl-hit:focus-visible { outline: none; stroke: var(--color-accent); stroke-width: 3; }
+.valley.is-descending {
+  transition: transform 260ms var(--ease-in), opacity 260ms var(--ease-in);
+  transform: scale(1.14);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) { .valley.is-descending { transition: none; } }
+
+/* Landform fills — flat, calm, from the garden palette. Sky by time of day. */
+.vl-sky { fill: var(--garden-sky-day); }
+.valley[data-time="dusk"]  .vl-sky { fill: var(--garden-sky-dusk); }
+.valley[data-time="night"] .vl-sky { fill: var(--garden-sky-night); }
+.vl-wilds   { fill: var(--garden-wilds); }
+.vl-basin   { fill: var(--garden-basin); }
+.vl-basin-2 { fill: var(--garden-basin-2); }
+.vl-grove   { fill: var(--garden-grove); }
+.vl-grove--rim { fill: var(--garden-mature); opacity: 0.42; }
+.vl-meadow  { fill: var(--garden-meadow); }
+.vl-terrace { fill: var(--garden-terrace); }
+.vl-terrace-step { fill: none; stroke: var(--garden-soil); stroke-width: 2; opacity: 0.5; }
+.vl-thicket { fill: var(--garden-thicket); }
+.vl-orchard { fill: var(--garden-grove); opacity: 0.55; }
+.vl-stream { fill: none; stroke: var(--garden-water); stroke-width: 6; stroke-linecap: round; }
+.vl-stream--under { stroke-width: 11; opacity: 0.4; }
+.vl-pond { fill: var(--garden-water); }
+.vl-pond-sky { fill: var(--garden-sky-day); opacity: 0.35; }
+.valley[data-time="night"] .vl-pond-sky { fill: var(--garden-sky-night); opacity: 0.5; }
+
+/* The Rootwood, from a distance: simple canopies, one lit if it is asking. */
+.vl-canopy-trunk { stroke: var(--garden-trunk); stroke-width: 2.4; stroke-linecap: round; }
+.vl-canopy--sprout  { fill: var(--garden-sprout); }
+.vl-canopy--young   { fill: var(--garden-young); }
+.vl-canopy--in_leaf { fill: var(--garden-inleaf); }
+.vl-canopy--mature  { fill: var(--garden-mature); }
+.vl-canopy--ancient { fill: var(--garden-ancient); }
+.vl-canopy--lit { fill: var(--garden-review); }
+.vl-canopy-glow { fill: var(--garden-review); opacity: 0.22; animation: valley-glow 5s ease-in-out infinite; }
+@keyframes valley-glow { 0%, 100% { opacity: 0.24; } 50% { opacity: 0.10; } }
+@media (prefers-reduced-motion: reduce) { .vl-canopy-glow { animation: none; } }
+
+/* The valley's only chrome: the two marks and the way out, low-contrast,
+   in the thumb zone (§16.1). The Gate (§19.2) will replace "Leave" later. */
+.valley__marks {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-3) 0 0;
+}
+.valley__mark {
+  color: var(--color-ink-3);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  padding: var(--space-2);
+}
+@media (hover: hover) { .valley__mark:hover { color: var(--color-ink); } }
 
 /* ---------- Plant detail ---------- */
 .lg-plant__hero { width: 55%; max-width: 11rem; margin: 0 auto var(--space-3); aspect-ratio: 1 / 1.08; }
@@ -2147,22 +2293,18 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   gap: var(--space-2);
   margin: var(--space-4) 0 var(--space-5);
 }
+/* The words you can now read, as quiet capability chips — NOT buttons.
+   The Garden has no screen that lets a learner re-read a family's answers
+   (Bible §7.1, Principle 22): the word is shown, its meaning is not, and
+   retrieval happens only in a Revisit. */
 .lg-leaf {
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-line);
   border-radius: var(--radius-full);
-  background: var(--color-surface);
+  background: var(--color-accent-subtle);
+  color: var(--color-ink);
+  font-family: var(--font-reading);
   font-size: var(--text-sm);
-  text-align: left;
-  max-width: 100%;
 }
-.lg-leaf__word { font-weight: var(--weight-medium); }
-.lg-leaf__meaning { display: block; color: var(--color-ink-2); font-size: var(--text-xs); margin-top: var(--space-1); }
-/* A plain class rule beats the UA stylesheet's [hidden] default, which
-   would otherwise force every meaning open and delete the one-tap
-   recall interaction entirely (Bible §10: "opening a single line of
-   recall" — recall implies retrieving BEFORE checking, not reading). */
-.lg-leaf__meaning[hidden] { display: none; }
 
 /* ---------- Journal ---------- */
 .lg-journal__capability {
@@ -2173,7 +2315,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .lg-journal__sightings .row:first-child { padding-top: 0; }
 
 /* ---------- Session: the six beats ---------- */
-.lgx { display: flex; flex-direction: column; min-height: calc(100dvh - var(--nav-height) - env(safe-area-inset-bottom) - var(--space-6)); }
+/* The session is always immersive (a garden route), so the nav is hidden and
+   the beats own the full height. */
+.lgx { display: flex; flex-direction: column; min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - var(--space-8)); }
 .lgx__close {
   align-self: flex-end;
   width: var(--tap-target);
@@ -2195,7 +2339,24 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    top offset also reads as composed on short beats (Key, Growth)
    instead of leaving the content stranded in a void mid-screen. */
 .lgx__stage { flex: 1; display: flex; flex-direction: column; padding-top: min(10vh, var(--space-8)); }
-.lgx-beat { width: 100%; }
+
+/* Each beat cross-dissolves in with a small forward drift (§11.2: 240ms,
+   8px). The session flows from one idea to the next; it never snaps. */
+.lgx-beat { width: 100%; animation: lgx-beat-in 240ms var(--ease-out) both; }
+@keyframes lgx-beat-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+#lgx-reach-choice { animation: lgx-beat-in 240ms var(--ease-out) both; }
+@media (prefers-reduced-motion: reduce) {
+  .lgx-beat, #lgx-reach-choice { animation: none; }
+}
+
+/* Held back until its moment: the Attempt's question (read the sentence
+   first, §5.1) and the growth line + button (which appear only once the
+   motion has come to rest, §11.4). A soft opacity fade, nothing that moves. */
+.is-veiled { opacity: 0; pointer-events: none; }
+.lgx-ask { transition: opacity var(--duration-slow) var(--ease-out); }
+.lgx-growth-line,
+.lgx-beat--growth .btn,
+.lgx-beat--growth .hint { transition: opacity var(--duration-slower) var(--ease-out); }
 
 .lgx-sentence {
   font-family: var(--font-reading);
@@ -2220,7 +2381,15 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-size: var(--text-2xl);
   letter-spacing: var(--tracking-tight);
   margin: var(--space-5) 0 var(--space-6);
+  /* A warm light passes across the Key once as it settles — gold means
+     "something is opening", rationed to the Key and the Reach (§12.2). */
+  animation: lgx-key-warm 1100ms var(--ease-out) 200ms both;
 }
+@keyframes lgx-key-warm {
+  0%, 100% { color: var(--color-ink); }
+  32%      { color: var(--garden-discovery); }
+}
+@media (prefers-reduced-motion: reduce) { .lgx-key { animation: none; } }
 
 .lgx-parts {
   display: flex;
@@ -2261,9 +2430,36 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 
 .lgx-beat--growth { text-align: center; }
 .lgx-growth-art { width: 60%; max-width: 12rem; margin: 0 auto var(--space-5); aspect-ratio: 1 / 1.08; }
+.lgx-growth-art.is-skippable { cursor: pointer; }
 .lgx-growth-line {
   font-family: var(--font-reading);
   font-size: var(--text-xl);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-6);
+}
+
+/* ---------- The growth moment (§11.4): the one peak per session ----------
+   Four movements — anticipation, extension, settle, rest. The tree RISES out
+   of the soil (a clip reveal from the base, which reads as extension, not the
+   cheap uniform scale the Bible rejects) and settles with a single organic
+   overshoot. Composite-friendly (clip-path + transform), so it holds 60fps
+   on an old phone (§11.7). The copy waits for stillness (handled in JS). */
+.lgx-grow-plant { display: block; transform-origin: 50% 92%; }
+.lgx-grow-plant.is-growing { animation: lgx-grow 1250ms var(--ease-out) 150ms both; }
+@keyframes lgx-grow {
+  0%   { clip-path: inset(94% 0 0 0); opacity: 0.55; transform: scaleY(0.92); }
+  14%  { clip-path: inset(92% 0 0 0); opacity: 0.65; transform: scaleY(0.90); }  /* anticipation */
+  60%  { clip-path: inset(0 0 0 0);  opacity: 1;    transform: scaleY(1.04); }   /* extension, overshoot */
+  80%  { transform: scaleY(0.99); }                                             /* settle */
+  100% { clip-path: inset(0 0 0 0);  opacity: 1;    transform: none; }
+}
+/* Reduced motion is not a downgrade (§11.5): a clear before→after with a
+   gentle fade, still felt through the chime, the haptic, and the line. */
+.lgx-grow-plant.is-grown-still { animation: lgx-grow-still var(--duration-slow) var(--ease-out) both; }
+@keyframes lgx-grow-still {
+  from { opacity: 0.35; transform: scale(0.94); }
+  to   { opacity: 1;    transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lgx-grow-plant.is-growing { animation: lgx-grow-still var(--duration-slow) var(--ease-out) both; }
 }

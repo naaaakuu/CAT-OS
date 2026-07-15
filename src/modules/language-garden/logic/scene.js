@@ -1,43 +1,82 @@
 /**
- * scene.js — the Root Grove scene: pure logic, no DOM, no storage.
- * Joins loaded plant content against stored garden-session history to
- * decide what the grove looks like right now and which single plant
- * (if any) is asking to be tended (LANGUAGE_GARDEN_BIBLE §6.4's guilt
- * containment: "at most one plant asking per visit, however many are
- * technically due — the scheduler holds the queue; the interface shows
- * one invitation").
+ * scene.js — what the valley and each biome look like right now: pure
+ * logic, no DOM, no storage. Joins loaded plant content against stored
+ * garden-session history to decide the state of every plant and which
+ * single one (if any) is asking to be tended.
+ *
+ * Guilt containment (LANGUAGE_GARDEN_BIBLE §16.1, §17.2): however many
+ * plants are technically due, only ONE invitation is ever shown — the
+ * most patient one, the one waiting longest. The scheduler holds the
+ * queue; the interface shows an invitation, never a backlog. This holds
+ * at both scales: the Overlook shows one for the whole valley, and a
+ * biome shows one for itself.
  */
 
 import { computePlantState } from '../../../core/engine/garden-session.js';
+import { biomeForFamily, biomeBySlug } from './biomes.js';
 import { sessionsForFamily } from './store.js';
 
-/**
- * @param {Array} families    loaded (resolved) lg items, registry order
- * @param {Array} allSessions every garden-session record (any family)
- * @param {number} [now]
- * @returns {{plants: Array, askingId: string|null, openSeedId: string|null}}
- */
-export function deriveGroveScene(families, allSessions, now = Date.now()) {
-  const plants = families.map((family) => {
+/** Build the per-plant view: content + derived state + its biome. */
+function plantsFor(families, allSessions, now) {
+  return families.map((family) => {
     const history = sessionsForFamily(allSessions, family.meta.id);
-    const state = computePlantState(history, now);
-    return { family, state, history };
+    return { family, state: computePlantState(history, now), history, biome: biomeForFamily(family) };
   });
+}
 
-  // Guilt containment: among every plant technically due, the single
-  // most patient one — the one that has been waiting longest — carries
-  // the one invitation the garden is allowed to show.
-  const due = plants
+/** The single most patient due plant, or null. */
+function pickAsking(plants) {
+  return plants
     .filter((p) => p.state.due !== 'none')
-    .sort((a, b) => a.state.nextReviewAt.localeCompare(b.state.nextReviewAt));
-  const asking = due[0] ?? null;
+    .sort((a, b) => a.state.nextReviewAt.localeCompare(b.state.nextReviewAt))[0] ?? null;
+}
 
-  // The empty day's other half: one seed, chosen by the system, never a
-  // list (§6.5). Stable order (registry order) so the same seed is
-  // offered all day rather than flickering between opens.
-  const openSeed = asking ? null : plants.find((p) => p.state.stage === 'seed') ?? null;
+/** One patch of open ground to offer, but only when nothing is asking —
+ *  a seed is never surfaced over a plant that wants tending (§16.1). */
+function pickOpenSeed(plants, asking) {
+  if (asking) return null;
+  return plants.find((p) => p.state.stage === 'open_ground' || p.state.stage === 'seed') ?? null;
+}
+
+/**
+ * The whole valley, for the Overlook (and the Home card).
+ * @returns {{plants, byBiome: Map<string, Array>, askingId, askingBiomeSlug,
+ *            openSeedId, openSeedBiomeSlug}}
+ */
+export function deriveValleyScene(families, allSessions, now = Date.now()) {
+  const plants = plantsFor(families, allSessions, now);
+  const asking = pickAsking(plants);
+  const openSeed = pickOpenSeed(plants, asking);
+
+  const byBiome = new Map();
+  for (const p of plants) {
+    const slug = p.biome?.slug ?? null;
+    if (!slug) continue;
+    if (!byBiome.has(slug)) byBiome.set(slug, []);
+    byBiome.get(slug).push(p);
+  }
 
   return {
+    plants,
+    byBiome,
+    askingId: asking?.family.meta.id ?? null,
+    askingBiomeSlug: asking?.biome?.slug ?? null,
+    openSeedId: openSeed?.family.meta.id ?? null,
+    openSeedBiomeSlug: openSeed?.biome?.slug ?? null,
+  };
+}
+
+/**
+ * One biome, for the biome screen (the Rootwood today).
+ * @returns {{biome, plants, askingId, openSeedId}}
+ */
+export function deriveBiomeScene(families, allSessions, biomeSlug, now = Date.now()) {
+  const inBiome = families.filter((f) => biomeForFamily(f)?.slug === biomeSlug);
+  const plants = plantsFor(inBiome, allSessions, now);
+  const asking = pickAsking(plants);
+  const openSeed = pickOpenSeed(plants, asking);
+  return {
+    biome: biomeBySlug(biomeSlug),
     plants,
     askingId: asking?.family.meta.id ?? null,
     openSeedId: openSeed?.family.meta.id ?? null,
@@ -45,9 +84,9 @@ export function deriveGroveScene(families, allSessions, now = Date.now()) {
 }
 
 /** Which reach word this visit should serve: whichever of the pool has
- *  been used least recently (tie broken by pool order), so a family
- *  with two reserved Reach words rotates between them rather than
- *  always serving the first. */
+ *  been used least recently (tie broken by pool order), so a family with
+ *  two reserved Reach words rotates between them rather than always
+ *  serving the first. */
 export function nextReachPoolIndex(history, poolSize) {
   if (poolSize <= 1) return 0;
   let best = 0;

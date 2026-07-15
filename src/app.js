@@ -26,7 +26,7 @@ import { recommendNextPJ } from './modules/para-jumbles/logic/tiers.js';
 import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
 import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
 import { listGardenSessions, gardenAmbienceEnabled, setGardenAmbience } from './modules/language-garden/logic/store.js';
-import { deriveGroveScene } from './modules/language-garden/logic/scene.js';
+import { deriveValleyScene } from './modules/language-garden/logic/scene.js';
 import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio } from './modules/language-garden/logic/audio.js';
 import { EMPTY_DAY_LINES, pick as pickGardenLine } from './core/mentor/garden-voice.js';
 import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem, listLGItems, loadLGItems } from './core/content-loader/loader.js';
@@ -184,7 +184,7 @@ async function gardenHomeCard() {
     const loaded = await loadLGItems(registry.map((i) => i.id));
     const families = registry.map((i) => loaded.get(i.id)).filter(Boolean);
     const sessions = await listGardenSessions(storage);
-    const scene = deriveGroveScene(families, sessions);
+    const scene = deriveValleyScene(families, sessions);
     const seed = `home-garden:${new Date().toDateString()}`;
 
     let line;
@@ -203,7 +203,7 @@ async function gardenHomeCard() {
       <div class="card">
         <h2>Your garden</h2>
         <p class="muted" style="margin-bottom: var(--space-3)">${line}</p>
-        <a class="btn btn--primary btn--block" href="#/garden">Open the grove</a>
+        <a class="btn btn--primary btn--block" href="#/garden">Enter the valley</a>
       </div>`;
   } catch {
     return ''; // offline/uncached: Home simply omits the widget
@@ -915,6 +915,19 @@ async function boot() {
 
   router.start();
 
+  // Chrome destroys place (Bible §14.7): inside the Garden — the Overlook, a
+  // biome, a plant, a session, the Journal — the app's header and bottom nav
+  // are hidden, and the valley carries its own quiet marks (and every garden
+  // screen its own quiet way back out). Set on boot AND on every navigation,
+  // so reopening the PWA straight onto a #/garden route is immersive too.
+  const applyImmersiveChrome = () => {
+    const h = location.hash;
+    const inGarden = h === '#/garden' || h.startsWith('#/garden/');
+    document.documentElement.toggleAttribute('data-immersive', inGarden);
+  };
+  applyImmersiveChrome();
+  window.addEventListener('hashchange', applyImmersiveChrome);
+
   // Stop focus noise automatically when navigating away from a session screen.
   // We check the hash to see if it's one of the session routes.
   window.addEventListener('hashchange', () => {
@@ -932,7 +945,7 @@ async function boot() {
   // its two named sounds, never a competing ambient bed).
   window.addEventListener('hashchange', async () => {
     const h = location.hash;
-    const isBrowsingGarden = (h === '#/garden' || h.startsWith('#/garden/plant') || h.startsWith('#/garden/journal'));
+    const isBrowsingGarden = (h === '#/garden' || h.startsWith('#/garden/biome') || h.startsWith('#/garden/plant') || h.startsWith('#/garden/journal'));
     if (isBrowsingGarden && await gardenAmbienceEnabled(storage)) {
       startGardenAmbience();
     } else {

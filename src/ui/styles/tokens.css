@@ -59,21 +59,37 @@
   --color-wrong-ink:   #7C2E22;
 
   /* Language Garden (0.14.0) — a small, separate palette (LANGUAGE_GARDEN_BIBLE
-     §8): greens map to maturity, gold is discovery (Key/Reach), amber is the
-     warm invitation to revisit, never red, never brown, never "dead". */
-  --garden-sprout:      #A8D5A2;
-  --garden-sapling:     #7CBB74;
+     §12): greens map to maturity, gold is discovery (Key/Reach), amber is the
+     warm invitation to revisit, never red, never brown, never "dead".
+     NOTE: the green tokens are COLOUR names (shades of green), decoupled from
+     the six growth STAGES in garden-session.js — cat-plant maps each stage
+     onto whichever shade reads right, so a stage can be renamed without
+     touching a colour. */
+  --garden-sprout:      #A8D5A2;   /* palest — sprout */
+  --garden-young:       #7CBB74;
   --garden-inleaf:      #4F9A5C;
-  --garden-evergreen:   #2B5D3F;
+  --garden-mature:      #3D7E4E;   /* the maturity ramp deepens by one step */
+  --garden-ancient:     #2B5D3F;   /* deepest — ancient, the horizon */
   --garden-discovery:   #EFC463;  /* dawn gold — Key, Reach */
   --garden-review:      #D68A3E;  /* autumn amber — the invitation to revisit */
   --garden-bare-branch: #B8AC98;  /* bare with buds: a branch, never a wound */
   --garden-bud:         #C9DDBE;
+  --garden-bloom:       #F4E3C2;   /* Mature's quiet blossom, never loud */
   --garden-trunk:       #8B7355;
   --garden-soil:        #D9CFC0;
   --garden-sky-day:     #EAF1E6;
   --garden-sky-dusk:    #F3DCC0;
   --garden-sky-night:   #23324A;
+  /* The valley, seen from the Overlook (§4.1): flat, calm landforms, one
+     living region and six that are simply land until they are cultivated. */
+  --garden-wilds:       #B9C0CB;   /* distant blue-grey, always visible, never entered */
+  --garden-basin:       #DBE6CC;   /* the valley floor */
+  --garden-basin-2:     #CADCB7;   /* a shaded fold of the floor, for depth */
+  --garden-grove:       #B7D3A6;   /* the living Rootwood ground, a little richer */
+  --garden-water:       #A9C8D3;   /* the stream and the pond */
+  --garden-terrace:     #D9C6A2;   /* the eastern terraced slopes, warm stone */
+  --garden-meadow:      #DDE4C3;   /* the western meadow, pale sage */
+  --garden-thicket:     #7E9A66;   /* the tangled southeast corner */
 
   /* ==================== TYPE ==================== */
   /* System stacks by design (TECH_STACK durability): nothing to
@@ -196,20 +212,30 @@
     --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
 
-    /* Dusk, not inversion (§8): deeper, warmer, gold still reads as gold. */
+    /* Night, not inversion (§12.6): deeper, warmer, gold still reads as gold. */
     --garden-sprout:      #6FA26A;
-    --garden-sapling:     #4F8B52;
+    --garden-young:       #4F8B52;
     --garden-inleaf:      #3C6F44;
-    --garden-evergreen:   #2E5439;
+    --garden-mature:      #356245;
+    --garden-ancient:     #2E5439;
     --garden-discovery:   #E0B563;
     --garden-review:      #C98A52;
     --garden-bare-branch: #5C5648;
     --garden-bud:         #7FA07A;
+    --garden-bloom:       #E4D3AE;
     --garden-trunk:       #6B5642;
     --garden-soil:        #3A3428;
     --garden-sky-day:     #26302A;
     --garden-sky-dusk:    #3A2E28;
     --garden-sky-night:   #12141C;
+    --garden-wilds:       #2A3340;
+    --garden-basin:       #2B3A2B;
+    --garden-basin-2:     #24311E;
+    --garden-grove:       #35512F;
+    --garden-water:       #35586B;
+    --garden-terrace:     #453D30;
+    --garden-meadow:      #333E2C;
+    --garden-thicket:     #2C4127;
   }
 }
 
@@ -243,18 +269,28 @@
   --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
 
   --garden-sprout:      #6FA26A;
-  --garden-sapling:     #4F8B52;
+  --garden-young:       #4F8B52;
   --garden-inleaf:      #3C6F44;
-  --garden-evergreen:   #2E5439;
+  --garden-mature:      #356245;
+  --garden-ancient:     #2E5439;
   --garden-discovery:   #E0B563;
   --garden-review:      #C98A52;
   --garden-bare-branch: #5C5648;
   --garden-bud:         #7FA07A;
+  --garden-bloom:       #E4D3AE;
   --garden-trunk:       #6B5642;
   --garden-soil:        #3A3428;
   --garden-sky-day:     #26302A;
   --garden-sky-dusk:    #3A2E28;
   --garden-sky-night:   #12141C;
+  --garden-wilds:       #2A3340;
+  --garden-basin:       #2B3A2B;
+  --garden-basin-2:     #24311E;
+  --garden-grove:       #35512F;
+  --garden-water:       #35586B;
+  --garden-terrace:     #453D30;
+  --garden-meadow:      #333E2C;
+  --garden-thicket:     #2C4127;
 }
 
 /* ==================== READING SIZE ====================

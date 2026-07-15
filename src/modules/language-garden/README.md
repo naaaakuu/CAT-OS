@@ -1,31 +1,34 @@
 # src/modules/language-garden/ — the Language Garden module
 
 Vocabulary stops being content to consume and becomes a living place
-the learner tends (`LANGUAGE_GARDEN_BIBLE.md`). The unit of learning is
-a **family** (a plant), not a word; the unit of progress is growth,
-never a score. This is the module's first vertical slice: only the
-**Root Grove** (Latin and Greek roots, the "decompose" engine of Bible
-§5.1) is built. The other four gardens (Vine Walk, Orchard, Wildflower
-Meadow, Twin Patch) are reserved in the schema's `garden` enum but ship
-no content or screens yet, exactly as `WORD_DNA_BIBLE` reserved
-"confused" before that content existed.
+the learner tends (`LANGUAGE_GARDEN.md`). The unit of learning is a
+**family** (a plant), not a word; the unit of progress is growth, never
+a score. The home is the **Overlook** — the whole valley, seen from
+above — from which the learner descends into a biome (§16.1, §4.1).
+Only the **Rootwood** (Latin and Greek roots, the "decompose" engine of
+Bible §5.2) is living; the other six biomes are enumerated in
+`logic/biomes.js` as real geography that is still `wild` — visible from
+the Overlook, not yet cultivated. The seam is deliberate: making a
+second biome living means adding content and building its engine, not
+rewriting these screens.
 
 Structure (the standard module island, Rule 5 — no imports from other
 modules):
 
 ```
 index.js             registerLanguageGarden(router, context); all app.js knows
-screens/grove.js      the Root Grove scene (module home; first-ever
-                       visit hands straight to screens/session.js — no
-                       tutorial, Bible §6.3)
+screens/overlook.js   the Overlook: the valley from above (module home;
+                       first-ever visit hands straight to screens/session.js
+                       — no tutorial, Bible §3.1)
+screens/biome.js      one biome of the valley (the Rootwood today), by slug
 screens/plant.js      one plant at a glance: key, members, one action
-screens/session.js    the six-beat Grow/Revisit session (Bible §5, §6.6)
-screens/journal.js    what you can read now + wild sightings (Bible §11)
+screens/session.js    the six-beat Grow/Revisit session (Bible §5, §17.3)
+screens/journal.js    what you can read now + wild sightings (Bible §16.6)
+logic/biomes.js       the biome + engine registry (the seam; living vs wild)
 logic/store.js        persistence through the StorageAdapter only (Rule 6)
-logic/scene.js        derives the grove's state from content + history (pure)
+logic/scene.js        derives valley / biome state from content + history (pure)
 logic/journal.js      derives Journal content from content + history (pure)
-logic/scene.js        which plant (if any) is asking; guilt containment
-logic/ambient.js       decides whether/which tiny living event appears (pure)
+logic/ambient.js      decides whether/which tiny living event appears (pure)
 logic/audio.js        the garden's own small, separate sound identity
 ```
 

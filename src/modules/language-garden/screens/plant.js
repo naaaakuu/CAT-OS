@@ -1,18 +1,24 @@
 /**
- * plant.js (screen) — a plant at a glance (LANGUAGE_GARDEN_BIBLE §10):
- * the key once earned, members as tappable leaves each opening one line
- * of recall, a quiet planting date, and exactly one contextual primary
- * action: Grow, Revisit, or nothing at all for an evergreen at rest.
- * No percentages, no "N of M learned."
+ * plant.js (screen) — a plant at a glance (LANGUAGE_GARDEN_BIBLE §16.3):
+ * the plant large, its key once earned in one line, its members as the
+ * words you can now read, and exactly one contextual primary action —
+ * Grow, Revisit, or nothing at all for a plant at rest.
+ *
+ * What is deliberately ABSENT (§16.3, Principle 22): no stage word, no
+ * accuracy, no last-reviewed date, no next-review countdown, no strength
+ * meter — and, crucially, no way to passively re-read the members'
+ * meanings. The Garden has no screen that lets a learner re-read the
+ * answers (§7.1); the words are shown as capability, the key is shown as
+ * the key, and retrieval happens only in a Revisit. The stage is read
+ * from the plant's own form, never stated as a word.
  */
 
 import { loadLGItem } from '../../../core/content-loader/loader.js';
 import { listGardenSessions, sessionsForFamily } from '../logic/store.js';
 import { computePlantState } from '../../../core/engine/garden-session.js';
+import { biomeForFamily } from '../logic/biomes.js';
 import { GARDEN_LINES } from '../../../core/mentor/garden-voice.js';
-import { escapeHTML, formatDate } from '../../../core/utils/format.js';
-
-const STAGE_LABEL = { seed: 'Open ground', sprout: 'Sprout', sapling: 'Sapling', in_leaf: 'In leaf', evergreen: 'Evergreen' };
+import { escapeHTML } from '../../../core/utils/format.js';
 
 export async function renderPlant(outlet, context, params) {
   let family, history;
@@ -23,15 +29,18 @@ export async function renderPlant(outlet, context, params) {
   } catch (err) {
     outlet.innerHTML = `<section class="screen"><h1>This plant will not open</h1>
       <div class="card"><p>${escapeHTML(err.message)}</p>
-      <p class="muted"><a href="#/garden">Back to the grove</a></p></div></section>`;
+      <p class="muted"><a href="#/garden">Back to the garden</a></p></div></section>`;
     return;
   }
 
+  const biome = biomeForFamily(family);
+  const biomeHome = biome ? `#/garden/biome/${biome.slug}` : '#/garden';
+
   const state = computePlantState(history);
   const reachedWords = new Set(history.filter((s) => s.reach?.is_correct).map((s) => s.reach.vocab_id));
-  const known = state.stage !== 'seed';
+  const known = !['open_ground', 'seed'].includes(state.stage);
 
-  const actionHTML = state.stage === 'seed'
+  const actionHTML = !known
     ? `<button class="btn btn--primary btn--block" id="plant-action">${GARDEN_LINES.growAction}</button>`
     : state.due !== 'none'
       ? `<button class="btn btn--primary btn--block" id="plant-action">${GARDEN_LINES.revisitAction}</button>`
@@ -43,24 +52,22 @@ export async function renderPlant(outlet, context, params) {
     ${family.root.mentor_note ? `<p class="hint">${escapeHTML(family.root.mentor_note)}</p>` : ''}
   ` : `<p class="muted">This root has not opened yet.</p>`;
 
+  // Members appear as the words you can now read. A held-out Reach word only
+  // appears once it has actually been constructed. The WORD is shown — never
+  // its meaning, which would be re-reading the answer (Principle 22).
   const leafHTML = (m) => {
     const visible = !m.held_out ? known : reachedWords.has(m.vocab_id);
     if (!visible) return '';
-    return `
-      <button class="lg-leaf" data-word="${escapeHTML(m.word)}">
-        <span class="lg-leaf__word">${escapeHTML(m.word)}</span>
-        <span class="lg-leaf__meaning" hidden>${escapeHTML(m.meaning)}</span>
-      </button>`;
+    return `<span class="lg-leaf">${escapeHTML(m.word)}</span>`;
   };
 
   outlet.innerHTML = `
     <section class="screen lg-plant">
-      <div class="session-bar"><a href="#/garden">← Grove</a></div>
+      <div class="session-bar"><a href="${biomeHome}">← Back</a></div>
 
       <div class="lg-plant__hero">
         <cat-plant stage="${state.stage}" due="${state.due}"></cat-plant>
       </div>
-      <p class="screen__eyebrow">${STAGE_LABEL[state.stage]}${state.plantedAt ? ` · ${escapeHTML(GARDEN_LINES.plantedOn(formatDate(state.plantedAt)))}` : ''}</p>
       <h1>${escapeHTML(family.root.label)}</h1>
 
       ${keyHTML}
@@ -73,13 +80,6 @@ export async function renderPlant(outlet, context, params) {
       ${actionHTML}
     </section>
   `;
-
-  for (const leaf of outlet.querySelectorAll('.lg-leaf')) {
-    leaf.addEventListener('click', () => {
-      const line = leaf.querySelector('.lg-leaf__meaning');
-      line.hidden = !line.hidden;
-    });
-  }
 
   outlet.querySelector('#plant-action')?.addEventListener('click', () => {
     location.hash = `#/garden/session/${family.meta.id}`;

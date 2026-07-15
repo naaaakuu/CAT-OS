@@ -30,6 +30,7 @@
 
 import { feedbackPrefs } from '../../../core/engagement/feedback.js';
 
+const C3 = 130.81, E3 = 164.81, G3 = 196.0, A3 = 220.0;
 const C4 = 261.63, D4 = 293.66, E4 = 329.63, G4 = 392.0, A4 = 440.0;
 const C5 = 523.25, D5 = 587.33, E5 = 659.25, G5 = 783.99, A5 = 880.0;
 
@@ -56,13 +57,24 @@ function ensureGraph() {
   if (!AC) return false;
   const ctx = new AC();
 
+  // The warm chain, mirroring the shell's own (gain → compressor → lowpass):
+  // a gentle compressor glues the mix and tames peaks so nothing is ever
+  // harsh, even if the learner turns the system up; a low ceiling keeps the
+  // garden warm rather than bright. This is the "warm, clear, never harsh at
+  // 40–50% volume" mandate expressed in the graph, not in raw loudness.
   const master = ctx.createGain();
   master.gain.value = 1; // per-sound peaks already carry the actual level (see gardenGain())
+  const glue = ctx.createDynamicsCompressor();
+  glue.threshold.value = -20; // linear ~0.1 — the growth chord sums to about here, so it compresses gently
+  glue.knee.value = 26;       // a soft knee: warmth, never a pump
+  glue.ratio.value = 3;
+  glue.attack.value = 0.006;  // let the soft attacks through, catch only the peak
+  glue.release.value = 0.2;
   const warm = ctx.createBiquadFilter();
   warm.type = 'lowpass';
-  warm.frequency.value = 5200; // softer ceiling than the shell's 7200 — the garden is quieter, never bright
-  warm.Q.value = 0.5;
-  master.connect(warm).connect(ctx.destination);
+  warm.frequency.value = 4600; // below the 2–4 kHz band that turns tinny/harsh on small phone speakers
+  warm.Q.value = 0.6;
+  master.connect(glue).connect(warm).connect(ctx.destination);
 
   const buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
   const data = buf.getChannelData(0);
@@ -123,35 +135,72 @@ function grain(t, { peak = 0.02, a = 0.01, d = 0.08, freq = 2400, q = 1.2 }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* The two session sounds Bible §7 names by name, plus two tiny        */
-/* construction-mechanic grains. Each takes (t, m) — m is the current  */
-/* gardenGain(), so nothing needs to "update" a stored volume.         */
+/* The garden's small sound set (Bible §10). Everything is sine-based   */
+/* (no harsh harmonics), every attack is soft (no click), and the whole */
+/* set is balanced so GROWTH is unmistakably the loudest event — the    */
+/* one peak per session — while COMMIT is barely a touch. Each takes    */
+/* (t, m, opts): m is the current gardenGain(), opts carries a rising   */
+/* step for the assembly. Nothing here stores a volume to "update".     */
 /* ------------------------------------------------------------------ */
 
+const ASSEMBLY_STEPS = [C4, D4, E4, G4, A4, C5]; // rising, so a 3-part word climbs
+
 const SOUNDS = {
-  /** The Key: one soft note, a small question settling into an answer. */
+  /** Commitment (§10.5 #1): the sound of *you chose*, never *you were right* —
+   *  identical for a right and a wrong answer (Law 7). One warm note with a
+   *  soft octave of body underneath, quiet enough to be a touch, not an event. */
+  commit(t, m) {
+    tone(t, { freq: C4, type: 'sine', peak: 0.030 * m, a: 0.012, d: 0.20 });
+    tone(t, { freq: C3, type: 'sine', peak: 0.014 * m, a: 0.020, d: 0.26 });
+  },
+  /** The Key (§10.5 #2): something opening. A low body, a warm mid note, and
+   *  a gentle rise settling a fifth above — a small question finding its answer. */
   key(t, m) {
-    tone(t, { freq: A4, type: 'sine', peak: 0.05 * m, a: 0.02, d: 0.4 });
-    tone(t + 0.16, { freq: D5, type: 'sine', peak: 0.035 * m, a: 0.03, d: 0.5 });
+    tone(t, { freq: A3, type: 'sine', peak: 0.020 * m, a: 0.03, hold: 0.05, d: 0.55 });
+    tone(t, { freq: A4, type: 'sine', peak: 0.044 * m, a: 0.02, d: 0.42 });
+    tone(t + 0.16, { freq: D5, type: 'sine', peak: 0.030 * m, a: 0.03, d: 0.5 });
   },
-  /** Growth: the one peak per session, warm and unhurried. */
+  /** Growth (§10.5 #4): the peak, and the ONLY sound with harmony. A warm low
+   *  body, a sustained fifth held gently underneath (the harmony), and a rising
+   *  pentatonic figure that blooms and resolves on a long, ringing tail — the
+   *  sound you pause and smile at. Kept in a warm register (nothing above C5). */
   growth(t, m) {
-    tone(t, { freq: C4, type: 'sine', peak: 0.03 * m, a: 0.05, d: 0.9 });
-    tone(t + 0.05, { freq: E4, type: 'triangle', peak: 0.03 * m, a: 0.05, d: 0.7 });
-    tone(t + 0.22, { freq: G4, type: 'sine', peak: 0.04 * m, a: 0.03, d: 0.6 });
-    tone(t + 0.42, { freq: C5, type: 'sine', peak: 0.045 * m, a: 0.02, d: 0.8 });
-    tone(t + 0.42, { freq: E5, type: 'sine', peak: 0.012 * m, a: 0.03, d: 0.6, pan: 0.12 });
+    tone(t,        { freq: C3, type: 'sine', peak: 0.040 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
+    tone(t + 0.02, { freq: G3, type: 'sine', peak: 0.024 * m, a: 0.09, hold: 0.26, d: 1.3, pan: -0.14 }); // harmony
+    tone(t + 0.02, { freq: C4, type: 'sine', peak: 0.022 * m, a: 0.09, hold: 0.26, d: 1.3, pan: 0.14 });
+    tone(t,        { freq: E4, type: 'sine', peak: 0.030 * m, a: 0.035, d: 0.70 });  // the figure blooms…
+    tone(t + 0.17, { freq: G4, type: 'sine', peak: 0.034 * m, a: 0.035, d: 0.85 });
+    tone(t + 0.36, { freq: C5, type: 'sine', peak: 0.046 * m, a: 0.04,  d: 1.20 });  // …and resolves, ringing
   },
-  /** A tapped word-part: a tiny, soft, woody tick — never a UI click. */
-  leafTap(t, m) {
-    grain(t, { peak: 0.018 * m, a: 0.004, d: 0.04, freq: 1500, q: 1.4 });
+  /** A tapped word-part (§10.5 #3, assembly): a soft pitched tick that RISES
+   *  with each part, so assembling a three-part word is a small climbing figure.
+   *  A hair of woody grain gives it body without a UI-click edge. */
+  leafTap(t, m, { step = 0 } = {}) {
+    const f = ASSEMBLY_STEPS[Math.min(step, ASSEMBLY_STEPS.length - 1)];
+    tone(t, { freq: f, type: 'sine', peak: 0.022 * m, a: 0.006, d: 0.18 });
+    grain(t, { peak: 0.009 * m, a: 0.003, d: 0.04, freq: 1400, q: 1.4 });
   },
-  /** Parts joining into the whole word: a small, round settling sound. */
+  /** Parts joining into the whole word: a warm, round settle, a step above the
+   *  last tap — the figure landing. */
   bloom(t, m) {
-    tone(t, { freq: E5, type: 'sine', peak: 0.03 * m, a: 0.015, d: 0.22 });
-    tone(t + 0.05, { freq: G5, type: 'sine', peak: 0.022 * m, a: 0.02, d: 0.26 });
+    tone(t, { freq: G4, type: 'sine', peak: 0.030 * m, a: 0.012, d: 0.24 });
+    tone(t + 0.05, { freq: C5, type: 'sine', peak: 0.024 * m, a: 0.016, d: 0.30 });
   },
 };
+
+/** Soft haptics, layered under the sounds (§14.5). Exactly two moments carry
+ *  a buzz: commitment (a light tick, the same for right and wrong) and growth
+ *  (a warmer, longer thump — the physical half of the peak, so it survives
+ *  with sound off). Gated by the shell's own haptics preference. */
+const HAPTICS = { commit: 12, growth: [16, 22, 34] };
+
+function gardenVibrate(name) {
+  try {
+    const pattern = HAPTICS[name];
+    if (!pattern || !feedbackPrefs().haptics) return;
+    navigator.vibrate?.(pattern);
+  } catch { /* unsupported — silent by design */ }
+}
 
 export function playGardenSound(name, opts = {}) {
   try {
@@ -162,8 +211,15 @@ export function playGardenSound(name, opts = {}) {
     if (!fn) return;
     if (!ensureGraph()) return;
     if (state.ctx.state === 'suspended') state.ctx.resume();
-    fn(state.ctx.currentTime + Math.max(0, opts.delay ?? 0), m);
+    fn(state.ctx.currentTime + Math.max(0, opts.delay ?? 0), m, opts);
   } catch { /* feedback is never worth an error */ }
+}
+
+/** The one cue API for the garden: sound + haptic together, mirroring the
+ *  shell's cue(). A sound with no haptic (key, leafTap, bloom) simply plays. */
+export function gardenCue(name, opts = {}) {
+  gardenVibrate(name);
+  playGardenSound(name, opts);
 }
 
 /* ------------------------------------------------------------------ */

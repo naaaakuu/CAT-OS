@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 16;
+const CACHE_VERSION = 17;
 const CONTENT_VERSION = 11;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -115,10 +115,12 @@ const SHELL_FILES = [
   './src/modules/language-garden/index.js',
   './src/modules/language-garden/logic/store.js',
   './src/modules/language-garden/logic/scene.js',
+  './src/modules/language-garden/logic/biomes.js',
   './src/modules/language-garden/logic/journal.js',
   './src/modules/language-garden/logic/ambient.js',
   './src/modules/language-garden/logic/audio.js',
-  './src/modules/language-garden/screens/grove.js',
+  './src/modules/language-garden/screens/overlook.js',
+  './src/modules/language-garden/screens/biome.js',
   './src/modules/language-garden/screens/plant.js',
   './src/modules/language-garden/screens/session.js',
   './src/modules/language-garden/screens/journal.js',

@@ -38,13 +38,13 @@ export function pickAmbientEvent(date = new Date(), random = Math.random) {
   return pool[Math.floor(random() * pool.length)];
 }
 
-/** How long an evergreen must have HELD that stage, in real elapsed
- *  time, before a nest quietly appears (Bible: "after a mature tree has
- *  existed for some time"). Fourteen days of standing evergreen. */
+/** How long a tree must have HELD Ancient, in real elapsed time, before a
+ *  nest quietly appears (Bible §6.5: a bird nests in an Ancient tree once
+ *  it "has existed for some time"). Fourteen days of standing Ancient. */
 export const NEST_ELIGIBLE_MS = 14 * 24 * 60 * 60 * 1000;
 
 /** @param {ReturnType<import('../../../core/engine/garden-session.js').computePlantState>} state */
 export function hasNest(state, now = Date.now()) {
-  if (state.stage !== 'evergreen' || !state.evergreenAt) return false;
-  return now - new Date(state.evergreenAt).getTime() >= NEST_ELIGIBLE_MS;
+  if (state.stage !== 'ancient' || !state.ancientAt) return false;
+  return now - new Date(state.ancientAt).getTime() >= NEST_ELIGIBLE_MS;
 }

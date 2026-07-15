@@ -1524,7 +1524,7 @@ if (lgFiles.length === 0) {
 } else {
   const gardenVoice = await mod('src/core/mentor/garden-voice.js');
   const rcVoice = await mod('src/core/mentor/voice.js');
-  const { computePlantState, GardenSession, RUNG_INTERVALS_MS, GOLD_WINDOW_MS, EVERGREEN_AT_REVISITS } = await mod('src/core/engine/garden-session.js');
+  const { computePlantState, GardenSession, RUNG_INTERVALS_MS, GOLD_WINDOW_MS, MATURE_AT_REVISITS, ANCIENT_AT_REVISITS } = await mod('src/core/engine/garden-session.js');
 
   /* -- The garden's mentor never judges either: lint its whole vocabulary. -- */
   {
@@ -1551,8 +1551,8 @@ if (lgFiles.length === 0) {
   /* -- Scheduler: computePlantState is a pure, deterministic function of
      history + now, and never demotes. -- */
   {
-    const seed = computePlantState([], 1_000_000);
-    if (seed.stage !== 'seed' || seed.due !== 'none') bad('garden scheduler: empty history must be Seed, never due');
+    const ground = computePlantState([], 1_000_000);
+    if (ground.stage !== 'open_ground' || ground.due !== 'none') bad('garden scheduler: empty history must be Open ground, never due');
 
     const plantedAt = new Date(2026, 0, 1, 10, 0, 0).getTime();
     const grow = { session_type: 'grow', finished_at: new Date(plantedAt).toISOString() };
@@ -1561,23 +1561,37 @@ if (lgFiles.length === 0) {
     if (justGrown.stage !== 'sprout') bad(`garden scheduler: fresh grow should be Sprout, got ${justGrown.stage}`);
 
     const settled = computePlantState([grow], plantedAt + RUNG_INTERVALS_MS[0] + 1000);
-    if (settled.stage !== 'sapling') bad(`garden scheduler: past rung 0 with no revisit should be Sapling, got ${settled.stage}`);
+    if (settled.stage !== 'young') bad(`garden scheduler: past rung 0 with no revisit should be Young, got ${settled.stage}`);
     if (settled.due !== 'gold') bad(`garden scheduler: just past its first interval should be Gold, got ${settled.due}`);
 
     const longNeglected = computePlantState([grow], plantedAt + RUNG_INTERVALS_MS[0] + GOLD_WINDOW_MS + 1000);
     if (longNeglected.due !== 'bare') bad(`garden scheduler: long past the gold window should be Bare with buds, got ${longNeglected.due}`);
 
-    // Four CLEAN revisits, each exactly at its own next_review_at, reach evergreen.
+    // Clean revisits, each exactly at its own next_review_at, climb the six
+    // stages: 1 → In leaf, MATURE_AT → Mature, ANCIENT_AT → Ancient.
     let history = [grow];
     let t = plantedAt;
-    for (let i = 0; i < EVERGREEN_AT_REVISITS; i += 1) {
+    const stageAfter = (n) => {
+      let h = [grow];
+      let tt = plantedAt;
+      for (let i = 0; i < n; i += 1) {
+        const s = computePlantState(h, tt + 5000);
+        tt = new Date(s.nextReviewAt).getTime();
+        h = [...h, { session_type: 'revisit', finished_at: new Date(tt).toISOString(), clean: true }];
+      }
+      return computePlantState(h, tt + 1000);
+    };
+    if (stageAfter(1).stage !== 'in_leaf') bad(`garden scheduler: 1 clean revisit should be In leaf, got ${stageAfter(1).stage}`);
+    if (stageAfter(MATURE_AT_REVISITS).stage !== 'mature') bad(`garden scheduler: ${MATURE_AT_REVISITS} clean revisits should be Mature, got ${stageAfter(MATURE_AT_REVISITS).stage}`);
+
+    for (let i = 0; i < ANCIENT_AT_REVISITS; i += 1) {
       const state = computePlantState(history, t + 5000);
       t = new Date(state.nextReviewAt).getTime();
       history = [...history, { session_type: 'revisit', finished_at: new Date(t).toISOString(), clean: true }];
     }
-    const evergreen = computePlantState(history, t + 1000);
-    if (evergreen.stage !== 'evergreen') bad(`garden scheduler: ${EVERGREEN_AT_REVISITS} clean revisits should reach Evergreen, got ${evergreen.stage}`);
-    if (!evergreen.evergreenAt) bad('garden scheduler: evergreenAt must be set once evergreen');
+    const ancient = computePlantState(history, t + 1000);
+    if (ancient.stage !== 'ancient') bad(`garden scheduler: ${ANCIENT_AT_REVISITS} clean revisits should reach Ancient, got ${ancient.stage}`);
+    if (!ancient.ancientAt) bad('garden scheduler: ancientAt must be set once Ancient');
 
     // A rocky (non-clean) revisit still regrows (stage advances) but must
     // NOT shrink the interval on the next round — never a demotion.
@@ -1586,7 +1600,7 @@ if (lgFiles.length === 0) {
     if (afterRocky.stage !== 'in_leaf') bad('garden scheduler: a completed rocky revisit should still regrow to In leaf');
     if (afterRocky.rung !== 0) bad('garden scheduler: a rocky revisit must not advance the rung (never a demotion, but never a shortcut either)');
 
-    if (JSON.stringify(computePlantState(history, t + 1000)) !== JSON.stringify(evergreen)) {
+    if (JSON.stringify(computePlantState(history, t + 1000)) !== JSON.stringify(ancient)) {
       bad('garden scheduler: computePlantState is not deterministic');
     }
   }
@@ -1652,10 +1666,13 @@ if (lgFiles.length === 0) {
   /* -- Audio identity: import-safe under Node, disabled path is a no-op. -- */
   {
     const audio = await mod('src/modules/language-garden/logic/audio.js');
-    const REQUIRED = ['key', 'growth', 'leafTap', 'bloom'];
+    const REQUIRED = ['commit', 'key', 'growth', 'leafTap', 'bloom'];
     for (const n of REQUIRED) if (!audio.GARDEN_SOUND_NAMES.includes(n)) bad(`garden audio: sound "${n}" missing from the engine`);
+    if (typeof audio.gardenCue !== 'function') bad('garden audio: missing export gardenCue() (sound + haptic)');
     try {
-      audio.playGardenSound('key');
+      audio.playGardenSound('leafTap', { step: 2 }); // the rising assembly path
+      audio.gardenCue('commit'); // sound + haptic together — disabled path is a no-op
+      audio.gardenCue('growth');
       audio.unlockGardenAudio();
       audio.startGardenAmbience();
       audio.stopGardenAmbience();

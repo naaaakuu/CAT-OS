@@ -9,13 +9,13 @@
 import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
 import { listGardenSessions } from '../logic/store.js';
 import { whatYouCanReadNow, wildSightings } from '../logic/journal.js';
-import { JOURNAL_LINES } from '../../../core/mentor/garden-voice.js';
+import { JOURNAL_LINES, VALLEY_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML, formatDate } from '../../../core/utils/format.js';
 
 export async function renderJournal(outlet, context) {
   outlet.innerHTML = `
     <section class="screen">
-      <p class="screen__eyebrow">Root Grove</p>
+      <div class="session-bar"><a href="#/garden">← ${escapeHTML(VALLEY_LINES.toValley)}</a></div>
       <h1>Journal</h1>
       <div id="lg-journal-body" aria-busy="true">
         <div class="skeleton skeleton--line" style="width: 50%"></div>

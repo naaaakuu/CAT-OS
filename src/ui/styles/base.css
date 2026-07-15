@@ -112,6 +112,19 @@ textarea {
   .shell__header { padding-top: var(--space-2); padding-bottom: var(--space-1); }
 }
 
+/* ---------- Immersive mode ----------
+   Inside the Garden the app's chrome steps aside, because chrome destroys
+   place (LANGUAGE_GARDEN_BIBLE §14.7): a tab bar over a valley makes the
+   valley a screen inside an app; its absence makes it somewhere you went.
+   The header and bottom nav are hidden; each garden screen carries its own
+   quiet way back out (the Overlook's marks, a plant's Back, a session's ×). */
+:root[data-immersive] .shell__header { display: none; }
+:root[data-immersive] cat-nav { display: none; }
+:root[data-immersive] .shell__view {
+  padding-top: 0;
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--space-3));
+}
+
 /* ---------- Motion foundation ----------
    One orchestrated entrance: the screen rises gently, and its
    cards follow in a quiet stagger. Nothing else moves on load. */

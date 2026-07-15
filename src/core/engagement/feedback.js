@@ -178,6 +178,11 @@ export function installGlobalFeedback() {
 
   // Press / toggle micro-feedback for interactive elements.
   document.addEventListener('click', (e) => {
+    // Immersive screens own their own sound world (the Language Garden's quiet
+    // identity — §10: the commitment sound is the only tap sound in the
+    // Garden, and its taps must never trigger the shell's wooden tick). They
+    // fire their own cues at the code site; the shell stays out of the way.
+    if (document.documentElement.hasAttribute('data-immersive')) return;
     const el = e.target.closest?.(
       'button, a[href], [role="button"], .segmented__option, cat-option'
     );
