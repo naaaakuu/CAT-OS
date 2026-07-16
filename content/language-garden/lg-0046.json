@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0046",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "bene, bone",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "bene, bone",
+    "origin_language": "Latin",
+    "core_meaning": "good",
+    "mentor_note": "bene and bone both mean good, and nearly every word built on them describes kindness or benefit."
+  },
+  "attempt": {
+    "direction_prompt": "Something harmful, or something good for you?",
+    "options": [
+      {
+        "text": "Harmful",
+        "correct": false
+      },
+      {
+        "text": "Good for you",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0193",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "bene",
+          "gloss": "good",
+          "is_root": true
+        },
+        {
+          "text": "ficial",
+          "gloss": "making, doing",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Regular short breaks turned out to be more beneficial to output than one long push through the afternoon.",
+        "The specialist confirmed the new diet would be beneficial, given his particular condition."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0194",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "bene",
+          "gloss": "good",
+          "is_root": true
+        },
+        {
+          "text": "volent",
+          "gloss": "wishing, willing",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The old landlord had a benevolent habit of forgiving rent whenever a tenant fell on hard times.",
+        "Behind the strict exterior was a genuinely benevolent teacher who never once embarrassed a struggling student."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0195",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "bene",
+          "gloss": "good",
+          "is_root": true
+        },
+        {
+          "text": "factor",
+          "gloss": "one who does, makes",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The scholarship fund had relied on a single anonymous benefactor for over a decade.",
+        "A benefactor from the town’s early years still lends her name to the library’s main reading room."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone who generously gives money or help to a cause or person",
+          "correct": true
+        },
+        {
+          "text": "Someone who causes harm, whether intentionally or not",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Someone who benefits from another person’s generosity",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0196",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "ben",
+          "gloss": "good",
+          "is_root": true
+        },
+        {
+          "text": "ign",
+          "gloss": "born, produced",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The biopsy came back benign, and the whole family exhaled for the first time in a week.",
+        "Beneath his stern manner was a genuinely benign temperament that took new colleagues months to notice."
+      ],
+      "construct_options": [
+        {
+          "text": "Gentle and harmless, not dangerous",
+          "correct": true
+        },
+        {
+          "text": "Generous and willing to give money to a cause",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Producing serious harm, especially to health",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

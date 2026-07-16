@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0031",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "brev",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "brev",
+    "origin_language": "Latin",
+    "core_meaning": "short",
+    "mentor_note": "brev is a small root that keeps its own promise: everything it builds stays short."
+  },
+  "attempt": {
+    "direction_prompt": "A long, unabridged version, or a shortened one?",
+    "options": [
+      {
+        "text": "A long, unabridged version",
+        "correct": false
+      },
+      {
+        "text": "A shortened one",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0131",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "ab",
+          "gloss": "away, from",
+          "is_root": false
+        },
+        {
+          "text": "brevi",
+          "gloss": "short",
+          "is_root": true
+        },
+        {
+          "text": "ation",
+          "gloss": "the act or result of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The report was so dense with abbreviations that it came with its own two-page glossary.",
+        "She never learned the abbreviation for the department’s own name until her third week there."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0132",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "brev",
+          "gloss": "short",
+          "is_root": true
+        },
+        {
+          "text": "ity",
+          "gloss": "the state or quality of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The editor prized brevity above almost everything else, cutting entire paragraphs down to a single line.",
+        "His toast lasted barely thirty seconds, and its brevity was exactly what the room needed that night."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0133",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "brevi",
+          "gloss": "short",
+          "is_root": true
+        },
+        {
+          "text": "ary",
+          "gloss": "a thing associated with",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The monk carried a worn breviary everywhere, its pages softened by decades of daily use.",
+        "A breviary of the committee’s three hundred page report circulated to the board within a day."
+      ],
+      "construct_options": [
+        {
+          "text": "A condensed summary of a longer text, especially of daily prayers",
+          "correct": true
+        },
+        {
+          "text": "A long, unabridged history of a religious order",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A collection of letters written between friends",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0134",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "ab",
+          "gloss": "away, from",
+          "is_root": false
+        },
+        {
+          "text": "brevi",
+          "gloss": "short",
+          "is_root": true
+        },
+        {
+          "text": "ate",
+          "gloss": "to make",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The style guide insisted every state name be abbreviated the same way throughout the document.",
+        "She abbreviated the surgery’s risks so much in conversation that he agreed without understanding half of them."
+      ],
+      "construct_options": [
+        {
+          "text": "To shorten a word, phrase, or process",
+          "correct": true
+        },
+        {
+          "text": "To lengthen or add unnecessary detail to something",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "To carve words permanently into a hard surface",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,33 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.15.1 — 2026-07-17 — The Rootwood dataset, complete
+
+Content only; no engine, screen, or schema changes. Every root family in the
+owner's roots reference (`99_REFERENCE/4 - Roots Words: Greek and Latin.md`)
+is now a plant: **47 new families** join the 4 that shipped with 0.14.0, for
+**51 total** (27 Greek, 24 Latin by final count after two honest splits — see
+below), spanning **217 vocabulary words** (`content/vocabulary/`, up from 20).
+
+- Every family carries 4 to 8 members (2 or 3 taught, at least 2 held out as
+  the Reach reserve, per `LANGUAGE_GARDEN_BIBLE` §5.1/§6.1), each with a
+  morpheme breakdown that concatenates exactly to its word, two CAT-register
+  context sentences, and (for Reach words) a three-option construction quiz
+  with `literal_only`/`wrong_root` traps.
+- Word choices and meanings are transcribed from the source PDF wherever it
+  gave enough; a minority of well-known, real words on the same root were
+  added only where the source list was too short to form a complete family
+  (e.g. `nihil`, `rect`, `bel` each had 2 or 3 words in the source).
+- Two source entries were honestly split rather than transcribed as given,
+  because a Language Garden plant needs exactly one root and one meaning:
+  the source's combined **"andr / gyn"** row became two families (`andr`
+  "man", `gyn` "woman", opposite meanings); its **"mort, necro"** row became
+  two families (`mort`, Latin; `necro`, Greek — the source mixed a Greek
+  root into its Latin Roots section). The source's **"vore"** entry, listed
+  twice verbatim (Latin Roots XXIII and XXIV), was consolidated into one
+  family rather than duplicated.
+- `CONTENT_VERSION` → 12. No `CACHE_VERSION` change (no shell code touched).
+
 ## 0.15.0 — 2026-07-15 — The Language Garden becomes a place (Phases 1–3)
 
 Three phases of the `LANGUAGE GARDEN — IMPLEMENTATION ROADMAP.md` (v1.4.0,

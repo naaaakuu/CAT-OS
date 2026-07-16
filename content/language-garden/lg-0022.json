@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0022",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "path",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "path",
+    "origin_language": "Greek",
+    "core_meaning": "feeling, suffering",
+    "mentor_note": "path carries feeling into a word, whether shared, absent, or endured."
+  },
+  "attempt": {
+    "direction_prompt": "Indifferent to the stranger’s pain, or moved by it?",
+    "options": [
+      {
+        "text": "Indifferent",
+        "correct": false
+      },
+      {
+        "text": "Moved by it",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0094",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "sym",
+          "gloss": "together, with",
+          "is_root": false
+        },
+        {
+          "text": "pathy",
+          "gloss": "feeling",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The whole office signed a card expressing their sympathy after the sudden loss in his family.",
+        "She listened with real sympathy, though nothing she said could actually fix what had happened."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0095",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "em",
+          "gloss": "in",
+          "is_root": false
+        },
+        {
+          "text": "pathy",
+          "gloss": "feeling",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Good doctors, her mentor always said, need empathy at least as much as they need diagnostic skill.",
+        "The training focused less on procedure and more on empathy, on actually hearing what a patient was afraid of."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0096",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "a",
+          "gloss": "without",
+          "is_root": false
+        },
+        {
+          "text": "pathy",
+          "gloss": "feeling",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Voter apathy, not any single scandal, was blamed for the record low turnout.",
+        "His apathy toward the project was obvious from the first meeting, and it never really lifted."
+      ],
+      "construct_options": [
+        {
+          "text": "A lack of interest, enthusiasm, or concern about something",
+          "correct": true
+        },
+        {
+          "text": "A strong, unshakeable feeling of anger",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A deep, shared feeling of compassion for others",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0097",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "path",
+          "gloss": "suffering",
+          "is_root": true
+        },
+        {
+          "text": "ology",
+          "gloss": "study of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The lab’s pathology report finally explained symptoms three earlier tests had missed entirely.",
+        "Her interest in pathology began with a single undergraduate class on how tissue actually fails."
+      ],
+      "construct_options": [
+        {
+          "text": "The study of disease, or a harmful deviation from what is normal",
+          "correct": true
+        },
+        {
+          "text": "A strong, unshakeable feeling of anger",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A deep, shared feeling of compassion for others",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

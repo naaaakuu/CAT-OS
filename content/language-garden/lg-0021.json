@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0021",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "onym",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "onym",
+    "origin_language": "Greek",
+    "core_meaning": "name",
+    "mentor_note": "onym is the root behind nearly every word English has for kinds of names."
+  },
+  "attempt": {
+    "direction_prompt": "The author’s real name, or a made up pen name?",
+    "options": [
+      {
+        "text": "The author’s real name",
+        "correct": false
+      },
+      {
+        "text": "A made up pen name",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0090",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "pseud",
+          "gloss": "false",
+          "is_root": false
+        },
+        {
+          "text": "onym",
+          "gloss": "name",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The novel was published under a pseudonym, and its true author was not revealed for a decade.",
+        "She writes her crime fiction under a pseudonym so it never gets shelved beside her academic work."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0091",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "syn",
+          "gloss": "together, same",
+          "is_root": false
+        },
+        {
+          "text": "onym",
+          "gloss": "name",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The editor replaced “utilise” with its plainer synonym “use” throughout the entire report.",
+        "Ask a room of ten people for a synonym of “happy” and you will get ten slightly different words."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0092",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "ant",
+          "gloss": "opposite",
+          "is_root": false
+        },
+        {
+          "text": "onym",
+          "gloss": "name",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The exam asked students to supply the correct antonym for each of ten adjectives.",
+        "He argued that “brave” has no perfect antonym, since “cowardly” carries a judgment “brave” does not."
+      ],
+      "construct_options": [
+        {
+          "text": "A word that means the opposite of another word",
+          "correct": true
+        },
+        {
+          "text": "A word borrowed directly from a foreign language",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A word that means nearly the same as another word",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0093",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "hom",
+          "gloss": "same",
+          "is_root": false
+        },
+        {
+          "text": "onym",
+          "gloss": "name",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The riddle depended entirely on a homonym: the word for a tree branch and the word for a bank’s branch.",
+        "Young readers often stumble on homonyms like “bark,” unsure whether it means a sound or a tree’s covering."
+      ],
+      "construct_options": [
+        {
+          "text": "A word that sounds or is spelled the same as another but differs in meaning",
+          "correct": true
+        },
+        {
+          "text": "A name passed down within the same family for generations",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A word invented for a single specific occasion",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0016",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "ped",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "ped",
+    "origin_language": "Greek",
+    "core_meaning": "child",
+    "mentor_note": "this ped means child; a different Latin ped, met elsewhere, means foot, and the two are easy to confuse."
+  },
+  "attempt": {
+    "direction_prompt": "A doctor who treats adults only, or one who treats children?",
+    "options": [
+      {
+        "text": "Adults only",
+        "correct": false
+      },
+      {
+        "text": "Children",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0070",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "pedi",
+          "gloss": "child",
+          "is_root": true
+        },
+        {
+          "text": "atrician",
+          "gloss": "a doctor, healer",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The pediatrician’s waiting room was decorated in bright colours, low shelves, and small chairs.",
+        "Their pediatrician had watched three generations of the same family grow up in that clinic."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0071",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "peda",
+          "gloss": "child",
+          "is_root": true
+        },
+        {
+          "text": "gogy",
+          "gloss": "leading, guiding",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The school’s new pedagogy replaced rote memorising with projects the students designed themselves.",
+        "Her thesis compared pedagogy across three countries, each with a completely different idea of what school is for."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0072",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "pedo",
+          "gloss": "child",
+          "is_root": true
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Her research in pedology tracked how children’s reasoning changes between the ages of five and ten.",
+        "The institute’s pedology programme had followed the same group of children since infancy."
+      ],
+      "construct_options": [
+        {
+          "text": "The study of how children develop physically and mentally",
+          "correct": true
+        },
+        {
+          "text": "The study of soil composition and rock layers",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The study of ageing and the elderly",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0073",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "pedo",
+          "gloss": "child",
+          "is_root": true
+        },
+        {
+          "text": "dontics",
+          "gloss": "relating to teeth",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The clinic added a pedodontics wing after realising how many young patients it was turning away.",
+        "A career in pedodontics meant learning to calm a frightened five year old before the drill ever started."
+      ],
+      "construct_options": [
+        {
+          "text": "The branch of dentistry focused on the dental care of children",
+          "correct": true
+        },
+        {
+          "text": "The study of foot and ankle disorders in children",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The branch of dentistry focused on the elderly",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

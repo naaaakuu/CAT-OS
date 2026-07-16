@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0042",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "flect, flex",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "flect, flex",
+    "origin_language": "Latin",
+    "core_meaning": "to bend",
+    "mentor_note": "flect and flex both mean bend, and English keeps flex as a living, everyday word on its own."
+  },
+  "attempt": {
+    "direction_prompt": "Rigid and unable to adjust, or adaptable and easily bent?",
+    "options": [
+      {
+        "text": "Rigid, unable to adjust",
+        "correct": false
+      },
+      {
+        "text": "Adaptable, easily bent",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0176",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "flex",
+          "gloss": "bend",
+          "is_root": true
+        },
+        {
+          "text": "ible",
+          "gloss": "able to be",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The new contract offered flexible hours, letting staff choose their own start time.",
+        "Bamboo bends in a storm precisely because it stays flexible where a stiffer tree would simply snap."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0177",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "in",
+          "gloss": "into",
+          "is_root": false
+        },
+        {
+          "text": "flect",
+          "gloss": "bend",
+          "is_root": true
+        },
+        {
+          "text": "ion",
+          "gloss": "the act or result of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "A single inflection in her voice told him the answer was no before she said a word.",
+        "The grammar chapter covered noun inflection: how a word bends to show number or case."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0178",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "genu",
+          "gloss": "knee",
+          "is_root": false
+        },
+        {
+          "text": "flect",
+          "gloss": "bend",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Every visitor to the shrine was expected to genuflect briefly at the entrance.",
+        "He genuflected out of habit, though he had not set foot in a church for years."
+      ],
+      "construct_options": [
+        {
+          "text": "To bend one knee to the ground as a gesture of respect",
+          "correct": true
+        },
+        {
+          "text": "To speak with a sudden change in tone of voice",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "To refuse to bend or show respect at all",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0179",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "de",
+          "gloss": "away, aside",
+          "is_root": false
+        },
+        {
+          "text": "flect",
+          "gloss": "bend",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The goalkeeper managed to deflect the shot just wide of the post at the last instant.",
+        "Every question about the delay was neatly deflected back onto the previous management team."
+      ],
+      "construct_options": [
+        {
+          "text": "To cause something to bend or turn aside from its path",
+          "correct": true
+        },
+        {
+          "text": "To bend one knee as a gesture of respect",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "To adapt readily and easily to a change",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

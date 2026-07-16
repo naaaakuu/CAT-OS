@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0028",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "psyche",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "psyche",
+    "origin_language": "Greek",
+    "core_meaning": "mind, spirit, soul",
+    "mentor_note": "psyche keeps every word it builds pointed inward, toward the mind rather than the body."
+  },
+  "attempt": {
+    "direction_prompt": "A physical injury to the body, or a disorder of the mind?",
+    "options": [
+      {
+        "text": "A physical injury",
+        "correct": false
+      },
+      {
+        "text": "A disorder of the mind",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0118",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "psych",
+          "gloss": "mind",
+          "is_root": true
+        },
+        {
+          "text": "iatrist",
+          "gloss": "healer, doctor",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Her psychiatrist adjusted the treatment slowly, one small change at a time, over almost a year.",
+        "The hospital’s only psychiatrist was booked three months in advance for most of that winter."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0119",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "psych",
+          "gloss": "mind",
+          "is_root": true
+        },
+        {
+          "text": "osis",
+          "gloss": "a condition, process",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The medication was designed to manage psychosis without leaving the patient permanently sedated.",
+        "A brief psychosis brought on by sleep deprivation resolved completely once he finally rested."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0120",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "psych",
+          "gloss": "mind",
+          "is_root": true
+        },
+        {
+          "text": "ic",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The fairground’s psychic claimed to know his fortune before he had even sat down.",
+        "Twins often report a strange psychic closeness, sensing when the other is in trouble."
+      ],
+      "construct_options": [
+        {
+          "text": "Relating to the mind, or an unusual, unexplained mental ability",
+          "correct": true
+        },
+        {
+          "text": "Relating to physical strength and athletic ability",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Relating to a severe, diagnosed mental illness",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0121",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "psycho",
+          "gloss": "mind",
+          "is_root": true
+        },
+        {
+          "text": "kinesis",
+          "gloss": "movement",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The magician’s act was billed as psychokinesis, though every trick had a far simpler explanation.",
+        "No experiment has ever reliably demonstrated psychokinesis under properly controlled conditions."
+      ],
+      "construct_options": [
+        {
+          "text": "The supposed ability to move objects using only the mind",
+          "correct": true
+        },
+        {
+          "text": "A form of therapy used to treat anxiety and stress",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The scientific study of motion and physical forces",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

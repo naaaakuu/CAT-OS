@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0011",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "neo",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "neo",
+    "origin_language": "Greek",
+    "core_meaning": "new",
+    "mentor_note": "neo rarely appears alone; it attaches itself to something old and declares a fresh version of it."
+  },
+  "attempt": {
+    "direction_prompt": "A long established idea, or a newly coined one?",
+    "options": [
+      {
+        "text": "Long established",
+        "correct": false
+      },
+      {
+        "text": "Newly coined",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0050",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "neo",
+          "gloss": "new",
+          "is_root": true
+        },
+        {
+          "text": "logism",
+          "gloss": "word, saying",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The dictionary’s editors add a fresh batch of neologisms every year, most of them born online.",
+        "Her lecture opened with a neologism nobody in the room had heard before, and it stuck."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0051",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "neo",
+          "gloss": "new",
+          "is_root": true
+        },
+        {
+          "text": "nate",
+          "gloss": "born",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The ward’s quietest corner was reserved for neonates who needed constant, careful watching.",
+        "A neonate’s grip, the nurse explained, is stronger than most new parents expect."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0052",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "neo",
+          "gloss": "new",
+          "is_root": true
+        },
+        {
+          "text": "phyte",
+          "gloss": "one who grows, a planted one",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "As a neophyte on the trading floor, he was given the smallest accounts and the longest hours.",
+        "The order welcomed each neophyte with a year of quiet, unglamorous training before any real responsibility."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone newly starting out in a subject or role, a beginner",
+          "correct": true
+        },
+        {
+          "text": "Someone who has just planted a new garden",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Someone who has mastered a subject over many years",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0053",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "neo",
+          "gloss": "new",
+          "is_root": true
+        },
+        {
+          "text": "phobia",
+          "gloss": "fear",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The old cat’s neophobia meant even a new rug took a week of cautious sniffing before it was trusted.",
+        "Some neophobia is healthy in a toddler, though his seemed to extend to every food that wasn’t beige."
+      ],
+      "construct_options": [
+        {
+          "text": "A strong or irrational fear of anything new or unfamiliar",
+          "correct": true
+        },
+        {
+          "text": "An intense love of new experiences and change",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A fear specifically of open or crowded spaces",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0012",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "andr",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Split from the source PDF’s combined \"andr / gyn\" entry: the two roots carry opposite meanings (man vs woman) and a Language Garden plant needs one root, one meaning, so they could not stay one family. gyn is its sibling plant."
+  },
+  "root": {
+    "label": "andr",
+    "origin_language": "Greek",
+    "core_meaning": "man",
+    "mentor_note": "andr names the male half of a pairing that gyn, its quiet opposite, completes."
+  },
+  "attempt": {
+    "direction_prompt": "Married to one husband, or to several?",
+    "options": [
+      {
+        "text": "One husband",
+        "correct": false
+      },
+      {
+        "text": "Several",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0054",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "poly",
+          "gloss": "many",
+          "is_root": false
+        },
+        {
+          "text": "andry",
+          "gloss": "man, husband",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The anthropologist’s fieldwork documented a rare form of polyandry practised in the mountain villages.",
+        "Polyandry was recorded there for centuries before outside law eventually made it illegal."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0055",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "andr",
+          "gloss": "man",
+          "is_root": true
+        },
+        {
+          "text": "oid",
+          "gloss": "resembling",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The film’s android moved so naturally that half the audience forgot it was not a person.",
+        "Engineers had spent a decade trying to make the android’s expressions look less unsettling."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0056",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "andro",
+          "gloss": "man",
+          "is_root": true
+        },
+        {
+          "text": "gen",
+          "gloss": "producing, giving rise to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The endocrinologist explained how a single androgen could influence everything from voice to bone density.",
+        "Levels of the androgen were measured twice before the specialist recommended any treatment."
+      ],
+      "construct_options": [
+        {
+          "text": "A hormone responsible for developing male physical characteristics",
+          "correct": true
+        },
+        {
+          "text": "A robot built to resemble a human being",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A hormone responsible for female physical characteristics",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0057",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "mis",
+          "gloss": "hatred of",
+          "is_root": false
+        },
+        {
+          "text": "andry",
+          "gloss": "man",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The essay argued that a few of the sitcom’s running jokes tipped over into casual misandry.",
+        "He dismissed every criticism of his behaviour as misandry, which made the criticism harder to raise at all."
+      ],
+      "construct_options": [
+        {
+          "text": "A dislike of, or ingrained prejudice against, men",
+          "correct": true
+        },
+        {
+          "text": "A dislike of, or ingrained prejudice against, women",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A robot built to resemble a human being",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

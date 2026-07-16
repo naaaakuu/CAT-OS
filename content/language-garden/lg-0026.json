@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0026",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "anthropos",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "anthropos",
+    "origin_language": "Greek",
+    "core_meaning": "mankind",
+    "mentor_note": "anthropos names humanity itself, and the words built on it are usually about studying or serving it."
+  },
+  "attempt": {
+    "direction_prompt": "The study of rock formations, or of human societies?",
+    "options": [
+      {
+        "text": "Rock formations",
+        "correct": false
+      },
+      {
+        "text": "Human societies",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0110",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "anthropo",
+          "gloss": "mankind",
+          "is_root": true
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "She switched into anthropology after one semester spent comparing kinship systems across three continents.",
+        "The department’s anthropology field trips were legendary, months at a time spent living in the community being studied."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0111",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "phil",
+          "gloss": "love of",
+          "is_root": false
+        },
+        {
+          "text": "anthropist",
+          "gloss": "mankind",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The wing of the hospital was funded entirely by a single anonymous philanthropist.",
+        "A quiet philanthropist for decades, she never once allowed her name on any of the buildings she funded."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0112",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "mis",
+          "gloss": "hatred of",
+          "is_root": false
+        },
+        {
+          "text": "anthrope",
+          "gloss": "mankind",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The neighbours had marked him down as a misanthrope long before anyone learned he simply worked nights.",
+        "Every misanthrope in fiction, it seems, eventually meets the one character who changes their mind."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone who dislikes or avoids the company of other people",
+          "correct": true
+        },
+        {
+          "text": "Someone who gives generously to help other people",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Someone who studies human societies professionally",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0113",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "anthropo",
+          "gloss": "mankind",
+          "is_root": true
+        },
+        {
+          "text": "morphic",
+          "gloss": "having the form of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The children’s film gave every anthropomorphic animal a distinct voice and a fully human wardrobe.",
+        "Early sailors drew anthropomorphic winds on their maps, each one with a face and puffed out cheeks."
+      ],
+      "construct_options": [
+        {
+          "text": "Attributing human form or characteristics to a god, animal, or object",
+          "correct": true
+        },
+        {
+          "text": "Attributing animal characteristics to a human being",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Devoted generously to helping other people",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

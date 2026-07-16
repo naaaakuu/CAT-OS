@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0006",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "micro",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 3 taught, 2 reach."
+  },
+  "root": {
+    "label": "micro",
+    "origin_language": "Greek",
+    "core_meaning": "small",
+    "mentor_note": "micro is mega turned around: the same instinct for scale, aimed the other way."
+  },
+  "attempt": {
+    "direction_prompt": "Visible to the naked eye, or too small to see?",
+    "options": [
+      {
+        "text": "Visible to the naked eye",
+        "correct": false
+      },
+      {
+        "text": "Too small to see",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0026",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "micro",
+          "gloss": "small",
+          "is_root": true
+        },
+        {
+          "text": "be",
+          "gloss": "life",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "A single microbe, invisible to the naked eye, had shut down the entire production line.",
+        "The lake looked perfectly clear, though a glass of it held millions of microbes."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0027",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "micro",
+          "gloss": "small",
+          "is_root": true
+        },
+        {
+          "text": "film",
+          "gloss": "a photographic record",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Before scanners existed, the archive preserved every newspaper on rolls of microfilm.",
+        "She spent the afternoon hunched over a reader, scrolling through decades of microfilm for one obituary."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0028",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "micro",
+          "gloss": "small",
+          "is_root": true
+        },
+        {
+          "text": "cosm",
+          "gloss": "world, order",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The dispute over one shared kitchen became a microcosm of everything wrong with the entire office.",
+        "Critics called the small border town a microcosm of the whole country’s divided politics."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0029",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "micro",
+          "gloss": "small",
+          "is_root": true
+        },
+        {
+          "text": "light",
+          "gloss": "not heavy",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "From a thousand feet up, the pilot of the microlight could see the whole valley at once.",
+        "Learning to fly a microlight took him barely a fortnight, though landing one calmly took much longer."
+      ],
+      "construct_options": [
+        {
+          "text": "A very small, lightweight aircraft built for one or two people",
+          "correct": true
+        },
+        {
+          "text": "A tiny handheld torch used by hikers at night",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A miniature model of an aircraft, never meant to fly",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0030",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "micro",
+          "gloss": "small",
+          "is_root": true
+        },
+        {
+          "text": "climate",
+          "gloss": "weather pattern",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The valley floor held its own microclimate, ten degrees cooler than the ridge above it.",
+        "Gardeners along the sheltered wall had discovered a microclimate warm enough for lemon trees."
+      ],
+      "construct_options": [
+        {
+          "text": "The distinct weather of one small area, different from the region around it",
+          "correct": true
+        },
+        {
+          "text": "A tiny weather station used to record rainfall",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A sudden, violent storm that appears without warning",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

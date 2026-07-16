@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0024",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "soph",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "soph",
+    "origin_language": "Greek",
+    "core_meaning": "wisdom",
+    "mentor_note": "soph promises wisdom, though one member of this family uses that promise to flatter, not inform."
+  },
+  "attempt": {
+    "direction_prompt": "A simple, plain way of living, or a complex and worldly one?",
+    "options": [
+      {
+        "text": "Simple and plain",
+        "correct": false
+      },
+      {
+        "text": "Complex and worldly",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0102",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "sophist",
+          "gloss": "wise, wisdom",
+          "is_root": true
+        },
+        {
+          "text": "icated",
+          "gloss": "made, having become",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The system looked simple on screen, but the sophisticated engineering behind it had taken three years.",
+        "Her tastes had grown far more sophisticated since the years when any coffee at all felt like a treat."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0103",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "philo",
+          "gloss": "love of",
+          "is_root": false
+        },
+        {
+          "text": "sophy",
+          "gloss": "wisdom",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "His philosophy held that a comfortable answer was usually the wrong one.",
+        "The department’s philosophy of teaching changed completely under its new, more demanding chair."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0104",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "soph",
+          "gloss": "wisdom",
+          "is_root": true
+        },
+        {
+          "text": "ist",
+          "gloss": "one who practices",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The lawyer was a brilliant sophist, capable of arguing either side of a case with equal conviction.",
+        "Critics dismissed him as a sophist whose arguments sounded clever right up until you checked the facts."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone who argues cleverly but misleadingly to win, rather than to find the truth",
+          "correct": true
+        },
+        {
+          "text": "Someone widely respected as the wisest person in a field",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Someone who studies philosophy purely for the love of it",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0105",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "soph",
+          "gloss": "wisdom",
+          "is_root": true
+        },
+        {
+          "text": "istry",
+          "gloss": "the practice or art of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The board saw through the sophistry within minutes and rejected the proposal outright.",
+        "What the defence offered was pure sophistry, technically consistent but designed to mislead the jury."
+      ],
+      "construct_options": [
+        {
+          "text": "Clever but false or misleading argument, meant to deceive",
+          "correct": true
+        },
+        {
+          "text": "A field of study devoted to the pursuit of wisdom",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Argument that is careful, honest, and easy to follow",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

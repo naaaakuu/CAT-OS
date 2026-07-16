@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0007",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "morph",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "morph",
+    "origin_language": "Greek",
+    "core_meaning": "form, shape",
+    "mentor_note": "morph shows up wherever something changes what it looks like."
+  },
+  "attempt": {
+    "direction_prompt": "Did it stay one shape, or change entirely?",
+    "options": [
+      {
+        "text": "Stayed one shape",
+        "correct": false
+      },
+      {
+        "text": "Changed entirely",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0031",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "meta",
+          "gloss": "change",
+          "is_root": false
+        },
+        {
+          "text": "morph",
+          "gloss": "form",
+          "is_root": true
+        },
+        {
+          "text": "osis",
+          "gloss": "a process",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The caterpillar’s metamorphosis into a moth took less than two weeks inside its case.",
+        "Colleagues barely recognised the nervous intern after his metamorphosis into a confident negotiator."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0032",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "morph",
+          "gloss": "form",
+          "is_root": true
+        },
+        {
+          "text": "ology",
+          "gloss": "study of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The professor’s course on morphology examined how a single root could branch into a hundred words.",
+        "Comparing wing morphology across the two species finally settled the argument about their common ancestor."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0033",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "a",
+          "gloss": "without",
+          "is_root": false
+        },
+        {
+          "text": "morph",
+          "gloss": "form",
+          "is_root": true
+        },
+        {
+          "text": "ous",
+          "gloss": "characterised by",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The committee remained an amorphous body for months, with no chair and no fixed membership.",
+        "Fog had turned the coastline into an amorphous grey mass, its edges impossible to trace."
+      ],
+      "construct_options": [
+        {
+          "text": "Lacking a clear, definite shape or structure",
+          "correct": true
+        },
+        {
+          "text": "Extremely large and difficult to move",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Constantly repeating the exact same form",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0034",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "morph",
+          "gloss": "form",
+          "is_root": true
+        },
+        {
+          "text": "o",
+          "gloss": "connecting vowel",
+          "is_root": false
+        },
+        {
+          "text": "genesis",
+          "gloss": "origin, coming into being",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The lab’s research into morphogenesis tries to explain how a single cell becomes a wing or a fin.",
+        "A fault somewhere in morphogenesis, not in the fully grown animal, was behind the rare deformity."
+      ],
+      "construct_options": [
+        {
+          "text": "The process by which a living thing develops its shape as it grows",
+          "correct": true
+        },
+        {
+          "text": "The sudden appearance of a new species overnight",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The study of ancient fossils and their age",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

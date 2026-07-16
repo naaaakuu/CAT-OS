@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0043",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "fract, frag",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 3 taught, 2 reach."
+  },
+  "root": {
+    "label": "fract, frag",
+    "origin_language": "Latin",
+    "core_meaning": "to break",
+    "mentor_note": "fract and frag both mean break, one usually a verb, the other usually describing what breaks easily."
+  },
+  "attempt": {
+    "direction_prompt": "Something whole and undamaged, or something broken?",
+    "options": [
+      {
+        "text": "Whole and undamaged",
+        "correct": false
+      },
+      {
+        "text": "Broken",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0180",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "fract",
+          "gloss": "break",
+          "is_root": true
+        },
+        {
+          "text": "ure",
+          "gloss": "the act or result of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The X-ray showed a hairline fracture that the first doctor had somehow missed entirely.",
+        "A small fracture in the pipe was enough to flood the basement over the long weekend."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0181",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "frag",
+          "gloss": "break",
+          "is_root": true
+        },
+        {
+          "text": "ile",
+          "gloss": "capable of, tending to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The vase was so fragile that the courier wrapped it in five separate layers of padding.",
+        "Trust, once broken, can turn out to be more fragile than either of them expected."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0182",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "frag",
+          "gloss": "break",
+          "is_root": true
+        },
+        {
+          "text": "ment",
+          "gloss": "the result of an action",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Only a single fragment of the original manuscript survived the fire.",
+        "Archaeologists pieced the entire vase back together from over sixty scattered fragments."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0183",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "in",
+          "gloss": "into, against",
+          "is_root": false
+        },
+        {
+          "text": "fract",
+          "gloss": "break",
+          "is_root": true
+        },
+        {
+          "text": "ion",
+          "gloss": "the act of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "A minor parking infraction became a major headache once the fine tripled unpaid.",
+        "The referee treated the second infraction far more harshly than the near identical first one."
+      ],
+      "construct_options": [
+        {
+          "text": "A violation or breaking of a rule, law, or agreement",
+          "correct": true
+        },
+        {
+          "text": "A small piece broken off from something larger",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "An object that is easily broken or damaged",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0184",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "fract",
+          "gloss": "break",
+          "is_root": true
+        },
+        {
+          "text": "ious",
+          "gloss": "full of, characterised by",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The coalition had turned fractious well before the vote, splitting into three squabbling factions.",
+        "A fractious toddler after a missed nap can undo an entire afternoon of careful planning."
+      ],
+      "construct_options": [
+        {
+          "text": "Easily irritated, quarrelsome, and difficult to control",
+          "correct": true
+        },
+        {
+          "text": "Easily broken or physically damaged",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Calm, cooperative, and easy to manage",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

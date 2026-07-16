@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0051",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "vore",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "The source PDF lists this root twice under Latin Roots XXIII and XXIV, word for word (both \"eat\"/\"to eat\"); consolidated here into one family rather than duplicated."
+  },
+  "root": {
+    "label": "vore",
+    "origin_language": "Latin",
+    "core_meaning": "to eat",
+    "mentor_note": "vore is a hungry root: every word it builds names exactly what is being eaten."
+  },
+  "attempt": {
+    "direction_prompt": "Eats only plants, or eats absolutely everything?",
+    "options": [
+      {
+        "text": "Only plants",
+        "correct": false
+      },
+      {
+        "text": "Absolutely everything",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0213",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "omni",
+          "gloss": "all",
+          "is_root": false
+        },
+        {
+          "text": "vore",
+          "gloss": "eater",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Bears are true omnivores, just as happy on berries and roots as on salmon.",
+        "She had turned vegetarian after twenty years as a committed omnivore."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0214",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "carni",
+          "gloss": "flesh",
+          "is_root": false
+        },
+        {
+          "text": "vore",
+          "gloss": "eater",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The zoo’s carnivore enclosure was always the most crowded stop on the tour.",
+        "A lion is an obligate carnivore, unable to survive on a plant based diet at all."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0215",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "herbi",
+          "gloss": "plant",
+          "is_root": false
+        },
+        {
+          "text": "vore",
+          "gloss": "eater",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The largest land animal alive today, the elephant, is also a herbivore.",
+        "Most of the reserve’s grazing herbivores move to higher ground once the rains begin."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0216",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "insecti",
+          "gloss": "insect",
+          "is_root": false
+        },
+        {
+          "text": "vore",
+          "gloss": "eater",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The bat colony, all insectivores, cleared the valley of mosquitoes within a single summer.",
+        "An insectivore this size needs to eat close to its own body weight in bugs each night."
+      ],
+      "construct_options": [
+        {
+          "text": "An animal that eats mainly or only insects",
+          "correct": true
+        },
+        {
+          "text": "An animal that eats mainly or only meat",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "An insect that eats decaying plant matter",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0217",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "grani",
+          "gloss": "grain",
+          "is_root": false
+        },
+        {
+          "text": "vore",
+          "gloss": "eater",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Most finches are granivores, their short strong beaks built for cracking seed husks.",
+        "The farmer set traps for the granivores raiding the stored wheat each winter."
+      ],
+      "construct_options": [
+        {
+          "text": "An animal that feeds mainly on grain or seeds",
+          "correct": true
+        },
+        {
+          "text": "An animal that eats only plant leaves and stems",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "An animal that eats both plants and meat",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

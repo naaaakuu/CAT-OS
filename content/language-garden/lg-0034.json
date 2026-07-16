@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0034",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "magni",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "magni",
+    "origin_language": "Latin",
+    "core_meaning": "large, great",
+    "mentor_note": "magni is a grand root, and most of the words built on it were made to sound grand too."
+  },
+  "attempt": {
+    "direction_prompt": "A modest, ordinary building, or an impressive, splendid one?",
+    "options": [
+      {
+        "text": "Modest and ordinary",
+        "correct": false
+      },
+      {
+        "text": "Impressive and splendid",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0143",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "magni",
+          "gloss": "great",
+          "is_root": true
+        },
+        {
+          "text": "ficent",
+          "gloss": "making, doing",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The cathedral’s ceiling was magnificent, painted from end to end without a single repeated figure.",
+        "Guests still talk about the magnificent view from the terrace, even years after the wedding."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0144",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "magni",
+          "gloss": "great, large",
+          "is_root": true
+        },
+        {
+          "text": "fy",
+          "gloss": "to make",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The lens could magnify a single grain of pollen until it filled the entire screen.",
+        "One careless remark, magnified by the rumour mill, had become a full blown scandal by Friday."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0145",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "magn",
+          "gloss": "great",
+          "is_root": true
+        },
+        {
+          "text": "animous",
+          "gloss": "of spirit, mind",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "In victory he was magnanimous, praising the opponent he had beaten by a single point.",
+        "The retiring CEO made a magnanimous gesture, handing her own bonus to the junior staff."
+      ],
+      "construct_options": [
+        {
+          "text": "Generous and forgiving, especially toward a rival or the less powerful",
+          "correct": true
+        },
+        {
+          "text": "Physically enormous in size or scale",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Petty and unwilling to forgive a rival",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0146",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "magni",
+          "gloss": "great",
+          "is_root": true
+        },
+        {
+          "text": "tude",
+          "gloss": "state, condition",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Nobody grasped the magnitude of the damage until the first aerial photos came in.",
+        "An earthquake of that magnitude had not struck the region in over a century."
+      ],
+      "construct_options": [
+        {
+          "text": "The great size, extent, or importance of something",
+          "correct": true
+        },
+        {
+          "text": "A lens used to make small objects appear larger",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A generous and forgiving attitude toward a rival",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

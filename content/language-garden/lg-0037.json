@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0037",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "rect",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "rect",
+    "origin_language": "Latin",
+    "core_meaning": "straight, right",
+    "mentor_note": "rect keeps a moral sense of straight as well as a physical one, and both senses show up in its words."
+  },
+  "attempt": {
+    "direction_prompt": "To leave an error uncorrected, or to correct it?",
+    "options": [
+      {
+        "text": "Leave it uncorrected",
+        "correct": false
+      },
+      {
+        "text": "Correct it",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0155",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "rect",
+          "gloss": "straight, right",
+          "is_root": true
+        },
+        {
+          "text": "ify",
+          "gloss": "to make",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The bank promised to rectify the error within two business days.",
+        "It took a formal complaint, not a phone call, before anyone bothered to rectify the mistake."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0156",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "rect",
+          "gloss": "right",
+          "is_root": true
+        },
+        {
+          "text": "itude",
+          "gloss": "state, quality",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The old judge was known for a rectitude that made even powerful defendants uneasy.",
+        "His reputation for rectitude was the one thing the scandal never quite managed to touch."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0157",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "recti",
+          "gloss": "straight",
+          "is_root": true
+        },
+        {
+          "text": "linear",
+          "gloss": "relating to a line",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The city’s old quarter was a maze, but the new district was laid out in a strict rectilinear grid.",
+        "The physics problem assumed rectilinear motion, ignoring any curve in the object’s path."
+      ],
+      "construct_options": [
+        {
+          "text": "Moving in, or bounded by, straight lines",
+          "correct": true
+        },
+        {
+          "text": "Morally correct and strictly honest",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Curved, following the shape of a circle",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0158",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "cor",
+          "gloss": "together, thoroughly",
+          "is_root": false
+        },
+        {
+          "text": "rect",
+          "gloss": "straight, right",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Only one of the five candidates gave the correct answer without hesitating.",
+        "The final figure in the report turned out to be correct after all, despite everyone’s doubts."
+      ],
+      "construct_options": [
+        {
+          "text": "Free from error; in agreement with the facts",
+          "correct": true
+        },
+        {
+          "text": "Moving in a perfectly straight physical line",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Left uncorrected, despite a known error",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

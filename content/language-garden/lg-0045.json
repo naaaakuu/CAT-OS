@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0045",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "loqu, locut",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "loqu, locut",
+    "origin_language": "Latin",
+    "core_meaning": "to speak",
+    "mentor_note": "loqu and locut are the same root wearing two different spellings, one for nouns, one for verbs."
+  },
+  "attempt": {
+    "direction_prompt": "Struggling for words, or speaking with real skill?",
+    "options": [
+      {
+        "text": "Struggling to find the words",
+        "correct": false
+      },
+      {
+        "text": "Speaking with persuasive skill",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0189",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "e",
+          "gloss": "out",
+          "is_root": false
+        },
+        {
+          "text": "loqu",
+          "gloss": "speak",
+          "is_root": true
+        },
+        {
+          "text": "ence",
+          "gloss": "the quality of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The closing argument was remembered for years, less for its facts than for its sheer eloquence.",
+        "Nerves stripped away all his usual eloquence the moment he stepped up to the microphone."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0190",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "soli",
+          "gloss": "alone",
+          "is_root": false
+        },
+        {
+          "text": "loquy",
+          "gloss": "speaking",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The actor’s soliloquy held the entire theatre silent for nearly four unbroken minutes.",
+        "Students are asked to memorise one soliloquy each term, chosen from a different play."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0191",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "e",
+          "gloss": "out",
+          "is_root": false
+        },
+        {
+          "text": "locut",
+          "gloss": "speak",
+          "is_root": true
+        },
+        {
+          "text": "ion",
+          "gloss": "the act of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Weekly elocution lessons had smoothed out every trace of his old stammer by the following year.",
+        "Her elocution was so precise that radio producers assumed she had trained for broadcasting."
+      ],
+      "construct_options": [
+        {
+          "text": "The skill of clear, expressive public speaking",
+          "correct": true
+        },
+        {
+          "text": "A speech given by a character alone on stage",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "The complete inability to speak clearly",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0192",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "grandi",
+          "gloss": "grand",
+          "is_root": false
+        },
+        {
+          "text": "loqu",
+          "gloss": "speak",
+          "is_root": true
+        },
+        {
+          "text": "ence",
+          "gloss": "the quality of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "His speech collapsed into grandiloquence, ten long words where two plain ones would have done.",
+        "The committee preferred a short, direct memo to another round of the chairman’s grandiloquence."
+      ],
+      "construct_options": [
+        {
+          "text": "Speech that is pompous or overly elaborate, meant to impress",
+          "correct": true
+        },
+        {
+          "text": "Speech that is direct, plain, and easy to follow",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A speech delivered by a character completely alone",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

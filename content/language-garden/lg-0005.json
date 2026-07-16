@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0005",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "macro, mega",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 3 taught, 2 reach."
+  },
+  "root": {
+    "label": "macro, mega",
+    "origin_language": "Greek",
+    "core_meaning": "large, big",
+    "mentor_note": "macro and mega both point the same direction: bigger, and often visibly so."
+  },
+  "attempt": {
+    "direction_prompt": "Visible only under a microscope, or visible without one?",
+    "options": [
+      {
+        "text": "Only under a microscope",
+        "correct": false
+      },
+      {
+        "text": "Visible without one",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0021",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "macro",
+          "gloss": "large",
+          "is_root": true
+        },
+        {
+          "text": "scopic",
+          "gloss": "relating to viewing",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Even without the microscope, the tumour's macroscopic edges were already visible to the surgeon.",
+        "The geologist trusted macroscopic clues, the cracks and colour bands any visitor could see, more than a lab result that took a week."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0022",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mega",
+          "gloss": "large",
+          "is_root": true
+        },
+        {
+          "text": "phone",
+          "gloss": "sound",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The marshal raised her megaphone and the entire platform fell quiet at once.",
+        "Without a megaphone, the coach's instructions never reached the runners at the far end of the track."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0023",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mega",
+          "gloss": "large",
+          "is_root": true
+        },
+        {
+          "text": "lith",
+          "gloss": "stone",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Visitors still gather at dawn to watch the sun rise directly behind the site’s tallest megalith.",
+        "No one has fully explained how the builders moved a single megalith weighing forty tonnes across open country."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0024",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "megalo",
+          "gloss": "large",
+          "is_root": true
+        },
+        {
+          "text": "polis",
+          "gloss": "city",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Driving in from the airport, she watched three once separate towns blur into a single sprawling megalopolis.",
+        "Planners now treat the region as one megalopolis, sharing water, transport and power across old city lines."
+      ],
+      "construct_options": [
+        {
+          "text": "A vast urban region formed when several cities grow together into one",
+          "correct": true
+        },
+        {
+          "text": "A single building so large it could house an entire city’s population",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A city especially known for its ancient stone monuments",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0025",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "mega",
+          "gloss": "large",
+          "is_root": true
+        },
+        {
+          "text": "hertz",
+          "gloss": "a unit of frequency",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The processor's clock speed, once measured in a few hundred megahertz, now runs a thousand times faster.",
+        "Two hundred megahertz was considered remarkable in a home computer only a few decades ago."
+      ],
+      "construct_options": [
+        {
+          "text": "A unit for measuring a very high frequency, equal to a million hertz",
+          "correct": true
+        },
+        {
+          "text": "A unit for measuring the physical size of a computer",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A unit for measuring an extremely small distance, a millionth of a metre",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

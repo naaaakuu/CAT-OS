@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0008",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "poly",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 3 taught, 2 reach."
+  },
+  "root": {
+    "label": "poly",
+    "origin_language": "Greek",
+    "core_meaning": "many",
+    "mentor_note": "poly rarely means a lot; it means more than one, precisely."
+  },
+  "attempt": {
+    "direction_prompt": "Fluent in one language, or several?",
+    "options": [
+      {
+        "text": "One language",
+        "correct": false
+      },
+      {
+        "text": "Several",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0035",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "poly",
+          "gloss": "many",
+          "is_root": true
+        },
+        {
+          "text": "glot",
+          "gloss": "tongue, language",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The hotel’s concierge was a natural polyglot, switching between five languages without seeming to notice.",
+        "Growing up near three borders had made her a polyglot before she ever opened a textbook."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0036",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "poly",
+          "gloss": "many",
+          "is_root": true
+        },
+        {
+          "text": "gon",
+          "gloss": "angle",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The architect’s sketch showed the plaza as an irregular polygon, wider on one side than the other.",
+        "Each tile on the floor was a small polygon, cut so precisely that no two edges left a gap."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0037",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "poly",
+          "gloss": "many",
+          "is_root": true
+        },
+        {
+          "text": "math",
+          "gloss": "learning",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Their grandfather, a genuine polymath, could discuss law, botany and astronomy with equal ease.",
+        "The university remembers her as a polymath whose lectures wandered happily from physics into poetry."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0038",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "poly",
+          "gloss": "many",
+          "is_root": true
+        },
+        {
+          "text": "nomial",
+          "gloss": "term, name",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The exam’s final question asked students to factor a polynomial with four separate terms.",
+        "Fitting a simple polynomial to the data explained the trend far better than a straight line did."
+      ],
+      "construct_options": [
+        {
+          "text": "A mathematical expression made of several terms added or subtracted together",
+          "correct": true
+        },
+        {
+          "text": "A single number used repeatedly throughout a calculation",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A geometric shape with many equal sides",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0039",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "poly",
+          "gloss": "many",
+          "is_root": true
+        },
+        {
+          "text": "gamy",
+          "gloss": "marriage",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The anthropologist’s book examined how polygamy was practised and regulated across different societies.",
+        "Local law had outlawed polygamy decades earlier, though the older generation still remembered it openly."
+      ],
+      "construct_options": [
+        {
+          "text": "The practice of having more than one spouse at the same time",
+          "correct": true
+        },
+        {
+          "text": "A large, extended family living under one roof",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A ceremony held to mark a wedding anniversary",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

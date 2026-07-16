@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0019",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "gam",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "gam",
+    "origin_language": "Greek",
+    "core_meaning": "marriage",
+    "mentor_note": "gam quietly counts: one marriage, two, or many."
+  },
+  "attempt": {
+    "direction_prompt": "Married to one person, or to several at once?",
+    "options": [
+      {
+        "text": "One person",
+        "correct": false
+      },
+      {
+        "text": "Several at once",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0082",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mono",
+          "gloss": "one",
+          "is_root": false
+        },
+        {
+          "text": "gamy",
+          "gloss": "marriage",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The species was once assumed to practise strict monogamy, until researchers tracked the pairs more closely.",
+        "Monogamy was the legal norm throughout the region, whatever older customs said otherwise."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0083",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "bi",
+          "gloss": "two",
+          "is_root": false
+        },
+        {
+          "text": "gamy",
+          "gloss": "marriage",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "He was eventually charged with bigamy after both marriage certificates surfaced in the same file.",
+        "Bigamy carried a heavier sentence in that country than in almost anywhere else in the region."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0084",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "poly",
+          "gloss": "many",
+          "is_root": false
+        },
+        {
+          "text": "gamy",
+          "gloss": "marriage",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Polygamy remained legal there under religious law, though civil law recognised only one spouse.",
+        "The census had no simple category for households shaped by polygamy, and researchers adapted their own."
+      ],
+      "construct_options": [
+        {
+          "text": "The practice of having more than one spouse at the same time",
+          "correct": true
+        },
+        {
+          "text": "A wedding celebrated by many guests at once",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The practice of never marrying at all",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0085",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "miso",
+          "gloss": "hatred of",
+          "is_root": false
+        },
+        {
+          "text": "gamist",
+          "gloss": "marriage",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "A committed misogamist, he had turned down three proposals before his friends stopped asking why.",
+        "The character reads at first as a misogamist, though the play slowly reveals a much older heartbreak behind it."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone who hates or strongly opposes the institution of marriage",
+          "correct": true
+        },
+        {
+          "text": "Someone who has been married many times",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Someone who hates or distrusts other people generally",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

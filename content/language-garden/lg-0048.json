@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0048",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "sens, sent",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "sens, sent",
+    "origin_language": "Latin",
+    "core_meaning": "to feel",
+    "mentor_note": "sens and sent both mean feel, one root behind everything from senses to sentiment."
+  },
+  "attempt": {
+    "direction_prompt": "Numb to what’s happening, or acutely feeling it?",
+    "options": [
+      {
+        "text": "Completely numb",
+        "correct": false
+      },
+      {
+        "text": "Acutely aware and feeling it",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0201",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "sens",
+          "gloss": "feel",
+          "is_root": true
+        },
+        {
+          "text": "itive",
+          "gloss": "tending to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The instrument was sensitive enough to register a footstep two rooms away.",
+        "He had grown more sensitive to criticism since the review, flinching at even mild feedback."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0202",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "senti",
+          "gloss": "feel",
+          "is_root": true
+        },
+        {
+          "text": "ment",
+          "gloss": "the result of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Public sentiment had shifted sharply against the plan within a single week of coverage.",
+        "Beneath the formal wording, the letter carried a sentiment of real, unmistakable gratitude."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0203",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "senti",
+          "gloss": "feel",
+          "is_root": true
+        },
+        {
+          "text": "ent",
+          "gloss": "being, having the quality of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The debate over whether the animal was truly sentient shaped the entire welfare policy.",
+        "The film’s central question, never fully answered, is whether the machine has become sentient."
+      ],
+      "construct_options": [
+        {
+          "text": "Able to perceive or feel things; conscious",
+          "correct": true
+        },
+        {
+          "text": "Completely unable to feel or perceive anything",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Extremely fragile and easily damaged",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0204",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "sens",
+          "gloss": "feel",
+          "is_root": true
+        },
+        {
+          "text": "ory",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The therapy room was designed for sensory calm, with soft light and almost no background noise.",
+        "After the injury, sensory feedback in his left hand took the better part of a year to return."
+      ],
+      "construct_options": [
+        {
+          "text": "Relating to physical sensation or the senses",
+          "correct": true
+        },
+        {
+          "text": "Relating to an opinion shaped strongly by emotion",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Completely lacking any physical sensation",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

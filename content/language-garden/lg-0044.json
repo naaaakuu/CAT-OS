@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0044",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "tract, tang",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "tract, tang",
+    "origin_language": "Latin",
+    "core_meaning": "to touch",
+    "mentor_note": "tract and tang both mean touch, though tract also drifted toward pulling, which is a kind of touching too."
+  },
+  "attempt": {
+    "direction_prompt": "An abstract idea, or something real you can touch?",
+    "options": [
+      {
+        "text": "An abstract idea",
+        "correct": false
+      },
+      {
+        "text": "Something that can be touched",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0185",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "tang",
+          "gloss": "touch",
+          "is_root": true
+        },
+        {
+          "text": "ible",
+          "gloss": "able to be",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The negotiations produced no tangible result, just another round of promises to meet again.",
+        "For the first time the project felt tangible, a real building rather than a stack of drawings."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0186",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "in",
+          "gloss": "not",
+          "is_root": false
+        },
+        {
+          "text": "tang",
+          "gloss": "touch",
+          "is_root": true
+        },
+        {
+          "text": "ible",
+          "gloss": "able to be",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Brand loyalty is intangible, yet accountants still find a way to put a number on it.",
+        "What she missed most about the old office was something intangible, a feeling she could not quite name."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0187",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "tact",
+          "gloss": "touch",
+          "is_root": true
+        },
+        {
+          "text": "ile",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The exhibit was deliberately tactile, encouraging visitors to run their hands over every surface.",
+        "Braille relies entirely on a tactile alphabet, read by the fingertips rather than the eyes."
+      ],
+      "construct_options": [
+        {
+          "text": "Relating to, or perceived through, the sense of touch",
+          "correct": true
+        },
+        {
+          "text": "Unable to be touched or physically sensed",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Relating to the sense of taste",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0188",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "in",
+          "gloss": "not",
+          "is_root": false
+        },
+        {
+          "text": "tact",
+          "gloss": "touch",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Remarkably, the antique clock arrived intact despite the long journey by sea.",
+        "The original city wall remains largely intact, six centuries after it was first built."
+      ],
+      "construct_options": [
+        {
+          "text": "Not damaged in any way; complete and untouched",
+          "correct": true
+        },
+        {
+          "text": "Able to be touched or physically sensed",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Handled roughly and left badly damaged",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

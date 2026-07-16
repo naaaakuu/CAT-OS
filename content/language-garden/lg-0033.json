@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0033",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "later",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "later",
+    "origin_language": "Latin",
+    "core_meaning": "side",
+    "mentor_note": "later counts sides the way bi and tri count anything else: one, two, or many."
+  },
+  "attempt": {
+    "direction_prompt": "Agreed by both sides, or decided by just one?",
+    "options": [
+      {
+        "text": "Made by both sides",
+        "correct": false
+      },
+      {
+        "text": "Made by just one",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0139",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "uni",
+          "gloss": "one",
+          "is_root": false
+        },
+        {
+          "text": "later",
+          "gloss": "side",
+          "is_root": true
+        },
+        {
+          "text": "al",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The company’s unilateral price increase caught even its own sales team by surprise.",
+        "Allies criticised the unilateral decision, made without a single round of consultation."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0140",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "bi",
+          "gloss": "two",
+          "is_root": false
+        },
+        {
+          "text": "later",
+          "gloss": "side",
+          "is_root": true
+        },
+        {
+          "text": "al",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The two governments signed a bilateral trade agreement after eighteen months of negotiation.",
+        "A bilateral ceasefire held for exactly nine days before the first shots were fired again."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0141",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "multi",
+          "gloss": "many",
+          "is_root": false
+        },
+        {
+          "text": "later",
+          "gloss": "side",
+          "is_root": true
+        },
+        {
+          "text": "al",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Twelve nations eventually joined the multilateral agreement on shared river access.",
+        "A multilateral summit, rather than a single bilateral meeting, was needed to settle the dispute."
+      ],
+      "construct_options": [
+        {
+          "text": "Involving three or more parties or sides acting together",
+          "correct": true
+        },
+        {
+          "text": "Involving exactly two sides negotiating directly",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Made by a single side, without any agreement from others",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0142",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "later",
+          "gloss": "side",
+          "is_root": true
+        },
+        {
+          "text": "al",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The physiotherapist tested his lateral movement first, then his balance moving forward and back.",
+        "A short lateral pass unlocked the defence in a way no forward run had managed all match."
+      ],
+      "construct_options": [
+        {
+          "text": "Relating to, or moving toward, the side of something",
+          "correct": true
+        },
+        {
+          "text": "Relating to an agreement made by all parties at once",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Moving directly forward without any change of direction",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

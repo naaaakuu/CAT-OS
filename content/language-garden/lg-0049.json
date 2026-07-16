@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0049",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "bel",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "bel",
+    "origin_language": "Latin",
+    "core_meaning": "war",
+    "mentor_note": "bel is a small, blunt root, and every word it builds is about conflict."
+  },
+  "attempt": {
+    "direction_prompt": "A calm, peaceful mood, or an aggressive, warlike one?",
+    "options": [
+      {
+        "text": "Calm and peaceful",
+        "correct": false
+      },
+      {
+        "text": "Aggressive and warlike",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0205",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "belli",
+          "gloss": "war",
+          "is_root": true
+        },
+        {
+          "text": "gerent",
+          "gloss": "waging, carrying on",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The customer grew belligerent the moment the refund was refused, raising his voice at the counter.",
+        "Both delegations arrived in a belligerent mood, and the talks collapsed within the hour."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0206",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "belli",
+          "gloss": "war",
+          "is_root": true
+        },
+        {
+          "text": "cose",
+          "gloss": "full of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The general’s bellicose speeches worried allies far more than they worried his intended enemy.",
+        "A bellicose tone in the press only made the border dispute harder to settle quietly."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0207",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "ante",
+          "gloss": "before",
+          "is_root": false
+        },
+        {
+          "text": "bellum",
+          "gloss": "war",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The museum’s east wing is devoted entirely to antebellum furniture and dress.",
+        "Historians describe the antebellum economy as one built almost entirely around a single export."
+      ],
+      "construct_options": [
+        {
+          "text": "Belonging to the period before a particular war",
+          "correct": true
+        },
+        {
+          "text": "Hostile and aggressive, ready to fight",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Belonging to the period immediately after a war ends",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0208",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "re",
+          "gloss": "again",
+          "is_root": false
+        },
+        {
+          "text": "bel",
+          "gloss": "war",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "By the time the army arrived, the rebel had already slipped across the northern border.",
+        "History remembers her as a rebel, though at the time most of her own neighbours called her a traitor."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone who resists or rises up against an established authority",
+          "correct": true
+        },
+        {
+          "text": "Someone eager to start a war for its own sake",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Someone loyal to, and firmly supportive of, the ruling authority",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

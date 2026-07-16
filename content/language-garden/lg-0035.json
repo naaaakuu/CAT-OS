@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0035",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "nihil",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "nihil",
+    "origin_language": "Latin",
+    "core_meaning": "nothing",
+    "mentor_note": "nihil is a stark little root, and it only ever built a handful of words, each one just as stark."
+  },
+  "attempt": {
+    "direction_prompt": "A gentle decline, or destruction, reduced to nothing?",
+    "options": [
+      {
+        "text": "A gradual decline",
+        "correct": false
+      },
+      {
+        "text": "Complete destruction",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0147",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "an",
+          "gloss": "to, toward",
+          "is_root": false
+        },
+        {
+          "text": "nihil",
+          "gloss": "nothing",
+          "is_root": true
+        },
+        {
+          "text": "ate",
+          "gloss": "to make, cause",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "A single flood had annihilated three seasons of careful planting in one night.",
+        "The champion annihilated every challenger that year, never once losing a set."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0148",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "nihil",
+          "gloss": "nothing",
+          "is_root": true
+        },
+        {
+          "text": "ism",
+          "gloss": "a belief, system",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The novel’s narrator flirts with nihilism for two hundred pages before quietly abandoning it.",
+        "His nihilism, friends noticed, always seemed to vanish whenever something actually mattered to him."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0149",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "nil",
+          "gloss": "nothing",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The match ended two nil, a scoreline nobody in the stadium had predicted at half time.",
+        "Support for the proposal was practically nil once the true cost became public."
+      ],
+      "construct_options": [
+        {
+          "text": "Nothing at all; zero, especially as a score or amount",
+          "correct": true
+        },
+        {
+          "text": "A belief that life has no inherent meaning or value",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A small but steadily growing amount",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0150",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "nihil",
+          "gloss": "nothing",
+          "is_root": true
+        },
+        {
+          "text": "istic",
+          "gloss": "characterised by",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The film’s nihilistic ending left half the audience arguing on the way out of the theatre.",
+        "His nihilistic phase in his twenties gave way, later, to a surprisingly settled sense of purpose."
+      ],
+      "construct_options": [
+        {
+          "text": "Rejecting moral or religious value, as though nothing ultimately matters",
+          "correct": true
+        },
+        {
+          "text": "Completely destroyed, reduced entirely to nothing",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Deeply devoted to a religious or moral cause",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

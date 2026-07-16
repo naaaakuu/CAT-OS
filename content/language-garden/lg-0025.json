@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0025",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "misein",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "misein",
+    "origin_language": "Greek",
+    "core_meaning": "to hate",
+    "mentor_note": "misein is a small, blunt root, and every word it builds names a specific target of hatred."
+  },
+  "attempt": {
+    "direction_prompt": "Loves the company of others, or despises humanity?",
+    "options": [
+      {
+        "text": "Loves company",
+        "correct": false
+      },
+      {
+        "text": "Despises humanity",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0106",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mis",
+          "gloss": "hatred of",
+          "is_root": true
+        },
+        {
+          "text": "anthropist",
+          "gloss": "humankind",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "He described himself, half joking, as a committed misanthropist who preferred his dog to most people.",
+        "The old caretaker’s reputation as a misanthropist softened the moment anyone actually spoke to him."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0107",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "miso",
+          "gloss": "hatred of",
+          "is_root": true
+        },
+        {
+          "text": "gynist",
+          "gloss": "woman",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Reviewers criticised the script for giving its misogynist villain the film’s funniest lines.",
+        "Colleagues quietly avoided him once it became clear he was a misogynist who never promoted a woman."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0108",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "miso",
+          "gloss": "hatred of",
+          "is_root": true
+        },
+        {
+          "text": "gamist",
+          "gloss": "marriage",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "A committed misogamist, he had turned down three proposals before his friends stopped asking why.",
+        "The character reads at first as a misogamist, though the play slowly reveals a much older heartbreak behind it."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone who hates or strongly opposes the institution of marriage",
+          "correct": true
+        },
+        {
+          "text": "Someone who has been married many times over",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Someone who dislikes or distrusts humankind in general",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0109",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "mis",
+          "gloss": "hatred of",
+          "is_root": true
+        },
+        {
+          "text": "oneism",
+          "gloss": "new, newness",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The committee’s misoneism killed every proposal that involved changing so much as the letterhead.",
+        "Pure misoneism, not any real objection, seemed to be behind the town’s decade long refusal to build the bridge."
+      ],
+      "construct_options": [
+        {
+          "text": "A dislike or hatred of anything new or unfamiliar",
+          "correct": true
+        },
+        {
+          "text": "An eager enthusiasm for anything new or unfamiliar",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A dislike or hatred of humankind in general",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

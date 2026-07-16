@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0047",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "mal",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "mal",
+    "origin_language": "Latin",
+    "core_meaning": "bad",
+    "mentor_note": "mal is bene’s opposite number, and every word it builds carries that same shadow."
+  },
+  "attempt": {
+    "direction_prompt": "A meal that nourished her, or one that made her ill?",
+    "options": [
+      {
+        "text": "Nourished her",
+        "correct": false
+      },
+      {
+        "text": "Made her ill",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0197",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mal",
+          "gloss": "bad",
+          "is_root": true
+        },
+        {
+          "text": "nutrition",
+          "gloss": "nourishment",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Doctors treating the region saw childhood malnutrition drop sharply once the new clinics opened.",
+        "Years of malnutrition had left visible marks that better meals alone could not fully reverse."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0198",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mal",
+          "gloss": "bad",
+          "is_root": true
+        },
+        {
+          "text": "ignant",
+          "gloss": "becoming, growing",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The scan revealed a small malignant growth that surgery caught early enough to remove entirely.",
+        "What had looked benign under the first microscope turned out, on closer study, to be malignant."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0199",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "mal",
+          "gloss": "bad",
+          "is_root": true
+        },
+        {
+          "text": "ady",
+          "gloss": "condition",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "No specialist could name the malady, though three separate ones had tried over two years.",
+        "The old sailor blamed every malady, real or imagined, on a lifetime spent at sea."
+      ],
+      "construct_options": [
+        {
+          "text": "An illness or disease, especially a chronic or hard to diagnose one",
+          "correct": true
+        },
+        {
+          "text": "A lack of proper nutrition from not eating enough good food",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A state of excellent, robust health",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0200",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "male",
+          "gloss": "bad",
+          "is_root": true
+        },
+        {
+          "text": "diction",
+          "gloss": "speaking",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The old folk tale ends with a malediction that follows the family for three generations.",
+        "Villagers still avoided the ruined house, half remembering some malediction laid on it long ago."
+      ],
+      "construct_options": [
+        {
+          "text": "A curse, a spoken wish for harm to fall on someone",
+          "correct": true
+        },
+        {
+          "text": "A blessing spoken to bring good fortune",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A chronic illness that resists diagnosis",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0023",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "biblio",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "biblio",
+    "origin_language": "Greek",
+    "core_meaning": "book",
+    "mentor_note": "biblio is the root behind almost every word English has for the love, sale, or study of books."
+  },
+  "attempt": {
+    "direction_prompt": "Indifferent to books, or collects them obsessively?",
+    "options": [
+      {
+        "text": "Indifferent to books",
+        "correct": false
+      },
+      {
+        "text": "Collects them obsessively",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0098",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "biblio",
+          "gloss": "book",
+          "is_root": true
+        },
+        {
+          "text": "phile",
+          "gloss": "lover of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "As a lifelong bibliophile, she judged any new city by the quality of its secondhand bookshops.",
+        "The estate sale drew bibliophiles from three counties, all hoping for a first edition."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0099",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "biblio",
+          "gloss": "book",
+          "is_root": true
+        },
+        {
+          "text": "graphy",
+          "gloss": "writing, record",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The thesis’s bibliography ran to eleven pages, longer than some of its actual chapters.",
+        "An examiner can often tell how carefully a student worked just from the bibliography alone."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0100",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "biblio",
+          "gloss": "book",
+          "is_root": true
+        },
+        {
+          "text": "mania",
+          "gloss": "obsession",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Friends gently called it bibliomania, though his flat, stacked floor to ceiling, suggested something more serious.",
+        "The auction house’s rare books department exists entirely because of collectors with a touch of bibliomania."
+      ],
+      "construct_options": [
+        {
+          "text": "An extreme, obsessive passion for collecting books",
+          "correct": true
+        },
+        {
+          "text": "A serious illness caused by reading in poor light",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "An extreme dislike of reading or owning books",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0101",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "biblio",
+          "gloss": "book",
+          "is_root": true
+        },
+        {
+          "text": "pole",
+          "gloss": "seller",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The old bibliopole knew the value of every worn spine on his shelves without checking a single catalogue.",
+        "Before the internet, a good bibliopole was often the only way to track down an out of print title."
+      ],
+      "construct_options": [
+        {
+          "text": "A person who sells books, especially rare or old ones",
+          "correct": true
+        },
+        {
+          "text": "A person who writes reviews of newly published books",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A person who repairs and restores damaged books",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0041",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "dorm, somn",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "dorm, somn",
+    "origin_language": "Latin",
+    "core_meaning": "to sleep",
+    "mentor_note": "dorm and somn are two Latin roots for the same idea, and English keeps both of them busy."
+  },
+  "attempt": {
+    "direction_prompt": "Wide awake and active, or lying dormant, as if asleep?",
+    "options": [
+      {
+        "text": "Wide awake",
+        "correct": false
+      },
+      {
+        "text": "Lying dormant",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0172",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "dorm",
+          "gloss": "sleep",
+          "is_root": true
+        },
+        {
+          "text": "ant",
+          "gloss": "in a state of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The volcano had lain dormant for four hundred years before the first tremors returned.",
+        "Her old talent for painting stayed dormant for two decades until retirement finally freed up the time."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0173",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "in",
+          "gloss": "not",
+          "is_root": false
+        },
+        {
+          "text": "somn",
+          "gloss": "sleep",
+          "is_root": true
+        },
+        {
+          "text": "ia",
+          "gloss": "a condition",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Months of insomnia finally sent her to a specialist who diagnosed the real cause within a week.",
+        "Deadline season always brought his insomnia back, night after night of watching the ceiling."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0174",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "somn",
+          "gloss": "sleep",
+          "is_root": true
+        },
+        {
+          "text": "olent",
+          "gloss": "full of, tending to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The heavy lunch left the whole meeting room somnolent by half past two.",
+        "A somnolent Sunday afternoon was exactly what the whole family needed after the busy week."
+      ],
+      "construct_options": [
+        {
+          "text": "Feeling sleepy or drowsy",
+          "correct": true
+        },
+        {
+          "text": "Wide awake and unable to fall asleep",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Permanently and completely inactive",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0175",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "somn",
+          "gloss": "sleep",
+          "is_root": true
+        },
+        {
+          "text": "ambul",
+          "gloss": "walk",
+          "is_root": false
+        },
+        {
+          "text": "ist",
+          "gloss": "one who does",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "As a child he was a committed somnambulist, once found asleep at the kitchen table at 3am.",
+        "The hotel had a quiet policy for somnambulists among its guests: leave doors gently blocked, never locked."
+      ],
+      "construct_options": [
+        {
+          "text": "A person who walks around while still asleep, a sleepwalker",
+          "correct": true
+        },
+        {
+          "text": "A person who suffers from a persistent inability to sleep",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A person who talks constantly and cannot stay quiet",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

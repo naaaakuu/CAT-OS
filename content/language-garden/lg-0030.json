@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0030",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "scribe",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 3 taught, 2 reach."
+  },
+  "root": {
+    "label": "scribe",
+    "origin_language": "Latin",
+    "core_meaning": "to write",
+    "mentor_note": "scribe is one of the busiest roots in English, and it always keeps its literal sense close by."
+  },
+  "attempt": {
+    "direction_prompt": "A doctor listening, or one ordering medicine?",
+    "options": [
+      {
+        "text": "Listening quietly",
+        "correct": false
+      },
+      {
+        "text": "Ordering a specific medicine",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0126",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "pre",
+          "gloss": "before",
+          "is_root": false
+        },
+        {
+          "text": "scribe",
+          "gloss": "write",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The doctor examined the results once more before deciding what to prescribe.",
+        "Her physician refused to prescribe anything stronger until the milder option had been tried for a month."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0127",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "de",
+          "gloss": "down, fully",
+          "is_root": false
+        },
+        {
+          "text": "scribe",
+          "gloss": "write",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The witness was asked to describe exactly what she had seen, in the order she had seen it.",
+        "No brochure could really describe how cold the wind gets on that ridge at dawn."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0128",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "in",
+          "gloss": "on, into",
+          "is_root": false
+        },
+        {
+          "text": "scribe",
+          "gloss": "write",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The jeweller offered to inscribe the ring with a short line chosen by the couple.",
+        "Names of the fallen were inscribed along the entire length of the memorial wall."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0129",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "pro",
+          "gloss": "forth, publicly",
+          "is_root": false
+        },
+        {
+          "text": "scribe",
+          "gloss": "write",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The council moved to proscribe the sale of fireworks anywhere inside the town limits.",
+        "Certain books were proscribed by the regime for decades before the ban was finally lifted."
+      ],
+      "construct_options": [
+        {
+          "text": "To forbid or officially prohibit something",
+          "correct": true
+        },
+        {
+          "text": "To recommend a medical treatment for an illness",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "To publicly praise and formally approve of something",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0130",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "scribb",
+          "gloss": "write",
+          "is_root": true
+        },
+        {
+          "text": "le",
+          "gloss": "repeated small action",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "He scribbled the address on a napkin, already halfway out the door.",
+        "The margins of her old textbooks were scribbled with notes only she could still decipher."
+      ],
+      "construct_options": [
+        {
+          "text": "To write quickly and carelessly, often illegibly",
+          "correct": true
+        },
+        {
+          "text": "To carve a permanent inscription into stone",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "To formally forbid something in writing",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

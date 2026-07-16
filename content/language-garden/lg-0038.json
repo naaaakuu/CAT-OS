@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0038",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "cide",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 3 taught, 2 reach."
+  },
+  "root": {
+    "label": "cide",
+    "origin_language": "Latin",
+    "core_meaning": "to kill",
+    "mentor_note": "cide names the killing of something specific; the rest of the word says exactly what."
+  },
+  "attempt": {
+    "direction_prompt": "A crime against property, or the killing of a person?",
+    "options": [
+      {
+        "text": "A crime against property",
+        "correct": false
+      },
+      {
+        "text": "The killing of a person",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0159",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "homi",
+          "gloss": "person, human",
+          "is_root": false
+        },
+        {
+          "text": "cide",
+          "gloss": "kill",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Detectives treated the case as a homicide from the moment they saw the scene.",
+        "The city’s homicide rate had fallen for six straight years by the time the report was published."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0160",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "sui",
+          "gloss": "of oneself",
+          "is_root": false
+        },
+        {
+          "text": "cide",
+          "gloss": "kill",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The charity’s helpline exists for exactly the moment someone is considering suicide.",
+        "Rates of suicide in the region had dropped noticeably since the new crisis line opened."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0161",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "insecti",
+          "gloss": "insect",
+          "is_root": false
+        },
+        {
+          "text": "cide",
+          "gloss": "kill",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The farm switched to a milder insecticide after bee populations nearby began to decline.",
+        "One heavy dose of insecticide wiped out both the pests and every ladybird in the greenhouse."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0162",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "geno",
+          "gloss": "race, kind",
+          "is_root": false
+        },
+        {
+          "text": "cide",
+          "gloss": "kill",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The tribunal spent a decade prosecuting those responsible for the genocide.",
+        "Survivors of the genocide have spent thirty years making sure the world does not forget it."
+      ],
+      "construct_options": [
+        {
+          "text": "The deliberate killing of a large national or ethnic group",
+          "correct": true
+        },
+        {
+          "text": "The accidental killing of one person by another",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A substance used to kill a variety of pests",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0163",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "patri",
+          "gloss": "father",
+          "is_root": false
+        },
+        {
+          "text": "cide",
+          "gloss": "kill",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The ancient tragedy turns on a single act of patricide the hero commits without recognising his victim.",
+        "Historians still argue over whether the emperor’s death was patricide or a simple accident."
+      ],
+      "construct_options": [
+        {
+          "text": "The killing of one’s own father",
+          "correct": true
+        },
+        {
+          "text": "The killing of one’s own child",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A disagreement between a father and his child",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

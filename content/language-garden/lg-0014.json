@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0014",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "pyr",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "pyr",
+    "origin_language": "Greek",
+    "core_meaning": "fire",
+    "mentor_note": "pyr is one of the few roots you can still feel burning inside the words it built."
+  },
+  "attempt": {
+    "direction_prompt": "Drawn to quiet routine, or drawn to setting fires?",
+    "options": [
+      {
+        "text": "Quiet routine",
+        "correct": false
+      },
+      {
+        "text": "Drawn to setting fires",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0062",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "pyro",
+          "gloss": "fire",
+          "is_root": true
+        },
+        {
+          "text": "maniac",
+          "gloss": "obsessed person",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Investigators eventually traced the string of small warehouse fires to a single pyromaniac.",
+        "The film painted its villain as a pyromaniac long before he ever lit a match on screen."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0063",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "pyr",
+          "gloss": "fire",
+          "is_root": true
+        },
+        {
+          "text": "e",
+          "gloss": "noun ending",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "By dusk the villagers had built the pyre high enough to be seen from the far shore.",
+        "The ceremony ended as it always had, with the pyre lit at the exact moment the sun set."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0064",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "pyro",
+          "gloss": "fire",
+          "is_root": true
+        },
+        {
+          "text": "technics",
+          "gloss": "craft, skill",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The stadium’s closing pyrotechnics lasted almost as long as the concert itself.",
+        "Years of pyrotechnics training went into a display that lasted barely ninety seconds."
+      ],
+      "construct_options": [
+        {
+          "text": "The skilled craft of making or setting off fireworks",
+          "correct": true
+        },
+        {
+          "text": "The technical study of how fire spreads through a building",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The engineering of heating systems for large buildings",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0065",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "pyro",
+          "gloss": "fire",
+          "is_root": true
+        },
+        {
+          "text": "genic",
+          "gloss": "producing",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The reaction was mildly pyrogenic, warming the flask enough that she reached for a glove.",
+        "A pyrogenic substance in the vaccine was later identified as the cause of the brief fevers."
+      ],
+      "construct_options": [
+        {
+          "text": "Producing heat or causing a fever",
+          "correct": true
+        },
+        {
+          "text": "Resistant to catching fire under any condition",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Producing a cooling or numbing sensation",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

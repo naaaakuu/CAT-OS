@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0039",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "mort",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Split from the source PDF’s \"mort, necro\" entry: mort is Latin and necro is Greek, and a plant’s root.origin_language can only hold one value, so an honest split was needed. necro is its sibling plant."
+  },
+  "root": {
+    "label": "mort",
+    "origin_language": "Latin",
+    "core_meaning": "death",
+    "mentor_note": "mort is Latin for death; a separate Greek root, necro, means the same thing from a different direction."
+  },
+  "attempt": {
+    "direction_prompt": "Immune to death, or subject to it like everything else?",
+    "options": [
+      {
+        "text": "Immune to death",
+        "correct": false
+      },
+      {
+        "text": "Subject to it",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0164",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mort",
+          "gloss": "death",
+          "is_root": true
+        },
+        {
+          "text": "al",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "For all his talk of legacy, the general remained as mortal as any soldier under his command.",
+        "The play’s central question is a simple one: what does a mortal owe to a god?"
+      ]
+    },
+    {
+      "vocab_id": "vocab-0165",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mort",
+          "gloss": "death",
+          "is_root": true
+        },
+        {
+          "text": "uary",
+          "gloss": "a place associated with",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The hospital’s mortuary was two floors below the maternity ward, a contrast nobody mentioned aloud.",
+        "A clerical error in the mortuary’s records delayed the funeral by nearly a week."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0166",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "mort",
+          "gloss": "death",
+          "is_root": true
+        },
+        {
+          "text": "ification",
+          "gloss": "the process of becoming",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "His mortification was total once he realised he had sent the email to the entire company.",
+        "She still remembers the mortification of tripping on stage in front of the whole school."
+      ],
+      "construct_options": [
+        {
+          "text": "A feeling of intense shame or embarrassment",
+          "correct": true
+        },
+        {
+          "text": "The physical process of a body decaying after death",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A feeling of pride following a great achievement",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0167",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "im",
+          "gloss": "not",
+          "is_root": false
+        },
+        {
+          "text": "mort",
+          "gloss": "death",
+          "is_root": true
+        },
+        {
+          "text": "al",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The myth’s hero begs the gods for a single day as an immortal, and instantly regrets it.",
+        "No line in the play is more quoted, more immortal, than its closing couplet."
+      ],
+      "construct_options": [
+        {
+          "text": "Living forever, not subject to death",
+          "correct": true
+        },
+        {
+          "text": "A feeling of deep shame or embarrassment",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A room where the dead are kept before burial",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

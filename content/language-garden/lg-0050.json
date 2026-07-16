@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0050",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "cogn, sci",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "cogn, sci",
+    "origin_language": "Latin",
+    "core_meaning": "to know",
+    "mentor_note": "cogn and sci both mean know, and one of them, sci, went on to name science itself."
+  },
+  "attempt": {
+    "direction_prompt": "Failing to notice something, or clearly recognising it?",
+    "options": [
+      {
+        "text": "Failing to notice it",
+        "correct": false
+      },
+      {
+        "text": "Clearly recognising it",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0209",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "re",
+          "gloss": "again",
+          "is_root": false
+        },
+        {
+          "text": "cogn",
+          "gloss": "know",
+          "is_root": true
+        },
+        {
+          "text": "ize",
+          "gloss": "to make, cause",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "She barely recognized the town after fifteen years away, every landmark changed or gone.",
+        "The board finally agreed to recognize the union after months of refusing to sit at the same table."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0210",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "con",
+          "gloss": "together, thoroughly",
+          "is_root": false
+        },
+        {
+          "text": "sci",
+          "gloss": "know",
+          "is_root": true
+        },
+        {
+          "text": "ous",
+          "gloss": "characterised by",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The patient was conscious within minutes of the surgery ending, asking for water almost immediately.",
+        "He made a conscious effort to speak more slowly during the interview than he normally would."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0211",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "un",
+          "gloss": "not",
+          "is_root": false
+        },
+        {
+          "text": "con",
+          "gloss": "together, thoroughly",
+          "is_root": false
+        },
+        {
+          "text": "sci",
+          "gloss": "know",
+          "is_root": true
+        },
+        {
+          "text": "on",
+          "gloss": "noun ending",
+          "is_root": false
+        },
+        {
+          "text": "able",
+          "gloss": "capable of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Charging that much for a basic repair struck the inspector as simply unconscionable.",
+        "The judge called the delay unconscionable, given how long the family had already waited."
+      ],
+      "construct_options": [
+        {
+          "text": "Not right or reasonable; unacceptable by any fair standard",
+          "correct": true
+        },
+        {
+          "text": "Fully aware, awake, and responding to one’s surroundings",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Completely unaware of one’s own actions or surroundings",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0212",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "sci",
+          "gloss": "know",
+          "is_root": true
+        },
+        {
+          "text": "ence",
+          "gloss": "the state or quality of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The museum’s new wing was built entirely to make science feel approachable to young children.",
+        "Whatever the debate, the underlying science on the question had been settled for decades."
+      ],
+      "construct_options": [
+        {
+          "text": "Knowledge built through systematic observation and experiment",
+          "correct": true
+        },
+        {
+          "text": "A vague feeling or hunch, without any evidence behind it",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A failure to recognise or acknowledge something",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

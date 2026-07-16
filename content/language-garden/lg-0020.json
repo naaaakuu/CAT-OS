@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0020",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "theo",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "theo",
+    "origin_language": "Greek",
+    "core_meaning": "god",
+    "mentor_note": "theo is one of the oldest roots in the grove, and one of the most direct."
+  },
+  "attempt": {
+    "direction_prompt": "Rule by an assembly, or rule in a god’s name?",
+    "options": [
+      {
+        "text": "An elected assembly",
+        "correct": false
+      },
+      {
+        "text": "In the name of a god",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0086",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "theo",
+          "gloss": "god",
+          "is_root": true
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "His degree in theology led him first to teaching, and only later to the priesthood.",
+        "The seminar on medieval theology drew students from departments that had nothing else in common."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0087",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "theo",
+          "gloss": "god",
+          "is_root": true
+        },
+        {
+          "text": "cracy",
+          "gloss": "rule by",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The new constitution rejected theocracy outright, separating the temple from the treasury for the first time.",
+        "Under the old theocracy, no law could pass without the high priest’s explicit approval."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0088",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "theo",
+          "gloss": "god",
+          "is_root": true
+        },
+        {
+          "text": "machy",
+          "gloss": "battle, fight",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The epic’s central chapter describes a theomachy so violent that mountains are said to have split apart.",
+        "Ancient vase paintings often depicted scenes from a theomachy, gods hurling weapons across the sky."
+      ],
+      "construct_options": [
+        {
+          "text": "A battle or conflict fought among gods in myth",
+          "correct": true
+        },
+        {
+          "text": "A formal debate held among religious scholars",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A machine built to imitate the power of the gods",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0089",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "a",
+          "gloss": "without",
+          "is_root": false
+        },
+        {
+          "text": "theist",
+          "gloss": "god, believer in god",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "He had been a quiet atheist for years before he ever said so at the family dinner table.",
+        "The debate paired a theologian with an atheist, and both left admitting the other had a point."
+      ],
+      "construct_options": [
+        {
+          "text": "A person who does not believe in the existence of any god",
+          "correct": true
+        },
+        {
+          "text": "A person who worships more than one god",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A person who studies religion professionally",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

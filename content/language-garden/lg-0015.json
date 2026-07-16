@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0015",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "astro",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "astro",
+    "origin_language": "Greek",
+    "core_meaning": "star",
+    "mentor_note": "astro keeps its eyes on the sky in every word it appears in."
+  },
+  "attempt": {
+    "direction_prompt": "Studies the stars, or never looks up at all?",
+    "options": [
+      {
+        "text": "Avoids looking up",
+        "correct": false
+      },
+      {
+        "text": "Studies the stars",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0066",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "astro",
+          "gloss": "star",
+          "is_root": true
+        },
+        {
+          "text": "nomy",
+          "gloss": "a system of laws, study",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "A single childhood evening at the observatory was enough to decide her career in astronomy.",
+        "Astronomy had answered most of his questions about the solar system, though the deepest ones remained."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0067",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "astro",
+          "gloss": "star",
+          "is_root": true
+        },
+        {
+          "text": "naut",
+          "gloss": "sailor, traveller",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Every astronaut on the mission had trained for this single spacewalk for over a year.",
+        "The retired astronaut still speaks, decades later, about the silence outside the capsule window."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0068",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "aster",
+          "gloss": "star",
+          "is_root": true
+        },
+        {
+          "text": "isk",
+          "gloss": "small",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Every disputed figure in the report carried a small asterisk pointing to a footnote below.",
+        "The editor added an asterisk beside the player’s name, noting the record was set before the rule changed."
+      ],
+      "construct_options": [
+        {
+          "text": "A small star shaped mark used to point to a note or exception",
+          "correct": true
+        },
+        {
+          "text": "A telescope used to view distant stars",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A traveller who journeys through outer space",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0069",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "astro",
+          "gloss": "star",
+          "is_root": true
+        },
+        {
+          "text": "loger",
+          "gloss": "one who speaks of, studies",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The astrologer’s column ran in the same corner of the newspaper for nearly forty years.",
+        "She consulted an astrologer before every major decision, though she rarely admitted it aloud."
+      ],
+      "construct_options": [
+        {
+          "text": "Someone who studies stars and planets to predict human affairs",
+          "correct": true
+        },
+        {
+          "text": "A scientist who studies the physical composition of stars",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A traveller who has journeyed to another planet",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0010",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "meter",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 3 taught, 2 reach."
+  },
+  "root": {
+    "label": "meter",
+    "origin_language": "Greek",
+    "core_meaning": "measure",
+    "mentor_note": "meter turns up inside almost every instrument built to measure something exactly."
+  },
+  "attempt": {
+    "direction_prompt": "A rough guess, or an exact measurement?",
+    "options": [
+      {
+        "text": "A rough guess",
+        "correct": false
+      },
+      {
+        "text": "An exact measurement",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0045",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "alti",
+          "gloss": "height",
+          "is_root": false
+        },
+        {
+          "text": "meter",
+          "gloss": "measure",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The pilot glanced at the altimeter and began the descent exactly on schedule.",
+        "Cloud cover made the horizon useless, so the climbers trusted only the altimeter strapped to a wrist."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0046",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "pedo",
+          "gloss": "foot",
+          "is_root": false
+        },
+        {
+          "text": "meter",
+          "gloss": "measure",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "By lunchtime the pedometer clipped to her belt already read well past six thousand steps.",
+        "He never quite trusted the pedometer on his phone, convinced it undercounted every uphill mile."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0047",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "volt",
+          "gloss": "a unit of electrical potential",
+          "is_root": false
+        },
+        {
+          "text": "meter",
+          "gloss": "measure",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The electrician touched the voltmeter’s probes to the wire before letting anyone near it.",
+        "A reading of zero on the voltmeter finally confirmed that the circuit really was dead."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0048",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "meteor",
+          "gloss": "things in the sky, weather",
+          "is_root": false
+        },
+        {
+          "text": "ology",
+          "gloss": "study of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "She switched from engineering to meteorology after one lecture on how storms actually form.",
+        "Decades of meteorology still cannot predict, more than a week out, exactly where a storm will land."
+      ],
+      "construct_options": [
+        {
+          "text": "The scientific study of the atmosphere and weather",
+          "correct": true
+        },
+        {
+          "text": "The measurement of distance between falling stars",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The precise measurement of time using instruments",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0049",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "chrono",
+          "gloss": "time",
+          "is_root": false
+        },
+        {
+          "text": "meter",
+          "gloss": "measure",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The ship’s captain trusted the chronometer more than any other instrument aboard.",
+        "A single faulty chronometer was enough to send the entire survey team off course."
+      ],
+      "construct_options": [
+        {
+          "text": "An instrument that measures time with great precision",
+          "correct": true
+        },
+        {
+          "text": "A calendar that marks only historic dates",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A device that records a person’s heart rate",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

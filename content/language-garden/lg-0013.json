@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0013",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "gyn",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Split from the source PDF’s combined \"andr / gyn\" entry: the two roots carry opposite meanings (man vs woman) and a Language Garden plant needs one root, one meaning, so they could not stay one family. andr is its sibling plant."
+  },
+  "root": {
+    "label": "gyn",
+    "origin_language": "Greek",
+    "core_meaning": "woman",
+    "mentor_note": "gyn is andr’s counterpart, and the two roots are easiest to hold in mind together."
+  },
+  "attempt": {
+    "direction_prompt": "Treats children, or treats women’s health?",
+    "options": [
+      {
+        "text": "Children",
+        "correct": false
+      },
+      {
+        "text": "Women’s health",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0058",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "gynaeco",
+          "gloss": "woman",
+          "is_root": true
+        },
+        {
+          "text": "logist",
+          "gloss": "a specialist in a field of study",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Her gynaecologist had run the same clinic in the same building for over twenty years.",
+        "The hospital’s newest gynaecologist trained abroad before returning to open her own practice."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0059",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "miso",
+          "gloss": "hatred of",
+          "is_root": false
+        },
+        {
+          "text": "gynist",
+          "gloss": "woman",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Colleagues quietly avoided him once it became clear he was a misogynist who never promoted a woman.",
+        "The critic called the film’s narrator a misogynist, dismissive of every female character he meets."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0060",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "gyneco",
+          "gloss": "woman",
+          "is_root": true
+        },
+        {
+          "text": "id",
+          "gloss": "resembling",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The textbook described the gynecoid pelvis as the shape most common among women.",
+        "Doctors classify pelvic shape into types, and the gynecoid form is the one considered most typical."
+      ],
+      "construct_options": [
+        {
+          "text": "Resembling or having characteristics typical of a woman",
+          "correct": true
+        },
+        {
+          "text": "Relating to the study of ancient women’s history",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "Resembling characteristics typical of a man",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0061",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "gyno",
+          "gloss": "woman",
+          "is_root": true
+        },
+        {
+          "text": "phobia",
+          "gloss": "fear",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The therapist traced his gynophobia back to a single frightening memory from early childhood.",
+        "Mild gynophobia, the researcher noted, is more common in the case studies than most people assume."
+      ],
+      "construct_options": [
+        {
+          "text": "An abnormal or irrational fear of women",
+          "correct": true
+        },
+        {
+          "text": "An abnormal or irrational fear of men",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A strong physical dislike of crowds",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}

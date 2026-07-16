@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0029",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "archy, cracy",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "archy, cracy",
+    "origin_language": "Greek",
+    "core_meaning": "rule by",
+    "mentor_note": "archy and cracy both mean rule; which one a word uses is mostly a matter of history, not meaning."
+  },
+  "attempt": {
+    "direction_prompt": "Shared among representatives, or held by one ruler?",
+    "options": [
+      {
+        "text": "Shared among representatives",
+        "correct": false
+      },
+      {
+        "text": "In the hands of one ruler",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0122",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "mon",
+          "gloss": "one",
+          "is_root": false
+        },
+        {
+          "text": "archy",
+          "gloss": "rule by",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The country had abolished its monarchy a century ago, though the old palace still drew tourists.",
+        "Under the monarchy, no law took effect until it carried the queen’s own signature."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0123",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "demo",
+          "gloss": "people",
+          "is_root": false
+        },
+        {
+          "text": "cracy",
+          "gloss": "rule by",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The country’s young democracy held its first genuinely contested election only two years after the war.",
+        "Critics argued that a healthy democracy needs a free press at least as much as it needs free elections."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0124",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "an",
+          "gloss": "without",
+          "is_root": false
+        },
+        {
+          "text": "archy",
+          "gloss": "rule by",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Within days of the government’s collapse, the capital had slid into open anarchy.",
+        "The novel imagines a city surviving years of anarchy purely on the strength of informal, unwritten rules."
+      ],
+      "construct_options": [
+        {
+          "text": "A state with no government, law, or order",
+          "correct": true
+        },
+        {
+          "text": "A government ruled by a single all powerful leader",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A government in which power is shared by all citizens equally",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0125",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "olig",
+          "gloss": "few",
+          "is_root": false
+        },
+        {
+          "text": "archy",
+          "gloss": "rule by",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "Investigators described the country’s economy as an oligarchy, controlled by fewer than a dozen families.",
+        "What had begun as a democracy had quietly hardened into an oligarchy over three decades."
+      ],
+      "construct_options": [
+        {
+          "text": "Government in which power rests with a small group of powerful people",
+          "correct": true
+        },
+        {
+          "text": "Government in which power is held by a single religious leader",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A state with no government or ruling structure at all",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

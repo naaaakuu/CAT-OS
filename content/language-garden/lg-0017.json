@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0017",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "soma",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "soma",
+    "origin_language": "Greek",
+    "core_meaning": "body",
+    "mentor_note": "soma keeps every word it builds anchored to the physical body, not the mind."
+  },
+  "attempt": {
+    "direction_prompt": "Only in the mind, or showing in the body too?",
+    "options": [
+      {
+        "text": "The mind alone",
+        "correct": false
+      },
+      {
+        "text": "Shows itself in the body",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0074",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "soma",
+          "gloss": "body",
+          "is_root": true
+        },
+        {
+          "text": "tic",
+          "gloss": "relating to",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The therapist asked her to describe the somatic symptoms first: the tight chest, the shallow breath.",
+        "Years of stress had produced clear somatic effects, long before he admitted anything was wrong."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0075",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "psycho",
+          "gloss": "mind",
+          "is_root": false
+        },
+        {
+          "text": "somatic",
+          "gloss": "of the body",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "After every test came back clear, the doctor gently suggested the pain might be psychosomatic.",
+        "His psychosomatic headaches always arrived on Sunday nights, just before the working week began."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0076",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "somato",
+          "gloss": "body",
+          "is_root": true
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Early somatology laid the groundwork for what later became modern human anatomy.",
+        "His lectures on somatology were dense, but nobody who attended forgot the diagrams."
+      ],
+      "construct_options": [
+        {
+          "text": "The scientific study of the structure and function of the human body",
+          "correct": true
+        },
+        {
+          "text": "The study of dreams and the unconscious mind",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The study of ancient burial practices",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0077",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "somato",
+          "gloss": "body",
+          "is_root": true
+        },
+        {
+          "text": "type",
+          "gloss": "classification, kind",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The coach designed each training plan around the athlete’s somatotype rather than a single generic routine.",
+        "Old fitness science leaned heavily on somatotype, sorting people into just three broad body types."
+      ],
+      "construct_options": [
+        {
+          "text": "A classification of a person’s physical body type",
+          "correct": true
+        },
+        {
+          "text": "A style of clothing designed for athletes",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "A classification of personality and temperament",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

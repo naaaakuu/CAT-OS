@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0027",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "logy",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "logy",
+    "origin_language": "Greek",
+    "core_meaning": "study of",
+    "mentor_note": "logy is the quiet root behind nearly every science’s name, tucked at the end rather than the front."
+  },
+  "attempt": {
+    "direction_prompt": "A casual hobby, or a formal field of scientific study?",
+    "options": [
+      {
+        "text": "A casual hobby",
+        "correct": false
+      },
+      {
+        "text": "A formal field of study",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0114",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "bio",
+          "gloss": "life",
+          "is_root": false
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "A single dissected frog in year nine biology was enough to convince her medicine was not for her.",
+        "His biology teacher kept a wall of preserved specimens that every student remembered decades later."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0115",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "archaeo",
+          "gloss": "ancient, old",
+          "is_root": false
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The dig site had drawn archaeology students from four different universities that summer.",
+        "A career in archaeology, she quickly learned, involved far more paperwork than actual digging."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0116",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "grapho",
+          "gloss": "writing",
+          "is_root": false
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "The company had once used graphology to screen job applicants, a practice it quietly dropped years ago.",
+        "Graphology remains popular in a few countries despite little evidence it reveals anything reliable about personality."
+      ],
+      "construct_options": [
+        {
+          "text": "The study of handwriting, often as a supposed guide to personality",
+          "correct": true
+        },
+        {
+          "text": "The study of graphs and statistical charts",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The study of ancient written languages",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0117",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "geronto",
+          "gloss": "old age, the elderly",
+          "is_root": false
+        },
+        {
+          "text": "logy",
+          "gloss": "study of",
+          "is_root": true
+        }
+      ],
+      "context_sentences": [
+        "She moved into gerontology after realising how few doctors specialised in the needs of older patients.",
+        "The clinic’s gerontology unit had grown to become its busiest department within a decade."
+      ],
+      "construct_options": [
+        {
+          "text": "The scientific study of ageing and the problems of the elderly",
+          "correct": true
+        },
+        {
+          "text": "The study of family trees and ancestry",
+          "correct": false,
+          "trap": "literal_only"
+        },
+        {
+          "text": "The study of infants and early childhood development",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    }
+  ]
+}

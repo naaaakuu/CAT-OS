@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "lg-0036",
+    "type": "lg",
+    "version": 1,
+    "status": "accepted",
+    "garden": "root_grove",
+    "title": "omni",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 4: Roots, Prefixes, Suffixes and Foreign Words (owner-supplied reference)",
+      "usage_note": "Personal study only. Root, words and meanings transcribed faithfully from the source PDF; a small number of well-attested real words on the same root are included where the source list was too short to form a complete family (4 to 8 members). Parts, glosses, context sentences, mentor note, attempt and construct options are the teaching layer, authored for the Language Garden (LANGUAGE_GARDEN_BIBLE §10)."
+    },
+    "date_added": "2026-07-17",
+    "batch_id": "batch-lg-002",
+    "reviewer_notes": "Batch 2: transcribed from the owner's roots (Greek and Latin) reference; 2 taught, 2 reach."
+  },
+  "root": {
+    "label": "omni",
+    "origin_language": "Latin",
+    "core_meaning": "all",
+    "mentor_note": "omni does not leave room for exceptions; every word it builds claims the whole of something."
+  },
+  "attempt": {
+    "direction_prompt": "Present in only one place, or present absolutely everywhere?",
+    "options": [
+      {
+        "text": "Only one place",
+        "correct": false
+      },
+      {
+        "text": "Everywhere",
+        "correct": true
+      }
+    ]
+  },
+  "members": [
+    {
+      "vocab_id": "vocab-0151",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "omni",
+          "gloss": "all",
+          "is_root": true
+        },
+        {
+          "text": "scient",
+          "gloss": "knowing",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The novel’s omniscient narrator moves freely between every character’s private thoughts.",
+        "No manager is truly omniscient, however much the newest hire assumes otherwise."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0152",
+      "held_out": false,
+      "parts": [
+        {
+          "text": "omni",
+          "gloss": "all",
+          "is_root": true
+        },
+        {
+          "text": "present",
+          "gloss": "being in a place",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "By the second week of the campaign, the candidate’s face felt almost omnipresent across the city.",
+        "The company’s logo had become so omnipresent that most people stopped consciously noticing it."
+      ]
+    },
+    {
+      "vocab_id": "vocab-0153",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "omni",
+          "gloss": "all",
+          "is_root": true
+        },
+        {
+          "text": "potent",
+          "gloss": "powerful",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "The regime liked to present itself as omnipotent, though its grip on the countryside was thin.",
+        "For a five year old, a parent can seem briefly, wonderfully omnipotent."
+      ],
+      "construct_options": [
+        {
+          "text": "Having unlimited power; able to do anything",
+          "correct": true
+        },
+        {
+          "text": "Knowing everything, with complete and unlimited knowledge",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "Present in every place at the same time",
+          "correct": false,
+          "trap": "wrong_root"
+        }
+      ]
+    },
+    {
+      "vocab_id": "vocab-0154",
+      "held_out": true,
+      "parts": [
+        {
+          "text": "omni",
+          "gloss": "all",
+          "is_root": true
+        },
+        {
+          "text": "vore",
+          "gloss": "eater",
+          "is_root": false
+        }
+      ],
+      "context_sentences": [
+        "Bears are true omnivores, just as happy on berries and roots as on salmon.",
+        "She had turned vegetarian after twenty years as a committed omnivore."
+      ],
+      "construct_options": [
+        {
+          "text": "An animal or person that eats both plants and meat",
+          "correct": true
+        },
+        {
+          "text": "An animal that eats only meat",
+          "correct": false,
+          "trap": "wrong_root"
+        },
+        {
+          "text": "A being with unlimited knowledge of the natural world",
+          "correct": false,
+          "trap": "literal_only"
+        }
+      ]
+    }
+  ]
+}
