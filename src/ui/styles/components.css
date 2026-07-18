@@ -2032,7 +2032,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    never to a label or a note, so text contrast is untouched (§12.7). The
    asking plant's lit state is a luminance glow no season reproduces. */
 .grove-scene { --lg-f-season: brightness(1); --lg-f-time: brightness(1); }
-.grove-scene :is(.grove-ground, .grove-horizon, .grove-ambient, .grove-plant__art) {
+.grove-scene :is(.grove-ground, .grove-horizon, .grove-ambient, .grove-plant__art, .grove-earth) {
   filter: var(--lg-f-season) var(--lg-f-time);
 }
 .grove-scene[data-season="spring"] { --lg-f-season: saturate(1.12) brightness(1.05); }
@@ -2042,18 +2042,55 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .grove-scene[data-time="dawn"]      { --lg-f-time: sepia(0.14) brightness(1.03); }
 .grove-scene[data-time="afternoon"] { --lg-f-time: sepia(0.08); }
 .grove-scene[data-time="dusk"]      { --lg-f-time: sepia(0.18) brightness(0.96); }
-.grove-scene[data-time="night"]     { --lg-f-time: brightness(0.82) saturate(0.85); }
+.grove-scene[data-time="night"]     { --lg-f-time: brightness(0.7) saturate(0.8) hue-rotate(-8deg); }
+
+/* The earth the grove stands on (Phase 4.9): a soft rise of ground so
+   the plants stand in a place, never float on a colour. Two painted
+   bands — a far slope, a near floor — flat shapes, no gradient-plastic. */
+.grove-earth {
+  position: absolute;
+  left: -6%; right: -6%; bottom: 0;
+  height: 46%;
+  background: var(--garden-basin);
+  border-radius: 46% 54% 0 0 / 22% 16% 0 0;
+  pointer-events: none;
+}
+.grove-earth::after {
+  content: "";
+  position: absolute;
+  left: -2%; right: -2%; bottom: 0;
+  height: 55%;
+  background: var(--garden-grove);
+  border-radius: 58% 42% 0 0 / 18% 24% 0 0;
+}
+/* At night the earth deepens with the sky and the stars come out — a
+   fixed constellation, the same few stars every night (§12.6). Never a
+   dimmed day: the moonlit grove is its own place. */
+.grove-night-sky {
+  position: absolute;
+  inset: 0 0 40% 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, #EFF4FB 50%, transparent 51%),
+    radial-gradient(1px 1px at 32% 34%, #EFF4FB 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 56% 12%, #EFF4FB 50%, transparent 51%),
+    radial-gradient(1px 1px at 71% 28%, #EFF4FB 50%, transparent 51%),
+    radial-gradient(1px 1px at 88% 16%, #EFF4FB 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 44% 42%, #EFF4FB 50%, transparent 51%),
+    radial-gradient(1px 1px at 22% 52%, #EFF4FB 50%, transparent 51%);
+  opacity: 0.85;
+}
 
 .grove-horizon {
   position: absolute;
   inset: 0 0 auto 0;
-  height: 55%;
+  height: 57%;
   display: flex;
   align-items: flex-end;
   justify-content: space-evenly;
   pointer-events: none;
 }
-.grove-horizon cat-plant { width: 30%; height: 100%; }
+.grove-horizon cat-plant { width: 26%; height: 62%; }
 
 /* The Ground (§4.3, Roadmap 3.2): the Effort Ledger made visible. Never
    random, never reversing — more of the same fixed set of marks reveals
@@ -2169,14 +2206,28 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   min-height: calc(var(--tap-target) * 2.4);
   position: relative;
   transition: transform var(--duration-fast) var(--ease-out);
+  /* The hold gesture (peek) owns a long press: no text selection, no
+     platform callout over the world (Phase 4.9 P5). */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
 }
 .grove-plant:active { transform: scale(var(--press-scale)); }
+.grove-plant:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
 .grove-plant__art { width: 72%; max-width: 6.5rem; aspect-ratio: 1 / 1.08; }
 .grove-plant__label {
   font-size: var(--text-xs);
   font-weight: var(--weight-medium);
   color: var(--color-ink-2);
 }
+/* Under the night sky the theme's day ink would sink into the dark scene:
+   the labels take moonlight instead, and hold WCAG AA against the deep
+   blues (§12.7 — contrast is checked in every hour, not just noon). */
+.grove-scene[data-time="night"] .grove-plant__label { color: #C6D0DC; }
 .grove-plant--asking::before,
 .grove-plant--invite::before {
   content: "";
@@ -2187,6 +2238,13 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   opacity: 0.22;
   animation: pl-catch-light 5s ease-in-out infinite;
   z-index: -1;
+}
+/* The asking plant's slow shimmer (§6.4) — a luminance breath, defined
+   here (not in the component) since the component's own gold veil carries
+   its own keyframes. */
+@keyframes pl-catch-light {
+  0%, 100% { opacity: 0.24; }
+  50% { opacity: 0.1; }
 }
 /* An open patch of ground is offered quietly, never as a beacon (§16.1):
    no pulse, and off the reserved colours (gold is Key/Reach, amber is
@@ -2202,7 +2260,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 
 .grove-note {
   text-align: center;
-  color: var(--color-ink-3);
+  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the paper (P5 audit) */
   font-size: var(--text-sm);
   margin-top: var(--space-4);
 }
@@ -2255,7 +2313,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   margin: 0 auto var(--space-2);
   padding: var(--space-1) var(--space-3);
   background: none; border: none;
-  color: var(--color-ink-3);
+  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the paper (P5 audit) */
   font-family: var(--font-ui);
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
@@ -2301,72 +2359,186 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 @media (prefers-reduced-motion: reduce) { .valley.is-descending { transition: none; } }
 
-/* Landform fills — flat, calm, from the garden palette. Sky by the five
-   real states of the day (§4.5): dawn, morning, afternoon, dusk, night.
-   Morning is the reference sky; the rest shift around it. */
-.vl-sky { fill: var(--garden-sky-day); }
-.valley[data-time="dawn"]      .vl-sky { fill: var(--garden-sky-dawn); }
-.valley[data-time="afternoon"] .vl-sky { fill: var(--garden-sky-afternoon); }
-.valley[data-time="dusk"]      .vl-sky { fill: var(--garden-sky-dusk); }
-.valley[data-time="night"]     .vl-sky { fill: var(--garden-sky-night); }
+/* Landform fills — the painted light model (THE WORLD Parts 5–6, Stage
+   W1). The sky is a three-stop gradient (§6.2), re-toned by the five
+   real hours (§4.5) via the stops' own CSS custom properties; morning
+   is the reference sky, the rest shift around it. A generic photo
+   filter over the whole scene ("sepia + hue-rotate") cannot make a
+   shadow agree with a sun, so it is retired here in favour of the
+   pinned per-hour pigments below. World-season colour stays a filter,
+   exactly as before (§6.6 sanctions this explicitly). */
+.vl-sky-stop--zenith   { stop-color: var(--garden-sky-morning-zenith); }
+.vl-sky-stop--mid      { stop-color: var(--garden-sky-morning-mid); }
+.vl-sky-stop--horizon  { stop-color: var(--garden-sky-morning-horizon); }
+.valley[data-time="dawn"] .vl-sky-stop--zenith      { stop-color: var(--garden-sky-dawn-zenith); }
+.valley[data-time="dawn"] .vl-sky-stop--mid         { stop-color: var(--garden-sky-dawn-mid); }
+.valley[data-time="dawn"] .vl-sky-stop--horizon     { stop-color: var(--garden-sky-dawn-horizon); }
+.valley[data-time="afternoon"] .vl-sky-stop--zenith { stop-color: var(--garden-sky-afternoon-zenith); }
+.valley[data-time="afternoon"] .vl-sky-stop--mid    { stop-color: var(--garden-sky-afternoon-mid); }
+.valley[data-time="afternoon"] .vl-sky-stop--horizon { stop-color: var(--garden-sky-afternoon-horizon); }
+.valley[data-time="dusk"] .vl-sky-stop--zenith      { stop-color: var(--garden-sky-dusk-zenith); }
+.valley[data-time="dusk"] .vl-sky-stop--mid         { stop-color: var(--garden-sky-dusk-mid); }
+.valley[data-time="dusk"] .vl-sky-stop--horizon     { stop-color: var(--garden-sky-dusk-horizon); }
+.valley[data-time="night"] .vl-sky-stop--zenith     { stop-color: var(--garden-sky-night-zenith); }
+.valley[data-time="night"] .vl-sky-stop--mid        { stop-color: var(--garden-sky-night-mid); }
+.valley[data-time="night"] .vl-sky-stop--horizon    { stop-color: var(--garden-sky-night-horizon); }
+/* The sky-going-green seam (§6.2, §12.6): dusk only, a thin band near
+   the horizon, under everything else. */
+.vl-sky-seam { fill: var(--garden-sky-dusk-seam); opacity: 0; }
+.valley[data-time="dusk"] .vl-sky-seam { opacity: 1; }
 
-/* Time-of-day and world-season light, composed as two identity-safe
-   filters over the drawn world only (§4.5, §4.7, §12.5, Roadmap 3.4 +
-   3.6). No text lives inside the valley SVG, so WCAG contrast is never
-   touched (§12.7); the one asking plant stays readable in every season
-   because it catches LIGHT (the glow shimmer), which no filter here
-   reproduces. Night deliberately deepens the whole land — dark or light
-   theme alike, the 11:40pm valley is moonlit, never merely dimmed. */
-.valley { --lg-f-season: brightness(1); --lg-f-time: brightness(1); }
-.valley__svg { filter: var(--lg-f-season) var(--lg-f-time); }
+/* The sun (§5.1): a soft disc at the ridge, dawn and dusk only — every
+   other hour it exists only as light, never a shape. */
+.vl-sun { fill: var(--garden-light-dawn); opacity: 0.9; }
+.valley[data-time="dusk"] .vl-sun { fill: var(--garden-light-dusk); }
+
+/* Exactly two clouds (§3.1, Appendix C.1): soft flat masses, a lit top
+   and a soft underside, drifting on an unsynchronised loop. */
+.vl-cloud-body  { fill: #FAF7EF; opacity: 0.85; }
+.vl-cloud-under { fill: #E3DCC8; opacity: 0.55; }
+.valley[data-time="dusk"] .vl-cloud-body   { fill: #F3D9B0; }
+.valley[data-time="dusk"] .vl-cloud-under  { fill: #C99B78; opacity: 0.5; }
+.valley[data-time="night"] .vl-cloud-body  { fill: #2A3A50; opacity: 0.55; }
+.valley[data-time="night"] .vl-cloud-under { fill: #1D2A3C; opacity: 0.45; }
+.vl-cloud { animation: vl-cloud-drift linear infinite; }
+@keyframes vl-cloud-drift {
+  from { transform: translateX(-14%); }
+  to   { transform: translateX(14%); }
+}
+@media (prefers-reduced-motion: reduce) { .vl-cloud { animation: none; } }
+
+/* World-season colour stays a whole-valley filter over the drawn world
+   only (§4.7, §12.5, §6.6, Roadmap 3.6). No text lives inside the
+   valley SVG, so WCAG contrast is never touched (§12.7); the one asking
+   plant stays readable in every season because it catches LIGHT (the
+   glow shimmer), which no filter here reproduces. */
+.valley { --lg-f-season: brightness(1); }
+.valley__svg { filter: var(--lg-f-season); }
 .valley[data-season="spring"] { --lg-f-season: saturate(1.12) brightness(1.05); }
 .valley[data-season="summer"] { --lg-f-season: saturate(1.08) contrast(1.01); }
 .valley[data-season="autumn"] { --lg-f-season: sepia(0.26) saturate(1.12); }
 .valley[data-season="winter"] { --lg-f-season: saturate(0.38) brightness(1.07) contrast(0.96); }
-.valley[data-time="dawn"]      { --lg-f-time: sepia(0.14) brightness(1.03); }
-.valley[data-time="afternoon"] { --lg-f-time: sepia(0.08) brightness(1.0); }
-.valley[data-time="dusk"]      { --lg-f-time: sepia(0.18) brightness(0.96); }
-.valley[data-time="night"]     { --lg-f-time: brightness(0.78) saturate(0.82); }
 
 /* The night sky (§12.6): a fixed constellation, the same stars every
-   night, and a quiet moon. Deliberately the best-looking state. */
+   night, and a quiet moon with its own soft halo (§5.1, §5.4 — a warm
+   point's pool, sized to the moon rather than a lantern). Deliberately
+   the best-looking state. */
 .vl-star { fill: #EFF4FB; opacity: 0.95; }
 .vl-star--breathing { animation: vl-star-breathe 5s ease-in-out infinite; }
 @keyframes vl-star-breathe { 0%, 100% { opacity: 0.95; } 50% { opacity: 0.45; } }
 .vl-moon { fill: #EDF1F6; }
-.vl-moon-shadow { fill: var(--garden-sky-night); }
+.vl-moon-halo { fill: #EDF1F6; opacity: 0.12; }
+.vl-moon-shadow { fill: var(--garden-sky-night-horizon); }
 @media (prefers-reduced-motion: reduce) { .vl-star--breathing { animation: none; } }
 
-/* Moonlight on the water (§12.6: "silver water"). */
-.valley[data-time="night"] .vl-stream { stroke: var(--garden-water-night); }
-.valley[data-time="night"] .vl-pond   { fill: var(--garden-water-night); }
-.vl-wilds   { fill: var(--garden-wilds); }
-.vl-basin   { fill: var(--garden-basin); }
-.vl-basin-2 { fill: var(--garden-basin-2); }
-.vl-grove   { fill: var(--garden-grove); }
-.vl-grove--rim { fill: var(--garden-mature); opacity: 0.42; }
-.vl-meadow  { fill: var(--garden-meadow); }
-.vl-terrace { fill: var(--garden-terrace); }
-.vl-terrace-step { fill: none; stroke: var(--garden-soil); stroke-width: 2; opacity: 0.5; }
-.vl-thicket { fill: var(--garden-thicket); }
-.vl-orchard { fill: var(--garden-grove); opacity: 0.55; }
-.vl-stream { fill: none; stroke: var(--garden-water); stroke-width: 6; stroke-linecap: round; transition: stroke-width var(--duration-slow) var(--ease-out), opacity var(--duration-slow) var(--ease-out); }
-.vl-stream--under { stroke-width: 11; opacity: 0.4; transition: opacity var(--duration-slow) var(--ease-out); }
-.vl-pond { fill: var(--garden-water); }
-.vl-pond-sky { fill: var(--garden-sky-day); opacity: 0.35; }
-.valley[data-time="night"] .vl-pond-sky { fill: var(--garden-sky-night); opacity: 0.5; }
+/* Moonlight on the water (§12.6: "silver water", §6.4): a deep night
+   body with silver highlights, never the flat pale fill of before. */
+.valley[data-time="night"] .vl-stream,
+.valley[data-time="night"] .vl-pond { fill: var(--garden-water-night-body); }
+.valley[data-time="night"] .vl-stream-under { fill: var(--garden-water-night); stroke: var(--garden-water-night); }
+/* The far planes at night: the ridges deepen with the sky, never glow
+   (aerial perspective holds at every hour, Guide 10.2). */
+.valley[data-time="night"] .vl-ridge { fill: var(--garden-sky-night-mid); opacity: 1; }
+.valley[data-time="night"] .vl-wilds { fill: var(--garden-sky-night-horizon); }
+.valley[data-time="night"] .vl-wilds-mist { opacity: 0.18; }
 
-/* The Stream is the streak (§3.1, §4.2, §8.4): level, brightness, and sound
+/* The land — aerial ramp (§6.3, §6.5): farther is cooler, paler, softer;
+   the terrace's stepped lips are its lit face, catching the sun (§3.2). */
+.vl-ridge      { fill: var(--garden-ridge-farther); opacity: 0.9; }
+.vl-wilds      { fill: var(--garden-ridge-far); }
+.vl-wilds-mist { fill: var(--garden-wilds-mist); opacity: 0.4; }
+.vl-basin      { fill: var(--garden-far-fields); }
+.vl-basin-2    { fill: var(--garden-near-floor); }
+.vl-grove      { fill: var(--garden-grove); }
+.vl-grove-shade { fill: var(--garden-mature); opacity: 0.2; }
+.vl-meadow     { fill: var(--garden-meadow-base); }
+.vl-terrace    { fill: var(--garden-terrace-shade); }
+.vl-terrace-step { fill: none; stroke: var(--garden-terrace-lit); stroke-width: 2; opacity: 0.75; }
+.vl-thicket    { fill: var(--garden-thicket-bramble); }
+.vl-thicket-curl { fill: none; stroke: var(--garden-thicket-thorn); stroke-width: 1.6; stroke-linecap: round; opacity: 0.55; }
+.vl-orchard    { fill: var(--garden-orchard-grass); }
+
+/* Night is "a deep cool field" (§5.4), not a mild shade — these are each
+   plane's own pigment run through logic/light.js's shadeFace() twice at
+   the night hour (a single pass reads as a shaded object; the ground
+   itself needs the stronger fall night gives the whole valley). Hue
+   identity holds per plane; only depth changes — aerial perspective and
+   "one hand" (Guide 10.2, 23) survive intact. */
+.valley[data-time="night"] .vl-basin      { fill: #75846F; }
+.valley[data-time="night"] .vl-basin-2    { fill: #526A4C; }
+.valley[data-time="night"] .vl-grove      { fill: #617861; }
+.valley[data-time="night"] .vl-meadow     { fill: #7A846C; }
+.valley[data-time="night"] .vl-terrace    { fill: #554A3F; }
+.valley[data-time="night"] .vl-orchard    { fill: #6D7C5D; }
+.valley[data-time="night"] .vl-thicket    { fill: #252F27; }
+
+/* The stream is a soft ribbon (Guide 8.1); its bank is the neighbouring
+   land's shade face, never an outline (§6.4) — here, the near floor's. */
+.vl-stream { fill: var(--garden-water-day-body); transition: opacity var(--duration-slow) var(--ease-out), fill var(--duration-slow) var(--ease-out); }
+.vl-stream-under { fill: var(--garden-near-floor); filter: brightness(0.82); stroke: none; opacity: 0.4; transition: opacity var(--duration-slow) var(--ease-out); }
+.vl-pond { fill: var(--garden-water-day-body); transition: fill var(--duration-slow) var(--ease-out); }
+.vl-pond-sky { fill: var(--garden-sky-morning-horizon); opacity: 0.35; }
+.valley[data-time="dusk"] .vl-stream,
+.valley[data-time="dusk"] .vl-pond { fill: var(--garden-water-dusk-body); }
+.valley[data-time="dusk"] .vl-pond-sky { fill: var(--garden-sky-dusk-horizon); opacity: 0.4; }
+.valley[data-time="night"] .vl-pond-sky { fill: var(--garden-sky-night-horizon); opacity: 0.4; }
+
+/* Drifting water highlights: slow, linear-but-modulated, never synced
+   (Guide 8.1 — the one place linear motion is allowed). */
+.vl-glint {
+  fill: none; stroke: var(--garden-water-day-glint); stroke-width: 1.1;
+  stroke-linecap: round; stroke-dasharray: 2.5 46; opacity: 0.6;
+  animation: vl-glint-drift 16s linear infinite;
+}
+.vl-glint--2 { animation-duration: 23s; animation-delay: -8s; }
+.valley[data-time="dusk"]  .vl-glint { stroke: var(--garden-water-dusk-glint); }
+.valley[data-time="night"] .vl-glint { stroke: var(--garden-water-night); opacity: 0.75; }
+@keyframes vl-glint-drift { to { stroke-dashoffset: -291; } }
+@media (prefers-reduced-motion: reduce) { .vl-glint { display: none; } }
+
+/* The Stream is the streak (§3.1, §4.2, §8.4): fullness and brightness
    reflect RECENT tending only — a smooth decay with a hard floor, never a
-   number shown to the learner. Absence quiets it; it never runs dry. */
-.valley[data-stream="low"]  .vl-stream       { stroke-width: 3.5; opacity: 0.55; }
-.valley[data-stream="low"]  .vl-stream--under { opacity: 0.2; }
-.valley[data-stream="mid"]  .vl-stream       { stroke-width: 5; opacity: 0.8; }
-.valley[data-stream="mid"]  .vl-stream--under { opacity: 0.32; }
-.valley[data-stream="high"] .vl-stream       { stroke-width: 6.5; opacity: 1; animation: vl-stream-glint 4.5s ease-in-out infinite; }
-.valley[data-stream="high"] .vl-stream--under { opacity: 0.5; }
-@keyframes vl-stream-glint { 0%, 100% { opacity: 1; } 50% { opacity: 0.82; } }
-@media (prefers-reduced-motion: reduce) { .valley[data-stream="high"] .vl-stream { animation: none; } }
+   number shown to the learner. Absence quiets it; it never runs dry: a
+   low stream is quiet and clear, still beautiful, simply resting. */
+.valley[data-stream="low"]  .vl-stream       { opacity: 0.62; }
+.valley[data-stream="low"]  .vl-stream-under { opacity: 0; }
+.valley[data-stream="low"]  .vl-glint        { display: none; }
+.valley[data-stream="mid"]  .vl-stream       { opacity: 0.85; }
+.valley[data-stream="mid"]  .vl-stream-under { opacity: 0.16; }
+.valley[data-stream="mid"]  .vl-glint        { opacity: 0.5; }
+.valley[data-stream="high"] .vl-stream       { opacity: 1; }
+.valley[data-stream="high"] .vl-stream-under { opacity: 0.3; }
+
+/* A wild region acknowledges the hand (Phase 4.9): the land breathes
+   once — a soft luminance swell, nothing more. The world noticed. */
+.vl-region.is-breathing { animation: vl-region-breathe 1100ms var(--ease-in-out); }
+@keyframes vl-region-breathe {
+  0%, 100% { filter: brightness(1); }
+  40% { filter: brightness(1.07) saturate(1.06); }
+}
+
+/* Low mist in the hollows (Guide 11.3): layered translucency, shown only
+   at dawn and at night, drifting below the threshold of attention. */
+.vl-mist-layer { display: none; }
+.valley[data-time="dawn"] .vl-mist-layer,
+.valley[data-time="night"] .vl-mist-layer { display: block; }
+.vl-mist { fill: #FCF4E4; opacity: 0.34; animation: vl-mist-drift 19s ease-in-out infinite alternate; }
+.vl-mist--2 { opacity: 0.24; animation-duration: 26s; animation-delay: -9s; }
+.valley[data-time="night"] .vl-mist { fill: #DCE6F0; opacity: 0.16; }
+.valley[data-time="night"] .vl-mist--2 { opacity: 0.11; }
+@keyframes vl-mist-drift { from { transform: translateX(-5px); } to { transform: translateX(5px); } }
+@media (prefers-reduced-motion: reduce) { .vl-mist { animation: none; } }
+
+/* Arrival (Guide 17.2): the world fades up from a warm dark, never from
+   white, never from a spinner. The veil lifts and is gone. */
+.valley__veil {
+  position: absolute; inset: 0;
+  background: #20261C;
+  pointer-events: none;
+  animation: vl-veil-lift 950ms var(--ease-out) 60ms both;
+}
+@keyframes vl-veil-lift { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .valley__veil { animation-duration: 240ms; } }
 
 /* The Ground and the Path (§4.3–4.4, Roadmap 3.2): the Effort Ledger made
    visible on the valley floor. Marks only ever accumulate (never random,
@@ -2376,8 +2548,8 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .vl-mark--wildflower { fill: var(--garden-wildflower); opacity: 0.85; }
 .vl-mark--fern       { fill: var(--garden-fern); opacity: 0.55; }
 .vl-path { fill: none; stroke-linecap: round; transition: stroke var(--duration-slow) var(--ease-out), opacity var(--duration-slow) var(--ease-out); }
-.vl-path--worn     { stroke: var(--garden-path); stroke-width: 4; opacity: 0.55; }
-.vl-path--settling { stroke: var(--garden-path); stroke-width: 3; stroke-dasharray: 7 6; opacity: 0.4; }
+.vl-path--worn     { stroke: var(--garden-path-worn); stroke-width: 4; opacity: 0.6; }
+.vl-path--settling { stroke: var(--garden-path-sun); stroke-width: 3; stroke-dasharray: 7 6; opacity: 0.45; }
 .vl-path--mossy    { stroke: var(--garden-moss); stroke-width: 2.5; stroke-dasharray: 2 8; opacity: 0.4; }
 
 /* The Rootwood, from a distance: simple canopies, one lit if it is asking. */
@@ -2387,16 +2559,48 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .vl-canopy--in_leaf { fill: var(--garden-inleaf); }
 .vl-canopy--mature  { fill: var(--garden-mature); }
 .vl-canopy--ancient { fill: var(--garden-ancient); }
+/* A Landmark (§6.5): deepest evergreen, standing prouder, with its nest —
+   the world singling out durable memory even at valley scale. */
+.vl-canopy--landmark { fill: var(--garden-ancient); stroke: var(--garden-ancient); stroke-width: 1.2; filter: brightness(0.9); }
+.vl-canopy-nest { fill: var(--garden-trunk); opacity: 0.62; }
+/* A firefly is a 0.4%-radius dot with its own 2%-radius glow pool
+   (§9.3, §5.4); a Landmark's gathered fireflies additionally share one
+   5%-radius pool (§5.4) — pinned radii, a warm point after dark. */
+.vl-firefly { fill: var(--garden-discovery); opacity: 0; animation: valley-firefly 4.8s ease-in-out infinite; }
+.vl-firefly-glow { fill: var(--garden-discovery); opacity: 0; animation: valley-firefly-glow 4.8s ease-in-out infinite; }
+@keyframes valley-firefly { 0%, 100% { opacity: 0; } 45%, 60% { opacity: 0.9; } }
+@keyframes valley-firefly-glow { 0%, 100% { opacity: 0; } 45%, 60% { opacity: 0.14; } }
+.vl-landmark-glow { fill: var(--garden-discovery); opacity: 0.14; }
 .vl-canopy--lit { fill: var(--garden-review); }
 .vl-canopy-glow { fill: var(--garden-review); opacity: 0.22; animation: valley-glow 5s ease-in-out infinite; }
 @keyframes valley-glow { 0%, 100% { opacity: 0.24; } 50% { opacity: 0.10; } }
-@media (prefers-reduced-motion: reduce) { .vl-canopy-glow { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .vl-canopy-glow { animation: none; }
+  .vl-firefly { animation: none; opacity: 0.6; }
+  .vl-firefly-glow { animation: none; opacity: 0.12; }
+}
 
-/* The Gate (§4.9, §16.9): two posts and a lintel of warm stone at the
-   valley's edge, where the path leaves. A place, not a button — though
-   it can be walked through. */
-.vl-gate-post   { stroke: var(--garden-trunk); stroke-width: 3; stroke-linecap: round; opacity: 0.75; }
-.vl-gate-lintel { fill: none; stroke: var(--garden-trunk); stroke-width: 2.4; stroke-linecap: round; opacity: 0.75; }
+/* A contact shadow grounds every standing object (§5.2) — the Gate
+   posts, each distant Rootwood tree — and agrees with the one sun at
+   every hour; a cast shadow joins it at dawn, dusk, or in autumn only
+   (a seasonal pleasure, §5.2). Colour and opacity are set inline per
+   hour by logic/light.js, since the sun's side changes with the hour. */
+.vl-contact-shadow, .vl-cast-shadow { pointer-events: none; }
+
+/* The Gate (§4.9, §16.9, §6.4): two posts and a lintel of warm stone,
+   the same pigment as the bridge — at the valley's edge, where the path
+   leaves. A place, not a button — though it can be walked through. */
+.vl-gate-post   { stroke: var(--garden-stone-shade); stroke-width: 3; stroke-linecap: round; opacity: 0.85; }
+.vl-gate-lintel { fill: none; stroke: var(--garden-stone-lit); stroke-width: 2.4; stroke-linecap: round; opacity: 0.9; }
+/* After dark, the Gate keeps one small warm light — a found detail for
+   whoever is out late (Guide 28.1: delight is discovered, never
+   awarded). Flame and pool colour, and the pool's opacity range, are
+   THE WORLD's pins (§5.4, §6.4); its radius (7% of frame width) is set
+   where it is drawn, in overlook.js. */
+.vl-lantern { fill: var(--garden-lantern-flame); }
+.vl-lantern-glow { fill: var(--garden-lantern-flame); opacity: 0.16; animation: vl-lantern-breathe 6s ease-in-out infinite; }
+@keyframes vl-lantern-breathe { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.12; } }
+@media (prefers-reduced-motion: reduce) { .vl-lantern-glow { animation: none; } }
 
 /* Leaving through the Gate (§19.2): a small journey, not a tab switch —
    the view drifts down and out toward the valley's edge. */
@@ -2467,7 +2671,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   padding: var(--space-3) 0 0;
 }
 .valley__mark {
-  color: var(--color-ink-3);
+  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the paper (P5 audit) */
   font-family: var(--font-ui);
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
@@ -2507,13 +2711,67 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   font-size: var(--text-sm);
 }
 
-/* ---------- Journal ---------- */
+/* ---------- Journal ----------
+   A naturalist's field notes, not a dashboard (Bible §16.6): serif for
+   what was learned, nothing bold (Guide 23.6 — emphasis is size and
+   space), and no section ever shown blank (Phase 4.9 P4). */
+.lg-journal h1 {
+  font-family: var(--font-reading);
+  font-weight: var(--weight-regular, 400);
+  letter-spacing: var(--tracking-tight);
+}
+.lg-journal h2 {
+  font-family: var(--font-reading);
+  font-weight: var(--weight-regular, 400);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tight);
+}
+.lg-journal .row__label { font-family: var(--font-reading); font-weight: var(--weight-regular, 400); }
 .lg-journal__capability {
+  font-family: var(--font-reading);
   font-size: var(--text-sm);
   line-height: var(--leading-body);
   margin-bottom: var(--space-3);
 }
+/* The root is set apart by size, never by weight (Guide 23.6). */
+.lg-journal__root { font-size: var(--text-base); }
 .lg-journal__sightings .row:first-child { padding-top: 0; }
+
+/* Seasons Tended (§8.5): the one number, small and quiet, on page one.
+   A calendar fact set above the capability, never a badge or a title. */
+.lg-journal__seasons {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the card (P5 audit) */
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-2);
+}
+
+/* The Weather Record (§8.6): a dense, irregular diary of the days tended.
+   Only tended days appear — no grid, no empty slots, nothing missing.
+   (Named lg-wrecord, not lg-weather: that namespace is the scene's
+   atmospheric particle overlay, absolutely positioned.) */
+.lg-wrecord { display: flex; flex-direction: column; gap: var(--space-4); }
+.lg-wrecord__month-label {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the card (P5 audit) */
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-2);
+}
+.lg-wrecord__days { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.lg-wrecord__day {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-3);
+}
+.lg-wrecord__day svg { width: 100%; height: 100%; display: block; }
+/* Shape alone carries the weather — no colour key, and the reserved
+   dawn-gold stays rationed to the Key and the Reach (§12.2). The two
+   clear-sky marks sit a shade darker so a fine day still reads warm. */
+.lg-wrecord__day--sun,
+.lg-wrecord__day--clear-night { color: var(--color-ink-2); }
 
 /* ---------- Session: the six beats ---------- */
 /* The session is always immersive (a garden route), so the nav is hidden and
@@ -2524,7 +2782,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   width: var(--tap-target);
   height: var(--tap-target);
   font-size: var(--text-lg);
-  color: var(--color-ink-3);
+  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the paper (P5 audit) */
   border-radius: var(--radius-full);
   transition: background-color var(--duration-fast) var(--ease-out),
               transform var(--duration-fast) var(--ease-out);
@@ -2544,6 +2802,31 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    top offset also reads as composed on short beats (Key, Growth)
    instead of leaving the content stranded in a void mid-screen. */
 .lgx__stage { flex: 1; display: flex; flex-direction: column; padding-top: min(10vh, var(--space-8)); }
+
+/* The arrival (Visual Guide Part 2): before the first question of the
+   learner's life in the Garden, the Rootwood fades up from a warm dark —
+   the world assembles from light, never from white, never from a spinner.
+   Once, ever. A tap moves on early. */
+.lgx-arrival {
+  position: fixed; inset: 0;
+  z-index: 40;
+  background: #20261C;
+  animation: lgx-veil-in 400ms var(--ease-out) both;
+}
+.lgx-arrival__wood {
+  width: 100%; height: 100%; display: block;
+  opacity: 0;
+  animation: lgx-wood-up 1700ms var(--ease-out) 250ms forwards;
+}
+.lgx-arrival.is-leaving { animation: lgx-veil-out 620ms var(--ease-out) both; }
+@keyframes lgx-veil-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lgx-wood-up { to { opacity: 1; } }
+@keyframes lgx-veil-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* Programmatic beat focus (P5) never draws a ring on the container —
+   the interactive children carry their own focus styles. */
+.lgx-beat:focus,
+.lgx-beat:focus-visible { outline: none; box-shadow: none; }
 
 /* Each beat cross-dissolves in with a small forward drift (§11.2: 240ms,
    8px). The session flows from one idea to the next; it never snaps. */

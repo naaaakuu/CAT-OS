@@ -19,6 +19,7 @@ import { computePlantState } from '../../../core/engine/garden-session.js';
 import { biomeForFamily } from '../logic/biomes.js';
 import { GARDEN_LINES, SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
+import '../../../ui/components/cat-plant.js';
 
 export async function renderPlant(outlet, context, params) {
   let family, history, seed;
@@ -71,7 +72,9 @@ export async function renderPlant(outlet, context, params) {
       <div class="session-bar"><a href="${biomeHome}">← Back</a></div>
 
       <div class="lg-plant__hero">
-        <cat-plant stage="${state.stage}" due="${state.due}"></cat-plant>
+        <cat-plant stage="${state.stage}" due="${state.due}"
+          seed="${escapeHTML(family.meta.id)}" vigor="${state.vigor}"
+          ${state.landmark ? `landmark nest name="${escapeHTML(family.root.label)}"` : ''}></cat-plant>
       </div>
       <h1>${escapeHTML(family.root.label)}</h1>
 

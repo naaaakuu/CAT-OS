@@ -28,7 +28,8 @@ import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
 import { listGardenSessions, listGardenSeeds, gardenAmbienceEnabled, setGardenAmbience } from './modules/language-garden/logic/store.js';
 import { deriveValleyScene } from './modules/language-garden/logic/scene.js';
 import { computeStreamLevel } from './modules/language-garden/logic/effort.js';
-import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio } from './modules/language-garden/logic/audio.js';
+import { computePlantState } from './core/engine/garden-session.js';
+import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio, playGardenSound } from './modules/language-garden/logic/audio.js';
 import { EMPTY_DAY_LINES, pick as pickGardenLine } from './core/mentor/garden-voice.js';
 import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem, listLGItems, loadLGItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
@@ -944,19 +945,40 @@ async function boot() {
 
   // Garden ambience: plays while browsing the grove/plant/journal, stays
   // quiet during an actual session (Bible §7 — a session keeps to just
-  // its two named sounds, never a competing ambient bed).
-  window.addEventListener('hashchange', async () => {
+  // its two named sounds, never a competing ambient bed). Checked on boot
+  // too, so reopening the PWA straight onto a garden route sounds like
+  // the garden — not only after the first navigation.
+  let wasInGarden = location.hash.startsWith('#/garden');
+  const syncGardenSoundscape = async () => {
     const h = location.hash;
+    const inGarden = h === '#/garden' || h.startsWith('#/garden/');
+    // Stepping into the Garden from outside: the arrival swell (§10.5,
+    // Guide 17.2) — the audio half of the world fading up from warm dark.
+    // Never on movement WITHIN the garden, so it stays an arrival, not a
+    // jingle.
+    if (inGarden && !wasInGarden) playGardenSound('arrival');
+    wasInGarden = inGarden;
     const isBrowsingGarden = (h === '#/garden' || h.startsWith('#/garden/biome') || h.startsWith('#/garden/plant') || h.startsWith('#/garden/journal'));
     if (isBrowsingGarden && await gardenAmbienceEnabled(storage)) {
       // The breeze bed's gain reflects the Stream (§3.1, §8.4): a
-      // recently-tended valley runs a little louder with water.
+      // recently-tended valley runs a little louder with water. And if the
+      // valley holds a Landmark tree (§6.5), its nesting bird may sing by day,
+      // audible from the Overlook — derived here from the sessions alone
+      // (computePlantState needs no content), so no extra content load.
       const sessions = await listGardenSessions(storage);
-      startGardenAmbience(computeStreamLevel(sessions));
+      const byFamily = new Map();
+      for (const s of sessions) {
+        if (!byFamily.has(s.family_id)) byFamily.set(s.family_id, []);
+        byFamily.get(s.family_id).push(s);
+      }
+      const landmark = [...byFamily.values()].some((rs) => computePlantState(rs).landmark);
+      startGardenAmbience(computeStreamLevel(sessions), { landmark });
     } else {
       stopGardenAmbience();
     }
-  });
+  };
+  window.addEventListener('hashchange', syncGardenSoundscape);
+  syncGardenSoundscape();
 
   // (Nav taps are covered by installGlobalFeedback's press delegation.)
   // A separate, minimal unlock for the garden's own audio graph — mirrors

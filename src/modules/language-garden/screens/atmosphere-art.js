@@ -51,7 +51,9 @@ function particles(count, cls) {
 
 /** The night sky for the Overlook's SVG (§12.6: deep blue, moonlight —
  *  the most beautiful state in the entire product). Fixed constellation,
- *  the same stars every night; a learner can come to know them. */
+ *  the same stars every night; a learner can come to know them. The
+ *  moon sits at THE WORLD Appendix C.1's pinned (74, 9), width 4.5% of
+ *  frame, with a soft 12%-opacity halo (§5.1, §5.4). */
 export function nightSkySVG() {
   const STARS = [
     [22, 24], [51, 58], [83, 20], [118, 44], [141, 16], [172, 62],
@@ -60,9 +62,44 @@ export function nightSkySVG() {
   ];
   const stars = STARS.map(([x, y], i) =>
     `<circle class="vl-star${i % 3 === 0 ? ' vl-star--breathing' : ''}" cx="${x}" cy="${y}" r="${i % 4 === 0 ? 1.3 : 0.9}"/>`).join('');
+  const mx = 0.74 * 360, my = 0.09 * 560, mr = (0.045 * 360) / 2;
   return `<g class="vl-night-sky" aria-hidden="true">
     ${stars}
-    <circle class="vl-moon" cx="306" cy="46" r="13"/>
-    <circle class="vl-moon-shadow" cx="311" cy="42" r="11"/>
+    <circle class="vl-moon-halo" cx="${mx}" cy="${my}" r="${(mr * 2.6).toFixed(1)}"/>
+    <circle class="vl-moon" cx="${mx}" cy="${my}" r="${mr.toFixed(1)}"/>
+    <circle class="vl-moon-shadow" cx="${(mx + mr * 0.4).toFixed(1)}" cy="${(my - mr * 0.3).toFixed(1)}" r="${(mr * 0.86).toFixed(1)}"/>
+  </g>`;
+}
+
+/** The sun disc (§5.1): drawn only at dawn and dusk — a soft disc at the
+ *  ridge; at every other hour the sun exists only as light, never a
+ *  shape. Positions and sizes are THE WORLD Appendix C.1's pins. */
+export function sunDiscSVG(time) {
+  if (time === 'dawn') {
+    const x = 0.82 * 360, y = 0.26 * 560, r = (0.07 * 360) / 2;
+    return `<circle class="vl-sun" cx="${x}" cy="${y}" r="${r.toFixed(1)}"/>`;
+  }
+  if (time === 'dusk') {
+    const x = 0.14 * 360, y = 0.25 * 560, r = (0.08 * 360) / 2;
+    return `<circle class="vl-sun" cx="${x}" cy="${y}" r="${r.toFixed(1)}"/>`;
+  }
+  return '';
+}
+
+/** Exactly two clouds (§3.1 Plane 1, Appendix C.1): soft flat masses,
+ *  drifting left to right on an unsynchronised 90–150s loop. Reduced
+ *  motion holds them still (Guide 15.4) — the world is composed to be
+ *  beautiful as a still image. */
+export function cloudsSVG() {
+  const CLOUDS = [
+    { x: 0.20 * 360, y: 0.06 * 560, w: 0.22 * 360, dur: 132, delay: 0 },
+    { x: 0.65 * 360, y: 0.14 * 560, w: 0.14 * 360, dur: 101, delay: -37 },
+  ];
+  return `<g class="vl-clouds" aria-hidden="true">
+    ${CLOUDS.map(({ x, y, w, dur, delay }, i) => `
+      <g class="vl-cloud" style="animation-duration:${dur}s; animation-delay:${delay}s" data-cloud="${i}">
+        <ellipse class="vl-cloud-body" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(w / 2).toFixed(1)}" ry="${(w * 0.22).toFixed(1)}"/>
+        <ellipse class="vl-cloud-under" cx="${x.toFixed(1)}" cy="${(y + w * 0.09).toFixed(1)}" rx="${(w * 0.4).toFixed(1)}" ry="${(w * 0.14).toFixed(1)}"/>
+      </g>`).join('')}
   </g>`;
 }

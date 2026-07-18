@@ -1524,7 +1524,12 @@ if (lgFiles.length === 0) {
 } else {
   const gardenVoice = await mod('src/core/mentor/garden-voice.js');
   const rcVoice = await mod('src/core/mentor/voice.js');
-  const { computePlantState, GardenSession, RUNG_INTERVALS_MS, GOLD_WINDOW_MS, MATURE_AT_REVISITS, ANCIENT_AT_REVISITS } = await mod('src/core/engine/garden-session.js');
+  const {
+    computePlantState, GardenSession, strugglingMembers,
+    RUNG_INTERVALS_MS, GOLD_WINDOW_MS, TOP_RUNG,
+    IN_LEAF_AT_SURVIVED_RUNG, MATURE_AT_SURVIVED_RUNG, ANCIENT_AT_SURVIVED_RUNG,
+    LANDMARK_TOP_SURVIVALS, ADAPTATION_MISS_THRESHOLD,
+  } = await mod('src/core/engine/garden-session.js');
 
   /* -- The garden's mentor never judges either: lint its whole vocabulary. -- */
   {
@@ -1567,11 +1572,14 @@ if (lgFiles.length === 0) {
     const longNeglected = computePlantState([grow], plantedAt + RUNG_INTERVALS_MS[0] + GOLD_WINDOW_MS + 1000);
     if (longNeglected.due !== 'bare') bad(`garden scheduler: long past the gold window should be Bare with buds, got ${longNeglected.due}`);
 
-    // Clean revisits, each exactly at its own next_review_at, climb the six
-    // stages: 1 → In leaf, MATURE_AT → Mature, ANCIENT_AT → Ancient.
-    let history = [grow];
-    let t = plantedAt;
-    const stageAfter = (n) => {
+    // Stage is keyed to the longest interval SURVIVED, never a raw count of
+    // revisits (the owner's redesign: Ancient must be durable memory, not
+    // repeated short-term success). Each clean revisit lands exactly at its
+    // own next_review_at, so it genuinely survives that interval and climbs
+    // the ladder: survive rung 0 (10min) → still Young, rung 1 (1d) → In leaf,
+    // rung 3 (8d) → Mature, the TOP rung (21d) → Ancient. `nClean` clean, due
+    // revisits therefore reach survivedRung = min(nClean-1, TOP).
+    const climb = (n) => {
       let h = [grow];
       let tt = plantedAt;
       for (let i = 0; i < n; i += 1) {
@@ -1579,30 +1587,87 @@ if (lgFiles.length === 0) {
         tt = new Date(s.nextReviewAt).getTime();
         h = [...h, { session_type: 'revisit', finished_at: new Date(tt).toISOString(), clean: true }];
       }
-      return computePlantState(h, tt + 1000);
+      return { state: computePlantState(h, tt + 1000), history: h, at: tt };
     };
-    if (stageAfter(1).stage !== 'in_leaf') bad(`garden scheduler: 1 clean revisit should be In leaf, got ${stageAfter(1).stage}`);
-    if (stageAfter(MATURE_AT_REVISITS).stage !== 'mature') bad(`garden scheduler: ${MATURE_AT_REVISITS} clean revisits should be Mature, got ${stageAfter(MATURE_AT_REVISITS).stage}`);
-
-    for (let i = 0; i < ANCIENT_AT_REVISITS; i += 1) {
-      const state = computePlantState(history, t + 5000);
-      t = new Date(state.nextReviewAt).getTime();
-      history = [...history, { session_type: 'revisit', finished_at: new Date(t).toISOString(), clean: true }];
+    const survivedRungAfter = (n) => Math.min(n - 1, TOP_RUNG);
+    const stageForSurvived = (sr) =>
+      sr < IN_LEAF_AT_SURVIVED_RUNG ? 'young'
+        : sr < MATURE_AT_SURVIVED_RUNG ? 'in_leaf'
+          : sr < ANCIENT_AT_SURVIVED_RUNG ? 'mature' : 'ancient';
+    for (let n = 1; n <= TOP_RUNG + 1; n += 1) {
+      const { state } = climb(n);
+      const sr = survivedRungAfter(n);
+      if (state.survivedRung !== sr) bad(`garden scheduler: ${n} clean due revisits should survive rung ${sr}, got ${state.survivedRung}`);
+      if (state.stage !== stageForSurvived(sr)) bad(`garden scheduler: survivedRung ${sr} should be ${stageForSurvived(sr)}, got ${state.stage}`);
     }
-    const ancient = computePlantState(history, t + 1000);
-    if (ancient.stage !== 'ancient') bad(`garden scheduler: ${ANCIENT_AT_REVISITS} clean revisits should reach Ancient, got ${ancient.stage}`);
+    // Reaching Ancient takes a full climb of the ladder (survive the top,
+    // 21-day interval) — it can never be reached by a short count of quick
+    // revisits. The first top-interval survival is Ancient but not yet a
+    // Landmark; ancientAt is set, landmark is still false.
+    const ancientClimb = climb(TOP_RUNG + 1); // survive rung TOP once
+    const ancient = ancientClimb.state;
+    if (ancient.stage !== 'ancient') bad(`garden scheduler: surviving the top interval should reach Ancient, got ${ancient.stage}`);
+    if (ancient.survivedRung !== TOP_RUNG) bad('garden scheduler: Ancient must have survived the top rung');
     if (!ancient.ancientAt) bad('garden scheduler: ancientAt must be set once Ancient');
+    if (ancient.landmark) bad('garden scheduler: one long-interval survival is Ancient, not yet a Landmark');
 
-    // A rocky (non-clean) revisit still regrows (stage advances) but must
-    // NOT shrink the interval on the next round — never a demotion.
+    // A Landmark is Ancient that survived the top interval LANDMARK_TOP_SURVIVALS
+    // times in a row (§6.5) — several long-interval retrievals with no lapse.
+    const landmarkClimb = climb(TOP_RUNG + LANDMARK_TOP_SURVIVALS);
+    if (!landmarkClimb.state.landmark) bad(`garden scheduler: ${LANDMARK_TOP_SURVIVALS} top-interval survivals should make a Landmark`);
+    if (!landmarkClimb.state.landmarkAt) bad('garden scheduler: landmarkAt must be set once a Landmark');
+
+    // A lapse (a rocky revisit) after Ancient never demotes the stage
+    // (Law 3: nothing is lost) but it does reset the Landmark run — the
+    // learner simply re-earns it, never punished.
+    const lapseAt = new Date(landmarkClimb.at + RUNG_INTERVALS_MS[TOP_RUNG] + 5000);
+    const lapsed = computePlantState(
+      [...landmarkClimb.history, { session_type: 'revisit', finished_at: lapseAt.toISOString(), clean: false }],
+      lapseAt.getTime() + 1000,
+    );
+    if (lapsed.stage !== 'ancient') bad('garden scheduler: a lapse after Ancient must never demote the tree');
+    if (lapsed.landmark) bad('garden scheduler: a lapse resets the Landmark run (re-earned, never punished)');
+
+    // A rocky (non-clean) FIRST revisit completes and returns the canopy to
+    // leaf (its due resets), but demonstrates no durable retrieval — so the
+    // durability stage stays Young, and the interval never shortens.
     const rockyHistory = [grow, { session_type: 'revisit', finished_at: new Date(plantedAt + RUNG_INTERVALS_MS[0] + 1000).toISOString(), clean: false }];
     const afterRocky = computePlantState(rockyHistory, plantedAt + RUNG_INTERVALS_MS[0] + 2000);
-    if (afterRocky.stage !== 'in_leaf') bad('garden scheduler: a completed rocky revisit should still regrow to In leaf');
+    if (afterRocky.stage !== 'young') bad(`garden scheduler: a rocky revisit demonstrates no durable memory — stage stays Young, got ${afterRocky.stage}`);
     if (afterRocky.rung !== 0) bad('garden scheduler: a rocky revisit must not advance the rung (never a demotion, but never a shortcut either)');
+    if (afterRocky.vigor !== 0) bad('garden scheduler: a rocky revisit earns no vigor (vigor is successful retrievals only)');
 
-    if (JSON.stringify(computePlantState(history, t + 1000)) !== JSON.stringify(ancient)) {
+    // Vigor (continuous refinement, §6.3) rises with clean retrievals, stays
+    // bounded in [0,1], and is monotonic non-decreasing across the climb.
+    let lastVigor = -1;
+    for (let n = 0; n <= TOP_RUNG + LANDMARK_TOP_SURVIVALS; n += 1) {
+      const v = climb(n).state.vigor;
+      if (v < 0 || v > 1) bad(`garden scheduler: vigor out of [0,1] at n=${n}: ${v}`);
+      if (v < lastVigor) bad(`garden scheduler: vigor must never fall as retrievals accumulate (n=${n})`);
+      lastVigor = v;
+    }
+    if (climb(0).state.vigor !== 0) bad('garden scheduler: a freshly grown plant has zero vigor');
+
+    if (JSON.stringify(computePlantState(landmarkClimb.history, landmarkClimb.at + 1000)) !== JSON.stringify(landmarkClimb.state)) {
       bad('garden scheduler: computePlantState is not deterministic');
     }
+
+    // Silent downward adaptation (§17.5): a member missed ADAPTATION_MISS_THRESHOLD
+    // times over is named for a gentler re-teach; two misses is not enough; and
+    // a correct check clears the run immediately (never a lasting mark).
+    const missN = (n) => Array.from({ length: n }, (_, i) => ({
+      session_type: 'revisit', clean: false,
+      finished_at: new Date(plantedAt + (i + 1) * 60000).toISOString(),
+      member_checks: [{ member_index: 0, is_correct: false }],
+    }));
+    if (strugglingMembers([grow, ...missN(ADAPTATION_MISS_THRESHOLD)]).length !== 1) bad('garden adaptation: a member missed the threshold number of times must be flagged');
+    if (strugglingMembers([grow, ...missN(ADAPTATION_MISS_THRESHOLD - 1)]).length !== 0) bad('garden adaptation: below the threshold, nothing is flagged');
+    const recovered = [grow, ...missN(ADAPTATION_MISS_THRESHOLD), {
+      session_type: 'revisit', clean: true,
+      finished_at: new Date(plantedAt + 999999).toISOString(),
+      member_checks: [{ member_index: 0, is_correct: true }],
+    }];
+    if (strugglingMembers(recovered).length !== 0) bad('garden adaptation: a correct check clears the miss run immediately');
   }
 
   /* -- Effort Ledger: Stream / Ground / Paths (Roadmap Phase 3, 3.1-3.2).
@@ -1673,6 +1738,89 @@ if (lgFiles.length === 0) {
     if (morningA !== morningB) bad('garden atmosphere: weather changed mid-window');
     const atmo = atmosphereFor(new Date(2026, 4, 20, 8, 5));
     if (!atmo.time || !atmo.season || !atmo.weather) bad('garden atmosphere: atmosphereFor is missing a field');
+  }
+
+  /* -- The painted-light recipe (THE WORLD Part 5.2, Stage W1): pure
+     colour math, so a lit face is always lighter than its base, a shade
+     face always darker, the mix ratios stay within [0,1] at their
+     endpoints, and the shadow geometry matches the pinned formula. -- */
+  {
+    const {
+      mixHex, adjustLightness, litFace, shadeFace, contactShadow, castShadow, castsShadow,
+      LIT_MIX_RATIO, SHADE_MIX_RATIO, CONTACT_SHADOW_WIDTH_RATIO, CONTACT_SHADOW_OFFSET_RATIO,
+      CONTACT_SHADOW_OPACITY, CAST_SHADOW_HEIGHT_RATIO, CAST_SHADOW_OPACITY, HOURS,
+    } = await mod('src/modules/language-garden/logic/light.js');
+
+    if (mixHex('#000000', '#FFFFFF', 0) !== '#000000') bad('garden light: mixHex at ratio 0 must return the base exactly');
+    if (mixHex('#000000', '#FFFFFF', 1) !== '#FFFFFF') bad('garden light: mixHex at ratio 1 must return the target exactly');
+    if (mixHex('#808080', '#808080', 0.5) !== '#808080') bad('garden light: mixing identical colours must not change them');
+
+    if (adjustLightness('#808080', 0) !== '#808080') bad('garden light: a zero lightness delta must not change the colour');
+    if (adjustLightness('#000000', -50) !== '#000000') bad('garden light: lightness must clamp at black, never go negative');
+    if (adjustLightness('#FFFFFF', 50) !== '#FFFFFF') bad('garden light: lightness must clamp at white, never overflow');
+
+    for (const hour of HOURS) {
+      const base = '#4F9A5C';
+      const lit = litFace(base, hour);
+      const shade = shadeFace(base, hour);
+      const luma = (hex) => { const h = hex.replace('#', ''); return 0.299 * parseInt(h.slice(0, 2), 16) + 0.587 * parseInt(h.slice(2, 4), 16) + 0.114 * parseInt(h.slice(4, 6), 16); };
+      if (luma(lit) <= luma(base) - 4) bad(`garden light: ${hour}'s lit face must not read darker than its own base`);
+      if (luma(shade) >= luma(base) + 4) bad(`garden light: ${hour}'s shade face must not read lighter than its own base`);
+      if (lit === shade) bad(`garden light: ${hour}'s lit and shade faces must differ — one sun casts one shadow, but they are not the same colour`);
+    }
+    if (LIT_MIX_RATIO <= 0 || LIT_MIX_RATIO >= 1) bad('garden light: the lit-face mix ratio must be a genuine blend, not 0 or 1');
+    if (SHADE_MIX_RATIO <= 0 || SHADE_MIX_RATIO >= 1) bad('garden light: the shade-face mix ratio must be a genuine blend, not 0 or 1');
+
+    const shadow = contactShadow(100, 200, 20, 'dawn');
+    if (Math.abs(shadow.rx * 2 - 20 * CONTACT_SHADOW_WIDTH_RATIO) > 0.01) bad('garden light: a contact shadow must be exactly 1.1x the object width');
+    if (shadow.opacity !== CONTACT_SHADOW_OPACITY) bad('garden light: contact shadow opacity must match the pin (18%)');
+    if (Math.abs(Math.abs(shadow.cx - 100) - 20 * CONTACT_SHADOW_OFFSET_RATIO) > 0.01) bad('garden light: a contact shadow must offset by exactly 15% of the object width');
+
+    const dawnShadowLeft = contactShadow(100, 200, 20, 'dawn').cx < 100;
+    const duskShadowRight = contactShadow(100, 200, 20, 'dusk').cx > 100;
+    if (!dawnShadowLeft) bad('garden light: at dawn the sun is at frame-right, so the shadow must fall left');
+    if (!duskShadowRight) bad('garden light: at dusk the sun is at frame-left, so the shadow must fall right');
+
+    const cast = castShadow(100, 200, 10, 20, 'dusk');
+    if (Math.abs(cast.rx * 2 - 10 * CAST_SHADOW_HEIGHT_RATIO) > 0.01) bad('garden light: a cast shadow must run exactly 2.2x the object height');
+    if (cast.opacity !== CAST_SHADOW_OPACITY) bad('garden light: cast shadow opacity must match the pin (12%)');
+
+    if (!castsShadow('dawn', 'summer') || !castsShadow('dusk', 'summer')) bad('garden light: cast shadows must appear at dawn and dusk regardless of season');
+    if (!castsShadow('morning', 'autumn')) bad('garden light: cast shadows must appear all through autumn, any hour');
+    if (castsShadow('morning', 'summer')) bad('garden light: cast shadows must NOT appear at midday outside autumn — a seasonal pleasure, not a default');
+  }
+
+  /* -- The Journal's records (Roadmap 4.4, §8.5–§8.6): Seasons Tended is
+     a calendar fact (unfarmable — many sessions in one season still count
+     once; it grows only as the planet turns), and the Weather Record has
+     NO empty boxes (only tended days exist, one mark each) and no numbers.
+     -- */
+  {
+    const { seasonsTended, weatherRecord } = await mod('src/modules/language-garden/logic/journal.js');
+    const sess = (y, m, d, h = 10) => ({ finished_at: new Date(y, m, d, h).toISOString() });
+
+    if (seasonsTended([]) !== 0) bad('garden journal: no tending is zero seasons');
+    // Ten sessions inside one summer are ONE season tended, not ten (§8.5).
+    const oneSummer = [sess(2026, 6, 1), sess(2026, 6, 3), sess(2026, 6, 20), sess(2026, 7, 15)];
+    if (seasonsTended(oneSummer) !== 1) bad('garden journal: many sessions in one season must count as one Season Tended (unfarmable)');
+    // A full turn of the planet is four, and no more (spring→winter, one year).
+    const oneYear = [sess(2026, 3, 1), sess(2026, 6, 1), sess(2026, 9, 1), sess(2026, 0, 15)];
+    if (seasonsTended(oneYear) !== 4) bad('garden journal: four distinct world-seasons should read as four');
+    // Winter spans the year boundary: Dec and the following Jan are one winter.
+    if (seasonsTended([sess(2026, 11, 20), sess(2027, 0, 5)]) !== 1) bad('garden journal: December and the January after it are one winter');
+
+    // Weather Record: only tended days appear (no gaps), one mark per day,
+    // grouped by month, and every mark is a known kind — never a count.
+    const rec = weatherRecord([sess(2026, 6, 2, 10), sess(2026, 6, 2, 22), sess(2026, 6, 9, 10), sess(2026, 5, 30, 10)]);
+    const totalDays = rec.reduce((n, mth) => n + mth.days.length, 0);
+    if (totalDays !== 3) bad(`garden journal: Weather Record must have one mark per TENDED day and no empty boxes — got ${totalDays} for 3 days`);
+    if (rec.length !== 2) bad('garden journal: Weather Record should group by month');
+    if (rec[0].days.some((d) => d.day === undefined || !d.mark)) bad('garden journal: every weather day needs a day and a mark');
+    const knownMarks = new Set(['sun', 'clear-night', 'rain', 'fog', 'wind', 'snow']);
+    for (const mth of rec) for (const d of mth.days) {
+      if (!knownMarks.has(d.mark)) bad(`garden journal: unknown weather mark "${d.mark}"`);
+    }
+    if (weatherRecord([]).length !== 0) bad('garden journal: an untended garden has no Weather Record, not an empty grid');
   }
 
   /* -- The Gate (Roadmap 3.5, §19.2): seeds and sightings are honest.
@@ -1790,18 +1938,50 @@ if (lgFiles.length === 0) {
   /* -- Audio identity: import-safe under Node, disabled path is a no-op. -- */
   {
     const audio = await mod('src/modules/language-garden/logic/audio.js');
-    const REQUIRED = ['commit', 'key', 'growth', 'leafTap', 'bloom'];
+    // 'regrowth' is the distinct revisit chime (§10.5 #5) — descends then rises.
+    // 'arrival' (Phase 4.9) is the world fading up, as sound — plays once on
+    // stepping into the Garden from outside.
+    const REQUIRED = ['arrival', 'commit', 'key', 'growth', 'regrowth', 'leafTap', 'bloom'];
     for (const n of REQUIRED) if (!audio.GARDEN_SOUND_NAMES.includes(n)) bad(`garden audio: sound "${n}" missing from the engine`);
     if (typeof audio.gardenCue !== 'function') bad('garden audio: missing export gardenCue() (sound + haptic)');
     try {
       audio.playGardenSound('leafTap', { step: 2 }); // the rising assembly path
+      audio.playGardenSound('arrival'); // stepping into the Garden
       audio.gardenCue('commit'); // sound + haptic together — disabled path is a no-op
       audio.gardenCue('growth');
+      audio.gardenCue('regrowth'); // a revisit's Regrowth peak
       audio.unlockGardenAudio();
-      audio.startGardenAmbience();
+      audio.startGardenAmbience(1, { landmark: true }); // the Landmark's nesting bird
       audio.stopGardenAmbience();
     } catch (e) {
       bad(`garden audio: disabled play path threw — ${e.message}`);
+    }
+  }
+
+  /* -- Phase 4.9 (Product Finish) invariants. -- */
+  {
+    // Ambience defaults ON (P6): an absent settings record must read as
+    // enabled, an explicit false as disabled — the master Sounds preference
+    // still gates actual playback inside audio.js.
+    const store = await mod('src/modules/language-garden/logic/store.js');
+    const stub = (value) => ({ get: async () => value, put: async () => {} });
+    if (await store.gardenAmbienceEnabled(stub(undefined)) !== true) bad('garden 4.9: ambience must default ON when no preference is stored');
+    if (await store.gardenAmbienceEnabled(stub({ id: 'lg:ambience', value: false })) !== false) bad('garden 4.9: an explicit ambience OFF must be honoured');
+    if (await store.gardenAmbienceEnabled(stub({ id: 'lg:ambience', value: true })) !== true) bad('garden 4.9: an explicit ambience ON must be honoured');
+
+    // No loading state may ever return to a Garden screen (Guide 24.1):
+    // the word "skeleton" must not appear in any garden screen source.
+    const { readFileSync } = await import('node:fs');
+    for (const f of [
+      'src/modules/language-garden/screens/overlook.js',
+      'src/modules/language-garden/screens/biome.js',
+      'src/modules/language-garden/screens/journal.js',
+      'src/modules/language-garden/screens/plant.js',
+      'src/modules/language-garden/screens/session.js',
+    ]) {
+      if (/class="[^"]*skeleton/i.test(readFileSync(new URL(`../${f}`, import.meta.url), 'utf8'))) {
+        bad(`garden 4.9: ${f} reintroduces a loading skeleton (Guide 24.1 forbids any loading state in the Garden)`);
+      }
     }
   }
 

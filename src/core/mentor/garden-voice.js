@@ -50,6 +50,13 @@ export const GROWTH_LINES = Object.freeze({
     `${label} has joined the old growth.`,
     `${label} keeps its leaves through every season now.`,
   ]),
+  /** The revisit that makes an Ancient tree a Landmark (§6.5) — stated as a
+   *  world fact the learner can see for themselves (a bird has come to it),
+   *  never as praise or a milestone announcement. */
+  landmark: (label, seed) => pick(seed, [
+    `A bird has come to nest in ${label}.`,
+    `${label} stands on the horizon now, and a bird sings in it.`,
+  ]),
 });
 
 /* ------------------------------------------------------------------ */
@@ -130,6 +137,23 @@ export const JOURNAL_LINES = Object.freeze({
   sightingsHeading: 'Sightings',
   emptySightings: 'Words from your garden, met again in real reading, settle here.',
   sightingLine: (title) => `seen in ${title}`,
+  // Seasons Tended (§8.5): the only number the Garden shows unasked, and
+  // a calendar fact. Small, once, on the first page — never a badge.
+  seasonsTended: (n) => `${n} ${Number(n) === 1 ? 'season' : 'seasons'} tended`,
+  // The Weather Record (§8.6): the days you came, each as its own
+  // weather. No grid, no empty boxes, nothing missing.
+  weatherHeading: 'Days you tended, as weather',
+  emptyWeather: 'The days you come to the garden gather here, each as its own weather.',
+  // The mark's name, for a screen reader reading the record aloud.
+  weatherNames: Object.freeze({
+    sun: 'sun',
+    'clear-night': 'a clear night',
+    rain: 'rain',
+    fog: 'fog',
+    wind: 'wind',
+    snow: 'snow',
+  }),
+  weatherDayLabel: (day, month, weatherName) => `${day} ${month}, ${weatherName}`,
 });
 
 /* ------------------------------------------------------------------ */

@@ -55,6 +55,10 @@ export const RUNG_INTERVALS_MS = Object.freeze([
  *  buds (Bible §6.4: both are honest, neither is ever "damaged"). */
 export const GOLD_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
 
+/** The top of the interval ladder — the longest gap a memory can be asked
+ *  to survive. Surviving THIS interval is what "durable memory" means. */
+export const TOP_RUNG = RUNG_INTERVALS_MS.length - 1;
+
 /** The six growth stages (Bible §6.2), plus Open ground (stage 0, which is
  *  absence, not a stage). One canonical vocabulary, used by the scheduler,
  *  the plant art (cat-plant), and every screen — so a stage is renamed in
@@ -75,15 +79,58 @@ export const GOLD_WINDOW_MS = 3 * 24 * 60 * 60 * 1000;
  *               neighbours; takes its place on the horizon; birds nest in it. */
 export const STAGES = Object.freeze(['open_ground', 'seed', 'sprout', 'young', 'in_leaf', 'mature', 'ancient']);
 
-/** Successful revisits at which a plant enters Mature, and Ancient. Mature
- *  begins once "several" retrievals have accrued; Ancient once the memory has
- *  survived to the top of the interval ladder. Count-based by design: the rung
- *  only advances on CLEAN revisits, so reaching these counts already implies
- *  expanding intervals were survived (never a demotion — §6.4). */
-export const MATURE_AT_REVISITS = 2;
-export const ANCIENT_AT_REVISITS = 4;
+/** Stage is keyed to the longest interval a memory has actually SURVIVED —
+ *  never to a raw count of revisits (Bible §6.2, and the owner's own
+ *  redesign brief: "Ancient should represent long-term memory, not repeated
+ *  short-term success"). `survivedRung` is the highest rung whose interval
+ *  the learner cleanly retrieved the family AFTER it had genuinely elapsed.
+ *  Because the rung only climbs on a clean, due revisit, and the intervals
+ *  expand (10min → 1d → 3d → 8d → 21d), reaching a survivedRung already
+ *  proves every shorter interval below it was survived first.
+ *
+ *   survivedRung < 1   Young    Nothing "spaced in days" survived yet — at
+ *                               most the same-day 10-minute consolidation
+ *                               touch (rung 0). Continuous refinement (§6.3),
+ *                               not a stage jump, carries the visible progress.
+ *   survivedRung 1–2   In leaf  First real spaced retrieval — days passed and
+ *                               the learner still had it (§6.2).
+ *   survivedRung 3     Mature   Several retrievals across expanding intervals;
+ *                               the ~week-long gap survived.
+ *   survivedRung TOP   Ancient  The 21-day interval survived — the memory has
+ *                               survived real time (§6.2). Reaching here takes
+ *                               a full climb of the ladder, roughly a month of
+ *                               kept memory: it cannot be reached by grinding. */
+export const IN_LEAF_AT_SURVIVED_RUNG = 1;
+export const MATURE_AT_SURVIVED_RUNG = 3;
+export const ANCIENT_AT_SURVIVED_RUNG = TOP_RUNG;
+
+/** A Landmark is an Ancient tree the world begins to treat differently
+ *  (§6.5): a bird nests and sings, it stands on the horizon, it gains a
+ *  name plate, fireflies gather at it. The Bible earns it with "several
+ *  long-interval retrievals with no lapse" — so it is not a new stage, it
+ *  is Ancient that has survived the top (21-day) interval this many times in
+ *  a row without a lapse. A lapse (a rocky revisit) never demotes the tree —
+ *  nothing is ever lost (Law 3) — it only resets the run, so the learner
+ *  simply re-demonstrates the durability rather than being punished. */
+export const LANDMARK_TOP_SURVIVALS = 2;
+
+/** After how many times the same taught member is missed, in successive
+ *  checks of that member, the Garden quietly re-teaches it smaller (§17.5,
+ *  silent downward adaptation). "Fails the same item three times." */
+export const ADAPTATION_MISS_THRESHOLD = 3;
 
 const byFinishedAsc = (a, b) => a.finished_at.localeCompare(b.finished_at);
+
+/** A smooth, bounded, monotonic "vigor" from the count of clean retrievals —
+ *  the signal behind continuous within-stage refinement (§6.3: "trunk girth
+ *  thickens with total successful retrievals"). 0 with none, rising fast at
+ *  first and saturating toward 1, so a plant is ALWAYS visibly a little
+ *  fuller after a real retrieval without any stage ever changing, and never
+ *  a number the learner can see. Rounded so computePlantState stays a pure,
+ *  byte-for-byte deterministic function of its inputs. */
+function vigorFrom(cleanRetrievals) {
+  return Math.round((1 - Math.pow(0.7, cleanRetrievals)) * 1000) / 1000;
+}
 
 /**
  * @param {Array} records  this family's garden-session records only
@@ -91,9 +138,10 @@ const byFinishedAsc = (a, b) => a.finished_at.localeCompare(b.finished_at);
  * @param {number} [now]   epoch ms, injectable for tests
  * @returns {{stage: typeof STAGES[number],
  *            due: 'none'|'gold'|'bare', nextReviewAt: string|null,
- *            revisitCount: number, rung: number,
+ *            revisitCount: number, rung: number, survivedRung: number,
+ *            vigor: number, landmark: boolean,
  *            plantedAt: string|null, lastVisitedAt: string|null,
- *            ancientAt: string|null}}
+ *            ancientAt: string|null, landmarkAt: string|null}}
  */
 export function computePlantState(records, now = Date.now()) {
   const grows = records.filter((r) => r.session_type === 'grow').sort(byFinishedAsc);
@@ -105,18 +153,53 @@ export function computePlantState(records, now = Date.now()) {
   // never nags — no due state, no schedule, until its first Grow session.
   if (grows.length === 0) {
     const seeded = records.some((r) => r.kind === 'garden-seed');
-    return { stage: seeded ? 'seed' : 'open_ground', due: 'none', nextReviewAt: null, revisitCount: 0, rung: 0, plantedAt: null, lastVisitedAt: null, ancientAt: null };
+    return {
+      stage: seeded ? 'seed' : 'open_ground', due: 'none', nextReviewAt: null,
+      revisitCount: 0, rung: 0, survivedRung: -1, vigor: 0, landmark: false,
+      plantedAt: null, lastVisitedAt: null, ancientAt: null, landmarkAt: null,
+    };
   }
 
   const plantedAt = grows[0].finished_at;
 
-  let rung = 0;
+  let rung = 0;               // the interval this memory is CURRENTLY asked to survive
+  let survivedRung = -1;      // the longest interval it has actually survived
+  let cleanRetrievals = 0;    // total clean retrievals — drives vigor (§6.3)
+  let topStreak = 0;          // clean survivals of the TOP interval, in a row (§6.5)
   let anchor = grows[grows.length - 1].finished_at;
+  let ancientAt = null;
+  let landmarkAt = null;
+
   for (const r of revisits) {
+    const scheduledAt = new Date(anchor).getTime() + RUNG_INTERVALS_MS[rung];
+    const due = new Date(r.finished_at).getTime() >= scheduledAt;
+
+    if (r.clean) {
+      cleanRetrievals += 1;
+      if (due) {
+        // A clean retrieval AFTER the interval elapsed is the only honest
+        // evidence of durable memory: it climbs the ladder and records the
+        // interval just survived. (Early review would waste the interval and
+        // is never offered by the UI — §7 — so an early-but-clean revisit,
+        // if one ever arrives, strengthens vigor but earns no survival credit.)
+        if (rung > survivedRung) survivedRung = rung;
+        if (rung === TOP_RUNG) {
+          topStreak += 1;
+          if (topStreak === 1 && !ancientAt) ancientAt = r.finished_at;
+          if (topStreak === LANDMARK_TOP_SURVIVALS && !landmarkAt) landmarkAt = r.finished_at;
+        }
+        rung = Math.min(rung + 1, TOP_RUNG);
+      }
+    } else {
+      // A rocky revisit still regrows the plant (it completed) and still
+      // thickens nothing it hasn't earned: it buys no longer interval (never
+      // a demotion, never a shortcut) and, if it happens at or past Ancient,
+      // it is a lapse that resets the Landmark run — never the stage, never a
+      // loss (Law 3: forgetting is weather). The learner simply re-earns it.
+      topStreak = 0;
+      landmarkAt = null;
+    }
     anchor = r.finished_at;
-    // A rocky revisit still regrows the plant (it completed), it simply
-    // does not buy a longer interval next time (never a demotion).
-    if (r.clean) rung = Math.min(rung + 1, RUNG_INTERVALS_MS.length - 1);
   }
 
   const nextReviewAt = new Date(new Date(anchor).getTime() + RUNG_INTERVALS_MS[rung]).toISOString();
@@ -128,28 +211,56 @@ export function computePlantState(records, now = Date.now()) {
     // Sprout for the first rung-0 window after planting (Bible's own
     // onboarding text: "within two minutes they own a sprout"), then it
     // settles into Young plant once old enough to be asking for its first
-    // revisit — a real, honest boundary, not a cosmetic timer. (Grow teaches
-    // the whole small family in one sitting, so "key known" and "all members
-    // met" — Sprout and Young — land together for this content; a larger
-    // family would split them across sittings, which this engine allows.)
+    // revisit — a real, honest boundary, not a cosmetic timer.
     stage = now < new Date(plantedAt).getTime() + RUNG_INTERVALS_MS[0] ? 'sprout' : 'young';
-  } else if (revisits.length < MATURE_AT_REVISITS) {
+  } else if (survivedRung < IN_LEAF_AT_SURVIVED_RUNG) {
+    stage = 'young';    // completed a revisit, but only the same-day touch — not "days"
+  } else if (survivedRung < MATURE_AT_SURVIVED_RUNG) {
     stage = 'in_leaf';
-  } else if (revisits.length < ANCIENT_AT_REVISITS) {
+  } else if (survivedRung < ANCIENT_AT_SURVIVED_RUNG) {
     stage = 'mature';
   } else {
     stage = 'ancient';
   }
 
-  // The exact moment the plant crossed into Ancient, purely so a much later
-  // feature (a nest quietly appearing after an Ancient tree "has existed for
-  // some time" — §6.5) can be computed honestly from real elapsed time
-  // instead of guessed — never stored, always re-derived.
-  const ancientAt = revisits.length >= ANCIENT_AT_REVISITS
-    ? revisits[ANCIENT_AT_REVISITS - 1].finished_at
-    : null;
+  // A Landmark is Ancient that has held the top interval LANDMARK_TOP_SURVIVALS
+  // times over, with no lapse in that run — the world starts treating it
+  // differently (§6.5). It can never appear on a tree that is not Ancient.
+  const landmark = stage === 'ancient' && landmarkAt !== null;
 
-  return { stage, due, nextReviewAt, revisitCount: revisits.length, rung, plantedAt, lastVisitedAt: anchor, ancientAt };
+  return {
+    stage, due, nextReviewAt,
+    revisitCount: revisits.length, rung, survivedRung,
+    vigor: vigorFrom(cleanRetrievals), landmark,
+    plantedAt, lastVisitedAt: anchor, ancientAt, landmarkAt,
+  };
+}
+
+/**
+ * Which taught members (by index) the learner keeps missing — the signal for
+ * silent downward adaptation (§17.5). A member's miss run is counted across
+ * the successive revisit checks OF THAT member and reset the moment it is
+ * answered correctly, so this only ever names a genuinely persistent
+ * difficulty, and it clears itself the instant the learner recovers. Never
+ * surfaced to the learner as a number or a label — it only reshapes the next
+ * revisit into a smaller, gentler re-teach.
+ * @param {Array} records  this family's garden-session records only
+ * @param {number} [threshold]
+ * @returns {number[]}  struggling taught-member indices, most-missed first
+ */
+export function strugglingMembers(records, threshold = ADAPTATION_MISS_THRESHOLD) {
+  const revisits = records.filter((r) => r.session_type === 'revisit').sort(byFinishedAsc);
+  const run = new Map();
+  for (const r of revisits) {
+    for (const c of r.member_checks ?? []) {
+      if (c.is_correct === false) run.set(c.member_index, (run.get(c.member_index) ?? 0) + 1);
+      else run.set(c.member_index, 0);
+    }
+  }
+  return [...run.entries()]
+    .filter(([, n]) => n >= threshold)
+    .sort((a, b) => b[1] - a[1])
+    .map(([i]) => i);
 }
 
 /** Evaluate a chosen index against a {text, correct}[] option set. */

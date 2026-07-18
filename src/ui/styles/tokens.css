@@ -82,7 +82,7 @@
   --garden-sky-afternoon: #EFEEDA; /* warm, hazy, soft shadows */
   --garden-sky-dusk:    #F3DCC0;
   --garden-sky-night:   #23324A;
-  --garden-water-night: #BFD0E2;   /* moonlit silver water (§12.6) */
+  --garden-water-night: #9FB6D1;   /* moonlit silver highlights (§6.4 — existing token honoured) */
   /* The valley, seen from the Overlook (§4.1): flat, calm landforms, one
      living region and six that are simply land until they are cultivated. */
   --garden-wilds:       #B9C0CB;   /* distant blue-grey, always visible, never entered */
@@ -99,6 +99,85 @@
   --garden-wildflower:  #C9A9D6;   /* small blooms in the grass, muted lilac */
   --garden-fern:        #4C7A4A;   /* deep undergrowth at the richest tier */
   --garden-path:        #C7B79A;   /* worn stone, a frequently walked path */
+
+  /* ---- Phase V, Stage W1 (LANGUAGE GARDEN — THE WORLD.md Parts 5–6):
+     the light model and the pigment canon, pinned. Light-theme values are
+     the canon table itself; Night is its own script and doubles as the
+     dark theme (§6.2 — "is the dark theme (P103)"), so its tokens below
+     are identical in every theme block. Some tokens (Hearth plane, window,
+     bridge/berry/terracotta flecks) have no geometry yet — they arrive
+     with the Hearth and further Rootwood dressing in later W-stages and
+     are reserved here so tokens.css is authored once, per Appendix A. */
+
+  /* Sky — three-stop gradients per hour (0% zenith, 55% mid, 100% horizon). */
+  --garden-sky-dawn-zenith:        #A9A7C9;
+  --garden-sky-dawn-mid:           #E8C9B6;
+  --garden-sky-dawn-horizon:       #F7E3C2;
+  --garden-sky-morning-zenith:     #A8CBDE;
+  --garden-sky-morning-mid:        #CFE3D8;
+  --garden-sky-morning-horizon:    #EFF3DA;
+  --garden-sky-afternoon-zenith:   #9FC4D4;
+  --garden-sky-afternoon-mid:      #D9E4C9;
+  --garden-sky-afternoon-horizon:  #F4EDCB;
+  --garden-sky-dusk-zenith:        #56597F;
+  --garden-sky-dusk-mid:           #977BA0;
+  --garden-sky-dusk-horizon:       #E8B27E;
+  --garden-sky-dusk-seam:          #AFC49B;   /* the sky-going-green seam, §12.6 */
+  --garden-sky-night-zenith:       #0E1524;
+  --garden-sky-night-mid:          #17263D;
+  --garden-sky-night-horizon:      #253A55;
+
+  /* Light/shadow overlays per hour — the painted-light recipe's inputs
+     (§5.2): a lit face mixes 25% toward "light" and lifts ~6L; a shade
+     face mixes 20% toward "shadow" and drops ~8L. */
+  --garden-light-dawn:      #F6D9A8;
+  --garden-shadow-dawn:     #7A7490;
+  --garden-light-morning:   #F4E6AC;
+  --garden-shadow-morning:  #5F7E63;
+  --garden-light-afternoon: #F2DA9E;
+  --garden-shadow-afternoon: #68806B;
+  --garden-light-dusk:      #F3C68F;
+  --garden-shadow-dusk:     #4E4A72;
+  --garden-light-night:     #C7D6EA;   /* moonlight */
+  --garden-shadow-night:    #2C3A4E;
+
+  /* The land — aerial ramp (§6.3): farther is cooler, paler, softer. */
+  --garden-far-fields:   #D8E3C0;
+  --garden-mid-floor:    #BCD3A0;   /* reserved — no mid-floor plane until W2 */
+  --garden-near-floor:   #9EC183;
+  --garden-hearth-plane: #82A468;   /* reserved — the Hearth arrives in W2 */
+  --garden-ridge-far:     #AEB9C6;
+  --garden-ridge-farther: #C4CDD8;
+  --garden-wilds-mist:    #E8EDF2;  /* ~40% opacity over the Wilds, §6.3 */
+
+  /* Water, paths, and stone (§6.4). */
+  --garden-water-day-body:    #8FB9CB;
+  --garden-water-day-glint:   #F4F9F2;
+  --garden-water-dusk-body:   #7E88A8;
+  --garden-water-dusk-glint:  #F3CE9A;
+  --garden-water-night-body:  #2E4763;
+  --garden-path-worn: #CBB691;  /* the worn-stone state */
+  --garden-path-sun:  #D8B87E;  /* the golden path in full sun, the warmest route */
+  --garden-stone-lit:   #CBB49A;  /* bridge, and the Gate: "warm stone, as bridge" */
+  --garden-stone-shade: #8F8271;
+  --garden-window-light:  #F5C56E;  /* reserved — the Hearth's window, W2 */
+  --garden-lantern-flame: #F2A64B;
+
+  /* Biome base palettes at Overlook zoom (§6.5). */
+  --garden-meadow-base:  #DCE3BC;
+  --garden-terrace-lit:        #D9B892;  /* the stone lips catching the sun, §3.2 */
+  --garden-terrace-shade:      #B08D66;
+  --garden-terrace-terracotta: #C0714D;  /* reserved — no terracotta-fleck geometry yet */
+  --garden-orchard-grass: #C9D9A0;
+  --garden-thicket-bramble:    #556B44;
+  --garden-thicket-thorn:      #7A6350;
+  --garden-thicket-berry-deep: #6E4A73;  /* reserved — no berry-fleck geometry yet */
+  --garden-thicket-berry-lit:  #8A5E92;  /* reserved */
+
+  /* Weather particle pigments (§6.4). */
+  --garden-weather-rain: #C7D6E0;
+  --garden-weather-snow: #F4F7FA;
+  --garden-weather-fog:  #E8EDF2;
 
   /* ==================== TYPE ==================== */
   /* System stacks by design (TECH_STACK durability): nothing to
@@ -239,7 +318,7 @@
     --garden-sky-afternoon: #2A2E24;
     --garden-sky-dusk:    #3A2E28;
     --garden-sky-night:   #12141C;
-    --garden-water-night: #7E97B3;
+    --garden-water-night: #9FB6D1;
     --garden-wilds:       #2A3340;
     --garden-basin:       #2B3A2B;
     --garden-basin-2:     #24311E;
@@ -252,6 +331,72 @@
     --garden-wildflower:  #A987B8;
     --garden-fern:        #3A5C3A;
     --garden-path:        #6B5F4C;
+
+    /* ---- Phase V, Stage W1: dark blocks derived from the Night script,
+       never from inverting day (§6.6). Night's own tokens are identical
+       to the light theme's — there is one moonlit valley, not a second,
+       darker one (P103: dark mode IS night, never an inversion). */
+    --garden-sky-dawn-zenith:        #3A3450;
+    --garden-sky-dawn-mid:           #4A3B34;
+    --garden-sky-dawn-horizon:       #4F4530;
+    --garden-sky-morning-zenith:     #24384A;
+    --garden-sky-morning-mid:        #26362E;
+    --garden-sky-morning-horizon:    #34362A;
+    --garden-sky-afternoon-zenith:   #223842;
+    --garden-sky-afternoon-mid:      #2A3226;
+    --garden-sky-afternoon-horizon:  #38351F;
+    --garden-sky-dusk-zenith:        #24263A;
+    --garden-sky-dusk-mid:           #3A2E44;
+    --garden-sky-dusk-horizon:       #4A3420;
+    --garden-sky-dusk-seam:          #33402E;
+    --garden-sky-night-zenith:       #0E1524;
+    --garden-sky-night-mid:          #17263D;
+    --garden-sky-night-horizon:      #253A55;
+
+    --garden-light-dawn:      #4A3A28;
+    --garden-shadow-dawn:     #3A3648;
+    --garden-light-morning:   #453C28;
+    --garden-shadow-morning:  #2C3A2E;
+    --garden-light-afternoon: #423622;
+    --garden-shadow-afternoon: #2E3A2F;
+    --garden-light-dusk:      #4A3822;
+    --garden-shadow-dusk:     #262436;
+    --garden-light-night:     #C7D6EA;
+    --garden-shadow-night:    #2C3A4E;
+
+    --garden-far-fields:   #2A3324;
+    --garden-mid-floor:    #263420;
+    --garden-near-floor:   #24361E;
+    --garden-hearth-plane: #203018;
+    --garden-ridge-far:     #2A3340;
+    --garden-ridge-farther: #333E4C;
+    --garden-wilds-mist:    #3A4452;
+
+    --garden-water-day-body:    #2E4B58;
+    --garden-water-day-glint:   #C8D6D0;
+    --garden-water-dusk-body:   #363C56;
+    --garden-water-dusk-glint:  #6B5738;
+    --garden-water-night-body:  #2E4763;
+    --garden-path-worn: #4A4028;
+    --garden-path-sun:  #4F3F24;
+    --garden-stone-lit:   #4A4032;
+    --garden-stone-shade: #3A342A;
+    --garden-window-light:  #4A3A20;
+    --garden-lantern-flame: #F2A64B;
+
+    --garden-meadow-base:  #2E3524;
+    --garden-terrace-lit:        #4A3C28;
+    --garden-terrace-shade:      #3A2E20;
+    --garden-terrace-terracotta: #4A3020;
+    --garden-orchard-grass: #2A3420;
+    --garden-thicket-bramble:    #263420;
+    --garden-thicket-thorn:      #3A2E24;
+    --garden-thicket-berry-deep: #3A2640;
+    --garden-thicket-berry-lit:  #4A3450;
+
+    --garden-weather-rain: #5A6C78;
+    --garden-weather-snow: #D8E0E8;
+    --garden-weather-fog:  #4A5460;
   }
 }
 
@@ -301,7 +446,7 @@
   --garden-sky-afternoon: #2A2E24;
   --garden-sky-dusk:    #3A2E28;
   --garden-sky-night:   #12141C;
-  --garden-water-night: #7E97B3;
+  --garden-water-night: #9FB6D1;
   --garden-wilds:       #2A3340;
   --garden-basin:       #2B3A2B;
   --garden-basin-2:     #24311E;
@@ -314,6 +459,72 @@
   --garden-wildflower:  #A987B8;
   --garden-fern:        #3A5C3A;
   --garden-path:        #6B5F4C;
+
+  /* ---- Phase V, Stage W1: dark blocks derived from the Night script,
+     never from inverting day (§6.6). Night's own tokens are identical
+     to the light theme's — there is one moonlit valley, not a second,
+     darker one (P103: dark mode IS night, never an inversion). */
+  --garden-sky-dawn-zenith:        #3A3450;
+  --garden-sky-dawn-mid:           #4A3B34;
+  --garden-sky-dawn-horizon:       #4F4530;
+  --garden-sky-morning-zenith:     #24384A;
+  --garden-sky-morning-mid:        #26362E;
+  --garden-sky-morning-horizon:    #34362A;
+  --garden-sky-afternoon-zenith:   #223842;
+  --garden-sky-afternoon-mid:      #2A3226;
+  --garden-sky-afternoon-horizon:  #38351F;
+  --garden-sky-dusk-zenith:        #24263A;
+  --garden-sky-dusk-mid:           #3A2E44;
+  --garden-sky-dusk-horizon:       #4A3420;
+  --garden-sky-dusk-seam:          #33402E;
+  --garden-sky-night-zenith:       #0E1524;
+  --garden-sky-night-mid:          #17263D;
+  --garden-sky-night-horizon:      #253A55;
+
+  --garden-light-dawn:      #4A3A28;
+  --garden-shadow-dawn:     #3A3648;
+  --garden-light-morning:   #453C28;
+  --garden-shadow-morning:  #2C3A2E;
+  --garden-light-afternoon: #423622;
+  --garden-shadow-afternoon: #2E3A2F;
+  --garden-light-dusk:      #4A3822;
+  --garden-shadow-dusk:     #262436;
+  --garden-light-night:     #C7D6EA;
+  --garden-shadow-night:    #2C3A4E;
+
+  --garden-far-fields:   #2A3324;
+  --garden-mid-floor:    #263420;
+  --garden-near-floor:   #24361E;
+  --garden-hearth-plane: #203018;
+  --garden-ridge-far:     #2A3340;
+  --garden-ridge-farther: #333E4C;
+  --garden-wilds-mist:    #3A4452;
+
+  --garden-water-day-body:    #2E4B58;
+  --garden-water-day-glint:   #C8D6D0;
+  --garden-water-dusk-body:   #363C56;
+  --garden-water-dusk-glint:  #6B5738;
+  --garden-water-night-body:  #2E4763;
+  --garden-path-worn: #4A4028;
+  --garden-path-sun:  #4F3F24;
+  --garden-stone-lit:   #4A4032;
+  --garden-stone-shade: #3A342A;
+  --garden-window-light:  #4A3A20;
+  --garden-lantern-flame: #F2A64B;
+
+  --garden-meadow-base:  #2E3524;
+  --garden-terrace-lit:        #4A3C28;
+  --garden-terrace-shade:      #3A2E20;
+  --garden-terrace-terracotta: #4A3020;
+  --garden-orchard-grass: #2A3420;
+  --garden-thicket-bramble:    #263420;
+  --garden-thicket-thorn:      #3A2E24;
+  --garden-thicket-berry-deep: #3A2640;
+  --garden-thicket-berry-lit:  #4A3450;
+
+  --garden-weather-rain: #5A6C78;
+  --garden-weather-snow: #D8E0E8;
+  --garden-weather-fog:  #4A5460;
 }
 
 /* ==================== READING SIZE ====================

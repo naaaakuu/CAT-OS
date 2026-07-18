@@ -42,6 +42,7 @@ const state = {
   ambienceGain: null,
   ambienceSrc: null,
   chirpTimer: null,
+  landmarkSong: false, // a bird nests and sings in a Landmark tree (§6.5)
 };
 
 /** Tracks the shell's own master volume 1:1 — 0 whenever the shell's Sounds
@@ -151,6 +152,15 @@ function grain(t, { peak = 0.02, a = 0.01, d = 0.08, freq = 2400, q = 1.2 }) {
 const ASSEMBLY_STEPS = [C4, D4, E4, G4, A4, C5]; // rising, so a 3-part word climbs
 
 const SOUNDS = {
+  /** Arrival (§10.5, Guide Part 2 0:00): the world fading up, as sound — a
+   *  low warm chord that swells gently and settles. The quietest event in
+   *  the set: an ambience, almost, not an announcement. Plays once when the
+   *  learner steps into the Garden from outside. */
+  arrival(t, m) {
+    tone(t,        { freq: C3, type: 'sine', peak: 0.026 * m, a: 0.5, hold: 0.3, d: 1.6 });
+    tone(t + 0.15, { freq: G3, type: 'sine', peak: 0.018 * m, a: 0.6, hold: 0.25, d: 1.5, pan: -0.2 });
+    tone(t + 0.3,  { freq: E4, type: 'sine', peak: 0.012 * m, a: 0.7, hold: 0.2, d: 1.4, pan: 0.2 });
+  },
   /** Commitment (§10.5 #1): the sound of *you chose*, never *you were right* —
    *  identical for a right and a wrong answer (Law 7). One warm note with a
    *  soft octave of body underneath, quiet enough to be a touch, not an event. */
@@ -177,6 +187,22 @@ const SOUNDS = {
     tone(t + 0.17, { freq: G4, type: 'sine', peak: 0.042 * m, a: 0.035, d: 0.85 });
     tone(t + 0.36, { freq: C5, type: 'sine', peak: 0.054 * m, a: 0.04,  d: 1.20 });  // …and resolves, ringing
   },
+  /** Regrowth (§10.5 #5): a revisit is a memory that faded and came back, so
+   *  its figure DESCENDS and then rises, resolving a step HIGHER than it began
+   *  — a quiet musical statement of the spacing effect that nobody consciously
+   *  notices. Same warm register, same sustained-fifth harmony bed as Growth
+   *  (it is still a peak, and still the only harmony in the product), but the
+   *  melodic shape is unmistakably its own: the canopy returning, fuller. */
+  regrowth(t, m) {
+    tone(t,        { freq: C3, type: 'sine', peak: 0.050 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
+    tone(t + 0.02, { freq: G3, type: 'sine', peak: 0.030 * m, a: 0.09, hold: 0.28, d: 1.35, pan: -0.14 }); // harmony (the held fifth)
+    tone(t + 0.02, { freq: C4, type: 'sine', peak: 0.026 * m, a: 0.09, hold: 0.28, d: 1.35, pan: 0.14 });
+    // The figure dips — the fade — then climbs back past where it started.
+    tone(t,        { freq: G4, type: 'sine', peak: 0.040 * m, a: 0.035, d: 0.62 });  // starts up here…
+    tone(t + 0.15, { freq: E4, type: 'sine', peak: 0.034 * m, a: 0.035, d: 0.60 });  // …dips (the faded gap)…
+    tone(t + 0.32, { freq: A4, type: 'sine', peak: 0.044 * m, a: 0.035, d: 0.80 });  // …and rises…
+    tone(t + 0.52, { freq: C5, type: 'sine', peak: 0.052 * m, a: 0.04,  d: 1.20 });  // …resolving HIGHER, ringing
+  },
   /** A tapped word-part (§10.5 #3, assembly): a soft pitched tick that RISES
    *  with each part, so assembling a three-part word is a small climbing figure.
    *  A hair of woody grain gives it body without a UI-click edge. */
@@ -193,11 +219,13 @@ const SOUNDS = {
   },
 };
 
-/** Soft haptics, layered under the sounds (§14.5). Exactly two moments carry
- *  a buzz: commitment (a light tick, the same for right and wrong) and growth
- *  (a warmer, longer thump — the physical half of the peak, so it survives
- *  with sound off). Gated by the shell's own haptics preference. */
-const HAPTICS = { commit: 12, growth: [16, 22, 34] };
+/** Soft haptics, layered under the sounds (§14.5). Exactly two SENSATIONS
+ *  exist (Principle 111): a light commitment tick (the same for right and
+ *  wrong), and the warmer, longer growth thump — the physical half of the
+ *  peak, so it survives with sound off. A revisit's Regrowth is still that
+ *  one peak, so it shares the growth thump; it is not a third haptic.
+ *  Gated by the shell's own haptics preference. */
+const HAPTICS = { commit: 12, growth: [16, 22, 34], regrowth: [16, 22, 34] };
 
 function gardenVibrate(name) {
   try {
@@ -234,6 +262,21 @@ export function gardenCue(name, opts = {}) {
 /* nothing repeats mechanically over a long sitting.                    */
 /* ------------------------------------------------------------------ */
 
+/** The nesting bird's song (§4.8, §6.5): "the most earned sound in the
+ *  product." Warmer, fuller, and lower than the sparse ambient chirp — a
+ *  short phrase that dips and lifts, the same shape as Regrowth, so the
+ *  Landmark's bird and the Landmark's tree speak with one voice. By day
+ *  only; a Landmark at night belongs to the owl and the fireflies. */
+function landmarkPhrase(t, m) {
+  const song = [G4, E4, A4, C5]; // dip, then rise past the start — the earned motif
+  for (let i = 0; i < song.length; i += 1) {
+    tone(t + i * (0.12 + Math.random() * 0.04), {
+      freq: song[i] * 2, type: 'sine', peak: (0.013 + Math.random() * 0.005) * m,
+      a: 0.006, d: 0.10 + Math.random() * 0.05, pan: Math.random() * 0.8 - 0.4,
+    });
+  }
+}
+
 function scheduleChirp() {
   if (!state.ambienceOn) return;
   const delay = 18000 + Math.random() * 24000; // rare: every 18 to 42 seconds
@@ -241,6 +284,15 @@ function scheduleChirp() {
     if (!state.ambienceOn || !state.ctx || document.hidden || gardenGain() <= 0) { scheduleChirp(); return; }
     const t = state.ctx.currentTime;
     const m = gardenGain();
+    const hour = new Date().getHours();
+    const isNight = hour >= 20 || hour < 5; // matches atmosphere.js's night window
+    // A Landmark's nesting bird sings sometimes, by day — a fuller phrase than
+    // the valley's generic distant chirp, and audible from the Overlook.
+    if (state.landmarkSong && !isNight && Math.random() < 0.4) {
+      landmarkPhrase(t, m);
+      scheduleChirp();
+      return;
+    }
     const notes = [A5, C5 * 2, D5 * 2, E5 * 2];
     const phrase = Math.random() < 0.5 ? 2 : 3;
     for (let i = 0; i < phrase; i += 1) {
@@ -265,9 +317,13 @@ function scheduleChirp() {
  *         running water, a quiet one a little quieter, and it never goes
  *         fully silent (the Stream's own hard floor, §4.2). Defaults to 1
  *         (full presence) so every existing caller that does not know
- *         about the Stream keeps its exact prior behaviour. */
-export function startGardenAmbience(streamLevel = 1) {
+ *         about the Stream keeps its exact prior behaviour.
+ *  @param {{landmark?: boolean}} [opts] when the valley holds at least one
+ *         Landmark tree (§6.5), its nesting bird may sing by day — a fuller
+ *         phrase than the generic chirp, audible from the Overlook. */
+export function startGardenAmbience(streamLevel = 1, opts = {}) {
   try {
+    state.landmarkSong = !!opts.landmark;
     if (state.ambienceOn || gardenGain() <= 0) return;
     if (!ensureGraph()) return;
     if (state.ctx.state === 'suspended') state.ctx.resume();
@@ -284,8 +340,11 @@ export function startGardenAmbience(streamLevel = 1) {
     f.Q.value = 0.4;
     const g = c.createGain();
     const level = Math.max(0, Math.min(1, streamLevel));
+    // Calibrated up a step in Phase 4.9 (P6): at the Bible's own 40–50%
+    // master volume the old bed sat below audibility on a phone speaker.
+    // Still the quietest layer in the mix — a presence, never a soundtrack.
     g.gain.setValueAtTime(0, c.currentTime);
-    g.gain.setTargetAtTime(0.028 * gardenGain() * (0.5 + 0.5 * level), c.currentTime, 1.2);
+    g.gain.setTargetAtTime(0.036 * gardenGain() * (0.5 + 0.5 * level), c.currentTime, 1.2);
     src.connect(f).connect(g).connect(state.master);
     src.start();
 

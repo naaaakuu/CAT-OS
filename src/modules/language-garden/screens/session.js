@@ -9,7 +9,7 @@
  */
 
 import { loadLGItem, listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
-import { GardenSession, computePlantState } from '../../../core/engine/garden-session.js';
+import { GardenSession, computePlantState, strugglingMembers } from '../../../core/engine/garden-session.js';
 import { listGardenSessions, sessionsForFamily, saveGardenSession, hasSeenGardenGrowth, markGardenGrowthSeen } from '../logic/store.js';
 import { deriveValleyScene, nextReachPoolIndex, memberCheckOffset } from '../logic/scene.js';
 import { biomeForFamily } from '../logic/biomes.js';
@@ -43,11 +43,15 @@ function markWord(sentence, word) {
   const stem = word.toLowerCase().slice(0, Math.max(4, word.length - 2));
   const at = sentence.toLowerCase().indexOf(stem);
   if (at === -1) return escapeHTML(sentence);
-  return `${escapeHTML(sentence.slice(0, at))}<mark>${escapeHTML(sentence.slice(at, at + stem.length))}</mark>${escapeHTML(sentence.slice(at + stem.length))}`;
+  // Highlight the WHOLE word as it appears in the prose (the stem only
+  // finds it): a half-marked word reads as a typo, not an invitation.
+  let end = at + stem.length;
+  while (end < sentence.length && /[a-z]/i.test(sentence[end])) end += 1;
+  return `${escapeHTML(sentence.slice(0, at))}<mark>${escapeHTML(sentence.slice(at, end))}</mark>${escapeHTML(sentence.slice(end))}`;
 }
 
 export async function renderGardenSession(outlet, context, params) {
-  let family, siblings, history;
+  let family, siblings, history, isFirstEver;
   try {
     family = await loadLGItem(params.id);
     const registry = await listLGItems();
@@ -55,6 +59,9 @@ export async function renderGardenSession(outlet, context, params) {
     siblings = [...others.values()].map((f) => ({ id: f.meta.id, label: f.root.label, core_meaning: f.root.core_meaning }));
     const all = await listGardenSessions(context.storage);
     history = sessionsForFamily(all, params.id);
+    // The very first session of the learner's life in the Garden — the one
+    // the Overlook launches directly (§3.1). It alone opens with an arrival.
+    isFirstEver = all.length === 0;
   } catch (err) {
     outlet.innerHTML = `<section class="screen"><h1>This plant will not open</h1>
       <div class="card"><p>${escapeHTML(err.message)}</p>
@@ -77,7 +84,9 @@ export async function renderGardenSession(outlet, context, params) {
     <section class="screen lgx" data-beat="">
       <button class="lgx__close" id="lgx-close" aria-label="Leave the garden">×</button>
       <div class="lgx__plant" aria-hidden="true">
-        <cat-plant stage="${type === 'grow' ? 'seed' : priorState.stage}" due="none"></cat-plant>
+        <cat-plant stage="${type === 'grow' ? 'seed' : priorState.stage}" due="none"
+          seed="${escapeHTML(family.meta.id)}" vigor="${type === 'grow' ? 0 : priorState.vigor}"
+          ${type !== 'grow' && priorState.landmark ? `landmark name="${escapeHTML(family.root.label)}"` : ''}></cat-plant>
       </div>
       <div class="lgx__stage" id="lgx-stage"></div>
     </section>
@@ -90,6 +99,58 @@ export async function renderGardenSession(outlet, context, params) {
   // grow_growth/revisit_growth twice, the Memory Ledger record it writes
   // must never be written twice for one real session.
   let sessionEnded = false;
+
+  /** Keyboard/screen-reader continuity (Phase 4.9 P5): each beat replaces
+   *  the stage wholesale, which would drop focus to <body>. Focus lands on
+   *  the fresh beat instead — programmatic, so no ring appears for a
+   *  pointer tap, while a keyboard learner is carried from beat to beat. */
+  function focusBeat() {
+    const beat = stage.querySelector('.lgx-beat');
+    if (!beat) return;
+    beat.setAttribute('tabindex', '-1');
+    beat.focus({ preventScroll: true });
+  }
+
+  /** The arrival (Visual Guide Part 2, 0:00): before the first question of
+   *  the learner's life here, the Rootwood fades up from a warm dark —
+   *  deep green, a few shafts of light — and only then does the sentence
+   *  come forward. ~2 seconds, once, ever. No text, no tip, no logo
+   *  (§3.1: no splash screen — this is the world, not a brand). A tap
+   *  moves on early; reduced motion goes straight to the sentence. */
+  function arrivalPrelude(onDone) {
+    if (prefersReducedMotion()) { onDone(); return; }
+    const veil = document.createElement('div');
+    veil.className = 'lgx-arrival';
+    veil.setAttribute('aria-hidden', 'true');
+    veil.innerHTML = `
+      <svg class="lgx-arrival__wood" viewBox="0 0 360 640" preserveAspectRatio="xMidYMid slice">
+        <rect x="0" y="0" width="360" height="640" fill="#26331F"/>
+        <!-- The old canopy overhead, barely told apart from the dark. -->
+        <ellipse cx="60" cy="30" rx="180" ry="110" fill="#1D2A17"/>
+        <ellipse cx="300" cy="10" rx="170" ry="100" fill="#1A2615"/>
+        <ellipse cx="180" cy="-20" rx="200" ry="90" fill="#182313"/>
+        <!-- Trunks of the wood, standing quietly. -->
+        <path d="M52,640 L58,110 L70,110 L80,640 Z" fill="#20291A"/>
+        <path d="M268,640 L272,70 L284,70 L292,640 Z" fill="#1D2617"/>
+        <path d="M150,640 L154,180 L162,180 L168,640 Z" fill="#232D1C"/>
+        <!-- Light through the leaves, from one high place (Guide 11.4). -->
+        <path d="M96,0 L150,0 L268,640 L180,640 Z" fill="#F7EFD8" opacity="0.06"/>
+        <path d="M180,0 L214,0 L330,640 L272,640 Z" fill="#F7EFD8" opacity="0.045"/>
+        <path d="M20,0 L44,0 L120,640 L82,640 Z" fill="#F7EFD8" opacity="0.05"/>
+        <!-- The ground the first seed will hold. -->
+        <path d="M0,560 Q120,536 220,552 Q300,562 360,552 L360,640 L0,640 Z" fill="#2B3820"/>
+      </svg>`;
+    outlet.querySelector('.lgx').appendChild(veil);
+    let left = false;
+    const leaveWood = () => {
+      if (left) return;
+      left = true;
+      veil.classList.add('is-leaving');
+      setTimeout(() => { veil.remove(); onDone(); }, 620);
+    };
+    veil.addEventListener('click', leaveWood, { once: true });
+    setTimeout(leaveWood, 2400);
+  }
 
   /* ---------------- shared: a quiet quick-pick beat ----------------
      `readFirst` splits Encounter from Attempt (Bible §5.1, §3.1): when a
@@ -108,6 +169,7 @@ export async function renderGardenSession(outlet, context, params) {
         </div>
       </div>
     `;
+    focusBeat();
     const ask = stage.querySelector('#lgx-ask');
     const optSlot = stage.querySelector('#lgx-options');
     optSlot.innerHTML = options.map((o, i) => `<cat-option letter="${LETTERS[i]}" text="${escapeHTML(o.text)}"></cat-option>`).join('');
@@ -163,6 +225,7 @@ export async function renderGardenSession(outlet, context, params) {
         <div id="lgx-joined"></div>
       </div>
     `;
+    focusBeat();
     const revealed = new Set();
     const partsEl = stage.querySelectorAll('.lgx-part');
     for (const btn of partsEl) {
@@ -218,6 +281,7 @@ export async function renderGardenSession(outlet, context, params) {
         <button class="btn btn--primary btn--block" id="lgx-next">${GARDEN_LINES.continueLabel}</button>
       </div>
     `;
+    focusBeat();
     playGardenSound('key');
     onceClick(stage.querySelector('#lgx-next'), () => grow_spread(0));
   }
@@ -246,10 +310,21 @@ export async function renderGardenSession(outlet, context, params) {
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
     const postState = computePlantState([...history, record], Date.parse(record.finished_at));
     const line = GROWTH_LINES.firstGrow(family.root.label, session.id);
-    growthBeat(line, postState);
+    growthBeat(line, postState, 'growth');
   }
 
   /* ---------------- REVISIT ---------------- */
+
+  // Silent downward adaptation (Bible §17.5, Principle 27, Roadmap 4.1): when
+  // a taught member has been missed three times over, the next revisit quietly
+  // re-teaches THAT member smaller — the spread narrows to it alone, its parts
+  // are broken down again, and it is met in its most familiar (first) sentence
+  // rather than a rotated fresh one. Nothing is announced; there is no "let's
+  // try an easier one" line, because that line is a small humiliation and it is
+  // why people quit. The Garden adapts down, always, and never says so.
+  const struggling = strugglingMembers(history);
+  const narrowTo = struggling.length ? struggling[0] : null;
+
   function revisit_key() {
     session.markBeatShown();
     const options = session.keyRetrievalOptions();
@@ -259,9 +334,37 @@ export async function renderGardenSession(outlet, context, params) {
       options,
       onAnswer: (idx) => {
         session.answerKeyRetrieval(idx);
+        if (narrowTo !== null) { revisit_reteach(narrowTo); return; }
         const offset = memberCheckOffset(history);
         const [a, b] = session.memberCheckIndices(offset);
         revisit_member(a, b);
+      },
+    });
+  }
+
+  /** The downward-adapted path: re-teach one struggling member by rebuilding
+   *  it from its parts (the Spread move, meaning shown — this is the sanctioned
+   *  §17.5 exception to "a revisit never re-shows the lesson"), then check just
+   *  that one member in its first, most familiar sentence. Same chrome, same
+   *  voice — indistinguishable from an ordinary revisit except that it is
+   *  gentler. */
+  function revisit_reteach(idx) {
+    const member = taught[idx];
+    renderPartsBuild({
+      eyebrow: family.root.label,
+      member,
+      revealMeaning: true,
+      onJoined: () => {
+        session.markBeatShown();
+        const options = session.memberCheckOptions(idx);
+        renderChoice({
+          eyebrow: family.root.label,
+          sentence: markWord(member.context_sentences[0], member.word),
+          prompt: 'Which meaning fits here?',
+          options,
+          readFirst: true,
+          onAnswer: (choiceIdx) => { session.answerMemberCheck(idx, choiceIdx); revisit_reach(); },
+        });
       },
     });
   }
@@ -299,12 +402,19 @@ export async function renderGardenSession(outlet, context, params) {
     const record = session.finish();
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
     const postState = computePlantState([...history, record], Date.parse(record.finished_at));
-    const line = postState.stage === 'ancient' && priorState.stage !== 'ancient'
-      ? GROWTH_LINES.ancient(family.root.label, session.id)
-      : record.clean
-        ? GROWTH_LINES.revisitClean(family.root.label, session.id)
-        : GROWTH_LINES.revisitRocky(family.root.label, session.id);
-    growthBeat(line, postState);
+    // The line follows what actually happened, in order of rarity: a tree the
+    // world just made a Landmark, a tree that just joined the old growth, then
+    // the ordinary "it holds" / "still growing" (never "how well" — §6.7).
+    const line = postState.landmark && !priorState.landmark
+      ? GROWTH_LINES.landmark(family.root.label, session.id)
+      : postState.stage === 'ancient' && priorState.stage !== 'ancient'
+        ? GROWTH_LINES.ancient(family.root.label, session.id)
+        : record.clean
+          ? GROWTH_LINES.revisitClean(family.root.label, session.id)
+          : GROWTH_LINES.revisitRocky(family.root.label, session.id);
+    // A revisit is a Regrowth — a memory that faded and came back — so it gets
+    // the distinct descending-then-rising chime (§10.5 #5), not the first-grow one.
+    growthBeat(line, postState, 'regrowth');
   }
 
   /* ---------------- shared: Reach (cannot be failed) ---------------- */
@@ -380,7 +490,7 @@ export async function renderGardenSession(outlet, context, params) {
    *  grove screen uses, so the art shown here can never promise a
    *  stage the grove itself won't also show the moment the learner
    *  returns (Bible: growth is earned, honest, never spent twice). */
-  function growthBeat(line, postState) {
+  function growthBeat(line, postState, cue = 'growth') {
     // The small "current plant" header would now duplicate — and dilute — the
     // one peak of the whole session (Bible §6: "one peak per session"), so it
     // steps aside the moment its own bigger portrait appears.
@@ -391,12 +501,15 @@ export async function renderGardenSession(outlet, context, params) {
     stage.innerHTML = `
       <div class="lgx-beat lgx-beat--growth">
         <div class="lgx-growth-art" id="lgx-grow">
-          <cat-plant class="lgx-grow-plant" stage="${postState.stage}" due="none"></cat-plant>
+          <cat-plant class="lgx-grow-plant" stage="${postState.stage}" due="none"
+            seed="${escapeHTML(family.meta.id)}" vigor="${postState.vigor}"
+            ${postState.landmark ? `landmark name="${escapeHTML(family.root.label)}"` : ''}></cat-plant>
         </div>
         <p class="lgx-growth-line is-veiled" id="lgx-line">${escapeHTML(line)}</p>
         <button class="btn btn--primary btn--block is-veiled" id="lgx-back">${GARDEN_LINES.backToGarden}</button>
       </div>
     `;
+    focusBeat();
     const art = stage.querySelector('#lgx-grow');
     const plant = stage.querySelector('.lgx-grow-plant');
     const backEl = stage.querySelector('#lgx-back');
@@ -420,7 +533,7 @@ export async function renderGardenSession(outlet, context, params) {
       // bigger, with leaves it did not have — the CHANGE is the reward — with
       // the chime, the haptic, and the line. No wipe, no long tween.
       plant.classList.add('is-grown-still');
-      gardenCue('growth');
+      gardenCue(cue);
       restTimer = setTimeout(reveal, 460);
     } else {
       // The four movements (§11.4): anticipation → extension → settle → rest.
@@ -429,7 +542,7 @@ export async function renderGardenSession(outlet, context, params) {
       // releases into the extension; then everything is still, and the line
       // fades in.
       plant.classList.add('is-growing');
-      setTimeout(() => gardenCue('growth'), 150); // the thump + chime as growth begins
+      setTimeout(() => gardenCue(cue), 150); // the thump + chime as growth begins
       restTimer = setTimeout(reveal, 1650);        // after the ~1.6s animation rests
     }
 
@@ -460,7 +573,8 @@ export async function renderGardenSession(outlet, context, params) {
     backEl.addEventListener('click', () => { location.hash = biomeHome; });
   }
 
-  if (type === 'grow') grow_attempt();
+  if (type === 'grow' && isFirstEver) arrivalPrelude(grow_attempt);
+  else if (type === 'grow') grow_attempt();
   else revisit_key();
 }
 

@@ -45,7 +45,7 @@ const DENSITY_BY_GROUND_TIER = Object.freeze({
 
 /** The pool for this time of day, widened only by what is actually true
  *  in this biome right now — never by the clock alone. */
-function poolFor(time, { bloomingCount = 0, ancientCount = 0 }) {
+function poolFor(time, { bloomingCount = 0, ancientCount = 0, landmarkCount = 0 }) {
   const pool = [...BASE_EVENTS_BY_TIME[time]];
   if (bloomingCount > 0) {
     if (time === 'dawn' || time === 'morning' || time === 'afternoon') pool.push('butterfly');
@@ -55,14 +55,20 @@ function poolFor(time, { bloomingCount = 0, ancientCount = 0 }) {
     if (time === 'night') pool.push('firefly', 'firefly'); // a nested firefly-glow bias
     if (time === 'dusk') pool.push('firefly');             // "the first fireflies" (§4.5)
   }
+  // Fireflies GATHER at a Landmark (§6.5): where the oldest trees the world
+  // has singled out are standing, the dusk-and-night glow is denser still —
+  // a mirror of real durable memory, never a reward for a tap (Law 8).
+  if (landmarkCount > 0 && (time === 'night' || time === 'dusk')) {
+    pool.push('firefly', 'firefly');
+  }
   return pool;
 }
 
 /**
- * @param {{bloomingCount?: number, ancientCount?: number, groundTier?: string}} state
+ * @param {{bloomingCount?: number, ancientCount?: number, landmarkCount?: number, groundTier?: string}} state
  *        true-state counts this biome has right now (Mature+Ancient
- *        plants, Ancient-only plants) and the valley's lifetime effort
- *        tier — all derived, never stored, never guessed.
+ *        plants, Ancient-only plants, Landmark trees) and the valley's
+ *        lifetime effort tier — all derived, never stored, never guessed.
  * @param {Date} date
  * @param {() => number} random  injectable for deterministic tests
  * @returns {string|null} one of 'bird'|'butterfly'|'leaf-stir'|'petal'|'firefly', or null (no visitor this time)
@@ -74,13 +80,12 @@ export function pickAmbientEvent(state = {}, date = new Date(), random = Math.ra
   return pool[Math.floor(random() * pool.length)];
 }
 
-/** How long a tree must have HELD Ancient, in real elapsed time, before a
- *  nest quietly appears (Bible §6.5: a bird nests in an Ancient tree once
- *  it "has existed for some time"). Fourteen days of standing Ancient. */
-export const NEST_ELIGIBLE_MS = 14 * 24 * 60 * 60 * 1000;
-
-/** @param {ReturnType<import('../../../core/engine/garden-session.js').computePlantState>} state */
-export function hasNest(state, now = Date.now()) {
-  if (state.stage !== 'ancient' || !state.ancientAt) return false;
-  return now - new Date(state.ancientAt).getTime() >= NEST_ELIGIBLE_MS;
+/** A bird nests in a tree the world has made a Landmark (Bible §6.5: "a bird
+ *  nests in it, and sings from it"). The Landmark state is itself already
+ *  earned only by surviving several long-interval retrievals with no lapse
+ *  (garden-session.js), so the nest is an honest consequence of durable
+ *  memory, not a timer — it appears with the Landmark and needs no separate
+ *  clock of its own. */
+export function hasNest(state) {
+  return state.landmark === true;
 }

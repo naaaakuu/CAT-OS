@@ -88,7 +88,13 @@ export function markGardenGrowthSeen(storage) {
 
 export async function gardenAmbienceEnabled(storage) {
   const record = await storage.get(STORES.SETTINGS, 'lg:ambience');
-  return record?.value === true; // default OFF, matching the app's sound-off default
+  // Default ON (Phase 4.9 P6): the world's own quiet sound — the breeze
+  // bed whose gain is the Stream (§10.4) — is part of the place, not a
+  // soundtrack (§10.2 silence-is-default governs EVENT sound, not the
+  // world's ambience). It still plays only when the shell's master
+  // Sounds preference is on, so a muted app stays a silent garden, and
+  // the Settings toggle turns it off in one tap.
+  return record?.value !== false;
 }
 
 export function setGardenAmbience(storage, enabled) {

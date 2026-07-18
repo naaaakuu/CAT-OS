@@ -32,11 +32,10 @@ export async function renderBiome(outlet, context, params) {
     return;
   }
 
-  outlet.innerHTML = `
-    <section class="screen biome-loading">
-      <div class="skeleton" style="height: 62vh; border-radius: var(--radius-xl)"></div>
-    </section>
-  `;
+  // No skeleton, ever (Visual Guide 24.1): the data is local and fast, and
+  // the scene's own descent animation is the arrival. Until it lands the
+  // learner sees calm paper, never a loading state.
+  outlet.innerHTML = '';
 
   let families, sessions, seeds;
   try {
@@ -63,7 +62,8 @@ function renderSceneHTML(outlet, biome, scene, ground) {
   const sessionSeed = `biome:${biome.slug}:${new Date().toDateString()}`;
   const bloomingCount = plants.filter((p) => p.state.stage === 'mature' || p.state.stage === 'ancient').length;
   const ancientCount = plants.filter((p) => p.state.stage === 'ancient').length;
-  const event = pickAmbientEvent({ bloomingCount, ancientCount, groundTier: ground.tier });
+  const landmarkCount = plants.filter((p) => p.state.landmark).length;
+  const event = pickAmbientEvent({ bloomingCount, ancientCount, landmarkCount, groundTier: ground.tier });
 
   const foreground = plants.filter((p) => p.state.stage !== 'ancient');
   const horizon = plants.filter((p) => p.state.stage === 'ancient');
@@ -76,10 +76,15 @@ function renderSceneHTML(outlet, biome, scene, ground) {
 
       <div class="grove-scene" data-time="${atmo.time}" data-season="${atmo.season}" data-weather="${atmo.weather}">
         <button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>
+        <!-- The earth the grove stands on: a soft rise of ground so the
+             trees stand IN a place, not on a colour (Guide 7.2's depth
+             planes, at biome scale). At night it holds the moonlight. -->
+        <div class="grove-earth" aria-hidden="true"></div>
+        ${atmo.time === 'night' ? '<div class="grove-night-sky" aria-hidden="true"></div>' : ''}
         ${weatherLayerHTML(atmo.weather)}
         <div class="grove-ground grove-ground--${ground.tier}" aria-hidden="true">${groundMarkup(ground.tier)}</div>
         ${horizon.length ? `<div class="grove-horizon" aria-hidden="true">
-          ${horizon.map(() => `<cat-plant size="horizon" stage="ancient"></cat-plant>`).join('')}
+          ${horizon.map((p) => `<cat-plant size="horizon" stage="ancient" ${p.state.landmark ? 'landmark' : ''}></cat-plant>`).join('')}
         </div>` : ''}
         <div class="grove-ambient" aria-hidden="true">${event ? ambientMarkup(event) : ''}</div>
         <div class="grove-grid">
@@ -120,6 +125,10 @@ function wirePlant(el, plant) {
   el.addEventListener('pointerup', end);
   el.addEventListener('pointerleave', end);
   el.addEventListener('pointercancel', end);
+  // On a touch device a long press otherwise summons the browser's own
+  // context menu / text-selection callout over the peek (Phase 4.9 P5);
+  // the hold owns this gesture, so the platform menu stays out of it.
+  el.addEventListener('contextmenu', (e) => e.preventDefault());
   el.addEventListener('click', (e) => {
     if (peeked) { e.preventDefault(); e.stopImmediatePropagation(); peeked = false; return; }
     location.hash = `#/garden/plant/${plant.family.meta.id}`;
@@ -172,7 +181,8 @@ function plantSlotHTML(p, askingId, openSeedId) {
     <button class="grove-plant ${isAsking ? 'grove-plant--asking' : ''} ${isOpenSeed ? 'grove-plant--invite' : ''}"
             data-plant-id="${id}" aria-label="${escapeHTML(aria)}">
       <span class="grove-plant__art">
-        <cat-plant stage="${p.state.stage}" due="${p.state.due}" ${nest ? 'nest' : ''}></cat-plant>
+        <cat-plant stage="${p.state.stage}" due="${p.state.due}" ${nest ? 'nest' : ''}
+          seed="${escapeHTML(id)}" vigor="${p.state.vigor}"></cat-plant>
       </span>
       <span class="grove-plant__label">${escapeHTML(p.family.root.label)}</span>
     </button>
