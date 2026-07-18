@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 21;
+const CACHE_VERSION = 22;
 const CONTENT_VERSION = 12;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;

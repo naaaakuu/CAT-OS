@@ -2443,20 +2443,38 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .valley[data-time="night"] .vl-wilds-mist { opacity: 0.18; }
 
 /* The land — aerial ramp (§6.3, §6.5): farther is cooler, paler, softer;
-   the terrace's stepped lips are its lit face, catching the sun (§3.2). */
+   the terrace's stepped lips are its lit face, catching the sun (§3.2).
+   THE WORLD Part 6.3 pins five rows, far to near; W1 painted the first
+   and third (far-fields, near-floor) onto the geometry that existed
+   then. W2 completes the ramp with the middle band and the Hearth's own
+   plane (drawn as ground in overlook.js's hearth(), Appendix C.3). */
 .vl-ridge      { fill: var(--garden-ridge-farther); opacity: 0.9; }
 .vl-wilds      { fill: var(--garden-ridge-far); }
 .vl-wilds-mist { fill: var(--garden-wilds-mist); opacity: 0.4; }
-.vl-basin      { fill: var(--garden-far-fields); }
-.vl-basin-2    { fill: var(--garden-near-floor); }
-.vl-grove      { fill: var(--garden-grove); }
-.vl-grove-shade { fill: var(--garden-mature); opacity: 0.2; }
+.vl-floor-far    { fill: var(--garden-far-fields); }
+.vl-floor-mid    { fill: var(--garden-mid-floor); }
+.vl-floor-near   { fill: var(--garden-near-floor); }
+.vl-hearth-ground { fill: var(--garden-hearth-plane); }
 .vl-meadow     { fill: var(--garden-meadow-base); }
+.vl-meadow-drift { fill: var(--garden-wildflower); opacity: 0.7; }
 .vl-terrace    { fill: var(--garden-terrace-shade); }
 .vl-terrace-step { fill: none; stroke: var(--garden-terrace-lit); stroke-width: 2; opacity: 0.75; }
+.vl-terracotta-fleck { fill: var(--garden-terrace-terracotta); opacity: 0.8; }
 .vl-thicket    { fill: var(--garden-thicket-bramble); }
 .vl-thicket-curl { fill: none; stroke: var(--garden-thicket-thorn); stroke-width: 1.6; stroke-linecap: round; opacity: 0.55; }
+.vl-berry-fleck--deep { fill: var(--garden-thicket-berry-deep); }
+.vl-berry-fleck--lit  { fill: var(--garden-thicket-berry-lit); }
 .vl-orchard    { fill: var(--garden-orchard-grass); }
+.vl-orchard-canopy { fill: var(--garden-orchard-canopy); }
+
+/* Founding rocks (Appendix C.4.4–5) and the reed cluster (C.4.7): fixed
+   pigment, the Gate's own precedent — a placed object gets a steady
+   colour, and only its shadow moves with the sun (Visual Guide 9.2). */
+.vl-rock-shade { fill: var(--garden-stone-shade); }
+.vl-rock-lit   { fill: var(--garden-stone-lit); }
+.vl-rock-moss  { fill: var(--garden-moss); opacity: 0.7; }
+.vl-reed { fill: none; stroke: var(--garden-pond-reed); stroke-width: 1.6; stroke-linecap: round; }
+.vl-fence-post { stroke: var(--garden-cottage-timber); stroke-width: 2; stroke-linecap: round; opacity: 0.8; }
 
 /* Night is "a deep cool field" (§5.4), not a mild shade — these are each
    plane's own pigment run through logic/light.js's shadeFace() twice at
@@ -2464,13 +2482,38 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    itself needs the stronger fall night gives the whole valley). Hue
    identity holds per plane; only depth changes — aerial perspective and
    "one hand" (Guide 10.2, 23) survive intact. */
-.valley[data-time="night"] .vl-basin      { fill: #75846F; }
-.valley[data-time="night"] .vl-basin-2    { fill: #526A4C; }
-.valley[data-time="night"] .vl-grove      { fill: #617861; }
+.valley[data-time="night"] .vl-floor-far    { fill: #75846F; }
+.valley[data-time="night"] .vl-floor-mid    { fill: #64785E; }
+.valley[data-time="night"] .vl-floor-near   { fill: #526A4C; }
+.valley[data-time="night"] .vl-hearth-ground { fill: #42543F; }
 .valley[data-time="night"] .vl-meadow     { fill: #7A846C; }
 .valley[data-time="night"] .vl-terrace    { fill: #554A3F; }
 .valley[data-time="night"] .vl-orchard    { fill: #6D7C5D; }
 .valley[data-time="night"] .vl-thicket    { fill: #252F27; }
+
+/* Dawn and dusk re-tone the ground too (§5.2: "when the hour changes, the
+   whole scene's lighting... change together"), so the postcard test holds
+   at every named hour (THE WORLD Part 13.2) — the glorious dawn/dusk sky
+   no longer sits over an unmoved daytime floor. Each value is the plane's
+   own day pigment run once through logic/light.js's litFace() at that
+   hour (25% toward the hour's light colour, +6L), the same formula
+   already used on every standing object. */
+.valley[data-time="dawn"] .vl-floor-far     { fill: #EAEACF; }
+.valley[data-time="dawn"] .vl-floor-mid     { fill: #D7DFB7; }
+.valley[data-time="dawn"] .vl-floor-near    { fill: #C1D1A1; }
+.valley[data-time="dawn"] .vl-hearth-ground { fill: #ADBC8B; }
+.valley[data-time="dawn"] .vl-meadow        { fill: #ECEACD; }
+.valley[data-time="dawn"] .vl-terrace       { fill: #CBAF8C; }
+.valley[data-time="dawn"] .vl-orchard       { fill: #DEE2B8; }
+.valley[data-time="dawn"] .vl-thicket       { fill: #8D986A; }
+.valley[data-time="dusk"] .vl-floor-far     { fill: #E8E6C9; }
+.valley[data-time="dusk"] .vl-floor-mid     { fill: #D5DAB1; }
+.valley[data-time="dusk"] .vl-floor-near    { fill: #C0CC9A; }
+.valley[data-time="dusk"] .vl-hearth-ground { fill: #ABB885; }
+.valley[data-time="dusk"] .vl-meadow        { fill: #EAE6C7; }
+.valley[data-time="dusk"] .vl-terrace       { fill: #CAAA85; }
+.valley[data-time="dusk"] .vl-orchard       { fill: #DDDDB1; }
+.valley[data-time="dusk"] .vl-thicket       { fill: #8F9463; }
 
 /* The stream is a soft ribbon (Guide 8.1); its bank is the neighbouring
    land's shade face, never an outline (§6.4) — here, the near floor's. */
@@ -2482,6 +2525,12 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .valley[data-time="dusk"] .vl-pond { fill: var(--garden-water-dusk-body); }
 .valley[data-time="dusk"] .vl-pond-sky { fill: var(--garden-sky-dusk-horizon); opacity: 0.4; }
 .valley[data-time="night"] .vl-pond-sky { fill: var(--garden-sky-night-horizon); opacity: 0.4; }
+/* The Pond's own stillness is the point (Guide 8.2) — unlike the stream,
+   its one highlight never drifts. By day it is a quiet trace of sky; at
+   night it is the silver the whole valley's water carries (§6.4). */
+.vl-pond-glint { fill: none; stroke: var(--garden-water-day-glint); stroke-width: 1.4; stroke-linecap: round; opacity: 0.4; }
+.valley[data-time="dusk"]  .vl-pond-glint { stroke: var(--garden-water-dusk-glint); }
+.valley[data-time="night"] .vl-pond-glint { stroke: var(--garden-water-night); opacity: 0.7; }
 
 /* Drifting water highlights: slow, linear-but-modulated, never synced
    (Guide 8.1 — the one place linear motion is allowed). */
@@ -2552,16 +2601,20 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .vl-path--settling { stroke: var(--garden-path-sun); stroke-width: 3; stroke-dasharray: 7 6; opacity: 0.45; }
 .vl-path--mossy    { stroke: var(--garden-moss); stroke-width: 2.5; stroke-dasharray: 2 8; opacity: 0.4; }
 
-/* The Rootwood, from a distance: simple canopies, one lit if it is asking. */
-.vl-canopy-trunk { stroke: var(--garden-trunk); stroke-width: 2.4; stroke-linecap: round; }
-.vl-canopy--sprout  { fill: var(--garden-sprout); }
-.vl-canopy--young   { fill: var(--garden-young); }
-.vl-canopy--in_leaf { fill: var(--garden-inleaf); }
-.vl-canopy--mature  { fill: var(--garden-mature); }
-.vl-canopy--ancient { fill: var(--garden-ancient); }
-/* A Landmark (§6.5): deepest evergreen, standing prouder, with its nest —
-   the world singling out durable memory even at valley scale. */
-.vl-canopy--landmark { fill: var(--garden-ancient); stroke: var(--garden-ancient); stroke-width: 1.2; filter: brightness(0.9); }
+/* The Rootwood, from the Overlook (THE WORLD Part 3.2): not individual
+   plants, but a fixed, growing cluster of canopy masses — three depth
+   greens stacked, back to front (row0 deepest/farthest, row2
+   lightest/nearest), each mass's own lit/shade split still painted per
+   hour (logic/light.js, inline). A mass never shows a plant's real
+   stage; the wood's density and depth are the mirror now (Part 8.5). */
+.vl-wood-ground-shadow { fill: var(--garden-mature); opacity: 0.18; }
+.vl-wood-canopy--row0 { fill: #2B5D3F; }
+.vl-wood-canopy--row1 { fill: #3D7E4E; }
+.vl-wood-canopy--row2 { fill: #4F9A5C; }
+/* A Landmark (§6.5): the emergent crown, deepest evergreen, standing
+   prouder, with its nest — the world singling out durable memory even
+   at valley scale (Part 3.2's "one or two emergent crowns", 3.4's notch). */
+.vl-wood-canopy--landmark { fill: var(--garden-ancient); stroke: var(--garden-ancient); stroke-width: 1.2; filter: brightness(0.9); }
 .vl-canopy-nest { fill: var(--garden-trunk); opacity: 0.62; }
 /* A firefly is a 0.4%-radius dot with its own 2%-radius glow pool
    (§9.3, §5.4); a Landmark's gathered fireflies additionally share one
@@ -2571,11 +2624,16 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 @keyframes valley-firefly { 0%, 100% { opacity: 0; } 45%, 60% { opacity: 0.9; } }
 @keyframes valley-firefly-glow { 0%, 100% { opacity: 0; } 45%, 60% { opacity: 0.14; } }
 .vl-landmark-glow { fill: var(--garden-discovery); opacity: 0.14; }
-.vl-canopy--lit { fill: var(--garden-review); }
-.vl-canopy-glow { fill: var(--garden-review); opacity: 0.22; animation: valley-glow 5s ease-in-out infinite; }
-@keyframes valley-glow { 0%, 100% { opacity: 0.24; } 50% { opacity: 0.10; } }
+/* The single valley-wide invitation (§16.1): not a lit plant any more,
+   but one soft window of amber light inside the canopy (Part 3.2) — the
+   mass itself keeps its row green; a two-layer soft glow sits over it
+   (a wide faint halo, a smaller warmer core), never a solid recolour. */
+.vl-wood-glow { fill: var(--garden-review); opacity: 0.5; animation: valley-glow-core 5s ease-in-out infinite; }
+.vl-wood-glow--outer { animation-name: valley-glow-outer; }
+@keyframes valley-glow-core  { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.32; } }
+@keyframes valley-glow-outer { 0%, 100% { opacity: 0.24; } 50% { opacity: 0.12; } }
 @media (prefers-reduced-motion: reduce) {
-  .vl-canopy-glow { animation: none; }
+  .vl-wood-glow { animation: none; }
   .vl-firefly { animation: none; opacity: 0.6; }
   .vl-firefly-glow { animation: none; opacity: 0.12; }
 }
@@ -2588,8 +2646,10 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .vl-contact-shadow, .vl-cast-shadow { pointer-events: none; }
 
 /* The Gate (§4.9, §16.9, §6.4): two posts and a lintel of warm stone,
-   the same pigment as the bridge — at the valley's edge, where the path
-   leaves. A place, not a button — though it can be walked through. */
+   the same pigment as the bridge — set in the Hearth's wall (Appendix
+   C.3), where the path leaves. From Stage W2 onward it is the valley's
+   only exit (THE WORLD Part 10.1). A place, not a button — though it
+   can be walked through. */
 .vl-gate-post   { stroke: var(--garden-stone-shade); stroke-width: 3; stroke-linecap: round; opacity: 0.85; }
 .vl-gate-lintel { fill: none; stroke: var(--garden-stone-lit); stroke-width: 2.4; stroke-linecap: round; opacity: 0.9; }
 /* After dark, the Gate keeps one small warm light — a found detail for
@@ -2601,6 +2661,76 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .vl-lantern-glow { fill: var(--garden-lantern-flame); opacity: 0.16; animation: vl-lantern-breathe 6s ease-in-out infinite; }
 @keyframes vl-lantern-breathe { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.12; } }
 @media (prefers-reduced-motion: reduce) { .vl-lantern-glow { animation: none; } }
+
+/* Warm stone recedes at night like the rest of the land (§5.4: "a deep
+   cool field" with only specific warm points) — computed the same way
+   as the floor bands, twice through logic/light.js's shadeFace(). This
+   is the low wall's and the bridge's own pigment family too (§6.4: "as
+   the Gate, as the bridge"), so all three share the same night fall. */
+.valley[data-time="night"] .vl-gate-post   { stroke: #454341; }
+.valley[data-time="night"] .vl-gate-lintel { stroke: #6E645A; }
+.valley[data-time="night"] .vl-wall-shade,
+.valley[data-time="night"] .vl-bridge-shade { fill: #454341; }
+.valley[data-time="night"] .vl-wall-lit,
+.valley[data-time="night"] .vl-bridge-lit { fill: #6E645A; }
+
+/* ---------- Phase V, Stage W2: the Hearth (THE WORLD Part 4, Appendix
+   C.3) — the home the learner stands at. Given whole from day one (Part
+   4.2); its window is warm at every dusk and every night, unconditionally
+   (Part 4.1), never because of anything the learner did or failed to do. */
+.vl-wall-shade { fill: var(--garden-stone-shade); }
+.vl-wall-lit   { fill: var(--garden-stone-lit); }
+.vl-bridge-shade { fill: var(--garden-stone-shade); }
+.vl-bridge-lit   { fill: var(--garden-stone-lit); }
+
+.vl-cottage-wall-shade { fill: var(--garden-cottage-wall-shade); }
+.vl-cottage-wall-lit   { fill: var(--garden-cottage-wall-lit); }
+.vl-cottage-roof-shade { fill: var(--garden-cottage-roof-shade); }
+.vl-cottage-roof-lit   { fill: var(--garden-cottage-roof-lit); }
+.valley[data-time="night"] .vl-cottage-wall-shade { fill: #615C52; }
+.valley[data-time="night"] .vl-cottage-wall-lit   { fill: #7E786B; }
+.valley[data-time="night"] .vl-cottage-roof-shade { fill: #1E292D; }
+.valley[data-time="night"] .vl-cottage-roof-lit   { fill: #2D3C40; }
+
+/* The window: a recessed, unlit glass tone by day; warm and glowing at
+   every dusk and every night, unconditionally (Part 4.1 — never earned,
+   never withheld). */
+.vl-window { fill: var(--garden-cottage-wall-shade); }
+.vl-window--lit { fill: var(--garden-window-light); }
+.vl-window-glow { fill: var(--garden-window-light); opacity: 0.16; animation: vl-lantern-breathe 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .vl-window-glow { animation: none; } }
+
+/* The chimney breathes at cold dawns because mornings are cold, not
+   because the learner visited (Part 4.4 — a mirror, never a motor): two
+   soft masses drifting up and fading, once, on an 8s loop. */
+.vl-chimney-smoke {
+  fill: #E9E7E2; opacity: 0;
+  animation: vl-chimney-smoke-drift 8s ease-out infinite;
+}
+.vl-chimney-smoke--2 { animation-delay: -3s; }
+@keyframes vl-chimney-smoke-drift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.7); }
+  20% { opacity: 0.3; }
+  100% { opacity: 0; transform: translate(3px, -14px) scale(1.3); }
+}
+@media (prefers-reduced-motion: reduce) { .vl-chimney-smoke { animation: none; opacity: 0.12; } }
+
+/* The bench (where the Journal lives, Bible §4.9) and the kettle-stone —
+   small, still, plainly there (Part 4.2). */
+.vl-bench { fill: var(--garden-cottage-timber); opacity: 0.9; }
+.vl-bench-legs { fill: none; stroke: var(--garden-cottage-timber); stroke-width: 1.6; opacity: 0.8; }
+.vl-kettle-stone { fill: var(--garden-stone-shade); }
+
+/* The hearth cat (Part 4.5, 9.1–9.3): two soft masses and a tail sweep,
+   no face, ever (Law 8, P45, P147). Its entire animation is one slow
+   breathing cycle (Part 9.2, 12) — the anti-companion, the deepest
+   proof the world exists without the learner. Never interactive. */
+.vl-cat { animation: vl-cat-breathe 4s ease-in-out infinite; pointer-events: none; }
+.vl-cat-body  { fill: var(--garden-cat-body); }
+.vl-cat-chest { fill: var(--garden-cat-chest); }
+.vl-cat-tail  { fill: none; stroke: var(--garden-cat-body); stroke-width: 1.6; stroke-linecap: round; }
+@keyframes vl-cat-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+@media (prefers-reduced-motion: reduce) { .vl-cat { animation: none; } }
 
 /* Leaving through the Gate (§19.2): a small journey, not a tab switch —
    the view drifts down and out toward the valley's edge. */

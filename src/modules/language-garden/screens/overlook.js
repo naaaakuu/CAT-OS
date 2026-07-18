@@ -4,32 +4,35 @@
  * seen from above, wordless (§13.4), on one screen with no scrolling
  * (§4.1). You arrive here, and arriving is meant to be good.
  *
- * The valley is a single, simpler, more distant scene than a biome
- * (§11.7): flat layered-vector landforms, the Rootwood living at its
- * heart, the six other regions simply land until they are cultivated —
- * real geography, never "coming soon", never a grid of empty slots
- * (§5.8, Principle 64). Tapping the Rootwood descends into it. Tapping
- * any wild region is ACKNOWLEDGED — the land breathes once under the
- * hand — because a world that ignores a touch feels broken, and nothing
- * here may ever feel broken (Visual Guide 19.1, Phase 4.9).
+ * Phase V, Stage W2 (LANGUAGE GARDEN — THE WORLD.md Part 3–4, Appendix C):
+ * the map is the one composed geography — sky, far ridges, the high
+ * shoulder (the Rootwood and the Vine Terraces), the valley floor (the
+ * Mirror Pond, the Meadow, the Orchard, the Thicket), and the Hearth
+ * plane in the foreground, where the learner stands. Every fixed
+ * position below is transcribed from Appendix C, THE WORLD's single
+ * authored source of coordinates — nothing here is improvised.
  *
- * Arrival is a cross-dissolve of light, never a loading state (Visual
- * Guide 17.2, 24.1: no spinner, no skeleton, ever): the world fades up
- * from a warm dark, as if assembling from light.
+ * The Hearth (Part 4) is the home: a stone cottage whose gable and warm
+ * window edge the frame, a bench, a lantern, a low dry-stone wall with
+ * the Gate set into it, and the head of the path. It is given whole from
+ * day one (Constitution 8 — a home that must be unlocked is a debt), and
+ * its window is lit at every dusk and every night, unconditionally,
+ * never because of anything the learner did or failed to do.
  *
- * First open, ever (§3.1): there is no splash, no tour, no menu. If
- * nothing has grown, the learner is taken straight into the first
- * family's session — "the first Attempt is the first thing they touch".
- * They arrive at the Overlook for the first time ninety seconds later,
- * and it already has something growing in it.
+ * The Rootwood, at this distance, is no longer individual trees in an
+ * ellipse (that read as a diagram, THE WORLD Part 1's own honest
+ * complaint about the pre-repaint build). It is a wood: a fixed,
+ * seeded cluster of overlapping canopy masses whose count deepens with
+ * mastery (Part 3.2, Part 8.5), and — at most one, ever — a soft amber
+ * light inside the canopy where a family is waiting (§16.1's one
+ * invitation, never a backlog).
  *
  * The Stream's level, brightness, and sound are the consistency signal
  * (§8.4, Roadmap 3.1); the Ground and Paths carry the Effort Ledger
  * (§4.3–4.4, 3.2); the sky carries the five-state clock, the calendar's
- * season, and the seeded weather (§4.5–§4.7, 3.4/3.6); and the Gate at
- * the valley's edge leads out to the rest of CAT OS (§16.9, 3.5). At
- * night, one small warm lantern light waits at the Gate — a found
- * detail, never announced (Visual Guide 28.1).
+ * season, and the seeded weather (§4.5–§4.7, 3.4/3.6); and the Gate, set
+ * in the Hearth's wall, leads out to the rest of CAT OS (§16.9, 3.5,
+ * THE WORLD Part 10.1: from W2 onward it is the valley's only exit).
  */
 
 import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
@@ -38,6 +41,7 @@ import { deriveValleyScene } from '../logic/scene.js';
 import { biomeBySlug, BIOMES } from '../logic/biomes.js';
 import { computeStreamLevel, streamBand, computeGroundTier, computePathWear } from '../logic/effort.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
+import { pickHearthCat } from '../logic/ambient.js';
 import { weatherLayerHTML, nightSkySVG, sunDiscSVG, cloudsSVG } from './atmosphere-art.js';
 import { litFace, shadeFace, contactShadow, castsShadow, castShadow } from '../logic/light.js';
 import { VALLEY_LINES } from '../../../core/mentor/garden-voice.js';
@@ -81,44 +85,50 @@ export async function renderOverlook(outlet, context) {
   }
 
   const scene = deriveValleyScene(families, sessions, Date.now(), seeds);
-  const rootwoodSessions = (scene.byBiome.get('rootwood') ?? []).flatMap((p) => p.history);
+  const rootwoodPlants = scene.byBiome.get('rootwood') ?? [];
+  const rootwoodSessions = rootwoodPlants.flatMap((p) => p.history);
   const level = computeStreamLevel(sessions);
   const effort = {
     streamBand: streamBand(level),
     ground: computeGroundTier(sessions),
     rootwoodPathWear: computePathWear(rootwoodSessions),
   };
-  renderValley(outlet, scene, effort);
+  const rootwood = {
+    matureCount: rootwoodPlants.filter((p) => p.state.stage === 'mature' || p.state.stage === 'ancient').length,
+    hasLandmark: rootwoodPlants.some((p) => p.state.landmark),
+    litId: scene.askingBiomeSlug === 'rootwood' ? scene.askingId : null,
+  };
+  renderValley(outlet, rootwood, effort);
 }
 
 /* ------------------------------------------------------------------ */
 /* The valley, as layered flat shapes. Coordinates are a 360×560       */
-/* portrait field; the SVG fills the immersive viewport (cover).       */
-/* Region placement follows the Bible's map (§4.1); the compass in     */
-/* logic/biomes.js is the source of truth for WHERE, this is the art   */
-/* that turns it into ground. Every boundary is organic and asymmetric */
-/* (Visual Guide 5.2: symmetry in nature reads as fake), and the far   */
-/* planes are cooler, paler, lower-contrast (aerial perspective, 10.2).*/
+/* portrait field (100% width = 360, 100% height = 560), matching      */
+/* Appendix C's percent-of-frame convention exactly. Every boundary is  */
+/* organic and asymmetric (Visual Guide 5.2: symmetry in nature reads   */
+/* as fake), and the far planes are cooler, paler, lower-contrast       */
+/* (aerial perspective, 10.2). Draw order is Appendix C's plane order:  */
+/* sky → far ridges → the high shoulder (Rootwood, Terraces) → the      */
+/* valley floor (Pond, Meadow, Orchard, Thicket) → the Hearth plane,     */
+/* which is drawn last because it is nearest the learner (Part 3.1).    */
 /* ------------------------------------------------------------------ */
 
-/** The wild regions a tap acknowledges, with their hit geometry. The
+/** The wild regions a tap acknowledges, with their hit geometry —
+ *  repositioned to THE WORLD Appendix C.7's founding geometry. The
  *  Rootwood and the Gate keep their own dedicated hits. */
 const WILD_HITS = [
-  { slug: 'wilds', shape: `<rect class="vl-hit vl-hit--wild" data-wild="wilds" x="0" y="98" width="360" height="42"/>` },
-  { slug: 'meadow', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="meadow" cx="50" cy="298" rx="70" ry="44"/>` },
-  { slug: 'terraces', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="terraces" cx="318" cy="246" rx="42" ry="72"/>` },
-  { slug: 'pond', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="pond" cx="180" cy="372" rx="50" ry="28"/>` },
-  { slug: 'orchard', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="orchard" cx="174" cy="462" rx="98" ry="42"/>` },
-  { slug: 'thicket', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="thicket" cx="330" cy="452" rx="34" ry="52"/>` },
+  { slug: 'wilds', shape: `<rect class="vl-hit vl-hit--wild" data-wild="wilds" x="0" y="95" width="360" height="65"/>` },
+  { slug: 'meadow', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="meadow" cx="75" cy="320" rx="78" ry="48"/>` },
+  { slug: 'terraces', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="terraces" cx="288" cy="250" rx="62" ry="92"/>` },
+  { slug: 'pond', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="pond" cx="180" cy="319" rx="48" ry="30"/>` },
+  { slug: 'orchard', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="orchard" cx="280" cy="366" rx="92" ry="42"/>` },
+  { slug: 'thicket', shape: `<ellipse class="vl-hit vl-hit--wild" data-wild="thicket" cx="306" cy="409" rx="42" ry="56"/>` },
 ];
 
-function renderValley(outlet, scene, effort) {
-  const rootwood = biomeBySlug('rootwood');
-  const rootwoodPlants = (scene.byBiome.get('rootwood') ?? [])
-    .filter((p) => p.state.stage !== 'open_ground' && p.state.stage !== 'seed');
-  const litInRootwood = scene.askingBiomeSlug === 'rootwood' ? scene.askingId : null;
-
+function renderValley(outlet, rootwood, effort) {
+  const rootwoodBiome = biomeBySlug('rootwood');
   const atmo = atmosphereFor();
+  const cat = pickHearthCat(atmo.time, atmo.season);
   const wildLabel = (slug) => {
     const b = BIOMES.find((x) => x.slug === slug);
     return VALLEY_LINES.wildBiome(b ? b.name : slug);
@@ -128,15 +138,15 @@ function renderValley(outlet, scene, effort) {
       <div class="valley" data-time="${atmo.time}" data-season="${atmo.season}"
            data-weather="${atmo.weather}" data-stream="${effort.streamBand}">
         <svg class="valley__svg" viewBox="0 0 360 560" preserveAspectRatio="xMidYMid slice">
-          ${landforms()}
+          ${landforms(atmo)}
           ${cloudsSVG()}
           ${sunDiscSVG(atmo.time)}
           ${atmo.time === 'night' ? nightSkySVG() : ''}
           ${groundMarks(effort.ground.tier)}
           ${path(effort.rootwoodPathWear)}
-          ${stream()}
-          ${gate(atmo)}
-          ${rootwoodCanopy(rootwoodPlants, litInRootwood, atmo)}
+          ${stream(atmo)}
+          ${rootwoodMasses(rootwood, atmo)}
+          ${hearth(atmo, cat)}
           ${mist()}
           <!-- The interactive shapes live inside the SVG so they always
                line up with the drawn world, whatever the crop. The wild
@@ -144,10 +154,10 @@ function renderValley(outlet, scene, effort) {
                the living region and the Gate lead anywhere. -->
           ${WILD_HITS.map(({ slug, shape }) =>
             shape.replace('/>', ` role="button" tabindex="0" aria-label="${escapeHTML(wildLabel(slug))}"/>`)).join('')}
-          <ellipse class="vl-hit" id="enter-rootwood" cx="180" cy="236" rx="130" ry="84"
+          <ellipse class="vl-hit" id="enter-rootwood" cx="95" cy="207" rx="88" ry="66"
                    role="button" tabindex="0"
-                   aria-label="${escapeHTML(VALLEY_LINES.enterBiome(rootwood.name))}"></ellipse>
-          <rect class="vl-hit" id="leave-gate" x="206" y="486" width="60" height="58"
+                   aria-label="${escapeHTML(VALLEY_LINES.enterBiome(rootwoodBiome.name))}"></ellipse>
+          <rect class="vl-hit" id="leave-gate" x="56" y="404" width="52" height="58"
                 role="button" tabindex="0"
                 aria-label="${escapeHTML(VALLEY_LINES.gateLabel)}"></rect>
         </svg>
@@ -156,7 +166,6 @@ function renderValley(outlet, scene, effort) {
       </div>
 
       <nav class="valley__marks" aria-label="Garden">
-        <button class="valley__mark" id="gate-mark">${escapeHTML(VALLEY_LINES.gate)}</button>
         <a class="valley__mark" href="#/garden/journal">${escapeHTML(VALLEY_LINES.journal)}</a>
         <a class="valley__mark" href="#/settings">${escapeHTML(VALLEY_LINES.settings)}</a>
       </nav>
@@ -198,9 +207,11 @@ function renderValley(outlet, scene, effort) {
     });
   }
 
-  // Leaving through the Gate (§16.9, §19.2): a small journey rather than a
-  // tab switch — the view drifts down toward the gate at the valley's edge,
-  // then the rest of CAT OS. No dialog, no confirmation (§14.6).
+  // Leaving through the Gate (§16.9, §19.2, THE WORLD Part 10.1: from W2
+  // onward the drawn Gate in the Hearth's wall is the valley's only
+  // exit): a small journey rather than a tab switch — the view drifts
+  // toward the wall, then the rest of CAT OS. No dialog, no confirmation
+  // (§14.6).
   const leave = () => {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduce) { location.hash = '#/home'; return; }
@@ -212,15 +223,17 @@ function renderValley(outlet, scene, effort) {
   gateHit.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); leave(); }
   });
-  outlet.querySelector('#gate-mark').addEventListener('click', leave);
 }
 
-/** The permanent geography: a pale far ridge, the Wilds beneath it, the
- *  valley basin, and the seven regions as organic patches — one living,
- *  six still wild. Nothing is a perfect ellipse; every boundary leans
- *  (Visual Guide 5.2, 7.3). The far planes are the palest and coolest
- *  (aerial perspective, 10.2). */
-function landforms() {
+/** The far sky and land, back to the foot of the high shoulder: sky,
+ *  ridges, the Wilds' permanent mist, the boundary fence (Appendix
+ *  C.4.6), the four-band aerial ramp, the Vine Terraces, and the still-
+ *  wild Meadow/Orchard/Thicket at their Appendix C.7 founding positions.
+ *  The Rootwood's own canopy is drawn separately in rootwoodMasses()
+ *  because its density depends on the learner's mastery, not on fixed
+ *  geometry alone (Part 3.2, 8.5). The Hearth plane is drawn last, in
+ *  hearth(), because it is nearest the learner (Part 3.1). */
+function landforms(atmo) {
   return `
     <!-- The sky (§6.2): a three-stop gradient — zenith, mid, horizon —
          re-toned per hour by CSS custom properties on [data-time]. -->
@@ -235,77 +248,136 @@ function landforms() {
     <!-- The sky-going-green seam (§6.2): a thin band, dusk only. -->
     <rect class="vl-sky-seam" x="0" y="107.6" width="360" height="8.3"/>
 
-    <!-- The farthest ridge: palest, coolest, almost still (Guide 10.1). -->
+    <!-- Far ridges (Appendix C.1: crests at y24/28%): palest, coolest,
+         almost still (Guide 10.1). -->
     <path class="vl-ridge" d="M0,134 L0,112 Q52,96 112,108 Q182,90 248,106
       Q312,94 360,110 L360,134 Z"/>
 
-    <!-- The Wilds: always visible on the horizon, never entered (§5.8),
-         unreachable by design — the far ridge's own colour under a
-         permanent, low mist wash (§6.3, §6.5). -->
+    <!-- The Wilds: always visible, never entered (§5.8), pooled at the
+         ridges' feet (Appendix C.7: y28–32%) — the far ridge's own
+         colour under a permanent, low mist wash (§6.3, §6.5). -->
     <g class="vl-region" data-region="wilds">
-      <path class="vl-wilds" d="M0,142 L0,120 Q50,104 96,116 Q150,98 200,114
-        Q250,96 306,116 Q336,106 360,120 L360,142 Z"/>
-      <path class="vl-wilds-mist" d="M0,142 L0,120 Q50,104 96,116 Q150,98 200,114
-        Q250,96 306,116 Q336,106 360,120 L360,142 Z"/>
+      <path class="vl-wilds" d="M0,150 L0,118 Q52,102 100,116 Q156,96 208,114
+        Q260,94 312,116 Q338,106 360,120 L360,150 Z"/>
+      <path class="vl-wilds-mist" d="M0,150 L0,118 Q52,102 100,116 Q156,96 208,114
+        Q260,94 312,116 Q338,106 360,120 L360,150 Z"/>
     </g>
 
-    <!-- The valley basin, seen from above, with a lower fold for depth. -->
-    <path class="vl-basin" d="M0,136 Q180,116 360,136 L360,560 L0,560 Z"/>
-    <path class="vl-basin-2" d="M0,396 Q120,368 220,384 Q300,394 360,386 L360,560 L0,560 Z"/>
+    <!-- The boundary fence, sparse and leaning, at the Wilds' edge
+         (Appendix C.4.6). -->
+    ${fencePostsSVG()}
 
-    <!-- West: the Meadow, spilling off the edge like real terrain. -->
-    <g class="vl-region" data-region="meadow">
-      <path class="vl-meadow" d="M-16,262 Q28,242 76,254 Q108,264 112,286
-        Q114,312 88,330 Q46,350 -16,342 Z"/>
-    </g>
-
-    <!-- East: the Vine Terraces on the morning slope, with step lines. -->
+    <!-- The high shoulder: the Vine Terraces step down the right slope
+         (Appendix C.7: x62–96%, lips y34/38/42%). -->
     <g class="vl-region" data-region="terraces">
-      <path class="vl-terrace" d="M282,170 Q318,174 344,190 Q358,198 360,206 L360,326
-        Q328,318 286,324 Q270,272 274,216 Q276,190 282,170 Z"/>
-      <path class="vl-terrace-step" d="M288,224 Q326,226 356,242"/>
-      <path class="vl-terrace-step" d="M284,266 Q322,270 354,286"/>
+      <path class="vl-terrace" d="M223,192 Q268,182 316,192 Q342,198 348,214 L348,326
+        Q312,314 268,320 Q234,270 228,220 Q226,204 223,192 Z"/>
+      <path class="vl-terrace-step" d="M230,213 Q288,208 344,222"/>
+      <path class="vl-terrace-step" d="M232,258 Q290,254 346,268"/>
+      <ellipse class="vl-terracotta-fleck" cx="252" cy="216" rx="3.2" ry="2.1"/>
+      <ellipse class="vl-terracotta-fleck" cx="310" cy="260" rx="2.8" ry="1.9"/>
     </g>
 
-    <!-- South-east: the Thicket, tangled and dark, curling in from the corner. -->
-    <g class="vl-region" data-region="thicket">
-      <path class="vl-thicket" d="M310,398 Q338,388 354,402 Q362,410 360,424 L360,508
-        Q336,508 314,500 Q298,494 300,466 Q298,428 310,398 Z"/>
-      <path class="vl-thicket-curl" d="M318,428 q12,-5 19,3 q5,7 -2,12"/>
-      <path class="vl-thicket-curl" d="M312,470 q10,-7 19,-2"/>
+    <!-- The valley floor: a four-band aerial ramp (§6.3), farthest to
+         nearest — the two bands that had no geometry until now
+         (mid-floor, and the Hearth's own plane, drawn in hearth()) join
+         the far-fields/near-floor pair W1 already painted. -->
+    <path class="vl-floor-far" d="M0,136 Q180,116 360,136 L360,560 L0,560 Z"/>
+    <path class="vl-floor-mid" d="M0,238 Q140,214 260,226 Q320,232 360,224 L360,560 L0,560 Z"/>
+    <path class="vl-floor-near" d="M0,340 Q150,318 260,330 Q320,338 360,326 L360,560 L0,560 Z"/>
+
+    <!-- West: the Meadow, three combed drifts (Appendix C.7). -->
+    <g class="vl-region" data-region="meadow">
+      <path class="vl-meadow" d="M-16,262 Q30,240 80,252 Q114,262 118,288
+        Q120,314 92,332 Q48,352 -16,344 Z"/>
+      <ellipse class="vl-meadow-drift" cx="43" cy="308" rx="20" ry="7"/>
+      <ellipse class="vl-meadow-drift" cx="72" cy="336" rx="18" ry="6"/>
+      <ellipse class="vl-meadow-drift" cx="101" cy="314" rx="16" ry="6"/>
     </g>
 
-    <!-- South: the Orchard, open and low. -->
+    <!-- South-east: the Orchard, five founding canopies (Appendix C.7). -->
     <g class="vl-region" data-region="orchard">
-      <path class="vl-orchard" d="M86,430 Q130,404 208,406 Q262,410 276,436
-        Q286,466 250,488 Q196,512 118,504 Q70,494 66,462 Q66,442 86,430 Z"/>
+      <path class="vl-orchard" d="M198,388 Q246,362 300,368 Q338,374 344,398
+        Q350,424 316,444 Q268,464 214,452 Q188,444 186,416 Q186,400 198,388 Z"/>
+      ${orchardCanopiesSVG()}
     </g>
 
-    <!-- North / centre: the living Rootwood ground, richer and the clear
-         heart — one organic clearing, no drawn ring (a boundary line would
-         read as interface; the richer green alone says "tended"). A soft
-         wood-shadow lies along its southern edge only, where the trees'
-         shade would fall (one light direction, Guide 11.4). -->
-    <path class="vl-grove-shade" transform="translate(4 8)" d="M60,232 Q58,192 104,164 Q152,146 206,152
-      Q252,160 276,190 Q292,216 282,252 Q266,286 220,298 Q156,308 110,288 Q64,266 60,232 Z"/>
-    <path class="vl-grove" d="M60,232 Q58,192 104,164 Q152,146 206,152
-      Q252,160 276,190 Q292,216 282,252 Q266,286 220,298 Q156,308 110,288 Q64,266 60,232 Z"/>`;
+    <!-- Far south-east: the Thicket, tangled, with its berry flecks
+         (Appendix C.7). -->
+    <g class="vl-region" data-region="thicket">
+      <path class="vl-thicket" d="M284,392 Q316,380 336,396 Q352,408 350,426 L350,502
+        Q322,504 296,494 Q280,486 282,458 Q278,420 284,392 Z"/>
+      <path class="vl-thicket-curl" d="M300,420 q12,-5 19,3 q5,7 -2,12"/>
+      <path class="vl-thicket-curl" d="M294,462 q10,-7 19,-2"/>
+      <circle class="vl-berry-fleck vl-berry-fleck--deep" cx="295.2" cy="403.2" r="2.6"/>
+      <circle class="vl-berry-fleck vl-berry-fleck--lit" cx="309.6" cy="414.4" r="2.4"/>
+      <circle class="vl-berry-fleck vl-berry-fleck--deep" cx="316.8" cy="397.6" r="2.2"/>
+    </g>
+
+    <!-- Founding rocks (Appendix C.4.4–5): one mossy shoulder rock at
+         the Rootwood's foot, one pale pair by the pond. -->
+    <g class="vl-rock" aria-hidden="true">
+      ${rockSVG(93.6, 263.2, 21.6)}
+      <ellipse class="vl-rock-moss" cx="93.6" cy="257.4" rx="7" ry="2.4"/>
+    </g>
+    <g class="vl-rock" aria-hidden="true">
+      ${rockSVG(226.8, 341.6, 10.8)}
+      ${rockSVG(234, 347.2, 10.8)}
+    </g>
+
+    <!-- The reed cluster at the pond's south lip (Appendix C.4.7). -->
+    <g class="vl-reeds" aria-hidden="true" transform="translate(198 347.2)">
+      ${[-6, -3, 0, 3, 6].map((dx, i) => `<path class="vl-reed" d="M${dx},0 Q${dx + (i % 2 ? 1.5 : -1.5)},-10 ${dx},-16"/>`).join('')}
+    </g>
+  `;
+}
+
+/** Fixed, leaning fence posts at the Wilds' edge (Appendix C.4.6): sparse
+ *  and simple, no contact shadow (a thin, low-visual-weight accent, not
+ *  a standing mass — Guide 5.4's 10% tier). */
+function fencePostsSVG() {
+  const POSTS = [[118.8, 173.6, -4], [147.6, 170.8, 3], [180, 168, -3], [212.4, 170.8, 4], [241.2, 173.6, -3]];
+  return `<g class="vl-fence" aria-hidden="true">
+    ${POSTS.map(([x, y, lean]) => `<path class="vl-fence-post" d="M${(x - lean * 0.3).toFixed(1)},${(y - 9).toFixed(1)} L${(x + lean * 0.3).toFixed(1)},${(y + 9).toFixed(1)}"/>`).join('')}
+  </g>`;
+}
+
+/** The Orchard's five founding canopies (Appendix C.7): round masses,
+ *  fruit-tree fuller than the Rootwood's, flat single-tone (the region
+ *  is still wild — detail is spent where the learner has actually
+ *  cultivated, Guide 5.4). */
+function orchardCanopiesSVG() {
+  const CANOPIES = [[226.8, 352.8, 10.8], [255.6, 369.6, 11.5], [284.4, 347.2, 10.4], [306, 380.8, 12.2], [324, 358.4, 10.9]];
+  return CANOPIES.map(([x, y, r]) =>
+    `<ellipse class="vl-orchard-canopy" cx="${x}" cy="${y}" rx="${r}" ry="${(r * 0.82).toFixed(1)}"/>`).join('');
+}
+
+/** A simple two-value rock (Visual Guide 9.2: "lit face, shadow face,
+ *  sometimes a mossy top") — a lit top mass and a shaded lower mass,
+ *  fixed pigment (matching the Gate's own precedent: a built/placed
+ *  object gets a steady stone colour, not an hour-modulated one; only
+ *  its contact shadow moves with the sun). */
+function rockSVG(cx, cy, width) {
+  const rx = width / 2, ry = rx * 0.62;
+  return `<ellipse class="vl-rock-shade" cx="${cx}" cy="${(cy + ry * 0.25).toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}"/>
+    <ellipse class="vl-rock-lit" cx="${(cx - rx * 0.18).toFixed(1)}" cy="${(cy - ry * 0.22).toFixed(1)}" rx="${(rx * 0.72).toFixed(1)}" ry="${(ry * 0.66).toFixed(1)}"/>`;
 }
 
 /** The Ground (§4.3, Roadmap 3.2): the Effort Ledger made visible, drawn
- *  in a fixed safe band just south of the Rootwood grove where it never
- *  collides with a region shape or a canopy. Never random — MARK_COUNT_BY_TIER
- *  reveals more of the same fixed set as lifetime effort accumulates; nothing
- *  ever rearranges, it only thickens (mirrors logic/effort.js exactly). */
+ *  in a fixed safe band just south of the Rootwood's new high-shoulder
+ *  position (Appendix C.7: x8–45%, y28–46%) where it never collides with
+ *  a region shape. Never random — MARK_COUNT_BY_TIER reveals more of the
+ *  same fixed set as lifetime effort accumulates; nothing ever
+ *  rearranges, it only thickens (mirrors logic/effort.js exactly). */
 const GROUND_MARKS = [
-  { x: 112, y: 332, kind: 'moss' },
-  { x: 250, y: 330, kind: 'moss' },
-  { x: 135, y: 340, kind: 'wildflower' },
-  { x: 225, y: 342, kind: 'wildflower' },
-  { x: 160, y: 328, kind: 'fern' },
-  { x: 200, y: 334, kind: 'fern' },
-  { x: 180, y: 344, kind: 'wildflower' },
-  { x: 120, y: 338, kind: 'moss' },
+  { x: 48, y: 268, kind: 'moss' },
+  { x: 140, y: 264, kind: 'moss' },
+  { x: 66, y: 276, kind: 'wildflower' },
+  { x: 118, y: 278, kind: 'wildflower' },
+  { x: 84, y: 262, kind: 'fern' },
+  { x: 104, y: 270, kind: 'fern' },
+  { x: 94, y: 280, kind: 'wildflower' },
+  { x: 56, y: 274, kind: 'moss' },
 ];
 const MARK_COUNT_BY_TIER = { bare: 0, tended: 2, growing: 4, flourishing: 6, lush: 8 };
 
@@ -318,78 +390,70 @@ function groundMarks(tier) {
   }).join('');
 }
 
-/** The one visible Path (§4.4): from the valley's edge up to the Rootwood,
- *  the only region walked today. Wear never erases it — a neglected path is
- *  softened by moss, never broken (logic/effort.js computePathWear()). */
+/** The Path (§4.4, Appendix C.2): from the Gate, in the Hearth's wall,
+ *  down to the bridge, forking beyond it — one branch climbing to the
+ *  Rootwood (the only region walked today; wear reflects real visits),
+ *  one bending toward the Orchard (not yet cultivated, so it stays a
+ *  quiet, settled trace — geography that exists before it is walked,
+ *  §Bible 3.3: "the world is older than the learner"). Wear never
+ *  erases a path — a neglected one is softened by moss, never broken
+ *  (logic/effort.js computePathWear()). */
 function path(wear) {
-  return `<path class="vl-path vl-path--${wear}" d="M235,540 C224,478 214,412 205,345"/>`;
+  return `
+    <path class="vl-path vl-path--${wear}" d="M81,448 C90,432 94,420 97,420 C104,404 108,392 111.6,392 C116,382 120,374 122.4,369.6
+      C114,358 106,344 108,336 C100,312 92,292 93.6,280 C96,266 99,254 100.8,246.4"/>
+    <path class="vl-path vl-path--settling" d="M122.4,369.6 C136,368 148,366 151.2,364 C168,368 190,372 208.8,375.2"/>`;
 }
 
-/** The Stream and the Mirror Pond. The stream runs from the Rootwood,
- *  through the pond, and out to the west (§4.2) — a soft meandering
- *  RIBBON that widens downstream, never a uniform rope (Visual Guide
- *  8.1: never a straight canal). Its fullness and brightness are the
- *  consistency signal (§8.4), carried by [data-stream] on .valley: a
- *  quiet stream is thinner and stiller, and it NEVER runs dry. */
-function stream() {
+/** The Stream and the Mirror Pond (Appendix C.2): the spring at the
+ *  Rootwood's south-eastern foot, an upper reach down to the pond, and a
+ *  lower reach out past the Meadow to the valley's western edge, where
+ *  the stone bridge crosses it (Bible §4.2 — never a straight canal;
+ *  Visual Guide 8.1 — a soft meandering ribbon). Its fullness and
+ *  brightness are the consistency signal (§8.4), carried by
+ *  [data-stream] on .valley: a quiet stream is thinner and stiller, and
+ *  it NEVER runs dry. */
+function stream(atmo) {
+  const bridgeShadows = shadowPairSVG(111.6, 400, 25.2, 8, atmo);
   return `
     <g class="vl-water" aria-hidden="true">
-      <!-- Upper reach: out of the Rootwood's eastern side, down to the pond. -->
-      <path class="vl-stream-under" d="M202,206 C190,252 157,300 170,352 L177,354
-        C164,300 196,252 207,206 Z"/>
-      <path class="vl-stream" d="M202,206 C190,252 157,300 170,352 L177,354
-        C164,300 196,252 207,206 Z"/>
-      <!-- Lower reach: out of the pond, west to the valley's edge. -->
-      <path class="vl-stream-under" d="M158,388 C118,414 72,448 18,524 L23,528
-        C82,452 126,420 164,393 Z"/>
-      <path class="vl-stream" d="M158,388 C118,414 72,448 18,524 L23,528
-        C82,452 126,420 164,393 Z"/>
+      <!-- The spring, and the upper reach into the pond. -->
+      <path class="vl-stream-under" d="M151.2,224 C160,238 168,246 169.2,252 C174,266 178,282 180,296.8 L186,296
+        C184,282 180,266 175,252 C173,246 165,238 156,224 Z"/>
+      <path class="vl-stream" d="M151.2,224 C160,238 168,246 169.2,252 C174,266 178,282 180,296.8 L186,296
+        C184,282 180,266 175,252 C173,246 165,238 156,224 Z"/>
+      <!-- The lower reach: pond exit, past the Meadow, to the bridge and
+           out the valley's western edge. -->
+      <path class="vl-stream-under" d="M151.2,347.2 C136,358 126,368 122.4,375.2 C118,384 114,390 111.6,392
+        C98,400 82,408 72,414.4 C48,420 20,424 0,425.6 L0,432
+        C22,430 50,426 74,420.4 C86,414 100,406 114,398
+        C118,394 122,388 128,381.2 C133,373 143,362 158,353.2 Z"/>
+      <path class="vl-stream" d="M151.2,347.2 C136,358 126,368 122.4,375.2 C118,384 114,390 111.6,392
+        C98,400 82,408 72,414.4 C48,420 20,424 0,425.6 L0,432
+        C22,430 50,426 74,420.4 C86,414 100,406 114,398
+        C118,394 122,388 128,381.2 C133,373 143,362 158,353.2 Z"/>
       <!-- Drifting highlights: the water's slow life (Guide 8.1) — the one
            permitted linear motion, and it never syncs to anything. -->
-      <path class="vl-glint" d="M204,208 C193,252 162,300 173,350"/>
-      <path class="vl-glint vl-glint--2" d="M158,390 C120,416 76,448 22,522"/>
+      <path class="vl-glint" d="M153,226 C162,240 170,248 172,254 C176,268 180,282 182,297"/>
+      <path class="vl-glint vl-glint--2" d="M148,349 C130,362 118,374 112,391 C90,404 60,416 20,424"/>
     </g>
-    <!-- The Mirror Pond, still, at the low centre (§4.2): a soft uneven
-         oval, its reflection a quiet offset of sky, never a ring. -->
+    <!-- The stone bridge, where the path crosses the stream (Appendix
+         C.2): warm stone, as the Gate (§6.4). -->
+    <g class="vl-bridge" aria-hidden="true">
+      ${bridgeShadows}
+      <path class="vl-bridge-shade" d="M99,396 Q111.6,404 124.2,396 L124.2,400.5 Q111.6,408.5 99,400.5 Z"/>
+      <path class="vl-bridge-lit" d="M99,396 Q111.6,388.4 124.2,396 L124.2,393.5 Q111.6,385.9 99,393.5 Z"/>
+    </g>
+    <!-- The Mirror Pond, still, at the low centre (Appendix C.2: x38–62%,
+         y52–62%): a soft uneven oval leaning west-south-west, its
+         reflection a quiet offset of sky, never a ring. Reserved: the
+         twin plants' positions (40,60)/(44,61) for when the biome
+         lives (Appendix C.7). -->
     <g class="vl-region" data-region="pond">
-      <path class="vl-pond" d="M152,368 Q156,356 176,352 Q196,349 208,358
-        Q216,366 211,378 Q204,390 182,392 Q160,392 153,381 Q149,375 152,368 Z"/>
-      <ellipse class="vl-pond-sky" cx="178" cy="364" rx="12" ry="3.6" transform="rotate(-7 178 364)"/>
-    </g>`;
-}
-
-/** The Gate (§4.9, §16.9): at the valley's edge, where the path leaves.
- *  Two posts and a lintel, low contrast, warm stone — a place, drawn as
- *  part of the world, that happens to lead out. At night it keeps one
- *  small warm light: a found delight, never announced (Guide 28.1). Its
- *  posts ground the world with the same shadow every standing thing
- *  gets (§5.2), and the lantern's glow pool is pinned at 7% of frame
- *  width (§5.4). */
-function gate(atmo) {
-  const lantern = atmo.time === 'night' || atmo.time === 'dusk'
-    ? `<circle class="vl-lantern-glow" cx="247" cy="518" r="${(0.07 * 360).toFixed(1)}"/>
-       <circle class="vl-lantern" cx="247" cy="518" r="1.8"/>`
-    : '';
-  const shadows = shadowPairSVG(235, 540, 20, 19, atmo);
-  return `
-    <g class="vl-gate" aria-hidden="true">
-      ${shadows}
-      <path class="vl-gate-post" d="M227,540 L227,521"/>
-      <path class="vl-gate-post" d="M243,540 L243,521"/>
-      <path class="vl-gate-lintel" d="M223,521 Q235,514 247,521"/>
-      ${lantern}
-    </g>`;
-}
-
-/** Low mist in the hollows (Visual Guide 11.3): layered translucent
- *  shapes, never a blur filter. Drawn always; CSS shows it only at dawn
- *  and at night, where it does the most emotional work. It softens the
- *  middle distance and leaves the near reading intact. */
-function mist() {
-  return `
-    <g class="vl-mist-layer" aria-hidden="true">
-      <ellipse class="vl-mist" cx="110" cy="332" rx="130" ry="15"/>
-      <ellipse class="vl-mist vl-mist--2" cx="262" cy="418" rx="112" ry="13"/>
+      <path class="vl-pond" d="M139,320 Q145,300 175,293 Q205,288 219,304
+        Q228,316 220,332 Q210,348 178,350 Q146,349 137,334 Q132,326 139,320 Z"/>
+      <ellipse class="vl-pond-sky" cx="178" cy="313" rx="15" ry="4.4" transform="rotate(-6 178 313)"/>
+      <path class="vl-pond-glint" d="M155,318 Q178,310 202,317"/>
     </g>`;
 }
 
@@ -407,79 +471,189 @@ function shadowPairSVG(bx, by, width, height, atmo) {
   return `${cast ? ellipse(cast, 'vl-cast-shadow') : ''}${ellipse(contact, 'vl-contact-shadow')}`;
 }
 
-/** A tiny stable lean for the Overlook's distant trees — identity at
- *  valley scale, mirroring cat-plant's own seeded character. */
-function miniLean(id) {
+/** A tiny stable seed for identity at valley scale, mirroring cat-plant's
+ *  own seeded character (used for the Rootwood's canopy lean and the
+ *  amber invitation's slot). */
+function seedFrom(id) {
   let h = 0;
   for (let i = 0; i < id.length; i += 1) h = (h * 31 + id.charCodeAt(i)) | 0;
-  return ((h >>> 0) % 100) / 100 * 5 - 2.5;
+  return (h >>> 0);
 }
 
-/** Stage body colours, mirroring tokens.css's --garden-{stage} values
- *  exactly (kept here too so the painted-light recipe, logic/light.js,
- *  can mix them per hour before the markup is ever inserted). */
-const STAGE_COLOR = Object.freeze({
-  sprout: '#A8D5A2', young: '#7CBB74', in_leaf: '#4F9A5C',
-  mature: '#3D7E4E', ancient: '#2B5D3F',
-});
+/** The Rootwood's eighteen possible canopy-mass slots (Appendix C.7:
+ *  x8–45%/28.8–162px, y28–46%/156.8–257.6px), authored once, in reveal
+ *  order — the first seven read as two depth rows (Part 3.2's founding
+ *  state), the rest deepen the wood into three rows as mastery
+ *  accumulates. Fixed forever: the wood never rearranges, it only
+ *  deepens (Part 7.2). `row` picks one of three depth greens. */
+const ROOTWOOD_MASS_SLOTS = [
+  { x: 78, y: 162, r: 11, row: 0 }, { x: 80, y: 232, r: 20, row: 2 },
+  { x: 50, y: 165, r: 12, row: 0 }, { x: 105, y: 225, r: 19, row: 2 },
+  { x: 135, y: 164, r: 11, row: 0 }, { x: 55, y: 222, r: 18, row: 2 },
+  { x: 105, y: 168, r: 12, row: 0 },
+  { x: 128, y: 235, r: 17, row: 2 }, { x: 40, y: 192, r: 15, row: 1 },
+  { x: 150, y: 220, r: 16, row: 2 }, { x: 65, y: 200, r: 16, row: 1 },
+  { x: 35, y: 238, r: 16, row: 2 }, { x: 90, y: 188, r: 14, row: 1 },
+  { x: 150, y: 240, r: 14, row: 2 }, { x: 112, y: 198, r: 17, row: 1 },
+  { x: 35, y: 208, r: 13, row: 1 }, { x: 135, y: 192, r: 15, row: 1 },
+  { x: 150, y: 205, r: 13, row: 1 },
+];
+const ROOTWOOD_FOUNDING_COUNT = 7;
+const ROOTWOOD_MASS_CEILING = 18;
+const ROOTWOOD_MASSES_PER_MATURE_GROUP = 4;
 
-/** The Rootwood, from a distance: a small cluster of two-mass canopies,
- *  one per grown plant — tiny trees, not lollipops, each with its own
- *  lean. The single valley-wide invitation (if it is in the Rootwood)
- *  glows amber — at most one, ever, at Overlook zoom (§16.1). A Landmark
- *  (§6.5) is singled out even from here: deeper evergreen, a nest, and,
- *  after dark, a few fireflies gathered at it. Every tree's two masses
- *  carry a lit face and a shade face (§5.2), and stands its own ground
- *  shadow; the lit (asking) tree is the one exception — a signal colour
- *  is never dimmed by the hour, so it out-reads the whole valley (§6.6). */
-function rootwoodCanopy(plants, litId, atmo) {
-  if (plants.length === 0) return '';
-  // A gentle deterministic arc across the Rootwood ground — never random,
-  // so the wood looks the same each time the learner arrives.
-  const cx = 168, cy = 232, spanX = 150, spanY = 36;
-  const n = plants.length;
-  const night = atmo?.time === 'night';
-  return plants.map((p, i) => {
-    const t = n === 1 ? 0.5 : i / (n - 1);
-    const lean = miniLean(p.family.meta.id);
-    const x = cx - spanX / 2 + spanX * t + lean;
-    // Continuous refinement even at valley scale (§6.3): vigor nudges the
-    // radius so a well-held tree reads a hair fuller from the Overlook too.
-    const r = canopyRadius(p.state.stage) + (p.state.vigor ?? 0) * 1.6;
-    const isLandmark = p.state.landmark;
-    // Landmarks stand a touch prouder on the arc.
-    const y = cy + Math.sin(t * Math.PI) * -spanY + (i % 2) * 10 - (isLandmark ? 4 : 0);
-    const lit = p.family.meta.id === litId;
-    const stageCls = `vl-canopy vl-canopy--${p.state.stage}${isLandmark ? ' vl-canopy--landmark' : ''}${lit ? ' vl-canopy--lit' : ''}`;
-    // The lit (asking) tree keeps its pure signal colour, unmixed by the
-    // hour (§6.6); every other tree gets the painted-light split.
-    const base = isLandmark ? STAGE_COLOR.ancient : (STAGE_COLOR[p.state.stage] ?? STAGE_COLOR.young);
-    const faceStyle = lit ? '' : ` style="fill:${litFace(base, atmo.time)}"`;
-    const shadeStyle = lit ? '' : ` style="fill:${shadeFace(base, atmo.time)}"`;
-    const glow = lit ? `<circle class="vl-canopy-glow" cx="${x.toFixed(1)}" cy="${(y - 2).toFixed(1)}" r="${(r + 9).toFixed(1)}"/>` : '';
-    const nest = isLandmark
-      ? `<ellipse class="vl-canopy-nest" cx="${(x + r * 0.5).toFixed(1)}" cy="${(y + 1).toFixed(1)}" rx="2.6" ry="1.6"/>`
+/** Depth-row body colours: three greens stacked (Part 3.2), back to
+ *  front — cool and deep in the distance, lighter and warmer near. These
+ *  are purely a depth device; the wood no longer shows any single
+ *  plant's actual stage at Overlook zoom (Part 3.2, Part 8.4). */
+const ROOTWOOD_ROW_COLOR = ['#2B5D3F', '#3D7E4E', '#4F9A5C'];
+
+/** The Rootwood, seen from the Overlook (Part 3.2): a fixed, growing
+ *  cluster of canopy masses — never individual plants — that deepens
+ *  from seven masses in two rows to a ceiling of eighteen in three rows
+ *  as families reach Mature. At most one soft window of amber light
+ *  waits inside the wood, in the canopy mass nearest the asking
+ *  family's own seeded slot, when a Rootwood family is asking (§16.1's
+ *  one invitation). A single emergent, deeper crown stands where a
+ *  Landmark has been earned (Part 3.2, 3.4's notch). */
+function rootwoodMasses(rootwood, atmo) {
+  const count = Math.min(ROOTWOOD_MASS_CEILING, ROOTWOOD_FOUNDING_COUNT + Math.floor(rootwood.matureCount / ROOTWOOD_MASSES_PER_MATURE_GROUP));
+  const slots = ROOTWOOD_MASS_SLOTS.slice(0, count);
+  const litSlotIndex = rootwood.litId ? seedFrom(rootwood.litId) % slots.length : -1;
+
+  const groundShadow = `<ellipse class="vl-wood-ground-shadow" cx="95" cy="252" rx="78" ry="14"/>`;
+
+  const masses = slots.map((s, i) => {
+    const lean = ((seedFrom(`rw-${i}`) % 100) / 100 - 0.5) * 6;
+    const lit = i === litSlotIndex;
+    const base = ROOTWOOD_ROW_COLOR[s.row];
+    // The mass itself always keeps its own row green (Part 3.2: the wood's
+    // colour is a depth device, not a status light) — the amber invitation
+    // is a soft glow laid OVER the canopy, never a recolour of it, so the
+    // wood still reads as a wood with one warm window inside it, not a
+    // tree-shaped light bulb.
+    const faceStyle = ` style="fill:${litFace(base, atmo.time)}"`;
+    const shadeStyle = ` style="fill:${shadeFace(base, atmo.time)}"`;
+    const cls = `vl-wood-canopy vl-wood-canopy--row${s.row}`;
+    const cx = (s.x + lean).toFixed(1);
+    const mass = `
+      <ellipse class="${cls}"${faceStyle} cx="${cx}" cy="${s.y}" rx="${s.r}" ry="${(s.r * 0.86).toFixed(1)}"/>
+      <ellipse class="${cls}"${shadeStyle} cx="${(s.x + lean - s.r * 0.5).toFixed(1)}" cy="${(s.y + s.r * 0.3).toFixed(1)}" rx="${(s.r * 0.5).toFixed(1)}" ry="${(s.r * 0.42).toFixed(1)}"/>`;
+    const glow = lit
+      ? `<circle class="vl-wood-glow vl-wood-glow--outer" cx="${cx}" cy="${(s.y - 1).toFixed(1)}" r="14.4"/>
+         <circle class="vl-wood-glow" cx="${cx}" cy="${(s.y - 1).toFixed(1)}" r="7.2"/>`
       : '';
-    // Fireflies (§9.3, §5.4): each is a 0.4%-radius dot with its own
-    // 2%-radius glow; a Landmark's gathered fireflies additionally share
-    // one 5%-radius pool, all pinned shares of frame width (360).
-    const fireflies = (isLandmark && night)
-      ? `<ellipse class="vl-landmark-glow" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(0.05 * 360).toFixed(1)}" ry="${(0.05 * 360 * 0.6).toFixed(1)}"/>` +
-        [[-4, -6], [5, -3], [1, 4]].map(([dx, dy], k) => `
-          <circle class="vl-firefly-glow" style="animation-delay:${k * 0.9}s" cx="${(x + dx).toFixed(1)}" cy="${(y + dy).toFixed(1)}" r="${(0.02 * 360).toFixed(1)}"/>
-          <circle class="vl-firefly" style="animation-delay:${k * 0.9}s" cx="${(x + dx).toFixed(1)}" cy="${(y + dy).toFixed(1)}" r="${(0.004 * 360).toFixed(1)}"/>`).join('')
-      : '';
-    const shadows = shadowPairSVG(x, y + r + 3, r * 1.3, r * 2, atmo);
-    return `
-      ${shadows}
-      ${glow}
-      <path class="vl-canopy-trunk" d="M${(x - lean * 0.6).toFixed(1)},${(y + r + 5).toFixed(1)} L${x.toFixed(1)},${(y + r - 2).toFixed(1)}"/>
-      <ellipse class="${stageCls}"${faceStyle} cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${r.toFixed(1)}" ry="${(r * 0.88).toFixed(1)}"/>
-      <ellipse class="${stageCls}"${shadeStyle} cx="${(x - r * 0.66).toFixed(1)}" cy="${(y + r * 0.28).toFixed(1)}" rx="${(r * 0.56).toFixed(1)}" ry="${(r * 0.46).toFixed(1)}"/>
-      ${nest}${fireflies}`;
+    return `${mass}${glow}`;
   }).join('');
+
+  const emergentCrown = rootwood.hasLandmark ? `
+    <ellipse class="vl-wood-canopy vl-wood-canopy--row0 vl-wood-canopy--landmark" cx="62" cy="158" rx="13" ry="11"/>
+    <ellipse class="vl-canopy-nest" cx="66" cy="156" rx="2.6" ry="1.6"/>
+    ${atmo.time === 'night' ? `<ellipse class="vl-landmark-glow" cx="62" cy="158" rx="18" ry="10.8"/>
+      ${[[-4, -6], [5, -3], [1, 4]].map(([dx, dy], k) => `
+        <circle class="vl-firefly-glow" style="animation-delay:${k * 0.9}s" cx="${62 + dx}" cy="${158 + dy}" r="7.2"/>
+        <circle class="vl-firefly" style="animation-delay:${k * 0.9}s" cx="${62 + dx}" cy="${158 + dy}" r="1.4"/>`).join('')}` : ''}
+  ` : '';
+
+  return `${groundShadow}${masses}${emergentCrown}`;
 }
 
-function canopyRadius(stage) {
-  return { sprout: 4, young: 7, in_leaf: 9, mature: 11, ancient: 13 }[stage] ?? 7;
+/** Two soft masses and a tail sweep, no face (Part 9.1, 9.2): the hearth
+ *  cat, sleeping wherever it has been placed (Part 4.5) — its entire
+ *  animation is one slow breathing cycle. It is never clickable and
+ *  never reacts; the anti-companion, the world's quietest joke. */
+function hearthCatSVG(spot) {
+  const { x, y } = spot;
+  return `
+    <g class="vl-cat" style="transform-origin:${x}px ${y}px" aria-hidden="true">
+      <path class="vl-cat-tail" d="M${(x + 5).toFixed(1)},${y} Q${(x + 9).toFixed(1)},${(y - 3).toFixed(1)} ${(x + 7).toFixed(1)},${(y - 6).toFixed(1)}"/>
+      <ellipse class="vl-cat-body" cx="${x}" cy="${y}" rx="5.4" ry="2.6"/>
+      <ellipse class="vl-cat-body" cx="${(x - 4.2).toFixed(1)}" cy="${(y - 1.4).toFixed(1)}" rx="2.6" ry="2.2"/>
+      <ellipse class="vl-cat-chest" cx="${(x - 4.6).toFixed(1)}" cy="${(y - 0.4).toFixed(1)}" rx="1.3" ry="1.1"/>
+    </g>`;
+}
+
+/**
+ * The Hearth (THE WORLD Part 4, Appendix C.3): the low dry-stone wall
+ * with the Gate set in its gap, the cottage (gable, roof, the window
+ * that is warm at every dusk and every night, unconditionally, and the
+ * chimney), the bench, the bench lantern, and the kettle-stone. Given
+ * whole from day one (Part 4.2 — home is given, never earned). The
+ * hearth cat, when the ambient roll finds it, sleeps at one of its two
+ * authored spots (Part 4.5, 9.3).
+ */
+function hearth(atmo, cat) {
+  const warm = atmo.time === 'dusk' || atmo.time === 'night';
+  const wallShadows = shadowPairSVG(75.6, 448, 20, 12, atmo) + shadowPairSVG(86.4, 450.8, 20, 12, atmo);
+  const cottageShadow = shadowPairSVG(309.6, 470.4, 100, 18, atmo);
+  const benchLantern = warm
+    ? `<circle class="vl-lantern-glow" cx="187.2" cy="481.6" r="${(0.07 * 360).toFixed(1)}"/>
+       <circle class="vl-lantern" cx="187.2" cy="481.6" r="2"/>`
+    : '';
+  const windowGlow = warm ? `<ellipse class="vl-window-glow" cx="302.4" cy="487.2" rx="${(0.09 * 360).toFixed(1)}" ry="${(0.09 * 360 * 0.7).toFixed(1)}"/>` : '';
+  const cold = atmo.season === 'autumn' || atmo.season === 'winter';
+  const smoke = (atmo.time === 'dawn' && cold) ? `
+    <ellipse class="vl-chimney-smoke" cx="280.8" cy="405" rx="4.5" ry="3.2"/>
+    <ellipse class="vl-chimney-smoke vl-chimney-smoke--2" cx="284" cy="396" rx="3.6" ry="2.6"/>` : '';
+  const catSVG = cat ? hearthCatSVG(cat) : '';
+
+  return `
+    <!-- The Hearth plane (Part 3.1, y76–100%): the near hillside, darkest
+         and warmest land in the frame, cut diagonally, that the whole
+         composition stands inside. -->
+    <path class="vl-hearth-ground" d="M0,430 Q160,410 360,436 L360,560 L0,560 Z"/>
+
+    <!-- The low dry-stone wall, with the Gate set in its gap (Appendix
+         C.3), and the head of the path leaving it. -->
+    <g class="vl-wall" aria-hidden="true">
+      ${wallShadows}
+      <path class="vl-wall-shade" d="M0,436.8 L75.6,443.9 L75.6,460.7 L0,453.6 Z"/>
+      <path class="vl-wall-lit" d="M0,436.8 L75.6,443.9 L75.6,449.9 L0,442.8 Z"/>
+      <path class="vl-wall-shade" d="M86.4,444.9 L360,470.4 L360,487.2 L86.4,461.7 Z"/>
+      <path class="vl-wall-lit" d="M86.4,444.9 L360,470.4 L360,476.4 L86.4,450.9 Z"/>
+    </g>
+    <g class="vl-gate" aria-hidden="true">
+      <path class="vl-gate-post" d="M75.6,448 L75.6,414.4"/>
+      <path class="vl-gate-post" d="M86.4,450.8 L86.4,417.2"/>
+      <path class="vl-gate-lintel" d="M75.6,414.4 Q81,408.5 86.4,417.2"/>
+    </g>
+
+    <!-- The cottage: gable cropped at the frame's right edge, the warm
+         window, the chimney (Appendix C.3). Home from day one, never
+         a door that opens (Part 4.1, 4.4). -->
+    <g class="vl-cottage" aria-hidden="true">
+      ${cottageShadow}
+      <path class="vl-cottage-wall-shade" d="M244.8,470.4 L374.4,470.4 L374.4,515 L244.8,515 Z"/>
+      <path class="vl-cottage-wall-lit" d="M244.8,470.4 L309.6,470.4 L309.6,515 L244.8,515 Z"/>
+      <path class="vl-cottage-roof-shade" d="M309.6,442.4 L374.4,470.4 L309.6,470.4 Z"/>
+      <path class="vl-cottage-roof-lit" d="M244.8,470.4 L309.6,442.4 L309.6,470.4 Z"/>
+      <path class="vl-cottage-wall-shade" d="M277,431.2 L284.6,431.2 L284.6,451 L277,451 Z"/>
+      <path class="vl-cottage-wall-lit" d="M277,410 L284.6,410 L284.6,431.2 L277,431.2 Z"/>
+      ${smoke}
+      <rect class="vl-window${warm ? ' vl-window--lit' : ''}" x="295.2" y="473.2" width="14.4" height="28" rx="1.4"/>
+      ${windowGlow}
+    </g>
+
+    <!-- The bench, the bench lantern, and the kettle-stone (Appendix
+         C.3) — the Journal lives here (Bible §4.9); a text mark still
+         opens it until the bench itself is staged (THE WORLD Part 10.5,
+         Stage W7). -->
+    <path class="vl-bench" d="M147.6,490.4 L183.6,490.4 L183.6,495.2 L147.6,495.2 Z"/>
+    <path class="vl-bench-legs" d="M150,495.2 L150,499 M181.2,495.2 L181.2,499" stroke-linecap="round"/>
+    ${benchLantern}
+    <ellipse class="vl-kettle-stone" cx="198" cy="498.4" rx="4.6" ry="3.2"/>
+    ${catSVG}
+  `;
+}
+
+/** Low mist in the hollows (Visual Guide 11.3, THE WORLD Appendix C.1:
+ *  dawn mist bands at y46–52% and y58–62%): layered translucent shapes,
+ *  never a blur filter. Drawn always; CSS shows it only at dawn and at
+ *  night, where it does the most emotional work. */
+function mist() {
+  return `
+    <g class="vl-mist-layer" aria-hidden="true">
+      <ellipse class="vl-mist" cx="150" cy="274.4" rx="140" ry="16.8"/>
+      <ellipse class="vl-mist vl-mist--2" cx="195" cy="336" rx="118" ry="11.2"/>
+    </g>`;
 }

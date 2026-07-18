@@ -87,7 +87,6 @@ export const GARDEN_LINES = Object.freeze({
 export const VALLEY_LINES = Object.freeze({
   journal: 'Journal',
   settings: 'Settings',
-  gate: 'Through the Gate',    // the way out is a place, not a nav item (§16.9)
   toValley: 'The valley',      // ascend from a biome to the Overlook
   // Accessible names for the wordless world (screen readers only).
   overlookLabel: 'The valley, seen from above',

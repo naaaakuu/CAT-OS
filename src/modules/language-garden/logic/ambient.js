@@ -89,3 +89,40 @@ export function pickAmbientEvent(state = {}, date = new Date(), random = Math.ra
 export function hasNest(state) {
   return state.landmark === true;
 }
+
+/* ---------------- The hearth cat (THE WORLD Part 4.5, 9.2, 9.3) ---------------- */
+
+/** The two authored spots the cat might be found (Appendix C.3): bench
+ *  left end (43, 87)% and the wall right of the Gate (28, 80)%, converted
+ *  to the Overlook's 360×560 pixel frame (100% width = 360, 100% height
+ *  = 560 — the same convention every coordinate in overlook.js uses). */
+export const HEARTH_CAT_SPOTS = Object.freeze([
+  { spot: 'bench', x: 154.8, y: 487.2 },
+  { spot: 'wall', x: 100.8, y: 448 },
+]);
+
+const HEARTH_CAT_BASE_RATE = 0.10;
+const HEARTH_CAT_COLD_SEASON_MULTIPLIER = 2;
+
+/**
+ * Whether the hearth cat is visiting right now, and where (Part 4.5: "It
+ * sleeps on the bench or the wall — dusk and night more often, cold
+ * seasons more often, rarely and unpredictably"). Eligible only at dusk
+ * and night (Part 9.3); the rate doubles in autumn and winter; it averages
+ * no more than one appearance in ten eligible visits. It is never a
+ * reward for a tap (Law 8, P45, P147), so this re-rolls true randomness on
+ * every call, exactly like pickAmbientEvent — never seeded from the date
+ * or from anything the learner did.
+ * @param {string} time  one of atmosphere.js's TIMES_OF_DAY
+ * @param {string} season  one of atmosphere.js's world seasons
+ * @param {() => number} random  injectable for deterministic tests
+ * @returns {{spot: string, x: number, y: number}|null}
+ */
+export function pickHearthCat(time, season, random = Math.random) {
+  if (time !== 'dusk' && time !== 'night') return null;
+  const rate = (season === 'autumn' || season === 'winter')
+    ? HEARTH_CAT_BASE_RATE * HEARTH_CAT_COLD_SEASON_MULTIPLIER
+    : HEARTH_CAT_BASE_RATE;
+  if (random() > rate) return null;
+  return HEARTH_CAT_SPOTS[Math.floor(random() * HEARTH_CAT_SPOTS.length)];
+}
