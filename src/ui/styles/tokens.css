@@ -211,6 +211,21 @@
   --garden-rootwood-floor-night:       #40513E;
   --garden-rootwood-floor-night-shade: #2C3B31;
 
+  /* ---- Phase V, Stage W4 (THE WORLD Part 10.3): the veil — the one
+     surface text ever sits on inside the world. Two pinned pairs (day
+     spans dawn through dusk; night is its own), never a third for the
+     app's own light/dark theme toggle — the veil is governed by the
+     garden's hour, not by the shell's theme, so it is declared once and
+     repeated identically in every theme block, exactly like every other
+     "night IS the dark theme" token above. Both pairs are mechanically
+     AA-checked (tools/verify.mjs) at 92% opacity against the ink they
+     carry. */
+  --garden-veil-day-bg:    #FAF7EF;
+  --garden-veil-day-ink:   #1C1D1F;
+  --garden-veil-night-bg:  #1B2737;
+  --garden-veil-night-ink: #D9E3F2;
+  --garden-veil-opacity: 0.92;
+
   /* Weather particle pigments (§6.4). */
   --garden-weather-rain: #C7D6E0;
   --garden-weather-snow: #F4F7FA;
@@ -452,6 +467,13 @@
     --garden-rootwood-floor-night-shade: #2C3B31;
     --garden-rootwood-shaft: #5C5238;
 
+    /* The veil (Stage W4): identical in every theme block — see :root. */
+    --garden-veil-day-bg:    #FAF7EF;
+    --garden-veil-day-ink:   #1C1D1F;
+    --garden-veil-night-bg:  #1B2737;
+    --garden-veil-night-ink: #D9E3F2;
+    --garden-veil-opacity: 0.92;
+
     --garden-weather-rain: #5A6C78;
     --garden-weather-snow: #D8E0E8;
     --garden-weather-fog:  #4A5460;
@@ -600,6 +622,13 @@
   --garden-rootwood-floor-night:       #40513E;
   --garden-rootwood-floor-night-shade: #2C3B31;
   --garden-rootwood-shaft: #5C5238;
+
+  /* The veil (Stage W4): identical in every theme block — see :root. */
+  --garden-veil-day-bg:    #FAF7EF;
+  --garden-veil-day-ink:   #1C1D1F;
+  --garden-veil-night-bg:  #1B2737;
+  --garden-veil-night-ink: #D9E3F2;
+  --garden-veil-opacity: 0.92;
 
   --garden-weather-rain: #5A6C78;
   --garden-weather-snow: #D8E0E8;

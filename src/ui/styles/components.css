@@ -2044,6 +2044,43 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .grove-scene[data-time="dusk"]      { --lg-f-time: sepia(0.18) brightness(0.96); }
 .grove-scene[data-time="night"]     { --lg-f-time: brightness(0.7) saturate(0.8) hue-rotate(-8deg); }
 
+/* ---------- Becalm (Phase V, Stage W4, THE WORLD Part 10.3) ----------
+   A session or a plant approach stages the world as a becalmed backdrop:
+   ambient life pauses, the scene deepens slightly, and its values
+   quieten with a wash of the hour's own shadow colour. Growth still
+   plays at full clarity on top of this same quiet ground — nothing here
+   dims the plant's own extension animation. */
+.grove-scene--becalmed {
+  transform: scale(1.03);
+  filter: brightness(0.87);
+  animation: grove-becalm-in var(--duration-slow) var(--ease-out) both;
+}
+@keyframes grove-becalm-in { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: scale(1.03); } }
+.grove-scene--becalmed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--becalm-wash-color, transparent);
+  opacity: 0.08;
+  pointer-events: none;
+}
+/* Ambient motion pauses during a session (Bible §11.6): every idle loop
+   in the cathedral holds still while the learner thinks. Growth's own
+   animation is added later (session.js), on an element already inside
+   this scene, and is never named here — it keeps moving. */
+.grove-scene--becalmed .grove-shaft,
+.grove-scene--becalmed .grove-cathedral-mist,
+.grove-scene--becalmed .grove-cathedral-firefly,
+.grove-scene--becalmed .grove-cathedral-firefly-glow,
+.grove-scene--becalmed .grove-plant--asking::before,
+.grove-scene--becalmed .grove-plant--invite::before {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .grove-scene--becalmed { animation: none; }
+}
+
 /* The earth the grove stands on (Phase 4.9): a soft rise of ground so
    the plants stand in a place, never float on a colour. Two painted
    bands — a far slope, a near floor — flat shapes, no gradient-plastic. */
@@ -2955,8 +2992,100 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 @media (hover: hover) { .valley__mark:hover { color: var(--color-ink); } }
 
-/* ---------- Plant detail ---------- */
-.lg-plant__hero { width: 55%; max-width: 11rem; margin: 0 auto var(--space-3); aspect-ratio: 1 / 1.08; }
+/* ---------- Plant detail (Phase V, Stage W4) ----------
+   THE WORLD Part 10.4: "opening a plant is an approach, not a page." The
+   biome stays as becalmed ground (the same .grove-scene--becalmed
+   staging a session uses); the approached plant, marked with
+   [data-tended-plant] by biome.js's focusedGroveSceneHTML, is sized up
+   and permanently named at its base; its key, leaves, and one action
+   float on the veil. */
+.lg-plant { position: relative; overflow: hidden; border-radius: var(--radius-xl); }
+.lg-plant--enter { animation: lg-plant-approach var(--duration-slow) var(--ease-out) both; }
+@keyframes lg-plant-approach { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .lg-plant--enter { animation: none; } }
+.lg-plant__world {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.lg-plant__world .grove-scene { height: 100%; }
+/* The approached plant stands large (Part 10.4) — the camera closing on
+   it — base-anchored so it grows upward from its own ground point.
+   :has() reaches the one slot carrying the focused plant without
+   threading a new parameter through the whole render chain. */
+.lg-plant__world .grove-plant--slot:has([data-tended-plant]) {
+  transform: translateX(-50%) scale(1.6);
+  transform-origin: 50% 100%;
+  z-index: 2;
+}
+.lg-plant__world .grove-plant--slot:has([data-tended-plant]) .grove-plant__name {
+  opacity: 1; /* names on approach (Part 8.4) — the plant screen is one of the three */
+}
+/* The horizon focus treatment (size-up + standing name) is Part 10.4's
+   approach only — .lg-plant__world scopes it there specifically. A
+   session's own world (.lgx__world) marks [data-tended-plant] on the
+   SAME horizon plant for the growth animation to find, but Part 10.3
+   asks for growth "at its real relative scale," never enlarged, and
+   names only on "focus, peek, or the plant screen" — a session is none
+   of those three, so it must render the ordinary, undecorated horizon
+   silhouette. */
+.lg-plant__world .grove-horizon__focus {
+  transform: scale(1.35);
+  transform-origin: 50% 100%;
+}
+.lg-plant__world .grove-horizon__focus .grove-plant__name--horizon { opacity: 1; }
+.grove-horizon__focus {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* An Ancient's horizon silhouette is deliberately low-contrast for the
+   ordinary distant view (cat-plant.js's own .pl-sil-g, 0.34/0.46 —
+   "the cheapest possible render," meant to recede). On approach the
+   camera has closed the distance (Part 10.4) — a shape sized up but
+   left at its far-away opacity would still read as barely-there against
+   a night sky, undermining "the plant stands large." This selector's
+   specificity outranks cat-plant's own single-class rule regardless of
+   which renders later in the DOM. */
+.lg-plant__world .grove-horizon__focus .pl-sil-g { opacity: 0.85; }
+.grove-horizon__focus .grove-plant__name--horizon {
+  /* Keep .grove-plant__name's own guaranteed-legible pill (surface
+     background, ink-2 text) — this sits directly on the world, same as
+     the veil's own reasoning: a name that only "inherits" whatever
+     colour happens to be ambient here has no contrast guarantee at all,
+     and this label sits over the night sky as often as over the day one. */
+  position: static;
+  margin-top: var(--space-1);
+  transform: none;
+}
+.lg-plant__close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 3;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  font-size: var(--text-lg);
+  color: var(--color-ink-2);
+  background: var(--color-surface);
+  opacity: 0.86;
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.lg-plant__close:active { transform: scale(var(--press-scale)); }
+@media (hover: hover) { .lg-plant__close:hover { background: var(--color-surface-2); } }
+.lg-plant__veil-wrap {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - var(--space-8));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-6) var(--space-4);
+}
+.lg-plant__veil { margin-left: auto; margin-right: auto; }
 .lg-plant__key {
   font-family: var(--font-reading);
   font-size: var(--text-lg);
@@ -3044,55 +3173,144 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .lg-wrecord__day--sun,
 .lg-wrecord__day--clear-night { color: var(--color-ink-2); }
 
-/* ---------- Session: the six beats ---------- */
-/* The session is always immersive (a garden route), so the nav is hidden and
-   the beats own the full height. */
-.lgx { display: flex; flex-direction: column; min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - var(--space-8)); }
+/* ---------- Session: the six beats (Phase V, Stage W4) ----------
+   THE WORLD Part 10.3: the session's stage is the biome itself. The
+   cathedral scene renders as a becalmed ground layer (.lgx__world, full
+   bleed, behind everything); every question beat floats on the veil,
+   the only surface text ever sits on inside the world; Growth clears
+   the veil completely and grows the same plant, in place, before the
+   quiet line appears on the clear air. */
+.lgx {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - var(--space-8));
+}
+.lgx__world {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* a becalmed backdrop, never a tap target (§11.6) */
+}
+.lgx__world .grove-scene { height: 100%; }
 .lgx__close {
-  align-self: flex-end;
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 3;
   width: var(--tap-target);
   height: var(--tap-target);
   font-size: var(--text-lg);
-  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the paper (P5 audit) */
+  color: var(--color-ink-2);
+  background: var(--color-surface);
+  opacity: 0.86;
   border-radius: var(--radius-full);
   transition: background-color var(--duration-fast) var(--ease-out),
               transform var(--duration-fast) var(--ease-out);
 }
 .lgx__close:active { transform: scale(var(--press-scale)); }
 @media (hover: hover) { .lgx__close:hover { background: var(--color-surface-2); } }
-.lgx__plant {
-  width: 34%;
-  max-width: 7rem;
-  aspect-ratio: 1 / 1.08;
-  margin: 0 auto;
-  opacity: 0.9;
-}
+
 /* Top-anchored, not vertically centered: the Reach beat accumulates
    content (parts → joined word → quiz → an optional hint/retry), and a
    centered flex block visibly jumps as each piece is appended. A fixed
    top offset also reads as composed on short beats (Key, Growth)
    instead of leaving the content stranded in a void mid-screen. */
-.lgx__stage { flex: 1; display: flex; flex-direction: column; padding-top: min(10vh, var(--space-8)); }
-
-/* The arrival (Visual Guide Part 2): before the first question of the
-   learner's life in the Garden, the Rootwood fades up from a warm dark —
-   the world assembles from light, never from white, never from a spinner.
-   Once, ever. A tap moves on early. */
-.lgx-arrival {
-  position: fixed; inset: 0;
-  z-index: 40;
-  background: #20261C;
-  animation: lgx-veil-in 400ms var(--ease-out) both;
+.lgx__veil-wrap {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - var(--space-8));
+  display: flex;
+  flex-direction: column;
+  padding: min(10vh, var(--space-8)) var(--space-4) var(--space-6);
+  transition: opacity 280ms var(--ease-out);
 }
-.lgx-arrival__wood {
-  width: 100%; height: 100%; display: block;
-  opacity: 0;
-  animation: lgx-wood-up 1700ms var(--ease-out) 250ms forwards;
+/* Growth (Part 10.3): "the veil clears completely." */
+.lgx__veil-wrap.lgx-veil-wrap--cleared { opacity: 0; pointer-events: none; }
+
+/* The veil (THE WORLD Part 10.3): an organic wash of light behind the
+   text, feathered by two layered, lower-opacity copies of the same
+   shape — never a blur filter, never a hard rectangle, never a border.
+   Pinned pair, day vs night (tokens.css); AA-checked mechanically at
+   both (tools/verify.mjs). The element's OWN colour carries the 92%
+   opacity (color-mix on the fill only) so the TEXT sitting on it stays
+   fully opaque and legible — opacity on the whole box would dilute the
+   ink itself, not just the wash. */
+.lgx-veil {
+  --veil-bg: var(--garden-veil-day-bg);
+  --veil-ink: var(--garden-veil-day-ink);
+  position: relative;
+  isolation: isolate;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: min(34ch, 100%);
+  padding: var(--space-5) var(--space-6);
+  /* Percentage radii (not fixed px) so the shape stays a soft, leaning
+     blob relative to its own size rather than a rectangle with rounded
+     corners — a card's corners look rounded; a pool of light has no
+     corners to notice at all. */
+  border-radius: 44% 56% 51% 49% / 57% 44% 56% 43%;
+  background: color-mix(in srgb, var(--veil-bg) 92%, transparent);
+  color: var(--veil-ink);
+  /* The outermost, softest ring of the feather: box-shadow follows the
+     blob's own border-radius automatically, so it needs no extra shape
+     of its own. A single wide, heavily-blurred layer — cheap (one
+     element, no layout impact) and the same technique this codebase's
+     own --shadow-2 already relies on elsewhere. */
+  box-shadow: 0 0 46px 10px color-mix(in srgb, var(--veil-bg) 16%, transparent);
+}
+[data-time="night"] .lgx-veil { --veil-bg: var(--garden-veil-night-bg); --veil-ink: var(--garden-veil-night-ink); }
+/* The feather (Part 10.3: "feathered by layered shapes, never a blur
+   filter, never a hard rectangle"): four widening, quietening rings
+   behind the main fill, each its own shape (a different lean than the
+   main box, so the whole thing reads as one soft irregular glow, not a
+   rectangle with a halo) — plus a small blur on only the outermost two
+   (a modest, localised blur behind everything, the same budget-safe
+   technique this codebase's own --shadow-2 already uses; never the
+   full-scene blur the performance rule actually forbids). */
+.lgx-veil::before,
+.lgx-veil::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: color-mix(in srgb, var(--veil-bg) 46%, transparent);
+  border-radius: 52% 48% 45% 55% / 46% 54% 48% 52%;
+}
+.lgx-veil::before { inset: -18px; filter: blur(6px); }
+.lgx-veil::after {
+  inset: -38px;
+  background: color-mix(in srgb, var(--veil-bg) 20%, transparent);
+  border-radius: 48% 52% 55% 45% / 52% 46% 54% 48%;
+  filter: blur(14px);
+}
+/* Secondary text inside the veil follows the same ink, quieted — never
+   the app's fixed ink-2/ink-3 tokens, which are not day/night-aware. */
+.lgx-veil .lgx-joined__meaning,
+.lgx-veil .lgx-hint,
+.lgx-veil .lgx-part__gloss { color: var(--veil-ink); opacity: 0.7; }
+.lgx-veil .lgx-part { background: color-mix(in srgb, var(--veil-bg) 55%, var(--color-surface)); }
+.lgx-veil .lg-leaf { color: inherit; background: color-mix(in srgb, currentColor 12%, transparent); }
+/* .hint/.muted are reused app-wide with fixed, non-veil-aware ink tokens
+   (base.css) — inside the veil they follow the veil's own ink instead,
+   quieted, so they stay legible at night too. */
+.lgx-veil .hint,
+.lgx-veil .muted { color: inherit; opacity: 0.72; }
+
+/* The arrival (Visual Guide Part 2, THE WORLD Part 10.3): the real
+   Rootwood the world already rendered behind this veil is there, whole
+   and still, from the first frame — a warm dark simply lifts off it,
+   ~2 seconds, once, ever. Never from white, never from a spinner, never
+   a painted stand-in. A tap moves on early. */
+.lgx-arrival {
+  position: absolute; inset: 0;
+  z-index: 5;
+  background: #20261C;
+  animation: lgx-arrival-fade 2000ms var(--ease-out) 300ms both;
 }
 .lgx-arrival.is-leaving { animation: lgx-veil-out 620ms var(--ease-out) both; }
-@keyframes lgx-veil-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes lgx-wood-up { to { opacity: 1; } }
+@keyframes lgx-arrival-fade { from { opacity: 1; } to { opacity: 0; } }
 @keyframes lgx-veil-out { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lgx-arrival { animation: none; opacity: 0; } }
 
 /* Programmatic beat focus (P5) never draws a ring on the container —
    the interactive children carry their own focus styles. */
@@ -3113,9 +3331,6 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    motion has come to rest, §11.4). A soft opacity fade, nothing that moves. */
 .is-veiled { opacity: 0; pointer-events: none; }
 .lgx-ask { transition: opacity var(--duration-slow) var(--ease-out); }
-.lgx-growth-line,
-.lgx-beat--growth .btn,
-.lgx-beat--growth .hint { transition: opacity var(--duration-slower) var(--ease-out); }
 
 .lgx-sentence {
   font-family: var(--font-reading);
@@ -3145,7 +3360,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   animation: lgx-key-warm 1100ms var(--ease-out) 200ms both;
 }
 @keyframes lgx-key-warm {
-  0%, 100% { color: var(--color-ink); }
+  0%, 100% { color: var(--veil-ink); }
   32%      { color: var(--garden-discovery); }
 }
 @media (prefers-reduced-motion: reduce) { .lgx-key { animation: none; } }
@@ -3168,6 +3383,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   background: var(--color-surface);
   font-family: var(--font-reading);
   font-size: var(--text-lg);
+  color: var(--color-ink);
   transition: transform var(--duration) var(--ease-out), border-color var(--duration) var(--ease-out), background-color var(--duration) var(--ease-out);
 }
 .lgx-part:active { transform: scale(var(--press-scale)); }
@@ -3176,7 +3392,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .lgx-part.is-revealed { border-color: var(--garden-inleaf); background: var(--color-accent-subtle); }
 .lgx-part.is-joined { transform: scale(0.92); opacity: 0.85; }
-.lgx-part__gloss { font-size: var(--text-2xs); font-family: var(--font-ui); color: var(--color-ink-2); }
+.lgx-part__gloss { font-size: var(--text-2xs); font-family: var(--font-ui); }
 
 .lgx-joined { text-align: center; margin-top: var(--space-5); animation: screen-in var(--duration-slow) var(--ease-out) both; }
 .lgx-joined__word {
@@ -3185,19 +3401,55 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-1);
 }
-.lgx-joined__meaning { color: var(--color-ink-2); margin-bottom: var(--space-4); }
+.lgx-joined__meaning { margin-bottom: var(--space-4); }
 
 .lgx-landed { text-align: center; font-weight: var(--weight-medium); margin: var(--space-4) 0; }
-.lgx-hint { text-align: center; color: var(--color-ink-2); margin: var(--space-4) 0; }
+.lgx-hint { text-align: center; margin: var(--space-4) 0; }
 
-.lgx-beat--growth { text-align: center; }
-.lgx-growth-art { width: 60%; max-width: 12rem; margin: 0 auto var(--space-5); aspect-ratio: 1 / 1.08; }
-.lgx-growth-art.is-skippable { cursor: pointer; }
-.lgx-growth-line {
+/* A full-screen, invisible tap target — skippable growth (from the
+   second viewing onward, §11.2) without demanding a precise tap on a
+   small in-scene plant. */
+.lgx-skip { position: absolute; inset: 0; z-index: 1; background: none; border: none; cursor: pointer; }
+
+/* Growth's clear-air text (Part 10.3: "the one line appears low on the
+   clear air… no card, no border, no bold"). The veil is gone; a soft
+   text-shadow in the hour's own veil tone keeps it legible over
+   whatever the becalmed world is doing underneath, without becoming a
+   surface of its own. */
+.lgx-clear {
+  position: absolute;
+  left: var(--space-5); right: var(--space-5);
+  bottom: max(env(safe-area-inset-bottom), var(--space-7));
+  z-index: 1;
+  text-align: center;
+}
+.lgx-clear__line {
   font-family: var(--font-reading);
   font-size: var(--text-xl);
   letter-spacing: var(--tracking-tight);
-  margin-bottom: var(--space-6);
+  margin: 0 0 var(--space-4);
+  color: var(--garden-veil-day-ink);
+  text-shadow: 0 1px 14px color-mix(in srgb, var(--garden-veil-day-bg) 80%, transparent);
+  transition: opacity var(--duration-slower) var(--ease-out);
+}
+.lgx-clear__back {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  color: var(--garden-veil-day-ink);
+  text-shadow: 0 1px 10px color-mix(in srgb, var(--garden-veil-day-bg) 80%, transparent);
+  opacity: 0.82;
+  cursor: pointer;
+  transition: opacity var(--duration-slower) var(--ease-out);
+}
+.lgx-clear__hint { color: inherit; opacity: 0.6; font-size: var(--text-xs); margin: 0 0 var(--space-2); }
+[data-time="night"] .lgx-clear__line,
+[data-time="night"] .lgx-clear__back {
+  color: var(--garden-veil-night-ink);
+  text-shadow: 0 1px 14px color-mix(in srgb, var(--garden-veil-night-bg) 80%, transparent);
 }
 
 /* ---------- The growth moment (§11.4): the one peak per session ----------
@@ -3205,14 +3457,19 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    of the soil (a clip reveal from the base, which reads as extension, not the
    cheap uniform scale the Bible rejects) and settles with a single organic
    overshoot. Composite-friendly (clip-path + transform), so it holds 60fps
-   on an old phone (§11.7). The copy waits for stillness (handled in JS). */
-.lgx-grow-plant { display: block; transform-origin: 50% 92%; }
+   on an old phone (§11.7). The copy waits for stillness (handled in JS).
+   Stage W4: this now plays on the SAME plant already standing in the
+   world, whose container may have just been resized (instantly, unseen
+   while clipped) to its post-growth stage — --grow-scale-from corrects
+   for that size jump so the extension still reads as continuous growth,
+   defaulting to 1 (no correction) for the pre-W4 fixed-box case. */
+.lgx-grow-plant { display: block; transform-origin: 50% 100%; }
 .lgx-grow-plant.is-growing { animation: lgx-grow 1250ms var(--ease-out) 150ms both; }
 @keyframes lgx-grow {
-  0%   { clip-path: inset(94% 0 0 0); opacity: 0.55; transform: scaleY(0.92); }
-  14%  { clip-path: inset(92% 0 0 0); opacity: 0.65; transform: scaleY(0.90); }  /* anticipation */
-  60%  { clip-path: inset(0 0 0 0);  opacity: 1;    transform: scaleY(1.04); }   /* extension, overshoot */
-  80%  { transform: scaleY(0.99); }                                             /* settle */
+  0%   { clip-path: inset(94% 0 0 0); opacity: 0.55; transform: scale(var(--grow-scale-from, 1)) scaleY(0.92); }
+  14%  { clip-path: inset(92% 0 0 0); opacity: 0.65; transform: scale(var(--grow-scale-from, 1)) scaleY(0.90); }  /* anticipation */
+  60%  { clip-path: inset(0 0 0 0);  opacity: 1;    transform: scale(1) scaleY(1.04); }   /* extension, overshoot */
+  80%  { transform: scale(1) scaleY(0.99); }                                              /* settle */
   100% { clip-path: inset(0 0 0 0);  opacity: 1;    transform: none; }
 }
 /* Reduced motion is not a downgrade (§11.5): a clear before→after with a

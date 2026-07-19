@@ -195,3 +195,30 @@ export function castShadow(bx, by, objHeight, objWidth, hour) {
     opacity: CAST_SHADOW_OPACITY,
   };
 }
+
+/* ---- WCAG contrast (Stage W4, THE WORLD Part 10.3): the veil's two
+   pinned ink/background pairs must measure ≥4.5:1 mechanically, at
+   every hour and season, before the screen ships. Standard relative
+   luminance + contrast ratio (WCAG 2.x), pure colour math like
+   everything else in this file. */
+
+function srgbToLinear(c) {
+  const v = c / 255;
+  return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+}
+
+/** WCAG relative luminance of a hex colour, 0 (black) to 1 (white). */
+export function relativeLuminance(hex) {
+  const { r, g, b } = hexToRgb(hex);
+  return 0.2126 * srgbToLinear(r) + 0.7152 * srgbToLinear(g) + 0.0722 * srgbToLinear(b);
+}
+
+/** WCAG contrast ratio between two hex colours, 1 (no contrast) to 21
+ *  (black on white). AA body text requires ≥4.5. */
+export function contrastRatio(hexA, hexB) {
+  const lA = relativeLuminance(hexA);
+  const lB = relativeLuminance(hexB);
+  const lighter = Math.max(lA, lB);
+  const darker = Math.min(lA, lB);
+  return (lighter + 0.05) / (darker + 0.05);
+}

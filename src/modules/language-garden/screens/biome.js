@@ -82,7 +82,7 @@ export async function renderBiome(outlet, context, params) {
  *  order below can address them directly. `scale` is the slot's own base
  *  scale (back/front/near — Part 8.5); `band` only changes the shadow's
  *  visual weight, never the game logic. */
-const ROOTWOOD_SLOTS = Object.freeze({
+export const ROOTWOOD_SLOTS = Object.freeze({
   S1: { x: 30, y: 60, scale: 0.8, band: 'back' },
   S2: { x: 50, y: 58, scale: 0.8, band: 'back' },
   S3: { x: 68, y: 61, scale: 0.8, band: 'back' },
@@ -93,14 +93,18 @@ const ROOTWOOD_SLOTS = Object.freeze({
 });
 /** Fill order (Part 8.5): the working-set rule's priority list lands here,
  *  first candidate to S4, and S4 is where "the lit plant, when present,
- *  always stands" — the two facts agree because lit is always priority 1. */
-const ROOTWOOD_FILL_ORDER = ['S4', 'S5', 'S2', 'S6', 'S1', 'S3', 'S7'];
+ *  always stands" — the two facts agree because lit is always priority 1.
+ *  Exported: Stage W4 (session.js, plant.js) forces the plant the learner
+ *  is actually looking at into S4 too — "the lit plant's slot" is, during
+ *  a session or an approach, exactly the plant receiving the learner's
+ *  whole attention, so the same seat is the right one. */
+export const ROOTWOOD_FILL_ORDER = ['S4', 'S5', 'S2', 'S6', 'S1', 'S3', 'S7'];
 
 /** A plant's height as a share of the frame's own height, at a slot's
  *  base scale of 1 (Part 8.2) — multiplied by the slot's scale for the
  *  final size. Ancient never reaches the foreground (Part 8.5), so it has
  *  no entry: it is always drawn at "horizon" size instead. */
-const STAGE_HEIGHT_PCT = Object.freeze({
+export const STAGE_HEIGHT_PCT = Object.freeze({
   open_ground: 2, seed: 2, sprout: 4, young: 9, in_leaf: 14, mature: 18,
 });
 /** cat-plant's own foreground viewBox (120×130, cat-plant.js's #wrap) —
@@ -108,7 +112,7 @@ const STAGE_HEIGHT_PCT = Object.freeze({
  *  slot's x/y map to different real units in a portrait frame, and only
  *  aspect-ratio lets the browser convert a height share into the correct
  *  width regardless of how the frame actually renders. */
-const CAT_PLANT_ASPECT = '120 / 130';
+export const CAT_PLANT_ASPECT = '120 / 130';
 
 /** The two great background trunks (§5.3, Part 10.2): x position and
  *  width as a share of frame width, rising from the floor past the
@@ -169,6 +173,137 @@ function seedFrom(id) {
   return h >>> 0;
 }
 
+/**
+ * The cathedral's whole `.grove-scene` markup (Part 10.2): the canopy
+ * ceiling, the two great trunks, the light shafts, the mid-wood, the
+ * ground, the horizon, the working-set slots. The single assembly point
+ * for the scene's paint — the biome screen calls it interactively, and
+ * Stage W4 (session.js, plant.js) calls it again as a becalmed backdrop,
+ * so the wood a learner tends inside is never a second, different
+ * drawing of the same place.
+ * @param {object} biome
+ * @param {object} ground  computeGroundTier()'s result
+ * @param {object} atmo  atmosphereFor()'s result
+ * @param {{horizon: Array, foreground: Array, overflowMature: Array,
+ *           askingId: string|null, openSeedId: string|null}} slots
+ *        already-decided occupancy — the ordinary biome screen computes
+ *        this with selectForegroundSlots; a session/approach screen
+ *        computes its own (the tended/focused family pinned to S4, or to
+ *        the horizon if it is already Ancient) and passes it in, so this
+ *        function itself never has to know which caller it is.
+ * @param {{interactive?: boolean, ambientEvent?: string|null,
+ *           focusId?: string|null}} [opts]  `interactive` draws the
+ *        sky-tap-to-ascend affordance (the biome screen only — a
+ *        becalmed backdrop is never itself a tap target, Bible §11.6:
+ *        "ambient motion pauses during a session"); `focusId` marks
+ *        whichever plant is the tended/approached one with
+ *        `data-tended-plant`, so session.js can find it again to grow it
+ *        in place.
+ */
+export function groveSceneHTML(biome, ground, atmo, { horizon, foreground, overflowMature, askingId, openSeedId }, opts = {}) {
+  const { interactive = true, ambientEvent = null, focusId = null } = opts;
+  // A non-interactive ground layer is, by construction, always Stage W4's
+  // becalmed backdrop (Part 10.3): a session or a plant approach, never the
+  // ordinary biome screen. Becalming here — rather than asking every caller
+  // to remember a separate flag — keeps "non-interactive" and "becalmed"
+  // one fact instead of two that could drift apart.
+  const becalmed = !interactive;
+  const wash = becalmed ? ` style="--becalm-wash-color:${shadowColor(atmo.time)};"` : '';
+  return `
+    <div class="grove-scene grove-scene--cathedral${becalmed ? ' grove-scene--becalmed' : ''}" data-time="${atmo.time}" data-season="${atmo.season}" data-weather="${atmo.weather}"${wash}>
+      ${interactive ? `<button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>` : ''}
+      <!-- The earth the wood stands on (Guide 7.2's depth planes, at
+           biome scale): the mossy cathedral floor, THE WORLD Part
+           6.5's own pigments, beneath everything painted above it. -->
+      <div class="grove-earth" aria-hidden="true"></div>
+      ${atmo.time === 'night' ? '<div class="grove-night-sky" aria-hidden="true"></div>' : ''}
+      ${weatherLayerHTML(atmo.weather)}
+
+      <!-- The cathedral's own structure (Part 10.2): the canopy
+           ceiling and its two sky-holes, the two great trunks rising
+           past the frame's top edge, the three light shafts falling
+           through the trunk gaps (§5.3), the mid-wood band standing in
+           for every Mature family the seven slots had no room for, and
+           the stream's single glint. A flat 0–100 percentage space,
+           stretched to the scene's own shape (never cropped), so it
+           shares one coordinate system with the slots positioned in
+           plain CSS below. -->
+      <svg class="grove-cathedral" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        ${trunksSVG(atmo)}
+        ${ceilingSVG(atmo)}
+        ${atmo.time === 'dawn' ? dawnMistSVG() : ''}
+        ${shaftsSVG(atmo)}
+        ${midWoodSVG(overflowMature.length, atmo)}
+        ${streamGlintSVG()}
+        ${atmo.time === 'night' ? nightFirefliesSVG() : ''}
+      </svg>
+
+      <div class="grove-ground grove-ground--${ground.tier}" aria-hidden="true">${groundMarkup(ground.tier)}</div>
+      ${horizon.length ? `<div class="grove-horizon" aria-hidden="true">
+        ${horizon.map((p) => {
+          const id = p.family.meta.id;
+          const isFocus = id === focusId;
+          const plant = `<cat-plant size="horizon" stage="ancient" ${isFocus ? 'data-tended-plant' : ''} ${p.state.landmark ? 'landmark' : ''}></cat-plant>`;
+          // Names on approach only (Part 8.4): cat-plant's own standing
+          // name plate (its foreground #wrap()) is legible at close range
+          // but is never drawn by its horizon silhouette — a name plate on
+          // a 3px-tall distant shape wouldn't read, so the ordinary far
+          // view is correctly wordless even for a Landmark. On APPROACH
+          // (10.4) the camera closes in and every focused plant gets its
+          // name regardless, Landmark or not — that courtesy is this
+          // wrapper's job specifically, not a duplicate of the (distance-
+          // only) standing plate.
+          return isFocus
+            ? `<span class="grove-horizon__focus">${plant}<span class="grove-plant__name grove-plant__name--horizon">${escapeHTML(p.family.root.label)}</span></span>`
+            : plant;
+        }).join('')}
+      </div>` : ''}
+      <div class="grove-ambient" aria-hidden="true">${ambientEvent ? ambientMarkup(ambientEvent) : ''}</div>
+
+      <div class="grove-slots">
+        ${renderSlotsBackToFront(foreground, askingId, openSeedId, atmo, focusId)}
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * A becalmed ground-layer backdrop with ONE specific family pinned into
+ * the foreground's S4 seat (or the horizon, if it is already Ancient) —
+ * Stage W4's shared staging for a session (Part 10.3) and a plant
+ * approach (Part 10.4): the plant the learner's whole attention is on
+ * stands exactly where the world would keep it, and the rest of the
+ * scene renders exactly as the biome screen would show it right now.
+ * Returns '' when the family has no living biome yet.
+ * @param {{family, state, history, biome}} focusedView  the plant view
+ *        for the family being tended/approached — its `state` may be a
+ *        display override (a session's "about to grow" seed stand-in)
+ *        rather than the raw computed state.
+ */
+export function focusedGroveSceneHTML(biome, ground, atmo, allFamilies, allSessions, seeds, focusedView, opts = {}) {
+  if (!biome || biome.status !== 'living') return '';
+  const scene = deriveBiomeScene(allFamilies, allSessions, biome.slug, Date.now(), seeds);
+  const focusId = focusedView.family.meta.id;
+  const others = scene.plants.filter((p) => p.family.meta.id !== focusId);
+  const nonAncientOthers = others.filter((p) => p.state.stage !== 'ancient');
+  const horizonOthers = others.filter((p) => p.state.stage === 'ancient');
+
+  let horizon, foreground, overflowMature;
+  if (focusedView.state.stage === 'ancient') {
+    horizon = [...horizonOthers, focusedView];
+    ({ foreground, overflowMature } = selectForegroundSlots(nonAncientOthers, scene.askingId, ROOTWOOD_FILL_ORDER.length));
+  } else {
+    horizon = horizonOthers;
+    const sel = selectForegroundSlots(nonAncientOthers, scene.askingId, ROOTWOOD_FILL_ORDER.length - 1);
+    foreground = [focusedView, ...sel.foreground];
+    overflowMature = sel.overflowMature;
+  }
+
+  return groveSceneHTML(biome, ground, atmo,
+    { horizon, foreground, overflowMature, askingId: scene.askingId, openSeedId: scene.openSeedId },
+    { interactive: false, focusId, ...opts });
+}
+
 function renderSceneHTML(outlet, biome, scene, ground) {
   const { plants, askingId, openSeedId } = scene;
   const atmo = atmosphereFor();
@@ -188,44 +323,7 @@ function renderSceneHTML(outlet, biome, scene, ground) {
         <span aria-hidden="true">↑</span> ${escapeHTML(VALLEY_LINES.toValley)}
       </button>
 
-      <div class="grove-scene grove-scene--cathedral" data-time="${atmo.time}" data-season="${atmo.season}" data-weather="${atmo.weather}">
-        <button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>
-        <!-- The earth the wood stands on (Guide 7.2's depth planes, at
-             biome scale): the mossy cathedral floor, THE WORLD Part
-             6.5's own pigments, beneath everything painted above it. -->
-        <div class="grove-earth" aria-hidden="true"></div>
-        ${atmo.time === 'night' ? '<div class="grove-night-sky" aria-hidden="true"></div>' : ''}
-        ${weatherLayerHTML(atmo.weather)}
-
-        <!-- The cathedral's own structure (Part 10.2): the canopy
-             ceiling and its two sky-holes, the two great trunks rising
-             past the frame's top edge, the three light shafts falling
-             through the trunk gaps (§5.3), the mid-wood band standing in
-             for every Mature family the seven slots had no room for, and
-             the stream's single glint. A flat 0–100 percentage space,
-             stretched to the scene's own shape (never cropped), so it
-             shares one coordinate system with the slots positioned in
-             plain CSS below. -->
-        <svg class="grove-cathedral" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          ${trunksSVG(atmo)}
-          ${ceilingSVG(atmo)}
-          ${atmo.time === 'dawn' ? dawnMistSVG() : ''}
-          ${shaftsSVG(atmo)}
-          ${midWoodSVG(overflowMature.length, atmo)}
-          ${streamGlintSVG()}
-          ${atmo.time === 'night' ? nightFirefliesSVG() : ''}
-        </svg>
-
-        <div class="grove-ground grove-ground--${ground.tier}" aria-hidden="true">${groundMarkup(ground.tier)}</div>
-        ${horizon.length ? `<div class="grove-horizon" aria-hidden="true">
-          ${horizon.map((p) => `<cat-plant size="horizon" stage="ancient" ${p.state.landmark ? 'landmark' : ''}></cat-plant>`).join('')}
-        </div>` : ''}
-        <div class="grove-ambient" aria-hidden="true">${event ? ambientMarkup(event) : ''}</div>
-
-        <div class="grove-slots">
-          ${renderSlotsBackToFront(foreground, askingId, openSeedId, atmo)}
-        </div>
-      </div>
+      ${groveSceneHTML(biome, ground, atmo, { horizon, foreground, overflowMature, askingId, openSeedId }, { ambientEvent: event })}
     </section>
   `;
 
@@ -309,12 +407,12 @@ function appendNote(outlet, text) {
  *  accident deciding which plant a tap lands on. */
 const ROOTWOOD_BACK_TO_FRONT = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7'];
 
-function renderSlotsBackToFront(foreground, askingId, openSeedId, atmo) {
+function renderSlotsBackToFront(foreground, askingId, openSeedId, atmo, focusId = null) {
   const bySlotName = new Map();
   foreground.forEach((p, i) => bySlotName.set(ROOTWOOD_FILL_ORDER[i], p));
   return ROOTWOOD_BACK_TO_FRONT
     .filter((name) => bySlotName.has(name))
-    .map((name) => plantSlotHTML(bySlotName.get(name), ROOTWOOD_SLOTS[name], askingId, openSeedId, atmo))
+    .map((name) => plantSlotHTML(bySlotName.get(name), ROOTWOOD_SLOTS[name], askingId, openSeedId, atmo, focusId))
     .join('');
 }
 
@@ -326,10 +424,11 @@ function renderSlotsBackToFront(foreground, askingId, openSeedId, atmo) {
  * name wordless until approach — focus, peek, or the plant screen (Part
  * 8.4), never printed permanently on the wood.
  */
-function plantSlotHTML(p, slot, askingId, openSeedId, atmo) {
+function plantSlotHTML(p, slot, askingId, openSeedId, atmo, focusId = null) {
   const id = p.family.meta.id;
   const isAsking = id === askingId;
   const isOpenSeed = id === openSeedId;
+  const isFocus = id === focusId;
   const nest = hasNest(p.state);
   const heightPct = (STAGE_HEIGHT_PCT[p.state.stage] ?? STAGE_HEIGHT_PCT.open_ground) * slot.scale;
   const shadowShift = (SUN_OFFSET_SIGN[atmo.time] ?? 0) * 15;
@@ -341,15 +440,18 @@ function plantSlotHTML(p, slot, askingId, openSeedId, atmo) {
     : isOpenSeed
       ? `${p.family.root.label}, open ground`
       : p.family.root.label;
+  // data-slot-scale: Stage W4's in-place growth (session.js) needs this
+  // slot's own scale back to resize the container to the post-growth
+  // stage's height without re-deriving which slot the plant stands in.
   const style = `left:${slot.x}%; bottom:${(100 - slot.y).toFixed(2)}%; height:${heightPct.toFixed(2)}%; aspect-ratio:${CAT_PLANT_ASPECT};`
     + ` --slot-shadow-color:${shadowColor(atmo.time)}; --slot-shadow-shift:${shadowShift.toFixed(0)}%;`;
   return `
     <button class="grove-plant grove-plant--slot grove-plant--${slot.band} ${isAsking ? 'grove-plant--asking' : ''} ${isOpenSeed ? 'grove-plant--invite' : ''}"
-            data-plant-id="${id}" aria-label="${escapeHTML(aria)}" style="${style}">
+            data-plant-id="${id}" data-slot-scale="${slot.scale}" aria-label="${escapeHTML(aria)}" style="${style}">
       <span class="grove-plant__shadow" aria-hidden="true"></span>
       <span class="grove-plant__tuft" aria-hidden="true"></span>
       <span class="grove-plant__art">
-        <cat-plant stage="${p.state.stage}" due="${p.state.due}" ${nest ? 'nest' : ''}
+        <cat-plant stage="${p.state.stage}" due="${p.state.due}" ${nest ? 'nest' : ''} ${isFocus ? 'data-tended-plant' : ''}
           seed="${escapeHTML(id)}" vigor="${p.state.vigor}"></cat-plant>
       </span>
       <span class="grove-plant__name">${escapeHTML(p.family.root.label)}</span>

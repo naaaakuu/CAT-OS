@@ -1828,6 +1828,27 @@ if (lgFiles.length === 0) {
     if (selectForegroundSlots([dup, dup], 'dup', 7).foreground.length !== 1) bad('garden working set: the same family must never occupy two slots');
   }
 
+  /* -- The veil (THE WORLD Part 10.3, Stage W4): "both pairs must
+     measure ≥4.5:1 mechanically… before any screen ships." These hex
+     values mirror tokens.css's --garden-veil-* exactly (same reasoning
+     as light.js's own HOUR_LIGHT/HOUR_SHADOW tables: there is no DOM
+     pass here to read a CSS custom property back out), so a future
+     revision to either place without the other is exactly the drift
+     this assertion exists to catch. -- */
+  {
+    const { contrastRatio } = await mod('src/modules/language-garden/logic/light.js');
+    const VEIL_DAY_BG = '#FAF7EF';
+    const VEIL_DAY_INK = '#1C1D1F';
+    const VEIL_NIGHT_BG = '#1B2737';
+    const VEIL_NIGHT_INK = '#D9E3F2';
+    const dayRatio = contrastRatio(VEIL_DAY_BG, VEIL_DAY_INK);
+    const nightRatio = contrastRatio(VEIL_NIGHT_BG, VEIL_NIGHT_INK);
+    if (dayRatio < 4.5) bad(`garden veil: the day pair only reaches ${dayRatio.toFixed(2)}:1 — the text sitting on the veil would fail WCAG AA`);
+    if (nightRatio < 4.5) bad(`garden veil: the night pair only reaches ${nightRatio.toFixed(2)}:1 — the text sitting on the veil would fail WCAG AA`);
+    if (contrastRatio('#000000', '#FFFFFF') !== 21) bad('garden veil: contrastRatio(black, white) must be exactly 21:1 — the formula itself is wrong');
+    if (contrastRatio('#808080', '#808080') !== 1) bad('garden veil: contrastRatio of a colour against itself must be exactly 1:1');
+  }
+
   /* -- The Journal's records (Roadmap 4.4, §8.5–§8.6): Seasons Tended is
      a calendar fact (unfarmable — many sessions in one season still count
      once; it grows only as the planet turns), and the Weather Record has
