@@ -1790,6 +1790,44 @@ if (lgFiles.length === 0) {
     if (castsShadow('morning', 'summer')) bad('garden light: cast shadows must NOT appear at midday outside autumn — a seasonal pleasure, not a default');
   }
 
+  /* -- The working set (THE WORLD Part 8.5, Stage W3): a biome's
+     foreground is a fixed number of slots, filled by priority — the lit
+     plant, then bare-with-buds, then the still-growing stages, then the
+     most RECENTLY tended Mature, then open ground as filler — capped at
+     the slot count however many real candidates exist, with every
+     overflow Mature family accounted for in the mid-wood, never lost. -- */
+  {
+    const { selectForegroundSlots } = await mod('src/modules/language-garden/logic/scene.js');
+    const plant = (id, stage, due = 'none', lastVisitedAt = null) =>
+      ({ family: { meta: { id } }, state: { stage, due, lastVisitedAt } });
+
+    const lit = plant('lit', 'young', 'gold');
+    const bare = plant('bare', 'in_leaf', 'bare');
+    const sprout = plant('sprout', 'sprout');
+    const matureOld = plant('mature-old', 'mature', 'none', '2026-01-01T00:00:00.000Z');
+    const matureNew = plant('mature-new', 'mature', 'none', '2026-06-01T00:00:00.000Z');
+    const openA = plant('open-a', 'open_ground');
+    const openB = plant('open-b', 'open_ground');
+    const openC = plant('open-c', 'open_ground');
+
+    const all = [openC, matureOld, openA, bare, matureNew, sprout, openB, lit];
+    const { foreground, overflowMature } = selectForegroundSlots(all, 'lit', 4);
+
+    if (foreground[0]?.family.meta.id !== 'lit') bad('garden working set: the lit plant must always be priority one (slot S4)');
+    if (foreground[1]?.family.meta.id !== 'bare') bad('garden working set: bare-with-buds is priority two');
+    if (foreground[2]?.family.meta.id !== 'sprout') bad('garden working set: a still-growing stage is priority three');
+    if (foreground[3]?.family.meta.id !== 'mature-new') bad('garden working set: the most recently tended Mature fills next, not just any Mature');
+    if (foreground.length !== 4) bad('garden working set: the slot count caps the foreground, however many candidates exist');
+    if (!overflowMature.some((p) => p.family.meta.id === 'mature-old')) bad('garden working set: a Mature family the slots had no room for must recede to the mid-wood, not vanish');
+    if (overflowMature.some((p) => p.family.meta.id === 'mature-new')) bad('garden working set: a Mature family that DID get a slot must not also count as overflow');
+
+    const noLit = selectForegroundSlots([openA, openB, openC], null, 7);
+    if (noLit.foreground.length !== 3) bad('garden working set: with no lit plant, every real candidate still fills a slot, and nothing pads the rest');
+
+    const dup = plant('dup', 'mature', 'none', '2026-01-01T00:00:00.000Z');
+    if (selectForegroundSlots([dup, dup], 'dup', 7).foreground.length !== 1) bad('garden working set: the same family must never occupy two slots');
+  }
+
   /* -- The Journal's records (Roadmap 4.4, §8.5–§8.6): Seasons Tended is
      a calendar fact (unfarmable — many sessions in one season still count
      once; it grows only as the planet turns), and the Weather Record has

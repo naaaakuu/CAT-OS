@@ -2032,7 +2032,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    never to a label or a note, so text contrast is untouched (§12.7). The
    asking plant's lit state is a luminance glow no season reproduces. */
 .grove-scene { --lg-f-season: brightness(1); --lg-f-time: brightness(1); }
-.grove-scene :is(.grove-ground, .grove-horizon, .grove-ambient, .grove-plant__art, .grove-earth) {
+.grove-scene :is(.grove-ground, .grove-horizon, .grove-ambient, .grove-plant__art, .grove-earth, .grove-cathedral) {
   filter: var(--lg-f-season) var(--lg-f-time);
 }
 .grove-scene[data-season="spring"] { --lg-f-season: saturate(1.12) brightness(1.05); }
@@ -2063,6 +2063,18 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   background: var(--garden-grove);
   border-radius: 58% 42% 0 0 / 18% 24% 0 0;
 }
+/* The cathedral floor (Stage W3, THE WORLD Part 6.5 "Rootwood (scene)"):
+   the mossy floor pigment pinned for standing inside the wood, distinct
+   from the Overlook's own zoomed-out ground tokens above. */
+.grove-scene--cathedral .grove-earth { background: var(--garden-rootwood-floor); }
+.grove-scene--cathedral .grove-earth::after { background: var(--garden-rootwood-floor-shade); }
+/* Night is "a deep cool field" (§5.4), not a dimmed day: one pass of the
+   shade-face formula on the day floor doesn't reach it (the same craft
+   call W1 made for the Overlook's own land planes at night), so night
+   gets its own hand-derived floor tone rather than relying on the
+   generic time-of-day filter alone to darken it enough. */
+.grove-scene--cathedral[data-time="night"] .grove-earth { background: var(--garden-rootwood-floor-night); }
+.grove-scene--cathedral[data-time="night"] .grove-earth::after { background: var(--garden-rootwood-floor-night-shade); }
 /* At night the earth deepens with the sky and the stars come out — a
    fixed constellation, the same few stars every night (§12.6). Never a
    dimmed day: the moonlit grove is its own place. */
@@ -2080,6 +2092,84 @@ a.list-item:active { transform: scale(var(--press-scale)); }
     radial-gradient(1px 1px at 22% 52%, #EFF4FB 50%, transparent 51%);
   opacity: 0.85;
 }
+
+/* The cathedral's painted structure (Stage W3, THE WORLD Part 10.2,
+   §5.2–5.3): a full-bleed 0–100 percentage layer — the ceiling, the
+   great trunks, the light shafts, the mid-wood, the stream's one glint —
+   behind the ground marks and the working-set slots, ahead of the earth
+   and the sky. Colour and hour live in the markup (logic/light.js's
+   litFace/shadeFace, computed once per render); this layer is motion and
+   proportion only. */
+.grove-cathedral {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.grove-hole-rim {
+  stroke: var(--garden-water-night, #9FB6D1);
+  stroke-width: 0.4;
+  opacity: 0.5;
+}
+/* Light shafts (§5.3): soft and translucent, feathered by two layered
+   wedges rather than a blur filter (§11.7, Part 11.3). They drift
+   imperceptibly on an unsynchronised loop; JS omits them at night. */
+.grove-shaft { animation: grove-shaft-drift 28s ease-in-out infinite alternate; }
+@keyframes grove-shaft-drift {
+  from { transform: translateX(-0.6px); }
+  to   { transform: translateX(0.6px); }
+}
+@media (prefers-reduced-motion: reduce) { .grove-shaft { animation: none; } }
+/* The mid-wood band (Part 8.5): fixed and quiet, never animated — it is
+   the record of mastery receding into the wood, not a living thing to
+   notice (Guide 15.3: idle motion is reserved for what is actually alive). */
+.grove-midwood { opacity: 0.94; }
+/* The stream's one glint through the trunks (Part 10.2) — never visible
+   water inside the wood, just a single quiet highlight. */
+.grove-glint {
+  stroke: var(--garden-water-day-glint, #F4F9F2);
+  stroke-width: 0.5;
+  opacity: 0.5;
+  stroke-linecap: round;
+  fill: none;
+}
+.grove-scene[data-time="night"] .grove-glint,
+.grove-scene[data-time="dusk"] .grove-glint { stroke: var(--garden-water-dusk-glint, #F3CE9A); opacity: 0.4; }
+
+/* Night: fireflies among the near trunks (Part 10.2, §5.4) — a small
+   fixed cluster, breathing on its own unsynchronised cycle, distinct
+   from the rare per-visit ambient firefly (a found Magic Moment, never a
+   standing fixture). */
+.grove-cathedral-firefly {
+  fill: var(--garden-discovery);
+  opacity: 0;
+  animation: grove-cathedral-firefly-breathe 4.6s ease-in-out infinite;
+}
+.grove-cathedral-firefly-glow {
+  fill: var(--garden-discovery);
+  opacity: 0;
+  animation: grove-cathedral-firefly-glow-breathe 4.6s ease-in-out infinite;
+}
+@keyframes grove-cathedral-firefly-breathe { 0%, 100% { opacity: 0; } 30%, 70% { opacity: 0.85; } }
+@keyframes grove-cathedral-firefly-glow-breathe { 0%, 100% { opacity: 0; } 30%, 70% { opacity: 0.22; } }
+@media (prefers-reduced-motion: reduce) {
+  .grove-cathedral-firefly { animation: none; opacity: 0.55; }
+  .grove-cathedral-firefly-glow { animation: none; opacity: 0.14; }
+}
+
+/* Dawn: mist bands between the far trunks (Part 10.2) — layered
+   translucent shapes, never a blur filter (§11.3, §11.7). */
+.grove-cathedral-mist {
+  fill: #FCF4E4;
+  opacity: 0.3;
+  animation: grove-cathedral-mist-drift 22s ease-in-out infinite alternate;
+}
+.grove-cathedral-mist--2 { opacity: 0.2; animation-duration: 30s; animation-delay: -8s; }
+@keyframes grove-cathedral-mist-drift {
+  from { transform: translateX(-1.2px); }
+  to   { transform: translateX(1.2px); }
+}
+@media (prefers-reduced-motion: reduce) { .grove-cathedral-mist { animation: none; } }
 
 .grove-horizon {
   position: absolute;
@@ -2190,20 +2280,15 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   50% { opacity: 0.6; transform: rotate(10deg); }
 }
 
-.grove-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-2);
+/* The working set (Stage W3, THE WORLD Part 8.5): exactly seven authored
+   slots, base-anchored so a slot's (x, y) is where the plant meets the
+   ground — never a grid, never wrapping, never more than seven at once. */
+.grove-slots {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 .grove-plant {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-2);
-  border-radius: var(--radius-lg);
-  min-height: calc(var(--tap-target) * 2.4);
   position: relative;
   transition: transform var(--duration-fast) var(--ease-out);
   /* The hold gesture (peek) owns a long press: no text selection, no
@@ -2213,21 +2298,78 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   -webkit-touch-callout: none;
   touch-action: manipulation;
 }
-.grove-plant:active { transform: scale(var(--press-scale)); }
+.grove-plant--slot {
+  position: absolute;
+  /* aspect-ratio is set inline per plant (biome.js's CAT_PLANT_ASPECT) —
+     one source of truth, shared with cat-plant's own 120x130 viewBox. */
+  transform: translateX(-50%);
+  padding: 0; border: none; background: none;
+}
+/* An invisible hit-area, a little larger than the visual art (Guide
+   14.3): kept modest, deliberately — Appendix C.6 seats some slots only
+   a few percent of the frame apart, and a generous pad here would make
+   one slot's hit-area cover a neighbour's plant. ::after: ::before is
+   the asking/invite glow below, and a slot can carry both at once. */
+.grove-plant--slot::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--space-1) * -1);
+}
+.grove-plant:active { transform: translateX(-50%) scale(var(--press-scale)); }
 .grove-plant:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
-.grove-plant__art { width: 72%; max-width: 6.5rem; aspect-ratio: 1 / 1.08; }
-.grove-plant__label {
+.grove-plant__art { width: 100%; height: 100%; display: block; }
+/* The contact shadow (§5.2) every standing plant gets, in the hour's own
+   shadow colour and offset — pinned ratios (1.1x width, 15% offset, 18%
+   opacity), set inline per plant from logic/light.js so the JS math and
+   the paint never drift apart. */
+.grove-plant__shadow {
+  position: absolute;
+  left: 50%; bottom: 2%;
+  width: 110%; height: 28%;
+  border-radius: 50%;
+  background: var(--slot-shadow-color, transparent);
+  opacity: 0.18;
+  transform: translate(calc(-50% + var(--slot-shadow-shift, 0%)), 0);
+  pointer-events: none;
+}
+/* A small fixed undergrowth tuft at the plant's own base (Part 10.2) —
+   two quiet blades, never a bed of grass, never randomised. */
+.grove-plant__tuft {
+  position: absolute;
+  left: 38%; bottom: 0%;
+  width: 24%; height: 14%;
+  pointer-events: none;
+  background:
+    linear-gradient(105deg, transparent 46%, var(--garden-fern) 46% 54%, transparent 54%) 0 0/50% 100% no-repeat,
+    linear-gradient(75deg, transparent 46%, var(--garden-rootwood-floor-shade) 46% 54%, transparent 54%) 100% 0/50% 100% no-repeat;
+  opacity: 0.6;
+}
+/* Names on approach only (Part 8.4, Principle 106): the wood itself is
+   wordless. A name surfaces on focus or hover — a small quiet pill, its
+   own surface so it stays AA-legible over whatever the wood is doing
+   underneath — never printed permanently on the world. */
+.grove-plant__name {
+  position: absolute;
+  left: 50%; bottom: calc(100% + var(--space-1));
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 0.1rem var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink-2);
   font-size: var(--text-xs);
   font-weight: var(--weight-medium);
-  color: var(--color-ink-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
 }
-/* Under the night sky the theme's day ink would sink into the dark scene:
-   the labels take moonlight instead, and hold WCAG AA against the deep
-   blues (§12.7 — contrast is checked in every hour, not just noon). */
-.grove-scene[data-time="night"] .grove-plant__label { color: #C6D0DC; }
+.grove-plant--slot:focus-visible .grove-plant__name { opacity: 1; }
+@media (hover: hover) {
+  .grove-plant--slot:hover .grove-plant__name { opacity: 1; }
+}
 .grove-plant--asking::before,
 .grove-plant--invite::before {
   content: "";
@@ -2329,7 +2471,6 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   flex-direction: column;
   justify-content: flex-end;
 }
-.biome .grove-grid { position: relative; z-index: 1; }
 /* The upper sky taps to ascend to the valley (§14.2). Sits behind the plants,
    so a plant tap always wins; only empty sky returns you. */
 .grove-sky {

@@ -188,6 +188,29 @@
   --garden-pond-reed:      #9DB08E;
   --garden-orchard-canopy: #86B36A;
 
+  /* ---- Phase V, Stage W3 (THE WORLD Part 6.5 "Rootwood (scene)", Part
+     10.2): the cathedral's own pigments — the canopy ceiling and mid-wood's
+     three-deep stack, the great trunks, the mossy floor, and the light
+     shafts' warm cream. Distinct from the Overlook's own zoomed-out wood
+     colours (overlook.js's ROOTWOOD_ROW_COLOR) — that is a separate,
+     already-shipped craft choice at valley distance; this is the pinned
+     canon for standing inside the wood. */
+  --garden-rootwood-canopy-1: #3E6B4B;
+  --garden-rootwood-canopy-2: #2E5440;
+  --garden-rootwood-canopy-3: #24463A;
+  --garden-rootwood-trunk-lit:   #6F5B48;
+  --garden-rootwood-trunk-shade: #4A4038;
+  --garden-rootwood-floor:       #7FA066;
+  --garden-rootwood-floor-shade: #5C7F55;
+  --garden-rootwood-shaft: #F3E9C2;   /* light shafts, 10–16% opacity (§5.3) */
+  /* Night's "deep cool field" (§5.4) reads darker than one pass of the
+     pinned shade-face formula on the day floor produces — the same
+     craft-level call W1 made for the Overlook's own land planes at night
+     (Roadmap Appendix E): the formula applied twice. Identical in every
+     theme block, like every other night token (night IS the dark theme). */
+  --garden-rootwood-floor-night:       #40513E;
+  --garden-rootwood-floor-night-shade: #2C3B31;
+
   /* Weather particle pigments (§6.4). */
   --garden-weather-rain: #C7D6E0;
   --garden-weather-snow: #F4F7FA;
@@ -418,6 +441,17 @@
     --garden-pond-reed:      #3A4A38;
     --garden-orchard-canopy: #2A3A20;
 
+    --garden-rootwood-canopy-1: #263C2C;
+    --garden-rootwood-canopy-2: #1C2E24;
+    --garden-rootwood-canopy-3: #16241E;
+    --garden-rootwood-trunk-lit:   #3E3226;
+    --garden-rootwood-trunk-shade: #2A241E;
+    --garden-rootwood-floor:       #344630;
+    --garden-rootwood-floor-shade: #263422;
+    --garden-rootwood-floor-night:       #40513E;
+    --garden-rootwood-floor-night-shade: #2C3B31;
+    --garden-rootwood-shaft: #5C5238;
+
     --garden-weather-rain: #5A6C78;
     --garden-weather-snow: #D8E0E8;
     --garden-weather-fog:  #4A5460;
@@ -555,6 +589,17 @@
   --garden-cat-chest: #C9BCA6;
   --garden-pond-reed:      #3A4A38;
   --garden-orchard-canopy: #2A3A20;
+
+  --garden-rootwood-canopy-1: #263C2C;
+  --garden-rootwood-canopy-2: #1C2E24;
+  --garden-rootwood-canopy-3: #16241E;
+  --garden-rootwood-trunk-lit:   #3E3226;
+  --garden-rootwood-trunk-shade: #2A241E;
+  --garden-rootwood-floor:       #344630;
+  --garden-rootwood-floor-shade: #263422;
+  --garden-rootwood-floor-night:       #40513E;
+  --garden-rootwood-floor-night-shade: #2C3B31;
+  --garden-rootwood-shaft: #5C5238;
 
   --garden-weather-rain: #5A6C78;
   --garden-weather-snow: #D8E0E8;

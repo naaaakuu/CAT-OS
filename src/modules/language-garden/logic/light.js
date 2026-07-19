@@ -61,7 +61,7 @@ export const CAST_SHADOW_OPACITY = 0.12;
  * more vertical one; night's moon is high and to the right, and casts
  * the faintest, most vertical shadow of all.
  */
-const SUN_OFFSET_SIGN = Object.freeze({
+export const SUN_OFFSET_SIGN = Object.freeze({
   dawn: -1,
   morning: -0.4,
   afternoon: 0.4,
