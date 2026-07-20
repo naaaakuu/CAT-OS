@@ -24,15 +24,84 @@
  * Ambience toggle (Settings, off by default) layers on TOP of that —
  * ambience only ever plays if both are on.
  *
+ * Phase V, Stage W5 (LANGUAGE GARDEN — THE WORLD.md Part 11, "The Music
+ * of the Valley"): the valley's one leitmotif, the Valley Phrase, joins
+ * here. It is never played whole except once ever per grown biome — it
+ * lives as a head (arrival) and a tail (growth), so the learner's ear
+ * assembles a song it has never heard whole. `pitchHz`/`VALLEY_PHRASE`
+ * are pure and exported so tools/verify.mjs can hold the actual pitches
+ * to THE WORLD's pinned notes mechanically, not just by ear.
+ *
  * Import-safe under plain Node (no AudioContext touched until a sound
  * actually plays), so tools/verify.mjs can dry-run this file.
  */
 
 import { feedbackPrefs } from '../../../core/engagement/feedback.js';
+import { weatherFor } from './atmosphere.js';
 
-const C3 = 130.81, E3 = 164.81, G3 = 196.0, A3 = 220.0;
+const C3 = 130.81, D3 = 146.83, E3 = 164.81, G3 = 196.0, A3 = 220.0;
 const C4 = 261.63, D4 = 293.66, E4 = 329.63, G4 = 392.0, A4 = 440.0;
 const C5 = 523.25, D5 = 587.33, E5 = 659.25, G5 = 783.99, A5 = 880.0;
+
+/* ------------------------------------------------------------------ */
+/* The Valley Phrase (THE WORLD Part 11.2, 11.4): one musical sentence  */
+/* in the pentatonic canon, stated in scale degrees over a tonic that   */
+/* pins to each biome (§10.3, 11.4). Pure pitch math, no AudioContext,  */
+/* so it is exported for tools/verify.mjs to check mechanically.        */
+/* ------------------------------------------------------------------ */
+
+/** Semitone offsets of the Bible's pentatonic scale (§10.3: do re mi sol
+ *  la — no fa, no ti) above its tonic. */
+export const PENTATONIC_SEMITONES = Object.freeze({ do: 0, re: 2, mi: 4, sol: 7, la: 9 });
+
+/** The Hz of one scale degree, `octave` steps above the tonic's own
+ *  octave (equal temperament) — the single mechanism every biome's
+ *  transposition of the Valley Phrase runs through. */
+export function pitchHz(tonicHz, degree, octave = 0) {
+  return tonicHz * (2 ** ((PENTATONIC_SEMITONES[degree] + octave * 12) / 12));
+}
+
+/** The phrase itself (§11.2), as scale degrees — locked. The head is a
+ *  question (mi–sol–la), the tail is its answer (sol–la–do′), and the
+ *  full phrase is simply the two concatenated (mi–sol–la–sol–la–do′):
+ *  the "same phrase to the ear" acceptance gate is exactly this
+ *  identity — `full` is BUILT from `head`+`tail`, never re-authored
+ *  separately, so the two can never quietly drift apart. */
+const PHRASE_HEAD = Object.freeze([{ degree: 'mi', octave: 1 }, { degree: 'sol', octave: 1 }, { degree: 'la', octave: 1 }]);
+const PHRASE_TAIL = Object.freeze([{ degree: 'sol', octave: 1 }, { degree: 'la', octave: 1 }, { degree: 'do', octave: 2 }]);
+export const VALLEY_PHRASE = Object.freeze({
+  head: PHRASE_HEAD,
+  tail: PHRASE_TAIL,
+  full: Object.freeze([...PHRASE_HEAD, ...PHRASE_TAIL]),
+});
+
+/** THE WORLD Part 11.4 pins the Bible's relative tonic table (§10.3) to
+ *  real pitch classes. Keyed by biomes.js's own `tonic` descriptor
+ *  string (not by what that string says — Rootwood's is 'low', Mirror
+ *  Pond's is 'lowest', a labelling quirk predating this stage that is
+ *  not this stage's to fix), so the mapping is by BIOME IDENTITY: a
+ *  future biome only needs its existing `tonic` field, nothing here
+ *  changes. Thicket's "A leaning on G, resolving to the tonic only at
+ *  Growth" is encoded as its true tonic (G) — the leaning tension itself
+ *  is unbuilt, honestly, because the Thicket has no engine yet
+ *  (biomes.js ENGINES.origin.implemented is false) and there is nothing
+ *  to attach it to. */
+const TONIC_HZ = Object.freeze({
+  low: C3,        // Rootwood — the lowest bed (11.4: Rootwood C)
+  fifth: G3,       // Vine Terraces — a fifth above the Rootwood (Terraces G)
+  major: E3,       // Orchard — bright major colour (Orchard E)
+  high: A3,        // Meadow — highest, no bass beneath (Meadow A)
+  lowest: D3,      // Mirror Pond — low, and alone (Mirror Pond D)
+  dissonant: G3,   // Thicket — leans on A, resolves to G only at Growth
+  none: null,      // Wilds — no tonic, wind only (§10.3)
+});
+
+/** The Hz to root the Valley Phrase on for a given biome (11.4). Falls
+ *  back to the Rootwood's own tonic — today's only living biome, and
+ *  the phrase's concrete pitches (§11.2) are already written C-rooted. */
+export function tonicHzForBiome(biome) {
+  return (biome && TONIC_HZ[biome.tonic]) || C3;
+}
 
 const state = {
   ctx: null,
@@ -43,6 +112,10 @@ const state = {
   ambienceSrc: null,
   chirpTimer: null,
   landmarkSong: false, // a bird nests and sings in a Landmark tree (§6.5)
+  location: null,      // 'overlook' | 'inner' | 'session' | null (outside the garden) — see setGardenLocation()
+  idleTimer: null,     // the Overlook idle fragment's own schedule (§11.2)
+  idleCount: 0,        // fragments played this garden visit, capped at 2
+  kettleArmed: false,  // eligible to fire the kettle-stone tick once this visit (§11.5)
 };
 
 /** Tracks the shell's own master volume 1:1 — 0 whenever the shell's Sounds
@@ -141,6 +214,91 @@ function grain(t, { peak = 0.02, a = 0.01, d = 0.08, freq = 2400, q = 1.2 }) {
 }
 
 /* ------------------------------------------------------------------ */
+/* The two voices of the Valley Phrase (THE WORLD §11.3). Character is  */
+/* pinned; exact envelope numbers are the free parameters that section  */
+/* explicitly leaves to an implementer. Neither voice is used for the   */
+/* garden's ordinary event set (commit/key/leafTap/bloom) — those keep  */
+/* their existing plain-sine identity untouched.                        */
+/* ------------------------------------------------------------------ */
+
+/** Felt piano: sine fundamental + a soft octave partial (~0.3 gain), a
+ *  4-8ms attack with a breath of filtered noise as the hammer,
+ *  exponential decay 1.2-2.5s, low-passed near 2.2kHz — "a piano heard
+ *  through a wall at dusk." Used only for the Overlook idle fragment and
+ *  the once-ever full Valley Phrase on a biome's Growth (§11.2). */
+function feltPiano(t, freq, { peak = 0.04, decay = 1.8 } = {}) {
+  const c = state.ctx;
+  const bus = c.createGain();
+  bus.gain.value = 1;
+  const lp = c.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = 2200;
+  lp.Q.value = 0.5;
+  bus.connect(lp).connect(state.master);
+
+  const a = 0.006; // 4-8ms hammer attack
+  const o1 = c.createOscillator();
+  o1.type = 'sine';
+  o1.frequency.setValueAtTime(freq, t);
+  const g1 = c.createGain();
+  g1.gain.setValueAtTime(0.0001, t);
+  g1.gain.exponentialRampToValueAtTime(Math.max(0.0001, peak), t + a);
+  g1.gain.exponentialRampToValueAtTime(0.0001, t + a + decay);
+  o1.connect(g1).connect(bus);
+  o1.start(t);
+  o1.stop(t + a + decay + 0.05);
+
+  const o2 = c.createOscillator(); // the octave partial, ~0.3 gain
+  o2.type = 'sine';
+  o2.frequency.setValueAtTime(freq * 2, t);
+  const g2 = c.createGain();
+  g2.gain.setValueAtTime(0.0001, t);
+  g2.gain.exponentialRampToValueAtTime(Math.max(0.0001, peak * 0.3), t + a);
+  g2.gain.exponentialRampToValueAtTime(0.0001, t + a + decay * 0.8);
+  o2.connect(g2).connect(bus);
+  o2.start(t);
+  o2.stop(t + a + decay * 0.8 + 0.05);
+
+  const hammer = c.createBufferSource(); // the breath of noise at onset
+  hammer.buffer = state.noiseBuf;
+  const bp = c.createBiquadFilter();
+  bp.type = 'bandpass';
+  bp.frequency.value = freq * 3;
+  bp.Q.value = 0.8;
+  const gN = c.createGain();
+  gN.gain.setValueAtTime(0.0001, t);
+  gN.gain.exponentialRampToValueAtTime(Math.max(0.0001, peak * 0.4), t + 0.003);
+  gN.gain.exponentialRampToValueAtTime(0.0001, t + 0.02);
+  hammer.connect(bp).connect(gN).connect(bus);
+  hammer.start(t);
+  hammer.stop(t + 0.03);
+}
+
+/** Breath strings: two triangles detuned ±5-8 cents through a low-pass
+ *  near 900Hz, attack 500ms+, release long — used only inside the
+ *  arrival swell, under the head. Never sustained as a pad outside it. */
+function breathString(t, freq, { peak = 0.026, attack = 0.55, release = 1.3 } = {}) {
+  const c = state.ctx;
+  const lp = c.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = 900;
+  lp.Q.value = 0.5;
+  const g = c.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(Math.max(0.0001, peak), t + attack);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + attack + release);
+  lp.connect(g).connect(state.master);
+  for (const cents of [-6, 6]) {
+    const o = c.createOscillator();
+    o.type = 'triangle';
+    o.frequency.setValueAtTime(freq * (2 ** (cents / 1200)), t);
+    o.connect(lp);
+    o.start(t);
+    o.stop(t + attack + release + 0.05);
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* The garden's small sound set (Bible §10). Everything is sine-based   */
 /* (no harsh harmonics), every attack is soft (no click), and the whole */
 /* set is balanced so GROWTH is unmistakably the loudest event — the    */
@@ -152,14 +310,20 @@ function grain(t, { peak = 0.02, a = 0.01, d = 0.08, freq = 2400, q = 1.2 }) {
 const ASSEMBLY_STEPS = [C4, D4, E4, G4, A4, C5]; // rising, so a 3-part word climbs
 
 const SOUNDS = {
-  /** Arrival (§10.5, Guide Part 2 0:00): the world fading up, as sound — a
-   *  low warm chord that swells gently and settles. The quietest event in
-   *  the set: an ambience, almost, not an announcement. Plays once when the
-   *  learner steps into the Garden from outside. */
+  /** Arrival (§10.5 #7; THE WORLD §11.2): the Valley Phrase's HEAD —
+   *  mi–sol–la, "a question" — hummed by the breath-strings voice, at the
+   *  pinned clock (0 / +0.7s / +1.4s), each note blooming rather than
+   *  striking (the voice's own 500ms+ attack). The three notes' long,
+   *  overlapping attacks and releases ARE the "soft swell… as the valley
+   *  fades in" (§10.5 #7) — no separate chord underneath; THE WORLD
+   *  rebinds the swell to be exactly this. Always the base (Rootwood)
+   *  tonic: arrival happens before any biome is chosen. Plays once when
+   *  the learner steps into the Garden from outside. */
   arrival(t, m) {
-    tone(t,        { freq: C3, type: 'sine', peak: 0.026 * m, a: 0.5, hold: 0.3, d: 1.6 });
-    tone(t + 0.15, { freq: G3, type: 'sine', peak: 0.018 * m, a: 0.6, hold: 0.25, d: 1.5, pan: -0.2 });
-    tone(t + 0.3,  { freq: E4, type: 'sine', peak: 0.012 * m, a: 0.7, hold: 0.2, d: 1.4, pan: 0.2 });
+    const tonic = C3;
+    VALLEY_PHRASE.head.forEach((n, i) => {
+      breathString(t + i * 0.7, pitchHz(tonic, n.degree, n.octave), { peak: 0.028 * m, attack: 0.55, release: 1.3 - i * 0.06 });
+    });
   },
   /** Commitment (§10.5 #1): the sound of *you chose*, never *you were right* —
    *  identical for a right and a wrong answer (Law 7). One warm note with a
@@ -176,32 +340,84 @@ const SOUNDS = {
     tone(t + 0.16, { freq: D5, type: 'sine', peak: 0.036 * m, a: 0.03, d: 0.5 });
   },
   /** Growth (§10.5 #4): the peak, and the ONLY sound with harmony. A warm low
-   *  body, a sustained fifth held gently underneath (the harmony), and a rising
-   *  pentatonic figure that blooms and resolves on a long, ringing tail — the
-   *  sound you pause and smile at. Kept in a warm register (nothing above C5). */
-  growth(t, m) {
-    tone(t,        { freq: C3, type: 'sine', peak: 0.050 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
-    tone(t + 0.02, { freq: G3, type: 'sine', peak: 0.030 * m, a: 0.09, hold: 0.26, d: 1.3, pan: -0.14 }); // harmony
-    tone(t + 0.02, { freq: C4, type: 'sine', peak: 0.028 * m, a: 0.09, hold: 0.26, d: 1.3, pan: 0.14 });
-    tone(t,        { freq: E4, type: 'sine', peak: 0.038 * m, a: 0.035, d: 0.70 });  // the figure blooms…
-    tone(t + 0.17, { freq: G4, type: 'sine', peak: 0.042 * m, a: 0.035, d: 0.85 });
-    tone(t + 0.36, { freq: C5, type: 'sine', peak: 0.054 * m, a: 0.04,  d: 1.20 });  // …and resolves, ringing
+   *  body, a sustained fifth held gently underneath (the harmony), and a
+   *  rising figure that blooms and resolves on a long, ringing tail — the
+   *  sound you pause and smile at. THE WORLD §11.2: the figure IS the Valley
+   *  Phrase's TAIL (sol–la–do′) — "growth always answers" — rooted on the
+   *  biome's own tonic (default the Rootwood, today's only living biome),
+   *  never a new sound beside it. Kept in a warm register (nothing above the
+   *  tonic's do′ two octaves up). */
+  growth(t, m, { tonic = C3 } = {}) {
+    tone(t,        { freq: pitchHz(tonic, 'do', 0),  type: 'sine', peak: 0.050 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
+    tone(t + 0.02, { freq: pitchHz(tonic, 'sol', 0), type: 'sine', peak: 0.030 * m, a: 0.09, hold: 0.26, d: 1.3, pan: -0.14 }); // harmony
+    tone(t + 0.02, { freq: pitchHz(tonic, 'do', 1),  type: 'sine', peak: 0.028 * m, a: 0.09, hold: 0.26, d: 1.3, pan: 0.14 });
+    tone(t,        { freq: pitchHz(tonic, 'sol', 1), type: 'sine', peak: 0.038 * m, a: 0.035, d: 0.70 });  // the tail blooms: sol…
+    tone(t + 0.17, { freq: pitchHz(tonic, 'la', 1),  type: 'sine', peak: 0.042 * m, a: 0.035, d: 0.85 });  // …la…
+    tone(t + 0.36, { freq: pitchHz(tonic, 'do', 2),  type: 'sine', peak: 0.054 * m, a: 0.04,  d: 1.20 });  // …do′, and resolves, ringing
   },
-  /** Regrowth (§10.5 #5): a revisit is a memory that faded and came back, so
-   *  its figure DESCENDS and then rises, resolving a step HIGHER than it began
-   *  — a quiet musical statement of the spacing effect that nobody consciously
-   *  notices. Same warm register, same sustained-fifth harmony bed as Growth
-   *  (it is still a peak, and still the only harmony in the product), but the
-   *  melodic shape is unmistakably its own: the canopy returning, fuller. */
-  regrowth(t, m) {
-    tone(t,        { freq: C3, type: 'sine', peak: 0.050 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
-    tone(t + 0.02, { freq: G3, type: 'sine', peak: 0.030 * m, a: 0.09, hold: 0.28, d: 1.35, pan: -0.14 }); // harmony (the held fifth)
-    tone(t + 0.02, { freq: C4, type: 'sine', peak: 0.026 * m, a: 0.09, hold: 0.28, d: 1.35, pan: 0.14 });
-    // The figure dips — the fade — then climbs back past where it started.
-    tone(t,        { freq: G4, type: 'sine', peak: 0.040 * m, a: 0.035, d: 0.62 });  // starts up here…
-    tone(t + 0.15, { freq: E4, type: 'sine', peak: 0.034 * m, a: 0.035, d: 0.60 });  // …dips (the faded gap)…
-    tone(t + 0.32, { freq: A4, type: 'sine', peak: 0.044 * m, a: 0.035, d: 0.80 });  // …and rises…
-    tone(t + 0.52, { freq: C5, type: 'sine', peak: 0.052 * m, a: 0.04,  d: 1.20 });  // …resolving HIGHER, ringing
+  /** Regrowth (§10.5 #5; THE WORLD §11.2 "as canon"): a revisit is a memory
+   *  that faded and came back. THE WORLD pins the shape precisely: the
+   *  tail's own contour INVERTED (do′–la–sol, the tail read backwards) then
+   *  RISING, resolving one step higher than the tail's own do′ — the next
+   *  pentatonic degree up, re′. Same warm register, same sustained-fifth
+   *  harmony bed as Growth (it is still a peak, still the only harmony in
+   *  the product), but every melody note now belongs to the tail itself or
+   *  to its resolution one step above it — nothing borrowed from outside
+   *  it, unlike the pre-W5 shape this replaces. */
+  regrowth(t, m, { tonic = C3 } = {}) {
+    tone(t,        { freq: pitchHz(tonic, 'do', 0),  type: 'sine', peak: 0.050 * m, a: 0.06, hold: 0.14, d: 1.5 });   // body
+    tone(t + 0.02, { freq: pitchHz(tonic, 'sol', 0), type: 'sine', peak: 0.030 * m, a: 0.09, hold: 0.28, d: 1.35, pan: -0.14 }); // harmony (the held fifth)
+    tone(t + 0.02, { freq: pitchHz(tonic, 'do', 1),  type: 'sine', peak: 0.026 * m, a: 0.09, hold: 0.28, d: 1.35, pan: 0.14 });
+    // The inverted tail: do′ (where the tail ends) … la … sol (where the
+    // tail begins) — then rising past it, resolving one step higher.
+    tone(t,        { freq: pitchHz(tonic, 'do', 2),  type: 'sine', peak: 0.040 * m, a: 0.035, d: 0.62 });  // do′, inverted…
+    tone(t + 0.15, { freq: pitchHz(tonic, 'la', 1),  type: 'sine', peak: 0.034 * m, a: 0.035, d: 0.60 });  // …la…
+    tone(t + 0.32, { freq: pitchHz(tonic, 'sol', 1), type: 'sine', peak: 0.044 * m, a: 0.035, d: 0.80 });  // …sol (the dip complete)…
+    tone(t + 0.52, { freq: pitchHz(tonic, 're', 2),  type: 'sine', peak: 0.052 * m, a: 0.04,  d: 1.20 });  // …rising, resolving one step higher
+  },
+  /** The Overlook idle fragment (THE WORLD §11.2, "optional, sparse"): a
+   *  single, distant statement of two ADJACENT notes of the Valley Phrase
+   *  — never the whole thing — in the felt-piano voice, 1.2s apart, mixed
+   *  at the assembly-tick tier (far beneath any event). "A wind chime of
+   *  the theme, not a performance." Weather-tinted: quieter and a touch
+   *  more muffled under rain, fog, or snow. Scheduling (at most twice a
+   *  visit, never inside a session, never closer than 45s apart) lives in
+   *  setGardenLocation()/scheduleIdleFragment() below; this function only
+   *  ever plays one pair. */
+  idleFragment(t, m, { tonic = C3, pairIndex = 0, weatherTint = 1 } = {}) {
+    const i = Math.max(0, Math.min(pairIndex, VALLEY_PHRASE.full.length - 2));
+    const a = VALLEY_PHRASE.full[i];
+    const b = VALLEY_PHRASE.full[i + 1];
+    const peak = 0.020 * m * weatherTint; // the assembly-tick tier (leafTap's grain sits at 0.014-0.032×m)
+    const decay = 1.5 - 0.3 * (1 - weatherTint); // weather muffles the ring a little too
+    feltPiano(t,       pitchHz(tonic, a.degree, a.octave), { peak, decay });
+    feltPiano(t + 1.2, pitchHz(tonic, b.degree, b.octave), { peak: peak * 0.92, decay });
+  },
+  /** A biome grown (Bible §3.5, §8.8; THE WORLD §11.2): "the only time the
+   *  valley ever sings its whole song." The full phrase, once ever per
+   *  biome, in the felt-piano voice, solo and unaccompanied — no harmony
+   *  bed, unlike Growth — at roughly 66 to the quarter, about five seconds
+   *  end to end. Dormant in practice today (it needs every family in a
+   *  biome to be at least Mature at once), built correctly so it is ready
+   *  the day a valley earns it. Replaces the ordinary Regrowth chime for
+   *  the one session that crosses the line (Law 6: one peak per session —
+   *  never both). */
+  grownPhrase(t, m, { tonic = C3 } = {}) {
+    const STEP = 60 / 66;
+    VALLEY_PHRASE.full.forEach((n, i) => {
+      feltPiano(t + i * STEP, pitchHz(tonic, n.degree, n.octave), { peak: 0.050 * m, decay: 2.0 });
+    });
+  },
+  /** The Hearth's kettle-stone (THE WORLD §11.5): "the closest the Garden
+   *  ever comes to saying someone lives here." Two soft unpitched ticks of
+   *  cooling metal, 300ms apart — the quietest event in the product, and
+   *  the only one built from noise alone (no pitch at all: a tick is not a
+   *  note). Dawn, in autumn or winter, at most once per garden visit —
+   *  scheduled by maybeKettleTick() below from the Overlook, the only
+   *  scene the Hearth stands in. */
+  kettleTick(t, m) {
+    grain(t,        { peak: 0.010 * m, a: 0.004, d: 0.05, freq: 3200, q: 2.4 });
+    grain(t + 0.3,  { peak: 0.009 * m, a: 0.004, d: 0.05, freq: 3450, q: 2.4 });
   },
   /** A tapped word-part (§10.5 #3, assembly): a soft pitched tick that RISES
    *  with each part, so assembling a three-part word is a small climbing figure.
@@ -223,9 +439,12 @@ const SOUNDS = {
  *  exist (Principle 111): a light commitment tick (the same for right and
  *  wrong), and the warmer, longer growth thump — the physical half of the
  *  peak, so it survives with sound off. A revisit's Regrowth is still that
- *  one peak, so it shares the growth thump; it is not a third haptic.
+ *  one peak, so it shares the growth thump; it is not a third haptic. The
+ *  once-ever grownPhrase is rarer still but is still that same one peak
+ *  (§11.7: "every learner, on every setting, feels the tree grow" — sound
+ *  off must lose nothing), so it shares the thump too, not a third one.
  *  Gated by the shell's own haptics preference. */
-const HAPTICS = { commit: 12, growth: [16, 22, 34], regrowth: [16, 22, 34] };
+const HAPTICS = { commit: 12, growth: [16, 22, 34], regrowth: [16, 22, 34], grownPhrase: [16, 22, 34] };
 
 function gardenVibrate(name) {
   try {
@@ -352,12 +571,14 @@ export function startGardenAmbience(streamLevel = 1, opts = {}) {
     state.ambienceSrc = src;
     state.ambienceOn = true;
     scheduleChirp();
+    if (state.location === 'overlook') scheduleIdleFragment(); // ambience just turned on while already standing here
   } catch { /* silently fine */ }
 }
 
 export function stopGardenAmbience() {
   state.ambienceOn = false;
   if (state.chirpTimer) { clearTimeout(state.chirpTimer); state.chirpTimer = null; }
+  if (state.idleTimer) { clearTimeout(state.idleTimer); state.idleTimer = null; }
   if (!state.ambienceGain || !state.ctx) return;
   const g = state.ambienceGain;
   const src = state.ambienceSrc;
@@ -372,6 +593,71 @@ export function stopGardenAmbience() {
 
 export function isGardenAmbiencePlaying() {
   return state.ambienceOn;
+}
+
+/* ------------------------------------------------------------------ */
+/* Where the learner is standing, for the two placements that depend   */
+/* on it (THE WORLD §11.2, §11.5): the Overlook idle fragment and the   */
+/* Hearth's kettle-stone tick both need "specifically the Overlook,     */
+/* right now" and "the start of a fresh visit to the garden" — neither  */
+/* is derivable from the Ambience on/off state alone, since ambience    */
+/* keeps playing across the Overlook/biome/plant/journal the whole      */
+/* visit through. The shell calls setGardenLocation() on every route    */
+/* change (app.js syncGardenSoundscape); nothing else needs to know.    */
+/* ------------------------------------------------------------------ */
+
+/** @param {'overlook'|'inner'|'session'|null} loc  'overlook' is exactly
+ *  the Overlook; 'inner' is a biome/plant/journal; 'session' is an actual
+ *  learning session (never eligible for either sound below); null is
+ *  outside the garden entirely. A transition INTO the garden from null,
+ *  from any of the other three, is a fresh visit: the idle fragment's
+ *  twice-per-visit budget resets and the kettle tick is re-armed. */
+export function setGardenLocation(loc) {
+  const freshVisit = loc !== null && state.location === null;
+  const wasOverlook = state.location === 'overlook';
+  state.location = loc;
+  if (freshVisit) { state.idleCount = 0; state.kettleArmed = true; }
+  if (loc !== 'overlook') {
+    if (state.idleTimer) { clearTimeout(state.idleTimer); state.idleTimer = null; }
+    return;
+  }
+  if (!wasOverlook) scheduleIdleFragment(); // just arrived at the Overlook specifically
+}
+
+/** Schedules (and re-schedules) the Overlook idle fragment. Self-guarding
+ *  on every axis the placement rule names: only while ambience is on,
+ *  only while still standing at the Overlook when the timer actually
+ *  fires (a learner who has since moved on gets silence, not a stray
+ *  note), at most twice per visit, and — because each firing reschedules
+ *  the NEXT one at a 45-90s delay — never closer together than the
+ *  pinned 45s floor. */
+function scheduleIdleFragment() {
+  if (state.idleTimer || !state.ambienceOn || state.idleCount >= 2) return;
+  const delay = state.idleCount === 0 ? (8000 + Math.random() * 14000) : (45000 + Math.random() * 30000);
+  state.idleTimer = setTimeout(() => {
+    state.idleTimer = null;
+    if (state.location === 'overlook' && state.ambienceOn && !document.hidden && gardenGain() > 0 && state.idleCount < 2) {
+      const tint = { clear: 1, wind: 1, rain: 0.7, fog: 0.75, snow: 0.8 }[weatherFor()] ?? 1;
+      playGardenSound('idleFragment', { pairIndex: Math.floor(Math.random() * (VALLEY_PHRASE.full.length - 1)), weatherTint: tint });
+      state.idleCount += 1;
+    }
+    if (state.location === 'overlook') scheduleIdleFragment();
+  }, delay);
+}
+
+/** The Hearth's kettle-stone tick (§11.5): called once per Overlook
+ *  render (overlook.js), which is the only scene that draws the Hearth.
+ *  Consumes the visit's single "armed" chance regardless of outcome — if
+ *  it is not dawn in a cold season right now, it will not retroactively
+ *  become so later in the same sitting, so there is nothing to keep
+ *  waiting for. A short delay avoids landing on top of the arrival swell
+ *  when this is also the first screen of a fresh visit. */
+export function maybeKettleTick(atmo) {
+  if (!state.kettleArmed) return;
+  state.kettleArmed = false;
+  const cold = atmo.season === 'autumn' || atmo.season === 'winter';
+  if (atmo.time !== 'dawn' || !cold) return;
+  setTimeout(() => playGardenSound('kettleTick'), 3200);
 }
 
 export const GARDEN_SOUND_NAMES = Object.freeze(Object.keys(SOUNDS));

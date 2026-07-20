@@ -1995,25 +1995,113 @@ if (lgFiles.length === 0) {
   }
 
   /* -- Audio identity: import-safe under Node, disabled path is a no-op. -- */
+  let gardenAudio;
   {
     const audio = await mod('src/modules/language-garden/logic/audio.js');
+    gardenAudio = audio;
     // 'regrowth' is the distinct revisit chime (§10.5 #5) — descends then rises.
     // 'arrival' (Phase 4.9) is the world fading up, as sound — plays once on
-    // stepping into the Garden from outside.
-    const REQUIRED = ['arrival', 'commit', 'key', 'growth', 'regrowth', 'leafTap', 'bloom'];
+    // stepping into the Garden from outside. Stage W5 (THE WORLD Part 11) adds
+    // the Overlook idle fragment, the once-ever grown-biome full phrase, and
+    // the Hearth's kettle-stone tick.
+    const REQUIRED = ['arrival', 'commit', 'key', 'growth', 'regrowth', 'leafTap', 'bloom', 'idleFragment', 'grownPhrase', 'kettleTick'];
     for (const n of REQUIRED) if (!audio.GARDEN_SOUND_NAMES.includes(n)) bad(`garden audio: sound "${n}" missing from the engine`);
     if (typeof audio.gardenCue !== 'function') bad('garden audio: missing export gardenCue() (sound + haptic)');
     try {
       audio.playGardenSound('leafTap', { step: 2 }); // the rising assembly path
       audio.playGardenSound('arrival'); // stepping into the Garden
       audio.gardenCue('commit'); // sound + haptic together — disabled path is a no-op
-      audio.gardenCue('growth');
+      audio.gardenCue('growth', { tonic: 196.0 }); // a non-Rootwood tonic (Terraces' G), still a no-op disabled
       audio.gardenCue('regrowth'); // a revisit's Regrowth peak
+      audio.playGardenSound('idleFragment', { pairIndex: 2, weatherTint: 0.7 });
+      audio.gardenCue('grownPhrase'); // the once-ever full phrase
+      audio.playGardenSound('kettleTick');
       audio.unlockGardenAudio();
+      audio.setGardenLocation('overlook');
+      audio.maybeKettleTick({ time: 'dawn', season: 'winter' });
+      audio.setGardenLocation(null);
       audio.startGardenAmbience(1, { landmark: true }); // the Landmark's nesting bird
       audio.stopGardenAmbience();
     } catch (e) {
       bad(`garden audio: disabled play path threw — ${e.message}`);
+    }
+  }
+
+  /* -- The Valley Phrase (THE WORLD Part 11, Stage W5): pure pitch math,
+     held to THE WORLD's own pinned notes mechanically — not just by ear.
+     The acceptance gate is literally "the head/tail are the same phrase
+     to the ear," which is exactly the identity checked first below. -- */
+  {
+    const { PENTATONIC_SEMITONES, VALLEY_PHRASE, pitchHz, tonicHzForBiome } = gardenAudio;
+
+    const degreesOf = (notes) => notes.map((n) => `${n.degree}${n.octave}`).join(',');
+    if (degreesOf(VALLEY_PHRASE.full) !== degreesOf([...VALLEY_PHRASE.head, ...VALLEY_PHRASE.tail])) {
+      bad('garden phrase: the full phrase must be exactly head+tail concatenated — "the same phrase to the ear"');
+    }
+    if (degreesOf(VALLEY_PHRASE.head) !== 'mi1,sol1,la1') bad(`garden phrase: the head must be mi-sol-la, got ${degreesOf(VALLEY_PHRASE.head)}`);
+    if (degreesOf(VALLEY_PHRASE.tail) !== 'sol1,la1,do2') bad(`garden phrase: the tail must be sol-la-do′, got ${degreesOf(VALLEY_PHRASE.tail)}`);
+    // The head's last two degrees and the tail's first two must be the SAME
+    // two notes (sol, la) — the overlap that lets the ear assemble a phrase
+    // it has only ever heard in two halves.
+    if (VALLEY_PHRASE.head[1].degree !== VALLEY_PHRASE.tail[0].degree || VALLEY_PHRASE.head[2].degree !== VALLEY_PHRASE.tail[1].degree) {
+      bad('garden phrase: the head and tail must overlap on sol-la for the ear to assemble one phrase from two halves');
+    }
+
+    // pitchHz must reproduce equal temperament: a fifth is 7 semitones
+    // (ratio 2^(7/12)), an octave doubles, and degree 'do' at octave 0 is
+    // the tonic itself, exactly.
+    const ROOTWOOD_C = 130.81; // audio.js's own C3 — the Rootwood's tonic (11.4)
+    if (pitchHz(ROOTWOOD_C, 'do', 0) !== ROOTWOOD_C) bad('garden phrase: pitchHz(tonic, "do", 0) must equal the tonic exactly');
+    if (Math.abs(pitchHz(ROOTWOOD_C, 'do', 1) - ROOTWOOD_C * 2) > 0.001) bad('garden phrase: one octave up must exactly double the tonic');
+    const fifthRatio = pitchHz(ROOTWOOD_C, 'sol', 0) / ROOTWOOD_C;
+    if (Math.abs(fifthRatio - 2 ** (7 / 12)) > 0.0001) bad(`garden phrase: sol must sit a perfect fifth (7 semitones) above the tonic, ratio was ${fifthRatio}`);
+    for (const [tail, semis] of [['do', 0], ['re', 2], ['mi', 4], ['sol', 7], ['la', 9]]) {
+      if (PENTATONIC_SEMITONES[tail] !== semis) bad(`garden phrase: pentatonic degree "${tail}" should be ${semis} semitones above the tonic, got ${PENTATONIC_SEMITONES[tail]}`);
+    }
+
+    // The tail IS the growth chime and its resolution is do′ two octaves up
+    // from the tonic's own octave; Regrowth must resolve ONE PENTATONIC
+    // STEP higher than that — re′ — never back at do′ (THE WORLD §11.2:
+    // "resolving one step higher").
+    const tailResolution = pitchHz(ROOTWOOD_C, 'do', 2);
+    const regrowthResolution = pitchHz(ROOTWOOD_C, 're', 2);
+    if (regrowthResolution <= tailResolution) bad('garden phrase: Regrowth must resolve higher than the tail (Growth) does');
+    const stepRatio = regrowthResolution / tailResolution;
+    if (Math.abs(stepRatio - 2 ** (2 / 12)) > 0.0001) bad(`garden phrase: Regrowth's resolution must be exactly one pentatonic whole-step above the tail's, ratio was ${stepRatio}`);
+
+    // The tonic map (11.4): every biome the game knows about must resolve
+    // to a real Hz (or null for the Wilds, which has none), and Rootwood —
+    // the only living biome — must be the literal C the phrase is written
+    // in (audio.js's own C3), so the default register never silently drifts.
+    const { BIOMES } = await mod('src/modules/language-garden/logic/biomes.js');
+    const EXPECTED_HZ = { rootwood: 130.81, terraces: 196.0, orchard: 164.81, meadow: 220.0, pond: 146.83, thicket: 196.0, wilds: null };
+    for (const biome of BIOMES) {
+      const got = tonicHzForBiome(biome);
+      const want = EXPECTED_HZ[biome.slug];
+      if (want === null) { if (got !== ROOTWOOD_C) bad(`garden phrase: the Wilds has no tonic and should fall back to the Rootwood's, got ${got}`); }
+      else if (Math.abs(got - want) > 0.01) bad(`garden phrase: ${biome.slug}'s tonic should be ${want}Hz (THE WORLD 11.4), got ${got}`);
+    }
+    if (tonicHzForBiome(null) !== ROOTWOOD_C) bad('garden phrase: tonicHzForBiome(null) must fall back to the Rootwood tonic, never throw');
+  }
+
+  /* -- A biome grown (Bible §3.5; THE WORLD §11.2, Stage W5): pure and
+     replayable — every family in the biome must independently reach at
+     least Mature before the biome itself reads as grown, and an empty or
+     foreign biome is never grown by default. -- */
+  {
+    const { isBiomeGrown } = await mod('src/modules/language-garden/logic/scene.js');
+    const fam = (id, garden) => ({ meta: { id, garden } });
+    const families = [fam('a', 'root_grove'), fam('b', 'root_grove'), fam('c', 'root_grove')];
+    const now = Date.now();
+    const grow = (id, at) => ({ family_id: id, session_type: 'grow', finished_at: new Date(at).toISOString() });
+
+    if (isBiomeGrown([], [], 'rootwood', now)) bad('garden phrase: an empty biome must never read as grown');
+    if (isBiomeGrown(families, [], 'rootwood', now)) bad('garden phrase: families with no history at all must not read as grown');
+    if (isBiomeGrown(families, [grow('a', now - 1000)], 'rootwood', now)) {
+      bad('garden phrase: one freshly-grown (Sprout) family among three must not make the biome grown');
+    }
+    if (isBiomeGrown(families, [grow('a', now - 1000)], 'orchard', now)) {
+      bad('garden phrase: isBiomeGrown must filter to the requested biome slug, not count families from another one');
     }
   }
 

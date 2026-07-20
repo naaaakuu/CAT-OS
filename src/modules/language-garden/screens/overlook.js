@@ -42,6 +42,7 @@ import { biomeBySlug, BIOMES } from '../logic/biomes.js';
 import { computeStreamLevel, streamBand, computeGroundTier, computePathWear } from '../logic/effort.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
 import { pickHearthCat } from '../logic/ambient.js';
+import { maybeKettleTick } from '../logic/audio.js';
 import { weatherLayerHTML, nightSkySVG, sunDiscSVG, cloudsSVG } from './atmosphere-art.js';
 import { litFace, shadeFace, contactShadow, castsShadow, castShadow } from '../logic/light.js';
 import { VALLEY_LINES } from '../../../core/mentor/garden-voice.js';
@@ -129,6 +130,11 @@ function renderValley(outlet, rootwood, effort) {
   const rootwoodBiome = biomeBySlug('rootwood');
   const atmo = atmosphereFor();
   const cat = pickHearthCat(atmo.time, atmo.season);
+  // The Hearth's kettle-stone (THE WORLD §11.5): only the Overlook draws the
+  // Hearth, so this is the one place that can ever fire it — armed once per
+  // fresh garden visit by setGardenLocation() (app.js), consumed here
+  // whether or not tonight's/today's conditions actually let it sound.
+  maybeKettleTick(atmo);
   const wildLabel = (slug) => {
     const b = BIOMES.find((x) => x.slug === slug);
     return VALLEY_LINES.wildBiome(b ? b.name : slug);

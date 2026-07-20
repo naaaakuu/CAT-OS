@@ -159,3 +159,25 @@ export function nextReachPoolIndex(history, poolSize) {
 export function memberCheckOffset(history) {
   return history.filter((s) => s.session_type === 'revisit').length;
 }
+
+/** Whether every family in ONE biome has reached at least Mature (Bible
+ *  §3.5 "every flower is bloomed"; THE WORLD Part 13's own definition,
+ *  "every family in it is at least Mature" — Ancient counts too, being a
+ *  stronger case of it). A pure replay of history, exactly like the
+ *  Landmark check session.js already makes for one plant — never a
+ *  stored flag — so the single session where a biome crosses this line
+ *  is found by comparing this against history with and without that
+ *  session's own record.
+ * @param {Array} families  every family (any biome) — filtered internally
+ * @param {Array} allSessions
+ * @param {string} biomeSlug
+ * @param {number} [now]
+ */
+export function isBiomeGrown(families, allSessions, biomeSlug, now = Date.now()) {
+  const inBiome = families.filter((f) => biomeForFamily(f)?.slug === biomeSlug);
+  if (!inBiome.length) return false;
+  return inBiome.every((f) => {
+    const stage = computePlantState(sessionsForFamily(allSessions, f.meta.id), now).stage;
+    return stage === 'mature' || stage === 'ancient';
+  });
+}

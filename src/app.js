@@ -29,7 +29,7 @@ import { listGardenSessions, listGardenSeeds, gardenAmbienceEnabled, setGardenAm
 import { deriveValleyScene } from './modules/language-garden/logic/scene.js';
 import { computeStreamLevel } from './modules/language-garden/logic/effort.js';
 import { computePlantState } from './core/engine/garden-session.js';
-import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio, playGardenSound } from './modules/language-garden/logic/audio.js';
+import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio, playGardenSound, setGardenLocation } from './modules/language-garden/logic/audio.js';
 import { EMPTY_DAY_LINES, pick as pickGardenLine } from './core/mentor/garden-voice.js';
 import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem, listLGItems, loadLGItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
@@ -959,6 +959,15 @@ async function boot() {
     if (inGarden && !wasInGarden) playGardenSound('arrival');
     wasInGarden = inGarden;
     const isBrowsingGarden = (h === '#/garden' || h.startsWith('#/garden/biome') || h.startsWith('#/garden/plant') || h.startsWith('#/garden/journal'));
+    // The Overlook idle fragment and the Hearth's kettle-stone tick (THE
+    // WORLD §11.2, §11.5) both need to know specifically whether the
+    // learner is standing at the Overlook right now, not just "somewhere
+    // in the garden" — and a session (never eligible for either) must
+    // still count as staying IN the garden, not as a fresh visit when it
+    // ends. 'overlook' is exactly #/garden; 'inner' is a biome/plant/
+    // journal; 'session' is an actual learning session; null is outside
+    // the garden entirely, the only state a return from counts as fresh.
+    setGardenLocation(!inGarden ? null : h === '#/garden' ? 'overlook' : isBrowsingGarden ? 'inner' : 'session');
     if (isBrowsingGarden && await gardenAmbienceEnabled(storage)) {
       // The breeze bed's gain reflects the Stream (§3.1, §8.4): a
       // recently-tended valley runs a little louder with water. And if the

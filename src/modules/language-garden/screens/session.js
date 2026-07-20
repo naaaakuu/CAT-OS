@@ -23,13 +23,13 @@
 import { loadLGItem, listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
 import { GardenSession, computePlantState, strugglingMembers } from '../../../core/engine/garden-session.js';
 import { listGardenSessions, sessionsForFamily, saveGardenSession, hasSeenGardenGrowth, markGardenGrowthSeen, listGardenSeeds } from '../logic/store.js';
-import { deriveValleyScene, nextReachPoolIndex, memberCheckOffset } from '../logic/scene.js';
+import { deriveValleyScene, nextReachPoolIndex, memberCheckOffset, isBiomeGrown } from '../logic/scene.js';
 import { biomeForFamily } from '../logic/biomes.js';
 import { computeGroundTier } from '../logic/effort.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
 import { focusedGroveSceneHTML, STAGE_HEIGHT_PCT } from './biome.js';
 import { GARDEN_LINES, GROWTH_LINES, ATTEMPT_LINES, pick } from '../../../core/mentor/garden-voice.js';
-import { playGardenSound, gardenCue } from '../logic/audio.js';
+import { playGardenSound, gardenCue, tonicHzForBiome } from '../logic/audio.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-option.js';
 import '../../../ui/components/cat-plant.js';
@@ -91,6 +91,10 @@ export async function renderGardenSession(outlet, context, params) {
   // not up at the Overlook. The valley is one level further out.
   const biome = biomeForFamily(family);
   const biomeHome = biome ? `#/garden/biome/${biome.slug}` : '#/garden';
+  // THE WORLD §11.4: Growth/Regrowth root the Valley Phrase on the biome's
+  // own tonic — today always the Rootwood's, since it is the only living
+  // biome, but computed generically so a future biome needs no change here.
+  const tonicHz = tonicHzForBiome(biome);
 
   const priorState = computePlantState(history);
   const type = ['open_ground', 'seed'].includes(priorState.stage) ? 'grow' : 'revisit';
@@ -323,7 +327,10 @@ export async function renderGardenSession(outlet, context, params) {
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
     const postState = computePlantState([...history, record], Date.parse(record.finished_at));
     const line = GROWTH_LINES.firstGrow(family.root.label, session.id);
-    growthBeat(line, postState, 'growth');
+    // A first-ever grow can reach Sprout at most (§6.2) — never Mature — so
+    // a biome can never become grown here; only a revisit can cross that
+    // line (revisit_growth, below).
+    growthBeat(line, postState, 'growth', tonicHz);
   }
 
   /* ---------------- REVISIT ---------------- */
@@ -414,7 +421,8 @@ export async function renderGardenSession(outlet, context, params) {
     sessionEnded = true;
     const record = session.finish();
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
-    const postState = computePlantState([...history, record], Date.parse(record.finished_at));
+    const finishedAt = Date.parse(record.finished_at);
+    const postState = computePlantState([...history, record], finishedAt);
     // The line follows what actually happened, in order of rarity: a tree the
     // world just made a Landmark, a tree that just joined the old growth, then
     // the ordinary "it holds" / "still growing" (never "how well" — §6.7).
@@ -425,9 +433,22 @@ export async function renderGardenSession(outlet, context, params) {
         : record.clean
           ? GROWTH_LINES.revisitClean(family.root.label, session.id)
           : GROWTH_LINES.revisitRocky(family.root.label, session.id);
+    // A biome grown (Bible §3.5, §8.8; THE WORLD §11.2): "the only time the
+    // valley ever sings its whole song." Detected live, exactly like the
+    // Landmark check above — was the WHOLE biome short of this before this
+    // record, does it clear the line with it included — never a stored
+    // flag, so the one session that crosses it is found by construction.
+    // Dormant in practice (it needs every family in the biome at Mature+),
+    // but real: only a revisit can ever complete it (a first grow tops out
+    // at Sprout, §6.2), so this is the only place it can fire.
+    const grownNow = !!biome
+      && !isBiomeGrown(allFamilies, allSessions, biome.slug, finishedAt)
+      && isBiomeGrown(allFamilies, [...allSessions, record], biome.slug, finishedAt);
     // A revisit is a Regrowth — a memory that faded and came back — so it gets
-    // the distinct descending-then-rising chime (§10.5 #5), not the first-grow one.
-    growthBeat(line, postState, 'regrowth');
+    // the distinct descending-then-rising chime (§10.5 #5), not the first-grow
+    // one — UNLESS this is the one session a biome becomes grown, which
+    // supersedes it (Law 6: one peak per session, never both).
+    growthBeat(line, postState, grownNow ? 'grownPhrase' : 'regrowth', tonicHz);
   }
 
   /* ---------------- shared: Reach (cannot be failed) ---------------- */
@@ -509,7 +530,7 @@ export async function renderGardenSession(outlet, context, params) {
    *  everything it held) fades away; the SAME plant already standing in
    *  the world — found via [data-tended-plant] — is grown in place, at
    *  its own real scale, never swapped for a separate floating hero. */
-  function growthBeat(line, postState, cue = 'growth') {
+  function growthBeat(line, postState, cue = 'growth', tonic = tonicHz) {
     const reduce = prefersReducedMotion();
     const afterglow = afterglowLine(context, family.meta.id);
 
@@ -576,14 +597,14 @@ export async function renderGardenSession(outlet, context, params) {
     if (!plantEl) {
       // Defensive only (no living biome behind this session): still the
       // chime, the haptic, the line — there is simply nothing to watch grow.
-      gardenCue(cue);
+      gardenCue(cue, { tonic });
       restTimer = setTimeout(reveal, 460);
     } else if (reduce) {
       // Reduced motion is not a downgrade (§11.5): the plant is simply there,
       // bigger, with leaves it did not have — the CHANGE is the reward — with
       // the chime, the haptic, and the line. No wipe, no long tween.
       plantEl.classList.add('lgx-grow-plant', 'is-grown-still');
-      gardenCue(cue);
+      gardenCue(cue, { tonic });
       restTimer = setTimeout(reveal, 460);
     } else {
       // The four movements (§11.4): anticipation → extension → settle → rest.
@@ -592,7 +613,7 @@ export async function renderGardenSession(outlet, context, params) {
       // releases into the extension; then everything is still, and the line
       // fades in.
       plantEl.classList.add('lgx-grow-plant', 'is-growing');
-      setTimeout(() => gardenCue(cue), 150); // the thump + chime as growth begins
+      setTimeout(() => gardenCue(cue, { tonic }), 150); // the thump + chime as growth begins
       restTimer = setTimeout(reveal, 1650);  // after the ~1.6s animation rests
     }
 
