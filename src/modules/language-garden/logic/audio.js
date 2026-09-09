@@ -116,6 +116,7 @@ const state = {
   idleTimer: null,     // the Overlook idle fragment's own schedule (§11.2)
   idleCount: 0,        // fragments played this garden visit, capped at 2
   kettleArmed: false,  // eligible to fire the kettle-stone tick once this visit (§11.5)
+  arrivalPlayed: false, // the Valley Phrase's head has sounded this visit (0.16.0: a cold open at the Overlook owes it on the first touch)
 };
 
 /** Tracks the shell's own master volume 1:1 — 0 whenever the shell's Sounds
@@ -170,6 +171,12 @@ export function unlockGardenAudio() {
     if (!feedbackPrefs().sounds) return;
     if (!ensureGraph()) return;
     if (state.ctx.state === 'suspended') state.ctx.resume();
+    // 0.16.0: the valley is the home, so the app can open straight onto the
+    // Overlook with no gesture behind it — and the browser lets nothing
+    // sound until there is one. The first touch of the world pays the
+    // arrival it owes (THE WORLD 10.7's swell), once per visit, and only
+    // while still standing at the Overlook.
+    if (state.location === 'overlook' && !state.arrivalPlayed) { state.arrivalPlayed = true; playGardenSound('arrival'); }
   } catch { /* audio is a bonus, never a blocker */ }
 }
 
@@ -457,6 +464,11 @@ function gardenVibrate(name) {
 export function playGardenSound(name, opts = {}) {
   try {
     const m = gardenGain();
+    // The arrival sounds once per visit. Scheduled on a still-locked graph
+    // it simply waits for the first touch, so it counts as played here
+    // either way; only a visit that never scheduled it (a cold open at the
+    // Overlook) is settled by unlockGardenAudio() on the first touch.
+    if (name === 'arrival' && m > 0) state.arrivalPlayed = true;
     if (m <= 0) return;
     if (typeof document !== 'undefined' && document.hidden) return;
     const fn = SOUNDS[name];
@@ -616,7 +628,7 @@ export function setGardenLocation(loc) {
   const freshVisit = loc !== null && state.location === null;
   const wasOverlook = state.location === 'overlook';
   state.location = loc;
-  if (freshVisit) { state.idleCount = 0; state.kettleArmed = true; }
+  if (freshVisit) { state.idleCount = 0; state.kettleArmed = true; state.arrivalPlayed = false; }
   if (loc !== 'overlook') {
     if (state.idleTimer) { clearTimeout(state.idleTimer); state.idleTimer = null; }
     return;

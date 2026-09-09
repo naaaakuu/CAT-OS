@@ -4,6 +4,54 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.16.0 — 2026-09-10 — The valley is the home
+
+The Language Garden stops being a feature inside CAT OS and becomes the
+place the app opens onto. Built to `LANGUAGE GARDEN — THE WORLD.md` v1.2.0
+(Part 15, the 0.16.0 pass) and `LANGUAGE GARDEN — IMPLEMENTATION ROADMAP.md`
+v1.6.0 (Appendices J–K), on the owner's 2026-09-10 brief. No content, schema,
+or storage-shape changes; one additive record kind (`garden-discovery`).
+
+- **Home.** A cold open lands on the Overlook (`router.start('/garden')`);
+  the very first open still hands straight to the Rootwood's first sentence.
+  The bottom nav, visible only outside the Garden, reads Valley · Practice ·
+  Growth · Settings; the old dashboard route stays registered, unlinked.
+  **Beyond the Gate:** `#/practice` rebuilt as the road out of the valley —
+  a live skyline over four places (the Reading Room, the Summary Table, the
+  Loom, the Stranger's Bench). No badges.
+- **The Overlook, repainted.** Full-bleed, no card; the sky raised by 100
+  units (`viewBox 0 -100 360 660`) with three clouds, a 28-star
+  constellation and a haloed moon; two mountain ranges with snow cut from
+  the crest geometry; the arrival staged back to front in four planes; the
+  Rootwood drawn as trees (trunk, shade, lit, cap) that thicken by one for
+  every three families grown, with evergreen emergent crowns where Ancients
+  stand; the whole pigment canon re-toned (richer skies, water, land, stone,
+  the cottage) and the whole-scene season filter retired for real pigment
+  (autumn gold, winter pale, spring fresh); hedgerows, stone joints, wall
+  grass, a ridge and eave and chimney cap, a pond gradient with a bank,
+  orchard trunks and blossom, terrace fields with stone lips and vine rows.
+- **The Rootwood, repainted.** Full-bleed; light through leaves between the
+  trunks (an hour-toned gradient) instead of paper; an SVG floor with pools
+  of light where the shafts land and undergrowth along the edge; an
+  old-growth far wood behind the working set from day one; bark and root
+  flare on the great trunks; leaf clusters on the ceiling; trunks under the
+  mid-wood; fuller plant crowns at every stage; plants standing on earth,
+  not a pale disc; the valley mark and the quiet line floating over the
+  scene.
+- **Stage W6 finished** (the interrupted authored-density, fauna, and
+  winter-geometry work, kept whole) and **Stage W7** (the Journal at the
+  bench — the view from the bench above the book; the Gate's 700ms drift).
+- **Discoveries and the Field Guide** (Bible §9, Roadmap 5.1): sixty
+  world-state discoveries in `logic/discoveries.js`, recorded after a scene
+  paints (one record per discovery, ever), listed in the Journal one line
+  each, closing on one fact about the valley. Nothing mechanical; no
+  silhouettes, no fractions.
+- **Audio.** The first touch at a cold-opened Overlook pays the arrival it
+  owes, once.
+- **Verification.** `tools/verify.mjs` now lints the discovery catalogue;
+  the app was driven in real Chrome at 390×844 at every hour and season.
+- `CACHE_VERSION` → 25. `APP_VERSION` → 0.16.0.
+
 ## 0.15.1 — 2026-07-17 — The Rootwood dataset, complete
 
 Content only; no engine, screen, or schema changes. Every root family in the

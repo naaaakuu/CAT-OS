@@ -24,13 +24,17 @@
  */
 
 import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
-import { listGardenSessions, listGardenSeeds } from '../logic/store.js';
+import { listGardenSessions, listGardenSeeds, recordDiscoveries } from '../logic/store.js';
+import { visibleDiscoveries } from '../logic/discoveries.js';
 import { deriveBiomeScene, selectForegroundSlots } from '../logic/scene.js';
 import { biomeBySlug } from '../logic/biomes.js';
 import { pickAmbientEvent, hasNest } from '../logic/ambient.js';
 import { computeGroundTier } from '../logic/effort.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
 import { weatherLayerHTML } from './atmosphere-art.js';
+import { revealedProps, revealedStories } from '../logic/props.js';
+import { inSceneRootwoodPropsSVG } from './prop-art.js';
+import { faunaSVG, faunaInlineSVG } from './fauna-art.js';
 import {
   litFace, shadeFace, shadowColor, SUN_OFFSET_SIGN,
   contactShadow, castShadow, castsShadow,
@@ -69,7 +73,20 @@ export async function renderBiome(outlet, context, params) {
 
   const scene = deriveBiomeScene(families, sessions, biome.slug, Date.now(), seeds);
   const ground = computeGroundTier(sessions);
-  renderSceneHTML(outlet, biome, scene, ground);
+  const shown = renderSceneHTML(outlet, biome, scene, ground);
+
+  // Discoveries (Bible §9, 0.16.0): what the wood just showed is now seen —
+  // recorded after the paint, never awaited by it, never announced.
+  recordDiscoveries(context.storage, visibleDiscoveries({
+    scene: 'rootwood',
+    time: shown.atmo.time, season: shown.atmo.season, weather: shown.atmo.weather,
+    ambient: shown.event,
+    hasLandmark: scene.plants.some((p) => p.state.landmark),
+    stages: new Set(scene.plants.map((p) => p.state.stage)),
+    dues: new Set(scene.plants.map((p) => p.state.due)),
+    tierRank: ['bare', 'tended', 'growing', 'flourishing', 'lush'].indexOf(ground.tier),
+    props: new Set(revealedProps({ tier: ground.tier, scene: 'rootwood', season: shown.atmo.season, time: shown.atmo.time, weather: shown.atmo.weather }).map((p) => p.id)),
+  }), 'rootwood');
 }
 
 /* ---- Phase V, Stage W3: the Rootwood cathedral's fixed geometry ----
@@ -209,6 +226,15 @@ export function groveSceneHTML(biome, ground, atmo, { horizon, foreground, overf
   // one fact instead of two that could drift apart.
   const becalmed = !interactive;
   const wash = becalmed ? ` style="--becalm-wash-color:${shadowColor(atmo.time)};"` : '';
+  // Stage W6 — the cathedral's own share of the authored inventory (THE
+  // WORLD Part 7, Appendix C.5's *in-scene* marks): the fern banks that
+  // fill the floor's edges at Flourishing, and at Lush the old stump with
+  // the carved stone beside it — Part 7.4's one environmental story that
+  // Appendix C actually gives a coordinate of its own (C.6).
+  const inScene = inSceneRootwoodPropsSVG(
+    revealedProps({ tier: ground.tier, scene: 'rootwood', season: atmo.season, time: atmo.time, weather: atmo.weather }),
+    revealedStories({ tier: ground.tier, scene: 'rootwood' }),
+  );
   return `
     <div class="grove-scene grove-scene--cathedral${becalmed ? ' grove-scene--becalmed' : ''}" data-time="${atmo.time}" data-season="${atmo.season}" data-weather="${atmo.weather}"${wash}>
       ${interactive ? `<button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>` : ''}
@@ -229,11 +255,15 @@ export function groveSceneHTML(biome, ground, atmo, { horizon, foreground, overf
            shares one coordinate system with the slots positioned in
            plain CSS below. -->
       <svg class="grove-cathedral" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        ${airSVG(atmo)}
+        ${floorSVG(atmo)}
+        ${farWoodSVG(atmo)}
         ${trunksSVG(atmo)}
         ${ceilingSVG(atmo)}
         ${atmo.time === 'dawn' ? dawnMistSVG() : ''}
         ${shaftsSVG(atmo)}
         ${midWoodSVG(overflowMature.length, atmo)}
+        ${inScene}
         ${streamGlintSVG()}
         ${atmo.time === 'night' ? nightFirefliesSVG() : ''}
       </svg>
@@ -344,6 +374,7 @@ function renderSceneHTML(outlet, biome, scene, ground) {
   for (const el of outlet.querySelectorAll('[data-plant-id]')) {
     wirePlant(el, plantsById.get(el.dataset.plantId));
   }
+  return { atmo, event };
 }
 
 function wirePlant(el, plant) {
@@ -452,7 +483,7 @@ function plantSlotHTML(p, slot, askingId, openSeedId, atmo, focusId = null) {
       <span class="grove-plant__tuft" aria-hidden="true"></span>
       <span class="grove-plant__art">
         <cat-plant stage="${p.state.stage}" due="${p.state.due}" ${nest ? 'nest' : ''} ${isFocus ? 'data-tended-plant' : ''}
-          seed="${escapeHTML(id)}" vigor="${p.state.vigor}"></cat-plant>
+          season="${escapeHTML(atmo.season)}" seed="${escapeHTML(id)}" vigor="${p.state.vigor}"></cat-plant>
       </span>
       <span class="grove-plant__name">${escapeHTML(p.family.root.label)}</span>
     </button>
@@ -483,23 +514,116 @@ function groundMarkup(tier) {
     .join('');
 }
 
+/** The scene's own frame width, in the units the ambient layer sizes its
+ *  creatures against. The cathedral is a portrait frame roughly 360 units
+ *  wide at the same scale the Overlook uses, so the roster's shares of
+ *  frame width resolve to the same real sizes in both scenes — a butterfly
+ *  is the same butterfly whether the learner is on the hill or in the wood. */
+const SCENE_FRAME_WIDTH = 360;
+
+/**
+ * One ambient visitor, drawn (THE WORLD Part 9.1, Stage W6's fauna
+ * redraw). Until this stage each of these was a TYPOGRAPHIC GLYPH — the
+ * butterfly was the character ❋, the bird was ◜, the firefly was a bullet
+ * point. Part 9.1 requires "one to three soft masses, no outlines, no
+ * faces," and a glyph is none of those things: it carries a font's own
+ * hand, an outline, and no silhouette the world could ever own. Every
+ * visitor is now masses from the pinned roster.
+ *
+ * Two of the five events are not creatures at all and keep their own
+ * markup: a falling petal and a leaf-stir are the WOOD moving, not
+ * something living in it.
+ */
 function ambientMarkup(event) {
-  switch (event) {
-    case 'bird': return '<span class="grove-visitor grove-visitor--bird" aria-hidden="true">◜</span>';
-    case 'butterfly': return '<span class="grove-visitor grove-visitor--butterfly" aria-hidden="true">❋</span>';
-    case 'firefly': return '<span class="grove-visitor grove-visitor--firefly" aria-hidden="true">•</span>';
-    case 'petal': return '<span class="grove-visitor grove-visitor--petal" aria-hidden="true">❁</span>';
-    case 'leaf-stir': return '<span class="grove-visitor grove-visitor--leaf-stir" aria-hidden="true">⁘</span>';
-    default: return '';
+  const CREATURE = { bird: 'bird', butterfly: 'butterfly-white', firefly: 'firefly' };
+  if (CREATURE[event]) {
+    return `<span class="grove-visitor grove-visitor--${event}" aria-hidden="true">${faunaInlineSVG(CREATURE[event], SCENE_FRAME_WIDTH)}</span>`;
   }
+  if (event === 'petal') {
+    return `<span class="grove-visitor grove-visitor--petal" aria-hidden="true">
+      <svg viewBox="-4 -4 8 8" width="8" height="8" aria-hidden="true" focusable="false">
+        <ellipse rx="3.4" ry="1.9" fill="var(--garden-bloom)" transform="rotate(-24)"/>
+      </svg></span>`;
+  }
+  if (event === 'leaf-stir') {
+    return `<span class="grove-visitor grove-visitor--leaf-stir" aria-hidden="true">
+      <svg viewBox="-5 -5 10 10" width="10" height="10" aria-hidden="true" focusable="false">
+        <path d="M-3.6,1.8 Q-1,-3.4 3.6,-1.8 Q1,3.4 -3.6,1.8 Z" fill="var(--garden-inleaf)"/>
+      </svg></span>`;
+  }
+  return '';
 }
 
 /* ---- The cathedral's painted structure (THE WORLD Part 10.2, §5.2–5.3) ---- */
 
+/** The air of the wood (0.16.0, THE WORLD 1.2.0): what shows between the
+ *  trunks is not paper but LIGHT THROUGH LEAVES — deep canopy shade at
+ *  the top, a luminous green-gold band where the shafts land, re-toned
+ *  per hour by CSS on the gradient's stops (the same device the Overlook
+ *  sky uses). Painted first, under everything. */
+function airSVG() {
+  return `
+    <defs>
+      <linearGradient id="grove-air-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop class="grove-air-stop grove-air-stop--top" offset="0%"/>
+        <stop class="grove-air-stop grove-air-stop--mid" offset="34%"/>
+        <stop class="grove-air-stop grove-air-stop--low" offset="58%"/>
+      </linearGradient>
+    </defs>
+    <rect class="grove-air" x="0" y="0" width="100" height="62" fill="url(#grove-air-grad)"/>`;
+}
+
+/** The cathedral floor, painted in the SVG (0.16.0): a far slope from the
+ *  wood's edge, a nearer mossy floor, the pools of light where the three
+ *  shafts land (never at night), and a fixed line of undergrowth along
+ *  the bottom edge — the floor the working set stands on. Replaces the
+ *  two flat DOM bands of Phase 4.9, which sat under the SVG and could
+ *  not take light. */
+function floorSVG(atmo) {
+  const night = atmo.time === 'night';
+  const tilt = SHAFT_TILT[atmo.time];
+  const sign = SUN_OFFSET_SIGN[atmo.time] ?? 0;
+  const dx = tilt === undefined ? 0 : SHAFT_FALL * tilt * sign;
+  const pools = night ? '' : SHAFT_X.map((x, i) =>
+    `<ellipse class="grove-light-pool" cx="${(x + dx).toFixed(1)}" cy="${(SHAFT_TOP_Y + SHAFT_FALL + 3 + i * 4).toFixed(1)}" rx="${(6.5 + i * 1.2).toFixed(1)}" ry="${(1.6 + i * 0.4).toFixed(1)}"/>`).join('');
+  const tufts = [4, 11, 19, 31, 42, 55, 63, 71, 84, 93].map((x, i) => {
+    const h = 3 + (i % 3) * 1.2;
+    const lean = (i % 2 ? 1 : -1) * 0.8;
+    return `<path class="grove-undergrowth" d="M${x},100 q${lean},${(-h * 0.6).toFixed(1)} ${(lean * 1.6).toFixed(1)},${-h} M${x + 1.6},100 q${-lean},${(-h * 0.5).toFixed(1)} ${(-lean * 1.4).toFixed(1)},${(-h * 0.8).toFixed(1)}"/>`;
+  }).join('');
+  return `
+    <path class="grove-floor-far" d="M0,60 Q22,54 50,56 Q78,58 100,55 L100,100 L0,100 Z"/>
+    <path class="grove-floor-near" d="M0,80 Q30,74 52,77 Q76,80 100,76 L100,100 L0,100 Z"/>
+    ${pools}
+    <g class="grove-undergrowth-line">${tufts}</g>`;
+}
+
+/** The old-growth horizon behind the working set (Bible §4.1: "behind
+ *  them a horizon of old growth") — a fixed row of deep silhouettes at
+ *  the wood's far edge, cooler and paler than the mid-wood (aerial
+ *  perspective inside the wood). It stands from day one: the wood is
+ *  older than the learner, and the learner's own trees join it. */
+function farWoodSVG() {
+  // Distant trunks first — trees taller than the screen, seen through the
+  // air behind the two great trunks — then the old-growth crowns at the
+  // wood's far edge. All fixed; all a little cooler than the mid-wood.
+  const TRUNKS = [[8, 1.4], [35, 1.8], [59, 1.2], [90, 1.6]];
+  const TREES = [[6, 55, 5], [26, 53, 6], [44, 55, 4.8], [57, 53, 5.6], [73, 55, 4.4], [92, 54, 5.4]];
+  return `<g class="grove-far-wood" aria-hidden="true">
+    ${TRUNKS.map(([x, w]) => `<path class="grove-far-column" d="M${x},10 L${x},58" style="stroke-width:${w}"/>`).join('')}
+    ${TREES.map(([x, y, r]) => `
+      <path class="grove-far-trunk" d="M${x},${y + r * 0.5} L${x},${(y + r * 1.5).toFixed(1)}"/>
+      <ellipse cx="${x}" cy="${y}" rx="${r}" ry="${(r * 1.35).toFixed(1)}"/>
+      <ellipse cx="${(x - r * 0.35).toFixed(1)}" cy="${(y - r * 0.6).toFixed(1)}" rx="${(r * 0.5).toFixed(1)}" ry="${(r * 0.65).toFixed(1)}"/>`).join('')}
+  </g>`;
+}
+
 /** The two great background trunks: trees taller than the screen, which
  *  is the entire feeling of the biome (Part 10.2). A tapering two-tone
  *  mass (warm lit face, cool shade face, §5.2), grounded by the same
- *  contact/cast shadow pair every standing object gets. */
+ *  contact/cast shadow pair every standing object gets — and, since
+ *  0.16.0, with a root flare at the floor and a few bark lines, so the
+ *  trunk is a tree and not a column. */
 function trunksSVG(atmo) {
   return GREAT_TRUNKS.map(({ x, width }) => {
     const lit = litFace(TRUNK_BASE, atmo.time);
@@ -507,11 +631,18 @@ function trunksSVG(atmo) {
     const halfW = width / 2;
     const topW = width * 0.62;
     const midX = x - halfW * 0.12;
+    const bark = [18, 41, 63, 84].map((y, i) => {
+      const bx = x - halfW * 0.5 + (i % 2) * halfW * 0.7;
+      return `<path class="grove-bark" d="M${bx.toFixed(1)},${y} q0.3,3 -0.2,7"/>`;
+    }).join('');
     return `
       <g class="grove-trunk" aria-hidden="true">
         ${trunkShadowSVG(x, 97, width, atmo)}
         <path fill="${shade}" d="M${(x - halfW).toFixed(1)},100 L${(midX - topW / 2).toFixed(1)},-14 L${midX.toFixed(1)},-14 L${(x - halfW * 0.18).toFixed(1)},100 Z"/>
         <path fill="${lit}" d="M${(x - halfW * 0.18).toFixed(1)},100 L${midX.toFixed(1)},-14 L${(midX + topW / 2).toFixed(1)},-14 L${(x + halfW).toFixed(1)},100 Z"/>
+        <path fill="${shade}" d="M${(x - halfW).toFixed(1)},100 Q${(x - halfW * 1.1).toFixed(1)},95 ${(x - halfW * 2.1).toFixed(1)},100 Z"/>
+        <path fill="${lit}" d="M${(x + halfW).toFixed(1)},100 Q${(x + halfW * 1.1).toFixed(1)},95.5 ${(x + halfW * 1.9).toFixed(1)},100 Z"/>
+        ${bark}
       </g>`;
   }).join('');
 }
@@ -539,14 +670,76 @@ function ceilingSVG(atmo) {
     { x: 46, y: 4, rx: 11, ry: 10, c: CANOPY_STACK[1] },
     { x: 85, y: 7, rx: 18, ry: 11, c: CANOPY_STACK[2] },
   ];
-  const body = masses.map((m) =>
-    `<ellipse cx="${m.x}" cy="${m.y}" rx="${m.rx}" ry="${m.ry}" fill="${litFace(m.c, atmo.time)}"/>`
-    + `<ellipse cx="${(m.x - m.rx * 0.28).toFixed(1)}" cy="${(m.y + m.ry * 0.3).toFixed(1)}" rx="${(m.rx * 0.55).toFixed(1)}" ry="${(m.ry * 0.5).toFixed(1)}" fill="${shadeFace(m.c, atmo.time)}"/>`,
-  ).join('');
+  // Winter overhead (Part 6.6): branch tracery HANGING BELOW the ceiling
+  // rather than the ceiling removed. The enclosure is a pinned law — Part
+  // 10.2 opens with "Full-bleed enclosure... the canopy closes the top of
+  // the frame" — so winter changes what the ceiling is made of, never
+  // whether it is there. A bare ceiling is still a ceiling; an open one
+  // would be a different scene, and that would need a revision of THE
+  // WORLD rather than a season.
+  const winter = atmo.season === 'winter';
+
+  // A bare canopy has no volume left to shade, so winter drops the shade-
+  // face sub-mass entirely. Keeping it was a real regression caught only on
+  // a screenshot: with the whole ceiling lightened for winter, those darker
+  // inner ellipses turned into three dark discs on three pale masses and
+  // read unmistakably as EYES — the very failure W3 had already fixed once
+  // for the sky-holes. One flat twig-haze mass per canopy, and no second
+  // ellipse inside it, is both the honest winter drawing and the safe one.
+  const body = masses.map((m) => (winter
+    ? `<ellipse cx="${m.x}" cy="${m.y}" rx="${m.rx}" ry="${m.ry}" fill="${shadeFace(m.c, atmo.time)}" class="grove-winter-haze"/>`
+    : `<ellipse cx="${m.x}" cy="${m.y}" rx="${m.rx}" ry="${m.ry}" fill="${litFace(m.c, atmo.time)}"/>`
+      + `<ellipse cx="${(m.x - m.rx * 0.28).toFixed(1)}" cy="${(m.y + m.ry * 0.3).toFixed(1)}" rx="${(m.rx * 0.55).toFixed(1)}" ry="${(m.ry * 0.5).toFixed(1)}" fill="${shadeFace(m.c, atmo.time)}"/>`
+  )).join('');
+
+  // The tracery hangs DOWN from the canopy's lower edge into the open air
+  // below it. Two earlier attempts, both caught on screenshots and both
+  // worth recording so neither is tried again:
+  //   1. Drawn ACROSS the masses it read as cracks in glass — a branch is
+  //      only legible against the space it reaches into, never against the
+  //      mass it belongs to.
+  //   2. Drawn as evenly spaced MIRRORED PAIRS it read as a row of seven
+  //      identical wishbones: Guide 5.2's "symmetry in nature reads as
+  //      fake," in its purest form, and hanging out of empty sky between
+  //      the canopies rather than out of the wood.
+  // Authored instead as single asymmetric limbs at irregular positions,
+  // each descending from a point that is genuinely UNDER one of the three
+  // canopy masses, with one short side twig and its own length.
+  const HANGS = [
+    { x: 5, top: 15, len: 11, dir: 1, twig: 0.5 }, { x: 14, top: 16, len: 7, dir: -1, twig: 0.62 },
+    { x: 21, top: 14, len: 13, dir: 1, twig: 0.4 }, { x: 40, top: 13, len: 9, dir: -1, twig: 0.55 },
+    { x: 50, top: 14, len: 12, dir: -1, twig: 0.35 }, { x: 72, top: 17, len: 8, dir: 1, twig: 0.6 },
+    { x: 82, top: 18, len: 13, dir: -1, twig: 0.45 }, { x: 92, top: 16, len: 10, dir: 1, twig: 0.5 },
+  ];
+  const winterTracery = winter
+    ? `<g class="grove-ceiling-winter">${HANGS.map(({ x, top, len, dir, twig }) => {
+      const endX = x + dir * len * 0.42;
+      const endY = top + len;
+      const tX = x + dir * len * 0.42 * twig;
+      const tY = top + len * twig;
+      return `
+        <path class="grove-winter-twig" d="M${x},${top} Q${(x + dir * len * 0.1).toFixed(1)},${(top + len * 0.55).toFixed(1)} ${endX.toFixed(1)},${endY.toFixed(1)}"/>
+        <path class="grove-winter-twig" d="M${tX.toFixed(1)},${tY.toFixed(1)} q${(-dir * len * 0.3).toFixed(1)},${(len * 0.28).toFixed(1)} ${(-dir * len * 0.34).toFixed(1)},${(len * 0.46).toFixed(1)}"/>`;
+    }).join('')}</g>`
+    : '';
   const rims = atmo.time === 'night'
     ? SKY_HOLES.map((h) => `<ellipse class="grove-hole-rim" cx="${h.x}" cy="${h.y}" rx="${h.rx}" ry="${h.ry}" fill="none"/>`).join('')
     : '';
-  return `<g class="grove-ceiling">${body}${rims}</g>`;
+  // Leaf clusters along each mass's lower edge (0.16.0): the ceiling is a
+  // canopy, not three discs — a few smaller masses in the lit and shade
+  // tones, fixed forever, breaking the silhouette the way real foliage
+  // does. Winter has none (the tracery is the canopy then).
+  const leaves = winter ? '' : masses.map((m, i) => {
+    const pts = [-0.7, -0.25, 0.2, 0.65];
+    return pts.map((t, k) => {
+      const lx = m.x + t * m.rx;
+      const ly = m.y + m.ry * (0.7 + ((i + k) % 2) * 0.22);
+      const r = m.rx * (0.22 + ((i * 3 + k) % 3) * 0.05);
+      const tone = (k % 2 === 0) ? litFace(m.c, atmo.time) : shadeFace(m.c, atmo.time);
+      return `<ellipse class="grove-ceiling-leaf" cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" rx="${r.toFixed(1)}" ry="${(r * 0.72).toFixed(1)}" fill="${tone}"/>`;
+    }).join('');
+  }).join('');
+  return `<g class="grove-ceiling${atmo.season === 'winter' ? ' grove-ceiling--winter' : ''}">${body}${leaves}${winterTracery}${rims}</g>`;
 }
 
 /** The three light shafts (§5.3): soft translucent wedges, feathered by
@@ -579,11 +772,28 @@ function shaftsSVG(atmo) {
  *  reshuffles (Part 7.2). */
 function midWoodSVG(overflowCount, atmo) {
   const slots = MID_WOOD_SLOTS.slice(0, Math.min(overflowCount, MID_WOOD_SLOTS.length));
+  const winter = atmo.season === 'winter';
   return slots.map((s, i) => {
     const base = CANOPY_STACK[i % CANOPY_STACK.length];
     const lean = ((seedFrom(`mw-${i}`) % 100) / 100 - 0.5) * 4;
     const cx = (s.x + lean).toFixed(1);
+    // Winter (Part 6.6): the mid-wood is deciduous like the working set in
+    // front of it, so it thins to a twig-haze with real branch structure
+    // rather than staying a summer mass under a monochrome filter. The
+    // masses keep their authored positions and silhouettes exactly — the
+    // wood is the same wood, and it is bare.
+    if (winter) {
+      const twigs = [-0.5, -0.15, 0.22, 0.55].map((t, k) => {
+        const ex = +cx + t * s.r * 1.1;
+        const ey = s.y - s.r * (0.45 + ((i + k) % 3) * 0.18);
+        return `<path class="grove-winter-twig" d="M${cx},${(s.y + s.r * 0.55).toFixed(1)}
+          Q${((+cx + ex) / 2).toFixed(1)},${(s.y - s.r * 0.05).toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}"/>`;
+      }).join('');
+      return `<ellipse class="grove-winter-haze" cx="${cx}" cy="${s.y}" rx="${(s.r * 0.94).toFixed(1)}" ry="${(s.r * 0.76).toFixed(1)}"
+        fill="${shadeFace(base, atmo.time)}"/>${twigs}`;
+    }
     return `
+      <path class="grove-midwood-trunk" d="M${cx},${(s.y + s.r * 0.5).toFixed(1)} L${cx},${(s.y + s.r * 1.9).toFixed(1)}"/>
       <ellipse class="grove-midwood" cx="${cx}" cy="${s.y}" rx="${s.r}" ry="${(s.r * 0.82).toFixed(1)}" fill="${litFace(base, atmo.time)}"/>
       <ellipse class="grove-midwood" cx="${(s.x + lean - s.r * 0.42).toFixed(1)}" cy="${(s.y + s.r * 0.32).toFixed(1)}" rx="${(s.r * 0.5).toFixed(1)}" ry="${(s.r * 0.42).toFixed(1)}" fill="${shadeFace(base, atmo.time)}"/>`;
   }).join('');
@@ -601,9 +811,11 @@ function streamGlintSVG() {
  *  Magic Moment, not a standing feature of the night scene itself. */
 function nightFirefliesSVG() {
   const POINTS = [{ x: 16, y: 90, d: 0 }, { x: 83, y: 92, d: 1.6 }, { x: 12, y: 80, d: 3.1 }];
-  return POINTS.map((p) => `
-    <circle class="grove-cathedral-firefly-glow" style="animation-delay:${p.d}s" cx="${p.x}" cy="${p.y}" r="3.2"/>
-    <circle class="grove-cathedral-firefly" style="animation-delay:${p.d}s" cx="${p.x}" cy="${p.y}" r="0.65"/>`).join('');
+  // Drawn from the roster (Part 9.3: a 0.4% dot inside a 2% glow) in the
+  // cathedral's own 0–100 percentage space, where "share of frame width"
+  // IS the percentage. The hand-picked r=3.2 glow this replaces was a 6.4%
+  // mass — three times its pinned size, and reading as a lantern.
+  return POINTS.map((p) => faunaSVG('firefly', p.x, p.y, 100, { delay: p.d })).join('');
 }
 
 /** Dawn: mist bands between the far trunks (Part 10.2) — layered

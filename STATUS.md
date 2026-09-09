@@ -4,7 +4,7 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-07-17 — the Rootwood dataset, complete (51 root families, 217 words). App version 0.15.1._
+_Last updated: 2026-09-10 — the valley is the home (0.16.0): Phase V complete (W1–W7), Phase H (the Home), Phase 5.1 (Discoveries + Field Guide). App version 0.16.0._
 
 ## Application
 
@@ -18,7 +18,8 @@ _Last updated: 2026-07-17 — the Rootwood dataset, complete (51 root families, 
 | IndexedDB adapter | **shipped** | DB `cat-os` v2; stores: settings, attempts, sessions, learning (v2, additive) |
 | Backup & Restore (core + Settings UI) | **shipped** | Format v2 (adds learning store); v1 files import cleanly; explicit merge/replace |
 | Global error handling | **shipped** | `cat-toast` surface; details to console |
-| Shell screens (Home / Practice / Growth / Settings / 404) | **shipped** | Home shows quiet progress; Practice lists modules; Growth is the first extracted shell screen (`src/shell/`) |
+| Shell screens (Valley / Practice / Growth / Settings / 404) | **shipped (0.16.0)** | **The valley is the home:** the router starts at `#/garden`; the nav reads Valley · Practice · Growth · Settings. Practice is *the road beyond the Gate* (a live skyline over four named places). The old `#/home` dashboard stays registered and unlinked. Growth is the first extracted shell screen (`src/shell/`) |
+| **Language Garden — the World (Phase V W1–W7, Phase H, Phase 5.1)** | **shipped (0.16.0)** | Built to `LANGUAGE GARDEN — THE WORLD.md` v1.2.0 (Parts 1–15) and Roadmap v1.6.0. The Painted Valley: light model and pigment canon (re-toned in 0.16.0), the one map and the Hearth, the Rootwood cathedral, sessions on the veil inside the world, the Valley Phrase leitmotif and two synthesized voices, the authored prop inventory and faceless fauna, winter's real geometry, the Journal at the bench, the Gate journey. 0.16.0: full-bleed frames, the raised sky, mountains with snow, the wood drawn as trees that thicken per grown family with emergent crowns for Ancients, seasons as pigment, the Rootwood's light-through-leaves air, SVG floor with light pools and an old-growth far wood, fuller plant crowns; **Discoveries + the Field Guide** (`logic/discoveries.js`, sixty world-state entries, `garden-discovery` records in `STORES.LEARNING`, one closing fact in the Journal). Verified mechanically (`tools/verify.mjs`) and in real Chrome at 390×844 across all hours and seasons. `CACHE_VERSION` → 25 |
 | **Personal Reading Mentor** (`core/mentor/`) | **shipped** | Voice (banned-word-linted), Reading DNA (evidence-floored, derived), One Lesson Rule, twenty-second recall with retire-at-3; mentor moment ends every session |
 | Growth screen (`/growth`) | **shipped** | How you read · Concepts collected (Fresh→Recalled→Absorbed) · In your own words; no marks anywhere; the notebook's goals, subsumed |
 | **Reading Comprehension module** | **shipped** | Journey library → briefing → session (read → answer → explain, with evidence jumps) → result → Learning Page → review |

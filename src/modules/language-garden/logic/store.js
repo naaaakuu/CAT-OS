@@ -49,6 +49,42 @@ export function sessionsForFamily(sessions, familyId) {
 
 export { listGardenSeeds, listGardenSightings } from '../../../core/engine/garden-gate.js';
 
+/* ---------------- Discoveries (Bible §9, 0.16.0) ----------------
+   One quiet record per discovery, ever — `kind: 'garden-discovery'` in
+   STORES.LEARNING beside the sessions (the same additive, zero-migration
+   pattern; covered by Backup & Restore for free). Seeing is passive: the
+   screen that drew the thing records it, and nothing mechanical ever
+   reads these records back except the Journal's Field Guide. */
+
+export async function listGardenDiscoveries(storage) {
+  const all = await storage.getAll(STORES.LEARNING);
+  return all
+    .filter((r) => r.kind === 'garden-discovery')
+    .sort((a, b) => a.seen_at.localeCompare(b.seen_at));
+}
+
+/**
+ * Record the discoveries in front of the learner right now that have never
+ * been recorded before. Returns the ids newly recorded (usually none).
+ * @param {object} storage
+ * @param {string[]} ids  visibleDiscoveries()'s answer
+ * @param {string} where  'overlook' | 'rootwood'
+ */
+export async function recordDiscoveries(storage, ids, where) {
+  if (!ids?.length) return [];
+  try {
+    const seen = new Set((await listGardenDiscoveries(storage)).map((r) => r.discovery_id));
+    const fresh = ids.filter((id) => !seen.has(id));
+    const now = new Date().toISOString();
+    for (const id of fresh) {
+      await storage.put(STORES.LEARNING, { id: `discovery:${id}`, kind: 'garden-discovery', module: 'lg', discovery_id: id, seen_at: now, where });
+    }
+    return fresh;
+  } catch {
+    return []; // a discovery is a pleasure, never a blocker
+  }
+}
+
 /* ---------------- First-time introduction ----------------
    One settings flag, same pattern as every other module: the
    introduction shows once, then lives one tap away forever. */

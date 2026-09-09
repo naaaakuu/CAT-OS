@@ -30,7 +30,24 @@ logic/scene.js        derives valley / biome state from content + history (pure)
 logic/journal.js      derives Journal content from content + history (pure)
 logic/ambient.js      decides whether/which tiny living event appears (pure)
 logic/audio.js        the garden's own small, separate sound identity
+logic/effort.js       the Effort Ledger's expression: stream, ground tiers, path wear (pure)
+logic/atmosphere.js   time of day, world season, seeded weather — Date only, never behaviour (pure)
+logic/light.js        the painted-light recipe: lit/shade faces, shadows, WCAG math (pure)
+logic/props.js        the authored prop inventory and environmental stories, by tier (pure)
+logic/fauna.js        the faceless fauna roster and the one-visitor-per-visit roll (pure)
+logic/discoveries.js  the Discovery catalogue (Bible §9) and "what is in front of the learner now" (pure)
+screens/atmosphere-art.js  sky, moon, stars, clouds, weather layers (markup only)
+screens/prop-art.js        every prop, story, and seasonal mark, drawn (markup only)
+screens/fauna-art.js       every creature, drawn from the roster (markup only)
 ```
+
+**0.16.0 — the valley is the application's home.** `app.js` starts the
+router at `/garden`; the Overlook and the Rootwood are full-bleed; the
+Gate leads to `#/practice`, rebuilt as the road beyond the Gate. Every
+visual value is pinned in `LANGUAGE GARDEN — THE WORLD.md` (Part 15 for
+this pass). Discoveries are recorded after a scene paints
+(`recordDiscoveries` in `logic/store.js`, `kind: 'garden-discovery'` in
+`STORES.LEARNING`) and read only by the Journal's Field Guide.
 
 Core services this module composes: `core/engine/garden-session.js`
 (the spacing scheduler `computePlantState()` plus the `GardenSession`

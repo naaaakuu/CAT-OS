@@ -61,7 +61,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.15.1'; // keep in step with CHANGELOG.md
+const APP_VERSION = '0.16.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -366,46 +366,53 @@ async function renderHome(outlet) {
   outlet.querySelector('cat-week-strip').days = stats.week;
 }
 
+/* Beyond the Gate (0.16.0). The valley is home; this is the road out of it —
+   the reading and reasoning rooms of CAT OS, each a place rather than a
+   "question type" (Bible §19.2: the Garden hands the learner off to the
+   reading, it never wraps it). No badges, no "Available": a place that is
+   listed exists. The wordless skyline above the list is the valley seen
+   from the road, so the way back is never in doubt. */
+const GATE_PLACES = [
+  { href: '#/rc',  name: 'The Reading Room', line: 'Long passages, read the way the exam reads them, with a mentor who notices how you read.' },
+  { href: '#/ps',  name: 'The Summary Table', line: 'Find the author’s point and protect it from the options that almost say it.' },
+  { href: '#/pj',  name: 'The Loom', line: 'Four sentences, one order. Rebuild the paragraph the author actually wrote.' },
+  { href: '#/ooo', name: 'The Stranger’s Bench', line: 'Build the paragraph, and the sentence that never belonged shows itself.' },
+];
+
 function renderPractice(outlet) {
+  const hour = new Date().getHours();
+  const time = hour < 5 ? 'night' : hour < 8 ? 'dawn' : hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : hour < 20 ? 'dusk' : 'night';
   outlet.innerHTML = `
-    <section class="screen">
-      <p class="screen__eyebrow">Practice</p>
-      <h1>Question types</h1>
-      <a class="list-item" href="#/rc">
-        <div class="list-item__title">Reading Comprehension</div>
-        <div class="list-item__meta">
-          <span class="badge badge--success">Available</span>
-          <span>A staged journey of passages, each with its own Learning Page</span>
-        </div>
+    <section class="screen gate-road" data-time="${time}">
+      <a class="gate-road__back" href="#/garden" aria-label="Back to the valley">
+        <svg class="gate-road__skyline" viewBox="0 0 360 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="gate-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop class="gate-sky-stop gate-sky-stop--top" offset="0%"/>
+              <stop class="gate-sky-stop gate-sky-stop--bottom" offset="100%"/>
+            </linearGradient>
+          </defs>
+          <rect width="360" height="120" fill="url(#gate-sky)"/>
+          <path class="gate-ridge gate-ridge--far" d="M0,86 Q40,58 84,70 Q126,40 176,64 Q222,34 262,60 Q308,44 360,72 L360,120 L0,120 Z"/>
+          <path class="gate-ridge gate-ridge--near" d="M0,104 Q60,88 110,96 Q150,80 200,94 Q260,82 300,98 Q330,92 360,100 L360,120 L0,120 Z"/>
+          <g class="gate-wood">
+            <ellipse cx="82" cy="92" rx="16" ry="12"/><ellipse cx="104" cy="96" rx="14" ry="10"/><ellipse cx="62" cy="98" rx="13" ry="9"/>
+          </g>
+          <rect class="gate-road__ground" x="0" y="106" width="360" height="14"/>
+        </svg>
+        <span class="gate-road__home">← The valley</span>
       </a>
-      <a class="list-item" href="#/pj">
-        <div class="list-item__title">Para Jumbles</div>
-        <div class="list-item__meta">
-          <span class="badge badge--success">Available</span>
-          <span>Rebuild the author's paragraph — an eight-tier journey from Beginner to Premium</span>
+      <div class="gate-road__body">
+        <p class="screen__eyebrow">Beyond the Gate</p>
+        <h1 class="gate-road__title">The road out of the valley</h1>
+        <div class="gate-road__places">
+          ${GATE_PLACES.map((p) => `
+            <a class="gate-place" href="${p.href}">
+              <span class="gate-place__name">${p.name}</span>
+              <span class="gate-place__line">${p.line}</span>
+            </a>`).join('')}
         </div>
-      </a>
-      <a class="list-item" href="#/ps">
-        <div class="list-item__title">Para Summary</div>
-        <div class="list-item__meta">
-          <span class="badge badge--success">Available</span>
-          <span>Find the author's point and protect it — an eight-tier journey from Foundation to Premium</span>
-        </div>
-      </a>
-      <a class="list-item" href="#/ooo">
-        <div class="list-item__title">Odd One Out</div>
-        <div class="list-item__meta">
-          <span class="badge badge--success">Available</span>
-          <span>Build the paragraph, and the stranger reveals itself — an eight-tier journey from Foundation to Premium</span>
-        </div>
-      </a>
-      <a class="list-item" href="#/garden">
-        <div class="list-item__title">Language Garden</div>
-        <div class="list-item__meta">
-          <span class="badge badge--success">Available</span>
-          <span>Tend a living root grove. Decompose real words, and construct ones nobody taught you</span>
-        </div>
-      </a>
+      </div>
     </section>
   `;
 }
@@ -869,7 +876,7 @@ function renderNotFound(outlet) {
         <div class="empty__glyph" aria-hidden="true">?</div>
         <h2>Screen not found</h2>
         <p>That address doesn't exist. It may be from an older version.</p>
-        <a class="btn btn--primary" href="#/home">Go to Home</a>
+        <a class="btn btn--primary" href="#/garden">Back to the valley</a>
       </div>
     </section>
   `;
@@ -916,7 +923,12 @@ async function boot() {
   registerWD(router, { storage }); // soft-hidden from nav (see CONTINUE_INFO); routes stay live
   registerLanguageGarden(router, { storage });
 
-  router.start();
+  // 0.16.0: the valley is the application's home. A cold open lands at the
+  // Overlook (or, on the very first open ever, straight into the Rootwood's
+  // first sentence — Bible §3.1); everything else in CAT OS lies beyond the
+  // Gate. The old dashboard route stays registered so nothing that linked
+  // to it breaks, but nothing links to it any more.
+  router.start('/garden');
 
   // Chrome destroys place (Bible §14.7): inside the Garden — the Overlook, a
   // biome, a plant, a session, the Journal — the app's header and bottom nav

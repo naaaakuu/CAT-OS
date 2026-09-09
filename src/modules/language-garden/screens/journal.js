@@ -8,8 +8,11 @@
  */
 
 import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
-import { listGardenSessions, listGardenSightings } from '../logic/store.js';
+import { listGardenSessions, listGardenSightings, listGardenDiscoveries } from '../logic/store.js';
 import { whatYouCanReadNow, wildSightings, seasonsTended, weatherRecord } from '../logic/journal.js';
+import { discoveryById, creatureKindCount } from '../logic/discoveries.js';
+import { atmosphereFor } from '../logic/atmosphere.js';
+import { benchViewSVG } from './overlook.js';
 import { JOURNAL_LINES, VALLEY_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML, formatDate } from '../../../core/utils/format.js';
 
@@ -38,13 +41,33 @@ export async function renderJournal(outlet, context) {
   let families = [];
   let sessions = [];
   let sightings = [];
+  let found = [];
   try {
     const registry = await listLGItems();
     const loaded = await loadLGItems(registry.map((i) => i.id));
     families = registry.map((i) => loaded.get(i.id)).filter(Boolean);
     sessions = await listGardenSessions(context.storage);
     sightings = await listGardenSightings(context.storage);
+    found = await listGardenDiscoveries(context.storage);
   } catch { /* the page-one empty state below still renders */ }
+
+  // The Field Guide (Bible §9.4, Roadmap 5.1, 0.16.0): what the learner has
+  // seen, one line each, oldest first — field notes, never a checklist. It
+  // does not appear until something has been seen, and it closes on one
+  // fact about the valley, never on a fraction (P64).
+  const guideEntries = found.map((r) => ({ r, d: discoveryById(r.discovery_id) })).filter((x) => x.d);
+  const guideCard = guideEntries.length === 0 ? '' : `
+    <div class="card lg-journal__guide">
+      <h2>${JOURNAL_LINES.fieldGuideHeading}</h2>
+      <ul class="lg-guide">
+        ${guideEntries.map(({ r, d }) => `
+          <li class="lg-guide__entry lg-guide__entry--${d.kind}">
+            <span class="lg-guide__line">${escapeHTML(d.line)}</span>
+            <span class="lg-guide__seen">${escapeHTML(JOURNAL_LINES.fieldGuideSeen(formatDate(r.seen_at)))}</span>
+          </li>`).join('')}
+      </ul>
+      <p class="lg-guide__fact">${escapeHTML(JOURNAL_LINES.fieldGuideFact(creatureKindCount()))}</p>
+    </div>`;
 
   const readable = whatYouCanReadNow(families, sessions);
   const reached = wildSightings(families, sessions);
@@ -111,9 +134,17 @@ export async function renderJournal(outlet, context) {
       </div>
     </div>`;
 
+  // Sitting down at the bench (THE WORLD Part 10.5, Stage W7): the view
+  // from the bench — the valley's upper planes at the real hour — holds
+  // the top of the screen; the book opens below it, on true paper.
+  const atmo = atmosphereFor();
   outlet.innerHTML = `
-    <section class="screen lg-journal">
-      <div class="session-bar"><a href="#/garden">← ${escapeHTML(VALLEY_LINES.toValley)}</a></div>
+    <section class="screen lg-journal" data-time="${atmo.time}">
+      <a class="lg-journal__view" href="#/garden" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" data-time="${atmo.time}" data-season="${atmo.season}">
+        ${benchViewSVG(atmo)}
+        <span class="lg-journal__view-back">← ${escapeHTML(VALLEY_LINES.toValley)}</span>
+      </a>
+      <div class="lg-journal__book">
       <h1>Journal</h1>
       <div class="card">
         ${seasons > 0 ? `<p class="lg-journal__seasons">${escapeHTML(JOURNAL_LINES.seasonsTended(seasons))}</p>` : ''}
@@ -129,7 +160,9 @@ export async function renderJournal(outlet, context) {
       </div>
       ${sightingsCard}
       ${reachCard}
+      ${guideCard}
       ${weatherCard}
+      </div>
     </section>
   `;
 }

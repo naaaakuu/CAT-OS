@@ -12,9 +12,13 @@
  */
 
 const ICONS = {
-  home: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+  // The valley (0.16.0): a hill with one tree — the way home from anywhere
+  // beyond the Gate. Replaces the dashboard's house glyph.
+  valley: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-           <path d="M4 10.5 L12 4 L20 10.5 V19 A1 1 0 0 1 19 20 H15 V14.5 H9 V20 H5 A1 1 0 0 1 4 19 Z"/>
+           <path d="M3 19.5 C7 13.5 10.5 12 13 13.5 C15.5 11 19 11.5 21 19.5 Z"/>
+           <path d="M7.5 13.2 V9.8"/>
+           <circle cx="7.5" cy="7.6" r="2.6"/>
          </svg>`,
   practice: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -38,7 +42,7 @@ const ICONS = {
 };
 
 const ITEMS = [
-  { path: '/home',     label: 'Home',     icon: ICONS.home },
+  { path: '/garden',   label: 'Valley',   icon: ICONS.valley },
   { path: '/practice', label: 'Practice', icon: ICONS.practice },
   { path: '/growth',   label: 'Growth',   icon: ICONS.growth },
   { path: '/settings', label: 'Settings', icon: ICONS.settings },
@@ -98,7 +102,7 @@ class CatNav extends HTMLElement {
   }
 
   #sync() {
-    const current = location.hash.slice(1) || '/home';
+    const current = location.hash.slice(1) || '/garden';
     for (const a of this.querySelectorAll('a')) {
       const active = current === a.dataset.path || current.startsWith(`${a.dataset.path}/`);
       if (active) a.setAttribute('aria-current', 'page');

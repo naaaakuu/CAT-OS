@@ -2071,8 +2071,8 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    this scene, and is never named here — it keeps moving. */
 .grove-scene--becalmed .grove-shaft,
 .grove-scene--becalmed .grove-cathedral-mist,
-.grove-scene--becalmed .grove-cathedral-firefly,
-.grove-scene--becalmed .grove-cathedral-firefly-glow,
+.grove-scene--becalmed .fa,
+.grove-scene--becalmed .grove-visitor,
 .grove-scene--becalmed .grove-plant--asking::before,
 .grove-scene--becalmed .grove-plant--invite::before {
   animation-play-state: paused;
@@ -2176,23 +2176,12 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 /* Night: fireflies among the near trunks (Part 10.2, §5.4) — a small
    fixed cluster, breathing on its own unsynchronised cycle, distinct
    from the rare per-visit ambient firefly (a found Magic Moment, never a
-   standing fixture). */
-.grove-cathedral-firefly {
-  fill: var(--garden-discovery);
-  opacity: 0;
-  animation: grove-cathedral-firefly-breathe 4.6s ease-in-out infinite;
-}
-.grove-cathedral-firefly-glow {
-  fill: var(--garden-discovery);
-  opacity: 0;
-  animation: grove-cathedral-firefly-glow-breathe 4.6s ease-in-out infinite;
-}
-@keyframes grove-cathedral-firefly-breathe { 0%, 100% { opacity: 0; } 30%, 70% { opacity: 0.85; } }
-@keyframes grove-cathedral-firefly-glow-breathe { 0%, 100% { opacity: 0; } 30%, 70% { opacity: 0.22; } }
-@media (prefers-reduced-motion: reduce) {
-  .grove-cathedral-firefly { animation: none; opacity: 0.55; }
-  .grove-cathedral-firefly-glow { animation: none; opacity: 0.14; }
-}
+   standing fixture).
+   Stage W6 moved these onto the shared roster: they are drawn by
+   fauna-art.js at Part 9.3's pinned sizes and styled by `.fa-verb--
+   breathe` with every other creature, so the two classes that used to
+   live here are gone rather than left behind as dead rules. The old
+   hand-picked glow was a 6.4% mass where the table pins 2%. */
 
 /* Dawn: mist bands between the far trunks (Part 10.2) — layered
    translucent shapes, never a blur filter (§11.3, §11.7). */
@@ -2257,35 +2246,35 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   pointer-events: none;
   overflow: hidden;
 }
+/* Stage W6: a visitor is now DRAWN, not typed — these boxes hold an
+   inline SVG of soft masses from Part 9.3's roster, where they used to
+   hold a font glyph (❋, ◜, •). The positioning and the one motion verb
+   still live on these classes; the creature's own body comes from
+   fauna-art.js, so line-height must not add a text baseline under it. */
 .grove-visitor {
   position: absolute;
-  font-size: 1.1rem;
-  color: var(--color-ink-2);
+  line-height: 0;
   opacity: 0;
 }
+.grove-visitor svg { display: block; overflow: visible; }
 .grove-visitor--bird {
   top: 14%; left: 0;
   animation: grove-bird-fly 6s var(--ease-in-out) both;
 }
 .grove-visitor--butterfly {
   top: 40%; left: 0;
-  color: var(--garden-review);
   animation: grove-butterfly-flit 7.5s var(--ease-in-out) both;
 }
 .grove-visitor--firefly {
   top: 55%; left: 48%;
-  color: var(--garden-discovery);
-  text-shadow: 0 0 6px var(--garden-discovery);
   animation: grove-firefly-glow 5s ease-in-out both;
 }
 .grove-visitor--petal {
   top: -5%; left: 30%;
-  color: var(--garden-review);
   animation: grove-petal-fall 8s linear both;
 }
 .grove-visitor--leaf-stir {
   top: 30%; left: 60%;
-  color: var(--garden-inleaf);
   animation: grove-leaf-stir 4s ease-in-out both;
 }
 @keyframes grove-bird-fly {
@@ -2519,13 +2508,25 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 
 /* ---------- The Overlook: the valley from above (§16.1) ---------- */
+/* 0.16.0 — the valley is the home, and the phone is the window: the
+   Overlook is full-bleed (no card, no margins, no rounded frame), with
+   its two marks on a slim strip along the bottom edge, outside the world
+   (THE WORLD Part 10.1). The strip's tone is the arrival veil's warm
+   dark, so the frame reads as one composition at every hour. */
+.valley-screen {
+  position: fixed; inset: 0;
+  z-index: 1;
+  display: flex; flex-direction: column;
+  background: #1B221D;
+  animation: none;
+}
 .valley {
   position: relative;
-  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 5rem);
-  min-height: 20rem;
-  border-radius: var(--radius-xl);
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: hidden;
   transform-origin: 50% 44%;
+  background: #1B221D;
 }
 .valley__svg { width: 100%; height: 100%; display: block; pointer-events: none; }
 .vl-hit { pointer-events: auto; fill: transparent; cursor: pointer; }
@@ -2590,12 +2591,10 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    valley SVG, so WCAG contrast is never touched (§12.7); the one asking
    plant stays readable in every season because it catches LIGHT (the
    glow shimmer), which no filter here reproduces. */
-.valley { --lg-f-season: brightness(1); }
-.valley__svg { filter: var(--lg-f-season); }
-.valley[data-season="spring"] { --lg-f-season: saturate(1.12) brightness(1.05); }
-.valley[data-season="summer"] { --lg-f-season: saturate(1.08) contrast(1.01); }
-.valley[data-season="autumn"] { --lg-f-season: sepia(0.26) saturate(1.12); }
-.valley[data-season="winter"] { --lg-f-season: saturate(0.38) brightness(1.07) contrast(0.96); }
+/* 0.16.0: the whole-scene season filter is retired — a sepia over a
+   painting washes it out and costs a full-screen filter pass on every
+   frame. Seasons are now real pigment (the "0.16.0 repaint" section at
+   the foot of this file re-tones the land per [data-season]). */
 
 /* The night sky (§12.6): a fixed constellation, the same stars every
    night, and a quiet moon with its own soft halo (§5.1, §5.4 — a warm
@@ -2836,8 +2835,15 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    THE WORLD's pins (§5.4, §6.4); its radius (7% of frame width) is set
    where it is drawn, in overlook.js. */
 .vl-lantern { fill: var(--garden-lantern-flame); }
-.vl-lantern-glow { fill: var(--garden-lantern-flame); opacity: 0.16; animation: vl-lantern-breathe 6s ease-in-out infinite; }
-@keyframes vl-lantern-breathe { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.12; } }
+/* Stage W6 corrects a real miss against THE WORLD Part 12's motion table:
+   "Lantern and window flicker | 4–7% luminance amplitude, 3–6s irregular
+   cycles — warmth breathing, never guttering." The shipped cycle swung
+   0.16 → 0.12, a 25% amplitude on a 6s loop: that is guttering, the one
+   thing the row names as wrong. Now 5%, on cycles that are genuinely
+   different lengths from each other so the lantern and the window never
+   breathe in step. */
+.vl-lantern-glow { fill: var(--garden-lantern-flame); opacity: 0.16; animation: vl-lantern-breathe 4.4s ease-in-out infinite; }
+@keyframes vl-lantern-breathe { 0%, 100% { opacity: 0.16; } 50% { opacity: 0.152; } }
 @media (prefers-reduced-motion: reduce) { .vl-lantern-glow { animation: none; } }
 
 /* Warm stone recedes at night like the rest of the land (§5.4: "a deep
@@ -2875,7 +2881,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    never withheld). */
 .vl-window { fill: var(--garden-cottage-wall-shade); }
 .vl-window--lit { fill: var(--garden-window-light); }
-.vl-window-glow { fill: var(--garden-window-light); opacity: 0.16; animation: vl-lantern-breathe 7s ease-in-out infinite; }
+.vl-window-glow { fill: var(--garden-window-light); opacity: 0.16; animation: vl-lantern-breathe 5.3s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .vl-window-glow { animation: none; } }
 
 /* The chimney breathes at cold dawns because mornings are cold, not
@@ -2909,6 +2915,206 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .vl-cat-tail  { fill: none; stroke: var(--garden-cat-body); stroke-width: 1.6; stroke-linecap: round; }
 @keyframes vl-cat-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
 @media (prefers-reduced-motion: reduce) { .vl-cat { animation: none; } }
+
+/* ═══════════════ Phase V, Stage W6 — the world, lived in ═══════════════
+   THE WORLD Part 7 (authored density), Part 9 (the fauna language), Part
+   6.6 (winter's real geometry), Part 12 (motion). Two laws govern every
+   rule below and are worth restating where a future hand will read them:
+
+   - **Nothing here is tappable** (Part 13's W6 acceptance, Bible §14.8).
+     Every prop, story, and creature is pointer-events: none. A world you
+     can poke is a toy; a world that ignores you is a place.
+   - **Nothing here is loud.** Props are Guide 5.4's 10% tier — small,
+     quiet, two-value. They are testimony that someone has been here a
+     long time, not decoration competing for the eye. The three signal
+     colours still out-read everything (§6.6). */
+
+.vl-prop, .vl-story, .vl-seasonal, .fa, .vl-visitor { pointer-events: none; }
+
+/* ---- The tier props (Appendix C.5) ---- */
+.vl-stone-shade  { fill: var(--garden-stone-shade); }
+.vl-stone-lit    { fill: var(--garden-stone-lit); }
+.vl-stone-polish { fill: var(--garden-stone-lit); opacity: 0.5; }
+.vl-log-body   { fill: var(--garden-trunk); opacity: 0.85; }
+.vl-log-end    { fill: var(--garden-cottage-timber); opacity: 0.7; }
+.vl-log-moss   { fill: var(--garden-moss); opacity: 0.62; }
+.vl-log-hollow { fill: #2A2018; opacity: 0.55; }
+.vl-cattail-stem { fill: none; stroke: var(--garden-pond-reed); stroke-width: 1.3; stroke-linecap: round; }
+.vl-cattail-head { fill: var(--garden-cottage-timber); opacity: 0.8; }
+.vl-lantern-post { fill: none; stroke: var(--garden-cottage-timber); stroke-width: 1.8; stroke-linecap: round; }
+.vl-lantern-cold { fill: var(--garden-stone-lit); opacity: 0.7; }
+.vl-hazel-upright { fill: none; stroke: var(--garden-cottage-timber); stroke-width: 1.2; stroke-linecap: round; opacity: 0.75; }
+.vl-hazel-weave   { fill: none; stroke: var(--garden-cottage-timber); stroke-width: 1.4; stroke-linecap: round; opacity: 0.6; }
+.vl-mushroom-stem { fill: none; stroke: #E4DACB; stroke-width: 1.1; stroke-linecap: round; }
+.vl-mushroom-cap  { fill: #C08A6E; opacity: 0.9; }
+.vl-snag { fill: none; stroke: var(--garden-bare-branch); stroke-width: 1.8; stroke-linecap: round; }
+.vl-snag--limb { stroke-width: 1.2; opacity: 0.8; }
+.vl-cane { fill: none; stroke: #6E5A45; stroke-width: 1.5; stroke-linecap: round; opacity: 0.85; }
+.vl-lily-pad   { fill: #6E9A63; opacity: 0.85; }
+.vl-lily-notch { fill: none; stroke: var(--garden-water); stroke-width: 0.9; opacity: 0.7; }
+.vl-spring-seam  { fill: none; stroke: var(--garden-water-day-glint); stroke-width: 2.2; stroke-linecap: round; opacity: 0.9; }
+.vl-spring-mouth { fill: var(--garden-water-day-glint); opacity: 0.7; }
+.vl-web-line { fill: none; stroke: #F2F4F0; stroke-width: 0.5; opacity: 0.55; }
+
+/* ---- The seasonal set (Part 7.3): recurring, never scarce ---- */
+.vl-blossom { fill: var(--garden-bloom); opacity: 0.9; }
+/* Heat haze is LIGHT, not an object: no edge, no mass, just a band of
+   the sky's own warmth sitting on the far land, breathing very slowly. */
+.vl-haze-seam {
+  fill: #F6E4C0; opacity: 0.13;
+  animation: vl-haze 9s ease-in-out infinite;
+}
+@keyframes vl-haze { 0%, 100% { opacity: 0.13; } 50% { opacity: 0.07; } }
+.vl-goose { fill: none; stroke: #5A5F68; stroke-width: 0.9; stroke-linecap: round; opacity: 0.65; }
+/* One skein, high, crossing very slowly — the only thing in the valley
+   that is unmistakably leaving. Ninety seconds to cross the frame. */
+.vl-geese-skein { animation: vl-geese-cross 90s linear infinite; }
+@keyframes vl-geese-cross { from { transform: translate(-60px, 6px); } to { transform: translate(300px, -14px); } }
+.vl-snow-cap { fill: #F4F7FA; opacity: 0.88; }
+.vl-track    { fill: #C3CED8; opacity: 0.6; }
+@media (prefers-reduced-motion: reduce) {
+  .vl-haze-seam, .vl-geese-skein { animation: none; }
+}
+
+/* ---- The environmental stories (Part 7.4) ----
+   Twelve authored micro-stories, "placed once, never explained, never
+   pointed at" (P143). Each is deliberately at the very edge of noticing:
+   a learner who never sees one has lost nothing, and a learner who
+   suddenly sees the soot ring on the kettle-stone after four months has
+   found the whole product's thesis without being told a word of it. If a
+   future hand raises any of these opacities to "make them read," the
+   story is over. */
+.vl-mend-stone           { fill: var(--garden-stone-lit); opacity: 0.55; }
+.vl-story--worn-post     { fill: var(--garden-stone-lit); opacity: 0.42; }
+.vl-story--soot          { stroke: #2E2A26; stroke-width: 1; opacity: 0.34; }
+.vl-story--perch-wear    { fill: var(--garden-stone-lit); opacity: 0.4; }
+.vl-story--keystone      { fill: var(--garden-stone-lit); opacity: 0.5; }
+.vl-story--bend          { fill: var(--garden-path-worn); opacity: 0.3; }
+.vl-story--wobble        { fill: #FFFFFF; opacity: 0.28; }
+
+/* ---- Winter's real geometry at Overlook zoom (Part 6.6) ----
+   "A filter cannot draw branches." From a hill a bare wood is a haze of
+   twigs with structure showing through it, not an absence — so the mass
+   keeps its authored silhouette at a much lower weight and gains real
+   branch-work rising into it. Nothing moves; nothing is removed. */
+.vl-winter-haze { opacity: 0.34; }
+/* Weight found by looking, not by reasoning. The first pass used
+   --garden-bare-branch (a pale #B8AC98, designed for a bud-branch read
+   close-up on light paper) at 0.9 width and half opacity — and winter's
+   own near-monochrome filter then washed it out completely, so the
+   screenshot showed pale discs and no branches at all: a filter, which is
+   the exact thing Part 6.6 says is not good enough. Real branch-work needs
+   the trunk's own darker tone and enough weight to survive the season's
+   desaturation. */
+.vl-winter-twig {
+  fill: none; stroke: var(--garden-trunk);
+  stroke-width: 1.5; stroke-linecap: round; opacity: 0.72;
+}
+
+/* ---- The fauna (Part 9) ----
+   One to three soft masses, no outlines, no faces, at any distance
+   (Part 9.1, P147). Each creature owns exactly ONE verb (Part 9.2),
+   slow enough to ignore (Guide 15.3). Nothing ever moves toward the
+   learner, looks at the learner, or performs for the learner. */
+.fa { transform-box: fill-box; }
+.fa-firefly-glow { opacity: 0.34; }
+.fa-firefly-dot  { opacity: 0.9; }
+
+/* Butterflies DRIFT, never dart (Part 9.2) — the distinction is the
+   whole character: a darting butterfly is a notification. */
+.fa-verb--drift { animation: fa-drift 24s ease-in-out infinite; }
+@keyframes fa-drift {
+  0%   { transform: translate(0, 0) rotate(-3deg); }
+  25%  { transform: translate(14px, -9px) rotate(3deg); }
+  50%  { transform: translate(26px, 2px) rotate(-2deg); }
+  75%  { transform: translate(12px, 10px) rotate(3deg); }
+  100% { transform: translate(0, 0) rotate(-3deg); }
+}
+/* A bird CROSSES: one arc, gone. It does not return, and there is never
+   a second bird behind it. */
+.fa-verb--cross { animation: fa-cross 13s ease-in-out infinite; }
+@keyframes fa-cross {
+  0%, 4%   { opacity: 0; transform: translate(-30px, 14px) scale(0.9); }
+  12%      { opacity: 0.85; }
+  76%      { opacity: 0.85; }
+  100%     { opacity: 0; transform: translate(300px, -46px) scale(1); }
+}
+/* Fireflies BREATHE on 0.8–2s luminance cycles, unsynchronised (Part
+   9.2). The scene staggers their delays; the cycle length differs from
+   the glow's so the two never lock. */
+.fa-verb--breathe .fa-firefly-glow { animation: fa-glow 2s ease-in-out infinite; }
+.fa-verb--breathe .fa-firefly-dot  { animation: fa-glow 1.3s ease-in-out infinite; }
+@keyframes fa-glow { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.85; } }
+/* The deer STEPS, then freezes — and the freeze is the event, so it holds
+   still for nine of every eleven seconds. */
+.fa-verb--step-freeze { animation: fa-step 11s ease-in-out infinite; }
+@keyframes fa-step {
+  0%, 62%   { transform: translate(0, 0); }
+  70%, 100% { transform: translate(-9px, 0); }
+}
+/* The fox CROSSES UNHURRIED. Forty seconds to pass, and never once faster. */
+.fa-verb--cross-unhurried { animation: fa-fox 40s linear infinite; }
+@keyframes fa-fox {
+  0%   { opacity: 0; transform: translate(-40px, 0); }
+  8%, 88% { opacity: 0.92; }
+  100% { opacity: 0; transform: translate(150px, -10px); }
+}
+/* The heron STANDS. Its event IS the stillness (Part 9.2), so it carries
+   no animation at all — the one creature whose whole character is that
+   nothing happens. */
+.fa-verb--stand { animation: none; }
+/* The owl IS HEARD, THEN IS THERE: it fades in once and simply remains. */
+.fa-verb--is-there { animation: fa-arrive 6s ease-out both; }
+@keyframes fa-arrive { 0% { opacity: 0; } 60%, 100% { opacity: 1; } }
+/* Snails and frogs ARE SIMPLY PRESENT after rain. No motion, ever. */
+.fa-verb--present { animation: none; }
+/* The cat SLEEPS: one ~4s breathing cycle, the only motion on it. */
+.fa-verb--sleep { animation: vl-cat-breathe 4s ease-in-out infinite; }
+/* Built and pinned, waiting on a living Orchard and Mirror Pond. */
+.fa-verb--potter { animation: fa-drift 18s ease-in-out infinite; }
+.fa-verb--orbit  { animation: fa-drift 15s ease-in-out infinite; }
+.fa-verb--hover-slip { animation: fa-drift 12s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Reduced motion is not a downgrade (§11.5): every creature is still
+     here, still drawn, still exactly where it was — it simply rests. */
+  .fa-verb--drift, .fa-verb--cross, .fa-verb--step-freeze,
+  .fa-verb--cross-unhurried, .fa-verb--sleep, .fa-verb--potter,
+  .fa-verb--orbit, .fa-verb--hover-slip,
+  .fa-verb--breathe .fa-firefly-glow, .fa-verb--breathe .fa-firefly-dot {
+    animation: none;
+  }
+  .fa-verb--cross, .fa-verb--cross-unhurried, .fa-verb--is-there { opacity: 1; animation: none; }
+}
+
+/* ---- The cathedral's own W6 additions ---- */
+.grove-prop, .grove-story { pointer-events: none; }
+/* Fern banks at the floor's edges (Part 10.2's own list, Appendix C.5,
+   Flourishing): the Effort Ledger's undergrowth reaching the walls of
+   the wood — slow, cumulative, permanent, never reversing (§8.3). */
+.grove-fern { fill: var(--garden-fern); opacity: 0.68; }
+/* The old stump and, beside it, the carved stone — Part 7.4's one story
+   Appendix C gives a coordinate of its own (C.6). Somebody carved it,
+   beside the highest path, before any of this. It is never mentioned in
+   copy, never recorded, never pointed at. */
+.grove-stump-side  { fill: var(--garden-trunk); opacity: 0.85; }
+.grove-stump-top   { fill: var(--garden-cottage-timber); opacity: 0.9; }
+.grove-carved-stone { fill: var(--garden-stone-lit); opacity: 0.7; }
+.grove-carved-mark  { stroke: #4A4038; stroke-width: 0.3; opacity: 0.45; stroke-linecap: round; }
+/* Winter in the wood (Part 6.6). The ceiling THINS but never opens:
+   Part 10.2's "full-bleed enclosure... the canopy closes the top of the
+   frame" is a pinned law, so winter changes what the ceiling is made of,
+   never whether it is there. */
+.grove-winter-haze { opacity: 0.42; }
+.grove-winter-twig {
+  fill: none; stroke: var(--garden-trunk);
+  stroke-width: 0.5; stroke-linecap: round; opacity: 0.6;
+}
+/* No blanket opacity on `.grove-ceiling--winter ellipse` here: that rule
+   was what turned each mass's inner shade-face into a dark disc on a pale
+   ground — three of them, evenly spaced, reading as a face. Winter's
+   lightening now happens per-shape in ceilingSVG(), which drops the inner
+   ellipse entirely rather than dimming both and hoping. */
 
 /* Leaving through the Gate (§19.2): a small journey, not a tab switch —
    the view drifts down and out toward the valley's edge. */
@@ -2973,24 +3179,28 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 /* The valley's only chrome: the marks along the bottom — the Gate out,
    the Journal, Settings — low-contrast, in the thumb zone (§16.1). */
 .valley__marks {
+  flex: 0 0 auto;
   display: flex;
   justify-content: center;
-  gap: var(--space-5);
-  padding: var(--space-3) 0 0;
+  gap: var(--space-6);
+  padding: var(--space-2) 0 calc(env(safe-area-inset-bottom) + var(--space-2));
+  background: #1B221D;
 }
 .valley__mark {
-  color: var(--color-ink-2); /* ink-3 fails WCAG AA on the paper (P5 audit) */
+  color: #C9CDBE; /* quiet bone on the frame's warm dark — measures AA */
   font-family: var(--font-ui);
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
   text-decoration: none;
-  padding: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  min-height: var(--tap-target);
+  display: inline-flex; align-items: center;
   background: none;
   border: none;
   cursor: pointer;
 }
-@media (hover: hover) { .valley__mark:hover { color: var(--color-ink); } }
+@media (hover: hover) { .valley__mark:hover { color: #FFFFFF; } }
 
 /* ---------- Plant detail (Phase V, Stage W4) ----------
    THE WORLD Part 10.4: "opening a plant is an approach, not a page." The
@@ -3482,3 +3692,473 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 @media (prefers-reduced-motion: reduce) {
   .lgx-grow-plant.is-growing { animation: lgx-grow-still var(--duration-slow) var(--ease-out) both; }
 }
+
+/* ═══════════════ 0.16.0 — the repaint: the valley as the home ═══════════════
+   THE WORLD 1.2.0: the raised sky, the pigment canon re-toned toward the
+   owner's "spectacular, colourful, warm and alive", real trees in the
+   wood, mountains with snow, seasons as pigment rather than a filter, and
+   the arrival choreography of Part 10.7. Every rule below deliberately
+   comes AFTER the W1–W6 rules it refines, so the older canon stays legible
+   in the file as history and this section reads as one pass. */
+
+/* Arrival (Part 10.7): planes assemble back to front, ~140ms apart, each
+   fading up as if the light reached it; the warm-dark veil lifts under
+   them. Reduced motion: one cross-fade to the finished scene. */
+.vl-plane { animation: vl-plane-up 620ms var(--ease-out) both; }
+.vl-plane--sky    { animation-delay: 160ms; }
+.vl-plane--far    { animation-delay: 300ms; }
+.vl-plane--floor  { animation-delay: 440ms; }
+.vl-plane--hearth { animation-delay: 580ms; }
+@keyframes vl-plane-up { from { opacity: 0; } to { opacity: 1; } }
+.valley__veil { animation: vl-veil-lift 700ms var(--ease-out) 80ms both; }
+@media (prefers-reduced-motion: reduce) { .vl-plane { animation: none; } }
+
+/* Leaving through the Gate (Part 10.6): a 700ms drift toward the wall. */
+.valley.is-leaving {
+  transition: transform 700ms var(--ease-in), opacity 700ms var(--ease-in);
+  transform: scale(1.12) translateY(-6%);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) { .valley.is-leaving { transition: none; } }
+
+/* ---- The sky ---- */
+.vl-sun { fill: #FFF3CA; opacity: 1; }
+.valley[data-time="dusk"] .vl-sun { fill: #FFE1A8; }
+.vl-sun-pool { fill: #FFE3A8; opacity: 0.32; }
+.valley[data-time="dusk"] .vl-sun-pool { fill: #FFC27C; opacity: 0.38; }
+.vl-sun-glow-stop { stop-color: #FFD58E; stop-opacity: 0.6; }
+.vl-sun-glow-stop--out { stop-opacity: 0; }
+.valley[data-time="dusk"] .vl-sun-glow-stop { stop-color: #FFB46C; stop-opacity: 0.62; }
+.vl-cloud-body  { fill: #FFFFFF; opacity: 0.94; }
+.vl-cloud-under { fill: #B9CCE4; opacity: 0.7; }
+.valley[data-time="dawn"] .vl-cloud-body   { fill: #FFE6D2; }
+.valley[data-time="dawn"] .vl-cloud-under  { fill: #D69AA6; opacity: 0.6; }
+.valley[data-time="dusk"] .vl-cloud-body   { fill: #F9CCA4; }
+.valley[data-time="dusk"] .vl-cloud-under  { fill: #8E5F8C; opacity: 0.6; }
+.valley[data-time="night"] .vl-cloud-body  { fill: #23375E; opacity: 0.85; }
+.valley[data-time="night"] .vl-cloud-under { fill: #121F3A; opacity: 0.7; }
+.vl-star { fill: #F4F7FF; }
+.vl-moon { fill: #F4F1E6; }
+.vl-moon-halo { fill: #F4F1E6; opacity: 0.16; }
+.vl-moon-halo--wide { opacity: 0.07; }
+.vl-moon-shadow { fill: var(--garden-sky-night-mid); }
+
+/* ---- The mountains (two ranges, snow on the highest peaks) ---- */
+.vl-ridge--farther { fill: var(--garden-ridge-farther); opacity: 1; }
+.vl-ridge--far     { fill: var(--garden-ridge-far); opacity: 1; }
+.vl-snow { fill: #F7F9FD; opacity: 0.92; }
+.valley[data-season="summer"] .vl-snow { opacity: 0.5; }
+.valley[data-time="dawn"] .vl-ridge--farther { fill: #B9A8CC; }
+.valley[data-time="dawn"] .vl-ridge--far     { fill: #8E7FAE; }
+.valley[data-time="dawn"] .vl-snow { fill: #FFE4C4; }
+.valley[data-time="dusk"] .vl-ridge--farther { fill: #6F5F92; }
+.valley[data-time="dusk"] .vl-ridge--far     { fill: #4F4478; }
+.valley[data-time="dusk"] .vl-snow { fill: #F6C9A0; }
+.valley[data-time="night"] .vl-ridge--farther { fill: #1F2F5B; }
+.valley[data-time="night"] .vl-ridge--far     { fill: #16233F; }
+.valley[data-time="night"] .vl-snow { fill: #9DB0D6; opacity: 0.55; }
+.valley[data-time="night"] .vl-wilds { fill: #1B2A48; }
+.vl-hedgerows path { fill: none; stroke: #4F9448; stroke-width: 2.2; stroke-linecap: round; opacity: 0.5; }
+.valley[data-time="night"] .vl-hedgerows path { stroke: #142B22; }
+
+/* ---- The land, by season (pigment, not a filter) ---- */
+.valley[data-season="spring"] .vl-floor-far     { fill: #B4DB96; }
+.valley[data-season="spring"] .vl-floor-mid     { fill: #90CB79; }
+.valley[data-season="spring"] .vl-floor-near    { fill: #75BC5F; }
+.valley[data-season="spring"] .vl-hearth-ground { fill: #5EA950; }
+.valley[data-season="spring"] .vl-meadow        { fill: #C6E39B; }
+.valley[data-season="spring"] .vl-orchard       { fill: #9DD47B; }
+.valley[data-season="autumn"] .vl-floor-far     { fill: #C9BF7E; }
+.valley[data-season="autumn"] .vl-floor-mid     { fill: #BBA962; }
+.valley[data-season="autumn"] .vl-floor-near    { fill: #A69450; }
+.valley[data-season="autumn"] .vl-hearth-ground { fill: #8D7D40; }
+.valley[data-season="autumn"] .vl-meadow        { fill: #DAC882; }
+.valley[data-season="autumn"] .vl-orchard       { fill: #C8A752; }
+.valley[data-season="autumn"] .vl-orchard-canopy { fill: #D89E3E; }
+.valley[data-season="autumn"] .vl-orchard-canopy--lit { fill: #EFC15C; }
+.valley[data-season="autumn"] .vl-hedgerows path { stroke: #8C7A33; }
+.valley[data-season="autumn"] .vl-terrace       { fill: #C99C60; }
+.valley[data-season="winter"] .vl-floor-far     { fill: #DDE4DB; }
+.valley[data-season="winter"] .vl-floor-mid     { fill: #CCD6CC; }
+.valley[data-season="winter"] .vl-floor-near    { fill: #BAC8BA; }
+.valley[data-season="winter"] .vl-hearth-ground { fill: #A6B7A6; }
+.valley[data-season="winter"] .vl-meadow        { fill: #D9E0D4; }
+.valley[data-season="winter"] .vl-orchard       { fill: #C7D2C1; }
+.valley[data-season="winter"] .vl-orchard-canopy { fill: #8AA38F; }
+.valley[data-season="winter"] .vl-orchard-canopy--lit { fill: #A9BCAE; }
+.valley[data-season="winter"] .vl-thicket       { fill: #5A6D59; }
+.valley[data-season="winter"] .vl-hedgerows path { stroke: #7E8E80; }
+.valley[data-season="winter"] .vl-snow { opacity: 1; }
+.valley[data-season="winter"] .vl-terrace       { fill: #BBB0A0; }
+
+/* ---- The land, by hour (the hour outranks the season) ---- */
+.valley[data-time="dawn"] .vl-floor-far     { fill: #B9D2A2; }
+.valley[data-time="dawn"] .vl-floor-mid     { fill: #95C089; }
+.valley[data-time="dawn"] .vl-floor-near    { fill: #79AF6F; }
+.valley[data-time="dawn"] .vl-hearth-ground { fill: #619D5B; }
+.valley[data-time="dawn"] .vl-meadow        { fill: #D3DCA0; }
+.valley[data-time="dawn"] .vl-terrace       { fill: #E3C19C; }
+.valley[data-time="dawn"] .vl-orchard       { fill: #A6CA8C; }
+.valley[data-time="dawn"] .vl-thicket       { fill: #4D6F4B; }
+.valley[data-time="dusk"] .vl-floor-far     { fill: #B9B88A; }
+.valley[data-time="dusk"] .vl-floor-mid     { fill: #95A66F; }
+.valley[data-time="dusk"] .vl-floor-near    { fill: #7A955D; }
+.valley[data-time="dusk"] .vl-hearth-ground { fill: #5F7C4B; }
+.valley[data-time="dusk"] .vl-meadow        { fill: #D0C28C; }
+.valley[data-time="dusk"] .vl-terrace       { fill: #D7A47A; }
+.valley[data-time="dusk"] .vl-orchard       { fill: #9EAA73; }
+.valley[data-time="dusk"] .vl-thicket       { fill: #40553F; }
+.valley[data-time="night"] .vl-floor-far     { fill: #243D37; }
+.valley[data-time="night"] .vl-floor-mid     { fill: #1F3630; }
+.valley[data-time="night"] .vl-floor-near    { fill: #1A2F29; }
+.valley[data-time="night"] .vl-hearth-ground { fill: #142720; }
+.valley[data-time="night"] .vl-meadow        { fill: #2B4338; }
+.valley[data-time="night"] .vl-terrace       { fill: #3B3A3D; }
+.valley[data-time="night"] .vl-orchard       { fill: #21382D; }
+.valley[data-time="night"] .vl-thicket       { fill: #11211B; }
+.valley[data-time="night"] .vl-orchard-canopy { fill: #183426; }
+.valley[data-time="night"] .vl-orchard-canopy--lit { fill: #244736; }
+.valley[data-time="night"] .vl-meadow-drift { opacity: 0.4; }
+.valley[data-time="night"] .vl-meadow-flower { opacity: 0.3; }
+.valley[data-time="night"] .vl-terrace-field { opacity: 0.25; }
+.valley[data-time="night"] .vl-wall-grass { stroke: #213A26; }
+.valley[data-time="night"] .vl-wood-trunk { stroke: #211E1A; }
+.valley[data-time="night"] .vl-path-edge { opacity: 0.18; }
+.valley[data-time="night"] .vl-path--worn { opacity: 0.5; }
+
+/* ---- The terraces, the meadow, the orchard, the pond ---- */
+.vl-terrace-field { fill: #E1C797; opacity: 0.85; }
+.vl-terrace-field--2 { fill: #D9B884; }
+.vl-meadow-drift { opacity: 0.85; }
+.vl-meadow-flower { fill: #C79EDD; opacity: 0.9; }
+.vl-meadow-flower--cream { fill: #FBF2BC; }
+.vl-orchard-trunk { fill: none; stroke: var(--garden-cottage-timber); stroke-width: 1.6; stroke-linecap: round; }
+.vl-orchard-canopy--lit { fill: #7DC66F; opacity: 0.9; }
+.vl-orchard-blossom { fill: #FAD9DF; opacity: 0.85; }
+.vl-pond-bank { fill: #3D7A5E; opacity: 0.5; }
+.vl-pond { fill: url(#vl-pond-grad); }
+.vl-pond-stop--deep    { stop-color: #2F7DBA; }
+.vl-pond-stop--shallow { stop-color: #66B1DE; }
+.valley[data-time="dawn"] .vl-pond-stop--deep    { stop-color: #5A6CA8; }
+.valley[data-time="dawn"] .vl-pond-stop--shallow { stop-color: #D8A9A0; }
+.valley[data-time="dusk"] .vl-pond-stop--deep    { stop-color: #47498C; }
+.valley[data-time="dusk"] .vl-pond-stop--shallow { stop-color: #C58A78; }
+.valley[data-time="night"] .vl-pond-stop--deep    { stop-color: #14264A; }
+.valley[data-time="night"] .vl-pond-stop--shallow { stop-color: #2B4570; }
+.valley[data-time="dusk"] .vl-pond, .valley[data-time="night"] .vl-pond { fill: url(#vl-pond-grad); }
+.vl-pond-sky { fill: #FFFFFF; opacity: 0.26; }
+.valley[data-time="night"] .vl-pond-sky { fill: #DDE7F5; opacity: 0.22; }
+.vl-pond-glint { opacity: 0.55; }
+.vl-pond-glint--2 { opacity: 0.28; }
+
+/* ---- The wood: trees, not blobs ---- */
+.vl-wood-trunk { fill: none; stroke: #5B432F; stroke-linecap: round; }
+.vl-wood-trunk--emergent { stroke-width: 2.6; }
+.vl-wood-cap { opacity: 0.5; }
+.vl-wood-canopy--landmark { stroke: none; filter: none; }
+.vl-wood-ground-shadow { fill: #1E4A33; opacity: 0.22; }
+
+/* ---- Water, the path, the bridge ---- */
+.vl-stream-under { fill: #2A6E93; filter: none; opacity: 0.35; }
+.valley[data-time="night"] .vl-stream-under { fill: #0F2038; }
+.vl-spring-foam { fill: #FFFFFF; opacity: 0.65; }
+.vl-glint { opacity: 0.85; stroke-width: 1.3; }
+.vl-path-edge { fill: none; stroke: #A8834D; stroke-width: 6; opacity: 0.3; stroke-linecap: round; }
+.vl-path--worn     { opacity: 0.95; }
+.vl-path--settling { opacity: 0.65; }
+.vl-path--mossy    { opacity: 0.6; }
+.vl-bridge-arch { fill: none; stroke: #5E4E3C; stroke-width: 1.2; opacity: 0.6; }
+
+/* ---- The Hearth ---- */
+.vl-wall-joint { fill: none; stroke: #6B5B49; stroke-width: 0.9; stroke-linecap: round; opacity: 0.5; }
+.vl-wall-grass { fill: none; stroke: #3F8F3B; stroke-width: 1; stroke-linecap: round; opacity: 0.8; }
+.vl-cottage-ridge { fill: none; stroke: #2E4753; stroke-width: 1.6; stroke-linecap: round; }
+.vl-cottage-eave  { fill: none; stroke: #2E4753; stroke-width: 1.2; opacity: 0.8; }
+.vl-cottage-chimney-cap { fill: none; stroke: #8E7A62; stroke-width: 2; stroke-linecap: round; }
+.vl-window-bar { fill: none; stroke: #6F5B42; stroke-width: 0.9; opacity: 0.7; }
+.vl-bench-back { fill: var(--garden-cottage-timber); opacity: 0.85; }
+.vl-lantern-glow { opacity: 0.22; }
+@keyframes vl-lantern-breathe { 0%, 100% { opacity: 0.22; } 50% { opacity: 0.205; } }
+.vl-window-glow { opacity: 0.24; }
+.valley[data-time="night"] .vl-cottage-wall-shade { fill: #4A4740; }
+.valley[data-time="night"] .vl-cottage-wall-lit   { fill: #6B665A; }
+.valley[data-time="night"] .vl-cottage-roof-shade { fill: #17242C; }
+.valley[data-time="night"] .vl-cottage-roof-lit   { fill: #24353F; }
+.valley[data-time="night"] .vl-cottage-ridge, .valley[data-time="night"] .vl-cottage-eave { stroke: #101A20; }
+
+/* ---- Beyond the Gate (the Practice screen, 0.16.0): the road out ---- */
+.gate-road { padding: 0; }
+.gate-road__back {
+  display: block; position: relative;
+  height: 11rem; overflow: hidden;
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  margin-top: var(--space-2);
+}
+.gate-road__skyline { width: 100%; height: 100%; display: block; }
+.gate-road__home {
+  position: absolute; left: var(--space-4); bottom: var(--space-3);
+  color: #F6F2E8; font-size: var(--text-sm); font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+.gate-sky-stop--top { stop-color: #3F87CB; }
+.gate-sky-stop--bottom { stop-color: #E9F3E3; }
+.gate-road[data-time="dawn"] .gate-sky-stop--top { stop-color: #6C6FB0; }
+.gate-road[data-time="dawn"] .gate-sky-stop--bottom { stop-color: #FBDCA8; }
+.gate-road[data-time="dusk"] .gate-sky-stop--top { stop-color: #383D7C; }
+.gate-road[data-time="dusk"] .gate-sky-stop--bottom { stop-color: #F4A65C; }
+.gate-road[data-time="night"] .gate-sky-stop--top { stop-color: #0A1230; }
+.gate-road[data-time="night"] .gate-sky-stop--bottom { stop-color: #2B436F; }
+.gate-ridge--far { fill: #A7B5D8; }
+.gate-ridge--near { fill: #7FBA6A; }
+.gate-wood ellipse { fill: #2E6E45; }
+.gate-road__ground { fill: #4E9342; }
+.gate-road[data-time="dusk"] .gate-ridge--far { fill: #6F5F92; }
+.gate-road[data-time="dusk"] .gate-ridge--near { fill: #95A66F; }
+.gate-road[data-time="night"] .gate-ridge--far { fill: #1F2F5B; }
+.gate-road[data-time="night"] .gate-ridge--near { fill: #1F3630; }
+.gate-road[data-time="night"] .gate-wood ellipse { fill: #142720; }
+.gate-road[data-time="night"] .gate-road__ground { fill: #142720; }
+.gate-road__body { padding: var(--space-5) 0 var(--space-4); }
+.gate-road__title { font-family: var(--font-reading); font-weight: var(--weight-semibold); }
+.gate-road__places { display: flex; flex-direction: column; gap: var(--space-3); }
+.gate-place {
+  display: block; padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-soft);
+  text-decoration: none; color: inherit;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.gate-place:active { transform: scale(var(--press-scale)); }
+.gate-place__name { display: block; font-family: var(--font-reading); font-size: var(--text-lg); font-weight: var(--weight-semibold); margin-bottom: var(--space-1); }
+.gate-place__line { display: block; color: var(--color-ink-2); font-size: var(--text-sm); line-height: var(--leading-body); }
+/* Terraces (0.16.0): green stepped fields under stone lips, vine rows
+   combed across them — a cultivated slope, not a rug of sand. */
+.vl-terrace { fill: #A6B86A; }
+.vl-terrace-field { fill: #CDBE8E; opacity: 0.9; }
+.vl-terrace-field--2 { fill: #C4B27E; }
+.vl-terrace-step { stroke: #E9D3A4; stroke-width: 2.2; opacity: 0.9; }
+.vl-terrace-rows path { fill: none; stroke: #6E8E48; stroke-width: 1.4; opacity: 0.6; stroke-linecap: round; }
+.valley[data-time="dawn"] .vl-terrace { fill: #B6BC7E; }
+.valley[data-time="dusk"] .vl-terrace { fill: #9E9E68; }
+.valley[data-time="night"] .vl-terrace { fill: #26382F; }
+.valley[data-time="night"] .vl-terrace-step { opacity: 0.25; }
+.valley[data-time="night"] .vl-terrace-rows path { stroke: #142B22; }
+.valley[data-season="autumn"] .vl-terrace { fill: #B7A95C; }
+.valley[data-season="winter"] .vl-terrace { fill: #BFC7B4; }
+/* Autumn keeps its grass green under the turned leaves (Law 3: leaves
+   turn; the ground does not brown). */
+.valley[data-season="autumn"] .vl-floor-far     { fill: #C2C57F; }
+.valley[data-season="autumn"] .vl-floor-mid     { fill: #A7B164; }
+.valley[data-season="autumn"] .vl-floor-near    { fill: #8DA353; }
+.valley[data-season="autumn"] .vl-hearth-ground { fill: #6E8E44; }
+.valley[data-season="autumn"] .vl-meadow        { fill: #D3CC85; }
+.valley[data-season="autumn"] .vl-orchard       { fill: #B9B05A; }
+/* Mist (0.16.0): lighter, so the pond and meadow keep their colour under it. */
+.vl-mist { opacity: 0.2; }
+.vl-mist--2 { opacity: 0.14; }
+.valley[data-time="night"] .vl-mist { opacity: 0.1; }
+.valley[data-time="night"] .vl-mist--2 { opacity: 0.07; }
+
+/* ═══════════════ 0.16.0 — the Rootwood, repainted ═══════════════
+   The cathedral goes full-bleed like the valley; what shows between the
+   trunks is light through leaves (an SVG gradient re-toned per hour),
+   not paper; the floor is painted in the SVG with pools of light where
+   the shafts land; an old-growth far wood stands behind the working set
+   from day one; and the whole-scene season/time filters are retired for
+   real pigment (perf, and no more washed-out sepia). */
+
+/* Every garden screen is edge to edge inside immersive chrome. */
+:root[data-immersive] .shell__view { padding: 0; max-width: none; }
+:root[data-immersive] .shell { min-height: 100dvh; }
+
+.biome { min-height: 100dvh; }
+.biome .grove-scene { height: 100dvh; min-height: 100dvh; border-radius: 0; padding: 0; }
+.grove-scene { border-radius: 0; padding: 0; }
+.biome__ascend {
+  position: absolute; z-index: 4;
+  top: calc(env(safe-area-inset-top) + var(--space-3));
+  left: 50%; transform: translateX(-50%);
+  margin: 0;
+  min-height: var(--tap-target);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  color: #F3F0E6;
+  background: rgba(16, 26, 20, 0.42);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+@media (hover: hover) { .biome__ascend:hover { color: #FFFFFF; } }
+.grove-note {
+  position: absolute; z-index: 4;
+  left: var(--space-4); right: var(--space-4);
+  bottom: calc(env(safe-area-inset-bottom) + var(--space-5));
+  margin: 0;
+  color: #F3F0E6;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+.lgx { border-radius: 0; min-height: 100dvh; }
+.lg-plant { border-radius: 0; min-height: 100dvh; }
+.lg-plant__world .grove-scene, .lgx__world .grove-scene { min-height: 100%; }
+
+/* Filters retired: pigment does the hour and the season now. */
+.grove-scene :is(.grove-ground, .grove-horizon, .grove-ambient, .grove-plant__art, .grove-earth, .grove-cathedral) { filter: none; }
+.grove-scene--cathedral .grove-earth { display: none; }
+.grove-scene, .grove-scene[data-time="dawn"], .grove-scene[data-time="afternoon"],
+.grove-scene[data-time="dusk"] { background: #1F4A35; }
+.grove-scene[data-time="night"] { background: #050A18; }
+
+/* The air (light through leaves) */
+.grove-air-stop--top { stop-color: #1F4A35; }
+.grove-air-stop--mid { stop-color: #9ECC8B; }
+.grove-air-stop--low { stop-color: #EEE9B2; }
+.grove-scene[data-time="dawn"] .grove-air-stop--top { stop-color: #33475C; }
+.grove-scene[data-time="dawn"] .grove-air-stop--mid { stop-color: #D9B39E; }
+.grove-scene[data-time="dawn"] .grove-air-stop--low { stop-color: #F7E1C0; }
+.grove-scene[data-time="afternoon"] .grove-air-stop--mid { stop-color: #A9CF88; }
+.grove-scene[data-time="afternoon"] .grove-air-stop--low { stop-color: #F3E5A6; }
+.grove-scene[data-time="dusk"] .grove-air-stop--top { stop-color: #3B3459; }
+.grove-scene[data-time="dusk"] .grove-air-stop--mid { stop-color: #CB8D7A; }
+.grove-scene[data-time="dusk"] .grove-air-stop--low { stop-color: #F2BD86; }
+.grove-scene[data-time="night"] .grove-air { display: none; }
+.grove-scene[data-time="night"] .grove-night-sky { inset: 0 0 38% 0; }
+.grove-scene[data-season="autumn"] .grove-air-stop--mid { stop-color: #C9B76A; }
+.grove-scene[data-season="autumn"] .grove-air-stop--low { stop-color: #F1DB98; }
+.grove-scene[data-season="winter"] .grove-air-stop--top { stop-color: #5F7078; }
+.grove-scene[data-season="winter"] .grove-air-stop--mid { stop-color: #C7D3D6; }
+.grove-scene[data-season="winter"] .grove-air-stop--low { stop-color: #EEF1EC; }
+
+/* The floor */
+.grove-floor-far  { fill: #7FA066; }
+.grove-floor-near { fill: #5F8557; }
+.grove-scene[data-season="spring"] .grove-floor-far  { fill: #8FBA6F; }
+.grove-scene[data-season="spring"] .grove-floor-near { fill: #6E925C; }
+.grove-scene[data-season="autumn"] .grove-floor-far  { fill: #A99E52; }
+.grove-scene[data-season="autumn"] .grove-floor-near { fill: #807742; }
+.grove-scene[data-season="winter"] .grove-floor-far  { fill: #CBD2C5; }
+.grove-scene[data-season="winter"] .grove-floor-near { fill: #A8B2A5; }
+.grove-scene[data-time="dawn"] .grove-floor-far  { fill: #A0B182; }
+.grove-scene[data-time="dawn"] .grove-floor-near { fill: #7B8F66; }
+.grove-scene[data-time="dusk"] .grove-floor-far  { fill: #8B905F; }
+.grove-scene[data-time="dusk"] .grove-floor-near { fill: #6A6E4A; }
+.grove-scene[data-time="night"] .grove-floor-far  { fill: #24372E; }
+.grove-scene[data-time="night"] .grove-floor-near { fill: #1A2922; }
+.grove-light-pool { fill: #FFF4C4; opacity: 0.2; }
+.grove-scene[data-time="dawn"] .grove-light-pool { fill: #FFE3C2; opacity: 0.18; }
+.grove-scene[data-time="dusk"] .grove-light-pool { fill: #FFD9A0; opacity: 0.18; }
+.grove-undergrowth { fill: none; stroke: #3F7E45; stroke-width: 0.6; stroke-linecap: round; opacity: 0.7; }
+.grove-scene[data-time="night"] .grove-undergrowth { stroke: #10281C; }
+.grove-scene[data-season="winter"] .grove-undergrowth { stroke: #8E9B8C; }
+
+/* The old-growth far wood, and the great trunks' bark */
+.grove-far-wood ellipse { fill: #2D5C41; opacity: 0.92; }
+.grove-far-trunk { fill: none; stroke: #3D3A2E; stroke-width: 1; stroke-linecap: round; }
+.grove-scene[data-time="dawn"] .grove-far-wood ellipse { fill: #5A6E78; }
+.grove-scene[data-time="dusk"] .grove-far-wood ellipse { fill: #4B4A62; }
+.grove-scene[data-time="night"] .grove-far-wood ellipse { fill: #0D2030; }
+.grove-scene[data-time="night"] .grove-far-trunk { stroke: #0A1620; }
+.grove-scene[data-season="autumn"] .grove-far-wood ellipse { fill: #7E6E36; }
+.grove-scene[data-season="winter"] .grove-far-wood ellipse { fill: #7F8E86; }
+.grove-bark { fill: none; stroke: #2A2118; stroke-width: 0.45; opacity: 0.35; stroke-linecap: round; }
+.grove-ceiling-leaf { opacity: 0.96; }
+.grove-midwood { opacity: 0.96; }
+/* Far wood, corrected (0.16.0): the hour outranks the season, and the
+   distant columns recede into the air. */
+.grove-far-wood ellipse { fill: #3A6A4E; opacity: 0.82; }
+.grove-far-column { fill: none; stroke: #6F8468; stroke-linecap: round; opacity: 0.55; }
+.grove-scene[data-season="autumn"] .grove-far-wood ellipse { fill: #8E8448; }
+.grove-scene[data-season="autumn"] .grove-far-column { stroke: #8F8A5C; }
+.grove-scene[data-season="winter"] .grove-far-wood ellipse { fill: #8A9890; }
+.grove-scene[data-season="winter"] .grove-far-column { stroke: #9AA69E; }
+.grove-scene[data-time="dawn"] .grove-far-wood ellipse { fill: #6A7A84; }
+.grove-scene[data-time="dawn"] .grove-far-column { stroke: #8C8A8C; }
+.grove-scene[data-time="dusk"] .grove-far-wood ellipse { fill: #5A5470; }
+.grove-scene[data-time="dusk"] .grove-far-column { stroke: #7A6E7E; }
+.grove-scene[data-time="night"] .grove-far-wood ellipse { fill: #0E2233; }
+.grove-scene[data-time="night"] .grove-far-column { stroke: #17283A; opacity: 0.8; }
+.grove-scene[data-time="night"] .grove-far-trunk { stroke: #0A1620; }
+/* The air's light band is green-gold, not cream, so the wood keeps its colour. */
+.grove-air-stop--mid { stop-color: #8FC080; }
+.grove-air-stop--low { stop-color: #E2E39F; }
+.grove-scene[data-season="autumn"] .grove-air-stop--mid { stop-color: #BFB266; }
+.grove-scene[data-season="autumn"] .grove-air-stop--low { stop-color: #EBD98F; }
+.grove-midwood-trunk { fill: none; stroke: #4E3E2F; stroke-width: 1.1; stroke-linecap: round; opacity: 0.85; }
+.grove-scene[data-time="night"] .grove-midwood-trunk { stroke: #16211C; }
+/* ---- The Journal at the bench (THE WORLD Part 10.5, W7, 0.16.0) ----
+   The top of the screen is the view from the bench — the valley's upper
+   planes, drawn by the Overlook's own functions — and the book opens
+   under it on paper. The view is also the way back. */
+.lg-journal { padding: 0; min-height: 100dvh; background: var(--color-bg); }
+.lg-journal__view {
+  display: block; position: relative;
+  height: 32dvh; min-height: 12rem;
+  overflow: hidden;
+  background: #1B221D;
+  text-decoration: none;
+}
+.lg-journal__view-svg { width: 100%; height: 100%; display: block; }
+.lg-journal__view-back {
+  position: absolute; left: var(--space-4); top: calc(env(safe-area-inset-top) + var(--space-3));
+  color: #F6F2E8; font-size: var(--text-xs); font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  background: rgba(16, 26, 20, 0.38);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.lg-journal__view .vl-sky-stop--zenith   { stop-color: var(--garden-sky-morning-zenith); }
+.lg-journal__view .vl-sky-stop--mid      { stop-color: var(--garden-sky-morning-mid); }
+.lg-journal__view .vl-sky-stop--horizon  { stop-color: var(--garden-sky-morning-horizon); }
+.lg-journal__view[data-time="dawn"] .vl-sky-stop--zenith      { stop-color: var(--garden-sky-dawn-zenith); }
+.lg-journal__view[data-time="dawn"] .vl-sky-stop--mid         { stop-color: var(--garden-sky-dawn-mid); }
+.lg-journal__view[data-time="dawn"] .vl-sky-stop--horizon     { stop-color: var(--garden-sky-dawn-horizon); }
+.lg-journal__view[data-time="afternoon"] .vl-sky-stop--zenith { stop-color: var(--garden-sky-afternoon-zenith); }
+.lg-journal__view[data-time="afternoon"] .vl-sky-stop--mid    { stop-color: var(--garden-sky-afternoon-mid); }
+.lg-journal__view[data-time="afternoon"] .vl-sky-stop--horizon { stop-color: var(--garden-sky-afternoon-horizon); }
+.lg-journal__view[data-time="dusk"] .vl-sky-stop--zenith      { stop-color: var(--garden-sky-dusk-zenith); }
+.lg-journal__view[data-time="dusk"] .vl-sky-stop--mid         { stop-color: var(--garden-sky-dusk-mid); }
+.lg-journal__view[data-time="dusk"] .vl-sky-stop--horizon     { stop-color: var(--garden-sky-dusk-horizon); }
+.lg-journal__view[data-time="night"] .vl-sky-stop--zenith     { stop-color: var(--garden-sky-night-zenith); }
+.lg-journal__view[data-time="night"] .vl-sky-stop--mid        { stop-color: var(--garden-sky-night-mid); }
+.lg-journal__view[data-time="night"] .vl-sky-stop--horizon    { stop-color: var(--garden-sky-night-horizon); }
+.lg-journal__view[data-time="night"] .vl-ridge--farther { fill: #1F2F5B; }
+.lg-journal__view[data-time="night"] .vl-ridge--far     { fill: #16233F; }
+.lg-journal__view[data-time="night"] .vl-snow { fill: #9DB0D6; opacity: 0.55; }
+.lg-journal__view[data-time="night"] .vl-wilds { fill: #1B2A48; }
+.lg-journal__view[data-time="night"] .vl-floor-far { fill: #243D37; }
+.lg-journal__view[data-time="night"] .vl-hedgerows path { stroke: #142B22; }
+.lg-journal__view[data-time="night"] .vl-cloud-body  { fill: #23375E; opacity: 0.85; }
+.lg-journal__view[data-time="night"] .vl-cloud-under { fill: #121F3A; opacity: 0.7; }
+.lg-journal__view[data-time="dusk"] .vl-ridge--farther { fill: #6F5F92; }
+.lg-journal__view[data-time="dusk"] .vl-ridge--far     { fill: #4F4478; }
+.lg-journal__view[data-time="dusk"] .vl-snow { fill: #F6C9A0; }
+.lg-journal__view[data-time="dusk"] .vl-floor-far { fill: #B9B88A; }
+.lg-journal__view[data-time="dusk"] .vl-cloud-body { fill: #F9CCA4; }
+.lg-journal__view[data-time="dusk"] .vl-cloud-under { fill: #8E5F8C; opacity: 0.6; }
+.lg-journal__view[data-time="dawn"] .vl-ridge--farther { fill: #B9A8CC; }
+.lg-journal__view[data-time="dawn"] .vl-ridge--far     { fill: #8E7FAE; }
+.lg-journal__view[data-time="dawn"] .vl-snow { fill: #FFE4C4; }
+.lg-journal__view[data-time="dawn"] .vl-floor-far { fill: #B9D2A2; }
+.lg-journal__view[data-time="dawn"] .vl-cloud-body { fill: #FFE6D2; }
+.lg-journal__view[data-time="dawn"] .vl-cloud-under { fill: #D69AA6; opacity: 0.6; }
+.lg-journal__view[data-season="autumn"] .vl-floor-far { fill: #C2C57F; }
+.lg-journal__view[data-season="winter"] .vl-floor-far { fill: #DDE4DB; }
+.lg-journal__view[data-season="spring"] .vl-floor-far { fill: #B4DB96; }
+.lg-journal__view .vl-cloud { animation: none; }
+.lg-journal__book {
+  padding: var(--space-5) calc(env(safe-area-inset-right) + var(--space-4))
+           calc(env(safe-area-inset-bottom) + var(--space-8))
+           calc(env(safe-area-inset-left) + var(--space-4));
+  max-width: var(--measure); margin: 0 auto;
+}
+.lg-journal__book h1 { margin-top: 0; }
+/* The Field Guide: field notes, not a checklist. */
+.lg-guide { list-style: none; margin: 0; padding: 0; }
+.lg-guide__entry { padding: var(--space-2) 0; border-top: 1px solid var(--color-line); }
+.lg-guide__entry:first-child { border-top: none; padding-top: 0; }
+.lg-guide__line { display: block; font-family: var(--font-reading); }
+.lg-guide__seen { display: block; color: var(--color-ink-3); font-size: var(--text-xs); margin-top: 2px; }
+.lg-guide__fact { color: var(--color-ink-2); font-family: var(--font-reading); font-style: italic; margin: var(--space-4) 0 0; }

@@ -24,20 +24,22 @@
 
 export const HOURS = Object.freeze(['dawn', 'morning', 'afternoon', 'dusk', 'night']);
 
+/* 0.16.0 (THE WORLD 1.2.0): re-toned with the pigment canon — a touch
+   more chroma in every hour's light, deeper shadow at night. */
 const HOUR_LIGHT = Object.freeze({
-  dawn: '#F6D9A8',
-  morning: '#F4E6AC',
-  afternoon: '#F2DA9E',
-  dusk: '#F3C68F',
-  night: '#C7D6EA',
+  dawn: '#F8D39A',
+  morning: '#FBEFB0',
+  afternoon: '#F6DC98',
+  dusk: '#F5B978',
+  night: '#B9CCEA',
 });
 
 const HOUR_SHADOW = Object.freeze({
-  dawn: '#7A7490',
-  morning: '#5F7E63',
-  afternoon: '#68806B',
-  dusk: '#4E4A72',
-  night: '#2C3A4E',
+  dawn: '#6E688F',
+  morning: '#4E7756',
+  afternoon: '#5F7A5F',
+  dusk: '#4A426E',
+  night: '#1F2C44',
 });
 
 /** The pinned mix/lift ratios (§5.2). */

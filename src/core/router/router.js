@@ -39,11 +39,14 @@ export class Router {
     return this;
   }
 
-  /** Start listening and render the current hash (default: first route). */
-  start() {
+  /** Start listening and render the current hash.
+   *  @param {string} [defaultPath] where an empty hash lands (default: the
+   *  first registered route). The shell passes the valley (0.16.0): the
+   *  world is the application's home, so a cold open arrives there. */
+  start(defaultPath) {
     window.addEventListener('hashchange', () => this.#render());
     if (!location.hash) {
-      location.replace(`#${this.#routes[0].path}`);
+      location.replace(`#${defaultPath || this.#routes[0].path}`);
     } else {
       this.#render();
     }

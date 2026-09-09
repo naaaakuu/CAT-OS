@@ -153,6 +153,21 @@ export const JOURNAL_LINES = Object.freeze({
     snow: 'snow',
   }),
   weatherDayLabel: (day, month, weatherName) => `${day} ${month}, ${weatherName}`,
+  // The Field Guide (§9.4, 0.16.0): what the learner has SEEN, one line
+  // each, oldest first, like field notes. Never a fraction, never a grid,
+  // never a silhouette. It closes on one fact about the world — not about
+  // the learner's progress toward it.
+  fieldGuideHeading: 'Field Guide',
+  fieldGuideFact: (n) => `${NUMBER_WORDS[n] ?? n} kinds of creature live in this valley.`,
+  fieldGuideSeen: (dateLabel) => `seen ${dateLabel}`,
+});
+
+/** Small counts, spelled — a fact about the valley reads as prose, not as
+ *  a statistic (§9.4's own example: "Forty kinds of creature"). */
+const NUMBER_WORDS = Object.freeze({
+  1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten',
+  11: 'Eleven', 12: 'Twelve', 13: 'Thirteen', 14: 'Fourteen', 15: 'Fifteen', 16: 'Sixteen', 17: 'Seventeen',
+  18: 'Eighteen', 19: 'Nineteen', 20: 'Twenty', 30: 'Thirty', 40: 'Forty',
 });
 
 /* ------------------------------------------------------------------ */

@@ -1551,6 +1551,27 @@ if (lgFiles.length === 0) {
       walk(exported, name);
     }
     if (offenders.length) offenders.forEach((o) => bad(`garden: mentor voice uses judgment language or "!" — ${o}`));
+
+    /* -- Discoveries (Bible §9, 0.16.0): every catalogue line is Journal
+          copy, so it is held to the same register; ids are unique, kinds
+          are §9.3's, and no line carries a number (§9.6: "anything with a
+          number in it" is not a discovery). -- */
+    const disc = await mod('src/modules/language-garden/logic/discoveries.js');
+    const ids = new Set();
+    for (const d of disc.DISCOVERIES) {
+      if (ids.has(d.id)) bad(`garden discoveries: duplicate id ${d.id}`);
+      ids.add(d.id);
+      if (!disc.DISCOVERY_KINDS.includes(d.kind)) bad(`garden discoveries: ${d.id} has an unknown kind "${d.kind}"`);
+      if (typeof d.line !== 'string' || !d.line.trim()) bad(`garden discoveries: ${d.id} has no line`);
+      if (/\d/.test(d.line)) bad(`garden discoveries: ${d.id} carries a number — "${d.line}"`);
+      if (typeof d.when !== 'function') bad(`garden discoveries: ${d.id} has no condition`);
+      walk(d.line, `discoveries.${d.id}`);
+    }
+    if (disc.visibleDiscoveries({}).length !== 0) bad('garden discoveries: an empty world must show nothing');
+    const night = disc.visibleDiscoveries({ scene: 'overlook', time: 'night', weather: 'clear' });
+    if (!night.includes('night-first') || !night.includes('stars')) bad('garden discoveries: a clear night at the Overlook must show the night and the stars');
+    if (disc.creatureKindCount() < 10) bad('garden discoveries: the valley should hold at least ten kinds of creature');
+    if (offenders.length === 0 && problems.length === 0) ok(`${disc.DISCOVERIES.length} discoveries, ${disc.creatureKindCount()} creatures, all in register`);
   }
 
   /* -- Scheduler: computePlantState is a pure, deterministic function of
@@ -2102,6 +2123,208 @@ if (lgFiles.length === 0) {
     }
     if (isBiomeGrown(families, [grow('a', now - 1000)], 'orchard', now)) {
       bad('garden phrase: isBiomeGrown must filter to the requested biome slug, not count families from another one');
+    }
+  }
+
+  /* -- The authored world (THE WORLD Part 7, Stage W6): density is
+     testimony, not decoration. Three properties carry the whole doctrine
+     and all three are mechanical, so no future hand can quietly break
+     them: the reveal is MONOTONIC (a prop never disappears as effort
+     accumulates — Part 7.2 rule 2), the inventory is DETERMINISTIC (the
+     same true state always yields the same props in the same order, which
+     is what "nothing random per frame" actually means), and the COUNTS
+     match Part 7.3's stated budget exactly. -- */
+  {
+    const props = await mod('src/modules/language-garden/logic/props.js');
+    const {
+      revealedProps, revealedStories, revealedSeasonalProps, TIER_ORDER, TIER_PROPS,
+      FOUNDING_PROPS, FOUNDING_BUDGET, PROPS_PER_TIER, LUSH_BUDGET,
+    } = props;
+
+    // The budget, exactly as Part 7.3 states it in words.
+    if (FOUNDING_PROPS.length !== FOUNDING_BUDGET) {
+      bad(`garden props: Part 7.3 pins eight founding props, found ${FOUNDING_PROPS.length}`);
+    }
+    for (const tier of TIER_ORDER.slice(1)) {
+      const n = TIER_PROPS.filter((p) => p.tier === tier).length;
+      if (n !== PROPS_PER_TIER) bad(`garden props: Part 7.3 pins four props per tier; "${tier}" has ${n}`);
+    }
+    if (FOUNDING_BUDGET + PROPS_PER_TIER * (TIER_ORDER.length - 1) !== LUSH_BUDGET) {
+      bad('garden props: the founding + per-tier budget must total twenty-four at Lush (Part 7.3)');
+    }
+    // Every tier prop must carry an authored position or be an explicitly
+    // in-scene item: "a prop without an Appendix C coordinate does not
+    // exist yet" (Part 7.3).
+    for (const p of TIER_PROPS) {
+      if (p.scene !== 'rootwood' && (typeof p.x !== 'number' || typeof p.y !== 'number')) {
+        bad(`garden props: "${p.id}" has no authored coordinate (Part 7.3 forbids an unplaced prop)`);
+      }
+    }
+
+    // Monotonic: crossing a tier only ever ADDS. Held at one hour, one
+    // season, and one weather, so only the tier is varying.
+    const at = (tier) => revealedProps({ tier, season: 'spring', time: 'morning', weather: 'clear' }).map((p) => p.id);
+    for (let i = 1; i < TIER_ORDER.length; i += 1) {
+      const lower = at(TIER_ORDER[i - 1]);
+      const higher = at(TIER_ORDER[i]);
+      for (const id of lower) {
+        if (!higher.includes(id)) {
+          bad(`garden props: "${id}" is revealed at ${TIER_ORDER[i - 1]} but gone at ${TIER_ORDER[i]} — Part 7.2 forbids a reveal reversing`);
+        }
+      }
+      if (higher.length < lower.length) bad(`garden props: ${TIER_ORDER[i]} shows fewer props than ${TIER_ORDER[i - 1]}`);
+    }
+    // Stories obey the same law, and none may precede its host prop.
+    const storiesAt = (tier) => revealedStories({ tier }).map((s) => s.id);
+    for (let i = 1; i < TIER_ORDER.length; i += 1) {
+      for (const id of storiesAt(TIER_ORDER[i - 1])) {
+        if (!storiesAt(TIER_ORDER[i]).includes(id)) bad(`garden props: story "${id}" disappears at ${TIER_ORDER[i]}`);
+      }
+    }
+
+    // Deterministic: same state in, identical list out — every time.
+    const state = { tier: 'lush', season: 'autumn', time: 'dawn', weather: 'rain' };
+    const a = JSON.stringify(revealedProps(state));
+    for (let i = 0; i < 5; i += 1) {
+      if (JSON.stringify(revealedProps(state)) !== a) {
+        bad('garden props: revealedProps is not deterministic — the valley must never reshuffle itself between frames (Part 7.2)');
+        break;
+      }
+    }
+
+    // The stated true-state conditions actually gate (Part 7.2 rule 4).
+    const lushClear = at('lush');
+    if (lushClear.includes('mushrooms')) bad('garden props: the mushroom cluster is pinned "rain hours only" (Appendix C.5)');
+    if (!revealedProps({ ...state }).some((p) => p.id === 'mushrooms')) {
+      bad('garden props: the mushroom cluster must appear when it is actually raining');
+    }
+    if (!revealedProps(state).some((p) => p.id === 'dew-web')) {
+      bad('garden props: the dew-web is pinned to autumn dawns (Appendix C.5) and should show on one');
+    }
+    if (revealedProps({ tier: 'lush', season: 'spring', time: 'dawn', weather: 'clear' }).some((p) => p.id === 'dew-web')) {
+      bad('garden props: the dew-web must not appear outside autumn');
+    }
+
+    // The seasonal set is calendar-only: it must never read the tier.
+    const springBare = revealedSeasonalProps({ season: 'spring', time: 'morning' }).map((p) => p.id);
+    if (!springBare.includes('blossom-drift')) {
+      bad('garden props: spring\'s blossom drift is "recurring, never scarce" (Part 7.3) and must show at every tier');
+    }
+    if (revealedSeasonalProps({ season: 'summer', time: 'morning' }).some((p) => p.id === 'heat-haze')) {
+      bad('garden props: the heat-haze seam is pinned to summer AFTERNOONS (Part 7.3)');
+    }
+    if (!revealedSeasonalProps({ season: 'summer', time: 'afternoon' }).some((p) => p.id === 'heat-haze')) {
+      bad('garden props: the heat-haze seam must show on a summer afternoon');
+    }
+  }
+
+  /* -- The fauna (THE WORLD Part 9, Stage W6). The roster's sizes and
+     pigments are pinned values, so they are asserted literally against the
+     document's own table; and the picker must stay a mirror of true state,
+     never a motor — a valley with nothing blooming and no Ancient standing
+     has nothing to show at any density. -- */
+  {
+    const { FAUNA, pickOverlookVisitor, RARE_RATE } = await mod('src/modules/language-garden/logic/fauna.js');
+
+    // Part 9.3's table, transcribed here independently so a drift in
+    // either copy is caught rather than mirrored.
+    const PINNED = {
+      'butterfly-white': [0.016, '#F2EFE2'], 'butterfly-dark': [0.016, '#4A3F52'],
+      bee: [0.012, '#D9A24A'], dragonfly: [0.022, '#7FA2B8'], firefly: [0.004, '#F2D98A'],
+      bird: [0.02, '#8C7A66'], moth: [0.014, '#E4DFD2'], snail: [0.012, '#C9BCA6'],
+      frog: [0.018, '#7FA066'], deer: [0.08, '#B08D66'], fox: [0.07, '#C97F58'],
+      heron: [0.06, '#AEB9C6'], owl: [0.035, '#6F5B48'], cat: [0.05, '#4A4644'],
+    };
+    for (const [id, [size, fill]] of Object.entries(PINNED)) {
+      const spec = FAUNA[id];
+      if (!spec) { bad(`garden fauna: "${id}" is in Part 9.3's roster but missing from FAUNA`); continue; }
+      if (Math.abs(spec.size - size) > 1e-9) bad(`garden fauna: ${id} is pinned at ${size * 100}% of frame width, found ${spec.size * 100}%`);
+      if (spec.fill.toUpperCase() !== fill) bad(`garden fauna: ${id}'s pigment is pinned ${fill}, found ${spec.fill}`);
+      if (!spec.verb) bad(`garden fauna: ${id} has no motion verb (Part 9.2 gives every creature exactly one)`);
+    }
+    if (Math.abs(FAUNA.firefly.glowSize - 0.02) > 1e-9) {
+      bad('garden fauna: the firefly is pinned as a 0.4% dot inside a 2% glow (Part 9.3)');
+    }
+
+    // A mirror, never a motor (Law 5/Law 8): nothing to see is a real,
+    // reachable answer. The dice are forced so the CONDITIONS are what is
+    // actually under test — and the two pools have to be separated, since
+    // the rare four are deliberately NOT gated on any true state (Bible
+    // §4.8: "unearned"), so a fox at a dead-quiet night is correct, not a
+    // bug. `commonOnly` declines the rare roll on its first call and
+    // accepts everything after it.
+    const commonOnly = () => { let first = true; return () => { if (first) { first = false; return 1; } return 0; }; };
+    const emptyValley = { time: 'morning', tier: 'bare', bloomingCount: 0, ancientCount: 0, weather: 'clear' };
+    if (pickOverlookVisitor({ ...emptyValley, time: 'night' }, commonOnly()) !== null) {
+      bad('garden fauna: a night valley with no Ancient standing and nothing blooming must show nothing common (Bible §4.8)');
+    }
+    // ...and a true state genuinely opens a pool.
+    if (pickOverlookVisitor({ ...emptyValley, time: 'night', ancientCount: 2 }, commonOnly()) === null) {
+      bad('garden fauna: fireflies are gated on Ancient trees and should appear when some are standing (§4.8)');
+    }
+    if (pickOverlookVisitor({ ...emptyValley, weather: 'rain' }, commonOnly()) === null) {
+      bad('garden fauna: snails come after rain (§4.8)');
+    }
+    // The rare four ARE reachable with no effort at all — that asymmetry
+    // is the point, and it is worth pinning so nobody "fixes" it later.
+    if (pickOverlookVisitor({ ...emptyValley, time: 'night' }, () => 0) === null) {
+      bad('garden fauna: the rare four must be reachable in an untended valley — they are unearned (§4.8)');
+    }
+    // Never a reward: no visitor may be gated on anything a session did.
+    const src = readFileSync(join(root, 'src/modules/language-garden/logic/fauna.js'), 'utf8');
+    for (const forbidden of ['xp', 'streak', 'score', 'reward']) {
+      if (new RegExp(`\\b${forbidden}\\b`, 'i').test(src.replace(/reward/gi, (m, i) => (/not a reward|never a reward|are not rewards|unearned/i.test(src.slice(Math.max(0, i - 40), i + 40)) ? '' : m)))) {
+        bad(`garden fauna: "${forbidden}" appears in the picker — the world is not a reward (Law 8)`);
+      }
+    }
+    if (!(RARE_RATE > 0 && RARE_RATE < 0.1)) {
+      bad('garden fauna: the rare four must stay rare (Bible §4.8: "rare, unpredictable, unearned")');
+    }
+  }
+
+  /* -- Winter's real geometry (THE WORLD Part 6.6, Stage W6): "a filter
+     cannot draw branches." The season must reach the drawing code, and it
+     must not reach the Ancients, which Part 8.2 pins as evergreen. -- */
+  {
+    const plantSrc = readFileSync(join(root, 'src/ui/components/cat-plant.js'), 'utf8');
+    if (!/observedAttributes[\s\S]{0,200}'season'/.test(plantSrc)) {
+      bad('garden winter: <cat-plant> must observe a `season` attribute, or the season can never change its geometry (Part 6.6)');
+    }
+    if (!/WINTER_BARE_STAGES/.test(plantSrc)) {
+      bad('garden winter: <cat-plant> has no winter stage set — winter would be a filter again (Part 6.6)');
+    }
+    if (/WINTER_BARE_STAGES\s*=\s*new Set\(\[[^\]]*'ancient'/.test(plantSrc)) {
+      bad('garden winter: Ancient is pinned "deep evergreen" (Part 8.2) and must not go bare in winter');
+    }
+    const biomeSrc = readFileSync(join(root, 'src/modules/language-garden/screens/biome.js'), 'utf8');
+    if (!/<cat-plant[^>]*season=/.test(biomeSrc)) {
+      bad('garden winter: the biome scene must pass the world season to its plants (Part 6.6)');
+    }
+  }
+
+  /* -- Nothing in the world is tappable (Part 13's W6 acceptance line,
+     Bible §14.8). The props, stories, and creatures are scenery: a world
+     you can poke is a toy. -- */
+  {
+    const css = readFileSync(join(root, 'src/ui/styles/components.css'), 'utf8');
+    if (!/\.vl-prop,[^{]*\.fa,[^{]*\{[^}]*pointer-events:\s*none/.test(css)) {
+      bad('garden W6: props, stories, and fauna must all be pointer-events:none — nothing in the world is tappable');
+    }
+    // Facelessness is a law, not a budget (Part 9.1, P147). Comments are
+    // stripped first: the file TALKS about faces and eyes at length (it
+    // must — the prohibition is the most important thing in it), and a
+    // naive scan would flag its own documentation forever.
+    const faunaArt = readFileSync(join(root, 'src/modules/language-garden/screens/fauna-art.js'), 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    if (/\b(eye|eyes|pupil|iris)\b/i.test(faunaArt)) {
+      bad('garden W6: a creature has grown a face — facelessness is a law (Part 9.1, P147)');
+    }
+    // The typographic glyphs the redraw replaced must not creep back.
+    const biomeSrc = readFileSync(join(root, 'src/modules/language-garden/screens/biome.js'), 'utf8');
+    for (const glyph of ['❋', '◜', '❁', '⁘']) {
+      if (biomeSrc.includes(`>${glyph}<`)) {
+        bad(`garden W6: the visitor glyph ${glyph} is back — Part 9.1 requires soft masses, not typography`);
+      }
     }
   }
 

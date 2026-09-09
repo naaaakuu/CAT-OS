@@ -18,6 +18,10 @@
  *          character (its lean, its canopy balance, the wobble of its
  *          masses), so a learner's oldest tree always has the same
  *          individual shape (Visual Guide 6.3). Optional.
+ *   season the world season ("spring"|"summer"|"autumn"|"winter"), so the
+ *          plant can carry real WINTER GEOMETRY rather than a filter (THE
+ *          WORLD Part 6.6, Phase V Stage W6). Optional; absent means the
+ *          plant draws its ordinary in-leaf form.
  *   nest   boolean presence attribute      (a bird's nest — a Landmark tree)
  *   landmark  boolean presence attribute   (Ancient the world singled out, §6.5)
  *   name   the family label, drawn once as a name plate at a Landmark's
@@ -119,26 +123,29 @@ function branchPath(fx, fy, tx, ty) {
    every stage is unmistakable in silhouette. Hand-composed and fixed:
    this table is the entire state space the component ever draws.
    `masses` are offsets from the trunk top; the first is the main mass. */
+/* 0.16.0: crowns fuller and taller at every stage (a young plant is a
+   small tree, not a dandelion), each stage still unmistakable at
+   thumbnail size in one second (P38) by its height and mass count. */
 const STAGE_ART = {
   young: {
-    topY: 86, baseW: 3.6, topW: 1.8,
-    masses: [{ ox: 0, oy: -10, rx: 13, ry: 10 }, { ox: -8, oy: -3, rx: 8, ry: 6 }],
+    topY: 82, baseW: 3.8, topW: 1.9,
+    masses: [{ ox: 0, oy: -12, rx: 16, ry: 12 }, { ox: -9, oy: -4, rx: 10, ry: 7 }, { ox: 8, oy: -3, rx: 8, ry: 6 }],
     branches: 0,
   },
   in_leaf: {
-    topY: 66, baseW: 4.6, topW: 2.1,
-    masses: [{ ox: 0, oy: -11, rx: 18, ry: 12 }, { ox: -13, oy: -4, rx: 10, ry: 8 }, { ox: 12, oy: -5, rx: 9, ry: 7 }],
+    topY: 64, baseW: 4.8, topW: 2.2,
+    masses: [{ ox: 0, oy: -13, rx: 22, ry: 14 }, { ox: -15, oy: -4, rx: 12, ry: 9 }, { ox: 14, oy: -5, rx: 11, ry: 8 }, { ox: 2, oy: -24, rx: 12, ry: 7 }],
     branches: 1,
   },
   mature: {
-    topY: 58, baseW: 5.6, topW: 2.5,
-    masses: [{ ox: 0, oy: -14, rx: 22, ry: 14 }, { ox: -16, oy: -6, rx: 13, ry: 9 }, { ox: 15, oy: -7, rx: 12, ry: 9 }],
+    topY: 56, baseW: 5.8, topW: 2.6,
+    masses: [{ ox: 0, oy: -15, rx: 27, ry: 16 }, { ox: -19, oy: -6, rx: 15, ry: 10 }, { ox: 18, oy: -7, rx: 14, ry: 10 }, { ox: 3, oy: -29, rx: 15, ry: 8 }],
     branches: 2,
     blooms: 5,
   },
   ancient: {
     topY: 52, baseW: 7.2, topW: 3.1,
-    masses: [{ ox: 0, oy: -16, rx: 26, ry: 15 }, { ox: -19, oy: -6, rx: 14, ry: 10 }, { ox: 18, oy: -7, rx: 14, ry: 10 }, { ox: 3, oy: -28, rx: 11, ry: 7 }],
+    masses: [{ ox: 0, oy: -16, rx: 30, ry: 16 }, { ox: -21, oy: -6, rx: 16, ry: 11 }, { ox: 20, oy: -7, rx: 16, ry: 11 }, { ox: 3, oy: -31, rx: 14, ry: 8 }],
     branches: 2,
   },
 };
@@ -153,6 +160,32 @@ const BARE_BRANCHES = {
   mature: 7,
   ancient: 8,
 };
+
+/* Winter's real geometry (THE WORLD Part 6.6, Phase V Stage W6): "the
+   winter Rootwood going graphically bare (real skeletal geometry, not just
+   a filter)... because winter is the valley's most beautiful graphic state
+   and a filter cannot draw branches."
+
+   Two decisions this needed, both taken from the documents rather than
+   invented, and both worth stating plainly:
+
+   1. **Ancients keep their green.** Part 8.2 pins Ancient as "deep
+      evergreen, broad crown," so the season does not strip it. The result
+      is the truest possible picture of the wood: bare young growth
+      standing under evergreen old growth, which is also exactly why Part
+      3.2 gives the Ancients the horizon and the skyline notch.
+
+   2. **The review signals survive the season.** Bible §12.7 and THE WORLD
+      §6.6 both insist a plant asking for review is never conveyed by hue
+      and always by CATCHING LIGHT, at every hour AND SEASON — so a `gold`
+      plant keeps its amber veil on the bare crown, where it reads better
+      against winter than it ever did against summer. The `bare` state
+      (long overdue) had used bare branches as its own signal, which winter
+      would have flattened; it keeps its distinction honestly instead, as
+      the swollen buds a dormant-but-waiting tree actually carries, while a
+      winter tree that is NOT waiting carries clean twigs. A branch, never
+      a wound (§6.4): nothing here ever reads as dead. */
+const WINTER_BARE_STAGES = new Set(['young', 'in_leaf', 'mature']);
 
 function branchFan(cx, trunkTop, count, tiltDeg = 0) {
   const spread = 96; // degrees either side of straight up — a real winter crown
@@ -189,7 +222,7 @@ function edgePoints(cx, cy, rx, ry, count, rnd, upperOnly = true) {
 }
 
 class CatPlant extends HTMLElement {
-  static get observedAttributes() { return ['stage', 'due', 'size', 'vigor', 'seed', 'nest', 'landmark', 'name']; }
+  static get observedAttributes() { return ['stage', 'due', 'size', 'vigor', 'seed', 'nest', 'landmark', 'name', 'season']; }
   attributeChangedCallback() { this.#render(); }
   connectedCallback() { this.#render(); }
 
@@ -202,6 +235,7 @@ class CatPlant extends HTMLElement {
     const isLandmark = this.hasAttribute('landmark');
     const name = this.getAttribute('name');
     const seed = this.getAttribute('seed');
+    const season = this.getAttribute('season');
     const vigor = Math.max(0, Math.min(1, Number.parseFloat(this.getAttribute('vigor') ?? '0') || 0));
 
     if (size === 'horizon') {
@@ -247,11 +281,16 @@ class CatPlant extends HTMLElement {
 
     const art = STAGE_ART[stage];
 
+    // Winter strips the deciduous stages to real branch structure (Part
+    // 6.6); Ancients stay evergreen (see WINTER_BARE_STAGES above).
+    const wintering = season === 'winter' && WINTER_BARE_STAGES.has(stage);
+    const dormant = due === 'bare' || wintering;
+
     // Continuous within-stage refinement (§6.3), all bounded so a stage never
     // reads as the next one up: the crown lifts a little, the trunk thickens,
     // the foliage fills. The bare (dormant) silhouette keeps its own honest
     // form; refinement rides the living canopy only.
-    const lift = due === 'bare' ? 0 : Math.round(vigor * 4);
+    const lift = dormant ? 0 : Math.round(vigor * 4);
     const topY = art.topY - lift;
     const baseW = art.baseW + vigor * 1.6;
     const tx = 60 + lean;   // trunk top x
@@ -268,11 +307,25 @@ class CatPlant extends HTMLElement {
 
     let canopy = '';
     let branches = '';
-    if (due === 'bare' && BARE_BRANCHES[stage]) {
+    if (dormant && BARE_BRANCHES[stage]) {
       const { paths, buds } = branchFan(tx, topY, BARE_BRANCHES[stage], lean * 1.2);
+      // Buds mark a tree that is WAITING (due 'bare' — long overdue). A
+      // merely wintering tree carries clean twigs, so the season never
+      // impersonates the invitation, and the invitation never disappears
+      // into the season (Bible §12.7).
+      const showBuds = due === 'bare';
       canopy = `
         ${paths.map((d) => `<path d="${d}" class="pl-branch"/>`).join('')}
-        ${buds.map((b) => `<circle cx="${b.cx.toFixed(1)}" cy="${b.cy.toFixed(1)}" r="${b.r}" class="pl-bud"/>`).join('')}`;
+        ${showBuds ? buds.map((b) => `<circle cx="${b.cx.toFixed(1)}" cy="${b.cy.toFixed(1)}" r="${b.r}" class="pl-bud"/>`).join('') : ''}`;
+      // The one signal that outranks every hour and every season (§6.6):
+      // a plant asking for review catches light. On a bare winter crown the
+      // amber sits on the branch tips themselves, since there is no canopy
+      // left to veil — the same luminance, the same meaning, a form the
+      // season cannot swallow.
+      if (due === 'gold') {
+        canopy += `<path d="${blobPath(tx, topY - 12, 15, 11, rnd, 0.14)}" class="pl-gold-veil pl-gold-veil--bare"/>`
+          + buds.map((b) => `<circle cx="${b.cx.toFixed(1)}" cy="${b.cy.toFixed(1)}" r="2.4" class="pl-turned"/>`).join('');
+      }
     } else {
       const masses = art.masses.map((m) => ({
         cx: tx + m.ox + (m.ox === 0 ? bias * 0.4 : bias),
@@ -357,7 +410,9 @@ class CatPlant extends HTMLElement {
       <style>
         cat-plant { display: block; }
         cat-plant svg { width: 100%; height: 100%; display: block; overflow: visible; }
-        .pl-soil { fill: var(--garden-soil); }
+        /* 0.16.0: the plant stands on earth, not on a pale disc — a
+           translucent darker patch that reads on moss, floor, or paper. */
+        .pl-soil { fill: #4A3B2A; opacity: 0.26; }
         .pl-grass { stroke: var(--garden-young); fill: none; stroke-width: 1.6; stroke-linecap: round; opacity: 0.7; }
         .pl-trunk { fill: var(--garden-trunk); }
         .pl-limb { stroke: var(--garden-trunk); fill: none; stroke-width: 2.2; stroke-linecap: round; }
@@ -393,6 +448,14 @@ class CatPlant extends HTMLElement {
         @keyframes pl-gold-breathe {
           0%, 100% { opacity: 0.5; }
           50% { opacity: 0.26; }
+        }
+        /* On a bare winter crown there is no canopy behind the veil, so the
+           same amber is carried lighter — a glow among branches, never a
+           solid amber blob standing where a crown used to be. */
+        .pl-gold-veil--bare { opacity: 0.28; animation-name: pl-gold-breathe-bare; }
+        @keyframes pl-gold-breathe-bare {
+          0%, 100% { opacity: 0.28; }
+          50% { opacity: 0.14; }
         }
         @media (prefers-reduced-motion: reduce) { .pl-gold-veil { animation: none; } }
         /* The maturity ramp: green deepens with the plant's age (§12.2). */
