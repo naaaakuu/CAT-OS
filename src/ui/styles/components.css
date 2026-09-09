@@ -4162,3 +4162,12 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .lg-guide__line { display: block; font-family: var(--font-reading); }
 .lg-guide__seen { display: block; color: var(--color-ink-3); font-size: var(--text-xs); margin-top: 2px; }
 .lg-guide__fact { color: var(--color-ink-2); font-family: var(--font-reading); font-style: italic; margin: var(--space-4) 0 0; }
+/* Wide viewports (desktop, landscape): the valley is a portrait painting,
+   so on a wide screen it stands as a phone-proportioned window in the
+   frame's warm dark rather than slicing down to its own foreground.
+   The same window holds the Rootwood, a session, and a plant approach. */
+@media (min-aspect-ratio: 3/4) {
+  .valley, .biome .grove-scene, .lgx, .lg-plant { max-width: min(100vw, calc(100dvh * 0.62)); margin-left: auto; margin-right: auto; }
+  .biome, .lgx-screen-wrap { background: #1B221D; }
+  :root[data-immersive] .shell__view { background: #1B221D; }
+}
