@@ -264,6 +264,7 @@ function renderValley(outlet, rootwood, effort) {
         </svg>
         ${weatherLayerHTML(atmo.weather)}
         <div class="valley__veil" aria-hidden="true"></div>
+        <div class="valley__card" id="valley-card" hidden></div>
       </div>
 
       <nav class="valley__marks" aria-label="Garden">
@@ -291,11 +292,31 @@ function renderValley(outlet, rootwood, effort) {
 
   // A wild region acknowledges the hand (Phase 4.9, Visual Guide 19.1,
   // 19.3: "touching a still pond and watching it answer"): the land
-  // breathes once — a soft luminance swell, no words, no dialog, no
-  // "coming soon" (§5.8). The world noticed; it is simply still wild.
+  // breathes once — a soft luminance swell — and, since 0.17.0 (THE
+  // WORLD Part 16.5), the place says its name: a small card with the
+  // region's name and one line of what grows there, gone again in a few
+  // seconds. No date, no lock, no "coming soon" (§5.8) — a place the
+  // learner can now anticipate, because it has been named.
+  const card = outlet.querySelector('#valley-card');
+  let cardTimer = null;
+  const hideCard = () => { clearTimeout(cardTimer); card.hidden = true; };
+  const showCard = (slug) => {
+    const b = BIOMES.find((x) => x.slug === slug);
+    if (!b) return;
+    card.innerHTML = `<p class="valley__card-name">${escapeHTML(b.name)}</p>
+      <p class="valley__card-line">${escapeHTML(b.whisper)}</p>`;
+    card.hidden = false;
+    card.classList.remove('is-shown');
+    void card.offsetWidth;
+    card.classList.add('is-shown');
+    clearTimeout(cardTimer);
+    cardTimer = setTimeout(hideCard, 4600);
+  };
+  card.addEventListener('click', hideCard);
   for (const hitEl of outlet.querySelectorAll('[data-wild]')) {
     const region = outlet.querySelector(`[data-region="${hitEl.dataset.wild}"]`);
     const breathe = () => {
+      showCard(hitEl.dataset.wild);
       if (!region) return;
       region.classList.remove('is-breathing');
       void region.getBoundingClientRect();
@@ -697,10 +718,10 @@ const ROOTWOOD_MASS_SLOTS = [
 ];
 const ROOTWOOD_FOUNDING_COUNT = 7;
 const ROOTWOOD_MASS_CEILING = ROOTWOOD_MASS_SLOTS.length;
-/** One more tree for every three families grown past Sprout (0.16.0 —
- *  the wood thickens within the first week, not the first month), so the
- *  eleven extra slots fill by the thirty-third grown family. */
-const ROOTWOOD_FAMILIES_PER_TREE = 3;
+/** One more tree for every two families grown past Sprout (0.17.0 — the
+ *  wood answers the second family grown, and the eleven extra slots fill
+ *  by the twenty-second), so the map visibly deepens week by week. */
+const ROOTWOOD_FAMILIES_PER_TREE = 2;
 
 /** Emergent crowns (Part 3.2: "one or two emergent crowns" where Ancients
  *  stand) — three authored spots above the canopy line, taken in order

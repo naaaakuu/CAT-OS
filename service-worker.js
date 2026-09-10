@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 25;
+const CACHE_VERSION = 26;
 const CONTENT_VERSION = 12;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -126,6 +126,7 @@ const SHELL_FILES = [
   './src/modules/language-garden/logic/props.js',
   './src/modules/language-garden/logic/fauna.js',
   './src/modules/language-garden/logic/discoveries.js',
+  './src/modules/language-garden/logic/groves.js',
   './src/modules/language-garden/screens/overlook.js',
   './src/modules/language-garden/screens/biome.js',
   './src/modules/language-garden/screens/atmosphere-art.js',
@@ -572,7 +573,12 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   event.respondWith(
-    caches.match(request, { ignoreSearch: true }).then((cached) => {
+    // 0.17.0: an exact-URL match. `ignoreSearch` forced a linear scan of
+    // every cached entry on every request (hundreds of entries, hundreds of
+    // requests per garden screen — a twenty-second first paint on a cold
+    // profile); nothing in this app fetches with a query string, and a
+    // navigation that misses still falls back to the cached shell below.
+    caches.match(request).then((cached) => {
       if (cached) return cached;
       return fetch(request).then((response) => {
         // New content files (future batches) are cached on first use so

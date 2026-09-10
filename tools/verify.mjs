@@ -1811,42 +1811,65 @@ if (lgFiles.length === 0) {
     if (castsShadow('morning', 'summer')) bad('garden light: cast shadows must NOT appear at midday outside autumn — a seasonal pleasure, not a default');
   }
 
-  /* -- The working set (THE WORLD Part 8.5, Stage W3): a biome's
-     foreground is a fixed number of slots, filled by priority — the lit
-     plant, then bare-with-buds, then the still-growing stages, then the
-     most RECENTLY tended Mature, then open ground as filler — capped at
-     the slot count however many real candidates exist, with every
-     overflow Mature family accounted for in the mid-wood, never lost. -- */
+  /* -- The Rootwood Walk (THE WORLD Part 16, 0.17.0): every family stands
+     in exactly one named grove, no grove is over capacity, the map is a
+     pure function of the families, stands in one row never collide, and
+     every place name and line is held to the mentor's register. -- */
   {
-    const { selectForegroundSlots } = await mod('src/modules/language-garden/logic/scene.js');
-    const plant = (id, stage, due = 'none', lastVisitedAt = null) =>
-      ({ family: { meta: { id } }, state: { stage, due, lastVisitedAt } });
+    const groves = await mod('src/modules/language-garden/logic/groves.js');
+    const biomesMod = await mod('src/modules/language-garden/logic/biomes.js');
+    const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
+    const lintLine = (text, where) => {
+      if (typeof text !== 'string' || !text.trim()) { bad(`${where}: empty`); return; }
+      for (const re of banned) if (re.test(text)) bad(`${where}: judgment language in "${text}"`);
+      if (text.includes('!')) bad(`${where}: exclamation mark in "${text}"`);
+      if (/\d/.test(text)) bad(`${where}: carries a number — "${text}"`);
+    };
+    const seen = new Map();
+    for (const g of groves.GROVES) {
+      lintLine(g.name, `grove ${g.slug} name`);
+      lintLine(g.line, `grove ${g.slug} line`);
+      if (g.families.length > groves.GROVE_CAPACITY) bad(`grove ${g.slug} seats ${g.families.length} families; a grove holds ${groves.GROVE_CAPACITY}`);
+      for (const id of g.families) {
+        if (!lgRegIds.includes(id)) bad(`grove ${g.slug} names ${id}, which is not in the registry`);
+        if (seen.has(id)) bad(`${id} stands in two groves: ${seen.get(id)} and ${g.slug}`);
+        seen.set(id, g.slug);
+      }
+    }
+    for (const id of lgRegIds) {
+      if (!seen.has(id)) bad(`${id} stands in no grove — it would be placed at the wood's edge; add it to logic/groves.js`);
+    }
+    for (const b of biomesMod.BIOMES) lintLine(b.whisper, `biome ${b.slug} whisper`);
 
-    const lit = plant('lit', 'young', 'gold');
-    const bare = plant('bare', 'in_leaf', 'bare');
-    const sprout = plant('sprout', 'sprout');
-    const matureOld = plant('mature-old', 'mature', 'none', '2026-01-01T00:00:00.000Z');
-    const matureNew = plant('mature-new', 'mature', 'none', '2026-06-01T00:00:00.000Z');
-    const openA = plant('open-a', 'open_ground');
-    const openB = plant('open-b', 'open_ground');
-    const openC = plant('open-c', 'open_ground');
-
-    const all = [openC, matureOld, openA, bare, matureNew, sprout, openB, lit];
-    const { foreground, overflowMature } = selectForegroundSlots(all, 'lit', 4);
-
-    if (foreground[0]?.family.meta.id !== 'lit') bad('garden working set: the lit plant must always be priority one (slot S4)');
-    if (foreground[1]?.family.meta.id !== 'bare') bad('garden working set: bare-with-buds is priority two');
-    if (foreground[2]?.family.meta.id !== 'sprout') bad('garden working set: a still-growing stage is priority three');
-    if (foreground[3]?.family.meta.id !== 'mature-new') bad('garden working set: the most recently tended Mature fills next, not just any Mature');
-    if (foreground.length !== 4) bad('garden working set: the slot count caps the foreground, however many candidates exist');
-    if (!overflowMature.some((p) => p.family.meta.id === 'mature-old')) bad('garden working set: a Mature family the slots had no room for must recede to the mid-wood, not vanish');
-    if (overflowMature.some((p) => p.family.meta.id === 'mature-new')) bad('garden working set: a Mature family that DID get a slot must not also count as overflow');
-
-    const noLit = selectForegroundSlots([openA, openB, openC], null, 7);
-    if (noLit.foreground.length !== 3) bad('garden working set: with no lit plant, every real candidate still fills a slot, and nothing pads the rest');
-
-    const dup = plant('dup', 'mature', 'none', '2026-01-01T00:00:00.000Z');
-    if (selectForegroundSlots([dup, dup], 'dup', 7).foreground.length !== 1) bad('garden working set: the same family must never occupy two slots');
+    const fams = lgRegIds.map((id) => ({ meta: { id } }));
+    const a = groves.layoutWood(fams);
+    const b = groves.layoutWood([...fams].reverse());
+    const flat = (m) => JSON.stringify([...m.stands.entries()].sort((p, q) => p[0].localeCompare(q[0])));
+    if (flat(a) !== flat(b)) bad('garden walk: layoutWood must not depend on input order');
+    if (a.stands.size !== fams.length) bad('garden walk: every family must get a stand');
+    if (a.width !== groves.woodWidth(groves.GROVES.length)) bad('garden walk: with every family claimed, the wood is exactly the six groves plus its margins');
+    for (const [id, st] of a.stands) {
+      if (st.x < 0 || st.x > a.width || st.y < 50 || st.y > 100) bad(`garden walk: ${id} stands outside the wood (${st.x}, ${st.y})`);
+    }
+    // Stands in one row never sit closer than a crown's width.
+    const rows = new Map();
+    for (const st of groves.GROVE_STANDS) {
+      if (!rows.has(st.band)) rows.set(st.band, []);
+      rows.get(st.band).push(st.x);
+    }
+    for (const [band, xs] of rows) {
+      const sorted = [...xs].sort((p, q) => p - q);
+      for (let i = 1; i < sorted.length; i += 1) {
+        if (sorted[i] - sorted[i - 1] < 22) bad(`garden walk: two ${band}-row stands sit ${sorted[i] - sorted[i - 1]} units apart; crowns would merge`);
+      }
+    }
+    for (const st of groves.GROVE_STANDS) {
+      const clear = groves.DOORPOST_CLEARANCE[st.band];
+      if (clear && (st.x < clear || st.x > groves.GROVE_WIDTH - clear)) bad(`garden walk: a ${st.band}-row stand at x=${st.x} would put its crown over a doorpost (needs ${clear} units from either edge)`);
+    }
+    if (groves.groveAt(groves.WOOD_ENTRANCE - 1, a.groves) !== null) bad('garden walk: the entrance belongs to no grove');
+    if (groves.groveAt(groves.WOOD_ENTRANCE + 1, a.groves)?.grove.slug !== groves.GROVES[0].slug) bad('garden walk: the first grove begins where the entrance ends');
+    if (problems.length === 0) ok(`the walk seats all ${a.stands.size} families in ${a.groves.length} groves, ${a.width} units wide`);
   }
 
   /* -- The veil (THE WORLD Part 10.3, Stage W4): "both pairs must

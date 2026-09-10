@@ -14,6 +14,7 @@
 
 import { computePlantState } from '../../../core/engine/garden-session.js';
 import { biomeForFamily, biomeBySlug } from './biomes.js';
+import { layoutWood } from './groves.js';
 import { sessionsForFamily } from './store.js';
 
 /** Build the per-plant view: content + derived state + its biome. Seeds
@@ -36,10 +37,25 @@ function pickAsking(plants) {
 }
 
 /** One patch of open ground to offer, but only when nothing is asking —
- *  a seed is never surfaced over a plant that wants tending (§16.1). */
+ *  a seed is never surfaced over a plant that wants tending (§16.1).
+ *  0.17.0 (THE WORLD Part 16): a seed carried back through the Gate comes
+ *  first (it is the learner's own intent); otherwise the offer is the
+ *  next open stand along the walk after the last grown one, so the wood
+ *  fills grove by grove rather than by registry id. The learner may plant
+ *  ANY root-stone they walk to; this is only the one the wood quietly
+ *  lifts. */
 function pickOpenSeed(plants, asking) {
   if (asking) return null;
-  return plants.find((p) => p.state.stage === 'open_ground' || p.state.stage === 'seed') ?? null;
+  const seed = plants.find((p) => p.state.stage === 'seed');
+  if (seed) return seed;
+  const open = plants.filter((p) => p.state.stage === 'open_ground');
+  if (open.length === 0) return null;
+  const { stands } = layoutWood(plants.map((p) => p.family));
+  const x = (p) => stands.get(p.family.meta.id)?.x ?? Number.POSITIVE_INFINITY;
+  const grownX = plants.filter((p) => p.state.stage !== 'open_ground').map(x).filter(Number.isFinite);
+  const frontier = grownX.length ? Math.max(...grownX) : -1;
+  const sorted = [...open].sort((a, b) => x(a) - x(b));
+  return sorted.find((p) => x(p) > frontier) ?? sorted[0];
 }
 
 /**
@@ -87,54 +103,11 @@ export function deriveBiomeScene(families, allSessions, biomeSlug, now = Date.no
   };
 }
 
-/**
- * The working-set rule (THE WORLD Part 8.5, Stage W3): a biome's
- * foreground holds a fixed number of slots (7, Appendix C.6), filled by
- * priority so the wood never has to grow past its own ceiling to stay
- * legible. Priority, highest first: the single lit (asking) plant, then
- * bare-with-buds, then the still-growing stages, then whichever Mature
- * family was tended most recently, then open ground as quiet filler so a
- * slot is never left standing empty (§Bible 3.3: "nothing is locked").
- * Ancient is never a candidate — it already collapses to the horizon
- * (unchanged by this rule) before this function ever sees the list.
- * @param {Array} nonAncientPlants  a biome's plants, Ancient excluded
- * @param {string|null} askingId  the single most-patient due family, as
- *        already chosen by pickAsking/deriveBiomeScene — never re-derived
- *        here, so there is only ever one definition of "the lit plant"
- * @param {number} slotCount
- * @returns {{foreground: Array, overflowMature: Array}} foreground is at
- *          most slotCount long, in fill-priority order (index 0 is the
- *          highest priority and belongs in the working set's first slot);
- *          overflowMature is every Mature family the slots had no room
- *          for — THE WORLD Part 8.5's "wood behind", drawn as the
- *          mid-wood band rather than a named plant.
- */
-export function selectForegroundSlots(nonAncientPlants, askingId, slotCount = 7) {
-  const GROWING_STAGES = new Set(['seed', 'sprout', 'young', 'in_leaf']);
-  const lit = askingId ? nonAncientPlants.filter((p) => p.family.meta.id === askingId) : [];
-  const bare = nonAncientPlants.filter((p) => p.state.due === 'bare');
-  const growing = nonAncientPlants.filter((p) => GROWING_STAGES.has(p.state.stage));
-  const mature = nonAncientPlants
-    .filter((p) => p.state.stage === 'mature')
-    .sort((a, b) => (b.state.lastVisitedAt ?? '').localeCompare(a.state.lastVisitedAt ?? ''));
-  const openGround = nonAncientPlants.filter((p) => p.state.stage === 'open_ground');
-
-  const seen = new Set();
-  const ordered = [];
-  for (const group of [lit, bare, growing, mature, openGround]) {
-    for (const p of group) {
-      const id = p.family.meta.id;
-      if (seen.has(id)) continue;
-      seen.add(id);
-      ordered.push(p);
-    }
-  }
-
-  const foreground = ordered.slice(0, slotCount);
-  const foregroundIds = new Set(foreground.map((p) => p.family.meta.id));
-  const overflowMature = mature.filter((p) => !foregroundIds.has(p.family.meta.id));
-  return { foreground, overflowMature };
-}
+/* The working-set rule (THE WORLD Part 8.5, 0.15–0.16) lived here as
+   selectForegroundSlots(): seven foreground slots filled by priority, every
+   other family folded into anonymous canopy. Retired in 0.17.0 by Part 16:
+   every family now stands in its own fixed stand in a named grove
+   (logic/groves.js), so there is nothing left to select. */
 
 /** Which reach word this visit should serve: whichever of the pool has
  *  been used least recently (tie broken by pool order), so a family with

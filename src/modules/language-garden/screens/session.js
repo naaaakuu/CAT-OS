@@ -542,21 +542,22 @@ export async function renderGardenSession(outlet, context, params) {
     // post-growth stage's true share of frame height (Part 8.2) — an
     // instant, un-animated layout change made while the plant itself is
     // still visually compressed near its base (clip-path), so the resize
-    // is never seen. Ancient stays visually capped at Mature's size while
-    // it remains in its slot (Ancient belongs on the horizon, Part 8.5 —
-    // the true promotion is revealed honestly on the next visit to the
-    // biome, not teleported mid-session). A horizon plant (already
-    // Ancient before this session) needs no resize at all: the horizon's
-    // own CSS sizing is stage-invariant.
+    // is never seen. Since 0.17.0 an Ancient stands in its own stand like
+    // every other stage (THE WORLD Part 16), so the promotion is grown
+    // right here, in place.
     const wrap = plantEl?.closest('.grove-plant--slot') ?? null;
     if (wrap) {
       const slotScale = Number(wrap.dataset.slotScale) || 1;
-      const cappedStage = postState.stage === 'ancient' ? 'mature' : postState.stage;
-      const oldPct = parseFloat(wrap.style.height) || (STAGE_HEIGHT_PCT[cappedStage] ?? STAGE_HEIGHT_PCT.mature) * slotScale;
-      const newPct = (STAGE_HEIGHT_PCT[cappedStage] ?? STAGE_HEIGHT_PCT.mature) * slotScale;
+      // 0.17.0 (THE WORLD Part 16): every stage, Ancient included, stands
+      // in its own stand at its own true height, so the promotion to
+      // Ancient is grown here, in place, the moment it is earned.
+      const nextStage = postState.stage;
+      const oldPct = parseFloat(wrap.style.height) || (STAGE_HEIGHT_PCT[nextStage] ?? STAGE_HEIGHT_PCT.mature) * slotScale;
+      const newPct = (STAGE_HEIGHT_PCT[nextStage] ?? STAGE_HEIGHT_PCT.mature) * slotScale;
       plantEl.style.setProperty('--grow-scale-from', String(newPct > 0 ? oldPct / newPct : 1));
       wrap.style.height = `${newPct}%`;
-      plantEl.setAttribute('stage', cappedStage);
+      plantEl.setAttribute('stage', nextStage);
+      if (nextStage === 'ancient') wrap.classList.add('grove-plant--ancient');
     } else if (plantEl) {
       plantEl.setAttribute('stage', 'ancient');
     }

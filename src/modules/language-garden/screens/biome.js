@@ -4,30 +4,47 @@
  * this screen is written against the biome seam (logic/biomes.js): it
  * renders "the biome for this slug" rather than "the grove."
  *
- * Phase V, Stage W3 (LANGUAGE GARDEN — THE WORLD.md Part 10.2, Part 8.2,
- * 8.4–8.5, Appendix C.6): the Rootwood is staged as a cathedral, not a
- * grid. A canopy ceiling closes the top of the frame with two sky-holes,
- * two great trunks rise past the frame's own top edge, three light
- * shafts fall through the trunk gaps (§5.3), a mid-wood band of
- * unlabelled canopy masses stands in for every Mature family the working
- * set has no room for, and the seven foreground slots of Appendix C.6
- * hold the plants the working-set rule actually chose (logic/scene.js's
- * selectForegroundSlots) — the lit plant always at S4. Plant names are
- * wordless until approach: focus, peek, or the plant screen (Part 8.4);
- * the wood itself carries no label. Ancient trees are unchanged by any
- * of this — they already collapse to the horizon (Part 8.5: "as canon").
+ * 0.17.0 — THE ROOTWOOD WALK (LANGUAGE GARDEN — THE WORLD.md Part 16).
+ * The 0.16.0 cathedral was one frame holding seven plants; every other
+ * family the learner had grown receded into anonymous canopy, and every
+ * family they had not yet met was invisible. With fifty-one families in
+ * the content system that was a wood that hid the learner's own work.
+ * Part 16 replaces the working set with a WALK: the wood is wider than
+ * the frame, entered at its mouth, and crossed by hand — swipe to walk —
+ * and **every family stands in it**, in a fixed stand, in one of six
+ * named groves (logic/groves.js), forever. An unmet root is a root-stone
+ * half-sunk in moss (open ground with a name on approach, never a
+ * padlock); a family grows in its own stand from sprout to Ancient; a
+ * grove whose every family is at least Mature carries a garland on its
+ * sign. The wood is the collection — the only one this product has.
  *
- * One screen, no scrolling (§4.1). Plant states are readable without
- * reading — the scene IS the status display (§16.3). At most one plant
- * is lit (§17.2). The learner ascends to the valley by the one quiet
- * mark, or by tapping the sky.
+ * The cathedral's enclosure is kept whole (Part 10.2): the canopy ceiling
+ * closes the top of the frame and stays overhead as you walk; the far
+ * wood and the old growth behind the stands drift at their own slower
+ * speeds (aerial perspective made into motion); the great trunks stand
+ * as doorposts between the groves, on the floor itself, so they can
+ * never cover a plant the camera has come to. Light shafts fall between
+ * them at the hour's own angle, and pools of light lie where they land.
+ * At most one plant is lit (§17.2); the walk opens on it when it exists,
+ * else on the family tended last.
+ *
+ * Plant names are wordless until approach — focus, peek, or the plant
+ * screen (Part 8.4) — but a grove is a PLACE, and places have names: a
+ * small signpost stands at each grove's mouth, and a quiet title card
+ * names the grove you have walked into, then fades (Part 16.4).
+ *
+ * The same drawing serves a session and a plant approach (Stage W4): the
+ * becalmed backdrop is this walk, its camera held on the tended family's
+ * own stand, so the wood a learner grows a tree in is never a second,
+ * different drawing of the same place.
  */
 
 import { listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
 import { listGardenSessions, listGardenSeeds, recordDiscoveries } from '../logic/store.js';
 import { visibleDiscoveries } from '../logic/discoveries.js';
-import { deriveBiomeScene, selectForegroundSlots } from '../logic/scene.js';
+import { deriveBiomeScene } from '../logic/scene.js';
 import { biomeBySlug } from '../logic/biomes.js';
+import { layoutWood, groveAt, GROVE_WIDTH, WOOD_ENTRANCE, WOOD_END } from '../logic/groves.js';
 import { pickAmbientEvent, hasNest } from '../logic/ambient.js';
 import { computeGroundTier } from '../logic/effort.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
@@ -39,6 +56,7 @@ import {
   litFace, shadeFace, shadowColor, SUN_OFFSET_SIGN,
   contactShadow, castShadow, castsShadow,
 } from '../logic/light.js';
+import { playGardenSound } from '../logic/audio.js';
 import { EMPTY_DAY_LINES, VALLEY_LINES, pick } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-plant.js';
@@ -73,7 +91,7 @@ export async function renderBiome(outlet, context, params) {
 
   const scene = deriveBiomeScene(families, sessions, biome.slug, Date.now(), seeds);
   const ground = computeGroundTier(sessions);
-  const shown = renderSceneHTML(outlet, biome, scene, ground);
+  const shown = renderWalk(outlet, biome, scene, ground);
 
   // Discoveries (Bible §9, 0.16.0): what the wood just showed is now seen —
   // recorded after the paint, never awaited by it, never announced.
@@ -89,71 +107,42 @@ export async function renderBiome(outlet, context, params) {
   }), 'rootwood');
 }
 
-/* ---- Phase V, Stage W3: the Rootwood cathedral's fixed geometry ----
-   (THE WORLD Part 10.2, 8.2, Appendix C.6). Coordinates are (x, y)
-   percentages of the scene frame, the exact convention Appendix C
-   states — nothing here is a pixel conversion, so it holds at any
-   rendered aspect ratio. */
+/* ---- Part 16.2: the walk's fixed geometry ----
+   Every coordinate here is in WOOD UNITS: one grove is 100 units wide and
+   one unit is one percent of the frame's width, so a grove is exactly one
+   frame; y is a percentage of frame height. Nothing is a pixel. */
 
-/** The seven working-set slots (Appendix C.6), keyed by name so the fill
- *  order below can address them directly. `scale` is the slot's own base
- *  scale (back/front/near — Part 8.5); `band` only changes the shadow's
- *  visual weight, never the game logic. */
-export const ROOTWOOD_SLOTS = Object.freeze({
-  S1: { x: 30, y: 60, scale: 0.8, band: 'back' },
-  S2: { x: 50, y: 58, scale: 0.8, band: 'back' },
-  S3: { x: 68, y: 61, scale: 0.8, band: 'back' },
-  S4: { x: 38, y: 70, scale: 1.0, band: 'front' }, // the lit plant's slot, always
-  S5: { x: 62, y: 69, scale: 1.0, band: 'front' },
-  S6: { x: 20, y: 80, scale: 1.15, band: 'near' },
-  S7: { x: 78, y: 81, scale: 1.15, band: 'near' },
-});
-/** Fill order (Part 8.5): the working-set rule's priority list lands here,
- *  first candidate to S4, and S4 is where "the lit plant, when present,
- *  always stands" — the two facts agree because lit is always priority 1.
- *  Exported: Stage W4 (session.js, plant.js) forces the plant the learner
- *  is actually looking at into S4 too — "the lit plant's slot" is, during
- *  a session or an approach, exactly the plant receiving the learner's
- *  whole attention, so the same seat is the right one. */
-export const ROOTWOOD_FILL_ORDER = ['S4', 'S5', 'S2', 'S6', 'S1', 'S3', 'S7'];
-
-/** A plant's height as a share of the frame's own height, at a slot's
- *  base scale of 1 (Part 8.2) — multiplied by the slot's scale for the
- *  final size. Ancient never reaches the foreground (Part 8.5), so it has
- *  no entry: it is always drawn at "horizon" size instead. */
+/** A plant's height as a share of the frame's own height at a stand's
+ *  base scale of 1 (Part 8.2, re-pinned in Part 16.2 so that a sprout is
+ *  legible from across the wood and an Ancient is unmistakably the
+ *  tallest thing in its grove) — multiplied by the stand's own scale.
+ *  Exported: session.js resizes the tended stand to the post-growth
+ *  stage's height in place. */
 export const STAGE_HEIGHT_PCT = Object.freeze({
-  open_ground: 2, seed: 2, sprout: 4, young: 9, in_leaf: 14, mature: 18,
+  open_ground: 6, seed: 6, sprout: 8, young: 12, in_leaf: 16.5, mature: 21, ancient: 28,
 });
-/** cat-plant's own foreground viewBox (120×130, cat-plant.js's #wrap) —
- *  used as an aspect-ratio, never as a computed width percentage: a
- *  slot's x/y map to different real units in a portrait frame, and only
- *  aspect-ratio lets the browser convert a height share into the correct
- *  width regardless of how the frame actually renders. */
+/** cat-plant's own foreground viewBox (120×130) as an aspect ratio — the
+ *  browser turns a height share into the right width whatever the frame. */
 export const CAT_PLANT_ASPECT = '120 / 130';
 
-/** The two great background trunks (§5.3, Part 10.2): x position and
- *  width as a share of frame width, rising from the floor past the
- *  frame's own top edge — "trees taller than the screen." */
-const GREAT_TRUNKS = Object.freeze([
-  { x: 15, width: 7 },
-  { x: 78, width: 9 },
-]);
+/** Parallax rates (Part 16.3): the far wood drifts at a third of the
+ *  floor's speed, the old growth behind the stands at two thirds; the
+ *  floor, the stands and the great trunks move together. */
+const FAR_RATE = 0.32;
+const MID_RATE = 0.62;
 
-/** The three light shafts (§5.3): exactly three, falling through the
- *  trunk gaps (between and beside the two great trunks above). */
-const SHAFT_X = Object.freeze([24, 48, 70]);
-const SHAFT_WIDTH_PCT = 8;
-const SHAFT_TOP_Y = 12;
-const SHAFT_FALL = 65;
-/** 55° from horizontal at dawn/dusk (long and raking, §5.1); 75°
- *  (near-vertical) by day; absent at night. cot(angle) is the shaft's
- *  horizontal lean per unit of height fallen. */
+/** The light shafts (§5.3): two per grove, one at the entrance, falling
+ *  from the ceiling to the floor at the hour's own angle. */
+const SHAFT_TOP_Y = 10;
+const SHAFT_FALL = 68;
+const SHAFT_WIDTH = 8;
 const SHAFT_TILT = Object.freeze({
   dawn: 1 / Math.tan((55 * Math.PI) / 180),
   morning: 1 / Math.tan((75 * Math.PI) / 180),
   afternoon: 1 / Math.tan((75 * Math.PI) / 180),
   dusk: 1 / Math.tan((55 * Math.PI) / 180),
 });
+const GROVE_SHAFT_X = Object.freeze([38, 104]);
 
 /** The ceiling's two sky-holes: fixed coordinates, never improvised. */
 const SKY_HOLES = Object.freeze([
@@ -161,23 +150,9 @@ const SKY_HOLES = Object.freeze([
   { x: 62, y: 5, rx: 5, ry: 2.6 },
 ]);
 
-/** The mid-wood band (Part 8.5, 10.2, y30–45%): unlabelled canopy masses
- *  standing in for every Mature family the seven slots had no room for.
- *  Authored once, in reveal order, never random (Part 7.2) — the wood
- *  only ever deepens, never rearranges. No Appendix C table exists for
- *  this band beyond its own y-span, so this is a modest, hand-placed set
- *  at cathedral zoom, kept clear of the two great trunks and the working
- *  set below it (Guide 5.4: fewer, considered shapes, not a crowd). */
-const MID_WOOD_SLOTS = Object.freeze([
-  { x: 22, y: 33, r: 7 }, { x: 44, y: 38, r: 6.5 }, { x: 58, y: 32, r: 6 },
-  { x: 33, y: 42, r: 6 }, { x: 68, y: 40, r: 6.5 }, { x: 27, y: 37, r: 5 },
-  { x: 51, y: 44, r: 5.5 }, { x: 62, y: 35, r: 5 },
-]);
-
-/** THE WORLD Part 6.5's Rootwood-scene pigments — kept here as literal
- *  hex (mirroring overlook.js's own ROOTWOOD_ROW_COLOR precedent) because
- *  litFace()/shadeFace() need a raw hex to compute from, not a CSS custom
- *  property. Values match tokens.css's --garden-rootwood-* exactly. */
+/** THE WORLD Part 6.5's Rootwood-scene pigments as literal hex (mirroring
+ *  overlook.js's precedent) because litFace()/shadeFace() compute from a
+ *  raw hex. Values match tokens.css's --garden-rootwood-* exactly. */
 const CANOPY_STACK = ['#3E6B4B', '#2E5440', '#24463A'];
 const TRUNK_BASE = '#6F5B48';
 const SHAFT_BASE = '#F3E9C2';
@@ -190,121 +165,106 @@ function seedFrom(id) {
   return h >>> 0;
 }
 
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const f1 = (n) => (Math.round(n * 10) / 10).toString();
+
 /**
- * The cathedral's whole `.grove-scene` markup (Part 10.2): the canopy
- * ceiling, the two great trunks, the light shafts, the mid-wood, the
- * ground, the horizon, the working-set slots. The single assembly point
- * for the scene's paint — the biome screen calls it interactively, and
- * Stage W4 (session.js, plant.js) calls it again as a becalmed backdrop,
- * so the wood a learner tends inside is never a second, different
- * drawing of the same place.
+ * The whole `.grove-scene` markup for the walk (Part 16): the fixed
+ * ceiling and air, the far wood, the scrolling floor with every stand
+ * and sign on it, the great trunks in front, the ambient layer, and the
+ * title card. The single assembly point for the wood's paint — the biome
+ * screen calls it interactively, and Stage W4 (session.js, plant.js)
+ * calls it again as a becalmed backdrop with the camera held on one
+ * family.
  * @param {object} biome
  * @param {object} ground  computeGroundTier()'s result
  * @param {object} atmo  atmosphereFor()'s result
- * @param {{horizon: Array, foreground: Array, overflowMature: Array,
- *           askingId: string|null, openSeedId: string|null}} slots
- *        already-decided occupancy — the ordinary biome screen computes
- *        this with selectForegroundSlots; a session/approach screen
- *        computes its own (the tended/focused family pinned to S4, or to
- *        the horizon if it is already Ancient) and passes it in, so this
- *        function itself never has to know which caller it is.
+ * @param {{plants: Array, askingId: string|null, openSeedId: string|null,
+ *           wood: ReturnType<typeof layoutWood>}} scene
  * @param {{interactive?: boolean, ambientEvent?: string|null,
- *           focusId?: string|null}} [opts]  `interactive` draws the
- *        sky-tap-to-ascend affordance (the biome screen only — a
- *        becalmed backdrop is never itself a tap target, Bible §11.6:
- *        "ambient motion pauses during a session"); `focusId` marks
- *        whichever plant is the tended/approached one with
- *        `data-tended-plant`, so session.js can find it again to grow it
- *        in place.
+ *           focusId?: string|null, cameraX?: number}} [opts]
+ *        `interactive` draws the sky-tap, the title card and lets the
+ *        walk scroll; a becalmed backdrop (a session, an approach) is
+ *        never itself a tap target (Bible §11.6). `focusId` marks the
+ *        tended/approached plant with `data-tended-plant` so session.js
+ *        can grow it in place. `cameraX` is the wood unit the frame's
+ *        left edge starts at (clamped to the wood).
  */
-export function groveSceneHTML(biome, ground, atmo, { horizon, foreground, overflowMature, askingId, openSeedId }, opts = {}) {
-  const { interactive = true, ambientEvent = null, focusId = null } = opts;
-  // A non-interactive ground layer is, by construction, always Stage W4's
-  // becalmed backdrop (Part 10.3): a session or a plant approach, never the
-  // ordinary biome screen. Becalming here — rather than asking every caller
-  // to remember a separate flag — keeps "non-interactive" and "becalmed"
-  // one fact instead of two that could drift apart.
+export function groveSceneHTML(biome, ground, atmo, scene, opts = {}) {
+  const { interactive = true, ambientEvent = null, focusId = null, cameraX = 0 } = opts;
+  const { plants, askingId, openSeedId, wood } = scene;
   const becalmed = !interactive;
-  const wash = becalmed ? ` style="--becalm-wash-color:${shadowColor(atmo.time)};"` : '';
-  // Stage W6 — the cathedral's own share of the authored inventory (THE
-  // WORLD Part 7, Appendix C.5's *in-scene* marks): the fern banks that
-  // fill the floor's edges at Flourishing, and at Lush the old stump with
-  // the carved stone beside it — Part 7.4's one environmental story that
-  // Appendix C actually gives a coordinate of its own (C.6).
-  const inScene = inSceneRootwoodPropsSVG(
-    revealedProps({ tier: ground.tier, scene: 'rootwood', season: atmo.season, time: atmo.time, weather: atmo.weather }),
-    revealedStories({ tier: ground.tier, scene: 'rootwood' }),
-  );
+  const W = wood.width;
+  const cam = clamp(cameraX, 0, Math.max(0, W - 100));
+  const farW = W * FAR_RATE + 100;
+  const midW = W * MID_RATE + 100;
+  // A becalmed scene cannot scroll, so its camera is a pure CSS shift: the
+  // track moves by `cam` units of frame, and each parallax layer by its
+  // own rate — expressed as a share of that layer's own width.
+  const shift = (units, layerW) => ` transform:translateX(${f1(-(units / layerW) * 100)}%);`;
+  const trackStyle = `width:${W}%;${becalmed ? shift(cam, W) : ''}`;
+  const farStyle = `width:${f1(farW)}%;${becalmed ? shift(cam * FAR_RATE, farW) : ''}`;
+  const midStyle = `width:${f1(midW)}%;${becalmed ? shift(cam * MID_RATE, midW) : ''}`;
+  const wash = becalmed ? ` --becalm-wash-color:${shadowColor(atmo.time)};` : '';
+
   return `
-    <div class="grove-scene grove-scene--cathedral${becalmed ? ' grove-scene--becalmed' : ''}" data-time="${atmo.time}" data-season="${atmo.season}" data-weather="${atmo.weather}"${wash}>
-      ${interactive ? `<button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>` : ''}
-      <!-- The earth the wood stands on (Guide 7.2's depth planes, at
-           biome scale): the mossy cathedral floor, THE WORLD Part
-           6.5's own pigments, beneath everything painted above it. -->
+    <div class="grove-scene grove-scene--wood${becalmed ? ' grove-scene--becalmed' : ''}"
+         data-time="${atmo.time}" data-season="${atmo.season}" data-weather="${atmo.weather}" data-tier="${ground.tier}"
+         style="--wood-w:${W};${wash}">
       <div class="grove-earth" aria-hidden="true"></div>
       ${atmo.time === 'night' ? '<div class="grove-night-sky" aria-hidden="true"></div>' : ''}
       ${weatherLayerHTML(atmo.weather)}
 
-      <!-- The cathedral's own structure (Part 10.2): the canopy
-           ceiling and its two sky-holes, the two great trunks rising
-           past the frame's top edge, the three light shafts falling
-           through the trunk gaps (§5.3), the mid-wood band standing in
-           for every Mature family the seven slots had no room for, and
-           the stream's single glint. A flat 0–100 percentage space,
-           stretched to the scene's own shape (never cropped), so it
-           shares one coordinate system with the slots positioned in
-           plain CSS below. -->
+      <!-- Overhead, fixed: the air of the wood and the canopy ceiling
+           (Part 10.2) — light through leaves, never paper. -->
       <svg class="grove-cathedral" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        ${airSVG(atmo)}
-        ${floorSVG(atmo)}
-        ${farWoodSVG(atmo)}
-        ${trunksSVG(atmo)}
+        ${airSVG()}
         ${ceilingSVG(atmo)}
         ${atmo.time === 'dawn' ? dawnMistSVG() : ''}
-        ${shaftsSVG(atmo)}
-        ${midWoodSVG(overflowMature.length, atmo)}
-        ${inScene}
-        ${streamGlintSVG()}
-        ${atmo.time === 'night' ? nightFirefliesSVG() : ''}
       </svg>
 
-      <div class="grove-ground grove-ground--${ground.tier}" aria-hidden="true">${groundMarkup(ground.tier)}</div>
-      ${horizon.length ? `<div class="grove-horizon" aria-hidden="true">
-        ${horizon.map((p) => {
-          const id = p.family.meta.id;
-          const isFocus = id === focusId;
-          const plant = `<cat-plant size="horizon" stage="ancient" ${isFocus ? 'data-tended-plant' : ''} ${p.state.landmark ? 'landmark' : ''}></cat-plant>`;
-          // Names on approach only (Part 8.4): cat-plant's own standing
-          // name plate (its foreground #wrap()) is legible at close range
-          // but is never drawn by its horizon silhouette — a name plate on
-          // a 3px-tall distant shape wouldn't read, so the ordinary far
-          // view is correctly wordless even for a Landmark. On APPROACH
-          // (10.4) the camera closes in and every focused plant gets its
-          // name regardless, Landmark or not — that courtesy is this
-          // wrapper's job specifically, not a duplicate of the (distance-
-          // only) standing plate.
-          return isFocus
-            ? `<span class="grove-horizon__focus">${plant}<span class="grove-plant__name grove-plant__name--horizon">${escapeHTML(p.family.root.label)}</span></span>`
-            : plant;
-        }).join('')}
-      </div>` : ''}
-      <div class="grove-ambient" aria-hidden="true">${ambientEvent ? ambientMarkup(ambientEvent) : ''}</div>
-
-      <div class="grove-slots">
-        ${renderSlotsBackToFront(foreground, askingId, openSeedId, atmo, focusId)}
+      <!-- Far: the old growth behind everything, drifting slowly. -->
+      <div class="grove-par grove-par--far" data-par="far" style="${farStyle}" aria-hidden="true">
+        <svg viewBox="0 0 ${f1(farW)} 100" preserveAspectRatio="none">${farWoodSVG(farW, atmo)}</svg>
       </div>
+
+      <!-- Mid: the old growth behind the stands — unlabelled crowns, the
+           wood that was here before the learner, passing at two thirds. -->
+      <div class="grove-par grove-par--mid" data-par="mid" style="${midStyle}" aria-hidden="true">
+        <svg viewBox="0 0 ${f1(midW)} 100" preserveAspectRatio="none">${midWoodSVG(midW, atmo)}</svg>
+      </div>
+
+      <!-- The walk: the floor and everything standing on it. -->
+      <div class="grove-walk${interactive ? ' grove-walk--live' : ''}" id="grove-walk" aria-label="${escapeHTML(biome.name)}">
+        <div class="grove-track" id="grove-track" style="${trackStyle}">
+          ${interactive ? `<button class="grove-sky" id="biome-sky" aria-label="${escapeHTML(VALLEY_LINES.toValley)}" tabindex="-1"></button>` : ''}
+          <svg class="grove-floor" viewBox="0 0 ${W} 100" preserveAspectRatio="none" aria-hidden="true">
+            ${floorSVG(W, wood, atmo, ground)}
+          </svg>
+          <div class="grove-slots">
+            ${signsHTML(wood, plants)}
+            ${standsHTML(plants, wood, askingId, openSeedId, atmo, focusId)}
+          </div>
+          <!-- The great trunks: doorposts between the groves, taller than
+               the screen, on the floor with everything else. -->
+          <svg class="grove-floor grove-doorposts" viewBox="0 0 ${W} 100" preserveAspectRatio="none" aria-hidden="true">
+            ${trunksSVG(W, wood, atmo)}
+          </svg>
+        </div>
+      </div>
+
+      <div class="grove-ambient" aria-hidden="true">${ambientEvent ? ambientMarkup(ambientEvent) : ''}</div>
+      ${interactive ? '<div class="grove-title" id="grove-title" aria-live="polite"></div>' : ''}
     </div>
   `;
 }
 
 /**
- * A becalmed ground-layer backdrop with ONE specific family pinned into
- * the foreground's S4 seat (or the horizon, if it is already Ancient) —
- * Stage W4's shared staging for a session (Part 10.3) and a plant
- * approach (Part 10.4): the plant the learner's whole attention is on
- * stands exactly where the world would keep it, and the rest of the
- * scene renders exactly as the biome screen would show it right now.
- * Returns '' when the family has no living biome yet.
+ * A becalmed backdrop with the camera held on ONE specific family's own
+ * stand — Stage W4's shared staging for a session (Part 10.3) and a
+ * plant approach (Part 10.4). The rest of the wood renders exactly as
+ * the biome screen would show it right now. Returns '' when the family
+ * has no living biome yet.
  * @param {{family, state, history, biome}} focusedView  the plant view
  *        for the family being tended/approached — its `state` may be a
  *        display override (a session's "about to grow" seed stand-in)
@@ -314,27 +274,30 @@ export function focusedGroveSceneHTML(biome, ground, atmo, allFamilies, allSessi
   if (!biome || biome.status !== 'living') return '';
   const scene = deriveBiomeScene(allFamilies, allSessions, biome.slug, Date.now(), seeds);
   const focusId = focusedView.family.meta.id;
-  const others = scene.plants.filter((p) => p.family.meta.id !== focusId);
-  const nonAncientOthers = others.filter((p) => p.state.stage !== 'ancient');
-  const horizonOthers = others.filter((p) => p.state.stage === 'ancient');
-
-  let horizon, foreground, overflowMature;
-  if (focusedView.state.stage === 'ancient') {
-    horizon = [...horizonOthers, focusedView];
-    ({ foreground, overflowMature } = selectForegroundSlots(nonAncientOthers, scene.askingId, ROOTWOOD_FILL_ORDER.length));
-  } else {
-    horizon = horizonOthers;
-    const sel = selectForegroundSlots(nonAncientOthers, scene.askingId, ROOTWOOD_FILL_ORDER.length - 1);
-    foreground = [focusedView, ...sel.foreground];
-    overflowMature = sel.overflowMature;
-  }
-
+  const plants = scene.plants.map((p) => (p.family.meta.id === focusId ? focusedView : p));
+  if (!plants.some((p) => p.family.meta.id === focusId)) plants.push(focusedView);
+  const wood = layoutWood(plants.map((p) => p.family));
+  const stand = wood.stands.get(focusId);
+  const cameraX = stand ? stand.x - 50 : 0;
   return groveSceneHTML(biome, ground, atmo,
-    { horizon, foreground, overflowMature, askingId: scene.askingId, openSeedId: scene.openSeedId },
-    { interactive: false, focusId, ...opts });
+    { plants, askingId: scene.askingId, openSeedId: scene.openSeedId, wood },
+    { interactive: false, focusId, cameraX, ...opts });
 }
 
-function renderSceneHTML(outlet, biome, scene, ground) {
+/** Where the walk opens (Part 16.4): on the one lit plant when there is
+ *  one; else on the family tended most recently, so a learner returning
+ *  from a session finds the tree they just grew in front of them; else at
+ *  the wood's mouth. */
+function startingCamera(plants, wood, askingId) {
+  const focus = askingId
+    ? plants.find((p) => p.family.meta.id === askingId)
+    : [...plants].filter((p) => p.state.lastVisitedAt)
+      .sort((a, b) => (b.state.lastVisitedAt ?? '').localeCompare(a.state.lastVisitedAt ?? ''))[0];
+  const stand = focus ? wood.stands.get(focus.family.meta.id) : null;
+  return stand ? stand.x - 50 : 0;
+}
+
+function renderWalk(outlet, biome, scene, ground) {
   const { plants, askingId, openSeedId } = scene;
   const atmo = atmosphereFor();
   const sessionSeed = `biome:${biome.slug}:${new Date().toDateString()}`;
@@ -343,17 +306,15 @@ function renderSceneHTML(outlet, biome, scene, ground) {
   const landmarkCount = plants.filter((p) => p.state.landmark).length;
   const event = pickAmbientEvent({ bloomingCount, ancientCount, landmarkCount, groundTier: ground.tier });
 
-  const nonAncient = plants.filter((p) => p.state.stage !== 'ancient');
-  const horizon = plants.filter((p) => p.state.stage === 'ancient');
-  const { foreground, overflowMature } = selectForegroundSlots(nonAncient, askingId, ROOTWOOD_FILL_ORDER.length);
+  const wood = layoutWood(plants.map((p) => p.family));
+  const cameraX = startingCamera(plants, wood, askingId);
 
   outlet.innerHTML = `
     <section class="screen biome biome--enter">
       <button class="biome__ascend" id="biome-ascend" aria-label="${escapeHTML(VALLEY_LINES.toValley)}">
         <span aria-hidden="true">↑</span> ${escapeHTML(VALLEY_LINES.toValley)}
       </button>
-
-      ${groveSceneHTML(biome, ground, atmo, { horizon, foreground, overflowMature, askingId, openSeedId }, { ambientEvent: event })}
+      ${groveSceneHTML(biome, ground, atmo, { plants, askingId, openSeedId, wood }, { ambientEvent: event, cameraX })}
     </section>
   `;
 
@@ -367,14 +328,70 @@ function renderSceneHTML(outlet, biome, scene, ground) {
   outlet.querySelector('#biome-ascend').addEventListener('click', ascend);
   outlet.querySelector('#biome-sky').addEventListener('click', ascend);
 
-  // Tap opens a plant; a long press PEEKS at it — its key and members, without
-  // entering — and it is gone the moment you release (Bible §14.2). Peek is an
-  // enhancement, never required (Principle 110): a plain tap still shows all.
+  // Tap opens a plant (or a root-stone); a long press PEEKS at it — its key
+  // and members, without entering — and it is gone the moment you release
+  // (Bible §14.2). Peek is an enhancement, never required (Principle 110).
   const plantsById = new Map(plants.map((p) => [p.family.meta.id, p]));
   for (const el of outlet.querySelectorAll('[data-plant-id]')) {
     wirePlant(el, plantsById.get(el.dataset.plantId));
   }
+
+  wireWalk(outlet, wood, cameraX);
   return { atmo, event };
+}
+
+/**
+ * The walk itself (Part 16.3–16.4): the camera opens on its starting
+ * stand, the two parallax layers follow the hand, and the title card
+ * names each grove as its centre crosses the frame's centre — once per
+ * grove entered, never on every scroll tick.
+ */
+function wireWalk(outlet, wood, cameraX) {
+  const walk = outlet.querySelector('#grove-walk');
+  const far = outlet.querySelector('[data-par="far"]');
+  const mid = outlet.querySelector('[data-par="mid"]');
+  const title = outlet.querySelector('#grove-title');
+  if (!walk) return;
+  const unit = () => walk.clientWidth / 100;
+  const cam = clamp(cameraX, 0, Math.max(0, wood.width - 100));
+  walk.scrollLeft = cam * unit();
+
+  let current = null;
+  let first = true;
+  const nameGrove = (scrollLeft) => {
+    const centre = scrollLeft / unit() + 50;
+    const g = groveAt(centre, wood.groves);
+    const slug = g ? g.grove.slug : null;
+    if (slug === current) return;
+    current = slug;
+    if (!title) return;
+    if (!g) { title.classList.remove('is-shown'); return; }
+    title.innerHTML = `
+      <p class="grove-title__name">${escapeHTML(g.grove.name)}</p>
+      <p class="grove-title__line">${escapeHTML(g.grove.line)}</p>`;
+    title.classList.remove('is-shown');
+    void title.offsetWidth; // restart the card's own fade
+    title.classList.add('is-shown');
+    // Walking into a grove sounds like one soft leaf — the wood's own
+    // register, never a chime for arriving (Bible §10.5). The opening
+    // grove is silent: the descent already paid for the arrival.
+    if (!first) playGardenSound('leafTap');
+    first = false;
+  };
+
+  let raf = 0;
+  const onScroll = () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = 0;
+      const s = walk.scrollLeft;
+      if (far) far.style.transform = `translateX(${(-s * FAR_RATE).toFixed(1)}px)`;
+      if (mid) mid.style.transform = `translateX(${(-s * MID_RATE).toFixed(1)}px)`;
+      nameGrove(s);
+    });
+  };
+  walk.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
 function wirePlant(el, plant) {
@@ -421,119 +438,125 @@ function hidePeek(el) {
   el.querySelector('.grove-peek')?.remove();
 }
 
+/** A quiet line floating low in the wood (never below the fold): the
+ *  nothing-due day, or the one seed that is ready. */
 function appendNote(outlet, text) {
   const note = document.createElement('p');
-  note.className = 'grove-note';
+  note.className = 'grove-note grove-note--float';
   note.textContent = text;
-  outlet.querySelector('.biome').appendChild(note);
+  outlet.querySelector('.grove-scene').appendChild(note);
 }
 
-/** Two adjacent slots can sit close enough (Appendix C.6's own spacing)
- *  that a large Mature plant in one visually reaches a smaller neighbour
- *  in another. Painting back-to-front — not in the fill-priority order
- *  candidates were chosen in — means whichever slot is genuinely nearer
- *  the viewer is also the one drawn on top, so it is the one a tap
- *  actually reaches wherever the two overlap: correct occlusion and
- *  predictable interaction from the same ordering, never a fill-order
- *  accident deciding which plant a tap lands on. */
-const ROOTWOOD_BACK_TO_FRONT = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7'];
-
-function renderSlotsBackToFront(foreground, askingId, openSeedId, atmo, focusId = null) {
-  const bySlotName = new Map();
-  foreground.forEach((p, i) => bySlotName.set(ROOTWOOD_FILL_ORDER[i], p));
-  return ROOTWOOD_BACK_TO_FRONT
-    .filter((name) => bySlotName.has(name))
-    .map((name) => plantSlotHTML(bySlotName.get(name), ROOTWOOD_SLOTS[name], askingId, openSeedId, atmo, focusId))
-    .join('');
-}
+/* ---- The stands (Part 16.2) ---- */
 
 /**
- * One foreground plant, standing in its authored slot (Appendix C.6):
- * positioned and sized in plain percentages (base-anchored, so the
- * slot's (x, y) is where the plant meets the ground), with a contact
- * shadow and a small undergrowth tuft at its base (Part 10.2), and its
- * name wordless until approach — focus, peek, or the plant screen (Part
- * 8.4), never printed permanently on the wood.
+ * Every family, standing in its own stand: a `<cat-plant>` for anything
+ * that has begun to grow (or the one plant being tended, whatever its
+ * display stage), a root-stone for open ground and for a seed carried
+ * back through the Gate. Painted back to front by row so a nearer plant
+ * is the one a tap actually reaches wherever two overlap.
  */
-function plantSlotHTML(p, slot, askingId, openSeedId, atmo, focusId = null) {
+function standsHTML(plants, wood, askingId, openSeedId, atmo, focusId) {
+  const placed = plants
+    .map((p) => ({ p, stand: wood.stands.get(p.family.meta.id) }))
+    .filter(({ stand }) => !!stand)
+    .sort((a, b) => a.stand.y - b.stand.y);
+  return placed.map(({ p, stand }) => standHTML(p, stand, wood.width, askingId, openSeedId, atmo, focusId)).join('');
+}
+
+function standHTML(p, stand, W, askingId, openSeedId, atmo, focusId) {
   const id = p.family.meta.id;
   const isAsking = id === askingId;
   const isOpenSeed = id === openSeedId;
   const isFocus = id === focusId;
+  const stage = p.state.stage;
+  const stone = !isFocus && (stage === 'open_ground' || stage === 'seed');
   const nest = hasNest(p.state);
-  const heightPct = (STAGE_HEIGHT_PCT[p.state.stage] ?? STAGE_HEIGHT_PCT.open_ground) * slot.scale;
+  const heightPct = (STAGE_HEIGHT_PCT[stage] ?? STAGE_HEIGHT_PCT.open_ground) * stand.scale;
   const shadowShift = (SUN_OFFSET_SIGN[atmo.time] ?? 0) * 15;
   // The accessible name conveys the plant's NAME and, where it matters, its
   // invitation — never its growth stage (§16.3). Sighted learners read the
   // stage from the plant's form; screen-reader learners hear what to do.
   const aria = isAsking
     ? `${p.family.root.label}, ready to tend`
-    : isOpenSeed
+    : (stage === 'open_ground' || stage === 'seed')
       ? `${p.family.root.label}, open ground`
       : p.family.root.label;
   // data-slot-scale: Stage W4's in-place growth (session.js) needs this
-  // slot's own scale back to resize the container to the post-growth
-  // stage's height without re-deriving which slot the plant stands in.
-  const style = `left:${slot.x}%; bottom:${(100 - slot.y).toFixed(2)}%; height:${heightPct.toFixed(2)}%; aspect-ratio:${CAT_PLANT_ASPECT};`
-    + ` --slot-shadow-color:${shadowColor(atmo.time)}; --slot-shadow-shift:${shadowShift.toFixed(0)}%;`;
+  // stand's own scale back to resize the container to the post-growth
+  // stage's height without re-deriving which stand the plant is in.
+  const style = `left:${f1((stand.x / W) * 100)}%; bottom:${f1(100 - stand.y)}%; height:${f1(heightPct)}%; aspect-ratio:${CAT_PLANT_ASPECT};`
+    + ` z-index:${Math.round(stand.y)}; --slot-shadow-color:${shadowColor(atmo.time)}; --slot-shadow-shift:${shadowShift.toFixed(0)}%;`;
+  const art = stone
+    ? rootStoneSVG(id, stage === 'seed', atmo)
+    : `<cat-plant stage="${stage}" due="${p.state.due}" ${nest ? 'nest' : ''} ${isFocus ? 'data-tended-plant' : ''}
+        ${p.state.landmark ? `landmark name="${escapeHTML(p.family.root.label)}"` : ''}
+        season="${escapeHTML(atmo.season)}" seed="${escapeHTML(id)}" vigor="${p.state.vigor}"></cat-plant>`;
   return `
-    <button class="grove-plant grove-plant--slot grove-plant--${slot.band} ${isAsking ? 'grove-plant--asking' : ''} ${isOpenSeed ? 'grove-plant--invite' : ''}"
-            data-plant-id="${id}" data-slot-scale="${slot.scale}" aria-label="${escapeHTML(aria)}" style="${style}">
+    <button class="grove-plant grove-plant--slot grove-plant--${stand.band}${stone ? ' grove-plant--stone' : ''}${isAsking ? ' grove-plant--asking' : ''}${isOpenSeed ? ' grove-plant--invite' : ''}${stage === 'ancient' ? ' grove-plant--ancient' : ''}"
+            data-plant-id="${id}" data-slot-scale="${stand.scale}" data-grove="${stand.grove.slug}" aria-label="${escapeHTML(aria)}" style="${style}">
       <span class="grove-plant__shadow" aria-hidden="true"></span>
-      <span class="grove-plant__tuft" aria-hidden="true"></span>
-      <span class="grove-plant__art">
-        <cat-plant stage="${p.state.stage}" due="${p.state.due}" ${nest ? 'nest' : ''} ${isFocus ? 'data-tended-plant' : ''}
-          season="${escapeHTML(atmo.season)}" seed="${escapeHTML(id)}" vigor="${p.state.vigor}"></cat-plant>
-      </span>
+      ${stone ? '' : '<span class="grove-plant__tuft" aria-hidden="true"></span>'}
+      <span class="grove-plant__art">${art}</span>
       <span class="grove-plant__name">${escapeHTML(p.family.root.label)}</span>
     </button>
   `;
 }
 
-/** The Ground (§4.3, Roadmap 3.2): a fixed, never-random set of positions
- *  so the floor looks the same on every visit, and MARK_COUNT_BY_TIER just
- *  reveals more of the same list as lifetime effort accumulates — nothing
- *  ever rearranges, it only thickens. Positions are percentages of the
- *  scene, kept low and to the sides so they never sit under a plant. */
-const GROUND_MARKS = [
-  { x: 8, y: 88, kind: 'moss' },
-  { x: 91, y: 85, kind: 'moss' },
-  { x: 18, y: 94, kind: 'wildflower' },
-  { x: 80, y: 92, kind: 'wildflower' },
-  { x: 4, y: 78, kind: 'fern' },
-  { x: 95, y: 76, kind: 'fern' },
-  { x: 30, y: 96, kind: 'wildflower' },
-  { x: 66, y: 95, kind: 'moss' },
-];
-const MARK_COUNT_BY_TIER = { bare: 0, tended: 2, growing: 4, flourishing: 6, lush: 8 };
-
-function groundMarkup(tier) {
-  const n = MARK_COUNT_BY_TIER[tier] ?? 0;
-  return GROUND_MARKS.slice(0, n)
-    .map((m) => `<span class="grove-mark grove-mark--${m.kind}" style="left:${m.x}%; top:${m.y}%"></span>`)
-    .join('');
+/**
+ * A root-stone (Part 16.2): open ground, drawn as a place rather than an
+ * absence — a small pale stone half-sunk in moss with two blades of grass,
+ * the root's name on approach only. Never a padlock, never a price, never
+ * a hole (Bible §6.2 stage 0). A seed carried back through the Gate adds
+ * the seed itself, pressed into the earth beside the stone. Drawn in
+ * cat-plant's own 120×130 box so it stands in a stand exactly as a plant
+ * does, and leans by its seed like everything else in the wood.
+ */
+function rootStoneSVG(id, hasSeed, atmo) {
+  const lean = ((seedFrom(`stone-${id}`) % 100) / 100 - 0.5) * 8;
+  const cx = 60 + lean;
+  const lit = litFace('#B8B09E', atmo.time);
+  const shade = shadeFace('#8E8677', atmo.time);
+  return `
+    <svg viewBox="0 0 120 130" role="img" aria-hidden="true" class="grove-stone">
+      <ellipse cx="60" cy="122" rx="24" ry="4.6" fill="#4A3B2A" opacity="0.22"/>
+      <ellipse cx="${f1(cx - 8)}" cy="121" rx="19" ry="4" class="grove-stone__moss"/>
+      <path d="M${f1(cx - 17)},120 Q${f1(cx - 19)},104 ${f1(cx - 4)},101 Q${f1(cx + 14)},99 ${f1(cx + 18)},112 Q${f1(cx + 19)},120 ${f1(cx + 10)},121 Z" fill="${shade}"/>
+      <path d="M${f1(cx - 15)},117 Q${f1(cx - 16)},105 ${f1(cx - 4)},103 Q${f1(cx + 8)},101 ${f1(cx + 12)},110 Q${f1(cx + 2)},112 ${f1(cx - 15)},117 Z" fill="${lit}"/>
+      <path d="M${f1(cx + 22)},121 q1,-7 3,-11 M${f1(cx + 25)},121 q0,-5 2.5,-8 M${f1(cx - 22)},121 q-1,-6 -3,-9" class="grove-stone__grass"/>
+      ${hasSeed ? `<ellipse cx="${f1(cx + 24)}" cy="119.5" rx="3.6" ry="2.2" class="grove-stone__seed"/>` : ''}
+    </svg>`;
 }
 
-/** The scene's own frame width, in the units the ambient layer sizes its
- *  creatures against. The cathedral is a portrait frame roughly 360 units
- *  wide at the same scale the Overlook uses, so the roster's shares of
- *  frame width resolve to the same real sizes in both scenes — a butterfly
- *  is the same butterfly whether the learner is on the hill or in the wood. */
-const SCENE_FRAME_WIDTH = 360;
+/** The signposts (Part 16.4): one at each grove's mouth — a post and a
+ *  board, the grove's name on it in the world's own serif. A grove whose
+ *  every family is at least Mature carries a garland on its board: the one
+ *  line "This grove is grown" is the sign, not a sentence. */
+function signsHTML(wood, plants) {
+  const stateById = new Map(plants.map((p) => [p.family.meta.id, p.state]));
+  return wood.groves.map((g) => {
+    const grown = g.families.length > 0 && g.families.every((f) => {
+      const s = stateById.get(f.meta.id)?.stage;
+      return s === 'mature' || s === 'ancient';
+    });
+    const x = ((g.left + 15) / wood.width) * 100;
+    return `
+      <div class="grove-sign${grown ? ' grove-sign--grown' : ''}" style="left:${f1(x)}%" aria-hidden="true">
+        <svg viewBox="0 0 60 46" class="grove-sign__post">
+          <path d="M29,46 L29,19" class="grove-sign__pole"/>
+          <path d="M3,7 L56,5 L57,19 L4,20 Z" class="grove-sign__board"/>
+          <path d="M3,7 L56,5" class="grove-sign__edge"/>
+          ${grown ? '<path d="M6,8 q7,-5 14,0 q7,-5 14,0 q7,-5 14,0 q3,-2 5,0" class="grove-sign__garland"/>' : ''}
+        </svg>
+        <span class="grove-sign__name">${escapeHTML(g.grove.name.replace(/^The Grove of /, ''))}</span>
+      </div>`;
+  }).join('');
+}
 
-/**
- * One ambient visitor, drawn (THE WORLD Part 9.1, Stage W6's fauna
- * redraw). Until this stage each of these was a TYPOGRAPHIC GLYPH — the
- * butterfly was the character ❋, the bird was ◜, the firefly was a bullet
- * point. Part 9.1 requires "one to three soft masses, no outlines, no
- * faces," and a glyph is none of those things: it carries a font's own
- * hand, an outline, and no silhouette the world could ever own. Every
- * visitor is now masses from the pinned roster.
- *
- * Two of the five events are not creatures at all and keep their own
- * markup: a falling petal and a leaf-stir are the WOOD moving, not
- * something living in it.
- */
+/** One ambient visitor, drawn from the roster (THE WORLD Part 9.1). Two
+ *  of the five events are not creatures at all: a falling petal and a
+ *  leaf-stir are the WOOD moving, not something living in it. */
+const SCENE_FRAME_WIDTH = 360;
 function ambientMarkup(event) {
   const CREATURE = { bird: 'bird', butterfly: 'butterfly-white', firefly: 'firefly' };
   if (CREATURE[event]) {
@@ -554,13 +577,11 @@ function ambientMarkup(event) {
   return '';
 }
 
-/* ---- The cathedral's painted structure (THE WORLD Part 10.2, §5.2–5.3) ---- */
+/* ---- The wood's painted structure (THE WORLD Part 10.2, 16.3, §5.2–5.3) ---- */
 
-/** The air of the wood (0.16.0, THE WORLD 1.2.0): what shows between the
- *  trunks is not paper but LIGHT THROUGH LEAVES — deep canopy shade at
- *  the top, a luminous green-gold band where the shafts land, re-toned
- *  per hour by CSS on the gradient's stops (the same device the Overlook
- *  sky uses). Painted first, under everything. */
+/** The air of the wood: what shows between the trunks is LIGHT THROUGH
+ *  LEAVES — deep canopy shade at the top, a luminous green-gold band
+ *  where the shafts land, re-toned per hour by CSS on the stops. */
 function airSVG() {
   return `
     <defs>
@@ -573,138 +594,24 @@ function airSVG() {
     <rect class="grove-air" x="0" y="0" width="100" height="62" fill="url(#grove-air-grad)"/>`;
 }
 
-/** The cathedral floor, painted in the SVG (0.16.0): a far slope from the
- *  wood's edge, a nearer mossy floor, the pools of light where the three
- *  shafts land (never at night), and a fixed line of undergrowth along
- *  the bottom edge — the floor the working set stands on. Replaces the
- *  two flat DOM bands of Phase 4.9, which sat under the SVG and could
- *  not take light. */
-function floorSVG(atmo) {
-  const night = atmo.time === 'night';
-  const tilt = SHAFT_TILT[atmo.time];
-  const sign = SUN_OFFSET_SIGN[atmo.time] ?? 0;
-  const dx = tilt === undefined ? 0 : SHAFT_FALL * tilt * sign;
-  const pools = night ? '' : SHAFT_X.map((x, i) =>
-    `<ellipse class="grove-light-pool" cx="${(x + dx).toFixed(1)}" cy="${(SHAFT_TOP_Y + SHAFT_FALL + 3 + i * 4).toFixed(1)}" rx="${(6.5 + i * 1.2).toFixed(1)}" ry="${(1.6 + i * 0.4).toFixed(1)}"/>`).join('');
-  const tufts = [4, 11, 19, 31, 42, 55, 63, 71, 84, 93].map((x, i) => {
-    const h = 3 + (i % 3) * 1.2;
-    const lean = (i % 2 ? 1 : -1) * 0.8;
-    return `<path class="grove-undergrowth" d="M${x},100 q${lean},${(-h * 0.6).toFixed(1)} ${(lean * 1.6).toFixed(1)},${-h} M${x + 1.6},100 q${-lean},${(-h * 0.5).toFixed(1)} ${(-lean * 1.4).toFixed(1)},${(-h * 0.8).toFixed(1)}"/>`;
-  }).join('');
-  return `
-    <path class="grove-floor-far" d="M0,60 Q22,54 50,56 Q78,58 100,55 L100,100 L0,100 Z"/>
-    <path class="grove-floor-near" d="M0,80 Q30,74 52,77 Q76,80 100,76 L100,100 L0,100 Z"/>
-    ${pools}
-    <g class="grove-undergrowth-line">${tufts}</g>`;
-}
-
-/** The old-growth horizon behind the working set (Bible §4.1: "behind
- *  them a horizon of old growth") — a fixed row of deep silhouettes at
- *  the wood's far edge, cooler and paler than the mid-wood (aerial
- *  perspective inside the wood). It stands from day one: the wood is
- *  older than the learner, and the learner's own trees join it. */
-function farWoodSVG() {
-  // Distant trunks first — trees taller than the screen, seen through the
-  // air behind the two great trunks — then the old-growth crowns at the
-  // wood's far edge. All fixed; all a little cooler than the mid-wood.
-  const TRUNKS = [[8, 1.4], [35, 1.8], [59, 1.2], [90, 1.6]];
-  const TREES = [[6, 55, 5], [26, 53, 6], [44, 55, 4.8], [57, 53, 5.6], [73, 55, 4.4], [92, 54, 5.4]];
-  return `<g class="grove-far-wood" aria-hidden="true">
-    ${TRUNKS.map(([x, w]) => `<path class="grove-far-column" d="M${x},10 L${x},58" style="stroke-width:${w}"/>`).join('')}
-    ${TREES.map(([x, y, r]) => `
-      <path class="grove-far-trunk" d="M${x},${y + r * 0.5} L${x},${(y + r * 1.5).toFixed(1)}"/>
-      <ellipse cx="${x}" cy="${y}" rx="${r}" ry="${(r * 1.35).toFixed(1)}"/>
-      <ellipse cx="${(x - r * 0.35).toFixed(1)}" cy="${(y - r * 0.6).toFixed(1)}" rx="${(r * 0.5).toFixed(1)}" ry="${(r * 0.65).toFixed(1)}"/>`).join('')}
-  </g>`;
-}
-
-/** The two great background trunks: trees taller than the screen, which
- *  is the entire feeling of the biome (Part 10.2). A tapering two-tone
- *  mass (warm lit face, cool shade face, §5.2), grounded by the same
- *  contact/cast shadow pair every standing object gets — and, since
- *  0.16.0, with a root flare at the floor and a few bark lines, so the
- *  trunk is a tree and not a column. */
-function trunksSVG(atmo) {
-  return GREAT_TRUNKS.map(({ x, width }) => {
-    const lit = litFace(TRUNK_BASE, atmo.time);
-    const shade = shadeFace(TRUNK_BASE, atmo.time);
-    const halfW = width / 2;
-    const topW = width * 0.62;
-    const midX = x - halfW * 0.12;
-    const bark = [18, 41, 63, 84].map((y, i) => {
-      const bx = x - halfW * 0.5 + (i % 2) * halfW * 0.7;
-      return `<path class="grove-bark" d="M${bx.toFixed(1)},${y} q0.3,3 -0.2,7"/>`;
-    }).join('');
-    return `
-      <g class="grove-trunk" aria-hidden="true">
-        ${trunkShadowSVG(x, 97, width, atmo)}
-        <path fill="${shade}" d="M${(x - halfW).toFixed(1)},100 L${(midX - topW / 2).toFixed(1)},-14 L${midX.toFixed(1)},-14 L${(x - halfW * 0.18).toFixed(1)},100 Z"/>
-        <path fill="${lit}" d="M${(x - halfW * 0.18).toFixed(1)},100 L${midX.toFixed(1)},-14 L${(midX + topW / 2).toFixed(1)},-14 L${(x + halfW).toFixed(1)},100 Z"/>
-        <path fill="${shade}" d="M${(x - halfW).toFixed(1)},100 Q${(x - halfW * 1.1).toFixed(1)},95 ${(x - halfW * 2.1).toFixed(1)},100 Z"/>
-        <path fill="${lit}" d="M${(x + halfW).toFixed(1)},100 Q${(x + halfW * 1.1).toFixed(1)},95.5 ${(x + halfW * 1.9).toFixed(1)},100 Z"/>
-        ${bark}
-      </g>`;
-  }).join('');
-}
-
-function trunkShadowSVG(bx, by, width, atmo) {
-  const contact = contactShadow(bx, by, width, atmo.time);
-  const cast = castsShadow(atmo.time, atmo.season) ? castShadow(bx, by, 16, width, atmo.time) : null;
-  const ellipse = (s) => `<ellipse cx="${s.cx.toFixed(1)}" cy="${s.cy.toFixed(1)}" rx="${s.rx.toFixed(1)}" ry="${s.ry.toFixed(1)}" fill="${s.fill}" opacity="${s.opacity}"/>`;
-  return `${cast ? ellipse(cast) : ''}${ellipse(contact)}`;
-}
-
 /** The canopy ceiling: three overhead masses in the deepest greens
- *  closing the top of the frame, with two sky-holes (Part 10.2). The
- *  masses are sized and placed so the holes are genuinely gaps BETWEEN
- *  them — the scene's own hour-coloured sky (already painted behind
- *  everything, §6.2) shows through on its own, rather than a separately
- *  drawn disc. A painted "eye" would have been the failure here: two
- *  same-height round patches on a rounded green mass reads as a face
- *  before it reads as a wood, and a real screenshot is the only way
- *  that mistake is ever actually caught. By night the gaps carry a thin
- *  "moon-silver" rim (§5.4) — a stroke only, never a filled disc. */
+ *  closing the top of the frame, with two sky-holes that are genuinely
+ *  gaps BETWEEN them (the hour's own sky shows through). Winter hangs
+ *  branch tracery below a bare ceiling rather than removing it (Part 6.6:
+ *  the enclosure is a pinned law). By night the gaps carry a thin
+ *  moon-silver rim (§5.4). */
 function ceilingSVG(atmo) {
   const masses = [
     { x: 10, y: 6, rx: 15, ry: 10, c: CANOPY_STACK[0] },
     { x: 46, y: 4, rx: 11, ry: 10, c: CANOPY_STACK[1] },
     { x: 85, y: 7, rx: 18, ry: 11, c: CANOPY_STACK[2] },
   ];
-  // Winter overhead (Part 6.6): branch tracery HANGING BELOW the ceiling
-  // rather than the ceiling removed. The enclosure is a pinned law — Part
-  // 10.2 opens with "Full-bleed enclosure... the canopy closes the top of
-  // the frame" — so winter changes what the ceiling is made of, never
-  // whether it is there. A bare ceiling is still a ceiling; an open one
-  // would be a different scene, and that would need a revision of THE
-  // WORLD rather than a season.
   const winter = atmo.season === 'winter';
-
-  // A bare canopy has no volume left to shade, so winter drops the shade-
-  // face sub-mass entirely. Keeping it was a real regression caught only on
-  // a screenshot: with the whole ceiling lightened for winter, those darker
-  // inner ellipses turned into three dark discs on three pale masses and
-  // read unmistakably as EYES — the very failure W3 had already fixed once
-  // for the sky-holes. One flat twig-haze mass per canopy, and no second
-  // ellipse inside it, is both the honest winter drawing and the safe one.
   const body = masses.map((m) => (winter
     ? `<ellipse cx="${m.x}" cy="${m.y}" rx="${m.rx}" ry="${m.ry}" fill="${shadeFace(m.c, atmo.time)}" class="grove-winter-haze"/>`
     : `<ellipse cx="${m.x}" cy="${m.y}" rx="${m.rx}" ry="${m.ry}" fill="${litFace(m.c, atmo.time)}"/>`
       + `<ellipse cx="${(m.x - m.rx * 0.28).toFixed(1)}" cy="${(m.y + m.ry * 0.3).toFixed(1)}" rx="${(m.rx * 0.55).toFixed(1)}" ry="${(m.ry * 0.5).toFixed(1)}" fill="${shadeFace(m.c, atmo.time)}"/>`
   )).join('');
-
-  // The tracery hangs DOWN from the canopy's lower edge into the open air
-  // below it. Two earlier attempts, both caught on screenshots and both
-  // worth recording so neither is tried again:
-  //   1. Drawn ACROSS the masses it read as cracks in glass — a branch is
-  //      only legible against the space it reaches into, never against the
-  //      mass it belongs to.
-  //   2. Drawn as evenly spaced MIRRORED PAIRS it read as a row of seven
-  //      identical wishbones: Guide 5.2's "symmetry in nature reads as
-  //      fake," in its purest form, and hanging out of empty sky between
-  //      the canopies rather than out of the wood.
-  // Authored instead as single asymmetric limbs at irregular positions,
-  // each descending from a point that is genuinely UNDER one of the three
-  // canopy masses, with one short side twig and its own length.
   const HANGS = [
     { x: 5, top: 15, len: 11, dir: 1, twig: 0.5 }, { x: 14, top: 16, len: 7, dir: -1, twig: 0.62 },
     { x: 21, top: 14, len: 13, dir: 1, twig: 0.4 }, { x: 40, top: 13, len: 9, dir: -1, twig: 0.55 },
@@ -725,10 +632,6 @@ function ceilingSVG(atmo) {
   const rims = atmo.time === 'night'
     ? SKY_HOLES.map((h) => `<ellipse class="grove-hole-rim" cx="${h.x}" cy="${h.y}" rx="${h.rx}" ry="${h.ry}" fill="none"/>`).join('')
     : '';
-  // Leaf clusters along each mass's lower edge (0.16.0): the ceiling is a
-  // canopy, not three discs — a few smaller masses in the lit and shade
-  // tones, fixed forever, breaking the silhouette the way real foliage
-  // does. Winter has none (the tracery is the canopy then).
   const leaves = winter ? '' : masses.map((m, i) => {
     const pts = [-0.7, -0.25, 0.2, 0.65];
     return pts.map((t, k) => {
@@ -739,91 +642,214 @@ function ceilingSVG(atmo) {
       return `<ellipse class="grove-ceiling-leaf" cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" rx="${r.toFixed(1)}" ry="${(r * 0.72).toFixed(1)}" fill="${tone}"/>`;
     }).join('');
   }).join('');
-  return `<g class="grove-ceiling${atmo.season === 'winter' ? ' grove-ceiling--winter' : ''}">${body}${leaves}${winterTracery}${rims}</g>`;
+  return `<g class="grove-ceiling${winter ? ' grove-ceiling--winter' : ''}">${body}${leaves}${winterTracery}${rims}</g>`;
 }
 
-/** The three light shafts (§5.3): soft translucent wedges, feathered by
- *  layering (never a blur filter) — falling through the trunk gaps,
- *  angled by the hour's actual sun side, absent at night. */
-function shaftsSVG(atmo) {
-  const tilt = SHAFT_TILT[atmo.time];
-  if (tilt === undefined) return '';
-  const sign = SUN_OFFSET_SIGN[atmo.time] ?? 0;
-  const dx = SHAFT_FALL * tilt * sign;
-  const color = litFace(SHAFT_BASE, atmo.time);
-  const botY = SHAFT_TOP_Y + SHAFT_FALL;
-  const wedge = (topX, botX, halfTop, halfBot, opacity, delay) => `
-    <polygon class="grove-shaft" style="animation-delay:${delay}s" opacity="${opacity}"
-      points="${(topX - halfTop).toFixed(1)},${SHAFT_TOP_Y} ${(topX + halfTop).toFixed(1)},${SHAFT_TOP_Y}
-              ${(botX + halfBot).toFixed(1)},${botY} ${(botX - halfBot).toFixed(1)},${botY}"
-      fill="${color}"/>`;
-  return SHAFT_X.map((x, i) => {
-    const botX = x + dx;
-    const wOuter = SHAFT_WIDTH_PCT / 2;
-    const wInner = wOuter * 0.5;
-    const delay = i * 7;
-    return wedge(x, botX, wOuter, wOuter * 1.35, 0.1, delay) + wedge(x, botX, wInner, wInner * 1.35, 0.16, delay);
-  }).join('');
-}
-
-/** The mid-wood band (Part 8.5): unlabelled canopy masses standing in
- *  for every Mature family the seven slots had no room for. Fixed
- *  positions, revealed by count only — the wood deepens, it never
- *  reshuffles (Part 7.2). */
-function midWoodSVG(overflowCount, atmo) {
-  const slots = MID_WOOD_SLOTS.slice(0, Math.min(overflowCount, MID_WOOD_SLOTS.length));
-  const winter = atmo.season === 'winter';
-  return slots.map((s, i) => {
-    const base = CANOPY_STACK[i % CANOPY_STACK.length];
-    const lean = ((seedFrom(`mw-${i}`) % 100) / 100 - 0.5) * 4;
-    const cx = (s.x + lean).toFixed(1);
-    // Winter (Part 6.6): the mid-wood is deciduous like the working set in
-    // front of it, so it thins to a twig-haze with real branch structure
-    // rather than staying a summer mass under a monochrome filter. The
-    // masses keep their authored positions and silhouettes exactly — the
-    // wood is the same wood, and it is bare.
-    if (winter) {
-      const twigs = [-0.5, -0.15, 0.22, 0.55].map((t, k) => {
-        const ex = +cx + t * s.r * 1.1;
-        const ey = s.y - s.r * (0.45 + ((i + k) % 3) * 0.18);
-        return `<path class="grove-winter-twig" d="M${cx},${(s.y + s.r * 0.55).toFixed(1)}
-          Q${((+cx + ex) / 2).toFixed(1)},${(s.y - s.r * 0.05).toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}"/>`;
-      }).join('');
-      return `<ellipse class="grove-winter-haze" cx="${cx}" cy="${s.y}" rx="${(s.r * 0.94).toFixed(1)}" ry="${(s.r * 0.76).toFixed(1)}"
-        fill="${shadeFace(base, atmo.time)}"/>${twigs}`;
-    }
-    return `
-      <path class="grove-midwood-trunk" d="M${cx},${(s.y + s.r * 0.5).toFixed(1)} L${cx},${(s.y + s.r * 1.9).toFixed(1)}"/>
-      <ellipse class="grove-midwood" cx="${cx}" cy="${s.y}" rx="${s.r}" ry="${(s.r * 0.82).toFixed(1)}" fill="${litFace(base, atmo.time)}"/>
-      <ellipse class="grove-midwood" cx="${(s.x + lean - s.r * 0.42).toFixed(1)}" cy="${(s.y + s.r * 0.32).toFixed(1)}" rx="${(s.r * 0.5).toFixed(1)}" ry="${(s.r * 0.42).toFixed(1)}" fill="${shadeFace(base, atmo.time)}"/>`;
-  }).join('');
-}
-
-/** The stream, seen only as one glint through the trunks (Part 10.2) —
- *  never drawn as visible water inside the wood. */
-function streamGlintSVG() {
-  return '<path class="grove-glint" d="M2,35.5 Q5.5,38.5 4,42" fill="none"/>';
-}
-
-/** Night: fireflies among the near trunks (Part 10.2), a small fixed
- *  cluster near the floor, breathing on its own unsynchronised cycle —
- *  distinct from the rare per-visit ambient firefly visitor, which is a
- *  Magic Moment, not a standing feature of the night scene itself. */
-function nightFirefliesSVG() {
-  const POINTS = [{ x: 16, y: 90, d: 0 }, { x: 83, y: 92, d: 1.6 }, { x: 12, y: 80, d: 3.1 }];
-  // Drawn from the roster (Part 9.3: a 0.4% dot inside a 2% glow) in the
-  // cathedral's own 0–100 percentage space, where "share of frame width"
-  // IS the percentage. The hand-picked r=3.2 glow this replaces was a 6.4%
-  // mass — three times its pinned size, and reading as a lantern.
-  return POINTS.map((p) => faunaSVG('firefly', p.x, p.y, 100, { delay: p.d })).join('');
-}
-
-/** Dawn: mist bands between the far trunks (Part 10.2) — layered
- *  translucent shapes, never a blur filter (§11.7). Sits below the
- *  ceiling's own gaps, so it reads as low mist in the wood rather than
- *  adding a second pale shape right where the sky already shows through. */
+/** Dawn: mist between the far trunks — layered translucent shapes, never
+ *  a blur filter (§11.3, §11.7). */
 function dawnMistSVG() {
   return `
     <ellipse class="grove-cathedral-mist" cx="40" cy="24" rx="20" ry="3.2"/>
     <ellipse class="grove-cathedral-mist grove-cathedral-mist--2" cx="64" cy="29" rx="17" ry="2.8"/>`;
 }
+
+/** The old-growth horizon behind the working wood (Bible §4.1: "behind
+ *  them a horizon of old growth"), tiled across the far layer's width —
+ *  a fixed row of deep silhouettes, cooler and paler than the trees in
+ *  front (aerial perspective inside the wood). It stands from day one:
+ *  the wood is older than the learner. */
+function farWoodSVG(farW) {
+  const TRUNKS = [[8, 1.4], [35, 1.8], [59, 1.2], [90, 1.6]];
+  const TREES = [[6, 55, 5], [26, 53, 6], [44, 55, 4.8], [57, 53, 5.6], [73, 55, 4.4], [92, 54, 5.4]];
+  const tiles = Math.ceil(farW / 100);
+  let out = '';
+  for (let i = 0; i < tiles; i += 1) {
+    // Each tile shifts its own set a little so the far wood never reads
+    // as a repeating wallpaper — the same trees, walked past.
+    const dx = i * 100 + (i % 3) * 4;
+    out += `<g transform="translate(${dx} 0)">
+      ${TRUNKS.map(([x, w], k) => `<path class="grove-far-column" d="M${x + ((i + k) % 2) * 3},10 L${x + ((i + k) % 2) * 3},58" style="stroke-width:${w}"/>`).join('')}
+      ${TREES.map(([x, y, r], k) => {
+        const yy = y + ((i + k) % 2) * 1.2;
+        return `
+        <path class="grove-far-trunk" d="M${x},${yy + r * 0.5} L${x},${(yy + r * 1.5).toFixed(1)}"/>
+        <ellipse cx="${x}" cy="${yy}" rx="${r}" ry="${(r * 1.35).toFixed(1)}"/>
+        <ellipse cx="${(x - r * 0.35).toFixed(1)}" cy="${(yy - r * 0.6).toFixed(1)}" rx="${(r * 0.5).toFixed(1)}" ry="${(r * 0.65).toFixed(1)}"/>`;
+      }).join('')}
+    </g>`;
+  }
+  return `<g class="grove-far-wood" aria-hidden="true">${out}</g>`;
+}
+
+/**
+ * The floor of the walk (Part 16.3), drawn once across the whole wood: a
+ * far slope at the wood's edge, the nearer mossy floor, the pools of
+ * light where the shafts land (never at night), the shafts themselves,
+ * the Ground's marks (the Effort Ledger — more of the same fixed set per
+ * grove as lifetime effort accumulates, nothing random, nothing
+ * rearranged), the entrance's authored props, the stream's one glint,
+ * and the fireflies of the night. The floor is stretched onto a portrait
+ * frame (`preserveAspectRatio="none"`), so every shape meant to read as
+ * round is authored squashed (one y-unit is about two x-units on screen).
+ */
+function floorSVG(W, wood, atmo, ground) {
+  const night = atmo.time === 'night';
+  const sign = SUN_OFFSET_SIGN[atmo.time] ?? 0;
+  const tilt = SHAFT_TILT[atmo.time];
+  const dx = tilt === undefined ? 0 : SHAFT_FALL * tilt * sign;
+
+  // The two ground lines, undulating gently the whole way across.
+  const undulate = (y, amp, step, phase) => {
+    let d = `M0,${y}`;
+    for (let x = 0; x <= W + step; x += step) {
+      const cx = x + step / 2;
+      const cy = y + (((x / step + phase) % 2) ? -amp : amp);
+      d += ` Q${f1(cx)},${f1(cy)} ${f1(x + step)},${y}`;
+    }
+    return `${d} L${f1(W + step)},100 L0,100 Z`;
+  };
+  const farSlope = `<path class="grove-floor-far" d="${undulate(58, 2.4, 52, 0)}"/>`;
+  const nearFloor = `<path class="grove-floor-near" d="${undulate(80, 2, 44, 1)}"/>`;
+
+  // Shafts and their pools: one at the entrance, two per grove.
+  const shaftXs = [WOOD_ENTRANCE * 0.5, ...wood.groves.flatMap((g) => GROVE_SHAFT_X.map((x) => g.left + x))];
+  const color = litFace(SHAFT_BASE, atmo.time);
+  const botY = SHAFT_TOP_Y + SHAFT_FALL;
+  const wedge = (topX, botX, halfTop, halfBot, opacity, delay) => `
+    <polygon class="grove-shaft" style="animation-delay:${delay}s" opacity="${opacity}"
+      points="${f1(topX - halfTop)},${SHAFT_TOP_Y} ${f1(topX + halfTop)},${SHAFT_TOP_Y} ${f1(botX + halfBot)},${botY} ${f1(botX - halfBot)},${botY}"
+      fill="${color}"/>`;
+  const shafts = tilt === undefined ? '' : shaftXs.map((x, i) => {
+    const botX = x + dx;
+    const wOuter = (SHAFT_WIDTH - (i % 3) * 1.6) / 2;
+    const wInner = wOuter * 0.5;
+    return wedge(x, botX, wOuter, wOuter * 1.35, 0.1, (i * 7) % 28) + wedge(x, botX, wInner, wInner * 1.35, 0.16, (i * 7) % 28);
+  }).join('');
+  const pools = night ? '' : shaftXs.map((x, i) =>
+    `<ellipse class="grove-light-pool" cx="${f1(x + dx)}" cy="${f1(botY + 3 + (i % 3) * 3)}" rx="${f1(6.5 + (i % 3) * 1.2)}" ry="${f1(1.6 + (i % 3) * 0.4)}"/>`).join('');
+
+  // The Ground (§4.3, Roadmap 3.2): eight fixed marks per grove, revealed
+  // by lifetime tier — the whole wood's floor thickens with effort.
+  const MARKS = [
+    { x: 6, y: 92, kind: 'moss' }, { x: 88, y: 90, kind: 'moss' }, { x: 27, y: 95, kind: 'wildflower' },
+    { x: 61, y: 94, kind: 'wildflower' }, { x: 3, y: 83, kind: 'fern' }, { x: 95, y: 82, kind: 'fern' },
+    { x: 42, y: 97, kind: 'wildflower' }, { x: 73, y: 96, kind: 'moss' },
+  ];
+  const COUNT_BY_TIER = { bare: 0, tended: 2, growing: 4, flourishing: 6, lush: 8 };
+  const n = COUNT_BY_TIER[ground.tier] ?? 0;
+  const marks = wood.groves.map((g, gi) => MARKS.slice(0, n).map((m, k) => {
+    const x = g.left + m.x + ((gi + k) % 2) * 1.5;
+    if (m.kind === 'moss') return `<ellipse class="grove-mark-moss" cx="${f1(x)}" cy="${m.y}" rx="3.2" ry="0.7"/>`;
+    if (m.kind === 'fern') return `<path class="grove-mark-fern" d="M${f1(x)},${m.y + 2} Q${f1(x - 1.2)},${m.y - 0.6} ${f1(x)},${m.y - 3.4} Q${f1(x + 1.2)},${m.y - 0.6} ${f1(x)},${m.y + 2} Z"/>`;
+    return `<circle class="grove-mark-flower" cx="${f1(x)}" cy="${m.y}" r="0.55"/>`;
+  }).join('')).join('');
+
+  // The entrance's authored inventory (Appendix C.6, Stage W6): the fern
+  // banks and, at Lush, the old stump with its carved stone — drawn in
+  // their own 0–100 coordinates, carried to the wood's mouth; the mirror
+  // bank closes the far end of the walk.
+  const props = revealedProps({ tier: ground.tier, scene: 'rootwood', season: atmo.season, time: atmo.time, weather: atmo.weather });
+  const stories = revealedStories({ tier: ground.tier, scene: 'rootwood' });
+  const inScene = inSceneRootwoodPropsSVG(props, stories);
+  const entrance = `<g transform="translate(${f1(WOOD_ENTRANCE - 100 + 2)} 0)">${inScene}</g>`;
+  const farEnd = `<g transform="translate(${f1(W - WOOD_END - 1)} 0)">${inScene}</g>`;
+
+  // The undergrowth line along the bottom edge, the whole way across.
+  const tufts = [];
+  for (let x = 3; x < W; x += 9.5) {
+    const i = Math.round(x / 9.5);
+    const h = 3 + (i % 3) * 1.2;
+    const lean = (i % 2 ? 1 : -1) * 0.8;
+    tufts.push(`<path class="grove-undergrowth" d="M${f1(x)},100 q${lean},${f1(-h * 0.6)} ${f1(lean * 1.6)},${-h} M${f1(x + 1.6)},100 q${-lean},${f1(-h * 0.5)} ${f1(-lean * 1.4)},${f1(-h * 0.8)}"/>`);
+  }
+
+  // Night: fireflies low among the stands, two per grove, each breathing
+  // on its own cycle — distinct from the rare ambient firefly visitor.
+  const fireflies = night ? wood.groves.flatMap((g, gi) => [
+    faunaSVG('firefly', g.left + 16, 91, 100, { delay: (gi * 1.3) % 4 }),
+    faunaSVG('firefly', g.left + 84, 93, 100, { delay: (gi * 1.3 + 2.1) % 4 }),
+  ]).join('') : '';
+
+  return `
+    ${farSlope}
+    ${nearFloor}
+    ${pools}
+    ${shafts}
+    ${marks}
+    ${entrance}
+    ${farEnd}
+    <path class="grove-glint" d="M3,35.5 Q6.5,38.5 5,42" fill="none"/>
+    ${fireflies}
+    <g class="grove-undergrowth-line">${tufts.join('')}</g>`;
+}
+
+/** The old growth behind the stands (Part 16.3): a band of unlabelled
+ *  crowns and thin trunks between the far wood and the working rows —
+ *  the mid-wood of Part 8.5, kept as depth rather than as a record.
+ *  Three crowns per hundred units, fixed forever, never a family. */
+function midWoodSVG(midW, atmo) {
+  const CROWNS = [[14, 52, 9, 0], [48, 50, 10.5, 1], [83, 53, 8.5, 2]];
+  const tiles = Math.ceil(midW / 100);
+  let out = '';
+  for (let i = 0; i < tiles; i += 1) {
+    const dx = i * 100 + (i % 2) * 6;
+    out += CROWNS.map(([x, y, r, k]) => {
+      const base = CANOPY_STACK[(k + i) % CANOPY_STACK.length];
+      const cx = dx + x;
+      const cy = y + ((i + k) % 2) * 1.5;
+      const winter = atmo.season === 'winter';
+      if (winter) {
+        return `<ellipse class="grove-winter-haze" cx="${f1(cx)}" cy="${f1(cy)}" rx="${f1(r * 0.94)}" ry="${f1(r * 1.5)}" fill="${shadeFace(base, atmo.time)}"/>
+          <path class="grove-midwood-trunk" d="M${f1(cx)},${f1(cy + r * 0.8)} L${f1(cx)},${f1(cy + r * 3.2)}"/>`;
+      }
+      return `
+        <path class="grove-midwood-trunk" d="M${f1(cx)},${f1(cy + r * 0.8)} L${f1(cx)},${f1(cy + r * 3.2)}"/>
+        <ellipse class="grove-midwood" cx="${f1(cx)}" cy="${f1(cy)}" rx="${r}" ry="${f1(r * 1.55)}" fill="${litFace(base, atmo.time)}"/>
+        <ellipse class="grove-midwood" cx="${f1(cx - r * 0.42)}" cy="${f1(cy + r * 0.5)}" rx="${f1(r * 0.5)}" ry="${f1(r * 0.8)}" fill="${shadeFace(base, atmo.time)}"/>
+        <ellipse class="grove-midwood" cx="${f1(cx + r * 0.3)}" cy="${f1(cy - r * 0.9)}" rx="${f1(r * 0.55)}" ry="${f1(r * 0.7)}" fill="${litFace(litFace(base, atmo.time), atmo.time)}"/>`;
+    }).join('');
+  }
+  return `<g class="grove-mid-wood" aria-hidden="true">${out}</g>`;
+}
+
+/** The great trunks (Part 10.2, 16.3): trees taller than the screen, the
+ *  whole feeling of the biome — one at the wood's mouth, one between
+ *  every pair of groves, one at the far end — so every grove is a room
+ *  between two doorposts, and no trunk ever stands where a plant does.
+ *  A tapering two-tone mass with a root flare and a few bark lines. */
+function trunksSVG(W, wood, atmo) {
+  const lit = litFace(TRUNK_BASE, atmo.time);
+  const shade = shadeFace(TRUNK_BASE, atmo.time);
+  const posts = [5, ...wood.groves.slice(1).map((g) => g.left), W - 7];
+  let out = '';
+  for (let k = 0; k < posts.length; k += 1) {
+    const x = posts[k];
+    const width = k % 2 ? 9 : 7;
+    const halfW = width / 2;
+    const topW = width * 0.62;
+    const midX = x - halfW * 0.12;
+    const bark = [18, 41, 63, 84].map((y, i) => {
+      const bx = x - halfW * 0.5 + (i % 2) * halfW * 0.7;
+      return `<path class="grove-bark" d="M${f1(bx)},${y} q0.3,3 -0.2,7"/>`;
+    }).join('');
+    out += `
+      <g class="grove-trunk" aria-hidden="true">
+        ${trunkShadowSVG(x, 97, width, atmo)}
+        <path fill="${shade}" d="M${f1(x - halfW)},100 L${f1(midX - topW / 2)},-14 L${f1(midX)},-14 L${f1(x - halfW * 0.18)},100 Z"/>
+        <path fill="${lit}" d="M${f1(x - halfW * 0.18)},100 L${f1(midX)},-14 L${f1(midX + topW / 2)},-14 L${f1(x + halfW)},100 Z"/>
+        <path fill="${shade}" d="M${f1(x - halfW)},100 Q${f1(x - halfW * 1.1)},95 ${f1(x - halfW * 2.1)},100 Z"/>
+        <path fill="${lit}" d="M${f1(x + halfW)},100 Q${f1(x + halfW * 1.1)},95.5 ${f1(x + halfW * 1.9)},100 Z"/>
+        ${bark}
+      </g>`;
+  }
+  return out;
+}
+
+function trunkShadowSVG(bx, by, width, atmo) {
+  const contact = contactShadow(bx, by, width, atmo.time);
+  const cast = castsShadow(atmo.time, atmo.season) ? castShadow(bx, by, 16, width, atmo.time) : null;
+  const ellipse = (s) => `<ellipse cx="${s.cx.toFixed(1)}" cy="${s.cy.toFixed(1)}" rx="${s.rx.toFixed(1)}" ry="${s.ry.toFixed(1)}" fill="${s.fill}" opacity="${s.opacity}"/>`;
+  return `${cast ? ellipse(cast) : ''}${ellipse(contact)}`;
+}
+
+export { GROVE_WIDTH };

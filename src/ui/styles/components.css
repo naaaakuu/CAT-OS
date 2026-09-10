@@ -4171,3 +4171,187 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   .biome, .lgx-screen-wrap { background: #1B221D; }
   :root[data-immersive] .shell__view { background: #1B221D; }
 }
+
+/* ═══════════════ 0.17.0 — the Rootwood Walk (THE WORLD Part 16) ═══════════════
+   The wood is wider than the frame and crossed by hand: a fixed ceiling
+   overhead, the far wood drifting behind, a scrolling floor with every
+   family standing on it in a named grove, and the great trunks passing in
+   front. Every family has a stand; open ground is a root-stone; a grove is
+   a place with a signpost and a title card that names it on arrival. */
+.grove-scene--wood { padding: 0; }
+.biome .grove-scene--wood { height: 100dvh; min-height: 100dvh; display: block; }
+.grove-scene--wood .grove-earth { z-index: 0; }
+.grove-scene--wood .grove-cathedral { z-index: 1; }
+.grove-scene--wood .grove-night-sky { z-index: 1; }
+.grove-par {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.grove-par svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.grove-par--far { z-index: 2; }
+.grove-par--mid { z-index: 2; }
+.grove-doorposts { z-index: 2; }
+.grove-midwood-trunk { stroke: #4F4636; stroke-width: 1.1; stroke-linecap: round; opacity: 0.8; }
+.grove-scene[data-time="night"] .grove-midwood-trunk { stroke: #16211C; }
+.grove-walk { position: absolute; inset: 0; z-index: 3; overflow: hidden; }
+.grove-walk--live {
+  overflow-x: auto; overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+.grove-walk--live::-webkit-scrollbar { display: none; }
+.grove-track { position: relative; height: 100%; }
+.grove-scene--wood .grove-sky {
+  position: absolute; left: 0; top: 0; right: auto; bottom: auto;
+  width: 100%; height: 56%;
+  z-index: 0;
+}
+.grove-floor { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.grove-scene--wood .grove-slots { position: absolute; inset: 0; z-index: 1; }
+.grove-scene--wood :is(.grove-floor, .grove-par svg) { filter: var(--lg-f-season) var(--lg-f-time); }
+.grove-scene--wood .grove-ambient { z-index: 6; }
+/* The Ground's marks, drawn into the floor (the Effort Ledger, §4.3). */
+.grove-mark-moss { fill: var(--garden-moss); opacity: 0.45; }
+.grove-mark-flower { fill: var(--garden-wildflower); opacity: 0.9; }
+.grove-mark-fern { fill: var(--garden-fern); opacity: 0.6; }
+.grove-scene[data-time="night"] .grove-mark-flower { opacity: 0.45; }
+
+/* A root-stone: open ground with a name on approach — a place, never an
+   absence, never a lock (Bible §6.2). */
+.grove-stone { width: 100%; height: 100%; display: block; overflow: visible; }
+.grove-stone__moss { fill: var(--garden-moss); opacity: 0.55; }
+.grove-stone__grass { fill: none; stroke: var(--garden-young); stroke-width: 1.8; stroke-linecap: round; opacity: 0.75; }
+.grove-stone__seed { fill: var(--garden-trunk); opacity: 0.9; }
+.grove-plant--stone .grove-plant__shadow { opacity: 0.12; height: 22%; }
+.grove-plant--stone .grove-plant__art { transform: scale(1.15); transform-origin: 50% 100%; }
+.grove-plant--stone::after { inset: calc(var(--space-2) * -1); }
+.grove-scene[data-time="night"] .grove-stone__grass { opacity: 0.4; }
+
+/* The signposts: a post and a board at each grove's mouth, the name in
+   the world's own serif; a grown grove carries a garland (Part 16.4). */
+.grove-sign {
+  position: absolute;
+  bottom: 21%;
+  width: calc(100% / var(--wood-w, 900) * 15);
+  transform: translateX(-50%);
+  z-index: 70;
+  pointer-events: none;
+}
+.grove-sign__post { width: 100%; height: auto; display: block; overflow: visible; }
+.grove-sign__pole { stroke: #5A4632; stroke-width: 3; stroke-linecap: round; fill: none; }
+.grove-sign__board { fill: #8C6E4E; }
+.grove-sign__edge { stroke: #B8977A; stroke-width: 1.4; fill: none; stroke-linecap: round; }
+.grove-sign__garland { fill: none; stroke: var(--garden-bloom); stroke-width: 1.8; stroke-linecap: round; }
+.grove-sign__name {
+  position: absolute;
+  top: 12%; left: 50%;
+  transform: translate(-50%, 0) rotate(-3deg);
+  font-family: var(--font-reading);
+  font-style: italic;
+  font-size: 0.68rem;
+  line-height: 1;
+  color: #F6ECD8;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 1px rgba(40, 24, 8, 0.5);
+}
+.grove-scene[data-time="night"] .grove-sign__board { fill: #4E4034; }
+.grove-scene[data-time="night"] .grove-sign__pole { stroke: #33291F; }
+.grove-scene[data-time="night"] .grove-sign__name { color: #D8CFBD; }
+
+/* The title card: the grove you have walked into, named once, then gone. */
+.grove-title {
+  position: absolute;
+  top: 10%; left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
+  width: max-content; max-width: 86%;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+}
+.grove-title.is-shown { animation: grove-title-card 3.8s var(--ease-out) both; }
+@keyframes grove-title-card {
+  0%   { opacity: 0; transform: translate(-50%, 8px); }
+  14%  { opacity: 1; transform: translate(-50%, 0); }
+  74%  { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grove-title.is-shown { animation: grove-title-still 3.8s step-end both; }
+  @keyframes grove-title-still { 0%, 90% { opacity: 1; } 100% { opacity: 0; } }
+}
+.grove-title__name {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium, 500);
+  letter-spacing: 0.01em;
+  color: #FBF3E3;
+  text-shadow: 0 1px 2px rgba(20, 28, 20, 0.6), 0 0 18px rgba(20, 28, 20, 0.45);
+}
+.grove-title__line {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-reading);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: #EDE2CB;
+  text-shadow: 0 1px 2px rgba(20, 28, 20, 0.6), 0 0 14px rgba(20, 28, 20, 0.4);
+}
+
+/* A quiet line floating low in the wood — never below the fold. */
+.grove-note--float {
+  position: absolute;
+  left: 50%; bottom: 3.5%;
+  transform: translateX(-50%);
+  z-index: 8;
+  margin: 0;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-lg);
+  background: rgba(27, 34, 29, 0.58);
+  color: #F3EBDD;
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* The Overlook's place card (Part 16.5): a touched region says its name
+   and one line of what grows there, then fades. */
+.valley__card {
+  position: absolute;
+  left: 50%; bottom: 7%;
+  transform: translateX(-50%);
+  z-index: 6;
+  width: max-content; max-width: min(84%, 22rem);
+  padding: 0.55rem 0.95rem 0.6rem;
+  border-radius: var(--radius-lg);
+  background: rgba(27, 34, 29, 0.72);
+  color: #F6EEDC;
+  text-align: center;
+  cursor: pointer;
+}
+.valley__card.is-shown { animation: valley-card-in 4.6s var(--ease-out) both; }
+@keyframes valley-card-in {
+  0%   { opacity: 0; transform: translate(-50%, 6px); }
+  8%   { opacity: 1; transform: translate(-50%, 0); }
+  86%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .valley__card.is-shown { animation: none; opacity: 1; } }
+.valley__card-name {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium, 500);
+}
+.valley__card-line {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-reading);
+  font-style: italic;
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  color: #E6DCC6;
+}

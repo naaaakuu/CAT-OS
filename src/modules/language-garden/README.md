@@ -20,7 +20,8 @@ index.js             registerLanguageGarden(router, context); all app.js knows
 screens/overlook.js   the Overlook: the valley from above (module home;
                        first-ever visit hands straight to screens/session.js
                        — no tutorial, Bible §3.1)
-screens/biome.js      one biome of the valley (the Rootwood today), by slug
+screens/biome.js      one biome of the valley (the Rootwood today), by slug —
+                       since 0.17.0 the Rootwood Walk: every family in its stand
 screens/plant.js      one plant at a glance: key, members, one action
 screens/session.js    the six-beat Grow/Revisit session (Bible §5, §17.3)
 screens/journal.js    what you can read now + wild sightings (Bible §16.6)
@@ -36,10 +37,21 @@ logic/light.js        the painted-light recipe: lit/shade faces, shadows, WCAG m
 logic/props.js        the authored prop inventory and environmental stories, by tier (pure)
 logic/fauna.js        the faceless fauna roster and the one-visitor-per-visit roll (pure)
 logic/discoveries.js  the Discovery catalogue (Bible §9) and "what is in front of the learner now" (pure)
+logic/groves.js       the walk's map: six named groves, eleven stands each, layoutWood (pure)
 screens/atmosphere-art.js  sky, moon, stars, clouds, weather layers (markup only)
 screens/prop-art.js        every prop, story, and seasonal mark, drawn (markup only)
 screens/fauna-art.js       every creature, drawn from the roster (markup only)
 ```
+
+**0.17.0 — the Rootwood Walk (THE WORLD Part 16).** The working set is
+retired: every family stands in the wood, in a fixed stand in one of six
+named semantic groves (`logic/groves.js`), and the biome screen is a
+horizontally walkable wood with a fixed canopy, far and mid parallax
+layers, doorpost trunks between groves, signposts, title cards, root-stones
+for unmet roots, and a camera that opens on the lit plant. Sessions and
+approaches render the same walk becalmed (`focusedGroveSceneHTML`), so a
+tree is grown in the place it will always stand. The Overlook names its
+places on touch (`biomes.js` `whisper`).
 
 **0.16.0 — the valley is the application's home.** `app.js` starts the
 router at `/garden`; the Overlook and the Rootwood are full-bleed; the

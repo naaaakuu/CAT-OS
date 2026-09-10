@@ -4,6 +4,60 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 0.17.0 — 2026-09-10 — The Rootwood Walk
+
+The product reality check. On the owner's instruction the build was opened
+and judged against the vision — "a beautiful game that happens to make the
+learner dramatically better" — rather than against the phase roadmap. The one
+finding that conflicted with the vision outright: the Rootwood held fifty-one
+families and showed six unlabelled saplings. Built to `LANGUAGE GARDEN — THE
+WORLD.md` v1.3.0 (Part 16) and the Roadmap's Phase R (Appendix L). No
+content, schema, or storage-shape changes.
+
+- **The Rootwood Walk.** The seven-slot working set is retired. **Every
+  family stands in the wood**, in a fixed stand in one of six named semantic
+  groves — Ways, Measures, Voices, Kin, Hearts, Embers (`logic/groves.js`,
+  eleven stands per grove in three rows) — and the wood is a walk 884 units
+  wide, crossed by a horizontal swipe. A fixed canopy overhead; the far wood
+  and a new mid-distance old-growth band on parallax; one floor across the
+  whole walk with light shafts, pools, the Ground's tier marks per grove, the
+  entrance's authored props, and fireflies after dark; the great trunks as
+  doorposts between groves; an unmet root drawn as a root-stone (open ground
+  with its name on approach, never a lock); Ancients standing at their true
+  height in their own stands; signposts with one-word names and a garland
+  when a grove is grown; a title card naming each grove on arrival, and one
+  soft leaf sound on entering one; a camera that opens on the lit plant, else
+  on the family tended last, else at the wood's mouth. Sessions and plant
+  approaches render the same walk becalmed with the camera on the tended
+  stand; Growth resizes that stand in place, Ancient included. The open-ground
+  offer walks the groves in order.
+- **The named valley.** Every region carries one line of what grows there;
+  touching a wild region from the Overlook shows its name and that line for a
+  few seconds (no date, no lock). The map's wood thickens one tree per two
+  families grown, not three.
+- **The reconsideration.** Every progression and reward mechanic the owner
+  listed was judged by one question — does it make learning English more
+  compelling? — and the verdicts are recorded in THE WORLD Part 16.7: seven
+  old restrictions changed, six mechanics refused again with reasons
+  (currencies, leaderboards, streaks/completion, wilting, collection grids,
+  unlockable areas), one narrowly relaxed.
+- **The first paint, fixed.** Measured under the live service worker for the
+  first time: loading the fifty-one families took 24 seconds, because the
+  worker's `caches.match(..., { ignoreSearch: true })` scanned every cached
+  entry for every request. It now matches by exact URL (1.1 seconds for the
+  same load), and `core/content-loader` memoizes resolved families and words
+  per page, so every garden screen after the first paints from memory
+  instead of re-fetching 268 files. Both were 0.16.0 behaviour on every
+  installed device.
+- **The installed app opens on the valley.** The manifest's `start_url` still
+  pointed at the retired dashboard (`#/home`); it is `#/garden` now.
+- **Verification.** `tools/verify.mjs` checks the walk (every registry family
+  in exactly one grove, capacity, order-independence, row spacing, doorpost
+  clearance, the register of every grove and region line); the app was
+  driven in real Chrome at 390×844 on a September morning, a September night
+  and a January dawn, with the service worker active.
+- `CACHE_VERSION` → 26. `APP_VERSION` → 0.17.0.
+
 ## 0.16.0 — 2026-09-10 — The valley is the home
 
 The Language Garden stops being a feature inside CAT OS and becomes the

@@ -660,8 +660,32 @@ export function wdConsistencyIssues(id, item) {
 /* discipline: schema validation + a trivial consistency check.        */
 /* ------------------------------------------------------------------ */
 
-/** Load one vocabulary word by id, schema-validated. */
-export async function loadVocabItem(id) {
+/* In-memory memo of resolved content (0.17.0). Every garden screen —
+   the Overlook, the walk, a plant, a session — needs every family and
+   every word it references (51 plants, 217 words today) to draw the
+   world, and until now each screen change re-fetched all of them, each
+   through the service worker's cache-first match. Content is immutable
+   for the life of a page (files change only with a release, when the
+   service worker's cache version rotates and the page reloads), so a
+   resolved item is loaded once per page and shared. The memo holds the
+   PROMISE, so concurrent loaders of the same id share one fetch; a
+   failed load is forgotten so a later attempt can retry (offline →
+   online). Nothing in the app mutates a loaded item. */
+const vocabMemo = new Map();
+const lgMemo = new Map();
+function memoized(memo, id, loadFn) {
+  if (memo.has(id)) return memo.get(id);
+  const p = loadFn(id).catch((err) => { memo.delete(id); throw err; });
+  memo.set(id, p);
+  return p;
+}
+
+/** Load one vocabulary word by id, schema-validated (memoized per page). */
+export function loadVocabItem(id) {
+  return memoized(vocabMemo, id, loadVocabItemUncached);
+}
+
+async function loadVocabItemUncached(id) {
   if (!/^vocab-[0-9]{4}$/.test(id)) {
     throw new ContentError(`"${id}" is not a valid vocabulary content id.`);
   }
@@ -717,7 +741,11 @@ export async function listLGItems() {
  * merge {word, meaning, part_of_speech} onto each member, then run
  * cross-file consistency checks.
  */
-export async function loadLGItem(id) {
+export function loadLGItem(id) {
+  return memoized(lgMemo, id, loadLGItemUncached);
+}
+
+async function loadLGItemUncached(id) {
   if (!/^lg-[0-9]{4}$/.test(id)) {
     throw new ContentError(`"${id}" is not a valid Language Garden content id.`);
   }

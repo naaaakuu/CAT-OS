@@ -21,6 +21,11 @@
  * `compass` places each region on the valley from above, per the Bible's
  * own map (§4.1). The Overlook art turns a compass point into pixels; the
  * data here stays presentation-free.
+ *
+ * `whisper` (0.17.0, THE WORLD Part 16.5) is the one line a place says
+ * when touched from the Overlook: its name and what grows there. A wild
+ * region names what it will hold — anticipation without a lock, a date,
+ * or a "coming soon" — and the Wilds say only what they are.
  */
 
 /** The cognitive engines (§5). `implemented` gates the session flow: only
@@ -44,36 +49,43 @@ export const ENGINES = Object.freeze({
  */
 export const BIOMES = Object.freeze([
   {
+    whisper: 'Latin and Greek roots. The wood where a word is taken apart and understood.',
     slug: 'rootwood', name: 'The Rootwood', garden: 'root_grove',
     engine: 'decompose', plant: 'tree', tonic: 'low', compass: 'north',
     status: 'living',
   },
   {
+    whisper: 'Still wild. One day the prefixes and suffixes will climb the trees you have grown.',
     slug: 'terraces', name: 'The Vine Terraces', garden: null,
     engine: 'compose', plant: 'vine', tonic: 'fifth', compass: 'east',
     status: 'wild',
   },
   {
+    whisper: 'Still wild. One day, words placed on their axis: warmer than this, cooler than that.',
     slug: 'orchard', name: 'The Orchard', garden: null,
     engine: 'contrast', plant: 'fruit-tree', tonic: 'major', compass: 'south',
     status: 'wild',
   },
   {
+    whisper: 'Still wild. One day, the words that paint a whole situation in one stroke.',
     slug: 'meadow', name: 'The Meadow', garden: null,
     engine: 'picture', plant: 'flower', tonic: 'high', compass: 'west',
     status: 'wild',
   },
   {
+    whisper: 'Still wild. One day, the twins that look alike and mean different things.',
     slug: 'pond', name: 'The Mirror Pond', garden: null,
     engine: 'discriminate', plant: 'twin', tonic: 'lowest', compass: 'centre',
     status: 'wild',
   },
   {
+    whisper: 'Still wild. One day, the words that arrived from other languages, with their stories.',
     slug: 'thicket', name: 'The Thicket', garden: null,
     engine: 'origin', plant: 'bramble', tonic: 'dissonant', compass: 'southeast',
     status: 'wild',
   },
   {
+    whisper: 'Beyond the valley. Never entered. Words are sighted out here, in real reading.',
     slug: 'wilds', name: 'The Wilds', garden: null,
     engine: 'spot', plant: null, tonic: 'none', compass: 'beyond',
     status: 'wild',
