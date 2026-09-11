@@ -4,6 +4,34 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 1.1.4 — 2026-09-12 — The second look
+
+Reviewing your own mistakes is the highest-yield hour in CAT preparation,
+and until now the app had no way to spend it: a missed question was
+explained once and never seen again.
+
+**The second look** (`#/rc/second-look`) brings back up to six questions
+the reader got wrong and has not since got right, weighted towards the
+kind of question they are worst at. It is deliberately not a re-read: the
+question comes first, with **the evidence paragraph one tap away** (the
+corpus stores `passage_anchor` as a real paragraph id), because "go back
+to the text" is the habit being trained. A miss opens the evidence
+automatically and names the trap that caught you, from the corpus's own
+distractor analysis — *opposite direction*, *near-synonym confusion*,
+*scope creep*. Getting one right settles it for good; getting it wrong
+keeps it in the pool.
+
+It makes Ink, carries its own stars and pace, and the Reading Room offers
+it above a new passage once four questions have got away — because at
+that point it is the better hour. The 32 passages go a great deal further
+than 32 readings.
+
+Also: a timed run is now immersive wherever it lives — the tab bar no
+longer sits under the clock during a passage or a second look, inviting
+the reader to leave mid-question — and a run's body scrolls when its card
+is taller than the screen, so an open evidence paragraph can never push
+the explanation out of reach.
+
 ## 1.1.3 — 2026-09-12 — The valley comes alive
 
 "If only trees grow, the world will feel lonely." Four creatures now

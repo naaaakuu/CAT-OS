@@ -17,6 +17,7 @@ import { renderBrowser } from './screens/browser.js';
 import { renderSession } from './screens/session.js';
 import { renderReview } from './screens/review.js';
 import { renderMentor } from './screens/mentor.js';
+import { renderSecondLook } from './screens/second-look.js';
 
 export function registerRC(router, context) {
   router
@@ -24,6 +25,11 @@ export function registerRC(router, context) {
       path: '/rc',
       title: 'Reading Comprehension',
       render: (outlet) => renderBrowser(outlet, context),
+    })
+    .register({
+      path: '/rc/second-look',
+      title: 'The second look',
+      render: (outlet) => renderSecondLook(outlet, context),
     })
     .register({
       path: '/rc/session/:id',

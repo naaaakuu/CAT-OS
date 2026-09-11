@@ -208,6 +208,10 @@ export function deriveWorldState(content, records, now = Date.now()) {
       earned = addBag(earned, EARN.verbal(r.stars, s.score?.correct ?? 0, r.flawless));
     }
   }
+  for (const s of sessions.filter((x) => x.module === 'rc2')) {
+    const r = verbalStars(s, (s.score?.total ?? 6) * 80);
+    earned = addBag(earned, EARN.secondLook(r.stars, s.score?.correct ?? 0, r.flawless));
+  }
   for (const s of wdSessions) earned = addBag(earned, EARN.wd(s.score?.accuracy === 1 ? 3 : 1, s.score?.correct ?? 0));
   for (const s of gardenSessions) earned = addBag(earned, EARN.garden(s.session_type, s.clean === true));
   for (const r of rounds) earned = addBag(earned, EARN.round(r.stars ?? 0, r.score?.correct ?? 0, r.flawless === true));

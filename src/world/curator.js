@@ -435,3 +435,55 @@ export function standing(state, weakness) {
   if (weakness?.weakest) out.push(`Your answers say ${typeName(weakness.weakest)} is the thing to work on.`);
   return out;
 }
+
+/* ------------------------------------------------------------------ */
+/* The second look — the questions that got away                       */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Every Reading Comprehension question the learner has answered wrongly
+ * and not since answered right, newest miss first. Derived from records
+ * alone (no passage loading), so the Reading Room can offer the run
+ * without paying for content it might not use.
+ *
+ * A question that has been missed more than once, or that belongs to the
+ * learner's weakest type, is worth more: reviewing your own mistakes is
+ * the highest-yield hour in CAT preparation, and this is that hour.
+ *
+ * @param {Array} sessions  the sessions store
+ * @param {object} [weakness] readingWeakness(sessions), to weight by type
+ * @returns {Array<{question_id, passage_id, type, misses, lastMissAt, weight}>}
+ */
+export function missedQuestions(sessions, weakness = null) {
+  const byQ = new Map();
+  const ordered = [...sessions].filter((s) => !s.module && s.finished_at)
+    .sort((a, b) => String(a.finished_at).localeCompare(String(b.finished_at)));
+  for (const s of ordered) {
+    for (const a of s.answers ?? []) {
+      if (a.is_correct === null || a.is_correct === undefined) continue;
+      const id = a.question_id;
+      if (!id) continue;
+      const rec = byQ.get(id) ?? { question_id: id, passage_id: s.passage_id, type: a.type ?? null, misses: 0, lastMissAt: null, settled: false };
+      if (a.type && !rec.type) rec.type = a.type;
+      if (a.is_correct === true) rec.settled = true;
+      else { rec.misses += 1; rec.settled = false; rec.lastMissAt = s.finished_at; }
+      byQ.set(id, rec);
+    }
+  }
+  const weak = weakness?.weakest ?? null;
+  return [...byQ.values()]
+    .filter((r) => !r.settled && r.misses > 0)
+    .map((r) => ({ ...r, weight: r.misses * 2 + (r.type && r.type === weak ? 3 : 0) + (r.lastMissAt ? 1 : 0) }))
+    .sort((a, b) => b.weight - a.weight || String(b.lastMissAt).localeCompare(String(a.lastMissAt)));
+}
+
+/** How the Reading Room offers the second look, in one line. */
+export function secondLookLine(missed, weakness) {
+  if (!missed.length) return '';
+  const n = missed.length;
+  const passages = new Set(missed.map((m) => m.passage_id)).size;
+  if (weakness?.weakest) {
+    return `${n} question${n === 1 ? '' : 's'} got away, from ${passages} passage${passages === 1 ? '' : 's'} — several of them about ${typeName(weakness.weakest)}.`;
+  }
+  return `${n} question${n === 1 ? '' : 's'} got away, from ${passages} passage${passages === 1 ? '' : 's'}. The traps are the lesson.`;
+}

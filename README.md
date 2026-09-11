@@ -24,7 +24,8 @@ what your own answers say you are weak at.
 - **The Thicket** — 271 loanwords from twelve languages. A lantern lights for
   every language you learn.
 - **The Reading Room** — 32 CAT-register passages (136 questions) read
-  against the clock. Three stars means three quarters right inside the
+  against the clock, and **the second look**: the questions that got away,
+  brought back with the evidence one tap away and the trap named. Three stars means three quarters right inside the
   passage's own time; the tower gains floors and lit windows as you earn them.
 - **The Loom · The Summary Table · The Stranger's Bench** — Para Jumbles, Para
   Summary and Odd One Out: eight-tier journeys with a mentor who names the

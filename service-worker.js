@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 31;
+const CACHE_VERSION = 32;
 const CONTENT_VERSION = 13;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -76,6 +76,7 @@ const SHELL_FILES = [
   './src/modules/reading-comprehension/logic/store.js',
   './src/modules/reading-comprehension/screens/browser.js',
   './src/modules/reading-comprehension/screens/session.js',
+  './src/modules/reading-comprehension/screens/second-look.js',
   './src/modules/reading-comprehension/screens/review.js',
   './src/modules/reading-comprehension/screens/mentor.js',
   './src/modules/para-jumbles/index.js',

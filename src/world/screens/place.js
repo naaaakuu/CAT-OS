@@ -18,7 +18,7 @@ import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { starHTML } from './result.js';
 import { REGION_CRAFT, craft } from '../economy.js';
-import { nextPassage, nextVerbal, nextFamily, readingWeakness, typeName } from '../curator.js';
+import { nextPassage, nextVerbal, nextFamily, readingWeakness, typeName, missedQuestions, secondLookLine } from '../curator.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
 import { STAGES } from '../../core/engine/garden-session.js';
@@ -216,7 +216,13 @@ export async function renderPlace(outlet, { storage }, params) {
       gold: rec.kind === 'retry',
     } : null;
     const note = rec?.why || (weakness.weakest ? `Your answers say ${typeName(weakness.weakest)} is the thing to work on.` : '');
-    head({ pct: rd.maxStars ? rd.stars / rd.maxStars : 0, label: `${rd.stars} / ${rd.maxStars} stars` }, cta, note);
+    const missed = missedQuestions(world.records.sessions, weakness);
+    head({ pct: rd.maxStars ? rd.stars / rd.maxStars : 0, label: `${rd.stars} / ${rd.maxStars} stars` },
+      missed.length >= 4 ? { href: '#/rc/second-look', label: 'The second look', sub: `${Math.min(6, missed.length)} questions that got away · the highest-yield run here`, gold: true } : cta,
+      missed.length >= 4 ? secondLookLine(missed, weakness) : note);
+    if (missed.length >= 4 && rec) {
+      top.insertAdjacentHTML('beforeend', `<a class="g-btn place__second" href="#/rc/session/${rec.item.id}">Or read a new passage: ${escapeHTML(rec.item.title)}</a>`);
+    }
     const groups = groupByStage(content.rc);
     more.innerHTML = `
       ${rd.observatory ? `<section class="place__section"><div class="upgrade"><div class="upgrade__lead"><p class="upgrade__name">Night Reading</p><p class="upgrade__line">From the Observatory: a tighter pace (four fifths of the time) for the flawless mark.</p></div><button class="upgrade__btn" id="night-toggle" aria-pressed="${night}">${night ? 'On' : 'Off'}</button></div></section>` : ''}

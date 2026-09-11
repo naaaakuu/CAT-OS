@@ -32,5 +32,9 @@ export function registerWorld(router, context) {
  *  tab bar): the valley, its places, its rounds, and the Rootwood's
  *  sessions and plants, which render on the world's own backdrop. */
 export function isWorldRoute(hash) {
-  return hash === '#/world' || hash.startsWith('#/world/') || hash.startsWith('#/round/') || hash === '#/garden' || hash.startsWith('#/garden/');
+  return hash === '#/world' || hash.startsWith('#/world/') || hash.startsWith('#/round/')
+    || hash === '#/garden' || hash.startsWith('#/garden/')
+    // A timed run is immersive wherever it lives: a tab bar under a clock
+    // is an invitation to leave in the middle of a passage.
+    || hash.startsWith('#/rc/session/') || hash === '#/rc/second-look';
 }

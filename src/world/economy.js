@@ -162,6 +162,10 @@ export const EARN = Object.freeze({
   rc: (stars, correct = 0, flawless = false) => ({
     amber: 0, ink: 14 + 10 * stars + 4 * correct, thread: 0, ember: emberFor(stars, flawless),
   }),
+  /** The second look: the questions that got away, answered again. */
+  secondLook: (stars, correct = 0, flawless = false) => ({
+    amber: 0, ink: 10 + 8 * stars + 5 * correct, thread: 0, ember: emberFor(stars, flawless),
+  }),
   /** A set at the Loom, the Table or the Bench. */
   verbal: (stars, correct = 0, flawless = false) => ({
     amber: 0, ink: 0, thread: 8 + 6 * stars + 5 * correct, ember: emberFor(stars, flawless),
