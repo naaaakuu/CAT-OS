@@ -273,11 +273,30 @@ export async function composeRound(region, fields, ledger, opts = {}) {
     for (const h of rest) { if (chosen.length >= n) break; seen.add(h.entry.id); chosen.push({ ...h, status: 'again' }); }
   }
 
+  /* Three of the twelve are the question CAT actually asks: a word inside
+     a real sentence, from the context pack. They are drawn from their own
+     pool (the pack overlaps the word lists barely at all) and carry their
+     own mastery, so the Meadow's flowers still count only Meadow words. */
+  if (opts.context?.entries?.length) {
+    const pack = opts.context.entries;
+    const want = Math.min(3, Math.max(0, chosen.length - 6));
+    const ctxDue = [...ledger.values()].filter((rec) => rec.bundle_id === 'context' && rec.next_at && Date.parse(rec.next_at) <= now);
+    const dueIds = new Set(ctxDue.map((rec) => rec.entry_id));
+    const scored = pack.map((e) => ({ e, pri: dueIds.has(e.id) ? 2 : ledger.has(e.id) ? 0 : 1 }));
+    shuffle(scored, r);
+    scored.sort((a, b) => b.pri - a.pri);
+    const take = scored.slice(0, want).map((s) => s.e);
+    for (let i = 0; i < take.length; i += 1) {
+      chosen[chosen.length - 1 - i] = { context: take[i], bundle: null, status: dueIds.has(take[i].id) ? 'due' : 'context' };
+    }
+  }
+
   shuffle(chosen, r);
   const counts = {
     due: chosen.filter((c) => c.status === 'due').length,
     shaky: chosen.filter((c) => c.status === 'shaky').length,
     new: chosen.filter((c) => c.status === 'new').length,
+    context: chosen.filter((c) => c.context).length,
   };
   const primary = bundles.get(newSource?.id) ?? bundles.values().next().value ?? null;
   return { entries: chosen, bundles, primary, counts, ...roundVoice(region, counts, newSource) };

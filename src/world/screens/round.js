@@ -16,7 +16,7 @@
  */
 
 import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../state.js';
-import { loadField, loadLedger, pickRound, LexRound, saveRound, TARGET_MS, ROUND_SIZE, listFields } from '../lexicon.js';
+import { loadField, loadLedger, pickRound, LexRound, saveRound, TARGET_MS, ROUND_SIZE, listFields, loadContext } from '../lexicon.js';
 import { composeRound } from '../curator.js';
 import { regionBySlug } from '../regions.js';
 import { play, silenceWorld, startAmbience } from '../audio.js';
@@ -53,7 +53,7 @@ export async function renderRound(outlet, { storage }, params) {
       line = 'A field you chose yourself.';
       counts = { due: 0, shaky: 0, new: picks.filter((p) => p.status === 'new').length };
     } else {
-      const composed = await composeRound(region.slug, fields, ledger, { seed: `round:${Date.now()}` });
+      const composed = await composeRound(region.slug, fields, ledger, { seed: `round:${Date.now()}`, context: await loadContext().catch(() => null) });
       ({ entries: picks, title, line, counts, primary } = composed);
     }
   } catch (err) {
@@ -63,7 +63,9 @@ export async function renderRound(outlet, { storage }, params) {
   if (!picks?.length) { location.hash = region.route; return; }
 
   const languages = region.slug === 'thicket' ? fields.map((f) => f.name) : [];
-  const round = new LexRound({ region: region.slug, picks, languages });
+  let context = null;
+  try { context = await loadContext(); } catch { /* the dictionary question still works */ }
+  const round = new LexRound({ region: region.slug, picks, languages, context });
   const target = TARGET_MS[region.slug] ?? 7000;
   const atmo = before.state.atmo;
 
@@ -99,6 +101,7 @@ export async function renderRound(outlet, { storage }, params) {
         ${counts.due ? `<span class="brief__fact is-due">${counts.due} due</span>` : ''}
         ${counts.shaky ? `<span class="brief__fact is-shaky">${counts.shaky} slipping</span>` : ''}
         ${counts.new ? `<span class="brief__fact is-new">${counts.new} new</span>` : ''}
+        ${counts.context ? `<span class="brief__fact is-context">${counts.context} in context</span>` : ''}
         <span class="brief__fact">~${Math.round(target / 1000)}s each</span>
       </div>
       <div class="brief__stars">
@@ -158,7 +161,7 @@ export async function renderRound(outlet, { storage }, params) {
       body.innerHTML = `
         <div class="vround" id="card">
           ${pick?.status === 'due' ? '<p class="vround__tag is-due">Due for review</p>' : pick?.status === 'new' ? '<p class="vround__tag is-new">New word</p>' : pick?.status === 'shaky' ? '<p class="vround__tag is-shaky">This one slipped</p>' : ''}
-          ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${escapeHTML(q.stem)}</p>`}
+          ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${markStem(q)}</p>`}
           <p class="vround__ask">${escapeHTML(q.ask)}${q.hint ? ` · <i>${escapeHTML(q.hint)}</i>` : ''}</p>
           <div class="vround__options ${isTwinPick ? 'twin__pair' : ''}" id="opts">
             ${q.options.map((o, i) => `<button class="vopt" data-i="${i}"><span class="key" aria-hidden="true">${KEYS[i]}</span><span>${escapeHTML(o.text)}</span></button>`).join('')}
@@ -189,7 +192,9 @@ export async function renderRound(outlet, { storage }, params) {
           play('wrong');
           body.querySelector('#card')?.classList.add('is-wrong');
           const right = q.options[verdict.correctIndex]?.text ?? '';
-          fb.innerHTML = q.kind === 'twin' || q.kind === 'twin-meaning'
+          fb.innerHTML = q.kind === 'context'
+            ? `Here it means <b>${escapeHTML(trim(q.context?.meaning ?? '', 90))}</b>.`
+            : q.kind === 'twin' || q.kind === 'twin-meaning'
             ? `<b>${escapeHTML(right)}</b> — ${escapeHTML(e2.explanation ?? '')}`
             : q.kind === 'reverse' ? `The word is <b>${escapeHTML(right)}</b>. ${escapeHTML(trim(e2.meaning ?? '', 80))}`
               : `<b>${escapeHTML(e2.word ?? '')}</b>: ${escapeHTML(e2.meaning ?? '')}`;
@@ -245,3 +250,12 @@ export async function renderRound(outlet, { storage }, params) {
 }
 
 function trim(s, n) { const t = String(s ?? '').trim(); return t.length > n ? `${t.slice(0, n - 1)}…` : t; }
+
+/** A sentence with the word under test marked, escaped first so the
+ *  content can never inject markup. */
+function markStem(q) {
+  const text = escapeHTML(q.stem);
+  if (!q.markWord) return text;
+  const w = escapeHTML(q.markWord).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(`(${w})`, 'i'), '<mark>$1</mark>');
+}

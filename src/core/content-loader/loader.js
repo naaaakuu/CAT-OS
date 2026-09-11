@@ -1079,3 +1079,35 @@ export function twinConsistencyIssues(id, item) {
   }
   return issues;
 }
+
+/* ------------------------------------------------------------------ */
+/* Words in context                                                    */
+/* ------------------------------------------------------------------ */
+
+let contextPack = null;
+
+/**
+ * The words-in-context pack: every word the corpus shows inside a real
+ * sentence, with the sense it carries there. Built by
+ * `tools/build-context.mjs` from the Reading Comprehension vocabulary
+ * blocks and the Rootwood members' context sentences, so it is derived
+ * content and has no registry entry of its own.
+ *
+ * @returns {Promise<{entries: Array<{id, word, sentence, meaning, difficulty, source, from, root?}>}>}
+ */
+export async function loadContextPack() {
+  if (contextPack) return contextPack;
+  const pack = await fetchJSON('content/context/pack.json');
+  if (!Array.isArray(pack?.entries)) throw new ContentError('The context pack is malformed.');
+  contextPack = pack;
+  return contextPack;
+}
+
+/** word (lowercased) → its context entry, for a quick lookup in a round. */
+export async function contextByWord() {
+  const pack = await loadContextPack();
+  if (!pack.__byWord) {
+    pack.__byWord = new Map(pack.entries.map((e) => [e.word.toLowerCase(), e]));
+  }
+  return pack.__byWord;
+}

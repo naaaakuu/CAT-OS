@@ -20,7 +20,7 @@
  * from.
  */
 
-import { listLexItems, loadLexItem, listTwinItems, loadTwinItem, listLoanItems, loadLoanItem } from '../core/content-loader/loader.js';
+import { listLexItems, loadLexItem, listTwinItems, loadTwinItem, listLoanItems, loadLoanItem, loadContextPack, contextByWord } from '../core/content-loader/loader.js';
 import { STORES } from '../core/storage/storage-adapter.js';
 import { rng } from './engine/palette.js';
 import { roundStars, EARN } from './economy.js';
@@ -206,6 +206,41 @@ export function buildQuestion(entry, bundle, region, seed, languages = [], pool 
 
 function shuffle(arr, r) { const a = [...arr]; for (let i = a.length - 1; i > 0; i -= 1) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
+/**
+ * The CAT question. The exam does not ask what a word means in the
+ * abstract; it asks what it means HERE. Given a context entry (a word
+ * inside a real sentence, with the sense it carries there) and a pool of
+ * other context entries for distractors, this builds that question.
+ *
+ * @param {object} ctx   { word, sentence, meaning } from the context pack
+ * @param {Array}  pool  other context entries
+ * @param {string} seed
+ * @param {object} [entry] the lexicon entry, when the round has one
+ */
+export function buildContextQuestion(ctx, pool, seed, entry = null) {
+  const r = rng(`ctx:${seed}:${ctx.id ?? ctx.word}`);
+  const right = cap(trimDot(ctx.meaning));
+  const others = pool.filter((e) => e.word.toLowerCase() !== ctx.word.toLowerCase()
+    && cap(trimDot(e.meaning)).toLowerCase() !== right.toLowerCase());
+  // Prefer distractors of a similar length: an option that is obviously
+  // too short or too long is a free mark, and CAT never gives one.
+  const near = [...others].sort((a, b) => Math.abs(a.meaning.length - ctx.meaning.length) - Math.abs(b.meaning.length - ctx.meaning.length));
+  const picked = sample(near.slice(0, Math.max(12, Math.min(40, near.length))), 3, r);
+  const opts = [{ text: right, correct: true }, ...picked.map((o) => ({ text: cap(trimDot(o.meaning)), correct: false }))];
+  // The sentence travels plain; the screen marks the word (see markStem),
+  // so nothing here can ever put markup into content.
+  return {
+    kind: 'context',
+    ask: `As used here, ${ctx.word} most nearly means`,
+    stem: ctx.sentence,
+    markWord: ctx.word,
+    options: shuffle(opts, r),
+    entry: entry ?? { id: ctx.id, word: ctx.word, meaning: ctx.meaning },
+    wordShown: null,
+    context: ctx,
+  };
+}
+
 /* ------------------------------------------------------------------ */
 /* A round                                                             */
 /* ------------------------------------------------------------------ */
@@ -219,9 +254,11 @@ export class LexRound {
    *   { region, picks: [{entry, bundle, status}] }   a curated round that
    *   spans bundles — the curator's shape, and what the valley uses.
    */
-  constructor({ region, bundle, entries, picks, languages = [], now = () => Date.now() }) {
+  constructor({ region, bundle, entries, picks, languages = [], context = null, now = () => Date.now() }) {
     this.region = region;
     this.picks = picks ?? entries.map((e) => ({ entry: e, bundle, status: 'again' }));
+    // A context pick carries no lexicon entry; it stands for itself.
+    for (const p of this.picks) if (p.context && !p.entry) p.entry = { id: p.context.id, word: p.context.word, meaning: p.context.meaning, isContext: true };
     this.entries = this.picks.map((p) => p.entry);
     this.bundle = bundle ?? this.picks[0]?.bundle ?? null;
     this.bundleOf = new Map(this.picks.map((p) => [p.entry.id, p.bundle]));
@@ -237,7 +274,19 @@ export class LexRound {
       seenBundles.add(p.bundle.meta.id);
       pool.push(...p.bundle.entries);
     }
-    this.questions = this.picks.map((p) => buildQuestion(p.entry, p.bundle, region, this.id, languages, pool));
+    // Where the corpus can show this word inside a real sentence, ask the
+    // CAT question instead of the dictionary one — about a third of the
+    // time, so a round still teaches meanings, synonyms and opposites too.
+    const ctxPool = context?.entries ?? [];
+    const byWord = context?.byWord ?? null;
+    const cr = rng(`ctxmix:${this.id}`);
+    this.questions = this.picks.map((p) => {
+      if (p.context) return buildContextQuestion(p.context, ctxPool.length ? ctxPool : [p.context], this.id, p.entry);
+      const word = String(p.entry.word ?? '').toLowerCase();
+      const hit = byWord && word ? byWord.get(word) : null;
+      if (hit && cr() < 0.34) return buildContextQuestion(hit, ctxPool, this.id, p.entry);
+      return buildQuestion(p.entry, p.bundle, region, this.id, languages, pool);
+    });
   }
   get total() { return this.questions.length; }
   get current() { return this.questions[this.index]; }
@@ -280,7 +329,7 @@ export async function saveRound(storage, round, result, ledger, now = Date.now()
   for (const a of round.answers) {
     const entry = byEntry.get(a.entry_id);
     if (!entry) continue;
-    const bundleId = round.bundleOf?.get(a.entry_id)?.meta.id ?? round.bundle?.meta.id ?? null;
+    const bundleId = entry.isContext ? 'context' : (round.bundleOf?.get(a.entry_id)?.meta.id ?? round.bundle?.meta.id ?? null);
     const rec = applyAnswer(ledger.get(a.entry_id), entry, round.region, bundleId, a.correct, now);
     ledger.set(a.entry_id, rec);
     await storage.put(STORES.LEARNING, rec);
@@ -307,4 +356,14 @@ export function summarizeLedger(ledger, now = Date.now()) {
 export function fieldSummary(field, summary) {
   const s = summary.get(field.id) ?? { met: 0, known: 0, mastered: 0, due: 0 };
   return { ...s, total: field.total, bloom: field.total ? s.mastered / field.total : 0 };
+}
+
+/** The words-in-context pack, ready for a round: the entries to draw
+ *  distractors from, and a word → entry map. Loaded once per app life. */
+let contextCache = null;
+export async function loadContext() {
+  if (contextCache) return contextCache;
+  const [pack, byWord] = await Promise.all([loadContextPack(), contextByWord()]);
+  contextCache = { entries: pack.entries, byWord };
+  return contextCache;
 }

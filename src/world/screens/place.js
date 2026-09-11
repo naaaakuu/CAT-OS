@@ -170,7 +170,7 @@ export async function renderPlace(outlet, { storage }, params) {
       gold: r.due >= 5,
     };
     const note = r.met === 0
-      ? `${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through — the valley brings you twelve at a time, and brings back the ones that fade.`
+      ? `${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through — the valley brings you twelve at a time, some of them inside a real sentence, and brings back the ones that fade.`
       : `${r.known} of ${r.total.toLocaleString()} ${unit} are in memory, ${r.mastered} of them for good.`;
 
     const groups = [...new Set(fields.map((f) => f.group))];

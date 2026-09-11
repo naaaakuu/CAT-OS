@@ -4,6 +4,37 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 1.1.2 — 2026-09-12 — The question CAT actually asks
+
+CAT does not ask what a word means in the abstract; it asks what it means
+HERE. The corpus already held hundreds of words shown inside a real
+sentence — the `vocabulary[]` block of every passage (word · passage_use ·
+meaning_here) and the `context_sentences` of every Rootwood member — and
+nothing had ever used them.
+
+- **`tools/build-context.mjs`** walks both and writes
+  `content/context/pack.json`: **270 words in a real sentence with the
+  sense they carry there** (60 from Reading Comprehension, 210 from the
+  Rootwood). Entries whose word cannot be found in their own sentence are
+  dropped, because a question cannot mark a word that is not on screen.
+  It is derived content, so it has no registry entry of its own.
+- **Three of every twelve** in a Meadow, Pond or Thicket round are now
+  that question: the sentence with the word marked, four plausible senses,
+  and "as used here, X most nearly means". They carry their own mastery
+  (ledger bundle `context`), so the Meadow's flowers still count only
+  Meadow words, and they come back on the same spacing ladder as everything
+  else.
+- **The Gauntlet is genuinely mixed**: 7 Meadow + 7 Pond + 7 Thicket + 9
+  in-context, still the same thirty all week against the same three
+  minutes. "Mixed pressure" now means mixed kinds of thinking, not only
+  words from three different places.
+- A missed in-context question teaches the contextual sense, not the
+  dictionary one.
+
+Also in this pass: the Wilds gets the road out painted behind its records;
+a 'cover' fit no longer leaves a bar (whole-device-pixel snapping rounds up
+for cover); map pins fade at the edge instead of stacking on the rim.
+
 ## 1.1.0 — 2026-09-12 — The final world rebuild
 
 The owner's 2026-09-12 brief ("CAT OS — THE FINAL WORLD REBUILD") asked for

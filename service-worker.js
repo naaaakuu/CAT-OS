@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 29;
+const CACHE_VERSION = 30;
 const CONTENT_VERSION = 13;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -175,6 +175,7 @@ const SHELL_FILES = [
 
 const CONTENT_FILES = [
   './content/index.json',
+  './content/context/pack.json',
   './content/schema/rc.schema.v1.json',
   './content/schema/rc.schema.v2.json',
   './content/schema/rc.schema.v3.json',

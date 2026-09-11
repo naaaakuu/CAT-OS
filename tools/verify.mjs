@@ -1935,6 +1935,26 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
       if (q.options.filter((o) => o.correct).length !== 1) bad('world curator: every question has exactly one right answer');
       if (new Set(q.options.map((o) => o.text.toLowerCase())).size !== q.options.length) bad(`world curator: repeated option text in a ${q.kind} question`);
     }
+    /* Words in context: the CAT question, built from the corpus. */
+    const ctx = await lexicon.loadContext();
+    if (ctx.entries.length < 200) bad(`world context: the pack should hold hundreds of words in context (${ctx.entries.length})`);
+    if (ctx.byWord.size !== ctx.entries.length) bad('world context: one entry per word');
+    for (const e of ctx.entries) {
+      if (!e.word || !e.sentence || !e.meaning) bad(`world context: ${e.id} is missing a field`);
+      if (!e.sentence.toLowerCase().includes(e.word.toLowerCase().slice(0, Math.max(4, e.word.length - 3)))) {
+        bad(`world context: ${e.id} — "${e.word}" does not appear in its own sentence`);
+      }
+    }
+    {
+      const c0 = ctx.entries[0];
+      const cq = lexicon.buildContextQuestion(c0, ctx.entries, 'verify');
+      if (cq.options.filter((o) => o.correct).length !== 1) bad('world context: a context question has exactly one right answer');
+      if (cq.options.length !== 4) bad('world context: a context question offers four options');
+      if (new Set(cq.options.map((o) => o.text.toLowerCase())).size !== 4) bad('world context: a context question repeats an option');
+      if (!cq.ask.includes(c0.word)) bad('world context: the question must name the word it is asking about');
+      if (cq.markWord !== c0.word) bad('world context: the word must be markable inside the sentence');
+    }
+
     /* Reach and weakness are read from real records, never claimed. */
     const rcContent = { rc: [
       { id: 'p1', stage: 'foundation', difficulty_numeric: 2 }, { id: 'p2', stage: 'foundation', difficulty_numeric: 3 },

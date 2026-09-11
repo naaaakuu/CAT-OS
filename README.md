@@ -17,7 +17,8 @@ what your own answers say you are weak at.
   apart, build one nobody taught you, and a tree grows in one of six groves.
 - **The Meadow** — the CAT word lists: 2,577 high-, medium- and low-frequency
   words with meanings, synonyms and antonyms, played as timed twelve-word
-  rounds. Every word you master opens a flower that stays.
+  rounds, three of them asked the way CAT asks — a word inside a real
+  sentence. Every word you master opens a flower that stays.
 - **The Mirror Pond** — 401 confusable word pairs and triples. Tell the twins
   apart and koi arrive.
 - **The Thicket** — 271 loanwords from twelve languages. A lantern lights for
@@ -34,8 +35,9 @@ what your own answers say you are weak at.
 - **The Hearth** — home and the Workshop: the four crafts you have made, the
   twenty-one works you can build with them, the day's three asks, and the
   honest read on where you stand.
-- **The Wilds** — the weekly Gauntlet: the same thirty words all week, three
-  minutes, against your own best.
+- **The Wilds** — the weekly Gauntlet: the same thirty questions all week —
+  words from three places and nine asked the way CAT asks them, inside a
+  real sentence — three minutes, against your own best.
 
 ## The four crafts
 

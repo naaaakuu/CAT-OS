@@ -10,7 +10,7 @@
 import { regionBySlug } from '../regions.js';
 import { WorldRenderer } from '../engine/canvas.js';
 import { buildBackdropScene } from '../engine/map.js';
-import { listFields, loadField, loadLedger, buildQuestion, LexRound, applyAnswer } from '../lexicon.js';
+import { listFields, loadField, loadLedger, buildQuestion, buildContextQuestion, LexRound, applyAnswer, loadContext } from '../lexicon.js';
 import { roundStars, EARN } from '../economy.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, newlyBuildable, loadWorldContent } from '../state.js';
 import { rng } from '../engine/palette.js';
@@ -46,8 +46,17 @@ export async function composeGauntlet(week) {
     const pool = bundles.flatMap((b) => b.entries.map((e) => ({ entry: e, bundle: b })));
     for (let i = pool.length - 1; i > 0; i -= 1) { const j = Math.floor(r() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
     const languages = region === 'thicket' ? fields.map((f) => f.name) : [];
-    for (const p of pool.slice(0, 10)) picks.push({ region, ...p, languages });
+    for (const p of pool.slice(0, 7)) picks.push({ region, ...p, languages });
   }
+  /* Nine of the thirty are the question CAT actually asks: a word inside a
+     real sentence. Mixed pressure means mixed KINDS of thinking, not just
+     words from three different places. */
+  try {
+    const ctx = await loadContext();
+    const pool = [...ctx.entries];
+    for (let i = pool.length - 1; i > 0; i -= 1) { const j = Math.floor(r() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    for (const c of pool.slice(0, 9)) picks.push({ region: 'meadow', context: c, contextPool: ctx.entries });
+  } catch { /* thirty words is still a Gauntlet */ }
   for (let i = picks.length - 1; i > 0; i -= 1) { const j = Math.floor(r() * (i + 1)); [picks[i], picks[j]] = [picks[j], picks[i]]; }
   return picks;
 }
@@ -74,7 +83,7 @@ export async function renderWilds(outlet, { storage }) {
       <div class="place__body">
         <p class="place__eyebrow">${escapeHTML(region.skill)}</p>
         <h1 class="place__title">The Gauntlet</h1>
-        <p class="place__line">${GAUNTLET_SIZE} words drawn across the Meadow, the Pond and the Thicket — the same ${GAUNTLET_SIZE} all week — in ${GAUNTLET_MS / 60000} minutes. No hints, no second tries. Beat your own best.</p>
+        <p class="place__line">${GAUNTLET_SIZE} questions — words from the Meadow, the Pond and the Thicket, and nine asked the way CAT asks them, inside a real sentence. The same ${GAUNTLET_SIZE} all week, in ${GAUNTLET_MS / 60000} minutes. No hints, no second tries. Beat your own best.</p>
         <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week'}</small><span class="arrow" aria-hidden="true">→</span></button>
         <div class="place__section">
           <h2>Records</h2>
@@ -118,7 +127,9 @@ export async function renderWilds(outlet, { storage }) {
 
 function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
   const startedAt = Date.now();
-  const questions = picks.map((p, i) => ({ ...buildQuestion(p.entry, p.bundle, p.region, `gauntlet:${week}:${i}`, p.languages), region: p.region, bundle: p.bundle }));
+  const questions = picks.map((p, i) => (p.context
+    ? { ...buildContextQuestion(p.context, p.contextPool, `gauntlet:${week}:${i}`), region: p.region, bundle: null, inContext: true }
+    : { ...buildQuestion(p.entry, p.bundle, p.region, `gauntlet:${week}:${i}`, p.languages), region: p.region, bundle: p.bundle }));
   const answers = [];
   let index = 0, shownAt = Date.now(), locked = false, alive = true, ended = false;
 
@@ -156,8 +167,8 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     pos.textContent = String(index + 1);
     track.style.width = `${Math.round((index / questions.length) * 100)}%`;
     body.innerHTML = `
-      <p class="vround__pos">${escapeHTML(regionBySlug(q.region)?.name ?? '')}</p>
-      ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${escapeHTML(q.stem)}</p>`}
+      <p class="vround__pos">${q.inContext ? 'In context' : escapeHTML(regionBySlug(q.region)?.name ?? '')}</p>
+      ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${markStem(q)}</p>`}
       <p class="vround__ask">${escapeHTML(q.ask)}</p>
       <div class="vround__options ${q.kind === 'twin' ? 'twin__pair' : ''}" id="opts">${q.options.map((o, i) => `<button class="vopt" data-i="${i}"><span class="key" aria-hidden="true">${KEYS[i] ?? ''}</span><span>${escapeHTML(o.text)}</span></button>`).join('')}</div>`;
     body.querySelector('#opts').addEventListener('click', (e) => {
@@ -166,7 +177,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       const i = Number(btn.dataset.i);
       const correct = !!q.options[i]?.correct;
       const ci = q.options.findIndex((o) => o.correct);
-      answers.push({ entry_id: q.entry.id, region: q.region, bundle_id: q.bundle.meta.id, kind: q.kind, chosen: i, correct, ms: Date.now() - shownAt });
+      answers.push({ entry_id: q.entry.id, region: q.region, bundle_id: q.bundle?.meta.id ?? null, kind: q.kind, chosen: i, correct, ms: Date.now() - shownAt });
       body.querySelectorAll('.vopt').forEach((b, j) => { b.disabled = true; if (j === ci) b.classList.add('is-correct'); else if (j === i) b.classList.add('is-wrong'); else b.classList.add('is-dim'); });
       play(correct ? 'correct' : 'wrong');
       setTimeout(() => { index += 1; if (index >= questions.length) finish(); else show(); }, correct ? 420 : 900);
@@ -188,7 +199,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       await storage.put(STORES.LEARNING, record);
       // The ledger learns from the Gauntlet too — every answer counts toward mastery.
       const byRegion = new Map();
-      for (const a of answers) { const q = questions.find((x) => x.entry.id === a.entry_id); if (!q) continue; const key = `${a.region}|${a.bundle_id}`; if (!byRegion.has(key)) byRegion.set(key, { region: a.region, bundle: q.bundle, entries: [], answers: [] }); const g = byRegion.get(key); g.entries.push(q.entry); g.answers.push(a); }
+      for (const a of answers) { if (!a.bundle_id) continue; const q = questions.find((x) => x.entry.id === a.entry_id); if (!q?.bundle) continue; const key = `${a.region}|${a.bundle_id}`; if (!byRegion.has(key)) byRegion.set(key, { region: a.region, bundle: q.bundle, entries: [], answers: [] }); const g = byRegion.get(key); g.entries.push(q.entry); g.answers.push(a); }
       for (const g of byRegion.values()) { const fake = { region: g.region, bundle: g.bundle, entries: g.entries, answers: g.answers }; await saveLedgerOnly(storage, fake, ledger); }
     } catch (err) { console.error('[CAT OS] gauntlet save failed', err); }
     const earned = EARN.gauntlet(stars.stars, correct);
@@ -240,3 +251,12 @@ async function saveLedgerOnly(storage, fake, ledger) {
 }
 
 export { deriveWorldState, loadWorldRecords, LexRound };
+
+/** A sentence with the word under test marked, escaped first so content
+ *  can never inject markup. */
+function markStem(q) {
+  const text = escapeHTML(q.stem);
+  if (!q.markWord) return text;
+  const w = escapeHTML(q.markWord).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(`(${w})`, 'i'), '<mark>$1</mark>');
+}
