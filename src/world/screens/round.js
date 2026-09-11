@@ -90,7 +90,7 @@ export async function renderRound(outlet, { storage }, params) {
 
   /* ---- Briefing: what this handful is, in one line ---- */
   body.innerHTML = `
-    <div class="brief">
+    <div class="brief is-veiled">
       <p class="brief__eyebrow">${escapeHTML(region.skill ?? 'Vocabulary')}</p>
       <h1 class="brief__title">${escapeHTML(title)}</h1>
       <p class="brief__line">${escapeHTML(line)}</p>

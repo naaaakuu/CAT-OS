@@ -67,6 +67,7 @@ export async function renderWorld(outlet, { storage }) {
       <div class="flyers" id="flyers" aria-hidden="true"></div>
     </section>`;
 
+  const askedAt = performance.now();
   let world;
   try {
     world = await loadWorld(storage);
@@ -92,8 +93,11 @@ export async function renderWorld(outlet, { storage }) {
   const earnedRaw = sessionStorage.getItem('world:earned');
   const unlockedRaw = sessionStorage.getItem('world:unlocked');
   for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked']) sessionStorage.removeItem(k);
-  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  const enter = (sel, delay) => setTimeout(() => { for (const el of outlet.querySelectorAll(sel)) el.classList.add('is-in'); }, delay);
+  // A slow open must not also be a slow reveal: if the valley took a while
+  // to load, everything arrives at once instead of in sequence.
+  const slow = performance.now() - askedAt > 1100;
+  const reduce = slow || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const enter = (sel, delay) => setTimeout(() => { for (const el of outlet.querySelectorAll(sel)) el.classList.add('is-in'); }, reduce ? 0 : delay);
   const hearthRegion = regionBySlug('hearth');
   const focus = focusSlug ? regionBySlug(focusSlug) : null;
 
@@ -147,12 +151,12 @@ export async function renderWorld(outlet, { storage }) {
       const el = pinFor.get(r.slug);
       if (!el) continue;
       const s = renderer.toScreen(r.anchor.x, r.anchor.y - (r.kind === 'learn' ? 34 : 26));
-      // Pins just past the edge lean in so their names stay readable;
-      // anything further out is hidden rather than stacked on the rim.
-      const far = s.x < -70 || s.x > renderer.cssW + 70 || s.y < -70 || s.y > renderer.cssH + 70;
-      const edge = s.x < 56 || s.x > renderer.cssW - 56 || s.y < 62 || s.y > renderer.cssH - 16;
-      const x = Math.max(56, Math.min(renderer.cssW - 56, s.x));
-      const y = Math.max(62, Math.min(renderer.cssH - 16, s.y));
+      // A pin sits where its place sits. Off the edge it fades out rather
+      // than being pushed onto the rim, where several would stack.
+      const far = s.x < 8 || s.x > renderer.cssW - 8 || s.y < 54 || s.y > renderer.cssH - 8;
+      const edge = s.x < 70 || s.x > renderer.cssW - 70 || s.y < 100 || s.y > renderer.cssH - 60;
+      const x = s.x;
+      const y = Math.max(54, s.y);
       el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px) translate(-50%, -100%)`;
       el.style.opacity = far ? '0' : edge ? '0.55' : '1';
       el.classList.toggle('is-tight', tight);
@@ -208,7 +212,11 @@ export async function renderWorld(outlet, { storage }) {
       el.addEventListener('pointerenter', () => { const r = regionBySlug(el.dataset.slug); if (r) renderer.lookAt(r.anchor.x, r.anchor.y - 20, { duration: 700 }); });
       el.addEventListener('click', () => { sessionStorage.setItem('world:focus', el.dataset.slug); play('open'); });
     }
-    enter('.op', state.isNew ? 4600 : 900);
+    // Fade them in on the nodes themselves: a selector-based timer can
+    // miss elements that were re-rendered while it was waiting.
+    const cards = [...nowEl.querySelectorAll('.op')];
+    const delay = state.isNew ? 4600 : 900;
+    cards.forEach((el, i) => setTimeout(() => el.classList.add('is-in'), reduce ? 0 : delay + i * 90));
   };
   renderNow();
 

@@ -108,6 +108,16 @@ spacing, reach and variety — and keeps a quiet weakness model on top:
   instead of glass panels, the four crafts as coloured gems everywhere they
   appear, the sheet, the pins, the Workshop, the build veil.
 
+### The rooms beyond the valley stand somewhere too
+
+The verbal crafts, Word DNA and the Reading Room keep their own screens —
+their pedagogy is the product's best work and was not worth rewriting to
+change a background. What they lacked was a PLACE. `src/world/stage.js`
+paints the region's own still scene behind the whole shell and sets
+`data-stage` on the root; the CSS lifts those screens onto warm glass over
+it. One canvas, painted once, no frame loop. The Loom stands at the Loom,
+Word DNA on the terraces, a passage in the Reading Room.
+
 ### Content: everything usable is now connected
 
 - **Sixteen new Word DNA units** (`wd-0013` … `wd-0028`) authored from

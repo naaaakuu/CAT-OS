@@ -97,9 +97,12 @@ export class WorldRenderer {
     const zw = this.cssW / this.worldW, zh = this.cssH / this.worldH;
     let z = this.fit === 'width' ? zw : this.fit === 'height' ? zh : this.fit === 'contain' ? Math.min(zw, zh) : Math.max(zw, zh);
     // Prefer a zoom that lands on whole device pixels per world pixel — the
-    // difference between crisp pixel art and a shimmering mush.
+    // difference between crisp pixel art and a shimmering mush. A 'cover'
+    // fit rounds UP, or snapping would leave a bar where the scene was
+    // meant to fill the frame.
     const device = z * this.dpr;
-    const snapped = device >= 2 ? Math.round(device) / this.dpr : z;
+    const whole = this.fit === 'cover' ? Math.ceil(device) : Math.round(device);
+    const snapped = device >= 2 ? whole / this.dpr : z;
     return clamp(snapped, this.minZoom(), this.maxZoom());
   }
 

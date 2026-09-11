@@ -68,8 +68,8 @@ export async function renderHearth(outlet, { storage }) {
     const canvas = outlet.querySelector('#hero');
     if (!canvas) return;
     const scene = buildBackdropScene('hearth', state, atmo);
-    renderer = new WorldRenderer(canvas, scene, { worldW: scene.W, worldH: scene.H, fit: 'width', pannable: false, minZoom: 0.3, maxZoom: 6 });
-    renderer.lookAt(scene.W / 2, 200, { animate: false });
+    renderer = new WorldRenderer(canvas, scene, { worldW: scene.W, worldH: scene.H, fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
+    renderer.lookAt(scene.W / 2, 150, { animate: false });
     renderer.start();
   };
   mountHero();

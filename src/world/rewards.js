@@ -36,6 +36,9 @@ export function worldReward(session, items = []) {
   sessionStorage.setItem('world:focus', region);
   sessionStorage.setItem('world:changed', region);
   sessionStorage.setItem('world:change-line', `${NAME_OF[region]}: <b>${stars} star${stars === 1 ? '' : 's'}</b>`);
+  // The crafts fly into the purse on the way back, exactly as they do
+  // after a round or a passage.
+  if (won.length) sessionStorage.setItem('world:earned', JSON.stringify(earned));
   setTimeout(() => { for (let i = 0; i < stars; i += 1) play(`star${i + 1}`, { delay: 0.9 + i * 0.35 }); if (won.length) play('ink', { delay: 0.9 + stars * 0.35 + 0.2 }); }, 0);
   return { region, stars, earned, html };
 }

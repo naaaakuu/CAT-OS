@@ -404,10 +404,12 @@
   -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: var(--g-shadow);
-  opacity: 0; transform: translateY(14px);
   transition: opacity 520ms var(--g-ease), transform 520ms var(--g-ease);
 }
-.brief.is-in { opacity: 1; transform: none; }
+/* Only a screen that asks for the entrance gets it; a brief with no script
+   behind it must never be invisible. */
+.brief.is-veiled { opacity: 0; transform: translateY(14px); }
+.brief.is-veiled.is-in { opacity: 1; transform: none; }
 .brief__fact.is-due { background: rgba(223, 162, 44, 0.16); border-color: rgba(223, 162, 44, 0.5); color: #7A5406; }
 .brief__fact.is-new { background: rgba(46, 107, 75, 0.12); border-color: rgba(46, 107, 75, 0.4); color: var(--g-accent); }
 .brief__fact.is-shaky { background: rgba(210, 84, 47, 0.12); border-color: rgba(210, 84, 47, 0.4); color: #8C3318; }
@@ -564,3 +566,63 @@
   box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.14);
   min-height: 60dvh;
 }
+
+/* ------------------------------------------------------------------ */
+/* The stage: a room that stands somewhere                             */
+/* ------------------------------------------------------------------ */
+
+.roomstage { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 700ms var(--g-ease); }
+.roomstage.is-in { opacity: 1; }
+.roomstage__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.roomstage__veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(246, 239, 225, 0.26), rgba(246, 239, 225, 0.52) 34%, rgba(246, 239, 225, 0.72));
+}
+
+:root[data-stage] body { background: transparent; }
+:root[data-stage] .shell, :root[data-stage] .shell__view { position: relative; z-index: 1; background: transparent; }
+:root[data-stage] .screen { background: transparent !important; }
+:root[data-stage] .card,
+:root[data-stage] .moment,
+:root[data-stage] .list-item,
+:root[data-stage] .brief,
+:root[data-stage] .recall {
+  background: var(--g-panel);
+  -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--g-shadow-soft);
+}
+:root[data-stage] .session-bar {
+  background: var(--g-panel);
+  -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%);
+}
+:root[data-stage] cat-nav {
+  background: var(--g-panel);
+  -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
+}
+/* The Reading Room's own run frame already paints a night; let the stage
+   show through it instead. */
+:root[data-stage="reading-room"] .run { background: transparent; }
+:root[data-stage="reading-room"] .run__bar { color: var(--g-ink); }
+:root[data-stage="reading-room"] .run__leave { background: var(--g-paper-3); color: var(--g-ink-2); }
+:root[data-stage="reading-room"] .run__place { color: var(--g-ink-3); }
+:root[data-stage="reading-room"] .run__what, :root[data-stage="reading-room"] .run__clock { color: var(--g-ink); }
+:root[data-stage="reading-room"] .run__ring { background: conic-gradient(var(--g-accent) var(--p, 0%), var(--g-paper-3) 0); }
+:root[data-stage="reading-room"] .run__ring::after { background: var(--g-paper); }
+:root[data-stage="reading-room"] .run__ring.is-over { background: conic-gradient(var(--c-ember) var(--p, 100%), var(--g-paper-3) 0); }
+:root[data-stage="reading-room"] .run__track { background: var(--g-paper-3); }
+:root[data-stage="reading-room"] .run__track i { background: var(--g-accent); }
+/* …but the result screen is its own night sky, always. */
+:root[data-stage] .result { background: radial-gradient(120% 80% at 50% 0%, #2B436F 0%, #0A1230 60%); }
+
+@media (prefers-reduced-motion: reduce) { .roomstage { transition: none; opacity: 1; } }
+
+/* The room sits ON the place: the card holds the words, the margins hold
+   the valley, and a soft ground under the content keeps long prose calm. */
+:root[data-stage] .shell__view { background: transparent; }
+:root[data-stage] .card, :root[data-stage] .moment, :root[data-stage] .list-item { border-radius: var(--g-radius-lg); }
+
+/* The Wilds: the road out, painted behind the records. */
+.place--wilds .place__hero { background: #0A1230; }
+.place--wilds .place__hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.place--wilds .place__hero > div { text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65); }

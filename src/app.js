@@ -19,6 +19,7 @@ import { registerOOO } from './modules/odd-one-out/index.js';
 import { registerWD } from './modules/word-dna/index.js';
 import { registerLanguageGarden } from './modules/language-garden/index.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
+import { syncStage, unmountStage } from './world/stage.js';
 import { silenceWorld, musicEnabled, setMusicEnabled } from './world/audio.js';
 import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
 import { resetPSIntro, latestByItem as latestPSByItem } from './modules/para-summary/logic/store.js';
@@ -947,6 +948,9 @@ async function boot() {
     document.documentElement.toggleAttribute('data-immersive', inWorld);
     document.documentElement.toggleAttribute('data-room', !inWorld);
     if (!inWorld) silenceWorld();
+    // Rooms beyond the valley still stand somewhere: the region's own scene
+    // is painted behind them (src/world/stage.js).
+    if (inWorld) unmountStage(); else syncStage(storage).catch(() => { /* the room still works */ });
   };
   applyImmersiveChrome();
   window.addEventListener('hashchange', applyImmersiveChrome);

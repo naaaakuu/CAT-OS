@@ -8,6 +8,8 @@
  */
 
 import { regionBySlug } from '../regions.js';
+import { WorldRenderer } from '../engine/canvas.js';
+import { buildBackdropScene } from '../engine/map.js';
 import { listFields, loadField, loadLedger, buildQuestion, LexRound, applyAnswer } from '../lexicon.js';
 import { roundStars, EARN } from '../economy.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, newlyBuildable, loadWorldContent } from '../state.js';
@@ -66,7 +68,7 @@ export async function renderWilds(outlet, { storage }) {
 
   outlet.innerHTML = `
     <section class="place place--page place--wilds" aria-label="The Wilds">
-      <div class="place__hero place__hero--short" style="background:linear-gradient(180deg,#2B436F,#0A1230)"><a class="place__back" href="#/world" id="back">← The valley</a>
+      <div class="place__hero place__hero--short"><canvas id="wilds-hero"></canvas><a class="place__back" href="#/world" id="back">← The valley</a>
         <div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:40px 20px 0"><div><div style="font-family:var(--g-display);font-size:40px;letter-spacing:0.12em;opacity:0.95">THE WILDS</div><div style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.7;margin-top:6px">Week ${escapeHTML(week.slice(-2))} · the Gauntlet</div></div></div>
       </div>
       <div class="place__body">
@@ -84,6 +86,21 @@ export async function renderWilds(outlet, { storage }) {
       </div>
     </section>`;
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'wilds'); play('close'); });
+
+  /* The road out, painted behind the records. */
+  let heroR = null;
+  try {
+    const w = await loadWorld(storage);
+    const canvas = outlet.querySelector('#wilds-hero');
+    if (canvas?.isConnected) {
+      const scene = buildBackdropScene('wilds', w.state, w.state.atmo);
+      heroR = new WorldRenderer(canvas, scene, { worldW: scene.W, worldH: scene.H, fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
+      heroR.lookAt(scene.W / 2, 116, { animate: false });
+      heroR.start();
+      const off = () => { heroR?.destroy(); window.removeEventListener('hashchange', off); };
+      window.addEventListener('hashchange', off);
+    }
+  } catch { /* the records still read */ }
   window.addEventListener('pointerdown', () => { unlock(); startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' }); }, { capture: true, once: true });
   startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' });
 

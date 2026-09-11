@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 28;
+const CACHE_VERSION = 29;
 const CONTENT_VERSION = 13;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -137,6 +137,7 @@ const SHELL_FILES = [
   './src/world/engine/life.js',
   './src/world/engine/map.js',
   './src/world/curator.js',
+  './src/world/stage.js',
   './src/world/craft-ui.js',
   './src/world/screens/backdrop.js',
   './src/world/screens/world.js',
