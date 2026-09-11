@@ -19,6 +19,7 @@
  * scoreboard; the numbers stay one quiet tap away.
  */
 
+import { worldReward } from '../../../world/rewards.js';
 import { loadPJItem, loadPJItems, listPJItems } from '../../../core/content-loader/loader.js';
 import { PJSession } from '../../../core/engine/pj-session.js';
 import { savePJResults, listPJSessions } from '../logic/store.js';
@@ -274,6 +275,7 @@ export async function renderPJSession(outlet, { storage }, params) {
       console.error('[CAT OS] pj mentor derive failed:', err);
     }
 
+    const worldRewardHTML = worldReward(s, resolved.items ?? []).html;
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">
@@ -312,6 +314,7 @@ export async function renderPJSession(outlet, { storage }, params) {
           `}
 
           <p class="moment__numbers">${escapeHTML(PJ_LINES.numbersAside(s.score.correct, s.score.total))}</p>
+          ${worldRewardHTML}
 
           <details class="reread moment__details">
             <summary>Set details</summary>
@@ -334,7 +337,7 @@ export async function renderPJSession(outlet, { storage }, params) {
         </article>
 
         <div class="session-actions">
-          <a class="btn btn--primary btn--block" href="#/pj">Continue the journey</a>
+          <a class="btn btn--primary btn--block" href="#/world/place/loom">Back to the world</a>
         </div>
       </section>
     `;

@@ -39,7 +39,7 @@ function readJSON(rel) {
 
 /* ---- import the app's real validation code ---- */
 const { validate } = await mod('src/core/content-loader/validator.js');
-const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues, oooConsistencyIssues, wdConsistencyIssues, vocabConsistencyIssues, lgConsistencyIssues } = await mod('src/core/content-loader/loader.js');
+const { consistencyIssues, pjConsistencyIssues, psConsistencyIssues, oooConsistencyIssues, wdConsistencyIssues, vocabConsistencyIssues, lgConsistencyIssues, lexConsistencyIssues, loanConsistencyIssues, twinConsistencyIssues } = await mod('src/core/content-loader/loader.js');
 const { PracticeSession } = await mod('src/core/engine/session.js');
 const { sessionXP, totalXP, levelFromXP, xpForNext } = await mod('src/core/engagement/xp.js');
 const { deriveStreaks, weekActivity, dayKey } = await mod('src/core/engagement/streaks.js');
@@ -286,6 +286,60 @@ for (const file of lgFiles) {
   ok(`${file} (${resolved.root.label}, ${taught} taught, ${reach} reach)`);
 }
 
+/* Lexicon (lex-*), loanword (loan-*) and confusable-twin (twin-*)
+   bundles — the owner's reference corpus (KNOWLEDGE/99_REFERENCE)
+   transcribed by tools/build-lexicon.mjs. Schema + the loader's own
+   consistency rules per bundle, then a per-band / per-type total so a
+   silent drop in the corpus is visible at a glance. */
+console.log('\n1h. Lexicon / loanword / twin JSON: schema + consistency');
+const bundleKinds = [
+  { type: 'lex',  dir: 'content/lexicon',   label: 'lexicon',  check: lexConsistencyIssues,  idRe: /^lex-(high|medium|low)-([a-z]|other)$/ },
+  { type: 'loan', dir: 'content/loanwords', label: 'loanword', check: loanConsistencyIssues, idRe: /^loan-[a-z0-9]+(-[a-z0-9]+)*$/ },
+  { type: 'twin', dir: 'content/twins',     label: 'twin',     check: twinConsistencyIssues, idRe: /^twin-[a-z]$/ },
+];
+const bundleFiles = {};        // type → sorted file names on disk
+const bundleById = new Map();  // id → parsed bundle (only those that passed)
+for (const kind of bundleKinds) {
+  const schemas = {};
+  for (const f of readdirSync(join(root, 'content/schema'))) {
+    if (f.startsWith(`${kind.type}.schema.v`)) schemas[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+  }
+  bundleFiles[kind.type] = existsSync(join(root, kind.dir))
+    ? readdirSync(join(root, kind.dir)).filter((f) => f.endsWith('.json')).sort() : [];
+  for (const file of bundleFiles[kind.type]) {
+    const id = file.replace('.json', '');
+    let item;
+    try { item = readJSON(`${kind.dir}/${file}`); }
+    catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+    if (!kind.idRe.test(id)) { bad(`${file}: file name is not a valid ${kind.label} bundle id`); continue; }
+    const schema = schemas[String(item.schema_version ?? 1)];
+    if (!schema) { bad(`${file}: no ${kind.label} schema for version ${item.schema_version}`); continue; }
+    const { valid, errors } = validate(schema, item);
+    if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+    const issues = kind.check(id, item);
+    if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+    bundleById.set(id, item);
+    ok(`${file} (${item.meta.title}, ${item.entries.length} entries)`);
+  }
+}
+{
+  const totals = { high: 0, medium: 0, low: 0, loan: 0, twin: 0 };
+  const languages = new Set();
+  let twinSplit = 0;
+  for (const item of bundleById.values()) {
+    const m = item.meta;
+    if (m.type === 'lex') totals[m.band] += item.entries.length;
+    if (m.type === 'loan') { totals.loan += item.entries.length; languages.add(m.language); }
+    if (m.type === 'twin') { totals.twin += item.entries.length; twinSplit += item.entries.filter((e) => e.split).length; }
+  }
+  for (const [k, v] of Object.entries(totals)) {
+    if (v === 0) bad(`reference corpus: no ${k} entries on disk (run node tools/build-lexicon.mjs)`);
+  }
+  console.log(`      totals: lexicon high ${totals.high} · medium ${totals.medium} · low ${totals.low}`
+    + ` (${totals.high + totals.medium + totals.low} words) · loanwords ${totals.loan} across ${languages.size} languages`
+    + ` · twins ${totals.twin} (${twinSplit} split per word)`);
+}
+
 console.log('\n2. Registry ↔ files agreement');
 const registry = readJSON('content/index.json');
 const rcRegIds = registry.items.filter((i) => i.type === 'rc').map((i) => i.id).sort();
@@ -439,7 +493,40 @@ for (const entry of registry.items.filter((i) => i.type === 'lg')) {
   if (entry.estimated_time_min !== mins) bad(`${entry.id}: registry estimated_time_min ${entry.estimated_time_min} ≠ ${mins}`);
 }
 
-if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS + ${oooRegIds.length} OOO + ${wdRegIds.length} Word DNA + ${vocabRegIds.length} vocab + ${lgRegIds.length} Language Garden items agree with registry`);
+// Lexicon / loanword / twin bundles: mutual existence + field mirror
+// (a browse screen reads band / letter / language / entry_count from
+// the registry without opening the bundle, so the two must agree).
+const bundleRegIds = {};
+for (const kind of bundleKinds) {
+  const regIds = registry.items.filter((i) => i.type === kind.type).map((i) => i.id).sort();
+  const fileIds = bundleFiles[kind.type].map((f) => f.replace('.json', ''));
+  bundleRegIds[kind.type] = regIds;
+  for (const id of regIds) {
+    if (!fileIds.includes(id)) bad(`registry lists ${kind.label} ${id} but no file exists`);
+  }
+  for (const id of fileIds) {
+    if (!regIds.includes(id)) bad(`file ${id}.json has no registry entry`);
+  }
+  for (const entry of registry.items.filter((i) => i.type === kind.type)) {
+    if (!bundleById.has(entry.id)) continue;
+    const item = bundleById.get(entry.id);
+    const m = item.meta;
+    if (entry.status !== m.status) bad(`${entry.id}: registry status ≠ file meta.status`);
+    if (entry.title !== m.title) bad(`${entry.id}: registry title ≠ file meta.title`);
+    if (entry.entry_count !== item.entries.length) {
+      bad(`${entry.id}: registry entry_count ${entry.entry_count} ≠ ${item.entries.length} entries`);
+    }
+    for (const f of ['band', 'letter', 'language']) {
+      if (f in m && entry[f] !== m[f]) bad(`${entry.id}: registry ${f} "${entry[f]}" ≠ file "${m[f]}"`);
+    }
+    if (entry.schema_version !== item.schema_version) bad(`${entry.id}: registry schema_version ≠ file`);
+    if (entry.version !== m.version) bad(`${entry.id}: registry version ≠ file meta.version`);
+    if (entry.date_added !== m.date_added) bad(`${entry.id}: registry date_added ≠ file`);
+    if (entry.batch_id !== m.batch_id) bad(`${entry.id}: registry batch_id ≠ file`);
+  }
+}
+
+if (problems.length === 0) ok(`${rcRegIds.length} RC + ${pjRegIds.length} PJ + ${psRegIds.length} PS + ${oooRegIds.length} OOO + ${wdRegIds.length} Word DNA + ${vocabRegIds.length} vocab + ${lgRegIds.length} Language Garden items + ${bundleRegIds.lex.length} lexicon + ${bundleRegIds.loan.length} loanword + ${bundleRegIds.twin.length} twin bundles agree with registry`);
 
 console.log('\n3. Service worker precache ↔ disk');
 const sw = readFileSync(join(root, 'service-worker.js'), 'utf8');
@@ -477,11 +564,18 @@ for (const file of lgFiles) {
   const path = `./${lgDir}/${file}`;
   if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
 }
+for (const kind of bundleKinds) {
+  for (const file of bundleFiles[kind.type]) {
+    const path = `./${kind.dir}/${file}`;
+    if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+  }
+}
 if (!listed.includes('./content/index.json')) bad('registry not precached');
 // Every schema version on disk must be precached — offline validation needs it.
 for (const f of readdirSync(join(root, 'content/schema'))) {
   if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v') || f.startsWith('ooo.schema.v') || f.startsWith('wd.schema.v')
-       || f.startsWith('vocab.schema.v') || f.startsWith('lg.schema.v'))
+       || f.startsWith('vocab.schema.v') || f.startsWith('lg.schema.v')
+       || f.startsWith('lex.schema.v') || f.startsWith('loan.schema.v') || f.startsWith('twin.schema.v'))
       && !listed.includes(`./content/schema/${f}`)) {
     bad(`schema not precached: ${f}`);
   }
@@ -1518,870 +1612,333 @@ if (wdFiles.length === 0) {
   }
 }
 
-console.log('\n15. Language Garden dry run (voice · scheduler · session · audio identity)');
-if (lgFiles.length === 0) {
-  ok('no Language Garden content yet — skipped');
-} else {
+console.log('\n15. Rootwood dry run (voice · scheduler · session · groves · effort · gate)');
+{
+  const before = problems.length;
   const gardenVoice = await mod('src/core/mentor/garden-voice.js');
   const rcVoice = await mod('src/core/mentor/voice.js');
-  const {
-    computePlantState, GardenSession, strugglingMembers,
-    RUNG_INTERVALS_MS, GOLD_WINDOW_MS, TOP_RUNG,
-    IN_LEAF_AT_SURVIVED_RUNG, MATURE_AT_SURVIVED_RUNG, ANCIENT_AT_SURVIVED_RUNG,
-    LANDMARK_TOP_SURVIVALS, ADAPTATION_MISS_THRESHOLD,
-  } = await mod('src/core/engine/garden-session.js');
+  const { computePlantState, GardenSession, STAGES, RUNG_INTERVALS_MS, TOP_RUNG, strugglingMembers } = await mod('src/core/engine/garden-session.js');
+  const groves = await mod('src/modules/language-garden/logic/groves.js');
+  const biomes = await mod('src/modules/language-garden/logic/biomes.js');
+  const scene = await mod('src/modules/language-garden/logic/scene.js');
+  const effort = await mod('src/modules/language-garden/logic/effort.js');
+  const atmosphere = await mod('src/modules/language-garden/logic/atmosphere.js');
+  const gate = await mod('src/core/engine/garden-gate.js');
+  const gardenAudio = await mod('src/modules/language-garden/logic/audio.js');
 
-  /* -- The garden's mentor never judges either: lint its whole vocabulary. -- */
+  /* ---- Voice: every line the gardener says stays in register ---- */
   {
+    const b0 = problems.length;
     const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
-    const offenders = [];
-    const walk = (value, path) => {
-      if (typeof value === 'string') {
-        for (const re of banned) if (re.test(value)) offenders.push(`${path}: "${value.slice(0, 60)}…"`);
-        if (value.includes('!')) offenders.push(`${path}: exclamation mark in "${value.slice(0, 60)}…"`);
-      } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${path}[${i}]`));
-      else if (value && typeof value === 'object') {
-        for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
-      } else if (typeof value === 'function') {
-        try { walk(value('cede', 'seed-a'), `${path}()`); } catch { /* signature mismatch is fine */ }
-      }
+    const walk = (v, path) => {
+      if (typeof v === 'string') { for (const re of banned) if (re.test(v)) bad(`garden voice: ${path} uses a banned word — "${v}"`); if (/!/.test(v)) bad(`garden voice: ${path} exclaims — "${v}"`); }
+      else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${path}[${i}]`));
+      else if (typeof v === 'function') { try { walk(v('cede', 'seed'), `${path}()`); } catch { /* needs other args */ } }
+      else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) walk(x, `${path}.${k}`);
     };
-    for (const [name, exported] of Object.entries(gardenVoice)) {
-      if (name === 'pick') continue;
-      walk(exported, name);
-    }
-    if (offenders.length) offenders.forEach((o) => bad(`garden: mentor voice uses judgment language or "!" — ${o}`));
-
-    /* -- Discoveries (Bible §9, 0.16.0): every catalogue line is Journal
-          copy, so it is held to the same register; ids are unique, kinds
-          are §9.3's, and no line carries a number (§9.6: "anything with a
-          number in it" is not a discovery). -- */
-    const disc = await mod('src/modules/language-garden/logic/discoveries.js');
-    const ids = new Set();
-    for (const d of disc.DISCOVERIES) {
-      if (ids.has(d.id)) bad(`garden discoveries: duplicate id ${d.id}`);
-      ids.add(d.id);
-      if (!disc.DISCOVERY_KINDS.includes(d.kind)) bad(`garden discoveries: ${d.id} has an unknown kind "${d.kind}"`);
-      if (typeof d.line !== 'string' || !d.line.trim()) bad(`garden discoveries: ${d.id} has no line`);
-      if (/\d/.test(d.line)) bad(`garden discoveries: ${d.id} carries a number — "${d.line}"`);
-      if (typeof d.when !== 'function') bad(`garden discoveries: ${d.id} has no condition`);
-      walk(d.line, `discoveries.${d.id}`);
-    }
-    if (disc.visibleDiscoveries({}).length !== 0) bad('garden discoveries: an empty world must show nothing');
-    const night = disc.visibleDiscoveries({ scene: 'overlook', time: 'night', weather: 'clear' });
-    if (!night.includes('night-first') || !night.includes('stars')) bad('garden discoveries: a clear night at the Overlook must show the night and the stars');
-    if (disc.creatureKindCount() < 10) bad('garden discoveries: the valley should hold at least ten kinds of creature');
-    if (offenders.length === 0 && problems.length === 0) ok(`${disc.DISCOVERIES.length} discoveries, ${disc.creatureKindCount()} creatures, all in register`);
+    for (const k of ['GROWTH_LINES', 'GARDEN_LINES', 'VALLEY_LINES', 'EMPTY_DAY_LINES', 'ATTEMPT_LINES', 'JOURNAL_LINES', 'SEED_LINES']) walk(gardenVoice[k], k);
+    if (problems.length === b0) ok('every garden line is in register: no banned words, no exclamation marks');
   }
 
-  /* -- Scheduler: computePlantState is a pure, deterministic function of
-     history + now, and never demotes. -- */
+  /* ---- Scheduler: stage from survived intervals, never a demotion ---- */
   {
-    const ground = computePlantState([], 1_000_000);
-    if (ground.stage !== 'open_ground' || ground.due !== 'none') bad('garden scheduler: empty history must be Open ground, never due');
-
-    const plantedAt = new Date(2026, 0, 1, 10, 0, 0).getTime();
-    const grow = { session_type: 'grow', finished_at: new Date(plantedAt).toISOString() };
-
-    const justGrown = computePlantState([grow], plantedAt + 60_000); // 1 minute later
-    if (justGrown.stage !== 'sprout') bad(`garden scheduler: fresh grow should be Sprout, got ${justGrown.stage}`);
-
-    const settled = computePlantState([grow], plantedAt + RUNG_INTERVALS_MS[0] + 1000);
-    if (settled.stage !== 'young') bad(`garden scheduler: past rung 0 with no revisit should be Young, got ${settled.stage}`);
-    if (settled.due !== 'gold') bad(`garden scheduler: just past its first interval should be Gold, got ${settled.due}`);
-
-    const longNeglected = computePlantState([grow], plantedAt + RUNG_INTERVALS_MS[0] + GOLD_WINDOW_MS + 1000);
-    if (longNeglected.due !== 'bare') bad(`garden scheduler: long past the gold window should be Bare with buds, got ${longNeglected.due}`);
-
-    // Stage is keyed to the longest interval SURVIVED, never a raw count of
-    // revisits (the owner's redesign: Ancient must be durable memory, not
-    // repeated short-term success). Each clean revisit lands exactly at its
-    // own next_review_at, so it genuinely survives that interval and climbs
-    // the ladder: survive rung 0 (10min) → still Young, rung 1 (1d) → In leaf,
-    // rung 3 (8d) → Mature, the TOP rung (21d) → Ancient. `nClean` clean, due
-    // revisits therefore reach survivedRung = min(nClean-1, TOP).
-    const climb = (n) => {
-      let h = [grow];
-      let tt = plantedAt;
-      for (let i = 0; i < n; i += 1) {
-        const s = computePlantState(h, tt + 5000);
-        tt = new Date(s.nextReviewAt).getTime();
-        h = [...h, { session_type: 'revisit', finished_at: new Date(tt).toISOString(), clean: true }];
-      }
-      return { state: computePlantState(h, tt + 1000), history: h, at: tt };
-    };
-    const survivedRungAfter = (n) => Math.min(n - 1, TOP_RUNG);
-    const stageForSurvived = (sr) =>
-      sr < IN_LEAF_AT_SURVIVED_RUNG ? 'young'
-        : sr < MATURE_AT_SURVIVED_RUNG ? 'in_leaf'
-          : sr < ANCIENT_AT_SURVIVED_RUNG ? 'mature' : 'ancient';
-    for (let n = 1; n <= TOP_RUNG + 1; n += 1) {
-      const { state } = climb(n);
-      const sr = survivedRungAfter(n);
-      if (state.survivedRung !== sr) bad(`garden scheduler: ${n} clean due revisits should survive rung ${sr}, got ${state.survivedRung}`);
-      if (state.stage !== stageForSurvived(sr)) bad(`garden scheduler: survivedRung ${sr} should be ${stageForSurvived(sr)}, got ${state.stage}`);
-    }
-    // Reaching Ancient takes a full climb of the ladder (survive the top,
-    // 21-day interval) — it can never be reached by a short count of quick
-    // revisits. The first top-interval survival is Ancient but not yet a
-    // Landmark; ancientAt is set, landmark is still false.
-    const ancientClimb = climb(TOP_RUNG + 1); // survive rung TOP once
-    const ancient = ancientClimb.state;
-    if (ancient.stage !== 'ancient') bad(`garden scheduler: surviving the top interval should reach Ancient, got ${ancient.stage}`);
-    if (ancient.survivedRung !== TOP_RUNG) bad('garden scheduler: Ancient must have survived the top rung');
-    if (!ancient.ancientAt) bad('garden scheduler: ancientAt must be set once Ancient');
-    if (ancient.landmark) bad('garden scheduler: one long-interval survival is Ancient, not yet a Landmark');
-
-    // A Landmark is Ancient that survived the top interval LANDMARK_TOP_SURVIVALS
-    // times in a row (§6.5) — several long-interval retrievals with no lapse.
-    const landmarkClimb = climb(TOP_RUNG + LANDMARK_TOP_SURVIVALS);
-    if (!landmarkClimb.state.landmark) bad(`garden scheduler: ${LANDMARK_TOP_SURVIVALS} top-interval survivals should make a Landmark`);
-    if (!landmarkClimb.state.landmarkAt) bad('garden scheduler: landmarkAt must be set once a Landmark');
-
-    // A lapse (a rocky revisit) after Ancient never demotes the stage
-    // (Law 3: nothing is lost) but it does reset the Landmark run — the
-    // learner simply re-earns it, never punished.
-    const lapseAt = new Date(landmarkClimb.at + RUNG_INTERVALS_MS[TOP_RUNG] + 5000);
-    const lapsed = computePlantState(
-      [...landmarkClimb.history, { session_type: 'revisit', finished_at: lapseAt.toISOString(), clean: false }],
-      lapseAt.getTime() + 1000,
-    );
-    if (lapsed.stage !== 'ancient') bad('garden scheduler: a lapse after Ancient must never demote the tree');
-    if (lapsed.landmark) bad('garden scheduler: a lapse resets the Landmark run (re-earned, never punished)');
-
-    // A rocky (non-clean) FIRST revisit completes and returns the canopy to
-    // leaf (its due resets), but demonstrates no durable retrieval — so the
-    // durability stage stays Young, and the interval never shortens.
-    const rockyHistory = [grow, { session_type: 'revisit', finished_at: new Date(plantedAt + RUNG_INTERVALS_MS[0] + 1000).toISOString(), clean: false }];
-    const afterRocky = computePlantState(rockyHistory, plantedAt + RUNG_INTERVALS_MS[0] + 2000);
-    if (afterRocky.stage !== 'young') bad(`garden scheduler: a rocky revisit demonstrates no durable memory — stage stays Young, got ${afterRocky.stage}`);
-    if (afterRocky.rung !== 0) bad('garden scheduler: a rocky revisit must not advance the rung (never a demotion, but never a shortcut either)');
-    if (afterRocky.vigor !== 0) bad('garden scheduler: a rocky revisit earns no vigor (vigor is successful retrievals only)');
-
-    // Vigor (continuous refinement, §6.3) rises with clean retrievals, stays
-    // bounded in [0,1], and is monotonic non-decreasing across the climb.
-    let lastVigor = -1;
-    for (let n = 0; n <= TOP_RUNG + LANDMARK_TOP_SURVIVALS; n += 1) {
-      const v = climb(n).state.vigor;
-      if (v < 0 || v > 1) bad(`garden scheduler: vigor out of [0,1] at n=${n}: ${v}`);
-      if (v < lastVigor) bad(`garden scheduler: vigor must never fall as retrievals accumulate (n=${n})`);
-      lastVigor = v;
-    }
-    if (climb(0).state.vigor !== 0) bad('garden scheduler: a freshly grown plant has zero vigor');
-
-    if (JSON.stringify(computePlantState(landmarkClimb.history, landmarkClimb.at + 1000)) !== JSON.stringify(landmarkClimb.state)) {
-      bad('garden scheduler: computePlantState is not deterministic');
-    }
-
-    // Silent downward adaptation (§17.5): a member missed ADAPTATION_MISS_THRESHOLD
-    // times over is named for a gentler re-teach; two misses is not enough; and
-    // a correct check clears the run immediately (never a lasting mark).
-    const missN = (n) => Array.from({ length: n }, (_, i) => ({
-      session_type: 'revisit', clean: false,
-      finished_at: new Date(plantedAt + (i + 1) * 60000).toISOString(),
-      member_checks: [{ member_index: 0, is_correct: false }],
-    }));
-    if (strugglingMembers([grow, ...missN(ADAPTATION_MISS_THRESHOLD)]).length !== 1) bad('garden adaptation: a member missed the threshold number of times must be flagged');
-    if (strugglingMembers([grow, ...missN(ADAPTATION_MISS_THRESHOLD - 1)]).length !== 0) bad('garden adaptation: below the threshold, nothing is flagged');
-    const recovered = [grow, ...missN(ADAPTATION_MISS_THRESHOLD), {
-      session_type: 'revisit', clean: true,
-      finished_at: new Date(plantedAt + 999999).toISOString(),
-      member_checks: [{ member_index: 0, is_correct: true }],
-    }];
-    if (strugglingMembers(recovered).length !== 0) bad('garden adaptation: a correct check clears the miss run immediately');
+    const b0 = problems.length;
+    const D = 86400000, M = 60000;
+    const t0 = Date.parse('2026-08-01T10:00:00Z');
+    const iso = (t) => new Date(t).toISOString();
+    const grow = (t) => ({ kind: 'garden-session', family_id: 'lg-0001', session_type: 'grow', finished_at: iso(t), clean: null });
+    const revisit = (t, clean = true) => ({ kind: 'garden-session', family_id: 'lg-0001', session_type: 'revisit', finished_at: iso(t), clean });
+    if (computePlantState([], t0).stage !== 'open_ground') bad('garden scheduler: no history is open ground');
+    if (computePlantState([{ kind: 'garden-seed', family_id: 'lg-0001', finished_at: iso(t0) }], t0).stage !== 'seed') bad('garden scheduler: a seed carried back through the Gate is a seed');
+    if (computePlantState([grow(t0)], t0 + M).stage !== 'sprout') bad('garden scheduler: a fresh grow is a sprout');
+    if (computePlantState([grow(t0)], t0 + 20 * M).stage !== 'young') bad('garden scheduler: after the first window a grow is young');
+    if (computePlantState([grow(t0)], t0 + 20 * M).due !== 'gold') bad('garden scheduler: the first revisit is asked for after ten minutes');
+    let recs = [grow(t0)]; let t = t0;
+    const gaps = [11 * M, 1.05 * D, 3.1 * D, 8.2 * D, 21.5 * D];
+    const stagesSeen = [];
+    for (const g of gaps) { t += g; recs.push(revisit(t)); stagesSeen.push(computePlantState(recs, t + M).stage); }
+    if (stagesSeen[0] !== 'young' || stagesSeen[1] !== 'in_leaf' || stagesSeen[3] !== 'mature' || stagesSeen[4] !== 'ancient') bad(`garden scheduler: the ladder must climb young → in_leaf → mature → ancient (${stagesSeen.join(' → ')})`);
+    const st = computePlantState(recs, t + M);
+    if (st.rung !== TOP_RUNG) bad('garden scheduler: after the whole ladder the memory is asked to survive the top interval');
+    const rocky = computePlantState([...recs, revisit(t + 22 * D, false)], t + 23 * D);
+    if (rocky.stage !== 'ancient') bad('garden scheduler: a rocky revisit never demotes the stage');
+    if (STAGES.length !== 7) bad('garden scheduler: seven stages, open ground to ancient');
+    if (RUNG_INTERVALS_MS[0] !== 10 * M) bad('garden scheduler: the first rung is ten minutes');
+    const struggling = strugglingMembers([revisit(t0), revisit(t0 + D), revisit(t0 + 2 * D)].map((r) => ({ ...r, member_checks: [{ member_index: 1, is_correct: false }] })));
+    if (!struggling.includes(1)) bad('garden scheduler: three misses of one member mark it struggling');
+    if (problems.length === b0) ok('the scheduler climbs only on clean, due revisits and never demotes');
   }
 
-  /* -- Effort Ledger: Stream / Ground / Paths (Roadmap Phase 3, 3.1-3.2).
-     Pure functions of history + now: the Stream never touches zero, the
-     Ground only ever moves forward as lifetime sessions accumulate, and a
-     Path is always "mossy" at worst, never broken or gone. -- */
+  /* ---- A real Grow and Revisit session over real content ---- */
   {
-    const { computeStreamLevel, streamBand, computeGroundTier, computePathWear, STREAM_FLOOR, GROUND_TIERS } = await mod('src/modules/language-garden/logic/effort.js');
-
-    if (computeStreamLevel([]) !== STREAM_FLOOR) bad('garden effort: an empty history must sit at the Stream floor, never below it');
-    const now = Date.now();
-    const justTended = computeStreamLevel([{ finished_at: new Date(now).toISOString() }], now);
-    if (justTended < 0.9) bad(`garden effort: a session just now should read a near-full Stream, got ${justTended}`);
-    const monthAgo = computeStreamLevel([{ finished_at: new Date(now - 30 * 24 * 60 * 60 * 1000).toISOString() }], now);
-    if (Math.abs(monthAgo - STREAM_FLOOR) > 0.01) bad(`garden effort: a month of silence should settle back to the floor, got ${monthAgo}`);
-    if (streamBand(0) !== 'low' || streamBand(0.5) !== 'mid' || streamBand(1) !== 'high') {
-      bad('garden effort: streamBand thresholds do not match its own bands');
-    }
-
-    const sessionsAt = (n) => Array.from({ length: n }, (_, i) => ({ finished_at: new Date(now - i * 1000).toISOString() }));
-    if (computeGroundTier([]).tier !== 'bare') bad('garden effort: no sessions ever must be Bare ground');
-    let lastTierIndex = -1;
-    for (const count of [0, 8, 25, 60, 120]) {
-      const tier = computeGroundTier(sessionsAt(count)).tier;
-      const idx = GROUND_TIERS.findIndex((t) => t.tier === tier);
-      if (idx < lastTierIndex) bad(`garden effort: Ground tier must never move backwards as effort accumulates (n=${count})`);
-      lastTierIndex = idx;
-    }
-    if (computeGroundTier(sessionsAt(120)).tier !== 'lush') bad('garden effort: 120 lifetime sessions should read Lush ground');
-
-    if (computePathWear([]) !== 'mossy') bad('garden effort: a never-walked path must be mossy, never "broken" or "gone"');
-    if (computePathWear(sessionsAt(10), now) !== 'worn') bad('garden effort: ten recent visits should read a worn path');
+    const b0 = problems.length;
+    const family = readJSON('content/language-garden/lg-0001.json');
+    const vocab = (id) => readJSON(`content/vocabulary/${id}.json`);
+    for (const m of family.members) { const v = vocab(m.vocab_id); m.word = v.word; m.meaning = v.meaning; }
+    const siblings = [{ id: 'lg-0002', label: 'chron', core_meaning: 'time' }, { id: 'lg-0003', label: 'phil', core_meaning: 'love' }];
+    const growS = new GardenSession(family, 'grow', siblings, { now: () => Date.parse('2026-09-11T10:00:00Z') });
+    growS.markBeatShown();
+    const opts = growS.attemptOptions();
+    if (opts.length !== 2 || opts.filter((o) => o.correct).length !== 1) bad('garden session: the Attempt offers two directions, one true');
+    growS.answerAttempt(opts.findIndex((o) => o.correct));
+    growS.taught.forEach((_, i) => growS.confirmSpreadMember(i));
+    const ro = growS.reachOptions(0, 1);
+    if (ro.filter((o) => o.correct).length !== 1) bad('garden session: the Reach construct has one true option');
+    growS.answerReach(0, ro.findIndex((o) => o.correct), 1);
+    const grec = growS.finish();
+    if (grec.kind !== 'garden-session' || grec.session_type !== 'grow' || grec.clean !== null) bad('garden session: a grow finishes as a grow record with no clean mark');
+    if (!grec.reach?.landed_clean_first_try) bad('garden session: a first-try correct Reach lands clean');
+    const rev = new GardenSession(family, 'revisit', siblings, { now: () => Date.parse('2026-09-12T10:00:00Z') });
+    const ko = rev.keyRetrievalOptions();
+    if (ko.length !== 3 || ko.filter((o) => o.correct).length !== 1) bad('garden session: the key retrieval offers three meanings, one true');
+    rev.answerKeyRetrieval(ko.findIndex((o) => o.correct));
+    const [a, b] = rev.memberCheckIndices(0);
+    for (const i of [a, b]) { const mo = rev.memberCheckOptions(i); rev.answerMemberCheck(i, mo.findIndex((o) => o.correct)); }
+    const rro = rev.reachOptions(1, 1);
+    rev.answerReach(1, rro.findIndex((o) => o.correct), 1);
+    const rrec = rev.finish();
+    if (rrec.clean !== true) bad('garden session: an all-correct revisit is clean');
+    const st = computePlantState([grec, { ...rrec, finished_at: '2026-09-12T10:00:00Z' }], Date.parse('2026-09-12T10:01:00Z'));
+    if (st.revisitCount !== 1) bad('garden session: the scheduler counts the revisit');
+    if (problems.length === b0) ok('a Grow and a clean Revisit run over lg-0001 with one true option per beat');
   }
 
-  /* -- Atmosphere (Roadmap 3.4, 3.6): the sky is a function of the clock
-     and the calendar ONLY — deterministic, never behaviour-driven, snow
-     never outside winter, and every hour of the day belongs to exactly
-     one of the five real time states. -- */
+  /* ---- Groves: every family seated, no grove over capacity ---- */
   {
-    const { timeOfDay, worldSeason, weatherFor, TIMES_OF_DAY, WEATHERS, atmosphereFor } = await mod('src/modules/language-garden/logic/atmosphere.js');
-
-    for (let h = 0; h < 24; h += 1) {
-      const t = timeOfDay(new Date(2026, 3, 10, h, 30));
-      if (!TIMES_OF_DAY.includes(t)) bad(`garden atmosphere: hour ${h} maps to unknown time "${t}"`);
-    }
-    if (timeOfDay(new Date(2026, 3, 10, 23, 40)) !== 'night') bad('garden atmosphere: 11:40pm must be night — the learner it is designed for');
-    if (timeOfDay(new Date(2026, 3, 10, 6, 0)) !== 'dawn') bad('garden atmosphere: 6am should be dawn');
-
-    const seasonOf = (m) => worldSeason(new Date(2026, m, 15));
-    if (seasonOf(3) !== 'spring' || seasonOf(6) !== 'summer' || seasonOf(9) !== 'autumn' || seasonOf(0) !== 'winter') {
-      bad('garden atmosphere: worldSeason does not follow the calendar');
-    }
-
-    // Weather: deterministic (same date+window → same sky), always a known
-    // kind, and snow belongs to winter alone (§12.5).
-    for (let day = 1; day <= 60; day += 1) {
-      for (const month of [0, 3, 6, 9]) {
-        const d = new Date(2026, month, 1 + (day % 27), 10, 0);
-        const w = weatherFor(d);
-        if (!WEATHERS.includes(w)) bad(`garden atmosphere: unknown weather "${w}"`);
-        if (weatherFor(new Date(d)) !== w) bad('garden atmosphere: weather is not deterministic for the same date');
-        if (w === 'snow' && worldSeason(d) !== 'winter') bad('garden atmosphere: snow outside winter');
-      }
-    }
-    // Within one time window the sky must not flicker (§4.6 seed+calendar).
-    const morningA = weatherFor(new Date(2026, 4, 20, 8, 5));
-    const morningB = weatherFor(new Date(2026, 4, 20, 11, 55));
-    if (morningA !== morningB) bad('garden atmosphere: weather changed mid-window');
-    const atmo = atmosphereFor(new Date(2026, 4, 20, 8, 5));
-    if (!atmo.time || !atmo.season || !atmo.weather) bad('garden atmosphere: atmosphereFor is missing a field');
-  }
-
-  /* -- The painted-light recipe (THE WORLD Part 5.2, Stage W1): pure
-     colour math, so a lit face is always lighter than its base, a shade
-     face always darker, the mix ratios stay within [0,1] at their
-     endpoints, and the shadow geometry matches the pinned formula. -- */
-  {
-    const {
-      mixHex, adjustLightness, litFace, shadeFace, contactShadow, castShadow, castsShadow,
-      LIT_MIX_RATIO, SHADE_MIX_RATIO, CONTACT_SHADOW_WIDTH_RATIO, CONTACT_SHADOW_OFFSET_RATIO,
-      CONTACT_SHADOW_OPACITY, CAST_SHADOW_HEIGHT_RATIO, CAST_SHADOW_OPACITY, HOURS,
-    } = await mod('src/modules/language-garden/logic/light.js');
-
-    if (mixHex('#000000', '#FFFFFF', 0) !== '#000000') bad('garden light: mixHex at ratio 0 must return the base exactly');
-    if (mixHex('#000000', '#FFFFFF', 1) !== '#FFFFFF') bad('garden light: mixHex at ratio 1 must return the target exactly');
-    if (mixHex('#808080', '#808080', 0.5) !== '#808080') bad('garden light: mixing identical colours must not change them');
-
-    if (adjustLightness('#808080', 0) !== '#808080') bad('garden light: a zero lightness delta must not change the colour');
-    if (adjustLightness('#000000', -50) !== '#000000') bad('garden light: lightness must clamp at black, never go negative');
-    if (adjustLightness('#FFFFFF', 50) !== '#FFFFFF') bad('garden light: lightness must clamp at white, never overflow');
-
-    for (const hour of HOURS) {
-      const base = '#4F9A5C';
-      const lit = litFace(base, hour);
-      const shade = shadeFace(base, hour);
-      const luma = (hex) => { const h = hex.replace('#', ''); return 0.299 * parseInt(h.slice(0, 2), 16) + 0.587 * parseInt(h.slice(2, 4), 16) + 0.114 * parseInt(h.slice(4, 6), 16); };
-      if (luma(lit) <= luma(base) - 4) bad(`garden light: ${hour}'s lit face must not read darker than its own base`);
-      if (luma(shade) >= luma(base) + 4) bad(`garden light: ${hour}'s shade face must not read lighter than its own base`);
-      if (lit === shade) bad(`garden light: ${hour}'s lit and shade faces must differ — one sun casts one shadow, but they are not the same colour`);
-    }
-    if (LIT_MIX_RATIO <= 0 || LIT_MIX_RATIO >= 1) bad('garden light: the lit-face mix ratio must be a genuine blend, not 0 or 1');
-    if (SHADE_MIX_RATIO <= 0 || SHADE_MIX_RATIO >= 1) bad('garden light: the shade-face mix ratio must be a genuine blend, not 0 or 1');
-
-    const shadow = contactShadow(100, 200, 20, 'dawn');
-    if (Math.abs(shadow.rx * 2 - 20 * CONTACT_SHADOW_WIDTH_RATIO) > 0.01) bad('garden light: a contact shadow must be exactly 1.1x the object width');
-    if (shadow.opacity !== CONTACT_SHADOW_OPACITY) bad('garden light: contact shadow opacity must match the pin (18%)');
-    if (Math.abs(Math.abs(shadow.cx - 100) - 20 * CONTACT_SHADOW_OFFSET_RATIO) > 0.01) bad('garden light: a contact shadow must offset by exactly 15% of the object width');
-
-    const dawnShadowLeft = contactShadow(100, 200, 20, 'dawn').cx < 100;
-    const duskShadowRight = contactShadow(100, 200, 20, 'dusk').cx > 100;
-    if (!dawnShadowLeft) bad('garden light: at dawn the sun is at frame-right, so the shadow must fall left');
-    if (!duskShadowRight) bad('garden light: at dusk the sun is at frame-left, so the shadow must fall right');
-
-    const cast = castShadow(100, 200, 10, 20, 'dusk');
-    if (Math.abs(cast.rx * 2 - 10 * CAST_SHADOW_HEIGHT_RATIO) > 0.01) bad('garden light: a cast shadow must run exactly 2.2x the object height');
-    if (cast.opacity !== CAST_SHADOW_OPACITY) bad('garden light: cast shadow opacity must match the pin (12%)');
-
-    if (!castsShadow('dawn', 'summer') || !castsShadow('dusk', 'summer')) bad('garden light: cast shadows must appear at dawn and dusk regardless of season');
-    if (!castsShadow('morning', 'autumn')) bad('garden light: cast shadows must appear all through autumn, any hour');
-    if (castsShadow('morning', 'summer')) bad('garden light: cast shadows must NOT appear at midday outside autumn — a seasonal pleasure, not a default');
-  }
-
-  /* -- The Rootwood Walk (THE WORLD Part 16, 0.17.0): every family stands
-     in exactly one named grove, no grove is over capacity, the map is a
-     pure function of the families, stands in one row never collide, and
-     every place name and line is held to the mentor's register. -- */
-  {
-    const groves = await mod('src/modules/language-garden/logic/groves.js');
-    const biomesMod = await mod('src/modules/language-garden/logic/biomes.js');
-    const banned = rcVoice.BANNED_WORDS.map((w) => new RegExp(`\\b${w}\\b`, 'i'));
-    const lintLine = (text, where) => {
-      if (typeof text !== 'string' || !text.trim()) { bad(`${where}: empty`); return; }
-      for (const re of banned) if (re.test(text)) bad(`${where}: judgment language in "${text}"`);
-      if (text.includes('!')) bad(`${where}: exclamation mark in "${text}"`);
-      if (/\d/.test(text)) bad(`${where}: carries a number — "${text}"`);
-    };
-    const seen = new Map();
+    const b0 = problems.length;
+    const registry = readJSON('content/index.json').items.filter((i) => i.type === 'lg');
+    const families = registry.map((i) => ({ meta: { id: i.id } }));
+    const wood = groves.layoutWood(families);
+    if (wood.stands.size !== families.length) bad(`garden groves: ${families.length} families but ${wood.stands.size} stands`);
     for (const g of groves.GROVES) {
-      lintLine(g.name, `grove ${g.slug} name`);
-      lintLine(g.line, `grove ${g.slug} line`);
-      if (g.families.length > groves.GROVE_CAPACITY) bad(`grove ${g.slug} seats ${g.families.length} families; a grove holds ${groves.GROVE_CAPACITY}`);
-      for (const id of g.families) {
-        if (!lgRegIds.includes(id)) bad(`grove ${g.slug} names ${id}, which is not in the registry`);
-        if (seen.has(id)) bad(`${id} stands in two groves: ${seen.get(id)} and ${g.slug}`);
-        seen.set(id, g.slug);
-      }
+      if (g.families.length > groves.GROVE_CAPACITY) bad(`garden groves: ${g.name} seats ${g.families.length}, over its capacity of ${groves.GROVE_CAPACITY}`);
+      for (const id of g.families) if (!registry.some((i) => i.id === id)) bad(`garden groves: ${g.name} names an unknown family ${id}`);
     }
-    for (const id of lgRegIds) {
-      if (!seen.has(id)) bad(`${id} stands in no grove — it would be placed at the wood's edge; add it to logic/groves.js`);
-    }
-    for (const b of biomesMod.BIOMES) lintLine(b.whisper, `biome ${b.slug} whisper`);
-
-    const fams = lgRegIds.map((id) => ({ meta: { id } }));
-    const a = groves.layoutWood(fams);
-    const b = groves.layoutWood([...fams].reverse());
-    const flat = (m) => JSON.stringify([...m.stands.entries()].sort((p, q) => p[0].localeCompare(q[0])));
-    if (flat(a) !== flat(b)) bad('garden walk: layoutWood must not depend on input order');
-    if (a.stands.size !== fams.length) bad('garden walk: every family must get a stand');
-    if (a.width !== groves.woodWidth(groves.GROVES.length)) bad('garden walk: with every family claimed, the wood is exactly the six groves plus its margins');
-    for (const [id, st] of a.stands) {
-      if (st.x < 0 || st.x > a.width || st.y < 50 || st.y > 100) bad(`garden walk: ${id} stands outside the wood (${st.x}, ${st.y})`);
-    }
-    // Stands in one row never sit closer than a crown's width.
-    const rows = new Map();
-    for (const st of groves.GROVE_STANDS) {
-      if (!rows.has(st.band)) rows.set(st.band, []);
-      rows.get(st.band).push(st.x);
-    }
-    for (const [band, xs] of rows) {
-      const sorted = [...xs].sort((p, q) => p - q);
-      for (let i = 1; i < sorted.length; i += 1) {
-        if (sorted[i] - sorted[i - 1] < 22) bad(`garden walk: two ${band}-row stands sit ${sorted[i] - sorted[i - 1]} units apart; crowns would merge`);
-      }
-    }
-    for (const st of groves.GROVE_STANDS) {
-      const clear = groves.DOORPOST_CLEARANCE[st.band];
-      if (clear && (st.x < clear || st.x > groves.GROVE_WIDTH - clear)) bad(`garden walk: a ${st.band}-row stand at x=${st.x} would put its crown over a doorpost (needs ${clear} units from either edge)`);
-    }
-    if (groves.groveAt(groves.WOOD_ENTRANCE - 1, a.groves) !== null) bad('garden walk: the entrance belongs to no grove');
-    if (groves.groveAt(groves.WOOD_ENTRANCE + 1, a.groves)?.grove.slug !== groves.GROVES[0].slug) bad('garden walk: the first grove begins where the entrance ends');
-    if (problems.length === 0) ok(`the walk seats all ${a.stands.size} families in ${a.groves.length} groves, ${a.width} units wide`);
+    const seen = new Set();
+    for (const g of groves.GROVES) for (const id of g.families) { if (seen.has(id)) bad(`garden groves: ${id} stands in two groves`); seen.add(id); }
+    if (wood.groves.some((g) => g.grove.slug === 'edge')) bad('garden groves: a family stands at the wood\'s edge — add it to a grove');
+    if (!biomes.isPlayable(biomes.biomeBySlug('rootwood'))) bad('garden biomes: the Rootwood must be playable');
+    if (biomes.biomeForGarden('root_grove')?.slug !== 'rootwood') bad('garden biomes: root_grove content belongs to the Rootwood');
+    if (problems.length === b0) ok(`${families.length} families seated across ${groves.GROVES.length} groves, none over capacity`);
   }
 
-  /* -- The veil (THE WORLD Part 10.3, Stage W4): "both pairs must
-     measure ≥4.5:1 mechanically… before any screen ships." These hex
-     values mirror tokens.css's --garden-veil-* exactly (same reasoning
-     as light.js's own HOUR_LIGHT/HOUR_SHADOW tables: there is no DOM
-     pass here to read a CSS custom property back out), so a future
-     revision to either place without the other is exactly the drift
-     this assertion exists to catch. -- */
+  /* ---- Effort, atmosphere, the Gate ---- */
   {
-    const { contrastRatio } = await mod('src/modules/language-garden/logic/light.js');
-    const VEIL_DAY_BG = '#FAF7EF';
-    const VEIL_DAY_INK = '#1C1D1F';
-    const VEIL_NIGHT_BG = '#1B2737';
-    const VEIL_NIGHT_INK = '#D9E3F2';
-    const dayRatio = contrastRatio(VEIL_DAY_BG, VEIL_DAY_INK);
-    const nightRatio = contrastRatio(VEIL_NIGHT_BG, VEIL_NIGHT_INK);
-    if (dayRatio < 4.5) bad(`garden veil: the day pair only reaches ${dayRatio.toFixed(2)}:1 — the text sitting on the veil would fail WCAG AA`);
-    if (nightRatio < 4.5) bad(`garden veil: the night pair only reaches ${nightRatio.toFixed(2)}:1 — the text sitting on the veil would fail WCAG AA`);
-    if (contrastRatio('#000000', '#FFFFFF') !== 21) bad('garden veil: contrastRatio(black, white) must be exactly 21:1 — the formula itself is wrong');
-    if (contrastRatio('#808080', '#808080') !== 1) bad('garden veil: contrastRatio of a colour against itself must be exactly 1:1');
+    const b0 = problems.length;
+    const D = 86400000;
+    const now = Date.parse('2026-09-11T10:00:00Z');
+    const iso = (t) => new Date(t).toISOString();
+    const sessions = [0, 1, 2, 3].map((d) => ({ kind: 'garden-session', family_id: 'lg-0001', session_type: 'grow', finished_at: iso(now - d * D) }));
+    const level = effort.computeStreamLevel(sessions, now);
+    if (!(level > 0 && level <= 1.5)) bad(`garden effort: the stream level is a bounded positive number (${level})`);
+    if (effort.computeStreamLevel([], now) > level) bad('garden effort: an untended valley runs no fuller than a tended one');
+    const tiers = effort.GROUND_TIERS ?? [];
+    if (tiers.length && effort.computeGroundTier(sessions).tier === undefined) bad('garden effort: a ground tier is named');
+    const atmo = atmosphere.atmosphereFor(new Date(2026, 8, 11, 22));
+    if (atmo.time !== 'night') bad('garden atmosphere: ten at night is night');
+    if (!atmosphere.TIMES_OF_DAY.includes(atmo.time) || !atmosphere.WEATHERS.includes(atmo.weather)) bad('garden atmosphere: time and weather come from the known sets');
+    const family = readJSON('content/language-garden/lg-0001.json');
+    const passage = { meta: { id: 'rc-x' }, passage: { title: 'x', paragraphs: [{ id: 'p1', text: 'The provinces voted to secede.' }] } };
+    const sightingsFn = gate.passageSightings ?? gate.findSightings ?? null;
+    if (typeof gate.recordPassageSightings !== 'function' || typeof gate.listGardenSeeds !== 'function') bad('garden gate: the Gate must record sightings and list seeds');
+    if (typeof gate.plantSeed !== 'function') bad('garden gate: the Gate must plant a seed');
+    if (problems.length === b0) ok(`stream ${level.toFixed(2)} for four days tended; ${atmosphere.TIMES_OF_DAY.length} times of day; the Gate opens both ways`);
   }
 
-  /* -- The Journal's records (Roadmap 4.4, §8.5–§8.6): Seasons Tended is
-     a calendar fact (unfarmable — many sessions in one season still count
-     once; it grows only as the planet turns), and the Weather Record has
-     NO empty boxes (only tended days exist, one mark each) and no numbers.
-     -- */
+  /* ---- The Rootwood's own sound: the Valley Phrase is import-safe and pinned ---- */
   {
-    const { seasonsTended, weatherRecord } = await mod('src/modules/language-garden/logic/journal.js');
-    const sess = (y, m, d, h = 10) => ({ finished_at: new Date(y, m, d, h).toISOString() });
-
-    if (seasonsTended([]) !== 0) bad('garden journal: no tending is zero seasons');
-    // Ten sessions inside one summer are ONE season tended, not ten (§8.5).
-    const oneSummer = [sess(2026, 6, 1), sess(2026, 6, 3), sess(2026, 6, 20), sess(2026, 7, 15)];
-    if (seasonsTended(oneSummer) !== 1) bad('garden journal: many sessions in one season must count as one Season Tended (unfarmable)');
-    // A full turn of the planet is four, and no more (spring→winter, one year).
-    const oneYear = [sess(2026, 3, 1), sess(2026, 6, 1), sess(2026, 9, 1), sess(2026, 0, 15)];
-    if (seasonsTended(oneYear) !== 4) bad('garden journal: four distinct world-seasons should read as four');
-    // Winter spans the year boundary: Dec and the following Jan are one winter.
-    if (seasonsTended([sess(2026, 11, 20), sess(2027, 0, 5)]) !== 1) bad('garden journal: December and the January after it are one winter');
-
-    // Weather Record: only tended days appear (no gaps), one mark per day,
-    // grouped by month, and every mark is a known kind — never a count.
-    const rec = weatherRecord([sess(2026, 6, 2, 10), sess(2026, 6, 2, 22), sess(2026, 6, 9, 10), sess(2026, 5, 30, 10)]);
-    const totalDays = rec.reduce((n, mth) => n + mth.days.length, 0);
-    if (totalDays !== 3) bad(`garden journal: Weather Record must have one mark per TENDED day and no empty boxes — got ${totalDays} for 3 days`);
-    if (rec.length !== 2) bad('garden journal: Weather Record should group by month');
-    if (rec[0].days.some((d) => d.day === undefined || !d.mark)) bad('garden journal: every weather day needs a day and a mark');
-    const knownMarks = new Set(['sun', 'clear-night', 'rain', 'fog', 'wind', 'snow']);
-    for (const mth of rec) for (const d of mth.days) {
-      if (!knownMarks.has(d.mark)) bad(`garden journal: unknown weather mark "${d.mark}"`);
-    }
-    if (weatherRecord([]).length !== 0) bad('garden journal: an untended garden has no Weather Record, not an empty grid');
+    const b0 = problems.length;
+    const { PENTATONIC_SEMITONES, pitchHz, VALLEY_PHRASE, tonicHzForBiome } = gardenAudio;
+    if (!('do' in PENTATONIC_SEMITONES && !('fa' in PENTATONIC_SEMITONES))) bad('garden audio: the scale is pentatonic — no fa');
+    if (Math.round(pitchHz(130.81, 'do', 1)) !== 262) bad('garden audio: an octave doubles');
+    if (VALLEY_PHRASE.full.length !== 6) bad('garden audio: the Valley Phrase is six notes');
+    if (tonicHzForBiome(biomes.biomeBySlug('rootwood')) !== 130.81) bad('garden audio: the Rootwood is rooted on C');
+    if (problems.length === b0) ok('the Rootwood\'s sound is import-safe, pentatonic, rooted on C');
   }
 
-  /* -- The Gate (Roadmap 3.5, §19.2): seeds and sightings are honest.
-     A sighting needs a GROWN word actually present in the passage text;
-     a held-out Reach word only counts once it was constructed; a seed
-     offer only exists for truly open ground; and a seed record makes the
-     stage read "seed" without ever counting as effort. -- */
-  {
-    const gate = await mod('src/core/engine/garden-gate.js');
-    const { computePlantState } = await mod('src/core/engine/garden-session.js');
-
-    if (!gate.textContainsWord('They chose to secede from the union.', 'secede')) bad('garden gate: word-boundary match missed a present word');
-    if (!gate.textContainsWord('Two states seceded that year.', 'secede')) bad('garden gate: an inflection of the same word is that word, met in the wild');
-    if (!gate.textContainsWord('The waters were receding.', 'recede')) bad('garden gate: drop-final-e inflection missed');
-    if (gate.textContainsWord('The secession was loud.', 'secede')) bad('garden gate: matched a DIFFERENT derived word (secession is not secede)');
-    if (gate.textContainsWord('He interceded.', 'cede')) bad('garden gate: matched inside a longer word (boundary broken)');
-
-    const family = {
-      meta: { id: 'lg-test' },
-      root: { label: 'cede' },
-      members: [
-        { vocab_id: 'v1', word: 'secede', held_out: false },
-        { vocab_id: 'v2', word: 'intercede', held_out: true },
-      ],
-    };
-    const passage = {
-      meta: { id: 'rc-test' },
-      passage: { title: 'T', paragraphs: [{ text: 'To secede is one thing; to intercede another.' }] },
-    };
-    const grow = { kind: 'garden-session', session_type: 'grow', family_id: 'lg-test', finished_at: new Date().toISOString() };
-
-    // Unplanted family: nothing to sight, but the word is seedable.
-    if (gate.findSightings(passage, [family], []).length !== 0) bad('garden gate: sighted a word from an unplanted family');
-    const seedable = gate.findSeedable([{ word: 'Secede' }], [family], []);
-    if (seedable.length !== 1 || seedable[0].familyId !== 'lg-test') bad('garden gate: an open-ground family member should be seedable (case-insensitive)');
-
-    // Planted family: the taught word is sighted; the unconstructed
-    // held-out word is not; and nothing is seedable any more.
-    const sighted = gate.findSightings(passage, [family], [grow]);
-    if (!sighted.some((s) => s.word === 'secede')) bad('garden gate: a grown word in the passage must be a sighting');
-    if (sighted.some((s) => s.word === 'intercede')) bad('garden gate: a never-constructed held-out word must not be a sighting');
-    if (gate.findSeedable([{ word: 'secede' }], [family], [grow]).length !== 0) bad('garden gate: a planted family must not be seedable');
-
-    // Once the Reach landed, the held-out word counts.
-    const reached = { ...grow, reach: { vocab_id: 'v2', is_correct: true } };
-    if (!gate.findSightings(passage, [family], [reached]).some((s) => s.word === 'intercede')) {
-      bad('garden gate: a constructed Reach word should be sightable');
-    }
-
-    // A seed record surfaces the Seed stage; a grow still wins over it.
-    const seed = { kind: 'garden-seed', family_id: 'lg-test', planted_at: new Date().toISOString() };
-    if (computePlantState([seed]).stage !== 'seed') bad('garden gate: a carried-back seed must surface the Seed stage');
-    if (computePlantState([seed]).due !== 'none') bad('garden gate: a seed must never be due — it sits quietly and never nags');
-    if (computePlantState([seed, grow]).stage === 'seed') bad('garden gate: a grown family must not read as a seed');
-  }
-
-  /* -- GardenSession: a real Grow session end to end, on real content. -- */
-  {
-    const cede = lgResolved.get('lg-0001');
-    if (!cede) {
-      ok('lg-0001 (cede) not present — GardenSession dry run skipped');
-    } else {
-      const siblings = [...lgResolved.values()]
-        .filter((f) => f.meta.id !== cede.meta.id)
-        .map((f) => ({ id: f.meta.id, label: f.root.label, core_meaning: f.root.core_meaning }));
-
-      let t = 2_000_000;
-      const session = new GardenSession(cede, 'grow', siblings, { now: () => (t += 1000) });
-
-      const attemptOpts = session.attemptOptions();
-      if (attemptOpts.filter((o) => o.correct).length !== 1) bad('garden session: attemptOptions must carry exactly one correct option');
-      const correctAttemptIdx = attemptOpts.findIndex((o) => o.correct);
-      if (!session.answerAttempt(correctAttemptIdx).is_correct) bad('garden session: answerAttempt did not recognize the correct option it just offered');
-
-      for (let i = 0; i < session.taught.length; i += 1) session.confirmSpreadMember(i);
-
-      const reachOpts = session.reachOptions(0, 1);
-      if (reachOpts.filter((o) => o.correct).length !== 1) bad('garden session: reachOptions must carry exactly one correct option');
-      const correctReachIdx = reachOpts.findIndex((o) => o.correct);
-      if (!session.answerReach(0, correctReachIdx, 1).is_correct) bad('garden session: answerReach did not recognize the correct option it just offered');
-
-      const record = session.finish();
-      if (record.module !== 'lg' || record.kind !== 'garden-session' || record.garden !== 'root_grove') {
-        bad('garden session: record missing module/kind/garden tags');
-      }
-      if (record.session_type !== 'grow' || record.family_id !== cede.meta.id) bad('garden session: record family/type wrong');
-      if (record.spread.length !== session.taught.length || record.spread.some((s) => !s.walked)) {
-        bad('garden session: spread record incomplete');
-      }
-      if (record.reach?.is_correct !== true) bad('garden session: reach record did not carry the correct verdict');
-      if ('score' in record || 'marks' in record) bad('garden session: no score of any kind may exist on a garden-session record');
-
-      // Determinism: the SAME session id must reshuffle to the SAME order
-      // on a second call (so a re-render never contradicts itself), and a
-      // different attempt number must be free to reshuffle differently.
-      if (JSON.stringify(session.attemptOptions()) !== JSON.stringify(attemptOpts)) bad('garden session: attemptOptions is not stable within one session');
-
-      // A revisit, on the same content, exercises the key/member-check path.
-      let t2 = 3_000_000;
-      const revisit = new GardenSession(cede, 'revisit', siblings, { now: () => (t2 += 1000) });
-      const keyOpts = revisit.keyRetrievalOptions();
-      if (keyOpts.length !== 3 || keyOpts.filter((o) => o.correct).length !== 1) bad('garden session: keyRetrievalOptions must offer 3 options, exactly 1 correct');
-      const [ia, ib] = revisit.memberCheckIndices(0);
-      const memberOpts = revisit.memberCheckOptions(ia);
-      if (memberOpts.filter((o) => o.correct).length !== 1) bad('garden session: memberCheckOptions must carry exactly one correct option');
-      revisit.answerKeyRetrieval(keyOpts.findIndex((o) => o.correct));
-      revisit.answerMemberCheck(ia, memberOpts.findIndex((o) => o.correct));
-      revisit.answerMemberCheck(ib, revisit.memberCheckOptions(ib).findIndex((o) => o.correct));
-      const revisitRecord = revisit.finish();
-      if (revisitRecord.session_type !== 'revisit') bad('garden session: revisit record has wrong session_type');
-      if (revisitRecord.clean !== null && typeof revisitRecord.clean !== 'boolean') bad('garden session: revisit record must carry a boolean clean flag');
-    }
-  }
-
-  /* -- Audio identity: import-safe under Node, disabled path is a no-op. -- */
-  let gardenAudio;
-  {
-    const audio = await mod('src/modules/language-garden/logic/audio.js');
-    gardenAudio = audio;
-    // 'regrowth' is the distinct revisit chime (§10.5 #5) — descends then rises.
-    // 'arrival' (Phase 4.9) is the world fading up, as sound — plays once on
-    // stepping into the Garden from outside. Stage W5 (THE WORLD Part 11) adds
-    // the Overlook idle fragment, the once-ever grown-biome full phrase, and
-    // the Hearth's kettle-stone tick.
-    const REQUIRED = ['arrival', 'commit', 'key', 'growth', 'regrowth', 'leafTap', 'bloom', 'idleFragment', 'grownPhrase', 'kettleTick'];
-    for (const n of REQUIRED) if (!audio.GARDEN_SOUND_NAMES.includes(n)) bad(`garden audio: sound "${n}" missing from the engine`);
-    if (typeof audio.gardenCue !== 'function') bad('garden audio: missing export gardenCue() (sound + haptic)');
-    try {
-      audio.playGardenSound('leafTap', { step: 2 }); // the rising assembly path
-      audio.playGardenSound('arrival'); // stepping into the Garden
-      audio.gardenCue('commit'); // sound + haptic together — disabled path is a no-op
-      audio.gardenCue('growth', { tonic: 196.0 }); // a non-Rootwood tonic (Terraces' G), still a no-op disabled
-      audio.gardenCue('regrowth'); // a revisit's Regrowth peak
-      audio.playGardenSound('idleFragment', { pairIndex: 2, weatherTint: 0.7 });
-      audio.gardenCue('grownPhrase'); // the once-ever full phrase
-      audio.playGardenSound('kettleTick');
-      audio.unlockGardenAudio();
-      audio.setGardenLocation('overlook');
-      audio.maybeKettleTick({ time: 'dawn', season: 'winter' });
-      audio.setGardenLocation(null);
-      audio.startGardenAmbience(1, { landmark: true }); // the Landmark's nesting bird
-      audio.stopGardenAmbience();
-    } catch (e) {
-      bad(`garden audio: disabled play path threw — ${e.message}`);
-    }
-  }
-
-  /* -- The Valley Phrase (THE WORLD Part 11, Stage W5): pure pitch math,
-     held to THE WORLD's own pinned notes mechanically — not just by ear.
-     The acceptance gate is literally "the head/tail are the same phrase
-     to the ear," which is exactly the identity checked first below. -- */
-  {
-    const { PENTATONIC_SEMITONES, VALLEY_PHRASE, pitchHz, tonicHzForBiome } = gardenAudio;
-
-    const degreesOf = (notes) => notes.map((n) => `${n.degree}${n.octave}`).join(',');
-    if (degreesOf(VALLEY_PHRASE.full) !== degreesOf([...VALLEY_PHRASE.head, ...VALLEY_PHRASE.tail])) {
-      bad('garden phrase: the full phrase must be exactly head+tail concatenated — "the same phrase to the ear"');
-    }
-    if (degreesOf(VALLEY_PHRASE.head) !== 'mi1,sol1,la1') bad(`garden phrase: the head must be mi-sol-la, got ${degreesOf(VALLEY_PHRASE.head)}`);
-    if (degreesOf(VALLEY_PHRASE.tail) !== 'sol1,la1,do2') bad(`garden phrase: the tail must be sol-la-do′, got ${degreesOf(VALLEY_PHRASE.tail)}`);
-    // The head's last two degrees and the tail's first two must be the SAME
-    // two notes (sol, la) — the overlap that lets the ear assemble a phrase
-    // it has only ever heard in two halves.
-    if (VALLEY_PHRASE.head[1].degree !== VALLEY_PHRASE.tail[0].degree || VALLEY_PHRASE.head[2].degree !== VALLEY_PHRASE.tail[1].degree) {
-      bad('garden phrase: the head and tail must overlap on sol-la for the ear to assemble one phrase from two halves');
-    }
-
-    // pitchHz must reproduce equal temperament: a fifth is 7 semitones
-    // (ratio 2^(7/12)), an octave doubles, and degree 'do' at octave 0 is
-    // the tonic itself, exactly.
-    const ROOTWOOD_C = 130.81; // audio.js's own C3 — the Rootwood's tonic (11.4)
-    if (pitchHz(ROOTWOOD_C, 'do', 0) !== ROOTWOOD_C) bad('garden phrase: pitchHz(tonic, "do", 0) must equal the tonic exactly');
-    if (Math.abs(pitchHz(ROOTWOOD_C, 'do', 1) - ROOTWOOD_C * 2) > 0.001) bad('garden phrase: one octave up must exactly double the tonic');
-    const fifthRatio = pitchHz(ROOTWOOD_C, 'sol', 0) / ROOTWOOD_C;
-    if (Math.abs(fifthRatio - 2 ** (7 / 12)) > 0.0001) bad(`garden phrase: sol must sit a perfect fifth (7 semitones) above the tonic, ratio was ${fifthRatio}`);
-    for (const [tail, semis] of [['do', 0], ['re', 2], ['mi', 4], ['sol', 7], ['la', 9]]) {
-      if (PENTATONIC_SEMITONES[tail] !== semis) bad(`garden phrase: pentatonic degree "${tail}" should be ${semis} semitones above the tonic, got ${PENTATONIC_SEMITONES[tail]}`);
-    }
-
-    // The tail IS the growth chime and its resolution is do′ two octaves up
-    // from the tonic's own octave; Regrowth must resolve ONE PENTATONIC
-    // STEP higher than that — re′ — never back at do′ (THE WORLD §11.2:
-    // "resolving one step higher").
-    const tailResolution = pitchHz(ROOTWOOD_C, 'do', 2);
-    const regrowthResolution = pitchHz(ROOTWOOD_C, 're', 2);
-    if (regrowthResolution <= tailResolution) bad('garden phrase: Regrowth must resolve higher than the tail (Growth) does');
-    const stepRatio = regrowthResolution / tailResolution;
-    if (Math.abs(stepRatio - 2 ** (2 / 12)) > 0.0001) bad(`garden phrase: Regrowth's resolution must be exactly one pentatonic whole-step above the tail's, ratio was ${stepRatio}`);
-
-    // The tonic map (11.4): every biome the game knows about must resolve
-    // to a real Hz (or null for the Wilds, which has none), and Rootwood —
-    // the only living biome — must be the literal C the phrase is written
-    // in (audio.js's own C3), so the default register never silently drifts.
-    const { BIOMES } = await mod('src/modules/language-garden/logic/biomes.js');
-    const EXPECTED_HZ = { rootwood: 130.81, terraces: 196.0, orchard: 164.81, meadow: 220.0, pond: 146.83, thicket: 196.0, wilds: null };
-    for (const biome of BIOMES) {
-      const got = tonicHzForBiome(biome);
-      const want = EXPECTED_HZ[biome.slug];
-      if (want === null) { if (got !== ROOTWOOD_C) bad(`garden phrase: the Wilds has no tonic and should fall back to the Rootwood's, got ${got}`); }
-      else if (Math.abs(got - want) > 0.01) bad(`garden phrase: ${biome.slug}'s tonic should be ${want}Hz (THE WORLD 11.4), got ${got}`);
-    }
-    if (tonicHzForBiome(null) !== ROOTWOOD_C) bad('garden phrase: tonicHzForBiome(null) must fall back to the Rootwood tonic, never throw');
-  }
-
-  /* -- A biome grown (Bible §3.5; THE WORLD §11.2, Stage W5): pure and
-     replayable — every family in the biome must independently reach at
-     least Mature before the biome itself reads as grown, and an empty or
-     foreign biome is never grown by default. -- */
-  {
-    const { isBiomeGrown } = await mod('src/modules/language-garden/logic/scene.js');
-    const fam = (id, garden) => ({ meta: { id, garden } });
-    const families = [fam('a', 'root_grove'), fam('b', 'root_grove'), fam('c', 'root_grove')];
-    const now = Date.now();
-    const grow = (id, at) => ({ family_id: id, session_type: 'grow', finished_at: new Date(at).toISOString() });
-
-    if (isBiomeGrown([], [], 'rootwood', now)) bad('garden phrase: an empty biome must never read as grown');
-    if (isBiomeGrown(families, [], 'rootwood', now)) bad('garden phrase: families with no history at all must not read as grown');
-    if (isBiomeGrown(families, [grow('a', now - 1000)], 'rootwood', now)) {
-      bad('garden phrase: one freshly-grown (Sprout) family among three must not make the biome grown');
-    }
-    if (isBiomeGrown(families, [grow('a', now - 1000)], 'orchard', now)) {
-      bad('garden phrase: isBiomeGrown must filter to the requested biome slug, not count families from another one');
-    }
-  }
-
-  /* -- The authored world (THE WORLD Part 7, Stage W6): density is
-     testimony, not decoration. Three properties carry the whole doctrine
-     and all three are mechanical, so no future hand can quietly break
-     them: the reveal is MONOTONIC (a prop never disappears as effort
-     accumulates — Part 7.2 rule 2), the inventory is DETERMINISTIC (the
-     same true state always yields the same props in the same order, which
-     is what "nothing random per frame" actually means), and the COUNTS
-     match Part 7.3's stated budget exactly. -- */
-  {
-    const props = await mod('src/modules/language-garden/logic/props.js');
-    const {
-      revealedProps, revealedStories, revealedSeasonalProps, TIER_ORDER, TIER_PROPS,
-      FOUNDING_PROPS, FOUNDING_BUDGET, PROPS_PER_TIER, LUSH_BUDGET,
-    } = props;
-
-    // The budget, exactly as Part 7.3 states it in words.
-    if (FOUNDING_PROPS.length !== FOUNDING_BUDGET) {
-      bad(`garden props: Part 7.3 pins eight founding props, found ${FOUNDING_PROPS.length}`);
-    }
-    for (const tier of TIER_ORDER.slice(1)) {
-      const n = TIER_PROPS.filter((p) => p.tier === tier).length;
-      if (n !== PROPS_PER_TIER) bad(`garden props: Part 7.3 pins four props per tier; "${tier}" has ${n}`);
-    }
-    if (FOUNDING_BUDGET + PROPS_PER_TIER * (TIER_ORDER.length - 1) !== LUSH_BUDGET) {
-      bad('garden props: the founding + per-tier budget must total twenty-four at Lush (Part 7.3)');
-    }
-    // Every tier prop must carry an authored position or be an explicitly
-    // in-scene item: "a prop without an Appendix C coordinate does not
-    // exist yet" (Part 7.3).
-    for (const p of TIER_PROPS) {
-      if (p.scene !== 'rootwood' && (typeof p.x !== 'number' || typeof p.y !== 'number')) {
-        bad(`garden props: "${p.id}" has no authored coordinate (Part 7.3 forbids an unplaced prop)`);
-      }
-    }
-
-    // Monotonic: crossing a tier only ever ADDS. Held at one hour, one
-    // season, and one weather, so only the tier is varying.
-    const at = (tier) => revealedProps({ tier, season: 'spring', time: 'morning', weather: 'clear' }).map((p) => p.id);
-    for (let i = 1; i < TIER_ORDER.length; i += 1) {
-      const lower = at(TIER_ORDER[i - 1]);
-      const higher = at(TIER_ORDER[i]);
-      for (const id of lower) {
-        if (!higher.includes(id)) {
-          bad(`garden props: "${id}" is revealed at ${TIER_ORDER[i - 1]} but gone at ${TIER_ORDER[i]} — Part 7.2 forbids a reveal reversing`);
-        }
-      }
-      if (higher.length < lower.length) bad(`garden props: ${TIER_ORDER[i]} shows fewer props than ${TIER_ORDER[i - 1]}`);
-    }
-    // Stories obey the same law, and none may precede its host prop.
-    const storiesAt = (tier) => revealedStories({ tier }).map((s) => s.id);
-    for (let i = 1; i < TIER_ORDER.length; i += 1) {
-      for (const id of storiesAt(TIER_ORDER[i - 1])) {
-        if (!storiesAt(TIER_ORDER[i]).includes(id)) bad(`garden props: story "${id}" disappears at ${TIER_ORDER[i]}`);
-      }
-    }
-
-    // Deterministic: same state in, identical list out — every time.
-    const state = { tier: 'lush', season: 'autumn', time: 'dawn', weather: 'rain' };
-    const a = JSON.stringify(revealedProps(state));
-    for (let i = 0; i < 5; i += 1) {
-      if (JSON.stringify(revealedProps(state)) !== a) {
-        bad('garden props: revealedProps is not deterministic — the valley must never reshuffle itself between frames (Part 7.2)');
-        break;
-      }
-    }
-
-    // The stated true-state conditions actually gate (Part 7.2 rule 4).
-    const lushClear = at('lush');
-    if (lushClear.includes('mushrooms')) bad('garden props: the mushroom cluster is pinned "rain hours only" (Appendix C.5)');
-    if (!revealedProps({ ...state }).some((p) => p.id === 'mushrooms')) {
-      bad('garden props: the mushroom cluster must appear when it is actually raining');
-    }
-    if (!revealedProps(state).some((p) => p.id === 'dew-web')) {
-      bad('garden props: the dew-web is pinned to autumn dawns (Appendix C.5) and should show on one');
-    }
-    if (revealedProps({ tier: 'lush', season: 'spring', time: 'dawn', weather: 'clear' }).some((p) => p.id === 'dew-web')) {
-      bad('garden props: the dew-web must not appear outside autumn');
-    }
-
-    // The seasonal set is calendar-only: it must never read the tier.
-    const springBare = revealedSeasonalProps({ season: 'spring', time: 'morning' }).map((p) => p.id);
-    if (!springBare.includes('blossom-drift')) {
-      bad('garden props: spring\'s blossom drift is "recurring, never scarce" (Part 7.3) and must show at every tier');
-    }
-    if (revealedSeasonalProps({ season: 'summer', time: 'morning' }).some((p) => p.id === 'heat-haze')) {
-      bad('garden props: the heat-haze seam is pinned to summer AFTERNOONS (Part 7.3)');
-    }
-    if (!revealedSeasonalProps({ season: 'summer', time: 'afternoon' }).some((p) => p.id === 'heat-haze')) {
-      bad('garden props: the heat-haze seam must show on a summer afternoon');
-    }
-  }
-
-  /* -- The fauna (THE WORLD Part 9, Stage W6). The roster's sizes and
-     pigments are pinned values, so they are asserted literally against the
-     document's own table; and the picker must stay a mirror of true state,
-     never a motor — a valley with nothing blooming and no Ancient standing
-     has nothing to show at any density. -- */
-  {
-    const { FAUNA, pickOverlookVisitor, RARE_RATE } = await mod('src/modules/language-garden/logic/fauna.js');
-
-    // Part 9.3's table, transcribed here independently so a drift in
-    // either copy is caught rather than mirrored.
-    const PINNED = {
-      'butterfly-white': [0.016, '#F2EFE2'], 'butterfly-dark': [0.016, '#4A3F52'],
-      bee: [0.012, '#D9A24A'], dragonfly: [0.022, '#7FA2B8'], firefly: [0.004, '#F2D98A'],
-      bird: [0.02, '#8C7A66'], moth: [0.014, '#E4DFD2'], snail: [0.012, '#C9BCA6'],
-      frog: [0.018, '#7FA066'], deer: [0.08, '#B08D66'], fox: [0.07, '#C97F58'],
-      heron: [0.06, '#AEB9C6'], owl: [0.035, '#6F5B48'], cat: [0.05, '#4A4644'],
-    };
-    for (const [id, [size, fill]] of Object.entries(PINNED)) {
-      const spec = FAUNA[id];
-      if (!spec) { bad(`garden fauna: "${id}" is in Part 9.3's roster but missing from FAUNA`); continue; }
-      if (Math.abs(spec.size - size) > 1e-9) bad(`garden fauna: ${id} is pinned at ${size * 100}% of frame width, found ${spec.size * 100}%`);
-      if (spec.fill.toUpperCase() !== fill) bad(`garden fauna: ${id}'s pigment is pinned ${fill}, found ${spec.fill}`);
-      if (!spec.verb) bad(`garden fauna: ${id} has no motion verb (Part 9.2 gives every creature exactly one)`);
-    }
-    if (Math.abs(FAUNA.firefly.glowSize - 0.02) > 1e-9) {
-      bad('garden fauna: the firefly is pinned as a 0.4% dot inside a 2% glow (Part 9.3)');
-    }
-
-    // A mirror, never a motor (Law 5/Law 8): nothing to see is a real,
-    // reachable answer. The dice are forced so the CONDITIONS are what is
-    // actually under test — and the two pools have to be separated, since
-    // the rare four are deliberately NOT gated on any true state (Bible
-    // §4.8: "unearned"), so a fox at a dead-quiet night is correct, not a
-    // bug. `commonOnly` declines the rare roll on its first call and
-    // accepts everything after it.
-    const commonOnly = () => { let first = true; return () => { if (first) { first = false; return 1; } return 0; }; };
-    const emptyValley = { time: 'morning', tier: 'bare', bloomingCount: 0, ancientCount: 0, weather: 'clear' };
-    if (pickOverlookVisitor({ ...emptyValley, time: 'night' }, commonOnly()) !== null) {
-      bad('garden fauna: a night valley with no Ancient standing and nothing blooming must show nothing common (Bible §4.8)');
-    }
-    // ...and a true state genuinely opens a pool.
-    if (pickOverlookVisitor({ ...emptyValley, time: 'night', ancientCount: 2 }, commonOnly()) === null) {
-      bad('garden fauna: fireflies are gated on Ancient trees and should appear when some are standing (§4.8)');
-    }
-    if (pickOverlookVisitor({ ...emptyValley, weather: 'rain' }, commonOnly()) === null) {
-      bad('garden fauna: snails come after rain (§4.8)');
-    }
-    // The rare four ARE reachable with no effort at all — that asymmetry
-    // is the point, and it is worth pinning so nobody "fixes" it later.
-    if (pickOverlookVisitor({ ...emptyValley, time: 'night' }, () => 0) === null) {
-      bad('garden fauna: the rare four must be reachable in an untended valley — they are unearned (§4.8)');
-    }
-    // Never a reward: no visitor may be gated on anything a session did.
-    const src = readFileSync(join(root, 'src/modules/language-garden/logic/fauna.js'), 'utf8');
-    for (const forbidden of ['xp', 'streak', 'score', 'reward']) {
-      if (new RegExp(`\\b${forbidden}\\b`, 'i').test(src.replace(/reward/gi, (m, i) => (/not a reward|never a reward|are not rewards|unearned/i.test(src.slice(Math.max(0, i - 40), i + 40)) ? '' : m)))) {
-        bad(`garden fauna: "${forbidden}" appears in the picker — the world is not a reward (Law 8)`);
-      }
-    }
-    if (!(RARE_RATE > 0 && RARE_RATE < 0.1)) {
-      bad('garden fauna: the rare four must stay rare (Bible §4.8: "rare, unpredictable, unearned")');
-    }
-  }
-
-  /* -- Winter's real geometry (THE WORLD Part 6.6, Stage W6): "a filter
-     cannot draw branches." The season must reach the drawing code, and it
-     must not reach the Ancients, which Part 8.2 pins as evergreen. -- */
-  {
-    const plantSrc = readFileSync(join(root, 'src/ui/components/cat-plant.js'), 'utf8');
-    if (!/observedAttributes[\s\S]{0,200}'season'/.test(plantSrc)) {
-      bad('garden winter: <cat-plant> must observe a `season` attribute, or the season can never change its geometry (Part 6.6)');
-    }
-    if (!/WINTER_BARE_STAGES/.test(plantSrc)) {
-      bad('garden winter: <cat-plant> has no winter stage set — winter would be a filter again (Part 6.6)');
-    }
-    if (/WINTER_BARE_STAGES\s*=\s*new Set\(\[[^\]]*'ancient'/.test(plantSrc)) {
-      bad('garden winter: Ancient is pinned "deep evergreen" (Part 8.2) and must not go bare in winter');
-    }
-    const biomeSrc = readFileSync(join(root, 'src/modules/language-garden/screens/biome.js'), 'utf8');
-    if (!/<cat-plant[^>]*season=/.test(biomeSrc)) {
-      bad('garden winter: the biome scene must pass the world season to its plants (Part 6.6)');
-    }
-  }
-
-  /* -- Nothing in the world is tappable (Part 13's W6 acceptance line,
-     Bible §14.8). The props, stories, and creatures are scenery: a world
-     you can poke is a toy. -- */
-  {
-    const css = readFileSync(join(root, 'src/ui/styles/components.css'), 'utf8');
-    if (!/\.vl-prop,[^{]*\.fa,[^{]*\{[^}]*pointer-events:\s*none/.test(css)) {
-      bad('garden W6: props, stories, and fauna must all be pointer-events:none — nothing in the world is tappable');
-    }
-    // Facelessness is a law, not a budget (Part 9.1, P147). Comments are
-    // stripped first: the file TALKS about faces and eyes at length (it
-    // must — the prohibition is the most important thing in it), and a
-    // naive scan would flag its own documentation forever.
-    const faunaArt = readFileSync(join(root, 'src/modules/language-garden/screens/fauna-art.js'), 'utf8')
-      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
-    if (/\b(eye|eyes|pupil|iris)\b/i.test(faunaArt)) {
-      bad('garden W6: a creature has grown a face — facelessness is a law (Part 9.1, P147)');
-    }
-    // The typographic glyphs the redraw replaced must not creep back.
-    const biomeSrc = readFileSync(join(root, 'src/modules/language-garden/screens/biome.js'), 'utf8');
-    for (const glyph of ['❋', '◜', '❁', '⁘']) {
-      if (biomeSrc.includes(`>${glyph}<`)) {
-        bad(`garden W6: the visitor glyph ${glyph} is back — Part 9.1 requires soft masses, not typography`);
-      }
-    }
-  }
-
-  /* -- Phase 4.9 (Product Finish) invariants. -- */
-  {
-    // Ambience defaults ON (P6): an absent settings record must read as
-    // enabled, an explicit false as disabled — the master Sounds preference
-    // still gates actual playback inside audio.js.
-    const store = await mod('src/modules/language-garden/logic/store.js');
-    const stub = (value) => ({ get: async () => value, put: async () => {} });
-    if (await store.gardenAmbienceEnabled(stub(undefined)) !== true) bad('garden 4.9: ambience must default ON when no preference is stored');
-    if (await store.gardenAmbienceEnabled(stub({ id: 'lg:ambience', value: false })) !== false) bad('garden 4.9: an explicit ambience OFF must be honoured');
-    if (await store.gardenAmbienceEnabled(stub({ id: 'lg:ambience', value: true })) !== true) bad('garden 4.9: an explicit ambience ON must be honoured');
-
-    // No loading state may ever return to a Garden screen (Guide 24.1):
-    // the word "skeleton" must not appear in any garden screen source.
-    const { readFileSync } = await import('node:fs');
-    for (const f of [
-      'src/modules/language-garden/screens/overlook.js',
-      'src/modules/language-garden/screens/biome.js',
-      'src/modules/language-garden/screens/journal.js',
-      'src/modules/language-garden/screens/plant.js',
-      'src/modules/language-garden/screens/session.js',
-    ]) {
-      if (/class="[^"]*skeleton/i.test(readFileSync(new URL(`../${f}`, import.meta.url), 'utf8'))) {
-        bad(`garden 4.9: ${f} reintroduces a loading skeleton (Guide 24.1 forbids any loading state in the Garden)`);
-      }
-    }
-  }
-
-  if (problems.filter((p) => p.startsWith('garden')).length === 0) {
-    ok('calm voice, honest scheduler (never demotes), a real Grow + Revisit session, no score anywhere, audio import-safe');
-  }
+  if (problems.length === before) ok('calm voice, honest scheduler (never demotes), a real Grow + Revisit session, every family seated');
 }
+
+
+console.log('\n16. The world (regions · economy · lexicon rounds · state · audio)');
+{
+  const before = problems.length;
+  const regions = await mod('src/world/regions.js');
+  const economy = await mod('src/world/economy.js');
+  const lexicon = await mod('src/world/lexicon.js');
+  const state = await mod('src/world/state.js');
+  const worldAudio = await mod('src/world/audio.js');
+  const sprites = await mod('src/world/engine/sprites.js');
+  const palette = await mod('src/world/engine/palette.js');
+
+  /* ---- Regions: unique, on the map, reachable, each with its words ---- */
+  {
+    const b0 = problems.length;
+    const slugs = new Set();
+    for (const r of regions.REGIONS) {
+      if (slugs.has(r.slug)) bad(`world regions: duplicate slug ${r.slug}`);
+      slugs.add(r.slug);
+      if (!(r.anchor.x >= 0 && r.anchor.x <= regions.WORLD_W && r.anchor.y >= 0 && r.anchor.y <= regions.WORLD_H)) bad(`world regions: ${r.slug} anchor is off the map`);
+      const hit = regions.regionAt(r.anchor.x, r.anchor.y);
+      if (hit?.slug !== r.slug) bad(`world regions: touching ${r.slug}'s anchor resolves to ${hit?.slug ?? 'nothing'}`);
+      for (const k of ['name', 'line', 'verb', 'route']) if (!r[k]) bad(`world regions: ${r.slug} is missing ${k}`);
+      if (!r.route.startsWith('#/')) bad(`world regions: ${r.slug} route is not a hash route`);
+    }
+    if (regions.regionAt(-5, -5) !== null) bad('world regions: a point off the map must hit nothing');
+    if (regions.LANTERN_SPOTS.length < 12) bad('world regions: the Thicket needs a lantern per loanword language (12)');
+    if (problems.length === b0) ok(`${regions.REGIONS.length} places, every anchor inside its own hit box, ${regions.LANTERN_SPOTS.length} lantern spots`);
+  }
+
+  /* ---- Economy: stars, ink, quests, upgrades ---- */
+  {
+    const b0 = problems.length;
+    const rc = (correct, total, min, target) => economy.rcStars({ score: { total, correct }, duration_ms: min * 60000 }, target);
+    if (rc(1, 4, 5, 6).stars !== 0) bad('world economy: fewer than half right must be 0 stars');
+    if (rc(2, 4, 5, 6).stars !== 1) bad('world economy: half right must be 1 star');
+    if (rc(3, 4, 9, 6).stars !== 2) bad('world economy: three quarters right but slow must be 2 stars');
+    if (rc(3, 4, 5, 6).stars !== 3) bad('world economy: three quarters right in time must be 3 stars');
+    if (!rc(4, 4, 5, 6).flawless) bad('world economy: all right in time must be flawless');
+    if (economy.rcStars({ score: { total: 4, correct: 4 }, duration_ms: 5.5 * 60000 }, 6, 0.8).stars !== 2) bad('world economy: Night Reading tightens the pace to four fifths');
+    const rs = economy.roundStars({ correct: 11, total: 12, avgMs: 5000, targetMs: 7000 });
+    if (rs.stars !== 3) bad('world economy: a 92% round at pace must be 3 stars');
+    if (economy.roundStars({ correct: 11, total: 12, avgMs: 9000, targetMs: 7000 }).stars !== 2) bad('world economy: a 92% round over pace must be 2 stars');
+    if (economy.roundStars({ correct: 6, total: 12, avgMs: 5000 }).stars !== 1) bad('world economy: half right is 1 star');
+    if (economy.verbalStars({ score: { total: 2, correct: 2, attempted: 2 }, duration_ms: 100000 }, 150).stars !== 3) bad('world economy: a clean verbal set in time must be 3 stars');
+    for (let s = 0; s <= 3; s += 1) if (!(economy.INK.rc(s) > 0 && economy.INK.round(s, 0) > 0 && economy.INK.verbal(s, 0) > 0)) bad('world economy: every finished run earns Ink');
+    if (!(economy.INK.rc(3) > economy.INK.rc(0))) bad('world economy: more stars must mean more Ink');
+    const q1 = economy.questsForDate('2026-09-11'), q2 = economy.questsForDate('2026-09-11'), q3 = economy.questsForDate('2026-09-12');
+    if (q1.length !== 3 || new Set(q1.map((q) => q.id)).size !== 3) bad('world economy: a day must have three distinct quests');
+    if (q1.map((q) => q.id).join() !== q2.map((q) => q.id).join()) bad('world economy: the same date must give the same quests');
+    if (![q1, q3].some((q) => q.some((x) => ['meadow', 'pond', 'thicket'].includes(x.region)))) bad('world economy: one quest a day is vocabulary');
+    for (const q of economy.QUEST_POOL) {
+      const p = q.progress({ rc: 0, rcTwoStar: 0, garden: 0, lexCorrect: { meadow: 0, pond: 0, thicket: 0 }, roundTwoStar: { meadow: 0, pond: 0, thicket: 0 }, verbalCorrect: 0, wd: 0, regions: new Set(), threeStars: 0 });
+      if (!(p.done === 0 && p.goal > 0)) bad(`world economy: quest ${q.id} must start at 0 of a positive goal`);
+      if (!regions.regionBySlug(q.region)) bad(`world economy: quest ${q.id} points at an unknown place ${q.region}`);
+    }
+    const ids = new Set();
+    for (const u of economy.UPGRADES) {
+      if (ids.has(u.id)) bad(`world economy: duplicate upgrade ${u.id}`);
+      ids.add(u.id);
+      if (!(u.cost > 0)) bad(`world economy: upgrade ${u.id} must cost Ink`);
+      if (u.requires && !economy.UPGRADES.some((x) => x.id === u.requires)) bad(`world economy: upgrade ${u.id} requires an unknown ${u.requires}`);
+      if (!regions.regionBySlug(u.region)) bad(`world economy: upgrade ${u.id} belongs to an unknown place`);
+    }
+    if (economy.availableUpgrades([]).some((u) => u.requires)) bad('world economy: a dependent upgrade must not be available before its prerequisite');
+    if (!economy.availableUpgrades(['hearth-2']).some((u) => u.id === 'hearth-3')) bad('world economy: building the chimney must unlock the flower boxes');
+    if (economy.titleFor(1) === economy.titleFor(20)) bad('world economy: titles must grow with level');
+    if (problems.length === b0) ok('stars follow accuracy then pace, Ink follows stars, three seeded quests a day, upgrades chain');
+  }
+
+  /* ---- Lexicon: real content into real questions, and an honest ledger ---- */
+  {
+    const b0 = problems.length;
+    const lex = readJSON('content/lexicon/lex-high-a.json');
+    const twin = readJSON('content/twins/twin-a.json');
+    const loan = readJSON('content/loanwords/loan-french.json');
+    const kinds = new Set();
+    for (const e of lex.entries.slice(0, 40)) {
+      const q = lexicon.buildQuestion(e, lex, 'meadow', 'verify');
+      kinds.add(q.kind);
+      if (q.options.length < 3) bad(`world lexicon: ${e.word} question has fewer than three options`);
+      if (q.options.filter((o) => o.correct).length !== 1) bad(`world lexicon: ${e.word} question must have exactly one correct option`);
+      if (new Set(q.options.map((o) => o.text.toLowerCase())).size !== q.options.length) bad(`world lexicon: ${e.word} question repeats an option`);
+      if (!q.stem || !q.ask) bad(`world lexicon: ${e.word} question has no stem or ask`);
+    }
+    if (!kinds.has('meaning') || !kinds.has('synonym')) bad('world lexicon: the Meadow must ask meanings and synonyms');
+    for (const e of twin.entries.slice(0, 20)) {
+      const q = lexicon.buildQuestion(e, twin, 'pond', 'verify');
+      if (q.options.filter((o) => o.correct).length !== 1) bad(`world lexicon: twin ${e.words.join('/')} must have one correct option`);
+      if (q.kind === 'twin' && !e.words.includes(q.options.find((o) => o.correct).text)) bad(`world lexicon: twin ${e.words.join('/')} must ask for one of its own words`);
+    }
+    for (const e of loan.entries.slice(0, 10)) {
+      const q = lexicon.buildQuestion(e, loan, 'thicket', 'verify', ['French', 'German', 'Japanese', 'Arabic', 'Spanish']);
+      if (q.options.filter((o) => o.correct).length !== 1) bad(`world lexicon: loanword ${e.word} must have one correct option`);
+    }
+    // The ledger: climbs only when due, never below met on a miss, never above deep.
+    const now = Date.parse('2026-09-11T10:00:00Z');
+    const e = lex.entries[0];
+    const rec = lexicon.applyAnswer(undefined, e, 'meadow', lex.meta.id, true, now);
+    if (rec.level !== 2 || rec.streak !== 1) bad('world lexicon: a first clean answer makes a word known (level 2)');
+    const early = lexicon.applyAnswer(rec, e, 'meadow', lex.meta.id, true, now + 60000);
+    if (early.level !== 2) bad('world lexicon: a second answer a minute later must not climb (spacing not elapsed)');
+    const later = lexicon.applyAnswer(rec, e, 'meadow', lex.meta.id, true, now + 2 * 24 * 3600000);
+    if (later.level !== 3) bad('world lexicon: a clean answer after the interval climbs to mastered');
+    const miss = lexicon.applyAnswer(later, e, 'meadow', lex.meta.id, false, now + 3 * 24 * 3600000);
+    if (miss.level !== 2 || miss.streak !== 0) bad('world lexicon: a miss drops one level and resets the streak');
+    let deep = later; for (let i = 0; i < 6; i += 1) deep = lexicon.applyAnswer(deep, e, 'meadow', lex.meta.id, true, Date.parse(deep.next_at) + 1000);
+    if (deep.level !== 4) bad('world lexicon: mastery caps at deep (4)');
+    const ledger = new Map([[lex.entries[0].id, { ...rec, next_at: new Date(now - 1000).toISOString() }]]);
+    const picked = lexicon.pickRound(lex.entries, ledger, now, 12, 'verify');
+    if (picked.length !== 12) bad('world lexicon: a round is twelve words');
+    if (!picked.some((x) => x.id === lex.entries[0].id)) bad('world lexicon: a due word must be in the round');
+    const round = new lexicon.LexRound({ region: 'meadow', bundle: lex, entries: picked, now: () => now });
+    round.markShown();
+    for (let i = 0; i < round.total; i += 1) { const ci = round.current.options.findIndex((o) => o.correct); round.answer(i % 3 === 0 ? (ci + 1) % round.current.options.length : ci); round.next(); }
+    const result = round.finish();
+    if (result.record.kind !== 'lex-round' || result.record.score.total !== 12) bad('world lexicon: a finished round yields a lex-round record of twelve answers');
+    if (result.record.score.correct !== 8) bad(`world lexicon: expected 8 correct in the dry run, got ${result.record.score.correct}`);
+    if (!(result.ink > 0)) bad('world lexicon: a finished round earns Ink');
+    const summary = lexicon.summarizeLedger(new Map([['a', { bundle_id: 'b1', level: 3, next_at: null }], ['b', { bundle_id: 'b1', level: 1, next_at: null }]]));
+    if (summary.get('b1')?.mastered !== 1 || summary.get('b1')?.met !== 2) bad('world lexicon: the ledger summary counts met and mastered per bundle');
+    if (problems.length === b0) ok('real words become one-correct questions; the ledger climbs only when due and never demotes below met');
+  }
+
+  /* ---- State: the world derived from records ---- */
+  {
+    const b0 = problems.length;
+    const content = { families: [], rc: [{ id: 'rc-0001', estimated_time_min: 6 }], pj: [], ps: [], ooo: [], wd: [], fields: { meadow: [{ id: 'lex-high-a', total: 100 }], pond: [], thicket: [] } };
+    const empty = state.deriveWorldState(content, { sessions: [], learning: [] }, Date.parse('2026-09-11T10:00:00Z'));
+    if (!empty.isNew || empty.ink.balance !== 0 || empty.stars !== 0) bad('world state: an empty world is new, with no Ink and no stars');
+    if (empty.quests.length !== 3) bad('world state: three quests a day');
+    const t0 = Date.parse('2026-09-11T09:00:00Z');
+    const rcSession = { id: 's1', passage_id: 'rc-0001', started_at: new Date(t0).toISOString(), finished_at: new Date(t0 + 5 * 60000).toISOString(), duration_ms: 5 * 60000, score: { total: 4, correct: 3, attempted: 4, accuracy: 0.75 }, answers: [] };
+    const learning = [
+      { id: 'lexm:lex-high-a-0001', kind: 'lex-mastery', entry_id: 'lex-high-a-0001', bundle_id: 'lex-high-a', region: 'meadow', level: 3, next_at: null },
+      { id: 'lex-round-1', kind: 'lex-round', region: 'meadow', bundle_id: 'lex-high-a', finished_at: new Date(t0).toISOString(), score: { correct: 10, total: 12 }, stars: 2 },
+      { id: 'build:hearth-2', kind: 'world-build', upgrade_id: 'hearth-2', cost: 80, region: 'hearth' },
+    ];
+    const s = state.deriveWorldState(content, { sessions: [rcSession], learning }, Date.parse('2026-09-11T10:00:00Z'));
+    if (s.reading.stars !== 3 || s.reading.litWindows !== 1) bad('world state: a 3/4 passage in time is three stars and a lit window');
+    if (s.meadow.mastered !== 1 || s.meadow.stars !== 2) bad('world state: the Meadow counts mastered words and best round stars');
+    const expectedEarned = economy.INK.rc(3) + economy.INK.round(2, 10);
+    if (s.ink.earned !== expectedEarned || s.ink.spent !== 80 || s.ink.balance !== Math.max(0, expectedEarned - 80)) bad(`world state: Ink must be earned minus spent, never negative (${s.ink.earned}/${s.ink.spent}/${s.ink.balance})`);
+    if (s.hearth.level !== 2) bad('world state: the built chimney raises the Hearth to level 2');
+    if (!s.hearth.practicedToday) bad('world state: a session today counts as practised today');
+    if (s.stars !== 5) bad(`world state: stars total across places (${s.stars})`);
+    if (state.worldChangeLine('reading-room', empty, s) === '') bad('world state: a change in the Reading Room must have a line');
+    if (problems.length === b0) ok('empty world is new; sessions become stars, windows, flowers and Ink; builds subtract');
+  }
+
+  /* ---- Audio identity and the sprite recipes ---- */
+  {
+    const b0 = problems.length;
+    for (const n of ['tap', 'open', 'star1', 'star2', 'star3', 'ink', 'quest', 'grow', 'build', 'correct', 'wrong', 'hurry', 'arrival']) if (!worldAudio.WORLD_SOUND_NAMES.includes(n)) bad(`world audio: missing sound ${n}`);
+    if (Math.round(worldAudio.pitch(130.81, 'do', 1)) !== 262) bad('world audio: an octave above the tonic doubles the pitch');
+    if (worldAudio.VALLEY_PHRASE.length !== 6) bad('world audio: the Valley Phrase has six notes');
+    for (const n of ['tree', 'flower', 'cottage', 'tower', 'workshop', 'lantern', 'koi', 'butterfly', 'bird', 'cat', 'cloud', 'rootStone', 'bridge']) if (!sprites.RECIPE_NAMES.includes(n)) bad(`world sprites: missing recipe ${n}`);
+    const r = palette.ramp('#4E9E4C');
+    if (!(r.light !== r.base && r.shade !== r.base && r.dark !== r.shade)) bad('world palette: a ramp must have four distinct tones');
+    if (!['spring', 'summer', 'autumn', 'winter'].includes(palette.seasonWord(new Date('2026-09-11')))) bad('world palette: a season for every date');
+    if (palette.hourWord(new Date(2026, 8, 11, 22)) !== 'night' || palette.hourWord(new Date(2026, 8, 11, 9)) !== 'morning') bad('world palette: the hour words follow the clock');
+    if (palette.weatherWord(new Date(2026, 8, 11)) !== palette.weatherWord(new Date(2026, 8, 11))) bad('world palette: the weather holds all day');
+    if (problems.length === b0) ok(`${worldAudio.WORLD_SOUND_NAMES.length} world sounds, ${sprites.RECIPE_NAMES.length} sprite recipes, ramps and seasons`);
+  }
+
+  /* ---- No screen still imports the retired SVG world ---- */
+  {
+    const b0 = problems.length;
+    const { readdirSync: rd, statSync } = await import('node:fs');
+    const walkDir = (dir, out = []) => { for (const f of rd(join(root, dir))) { const p = `${dir}/${f}`; if (statSync(join(root, p)).isDirectory()) walkDir(p, out); else if (p.endsWith('.js')) out.push(p); } return out; };
+    for (const f of walkDir('src')) {
+      const src = readFileSync(join(root, f), 'utf8');
+      if (/from '\.[^']*\/(overlook|biome|atmosphere-art|prop-art|fauna-art|discoveries|props|fauna|light|ambient|journal)\.js'/.test(src)) bad(`world: ${f} still imports a retired garden module`);
+    }
+    if (problems.length === b0) ok('no module imports the retired SVG world');
+  }
+
+  if (problems.length === before) ok('the world derives honestly from records; the places, the rules, the rounds and the sounds agree');
+}
+
 
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {

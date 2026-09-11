@@ -18,6 +18,8 @@ import { registerPS } from './modules/para-summary/index.js';
 import { registerOOO } from './modules/odd-one-out/index.js';
 import { registerWD } from './modules/word-dna/index.js';
 import { registerLanguageGarden } from './modules/language-garden/index.js';
+import { registerWorld, isWorldRoute } from './world/index.js';
+import { silenceWorld, musicEnabled, setMusicEnabled } from './world/audio.js';
 import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
 import { resetPSIntro, latestByItem as latestPSByItem } from './modules/para-summary/logic/store.js';
 import { resetOOOIntro, latestByItem as latestOOOByItem } from './modules/odd-one-out/logic/store.js';
@@ -25,11 +27,9 @@ import { resetWDIntro } from './modules/word-dna/logic/store.js';
 import { recommendNextPJ } from './modules/para-jumbles/logic/tiers.js';
 import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
 import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
-import { listGardenSessions, listGardenSeeds, gardenAmbienceEnabled, setGardenAmbience } from './modules/language-garden/logic/store.js';
+import { listGardenSessions, listGardenSeeds } from './modules/language-garden/logic/store.js';
 import { deriveValleyScene } from './modules/language-garden/logic/scene.js';
-import { computeStreamLevel } from './modules/language-garden/logic/effort.js';
-import { computePlantState } from './core/engine/garden-session.js';
-import { startGardenAmbience, stopGardenAmbience, unlockGardenAudio, playGardenSound, setGardenLocation } from './modules/language-garden/logic/audio.js';
+import { unlockGardenAudio, setGardenLocation } from './modules/language-garden/logic/audio.js';
 import { EMPTY_DAY_LINES, pick as pickGardenLine } from './core/mentor/garden-voice.js';
 import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem, listLGItems, loadLGItems } from './core/content-loader/loader.js';
 import { deriveEngagement } from './core/engagement/stats.js';
@@ -61,7 +61,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '0.17.0'; // keep in step with CHANGELOG.md
+const APP_VERSION = '1.0.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -206,7 +206,7 @@ async function gardenHomeCard() {
       <div class="card">
         <h2>Your garden</h2>
         <p class="muted" style="margin-bottom: var(--space-3)">${line}</p>
-        <a class="btn btn--primary btn--block" href="#/garden">Enter the valley</a>
+        <a class="btn btn--primary btn--block" href="#/world">Enter the valley</a>
       </div>`;
   } catch {
     return ''; // offline/uncached: Home simply omits the widget
@@ -380,6 +380,9 @@ const GATE_PLACES = [
 ];
 
 function renderPractice(outlet) {
+  // 1.0.0: the road beyond the Gate is the world itself.
+  location.replace('#/world');
+  if (outlet) return;
   const hour = new Date().getHours();
   const time = hour < 5 ? 'night' : hour < 8 ? 'dawn' : hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : hour < 20 ? 'dusk' : 'night';
   outlet.innerHTML = `
@@ -527,19 +530,29 @@ function renderSettings(outlet) {
       </div>
 
       <div class="card">
-        <h2>Language Garden</h2>
+        <h2>The world</h2>
         <div class="row">
           <div class="row__lead">
-            <span class="row__icon" aria-hidden="true">⚘</span>
+            <span class="row__icon" aria-hidden="true">♫</span>
             <div>
-              <div class="row__label">Ambience</div>
-              <div class="row__hint">Soft birds and breeze while you tend the grove — off by default</div>
+              <div class="row__label">Music and ambience</div>
+              <div class="row__hint">The valley's own music, wind, water and birds — needs Sounds on</div>
             </div>
           </div>
-          <div class="segmented" id="garden-ambience-picker" role="group" aria-label="Garden ambience" data-sfx="off">
+          <div class="segmented" id="garden-ambience-picker" role="group" aria-label="World music" data-sfx="off">
             <button class="segmented__option" data-garden-ambience="true" aria-pressed="false">On</button>
             <button class="segmented__option" data-garden-ambience="false" aria-pressed="false">Off</button>
           </div>
+        </div>
+        <div class="row">
+          <div class="row__lead">
+            <span class="row__icon" aria-hidden="true">⌂</span>
+            <div>
+              <div class="row__label">Back to the valley</div>
+              <div class="row__hint">The world is the home screen</div>
+            </div>
+          </div>
+          <a class="btn" href="#/world">Open</a>
         </div>
       </div>
 
@@ -762,9 +775,9 @@ function renderSettings(outlet) {
   });
   syncFocusNoise();
 
-  // --- Language Garden: ambience toggle ---
-  const syncGardenAmbience = async () => {
-    const on = await gardenAmbienceEnabled(storage);
+  // --- The world: music and ambience toggle ---
+  const syncGardenAmbience = () => {
+    const on = musicEnabled();
     for (const b of outlet.querySelectorAll('[data-garden-ambience]')) {
       b.setAttribute('aria-pressed', String((b.dataset.gardenAmbience === 'true') === on));
     }
@@ -772,16 +785,9 @@ function renderSettings(outlet) {
   outlet.querySelector('#garden-ambience-picker').addEventListener('click', async (e) => {
     const b = e.target.closest('[data-garden-ambience]');
     if (!b) return;
-    const on = b.dataset.gardenAmbience === 'true';
-    await setGardenAmbience(storage, on);
-    await syncGardenAmbience();
+    await setMusicEnabled(b.dataset.gardenAmbience === 'true');
+    syncGardenAmbience();
     cue('toggle');
-    if (on) {
-      startGardenAmbience();
-      setTimeout(stopGardenAmbience, 1400); // a brief preview, same idea as Focus Sound's
-    } else {
-      stopGardenAmbience();
-    }
   });
   syncGardenAmbience();
 
@@ -876,7 +882,7 @@ function renderNotFound(outlet) {
         <div class="empty__glyph" aria-hidden="true">?</div>
         <h2>Screen not found</h2>
         <p>That address doesn't exist. It may be from an older version.</p>
-        <a class="btn btn--primary" href="#/garden">Back to the valley</a>
+        <a class="btn btn--primary" href="#/world">Back to the valley</a>
       </div>
     </section>
   `;
@@ -922,23 +928,25 @@ async function boot() {
   registerOOO(router, { storage });
   registerWD(router, { storage }); // soft-hidden from nav (see CONTINUE_INFO); routes stay live
   registerLanguageGarden(router, { storage });
+  registerWorld(router, { storage });
 
-  // 0.16.0: the valley is the application's home. A cold open lands at the
-  // Overlook (or, on the very first open ever, straight into the Rootwood's
-  // first sentence — Bible §3.1); everything else in CAT OS lies beyond the
-  // Gate. The old dashboard route stays registered so nothing that linked
-  // to it breaks, but nothing links to it any more.
-  router.start('/garden');
+  // 1.0.0: the world is the application. A cold open lands in the valley;
+  // every learning room is a place in it. The old routes stay registered so
+  // nothing that linked to them breaks.
+  router.start('/world');
 
-  // Chrome destroys place (Bible §14.7): inside the Garden — the Overlook, a
-  // biome, a plant, a session, the Journal — the app's header and bottom nav
-  // are hidden, and the valley carries its own quiet marks (and every garden
-  // screen its own quiet way back out). Set on boot AND on every navigation,
-  // so reopening the PWA straight onto a #/garden route is immersive too.
+  // Chrome destroys place: inside the world — the valley, a place, a round,
+  // a Rootwood session — the app's header and tab bar are hidden and every
+  // screen carries its own way back. The learning rooms beyond keep the
+  // world's paper and typography (game.css restyles the shared chrome under
+  // [data-world]) and show the tab bar again, since they are deeper pages.
   const applyImmersiveChrome = () => {
     const h = location.hash;
-    const inGarden = h === '#/garden' || h.startsWith('#/garden/');
-    document.documentElement.toggleAttribute('data-immersive', inGarden);
+    const inWorld = isWorldRoute(h);
+    document.documentElement.toggleAttribute('data-world', inWorld);
+    document.documentElement.toggleAttribute('data-immersive', inWorld);
+    document.documentElement.toggleAttribute('data-room', !inWorld);
+    if (!inWorld) silenceWorld();
   };
   applyImmersiveChrome();
   window.addEventListener('hashchange', applyImmersiveChrome);
@@ -955,51 +963,14 @@ async function boot() {
     }
   });
 
-  // Garden ambience: plays while browsing the grove/plant/journal, stays
-  // quiet during an actual session (Bible §7 — a session keeps to just
-  // its two named sounds, never a competing ambient bed). Checked on boot
-  // too, so reopening the PWA straight onto a garden route sounds like
-  // the garden — not only after the first navigation.
-  let wasInGarden = location.hash.startsWith('#/garden');
-  const syncGardenSoundscape = async () => {
+  // The Rootwood's own session sounds (the key, the leaf taps, growth) keep
+  // their location-aware state; the world engine now carries all ambience.
+  const syncGardenLocation = () => {
     const h = location.hash;
-    const inGarden = h === '#/garden' || h.startsWith('#/garden/');
-    // Stepping into the Garden from outside: the arrival swell (§10.5,
-    // Guide 17.2) — the audio half of the world fading up from warm dark.
-    // Never on movement WITHIN the garden, so it stays an arrival, not a
-    // jingle.
-    if (inGarden && !wasInGarden) playGardenSound('arrival');
-    wasInGarden = inGarden;
-    const isBrowsingGarden = (h === '#/garden' || h.startsWith('#/garden/biome') || h.startsWith('#/garden/plant') || h.startsWith('#/garden/journal'));
-    // The Overlook idle fragment and the Hearth's kettle-stone tick (THE
-    // WORLD §11.2, §11.5) both need to know specifically whether the
-    // learner is standing at the Overlook right now, not just "somewhere
-    // in the garden" — and a session (never eligible for either) must
-    // still count as staying IN the garden, not as a fresh visit when it
-    // ends. 'overlook' is exactly #/garden; 'inner' is a biome/plant/
-    // journal; 'session' is an actual learning session; null is outside
-    // the garden entirely, the only state a return from counts as fresh.
-    setGardenLocation(!inGarden ? null : h === '#/garden' ? 'overlook' : isBrowsingGarden ? 'inner' : 'session');
-    if (isBrowsingGarden && await gardenAmbienceEnabled(storage)) {
-      // The breeze bed's gain reflects the Stream (§3.1, §8.4): a
-      // recently-tended valley runs a little louder with water. And if the
-      // valley holds a Landmark tree (§6.5), its nesting bird may sing by day,
-      // audible from the Overlook — derived here from the sessions alone
-      // (computePlantState needs no content), so no extra content load.
-      const sessions = await listGardenSessions(storage);
-      const byFamily = new Map();
-      for (const s of sessions) {
-        if (!byFamily.has(s.family_id)) byFamily.set(s.family_id, []);
-        byFamily.get(s.family_id).push(s);
-      }
-      const landmark = [...byFamily.values()].some((rs) => computePlantState(rs).landmark);
-      startGardenAmbience(computeStreamLevel(sessions), { landmark });
-    } else {
-      stopGardenAmbience();
-    }
+    setGardenLocation(h.startsWith('#/garden/session') ? 'session' : h.startsWith('#/garden/') ? 'inner' : null);
   };
-  window.addEventListener('hashchange', syncGardenSoundscape);
-  syncGardenSoundscape();
+  window.addEventListener('hashchange', syncGardenLocation);
+  syncGardenLocation();
 
   // (Nav taps are covered by installGlobalFeedback's press delegation.)
   // A separate, minimal unlock for the garden's own audio graph — mirrors
@@ -1021,7 +992,10 @@ async function boot() {
   // so we check for updates explicitly and reload once a new worker
   // actually takes control (not on the very first install: `hadController`
   // guards that so a fresh visit doesn't get an extra reload).
+  // 1.0.0: registration waits for the first screen to paint and settle, so a
+  // cold open of the valley is never starved by the precache of ~700 files.
   if ('serviceWorker' in navigator) {
+    await new Promise((r) => setTimeout(r, 3500));
     try {
       const hadController = !!navigator.serviceWorker.controller;
       let refreshing = false;

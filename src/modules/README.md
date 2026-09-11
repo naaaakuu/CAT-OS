@@ -43,3 +43,14 @@ Four modules exist today, all following this shape:
 Adding the next module (Vocabulary) is: copy this shape, write its
 screens against `ui/` components, register it in `app.js`, add its files
 to the service worker's shell list. No existing module changes.
+
+
+## 1.0.0 — the world
+
+The application is the world in `src/world/` (not a module island: it is the
+home and composes the modules). It imports the modules' pure logic —
+recommenders, tiers, the Rootwood scheduler — never their screens, and the
+modules report back through `src/world/rewards.js`. The Rootwood's sessions
+render on the world's canvas via `src/world/garden-backdrop.js`. New content
+types for the world (`lex`, `twin`, `loan`) are read through the shared loader
+and played by `src/world/lexicon.js`.

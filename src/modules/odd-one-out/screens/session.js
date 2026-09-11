@@ -29,6 +29,7 @@
  * scoreboard; the numbers stay one quiet tap away.
  */
 
+import { worldReward } from '../../../world/rewards.js';
 import { loadOOOItem, loadOOOItems, listOOOItems } from '../../../core/content-loader/loader.js';
 import { OOOSession } from '../../../core/engine/ooo-session.js';
 import { saveOOOResults } from '../logic/store.js';
@@ -403,6 +404,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
       console.error('[CAT OS] ooo mentor derive failed:', err);
     }
 
+    const worldRewardHTML = worldReward(s, resolved.items ?? []).html;
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">
@@ -441,6 +443,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
           `}
 
           <p class="moment__numbers">${escapeHTML(OOO_LINES.numbersAside(s.score.correct, s.score.total))}</p>
+          ${worldRewardHTML}
 
           <details class="reread moment__details">
             <summary>Set details</summary>
@@ -463,7 +466,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
         </article>
 
         <div class="session-actions">
-          <a class="btn btn--primary btn--block" href="#/ooo">Continue the journey</a>
+          <a class="btn btn--primary btn--block" href="#/world/place/bench">Back to the world</a>
         </div>
       </section>
     `;

@@ -869,3 +869,197 @@ export function consistencyIssues(id, item) {
   }
   return issues;
 }
+
+/* ------------------------------------------------------------------ */
+/* Reference bundles — Lexicon (lex-*), Loanwords (loan-*) and         */
+/* Confusable twins (twin-*): the owner's vocabulary reference corpus  */
+/* (KNOWLEDGE/99_REFERENCE) transcribed by tools/build-lexicon.mjs     */
+/* into one bundle per band + first letter, per source language, and   */
+/* per section letter. Bundles are pure reference data (no teaching    */
+/* layer) and immutable per page, so loads are memoized like vocab.    */
+/* Same boundary discipline as every other content type: schema        */
+/* validation + cross-field consistency before anything renders.       */
+/* ------------------------------------------------------------------ */
+
+const LEX_ID  = /^lex-(high|medium|low)-([a-z]|other)$/;
+const LOAN_ID = /^loan-([a-z0-9]+(?:-[a-z0-9]+)*)$/;
+const TWIN_ID = /^twin-([a-z])$/;
+const lexMemo  = new Map();
+const loanMemo = new Map();
+const twinMemo = new Map();
+
+/** First letter of a word for bundling: diacritics ignored, lower-case,
+ *  "other" when the word does not start with a letter. Shared with
+ *  tools/build-lexicon.mjs so the builder and the checker cannot drift. */
+export function lexLetterOf(word) {
+  const c = String(word).normalize('NFD').replace(/[\u0300-\u036f]/g, '').charAt(0).toLowerCase();
+  return /^[a-z]$/.test(c) ? c : 'other';
+}
+
+/** Language name → bundle slug ("African Languages" → "african-languages"). */
+export function loanSlugOf(language) {
+  return String(language).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+/** Registry entries of one type that are practicable (accepted or in review). */
+async function listBundleItems(type) {
+  const registry = await loadRegistry();
+  return (registry.items ?? []).filter(
+    (i) => i.type === type && (i.status === 'accepted' || i.status === 'review')
+  );
+}
+
+/** Fetch one bundle, schema-validate it, run its consistency rules. */
+async function loadBundle(id, { idRe, dir, schemaName, label, check }) {
+  if (!idRe.test(id)) throw new ContentError(`"${id}" is not a valid ${label} bundle id.`);
+  const item = await fetchJSON(`content/${dir}/${id}.json`);
+  const schema = await loadSchema(`${schemaName}.schema.v${item.schema_version ?? 1}.json`);
+  const { valid, errors } = validate(schema, item);
+  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  const issues = check(id, item);
+  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  return item;
+}
+
+/** Load several bundles at once → Map(id → item). Ids that fail to load
+ *  are absent from the Map (same fail-open discipline as every other
+ *  loadXItems here). */
+async function loadBundles(ids, loadOne) {
+  const map = new Map();
+  await Promise.all([...new Set(ids)].map(async (id) => {
+    try { map.set(id, await loadOne(id)); } catch { /* skip */ }
+  }));
+  return map;
+}
+
+/** Truths every bundle shape shares that the schemas can't express:
+ *  id ↔ meta.id, entry_count ↔ entries.length, entry ids unique and
+ *  prefixed by the bundle id. */
+function bundleIssues(id, item) {
+  const issues = [];
+  if (item.meta.id !== id) issues.push(`meta.id "${item.meta.id}" ≠ file id "${id}"`);
+  if (item.meta.entry_count !== item.entries.length) {
+    issues.push(`meta.entry_count ${item.meta.entry_count} ≠ ${item.entries.length} entries`);
+  }
+  const seen = new Set();
+  item.entries.forEach((e, i) => {
+    if (!e.id.startsWith(`${id}-`)) issues.push(`entries[${i}].id "${e.id}" not under ${id}`);
+    if (seen.has(e.id)) issues.push(`entries[${i}].id "${e.id}" repeats an earlier entry id`);
+    seen.add(e.id);
+  });
+  return issues;
+}
+
+const blank = (s) => typeof s !== 'string' || s.trim() === '';
+
+/* ---- Lexicon (lex-<band>-<letter>) ---- */
+
+/** Registry entries for practicable lexicon bundles (accepted or in review). */
+export async function listLexItems() { return listBundleItems('lex'); }
+
+/** Load one lexicon bundle by id, schema-validated + consistency-checked (memoized per page). */
+export function loadLexItem(id) {
+  return memoized(lexMemo, id, (bundleId) => loadBundle(bundleId, {
+    idRe: LEX_ID, dir: 'lexicon', schemaName: 'lex', label: 'lexicon', check: lexConsistencyIssues,
+  }));
+}
+
+/** Load several lexicon bundles at once → Map(id → item); failures are absent. */
+export async function loadLexItems(ids) { return loadBundles(ids, loadLexItem); }
+
+/** Lexicon cross-field truths the schema can't express. Exported so
+ *  tools/verify.mjs (and the builder) apply the identical rules. */
+export function lexConsistencyIssues(id, item) {
+  const issues = bundleIssues(id, item);
+  const [, band, letter] = id.match(LEX_ID) ?? [];
+  if (band && item.meta.band !== band) {
+    issues.push(`meta.band "${item.meta.band}" ≠ band in id "${band}"`);
+  }
+  if (letter) {
+    const expected = letter === 'other' ? 'other' : letter.toUpperCase();
+    if (item.meta.letter !== expected) issues.push(`meta.letter "${item.meta.letter}" ≠ letter in id "${expected}"`);
+  }
+  for (const e of item.entries) {
+    if (blank(e.word)) { issues.push(`${e.id}: empty word`); continue; }
+    if (blank(e.meaning)) issues.push(`${e.id}: empty meaning`);
+    if (letter && lexLetterOf(e.word) !== letter) {
+      issues.push(`${e.id}: "${e.word}" does not belong under letter "${letter}"`);
+    }
+  }
+  return issues;
+}
+
+/* ---- Loanwords (loan-<language-slug>) ---- */
+
+/** Registry entries for practicable loanword bundles (accepted or in review). */
+export async function listLoanItems() { return listBundleItems('loan'); }
+
+/** Load one loanword bundle by id, schema-validated + consistency-checked (memoized per page). */
+export function loadLoanItem(id) {
+  return memoized(loanMemo, id, (bundleId) => loadBundle(bundleId, {
+    idRe: LOAN_ID, dir: 'loanwords', schemaName: 'loan', label: 'loanword', check: loanConsistencyIssues,
+  }));
+}
+
+/** Load several loanword bundles at once → Map(id → item); failures are absent. */
+export async function loadLoanItems(ids) { return loadBundles(ids, loadLoanItem); }
+
+/** Loanword cross-field truths the schema can't express. Exported so
+ *  tools/verify.mjs (and the builder) apply the identical rules. */
+export function loanConsistencyIssues(id, item) {
+  const issues = bundleIssues(id, item);
+  const [, slug] = id.match(LOAN_ID) ?? [];
+  if (blank(item.meta.language)) {
+    issues.push('meta.language is empty');
+  } else if (slug && loanSlugOf(item.meta.language) !== slug) {
+    issues.push(`meta.language "${item.meta.language}" does not slug to "${slug}"`);
+  }
+  for (const e of item.entries) {
+    if (blank(e.word)) issues.push(`${e.id}: empty word`);
+    if (blank(e.meaning)) issues.push(`${e.id}: empty meaning`);
+  }
+  return issues;
+}
+
+/* ---- Confusable twins (twin-<letter>) ---- */
+
+/** Registry entries for practicable twin bundles (accepted or in review). */
+export async function listTwinItems() { return listBundleItems('twin'); }
+
+/** Load one twin bundle by id, schema-validated + consistency-checked (memoized per page). */
+export function loadTwinItem(id) {
+  return memoized(twinMemo, id, (bundleId) => loadBundle(bundleId, {
+    idRe: TWIN_ID, dir: 'twins', schemaName: 'twin', label: 'twin', check: twinConsistencyIssues,
+  }));
+}
+
+/** Load several twin bundles at once → Map(id → item); failures are absent. */
+export async function loadTwinItems(ids) { return loadBundles(ids, loadTwinItem); }
+
+/** Twin cross-field truths the schema can't express: at least two
+ *  words (a homograph may repeat, e.g. the source's "Lead/Led/Lead"),
+ *  exactly one sense per word in the same order, every sense and the
+ *  explanation non-empty. Exported so tools/verify.mjs
+ *  (and the builder) apply the identical rules. */
+export function twinConsistencyIssues(id, item) {
+  const issues = bundleIssues(id, item);
+  const [, letter] = id.match(TWIN_ID) ?? [];
+  if (letter && item.meta.letter !== letter.toUpperCase()) {
+    issues.push(`meta.letter "${item.meta.letter}" ≠ letter in id "${letter.toUpperCase()}"`);
+  }
+  for (const e of item.entries) {
+    if (e.words.length < 2) issues.push(`${e.id}: fewer than 2 words`);
+    if (e.words.some(blank)) issues.push(`${e.id}: empty word`);
+    if (e.senses.length !== e.words.length) {
+      issues.push(`${e.id}: ${e.senses.length} senses for ${e.words.length} words`);
+    } else {
+      e.senses.forEach((s, i) => {
+        if (s.word !== e.words[i]) issues.push(`${e.id}: senses[${i}] is "${s.word}", expected "${e.words[i]}"`);
+        if (blank(s.meaning)) issues.push(`${e.id}: senses[${i}] has an empty meaning`);
+      });
+    }
+    if (blank(e.explanation)) issues.push(`${e.id}: empty explanation`);
+  }
+  return issues;
+}

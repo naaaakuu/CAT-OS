@@ -17,23 +17,22 @@
  *   /garden/journal         — the Journal (what you can read now, sightings)
  */
 
-import { renderOverlook } from './screens/overlook.js';
-import { renderBiome } from './screens/biome.js';
 import { renderPlant } from './screens/plant.js';
 import { renderGardenSession } from './screens/session.js';
-import { renderJournal } from './screens/journal.js';
 
 export function registerLanguageGarden(router, context) {
   router
+    // 1.0.0: the valley and the Rootwood walk live in src/world/ now; the
+    // old addresses keep working by pointing there.
     .register({
       path: '/garden',
       title: 'The valley',
-      render: (outlet) => renderOverlook(outlet, context),
+      render: () => { location.replace('#/world'); },
     })
     .register({
       path: '/garden/biome/:biome',
       title: 'The Rootwood',
-      render: (outlet, params) => renderBiome(outlet, context, params),
+      render: () => { location.replace('#/world/place/rootwood'); },
     })
     .register({
       path: '/garden/plant/:id',
@@ -48,6 +47,6 @@ export function registerLanguageGarden(router, context) {
     .register({
       path: '/garden/journal',
       title: 'Journal',
-      render: (outlet) => renderJournal(outlet, context),
+      render: () => { location.replace('#/world/place/hearth'); },
     });
 }

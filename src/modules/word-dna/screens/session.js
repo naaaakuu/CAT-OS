@@ -18,6 +18,7 @@
  * scoreboard; the numbers stay one quiet tap away.
  */
 
+import { worldReward } from '../../../world/rewards.js';
 import { loadWDItem, loadWDItems, listWDItems } from '../../../core/content-loader/loader.js';
 import { WDSession } from '../../../core/engine/wd-session.js';
 import { saveWDResults } from '../logic/store.js';
@@ -396,6 +397,7 @@ export async function renderWDSession(outlet, { storage }, params) {
       console.error('[CAT OS] wd mentor derive failed:', err);
     }
 
+    const worldRewardHTML = worldReward(s, resolved.items ?? []).html;
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">
@@ -434,6 +436,7 @@ export async function renderWDSession(outlet, { storage }, params) {
           `}
 
           <p class="moment__numbers">${escapeHTML(WD_LINES.numbersAside(s.score.correct, s.score.total))}</p>
+          ${worldRewardHTML}
 
           <details class="reread moment__details">
             <summary>Set details</summary>
@@ -456,7 +459,7 @@ export async function renderWDSession(outlet, { storage }, params) {
         </article>
 
         <div class="session-actions">
-          <a class="btn btn--primary btn--block" href="#/wd">Continue the journey</a>
+          <a class="btn btn--primary btn--block" href="#/world/place/terraces">Back to the world</a>
         </div>
       </section>
     `;

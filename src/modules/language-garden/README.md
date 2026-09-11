@@ -1,129 +1,49 @@
-# src/modules/language-garden/ — the Language Garden module
+# src/modules/language-garden/ — the Rootwood's sessions
 
-Vocabulary stops being content to consume and becomes a living place
-the learner tends (`LANGUAGE_GARDEN.md`). The unit of learning is a
-**family** (a plant), not a word; the unit of progress is growth, never
-a score. The home is the **Overlook** — the whole valley, seen from
-above — from which the learner descends into a biome (§16.1, §4.1).
-Only the **Rootwood** (Latin and Greek roots, the "decompose" engine of
-Bible §5.2) is living; the other six biomes are enumerated in
-`logic/biomes.js` as real geography that is still `wild` — visible from
-the Overlook, not yet cultivated. The seam is deliberate: making a
-second biome living means adding content and building its engine, not
-rewriting these screens.
+The Rootwood is the world's root-and-word-family place (see `src/world/`
+and `KNOWLEDGE/01_KNOWLEDGE/CAT OS — THE WORLD (1.0).md`). This module owns
+what happens **inside** it: the six-beat Grow and Revisit sessions, the plant
+page, and the pure logic the world reads to draw every family as a tree.
 
-Structure (the standard module island, Rule 5 — no imports from other
-modules):
+Since 1.0.0 the valley, the walk, the journal and the discoveries that used
+to live here as SVG screens are retired; the world engine draws the Rootwood
+(`src/world/engine/map.js`) and sessions render on its canvas
+(`src/world/garden-backdrop.js`). The learning design is unchanged: no score
+inside a session, construction before recall, a scheduler that never demotes.
 
 ```
-index.js             registerLanguageGarden(router, context); all app.js knows
-screens/overlook.js   the Overlook: the valley from above (module home;
-                       first-ever visit hands straight to screens/session.js
-                       — no tutorial, Bible §3.1)
-screens/biome.js      one biome of the valley (the Rootwood today), by slug —
-                       since 0.17.0 the Rootwood Walk: every family in its stand
-screens/plant.js      one plant at a glance: key, members, one action
-screens/session.js    the six-beat Grow/Revisit session (Bible §5, §17.3)
-screens/journal.js    what you can read now + wild sightings (Bible §16.6)
-logic/biomes.js       the biome + engine registry (the seam; living vs wild)
-logic/store.js        persistence through the StorageAdapter only (Rule 6)
-logic/scene.js        derives valley / biome state from content + history (pure)
-logic/journal.js      derives Journal content from content + history (pure)
-logic/ambient.js      decides whether/which tiny living event appears (pure)
-logic/audio.js        the garden's own small, separate sound identity
-logic/effort.js       the Effort Ledger's expression: stream, ground tiers, path wear (pure)
-logic/atmosphere.js   time of day, world season, seeded weather — Date only, never behaviour (pure)
-logic/light.js        the painted-light recipe: lit/shade faces, shadows, WCAG math (pure)
-logic/props.js        the authored prop inventory and environmental stories, by tier (pure)
-logic/fauna.js        the faceless fauna roster and the one-visitor-per-visit roll (pure)
-logic/discoveries.js  the Discovery catalogue (Bible §9) and "what is in front of the learner now" (pure)
-logic/groves.js       the walk's map: six named groves, eleven stands each, layoutWood (pure)
-screens/atmosphere-art.js  sky, moon, stars, clouds, weather layers (markup only)
-screens/prop-art.js        every prop, story, and seasonal mark, drawn (markup only)
-screens/fauna-art.js       every creature, drawn from the roster (markup only)
+index.js             registerLanguageGarden(router, context)
+                       /garden/session/:id   the six-beat Grow / Revisit session
+                       /garden/plant/:id     a plant at a glance: key, members, one action
+                       /garden, /garden/biome/*, /garden/journal  → redirect into the world
+screens/session.js   the session: Encounter+Attempt → Key → Spread → Reach → Growth
+                       (grow) or Key retrieval → two member checks → Reach → Growth
+                       (revisit); growth animates in the canvas scene; the Ink earned
+                       is shown once the tree has come to rest
+screens/plant.js     one plant on the canvas backdrop
+logic/store.js       persistence through the StorageAdapter only (garden-session
+                       records in STORES.LEARNING, seeds/sightings via the Gate)
+logic/scene.js       derives valley/biome state from content + history (pure)
+logic/groves.js      the six semantic groves and every family's stand (pure)
+logic/biomes.js      the biome/engine registry (only the Rootwood is living)
+logic/effort.js      the Stream, ground tiers, path wear (pure)
+logic/atmosphere.js  time of day, season, weather from the Date (pure)
+logic/audio.js       the session's own sounds: the key, leaf taps, growth, the
+                       Valley Phrase (import-safe under Node)
 ```
 
-**0.17.0 — the Rootwood Walk (THE WORLD Part 16).** The working set is
-retired: every family stands in the wood, in a fixed stand in one of six
-named semantic groves (`logic/groves.js`), and the biome screen is a
-horizontally walkable wood with a fixed canopy, far and mid parallax
-layers, doorpost trunks between groves, signposts, title cards, root-stones
-for unmet roots, and a camera that opens on the lit plant. Sessions and
-approaches render the same walk becalmed (`focusedGroveSceneHTML`), so a
-tree is grown in the place it will always stand. The Overlook names its
-places on touch (`biomes.js` `whisper`).
+Core services composed: `core/engine/garden-session.js` (`computePlantState`
+scheduler + the `GardenSession` state machine), `core/mentor/garden-voice.js`
+(the quiet gardener, banned-word-linted), `core/content-loader` (`listLGItems`,
+`loadLGItem(s)`, `loadVocabItem(s)`).
 
-**0.16.0 — the valley is the application's home.** `app.js` starts the
-router at `/garden`; the Overlook and the Rootwood are full-bleed; the
-Gate leads to `#/practice`, rebuilt as the road beyond the Gate. Every
-visual value is pinned in `LANGUAGE GARDEN — THE WORLD.md` (Part 15 for
-this pass). Discoveries are recorded after a scene paints
-(`recordDiscoveries` in `logic/store.js`, `kind: 'garden-discovery'` in
-`STORES.LEARNING`) and read only by the Journal's Field Guide.
+## Content shape (Rule 22)
 
-Core services this module composes: `core/engine/garden-session.js`
-(the spacing scheduler `computePlantState()` plus the `GardenSession`
-beat-by-beat state machine — plain construction/retrieval, no CAT-style
-marks, no score of any kind), `core/mentor/garden-voice.js` (the quiet
-gardener; banned-word-linted like every other mentor, but deliberately
-carries none of the DNA-trait/one-lesson apparatus the other mentors
-use — Bible §13 forbids a second reward economy, and abolishes the
-mentor page outright in favour of single lines at earned moments), and
-`core/content-loader` (`listLGItems`, `loadLGItem`, `loadVocabItem(s)`
-— schema + cross-file consistency validated at the boundary).
-
-**Storage is deliberately NOT `STORES.SESSIONS`.** Garden sessions are
-`kind: 'garden-session'` records in `STORES.LEARNING` instead, so they
-never feed the shell's XP/streak/achievement system (`core/engagement/
-stats.js` reads `STORES.SESSIONS` unconditionally) — see `logic/
-store.js` for the full reasoning. They are still fully covered by
-Backup & Restore.
-
-## Content shape this module expects (Rule 22)
-
-Two content types, because every future garden shares the first one:
-
-**`content/vocabulary/vocab-NNNN.json`** (schema
-`content/schema/vocab.schema.v1.json`) — one standalone word: `word`,
-`meaning` (one line), optional `part_of_speech`, plus the usual
-id/status/source/provenance envelope. This is the shared substrate
-`MASTER_CONTEXT.md` already reserves the `vocab` prefix for; every
-future garden references words by id here rather than inlining them
-(Rule 3: never duplicate content).
-
-**`content/language-garden/lg-NNNN.json`** (schema `content/schema/
-lg.schema.v1.json`) — one plant:
-- `meta.garden` — which garden (`root_grove` today).
-- `root` — `label` (the root itself, e.g. `"cede"`), `origin_language`
-  (`Latin` | `Greek`), `core_meaning`, and an optional one-sentence
-  `mentor_note` shown only on the plant detail page.
-- `attempt` — the opening directional read (Bible §5.1): a prompt and
-  exactly two options, tested against `members[0]`'s first context
-  sentence.
-- `members` — 4 to 8 entries, each `{vocab_id, held_out, parts,
-  context_sentences}`. `parts` is the morpheme breakdown (`{text,
-  gloss, is_root}`) the Spread and Reach beats tap-to-reveal; the
-  loader enforces that a member's parts actually concatenate to its
-  word. `context_sentences` is exactly two: `[0]` teaches, `[1]` is the
-  "fresh" sentence every revisit reuses (Bible §6.6). 2 or 3 members
-  are taught (`held_out: false`, walked in Spread); at least 2 are
-  reserved Reach words (`held_out: true`), each additionally carrying
-  `construct_options` (exactly one correct, others may carry a `trap`
-  tag) for the Reach beat's construction quiz. Word/meaning facts are
-  never inlined here — they are resolved from `vocab_id` at load time
-  and merged onto the member in memory.
-
-Garden sessions persist to `STORES.LEARNING` with `kind:
-'garden-session'` (see above). No XP, no achievements, no celebration
-overlay, no progress bar or clock inside a session — all deliberate
-omissions, not oversights (Bible §13).
-
-## Adding content later (no code changes)
-
-New Root Grove plants are new `content/language-garden/lg-NNNN.json`
-files (plus any new `vocab-NNNN.json` words they reference) and new
-registry rows. A future garden (Vine Walk, Orchard, Wildflower Meadow,
-Twin Patch) needs a new `garden` value, a new session "engine" (Bible
-§5 names four: decompose, contrast, picture, discriminate — this
-module only implements decompose), and its own screens; the content
-substrate (`vocab-NNNN`) and the module-island shape already generalize.
+`content/language-garden/lg-NNNN.json` (schema `lg.schema.v1.json`): `meta.garden`
+(`root_grove`), `root` (label, origin_language, core_meaning, optional mentor_note),
+`attempt` (a prompt and exactly two options), `members[]` (`vocab_id`, `held_out`,
+morpheme `parts` with glosses, exactly two `context_sentences`; held-out members
+carry `construct_options`). Words and meanings are resolved from
+`content/vocabulary/vocab-NNNN.json` at load time. A family's grove is authored
+in `logic/groves.js`; a family in no grove is seated at the wood's edge and
+reported by `tools/verify.mjs`.

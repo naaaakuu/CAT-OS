@@ -25,9 +25,10 @@ import { GardenSession, computePlantState, strugglingMembers } from '../../../co
 import { listGardenSessions, sessionsForFamily, saveGardenSession, hasSeenGardenGrowth, markGardenGrowthSeen, listGardenSeeds } from '../logic/store.js';
 import { deriveValleyScene, nextReachPoolIndex, memberCheckOffset, isBiomeGrown } from '../logic/scene.js';
 import { biomeForFamily } from '../logic/biomes.js';
-import { computeGroundTier } from '../logic/effort.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
-import { focusedGroveSceneHTML, STAGE_HEIGHT_PCT } from './biome.js';
+import { mountGardenBackdrop } from '../../../world/garden-backdrop.js';
+import { INK } from '../../../world/economy.js';
+import { play as playWorld } from '../../../world/audio.js';
 import { GARDEN_LINES, GROWTH_LINES, ATTEMPT_LINES, pick } from '../../../core/mentor/garden-voice.js';
 import { playGardenSound, gardenCue, tonicHzForBiome } from '../logic/audio.js';
 import { escapeHTML } from '../../../core/utils/format.js';
@@ -90,7 +91,7 @@ export async function renderGardenSession(outlet, context, params) {
   // "back in the Rootwood" with the plant that just changed (Bible §3.1) —
   // not up at the Overlook. The valley is one level further out.
   const biome = biomeForFamily(family);
-  const biomeHome = biome ? `#/garden/biome/${biome.slug}` : '#/garden';
+  const biomeHome = '#/world/place/rootwood';
   // THE WORLD §11.4: Growth/Regrowth root the Valley Phrase on the biome's
   // own tonic — today always the Rootwood's, since it is the only living
   // biome, but computed generically so a future biome needs no change here.
@@ -101,7 +102,6 @@ export async function renderGardenSession(outlet, context, params) {
   const session = new GardenSession(family, type, siblings);
   const taught = session.taught;
 
-  const ground = computeGroundTier(allSessions);
   const atmo = atmosphereFor();
   // The tended plant's DISPLAY state, before growth: a grow-type session
   // always shows a seed about to become a sprout (§3.1), regardless of
@@ -111,19 +111,19 @@ export async function renderGardenSession(outlet, context, params) {
   const displayState = type === 'grow'
     ? { stage: 'seed', due: 'none', vigor: 0, landmark: false, nextReviewAt: null }
     : priorState;
-  const tendedView = { family, state: displayState, history, biome };
-  const worldHTML = focusedGroveSceneHTML(biome, ground, atmo, allFamilies, allSessions, seeds, tendedView);
-
   outlet.innerHTML = `
     <section class="screen lgx" data-beat="" data-time="${atmo.time}">
-      <div class="lgx__world" aria-hidden="true">${worldHTML}</div>
+      <div class="lgx__world" id="lgx-world" aria-hidden="true"></div>
       <button class="lgx__close" id="lgx-close" aria-label="Leave the garden">×</button>
       <div class="lgx__veil-wrap" id="lgx-veil-wrap">
         <div class="lgx-veil" id="lgx-veil"></div>
       </div>
     </section>
   `;
-  outlet.querySelector('#lgx-close').addEventListener('click', () => { location.hash = biomeHome; });
+  const backdrop = mountGardenBackdrop(outlet.querySelector('#lgx-world'), { family, allFamilies, allSessions, seeds, displayState });
+  const onHashLeave = () => { backdrop.destroy(); window.removeEventListener('hashchange', onHashLeave); };
+  window.addEventListener('hashchange', onHashLeave);
+  outlet.querySelector('#lgx-close').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'rootwood'); location.hash = biomeHome; });
   const lgxEl = outlet.querySelector('.lgx');
   const stage = outlet.querySelector('#lgx-veil');
   const veilWrap = outlet.querySelector('#lgx-veil-wrap');
@@ -133,6 +133,7 @@ export async function renderGardenSession(outlet, context, params) {
   // grow_growth/revisit_growth twice, the Memory Ledger record it writes
   // must never be written twice for one real session.
   let sessionEnded = false;
+  let lastRecord = null;
 
   /** Keyboard/screen-reader continuity (Phase 4.9 P5): each beat replaces
    *  the stage wholesale, which would drop focus to <body>. Focus lands on
@@ -324,6 +325,7 @@ export async function renderGardenSession(outlet, context, params) {
     if (sessionEnded) return;
     sessionEnded = true;
     const record = session.finish();
+    lastRecord = record;
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
     const postState = computePlantState([...history, record], Date.parse(record.finished_at));
     const line = GROWTH_LINES.firstGrow(family.root.label, session.id);
@@ -420,6 +422,7 @@ export async function renderGardenSession(outlet, context, params) {
     if (sessionEnded) return;
     sessionEnded = true;
     const record = session.finish();
+    lastRecord = record;
     try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
     const finishedAt = Date.parse(record.finished_at);
     const postState = computePlantState([...history, record], finishedAt);
@@ -537,109 +540,38 @@ export async function renderGardenSession(outlet, context, params) {
     veilWrap.classList.add('lgx-veil-wrap--cleared');
     stage.innerHTML = '';
 
-    const plantEl = outlet.querySelector('[data-tended-plant]');
-    // A plant in a working-set slot resizes its container to the
-    // post-growth stage's true share of frame height (Part 8.2) — an
-    // instant, un-animated layout change made while the plant itself is
-    // still visually compressed near its base (clip-path), so the resize
-    // is never seen. Since 0.17.0 an Ancient stands in its own stand like
-    // every other stage (THE WORLD Part 16), so the promotion is grown
-    // right here, in place.
-    const wrap = plantEl?.closest('.grove-plant--slot') ?? null;
-    if (wrap) {
-      const slotScale = Number(wrap.dataset.slotScale) || 1;
-      // 0.17.0 (THE WORLD Part 16): every stage, Ancient included, stands
-      // in its own stand at its own true height, so the promotion to
-      // Ancient is grown here, in place, the moment it is earned.
-      const nextStage = postState.stage;
-      const oldPct = parseFloat(wrap.style.height) || (STAGE_HEIGHT_PCT[nextStage] ?? STAGE_HEIGHT_PCT.mature) * slotScale;
-      const newPct = (STAGE_HEIGHT_PCT[nextStage] ?? STAGE_HEIGHT_PCT.mature) * slotScale;
-      plantEl.style.setProperty('--grow-scale-from', String(newPct > 0 ? oldPct / newPct : 1));
-      wrap.style.height = `${newPct}%`;
-      plantEl.setAttribute('stage', nextStage);
-      if (nextStage === 'ancient') wrap.classList.add('grove-plant--ancient');
-    } else if (plantEl) {
-      plantEl.setAttribute('stage', 'ancient');
-    }
-    if (plantEl) {
-      plantEl.setAttribute('due', 'none');
-      plantEl.setAttribute('vigor', String(postState.vigor));
-      if (postState.landmark) plantEl.setAttribute('landmark', '');
-      else plantEl.removeAttribute('landmark');
-    }
+    // The world's reward, shown once the tree has come to rest: the Ink
+    // this session earned, and where the valley will look on the way back.
+    const record = lastRecord;
+    const ink = record ? INK.garden(record.session_type, record.clean === true) : 0;
+    sessionStorage.setItem('world:focus', 'rootwood');
+    sessionStorage.setItem('world:changed', 'rootwood');
+    sessionStorage.setItem('world:change-line', `${escapeHTML(family.root.label)} ${postState.stage === 'sprout' ? 'has sprouted' : 'grew'} in the Rootwood · +${ink} Ink`);
 
     const clear = document.createElement('div');
     clear.className = 'lgx-clear';
     clear.innerHTML = `
       <p class="lgx-clear__line is-veiled" id="lgx-line">${escapeHTML(line)}</p>
-      <button class="lgx-clear__back is-veiled" id="lgx-back">${GARDEN_LINES.backToGarden}</button>
+      <p class="lgx-clear__ink is-veiled" id="lgx-ink"><span class="world-reward__ink"><span class="ink" aria-hidden="true"></span>+${ink} Ink</span></p>
+      <button class="lgx-clear__back is-veiled" id="lgx-back">Back to the Rootwood</button>
     `;
     lgxEl.appendChild(clear);
 
     // The line and the button appear only AFTER the motion has come to rest —
-    // never during it (Bible §11.4: "never animate and ask to read at the same
-    // time"). `reveal` un-veils everything held back for the Rest beat,
-    // including a late-arriving afterglow line.
+    // never during it (never animate and ask to read at the same time).
     let rested = false;
-    let skipEl = null;
     const reveal = () => {
       if (rested) return;
       rested = true;
       for (const el of clear.querySelectorAll('.is-veiled')) el.classList.remove('is-veiled');
-      // The skip overlay must never outlive its own purpose: once rested —
-      // whether reached by a tap or by the animation simply finishing on
-      // its own — it would otherwise sit over "Back to the garden" forever
-      // (same z-index, later in DOM order) and silently swallow every tap.
-      skipEl?.remove();
-      skipEl = null;
+      playWorld('ink', { delay: 0.15 });
     };
-
-    let restTimer;
-    if (!plantEl) {
-      // Defensive only (no living biome behind this session): still the
-      // chime, the haptic, the line — there is simply nothing to watch grow.
-      gardenCue(cue, { tonic });
-      restTimer = setTimeout(reveal, 460);
-    } else if (reduce) {
-      // Reduced motion is not a downgrade (§11.5): the plant is simply there,
-      // bigger, with leaves it did not have — the CHANGE is the reward — with
-      // the chime, the haptic, and the line. No wipe, no long tween.
-      plantEl.classList.add('lgx-grow-plant', 'is-grown-still');
-      gardenCue(cue, { tonic });
-      restTimer = setTimeout(reveal, 460);
-    } else {
-      // The four movements (§11.4): anticipation → extension → settle → rest.
-      // The tree rises out of the soil (a clip reveal from the base) and
-      // settles with one organic overshoot; the chime + warm haptic land as it
-      // releases into the extension; then everything is still, and the line
-      // fades in.
-      plantEl.classList.add('lgx-grow-plant', 'is-growing');
-      setTimeout(() => gardenCue(cue, { tonic }), 150); // the thump + chime as growth begins
-      restTimer = setTimeout(reveal, 1650);  // after the ~1.6s animation rests
-    }
-
-    // Skippable by tap from the SECOND viewing onward — never the first, which
-    // is sacred (§11.2). A tap lands the tree and reveals the line at once.
-    if (plantEl && !reduce) {
-      hasSeenGardenGrowth(context.storage).then((seen) => {
-        if (seen && !rested) {
-          const skip = document.createElement('button');
-          skip.className = 'lgx-skip';
-          skip.setAttribute('aria-label', GARDEN_LINES.continueLabel);
-          lgxEl.appendChild(skip);
-          skipEl = skip;
-          skip.addEventListener('click', () => {
-            clearTimeout(restTimer);
-            plantEl.classList.remove('is-growing');
-            plantEl.classList.add('is-grown-still');
-            reveal();
-          }, { once: true });
-        }
-        markGardenGrowthSeen(context.storage).catch(() => { /* non-fatal */ });
-      }).catch(() => { /* first-view default: play in full */ });
-    } else {
-      markGardenGrowthSeen(context.storage).catch(() => { /* non-fatal */ });
-    }
+    // The four movements: anticipation → extension → settle → rest. The
+    // tree rises out of the ground in the scene itself (garden-backdrop.js),
+    // the chime and the warm haptic land as growth begins.
+    setTimeout(() => gardenCue(cue, { tonic }), reduce ? 0 : 150);
+    backdrop.grow(postState, { reduce }).then(() => setTimeout(reveal, reduce ? 200 : 380));
+    markGardenGrowthSeen(context.storage).catch(() => { /* non-fatal */ });
 
     afterglow.then((extra) => {
       if (!extra) return;

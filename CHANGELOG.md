@@ -4,6 +4,129 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 1.0.0 — 2026-09-11 — The world
+
+The dream product, built on the owner's 2026-09-11 brief ("BUILD CAT OS"):
+CAT OS stops being a study app with a garden on top and becomes a living,
+hand-drawn game world in which every place is a real CAT skill and
+everything the learner learns changes the land. The brief is the creative
+authority; where the earlier Language Garden documents conflict with it,
+they are superseded (recorded in `KNOWLEDGE/01_KNOWLEDGE/CAT OS — THE WORLD
+(1.0).md`).
+
+### The world (new `src/world/`)
+
+- **A Canvas 2D pixel-art engine, no dependencies.** The SVG valley of
+  0.14–0.17 could not reach the depth, lighting and life the brief asks
+  for, and PixiJS/Phaser would have broken the no-build, no-CDN rules for
+  little gain, so the world layer is ~2,000 lines of plain Canvas 2D:
+  `engine/palette.js` (hue-shifted four-tone ramps, seeded randomness,
+  value noise, the hour/season/weather clock), `engine/sprites.js`
+  (every tree, flower, building, creature and prop drawn procedurally as
+  outlined pixel art and cached by recipe — no image assets), `engine/
+  canvas.js` (a world-resolution scene blitted at whole-device-pixel zoom,
+  camera with drag/pinch/wheel/keys and inertia, painter-sorted depth, a
+  multiply lighting pass with additive lamps, hit-testing), `engine/
+  life.js` (rain, snow, leaf and petal fall, pollen, fireflies, smoke,
+  birds, butterflies, koi, the cat, clouds, water glints) and `engine/
+  map.js` (the 640×720 valley: sky, mountains with snow, rolling ground,
+  a meandering river and the Mirror Pond rasterised from stroked masks,
+  paths, terraces, the Hearth's yard and the Quarter's flagstones — plus
+  the hero scenes for every place). The terrain is painted once per hour
+  change through a single ImageData raster (~270 ms in software
+  rendering); a frame is ~5 ms.
+- **The valley remembers.** `state.js` derives the whole world from the
+  records: each Rootwood family stands as a tree at its true stage in its
+  grove (root-stones for unmet roots, gold for the one asking, fireflies
+  near Ancients at night); the Meadow's flower density is mastered words;
+  koi arrive per twelve twins told apart; a Thicket lantern lights per
+  loanword language mastered; the Reading Room tower gains a floor per
+  twelve stars and a lit window per two-star passage; the Loom, the Table
+  and the Bench grow with solved sets; the Hearth is built with Ink; smoke
+  rises on days you practised; five times of day, four seasons and seeded
+  weather run on the real clock.
+- **Home is opening a game.** `screens/world.js`: full-bleed canvas,
+  arrival over the mountains with the wordmark, a glass HUD (title and
+  level, Ink, stars, sound), three daily quests, place cards with one way
+  in, the camera returning to the place you came from with sparks and a
+  notice when the world changed there.
+- **Places.** `screens/place.js` gives every region a living hero scene
+  and its own content: six groves with family rows in the Rootwood;
+  fields by frequency band and letter in the Meadow; shoals in the Pond;
+  languages in the Thicket; shelves by stage with stars in the Reading
+  Room; the eight tiers of each verbal craft; the vines of Word DNA.
+  `screens/hearth.js` is home (quests, Ink and upgrades, collections,
+  sightings, achievements, the study); `screens/wilds.js` the weekly
+  Gauntlet with records.
+- **Progression that can be seen.** `economy.js`: stars per item
+  (accuracy first, then pace — 0/1/2/3 with a flawless mark), Ink earned
+  only by finishing real practice and weighted by stars, eight upgrades
+  that build the valley (the Hearth's chimney, flower boxes, lantern, ivy;
+  pond lanterns; the Observatory and its Night Reading pace; the terrace
+  arbour; the road's lanterns), three seeded daily quests worth 25 Ink,
+  titles by level. Nothing learnable is ever locked.
+- **Sound with a personality.** `audio.js`: a generative pentatonic bed
+  (two breathing pads under a plucked line that keeps returning to the
+  Valley Phrase), a tonic per place, sparser and lower at night; wind,
+  water, birds by day, crickets at night, rain; and the interaction
+  vocabulary — tap, open, close, star chimes one to three, Ink, quest,
+  growth, building, the hurry tick. Music has its own toggle in the HUD
+  and Settings; everything honours the master Sounds preference.
+
+### Content connected
+
+- **The reference corpus, wired in.** `tools/build-lexicon.mjs` transcribes
+  the owner's vocabulary reference (`KNOWLEDGE/99_REFERENCE`) into 106
+  validated bundles under three new content types and schemas: `lex`
+  (2,577 words — 1,115 high, 965 medium, 497 low frequency — with meanings,
+  synonyms and antonyms, one bundle per band and letter), `twin` (401
+  confusable sets with per-word senses) and `loan` (271 loanwords across
+  twelve languages). Registry rows, loader functions with consistency
+  checks, precache entries and verify sections come with them.
+- **Vocabulary rounds** (`lexicon.js`, `screens/round.js`): twelve words
+  from one field, chosen due-first then new, every question assembled
+  from the entries themselves (meaning, reverse, synonym, antonym, twin,
+  origin), a pace ring per word, combos, the verdict in place, the miss
+  shown with its meaning. A per-word mastery ledger climbs one level per
+  clean answer once its spacing has elapsed (10 min, 1, 3, 7, 21 days)
+  and drops one on a miss, never below "met".
+- **All 51 root families** stand in the wood and in the grove lists; the
+  Rootwood's six-beat sessions are unchanged in logic and now play on the
+  world's canvas, with the growth moment animated in the scene and the
+  Ink earned shown once the tree has come to rest.
+
+### The Reading Room's run (rebuilt `reading-comprehension/screens/session.js`)
+
+Briefing (stage, genre, words, questions, the passage's own target time
+and what three stars ask for) → reading with a pace ring counting down
+the target (amber past it, never red) and the scroll hairline → one
+question at a time with the clock still running, lock in or set aside,
+explanations in place with evidence jumps → the star reveal, accuracy and
+time against target, Ink, what changed in the tower, and the mentor's one
+lesson beneath with the Learning Page one tap away. Persistence, lessons,
+recall and the Gate's sightings are unchanged.
+
+### Everything else
+
+- `game.css`: the interface language — glass HUD, place sheets, the run
+  frame, star reveal, tiles and rows — and a restyle of the shared chrome
+  so the older rooms read as the same product.
+- The verbal crafts and Word DNA end with the world's reward strip (stars,
+  Ink) and return to their place.
+- The old SVG valley (`overlook.js`, `biome.js`, the prop/fauna/atmosphere
+  art, discoveries, journal, props, fauna, light, ambient) is retired;
+  `#/garden`, `#/garden/biome/*` and `#/garden/journal` redirect into the
+  world. `#/home` and `#/practice` point at the valley.
+- Service-worker registration now waits for the first screen to paint
+  (a cold open of the valley was being starved by the precache).
+  `CACHE_VERSION` → 27, `CONTENT_VERSION` → 13.
+- `tools/verify.mjs`: sections 15 (Rootwood) and 16 (the world) replace
+  the retired SVG-world checks; section 1h validates the new bundles.
+- Verified in real Chrome (390×844 and 1280×800; day and night; fresh and
+  lived-in profiles): a full Meadow round, a full Reading Room run, a full
+  Rootwood grow session, an upgrade bought at the Hearth, and the return
+  to the valley — no console errors.
+
 ## 0.17.0 — 2026-09-10 — The Rootwood Walk
 
 The product reality check. On the owner's instruction the build was opened

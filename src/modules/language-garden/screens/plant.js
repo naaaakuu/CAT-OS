@@ -26,9 +26,8 @@ import { loadLGItem, listLGItems, loadLGItems } from '../../../core/content-load
 import { listGardenSessions, listGardenSeeds, sessionsForFamily } from '../logic/store.js';
 import { computePlantState } from '../../../core/engine/garden-session.js';
 import { biomeForFamily } from '../logic/biomes.js';
-import { computeGroundTier } from '../logic/effort.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
-import { focusedGroveSceneHTML } from './biome.js';
+import { mountGardenBackdrop } from '../../../world/garden-backdrop.js';
 import { GARDEN_LINES, SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-plant.js';
@@ -52,7 +51,7 @@ export async function renderPlant(outlet, context, params) {
   }
 
   const biome = biomeForFamily(family);
-  const biomeHome = biome ? `#/garden/biome/${biome.slug}` : '#/garden';
+  const biomeHome = '#/world/place/rootwood';
 
   const state = computePlantState(seed ? [...history, seed] : history);
   const reachedWords = new Set(history.filter((s) => s.reach?.is_correct).map((s) => s.reach.vocab_id));
@@ -83,14 +82,11 @@ export async function renderPlant(outlet, context, params) {
     return `<span class="lg-leaf">${escapeHTML(m.word)}</span>`;
   };
 
-  const ground = computeGroundTier(allSessions);
   const atmo = atmosphereFor();
-  const focusView = { family, state, history, biome };
-  const worldHTML = focusedGroveSceneHTML(biome, ground, atmo, allFamilies, allSessions, seeds, focusView);
 
   outlet.innerHTML = `
     <section class="screen lg-plant lg-plant--enter" data-time="${atmo.time}">
-      <div class="lg-plant__world" aria-hidden="true">${worldHTML}</div>
+      <div class="lg-plant__world" id="lg-plant-world" aria-hidden="true"></div>
       <button class="lg-plant__close" id="lg-plant-close" aria-label="Back to the wood">×</button>
 
       <div class="lg-plant__veil-wrap">
@@ -108,7 +104,10 @@ export async function renderPlant(outlet, context, params) {
     </section>
   `;
 
-  outlet.querySelector('#lg-plant-close').addEventListener('click', () => { location.hash = biomeHome; });
+  const backdrop = mountGardenBackdrop(outlet.querySelector('#lg-plant-world'), { family, allFamilies, allSessions, seeds, displayState: state });
+  const onHash = () => { backdrop.destroy(); window.removeEventListener('hashchange', onHash); };
+  window.addEventListener('hashchange', onHash);
+  outlet.querySelector('#lg-plant-close').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'rootwood'); location.hash = biomeHome; });
   outlet.querySelector('#plant-action')?.addEventListener('click', () => {
     location.hash = `#/garden/session/${family.meta.id}`;
   });
