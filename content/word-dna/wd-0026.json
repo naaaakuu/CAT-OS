@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0026",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-fold",
+    "estimated_time_sec": 144,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-fold",
+    "origin_language": "Germanic",
+    "core_meaning": "increased by, or having so many parts",
+    "mentor_note": "Fold is multiplication written into the word. A tenfold rise is not ten more, it is ten times — and a passage that says one when it means the other is testing whether you noticed."
+  },
+  "members": [
+    {
+      "word": "tenfold",
+      "meaning": "multiplied by ten",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "manifold",
+      "meaning": "many times; of many kinds",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "twofold",
+      "meaning": "having two parts, or twice as great",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "hundredfold",
+      "meaning": "multiplied by a hundred",
+      "part_of_speech": "adjective",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Multiplied by, or made of that many parts",
+        "correct": true
+      },
+      {
+        "text": "Divided into equal shares",
+        "correct": false
+      },
+      {
+        "text": "Folded or bent physically",
+        "correct": false
+      }
+    ],
+    "understand_note": "Fold multiplies. It also counts parts: a twofold argument has two strands. Either way it is a quantity word, and quantity words are where careless reading costs marks.",
+    "applies": [
+      {
+        "held_out_word": "hundredfold",
+        "prompt": "A yield that increased a hundredfold went up by how much?",
+        "options": [
+          {
+            "text": "It became a hundred times what it was",
+            "correct": true
+          },
+          {
+            "text": "It went up by a hundred units",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "It rose by a hundred per cent, that is, doubled",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

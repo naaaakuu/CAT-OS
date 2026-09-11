@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0023",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-less",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-less",
+    "origin_language": "Germanic",
+    "core_meaning": "without",
+    "mentor_note": "Less is the cheapest negation in English, which is why writers use it when they want the absence to sound total: not \"with little hope\" but hopeless."
+  },
+  "members": [
+    {
+      "word": "hopeless",
+      "meaning": "without hope",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "careless",
+      "meaning": "without care",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "fearless",
+      "meaning": "without fear",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "homeless",
+      "meaning": "without a home",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "guileless",
+      "meaning": "without cunning; innocent and sincere",
+      "part_of_speech": "adjective",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Without the thing named",
+        "correct": true
+      },
+      {
+        "text": "A smaller amount of the thing named",
+        "correct": false
+      },
+      {
+        "text": "The opposite kind of thing",
+        "correct": false
+      }
+    ],
+    "understand_note": "Less removes entirely; it does not reduce. That absoluteness is the trap in many options: \"careless\" is not \"less careful\", it is without care.",
+    "applies": [
+      {
+        "held_out_word": "guileless",
+        "prompt": "Knowing -less means without, and guile means cunning, what does guileless describe?",
+        "options": [
+          {
+            "text": "Someone innocent and sincere, with no cunning in them",
+            "correct": true
+          },
+          {
+            "text": "Someone who is unusually clever and scheming",
+            "correct": false,
+            "trap": "context_mismatch"
+          },
+          {
+            "text": "Someone who feels no guilt about what they have done",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

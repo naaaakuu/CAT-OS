@@ -33,9 +33,9 @@ import { LINES } from '../../../core/mentor/voice.js';
 import { STAGE_INFO } from '../../../core/learning/journey.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
-import { rcStars, INK } from '../../../world/economy.js';
+import { rcStars, EARN } from '../../../world/economy.js';
 import { renderResult, formatClock } from '../../../world/screens/result.js';
-import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine } from '../../../world/state.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../../../world/state.js';
 import { play, silenceWorld } from '../../../world/audio.js';
 import '../../../ui/components/cat-passage.js';
 import '../../../ui/components/cat-question-card.js';
@@ -295,7 +295,7 @@ export async function renderSession(outlet, { storage }, params) {
 
       const { session: s } = results;
       const res = rcStars(s, m.estimated_time_min, paceFactor);
-      const ink = INK.rc(res.stars);
+      const earned = EARN.rc(res.stars, s.score?.correct ?? 0, res.flawless);
 
       // The mentor: DNA from PRIOR sessions, then this session's one lesson.
       let lesson = null, prior = [];
@@ -309,7 +309,8 @@ export async function renderSession(outlet, { storage }, params) {
       } catch (err) { console.error('[CAT OS] mentor derive failed:', err); }
 
       let line = '';
-      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); line = worldChangeLine('reading-room', before.state, after); } } catch { /* fine */ }
+      let unlocked = [];
+      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); line = worldChangeLine('reading-room', before.state, after); unlocked = newlyBuildable(before.state, after); } } catch { /* fine */ }
 
       const mentorHTML = lesson ? `
         <div class="result__mentor">
@@ -332,8 +333,9 @@ export async function renderSession(outlet, { storage }, params) {
           { label: 'Time', value: formatClock(s.duration_ms), good: res.inTime },
           { label: 'Target', value: formatClock(targetMs) },
         ],
-        ink,
+        earned,
         worldLine: line,
+        unlocked,
         extraHTML: mentorHTML + reviewHTML,
         actions: [
           { label: 'Understand this passage', href: `#/rc/mentor/${passage.meta.id}`, primary: true },

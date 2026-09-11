@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0020",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ness",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ness",
+    "origin_language": "Germanic",
+    "core_meaning": "a condition or state",
+    "mentor_note": "Ness is the plainest abstraction machine in English: attach it to any adjective and you get the quality itself. Half of what a summary question asks is whether you can do this in your head."
+  },
+  "members": [
+    {
+      "word": "goodness",
+      "meaning": "decency; the quality of being good",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "populousness",
+      "meaning": "the state of having a large population",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "wickedness",
+      "meaning": "the state of being bad",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "business",
+      "meaning": "an occupation; the state of being busy",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "remoteness",
+      "meaning": "the state of being far off or distant",
+      "part_of_speech": "noun",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "The condition or quality of being something",
+        "correct": true
+      },
+      {
+        "text": "A person who performs an action",
+        "correct": false
+      },
+      {
+        "text": "The opposite of something",
+        "correct": false
+      }
+    ],
+    "understand_note": "Ness names the quality itself, cut loose from anything that has it. Notice that business is literally busy-ness, worn down by centuries of use — the suffix is older than it looks.",
+    "applies": [
+      {
+        "held_out_word": "remoteness",
+        "prompt": "Knowing -ness names a quality itself, what does remoteness mean in a sentence like \"the remoteness of the argument from the evidence\"?",
+        "options": [
+          {
+            "text": "How far apart the argument and the evidence stand",
+            "correct": true
+          },
+          {
+            "text": "A place a long way from the city",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "The difficulty of understanding the argument",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

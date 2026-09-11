@@ -77,7 +77,9 @@ export class Router {
 
 /** '#/practice/rc-0001' → ['practice', 'rc-0001'] */
 function split(path) {
-  return path.replace(/^#?\//, '').split('/').filter(Boolean);
+  // A query after the route (#/world/place/hearth?works=1) is a hint for
+  // the screen, never part of the match.
+  return path.split('?')[0].replace(/^#?\//, '').split('/').filter(Boolean);
 }
 
 /** Match URL segments against route segments; ':name' captures a param.

@@ -1804,8 +1804,26 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     if (economy.roundStars({ correct: 11, total: 12, avgMs: 9000, targetMs: 7000 }).stars !== 2) bad('world economy: a 92% round over pace must be 2 stars');
     if (economy.roundStars({ correct: 6, total: 12, avgMs: 5000 }).stars !== 1) bad('world economy: half right is 1 star');
     if (economy.verbalStars({ score: { total: 2, correct: 2, attempted: 2 }, duration_ms: 100000 }, 150).stars !== 3) bad('world economy: a clean verbal set in time must be 3 stars');
-    for (let s = 0; s <= 3; s += 1) if (!(economy.INK.rc(s) > 0 && economy.INK.round(s, 0) > 0 && economy.INK.verbal(s, 0) > 0)) bad('world economy: every finished run earns Ink');
-    if (!(economy.INK.rc(3) > economy.INK.rc(0))) bad('world economy: more stars must mean more Ink');
+    /* The four crafts: each place makes one kind, embers only at pace. */
+    if (economy.CRAFT_KEYS.join() !== 'amber,ink,thread,ember') bad('world economy: the four crafts are amber, ink, thread, ember');
+    for (let s = 0; s <= 3; s += 1) {
+      if (!(economy.EARN.rc(s, 4).ink > 0)) bad('world economy: a finished passage must make Ink');
+      if (!(economy.EARN.round(s, 8).amber > 0)) bad('world economy: a finished round must make Amber');
+      if (!(economy.EARN.verbal(s, 1).thread > 0)) bad('world economy: a finished verbal set must make Thread');
+      if (economy.EARN.rc(s, 4).amber !== 0) bad('world economy: reading must never make Amber');
+      if (economy.EARN.round(s, 8).ink !== 0) bad('world economy: a word round must never make Ink');
+      if (economy.EARN.verbal(s, 1).amber !== 0) bad('world economy: the Quarter must never make Amber');
+    }
+    if (!(economy.EARN.rc(3, 4).ink > economy.EARN.rc(0, 4).ink)) bad('world economy: more stars must mean more Ink');
+    if (economy.EARN.rc(2, 4).ember !== 0) bad('world economy: two stars must not strike an ember');
+    if (economy.EARN.rc(3, 4).ember !== 1) bad('world economy: three stars must strike one ember');
+    if (economy.EARN.rc(3, 4, true).ember !== 2) bad('world economy: a flawless run must strike two embers');
+    /* Bag arithmetic. */
+    const bagA = economy.addBag(economy.emptyBag(), { amber: 10, ink: 4, thread: 0, ember: 1 });
+    if (bagA.amber !== 10 || bagA.ember !== 1) bad('world economy: addBag must add every craft');
+    if (economy.subBag(bagA, { amber: 20, ink: 0, thread: 0, ember: 0 }).amber !== 0) bad('world economy: a purse can never go negative');
+    if (economy.canAfford(bagA, { amber: 11, ink: 0, thread: 0, ember: 0 })) bad('world economy: canAfford must refuse what the purse cannot cover');
+    if (!economy.canAfford(bagA, { amber: 10, ink: 4, thread: 0, ember: 1 })) bad('world economy: canAfford must accept an exact cost');
     const q1 = economy.questsForDate('2026-09-11'), q2 = economy.questsForDate('2026-09-11'), q3 = economy.questsForDate('2026-09-12');
     if (q1.length !== 3 || new Set(q1.map((q) => q.id)).size !== 3) bad('world economy: a day must have three distinct quests');
     if (q1.map((q) => q.id).join() !== q2.map((q) => q.id).join()) bad('world economy: the same date must give the same quests');
@@ -1815,18 +1833,40 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
       if (!(p.done === 0 && p.goal > 0)) bad(`world economy: quest ${q.id} must start at 0 of a positive goal`);
       if (!regions.regionBySlug(q.region)) bad(`world economy: quest ${q.id} points at an unknown place ${q.region}`);
     }
+    /* The works: every one costs crafts, asks for standing, and is reachable. */
     const ids = new Set();
-    for (const u of economy.UPGRADES) {
-      if (ids.has(u.id)) bad(`world economy: duplicate upgrade ${u.id}`);
+    let multi = 0;
+    for (const u of economy.WORKS) {
+      if (ids.has(u.id)) bad(`world economy: duplicate work ${u.id}`);
       ids.add(u.id);
-      if (!(u.cost > 0)) bad(`world economy: upgrade ${u.id} must cost Ink`);
-      if (u.requires && !economy.UPGRADES.some((x) => x.id === u.requires)) bad(`world economy: upgrade ${u.id} requires an unknown ${u.requires}`);
-      if (!regions.regionBySlug(u.region)) bad(`world economy: upgrade ${u.id} belongs to an unknown place`);
+      const total = economy.bagTotal(u.cost);
+      if (!(total > 0)) bad(`world economy: work ${u.id} must cost crafts`);
+      if (economy.bagEntries(u.cost).length >= 3) multi += 1;
+      if (typeof u.standing?.test !== 'function' || !u.standing.line) bad(`world economy: work ${u.id} must ask for standing, in words`);
+      if (!u.after) bad(`world economy: work ${u.id} must say what the valley looks like after`);
+      for (const req of u.requires ?? []) if (!economy.WORKS.some((x) => x.id === req)) bad(`world economy: work ${u.id} requires an unknown ${req}`);
+      if (!regions.regionBySlug(u.region)) bad(`world economy: work ${u.id} belongs to an unknown place`);
+      if (!(u.stage >= 1 && u.stage <= 3)) bad(`world economy: work ${u.id} must sit in one of the three stages`);
     }
-    if (economy.availableUpgrades([]).some((u) => u.requires)) bad('world economy: a dependent upgrade must not be available before its prerequisite');
-    if (!economy.availableUpgrades(['hearth-2']).some((u) => u.id === 'hearth-3')) bad('world economy: building the chimney must unlock the flower boxes');
+    if (multi < 6) bad('world economy: the valley must hold several works that need three crafts at once');
+    if (economy.WORKS.filter((u) => u.cost.ember > 0).length < 6) bad('world economy: embers must gate the later works');
+    /* Every craft must be spendable, or a place makes nothing anyone wants. */
+    for (const k of economy.CRAFT_KEYS) if (!economy.WORKS.some((u) => (u.cost[k] ?? 0) > 0)) bad(`world economy: nothing in the valley costs ${k}`);
+    /* An empty world can build nothing, and the survey says why. */
+    const emptyState = {
+      builds: [], purse: economy.emptyBag(),
+      hearth: { activeDays: 0, streak: { best: 0, current: 0 } },
+      meadow: { met: 0, known: 0, mastered: 0 }, pond: { mastered: 0 }, thicket: { lanterns: 0 },
+      reading: { read: 0, wellRead: 0, threeStar: 0 }, rootwood: { grownCount: 0 },
+      loom: { solved: 0 }, table: { solved: 0 }, bench: { solved: 0 },
+      terraces: { done: 0 }, wilds: { runs: 0 }, stars: 0, placesVisited: 0,
+    };
+    const survey = economy.surveyWorks(emptyState);
+    if (survey.some((w) => w.ready)) bad('world economy: nothing can be built before anything is learned');
+    if (survey.length !== economy.WORKS.length) bad('world economy: the survey must cover every work');
+    if (!economy.nextWork(emptyState)) bad('world economy: a new valley must still be told what it is working towards');
     if (economy.titleFor(1) === economy.titleFor(20)) bad('world economy: titles must grow with level');
-    if (problems.length === b0) ok('stars follow accuracy then pace, Ink follows stars, three seeded quests a day, upgrades chain');
+    if (problems.length === b0) ok(`stars follow accuracy then pace, four crafts from four abilities, ${economy.WORKS.length} works that need learning before crafts`);
   }
 
   /* ---- Lexicon: real content into real questions, and an honest ledger ---- */
@@ -1877,7 +1917,39 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     const result = round.finish();
     if (result.record.kind !== 'lex-round' || result.record.score.total !== 12) bad('world lexicon: a finished round yields a lex-round record of twelve answers');
     if (result.record.score.correct !== 8) bad(`world lexicon: expected 8 correct in the dry run, got ${result.record.score.correct}`);
-    if (!(result.ink > 0)) bad('world lexicon: a finished round earns Ink');
+    if (!(result.earned?.amber > 0)) bad('world lexicon: a finished round earns Amber');
+    if (result.earned.ink !== 0 || result.earned.thread !== 0) bad('world lexicon: a word round makes Amber only');
+    /* The curator composes a round across bundles, due words first. */
+    const curator = await mod('src/world/curator.js');
+    const fields = await lexicon.listFields('meadow');
+    if (fields.length < 10) bad('world curator: the Meadow must expose every lexicon field');
+    const curLedger = new Map([[lex.entries[0].id, { ...rec, region: 'meadow', bundle_id: lex.meta.id, next_at: new Date(now - 1000).toISOString(), last_at: new Date(now - 90000000).toISOString() }]]);
+    const composed = await curator.composeRound('meadow', fields, curLedger, { now, seed: 'verify' });
+    if (composed.entries.length !== 12) bad('world curator: a composed round is twelve words');
+    if (!composed.entries.some((p) => p.entry.id === lex.entries[0].id)) bad('world curator: a due word must come back in the next round');
+    if (new Set(composed.entries.map((p) => p.entry.id)).size !== composed.entries.length) bad('world curator: a round must never repeat a word');
+    if (!composed.title || !composed.line) bad('world curator: a round must say what it is, in words');
+    const curRound = new lexicon.LexRound({ region: 'meadow', picks: composed.entries, now: () => now });
+    if (curRound.total !== 12) bad('world curator: a curated round builds twelve questions');
+    for (const q of curRound.questions) {
+      if (q.options.filter((o) => o.correct).length !== 1) bad('world curator: every question has exactly one right answer');
+      if (new Set(q.options.map((o) => o.text.toLowerCase())).size !== q.options.length) bad(`world curator: repeated option text in a ${q.kind} question`);
+    }
+    /* Reach and weakness are read from real records, never claimed. */
+    const rcContent = { rc: [
+      { id: 'p1', stage: 'foundation', difficulty_numeric: 2 }, { id: 'p2', stage: 'foundation', difficulty_numeric: 3 },
+      { id: 'p3', stage: 'developing', difficulty_numeric: 5 }, { id: 'p4', stage: 'developing', difficulty_numeric: 6 },
+    ] };
+    const bestMap = new Map([['p1', { stars: 3 }], ['p2', { stars: 2 }]]);
+    if (curator.rcReach(rcContent, bestMap) !== 1) bad('world curator: two well-read foundation passages open the next stage');
+    const weak = curator.readingWeakness([{ answers: [
+      { type: 'inference', is_correct: false }, { type: 'inference', is_correct: false }, { type: 'inference', is_correct: false },
+      { type: 'main_idea', is_correct: true }, { type: 'main_idea', is_correct: true }, { type: 'main_idea', is_correct: true },
+    ] }]);
+    if (weak.weakest !== 'inference') bad('world curator: the weakness model must find what actually goes wrong');
+    if (!curator.weaknessLine('inference')) bad('world curator: a weakness must be sayable in the valley\'s voice');
+    const nxt = curator.nextPassage(rcContent, bestMap, weak, 'verify');
+    if (!nxt || bestMap.has(nxt.item.id)) bad('world curator: the next passage must be one not yet read');
     const summary = lexicon.summarizeLedger(new Map([['a', { bundle_id: 'b1', level: 3, next_at: null }], ['b', { bundle_id: 'b1', level: 1, next_at: null }]]));
     if (summary.get('b1')?.mastered !== 1 || summary.get('b1')?.met !== 2) bad('world lexicon: the ledger summary counts met and mastered per bundle');
     if (problems.length === b0) ok('real words become one-correct questions; the ledger climbs only when due and never demotes below met');
@@ -1888,25 +1960,33 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     const b0 = problems.length;
     const content = { families: [], rc: [{ id: 'rc-0001', estimated_time_min: 6 }], pj: [], ps: [], ooo: [], wd: [], fields: { meadow: [{ id: 'lex-high-a', total: 100 }], pond: [], thicket: [] } };
     const empty = state.deriveWorldState(content, { sessions: [], learning: [] }, Date.parse('2026-09-11T10:00:00Z'));
-    if (!empty.isNew || empty.ink.balance !== 0 || empty.stars !== 0) bad('world state: an empty world is new, with no Ink and no stars');
+    if (!empty.isNew || economy.bagTotal(empty.purse) !== 0 || empty.stars !== 0) bad('world state: an empty world is new, with an empty purse and no stars');
+    if (empty.readyWorks.length !== 0) bad('world state: an empty world can build nothing');
+    if (!empty.opportunities.length) bad('world state: a new learner must still be told where to begin');
     if (empty.quests.length !== 3) bad('world state: three quests a day');
     const t0 = Date.parse('2026-09-11T09:00:00Z');
     const rcSession = { id: 's1', passage_id: 'rc-0001', started_at: new Date(t0).toISOString(), finished_at: new Date(t0 + 5 * 60000).toISOString(), duration_ms: 5 * 60000, score: { total: 4, correct: 3, attempted: 4, accuracy: 0.75 }, answers: [] };
     const learning = [
       { id: 'lexm:lex-high-a-0001', kind: 'lex-mastery', entry_id: 'lex-high-a-0001', bundle_id: 'lex-high-a', region: 'meadow', level: 3, next_at: null },
       { id: 'lex-round-1', kind: 'lex-round', region: 'meadow', bundle_id: 'lex-high-a', finished_at: new Date(t0).toISOString(), score: { correct: 10, total: 12 }, stars: 2 },
-      { id: 'build:hearth-2', kind: 'world-build', upgrade_id: 'hearth-2', cost: 80, region: 'hearth' },
+      { id: 'build:hearth-chimney', kind: 'world-build', work_id: 'hearth-chimney', region: 'hearth', finished_at: new Date(t0).toISOString() },
     ];
     const s = state.deriveWorldState(content, { sessions: [rcSession], learning }, Date.parse('2026-09-11T10:00:00Z'));
     if (s.reading.stars !== 3 || s.reading.litWindows !== 1) bad('world state: a 3/4 passage in time is three stars and a lit window');
     if (s.meadow.mastered !== 1 || s.meadow.stars !== 2) bad('world state: the Meadow counts mastered words and best round stars');
-    const expectedEarned = economy.INK.rc(3) + economy.INK.round(2, 10);
-    if (s.ink.earned !== expectedEarned || s.ink.spent !== 80 || s.ink.balance !== Math.max(0, expectedEarned - 80)) bad(`world state: Ink must be earned minus spent, never negative (${s.ink.earned}/${s.ink.spent}/${s.ink.balance})`);
+    const expectedInk = economy.EARN.rc(3, 3).ink;
+    const expectedAmber = economy.EARN.round(2, 10).amber;
+    if (s.earned.ink !== expectedInk) bad(`world state: reading makes Ink and only Ink (${s.earned.ink} vs ${expectedInk})`);
+    if (s.earned.amber !== expectedAmber) bad(`world state: a round makes Amber (${s.earned.amber} vs ${expectedAmber})`);
+    if (s.spent.amber !== 40) bad(`world state: a built work spends its cost (${s.spent.amber})`);
+    if (s.purse.amber !== Math.max(0, expectedAmber - 40)) bad('world state: the purse is earned minus spent, never negative');
     if (s.hearth.level !== 2) bad('world state: the built chimney raises the Hearth to level 2');
+    if (!s.builds.includes('hearth-chimney')) bad('world state: a build record must stand in the valley');
+    if (s.works.find((w) => w.id === 'hearth-chimney')?.built !== true) bad('world state: the survey must know what is already built');
     if (!s.hearth.practicedToday) bad('world state: a session today counts as practised today');
     if (s.stars !== 5) bad(`world state: stars total across places (${s.stars})`);
     if (state.worldChangeLine('reading-room', empty, s) === '') bad('world state: a change in the Reading Room must have a line');
-    if (problems.length === b0) ok('empty world is new; sessions become stars, windows, flowers and Ink; builds subtract');
+    if (problems.length === b0) ok('empty world is new; sessions become stars, windows, flowers and crafts; works subtract');
   }
 
   /* ---- Audio identity and the sprite recipes ---- */
@@ -1915,7 +1995,8 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     for (const n of ['tap', 'open', 'star1', 'star2', 'star3', 'ink', 'quest', 'grow', 'build', 'correct', 'wrong', 'hurry', 'arrival']) if (!worldAudio.WORLD_SOUND_NAMES.includes(n)) bad(`world audio: missing sound ${n}`);
     if (Math.round(worldAudio.pitch(130.81, 'do', 1)) !== 262) bad('world audio: an octave above the tonic doubles the pitch');
     if (worldAudio.VALLEY_PHRASE.length !== 6) bad('world audio: the Valley Phrase has six notes');
-    for (const n of ['tree', 'flower', 'cottage', 'tower', 'workshop', 'lantern', 'koi', 'butterfly', 'bird', 'cat', 'cloud', 'rootStone', 'bridge']) if (!sprites.RECIPE_NAMES.includes(n)) bad(`world sprites: missing recipe ${n}`);
+    for (const n of ['tree', 'flower', 'cottage', 'tower', 'workshop', 'lantern', 'koi', 'butterfly', 'bird', 'cat', 'cloud', 'rootStone', 'bridge',
+      'hive', 'heron', 'arch', 'shrine', 'arbour', 'stall', 'well', 'villager', 'paving', 'stoneBridge']) if (!sprites.RECIPE_NAMES.includes(n)) bad(`world sprites: missing recipe ${n}`);
     const r = palette.ramp('#4E9E4C');
     if (!(r.light !== r.base && r.shade !== r.base && r.dark !== r.shade)) bad('world palette: a ramp must have four distinct tones');
     if (!['spring', 'summer', 'autumn', 'winter'].includes(palette.seasonWord(new Date('2026-09-11')))) bad('world palette: a season for every date');

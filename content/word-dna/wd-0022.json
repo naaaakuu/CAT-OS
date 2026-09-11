@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0022",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ful",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ful",
+    "origin_language": "Germanic",
+    "core_meaning": "full of, or providing",
+    "mentor_note": "Ful has two senses that are easy to confuse: full of a thing (beautiful) and apt to do a thing (forgetful). CAT vocabulary-in-context questions live in exactly that gap."
+  },
+  "members": [
+    {
+      "word": "healthful",
+      "meaning": "promoting health",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "plentiful",
+      "meaning": "existing in great quantity",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "beautiful",
+      "meaning": "full of beauty",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "forgetful",
+      "meaning": "apt to forget",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "artful",
+      "meaning": "showing skill, often of a cunning kind",
+      "part_of_speech": "adjective",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Full of something, or apt to provide it",
+        "correct": true
+      },
+      {
+        "text": "Without something",
+        "correct": false
+      },
+      {
+        "text": "Almost, but not quite, something",
+        "correct": false
+      }
+    ],
+    "understand_note": "Watch the two senses. Healthful does not mean healthy: it means health-giving. An author who writes healthful is making a claim about effect, not about state.",
+    "applies": [
+      {
+        "held_out_word": "artful",
+        "prompt": "Knowing -ful means full of, and remembering that a writer chooses it for tone, what does artful most often mean?",
+        "options": [
+          {
+            "text": "Skilful, often with a hint of cunning",
+            "correct": true
+          },
+          {
+            "text": "Filled with paintings and sculpture",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "Awkward and clumsy",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

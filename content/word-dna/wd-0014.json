@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0014",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ancy / -mancy",
+    "estimated_time_sec": 162,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ancy / -mancy",
+    "origin_language": "Latin and Greek",
+    "core_meaning": "a state, action or process — and, in -mancy, divination by some means",
+    "mentor_note": "The -mancy family is a small museum of how people have tried to read the future. You will almost never need the words themselves; you will often need the habit of reading the first half of a long word to find its subject."
+  },
+  "members": [
+    {
+      "word": "bibliomancy",
+      "meaning": "forecasting the future through biblical books",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "anthropomancy",
+      "meaning": "forecasting through studying human entrails",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "cubomancy",
+      "meaning": "forecasting through the use of dice",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "osteomancy",
+      "meaning": "forecasting through observing bones",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "cheiromancy",
+      "meaning": "forecasting by reading the palms",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "graphomancy",
+      "meaning": "forecasting through observing handwriting",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "necromancy",
+      "meaning": "forecasting by communication with the dead",
+      "part_of_speech": "noun",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Foretelling the future by some particular means",
+        "correct": true
+      },
+      {
+        "text": "The scientific study of an object",
+        "correct": false
+      },
+      {
+        "text": "A fear of something",
+        "correct": false
+      }
+    ],
+    "understand_note": "Mancy is always divination; the piece in front of it names what is being read — books, bones, dice, palms, handwriting. Split the word and the meaning falls out.",
+    "applies": [
+      {
+        "held_out_word": "necromancy",
+        "prompt": "Knowing -mancy means divination, and necro- means death, what is necromancy?",
+        "options": [
+          {
+            "text": "Foretelling the future by communicating with the dead",
+            "correct": true
+          },
+          {
+            "text": "The study of how diseases spread",
+            "correct": false,
+            "trap": "context_mismatch"
+          },
+          {
+            "text": "The practice of burying the dead with ceremony",
+            "correct": false,
+            "trap": "literal_only"
+          }
+        ]
+      }
+    ]
+  }
+}

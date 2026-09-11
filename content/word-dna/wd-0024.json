@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0024",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-like",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-like",
+    "origin_language": "Germanic",
+    "core_meaning": "resembling, or similar to",
+    "mentor_note": "Like is the most honest of the resemblance suffixes: it says plainly that the thing is not the thing. Childlike and childish both mean \"like a child\" — and the difference between them is the whole of tone."
+  },
+  "members": [
+    {
+      "word": "childlike",
+      "meaning": "having the innocence of a child",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "warlike",
+      "meaning": "hostile; ready for war",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "ladylike",
+      "meaning": "behaving in a refined manner",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "godlike",
+      "meaning": "resembling a god in power or beauty",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "workmanlike",
+      "meaning": "competent and efficient, though not inspired",
+      "part_of_speech": "adjective",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Resembling or similar to something",
+        "correct": true
+      },
+      {
+        "text": "Belonging to something",
+        "correct": false
+      },
+      {
+        "text": "Made from something",
+        "correct": false
+      }
+    ],
+    "understand_note": "Like flags a comparison, not an identity. Set childlike (warm) beside childish (dismissive) and you can see how much a suffix alone can carry.",
+    "applies": [
+      {
+        "held_out_word": "workmanlike",
+        "prompt": "Knowing -like means resembling, what is a reviewer saying when they call a novel workmanlike?",
+        "options": [
+          {
+            "text": "It is competent and solidly made, but not inspired",
+            "correct": true
+          },
+          {
+            "text": "It is a masterpiece of the highest order",
+            "correct": false,
+            "trap": "context_mismatch"
+          },
+          {
+            "text": "It is about the lives of manual labourers",
+            "correct": false,
+            "trap": "literal_only"
+          }
+        ]
+      }
+    ]
+  }
+}

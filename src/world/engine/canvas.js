@@ -333,13 +333,16 @@ export class WorldRenderer {
     }
     this.scene.overlay?.(wctx, view, this.time);
 
-    // Blit to the screen at the camera's zoom; letterbox with the scene's ground colour.
+    // Blit to the screen at the camera's zoom. Anything the map does not
+    // cover is painted by the scene's `beyond` — sky above the mountains,
+    // haze below the road — so a tall phone never shows a dead bar.
     const s = this.sctx, z = this.cam.zoom * this.dpr;
     s.imageSmoothingEnabled = false;
     s.fillStyle = this.scene.backdrop ?? '#0A1230';
     s.fillRect(0, 0, this.screen.width, this.screen.height);
     const ox = Math.round(this.screen.width / 2 - this.cam.x * z);
     const oy = Math.round(this.screen.height / 2 - this.cam.y * z);
+    this.scene.beyond?.(s, { ox, oy, z, w: this.screen.width, h: this.screen.height, worldW, worldH }, this.time);
     s.drawImage(this.world, 0, 0, worldW, worldH, ox, oy, Math.round(worldW * z), Math.round(worldH * z));
     this.scene.hud?.(s, { ox, oy, z, w: this.screen.width, h: this.screen.height, dpr: this.dpr }, this.time);
   }

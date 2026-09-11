@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0028",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-wise",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-wise",
+    "origin_language": "Germanic",
+    "core_meaning": "in the manner of, or with regard to",
+    "mentor_note": "Wise narrows a claim to one dimension. \"Moneywise, the plan works\" concedes that in every other respect it might not — and that concession is exactly what a strengthen-or-weaken question hunts for."
+  },
+  "members": [
+    {
+      "word": "dollarwise",
+      "meaning": "with respect to dollars",
+      "part_of_speech": "adverb",
+      "held_out": false
+    },
+    {
+      "word": "weatherwise",
+      "meaning": "with regard to the weather",
+      "part_of_speech": "adverb",
+      "held_out": false
+    },
+    {
+      "word": "moneywise",
+      "meaning": "with regard to money",
+      "part_of_speech": "adverb",
+      "held_out": false
+    },
+    {
+      "word": "healthwise",
+      "meaning": "with respect to health",
+      "part_of_speech": "adverb",
+      "held_out": false
+    },
+    {
+      "word": "clockwise",
+      "meaning": "in the direction the hands of a clock turn",
+      "part_of_speech": "adverb",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "With regard to, or in the manner of, the thing named",
+        "correct": true
+      },
+      {
+        "text": "Knowing a great deal about something",
+        "correct": false
+      },
+      {
+        "text": "Against or contrary to something",
+        "correct": false
+      }
+    ],
+    "understand_note": "Wise means \"in the manner or respect of\". It quietly limits a claim to one axis: healthwise good says nothing about cost, taste or time.",
+    "applies": [
+      {
+        "held_out_word": "clockwise",
+        "prompt": "Knowing -wise means \"in the manner of\", what does clockwise describe?",
+        "options": [
+          {
+            "text": "Turning in the direction a clock’s hands move",
+            "correct": true
+          },
+          {
+            "text": "Being good at telling the time",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "Happening exactly on schedule",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

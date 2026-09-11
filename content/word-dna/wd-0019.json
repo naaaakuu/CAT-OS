@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0019",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ling",
+    "estimated_time_sec": 144,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ling",
+    "origin_language": "Germanic",
+    "core_meaning": "a small, young or minor one of its kind",
+    "mentor_note": "Ling makes things small, and often slightly beneath the speaker: a princeling is not a prince taken seriously. Diminutives are a favourite way for authors to condescend without saying so."
+  },
+  "members": [
+    {
+      "word": "yearling",
+      "meaning": "an animal one year old",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "fingerling",
+      "meaning": "a very young fish",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "seedling",
+      "meaning": "a young plant grown from seed",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "princeling",
+      "meaning": "a minor or unimportant prince",
+      "part_of_speech": "noun",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "A small, young or minor version of something",
+        "correct": true
+      },
+      {
+        "text": "Something made by hand",
+        "correct": false
+      },
+      {
+        "text": "Something that happens repeatedly",
+        "correct": false
+      }
+    ],
+    "understand_note": "Ling shrinks whatever it attaches to, in size or in status. When an author reaches for it, read the tone: they are rarely being neutral.",
+    "applies": [
+      {
+        "held_out_word": "princeling",
+        "prompt": "Knowing -ling makes something small or minor, what is a princeling — and what is the writer doing by choosing that word?",
+        "options": [
+          {
+            "text": "A minor prince — and the writer is belittling him",
+            "correct": true
+          },
+          {
+            "text": "A prince still in training for the throne",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "The eldest son of a reigning king",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

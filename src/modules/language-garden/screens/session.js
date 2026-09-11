@@ -27,7 +27,8 @@ import { deriveValleyScene, nextReachPoolIndex, memberCheckOffset, isBiomeGrown 
 import { biomeForFamily } from '../logic/biomes.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
 import { mountGardenBackdrop } from '../../../world/garden-backdrop.js';
-import { INK } from '../../../world/economy.js';
+import { EARN } from '../../../world/economy.js';
+import { chips as craftChips, bagText } from '../../../world/craft-ui.js';
 import { play as playWorld } from '../../../world/audio.js';
 import { GARDEN_LINES, GROWTH_LINES, ATTEMPT_LINES, pick } from '../../../core/mentor/garden-voice.js';
 import { playGardenSound, gardenCue, tonicHzForBiome } from '../logic/audio.js';
@@ -543,16 +544,17 @@ export async function renderGardenSession(outlet, context, params) {
     // The world's reward, shown once the tree has come to rest: the Ink
     // this session earned, and where the valley will look on the way back.
     const record = lastRecord;
-    const ink = record ? INK.garden(record.session_type, record.clean === true) : 0;
+    const earned = record ? EARN.garden(record.session_type, record.clean === true) : null;
     sessionStorage.setItem('world:focus', 'rootwood');
     sessionStorage.setItem('world:changed', 'rootwood');
-    sessionStorage.setItem('world:change-line', `${escapeHTML(family.root.label)} ${postState.stage === 'sprout' ? 'has sprouted' : 'grew'} in the Rootwood · +${ink} Ink`);
+    sessionStorage.setItem('world:change-line', `${escapeHTML(family.root.label)} ${postState.stage === 'sprout' ? 'has sprouted' : 'grew'} in the Rootwood`);
+    if (earned) sessionStorage.setItem('world:earned', JSON.stringify(earned));
 
     const clear = document.createElement('div');
     clear.className = 'lgx-clear';
     clear.innerHTML = `
       <p class="lgx-clear__line is-veiled" id="lgx-line">${escapeHTML(line)}</p>
-      <p class="lgx-clear__ink is-veiled" id="lgx-ink"><span class="world-reward__ink"><span class="ink" aria-hidden="true"></span>+${ink} Ink</span></p>
+      <p class="lgx-clear__ink is-veiled" id="lgx-ink" aria-label="${earned ? bagText(earned) : ''}">${earned ? craftChips(earned, { sign: '+' }) : ''}</p>
       <button class="lgx-clear__back is-veiled" id="lgx-back">Back to the Rootwood</button>
     `;
     lgxEl.appendChild(clear);

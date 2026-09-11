@@ -14,7 +14,7 @@ export function dayKey(dateLike) {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
 
-function shiftDay(key, delta) {
+export function shiftDay(key, delta) {
   const [y, m, d] = key.split('-').map(Number);
   const dt = new Date(y, m - 1, d + delta);
   return dayKey(dt);

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0015",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-oid",
+    "estimated_time_sec": 180,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-oid",
+    "origin_language": "Greek",
+    "core_meaning": "like, or in the shape of",
+    "mentor_note": "Oid is a shape word. Doctors and scientists use it constantly because it lets them name a thing by what it resembles — and CAT loves a passage where a writer names something by resemblance rather than by definition."
+  },
+  "members": [
+    {
+      "word": "xiphoid",
+      "meaning": "sword-shaped",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "scaphoid",
+      "meaning": "boat-shaped",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "sigmoid",
+      "meaning": "shaped like the letter C",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "cuboid",
+      "meaning": "cube-shaped",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "actinoid",
+      "meaning": "star-shaped",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "belonoid",
+      "meaning": "needle-shaped",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "ovoid",
+      "meaning": "egg-shaped",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "helicoid",
+      "meaning": "screw-shaped",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "schizoid",
+      "meaning": "split",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "spheroid",
+      "meaning": "shaped almost, but not exactly, like a sphere",
+      "part_of_speech": "noun",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Having the shape of, or resembling, something",
+        "correct": true
+      },
+      {
+        "text": "Made out of a particular material",
+        "correct": false
+      },
+      {
+        "text": "Belonging to a scientific category",
+        "correct": false
+      }
+    ],
+    "understand_note": "Oid means \"shaped like\": ovoid is egg-shaped, cuboid is cube-shaped, helicoid is screw-shaped. Note the hedge inside it — an -oid thing resembles, and is therefore never quite, the thing named.",
+    "applies": [
+      {
+        "held_out_word": "spheroid",
+        "prompt": "Knowing -oid means shaped like, what does spheroid describe?",
+        "options": [
+          {
+            "text": "Something close to a sphere but not a perfect one",
+            "correct": true
+          },
+          {
+            "text": "A perfectly round ball",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "The hollow inside of a sphere",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

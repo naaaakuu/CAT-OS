@@ -1,135 +1,256 @@
 /**
- * hearth.js (screen) — home. Who the learner has become (title, level),
- * today's three quests, the Ink they hold and what it can build, the
- * collections (stars and mastery across every place), the records, the
- * achievements, and the doors to the study (Growth) and Settings.
+ * hearth.js (screen) — home, and the Workshop.
+ *
+ * The Hearth answers "what am I building?", "what do I need?" and "what
+ * should I practise to get it?" in one place. Three panels:
+ *
+ *   WORKSHOP  every work the valley can hold, in three stages. Each shows
+ *             its cost in crafts (short ones marked), the standing it
+ *             asks of your learning, and — when both are met — a Build
+ *             button that changes the world for good.
+ *   TODAY     the day's three asks, and what they pay.
+ *   STANDING  the honest read on where this learner is, and the records.
+ *
+ * Building is the product's biggest moment, so it is slow on purpose:
+ * the button, the sound, the line, and then the valley, changed.
  */
 
 import { WorldRenderer } from '../engine/canvas.js';
-import { buildBuildingScene } from '../engine/map.js';
+import { buildBackdropScene } from '../engine/map.js';
 import { regionBySlug, REGIONS } from '../regions.js';
 import { loadWorld } from '../state.js';
-import { availableUpgrades, UPGRADES, INK } from '../economy.js';
-import { evaluate } from '../../core/engagement/achievements.js';
+import { WORK_STAGES, bagEntries, CRAFTS } from '../economy.js';
+import { costChips, purseHTML, chips as craftChips } from '../craft-ui.js';
+import { standing as standingLines, readingWeakness } from '../curator.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
-import { escapeHTML, formatDate } from '../../core/utils/format.js';
-import { listGardenSightings } from '../../modules/language-garden/logic/store.js';
+import { escapeHTML } from '../../core/utils/format.js';
 
 export async function renderHearth(outlet, { storage }) {
   document.documentElement.setAttribute('data-world', '');
   const region = regionBySlug('hearth');
+
   let world;
   try { world = await loadWorld(storage); } catch (err) {
-    outlet.innerHTML = `<section class="place"><div class="place__body" style="padding-top:60px"><h1 class="place__title">The Hearth will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
+    outlet.innerHTML = `<section class="place"><div class="place__body"><h1 class="place__title">The Hearth will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
     return;
   }
-  const { state } = world;
+  let { state } = world;
   const atmo = state.atmo;
+  const openWorks = location.hash.includes('works=1');
+
   outlet.innerHTML = `
-    <section class="place" aria-label="The Hearth">
-      <div class="place__hero"><canvas id="hero" aria-label="The Hearth, your cottage"></canvas><a class="place__back" href="#/world" id="back">← The valley</a><div class="place__hero-stat"><span class="hud__pill"><span class="ink" aria-hidden="true"></span>${state.ink.balance}</span><span class="hud__pill"><span class="star" aria-hidden="true">★</span>${state.stars}</span></div></div>
-      <div class="place__body" id="body"></div>
+    <section class="place place--hearth">
+      <div class="place__hero place__hero--short">
+        <canvas id="hero" aria-label="The Hearth"></canvas>
+        <a class="place__back" href="#/world" id="back">← The valley</a>
+        <div class="place__hero-stat"><span class="purse purse--static">${purseHTML(state.purse)}</span></div>
+      </div>
+      <div class="place__body" id="body">
+        <p class="place__eyebrow">Home</p>
+        <h1 class="place__title">The Hearth</h1>
+        <p class="place__line" id="hearth-line"></p>
+        <div class="tabs" role="tablist">
+          <button class="tab" data-tab="works" role="tab">The Workshop</button>
+          <button class="tab" data-tab="today" role="tab">Today</button>
+          <button class="tab" data-tab="you" role="tab">Standing</button>
+        </div>
+        <div id="panel"></div>
+      </div>
     </section>`;
+
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'hearth'); play('close'); });
-  const canvas = outlet.querySelector('#hero');
-  const heroScene = buildBuildingScene('cottage', state.hearth.level, atmo, { practicedToday: state.hearth.practicedToday });
-  const renderer = new WorldRenderer(canvas, heroScene, { worldW: heroScene.W, worldH: heroScene.H, fit: 'cover', pannable: false, maxZoom: 6 });
-  renderer.lookAt(heroScene.W / 2, heroScene.focusY ?? heroScene.H * 0.6, { animate: false });
-  renderer.start();
-  const onHash = () => { renderer.destroy(); window.removeEventListener('hashchange', onHash); };
-  window.addEventListener('hashchange', onHash);
-  window.addEventListener('pointerdown', () => { unlock(); startMusic('hearth', { hour: atmo.hour }); startAmbience('hearth', atmo); }, { capture: true, once: true });
-  startMusic('hearth', { hour: atmo.hour }); startAmbience('hearth', atmo);
 
-  let sightings = [];
-  try { sightings = await listGardenSightings(storage); } catch { /* none */ }
-
-  const body = outlet.querySelector('#body');
-  const render = () => {
-    const xp = state.hearth.level_xp;
-    const built = new Set(state.builds);
-    const avail = availableUpgrades(state.builds);
-    const ach = evaluate(state.engagement);
-    const unlocked = ach.filter((a) => a.unlocked);
-    const collections = [
-      ['reading-room', `${state.reading.stars}/${state.reading.maxStars} ★`, `${state.reading.read} passages read`],
-      ['rootwood', `${state.rootwood.grownCount} grown`, `${state.rootwood.ancientCount} ancient · ${state.rootwood.landmarks} landmarks`],
-      ['meadow', `${state.meadow.mastered} in bloom`, `${state.meadow.fieldsDone} fields complete`],
-      ['pond', `${state.pond.koi} koi`, `${state.pond.mastered} twins told apart`],
-      ['thicket', `${state.thicket.lanterns} lanterns`, `${state.thicket.mastered} loanwords`],
-      ['terraces', `${state.terraces.done}/${state.terraces.total}`, 'families climbed'],
-      ['loom', `${state.loom.solved}/${state.loom.total}`, `${state.loom.stars} ★`],
-      ['table', `${state.table.solved}/${state.table.total}`, `${state.table.stars} ★`],
-      ['bench', `${state.bench.solved}/${state.bench.total}`, `${state.bench.stars} ★`],
-    ];
-    body.innerHTML = `
-      <p class="place__eyebrow">Home</p>
-      <h1 class="place__title">${escapeHTML(state.hearth.title)}</h1>
-      <p class="place__line">Level ${xp.level} · ${xp.intoLevel} of ${xp.needed} to the next · ${state.hearth.activeDays} day${state.hearth.activeDays === 1 ? '' : 's'} in the valley${state.hearth.streak.current ? ` · ${state.hearth.streak.current}-day run` : ''}</p>
-      <div class="place__progress"><div class="bar"><i style="width:${Math.round(xp.progress * 100)}%"></i></div><b>Lv ${xp.level}</b></div>
-
-      <div class="place__section">
-        <h2>Today's quests</h2>
-        <p class="sub">Three small aims, new every day. Each pays ${INK.quest} Ink when done.</p>
-        <div class="g-list">
-          ${state.quests.map((q) => `<a class="g-row ${q.complete ? '' : ''}" href="${regionBySlug(q.region)?.route ?? '#/world'}"><span class="g-row__num" style="${q.complete ? 'background:var(--g-accent);color:#fff' : ''}">${q.complete ? '✓' : `${q.done}/${q.goal}`}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(q.title)}</span><span class="g-row__meta">${escapeHTML(q.line)}</span></span><span class="g-row__where">${escapeHTML(regionBySlug(q.region)?.name ?? '')}</span></a>`).join('')}
-        </div>
-      </div>
-
-      <div class="place__section">
-        <h2>Build the valley</h2>
-        <p class="sub">Ink is earned by finishing real practice, more with more stars. It is spent only here, and the valley keeps what you build.</p>
-        <div class="stat-tiles" style="margin-bottom:12px"><div class="stat-tile"><b>${state.ink.balance}</b><span>Ink held</span></div><div class="stat-tile"><b>${state.ink.earned}</b><span>Earned</span></div><div class="stat-tile"><b>${state.builds.length}/${UPGRADES.length}</b><span>Built</span></div></div>
-        <div class="g-list">
-          ${avail.map((u) => `<div class="upgrade"><div class="upgrade__lead"><p class="upgrade__name">${escapeHTML(u.name)} <small style="color:var(--g-ink-3);font-weight:500">· ${escapeHTML(regionBySlug(u.region)?.name ?? '')}</small></p><p class="upgrade__line">${escapeHTML(u.line)}</p></div><button class="upgrade__btn" data-build="${u.id}" ${state.ink.balance < u.cost ? 'disabled' : ''}><span class="ink" aria-hidden="true"></span>${u.cost}</button></div>`).join('')}
-          ${UPGRADES.filter((u) => built.has(u.id)).map((u) => `<div class="upgrade upgrade--built"><div class="upgrade__lead"><p class="upgrade__name">${escapeHTML(u.name)}</p><p class="upgrade__line">${escapeHTML(u.line)}</p></div><span class="upgrade__btn">Built</span></div>`).join('')}
-        </div>
-      </div>
-
-      <div class="place__section">
-        <h2>Collections</h2>
-        <p class="sub">What the valley remembers of you.</p>
-        <div class="tiles">
-          ${collections.map(([slug, big, small]) => { const r = regionBySlug(slug); return `<a class="tile" href="${r.route}"><p class="tile__name">${escapeHTML(r.name)}</p><p class="tile__meta" style="font-size:16px;color:var(--g-ink);font-weight:700;margin-bottom:2px">${escapeHTML(big)}</p><p class="tile__meta">${escapeHTML(small)}</p></a>`; }).join('')}
-        </div>
-      </div>
-
-      ${sightings.length ? `<div class="place__section"><h2>Sightings</h2><p class="sub">Words grown in the Rootwood, met again out in real passages.</p><div class="g-list">${sightings.slice(-6).reverse().map((s) => `<div class="g-row"><span class="g-row__num">✦</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(s.word ?? s.vocab_id ?? '')}</span><span class="g-row__meta">${escapeHTML(s.passage_title ?? s.passage_id ?? '')} · ${formatDate(s.seen_at ?? s.finished_at ?? new Date().toISOString())}</span></span></div>`).join('')}</div></div>` : ''}
-
-      <div class="place__section">
-        <h2>Achievements</h2>
-        <p class="sub">${unlocked.length} of ${ach.length} unlocked.</p>
-        <div class="tiles">${ach.map((a) => `<div class="tile ${a.unlocked ? 'tile--done' : 'tile--stone'}"><div class="tile__glyph" aria-hidden="true">${a.glyph}</div><p class="tile__name">${escapeHTML(a.title)}</p><p class="tile__meta">${escapeHTML(a.description)}</p></div>`).join('')}</div>
-      </div>
-
-      <div class="place__section">
-        <h2>The study</h2>
-        <div class="g-list">
-          <a class="g-row" href="#/growth"><span class="g-row__num">✎</span><span class="g-row__lead"><span class="g-row__title">How you read</span><span class="g-row__meta">Your Reading DNA, the concepts you have collected, your own reflections.</span></span></a>
-          <a class="g-row" href="#/world/place/wilds"><span class="g-row__num">⟶</span><span class="g-row__lead"><span class="g-row__title">Records</span><span class="g-row__meta">The weekly Gauntlet and your best runs.</span></span></a>
-          <a class="g-row" href="#/settings"><span class="g-row__num">⚙</span><span class="g-row__lead"><span class="g-row__title">Settings</span><span class="g-row__meta">Sound, theme, reading size, backup.</span></span></a>
-        </div>
-      </div>`;
-    for (const b of body.querySelectorAll('[data-build]')) {
-      b.addEventListener('click', async () => {
-        const u = UPGRADES.find((x) => x.id === b.dataset.build);
-        if (!u || state.ink.balance < u.cost) return;
-        b.disabled = true;
-        try {
-          await storage.put(STORES.LEARNING, { id: `build:${u.id}`, kind: 'world-build', module: 'world', upgrade_id: u.id, cost: u.cost, region: u.region, built_at: new Date().toISOString() });
-          state.builds.push(u.id); state.ink.balance -= u.cost; state.ink.spent += u.cost;
-          if (u.effect?.hearthLevel) state.hearth.level = Math.max(state.hearth.level, u.effect.hearthLevel);
-          play('build');
-          sessionStorage.setItem('world:focus', u.region); sessionStorage.setItem('world:changed', u.region); sessionStorage.setItem('world:change-line', `Built: <b>${escapeHTML(u.name)}</b>`);
-          if (u.region === 'hearth') { renderer.scene = buildBuildingScene('cottage', state.hearth.level, atmo, { practicedToday: state.hearth.practicedToday }); renderer.invalidateTerrain(); }
-          render();
-          outlet.querySelector('.place__hero-stat').innerHTML = `<span class="hud__pill"><span class="ink" aria-hidden="true"></span>${state.ink.balance}</span><span class="hud__pill"><span class="star" aria-hidden="true">★</span>${state.stars}</span>`;
-        } catch (err) { console.error('[CAT OS] build failed', err); b.disabled = false; }
-      });
-    }
+  /* ---- The hero ---- */
+  let renderer = null;
+  const mountHero = () => {
+    renderer?.destroy();
+    const canvas = outlet.querySelector('#hero');
+    if (!canvas) return;
+    const scene = buildBackdropScene('hearth', state, atmo);
+    renderer = new WorldRenderer(canvas, scene, { worldW: scene.W, worldH: scene.H, fit: 'width', pannable: false, minZoom: 0.3, maxZoom: 6 });
+    renderer.lookAt(scene.W / 2, 200, { animate: false });
+    renderer.start();
   };
-  render();
+  mountHero();
+  const onHash = () => { renderer?.destroy(); window.removeEventListener('hashchange', onHash); };
+  window.addEventListener('hashchange', onHash);
+  const warmth = Math.min(1, (state.builds.length / 12) * 0.6 + Math.min(1, state.stars / 90) * 0.4);
+  const onDown = () => { unlock(); startMusic('hearth', { hour: atmo.hour, warmth }); startAmbience('hearth', atmo); };
+  window.addEventListener('pointerdown', onDown, { capture: true, once: true });
+  startMusic('hearth', { hour: atmo.hour, warmth }); startAmbience('hearth', atmo);
+
+  const panel = outlet.querySelector('#panel');
+  const lineEl = outlet.querySelector('#hearth-line');
+
+  const headline = () => {
+    const ready = state.readyWorks.length;
+    if (ready) return `${ready === 1 ? 'One work is' : `${ready} works are`} ready to build. This is where the valley changes.`;
+    const next = state.nextWork;
+    if (next) return `Next: <b>${escapeHTML(next.name)}</b>. ${next.hasStanding ? 'You have the standing — it needs crafts.' : escapeHTML(next.standing.line)}`;
+    return 'Every work in the valley is standing. The rest is reading.';
+  };
+  lineEl.innerHTML = headline();
+
+  /* ---- Panels ---- */
+  function renderWorks() {
+    const byStage = WORK_STAGES.map((st) => ({ ...st, works: state.works.filter((w) => w.stage === st.n) }));
+    panel.innerHTML = `
+      <div class="purse-row" aria-label="Your crafts">${CRAFTS.map((c) => `
+        <div class="purse-row__c craft--${c.key}">
+          <i aria-hidden="true"></i>
+          <b>${state.purse[c.key] ?? 0}</b>
+          <span>${c.name}</span>
+          <small>${escapeHTML(c.from)}</small>
+        </div>`).join('')}
+      </div>
+      ${byStage.map((st) => {
+        const open = st.works.filter((w) => !w.built);
+        const done = st.works.filter((w) => w.built);
+        if (!open.length && !done.length) return '';
+        return `
+        <section class="stage">
+          <h2 class="stage__name">${escapeHTML(st.name)} <span>${done.length}/${st.works.length}</span></h2>
+          <p class="stage__line">${escapeHTML(st.line)}</p>
+          ${open.map(workCard).join('')}
+          ${done.length ? `<div class="stage__done">${done.map((w) => `<span class="built">✓ ${escapeHTML(w.name)}</span>`).join('')}</div>` : ''}
+        </section>`;
+      }).join('')}`;
+    for (const btn of panel.querySelectorAll('[data-build]')) {
+      btn.addEventListener('click', () => build(btn.dataset.build));
+    }
+  }
+
+  function workCard(w) {
+    const blocked = w.blockedBy.length > 0;
+    const cls = w.ready ? 'is-ready' : blocked ? 'is-blocked' : w.hasStanding ? 'is-waiting' : 'is-locked';
+    return `
+      <article class="work ${cls}">
+        <div class="work__head">
+          <h3 class="work__name">${escapeHTML(w.name)}</h3>
+          ${w.ready ? '<span class="work__flag">Ready</span>' : ''}
+        </div>
+        <p class="work__line">${escapeHTML(w.line)}</p>
+        <div class="work__cost">${costChips(w.cost, state.purse)}</div>
+        <p class="work__standing ${w.hasStanding ? 'is-met' : ''}">
+          <span class="tick" aria-hidden="true">${w.hasStanding ? '✓' : '○'}</span>${escapeHTML(w.standing.line)}
+        </p>
+        ${blocked ? `<p class="work__blocked">Needs ${escapeHTML(w.blockedBy.join(', '))} first.</p>` : ''}
+        ${w.ready ? `<button class="g-cta g-cta--gold" data-build="${w.id}">Build it<span class="arrow" aria-hidden="true">→</span></button>`
+          : !w.hasStanding ? `<p class="work__hint">Practise to earn the standing.</p>`
+            : blocked ? '' : `<p class="work__hint">Short: ${escapeHTML(bagEntries(w.missing).map((c) => `${c.amount} ${c.name}`).join(', '))}. ${escapeHTML(whereToEarn(w.missing))}</p>`}
+      </article>`;
+  }
+
+  function whereToEarn(missing) {
+    const e = bagEntries(missing);
+    if (!e.length) return '';
+    const first = e.sort((a, b) => b.amount - a.amount)[0];
+    return { amber: 'Amber is made in the Meadow, the Pond, the Thicket, the Rootwood and the Terraces.', ink: 'Ink is made only in the Reading Room.', thread: 'Thread is made at the Loom, the Table and the Bench.', ember: 'Embers come only from three-star runs.' }[first.key] ?? '';
+  }
+
+  function renderToday() {
+    const done = state.quests.filter((q) => q.complete).length;
+    panel.innerHTML = `
+      <p class="panel__lead">Three small aims, new every day, chosen to pull you across the valley. Each pays ${escapeHTML(bagEntries({ amber: 18, ink: 8, thread: 8, ember: 0 }).map((c) => `${c.amount} ${c.name}`).join(', '))}.</p>
+      <div class="asks">
+        ${state.quests.map((q) => `
+          <a class="ask ${q.complete ? 'is-done' : ''}" href="${regionBySlug(q.region)?.route ?? '#/world'}">
+            <span class="ask__tick" aria-hidden="true">${q.complete ? '✓' : ''}</span>
+            <span class="ask__body">
+              <b>${escapeHTML(q.title)}</b>
+              <span>${escapeHTML(q.line)}</span>
+              <span class="ask__bar"><i style="width:${Math.round((q.done / q.goal) * 100)}%"></i></span>
+            </span>
+            <span class="ask__n">${q.done}/${q.goal}</span>
+          </a>`).join('')}
+      </div>
+      <p class="panel__foot">${done === 3 ? 'All three done. The valley is satisfied.' : `${3 - done} to go.`} ${state.hearth.streak.current ? `A ${state.hearth.streak.current}-day run, best ${state.hearth.streak.best}.` : 'Practise anywhere today to start a run.'}</p>`;
+  }
+
+  async function renderYou() {
+    let weakness = null;
+    try { weakness = readingWeakness(world.records.sessions); } catch { /* none */ }
+    const lines = standingLines(state, weakness);
+    panel.innerHTML = `
+      <div class="standing">
+        ${lines.map((l) => `<p>${escapeHTML(l)}</p>`).join('')}
+      </div>
+      <div class="figures">
+        ${[
+          ['Passages read', `${state.reading.read}/${state.reading.passages}`],
+          ['Stars', String(state.stars)],
+          ['Root families grown', `${state.rootwood.grownCount}/${state.rootwood.total}`],
+          ['Words in memory', String(state.meadow.known + state.pond.known + state.thicket.known)],
+          ['Words for good', String(state.meadow.mastered + state.pond.mastered + state.thicket.mastered)],
+          ['Verbal items solved', String(state.loom.solved + state.table.solved + state.bench.solved)],
+          ['Works built', `${state.works.filter((w) => w.built).length}/${state.works.length}`],
+          ['Days in the valley', String(state.hearth.activeDays)],
+        ].map(([k, v]) => `<div class="figure"><b>${escapeHTML(v)}</b><span>${escapeHTML(k)}</span></div>`).join('')}
+      </div>
+      <div class="places">
+        ${REGIONS.filter((r) => r.kind === 'learn').map((r) => `<a class="places__row" href="${r.route}"><b>${escapeHTML(r.name)}</b><span>${escapeHTML(r.skill ?? '')}</span></a>`).join('')}
+      </div>
+      <p class="panel__foot"><a href="#/settings">Settings, backup and restore →</a></p>`;
+  }
+
+  const TABS = { works: renderWorks, today: renderToday, you: renderYou };
+  let current = openWorks ? 'works' : state.readyWorks.length ? 'works' : 'today';
+  const select = (name) => {
+    current = name;
+    for (const t of outlet.querySelectorAll('.tab')) t.classList.toggle('is-on', t.dataset.tab === name);
+    TABS[name]();
+    panel.classList.remove('is-in');
+    requestAnimationFrame(() => panel.classList.add('is-in'));
+  };
+  for (const t of outlet.querySelectorAll('.tab')) t.addEventListener('click', () => { play('tap'); select(t.dataset.tab); });
+  select(current);
+
+  /* ---- Building ---- */
+  let building = false;
+  async function build(id) {
+    if (building) return;
+    const w = state.works.find((x) => x.id === id);
+    if (!w?.ready) return;
+    building = true;
+    play('build');
+    const veil = document.createElement('div');
+    veil.className = 'buildveil';
+    veil.innerHTML = `
+      <div class="buildveil__card">
+        <p class="buildveil__eyebrow">Building</p>
+        <h2 class="buildveil__name">${escapeHTML(w.name)}</h2>
+        <div class="buildveil__cost">${craftChips(w.cost, { sign: '−' })}</div>
+        <p class="buildveil__after">${escapeHTML(w.after ?? w.line)}</p>
+        <a class="g-cta g-cta--gold" href="#/world" id="buildveil-go">See it<span class="arrow" aria-hidden="true">→</span></a>
+      </div>`;
+    document.body.appendChild(veil);
+    requestAnimationFrame(() => veil.classList.add('is-in'));
+    try {
+      await storage.put(STORES.LEARNING, {
+        id: `build:${w.id}`, kind: 'world-build', module: 'world',
+        work_id: w.id, upgrade_id: w.id, region: w.region, cost: w.cost,
+        finished_at: new Date().toISOString(),
+      });
+    } catch (err) { console.error('[CAT OS] build failed', err); }
+    setTimeout(() => play('unlock'), 700);
+    veil.querySelector('#buildveil-go').addEventListener('click', () => {
+      sessionStorage.setItem('world:focus', w.region);
+      sessionStorage.setItem('world:changed', w.region);
+      sessionStorage.setItem('world:change-line', `<b>${escapeHTML(w.name)}</b> — ${escapeHTML(w.after ?? '')}`);
+      play('open');
+    });
+    // Refresh in place too, so staying on the Hearth shows the truth.
+    try {
+      const fresh = await loadWorld(storage);
+      world = fresh; state = fresh.state;
+      lineEl.innerHTML = headline();
+      outlet.querySelector('.place__hero-stat').innerHTML = `<span class="purse purse--static">${purseHTML(state.purse)}</span>`;
+      mountHero();
+      select('works');
+    } catch { /* the veil still tells the truth */ }
+    building = false;
+  }
 }
 
 export { REGIONS };

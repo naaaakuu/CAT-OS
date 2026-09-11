@@ -4,16 +4,30 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-11 — 1.0.0, the world: a Canvas 2D pixel-art valley is the application; every learning room is a place in it; the owner's reference corpus (2,577 words, 401 confusable sets, 271 loanwords) is content. App version 1.0.0._
+_Last updated: 2026-09-12 — 1.1.0, the final world rebuild: four crafts made by four CAT abilities, twenty-one works that need learning before crafts, a curator that chooses what to practise out of the whole corpus, place screens that are places, and sixteen new Word DNA units from the previously unconnected prefix/suffix reference. App version 1.1.0._
+
+## What changed in 1.1.0
+
+| System | State | Notes |
+|---|---|---|
+| **The economy** (`world/economy.js`) | **shipped (1.1.0)** | Four crafts — Amber (word knowledge), Ink (reading), Thread (verbal structure), Ember (accuracy at pace, scarce). A place can never make another place's craft. 21 works, each with a cost bag AND a standing predicate over the learner's record; 14 need three or four crafts, 11 need Embers. Three stages: Settling, Building, Flourishing |
+| **The curator** (`world/curator.js`) | **shipped (1.1.0)** | Composes a word round across bundles (due → slipped → new, frequency band by reach), picks the next passage by measured stage reach and by weakness, climbs the verbal tiers rung by rung, chooses the next root family. Weakness is derived from stored per-answer question `type` — never claimed, never shown as a chart on the way in |
+| **The Workshop** (`world/screens/hearth.js`) | **shipped (1.1.0)** | What am I building, what do I need, what should I practise to get it — in one screen, with a build moment that changes the map |
+| **Place screens** (`world/screens/place.js`) | **shipped (1.1.0)** | The region's scene fills the screen; a sheet holds one line and one action; the shelves live under a pull. `buildBackdropScene` paints a portrait landscape per place |
+| **The valley's home** (`world/screens/world.js`) | **shipped (1.1.0)** | Named pins that pulse when asking, at most three "worth doing now" cards (never three of a kind), crafts that fly into the purse, a line when you come back after days away, sky and land beyond the map's edge |
+| **Visual language** (`ui/styles/world.css`) | **shipped (1.1.0)** | Painted surfaces, crafts as coloured gems, the sheet, the pins, the works, the build veil |
+| **Word DNA content** | **shipped (1.1.0)** | 16 new units (wd-0013…wd-0028) from `99_REFERENCE/5- Prefix and Suffix.md`; the Terraces go from 12 units to 28; registry 493 items |
+| **Audio** | **shipped (1.1.0)** | `startMusic` takes a `warmth` from works built and stars earned: one more pad voice and a slightly freer line as the valley fills. Same key, same calm |
+| **Verification** | **shipped (1.1.0)** | The content loader reads from disk under Node, so `tools/verify.mjs` exercises the real pipeline: craft separation, bag arithmetic, work standings, round composition, reach and weakness. All 44 routes sweep with no console errors |
 
 ## Application
 
 | System | State | Notes |
 |---|---|---|
 | PWA shell (index.html, manifest, icons) | **shipped** | Installable; relative paths → GitHub Pages subpath safe; `start_url` is the valley |
-| Service worker / offline caching | **shipped** | Shell cache v27 + content cache v13, cache-first by exact URL; ~620 content files precached; registration waits for the first screen to paint (1.0.0) |
+| Service worker / offline caching | **shipped** | Shell cache v28 + content cache v13, cache-first by exact URL; ~640 content files precached; registration waits for the first screen to paint (1.0.0) |
 | Design tokens + base styles + `game.css` | **shipped (1.0.0)** | Tokens and base unchanged; `game.css` is the world's interface language (glass HUD, place sheets, run frame, star reveal, tiles/rows) and restyles the shared chrome under `[data-world]` |
-| Hash router | **shipped** | Param routes; 404; modules register their own routes; the world registers `/world`, `/world/place/:slug`, `/round/:region/:field` |
+| Hash router | **shipped** | Param routes; 404; modules register their own routes; the world registers `/world`, `/world/place/:slug`, `/round/:region` and `/round/:region/:field`; a query after a route is a hint for the screen, never part of the match (1.1.0) |
 | `StorageAdapter` + IndexedDB adapter | **shipped** | DB `cat-os` v2; stores: settings, attempts, sessions, learning. New record kinds in `learning` (all additive, all in backups): `lex-mastery`, `lex-round`, `gauntlet-run`, `world-build`, `world-quest` |
 | Backup & Restore | **shipped** | Format v2; the whole world derives from records, so a backup carries the valley |
 | **The world — engine** (`src/world/engine/`) | **shipped (1.0.0)** | Canvas 2D, no dependencies, no image assets: hue-shifted palette ramps and seeded noise; a procedural pixel-sprite factory (trees at seven stages, pines, flowers, bushes, brambles, rocks, the cottage at five levels, the tower with floors/windows/observatory, three workshops, lanterns, signposts, bridges, fences, terrace walls, koi, butterflies, birds, the cat, clouds, root-stones); a renderer drawing at world resolution and blitting at whole-device-pixel zoom with camera, input, depth sort, lighting and hit-testing; particle and creature systems; the 640×720 valley terrain painted through one raster (~270 ms software), hero scenes per place. Frame ≈ 5 ms |

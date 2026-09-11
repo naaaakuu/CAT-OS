@@ -24,6 +24,7 @@ export function registerWorld(router, context) {
   router
     .register({ path: '/world', title: 'The valley', render: (outlet) => renderWorld(outlet, context) })
     .register({ path: '/world/place/:slug', title: 'A place', render: (outlet, params) => renderPlace(outlet, context, params) })
+    .register({ path: '/round/:region', title: 'A round', render: (outlet, params) => renderRound(outlet, context, params) })
     .register({ path: '/round/:region/:field', title: 'A round', render: (outlet, params) => renderRound(outlet, context, params) });
 }
 

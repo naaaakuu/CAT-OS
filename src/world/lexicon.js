@@ -23,7 +23,7 @@
 import { listLexItems, loadLexItem, listTwinItems, loadTwinItem, listLoanItems, loadLoanItem } from '../core/content-loader/loader.js';
 import { STORES } from '../core/storage/storage-adapter.js';
 import { rng } from './engine/palette.js';
-import { roundStars, INK } from './economy.js';
+import { roundStars, EARN } from './economy.js';
 
 export const REGION_KIND = Object.freeze({ meadow: 'lex', pond: 'twin', thicket: 'loan' });
 export const ROUND_SIZE = 12;
@@ -150,9 +150,12 @@ const trimDot = (s) => String(s ?? '').trim().replace(/[.;]\s*$/, '');
  * 'origin' (word → language).
  * @returns {{kind, prompt, stem, options: [{text, correct}], entry, ask}}
  */
-export function buildQuestion(entry, bundle, region, seed, languages = []) {
+export function buildQuestion(entry, bundle, region, seed, languages = [], pool = null) {
   const r = rng(`${seed}:${entry.id}`);
-  const others = bundle.entries.filter((e) => e.id !== entry.id);
+  // Distractors come from the widest pool the round has open: a curated
+  // round spans several bundles, so the wrong answers stop being "the
+  // other words that begin with A" and start being real competition.
+  const others = (pool ?? bundle.entries).filter((e) => e.id !== entry.id);
   if (region === 'pond') {
     // A twin set: senses per word. Ask which word fits the sense (the
     // real CAT skill: not "what does X mean" but "which of these is X").
@@ -210,13 +213,31 @@ function shuffle(arr, r) { const a = [...arr]; for (let i = a.length - 1; i > 0;
 export class LexRound {
   #answers = [];
   #shownAt = 0;
-  constructor({ region, bundle, entries, languages = [], now = () => Date.now() }) {
-    this.region = region; this.bundle = bundle; this.entries = entries; this.languages = languages;
+  /**
+   * Two shapes are accepted:
+   *   { region, bundle, entries }   one bundle (the Gauntlet, tests)
+   *   { region, picks: [{entry, bundle, status}] }   a curated round that
+   *   spans bundles — the curator's shape, and what the valley uses.
+   */
+  constructor({ region, bundle, entries, picks, languages = [], now = () => Date.now() }) {
+    this.region = region;
+    this.picks = picks ?? entries.map((e) => ({ entry: e, bundle, status: 'again' }));
+    this.entries = this.picks.map((p) => p.entry);
+    this.bundle = bundle ?? this.picks[0]?.bundle ?? null;
+    this.bundleOf = new Map(this.picks.map((p) => [p.entry.id, p.bundle]));
+    this.languages = languages;
     this.now = now;
     this.startedAt = now();
     this.id = `lex-round-${new Date(this.startedAt).toISOString().replace(/[:.]/g, '-')}`;
     this.index = 0;
-    this.questions = entries.map((e) => buildQuestion(e, bundle, region, this.id, languages));
+    const seenBundles = new Set();
+    const pool = [];
+    for (const p of this.picks) {
+      if (!p.bundle || seenBundles.has(p.bundle.meta.id)) continue;
+      seenBundles.add(p.bundle.meta.id);
+      pool.push(...p.bundle.entries);
+    }
+    this.questions = this.picks.map((p) => buildQuestion(p.entry, p.bundle, region, this.id, languages, pool));
   }
   get total() { return this.questions.length; }
   get current() { return this.questions[this.index]; }
@@ -239,13 +260,15 @@ export class LexRound {
     const avgMs = total ? this.#answers.reduce((n, a) => n + a.ms, 0) / total : 0;
     const stars = roundStars({ correct, total, avgMs, targetMs: TARGET_MS[this.region] ?? 7000 });
     const record = {
-      id: this.id, kind: 'lex-round', module: 'lex', region: this.region, bundle_id: this.bundle.meta.id,
+      id: this.id, kind: 'lex-round', module: 'lex', region: this.region,
+      bundle_id: this.bundle?.meta.id ?? null,
+      bundle_ids: [...new Set(this.picks.map((p) => p.bundle?.meta.id).filter(Boolean))],
       started_at: new Date(this.startedAt).toISOString(), finished_at: new Date(finishedAt).toISOString(),
       duration_ms: finishedAt - this.startedAt,
       answers: this.#answers, score: { correct, total, accuracy: total ? correct / total : 0, avg_ms: Math.round(avgMs) },
       stars: stars.stars, flawless: stars.flawless,
     };
-    return { record, stars, ink: INK.round(stars.stars, correct) };
+    return { record, stars, earned: EARN.round(stars.stars, correct, stars.flawless) };
   }
   get answers() { return this.#answers; }
 }
@@ -257,7 +280,8 @@ export async function saveRound(storage, round, result, ledger, now = Date.now()
   for (const a of round.answers) {
     const entry = byEntry.get(a.entry_id);
     if (!entry) continue;
-    const rec = applyAnswer(ledger.get(a.entry_id), entry, round.region, round.bundle.meta.id, a.correct, now);
+    const bundleId = round.bundleOf?.get(a.entry_id)?.meta.id ?? round.bundle?.meta.id ?? null;
+    const rec = applyAnswer(ledger.get(a.entry_id), entry, round.region, bundleId, a.correct, now);
     ledger.set(a.entry_id, rec);
     await storage.put(STORES.LEARNING, rec);
   }

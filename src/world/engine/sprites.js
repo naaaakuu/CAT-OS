@@ -668,10 +668,193 @@ function puff({ size = 3 }) {
   return done(p, size, size);
 }
 
+/* ------------------------------------------------------------------ */
+/* The works: what Amber, Ink, Thread and Ember build                   */
+/* ------------------------------------------------------------------ */
+
+/** A white bee skep on a low stand. The Meadow's hives. */
+function hive({ seed = 'h' }) {
+  const p = new Pix(12, 14);
+  const w = ramp('#F0E6D2');
+  const t = ramp(PIGMENT.timber);
+  p.rect(2, 12, 8, 2, t.dark);
+  for (let i = 0; i < 5; i += 1) {
+    const wdt = 9 - Math.abs(i - 3);
+    const x = 6 - Math.floor(wdt / 2);
+    p.rect(x, 11 - i * 2, wdt, 2, i % 2 ? w.base : w.light);
+    p.hline(x, x + wdt - 1, 11 - i * 2, w.shade);
+  }
+  p.px(6, 10, '#3A2E22');
+  p.px(5, 10, '#3A2E22');
+  const r = rng(`hive:${seed}`);
+  for (let i = 0; i < 3; i += 1) p.px(1 + Math.floor(r() * 10), 1 + Math.floor(r() * 6), PIGMENT.gold);
+  p.outline();
+  return done(p, 6, 13);
+}
+
+/** A heron standing in the shallows: grey, still, one leg. */
+function heron({ frame = 0 }) {
+  const p = new Pix(11, 20);
+  const g = ramp('#9DA7B4');
+  p.vline(5, 15, 19, '#C9A24B');          // leg
+  p.blob(5, 12, 3, 4, g.base, rng('heron-body'), 0.1);
+  p.rect(5, 11, 2, 3, g.light);
+  p.vline(6, 5, 10, g.base);               // neck
+  p.vline(7, 5, 9, g.shade);
+  p.rect(6, 3, 3, 3, g.light);             // head
+  p.hline(9, 10, 4, '#E2B54A');            // bill
+  p.px(7, 4, PIGMENT.ink);
+  p.hline(2, 4, 2 + 0, '#FFFFFF');
+  p.px(3, 7, '#2F3540'); p.px(4, 8, '#2F3540');
+  if (frame % 2) p.px(4, 14, g.dark);
+  p.outline();
+  return done(p, 5, 19);
+}
+
+/** A carved stone arch at the Thicket's mouth. */
+function arch({ }) {
+  const p = new Pix(34, 30);
+  const s = ramp(PIGMENT.stoneWarm);
+  p.rect(1, 8, 6, 22, s.base); p.rect(27, 8, 6, 22, s.base);
+  p.rect(1, 8, 6, 2, s.light); p.rect(27, 8, 6, 2, s.light);
+  p.vline(6, 10, 29, s.shade); p.vline(32, 10, 29, s.shade);
+  // the span
+  for (let x = 5; x <= 29; x += 1) {
+    const t = (x - 17) / 12;
+    const y = 8 - Math.round(6 * (1 - t * t));
+    p.rect(x, y, 1, 5, (x % 4 === 0) ? s.shade : s.base);
+    p.px(x, y, s.light);
+  }
+  // carved marks: the tongues learned from
+  for (let i = 0; i < 5; i += 1) { p.px(10 + i * 3, 5, s.dark); p.px(11 + i * 3, 6, s.dark); }
+  p.outline();
+  return done(p, 17, 29);
+}
+
+/** A low root shrine: two uprights, a lintel, a lamp. */
+function shrine({ lit = true }) {
+  const p = new Pix(20, 20);
+  const s = ramp(PIGMENT.stone);
+  const t = ramp(PIGMENT.trunk);
+  p.rect(2, 8, 3, 11, s.base); p.rect(15, 8, 3, 11, s.base);
+  p.rect(1, 5, 18, 3, s.light); p.hline(1, 18, 8, s.shade);
+  p.rect(7, 12, 6, 7, t.dark);
+  p.rect(8, 13, 4, 4, lit ? PIGMENT.lantern : '#5C5142');
+  if (lit) p.px(9, 14, '#FFF1C8');
+  p.rect(0, 19, 20, 1, s.dark);
+  p.outline();
+  return done(p, 10, 19);
+}
+
+/** A wooden arbour with vines over it. */
+function arbour({ }) {
+  const p = new Pix(30, 22);
+  const t = ramp(PIGMENT.timber);
+  const v = ramp(PIGMENT.vine);
+  p.rect(2, 6, 2, 16, t.base); p.rect(26, 6, 2, 16, t.base);
+  p.rect(1, 4, 28, 2, t.shade);
+  for (let x = 3; x < 28; x += 4) p.rect(x, 2, 2, 3, t.base);
+  const r = rng('arbour');
+  for (let i = 0; i < 26; i += 1) {
+    const x = 2 + Math.floor(r() * 26), y = 1 + Math.floor(r() * 6);
+    p.px(x, y, r() > 0.5 ? v.base : v.light);
+    if (r() > 0.6) p.px(x, y + 1, v.shade);
+  }
+  for (let i = 0; i < 8; i += 1) { const y = 7 + Math.floor(r() * 12); p.px(3, y, v.base); p.px(27, y, v.base); }
+  p.outline();
+  return done(p, 15, 21);
+}
+
+/** A market stall with a striped awning — the Quarter's square. */
+function stall({ colour = 0 }) {
+  const p = new Pix(20, 16);
+  const t = ramp(PIGMENT.timber);
+  const cloth = [['#C6533A', '#EFE3D0'], ['#3E7FA8', '#EFE3D0'], ['#6E8F4E', '#F2E9D4']][colour % 3];
+  p.vline(1, 5, 15, t.dark); p.vline(18, 5, 15, t.dark);
+  for (let x = 0; x < 20; x += 1) p.rect(x, 3, 1, 3, (Math.floor(x / 2) % 2) ? cloth[0] : cloth[1]);
+  p.rect(0, 6, 20, 1, t.shade);
+  p.rect(3, 10, 14, 5, t.base);
+  p.rect(3, 10, 14, 1, t.light);
+  p.px(6, 12, PIGMENT.gold); p.px(9, 12, '#C6533A'); p.px(12, 12, '#6E8F4E');
+  p.outline();
+  return done(p, 10, 15);
+}
+
+/** A stone well, the heart of a square. */
+function well({ }) {
+  const p = new Pix(16, 18);
+  const s = ramp(PIGMENT.stone);
+  const t = ramp(PIGMENT.timber);
+  p.rect(2, 11, 12, 6, s.base);
+  for (let y = 11; y < 17; y += 2) for (let x = 2; x < 14; x += 3) p.px(x + ((y / 2) % 2), y, s.shade);
+  p.rect(2, 10, 12, 2, s.light);
+  p.rect(4, 11, 8, 2, '#2A3A4E');
+  p.vline(3, 2, 10, t.base); p.vline(12, 2, 10, t.base);
+  p.rect(2, 0, 12, 3, '#8A5A3E'); p.rect(2, 0, 12, 1, '#A9713F');
+  p.rect(7, 4, 2, 3, t.dark);
+  p.outline();
+  return done(p, 8, 17);
+}
+
+/** A villager: a small figure that walks the paths once the valley lives. */
+function villager({ frame = 0, colour = 0 }) {
+  const p = new Pix(7, 12);
+  const shirts = ['#C6533A', '#3E7FA8', '#6E8F4E', '#8A6C9C', '#C9A24B'];
+  const shirt = shirts[colour % shirts.length];
+  p.rect(2, 1, 3, 3, '#E8C49A');           // head
+  p.px(3, 2, PIGMENT.ink);
+  p.rect(2, 4, 3, 4, shirt);
+  p.px(1, 5, shirt); p.px(5, 5, shirt);
+  const step = frame % 4;
+  const a = step === 1 ? 1 : step === 3 ? -1 : 0;
+  p.vline(2 + (a > 0 ? -1 : 0), 8, 10, '#4A3B2E');
+  p.vline(4 + (a < 0 ? 1 : 0), 8, 10, '#4A3B2E');
+  p.px(2, 11, '#2F2A22'); p.px(4, 11, '#2F2A22');
+  p.outline();
+  return done(p, 3, 11);
+}
+
+/** A paved stone path tile, laid when the valley's paths are stoned. */
+function paving({ w = 16, seed = 'p' }) {
+  const p = new Pix(w, 6);
+  const s = ramp(PIGMENT.stoneWarm);
+  const r = rng(`paving:${seed}:${w}`);
+  for (let y = 0; y < 6; y += 1) {
+    for (let x = 0; x < w; x += 1) {
+      const cell = Math.floor(x / 4) + Math.floor(y / 3) * 7;
+      const n = rng(`pv${seed}${cell}`)();
+      p.px(x, y, n > 0.66 ? s.light : n < 0.33 ? s.shade : s.base);
+    }
+  }
+  for (let x = 0; x < w; x += 4) p.vline(x + (r() > 0.5 ? 0 : 1), 0, 5, s.dark);
+  p.hline(0, w - 1, 3, s.dark);
+  return done(p, Math.floor(w / 2), 5);
+}
+
+/** An arched stone bridge, replacing the plank crossing. */
+function stoneBridge({ w = 26 }) {
+  const p = new Pix(w, 14);
+  const s = ramp(PIGMENT.stoneWarm);
+  p.rect(0, 4, w, 5, s.base);
+  p.rect(0, 3, w, 2, s.light);
+  for (let x = 0; x < w; x += 4) p.vline(x, 4, 8, s.shade);
+  const cx = Math.floor(w / 2);
+  for (let x = 0; x < w; x += 1) {
+    const t = (x - cx) / (w / 2);
+    const y = 9 + Math.round(4 * (1 - t * t));
+    for (let yy = 9; yy < y; yy += 1) p.px(x, yy, s.shade);
+  }
+  for (let x = 1; x < w; x += 6) { p.vline(x, 0, 3, s.base); p.px(x, 0, s.light); }
+  p.rect(0, 2, w, 1, s.dark);
+  p.outline();
+  return done(p, cx, 8);
+}
+
 const RECIPES = {
   tree, flower, flowerPatch, grassTuft, bush, bramble, rock, stump, lilypad, reeds,
   cottage, tower, workshop, lantern, signpost, bridge, fence, terraceWall,
   koi, butterfly, bird, cat, cloud, rootStone, marker, puff,
+  hive, heron, arch, shrine, arbour, stall, well, villager, paving, stoneBridge,
 };
 
 export const RECIPE_NAMES = Object.freeze(Object.keys(RECIPES));

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0027",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ish",
+    "estimated_time_sec": 144,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ish",
+    "origin_language": "Germanic",
+    "core_meaning": "somewhat like — and often, faintly disapproving",
+    "mentor_note": "Ish hedges. Reddish is not red; childish is not childlike. When an author hangs -ish on a word they are keeping their distance from it, and that distance is usually the answer to a tone question."
+  },
+  "members": [
+    {
+      "word": "childish",
+      "meaning": "immature; behaving like a child",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "churlish",
+      "meaning": "ill-bred; rude and surly",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "impish",
+      "meaning": "mischievous, like an imp",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "mulish",
+      "meaning": "stubborn, like a mule",
+      "part_of_speech": "adjective",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Somewhat like something, often with mild disapproval",
+        "correct": true
+      },
+      {
+        "text": "Completely and entirely something",
+        "correct": false
+      },
+      {
+        "text": "The study of something",
+        "correct": false
+      }
+    ],
+    "understand_note": "Ish is a hedge with an attitude. Compare childlike, which admires, with childish, which does not — the root is the same and only the suffix has changed.",
+    "applies": [
+      {
+        "held_out_word": "mulish",
+        "prompt": "Knowing -ish means \"somewhat like\", and thinking about what a mule is famous for, what does mulish mean?",
+        "options": [
+          {
+            "text": "Stubborn and unwilling to be moved",
+            "correct": true
+          },
+          {
+            "text": "Strong enough to carry heavy loads",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "Patient and hard-working",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 27;
+const CACHE_VERSION = 28;
 const CONTENT_VERSION = 13;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -136,6 +136,9 @@ const SHELL_FILES = [
   './src/world/engine/canvas.js',
   './src/world/engine/life.js',
   './src/world/engine/map.js',
+  './src/world/curator.js',
+  './src/world/craft-ui.js',
+  './src/world/screens/backdrop.js',
   './src/world/screens/world.js',
   './src/world/screens/place.js',
   './src/world/screens/round.js',
@@ -143,6 +146,7 @@ const SHELL_FILES = [
   './src/world/screens/hearth.js',
   './src/world/screens/wilds.js',
   './src/ui/styles/game.css',
+  './src/ui/styles/world.css',
   './src/ui/components/cat-nav.js',
   './src/ui/components/cat-plant.js',
   './src/ui/components/cat-jumble-board.js',
@@ -286,6 +290,22 @@ const CONTENT_FILES = [
   './content/word-dna/wd-0010.json',
   './content/word-dna/wd-0011.json',
   './content/word-dna/wd-0012.json',
+  './content/word-dna/wd-0013.json',
+  './content/word-dna/wd-0014.json',
+  './content/word-dna/wd-0015.json',
+  './content/word-dna/wd-0016.json',
+  './content/word-dna/wd-0017.json',
+  './content/word-dna/wd-0018.json',
+  './content/word-dna/wd-0019.json',
+  './content/word-dna/wd-0020.json',
+  './content/word-dna/wd-0021.json',
+  './content/word-dna/wd-0022.json',
+  './content/word-dna/wd-0023.json',
+  './content/word-dna/wd-0024.json',
+  './content/word-dna/wd-0025.json',
+  './content/word-dna/wd-0026.json',
+  './content/word-dna/wd-0027.json',
+  './content/word-dna/wd-0028.json',
   './content/vocabulary/vocab-0001.json',
   './content/vocabulary/vocab-0002.json',
   './content/vocabulary/vocab-0003.json',

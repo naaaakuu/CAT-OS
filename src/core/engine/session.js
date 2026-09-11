@@ -78,8 +78,11 @@ export class PracticeSession {
   /** Finish and produce the persistable records. */
   finish() {
     const finishedAt = this.now();
+    // `type` travels with the answer so the curator can learn which kinds
+    // of question the reader is weak at without re-loading every passage.
     const ordered = this.#passage.questions.map((q) => ({
       question_id: q.id,
+      type: q.type ?? null,
       ...(this.#answers.get(q.id) ?? { chosen: null, is_correct: null, time_ms: 0 }),
     }));
     const score = computeScore(ordered);
@@ -99,6 +102,7 @@ export class PracticeSession {
       session_id: this.id,
       passage_id: this.#passage.meta.id,
       question_id: a.question_id,
+      type: a.type ?? null,
       chosen: a.chosen,
       is_correct: a.is_correct,
       time_ms: a.time_ms,

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0017",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ard",
+    "estimated_time_sec": 144,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ard",
+    "origin_language": "Germanic",
+    "core_meaning": "one who does something, often to excess, or one characterised by it",
+    "mentor_note": "Ard almost always carries a sneer. Dullard, drunkard, laggard, sluggard: the suffix itself is the writer’s judgement, and noticing that is half of a tone question."
+  },
+  "members": [
+    {
+      "word": "dullard",
+      "meaning": "a slow or stupid person",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "pollard",
+      "meaning": "a hornless animal, or a tree cut back to its trunk",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "laggard",
+      "meaning": "one who falls behind",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "sluggard",
+      "meaning": "a habitually lazy person",
+      "part_of_speech": "noun",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "A person marked by a quality, usually an unflattering one",
+        "correct": true
+      },
+      {
+        "text": "A place where something happens",
+        "correct": false
+      },
+      {
+        "text": "A tool used for a particular job",
+        "correct": false
+      }
+    ],
+    "understand_note": "Ard names a person by a fault: dull gives dullard, lag gives laggard. The suffix carries the disapproval, so an author who uses it has already taken a side.",
+    "applies": [
+      {
+        "held_out_word": "sluggard",
+        "prompt": "Knowing -ard names a person by a fault, what is a sluggard?",
+        "options": [
+          {
+            "text": "A habitually lazy person",
+            "correct": true
+          },
+          {
+            "text": "A person who moves house often",
+            "correct": false,
+            "trap": "context_mismatch"
+          },
+          {
+            "text": "A gardener who studies slugs",
+            "correct": false,
+            "trap": "literal_only"
+          }
+        ]
+      }
+    ]
+  }
+}

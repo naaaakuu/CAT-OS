@@ -80,7 +80,7 @@ export function deriveWDDNA(sessions, items) {
 
   /* ---- Root Recognition: Predict accuracy on root/prefix/suffix units ---- */
   {
-    const bools = sharedRows.filter((r) => r.predict !== null).map((r) => r.predict.is_correct);
+    const bools = sharedRows.filter((r) => r.predict != null).map((r) => r.predict.is_correct);
     const rate = bools.length >= WD_FLOORS.ROOT_MIN ? rateOf(bools) : null;
     if (rate !== null) {
       if (rate >= WD_FLOORS.STRENGTH_ACC) {
@@ -103,7 +103,7 @@ export function deriveWDDNA(sessions, items) {
      the signature trait (WORD_DNA_BIBLE §5): applying a just-taught
      root to a word never shown before. ---- */
   {
-    const bools = sharedRows.flatMap((r) => r.applies.filter((a) => a !== null).map((a) => a.is_correct));
+    const bools = sharedRows.flatMap((r) => (r.applies ?? []).filter((a) => a != null).map((a) => a.is_correct));
     const rate = bools.length >= WD_FLOORS.TRANSFER_MIN ? rateOf(bools) : null;
     if (rate !== null) {
       if (rate >= WD_FLOORS.STRENGTH_ACC) {
@@ -127,8 +127,8 @@ export function deriveWDDNA(sessions, items) {
      (WORD_DNA_BIBLE §3a, mirroring CAT_VARC_BIBLE §21). ---- */
   {
     const bools = [
-      ...noSharedRows.filter((r) => r.predict !== null).map((r) => r.predict.is_correct),
-      ...noSharedRows.flatMap((r) => r.applies.filter((a) => a !== null).map((a) => a.is_correct)),
+      ...noSharedRows.filter((r) => r.predict != null).map((r) => r.predict.is_correct),
+      ...noSharedRows.flatMap((r) => (r.applies ?? []).filter((a) => a != null).map((a) => a.is_correct)),
     ];
     const rate = bools.length >= WD_FLOORS.CONTEXT_MIN ? rateOf(bools) : null;
     if (rate !== null) {
@@ -154,7 +154,7 @@ export function deriveWDDNA(sessions, items) {
   {
     const byUnitFirstSeen = new Map();
     for (const r of sharedRows) {
-      if (r.predict === null || byUnitFirstSeen.has(r.item_id)) continue;
+      if (r.predict == null || byUnitFirstSeen.has(r.item_id)) continue;
       byUnitFirstSeen.set(r.item_id, r.predict.is_correct);
     }
     const ordered = [...byUnitFirstSeen.values()];

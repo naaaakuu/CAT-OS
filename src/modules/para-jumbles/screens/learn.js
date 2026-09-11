@@ -43,7 +43,7 @@ export async function renderPJLearn(outlet, { storage }, params) {
             ${escapeHTML(m.genre)} · ${escapeHTML(m.learning_objective)}</p>
         </header>
 
-        ${answer ? `
+        ${answer?.entered ? `
           <p class="pjx-verdict ${answer.is_correct ? 'is-correct' : 'is-wrong'}">
             Your latest attempt (${escapeHTML(formatDate(answer.finished_at))}):
             ${escapeHTML(answer.entered.join(''))}${answer.is_correct

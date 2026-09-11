@@ -8,9 +8,9 @@
  */
 
 import { regionBySlug } from '../regions.js';
-import { loadWorld, loadWorldRecords, deriveWorldState } from '../state.js';
 import { listFields, loadField, loadLedger, buildQuestion, LexRound, applyAnswer } from '../lexicon.js';
-import { roundStars, INK } from '../economy.js';
+import { roundStars, EARN } from '../economy.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, newlyBuildable, loadWorldContent } from '../state.js';
 import { rng } from '../engine/palette.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, silenceWorld } from '../audio.js';
@@ -59,12 +59,14 @@ export async function renderWilds(outlet, { storage }) {
   const thisWeek = runs.filter((r) => r.week === week);
   const best = (list) => [...list].sort((a, b) => (b.score.correct - a.score.correct) || (a.duration_ms - b.duration_ms))[0] ?? null;
   const weekBest = best(thisWeek), allBest = best(runs);
+  let beforeRecords = { sessions: [], learning: [] };
+  try { beforeRecords = await loadWorldRecords(storage); } catch { /* the run still counts */ }
   let lit = false;
-  try { lit = (await storage.getAll(STORES.LEARNING)).some((r) => r.kind === 'world-build' && r.upgrade_id === 'wilds-lanterns'); } catch { /* unlit */ }
+  try { lit = (await storage.getAll(STORES.LEARNING)).some((r) => r.kind === 'world-build' && (r.work_id ?? r.upgrade_id) === 'wilds-lanterns'); } catch { /* unlit */ }
 
   outlet.innerHTML = `
-    <section class="place" aria-label="The Wilds">
-      <div class="place__hero" style="background:linear-gradient(180deg,#2B436F,#0A1230)"><a class="place__back" href="#/world" id="back">← The valley</a>
+    <section class="place place--page place--wilds" aria-label="The Wilds">
+      <div class="place__hero place__hero--short" style="background:linear-gradient(180deg,#2B436F,#0A1230)"><a class="place__back" href="#/world" id="back">← The valley</a>
         <div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:40px 20px 0"><div><div style="font-family:var(--g-display);font-size:40px;letter-spacing:0.12em;opacity:0.95">THE WILDS</div><div style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.7;margin-top:6px">Week ${escapeHTML(week.slice(-2))} · the Gauntlet</div></div></div>
       </div>
       <div class="place__body">
@@ -172,8 +174,15 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       for (const a of answers) { const q = questions.find((x) => x.entry.id === a.entry_id); if (!q) continue; const key = `${a.region}|${a.bundle_id}`; if (!byRegion.has(key)) byRegion.set(key, { region: a.region, bundle: q.bundle, entries: [], answers: [] }); const g = byRegion.get(key); g.entries.push(q.entry); g.answers.push(a); }
       for (const g of byRegion.values()) { const fake = { region: g.region, bundle: g.bundle, entries: g.entries, answers: g.answers }; await saveLedgerOnly(storage, fake, ledger); }
     } catch (err) { console.error('[CAT OS] gauntlet save failed', err); }
-    const ink = INK.gauntlet(stars.stars);
-    try { await storage.put(STORES.LEARNING, { id: `${record.id}:ink`, kind: 'world-quest', module: 'world', quest_id: 'gauntlet', date: record.finished_at.slice(0, 10), ink, claimed_at: record.finished_at }); } catch { /* ink lost, run kept */ }
+    const earned = EARN.gauntlet(stars.stars, correct);
+    let unlocked = [];
+    try {
+      const content = await loadWorldContent();
+      const beforeState = deriveWorldState(content, beforeRecords);
+      const afterState = deriveWorldState(content, await loadWorldRecords(storage));
+      unlocked = newlyBuildable(beforeState, afterState);
+    } catch { /* the run still counts */ }
+
     let prevBest = null;
     try { const all = (await storage.getAll(STORES.LEARNING)).filter((r) => r.kind === 'gauntlet-run' && r.id !== record.id); prevBest = [...all].sort((a, b) => (b.score.correct - a.score.correct) || (a.duration_ms - b.duration_ms))[0] ?? null; } catch { /* none */ }
     const isRecord = !prevBest || correct > prevBest.score.correct || (correct === prevBest.score.correct && record.duration_ms < prevBest.duration_ms);
@@ -189,7 +198,8 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
         { label: 'Time', value: formatClock(record.duration_ms), good: record.duration_ms < GAUNTLET_MS },
         { label: 'Per word', value: `${(avgMs / 1000).toFixed(1)}s`, good: avgMs < GAUNTLET_MS / total },
       ],
-      ink,
+      earned,
+      unlocked,
       worldLine: isRecord ? 'The road out remembers a <b>new best</b>.' : '',
       extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>`,
       actions: [

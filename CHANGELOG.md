@@ -4,6 +4,140 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 1.1.0 — 2026-09-12 — The final world rebuild
+
+The owner's 2026-09-12 brief ("CAT OS — THE FINAL WORLD REBUILD") asked for
+the thing 1.0.0 gestured at: a game that secretly makes CAT aspirants
+dramatically better at VARC, where the economy is tied to real practice,
+construction is an achievement, and the interface belongs to the world
+rather than to a dashboard. 1.0.0's engine, audio and content were kept;
+its economy, its place screens and its selection of content were replaced.
+
+### The economy: four crafts, not one currency (`world/economy.js`)
+
+Ink was a single number earned by everything and spent on anything, which
+meant no activity was necessary and grinding one place bought the whole
+valley. It is replaced by **four crafts, each made by one kind of thinking**:
+
+- **Amber** — word knowledge. Made in the Meadow, the Mirror Pond, the
+  Thicket, the Rootwood and the Vine Terraces.
+- **Ink** — reading. Made only in the Reading Room.
+- **Thread** — verbal structure. Made at the Loom, the Table and the Bench.
+- **Ember** — mastery. Struck only by a three-star run (two for a flawless
+  one), a clean spaced revisit, or a Gauntlet. Deliberately scarce.
+
+A place can never make another place's craft (enforced in `verify.mjs`), so
+the valley cannot be built by a learner who only does vocabulary.
+
+### The works: what learning builds (`WORKS`, the Workshop)
+
+Twenty-one **works** replace the eight flat upgrades. Each one has
+
+- a **cost** in crafts — fourteen of them need three or four at once,
+  eleven need Embers, so the late valley is impossible without CAT pace;
+- a **standing**: a condition on the learner's actual record, written in
+  words ("Read four passages at two stars or better", "Tell 40 twins apart
+  for good", "Practise in four different places"). Nothing in the valley can
+  be bought before the learning that earns the right to it;
+- an **after** line — what the valley looks like once it stands.
+
+They are grouped into three arcs (Settling, Building, Flourishing) so the
+Workshop never shows a wall of twenty-one, and every one of them changes the
+map: stone paths and arched bridges, beehives in the Meadow, lanterns on the
+pond and in the Quarter, the traveller's arch at the Thicket, the root
+shrine, an arbour on the terraces, the Quarter's square with stalls and a
+well, a heron in the reeds, the Reading Room's floors and its Observatory —
+and **villagers**, who begin to walk the valley's paths as works go up, so a
+built valley is a settlement rather than scenery.
+
+### The curator: the game decides what is worth showing (`world/curator.js`)
+
+The learner no longer browses a library. A new selection engine composes
+what comes next out of the whole corpus, on four axes at once — mastery,
+spacing, reach and variety — and keeps a quiet weakness model on top:
+
+- **Word rounds span bundles.** A Meadow round is twelve words assembled
+  from wherever they are: due for review first (up to seven), then words
+  that recently slipped, then new words from the frequency band the learner
+  has reached (high only, until 120 high-frequency words are held; then
+  medium; then low). Distractors are drawn from every bundle the round has
+  open, so the wrong answers stop being "the other words beginning with A".
+  Each round tells the learner what it is in one line ("Words that are
+  fading", "A mixed handful", "New words · High frequency").
+- **Passages follow a measured reach.** A stage opens when two of its
+  passages have been read at two stars or better; the curator then offers
+  the next stage, and prefers a retry when a passage was read badly.
+- **The weakness model is read from answers, never claimed.** `session.js`
+  now stores each answer's question `type`, so accuracy per question type
+  (inference, main idea, tone, author's purpose, …) is derivable from
+  records alone. The Reading Room offers the passage that practises the
+  weak type and says so in the valley's voice ("Nothing here is stated
+  outright. What follows from the text is the whole question."), never as a
+  chart — although the full breakdown is available under the sheet for
+  anyone who wants it.
+- **The Quarter climbs its ladder** rung by rung, retrying what got away.
+
+### The interface belongs to the world
+
+- **A place is a place.** The place screens were a short art strip over a
+  scrolling wall of cards. Now the region's own living scene fills the
+  screen and a **sheet** rests over the bottom of it holding one line of
+  who you are, how far this place has come, and the single best next thing.
+  Everything else — the shelves, the fields, the tiers — is under a pull.
+  New `buildBackdropScene` paints a portrait landscape per place, composed
+  so its signature always sits above the sheet on a phone.
+- **The valley reads at a glance.** Every place is now labelled on the map
+  with a pin that pulses when it is asking and shows a mark when something
+  can be built there; the camera arrives over the whole valley and settles
+  on the Hearth; the sky and land continue beyond the map's edge, so a tall
+  phone or a wide desktop never shows a dead bar.
+- **What is worth doing now** replaces the quest strip: at most three cards,
+  never three of the same kind, weighted by what the record actually says —
+  a work that can be built, spacing that is genuinely due, the day's nearest
+  ask, the next passage, a workshop never opened, the Wilds once there is
+  enough learned to be tested on.
+- **A run happens somewhere.** Rounds are played on the place's own dimmed,
+  still scene rather than on white paper, with the word on warm glass, and
+  every question says whether it is new, due, or one that slipped.
+- **The result is the loudest moment.** Stars, then the honest CAT numbers,
+  then the crafts the run MADE counted up on screen, then what changed in
+  the valley, then — when a work has just become buildable — a banner that
+  says so and a door straight to the Workshop. Crafts fly into the purse
+  when the learner walks back out.
+- **New `src/ui/styles/world.css`** carries the language: painted surfaces
+  instead of glass panels, the four crafts as coloured gems everywhere they
+  appear, the sheet, the pins, the Workshop, the build veil.
+
+### Content: everything usable is now connected
+
+- **Sixteen new Word DNA units** (`wd-0013` … `wd-0028`) authored from
+  `KNOWLEDGE/99_REFERENCE/5- Prefix and Suffix.md`, the one reference file
+  the app had never connected: meta-, -ancy/-mancy, -oid, -ent, -ard, -hood,
+  -ling, -ness, -ship, -ful, -less, -like, -ly, -fold, -ish, -wise. Words and
+  meanings are transcribed faithfully; the mentor note, the predict options,
+  the understand note and the held-out transfer word are authored. The Vine
+  Terraces go from 12 units to 28.
+- The corpus the game now draws on: 2,577 lexicon words, 401 confusable
+  groups, 271 loanwords, 51 root families (217 words), 32 passages (136
+  questions), 59 verbal items, 28 Word DNA units — 493 registry entries.
+
+### Also
+
+- **Music answers progression.** `startMusic` takes a `warmth` read from the
+  works standing and the stars earned: a fuller valley gains a pad voice and
+  lets the line breathe a little more often. The key, the tempo and the
+  calm never change — it is the same music, further along.
+- **Coming back after days away** is met with one line: how long, how much
+  is ready to revisit, how many works can be built.
+- **A title that means something.** It reads stars and works, not session XP.
+- **The loader reads from disk under Node**, so `tools/verify.mjs` now
+  validates the real content pipeline (the curator's round composition, the
+  reach model and the weakness model are covered by the verifier).
+- **Robustness.** The router ignores a query after a route; Para Jumbles'
+  learning page and the Word DNA analytics no longer throw on a partial
+  record. All 44 routes sweep clean with no console errors.
+- Service worker cache v28; the sixteen new content files are precached.
+
 ## 1.0.0 — 2026-09-11 — The world
 
 The dream product, built on the owner's 2026-09-11 brief ("BUILD CAT OS"):

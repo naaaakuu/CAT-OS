@@ -221,3 +221,57 @@ export function waterGlints({ shapes, seed = 'glint', color = 'rgba(232,246,255,
     },
   };
 }
+
+/**
+ * A villager walking a route, there and back. The valley only has these
+ * once works have been built, so people arriving IS the progression: a
+ * settlement, not scenery.
+ *
+ * @param {Array<[number,number]>} route  world points, walked in order
+ * @param {number} [index]  which villager (colour, speed, phase)
+ */
+export function walker(route, index = 0) {
+  const r = rng(`walker:${index}`);
+  const speed = 0.010 + r() * 0.006;      // world px per ms
+  let t = r() * 4000;
+  let leg = Math.floor(r() * Math.max(1, route.length - 1));
+  let p = r();
+  let dir = 1;
+  let pause = 0;
+  let pos = { x: route[0][0], y: route[0][1] };
+  let facing = 1;
+  return {
+    kind: 'walker',
+    update(dt) {
+      t += dt;
+      if (pause > 0) { pause -= dt; return; }
+      const a = route[leg], b = route[leg + dir === route.length ? leg : leg + (dir > 0 ? 1 : 0)];
+      const from = dir > 0 ? route[leg] : route[leg + 1];
+      const to = dir > 0 ? route[leg + 1] : route[leg];
+      if (!from || !to) { dir = -dir; return; }
+      const dist = Math.hypot(to[0] - from[0], to[1] - from[1]) || 1;
+      p += (speed * dt) / dist;
+      if (p >= 1) {
+        p = 0;
+        if (dir > 0) { leg += 1; if (leg >= route.length - 1) { leg = route.length - 2; dir = -1; pause = 1200 + r() * 2600; } }
+        else { leg -= 1; if (leg < 0) { leg = 0; dir = 1; pause = 1200 + r() * 2600; } }
+      }
+      const f2 = dir > 0 ? route[leg] : route[leg + 1];
+      const t2 = dir > 0 ? route[leg + 1] : route[leg];
+      if (f2 && t2) {
+        pos = { x: f2[0] + (t2[0] - f2[0]) * p, y: f2[1] + (t2[1] - f2[1]) * p };
+        facing = t2[0] >= f2[0] ? 1 : -1;
+        void a; void b;
+      }
+    },
+    draw(ctx) {
+      const s = sprite('villager', { frame: pause > 0 ? 0 : Math.floor(t / 230) % 4, colour: index });
+      ctx.save();
+      ctx.translate(Math.round(pos.x), Math.round(pos.y));
+      if (facing < 0) ctx.scale(-1, 1);
+      ctx.drawImage(s.canvas, -s.ax, -s.ay);
+      ctx.restore();
+    },
+    get y() { return pos.y; },
+  };
+}

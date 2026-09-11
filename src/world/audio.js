@@ -179,11 +179,17 @@ function seeded(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) 
  * place already playing does nothing; a new place crossfades the pads and
  * moves the line to the new tonic.
  */
-export function startMusic(region = 'world', { hour = 'morning' } = {}) {
+export function startMusic(region = 'world', { hour = 'morning', warmth = 0 } = {}) {
   state.music.region = region; state.music.hour = hour;
+  // Warmth is how far the valley has come: 0 on the first morning, 1 for a
+  // grown, built settlement. It never changes the key or the tempo — it
+  // adds a voice and lets the line breathe a little more often, so coming
+  // back after months sounds like a fuller place, not a different one.
+  const warm = Math.max(0, Math.min(1, warmth));
+  state.music.warmth = warm;
   if (!state.music.on || !state.unlocked) return;
   if (gain() <= 0 || !ensure()) return;
-  if (state.music.playing && state.music.tonic === (TONIC[region] ?? TONIC.world) && state.music.hourPlaying === hour) return;
+  if (state.music.playing && state.music.tonic === (TONIC[region] ?? TONIC.world) && state.music.hourPlaying === hour && Math.abs((state.music.warmthPlaying ?? 0) - warm) < 0.2) return;
   stopMusic(0.9);
   const c = state.ctx;
   const tonic = TONIC[region] ?? TONIC.world;
@@ -194,6 +200,8 @@ export function startMusic(region = 'world', { hour = 'morning' } = {}) {
   // Two pads: the tonic and its fifth, each two detuned triangles through a
   // slowly breathing lowpass. Quiet enough to sit under the environment.
   const padNotes = night ? [pitch(tonic, 'do', 0), pitch(tonic, 'sol', 0)] : [pitch(tonic, 'do', 0), pitch(tonic, 'sol', 0), pitch(tonic, 'mi', 1)];
+  if (warm >= 0.45) padNotes.push(pitch(tonic, night ? 'mi' : 'la', 1));
+  if (warm >= 0.8) padNotes.push(pitch(tonic, 'do', 1));
   padNotes.forEach((f, i) => {
     const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 300 + i * 120; lp.Q.value = 0.7;
     const g = c.createGain(); g.gain.value = (night ? 0.02 : 0.026) / padNotes.length * 1.4;
@@ -202,7 +210,7 @@ export function startMusic(region = 'world', { hour = 'morning' } = {}) {
     lp.connect(g).connect(bed);
     pads.push(lfo);
   });
-  state.music.pads = pads; state.music.gain = bed; state.music.playing = true; state.music.tonic = tonic; state.music.hourPlaying = hour;
+  state.music.pads = pads; state.music.gain = bed; state.music.playing = true; state.music.tonic = tonic; state.music.hourPlaying = hour; state.music.warmthPlaying = warm;
   // The line: a scheduler that places pentatonic plucks on a slow grid,
   // leaning on the Valley Phrase's shapes; rests are part of the music.
   const r = seeded((region.length * 7919 + (night ? 13 : 1)) >>> 0);
@@ -218,7 +226,7 @@ export function startMusic(region = 'world', { hour = 'morning' } = {}) {
     if (bar === 0 && r() < 0.5) { // sometimes open a bar with the phrase head
       VALLEY_PHRASE.slice(0, 3).forEach(([d, o], i) => pluck(t + i * beat * 0.5, pitch(tonic, d, o), 0.03, (i - 1) * 0.2, lineGain));
       step += 2;
-    } else if (r() < (night ? 0.42 : 0.6)) {
+    } else if (r() < (night ? 0.42 : 0.6) + warm * 0.12) {
       const move = r() < 0.6 ? (r() < 0.5 ? -1 : 1) : (r() < 0.5 ? -2 : 2);
       last = Math.max(0, Math.min(DEGREES.length - 1, last + move));
       deg = DEGREES[last]; oct = r() < 0.2 ? 2 : 1;

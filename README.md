@@ -3,9 +3,15 @@
 **A living world that makes you better at CAT verbal ability by playing it.**
 
 CAT OS is an offline-first Progressive Web App for the VARC section of India's
-Common Admission Test. Since 1.0.0 it is not a study app with a game on top:
-it is a small, hand-drawn pixel-art valley you open, explore and grow, where
-every place is a real CAT skill and everything you learn changes the land.
+Common Admission Test. It is not a study app with a game on top: it is a
+small, hand-drawn pixel-art valley you open, explore and grow, where every
+place is a real CAT skill and everything you learn changes the land.
+
+The loop is **learn → perform → earn → build → see the world change**. You
+never browse a library: a curator chooses what is worth meeting next out of
+~3,900 words, 51 root families, 32 passages and 59 verbal items, weighing
+what you have mastered, what is due, how hard you can currently work, and
+what your own answers say you are weak at.
 
 - **The Rootwood** — 51 Latin and Greek root families (217 words): take a word
   apart, build one nobody taught you, and a tree grows in one of six groves.
@@ -22,13 +28,34 @@ every place is a real CAT skill and everything you learn changes the land.
 - **The Loom · The Summary Table · The Stranger's Bench** — Para Jumbles, Para
   Summary and Odd One Out: eight-tier journeys with a mentor who names the
   exact trap you fell for. The workshops grow as tiers are cleared.
-- **The Vine Terraces** — prefixes, suffixes, foreign words and CAT vocabulary
-  learned by pattern (Word DNA).
-- **The Hearth** — home: your title and level, three daily quests, the Ink
-  you have earned and the valley you can build with it, your collections,
-  achievements and records.
+- **The Vine Terraces** — 28 Word DNA units: prefixes, suffixes, roots,
+  foreign words and CAT vocabulary learned by pattern, each ending in a word
+  you were never shown.
+- **The Hearth** — home and the Workshop: the four crafts you have made, the
+  twenty-one works you can build with them, the day's three asks, and the
+  honest read on where you stand.
 - **The Wilds** — the weekly Gauntlet: the same thirty words all week, three
   minutes, against your own best.
+
+## The four crafts
+
+Each kind of thinking makes one kind of resource, and no place can make
+another place's:
+
+| Craft | Made by | Where |
+|---|---|---|
+| **Amber** | word knowledge | Meadow, Mirror Pond, Thicket, Rootwood, Terraces |
+| **Ink** | reading comprehension | the Reading Room |
+| **Thread** | verbal structure | the Loom, the Table, the Bench |
+| **Ember** | accuracy at CAT pace | three-star runs, clean revisits, the Gauntlet |
+
+Crafts are spent on **works** — stone paths, arched bridges, lanterns, the
+Reading Room's floors and its Observatory, beehives, the Quarter's square,
+the traveller's arch, the root shrine. Every work costs crafts *and* asks a
+standing of your record ("Read four passages at two stars or better"), so
+nothing in the valley can be bought before the learning that earns it, and
+the later works need three or four crafts at once. As works go up, villagers
+begin to walk the paths.
 
 ## Principles
 

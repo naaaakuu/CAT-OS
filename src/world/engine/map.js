@@ -13,7 +13,7 @@
 
 import { noise2, rng, ramp, mix, SKY, SEASON, PIGMENT, LIGHT } from './palette.js';
 import { sprite, Pix } from './sprites.js';
-import { particles, smoke, birds, butterflies, koi, hearthCat, clouds, waterGlints } from './life.js';
+import { particles, smoke, birds, butterflies, koi, hearthCat, clouds, waterGlints, walker } from './life.js';
 import { WORLD_W, WORLD_H, REGIONS, GROVE_SPOTS, LANTERN_SPOTS, regionAt } from '../regions.js';
 
 /* ------------------------------------------------------------------ */
@@ -249,14 +249,28 @@ export function paintTerrain(ctx, atmo, state) {
     if (d < 1 && n2(x / 7, y / 7) > 0.3) px(x, y, (x % 6 === 0 || y % 5 === 0) ? cobbleLine : d < 0.5 ? cobbleA : cobbleB);
   }
 
-  /* ---- Paths: worn earth with a dithered edge, rasterised from a stroked mask ---- */
+  /* ---- Paths: worn earth with a dithered edge, rasterised from a stroked
+          mask. Once the valley's paths are stoned, the same tracks are
+          laid in pale flags with a mortar grid: the first work the whole
+          valley can see. ---- */
   {
-    const mask = strokeMask(W, H, (m) => { for (const path of PATHS) strokePolyline(m, path, 6.8); });
-    const core = strokeMask(W, H, (m) => { for (const path of PATHS) strokePolyline(m, path, 4.4); });
+    const stoned = state?.built?.stonePaths === true;
+    const mask = strokeMask(W, H, (m) => { for (const path of PATHS) strokePolyline(m, path, stoned ? 7.6 : 6.8); });
+    const core = strokeMask(W, H, (m) => { for (const path of PATHS) strokePolyline(m, path, stoned ? 5.4 : 4.4); });
+    const flagA = mix(PIGMENT.stoneWarm, '#FFFFFF', 0.18);
+    const flagB = PIGMENT.stoneWarm;
+    const mortar = mix(PIGMENT.stoneWarm, PIGMENT.outline, 0.3);
     for (let y = 150; y < H; y += 1) for (let x = 0; x < W; x += 1) {
       const i = y * W + x;
-      if (core[i]) px(x, y, PIGMENT.path);
-      else if (mask[i]) px(x, y, (x + y) & 1 ? PIGMENT.path : PIGMENT.pathEdge);
+      if (!stoned) {
+        if (core[i]) px(x, y, PIGMENT.path);
+        else if (mask[i]) px(x, y, (x + y) & 1 ? PIGMENT.path : PIGMENT.pathEdge);
+      } else if (core[i]) {
+        const grid = (x % 5 === 0) || (y % 4 === 0);
+        px(x, y, grid ? mortar : (Math.floor(x / 5) + Math.floor(y / 4)) % 2 ? flagA : flagB);
+      } else if (mask[i]) {
+        px(x, y, (x + y) & 1 ? PIGMENT.pathEdge : mix(PIGMENT.stoneWarm, PIGMENT.pathEdge, 0.5));
+      }
     }
   }
 
@@ -481,6 +495,63 @@ export function buildWorldScene(state, atmo, opts = {}) {
   statics.push({ x: 300, y: 690, sprite: sprite('tree', { stage: 'in_leaf', seed: 'w-tree', season, kind: 'pine' }) });
   statics.push({ x: 396, y: 700, sprite: sprite('rock', { seed: 'w-rock', size: 2 }) });
 
+  /* ---- The works: everything Amber, Ink, Thread and Ember have built.
+          This is the whole point of the economy — the valley is visibly
+          the sum of what the learner has understood. ---- */
+  const built = state.built ?? {};
+  if (built.meadowHives) for (let i = 0; i < 3; i += 1) statics.push({ x: 62 + i * 22, y: 388 + (i % 2) * 8, sprite: sprite('hive', { seed: `mh${i}` }), region: 'meadow' });
+  if (built.pondLanterns) {
+    for (let i = 0; i < 6; i += 1) {
+      const a = (i / 6) * Math.PI * 2;
+      const x = POND.cx + Math.cos(a) * (POND.rx + 9), y = POND.cy + Math.sin(a) * (POND.ry + 7);
+      statics.push({ x, y, sprite: sprite('lantern', { lit: true }), region: 'pond' });
+      lamps.push({ x, y: y - 10, r: night ? 18 : 9, a: night ? 0.6 : 0.18, color: PIGMENT.lantern });
+    }
+  }
+  if (built.pondHeron) statics.push({ x: POND.cx - 44, y: POND.cy - 14, sprite: sprite('heron', {}), region: 'pond' });
+  if (built.thicketArch) statics.push({ x: 74, y: 512, sprite: sprite('arch', {}), region: 'thicket' });
+  if (built.rootShrine) statics.push({ x: GROVE_SPOTS.hearts.x, y: GROVE_SPOTS.hearts.y + 14, sprite: sprite('shrine', { lit: night }), region: 'rootwood' });
+  if (built.rootShrine && night) lamps.push({ x: GROVE_SPOTS.hearts.x, y: GROVE_SPOTS.hearts.y + 6, r: 18, a: 0.5, color: PIGMENT.lantern });
+  if (built.terraceArbour) statics.push({ x: 540, y: 214, sprite: sprite('arbour', {}), region: 'terraces' });
+  if (built.quarterSquare) {
+    statics.push({ x: 470, y: 606, sprite: sprite('well', {}), region: 'table' });
+    statics.push({ x: 440, y: 626, sprite: sprite('stall', { colour: 0 }), region: 'loom' });
+    statics.push({ x: 506, y: 636, sprite: sprite('stall', { colour: 1 }), region: 'table' });
+    statics.push({ x: 556, y: 600, sprite: sprite('stall', { colour: 2 }), region: 'bench' });
+  }
+  if (built.quarterLamps) {
+    for (const [x, y] of [[404, 546], [496, 586], [574, 520]]) {
+      statics.push({ x, y, sprite: sprite('lantern', { lit: true }) });
+      lamps.push({ x, y: y - 10, r: night ? 16 : 8, a: night ? 0.55 : 0.18, color: PIGMENT.lantern });
+    }
+  }
+  if (built.wildsLanterns) {
+    for (let i = 0; i < 4; i += 1) {
+      const x = i % 2 ? 310 : 372, y = 664 + i * 14;
+      statics.push({ x, y, sprite: sprite('lantern', { lit: true }), region: 'wilds' });
+      lamps.push({ x, y: y - 10, r: night ? 16 : 8, a: night ? 0.55 : 0.18, color: PIGMENT.lantern });
+    }
+  }
+  if (built.stoneBridges) {
+    statics.push({ x: 372, y: 302, sprite: sprite('stoneBridge', { w: 30 }) });
+    statics.push({ x: 344, y: 494, sprite: sprite('stoneBridge', { w: 28 }) });
+  }
+  // Villagers: the valley stops being scenery and becomes a settlement.
+  // One walks for every three works standing, up to six.
+  const worksBuilt = (state.builds ?? []).length;
+  const folk = Math.min(6, Math.floor(worksBuilt / 2));
+  if (folk > 0) {
+    const routes = [
+      [[214, 592], [280, 560], [340, 520], [300, 470]],
+      [[150, 440], [200, 470], [250, 520], [214, 566]],
+      [[424, 580], [470, 600], [516, 610], [560, 560]],
+      [[522, 420], [470, 470], [420, 520], [424, 566]],
+      [[84, 580], [130, 540], [180, 500], [150, 440]],
+      [[340, 660], [320, 620], [280, 590], [240, 570]],
+    ];
+    for (let i = 0; i < folk; i += 1) life.push(walker(routes[i], i));
+  }
+
   /* ---- Sky and weather life ---- */
   const cloudSys = clouds({ rect: { x: -40, y: 20, w: 720, h: 90 }, count: hour === 'night' ? 2 : 5, seed: 'clouds' });
   const birdSys = birds({ rect: { x: 0, y: 30, w: WORLD_W, h: 120 }, seed: 'birds' });
@@ -498,6 +569,57 @@ export function buildWorldScene(state, atmo, opts = {}) {
     time: 0,
     focus: opts.focus ?? null,
     terrain(ctx) { paintTerrain(ctx, atmo, state); },
+    /** Everything outside the 640 × 720 map: more sky above the mountains,
+     *  and haze below the road out. A tall phone must never see a bar. */
+    beyond(ctx, { ox, oy, z, w, h, worldH, worldW }) {
+      const sky = SKY[hour] ?? SKY.morning;
+      const li = LIGHT[hour] ?? LIGHT.morning;
+      const lit = (c) => (li.strength > 0 ? mix(c, li.tint, li.strength) : c);
+      /* The sides, on a screen wider than the valley: the same sky above
+         the same horizon, the same land below, so the map never floats in
+         a coloured box. */
+      const horizonY = oy + 150 * z;
+      const sideGround = lit(mix(PIGMENT.pine, '#3C5C42', 0.5));
+      for (const [sx, sw] of [[0, Math.max(0, ox)], [ox + worldW * z, Math.max(0, w - (ox + worldW * z))]]) {
+        if (sw <= 0) continue;
+        ctx.fillStyle = lit(sky[0]);
+        ctx.fillRect(sx, 0, sw + 1, Math.max(0, Math.min(h, horizonY)));
+        if (horizonY < h) {
+          const g = ctx.createLinearGradient(0, horizonY, 0, h);
+          g.addColorStop(0, sideGround);
+          g.addColorStop(1, lit(mix(PIGMENT.pine, '#16261C', 0.75)));
+          ctx.fillStyle = g;
+          ctx.fillRect(sx, Math.max(0, horizonY), sw + 1, h - Math.max(0, horizonY));
+        }
+      }
+      if (oy > 0) {
+        ctx.fillStyle = lit(sky[0]);
+        ctx.fillRect(0, 0, w, oy + 2);
+        if (night) {
+          // Stars keep going above the ridge.
+          const sr = rng('beyond-stars');
+          ctx.fillStyle = 'rgba(255,255,255,0.55)';
+          for (let i = 0; i < 60; i += 1) ctx.fillRect(Math.floor(sr() * w), Math.floor(sr() * Math.max(1, oy)), 2, 2);
+        }
+      }
+      const bottom = oy + worldH * z;
+      if (bottom < h) {
+        const near = lit(mix(PIGMENT.pine, '#2E4A38', 0.45));
+        const far = lit(mix(PIGMENT.pine, '#16261C', 0.75));
+        const g = ctx.createLinearGradient(0, bottom - 2, 0, h);
+        g.addColorStop(0, near);
+        g.addColorStop(1, far);
+        ctx.fillStyle = g;
+        ctx.fillRect(0, bottom - 2, w, h - bottom + 2);
+        // A ragged treeline hides the seam where the map stops.
+        const tr = rng('beyond-trees');
+        ctx.fillStyle = far;
+        for (let x = 0; x < w; x += 6) {
+          const hgt = 6 + Math.floor(tr() * 16);
+          ctx.fillRect(x, bottom - 2, 6, hgt);
+        }
+      }
+    },
     update(dt, t) {
       this.time = t;
       cloudSys.update(dt); birdSys.update(dt); weatherSys?.update(dt);
@@ -542,6 +664,16 @@ export function buildWorldScene(state, atmo, opts = {}) {
       g.addColorStop(0, 'rgba(220,230,246,0)'); g.addColorStop(1, night ? 'rgba(20,30,60,0.6)' : 'rgba(220,230,246,0.7)');
       ctx.fillStyle = g; ctx.fillRect(0, 650, WORLD_W, WORLD_H - 650);
     },
+    /** After the blit: soften the seam where the map meets the beyond, so a
+     *  wide screen reads as distance rather than as a border. */
+    hud(ctx, { ox, oy, z, w, h }) {
+      const right = ox + WORLD_W * z;
+      const fade = Math.max(10, Math.round(26 * z));
+      if (ox > 0) { const g = ctx.createLinearGradient(ox - fade, 0, ox + fade, 0); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.5, 'rgba(12,20,40,0.22)'); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.fillRect(ox - fade, 0, fade * 2, h); }
+      if (right < w) { const g = ctx.createLinearGradient(right - fade, 0, right + fade, 0); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.5, 'rgba(12,20,40,0.22)'); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.fillRect(right - fade, 0, fade * 2, h); }
+      const bottom = oy + WORLD_H * z;
+      if (bottom < h) { const g = ctx.createLinearGradient(0, bottom - fade, 0, bottom + fade); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.5, 'rgba(12,20,40,0.25)'); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.fillRect(0, bottom - fade, w, fade * 2); }
+    },
     hit(x, y) { return regionAt(x, y); },
     /** Where a region's growth animation should play from. */
     anchorOf(slug) { return REGIONS.find((x) => x.slug === slug)?.anchor ?? null; },
@@ -561,21 +693,21 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
   const { hour, season } = atmo;
   const night = hour === 'night' || hour === 'dusk';
   const portrait = !!opts.portrait;
-  const W = portrait ? 240 : 320, H = portrait ? 480 : 180;
+  const W = portrait ? 240 : 320, H = portrait ? 340 : 180;
   const n2 = noise2(`grove-${grove.slug}`);
   const grass = ramp((SEASON[season] ?? SEASON.summer).grass);
   const objects = [];
   const gr = rng(`grovescene:${grove.slug}`);
   // Stands: three rows, hand-placed and uneven.
   const rows = portrait
-    ? [[0.2, 236, 1], [0.8, 240, 1], [0.1, 200, 0.9], [0.5, 198, 0.85], [0.9, 206, 0.9], [0.3, 172, 0.8], [0.7, 176, 0.8], [0.12, 148, 0.7], [0.5, 146, 0.7], [0.88, 150, 0.7], [0.32, 128, 0.6]]
+    ? [[0.3, 200, 1.1], [0.7, 204, 1.1], [0.26, 180, 0.95], [0.5, 176, 0.9], [0.74, 182, 0.95], [0.33, 160, 0.85], [0.67, 162, 0.85], [0.29, 142, 0.75], [0.5, 140, 0.75], [0.71, 144, 0.75], [0.4, 126, 0.65]]
     : [[0.5, 150, 1], [0.32, 128, 1], [0.7, 132, 1], [0.18, 108, 0.9], [0.5, 104, 0.9], [0.84, 110, 0.9], [0.1, 84, 0.8], [0.36, 80, 0.8], [0.64, 82, 0.8], [0.9, 86, 0.8], [0.5, 66, 0.7]];
   // In the portrait scene the tended family takes the hero stand, centre front.
   const heroId = portrait ? opts.heroId ?? null : null;
   let rowIndex = 0;
   families.forEach((f, i) => {
     let fx, y, scale;
-    if (heroId && f.id === heroId) { fx = 0.5; y = 268; scale = 1.15; }
+    if (heroId && f.id === heroId) { fx = 0.5; y = 208; scale = 1.3; }
     else { [fx, y, scale] = rows[rowIndex % rows.length]; rowIndex += 1; }
     const x = Math.round(fx * W + (gr() - 0.5) * 12);
     const sp = f.stage === 'open_ground' ? sprite('rootStone', { seed: f.id }) : sprite('tree', { stage: f.stage, seed: f.id, season, vigor: Math.round(f.vigor * 4) / 4, landmark: f.landmark, due: f.due });
@@ -587,14 +719,14 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
   const bf = !night && season !== 'winter' ? butterflies({ rect: { x: 20, y: 60, w: W - 40, h: H - 80 }, count: 2, seed: `bf-${grove.slug}` }) : null;
   let selected = opts.selected ?? null;
   const scene = {
-    backdrop: '#0A1230', W, H, focusY: portrait ? 240 : 112,
+    backdrop: '#0A1230', W, H, focusY: portrait ? 166 : 112,
     terrain(ctx) {
       const sky = SKY[hour] ?? SKY.morning;
-      const skyH = portrait ? 90 : 44;
+      const skyH = portrait ? 56 : 44;
       for (let y = 0; y < skyH; y += 1) { ctx.fillStyle = mix(sky[1], sky[2], y / skyH); ctx.fillRect(0, y, W, 1); }
       // A canopy ceiling: overlapping dark masses along the top edge.
       const c = ramp(season === 'autumn' ? PIGMENT.autumn : season === 'winter' ? '#6F8677' : PIGMENT.canopyDeep);
-      const canopyH = portrait ? 100 : 70;
+      const canopyH = portrait ? 70 : 70;
       const pxl = new Pix(W, canopyH);
       const cr = rng(`canopy:${grove.slug}`);
       const cy = portrait ? 1.7 : 1;
@@ -607,22 +739,36 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
       ctx.drawImage(pxl.canvas, 0, 0);
       // Two great trunks frame the grove.
       const trunk = ramp(PIGMENT.trunk);
-      const trunkH = portrait ? 150 : 92;
+      const trunkH = portrait ? 108 : 92;
       for (const [tx, tw] of [[6, 9], [W - 16, 10]]) { ctx.fillStyle = trunk.base; ctx.fillRect(tx, 0, tw, trunkH); ctx.fillStyle = trunk.light; ctx.fillRect(tx, 0, 2, trunkH); ctx.fillStyle = trunk.dark; ctx.fillRect(tx + tw - 2, 0, 2, trunkH); }
       // The floor: mossy ground with light pools.
       const floorBase = mix(grass.base, '#3E6B4B', 0.28), floorShade = mix(grass.shade, '#3E6B4B', 0.3), floorPool = mix(grass.light, '#F3E9C2', 0.3);
-      for (let y = portrait ? 72 : 38; y < H; y += 1) for (let x = 0; x < W; x += 1) {
+      for (let y = portrait ? 50 : 38; y < H; y += 1) for (let x = 0; x < W; x += 1) {
         const g = n2(x / 16, y / 16);
         const pool = n2(x / 34 + 50, y / 34) > 0.66 && !night;
         ctx.fillStyle = pool ? mix(floorBase, floorPool, 0.6) : g < 0.4 ? floorShade : floorBase;
         ctx.fillRect(x, y, 1, 1);
       }
       // A path through the middle.
-      const pathTop = portrait ? 120 : 92;
+      const pathTop = portrait ? 84 : 92;
       for (let y = pathTop; y < H; y += 1) { const hw = 6 + (y - pathTop) * (portrait ? 0.08 : 0.25); ctx.fillStyle = PIGMENT.path; ctx.fillRect(Math.round(W / 2 - hw + Math.sin(y / 20) * 4), y, Math.round(hw * 2), 1); }
+      // A wall of wood behind the stands: a clearing has to be inside
+      // something, or it reads as a field with two trees in it.
+      if (portrait) {
+        const br = rng(`backwood:${grove.slug}`);
+        for (let i = 0; i < 18; i += 1) {
+          const bs = sprite('tree', { stage: br() > 0.5 ? 'mature' : 'in_leaf', seed: `bw${grove.slug}${i}`, season, kind: br() > 0.6 ? 'pine' : 'broad' });
+          ctx.drawImage(bs.canvas, Math.round(br() * (W + 40) - 20 - bs.ax), Math.round(76 + br() * 26 - bs.ay));
+        }
+        // A soft shadow under them, to seat the wall on the floor.
+        for (let y = 96; y < 120; y += 1) {
+          ctx.fillStyle = `rgba(20,34,24,${(0.24 * (1 - (y - 96) / 24)).toFixed(3)})`;
+          ctx.fillRect(0, y, W, 1);
+        }
+      }
       const tr = rng(`tufts:${grove.slug}`);
-      const floorTop = portrait ? 100 : 70;
-      for (let i = 0; i < (portrait ? 60 : 30); i += 1) { const s = sprite('grassTuft', { seed: `gt${i}`, season }); ctx.drawImage(s.canvas, Math.floor(tr() * W), floorTop + Math.floor(tr() * (H - floorTop - 6))); }
+      const floorTop = portrait ? 72 : 70;
+      for (let i = 0; i < (portrait ? 44 : 30); i += 1) { const s = sprite('grassTuft', { seed: `gt${i}`, season }); ctx.drawImage(s.canvas, Math.floor(tr() * W), floorTop + Math.floor(tr() * (H - floorTop - 6))); }
       for (let i = 0; i < (portrait ? 12 : 6); i += 1) { const s = sprite('flowerPatch', { seed: `gf${i}`, n: 3, colors: [2, 3, 6], w: 10, h: 7 }); ctx.drawImage(s.canvas, Math.floor(tr() * W), floorTop + 20 + Math.floor(tr() * (H - floorTop - 30))); }
     },
     update(dt) { ff?.update(dt); bf?.update(dt); },
@@ -837,6 +983,252 @@ export function buildBuildingScene(kind, level, atmo, extra = {}) {
     update(dt) { sm?.update(dt); catSys?.update(dt); bf?.update(dt); },
     objects(view, t) { const out = []; if (sm) out.push({ x: 0, y: 0, draw: (ctx) => sm.draw(ctx) }); if (catSys) out.push({ x: 0, y: 1, draw: (ctx) => catSys.draw(ctx) }); if (bf) out.push({ x: 0, y: 2, draw: (ctx) => bf.draw(ctx) }); return out; },
     light() { return LIGHT[hour] ?? LIGHT.morning; },
+    lights() { return lamps; },
+    hit() { return null; },
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* The full-bleed backdrop behind a run                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A tall landscape of one place, painted once and left still: the sky of
+ * the hour, a ridge, the ground, and the place's own signature — the
+ * tower, the water, the brambles, the looms. Portrait (240 x 420) so a
+ * phone covers it without cropping away what identifies the place.
+ *
+ * The run screens dim it heavily; it is there so the learner always knows
+ * where in the valley they are standing, never to be stared at.
+ */
+export function buildBackdropScene(slug, state, atmo) {
+  const { hour, season } = atmo;
+  const W = 240, H = 340;
+  const night = hour === 'night' || hour === 'dusk';
+  const HOR = 124;                       // where the ground begins
+  const n2 = noise2(`bd-${slug}`);
+  const r = rng(`bd-${slug}`);
+  const seasonPal = SEASON[season] ?? SEASON.summer;
+  const grass = ramp(slug === 'meadow' ? seasonPal.meadow : seasonPal.grass);
+  const lamps = [];
+  // The window a phone actually shows: cover-zoom crops the sides, and the
+  // sheet covers everything below y ~236. Every signature lives in here.
+  const SAFE_X = 56, SAFE_W = 128, BAND_TOP = HOR + 6, BAND_BOT = HOR + 84;
+  const stars = night ? Array.from({ length: 44 }, () => ({ x: Math.floor(r() * W), y: Math.floor(r() * (HOR - 34)), b: r() })) : [];
+
+  const sky = (ctx) => {
+    const s = SKY[hour] ?? SKY.morning;
+    for (let y = 0; y < HOR; y += 1) {
+      ctx.fillStyle = mix(mix(s[0], s[1], Math.min(1, y / 84)), s[2], Math.max(0, (y - 76) / 78));
+      ctx.fillRect(0, y, W, 1);
+    }
+    for (const st of stars) { ctx.fillStyle = `rgba(255,255,255,${0.2 + st.b * 0.65})`; ctx.fillRect(st.x, st.y, 1, 1); }
+    if (night) {
+      // A moon, so a night backdrop has one warm thing in it.
+      ctx.fillStyle = 'rgba(255,246,214,0.92)';
+      for (let y = -7; y <= 7; y += 1) {
+        const half = Math.floor(Math.sqrt(49 - y * y));
+        for (let x = -half; x <= half; x += 1) {
+          const dx = x + 3, dy = y - 1;
+          if (dx * dx + dy * dy <= 42) continue;   // the bite that makes a crescent
+          ctx.fillRect(190 + x, 36 + y, 1, 1);
+        }
+      }
+    }
+  };
+  /** A ridge that lightens toward its base, the way distance works. */
+  const ridge = (ctx, colour, haze, base, amp, freq) => {
+    for (let x = 0; x < W; x += 1) {
+      const h = base + Math.floor(n2(x / freq, 3) * amp);
+      const span = Math.max(1, HOR - h + 2);
+      for (let y = h; y < HOR + 2; y += 1) {
+        ctx.fillStyle = mix(colour, haze, Math.min(0.55, ((y - h) / span) * 0.7));
+        ctx.fillRect(x, y, 1, 1);
+      }
+      ctx.fillStyle = mix(colour, '#FFFFFF', 0.28);
+      ctx.fillRect(x, h, 1, 1);
+    }
+  };
+  const ground = (ctx) => {
+    const gBase = grass.base;
+    const gLight = mix(grass.base, grass.light, 0.55);
+    const gShade = mix(grass.base, grass.shade, 0.55);
+    for (let y = HOR; y < H; y += 1) {
+      for (let x = 0; x < W; x += 1) {
+        const g = n2(x / 20, y / 20);
+        ctx.fillStyle = g > 0.63 ? gLight : g < 0.37 ? gShade : gBase;
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+    for (let y = HOR; y < HOR + 9; y += 1) { ctx.fillStyle = `rgba(20,30,40,${0.18 * (1 - (y - HOR) / 9)})`; ctx.fillRect(0, y, W, 1); }
+    // The very bottom darkens: the ground the learner is standing on.
+    for (let y = H - 56; y < H; y += 1) { ctx.fillStyle = `rgba(12,18,34,${0.5 * ((y - (H - 56)) / 56) ** 1.4})`; ctx.fillRect(0, y, W, 1); }
+  };
+  const treeline = (ctx, y, n, kind, stage) => {
+    for (let i = 0; i < n; i += 1) {
+      const s = sprite('tree', { stage, seed: `bdt-${slug}-${i}`, season, kind });
+      ctx.drawImage(s.canvas, Math.round(SAFE_X + r() * SAFE_W - s.ax), Math.round(y + r() * 12 - s.ay));
+    }
+  };
+  const scatter = (ctx, name, n, y0, y1, params = {}) => {
+    for (let i = 0; i < n; i += 1) {
+      const s = sprite(name, { seed: `bds-${slug}-${name}-${i}`, season, ...params });
+      ctx.drawImage(s.canvas, Math.round(r() * W - s.ax / 2), Math.round(y0 + r() * (y1 - y0) - s.ay));
+    }
+  };
+
+  /* Every place puts its signature in the band just under the horizon
+     (y 150–290), because that is the part of the screen a sheet does not
+     cover on a phone. */
+  const terrain = (ctx) => {
+    sky(ctx);
+    const hazeC = SKY[hour]?.[2] ?? '#EEEEEE';
+    ridge(ctx, mix(PIGMENT.mountainFar, hazeC, night ? 0.3 : 0.45), hazeC, 58, 20, 46);
+    ridge(ctx, mix(PIGMENT.mountain, night ? '#16264C' : '#8FA6CE', 0.38), hazeC, 90, 14, 34);
+    // A treeline along the far bank, so the ground never meets the hills
+    // in a straight line.
+    {
+      const tl = ramp(night ? '#1E3A2C' : mix(PIGMENT.pine, hazeC, 0.28));
+      for (let x = 0; x < W; x += 1) {
+        const h = HOR - 4 - Math.floor(n2(x / 9, 7) * 9);
+        ctx.fillStyle = (x & 1) ? tl.base : tl.shade;
+        ctx.fillRect(x, h, 1, HOR - h + 1);
+      }
+    }
+    ground(ctx);
+
+    if (slug === 'meadow') {
+      treeline(ctx, HOR + 2, 3, 'broad', 'mature');
+      const bloom = Math.min(1, (state?.meadow?.mastered ?? 0) / 160);
+      for (let i = 0; i < 34 + Math.round(bloom * 90); i += 1) {
+        const s = sprite('flower', { color: Math.floor(r() * 7), seed: `bdf${i}`, tall: r() > 0.7 });
+        ctx.drawImage(s.canvas, Math.round(r() * W - s.ax), Math.round(BAND_TOP + r() * 110 - s.ay));
+      }
+      if (state?.meadow?.path) for (let x = 0; x < W; x += 14) { const s = sprite('paving', { w: 16, seed: `mp${x}` }); ctx.drawImage(s.canvas, x - 2, BAND_BOT - 8); }
+      if (state?.meadow?.hives) for (let i = 0; i < 3; i += 1) { const s = sprite('hive', { seed: `bh${i}` }); ctx.drawImage(s.canvas, SAFE_X + 8 + i * 38 - s.ax, BAND_TOP + 28 - s.ay); }
+      scatter(ctx, 'grassTuft', 20, HOR + 10, HOR + 150);
+    } else if (slug === 'pond') {
+      const C = { cx: 120, cy: 206, rx: 96, ry: 44 };
+      const body = ramp(night ? '#213B5E' : hour === 'dusk' ? '#5F6BA8' : PIGMENT.water);
+      for (let y = HOR; y < H; y += 1) {
+        for (let x = 0; x < W; x += 1) {
+          const d = ((x - C.cx) ** 2) / (C.rx ** 2) + ((y - C.cy) ** 2) / (C.ry ** 2);
+          if (d > 1) continue;
+          const g = n2(x / 14, y / 9);
+          ctx.fillStyle = d > 0.87 ? mix(body.light, PIGMENT.sand, 0.35) : g > 0.6 ? body.light : g < 0.4 ? body.shade : body.base;
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+      for (let i = 0; i < 8; i += 1) { const s = sprite('lilypad', { seed: `bdl${i}`, bloom: i % 3 === 0 }); ctx.drawImage(s.canvas, Math.round(SAFE_X + r() * SAFE_W - s.ax), Math.round(184 + r() * 52 - s.ay)); }
+      scatter(ctx, 'reeds', 8, HOR + 2, HOR + 22);
+      treeline(ctx, HOR - 4, 2, 'broad', 'in_leaf');
+      if (state?.pond?.lanterns) {
+        for (let i = 0; i < 4; i += 1) {
+          const s = sprite('lantern', { lit: true });
+          const x = SAFE_X + 8 + i * 38, y = HOR + 10;
+          ctx.drawImage(s.canvas, x - s.ax, y - s.ay);
+          lamps.push({ x, y: y - 8, r: 22, a: night ? 0.65 : 0.2, color: PIGMENT.lantern });
+        }
+      }
+      if (state?.pond?.heron) { const s = sprite('heron', {}); ctx.drawImage(s.canvas, 172 - s.ax, HOR + 30 - s.ay); }
+    } else if (slug === 'thicket') {
+      for (let i = 0; i < 18; i += 1) {
+        const lit = i < (state?.thicket?.lanterns ?? 0);
+        const s = sprite('bramble', { seed: `bdb${i}`, season, lit });
+        ctx.drawImage(s.canvas, Math.round(r() * W - s.ax), Math.round(HOR + 4 + r() * 120 - s.ay));
+      }
+      if (state?.thicket?.path) for (let x = 0; x < W; x += 14) { const s = sprite('paving', { w: 16, seed: `tp${x}` }); ctx.drawImage(s.canvas, x - 2, BAND_BOT - 20); }
+      for (let i = 0; i < Math.min(6, state?.thicket?.lanterns ?? 0); i += 1) {
+        const s = sprite('lantern', { lit: true });
+        const x = SAFE_X + 10 + (i % 3) * 54, y = HOR + 22 + Math.floor(i / 3) * 42;
+        ctx.drawImage(s.canvas, x - s.ax, y - s.ay);
+        lamps.push({ x, y: y - 10, r: 24, a: night ? 0.7 : 0.22, color: PIGMENT.lantern });
+      }
+      if (state?.thicket?.arch) { const s = sprite('arch', {}); ctx.drawImage(s.canvas, 120 - s.ax, HOR + 28 - s.ay); }
+      treeline(ctx, HOR - 8, 4, 'pine', 'mature');
+    } else if (slug === 'rootwood') {
+      treeline(ctx, HOR - 4, 4, 'broad', 'ancient');
+      treeline(ctx, HOR + 30, 4, 'broad', 'mature');
+      if (state?.built?.rootShrine) { const s = sprite('shrine', {}); ctx.drawImage(s.canvas, 120 - s.ax, HOR + 66 - s.ay); }
+      scatter(ctx, 'rootStone', 4, HOR + 40, HOR + 100);
+      scatter(ctx, 'grassTuft', 14, HOR + 8, HOR + 150);
+    } else if (slug === 'reading-room') {
+      const t = sprite('tower', { floors: state?.reading?.floors ?? 1, lit: night ? (state?.reading?.litWindows ?? 0) : 0, observatory: state?.reading?.observatory, night });
+      ctx.drawImage(t.canvas, 120 - t.ax, HOR + 54 - t.ay);
+      if (night || state?.built?.rrLamp) lamps.push({ x: 120, y: HOR + 22, r: 42, a: night ? 0.55 : 0.18, color: PIGMENT.windowLight });
+      treeline(ctx, HOR + 4, 3, 'pine', 'in_leaf');
+      scatter(ctx, 'grassTuft', 12, HOR + 10, HOR + 150);
+    } else if (slug === 'terraces') {
+      for (let i = 0; i < 5; i += 1) {
+        const wall = sprite('terraceWall', { w: W - 16, level: Math.max(0, Math.min(3, (state?.terraces?.level ?? 0) - i)) });
+        ctx.drawImage(wall.canvas, 8, HOR + 6 + i * 26);
+      }
+      if (state?.terraces?.arbour) { const s = sprite('arbour', {}); ctx.drawImage(s.canvas, 120 - s.ax, HOR + 4 - s.ay); }
+      scatter(ctx, 'bush', 6, HOR + 4, HOR + 120, { berries: true });
+    } else if (slug === 'loom' || slug === 'table' || slug === 'bench') {
+      const s = sprite('workshop', { kind: slug, level: state?.[slug]?.level ?? 0, lit: night });
+      ctx.drawImage(s.canvas, 116 - s.ax, HOR + 56 - s.ay);
+      if (night || state?.built?.quarterLamps) {
+        const l = sprite('lantern', { lit: true });
+        ctx.drawImage(l.canvas, 158 - l.ax, HOR + 56 - l.ay);
+        lamps.push({ x: 158, y: HOR + 44, r: 26, a: night ? 0.6 : 0.2, color: PIGMENT.lantern });
+      }
+      if (state?.built?.quarterSquare) {
+        for (let i = 0; i < W; i += 14) { const pv = sprite('paving', { w: 16, seed: `qp${i}` }); ctx.drawImage(pv.canvas, i - 2, HOR + 62); }
+        const st = sprite('stall', { colour: slug === 'loom' ? 0 : slug === 'table' ? 1 : 2 });
+        ctx.drawImage(st.canvas, 70 - st.ax, HOR + 80 - st.ay);
+        const wl = sprite('well', {}); ctx.drawImage(wl.canvas, 168 - wl.ax, HOR + 84 - wl.ay);
+      }
+      treeline(ctx, HOR - 2, 2, 'broad', 'mature');
+      scatter(ctx, 'grassTuft', 12, HOR + 10, HOR + 150);
+    } else if (slug === 'wilds') {
+      for (let y = HOR; y < H; y += 1) {
+        const t = (y - HOR) / (H - HOR);
+        const w = 6 + t * 46, cx = 120 + Math.sin(t * 2.3) * 14;
+        for (let x = Math.round(cx - w / 2); x < Math.round(cx + w / 2); x += 1) {
+          if (x < 0 || x >= W) continue;
+          ctx.fillStyle = n2(x / 6, y / 6) > 0.5 ? PIGMENT.path : PIGMENT.pathEdge;
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+      if (state?.built?.wildsLanterns) {
+        for (let i = 0; i < 4; i += 1) {
+          const s = sprite('lantern', { lit: true });
+          const x = i % 2 ? 158 : 82, y = HOR + 16 + i * 38;
+          ctx.drawImage(s.canvas, x - s.ax, y - s.ay);
+          lamps.push({ x, y: y - 10, r: 24, a: night ? 0.65 : 0.2, color: PIGMENT.lantern });
+        }
+      }
+      treeline(ctx, HOR - 8, 4, 'pine', 'mature');
+      scatter(ctx, 'rock', 5, HOR + 16, HOR + 120, { size: 2 });
+    } else {
+      const s = sprite('cottage', { level: state?.hearth?.level ?? 1, lit: night, smoke: false });
+      ctx.drawImage(s.canvas, 120 - s.ax, HOR + 56 - s.ay);
+      lamps.push({ x: 120, y: HOR + 36, r: night ? 34 : 20, a: night ? 0.55 : 0.16, color: PIGMENT.windowLight });
+      treeline(ctx, HOR - 6, 3, 'broad', 'mature');
+      if (state?.built?.stonePaths) for (let x = 0; x < W; x += 14) { const pv = sprite('paving', { w: 16, seed: `hp${x}` }); ctx.drawImage(pv.canvas, x - 2, HOR + 64); }
+      scatter(ctx, 'flowerPatch', 4, HOR + 70, HOR + 120, { n: 6, colors: [0, 1, 3], w: 18, h: 9 });
+    }
+  };
+
+  const light = LIGHT[hour] ?? LIGHT.morning;
+  // A backdrop is lit a little more kindly than the map: a run must be
+  // readable at midnight without the place disappearing.
+  const softened = { ...light, strength: light.strength * 0.78 };
+
+  return {
+    backdrop: (SKY[hour] ?? SKY.morning)[0], W, H, focusY: 196,
+    terrain,
+    beyond(ctx, { oy, z, w, h }) {
+      const s = SKY[hour] ?? SKY.morning;
+      const tinted = mix(s[0], softened.tint, softened.strength);
+      if (oy > 0) { ctx.fillStyle = tinted; ctx.fillRect(0, 0, w, oy + 2); }
+      const bottom = oy + H * z;
+      if (bottom < h) { ctx.fillStyle = mix(mix(grass.shade, '#121B2C', 0.62), softened.tint, softened.strength); ctx.fillRect(0, bottom - 2, w, h - bottom + 2); }
+    },
+    update() { /* still */ },
+    objects() { return []; },
+    light() { return softened; },
     lights() { return lamps; },
     hit() { return null; },
   };

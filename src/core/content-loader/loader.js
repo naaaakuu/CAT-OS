@@ -30,7 +30,23 @@ export class ContentError extends Error {
 /** Cache schemas per session; they are immutable files. */
 const schemaCache = new Map();
 
+/** In the browser there is only fetch. Under Node (tools/verify.mjs) the
+ *  same loader reads the repository from disk, so the tool and the app can
+ *  never validate different content. */
+const IS_NODE = typeof window === 'undefined' && typeof process !== 'undefined' && !!process.versions?.node;
+
 async function fetchJSON(path) {
+  if (IS_NODE) {
+    try {
+      const { readFile } = await import('node:fs/promises');
+      const { fileURLToPath } = await import('node:url');
+      const { dirname, join } = await import('node:path');
+      const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
+      return JSON.parse(await readFile(join(root, path), 'utf8'));
+    } catch (cause) {
+      throw new ContentError(`Could not read ${path} from disk (${cause.message}).`);
+    }
+  }
   let res;
   try {
     res = await fetch(path);

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0013",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "prefix",
+    "title": "meta-",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "prefix",
+    "label": "meta-",
+    "origin_language": "Greek",
+    "core_meaning": "beyond, after, or a change of",
+    "mentor_note": "Meta always steps outside the thing it names. Metaphysics stands beyond physics; metamorphosis is a change of the form itself. When you meet it in an argument, ask what the writer has stepped outside of."
+  },
+  "members": [
+    {
+      "word": "metaphysics",
+      "meaning": "the branch of philosophy that deals with what lies beyond physics",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "metacarpals",
+      "meaning": "the bones of the hand beyond the wrist",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "metamorphosis",
+      "meaning": "a complete change of form",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "metastasis",
+      "meaning": "the spread of a disease beyond its original site",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "metalanguage",
+      "meaning": "a language used to describe another language",
+      "part_of_speech": "noun",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Beyond, after, or a change of something",
+        "correct": true
+      },
+      {
+        "text": "Below or underneath something",
+        "correct": false
+      },
+      {
+        "text": "Against or in opposition to something",
+        "correct": false
+      }
+    ],
+    "understand_note": "Meta marks a step outside or past: past physics, past the wrist, past one form into another. In CAT reading it often signals a writer commenting on the discussion itself rather than on its subject.",
+    "applies": [
+      {
+        "held_out_word": "metalanguage",
+        "prompt": "Knowing meta- means beyond or about, what do you think a metalanguage is?",
+        "options": [
+          {
+            "text": "A language used to talk about another language",
+            "correct": true
+          },
+          {
+            "text": "A language spoken by very few people",
+            "correct": false,
+            "trap": "context_mismatch"
+          },
+          {
+            "text": "The oldest ancestor of a language family",
+            "correct": false,
+            "trap": "literal_only"
+          }
+        ]
+      }
+    ]
+  }
+}

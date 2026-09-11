@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0025",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ly",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ly",
+    "origin_language": "Germanic",
+    "core_meaning": "like, or characteristic of",
+    "mentor_note": "Everyone learns -ly as the adverb ending, and then meets manly, saintly, heavenly — adjectives. The suffix means \"like\", and whether the result is an adverb or an adjective depends on what it was attached to."
+  },
+  "members": [
+    {
+      "word": "manly",
+      "meaning": "like a man",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "friendly",
+      "meaning": "like a friend",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "saintly",
+      "meaning": "like a saint",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "heavenly",
+      "meaning": "like heaven",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "scholarly",
+      "meaning": "like a scholar; careful and learned",
+      "part_of_speech": "adjective",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Having the character of the thing named",
+        "correct": true
+      },
+      {
+        "text": "Happening at a particular time",
+        "correct": false
+      },
+      {
+        "text": "In the opposite manner",
+        "correct": false
+      }
+    ],
+    "understand_note": "Attach -ly to a noun and you get an adjective (friend gives friendly); attach it to an adjective and you get an adverb (quick gives quickly). Same suffix, two jobs.",
+    "applies": [
+      {
+        "held_out_word": "scholarly",
+        "prompt": "Knowing -ly means \"like\", what does a scholarly treatment of a subject mean?",
+        "options": [
+          {
+            "text": "One conducted with the care and learning of a scholar",
+            "correct": true
+          },
+          {
+            "text": "One intended for schoolchildren",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "One written in a deliberately obscure style",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

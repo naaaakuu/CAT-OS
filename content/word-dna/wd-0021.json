@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0021",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ship",
+    "estimated_time_sec": 150,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ship",
+    "origin_language": "Germanic",
+    "core_meaning": "a state, a rank, or a skill",
+    "mentor_note": "Ship covers three related ideas: what you are (citizenship), where you stand (professorship), and what you can do (penmanship). Which one is meant is always decided by the word in front of it."
+  },
+  "members": [
+    {
+      "word": "penmanship",
+      "meaning": "the art of writing by hand",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "craftsmanship",
+      "meaning": "the skill of making things well",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "township",
+      "meaning": "a unit of local government",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "musicianship",
+      "meaning": "the skill of a musician",
+      "part_of_speech": "noun",
+      "held_out": false
+    },
+    {
+      "word": "stewardship",
+      "meaning": "the careful management of something in one’s care",
+      "part_of_speech": "noun",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "A state, a rank, or a skill",
+        "correct": true
+      },
+      {
+        "text": "Something related to sailing",
+        "correct": false
+      },
+      {
+        "text": "A group of people working together",
+        "correct": false
+      }
+    ],
+    "understand_note": "Ship has nothing to do with boats: it is an old word for shape or condition. Craftsmanship is the condition of being a craftsman — that is, the skill itself.",
+    "applies": [
+      {
+        "held_out_word": "stewardship",
+        "prompt": "Knowing -ship names a state or skill, and a steward manages what belongs to another, what is stewardship?",
+        "options": [
+          {
+            "text": "The careful management of something entrusted to you",
+            "correct": true
+          },
+          {
+            "text": "A journey taken by sea",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "The legal ownership of property",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}

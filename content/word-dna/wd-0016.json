@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wd-0016",
+    "type": "wd",
+    "version": 1,
+    "status": "accepted",
+    "kind": "suffix",
+    "title": "-ent",
+    "estimated_time_sec": 192,
+    "source": {
+      "publication": "Section 5: Prefix and Suffix (owner-supplied reference)",
+      "usage_note": "Personal study only. Every word and meaning transcribed faithfully from the source; the teaching layer (mentor_note, discovery) is authored for CAT OS."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wd-002",
+    "prompt_version": "in-repo authored (the final world rebuild); Word DNA frameworks applied",
+    "reviewer_notes": "Authored from the previously unconnected prefix/suffix reference. Words and meanings faithful to the source; the held-out word and its apply question are authored. Owner review pending."
+  },
+  "unit": {
+    "kind": "suffix",
+    "label": "-ent",
+    "origin_language": "Latin",
+    "core_meaning": "being, manifesting or possessing a quality",
+    "mentor_note": "This is one of the most useful suffixes on the exam, because the words that carry it are the adjectives CAT reaches for when it wants a precise temperament: truculent, intransigent, plangent, indigent."
+  },
+  "members": [
+    {
+      "word": "truculent",
+      "meaning": "showing aggression",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "imminent",
+      "meaning": "about to happen; posing pending danger",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "flocculent",
+      "meaning": "having a woolly texture",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "indigent",
+      "meaning": "in need; poor",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "intransigent",
+      "meaning": "stubborn; refusing to compromise",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "diligent",
+      "meaning": "showing earnest and careful effort",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "effulgent",
+      "meaning": "shining brilliantly; radiant",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "plangent",
+      "meaning": "loud and mournful in sound",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "continent",
+      "meaning": "showing restraint, especially over appetites",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "ambivalent",
+      "meaning": "having mixed or uncertain feelings",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "prudent",
+      "meaning": "showing good judgement; wise",
+      "part_of_speech": "adjective",
+      "held_out": false
+    },
+    {
+      "word": "refulgent",
+      "meaning": "shining brightly",
+      "part_of_speech": "adjective",
+      "held_out": true
+    }
+  ],
+  "discovery": {
+    "notice_prompt": "What do these words share?",
+    "predict_options": [
+      {
+        "text": "Possessing or showing a particular quality",
+        "correct": true
+      },
+      {
+        "text": "Doing something for the first time",
+        "correct": false
+      },
+      {
+        "text": "Lacking a particular quality",
+        "correct": false
+      }
+    ],
+    "understand_note": "Ent turns a quality into a person or thing that has it: truculence gives truculent, diligence gives diligent. When an author picks an -ent adjective, they are naming a disposition, not an action.",
+    "applies": [
+      {
+        "held_out_word": "refulgent",
+        "prompt": "You already know effulgent means radiant. Knowing -ent marks a possessed quality and fulg- means to shine, what does refulgent mean?",
+        "options": [
+          {
+            "text": "Shining brightly",
+            "correct": true
+          },
+          {
+            "text": "Refusing to shine or reflect",
+            "correct": false,
+            "trap": "literal_only"
+          },
+          {
+            "text": "Repeated over and over",
+            "correct": false,
+            "trap": "context_mismatch"
+          }
+        ]
+      }
+    ]
+  }
+}
