@@ -13,7 +13,7 @@
 
 import { noise2, rng, ramp, mix, SKY, SEASON, PIGMENT, LIGHT } from './palette.js';
 import { sprite, Pix } from './sprites.js';
-import { particles, smoke, birds, butterflies, koi, hearthCat, clouds, waterGlints, walker } from './life.js';
+import { particles, smoke, birds, butterflies, koi, hearthCat, clouds, waterGlints, walker, grazers, ducks } from './life.js';
 import { WORLD_W, WORLD_H, REGIONS, GROVE_SPOTS, LANTERN_SPOTS, regionAt } from '../regions.js';
 
 /* ------------------------------------------------------------------ */
@@ -536,6 +536,23 @@ export function buildWorldScene(state, atmo, opts = {}) {
     statics.push({ x: 372, y: 302, sprite: sprite('stoneBridge', { w: 30 }) });
     statics.push({ x: 344, y: 494, sprite: sprite('stoneBridge', { w: 28 }) });
   }
+  /* Creatures arrive because the learner brought them. Nothing here is
+     decoration on a timer: a deer needs an old wood, sheep need fields in
+     bloom, ducks need a pond that has been worked, the dog needs a home
+     with a lit door. */
+  if (state.rootwood.matureCount >= 8) {
+    life.push(grazers({ rect: { x: 40, y: 318, w: 250, h: 26 }, count: Math.min(4, 1 + Math.floor(state.rootwood.matureCount / 10)), kind: 'deer', seed: 'wood-deer' }));
+  }
+  if (state.meadow.fieldsDone >= 1 || state.meadow.mastered >= 90) {
+    life.push(grazers({ rect: { x: 46, y: 392, w: 210, h: 62 }, count: Math.min(6, 2 + state.meadow.fieldsDone), kind: 'sheep', seed: 'meadow-sheep' }));
+  }
+  if (state.pond.koi >= 4) {
+    life.push(ducks({ cx: POND.cx, cy: POND.cy, rx: POND.rx, ry: POND.ry, count: Math.min(5, Math.floor(state.pond.koi / 3)), seed: 'pond-ducks' }));
+  }
+  if (built.hearthLevel >= 3) {
+    life.push(grazers({ rect: { x: 178, y: 574, w: 80, h: 22 }, count: 1, kind: 'dog', seed: 'hearth-dog' }));
+  }
+
   // Villagers: the valley stops being scenery and becomes a settlement.
   // One walks for every three works standing, up to six.
   const worksBuilt = (state.builds ?? []).length;

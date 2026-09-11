@@ -339,16 +339,48 @@ export class WorldRenderer {
     // Blit to the screen at the camera's zoom. Anything the map does not
     // cover is painted by the scene's `beyond` — sky above the mountains,
     // haze below the road — so a tall phone never shows a dead bar.
+    //
+    // Both edge painters are pure functions of the camera geometry, so
+    // they are skipped entirely when the map covers the screen (the
+    // common case) and cached otherwise: they must never cost a frame.
     const s = this.sctx, z = this.cam.zoom * this.dpr;
+    const W = this.screen.width, H = this.screen.height;
     s.imageSmoothingEnabled = false;
     s.fillStyle = this.scene.backdrop ?? '#0A1230';
-    s.fillRect(0, 0, this.screen.width, this.screen.height);
-    const ox = Math.round(this.screen.width / 2 - this.cam.x * z);
-    const oy = Math.round(this.screen.height / 2 - this.cam.y * z);
-    this.scene.beyond?.(s, { ox, oy, z, w: this.screen.width, h: this.screen.height, worldW, worldH }, this.time);
+    s.fillRect(0, 0, W, H);
+    const ox = Math.round(W / 2 - this.cam.x * z);
+    const oy = Math.round(H / 2 - this.cam.y * z);
+    const covers = ox <= 0 && oy <= 0 && ox + worldW * z >= W && oy + worldH * z >= H;
+    const edgeView = { ox, oy, z, w: W, h: H, worldW, worldH, dpr: this.dpr };
+    if (!covers) this.#edge('beyond', edgeView);
     s.drawImage(this.world, 0, 0, worldW, worldH, ox, oy, Math.round(worldW * z), Math.round(worldH * z));
-    this.scene.hud?.(s, { ox, oy, z, w: this.screen.width, h: this.screen.height, dpr: this.dpr }, this.time);
+    if (!covers) this.#edge('hud', edgeView);
   }
+
+  /** Paint (and cache) one of the scene's edge layers. */
+  #edge(which, view) {
+    const fn = this.scene[which];
+    if (!fn) return;
+    const key = `${view.ox}|${view.oy}|${view.z.toFixed(3)}|${view.w}|${view.h}`;
+    let slot = this.#edges[which];
+    if (!slot) {
+      const c = document.createElement('canvas');
+      slot = { key: '', canvas: c, ctx: c.getContext('2d') };
+      this.#edges[which] = slot;
+    }
+    if (slot.canvas.width !== view.w || slot.canvas.height !== view.h) {
+      slot.canvas.width = view.w; slot.canvas.height = view.h; slot.key = '';
+    }
+    if (slot.key !== key) {
+      slot.ctx.clearRect(0, 0, view.w, view.h);
+      slot.ctx.imageSmoothingEnabled = false;
+      fn.call(this.scene, slot.ctx, view, this.time);
+      slot.key = key;
+    }
+    this.sctx.drawImage(slot.canvas, 0, 0);
+  }
+
+  #edges = {};
 }
 
 function hexA(hex, a) {

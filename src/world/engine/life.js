@@ -275,3 +275,89 @@ export function walker(route, index = 0) {
     get y() { return pos.y; },
   };
 }
+
+/**
+ * Grazing animals: they wander a rectangle at a walking pace, stop to
+ * graze, and turn to face where they are going. Used for the deer at the
+ * Rootwood's edge, the sheep in the Meadow and the dog at the Hearth —
+ * every one of them arrives only because the learner made it arrive.
+ *
+ * @param {object} o { rect, count, kind: 'deer'|'sheep'|'dog', seed, params }
+ */
+export function grazers({ rect, count = 3, kind = 'sheep', seed = 'graze', params = {} }) {
+  const r = rng(`${seed}:${kind}`);
+  const herd = Array.from({ length: count }, (_, i) => ({
+    x: rect.x + r() * rect.w,
+    y: rect.y + r() * rect.h,
+    tx: rect.x + r() * rect.w,
+    ty: rect.y + r() * rect.h,
+    face: r() > 0.5 ? 1 : -1,
+    pause: r() * 6000,
+    t: r() * 3000,
+    v: 0.006 + r() * 0.005,
+    variant: i,
+  }));
+  return {
+    kind: 'grazers',
+    update(dt) {
+      for (const a of herd) {
+        a.t += dt;
+        if (a.pause > 0) { a.pause -= dt; continue; }
+        const dx = a.tx - a.x, dy = a.ty - a.y;
+        const d = Math.hypot(dx, dy);
+        if (d < 1.5) {
+          a.tx = rect.x + r() * rect.w;
+          a.ty = rect.y + r() * rect.h;
+          a.pause = 3000 + r() * 9000;
+          continue;
+        }
+        a.x += (dx / d) * a.v * dt;
+        a.y += (dy / d) * a.v * dt;
+        if (Math.abs(dx) > 0.6) a.face = dx > 0 ? 1 : -1;
+      }
+    },
+    draw(ctx) {
+      for (const a of herd) {
+        const moving = a.pause <= 0;
+        const s = sprite(kind, { frame: moving ? Math.floor(a.t / 260) % 2 : 0, ...params, ...(kind === 'deer' ? { stag: a.variant === 0 } : {}) });
+        ctx.save();
+        ctx.translate(Math.round(a.x), Math.round(a.y));
+        if (a.face < 0) ctx.scale(-1, 1);
+        ctx.drawImage(s.canvas, -s.ax, -s.ay);
+        ctx.restore();
+      }
+    },
+    get y() { return herd.length ? herd[0].y : rect.y; },
+  };
+}
+
+/** Ducks on the water: they paddle the ellipse and leave a small wake. */
+export function ducks({ cx, cy, rx, ry, count = 3, seed = 'ducks' }) {
+  const r = rng(seed);
+  const birdsOnWater = Array.from({ length: count }, (_, i) => ({
+    a: r() * Math.PI * 2,
+    rr: 0.35 + r() * 0.5,
+    v: (r() > 0.5 ? 1 : -1) * (0.00008 + r() * 0.00009),
+    t: r() * 2000,
+    drake: i % 3 === 0,
+  }));
+  return {
+    kind: 'ducks',
+    update(dt) { for (const d of birdsOnWater) { d.a += d.v * dt; d.t += dt; } },
+    draw(ctx) {
+      for (const d of birdsOnWater) {
+        const x = cx + Math.cos(d.a) * rx * d.rr;
+        const y = cy + Math.sin(d.a) * ry * d.rr;
+        ctx.fillStyle = 'rgba(232,246,255,0.4)';
+        ctx.fillRect(Math.round(x - 3), Math.round(y + 2), 7, 1);
+        const s = sprite('duck', { frame: Math.floor(d.t / 420) % 2, drake: d.drake });
+        ctx.save();
+        ctx.translate(Math.round(x), Math.round(y));
+        if (Math.cos(d.a + Math.PI / 2) < 0) ctx.scale(-1, 1);
+        ctx.drawImage(s.canvas, -s.ax, -s.ay);
+        ctx.restore();
+      }
+    },
+    get y() { return cy; },
+  };
+}

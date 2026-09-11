@@ -4,6 +4,38 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 1.1.3 — 2026-09-12 — The valley comes alive
+
+"If only trees grow, the world will feel lonely." Four creatures now
+arrive in the valley, and every one of them arrives because the learner
+brought it:
+
+- **Deer** at the Rootwood's edge once eight root families are mature, a
+  stag among them, more of them as the wood ages.
+- **Sheep** in the Meadow once a whole field is in bloom (or ninety words
+  are held for good), the flock growing with the fields.
+- **Ducks** on the Mirror Pond once four koi are there, paddling the
+  water with a small wake behind them.
+- **A dog** at the Hearth once the cottage has flower boxes.
+
+They wander, stop, graze and turn to face where they are going
+(`life.js`: `grazers`, `ducks`), depth-sorted with everything else, and
+they cost nothing when they are not there. With the villagers from 1.1.0
+a worked valley now holds people, livestock, wild animals and birds.
+
+**Performance.** The two edge painters (the sky and land that continue
+beyond the map, and the seam that softens where the map stops) were
+running every frame and cost 11 ms of an 32 ms frame in software
+rendering. They are pure functions of the camera geometry, so the
+renderer now skips them entirely when the map covers the screen — the
+common case on a phone, because a 'cover' fit guarantees it — and caches
+them per camera position otherwise. A worked valley's frame fell from
+32 ms to 21 ms in headless software, and to nothing extra at all on a
+phone that is not zoomed out.
+
+Also: the world's notice clears the HUD's icons and wraps on a narrow
+screen instead of running off it.
+
 ## 1.1.2 — 2026-09-12 — The question CAT actually asks
 
 CAT does not ask what a word means in the abstract; it asks what it means

@@ -17,6 +17,7 @@ _Last updated: 2026-09-12 — 1.1.0, the final world rebuild: four crafts made b
 | **The valley's home** (`world/screens/world.js`) | **shipped (1.1.0)** | Named pins that pulse when asking, at most three "worth doing now" cards (never three of a kind), crafts that fly into the purse, a line when you come back after days away, sky and land beyond the map's edge |
 | **Visual language** (`ui/styles/world.css`) | **shipped (1.1.0)** | Painted surfaces, crafts as coloured gems, the sheet, the pins, the works, the build veil |
 | **Words in context** (`tools/build-context.mjs`, `content/context/pack.json`) | **shipped (1.1.2)** | 270 words shown in a real sentence with the sense they carry there, built from the RC vocabulary blocks and the Rootwood context sentences. Three of every twelve in a word round, nine of the Gauntlet's thirty. Own mastery bucket (`context`), so place counts stay honest |
+| **Life in the valley** (`world/engine/life.js`) | **shipped (1.1.3)** | Villagers walk the paths as works go up; deer come to an old Rootwood, sheep to a Meadow in bloom, ducks to a worked Pond, a dog to a Hearth with flower boxes. Nothing appears on a timer: every creature is a consequence of learning |
 | **The stage** (`world/stage.js`) | **shipped (1.1.0)** | The region's own still scene painted behind the rooms beyond the valley (the Quarter, the Terraces, the Reading Room), with `data-stage` on the root lifting their screens onto warm glass. One canvas, no frame loop |
 | **Word DNA content** | **shipped (1.1.0)** | 16 new units (wd-0013…wd-0028) from `99_REFERENCE/5- Prefix and Suffix.md`; the Terraces go from 12 units to 28; registry 493 items |
 | **Audio** | **shipped (1.1.0)** | `startMusic` takes a `warmth` from works built and stars earned: one more pad voice and a slightly freer line as the valley fills. Same key, same calm |
@@ -27,7 +28,7 @@ _Last updated: 2026-09-12 — 1.1.0, the final world rebuild: four crafts made b
 | System | State | Notes |
 |---|---|---|
 | PWA shell (index.html, manifest, icons) | **shipped** | Installable; relative paths → GitHub Pages subpath safe; `start_url` is the valley |
-| Service worker / offline caching | **shipped** | Shell cache v28 + content cache v13, cache-first by exact URL; ~640 content files precached; registration waits for the first screen to paint (1.0.0) |
+| Service worker / offline caching | **shipped** | Shell cache v31 + content cache v13, cache-first by exact URL; ~640 content files precached; registration waits for the first screen to paint (1.0.0) |
 | Design tokens + base styles + `game.css` | **shipped (1.0.0)** | Tokens and base unchanged; `game.css` is the world's interface language (glass HUD, place sheets, run frame, star reveal, tiles/rows) and restyles the shared chrome under `[data-world]` |
 | Hash router | **shipped** | Param routes; 404; modules register their own routes; the world registers `/world`, `/world/place/:slug`, `/round/:region` and `/round/:region/:field`; a query after a route is a hint for the screen, never part of the match (1.1.0) |
 | `StorageAdapter` + IndexedDB adapter | **shipped** | DB `cat-os` v2; stores: settings, attempts, sessions, learning. New record kinds in `learning` (all additive, all in backups): `lex-mastery`, `lex-round`, `gauntlet-run`, `world-build`, `world-quest` |

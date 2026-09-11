@@ -850,11 +850,88 @@ function stoneBridge({ w = 26 }) {
   return done(p, cx, 8);
 }
 
+/* ------------------------------------------------------------------ */
+/* Creatures that arrive as the valley grows                           */
+/* ------------------------------------------------------------------ */
+
+/** A deer at the edge of the Rootwood: comes out once the wood is old. */
+function deer({ frame = 0, stag = false }) {
+  const p = new Pix(14, 14);
+  const c = ramp('#A2734A');
+  const legY = frame % 2 ? 0 : 1;
+  p.vline(3, 9, 13 - legY, c.dark);
+  p.vline(5, 9, 13, c.dark);
+  p.vline(9, 9, 13, c.dark);
+  p.vline(11, 9, 13 - (1 - legY), c.dark);
+  p.rect(2, 5, 11, 5, c.base);
+  p.rect(2, 5, 11, 1, c.light);
+  p.rect(2, 9, 11, 1, c.shade);
+  p.rect(10, 2, 3, 4, c.base);          // neck
+  p.rect(10, 1, 4, 3, c.light);         // head
+  p.px(13, 2, PIGMENT.ink);
+  p.px(1, 6, c.light);                  // tail
+  if (stag) {
+    p.px(10, 0, '#6E5233'); p.px(9, -0 + 0, '#6E5233');
+    p.vline(11, -0, 0, '#6E5233');
+    p.px(12, 0, '#6E5233'); p.px(13, 0, '#6E5233');
+  }
+  for (let i = 0; i < 4; i += 1) p.px(4 + i * 2, 6 + (i % 2), c.light);  // dapples
+  p.outline();
+  return done(p, 7, 13);
+}
+
+/** A sheep in the Meadow: arrives when whole fields are in bloom. */
+function sheep({ frame = 0 }) {
+  const p = new Pix(12, 10);
+  const w = ramp('#F2EEE4');
+  p.vline(3, 7, 9 - (frame % 2), '#5B4A3A');
+  p.vline(8, 7, 9, '#5B4A3A');
+  p.blob(6, 5, 5, 3, w.base, rng('sheep'), 0.3);
+  p.blob(5, 4, 4, 2, w.light, rng('sheep2'), 0.35);
+  p.rect(9, 3, 3, 3, '#3D3630');        // head
+  p.px(11, 4, '#F2EEE4');
+  p.px(10, 4, PIGMENT.ink);
+  p.outline();
+  return done(p, 6, 9);
+}
+
+/** A duck on the Mirror Pond. */
+function duck({ frame = 0, drake = false }) {
+  const p = new Pix(9, 7);
+  const body = drake ? ramp('#5E6B54') : ramp('#B8A98E');
+  p.blob(4, 4, 3, 2, body.base, rng('duck'), 0.2);
+  p.px(1, 4, body.light);                // tail
+  p.rect(6, 1, 2, 3, drake ? '#2F5540' : body.shade);   // neck + head
+  p.px(7, 1, drake ? '#3C6B4E' : body.light);
+  p.px(8, 2, '#E2A33A');                 // bill
+  p.px(7, 2, PIGMENT.ink);
+  if (frame % 2) p.px(2, 5, body.shade);
+  p.outline();
+  return done(p, 4, 6);
+}
+
+/** The dog that shows up once the Hearth has a proper door. */
+function dog({ frame = 0 }) {
+  const p = new Pix(11, 9);
+  const c = ramp('#C08C50');
+  p.vline(3, 6, 8, c.dark);
+  p.vline(7, 6, 8 - (frame % 2), c.dark);
+  p.rect(2, 3, 7, 4, c.base);
+  p.rect(2, 3, 7, 1, c.light);
+  p.rect(8, 1, 3, 3, c.base);            // head
+  p.px(10, 2, PIGMENT.ink);
+  p.px(8, 0, c.dark); p.px(10, 0, c.dark);  // ears
+  p.vline(1, 2 + (frame % 2), 4, c.shade);  // tail
+  p.outline();
+  return done(p, 5, 8);
+}
+
 const RECIPES = {
   tree, flower, flowerPatch, grassTuft, bush, bramble, rock, stump, lilypad, reeds,
   cottage, tower, workshop, lantern, signpost, bridge, fence, terraceWall,
   koi, butterfly, bird, cat, cloud, rootStone, marker, puff,
   hive, heron, arch, shrine, arbour, stall, well, villager, paving, stoneBridge,
+  deer, sheep, duck, dog,
 };
 
 export const RECIPE_NAMES = Object.freeze(Object.keys(RECIPES));

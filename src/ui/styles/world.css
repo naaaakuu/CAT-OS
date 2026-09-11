@@ -628,3 +628,14 @@
 .place--wilds .place__hero > div { text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65); }
 .brief__fact.is-context { background: rgba(59, 123, 214, 0.13); border-color: rgba(59, 123, 214, 0.42); color: #1E4E96; }
 .vround__sentence mark { background: linear-gradient(transparent 52%, rgba(233, 185, 73, 0.55) 52%); color: inherit; font-weight: 700; padding: 0 1px; }
+
+/* The notice clears the HUD's second row (the sound and settings icons),
+   and wraps rather than running off a narrow screen. */
+.world-notice {
+  top: calc(env(safe-area-inset-top) + 124px);
+  max-width: min(92vw, 460px);
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+  pointer-events: auto;
+}
