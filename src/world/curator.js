@@ -336,10 +336,14 @@ function pickGrowthField(region, fields, seenByBundle, mine, r) {
 /** The round's own title and one line, written from what it contains. */
 function roundVoice(region, counts, source) {
   const place = { meadow: 'the Meadow', pond: 'the Mirror Pond', thicket: 'the Thicket' }[region] ?? 'the valley';
-  if (counts.due >= 7) return { title: 'Words that are fading', line: `These were yours once. ${place[0].toUpperCase()}${place.slice(1)} is asking for them back before they go.` };
-  if (counts.due >= 3) return { title: 'A mixed handful', line: `Some due for review, some you have never met. This is how ${place} keeps what it grows.` };
-  if (counts.new >= 10) return { title: source?.name ? `New words${source.groupLabel ? ` · ${source.groupLabel}` : ''}` : 'New words', line: `Twelve you have not met. Answer from what you know — the misses teach you the rest.` };
-  return { title: 'A round', line: `Twelve words from ${place}.` };
+  const Place = place[0].toUpperCase() + place.slice(1);
+  const inContext = counts.context
+    ? ` ${counts.context === 1 ? 'One of them is' : `${counts.context} of them are`} asked the way CAT asks: inside a real sentence.`
+    : '';
+  if (counts.due >= 7) return { title: 'Words that are fading', line: `These were yours once. ${Place} is asking for them back before they go.${inContext}` };
+  if (counts.due >= 3) return { title: 'A mixed handful', line: `Some due for review, some you have never met. This is how ${place} keeps what it grows.${inContext}` };
+  if (counts.new >= 6) return { title: source?.name ? `New words${source.groupLabel ? ` · ${source.groupLabel}` : ''}` : 'New words', line: `Words you have not met. Answer from what you know — the misses teach you the rest.${inContext}` };
+  return { title: 'A handful from ' + place, line: `Twelve to work through.${inContext}` };
 }
 
 function shuffle(arr, r) {
