@@ -1,0 +1,529 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0072",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "structure-mapping",
+      "scope-control",
+      "inference",
+      "tone-detection"
+    ],
+    "word_count": 666,
+    "question_count": 6,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "paragraph_function",
+      "scope",
+      "specific_detail",
+      "tone"
+    ],
+    "theme": "the charge that legal fictions are dishonest misses because a fiction issues an instruction rather than a proposition, and what they actually do is import a settled apparatus of rules at the price of a sentence, whose real cost is that the moment of decision is hidden, so the objection is constitutional rather than moral and bites only where the extension is one somebody would have contested",
+    "estimated_time_min": 11.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "A view is stated, refused, replaced, priced and then bounded, one paragraph each, so paragraph function and scope can both be asked without overlapping. The hardest thing in the passage is that the author agrees with the reformers' instinct while rejecting their reason, which makes both the dismissive and the deceived readings available for the tone question.",
+    "length_class": "long",
+    "structure": "view_critique_replacement",
+    "viewpoints": 2,
+    "tone": "assured, appreciative, exacting at the close",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.view_critique_replacement",
+      "struct.qualification",
+      "struct.contrast",
+      "struct.definition",
+      "comp.organization",
+      "comp.function_over_words",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.attention_span",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.qualification",
+      "arg.principle",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.author_vs_reported",
+      "scope.condition",
+      "scope.too_broad",
+      "lang.tone_shift",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that the second paragraph excuses a harmless deception, which keeps the deception the paragraph is denying; the paragraph's claim is that an instruction has no truth value and that nothing published in advance and believed by nobody is a lie, so there is no deception left to excuse. Q2's rival is the option extending the defence to every fiction whose terms are public, which takes the second paragraph's observation about publication as the boundary; the boundary is set in the fifth paragraph and is contestability, so a published fiction that settles a disputed question is exactly the case the author refuses to defend. Q3's rival is the option that an open statute would be more likely to be just, which converts a claim about what can be argued with into a claim about outcomes; the passage says the fiction cannot be opposed and never says the opposable result is the better one. Q4's rival is the uneasy reading, built from the reformers' word deception, which the second paragraph has removed from the case. Q5's rival is the option about reopening settled law, which is what the passage attributes to the rejected course of rewriting the general rules. Q6's rival is the option about the enormous saving, which is the third paragraph offered as the thesis when the passage's point is the price of that saving.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "candid",
+      "limitation",
+      "contestability"
+    ]
+  },
+  "passage": {
+    "title": "As If It Were True",
+    "reading_time_min": 3.6,
+    "paragraphs": [
+      {
+        "id": "rc-0072-p1",
+        "text": "The complaint against the legal fiction is easily stated and has been stated for two centuries. A court says that a company is a person, that a ship may be sued in its own name, that a man possesses goods he has never seen or touched, that a child born after its father's death was alive at the moment of the death. Each of these is false as a description of the world, and everybody involved knows it is false. Reformers have accordingly called the fictions the rubbish of the law: dishonesty raised to a technique, a means by which judges altered the law while denying that they were altering anything, and a thing to be swept away and replaced by candid legislation."
+      },
+      {
+        "id": "rc-0072-p2",
+        "text": "The charge assumes that a fiction asserts something, and it does not. To say that a company is a person is not to offer a proposition about the world for anyone's belief; it is to issue an instruction, which runs: apply to this thing the rules that were worked out for persons. An instruction has no truth value, any more than a rule about which side of the road to drive on has one. Nor is anybody deceived. The fiction is announced in the judgment, printed in the reports, and explained to students in their first month, which is an unusual way to conduct a fraud. Whatever is wrong with a statement that is published in advance and believed by nobody, it is not lying."
+      },
+      {
+        "id": "rc-0072-p3",
+        "text": "What the device actually does is extend a settled body of rules to a case they were not written for, without reopening the rules. When something new appears, a new kind of association, a new way of moving goods, a new form of holding property, a legal system has two courses. It can rewrite the general law, which takes a generation and puts back into dispute every question that the general law had already settled. Or it can declare that the new thing is, for these purposes, an old thing. The second course imports an entire apparatus at the price of a sentence: the remedies, the defences, the periods of limitation, the whole accumulated stock of decided cases, all of it available at once and none of it renegotiated."
+      },
+      {
+        "id": "rc-0072-p4",
+        "text": "The saving is real and it is paid for, though not in the coin the reformers named. A fiction hides the moment at which something was decided. When a court holds that the company is a person, it has determined that the rules made for persons shall govern companies, and that determination is a choice, with parties who gain by it and parties who lose. Dressed as a fiction it does not look like a choice; it looks like the application of a rule that was there already, and an application is not the sort of thing anyone thinks to argue with. The objection to fictions is therefore constitutional and not moral. It concerns where law is made and whether the making can be contested, rather than whether anyone has been misled."
+      },
+      {
+        "id": "rc-0072-p5",
+        "text": "The test that follows is contestability rather than candour. Where the extension is one that nobody would resist if it were proposed in the open, that a partnership may hold a lease, that a company may be sued for a debt it incurred, the fiction costs nothing and saves a great deal, and the reformers' remedy of a statute would be an expensive way of arriving at the same place. Where the extension settles something people disagree about, the fiction is legislation conducted in a form that admits of no opposition, and the very fact that it wears the clothes of an old rule is what makes it difficult to attack. The reformers were right to be suspicious and wrong about what deserved their suspicion. Nothing in the distinction, however, tells a court which of the two cases it is in, and the vocabulary of fiction is precisely the vocabulary in which that question does not arise."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0072-q1",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.organization",
+        "arg.rebuttal"
+      ],
+      "target_mistake": "reading the second paragraph as an excuse for a deception rather than as a denial that any deception is present",
+      "prediction_target": "The learner should be able to say: this paragraph removes the charge's subject matter, by showing that the thing complained of is not the kind of thing that can be true or false.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "The second paragraph functions chiefly to",
+      "options": {
+        "A": "concede the reformers' charge while arguing that the benefits of the practice outweigh it",
+        "B": "supply the historical origin of the particular fictions to which the reformers objected",
+        "C": "argue that the deception is harmless because everyone concerned already understands what is going on",
+        "D": "deny the charge a subject, by treating the fiction as an instruction rather than a statement"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph opens by naming the charge's assumption and refusing it in the same sentence: the charge assumes that a fiction asserts something, and it does not. Everything after that is the refusal being made good, first by the instruction, then by the absence of any truth value, then by the publicity of the whole business.",
+        "correct_reasoning": "The correct option names the job. A complaint about dishonesty needs a false statement to attach to, and the paragraph argues that no statement is being made at all, only a direction about which rules to apply. The point about publication is not an excuse but a second reason for the same conclusion, since a fraud is not conducted by telling the students about it in their first month.",
+        "passage_anchor": "rc-0072-p2",
+        "question_type_note": "A paragraph-function question asks for the job, not the content. Where a paragraph begins by naming an assumption, its job is almost always to remove the assumption rather than to answer the argument built on it.",
+        "reading_habit": "Distinguish denying a charge from excusing what it alleges. Authors who do the first say the thing complained of is not present; authors who do the second admit it and argue about its weight.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Nothing is conceded here and no benefit is mentioned. The advantages of the device belong to the third paragraph, and this one denies that there is anything to weigh them against.",
+            "seductive_element": "The passage as a whole does end up balancing a cost against a saving, so a reader who knows where the argument is going can attach that balance to the wrong paragraph."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No history is given anywhere in the passage. The examples in the first paragraph are offered as instances of the form, and the second paragraph works entirely with one of them as an illustration of what an instruction is.",
+            "seductive_element": "The first paragraph's two centuries and its list of old-sounding doctrines make a historical paragraph seem likely to follow."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The first clause matches and the second keeps what the paragraph discards. Universal understanding is cited here as evidence that no deception is occurring, not as a reason for tolerating one, and the paragraph ends by saying that whatever is wrong with such a statement, it is not lying.",
+            "seductive_element": "It is the live rival, because the sentences about announcement and publication really are about everybody knowing, and harmless deception is the conclusion most readers would draw from them."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0072-q2",
+      "type": "scope",
+      "skill": "scope",
+      "patterns": [
+        "scope.condition",
+        "scope.too_broad",
+        "arg.qualification"
+      ],
+      "target_mistake": "taking publicity as the boundary of the author's defence when the boundary he sets is whether anyone would have objected",
+      "prediction_target": "The learner should be able to state the limit before the options: the defence covers extensions nobody would contest and stops exactly where a dispute begins.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "inference",
+        "argument"
+      ],
+      "stem": "The author's defence of legal fictions extends to",
+      "options": {
+        "A": "extensions nobody would contest if they were put openly, and no further, since the device hides the choice wherever it is disputed",
+        "B": "all fictions whose terms are published in advance and understood by everyone in the profession",
+        "C": "fictions adopted by courts, though not those written into statutes by a legislature",
+        "D": "every fiction the reformers attacked, since their charge rested on a misunderstanding of what a fiction does"
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The fifth paragraph divides the field in two and gives each half a verdict. Where nobody would resist the extension in the open, the fiction costs nothing and saves a great deal; where the extension settles something people disagree about, it is legislation in a form that admits of no opposition. The boundary is disagreement, not disclosure.",
+        "correct_reasoning": "The correct option takes that division as the limit of the defence. The author is defending a labour-saving device on the condition that nothing is being decided behind the saving, and the fourth paragraph explains why: the cost of a fiction is that a choice is made in a form that looks like an application. Where no choice would have been resisted, there is nothing the concealment could have concealed.",
+        "passage_anchor": "rc-0072-p5",
+        "question_type_note": "A scope question asks how far a claim reaches, so the answer is usually in the paragraph where the author draws his own line rather than in the one where he makes his case.",
+        "reading_habit": "When an author splits cases into two and judges them differently, write the dividing criterion in your own words. Wrong options in scope questions almost always substitute a different criterion that the passage happens to mention.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_condition",
+            "why_wrong": "Publication is the second paragraph's answer to the charge of dishonesty, not the boundary of the defence. A fiction that is fully published and settles a disputed question is precisely the case the fifth paragraph refuses to defend.",
+            "seductive_element": "It is the live rival, because the passage really does make publicity decisive against the reformers, and a reader who takes their charge as the only issue will take its refutation as the whole verdict."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No distinction is drawn between judicial and statutory fictions. Legislation appears as the reformers' proposed alternative and, in the last paragraph, as an expensive route to an uncontested destination, never as a separate class of fiction.",
+            "seductive_element": "The passage is full of courts and legislatures and does say the objection is constitutional, which invites a division along institutional lines."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "Refuting the reformers' reason does not vindicate every case they attacked. The passage then supplies a different objection of its own, and says the reformers were right to be suspicious and wrong only about what deserved their suspicion.",
+            "seductive_element": "The second paragraph's demolition is so complete that a reader naturally treats the rest of the passage as elaboration rather than as a fresh charge."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0072-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "inf.strongly_supported",
+        "struct.contrast"
+      ],
+      "target_mistake": "turning a claim about what can be argued with into a claim about which outcome is better",
+      "prediction_target": "The learner should predict that the inference will follow from the fiction's looking like an application, which is the reason the passage gives for its being hard to oppose.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred that an extension of the law made openly by statute would",
+      "options": {
+        "A": "be more likely to be just, since those affected would have had the chance to argue against it",
+        "B": "be easier to resist than the same extension made by fiction, whatever the merits of either",
+        "C": "take longer to enact but would import the same accumulated stock of decided cases",
+        "D": "be preferred by the author in every case where a fiction was available instead"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The fourth paragraph explains why a fiction is hard to oppose, and the reason is entirely about appearance. Dressed as a fiction, a choice looks like the application of a rule that was there already, and an application is not the sort of thing anyone thinks to argue with. Remove the dress and the choice is visible as a choice.",
+        "correct_reasoning": "The correct option states that consequence and nothing more. A statute presents an extension as a decision being taken, which is the form in which objection is possible, whereas the fiction presents it as a rule being applied. The passage's fifth paragraph confirms the direction by calling the fiction legislation in a form that admits of no opposition, and it says nothing at all about which route produces the better rule.",
+        "passage_anchor": "rc-0072-p4",
+        "question_type_note": "An inference question rewards taking the author's claim exactly one step. Where his point is about the form in which something is presented, the inference is about form as well, not about quality.",
+        "reading_habit": "Separate arguability from correctness. Passages about procedure often say only that a thing can or cannot be challenged, and every option that promises a better outcome has added a premise.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Justice never enters the passage. The complaint against the concealed choice is that it cannot be contested, and nothing is said or implied about contested decisions coming out better than unopposed ones.",
+            "seductive_element": "It is the live rival, because it is the reason most readers would give for wanting decisions argued about, and the passage's talk of winners and losers invites it."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The importing of remedies, defences and decided cases is what the third paragraph credits to the fiction. The alternative it describes, rewriting the general law, is said to put back into dispute every question the general law had already settled.",
+            "seductive_element": "Both halves use the passage's own vocabulary, and the first half is correct, which carries the second half past a reader who is checking for familiar words."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The fifth paragraph says the opposite for one whole class of cases: where nobody would resist the extension, the fiction costs nothing and the statute would be an expensive way of arriving at the same place.",
+            "seductive_element": "The passage's final verdict is critical enough that a reader who has stopped at the fourth paragraph will suppose the author prefers the open route everywhere."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0072-q4",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "inf.author_vs_reported",
+        "arg.description_vs_evaluation"
+      ],
+      "target_mistake": "attributing to the author the disquiet about deception that belongs to the view he has already dismantled",
+      "prediction_target": "The learner should be able to say: the author admires the device, disagrees with its critics about the reason, and is strict about the case where it does damage.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "main_idea"
+      ],
+      "stem": "The author's tone in discussing legal fictions is best described as",
+      "options": {
+        "A": "dismissive of reformers who, in his view, never understood their own subject",
+        "B": "neutral between the reformers and the courts, reporting a long disagreement",
+        "C": "uneasy about a practice he regards as a standing deception of the public",
+        "D": "appreciative of a device whose real cost he thinks has been misidentified"
+      },
+      "correct": "D",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The evaluative words are warm about the device and exact about its price. The fiction imports an entire apparatus at the price of a sentence, costs nothing and saves a great deal in the easy cases, and is legislation without opposition in the hard ones. The reformers are said to have been right to be suspicious.",
+        "correct_reasoning": "The correct option carries both. The admiration is for what the device achieves, which the third paragraph describes with evident pleasure, and the exactness is in relocating the objection from morality to the constitution. A tone option that made the author hostile to the device or to its critics would have to explain the sentence granting the reformers their instinct.",
+        "passage_anchor": "rc-0072-p3, rc-0072-p5",
+        "question_type_note": "Tone questions in a view-and-replacement passage are decided by how the author treats the side he rejects. Partial agreement with an opponent rules out every dismissive option at once.",
+        "reading_habit": "Look for the sentence where the author gives his opponents something. Its existence sets a ceiling on how hostile any correct tone option can be.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The last paragraph credits them expressly, saying they were right to be suspicious and wrong only about what deserved their suspicion. That is a correction rather than a dismissal.",
+            "seductive_element": "The second paragraph does take their argument apart briskly, and the remark about an unusual way to conduct a fraud is the sharpest sentence in the passage."
+          },
+          {
+            "option": "B",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author decides throughout. The charge is refused, a replacement account is supplied, a different objection is named as the real one, and a test is proposed for when it bites. None of that is reporting.",
+            "seductive_element": "The prose is calm and gives each side its due, and evenhandedness is easily mistaken for the absence of a position."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Deception is the reformers' charge, and the second paragraph removes it from the case: nobody is deceived, the fiction is announced and printed, and whatever is wrong with it is not lying.",
+            "seductive_element": "It is the live rival, because the author is genuinely uneasy about something, and a reader who has the right unease and the wrong object will find every word of this familiar."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0072-q5",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.attention_span",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "attaching to the fiction the consequence the passage assigns to the course it was chosen instead of",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, declaring a new thing to be, for the purposes in hand, an old thing allows a legal system to",
+      "options": {
+        "A": "bring across the remedies, defences and decided cases attached to the older category in one sentence",
+        "B": "settle a question people disagree about without any judge having to make a decision at all",
+        "C": "try out the older rules on the new case first, and abandon them later if they turn out not to suit it",
+        "D": "reopen the settled parts of its general law without putting the new case itself into dispute"
+      },
+      "correct": "A",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The third paragraph lists the contents of the saving in a single clause: the remedies, the defences, the periods of limitation, the whole accumulated stock of decided cases, all available at once and none of it renegotiated. That list is the answer, and the paragraph has already named the price as a sentence.",
+        "correct_reasoning": "The correct option is that list in fewer words. The point of the device on this account is not economy of language but the immediate availability of a body of law that has already been worked out, which is what makes the alternative, rewriting the general rules, so much more expensive than it looks.",
+        "passage_anchor": "rc-0072-p3",
+        "question_type_note": "A detail question in a passage of contrasts is usually decided by which side of the contrast a consequence sits on. Check the subject of the sentence you are remembering.",
+        "reading_habit": "When a passage sets two courses of action against each other, label every consequence with the course it belongs to as you read. Half the distractors will be real consequences attached to the wrong course.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph insists that a decision is made. When a court holds that the company is a person it has determined that one body of rules shall govern another kind of thing, and that determination is called a choice with winners and losers.",
+            "seductive_element": "The passage does say the fiction looks like an application rather than a choice, and a reader who keeps the appearance and drops the correction lands here."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing provisional is described. The declaration imports the older apparatus at once and none of it is renegotiated, and the passage's worry in the fourth paragraph is that the step is hard to revisit rather than that it is easily undone.",
+            "seductive_element": "The qualifying phrase about purposes in hand sounds like a limitation in time, which suggests an experiment that could be abandoned."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Every phrase is the paragraph's and the claim underneath has been swapped. Reopening the settled law is what the third paragraph attributes to the other course, rewriting the general rules, which it says puts back into dispute every question already settled. The fiction is defined by its not doing this.",
+            "seductive_element": "Every phrase in it comes from the paragraph, and the structure of the option mirrors the structure of the sentence it inverts."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0072-q6",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.view_critique_replacement",
+        "scope.condition"
+      ],
+      "target_mistake": "offering the saving described in the third paragraph as the thesis, when the passage exists to price that saving",
+      "prediction_target": "The learner should be able to say: a fiction is not a lie but an instruction, its price is a decision made invisibly, and the price only matters where somebody would have objected.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Legal fictions are a dishonest device that a candid legislature ought to have replaced with plain statutes long ago.",
+        "B": "Legal fictions save a legal system the enormous cost of rewriting its general rules whenever something new appears.",
+        "C": "A fiction is an instruction rather than a falsehood, and its cost is making law in a form nobody can argue with, which matters where the extension is disputed.",
+        "D": "Courts have quietly taken over from legislatures the task of adapting the law to new circumstances."
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Each of the five paragraphs has one job and the main idea has to need all of them: the charge, its refusal, the replacement account, the price, and the case in which the price is worth paying. The fourth paragraph names the real objection as constitutional rather than moral, and the fifth fixes when it applies.",
+        "correct_reasoning": "The correct option keeps the three moves that do the work. It refuses the charge by making the fiction an instruction, it names the genuine cost as a decision taken in a form that cannot be opposed, and it attaches the condition that decides whether the cost is worth anything. Drop any of the three and one paragraph of the passage becomes decorative.",
+        "passage_anchor": "rc-0072-p4, rc-0072-p5",
+        "question_type_note": "In a view, critique and replacement passage, the main idea is the replacement with its limits, never the critique alone and never the view the critique was aimed at.",
+        "reading_habit": "Test a main-idea option by asking which paragraph it makes optional. The right option is the one under which every paragraph is still earning its place.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the reformers' position, stated in the first paragraph in order to be refused in the second, where the passage argues that a fiction asserts nothing and that nobody is deceived by it.",
+            "seductive_element": "The first paragraph gives the charge its strongest form and does not label it as somebody else's, so a reader who begins to skim after it carries it away as the thesis."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the third paragraph, which supplies the replacement account and is then priced by the fourth and bounded by the fifth. Offered as the thesis it makes the last two paragraphs, where the author's own objection lives, look like an afterthought.",
+            "seductive_element": "It is the live rival, because it is true, it is the passage's most enthusiastic passage, and it is what the author positively asserts about what fictions do."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "No claim about an institutional transfer is made. The passage describes what a fiction does in a particular case and says the objection concerns where law is made, without asserting that courts have displaced anybody.",
+            "seductive_element": "The language of constitutional objection and of legislation without opposition points towards a story about institutions taking each other's work."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "candid",
+      "passage_use": "swept away and replaced by candid legislation",
+      "meaning_here": "open about what it is doing, concealing nothing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "limitation",
+      "passage_use": "the periods of limitation",
+      "meaning_here": "the fixed time after which a legal claim can no longer be brought",
+      "difficulty": "hard"
+    },
+    {
+      "word": "contestability",
+      "passage_use": "The test that follows is contestability rather than candour",
+      "meaning_here": "whether a decision is presented in a form that allows it to be opposed",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "A famous complaint is stated, refused, and then replaced by a different complaint the author thinks is the real one. Keep the two complaints apart; three of the six questions turn on which is which.",
+    "one_sentence_summary": "The charge that legal fictions are dishonest fails because a fiction issues an instruction rather than a statement and nobody is deceived by it, but the device does carry a cost the reformers missed, since it hides the moment at which a court chose to extend one body of rules to a new case, which makes the objection constitutional rather than moral and leaves the fiction harmless wherever nobody would have opposed the extension.",
+    "main_idea": "Reformers call fictions dishonest. They are not statements about the world at all but instructions to apply one set of rules to another kind of thing, announced openly and believed by nobody. What they do is import a whole settled apparatus of law for the price of a sentence. The price is that the decision to extend the rules is invisible, dressed as the application of a rule that already existed. So the objection is about where law is made and whether it can be argued with, and it bites only where the extension would have been resisted.",
+    "simple_explanation": "Courts say things that are plainly untrue. A company is a person. A ship can be sued as if it were a defendant. A man possesses goods he has never touched. For two hundred years reformers have called this dishonest and demanded that it be replaced with honest legislation.\n\nThe author's first move is to say the complaint misfires. When a court says a company is a person, it is not telling you a fact and asking you to believe it. It is giving an instruction: apply to companies the rules we worked out for people. An instruction cannot be true or false, any more than a rule about which side of the road to drive on can. And nobody is fooled anyway. The fiction is written in the judgment, printed in the law reports, and taught to first-year students, which is a very strange way to run a deception.\n\nSo what is the device really for? Suppose something new appears that the law was not written for. You have two options. Rewrite the general law, which takes a generation and reopens every question that was already settled. Or say that the new thing counts as an old thing. The second option is astonishingly cheap: in one sentence you get the remedies, the defences, the time limits and every decided case that goes with the old category, and none of it has to be argued again.\n\nBut there is a price, and it is not the one the reformers named. When a court says a company is a person, it has actually decided something: that these rules shall govern this new sort of thing. That is a choice, and somebody gains and somebody loses by it. Because it is dressed up as a fiction, it does not look like a choice; it looks like a judge applying a rule that was already there. And nobody argues with a rule being applied. So the real objection is not about honesty. It is about where law gets made and whether anyone can push back against it.\n\nWhich gives the test. If the extension is one nobody would have objected to, the fiction costs nothing and saves a great deal, and passing a statute instead would just be an expensive way of reaching the same place. If the extension settles something people actually disagree about, then the fiction is law-making in a form that cannot be opposed, and the fact that it looks like an old rule is exactly what makes it hard to fight.\n\nThe reformers, in other words, were right to be uneasy and wrong about why. And the author ends by admitting that nothing in his own distinction tells a court which kind of case it is in.",
+    "why_difficult": "The passage ends up agreeing with the reformers' instinct while rejecting their reason, and readers find it very hard to hold both. Those who follow the second paragraph conclude that fictions are fine and answer the scope question too generously; those who follow the fourth conclude that the author shares the reformers' disquiet and answer the tone question with their word rather than his. The other difficulty is the third and fourth paragraphs, which describe a saving and then a price in almost the same vocabulary, so that consequences migrate between them: several distractors in the set are real statements attached to the wrong course of action.",
+    "author_intention": "To take a familiar accusation away from a legal device, and then to put a better accusation in its place, so that the reader's suspicion is not abandoned but redirected to the cases where it is warranted.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0072-p1",
+        "role": "States the charge",
+        "note": "Courts say things that are plainly false and everyone knows it. Reformers call this dishonesty made into a technique and want statutes instead."
+      },
+      {
+        "paragraph_id": "rc-0072-p2",
+        "role": "Refuses the charge",
+        "note": "A fiction is not a claim about the world but an instruction about which rules to use, and instructions are neither true nor false. It is also announced everywhere, which is no way to run a fraud."
+      },
+      {
+        "paragraph_id": "rc-0072-p3",
+        "role": "Supplies the replacement",
+        "note": "It extends settled rules to a new case without reopening them. One sentence brings across the remedies, defences, time limits and all the decided cases, none of which has to be argued again."
+      },
+      {
+        "paragraph_id": "rc-0072-p4",
+        "role": "Names the real price",
+        "note": "The choice is hidden. A decision with winners and losers is dressed as an application of an existing rule, and nobody argues with an application. So the objection is constitutional, not moral."
+      },
+      {
+        "paragraph_id": "rc-0072-p5",
+        "role": "Draws the line",
+        "note": "Harmless where nobody would have objected; serious where the extension settles a dispute. The reformers were right to be suspicious and wrong about what to suspect, and the test cannot be applied in advance."
+      }
+    ],
+    "tone_progression": "It reports the charge in the reformers' own heat, turns crisp and slightly amused while dismantling it, becomes admiring as the device's economy is described, hardens as the price is named, and ends exacting, granting the critics their instinct and withholding their conclusion.",
+    "key_transitions": [
+      "'The charge assumes that a fiction asserts something, and it does not.' (opening of paragraph 2) — the complaint is refused at its root rather than answered.",
+      "'The saving is real and it is paid for, though not in the coin the reformers named.' (opening of paragraph 4) — a second objection replaces the first.",
+      "'The reformers were right to be suspicious and wrong about what deserved their suspicion.' (paragraph 5) — the verdict on the view the passage began by stating."
+    ],
+    "misunderstanding": "Two opposite wrong models form. The first takes the second paragraph as the conclusion and ends with the thought that fictions are fine because everyone knows what they are, which the fifth paragraph refuses for a whole class of cases. The second takes the fourth paragraph's disquiet and reattaches it to the reformers' word, so that the author becomes someone who thinks the public is being deceived, which the second paragraph has already ruled out. Both readings are available because the passage's own position is assembled from a denial and a fresh charge, and readers habitually keep only one of the two.",
+    "traps_summary": "This set offers an excuse for a deception where the passage denies the deception, publicity as the limit where the limit is disagreement, justice where the passage claims only arguability, the critics' unease as the author's, a consequence of the rejected course attached to the chosen one, and the saving offered as the thesis when the passage exists to price it. Sorting each option into charge, refusal, replacement, price or limit answers all six.",
+    "reading_lesson": "When an author rejects an objection and then raises one of his own, keep three columns as you read: their complaint, why it fails, and his complaint. Distractors in such passages are built almost entirely by mixing the columns, and the commonest mixture gives the author the emotion of the critics he has just answered. The same habit disciplines scope questions, since the author's own objection is what fixes the limits of his defence.",
+    "real_world": "The same move happens outside the law whenever a new thing is classified as an old one to avoid renegotiating the rules: a contractor treated as an employee for one purpose and not another, a digital file treated as a copy of a book, a delivery rider treated as a driver, or a new product slotted into an existing tax category.",
+    "takeaway": "The danger in calling a new thing an old thing is not the untruth; it is that a decision gets made in a form nobody can oppose.",
+    "reflection_question": "Where in your own work is something new being handled under an old category, and who would have objected if the change had been announced instead?"
+  }
+}

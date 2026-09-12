@@ -1,0 +1,399 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0073",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "arts-culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "vocabulary-in-context",
+      "structure-mapping"
+    ],
+    "word_count": 505,
+    "question_count": 4,
+    "question_types": [
+      "assumption",
+      "best_characterization",
+      "inference",
+      "vocabulary_in_context"
+    ],
+    "theme": "a museum understood on the model of a mint, as an institution that certifies rather than discovers value, with the analogy pressed through several tests and then broken at one joint, since a museum's authority is reputational and revocable by the public it certifies to, which is what explains why selling a work is a scandal and melting a coin is routine",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "An analogy that is proposed, tested and then deliberately broken, with the break carrying the payoff. Readers who treat the third paragraph as a retreat lose the whole argument, and the characterisation question is built on exactly that misreading. The assumption question tests the load-bearing premise of the first paragraph rather than anything in the comparison itself.",
+    "length_class": "medium",
+    "structure": "analogy_driven",
+    "viewpoints": 2,
+    "tone": "confident, analytical",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.analogy",
+      "struct.contrast",
+      "struct.claim_evidence",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "comp.paraphrase",
+      "arg.analogy",
+      "arg.assumption",
+      "arg.evidence",
+      "arg.principle",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.logical_gap",
+      "scope.abstraction_level",
+      "lang.comparative",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the reading of the verb as agreeing to display something, which the sentence will not support: the object in question is a bus ticket given a number, and the clause is about what the institution takes in rather than what it puts out. Q2's rival is the option that the analogy is offered as an image the argument does not rely on, which a candidate defends from the third paragraph's admission of failure; the fourth paragraph then uses the failure to explain the difference in behaviour, so the comparison is load-bearing at exactly the point where it breaks. Q3's rival is the option about museums being able to state their reasons, which is plausible and idle: the argument needs the object not to have the value already, and nothing at all about whether the selection is articulate. Q4's rival is the option that an unaccessioned object cannot be valuable to anyone, which inflates a claim about one kind of certified value into a claim about value as such.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "accession",
+      "vitrine",
+      "debase"
+    ]
+  },
+  "passage": {
+    "title": "The Mint and the Museum",
+    "reading_time_min": 2.7,
+    "paragraphs": [
+      {
+        "id": "rc-0073-p1",
+        "text": "A museum is generally described as a place where valuable things are kept, and it would be closer to the truth to call it a place where value is made. Consider a mint. A mint does not examine a metal, find it precious, and record the finding. It stamps a disc, and the stamp is what makes the disc money; the qualities of the metal decide almost nothing about what the disc will buy. Museums work in the same manner. A museum does not go out, identify the important objects and bring them home. The selecting, the cataloguing, the lighting, the insurance schedule and the refusal to sell are themselves the operations by which an object becomes the kind of thing that has a value at all."
+      },
+      {
+        "id": "rc-0073-p2",
+        "text": "The comparison survives more pressure than one expects. Both institutions are indifferent to the substance they work on: a mint will stamp base metal, and a museum will accession a bus ticket and give it a number. Both operate chiefly by exclusion, since a stamp given to every disc, and a vitrine that admitted every object, would certify nothing. And in both, the value produced cannot be taken away from the institution that produced it. A coin melted down is worth its weight and no more, and an object that leaves the collection loses, at the door, whatever the collection had been supplying. What circulates in each case is the certificate rather than the material."
+      },
+      {
+        "id": "rc-0073-p3",
+        "text": "It fails at one joint, and the failure is the interesting part. A mint's authority is a monopoly granted by law, and it does not depend on anybody's opinion of the mint; the coin is legal tender whether or not the public admires the institution that struck it. A museum's authority is reputational, and it is conferred, continuously, by the very people to whom the museum is certifying. A museum can therefore be wrong in a way a mint cannot. A mint cannot debase a coinage by accident; it can only decide to. A museum can spend thirty years certifying what the next generation will look at and see nothing in, and then discover that its stamp has become the evidence of an error."
+      },
+      {
+        "id": "rc-0073-p4",
+        "text": "This is the point at which the comparison stops being decorative and starts doing work, because it explains a difference in behaviour that the ordinary account of museums cannot. When a mint withdraws a coinage, nobody is scandalised; the metal goes back into the furnace and the institution is not thought to have confessed anything. When a museum sells a work, the outrage is wildly out of proportion to the sum involved, and it is directed at the institution rather than at the buyer. The sale is not read as a financial act. It is read as the withdrawal of a certificate, and it convicts the museum, backwards, of having issued one it should not have issued. The mint teaches us what a museum does; the place where the mint stops teaching us is where museums become worth explaining."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0073-q1",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "reading the verb as an act of display or of purchase, because those are the museum activities a reader already has words for",
+      "prediction_target": "The learner should predict from the parallel: the mint's matching act is stamping a disc, so the museum's act must be the one that admits an object and marks it as admitted.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the second paragraph, the statement that a museum will \"accession a bus ticket and give it a number\" uses \"accession\" to mean",
+      "options": {
+        "A": "agree to put on show an object that has been offered to it on loan",
+        "B": "acquire an object by paying more for it than any other buyer would",
+        "C": "take an object formally into the collection and enter it in the register",
+        "D": "declare an object to be more important than the ones already held"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The sentence is built as a parallel and the parallel supplies the meaning. A mint will stamp base metal; a museum will do the corresponding thing to a bus ticket. Stamping is the act that admits a disc into the class of money, and the phrase about giving it a number says what the museum's version of the stamp consists in.",
+        "correct_reasoning": "The correct option keeps the act at the point of entry. What the paragraph is illustrating is indifference to the substance, which requires an act that can be performed on anything and that changes the thing's status rather than its qualities; formally taking it into the collection and recording it does exactly that, which is why the number matters as much as the object.",
+        "passage_anchor": "rc-0073-p2",
+        "question_type_note": "A word in context inside an analogy is settled by the term it is parallel to. Find the matching act on the other side of the comparison and the sense follows.",
+        "reading_habit": "When two clauses are built to mirror each other, read the unfamiliar word as the counterpart of the familiar one. The author has already told you what it does; only the label is new.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Display is a different operation, and the passage lists it separately as the lighting and the vitrine. An object shown on loan has not entered the collection, which is precisely the status the paragraph's parallel with stamping requires.",
+            "seductive_element": "It is the live rival, because showing things is what a museum is best known for, and giving an object a number sounds like the beginning of putting it out."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No purchase is described here. The paragraph is making the point that the substance does not matter, and a bus ticket is chosen because nobody would be bidding for it at all.",
+            "seductive_element": "Acquisition is the commonest way objects reach museums, and the passage does discuss money in three of its four paragraphs."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "Nothing is being ranked against anything. The sentence is about what the institution does to an object at the moment of admission, and the whole point of the bus ticket is that its importance before that moment is nil.",
+            "seductive_element": "The passage does say museums make value, so an act of declaring importance sounds like the thing being described."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0073-q2",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.analogy",
+        "struct.analogy"
+      ],
+      "target_mistake": "reading the third paragraph's admission of failure as an abandonment of the comparison rather than as the place where it earns its keep",
+      "prediction_target": "The learner should be able to name the move in a verb and an object: the author tests the comparison to destruction and then uses the breaking point to explain something else.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "paragraph_function"
+      ],
+      "stem": "Which of the following best characterises the use the author makes of the comparison with a mint?",
+      "options": {
+        "A": "He offers it as a striking image without resting any part of his actual argument on it.",
+        "B": "He presses it until it fails, and uses the failure to explain what the comparison alone could not.",
+        "C": "He uses it to argue that an object's value is nothing more than the price it would fetch.",
+        "D": "He shows that the comparison holds at every point once both institutions have been properly described."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph announces the shape: it fails at one joint, and the failure is the interesting part. The fourth then opens by saying this is where the comparison stops being decorative and starts doing work, and uses the disanalogy to account for the scandal of a sale.",
+        "correct_reasoning": "The correct option keeps both halves of that shape. The comparison is not dropped when it breaks; the break is the instrument. Because a mint's authority is legal and a museum's is granted by the people it certifies to, the museum can be shown to have been wrong, which is what makes the withdrawal of a certificate a confession and the melting of a coin a routine administrative act.",
+        "passage_anchor": "rc-0073-p3, rc-0073-p4",
+        "question_type_note": "A characterisation question wants a verb and an object that survive the whole passage. Where an author names the limits of his own comparison, the limits belong in the verb.",
+        "reading_habit": "When an author says an analogy breaks down, read on before deciding he has withdrawn it. Careful writers break analogies on purpose, and the break is often the most productive sentence in the piece.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The comparison carries the argument from the first sentence to the last. It supplies the thesis that value is made rather than found, the three tests in the second paragraph, and the explanation of the difference in behaviour in the fourth.",
+            "seductive_element": "It is the live rival, because the third paragraph says the comparison fails, and a reader who stops there has an author apparently walking away from his own image."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It borrows the cadence of the passage's worth-and-no-more sentence and reverses what that sentence was for. Price is never offered as what value amounts to. The passage says the opposite in the second paragraph, where a coin melted down is worth its weight and no more, which is exactly the value the certificate was adding.",
+            "seductive_element": "Mints, insurance schedules and sales give the passage a financial vocabulary, and reducing value to price is the cynical conclusion such vocabulary invites."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The third paragraph exists to deny this, naming a joint at which the two come apart and spending its whole length on the difference between an authority granted by law and one conferred by an audience.",
+            "seductive_element": "The second paragraph really does run three successful tests in a row, and its opening line about surviving more pressure than one expects reads like a promise."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0073-q3",
+      "type": "assumption",
+      "skill": "argument",
+      "patterns": [
+        "arg.assumption",
+        "inf.logical_gap",
+        "arg.analogy"
+      ],
+      "target_mistake": "looking for the assumption inside the comparison, when the load is carried by a prior claim about where the value was before the museum arrived",
+      "prediction_target": "The learner should negate each candidate: the assumption is the one whose denial would turn the museum from a maker of value into a finder of it.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "inference",
+        "logical_structure"
+      ],
+      "stem": "The author's argument depends on which of the following assumptions?",
+      "options": {
+        "A": "That an object does not already possess, apart from the institution, the value it is said to be given",
+        "B": "That museums select the objects they accession for reasons they would be able to state if they were asked",
+        "C": "That a museum's holdings are together worth more than the objects it has refused",
+        "D": "That mints and museums were founded to serve purposes that are broadly comparable"
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The first paragraph makes one substitution and everything else rests on it: the museum does not find important objects and bring them home, and the ordinary operations of the institution are themselves what make an object valuable. The mint is introduced to illustrate that substitution, not to establish it.",
+        "correct_reasoning": "The correct option is that substitution stated as its precondition. Negate it, and the object arrives with its value already in it; the selecting and cataloguing then record something rather than creating it, the mint becomes a false parallel because a mint plainly does not detect worth, and the scandal of a sale in the last paragraph loses its explanation, since nothing would have been withdrawn.",
+        "passage_anchor": "rc-0073-p1",
+        "question_type_note": "An assumption is what the argument needs and does not say. Test each candidate by denying it: if the passage still stands, it was not an assumption but an accompaniment.",
+        "reading_habit": "Look for the assumption where the author makes his substitution, not where he makes his comparison. An analogy is usually offered as support, and support rests on a premise stated earlier.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Denying it costs the argument nothing. A museum whose reasons were entirely inarticulate would still be performing the operations the first paragraph names, and the certificate would be issued exactly as before.",
+            "seductive_element": "It is the live rival, because it sounds like the sort of thing a sceptical account of institutions would have to presuppose, and the passage does emphasise selection."
+          },
+          {
+            "option": "C",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "No comparison between what is held and what is refused is made or needed. Exclusion appears in the second paragraph as a condition of certifying anything at all, which is a claim about how a certificate works rather than about the relative worth of two groups of objects.",
+            "seductive_element": "Exclusion is genuinely in the argument, and a claim about refused objects reuses its vocabulary."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The analogy is about how the two institutions operate, not about why either was set up. Nothing in the argument would change if mints and museums had been founded for wholly unrelated reasons, which historically they were.",
+            "seductive_element": "Analogies do need something to be shared, and purpose is the most natural candidate for a reader who has not identified which feature is doing the work."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0073-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "inf.strongly_supported",
+        "lang.comparative"
+      ],
+      "target_mistake": "inflating a claim about one institution's certified value into a claim about value in general",
+      "prediction_target": "The learner should predict that the inference will follow from the museum's authority being granted continuously by the people it certifies to, which is the one property the mint lacks.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A coin is worth less than the metal in it once the mint that struck it has withdrawn the coinage.",
+        "B": "A museum that sells a work is usually in greater financial difficulty than one that has never sold anything.",
+        "C": "Objects that no museum has ever accessioned cannot be of value to anybody at all.",
+        "D": "The authority by which a museum makes value can be taken back by the public that supplies it."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph locates the whole difference in the source of the authority. A mint holds a monopoly granted by law that does not depend on anyone's opinion; a museum's is reputational and is conferred, continuously, by the very people to whom it certifies. A thing conferred continuously is a thing that can stop being conferred.",
+        "correct_reasoning": "The correct option takes that one step. The passage supplies the consequence itself in the same paragraph, where a museum may certify for thirty years and then find its stamp has become the evidence of an error, which can only happen if the audience that granted the authority has revised its view. Nothing comparable is said or possible for the mint.",
+        "passage_anchor": "rc-0073-p3",
+        "question_type_note": "Where a passage contrasts two institutions on a single property, the inference almost always concerns that property. Ask what follows from the difference rather than from either institution alone.",
+        "reading_habit": "Notice adverbs like continuously. An author who says a thing is granted again and again is telling you it can be withheld, and questions are built on that quiet implication.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The second paragraph says a coin melted down is worth its weight and no more, which sets the metal as the floor rather than as something the coin can fall below. Withdrawal removes the certificate and leaves the substance.",
+            "seductive_element": "The passage does describe withdrawal and melting in adjacent sentences, and an option combining them reads like a summary of the pair."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No account of why museums sell is offered. The fourth paragraph is about how a sale is received rather than about what prompted it, and it insists that the reaction is out of all proportion to the sum involved.",
+            "seductive_element": "Financial pressure is the ordinary explanation for an institution selling assets, and the reader supplies it where the passage leaves a gap."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The claim is about a particular kind of value that institutions confer, not about worth as such. The bus ticket example works precisely because such an object begins with some ordinary significance to somebody and acquires a different standing on being accessioned.",
+            "seductive_element": "It is the live rival, because the first paragraph's phrase about becoming the kind of thing that has a value at all really does sound absolute when lifted out of the sentence."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "accession",
+      "passage_use": "a museum will accession a bus ticket and give it a number",
+      "meaning_here": "take an object formally into a collection and record it",
+      "difficulty": "hard"
+    },
+    {
+      "word": "vitrine",
+      "passage_use": "a vitrine that admitted every object",
+      "meaning_here": "a glass case in which an exhibit is displayed",
+      "difficulty": "hard"
+    },
+    {
+      "word": "debase",
+      "passage_use": "A mint cannot debase a coinage by accident",
+      "meaning_here": "reduce the value of a currency by lowering what is in it",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "An analogy is offered, tested three times, and then broken on purpose. The paragraph where it breaks is not a retreat; work out what the author does with the break.",
+    "one_sentence_summary": "A museum is better understood on the model of a mint, as an institution whose ordinary operations certify rather than discover value, and the comparison is worth having chiefly because of the single point at which it fails, since a museum's authority is granted continuously by the public it certifies to and can therefore be shown to have been misused, which is why selling a work is treated as a confession while melting a coin is not.",
+    "main_idea": "A museum does not collect valuable things; the selecting, cataloguing, lighting, insuring and refusing to sell are what make an object the kind of thing that has value. A mint works the same way, is equally indifferent to its material, equally dependent on exclusion, and produces value equally inseparable from itself. The analogy breaks at one place: a mint's authority comes from law and a museum's from the people it certifies to, so a museum can be wrong, which is why selling a work reads as a withdrawn certificate and a scandal.",
+    "simple_explanation": "We usually say a museum is where valuable objects are kept. The author says it is closer to the truth to say it is where value gets made.\n\nThink about a mint. A mint does not inspect metal, decide it is precious, and write that down. It stamps a disc, and the stamp is what turns the disc into money. What the metal is made of barely matters to what it will buy.\n\nMuseums, he says, do the same thing. They do not go out and find the important objects. Choosing an object, giving it a number, lighting it, insuring it and refusing to sell it are the actions that turn it into something with a value.\n\nHe then tests the comparison three times, and it holds each time. Neither cares about the material: a mint will stamp cheap metal, a museum will take in a bus ticket. Both work by leaving things out, because a stamp given to every disc, or a case that admitted every object, would prove nothing. And in both, the value cannot be carried away: melt a coin and you have its weight, and an object that leaves the collection loses whatever the collection was giving it.\n\nThen he breaks the comparison, deliberately. A mint has authority because the law says so, and that does not depend on whether anyone admires it. A museum's authority is reputation, and it is handed over again and again by the very people the museum is trying to convince. That means a museum can be wrong in a way a mint cannot. A mint cannot accidentally debase a coin; it can only choose to. A museum can spend thirty years vouching for work that the next generation finds empty, and then its stamp becomes proof of a mistake.\n\nAnd this, he says, is where the comparison becomes useful rather than just clever, because it explains something odd. When a mint withdraws a coinage nobody is scandalised. When a museum sells a work, people are furious, far beyond the money involved, and furious at the museum rather than at the buyer. That is because the sale is not really a financial act. It is the museum taking back a certificate, and by doing so admitting it should never have issued it.",
+    "why_difficult": "The passage is organised around an analogy, and analogies make readers lazy in two opposite ways. Some take the comparison as decoration and miss that it is carrying the argument; others take the third paragraph's admission of failure as a withdrawal and conclude that the author has abandoned the model. Neither is right: the failure is the productive part. There is also a level problem in the claim itself. The passage says museums make a particular kind of value, and it is easy to hear this as the much stronger claim that nothing is valuable until an institution says so, which the last question is built on.",
+    "author_intention": "To replace the picture of a museum as a warehouse for things already known to matter with the picture of a museum as a machine that confers standing, and then to use the one respect in which the machine is unlike a mint to explain the peculiar heat that surrounds a sale.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0073-p1",
+        "role": "Proposes the model",
+        "note": "A mint does not find precious metal; the stamp makes the money. A museum likewise does not find important objects; its ordinary operations are what make an object valuable."
+      },
+      {
+        "paragraph_id": "rc-0073-p2",
+        "role": "Tests the model",
+        "note": "Three tests, all passed: neither institution cares about the material, both work by excluding, and in both the value cannot leave with the object."
+      },
+      {
+        "paragraph_id": "rc-0073-p3",
+        "role": "Breaks the model",
+        "note": "A mint's authority comes from law and needs nobody's approval. A museum's comes from the audience it is certifying to, and can be revoked, so a museum can turn out to have been wrong."
+      },
+      {
+        "paragraph_id": "rc-0073-p4",
+        "role": "Uses the break",
+        "note": "Which explains why withdrawing a coinage is routine and selling a work is a scandal: the sale takes back a certificate and convicts the museum of having issued it wrongly."
+      }
+    ],
+    "tone_progression": "Assured and slightly provocative in the opening substitution, methodical through the three tests, and then quickened at the break, where the author's interest visibly rises, ending with the satisfaction of a comparison that has paid off in an explanation.",
+    "key_transitions": [
+      "'it would be closer to the truth to call it a place where value is made' (paragraph 1) — the substitution on which everything rests.",
+      "'It fails at one joint, and the failure is the interesting part.' (opening of paragraph 3) — the analogy is broken deliberately and the reader is told the break matters.",
+      "'This is the point at which the comparison stops being decorative and starts doing work' (opening of paragraph 4) — the author names the payoff."
+    ],
+    "misunderstanding": "Readers build one of two wrong models. In the first, the passage is a debunking: museums are frauds, value is invented, nothing is really worth anything. The passage never says this, and the second paragraph's melted coin shows that the substance retains its own worth after the certificate goes. In the second, the third paragraph is read as the author conceding that his comparison does not work, so the fourth paragraph's explanation arrives with nothing to attach to. Both errors come from treating an analogy as a claim of resemblance rather than as an instrument whose limits are part of what it shows.",
+    "traps_summary": "This set offers a familiar museum activity in place of an unfamiliar word's real sense, an analogy said to be abandoned where it is being put to work, a plausible premise about articulate selection where the load is carried by a claim about prior value, and an absolute statement about worth built from a phrase about one kind of value. Asking which paragraph each option belongs to, and whether it belongs to the model or to the break, settles all four.",
+    "reading_lesson": "When a passage is built on an analogy, keep two lists as you read: the respects in which the two things are said to match, and the respect in which they are said to differ. Careful writers break their own comparisons deliberately, and the break is usually where the argument is going rather than where it gives up. The second habit is to watch the altitude of a claim about what an institution does: the statement that a museum confers a kind of standing is not the statement that nothing has worth without it, and distractors are built almost entirely out of that upgrade.",
+    "real_world": "The same structure covers any body whose certificate is worth more than the thing certified: a university's degree, a ratings agency's grade, a court's precedent, a journal's acceptance, and any award whose value depends on the continued respect of the people it is awarded to.",
+    "takeaway": "The stamp is the product; the difference between a mint and a museum is that a museum's stamp can be taken back by the people who lent it.",
+    "reflection_question": "Which of the things you treat as valuable would keep that standing if the institution that vouches for them stopped being believed?"
+  }
+}

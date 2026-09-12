@@ -1,0 +1,459 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0068",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "law",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "qualifier-tracking",
+      "inference",
+      "scope-control"
+    ],
+    "word_count": 480,
+    "question_count": 5,
+    "question_types": [
+      "inference",
+      "must_be_true",
+      "primary_purpose",
+      "specific_detail",
+      "tone"
+    ],
+    "theme": "liability without fault defended as a relocation rather than an abandonment of fault: the objection assumes the defendant chose only on the day of the accident, whereas he chose to carry on the activity, so the doctrine holds only where that earlier choice was declinable, unusual and to his own advantage, and the test should be the availability of an alternative rather than the danger of the activity",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "A defence that carries its own limit, so that the third paragraph is worth as many questions as the second. The doctrine is defended and then handed back to its critics for a whole class of cases, and the questions are built on readers who take the defence without the conditions or the conditions without the defence.",
+    "length_class": "medium",
+    "structure": "problem_diagnosis_prescription",
+    "viewpoints": 2,
+    "tone": "measured, corrective, candid at the close",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.problem_solution",
+      "struct.qualification",
+      "struct.definition",
+      "comp.explicit_detail",
+      "comp.central_idea",
+      "comp.purpose",
+      "comp.paraphrase",
+      "arg.assumption",
+      "arg.qualification",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.principle",
+      "arg.necessary_vs_sufficient",
+      "inf.necessary",
+      "inf.strongly_supported",
+      "inf.author_view_application",
+      "scope.condition",
+      "lang.concession_marker",
+      "lang.tone_shift",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that any activity a person chose to undertake may fairly attract liability without fault, which follows from the second paragraph alone; the third adds two further requirements, that the activity be declinable without ceasing to live an ordinary life and that its advantage run chiefly to the actor, so choice is necessary and not sufficient. Q2's rival is the option about intention, which sounds like the natural form of the fault objection and is not the assumption the passage names; the passage states the hidden premise as the defendant having chosen only once, on the day of the accident. Q3's rival is the option calling the passage an argument for abolishing the doctrine, which reverses a defence into an attack; the second paragraph says the doctrine does not abolish fault but moves the question. Q4's rival is the option that an employee has undertaken the activity and is paid for it, which drops the condition the third paragraph makes explicit in the words about work a man must take because it is the work available. Q5's rival is the sceptical reading, which is right about the fiction and wrong about where the passage puts it: the fiction appears only where the conditions fail, and elsewhere the relocated question is called a real one.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "premise",
+      "volatile",
+      "allocated"
+    ]
+  },
+  "passage": {
+    "title": "The Choice Before the Accident",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0068-p1",
+        "text": "The doctrine is stated plainly enough and offends most people the first time they hear it. In certain classes of case a defendant is made to pay although he did nothing careless: he kept the reservoir in good repair, inspected the tanks on the proper days, hired the men a prudent employer would have hired, and the water came down all the same. Lawyers call this liability without fault, and the objection to it is as old as the doctrine. A person, the objection runs, should answer for what he could have avoided, and a defendant who has taken every precaution available to him could not have avoided this."
+      },
+      {
+        "id": "rc-0068-p2",
+        "text": "The objection has a hidden premise, which is that the defendant chose only once, on the day of the accident. He chose earlier. He chose to hold a great weight of water above a village, to keep a quantity of a volatile substance beside a road, to fly a machine over the roofs of a town. At that earlier moment the harm was not certain but it was foreseeable in the only sense the law needs, as a thing of the kind that can happen and against which no amount of care is a guarantee. Ask the question there and the fault principle is not breached at all. The doctrine does not abolish fault. It moves the question from the conduct of an activity to the decision to carry it on."
+      },
+      {
+        "id": "rc-0068-p3",
+        "text": "That defence is worth exactly what the earlier choice is worth, and the earlier choice is not always worth much. It has to be a choice a man could have declined without ceasing to live an ordinary life, which means the activity must be an unusual one rather than a condition of existence; and its advantage has to run chiefly to him, since a person who carries a risk for the general convenience has not helped himself by accepting it. Where those conditions hold, the relocated question is a real one. Where they do not, where the activity is the work a man must take because it is the work available, the earlier moment of choice is a fiction, and the old objection recovers every particle of its force."
+      },
+      {
+        "id": "rc-0068-p4",
+        "text": "The practical consequence is a change of question. Courts and legislatures extending liability of this kind habitually ask how dangerous the activity is, which settles nothing, since danger by itself tells you only that somebody will be hurt and not who should pay. The question to ask is whether the defendant had a genuine alternative to undertaking it. One honest difficulty remains. A defendant told that his fault lay in a decision that everybody thought innocent when he took it is being judged by a standard he could not have consulted, and calling that fault, rather than misfortune fairly allocated, is a use of the word that will not comfort him."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0068-q1",
+      "type": "must_be_true",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "arg.necessary_vs_sufficient",
+        "scope.condition"
+      ],
+      "target_mistake": "treating the earlier choice as enough to license the doctrine when the passage adds two further requirements to it",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following must be true on the account the passage gives?",
+      "options": {
+        "A": "A defendant who exercised every precaution cannot be liable on the account the author defends.",
+        "B": "The more harm an activity can cause, the stronger the case for imposing liability without fault.",
+        "C": "Any activity a person has chosen to undertake may fairly attract liability without fault.",
+        "D": "Where a person had no real alternative to an activity, the author's defence does not reach him."
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph is written as a pair of conditions with an explicit failure case attached. Where the conditions hold, the relocated question is called a real one; where they do not, the earlier moment of choice is called a fiction and the old objection recovers every particle of its force. That last clause is the whole answer.",
+        "correct_reasoning": "The correct option states the failure case in the passage's own terms. The defence of the doctrine consists entirely in there having been an earlier choice worth calling a choice; remove the alternative and there is nothing left for the fault question to attach to, which is why the author hands those cases straight back to the objectors rather than arguing for them.",
+        "passage_anchor": "rc-0068-p3",
+        "question_type_note": "A must-be-true question is a test of force, not of plausibility. Try to imagine the passage entirely true and the option false; the one where you cannot is the answer.",
+        "reading_habit": "When an author defends a position and then names conditions, read the conditions as a boundary rather than as decoration. The sentence that says what happens outside the boundary is the one questions are built from.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the doctrine's denial, not its defence. The first paragraph describes exactly such a defendant being made to pay, and the second says the fault question should be asked about the earlier decision instead, where his care on the day is beside the point.",
+            "seductive_element": "The passage takes the objection seriously and restates it fully, so a reader who has absorbed the objection can finish holding it as the conclusion."
+          },
+          {
+            "option": "B",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The fourth paragraph rules danger out as the test, saying it settles nothing because it tells you only that somebody will be hurt and not who should pay. Nothing in the passage makes liability track the scale of possible harm.",
+            "seductive_element": "Everyone associates strict liability with hazardous things, and the passage's own examples are a reservoir, a volatile substance and an aircraft."
+          },
+          {
+            "option": "C",
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "Choice is necessary on this account and not sufficient. The third paragraph adds that the activity must be one a man could decline without ceasing to live an ordinary life, and that its advantage must run chiefly to him.",
+            "seductive_element": "It is the live rival, because the second paragraph really does rest the whole defence on the earlier choice, and a reader who stops there has everything this option needs."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0068-q2",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "arg.assumption",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "supplying the familiar version of the fault objection instead of the premise the passage actually names",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "According to the passage, the objection to liability without fault rests on the hidden premise that",
+      "options": {
+        "A": "the defendant made only one relevant choice, and made it on the day of the accident",
+        "B": "a defendant should never be made to pay for harm that he did not intend to cause",
+        "C": "the activities to which the doctrine attaches are more dangerous than ordinary ones",
+        "D": "courts are better placed than legislatures to decide where a loss ought to fall"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The second paragraph names the premise in its first sentence and then spends four sentences dismantling it, which is the clearest signal a passage can give that the sentence matters. The dismantling consists of listing the earlier decisions the defendant did make.",
+        "correct_reasoning": "The correct option is that sentence. The objection says a person should answer for what he could have avoided, and it reaches the conclusion that this defendant could not have avoided the harm only by looking at the day of the accident alone. Once the earlier decision to carry on the activity is admitted as a choice, the same principle gives the opposite answer.",
+        "passage_anchor": "rc-0068-p2",
+        "question_type_note": "A detail question wants the sentence, not the topic. Where a passage says an argument has a hidden premise, the premise is stated within a line of that phrase and rarely needs hunting for.",
+        "reading_habit": "When an author says an argument assumes something, stop and mark the assumption. The rest of the paragraph will be an attack on it, and the attack is unintelligible if you have the assumption slightly wrong.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Intention appears nowhere in the passage. The objection is built on avoidability, and the defendant it describes is one who took every precaution, which is a claim about care rather than about what he meant to do.",
+            "seductive_element": "It is the live rival, because intention is the form the fault principle takes in most readers' minds, and the option sounds like the objection stated properly."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Danger is discussed in the last paragraph, where it is the question the author says courts wrongly ask. It is nobody's premise for the objection, which turns on when the defendant is taken to have chosen.",
+            "seductive_element": "The examples really are dangerous things, so a reader who remembers the reservoir rather than the argument reaches for this."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Courts and legislatures appear once, side by side, as bodies that habitually ask the wrong question. The passage never compares their competence or suggests that either should decide instead of the other.",
+            "seductive_element": "Institutional questions are common in writing about law, and the fourth paragraph does name both bodies in a single breath."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0068-q3",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.central_idea",
+        "arg.rebuttal"
+      ],
+      "target_mistake": "reading a defence bounded by conditions as an attack, because the passage grants the objection so much ground in its opening and closing paragraphs",
+      "prediction_target": "The learner should be able to name the verb before reading the options: the author is answering an objection by moving the question it asks, and then marking where the answer stops working.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to argue that strict liability ought to give way to a test of the care that a defendant actually took",
+        "B": "to describe the history of a doctrine that has puzzled lawyers since the day it was first imposed",
+        "C": "to show that the doctrine relocates fault rather than abandoning it, and where the move fails",
+        "D": "to show that the idea of fault is too vague to do useful work in the law of accidents"
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage announces its move in two short sentences at the end of the second paragraph: the doctrine does not abolish fault, it moves the question. The third paragraph then does something a purely defensive piece would not do, which is to say where the move is a fiction.",
+        "correct_reasoning": "The correct option keeps both actions. The relocation is the answer to the objection, and the conditions are the price of the answer, which is why a whole class of cases is returned to the objectors with the old complaint intact. A statement of purpose that omits either half describes a different and less careful passage.",
+        "passage_anchor": "rc-0068-p2, rc-0068-p3",
+        "question_type_note": "A purpose question is answered with a verb and an object, and both must survive the paragraph that limits the claim. Where an author sets his own boundary, the boundary belongs in the statement of purpose.",
+        "reading_habit": "Ask what the author would have had to leave out to make the passage simpler. What he refused to leave out is usually what the purpose question is testing.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This reverses the passage. The care a defendant took is exactly what the second paragraph declines to treat as the relevant question, since it says the fault enquiry belongs at the decision to carry the activity on.",
+            "seductive_element": "The opening paragraph states the objection warmly and at length, and the closing paragraph concedes a real difficulty, so a reader can assemble an attack out of the frame alone."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "No history is given. The passage is an argument about how a question should be posed, and its only temporal remark is that the objection is as old as the doctrine, which is a single clause of setting.",
+            "seductive_element": "Legal writing often opens historically, and the phrase about an objection as old as the doctrine sounds like the start of one."
+          },
+          {
+            "option": "D",
+            "trap_type": "sophisticated_sounding",
+            "why_wrong": "The argument depends on fault being a usable idea. The whole manoeuvre is to apply the fault principle at a different moment, which would be impossible if the principle were too vague to apply anywhere.",
+            "seductive_element": "Declaring a legal concept incoherent sounds like the kind of thesis a passage about liability without fault would have, and it is the most abstract option on offer."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0068-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.strongly_supported",
+        "scope.condition"
+      ],
+      "target_mistake": "counting a formal act of agreement as the choice the passage requires, when the passage requires an alternative the person could have taken",
+      "prediction_target": "The learner should predict that the answer will turn on whether the person could have declined the activity and still lived an ordinary life, not on whether he agreed to it.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "application",
+        "scope"
+      ],
+      "stem": "It can be inferred that a rule imposing liability without fault on a labourer for accidents arising from the work he was hired to do would",
+      "options": {
+        "A": "be justified, since he undertook the activity and drew the wage that was paid for it",
+        "B": "fall outside the author's defence, because the choice it relies on is one the labourer did not really have",
+        "C": "be defensible only if the employer who hired him were made to pay alongside him",
+        "D": "be an ordinary application of the fault principle as lawyers have always understood it"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph supplies this case by name. It says the conditions fail where the activity is the work a man must take because it is the work available, and in such cases it calls the earlier moment of choice a fiction. The passage has already run the test; the question only asks the reader to notice.",
+        "correct_reasoning": "The correct option applies the condition rather than the conclusion. The defence rests on a decision the defendant could have declined without ceasing to live an ordinary life, and work taken because it is the work available is the passage's own example of a decision that fails that description. The doctrine may still be imposed by a legislature; what it cannot claim is the justification this author has offered.",
+        "passage_anchor": "rc-0068-p3",
+        "question_type_note": "When a passage states conditions, an inference question usually supplies a case designed to fail one of them. Check the case against each condition separately rather than against the general claim.",
+        "reading_habit": "Distinguish a choice from a formal act of agreement. Authors who write about consent almost always attach a test about the alternatives available, and the test, not the agreement, decides the question.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "It keeps the undertaking and drops the condition attached to it. The passage requires a choice that could have been declined without ceasing to live an ordinary life, and adds that the advantage must run chiefly to the person accepting the risk.",
+            "seductive_element": "It is the live rival, because taking a job really is a decision, and the second paragraph rests its whole defence on decisions of that shape."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage divides liability between two parties or discusses who else might be joined. The argument is about which moment the fault question is asked at, not about how a loss should be shared once it falls.",
+            "seductive_element": "Sharing a loss is the obvious practical fix, and the passage's talk of who should pay invites the reader to design a remedy."
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The fault principle as ordinarily understood is the objectors' version, which looks at the day of the accident. The author's move is a departure from that reading, which is why he has to argue for it.",
+            "seductive_element": "The passage does insist that fault is not abolished, so a reader can conclude that everything here is ordinary fault liability after all."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0068-q5",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "lang.concession_marker",
+        "arg.qualification"
+      ],
+      "target_mistake": "reading the closing admission as a withdrawal, so that a bounded defence becomes scepticism about the doctrine as such",
+      "prediction_target": "The learner should be able to say: the author is correcting a description rather than attacking or celebrating a rule, and he ends by admitting what his correction cannot do.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "main_idea"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "indignant at a rule that fixes blame on people who have plainly done nothing careless at all",
+        "B": "detached, reporting a legal doctrine without taking any position on its merits",
+        "C": "patient and corrective, defending the doctrine as far as a real earlier choice allows",
+        "D": "sceptical of a doctrine he regards as defensible only by resort to a fiction"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The judgement words are mild and they point one way until the last paragraph. The objection is restated fairly, the doctrine is said not to abolish fault, the conditions are set out without heat, and the closing admission is introduced as one honest difficulty rather than as a change of mind.",
+        "correct_reasoning": "The correct option keeps the temperature and the commitment together. The author is arguing, so he is not neutral, and he is arguing for a reading of the doctrine rather than for or against the doctrine in every case, which is why he can hand a whole class of cases back to the objectors in the third paragraph and still be defending it in the fourth.",
+        "passage_anchor": "rc-0068-p3, rc-0068-p4",
+        "question_type_note": "Tone is set by judgement words, not by subject matter. A passage about people being made to pay for accidents can be entirely unexcited, and usually is when the author's interest is in how a question is posed.",
+        "reading_habit": "Separate the heat of the topic from the heat of the writing. Ask which words in the passage express approval or disapproval, and if there are very few, no strong tone option can be right.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "This is the objection's temperature, not the author's. He states the complaint in the first paragraph in order to answer it, and the second paragraph begins by calling its central premise hidden and mistaken.",
+            "seductive_element": "The opening paragraph is the most emotive thing in the passage, and it is written from the objector's point of view without any marker saying so."
+          },
+          {
+            "option": "B",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author takes a position repeatedly: the premise is hidden, the principle is not breached, the question courts ask settles nothing, and the question they should ask is named. None of that is reporting.",
+            "seductive_element": "The prose is unexcited and free of adjectives, and calm writing is easily mistaken for neutral writing."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The fiction is named only where the conditions fail. Where they hold, the passage calls the relocated question a real one, so scepticism about the doctrine as such is broader than anything the author says.",
+            "seductive_element": "It is the live rival: the word fiction really is in the passage, and the final paragraph's admission sounds like the author conceding that the whole defence is a form of words."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "premise",
+      "passage_use": "The objection has a hidden premise",
+      "meaning_here": "an assumption an argument needs but does not state",
+      "difficulty": "medium"
+    },
+    {
+      "word": "volatile",
+      "passage_use": "a quantity of a volatile substance beside a road",
+      "meaning_here": "readily catching fire or turning to vapour; unstable in storage",
+      "difficulty": "medium"
+    },
+    {
+      "word": "allocated",
+      "passage_use": "rather than misfortune fairly allocated",
+      "meaning_here": "assigned to one party rather than another by a rule",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "An old objection is stated so well in the first paragraph that it can survive the rest of the passage in a careless reader's head. Watch for the moment the author agrees with it, and notice exactly how narrow that agreement is.",
+    "one_sentence_summary": "Liability without fault seems to punish the blameless only if the defendant is taken to have chosen once, on the day of the accident; he also chose to carry on the activity, so the doctrine moves the fault question rather than abolishing it, and it earns that defence only where the earlier choice could really have been declined and served mainly the chooser, which is why the test should be the availability of an alternative rather than the danger of the activity.",
+    "main_idea": "The complaint against liability without fault assumes a single moment of choice. There was an earlier one: the decision to keep the reservoir, store the substance, fly the aircraft. Asking about fault there leaves the fault principle intact, so the doctrine relocates the question rather than discarding it. The defence is worth only what the earlier choice is worth, so it fails where the activity was unavoidable or undertaken for the general convenience, and the right test is whether the defendant had an alternative.",
+    "simple_explanation": "There are cases where the law makes someone pay for damage even though they were careful. They maintained everything properly, checked everything on time, and the reservoir burst anyway. Most people's first reaction is that this is unfair, because we think you should only answer for something you could have avoided.\n\nThe author says that reaction hides an assumption. It assumes the only choice the defendant ever made was on the day of the accident. But he made an earlier one. He chose to keep a huge weight of water sitting above a village. He chose to store something dangerous next to a road. He chose to fly over a town. At that earlier moment nobody could say the accident would happen, but everybody could say that accidents of this kind happen and that no amount of care removes them.\n\nSo ask the fairness question about that earlier decision instead, and it no longer looks unfair. The law has not thrown out the idea of fault. It has moved the question to a different moment.\n\nThen comes the catch, and it is a serious one. This defence is only as good as the earlier choice was. For it to work, the person must really have been able to say no and still live a normal life, so the activity has to be something unusual rather than something everybody has to do. And the benefit has to go mainly to him, because someone carrying a risk for everyone else's convenience has not done himself a favour by accepting it. When those things are true, the moved question is a real question. When they are not, for instance when the activity is simply the job a person has to take because it is the job available, then the earlier choice was never a choice at all, and the original complaint comes straight back with all its force.\n\nSo the practical advice is to change the question. Courts and lawmakers usually ask how dangerous an activity is, which decides nothing, because dangerousness only tells you that somebody will get hurt, not who ought to pay. The question to ask is whether the defendant could have done something else.\n\nThe author ends honestly. Even where his defence works, the defendant is being told that his fault lay in a decision everyone considered perfectly innocent at the time. Calling that fault is a stretch, and the author says so rather than pretending otherwise.",
+    "why_difficult": "The passage defends a position and limits it in the same breath, and readers habitually keep only one half. Those who keep the defence answer the conditional questions as though choice alone licensed the doctrine; those who keep the limit read the passage as an attack and choose sceptical options for tone and purpose. The other difficulty is that the objection in the first paragraph is written from inside the objector's head with no marker saying so, which leaves it available as the author's voice for anyone who is skimming.",
+    "author_intention": "To stop a familiar complaint by showing that it is asking about the wrong moment, and then to prevent the reader from over-using the repair by naming the cases in which the earlier moment does not exist.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0068-p1",
+        "role": "States the problem",
+        "note": "Sometimes a careful defendant still has to pay. The old complaint is that you should only answer for what you could have avoided, and he could not have avoided this."
+      },
+      {
+        "paragraph_id": "rc-0068-p2",
+        "role": "Finds the hidden premise",
+        "note": "The complaint assumes he only chose once, on the day. He chose earlier, when he decided to run the activity at all. Ask about that moment and fault is still doing its work."
+      },
+      {
+        "paragraph_id": "rc-0068-p3",
+        "role": "Prices the defence",
+        "note": "The defence is worth what the earlier choice was worth. It must have been declinable, unusual, and mainly to his own advantage. Otherwise the choice is a fiction and the complaint returns."
+      },
+      {
+        "paragraph_id": "rc-0068-p4",
+        "role": "Changes the question, and concedes",
+        "note": "So ask whether the defendant had an alternative, not how dangerous the thing is. And admit that calling an innocent-looking decision a fault will never console the man who made it."
+      }
+    ],
+    "tone_progression": "It opens in the objector's voice, warm and aggrieved, cools into flat analysis as the premise is exposed, becomes exacting while the conditions are set out, and ends candid rather than triumphant, giving away a point that a more partisan writer would have kept quiet about.",
+    "key_transitions": [
+      "'The objection has a hidden premise, which is that the defendant chose only once, on the day of the accident.' (opening of paragraph 2) — the complaint is not denied but re-dated.",
+      "'That defence is worth exactly what the earlier choice is worth' (opening of paragraph 3) — the author begins pricing his own argument.",
+      "'One honest difficulty remains.' (paragraph 4) — a concession the argument did not require, offered anyway."
+    ],
+    "misunderstanding": "The commonest wrong model is that the author is against liability without fault, built from the vivid first paragraph and the candid last one, with the middle read as a description of what courts say rather than as what the author is arguing. The second wrong model is the opposite: the reader takes the relocation and forgets the price, and then treats any chosen activity as fair game, which the third paragraph rules out twice over, once by requiring that the choice be declinable and once by requiring that its advantage run chiefly to the chooser.",
+    "traps_summary": "The options here offer the objection as the author's conclusion, the familiar version of a principle in place of the one the passage names, a defence stripped of its conditions, and scepticism built from a word the passage uses only inside a failure case. Sorting every option by whether it belongs to the objection, the defence or the limit answers four of the five questions.",
+    "reading_lesson": "When an author answers an objection by changing the moment at which a question is asked, immediately look for the conditions that make the new moment a real one, because that is where the argument can be true and useless at once. More generally, in any passage that defends something with conditions attached, keep two lists as you read: what the defence claims, and what it costs. Almost every wrong option in such a passage is one list without the other.",
+    "real_world": "The same move appears whenever responsibility is pushed back from an act to the decision to be in a position to perform it: a driver who chose to drive tired, a firm that chose to run a process it could not fully control, a government that chose a system whose failures it can predict in aggregate and never in particular.",
+    "takeaway": "Moving the question of fault to an earlier moment answers the objection only if there was a real choice at that moment.",
+    "reflection_question": "Which of the risks you run would still look like a choice if somebody asked you what else you could realistically have done?"
+  }
+}

@@ -1,0 +1,399 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0069",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "urban-studies",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "concession-tracking",
+      "inference",
+      "main-idea-extraction"
+    ],
+    "word_count": 410,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "phrase_in_context",
+      "strengthen",
+      "title_selection"
+    ],
+    "theme": "the features that make a street feel safe are drawn up from the position of a frightened walker alone at night and stand in for the company that actually deters harm, while the sources of that company are the untidy small frontages such clearing removes, though reassurance still earns its place indirectly by keeping people on the pavement wherever there is an errand to bring them out",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "The concession in the opening paragraph is not a formality: the last paragraph needs it, because the thesis would otherwise be the simple inversion that reassurance is worthless. Every question in the set is decided by holding the concession and the thesis at once, and the strengthen question isolates the presence mechanism by holding lighting constant.",
+    "length_class": "medium",
+    "structure": "concession_thesis",
+    "viewpoints": 2,
+    "tone": "brisk, fair-minded",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.contrast",
+      "struct.qualification",
+      "struct.cause_effect",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "arg.concession",
+      "arg.causal_claim",
+      "arg.evidence",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "cr.strengthen",
+      "scope.condition",
+      "scope.abstraction_level",
+      "lang.concession_marker",
+      "word.context_clue",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the reading of the phrase as company in the ordinary social sense, making the lamps a cure for loneliness; the colon that follows settles it, since what the lamp is said to be unable to do is be appealed to, which is protective work rather than companionship. Q2's rival is the title naming the reassurance checklist, which covers the concession and nothing after it; the key takes the closing formulation, where the safety the list delivers is called borrowed from the people it was designed to replace, and that phrase reaches the concession and the thesis together. Q3's rival is the option about lighting and public fear, which supports only the paragraph the author has already granted; the key holds lighting constant and varies occupancy, which is the one comparison that tests the presence claim on its own. Q4's rival is the option that avoidance draws offenders, which supplies a mechanism the passage does not: the passage says an avoided street empties and thereby becomes what the walker feared, which needs no account of who arrives.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "recesses",
+      "frontages",
+      "reassurance"
+    ]
+  },
+  "passage": {
+    "title": "Bright and Empty",
+    "reading_time_min": 2.2,
+    "paragraphs": [
+      {
+        "id": "rc-0069-p1",
+        "text": "The list by which a street is judged safe is easy to mock: lamps at short intervals, sightlines cleared to the corner, no recesses or service doorways, railings, a patrol that passes on the hour. It would be a mistake to mock it quickly. Fear is not a misunderstanding waiting to be corrected by a statistic; it is a cost in itself, paid by the person who takes the longer way home, or does not go, or stops going out in the evening at all. A street that frightens the people who must use it is failing them, whatever the returns show."
+      },
+      {
+        "id": "rc-0069-p2",
+        "text": "Notice, though, from what position the list was drawn up. Every item on it answers the question a frightened person asks while walking alone at night: can I see what is coming, and can I be seen if something happens? The list is written for a street with nobody in it. Each of its provisions is a substitute for company, and what it substitutes is poor: a lamp cannot be appealed to, a cleared sightline will not come out of a doorway, and a patrol is somewhere else."
+      },
+      {
+        "id": "rc-0069-p3",
+        "text": "What keeps a street from being a good place to do harm in is people who have a reason to be on it at hours nobody planned: a shop that shuts at nine beside one that shuts at six, flats above the shops with somebody in them, premises small enough to be numerous, a launderette, errands. None of this is tidy. It produces clutter, blocked views, corners, deliveries at awkward times. And a street rebuilt to the reassurance list tends to lose precisely the small frontages and mixed uses that generate the coming and going, because the frontages are what the clearing clears."
+      },
+      {
+        "id": "rc-0069-p4",
+        "text": "The two are not independent, which is why the opening concession has to stand. Reassurance produces presence. A street that feels dangerous is avoided, and being avoided it empties, and being empty it becomes the thing the walker was afraid of; the lamps that do no policing of their own keep people on the pavement, and the people do the policing. But the loop only turns where there is somewhere to be going. Light on an industrial road at midnight buys nothing, because no amount of reassurance will invent an errand. The list is not wrong. It is a second best, and such safety as it delivers is borrowed from the people it was designed to replace."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0069-q1",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "comp.function_over_words"
+      ],
+      "target_mistake": "reading company in its social sense, so that the provisions become a remedy for loneliness rather than a stand-in for what other people do",
+      "prediction_target": "The learner should paraphrase from the clause that follows the colon: the lamp is faulted for something it cannot do, and what it cannot do is act, so the company being replaced is protective.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the second paragraph, the claim that each provision on the list \"is a substitute for company\" most nearly means that each provision is",
+      "options": {
+        "A": "a way of making a street feel less lonely for the person walking down it",
+        "B": "a stand-in for the other people whose presence would do the work",
+        "C": "a cheaper alternative to keeping more patrols out on the street",
+        "D": "a measure that helps a lone walker more than it helps a crowd"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The colon does the defining. What it substitutes is poor, and the three examples of the poverty are all failures to act: a lamp cannot be appealed to, a sightline will not come out of a doorway, a patrol is somewhere else. Each complaint is about something a person would have done.",
+        "correct_reasoning": "The correct option keeps that sense of replacement. The provisions are standing in for other people, and the paragraph judges them by whether they can do what other people do, which is why it rates them poorly rather than merely coldly. The third paragraph then names the work being replaced, since what keeps a street from being a good place to do harm in is people with a reason to be on it.",
+        "passage_anchor": "rc-0069-p2",
+        "question_type_note": "A phrase question is settled by the clause the author attaches to explain himself, which is usually the one after a colon or a dash. Read the explanation before you read the options.",
+        "reading_habit": "When an author calls something a substitute, ask what job it is substituting in. The answer is almost always in the next clause, and it is what separates the key from the near-synonym.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Company in the sense of pleasant human society is not what the paragraph measures. Its three complaints are that a lamp cannot be appealed to, that a sightline will not come out of a doorway, and that a patrol is elsewhere, all of which are about intervention.",
+            "seductive_element": "It is the live rival, because the commonest sense of the word really is sociable company, and a lit street does feel less lonely."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No costs are compared anywhere in the passage. The patrol appears on the list as one provision among several and then reappears as a provision that fails, never as an expense that something cheaper displaces.",
+            "seductive_element": "Substitution suggests economy, and municipal lighting really is defended on cost grounds outside this passage."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The paragraph is saying what the provisions replace, not whom they serve best. It does note that the list was drawn up from the position of a lone walker, but that is an account of its origin rather than a comparison of its effects on different users.",
+            "seductive_element": "The lone walker is genuinely in the paragraph two sentences earlier, which makes a comparison involving her feel authorised."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0069-q2",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.abstraction_level",
+        "arg.concession"
+      ],
+      "target_mistake": "titling the passage from the half it concedes, or from the attack it explicitly refuses to make",
+      "prediction_target": "The learner should be able to say: the title must cover both the claim that the list replaces people and the admission that it still works, which the closing sentence does in one word.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "scope"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "The Case Against Well-Lit Streets",
+        "B": "How to Make a Street Feel Safer at Night",
+        "C": "Fear, and the Damage It Does to Cities",
+        "D": "A Borrowed Kind of Safety"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage names its own subject in the last sentence: the list is a second best, and such safety as it delivers is borrowed from the people it was designed to replace. Every earlier paragraph is arranged to earn that word, from the concession about fear to the untidy frontages to the loop that only turns where there is an errand.",
+        "correct_reasoning": "The correct title carries both halves of the argument at once. Borrowed keeps the claim, since the protective work belongs to the people rather than to the lamps, and it keeps the concession, since something borrowed is genuinely had. A title that dropped either half would leave a paragraph of the passage looking like padding.",
+        "passage_anchor": "rc-0069-p4",
+        "question_type_note": "A title is the main idea under a word limit, and in a concession-and-thesis passage it has to survive the concession. Test each candidate against the paragraph that grants ground, not only against the one that takes it.",
+        "reading_habit": "Ask which sentence of the passage each candidate title makes redundant. The title that leaves every paragraph doing work is the one at the right altitude.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage declines this twice, first by warning against mocking the list quickly and then by saying the list is not wrong. Lighting is credited with keeping people on the pavement, which is the mechanism the author says does the protecting.",
+            "seductive_element": "The middle paragraphs really are an attack on the checklist, and a reader who takes the concession as throat-clearing has an unopposed case for it."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "Feeling safer is the first paragraph, which the passage grants and then sets aside in order to ask what actually keeps harm from happening. Two of the four paragraphs would have no place under this title.",
+            "seductive_element": "It is the live rival, because the checklist is described in more concrete detail than anything else in the passage and occupies its opening."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The cost of fear is conceded in one paragraph and then used as a premise, not argued for. The passage is about what protects a street and what the reassurance measures are standing in for, which this title does not reach at all.",
+            "seductive_element": "The claim that fear is a cost in itself is the most quotable sentence in the passage and the only one that sounds like a thesis."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0069-q3",
+      "type": "strengthen",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.strengthen",
+        "arg.evidence",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "strengthening the conceded half, which the author has already granted, instead of the presence claim that carries the argument",
+      "prediction_target": "The learner should predict that the strengthener will hold the reassurance features constant and vary the number of people with a reason to be on the street.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most strengthen the author's central claim?",
+      "options": {
+        "A": "Among streets lit to the same standard, those with lived-in upper floors record fewer incidents than those whose upper floors are offices.",
+        "B": "People questioned in surveys report feeling considerably safer on brightly lit streets than they do on dim ones.",
+        "C": "Cities that increased their street lighting saw the public's fear of walking home at night fall sharply.",
+        "D": "Incidents on residential streets are more often committed by people living nearby than by strangers."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The central claim is that presence, not visibility, is what stops a street being a good place to do harm in. The author has already granted that the list reassures. A strengthener therefore has to isolate presence, which means holding the reassurance features fixed while the number of people with a reason to be there changes.",
+        "correct_reasoning": "The correct option is that experiment as nearly as an observation can be. Lighting is equal on both sides, so nothing on the checklist can explain the difference; what differs is whether there is somebody upstairs at the hours the passage says matter, which is exactly the untidy occupancy the third paragraph names. The comparison props the one link the passage cannot otherwise demonstrate.",
+        "passage_anchor": "rc-0069-p3",
+        "question_type_note": "A strengthen question attaches to the claim that is still unsupported after the passage ends, never to the one the author has already conceded. Ask what he has asserted and not shown.",
+        "reading_habit": "Look for the option that holds one variable still. Evidence in which everything differs at once supports nothing in particular, however favourable it sounds.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This supports the concession the author makes in his opening paragraph, where fear is granted as a real cost. It says nothing about whether harm occurs less often, which is the claim the rest of the passage argues for.",
+            "seductive_element": "Supporting anything the author says feels like supporting the author, and this is the part of his case a reader can verify from their own experience."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Fear falling is the outcome the passage separates from the outcome it cares about. The whole point of the second and third paragraphs is that the two can move apart, so evidence about the first cannot bear on the claim about the second.",
+            "seductive_element": "It is the live rival, because it reads as hard evidence for a measure the passage does eventually endorse, though for an entirely different reason."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This cuts against the argument rather than supporting it. If those who do the harm are the neighbours, their being about is not obviously a deterrent, and the passage's mechanism of company doing the policing loses some of its force.",
+            "seductive_element": "It is a fact about streets and residents, and its subject matter sits so close to the passage's that its direction is easy to misread under time."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0069-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "scope.condition",
+        "arg.qualification"
+      ],
+      "target_mistake": "taking the final loop as unconditional, when the passage attaches it to there being somewhere for people to be going",
+      "prediction_target": "The learner should predict that the inference will carry the condition attached to the loop: reassurance works through people, so it does nothing where no people would come out anyway.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "Lighting a street brightly enough is by itself sufficient to make it safe to walk down.",
+        "B": "The measures on the list do most good where there are already reasons for people to be out.",
+        "C": "Streets that people avoid become dangerous because avoidance draws those who mean harm to them.",
+        "D": "Mixed streets are safer than residential ones at every hour of the day and of the night."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The last paragraph gives the mechanism and then bounds it in the same breath. Reassurance produces presence, and the people do the policing; but the loop only turns where there is somewhere to be going, and light on an industrial road at midnight buys nothing because no amount of reassurance will invent an errand.",
+        "correct_reasoning": "The correct option is that bound stated as a comparison. Since the list works by keeping people on the pavement rather than by acting on its own, its value rises with the number of people it can keep there, and falls to nothing where none would have come. The industrial road is the passage's own limiting case and the inference is what that case is there to establish.",
+        "passage_anchor": "rc-0069-p4",
+        "question_type_note": "Where an author states a mechanism and then names the condition under which it fails, the inference question is usually about the condition. The failure case tells you what the mechanism was made of.",
+        "reading_habit": "When a passage ends with an example of something not working, ask what the example subtracts. Whatever is missing there is what the mechanism actually ran on.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "The passage credits lighting with keeping people on the pavement and then says the people do the policing, which makes light a contributor and not a cause. The industrial road at midnight is offered precisely to show light acting alone and achieving nothing.",
+            "seductive_element": "The final paragraph is the passage's most generous stretch about lighting, and a reader collecting the concession can easily inflate it."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It runs the passage's own chain and swaps one link. The passage describes an emptying, not an attraction. An avoided street becomes what the walker feared because the people who would have been on it are absent, and no claim is made about anybody being drawn in by the absence.",
+            "seductive_element": "It is the live rival, because it supplies the missing step a reader expects in a story about danger, and the passage's loop really does end with the street becoming dangerous."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "No ranking of street types across the whole day is made. The argument is about particular hours, the ones nobody planned for, and about what generates traffic at them, not about which kind of street is safer in general.",
+            "seductive_element": "The third paragraph does praise mixed uses, and a reader who compresses it into a verdict about street types has most of the words on his side."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "recesses",
+      "passage_use": "no recesses or service doorways",
+      "meaning_here": "set-back spaces in a wall where somebody could stand unseen",
+      "difficulty": "medium"
+    },
+    {
+      "word": "frontages",
+      "passage_use": "the small frontages and mixed uses that generate the coming and going",
+      "meaning_here": "the street-facing fronts of individual premises",
+      "difficulty": "medium"
+    },
+    {
+      "word": "reassurance",
+      "passage_use": "a street rebuilt to the reassurance list",
+      "meaning_here": "the removal of fear, considered apart from the removal of danger",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "The first paragraph agrees with the view the passage is about to argue against. Work out, before the end, why the author needed that agreement rather than merely being polite.",
+    "one_sentence_summary": "The measures that make a street feel safe were drawn up from the position of a lone walker at night and stand in for the people whose presence actually deters harm, and since those people are produced by the small untidy frontages such measures clear away, the checklist is a second best whose real value is indirect, holding only where there is already an errand to bring somebody out.",
+    "main_idea": "Fear is a genuine cost, so the safety checklist is not to be dismissed. But every item on it answers the question a frightened solitary walker asks, and each is a poor substitute for other people. What actually makes a street a bad place to do harm is company at unplanned hours, produced by small mixed premises of the kind that clearing removes. The two are linked, because reassurance keeps people on the pavement, but only where there is somewhere for them to be going.",
+    "simple_explanation": "Think about what a city puts on its list when it wants a street to be safe: more lamps, clear views round the corner, no dark alcoves, railings, a patrol going past.\n\nThe author says do not laugh at that list. Being frightened is itself a real harm. If a street scares you, you take the long way round, or you stay in, and that is a loss whether or not anything would actually have happened to you.\n\nNow look at where the list came from. Every item on it answers one question, asked by one kind of person: someone walking alone at night who wants to see what is ahead and be seen if something goes wrong. In other words, the list assumes the street is empty. Each item is standing in for other people. And it is a poor stand-in, because you cannot call out to a lamp, a clear sightline will not step out of a doorway to help, and the patrol is three streets away.\n\nWhat really makes a street a bad place to commit a crime is people who have a reason to be there at odd hours. A shop shutting at nine next to one shutting at six. Flats above the shops with somebody home. Lots of small premises rather than a few big ones. A launderette. Errands. All of that is messy: clutter, blocked views, corners, vans unloading at inconvenient times. And a street rebuilt to the tidy checklist usually loses exactly those small shopfronts, because clearing the street is what clearing removes.\n\nThen comes the twist, and it is why the opening concession mattered. The two things are connected. If a street feels frightening, people avoid it. If they avoid it, it empties. And once it is empty, it really has become the dangerous place they imagined. So the lamps, which cannot police anything themselves, do help, by keeping people out on the pavement where they can police it for you.\n\nBut this only works if there is somewhere for people to be going. Light an empty industrial road at midnight and nothing happens, because no amount of lighting invents an errand. So the checklist is not wrong. It is second best, and whatever safety it produces is borrowed from the very people it was designed to replace.",
+    "why_difficult": "The structure invites two opposite oversimplifications, and both are wrong. A reader who treats the first paragraph as politeness ends with the thesis that reassurance measures are useless, which the fourth paragraph denies outright. A reader who takes the fourth paragraph as a retraction ends with the thesis that they work after all, which the second and third deny. The argument only makes sense if the concession and the claim are held together, and the sentence that joins them is short and easy to pass over. The passage also never says which streets are safer, only what produces safety, and options that convert the mechanism into a ranking are hard to reject at speed.",
+    "author_intention": "To stop the reader choosing between two positions that are both half right, by showing that the reassurance measures are a substitute for people and that substitutes of this kind can still work, but only through the people they were replacing.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0069-p1",
+        "role": "Grants the checklist",
+        "note": "Lamps, sightlines, railings, patrols. Easy to sneer at, but fear is itself a cost, paid by whoever takes the long way home or stays in."
+      },
+      {
+        "paragraph_id": "rc-0069-p2",
+        "role": "Asks who wrote it",
+        "note": "Every item answers the question a lone frightened walker asks. The list assumes an empty street, and each item is a poor stand-in for other people."
+      },
+      {
+        "paragraph_id": "rc-0069-p3",
+        "role": "Names what works",
+        "note": "People with reasons to be out at odd hours, produced by small mixed premises and occupied upper floors. Untidy, and exactly what a cleared street loses."
+      },
+      {
+        "paragraph_id": "rc-0069-p4",
+        "role": "Joins the two",
+        "note": "Reassurance keeps people on the street, and the people do the policing. But only where there is an errand to come out for, which is why the list is a borrowed second best."
+      }
+    ],
+    "tone_progression": "It begins by resisting an easy sneer, turns analytical and slightly cool in the middle two paragraphs as the checklist is taken apart, and closes fair-minded rather than triumphant, giving the measures back a real if dependent value.",
+    "key_transitions": [
+      "'It would be a mistake to mock it quickly.' (paragraph 1) — the concession is made deliberately, and the passage will need it later.",
+      "'Notice, though, from what position the list was drawn up.' (opening of paragraph 2) — the turn: the list is not wrong so much as written from one seat.",
+      "'The two are not independent, which is why the opening concession has to stand.' (opening of paragraph 4) — the author tells you what the first paragraph was for."
+    ],
+    "misunderstanding": "The wrong model most readers build is a simple inversion: feeling safe is an illusion, real safety comes from people, so the lamps are a waste. The passage says the opposite in its final paragraph, where the lamps keep people on the pavement and the people do the policing. The misreading survives because the middle two paragraphs are the most vivid part of the passage and because the correction arrives inside a sentence about independence, which does not announce itself as a reversal.",
+    "traps_summary": "This set offers the social sense of a word the passage uses functionally, a title drawn from the conceded half, support for a claim the author never disputed, and an extra mechanism supplied where the passage needs none. Each is answered by asking whether a statement belongs to the concession, the thesis, or the loop that connects them.",
+    "reading_lesson": "When a passage opens by conceding ground, note the concession as a claim the author still holds, not as a manner of speaking, and expect it to do work later. In concession-and-thesis passages the commonest error is to answer as though the author believed only the second half, and the second commonest is to read a late qualification as a change of mind. Both are avoided by the same habit: before answering anything, state the author's position as a sentence containing an although.",
+    "real_world": "The same structure turns up wherever a measure is judged by how it feels rather than by what it does: airport queues, visible security staff in shops, the cameras in a car park, and any office policy whose main effect is to reassure the people who have to comply with it.",
+    "takeaway": "Some measures work only by keeping the people around who were going to do the work anyway.",
+    "reflection_question": "Which of the arrangements that make you feel safe would still be doing anything if everyone else stopped turning up?"
+  }
+}

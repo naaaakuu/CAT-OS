@@ -1,0 +1,399 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0066",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "main-idea-extraction",
+      "inference",
+      "vocabulary-in-context"
+    ],
+    "word_count": 451,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "vocabulary_in_context",
+      "weaken"
+    ],
+    "theme": "imperial overreach explained by the argument that authorises an advance rather than by appetite: a case made on revenue carries its own arithmetic brake, while a case made on the safety of the frontier is renewed by every frontier it creates, so the expansions that ruined empires were characteristically the defensive ones, except where a frontier rests on ground nobody crosses",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "A contrast between two justifications rather than between two empires, which is where readers go wrong: they look for a comparison of places. The final paragraph attaches a condition to the contrast, and the inference question is built on that condition rather than on the contrast itself.",
+    "length_class": "medium",
+    "structure": "comparison_contrast",
+    "viewpoints": 2,
+    "tone": "dry, analytical",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.contrast",
+      "struct.qualification",
+      "struct.cause_effect",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "arg.causal_claim",
+      "arg.evidence_vs_conclusion",
+      "arg.qualification",
+      "arg.premise",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "cr.weaken",
+      "scope.condition",
+      "scope.abstraction_level",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about frontier governors needing instruction from a distant capital, which a candidate defends by saying that a slow chain of command breaks the automatic advance; the third paragraph has already placed the decision in the capital and says the case can be made there again in the same words a season later, so distance from the frontier changes nothing about who argues or how often. The garrison-cost option is the other pull, and it strengthens rather than weakens, since it deepens exactly the burden the author blames. Q2's rival is the commercial sense of purchase, which the sentence refuses: an argument is the thing said to find or not find it, and what an argument needs is something to take hold on. Q3's rival is the option that a barrier frontier removes every reason to advance; the second paragraph keeps the revenue case alive independently of any danger, so only the safety case is extinguished. Q4's rival is the option about holding costs outrunning revenue, which is the second paragraph's brake described as though it were the passage's thesis; the thesis is about which argument lacks a stopping point, and the revenue argument is the one that has one.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "purchase",
+      "yield",
+      "terminates"
+    ]
+  },
+  "passage": {
+    "title": "A Border Needs a Border",
+    "reading_time_min": 2.4,
+    "paragraphs": [
+      {
+        "id": "rc-0066-p1",
+        "text": "Empires are commonly said to have fallen because they took more than they could hold, and the remark is offered as a verdict on appetite. As an explanation it does very little work. Appetite may be taken as constant. What varied, from one advance to the next, was the argument by which the advance was authorised, and in the records of the imperial councils there are broadly two such arguments. One holds that the ground beyond the line will pay for itself. The other holds that the line itself is unsafe."
+      },
+      {
+        "id": "rc-0066-p2",
+        "text": "An advance made for revenue carries its own brake. The ground is assessed before it is taken, and the assessment has to be made again for each district, growing weaker as it travels: the further the district from the centre, the larger the share of its yield that is eaten by the business of bringing the yield home. Somewhere the two columns cross, and past that point the case for advancing has quietly become a case against it. There is nothing admirable in this restraint. A treasury that is only counting will, sooner or later, count in the empire's favour, and the advance halts where the counting stops."
+      },
+      {
+        "id": "rc-0066-p3",
+        "text": "An advance made for safety has no such crossing point, because the trouble it answers is manufactured by the frontier and is therefore manufactured afresh by every frontier. Take the valley that overlooks the pass, and the new line runs along a ridge; beyond the ridge is a plain, and on the plain are people who now have an empire at their door and reasons of their own to resent it. The case for taking the plain is the case that took the valley, in the same words, a season later. Against it the argument for halting never finds any purchase, since whoever makes it must say aloud that some named danger is to be endured, and no minister wishes to be remembered as the man who said so."
+      },
+      {
+        "id": "rc-0066-p4",
+        "text": "The expansions that broke empires were therefore, characteristically, the defensive ones: made by men who wanted nothing, saw a danger, and removed it in the only way that seemed to remove it for good. The contrast should not be pressed further than it will go. It holds where the cost of holding ground rises with distance and where each new neighbour can reach the one before. Where a frontier rests on something nobody crosses, a sea or a desert with no water in it, the argument from safety terminates as tidily as the argument from revenue, and empires have sat behind such lines for centuries without taking another acre. What lacks a stopping rule is not conquest. It is conquest justified by fear."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0066-q1",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.weaken",
+        "arg.causal_claim",
+        "arg.premise"
+      ],
+      "target_mistake": "choosing a fact that makes the empire's position worse instead of one that makes the author's explanation worse",
+      "prediction_target": "The learner should predict that the weakener will take the ruinous advances away from the safety argument and hand them to the argument the author says has a brake.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most weaken the author's explanation of imperial overreach?",
+      "options": {
+        "A": "Several empires that advanced chiefly for revenue also fell, and fell within a generation of their richest annexation.",
+        "B": "The advances now blamed for ruin were decided on the yield the new ground was expected to return, not on any danger.",
+        "C": "Garrisons on a new frontier cost more each year to supply than the whole campaign that first took the ground beneath them.",
+        "D": "Frontier governors could not order an advance without instruction from a capital several months away by road."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The author's claim is not about how much ground was taken but about which argument authorised the taking. He assigns a brake to the revenue case and no brake to the safety case, and then assigns the ruinous advances to the second. The whole explanation therefore rests on that assignment.",
+        "correct_reasoning": "The correct option removes the assignment. If the advances that ruined empires were decided on expected yield, they were decided by the very argument the second paragraph says carries an arithmetic brake, and the author is left explaining ruin by a mechanism that was not operating. Nothing else in the passage is touched: the two arguments may still behave as described, but they no longer explain the cases the passage exists to explain.",
+        "passage_anchor": "rc-0066-p3",
+        "question_type_note": "A weaken question attacks the step from evidence to conclusion, not the topic. Ask which sentence the author would have to give up, and look for the option that makes him give up that one.",
+        "reading_habit": "Before reading the options, say in one line what the author's explanation needs to be true. A weakener is almost always the denial of that line rather than bad news about the subject.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The passage never says revenue-driven empires survived. It says the revenue case runs out of arithmetic at some distance, which is compatible with an empire collapsing for other reasons, including at the moment of its greatest wealth.",
+            "seductive_element": "It reads as a counterexample, and counterexamples are the usual shape of a weakener, so the form of the option does the persuading."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This supports the author rather than damaging him. A garrison that costs more than the campaign is precisely the burden he says a safety advance keeps taking on without any figure ever telling it to stop.",
+            "seductive_element": "It is the live rival, because it is plainly bad news for an empire, and a reader in a hurry weakens the empire when he was asked to weaken the explanation."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It borrows the passage's own capital and builds on it a constraint the passage never mentions. The third paragraph puts the decision in the capital precisely to say that the case can be made there again in the same words a season later, so a governor's lack of authority interrupts nothing.",
+            "seductive_element": "Slow communication sounds like a natural brake, and the passage is about advances that seemed to happen automatically."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0066-q2",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "taking the commercial sense of the word because the surrounding passage is full of treasuries, yields and costs",
+      "prediction_target": "The learner should paraphrase the sentence first: an argument is being said to find nothing it can act on, so the word must name a grip rather than a payment.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the third paragraph, \"the argument for halting never finds any purchase\" uses \"purchase\" to mean",
+      "options": {
+        "A": "the price an empire paid for a further year of quiet",
+        "B": "a legal claim to the ground lying beyond the line",
+        "C": "anything firm enough for the argument to take hold on",
+        "D": "an advantage over the neighbours the advance had created"
+      },
+      "correct": "C",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The grammar settles it before any dictionary does. It is an argument, not a buyer, that finds or fails to find the thing, and the clause that follows explains the failure: whoever makes the case must say aloud that a named danger will be endured. The word is naming what an argument can get a grip on.",
+        "correct_reasoning": "The correct option keeps that sense of a hold. The case for stopping is not defeated by a counter-argument in the passage; it simply has no surface to rest on, because the one thing it must say is the one thing no minister will say. Reading the word as a grip also preserves the sentence's logic, in which the obstacle is political rather than financial.",
+        "passage_anchor": "rc-0066-p3",
+        "question_type_note": "A word-in-context question is decided by the sentence, not by frequency. Identify what the word is attached to grammatically, and a common sense that cannot take that subject is eliminated at once.",
+        "reading_habit": "Substitute your candidate meaning into the sentence and read the whole sentence aloud in your head. A sense that forces you to change the subject of the verb is the wrong sense.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This is the commonest dictionary sense and the sentence will not take it. An argument does not pay a price, and the reason given for the failure is that a minister will not speak, which has no cost attached to it anywhere in the paragraph.",
+            "seductive_element": "It is the live rival: the passage has just spent a paragraph on yields, columns and treasuries, so a commercial reading feels prepared for."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No question of legal title arises in the passage. The ground beyond the line is discussed as something to be assessed, taken or endured, never as something an empire has or lacks a right to.",
+            "seductive_element": "Annexation is a legal act in the reader's general knowledge, and the word can be used of acquiring a title elsewhere."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The sentence is about whether an argument can gain any footing inside a council, not about how the empire stands against the people beyond the ridge. No advantage over neighbours is being weighed here at all.",
+            "seductive_element": "The previous sentence really does describe new neighbours with reasons to resent the empire, so a comparison feels close at hand."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0066-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "scope.condition",
+        "arg.qualification"
+      ],
+      "target_mistake": "letting the barrier switch off both arguments when the passage switches off only one of them",
+      "prediction_target": "The learner should predict that a barrier removes the safety case, which was the case without a stopping point, and leaves the revenue case exactly where the second paragraph left it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred from the passage that an empire whose frontier ran along a desert nobody could cross would",
+      "options": {
+        "A": "have had no reason of any kind to take further ground beyond it",
+        "B": "have been governed by ministers less afraid of blame than others",
+        "C": "have lasted longer than empires whose frontiers ran through settled country",
+        "D": "still have had the treasury's argument available to it, though not the one the passage calls endless"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The last paragraph says what the barrier does and is careful about how much it does. Where a frontier rests on something nobody crosses, the argument from safety terminates as tidily as the argument from revenue. One argument is named as ending there; the other was already described as ending by arithmetic, wherever it runs.",
+        "correct_reasoning": "The correct option keeps both arguments in play and switches off only the one the passage switches off. A desert removes the neighbour who would otherwise appear beyond each new line, so the safety case has nothing to renew itself on. It says nothing whatever about whether ground beyond the desert might pay, and the second paragraph treats that as a separate calculation with a brake of its own.",
+        "passage_anchor": "rc-0066-p4",
+        "question_type_note": "When a passage sets out two mechanisms and then names a condition, the inference is usually about which of the two the condition touches. Options that switch off both are the standard overreach.",
+        "reading_habit": "When an author introduces a limiting condition, ask exactly which of his claims it limits. A condition attached to one half of a contrast is not a condition on the whole passage.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "This takes the barrier further than the paragraph does. The safety case is what a barrier extinguishes; a district on the far side might still be assessed and found to pay, which is the whole of the second paragraph's mechanism.",
+            "seductive_element": "It is the live rival, because the closing lines make the barrier sound decisive and a reader who has followed the argument expects the conclusion to be clean."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing connects the shape of a frontier to the temperament of a government. The minister who will not speak appears in the passage as a description of what any council makes difficult, not as a trait some empires have and others lack.",
+            "seductive_element": "The passage does make the fear of blame decisive, so a reader looks for somewhere to put it in the new case."
+          },
+          {
+            "option": "C",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "No ranking of empires by longevity appears anywhere. The passage says empires have sat behind such lines for centuries without taking more ground, which is a claim about advances rather than about which empire outlived which.",
+            "seductive_element": "Centuries is in the text, and duration is the outcome the whole passage seems to be about."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0066-q4",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.abstraction_level",
+        "arg.evidence_vs_conclusion"
+      ],
+      "target_mistake": "reporting the arithmetic of the revenue case as the passage's point, when that case is the one the author says does stop",
+      "prediction_target": "The learner should be able to say: the difference between the two justifications is that one of them contains a figure that eventually says stop and the other contains nothing that ever does.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "scope"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Expansion argued for as defence has no stopping point, which is why it, not greed, undoes empires.",
+        "B": "Empires failed once the cost of holding distant ground grew larger than the revenue that ground returned.",
+        "C": "Rulers who called their conquests defensive were usually concealing an ordinary appetite for plunder.",
+        "D": "Borders should have been fixed at natural barriers wherever a barrier of the right kind existed."
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The first paragraph sets aside appetite in two sentences and announces that what varies is the argument by which an advance is authorised. Everything after that is a comparison between two arguments, and the last line names the survivor: what lacks a stopping rule is conquest justified by fear.",
+        "correct_reasoning": "The correct option states that comparison at the altitude the passage states it. It keeps the author's substitution, in which the explanation of ruin moves from a vice to a form of reasoning, and it keeps the property that does the work, which is the absence of any point at which the defensive case turns into its own refusal.",
+        "passage_anchor": "rc-0066-p1, rc-0066-p4",
+        "question_type_note": "In a passage built on a contrast, the main idea is the difference between the two things, not a true statement about one of them. Test each option by asking whether the other half of the contrast is still needed.",
+        "reading_habit": "Ask which paragraphs an option would let you skip. A main-idea option that makes half the passage decorative has described a part rather than the point.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second paragraph, and the second paragraph is the case the author says has a brake. Offering it as the thesis reverses the passage's verdict: the advance halts where the counting stops, which is the opposite of a mechanism of ruin.",
+            "seductive_element": "It is the live rival, because it is true of the passage's arithmetic and matches what most readers already believe about why empires fail."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage insists on the sincerity of the defensive case, describing men who wanted nothing and saw a danger. If the defence were a cover for plunder, the advance would have the revenue case's brake and the argument would collapse.",
+            "seductive_element": "Suspicion of official motives is the reading most readers bring to any account of empire, and the passage is unflattering enough to seem to invite it."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No advice is offered. The barrier appears in the last paragraph as the condition under which the contrast stops holding, not as a recommendation any council could have acted on, since a frontier cannot be moved to a desert that is not there.",
+            "seductive_element": "The passage does end on barriers and does sound like it has drawn a lesson, which invites the reader to supply the lesson's imperative."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "purchase",
+      "passage_use": "the argument for halting never finds any purchase",
+      "meaning_here": "a grip or foothold; something firm enough to act on",
+      "difficulty": "hard"
+    },
+    {
+      "word": "yield",
+      "passage_use": "the larger the share of its yield that is eaten",
+      "meaning_here": "what a district produces, counted as revenue",
+      "difficulty": "medium"
+    },
+    {
+      "word": "terminates",
+      "passage_use": "the argument from safety terminates as tidily as the argument from revenue",
+      "meaning_here": "comes to an end of its own accord, at a definite point",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two justifications for the same act are set side by side, and only one of them has a point at which it runs out. Notice which one the last paragraph blames, and which condition it attaches before blaming it.",
+    "one_sentence_summary": "Empires overreached not from appetite but from the kind of case made for each advance: a case built on revenue eventually produces a figure that says stop, while a case built on the safety of the frontier is renewed by every new frontier it creates, so the ruinous expansions were characteristically the defensive ones, except where the frontier rested on ground nobody could cross.",
+    "main_idea": "The usual verdict on empires, that they were greedy, explains nothing, because greed is constant. What changes is the argument that authorises each advance. The revenue argument carries its own brake, since distance eats the yield and at some point the sums refuse. The safety argument has no brake, because securing a line creates a new line with the same problem, and nobody in a council will volunteer to say that a danger should be endured. The contrast holds only where distance is costly and where each new neighbour can reach the last.",
+    "simple_explanation": "People often say empires collapsed because they were greedy and grabbed too much. The author thinks that explains nothing, because every empire is greedy. What actually differs is the reason given, in the council chamber, for each particular advance.\n\nThere were two kinds of reason.\n\nThe first was money. Somebody works out what the new district will produce and what it will cost to bring that produce home. The further away the district, the more of its value is swallowed by transport and administration. Sooner or later the two figures cross, and the same calculation that argued for advancing starts arguing against it. This is not virtue. It is just arithmetic, and arithmetic eventually says no.\n\nThe second was safety. The line is exposed, so you take the valley that overlooks the pass. Now your border runs along a ridge, and beyond the ridge is a plain full of people who suddenly have an empire on their doorstep and are not pleased about it. So now the plain is a danger too. The argument that took the valley works just as well for the plain, word for word, a year later. And nobody can argue against it, because to argue against it you have to stand up and say that a particular named danger is acceptable, and no minister wants that sentence attached to his name if anything goes wrong.\n\nSo the expansions that destroyed empires were often made by people who were not greedy at all. They were frightened, and they kept removing threats, and each removal produced the next one.\n\nThe author then adds a limit. This only works where distance makes holding ground expensive and where there is always another neighbour behind the last. If your frontier ends at a sea, or at a desert nobody can cross, then there is no next neighbour, the safety argument simply stops, and empires have sat behind such lines for centuries without taking another acre.",
+    "why_difficult": "The passage compares two arguments, not two empires, and readers primed by the word overreach look for a comparison between places or periods and cannot find one. The second difficulty is the direction of sympathy: the defensive case sounds like the restrained one, and the passage blames it, while the money-grubbing case is the one it credits with restraint. The final paragraph then attaches a condition to the whole contrast in two quiet sentences, and a reader who has taken the thesis as universal will answer the inference question by extending the barrier to both arguments at once.",
+    "author_intention": "To take the word greed out of the explanation of imperial collapse and put a form of argument in its place, so that the reader stops judging motives and starts asking which case contains a figure capable of saying stop.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0066-p1",
+        "role": "Clears the usual answer",
+        "note": "Saying empires were greedy explains nothing, because greed does not vary. What varies is the reason offered for each advance, and there are two of them."
+      },
+      {
+        "paragraph_id": "rc-0066-p2",
+        "role": "The argument that stops",
+        "note": "An advance made for money is assessed district by district, and distance eats the profit. At some point the figures turn round and the advance halts."
+      },
+      {
+        "paragraph_id": "rc-0066-p3",
+        "role": "The argument that does not",
+        "note": "An advance made for safety creates a new frontier with the same problem, so the same case can be made again next season. Nobody argues back, because arguing back means saying a danger is acceptable."
+      },
+      {
+        "paragraph_id": "rc-0066-p4",
+        "role": "The verdict and its limit",
+        "note": "So the ruinous advances were typically the defensive ones. But the contrast needs costly distance and a next neighbour: a sea or a waterless desert ends the safety case as tidily as arithmetic ends the other."
+      }
+    ],
+    "tone_progression": "Impatient with the received verdict in the opening, then evenly analytical across the two comparisons, with a flicker of dryness at the minister who will not speak, and finally careful, drawing its own boundary in the last paragraph before landing on a short, flat sentence.",
+    "key_transitions": [
+      "'What varied, from one advance to the next, was the argument by which the advance was authorised' (paragraph 1) — the subject changes from motive to justification.",
+      "'An advance made for safety has no such crossing point' (opening of paragraph 3) — the contrast arrives and the passage's real target is named.",
+      "'The contrast should not be pressed further than it will go.' (paragraph 4) — the author limits his own claim before anyone else can."
+    ],
+    "misunderstanding": "A hurried reader builds the ordinary picture in which empires collapse because conquest costs more than it earns, and then reads the second paragraph as the passage's argument. It is the opposite: that paragraph is about the case that does eventually stop. The second misreading treats the defensive advances as insincere, so that the passage becomes an exposure of hypocrisy. If the defence were a pretext, the advance would be governed by the revenue arithmetic and would have a brake, and the passage's explanation would disappear.",
+    "traps_summary": "The options in this set offer bad news about empires as though it weakened an argument about empires, the commercial sense of a word whose sentence has an argument as its subject, a condition extended from one half of a contrast to both, and the passage's own restrained mechanism dressed up as its thesis. All four are answered by asking which of the two arguments a sentence belongs to.",
+    "reading_lesson": "When a passage sets two things against each other, write one line for each before you reach the questions: what it is, and what makes it stop. Most wrong options in comparison passages are true statements about the wrong half, and half of the rest are conditions lifted from one side and applied to both. The habit also protects you on weaken questions, where the tempting option is usually bad news about the subject rather than damage to the argument.",
+    "real_world": "The same shape appears in any organisation where one budget line is defended by a number and another by a risk: the number eventually says no, and the risk never does, which is why security, compliance and insurance departments grow in ways that nobody ever decided on.",
+    "takeaway": "An argument from fear has no arithmetic in it, and therefore no point at which it says enough.",
+    "reflection_question": "Which decisions in your own life are defended by a figure that could one day refuse, and which are defended by a danger that no figure will ever settle?"
+  }
+}

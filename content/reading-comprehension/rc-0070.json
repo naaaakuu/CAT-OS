@@ -1,0 +1,459 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0070",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "public-policy",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "tone-detection",
+      "evidence-anchoring"
+    ],
+    "word_count": 443,
+    "question_count": 5,
+    "question_types": [
+      "author_purpose",
+      "comparative",
+      "except",
+      "inference",
+      "tone"
+    ],
+    "theme": "a thinly sourced parable about a bounty that bred the pest it was meant to remove, widened in popular use until it names any disappointing policy, and worth keeping only in the narrow form economists gave it, where the failure requires a reward paid on a token the collector can manufacture, a condition an administrator can test before signing rather than after failing",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "The passage attacks a story's provenance in its first paragraph and then refuses to let that attack damage the idea, which is the move most readers fail to follow. Two questions are built on that refusal. The tone is the other difficulty: the author is amused by the phrase's career and severe about the claim, and options that make him either scornful or neutral are both available.",
+    "length_class": "medium",
+    "structure": "history_of_an_idea",
+    "viewpoints": 3,
+    "tone": "wry, exacting",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.qualification",
+      "struct.definition",
+      "comp.explicit_detail",
+      "comp.purpose",
+      "comp.intent",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "arg.evidence",
+      "arg.description_vs_evaluation",
+      "arg.qualification",
+      "arg.principle",
+      "arg.example_vs_principle",
+      "inf.strongly_supported",
+      "inf.necessary",
+      "scope.condition",
+      "scope.too_broad",
+      "lang.comparative",
+      "lang.tone_shift",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about where each version draws its support, which a candidate defends from the first paragraph's demolition of the sources; the fourth paragraph refuses both of its halves, since a parable is not evidence for the narrow claim and the popular version is that same story's swollen career rather than something that left it behind, and the contrast the passage does draw is between a question answerable before signing and a phrase answerable at no point at all. Q2's rival is the option that the doubtful provenance makes the narrow claim doubtful, which is the inference the first paragraph invites and the fourth explicitly blocks by calling a parable not evidence but an instrument for making a condition visible. Q3's rival is the scornful reading, which has the direction right and the volume wrong: the severity in the passage falls on a phrase used against everything, and the story itself is called a good story. Q4's exception is the claim that the original administration formulated the condition, which no sentence supports; the narrowing is attributed to economists and placed long after the events. Q5's rival is the option about establishing whether the episode occurred, which is the first paragraph's business and is then set aside as not touching the claim at all.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "attested",
+      "token",
+      "office"
+    ]
+  },
+  "passage": {
+    "title": "A Bounty on the Evidence",
+    "reading_time_min": 2.4,
+    "paragraphs": [
+      {
+        "id": "rc-0070-p1",
+        "text": "The story is told in a paragraph and is almost never sourced. A colonial administration, troubled by snakes, offers a bounty on dead ones; the bounty is collected; the snakes do not diminish; somebody eventually discovers that a trade in breeding them has grown up around the scheme, and when the bounty is withdrawn the stock is turned loose, leaving the city worse supplied with snakes than before it began. It is a good story. It appears in print long after the administration it describes, with no record of the scheme in the papers of the government that is supposed to have run it, and every retelling cites the retelling before it."
+      },
+      {
+        "id": "rc-0070-p2",
+        "text": "Thinly attested stories can have vigorous careers, and this one has had a career out of all proportion to its evidence. It became the standard proof that incentives are treacherous, produced in argument against any policy that attaches a payment to a measurable thing, and then against measurement itself, and then, in its present condition, against more or less any intervention whose results disappointed the people who designed it. A phrase that can be used against everything tells you nothing about anything."
+      },
+      {
+        "id": "rc-0070-p3",
+        "text": "What the economists did with it was better, and consisted in asking what the scheme had actually bought. It had not bought fewer snakes. It had bought dead snakes, which is a different commodity, and one that a person with a shed and some patience can manufacture. That is the whole of the mechanism, and stated in that form it is narrow, testable and useful: the failure requires a reward paid on a token that the person collecting it can produce independently of the outcome the payer wanted. Where the token can be manufactured, the scheme buys manufacture. Where it cannot, the scheme buys the outcome, and the payment may be wasteful or unfair or too large, but it will not turn round."
+      },
+      {
+        "id": "rc-0070-p4",
+        "text": "Two things follow, and they are more useful than the anecdote. The first is that the doubtful history does not touch the claim. A parable is not evidence; its office is to make a condition visible, and the condition can afterwards be put to schemes whose records do survive. The second is that the question is one an administrator can ask before signing anything: what exactly am I paying for, and can the person I am paying make more of it? That question is answerable in an afternoon. Nothing in the wide version is answerable at all, since it announces only that policies sometimes fail, which was never in dispute and does not tell the official which of the schemes on his desk to worry about."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0070-q1",
+      "type": "comparative",
+      "skill": "inference",
+      "patterns": [
+        "lang.comparative",
+        "comp.paraphrase",
+        "scope.condition"
+      ],
+      "target_mistake": "assembling a contrast out of two true sentences from different paragraphs instead of taking the one the passage actually draws",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "scope"
+      ],
+      "stem": "The passage distinguishes the narrow version of the idea from the version now in popular use chiefly on the ground that",
+      "options": {
+        "A": "the narrow one draws its support from the anecdote, while the popular one has abandoned it altogether",
+        "B": "the narrow one is about rewards, while the popular one has come to be about penalties as well",
+        "C": "the narrow one can be tested before a scheme starts, while the wide one arrives only after it fails",
+        "D": "the narrow one faults the design of a scheme, while the wide one faults those who exploited it"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The comparison is made in the last paragraph and nowhere else. The narrow version becomes a question an administrator can ask before signing anything, answerable in an afternoon; the wide version is said to be answerable at no point, because it announces only that policies sometimes fail.",
+        "correct_reasoning": "The correct option takes that contrast in the passage's own terms. What makes the narrow form useful is that it can be applied to a scheme while the scheme is still a proposal, since the question about the token has an answer before any money is paid. The wide form attaches itself to interventions whose results have already disappointed, which is why the passage says it cannot tell an official which scheme on his desk to worry about.",
+        "passage_anchor": "rc-0070-p4",
+        "question_type_note": "A comparison question is answered from the sentence where the two things are actually set against each other. Options that pair two separate true statements are the standard manufacture.",
+        "reading_habit": "Find the sentence in which both terms appear together before you read the options. If a comparison never occurs in one sentence, it is probably not the passage's comparison.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "Both halves are refused. The fourth paragraph says a parable is not evidence, so the narrow version does not rest on the story at all, and the second describes the popular version as that same story's swollen career rather than as something that has left it behind.",
+            "seductive_element": "It is the live rival, because the first paragraph's attack on the sources is the most memorable thing in the passage and evidence is the obvious axis on which two versions of an idea might differ."
+          },
+          {
+            "option": "B",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "Penalties appear nowhere. The wide version is described as spreading over measurement and then over interventions in general, which is a widening of subject matter rather than a move from one instrument to another.",
+            "seductive_element": "Rewards and penalties are the natural pair, and the second paragraph's list of widenings goes by quickly enough that a reader may supply a plausible item."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Neither version is described as apportioning blame. The narrow one names a condition on the payment; the wide one is said to announce only that policies sometimes fail, which fixes fault on nobody at all.",
+            "seductive_element": "The breeders in the first paragraph are the villains of the story, so a distinction about whom to blame feels as though it must be in play."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0070-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "scope.condition",
+        "arg.principle"
+      ],
+      "target_mistake": "letting a doubtful anecdote discredit the claim the anecdote was only ever used to illustrate",
+      "prediction_target": "The learner should predict that the inference will restate the condition as a test: the effect needs a payable token the collector can make, so a reward on something unmakeable is out of its reach.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "The larger the reward a scheme offers, the more likely the effect is to appear, whatever is being paid for.",
+        "B": "A scheme that has produced the effect must have been designed by people ignorant of economics.",
+        "C": "Since the story's provenance is doubtful, the narrow version of the idea is doubtful too.",
+        "D": "A reward is out of the effect's reach where what is paid for cannot be produced by the collector."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph states the mechanism as a requirement rather than as a tendency. The failure requires a reward paid on a token that the person collecting it can produce independently of the outcome. A requirement runs in both directions, which is what the paragraph's last two sentences spell out.",
+        "correct_reasoning": "The correct option is the requirement read the other way. Where the token cannot be manufactured, the passage says the scheme buys the outcome, and adds that it may still be wasteful, unfair or too large but will not turn round. Turning round is exactly the effect in question, so a reward on something the collector cannot make is immune to it while remaining open to every other criticism.",
+        "passage_anchor": "rc-0070-p3",
+        "question_type_note": "When a passage states a necessary condition, the inference question usually asks what follows when the condition is absent. Read such a sentence twice, once forwards and once as its contrapositive.",
+        "reading_habit": "Distinguish a condition from a warning. A warning tells you to be careful in general; a condition tells you which cases are safe, and that is far more use in the options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The size of the reward never enters the passage. The mechanism turns on whether the thing paid for can be produced, and a large payment for something unmakeable would, on the passage's account, simply buy the outcome expensively.",
+            "seductive_element": "Stronger incentives producing stronger distortions is the intuition the whole subject trades on, and it feels like the natural extension of the argument."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "No claim about designers is made, and the passage's whole complaint against the wide version is that it substitutes blame for diagnosis. It offers the condition as a question anyone can ask in an afternoon, not as a mark of expertise.",
+            "seductive_element": "The passage does credit economists with improving the idea, which makes a contrast between the knowing and the ignorant sound like its natural consequence."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph blocks this in two sentences: a parable is not evidence, and its office is to make a condition visible. The story's weakness is a fact about the story, and the condition is then tested against schemes whose records survive.",
+            "seductive_element": "It is the live rival, because the first paragraph spends half its length destroying the story's credentials, and a reader trained to distrust unsourced anecdotes will expect that demolition to be the point."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0070-q3",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "comp.intent",
+        "arg.description_vs_evaluation"
+      ],
+      "target_mistake": "converting amusement at a phrase's career into contempt for the people who use it, or reading an unexcited style as neutrality",
+      "prediction_target": "The learner should be able to say: the author enjoys the story's history and is strict about what survives of it, so the tone has to combine lightness with precision.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "main_idea"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "wry about the story's career, and exacting about what survives of it",
+        "B": "scornful of those who repeat a tale whose evidence has never been produced",
+        "C": "detached, tracing a phrase's history without judging any use made of it",
+        "D": "pessimistic about the prospects of any scheme that offers a reward for results"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The judgement words split in two directions. The story is called a good story and its career vigorous and out of all proportion, which is amusement; the mechanism is called narrow, testable and useful, and the wide version is dismissed in a single flat sentence. Lightness about the history, severity about the claim.",
+        "correct_reasoning": "The correct option keeps both registers, which is what the passage's own sentences do. The author never sneers at the tellers, and the one sentence of real contempt is aimed at a phrase that can be used against everything rather than at anybody using it. At the same time he holds the surviving idea to a strict standard, insisting it be stated as a condition that can be tested.",
+        "passage_anchor": "rc-0070-p2, rc-0070-p3",
+        "question_type_note": "Tone questions need two decisions, direction and volume, and a passage that is light in one paragraph and strict in another needs an option that carries both. A single adjective will usually be wrong.",
+        "reading_habit": "Collect the evaluative words as you read and note what each is attached to. An author can be affectionate about a story and merciless about the use made of it in the same paragraph.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The valence is right and the volume is not. The passage calls the anecdote a good story and directs its one severe sentence at a phrase usable against everything, not at the people who have passed it on.",
+            "seductive_element": "It is the live rival, because the first paragraph really does convict the story of having no sources and ends on the sharp observation that every retelling cites the one before it."
+          },
+          {
+            "option": "C",
+            "trap_type": "weakened_version",
+            "why_wrong": "Judgements are made throughout. One use of the idea is called better than another, one version narrow and useful, the other empty, and the passage ends by recommending a particular question to administrators.",
+            "seductive_element": "The prose is dry and free of indignation, and a history of an idea is the genre in which neutrality is most expected."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage expressly protects most reward schemes. Where the token cannot be manufactured it says the scheme buys the outcome, which is the opposite of pessimism about rewards as such.",
+            "seductive_element": "A passage that opens with a bounty producing more of the pest reads as a warning against paying for results, and the reader supplies the gloom."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0070-q4",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "arg.example_vs_principle"
+      ],
+      "target_mistake": "accepting a statement about the idea's origins that the passage never makes, because the story and the analysis have merged in the reader's memory",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "The passage states each of the following about the narrow version of the idea EXCEPT:",
+      "options": {
+        "A": "It supplies a question that can be put to a scheme before any of the money is paid out.",
+        "B": "It concerns a reward paid on a token rather than on the outcome the payer wanted.",
+        "C": "It was arrived at by the administration that offered the bounty in the first place.",
+        "D": "It stands or falls independently of whether the original episode ever took place."
+      },
+      "correct": "C",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "expert_notice": "The passage separates three moments and keeps them apart: the administration in the story, the phrase's later career, and the narrowing, which it credits to economists and places long after the events. Nothing is attributed to the original officials except the offer of a bounty.",
+        "correct_reasoning": "The exception is the claim about the administration. It is the one statement with no sentence behind it: the third paragraph opens by saying what the economists did with the story, and the first has already noted that the account appears in print long after the administration it describes. The other three are the passage's own statements about the narrow version, in the order it makes them.",
+        "passage_anchor": "rc-0070-p3, rc-0070-p4",
+        "question_type_note": "An EXCEPT question is three verifications and one exclusion, and in a history of an idea the exclusion is very often a claim that moves an insight to the wrong stage of the history.",
+        "reading_habit": "Keep a timeline as you read a passage about how an idea developed. Most wrong options are true statements attached to the wrong moment in it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is the fourth paragraph's second point in different words: the question is one an administrator can ask before signing anything, and it is answerable in an afternoon.",
+            "seductive_element": "The passage phrases it as a question in the official's own voice rather than as a property of the idea, so a reader hunting for a matching sentence may not recognise it."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The third paragraph states this as the mechanism in the passage's own words, requiring a reward paid on a token the collector can produce independently of the outcome the payer wanted.",
+            "seductive_element": "The passage reaches the point through snakes and a shed, so the abstract statement of it can look like something the reader has supplied."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The fourth paragraph states it first among the two things that follow: the doubtful history does not touch the claim, because a parable is not evidence but a way of making a condition visible.",
+            "seductive_element": "It sounds like a general principle about parables rather than a claim about this idea, and general principles are easy to read past."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0070-q5",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.central_idea",
+        "scope.too_broad"
+      ],
+      "target_mistake": "taking the demolition of the story's sources as the passage's business, when it is the first paragraph's business and is then set aside",
+      "prediction_target": "The learner should be able to name the verb: the author is recovering a usable claim from a phrase that has been stretched until it says nothing.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's chief purpose in the passage is",
+      "options": {
+        "A": "to settle the question of whether the episode described in the story actually took place",
+        "B": "to rescue a precise claim from a phrase that has been widened until it names only disappointment",
+        "C": "to warn administrators against offering rewards for the removal of pests and similar nuisances",
+        "D": "to show that economists have made a parable carry more weight than any parable can carry"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The shape of the passage announces the purpose. One paragraph on a story, one on how the story swelled into a phrase usable against everything, one on the economists' narrowing, and one on why the narrow form is worth having. Three of the four paragraphs are about the difference between a claim and a slogan.",
+        "correct_reasoning": "The correct option names that action. The author is not settling the history and not attacking the idea; he is separating a testable condition from a catch-all, which is why the last paragraph ends on what the wide version fails to tell an official. The verb is recovery, and the object is a claim narrow enough to be applied.",
+        "passage_anchor": "rc-0070-p3, rc-0070-p4",
+        "question_type_note": "A purpose question asks what the author is doing, not what the passage is about. Count the paragraphs: the purpose has to account for most of them, and for the last one in particular.",
+        "reading_habit": "When a passage traces how an idea changed, ask which version the author wants you to leave holding. That version, and the act of handing it over, is the purpose.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The provenance occupies the first paragraph and is then explicitly set aside, since the fourth says the doubtful history does not touch the claim. A purpose confined to it would leave three paragraphs unaccounted for.",
+            "seductive_element": "It is the live rival, because the opening paragraph reads like investigative work and ends on the damning observation about retellings citing retellings."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The advice the passage does give is to ask a question, not to avoid a class of scheme, and the third paragraph protects every reward whose token cannot be manufactured. Pests are the illustration rather than the subject.",
+            "seductive_element": "The passage ends with an administrator at his desk, which makes a practical prohibition feel like the natural close."
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The economists are the people the passage praises. What they did with the story is called better, and the overloading is attributed to the popular career the phrase acquired, which the second paragraph describes without naming anyone.",
+            "seductive_element": "The passage really does say a parable is not evidence, so a reader can attach that complaint to the profession the passage names most often."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "attested",
+      "passage_use": "Thinly attested stories can have vigorous careers",
+      "meaning_here": "supported by evidence or by witnesses",
+      "difficulty": "hard"
+    },
+    {
+      "word": "token",
+      "passage_use": "a reward paid on a token that the person collecting it can produce",
+      "meaning_here": "the physical item accepted as proof that the wanted outcome occurred",
+      "difficulty": "medium"
+    },
+    {
+      "word": "office",
+      "passage_use": "its office is to make a condition visible",
+      "meaning_here": "the job a thing is there to do",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "The first paragraph takes a famous story apart. Watch whether the passage then treats that demolition as a reason to abandon the idea, or as something quite separate from it.",
+    "one_sentence_summary": "A much-repeated and poorly sourced story about a bounty that bred the pest it was meant to remove has been stretched in popular use until it merely announces that policies sometimes fail, whereas the version economists gave it names a precise requirement, a reward paid on a token the collector can manufacture, and that version is worth keeping because it can be tested against a scheme before the scheme is signed.",
+    "main_idea": "The anecdote is almost certainly unsourced, and in ordinary use it has swollen into a charge against any policy that disappointed its designers, which makes it useless. The narrow version is better: the failure requires that the reward be paid on a token the collector can produce independently of the outcome. That condition survives the story's doubtful history, because a parable's job is to make a condition visible rather than to prove it, and it can be put to a scheme in advance.",
+    "simple_explanation": "You have probably heard the story. A government wants fewer snakes, so it pays people for dead snakes. People start breeding snakes to collect the money. The government cancels the scheme, the breeders release their stock, and the city ends up with more snakes than it started with.\n\nThe author's first point is that the story is almost certainly not documented. It turns up in print long after the events, there is no trace of the scheme in the relevant government's papers, and each person who tells it is just citing the last person who told it.\n\nHis second point is about what happened to the story afterwards. It became the all-purpose proof that incentives go wrong. First it was used against paying for measurable things, then against measuring anything, and now against practically any policy that did not work out. And a phrase you can use against everything tells you nothing.\n\nThen the useful part. Economists asked a sharper question: what did the money actually buy? Not fewer snakes. Dead snakes. Those are two different things, and one of them can be made in a shed. So the real rule is narrow: this kind of failure needs a reward paid for a token that the person collecting it can produce for himself. If he can make the token, you are buying manufacture. If he cannot, you are buying the outcome. The scheme might still be expensive or unfair, but it will not run backwards.\n\nFinally, two consequences. First, it does not matter whether the snake story is true. A parable is not proof; it is a way of showing you what to look for, and once you can see the condition you can test it against schemes whose records do exist. Second, the narrow version gives an official something to do before he signs: what exactly am I paying for, and can the person I am paying make more of it? That takes an afternoon to answer. The wide version gives him nothing, because saying that policies sometimes go wrong does not tell him which of the ones on his desk to worry about.",
+    "why_difficult": "The passage looks as though it is debunking and then does the opposite: it protects the claim it has just stripped of its evidence. Readers who take the first paragraph as the thesis answer both the inference and the purpose question wrongly. The second difficulty is the tone, which is amused about the history and severe about the claim, so options offering a single steady attitude are all slightly off. A third is the condition itself, which is stated once, as a necessary requirement, and has to be read in both directions before the inference question becomes easy.",
+    "author_intention": "To stop a useful idea being lost in two directions at once, first to the discovery that its founding story is unsupported, and second to a popular usage so wide that it can be brought against anything and therefore decides nothing.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0070-p1",
+        "role": "Tells and doubts the story",
+        "note": "The bounty, the breeding, the release. Then the awkward facts: no contemporary record, and every version quoting the version before it."
+      },
+      {
+        "paragraph_id": "rc-0070-p2",
+        "role": "Traces the swelling",
+        "note": "The tale became proof that incentives are treacherous, then an argument against measurement, and now against any policy that disappointed anyone. Used against everything, it says nothing."
+      },
+      {
+        "paragraph_id": "rc-0070-p3",
+        "role": "The useful narrowing",
+        "note": "Economists asked what the money bought. Not fewer snakes but dead snakes, which can be manufactured. So the failure needs a token the collector can make himself."
+      },
+      {
+        "paragraph_id": "rc-0070-p4",
+        "role": "Why the narrow form survives",
+        "note": "The story's doubtful history does not damage the condition, since a parable only makes a condition visible. And the condition can be tested before a scheme starts, which the wide version never can."
+      }
+    ],
+    "tone_progression": "Light and slightly amused while the story and its dubious credentials are laid out, briskly contemptuous of the phrase in its swollen form, and then precise and almost technical once the surviving claim is reached, ending practical with a question an official can actually ask.",
+    "key_transitions": [
+      "'It is a good story.' (paragraph 1) — the compliment arrives just before the evidence is taken away, and both judgements stand.",
+      "'What the economists did with it was better' (opening of paragraph 3) — the history turns from decline to repair.",
+      "'The first is that the doubtful history does not touch the claim.' (paragraph 4) — the demolition of the story is quarantined from the idea."
+    ],
+    "misunderstanding": "The natural wrong reading is that the passage is an exposure: a famous story turns out to be false, therefore the lesson drawn from it is false too. The fourth paragraph blocks that inference directly, and the third has already restated the lesson as a condition that can be checked against real records. The second wrong reading goes the other way and treats the passage as a general warning against paying for results, which the third paragraph refuses by saying that where the token cannot be manufactured the scheme simply buys what it wanted.",
+    "traps_summary": "The options here build a contrast out of two unrelated true sentences, convert a story's weakness into a claim's weakness, raise amusement into contempt, move an insight to the wrong stage of a history, and hand the passage's praise to the party it criticises. Sorting each option by which of the three stages it belongs to, story, swelling or narrowing, disposes of most of them.",
+    "reading_lesson": "When a passage begins by discrediting the evidence for an idea, read on before concluding that the idea is discredited, because a common and important move in argument is to separate an illustration from the claim it illustrated. More generally, in any history of an idea, keep the stages numbered as you read: who said what, when, and in which version. Almost every wrong option in such a passage is a true statement docked at the wrong stage.",
+    "real_world": "The same question applies to any payment made on a proxy: bonuses on recorded cases closed, funding on reported enrolments, contractor payments on units delivered, or bounties on anything that can be grown, faked or moved from somewhere else.",
+    "takeaway": "Before paying for a result, ask whether the person you are paying can make the thing you are paying for.",
+    "reflection_question": "In the arrangements you take part in, what is actually being paid for, and could somebody produce it without producing the thing anybody wanted?"
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0071",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "qualifier-tracking",
+      "structure-mapping",
+      "main-idea-extraction"
+    ],
+    "word_count": 486,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "logical_structure",
+      "main_idea",
+      "phrase_in_context"
+    ],
+    "theme": "a decision that raises one household's savings can lower the savings of all households together, because one household's outlay is another's receipts, but the result holds only where production is limited by willingness to buy and is a claim about the level at which a description is true rather than a verdict on thrift",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "Two qualifications in succession, one about conditions and one about what kind of claim this is, and the second is the one readers lose. The passage takes care never to disapprove of saving, which makes every moralising option refutable by a sentence rather than by a general impression.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "precise, faintly impatient with moralists",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.qualification",
+      "struct.cause_effect",
+      "comp.organization",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "arg.qualification",
+      "arg.causal_claim",
+      "arg.generalization",
+      "arg.example_vs_principle",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "scope.condition",
+      "scope.abstraction_level",
+      "lang.comparative",
+      "word.context_clue",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the reading of the phrase as the saver's own reduced spending, which the sentence refuses by putting prudence and subtraction on opposite sides of the copula: the same act described from two positions, one of them the position of whoever was going to receive the money. Q2's rival is the option about a household that saves while others save, which converts an aggregate result into a prediction about an individual; the fourth paragraph explicitly allows a statement to be true of one household and false of all households together. Q3's rival is the option about an objection answered and an argument restated more strongly, which is right that a challenge is handled and wrong about the outcome, since the passage ends with the claim reduced twice rather than strengthened. Q4's rival is the option that thrift is harmful, which the fourth paragraph denies in two clauses, refusing both to advise against household saving and to call saving a vice.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "outlay",
+      "circuit",
+      "counselled"
+    ]
+  },
+  "passage": {
+    "title": "Everybody's Prudence",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0071-p1",
+        "text": "A household that resolves to spend less and put the difference by will, at the end of the year, have more than it had. The resolution is sound, the arithmetic is elementary, and nothing in it is mistaken. Let every household in the country form the same resolution on the same morning, and the country may finish the year having saved less than it saved before. Nobody has blundered. Each sum is right and the total is wrong, because one household's outlay is another household's receipts, and a receipt that never arrives cannot be put by either. What is prudence in the parlour is subtraction in the ledger."
+      },
+      {
+        "id": "rc-0071-p2",
+        "text": "Follow it round once. Households reduce their outlay by a tenth in order to build a reserve. The takings of the shops fall by a tenth, and shopkeepers are households as well; they cut their own spending, and a few of them let an assistant go. The assistant's income falls to nothing, and so does the sum he was setting aside each week. The circuit closes at a lower level of income, where what households actually manage to save is no larger than it was, and may well be smaller. The desire to save has risen throughout. The saving has not."
+      },
+      {
+        "id": "rc-0071-p3",
+        "text": "The result depends on a condition that is easy to leave out and fatal to leave out. It holds where what limits production is the willingness of somebody to buy, and it fails where what limits production is the capacity to produce. In an economy working at its limit, with every hand employed and every yard of floor in use, a greater wish to save is not a withdrawal at all: it releases labour and materials from making things to be consumed now, lowers the cost of borrowing, and pays for the plant that will produce later. The intention is the same and the outcome is reversed, because the constraint has changed sides. Anyone who states the paradox without its condition has stated something that is false in half the circumstances it is offered for."
+      },
+      {
+        "id": "rc-0071-p4",
+        "text": "Nor is it a verdict on thrift, though it is generally received as one. It does not advise a household against saving, since the household that saves nothing has nothing when the shop closes; and it does not convict saving of being a vice, since the same act is prudent for the person who performs it and is a subtraction from somebody else's takings, and those two descriptions are not competing for the same office. What the argument establishes is narrower and odder than either moral. A statement can be true of one household and false of all households together, so that the country is not a large family and cannot be counselled as though it were. That is a claim about which level a description belongs to, and the moralists on both sides have taken it for a claim about virtue."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0071-q1",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "lang.comparative"
+      ],
+      "target_mistake": "reading the subtraction as the saver's own reduced spending rather than as the income removed from whoever was going to be paid",
+      "prediction_target": "The learner should paraphrase from the sentence before it: one household's outlay is another household's receipts, so the thing subtracted is somebody else's income.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the first paragraph, \"subtraction in the ledger\" refers to",
+      "options": {
+        "A": "the reduction in a household's own outgoings that saving brings about",
+        "B": "the loss a household suffers when its reserve is eaten by rising prices",
+        "C": "the shortfall between what households intended to save and what they were in the end able to save",
+        "D": "the income taken out of the accounts of whoever would have received the money"
+      },
+      "correct": "D",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The sentence before supplies the definition: one household's outlay is another household's receipts, and a receipt that never arrives cannot be put by either. The phrase then sets two descriptions of a single act against each other, prudence on one side and subtraction on the other, which only makes sense if the second describes the act from somebody else's position.",
+        "correct_reasoning": "The correct option keeps that second position. The act subtracts nothing from the saver, who is by hypothesis better off; what it removes is the receipt that the shopkeeper, the supplier and the assistant were going to enter on their own side of the account. The whole paradox depends on the money not disappearing but arriving somewhere else as a smaller number.",
+        "passage_anchor": "rc-0071-p1",
+        "question_type_note": "A phrase built on a contrast is decided by working out who occupies each side of it. Where an author balances two nouns across a verb, he is usually describing one thing from two positions.",
+        "reading_habit": "Read the sentence immediately before a coined phrase. Authors nearly always supply the plain version first and then compress it, and the plain version is what the options are tested against.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The saver's own outgoings do fall, but that is the prudence half of the sentence, not the subtraction half. If both halves described the same household the sentence would state no paradox at all, since a household spending less and saving more is simply doing what it intended.",
+            "seductive_element": "It is the live rival, because spending less really is a subtraction in the household's own accounts and the phrase sits in a sentence about a household."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Prices never appear in the passage, which works entirely in quantities of income and spending. The reserve is discussed only as something a household builds and, in the fourth paragraph, as something it needs when the shop closes.",
+            "seductive_element": "Erosion of savings is the most familiar thing that can go wrong with a reserve, and the ledger image invites a reader to look for a hidden loss."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "That gap is real and is the second paragraph's result, where the desire to save rises and the saving does not. It is what the subtraction produces after going round the circuit, rather than what the phrase names at the moment the money is withheld.",
+            "seductive_element": "It is genuinely part of the argument and uses the passage's own vocabulary of intention and outcome, which makes it feel like a paraphrase rather than a substitution."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0071-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "scope.condition",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "carrying the aggregate result down to an individual household, or carrying it across the condition that limits it",
+      "prediction_target": "The learner should predict that the inference will attach the result to the demand-limited case, since the passage says the outcome reverses when the constraint changes sides.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "Where output is limited by capacity rather than by demand, a general wish to save should not reduce incomes.",
+        "B": "A household that saves more while every other household is saving more will end the year with less than it expected.",
+        "C": "Saving becomes harmful to an economy whenever the wish to save becomes general among households.",
+        "D": "A fall in the cost of borrowing is the thing that allows an increased wish to save to become an increase in investment."
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The third paragraph names the condition twice, once in each direction. The result holds where production is limited by the willingness to buy and fails where it is limited by the capacity to produce; in the second case a greater wish to save is said not to be a withdrawal at all, but to release resources and pay for plant.",
+        "correct_reasoning": "The correct option states the failure case as the passage states it. Where capacity is the binding constraint, the saving is not withheld from the circuit but redirected within it, so the mechanism that drove income down in the second paragraph has nothing to work on. The passage puts this beyond doubt by saying the intention is the same and the outcome is reversed.",
+        "passage_anchor": "rc-0071-p3",
+        "question_type_note": "When an author supplies a condition and then describes what happens when it fails, the inference question usually lives in the failure case. Read that sentence as carefully as the claim itself.",
+        "reading_habit": "Ask at what level each option is pitched. Aggregate results and individual results are different claims, and a passage that distinguishes them will be tested on exactly that difference.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The result is about households taken together. The fourth paragraph makes the point expressly, allowing a statement to be true of one household and false of all households together, so nothing follows about how any particular household fares.",
+            "seductive_element": "It is the live rival, because the second paragraph's assistant does end with nothing, and a reader takes the vivid individual case as the general one."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "This drops the condition the third paragraph calls fatal to leave out, and the fourth paragraph separately refuses the word harmful, declining to convict saving of being a vice at any point.",
+            "seductive_element": "It is the summary most readers carry away from the first two paragraphs, and generality really is what turns the private result into the public one."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It lifts a clause from the paragraph and promotes it. The cheaper borrowing is one of three things the passage lists as happening in a capacity-limited economy, alongside the release of labour and the payment for plant. Naming it as the mechanism that permits the rest is an addition the sentence does not make.",
+            "seductive_element": "The item is genuinely in the text and sounds like the sort of connecting mechanism an economics passage would assert."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0071-q3",
+      "type": "logical_structure",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "arg.qualification",
+        "arg.description_vs_evaluation"
+      ],
+      "target_mistake": "reading the last two paragraphs as a defence of the claim when they are two successive reductions of it",
+      "prediction_target": "The learner should be able to sketch the skeleton first: a surprising result, a worked circuit, a condition that limits it, and a statement of what kind of claim it is not.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "paragraph_function"
+      ],
+      "stem": "Which of the following best describes the structure of the passage?",
+      "options": {
+        "A": "a common belief is stated, refuted by a worked example, and replaced by its opposite",
+        "B": "an argument is set out, an objection to it is answered, and the argument is restated more strongly",
+        "C": "a paradox is stated and worked through, then confined to one condition and to one kind of claim",
+        "D": "a moral question is raised, examined from both sides, and left for the reader to settle"
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The four paragraphs have four distinct jobs, and the last two both begin by taking something away. One states the surprising result, one traces it round the circuit, one attaches the condition without which it is false, and one refuses the moral reading and substitutes a claim about levels of description.",
+        "correct_reasoning": "The correct option names that descent. Nothing in the passage is refuted or restated more strongly; the claim ends narrower than it began, first restricted to economies limited by demand and then restricted to being a statement about the level at which a description holds. Both restrictions are the author's own, offered before anyone objects.",
+        "passage_anchor": "rc-0071-p3, rc-0071-p4",
+        "question_type_note": "A structure question is answered by labelling each paragraph's job before reading the options. Watch in particular whether the late paragraphs strengthen the claim or shrink it, since the two shapes look alike at a glance.",
+        "reading_habit": "Mark every paragraph that begins by conceding or limiting. A passage with two such paragraphs in a row is a claim being narrowed, not a claim being defended.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Nothing is refuted. The opening claim about a single household is called sound, with elementary arithmetic and nothing mistaken in it, and it survives to the end, where the same act is still called prudent for the person who performs it.",
+            "seductive_element": "The passage does open with something everyone believes and then produce a surprise, which is the opening half of the refutation shape."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The first half is nearly right and the second is not. A challenge is indeed handled in the third paragraph, but the outcome is a restriction rather than a stronger statement, and the fourth paragraph then restricts the claim again.",
+            "seductive_element": "It is the live rival, because a passage that raises a difficulty and keeps going usually is defending itself, and the third paragraph's tone is confident throughout."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage's final paragraph exists to deny that a moral question is at issue, saying the argument is not a verdict on thrift and that the moralists on both sides have mistaken a claim about description for a claim about virtue.",
+            "seductive_element": "Thrift is a moral word, the passage discusses prudence and vice, and the ending genuinely declines to give advice, which can read as leaving the matter open."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0071-q4",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "arg.example_vs_principle",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "reporting the worked circuit as the claim, or converting a claim about levels of description into a judgement on saving",
+      "prediction_target": "The learner should be able to say in one sentence: a result true of one household can be false of all of them, under a stated condition, which is why an economy cannot be advised like a family.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Thrift, which looks like a virtue in a household, turns out on examination to be harmful once a whole country practises it.",
+        "B": "An act that raises one household's savings can lower the nation's where output is limited by demand, which is why a country cannot be counselled as a household.",
+        "C": "When every household cuts its spending by a tenth, the takings of shops fall, and some shopkeepers let their assistants go.",
+        "D": "Economic statements are true only at the level at which they are made, and never at any other level."
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The fourth paragraph tells you where the point is: what the argument establishes is narrower and odder than either moral, and then states it, that a statement can be true of one household and false of all households together. The third paragraph has already fixed the condition under which that happens.",
+        "correct_reasoning": "The correct option carries the claim with its condition attached and at the altitude the passage sets. It keeps the paradox, since the same act has opposite results at the two levels; it keeps the restriction to economies limited by demand, without which the passage says the statement is false half the time; and it ends where the author ends, on the country not being a large family.",
+        "passage_anchor": "rc-0071-p4",
+        "question_type_note": "In a claim-and-qualification passage the main idea must survive the qualifications. Test each option against the last paragraph before the first, since the last is where the author says what he has and has not shown.",
+        "reading_habit": "When an author writes that his conclusion is narrower than people take it to be, treat the sentence after that as the thesis. Everything more sweeping is something he has just disowned.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph denies this twice, refusing to advise a household against saving and refusing to convict saving of being a vice. The same act is called prudent for the person performing it even while it subtracts from another's takings.",
+            "seductive_element": "It is the live rival, because the first two paragraphs really do show general saving making everyone poorer, and the moral reading is the one the passage says most people arrive at."
+          },
+          {
+            "option": "C",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "This is the second paragraph's illustration, offered as a way of following the argument round once. It is the demonstration rather than the claim, and it says nothing about the condition or about levels of description.",
+            "seductive_element": "It is the most concrete sentence available and the part of the passage a reader remembers, since it has people and numbers in it."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says a statement can be true of one household and false of all together, which is a possibility rather than a rule. Its own opening claim about a single household is explicitly allowed to be sound at its own level.",
+            "seductive_element": "It generalises the fourth paragraph's point into a principle, and the abstraction sounds like the kind of conclusion a passage of this sort would reach."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "outlay",
+      "passage_use": "one household's outlay is another household's receipts",
+      "meaning_here": "money spent, considered as a flow leaving one party",
+      "difficulty": "medium"
+    },
+    {
+      "word": "circuit",
+      "passage_use": "The circuit closes at a lower level of income",
+      "meaning_here": "the loop by which spending returns as somebody else's income",
+      "difficulty": "medium"
+    },
+    {
+      "word": "counselled",
+      "passage_use": "cannot be counselled as though it were",
+      "meaning_here": "advised, as one would advise a person",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The surprise arrives in the first paragraph and the real claim in the last. Between them are two sentences that take back more than most readers notice.",
+    "one_sentence_summary": "Because one household's spending is another household's income, a decision that would raise any single household's savings can, if every household takes it at once, leave the country saving less, though this holds only where production is limited by willingness to buy and amounts to a claim about the level at which a description is true rather than to any verdict on thrift.",
+    "main_idea": "Saving more is sound advice for a household and can be self-defeating for all households at once, because the money withheld is somebody else's receipts and incomes fall until the extra saving fails to appear. The result requires that output be limited by demand; where capacity is the constraint the same wish finances investment instead. And the argument passes no judgement on thrift: it shows only that a claim true at one level can be false at another, so a country is not a large family.",
+    "simple_explanation": "If you decide to spend less and save the difference, you will end the year with more money. That is obviously right.\n\nNow suppose everyone in the country decides the same thing on the same morning. The country may end the year having saved less than before. Nobody made a mistake. Every individual calculation was correct and the total still came out wrong.\n\nThe reason is that your spending is somebody else's income. If you stop buying, the shopkeeper stops receiving, and the money you did not spend is not saved by him either, because it never reached him.\n\nFollow it through. Everyone cuts spending by a tenth to build a reserve. Shop takings fall by a tenth. Shopkeepers are households too, so they cut their spending, and some of them let an assistant go. That assistant now earns nothing and saves nothing. Incomes settle at a lower level, and the amount actually saved is no bigger than before, possibly smaller. Everyone wanted to save more. Nobody did.\n\nThen comes the condition, and it matters enormously. This only works when what is holding production back is that nobody is buying. If instead the factories are already full and everyone is employed, then wanting to save more does not take money out of circulation at all. It frees up workers and materials from making things for immediate use, makes borrowing cheaper, and pays for building the machinery that will produce later. Same wish, opposite result, because the thing limiting output has changed. Stating the paradox without this condition makes it false half the time.\n\nFinally, the author insists this is not a lecture about thrift. He does not say households should stop saving, because a household with no reserve is in trouble when the shop shuts. He does not say saving is a vice, because the same act really is prudent for the person doing it and really does subtract from someone else's takings, and those two descriptions do not contradict each other.\n\nWhat the argument actually shows is smaller and stranger: a statement can be true of one household and false of all households put together. So a country is not a big family, and you cannot give it the advice you would give a family. That is a point about which level a statement belongs to, and people arguing about whether thrift is good or bad have mistaken it for a point about morals.",
+    "why_difficult": "The passage delivers its surprise early, which tempts a reader to stop constructing and start agreeing. The two qualifications then arrive in quick succession, and each is the kind that readers habitually discard: the first is a condition tucked into an abstract contrast between two kinds of constraint, and the second denies the moral conclusion the argument seems designed to produce. There is also a level problem running through the whole piece. The vivid material, the shopkeeper and the assistant, is individual, while the claim is about totals, and options that slide between the two are hard to catch at speed.",
+    "author_intention": "To install a surprising result and then, in the same breath, to stop the reader using it, first by naming the circumstances in which it is simply false and then by refusing the moral that everybody draws from it.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0071-p1",
+        "role": "States the paradox",
+        "note": "One household saving more ends up richer. Every household saving more may leave the country with less saved, because your spending is somebody else's income."
+      },
+      {
+        "paragraph_id": "rc-0071-p2",
+        "role": "Works the circuit",
+        "note": "Spending falls, shop takings fall, shopkeepers cut back, an assistant loses his job and saves nothing. Income settles lower and the extra saving never appears."
+      },
+      {
+        "paragraph_id": "rc-0071-p3",
+        "role": "Attaches the condition",
+        "note": "All of this needs demand to be the limit. If capacity is the limit, the same wish to save releases resources and pays for new plant, and the result reverses."
+      },
+      {
+        "paragraph_id": "rc-0071-p4",
+        "role": "Refuses the moral",
+        "note": "It is not advice against saving and not a charge against thrift. It shows that a statement can hold of one household and fail of all of them, so a country is not a large family."
+      }
+    ],
+    "tone_progression": "It opens patient and almost pedagogical, walks the circuit without raising its voice, becomes severe at the sentence about stating the paradox without its condition, and ends slightly impatient, with a single dismissal of the moralists on both sides.",
+    "key_transitions": [
+      "'Each sum is right and the total is wrong' (paragraph 1) — the paradox is put in eight words and the level problem is already visible.",
+      "'The result depends on a condition that is easy to leave out and fatal to leave out.' (opening of paragraph 3) — the claim starts shrinking.",
+      "'What the argument establishes is narrower and odder than either moral.' (paragraph 4) — the author names his own thesis and disowns the popular one."
+    ],
+    "misunderstanding": "The picture most readers build is that saving is bad for the economy, which the passage denies in two separate clauses. It survives because the first two paragraphs are vivid and unqualified and because the denial is phrased as a refusal rather than as a claim. A second and subtler error is to read the argument as advice to households, when its whole point is that advice good for a household is what fails when generalised. Readers who make that error answer the inference question with a prediction about an individual household, which the passage expressly refuses to license.",
+    "traps_summary": "The options here read a two-sided phrase from one side only, carry an aggregate result down to a single household, drop the condition that makes the result true, and turn a claim about levels of description into a verdict on a virtue. Deciding in each case which level and which condition an option belongs to settles all four questions.",
+    "reading_lesson": "When a passage states a result about a group and illustrates it with an individual, keep the two apart in your notes, because the commonest distractor in such passages is a true statement pitched at the wrong level. Then, whenever an author says his conclusion is narrower than people suppose, treat every earlier sentence as provisional and read the next sentence as the thesis. Claim-and-qualification passages punish readers who answer from the memorable opening rather than from the careful close.",
+    "real_world": "The same shape appears whenever a sensible individual response is generalised: everyone standing to see better at a concert, every firm cutting wages to restore its margin, every depositor withdrawing early to protect a deposit, every driver leaving an hour sooner to beat the traffic.",
+    "takeaway": "Advice that is sound for one person can be false for everyone, and a country is not a large household.",
+    "reflection_question": "Which piece of advice you have taken this year would stop working if everybody around you took it on the same day?"
+  }
+}

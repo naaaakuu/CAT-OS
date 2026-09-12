@@ -1,0 +1,330 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0074",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "human-behaviour",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "main-idea-extraction",
+      "qualifier-tracking"
+    ],
+    "word_count": 286,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "not_true",
+      "primary_purpose"
+    ],
+    "theme": "putting things off redefined as the removal of an unpleasant feeling produced by approaching a task rather than as a misjudgement of time, a definition defended by what it predicts about which tasks are delayed and which remedies work, and qualified by the observation that the delayer is not ignorant of the cost but is arranging not to feel it",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-04",
+    "reviewer_notes": "Under three hundred words carrying a definition, three predictions and a qualification that turns the whole thing round. The last two sentences are the hardest part: the delayer is credited with full knowledge of the cost, which removes the obvious reading that he has miscalculated, and every question in the set can be decided from them.",
+    "length_class": "short",
+    "structure": "definition_application",
+    "viewpoints": 2,
+    "tone": "dry, precise, slightly sympathetic",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.definition",
+      "struct.qualification",
+      "struct.general_to_specific",
+      "comp.central_idea",
+      "comp.purpose",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "arg.principle",
+      "arg.qualification",
+      "arg.example",
+      "inf.author_view_application",
+      "inf.strongly_supported",
+      "scope.condition",
+      "scope.abstraction_level",
+      "lang.absolute_vs_qualified",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that anyone uncomfortable about a task will put it off, which takes the definition's mechanism and strips its hedging; the passage describes a delay undertaken in the expectation of being worse off and never says discomfort is sufficient, and its own example pairs discomfort with delay rather than deriving one from the other. Q2's rival is the option about techniques for stopping, which mistakes the third prediction for advice: the remedies appear as things the definition predicts will work, offered as evidence for the definition rather than as instruction. Q3's false statement is that the delayer has misjudged the cost, which the final two sentences deny in terms, saying he knows precisely what the delay will cost him and that the knowledge is among the things he is arranging not to feel.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "charge",
+      "deferred",
+      "wretched"
+    ]
+  },
+  "passage": {
+    "title": "A Mood Repaired Now",
+    "reading_time_min": 1.5,
+    "paragraphs": [
+      {
+        "id": "rc-0074-p1",
+        "text": "Procrastination is filed, almost everywhere, under time management, as though the person delaying had misjudged how long the work would take. A different definition is available and does more work: an unnecessary delay, undertaken in the expectation of being worse off for it, whose function is to remove an unpleasant feeling that approaching the task produces. On that account the delay is not a failure of planning at all. It is a repair, and what it repairs is a mood."
+      },
+      {
+        "id": "rc-0074-p2",
+        "text": "The definition earns its place by predicting what the managerial account does not. It predicts that delay will follow a task's emotional charge rather than its length, which is why the two-line message that must refuse somebody sits unwritten for a week while the four-hour job with nothing uncomfortable in it is finished on the afternoon it arrives. It predicts that lists and schedules will disappoint, since they prescribe a time and leave the feeling exactly where it was. And it predicts that anything which lowers the charge, permission to produce a bad first attempt, or a first step that carries no verdict on the person taking it, will succeed where encouragement fails."
+      },
+      {
+        "id": "rc-0074-p3",
+        "text": "None of this makes the delayer irrational at the moment of delaying. The relief he buys is immediate and certain; the price is deferred and is paid by somebody he is not yet. That is a wretched bargain across a life and a perfectly good one before lunch. Which is why advice that treats him as ignorant of the consequences is aimed at a mistake he is not making. He knows precisely what the delay will cost him, and that knowledge is among the things he is at present arranging not to feel."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0074-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.strongly_supported",
+        "arg.principle"
+      ],
+      "target_mistake": "converting the definition's mechanism into a rule that discomfort always produces delay",
+      "prediction_target": "The learner should predict that the inference will make the feeling, rather than the size of the job, the thing that decides which task is postponed.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "application",
+        "scope"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "Between two tasks of the same length, the one a person expects to feel worse about beginning is the more likely to be delayed.",
+        "B": "Anyone who feels uncomfortable about a piece of work will certainly find a reason to postpone it.",
+        "C": "Procrastination is commonest among people who underestimate how long their work is going to take, and rarest among those who plan well.",
+        "D": "The delay lasts until the unpleasant feeling attached to the task has faded of its own accord."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The definition makes the feeling the cause and the delay the remedy, and the second paragraph converts that into a prediction: delay follows a task's emotional charge rather than its length. The example is built to hold length constant in the other direction, pairing a two-line message with a four-hour job.",
+        "correct_reasoning": "The correct option is that prediction stated as a comparison. If the delay exists to remove a feeling produced by approaching the task, then between two jobs that take the same time the one with more of that feeling attached is the one that gets postponed, and the passage's own example is this comparison run with the lengths reversed to make the point vivid.",
+        "passage_anchor": "rc-0074-p2",
+        "question_type_note": "When a passage offers a definition and then says what it predicts, the inference question usually asks you to state the prediction for a case the passage did not give. Hold the stated variable fixed and vary the other.",
+        "reading_habit": "Turn an author's example back into the rule it came from. The example is chosen to be memorable; the rule is what the questions are built on.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage describes what a delay is for, not a law about what discomfort must produce. Its definition requires an unnecessary delay undertaken in the expectation of being worse off, which is a description of some episodes rather than a prediction about everyone who is uncomfortable.",
+            "seductive_element": "It is the live rival, because it uses the passage's own mechanism and differs from the key only in strength, which is the easiest difference to stop noticing under time."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Misjudging how long work takes is the managerial account named in the first sentence, which the passage sets aside in favour of a definition in which the delay is undertaken in full expectation of the cost.",
+            "seductive_element": "It is the view the reader arrives holding, and the passage states it clearly enough at the start to be remembered as something the author said."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing is said about how the episode ends or about the feeling subsiding. The passage's account of what changes things is quite different, naming remedies that lower the charge rather than any process of waiting it out.",
+            "seductive_element": "A feeling that fades is the natural completion of a story about feelings, and the passage never explicitly rules it out."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0074-q2",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.central_idea",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "reading the third prediction as a set of recommendations, so that a piece of argument becomes a piece of advice",
+      "prediction_target": "The learner should be able to name the verb before the options: the author is exchanging one definition for another and showing what the new one buys.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to persuade the reader that putting things off is less harmful than it is generally supposed to be",
+        "B": "to exchange one account of a familiar habit for another, and to show what the new one predicts",
+        "C": "to offer a set of techniques by which somebody might stop putting off the work he dislikes",
+        "D": "to describe the feelings that accompany work a person is reluctant to sit down and begin"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The first paragraph sets one definition against another, the second is a list of things the new definition predicts and the old one does not, and the third guards the new definition against a misreading. The structure is a definition being argued for by its consequences.",
+        "correct_reasoning": "The correct option names both halves of the operation. A definition is substituted, and it is defended in the only way a definition can be defended, by showing what follows from it: which tasks get delayed, why schedules disappoint, and which remedies work. Nothing is being recommended and nothing is being excused; the predictions are the evidence.",
+        "passage_anchor": "rc-0074-p1, rc-0074-p2",
+        "question_type_note": "A purpose question wants a verb and an object. Where a passage opens by rejecting a definition, the verb is almost always a replacement, and the rest of the passage is the case for it.",
+        "reading_habit": "Ask whether a passage's practical-sounding sentences are instructions or evidence. Authors often mention what would work in order to test an account, not in order to tell you what to do.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage calls the delay a wretched bargain across a life, and its defence of the delayer is confined to the moment of delaying. It denies that he is irrational then, which is a claim about his reasoning rather than about the harm.",
+            "seductive_element": "The third paragraph is sympathetic in tone and does refuse one common accusation, which reads as a general defence of the behaviour."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The remedies appear inside a prediction, as the things the definition says will work, and they are offered to support the definition. No instruction is issued and the passage's last paragraph explains why ordinary advice misfires.",
+            "seductive_element": "It is the live rival, because the second paragraph really does name two things that work, and a reader who wants help will read them as the point of the piece."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The feelings are named only as the mechanism in a definition. The passage describes none of them in any detail and spends its length on what the definition explains, not on what the reluctance is like from inside.",
+            "seductive_element": "The subject matter is emotional and the passage does hinge on a feeling, so a descriptive purpose sounds close enough to pass."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0074-q3",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "keeping the ordinary picture in which the delayer has got his sums wrong, when the passage credits him with knowing the cost exactly",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following is NOT true, according to the passage?",
+      "options": {
+        "A": "The delay removes a feeling rather than a planning error.",
+        "B": "Schedules disappoint because they prescribe a time and leave the feeling exactly where it was.",
+        "C": "The relief a delayer gains arrives sooner than the cost he will eventually pay.",
+        "D": "The delayer has misjudged what the postponement is going to cost him in the end."
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The final two sentences are written to close off exactly this reading. Advice that treats the delayer as ignorant of the consequences is aimed at a mistake he is not making, and he knows precisely what the delay will cost him. The knowledge is not absent; it is one of the things being avoided.",
+        "correct_reasoning": "The correct option restores the miscalculation the passage has removed. On this account nothing has been misjudged at all: the definition requires the delay to be undertaken in the expectation of being worse off, and the closing sentences make that expectation exact rather than approximate, which is what distinguishes the account from the managerial one it replaced.",
+        "passage_anchor": "rc-0074-p3",
+        "question_type_note": "In a NOT-true question the false option is usually the everyday belief the passage has taken trouble to exclude, restated in the passage's own vocabulary.",
+        "reading_habit": "When an author says what somebody is not mistaken about, mark it. Passages replacing one explanation with another are tested mostly on the mistake they refuse to attribute.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The first paragraph states this and puts it twice, saying the delay is not a failure of planning at all and that it is a repair whose object is a mood.",
+            "seductive_element": "The compression makes it sound like a candidate's summary rather than a sentence of the text, since neither of its key words appears in that order in the passage."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "This is the second of the passage's three predictions, given in its own words: lists and schedules prescribe a time and leave the feeling exactly where it was.",
+            "seductive_element": "The passage phrases it as a prediction the definition makes, so a reader looking for a statement of fact may not count it as one."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The third paragraph states the timing directly, with the relief immediate and certain and the price deferred and paid by somebody the delayer is not yet.",
+            "seductive_element": "It reads as an interpretation of the bargain rather than as a report of it, and the passage's phrasing is figurative enough to look like something the reader supplied."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "charge",
+      "passage_use": "delay will follow a task's emotional charge rather than its length",
+      "meaning_here": "the weight of feeling attached to something",
+      "difficulty": "medium"
+    },
+    {
+      "word": "deferred",
+      "passage_use": "the price is deferred and is paid by somebody he is not yet",
+      "meaning_here": "put off to a later time rather than avoided",
+      "difficulty": "medium"
+    },
+    {
+      "word": "wretched",
+      "passage_use": "a wretched bargain across a life",
+      "meaning_here": "very bad indeed, when judged over the whole period",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Fewer than three hundred words, and the last two sentences reverse the accusation the whole subject usually carries. Read them twice before answering anything.",
+    "one_sentence_summary": "Putting things off is better defined not as a misjudgement about time but as an unnecessary delay whose job is to remove an unpleasant feeling produced by approaching a task, a definition that predicts which tasks are postponed, why schedules fail and which remedies work, and that leaves the delayer fully aware of what the delay will cost him.",
+    "main_idea": "Procrastination is usually treated as bad time management. Define it instead as a delay undertaken in the expectation of being worse off, whose function is to remove the discomfort of approaching a task. That definition predicts that delay tracks a task's emotional charge rather than its length, that schedules will not help, and that lowering the charge will. And it makes the delayer neither ignorant nor irrational in the moment, since the relief is immediate and the cost falls on a later self.",
+    "simple_explanation": "Nearly everyone treats putting things off as a planning problem, as if the person had got their sums wrong about how long a job takes.\n\nThe author suggests a different definition. Procrastination is delaying something unnecessarily, knowing you will be worse off for it, in order to get rid of a bad feeling that comes from going near the task. So the delay is not a mistake about time. It is a repair job, and the thing being repaired is your mood.\n\nWhy prefer this definition? Because it predicts things the planning story cannot.\n\nFirst, it predicts that what gets delayed will depend on how the task feels, not how long it takes. That fits what actually happens: a two-line email refusing somebody can sit there for a week, while a four-hour job with nothing awkward in it gets done the afternoon it lands.\n\nSecond, it predicts that timetables and to-do lists will not solve anything, because they tell you when to do the job and do nothing about the feeling.\n\nThird, it predicts that anything reducing the feeling will work: letting yourself write a bad first draft, or starting with a step that is not a judgement on you as a person.\n\nThen the twist. The author says the person delaying is not being irrational in the moment. The relief comes now and is guaranteed. The cost comes later, and is paid by a version of him that does not exist yet. Over a whole life that is a terrible deal. Before lunch it is a very good one.\n\nAnd so advice that assumes he does not realise what it will cost him is aimed at a mistake he is not making. He knows exactly what it will cost. That knowledge is one of the things he is currently trying not to feel.",
+    "why_difficult": "The passage is short, which means each sentence carries more weight than usual and there is no repetition to correct a first impression. Its hardest move is the last one, where the reader's natural picture of the procrastinator as someone who has miscalculated is taken away and replaced with someone who has calculated correctly and does not want to think about the answer. Readers who miss that answer the NOT-true question wrongly. The second difficulty is the three predictions, which look like practical advice and are actually the evidence for a definition, which is what the purpose question turns on.",
+    "author_intention": "To move a familiar behaviour out of the category of incompetence and into the category of feeling-management, and then to stop the reader from treating that as either an excuse or a self-help programme.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0074-p1",
+        "role": "Swaps the definition",
+        "note": "Not bad planning. A delay taken knowing it will cost you, in order to get rid of the discomfort of starting. The delay repairs a mood."
+      },
+      {
+        "paragraph_id": "rc-0074-p2",
+        "role": "Shows what it predicts",
+        "note": "Delay follows feeling rather than length; schedules do not help because they leave the feeling alone; and anything that lowers the feeling does help."
+      },
+      {
+        "paragraph_id": "rc-0074-p3",
+        "role": "Qualifies the verdict",
+        "note": "He is not irrational now: relief is immediate, the bill falls on a later self. And he is not ignorant either, which is why warnings miss."
+      }
+    ],
+    "tone_progression": "It begins briskly corrective, sharpens into confident exposition as the predictions are set out, and ends dry and a little sympathetic, granting the delayer his rationality in the moment and taking away his excuse in the same breath.",
+    "key_transitions": [
+      "'It is a repair, and what it repairs is a mood.' (end of paragraph 1) — the definition lands in eight words.",
+      "'None of this makes the delayer irrational at the moment of delaying.' (opening of paragraph 3) — the passage guards its own account against a verdict readers are about to deliver.",
+      "'He knows precisely what the delay will cost him' (paragraph 3) — the miscalculation is denied outright."
+    ],
+    "misunderstanding": "The wrong model a hurried reader builds keeps the ordinary picture underneath the new vocabulary, so that the delayer is still someone who has not grasped the consequences, only now for emotional reasons. The passage says the reverse in its final sentence, making the knowledge of the cost part of what is being avoided. A second misreading takes the paragraph of predictions as a list of tips, which turns an argument for a definition into a piece of advice and makes the purpose question unanswerable.",
+    "traps_summary": "This set offers the mechanism without its hedging, the account the passage replaced, an ending the passage never describes, a set of tips where the passage offers evidence, and the miscalculation the last sentence denies. Each is answered by asking whether a statement belongs to the definition, to what the definition predicts, or to the qualification.",
+    "reading_lesson": "When a passage replaces one definition with another, the questions will mostly be built on the mistake the new definition refuses to attribute. Write that refusal down as you read: not ignorance, not miscalculation, not bad planning. The second habit is to check whether a passage's practical-sounding sentences are instructions or evidence, because an author often lists what would work in order to test an account rather than to tell anyone what to do, and a purpose question will punish the confusion.",
+    "real_world": "The same structure shows up wherever a behaviour is blamed on ignorance and is actually managing a feeling: unopened letters from a bank, a medical appointment nobody makes, a conversation put off for months, and every reminder system that fails because it addresses the calendar rather than the dread.",
+    "takeaway": "The delay is not a mistake about time; it is a very good deal for the person you are this afternoon.",
+    "reflection_question": "What are you currently putting off, and what exactly would you have to feel in order to begin it?"
+  }
+}
