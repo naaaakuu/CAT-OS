@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0030",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "arts-culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "The Note the Orchestra Waits For",
+    "theme": "why an orchestra tunes to the oboe, and what the order of tuning records",
+    "estimated_time_sec": 65,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "A",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is about the same note the paragraph is about, and it offers the kind of historical fact a reader is pleased to meet, which is enough camouflage at this tier. The decoy is the sentence about strings and pegs, which appears to wander onto a different family of instruments."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring"],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice when a sentence about the same object is speaking across centuries while the paragraph is describing a single minute, and that no tie joins the two",
+    "reasoning_patterns": ["scope.time_period", "scope.abstraction_level", "disc.function_slot", "comp.organization"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about strings and their pegs: it names a different family of instruments and can look like a digression from a paragraph about the oboe. It stays because the explanation is an ordering by adjustability, and the strings are the other end of that order; without them the closing sentence's ordering has only one member. The sentence about pitch rising across Europe is about the same note and still belongs elsewhere: it covers two centuries and a continent, while every other sentence describes the minutes before one concert, and no tie in the set reaches it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of orchestral tuning practice; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A foundation item that teaches the scope test with a friendly fact as the outlier. The core is short, strongly cued and closes on an interpretation, so a learner who builds first cannot miss the seat that is not there."
+  },
+  "sentences": [
+    { "label": "A", "text": "The oboe is used because its pitch is the least obliging: the reed gives its player little room to bend a note, so it is easier for eighty instruments to come to the oboe than for the oboe to come to them." },
+    { "label": "B", "text": "The ritual looks like deference to a soloist and is in truth an ordering by adjustability, with the least flexible instrument given the first word." },
+    { "label": "C", "text": "Before a concert the orchestra falls quiet and the oboe plays one sustained A, which the other players match section by section." },
+    { "label": "D", "text": "Strings, which can be retuned in seconds by turning a peg, are the most obliging of all, and they are accordingly the ones asked to move furthest." },
+    { "label": "E", "text": "The pitch that counts as A has climbed by nearly a semitone across Europe since the eighteenth century, as orchestras chased a brighter sound and makers of instruments followed them." }
+  ],
+  "outlier": "E",
+  "core_order": ["C", "A", "D", "B"],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of the minute before a concert, from the quiet to what the order of tuning reveals. The sentence that is not in that minute is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one small ceremony in four steps. It opens with what happens, a hush and a single sustained note that the rest of the orchestra matches, then gives the reason the note comes from the oboe. The third sentence puts the other end of the scale in place, the instruments that can be retuned with a peg, and the fourth reads the practice: an ordering by adjustability wearing the appearance of deference. What happens, why, the other end, what it means.",
+    "core_roles": [
+      { "label": "C", "role": "topic", "why_here": "It describes the practice everything else explains, and is the only sentence that says what actually occurs before a concert." },
+      { "label": "A", "role": "cause_effect", "why_here": "It answers the question the opening raises, why that instrument, and supplies the property the rest of the explanation runs on." },
+      { "label": "D", "role": "development", "why_here": "'The most obliging of all' compares directly with the least obliging just named, and completes the scale the closing sentence reads." },
+      { "label": "B", "role": "conclusion", "why_here": "It interprets the whole practice, and can only come last because the ordering it names has to exist before it can be named." }
+    ],
+    "links": [
+      { "from": "C", "to": "A", "tie": "lexical", "explanation": "'The oboe' is picked up from the sentence before and made the subject of an explanation rather than of a description." },
+      { "from": "A", "to": "D", "tie": "reference", "explanation": "'The most obliging of all' is a comparison that needs 'the least obliging' from the previous sentence to be intelligible." },
+      { "from": "D", "to": "B", "tie": "given_new", "explanation": "The two ends of the scale are now given, and the closing sentence adds the new thing: what the arrangement of them amounts to." }
+    ],
+    "violation_named": "The odd sentence is about the same note, A, and about orchestras, and yet it is written at a scale nothing else in the paragraph occupies. The core describes the minutes before one concert and reads a practice; the stray sentence covers two centuries and a continent, and reports a drift rather than a practice.",
+    "why_it_breaks": "Every tie in the core is local: one instrument matched against another, one property compared with its opposite, all inside a single hush. The stray sentence offers nothing any of those ties can hold on to, and takes nothing from them, since the height of the note is not what the paragraph is explaining; what the note is worth to the paragraph is only that everyone has to arrive at it.",
+    "trap_exposed": "The camouflage is pleasant information. It is the fact a reader is most glad to learn, and it names the paragraph's own note, so a topic check keeps it comfortably. The planted decoy is the sentence about strings: it seems to leave the oboe behind, when in fact it supplies the other end of the scale that the closing sentence reads.",
+    "exclusion_analysis": [
+      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It states the plain facts of the ceremony and no more, so a reader hunting for argument may treat it as scene setting that could be dropped.", "what_breaks": "Without it there is no ceremony to explain, and the reason, the comparison and the interpretation all discuss something the paragraph never showed." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It is the longest sentence in the set and carries both a cause and a comparison, so a reader may struggle to see where its work begins.", "what_breaks": "Without it the paragraph never says why the oboe rather than anything else, and the scale of adjustability has no fixed point at its stiff end." },
+      { "label": "D", "mistake_type": "lexical_pull", "why_tempting": "It is the only sentence that leaves the oboe and talks about a different family of instruments entirely.", "what_breaks": "Without it the ordering named in the closing sentence has a single member, and the claim that this is a scale rather than a courtesy loses its evidence." },
+      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "It makes the only evaluative move in the set, saying that things are not what they look like, and so can feel like a sentence from a different essay.", "what_breaks": "Without it the paragraph describes a practice and explains its parts but never says what the practice records, so the explanation stops one step short." }
+    ],
+    "detection_habit": "Ask how much time and how much ground each sentence covers. Four sentences inside one minute have no place for a sentence that spans two centuries, however closely the subject matches."
+  },
+  "mentor": {
+    "challenge": "Five sentences about the note an orchestra tunes to. One of them is the sort of fact you would happily repeat at dinner, which is not the same as belonging here.",
+    "takeaway": "Match the reach, not just the subject. A paragraph living in one minute cannot hold a sentence living in two centuries."
+  }
+}

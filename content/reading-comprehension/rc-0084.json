@@ -1,0 +1,469 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0084",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "technology-ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "structure-mapping",
+      "argument-tracking",
+      "inference",
+      "scope-control",
+      "main-idea-extraction"
+    ],
+    "word_count": 567,
+    "question_count": 5,
+    "question_types": [
+      "except",
+      "inference",
+      "main_idea",
+      "paragraph_function",
+      "scope"
+    ],
+    "theme": "three successive descriptions of collaboratively written software, as a liberty, as a method and as a commons, with the third preferred for treating the practice as an institution and corrected at one point, since a resource that use cannot diminish faces desertion rather than depletion and is protected by reciprocity conditions rather than by rationing rules",
+    "estimated_time_min": 9,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-05",
+    "reviewer_notes": "Three descriptions in sequence, the newest endorsed and then corrected at exactly one point. The fourth paragraph is the pivot and is easy to read as a rejection, which is what the paragraph-function and scope questions are built on. The passage never says any description was abandoned, which is what the EXCEPT question turns on.",
+    "length_class": "medium",
+    "structure": "history_of_an_idea",
+    "viewpoints": 3,
+    "tone": "historically minded, appreciative, precise at the correction",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.analogy",
+      "struct.contrast",
+      "struct.qualification",
+      "struct.chronology",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.attention_span",
+      "comp.function_over_words",
+      "comp.organization",
+      "arg.analogy",
+      "arg.qualification",
+      "arg.concession",
+      "arg.causal_claim",
+      "inf.reasonable_implication",
+      "inf.strongly_supported",
+      "scope.condition",
+      "scope.abstraction_level",
+      "elim.predict_first",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's exception is the claim that the first description was abandoned, which the passage never makes: the descriptions accumulate, and the licences the first produced are named in the last paragraph as the institutions now doing the work. Q2's live rival is the option that the fourth paragraph rejects the commons description, which the fifth paragraph forbids by keeping the frame and correcting it at one point. Q3's rival is the option that the earlier descriptions were mistaken, which converts a claim about what each recorded into a verdict the passage does not deliver. Q4's rival is the option extending the criticism to the whole analogy, which the closing paragraph refuses in the sentence keeping the frame for being right about the important thing. Q5's rival is the definition of a commons offered as the main idea, which is one sentence of the third paragraph and leaves the correction with nothing to do.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "rationing",
+      "reciprocity",
+      "depletion"
+    ]
+  },
+  "passage": {
+    "title": "The Grass That Never Runs Out",
+    "reading_time_min": 2.8,
+    "paragraphs": [
+      {
+        "id": "rc-0084-p1",
+        "text": "The practice came first and the descriptions of it afterwards, which is the usual order. When programs written by many hands and given away were first argued about, the argument was moral and it was about the user. A person who cannot read or alter what runs on his own machine, it was said, is in somebody else's power, and the remedy was a licence that obliged the code to stay open wherever it travelled. The word in use was freedom, the subject of the sentence was the user, and whether the resulting programs were any good was not what the argument was about."
+      },
+      {
+        "id": "rc-0084-p2",
+        "text": "Two decades later the same practice was described again, and quite differently, as a way of producing better software: many readers, faults found quickly, releases that did not wait on a committee. The redescription was deliberate and it was aimed at firms, which had no use for a claim about liberty and a great deal of use for a claim about defects. It worked. What it recorded was that the practice had outgrown the people who began it. What it could not say was why anybody should go on contributing once he had the program he came for."
+      },
+      {
+        "id": "rc-0084-p3",
+        "text": "The third description is recent and is borrowed from the study of shared pastures, inshore fisheries and village irrigation systems. On this account what has been built is a commons: a resource owned by nobody, drawn on by everybody, and held together by rules that are neither property nor command. This is the most illuminating of the three descriptions, and the reason is easy to state. It is the first of them to treat the thing as an institution rather than as a licence or as a technique."
+      },
+      {
+        "id": "rc-0084-p4",
+        "text": "It also imports a mistake, and the mistake is worth naming precisely. In the pastures the language comes from, the resource is diminished by being used. Every additional animal leaves less grass for the rest, so the governing problem is overuse, and the institutions that grow up are rationing rules: who may graze, how many beasts, in which months. A commons of this other kind is not diminished by use at all. A million copies leave the original exactly as it was, and the millionth user takes nothing from the first. The problem the rationing rules were invented for therefore cannot arise here, and the problem that does arise is its mirror image. There are not too many takers. There are too few givers."
+      },
+      {
+        "id": "rc-0084-p5",
+        "text": "So the characteristic failure is not a stripped hillside. It is a library on which three hundred firms depend and which one unpaid person maintains, until the evening he decides not to. And the institutions that have actually grown up around such resources are not rationing rules but conditions of reciprocity written into licences, which is what one would expect if the danger were desertion rather than exhaustion. The frame should be kept, because it was right about the thing that matters, that this is an institution and not a product, and neither of the earlier descriptions could say so at all. One substitution is needed and only one. Replace the fear of depletion with the fear of desertion, which also changes who ought to be worried about whom: the users of a pasture are the danger to it, and the users of a codebase are the only repair it can ever have."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0084-q1",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "comp.attention_span"
+      ],
+      "target_mistake": "assuming that a later description replaced an earlier one, because a sequence of descriptions is usually a sequence of replacements",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, each of the following is true EXCEPT:",
+      "options": {
+        "A": "The second description was adopted deliberately and was aimed at firms",
+        "B": "The institutions of a pasture are concerned with who may use it and with how much of it",
+        "C": "The first description was given up once the second had proved more persuasive",
+        "D": "The third description is the first to treat the practice as an institution"
+      },
+      "correct": "C",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "Three of these have sentences of their own: the redescription was deliberate and aimed at firms, the rationing rules cover who may graze and how many beasts, and the commons account is the first to treat the thing as an institution. Nothing anywhere says a description stopped being used.",
+        "correct_reasoning": "The exception is the statement about abandonment. The passage describes descriptions accumulating rather than succeeding one another, and the last paragraph shows the first description still at work, since the licences it produced are the very place where the conditions of reciprocity are written. A sentence about persuasion and replacement would have to come from somewhere, and there is nowhere it could come from.",
+        "passage_anchor": "rc-0084-p2, rc-0084-p3, rc-0084-p5",
+        "question_type_note": "An EXCEPT question is three verifications and one exclusion, and the exclusion is often something the shape of the passage suggests rather than anything its sentences say.",
+        "reading_habit": "In a passage that traces an idea through stages, ask whether the earlier stages are said to have ended. Accumulation and replacement look identical in a summary and are quite different in the text.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The second paragraph states both halves: the redescription was deliberate and it was aimed at firms, which had no use for a claim about liberty and a great deal of use for a claim about defects.",
+            "seductive_element": "The option compresses a long sentence into a short one, so a reader matching words rather than claims does not find it and begins to doubt."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The fourth paragraph gives this as a list of particulars, naming who may graze, how many beasts and in which months, which the option restates as who may use it and how much.",
+            "seductive_element": "The passage speaks of grazing and beasts while the option speaks of use, which makes a faithful summary look like a generalisation the reader has supplied."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The third paragraph says exactly this, and offers it as the reason the commons account is the most illuminating of the three: it is the first to treat the thing as an institution rather than as a licence or a technique.",
+            "seductive_element": "It reads as the author's judgement rather than as a statement of fact, and readers hunting for the false option discount anything that sounds like an opinion."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0084-q2",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.organization",
+        "struct.analogy"
+      ],
+      "target_mistake": "reading a paragraph that corrects one feature of a borrowed frame as a paragraph that rejects the frame",
+      "prediction_target": "The learner should be able to say: this paragraph finds the single place where the analogy carries across a danger the new case cannot have.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "The fourth paragraph functions chiefly to",
+      "options": {
+        "A": "withdraw the commons description in favour of the two accounts that preceded it",
+        "B": "give the history of how shared pastures and inshore fisheries came to be studied",
+        "C": "identify the single point at which the frame imports a danger that cannot arise here",
+        "D": "introduce a practical difficulty which the final paragraph then proposes a way of solving"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph opens with also, which adds rather than cancels, and announces its own scale in the same sentence: it imports a mistake, and the mistake is worth naming precisely. The rest works the analogy through a single feature, whether use diminishes the resource, and stops there.",
+        "correct_reasoning": "The correct option names that job. The paragraph accepts the borrowed frame and isolates the one property that does not travel, since a pasture is consumed by grazing and a program is not, and it ends by replacing the expected danger with its mirror image. The next paragraph confirms the size of the correction by keeping the frame and asking for one substitution only.",
+        "passage_anchor": "rc-0084-p4",
+        "question_type_note": "A paragraph-function question asks for the job rather than the content. Where a paragraph begins with also and names a single mistake, its job is a correction, and the thing to measure is how much of the frame the correction removes.",
+        "reading_habit": "When an author borrows a comparison and then finds fault with it, look for the sentence that says how much of the comparison survives. Authors who correct one feature seldom mean to throw the comparison away.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The fifth paragraph says the frame should be kept, because it was right about the thing that matters, and asks for one substitution and only one. The earlier two descriptions are then said to have been unable to make the point the commons frame makes.",
+            "seductive_element": "It is the live rival, because the paragraph really is the passage's most critical and because a reader who finds a flaw named precisely expects the flaw to be fatal."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No history of that study is given anywhere. Pastures, fisheries and irrigation systems appear once as the source of a vocabulary, and the fourth paragraph uses grazing only as a case in which use consumes what is used.",
+            "seductive_element": "The passage is built as a history and does describe where the vocabulary was borrowed from, which makes a second historical paragraph look likely."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The final paragraph proposes no solution. It identifies the characteristic failure, names the institutions that have grown up in fact, and asks for a change of expectation, which is a correction to a description rather than a remedy for a difficulty.",
+            "seductive_element": "The unpaid maintainer who stops is a practical problem stated vividly, so a reader expects the paragraph containing it to be moving towards a cure."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0084-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "inf.strongly_supported",
+        "arg.analogy"
+      ],
+      "target_mistake": "converting the passage's account of what each description recorded into a verdict that the earlier ones were false",
+      "prediction_target": "The learner should predict that the inference will apply the non-diminishing property to the kind of rule a pasture needs.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "The two earlier descriptions of the practice were mistaken and the third one is correct",
+        "B": "A rule limiting how much of a program any one user may take would answer a problem that does not arise here",
+        "C": "Software that nobody is maintaining will be used less than software that somebody is maintaining",
+        "D": "A pasture and a codebase both begin to fail at the point where their users stop contributing"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fourth paragraph states the property and then states what follows from it. A million copies leave the original exactly as it was, and the millionth user takes nothing from the first, so the problem the rationing rules were invented for cannot arise. Rationing rules are defined two sentences earlier as rules about who may use and how much.",
+        "correct_reasoning": "The correct option runs that reasoning on to a particular rule. A limit on how much a user may take is a rationing rule by the passage's own definition, and the passage says the problem such rules address cannot arise where use removes nothing. The inference adds nothing: it applies a stated property to an instance of a stated category.",
+        "passage_anchor": "rc-0084-p4",
+        "question_type_note": "An inference question rewards applying a stated property to a case the author did not mention. Where a passage defines a class of rule and then says the problem it answers is absent, individual rules of that class are fair game.",
+        "reading_habit": "When a passage says a problem cannot arise, ask what institutions exist only to solve that problem. They are the safest inference available, and they are usually the answer.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage grades the three descriptions without falsifying any of them, saying what each recorded and what each could not say. It also has the first description's licences still doing the work in the last paragraph, which a mistaken account could not manage.",
+            "seductive_element": "A sequence of descriptions in which the last is called the most illuminating reads as a story of progress, and progress is usually taken to mean that the earlier stages were errors."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing is said about how much unmaintained software is used. The passage's case is a library on which three hundred firms depend and which one person maintains, which is heavy use surviving the thinnest possible maintenance.",
+            "seductive_element": "It sounds like the natural consequence of the maintainer's departure, and the passage does present that departure as the characteristic failure."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The second half is true of one case and the passage says the two are mirror images. A pasture fails when its users take too much, which is why the last sentence calls a pasture's users its danger and a codebase's users its only repair.",
+            "seductive_element": "It is the live rival, because it sounds like the general lesson of a passage about commons, and it puts contribution at the centre, which is where the passage puts it for one of the two cases."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0084-q4",
+      "type": "scope",
+      "skill": "scope",
+      "patterns": [
+        "scope.condition",
+        "arg.qualification",
+        "arg.concession"
+      ],
+      "target_mistake": "extending a correction of one feature into a rejection of the whole comparison",
+      "prediction_target": "The learner should be able to state the limit in advance: the criticism touches what danger the frame teaches people to expect, and nothing else.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "main_idea"
+      ],
+      "stem": "The author's criticism of the commons description extends to",
+      "options": {
+        "A": "the whole of the analogy, drawn as it is from a case too unlike this one to be of help",
+        "B": "the way firms have used it, though not the way its first adopters understood it",
+        "C": "the claim that a shared resource can be held together without property or command",
+        "D": "one feature of it, the danger it teaches people to expect, and no further than that"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fifth paragraph measures the criticism itself. The frame should be kept, it was right about the thing that matters, one substitution is needed and only one, and the substitution named is replacing the fear of depletion with the fear of desertion. That is a correction to an expectation and not to the description.",
+        "correct_reasoning": "The correct option takes those sentences as the boundary. What the author objects to is a danger imported from pastures, overuse, which cannot occur where use removes nothing; what he keeps is everything else, including the part he calls the most illuminating of the three descriptions, that this is an institution rather than a product.",
+        "passage_anchor": "rc-0084-p5",
+        "question_type_note": "A scope question is usually answered where the author draws his own line rather than where he makes his case. Look for the words that count the corrections.",
+        "reading_habit": "When an author corrects a comparison, find the sentence that says how many corrections he is making. Wrong options in scope questions extend a named and numbered objection into a general one.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage calls the commons account the most illuminating of the three and asks that the frame be kept. Its objection is confined by the phrase one substitution is needed and only one.",
+            "seductive_element": "It is the live rival, because the fourth paragraph does say the frame imports a mistake, and an analogy that misleads about the central danger sounds like an analogy worth dropping."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No division is drawn between how firms use the commons description and how anyone else does. Firms appear once, in the second paragraph, as the audience the earlier redescription was aimed at.",
+            "seductive_element": "The passage does say one redescription was aimed at firms, and the three hundred firms depending on an unpaid maintainer make them look like the party at fault."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "That claim is what the author credits the description with. It is the definition given in the third paragraph, and it is the ground on which he calls the account the first to treat the thing as an institution.",
+            "seductive_element": "It is the most theoretical sentence in the passage, and readers expect the objection in a critical passage to attach to the most theoretical claim in it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0084-q5",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.history_of_an_idea",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "offering one of the three descriptions, or the definition inside the third, as what the passage is claiming",
+      "prediction_target": "The learner should be able to say: three descriptions in turn, the newest preferred as an institutional account and corrected at exactly one point.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Three successive descriptions of one practice, of which the newest is the best and needs one correction",
+        "B": "Software written openly by many hands turns out to contain fewer defects than software written behind closed doors",
+        "C": "The people who maintain the code that everybody depends on are unpaid and ought to be supported properly",
+        "D": "A commons is a resource that nobody owns, that everybody draws on, and that rules hold together"
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage is built in stages and each stage is a description: a liberty, a method, a commons. The fourth paragraph corrects the third and the fifth measures the correction at one substitution. A main idea has to contain both the sequence and the size of the correction.",
+        "correct_reasoning": "The correct option holds both. The sequence accounts for the first three paragraphs, each of which says what a description recorded and what it could not say; the single correction accounts for the last two, which isolate the imported danger and then keep the rest of the frame. An option naming any one description leaves four paragraphs unexplained.",
+        "passage_anchor": "rc-0084-p3, rc-0084-p5",
+        "question_type_note": "In a passage tracing an idea through stages, the main idea is what the sequence shows, not any stage in it. Check that a candidate needs the last paragraph as well as the first.",
+        "reading_habit": "Ask of each candidate which paragraph it makes optional. The right main idea leaves every stage of a history doing work, including the correction at the end.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the second description, which the passage reports as a redescription aimed at firms and then leaves behind. The passage records what the claim achieved and notes that it could not say why anybody should keep contributing.",
+            "seductive_element": "It is the most familiar claim about the subject and the one a reader arrives already believing, which makes it feel like the passage's ground rather than one of its stages."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage recommends nothing. It names the unpaid maintainer as the characteristic failure and asks for a change in what danger readers expect, which is a correction to a description rather than a proposal.",
+            "seductive_element": "The maintainer who stops one evening is the passage's most affecting detail, and it sits in the paragraph where a conclusion is expected."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the definition offered inside the third description, which the passage then corrects and bounds. Taken as the main idea it makes the fourth and fifth paragraphs, where the author's own contribution lives, into an appendix.",
+            "seductive_element": "It is the only sentence in the passage that reads like a formal definition, and definitions are habitually mistaken for theses."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "rationing",
+      "passage_use": "the institutions that grow up are rationing rules",
+      "meaning_here": "rules that share out a limited thing by restricting how much each may take",
+      "difficulty": "medium"
+    },
+    {
+      "word": "reciprocity",
+      "passage_use": "conditions of reciprocity written into licences",
+      "meaning_here": "a requirement to give back on the same terms one received",
+      "difficulty": "hard"
+    },
+    {
+      "word": "depletion",
+      "passage_use": "Replace the fear of depletion with the fear of desertion",
+      "meaning_here": "a resource being used up by those who draw on it",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "One practice is described three times over, and the author prefers the newest description. Notice how much of it he takes back, because two of the five questions depend on the size of the correction rather than on its content.",
+    "one_sentence_summary": "Software written by many hands has been described in turn as a liberty owed to the user, as a method that produces fewer defects, and as a commons, and the third description is the best because it is the first to treat the practice as an institution, but it imports from grazing land a danger that cannot occur where use removes nothing, so the fear of depletion has to be replaced by the fear of desertion and the users who threaten a pasture become the only possible repair for a codebase.",
+    "main_idea": "The same practice has been described three ways: as freedom for the user, as a better way to make software, and as a commons. The third is the most useful, because it is the first to treat the thing as an institution rather than as a licence or a technique. But it borrows from pastures a problem that cannot occur here, since copying takes nothing from anybody. The real danger is not too many users but too few contributors, and the institutions that grew up are reciprocity conditions rather than rationing rules. Keep the frame, and change what you are afraid of.",
+    "simple_explanation": "People were writing and sharing software before anyone had a good way to describe what they were doing. The descriptions came later, and there have been three of them.\n\nThe first was moral. If you cannot read or change the program running on your own machine, you are in somebody else's hands. So the answer was a licence that forced the code to stay open wherever it went. The word was freedom, the argument was about the user, and nobody was claiming the software would be any better.\n\nThe second came about twenty years later and was completely different. This is a good way to make software, it said: lots of people reading the code, bugs found fast, releases that do not wait for a committee. That description was written on purpose to appeal to companies, who did not care about freedom and cared a lot about defects. It worked. But it had nothing to say about why anyone should keep helping once they had got the program they came for.\n\nThe third description is recent, and it is borrowed from people who study shared grazing land, small fishing grounds and village water systems. What has been built, they say, is a commons: nobody owns it, everybody uses it, and it is held together by rules that are neither ownership nor orders from above. The author thinks this is the best of the three, for a simple reason. It is the first one that treats the thing as an institution instead of as a licence or a trick.\n\nBut it smuggles in a mistake. On grazing land, using the thing uses it up. Another animal means less grass for everyone else, so the danger is overuse, and the rules that grow up are about rationing: who may graze, how many animals, in which months. Software is not used up. A million copies leave the original exactly as it was. So the problem all that rationing was invented for simply cannot happen here. And the problem that does happen is the other way round: not too many takers, too few givers.\n\nSo the typical disaster is not a hillside eaten bare. It is a piece of code that three hundred companies rely on, kept going by one unpaid person, until the evening he stops. And what has actually grown up around these resources is not rationing but reciprocity written into the licences, which is exactly what you would expect if the danger were being abandoned rather than being used up.\n\nKeep the commons idea, says the author, because it got the important thing right: this is an institution, not a product, and neither of the earlier descriptions could say that. Change one thing only. Stop fearing depletion and start fearing desertion. Which also turns one other thing round: on a pasture, the users are the threat. In software, the users are the only repair there will ever be.",
+    "why_difficult": "The passage looks like a story of progress in which each description defeats the last, and it is not: the descriptions accumulate, and the licences from the first are still doing work in the final paragraph. The second difficulty is the fourth paragraph, which finds a flaw and states it with great precision, so readers take the flaw to be fatal; the fifth paragraph then keeps the frame and asks for one change. Holding a strong criticism and a strong endorsement of the same idea is what this passage is really testing.",
+    "author_intention": "To show that the newest way of describing a familiar practice is the right one and that it brings with it an expectation borrowed from a case it does not fit, so that a reader keeps the frame and starts worrying about the right failure.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0084-p1",
+        "role": "The first description",
+        "note": "A moral claim about the user: you should be able to read and change what runs on your machine. The remedy was a licence, and code quality was not the point."
+      },
+      {
+        "paragraph_id": "rc-0084-p2",
+        "role": "The second description",
+        "note": "The same practice redescribed as a way of making better software, aimed deliberately at firms. It worked, and it could not say why anyone should keep contributing."
+      },
+      {
+        "paragraph_id": "rc-0084-p3",
+        "role": "The third description",
+        "note": "Borrowed from grazing land and fisheries: a resource nobody owns, everybody uses, held together by rules. The first account to treat it as an institution."
+      },
+      {
+        "paragraph_id": "rc-0084-p4",
+        "role": "Names the imported mistake",
+        "note": "Grass is used up and software is not, so the overuse problem cannot arise. The real problem is the mirror image: too few givers rather than too many takers."
+      },
+      {
+        "paragraph_id": "rc-0084-p5",
+        "role": "Keeps the frame, changes the fear",
+        "note": "The typical failure is an unpaid maintainer stopping, and the real institutions are reciprocity conditions. Keep the commons idea; swap depletion for desertion."
+      }
+    ],
+    "tone_progression": "It begins as flat chronicle, giving each description its own paragraph without comment, warms noticeably when the third arrives and is called the most illuminating, turns exact and slightly corrective through the analysis of grazing, and ends decided, keeping what it has praised and naming the one change it wants.",
+    "key_transitions": [
+      "'It also imports a mistake, and the mistake is worth naming precisely.' (opening of paragraph 4) — the endorsement becomes a correction, and the word precisely announces its size.",
+      "'There are not too many takers. There are too few givers.' (close of paragraph 4) — the danger is inverted in eight words.",
+      "'The frame should be kept, because it was right about the thing that matters' (paragraph 5) — the criticism is bounded and the description is retained."
+    ],
+    "misunderstanding": "Readers finish believing the passage rejects the commons analogy, which is the natural reading of a paragraph that names a mistake and works it through in detail. The fifth paragraph says the opposite twice. The other wrong model turns the sequence of descriptions into a sequence of refutations, so that the moral account is treated as discredited; the passage never says any description was given up, and the licences the moral account produced are where the reciprocity conditions of the last paragraph live.",
+    "traps_summary": "The set offers abandonment where the passage shows accumulation, rejection where it corrects, the whole analogy where one feature is at issue, a definition in place of a thesis, and a recommendation the passage never makes. Deciding which of the three descriptions an option belongs to, and whether the author was keeping it, answers all five.",
+    "reading_lesson": "When an author borrows a comparison and then finds a fault in it, look immediately for the sentence that counts the fault. Authors who write one substitution is needed and only one are telling you how to answer every question about the scope of their criticism, and the commonest error is to let a precisely stated objection expand into a general one. The companion habit applies to any history of an idea: check whether the stages replaced one another or piled up, because summaries of such passages flatten the two into the same shape.",
+    "real_world": "The same imported danger turns up wherever a vocabulary built for scarce things is applied to things that copying does not consume: a library of recordings, a dataset, a standard, a body of case law. The instinct to ration is strong, the wrong problem is easy to solve, and the failure when it comes is always somebody quietly stopping.",
+    "takeaway": "When a comparison is borrowed, check which of its dangers came along with it and whether that danger can happen here at all.",
+    "reflection_question": "Which of the shared things you depend on are being kept going by somebody who could simply decide, one evening, to stop?"
+  }
+}

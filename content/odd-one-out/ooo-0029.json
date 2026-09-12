@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0029",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "markets",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Clock That Falls Until Someone Stops It",
+    "theme": "how a descending-price clock organises a flower market's morning around goods that cannot wait",
+    "estimated_time_sec": 110,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "D",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier reads like the topic sentence a description of an auction ought to begin with, and it shares the paragraph's central noun. The decoy is the sentence that explains why waiting gains nothing, the only reasoning in a set of description, which a reader sorting by texture will suspect first."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "see that a description of one arrangement has no slot for a statement about arrangements in general, however well the general statement would serve as a title",
+    "reasoning_patterns": ["scope.abstraction_level", "disc.topic_progression", "arg.example_vs_principle", "comp.organization", "disc.given_new"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence explaining that nothing is gained by waiting: it is the only piece of reasoning in a paragraph of description, so a reader eliminating by texture will take it for the intruder. It stays because the next sentence's 'therefore' draws the pace of the hall from exactly that reasoning, and because without it the speed of the clock is a fact with no cause. The general sentence about what every auction is trying to learn would make a fine first line of an essay on auctions; in this paragraph nothing uses it, and the description that follows never once turns on the seller's ignorance of what a buyer will pay.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of descending-price auctions for perishable goods; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A cat-tier item whose outlier is the sentence most readers would choose as the paragraph's opening. The core is a description with a single governing constraint, and the test is whether a general truth about auctions does any work in it."
+  },
+  "sentences": [
+    { "label": "A", "text": "Nothing is gained by waiting, since the lot goes to whoever moves first, so a buyer holding out for a better number is bidding against the risk of having nothing at all to load." },
+    { "label": "B", "text": "Every auction is an attempt by a seller to discover what a buyer will pay without asking him, since the question itself invites a lie." },
+    { "label": "C", "text": "By half past seven the flowers bought in that silence are on lorries, which is the constraint the whole arrangement is built around: the goods will not keep and the buyers will not wait." },
+    { "label": "D", "text": "At the flower auction the price is not called upwards but let down, a hand sweeping from a high figure towards a low one until the first buyer presses a button and stops it where it stands." },
+    { "label": "E", "text": "The clock therefore runs fast, a lot every few seconds, and the hall is almost silent, the whole negotiation compressed into the moment a thumb comes down." }
+  ],
+  "outlier": "B",
+  "core_order": ["D", "A", "E", "C"],
+  "builder": {
+    "prompt": "Build the four-sentence description of the auction hall, from the falling clock to the lorries. The sentence that describes no part of that morning is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core describes one arrangement in four steps. It opens with the mechanism, a price falling until a buyer stops it, then gives the consequence for the buyer, that waiting buys nothing but risk. The third sentence turns that into what the hall looks and sounds like, a lot every few seconds and near silence, and the fourth reaches the lorries and names the constraint the whole arrangement answers to. Mechanism, incentive, scene, reason.",
+    "core_roles": [
+      { "label": "D", "role": "topic", "why_here": "It is the only sentence that says how the price is set, and everything after it is a consequence of the direction the clock travels in." },
+      { "label": "A", "role": "development", "why_here": "It takes the falling price and states what it does to a buyer, which is the step that explains the behaviour the next sentence describes." },
+      { "label": "E", "role": "development", "why_here": "'Therefore' converts the incentive into the observable morning, the pace of the sale and the quiet of the hall." },
+      { "label": "C", "role": "conclusion", "why_here": "It follows the goods out of the building and gives the reason the arrangement exists at all, which is the only place the description could end." }
+    ],
+    "links": [
+      { "from": "D", "to": "A", "tie": "given_new", "explanation": "The falling price is now given, and the new material is what it costs a buyer to wait while it falls." },
+      { "from": "A", "to": "E", "tie": "conjunction", "explanation": "'Therefore' makes the pace and the silence follow from the incentive just described rather than merely coming after it." },
+      { "from": "E", "to": "C", "tie": "reference", "explanation": "'That silence' points back at the quiet hall, and carries the description from the moment of sale to the loading bay." }
+    ],
+    "violation_named": "The odd sentence states what auctions in general are for. The four core sentences describe one hall on one morning, and every claim in them is about this clock, these buyers and goods that will not keep. A general definition sits at a different altitude from a description of a particular arrangement, and this paragraph never climbs to it.",
+    "why_it_breaks": "The description is a chain: the direction of the clock produces the incentive, the incentive produces the pace, the pace produces the loading by half past seven. The general sentence receives nothing from that chain and hands nothing on, because nothing in the hall turns on the seller's difficulty in learning what a buyer would pay. It would open an essay about auction design; here it is a title on a page that already has one.",
+    "trap_exposed": "The camouflage is that it looks like the sentence the paragraph is missing. Descriptions often start from a general principle, so a reader builds a paragraph that begins with the definition and slides the falling clock in as its illustration. The test is whether any later sentence uses the definition, and none does. The decoy pulls the other way: the reasoning sentence stands out in a set of description, and it is the one the chain cannot lose.",
+    "exclusion_analysis": [
+      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It is the longest sentence in the set and reads like a self-contained explanation of the whole system, so it can seem to belong to a different, more expository paragraph.", "what_breaks": "Without it nothing says which way the price moves, and the incentive, the pace and the silence all become assertions about a mechanism the reader has never seen." },
+      { "label": "A", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence that argues rather than describes, and its texture is therefore unlike everything around it.", "what_breaks": "Without it the speed of the clock has no cause, and the paragraph shows a hall behaving strangely without ever saying why anyone behaves that way." },
+      { "label": "E", "mistake_type": "connective_assumption", "why_tempting": "'Therefore' invites a reader to treat it as a conclusion, after which the sentence about lorries looks like an unwanted extra ending.", "what_breaks": "Without it the description jumps from a buyer's calculation to loaded lorries, and the hall itself, its pace and its silence, never appears." },
+      { "label": "C", "mistake_type": "no_uniqueness_test", "why_tempting": "It names a constraint in general terms after four lines of particulars, so it reads like the beginning of an argument rather than the end of a description.", "what_breaks": "Without it the description stops at a quiet hall and never reaches the reason the clock falls at all, which is the point the whole scene was gathering towards." }
+    ],
+    "detection_habit": "Ask what altitude the paragraph is flying at, one case or the whole class, and hold every sentence to it. A definition is not an opening sentence unless something later stands on it."
+  },
+  "mentor": {
+    "challenge": "One of these sentences would make an excellent first line for an essay on auctions. Build this particular morning first, and see whether it has anywhere to sit.",
+    "takeaway": "A description of one thing does not need a truth about all such things. Belonging is decided by use, not by grandeur."
+  }
+}

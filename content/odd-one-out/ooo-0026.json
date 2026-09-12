@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0026",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "education",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Wall That Faced the Class",
+    "theme": "how a writing surface on the front wall turned a queue of individual pupils into a class that moved together",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "D",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier keeps the board, the teacher and the schoolroom, and its subject is the very change the story tells, so a topic check and a period check both keep it. The decoy is the opening sentence, the only one with no board in it, which a reader scanning for the shared object may throw out first."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "tell a sentence about how something came to be known from the sentences that say what happened, and see that only one of the two belongs in a narrative",
+    "reasoning_patterns": ["disc.chronology", "comp.function_over_words", "arg.description_vs_evaluation", "disc.tense_continuity", "comp.purpose"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the opening sentence about the queue at the master's desk: it is the only sentence with no board in it, and a reader matching on the shared object will drop it first. It stays because a story about an ending needs the thing that ended, and because the next sentence's 'ended the queue' has no antecedent without it. The sentence about inventories and bills of sale survives every surface check, shares the period, the room and the furniture, and still belongs to a different paragraph: it tells the reader how the change is known rather than what the change did, and no sentence in the story asks how anyone knows.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the classroom board and simultaneous instruction; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A narrative core with a clean chronological spine and an outlier drawn from the historian's workshop rather than from the schoolroom. The branch the mission asks for is exactly this: the story of the change, and the story of how the change was recovered."
+  },
+  "sentences": [
+    { "label": "A", "text": "Lessons were rewritten to exploit that: a problem worked through in view of forty children was a lesson delivered forty times, and the class began to move as one body." },
+    { "label": "B", "text": "Before anything was written on the front wall, a class was a queue: each child came to the master's desk in turn, recited, was corrected, and went back to a bench to wait." },
+    { "label": "C", "text": "A room of separate pupils under one roof had become a year group with a syllabus, and the teacher's day was rebuilt around the minutes in which everyone attended to the same thing." },
+    { "label": "D", "text": "The large dark slate fixed across the front of the room, which reached ordinary schools in the early nineteenth century, ended the queue by making one correction visible to everybody at once." },
+    { "label": "E", "text": "Historians reconstruct the board's arrival from inventories, bills of sale and the complaints of inspectors, since no teacher thought a change of furniture worth writing down." }
+  ],
+  "outlier": "E",
+  "core_order": ["B", "D", "A", "C"],
+  "builder": {
+    "prompt": "Build the four-sentence story of what the board did to the schoolroom, from the queue to the year group. The sentence that is not part of that story is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one story in four stages. It begins with the room as it was, a queue of children waiting their turn at the master's desk, then brings in the slate on the front wall and the thing it ended. The third stage shows teachers rebuilding lessons around a correction everyone could see, and the fourth states what the room had become by the end. Before, event, adjustment, after.",
+    "core_roles": [
+      { "label": "B", "role": "background", "why_here": "A story about something ending has to show the thing that ended, and this is the only sentence that describes the room before the change." },
+      { "label": "D", "role": "development", "why_here": "It brings in the object and dates it, and its 'ended the queue' takes the previous sentence's arrangement as the thing now finished." },
+      { "label": "A", "role": "development", "why_here": "'That' points at the new visibility, and the sentence carries the story forward from the object to what teachers did with it." },
+      { "label": "C", "role": "conclusion", "why_here": "Its past perfect closes the sequence by stating what the room had become, which only makes sense after the three stages before it." }
+    ],
+    "links": [
+      { "from": "B", "to": "D", "tie": "lexical", "explanation": "'Ended the queue' names the arrangement the first sentence has just described, so the second sentence answers the first rather than merely following it." },
+      { "from": "D", "to": "A", "tie": "reference", "explanation": "'Exploit that' points at the new fact just established, that one correction is now visible to everyone, and cannot be read without it." },
+      { "from": "A", "to": "C", "tie": "given_new", "explanation": "The class moving as one body is now given, and the closing sentence adds the new material: what that made of the room and of the teacher's day." }
+    ],
+    "violation_named": "The four core sentences narrate a change in a schoolroom. The odd sentence tells the reader how historians know about that change, from inventories, bills and inspectors' complaints. It is a statement of method inside a story of events, and a story has no stage at which its own sources are discussed.",
+    "why_it_breaks": "Nothing in the narrative raises the question of evidence, and nothing after the stray sentence could use an answer to it: the sentences on either side of any position it might take are busy handing on a sequence of events. Its tense is the historian's present while the story runs in the past, and its subject is a set of documents that never appear in the room the paragraph is describing.",
+    "trap_exposed": "The camouflage is that the stray sentence is about the very object the story is about, in the very period the story covers, and it even repeats the paragraph's explanation for why the change went unremarked. Shared object, shared period, shared explanation, and still a different job. The decoy pulls the other way: the sentence about the queue never mentions the board, which is exactly what a reader matching on nouns throws out.",
+    "exclusion_analysis": [
+      { "label": "B", "mistake_type": "lexical_pull", "why_tempting": "It is the only sentence that never mentions the board, so a reader matching on the shared object finds nothing in it to hold on to.", "what_breaks": "Without it the story opens on an object with nothing to change, and 'ended the queue' refers to an arrangement the paragraph never showed." },
+      { "label": "D", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence carrying a date, and its relative clause gives it the flavour of an encyclopaedia entry dropped into a story.", "what_breaks": "Without it the paragraph never brings in the thing it is about, and the following sentence's 'that' has no new fact to point at." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "Its middle clause is a piece of arithmetic about forty children, which reads like an aside rather than a stage in the story.", "what_breaks": "Without it the room goes from a new object straight to a new institution, with the step in which teachers actually changed their lessons missing." },
+      { "label": "C", "mistake_type": "no_uniqueness_test", "why_tempting": "It shifts into the past perfect and speaks of syllabuses and year groups, so it sounds like the opening of a different, more institutional discussion.", "what_breaks": "Without it the story stops at a change in teaching method and never says what the room had turned into, which is what the whole sequence was leading to." }
+    ],
+    "detection_habit": "In a narrative, ask of each sentence whether it happened. A sentence about how the events came to be known is about the historian's desk, not about the room where the events took place."
+  },
+  "mentor": {
+    "challenge": "Five sentences about a slate on a schoolroom wall, all of them true of the same century. Build the story, and notice which one is standing outside it looking in.",
+    "takeaway": "What happened and how we know it happened are two paragraphs. Only one of them is being written here."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0023",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "environment",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Water That Arrives Too Clean",
+    "theme": "what happens to a river reach by reach once a dam has kept its gravel and sand",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "A",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier shares the paragraph's two governing nouns, reservoirs and sediment, and states the most impressive fact in the set, so a reader who marks importance keeps it. The decoy is the closing sentence, which leaves the riverbed for a beach and a lorry and so changes texture where the description changes place."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice that a description travels, and that a sentence about the same subject at world scale is standing still while the paragraph is moving downstream",
+    "reasoning_patterns": ["scope.abstraction_level", "disc.topic_progression", "scope.too_broad", "comp.organization", "disc.lexical_chain"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the closing sentence about the estuary and the lorries: it is the only one with a machine in it and the only one that leaves the riverbed, so a reader sorting by texture will drop it. It stays because the description is a journey downstream and the estuary is its last station, and because the beaches it names are fed by exactly the load the opening sentence says the reservoir has kept. The global sentence about a quarter of the world's river sediment is the only one that never occupies a place on that journey; it is true, it uses the paragraph's nouns, and it reports a total where every other sentence reports a stretch of one river.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of sediment starvation downstream of dams; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A descriptive core whose organising principle is a route rather than an argument. The outlier is the item's most quotable fact, which is precisely why it teaches the scope test: a paragraph that is walking down one river has no position for a world total."
+  },
+  "sentences": [
+    { "label": "A", "text": "Clear water is hungry water: carrying nothing of its own, it lifts whatever the bed offers, and in the first miles below the outlet the riverbed has been dropping by a foot a decade." },
+    { "label": "B", "text": "The water released from the dam is strikingly clear, because the gravel and sand the river once carried have settled out in the still reservoir behind the wall." },
+    { "label": "C", "text": "Across the world the reservoirs behind large dams now intercept something like a quarter of the sediment rivers would otherwise deliver to the sea." },
+    { "label": "D", "text": "Further down, where the current slackens, the gravel bars that salmon spawn on are not replaced as they wash away, and the bed left behind is a pavement of stones too heavy to move." },
+    { "label": "E", "text": "By the estuary the shortage has changed character again, since the beaches the river once fed are now kept in place, where they are kept at all, by lorries." }
+  ],
+  "outlier": "C",
+  "core_order": ["B", "A", "D", "E"],
+  "builder": {
+    "prompt": "Build the four-sentence journey down this river, from the wall to the sea. The sentence that never stands anywhere on that journey is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core is a description organised as a route. It begins at the wall with water that has left its load in the reservoir, moves to the first miles below the outlet where clear water cuts into the bed, then further down to the gravel bars that are never replenished, and ends at the estuary where the missing load shows up as beaches maintained by lorry. Four stations, in order, one river.",
+    "core_roles": [
+      { "label": "B", "role": "topic", "why_here": "It establishes the condition that the rest of the route describes the effects of, and it is the only sentence that says where the sediment went." },
+      { "label": "A", "role": "development", "why_here": "'Clear water' takes the clarity just established and turns it into a force, which is what makes everything downstream follow rather than merely happen." },
+      { "label": "D", "role": "development", "why_here": "'Further down' moves the description one stage along the same river and shows the same shortage producing a different result where the current is weaker." },
+      { "label": "E", "role": "conclusion", "why_here": "'By the estuary' is the last station on the route, and it closes the description by showing the shortage arriving where the river ends." }
+    ],
+    "links": [
+      { "from": "B", "to": "A", "tie": "lexical", "explanation": "'Clear water' repeats the clarity just described and makes it the subject, so the second sentence begins from what the first ended with." },
+      { "from": "A", "to": "D", "tie": "conjunction", "explanation": "'Further down' is a positional connective: it accepts the first miles as covered and moves the description to the next reach." },
+      { "from": "D", "to": "E", "tie": "reference", "explanation": "'The shortage has changed character again' points back at the missing gravel of the previous stretch and carries it to the river's mouth." }
+    ],
+    "violation_named": "The odd sentence is about dams and sediment, like every other sentence here, but it reports a world total. The core has settled at one altitude, a single river described reach by reach, and every one of its sentences can be given a position on that river. A quarter of the sediment of all rivers has no position on it.",
+    "why_it_breaks": "A description that travels is held together by its route: each sentence is somewhere, and somewhere further on than the last. The global sentence receives no place from the sentence before it and offers none to the sentence after, so wherever it is inserted the journey stops for a line and then resumes. It also answers a question the paragraph never asks, how much is happening in total, when the paragraph is asking what the shortage does at each stage.",
+    "trap_exposed": "The camouflage is arithmetic. A number that large reads as the most important sentence in the set, and it carries the paragraph's own vocabulary, reservoirs and sediment, so a topic check and an importance check both keep it. The decoy pulls the other way: the last station has a beach and a lorry in it, where everything before it had a riverbed, and a reader sorting by texture drops the sentence that completes the route.",
+    "exclusion_analysis": [
+      { "label": "B", "mistake_type": "premature_closure", "why_tempting": "Read alone it is background, a statement about a reservoir rather than about the river, so it can look like scene setting the paragraph could do without.", "what_breaks": "Without it nothing explains why the water is clear, and the hunger of the next sentence becomes an assertion about water in general instead of about this river." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It opens with an epigram rather than a place, and a reader tracking geography may not find a station for it.", "what_breaks": "Without it the description lists three unconnected damages; it is the sentence that turns the missing load into the force that does them." },
+      { "label": "D", "mistake_type": "no_uniqueness_test", "why_tempting": "It is the only sentence to mention a living thing, and the salmon make it feel like an aside from an essay about fisheries.", "what_breaks": "Without it the route jumps from the first miles to the estuary, and the paragraph loses the stage where the shortage stops cutting and starts starving." },
+      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It leaves the riverbed for a beach and ends on lorries, so its texture is unlike anything before it.", "what_breaks": "Without it the description stops in midstream, and the load the opening sentence took out of the river is never followed to the place it used to arrive." }
+    ],
+    "detection_habit": "When the four sentences are a journey, give each sentence a position on it. A sentence about the same subject that cannot be placed anywhere along the route is standing beside the paragraph, not walking with it."
+  },
+  "mentor": {
+    "challenge": "All five sentences are about dams and the load rivers carry. Four of them are somewhere on one river, and the fifth is the one you are most likely to want to quote.",
+    "takeaway": "In a description that travels, belonging has an address. Ask each sentence where it is standing."
+  }
+}

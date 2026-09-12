@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0041",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "mathematics-logic",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "The Axis That Counts by Ratio",
+    "theme": "what a logarithmic axis makes visible, what it hides, and what using one has already decided",
+    "estimated_time_sec": 105,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "D",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier speaks of a second restriction, and the paragraph does contain something that reads like a first one, the price paid at the top of the scale, so the reference finds a plausible but false anchor. The decoy is that same sentence about the price, which turns against the device just after it has been praised."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["connective_reading", "coherence_monitoring", "relatedness_vs_belonging"],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "test a backward reference against what the paragraph has actually said, and notice when a sentence is continuing a list, a warning or a dispute that exists only in its own first words",
+    "reasoning_patterns": ["comp.reference_tracking", "disc.lexical_chain", "scope.abstraction_level", "disc.topic_progression", "comp.organization"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about the price paid at the top of the scale: it criticises the device the paragraph has been explaining, so a reader may take it for an intruder from a sceptical paragraph. It stays because the closing claim, that the axis decides what matters, needs both what the scale shows and what it costs, and because its top and bottom continue the same axis the opening measured. The sentence about a second restriction fails on its own words: the paragraph has listed no restrictions, nobody has been caught out, and scales with an arbitrary zero appear once and are never mentioned again.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of logarithmic axes in graphs; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A cat-tier thread break with a deliberately plausible false anchor: the paragraph contains something a hurried reader will accept as the first restriction, which is what stops a pronoun-spotting heuristic from solving the item."
+  },
+  "sentences": [
+    { "label": "A", "text": "That second restriction is the one that catches people out, since a scale whose zero is fixed by convention cannot be treated this way at all, however convenient the picture would be." },
+    { "label": "B", "text": "What the eye then reads off the page is rate rather than amount: a quantity multiplying by a fixed factor each year draws a straight line, and the steeper the line the larger the factor." },
+    { "label": "C", "text": "The axis is therefore a claim about what matters in the data, and a graph drawn on one has already decided that proportion is the thing worth looking at." },
+    { "label": "D", "text": "On a logarithmic axis equal distances stand for equal ratios rather than equal differences, so the step from one to ten occupies exactly the width of the step from ten to a hundred." },
+    { "label": "E", "text": "The price is that differences disappear at the top of the scale, where an increase of a thousand takes up less room than an increase of ten does at the bottom." }
+  ],
+  "outlier": "A",
+  "core_order": ["D", "B", "E", "C"],
+  "builder": {
+    "prompt": "Build the four-sentence description of what a logarithmic axis does, from the rule to what drawing one commits you to. The sentence that reaches back for something the paragraph never said is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core describes one device in four steps. It states the rule that equal distances mean equal ratios, then what the eye can read off a page drawn that way, namely rate rather than amount. The third step names the cost, the disappearance of differences at the top of the scale, and the fourth draws the consequence: choosing the axis is already a choice about what the data are for. Rule, gain, cost, consequence.",
+    "core_roles": [
+      { "label": "D", "role": "topic", "why_here": "It states the defining rule, and both the gain and the cost that follow are consequences of exactly this equal ratios for equal distances." },
+      { "label": "B", "role": "development", "why_here": "'What the eye then reads' takes the rule as established and reports what it buys, which is the reason anyone draws such an axis." },
+      { "label": "E", "role": "contrast", "why_here": "'The price' sets the loss against the gain just described, and the top and bottom of the scale are the same scale the opening defined." },
+      { "label": "C", "role": "conclusion", "why_here": "'Therefore' gathers the gain and the loss into a claim about the axis itself, which is where a description of a device with costs has to end." }
+    ],
+    "links": [
+      { "from": "D", "to": "B", "tie": "conjunction", "explanation": "'Then' makes the reading of rate a consequence of the rule just stated rather than a separate observation." },
+      { "from": "B", "to": "E", "tie": "lexical", "explanation": "'The price' answers the gain just described, and the pairing of gain and price holds the two sentences together." },
+      { "from": "E", "to": "C", "tie": "conjunction", "explanation": "'Therefore' draws the conclusion from a gain and a cost taken together, so the closing claim needs both of the sentences before it." }
+    ],
+    "violation_named": "The odd sentence continues a list the paragraph has never begun. It calls something the second restriction, which requires a first, and reports that people are caught out by it, which requires a discussion of common errors. The core states a rule, a gain, a cost and a consequence, and none of those is a restriction in a numbered series.",
+    "why_it_breaks": "Its reference fails on inspection. The paragraph does contain a cost, which a quick reader will accept as the first restriction, but that cost is about how a picture looks at the top of a scale, not about which quantities may be drawn on one at all. The stray sentence also leaves nothing behind: quantities with conventional zeros never return, and the closing sentence needs a gain and a cost rather than a class of excluded measurements.",
+    "trap_exposed": "The camouflage is a plausible anchor. Because the paragraph has just conceded a drawback, the words that second restriction find a place to attach, and a reader checking only whether a reference has something to point at will be satisfied. The decoy is that very drawback, which turns against the device just after it has been praised and so reads like a sceptic's interruption, though the closing conclusion cannot be drawn without it.",
+    "exclusion_analysis": [
+      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It reads like a definition from a textbook, flat and unargued, so a reader looking for the paragraph's idea may treat it as preliminary.", "what_breaks": "Without it nothing says what the axis does, so the straight line, the vanishing differences and the closing claim all describe a device the reader has never been shown." },
+      { "label": "B", "mistake_type": "hardest_to_place", "why_tempting": "It packs a rule, a picture and a comparison into one sentence, which makes its role in the description hard to name quickly.", "what_breaks": "Without it the paragraph names a cost with no benefit to weigh it against, and the conclusion that the axis decides what matters loses half its evidence." },
+      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence that criticises the device, so its stance feels imported from a different, more sceptical paragraph.", "what_breaks": "Without it the description praises the axis and never says what it hides, and the closing claim that a choice has been made has nothing to be a choice between." },
+      { "label": "C", "mistake_type": "no_uniqueness_test", "why_tempting": "It leaves geometry for a claim about what matters in data, which sounds like the beginning of an argument rather than the end of a description.", "what_breaks": "Without it the paragraph lists a gain and a cost and never says what follows, so the description stops before its point." }
+    ],
+    "detection_habit": "When a sentence says the second, the same, or that other, count the first ones in the paragraph. A reference that finds something to attach to is not the same as a reference that fits what it attaches to."
+  },
+  "mentor": {
+    "challenge": "Five sentences about an axis that counts by ratios. One of them refers back to a restriction, and the paragraph does contain something that will pass for one if you do not look closely.",
+    "takeaway": "Check what a backward reference actually lands on. A near-fit anchor is how a stray sentence keeps its seat."
+  }
+}

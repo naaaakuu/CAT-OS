@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0027",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "philosophy",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Apology on the First Page",
+    "theme": "why an author can believe every sentence of a book and still believe the book contains a mistake",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "C",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "local",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier opens with a comparative, harder still, which sounds like a step in a discussion already under way, and it keeps the paragraph's vocabulary of belief and refusal. The decoy is the sentence that separates two questions, the most abstract in the set, which a reader may take for the intruder because it changes register."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["connective_reading", "coherence_monitoring", "relatedness_vs_belonging"],
+    "mission": "notice_topic_stability",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "check every comparative and every the that promises a previous mention, and treat a tie with no anchor as the strongest evidence a sentence is a visitor",
+    "reasoning_patterns": ["disc.lexical_chain", "lang.comparative", "comp.reference_tracking", "disc.implicit_transition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence that separates the two questions, whether this claim survived checking and how often such checking succeeds: it is the most abstract in the set and it changes the paragraph's register, so a reader sorting by feel will reach for it. It stays because the closing sentence's 'then' draws its conclusion from exactly that separation, and because without it the paradox is stated twice and never dissolved. The lottery sentence fails a simpler test: 'harder still' compares this case with a discussion the paragraph has never had, and no later sentence returns to tickets.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the preface paradox; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An easy-tier item on the cleanest tie failure there is: a comparative with nothing behind it. The decoy is deliberately the paragraph's most valuable sentence, so that a learner who eliminates by register is corrected at low cost."
+  },
+  "sentences": [
+    { "label": "A", "text": "The lottery case is harder still, since there the writer can name the very ticket she has in mind and still refuse to believe that it will win." },
+    { "label": "B", "text": "Taken one at a time each claim is believed; taken together they are believed to contain a falsehood, and she can point to no sentence she would withdraw." },
+    { "label": "C", "text": "What the preface records, then, is not a doubt about any particular claim but a confidence about the rate at which claims checked in this way go wrong." },
+    { "label": "D", "text": "An author who has checked every claim in her book still writes, in the preface, that some of what follows is certainly mistaken." },
+    { "label": "E", "text": "The oddity eases once the two beliefs are seen to answer different questions, one about whether this sentence survived checking and one about how often checking of that kind succeeds." }
+  ],
+  "outlier": "A",
+  "core_order": ["D", "B", "E", "C"],
+  "builder": {
+    "prompt": "Build the four-sentence account of the author's apology, from the puzzle to what the apology is actually reporting. The sentence that reaches back for something the paragraph never said is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core sets a puzzle and dissolves it in four steps. It opens with an author who believes every claim she has checked and still announces an error, then states the puzzle precisely as two beliefs that cannot both be given up. The third sentence separates the questions the two beliefs answer, and the fourth says what the preface is therefore reporting. Puzzle, sharpening, distinction, resolution.",
+    "core_roles": [
+      { "label": "D", "role": "topic", "why_here": "It puts the case on the table in ordinary terms and is the only sentence that introduces the author, the book and the preface the rest depends on." },
+      { "label": "B", "role": "development", "why_here": "It restates the case as a conflict between two beliefs, which is what has to be sharpened before anything can be dissolved." },
+      { "label": "E", "role": "cause_effect", "why_here": "'The oddity' names the conflict just described and supplies the distinction that makes it stop being a conflict." },
+      { "label": "C", "role": "conclusion", "why_here": "'Then' draws the consequence of the distinction and states what the preface is really doing, which is where the exposition was heading." }
+    ],
+    "links": [
+      { "from": "D", "to": "B", "tie": "lexical", "explanation": "'Each claim' and 'no sentence she would withdraw' pick up the checked claims of the opening and restate the situation as a pair of beliefs." },
+      { "from": "B", "to": "E", "tie": "reference", "explanation": "'The oddity' and 'the two beliefs' both point back at the conflict the previous sentence has just set out, and have no other anchor here." },
+      { "from": "E", "to": "C", "tie": "conjunction", "explanation": "'Then' marks the conclusion drawn from the distinction, so the closing sentence is the second half of the sentence before it." }
+    ],
+    "violation_named": "The odd sentence begins with a comparative, harder still, which claims that something difficult has already been discussed and offers to raise the difficulty. Nothing in the paragraph has been compared with anything. It joins a discussion of degrees of difficulty across cases, and this paragraph is working through a single case from puzzle to resolution.",
+    "why_it_breaks": "A comparative is a tie, and this one reaches for an anchor that is not in the set. The sentence also introduces tickets and a lottery, which no later sentence takes up: the resolution is about rates of error in checking, and nothing in it needs or mentions a second case. Put the sentence anywhere and the paragraph acquires a comparison it never completes.",
+    "trap_exposed": "The disguise is that the stray sentence sounds like a step, and steps are what this paragraph is made of. It keeps the vocabulary of believing and refusing to believe, and its shape, a claim plus a because clause, matches the sentences around it. The decoy is the sentence that separates the two questions, which is the most abstract in the set and therefore the easiest to mistake for an intruder, though it is the sentence the resolution is built from.",
+    "exclusion_analysis": [
+      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It reads like a scene rather than an argument, and a reader who has grasped the puzzle may treat it as an anecdote the discussion has left behind.", "what_breaks": "Without it there is no author, no book and no preface, so every later sentence refers to a situation the paragraph has never set up." },
+      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "It seems to repeat the opening in more careful words, so a hurried reader holds it and the opening as interchangeable candidates.", "what_breaks": "Without it the paragraph never states the conflict as two beliefs, and the distinction that follows has nothing to be a distinction between." },
+      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is the most abstract sentence in the set and changes the register from a case to a taxonomy of questions.", "what_breaks": "Without it the puzzle is stated and then answered with no step in between, and the closing sentence's 'then' draws a conclusion from nothing." },
+      { "label": "C", "mistake_type": "connective_assumption", "why_tempting": "'Then' makes it look like a conclusion attached to some other paragraph's argument, and it uses none of the earlier words about belief.", "what_breaks": "Without it the distinction is drawn and never applied, so the paragraph explains the puzzle away without ever saying what the preface is for." }
+    ],
+    "detection_habit": "Treat every comparative, every this and every the that promises an earlier mention as a claim about the paragraph. If you cannot point at the sentence the claim refers to, the tie is pointing outside the set."
+  },
+  "mentor": {
+    "challenge": "All five sentences are about believing and doubting what one has written. One of them takes hold of something the paragraph has never put in your hand.",
+    "takeaway": "A connective is a promise about what came before. Check the promise before you admire the sentence."
+  }
+}

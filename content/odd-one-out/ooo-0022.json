@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0022",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "scientific-method",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "The Rule That Knew Every Flood",
+    "theme": "why a forecasting rule that reproduced every flood in its record had not thereby been tested",
+    "estimated_time_sec": 135,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is a quotable general truth about models, placed among sentences that are all about models, so it reads like the thesis the paragraph forgot to put first. The planted decoy is the closing sentence, which brings in a new season, a measurement and the set's only concession, and so looks like a stray narrative fragment."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "separate a general truth about a class of things from an argument about one particular thing, and see that the general truth belongs only where some sentence uses it",
+    "reasoning_patterns": ["scope.abstraction_level", "disc.claim_then_evidence", "arg.example_vs_principle", "comp.function_over_words", "disc.given_new"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the closing sentence about the following spring's flood: it brings in a new event, a measurement and the only concessive clause in the set, so a reader hunting for a tonal misfit reaches for it. It stays because the sentence before it sets a standard, that a test is something a rule can fail, and nothing else in the set applies that standard; drop it and the accusation is never made good. The general sentence about compression survives a topic check and a plausibility check and fails the one that matters: no core sentence uses it, and its point, that something must be left out, is the reverse of the argument's point, that nothing was.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of overfitting and the difference between fit and test; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A premium item built on the commonest way a general statement smuggles itself into a specific argument: by being true, quotable and on topic. The core is an accusation about one rule, and the test the learner has to run is whether any sentence uses the visitor."
+  },
+  "sentences": [
+    { "label": "A", "text": "A rule for predicting river floods was built on thirty years of gauge readings, and run backwards over those thirty years it reproduced every flood in them." },
+    { "label": "B", "text": "A model is a compressed description of a process, and every compression is a decision about what can safely be left out, taken long before anyone knows what will matter." },
+    { "label": "C", "text": "Its success on the record was therefore not a test it had passed but a description of the labour its authors had done, and a test is something a rule can fail." },
+    { "label": "D", "text": "The rule carried as many adjustable quantities as the record held floods, so there was no arrangement of the past it could have failed to reproduce." },
+    { "label": "E", "text": "What would have counted was the flood of the following spring, which arrived two metres above anything the rule allowed, though it came off a catchment the rule had been fitted on." }
+  ],
+  "outlier": "B",
+  "core_order": ["A", "D", "C", "E"],
+  "builder": {
+    "prompt": "Build the four-sentence case against the flood rule, from what it achieved to what it failed. The sentence that has no work to do inside that case is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core makes one argument in four moves. It opens with a rule that reproduced every flood in the record it was built on, then supplies the fact that empties that achievement: the rule carried as many adjustable quantities as the record held floods. The third move draws the consequence, that the fit records its authors' labour rather than the rule's standing, and the last names the test the rule had not yet taken, and what happened when it did. Case, mechanism, verdict, test.",
+    "core_roles": [
+      { "label": "A", "role": "topic", "why_here": "It puts the particular case on the table and states the achievement everything after it reassesses; nothing can precede it, because the rest of the paragraph is commentary on this rule and this record." },
+      { "label": "D", "role": "evidence", "why_here": "Both the rule and the record are already given, and this sentence adds the single new fact the verdict turns on: the number of quantities the authors were free to adjust." },
+      { "label": "C", "role": "cause_effect", "why_here": "Its 'therefore' takes the impossibility of failure just established and converts it into a judgement about what the fit was worth, which is the paragraph's central claim." },
+      { "label": "E", "role": "conclusion", "why_here": "It applies the standard the sentence before it announced, and closes the argument by showing the rule meeting a test it could fail, and failing it." }
+    ],
+    "links": [
+      { "from": "A", "to": "D", "tie": "lexical", "explanation": "'The rule' and 'the record' repeat the two nouns just introduced, and the sentence says something new about the pair rather than restating them." },
+      { "from": "D", "to": "C", "tie": "conjunction", "explanation": "'Therefore' draws the consequence of the count: a rule that could not have failed has not passed anything." },
+      { "from": "C", "to": "E", "tie": "given_new", "explanation": "The standard just stated, that a test is something a rule can fail, becomes the given; the new material is the test that arrived and what it did." }
+    ],
+    "violation_named": "The odd sentence states a general truth about models of every kind inside an argument that is about one rule and one record. The four core sentences never reason from what a model is; they reason from a count, as many adjustable quantities as there were floods, and every step they take depends on that count rather than on any property models share.",
+    "why_it_breaks": "Its point is that a compression must leave something out. The argument's complaint is the opposite: this rule left nothing out, because nothing in the record could have embarrassed it. Put the general sentence anywhere in the sequence and the paragraph acquires a premise no later sentence uses, while the step it actually needs, the count, goes missing from the position the visitor took.",
+    "trap_exposed": "The camouflage is that the stray sentence is true, is about models, and reads like the opening thesis this paragraph seems to lack. Both of those are surface facts. The planted decoy works the other way: the closing sentence introduces a new spring, a measurement and the set's only concession, so a reader who sorts sentences by texture throws out the one that finishes the argument and keeps the one that never joins it.",
+    "exclusion_analysis": [
+      { "label": "A", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence that reads as a plain report of what somebody built, with no claim in it at all, so it feels like background attached to a finished argument.", "what_breaks": "Without it there is no rule and no record, so the count in the next sentence has nothing to count, and the verdict has no case to be a verdict about." },
+      { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "Its centre is a piece of arithmetic rather than a claim, and a reader looking for argument may not see where arithmetic attaches.", "what_breaks": "Without it the paragraph asserts that a perfect fit proves nothing and never says why, which is the only thing that raises the verdict above suspicion." },
+      { "label": "C", "mistake_type": "connective_assumption", "why_tempting": "'Therefore' makes it sound like an ending, so a reader may treat whatever follows as an unwanted continuation and drop one of the two.", "what_breaks": "Without it the paragraph runs from a count straight to next spring's water and never states what the fit was actually worth, which is the thing being argued." },
+      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "It brings in a new season and a measurement, and its concessive clause makes it look like an afterthought added to an argument that had already closed.", "what_breaks": "Without it the paragraph names a standard, that a test is something a rule can fail, and never applies it, so the accusation is left unproved." }
+    ],
+    "detection_habit": "When a paragraph is prosecuting one specific case, treat every sentence that could be printed on a poster as a suspect, and ask which later sentence leans on it. A general truth that nothing uses is decoration, however true it is."
+  },
+  "mentor": {
+    "challenge": "Every sentence here is about a model and its record, and one of them is the sort of sentence you would happily underline. Build the argument first, then see whether anything in it uses that sentence.",
+    "takeaway": "A true sentence earns its seat by being used. If nothing in the paragraph leans on it, it is a visitor."
+  }
+}

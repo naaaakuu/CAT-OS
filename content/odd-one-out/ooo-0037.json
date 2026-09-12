@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0037",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "contemporary-society",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Reply That Proves You Were There",
+    "theme": "why speed of response became the visible sign of effort, and what the sign costs the work it stands for",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "A",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is about work, hours and what they produce, which is the paragraph's own subject, and it carries a century of evidence, so it reads as the sentence that puts the argument in perspective. The decoy is the sentence about availability punishing the work it oversees, whose turn against the metric can look like a second argument beginning."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "keep hold of the level an argument works at, and recognise that an aggregate trend over a century cannot be handed to or taken from a claim about one person's day",
+    "reasoning_patterns": ["scope.abstraction_level", "scope.too_broad", "disc.cause_effect", "comp.purpose", "disc.topic_progression"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about availability being protected by never being deep in anything: it turns against the practice the argument has been calmly explaining, so a reader may take it for a second argument smuggled in. It stays because it is the consequence of the cheapest trace, and because the trap named in the closing sentence is precisely this consequence stated as a dilemma. The sentence about hours falling and output per hour rising is about the same subject at a scale the argument never occupies: nothing in the core concerns an economy, and no sentence could receive a century-long trend from the one before it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of responsiveness as a proxy for diligence; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The outlier is the sentence a reader wants for perspective, which is why it teaches the scope habit well: the argument lives inside one working day and cannot use a statistic about a century."
+  },
+  "sentences": [
+    { "label": "A", "text": "The change is not hard to explain: work that leaves no trace is hard to supervise, and a message answered within the minute is the cheapest trace there is." },
+    { "label": "B", "text": "The trap is not that anyone believes speed and diligence are the same thing, but that nobody has found a way of showing diligence that arrives as quickly." },
+    { "label": "C", "text": "Somewhere in the last two decades the speed of a reply stopped counting as a courtesy and started counting as evidence of effort." },
+    { "label": "D", "text": "What is being watched is availability, and availability is best protected by never being far inside anything, so the measure quietly punishes the work it was brought in to oversee." },
+    { "label": "E", "text": "Measured across an economy, hours worked have fallen for a century while output per hour has climbed, a movement no change in office manners has interrupted." }
+  ],
+  "outlier": "E",
+  "core_order": ["C", "A", "D", "B"],
+  "builder": {
+    "prompt": "Build the four-sentence argument about why a fast reply came to stand for effort, and what standing for it costs. The sentence pitched at a scale the argument never reaches is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves, each taking up the last. It opens with the change, a fast reply turning from a courtesy into evidence, then explains why it happened: unsupervisable work needs a cheap visible trace. The third move states the cost, since the trace can only be produced by staying shallow, and the fourth names the trap, that nobody has a sign of depth that travels as fast. Change, cause, cost, dilemma.",
+    "core_roles": [
+      { "label": "C", "role": "topic", "why_here": "It states the change everything else explains and dates it loosely, which is all the dating the argument needs." },
+      { "label": "A", "role": "cause_effect", "why_here": "'The change' names what the opening reported, and the sentence supplies the reason, the cheapness of the trace, that the rest of the argument spends." },
+      { "label": "D", "role": "development", "why_here": "It follows the cheap trace to its consequence, and its punishment of the work is the material the closing dilemma is built from." },
+      { "label": "B", "role": "conclusion", "why_here": "It states the trap in its sharpest form, and it can only come last because both halves of the dilemma have to be on the table before they can be set against each other." }
+    ],
+    "links": [
+      { "from": "C", "to": "A", "tie": "reference", "explanation": "'The change' points at the shift just reported and promises the explanation the sentence then gives." },
+      { "from": "A", "to": "D", "tie": "lexical", "explanation": "'What is being watched' renames the trace of the previous sentence from the supervisor's side, so the cost follows from the same fact." },
+      { "from": "D", "to": "B", "tie": "conjunction", "explanation": "'The trap is not that, but that' takes the punishment just described and restates it as the dilemma nobody has escaped." }
+    ],
+    "violation_named": "The odd sentence is about work and what it produces, measured across an economy and across a century. The argument works at one level throughout: a person, a message, a minute, a supervisor who cannot see the work. An aggregate movement over a hundred years is the same subject seen from an altitude the paragraph never climbs to.",
+    "why_it_breaks": "Each core sentence takes its material from the one before it, and none of them could take a century-long trend or pass one on: the explanation is about what a supervisor can see today, and the dilemma is about what a worker can show this afternoon. The stray sentence also settles nothing the argument raises, since the claim is not that responsiveness has made people less productive in the aggregate, but that the sign has replaced the thing it stood for.",
+    "trap_exposed": "The camouflage is perspective. A reader reaching the end of a critical argument wants the long view, and this sentence offers exactly that, in the paragraph's own vocabulary of work and hours. Wanting a sentence is not the same as the paragraph needing it. The decoy is the sentence about availability, whose turn against the measure looks like a new argument starting, though it is the middle link the closing dilemma depends on.",
+    "exclusion_analysis": [
+      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It reports a change without arguing anything, so a reader who wants the paragraph's point may treat it as a scene-setting line.", "what_breaks": "Without it the explanation explains nothing in particular, since the change it accounts for has never been stated, and the trap has no practice to be a trap about." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It offers a cause in a single compressed clause and then a second clause that sounds like an aside, so its role is easy to misread.", "what_breaks": "Without it the paragraph asserts that speed became evidence and never says why, and the availability that follows has no reason to be what anyone watches." },
+      { "label": "D", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence that accuses, and its verb punishes gives it a heat the surrounding sentences do not have.", "what_breaks": "Without it the argument explains the practice and never states its cost, so the closing dilemma has only one side and no bite." },
+      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "Its not that, but that construction makes it sound like a correction of somebody else's view rather than the conclusion of this one.", "what_breaks": "Without it the argument ends on an accusation and never explains why the practice survives, which is the difference between a complaint and a case." }
+    ],
+    "detection_habit": "Ask what unit each sentence is about, a person, a firm, an economy, a century. Four sentences that share a unit have no seat for a fifth that changes it, however welcome the wider view would be."
+  },
+  "mentor": {
+    "challenge": "Five sentences about work and how it is seen. One of them offers the long view, which is the thing a reader most wants and this paragraph least needs.",
+    "takeaway": "An argument settles at one altitude. A true sentence flying higher over the same ground still cannot land in it."
+  }
+}

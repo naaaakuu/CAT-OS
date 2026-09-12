@@ -1,0 +1,481 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0082",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "evidence-anchoring",
+      "tone-detection",
+      "scope-control"
+    ],
+    "word_count": 669,
+    "question_count": 5,
+    "question_types": [
+      "author_purpose",
+      "inference",
+      "must_be_true",
+      "specific_detail",
+      "tone"
+    ],
+    "theme": "why an undisputed distinction between repeatability and closeness to the truth keeps collapsing in practice, diagnosed as an asymmetry in what an apparatus can certify about itself, illustrated by published values that moved together while their quoted intervals stayed narrow, and prescribed for by labelling which of the two a number is rather than by more careful language",
+    "estimated_time_min": 10,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-05",
+    "reviewer_notes": "The diagnosis is an asymmetry rather than a fault, which is what keeps the tone question hard: everything in the passage sounds like an accusation and the author twice refuses to make one. The prescription is deliberately smaller than the diagnosis, and the concession that the intervals remain worth having sits immediately before it, which is where the purpose and inference questions are decided.",
+    "length_class": "long",
+    "structure": "problem_diagnosis_prescription",
+    "viewpoints": 1,
+    "tone": "exacting, unaccusing, practical at the close",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.problem_solution",
+      "struct.cause_effect",
+      "struct.contrast",
+      "struct.definition",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.attention_span",
+      "comp.purpose",
+      "comp.intent",
+      "comp.function_over_words",
+      "arg.causal_claim",
+      "arg.evidence",
+      "arg.qualification",
+      "arg.concession",
+      "arg.description_vs_evaluation",
+      "arg.necessary_vs_sufficient",
+      "inf.necessary",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "scope.too_broad",
+      "lang.tone_shift",
+      "meta.contradiction",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that an accurate measurement repeated often enough becomes precise, which treats one of the two as producing the other; the passage makes them independent in the second sentence and gives both crossed cases. Q2's rival is the indignant reading, which every image in the passage invites and which two sentences forbid, the one saying no deception is involved anywhere and the one locating the drift in which quantity happens to be cheap. Q3's rival is the option about abandoning reported uncertainties, which the concession expressly refuses by calling the intervals a good number honestly described and worth more than two vague ones. Q4's rival is the option that disagreement between methods shows which one is accurate, which uses a real device of the prescription and draws from it a conclusion the passage never permits, since agreement and disagreement are both evidence about the pair rather than about either member. Q5's rival is the option about mattering to the question the scientist is answering, which is true of accuracy and therefore the wrong member of the pair for a stem about what can be established from the readings.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "asymmetry",
+      "artefact",
+      "repeatability",
+      "constant"
+    ]
+  },
+  "passage": {
+    "title": "Repeatably Wrong",
+    "reading_time_min": 3.8,
+    "paragraphs": [
+      {
+        "id": "rc-0082-p1",
+        "text": "Every physicist can state the difference in a sentence, and most of them learned it before they were twenty. Precision is how closely a set of measurements agree with one another. Accuracy is how close they are to the quantity being measured. The two are independent: readings can cluster inside a hair's breadth and sit a mile from the truth, and a scattered set can have its centre exactly right. The distinction is not subtle and nobody disputes it, and it collapses constantly in practice, including in the work of people who could have defined it faultlessly the day before. That regularity is the thing worth explaining, because a mistake everybody knows how to avoid and nobody avoids is usually not a mistake about words."
+      },
+      {
+        "id": "rc-0082-p2",
+        "text": "The explanation is an asymmetry in what can be had from the data. Precision is available from the readings themselves. Take them, compute their spread, and the result is a fact about the set in front of you that needs nothing from outside it. Accuracy is not available from the readings at all. To know how far a set of them sits from the true value you need the true value, or something standing in for it: a reference artefact, an independent method resting on different physics, a sample whose composition was fixed before the instrument ever saw it. None of that comes out of the numbers. An apparatus asked about its own accuracy is a ruler asked to measure itself, and it will report that it is exactly a foot long."
+      },
+      {
+        "id": "rc-0082-p3",
+        "text": "Consider what this does inside a scientific culture that has quite rightly made the reporting of uncertainty a condition of publication. An author must attach a number, and only one of the two numbers can be produced on demand. A spread can be computed on the afternoon of the deadline out of data already in hand; a comparison against something external may not exist, may cost a year, and may be nobody's to arrange. So the interval printed after a measurement is characteristically a statement about repeatability wearing the label of a statement about truth, and it is read as the second by everybody, its author included. No deception is involved anywhere in this. The drift is produced by which of the two quantities happens to be cheap."
+      },
+      {
+        "id": "rc-0082-p4",
+        "text": "The record carries the mark of it. When a physical constant is measured repeatedly across decades, the published values do not wander at random about the figure finally settled on. They sit close together for a period, then move as a group into a new region, and the intervals quoted by the earlier group often fail to reach the later figure at all. Those readings were exactly as repeatable as their intervals claimed. They were repeatably wrong, and the repeatability was the very thing that made the error difficult to see, since agreement between laboratories is what everybody reaches for as a check."
+      },
+      {
+        "id": "rc-0082-p5",
+        "text": "The remedy cannot be more careful language, because the language was never the difficulty. It has to be some habit that brings in from outside what an apparatus cannot supply about itself: a standard measured alongside the unknown, a second method chosen because its failures are of a different kind, a duplicate sent out under another name. All of these are expensive, several are unavailable, and no laboratory can run them on everything. None of this makes the published intervals worthless, either. They bound one of the two quantities exactly, and one quantity known exactly is worth more than two known vaguely. So the prescription has to be smaller than the diagnosis, and it is this: say which of the two a number is. An interval labelled as repeatability is a good number honestly described. The same interval offered as the distance to the truth is a claim the apparatus was never in a position to make. The distinction is not hard to keep. It is hard to keep only when keeping it costs you a claim you wanted to make."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0082-q1",
+      "type": "must_be_true",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "comp.paraphrase",
+        "meta.contradiction"
+      ],
+      "target_mistake": "treating the two quantities as connected, so that having one in good order is taken to produce or guarantee the other",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "scope"
+      ],
+      "stem": "Which of the following must be true, given the passage?",
+      "options": {
+        "A": "A measurement that is accurate will become precise as well if it is repeated often enough",
+        "B": "Instruments whose makers report an uncertainty are more likely to be biased than those whose makers do not",
+        "C": "Every reported uncertainty in every field of science is a statement about repeatability alone",
+        "D": "A set of measurements can be tightly clustered and lie a very long way from the quantity being measured"
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The first paragraph states the independence and then gives both crossed cases in one sentence: readings can cluster inside a hair's breadth and sit a mile from the truth, and a scattered set can have its centre exactly right. The fourth paragraph supplies the same combination from the record, where repeatable values were repeatably wrong.",
+        "correct_reasoning": "The correct option is the first of those two cases restated. If the passage is true, this cannot be false, because independence means that fixing one of the quantities leaves the other entirely open, and the passage's central example is a body of measurements that agreed with each other closely while the group as a whole later moved. Nothing more than the definition is needed.",
+        "passage_anchor": "rc-0082-p1, rc-0082-p4",
+        "question_type_note": "A must-be-true question is a test rather than a judgement: ask of each option whether the passage could be wholly true and the option false. Anything the passage merely permits fails that test.",
+        "reading_habit": "When a passage declares two things independent, expect a question that tries to reconnect them. The forced answer is usually one of the crossed cases the author has already named.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "Independence forbids the inference. Repetition tightens a spread and says nothing about where the centre lies, and the passage allows a scattered set to be centred exactly right, which is an accurate set that repetition alone did not make precise.",
+            "seductive_element": "Repeating a measurement is the standard remedy for error of every kind, and the passage does treat repetition as the source of the one quantity that can be computed."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "No comparison between instruments that report uncertainty and those that do not appears anywhere. The passage's claim is about what an interval means once it is printed, not about which apparatus is more likely to be biased.",
+            "seductive_element": "The passage does associate the reporting requirement with a drift, so a reader who converts an institutional pressure into a property of the instruments lands here."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage says characteristically rather than always, and speaks of a drift produced by cost rather than of a universal rule. It also describes external comparisons that do get made, which would be impossible if every published interval were a spread.",
+            "seductive_element": "It is the live rival, because it is the passage's own diagnosis with the hedging word removed, and the removed word is the only thing separating it from the argument."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0082-q2",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "arg.description_vs_evaluation",
+        "comp.intent"
+      ],
+      "target_mistake": "reading a structural diagnosis as an accusation, because the material it describes would support one",
+      "prediction_target": "The learner should be able to say: he is severe about the practice and explicitly refuses to blame anybody for it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "author_purpose"
+      ],
+      "stem": "The author's tone in discussing the practice he describes is best characterised as",
+      "options": {
+        "A": "indignant at a profession he believes has been misreporting its results for decades",
+        "B": "detached, reporting the practice without taking any view about whether it matters",
+        "C": "exacting about a habit he treats as structural, not as the dishonesty of any individual",
+        "D": "hopeful that better training in the use of the two words would remove the difficulty"
+      },
+      "correct": "C",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "expert_notice": "Two sentences control the tone and they sit together. No deception is involved anywhere in this, and the drift is produced by which of the two quantities happens to be cheap. The first paragraph has already excluded ignorance as the cause, saying the people who do it could have defined the distinction faultlessly the day before.",
+        "correct_reasoning": "The correct option keeps the severity and the source apart. The author is hard on the practice, calling a printed interval a claim the apparatus was never in a position to make, and he places the cause in cost and in a publication requirement rather than in anyone's conduct. That is a structural diagnosis delivered without an accusation, which is exactly what the option names.",
+        "passage_anchor": "rc-0082-p3",
+        "question_type_note": "Tone is two decisions, valence and intensity, and a passage that describes a failing may still decline to blame anyone for it. Read the sentence that names the cause before fixing the attitude.",
+        "reading_habit": "When an author diagnoses a widespread error, look for the sentence that says whose fault it is. Authors who answer nobody's are telling you to read every sharp phrase as description rather than as complaint.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The valence is roughly right and the volume is not, and the passage denies the charge in a sentence of its own: no deception is involved anywhere in this. It also credits the reporting requirement as quite rightly imposed.",
+            "seductive_element": "It is the live rival, because the phrase repeatably wrong and the image of a ruler measuring itself both sound like indictments, and the fourth paragraph's history reads as a catalogue of failures."
+          },
+          {
+            "option": "B",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author takes a view throughout. He calls the regularity the thing worth explaining, says the interval is read as something it is not, and ends by prescribing a practice, none of which is the behaviour of a reporter without a position.",
+            "seductive_element": "The refusal to accuse anybody is easily mistaken for a refusal to judge anything, especially in a passage whose middle paragraphs are written as plain exposition."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The final paragraph opens by rejecting this, saying the remedy cannot be more careful language because the language was never the difficulty, and the first paragraph has already noted that the people who err could define the terms perfectly.",
+            "seductive_element": "The passage is about two words that get confused, so a reader who has fixed the subject as terminology will expect the cure to be terminological."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0082-q3",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.intent",
+        "struct.problem_solution"
+      ],
+      "target_mistake": "naming as the purpose either the definitions the passage begins with or a rejection of reported uncertainty that the passage refuses",
+      "prediction_target": "The learner should be able to name a verb and an object: explain why a distinction everybody knows keeps failing, and say what would keep it in place.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's chief purpose in the passage is",
+      "options": {
+        "A": "to define two terms that working scientists are in the habit of confusing with one another",
+        "B": "to explain why a well-known distinction keeps collapsing in practice, and to say what would hold it open",
+        "C": "to argue that reported uncertainties are misleading and ought to be dropped from published work altogether",
+        "D": "to show that measurement in the sciences is a great deal less reliable than outsiders suppose"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The first paragraph says what the passage is for in its last sentence, calling the regularity the thing worth explaining and adding that a mistake everybody knows how to avoid is not a mistake about words. The last paragraph then supplies a prescription and announces that it has been kept smaller than the diagnosis.",
+        "correct_reasoning": "The correct option names both halves of that plan. The explanation is the asymmetry, since only one of the two quantities can be computed from the readings, together with the cost pressure that turns the asymmetry into a habit; what would hold the distinction open is the labelling rule the passage ends with. A purpose that stops at the definitions accounts for one paragraph and leaves four without work.",
+        "passage_anchor": "rc-0082-p1, rc-0082-p5",
+        "question_type_note": "Purpose is a verb with an object, and in a problem-and-prescription passage both the diagnosis and the prescription belong inside it. An option that names only the opening material has described the passage's first move.",
+        "reading_habit": "Look for the sentence in which an author says what he finds worth explaining. It is usually near the end of the first paragraph, and it states the purpose more directly than the conclusion does.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The definitions occupy two sentences and are then called not subtle and undisputed. The passage's own claim is that people who can define the terms faultlessly still fall into the error, which is the point a purpose of defining them would make unintelligible.",
+            "seductive_element": "The passage opens with the definitions and returns to the pair constantly, so a reader summarising by subject rather than by argument arrives here."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fifth paragraph expressly refuses this, saying none of this makes the published intervals worthless, that they bound one quantity exactly, and that an interval labelled as repeatability is a good number honestly described.",
+            "seductive_element": "It is the live rival, because the third paragraph really does say the printed interval is read as something it is not, and abolition is the natural response to a number that misleads."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "No claim about the overall reliability of measurement is made, and the passage says the reporting requirement was quite rightly imposed. The argument concerns what a particular number certifies, which is a narrower thing than the trustworthiness of a practice.",
+            "seductive_element": "The fourth paragraph's history of values that moved as a group is easy to read as an exposé, and readers supply the larger conclusion such histories usually carry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0082-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "treating agreement between laboratories as evidence about closeness to the truth, which is the check the fourth paragraph shows failing",
+      "prediction_target": "The learner should predict that the inference will concern what agreement between measurements does not establish, since accuracy needs something outside the readings.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "Two laboratories using the same method and agreeing closely have not shown that either is near the truth",
+        "B": "A laboratory that repeats a measurement a greater number of times will in the end arrive nearer to the true value",
+        "C": "Disagreement between two different methods establishes which of the two is the accurate one",
+        "D": "An interval should be widened until it covers every source of bias anybody can think of"
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "Two paragraphs have to be held together. The second says accuracy requires something from outside the readings, and names an independent method resting on different physics as one such thing. The fourth says agreement between laboratories is what everybody reaches for as a check, and then shows a whole group of laboratories agreeing and being wrong together.",
+        "correct_reasoning": "The correct option joins those. Two laboratories running the same method share whatever is wrong with the method, so their agreement is a second measurement of repeatability rather than a comparison against anything external. The passage's own historical case is precisely this: values that sat close together for a period and then moved as a group, with the earlier intervals failing to reach the later figure.",
+        "passage_anchor": "rc-0082-p2, rc-0082-p4",
+        "question_type_note": "An inference question rewards combining a stated requirement with a stated practice. Where a passage says what accuracy needs and then names a check people actually use, the inference lives in the gap between them.",
+        "reading_habit": "When an author says a quantity cannot be got from the data, test every proposed check by asking whether it uses anything but the data. Agreement among people doing the same thing almost never does.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Repetition produces the quantity the passage says is cheap and says nothing about the other. The historical case is a body of repeated measurements that was exactly as repeatable as claimed and was repeatably wrong.",
+            "seductive_element": "More data feels like better knowledge, and the passage's account of how a spread is computed puts repetition at the centre of the reader's attention."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "An independent method is a real part of the prescription and the conclusion drawn from it is not available. A disagreement tells you the pair cannot both be right; identifying which one is closer to the truth would need the very external standard the comparison was standing in for.",
+            "seductive_element": "It is the live rival, because a second method resting on different physics is offered by the passage as a remedy, and a remedy is naturally read as something that settles the question."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage prescribes labelling rather than widening, and says the prescription has to be smaller than the diagnosis. It also treats the published interval as a good number honestly described once it is correctly named.",
+            "seductive_element": "Enlarging an interval to cover an unknown error is the obvious engineering answer, and the passage's account of the uncovered residue invites it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0082-q5",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "comp.attention_span"
+      ],
+      "target_mistake": "picking the member of the pair that matters most rather than the member the stem asks about",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, the asymmetry between the two quantities is that only one of them",
+      "options": {
+        "A": "can be set down as a number rather than left as a matter of judgement",
+        "B": "can be established from the readings without appeal to anything outside them",
+        "C": "bears on the question that the scientist taking the measurement wants answered",
+        "D": "is secured by the care with which the experiment has actually been carried out"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The second paragraph states the asymmetry twice, once for each side. Precision is available from the readings themselves and needs nothing from outside them; accuracy is not available from the readings at all and needs a reference artefact, an independent method or a prepared sample.",
+        "correct_reasoning": "The correct option is that pair of statements compressed. The whole diagnosis rests on it, since the third paragraph's account of the drift depends on one quantity being computable on the afternoon of a deadline and the other requiring a comparison that may not exist, and the closing image of a ruler measuring itself is the same point put pictorially.",
+        "passage_anchor": "rc-0082-p2",
+        "question_type_note": "A detail question about a contrast is decided by which side of the contrast a property sits on. Check the subject of the sentence you are remembering before matching an option to it.",
+        "reading_habit": "When a passage sets two quantities against each other, write each property in the column it belongs to as you read. Half the distractors in such sets are real properties filed under the wrong heading.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Both quantities are numbers in the passage, and the whole difficulty described is that both get printed as intervals. What separates them is where the number can come from, not whether one exists.",
+            "seductive_element": "The paragraph does emphasise computing a spread, and the contrast between a calculation and a judgement is the shape a reader expects such an asymmetry to take."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is true of the other member of the pair and the stem asks about the one that can be had from the data. The passage's complaint is precisely that the quantity people want is the one the apparatus cannot certify.",
+            "seductive_element": "It is the live rival, because it states the most important fact in the passage, and importance is easily substituted for the property the stem actually names."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Care is never offered as a source of either quantity. The passage locates the trouble in what an apparatus can establish about itself, and its historical case describes careful laboratories agreeing with one another and being wrong together.",
+            "seductive_element": "Careful work is the usual explanation of a good measurement, and the reader supplies it where the passage has deliberately put a structural condition instead."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "asymmetry",
+      "passage_use": "The explanation is an asymmetry in what can be had from the data",
+      "meaning_here": "a difference in kind between two cases rather than in amount",
+      "difficulty": "medium"
+    },
+    {
+      "word": "artefact",
+      "passage_use": "a reference artefact",
+      "meaning_here": "a manufactured object whose value is fixed and used as a standard",
+      "difficulty": "hard"
+    },
+    {
+      "word": "repeatability",
+      "passage_use": "a statement about repeatability wearing the label of a statement about truth",
+      "meaning_here": "how closely the same procedure reproduces its own result",
+      "difficulty": "medium"
+    },
+    {
+      "word": "constant",
+      "passage_use": "When a physical constant is measured repeatedly across decades",
+      "meaning_here": "a quantity in nature taken to have one fixed value everywhere",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The passage describes a failing that looks like carelessness and then says it is nobody's fault. Watch for the two sentences that refuse to blame anyone, because the tone question is decided there rather than by the sharp phrases around them.",
+    "one_sentence_summary": "The undisputed distinction between how closely measurements agree with one another and how close they are to the truth keeps collapsing because only the first can be computed from the readings while the second needs a standard from outside, so a culture that requires a printed uncertainty ends up printing repeatability and reading it as truth, and since the external comparisons that would fix this are expensive the author asks only that a number be labelled with which of the two it is.",
+    "main_idea": "Precision and accuracy are independent, everyone knows it, and the distinction fails constantly anyway. The reason is that a spread can be computed from the data while closeness to the truth needs something external. Since journals require a printed uncertainty, and only one of the two can be produced to order, the interval after a measurement is usually repeatability read as truth. The record shows values agreeing closely and then moving as a group. The cure is not better wording but external comparison, and where that is unaffordable, an honest label.",
+    "simple_explanation": "Two words that sound alike mean different things. Precision is how closely your measurements agree with each other. Accuracy is how close they are to the real value. They have nothing to do with each other: you can have ten readings that agree to the last decimal place and are all badly wrong, and you can have a messy scatter whose average is exactly right.\n\nEvery scientist knows this. And it goes wrong all the time, including for people who could have explained it perfectly the day before. That is the interesting bit. When everybody knows how to avoid a mistake and nobody avoids it, the trouble is not the words.\n\nHere is the real trouble. You can work out precision from your own numbers. Take the readings, see how spread out they are, done. You cannot work out accuracy from your own numbers at all. To know how far off you are, you need something from outside: an object whose value is already known, a completely different method, a sample somebody prepared before your machine ever touched it. Nothing inside the data can tell you. An instrument asked how accurate it is, is like a ruler asked to measure itself: it says it is exactly a foot long.\n\nNow put that inside a world where journals require you to print an uncertainty. You have to attach a number, and only one of the two numbers can be produced on demand. The spread you can calculate the afternoon before the deadline. The external comparison might not exist, might take a year, and might not be yours to arrange. So the little interval after the measurement is usually a statement about repeatability with a label on it saying truth, and everybody reads it as truth, including the person who wrote it. Nobody is lying. It happens because one of the two is cheap.\n\nThe history shows it. Measure a physical constant again and again over decades, and the published values do not scatter randomly round the final answer. They sit tightly together for a while, then the whole group shifts to a new place, and the old error bars often do not even reach the new value. Those readings were exactly as repeatable as they claimed. They were repeatably wrong, and the repeatability was what hid the error, because laboratories agreeing with each other is what everyone treats as proof.\n\nSo what do you do? Not talk more carefully; the words were never the problem. You need something from outside: a known standard alongside your unknown, a second method that fails in different ways, a duplicate sample sent out under a false name. All of that costs money, some of it is impossible, and no lab can do it for everything. The author also refuses to say the error bars are useless: they pin down one of the two quantities exactly, and one exact number beats two vague ones.\n\nSo his request is deliberately small. Say which of the two your number is. An interval labelled as repeatability is an honest number. The same interval presented as your distance from the truth is a claim your equipment was never able to make. Keeping the two apart is easy, except on the days when keeping them apart costs you the claim you wanted to make.",
+    "why_difficult": "Everything in the passage sounds like an accusation and none of it is one, so readers reliably overshoot the tone. The sharp phrases, the ruler measuring itself and the constants that were repeatably wrong, sit two sentences away from the flat statement that no deception is involved. The second difficulty is that the passage refuses two conclusions a reader will already have drawn by the fourth paragraph: that published intervals are worthless, and that the answer is to be more careful with words. The third is that the prescription is smaller than the diagnosis on purpose, which readers experience as an anticlimax and therefore skim.",
+    "author_intention": "To explain a persistent error by the economics of what can be computed rather than by anybody's carelessness, and then to ask for the one repair that costs nothing, so that the reader stops treating a number as evidence of something it was never able to establish.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0082-p1",
+        "role": "States the puzzle",
+        "note": "Everyone can define the two words and the distinction still collapses, which means the mistake is not about the words."
+      },
+      {
+        "paragraph_id": "rc-0082-p2",
+        "role": "Gives the diagnosis",
+        "note": "A spread can be computed from the readings. Closeness to the truth needs something external. An instrument cannot certify its own accuracy."
+      },
+      {
+        "paragraph_id": "rc-0082-p3",
+        "role": "Explains the drift",
+        "note": "Journals demand a printed uncertainty, and only the cheap quantity can be produced to order, so repeatability gets printed and read as truth."
+      },
+      {
+        "paragraph_id": "rc-0082-p4",
+        "role": "Supplies the evidence",
+        "note": "Published values of constants cluster, then move as a group, with old intervals failing to reach the new figure. Repeatable, and repeatably wrong."
+      },
+      {
+        "paragraph_id": "rc-0082-p5",
+        "role": "Prescribes, and shrinks it",
+        "note": "External comparisons are the real cure and are expensive. The intervals are still worth having. So: say which of the two your number is."
+      }
+    ],
+    "tone_progression": "It opens briskly and almost conversationally, hardens into diagnosis through the two middle paragraphs, becomes coolly damning in the historical passage without naming anybody, and ends practical and deliberately modest, refusing the larger cure and asking for a label.",
+    "key_transitions": [
+      "'That regularity is the thing worth explaining' (close of paragraph 1) — the subject changes from the distinction to why it fails.",
+      "'No deception is involved anywhere in this.' (paragraph 3) — the author refuses the accusation his own evidence invites.",
+      "'So the prescription has to be smaller than the diagnosis' (paragraph 5) — the remedy is cut to what can actually be done."
+    ],
+    "misunderstanding": "Readers finish holding one of two wrong models. The first is that scientists have been overstating their certainty and ought to be called out, which the passage denies twice, once by excluding deception and once by locating the cause in cost. The second is that reported uncertainties are misleading and should go, which the fifth paragraph refuses in a sentence most readers have stopped attending to by the time it arrives, since it sits between the expensive remedies and the modest one.",
+    "traps_summary": "The set offers the diagnosis with its hedge removed, indignation in place of structural criticism, the definitions in place of the argument, agreement between laboratories as evidence about truth, and the more important of the two quantities in place of the one the stem asked about. Deciding which member of the pair an option is about, and whether the author was blaming anybody, answers all five.",
+    "reading_lesson": "When a passage explains a persistent error, look for the sentence that says whose fault it is. Authors who answer nobody's have written a structural argument, and every sharp phrase in it is description rather than complaint, which is what tone questions on such passages are built to test. The companion habit is to check the last paragraph for what the author refuses: a prescription deliberately smaller than the diagnosis almost always sits next to a conclusion the reader had already drawn and the author declines.",
+    "real_world": "The same asymmetry governs any figure an organisation can produce about itself. A forecast's consistency can be measured from its own history; its correspondence to the world cannot. So can a model's stability, an assessor's agreement with other assessors, a survey's margin of sampling error. In each case the cheap number gets printed and is read as the expensive one.",
+    "takeaway": "An instrument can tell you how much it agrees with itself, and that is the one thing you never wanted to know.",
+    "reflection_question": "Which of the numbers you rely on describe how consistent a process is rather than how right it is?"
+  }
+}

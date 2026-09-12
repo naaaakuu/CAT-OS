@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0038",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "architecture",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Wall That Became a Window",
+    "theme": "how a single sheet of glass across a shop front turned goods into display and the street into an entertainment",
+    "estimated_time_sec": 115,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "E",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is set in the same shop in the same decades and uses the paragraph's own nouns, counter, customers, shop, so every surface test keeps it. The decoy is the sentence about goods becoming things to look at, the only one with no glass in it, which a reader matching on the object may drop."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "check whether a sentence is joined to its neighbours by a real tie or merely by a shared setting, and see that a shared setting binds nothing",
+    "reasoning_patterns": ["disc.chronology", "disc.lexical_chain", "comp.function_over_words", "disc.topic_progression", "scope.true_but_off_question"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about goods becoming things to be looked at: it never mentions glass, and a reader tracking the object through the story may find nothing in it to hold. It stays because behind it refers to the new sheet and because the lit rooms of the closing sentence are exactly rooms arranged for a person who has not yet come in. The sentence about the ledger and credit is in the same shop in the same decades and joins nothing: the story runs from a material to a front to a way of displaying to a street, and who was allowed to buy on trust is a different history that begins and ends in one line.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of plate glass and the nineteenth-century shop front; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A narrative core with a strict causal sequence and an outlier that shares the room, the decade and the vocabulary. The only thing it does not share is a handoff, which is what the mission asks the learner to test."
+  },
+  "sentences": [
+    { "label": "A", "text": "The street gained a row of lit rooms it could see into and not enter, and the walk past the shops became an entertainment that cost nothing." },
+    { "label": "B", "text": "Larger panes reached the ordinary high street in the middle of the nineteenth century, and within a generation the front of a shop was a single sheet from sill to fascia." },
+    { "label": "C", "text": "Behind the counter the shop kept a ledger in which the debts of regular customers were entered, and a willingness to give credit decided which families could shop where." },
+    { "label": "D", "text": "Until sheet glass could be made in large pieces a shop showed its goods through a grid of small panes, or through an open front that had to be shuttered at dusk." },
+    { "label": "E", "text": "The goods behind it stopped being things to be handled and became things to be looked at, arranged for the benefit of somebody who had not yet come in." }
+  ],
+  "outlier": "C",
+  "core_order": ["D", "B", "E", "A"],
+  "builder": {
+    "prompt": "Build the four-sentence story of what a sheet of glass did to the shop and the street outside it. The sentence that shares the shop but joins nothing is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one story in four stages, and each stage is caused by the one before. It begins with what a shop front was before large panes could be made, then brings in the larger panes and the single sheet they allowed. The third stage is what the sheet did to the goods, which were now arranged for someone outside, and the fourth is what that did to the street. Before, material, display, street.",
+    "core_roles": [
+      { "label": "D", "role": "background", "why_here": "It sets the condition the story changes, and its small panes and shutters are what the single sheet replaces." },
+      { "label": "B", "role": "development", "why_here": "It supplies the change itself, and its single sheet is the object every later sentence refers to." },
+      { "label": "E", "role": "development", "why_here": "'Behind it' points at the sheet, and the sentence carries the story from a material to a way of arranging goods." },
+      { "label": "A", "role": "conclusion", "why_here": "It takes the display outside the shop and states what the change did to the street, which is as far as the story goes." }
+    ],
+    "links": [
+      { "from": "D", "to": "B", "tie": "lexical", "explanation": "'Larger panes' answers the small panes of the previous sentence directly, so the change is presented as the end of a stated condition." },
+      { "from": "B", "to": "E", "tie": "reference", "explanation": "'Behind it' has one possible antecedent, the single sheet just described, and the sentence is unreadable without it." },
+      { "from": "E", "to": "A", "tie": "given_new", "explanation": "Goods arranged for a person outside are now given, and the new material is what such rooms did to the experience of walking past them." }
+    ],
+    "violation_named": "The odd sentence is set in the same shop in the same decades and uses the paragraph's own furniture, and it belongs to a different history: who could buy on trust, and what that decided about where families shopped. The core is a causal sequence about a material and what it made visible, and credit is not a stage of it.",
+    "why_it_breaks": "Every core sentence hands something to the next: small panes to larger panes, the sheet to what stands behind it, the arranged window to the street outside. The stray sentence receives nothing, since nobody has mentioned buying or paying, and gives nothing, since the street outside is described in terms of looking rather than of accounts. It opens a subject in its first clause and closes it in its last.",
+    "trap_exposed": "The camouflage is the setting. Same shop, same century, same nouns, and a sentence that sounds like the kind of social detail a good history would include. Shared setting is the cheapest tie there is, and it is not a tie at all. The decoy runs the other way: the sentence about goods becoming things to look at never names the glass, so a reader following the object rather than the sequence loses the story's middle.",
+    "exclusion_analysis": [
+      { "label": "D", "mistake_type": "lexical_pull", "why_tempting": "It describes the arrangement the paragraph is not about, and a reader matching on the new shop front may treat it as a preamble that could go.", "what_breaks": "Without it the story opens on a change with nothing to change from, and the point of a single sheet, that it replaced a grid, is never made." },
+      { "label": "B", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence carrying a date, which gives it the flat texture of a reference entry among sentences that are describing effects.", "what_breaks": "Without it the paragraph never introduces the sheet, and the following sentence's behind it points at nothing at all." },
+      { "label": "E", "mistake_type": "hardest_to_place", "why_tempting": "It is the most abstract sentence in the set and mentions neither glass nor street, so a reader may fail to find a stage for it.", "what_breaks": "Without it the story jumps from a pane of glass to an entertainment in the street, with the step that turned goods into display left out." },
+      { "label": "A", "mistake_type": "no_uniqueness_test", "why_tempting": "It leaves the shop entirely and speaks of walking and entertainment, so it can read as the opening of a broader essay on city life.", "what_breaks": "Without it the story stops inside the window and never reaches what the change did to the people outside it, which is where the sequence was going." }
+    ],
+    "detection_habit": "For each sentence, name what it receives from its neighbour and what it hands on. A shared room, a shared decade and a shared vocabulary can all be present while nothing is handed over at all."
+  },
+  "mentor": {
+    "challenge": "All five sentences stand in the same shop in the same century. Four of them pass something to the next; one only stands there.",
+    "takeaway": "Setting is not structure. Ask what each sentence receives, and what it leaves behind for the next."
+  }
+}

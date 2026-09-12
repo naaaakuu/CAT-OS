@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0042",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "urban-studies",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Line the Buildings Forget",
+    "theme": "why the lines of old streets outlive every building that has ever stood on them",
+    "estimated_time_sec": 115,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "A",
+    "violation_type": "example_no_claim",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is a concrete instance about houses, roads and frontage in a paragraph whose other sentences are abstract, so it arrives as the illustration the exposition appears to want. The decoy is the closing sentence, whose three disasters give it the texture of an aside."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "ask what a concrete sentence is an instance of, and see that an example about the same objects can illustrate a claim the paragraph never makes",
+    "reasoning_patterns": ["arg.example_vs_principle", "disc.example_after_claim", "comp.supporting_idea", "disc.cause_effect", "scope.true_but_off_question"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the closing sentence about fire, bombing and bankruptcy: its three catastrophes make it sound like illustration, and a reader pruning the concrete may take it. It stays because the exposition has claimed that boundaries survive rebuilding, and this is the sentence that names what rebuilding actually is; without it the claim is never tested against anything violent enough to matter. The sentence about setting houses back behind a verge illustrates a device for quiet, and quiet is not a subject the paragraph has: every claim here is about who has to agree before a line can move.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the persistence of plot boundaries in urban form; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The outlier is the only fully concrete sentence in an abstract set, which makes it feel like the example the paragraph is missing. The branch it takes is design for comfort; the paragraph's road is ownership and consent."
+  },
+  "sentences": [
+    { "label": "A", "text": "The reason is ownership: a plot is bought, sold and rebuilt as a unit, and the boundary between two plots is the one thing a rebuilding cannot move without the neighbour's agreement." },
+    { "label": "B", "text": "Fire, bombing and bankruptcy clear the buildings and leave the lines, which is why a district can be rebuilt three times over and still be walked by the pattern of a vanished century." },
+    { "label": "C", "text": "On a new estate the houses are set back behind a service verge, so that the front doors are a good deal quieter than the road they face." },
+    { "label": "D", "text": "A street is older than any building standing on it, and usually older than the memory of whatever it was first made for." },
+    { "label": "E", "text": "A row of frontages is therefore a row of agreements, and the bend in an old street is the accumulated record of where those agreements happened to fall." }
+  ],
+  "outlier": "C",
+  "core_order": ["D", "A", "E", "B"],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of why street lines outlast the buildings on them. The concrete sentence that illustrates no claim the explanation makes is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one persistence in four steps. It opens with the fact to be explained, that a street outlives its buildings and its purpose, then gives the reason: plots change hands as units and a boundary cannot move without a neighbour's consent. The third step reads the consequence off the map, a row of frontages as a row of agreements, and the fourth shows the explanation holding under the most violent kind of rebuilding. Fact, reason, reading, test.",
+    "core_roles": [
+      { "label": "D", "role": "topic", "why_here": "It states the fact the paragraph exists to explain, and the reason that follows is an answer to the question it raises." },
+      { "label": "A", "role": "cause_effect", "why_here": "'The reason is' answers the opening directly, and the neighbour's agreement is the mechanism both later sentences depend on." },
+      { "label": "E", "role": "development", "why_here": "'Therefore' converts the mechanism into something visible on the ground, so the explanation becomes a way of reading a street." },
+      { "label": "B", "role": "conclusion", "why_here": "It takes the explanation to the hardest case, total destruction, and shows the lines surviving, which is where the argument had to arrive." }
+    ],
+    "links": [
+      { "from": "D", "to": "A", "tie": "reference", "explanation": "'The reason' points at the persistence just reported and promises the explanation the sentence goes on to give." },
+      { "from": "A", "to": "E", "tie": "conjunction", "explanation": "'Therefore' draws the consequence of the boundary rule, turning consent into the row of agreements a frontage records." },
+      { "from": "E", "to": "B", "tie": "lexical", "explanation": "'The lines' takes up the frontages and bends just described and carries them through the clearances the closing sentence names." }
+    ],
+    "violation_named": "The odd sentence is an example with no claim behind it. It illustrates a piece of layout designed for quiet, and quiet is not something the paragraph is about. Every claim in the core concerns why a boundary cannot move: ownership, consent, the record a frontage keeps and what survives a fire.",
+    "why_it_breaks": "The chain of the core is causal, and the stray sentence enters it with a purpose nobody has raised and leaves nothing for the next sentence to take up. It is also about a layout drawn all at once by one owner, which is the case in which the paragraph's mechanism, agreement between neighbours, has nothing to do; so it is not even a counterexample, since a counterexample would have to bear on the claim it contradicts.",
+    "trap_exposed": "The camouflage is concreteness. Four abstract sentences seem to want an example, and this one arrives with houses, doors and a road, in the paragraph's own field. An exposition wants the example its claim needs, not the first example of its subject matter. The decoy is the closing sentence, whose fire and bombing look like illustration, though it is the test that makes the explanation worth stating.",
+    "exclusion_analysis": [
+      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It sounds like an aphorism rather than a step, and a reader who wants argument may treat it as an epigraph the paragraph could lose.", "what_breaks": "Without it the reason answers no question, and the paragraph explains a persistence it has never asserted." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It states a mechanism in legal rather than physical terms, so a reader picturing streets may not see where it fits among them.", "what_breaks": "Without it the paragraph claims that lines outlive buildings and never says why, and the row of agreements refers to an agreement nothing has described." },
+      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "Its reading of a bend in the road as a record is the most figurative sentence in the set, which makes its register stand out.", "what_breaks": "Without it the mechanism is stated and never applied to anything visible, so the closing survival of the lines has no pattern for a walker to read." },
+      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "Its three disasters read like illustration, and a reader pruning examples may treat it as the set's spare concrete sentence.", "what_breaks": "Without it the explanation is never tested against the cases that would break it, and the paragraph never reaches the point that a district can be wholly rebuilt and still be old." }
+    ],
+    "detection_habit": "Finish the sentence this is an example of, using only the paragraph's own claims. An example about the right objects can still be an example of something the paragraph never says."
+  },
+  "mentor": {
+    "challenge": "Four of these sentences are abstract and one is not, which is exactly the reason to be careful. Build the explanation and ask what the concrete sentence is an example of.",
+    "takeaway": "An exposition wants the example its claim needs, not the first vivid thing in the same field."
+  }
+}
