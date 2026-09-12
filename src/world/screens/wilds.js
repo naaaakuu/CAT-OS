@@ -13,6 +13,7 @@ import { buildBackdropScene } from '../engine/map.js';
 import { listFields, loadField, loadLedger, buildQuestion, buildContextQuestion, LexRound, applyAnswer, loadContext } from '../lexicon.js';
 import { roundStars, EARN } from '../economy.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, newlyBuildable, loadWorldContent } from '../state.js';
+import { newlyFinished } from '../collections.js';
 import { rng } from '../engine/palette.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, silenceWorld } from '../audio.js';
@@ -203,12 +204,13 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       for (const g of byRegion.values()) { const fake = { region: g.region, bundle: g.bundle, entries: g.entries, answers: g.answers }; await saveLedgerOnly(storage, fake, ledger); }
     } catch (err) { console.error('[CAT OS] gauntlet save failed', err); }
     const earned = EARN.gauntlet(stars.stars, correct);
-    let unlocked = [];
+    let unlocked = [], setsDone = [];
     try {
       const content = await loadWorldContent();
       const beforeState = deriveWorldState(content, beforeRecords);
       const afterState = deriveWorldState(content, await loadWorldRecords(storage));
       unlocked = newlyBuildable(beforeState, afterState);
+      setsDone = newlyFinished(beforeState, afterState, before?.content ?? null);
     } catch { /* the run still counts */ }
 
     let prevBest = null;
@@ -229,6 +231,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       earned,
       unlocked,
       worldLine: isRecord ? 'The road out remembers a <b>new best</b>.' : '',
+        setsDone,
       extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>`,
       actions: [
         { label: 'Run again', href: '#/world/place/wilds', primary: true, onClick: () => { location.hash = '#/world/place/wilds'; setTimeout(() => document.querySelector('#run')?.click(), 400); } },

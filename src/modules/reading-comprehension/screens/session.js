@@ -36,6 +36,7 @@ import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { rcStars, EARN } from '../../../world/economy.js';
 import { renderResult, formatClock } from '../../../world/screens/result.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../../../world/state.js';
+import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld } from '../../../world/audio.js';
 import '../../../ui/components/cat-passage.js';
 import '../../../ui/components/cat-question-card.js';
@@ -315,7 +316,8 @@ export async function renderSession(outlet, { storage }, params) {
 
       let line = '';
       let unlocked = [];
-      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); line = worldChangeLine('reading-room', before.state, after); unlocked = newlyBuildable(before.state, after); } } catch { /* fine */ }
+      let setsDone = [];
+      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); line = worldChangeLine('reading-room', before.state, after); unlocked = newlyBuildable(before.state, after); setsDone = newlyFinished(before.state, after, before.content); } } catch { /* fine */ }
 
       const mentorHTML = lesson ? `
         <div class="result__mentor">
@@ -341,6 +343,7 @@ export async function renderSession(outlet, { storage }, params) {
         ],
         earned,
         worldLine: line,
+        setsDone,
         unlocked,
         extraHTML: mentorHTML + reviewHTML,
         actions: [

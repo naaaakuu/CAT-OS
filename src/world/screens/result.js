@@ -68,6 +68,12 @@ export function renderResult(outlet, o) {
           <div class="won__row">${won.map((c) => `<span class="won__craft craft--${c.key}" data-to="${c.amount}"><i aria-hidden="true"></i><b>0</b><small>${c.name}</small></span>`).join('')}</div>
         </div>` : ''}
         ${o.worldLine ? `<p class="result__world late">${o.worldLine}</p>` : ''}
+        ${(o.setsDone ?? []).length ? `
+        <div class="setsdone late">
+          <p class="setsdone__eyebrow">${(o.setsDone ?? []).length === 1 ? 'A set finished' : `${o.setsDone.length} sets finished`}</p>
+          ${o.setsDone.slice(0, 3).map((c) => `
+            <p class="setsdone__row"><b>${escapeHTML(c.name)}</b><span>all ${c.total} ${escapeHTML(c.unit)}</span></p>`).join('')}
+        </div>` : ''}
         ${unlocked.length ? `
         <div class="unlockbar late">
           <div class="unlockbar__glow" aria-hidden="true"></div>

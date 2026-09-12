@@ -23,6 +23,7 @@ import { EARN, verbalStars } from '../../../world/economy.js';
 import { renderResult, formatClock } from '../../../world/screens/result.js';
 import { mountBackdrop } from '../../../world/screens/backdrop.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../../../world/state.js';
+import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld, startAmbience } from '../../../world/audio.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 
@@ -213,12 +214,13 @@ export async function renderSecondLook(outlet, { storage }) {
       const earned = EARN.secondLook(res.stars, correct, res.flawless);
       try { await storage.put(STORES.SESSIONS, record); } catch (err) { console.error('[CAT OS] second look save failed', err); }
 
-      let worldLine = '', unlocked = [];
+      let worldLine = '', unlocked = [], setsDone = [];
       try {
         const records = await loadWorldRecords(storage);
         const after = deriveWorldState(before.content, records);
         worldLine = worldChangeLine('reading-room', before.state, after);
         unlocked = newlyBuildable(before.state, after);
+        setsDone = newlyFinished(before.state, after, before.content);
       } catch { /* the facts still show */ }
 
       const settled = answers.filter((a) => a.is_correct).length;
@@ -237,6 +239,7 @@ export async function renderSecondLook(outlet, { storage }) {
         ],
         earned,
         worldLine,
+        setsDone,
         unlocked,
         actions: [
           { label: 'Back to the Reading Room', href: '#/world/place/reading-room', primary: true },

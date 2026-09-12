@@ -200,6 +200,18 @@ export function closest(all, n = 6) {
     .slice(0, n);
 }
 
+/**
+ * The sets that crossed from unfinished to finished between two states.
+ * This is the moment the whole idea of a collection exists for: not a
+ * percentage moving, but "that one is done now".
+ */
+export function newlyFinished(before, after, content) {
+  if (!before || !after) return [];
+  let was;
+  try { was = new Set(collections(before, content).filter((c) => c.done).map((c) => c.id)); } catch { return []; }
+  try { return collections(after, content).filter((c) => c.done && !was.has(c.id)); } catch { return []; }
+}
+
 /** How many sets are finished, and out of how many. */
 export function tally(all) {
   return { done: all.filter((c) => c.done).length, total: all.filter((c) => c.total > 0).length };

@@ -18,6 +18,7 @@
 import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../state.js';
 import { loadField, loadLedger, pickRound, LexRound, saveRound, TARGET_MS, ROUND_SIZE, listFields, loadContext } from '../lexicon.js';
 import { composeRound } from '../curator.js';
+import { newlyFinished } from '../collections.js';
 import { regionBySlug } from '../regions.js';
 import { play, silenceWorld, startAmbience } from '../audio.js';
 import { renderResult, formatClock } from './result.js';
@@ -216,6 +217,7 @@ export async function renderRound(outlet, { storage }, params) {
       try { const records = await loadWorldRecords(storage); after = deriveWorldState(before.content, records); } catch { /* facts still show */ }
       const worldLine = after ? worldChangeLine(region.slug, before.state, after) : '';
       const unlocked = after ? newlyBuildable(before.state, after) : [];
+      const setsDone = after ? newlyFinished(before.state, after, before.content) : [];
       const misses = round.answers.filter((a) => !a.correct);
       const byId = new Map(round.entries.map((e) => [e.id, e]));
       const reviewHTML = misses.length ? `
@@ -238,6 +240,7 @@ export async function renderRound(outlet, { storage }, params) {
         ],
         earned: result.earned,
         worldLine,
+        setsDone,
         unlocked,
         extraHTML: reviewHTML,
         actions: [
