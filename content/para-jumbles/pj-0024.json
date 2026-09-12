@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0024",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Map Made of Smells",
+    "theme": "the evidence that ocean-going seabirds find their way home partly by scent",
+    "estimated_time_sec": 80,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["demonstrative", "lexical_repetition", "article_given_new", "connective_implicit"],
+    "primary_trap": "none",
+    "secondary_traps": ["lexical_decoy"],
+    "dna_traits": ["surface_matching", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "C",
+    "learning_objective": "let a demonstrative phrase such as 'such a pattern' fix a sentence immediately after the sentence that supplies the pattern",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.demonstrative", "disc.given_new", "disc.closing_sentence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival puts the sentence about chemical gradients second, because explaining the mechanism before the experiment is the tidier shape and because open water chimes with crossing whole oceans. It breaks at the closing sentence: 'such a pattern' has to pick up the pattern that the gradients hold for days, and in that order the two sentences are no longer neighbours, so the demonstrative reaches past the experiment to a noun two sentences back. The experiment also loses its force when it arrives after the mechanism, since its whole point is to show that smell, rather than sight, is doing the work.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of olfactory navigation in seabirds; no specific study adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy claim-and-evidence jumble whose tail is locked by one demonstrative. No trap is engineered, but a mild lexical decoy joins the opening claim to the sentence about open water; the demonstrative in the final sentence settles the order regardless."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A bird that has learnt such a pattern is carrying something close to a map, drawn in smells instead of in lines.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "Shearwaters whose sense of smell had been temporarily blocked wandered far off course on the way home, while birds whose vision was obscured did not.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "Seabirds that cross whole oceans and return to a single burrow appear to use their noses quite as much as their eyes.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "Over open water the air carries faint chemical gradients, given off by plankton, which hold their pattern for days at a time.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "B", "D", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "B",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "C claims that the birds navigate by smell as much as by sight. B is the experiment that separates the two senses, and its contrast between blocked smell and obscured vision answers C's comparison directly."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "medium",
+      "explanation": "B has shown that smell carries the information; D then says what there is at sea to be smelled. The mechanism is offered because the experiment has made it necessary, not before."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "A speaks of a bird that has learnt 'such a pattern'. The only pattern in the paragraph is the one D describes, the gradients that hold their shape for days, so A must follow D immediately."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim, the experiment that supports it, the mechanism that makes the claim possible, and a closing image. The order of the middle two is the whole question: the paragraph offers the mechanism as an answer to the experiment, not as a preamble to it.",
+    "movement": [
+      { "label": "C", "why_here": "C states the claim and needs nothing before it. Everything that follows is either evidence for it or an account of how it could be true." },
+      { "label": "B", "why_here": "B is the evidence, and it is built to isolate one sense from another. Placed second it tests the claim while the claim is still fresh." },
+      { "label": "D", "why_here": "D answers the question B raises: if smell is carrying the information, what information is there? It supplies the gradients and, crucially, the word the last sentence needs." },
+      { "label": "A", "why_here": "A closes with the image the paragraph has been building towards, and its 'such a pattern' binds it to D. A closing sentence hands nothing on; this one only gathers up." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDBA",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "Crossing whole oceans and open water belong together, and many readers prefer a paragraph that explains the mechanism first and produces the experiment as confirmation afterwards.",
+        "where_it_breaks": "The closing sentence says 'such a pattern', and in this order the pattern it points at is two sentences away, with an experiment about blocked senses in between. A demonstrative reaches back to the sentence beside it, not across a paragraph."
+      }
+    ],
+    "trap_named": "Nothing here is designed to deceive, but the item rewards one habit and punishes another. The habit it rewards is reading demonstratives as instructions: 'such a pattern', 'these birds', 'that route' name something that must be standing next door. The habit it punishes is arranging sentences by the shape a paragraph usually takes, which here would place the mechanism before the evidence.",
+    "solving_habit": "Find every phrase of the form 'such a', 'these' or 'that' and ask what noun it needs. Those phrases fix adjacency, and adjacency is worth more than your sense of how an argument ought to be laid out."
+  },
+  "mentor": {
+    "challenge": "One sentence refers to a pattern without saying what the pattern is. The sentence that supplies it has to be its neighbour.",
+    "paragraph_plain": "Seabirds that fly right across an ocean and come back to one burrow seem to navigate by smell as much as by sight. When researchers temporarily blocked the birds' sense of smell they wandered badly off course on the way home, while birds whose eyes were covered did not. The reason there is anything to smell is that the open sea carries faint chemical trails from plankton, and these hold their shape for days. A bird that has learnt one of those shapes is effectively carrying a map, made of smells rather than lines.",
+    "takeaway": "'Such a pattern' is not decoration; it is a hand pointing at the sentence immediately before it."
+  }
+}

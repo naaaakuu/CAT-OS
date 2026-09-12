@@ -1,0 +1,390 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0039",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "linguistics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 395,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "logical_structure",
+      "not_true",
+      "title_selection"
+    ],
+    "theme": "whether language shapes thought: obligatory grammatical marking as a habit of attention built by repetition, replacing the picture of a grammar that walls off what its speakers can think",
+    "estimated_time_min": 6,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "A foundation-level passage on a topic usually written badly. The familiar strong claim is stated and refused in the second paragraph, so every question is really a test of whether the reader kept the refusal. No named languages and no trivia: the illustration is hypothetical on purpose.",
+    "length_class": "medium",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 2,
+    "tone": "clear, mildly corrective",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.contrast",
+      "comp.organization",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "meta.contradiction",
+      "scope.abstraction_level",
+      "elim.predict_first",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "arg.causal_claim",
+      "arg.counterargument"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the rival is the option that speakers of a marking language attend to the distinction in every situation; the last paragraph predicts the opposite, that the difference 'should shrink when the task has nothing to do with language at all'. Q2: the live rival among the true statements is the one about non-linguistic tasks, because the passage states the comparison from the other end, and a reader who remembers only 'largest when a speaker is preparing to speak' may mark it false; the exception is the wall claim, which the second paragraph names and refuses. Q3: the strongest wrong title is the wall image, which is the passage's most vivid phrase and belongs to the account being rejected; the correct title has to carry obligation rather than prohibition. Q4: the rival structure is the one that has the author declining to choose between two theories; the second paragraph chooses in two sentences — 'Nothing is missing from their minds. Something is different about their habits.'",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "obliges",
+      "congenial",
+      "attended"
+    ]
+  },
+  "passage": {
+    "title": "The Sentence You Cannot Finish",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0039-p1",
+        "text": "The question of whether language shapes thought usually arrives in a form that cannot be answered. Does a language allow its speakers thoughts that another language forbids? Put that way the answer is almost certainly no. People translate, borrow, explain and invent, and no idea has yet been found that stops at a border. But there is a smaller question underneath the large one, and the smaller question does have an answer. Speakers of different languages, asked to sort pictures or to describe a scene from memory, sometimes attend to different features of the same event, consistently, and without any sense of doing anything unusual."
+      },
+      {
+        "id": "rc-0039-p2",
+        "text": "The familiar explanation is that a language builds walls: what your grammar has no room for, you cannot easily think. It is a congenial picture and it does not fit the findings. Speakers whose language leaves a distinction unmarked can be shown it, taught it, and asked about it, and they draw it as competently as anyone else. Nothing is missing from their minds. Something is different about their habits."
+      },
+      {
+        "id": "rc-0039-p3",
+        "text": "The difference lies in what a grammar obliges. Every language lets its speakers say anything; only some make them say particular things every time. Imagine a language in which you cannot report that a vase broke without also indicating whether you saw it break or were told about it. A speaker of that language has to settle the question of evidence before the sentence will close — not because the matter is important on that occasion, but because there is no grammatical way round it. Do that a few thousand times a day for a lifetime, and how you know a thing becomes something you have already worked out before anyone asks."
+      },
+      {
+        "id": "rc-0039-p4",
+        "text": "This accounts for the findings without the walls. What differs between speakers is not what can be thought but what is routinely attended to, and habits of attention are made by repetition rather than by limitation. The explanation also makes a prediction the wall picture does not: the difference between speakers should be largest when they are preparing to speak, and should shrink when the task has nothing to do with language at all. That is roughly what is observed. A language does not decide what its speakers may think. It decides what they must have thought about by the time they reach the end of a sentence."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0039-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "treating a difference in attention as a difference in capacity, which is exactly the wall picture the second paragraph refuses",
+      "prediction_target": "Before the options the learner should be able to say: the passage separates what speakers notice from what speakers can understand, so any safe inference will keep the two apart.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "Two speakers may differ in what they notice about an event without differing in what they can understand about it.",
+        "B": "Speakers whose language marks a distinction will attend to that distinction in every situation they encounter.",
+        "C": "A community first comes to care about a distinction and its language later develops a way of marking it.",
+        "D": "A language with many obligatory categories is harder for an adult to learn than a language with few."
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The first paragraph reports that speakers attend to different features of the same event; the second insists that 'Nothing is missing from their minds' and that unmarked speakers draw the distinction as competently as anyone else. Putting the two together is the whole inference.",
+        "correct_reasoning": "The correct option holds those two findings side by side. The passage reports a real difference in what speakers notice and denies that it is a difference in capacity, since anyone can be shown the distinction and will then draw it well. So a difference in noticing without a difference in understanding is precisely the situation the passage describes, and nothing stronger is claimed.",
+        "passage_anchor": "rc-0039-p2",
+        "question_type_note": "Inference questions reward what the sentences force together and punish the extra step. Here two sentences from different paragraphs combine, and the trap is to convert a habit into an ability.",
+        "reading_habit": "When a passage says a difference is real but not a limitation, write both halves down. Options will offer you the difference with the limitation smuggled back in, or the limitation with the difference removed.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "extreme_language",
+            "why_wrong": "The final paragraph predicts the opposite: the difference should be largest when a speaker is preparing to speak and should shrink when the task has nothing to do with language, which rules out attention in every situation.",
+            "seductive_element": "The passage does describe a habit built by thousands of daily repetitions, and a lifelong habit sounds like something that operates everywhere."
+          },
+          {
+            "option": "C",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The passage runs the arrow from grammar to attention: obligation forces a settlement thousands of times a day and a habit follows. It says nothing at all about how a language came to have the obligation in the first place.",
+            "seductive_element": "It sounds like the sensible, non-mystical account of where such grammar comes from, and the passage's dislike of strong claims makes a modest-sounding one feel welcome."
+          },
+          {
+            "option": "D",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Language learning is never discussed; the passage compares fluent speakers of different languages on tasks of noticing, not learners on tasks of acquisition.",
+            "seductive_element": "It is a widely held belief about grammar and it uses the passage's own term, obligatory, which makes it feel like a consequence."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0039-q2",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "meta.contradiction"
+      ],
+      "target_mistake": "rejecting a claim the passage really makes because it is paraphrased or stated from the other end, and so missing the one claim the passage argues against",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following is NOT true, according to the passage?",
+      "options": {
+        "A": "A grammatical requirement can force a speaker to settle a matter before a sentence can be completed.",
+        "B": "A distinction that a language leaves unmarked is one that its speakers find hard to think about.",
+        "C": "The difference between speakers should be smaller in tasks that have nothing to do with language.",
+        "D": "No idea has so far been found that cannot make its way from one language into another."
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "Three of these are the passage's own claims, one from each of three paragraphs. The fourth is the account the second paragraph introduces in order to reject, complete with the word walls. In a NOT-true question the rejected view is the natural answer, because it is the one thing in the passage the author does not hold.",
+        "correct_reasoning": "The correct option is the wall picture: what your grammar has no room for, you cannot easily think. The passage names it, calls it congenial, and then refuses it in the plainest terms available — speakers who do not mark a distinction 'draw it as competently as anyone else', and 'Nothing is missing from their minds'. So it is the one statement in the list the passage denies.",
+        "passage_anchor": "rc-0039-p2",
+        "question_type_note": "A NOT-true question is a verification task. Tick each option against the text; the answer is the one that survives with no sentence behind it, or with a sentence that says the reverse.",
+        "reading_habit": "In any passage that states a view in order to reject it, mark that view clearly as you read. It reappears as the answer in NOT-true questions and as a trap in every other kind.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is the third paragraph in plainer words: a speaker 'has to settle the question of evidence before the sentence will close', because there is no grammatical way round it. A reader matching vocabulary rather than claims may not recognise the paraphrase.",
+            "seductive_element": "The passage's own wording is concrete and the option's is abstract, so the match is easy to miss under time pressure."
+          },
+          {
+            "option": "C",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The final paragraph makes exactly this comparison from the other end, predicting that the difference is largest when a speaker is preparing to speak and should shrink when the task is not about language. Stating the same comparison in reverse does not change it.",
+            "seductive_element": "It is the live rival: a reader who remembers only the first half of the prediction will read this as an inversion of the text."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The first paragraph says it directly — 'no idea has yet been found that stops at a border' — and this option keeps the same hedge, so far, rather than claiming that no such idea could exist.",
+            "seductive_element": "The sweep of the sentence makes it look like the kind of overstatement a careful passage would avoid, which invites a reader to mark it false on style."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0039-q3",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.abstraction_level",
+        "elim.predict_first"
+      ],
+      "target_mistake": "titling the passage with the vivid image it rejects, or with a theme so wide that the argument disappears into it",
+      "prediction_target": "The learner should be able to say before the options: the title must be about obligation, about what a grammar makes a speaker settle, and not about what a grammar forbids.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "The Walls a Grammar Builds",
+        "B": "How Language Makes Us Who We Are",
+        "C": "What a Language Obliges You to Notice",
+        "D": "The Vase, the Witness and the Broken Report"
+      },
+      "correct": "C",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The closing pair of sentences is the passage compressed: a language does not decide what may be thought, it decides what must have been thought about by the end of a sentence. A title is the main idea in a few words, so it has to carry obligation rather than prohibition.",
+        "correct_reasoning": "The correct title names the mechanism the passage argues for and the effect it produces. Obliges is the passage's own verb for what a grammar does, and notice is what the whole argument is about: routine attention built by repeated requirement. It also covers all four paragraphs, since the finding, the rejected explanation and the accepted one are all about noticing rather than about capacity.",
+        "passage_anchor": "rc-0039-p4",
+        "question_type_note": "A title question is a main-idea question at a smaller word count. The same rules apply: it must fit the whole passage, sit at the author's level of claim, and not belong to a view the author rejects.",
+        "reading_habit": "Write your own six-word title before you look at the options. If the passage rejects a picture, make sure your title is not that picture, however memorable its wording is.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Walls is the image of the explanation the second paragraph introduces in order to refuse; the passage's own conclusion is that the findings can be accounted for 'without the walls'.",
+            "seductive_element": "It is the most concrete phrase in the passage and it appears twice, which makes it feel like the author's own figure."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage says nothing about identity or character; its claim is narrowly about which features of an event speakers attend to, and it goes out of its way to deny the larger claims usually made in this area.",
+            "seductive_element": "It is the title this subject usually gets, and a reader expecting the familiar debate will accept the familiar heading."
+          },
+          {
+            "option": "D",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The vase is a hypothetical illustration of one obligation in one imagined grammar; the passage uses it for three sentences and draws a general claim from it, so a title built on it names the scenery rather than the argument.",
+            "seductive_element": "It is the only concrete scene in an abstract passage, and concrete images are what readers remember."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0039-q4",
+      "type": "logical_structure",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "struct.phenomenon_explanation",
+        "struct.contrast"
+      ],
+      "target_mistake": "describing the passage as an even-handed comparison of two theories when the second paragraph rejects one of them outright",
+      "prediction_target": "The learner should be able to sketch the skeleton before the options: a puzzling finding, a popular explanation refused, a narrower explanation offered, and a prediction used to test it.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "paragraph_function"
+      ],
+      "stem": "Which of the following best describes the structure of the passage?",
+      "options": {
+        "A": "A familiar claim is stated, supported with examples, and then extended to a wider field of study.",
+        "B": "A finding is reported, the usual explanation of it is refused, and a narrower one is offered and tested.",
+        "C": "Two competing theories are set out in turn and the author declines to choose between them.",
+        "D": "A term is defined and then applied to a sequence of progressively more difficult cases."
+      },
+      "correct": "B",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "expert_notice": "Each paragraph announces its job. The first ends with a finding about what speakers attend to; the second says the familiar explanation 'does not fit the findings'; the third gives the alternative; the fourth derives a prediction and reports that it holds. That is four moves, in that order.",
+        "correct_reasoning": "The correct option names those four moves in the order the passage makes them. It also captures the relation between the two explanations, which is not a comparison but a replacement: the wall account is refused on evidence, and the obligation account is then required to earn its place by predicting something the refused account does not.",
+        "passage_anchor": "rc-0039-p4",
+        "question_type_note": "Structure questions ask about the skeleton, not the subject. Label each paragraph with a verb as you read, and then choose the option whose verbs match yours in the same order.",
+        "reading_habit": "Sketch the argument in four words before you read the options: finding, refusal, alternative, test. An option that changes even one of those verbs is describing a different passage.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "The opening does state a familiar claim, but the passage answers it almost certainly no and then abandons it; nothing is supported with examples in order to be extended, and the argument narrows rather than widens.",
+            "seductive_element": "The first clause matches the opening sentence exactly, and an option that starts correctly is rarely read to the end."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The author chooses in two short sentences: 'Nothing is missing from their minds. Something is different about their habits.' The wall account is not left standing as an alternative, it is rejected.",
+            "seductive_element": "Two explanations really are set out, and the passage's calm tone can be mistaken for even-handedness."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "No term is defined here and no series of cases is worked through; the passage has one hypothetical illustration, used once, in the service of an explanation it has already announced.",
+            "seductive_element": "The passage does introduce an unfamiliar idea carefully, which resembles the opening of a definition-and-application essay."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "obliges",
+      "passage_use": "The difference lies in what a grammar obliges.",
+      "meaning_here": "compels as a condition of speaking at all, leaving the speaker no way round it",
+      "difficulty": "medium"
+    },
+    {
+      "word": "congenial",
+      "passage_use": "It is a congenial picture and it does not fit the findings",
+      "meaning_here": "agreeable to the mind; easy and pleasant to believe",
+      "difficulty": "hard"
+    },
+    {
+      "word": "attended",
+      "passage_use": "not what can be thought but what is routinely attended to",
+      "meaning_here": "noticed and kept in mind as a matter of course",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A familiar debate, handled unusually. The passage rejects the version of the claim you have probably met, and then makes a smaller one. Keep track of which version is which.",
+    "one_sentence_summary": "Speakers of different languages really do notice different things about the same event, but not because their grammar forbids certain thoughts; it is because a grammar that obliges a distinction makes its speakers settle that question thousands of times a day, and repetition turns settlement into a habit of attention.",
+    "main_idea": "Language does not limit what people can think. What it can do is force them to settle certain questions every time they speak. Do that often enough and you are in the habit of noticing something that speakers of other languages have no particular reason to notice. The differences researchers find are differences of habit, not of ability.",
+    "simple_explanation": "People often ask whether your language controls your thinking. Asked in the strongest way — can a language stop you having a thought? — the answer seems to be no. People translate, borrow words and explain things, and no idea has been found that gets stuck at a border.\n\nBut there is a smaller question that does have an answer. When researchers ask speakers of different languages to sort pictures or describe a remembered scene, the speakers sometimes pay attention to different parts of the same event, over and over, without realising they are doing it.\n\nThe popular explanation is that grammar builds walls: if your language has no room for an idea, you cannot really think it. That is a nice picture and it is wrong. Take a speaker whose language does not mark some distinction, show it to them, explain it, ask them about it, and they handle it perfectly well. Nothing is missing from their heads.\n\nWhat is different is habit, and the cause is obligation. Every language can express anything; only some force you to express particular things every time. Imagine a language where you cannot say 'the vase broke' without also saying whether you saw it happen or were told. Then you have to decide how you know, every single time, whether or not you care. Do that thousands of times a day for years, and the question of how you know is already answered before anyone asks it.\n\nThis explains the results without any walls. It also predicts something the wall story does not: the difference between speakers should be biggest when they are about to speak and much smaller when the task has nothing to do with language. That is what researchers find. So a language does not decide what you may think. It decides what you must have thought about by the time your sentence ends.",
+    "why_difficult": "The difficulty is not in the vocabulary but in holding two similar-sounding claims apart. The passage states a strong claim, rejects it, and then makes a weaker one that uses many of the same words, so a reader who remembers the topic rather than the argument will carry the rejected version into the questions. The image of walls is the most vivid thing in the piece, and it belongs to the view the author refuses, which is exactly why it appears among the options as a title and as an answer.",
+    "author_intention": "To rescue a real finding from an exciting but false explanation, and to leave the reader with a mechanism plain enough to use: obligation, repetition, habit.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0039-p1",
+        "role": "Sets the finding",
+        "note": "The big version of the question has no answer worth having. The smaller one does: speakers of different languages notice different parts of the same event, consistently."
+      },
+      {
+        "paragraph_id": "rc-0039-p2",
+        "role": "Refuses the popular account",
+        "note": "The idea that grammar walls off thought is attractive and does not match the evidence. Show an unmarked speaker the distinction and they draw it perfectly."
+      },
+      {
+        "paragraph_id": "rc-0039-p3",
+        "role": "Gives the explanation",
+        "note": "Some grammars force you to settle a matter before a sentence can end. Do that thousands of times a day and you have already decided before you are asked."
+      },
+      {
+        "paragraph_id": "rc-0039-p4",
+        "role": "Tests and lands it",
+        "note": "Habit, not limitation. The account predicts the effect shrinks in tasks that are not about speaking, which is what is observed, and the passage closes on the distinction it has been defending."
+      }
+    ],
+    "tone_progression": "Level and slightly impatient with the way the question is usually posed, then firmly corrective in the second paragraph, and finally calm and confident, closing on a neat pair of sentences rather than a flourish.",
+    "key_transitions": [
+      "'But there is a smaller question underneath the large one' (paragraph 1) — the unanswerable question is swapped for an answerable one.",
+      "'It is a congenial picture and it does not fit the findings.' (paragraph 2) — the popular explanation is refused.",
+      "'The difference lies in what a grammar obliges.' (opening of paragraph 3) — the author's own account begins."
+    ],
+    "misunderstanding": "Readers in a hurry come away believing the passage says language shapes thought in the usual strong sense, because the walls image is the thing they remember and the passage certainly says that language makes a difference. The actual claim is narrower and more interesting: the difference is in what speakers routinely attend to, built by a requirement they cannot avoid, and it fades when speaking is not involved. Anyone whose summary contains 'cannot think' has summarised the view the author rejects.",
+    "traps_summary": "Three moves are punished here. Taking the rejected picture as the thesis, which the title question and the NOT-true question both test. Turning a habit into a universal rule, since a lifelong habit sounds as if it must operate everywhere. And rejecting a true statement because it is paraphrased or stated from the opposite end of a comparison. Check each option against a sentence, not against your memory of the topic.",
+    "reading_lesson": "When an author states a familiar view before disagreeing with it, mark that view at once and keep it marked. Its vocabulary will come back in the options, because a wrong answer built from the passage's own memorable words is the cheapest trap there is. The test is never whether the words appeared, but whose claim they were serving.",
+    "real_world": "Any form that will not let you proceed without answering a question does the same work as such a grammar: filling it in often enough makes you notice something you would otherwise have passed over, which is why the design of forms is quietly powerful.",
+    "takeaway": "A language does not limit what you can think; it decides what you cannot leave unsettled.",
+    "reflection_question": "What question does your daily routine force you to answer so often that you have stopped noticing you are answering it?"
+  }
+}

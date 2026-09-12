@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0029",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "education",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Quiz That Teaches",
+    "theme": "why recalling material is a better way to learn it than reading it again, and why the effort is the point",
+    "estimated_time_sec": 80,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "abstract_to_concrete",
+    "cohesion_signals": ["lexical_repetition", "article_given_new", "connective_explicit", "demonstrative"],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": [],
+    "dna_traits": ["surface_matching", "opener_heuristic"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 2,
+      "competing_endings": 2,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "D",
+    "learning_objective": "break a pair of sentences that share a word by asking what a definite phrase such as 'the method' actually needs",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.lexical_chain", "disc.given_new", "disc.transition_word"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The engineered rival glues the two sentences that use the language of retrieval and pushes the student's twenty minutes to the end. It fails because the sentence about discomfort speaks of 'the method', and a mechanism is not a method: the only practice described anywhere in the set is closing the book and writing down what you can remember, so that sentence has to come first. The sentence about the deepening path cannot open either, since it is introduced as 'The reason', which requires a claim already made.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of retrieval practice in learning; no specific study adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy-tier jumble that teaches the anchor-pair defence in its mildest form. Two sentences share the vocabulary of retrieval and look inseparable; the tail is settled by one definite phrase. Written so that a solver who reads for reference rather than for repetition gets it quickly."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The reason is mechanical: every time a fact is retrieved rather than reread, the path back to it is cut a little deeper.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "B",
+      "text": "The discomfort of trying to retrieve something is not a sign that the method is failing; it is the method working.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Hence the student who shuts the book and writes down what she can remember learns more in twenty minutes than the one who reads the chapter twice.",
+      "role": "example"
+    },
+    {
+      "label": "D",
+      "text": "Memory is strengthened less by putting information in than by taking it out again.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "A", "C", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "A",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "A opens 'The reason is mechanical', which requires a claim to explain. D has just made one, and A restates it as a process: taking information out becomes retrieving a fact, and the strengthening becomes a path cut deeper."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "C's 'Hence' draws a practical consequence from the mechanism A describes. The student who writes from memory is retrieving; the one who rereads is not."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "B refers to 'the method', and the only method anywhere in the paragraph is the one C has just described: shut the book and write down what you can remember. B then corrects the natural objection to it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph starts with a claim about memory in the abstract, gives the mechanism behind it, turns the mechanism into something a student can actually do, and ends by defending that practice against the way it feels. Each step is narrower than the one before, and the last sentence is the only one addressed to the learner's experience.",
+    "movement": [
+      { "label": "D", "why_here": "D is the claim, and it is the only sentence that refers to nothing earlier. It also supplies the contrast — putting in against taking out — that every later sentence relies on." },
+      { "label": "A", "why_here": "A explains D. Its opening words announce an explanation, so the thing explained has to be in place, and the path cut deeper is the mechanism behind the claim just made." },
+      { "label": "C", "why_here": "C turns the mechanism into advice, with 'Hence' marking the step from how memory works to what a student should do. It is also the sentence that first names a practice." },
+      { "label": "B", "why_here": "B defends that practice, and it needs the practice to exist before it can call it a method. Ending here leaves the learner with the one thing most likely to make them abandon the technique." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DABC",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences use the language of retrieval, one saying the path is cut deeper each time a fact is retrieved and one saying the discomfort of trying to retrieve something is the method working. The repetition makes them look like a pair that has to stay together, and the student example then reads as a closing illustration.",
+        "where_it_breaks": "The sentence about discomfort says 'the method'. A path cut deeper is a mechanism, not a method, and the only method in the paragraph is shutting the book and writing from memory. That sentence must therefore stand before the one about discomfort, whatever the shared vocabulary suggests."
+      }
+    ],
+    "trap_named": "The trap is an anchor pair: two sentences joined in the solver's mind by a repeated word, so firmly that the pair is moved around the paragraph as a single block. The defence is to ask what each sentence needs rather than what it echoes. Here one sentence needs a method to refer to, and the sentence supplying a method is not the one that shares its vocabulary.",
+    "solving_habit": "When two sentences seem welded together by a repeated word, test the weld: ask whether either of them contains a definite phrase that the other cannot satisfy. If it does, the pair is a decoy and something has to come between them."
+  },
+  "mentor": {
+    "challenge": "Two sentences here share a word and feel like a pair. One of them mentions a method; make sure a method has been described first.",
+    "paragraph_plain": "You remember things better by getting them out of your head than by putting them in again. The reason is physical: each time you actually recall a fact instead of rereading it, the route back to that fact is worn a little deeper. So a student who closes the book and writes down everything she can remember learns more in twenty minutes than one who reads the chapter through twice. And the unpleasant strain of trying to recall something is not the technique going wrong; it is the technique doing its work.",
+    "takeaway": "A repeated word suggests a pair. A definite phrase like 'the method' proves an order."
+  }
+}

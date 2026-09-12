@@ -1,0 +1,524 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0044",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "mathematics-logic",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "elite",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "application",
+      "causal-reasoning",
+      "trap-recognition"
+    ],
+    "word_count": 690,
+    "question_count": 6,
+    "question_types": [
+      "agree_disagree",
+      "application",
+      "inference",
+      "primary_purpose",
+      "role_of_detail",
+      "specific_detail"
+    ],
+    "theme": "the gambler's fallacy and the expectation of a streak as one habit meeting two assumptions about the source, and why only one of the pair is an invalid inference",
+    "estimated_time_min": 11.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "The hardest item in the batch. Everything depends on which assumption about the source yields which expectation, and the two are easy to swap under time pressure; the application question is built to punish exactly that swap. The final paragraph breaks the symmetry the rest of the passage has been building, which is where the agreement question lives.",
+    "length_class": "long",
+    "structure": "view_critique_replacement",
+    "viewpoints": 2,
+    "tone": "exact, quietly contrarian",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.view_critique_replacement",
+      "struct.claim_evidence",
+      "struct.definition",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "comp.purpose",
+      "comp.organization",
+      "arg.evidence",
+      "arg.causal_claim",
+      "arg.principle",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.necessary",
+      "inf.author_view_application",
+      "inf.author_vs_reported",
+      "elim.predict_first",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the rival describes the error rather than the explanation of it — a failure to grasp that a wheel has no memory — and the passage names the explanation exactly, as the expectation that a short stretch shows a long one's proportions. Q2: the rival treats the same-evening detail as evidence of how common the errors are; the sentence after it states its job, that whatever generates the expectation generates both, which is an argument about explanatory adequacy rather than about prevalence. Q3: the near-tie reverses the mapping, giving continuation to the fixed-mechanism assumption; the third paragraph attaches continuation to the unknown generator and temporariness to the known character. Q4: the same reversal is the live rival in the applied case, and the second observer's drifted machine is by construction a generator still being estimated, so the run is information rather than a departure. Q5: the strongest rival says streak expectations are always justified; the closing paragraph grants only that the inference is valid in form and then names two ways it goes wrong in fact — a steadier generator than it looked, or an effect too small to show in four attempts. Q6: the rival offers the standard account as the passage's own position, which the second paragraph declares under-determined.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "under-determined",
+      "memoryless",
+      "generator"
+    ]
+  },
+  "passage": {
+    "title": "Due for a Change",
+    "reading_time_min": 3.5,
+    "paragraphs": [
+      {
+        "id": "rc-0044-p1",
+        "text": "Two errors of expectation are usually taught as a matched pair. In the first, a run of one result raises the expectation of the other: the wheel has come up red six times, so black is due. In the second, a run of one result raises the expectation of more of the same: the player has scored four in a row, so the fifth will go in as well. They point in opposite directions, and the textbooks explain both with a single mistaken belief, the one usually called the law of small numbers — the expectation that a short run of results will show the proportions of a long one. A short stretch that looks lopsided feels wrong, and the mind does something about it."
+      },
+      {
+        "id": "rc-0044-p2",
+        "text": "The trouble with this account is not that it is false but that it is under-determined. A belief about how short runs ought to look will tell you that a lopsided run is unusual. It will not tell you which way to lean next, and the two errors lean opposite ways. Nor is the difference a difference between people. The same person, on the same evening, will wait for black at the wheel and back the player who cannot miss, without any sense of having changed his mind about anything in between. Whatever produces the expectation is producing both of them, and it is being switched by something in the situation rather than by anything in the belief."
+      },
+      {
+        "id": "rc-0044-p3",
+        "text": "What switches is not a belief about sequences but a belief about sources. Consider what a run is taken to be evidence of. If the results are believed to come from a mechanism whose character is fixed and already known — a wheel, a coin, a well-made die — then there is nothing further to learn about the source, and a run can only be a departure from a character we already have on file. Departures from a known character are expected to be temporary. If instead the results are believed to come from an agent whose character is unknown and capable of changing — a player, a fund manager, a forecaster — then the run is not a departure from anything. It is information about a generator we are still trying to estimate, and information accumulates: six results in one direction are better evidence than three."
+      },
+      {
+        "id": "rc-0044-p4",
+        "text": "So the two errors are one habit meeting two assumptions. The habit is identical in both cases: a run means something, and what it means bears on what comes next. What differs is what there is to be meant. Under the first assumption the only thing a run can report is noise, and noise is expected to average out. Under the second the only thing a run can report is the generator, and evidence about a generator is expected to persist. Neither expectation asks the reasoner to change his view of probability. It asks him only to classify the thing in front of him, which he does instantly and without noticing that he has done it."
+      },
+      {
+        "id": "rc-0044-p5",
+        "text": "This has an awkward consequence for the matched pair, because it makes the two members unequal. Treating a run as a deviation from a known and memoryless mechanism is a mistake of a definite kind. The source has been classified correctly, and the inference drawn from the classification is simply invalid, since a mechanism that keeps no record has no means of restoring a balance it does not track. Treating a run as evidence about an unknown generator is not a mistake at all. It is what anyone estimating an unknown quantity does, and it is the whole of how a reputation is ever justly acquired. When it goes wrong it goes wrong elsewhere, in the classification rather than in the reasoning: the generator turns out to have been steadier than it looked, or the variation in it is real but far too small to show itself in four attempts. The pair should therefore be broken up. One member is an invalid inference. The other is a valid inference about a badly identified source, which is a different failure and needs a different cure."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0044-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "struct.definition"
+      ],
+      "target_mistake": "answering with a description of the error itself instead of the explanation of it that the passage names and then attacks",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the standard textbook account attributes both errors to",
+      "options": {
+        "A": "a failure to grasp that a wheel cannot remember what it has just done",
+        "B": "the belief that long runs occur less often than chance alone would produce",
+        "C": "the expectation that a short run of results will show the proportions of a long one",
+        "D": "the tendency to remember losses more vividly than wins of the same size"
+      },
+      "correct": "C",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The first paragraph names the standard account in one clause and defines it in the next: 'a single mistaken belief, the one usually called the law of small numbers — the expectation that a short run of results will show the proportions of a long one'. A detail question about a named account is answered from the sentence that names it.",
+        "correct_reasoning": "The correct option is that definition, word for word in substance. The passage needs the account stated precisely because its whole critique depends on what the belief does and does not deliver: a belief about how short runs ought to look can mark a run as unusual, and the second paragraph then argues that this is not enough to fix a direction.",
+        "passage_anchor": "rc-0044-p1",
+        "question_type_note": "Detail questions on a reported theory are settled by the sentence that states the theory; the decoys are true remarks about the phenomenon the theory was invented to explain.",
+        "reading_habit": "When a passage names a rival account, underline its definition immediately. The critique that follows will be aimed at the definition, and detail questions will test whether you took it down accurately.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "This describes what is wrong with the gambler's expectation, which the final paragraph does discuss, and not the explanation the textbooks give for why people form it; the passage's account of that explanation is about short runs resembling long ones.",
+            "seductive_element": "It is true of the passage and sits close to the last paragraph's decisive phrase about a mechanism that keeps no record."
+          },
+          {
+            "option": "B",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never compares how often long runs occur with how often chance would produce them; the belief it describes concerns what a short stretch is expected to look like, not the frequency of long stretches.",
+            "seductive_element": "It reuses the vocabulary of runs and chance and sounds like a technical statement of the same idea."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Memory for outcomes is nowhere in the passage, which explains the errors by what a run is taken to be evidence about rather than by how vividly any result is recalled.",
+            "seductive_element": "It is a familiar and plausible piece of psychology about gambling, and the passage's opening scene is a gambling table."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0044-q2",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.evidence",
+        "struct.claim_evidence"
+      ],
+      "target_mistake": "treating a detail offered as a test of an explanation as though it were offered to show how common the behaviour is",
+      "prediction_target": "The learner should be able to say before the options: this detail is there to rule out an explanation, because one belief held by one person at one time cannot point in two directions.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "The author notes that the same person, on the same evening, will wait for black at the wheel and back the player who cannot miss, chiefly in order to",
+      "options": {
+        "A": "show that a single mistaken belief cannot account for both errors at once",
+        "B": "establish that most people commit at least one of the two errors regularly",
+        "C": "concede that the standard explanation does succeed in the case of the wheel",
+        "D": "suggest that people reason less well when their own money is at stake"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The detail is bracketed by its job. Before it: the belief 'will not tell you which way to lean next, and the two errors lean opposite ways'. After it: 'Whatever produces the expectation is producing both of them.' The observation is doing logical work, not descriptive work.",
+        "correct_reasoning": "The correct option names that work. If the difference between the two errors were a difference between people, a single belief could still explain each of them separately, one belief in one head. The same person doing both, unaware of any change of mind, closes that escape: whatever produces the expectations is one thing and is being switched by the situation, which is precisely what the replacement account then supplies.",
+        "passage_anchor": "rc-0044-p2",
+        "question_type_note": "A role-of-detail question asks what a fact is for. Name the claim on either side of the detail first; the answer will be the option that makes the detail serve that claim.",
+        "reading_habit": "When a vivid particular appears in the middle of an argument, read the sentence after it before deciding what it is doing. Authors almost always say what a detail has just established.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "too_broad",
+            "why_wrong": "Nothing in the passage counts how many people make these errors or how often; the argument would work in exactly the same way if the person described were rare, since the point is that one belief cannot produce opposite expectations.",
+            "seductive_element": "The example is written as though it were an everyday scene, and everyday scenes read as claims about prevalence."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The sentence is an objection, not a concession; the passage does grant that the standard account is not false, but it does so two sentences earlier and for a different reason, and this detail is the part that presses the objection home.",
+            "seductive_element": "The passage really does concede something nearby — 'not that it is false but that it is under-determined' — so a concession is in the air."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "Both halves of the example involve money and the passage draws no contrast between staked and unstaked reasoning; its contrast is between a wheel and a player, that is, between two kinds of source.",
+            "seductive_element": "The scene is a gambler's evening, and it is natural to assume the stakes are the point of it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0044-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.necessary",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "swapping the two assumptions, so that a fixed and known mechanism is made to yield continuation and an unknown agent reversion",
+      "prediction_target": "The learner should predict that the direction of the expectation follows the assumption about the source, so an inference will pair the unknown, changeable source with continuation and the known, fixed one with reversion.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "application",
+        "scope"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "A person who treated a player as a mechanism of fixed and known character would expect a run of hits to continue.",
+        "B": "Knowing that a mechanism has no memory is enough to prevent the expectation of a correction.",
+        "C": "Longer runs produce stronger expectations of reversal than shorter runs do.",
+        "D": "A person who treated a wheel as an agent of unknown character would expect a run of reds to continue."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The third paragraph attaches an expectation to each assumption and not to each object. A known, fixed source makes a run 'a departure from a character we already have on file', and such departures 'are expected to be temporary'. An unknown, changeable source makes the run 'information about a generator we are still trying to estimate', and information accumulates.",
+        "correct_reasoning": "The correct option follows by running that rule on a swapped case. The passage's account locates the difference in the assumption, not in the apparatus: it says the reasoner has only to classify the thing in front of him. So a person who classified a wheel as an agent whose character is unknown would read six reds as information about that character and expect more of the same, exactly as the backer of the player does.",
+        "passage_anchor": "rc-0044-p3",
+        "question_type_note": "When a passage explains a difference by a variable rather than by an object, inference questions test whether you can hold the variable fixed and move the object; the trap is to keep the familiar pairing of object and expectation.",
+        "reading_habit": "Write the author's rule as an if-then with a blank where the example was. If an option merely repeats the example the author used, it is testing nothing; if it changes the example and keeps the rule, check the rule carefully.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "It runs the rule backwards. A fixed and known character makes a run a temporary departure, so a player classified that way would attract the expectation of a return to his usual rate, not of more hits.",
+            "seductive_element": "It is the near-tie: it keeps the player with continuation, which is the pairing the passage's opening example establishes, and only the assumption has been quietly switched."
+          },
+          {
+            "option": "B",
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "The final paragraph says the gambler has classified the source correctly and still draws the invalid inference, so knowing that the mechanism keeps no record plainly does not prevent the expectation.",
+            "seductive_element": "It sounds like the obvious remedy, and the passage does say memorylessness is why the inference fails."
+          },
+          {
+            "option": "C",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The passage grades evidence only on the other side of the contrast, saying six results are better evidence than three about an unknown generator; it never claims that longer runs strengthen the expectation of reversal.",
+            "seductive_element": "It borrows the passage's one explicit comparison between six and three and attaches it to the wrong half of the argument."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0044-q4",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "elim.predict_first"
+      ],
+      "target_mistake": "assigning the expectations by which observer sounds more sophisticated rather than by which assumption the passage attaches to each expectation",
+      "prediction_target": "The learner should extract the rule first: a source whose character is known and fixed makes a run a temporary departure, and a source still being estimated makes a run evidence that accumulates.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "inference",
+        "scope"
+      ],
+      "stem": "Two observers watch a machine that has just stamped out six faulty components in a row. They agree about everything except the machine itself: the first believes its settings were fixed at installation and are fully known, while the second believes it may have drifted out of adjustment in some way nobody has measured. On the passage's account, what should be expected of them?",
+      "options": {
+        "A": "The first expects the run of faults to end; the second expects it to continue.",
+        "B": "The first expects the run of faults to continue; the second expects it to end.",
+        "C": "Both expect it to continue, since six in a row is strong evidence either way.",
+        "D": "Neither expectation is affected, because the run of faults has already happened."
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The passage supplies a rule with two clauses, and the stem has been built to supply one observer for each. Fixed and fully known is the wheel's case; drifted in some unmeasured way is the player's case, translated into machinery.",
+        "correct_reasoning": "The correct option applies the rule mechanically. For the first observer there is nothing left to learn about the machine, so six faults can only be a departure from a character already on file, and departures from a known character are expected to be temporary. For the second, the machine is a generator still being estimated, so the six faults are information about it, and information accumulates; he expects more faults. The expectations differ although the observers have seen exactly the same run.",
+        "passage_anchor": "rc-0044-p3",
+        "question_type_note": "Application questions want the author's rule run on a case the author never saw. Extract the rule in the author's terms first, then match the new case's features to the rule's conditions, ignoring what sounds sensible about the case itself.",
+        "reading_habit": "Before you look at the options in an application question, decide which of the author's conditions the new case satisfies. If you cannot name the condition, you are about to answer from your own judgement rather than from the passage.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "It reverses both halves of the rule. A source whose character is settled and known yields the expectation of a temporary departure, and a source still being estimated yields the expectation that evidence will persist.",
+            "seductive_element": "It is the live rival, and the swap is easy because a machine in good order sounds like something that will keep doing what it is doing, while a faulty one sounds like something waiting to be fixed."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage makes the strength of a run's evidence depend entirely on the assumption about the source; under the first observer's assumption there is nothing for the run to be evidence about, however long it is.",
+            "seductive_element": "Six in a row genuinely is a striking run, and the passage itself says six results are better evidence than three."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The whole passage is about how a completed run changes expectations about what comes next; that a run has already happened is true of every case it discusses, including the wheel and the player.",
+            "seductive_element": "It sounds like the rigorous, unfooled answer, and refusing to be moved by a past run is what the gambler's fallacy is usually said to require."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0044-q5",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_vs_reported",
+        "arg.qualification",
+        "elim.near_tie"
+      ],
+      "target_mistake": "converting the author's claim that one inference is valid in form into the claim that its conclusions are generally right, or attributing the replaced account to the author",
+      "prediction_target": "The learner should be able to say: the author breaks the pair apart, calling one member invalid and the other a sound form of inference that can be applied to a badly identified source.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "The author would be most likely to agree with which one of the following?",
+      "options": {
+        "A": "The expectation that a run will continue is always justified, since agents really do vary in form.",
+        "B": "Both errors grow from one false belief about how a short run of results ought to look.",
+        "C": "Reading a run as evidence about a source whose character is unknown is not in itself a mistake.",
+        "D": "Gamblers would do better to treat the wheel as an agent whose character is still unknown."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The final paragraph stops treating the two errors as a pair. One is 'a mistake of a definite kind' and 'simply invalid'; the other 'is not a mistake at all' and 'is what anyone estimating an unknown quantity does'. Agreement questions on this passage are decided there.",
+        "correct_reasoning": "The correct option is the author's own verdict on the second member, kept at the author's strength. The passage endorses the form of the inference — treating a run as evidence about a generator still being estimated — and separately allows that it can be misapplied when the source turns out to be steadier than it looked or the variation too small to show. Saying it is not in itself a mistake keeps the endorsement and leaves room for the misapplication.",
+        "passage_anchor": "rc-0044-p5",
+        "question_type_note": "An agreement question turns on the difference between what an author reports and what an author holds, and on strength: the right option usually states the author's claim at exactly the level of confidence the text does.",
+        "reading_habit": "Mark the sentence where a passage stops being symmetrical. Writers who set up a matched pair and then break it are telling you which member they will defend, and that is the sentence agreement questions are built from.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage defends the form of the inference and then lists two ways it goes wrong in fact: the generator may have been steadier than it looked, and the variation may be real but far too small to show in four attempts. Always justified is a claim the same paragraph refuses.",
+            "seductive_element": "It is the near-tie, differing from the author's position by a single word of strength while keeping everything else the passage says."
+          },
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the account the passage sets out in order to replace, and the second paragraph explains why the author will not hold it: a belief about how short runs look cannot fix a direction, and the two errors point opposite ways.",
+            "seductive_element": "It is stated first, stated clearly, and never called false, since the objection is that it is under-determined rather than mistaken."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "On the author's account the wheel's character really is known and fixed, so classifying it as an unknown agent would be a misidentification of exactly the kind the last paragraph names as the second error's failure mode.",
+            "seductive_element": "The passage does treat the second kind of inference as sound, which invites the reader to recommend it everywhere."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0044-q6",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.view_critique_replacement"
+      ],
+      "target_mistake": "naming the topic of the passage instead of the operation performed on it, or crediting the author with the account the passage displaces",
+      "prediction_target": "The learner should be able to say: the author is displacing an explanation that cannot deliver two opposite errors and putting in its place one that derives both from a single habit plus an assumption about the source.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to explain why a long run of identical results makes people uncomfortable",
+        "B": "to replace an explanation that cannot yield two opposite errors with one that derives both",
+        "C": "to defend the law of small numbers as the common source of both familiar fallacies",
+        "D": "to argue that statistics should be taught by kinds of source rather than kinds of sequence"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage has three movements and announces each. A view is stated in the first paragraph; the second says it is under-determined and shows why; the third opens 'What switches is not a belief about sequences but a belief about sources', which is the replacement. A purpose statement has to contain all three.",
+        "correct_reasoning": "The correct option names the operation rather than the topic. The objection to the standard account is specific — it cannot yield two opposite expectations from one belief — and the replacement is built to meet exactly that objection, deriving both errors from one habit applied under two assumptions about the source. That is why the passage is organised as it is, and why it ends by dividing a pair that the account it replaced had joined.",
+        "passage_anchor": "rc-0044-p3",
+        "question_type_note": "In a view-critique-replacement passage the purpose is the replacement, stated together with what it replaces; an option that describes only the phenomenon or only the rejected view is describing a part.",
+        "reading_habit": "When a passage attacks an explanation, write down precisely what it says the explanation fails to do. The author's own account will be built to do that thing, and the purpose is the pair of them together.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "Discomfort at a lopsided run belongs to the rejected account, where it appears in a single sentence; the passage's own work begins once that account has been declared insufficient, and it is about what a run is taken to be evidence of.",
+            "seductive_element": "It describes the passage's subject matter accurately and sounds like a modest, safe statement of what the piece is about."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "The passage displaces this account rather than defending it, calling it under-determined and showing that a belief about short runs cannot decide which way an expectation will lean.",
+            "seductive_element": "The account is stated respectfully and is explicitly not called false, which can read as endorsement."
+          },
+          {
+            "option": "D",
+            "trap_type": "sophisticated_sounding",
+            "why_wrong": "No claim about teaching appears anywhere; the closing recommendation is about how the two errors should be classified and cured, which is an analytical conclusion rather than a proposal for a curriculum.",
+            "seductive_element": "It borrows the passage's real contrast between sources and sequences and dresses it as a methodological programme, which sounds like the kind of thing such a passage would conclude."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "under-determined",
+      "passage_use": "not that it is false but that it is under-determined",
+      "meaning_here": "not settling the matter; consistent with more than one outcome, so it cannot pick one",
+      "difficulty": "hard"
+    },
+    {
+      "word": "memoryless",
+      "passage_use": "a deviation from a known and memoryless mechanism",
+      "meaning_here": "keeping no record of its own past results, so that nothing carries over",
+      "difficulty": "medium"
+    },
+    {
+      "word": "generator",
+      "passage_use": "information about a generator we are still trying to estimate",
+      "meaning_here": "whatever is producing the results, considered as a thing with a character of its own",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two familiar mistakes, an explanation for them, and then an argument that the explanation cannot be right. Keep track of which assumption about the source produces which expectation, because every hard question in this set depends on that pairing.",
+    "one_sentence_summary": "The gambler waiting for black and the punter backing a streak are not two beliefs but one habit — a run means something — applied under two different assumptions about the source, and once that is seen the pair comes apart, because reading a run as evidence about an unknown generator is sound reasoning while reading it as a debt owed by a memoryless mechanism is not.",
+    "main_idea": "Both errors come from the same move: treating a run as informative. What decides the direction is what the reasoner assumes about the thing producing the results. A fixed, known mechanism turns a run into a temporary deviation, so reversal is expected. An unknown, changeable agent turns a run into evidence, so continuation is expected. Only the first is a genuinely invalid inference; the second is good reasoning about a source that may have been misidentified.",
+    "simple_explanation": "Two mistakes usually get taught together. One: the wheel has come up red six times, so black must be due. Two: the player has scored four in a row, so he will score again. They point in opposite directions, and textbooks blame both on one wrong idea — that a short run should look like a long one.\n\nThe writer says that cannot be the whole story. That wrong idea tells you a lopsided run is odd. It does not tell you which way to bet next, and the two mistakes bet opposite ways. And you cannot say different people make different mistakes, because the same man on the same night waits for black at the table and puts money on the hot player, and feels no contradiction at all.\n\nSo what changes between the two moments? Not a belief about runs. A belief about where the results are coming from.\n\nIf you think the source is a machine whose character is fixed and already known — a wheel, a coin — then there is nothing left to learn about it. A run can only be a wobble away from what you already know it is, and wobbles are expected to settle down. If you think the source is a person or a fund or a forecaster whose character is unknown and might change, then a run is not a wobble. It is information about someone you are still working out, and information piles up: six results tell you more than three.\n\nSame habit, two assumptions. And the reasoner never notices he has made an assumption; he just classifies the thing in front of him, instantly.\n\nThe sting comes last. The two are not equally wrong. The gambler has classified the wheel correctly and then reasoned badly, because a machine that keeps no record cannot owe anybody a balance. The streak-backer has reasoned perfectly well: working out what something is like from what it has done is how every reputation is earned. When that goes wrong, it goes wrong because the source was misjudged — steadier than it looked, or varying by too little to show in four tries. One is a broken argument. The other is a good argument pointed at the wrong thing, and they need different fixes.",
+    "why_difficult": "The passage asks the reader to hold a two-branch rule and to keep each branch attached to the right expectation, and the natural associations pull the other way: a well-made machine sounds like something that will carry on, and a person on a streak sounds like someone due to come down. Once the branches are swapped, three questions in the set go wrong together. A second difficulty is the ending, which breaks the symmetry the passage has been carefully building and does so without announcing itself as a reversal: after four paragraphs treating the two errors as one phenomenon, the fifth says they are not equal, and readers who have filed the passage under 'both are the same' will miss the verdict.",
+    "author_intention": "To show that an explanation everybody accepts cannot do the job it is given, and to replace it with one that not only covers both cases but tells the reader which of the two is genuinely a failure of reasoning.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0044-p1",
+        "role": "States the view",
+        "note": "Two opposite errors, taught as a pair, and the standard explanation: people expect a short run to look like a long one."
+      },
+      {
+        "paragraph_id": "rc-0044-p2",
+        "role": "Shows it cannot work",
+        "note": "That belief cannot pick a direction, and the two errors point opposite ways. The same person does both on the same evening, so it is not a difference between people either."
+      },
+      {
+        "paragraph_id": "rc-0044-p3",
+        "role": "Supplies the replacement",
+        "note": "What changes is the assumed source. A fixed, known mechanism makes a run a temporary wobble; an unknown, changeable agent makes it evidence that accumulates."
+      },
+      {
+        "paragraph_id": "rc-0044-p4",
+        "role": "Names the common habit",
+        "note": "One habit — a run means something — meeting two assumptions. The reasoner classifies the source instantly and without noticing, which is where the direction comes from."
+      },
+      {
+        "paragraph_id": "rc-0044-p5",
+        "role": "Breaks the pair",
+        "note": "The two are unequal. One is an invalid inference from a correctly classified source. The other is valid reasoning about a source that was identified badly, and needs a different cure."
+      }
+    ],
+    "tone_progression": "Expository and unhurried while the standard account is laid out, sharper and more insistent through the objection, then explanatory in the middle, and finally decisive: the last paragraph passes judgement twice and closes with an instruction about how the two should be filed.",
+    "key_transitions": [
+      "'The trouble with this account is not that it is false but that it is under-determined.' (opening of paragraph 2) — the critique begins, and its exact charge is named.",
+      "'What switches is not a belief about sequences but a belief about sources.' (opening of paragraph 3) — the replacement arrives.",
+      "'This has an awkward consequence for the matched pair, because it makes the two members unequal.' (opening of paragraph 5) — the symmetry the passage built is deliberately broken."
+    ],
+    "misunderstanding": "The commonest wrong picture is the tidy one: two symmetrical errors, one underlying cause, everybody equally deceived. Four paragraphs encourage it and the fifth destroys it, which means a reader who is skimming by then will carry away the opposite of the author's conclusion. The second common error is a swap: because the passage's examples are a wheel and a player, readers remember wheel-with-reversal and player-with-continuation as facts about wheels and players, when the passage insists they are facts about how the reasoner has classified the source. Every question that moves the example to a new object is built to detect that swap.",
+    "traps_summary": "Three habits are punished. Reversing a two-branch rule, which is the single most expensive mistake available here and appears in both the inference and the application questions. Adopting the displaced account, which is stated respectfully and never called false. And inflating the author's careful endorsement of one inference into a claim that its conclusions are usually right, when the same paragraph names two ways it fails.",
+    "reading_lesson": "When an author explains a difference by a variable rather than by the objects in the examples, rewrite the rule with the objects removed: if the source is assumed to be X, then Y is expected. Doing this once costs ten seconds and immunises you against every question that changes the example, which in a passage of this kind is most of them. The examples are there to make the rule visible; they are not the rule.",
+    "real_world": "The same fork appears whenever a result has to be judged: a bad quarter at a company, a run of wins by a team, three rejected applications. The question that decides everything is whether the thing producing the results has a character you already know or one you are still learning.",
+    "takeaway": "Before asking what a run means, ask what you have quietly assumed about the thing that produced it.",
+    "reflection_question": "When you last read a run of results as a sign of what was coming, were you learning about the source or expecting it to settle back to a character you had already assigned it?"
+  }
+}

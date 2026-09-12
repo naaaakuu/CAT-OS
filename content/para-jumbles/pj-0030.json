@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0030",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "The Cost of Making a Deal",
+    "theme": "why so much economic activity is organised by instruction inside firms rather than by prices in a market",
+    "estimated_time_sec": 165,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["article_given_new", "demonstrative", "connective_implicit", "lexical_repetition"],
+    "primary_trap": "generic_the",
+    "secondary_traps": ["lexical_decoy", "competing_ending"],
+    "dna_traits": ["surface_matching", "global_tracking", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 2,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "make a sentence beginning 'The reason is' explain the sentence it actually answers, not the nearest sentence that shares its vocabulary",
+    "reasoning_patterns": ["disc.given_new", "disc.demonstrative", "disc.problem_then_solution", "disc.general_to_specific", "struct.phenomenon_explanation"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The designed rival puts the sentence beginning 'The reason is' immediately after the opening claim about prices, because both sentences are about markets and prices and a definite article invites attachment to the nearest plausible antecedent. It fails twice. Read there, the sentence would be giving the reason why prices coordinate strangers well, when what it actually says is that using them is costly, which is close to the opposite. And the closing sentence speaks of 'those costs', which would then have nothing to point at, since the sentence before it names no costs at all. A second rival moves the definition of a firm up to third place and ends on the list of costs, which strands the same demonstrative.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General economics of firms and transaction costs; no specific text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-plus jumble built on definite articles. Three sentences open with the — the claim, the reason, and a demonstrative pointing at costs — and each points at a different antecedent. The decoy is a pair of sentences that share the vocabulary of markets and prices while answering different questions."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The reason is that using the market is itself expensive: finding a supplier, agreeing a price, writing a contract that anticipates what neither party can foresee.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "B",
+      "text": "A firm is what appears wherever those costs exceed the cost of simply telling somebody what to do, and its boundary is drawn exactly there.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "The claim leaves an awkward fact unexplained: most of the work done in any economy is not coordinated by prices at all, but by instructions issued inside firms.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "Economists explain a great deal by saying that prices coordinate strangers better than any planner could.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "C", "A", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "C opens 'The claim', a definite reference to the proposition D has just stated, and then produces a fact that the proposition cannot account for. Nothing else in the set is a claim in that sense."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "A answers the awkward fact C has raised: work is organised by instruction because dealing through the market costs something. Read anywhere else, the sentence would be explaining why prices coordinate well, which is not what it says."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "B speaks of 'those costs', and the costs are the three A has just listed: finding a supplier, agreeing a price, writing a contract against an unforeseeable future. The demonstrative fixes B immediately after A."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph begins with a general proposition, produces the fact that embarrasses it, explains the fact, and then converts the explanation into a definition. It reads as a small piece of detective work, and like most detective work it cannot be reordered: the awkward fact must arrive before its explanation, and the definition must arrive after the thing it defines has been made necessary.",
+    "movement": [
+      { "label": "D", "why_here": "D is the only sentence that states something outright rather than referring to something stated. It is also the proposition the rest of the paragraph qualifies, which is why it has to be first." },
+      { "label": "C", "why_here": "C is the turn, and its opening phrase names what it is turning against. It replaces the comfortable picture with a fact about where work is actually coordinated, and that fact is what the next sentence has to explain." },
+      { "label": "A", "why_here": "A explains C. Placed anywhere earlier it would appear to explain the coordinating power of prices, when what it reports is the cost of using them, and the paragraph would contradict itself at the second sentence." },
+      { "label": "B", "why_here": "B converts the explanation into a definition and closes. 'Those costs' ties it to A's list, and a boundary drawn exactly there is the last thing the paragraph has to say." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DACB",
+        "trap_type": "generic_the",
+        "why_tempting": "The sentence beginning 'The reason is' talks about markets, prices and suppliers, and so does the opening sentence. A definite article looks for the nearest antecedent it can use, and here the nearest one is available and on the same subject.",
+        "where_it_breaks": "In that seat the sentence gives the reason why prices coordinate strangers well, and what it actually says is that using them is expensive. The paragraph would be contradicting itself in two sentences. The closing sentence then strands too, since 'those costs' would point at a sentence about instructions inside firms, which names no costs."
+      },
+      {
+        "order": "DCBA",
+        "trap_type": "competing_ending",
+        "why_tempting": "The list of costs is concrete and specific, and specific things make satisfying endings; the definition of a firm looks like a piece of theory that should be got out of the way as soon as the puzzle has been set.",
+        "where_it_breaks": "'Those costs' has nothing to refer to when the list of costs comes after it. A demonstrative cannot point forwards, and the definition would be resting on an antecedent the reader has not yet been given."
+      }
+    ],
+    "trap_named": "The trap is the generic definite article. English uses 'the' both for things already named and for things named in general — the market, the firm, the consumer — and a setter can exploit the ambiguity by writing a sentence whose 'the' looks like a backward reference to the nearest sentence on the same subject. The defence is to read what the sentence claims, not what it is about: a sentence beginning 'The reason is' has to be a reason for something specific, and only one sentence in the set will have asked for it.",
+    "solving_habit": "For every sentence that opens with 'The reason', 'The claim' or 'The answer', state in your own words what question it answers, and then find the sentence that asks exactly that question. Subject matter will suggest several candidates; the question will leave one."
+  },
+  "mentor": {
+    "challenge": "Two sentences here are about markets and prices, and they must not be neighbours. Ask what question each one answers before you place it.",
+    "paragraph_plain": "Economists often explain things by pointing out that prices coordinate strangers better than any planner could manage. That leaves an uncomfortable fact unaccounted for: most work in any economy is not coordinated by prices at all, but by people inside firms being told what to do. The explanation is that using the market costs something in itself — you have to find a supplier, settle a price, and write a contract covering things neither side can predict. A firm is simply what appears wherever those costs are higher than the cost of giving an instruction, and that is exactly where its boundary lies.",
+    "takeaway": "'The reason is' must answer a question the paragraph has actually asked, not merely change the subject to something it has mentioned."
+  }
+}

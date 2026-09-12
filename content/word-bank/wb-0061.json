@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wb-0061",
+    "type": "wb",
+    "version": 1,
+    "status": "accepted",
+    "kind": "connotation",
+    "band": "stretch",
+    "title": "Connotation · the colour the sentence has already chosen",
+    "item_count": 20,
+    "estimated_time_sec": 40,
+    "source": { "publication": "original", "usage_note": "Every sentence, option and explanation composed for CAT OS. Personal study only." },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wb-002",
+    "reviewer_notes": "The second connotation bundle, a band harder than the core set. Each sentence contains its own verdict — a consequence, a clause of concession, a gloss after a colon, an explicit denial — and the four options share a denotation while differing in what they think of it. The rivals are not slang: they are respectable words whose approval, disapproval, intensity or scope the sentence has already excluded.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Item 2 (the biography): 'pragmatism' is the live rival, since a reader can argue that changing party is a practical response to circumstance; it dies on 'always towards the side that was winning', which names advantage, not what works, and on 'honest about', which announces a fault. Item 11 (the bank): 'prudence' is the strongest rival and would be the answer in almost any other sentence; here the sentence assigns that verdict to a later date, so putting it in the blank makes the sentence say that wisdom looked like wisdom afterwards. Item 14 (the negotiations): 'taciturn' is the near-tie, separated only by scope — the phrase 'about the negotiations' restricts the silence to one subject, and taciturnity is a standing trait that cannot be restricted. Item 15 (the headquarters): 'replica' attracts readers who take 'a Venetian palace' as a particular original; the clause about nobody being deceived rules out exactness and fraud together. Item 19 (the book): 'chauvinistic' is defensible until 'without being blind' is read as a concession, at which point the option contradicts the very thing conceded. Item 12 was rewritten so that no option is excluded by the article before the blank.",
+      "blind_solve": null
+    }
+  },
+  "items": [
+    {
+      "id": "wb-0061-01",
+      "word": "thrift",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "He ran the department on very little money, and his staff admired the ____ that made it possible.",
+      "options": { "A": "thrift", "B": "parsimony", "C": "penury", "D": "meanness" },
+      "correct": "A",
+      "explanation": {
+        "clue": "'His staff admired' is the sentence's own verdict, and 'made it possible' says the little money was enough. The word denotes spending little; its colouring has to be one that admiration can attach to.",
+        "correct_reasoning": "Careful management that makes resources go further is the only reading of this family that can be praised, and the relative clause insists that the department went on running. Economy that works is a virtue, and the sentence has already called it one.",
+        "distractors": [
+          { "option": "B", "trap_type": "near_synonym_wrong_degree", "why_wrong": "Parsimony is economy carried past its use: it names spending less than the occasion requires. The sentence says the occasion was met." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "Penury is the condition of being desperately poor, something suffered rather than practised. It cannot name a way of running a department." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "Meanness is a moral fault, an unwillingness to give what one could. The sentence reports a shortage of money, not a shortage of generosity." }
+        ],
+        "method": "Find the sentence's own verdict — a word like 'admired', 'complained', 'unbearable' — and let it choose the colouring. The dictionary meanings will be nearly identical; only one of them can be praised."
+      }
+    },
+    {
+      "id": "wb-0061-02",
+      "word": "opportunism",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "elim.near_tie"],
+      "difficulty": 4,
+      "stem": "The biography is honest about his ____: he changed party three times in nine years, and always towards the side that was winning.",
+      "options": { "A": "adaptability", "B": "opportunism", "C": "pragmatism", "D": "versatility" },
+      "correct": "B",
+      "explanation": {
+        "clue": "'Honest about' announces that a fault is coming, and the colon supplies it: the changes always went one way, towards whoever was winning.",
+        "correct_reasoning": "Only one of these nouns says that advantage, rather than judgement, did the choosing, and the direction of the changes is the evidence for exactly that. A biography described as honest about a subject is conceding something discreditable, so the word must be the one that convicts.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "Adaptability praises a capacity to adjust to circumstances, which would make the three changes a strength. 'Honest about' has already ruled a strength out." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "Pragmatism claims the changes were made for practical results. The pattern reported is about who was winning, which is a claim about advantage, not about what works." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "Versatility is a range of abilities — a musician who plays four instruments well. It does not describe changes of allegiance at all." }
+        ],
+        "method": "Read the evidence after the colon as a test of the word, not as an illustration of it. If the evidence names a motive, only an option that names the same motive can survive."
+      }
+    },
+    {
+      "id": "wb-0061-03",
+      "word": "crowd",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "By nine o'clock a ____ of several hundred had gathered outside the town hall, orderly and in good humour.",
+      "options": { "A": "mob", "B": "swarm", "C": "crowd", "D": "rabble" },
+      "correct": "C",
+      "explanation": {
+        "clue": "The sentence ends by telling you how these people behaved: orderly, and in good humour. The noun must be the one that leaves that description possible.",
+        "correct_reasoning": "The neutral collective reports a number of people in one place and says nothing about how they conduct themselves, which is why the two adjectives can then do that work. Every other choice would contradict, in advance, the description the sentence goes on to give.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "A mob is disorderly and menacing by definition, and the sentence's 'orderly' takes the word away." },
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "A swarm is of insects; used of people it suggests a mindless mass in motion, not several hundred standing about in good humour." },
+          { "option": "D", "trap_type": "wrong_register", "why_wrong": "A contemptuous and old-fashioned word, the term of a writer looking down on the poor. The sentence passes no such judgement." }
+        ],
+        "method": "Read to the end of the sentence before choosing a noun for a group. Collective nouns carry verdicts, and the verdict has to agree with the adjectives the writer has already supplied."
+      }
+    },
+    {
+      "id": "wb-0061-04",
+      "word": "boyish",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "At sixty he kept a ____ delight in machinery of every kind, and his grandchildren adored him for it.",
+      "options": { "A": "childish", "B": "infantile", "C": "puerile", "D": "boyish" },
+      "correct": "D",
+      "explanation": {
+        "clue": "'Delight' and 'adored him for it' make the quality attractive. The word has to describe youthfulness surviving in an adult as something to be enjoyed, not as a failure to grow up.",
+        "correct_reasoning": "Only one of these words treats the survival of youth in a grown man as endearing; the others name it as a defect. The grandchildren's affection, and the harmlessness of the object, fix the colouring the sentence requires.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "Childish is the word for an adult behaving as a child should not. It convicts, and the sentence is charmed." },
+          { "option": "B", "trap_type": "near_synonym_wrong_degree", "why_wrong": "The strongest of the family, and contemptuous with it: infantile behaviour is a collapse into helplessness, far beyond a delight in machines." },
+          { "option": "C", "trap_type": "wrong_register", "why_wrong": "A formal literary word used almost only in dismissal, of jokes and of arguments. It cannot describe something a family adores." }
+        ],
+        "method": "Where a sentence reports that somebody is loved for a quality, every disapproving synonym is excluded at once, however exactly it matches the denotation."
+      }
+    },
+    {
+      "id": "wb-0061-05",
+      "word": "inexpensive",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "The chairs were ____ — plain wood, no upholstery — and the school was able to buy three hundred of them.",
+      "options": { "A": "cut-price", "B": "inexpensive", "C": "shoddy", "D": "economical" },
+      "correct": "B",
+      "explanation": {
+        "clue": "The dashes gloss the chairs: plain, not badly made. The sentence establishes a low price and a large order, and passes no judgement on the workmanship.",
+        "correct_reasoning": "The neutral adjective reports the price and nothing else, which is all the evidence supports; simplicity of design and a large order explain the price without implying that the chairs were poor.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "The language of advertising and the retail page, and it implies a reduction from a higher price, which nothing here reports." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "Shoddy asserts bad workmanship. 'Plain wood, no upholstery' describes what was left out of the design, not a fault in the making." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "Economical describes something that uses little of a resource — an economical engine, an economical prose style. It is not a word for a low price." }
+        ],
+        "method": "Separate the price of a thing from the quality of it. Several adjectives cover both, and the sentence will usually tell you which of the two it is talking about."
+      }
+    },
+    {
+      "id": "wb-0061-06",
+      "word": "gaunt",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "She was ____ in a way that suggested long illness rather than long walks.",
+      "options": { "A": "slender", "B": "svelte", "C": "gaunt", "D": "wiry" },
+      "correct": "C",
+      "explanation": {
+        "clue": "The contrast at the end does all the work: illness, not exercise. The word has to describe a thinness that reads as damage.",
+        "correct_reasoning": "Thinness with the flesh wasted, so that the bones show through, is what illness produces, and it is the only word here that carries that suggestion. Every thinness associated with health or with training has been ruled out by the sentence's own comparison.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "Slender flatters: it implies grace, and grace reads as a sign of health. The sentence is pointing the other way." },
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "A fashion word, borrowed and admiring, at home in advertising copy. It cannot describe something that suggests long illness." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "Wiry means lean and strong, the build of somebody who does take long walks — exactly the reading the sentence rejects." }
+        ],
+        "method": "When a sentence contrasts two explanations for the same appearance, choose the word that only one of the explanations could have produced."
+      }
+    },
+    {
+      "id": "wb-0061-07",
+      "word": "aroma",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "The ____ of bread reached the street each morning, and a queue had formed before the shop opened.",
+      "options": { "A": "aroma", "B": "odour", "C": "reek", "D": "fumes" },
+      "correct": "A",
+      "explanation": {
+        "clue": "The queue is the verdict: the smell brought people to the door. Whatever the noun denotes, its colouring has to be inviting.",
+        "correct_reasoning": "The word for a smell that is pleasant and belongs to food is the only one a queue could be an effect of; the sentence gives the cause and its consequence in a single breath.",
+        "distractors": [
+          { "option": "B", "trap_type": "wrong_connotation", "why_wrong": "Odour is the neutral-to-unpleasant term — an odour of damp, a body odour — and it would leave the queue unexplained." },
+          { "option": "C", "trap_type": "near_synonym_wrong_degree", "why_wrong": "A reek is a strong and offensive smell, at the far end of the scale, and it carries disgust with it." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "Fumes are vapours given off by burning or by chemicals. They are a hazard rather than a smell, and nobody queues for them." }
+        ],
+        "method": "Smell words are almost pure connotation: the same air is an aroma, an odour or a reek according to what the writer thinks of it. Let the sentence's consequences tell you which."
+      }
+    },
+    {
+      "id": "wb-0061-08",
+      "word": "scheme",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "The ____ to bring water down from the hills was completed in 1912 and still supplies half the city.",
+      "options": { "A": "plot", "B": "stratagem", "C": "gambit", "D": "scheme" },
+      "correct": "D",
+      "explanation": {
+        "clue": "A public work, dated, and still in service: nothing secret, nothing cunning, nothing aimed at an opponent. The noun has to be the neutral word for a planned undertaking on that scale.",
+        "correct_reasoning": "The ordinary term for an organised public project is the one that can take a date of completion and a century of service, and that anyone could watch being built. The sentence supplies no adversary and no concealment, so no word implying either can stand.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "A plot is secret and directed against somebody. Water reaching half a city for a hundred years is the opposite of a conspiracy." },
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "A literary and military word for a trick used to gain advantage over an opponent. There is no opponent in this sentence." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "A gambit is an opening move that gives something up to gain position later. It names a move inside a contest, not a completed public work." }
+        ],
+        "method": "Nouns for 'a plan' sort themselves by what the plan is for and who it is against. Search the sentence for an adversary and for secrecy; with neither present, the neutral word is the only honest one."
+      }
+    },
+    {
+      "id": "wb-0061-09",
+      "word": "rigid",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "inf.reasonable_implication"],
+      "difficulty": 4,
+      "stem": "The committee's ____ adherence to its own procedure meant that an emergency application waited three weeks.",
+      "options": { "A": "principled", "B": "steadfast", "C": "rigid", "D": "scrupulous" },
+      "correct": "C",
+      "explanation": {
+        "clue": "The consequence is offered as a fault: an emergency waited three weeks. The adjective has to convict the committee, not commend it.",
+        "correct_reasoning": "The word must name a rule followed past the point where following it still makes sense, which is exactly what a three-week wait for an emergency demonstrates. It is the only option whose colouring can carry the blame the sentence has already assigned.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "This praises the same behaviour, and praise cannot be what a sentence ending in a delayed emergency is delivering." },
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "Steadfastness is loyalty held under pressure, usually to a person or a cause. Following one's own procedure is not fidelity under attack." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "Scrupulousness is care to do exactly right, and it is a compliment. The sentence is counting the cost of the care, not commending it." }
+        ],
+        "method": "When a sentence states a consequence, ask whether the consequence is offered as a benefit or as a cost, and take the colouring that agrees with it."
+      }
+    },
+    {
+      "id": "wb-0061-10",
+      "word": "notorious",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "The district is ____ for its traffic, which defeats every plan the council devises.",
+      "options": { "A": "notorious", "B": "renowned", "C": "legendary", "D": "infamous" },
+      "correct": "A",
+      "explanation": {
+        "clue": "The relative clause says the traffic defeats every plan the council makes: this is a nuisance, and the sentence expects the reader to take it as one.",
+        "correct_reasoning": "Being widely known for something bad is the word's whole meaning, and the traffic is plainly bad. It reports fame and disapproval together, at the pitch a local nuisance deserves.",
+        "distractors": [
+          { "option": "B", "trap_type": "wrong_connotation", "why_wrong": "Renown is fame with honour. A district known for traffic that defeats its council is not being honoured." },
+          { "option": "C", "trap_type": "wrong_register", "why_wrong": "The word of sports pages and advertising, where anything popular becomes legendary. It also praises, which the relative clause forbids." },
+          { "option": "D", "trap_type": "near_synonym_wrong_degree", "why_wrong": "Infamy attaches to wickedness — a massacre, a great betrayal. Traffic is a nuisance, and the word is several degrees too grave for it." }
+        ],
+        "method": "Fame words carry a verdict and a weight. Settle the verdict first and the weight second: the right side of the scale at the wrong intensity is still the wrong word."
+      }
+    },
+    {
+      "id": "wb-0061-11",
+      "word": "caution",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "elim.near_tie"],
+      "difficulty": 5,
+      "stem": "The bank's ____ in the boom years looked like timidity at the time and like wisdom afterwards.",
+      "options": { "A": "timidity", "B": "caution", "C": "cowardice", "D": "prudence" },
+      "correct": "B",
+      "explanation": {
+        "clue": "The sentence compares the quality with two later verdicts on it, one unkind and one admiring. A word that already delivers either verdict cannot be the thing being judged.",
+        "correct_reasoning": "The noun has to be neutral, because the point of the sentence is that one behaviour was read in opposite ways at two different times. Only a word that withholds judgement can be the subject of a sentence that hands the judgements to other people and to later dates.",
+        "distractors": [
+          { "option": "A", "trap_type": "context_mismatch", "why_wrong": "The sentence says the quality 'looked like' timidity, which means it was not timidity. A thing cannot merely resemble itself." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "Cowardice convicts, and it convicts harder than the unkind verdict the sentence actually records." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "This is the admiring verdict, and the sentence says that verdict arrived only afterwards. In the blank it would settle at the outset what the sentence takes a whole clause to decide." }
+        ],
+        "method": "When a sentence reports how something came to be judged, the thing judged must be named neutrally. Any option that agrees with one of the verdicts has quietly stolen the sentence's conclusion."
+      }
+    },
+    {
+      "id": "wb-0061-12",
+      "word": "assurance",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.tone_of_word"],
+      "difficulty": 4,
+      "stem": "The ____ of her prose comes of knowing exactly how good the sentence she has just written is.",
+      "options": { "A": "conceit", "B": "vanity", "C": "swagger", "D": "assurance" },
+      "correct": "D",
+      "explanation": {
+        "clue": "The clause after the verb explains the quality: she knows exactly how good her sentence is. That is accurate self-knowledge, neither inflated nor on display.",
+        "correct_reasoning": "A settled confidence resting on a correct estimate of one's own work is what the explanation describes, and only one of these nouns names confidence without alleging that it is excessive or performed for an audience.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "Conceit is an opinion of oneself higher than the facts warrant, and the sentence insists the writer's estimate is exact." },
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "Vanity is a hunger to be admired, and it attaches most often to appearance. This is a writer's private judgement of her own sentences." },
+          { "option": "C", "trap_type": "wrong_register", "why_wrong": "A physical, colloquial word for display: it describes a walk, and by extension a manner put on in front of other people." }
+        ],
+        "method": "Confidence words differ on two questions: is the estimate accurate, and is it being displayed? Answer both from the sentence before you choose."
+      }
+    },
+    {
+      "id": "wb-0061-13",
+      "word": "docile",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "The mare was ____, and the children were allowed to ride her without supervision.",
+      "options": { "A": "docile", "B": "submissive", "C": "spiritless", "D": "meek" },
+      "correct": "A",
+      "explanation": {
+        "clue": "The consequence tells you what the word must mean: children ride her unsupervised, so she is safe to handle and easily managed. Nothing is said about her spirit being broken.",
+        "correct_reasoning": "The word for an animal that accepts handling and is easily led is what makes the children's freedom reasonable, and it reports an advantage rather than a lack. The sentence gives a permission, which is the behaviour of people who trust the animal.",
+        "distractors": [
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "Submissiveness is yielding to another's will, and it belongs to relations between people or inside a hierarchy. A horse safe with children is not yielding to anybody." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "This names a lack and regrets it. The sentence reports a benefit, and nothing suggests the mare was dull." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "Meekness is a human temper, patient and unassertive, and the word carries a faint pity the sentence does not intend." }
+        ],
+        "method": "For words about temperament, ask whether the option names a quality the thing has or a quality it is missing. A sentence reporting a benefit is not using the word of deficiency."
+      }
+    },
+    {
+      "id": "wb-0061-14",
+      "word": "reticent",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "elim.near_tie"],
+      "difficulty": 5,
+      "stem": "He was ____ about the negotiations, and the reporters went away with nothing.",
+      "options": { "A": "tight-lipped", "B": "reticent", "C": "furtive", "D": "taciturn" },
+      "correct": "B",
+      "explanation": {
+        "clue": "The blank is followed by 'about the negotiations'. The silence is on one subject, and it was kept in front of people who wanted that subject discussed.",
+        "correct_reasoning": "Reserve exercised on a particular matter is what the phrase 'about the negotiations' requires, and the word must leave the man free to be perfectly talkative on anything else. The sentence reports a policy for one topic, not a character.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "The press's own idiom, informal and mildly disparaging, and it suggests a jaw clamped shut rather than a considered decision to say nothing." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "Furtive describes stealthy behaviour, as of somebody who expects to be caught. Declining to brief reporters is done in the open." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "Taciturnity is a standing trait: the person says little in general. It cannot be confined to one subject, which is precisely what 'about the negotiations' does." }
+        ],
+        "method": "Ask whether the word names a state on one occasion or a permanent character. A phrase like 'about X' restricts the behaviour to a topic, and only a word that can be restricted will fit."
+      }
+    },
+    {
+      "id": "wb-0061-15",
+      "word": "pastiche",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 5,
+      "stem": "The bank's new headquarters is a ____ of a Venetian palace, and nobody who has seen the original is deceived for a moment.",
+      "options": { "A": "replica", "B": "parody", "C": "pastiche", "D": "counterfeit" },
+      "correct": "C",
+      "explanation": {
+        "clue": "Two facts are given: the building imitates a particular manner, and it fools nobody. The word must allow imitation that is open, imperfect and not mocking.",
+        "correct_reasoning": "A work that imitates another's manner, openly and inexactly, is what the sentence describes; the failure to deceive is not a flaw in such a thing but a consequence of what it is. The word names the kind of imitation, and passes no verdict on its honesty.",
+        "distractors": [
+          { "option": "A", "trap_type": "context_mismatch", "why_wrong": "A replica is an exact copy of one particular original. The sentence says the resemblance does not survive inspection, which rules exactness out." },
+          { "option": "B", "trap_type": "wrong_connotation", "why_wrong": "A parody imitates in order to mock, and nothing here suggests the building is laughing at Venice." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "A counterfeit is made to be taken for the real thing, and taken by somebody. Nothing is being passed off here, and a building could not be mistaken for a palace in Venice in any case." }
+        ],
+        "method": "Words for copies differ on two axes: how exact the copy is, and what it intends. Read the sentence for evidence of each before matching the noun."
+      }
+    },
+    {
+      "id": "wb-0061-16",
+      "word": "austere",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "The chapel's interior is ____: whitewash, four windows and a wooden bench, and the effect is not poverty but calm.",
+      "options": { "A": "spartan", "B": "impoverished", "C": "bleak", "D": "austere" },
+      "correct": "D",
+      "explanation": {
+        "clue": "The sentence rules out one reading and names the one it wants: not poverty, but calm. The adjective has to describe severe plainness that produces calm.",
+        "correct_reasoning": "Severe simplicity, chosen rather than suffered, is what three bare things add up to, and it is the only one of these words a writer on buildings uses with approval. The final clause supplies both the exclusion and the effect the adjective has to carry.",
+        "distractors": [
+          { "option": "A", "trap_type": "near_synonym_wrong_degree", "why_wrong": "Spartan conditions are plain to the point of hardship, imposed and endured. A bench and whitewash are plain; nothing here is being endured." },
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "The sentence says in so many words that the effect is not poverty. The option asserts what the writer has just denied." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "Bleak is cold and comfortless, and it leaves a person lower than it found them. The sentence reports calm." }
+        ],
+        "method": "When a sentence explicitly rejects one interpretation, the rejection usually kills an option outright. Read the whole clause before matching an adjective to the list of details."
+      }
+    },
+    {
+      "id": "wb-0061-17",
+      "word": "resonant",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "The orchestra's sound in that hall is ____: it fills the room without ever pressing on the ear.",
+      "options": { "A": "blaring", "B": "deafening", "C": "strident", "D": "resonant" },
+      "correct": "D",
+      "explanation": {
+        "clue": "The colon explains the adjective: the sound is large and never uncomfortable. Every word for loudness that implies discomfort is excluded by the second half of the sentence.",
+        "correct_reasoning": "A full sound that carries and rings without harshness is what filling a room without pressing on the ear describes, so the word must be the one that praises volume rather than complaining of it.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "Blaring is loud and unpleasant, the sound of a horn or a loudspeaker. It presses on the ear by definition." },
+          { "option": "B", "trap_type": "near_synonym_wrong_degree", "why_wrong": "Deafening is volume at the point of injury, the far end of the scale, and the sentence explicitly denies any discomfort." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "Stridency is harshness of tone rather than quantity of sound, and it is the quality a good hall is praised for removing." }
+        ],
+        "method": "Where a colon or a dash explains the word, treat the explanation as a definition and test each option against every part of it, including the part that says what the thing is not."
+      }
+    },
+    {
+      "id": "wb-0061-18",
+      "word": "reversal",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.tone_of_word"],
+      "difficulty": 4,
+      "stem": "His ____ on the question was complete: he voted against the bill in March and drafted its successor in October.",
+      "options": { "A": "betrayal", "B": "U-turn", "C": "reversal", "D": "apostasy" },
+      "correct": "C",
+      "explanation": {
+        "clue": "After the colon there are two dated facts and no comment at all. The sentence records a change of position and leaves the reader to judge it.",
+        "correct_reasoning": "A change to the opposite position is exactly what the two dates establish, and the noun has to state that change without adding a verdict, because the sentence adds none. It is also the only option that can sensibly be called complete, since completeness measures how far a position moved.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "A betrayal needs somebody betrayed, and it convicts. The sentence names no injured party and passes no judgement." },
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "The press's word for the same event, informal and written to embarrass. A sentence giving months and legislative stages is not in that voice." },
+          { "option": "D", "trap_type": "near_synonym_wrong_degree", "why_wrong": "Apostasy is the abandonment of a faith, and it carries a charge of treachery far heavier than a changed vote on a bill." }
+        ],
+        "method": "Where a sentence gives dates and facts and withholds comment, the abstract noun must withhold comment too. A word that judges is doing work the writer deliberately left undone."
+      }
+    },
+    {
+      "id": "wb-0061-19",
+      "word": "patriotic",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "elim.near_tie"],
+      "difficulty": 4,
+      "stem": "The book is ____ without being blind: it praises the country's institutions and lists their failures in the same chapter.",
+      "options": { "A": "patriotic", "B": "jingoistic", "C": "chauvinistic", "D": "partisan" },
+      "correct": "A",
+      "explanation": {
+        "clue": "'Without being blind' concedes that the quality in the blank often comes with blindness, and the colon shows what avoiding it looks like: praise and failures in one chapter.",
+        "correct_reasoning": "Love of one's country that survives an honest list of its failures is precisely what the second half describes, so the word must name that love without already including the blindness the sentence says the book escapes.",
+        "distractors": [
+          { "option": "B", "trap_type": "wrong_connotation", "why_wrong": "Jingoism is belligerent national feeling, keen on war and contemptuous of foreigners. A book that lists its country's failures is not that." },
+          { "option": "C", "trap_type": "near_synonym_wrong_degree", "why_wrong": "This is the blind form of the same feeling, an unexamined conviction of superiority. The sentence concedes that the book is not blind, so the option contradicts the concession." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "Partisanship is loyalty to a party or a faction inside a country, not to the country itself; the institutions praised belong to everybody." }
+        ],
+        "method": "A phrase like 'without being blind' tells you the right word has a well-known excess. Choose the word that names the thing, and reject the words that are the excess."
+      }
+    },
+    {
+      "id": "wb-0061-20",
+      "word": "quiet",
+      "skill": "word_precision",
+      "patterns": ["word.connotation", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "The house was ____ in the afternoons, and she did her best work then.",
+      "options": { "A": "deserted", "B": "quiet", "C": "desolate", "D": "hushed" },
+      "correct": "B",
+      "explanation": {
+        "clue": "She is in the house, and working well. The word has to be a pleasant one, and it has to leave somebody there.",
+        "correct_reasoning": "The plain word for an absence of noise reports the condition she needs without emptying the house or making it dismal. Both halves of the second clause — that she is there, and that the afternoons suit her — are tests the word has to pass.",
+        "distractors": [
+          { "option": "A", "trap_type": "context_mismatch", "why_wrong": "Deserted says that nobody is there, and the sentence has her there, working." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "Desolate is bleak and abandoned, a place that lowers the spirits. The sentence reports her best work being done." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "A hush is a silence that people are keeping — voices lowered, an audience waiting. It implies the very company the afternoon does not contain." }
+        ],
+        "method": "Test an option against every fact in the sentence, including the one that looks incidental. A single detail — somebody present, somebody working — can eliminate a word whose meaning fits perfectly."
+      }
+    }
+  ]
+}

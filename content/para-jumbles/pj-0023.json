@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0023",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "mathematics-logic",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Numbers Nobody Would Allow",
+    "theme": "how quantities less than nothing were used for two centuries before they were admitted to exist",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["article_given_new", "connective_explicit", "lexical_repetition", "temporal_sequence"],
+    "primary_trap": "misleading_connective",
+    "secondary_traps": ["competing_ending", "lexical_decoy"],
+    "dna_traits": ["surface_matching", "global_tracking", "wm_long_chain"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 2,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "make a 'Yet' point at the claim it actually contradicts rather than at the nearest sentence that shares its vocabulary",
+    "reasoning_patterns": ["disc.chronology", "disc.contrast", "disc.given_new", "disc.transition_word", "struct.history_of_an_idea"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival attaches the sentence beginning 'Yet' directly to the opening sentence, which already contains a contrast between working and results and repeats the vocabulary of calculation. It is killed by five words inside the 'Yet' sentence: 'the same men who denied that such a quantity could exist'. The opening sentence says only that they kept these quantities out of their results; the denial of existence is made in the sentence about the metaphysical objection, which must therefore stand between them. A second rival ends on the concession rather than on the resolution, which cannot stand because a sentence beginning 'What ended the quarrel' has to follow both parties to the quarrel, and because a chronological paragraph cannot narrate the ending and then return to the middle.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General intellectual history of mathematics; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An advanced chronological jumble built on one weaponised connective. The 'Yet' sentence shares its vocabulary with the opening sentence and looks glued to it; the relative clause inside it names a denial that only the second sentence makes, so the pair must be separated. A surface solver who follows repeated words gets this item wrong."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Yet the same men who denied that such a quantity could exist went on subtracting the greater number from the less whenever a calculation required it, and the answers that route produced were never wrong.",
+      "role": "contrast"
+    },
+    {
+      "label": "B",
+      "text": "For the better part of two centuries European mathematicians used negative quantities freely in their working and refused them any place in their results.",
+      "role": "background"
+    },
+    {
+      "label": "C",
+      "text": "What ended the quarrel, when it ended, was not a demonstration that such quantities exist but a decision to define them by the rules they obey.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "The objection was not technical but metaphysical: a quantity less than nothing was held to be a contradiction in terms, and an equation whose only root was negative was reported as having no root at all.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "D opens with 'The objection', a definite reference that needs a refusal already on the page, and B has just reported one: a place in the results denied. D then classifies that refusal as metaphysical rather than technical."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "A's 'Yet' turns against a denial of existence, and it names that denial in its own relative clause. Only D says that such a quantity was held to be a contradiction in terms; B says merely that it was kept out of the results."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "thematic_development",
+      "reliability": "high",
+      "explanation": "C speaks of a quarrel, which requires both parties to have been heard: the objection in D and the unbroken practice in A. Its 'when it ended' also closes the chronology B opened with two centuries."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph tells a story with a shape: a long standoff, the reason for it, the practice that went on regardless, and the way the standoff was finally resolved. Because it is chronological, the resolution has to come last; because it is an argument about a quarrel, both sides of the quarrel have to be stated before the resolution can refer to them.",
+    "movement": [
+      { "label": "B", "why_here": "B sets the period and the paradox in one line: used in the working, refused in the results. It contains no reference to anything earlier, which is what an opening sentence has to manage." },
+      { "label": "D", "why_here": "D explains the refusal B reports. 'The objection' points back at that refusal, and the sentence raises it from a habit to a principle — the quantities were not merely unwelcome, they were held to be impossible." },
+      { "label": "A", "why_here": "A is the turn, and it turns against the principle rather than the habit. Its relative clause quotes the denial D has just made, and its report that the answers were never wrong is what makes the principle uncomfortable." },
+      { "label": "C", "why_here": "C resolves what A and D have set against each other, and it is the only sentence that looks back on the whole episode. 'When it ended' can only be written once the ending is the last thing left to say." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BADC",
+        "trap_type": "misleading_connective",
+        "why_tempting": "The opening sentence already contains a contrast — used in the working, refused in the results — so a 'Yet' seems made for it, and both sentences talk about working and calculation. The repetition and the connective appear to agree.",
+        "where_it_breaks": "The 'Yet' sentence describes 'the same men who denied that such a quantity could exist'. Nobody has denied existence at that point: the opening sentence reports only that the quantities were kept out of the results. The denial is made by the sentence about the metaphysical objection, so that sentence has to stand in between."
+      },
+      {
+        "order": "BDCA",
+        "trap_type": "competing_ending",
+        "why_tempting": "The sentence reporting that the answers were never wrong is the most satisfying line in the set, and a paragraph that ends on a vindication of the working mathematicians feels complete.",
+        "where_it_breaks": "The sentence about what ended the quarrel would then arrive before the quarrel has two sides, and the paragraph would narrate the resolution and afterwards return to the practice that made resolution necessary. A chronological paragraph cannot go back past its own ending."
+      }
+    ],
+    "trap_named": "The trap is a connective aimed at the wrong sentence. 'Yet', 'however' and 'nevertheless' attach to a claim, not to a topic, and setters exploit this by placing a decoy sentence that shares the vocabulary of the contrast without making the claim the contrast denies. The defence is to read the contradicting sentence for what exactly it contradicts, and then to find the sentence that says that exact thing.",
+    "solving_habit": "When a sentence begins with a word of contrast, finish the sentence before you place it. The relative clauses and appositions inside it usually name the claim being answered, and that naming beats any similarity of subject matter."
+  },
+  "mentor": {
+    "challenge": "One sentence begins with 'Yet' and appears to answer the first sentence you read. Work out exactly what it contradicts before you let it sit there.",
+    "paragraph_plain": "For nearly two hundred years, European mathematicians happily used negative numbers while they were calculating, and then refused to let them appear in an answer. The reason was not practical but philosophical: a quantity less than nothing seemed to be a contradiction, so an equation whose only solution was negative was said to have no solution. All the same, the very people who said such quantities could not exist went on taking a bigger number away from a smaller one whenever the arithmetic called for it, and the results were always right. What finally settled the dispute was not a proof that negative numbers exist, but the decision to define them by the rules they follow.",
+    "takeaway": "A 'Yet' does not point at a subject; it points at a claim. Find the claim and the sentence falls into place."
+  }
+}

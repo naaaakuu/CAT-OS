@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0026",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Explanation Nobody Can Check",
+    "theme": "whether a right to be told why an automated decision went against you is worth anything without the means to contest the answer",
+    "estimated_time_sec": 195,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "question_answer",
+    "cohesion_signals": ["demonstrative", "article_given_new", "connective_explicit", "pronoun_ref", "lexical_repetition"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["competing_opener", "lexical_decoy"],
+    "dna_traits": ["inference_implicit", "global_tracking", "wm_long_chain", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 5,
+      "reference_density": 5,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 4,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "refuse a join made by a repeated noun when the sentence being joined opens with a demonstrative that names something not yet on the page",
+    "reasoning_patterns": ["disc.question_then_answer", "disc.demonstrative", "disc.given_new", "disc.lexical_chain", "lang.pronoun_reference"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The designed rival takes the question straight to the sentence about the reason recorded and the reason that operated, because the question ends on the word reason and the two sentences appear to be talking about the same thing. It is defeated by three words: that sentence opens 'By that test', and no test exists until the sentence defining what an explanation is for has been read. A second rival opens on the definition itself, which is abstract and general and looks like a thesis; it opens 'The answer turns on', which presupposes a question and answers nothing at the head of a paragraph. The closing sentence cannot be moved earlier because its 'therefore' depends on a failure that only the third sentence reports.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument about automated decision-making and the value of explanations; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A premium four-sentence jumble in which the false join is made by a repeated noun across a question and a finding, and broken by a demonstrative inside the finding. The paragraph is abstract throughout and offers no chronology or example to fall back on, so the solver must work purely from reference."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The answer turns on what an explanation is for: not consolation, but an instrument, whose whole use lies in being checkable against the case it claims to describe.",
+      "role": "definition"
+    },
+    {
+      "label": "B",
+      "text": "The entitlement is therefore worth precisely what the means of challenge are worth, and where those are missing it is a courtesy with a legal name.",
+      "role": "answer"
+    },
+    {
+      "label": "C",
+      "text": "Where an automated system refuses a loan or a licence, the applicant is now often entitled to be told the reason; it is worth asking what such an entitlement secures.",
+      "role": "question"
+    },
+    {
+      "label": "D",
+      "text": "By that test the accounts such systems issue fail: they are true of the model and untestable by the applicant, who cannot show that the reason recorded was not the reason that operated.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "A opens with 'The answer turns on', which requires a question already put. C ends by putting one: what such an entitlement secures. The definition that follows is offered as the way to settle it."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "D begins 'By that test'. The only test in the paragraph is the one A has just laid down, that an explanation must be checkable against the case, and D applies it and reports a failure."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "B's 'therefore' draws the consequence of the failure D reports, and 'The entitlement' returns to the right C introduced. The paragraph closes by answering its own question in the terms the definition set."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A question, a criterion for answering it, the application of that criterion to the case, and the answer. The paragraph is an argument rather than a narrative, so nothing in it can be placed by chronology or by example; every seat is fixed by a word that points backwards at a sentence already read.",
+    "movement": [
+      { "label": "C", "why_here": "C is the only sentence that introduces rather than refers. It names the situation, the right and the question, and every later sentence depends on one of the three." },
+      { "label": "A", "why_here": "A answers nothing yet; it decides what would count as an answer. Its opening words say as much, which is why it must stand between the question and any finding about particular systems." },
+      { "label": "D", "why_here": "D runs the criterion against the case. 'By that test' binds it to the definition, and the failure it reports is failure by that standard and no other." },
+      { "label": "B", "why_here": "B is the answer the paragraph was built to give, and it can only be given once the failure is on the page. It also closes the loop by returning to the entitlement with which the paragraph opened." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDAB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "The opening sentence ends on the applicant being told the reason, and the sentence about the reason recorded against the reason that operated seems to take that word straight up. Two sentences sharing a noun in that position look like a pair, and the second appears to answer the first.",
+        "where_it_breaks": "That sentence begins 'By that test', and at this point no test has been stated. The repeated noun is the bait; the demonstrative is the proof, because it names something the paragraph has not yet supplied. The definition of what an explanation is for has to stand in between."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "competing_opener",
+        "why_tempting": "A general statement of what an explanation is for is exactly the kind of abstract sentence that opens an essay, and it contains no pronoun, no demonstrative and no proper noun to tie it down.",
+        "where_it_breaks": "It is introduced as 'The answer turns on', which presupposes a question. As a first sentence it announces an answer to nothing, and the question sentence, arriving second, would be asking what has already been settled."
+      },
+      {
+        "order": "CABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "Once the question and the definition are placed, the conclusion seems to follow from the definition alone: if an explanation must be checkable, then the right to one is worth what the means of checking are worth. The sentence about what these systems actually issue then looks like a closing illustration.",
+        "where_it_breaks": "The conclusion says 'therefore', and a definition cannot supply the premise it needs; what makes the entitlement empty is the finding that the accounts cannot be tested, which would now come after the verdict. The finding also opens 'By that test', so it would be applying a criterion the paragraph had already finished using."
+      }
+    ],
+    "trap_named": "The trap is a false binding built out of a repeated noun. A word that appears in two sentences creates an impression of reference where there is none, and under time pressure that impression is stronger than the evidence of a demonstrative. The rule to carry away is that a repeated noun places two sentences in the same paragraph, while a demonstrative places one sentence immediately after another. Where the two disagree, the demonstrative wins, because it is a claim about what has already been said.",
+    "solving_habit": "List the sentences that open with a backward-pointing phrase — 'by that test', 'the answer', 'the entitlement', 'therefore' — and satisfy those demands first. Only when every demand is met should you consider joins suggested by shared vocabulary."
+  },
+  "mentor": {
+    "challenge": "Two sentences share a word and look like neighbours. One of them opens by pointing at something the paragraph has not yet said; find it before you commit.",
+    "paragraph_plain": "When an automated system turns down your loan or your licence, the law now often gives you the right to be told why, and it is fair to ask what that right actually buys. It depends on what an explanation is for. An explanation is not a consolation prize; it is a tool, and its value lies in being checkable against your case. Judged that way, the accounts these systems produce fail: they describe the model accurately but you cannot test them, because you have no way to show that the reason on the page was not the reason that actually operated. So the right to an explanation is worth exactly as much as your means of challenging one, and with no such means it is only politeness with a legal name.",
+    "takeaway": "A shared word puts two sentences in the same paragraph. A demonstrative puts one sentence immediately after another."
+  }
+}

@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wb-0059",
+    "type": "wb",
+    "version": 1,
+    "status": "accepted",
+    "kind": "register",
+    "band": "elite",
+    "title": "Register · four formal words, one formal room",
+    "item_count": 20,
+    "estimated_time_sec": 45,
+    "source": { "publication": "original", "usage_note": "Every sentence, option and explanation composed for CAT OS. Personal study only." },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wb-002",
+    "reviewer_notes": "The elite register bundle. Unlike the core and stretch sets, slang is almost never the answer's rival: in every item all four options are educated, formal words, and the discrimination is which professional room wrote the sentence — a judgment, a minute, a statute, a referee's report, a policy, a will. Three rivals per item fail on a locatable ground: the verb takes the wrong object, the act named is a different act, or the word imports a feeling the genre does not express.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Item 1 (the judgment): the live rival is the journalistic word for the same outcome, which a candidate will defend because an appeal that succeeds is loosely said to be upheld; it dies on the second clause, where the order below is set aside, so nothing in the sentence is left standing. Item 5 (the referee's report): 'ready for publication' would be defensible and is deliberately not offered; of what is offered, entitlement and personal qualification both attach to the wrong noun. Item 8 (the planning decision): 'declined' is the live rival because banks decline applications; it is killed by direction — one declines what is offered to one, and an application is made to the authority, not offered to it. Item 13 (the consent form): 'revoke' and 'rescind' are both formal and both undo something, so the item turns on what kind of thing consent is; it is not an instrument granted by authority, nor a binding resolution. Item 16 (the policy exclusion): 'resulting from' would be a second answer and is not offered; the three offered participles are plain speech, journalism and figurative writing respectively. Item 20 (the will): 'devise' was considered and rejected as an option, since land is devised and a library is not; the offered rivals fail on transmission through generations, on modern tax jargon, and on abandonment.",
+      "blind_solve": null
+    }
+  },
+  "items": [
+    {
+      "id": "wb-0059-01",
+      "word": "allowed",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "For these reasons the appeal is ____, and the order of the court below is set aside.",
+      "options": { "A": "granted", "B": "vindicated", "C": "allowed", "D": "upheld" },
+      "correct": "C",
+      "explanation": {
+        "clue": "'For these reasons' followed by an order setting aside the decision below: this is the operative sentence at the end of a judgment. The word must be the one a court uses of an appeal that succeeds.",
+        "correct_reasoning": "In judicial usage an appeal that succeeds is allowed and an appeal that fails is dismissed; the consequence, stated in the same sentence, is that the order appealed from is set aside. The verb and the consequence are a fixed pair.",
+        "distractors": [
+          { "option": "A", "trap_type": "collocation_clash", "why_wrong": "A court grants leave to appeal, an application, or an injunction. The appeal itself is not granted, and the verb here has taken the wrong object." },
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "To vindicate is to show a person or a claim to have been justified. It describes a reputation restored, not the disposal of proceedings, and no court makes that order." },
+          { "option": "D", "trap_type": "wrong_register", "why_wrong": "What is upheld is the thing left standing — a conviction, a finding, a decision below. This sentence sets the order below aside, so the newspaper's shorthand contradicts the court's own act." }
+        ],
+        "method": "Ask which trade wrote the sentence, then ask what that trade's fixed verb for this act is. Judgments, minutes and statutes keep one verb per act, and the synonym that is right in the newspaper is wrong in the order."
+      }
+    },
+    {
+      "id": "wb-0059-02",
+      "word": "resolved",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "It was ____ that the sub-committee should report before the end of the financial year.",
+      "options": { "A": "decided", "B": "noted", "C": "settled", "D": "resolved" },
+      "correct": "D",
+      "explanation": {
+        "clue": "The impersonal passive 'It was … that', followed by a direction about what a body should do, is the fixed opening of a formal minute.",
+        "correct_reasoning": "Minutes record a meeting's decisions in one formula, and the verb marks a motion put and carried. A direction that a sub-committee report by a date is exactly such a motion, which is why the minute is written this way and not as a narrative.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "The everyday report of the same act. A minute book is written in the language of motions, and it does not use the conversational verb for one that has been carried." },
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "'It was noted that' records a fact placed before the meeting. Here the meeting is issuing a direction, not registering information it has received." },
+          { "option": "C", "trap_type": "collocation_clash", "why_wrong": "One settles a dispute, a question or an account, and settling means bringing to an end. A forward-looking instruction to report has not been ended." }
+        ],
+        "method": "Institutional documents keep a small verb stock, one verb to an act: meetings resolve and note, courts find and hold, statutes provide and require. Identify the act first, then take the room's verb for it."
+      }
+    },
+    {
+      "id": "wb-0059-03",
+      "word": "commits",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "A person who contravenes subsection (2) ____ an offence and is liable on summary conviction to a fine.",
+      "options": { "A": "commits", "B": "perpetrates", "C": "undertakes", "D": "effects" },
+      "correct": "A",
+      "explanation": {
+        "clue": "'Contravenes subsection (2)', 'liable on summary conviction' — this is the penal provision of a statute, and statutory drafting has one verb for bringing an offence into being.",
+        "correct_reasoning": "Drafting says that a person commits an offence, and the rest of the clause is built on that phrase: it is the commission of the offence that founds the liability on conviction which follows.",
+        "distractors": [
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "'Perpetrate' belongs to journalism and to melodrama, where frauds and hoaxes are perpetrated. It carries the writer's disapproval, and a statute does not express one." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "To undertake is to take on a task willingly. An offence is not a task accepted; the clause is about breach of a prohibition, not about a commitment given." },
+          { "option": "D", "trap_type": "collocation_clash", "why_wrong": "One effects a change, a transfer or an escape — a result deliberately brought about. An offence is not a result the drafter supposes anyone set out to produce." }
+        ],
+        "method": "In a statute, read the machinery around the blank — contravenes, liable, summary conviction — and supply the verb that machinery is built around. Drafting never varies its verbs for elegance."
+      }
+    },
+    {
+      "id": "wb-0059-04",
+      "word": "indebted",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.connotation"],
+      "difficulty": 4,
+      "stem": "I am ____ to the two anonymous referees, whose objections improved the argument at every point.",
+      "options": { "A": "thankful", "B": "indebted", "C": "obliged", "D": "beholden" },
+      "correct": "B",
+      "explanation": {
+        "clue": "This is the acknowledgements page of a scholarly book. The relative clause says that something was received and used, so what is being recorded is a debt rather than a feeling.",
+        "correct_reasoning": "Scholarly acknowledgement is phrased as a debt precisely because something was received that cannot be repaid, and the clause states what was received: objections that improved the argument. The metaphor of debt is the one the sentence has already set up.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "'Thankful' names a private feeling and normally takes 'for' or 'that'. It reads as personal relief rather than as the public recording of an intellectual obligation." },
+          { "option": "C", "trap_type": "wrong_register", "why_wrong": "'Much obliged' is dated conversational courtesy, the language of a small favour done at a counter. In print it sounds arch rather than grateful." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "To be beholden is to be under an obligation that constrains you, and the word carries reluctance. An acknowledgement is offered freely and claims to be glad of the debt." }
+        ],
+        "method": "Where a genre has a conventional metaphor — debt in acknowledgements, a bereavement in an obituary — choose the word that keeps the metaphor running. Near-synonyms import feelings the genre is not expressing."
+      }
+    },
+    {
+      "id": "wb-0059-05",
+      "word": "suitable",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "In its present form the manuscript is not ____ for publication, though a substantially revised version might be.",
+      "options": { "A": "eligible", "B": "suitable", "C": "ripe", "D": "qualified" },
+      "correct": "B",
+      "explanation": {
+        "clue": "A referee's report on a paper. The judgement is about the fit between this text as it stands and the purpose of publication, and the concession that a revised version might pass shows that the state of the text is what is being judged.",
+        "correct_reasoning": "Suitability is the referee's category: whether a thing, as it is, fits a stated purpose. Because the same sentence allows that a different version could pass, the adjective must be one that can change with the text, which is what fitness for a purpose does.",
+        "distractors": [
+          { "option": "A", "trap_type": "context_mismatch", "why_wrong": "Eligibility is entitlement under a criterion — a candidate is eligible for a post, a book for a prize. A journal is not applying a criterion of entitlement; it is judging a fit." },
+          { "option": "C", "trap_type": "wrong_register", "why_wrong": "Used this way the word is figurative and literary: the time is ripe, a subject ripe for treatment. A technical report on a manuscript does not reach for the metaphor." },
+          { "option": "D", "trap_type": "collocation_clash", "why_wrong": "Persons hold qualifications; a manuscript cannot. The word would also point at training rather than at merit, which is not what a referee assesses." }
+        ],
+        "method": "When several formal adjectives share a meaning, test which noun each really takes. Eligible attaches to applicants, qualified to people, suitable to anything at all that is judged against a purpose."
+      }
+    },
+    {
+      "id": "wb-0059-06",
+      "word": "originated",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.tone_of_word"],
+      "difficulty": 3,
+      "stem": "The movement ____ in Vienna in the 1890s and spread to Berlin within a decade.",
+      "options": { "A": "erupted", "B": "blossomed", "C": "was born", "D": "originated" },
+      "correct": "D",
+      "explanation": {
+        "clue": "A reference entry: a place, a decade, a second place, no adjectives and no verdict. The verb has to state where a thing began and add nothing to it.",
+        "correct_reasoning": "Reference prose reports a beginning with a verb that supplies no picture and no praise, leaving the reader to judge. The colourless verb also matches the flat second clause, which gives a direction and a span and nothing more.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "Eruption makes the movement violent and sudden. An entry that gives a decade rather than a date is not describing an explosion." },
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "A figurative and approving verb from appreciation writing. Reference prose does not admire its subject in the first clause of a factual sentence." },
+          { "option": "C", "trap_type": "wrong_register", "why_wrong": "The journalist's metaphor, vivid and faintly sentimental. The bare chronology on either side of the blank refuses it." }
+        ],
+        "method": "In reference prose, prefer the verb whose claim could be checked against a source. Any verb that smuggles in speed, growth or approval is doing work the genre leaves to the reader."
+      }
+    },
+    {
+      "id": "wb-0059-07",
+      "word": "dedicated",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "This tablet is ____ to the memory of those of the parish who did not return from the two wars.",
+      "options": { "A": "devoted", "B": "consecrated", "C": "dedicated", "D": "assigned" },
+      "correct": "C",
+      "explanation": {
+        "clue": "A memorial inscription, in the passive, with 'to the memory of' following the blank. The phrase that comes after the verb is what fixes it.",
+        "correct_reasoning": "Setting an object apart in honour of someone is the act a memorial performs, and the verb that names that act is the one which takes 'to the memory of'. The verb and the prepositional phrase have been a single formula for centuries.",
+        "distractors": [
+          { "option": "A", "trap_type": "collocation_clash", "why_wrong": "One devotes time, money or a life to something. A tablet devotes nothing, and the phrase would describe a person's constancy rather than a monument's purpose." },
+          { "option": "B", "trap_type": "context_mismatch", "why_wrong": "Consecration sets a thing apart as sacred — ground, a church, a bishop — and is a religious act performed upon the object. A tablet recording names is not being made holy." },
+          { "option": "D", "trap_type": "wrong_register", "why_wrong": "Assignment is administrative: duties, rooms and cases are assigned. The word turns an act of remembrance into an allocation." }
+        ],
+        "method": "Look hard at the words that must follow the blank. A fixed phrase — 'to the memory of', 'in good repair', 'on summary conviction' — usually admits one verb, and the rivals fail on the preposition before they fail on the tone."
+      }
+    },
+    {
+      "id": "wb-0059-08",
+      "word": "refused",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "Your application for planning permission has been ____, and the reasons for the decision are set out in the notice enclosed.",
+      "options": { "A": "refused", "B": "denied", "C": "declined", "D": "rebuffed" },
+      "correct": "A",
+      "explanation": {
+        "clue": "A decision letter from a planning authority, with written reasons enclosed. British administrative language, which follows the statute behind it, has one word for an application that fails.",
+        "correct_reasoning": "Permission applied for and not given is refused, and the refusal is what the enclosed reasons attach to. The verb names the authority's act on an application made to it, which is exactly the relation the sentence describes.",
+        "distractors": [
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "The word of American administration and of headlines. In British official usage to deny something is to say that it is untrue, which is not the act this letter performs." },
+          { "option": "C", "trap_type": "collocation_clash", "why_wrong": "One declines what is offered to one: an invitation, an honour, a drink. An application is made to the authority rather than offered to it, so the verb points the wrong way." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "A rebuff is a snub — curt, personal and a little insulting. A letter that encloses its reasons is doing the opposite of snubbing the applicant." }
+        ],
+        "method": "Administrative prose is statutory prose in a politer font. Ask what word the rule behind the letter would use, and keep it; the synonyms import either a different act or a different attitude."
+      }
+    },
+    {
+      "id": "wb-0059-09",
+      "word": "reduces",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "In the late drawings the artist ____ the figure to a few strokes of ink, and the page is mostly empty.",
+      "options": { "A": "shrinks", "B": "reduces", "C": "diminishes", "D": "abbreviates" },
+      "correct": "B",
+      "explanation": {
+        "clue": "Art criticism describing a method: a figure arrives at a few strokes, and the rest of the page is left bare. The verb has to name a deliberate paring down, and it has to take 'to'.",
+        "correct_reasoning": "The construction with 'to' is part of the meaning: the critic's phrase for stripping a subject to its essentials names both the act and the result it arrives at, which the following clause then describes as an empty page.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "The everyday physical verb: a jumper shrinks in the wash. It reports a change of size and gives the artist no agency in it." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "To diminish something is to lessen its importance or standing. The sentence is admiring a method, not saying that the figure came to matter less." },
+          { "option": "D", "trap_type": "collocation_clash", "why_wrong": "Words, titles and texts are abbreviated. Applied to a drawn figure the verb belongs to the wrong medium, and it means shortening rather than stripping away." }
+        ],
+        "method": "Test the whole construction, not the bare verb. A verb that takes 'to' and an endpoint carries a meaning its near-synonyms cannot, and criticism chooses the verb whose grammar names the method."
+      }
+    },
+    {
+      "id": "wb-0059-10",
+      "word": "Prune",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "____ the shrub hard in late winter, cutting each stem back to two buds.",
+      "options": { "A": "Chop", "B": "Trim", "C": "Prune", "D": "Dock" },
+      "correct": "C",
+      "explanation": {
+        "clue": "An imperative with a season and an exact endpoint — each stem cut back to two buds. This is a horticultural instruction, and 'hard' tells you how far the cutting goes.",
+        "correct_reasoning": "Cutting a plant back to shape it or to force new growth is a named technique, and its verb is the one that takes both 'hard' and 'back to two buds'. The instruction is prescribing that technique, not describing a tidy-up.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "The kitchen's word, and a blunt one. It says nothing about where the cut falls, which is the whole content of the instruction." },
+          { "option": "B", "trap_type": "near_synonym_wrong_degree", "why_wrong": "To trim is to tidy the edges lightly. 'Hard', and a cut back to two buds, describe a severe reduction that trimming excludes." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "Docking is cutting something short at a stroke — a tail, a stem for the vase — and it does not describe working over a shrub stem by stem." }
+        ],
+        "method": "In instructions, let the qualifiers choose the verb. An adverb of degree and a precise endpoint belong to one technique, and a near-synonym that cannot carry both is not the word being asked for."
+      }
+    },
+    {
+      "id": "wb-0059-11",
+      "word": "corroborated",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "The chronicler's account of the siege cannot be ____ by any independent source, and must therefore be used with caution.",
+      "options": { "A": "corroborated", "B": "backed up", "C": "endorsed", "D": "seconded" },
+      "correct": "A",
+      "explanation": {
+        "clue": "A historian weighing a single testimony. The test being applied is whether other evidence, arrived at independently, supports what this witness says.",
+        "correct_reasoning": "The missing word must mean 'supported by independent evidence', because that is what the sentence says is absent and what the caution in the second clause follows from. Historians and lawyers share one term for that test.",
+        "distractors": [
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "A conversational phrasal verb, which now also means making a copy of a file. Neither sense belongs in a sentence that concludes with a rule for using evidence." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "To endorse is to declare public approval of a view or a candidate. A second source that agreed would not be approving the chronicler; it would be confirming him." },
+          { "option": "D", "trap_type": "collocation_clash", "why_wrong": "One seconds a motion or a nomination, a formality inside a meeting. A source cannot second an account of a siege." }
+        ],
+        "method": "Say in one phrase what the missing word must do — here, 'supply independent support' — before looking at the options. Then reject every word that names approval, agreement or procedure instead."
+      }
+    },
+    {
+      "id": "wb-0059-12",
+      "word": "refrain",
+      "skill": "word_precision",
+      "patterns": ["word.register", "lang.modal_verbs"],
+      "difficulty": 4,
+      "stem": "Each Party shall ____ from any measure that would deprive this Agreement of its object and purpose.",
+      "options": { "A": "hold off", "B": "abstain", "C": "desist", "D": "refrain" },
+      "correct": "D",
+      "explanation": {
+        "clue": "Treaty language: 'Each Party shall', an obligation stated for the future, and an abstract object — any measure a Party might otherwise take. The duty is to do nothing, indefinitely.",
+        "correct_reasoning": "A negative obligation in an instrument binds a Party not to begin something, and the verb has to govern an abstract class of acts rather than a particular one. The standard treaty formula does both, which is why 'any measure' can follow it.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "A colloquial phrasal verb, and one that means to postpone. An obligation that lapses when the Party is ready is not an obligation at all." },
+          { "option": "B", "trap_type": "collocation_clash", "why_wrong": "In the language of institutions one abstains in a vote, or abstains from a practice. The verb wants a ballot or a habit, not a class of measures defined by their effect." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "To desist is to stop doing what one has already begun, as in an order to cease and desist. The clause looks forward to measures not yet taken." }
+        ],
+        "method": "Read the tense and the object together. A forward-looking duty with an abstract object needs a verb that can govern both; a verb presupposing an act already under way, or a vote in progress, is the wrong instrument."
+      }
+    },
+    {
+      "id": "wb-0059-13",
+      "word": "withdraw",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "Participation is voluntary, and you may ____ your consent at any time, without giving a reason and without penalty.",
+      "options": { "A": "take back", "B": "withdraw", "C": "revoke", "D": "rescind" },
+      "correct": "B",
+      "explanation": {
+        "clue": "A research consent form addressed to the participant. What is being undone is consent, and the following clauses insist that undoing it is free of explanation and of consequence.",
+        "correct_reasoning": "Consent is given and withdrawn, and the verb of undoing has to match the kind of thing consent is: a permission the participant holds and may simply take away. It is also the only formal option that implies no procedure and no fault, which is what 'without giving a reason and without penalty' requires.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "The everyday phrase, and a vague one: a remark, a gift or a step can all be taken back. A document conferring a right states the right in a formal verb." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "One revokes an instrument granted by an authority — a licence, a will, a power of attorney. Consent given by a participant is not a grant of that kind." },
+          { "option": "D", "trap_type": "collocation_clash", "why_wrong": "Contracts, orders and resolutions are rescinded. The verb belongs to instruments that bind, and it would make a change of mind into a legal act requiring form." }
+        ],
+        "method": "Name the thing being undone before you choose the verb of undoing. Consent is withdrawn, a licence revoked, a resolution rescinded, a statement retracted; the noun selects the verb, not the level of formality."
+      }
+    },
+    {
+      "id": "wb-0059-14",
+      "word": "attributed",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "The portrait is ____ to Lely, though the sitter has never been identified.",
+      "options": { "A": "attributed", "B": "allotted", "C": "consigned", "D": "imputed" },
+      "correct": "A",
+      "explanation": {
+        "clue": "A catalogue entry. A painter is being proposed for a picture, and a doubt is admitted in the same sentence, so the verb must make a claim that is revisable.",
+        "correct_reasoning": "Assigning a work to an artist on the evidence, subject to revision, is the catalogue's own act, and its verb is used precisely because it stops short of certainty. That caution is what allows the concession about the sitter to sit beside it.",
+        "distractors": [
+          { "option": "B", "trap_type": "collocation_clash", "why_wrong": "What is allotted is a share of something divisible — time, land, seats. A picture has one author, and authorship is not distributed." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "In a saleroom a work is consigned by its owner for sale. The verb concerns who is selling the picture, not who painted it." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "One imputes motives, blame or fault. The verb lays something discreditable at a person's door, and a catalogue is crediting a painter, not accusing one." }
+        ],
+        "method": "Within one professional room several verbs may mean 'assign'. Separate them by what is assigned and by what the act implies — authorship, a share, a sale, or blame."
+      }
+    },
+    {
+      "id": "wb-0059-15",
+      "word": "acknowledged",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.tone_of_word"],
+      "difficulty": 4,
+      "stem": "The company ____ that it had known of the defect for two years, but said the risk had been judged negligible at the time.",
+      "options": { "A": "confessed", "B": "owned up", "C": "let on", "D": "acknowledged" },
+      "correct": "D",
+      "explanation": {
+        "clue": "Straight news reporting: one clause attributes an admission, the next attributes the company's defence, and the reporter passes no verdict between them.",
+        "correct_reasoning": "The attribution verb must report that a fact was accepted and add nothing the reporter cannot prove. Because the defence is reported even-handedly in the same sentence, any verb that convicts the company in advance would contradict the sentence's own balance.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_connotation", "why_wrong": "Confession belongs to crime and to the confessional. It imputes wrongdoing the report has not established, and it jars against a defence set out in the same sentence." },
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "A schoolroom phrase, informal and faintly amused. News prose does not describe a company as owning up." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "To let on is to reveal something inadvertently, or else to pretend. The sentence reports a statement deliberately made, and the phrase is colloquial besides." }
+        ],
+        "method": "In a report, choose the attribution verb that adds nothing beyond the fact of the statement. A verb implying guilt, reluctance or accident is comment wearing a report's clothes."
+      }
+    },
+    {
+      "id": "wb-0059-16",
+      "word": "arising",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 3,
+      "stem": "The insurer shall not be liable for any loss ____ from wear and tear or from gradual deterioration.",
+      "options": { "A": "coming", "B": "stemming", "C": "arising", "D": "springing" },
+      "correct": "C",
+      "explanation": {
+        "clue": "An exclusion clause in an insurance policy: 'shall not be liable', then a list of excluded causes. The participle states the relation between a loss and its cause, and a policy uses a settled term for it.",
+        "correct_reasoning": "The participle has to be colourless: it must say that the loss came from the cause without committing the insurer to how directly or how suddenly. That is why drafting uses the term whose meaning the courts have already fixed.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "The everyday participle. A document whose force depends on settled terms does not fall back on plain speech at the point where the exclusion bites." },
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "The analytical prose of journalism and of reports. An instrument is drafted to be construed, and it uses the term that has been construed." },
+          { "option": "D", "trap_type": "collocation_clash", "why_wrong": "Things spring from a source suddenly and figuratively — hope springs, a suspicion springs. Gradual deterioration is the opposite of a spring." }
+        ],
+        "method": "In an instrument the commonest formal word is usually right, because it is the one that has been litigated. Reject participles borrowed from journalism or from figurative writing, however natural they sound."
+      }
+    },
+    {
+      "id": "wb-0059-17",
+      "word": "failed",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "The beam ____ at a load of 40 kN, well below the value assumed in the design.",
+      "options": { "A": "gave way", "B": "collapsed", "C": "buckled", "D": "failed" },
+      "correct": "D",
+      "explanation": {
+        "clue": "An engineer's report: a member, a measured load, a comparison with the design value. The verb has to record that the member stopped performing, and to claim nothing further.",
+        "correct_reasoning": "Engineering keeps a general term for a member ceasing to perform its function at whatever load, and it is that general fact which the comparison with the design value is about. Choosing it commits the writer to nothing about the manner of the event, which the report has not measured.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "Narrative and journalistic: a bank gives way, a rope gives way. It dramatises the moment instead of recording a result against a design value." },
+          { "option": "B", "trap_type": "near_synonym_wrong_degree", "why_wrong": "Collapse names a total and sudden loss of form. The sentence states a load and a comparison; it does not assert that the beam came down." },
+          { "option": "C", "trap_type": "context_mismatch", "why_wrong": "Buckling is one particular mode of failure, sideways instability under compression, and nothing in the sentence identifies the mode." }
+        ],
+        "method": "Technical registers keep one general term and several specific ones. Where the sentence gives no evidence about which specific case occurred, the general term is the only honest choice."
+      }
+    },
+    {
+      "id": "wb-0059-18",
+      "word": "made redundant",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.connotation"],
+      "difficulty": 3,
+      "stem": "Employees who are ____ will be offered redeployment wherever a suitable vacancy exists.",
+      "options": { "A": "sacked", "B": "let go", "C": "made redundant", "D": "terminated" },
+      "correct": "C",
+      "explanation": {
+        "clue": "A written staffing policy: an entitlement is being conferred, and the entitlement is redeployment. A right of that kind is triggered by a ground, so the phrase in the blank must name the ground.",
+        "correct_reasoning": "The term names dismissal because the post itself has ceased to exist, which is precisely why redeployment into another post is the remedy the sentence offers. It also carries no imputation against the employee, as a policy conferring a right must not.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "Slang, and it implies dismissal for fault. A policy cannot promise redeployment to people it has just described as dismissed for their conduct." },
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "A soft conversational euphemism, and vague about the reason. The reason is the very thing that triggers the entitlement, so a policy avoids it." },
+          { "option": "D", "trap_type": "wrong_connotation", "why_wrong": "A contract or an appointment is terminated; applied to the person the word is chilling, and it names the ending without naming the ground for it." }
+        ],
+        "method": "Where a document confers an entitlement, the word has to name the ground on which it arises. Slang and euphemism both blur the ground, and a policy that blurs it does not work."
+      }
+    },
+    {
+      "id": "wb-0059-19",
+      "word": "rejected",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.tone_of_word"],
+      "difficulty": 4,
+      "stem": "The reading of the second folio is here ____, since no manuscript supports it and the metre is against it.",
+      "options": { "A": "binned", "B": "rejected", "C": "spurned", "D": "repudiated" },
+      "correct": "B",
+      "explanation": {
+        "clue": "A textual editor's note that gives its reasons — manuscript authority and metre. The verb introduces an editorial decision that the evidence after it will justify.",
+        "correct_reasoning": "Because the reasons follow immediately, the verb of decision must be the plainest one available: it should record the decision and leave the argument to the evidence. An editor's settled term for declining a reading does exactly that.",
+        "distractors": [
+          { "option": "A", "trap_type": "wrong_register", "why_wrong": "Slang for throwing something away, and it makes the decision sound careless at the very moment two reasons are being offered for it." },
+          { "option": "C", "trap_type": "wrong_connotation", "why_wrong": "To spurn is to reject with contempt, and usually a person or an offer. The scorn is the editor's own, and the evidence does not license it." },
+          { "option": "D", "trap_type": "context_mismatch", "why_wrong": "One repudiates a debt, a doctrine or an agreement by which one was thought to be bound. The editor was never committed to this reading." }
+        ],
+        "method": "When a sentence supplies its reasons, keep the verb of decision neutral. Any verb that adds feeling quarrels with the evidence it is introducing."
+      }
+    },
+    {
+      "id": "wb-0059-20",
+      "word": "bequeath",
+      "skill": "word_precision",
+      "patterns": ["word.register", "word.near_synonym"],
+      "difficulty": 4,
+      "stem": "I ____ my library to the college, and the residue of my estate to my sister.",
+      "options": { "A": "bequeath", "B": "hand down", "C": "gift", "D": "leave behind" },
+      "correct": "A",
+      "explanation": {
+        "clue": "A will, in the testator's own voice, disposing first of named property and then of the residue of an estate. The sentence performs a legal act rather than describing one.",
+        "correct_reasoning": "Disposing of personal property by will is a named act with its own verb, and the parallel with 'the residue of my estate' shows that a formal disposition is being made in both halves of the sentence. Only a verb that performs the disposition can carry both objects.",
+        "distractors": [
+          { "option": "B", "trap_type": "wrong_register", "why_wrong": "A phrase about transmission through generations — an heirloom is handed down — and an informal one. A will makes a single disposition, effective on one death." },
+          { "option": "C", "trap_type": "wrong_register", "why_wrong": "As a verb this belongs to tax planning and the business pages. In a will it is both modern jargon and imprecise about when the property is to pass." },
+          { "option": "D", "trap_type": "collocation_clash", "why_wrong": "To leave something behind is to forget it or abandon it. The phrase describes what is left where one has been, not what one gives by will." }
+        ],
+        "method": "The most formal room often has the narrowest verb. When a sentence performs a legal act — disposing, conveying, resolving — choose the verb that names the act rather than one describing its effect."
+      }
+    }
+  ]
+}

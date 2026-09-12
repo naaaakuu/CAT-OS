@@ -1,0 +1,396 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0037",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "media",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "elite",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "evidence-anchoring",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 505,
+    "question_count": 4,
+    "question_types": [
+      "best_characterization",
+      "inference",
+      "specific_detail",
+      "strengthen"
+    ],
+    "theme": "why satire fails against a figure who cannot be shamed: its force is borrowed from what the target has staked on an audience's good opinion, and what survives is an audience-facing function the author refuses to call equivalent",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "A narrative that looks like an anecdote about a spoiled joke and is really about where a joke's force comes from. The set punishes the two easy readings: that the sketch was at fault, and that the closing paragraph is a consolation.",
+    "length_class": "medium",
+    "structure": "narrative_reflection",
+    "viewpoints": 2,
+    "tone": "rueful, exacting",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 4,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.example",
+      "struct.pivot",
+      "comp.function_over_words",
+      "comp.organization",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "arg.principle",
+      "arg.causal_claim",
+      "inf.directly_implied",
+      "inf.vs_speculation",
+      "cr.strengthen",
+      "arg.assumption",
+      "elim.near_tie",
+      "arg.qualification",
+      "lang.tone_shift"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the rival is the option that public figures no longer suffer any cost from ridicule. The passage supports it only for one kind of figure, and the same paragraph describes the other kind — the man who 'has pledged his seriousness' and on whom 'ridicule can foreclose' — so the generalisation is refuted inside the sentence that inspires it. Q2: the option about mockery reaching a wide audience is the live rival, since reach is what the anecdote is about; it dies because the minister spread the clip himself and suffered nothing, which makes reach the opposite of a condition for damage. Q3: the strongest rival says satire has lost its power and the audience's pleasure is offered as consolation; the final sentences refuse exactly that — 'it would be a consolation to pretend the second function is as good as the first, and it is not' — and the passage limits the failure to targets who have staked nothing. Q4: the near-tie is the unchanged approval rating, which corroborates that the sketch did no damage but says nothing about why; the correct option contrasts figures who depend on outside approval with figures who do not, which is the author's mechanism and the only option that tests it.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "foreclose",
+      "testimonial",
+      "caricature"
+    ]
+  },
+  "passage": {
+    "title": "Worth Watching",
+    "reading_time_min": 2.8,
+    "paragraphs": [
+      {
+        "id": "rc-0037-p1",
+        "text": "For a few weeks one winter I sat in on rehearsals for a topical revue, which is an unglamorous business: eight people in a cold room arguing about whether a joke has a fortnight left in it. The best thing in the show was an impression. A young performer had caught a junior minister exactly — not the voice, which anyone can do, but a particular way he had of pausing before a lie, as though consulting a document that did not exist. It was cruel and it was accurate, and on the first night the laugh it drew had an edge to it, the sound an audience makes when it has been shown something it had noticed without ever naming. By the Thursday the minister had posted the clip himself. Worth watching, he wrote. The sketch stayed in the programme for another week and then quietly left it. Nobody decided anything."
+      },
+      {
+        "id": "rc-0037-p2",
+        "text": "It is tempting to say the sketch had been stolen, and the company said something like that at the time. But nothing had been taken from it; what it wanted had simply not been there to take. Satire has never worked by making a target look foolish. A caricature does that, and no government has ever fallen to a caricature. It works by showing a man to the people whose good opinion he requires, in a light he would not have chosen. The performer supplies the light, the audience supplies the judgement, and the target supplies the need. Remove the third and the first two have nothing to act on."
+      },
+      {
+        "id": "rc-0037-p3",
+        "text": "That need is not a weakness of character but a security posted in advance. A figure who has spent years asking to be thought serious has pledged his seriousness, and ridicule can foreclose on it. A figure who never asked owns nothing the laughter can take: his standing rests on a following that reads mockery from outside as proof of the distance it elected him to keep. To such a man the clip is not an injury but a testimonial, and the better the impression, the better the testimonial. The force of satire was never in the portrait. It was borrowed, all of it, from what the target had staked."
+      },
+      {
+        "id": "rc-0037-p4",
+        "text": "What remains is smaller and is not nothing. An audience that laughs at a public man is doing something for itself as well as to him: it is confirming that a standard still exists and can still be applied, which is a thing a room of strangers can discover only together. Where the target cannot be shamed, that confirmation is the whole of satire's work, and the work is worth doing, since a people that loses the ability to say what is absurd loses more than a joke. But it would be a consolation to pretend that the second function is as good as the first, and it is not. The old sketch changed what a minister could afford to do. The new one changes only what we can still bear to notice."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0037-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "inf.vs_speculation",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "generalising the failure of one sketch against one kind of target into a claim about all public figures, or locating satire's force in the quality of the portrait the passage says it never had",
+      "prediction_target": "Before the options the learner should be able to say: since the force is borrowed from the target's stake and not from the portrait, anything done to the portrait alone leaves the outcome where it was.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "An audience that shares a satirical clip generally agrees with the judgement the clip makes of its target.",
+        "B": "Public figures no longer suffer any cost at all from being ridiculed.",
+        "C": "It is the laughter of an audience that creates the standing a satirist then sets out to damage.",
+        "D": "Making a satirical portrait sharper or crueller would not restore its force against a target of this kind."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two sentences in the third paragraph settle every option: 'the better the impression, the better the testimonial', and 'The force of satire was never in the portrait. It was borrowed, all of it, from what the target had staked.' If the force is borrowed from the stake, improving the portrait improves the thing that was never doing the work.",
+        "correct_reasoning": "The correct option follows directly from the causal claim. The passage locates satire's force outside the performance, in what the target has pledged to an audience; against a man who has pledged nothing there is nothing to draw on, and the passage adds that a better impression makes a better testimonial. So sharpening the portrait cannot restore a force that did not live there, and the option says only that, with no claim about other targets.",
+        "passage_anchor": "rc-0037-p3",
+        "question_type_note": "When a passage states where a phenomenon's power comes from, the inference questions test whether the reader keeps that source fixed; options that relocate the power into the most visible feature are the standard trap.",
+        "reading_habit": "When an author says that the force of something is borrowed from elsewhere, treat every option that proposes to improve the visible thing as suspect. Ask what the sentence says is actually carrying the weight.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The one act of sharing the passage describes is the minister's own, and the following it reaches is said to read outside mockery as proof of distance — that is a use of the clip, not an agreement with it.",
+            "seductive_element": "Sharing usually does imply endorsement, and the anecdote turns on an act of sharing."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage draws a line inside the class of public figures: one who has ‘pledged his seriousness’ can still be foreclosed on, and only the figure who never asked owns nothing the laughter can take.",
+            "seductive_element": "The anecdote is a story of ridicule costing its target nothing, and the closing paragraph sounds elegiac enough to license the wider claim."
+          },
+          {
+            "option": "C",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The passage runs the arrow the other way: the target's standing comes from a following or from a reputation he has pledged, and the audience's laughter acts on that standing rather than creating it.",
+            "seductive_element": "The passage does give the audience a decisive role — it 'supplies the judgement' — which makes an audience-first account sound like the author's."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0037-q2",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "arg.principle"
+      ],
+      "target_mistake": "answering with a feature of the anecdote that is true and near the condition — the accuracy of the impression, the reach of the clip — instead of the condition the passage actually states",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "According to the passage, ridicule can damage a public figure only when that figure",
+      "options": {
+        "A": "is the subject of an impression accurate enough to be instantly recognised",
+        "B": "has staked something on the good opinion the laughter would withdraw",
+        "C": "is unable to stop the mockery from reaching a large enough audience",
+        "D": "privately accepts that the satirist's judgement of him is a fair one"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The third paragraph gives the condition twice, in a matched pair: the man who 'has pledged his seriousness' can be foreclosed on; the man who 'never asked owns nothing the laughter can take'. A condition stated as a contrast between two cases is the sentence a detail question is built from.",
+        "correct_reasoning": "The correct option restates that pledge. The passage's word for it is a security posted in advance: damage is possible only where the target has already committed something to an audience, so that the audience's changed opinion takes something real away. The minister of the anecdote had committed nothing, which is why the clip cost him nothing.",
+        "passage_anchor": "rc-0037-p3",
+        "question_type_note": "A detail question about a stated condition is answered from the sentence that states it; the decoys will be other true features of the same episode that the passage never makes conditions.",
+        "reading_habit": "When a passage says something works 'only when', copy the clause after the 'when'. Options that substitute a vivid feature of the example for the stated condition are the commonest way to lose an easy mark.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The impression's accuracy is established in the first paragraph and then explicitly discounted: the force of satire 'was never in the portrait', and a better impression is said to make a better testimonial.",
+            "seductive_element": "The accuracy of the impression is the most admired thing in the narrative, and it is genuinely in the passage."
+          },
+          {
+            "option": "C",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Reach cannot be the condition here, since the minister enlarged the audience himself and was unharmed; the passage locates damage in what has been pledged, not in how many people watch.",
+            "seductive_element": "It is what everyone assumes about mockery, and the anecdote's turning point is an act that multiplies the clip's audience."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage requires a commitment to an audience, not an assent to the satirist; nothing in it says the target must think the portrait fair, and the whole account is about what others withdraw rather than what the target concedes.",
+            "seductive_element": "It sounds like a subtle psychological reading of shame, and shame is the passage's subject."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0037-q3",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.organization",
+        "struct.pivot"
+      ],
+      "target_mistake": "reading the final paragraph as a consolation the author accepts, or treating the anecdote as a story about a sketch that was not good enough",
+      "prediction_target": "The learner should be able to say: the author uses one failed sketch to name the condition satire has always depended on, and then moves satire's surviving purpose from the target to the audience without calling the two equal.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best characterises what the author does in the passage?",
+      "options": {
+        "A": "recounts an episode in which a satirical sketch failed and identifies the mistakes its performers made",
+        "B": "argues that satirists should leave politicians alone and choose targets still capable of embarrassment",
+        "C": "uses one failed sketch to name the condition satire depends on, then moves its remaining purpose to the audience",
+        "D": "shows that satire has lost its power and offers the pleasure of a shared laugh as compensation"
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The passage has two hinges. The first is 'nothing had been taken from it; what it wanted had simply not been there to take', which converts an anecdote into an analysis. The second is 'What remains is smaller and is not nothing', which shifts the beneficiary of satire from the target to the room. A characterisation must name both moves.",
+        "correct_reasoning": "The correct option keeps the verb and the object of each move. The anecdote is not evidence that the sketch was bad — the passage insists it was cruel and accurate — but the occasion for stating a condition, that satire draws on what the target has staked. The final paragraph then relocates the purpose: the laugh confirms a standard for the people who are not the target. That relocation, not a verdict on satire in general, is where the passage ends.",
+        "passage_anchor": "rc-0037-p4",
+        "question_type_note": "Best-characterisation questions are answered in verbs. Name what the author does to the material, paragraph by paragraph, and reject options whose verbs the passage never performs.",
+        "reading_habit": "Before the options, say the passage aloud as two or three verbs with objects: recounts an episode, names a condition, relocates a purpose. An option that adds a verb the author never used, such as blames or recommends, is out however true its nouns are.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The passage takes trouble to say the sketch was excellent — cruel, accurate, drawing a laugh with an edge — and its argument is that no fault in the performance was involved; there are no mistakes to identify.",
+            "seductive_element": "The narrative really is an account of something that failed, and failure invites a search for error."
+          },
+          {
+            "option": "B",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No advice to satirists appears anywhere; the passage moves from what satire needs to what it still achieves, and its last paragraph endorses continuing to laugh at public men rather than abandoning them.",
+            "seductive_element": "An argument that a target cannot be hurt reads as an argument for choosing a different target."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage refuses exactly this reading: 'it would be a consolation to pretend that the second function is as good as the first, and it is not.' It also limits the loss to targets who have staked nothing, rather than declaring satire powerless.",
+            "seductive_element": "It is the near-tie: the paragraph does describe a surviving pleasure, and an elegiac closing cadence makes the whole passage sound like a lament."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0037-q4",
+      "type": "strengthen",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.strengthen",
+        "arg.assumption",
+        "elim.near_tie"
+      ],
+      "target_mistake": "accepting a fact that confirms the outcome of the anecdote as though it supported the explanation of the outcome",
+      "prediction_target": "The learner should first name the mechanism — damage requires dependence on an audience whose good opinion can be withdrawn — and predict that the strengthener compares figures who have that dependence with figures who do not.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most strengthen the author's explanation of why the sketch cost the minister nothing?",
+      "options": {
+        "A": "Politicians who need the approval of people outside their own following lose standing when satirised; those who need only their following do not.",
+        "B": "Clips taken from satirical programmes now circulate far more widely than the programmes from which they have been cut.",
+        "C": "Politicians who draw attention to mockery of themselves are afterwards trusted less by their own supporters than before.",
+        "D": "In the weeks after the clip circulated, the minister's standing with the public was found to be unchanged."
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The explanation is causal and it names its variable: the target 'supplies the need', and where the need is absent the performance has nothing to act on. A strengthener must therefore vary the need and hold the ridicule constant.",
+        "correct_reasoning": "The correct option does exactly that. It compares two kinds of politician who are equally satirised and differ only in whether they depend on approval from outside their own following, and it reports the difference in outcome the author's account predicts. That is direct support for the mechanism rather than for the single episode, which is what the question asks about.",
+        "passage_anchor": "rc-0037-p2",
+        "question_type_note": "A strengthen question is about the link between evidence and conclusion. Name the variable the author says is doing the work, then choose the option that manipulates that variable and nothing else.",
+        "reading_habit": "Write the author's claim as 'because X, therefore Y', and ask of each option whether it bears on X or only on Y. Options that confirm the outcome without touching the mechanism are the standard near-miss on strengthen questions.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Circulation bears on how many people see a sketch, and the passage's account turns on what the target has staked rather than on audience size; on this account wider circulation would change nothing either way.",
+            "seductive_element": "The episode hinges on a clip being shared, so anything about circulation feels central to it."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This would make the minister's decision to post the clip a cost rather than a gain, which cuts against the claim that mockery from outside functions as a testimonial to his own following.",
+            "seductive_element": "It concerns the exact act the anecdote turns on, and a finding about trust sounds like evidence for a passage about standing."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "An unchanged rating in one case confirms that the sketch did no damage, which the passage already reports; it gives no reason to prefer the author's explanation of the absence of damage over any other.",
+            "seductive_element": "It is the near-tie: it is about this minister and this clip, and it is consistent with everything the author says."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "foreclose",
+      "passage_use": "has pledged his seriousness, and ridicule can foreclose on it",
+      "meaning_here": "to seize what was pledged as security when the pledge is broken",
+      "difficulty": "hard"
+    },
+    {
+      "word": "testimonial",
+      "passage_use": "the clip is not an injury but a testimonial",
+      "meaning_here": "a public endorsement; evidence in the target's favour rather than against him",
+      "difficulty": "medium"
+    },
+    {
+      "word": "caricature",
+      "passage_use": "A caricature does that, and no government has ever fallen to a caricature",
+      "meaning_here": "an exaggerated portrait that distorts a subject for comic effect",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A story about a joke that stopped working, told by someone who admires the joke. Decide early what the author thinks went wrong, because three of the obvious answers are wrong and the passage says so.",
+    "one_sentence_summary": "A first-rate satirical impression cost its target nothing because satire's force is borrowed from what the target has staked on other people's good opinion, and where nothing has been staked the only thing left for satire to do is to remind an audience that it still has a standard.",
+    "main_idea": "Satire does not work by making someone look foolish. It works by showing a person to the people whose good opinion he needs. A politician who needs no such opinion has nothing to lose, so ridicule becomes a compliment to his own side. What is left of satire is a service to the audience rather than a weapon against the target, and the author says plainly that this is a smaller thing.",
+    "simple_explanation": "The writer spends a few weeks watching a comedy show being rehearsed. The best part is an impression of a minister, and it is very good: not just the voice, but the way the man pauses before telling a lie. The first audience laughs the way people laugh when someone finally says out loud what they had only half noticed.\n\nThen the minister posts the clip himself, with the words 'worth watching'. The sketch keeps going for a week and then disappears from the show.\n\nThe company felt robbed. The writer says nothing was stolen, because the thing the sketch was reaching for was never there. Satire has never worked simply by making someone look silly; a rude drawing can do that, and no government has ever fallen because of a drawing. It works when it shows a person to the people whose approval he needs, in a light he would not have chosen. Three things are needed: the performer's light, the audience's judgement, and the target's need. Take away the need and the other two have nothing to push against.\n\nSo the real question is what a politician has promised. A man who has spent years asking to be taken seriously has put his seriousness up as security, and mockery can take it. A man who never asked has put up nothing. His supporters treat mockery from outsiders as proof that he is not one of them, which is why they chose him. For him the clip is not a wound; it is a reference. And the better the impression, the better the reference.\n\nWhat is left? When an audience laughs at a public figure, it is also doing something for itself: agreeing that a standard still exists and can still be used. That is worth having, and a country that cannot say what is absurd has lost more than a joke. But the writer refuses to call it a fair exchange. The old sketch changed what a minister could get away with. The new one only changes what we can still bring ourselves to notice.",
+    "why_difficult": "The passage keeps praising the thing that failed, which readers find hard to hold. Because the sketch is described as cruel and accurate, the mind looks for a fault in it and the options offer several. The argument's real move is an abstraction dropped into the middle of a story: satire's force is borrowed, not produced, and the lender is the target. The closing paragraph then performs a second difficult move, granting a real value to what remains and immediately refusing to call it equivalent, so that both an optimistic and a despairing reading are available to anyone who stops one sentence early.",
+    "author_intention": "To stop the reader from blaming the satirist, and to replace a vague sense that mockery has stopped working with a precise account of what mockery was ever working on.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0037-p1",
+        "role": "Tells the episode",
+        "note": "A comedy company rehearses a superb impression of a minister. The minister shares the clip himself, and the sketch quietly disappears from the show."
+      },
+      {
+        "paragraph_id": "rc-0037-p2",
+        "role": "Refuses the easy reading",
+        "note": "Nothing was stolen. Satire never worked by making someone look silly; it works by showing him to people whose approval he needs. Three parts are required, and the target supplies one of them."
+      },
+      {
+        "paragraph_id": "rc-0037-p3",
+        "role": "States the condition",
+        "note": "Damage is possible only where something has been pledged. A man who never asked to be thought serious owns nothing the laughter can take, and the better the impression, the better it serves him."
+      },
+      {
+        "paragraph_id": "rc-0037-p4",
+        "role": "Relocates the purpose",
+        "note": "What survives is the audience's confirmation that a standard still exists, which is worth doing. The author then refuses to pretend it is as good as what was lost."
+      }
+    ],
+    "tone_progression": "Warm and observational in the anecdote, cooler and more analytical as the mechanism is set out, and finally level and unconsoled, granting the smaller function its worth in one sentence and denying it equivalence in the next.",
+    "key_transitions": [
+      "'But nothing had been taken from it; what it wanted had simply not been there to take.' (paragraph 2) — the anecdote becomes an argument.",
+      "'The force of satire was never in the portrait.' (end of paragraph 3) — the claim the whole passage exists to make.",
+      "'But it would be a consolation to pretend that the second function is as good as the first, and it is not.' (paragraph 4) — the refusal that stops the ending from being comforting."
+    ],
+    "misunderstanding": "Readers in a hurry build one of two wrong pictures. The first is that the sketch was somehow at fault and the passage is about how satire should be done better, which the text contradicts by praising the sketch and saying a sharper one would only serve the target more. The second is that the last paragraph is a consolation prize the author accepts, so that the passage ends in gentle optimism. The author's last three sentences exist precisely to block that, and a reader who stops at 'the work is worth doing' will misread the tone of the whole piece.",
+    "traps_summary": "Two habits are punished here. One is transferring a cause: options move satire's power into the portrait, the audience or the size of the audience, when the passage has already said where it comes from. The other is dropping a limit: the failure is stated for one kind of target, and options offer it for all public figures and for satire as such. When an author says a thing works 'only when', the limit is the answer and the generalisation is the trap.",
+    "reading_lesson": "When a passage tells a story and then explains it, find the sentence where the explanation names its cause, and treat that sentence as the passage's law. Every later question about what would help, what would change, or what follows is decided by whether the option touches that named cause or merely touches the story. Vivid details from the narrative will be offered as causes; they are only scenery unless the author says otherwise.",
+    "real_world": "The same structure governs apologies, boycotts and public criticism of every kind: pressure works on people who have something posted with the public, and looks absurd when applied to people who have posted nothing.",
+    "takeaway": "Mockery can only collect a debt that the target has already agreed to owe.",
+    "reflection_question": "What have you staked on the good opinion of people you will never meet, and what would it cost you to be laughed at by them?"
+  }
+}

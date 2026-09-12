@@ -1,0 +1,159 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0025",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "history",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Biscuit and the Reach of Fleets",
+    "theme": "how the keeping qualities of food and water, not doctrine, set the limits of naval power",
+    "estimated_time_sec": 170,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: five-sentence TITA jumble, used by CAT for its harder sets; re-verify against each new official paper"
+    },
+    "macro_pattern": "specific_to_general",
+    "cohesion_signals": ["pronoun_ref", "demonstrative", "connective_explicit", "lexical_repetition", "article_given_new"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["competing_opener", "lexical_decoy"],
+    "dna_traits": ["ending_judgement", "global_tracking", "wm_long_chain", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 5,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "separate three sentences that all sound like conclusions by asking which of them contains a backward reference the others do not",
+    "reasoning_patterns": ["disc.competing_ending", "disc.specific_to_general", "disc.demonstrative", "disc.transition_word", "struct.specific_to_general"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Three sentences here read as conclusions, which is the whole design. The sentence about admirals and contractors is epigrammatic and tempts a solver to end there, but it opens with 'Every extension of a blockade therefore', and a 'therefore' cannot conclude a paragraph whose evidence would then lie behind it in the wrong place. The strongest rival ends on the general statement about what a fleet may attempt and moves the aphorism about the storehouse earlier; it dies on 'On that reading', which needs a reading, and the only general statement available to be read is the one about carrying supplies. A third rival opens on the sentence about biscuit, which looks free of references until 'her casks' is noticed.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General naval and logistical history; no specific text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A ninety-nine tier five-sentence jumble whose difficulty is concentrated at the tail: three candidate endings, separated only by a 'therefore', a definite phrase and a demonstrative. The opening is also contested, since the sentence about biscuit begins with a bare noun and only a possessive pronoun betrays its dependence."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The pattern is older than these navies and outlasts them: what a fleet or an army may attempt is fixed by what can be carried to it and kept fit to use.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "Biscuit baked twice and stored dry lasted a year; the water in her casks went foul in six weeks, and the beer that replaced it in eight.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "On that reading, strategy is written in the storehouse before it is ever written on the map.",
+      "role": "restatement"
+    },
+    {
+      "label": "D",
+      "text": "A ship of the line in 1780 could keep the sea for about four months, and the limit was set not by her timbers but by her bread.",
+      "role": "topic"
+    },
+    {
+      "label": "E",
+      "text": "Every extension of a blockade therefore had to be bought with a chain of victualling ports, and the admirals who won reputations for daring were commonly the ones with the better contractors.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": ["D", "B", "E", "A", "C"],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "D ends on her bread as the thing that set the limit; B takes up the biscuit at once and adds the water and the beer. The possessive in 'her casks' also needs the ship D has introduced, so B cannot stand anywhere before it."
+    },
+    {
+      "from": "B",
+      "to": "E",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "E's 'therefore' draws a consequence from durations, and only B supplies durations: a year, six weeks, eight weeks. Without those figures the inference about victualling ports has nothing to rest on."
+    },
+    {
+      "from": "E",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "A widens the case into a rule, and its opening words, 'The pattern', can only point at the sequence the three earlier sentences have set out. Its 'these navies' likewise needs navies already on the page."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "C begins 'On that reading', which refers to a general statement just made. A is the only general statement in the set, so C follows it and nothing else."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph works outwards from one navy in one decade to a claim about armies and fleets in general, and then compresses that claim into a single line. Because it travels from the particular to the general, the sentences most likely to be mistaken for conclusions are the ones in the middle, where the particular case is at its most quotable.",
+    "movement": [
+      { "label": "D", "why_here": "D is the only sentence free of backward references, and it names the ship, the period and the puzzle at once: the limit was set by bread rather than by timbers." },
+      { "label": "B", "why_here": "B supplies the figures behind that puzzle. It belongs immediately after D because 'her casks' has no owner until the ship has been introduced, and because the biscuit answers D's last word." },
+      { "label": "E", "why_here": "E draws the operational consequence of the figures, with 'therefore' marking it as an inference. Its closing line about admirals and contractors is the sting of the particular case, not the moral of the paragraph." },
+      { "label": "A", "why_here": "A is where the paragraph widens. 'The pattern' collects the three preceding sentences into a rule, and 'these navies' shows that the rule is being read off a case already described." },
+      { "label": "C", "why_here": "C restates that rule in one line and closes. 'On that reading' cannot precede the reading it refers to, and the sentence hands nothing on to anything else." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DBECA",
+        "trap_type": "competing_ending",
+        "why_tempting": "The aphorism about the storehouse and the map is the most quotable sentence in the set, and a paragraph that finishes on the widest general claim about fleets and armies looks properly built.",
+        "where_it_breaks": "The aphorism begins 'On that reading', which requires a reading to have been offered. In this order the phrase points backwards at three sentences of naval detail, and a chain of victualling ports is not a reading of anything. The general statement has to come first and be restated, not the other way round."
+      },
+      {
+        "order": "DBAEC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The general sentence speaks of fleets and armies and of what can be carried to them, which chimes with the biscuit and the casks; a solver who joins on subject matter moves it up beside the supplies.",
+        "where_it_breaks": "The sentence about blockades opens with 'therefore' and would then draw its inference after the paragraph has already generalised, so the argument would run from the rule back to the case. It also strands 'The pattern', which needs the blockade sentence among the things it is a pattern of."
+      },
+      {
+        "order": "BDEAC",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence about biscuit begins with a bare noun, carries no connective and states a fact that seems to need nothing before it, which is the shape solvers look for in an opener.",
+        "where_it_breaks": "Halfway through it speaks of 'her casks'. There is no ship yet for the possessive to attach to, and the sentence about the ship of the line then arrives to introduce a vessel the paragraph has already been describing."
+      }
+    ],
+    "trap_named": "The trap is a crowd of endings. Setters write two or three sentences that each sound final — an epigram, a general rule, a compressed restatement — and leave one small reference to sort them. Here the sorting is done by 'therefore', which points backwards to figures, by 'The pattern', which points backwards to a sequence, and by 'On that reading', which points backwards to a rule. Sounding final is a feeling; a backward reference is evidence.",
+    "solving_habit": "When more than one sentence could close a paragraph, stop judging them by tone and line them up by what each one refers back to. The sentence whose reference is widest, and which nothing else refers back to, is the one that ends."
+  },
+  "mentor": {
+    "challenge": "Three of these five sentences sound like the last one. Decide between them by what each refers back to, not by which is the most quotable.",
+    "paragraph_plain": "A big warship in 1780 could stay at sea for about four months, and what stopped her was food rather than the state of her hull. Biscuit, baked twice and kept dry, lasted a year, but the water in her barrels was foul within six weeks and the beer that replaced it within eight. So a longer blockade meant building a chain of supply ports, and the admirals who became famous for boldness were usually the ones with better suppliers behind them. The same thing is true far beyond these navies: what any army or fleet can attempt depends on what can be carried to it and kept usable. Read that way, strategy is decided in the storehouse before anyone draws a line on a map.",
+    "takeaway": "Sounding like an ending is a feeling; referring back to what the paragraph already said is evidence."
+  }
+}

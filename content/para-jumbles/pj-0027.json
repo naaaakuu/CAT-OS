@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0027",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "institutions",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "The Judgement That Could Not Be Inherited",
+    "theme": "why an organisation built on one person's good judgement fails after that person leaves, and what can be done about it in advance",
+    "estimated_time_sec": 160,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["demonstrative", "article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 5,
+      "competing_endings": 3,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "test a candidate opening sentence for definite noun phrases before accepting it, since an abstract sentence can still be bound to one that comes before it",
+    "reasoning_patterns": ["disc.competing_opener", "disc.problem_then_solution", "disc.demonstrative", "disc.given_new", "struct.problem_solution"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The designed rival opens on the sentence about the danger, which is abstract, general, free of pronouns and epigrammatic in shape, and therefore looks like a thesis. It is bound twice over: it begins 'The danger', a definite reference to a danger not yet named, and it speaks of 'the founder' as somebody the paragraph has already introduced. A second rival ends on that same sentence, on the ground that the bleakest line makes the best close; the remedy would then be prescribed before the harm it addresses had been described, and the sentence that begins 'The remedy' would answer an incomplete problem. The second sentence is anchored beyond argument by 'Such an institution'.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General writing on organisations and succession; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-plus problem-and-solution jumble whose trap is placed at the head rather than the tail. The decoy opener has every surface property solvers look for in a first sentence and two definite references that disqualify it; the real opener is the least quotable sentence in the set."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The danger is not that a successor will be foolish, but that the reasons will have left the building with the founder, and the habits that remain will go on being obeyed where they no longer apply.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "An institution that works because its founder's judgement is good has a defect that nobody notices while the judgement lasts.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "The remedy is unglamorous and expensive: to make the founder, while still present, convert decisions into rules that can be taught, disputed and, when they fail, revised.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "Such an institution settles its hard cases well, needs no rule in order to settle them, and therefore writes none; the practice is carried entirely in one head.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "D opens 'Such an institution', which can only mean the one B has just described. It then spells out the defect B announced but did not name: the cases are settled well, so no rule is ever written down."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "D ends with the practice carried entirely in one head. A takes that up as its given, since reasons can only leave the building with the founder if they were never anywhere else, and it names the harm that follows."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "thematic_development",
+      "reliability": "high",
+      "explanation": "C opens 'The remedy', which presupposes a harm fully stated. A is where the harm is finally named, and C's prescription answers it point for point: reasons written down, rules that can be taught and revised."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A problem stated, the mechanism that produces it, the harm it does when the conditions change, and the remedy. What makes the paragraph awkward is that its most striking sentence is the third one, and its plainest sentence is the first; solvers who choose an opener by memorability rather than by reference start in the wrong place.",
+    "movement": [
+      { "label": "B", "why_here": "B is the only sentence with nothing behind it. It introduces the institution, the founder and the defect, and the three later sentences each refer to one of them." },
+      { "label": "D", "why_here": "D explains why the defect goes unnoticed: an institution that settles its cases well has no occasion to write a rule. 'Such an institution' ties it to B, and the head that carries the practice sets up what follows." },
+      { "label": "A", "why_here": "A is where the defect becomes damage, and it depends on D for its content: the reasons can only depart with the founder because D has established that they were never recorded." },
+      { "label": "C", "why_here": "C prescribes, and a prescription comes last in a paragraph of this shape. Its opening phrase demands a complete diagnosis, and the diagnosis is complete only once the harm in A has been described." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ABDC",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence about the danger is abstract, contains no pronoun, states a general truth and has the balanced shape of a thesis. It is also the most quotable line in the set, and solvers reach for quotable lines when choosing an opener.",
+        "where_it_breaks": "It opens with 'The danger', a definite reference to a danger that has not been named, and it goes on to speak of 'the founder' as a person already in the paragraph. Both phrases are demands on an earlier sentence, and only the sentence about an institution built on its founder's judgement can meet them."
+      },
+      {
+        "order": "BDCA",
+        "trap_type": "competing_ending",
+        "why_tempting": "The sentence about habits obeyed where they no longer apply is the bleakest in the set, and a paragraph that ends on the cost of a mistake feels finished; the remedy then reads as a practical aside placed in the middle.",
+        "where_it_breaks": "The remedy sentence begins 'The remedy', which requires the trouble to have been stated in full. Placed third it answers a problem whose worst consequence has not yet been described, and the paragraph would end by reopening the diagnosis it had already treated."
+      }
+    ],
+    "trap_named": "The trap is a decoy opener. Solvers test a candidate first sentence for pronouns and connectives and, finding none, accept it; setters exploit this by writing a decoy that is abstract and pronoun-free but carries a definite noun phrase — 'the danger', 'the remedy', 'the founder' — that quietly refers to something earlier. A definite article on an abstract noun is a reference like any other, and it disqualifies a sentence from opening just as surely as an 'it' would.",
+    "solving_habit": "Before you accept a sentence as the opener, read every noun phrase in it and ask whether each names something the reader could already identify. A sentence that says 'the danger' without having produced a danger is not an opening sentence, however general it sounds."
+  },
+  "mentor": {
+    "challenge": "The most thesis-like sentence here cannot open the paragraph. Look at its definite articles and you will see what it is quietly leaning on.",
+    "paragraph_plain": "An organisation that works because its founder has good judgement carries a flaw nobody can see while the founder is still deciding things. Because the hard cases keep being settled well, no rule is ever needed and none is written, so the whole practice lives in one person's head. The risk is not that whoever comes next will be stupid; it is that the reasons walk out of the door with the founder, leaving behind habits that are still obeyed in situations they were never meant for. The cure is dull and costly: while the founder is still there, make the decisions into rules that can be taught, argued with, and rewritten when they turn out to be wrong.",
+    "takeaway": "'The danger', 'the remedy', 'the problem' — a definite article on an abstract noun is a backward reference, and a sentence carrying one cannot go first."
+  }
+}

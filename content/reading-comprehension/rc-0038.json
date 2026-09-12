@@ -1,0 +1,453 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0038",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "anthropology",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "elite",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "scope-control",
+      "vocabulary-in-context",
+      "trap-recognition"
+    ],
+    "word_count": 492,
+    "question_count": 5,
+    "question_types": [
+      "inference",
+      "must_be_true",
+      "primary_purpose",
+      "tone",
+      "vocabulary_in_context"
+    ],
+    "theme": "food prohibitions versus food procedures as boundary markers: the first is kept alone and portable, the second requires co-performers, so dispersal dissolves a shared practice into a stated identity without anyone abandoning anything",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "A contrast passage whose two terms are easy to state and hard to keep apart under pressure. The set turns on cost: abstention is paid by one person, coordination by a group, and almost every distractor is built by forgetting which is which.",
+    "length_class": "medium",
+    "structure": "comparison_contrast",
+    "viewpoints": 2,
+    "tone": "analytical, unsentimental",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.contrast",
+      "comp.purpose",
+      "comp.organization",
+      "comp.intent",
+      "comp.paraphrase",
+      "arg.concession",
+      "arg.causal_claim",
+      "arg.description_vs_evaluation",
+      "lang.tone_shift",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "inf.necessary",
+      "meta.contradiction",
+      "elim.systematic",
+      "word.context_clue",
+      "word.polysemy"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option about dispersed communities losing cooking practices first, which is genuinely the passage's most striking finding; it fails because it is the final paragraph's consequence rather than the passage's project, and the first paragraph announces that project as separating two rules that have been treated as one. Q2: the rival is the elegiac option, since the closing sentences describe a wall coming down; the flat diction there — 'the ordinary operation of timetables' — and the absence of any evaluative word about the loss make mourning an addition rather than a reading. Q3: the near-tie is the option that prohibitions lapse first under dispersal; it reverses the asymmetry the fourth paragraph states, and the reversal is easy to make because the second paragraph dwells on how visible prohibitions are to outsiders rather than on how durable they are. Q4: the option that a procedure lapses only when belief in the classification fails is the strongest rival, and the third paragraph refuses it outright — 'a procedure therefore fails for reasons that have nothing to do with conviction'. Q5: the literal 'easily carried' sense of portable is the rival; the sentence that follows defines the word for this passage as asking nothing of the keeper's surroundings and nothing of anyone else.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "portable",
+      "abstention",
+      "dispersal"
+    ]
+  },
+  "passage": {
+    "title": "What Travels and What Does Not",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0038-p1",
+        "text": "The most durable anthropological insight about food is that rules of eating are rules of classification: a community decides what belongs where, and its table keeps the register. The insight is sound as far as it goes, and it has been asked to go further than it can, because it treats as one thing two rules that behave quite differently under strain. Some food rules are prohibitions, and say what may not be eaten. Others are procedures, and say how what is eaten must be got, handled, cooked, served and shared — in which vessel, by whose hands, in what order, in whose company. Both mark the edge of a group. They do not mark it in the same way."
+      },
+      {
+        "id": "rc-0038-p2",
+        "text": "A prohibition is portable. It asks nothing of the keeper's surroundings and nothing of anybody else: it can be observed in a canteen, in a foreign city, at a table where no one knows what is being done and no one would mind if they did. Its cost is abstention, and abstention is a cost one person can pay alone. This is why prohibitions are the part of a tradition most visible from outside and the part most easily described; they can be stated as a list, and a list can be carried anywhere. It is also why they are so often mistaken for the whole of the matter, and why an outsider, seeing a refusal and no ceremony, concludes that the rule is about squeamishness."
+      },
+      {
+        "id": "rc-0038-p3",
+        "text": "A procedure cannot be kept alone. It needs other people who know what they are doing: someone to prepare the food as the rule specifies, others to receive it in the order the rule specifies, a household with the vessels and the hours and the memory the rule presumes. Its cost is not abstention but coordination, and coordination is paid by a group. A procedure therefore fails for reasons that have nothing to do with conviction. Nobody need decide that it no longer matters; it is enough that the people whose participation it requires are working different shifts, or living an hour away, or not there at all."
+      },
+      {
+        "id": "rc-0038-p4",
+        "text": "The consequence is an asymmetry that is hard to see from inside. Put a community under dispersal and the procedures go first while the prohibitions remain; and because the prohibitions remain, and because they are what outsiders ask about, the tradition can look intact from either side of the boundary long after it has stopped organising anyone's day. What has happened is not a loss of belief but a change in what the rules are for. A boundary once maintained by what people did together has become a boundary carried by individuals, one at a time, in the form of something they can state about themselves. Assimilation of this kind needs no convert and no crisis. Nothing is renounced, nobody is persuaded of anything, and the wall comes down from the inside by the ordinary operation of timetables."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0038-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.contrast"
+      ],
+      "target_mistake": "offering the passage's most striking consequence as its purpose, or adopting the classificatory account the author grants in the opening sentence",
+      "prediction_target": "Before the options the learner should be able to say: the author is prising apart two kinds of rule that are usually treated as one, in order to explain something the undivided account cannot explain.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to explain why dispersed communities give up their cooking practices before they give up their dietary prohibitions",
+        "B": "to defend the view that rules of eating express a community's system of classification rather than its disgust",
+        "C": "to urge communities under strain to protect the shared practices that outsiders find hardest to understand",
+        "D": "to separate two kinds of food rule usually treated as one, and to show what the distinction explains about how boundaries fail"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The opening paragraph announces the project in a single complaint: the classificatory insight 'has been asked to go further than it can, because it treats as one thing two rules that behave quite differently under strain'. Everything that follows is that separation being carried out and then cashed in.",
+        "correct_reasoning": "The correct option names the operation and its pay-off. Two paragraphs define the two kinds of rule by their cost — abstention for one, coordination for the other — and the last paragraph uses the distinction to explain a specific failure, in which a boundary survives as a statement about oneself after it has stopped organising anyone's day. A purpose statement that stops at either half describes a part of the passage rather than what it was written to do.",
+        "passage_anchor": "rc-0038-p1",
+        "question_type_note": "Primary-purpose questions want the verb and its object across the whole passage. In a contrast passage the verb is almost always distinguishing, and the object is the pair the author says has been run together.",
+        "reading_habit": "When a passage opens by saying an accepted idea has been asked to do too much, expect the purpose to be a division rather than a discovery. The author's job is usually to show that two things filed together behave differently.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the consequence drawn in the final paragraph, not the passage's undertaking; the distinction between prohibition and procedure is built over two paragraphs before dispersal is mentioned, and it is that distinction the author set out to make.",
+            "seductive_element": "It is the most concrete and most memorable claim in the passage, and it is entirely accurate as far as it goes."
+          },
+          {
+            "option": "B",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The classificatory account is granted in the opening sentence and immediately limited; the author neither defends it nor attacks it, but argues that it cannot tell two kinds of rule apart, which is a different undertaking altogether.",
+            "seductive_element": "The passage does open with that account and does call it sound, and the squeamishness remark near the end of the second paragraph sounds like a defence of it."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No advice is offered to anyone; the final paragraph describes a process that needs no decision and passes no verdict on it, and the passage never says that a community should try to hold its procedures together.",
+            "seductive_element": "The closing image of a wall coming down invites the reader to supply a recommendation the author declines to make."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0038-q2",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "arg.description_vs_evaluation",
+        "comp.intent"
+      ],
+      "target_mistake": "reading the final paragraph's subject matter as the author's attitude, and so hearing mourning in sentences that pass no judgement at all",
+      "prediction_target": "The learner should be able to say before the options: the author describes a loss without grieving it and corrects a discipline without attacking it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The author's tone in the passage is best described as",
+      "options": {
+        "A": "indignant, treating the outsider's account of these rules as a deliberate insult",
+        "B": "dismissive of the classificatory account and of the discipline that produced it",
+        "C": "analytical and unsentimental, more interested in how the boundary works than in lamenting it",
+        "D": "tentative, advancing the distinction as a possibility the passage declines to rely on"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "Look for evaluative words and find almost none. The classificatory insight is 'sound as far as it goes'; the outsider's error is reported, not condemned; and the final sentence explains an entire cultural loss as 'the ordinary operation of timetables', which is the flattest available way of saying it.",
+        "correct_reasoning": "The correct option matches both the method and the temperature. The passage is analytical — it divides, defines by cost, and derives a consequence — and it refuses the emotional register its subject invites, ending on a mechanism rather than on a regret. That is what unsentimental means here: the loss is described precisely and is never called a loss.",
+        "passage_anchor": "rc-0038-p4",
+        "question_type_note": "Tone is set by judgement words, not by topic. A passage can describe something sad in a voice that is not sad, and the options will always offer you the emotion the subject matter suggests.",
+        "reading_habit": "Ask what the author calls the thing, not what the thing is. If the strongest evaluative phrase in a paragraph is 'ordinary', the loud options are gone before you compare them.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The outsider's conclusion about squeamishness is explained as a natural consequence of seeing only the portable half of a tradition; the passage offers a cause for the error rather than any charge of bad faith.",
+            "seductive_element": "Correcting a misunderstanding about a community's practices reads as defence, and defence reads as indignation."
+          },
+          {
+            "option": "B",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The opening sentence calls the classificatory insight the most durable one in the field and sound as far as it goes; the criticism is that it has been overextended, which is a limit placed on a good idea rather than a dismissal of it.",
+            "seductive_element": "The passage does begin by finding fault with the established account, and a reader who registers the fault without the concession hears rejection."
+          },
+          {
+            "option": "D",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author relies on the distinction completely: the final paragraph opens 'The consequence is an asymmetry' and derives a whole account of assimilation from it, which no writer does with a claim being held at arm's length.",
+            "seductive_element": "The prose is careful and free of superlatives, and carefulness is easily mistaken for hesitation."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0038-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "reversing the asymmetry because the second paragraph makes prohibitions sound like the fragile, exposed part of a tradition",
+      "prediction_target": "The learner should predict that a supported inference follows from who pays the cost: a rule one person can keep says something about that person, and a rule requiring several says something about whether they are still together.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "The food rules that outsiders find hardest to understand are the ones a community defends most fiercely.",
+        "B": "A rule that one person can keep alone is a weaker sign of a group's cohesion than one that cannot.",
+        "C": "Prohibitions are the first of a community's food rules to lapse once its members have been dispersed.",
+        "D": "Any practice that requires several people to perform it disappears once a community has been dispersed."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The passage defines each kind of rule by who pays for it. A prohibition costs abstention, 'a cost one person can pay alone'; a procedure costs coordination, and 'coordination is paid by a group'. That difference is what the inference questions are built on.",
+        "correct_reasoning": "The correct option follows from the two costs. A prohibition kept tells you only that one person paid a cost one person can pay; a procedure kept tells you that the people it needs were assembled, with their vessels and hours and memory, because there is no other way it could have happened. So the persistence of a rule that can be kept alone is worse evidence about the group than the persistence of one that cannot, which is exactly why dispersal removes the second while the first survives.",
+        "passage_anchor": "rc-0038-p3",
+        "question_type_note": "Inference questions on a contrast passage are decided by the axis of the contrast; here the axis is cost, and every option has to be tested against who pays.",
+        "reading_habit": "When an author distinguishes two things by a single property, write that property down and check each option against it. Options that swap the two sides of the axis feel right because both halves are in the passage.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage says which rules outsiders notice and why, but it never discusses how fiercely anything is defended; its whole account of decay turns on things lapsing without anyone deciding to defend or abandon them.",
+            "seductive_element": "It borrows the outsider's viewpoint from the second paragraph and attaches a plausible sociological claim to it."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph states the order and it is the other way round: 'the procedures go first while the prohibitions remain', which is the whole basis of the asymmetry the passage is describing.",
+            "seductive_element": "It is the near-tie. The second paragraph makes prohibitions sound exposed, being visible to outsiders and easily mistaken, and exposure suggests fragility."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The claim in the passage is about food procedures and is stated as what happens first under dispersal, not as a law about every collective practice, and the mechanism it gives is a shortage of available participants rather than a certainty of extinction.",
+            "seductive_element": "It generalises the passage's own logic and sounds like the abstract version of the argument a reader has just followed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0038-q4",
+      "type": "must_be_true",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "meta.contradiction",
+        "elim.systematic"
+      ],
+      "target_mistake": "accepting an attractive prediction about what happens next, or importing belief as the cause of a lapse the passage attributes to logistics",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "If the passage is true, which of the following must also be true?",
+      "options": {
+        "A": "A group that has lost its procedures while keeping its prohibitions will in time lose the prohibitions as well.",
+        "B": "A procedure lapses only when a community stops believing in the classification that the procedure expresses.",
+        "C": "A community whose food rules are all prohibitions could maintain them without its members ever assembling.",
+        "D": "Communities that lose their procedures devise new shared practices to take the place of the old ones."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The second paragraph is a set of necessary conditions in disguise: a prohibition 'asks nothing of the keeper's surroundings and nothing of anybody else', and its cost 'is a cost one person can pay alone'. Anything that follows from those two clauses alone must be true if the passage is.",
+        "correct_reasoning": "The correct option is that entailment. If every rule a community holds is of a kind that requires no other participant and no particular setting, then nothing in the observance of those rules requires the members to come together at all. The passage says as much when it describes a prohibition being kept in a canteen or a foreign city among people who do not know what is being done.",
+        "passage_anchor": "rc-0038-p2",
+        "question_type_note": "A must-be-true question is a test, not a preference: ask whether the passage could be entirely true while the option is false. If it could, the option is not forced, however likely it sounds.",
+        "reading_habit": "Run each option through the negation test rather than the plausibility test. Words like 'will in time', 'only when' and 'devise' are where an option quietly asks for more than the text guarantees.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "The passage says the opposite is what makes the asymmetry interesting: prohibitions remain, which is why the tradition looks intact. Nothing in it forecasts their eventual loss, and a prohibition's cost can still be paid by a single person indefinitely.",
+            "seductive_element": "It sounds like the natural next chapter of a story about a boundary dissolving, and readers supply endings that passages do not."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The third paragraph rules this out in terms: a procedure 'fails for reasons that have nothing to do with conviction', and the reasons given are shifts, distance and absence rather than any change of mind.",
+            "seductive_element": "It is the live rival, because belief is the explanation most readers bring to questions about tradition, and the passage does discuss what the rules express."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Replacement is never mentioned; the passage describes what remains after the procedures lapse, which is the old prohibitions carried privately, and explicitly says nothing is renounced and nobody is persuaded of anything.",
+            "seductive_element": "It reads like a balanced, humane observation, and the passage's interest in what survives makes invention sound like part of the story."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0038-q5",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "taking the everyday sense of a common word instead of the narrow sense the following sentence assigns it",
+      "prediction_target": "The learner should paraphrase the word from the sentence after it, which spells out what portability consists of: no demand on the surroundings and none on other people.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the second paragraph, \"portable\" most nearly means",
+      "options": {
+        "A": "light enough to be carried from one place to another without effort",
+        "B": "easily borrowed by communities that did not originally hold it",
+        "C": "able to survive any change whatever in a community's circumstances",
+        "D": "observable anywhere, because it asks nothing of the keeper's surroundings"
+      },
+      "correct": "D",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The word is defined by the sentence that follows it: 'It asks nothing of the keeper's surroundings and nothing of anybody else', with the canteen and the foreign city as instances. The author has planted the working definition one clause away.",
+        "correct_reasoning": "The correct option is that definition put back into the word. Portability here is a property of the rule's demands rather than of its weight: because the rule requires no particular setting and no second participant, there is nowhere it cannot be kept. That is also why the passage can say a list can be carried anywhere while a procedure cannot.",
+        "passage_anchor": "rc-0038-p2",
+        "question_type_note": "A word-in-context question is decided by the sentence that surrounds the word, and the commonest dictionary sense is the standard decoy when the author has narrowed the term.",
+        "reading_habit": "When a familiar word appears in an argument, read the next sentence before you translate it. Authors who use a plain word in a narrow way almost always explain the narrowing immediately.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This is the ordinary physical sense, and rules have no weight; the passage's portability is about what a rule demands of its setting, which is why it can be kept where nobody knows it is being kept.",
+            "seductive_element": "It is the first meaning of the word, and the paragraph's talk of lists being carried encourages the literal reading."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Transfer between communities is never discussed; the passage is concerned with one community's members keeping their own rule in unfamiliar places, not with other groups taking it up.",
+            "seductive_element": "Portability does suggest transferability, and the passage is full of movement between places."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage claims only that prohibitions outlast procedures under dispersal; survival of any change whatever is a guarantee it never offers, and the last paragraph shows a tradition being hollowed out while the prohibitions remain.",
+            "seductive_element": "It generalises the passage's actual finding about durability and sounds like a stronger statement of the same idea."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "portable",
+      "passage_use": "A prohibition is portable. It asks nothing of the keeper's surroundings",
+      "meaning_here": "keepable anywhere, because it makes no demand on setting or on other people",
+      "difficulty": "easy"
+    },
+    {
+      "word": "abstention",
+      "passage_use": "Its cost is abstention, and abstention is a cost one person can pay alone",
+      "meaning_here": "the act of refraining from something; here, the whole price of keeping a prohibition",
+      "difficulty": "medium"
+    },
+    {
+      "word": "dispersal",
+      "passage_use": "Put a community under dispersal and the procedures go first",
+      "meaning_here": "the scattering of a group's members so that they are no longer at hand",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two kinds of food rule are defined early and then kept apart for the rest of the passage. Decide which cost belongs to which rule, because nearly every question is decided by that one property.",
+    "one_sentence_summary": "Food prohibitions and food procedures both mark the edge of a group, but a prohibition costs only abstention and can be kept alone anywhere, while a procedure costs coordination and needs other people, so dispersal removes the procedures and leaves the prohibitions, turning a boundary that people maintained together into one that individuals merely state.",
+    "main_idea": "Rules about what may not be eaten are kept by one person and travel anywhere. Rules about how food must be handled and shared need other people and cannot travel. When a community scatters, the second kind disappears and the first kind stays, so the tradition looks unbroken while the shared life behind it has stopped. Nobody has abandoned anything; the boundary has simply changed from a practice into a label.",
+    "simple_explanation": "Communities have rules about food. The writer says there are two very different kinds, and people usually talk about them as if they were one.\n\nThe first kind is a ban: this may not be eaten. You can keep a ban by yourself. You can keep it in a work canteen, in a strange city, sitting with people who have no idea what you are doing. It costs you one thing only, which is going without, and one person can pay that.\n\nThe second kind is a method: how the food must be bought, prepared, served and shared, in which dish, by whose hands, in what order, with whom. You cannot keep a method by yourself. You need other people who know the steps, and a house with the right things in it, and a time when everyone is there. Its cost is not going without; its cost is getting people together, and a group has to pay that.\n\nSo what happens when a community spreads out? The methods go first. Not because anybody stops believing in them — nobody has to decide anything — but because the people needed for them are on other shifts, or an hour away, or gone. The bans survive, because a ban needs nobody.\n\nAnd here is the quiet part. Outsiders ask about bans, and the bans are still there, so from outside and even from inside the tradition looks whole. But it is no longer running anybody's day. What used to be a thing people did together has become a thing individuals can say about themselves. No one converted, no one argued, and the wall came down anyway, simply because of timetables.",
+    "why_difficult": "The distinction is easy to understand and hard to hold. Both halves are in front of the reader at once, and under time pressure the properties swap: the paragraph on prohibitions dwells on how exposed and misunderstood they are, which makes them feel fragile, exactly when the argument needs them to be the durable half. The last paragraph then makes a second demanding move, separating a change in belief from a change in circumstance, and readers who assume traditions die of doubt will misread it. The tone compounds the difficulty, because the subject is a loss and the prose refuses to treat it as one.",
+    "author_intention": "To stop the reader from treating a list of prohibitions as a measure of how intact a tradition is, and to show what an undivided account of food rules cannot explain.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0038-p1",
+        "role": "Grants and divides",
+        "note": "Accepts the standard idea that food rules are rules of classification, then says it hides a difference: some rules ban a food, others prescribe how food is handled and shared."
+      },
+      {
+        "paragraph_id": "rc-0038-p2",
+        "role": "Defines the first kind",
+        "note": "A ban can be kept anywhere by one person, because it needs nothing and nobody. That is why outsiders see bans first and think the whole thing is about disgust."
+      },
+      {
+        "paragraph_id": "rc-0038-p3",
+        "role": "Defines the second kind",
+        "note": "A method needs other people, equipment and shared time. It can stop working without anyone changing their mind, simply because the participants are not available."
+      },
+      {
+        "paragraph_id": "rc-0038-p4",
+        "role": "Draws the consequence",
+        "note": "Scatter a community and the methods go while the bans stay, so the tradition looks intact from both sides. The boundary becomes something individuals state rather than something people do."
+      }
+    ],
+    "tone_progression": "Even throughout: a mild correction of an accepted idea at the start, careful definition in the middle, and at the end the flattest possible account of a large loss, explained by shifts and distances rather than by any failure of faith.",
+    "key_transitions": [
+      "'The insight is sound as far as it goes, and it has been asked to go further than it can' (paragraph 1) — the concession that sets up the division.",
+      "'A procedure therefore fails for reasons that have nothing to do with conviction.' (paragraph 3) — belief is removed from the mechanism.",
+      "'The consequence is an asymmetry that is hard to see from inside.' (opening of paragraph 4) — the distinction is cashed in."
+    ],
+    "misunderstanding": "The commonest wrong picture is that this is a passage about a tradition weakening because people believe in it less, with the food rules as evidence of the decline. The passage says the opposite about the cause: nothing is renounced and nobody is persuaded of anything. The second wrong picture reverses the asymmetry, because the paragraph on prohibitions emphasises how misunderstood and visible they are and a reader converts visibility into vulnerability. Both misreadings survive a first pass because every element of them really does appear somewhere in the text.",
+    "traps_summary": "The set is built from three moves. Swapping the two sides of a contrast, since both are in the passage and only the axis tells them apart. Supplying a cause the author has explicitly excluded, here belief. And widening a claim from food procedures to all collective practice, or from 'outlasts procedures' to 'survives anything'. Before choosing, check which half of the contrast the option is about and what it has added to the text's own strength.",
+    "reading_lesson": "In a passage built on a contrast, find the single property the author uses to separate the two terms and write it in the margin: here it is who pays the cost. Every later question, on inference, on entailment, even on a word's meaning, is decided by that property rather than by which term sounds more important. When an option feels right but you cannot say which side of the axis it sits on, it is usually the trap.",
+    "real_world": "The same asymmetry governs languages, festivals and family customs anywhere people move for work: the parts that one person can keep alone survive the move, the parts that need a room full of people do not, and the survivors are mistaken for the whole.",
+    "takeaway": "A rule you can keep alone tells you about a person; a rule you cannot tells you whether the group is still there.",
+    "reflection_question": "Which of the practices you inherited could you keep entirely by yourself, and which would end the moment nobody turned up?"
+  }
+}

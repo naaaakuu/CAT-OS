@@ -1,0 +1,461 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0036",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "public-policy",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "elite",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "tone-detection",
+      "scope-control",
+      "trap-recognition"
+    ],
+    "word_count": 645,
+    "question_count": 5,
+    "question_types": [
+      "agree_disagree",
+      "inference",
+      "main_idea",
+      "phrase_in_context",
+      "tone"
+    ],
+    "theme": "why pilots succeed and rollouts fail: a pilot measures efficacy under attention while a rollout depends on a supervisory capacity that cannot be extended, so the two are different questions rather than one biased measurement",
+    "estimated_time_min": 10,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "Two accounts of the pilot-to-scale gap are given their due and then both refused, not because they are false but because they answer the wrong question. The near-tie sits in the agreement question, where a distractor converts the author's 'not sufficient' into 'irrelevant'.",
+    "length_class": "long",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "analytical, quietly corrective",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "inf.author_vs_reported",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "elim.near_tie",
+      "lang.tone_shift",
+      "arg.description_vs_evaluation",
+      "word.context_clue",
+      "comp.paraphrase",
+      "arg.analogy",
+      "comp.central_idea",
+      "scope.abstraction_level",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "arg.evidence_vs_conclusion"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option calling the pilot's effect size 'irrelevant to the decision to extend it'. It is built from the author's own emphasis on attention as the binding constraint, and a hurried reader will take 'not sufficient' for 'not needed'. It dies on the sentence 'whether the thing works at all is a real question, and it has to be answered before the second one is worth asking' — a question that must be answered first is not irrelevant. Q2: the rival is 'detached and descriptive, declining to choose'; the author does describe both accounts at length, but 'Both accounts are true, and both misdescribe the problem' and 'refine an estimate of the wrong quantity' are verdicts, not description. Q3: the rival reads the loan as a promise that the effect will reappear under the same conditions; the sentence itself defines the loan by what is spent, not by what is promised — 'the same scrutiny, divided among four hundred sites, is no longer scrutiny'. Q4: the dilution option is tempting because the passage states it sympathetically and never calls it false; it loses because the author's conclusion turns on the two questions being different, which that option denies by treating the gap as closable by resources. Q5: the rival says an intervention needing close supervision 'will fail' at scale; the passage licenses only that such an intervention is expensive in the input the system cannot extend, and its own prescription is to look for pilots that survive neglect, which presupposes some do.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "dilution",
+      "hothouse",
+      "compound"
+    ]
+  },
+  "passage": {
+    "title": "The Question the Pilot Never Asks",
+    "reading_time_min": 3.5,
+    "paragraphs": [
+      {
+        "id": "rc-0036-p1",
+        "text": "A government that wants to know whether something works tries it small first. A reading programme in nine schools, a rent subsidy in two districts, a nurse-led clinic in a single hospital: the pilot is the modern state's instrument of caution, and by the standards it sets itself it performs well. Pilots produce clean estimates, and the estimates are usually encouraging. What happens afterwards is equally regular. The programme is extended to four hundred schools, to a whole region, to every hospital in the country, and the effect that survives the journey is a fraction of the one that set out. Practitioners have a phrase for the drop and the journals have a literature on it, and neither has produced a reliable way of saying in advance which programmes will suffer it."
+      },
+      {
+        "id": "rc-0036-p2",
+        "text": "The commonest account is dilution. A pilot is a hothouse: money is not scarce, the staff are chosen, the designers are in the building, and everyone involved knows that the results are being watched. Scale removes each of these advantages in turn, and the estimate falls as they go. On this account the pilot's finding is not false, merely inflated, and the correction is arithmetical. Discount the number by whatever factor experience suggests, or else fund the rollout at pilot intensity and collect the pilot's effect."
+      },
+      {
+        "id": "rc-0036-p3",
+        "text": "A second account locates the trouble earlier, in who agrees to be piloted. Sites that volunteer are not the same as sites that are instructed; the head teacher who applies to trial a reading programme is already the sort of head teacher who would have raised reading scores with some other programme. What a pilot measures, on this account, is the intervention as delivered by its enthusiasts, while a rollout recruits, of necessity, the indifferent and the overstretched. The correction it proposes is a harder pilot: run the thing where nobody asked for it, and believe only the number that survives."
+      },
+      {
+        "id": "rc-0036-p4",
+        "text": "Both accounts are true, and both misdescribe the problem, because both treat the gap as a bias in a measurement — a distortion to be removed so that the pilot's number can be trusted to forecast the rollout's. But a pilot and a rollout are not two measurements of the same quantity. A pilot asks whether an intervention produces an effect when it is done properly. A rollout asks whether an organisation that cannot watch everything will get it done properly often enough to justify the cost of trying. The first question is about the intervention; the second is about the organisation, and in particular about its scarcest input, which is not money but attention. Attention is fixed in a way budgets are not. A ministry can double a programme's funding in a single spending round; it cannot double the number of hours its senior people are able to spend looking at anything."
+      },
+      {
+        "id": "rc-0036-p5",
+        "text": "Seen this way, a successful pilot is a loan against the organisation's attention, and a rollout is the demand for repayment: the same scrutiny, divided among four hundred sites, is no longer scrutiny. The number a pilot reports is a compound, the intervention's own contribution and the care that surrounded it, and nothing in the design separates the two. That is why the corrections both accounts propose, discounting and hostile piloting alike, refine with great sophistication an estimate of the wrong quantity. None of this makes the pilot worthless. Whether the thing works at all is a real question, and it has to be answered before the second one is worth asking. But the pilot worth commissioning is not the one that produces the largest effect. It is the one that produces a defensible effect while being deliberately neglected: run by ordinary staff, visited rarely, supported by nothing the system could not supply to every site at once. Such a pilot will report a smaller number, and the smaller number will mean more."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0036-q1",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_vs_reported",
+        "arg.rebuttal",
+        "elim.near_tie"
+      ],
+      "target_mistake": "converting the author's claim that efficacy is not sufficient for a rollout decision into the claim that it is not needed, or adopting one of the two corrections the author reports and refuses",
+      "prediction_target": "Before the options the learner should be able to say: the author values a pilot for what it reveals about how much attention the result needed, so the agreeable statement will prize a result obtained with little supervision over a bigger result obtained with a lot.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "The author would be most likely to agree with which one of the following?",
+      "options": {
+        "A": "A pilot that secured its effect without close supervision tells a policymaker more about a rollout than one that secured a larger effect with it.",
+        "B": "Because volunteer sites are unrepresentative, a pilot's finding should be recalibrated downwards before it is used to forecast a rollout.",
+        "C": "Since attention is the constraint that binds at scale, the size of the effect a pilot records is irrelevant to the decision to extend it.",
+        "D": "Programmes that disappoint on rollout should be returned to pilot conditions and retested under a stricter protocol before being abandoned."
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The last three sentences are a verdict, not a summary: the pilot worth commissioning is the deliberately neglected one, and 'the smaller number will mean more'. An agreement question on a passage that reports two positions before stating its own is always decided in the paragraph where the author stops reporting.",
+        "correct_reasoning": "The correct option is the author's closing prescription put as a comparison. If the number a pilot reports is a compound of the intervention and the care around it, then a result obtained under neglect has less of the care mixed into it, and so tells you more about what will remain when the care is withdrawn. That is exactly why the author prefers the pilot that is 'visited rarely' and says its smaller number will mean more.",
+        "passage_anchor": "rc-0036-p5",
+        "question_type_note": "Agreement questions live on the line between what an author reports and what an author holds. Mark the sentence where the reporting stops; nothing before it is safe to attribute.",
+        "reading_habit": "In any passage that sets out two existing positions, write a one-line verdict for each in the margin as you finish it. When the agreement question comes, discard every option that is one of those positions restated, however reasonable it sounds.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the second account's diagnosis fitted with the first account's remedy, and the author refuses both by name: discounting and hostile piloting 'refine with great sophistication an estimate of the wrong quantity'.",
+            "seductive_element": "The passage states the volunteer-site problem sympathetically and never says it is false, so a reader can mistake a granted premise for an endorsed conclusion."
+          },
+          {
+            "option": "C",
+            "trap_type": "overstatement",
+            "why_wrong": "The author demotes the effect size from sufficient to insufficient, not to irrelevant: whether the thing works at all 'has to be answered before the second one is worth asking', which makes it a necessary part of the decision.",
+            "seductive_element": "It is built out of the author's own emphasis — attention as the binding constraint — and reads like the bold version of the thesis."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "Nothing in the passage recommends re-piloting a failed rollout; on the author's analysis a stricter protocol would restore the very conditions whose absence the rollout exposed, which is the mistake the passage diagnoses.",
+            "seductive_element": "The passage does end with advice about how to commission a pilot, so a reader primed for a recommendation may accept a different one."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0036-q2",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "arg.description_vs_evaluation",
+        "inf.author_vs_reported"
+      ],
+      "target_mistake": "reading the long, fair-minded exposition of two rival accounts as neutrality, or reading the refusal of both as hostility",
+      "prediction_target": "The learner should be able to say before the options: the author is even-handed in exposition but not neutral in judgement, and corrects without heat.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "author_purpose"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "exasperated by the failures of evaluators and dismissive of the pilot as a method",
+        "B": "partisan: sympathetic to the selection account and impatient with the dilution one",
+        "C": "analytical and quietly corrective, fair to both accounts and satisfied with neither",
+        "D": "detached and descriptive, declining to choose between the two accounts it reports"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "Tone lives in the verdict words. Here they are mild and decisive at once: 'Both accounts are true, and both misdescribe the problem'; corrections that 'refine with great sophistication an estimate of the wrong quantity'; 'None of this makes the pilot worthless'. There is no ridicule anywhere and no abstention either.",
+        "correct_reasoning": "The correct option keeps both halves of that voice. The passage is analytical — it separates two questions and names the scarce input — and corrective, since it tells the reader that both existing remedies aim at the wrong quantity. 'Fair to both accounts and satisfied with neither' is the passage's own posture: each account is granted its truth in its own paragraph and then refused a role in the conclusion.",
+        "passage_anchor": "rc-0036-p4",
+        "question_type_note": "Tone questions are decided by judgement words, not by subject matter. Topic words tell you what the passage is about; only evaluative words tell you where the author stands, and intensity is a separate decision from direction.",
+        "reading_habit": "Underline every word in which the author passes judgement rather than reports. If those words are few and mild, reject the loud options; if they exist at all, reject the option that says the author takes no position.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The direction is not wrong but the volume is: the author calls the existing corrections sophisticated and the pilot's question real, which is not the language of exasperation or dismissal.",
+            "seductive_element": "A passage that says two established accounts misdescribe their subject can read as an attack if the reader skips the concessions."
+          },
+          {
+            "option": "B",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The passage treats the two accounts identically — a paragraph each, stated at full strength, then refused together in one sentence — so neither is the author's favourite and neither is singled out for impatience.",
+            "seductive_element": "The selection account appears second and sounds tougher-minded, which readers often take as a sign of the author's sympathy."
+          },
+          {
+            "option": "D",
+            "trap_type": "weakened_version",
+            "why_wrong": "Description stops at the fourth paragraph: 'both misdescribe the problem' is a judgement, and the final paragraph tells the reader which pilot is worth commissioning, which no abstaining author does.",
+            "seductive_element": "Two-thirds of the passage is careful exposition of other people's views, which feels like neutrality until the pivot is noticed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0036-q3",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "arg.analogy"
+      ],
+      "target_mistake": "reading the financial vehicle of the metaphor (money, interest, returns) instead of the thing the sentence says is being borrowed",
+      "prediction_target": "The learner should paraphrase from the sentence itself: the pilot's result was bought with supervision drawn from a fixed store, and spreading that store over many sites destroys it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the final paragraph, the phrase \"a loan against the organisation's attention\" most nearly means",
+      "options": {
+        "A": "a debt the programme owes to the staff who ran it, which the organisation settles later in money",
+        "B": "a result bought with a supervisory capacity the wider system will not be able to supply",
+        "C": "a promise that the measured effect will reappear wherever the same conditions are restored",
+        "D": "an investment whose true return can be calculated only once every site has been included"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The sentence defines its own metaphor in its second half: the repayment is 'the same scrutiny, divided among four hundred sites', which 'is no longer scrutiny'. The thing borrowed is supervision, and the reason the debt cannot be paid is stated one paragraph earlier — attention is fixed while budgets are not.",
+        "correct_reasoning": "The correct option translates the figure into its terms: the pilot's result was obtained by spending a scarce supervisory resource, and the wider system has no more of it to spend. That is why the author calls the reported number a compound of the intervention and the care around it, and why the passage prefers a pilot supported by 'nothing the system could not supply to every site at once'.",
+        "passage_anchor": "rc-0036-p5",
+        "question_type_note": "A phrase question on a metaphor is settled by the clause the author attaches to it, not by the ordinary associations of the image; the working definition is almost always planted in the same sentence.",
+        "reading_habit": "When a metaphor arrives, ask which noun in the sentence is playing the borrowed role. Translate the figure with that noun in your own words before you look at the options, and the dictionary associations of the image lose their pull.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The currency of the metaphor is stated and it is not money: the passage separates the two explicitly, saying a ministry can double funding in a spending round but cannot double the hours its senior people have.",
+            "seductive_element": "A loan is normally repaid in money, and the paragraph is full of financial vocabulary."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The figure describes what the pilot spent, not what it promises; the passage's point is that the conditions cannot be restored at scale, since the same scrutiny spread across four hundred sites is no longer scrutiny.",
+            "seductive_element": "It reuses 'measured effect' and 'conditions' from the passage and sounds like the dilution account, which the passage has just discussed at length."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The passage does treat the rollout as the moment of reckoning, but the reckoning is about an input that runs out, not about a return that becomes calculable; nothing is said about computing a programme's yield.",
+            "seductive_element": "It sounds like a sophisticated reading of the financial image and keeps the passage's sequence of pilot first, full coverage later."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0036-q4",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.two_views_adjudication",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "choosing one of the two reported accounts, or hardening the author's verdict into a rejection of piloting altogether",
+      "prediction_target": "The learner should be able to say: a pilot and a rollout ask different questions, one about the intervention and one about the organisation's supply of attention, so the pilot should be judged by how little attention its result needed.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "scope"
+      ],
+      "stem": "Which of the following best captures the central argument of the passage?",
+      "options": {
+        "A": "Pilots flatter interventions because the sites that volunteer for them are unusually capable, so every pilot finding must be discounted before a rollout is planned.",
+        "B": "The gap between pilot and rollout is an artefact of generous funding and close observation, and would close if rollouts were resourced at pilot intensity.",
+        "C": "Since a result obtained under conditions that cannot be reproduced cannot guide a decision about scale, governments would do better to abandon piloting altogether.",
+        "D": "A pilot and a rollout answer different questions, one about the intervention and one about an organisation's scarcest input, so a pilot is best judged by how little attention its result required."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The pivot is the sentence 'a pilot and a rollout are not two measurements of the same quantity'. Everything before it is other people's work; everything after it follows from that one distinction, including the final prescription. A main-idea option has to contain the distinction and what the author does with it.",
+        "correct_reasoning": "The correct option carries the whole arc. It names the two questions the fourth paragraph separates, identifies the second question's subject as the organisation's scarcest input, and ends where the passage ends, with the criterion for a pilot worth commissioning. It also keeps the author's altitude: a claim about what pilots and rollouts are for, not about how any particular estimate should be adjusted.",
+        "passage_anchor": "rc-0036-p4",
+        "question_type_note": "In a two-views passage the main idea is never one of the views; it is the author's adjudication, and it usually sits in the paragraph that begins by granting both of them something.",
+        "reading_habit": "After the second position is set out, look for the sentence that says what both positions share. That shared assumption is almost always what the author is about to deny, and the denial is the thesis.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the third paragraph's account offered as the conclusion; the author grants its truth and then says the correction it proposes aims at the wrong quantity, so it cannot be what the passage is arguing.",
+            "seductive_element": "It is vividly argued in the passage and the head teacher example is the most concrete thing in it."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "The dilution account is the second paragraph, not the passage, and its remedy of resourcing the rollout at pilot intensity is ruled out by the fourth paragraph, which says the binding input is attention rather than money.",
+            "seductive_element": "The passage does describe the hothouse conditions in detail and never calls the account false, only incomplete."
+          },
+          {
+            "option": "C",
+            "trap_type": "overstatement",
+            "why_wrong": "The author explicitly protects the pilot: 'None of this makes the pilot worthless', and the efficacy question 'has to be answered before the second one is worth asking'. The conclusion is about which pilot to commission, not whether to commission one.",
+            "seductive_element": "It sounds like the boldest version of the argument, and the passage does insist that pilot conditions cannot be reproduced."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0036-q5",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "arg.evidence_vs_conclusion"
+      ],
+      "target_mistake": "turning a claim about an inseparable compound into a claim that the attention is the whole of the effect, or into a certainty about which interventions must fail",
+      "prediction_target": "The learner should predict that a safe inference here follows from the reported number being a compound the design cannot decompose, and must not say which of the two components dominates.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "Two interventions that record the same effect in their pilots may differ in how much of that effect survives a rollout.",
+        "B": "An intervention that needs close supervision to work in its pilot will fail once it is extended to every site.",
+        "C": "The attention a pilot attracts is what produces the measured effect, rather than a condition under which it appears.",
+        "D": "Programmes designed by the staff who will deliver them are extended more successfully than those designed centrally."
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "Two sentences do the work together: the reported number is 'a compound, the intervention's own contribution and the care that surrounded it', and 'nothing in the design separates the two'. If the parts cannot be separated, equal totals are compatible with unequal parts.",
+        "correct_reasoning": "The correct option is what an inseparable compound entails. Two pilots may report the same figure while one owes more of it to the intervention and the other more to the supervision; since the rollout withdraws the supervision and keeps the intervention, the survivals can differ. The option claims only that they may differ, which is precisely the strength the passage supports.",
+        "passage_anchor": "rc-0036-p5",
+        "question_type_note": "An inference question rewards the option the sentences force and punishes the option that adds a direction, a magnitude or a certainty the sentences leave open.",
+        "reading_habit": "For each option, name the sentence it rests on and then ask what it has added to that sentence. Added words like 'will', 'is what produces' and 'more successfully' are where unsupported options give themselves away.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "The passage says supervision is the input that cannot be extended, which makes such an intervention expensive at scale; it never says the effect must vanish, and its own advice to look for pilots that survive neglect assumes the outcome is not settled in advance.",
+            "seductive_element": "It sounds like the disciplined, hard-headed reading of the attention argument, and it uses the passage's own contrast between close supervision and scale."
+          },
+          {
+            "option": "C",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The passage calls the reported figure a compound of two contributions; making the attention the producer of the effect eliminates the intervention's contribution, which the same sentence insists is in there and merely inseparable.",
+            "seductive_element": "It is one small step from 'the care is mixed into the number' to 'the care is the number', and the step feels like rigour."
+          },
+          {
+            "option": "D",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The passage never compares centrally designed programmes with locally designed ones; its distinction is between who watches a programme and how many sites are running it, which is a different axis entirely.",
+            "seductive_element": "It is a familiar and attractive belief about public administration, and the passage's sympathy for the front line makes it sound like something the author would say."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "dilution",
+      "passage_use": "The commonest account is dilution.",
+      "meaning_here": "the weakening of an effect as the favourable conditions that produced it are spread thinner",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hothouse",
+      "passage_use": "A pilot is a hothouse: money is not scarce, the staff are chosen",
+      "meaning_here": "an artificially favourable setting in which something grows better than it would outside",
+      "difficulty": "medium"
+    },
+    {
+      "word": "compound",
+      "passage_use": "The number a pilot reports is a compound, the intervention's own contribution and the care that surrounded it",
+      "meaning_here": "a single figure made of two contributions mixed together and not separable",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two established explanations are set out at full strength before the author says a word in their own voice. Watch for the sentence where the reporting stops, because everything the questions ask about lives after it.",
+    "one_sentence_summary": "The fall-off between a pilot and a rollout is not a bias to be corrected but a sign that the two are answering different questions, one about whether an intervention works and one about whether an organisation with a fixed supply of attention can keep doing it, so the pilot worth trusting is the one that succeeded while being neglected.",
+    "main_idea": "Pilots do well and rollouts disappoint. The usual explanations blame hothouse conditions or unrepresentative volunteers, and both propose ways of correcting the pilot's number. The author says the number is not the problem: a pilot tests the intervention, a rollout tests the organisation's supply of attention, and attention cannot be increased the way money can. So a pilot should be judged by how little attention its result needed, not by how large the result was.",
+    "simple_explanation": "Governments test new ideas in a few places before using them everywhere. The small test almost always looks good. Then the idea is used everywhere and the good result shrinks.\n\nThere are two popular explanations. The first says the small test was spoiled by comfort: plenty of money, hand-picked staff, the designers on site, everybody knowing they were being watched. Take the comfort away and the result falls. The second says the small test was spoiled by who took part: the places that volunteer are already the better places, so you were partly measuring them rather than the idea.\n\nBoth are fair, says the author, and both miss something. They both assume the small test and the big rollout are measuring the same thing, just with different accuracy. They are not. The small test asks: does this idea work when it is done well? The rollout asks: can an organisation that cannot watch everything get it done well often enough to be worth it? The second question is about the organisation, and the thing the organisation runs short of is not money but attention. You can double a budget in one decision. You cannot double the hours your senior people have.\n\nSo a good pilot result is borrowed attention, and the rollout is where the loan is called in. The number the pilot reports mixes two things together, the idea itself and the care taken over it, and nothing in the test tells you how much of each you have. That does not make pilots useless, because you still need to know the idea works at all. But the pilot worth paying for is not the one with the biggest number. It is the one that still worked while being ignored, run by ordinary staff with nothing the system could not give every site. That pilot will report a smaller number, and the smaller number is the one worth believing.",
+    "why_difficult": "The two rival accounts are stated so generously, and for so long, that a reader arrives at the fourth paragraph without a clear sense of who is speaking. The author then rejects both without calling either false, which is a hard move to hold in memory: the accounts are granted their truth and refused their remedy in the same sentence. The final paragraph adds a second delicate distinction, between a finding that is insufficient and a finding that is worthless, and several distractors in the set are built on collapsing exactly that difference.",
+    "author_intention": "To stop a familiar policy disappointment from being treated as a technical problem of estimation, and to replace the question 'how much should we shave off the pilot's number' with a different one about what the organisation can sustain unwatched.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0036-p1",
+        "role": "Sets out the pattern",
+        "note": "Small trials of public programmes look good; the same programmes look much weaker once they are used everywhere. Nobody can say in advance which ones will shrink."
+      },
+      {
+        "paragraph_id": "rc-0036-p2",
+        "role": "The first account",
+        "note": "The dilution story: a pilot has money, chosen staff and close attention, and scale takes all three away. Its fix is to discount the number or to pay for the same conditions everywhere."
+      },
+      {
+        "paragraph_id": "rc-0036-p3",
+        "role": "The second account",
+        "note": "The selection story: places that volunteer are better places, so you measured enthusiasts. Its fix is to run pilots where nobody wanted one."
+      },
+      {
+        "paragraph_id": "rc-0036-p4",
+        "role": "Refuses both, and turns",
+        "note": "Both stories treat the gap as a measurement error. The author says the pilot and the rollout ask different questions, and the rollout's question is about attention, which cannot be increased the way money can."
+      },
+      {
+        "paragraph_id": "rc-0036-p5",
+        "role": "Draws the practical conclusion",
+        "note": "A pilot borrows attention the system cannot repay at scale, and its number mixes idea and care inseparably. Pilots are still worth running, but the one to trust is the one that worked while being neglected."
+      }
+    ],
+    "tone_progression": "Flat and factual while the pattern is described, courteous and unhurried while the two accounts are given their due, and then quietly decisive from 'Both accounts are true' onwards, ending on a short verdict rather than a flourish.",
+    "key_transitions": [
+      "'Both accounts are true, and both misdescribe the problem' (opening of paragraph 4) — the exposition ends and the adjudication begins.",
+      "'But a pilot and a rollout are not two measurements of the same quantity.' (paragraph 4) — the sentence the whole argument turns on.",
+      "'None of this makes the pilot worthless.' (paragraph 5) — the limit that stops the thesis from becoming a rejection of piloting."
+    ],
+    "misunderstanding": "Hurried readers file the passage as a case against pilots, or as a vote for one of the two accounts it describes. Both misreadings come from the same habit: treating a fairly stated position as an endorsed one. The passage never says either account is wrong about the facts, which makes it easy to carry one of them into the questions as the thesis. The author's actual claim is narrower and stranger — the accounts are answering a question the rollout decision does not ask.",
+    "traps_summary": "This set punishes two moves. The first is adopting a reported view: three options across the paper restate the dilution or selection accounts in the author's vocabulary. The second is hardening a qualification: the author says the effect size is not sufficient, and options offer you 'irrelevant', 'will fail', and 'abandon piloting altogether'. When an author concedes something before turning, expect the concession to come back as a distractor.",
+    "reading_lesson": "When a passage gives two established positions a paragraph each, do not look for which one the author prefers; look for the assumption they share. Authors who structure a piece this way almost always turn by denying that shared assumption, and the thesis is the denial, not a choice between the two. Mark the shared assumption as soon as the second position ends and you will have the main idea before the pivot arrives.",
+    "real_world": "Anyone who has seen a team's successful experiment become a disappointing company-wide process has watched this happen; the same logic governs a trial ward, a model school, a prototype line, and any improvement that worked while somebody important was watching.",
+    "takeaway": "Ask not how big the pilot's effect was, but how much attention it had to be paid to get it.",
+    "reflection_question": "Which success in your own work survived only because someone was watching, and what would it look like if nobody were?"
+  }
+}

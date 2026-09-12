@@ -1,0 +1,394 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0043",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "qualifier-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 481,
+    "question_count": 4,
+    "question_types": [
+      "assumption",
+      "best_characterization",
+      "inference",
+      "phrase_in_context"
+    ],
+    "theme": "explaining a belief versus justifying it: why the causal question is asked only after the verdict, and the single condition under which a causal story really does bear on a belief's standing",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "A claim, then a carefully drawn exception. The whole set turns on one substitution the passage anticipates and refuses: readers who take the qualification to be about the believer's motive rather than about the process will pick the wrong option three times out of four.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "precise, dryly observant",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.qualification",
+      "struct.claim_evidence",
+      "comp.organization",
+      "comp.function_over_words",
+      "comp.paraphrase",
+      "word.context_clue",
+      "arg.assumption",
+      "arg.qualification",
+      "arg.causal_claim",
+      "inf.logical_gap",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "cr.assumption_gap",
+      "elim.near_tie",
+      "scope.condition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival makes an interest in the belief the trigger for the explanation mattering; the passage anticipates that substitution and blocks it — 'What is doing the work here is not the impurity of his motive. It is the insensitivity of the process' — and adds that an interested party who followed the evidence is in no difficulty. Q2: the rival reads the phrase as having run out of arguments; the surrounding sentences say the demand for a cause 'arrives only after the verdict', so the disagreement is settled rather than exhausted. Q3: the strongest rival restates the second paragraph's observation about when people ask for explanations, which is a premise the passage has already asserted rather than something the criterion needs; negating it leaves the criterion standing. The correct assumption fails the negation test loudly: if an insensitive process did lend support, the coincidence argument collapses. Q4: the rival calls origin questions always rhetorical, which the passage's own 'nine times in ten' and its whole third paragraph refuse.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "insensitivity",
+      "manoeuvre",
+      "coincidence"
+    ]
+  },
+  "passage": {
+    "title": "Nine Times in Ten",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0043-p1",
+        "text": "Two questions can be asked about any belief, and they are not the same question. One asks what would make it true, and is answered by producing reasons. The other asks how this particular person came to hold it, and is answered by producing causes: an upbringing, an incentive, a temperament, a bad experience at twenty. The first is an assessment; the second is a biography. That a belief has a history tells us nothing at all about whether it is correct, since every belief has one, the correct ones included. The point is old enough to have a name and familiar enough to be agreed to by everybody who then goes on to ignore it."
+      },
+      {
+        "id": "rc-0043-p2",
+        "text": "It is not ignored because the logic is hard. It is ignored because the two questions are almost never asked at the same time. Nobody hunts for the psychological origins of a view they hold themselves; for that one they ask about the evidence. The demand for a causal story arrives only after the verdict, which is what makes it so effective and so hard to answer. To ask why a man believes something is, nine times in ten, to have finished disagreeing with him. The question sounds like curiosity and works as a dismissal, and the person on the receiving end cannot protest without appearing to protest at being understood."
+      },
+      {
+        "id": "rc-0043-p3",
+        "text": "There is, even so, a real case in which a causal story bears on a belief's standing, and it is worth stating exactly, because a blurred version of it is what the manoeuvre borrows its respectability from. Suppose a belief was produced by a process that would have produced it anyway: a process that runs the same way whether or not the thing believed is so. A man who believes what he was paid to believe, or what a coin decided, is in that position. His belief may still be true, but its being true would now be a coincidence, and a coincidence is not a reason. What is doing the work here is not the impurity of his motive. It is the insensitivity of the process. An interested party who looked hard at the evidence and then followed it is in no difficulty whatever."
+      },
+      {
+        "id": "rc-0043-p4",
+        "text": "That yields a test which can be applied without insult. Ask not where a belief came from, but whether the route it came by would have delivered anything else had the facts been otherwise. If it would, the explanation is a biography and nothing follows from it. If it would not, the explanation is evidence, and the believer owes an account of why that route can be trusted. Most explanations offered in argument fail this test, which is why most of them are worth nothing; and the few that would pass are rarely offered, because framing one requires knowing something about a person's reasoning rather than about their circumstances."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0043-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "arg.qualification"
+      ],
+      "target_mistake": "replacing the passage's condition about the process with a condition about the believer's motive or interest, which the third paragraph explicitly refuses",
+      "prediction_target": "Before the options the learner should be able to say: what matters is whether the route to the belief would have given a different answer had the facts differed, so any safe inference will be about routes rather than about motives.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "Two people who hold the same belief for different reasons may not be equally entitled to it.",
+        "B": "A belief whose origin can be explained is, for that reason, less well supported than one that cannot.",
+        "C": "A person who cannot say why they hold a belief has no justification for continuing to hold it.",
+        "D": "An explanation bears on a belief's standing whenever the believer had an interest in its being true."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The passage puts the whole weight on the route rather than the belief. A belief reached by a process that would have delivered it anyway is a coincidence if true; a belief reached by looking at the evidence is not. Since two people can reach the same belief by those two different routes, entitlement is a property of the route.",
+        "correct_reasoning": "The correct option follows directly from that. The man who believes what a coin decided and the man who examined the evidence may hold the identical belief, yet the passage says the first has only a coincidence and the second is 'in no difficulty whatever'. If entitlement tracks the route and routes can differ while the belief is the same, then sameness of belief does not guarantee sameness of standing.",
+        "passage_anchor": "rc-0043-p3",
+        "question_type_note": "Inference questions on a qualified claim are decided by the qualification. Hold the author's condition in its exact form, and check whether the option is stated in those terms or in some looser ones.",
+        "reading_habit": "When an author distinguishes a right case from a wrong case, write the discriminating feature down in the author's own words. Most wrong options swap that feature for a neighbouring one that sounds equivalent.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is exactly the inference the first paragraph forbids: every belief has a history, the correct ones included, so having an explicable origin cannot count against a belief.",
+            "seductive_element": "The passage spends its third paragraph showing that an origin sometimes damages a belief, and a reader who takes the exception for the rule lands here."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing in the passage requires a believer to be able to narrate their own route; the test is about what the route would have done had the facts differed, which is a fact about the process rather than about the believer's self-knowledge.",
+            "seductive_element": "The passage is full of people being asked to account for their beliefs, so an obligation to account for oneself seems to be in the air."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The passage anticipates this substitution and blocks it: 'What is doing the work here is not the impurity of his motive. It is the insensitivity of the process', and an interested party who followed the evidence is said to be in no difficulty.",
+            "seductive_element": "It is the near-tie. The passage's own example is a man paid to believe something, which makes interest look like the operative feature."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0043-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "reading the phrase as a description of exhaustion or withdrawal rather than of a judgement that has already been made",
+      "prediction_target": "The learner should paraphrase from the sentence before it: the causal question arrives after the verdict, so the disagreement is over before the question is asked.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the second paragraph, \"to have finished disagreeing with him\" most nearly means",
+      "options": {
+        "A": "to have exhausted every argument one had against him",
+        "B": "to have given up the attempt to change his mind",
+        "C": "to have already settled that he is wrong, leaving only the cause to be found",
+        "D": "to have concluded that no argument could ever have persuaded him"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The sentence immediately before supplies the gloss: 'The demand for a causal story arrives only after the verdict.' Finishing, here, means the verdict is in — not that the arguing was long, and not that anyone has walked away.",
+        "correct_reasoning": "The correct option converts the figure into its plain meaning. Once you are looking for the cause of someone's belief, you have stopped treating it as a candidate for truth; the question of whether he is right has been closed, and the only remaining question is how he came to be wrong. That is why the passage says the question sounds like curiosity and works as a dismissal.",
+        "passage_anchor": "rc-0043-p2",
+        "question_type_note": "A phrase question is settled by the sentences around the phrase, which usually carry the author's own paraphrase; the general associations of the words are the decoy.",
+        "reading_habit": "Read one sentence back before translating any striking phrase. Authors who write a memorable line almost always explain it in the line just before or just after.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Finished, in this sentence, refers to a conclusion reached rather than to a supply of arguments used up; the passage's point is that the disagreement never had to be argued out, since the verdict came first.",
+            "seductive_element": "Finished commonly means used up, and an exhausted argument is exactly the scene the phrase evokes."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing is said about wanting to change anybody's mind or abandoning the attempt; the sentence describes a shift in what the questioner is asking about, not a decision to stop trying.",
+            "seductive_element": "Asking about causes instead of reasons does look like disengagement, and the paragraph is about a kind of giving up."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage claims that the verdict has been reached, not that the person is unpersuadable; it says this happens nine times in ten in practice, which is a claim about the questioner's state rather than about the other man's capacities.",
+            "seductive_element": "It sounds like the cynical, worldly reading of a cynical, worldly sentence, and the paragraph does describe a dismissal."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0043-q3",
+      "type": "assumption",
+      "skill": "argument",
+      "patterns": [
+        "arg.assumption",
+        "inf.logical_gap",
+        "cr.assumption_gap"
+      ],
+      "target_mistake": "choosing an observation the passage has already asserted, or a version of the needed assumption strengthened until the argument no longer requires it",
+      "prediction_target": "The learner should name the gap before the options: the passage moves from 'the process would have produced the belief anyway' to 'the belief gets no support from it', and something unstated links those.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "logical_structure"
+      ],
+      "stem": "The argument of the third paragraph depends on which of the following assumptions?",
+      "options": {
+        "A": "Every belief for which a causal explanation exists was produced by a process indifferent to the truth.",
+        "B": "People ask for an explanation of a belief more readily when they reject it than when they share it.",
+        "C": "An explanation undermines a belief only if the believer stood to gain from holding that belief.",
+        "D": "A process that would have produced the same belief whether or not it was true lends it no support."
+      },
+      "correct": "D",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The paragraph's step is short and unstated: because the process would have produced the belief anyway, the belief's truth 'would now be a coincidence, and a coincidence is not a reason'. Between the description of the process and the verdict about support there is a bridge the author never writes out.",
+        "correct_reasoning": "The correct option is that bridge, and the negation test shows it. Suppose a process that runs the same way whether or not the belief is true did lend the belief some support. Then the coin-flipper and the paid believer would have reasons after all, the coincidence remark would be false, and the whole exception collapses back into the rule the passage began by defending. An assumption whose denial destroys the argument is the one the argument depends on.",
+        "passage_anchor": "rc-0043-p3",
+        "question_type_note": "Assumption questions are settled by negation, not by plausibility. Deny the option; if the argument still stands, the option was not load-bearing.",
+        "reading_habit": "Write the argument as premise and conclusion and look for the word that appears in the conclusion but not in the premise. The assumption is usually the sentence that would license that word.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The argument needs only that some processes are insensitive to the truth, and the first paragraph insists that every belief has a history including the correct ones, so this would contradict the passage as well as overshoot its needs.",
+            "seductive_element": "It sounds like the bold general principle standing behind the paragraph, and strong-sounding statements read as foundations."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This is asserted outright in the previous paragraph as an observation about how people argue; negate it and the third paragraph's account of coin flips and coincidences is untouched, so it is not what that argument rests on.",
+            "seductive_element": "It is unmistakably the passage's own claim, and a reader who is matching content rather than testing dependence will take that as sufficient."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The paragraph rules this out in the next breath, saying the work is done by the insensitivity of the process rather than by the impurity of the motive, and that an interested party who followed the evidence is in no difficulty.",
+            "seductive_element": "The paid believer is the paragraph's first example, and gain is the most visible feature of that example."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0043-q4",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "comp.function_over_words",
+        "struct.qualification"
+      ],
+      "target_mistake": "describing the passage by its liveliest paragraph, so that the exception drawn in the second half disappears from the account of what the passage is doing",
+      "prediction_target": "The learner should be able to say: the passage defends a distinction, explains why it is habitually ignored, and then states with care the single case in which it does not apply.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best characterises the passage?",
+      "options": {
+        "A": "an exposure of a common fallacy, illustrated by the ways people dismiss opinions they dislike",
+        "B": "a defence of a distinction, followed by a precise statement of the one case where it does not hold",
+        "C": "a demonstration that questions about the origins of beliefs are always rhetorical rather than genuine",
+        "D": "a proposal to replace the assessment of beliefs with an inquiry into what produces them"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage turns on 'There is, even so, a real case'. Before that sentence it is defending a separation between reasons and causes and diagnosing why the separation is ignored; after it, the author is building an exception and then converting it into a usable test. A characterisation must contain both halves.",
+        "correct_reasoning": "The correct option names the shape exactly. The distinction between assessing a belief and narrating its origin is stated and defended; then a single, carefully bounded case is identified in which a causal story really does bear on standing, and the boundary is drawn by the insensitivity of the process rather than by anything about the believer. The final paragraph turns that exception into a test, which is what a qualification is for.",
+        "passage_anchor": "rc-0043-p3",
+        "question_type_note": "Best-characterisation questions want the passage's move in a verb and an object. When the passage qualifies its own claim, an option that omits the qualification is describing only the first half.",
+        "reading_habit": "Ask where the passage would be weakest if it stopped. If the answer is a paragraph you have not yet accounted for, your characterisation is incomplete.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "That is the first half. Two of the four paragraphs are spent constructing the exception and turning it into a test, which an account of the passage as fallacy-spotting leaves out entirely.",
+            "seductive_element": "The second paragraph is the most vivid part of the passage, and a fallacy exposed is a satisfying thing to have read."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The passage says nine times in ten, not always, and its third paragraph exists to describe the genuine version of the question; an author who thought such questions always rhetorical would have no exception to draw.",
+            "seductive_element": "The dismissive use of the question is described with such force that the hedge in front of it is easy to lose."
+          },
+          {
+            "option": "D",
+            "trap_type": "sophisticated_sounding",
+            "why_wrong": "The passage proposes the reverse: it protects the assessment of beliefs from being displaced by their biographies, and admits inquiry into a process only where the process turns out to be indifferent to the facts.",
+            "seductive_element": "It uses the passage's vocabulary of processes and production and sounds like a methodological conclusion a philosophical piece might reach."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "insensitivity",
+      "passage_use": "It is the insensitivity of the process.",
+      "meaning_here": "the property of giving the same result regardless of what the facts are",
+      "difficulty": "medium"
+    },
+    {
+      "word": "manoeuvre",
+      "passage_use": "a blurred version of it is what the manoeuvre borrows its respectability from",
+      "meaning_here": "a calculated move in argument, made to gain an advantage rather than to find the truth",
+      "difficulty": "medium"
+    },
+    {
+      "word": "coincidence",
+      "passage_use": "its being true would now be a coincidence, and a coincidence is not a reason",
+      "meaning_here": "an accidental agreement between belief and fact, with nothing connecting the two",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "The passage makes a rule, then carves out an exception, and the exception is narrower than it first appears. Notice exactly what the author says the exception depends on, because it is not the obvious thing.",
+    "one_sentence_summary": "Explaining why someone holds a belief is not the same as showing whether it is true, and the confusion survives because we only ask for causes once we have already decided someone is wrong; the one case where a cause does count against a belief is where the route to it would have produced it whatever the facts were.",
+    "main_idea": "Asking what makes a belief true and asking how a person came to hold it are different questions. The second is asked almost only about beliefs we have already rejected, which is what makes it feel like a refutation. It becomes a real objection in one case only: when the process that produced the belief would have produced it anyway, so that being right would be a coincidence.",
+    "simple_explanation": "There are two different questions you can ask about anything a person believes. What would make this true? And how did he end up believing it? The first is answered with reasons. The second is answered with a life story: his parents, his job, something that happened when he was twenty.\n\nHaving a life story tells you nothing about whether a belief is right, because every belief has one, including all the true ones. Everybody agrees with this and almost nobody acts on it.\n\nWhy not? Because the two questions are never asked together. You do not go looking for the psychological roots of your own opinions; for those you ask what the evidence is. You only go looking for causes once you have decided somebody is wrong. So asking why a man believes something usually means you have already finished disagreeing with him. It sounds like interest and works as a dismissal, and he cannot object without seeming to object to being understood.\n\nStill, there is one real case. Imagine a belief produced by something that would have produced it regardless — a man paid to believe it, or a coin flipped to decide it. He might be right. But if he is, that is luck, and luck is not a reason. Notice what is doing the damage: not that his motives were impure, but that the method could not tell the difference. Someone with a strong interest who nevertheless studied the evidence and went where it led is perfectly fine.\n\nSo here is a test you can use without being rude. Do not ask where a belief came from. Ask whether the route it came by would have delivered something different if the facts had been different. If it would, the story is just biography, and nothing follows. If it would not, the story is evidence, and the believer needs to explain why that route can be trusted. Most of the explanations people throw at each other in arguments fail this test, which is why most of them prove nothing.",
+    "why_difficult": "The passage states an exception to its own rule and then narrows the exception twice, in two short sentences that are easy to read past. Readers meet a paid believer and conclude that the objection is about self-interest; the author's next two sentences say it is not. Holding the right discriminating feature — would the route have delivered anything else? — takes deliberate effort, because the natural moral reading of the example is about corruption and the author's reading is about reliability. The second paragraph adds a different kind of difficulty: it is an observation about how people argue, not a premise of the philosophical point, and it is easy to mistake it for one.",
+    "author_intention": "To stop a familiar move in argument from passing as reasoning, while refusing the easy position that origins never matter, and to leave the reader with a test precise enough to use.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0043-p1",
+        "role": "Draws the distinction",
+        "note": "Two different questions: what would make a belief true, and how this person came to hold it. Every belief has a history, so having one proves nothing."
+      },
+      {
+        "paragraph_id": "rc-0043-p2",
+        "role": "Explains the confusion",
+        "note": "The causal question is asked only about beliefs we have already rejected. That is why it feels like a refutation and why it is so hard to answer."
+      },
+      {
+        "paragraph_id": "rc-0043-p3",
+        "role": "Draws the exception",
+        "note": "One real case: a process that would have produced the belief anyway. Then being right is luck. What matters is the method's blindness, not the believer's motive."
+      },
+      {
+        "paragraph_id": "rc-0043-p4",
+        "role": "Turns it into a test",
+        "note": "Ask whether the route would have given a different answer had the facts differed. If yes, it is biography; if no, it is evidence and the route needs defending."
+      }
+    ],
+    "tone_progression": "Brisk and slightly weary about a point everyone concedes and nobody applies, sharper in the middle where the rhetorical use of the question is described, and then careful and constructive, ending with a rule the reader can carry away.",
+    "key_transitions": [
+      "'It is not ignored because the logic is hard.' (opening of paragraph 2) — the diagnosis begins.",
+      "'There is, even so, a real case in which a causal story bears on a belief's standing' (paragraph 3) — the qualification opens.",
+      "'What is doing the work here is not the impurity of his motive. It is the insensitivity of the process.' (paragraph 3) — the exception is narrowed to its true basis."
+    ],
+    "misunderstanding": "The common wrong reading is that the passage condemns biased believers: the paid man is the memorable figure, so the lesson becomes that beliefs held for self-interested reasons are suspect. The author denies this in the very next sentence, and adds that an interested person who followed the evidence is in no trouble at all. The second wrong reading goes the other way, taking the first paragraph as the whole passage, so that origins never matter and the third paragraph disappears. Both readings answer the easy question the passage is not asking.",
+    "traps_summary": "Nearly every distractor here is built by swapping one condition for a neighbouring one: motive for method, always for nine times in ten, unable to explain oneself for produced by a blind process. The defence is to write the author's condition down in the author's own words before reading any options, and to treat any option phrased in different terms as guilty until it can be matched to a sentence.",
+    "reading_lesson": "When an author states a rule and then admits an exception, the exception is where every difficult question will live, and its exact boundary is usually drawn in one sentence that corrects the obvious reading of the example. Read the sentences immediately after an example with extra care: that is where authors tell you which feature of the example they meant you to notice.",
+    "real_world": "The move appears every day in public argument, where an opponent's position is answered with an account of their funding, their upbringing or their profession; the passage supplies the one question that tells you whether such an account is an argument or merely an insult.",
+    "takeaway": "An account of how someone came by a belief matters only if the same route would have delivered it whatever the facts were.",
+    "reflection_question": "When you last explained away someone's opinion by explaining the person, what would you have had to show to make that a real objection?"
+  }
+}

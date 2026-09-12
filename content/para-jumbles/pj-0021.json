@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0021",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 82,
+    "genre": "human-behaviour",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "beginner",
+    "title": "The Hour That Was Never Enough",
+    "theme": "why our estimates of how long work will take stay wrong however often they are corrected",
+    "estimated_time_sec": 60,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["lexical_repetition", "connective_explicit", "article_given_new"],
+    "primary_trap": "none",
+    "secondary_traps": [],
+    "dna_traits": ["opener_heuristic", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 1,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 1,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "C",
+    "learning_objective": "start from the widest sentence, and place a sentence that opens 'The explanation is' after the thing it explains",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.example_after_claim", "disc.opening_sentence", "disc.transition_word"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The one real rival puts the two closing sentences the other way round, ending on the explanation because an explanation sounds conclusive. It fails on the connective: the sentence about experience begins 'Nor does', which has to continue a statement that something else does not help, and the only such statement is the one about imagination leaving the interruptions out. The example sentence cannot open either, since 'Students asked to say when they will finish an essay' is a case of a claim that has not yet been made.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General psychology of planning and estimation; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A foundation-tier jumble with no engineered trap: one general claim, one case, one explanation and one closing qualification, each carrying a plain signal. It exists to teach the two habits the harder items assume — open with the sentence that needs nothing before it, and let explicit connectives place the rest."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Students asked to say when they will finish an essay name a date, miss it, and then name just as confident a date for the next one.",
+      "role": "example"
+    },
+    {
+      "label": "B",
+      "text": "Nor does experience of our own lateness help, since each new task feels like the one job that will run to plan.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Almost everybody underestimates how long a piece of work will take, and the mistake survives every correction.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "The explanation is that we plan by imagining the work going as it should, while the interruptions that actually arrive are the ones imagination leaves out.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "C makes a claim about almost everybody and about a mistake that survives correction. A is the case of it: one group of people, one kind of estimate, and the same estimate made again after it has been shown wrong."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "D opens 'The explanation is', which needs something already described to explain. A has just described the behaviour in detail — a date named, missed, and confidently named again."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "B begins 'Nor does', which continues a statement that something fails to help. D has just said that imagination leaves out precisely what delays us; B adds that experience does not make up the gap."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph moves from the widest statement to the narrowest support and then back out again: a claim about almost everybody, a single familiar case, the mechanism behind the case, and a closing sentence that blocks the obvious objection. Nothing is hidden here; every joint is marked by a word you can point at.",
+    "movement": [
+      { "label": "C", "why_here": "C needs nothing before it and names the subject of every other sentence: how long work takes, and a mistake about it that correction does not cure. Only a sentence this wide can open." },
+      { "label": "A", "why_here": "A supplies the case. It illustrates both halves of C — the underestimate, in the missed date, and the survival of the mistake, in the equally confident date that follows." },
+      { "label": "D", "why_here": "D explains what A has just shown. Its opening words announce that an explanation is coming, so the thing explained must already be on the page in full." },
+      { "label": "B", "why_here": "B closes by answering the objection a reader is now forming: surely being late teaches you. Its 'Nor' attaches it to D's account of why planning misleads, and it hands nothing on." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "An explanation feels like a destination, so a solver who has placed the claim and the case wants the mechanism last and treats the sentence about experience as a further piece of evidence.",
+        "where_it_breaks": "The sentence about experience begins with 'Nor does'. Put immediately after the students, it continues nothing: no earlier sentence has said that anything fails to help. The word needs the explanation in front of it."
+      }
+    ],
+    "trap_named": "No trap was set in this item; the risk is impatience. Solvers who fix the first two sentences quickly often stop reading the connectives and order the last two by feel. 'Nor', 'The explanation is', 'therefore' and 'in each case' are instructions, and they decide the tail of a paragraph more reliably than any sense of what sounds final.",
+    "solving_habit": "Read the first two words of every sentence before you order anything. A sentence that starts with a connective is telling you what has to stand in front of it, and that is usually cheaper information than working out the argument."
+  },
+  "mentor": {
+    "challenge": "Three of these sentences announce, in their opening words, what must come before them. Find those words first and the order will assemble itself.",
+    "paragraph_plain": "Nearly everyone thinks work will take less time than it does, and being wrong about it does not seem to teach us much. Students promise a date for an essay, miss it, and promise the same sort of date next time. The reason is that when we plan we picture the job going smoothly, and the interruptions that actually turn up are exactly the things we never picture. Even knowing we are usually late does not help, because every new job feels like the one that will finally go to plan.",
+    "takeaway": "A sentence beginning 'Nor' or 'The explanation is' is not free to go anywhere; it has already told you what it follows."
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0028",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "architecture",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "The Street That Keeps You Interested",
+    "theme": "the hypothesis that a street's pleasantness depends on how often it gives the walker something to notice, rather than on its beauty",
+    "estimated_time_sec": 185,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "hypothesis_support",
+    "cohesion_signals": ["demonstrative", "parallelism", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["lexical_decoy"],
+    "dna_traits": ["ending_judgement", "premature_closure", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 2,
+      "competing_endings": 5,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "place a measured comparison immediately after the thing it is measured against, and keep an inference behind both of the cases it rests on",
+    "reasoning_patterns": ["disc.competing_ending", "disc.claim_then_evidence", "disc.parallelism", "disc.demonstrative", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival ends on the long blank façade, because that sentence is the most concrete in the set and its closing words, walking as the covering of ground, sound like a verdict on modern streets. It breaks on a measurement: the façade is described as a hundred paces long, and the hundred paces are set by the sentence about the broken street, which would then be two sentences away with an inference in between. The inference itself cannot move earlier, since it is drawn from a contrast, and before the second case there is only one case to draw from.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General writing on streets and urban form; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A premium hypothesis-and-support jumble locked by a measurement rather than by a connective. The two supporting sentences are parallel cases that must run in one direction only, because the second borrows its length from the first; the closing inference is marked as an inference by a single modal."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Such a street is broken every few metres by a doorway, a step, a change of material or a glimpse down an alley, so that in a hundred paces the eye is given something to do at every one of them.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "Fine grain, not grandeur, would then be what makes a street companionable, and a handsome building could stand in a dull one without contradiction.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "The pleasure of an old street may depend less on its beauty than on how many small decisions it offers the walker in a minute.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "A single façade a hundred paces long offers one decision, taken at the start, after which walking is only the covering of ground.",
+      "role": "contrast"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "A opens 'Such a street', which needs a street already characterised, and C has just characterised one: the old street whose pleasure may lie in the decisions it offers. A then shows what those decisions are."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "parallel_structure",
+      "reliability": "high",
+      "explanation": "D measures itself against A: a façade a hundred paces long is set beside the hundred paces A has just walked. The two sentences are the same experiment run twice, and the second borrows its length from the first."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "medium",
+      "explanation": "B's 'would then be' marks it as an inference rather than a premise, and the inference is drawn from the pair of cases. Only after both the broken street and the blank façade have been walked does the contrast between grain and grandeur follow."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A hypothesis, two cases that differ in exactly one respect, and the conclusion the difference supports. The cases are written as a matched pair, which is what makes the order of the middle two sentences decidable: one of them sets the scale and the other uses it.",
+    "movement": [
+      { "label": "C", "why_here": "C proposes the hypothesis and is the only sentence that introduces the subject rather than referring to it. Its 'may depend' sets the tentative footing that the last sentence will pick up." },
+      { "label": "A", "why_here": "A is the first case, and it establishes the unit of measurement. Its demonstrative ties it to C, and its hundred paces are what the second case will be weighed against." },
+      { "label": "D", "why_here": "D is the same stretch of street with the grain removed, and it can only be read as a comparison because A has already supplied the length. Its flatness is the point of the pair." },
+      { "label": "B", "why_here": "B draws the conclusion and softens it with a modal, which marks it as what follows if the two cases are typical. It also disposes of the objection about beautiful buildings, which is why nothing follows it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "The sentence about a hundred paces of blank façade is the most vivid in the set, and its last words, walking reduced to the covering of ground, read like a judgement. Ending there also leaves the general sentence about grain and grandeur beside the hypothesis it resembles.",
+        "where_it_breaks": "The blank façade is 'a hundred paces long', and that measure comes from the sentence about the broken street; with the conclusion in between, the comparison reaches across a sentence that has already finished the argument. The conclusion would also be drawn from a single case, when the whole of its force comes from the contrast between two."
+      },
+      {
+        "order": "CDAB",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The hypothesis and the blank-façade sentence both describe a street as a whole, while the broken-street sentence is a list of details; grouping the two general sentences and letting the detail follow feels like moving from statement to illustration.",
+        "where_it_breaks": "A façade 'a hundred paces long' has no length to match until the broken street has been walked in a hundred paces. The comparison is left measuring itself against nothing, and the sentence that supplies the measure arrives afterwards as though it were the new information."
+      }
+    ],
+    "trap_named": "The trap is a crowd of endings again, but the key is not a connective this time. Two sentences here are written as a matched pair, and a matched pair has a direction: the sentence that sets the terms of the comparison comes first, and the sentence that borrows them comes second. Setters hide the direction inside a shared measurement — a hundred paces, a decade, the same sum — because solvers read such repetitions as decoration rather than as reference.",
+    "solving_habit": "When two sentences look like parallel cases, find the quantity or the condition they share and ask which sentence introduces it. That sentence goes first, whatever the other one sounds like."
+  },
+  "mentor": {
+    "challenge": "Two sentences describe the same stretch of street in opposite ways. A number hidden in one of them decides which comes first.",
+    "paragraph_plain": "What makes walking down an old street enjoyable may have less to do with how beautiful it is than with how many small things it gives you to notice as you go. On such a street something changes every few metres, a doorway, a step, a different material, a view down an alley, so that over a hundred paces your eye has work to do the whole way. A single unbroken frontage of the same hundred paces offers one thing to notice, at the beginning, and after that you are simply covering distance. If that is right, then what makes a street good company is fineness of grain rather than grandeur, and a fine building can stand in a dull street without any contradiction at all.",
+    "takeaway": "In a matched pair of examples, the sentence that sets the measure comes first and the sentence that borrows it comes second."
+  }
+}
