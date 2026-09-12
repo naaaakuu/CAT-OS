@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0031",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "markets",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "The Prize for Guessing Highest",
+    "theme": "why the winner of an auction for an unknown quantity is systematically the bidder who overestimated it",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["demonstrative", "article_given_new", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["competing_ending", "generic_the"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "refuse an opener-shaped sentence when a phrase inside it counts something the paragraph has not yet supplied",
+    "reasoning_patterns": ["disc.competing_opener", "disc.demonstrative", "disc.given_new", "disc.cause_effect", "struct.claim_counterclaim"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence about the arithmetic. It carries no pronoun, states a general truth about auctions and reads exactly like a thesis, which is what an opener heuristic is looking for. It is refused by three words inside it: 'that second kind'. A second kind exists only after a first has been named, and the only sentence that names two kinds of auction is the one dividing value that is a matter of taste from value that every bidder is guessing at. A second rival ends on that same arithmetic sentence and moves the conclusion up; it dies on the phrase 'the most generous in the room', which is lifted from the arithmetic sentence, so the conclusion would be quoting a sentence the reader has not yet reached.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General auction theory; no specific text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier jumble built around a single decoy opener. The sentence a heuristic solver will place first is the third sentence of the paragraph, and the only thing that refuses it is a two-word ordinal deep inside a clause. Lexical repetition also misleads: the opening advice and the closing discipline share the vocabulary of bidding."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The arithmetic is not mysterious: an auction of that second kind selects, out of a scatter of honest guesses, the most generous one and hands the prize to whoever made it.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "Bidders are commonly advised to decide in private what a thing is worth to them, and then to hold that line in the room.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "Winning is therefore itself a piece of evidence: it says that your guess was the most generous in the room, and a bidder who has grasped as much shades the offer downwards before the sale rather than regretting it afterwards.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "The advice holds where value is a matter of taste, and fails where every bidder is estimating the same unknown quantity: the oil beneath a tract, the earnings a licence will eventually yield.",
+      "role": "contrast"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "The second sentence opens on 'The advice', a definite reference to the counsel just given, and then splits it into a case where it works and a case where it does not. Nothing else in the set is advice."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That second kind' can only mean the second of two kinds already distinguished, and the distinction between value as taste and value as a shared unknown is made in exactly one sentence. The ordinal fixes the order."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Therefore' draws a consequence from the selection just described, and the sentence then names it: your guess was 'the most generous in the room'. That phrase is lifted from the sentence about the scatter of guesses, so the inference cannot precede it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph argues. It states a piece of standing advice, marks the conditions under which the advice fails, shows the mechanism that makes it fail, and then replaces the advice with a harder discipline. The mechanism sentence sits in the middle even though it sounds like a thesis, because everything in it is being applied to a case the previous sentence has carved out.",
+    "movement": [
+      { "label": "B", "why_here": "This is the only sentence that refers to nothing outside itself. It puts the familiar counsel on the table so that the rest of the paragraph has something to correct." },
+      { "label": "D", "why_here": "The turn. 'The advice' names what it is turning against, and the sentence divides the world into two kinds of auction so that the next sentence can speak about one of them." },
+      { "label": "A", "why_here": "The mechanism, restricted by 'that second kind' to the case just carved out. It explains why the counsel fails there: the winning bid is by construction the most optimistic estimate in the room." },
+      { "label": "C", "why_here": "The practical upshot, marked as an inference by 'therefore' and borrowing the phrase 'the most generous' from the sentence before it. It lands the paragraph on what a bidder should actually do." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ABDC",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence about the arithmetic carries no pronoun and no connective, and it states a general truth about how auctions work. That is the shape solvers are trained to treat as an opening thesis, and a paragraph that begins with the mechanism and then applies it looks well built.",
+        "where_it_breaks": "The phrase 'that second kind' counts kinds of auction, and in this position none have been counted. An ordinal is a backward reference in disguise, and the only sentence that supplies a first and a second kind is the one separating value as taste from value as a shared unknown."
+      },
+      {
+        "order": "BDCA",
+        "trap_type": "competing_ending",
+        "why_tempting": "The sentence about the scatter of guesses is the most quotable line in the set and reads like the sting in the tail, so a solver keeps it for last and promotes the advice about shading the bid to third place.",
+        "where_it_breaks": "The promoted sentence says winning shows 'your guess was the most generous in the room'. Nothing has yet said that an auction picks the most generous guess, so the claim arrives as an assertion rather than an inference, and its 'therefore' would be drawing on a sentence that has only distinguished two kinds of value."
+      }
+    ],
+    "trap_named": "The trap is a decoy opener. Setters write one sentence that is aphoristic, pronoun-free and general, so that a solver scanning for an independent sentence stops there and never reads to the end of the clause. The defence is to finish reading every candidate opener: a definite article, an ordinal such as 'the second', a comparative or a plural counted by 'each' is a backward reference wherever it sits in the sentence, not only at the front.",
+    "solving_habit": "Test a candidate opener by reading it aloud to somebody who has heard nothing else. If any phrase in it would make them ask 'the second of what?' or 'which advice?', the sentence is not first, however confidently it begins."
+  },
+  "mentor": {
+    "challenge": "One sentence here sounds like the thesis of the whole paragraph. Read it to the end before you let it open.",
+    "paragraph_plain": "Bidders are usually told to work out privately what something is worth to them and then stop at that figure. That works when value is a matter of personal taste, but not when everyone in the room is guessing at the same unknown number, such as how much oil lies under a piece of ground. In that second situation the auction simply picks the most generous guess and gives the thing to the person who made it. So winning is itself information: it tells you that your guess was the most generous in the room. A bidder who understands that bids below the estimate in the first place rather than regretting the purchase later.",
+    "takeaway": "An ordinal such as 'the second kind' is a backward reference wherever it hides in the sentence."
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0036",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "media",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "One Voice From Each Side",
+    "theme": "why a convention designed to keep reporters out of a dispute misreports the shape of the dispute, and the cheap repair",
+    "estimated_time_sec": 175,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["pronoun_ref", "article_given_new", "lexical_repetition", "substitution_ellipsis"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["competing_ending", "generic_the"],
+    "dna_traits": ["global_tracking", "wm_long_chain", "inference_implicit", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "settle a pronoun that has two plausible owners by finding the definite noun elsewhere in the same sentence",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.given_new", "disc.repeated_noun", "disc.problem_then_solution", "struct.problem_solution"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival moves the sentence beginning 'They are not lying' into second place, binding 'they' to the qualified voices the opening sentence describes. The binding is defensible on its own: two positions imply two speakers, and the clause about the reporter who called them fits either seat. What refuses it sits later in the same sentence, in 'the count that never reaches the page'. A count is introduced by exactly one sentence, the one that says the convention hides one, so the sentence about lying cannot precede it. A second rival ends on that same sentence about lying; it dies because the repair sentence hands back 'the one fact the arrangement had removed', and a page on which the count has been restored cannot then be described as a page the count never reaches.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General media criticism on balance conventions; no specific outlet, dispute or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A premium item built on one pronoun with two honest owners. Both candidate antecedents are plural, both are people, and the surrounding clause fits either reading; the tie is broken by a definite noun several words later. A heuristic solver following the nearest plural gets the second seat wrong and never recovers."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The repair is not to silence the smaller party but to say how small it is, a clause that costs a line and hands back the one fact the arrangement had removed.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "They are not lying, and nor is the reporter who called them; the distortion lies in the count that never reaches the page, and it survives every check a newsroom knows how to make.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "C",
+      "text": "What the convention hides is a count: nobody is told how deep the pool behind each speaker was, and two people on a platform look like two halves of a profession however lopsided the division really is.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "A reporter with no way of settling a technical dispute can at least decline to settle it, and the convention built on that modesty is to find one qualified voice for each position and leave the reader to judge.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "C", "B", "A"],
+  "links": [
+    {
+      "from": "D",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'What the convention hides' is a definite reference to a convention already described, and only one sentence describes one. The second sentence then adds the new element the rest of the paragraph runs on, a count."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The count that never reaches the page' needs a count to have been introduced, and it has just been introduced as the thing the convention hides. The plural 'they' also finds its owner in the two people on the platform."
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "high",
+      "explanation": "A sentence that names a distortion and says it survives every check is asking for a remedy, and the last sentence supplies one. 'The one fact the arrangement had removed' is the count, so the removal has to be on the page first."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph sets a problem and repairs it. A convention is described sympathetically, the thing it conceals is named, the blame is placed on the format rather than on the people, and a cheap remedy is proposed. Because the diagnosis separates guilty people from an innocent-looking arrangement, the sentence about nobody lying can only come after the arrangement has been shown to conceal something.",
+    "movement": [
+      { "label": "D", "why_here": "The only sentence that establishes rather than refers. It explains the motive behind the convention, which is what makes the criticism that follows fair rather than cheap." },
+      { "label": "C", "why_here": "The turn, and the source of everything later. It names the hidden quantity, a count, and puts the two speakers on a platform who become the owners of the next sentence's pronoun." },
+      { "label": "B", "why_here": "The diagnosis. It clears the speakers and the reporter and locates the fault in the missing count, which means it has to follow the sentence that identified the count as missing." },
+      { "label": "A", "why_here": "The repair, and the close. It restores exactly what the diagnosis said was absent, and the phrase 'the one fact the arrangement had removed' points back at the count rather than forwards at anything." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DBCA",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "The opening sentence produces one qualified voice for each position, which is a plural of people, and the next sentence begins 'They are not lying, and nor is the reporter who called them'. The reporter is right there in the opening sentence too, so the binding looks settled and a solver moves on.",
+        "where_it_breaks": "The same sentence goes on to place the distortion in 'the count that never reaches the page'. Nothing has mentioned a count, so the definite article has no owner. The sentence about what the convention hides is the one that introduces the count, and it must come first even though the pronoun seemed to have been dealt with already."
+      },
+      {
+        "order": "DCAB",
+        "trap_type": "competing_ending",
+        "why_tempting": "Clearing the speakers and the reporter and pinning the fault on a format is a sharp, conclusive move, and the clause about surviving every check a newsroom knows how to make sounds like the last word on the subject.",
+        "where_it_breaks": "The remedy sentence hands back 'the one fact the arrangement had removed'. Once the fact has been handed back, the paragraph cannot go on to say that the count never reaches the page, because the remedy has just put it there. A repair cannot precede the damage it repairs."
+      },
+      {
+        "order": "CDBA",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence about what the convention hides carries no pronoun, opens with a confident cleft and states the paragraph's whole complaint in a line. A solver hunting for an independent sentence, or for the thesis, finds both here.",
+        "where_it_breaks": "It says 'What the convention hides', and the convention is definite and unexplained. A reader meeting it first has no idea which convention is meant or why anyone adopted it, and the sentence about a reporter declining to settle a dispute is what supplies both. The complaint has to follow the description of what is being complained about."
+      }
+    ],
+    "trap_named": "The trap is a pronoun with two honest owners. Setters make sure that the wrong owner is nearer, is the same number and gender, and produces a sentence that reads perfectly well, so that checking the pronoun in isolation settles nothing. The defence is to stop treating a pronoun as the only reference in its sentence. Read to the end and find the definite noun phrase, the demonstrative or the counted plural that has exactly one source, and let that decide.",
+    "solving_habit": "When a pronoun could belong to two earlier sentences, ignore it and look for a second reference in the same sentence. Ambiguous evidence is settled by unambiguous evidence sitting a few words away."
+  },
+  "mentor": {
+    "challenge": "One pronoun in this set has two owners who both fit. Something else in the same sentence does not.",
+    "paragraph_plain": "A reporter who cannot settle a technical dispute can at least refuse to settle it, and the convention built on that modesty is to quote one qualified person on each side and let readers make up their own minds. What the convention hides is a number: nobody is told how many experts stood behind each of those two speakers, and two people on a platform look like two halves of a profession even when the split is wildly uneven. The speakers are not lying and neither is the reporter who rang them. The distortion is in the count that never appears, and it passes every check a newsroom knows how to run. The fix is not to silence the smaller camp but to say how small it is, which costs one clause and gives the reader back the only fact the arrangement had taken away.",
+    "takeaway": "A pronoun with two owners is not evidence. Read on until you find a reference with one."
+  }
+}

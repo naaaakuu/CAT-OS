@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0035",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "medicine-health",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "Ninety-Nine Times in a Hundred",
+    "theme": "why an accurate screening test returns mostly false alarms when the condition it looks for is rare",
+    "estimated_time_sec": 150,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "question_answer",
+    "cohesion_signals": ["demonstrative", "article_given_new", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["competing_opener", "lexical_decoy"],
+    "dna_traits": ["ending_judgement", "global_tracking", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 3,
+      "competing_endings": 4,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "keep a vivid illustration out of the final seat when the closing sentence counts the very figures it supplies",
+    "reasoning_patterns": ["disc.question_then_answer", "disc.demonstrative", "disc.competing_ending", "disc.claim_then_evidence", "struct.question_answer"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival ends on the arithmetic, since the million people and the ten thousand false alarms are the most concrete thing in the set and concrete things make satisfying closes. It is refused by the closing sentence itself, which speaks of a programme that cannot afford to look again 'at ten thousand people'. That figure is produced by the arithmetic, so the arithmetic must already have been given, and the 'therefore' in the same sentence would otherwise be drawing an inference from a sentence that supplies no numbers. A second rival puts the arithmetic straight after the question, on the ground that a question about a positive result is best answered with figures; it dies on 'Give that number a value', which needs a number to have been named as the missing one.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General statistics of screening and base rates; illustrative figures composed for the item, no specific study adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier question-and-answer jumble whose tail is the contest. The illustration is written to be quotable so that it attracts the final seat, and the real closer is anchored to it by a figure the illustration alone produces. The imperative opening of the illustration also blocks it from the second seat."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A positive result is therefore not a diagnosis but an instruction to look again, and a programme that cannot afford to look again at ten thousand people has bought a great deal of fear and very little information.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "The honest answer depends on a number the accuracy figure leaves out: how many of the people being screened have the condition at all.",
+      "role": "answer"
+    },
+    {
+      "label": "C",
+      "text": "If a screening test is right ninety-nine times in a hundred, what should a patient make of a positive result?",
+      "role": "question"
+    },
+    {
+      "label": "D",
+      "text": "Give that number a value: screen a million people for a disease that afflicts one in ten thousand, and the hundred genuine cases sit among roughly ten thousand healthy people whom the same test has flagged with the same confidence.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "B", "D", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The honest answer' is a definite reference that requires a question to have been asked, and exactly one sentence in the set asks one. The answer also picks up 'the accuracy figure', which is the ninety-nine in a hundred."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That number' points at the number just named as missing, namely how many of those screened actually have the condition. The sentence then supplies a value for it, one in ten thousand, which is what the instruction promises."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Therefore' draws its conclusion from the count just performed, and the closing clause names ten thousand people, a figure that exists only because the arithmetic has been done. Both signals run the same way."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph asks a question and answers it in three stages: the principle that the accuracy figure is incomplete, a worked case that gives the missing quantity a value, and the practical consequence for anyone who receives a positive result. Question, principle, case, consequence, which is why the most memorable sentence in the set is the third one rather than the last.",
+    "movement": [
+      { "label": "C", "why_here": "It is the question the rest of the paragraph exists to answer, and the only sentence that introduces the test and the accuracy figure instead of referring back to them." },
+      { "label": "B", "why_here": "The answer in principle. It names the quantity the accuracy figure omits, and by naming it as a number it creates the reference that the next sentence picks up." },
+      { "label": "D", "why_here": "The case. It gives the missing number a value and shows what follows: a hundred real cases lost among ten thousand false alarms. The instruction it opens with can only follow the sentence that identified the number." },
+      { "label": "A", "why_here": "The consequence, and the close. 'Therefore' marks it as an inference from the count, and it names the ten thousand the count produced, so it cannot stand anywhere before them." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CBAD",
+        "trap_type": "competing_ending",
+        "why_tempting": "The arithmetic is the most concrete sentence in the set and it ends on a hard image, thousands of healthy people flagged with the same confidence as the genuinely ill. Solvers keep concrete sentences for the end, and the sentence about diagnosis and looking again reads like a piece of principle that belongs earlier.",
+        "where_it_breaks": "The sentence about looking again names ten thousand people. That number is produced by the arithmetic and by nothing else in the set, so it cannot appear before it. Its 'therefore' would also be drawing a consequence from a sentence that has merely said a number is missing."
+      },
+      {
+        "order": "CDBA",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The question is about accuracy and the arithmetic is about accuracy, so the two seem to belong together, with the principle stated afterwards as the lesson of the case.",
+        "where_it_breaks": "The arithmetic opens 'Give that number a value'. No number has been singled out yet, so the demonstrative has nothing to point at. The principle has to name the missing quantity first, and only then can a value be given to it."
+      }
+    ],
+    "trap_named": "The trap is a crowded ending. One sentence is written to be quotable and one is written to be conclusive, and solvers reach for the quotable one because it sounds like the point. The defence is arithmetic rather than taste: look for a figure, a plural or a name in the candidate closers, and ask which sentence produced it. A sentence that counts something the paragraph has not yet counted is not an ending, however good it sounds.",
+    "solving_habit": "When two sentences both feel final, underline every number and every definite noun phrase in each of them and ask where each one came from. The sentence that borrows more from the others is the later one."
+  },
+  "mentor": {
+    "challenge": "The most striking sentence here is not the last one. Find the sentence that borrows a figure from it.",
+    "paragraph_plain": "Suppose a screening test is right ninety-nine times out of a hundred. What should you make of a positive result? The honest answer depends on something the accuracy figure never tells you: how common the disease is among the people being tested. Put a value on that. Screen a million people for a condition that affects one in ten thousand, and the hundred people who really have it are sitting among about ten thousand healthy people whom the same test has flagged just as confidently. So a positive result is not a diagnosis at all; it is an instruction to investigate further. A screening programme that cannot afford to investigate ten thousand people has purchased a lot of fear and almost no information.",
+    "takeaway": "The sentence that borrows a number from another sentence always comes after it."
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0046",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The One Who Did Nothing",
+    "theme": "the proposal that our lighter judgement of omissions tracks the ease of identifying an agent rather than the gravity of the wrong",
+    "estimated_time_sec": 155,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "hypothesis_support",
+    "cohesion_signals": ["pronoun_ref", "former_latter", "article_given_new", "connective_explicit"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["global_tracking", "inference_implicit", "wm_long_chain", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "check what kind of thing an ordinal such as the second is counting before letting it bind",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.question_then_answer", "disc.given_new", "disc.claim_then_evidence", "struct.two_views_adjudication"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival binds 'The second' to the second person in the opening scene, the woman on the bank, and so places the sentence about acts and omissions immediately after it. The binding is genuinely inviting, because the scene explicitly offers a first and a second person and the sentence goes on to talk about omission, which is what she is guilty of. What refuses it is the noun the ordinal actually modifies: 'The second is the likelier account'. An account is not a person, and the only sentence that puts two accounts on the table is the one asking whether the verdict tracks the wrong or the ease of identifying who did it. A second rival ends on the acts and omissions sentence; that dies on 'If that is right', which needs a proposition, and the question it would then point at is a question rather than a claim.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General moral philosophy on the acts and omissions distinction; the drowning case is a standard kind of philosophical example, composed here in original wording. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-plus item that sets two ordinals against each other. The scene offers a first and a second person; the question offers a first and a second explanation; and the sentence that says 'The second' names which kind it means only in the noun that follows it. Solvers who bind on the nearer pair lose the whole chain."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The second is the likelier account, because an act comes with an author, a time and a place, while an omission has to be assembled out of everything that might have been done and was not.",
+      "role": "answer"
+    },
+    {
+      "label": "B",
+      "text": "A man drowns, and two people had it in their power to prevent it: the one who pushed him in, and the one who sat on the bank with a rope at her feet.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "If that is right, a distinction we treat as moral is in part an artefact of evidence, and it ought to weaken wherever an omission is as easy to identify as an act: the lifeguard on duty, the doctor on call, the signalman at his post.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "She is judged less harshly by almost everybody, and the question worth asking is whether that verdict tracks the wrong that was done or only the ease of seeing who did it.",
+      "role": "question"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'She' needs a woman, and the only woman anywhere in the set is the one sitting on the bank with a rope at her feet. The sentence then turns the scene into a question about what our verdict is tracking."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "former_latter_reference",
+      "reliability": "high",
+      "explanation": "'The second is the likelier account' counts accounts, not people, and two accounts are offered in exactly one sentence: that the verdict tracks the wrong, or that it tracks the ease of seeing who did it."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'If that is right' needs a proposition to condition, and only the preceding sentence asserts one. A question cannot be right or wrong, so the conditional cannot reach past it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph builds a hypothesis and then draws out what it would cost us. A case is described, a question is asked about our reaction to it, one of the two answers is argued for, and the consequence is spelled out with three cases where the argument predicts our reaction should change. Case, question, hypothesis, consequence.",
+    "movement": [
+      { "label": "B", "why_here": "It sets the case and introduces both agents, including the woman every later pronoun depends on. It refers to nothing outside itself." },
+      { "label": "D", "why_here": "It reports the common verdict and converts it into a question with exactly two candidate answers, which is what the next sentence chooses between." },
+      { "label": "A", "why_here": "The hypothesis, and the nucleus. It picks the second of the two accounts and gives the reason: acts are individuated and omissions have to be constructed." },
+      { "label": "C", "why_here": "The consequence, and the close. Its conditional rests on the hypothesis just asserted, and the three professions are the cases where the hypothesis predicts our lenience should fade." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BADC",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "The opening scene names two people in order, the one who pushed and the one who sat, so a sentence beginning 'The second' seems to have been written for it. The rest of that sentence is about omission, which is what the second person is guilty of, and the binding feels confirmed rather than merely possible.",
+        "where_it_breaks": "The ordinal is modifying a noun, and the noun is 'account'. A person is not an account, and the only sentence that offers two accounts is the one asking whether the verdict tracks the wrong done or the ease of seeing who did it. Read on two words and the binding collapses."
+      },
+      {
+        "order": "BDCA",
+        "trap_type": "competing_ending",
+        "why_tempting": "The contrast between an act with an author, a time and a place and an omission assembled out of everything that did not happen is the sharpest formulation in the set, and it reads like a conclusion rather than a step towards one.",
+        "where_it_breaks": "The sentence about the distinction being an artefact of evidence opens 'If that is right'. In this position 'that' would point at a question, and a question cannot be right. The conditional needs the claim about acts and omissions to have been made first."
+      }
+    ],
+    "trap_named": "The trap is an ordinal with two candidate series. 'The second', 'the latter', 'the former' and 'the first of these' all look like precise references, and they are, but only once you have asked what kind of thing is being counted. A setter supplies two series, puts the wrong one nearer, and lets the solver bind on proximity. The defence is one word long: read the noun the ordinal modifies, and count only things of that kind.",
+    "solving_habit": "Whenever you meet 'the second' or 'the latter', finish the phrase before you place the sentence. What is being counted decides the link, and the nearest pair is rarely the right one."
+  },
+  "mentor": {
+    "challenge": "Two different pairs are numbered in this set. One sentence says 'the second' and means only one of them.",
+    "paragraph_plain": "A man drowns, and two people could have stopped it: the one who pushed him in, and the one who sat on the bank with a rope at her feet. Almost everyone judges the woman less harshly, and the question worth asking is whether that judgement is tracking the seriousness of the wrong or just how easy it is to see who did it. The second explanation is the more likely one, because an action comes with a doer, a time and a place, whereas a failure to act has to be pieced together out of everything that might have been done and was not. If that is right, a distinction we treat as moral is partly a by-product of evidence, and it should weaken wherever an omission is as easy to pin down as an act: the lifeguard on duty, the doctor on call, the signalman at his post.",
+    "takeaway": "Read the noun after 'the second'. What is being counted settles where the sentence goes."
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0049",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "structure-mapping",
+      "elimination"
+    ],
+    "word_count": 267,
+    "question_count": 3,
+    "question_types": [
+      "best_characterization",
+      "except",
+      "inference"
+    ],
+    "theme": "why mathematics invented for its own sake so often fits the physical world: most of it never fits, physicists go looking for the parts that do, and a small residue of exact prediction survives the explanation",
+    "estimated_time_min": 4.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "A foundation item: plain sentences, one claim, two supports and a short concession. The only real work is keeping the concession of the third paragraph out of the author's case, which is what the EXCEPT question tests.",
+    "length_class": "short",
+    "structure": "thesis_support",
+    "viewpoints": 2,
+    "tone": "plain, gently deflating",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.general_to_specific",
+      "comp.central_idea",
+      "comp.supporting_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.organization",
+      "arg.evidence",
+      "arg.qualification",
+      "arg.concession",
+      "inf.directly_implied",
+      "inf.vs_speculation",
+      "elim.systematic"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q3 is the item that decides whether the passage was read to the end. The live rival is the option about mathematics chosen for its neatness predicting a measurement, which a reader takes for a further illustration of how well mathematics fits; it belongs to the third paragraph, where it is introduced by and it does not remove all of it and is the one thing selection cannot account for, so it works against the author's case rather than for it. Q1's rival is the option that unapplied branches will one day be found to describe something in nature, which the passage never suggests and which would undo the point that most mathematics has never been used outside mathematics. Q2's rival is the option about how physicists choose their mathematics: true, and only the second of two supports, with the concession left out entirely.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "branches",
+      "selection",
+      "dismissal"
+    ]
+  },
+  "passage": {
+    "title": "The Tools That Happened to Fit",
+    "reading_time_min": 1.3,
+    "paragraphs": [
+      {
+        "id": "rc-0049-p1",
+        "text": "Mathematicians often work on problems chosen for their own sake, with no thought of the physical world at all. Decades later a physicist finds that one of those inventions describes how matter behaves, and describes it exactly. People call this a miracle, or at least a deep mystery. It is worth asking how much of the mystery is a product of the way we count the cases."
+      },
+      {
+        "id": "rc-0049-p2",
+        "text": "Two facts should be set beside the wonder. The first is that most mathematics has never been used for anything outside mathematics. Whole branches have grown for a century without once touching physics, and nobody writes essays about them. We hear about the branches that fitted, because those are the ones anyone mentions. The second fact is that physicists do not wait for a fit to arrive. They search for one. When a theory needs a new kind of description, they look through what mathematicians have already built, and if nothing suits they build something themselves. A fit found by searching is not the same as a fit that simply turned up."
+      },
+      {
+        "id": "rc-0049-p3",
+        "text": "This removes a good deal of the mystery, and it does not remove all of it. Now and then a piece of mathematics chosen for its neatness has predicted a measurement to many decimal places, long before anyone thought to take the measurement. Selection cannot account for that, because there was nothing to select from and no rival candidate to compare it with. So the honest position is neither wonder nor dismissal. The puzzle is smaller than it is usually made to look, and something is left over."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0049-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "comp.supporting_idea"
+      ],
+      "target_mistake": "turning an observation about what has happened so far into a prediction about what will happen, or into advice about what mathematicians should do",
+      "prediction_target": "The learner should be able to say beforehand: if most mathematics has never been used outside mathematics, then the unapplied part must be the larger part.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 2,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that branches of mathematics with no physical application",
+      "options": {
+        "A": "are less carefully worked out than the branches physicists have used",
+        "B": "will one day be found to describe something in the natural world",
+        "C": "outnumber the branches that have turned out to describe the physical world",
+        "D": "should be given up in favour of work that physics is able to use"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "One sentence in the second paragraph carries this question: most mathematics has never been used for anything outside mathematics. The word most is a quantity, and a quantity is what an inference can be built from.",
+        "correct_reasoning": "If most of mathematics has never left mathematics, then the part that has never left is larger than the part that has, which is precisely what the correct option says. The passage adds the same point from the other side by noting that whole branches have grown for a century without once touching physics. No further step is needed, which is what makes this an inference rather than a guess.",
+        "passage_anchor": "rc-0049-p2",
+        "question_type_note": "An inference question asks for what must follow from the text, not for what would be interesting if true. When a passage gives a quantity word such as most, check whether an option is simply that word restated.",
+        "reading_habit": "Underline quantity words as you read: most, few, some, never. They are the sentences inference questions are usually built from, because they support a conclusion without needing any assumption of your own.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never compares how carefully different branches are worked out; its comparison is between how often they are applied and how often they are talked about.",
+            "seductive_element": "It sounds like an explanation for why some branches were never used, and the passage is in the business of explaining."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Nothing in the passage promises a future use for unapplied mathematics, and the claim would undermine the author's first support, which depends on most mathematics staying unused.",
+            "seductive_element": "The passage describes fits arriving decades late, which invites the thought that the rest are simply waiting their turn."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No recommendation is made anywhere. The author is explaining why a coincidence looks larger than it is, and his argument treats work done for its own sake as ordinary rather than wasteful.",
+            "seductive_element": "An essay that points out how rarely something is used reads as though it must be complaining about the waste."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0049-q2",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "arg.qualification",
+        "struct.claim_evidence"
+      ],
+      "target_mistake": "naming one of the two supports as the whole of what the author does, or crediting him with the view he is arguing against",
+      "prediction_target": "The learner should be able to say: he shrinks a mystery with two reasons and then admits that a small part of it survives both.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "Which of the following best characterises what the author does in the passage?",
+      "options": {
+        "A": "He denies that mathematics fits the physical world as closely as is claimed.",
+        "B": "He offers two reasons why the fit is less surprising than it seems, and then admits that some surprise remains.",
+        "C": "He explains how physicists go about choosing the mathematics their theories need.",
+        "D": "He argues that the fit between mathematics and the natural world is a miracle that lies beyond any explaining at all."
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage is laid out in plain sight. One paragraph raises the puzzle, one gives two facts that shrink it, and the last says the shrinking is not complete. Any description of what the author does has to include all three parts, and especially the last, which is where the sentence beginning and it does not remove all of it sits.",
+        "correct_reasoning": "The correct option counts correctly. Two reasons are offered, labelled the first and the second fact, and the closing paragraph then keeps a remainder: a prediction that selection cannot account for. The final sentence puts both halves together, calling the puzzle smaller than it is usually made to look and saying that something is left over.",
+        "passage_anchor": "rc-0049-p3",
+        "question_type_note": "Best-characterisation questions ask about the shape of a passage rather than its subject. Counting the moves — how many reasons, is there a concession — usually settles them before any option is weighed.",
+        "reading_habit": "As you finish each paragraph, give it a one-word label: puzzle, reasons, remainder. Three labels are enough to answer most questions about what a passage is doing.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The closeness of the fit is granted throughout, including the case of a prediction accurate to many decimal places; what is questioned is how surprising the fit should be, not whether it occurs.",
+            "seductive_element": "An author who sets out to reduce a mystery sounds as if he must be doubting the thing itself."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second of two supports and occupies four sentences; it leaves out the first support, the puzzle both are answering, and the concession that closes the passage.",
+            "seductive_element": "It is entirely accurate as far as it goes, and it describes the passage's most concrete piece of information."
+          },
+          {
+            "option": "D",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "The miracle is what other people are said to call it in the first paragraph, and the whole passage is an argument against taking that description at face value.",
+            "seductive_element": "The word miracle appears in the passage, and the last paragraph does admit that something is left unexplained."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0049-q3",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "arg.evidence"
+      ],
+      "target_mistake": "counting the concession of the last paragraph among the author's supports, because it is also a fact about mathematics fitting the world",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, each of the following is part of the author's case that the mystery is smaller than it looks EXCEPT:",
+      "options": {
+        "A": "Mathematics chosen for its neatness has predicted a measurement to many decimal places.",
+        "B": "Most mathematics has never been used for anything outside mathematics.",
+        "C": "The branches that turned out to fit are the only ones that people ever go on to talk about.",
+        "D": "Physicists search for a description and build one themselves if none exists."
+      },
+      "correct": "A",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The second paragraph announces its contents: two facts should be set beside the wonder, then the first and the second fact. Everything in the author's case is inside that paragraph. The third paragraph opens by saying the mystery has not been removed entirely, which marks what follows as the exception rather than the evidence.",
+        "correct_reasoning": "The correct option is the one thing in the passage that makes the mystery larger rather than smaller. It is introduced after the concession, and the sentence immediately following it says that selection cannot account for it, because there was nothing to select from. A fact the author's own explanation cannot cover is not part of the explanation.",
+        "passage_anchor": "rc-0049-p3",
+        "question_type_note": "An EXCEPT question over an argument asks you to sort the sentences by the job they do. Find where the case stops and the concession starts, then check which side each option falls on.",
+        "reading_habit": "Treat the words and yet, still, or does not remove all of it as a boundary line. What comes after such a phrase is usually what the author is giving away, not what he is arguing.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is the first of the two facts, in the passage's own words: most mathematics has never been used for anything outside mathematics. It is the opening support and cannot be the exception.",
+            "seductive_element": "It is stated so briefly that it can read as a passing remark rather than as one of the two pillars of the argument."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The observation that we hear only about the branches that fitted is what turns the first fact into an argument, by explaining why the successes look more common than they are. It is doing work, not decorating.",
+            "seductive_element": "It looks like an aside about publicity rather than a step in a case about mathematics."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "This is the second fact, and the paragraph draws the conclusion from it in the next sentence: a fit found by searching is not the same as a fit that simply turned up.",
+            "seductive_element": "It describes the working habits of physicists, which can look like background rather than an argument about coincidence."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "branches",
+      "passage_use": "Whole branches have grown for a century without once touching physics",
+      "meaning_here": "separate areas of study growing out of one subject",
+      "difficulty": "easy"
+    },
+    {
+      "word": "selection",
+      "passage_use": "Selection cannot account for that, because there was nothing to select from",
+      "meaning_here": "the process by which only the successful cases come to be noticed",
+      "difficulty": "medium"
+    },
+    {
+      "word": "dismissal",
+      "passage_use": "the honest position is neither wonder nor dismissal",
+      "meaning_here": "the refusal to treat something as worth taking seriously",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short passage with a simple shape, and one trap at the end. Notice exactly where the author stops arguing and starts giving something away.",
+    "one_sentence_summary": "Mathematics invented for its own sake often turns out to describe nature, but much of that looks miraculous only because we ignore the mathematics that never fitted and forget that physicists go hunting for the parts that do — though a small, genuinely surprising remainder survives both points.",
+    "main_idea": "People are amazed that pure mathematics ends up describing the physical world. The author says most of the amazement comes from counting only the successes and forgetting that physicists actively search for something that will work. A little of the amazement is still deserved.",
+    "simple_explanation": "Mathematicians often invent things for fun, with no interest in the real world. Years later a physicist picks up one of those inventions and finds it describes how matter actually behaves. People say this is a miracle.\n\nThe author gives two reasons for calming down. First, most mathematics never gets used for anything outside mathematics at all. Entire areas have been studied for a hundred years and touched nothing in physics. Nobody writes articles about those. We only hear about the ones that worked, so the hit rate looks far better than it is.\n\nSecond, physicists are not sitting still waiting for a gift. When they need a new way of describing something, they go looking through what mathematicians have made, and if nothing fits they make something themselves. Finding something after a search is very different from having it drop in your lap.\n\nThen the author is honest. Sometimes a piece of mathematics chosen just because it was elegant has predicted a measurement to many decimal places before anyone even took the measurement. You cannot explain that by saying we only notice the hits, because in that case there was nothing else to notice and nothing to compare. So the right attitude is in the middle: the puzzle is smaller than people say, and it has not disappeared.",
+    "why_difficult": "The passage is easy to read and easy to misfile. Its three paragraphs do three different jobs, and the last one is the one readers mix up, because it also contains an example of mathematics fitting the world and therefore looks like more evidence. It is the opposite: it is the part the author's explanation cannot cover, which is why he keeps it separate.",
+    "author_intention": "To take a familiar piece of wonder and show how much of it comes from the way the cases are counted, without pretending that the wonder disappears entirely.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0049-p1",
+        "role": "Raises the puzzle",
+        "note": "Pure mathematics turns out to describe matter exactly, and people call this a miracle. The author asks how much of it comes from how we count."
+      },
+      {
+        "paragraph_id": "rc-0049-p2",
+        "role": "Gives two reasons",
+        "note": "Most mathematics is never used outside mathematics, and we only hear about the successes. And physicists go looking rather than waiting, so a fit is found rather than given."
+      },
+      {
+        "paragraph_id": "rc-0049-p3",
+        "role": "Keeps a remainder",
+        "note": "Sometimes elegant mathematics predicts a measurement exactly before anyone takes it, and counting cannot explain that. So the puzzle shrinks but does not vanish."
+      }
+    ],
+    "tone_progression": "Curious at the start, matter-of-fact while the two reasons are given, and then careful at the close, refusing both the enthusiasm of the first paragraph and the easy dismissal his own argument might invite.",
+    "key_transitions": [
+      "'It is worth asking how much of the mystery is a product of the way we count the cases.' (end of paragraph 1) — the wonder becomes a question about method.",
+      "'This removes a good deal of the mystery, and it does not remove all of it.' (opening of paragraph 3) — the case ends and the concession begins."
+    ],
+    "misunderstanding": "Hurried readers file the last paragraph as more of the same, because it too describes mathematics fitting the world beautifully. But it is introduced by a sentence saying the mystery has not been removed entirely, and the author states plainly that selection cannot account for it. Treating that example as part of the argument is the single mistake this passage is built to catch.",
+    "traps_summary": "The options here do three things. They take one of the two supports and offer it as the whole passage. They turn a description of what has happened into a prediction or a recommendation. And they offer the concession back as evidence, which only a reader who noticed where the argument stopped will refuse.",
+    "reading_lesson": "Give every paragraph a one-word job as you finish it, and mark the sentence where the author stops arguing and starts conceding. In a short passage that sentence is usually the first sentence of the final paragraph, and half the questions are built on whether you noticed it. The habit costs nothing and works on passages of any length.",
+    "real_world": "The same counting error appears whenever a method is judged by its hits: the fund manager whose good calls are remembered, the remedy whose successes are reported, the prediction that came true. Ask what happened to the cases nobody wrote about.",
+    "takeaway": "A success rate measured only on the successes is not a success rate.",
+    "reflection_question": "Which of your own beliefs about what works rests on cases you happened to hear about?"
+  }
+}

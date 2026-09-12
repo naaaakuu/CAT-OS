@@ -1,0 +1,329 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0052",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "vocabulary-in-context",
+      "argument-tracking",
+      "causal-reasoning",
+      "scope-control"
+    ],
+    "word_count": 302,
+    "question_count": 3,
+    "question_types": [
+      "author_purpose",
+      "inference",
+      "vocabulary_in_context"
+    ],
+    "theme": "why cuisines change so much more slowly than dress: a dish is judged against a remembered version and sits inside a tuned system, so departure reads as error rather than novelty until circumstances remove the choosing",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "A short passage with two mechanisms and a closing pivot that turns the whole account round. The pivot is what makes sentiment the wrong answer everywhere in the set, and the word in the last clause carries two opposed senses, only one of which the sentence can take.",
+    "length_class": "short",
+    "structure": "comparison_contrast",
+    "viewpoints": 2,
+    "tone": "analytical, quietly corrective",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.contrast",
+      "struct.cause_effect",
+      "struct.general_to_specific",
+      "comp.purpose",
+      "comp.organization",
+      "comp.paraphrase",
+      "arg.causal_claim",
+      "arg.counterargument",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.necessary",
+      "inf.vs_speculation",
+      "scope.condition",
+      "word.polysemy",
+      "word.context_clue",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that fast-changing cuisines are less attached to their past, which is the sentimental account the opening paragraph sets aside and the closing sentences contradict, since migration is said to keep the remembered standard and change the supply. Q2's rival is approval granted by a recognised authority, which is close to the sense the sentence needs and imports an authority the passage does not have: the two cases of licensed departure are a lost supply and a cheap new staple, neither of which approves anything. Q3's rival is the option naming the comparison with clothing, which is the passage's device rather than its object, and which leaves out both mechanisms and the pivot they are built to support.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "tuned",
+      "staple",
+      "sanction"
+    ]
+  },
+  "passage": {
+    "title": "Judged Against a Memory",
+    "reading_time_min": 1.6,
+    "paragraphs": [
+      {
+        "id": "rc-0052-p1",
+        "text": "Clothing and cooking are both remade every day, both announce who a person is, and both lie within reach of anybody who wants to alter them. One of them changes in a season and the other in a century. The contrast is usually put down to sentiment, on the ground that food is memory and memory is conservative; but sentiment attaches to clothes as well, and has never slowed them down."
+      },
+      {
+        "id": "rc-0052-p2",
+        "text": "The difference is in how each is judged. A garment is judged on the body in front of you: if it looks well it has succeeded, and nobody consults an earlier coat. A dish is judged against a remembered one. The eater already holds a version of it, and the plate is measured against that version, which means a departure does not present itself as novelty. It presents itself as an error. The cook who improvises is not, at that table, being bold. He is being wrong."
+      },
+      {
+        "id": "rc-0052-p3",
+        "text": "The second difference is that a dish is not a single object but a position in a system. Its ingredients come from a countryside and a trade that took decades to settle into their present shape, and the seasonings of a cuisine are tuned to one another, so that a single substitution runs through a dozen other dishes before it comes to rest. Novelty is cheap at the plate and expensive at the level of the whole. Which explains when cuisines do move quickly, and they do. Migration keeps the remembered standard and removes the supply, so that substitution is forced and therefore excused; a new staple that arrives cheaply and dependably is absorbed within a generation, with nobody resisting at all. What looks from outside like reverence for the old turns out to be the absence of any sanction for departing from it."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0052-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.necessary",
+        "struct.contrast"
+      ],
+      "target_mistake": "explaining the fast-changing cases by weaker attachment, when the passage says the remembered standard survives and only the element of choice has gone",
+      "prediction_target": "The learner should predict that the licence comes from circumstance rather than from taste: a change nobody chose cannot be judged as a mistake by the person who notices it.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "Cuisines that change quickly have weaker attachments to their past than cuisines that change slowly.",
+        "B": "A cook who wants to alter a dish should first persuade the eaters to forget the version they hold.",
+        "C": "A change accepted after migration is excused because it was forced on the cook rather than chosen.",
+        "D": "The tuning of seasonings to one another is what makes eaters judge a dish against a remembered version."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The last three sentences do the work, and one word in them decides the question: substitution after migration is forced and therefore excused. Set that beside the second paragraph, where a departure reads as an error because the eater is comparing the plate with a version he already holds, and the two together say what the excuse consists in.",
+        "correct_reasoning": "A departure is condemned as an error because it is read as the cook's doing, measured against the version the eater already holds. Remove the supply and the departure is no longer the cook's doing, so the ground for calling it a mistake goes with the choice. The passage compresses this by pairing forced with excused, and the correct option unpacks the pairing without adding to it.",
+        "passage_anchor": "rc-0052-p3",
+        "question_type_note": "An inference question often lives in a conjunction. When an author writes therefore between two adjectives, ask what has to be true for the second to follow from the first.",
+        "reading_habit": "Read the exceptions an author supplies as tests of his own explanation. If the explanation is right, the exceptions will lack exactly the thing it identified, and naming that missing thing is usually the inference.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage never ranks cuisines against one another by attachment. It says migration keeps the remembered standard and removes only the supply, so the attachment is intact in precisely the case where change is fastest, and the opening paragraph has already refused sentiment as the explanation of the difference.",
+            "seductive_element": "Attachment is the ordinary explanation of why traditions hold, and an option that varies it to explain why they sometimes give way feels like the passage's argument."
+          },
+          {
+            "option": "B",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No advice is offered anywhere, and this advice runs against the account: the two cases where change is absorbed leave the memory untouched and alter the circumstances instead.",
+            "seductive_element": "The remembered version is named as the obstacle, so removing it looks like the remedy the argument implies."
+          },
+          {
+            "option": "D",
+            "trap_type": "reversed_causation",
+            "why_wrong": "These are the passage's two separate differences, and it does not derive either from the other. Judging against a memory is a fact about the eater, set out in the second paragraph; the tuned system is a fact about supply and seasoning, introduced in the third as a second difference.",
+            "seductive_element": "Both are the author's own claims and both explain conservatism, which makes a connection between them feel already stated."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0052-q2",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.polysemy",
+        "word.context_clue"
+      ],
+      "target_mistake": "taking the word in its penal sense, which the sentence cannot carry, or attaching it to an approving authority the passage never supplies",
+      "prediction_target": "The learner should paraphrase from the sentence: what is missing is not affection for the old dish but anything that would make departing from it allowable.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the final sentence, the word \"sanction\" is used to mean",
+      "options": {
+        "A": "authorisation to depart from the standard",
+        "B": "a penalty imposed for breaking a rule",
+        "C": "formal approval by a recognised authority",
+        "D": "praise for having done something new"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The word carries two opposed senses, and the sentence chooses between them by what it is explaining. It is explaining why cuisines look reverent, and it says the appearance is produced by an absence. An absence of permission would keep cooks in place; an absence of punishment would set them free, which is the wrong result.",
+        "correct_reasoning": "The correct reading is the permissive one, and the rest of the paragraph has just demonstrated what supplies it: a lost supply makes a substitution forced, a cheap new staple makes one unavoidable, and in both cases the cook may depart without being wrong. Where no such circumstance exists there is nothing that would make a departure allowable, which is the absence the sentence names.",
+        "passage_anchor": "rc-0052-p3",
+        "question_type_note": "Words with two opposed senses are settled by testing which sense makes the sentence true of the argument, not by which is more common in ordinary speech.",
+        "reading_habit": "When a word can mean a thing and its opposite, substitute each meaning into the sentence and ask which one keeps the author's point intact. One of them will make the sentence contradict the paragraph it closes.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the word's other sense, and it reverses the sentence. If what were missing was a penalty, cooks would be free to improvise, whereas the paragraph is explaining why departures are not made.",
+            "seductive_element": "It is the sense the word most often carries in public life, and it arrives before the sentence has been tested."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "It imports an authority the passage does not have. Nothing here approves anything: the two circumstances that make departure allowable are a supply that has vanished and an ingredient that has become cheap, and neither of them issues a decision.",
+            "seductive_element": "It is the near-tie, differing from the correct sense by one element, and official approval is a natural extension of authorisation."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Praise appears nowhere in the passage. Its contrast is between a departure taken as an error and a departure that nobody can call an error, which is a matter of permission rather than of reward.",
+            "seductive_element": "The second paragraph does discuss how a cook is received at the table, which makes a claim about approval sound relevant."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0052-q3",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "naming the comparison with clothing, which is the device the passage opens with, as the thing the passage set out to do",
+      "prediction_target": "The learner should be able to say: the author explains a slowness that sentiment does not explain, gives two mechanisms for it, and uses them to say when the slowness disappears.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's purpose in the passage is to",
+      "options": {
+        "A": "set out the ways in which cooking and clothing are alike, since both are remade every day, both announce who a person is, and both lie within anyone's reach",
+        "B": "argue that eaters are more attached to their childhood tastes than wearers are to their clothes",
+        "C": "explain the slowness of cuisines by how a dish is judged and where it sits in a system, and so account for when they move fast",
+        "D": "recommend that cooks be given more freedom to depart from the recipes they have inherited"
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage names its own shape. A puzzle is set by a comparison, the usual explanation is dismissed in the first paragraph, two differences are then supplied in order, and the last three sentences use them to predict the exceptions. A purpose statement has to include the exceptions, because that is where the account is tested.",
+        "correct_reasoning": "The correct option follows that sequence. The two mechanisms are the second paragraph's standard of comparison and the third paragraph's tuned system, and they are offered as the explanation that sentiment failed to provide. The closing pivot is not an afterthought but the pay-off: an account of why cuisines are slow should also say when they are not, and this one does.",
+        "passage_anchor": "rc-0052-p3",
+        "question_type_note": "A purpose question wants the operation performed on the subject. A comparison at the head of a passage is usually the way in rather than the point, especially when the author dismisses the explanation the comparison first suggests.",
+        "reading_habit": "Check whether an author's account also explains its own exceptions. When it does, the exceptions belong in your statement of what the passage is for, because they are what the account was built to earn.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Every phrase here is lifted from the first paragraph, where the similarities are the setup rather than the subject: they are listed in order to make the difference in pace puzzling. The passage's own work begins once sentiment has been ruled out, and none of it survives in this option.",
+            "seductive_element": "It is built entirely out of the author's own words, and an option assembled from a writer's sentences is hard to reject on a first reading."
+          },
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Attachment is the explanation the passage sets aside in its third sentence, on the ground that clothes attract sentiment without changing slowly; the account that replaces it is about how a dish is judged and how a supply is arranged.",
+            "seductive_element": "It is the explanation almost everyone brings to the subject, and the passage states it fairly before disposing of it."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No proposal appears anywhere, and the closing sentences treat departures as licensed by circumstance rather than by anyone's decision to allow them.",
+            "seductive_element": "The final sentence speaks of an absence of permission, which sounds like a complaint and therefore like the opening of a recommendation."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "tuned",
+      "passage_use": "the seasonings of a cuisine are tuned to one another",
+      "meaning_here": "adjusted over time so as to fit together exactly",
+      "difficulty": "medium"
+    },
+    {
+      "word": "staple",
+      "passage_use": "a new staple that arrives cheaply and dependably",
+      "meaning_here": "a basic food that a diet is built around and eaten constantly",
+      "difficulty": "medium"
+    },
+    {
+      "word": "sanction",
+      "passage_use": "the absence of any sanction for departing from it",
+      "meaning_here": "permission, or anything that would make an act allowable",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "A short passage that dismisses the obvious explanation in its first paragraph and then supplies two of its own. Track what each mechanism explains, because the last three sentences turn both of them round.",
+    "one_sentence_summary": "Cuisines change slowly not out of sentiment but because a dish is measured against a version the eater already holds, so that any departure reads as an error rather than as novelty, and because ingredients belong to a tuned system that a single substitution disturbs — which is why change is absorbed instantly in the cases where nobody chose it.",
+    "main_idea": "Food changes far more slowly than clothing, and affection for the past does not explain it, since clothes are loved too. Two things do. A dish is judged against a remembered one, so departing from it looks like a mistake rather than an experiment. And a dish sits inside a system of supply and seasoning that one change disturbs widely. When circumstances remove the choice, change happens at once.",
+    "simple_explanation": "You put on new clothes every day, and you cook every day. Both say something about who you are. Both are easy to change if you want to. Yet fashion moves in months and cooking moves in centuries. People explain this by saying food is bound up with memory. But people are sentimental about clothes too, and that has never slowed clothes down.\n\nThe writer says the real difference is in how each one is judged. A coat is judged on you, today. Does it look good? Nobody compares it with last year's coat. But a dish is compared, every single time, with a version the eater already carries in his head. So if the cook changes something, the eater does not think 'how interesting'. He thinks 'that is not right'. Changing a dish does not look like invention. It looks like a mistake.\n\nThere is a second reason. A dish is not one thing standing alone. Its ingredients come from a whole countryside and trade that took decades to settle down, and the flavourings of a cuisine have been fitted to each other, so if you swap one thing it disturbs a dozen other dishes before it settles. So a new idea is cheap on one plate and expensive across the whole cuisine.\n\nThen comes the twist. Cuisines sometimes change very fast. When people migrate, they keep the remembered dish but lose the ingredients, so substituting is forced, and nobody can blame them for it. And when a new food turns up cheap and plentiful, it gets taken up within a generation and nobody objects at all. So what looked like respect for the old way was really the lack of anything that would make changing it allowable.",
+    "why_difficult": "The passage looks descriptive and is argumentative. It sets aside the obvious explanation in a subordinate clause, offers two mechanisms without labelling them as an argument, and then reverses the whole account in its last sentence, where reverence turns out to be an absence rather than a feeling. The final word carries two opposite meanings, and the sentence is only true on one of them.",
+    "author_intention": "To replace a sentimental explanation of culinary conservatism with two mechanical ones, and then to prove them by showing that the exceptions are exactly the cases where the mechanisms stop applying.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0052-p1",
+        "role": "Sets the puzzle",
+        "note": "Clothes and food are alike in every obvious way and change at completely different speeds. The usual answer, sentiment, fails because clothes attract sentiment too."
+      },
+      {
+        "paragraph_id": "rc-0052-p2",
+        "role": "Gives the first mechanism",
+        "note": "A coat is judged on the wearer now; a dish is judged against a remembered version. So changing a dish looks like getting it wrong rather than trying something."
+      },
+      {
+        "paragraph_id": "rc-0052-p3",
+        "role": "Adds the second and turns",
+        "note": "A dish sits in a system of supply and seasoning that a single change disturbs widely. And when circumstances force a change, it is accepted at once, which shows the conservatism was never affection."
+      }
+    ],
+    "tone_progression": "Curious at the opening, brisk and explanatory through the two mechanisms, and coolly revisionist at the close, where the sentiment dismissed in the first paragraph is finally replaced by something less flattering.",
+    "key_transitions": [
+      "'but sentiment attaches to clothes as well, and has never slowed them down' (paragraph 1) — the obvious explanation is removed before the argument begins.",
+      "'Which explains when cuisines do move quickly, and they do.' (paragraph 3) — the account is turned on its own exceptions.",
+      "'What looks from outside like reverence for the old turns out to be the absence of any sanction for departing from it.' (final sentence) — the conclusion restates conservatism as a lack rather than a loyalty."
+    ],
+    "misunderstanding": "The commonest misreading keeps the explanation the passage dismisses in its opening paragraph, so that cuisines come out slow because people love the food of their childhood. The passage says clothes are loved too. Everything it offers instead is impersonal: what the eater compares the plate with, and what the surrounding trade happens to supply. A reader carrying affection into the questions will pick the option that varies affection to explain the exceptions, which is exactly the option the last sentences rule out.",
+    "traps_summary": "Three moves recur. The rejected sentimental account comes back as the author's, once as a purpose and once as an explanation of fast change. The opening comparison, which is the way into the argument, is offered as its object. And a word with two opposed senses invites the more familiar one, which would make the closing sentence say the opposite of what the paragraph has just shown.",
+    "reading_lesson": "When an author explains why something rarely happens, read on to find the cases where it does. A good explanation predicts its own exceptions, and the sentence naming them usually contains the passage's sharpest claim. Reading only to the end of the mechanism leaves you with a description; reading to the end of the exceptions leaves you with the argument, and the questions are set on the argument.",
+    "real_world": "The same pattern governs anything judged against a remembered standard rather than on its own merits: a hymn tune, a family Christmas, the format of a meeting nobody enjoys. Departure is not read as innovation but as error, until circumstances make the old version impossible.",
+    "takeaway": "Where a thing is judged against a remembered version, novelty is indistinguishable from a mistake.",
+    "reflection_question": "Which of the practices you keep unchanged are you attached to, and which have you simply never had a reason you could give for changing?"
+  }
+}

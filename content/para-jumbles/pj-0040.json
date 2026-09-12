@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0040",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "sociology",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "beginner",
+    "title": "What a Price Can Take Away",
+    "theme": "why paying people for something they were doing freely can reduce how much of it gets done",
+    "estimated_time_sec": 85,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["article_given_new", "pronoun_ref", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "generic_the",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["surface_matching", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 2,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "attach a sentence beginning with the to the thing it is about, not to the nearest sentence that uses the same word",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.cause_effect", "disc.given_new", "disc.specific_to_general", "struct.claim_counterclaim"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival a solver builds follows the word pay. The opening sentence proposes paying people, and the sentence beginning 'The payment' seems to pick that up at once, so the explanation is promoted to second place and the blood services are pushed behind it. It is refused by 'a donation became a badly paid job': nothing has been donated yet, because the only sentence about donors is the one that has been displaced. A second rival ends on the explanation, whose closing phrase about a job nobody applied for is the sharpest line in the set; it fails because the general statement about money and meaning is what the case is offered in support of, and putting the general claim third leaves the paragraph finishing on a detail about blood after it has already widened.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General sociology of incentives and voluntary donation; no specific scheme, service or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A beginner item that introduces the definite article as a trap. Two sentences use the vocabulary of payment, and the definite noun phrase attaches to the later one; a single indefinite noun, a donation, is what proves it. Kept short and plain so the lesson is the reference, not the reading."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The payment did not add a motive to the old one; it replaced it, and a donation became a badly paid job that nobody had applied for.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "B",
+      "text": "The obvious way to get more of something people already do for nothing is to pay them for it.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "Blood services that have tried it, hoping to add paid donors to the unpaid ones, have more than once watched the total fall.",
+      "role": "evidence"
+    },
+    {
+      "label": "D",
+      "text": "Money is not always an extra reason to act, and where an act carries its own meaning, naming a price for it can take the meaning away.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["B", "C", "A", "D"],
+  "links": [
+    {
+      "from": "B",
+      "to": "C",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'Services that have tried it' needs a method to have been proposed, and the only proposal in the set is paying people for what they already do for nothing."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "The explanation names a donation becoming a badly paid job, which requires donors to be on the page. The sentence about blood services is where they arrive, and the fall it reports is what the explanation accounts for."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "The last sentence widens one case into a rule about money and meaning, and a rule of that kind is drawn after the mechanism it generalises has been given, not before."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph argues against a piece of common sense. It states the sensible-sounding idea, gives a case in which it failed, explains why it failed, and then states the rule that the failure teaches. Idea, counter-case, explanation, rule.",
+    "movement": [
+      { "label": "B", "why_here": "It puts the idea on the table in its most reasonable form. It refers to nothing before it, and everything else in the paragraph is a response to it." },
+      { "label": "C", "why_here": "The counter-case. 'Tried it' points back at the proposal, and the sentence introduces the donors that the next sentence talks about." },
+      { "label": "A", "why_here": "The explanation of the fall. It can only be read here, because it speaks of a donation, and donation is something the previous sentence has just introduced." },
+      { "label": "D", "why_here": "The rule, and the close. It leaves blood behind and states what the case shows about money in general, which is the widest thing the paragraph says." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BACD",
+        "trap_type": "generic_the",
+        "why_tempting": "The opening sentence proposes paying people, and the next sentence a solver sees begins 'The payment'. A definite article looks for the closest thing it could be pointing at, and here the closest thing is right there in the sentence before.",
+        "where_it_breaks": "The same sentence says 'a donation became a badly paid job'. Nothing has been donated at this point in the paragraph, because the only sentence about donors has been pushed behind it. The definite article is pointing at a payment that has actually been made, not at a payment that has merely been suggested."
+      },
+      {
+        "order": "BCDA",
+        "trap_type": "competing_ending",
+        "why_tempting": "The phrase about a badly paid job that nobody had applied for is the sharpest line in the set, and it sounds like the kind of remark a paragraph is built to end on.",
+        "where_it_breaks": "The sentence about money and meaning is a general rule, and a general rule is what a case is offered in support of. Put it third and the paragraph widens and then narrows again, finishing on a detail about blood donors after it has already left them behind."
+      }
+    ],
+    "trap_named": "The trap is the word 'the'. English uses it both for something already mentioned and for something being treated generally, so a sentence beginning 'The payment' will always look as though it belongs beside the nearest sentence about paying. The test is not what the sentence is about but what it assumes has already happened. A payment that has replaced a motive is a payment somebody actually made, and only one sentence makes one.",
+    "solving_habit": "When a sentence starts with 'the' and a noun, ask whether the thing it names has happened yet. Being mentioned is not the same as having happened."
+  },
+  "mentor": {
+    "challenge": "Two sentences here talk about paying. Only one of them describes a payment that was actually made.",
+    "paragraph_plain": "If people already do something for free, the obvious way to get more of it is to pay them. Blood services that have tried this, hoping to add paid donors to the unpaid ones, have more than once seen the total number of donations go down. The money did not add a second reason on top of the first; it pushed the first one out, and giving blood turned into a badly paid job that nobody had applied for. So money is not always an extra reason to act. Where an action already carries its own meaning, putting a price on it can take that meaning away.",
+    "takeaway": "Being mentioned is not the same as having happened. Ask which before you follow a 'the'."
+  }
+}

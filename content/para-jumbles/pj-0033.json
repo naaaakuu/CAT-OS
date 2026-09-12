@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0033",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "beginner",
+    "title": "The Engineer With Four Legs",
+    "theme": "why returning beavers to a valley slows water as effectively as concrete flood defences",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["pronoun_ref", "article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "none",
+    "secondary_traps": ["false_pronoun_binding", "competing_ending"],
+    "dna_traits": ["surface_matching", "ending_judgement"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 1,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "A",
+    "learning_objective": "give every they and their an owner before deciding where a sentence sits",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.given_new", "disc.claim_then_evidence", "disc.cause_effect", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival a careless reader builds puts the sentence about dams and pools second, because the paragraph has just mentioned engineers and engineers build dams, so 'they' and 'their dams' seem to have an owner already. It fails on 'brought back to a valley': engineers were not removed from anywhere, and the only plural that can be brought back is the hunted animal. A second rival keeps the pools for last, since a string of shallow pools makes a pleasant closing picture; it fails because the closing sentence says the flood arrives later and smaller, a comparison that needs the single surge and the several days already stated.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General river management and beaver reintroduction; no specific text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A beginner item that teaches one move: find the owner of a pronoun. The surface signals all point the right way, so a careful reader who checks references will solve it directly; the only decoy is that engineers also build dams."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The cheapest way of doing it turns out to be an animal that was hunted out of most of Europe three centuries ago: the beaver.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "Downstream farms and villages get their flood later and a good deal smaller, which is precisely what an expensive concrete barrier is built to do.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Engineers spent a century straightening rivers so that water would leave a valley as quickly as possible, and only recently began asking whether slowing it down might work better.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "Where they have been brought back to a valley, their dams hold a chain of shallow pools, and water that once ran off the hills in a single surge now leaves over several days.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'The cheapest way of doing it' needs something to be doing, and the only thing proposed anywhere in the set is slowing the water down. The sentence that raises that possibility has to come first."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'Where they have been brought back' and 'their dams' both need an owner, and the sentence naming a hunted animal is the only one that supplies a creature which could be brought back to a valley."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "Water leaving over several days instead of in one surge is the cause; a flood that arrives later and smaller is the effect. The comparison in the final sentence only means something once the surge has been described."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph makes a claim and then shows the evidence for it. First the idea that water should be slowed rather than hurried, then the surprising candidate for doing the slowing, then what actually happens in a valley where it has been tried, and finally the comparison with the concrete alternative. Claim, candidate, evidence, comparison.",
+    "movement": [
+      { "label": "C", "why_here": "It introduces everything the rest of the paragraph leans on: the rivers, the engineers and the new question about slowing water. It refers to nothing outside itself." },
+      { "label": "A", "why_here": "It answers the question just raised, and 'doing it' points straight back at the idea of slowing water down. It also introduces the animal that the next sentence talks about with pronouns." },
+      { "label": "D", "why_here": "It is the evidence. The pronouns 'they' and 'their' have an owner only because the animal has just been named, and the sentence shows the mechanism: pools instead of a surge." },
+      { "label": "B", "why_here": "It draws the consequence for people downstream and compares it with a concrete barrier, which is a natural place to stop. 'Later and smaller' only makes sense against the surge described just before." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDAB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "The opening sentence is about engineers, and engineers build dams. A reader who does not stop to check is happy to let 'they' and 'their dams' belong to them, which joins the two sentences neatly.",
+        "where_it_breaks": "The sentence says 'Where they have been brought back to a valley'. Engineers were never taken away from valleys, so nothing can be brought back except the animal that was hunted out of Europe, and that animal is introduced in a different sentence."
+      },
+      {
+        "order": "CABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "A chain of shallow pools and water leaving over several days makes a calm, finished picture, and it is tempting to end on the image rather than on the comparison with concrete.",
+        "where_it_breaks": "The other candidate ending says the flood comes 'later and a good deal smaller'. Later and smaller than what? Only the sentence about a single surge answers that, so it has to come first and the comparison has to come after it."
+      }
+    ],
+    "trap_named": "No heavy trap is set here, and that is deliberate. What the item drills is the habit that defeats heavier traps later: every 'they', 'their' and 'it' has exactly one owner, and the owner is always in an earlier sentence. A plausible owner is not the same as the right one, and the test is whether the whole sentence still makes sense once the owner is fitted in.",
+    "solving_habit": "Read each pronoun aloud with a candidate owner substituted in. If the resulting sentence says something false or strange, you have found a decoy, not a link."
+  },
+  "mentor": {
+    "challenge": "One sentence is full of pronouns. Find who owns them before you decide where it belongs.",
+    "paragraph_plain": "For about a hundred years, engineers straightened rivers so that water would rush out of a valley as fast as it could. Only recently did anyone ask whether slowing the water down might be better. It turns out the cheapest way to slow it is an animal that was hunted out of most of Europe three centuries ago: the beaver. Where beavers have been brought back, their dams create a string of shallow pools, and rain that used to come off the hills in one surge now drains away over several days. Farms and villages downstream get their flood later and much smaller, which is exactly what a costly concrete barrier is meant to achieve.",
+    "takeaway": "A pronoun is a promise that somebody has already been introduced. Find them."
+  }
+}

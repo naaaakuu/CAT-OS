@@ -1,0 +1,399 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0050",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "law",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "structure-mapping",
+      "vocabulary-in-context",
+      "trap-recognition"
+    ],
+    "word_count": 427,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "phrase_in_context",
+      "primary_purpose",
+      "weaken"
+    ],
+    "theme": "intent in criminal law as an imputation made from conduct by standing presumptions, which answers the objection that mental states cannot be observed but narrows the difference the traditional defence of intent relies on",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "The adjudication in the third paragraph rescues one side and then charges it for the rescue in the fourth, so options that make the author a defender of the mental element are attractive throughout. The weaken question's rival restates the author's own qualification about displacement and supplies no frequency, which is the element the key adds.",
+    "length_class": "medium",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "analytical, faintly deflating",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.claim_counterclaim",
+      "struct.definition",
+      "comp.purpose",
+      "comp.organization",
+      "comp.paraphrase",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.qualification",
+      "arg.assumption",
+      "arg.evidence_vs_conclusion",
+      "inf.strongly_supported",
+      "inf.necessary",
+      "inf.author_vs_reported",
+      "scope.condition",
+      "lang.absolute_vs_qualified",
+      "word.context_clue",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q4's live rival is the option about judges directing juries that the presumption may be displaced by credible evidence of actual purpose. It looks like a demolition of the author's account and is in fact the author's own sentence, since the third paragraph already says the presumption stands unless something in the evidence displaces it; what it withholds is how often that happens, and frequency is exactly what the key supplies. Q2's rival is the option calling the verdict a guess dressed in the language of discovery, which belongs to the objectors of the first paragraph; the third paragraph's whole point is that the conclusion is reached by a rule the law supplies, which is what a guess is not. Q1's rival is the option that the author defends the mental element, which is half of the third paragraph and none of the fourth, where the defence is charged for the rescue. Q3's rival is the option that a displaced presumption leaves the verdict to harm and risk, which is the reformers' proposal rather than a consequence of the author's account.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "presumptions",
+      "displaces",
+      "imputation"
+    ]
+  },
+  "passage": {
+    "title": "Finding, Not Finding Out",
+    "reading_time_min": 2.1,
+    "paragraphs": [
+      {
+        "id": "rc-0050-p1",
+        "text": "Intent is the hinge of the criminal law. The same act — a hand on a shoulder, a fire in a warehouse, a payment into an account — is a crime or an accident according to what the person meant by it. And intent is the one element of an offence that nobody can observe. This has produced a standing objection. If a state of mind cannot be seen, measured or recorded, then a system that grades punishment by it is grading punishment by something it can only guess at; better, the objectors say, to drop the mental element and sort offences by the harm done and the risk taken, both of which leave traces."
+      },
+      {
+        "id": "rc-0050-p2",
+        "text": "Against this is set an answer that sounds unanswerable. Harm and risk cannot separate the surgeon from the poisoner, or the unlucky driver from the assassin; take out intent and the law loses the distinction between a misfortune and a wrong, which is the distinction it exists to draw. Better an element that must be inferred, on this view, than a code that cannot tell the two apart. Whatever the evidential price, intent stays."
+      },
+      {
+        "id": "rc-0050-p3",
+        "text": "Both arguments assume something about the practice that the practice does not do. Courts do not attempt to read minds, and never have. They work with standing presumptions: a person is taken to intend the ordinary and probable consequences of a deliberate act, and the presumption holds unless something in the evidence displaces it. What a jury delivers is therefore not a report of what was in the defendant's head but a finding about it, reached from conduct by a rule the law supplies. Intent in law is an imputation, and an imputation is a finding rather than a finding out."
+      },
+      {
+        "id": "rc-0050-p4",
+        "text": "That answers the objection, and it should trouble the side it rescues. If intent is imputed from conduct by rule, the distance between a code that grades by mental states and one that grades by conduct is smaller than the second argument needs it to be, because in the ordinary case the two deliver the same verdict, the mental state having been read off the conduct. What remains to intent is the contested case, where the presumption is displaced and the jury must decide whether to believe an account of a state of mind that no conduct confirms. That is a genuine difference, and a narrow one. The moral weight the second argument wants intent to carry was borrowed from a picture of the law looking into a man's mind, and the law has never done that."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0050-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.two_views_adjudication"
+      ],
+      "target_mistake": "reading the third paragraph's rescue of the mental element as the point of the piece, and so missing that the fourth paragraph charges the rescued side for it",
+      "prediction_target": "The learner should be able to say: both parties are arguing about a practice neither has described correctly, and once the practice is described the dispute changes shape.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is to",
+      "options": {
+        "A": "show that a dispute about grading by intent rests on a mistaken picture of how the law establishes intent",
+        "B": "defend the retention of the mental element against proposals to sort offences by harm and risk alone",
+        "C": "argue that juries are not in a position to determine what a defendant was actually thinking at the time of the act",
+        "D": "recommend that the law replace its presumptions about intent with a clearer statutory definition of it"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The third paragraph opens with the sentence that organises the whole piece: both arguments assume something about the practice that the practice does not do. Everything before it belongs to the two parties, and everything after it is the author describing what courts actually do and drawing consequences for both sides.",
+        "correct_reasoning": "The correct option names the operation. The passage does not join either side; it says the shared assumption is false, since courts have never tried to read minds and work instead from presumptions applied to conduct. That redescription answers the objectors and then narrows the ground the other side was standing on, which is why the fourth paragraph exists and why neither party is left holding the argument it came with.",
+        "passage_anchor": "rc-0050-p3",
+        "question_type_note": "In a two-view passage the purpose is the adjudication, and the adjudication is usually announced in a single sentence at the head of the paragraph that follows the second view.",
+        "reading_habit": "When an author says that both sides have assumed something, stop and write down what the assumption is. Purpose questions on such passages are answered from that sentence rather than from anything either side says.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The mental element does survive, but the fourth paragraph immediately reduces what it is worth: the distance between grading by mind and grading by conduct is called smaller than the second argument needs, and the moral weight claimed for intent is said to rest on a picture the law has never used.",
+            "seductive_element": "It is the live rival, because the third paragraph really does rescue intent from the charge of unknowability, and a reader who stops there has read a defence."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The passage does say nobody can observe a state of mind, but it offers this as the objectors' premise and then argues that the law never needed such access; a claim about what juries cannot do is the starting point of the debate rather than the author's conclusion.",
+            "seductive_element": "It restates a proposition the passage accepts, and the accepted proposition sounds like a thesis when lifted out of the argument it serves."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No reform is proposed anywhere. The presumptions are described as what the law already does, and the passage's closing move is a reassessment of an argument rather than a suggestion about drafting.",
+            "seductive_element": "The passage treats the presumptions as the key to everything, and a reader expects an author who has found the key to recommend using it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0050-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "struct.definition"
+      ],
+      "target_mistake": "hearing the phrase as a complaint that verdicts about intent are arbitrary, when the sentence before it supplies the rule that makes them anything but",
+      "prediction_target": "The learner should paraphrase from the preceding sentence: the jury reaches a conclusion about intent by applying the law's rule to conduct, instead of uncovering a hidden fact.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the third paragraph, the phrase \"a finding rather than a finding out\" most nearly means that a verdict about intent is",
+      "options": {
+        "A": "little more than a guess that the law has dressed in the language of discovery",
+        "B": "a conclusion the jury reaches by recovering what the defendant actually thought",
+        "C": "a conclusion the law authorises from conduct rather than a discovery about a hidden fact",
+        "D": "a decision taken without any evidence bearing on the defendant's state of mind"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The phrase is the last clause of a paragraph that has already defined it. A jury delivers not a report of what was in the defendant's head but a finding about it, reached from conduct by a rule the law supplies. The wordplay compresses that sentence; it does not add anything to it.",
+        "correct_reasoning": "The correct option keeps both halves of the contrast. What the law does is authorise a conclusion, by a presumption applied to what the defendant did, which is the finding; what it does not do is uncover the mental fact itself, which would be the finding out. The option preserves the rule, and so avoids turning a legal operation into either an act of perception or an act of invention.",
+        "passage_anchor": "rc-0050-p3",
+        "question_type_note": "A phrase-in-context question built on a play on words is answered from the sentence that sets up the play, never from the connotations of the words in isolation.",
+        "reading_habit": "When a paragraph ends on a memorable formulation, read the sentence before it. Authors almost always state the idea plainly first and only then compress it into the phrase a question will quote.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Guess is the passage's own word and it belongs to the objectors of the first paragraph, who say the law grades punishment by something it can only guess at. The paragraph the phrase comes from borrows nothing from them: it describes a rule applied to observable conduct, which is exactly what separates a finding from a guess.",
+            "seductive_element": "The phrase does deny that anything is really discovered, and denying discovery sounds like conceding invention."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the second half of the phrase, the finding out, which the passage says does not happen: courts do not attempt to read minds, and never have.",
+            "seductive_element": "It is the ordinary sense of what a jury is imagined to be doing, and the passage's own vocabulary of finding invites it."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "Evidence is central to the account. The presumption is applied to a deliberate act and holds only unless something in the evidence displaces it, and the contested case turns on an account of a state of mind that the jury must weigh.",
+            "seductive_element": "If nothing is being discovered, it is easy to slide into the thought that nothing is being considered either."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0050-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.necessary",
+        "arg.qualification"
+      ],
+      "target_mistake": "assuming that when the presumption fails the law falls back on harm and risk, which is the reformers' proposal rather than anything the author describes",
+      "prediction_target": "The learner should predict that displacement is where conduct stops settling the question, so what remains is an account of the defendant's mind that the jury must decide whether to believe.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred from the passage that in a case where the standard presumption has been displaced",
+      "options": {
+        "A": "the prosecution must abandon the charge, since intent can no longer be imputed to the defendant",
+        "B": "the verdict will rest instead on the harm that was done and the risk that was taken",
+        "C": "the finding about intent will agree with the finding that the conduct by itself would have produced",
+        "D": "the jury must weigh an account of a state of mind that the defendant's conduct does not settle"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fourth paragraph separates two kinds of case and says what happens in each. In the ordinary case mind and conduct deliver the same verdict because the mental state is read off the conduct; in the contested case the presumption is displaced and the jury must decide whether to believe an account of a state of mind that no conduct confirms.",
+        "correct_reasoning": "The correct option is the second of those two sentences applied to the stem. Displacement is defined by evidence that stops conduct settling the question, so what is left is testimony or some other account of the defendant's purpose, and the jury's task becomes one of credit rather than of applying the rule. The option claims nothing beyond that, which is why it holds where the stronger readings do not.",
+        "passage_anchor": "rc-0050-p4",
+        "question_type_note": "When a passage divides cases into an ordinary and a contested kind, inference questions ask you to stay inside one of them. Check which case the stem names before testing any option.",
+        "reading_habit": "Whenever a rule is stated with an exception, read on to find what happens inside the exception. Authors who bother to name an exception almost always describe it, and that description is what questions are built from.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "Displacing the presumption removes a shortcut, not the charge; the passage says the jury then decides whether to believe the account offered, which is a decision that may go either way.",
+            "seductive_element": "If the law's own rule no longer supplies the mental element, it is tempting to conclude that the element has gone missing altogether."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Agreement between the two findings is what the passage attributes to the ordinary case, and the contested case is defined as the one where the conduct no longer settles the matter, which is why it is the only place intent still does independent work.",
+            "seductive_element": "The fourth paragraph really does insist that mind and conduct usually coincide, and the reader carries the claim across the line the paragraph has just drawn."
+          },
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Grading by harm and risk is the proposal of the objectors in the first paragraph, offered as a replacement for the mental element; nothing in the author's account treats it as what a court falls back on when a presumption fails.",
+            "seductive_element": "Harm and risk are the passage's only named alternatives to intent, so they present themselves as the remainder when intent becomes unavailable."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0050-q4",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "arg.assumption",
+        "arg.evidence_vs_conclusion",
+        "elim.near_tie"
+      ],
+      "target_mistake": "choosing a statement that repeats the author's own qualification about displacement instead of the one that makes displacement the normal case",
+      "prediction_target": "The learner should first name the assumption: that displacement is exceptional, so that in most disputed trials the rule applied to conduct is what produces the finding.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most weaken the author's claim that the objection about unobservable mental states is answered by the way courts actually establish intent?",
+      "options": {
+        "A": "A few jurisdictions have abolished the mental element altogether for a small class of regulatory offences.",
+        "B": "In most trials where intent is disputed, the defendant's own account displaces the presumption, leaving the verdict to rest on whether jurors believe him.",
+        "C": "Most criminal convictions are for offences in which the defendant's intent was never in dispute at all.",
+        "D": "Judges direct juries that the presumption about ordinary consequences may be displaced by any credible evidence of what the defendant's actual purpose had been."
+      },
+      "correct": "B",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "expert_notice": "The author's answer rests on a quantity he never states. Presumptions applied to conduct dispose of the objection only if they are what usually produces the finding; the passage confines the other case to a corner, calling it the contested case and the difference that remains a narrow one.",
+        "correct_reasoning": "The correct option attacks that unstated quantity directly. If the presumption is displaced in most disputed trials, then the rule-governed imputation is not doing the work in the cases that matter, and what decides those trials is a judgement about whether to believe a claim that no conduct can confirm. That is the guesswork the objectors complained of, restored to the centre of the practice the author offered as the answer.",
+        "passage_anchor": "rc-0050-p4",
+        "question_type_note": "Weaken questions are decided at the join between evidence and conclusion. Name what the argument needs to be true, then look for the option that makes that thing false rather than for the one that sounds most damaging.",
+        "reading_habit": "When an author describes an exception as narrow without giving a number, treat the narrowness as an assumption. Any fact that makes the exception common is the weakener the question is looking for.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Offences with no mental element are outside the argument, which concerns how intent is established where the law still requires it; abolishing it in a small class says nothing about whether presumptions work in the rest.",
+            "seductive_element": "It sounds like evidence that the objectors have already won somewhere, and a partial victory feels like a dent in the reply to them."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This makes the author's position more comfortable rather than less. Where intent is undisputed the presumption is never tested, and the passage has already said that in the ordinary case mind and conduct deliver the same verdict.",
+            "seductive_element": "It seems to shrink the importance of intent, and shrinking a thing feels like damaging any argument that depends on it."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This is the author's own qualification returned unchanged: the third paragraph says the presumption holds unless something in the evidence displaces it. Knowing that displacement is permitted leaves untouched the question of how often it occurs, and only frequency threatens the reply.",
+            "seductive_element": "It is the live rival, and it looks like an insider's fact that quietly undoes the rule the author was relying on."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "presumptions",
+      "passage_use": "They work with standing presumptions",
+      "meaning_here": "conclusions the law treats as established unless evidence is produced against them",
+      "difficulty": "medium"
+    },
+    {
+      "word": "displaces",
+      "passage_use": "the presumption holds unless something in the evidence displaces it",
+      "meaning_here": "pushes out of the position it would otherwise keep",
+      "difficulty": "medium"
+    },
+    {
+      "word": "imputation",
+      "passage_use": "Intent in law is an imputation",
+      "meaning_here": "a state of mind attributed to a person by rule rather than observed in him",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two sides argue, and the author says both have misdescribed the thing they are arguing about. Keep track of which paragraph belongs to whom, because the author's own voice does not arrive until the third.",
+    "one_sentence_summary": "Criminal law never tried to look inside anyone's head: it imputes intent from conduct by standing presumptions, which answers the complaint that mental states cannot be observed while shrinking the gap between grading by mind and grading by conduct that the defenders of intent rely on.",
+    "main_idea": "One side says intent should go, because nobody can see a state of mind. The other says intent must stay, because without it the law cannot tell a misfortune from a wrong. The author says both have the practice wrong. Courts infer intent from conduct by rule, so the objection fails, and so does much of the moral weight the second side wanted intent to carry.",
+    "simple_explanation": "Whether something is a crime often depends on what the person meant. The same fire is arson or an accident depending on intention. But nobody can look inside a head.\n\nSo one group says: drop it. Punish according to the harm caused and the risk taken, because those leave evidence behind.\n\nThe other group says: you cannot. Harm alone cannot tell a surgeon from a poisoner. Take intention out and the law can no longer tell bad luck from wrongdoing, which is the whole job. So intention stays, however hard it is to prove.\n\nNow the author steps in and says both sides have imagined the wrong courtroom. Judges and juries have never tried to read minds. They use a rule: a person is taken to have meant the ordinary results of what he deliberately did, and that stands unless the evidence gives a reason to think otherwise. So a verdict about intention is not a discovery about a hidden fact. It is a conclusion the law allows you to draw from what the person did. That is the meaning of the line about a finding rather than a finding out.\n\nThat answers the first group: nothing unobservable has to be observed. But it costs the second group something. If intention is worked out from conduct, then a system that grades by intention and a system that grades by conduct usually give the same answer. Intention only does independent work in the hard cases, where the ordinary rule has been displaced and the jury has to decide whether to believe an account of what someone meant that his actions do not settle. That is a real difference, but a small one, and much smaller than the second group's argument assumed.",
+    "why_difficult": "The author's position only becomes visible in the third paragraph, and it is not a choice between the two sides but a correction of a picture both of them share. Readers who are looking for a winner declare one after the third paragraph, where the mental element is rescued, and then miss the fourth, which takes back most of what the rescue seemed to be worth. The vocabulary compounds it: presumption, displacement and imputation are ordinary legal words used precisely, and the argument runs on the precision.",
+    "author_intention": "To stop an argument by describing the practice both parties are arguing about, and then to follow the description far enough to see what it costs the side it saves.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0050-p1",
+        "role": "States the objection",
+        "note": "Intention decides whether an act is a crime, but nobody can see it. So one side says grade offences by harm and risk instead, because those leave traces."
+      },
+      {
+        "paragraph_id": "rc-0050-p2",
+        "role": "States the reply",
+        "note": "Harm cannot separate a surgeon from a poisoner. Without intention the law loses the difference between bad luck and wrongdoing, so intention stays whatever it costs in proof."
+      },
+      {
+        "paragraph_id": "rc-0050-p3",
+        "role": "Corrects both sides",
+        "note": "Courts never read minds. They apply a rule to conduct and treat the conclusion as established unless evidence displaces it. Intention in law is imputed, not discovered."
+      },
+      {
+        "paragraph_id": "rc-0050-p4",
+        "role": "Sends the bill",
+        "note": "If intention is read off conduct, grading by mind and grading by conduct usually agree. Intention does separate work only in contested cases, which is a real difference but a narrow one."
+      }
+    ],
+    "tone_progression": "Neutral while the two positions are set out, matter-of-fact and slightly corrective when the practice is described, and coolly unimpressed at the close, where a familiar moral claim is traced to a picture the law never used.",
+    "key_transitions": [
+      "'Both arguments assume something about the practice that the practice does not do.' (opening of paragraph 3) — the author enters and refuses the question as asked.",
+      "'Intent in law is an imputation, and an imputation is a finding rather than a finding out.' (end of paragraph 3) — the redescription is compressed into its sharpest form.",
+      "'That answers the objection, and it should trouble the side it rescues.' (opening of paragraph 4) — the rescue turns into a charge."
+    ],
+    "misunderstanding": "The usual wrong picture is that the author has taken the traditionalist's side, because the third paragraph does save the mental element from the charge of unknowability. But saving it changes what it is. Once intent is a conclusion drawn from conduct by rule, the moral distance between the two proposed codes narrows, and the fourth paragraph says so twice. A reader whose summary ends with the third paragraph has the author defending exactly what he goes on to deflate.",
+    "traps_summary": "Three patterns recur here. The objectors' vocabulary comes back as the author's, so guesswork and harm and risk are offered as things he believes. The third paragraph's rescue is offered as the purpose of the piece, with the fourth paragraph's charge left out. And in the weaken question the author's own qualification is handed back as though it were an objection, which it cannot be, since he wrote it.",
+    "reading_lesson": "When an author describes an exception as narrow, or ordinary cases as typical, notice that a quantity has been asserted without evidence. Those unstated frequencies are load-bearing: they are what a weaken question will attack and what a careless summary will drop. Marking them as you read gives you the argument's soft point before the questions ask you to find it.",
+    "real_world": "The same move governs any institution that has to act on something it cannot observe: an employer judging good faith, a regulator judging recklessness, a school judging effort. None of them looks inside anyone. Each applies a rule to visible behaviour and calls the result a judgement about the person.",
+    "takeaway": "When an institution cannot see a state of mind, it does not guess at one; it builds a rule for attributing one, and the rule is what you should argue about.",
+    "reflection_question": "When you last decided what somebody meant by what they did, which rule were you applying without noticing that you had one?"
+  }
+}

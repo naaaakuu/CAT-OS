@@ -1,0 +1,330 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0048",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "elite",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "scope-control",
+      "vocabulary-in-context",
+      "trap-recognition"
+    ],
+    "word_count": 348,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "phrase_in_context"
+    ],
+    "theme": "the rule of law as a formal virtue whose worth is conditional: predictability makes usable whatever room the law's content leaves, so it multiplies liberty rather than supplying it",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "Three short paragraphs, three positions, and a thesis that arrives only in the last four sentences. The formal account stated in the opening paragraph survives into the author's view, which is what makes it the strongest wrong answer to the main-idea question.",
+    "length_class": "short",
+    "structure": "dialectic",
+    "viewpoints": 3,
+    "tone": "analytical, unsentimental",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.claim_counterclaim",
+      "struct.pivot",
+      "struct.definition",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "arg.qualification",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.analogy",
+      "arg.principle",
+      "inf.author_view_application",
+      "inf.author_vs_reported",
+      "scope.condition",
+      "lang.absolute_vs_qualified",
+      "word.context_clue",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the formal account from the first paragraph, which a strong candidate defends on the ground that the author never retracts it. He does not, but he does not stop there either: the third paragraph adds the condition that decides the passage, that the worth of the form is not independent of the content, and an option ending at formality has summarised the premise rather than the argument. Q2's rival is the option that the regime achieved a modest good which its injustice then cancels; that gets the net right and the mechanism wrong, since multiplying by zero yields nothing rather than something offset, and the sentence insists the care was real. Q3's rival is the option calling the gain worthless, which reads the multiplier as though every unjust system left no room at all; the third paragraph's phrase whatever room the content of the law leaves makes the size of the gain vary with the content rather than vanish with it.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "prospective",
+      "multiplier",
+      "wanting"
+    ]
+  },
+  "passage": {
+    "title": "A Multiplier, Not a Gift",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0048-p1",
+        "text": "The rule of law is a virtue of form. A legal order has it when its rules are general, published in advance, prospective, intelligible and stable enough to be relied upon, and when officials do what the published rules say they will do. Nothing in that list mentions what the rules contain. A state may meet every requirement on it and still forbid what ought to be permitted, tax what ought to be left alone, and punish what deserves no punishment. This is not an awkward consequence to be argued away. It is the point: the rule of law was separated from justice precisely so that a society could be found wanting in the one while doing well by the other."
+      },
+      {
+        "id": "rc-0048-p2",
+        "text": "The obvious reply is that a virtue so emptied of content is no virtue at all. What does a subject gain from knowing, with admirable precision, the procedure by which his property will be taken and the grounds of his imprisonment? To praise a regime for the clarity of its published cruelties is to commend its administration and call the compliment a moral verdict. If the standard can be satisfied by a tyranny that keeps good records, the objection runs, it measures competence rather than decency, and should be described as such."
+      },
+      {
+        "id": "rc-0048-p3",
+        "text": "The reply is half right, and the half it gets wrong is the instructive one. Predictability is not nothing. It is what makes a plan possible, and a person who cannot form plans cannot exercise much of what we would otherwise call freedom. But its worth is not independent of what the rules contain, because a plan is worth making only if some of the things one might plan for are worth having. That is why the rule of law is best understood as a multiplier rather than a gift. It takes whatever room the content of the law leaves a person and makes that room usable; applied to a generous content it is enormously valuable, and applied to nothing it yields nothing. The tyranny with good records has multiplied a zero with great care."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0048-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "arg.qualification",
+        "struct.pivot"
+      ],
+      "target_mistake": "taking the formal definition of the first paragraph for the thesis, when the passage's own claim is the condition attached to it in the third",
+      "prediction_target": "Before the options the learner should be able to say: predictability is a real good, but its value rises and falls with what the law permits, so it magnifies liberty rather than providing any.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best captures the central claim of the passage?",
+      "options": {
+        "A": "The rule of law is a purely formal virtue, so a legal order may satisfy it completely while the rules it enforces remain unjust.",
+        "B": "The rule of law is worth as much as the law's content allows: it makes usable whatever room that content leaves, and adds nothing where none is left.",
+        "C": "Because a tyranny that keeps good records can satisfy it in full, the rule of law measures administrative competence rather than any kind of decency at all.",
+        "D": "Predictability is the foundation of freedom, since a person who cannot form plans cannot be free in any meaningful sense."
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage moves in three steps and only the third is the author's own. A definition is given, an objection is put, and then the objection is graded: half right, and the half it gets wrong is the instructive one. Everything after that sentence is the thesis, and it ends in an image that states the whole of it.",
+        "correct_reasoning": "The correct option holds both parts of the third paragraph together. Predictability really is a good, because planning is a condition of using any liberty one has; and its worth is conditional, because there is nothing to plan for unless the content of the rules leaves something worth planning for. That is exactly what the multiplier figure says, and the closing sentence supplies the limiting case, where the operation is performed faultlessly on nothing.",
+        "passage_anchor": "rc-0048-p3",
+        "question_type_note": "In a dialectical passage the thesis is what survives the objection, not what precedes it. Locate the sentence that grades the objection and read the thesis forwards from there.",
+        "reading_habit": "When an author says a criticism is half right, find both halves before choosing. The half conceded is usually the memorable one, and the half refused is usually where the argument lives.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the first paragraph's definition, which the author keeps and then qualifies. Left on its own it says nothing about whether the form is worth anything, which is the question the objection raises and the last paragraph answers.",
+            "seductive_element": "It is the live rival: the author never retracts a word of it, so a reader who tests options only for consistency with the text finds no fault here."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the objection of the second paragraph, reported in the third person and then rejected: the author's reply is that predictability is not nothing, because it is what makes a plan possible.",
+            "seductive_element": "It is stated forcefully, and the closing sentence about the tyranny with good records seems to grant it the last word."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "It rebuilds the passage's own sentence with two words changed. The text says a person who cannot form plans cannot exercise much of what we would otherwise call freedom, and calls the rule of law a multiplier rather than a gift; this option promotes much of into any meaningful sense and the multiplier into a foundation, and a foundation supplies what is built on it.",
+            "seductive_element": "It is assembled out of the one sentence in the passage that praises predictability without qualification, so every phrase in it sounds familiar."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0048-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "arg.analogy",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "reading the closing image as a claim that the regime's virtue was cancelled by its injustice, rather than as a claim that there was nothing for the virtue to act upon",
+      "prediction_target": "The learner should paraphrase from the multiplier figure: the operation was carried out properly, but on a content that leaves nothing to be magnified, so the product is nothing.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the last sentence, the phrase \"has multiplied a zero with great care\" most nearly means that the regime described has",
+      "options": {
+        "A": "applied a genuine virtue to a content that leaves nothing for it to enlarge",
+        "B": "achieved a modest good which the injustice of its rules then cancels out",
+        "C": "given its subjects an accurate account of the treatment they may expect",
+        "D": "adopted the outward forms of legality while departing from them in practice"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The image is set up two sentences earlier and should be read from its setting. The rule of law takes whatever room the content leaves and makes that room usable; applied to a generous content it is enormously valuable, applied to nothing it yields nothing. The final sentence is that last clause given a subject.",
+        "correct_reasoning": "The correct option keeps both parts of the figure. The multiplying is real, which is why the author writes with great care rather than carelessly, and the product is nothing because the other term is nothing. The regime has the formal virtue and gets no value from it, not because the virtue was fraudulent but because there was no liberty for it to make usable.",
+        "passage_anchor": "rc-0048-p3",
+        "question_type_note": "A phrase-in-context question on a mathematical or mechanical figure is answered by the sentence that set the figure up, not by what the image suggests on its own.",
+        "reading_habit": "When an author introduces a metaphor and then applies it, read the application back through the introduction. The two sentences together say more exactly what the image is claiming than either does alone.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "It gets the total right and the arithmetic wrong. Nothing is cancelled here; there was never anything to cancel, since the multiplier acts on the room the rules leave and these rules leave none. A good that had been achieved and then offset would not be a zero.",
+            "seductive_element": "It is the near-tie: it ends where the passage ends, with a regime that gains nothing, and it sounds like the same judgement stated less technically."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The second paragraph does say such a regime tells its subjects precisely how they will be treated, and the passage does not deny it. The phrase in question is about what that accuracy is worth, which is a different matter from whether it exists.",
+            "seductive_element": "It is true of the regime and is drawn from the passage's own account of it."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The whole case depends on officials actually doing what the published rules say; a state that departed from its own forms in practice would fail the first paragraph's definition and would not be an example of the problem at all.",
+            "seductive_element": "Hypocrisy is the usual charge against a cruel state that talks about legality, and the reader arrives expecting it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0048-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "elim.near_tie"
+      ],
+      "target_mistake": "turning a conditional worth into no worth, so that any improvement in predictability under unjust rules counts for nothing",
+      "prediction_target": "The learner should predict that the author's answer will vary with the case: the reform is worth whatever the rules already leave people room to do.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "application",
+        "scope"
+      ],
+      "stem": "It can be inferred that the author would regard a reform that made an unjust legal system more predictable as",
+      "options": {
+        "A": "an advance in justice, since predictability is one of the things that justice requires",
+        "B": "worthless, because the rule of law has no value apart from the justice of the rules",
+        "C": "a gain in freedom equal to the gain the same reform would bring in a just system",
+        "D": "a gain whose size depends on how much the system's rules already leave people free to do"
+      },
+      "correct": "D",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The multiplier figure is a rule for exactly this question. It takes whatever room the content of the law leaves a person and makes that room usable, which means the same improvement in form produces different amounts of value in different systems. The two extremes are given: a generous content and nothing at all.",
+        "correct_reasoning": "The correct option is that rule applied to the stem's case. An unjust system is not necessarily an empty one, and the passage never says it is; it says the yield is proportional to the room the rules leave. So the answer has to be a quantity that varies with the content, which is what this option supplies and what makes it the only option consistent with the figure the passage chose.",
+        "passage_anchor": "rc-0048-p3",
+        "question_type_note": "When an author states a relation rather than a verdict, an inference question will ask for the relation applied to a new case. Look for the option whose answer is a variable, not a fixed judgement.",
+        "reading_habit": "Notice the difference between a multiplier and an addend when a passage grades one good against another. The word chosen fixes what happens at the extremes, and inference questions are built at the extremes.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "The passage attaches predictability to the exercise of freedom, not to justice, and its first paragraph exists in order to keep the two apart: the rule of law was separated from justice so that a society could be found wanting in one while doing well by the other.",
+            "seductive_element": "Freedom and justice are neighbouring political goods, and an argument that predictability matters morally seems to bring it under justice."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage insists that predictability is not nothing, and its arithmetic yields zero only where the content leaves no room at all. An unjust system is not by definition an empty one, so worthless goes beyond what the figure licenses.",
+            "seductive_element": "It is the near-tie: the closing sentence really does reach zero, and a reader who takes that case as the general one lands here."
+          },
+          {
+            "option": "C",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "Equality between the two systems is what a multiplier rules out; the same formal improvement is described as enormously valuable under a generous content and worth nothing under an empty one.",
+            "seductive_element": "It respects the passage's insistence that the form is a genuine virtue, and treating a virtue as constant feels like taking that insistence seriously."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "prospective",
+      "passage_use": "published in advance, prospective, intelligible and stable enough to be relied upon",
+      "meaning_here": "governing only what happens after the rule is made, never what happened before it",
+      "difficulty": "hard"
+    },
+    {
+      "word": "wanting",
+      "passage_use": "a society could be found wanting in the one while doing well by the other",
+      "meaning_here": "falling short when judged against a standard",
+      "difficulty": "medium"
+    },
+    {
+      "word": "multiplier",
+      "passage_use": "the rule of law is best understood as a multiplier rather than a gift",
+      "meaning_here": "something that increases the value of whatever it is applied to without supplying any value of its own",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Three paragraphs, three voices, and only the third is the author's. Do not decide what he thinks until you have read the sentence that grades the objection.",
+    "one_sentence_summary": "The rule of law is a virtue of form that says nothing about the justice of the rules, and although that makes it look empty, predictability is what allows people to plan and therefore multiplies whatever liberty the law's content leaves — which is why a tyranny with faultless procedures gains nothing from them.",
+    "main_idea": "A legal system can be perfectly law-governed and thoroughly unjust, because the rule of law is about form rather than content. That looks like an objection to the whole idea. The author answers that predictability does matter, since without it nobody can plan, but its value depends entirely on how much the rules leave worth planning for.",
+    "simple_explanation": "The rule of law is a set of rules about rules. Are they general? Published beforehand? Understandable? Do they apply going forward rather than backwards? Do officials actually follow them? If yes, the system has the rule of law. Notice that none of these questions asks whether the rules are fair. So a country can tick every box and still have terrible laws. The author says that is not a flaw in the idea; that is what the idea was for.\n\nThen comes the obvious complaint. If a cruel government can tick all the boxes, what use is the idea? Knowing exactly how you will be robbed is not much of a comfort. Praising such a government for tidy paperwork and calling that praise moral seems like a trick.\n\nThe author says this complaint is half right. Here is the half that is wrong. Being able to predict what the law will do is what lets you make plans, and a person who cannot make plans cannot really use any freedom he has. So predictability does matter.\n\nBut here is the half that is right, put properly. A plan is only worth making if there is something worth planning for. So predictability does not hand you anything by itself. It takes whatever freedom the laws leave you and makes it usable. Think of it as multiplication. Multiply a large amount of freedom by good procedures and you get a great deal. Multiply nothing by the same excellent procedures and you still have nothing. That is the last line: the tyranny with perfect records has multiplied a zero, very carefully.",
+    "why_difficult": "The passage never signals its own position with a verdict word. It states a definition that it keeps, reports an objection that it partly accepts, and then makes a claim about a relation rather than about a thing, which readers looking for a side find hard to file. The last two sentences also carry the whole argument in an image, and an image has to be translated back into the claim that set it up before it can be used on the questions.",
+    "author_intention": "To rescue a formal idea from the charge of emptiness without pretending it is worth more than it is, by changing the question from how much the rule of law is worth to what its worth depends on.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0048-p1",
+        "role": "States the formal idea",
+        "note": "Lists what makes a system law-governed and points out that none of it is about whether the laws are good. The separation from justice is deliberate, not an accident."
+      },
+      {
+        "paragraph_id": "rc-0048-p2",
+        "role": "Puts the objection",
+        "note": "If a cruel state with good records passes the test, the test measures competence rather than decency, and praising a government for clear rules is not a moral judgement at all."
+      },
+      {
+        "paragraph_id": "rc-0048-p3",
+        "role": "Grades and answers it",
+        "note": "Predictability does matter, because planning needs it. But it only magnifies the freedom the rules already allow, so with nothing to magnify it produces nothing."
+      }
+    ],
+    "tone_progression": "Flat and definitional at the start, then sharper as the objection is voiced in its most damaging form, and finally judicial: the objection is scored rather than accepted or refused, and the last sentence delivers the verdict as an image.",
+    "key_transitions": [
+      "'This is not an awkward consequence to be argued away.' (paragraph 1) — the apparent embarrassment is claimed as the whole design.",
+      "'The reply is half right, and the half it gets wrong is the instructive one.' (opening of paragraph 3) — the objection is graded and the author's own argument begins.",
+      "'But its worth is not independent of what the rules contain' (paragraph 3) — the concession turns into the condition that decides the passage."
+    ],
+    "misunderstanding": "The common wrong picture is that the author defends the rule of law against the objection and leaves it standing as an unqualified good. He does less than that. He grants the objection its central point, that a formal virtue can accompany any content, and rescues only the claim that the form is worth something wherever there is something for it to act on. A reader who carries away a defence rather than a condition chooses the wrong answer in every question here.",
+    "traps_summary": "Two traps recur. One offers the first paragraph's definition as the thesis: it is never contradicted, so consistency alone will not eliminate it, and only the question of whether an option carries the argument can. The other converts a conditional into an absolute, either by making predictability worthless under unjust rules or by making it a foundation of freedom rather than a multiplier of it.",
+    "reading_lesson": "When a passage answers an objection by saying it is partly right, treat the paragraph that follows as two claims, not one: what is being conceded and what is being kept. The conceded half usually reappears in a distractor dressed as the thesis, and the kept half is usually stated in the form of a relation. Options that name a relation, rather than a verdict, are the ones to check first.",
+    "real_world": "The same structure governs arguments about any procedural good — transparency, due process, a clear appeals policy at work. Each is genuinely valuable and none of them supplies a reason on its own, which is why an institution can be scrupulous about how it decides and still decide badly.",
+    "takeaway": "Good procedure does not give you liberty; it lets you use whatever liberty you have been left.",
+    "reflection_question": "Where in your own life have you mistaken a clear and reliable process for a fair one?"
+  }
+}

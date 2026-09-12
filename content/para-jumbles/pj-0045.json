@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0045",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "public-policy",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "beginner",
+    "title": "The Help That Nobody Claims",
+    "theme": "why money offered to poor households goes uncollected, and why the cheapest reform is a shorter form",
+    "estimated_time_sec": 80,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["demonstrative", "article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "none",
+    "secondary_traps": ["competing_ending", "competing_opener"],
+    "dna_traits": ["surface_matching", "ending_judgement"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 2,
+      "competing_endings": 2,
+      "lexical_decoys": 1,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "A",
+    "learning_objective": "let a phrase such as each of these fix a sentence immediately after the list it counts",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.demonstrative", "disc.given_new", "disc.cause_effect", "struct.problem_solution"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival keeps the sentence about time and nerve for last, since it names the people the policy was written for and reads like a moral. It fails at once: that sentence begins 'Each of these', and a phrase that counts has to follow the things it counts, which are the nine-page form, the office hours and the rule. A second rival opens on the list of reasons, because it carries no pronoun; that fails because 'The reasons' is a definite reference to an outcome nobody has yet described, and the only sentence describing one is the one about payments going uncollected.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General public administration on benefit take-up; no specific programme, country or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A beginner problem-and-solution item built on one very reliable device: a counting phrase. The list has to precede the sentence that counts it, and the surface signals all agree with the meaning, so a careful reader solves it directly."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The cheapest reform is often not a larger payment but a shorter form, or no form at all where the state already holds the facts it is asking for.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "A payment that nobody claims helps nobody, and in most countries a surprising share of what is offered to poor households is never collected.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "Each of these costs an applicant time and nerve, and the households with least of either are exactly the ones the payment was written for.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "The reasons are rarely mysterious: a form that runs to nine pages, an office that opens while people are at work, a rule that has to be understood before it can be used.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": ["B", "D", "C", "A"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The reasons' is a definite reference and needs something to be the reasons for. The only thing in the set that calls for an explanation is the fact that offered payments go uncollected."
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Each of these' counts a group that has already been put on the page, and the nine-page form, the office hours and the rule are that group. A counting phrase cannot point forwards."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "Once the obstacles have been shown to fall hardest on the intended households, the paragraph has earned its remedy, and the remedy names the form rather than the money."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph states a problem, gives its causes, shows why the causes matter more than they look, and proposes a cheap repair. Problem, causes, why the causes bite, remedy. Because the remedy answers the causes, it has to come after them, and because one sentence counts the causes, it has to come immediately after the list.",
+    "movement": [
+      { "label": "B", "why_here": "It states the problem in a form that demands an explanation, and it introduces nothing by reference, which no other sentence here can claim." },
+      { "label": "D", "why_here": "It supplies the explanation and lays out the three obstacles that the next sentence counts. Its 'The reasons' points back at the uncollected payments." },
+      { "label": "C", "why_here": "It counts those obstacles and turns them into a point about who is hurt by them. 'Each of these' fixes it in the seat directly after the list." },
+      { "label": "A", "why_here": "The remedy, and the close. It answers the obstacles rather than the shortfall, which is the paragraph's real argument, and nothing follows from it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDAC",
+        "trap_type": "competing_ending",
+        "why_tempting": "The sentence about time and nerve names the very households the payment was written for, which makes a pointed and rather moving place to stop, and the remedy looks like administrative detail that could go earlier.",
+        "where_it_breaks": "That sentence opens 'Each of these'. In the last seat the things being counted would be a shorter form and no form at all, which are remedies and not obstacles, so the count would be pointing at the wrong list. A counting phrase belongs immediately after the list it counts."
+      },
+      {
+        "order": "DBCA",
+        "trap_type": "competing_opener",
+        "why_tempting": "The list of reasons carries no pronoun and opens with a confident phrase, and a paragraph that begins with concrete obstacles feels like it is getting straight to business.",
+        "where_it_breaks": "'The reasons' is definite. Reasons for what? At this point nothing has happened that would need explaining, and the sentence about payments going uncollected is the only one that supplies a fact to be accounted for."
+      }
+    ],
+    "trap_named": "No trap is set here on purpose; the item exists to make one device automatic. Phrases that count, such as 'each of these', 'both', 'all three' and 'these obstacles', are among the most reliable signals in any jumble, because a count needs its members already on the page. Learn to place them first and the rest of a paragraph often falls out around them.",
+    "solving_habit": "Find the counting phrase before anything else. It gives you one certain join, and a certain join is worth more than several plausible ones."
+  },
+  "mentor": {
+    "challenge": "One sentence counts something. Find what it counts, and one join is settled for you.",
+    "paragraph_plain": "A payment that nobody claims helps nobody, and in most countries a surprising amount of the money offered to poor households is never collected. The reasons are rarely mysterious: a form that runs to nine pages, an office that is open only while people are at work, a rule you have to understand before you can use it. Each of those costs an applicant time and nerve, and the households with least of either are precisely the ones the payment was meant for. So the cheapest reform is often not a bigger payment but a shorter form, or no form at all in cases where the state already holds the facts it is asking people to supply.",
+    "takeaway": "A phrase that counts always sits just after the things it counts."
+  }
+}

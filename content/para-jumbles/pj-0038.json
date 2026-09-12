@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0038",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Line Nature Does Not Draw",
+    "theme": "why concepts without edges force institutions to supply boundaries that can be reasonable but never correct",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "abstract_to_concrete",
+    "cohesion_signals": ["article_given_new", "connective_explicit", "substitution_ellipsis", "lexical_repetition"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["misleading_connective"],
+    "dna_traits": ["ending_judgement", "global_tracking", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 4,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "keep an aphorism out of the last seat when a later sentence quotes its content back as a definite description",
+    "reasoning_patterns": ["disc.competing_ending", "disc.transition_word", "disc.example_after_claim", "disc.closing_sentence", "struct.definition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival keeps the line about the concept never having been built with an edge for the end, because it is the most philosophical sentence in the set and reads like a verdict. It is refused by the institutions sentence, which speaks of 'the grain that no inquiry will ever disclose' — a definite description whose content is supplied only by the sentence about inquiry, so that sentence has to come earlier. A second rival puts the same institutions sentence second, on the strength of its 'Yet'; that breaks because the explanation of why the edge is absent would then follow a sentence that has already declared the absence permanent.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General philosophy of vagueness and legal line-drawing; no specific text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A medium item with two sentences that sound like verdicts. The separation is done by a definite description that repeats the content of the sentence it depends on, which is the cleanest kind of evidence a jumble can carry and worth drilling at this tier."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Yet institutions cannot wait for the grain that no inquiry will ever disclose, and so a licensing authority picks seventeen, a pension scheme picks sixty-six, and a court decides that this defendant and not that one was reckless.",
+      "role": "contrast"
+    },
+    {
+      "label": "B",
+      "text": "The absence of an edge is not ignorance, since no further inquiry would disclose the missing grain; the concept was simply never built to have one.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "What such a number does is not to discover a boundary but to supply one, which is why it can be defended as reasonable and never as correct.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "Some of our most useful words have no edges: there is no number of grains at which a scattering becomes a heap, and no hour at which a young person becomes an old one.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "B", "A", "C"],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The absence of an edge' is a definite reference to something already reported, and only one sentence reports that useful words have no edges. The grains are also carried across from it."
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The grain that no inquiry will ever disclose' repeats, as a definite description, exactly what the previous sentence asserts about inquiry and the missing grain. The description can only be used once the assertion has been made."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Such a number' needs numbers to have been produced, and seventeen and sixty-six are the only ones in the set. The final sentence then says what those numbers are doing."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph runs from an abstraction to the places where the abstraction bites. It observes that some concepts have no boundary, explains that the missing boundary is not a gap in our knowledge, shows what institutions do about it anyway, and then says what their decision is and is not. Abstract claim, diagnosis, concrete practice, verdict on the practice.",
+    "movement": [
+      { "label": "D", "why_here": "It states the abstraction and supplies both illustrations the rest of the paragraph borrows, the grains and the ages. It refers to nothing outside itself, which no other sentence here can say." },
+      { "label": "B", "why_here": "It forestalls the obvious objection that we simply have not looked hard enough, and in doing so it produces the phrase about inquiry and the missing grain that the next sentence reuses." },
+      { "label": "A", "why_here": "The turn to practice. Institutions cannot suspend judgement, so they pick a figure, and the figures produced here are what the final sentence calls 'such a number'." },
+      { "label": "C", "why_here": "The verdict, and the close. It says what the chosen number can and cannot claim for itself, which is the point the whole paragraph has been assembling and which nothing further follows from." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DACB",
+        "trap_type": "competing_ending",
+        "why_tempting": "The line about the concept never having been built to have an edge is the most quotable sentence in the set and has the shape of a philosophical verdict, so it is natural to save it for last and run the examples earlier.",
+        "where_it_breaks": "The institutions sentence speaks of 'the grain that no inquiry will ever disclose'. That definite description assumes the claim about inquiry has already been made, and here it would be made two sentences later. A description cannot borrow from a sentence the reader has not reached."
+      },
+      {
+        "order": "DABC",
+        "trap_type": "misleading_connective",
+        "why_tempting": "The institutions sentence opens with 'Yet', and a paragraph that begins abstractly seems to want its turn immediately, so a solver moves the contrast up and treats the explanation about ignorance as a later gloss.",
+        "where_it_breaks": "The explanation is what licenses the turn, not a gloss on it: the sentence about institutions not waiting is only intelligible once we have been told that waiting would be futile. Placed after, the explanation would be arguing for a conclusion the paragraph has already drawn, and its 'the missing grain' would be a second introduction of a grain already described as undiscoverable."
+      }
+    ],
+    "trap_named": "The trap is two verdicts in one set. A sentence that sounds final is competing for a seat that only one sentence can have, and tone will not adjudicate between them. What adjudicates is borrowing: find the definite description, the demonstrative or the repeated formula that one sentence takes from another, and the borrower is later. Here 'the grain that no inquiry will ever disclose' is a whole sentence compressed into a noun phrase, which is as clear a debt as a paragraph ever records.",
+    "solving_habit": "Look for noun phrases that summarise another sentence, such as 'the grain no inquiry will find' or 'that refusal'. They are dependencies wearing a disguise, and they always point backwards."
+  },
+  "mentor": {
+    "challenge": "Two sentences here sound like the last word. One of them is quoted, in compressed form, inside another.",
+    "paragraph_plain": "Some of the words we rely on most have no sharp boundaries. There is no exact number of grains at which a scattering turns into a heap, and no particular hour at which a young person becomes old. That missing boundary is not a case of us not knowing enough: no amount of further investigation would turn up the decisive grain, because the concept was never built with a boundary in the first place. Institutions, however, cannot wait for a grain that will never be found, so a licensing authority settles on seventeen, a pension scheme on sixty-six, and a court decides that this defendant, and not that one, was reckless. What a number like that does is not to find a boundary but to provide one, which is why it can be defended as sensible and never as right.",
+    "takeaway": "A noun phrase that summarises another sentence is a debt, and debts point backwards."
+  }
+}

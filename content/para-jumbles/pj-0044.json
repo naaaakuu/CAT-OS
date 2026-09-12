@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0044",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "intellectual-history",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "A Name for What They Were Doing",
+    "theme": "why a word for the practitioner of science had to be coined, and what the coinage recorded about an older description",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "question_answer",
+    "cohesion_signals": ["temporal_sequence", "article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["anchor_pair", "lexical_decoy"],
+    "dna_traits": ["ending_judgement", "global_tracking", "wm_long_chain"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 4,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "keep a vivid piece of evidence out of the final seat when the closing sentence names the evidence back",
+    "reasoning_patterns": ["disc.question_then_answer", "disc.competing_ending", "disc.chronology", "disc.lexical_chain", "struct.history_of_an_idea"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival ends on the sentence about shared instruments and journals, because it is the most concrete thing in the set and a paragraph that finishes on what people actually did feels well grounded. It is refused by the verdict sentence, which says 'the instruments and the journals had done the pulling'. Both nouns are definite and neither has been introduced anywhere else, so the verdict cannot precede them. A second rival treats the question and the concrete description as a matched pair and puts them together; that dies on 'a metaphysician', a word supplied only by the sentence about natural philosophers, and on the pairing of 'Until then' with 'By then'.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General history of scientific vocabulary and professionalisation; no specific text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier question-and-answer item whose concrete sentence is deliberately the most attractive closer. Two definite nouns in the real closer take their referents from it, which is the evidence that settles the tail. The paired time adverbs fix the middle."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Until then the people who did the work were natural philosophers, a description that placed them with the metaphysicians rather than with one another, and that is precisely what had ceased to be true.",
+      "role": "answer"
+    },
+    {
+      "label": "B",
+      "text": "The coinage did not name a new kind of person; it recorded that a description had come apart, and the instruments and the journals had done the pulling.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "By then a chemist and an astronomer shared instruments, journals, a method of argument and a habit of distrusting whatever could not be shown twice, and they shared none of it with a metaphysician.",
+      "role": "evidence"
+    },
+    {
+      "label": "D",
+      "text": "Why did a word as obvious as scientist have to be invented, and invented as late as the 1830s?",
+      "role": "question"
+    }
+  ],
+  "correct_order": ["D", "A", "C", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "A",
+      "device": "temporal_marker",
+      "reliability": "high",
+      "explanation": "'Until then' needs a date to be measured from, and the 1830s in the question is the only one offered. The sentence also begins the answer by saying what the practitioners were called before the coinage."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'By then' answers 'Until then', and the closing words 'none of it with a metaphysician' take up the metaphysicians introduced a sentence earlier. Both ties run in the same direction."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The instruments and the journals' are definite and appear nowhere else in the set, so the sentence that lists them must come first. The verdict then says what the coinage was really doing."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph asks why a word was needed and answers in three moves: what the old description was, what had changed underneath it, and what the new word therefore recorded. The evidence sits third because the verdict quotes it, which is what makes the closing seat contested rather than obvious.",
+    "movement": [
+      { "label": "D", "why_here": "It asks the question the paragraph exists to answer and supplies the date that every later time reference is measured against. It refers to nothing before it." },
+      { "label": "A", "why_here": "The answer begins by naming the old description and the company it kept, and it ends by announcing that this had stopped being accurate, which is the claim the next sentence proves." },
+      { "label": "C", "why_here": "The proof. Its 'By then' pairs with the earlier 'Until then', and the metaphysician it sets the practitioners against is borrowed from the sentence before it." },
+      { "label": "B", "why_here": "The verdict, and the close. It names the instruments and the journals as the force that pulled the old description apart, which is only possible once they have been described." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DABC",
+        "trap_type": "competing_ending",
+        "why_tempting": "The description of chemists and astronomers sharing instruments, journals and a habit of distrust is the most concrete sentence here, and finishing on what people actually did feels more solid than finishing on a claim about a word.",
+        "where_it_breaks": "The sentence about the coinage says 'the instruments and the journals had done the pulling'. Both nouns carry a definite article and neither has been mentioned, so the reader is being asked to recognise things that appear only in the displaced sentence. The verdict has to come after the evidence it names."
+      },
+      {
+        "order": "DCAB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "A question followed immediately by a vivid description of practitioners looks like a question and its answer, and the two make a satisfying unit at the head of the paragraph.",
+        "where_it_breaks": "The description ends 'they shared none of it with a metaphysician'. Nothing has put a metaphysician on the page, and the sentence that does is the one about natural philosophers being grouped with them. The time adverbs agree: 'By then' is written to answer an 'Until then' that would now come after it."
+      }
+    ],
+    "trap_named": "The trap is a competing ending built out of concreteness. Solvers associate specificity with conclusiveness and abstraction with preamble, so the sentence full of instruments and journals is pulled to the last seat and the sentence about what a word recorded is pushed forward. The defence is to look at the definite nouns in each candidate closer. A closer may summarise the paragraph, but it may not introduce, as already known, things the paragraph has not shown.",
+    "solving_habit": "For each sentence that might end the paragraph, list its definite noun phrases and find where each was introduced. The sentence that depends on the most, and that nothing else depends on, is the ending."
+  },
+  "mentor": {
+    "challenge": "The most concrete sentence here is not the last. Look at which sentence names its nouns back.",
+    "paragraph_plain": "Why did a word as obvious as scientist have to be invented, and invented only in the 1830s? Until then the people doing the work were called natural philosophers, a label that grouped them with metaphysicians rather than with each other, and that is exactly what had stopped being true. By the 1830s a chemist and an astronomer shared instruments, journals, a way of arguing and a habit of distrusting anything that could not be shown twice, and they shared none of that with a metaphysician. So the new word did not name a new kind of person. It recorded that an old description had come apart, and the instruments and the journals were what pulled it apart.",
+    "takeaway": "A closing sentence may summarise; it may not introduce definite nouns nobody has met."
+  }
+}

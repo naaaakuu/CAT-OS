@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0032",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "What the Courts Did When God Stopped Answering",
+    "theme": "how a prohibition on clerical participation in the ordeal forced English courts to improvise a lay method of deciding facts",
+    "estimated_time_sec": 155,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["temporal_sequence", "article_given_new", "demonstrative", "lexical_repetition"],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": ["competing_opener"],
+    "dna_traits": ["surface_matching", "global_tracking", "wm_long_chain"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "let a sentence that reports an absence sit after the sentence that creates the absence, whatever word the two sentences happen to share",
+    "reasoning_patterns": ["disc.chronology", "disc.lexical_chain", "disc.demonstrative", "disc.cause_effect", "struct.chronology"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival a strong candidate builds joins the sentence about the ordeal straight to the sentence about the travelling judges, because both end on the word verdict and the pairing looks like a single account of how facts were found. It is killed by 'left with prisoners, accusations and no method': a court cannot be left without a method until something has taken the method away, and only the sentence about the Roman council does that. A second rival opens on the council, since a date is the natural first move in a chronological paragraph; that fails on 'the iron or the water', two definite nouns whose referents have not been introduced.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General legal history of proof and the early jury; no specific text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-plus chronology whose difficulty is a shared noun. Two sentences end on the word verdict and invite a solver to weld them; a third sentence has to stand between them, and the only evidence for that is a reported absence. The date sentence is also a decoy opener."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "In 1215 a council at Rome forbade priests to bless the iron or the water, and without the blessing what remained of the procedure was a burn and a ducking.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "The institution that grew out of that expedient was never designed as a guarantee of anything; the reputation it now enjoys was acquired slowly, and long after the emergency that produced it had been forgotten.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "For centuries an English court faced with a disputed fact could hand the question to God, sending the accused to carry hot iron or be lowered into a pond and reading the outcome as a verdict.",
+      "role": "background"
+    },
+    {
+      "label": "D",
+      "text": "The judges who rode the shire circuits were left with prisoners, accusations and no method, and the expedient they hit upon was to put the question to a body of local men and take their answer as the verdict.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "temporal_marker",
+      "reliability": "high",
+      "explanation": "'For centuries' is followed by a dated event, which is the ordinary shape of a chronology. More decisively, 'the iron or the water' are definite nouns that need the hot iron and the pond already on the page."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "A court can only be left with 'no method' after its method has been removed, and the withdrawal of the blessing is the removal. The sentence about the judges reports a consequence, so it must follow the cause."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That expedient' points at the improvisation just described, namely asking local men and taking their answer. The demonstrative cannot point forwards, so the sentence about the institution's later reputation comes last."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph tells a story with a hinge in it: a long-standing practice, the moment something is taken away from it, the improvisation that filled the gap, and the later reputation of what was improvised. Because the hinge is a prohibition, the sentence reporting an absence has to come after the sentence that creates it, and that is the ordering fact the shared vocabulary is designed to hide.",
+    "movement": [
+      { "label": "C", "why_here": "The only sentence that introduces rather than refers. It gives the practice, the court and the era, and it is the source of the hot iron and the pond that the next sentence speaks of definitely." },
+      { "label": "A", "why_here": "The hinge. A date moves the clock on, and 'the iron or the water' shows the sentence is describing the very procedure just introduced. What it reports is a removal, which is what the next sentence needs." },
+      { "label": "D", "why_here": "The consequence. Judges are left with no method because the method has just been taken away, and the improvisation described here is what the final sentence calls an expedient." },
+      { "label": "B", "why_here": "The long view, and the end. 'That expedient' ties it to the improvisation, and it closes by separating what the institution was for from what it later came to mean." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDAB",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "Two sentences end on the same word, verdict, and a paragraph about how courts decided facts seems to want them side by side. Read together they look like one continuous account of proof, first by ordeal and then by neighbours.",
+        "where_it_breaks": "The sentence about the judges says they were left with 'no method'. Nothing has yet taken a method away from them, since the prohibition arrives afterwards in this order, and the paragraph would report the effect of a cause it has not mentioned. The shared word joins the topics; it does not join the events."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "competing_opener",
+        "why_tempting": "A story usually opens on a date, and the sentence about the Roman council carries one. It also has no pronoun and names its own actors, which is what solvers look for in a first sentence.",
+        "where_it_breaks": "It says priests were forbidden to bless 'the iron or the water'. Both nouns are definite and neither has been introduced, so a reader meeting this sentence first would have to guess what iron and which water. The sentence about carrying hot iron and being lowered into a pond is where they come from."
+      }
+    ],
+    "trap_named": "The trap is a lexical decoy: one word placed at the end of two different sentences so that they seem to belong together. Shared vocabulary is evidence of shared topic and nothing more. What actually orders a narrative is dependency, and the strongest kind of dependency is a reported absence, because an absence has to be created by an earlier sentence before a later one can complain of it.",
+    "solving_habit": "When two sentences share a striking word, ask what each of them needs rather than what each of them mentions. A sentence that reports something missing is always downstream of the sentence that removed it."
+  },
+  "mentor": {
+    "challenge": "Two sentences end on the same word and look like a pair. One of them describes a gap that something else has to open first.",
+    "paragraph_plain": "For hundreds of years, an English court that could not settle a disputed fact handed the question to God: the accused carried a piece of hot iron or was lowered into a pond, and the result counted as the verdict. In 1215 a council in Rome told priests to stop blessing the iron and the water, and without the blessing the whole business was just a burn and a soaking. The judges travelling the country were now left with prisoners, accusations and no way of deciding anything, so they improvised: they asked a group of local men what they made of it and treated the answer as the verdict. The institution that grew out of that improvisation was not designed to protect anybody. Its reputation for doing so came much later, once the emergency behind it had been forgotten.",
+    "takeaway": "A sentence that reports a missing method sits downstream of the sentence that removed it."
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0055",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "literature-theory",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "structure-mapping",
+      "inference",
+      "vocabulary-in-context",
+      "argument-tracking"
+    ],
+    "word_count": 317,
+    "question_count": 3,
+    "question_types": [
+      "best_characterization",
+      "inference",
+      "phrase_in_context"
+    ],
+    "theme": "the order of telling as a choice rather than an ornament: order fixes what a reader knows when each event arrives, so it decides which questions are available, without any order being better than another",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "A concession-then-thesis passage where the concession is unusually firm: rearrangement is refused any credit at all, twice. That is what makes every option ranking one order above another wrong, and it is the commonest thing a reader supplies for himself.",
+    "length_class": "short",
+    "structure": "concession_thesis",
+    "viewpoints": 2,
+    "tone": "measured, then insistent",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.qualification",
+      "struct.contrast",
+      "struct.claim_evidence",
+      "comp.organization",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "arg.concession",
+      "arg.qualification",
+      "arg.example",
+      "inf.strongly_supported",
+      "inf.directly_implied",
+      "lang.comparative",
+      "lang.contrast_marker",
+      "word.context_clue",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The passage's own concession is what most of the wrong answers ignore. Q2's live rival says a chronological narrative has made no choice about order, which the closing clause forbids in six words: a writer who has not noticed that he is choosing has chosen anyway. The second rival there ranks rearranged telling above chronological telling, which both the opening paragraph and the final sentences refuse, saying none of the questions is better than the others. Q1's rival describes the claim and its example and leaves out the concession, which is the passage's first move and the reason the thesis is stated as narrowly as it is. Q3's rival is the option about what events signify beyond themselves, which is a real question in the passage and belongs to the other half of the contrast, becoming available only when the telling is disarranged.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "withholding",
+      "disclosed",
+      "disarrange"
+    ]
+  },
+  "passage": {
+    "title": "What the Reader Knows Yet",
+    "reading_time_min": 1.5,
+    "paragraphs": [
+      {
+        "id": "rc-0055-p1",
+        "text": "It is easy to make too much of the difference between the events of a story and the order in which a narrative delivers them. The distinction is often taught as though rearrangement were itself a virtue, and it is not. A great deal of powerful writing proceeds from the first thing to the last without a single jump, and a novel that opens at the end and doubles back has not thereby achieved anything. Order is not a technique a writer can be congratulated for having used."
+      },
+      {
+        "id": "rc-0055-p2",
+        "text": "It is never neutral, though, and that is a different claim. Whatever order a narrative adopts settles what the reader knows at the moment each event arrives, and an event is not a fixed quantity to which knowledge is added afterwards. A farewell at a railway station is one thing to a reader who has been told that the train will crash, and quite another to a reader who has not. The words on the page are identical. What differs is the question the reader is holding while he reads them, and that question is supplied entirely by what has been disclosed and what is being kept back."
+      },
+      {
+        "id": "rc-0055-p3",
+        "text": "Which is why withholding is a structural device rather than a trick. A narrative cannot make a reader ask anything except by declining to answer it yet, and the reader who is asking a question is the reader for whom the next event will matter. Tell everything in order and the questions are the ones life supplies, which are chiefly about what happens next; disarrange the telling and other questions become available, about why, about whose account this is, about what the earlier scene will turn out to have been. None of these is better than the others. They are different books made from the same events, and a writer who has not noticed that he is choosing has chosen anyway."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0055-q1",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "arg.concession",
+        "struct.qualification"
+      ],
+      "target_mistake": "describing the claim and its illustration while leaving out the opening concession, which is what makes the claim as narrow as it is",
+      "prediction_target": "The learner should be able to say: the author first gives away more than expected, refusing to credit rearrangement at all, and then makes a smaller claim about what order always does.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "paragraph_function"
+      ],
+      "stem": "Which of the following best characterises the way the passage is organised?",
+      "options": {
+        "A": "a claim is made, illustrated with an example, and then extended to a wider class of cases",
+        "B": "a common overstatement is conceded, and a narrower claim is then made and developed",
+        "C": "two views are set out and the author declines to choose between them",
+        "D": "a definition is given and then applied to a series of literary works"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The first paragraph gives ground before anything has been argued: rearrangement is not a virtue, a novel that doubles back has achieved nothing by doing so, and order earns no congratulations. The second paragraph then opens with though, which is the hinge, and states a claim carefully distinguished from the one just refused.",
+        "correct_reasoning": "The correct option names both movements in order. What is conceded is the inflated version of the distinction, the one in which rearranging is itself an accomplishment; what is then asserted is smaller and stronger, that order is never neutral because it fixes what the reader knows as each event arrives. The third paragraph develops that claim into a statement about which questions each kind of telling makes available.",
+        "passage_anchor": "rc-0055-p1",
+        "question_type_note": "Best-characterisation questions are about a passage's moves rather than its subject. Name each move in two or three words before reading the options, and count them.",
+        "reading_habit": "When a passage opens by attacking the position you expected it to defend, mark that as a concession rather than as the thesis. The thesis will arrive after a word like though or but, and it will be narrower than what was given away.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "This describes the second and third paragraphs and drops the first entirely, so it misses the concession that the claim is built against; and the passage narrows its claim rather than extending it, ending by refusing to rank any order above another.",
+            "seductive_element": "It is the live rival, because there really is a claim and really is an example, and the description is accurate for two thirds of the text."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "No second party is speaking here, and the author does choose: he says order is never neutral and that a writer who has not noticed he is choosing has chosen anyway.",
+            "seductive_element": "The closing refusal to rank the two kinds of telling reads like even-handedness between two positions."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing is defined and no literary work is named; the single illustration is an invented farewell at a railway station, used to show what a reader's knowledge does to a scene.",
+            "seductive_element": "The subject sounds like the kind that comes with definitions and worked examples from novels, so a reader supplies the shape he expects."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0055-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "struct.contrast",
+        "lang.comparative"
+      ],
+      "target_mistake": "converting the passage's contrast between two sets of available questions into a ranking of the two kinds of telling",
+      "prediction_target": "The learner should predict that chronological telling is described by which questions it leaves the reader with, and that no verdict about quality will be attached.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "It can be inferred from the passage that a narrative which tells its events in the order they occurred",
+      "options": {
+        "A": "has avoided making any choice about the order of telling",
+        "B": "will necessarily be less interesting than one that rearranges them",
+        "C": "leaves its reader with a narrower range of questions to be asking",
+        "D": "conceals nothing from its reader at any point in the telling"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph sets the two kinds of telling side by side and describes each by its questions. Straight order leaves the ones life supplies, chiefly about what happens next; a disarranged telling makes others available, about why, about whose account it is, about what an earlier scene will turn out to have been. The verb is available, and the list on one side is longer.",
+        "correct_reasoning": "Since the passage says other questions become available when the telling is disarranged, the straight telling must be the case in which those questions are not available, which is a narrower range. The correct option says exactly that and stops, which matters here because the sentence immediately following insists that none of the questions is better than the others.",
+        "passage_anchor": "rc-0055-p3",
+        "question_type_note": "An inference question built on a contrast asks what must be true of the unstated side. Take the side the author describes and read the other as its complement, without importing a verdict.",
+        "reading_habit": "When an author contrasts two things and then says neither is better, expect an option that keeps the contrast and adds the ranking. The ranking is the part he refused, and refusing it twice is his way of telling you a question is coming.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The last clause of the passage forbids it: a writer who has not noticed that he is choosing has chosen anyway, which makes straight chronology one of the available choices rather than the absence of a choice.",
+            "seductive_element": "Telling events in the order they happened feels like the default rather than a decision, which is exactly the impression the closing clause was written to correct."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "Both the opening and the closing refuse the ranking: a great deal of powerful writing proceeds without a single jump, and none of the available sets of questions is better than the others.",
+            "seductive_element": "A passage that spends its last paragraph describing what rearrangement makes possible sounds as though it must prefer rearrangement."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Even a straight telling keeps the reader waiting, which is what the passage means by saying a narrative cannot make a reader ask anything except by declining to answer it yet; what happens next is withheld until it happens.",
+            "seductive_element": "Chronological order sounds like full disclosure, and the passage does contrast it with the telling that keeps things back."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0055-q3",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "struct.contrast"
+      ],
+      "target_mistake": "attaching the phrase to the questions on the other side of the contrast, which the passage says become available only when the telling is disarranged",
+      "prediction_target": "The learner should paraphrase from the clause that follows: the questions life supplies are the ones anybody has about events as they come, which is to say what happens next.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the third paragraph, the phrase \"the questions are the ones life supplies\" most nearly means that the reader is left asking",
+      "options": {
+        "A": "what will happen next, as he would of events unfolding around him",
+        "B": "whether the events described could really have happened at all",
+        "C": "what the events are meant to signify beyond themselves",
+        "D": "why the writer has presented the story in this particular way"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The phrase is glossed in the same sentence. Tell everything in order and the questions are the ones life supplies, which are chiefly about what happens next. The clause after the comma is the definition, and the semicolon that follows introduces the questions belonging to the other half of the contrast.",
+        "correct_reasoning": "What life supplies is the position of somebody living through events without foreknowledge, and the only question available to such a person is what comes next. The correct option gives that sense and keeps the analogy the phrase depends on, which is between reading a straight narrative and meeting events as they happen.",
+        "passage_anchor": "rc-0055-p3",
+        "question_type_note": "A phrase-in-context question is usually answered by the clause immediately beside the phrase, especially where an author has supplied a gloss and then moved on to a contrast.",
+        "reading_habit": "Read to the end of the sentence before interpreting a phrase inside it. Authors who build a contrast in one sentence often define both halves there, and the trap is to take a definition from the wrong half.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Whether the events are believable is never raised anywhere in the passage, which is about what a reader knows at each moment rather than about what he accepts as possible.",
+            "seductive_element": "The phrase mentions life, which suggests a comparison between fiction and reality and therefore a question about realism."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Questions about what an event will turn out to have meant sit on the other side of the semicolon, among the ones the passage says become available when the telling is disarranged.",
+            "seductive_element": "It sounds like the more literary reading of the phrase, and such questions genuinely are in the passage, one clause away."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Asking after the writer's arrangement is another of the questions the passage assigns to disarranged telling, where the reader has been made aware that somebody is choosing what to disclose and when.",
+            "seductive_element": "The passage's closing sentence is about a writer choosing, so a question about the writer's choice feels like the one it has in mind."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "disclosed",
+      "passage_use": "supplied entirely by what has been disclosed and what is being kept back",
+      "meaning_here": "made known to the reader at a particular point in the telling",
+      "difficulty": "medium"
+    },
+    {
+      "word": "withholding",
+      "passage_use": "withholding is a structural device rather than a trick",
+      "meaning_here": "keeping something back from the reader on purpose and for a while",
+      "difficulty": "medium"
+    },
+    {
+      "word": "disarrange",
+      "passage_use": "disarrange the telling and other questions become available",
+      "meaning_here": "deliberately put out of the order in which things happened",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "The opening paragraph gives away more than you expect. Read it as a concession, and wait for the word that turns the argument round.",
+    "one_sentence_summary": "Rearranging the order of a narrative is not an achievement in itself, but order is never neutral, because it fixes what the reader knows as each event arrives and therefore decides which questions he is able to ask.",
+    "main_idea": "Telling a story out of sequence is not by itself clever, and plenty of fine writing runs straight through. What is true is that the order always matters, since the same scene means something different depending on what the reader has already been told. So the choice of order decides which questions a reader can hold, and every writer makes that choice whether he notices or not.",
+    "simple_explanation": "People often talk about the difference between what happens in a story and the order in which the story tells it, as though shuffling the order were automatically clever. The author says it is not. Some of the best writing goes straight from the beginning to the end. Starting at the end and going back is not an achievement by itself.\n\nBut, he says, order always does something. Think of a goodbye at a railway station. If you already know the train is going to crash, that goodbye is unbearable. If you do not know, it is an ordinary goodbye. The words are exactly the same words. What has changed is what you know while you read them, and what you know was decided by the writer, who chose what to tell you and what to keep back.\n\nThat is why keeping things back is not a cheap trick. It is the only way a story can make you ask a question at all, and a reader who is asking a question is a reader who cares about the next thing that happens. If everything is told in order, you mostly ask the question life gives you: what happens next? If the order is broken up, you can be made to ask other things instead: why did that happen, whose version of this am I reading, what was that earlier scene really about?\n\nNeither set of questions is better. They just make different books out of the same events. And a writer who never thinks about order has still chosen one.",
+    "why_difficult": "The passage spends its first paragraph arguing against the thing readers expect it to praise, which makes it easy to read the concession as the whole position and stop, or to assume the reversal never comes. It also finishes by refusing to rank the two kinds of telling, after a paragraph that has described in detail what one of them makes possible. Readers hear the detail as a preference, and the last two sentences are there to stop them.",
+    "author_intention": "To rescue a real observation about narrative from the inflated version of it that gets taught, by saying exactly how much order does and refusing to say that any order is better.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0055-p1",
+        "role": "Gives ground first",
+        "note": "Rearranging events is not a merit in itself. Plenty of powerful writing runs straight through, and starting at the end earns nobody any credit."
+      },
+      {
+        "paragraph_id": "rc-0055-p2",
+        "role": "States the real claim",
+        "note": "Order is never neutral, because it fixes what the reader knows when each scene arrives. The same farewell means different things depending on what he has been told."
+      },
+      {
+        "paragraph_id": "rc-0055-p3",
+        "role": "Develops it",
+        "note": "Keeping things back is how a story makes a reader ask anything. Straight order leaves him asking what happens next; a broken order makes other questions possible, and neither set is better."
+      }
+    ],
+    "tone_progression": "Deflating at the start, where a fashionable claim is cut down, then insistent through the middle as a smaller claim is pressed, and finally even-handed, refusing the ranking the argument might have been expected to deliver.",
+    "key_transitions": [
+      "'It is never neutral, though, and that is a different claim.' (opening of paragraph 2) — the concession ends and the thesis begins, with the difference between the two stated outright.",
+      "'None of these is better than the others.' (paragraph 3) — the passage refuses to turn its contrast into a ranking."
+    ],
+    "misunderstanding": "The commonest misreading is the one the passage is written against: that telling a story out of order is the sophisticated option and telling it straight is the naive one. The third paragraph seems to support this, because it lists what a broken order makes possible and the list is longer. But the next sentence says none of the questions is better, and the opening paragraph has already refused to praise rearrangement at all. The claim is about what order does, never about which order to choose.",
+    "traps_summary": "Two habits are punished here. Turning a contrast into a ranking, which the passage blocks twice and which a reader supplies for himself almost automatically. And taking a definition from the wrong half of a contrast, which is how the phrase question is built: the interesting literary questions are real and sit one clause away from the phrase being asked about.",
+    "reading_lesson": "When a passage says two things are different and then says neither is better, treat the second sentence as load-bearing rather than as politeness. Distractors are made by keeping the difference and adding the preference, and the preference is the thing you will have added yourself if you are not watching. The same habit applies to any passage that describes an option's advantages at length before declining to recommend it.",
+    "real_world": "Every time you decide what to say first in an explanation, an apology or a piece of bad news, you are choosing what the other person will know when the important sentence arrives, which is the same choice a novelist makes.",
+    "takeaway": "The order of telling decides what the reader knows yet, and what he knows yet decides what the scene means.",
+    "reflection_question": "When you last told someone a piece of news, what did you keep back until the end, and what did that do to how they heard the rest?"
+  }
+}

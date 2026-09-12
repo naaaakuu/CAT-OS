@@ -1,0 +1,159 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0047",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Vote You Cannot Prove",
+    "theme": "the secret ballot as a freedom protected by making evidence impossible rather than by forbidding pressure",
+    "estimated_time_sec": 190,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: five-sentence TITA jumble, used by CAT for its harder sets; re-verify against each new official paper"
+    },
+    "macro_pattern": "abstract_to_concrete",
+    "cohesion_signals": ["demonstrative", "article_given_new", "lexical_repetition", "connective_implicit", "parallelism"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["competing_ending", "anchor_pair"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "wm_long_chain", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 4,
+      "competing_openings": 5,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "refuse a maxim the opening seat when a clause at its end names a mechanism the paragraph has not yet described",
+    "reasoning_patterns": ["disc.competing_opener", "disc.demonstrative", "disc.general_to_specific", "disc.lexical_chain", "disc.closing_sentence", "struct.definition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the maxim about anything that can be verified being bought. It is the most epigrammatic sentence in the set, has no pronoun or demonstrative in its first clause, and states a principle that a paragraph of this shape would reasonably begin from. It is refused by its own tail: 'which is why the destruction has to be complete'. The destruction is definite and has not been named, and the only sentence that names one is the one about protecting a freedom by destroying evidence. A second rival ends on the list of fussy rules, whose three prohibitions make a crisp close; that dies because the real closer counts them, 'Each of those prohibitions', and a count cannot precede its members. A third rival joins the principle straight to the polling booth, and dies on 'Completeness', which answers a word the intervening sentence supplies.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General political theory of the secret ballot and vote buying; no specific jurisdiction, statute or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A ninety-nine tier five-sentence item in which two sentences are abstract maxims and either could open. The tie is broken by a clause at the end of one of them, which is the pattern this tier should drill. The tail is anchored by a counting phrase, so the contest is concentrated at the head."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Completeness is what the polling booth is for: the curtain is not there to spare a voter embarrassment but to make it impossible for her to prove, to an employer or a landlord or a party agent, how she voted.",
+      "role": "example"
+    },
+    {
+      "label": "B",
+      "text": "Each of those prohibitions is a refusal to let her prove anything to anybody, and a voter who can prove nothing is worth nothing to a buyer: the freedom is made of what she cannot show.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Some freedoms are protected not by forbidding interference but by destroying the evidence that would make interference worth attempting.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "This is why the rules that look most fussy are the ones that matter most: no photograph of the paper, no ballot carried home, no voting from a device an employer controls.",
+      "role": "development"
+    },
+    {
+      "label": "E",
+      "text": "Anything that can be verified can be bought, and anything that can be bought is owed to whoever is prepared to pay for it, which is why the destruction has to be complete rather than merely polite.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "E", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "E",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The destruction' is definite and names the move the first sentence describes, protecting a freedom by destroying the evidence. The maxim about verification then explains why that destruction cannot be half done."
+    },
+    {
+      "from": "E",
+      "to": "A",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'Completeness' picks up 'complete rather than merely polite' and turns it into the purpose of a particular institution. The abstraction becomes a curtain in a booth at exactly this point."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'This is why the rules that look most fussy are the ones that matter most' points at the purpose just stated, making proof impossible, and the three rules listed are what that purpose requires."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Each of those prohibitions' counts the three rules just listed. A counting phrase needs its members on the page, so the sentence that collects them closes the paragraph."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph moves from a principle about how some freedoms are protected to the most familiar institution built on it, and then to the small rules that institution needs. Principle, why the principle must be applied without exception, the institution, its fussy rules, and finally what the whole arrangement amounts to. Two of the five sentences are abstract, which is what makes the opening seat contested.",
+    "movement": [
+      { "label": "C", "why_here": "It states the principle and is the only sentence in the set that refers to nothing outside itself. Everything later calls this destruction, completeness or the freedom, rather than describing it again." },
+      { "label": "E", "why_here": "It supplies the reason the protection cannot be partial: a provable right is a saleable one. Its 'the destruction' ties it to the principle, and its last word sets up the next sentence." },
+      { "label": "A", "why_here": "The abstraction lands on an institution. 'Completeness' answers the previous sentence's demand, and the curtain is reinterpreted as a device against proof rather than against embarrassment." },
+      { "label": "D", "why_here": "The consequences in detail. 'This' points at the purpose just given, and the three prohibitions are the practical shape of making proof impossible." },
+      { "label": "B", "why_here": "The close. It counts the three prohibitions, states what they have in common, and returns to the buyer, ending on the paradox the paragraph was built to reach." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ECADB",
+        "trap_type": "competing_opener",
+        "why_tempting": "The maxim about verification and purchase is the most epigrammatic sentence here, its first clause carries no pronoun and no demonstrative, and a paragraph that begins from a principle and works towards a booth is exactly the shape solvers expect. Almost every surface test for an opener passes it.",
+        "where_it_breaks": "It ends 'which is why the destruction has to be complete rather than merely polite'. The destruction is definite, and nothing has been destroyed. The sentence about protecting a freedom by destroying evidence is where the phrase comes from, so the maxim is a second move and not a first."
+      },
+      {
+        "order": "CEABD",
+        "trap_type": "competing_ending",
+        "why_tempting": "The three prohibitions make a crisp, concrete finish, and a paragraph that ends on no photograph, no ballot carried home and no voting from an employer's device sounds like it has arrived somewhere practical.",
+        "where_it_breaks": "The other candidate closer begins 'Each of those prohibitions'. In this order it would be counting a list that has not been given, and the pronoun 'her' in it would be reaching back past two sentences for a voter. A count belongs immediately after the things counted."
+      },
+      {
+        "order": "CAEDB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "A principle followed directly by its clearest instance is the standard abstract-to-concrete pairing, so the sentence about the polling booth is pulled up next to the sentence about destroying evidence and the maxim is treated as a later gloss.",
+        "where_it_breaks": "The booth sentence opens on the single word 'Completeness', which is not a new idea being introduced but an answer to a demand. The demand is made by the maxim, in the phrase 'complete rather than merely polite', so the maxim has to stand between the principle and the booth."
+      }
+    ],
+    "trap_named": "The trap is two openers. When a paragraph carries more than one abstract, aphoristic sentence, the opener heuristic cannot separate them, because both look independent at the front. The separation is always at the back: one of them will contain a subordinate clause with a definite noun, a demonstrative or a causal 'which is why' that reaches for something not yet said. Read candidate openers to the full stop, and prefer the one that asks for nothing.",
+    "solving_habit": "When two sentences both sound like first sentences, compare their tails rather than their heads. The sentence whose final clause reaches backwards is the second of the two."
+  },
+  "mentor": {
+    "challenge": "Two sentences here are maxims and both look like openings. The difference is in their last clauses.",
+    "paragraph_plain": "Some freedoms are protected not by banning interference but by destroying the evidence that would make interfering worthwhile. Anything that can be verified can be bought, and anything that can be bought is owed to whoever will pay for it, which is why the destruction has to be total rather than merely polite. Completeness is the point of the polling booth: the curtain is not there to save a voter from embarrassment, but to make it impossible for her to prove to an employer, a landlord or a party agent how she voted. That is why the rules that look fussiest matter most: no photographing the paper, no taking a ballot home, no voting on a device an employer controls. Each of those bans is a refusal to let her prove anything to anyone, and a voter who can prove nothing is worth nothing to a buyer. The freedom is made out of what she cannot show.",
+    "takeaway": "When two sentences both sound like openings, compare their last clauses, not their first words."
+  }
+}

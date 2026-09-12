@@ -1,0 +1,523 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0047",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "medicine-health",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "scope-control",
+      "evidence-anchoring",
+      "trap-recognition"
+    ],
+    "word_count": 663,
+    "question_count": 6,
+    "question_types": [
+      "agree_disagree",
+      "except",
+      "inference",
+      "main_idea",
+      "relationship",
+      "specific_detail"
+    ],
+    "theme": "applying trial evidence to an individual patient: the average is an estimate for whoever resembles the enrolled, so the real judgement is about resemblance, and an unnamed difference is not a reason to depart from the result",
+    "estimated_time_min": 11,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "The passage refuses both familiar positions, which is what the relationship and agreement questions are built on. The fourth paragraph rejects the sceptic and the fifth refuses to let the manualist collect the winnings, and readers who stop after the fourth carry away half the argument.",
+    "length_class": "long",
+    "structure": "question_answer",
+    "viewpoints": 3,
+    "tone": "measured, insistent",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.question_answer",
+      "struct.two_views_adjudication",
+      "struct.claim_evidence",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.organization",
+      "arg.qualification",
+      "arg.rebuttal",
+      "arg.assumption",
+      "arg.evidence",
+      "inf.author_view_application",
+      "inf.necessary",
+      "inf.author_vs_reported",
+      "scope.condition",
+      "scope.population",
+      "lang.absolute_vs_qualified",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the decision rule that says a named difference removes the patient from the result: it reads like the passage's own advice and is half of it, but the fifth paragraph says the estimate becomes uncertain rather than inapplicable, and the option's closing clause claims the stronger thing. Q3's rival is the option that a trial reports what a treatment will do in a resembling patient; the second paragraph separates estimate from prediction in one sentence and says an average does not say how benefit was distributed inside the group. Q5's rival is the option calling the sceptic's reasoning sound, which is exactly the inference the fourth paragraph declares empty because it would excuse a doctor from every result ever obtained. Q6's rival is the option about a treatment working in most patients who receive it, which trades an average for a majority; the passage forbids the trade in the sentence that defines an average as a property of a group. Q4's rival is the reading of the fifth paragraph as a conceded objection, which mistakes the author's own second verdict for a surrender.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "anecdote",
+      "ledger",
+      "enrolled"
+    ]
+  },
+  "passage": {
+    "title": "The Second Judgement",
+    "reading_time_min": 3.4,
+    "paragraphs": [
+      {
+        "id": "rc-0047-p1",
+        "text": "A trial reports that a drug lowers the rate of a serious event by about a fifth. The patient in the consulting room is eighty-one, takes four other medicines, and has a second illness that would have kept her out of the study altogether. Does the result apply to her? Two answers are usually offered, and they have hardened into positions. The first says that the evidence is what we have, and that departing from it is how medicine returned to anecdote the last time it was tried. The second says that trials describe populations while doctors treat persons, and that an average tells you nothing about the woman in front of you. Both answers are confident, and both are answers to a question that has been badly put."
+      },
+      {
+        "id": "rc-0047-p2",
+        "text": "Begin with what a trial result is. It is an average taken over the people who were enrolled, and an average is a property of a group: it does not say how the benefit was distributed inside that group, and it does not forecast what any particular member of it will experience. So the second answer is right that the number is not a claim about a single person. It is wrong about what follows from that. For anyone who resembles those enrolled, the average remains the best available estimate of what the treatment will do, and a considerably better one than a clinician's recollection of the last dozen patients he treated, which is a sample of twelve assembled by memory. An estimate is not a forecast. It is also not silence."
+      },
+      {
+        "id": "rc-0047-p3",
+        "text": "That puts the whole weight on resemblance, and on resemblance in which respects. Patients differ from trial populations in countless ways, and almost none of the ways matter. A difference matters only if it bears on the mechanism by which the treatment produces its benefit, or on the balance of harms that the benefit has to outweigh. Being eighty-one is not, in itself, such a difference; it is a number attached to a person rather than a fact about a drug. A decline in the organ that clears the drug is such a difference, because it alters how much of the drug reaches the tissue and therefore moves both sides of the ledger at once. Applying evidence is the work of telling the first sort of difference from the second."
+      },
+      {
+        "id": "rc-0047-p4",
+        "text": "Once that is seen, the sceptic's move collapses. From the observation that this patient is not the average patient nothing whatever follows, because no patient is the average patient, and the objection would therefore excuse the doctor from every result ever obtained. What is wanted is not a feeling of difference but a named one, carrying a direction: this feature, working in this way, makes the benefit smaller or the harm larger. Uniqueness that cannot be specified is not evidence about the patient. It is the absence of evidence wearing the clothes of evidence, and it leaves the clinician exactly where he would have stood if no trial had ever been run."
+      },
+      {
+        "id": "rc-0047-p5",
+        "text": "None of which hands the victory to the other side. Suppose the difference is named, and named well, and suppose the trial excluded patients who had it. The honest conclusion is not that the estimate stands unchanged; it is that the estimate has become uncertain, by an amount nobody can state. The decision then has to be made out of weaker materials: what is known about the mechanism, whatever smaller studies exist, and the patient's own ranking of the harms she is being asked to accept. That is a judgement, and it cannot be abolished. What the discipline of evidence did was not to remove clinical judgement but to move it, from the question whether the treatment works to the question whether this patient belongs with the people in whom it was shown to work. The second question can be argued about, taught, and got wrong in public. Calling it the art of medicine keeps it none of those things."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0047-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "arg.qualification",
+        "struct.question_answer"
+      ],
+      "target_mistake": "carrying away the fourth paragraph's rebuttal of the sceptic as the whole argument, and so turning a relocation of judgement into a decision rule",
+      "prediction_target": "Before the options the learner should be able to say: the passage answers its opening question by showing that the average is an estimate for whoever resembles the enrolled, so what the clinician must judge is the resemblance rather than the treatment.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best captures the central argument of the passage?",
+      "options": {
+        "A": "Trial evidence does not remove clinical judgement but redirects it, from whether a treatment works to whether this patient belongs with those in whom it worked.",
+        "B": "Since no patient is the average patient, a result obtained in a trial population cannot be carried across to an individual without serious distortion.",
+        "C": "A clinician should follow the trial result unless a specific difference in the patient can be named, in which case the result no longer applies to that patient at all.",
+        "D": "The familiar division between the science and the art of medicine is unhelpful, because every clinical decision plainly requires both of them at once."
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage asks a question in the first paragraph and answers it across four more, and the answer is stated twice: once as a diagnosis, that everything turns on resemblance and in which respects, and once as a conclusion, that the discipline of evidence moved clinical judgement rather than removing it. A thesis has to survive the fifth paragraph, which takes back the tidy rule the fourth seemed to be building.",
+        "correct_reasoning": "The correct option keeps both halves of the position. Judgement is not abolished, which is the fifth paragraph's insistence that a decision made out of weaker materials is still a decision; and the judgement has a new object, which is the third paragraph's question of resemblance in the respects that bear on mechanism and harm. It names the shift the passage was written to describe rather than a rule for what to prescribe.",
+        "passage_anchor": "rc-0047-p5",
+        "question_type_note": "A main-idea question on a question-and-answer passage is settled by the answer the last paragraph actually gives, not by the rebuttal that clears the ground for it.",
+        "reading_habit": "When a passage opens by rejecting two familiar positions, expect the thesis to be a third thing rather than a corrected version of either. Read to the last paragraph before fixing it.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the second of the two positions the opening paragraph sets up, and the fourth paragraph disposes of it in terms: nothing follows from a patient not being the average patient, since no patient is.",
+            "seductive_element": "It states a truth the passage concedes at length, that an average is not a claim about any single person, and stops one step before the passage's objection to it."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The closing clause claims more than the passage allows. Where a difference is named and the trial excluded such patients, the fifth paragraph says the estimate has become uncertain by an amount nobody can state, not that it has ceased to apply.",
+            "seductive_element": "It is the live rival: the first half is the passage's own demand for a named difference, which makes the second half feel like the same sentence continuing."
+          },
+          {
+            "option": "D",
+            "trap_type": "sophisticated_sounding",
+            "why_wrong": "The passage does dismiss the art of medicine as a label, but for a different reason: the phrase hides a judgement that could be stated, taught and disputed. It never says that science and art are both required in every decision.",
+            "seductive_element": "It borrows the essay's last phrase and dresses it as the balanced conclusion a piece on this subject is expected to reach."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0047-q2",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "scope.condition"
+      ],
+      "target_mistake": "taking the passage's own illustration of an irrelevant difference, age, for the criterion by which differences are judged",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, a difference between a patient and a trial population matters only when it",
+      "options": {
+        "A": "was large enough for the trial's investigators to exclude patients who had it",
+        "B": "concerns the patient's age, the commonest reason for setting a trial result aside",
+        "C": "bears on how the treatment produces its benefit or on the balance of its harms",
+        "D": "can be shown to be present in a large proportion of the patients seen in practice"
+      },
+      "correct": "C",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The third paragraph states the criterion in a single sentence and then supplies one case on each side of it. The criterion is about mechanism and the balance of harms; age is offered as the example of a difference that fails it, and impaired clearance as the example that passes.",
+        "correct_reasoning": "The correct option is the criterion itself, in the passage's own terms. Everything else in the paragraph is arranged around it: eighty-one is rejected because it is a number attached to a person rather than a fact about a drug, and impaired clearance qualifies because it changes how much drug reaches the tissue and so moves both sides of the ledger.",
+        "passage_anchor": "rc-0047-p3",
+        "question_type_note": "A detail question about a stated criterion is answered from the sentence that states it. The reliable decoys are the examples the author used to show the criterion working.",
+        "reading_habit": "When a paragraph gives a rule and then two examples, mark the rule. Examples are what questions are built out of, but rules are what they are answered from.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "Exclusion from a trial appears in the fifth paragraph as a circumstance that makes an estimate uncertain, not as the test of whether a difference counts; a difference qualifies by what it does to the drug's working, whether or not any investigator noticed it.",
+            "seductive_element": "The opening patient is one the study would have excluded, so exclusion is on the reader's mind as the mark of a relevant difference."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage uses age as its example of a difference that does not matter, calling eighty-one a number attached to a person rather than a fact about a drug; the relevant difference in the same paragraph is the failing organ, not the years.",
+            "seductive_element": "Age is the most conspicuous fact about the patient in the first paragraph, and it is the feature a clinician would name first."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "How common a difference is never enters the passage's test; a rare difference that alters the mechanism counts and a universal one that does not is irrelevant.",
+            "seductive_element": "Prevalence sounds like the sort of thing an evidence-minded author would insist on, and the passage is elsewhere concerned with populations."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0047-q3",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "collapsing the passage's distinction between an estimate for a resembling patient and a forecast of what that patient will experience",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "According to the passage, each of the following is true of a trial result EXCEPT:",
+      "options": {
+        "A": "It is an average taken over the people who were entered into the study.",
+        "B": "It reports what the treatment will do in any patient who resembles those enrolled.",
+        "C": "It is not, taken by itself, a claim about any single person.",
+        "D": "It beats one clinician's memory of recent cases as a starting estimate."
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The second paragraph is built out of careful distinctions and marks them with short sentences. An average does not say how benefit was distributed inside the group and does not forecast what a member will experience; for a resembling patient it is the best available estimate; and then, flatly, an estimate is not a forecast.",
+        "correct_reasoning": "The correct option converts the estimate back into the forecast the paragraph has just separated from it. The passage allows that the average is the best thing we have for a resembling patient, which is a claim about what to believe; it refuses to say that the treatment will do that in any such patient, which is a claim about what will happen. The word that fails is the verb, not the resemblance.",
+        "passage_anchor": "rc-0047-p2",
+        "question_type_note": "In an EXCEPT question three options are the passage rephrased and one has been strengthened or weakened somewhere. Compare verbs and modals rather than topics.",
+        "reading_habit": "Watch for authors who write a two-word sentence in the middle of a paragraph. A sentence that short is almost always the distinction on which the paragraph turns, and questions are built on the side of it readers forget.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This restates the paragraph's opening definition, with entered into the study standing in for enrolled. A reader matching words rather than claims may treat the substitution as a change of meaning.",
+            "seductive_element": "None of the passage's own vocabulary survives, which makes an exact paraphrase look like an alteration."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The passage says exactly this and then adds that it is not silence either; stating only the first half is incomplete, but incompleteness is not falsehood, and the sentence as written is one the author supplies.",
+            "seductive_element": "A reader who has taken the point that the average does bear on the individual may read this as the sceptic's error and reject it on sight."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The comparison is the passage's own: the average is a considerably better estimate than a clinician's recollection of the last dozen patients, which it calls a sample of twelve assembled by memory.",
+            "seductive_element": "The essay is otherwise so careful about what a trial cannot do that a confident ranking of trial over experience can look like an addition."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0047-q4",
+      "type": "relationship",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "struct.two_views_adjudication",
+        "arg.rebuttal"
+      ],
+      "target_mistake": "reading the fifth paragraph's limit as an objection the author concedes, rather than as the second half of an adjudication",
+      "prediction_target": "The learner should be able to say: the fourth paragraph disposes of one of the two opening positions and the fifth refuses to let the other one collect the winnings.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "paragraph_function",
+        "argument"
+      ],
+      "stem": "The relationship between the fourth paragraph and the fifth is best described as",
+      "options": {
+        "A": "a general rule, followed by an example chosen to show the rule working in a hard case",
+        "B": "a claim about clinical practice, followed by the kinds of evidence the author offers in support of it",
+        "C": "an objection to the author's argument, followed by the concession that the objection holds",
+        "D": "the rejection of one position, followed by a refusal to let the opposing position claim the victory"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The two positions are named in the first paragraph and then dealt with one at a time. The fourth paragraph opens by saying the sceptic's move collapses; the fifth opens with none of which hands the victory to the other side. The paragraphs are the two halves of a verdict, and each announces itself in its first clause.",
+        "correct_reasoning": "The correct option names that structure. One paragraph shows that an appeal to the patient's uniqueness proves nothing, since it would excuse a doctor from every result ever obtained; the next denies that the survivor therefore wins, because a named difference leaves the estimate uncertain and the decision has to be taken out of weaker materials. Both are the author's own findings, delivered in sequence.",
+        "passage_anchor": "rc-0047-p5",
+        "question_type_note": "Relationship questions ask what one part does to another. Read the opening clause of each paragraph: authors adjudicating between two views announce which one they are addressing before they address it.",
+        "reading_habit": "Count the positions a passage sets up and then check that each has been answered before you decide what the author holds. A verdict against one side is only half of an adjudication.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "The fifth paragraph does describe a hard case, which makes it look like an illustration; but it is not an instance of the fourth paragraph's rule. It withholds the conclusion that the rule, left alone, would seem to license.",
+            "seductive_element": "Suppose the difference is named reads like the opening of a worked example, and the paragraph does then walk through one."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Mechanism, smaller studies and the patient's own ranking of harms appear in the fifth paragraph as the materials a clinician is left with, not as support for anything the fourth paragraph asserted.",
+            "seductive_element": "The paragraph really does list kinds of evidence, and a list of evidence after a claim looks like evidence for the claim."
+          },
+          {
+            "option": "C",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "Nothing in the fifth paragraph is offered as an objection to the author, and nothing is given up. It qualifies the fourth paragraph's conclusion in the author's own voice, which is how an adjudication ends rather than how one is abandoned.",
+            "seductive_element": "The paragraph opens by taking something back, and a reader who has just watched the sceptic lose expects the recoil to be a concession."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0047-q5",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.necessary",
+        "arg.assumption"
+      ],
+      "target_mistake": "accepting an unexplained feature of the patient as a named difference, when the passage requires the feature to come with a direction",
+      "prediction_target": "The learner should predict that the author will ask what the feature does to the benefit or the harm, and will count the objection as empty until that is said.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "application",
+        "argument"
+      ],
+      "stem": "It can be inferred that the author would regard a clinician who withholds a trial-supported treatment solely on the ground that the patient is elderly as having",
+      "options": {
+        "A": "identified a difference of exactly the kind the passage says should alter the estimate",
+        "B": "reasoned soundly, because a patient outside the trial population lies outside its result",
+        "C": "named a feature without saying how it bears on the treatment, which the passage counts as no reason at all",
+        "D": "abandoned the discipline of evidence for the clinical intuition the passage sets out to defend"
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two sentences decide it. The third paragraph says being eighty-one is not in itself a relevant difference, because it is a number attached to a person rather than a fact about a drug. The fourth says what is wanted is a named difference carrying a direction: this feature, working in this way, makes the benefit smaller or the harm larger.",
+        "correct_reasoning": "Age alone supplies a feature and no direction. The clinician has not said what the years do to the drug's working or to the harms it must outweigh, and until that is said the passage treats the objection as uniqueness that cannot be specified, which it calls the absence of evidence wearing the clothes of evidence. The correct option states the defect and its consequence without pronouncing on whether some age-linked difference might have been produced.",
+        "passage_anchor": "rc-0047-p4",
+        "question_type_note": "Author-view inference questions apply a stated test to a case the author did not discuss. Extract the test in the author's own words and check the case against every part of it, including the part readers drop.",
+        "reading_habit": "When an author demands that something be named, check whether the case in the stem also supplies the second requirement, usually a direction or a mechanism. Half a requirement met is the standard shape of a wrong answer.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "Age is the passage's own example of a difference that does not qualify; the qualifying example in the same paragraph is the failing organ, which is relevant because it changes how much drug reaches the tissue.",
+            "seductive_element": "The patient's age is the first thing the opening paragraph tells us about her, which invites the reader to treat it as the decisive fact."
+          },
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the sceptic's inference, and the fourth paragraph refuses it on the ground that it would excuse the doctor from every result ever obtained, since no patient is the average patient.",
+            "seductive_element": "It sounds like ordinary caution about applying group findings to individuals, which the passage has itself endorsed in part."
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The passage does not defend intuition. It defends a judgement that can be stated, taught and got wrong in public, and its complaint against the phrase the art of medicine is precisely that it protects judgements from being examined.",
+            "seductive_element": "The essay does end by insisting that judgement cannot be abolished, which reads as a defence of the clinician's instinct against the evidence."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0047-q6",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_vs_reported",
+        "arg.qualification",
+        "elim.near_tie"
+      ],
+      "target_mistake": "trading an average effect for a claim about most individuals, or crediting the author with one of the two positions the passage was written to refuse",
+      "prediction_target": "The learner should be able to say: the author holds that the judgement about resemblance is a real judgement which ought to be stated openly rather than hidden behind a compliment.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "main_idea"
+      ],
+      "stem": "The author would be most likely to agree with which one of the following?",
+      "options": {
+        "A": "Where a trial excluded patients like the one in the consulting room, its result should be set aside entirely.",
+        "B": "Clinical judgement is what the discipline of evidence was designed to remove from the consultation.",
+        "C": "A treatment shown to work on average will work in most of the patients to whom it is given.",
+        "D": "Calling a hard clinical decision an exercise of art conceals a judgement that could be stated and examined."
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The last three sentences of the passage are the author speaking in his own voice. Judgement has been moved rather than removed; the new question can be argued about, taught, and got wrong in public; and calling it the art of medicine keeps it none of those things. That is a complaint about a phrase, and it is the passage's own.",
+        "correct_reasoning": "The correct option restates that complaint at the strength the passage gives it. The objection is not that art is the wrong word for a mysterious skill but that the label hides something that is not mysterious at all: a claim about whether this patient resembles the trial population in the respects that matter, which can be put into words and contradicted. Every other option belongs to a position the passage has refused.",
+        "passage_anchor": "rc-0047-p5",
+        "question_type_note": "An agreement question turns on the difference between what a passage reports and what it holds. The safest ground is the closing sentences, where an author who has adjudicated finally says something unhedged.",
+        "reading_habit": "Look for the sentence where a passage criticises a phrase rather than a practice. Authors who object to a word are usually stating their own thesis in its most compressed form.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The fifth paragraph considers exactly this case and reaches a weaker conclusion: the estimate becomes uncertain by an amount nobody can state, which leaves it in evidence rather than out of it.",
+            "seductive_element": "It is the natural conclusion to draw from a passage that has just insisted on how much exclusion matters, and it sounds appropriately cautious."
+          },
+          {
+            "option": "B",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The passage says the opposite in its closing sentences: the discipline of evidence moved clinical judgement rather than removing it, and the judgement that remains cannot be abolished.",
+            "seductive_element": "It is a fair summary of what the first of the two opening positions is usually taken to want, and the passage treats that position respectfully."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The second paragraph blocks this exchange directly: an average is a property of a group and does not say how the benefit was distributed inside it, so a fifth fewer events across a population is not a claim about most of its members.",
+            "seductive_element": "It is the near-tie, and it sounds like nothing more than the trial result restated in everyday language."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "anecdote",
+      "passage_use": "departing from it is how medicine returned to anecdote the last time it was tried",
+      "meaning_here": "a remembered individual case treated as though it were evidence",
+      "difficulty": "medium"
+    },
+    {
+      "word": "enrolled",
+      "passage_use": "an average taken over the people who were enrolled",
+      "meaning_here": "formally entered into the study as participants",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ledger",
+      "passage_use": "moves both sides of the ledger at once",
+      "meaning_here": "the running account in which a treatment's benefits are set against its harms",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two familiar positions are set up in the first paragraph and both are refused. Watch which paragraph disposes of which, and do not settle the author's view before the last one.",
+    "one_sentence_summary": "A trial result is an average over the people enrolled, which makes it the best available estimate for anyone who resembles them, so the clinician's real task is not to decide whether the treatment works but to judge whether this patient resembles that group in the respects that bear on benefit and harm.",
+    "main_idea": "The quarrel between following the evidence and treating the individual rests on a badly put question. A trial gives an estimate, good for whoever resembles the people studied. So the judgement that matters is about resemblance, and only differences that touch the mechanism or the harms count. Saying the patient is unique is not such a difference, and naming a real one makes the estimate uncertain rather than void.",
+    "simple_explanation": "A study says a drug cuts serious events by about a fifth. In front of the doctor sits a woman of eighty-one on four other medicines, who would never have been allowed into the study. Does the number mean anything for her?\n\nPeople usually give one of two answers. Follow the evidence, or else you are back to guessing from stories. Or: studies are about crowds, doctors treat people, so the number tells you nothing about her. The writer says both answers are answering the wrong question.\n\nStart with what the number is. It is an average over the people who took part. An average belongs to a group. It does not tell you how the benefit was spread among them, and it does not predict what any one person will get. So yes, it is not a statement about her. But that does not make it useless. For anyone who is like the people in the study, it is the best guess available, and much better than a doctor's memory of the last twelve patients he happened to see.\n\nSo everything now depends on one word: like. Like in what way? Patients differ from study groups in a thousand ways and almost none of them matter. A difference matters only if it changes how the drug does its work, or changes the harms that the good has to outweigh. Being eighty-one is not that. It is a number about a person, not a fact about a drug. A kidney that no longer clears the drug is that, because it changes how much of the drug arrives.\n\nSo saying 'my patient is not average' proves nothing, because nobody is average, and if that were a reason the doctor could ignore every study ever done. You have to name the difference and say which way it pushes: this thing, working this way, makes the good smaller or the harm bigger.\n\nAnd then the last turn. Suppose you do name it, and the study left such patients out. That does not mean the estimate still holds. It means the estimate is now shaky, by an amount nobody can measure. You have to decide anyway, using weaker things: what is known about how the drug works, smaller studies, and what the patient herself minds most. That is judgement. Evidence did not get rid of it; it moved it. It used to be a judgement about the treatment. Now it is a judgement about whether this patient belongs with those people. And that question, unlike 'the art of medicine', is one you can argue about and be shown to have got wrong.",
+    "why_difficult": "The difficulty is not in the words but in holding two refusals at once. The fourth paragraph destroys the sceptic so thoroughly that readers finish it believing the passage is a defence of following the evidence, and then the fifth paragraph takes most of that back. The other trouble is a pair of distinctions drawn quickly: estimate against forecast, and difference against relevant difference. Both are stated once, in short sentences, and both decide questions later.",
+    "author_intention": "To dissolve a familiar quarrel by showing that the two sides are answering a question nobody should have asked, and then to name the judgement that is actually being made so that it can be examined instead of admired.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0047-p1",
+        "role": "Poses the question",
+        "note": "A study result and a patient who would not have been in the study. Two stock answers are given, and both are said to be answering a badly put question."
+      },
+      {
+        "paragraph_id": "rc-0047-p2",
+        "role": "Says what a result is",
+        "note": "An average over the people enrolled. Not a prediction about anybody, but still the best estimate for someone like them, and better than a doctor's memory of recent cases."
+      },
+      {
+        "paragraph_id": "rc-0047-p3",
+        "role": "Defines the real test",
+        "note": "Everything turns on resemblance, and only in some respects. A difference counts only if it touches how the treatment works or the harms it must outweigh. Age alone does not; a failing organ does."
+      },
+      {
+        "paragraph_id": "rc-0047-p4",
+        "role": "Disposes of the sceptic",
+        "note": "Nothing follows from a patient being unlike the average, since nobody is like the average. A difference has to be named and given a direction, or it is not evidence at all."
+      },
+      {
+        "paragraph_id": "rc-0047-p5",
+        "role": "Withholds the other victory",
+        "note": "When the difference is real, the estimate becomes uncertain rather than unchanged, and the doctor decides on weaker materials. Judgement was moved, not removed, and the phrase art of medicine hides it."
+      }
+    ],
+    "tone_progression": "Even-handed while the two positions are laid out, brisk and slightly impatient when the sceptic's move is taken apart, and then careful again, ending on a quiet reproach aimed at a phrase rather than at any person.",
+    "key_transitions": [
+      "'Both answers are confident, and both are answers to a question that has been badly put.' (paragraph 1) — the quarrel is set aside rather than joined.",
+      "'That puts the whole weight on resemblance, and on resemblance in which respects.' (paragraph 3) — the passage names what the judgement is actually about.",
+      "'None of which hands the victory to the other side.' (paragraph 5) — the second half of the adjudication begins."
+    ],
+    "misunderstanding": "Readers who stop mentally at the fourth paragraph file this as a defence of trial evidence against sentimental clinicians, and every question that turns on the fifth paragraph then goes wrong. The other frequent misreading is smaller and just as costly: treating the average as a promise. The passage says an average does not show how benefit was distributed inside the group, which means a fifth fewer events is not a claim that most patients will benefit, and options that make the trade look like plain restatement.",
+    "traps_summary": "The distractors here do four things. They hand the author one of the two positions he opened by refusing. They convert an estimate into a forecast, or an average into a majority. They turn a qualification in the author's own voice into a conceded objection. And they take the passage's example of an irrelevant difference, the patient's age, and offer it back as the criterion.",
+    "reading_lesson": "When a passage opens by naming two positions, keep a line for each and do not close either until the passage has. Writers who adjudicate almost always deal with one side at a time, and the paragraph that finishes the first side reads like a conclusion although it is only half of one. The habit is cheap: count the positions, and refuse to state the thesis while one of them is still standing untouched.",
+    "real_world": "Anyone who has been handed a statistic about people like them — a survival rate, a default rate, a pass rate — faces the same two questions in order: what group is this an average over, and do I differ from that group in a way that touches the mechanism rather than merely in a way that is true of me.",
+    "takeaway": "An average is not silence and not a promise; it is the best estimate for whoever resembles the people it was taken over.",
+    "reflection_question": "When a figure about people like you last felt inapplicable, could you have named the difference and said which way it cut?"
+  }
+}

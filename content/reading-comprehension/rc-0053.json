@@ -1,0 +1,326 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0053",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "causal-reasoning",
+      "scope-control"
+    ],
+    "word_count": 257,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "not_true"
+    ],
+    "theme": "why a highly accurate test can still be mostly wrong: accuracy belongs to the instrument while the worth of a positive result belongs to the instrument together with the population, so the same test changes value when it changes room",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "The arithmetic is given in words so that no calculation is required, and every question is decided by the third paragraph's separation of two quantities rather than by the numbers. The near-tie is in the inference question, where improving the test is offered as the remedy for a problem the test is not causing.",
+    "length_class": "short",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "matter-of-fact, faintly unsettling",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.cause_effect",
+      "struct.general_to_specific",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "arg.causal_claim",
+      "arg.evidence",
+      "inf.necessary",
+      "inf.strongly_supported",
+      "scope.population",
+      "scope.abstraction_level",
+      "lang.absolute_vs_qualified",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that improving the test at finding true cases would raise the proportion of correct positives. It is the natural remedy and the passage forecloses it in three words: the test finds him. The single true case is already being caught, so nothing on that side can be improved, and the hundred results are spoiled by the healthy group instead. Q2's rival is the option that a positive result can be mostly wrong without anything being wrong with the test, which reads as a paradox a candidate has constructed; the second paragraph states it twice, once as nothing has gone wrong and once as it performed exactly as advertised. Q3's rival is the option about false alarms when a condition is rare: true, and the arithmetic of the middle paragraph rather than the claim of the last, which is about where the quantity lives.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "advertised",
+      "screening",
+      "instrument"
+    ]
+  },
+  "passage": {
+    "title": "A Good Test in the Wrong Room",
+    "reading_time_min": 1.4,
+    "paragraphs": [
+      {
+        "id": "rc-0053-p1",
+        "text": "A test is described as ninety-nine per cent accurate. A man takes it, the result comes back positive, and he is told that he probably does not have the disease. The sentence sounds like a mistake, or like a hedge put in by somebody protecting himself, and it is neither. It is arithmetic, and it holds however good the test is, provided the condition is rare enough."
+      },
+      {
+        "id": "rc-0053-p2",
+        "text": "Take ten thousand people, of whom one has the condition. The test finds him. It also returns a positive result for about one in a hundred of the others, which is ninety-nine people who are perfectly well. The room now holds a hundred positive results and exactly one of them is right. Nothing has gone wrong here; the test performed exactly as advertised. The false alarms are drawn from an enormous group and the true finding from a tiny one, and the enormous group wins."
+      },
+      {
+        "id": "rc-0053-p3",
+        "text": "What follows is more unsettling than the arithmetic. Accuracy is a property of the test. The chance that a positive result is right is a property of the test together with the people it is used on, and those people can change while the test does not change at all. Move the same instrument from a clinic, where most of those tested have symptoms already, to a screening programme for the general population, and it turns from a useful tool into a machine that alarms ninety-nine people in order to find one. Nothing about the device has altered. Only the room it is standing in."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0053-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "arg.causal_claim",
+        "scope.population"
+      ],
+      "target_mistake": "reaching for a better test when the passage has located the trouble in the group being tested rather than in the instrument",
+      "prediction_target": "The learner should predict that the fix has to change the population, since the passage says the test performed exactly as advertised and the true case was found.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred from the passage that the proportion of positive results that are correct would rise if",
+      "options": {
+        "A": "the same test were used only on people in whom the condition was already likely",
+        "B": "the test were made better at identifying the people who do have the condition",
+        "C": "fewer people were tested while the condition remained exactly as rare as before",
+        "D": "the condition became more serious for those who turned out to have it"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The last paragraph names the two quantities and keeps them apart. Accuracy belongs to the test; the chance that a positive result is right belongs to the test together with the people it is used on. Since the passage insists the test performed exactly as advertised, anything that improves the result has to act on the other term.",
+        "correct_reasoning": "Testing only people in whom the condition is already likely changes the composition of the group, so the true cases are no longer vastly outnumbered by the healthy people from whom false alarms are drawn. This is the passage's own comparison run backwards: it describes the same instrument moving from a clinic full of symptomatic patients to a general population and losing its worth, so the reverse move restores it.",
+        "passage_anchor": "rc-0053-p3",
+        "question_type_note": "When a passage separates two quantities and says which one is fixed, an inference question will ask what could change the other. Identify the movable term before reading the options.",
+        "reading_habit": "Whenever an author says a problem is not caused by the obvious culprit, write down what he says is causing it instead. Half the wrong answers in such a passage are improvements to the culprit he has just cleared.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The single person with the condition is already being caught, which the second paragraph states in three words, so there is nothing on that side to improve; the hundred results are spoiled by the false alarms coming from the healthy thousands.",
+            "seductive_element": "It is the live rival, because improving the instrument is the natural response to a poor result, and the passage has spent a paragraph on how the instrument behaves."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The passage's argument is about proportions, and halving the number tested halves the true findings and the false alarms alike; the condition it names as decisive is how rare the disease is in the group, and the option holds that fixed.",
+            "seductive_element": "Fewer tests sounds like fewer false alarms, and the paragraph does make its point by counting people."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "How serious a condition is never enters the passage, which is about how often it occurs. Severity might change whether a screening programme is worth running, but it cannot change which of the hundred positive results is the right one.",
+            "seductive_element": "Seriousness feels like the reason anyone would test at all, and the passage's closing image is about people being alarmed."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0053-q2",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "letting accuracy absorb the second quantity, so that a test which produces mostly wrong positives counts as having become less accurate",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following is NOT true, according to the passage?",
+      "options": {
+        "A": "A positive result can be mostly wrong without anything being wrong with the test.",
+        "B": "The same instrument can be worth using in one setting and not worth using in another.",
+        "C": "How often a condition occurs in a group affects what a positive result from that group means.",
+        "D": "The accuracy of a test falls when it is used on a population in which the condition is rare."
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The third paragraph is built out of two short sentences that a hurried reader runs together. Accuracy is a property of the test. The chance that a positive result is right is a property of the test together with the people it is used on. Everything in this question turns on keeping those two apart.",
+        "correct_reasoning": "The correct option makes accuracy do the second quantity's work. On the passage's account accuracy stays exactly where it was, which is why the closing lines insist that nothing about the device has altered and that only the room has changed; what falls in a rare-condition population is the chance that a positive result is right, which the passage carefully declines to call accuracy.",
+        "passage_anchor": "rc-0053-p3",
+        "question_type_note": "In a NOT-true question, three options restate the passage and one swaps a term. Compare the nouns each option attaches its verb to, since a swap of quantities is invisible if you read only for topic.",
+        "reading_habit": "When an author defines two things that sound like one thing, write both definitions down. Questions on such passages are made by attributing to one what belongs to the other.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The second paragraph says it twice: nothing has gone wrong here, and the test performed exactly as advertised, in the very example where ninety-nine of a hundred positives are false.",
+            "seductive_element": "It reads like a paradox constructed by the candidate rather than a sentence from the text, because nothing in it repeats the passage's wording."
+          },
+          {
+            "option": "B",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The comparison is the passage's own and occupies its closing image: the same instrument is a useful tool in a clinic of symptomatic patients and a machine that alarms ninety-nine people in a general screening programme.",
+            "seductive_element": "Judging an instrument worth using is a practical verdict, and the passage seems to be describing arithmetic rather than delivering verdicts."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "This is the third paragraph in general terms: the chance that a positive result is right depends on the people the test is used on, and the worked example shows rarity doing precisely that work.",
+            "seductive_element": "It is stated at a level of abstraction the passage never uses, which makes a faithful summary look like an addition."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0053-q3",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.abstraction_level",
+        "struct.phenomenon_explanation"
+      ],
+      "target_mistake": "reporting the worked arithmetic of the middle paragraph as the claim, when the claim is the third paragraph's statement about where the quantity lives",
+      "prediction_target": "The learner should be able to say: the worth of a positive result belongs to the test and the population together, so moving a test between populations changes what it is worth without changing the test.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "A test that is ninety-nine per cent accurate will still produce a great many false alarms whenever the condition it looks for is a rare one in the group being tested.",
+        "B": "What a positive result is worth depends on the group tested as well as on the test, so one instrument can be good in one setting and bad in another.",
+        "C": "Screening programmes for the general population do more harm than good and ought to be reconsidered.",
+        "D": "People find probability difficult, which is why the meaning of a positive result is so often misunderstood."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage announces where its point lies. The third paragraph opens with what follows is more unsettling than the arithmetic, which marks the arithmetic as the demonstration and what comes after it as the claim. The closing two sentences then reduce the claim to an image about a room.",
+        "correct_reasoning": "The correct option states the claim at the level the third paragraph states it: the quantity that matters is not carried by the instrument but by the instrument and the population together, which is why the same device can be a useful tool in one place and a generator of alarm in another. It keeps the arithmetic in its place, as the reason for believing the claim rather than as the claim itself.",
+        "passage_anchor": "rc-0053-p3",
+        "question_type_note": "In a phenomenon-and-explanation passage the main idea is the explanation, not the phenomenon. The worked example is evidence, and evidence offered as a thesis is the standard distractor.",
+        "reading_habit": "Watch for a sentence that tells you the interesting part is still coming. Authors who write something like what follows is more unsettling are labelling their own thesis, and the label is worth more than any amount of underlining.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the middle paragraph's demonstration, and the third paragraph explicitly treats it as the less interesting half. It says nothing about the quantity belonging to the test and the population jointly, which is what makes the same test change value between settings.",
+            "seductive_element": "It is the live rival: entirely true, vividly worked out, and the part of the passage a reader remembers, since it is the part with numbers in it."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No recommendation is made. The passage says what happens when an instrument is moved to a general population; whether that trade is worth making would depend on considerations the passage never raises.",
+            "seductive_element": "The closing image is unfavourable enough to sound like a verdict on screening, and a reader supplies the policy the author withheld."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The passage blames nobody's arithmetic. It says the surprising sentence is neither a mistake nor a hedge but a consequence, and it locates the problem in a property of the test-and-population pair rather than in anyone's understanding.",
+            "seductive_element": "The opening sentence describes a result that sounds wrong to the man who receives it, which invites an explanation in terms of human confusion."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "advertised",
+      "passage_use": "the test performed exactly as advertised",
+      "meaning_here": "as it was described and promised to perform",
+      "difficulty": "easy"
+    },
+    {
+      "word": "screening",
+      "passage_use": "to a screening programme for the general population",
+      "meaning_here": "testing people who have shown no sign of illness, to find cases nobody suspected",
+      "difficulty": "medium"
+    },
+    {
+      "word": "instrument",
+      "passage_use": "Move the same instrument from a clinic",
+      "meaning_here": "the test itself, considered as a device with fixed properties",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A worked example in the middle and the real claim at the end. Notice the sentence that tells you the arithmetic was only the warm-up.",
+    "one_sentence_summary": "A test can be ninety-nine per cent accurate and still be wrong about ninety-nine of every hundred people it declares positive, because the worth of a result depends on how common the condition is among those tested, which means the same instrument changes value the moment it changes population.",
+    "main_idea": "When a condition is rare, the false alarms drawn from a huge healthy group swamp the handful of true findings, so most positive results are wrong even though the test is behaving perfectly. Accuracy belongs to the test; the chance that a positive is right belongs to the test and the population together.",
+    "simple_explanation": "Imagine a test that is right ninety-nine times out of a hundred. A man tests positive and is told he probably does not have the illness. That sounds like nonsense. It is not.\n\nHere is why. Take ten thousand people. Suppose one of them really has the illness. The test finds him, which is good. But it also gives a positive result for about one in a hundred of everybody else, and one in a hundred of the remaining people is about ninety-nine. So you now have a hundred people holding a positive result, and only one of them is actually ill.\n\nNothing broke. The test did precisely what it promised. The trouble is that the wrong answers are being collected from a huge crowd of healthy people, while the right answer comes from a group of one. The crowd wins on sheer numbers.\n\nThen comes the part that matters. Accuracy is something the test has. But the chance that your positive result is correct is not something the test has on its own; it depends on who is being tested. Give the same test to patients in a clinic who already have symptoms and it is genuinely useful, because a fair number of them are ill. Give it to the whole population, most of whom are perfectly well, and it becomes a machine for frightening ninety-nine people to find one. The machine has not changed. The crowd around it has.",
+    "why_difficult": "The numbers make the passage look like a puzzle about arithmetic, and readers come away with the arithmetic rather than the claim. The claim is a distinction between two quantities with similar names: how accurate the test is, and how likely a positive result is to be right. The passage keeps them apart in two short sentences, and most misreadings come from letting the second collapse into the first.",
+    "author_intention": "To use a startling number to make a reader accept a distinction he would otherwise skim past, and then to show that the distinction has practical consequences for where a good test should be used.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0053-p1",
+        "role": "States the puzzle",
+        "note": "A very accurate test says you are positive, and a doctor says you are probably fine. That sounds like an evasion and is a consequence of how rare the illness is."
+      },
+      {
+        "paragraph_id": "rc-0053-p2",
+        "role": "Works the numbers",
+        "note": "One ill person in ten thousand. The test finds him and also flags about ninety-nine well people. So of a hundred positives, one is right, and the test has done nothing wrong."
+      },
+      {
+        "paragraph_id": "rc-0053-p3",
+        "role": "Draws the real point",
+        "note": "Accuracy belongs to the test; the worth of a positive belongs to the test and the people tested together. Move the test to a healthier population and it becomes a different thing without changing at all."
+      }
+    ],
+    "tone_progression": "Provocative in the opening, patient and neutral through the counting, and quietly disquieting at the close, where an unchanged instrument is shown to have become something else.",
+    "key_transitions": [
+      "'It is arithmetic, and it holds however good the test is, provided the condition is rare enough.' (paragraph 1) — the surprise is claimed as a consequence rather than an error.",
+      "'What follows is more unsettling than the arithmetic.' (opening of paragraph 3) — the author labels the arithmetic as the demonstration and the claim as what comes next."
+    ],
+    "misunderstanding": "Most readers leave with the sentence about false alarms and not with the sentence about where the quantity lives, and once the two quantities have merged the errors follow automatically: the test seems to have become less accurate in the screening programme, and improving the test seems to be the remedy. The passage says the opposite twice. The test found the one true case, performed exactly as advertised, and did not alter at all when it moved rooms.",
+    "traps_summary": "The options in this set do three things. They offer the worked example as the thesis, which is the commonest error in any passage that explains a phenomenon. They attach a change in the population to the word accuracy, which the passage reserves for the instrument. And they supply a recommendation about screening that the passage deliberately withholds.",
+    "reading_lesson": "When a passage defines two quantities whose names sound alike, copy both definitions into the margin before going on, and check every option against the pair. Distractors in this form are almost never false statements; they are true statements about the wrong one of the two. The habit transfers to any passage that separates a property of a thing from a property of the thing in a setting.",
+    "real_world": "The same reasoning governs a security alarm in a quiet street, a fraud filter on ordinary transactions, and any rare-disease test offered to people with no symptoms: the rarer the thing being hunted, the more of the catch is innocent.",
+    "takeaway": "A test does not carry its usefulness with it; usefulness is what happens between a test and a crowd.",
+    "reflection_question": "When you last heard that something was highly accurate, did you ask who it was going to be used on?"
+  }
+}

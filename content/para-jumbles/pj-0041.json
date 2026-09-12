@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0041",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "urban-studies",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Floor That Changed Places",
+    "theme": "how the passenger lift turned the top of a building from the cheapest address into the dearest",
+    "estimated_time_sec": 95,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["temporal_sequence", "article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["lexical_decoy", "competing_ending"],
+    "dna_traits": ["opener_heuristic", "ending_judgement", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "check a candidate opener for a definite noun that names something only an earlier sentence could have supplied",
+    "reasoning_patterns": ["disc.competing_opener", "disc.chronology", "disc.given_new", "disc.cause_effect", "struct.chronology"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival opens on the lift, because an invention is the natural first move in a story about what an invention changed, and the sentence begins with an indefinite noun phrase and carries no pronoun. It is refused by 'changed the arithmetic'. The arithmetic is definite and is a sum nobody has yet set out: rent falling with every flight of stairs. A second rival is built on a decoy: the attic and the shed on a roof are the same place under two names, so the sentence about the word penthouse is pulled up beside the sentence about the attic and the lift is left at the end. It fails because the promoted sentence says 'the reversal was complete', and no reversal has occurred until the climb has been abolished; the two names sit at opposite ends of the story precisely because the lift stands between them.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General urban and architectural history of lifts and rent gradients; no specific building or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy-tier chronology with one decoy opener. The lift sentence is the most interesting thing in the set and looks independent, and a single definite noun refuses it. A mild lexical decoy links the attic to the shed on the roof."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A safe passenger lift changed the arithmetic within a generation: the climb disappeared, and what was left at the top was quiet, light and a view.",
+      "role": "cause_effect"
+    },
+    {
+      "label": "B",
+      "text": "The word penthouse, which had meant a shed on a roof, was in time attached to the most expensive flat in the building, and the reversal was complete.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "The attic, hottest in summer, coldest in winter and furthest from the street door, was where a landlord put whoever could pay least.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "In a five-storey building of the 1850s the best rooms were on the first floor, and the rent fell with every flight of stairs above it.",
+      "role": "background"
+    }
+  ],
+  "correct_order": ["D", "C", "A", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "C",
+      "device": "thematic_development",
+      "reliability": "high",
+      "explanation": "'The attic' is definite and needs a building with floors above the first, which the opening sentence supplies. It also takes the rent gradient to its endpoint: the cheapest room is the highest one."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "'Changed the arithmetic' names the sum that the two previous sentences set out, rent falling with every flight. The climb it abolishes is the climb those sentences made expensive."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "temporal_marker",
+      "reliability": "high",
+      "explanation": "'In time' follows the change rather than preceding it, and 'the reversal was complete' names a reversal that only the lift sentence brings about. Both signals point the same way."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "This is a story about a rent gradient turning upside down. It sets out the old order, goes to the bottom of it, introduces the machine that inverted it, and finishes with the word that records the inversion. The interest lies in the fact that the most striking sentence, the one with the invention in it, belongs in the middle.",
+    "movement": [
+      { "label": "D", "why_here": "It establishes the building, the decade and the rule that the rest of the paragraph works with. Nothing in it refers outside itself, which is true of no other sentence here." },
+      { "label": "C", "why_here": "It takes the rule to its limit. The attic is the worst address precisely because it is the highest, and a reader needs that before the lift can mean anything." },
+      { "label": "A", "why_here": "The hinge of the story. It abolishes the climb, which is what made height cheap, and 'the arithmetic' it changes is the rent gradient already described." },
+      { "label": "B", "why_here": "The consequence, recorded in a word, and the end. 'In time' places it after the change, and 'the reversal was complete' can only be said once the reversal has happened." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ADCB",
+        "trap_type": "competing_opener",
+        "why_tempting": "A story about what an invention changed seems to want the invention first, and this sentence begins with an indefinite noun phrase, carries no pronoun and contains the most interesting fact in the set. Every surface test for an opener passes it.",
+        "where_it_breaks": "It says the lift 'changed the arithmetic'. Which arithmetic? A definite noun needs a source, and the only sum anywhere in the set is the one in which rent falls with every flight of stairs. The paragraph has to state the sum before anything can change it."
+      },
+      {
+        "order": "DCBA",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The attic and the shed on a roof are the same place under two names, so the sentence about the word penthouse looks as though it belongs immediately after the sentence about the attic. Joining them also leaves the lift at the end, where its quiet, light and view make a pleasant close.",
+        "where_it_breaks": "The two names do point at the same place, but one of them is the cheapest address in the building and the other the dearest, and the whole distance between them is the lift. The sentence ends 'and the reversal was complete', and in this position no reversal has occurred, because the climb has not yet been abolished. 'In time' would also be measuring time from an event the paragraph has not reached."
+      }
+    ],
+    "trap_named": "The trap is a decoy opener made of the most memorable sentence in the set. Solvers reach for interest, and a sentence with an invention in it feels like a beginning. The defence is mechanical: read every candidate opener looking for a definite noun phrase, and ask where its referent came from. 'The arithmetic' is a backward reference even though it sits in the middle of a sentence that starts with 'A'.",
+    "solving_habit": "Scan candidate openers for definite nouns anywhere in the sentence, not just at the front. The first word of a sentence tells you very little about whether it can go first."
+  },
+  "mentor": {
+    "challenge": "The most interesting sentence here is not the first one. Look for a definite noun hiding in the middle of it.",
+    "paragraph_plain": "In a five-storey building in the 1850s, the best rooms were on the first floor, and rent went down with every flight of stairs you had to climb above it. The attic was hottest in summer, coldest in winter and furthest from the front door, so it was where a landlord put whoever could pay the least. Then the safe passenger lift arrived and changed the sum within a generation: the climb vanished, and what remained at the top was quiet, daylight and a view. The word penthouse, which used to mean a shed on a roof, ended up attached to the most expensive flat in the building, and the inversion was finished.",
+    "takeaway": "A definite noun is a backward reference wherever in the sentence it sits."
+  }
+}

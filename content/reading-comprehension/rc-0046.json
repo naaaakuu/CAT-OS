@@ -1,0 +1,456 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0046",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "history",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "scope-control",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 514,
+    "question_count": 5,
+    "question_types": [
+      "author_purpose",
+      "cannot_be_inferred",
+      "inference",
+      "not_true",
+      "paragraph_function"
+    ],
+    "theme": "counterfactual history as a disciplined method: every causal claim already contains a counterfactual, the discipline is a minimal rewrite and a short chain, and what a good one establishes is contingency rather than an alternative past",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-02",
+    "reviewer_notes": "A definition-then-application passage where the two conditions stated in the second paragraph decide four of the five questions. The near-tie sits in the inference question, where a narrow vote satisfies the first condition and a reader is invited to treat that as enough to settle what the alternative would have produced.",
+    "length_class": "medium",
+    "structure": "definition_application",
+    "viewpoints": 2,
+    "tone": "precise, dryly sceptical",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.definition",
+      "struct.general_to_specific",
+      "comp.function_over_words",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.purpose",
+      "comp.organization",
+      "arg.concession",
+      "arg.causal_claim",
+      "arg.principle",
+      "arg.qualification",
+      "inf.author_view_application",
+      "inf.vs_speculation",
+      "inf.necessary",
+      "scope.condition",
+      "elim.predict_first",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q3 is where a strong candidate is most likely to go wrong, and the live rival is the option that calls the historian safe because a narrow vote makes the alternative easy to establish. A narrow vote does satisfy the minimal rewrite, and the passage does treat such a case as the good one; but the fourth paragraph says in terms that a well-made counterfactual 'does not establish what would have happened', so satisfying the condition is a licence to run the exercise, not a warrant for its result. Q2's near miss is the option about tracing consequences as long as the record stays detailed, which sounds like ordinary evidential prudence; the second paragraph blocks it by naming the limit as one 'set by the alternative itself and not by how thoroughly the actual past happens to be documented'. Q4's rival is the option that two historians may disagree about a turning point without disagreeing about events, which reads like a paradox invented by the candidate; it is forced by the first paragraph's identification of a causal claim with a counterfactual. Q5's rival is the option that the author defends the method against the no-evidence objection: true of the first paragraph only, and the last paragraph grants that objection almost everything it asked for.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "precipitated",
+      "overdetermined",
+      "divergence"
+    ]
+  },
+  "passage": {
+    "title": "Only One Thing at a Time",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0046-p1",
+        "text": "Counterfactual history has a poor reputation among historians, and the charge against it is easy to state: the past happened only once, and what did not happen has left no evidence behind, so an account of it can be neither confirmed nor refuted. The charge is serious. It is also, in one respect, self-defeating, because the historians who press it spend their working lives writing sentences of the form 'the harvest failure precipitated the revolt'. To say that one thing caused another is to say that without the first the second would not have followed, or would have followed less surely. The counterfactual is not an ornament attached to causal history. It is what a causal claim means."
+      },
+      {
+        "id": "rc-0046-p2",
+        "text": "If every causal claim conceals a counterfactual, the useful question is not whether to run them but which of them can be run well. Two conditions do most of the work. The first is the minimal rewrite: the point of divergence must be something an actor at the time could have done otherwise, and nothing else may be altered to make the new path convenient. A minister may vote the other way; the weather in the Channel may not be rearranged, and the minister may not be given a temperament he never had. The second is the short chain. The consequences traced must stop where the divergence stops being traceable, a limit set by the alternative itself and not by how thoroughly the actual past happens to be documented, and it is reached long before the exercise stops being enjoyable."
+      },
+      {
+        "id": "rc-0046-p3",
+        "text": "Apply the two conditions and the field sorts itself. A cabinet that divided narrowly over two policies, both fully drafted and both defended in the room, offers a divergence that meets the first condition exactly, and asking what the rejected policy would have produced over the following two years meets the second. That is not speculation; it is the ordinary work of showing that the decision mattered, since a rejected policy that leads to much the same place leaves the historian who called the vote a turning point with something to explain. Contrast the famous invitations: what if the Roman Empire had never fallen, what if the Americas had gone undiscovered for another century. Nobody chose these. There is no decision in them at all, and the chain runs on for centuries through a world that the fantasy has been rebuilding at every step."
+      },
+      {
+        "id": "rc-0046-p4",
+        "text": "The discipline is worth having, but it buys less than its warmest defenders suggest. A well-made counterfactual does not establish what would have happened; the evidence for that does not exist and cannot be manufactured by care. What it establishes is weaker and still worth knowing: that the outcome was contingent rather than overdetermined, that it turned on a decision which could have gone the other way and was not being produced anyway by forces indifferent to the decision. Historians who dislike the method often want that conclusion too, and reach it by other means. The ambitious counterfactual, meanwhile, remains excellent entertainment, and is no worse for being told what it is."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0046-q1",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.concession",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "describing what the opening paragraph contains — an objection, an example sentence — instead of the manoeuvre it performs on the objection",
+      "prediction_target": "The learner should be able to say before the options: the paragraph accepts that the objection is serious and then turns it round by showing that the objectors' own causal sentences contain the thing they object to.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "The first paragraph proceeds by",
+      "options": {
+        "A": "granting an objection its force and then showing that those who press it already rely on the reasoning they reject",
+        "B": "dismissing an objection as self-serving and putting a definition of disciplined counterfactual reasoning in its place",
+        "C": "illustrating with a historical case how little evidence survives concerning the events that never took place",
+        "D": "conceding that such reasoning cannot be tested and proposing that it be reclassified as a form of entertainment"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph has three beats and marks each of them. It states the charge in full, stops to say 'The charge is serious', and then pivots on 'It is also, in one respect, self-defeating', which is followed by the specimen causal sentence and the identification of a causal claim with a counterfactual. An expert reads the pivot as the paragraph's job.",
+        "correct_reasoning": "The correct option names both beats in order. The force of the objection is granted outright rather than argued away, and what follows is not a rebuttal of its premises but a demonstration that the objectors are committed to counterfactual reasoning already: 'to say that one thing caused another is to say that without the first the second would not have followed'. The paragraph ends by making that commitment definitional, which is the turn the option describes.",
+        "passage_anchor": "rc-0046-p1",
+        "question_type_note": "Paragraph-function questions ask what work a paragraph does, not what it mentions. Label the moves in your own words first, then reject every option that names a move the paragraph never makes.",
+        "reading_habit": "When an author writes a short sentence of agreement in the middle of an objection, mark it. A one-line concession is almost always the hinge on which the paragraph turns the objection round.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Nothing here is dismissed and nothing is defined. The paragraph calls the charge serious and calls it self-defeating, which are not the same as self-serving, and the two conditions that make up the definition arrive only in the paragraph that follows.",
+            "seductive_element": "The paragraph really does turn the charge back on those who make it, and a definition really is coming, so the whole account feels correct if the reader is a paragraph ahead of himself."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The only particular the paragraph offers is a specimen sentence about a harvest failure, and it is there to display the logical form of a causal claim, not to show how thin the record is; the claim about missing evidence is stated, not illustrated.",
+            "seductive_element": "The paragraph does assert that what did not happen leaves no evidence, and it does contain something that looks like an example."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No proposal is made anywhere in the paragraph; the remark about entertainment belongs to the closing paragraph and is confined to the ambitious kind of counterfactual, which is the kind the passage has by then disqualified.",
+            "seductive_element": "It sounds like the balanced verdict such a passage might reach, and it borrows a real concession from the end of the piece."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0046-q2",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "scope.condition"
+      ],
+      "target_mistake": "accepting a plausible evidential standard — trace the consequences as far as the records allow — in place of the limit the passage actually sets",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following is NOT true of the discipline the passage describes?",
+      "options": {
+        "A": "The point at which the past is altered must be one that somebody alive at the time could have decided differently.",
+        "B": "A consequence may be traced for as long as the surviving record of the actual past remains detailed.",
+        "C": "Nothing beyond the altered decision may be adjusted in order to make the new path easier to follow.",
+        "D": "The temperament of the person whose decision is altered has to be left as it was."
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The second paragraph states two conditions and then does something unusual with the second: it says where the limit comes from. The chain stops where the divergence stops being traceable, 'a limit set by the alternative itself and not by how thoroughly the actual past happens to be documented'. That clause is written to block exactly one substitution.",
+        "correct_reasoning": "The correct option performs that substitution. It replaces a limit fixed by the imagined alternative with a limit fixed by the documentation of the real past, which is a different and far more generous standard, since the actual record may stay rich for centuries after the imagined divergence has become untraceable. The passage denies the substitution in the same sentence that states the condition, so this is the one item in the list it does not hold.",
+        "passage_anchor": "rc-0046-p2",
+        "question_type_note": "In a NOT-true question three options are the passage in other words and one has been quietly re-engineered. Read for the criterion each option names, not for whether it sounds sensible.",
+        "reading_habit": "When an author says where a limit comes from, underline the source of the limit and not just its existence. Distractors are built by keeping the limit and changing what sets it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is the minimal rewrite in plainer words: the point of divergence 'must be something an actor at the time could have done otherwise'. A reader matching vocabulary rather than claims may not see that 'somebody alive at the time' and 'an actor at the time' name the same person.",
+            "seductive_element": "Not one of the passage's own words survives in the option, which makes a faithful paraphrase look like an alteration."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The absolute is the passage's own: 'nothing else may be altered to make the new path convenient'. The option keeps the restriction at exactly the strength the second paragraph gives it, so its flat prohibition is accurate rather than overstated.",
+            "seductive_element": "An option beginning with 'nothing' is the kind that is usually caught for overstating, and the habit of suspecting absolutes fires before the sentence is checked."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The minister who may not be given a temperament he never had is the passage's own illustration of what the minimal rewrite forbids, and the option restates it. A particular case of a stated condition is still true of the discipline.",
+            "seductive_element": "It reads as a small detail rather than a rule, which invites the thought that it cannot be one of the conditions and must therefore be the odd one out."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0046-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "arg.principle",
+        "elim.predict_first"
+      ],
+      "target_mistake": "treating satisfaction of the minimal rewrite as a warrant for the counterfactual's result, when the passage makes it only a licence to run the exercise",
+      "prediction_target": "The learner should predict that the author, who holds a causal claim to be a counterfactual, will say the historian has already made one and now owes an account of the rejected course.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "application",
+        "argument"
+      ],
+      "stem": "It can be inferred that the author would regard a historian who claims that a narrowly decided cabinet vote was a turning point as",
+      "options": {
+        "A": "already committed to a counterfactual, and so owing an account of what the rejected course would have produced",
+        "B": "entitled to the claim only if the vote's consequences can be traced across the whole period he is writing about",
+        "C": "speculating, since no evidence can exist about a policy that was never adopted",
+        "D": "on safe ground, because a narrow vote makes the alternative outcome easy to establish"
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two sentences settle this before the options are read. The first paragraph makes a causal claim and a counterfactual the same claim; the third says that asking what the rejected policy would have produced 'is the ordinary work of showing that the decision mattered', and that a rejected policy leading to much the same place leaves the turning-point historian 'with something to explain'.",
+        "correct_reasoning": "Calling a vote a turning point is a causal claim, and on this author's account that is a counterfactual whether the historian says so or not. The debt follows immediately: to have said the decision mattered is to have said the rejected course would have led somewhere else, and that is what the historian now has to make good. The correct option states the commitment and the debt without adding a verdict on whether the debt can be paid.",
+        "passage_anchor": "rc-0046-p3",
+        "question_type_note": "An author-view inference is the output of the author's own rule applied to the stem's case. Write the rule down first; the winning option will read like its result rather than like a judgement about the case.",
+        "reading_habit": "Whenever a passage says that one kind of claim means another, treat every instance of the first kind in a question stem as an instance of the second. That identification is the engine the inference questions run on.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The second condition demands the opposite: the chain must stop where the divergence stops being traceable, and the model case in the third paragraph traces a rejected policy for two years, not for the span of the book.",
+            "seductive_element": "It sounds like ordinary evidential rigour, and rigour is what the passage has been demanding for two paragraphs."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the charge the first paragraph reports and the third paragraph answers in as many words: of precisely this kind of case the passage says 'that is not speculation'. The author is the one refusing the label.",
+            "seductive_element": "The charge is quoted early, is called serious, and is never shown to be false about the ambitious counterfactuals the passage later dismisses."
+          },
+          {
+            "option": "D",
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "A narrow vote satisfies the minimal rewrite, which is what lets the exercise be run at all; it does nothing to make the result available, and the closing paragraph states flatly that a well-made counterfactual does not establish what would have happened.",
+            "seductive_element": "It is the live rival: the passage does treat the narrowly divided cabinet as its model case, which invites the reader to carry the approval from the method across to its conclusion."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0046-q4",
+      "type": "cannot_be_inferred",
+      "skill": "inference",
+      "patterns": [
+        "inf.vs_speculation",
+        "inf.necessary",
+        "elim.near_tie"
+      ],
+      "target_mistake": "reading the passage's restrictive tone as a claim about how much existing history would fail its test",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following can NOT be inferred from the passage?",
+      "options": {
+        "A": "Two historians may disagree about whether an event was a turning point while agreeing about everything that happened.",
+        "B": "An account of an alternative past may satisfy both of the conditions and still be wrong.",
+        "C": "Applied strictly, the two conditions would disqualify most of what historians now write about causes.",
+        "D": "A chain of consequence traced over two years may make better history than one traced over two centuries."
+      },
+      "correct": "C",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The passage is severe in tone and modest in claim. It disqualifies the famous invitations, but it also says that ordinary causal history is counterfactual already and that the narrowly divided cabinet is 'the ordinary work' of the discipline. Nothing anywhere counts how much writing would fail the test.",
+        "correct_reasoning": "The correct option is the one the passage gives no footing for. Its argument runs the other way: if a causal claim just is a counterfactual, then the historians writing about causes are running the exercise all the time, and the model case offered is presented as ordinary rather than rare. The two conditions are aimed at a particular genre of speculation, not at the daily business of explanation, so a claim about most of what historians write is an extrapolation the text neither makes nor supports.",
+        "passage_anchor": "rc-0046-p3",
+        "question_type_note": "In a cannot-be-inferred question the three wrong answers are forced by the text and the key is merely plausible. Ask of each option which sentence would have to be true for it to follow, and look for the one with no sentence behind it.",
+        "reading_habit": "Separate an author's tone from an author's quantities. A severe manner is not a measurement, and options that convert severity into a proportion are among the most reliable traps in the form.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "It follows from the first paragraph's identification. If calling an event a turning point is a claim about what would otherwise have happened, then two historians who agree on every actual event can still differ about the alternative, which is the disagreement the third paragraph describes.",
+            "seductive_element": "It sounds like a paradox the candidate has invented rather than a consequence of the text, and paradoxes invite suspicion."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The closing paragraph says a well-made counterfactual does not establish what would have happened and that the missing evidence 'cannot be manufactured by care', which is exactly the admission that a disciplined account may be mistaken.",
+            "seductive_element": "It reads as a harsher verdict than an author who has just recommended the conditions would accept, when in fact he supplies it himself."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The comparison is the passage's own. Two years is the span of the approved case and centuries is the span of the disqualified ones, and the difference between them is the second condition doing its work.",
+            "seductive_element": "The passage never ranks two particular counterfactuals against each other in so many words, so an explicit comparison can look manufactured."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0046-q5",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.definition"
+      ],
+      "target_mistake": "naming the defence mounted in the first paragraph as the purpose of the whole piece, and so missing that the passage sorts the method rather than defending it",
+      "prediction_target": "The learner should be able to say: the author changes the question from whether counterfactuals are allowed to which ones are disciplined, and then states how little even a disciplined one delivers.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's purpose in the passage is best described as an attempt to",
+      "options": {
+        "A": "defend counterfactual history from the objection that events which did not happen have left no evidence behind",
+        "B": "show that historians who refuse counterfactual reasoning cannot account for the causes of anything at all",
+        "C": "separate the counterfactuals that entertain a general reader from those that persuade other historians",
+        "D": "replace the question whether the method is legitimate with a test of which uses are disciplined, and to say what those show"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Each paragraph announces its office. The first dissolves the yes-or-no question by making causal history counterfactual already; the second says 'the useful question is not whether to run them but which of them can be run well' and supplies two conditions; the third applies them; the fourth states the yield. A purpose statement has to carry the change of question and the yield together.",
+        "correct_reasoning": "The correct option names the operation rather than the subject. The passage does not argue that counterfactual history is permissible and stop; it converts an argument about permission into a test, applies the test to two kinds of case, and then limits what passing it is worth, which is why the last paragraph exists at all. Both halves of the option correspond to halves of the piece.",
+        "passage_anchor": "rc-0046-p2",
+        "question_type_note": "A purpose question wants the verb of the whole passage. If an option describes what only the opening does, it has named a movement rather than the piece.",
+        "reading_habit": "Ask what question the passage ends up answering, not what question it starts from. Authors who reframe a debate almost always announce the new question in a single sentence, usually early in the second paragraph.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "That defence occupies the first paragraph and is over by the second, and the closing paragraph concedes the objection most of what it asked for by admitting that the evidence for an alternative past does not exist.",
+            "seductive_element": "It describes the passage's opening move accurately and matches the reputation such an essay is expected to be defending."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage says such historians already reason counterfactually without noticing, which is the opposite of an incapacity; it adds that they often reach the author's own conclusion about contingency by other means.",
+            "seductive_element": "The first paragraph does catch the objectors in an inconsistency, and an inconsistency feels like it should ground a stronger charge."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The division drawn is between counterfactuals that meet two stated conditions and those that do not, which is a matter of method rather than of audience; entertainment appears once, in the final sentence, as what is left over after the sorting has been done.",
+            "seductive_element": "The passage does end on the word entertainment and does mention a contrast with what other historians will accept, so an audience-based division sounds like its own."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "precipitated",
+      "passage_use": "sentences of the form 'the harvest failure precipitated the revolt'",
+      "meaning_here": "brought on suddenly; caused to happen sooner than it otherwise would have",
+      "difficulty": "medium"
+    },
+    {
+      "word": "divergence",
+      "passage_use": "the point of divergence must be something an actor at the time could have done otherwise",
+      "meaning_here": "the moment at which the imagined past parts company with the real one",
+      "difficulty": "medium"
+    },
+    {
+      "word": "overdetermined",
+      "passage_use": "the outcome was contingent rather than overdetermined",
+      "meaning_here": "produced by more causes than were needed, so that it would have happened anyway",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "The author accepts the case against counterfactual history and then uses it, and everything afterwards depends on two conditions stated once. Find those two conditions before you reach the questions.",
+    "one_sentence_summary": "Every causal claim in history is already a counterfactual, so the question is not whether to imagine alternatives but which alternatives are disciplined — one altered decision, a short chain of consequence — and even a disciplined one shows only that the outcome could have been otherwise, never what the other outcome would have been.",
+    "main_idea": "Saying that one thing caused another means saying that without it the second would not have happened, so historians who scorn counterfactual reasoning use it every day. What separates a serious counterfactual from an idle one is that it changes a single decision somebody really could have made and stops tracing consequences early. Even then it establishes only that the outcome was not inevitable.",
+    "simple_explanation": "Historians often say that imagining what might have happened is a waste of time. Their reason sounds strong: the past happened once, and there is no evidence about a past that never occurred.\n\nBut look at what those same historians write. 'The harvest failure caused the revolt.' What does that sentence mean? It means that if there had been no harvest failure, there would probably have been no revolt. That is an imagined alternative past. So the imagining is not an optional extra bolted onto history; it is hidden inside every claim about causes.\n\nIf that is right, the question changes. Not 'should we imagine alternatives' but 'which imagined alternatives are any good'. The author gives two tests. First, change one thing only, and let that one thing be something a real person at the time could have chosen. A minister may vote the other way. You may not change the weather, and you may not give the minister a different character. Second, stop early. Follow the consequences only as far as you can still see them, which is not far.\n\nRun the tests and cases sort themselves. A cabinet that split narrowly over two ready-made policies? Fine: ask what the losing policy would have done over the next two years. That is not daydreaming; it is how you show that the vote mattered, because if the losing policy leads to the same place, the vote was not a turning point after all. Now try 'what if the Roman Empire had never fallen'. Nobody ever decided that, and the story would have to run for centuries through a world you are inventing as you go.\n\nThe ending is honest about the payoff. Even a careful counterfactual cannot tell you what would have happened; that evidence is simply missing. What it can tell you is that things could have gone differently — that the outcome hung on a decision and was not being produced anyway by forces that did not care about the decision. That is a smaller prize than the method's fans want, and worth having.",
+    "why_difficult": "The passage looks like a defence and is really a sorting, and the difference decides several questions. Readers who file it as 'in favour of counterfactual history' are surprised by the last paragraph, which takes back the thing they thought was being defended: what would have happened. The two conditions are also stated once each, without headings, and the second carries a clause about where its limit comes from that a fast reader treats as decoration although it is the whole point.",
+    "author_intention": "To take a question people argue about as a matter of permission and turn it into a question of craft, and then to be honest about how small the reward is for doing the craft well.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0046-p1",
+        "role": "Turns the objection round",
+        "note": "States the case against imagining alternative pasts, agrees that it is serious, and then shows that the people making it write causal sentences, which are alternative pasts in disguise."
+      },
+      {
+        "paragraph_id": "rc-0046-p2",
+        "role": "Gives the two conditions",
+        "note": "Change one decision that a real person could have made, and nothing else. Then stop tracing consequences where the alternative stops being traceable, which is early."
+      },
+      {
+        "paragraph_id": "rc-0046-p3",
+        "role": "Applies them to cases",
+        "note": "A narrow cabinet vote passes both tests and asking about the rejected policy is ordinary historical work. The grand what-ifs fail both: nobody chose them, and the chain runs for centuries."
+      },
+      {
+        "paragraph_id": "rc-0046-p4",
+        "role": "Prices the reward",
+        "note": "Even a good counterfactual cannot say what would have happened. It can say the outcome depended on a decision rather than being produced anyway, which is less than the enthusiasts claim and still useful."
+      }
+    ],
+    "tone_progression": "Sceptical about the sceptics at first, then technical and rule-giving through the middle, and finally cool and deflating, with the last sentence granting the grand what-ifs a place while refusing to call it history.",
+    "key_transitions": [
+      "'It is also, in one respect, self-defeating' (paragraph 1) — the objection is accepted and then turned against those who press it.",
+      "'the useful question is not whether to run them but which of them can be run well' (paragraph 2) — the debate about permission becomes a test of method.",
+      "'but it buys less than its warmest defenders suggest' (paragraph 4) — the author, having built the discipline, marks down what it delivers."
+    ],
+    "misunderstanding": "The usual wrong picture is that the author has defended counterfactual history and therefore believes a good counterfactual tells you what would have happened. Two things produce it: the first paragraph reads as a rescue, and the third paragraph praises a particular case warmly. But the case is praised as a licence to run the exercise, not as a warrant for its result, and the fourth paragraph says so directly. A summary containing the words 'shows what would have happened' has summarised the reader's hopes rather than the passage.",
+    "traps_summary": "Three habits are punished here. Carrying approval of a method across to approval of its conclusions, which is the inference question. Replacing the author's stated limit with a more familiar evidential one, which is the not-true question. And treating a severe tone as a quantity, which is the cannot-be-inferred question, where the passage's sharpness about grand what-ifs is offered back as a claim about how much history would fail the test.",
+    "reading_lesson": "When an author lays down conditions, write down not only what each condition says but what sets it. Distractors in this form of passage are made by keeping the condition and swapping the thing that fixes its limit, which is invisible unless you noted the source the first time through. The habit costs one underline and survives every question built on the rule.",
+    "real_world": "The same discipline governs any argument about whether a decision mattered — a policy, a hire, a treatment, a change of course at work — because to say it mattered is to claim something about the road not taken, and the claim is only as good as the alternative you are willing to specify.",
+    "takeaway": "To say a decision mattered is to describe a past that never happened, so describe it carefully and stop early.",
+    "reflection_question": "When you last called a choice in your own life a turning point, what exactly were you claiming the other choice would have led to?"
+  }
+}

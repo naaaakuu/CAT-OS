@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0042",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "anthropology",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "The Relatives Who Must Be Rude",
+    "theme": "why compulsory mockery is licensed between exactly those kin whose cooperation is obligatory and whose interests collide",
+    "estimated_time_sec": 135,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["pronoun_ref", "demonstrative", "article_given_new", "lexical_repetition"],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": ["generic_the", "competing_ending"],
+    "dna_traits": ["surface_matching", "global_tracking", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "resist welding two sentences that share a vivid word when one of them counts something only a third sentence supplies",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.lexical_chain", "disc.pronoun_antecedent", "disc.given_new", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival joins the opening claim about licensed insult straight to the closing line about compulsory insult, since the two share the word and the second seems to complete the first. It is refused twice. 'The two people who can least afford a quarrel' is a definite description of a pair whose obligations and frictions have been specified in exactly one sentence, the one listing a man and his wife's brother and a grandchild and a grandparent. And 'where the insult is compulsory' needs compulsion, which the opening claim never grants: being licensed to insult is a permission, and only the sentence calling the licence closer to an obligation makes it a requirement. A second rival pulls the sentence beginning 'The licence' up to the word license in the opening claim; that dies on 'a bond this necessary and this exposed', since neither necessity nor exposure has been described at that point.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General anthropology of joking relationships; no specific society, ethnography or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier claim-and-evidence item in which one word, insult, appears at the start and at the end and invites a weld. The evidence sentence has to sit between them, and the proof is a definite description in the closer that only the evidence can satisfy."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Where the insult is compulsory the offence is impossible, which is why the rudest exchanges in such societies take place between the two people who can least afford a quarrel.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "It falls, with striking regularity, between people whose positions oblige them to cooperate closely while giving them something to quarrel over: a man and his wife's brother, a grandchild and a grandparent whose land will one day be divided.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "The licence is not an outlet for a feeling that would otherwise build up; it is closer to an obligation, a standing announcement that a bond this necessary and this exposed will not be allowed to turn serious.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "Many societies license one particular pair of relatives to insult each other without consequence, and the pairing is never random.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "B", "C", "A"],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'It falls between people whose positions...' needs a thing that can fall between relatives, and the pairing declared never random is the only candidate. The sentence then makes good on that claim by showing the regularity."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'A bond this necessary and this exposed' points at a description of necessity and exposure, and the obligation to cooperate closely while having something to quarrel over is that description. Without it the two demonstratives measure nothing."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Where the insult is compulsory' needs compulsion, and only the previous sentence supplies it, by calling the licence closer to an obligation. Being permitted to insult is not the same as being required to, and the conclusion rests on the stronger word."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph makes a claim and then earns it. A custom is described, the regularity behind it is set out, the usual explanation for the custom is rejected in favour of a better one, and the point is compressed into a single line. Claim, evidence, correction, conclusion, with the correction depending on the evidence rather than on the claim.",
+    "movement": [
+      { "label": "D", "why_here": "It introduces the custom and makes the promise the rest of the paragraph keeps: the pairing is never random. It is the only sentence that refers to nothing before it." },
+      { "label": "B", "why_here": "It redeems that promise by naming the regularity, and the two relationships it lists are what every later definite description points at." },
+      { "label": "C", "why_here": "The correction. It rejects the release-of-pressure explanation, substitutes one about the bond, and upgrades the custom from a permission to an obligation, which is the word the last sentence needs." },
+      { "label": "A", "why_here": "The compression, and the close. Its 'where the insult is compulsory' takes up the obligation just named, and the pair who can least afford a quarrel are the ones the evidence specified." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DABC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The opening claim is about licensed insult and the closing line is about compulsory insult, so the two look like a single thought split in half. Joining them produces a neat paradox at the top of the paragraph, which is exactly what a solver hunting for anchors is hoping to find.",
+        "where_it_breaks": "The two sentences do not in fact say the same thing. The opening claim grants a permission; the closing line speaks of an insult that is compulsory, and a requirement has to be established before it can be reasoned from. It also ends on 'the two people who can least afford a quarrel', a definite description of a pair whose obligations and frictions are spelled out only in the sentence about a man and his wife's brother. A shared word makes two sentences neighbours in subject matter, not in sequence."
+      },
+      {
+        "order": "DCBA",
+        "trap_type": "generic_the",
+        "why_tempting": "The opening sentence uses the verb license and the next sentence a solver finds begins 'The licence'. The definite article seems to be picking up the nearest available noun, and the sentence reads as a natural gloss on the custom just described.",
+        "where_it_breaks": "It goes on to speak of 'a bond this necessary and this exposed'. Both demonstratives require a measurement already taken, and nothing has yet said that these relatives must cooperate or that they have anything to fall out about. Only the sentence listing the pairs supplies that."
+      }
+    ],
+    "trap_named": "The trap is a lexical decoy laid at both ends of the paragraph. A setter repeats a striking word in the first and last sentences so that they seem to belong together, and the real link, which is a definite description, is buried in the middle of the closer. The defence is to treat repeated vocabulary as a claim about topic and definite descriptions as claims about order. Only the second kind is evidence.",
+    "solving_habit": "When two sentences share a word, ask whether either of them also contains a phrase such as 'the two people who...' or 'a bond this...'. Those phrases name something specific, and the sentence that specified it comes first."
+  },
+  "mentor": {
+    "challenge": "One word appears in two sentences and makes them look like a pair. Something between them has to come first.",
+    "paragraph_plain": "In many societies one particular pair of relatives is allowed to insult each other freely, and which pair it is turns out never to be random. It falls, with remarkable consistency, between people whose positions force them to cooperate closely while also giving them something to argue about: a man and his wife's brother, or a grandchild and a grandparent whose land will one day be split up. The permission is not a safety valve for feelings that would otherwise build up. It is closer to a duty: a public announcement that a relationship this necessary and this exposed will not be allowed to become serious. Where rudeness is required, offence becomes impossible, which is why the rudest exchanges in such places happen between the two people who can least afford a real quarrel.",
+    "takeaway": "A shared word joins topics. A definite description joins sentences."
+  }
+}

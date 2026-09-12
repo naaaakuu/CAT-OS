@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0034",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "The Tune That Stopped Changing",
+    "theme": "how writing a living practice down rescues one version of it and quietly ends the variation that produced it",
+    "estimated_time_sec": 110,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "specific_to_general",
+    "cohesion_signals": ["article_given_new", "connective_explicit", "lexical_repetition", "pronoun_ref"],
+    "primary_trap": "misleading_connective",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["surface_matching", "global_tracking", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 4,
+      "competing_openings": 2,
+      "competing_endings": 3,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "place a contrast marker by what it contradicts rather than by where a paragraph usually turns",
+    "reasoning_patterns": ["disc.transition_word", "disc.specific_to_general", "disc.given_new", "disc.concession", "struct.specific_to_general"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival moves the sentence beginning 'Yet' up to second place, because a paragraph that travels from one village to a general claim seems to want its single turn early, and a reader who orders by shape obliges. It is refused by a number: 'the other eleven shapes'. Eleven is what remains of a dozen once one has been separated out, and the only sentence that separates one out is the one about the printed version. A second rival ends on that same sentence about nothing being forbidden, which has the ring of a verdict; it dies because the closing sentence names 'the eleven vanished shapes', and a countable reference cannot precede the count.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General cultural history of folk-song collection and notation; no specific collector, village or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A medium item in which the only hard evidence is arithmetic. A dozen becomes one plus eleven, and the two references to eleven fix the last two sentences absolutely. The 'Yet' is a decoy: it marks a contrast with an outcome, not with the opening scene."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "What he carried away was a single shape, printed with a title and a key, and it came back to the village a generation later in the mouths of schoolchildren taught out of the book.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "Preservation of that kind saves an object and ends a practice, and the exchange passes unnoticed because the saved object can be pointed at and the eleven vanished shapes cannot.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Yet nothing had been forbidden and no singer had been silenced; the other eleven shapes simply stopped having anywhere to go.",
+      "role": "concession"
+    },
+    {
+      "label": "D",
+      "text": "A collector arrived in a village in 1905 with a notebook and a wax cylinder, and took down a song that had a dozen shapes, one for every singer who had ever had a reason to alter it.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "A", "C", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "A",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'What he carried away' needs a man who arrived, and only one sentence puts a collector in the village. The single shape it describes is also drawn from the dozen the first sentence counts."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The other eleven shapes' is arithmetic: eleven is what is left of a dozen after one has been taken. The sentence about the printed version is the one that takes it, so the eleven can only be counted afterwards."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "thematic_development",
+      "reliability": "high",
+      "explanation": "The closing sentence names 'the eleven vanished shapes' as the invisible half of the exchange, and they have just been described as having nowhere left to go. It also widens the single village into a general claim about preservation."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph moves from one village in one year to a general statement about what preservation does. Everything before the last sentence is a single case, told in sequence: the collector arrives, one version leaves in a notebook, the other versions quietly lapse. Only at the end does the writer draw the rule, which is why the sentence that sounds most like a moral is not the one that closes.",
+    "movement": [
+      { "label": "D", "why_here": "The scene, and the only sentence that introduces rather than refers. It supplies the collector, the year and, crucially, the number twelve that the rest of the paragraph does arithmetic with." },
+      { "label": "A", "why_here": "The event. One shape is removed from the dozen, fixed in print, and returned to the village with the authority of a book behind it. Its 'he' needs the collector." },
+      { "label": "C", "why_here": "The concession that sharpens the point. Nobody was coerced, and the eleven remaining shapes simply lost their occasions. The number eleven can only be stated once one of the twelve has been separated out." },
+      { "label": "B", "why_here": "The rule, drawn from the case, and the close. It names the eleven vanished shapes as the part of the exchange nobody can see, which is the reason the loss goes unnoticed." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DCAB",
+        "trap_type": "misleading_connective",
+        "why_tempting": "'Yet' announces a turn, and in a paragraph that travels from a particular scene to a general claim the turn is expected early, just after the scene has been set. A solver ordering by shape puts the contrast marker in the second seat almost without reading the clause behind it.",
+        "where_it_breaks": "The sentence counts 'the other eleven shapes'. In this position the paragraph has named a dozen and removed none of them, so eleven is not a number anything supports. The contrast is not with the village as it was; it is with the outcome of the printing, which has not yet happened."
+      },
+      {
+        "order": "DABC",
+        "trap_type": "competing_ending",
+        "why_tempting": "The line about nothing being forbidden and no singer being silenced has the cadence of a verdict, and 'stopped having anywhere to go' is the most quotable phrase in the set. Ending there feels like landing the paragraph.",
+        "where_it_breaks": "The general sentence names 'the eleven vanished shapes' as the thing nobody can point at. That reference needs the eleven to have vanished already, so the sentence about them cannot come after it. A count comes before the thing that counts it again."
+      }
+    ],
+    "trap_named": "The trap is a connective doing honest work in an unexpected place. 'Yet' really does mark this paragraph's turn, but the turn is against the result of the printing, not against the scene at the start, and a solver who places contrast markers by habit will put it one seat too early. The defence is to finish the sentence the connective introduces and ask what proposition it denies. Here the denial is of an assumption about coercion, which only arises once something has been taken.",
+    "solving_habit": "Treat every 'yet', 'but' and 'however' as a question: what exactly is being denied? Then find the sentence that asserts it. A contrast marker points at a claim, not at a position in the paragraph."
+  },
+  "mentor": {
+    "challenge": "One sentence begins with a turn word and one sentence counts to eleven. The arithmetic is the stronger evidence.",
+    "paragraph_plain": "A song collector went to a village in 1905 with a notebook and a recording machine, and wrote down a song that existed in about a dozen versions, one for each singer who had ever had a reason to change it. He took away one of those versions, printed it with a title and a key, and a generation later it came back to the village in the mouths of children who had learned it from the book. Nobody had been ordered to stop singing the others; they simply had no occasions left. That is what preservation does when it succeeds: it rescues an object and finishes off a practice, and nobody notices the trade, because the rescued object is there to be pointed at and the eleven lost versions are not.",
+    "takeaway": "A number is harder evidence than a turn word. Eleven means one has already been taken."
+  }
+}

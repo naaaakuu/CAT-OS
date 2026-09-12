@@ -1,0 +1,159 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0039",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "contemporary-society",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "Having, and Being Allowed",
+    "theme": "the replacement of ownership by revocable permission, and why the least glamorous cases are the ones that show it",
+    "estimated_time_sec": 195,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: five-sentence TITA jumble, used by CAT for its harder sets; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["demonstrative", "article_given_new", "lexical_repetition", "synonym_hypernym", "parallelism"],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": ["generic_the", "competing_opener"],
+    "dna_traits": ["surface_matching", "global_tracking", "wm_long_chain", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 4,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 5,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "E",
+    "learning_objective": "break a pair of examples that look welded when a sentence between them promises the second one",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.demonstrative", "disc.example_after_claim", "disc.given_new", "disc.topic_progression", "struct.general_to_specific"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival treats the two examples as a block. The car and the library are the only concrete things in the set, they are built on the same grammar, and a solver who has found a pair rarely puts anything between them; the sentence about the pattern not being confined to things with software then drifts to the end, where it reads as a closing generalisation. It is refused twice. That sentence is a promise, and the library is what redeems it, so the promise cannot follow its own fulfilment. And the library sentence calls itself 'the least glamorous instance', which picks up a phrase that exists in only one other sentence. A second rival promotes the pattern sentence above the car, where 'not confined to things with software in them' denies a limit nobody has yet proposed; a third opens on the car, and dies on 'the arrangement'.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General commentary on licensing and consumer goods; no specific company, product, library or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A premium five-sentence item whose whole difficulty is a false weld. Two parallel examples invite a solver to treat them as a unit, and the sentence that must sit between them is written to read perfectly well as a closing generalisation. The evidence against the weld is a superlative repeated across the two sentences it separates."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The pattern is not confined to things with software in them, and it is least visible where the object is least glamorous.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "Ownership used to be a dull idea: you had the thing, and you could lend it, break it, sell it or leave it to a child without asking anyone.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "A public library is the least glamorous instance and the plainest: it once bought a book and kept it, and now rents a copy that disappears when the licence does, leaving a shelf with no gap in it.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "A car that refuses to start because the monthly payment has lapsed is not a vehicle at fault; it is a vehicle doing exactly what the arrangement requires.",
+      "role": "example"
+    },
+    {
+      "label": "E",
+      "text": "Across a widening share of what households buy, that plain arrangement has been replaced by a permission, revocable and priced by the month.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "E", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "E",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That plain arrangement' points at an arrangement already described as plain, and the description of ownership as a dull idea you could act on without asking anyone is the only candidate."
+    },
+    {
+      "from": "E",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "The car sentence ends on 'what the arrangement requires', a definite reference to the permission just introduced. Without it the sentence would be appealing to an arrangement the reader has never met."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "'The pattern is not confined to things with software in them' can only deny a limit that a case has suggested, and the car with its lapsed payment is that case. The sentence then promises somewhere less glamorous to look."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The least glamorous instance' answers 'least visible where the object is least glamorous' word for word. The library is the case the previous sentence has just promised, and the superlative is the receipt."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph starts wide and narrows twice. It describes what ownership used to mean, names what has replaced it, gives one vivid case, widens again to say the case is not the whole of it, and then gives the quiet case that proves the widening. The second widening is what makes the order hard: it sits between two examples that look as though they belong side by side.",
+    "movement": [
+      { "label": "B", "why_here": "It defines the thing that is being lost, in terms the rest of the paragraph keeps referring back to. It is the only sentence with no backward reference of any kind." },
+      { "label": "E", "why_here": "It names the replacement and calls the old idea 'that plain arrangement', which fixes it second. The permission it introduces is what the car sentence then appeals to." },
+      { "label": "D", "why_here": "The first case, and a deliberately glamorous one. Its point is that the refusal is not a malfunction, which is only intelligible once the permission has been described as revocable." },
+      { "label": "A", "why_here": "The second widening. It denies that software is the boundary of the pattern and promises a case where the object is unglamorous, which is a forward-looking promise and cannot be a closing line." },
+      { "label": "C", "why_here": "The promised case, and the close. It identifies itself as the least glamorous instance, and it ends on the image the paragraph has been working towards: a loss that leaves no visible gap." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BEDCA",
+        "trap_type": "anchor_pair",
+        "why_tempting": "The car and the library are the only concrete sentences in the set and they are built the same way, an object that once behaved one way and now behaves another. Once a solver sees a pair like that, separating them feels perverse, and the remaining sentence about the pattern reads well as a closing generalisation.",
+        "where_it_breaks": "The sentence about the pattern is a promise, not a summary: it says the pattern is not confined to things with software and is least visible where the object is least glamorous. The library sentence then calls itself 'the least glamorous instance', which answers the promise directly. A promise cannot be made after it has been kept, and the superlative has only one source."
+      },
+      {
+        "order": "BEADC",
+        "trap_type": "generic_the",
+        "why_tempting": "'The pattern' looks like a definite reference to the replacement of ownership by permission, which has just been described, so the sentence seems to belong immediately after it, with both examples following as illustration.",
+        "where_it_breaks": "The sentence denies that the pattern is 'confined to things with software in them'. Nothing has proposed that limit yet, because the car has not been mentioned, so the denial answers an objection the reader has had no chance to form. The limit has to be suggested by a case before it can be refused."
+      },
+      {
+        "order": "DBEAC",
+        "trap_type": "competing_opener",
+        "why_tempting": "The car sentence begins with an indefinite noun phrase, states a self-contained paradox and carries no pronoun, which is the profile solvers use to pick an opener. It is also the most arresting line in the set.",
+        "where_it_breaks": "It ends on 'exactly what the arrangement requires'. The arrangement is definite and has not been introduced, so the sentence is leaning on something the reader does not have. The sentence about a revocable permission priced by the month is where the arrangement comes from."
+      }
+    ],
+    "trap_named": "The trap is a false weld. Two sentences are built on the same frame and belong to the same class, so the eye pairs them and the solver places them as a unit. But a pair is a hypothesis about adjacency, not a fact, and paragraphs frequently put a sentence between two examples to say what the first one did not settle. The defence is to check whether any remaining sentence makes a promise the second example keeps: the words 'least glamorous' appear twice here, once as a promise and once as a receipt, and that is what unwelds the pair.",
+    "solving_habit": "When two sentences look like a matched pair, ask what the sentences left over would be doing elsewhere. If one of them would be making a promise that the second half of your pair fulfils, the pair has to be opened up."
+  },
+  "mentor": {
+    "challenge": "Two sentences in this set look like a matched pair. Something has to stand between them, and one repeated phrase says what.",
+    "paragraph_plain": "Owning something used to be a dull idea: you had the thing, and you could lend it, break it, sell it or leave it to your children without asking permission from anyone. Across more and more of what households buy, that plain arrangement has been replaced by a permission that can be withdrawn and is charged by the month. A car that will not start because the monthly payment has lapsed is not a faulty car; it is a car doing exactly what the deal says it should. The pattern is not limited to things with software in them, and it is hardest to see where the object is least glamorous. A public library is the plainest case of all: it used to buy a book and keep it, and now rents a copy that vanishes when the licence does, leaving a shelf with no gap in it.",
+    "takeaway": "A matching pair of examples is a guess. A promise kept by one of them is proof of what sits between."
+  }
+}

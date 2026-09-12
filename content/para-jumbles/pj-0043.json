@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0043",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "linguistics",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Words Too Common to Tidy",
+    "theme": "why the verbs that resist regular endings are almost always the ones speakers use every day",
+    "estimated_time_sec": 85,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "specific_to_general",
+    "cohesion_signals": ["connective_explicit", "article_given_new", "lexical_repetition", "substitution_ellipsis"],
+    "primary_trap": "misleading_connective",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["surface_matching", "global_tracking", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 4,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "place a but by the loss or claim it answers, and notice that a word like survivors presupposes a casualty",
+    "reasoning_patterns": ["disc.transition_word", "disc.specific_to_general", "disc.given_new", "disc.contrast", "struct.specific_to_general"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival moves the sentence beginning 'But' into second place, because the opening sentence says no rule explains the odd forms and a contrast seems due immediately. It is refused by one noun: survivors. A survivor presupposes that others did not survive, and the only sentence reporting a loss is the one about hundreds of verbs quietly giving in. A second rival ends on the line about verbs a speaker uses every day, which is the most quotable in the set; that fails because the general statement about frequency is the conclusion the observation supports, and a paragraph that states its rule and then adds the observation reverses the support.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General historical linguistics of irregular verbs and frequency; no specific study or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy item that teaches one high-value move: a presupposing noun beats a connective. Survivors cannot be counted until a loss has been reported, and that single word settles a seat that the But would otherwise win."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Frequency is what preserves an irregularity, because a form is only remembered if it is heard often enough, and whatever is heard rarely gets tidied by the rule in the end.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "But the survivors are not a random handful: they are, almost without exception, the verbs a speaker uses every day of their life.",
+      "role": "contrast"
+    },
+    {
+      "label": "C",
+      "text": "English has kept a handful of verbs that refuse the ordinary past tense: go became went, be became was, and no rule explains either.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "Hundreds of others that once behaved the same way have quietly given in, and nobody misses the forms they lost.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "D", "B", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'Hundreds of others that once behaved the same way' needs a way to have been described, and the refusal of the ordinary past tense is that way. Others also implies a first group, which the opening sentence supplies."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "'The survivors' presupposes that some did not survive, and the sentence about hundreds giving in is the only report of a loss. The 'But' then pushes against the impression that what is left is an accident."
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "The observation that the survivors are the everyday verbs is a fact about frequency, and the final sentence states the rule that explains it. Observation first, general principle afterwards."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph starts with two or three odd English verbs and finishes with a rule about language in general. Between them it reports what happened to the rest and then notices what the leftovers have in common. Particular case, loss, pattern in what remains, general principle.",
+    "movement": [
+      { "label": "C", "why_here": "It introduces the oddity with examples anyone can check and refers to nothing before it. The way of behaving it describes is what the next sentence calls the same way." },
+      { "label": "D", "why_here": "It reports the loss. Without it the paragraph has nothing for the word survivors to mean, and it supplies the contrast the next sentence is pushing against." },
+      { "label": "B", "why_here": "The turn. Its 'But' denies that the leftovers are an accident, and 'the survivors' can only be counted after the casualties have been reported." },
+      { "label": "A", "why_here": "The rule, and the close. It explains what the previous sentence observed and widens from English verbs to anything heard often or rarely, which is as far as the paragraph goes." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CBDA",
+        "trap_type": "misleading_connective",
+        "why_tempting": "The opening sentence ends by saying no rule explains these forms, which sounds like exactly the thing a 'But' would answer, and a contrast marker in the second seat is the commonest shape in short paragraphs. A solver who places connectives by habit does this instantly.",
+        "where_it_breaks": "The sentence speaks of 'the survivors'. Nothing has yet died: the paragraph has described a handful of odd verbs and reported no losses at all, so there is no group for the survivors to be the remainder of. The sentence about hundreds giving in has to come first, and once it does the contrast is with the impression that what is left is random."
+      },
+      {
+        "order": "CDAB",
+        "trap_type": "competing_ending",
+        "why_tempting": "The line about the verbs a speaker uses every day of their life is the most quotable sentence here, and ending on a concrete observation rather than an abstract rule feels like good writing.",
+        "where_it_breaks": "The sentence about frequency is the explanation of that observation, not a preliminary to it. Put the rule third and the paragraph explains something it has not yet observed, and the 'But' then pushes against a general principle instead of against the loss it was written to answer."
+      }
+    ],
+    "trap_named": "The trap is a connective that looks like it belongs early. 'But' really does mark this paragraph's turn, but the turn answers a loss, and the loss is reported in a sentence a solver may not have placed yet. The defence is a presupposing noun. Words such as survivors, the rest, the remainder, the others and the exception all assume a group that something happened to, and the sentence that made it happen is always earlier.",
+    "solving_habit": "Before trusting a 'but' or a 'however', look for a noun in the same sentence that assumes something has already occurred. Presupposition is stronger evidence than contrast."
+  },
+  "mentor": {
+    "challenge": "One sentence begins with a turn word and contains a noun that quietly assumes a loss. The noun decides.",
+    "paragraph_plain": "English has hung on to a few verbs that refuse the normal past tense: go turns into went, be turns into was, and no rule accounts for either. Hundreds of other verbs that once behaved the same way have quietly given in, and nobody misses the old forms. But the ones that are left are not a random selection: they are, almost without exception, the verbs a speaker uses every single day. Frequency is what keeps an irregularity alive, because an odd form is only remembered if it is heard often enough, and anything heard rarely eventually gets tidied up by the rule.",
+    "takeaway": "Survivors, the rest, the others: each of those words assumes a loss, and the loss comes first."
+  }
+}

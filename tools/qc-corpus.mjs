@@ -71,6 +71,15 @@ export function runCorpusQC() {
   const bump = (obj, k) => { obj[k] = (obj[k] ?? 0) + 1; };
   const keyTally = (type, letter) => { stats.keys[type] ??= { A: 0, B: 0, C: 0, D: 0 }; stats.keys[type][letter] += 1; };
   const trapTally = (type, trap) => { stats.traps[type] ??= {}; bump(stats.traps[type], trap); };
+  const longest = {}; // type → { n, correct_longest } — is the answer the fattest option?
+  const lenTally = (type, q) => {
+    const lens = ['A', 'B', 'C', 'D'].map((l) => String(q.options[l] ?? '').trim().length);
+    const max = Math.max(...lens);
+    const ties = lens.filter((x) => x === max).length;
+    longest[type] ??= { n: 0, correct_longest: 0 };
+    longest[type].n += 1;
+    if (ties === 1 && String(q.options[q.correct] ?? '').trim().length === max) longest[type].correct_longest += 1;
+  };
   const absolute = {}; // type → { correct:{n,abs}, wrong:{n,abs} }
   const absTally = (type, text, isCorrect) => {
     absolute[type] ??= { correct: { n: 0, abs: 0 }, wrong: { n: 0, abs: 0 } };
@@ -90,6 +99,7 @@ export function runCorpusQC() {
   };
   const checkMCQ = (type, where, q, distractors, trapSet) => {
     keyTally(type, q.correct);
+    lenTally(type, q);
     for (const l of ['A', 'B', 'C', 'D']) { absTally(type, q.options[l], l === q.correct); hygiene(q.options[l], `${where} option ${l}`); }
     if (q.explanation?.correct_reasoning) {
       letterMentions(q.explanation.correct_reasoning, `${where} correct_reasoning`, q.correct);
@@ -261,6 +271,13 @@ export function runCorpusQC() {
     const fc = b.correct.abs / b.correct.n, fw = b.wrong.abs / Math.max(1, b.wrong.n);
     stats.absolute_bias[type] = { correct: Math.round(fc * 100) / 100, wrong: Math.round(fw * 100) / 100 };
     if (fw > 0 && (fc / fw > 2 || fc / fw < 0.5)) warnings.push(`${type}: absolute words appear in ${Math.round(fc * 100)}% of correct options vs ${Math.round(fw * 100)}% of distractors — a tell`);
+  }
+  stats.longest_option_bias = {};
+  for (const [type, b] of Object.entries(longest)) {
+    if (b.n < 40) continue;
+    const f = b.correct_longest / b.n;
+    stats.longest_option_bias[type] = Math.round(f * 100) / 100;
+    if (f > 0.35) warnings.push(`${type}: the correct option is the longest one in ${Math.round(f * 100)}% of ${b.n} questions (chance is 25%) — length is a tell`);
   }
   stats.distinct_patterns = stats.patterns.size;
   stats.distinct_traps = Object.values(stats.traps).reduce((s, t) => s + Object.keys(t).length, 0);

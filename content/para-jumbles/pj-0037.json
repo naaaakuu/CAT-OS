@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0037",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "literature-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "The Voice That Belongs to Neither",
+    "theme": "the proposal that unmarked narration in a character's own idiom is what let the novel judge and sympathise at once",
+    "estimated_time_sec": 135,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "hypothesis_support",
+    "cohesion_signals": ["demonstrative", "pronoun_ref", "lexical_repetition", "article_given_new"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["competing_ending"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "refuse a thesis sentence the opening seat when it points at a device with a demonstrative",
+    "reasoning_patterns": ["disc.competing_opener", "disc.demonstrative", "disc.definition_then_application", "disc.example_after_claim", "struct.phenomenon_explanation"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the hypothesis, which is exactly what a paragraph of this shape usually does: state the proposal, then support it. A solver who orders by macro pattern will do it without hesitation. It is refused by two words, 'this quiet device', a demonstrative that needs a device already described, and the only description of one is the sentence about reporting thoughts in the narrator's grammar and the character's vocabulary. A second rival keeps the specimen line for last, on the ground that a quoted sentence makes a striking close; it fails because the final sentence says sympathy and judgement 'arrive in that sentence together', and 'that sentence' can only be the specimen.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General narrative theory; the quoted specimen line is invented for the item and no novel or critical text is adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier hypothesis-support item whose trap is the macro pattern itself. Solvers taught that such paragraphs open on the hypothesis will place the second sentence first; the only evidence against them is a demonstrative. The specimen line is anchored in the final seat by a demonstrative of its own."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The proposal worth testing is that this quiet device, rather than any growth in psychological insight, is what allowed the novel to be ironic about people it was also asking its readers to love.",
+      "role": "topic"
+    },
+    {
+      "label": "B",
+      "text": "Some time in the nineteenth century novelists acquired a way of reporting a character's thoughts in the narrator's grammar but the character's vocabulary, with no quotation mark to announce the change of hands.",
+      "role": "definition"
+    },
+    {
+      "label": "C",
+      "text": "Sympathy and judgement, which any other arrangement obliges a writer to take in turns, arrive in that sentence together, and the manoeuvre is so quiet that readers absorb the judgement without noticing that they were asked to make it.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "The test is a single line: 'She had always been perfectly reasonable about money' can be, in one breath, what the woman believes and what the book doubts, and nothing on the page marks which is which.",
+      "role": "example"
+    }
+  ],
+  "correct_order": ["B", "A", "D", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'This quiet device' points at a technique already described, and the description is the sentence about narrator's grammar and character's vocabulary. A demonstrative cannot introduce what it points at."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The test' is definite and needs something to have been declared worth testing. Exactly one sentence does that, in the words 'the proposal worth testing', so the specimen line cannot stand before it."
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Arrive in that sentence together' needs a particular sentence to have been quoted, and the specimen about being reasonable about money is the only quotation in the set."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph states a hypothesis and supports it with a single specimen. What makes the order harder than it looks is that the hypothesis is not the first sentence: the device has to be described before it can be proposed as the explanation, because the proposal refers to it rather than defining it. Description, hypothesis, test, upshot.",
+    "movement": [
+      { "label": "B", "why_here": "It describes the technique in full and introduces nothing by reference, which is why it opens. Everything later in the paragraph calls this a device, a proposal or a manoeuvre rather than describing it again." },
+      { "label": "A", "why_here": "The hypothesis, and the nucleus of the paragraph. Its 'this quiet device' fixes it immediately after the description, and its claim about irony is what the specimen is brought in to test." },
+      { "label": "D", "why_here": "The test, announced with a definite article that only the proposal can license. The quoted line does the double duty the proposal predicted: the woman's belief and the book's doubt in one clause." },
+      { "label": "C", "why_here": "The upshot, and the close. 'That sentence' points back at the specimen, and the paragraph ends on what the technique costs the reader, which nothing else follows from." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ABDC",
+        "trap_type": "competing_opener",
+        "why_tempting": "A paragraph that offers a hypothesis and then supports it normally begins with the hypothesis, and this sentence announces itself as a proposal worth testing. Solvers who have learned the macro patterns place it first on principle, without weighing its reference.",
+        "where_it_breaks": "It says 'this quiet device'. A demonstrative of that kind points backwards at something already described, and in the first seat there is nothing behind it. The sentence describing how thoughts are reported in the narrator's grammar is what supplies the device, and the proposal has to follow it."
+      },
+      {
+        "order": "BACD",
+        "trap_type": "competing_ending",
+        "why_tempting": "A quoted line is a striking thing to finish on, and the sentence about sympathy and judgement reads like a piece of theory that could be stated before the illustration rather than after it.",
+        "where_it_breaks": "That theoretical sentence says sympathy and judgement 'arrive in that sentence together'. There is no such sentence yet, because the only quotation in the set has been pushed behind it. The specimen also announces itself as 'the test', which a paragraph that has finished arguing is no longer in a position to run."
+      }
+    ],
+    "trap_named": "The trap is the macro pattern used as bait. A solver who knows that hypothesis-and-support paragraphs open on the hypothesis will place the proposal first and feel well trained doing it. But a macro pattern describes what a paragraph does, not which sentence carries the reference; a hypothesis that says 'this device' has already been given the device by a sentence before it. Shape is a prior; reference is evidence, and evidence wins.",
+    "solving_habit": "Let the macro pattern generate your guess and let the demonstratives test it. Whenever a sentence you want to place first contains 'this', 'that', 'such' or 'the latter', find what it points at before you commit."
+  },
+  "mentor": {
+    "challenge": "The sentence that sounds most like a thesis has two words in it that stop it opening the paragraph.",
+    "paragraph_plain": "At some point in the nineteenth century, novelists worked out how to report a character's thoughts using the narrator's grammar but the character's own words, with no quotation marks to signal the handover. The idea worth testing is that this trick, rather than any increase in psychological understanding, is what let novels be ironic about characters they also wanted readers to care for. The test is a single line: 'She had always been perfectly reasonable about money' can be, at the same time, what the woman thinks of herself and what the book quietly disputes, and nothing on the page tells you which. Sympathy and judgement, which any other technique makes a writer alternate between, come in that one sentence together, and the move is so discreet that readers take on the judgement without noticing they were invited to make it.",
+    "takeaway": "A paragraph's usual shape is a guess. A demonstrative is proof."
+  }
+}

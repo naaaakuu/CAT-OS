@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0048",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "beginner",
+    "title": "Three Digits at a Time",
+    "theme": "why grouping raises how much can be held in mind without the store itself growing",
+    "estimated_time_sec": 80,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["article_given_new", "lexical_repetition", "connective_explicit", "connective_implicit"],
+    "primary_trap": "none",
+    "secondary_traps": ["competing_ending", "lexical_decoy"],
+    "dna_traits": ["surface_matching", "ending_judgement"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 2,
+      "competing_openings": 1,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "C",
+    "learning_objective": "put an example after the sentence that supplies the words the example uses",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.example_after_claim", "disc.given_new", "disc.lexical_chain", "struct.general_to_specific"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival keeps the telephone number for the end, because a concrete example makes a pleasant close and the sentence about experts sounds like theory that could come earlier. It fails on 'therefore' in that sentence, which draws its conclusion from the example, and on 'bigger pieces', which are the three groups the example creates. A second rival puts the example second, straight after the sentence about the limit; it fails because the example uses the phrase 'what counts as one item', which the paragraph has not yet made available, and that phrase is the whole point of the sentence it skips.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General cognitive psychology of working memory and grouping; no specific study or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A beginner general-to-specific item. The example is written so that it borrows a phrase from the sentence before it, which is the cleanest way to teach that an illustration follows the claim it illustrates rather than the topic it shares words with."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A telephone number recited as eleven separate digits defeats most people; the same number in three short groups does not, because the grouping has changed what counts as one item and three is well inside the limit.",
+      "role": "example"
+    },
+    {
+      "label": "B",
+      "text": "Working memory holds very little at once, and the limit is counted in items rather than in letters or seconds.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "Getting better at remembering is therefore rarely a matter of enlarging the store; it is a matter of packing it, and every expert who seems to hold more is really holding bigger pieces.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "What counts as one item, though, is decided by the person remembering and not by the material.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The first sentence says the limit is counted in items, and the second asks what an item is. The question only arises once items have been made the unit of measurement."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "high",
+      "explanation": "The example uses the phrase 'what counts as one item' and shows a person changing it by grouping. It is the demonstration of the claim immediately before it, and it borrows that claim's words."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Therefore' draws the lesson from the example, and 'bigger pieces' are the three groups the example made out of eleven digits. Both signals point back at the same sentence."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph goes from a general fact to a particular case and then to the practical lesson. It states the limit, refines what the limit counts, shows the refinement at work on a telephone number, and finishes with what this means for anyone trying to remember more.",
+    "movement": [
+      { "label": "B", "why_here": "It states the general fact and introduces the unit, items, that the whole paragraph then argues about. It refers to nothing before it." },
+      { "label": "D", "why_here": "It refines the fact. Once the limit is measured in items, the interesting question is what an item is, and the answer, that the rememberer decides, is what the example demonstrates." },
+      { "label": "A", "why_here": "The demonstration. It repeats the phrase 'what counts as one item', which shows it is illustrating the sentence before it and not the sentence about the limit." },
+      { "label": "C", "why_here": "The lesson, and the close. 'Therefore' marks it as drawn from the example, and the bigger pieces it mentions are the groups the example produced." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDCA",
+        "trap_type": "competing_ending",
+        "why_tempting": "A concrete example is a pleasant place to finish, and the sentence about experts and bigger pieces reads like a general remark that could sit anywhere. Solvers often put the abstract sentence in the middle and the picture at the end.",
+        "where_it_breaks": "The sentence about experts starts its conclusion with 'therefore' and ends on 'bigger pieces'. The pieces are the three groups the telephone number was broken into, so the example has to come first, and a 'therefore' cannot draw a conclusion from a sentence that has not yet argued anything."
+      },
+      {
+        "order": "BADC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The first sentence talks about a limit and the example also talks about the limit, so the two look like a natural pair, with the remark about who decides an item arriving afterwards as commentary.",
+        "where_it_breaks": "The example explains itself with the phrase 'what counts as one item'. That phrase is the whole content of the sentence being skipped, so the illustration would be using an idea the paragraph has not yet introduced. An example follows the claim whose words it borrows."
+      }
+    ],
+    "trap_named": "No heavy trap is set here. The habit being drilled is the one that defeats most easy jumbles: an example belongs after the sentence whose words it reuses, not after the sentence whose topic it shares. Topic is common to everything in a paragraph; borrowed wording is specific, and specific evidence is what fixes an order.",
+    "solving_habit": "When you find an example, look for the phrase it quietly repeats. The sentence containing that phrase is the one it illustrates, and it comes immediately before."
+  },
+  "mentor": {
+    "challenge": "Every sentence here is about the same limit. Find the one whose exact words the example borrows.",
+    "paragraph_plain": "Working memory holds very little at a time, and the limit is measured in items rather than in letters or seconds. What counts as one item, though, is decided by the person doing the remembering and not by the material itself. A telephone number read out as eleven separate digits defeats most people, while the same number in three short groups does not, because the grouping has changed what counts as one item and three is comfortably inside the limit. So getting better at remembering is rarely about making the store bigger. It is about packing it, and every expert who appears to hold more is really holding larger pieces.",
+    "takeaway": "An example follows the sentence whose words it borrows, not the sentence whose topic it shares."
+  }
+}
