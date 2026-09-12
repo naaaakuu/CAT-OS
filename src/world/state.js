@@ -11,7 +11,7 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-import { listLGItems, loadLGItems, listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems } from '../core/content-loader/loader.js';
+import { listLGItems, listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems } from '../core/content-loader/loader.js';
 import { computePlantState } from '../core/engine/garden-session.js';
 import { GROVES } from '../modules/language-garden/logic/groves.js';
 import { deriveEngagement } from '../core/engagement/stats.js';
@@ -32,8 +32,19 @@ import { hourWord, seasonWord, weatherWord } from './engine/palette.js';
 
 let contentCache = null;
 
-/** Every registry the world needs, loaded once per app life (content is
- *  static; the service worker keeps it offline). */
+/**
+ * Every registry the world needs, loaded once per app life (content is
+ * static; the service worker keeps it offline).
+ *
+ * This is the whole of what stands between tapping the app and seeing the
+ * valley, so it loads INDEX ROWS and nothing else. It used to open all
+ * fifty-one root-family files — every member, every exercise, every
+ * mentor note — to draw fifty-one trees and label them, which cost about
+ * 1.7 seconds before a single pixel of the map could be painted. The
+ * three fields it actually wanted (the root's label, language and
+ * meaning) now live in the index; see tools/index-derived.mjs. The full
+ * families are still loaded, by the Rootwood, when a walk begins.
+ */
 export async function loadWorldContent() {
   if (contentCache) return contentCache;
   const safe = (p) => p.catch(() => []);
@@ -41,11 +52,13 @@ export async function loadWorldContent() {
     safe(listLGItems()), safe(listRCItems()), safe(listPJItems()), safe(listPSItems()), safe(listOOOItems()), safe(listWDItems()),
     safe(listFields('meadow')), safe(listFields('pond')), safe(listFields('thicket')),
   ]);
-  let families = [];
-  try {
-    const loaded = await loadLGItems(lgRegistry.map((i) => i.id));
-    families = lgRegistry.map((i) => loaded.get(i.id)).filter(Boolean).sort((a, b) => a.meta.id.localeCompare(b.meta.id));
-  } catch { families = []; }
+  const families = [...lgRegistry]
+    .sort((a, b) => String(a.id).localeCompare(String(b.id)))
+    .map((i) => ({
+      meta: { id: i.id, garden: i.garden },
+      root: { label: i.title, origin_language: i.root_origin ?? '', core_meaning: i.root_meaning ?? '' },
+      members: { length: i.member_count ?? 0 },
+    }));
   contentCache = { families, rc, pj, ps, ooo, wd, fields: { meadow: meadowFields, pond: pondFields, thicket: thicketFields } };
   return contentCache;
 }

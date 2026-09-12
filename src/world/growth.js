@@ -50,7 +50,7 @@ export function deriveGrowth(s) {
     wood, meadow, pond, thicket, reading, quarter, terraces, wilds, valley,
     /* ---- The counts the map paints from ---- */
     // The Rootwood is a thin stand of six trees before anything is grown.
-    wildTrees: grown(wood, 7, 155),
+    wildTrees: grown(wood, 16, 158),
     // Trees scattered over the open valley.
     valleyTrees: grown(valley, 3, 30),
     // Brambles in the Thicket's corner.

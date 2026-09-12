@@ -13,7 +13,7 @@
 
 import { noise2, rng, ramp, mix, SKY, SEASON, PIGMENT, LIGHT } from './palette.js';
 import { sprite, Pix } from './sprites.js';
-import { particles, smoke, birds, butterflies, koi, hearthCat, clouds, waterGlints, walker, grazers, ducks } from './life.js';
+import { particles, smoke, birds, butterflies, koi, hearthCat, clouds, waterGlints, walker, grazers, ducks, companion } from './life.js';
 import { WORLD_W, WORLD_H, REGIONS, GROVE_SPOTS, LANTERN_SPOTS, regionAt } from '../regions.js';
 
 /* ------------------------------------------------------------------ */
@@ -95,11 +95,48 @@ const BRIDGE_N = { x: 372, y: 300, w: 22 };
  * canvas once: hundreds of thousands of fillRect calls become one
  * putImageData. Colours are hex strings, parsed once and cached.
  */
+const RASTER_LE = (() => {
+  const b = new ArrayBuffer(4);
+  new Uint32Array(b)[0] = 0x01020304;
+  return new Uint8Array(b)[0] === 0x04;
+})();
+
+/**
+ * The terrain surface: 640 x 720 pixels, painted once per scene.
+ *
+ * Colours are packed to a single 32-bit value and memoised, so a pixel is
+ * one array write rather than a Map lookup and four byte writes. At
+ * nearly half a million pixels that difference is felt on a phone.
+ */
 class Raster {
-  constructor(W, H) { this.W = W; this.H = H; this.img = new ImageData(W, H); this.d = this.img.data; this.cache = new Map(); }
-  rgb(hex) { let v = this.cache.get(hex); if (!v) { const n = parseInt(hex.slice(1), 16); v = [(n >> 16) & 255, (n >> 8) & 255, n & 255]; this.cache.set(hex, v); } return v; }
-  set(x, y, hex) { if (x < 0 || y < 0 || x >= this.W || y >= this.H) return; const i = (y * this.W + x) * 4, c = this.rgb(hex); this.d[i] = c[0]; this.d[i + 1] = c[1]; this.d[i + 2] = c[2]; this.d[i + 3] = 255; }
-  rect(x, y, w, h, hex) { for (let j = 0; j < h; j += 1) for (let i = 0; i < w; i += 1) this.set(x + i, y + j, hex); }
+  constructor(W, H) {
+    this.W = W; this.H = H;
+    this.img = new ImageData(W, H);
+    this.d = this.img.data;
+    this.buf = new Uint32Array(this.img.data.buffer);
+    this.cache = new Map();
+  }
+  pack(hex) {
+    let v = this.cache.get(hex);
+    if (v === undefined) {
+      const n = parseInt(hex.slice(1), 16);
+      const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+      v = (RASTER_LE ? ((255 << 24) | (b << 16) | (g << 8) | r) : ((r << 24) | (g << 16) | (b << 8) | 255)) >>> 0;
+      this.cache.set(hex, v);
+    }
+    return v;
+  }
+  set(x, y, hex) {
+    if (x < 0 || y < 0 || x >= this.W || y >= this.H) return;
+    this.buf[y * this.W + x] = this.pack(hex);
+  }
+  rect(x, y, w, h, hex) {
+    const v = this.pack(hex);
+    let x0 = x | 0, y0 = y | 0, x1 = x0 + (w | 0), y1 = y0 + (h | 0);
+    if (x0 < 0) x0 = 0; if (y0 < 0) y0 = 0;
+    if (x1 > this.W) x1 = this.W; if (y1 > this.H) y1 = this.H;
+    for (let j = y0; j < y1; j += 1) this.buf.fill(v, j * this.W + x0, j * this.W + x1);
+  }
   flush(ctx) { ctx.putImageData(this.img, 0, 0); }
 }
 
@@ -157,6 +194,20 @@ function fillEllipse(m, cx, cy, rx, ry) { m.beginPath(); m.ellipse(cx, cy, Math.
 /** River half-width at a given y: wider as it nears the pond, narrow in the hills. */
 function riverHalfWidth(y) { return y < 250 ? 3 : y < 340 ? 4 : y > 470 ? 5 : 4; }
 
+/**
+ * Scatter sprites share a small pool of variants.
+ *
+ * Every distinct (recipe, params) pair is drawn pixel by pixel and traced
+ * for its outline the first time it is asked for. A wood of a hundred and
+ * fifty trees with a hundred and fifty seeds is a hundred and fifty of
+ * those, and on a phone that is seconds of stall the first time a mature
+ * valley opens. Nobody has ever looked at a forest and noticed that the
+ * eleventh tree is the same shape as the first — so scatter draws from a
+ * pool, and the pool is what gets cached.
+ */
+const VARIANTS = 12;
+function vseed(prefix, i, pool = VARIANTS) { return `${prefix}${i % pool}`; }
+
 /* ------------------------------------------------------------------ */
 /* The terrain                                                         */
 /* ------------------------------------------------------------------ */
@@ -172,6 +223,11 @@ export function paintTerrain(ctx, atmo, state) {
   const ras = new Raster(W, H);
   const px = (x, y, c) => ras.set(x, y, c);
   const rect = (x, y, w, h, c) => ras.rect(x, y, w, h, c);
+  // The loops that cover the whole map pack their colours up front and
+  // write the buffer directly: at nearly half a million pixels, a Map
+  // lookup per pixel is most of the cost of painting a valley.
+  const P = (hex) => ras.pack(hex);
+  const buf = ras.buf;
   const after = []; // sprite draws, made after the raster is flushed
   const n = noise2('valley');
   const n2 = noise2('valley-grain');
@@ -237,11 +293,13 @@ export function paintTerrain(ctx, atmo, state) {
     const rowLight = north > 0 ? mix(grassSoftLight, '#B9D6C3', north * 0.55) : grassSoftLight;
     const rowBase = north > 0 ? mix(grass.base, '#B9D6C3', north * 0.55) : grass.base;
     const rowTip = north > 0 ? mix(grass.light, '#B9D6C3', north * 0.55) : grass.light;
+    const pShade = P(rowShade), pLight = P(rowLight), pBase = P(rowBase), pTip = P(rowTip);
+    const row = y * W;
     for (let x = 0; x < W; x += 1) {
       const g = n2(x / 18, y / 18) * 0.7 + n2(x / 60, y / 60) * 0.3;
-      let c = g < 0.4 ? rowShade : g > 0.66 ? rowLight : rowBase;
-      if (((x * 7 + y * 13) % 29) === 0 && g > 0.5) c = rowTip; // a sparse leaf-tip sparkle
-      px(x, y, c);
+      let c = g < 0.4 ? pShade : g > 0.66 ? pLight : pBase;
+      if (((x * 7 + y * 13) % 29) === 0 && g > 0.5) c = pTip; // a sparse leaf-tip sparkle
+      buf[row + x] = c;
     }
   }
   // The valley's hill line: a soft pale edge where the ground meets the mountains.
@@ -392,6 +450,55 @@ export function paintTerrain(ctx, atmo, state) {
       px(x, y, sheen);
     }
   }
+  /* ---- The wild. A valley nobody has worked is heather, bracken and
+          bare earth, not mown grass. This pass is strongest at the very
+          beginning and fades as the learner tends the place, so the
+          barren opening has something to look at and "tended" is a
+          visible state rather than a number. ---- */
+  {
+    const wildness = 1 - Math.min(1, state?.growth?.valley ?? 0);
+    if (wildness > 0.02) {
+      const wr = rng('wild-ground');
+      const heather = mix(seasonPal.grass, '#8E6E9B', 0.42);
+      const heather2 = mix(seasonPal.grass, '#6F5480', 0.5);
+      const bracken = mix(seasonPal.grass, '#A8873F', 0.5);
+      const earth = mix(PIGMENT.path, '#6B5638', 0.35);
+      const scree = ramp('#9A9286');
+      const patches = Math.round(54 * wildness);
+      for (let i = 0; i < patches; i += 1) {
+        const cx = 20 + wr() * 600, cy = 210 + wr() * 460;
+        if (inPond(cx, cy, 10) || distToPolyline(cx, cy, RIVER) < 10) continue;
+        if (regionAt(cx, cy)?.slug === 'rootwood') continue;
+        const kind = wr();
+        const rx = 7 + wr() * 16, ry = 4 + wr() * 8;
+        const col = kind > 0.72 ? bracken : kind > 0.34 ? heather : earth;
+        const col2 = kind > 0.72 ? mix(bracken, '#D8B25E', 0.4) : kind > 0.34 ? heather2 : mix(earth, '#8C7350', 0.5);
+        for (let y = -ry; y <= ry; y += 1) for (let x = -rx; x <= rx; x += 1) {
+          const d = (x * x) / (rx * rx) + (y * y) / (ry * ry);
+          if (d > 1) continue;
+          const px2 = Math.round(cx + x), py2 = Math.round(cy + y);
+          if (py2 < 200 || py2 >= H || px2 < 0 || px2 >= W) continue;
+          if (n2(px2 / 7, py2 / 7) < 0.34 + d * 0.5) continue;
+          px(px2, py2, n2(px2 / 3, py2 / 3) > 0.58 ? col2 : col);
+        }
+        // Heather flowers a little, so the wild is not only drab.
+        if (kind > 0.34 && kind <= 0.72) {
+          for (let k = 0; k < 4; k += 1) {
+            px(Math.round(cx + (wr() - 0.5) * rx * 1.4), Math.round(cy + (wr() - 0.5) * ry * 1.4), '#C79BD8');
+          }
+        }
+      }
+      // Scree running down from the mountains, where nothing has been cut.
+      const stones = Math.round(40 * wildness);
+      for (let i = 0; i < stones; i += 1) {
+        const sx = 20 + wr() * 600, sy = 196 + wr() * 70;
+        const w2 = 1 + Math.floor(wr() * 3);
+        rect(Math.round(sx), Math.round(sy), w2, 1, wr() > 0.5 ? scree.base : scree.shade);
+        if (wr() > 0.6) px(Math.round(sx), Math.round(sy) - 1, scree.light);
+      }
+    }
+  }
+
   // Snow settles on the ground in winter: a light dither over the grass.
   if (isWinter) for (let y = HORIZON - 12; y < H; y += 2) for (let x = (y >> 1) & 1; x < W; x += 3) if (n2(x / 11, y / 11) > 0.45 && !inPond(x, y, 0) && distToPolyline(x, y, RIVER) > riverHalfWidth(y)) px(x, y, mix(PIGMENT.snow, grass.light, 0.25));
 
@@ -407,13 +514,13 @@ export function paintTerrain(ctx, atmo, state) {
     // A raft of pads in the north-east corner, where the water is still.
     const a = -0.9 + rr() * 1.5;
     const rad = 0.5 + rr() * 0.34;
-    const s = sprite('lilypad', { seed: `lily${i}`, bloom: i % 3 === 0 && !isWinter });
+    const s = sprite('lilypad', { seed: vseed('lily', i, 6), bloom: i % 3 === 0 && !isWinter });
     ctx.drawImage(s.canvas, Math.round(POND.cx + Math.cos(a) * POND.rx * rad - s.ax), Math.round(POND.cy + Math.sin(a) * POND.ry * rad - s.ay));
   }
   // Reeds all round the shallow shore, thickest away from the beach.
   const reedAngles = [0.25, 0.55, 0.85, 1.15, 1.5, 1.85, 2.2, 4.35, 4.75, 5.1, 5.5, 5.85];
   reedAngles.forEach((a, i) => {
-    const s = sprite('reeds', { seed: `reeds${i}` });
+    const s = sprite('reeds', { seed: vseed('reeds', i, 6) });
     const r = pondR(a) * (1.0 + (i % 2) * 0.03);
     ctx.drawImage(s.canvas,
       Math.round(POND.cx + Math.cos(a) * POND.rx * r - s.ax),
@@ -429,7 +536,7 @@ export function paintTerrain(ctx, atmo, state) {
   if (state?.growth?.bridges === false) {
     for (const b of [BRIDGE, BRIDGE_N]) {
       for (let i = 0; i < 4; i += 1) {
-        const st = sprite('rock', { seed: `ford${b.x}${i}`, size: 1 });
+        const st = sprite('rock', { seed: vseed('ford', i, 4), size: 1 });
         ctx.drawImage(st.canvas, Math.round(b.x - 10 + i * 7 - st.ax), Math.round(b.y + ((i % 2) ? 2 : -2) - st.ay));
       }
     }
@@ -445,7 +552,7 @@ export function paintTerrain(ctx, atmo, state) {
   for (let i = 0; i < meadowPatches; i += 1) {
     const x = 30 + r() * 236, y = 352 + r() * 112;
     if (distToPolyline(x, y, PATHS[2]) < 6 || distToPolyline(x, y, PATHS[3]) < 6) continue;
-    const s = sprite('flowerPatch', { seed: `mp${i}`, n: isWinter ? 2 : 5 + Math.floor(r() * 4), colors: [i % 7, (i + 2) % 7, (i + 4) % 7], w: 14, h: 9 });
+    const s = sprite('flowerPatch', { seed: vseed('mp', i, 8), n: isWinter ? 2 : 5 + (i % 4), colors: [i % 7, (i + 2) % 7, (i + 4) % 7], w: 14, h: 9 });
     ctx.globalAlpha = isWinter ? 0.5 : 1;
     ctx.drawImage(s.canvas, Math.round(x - s.ax), Math.round(y - s.ay));
     ctx.globalAlpha = 1;
@@ -456,7 +563,7 @@ export function paintTerrain(ctx, atmo, state) {
     if (i >= tufts) continue;
     if (inPond(x, y, 6) || distToPolyline(x, y, RIVER) < 8) continue;
     if (regionAt(x, y)?.slug === 'rootwood' || regionAt(x, y)?.slug === 'thicket') continue;
-    const s = sprite('grassTuft', { seed: `t${i}`, season });
+    const s = sprite('grassTuft', { seed: vseed('t', i, 8), season });
     ctx.drawImage(s.canvas, Math.round(x - s.ax), Math.round(y - s.ay));
   }
   const rocks = state?.growth?.rocks ?? 14;
@@ -464,12 +571,14 @@ export function paintTerrain(ctx, atmo, state) {
     const x = 20 + r() * 600, y = 210 + r() * 480;
     if (i >= rocks) continue;
     if (inPond(x, y, 10) || distToPolyline(x, y, RIVER) < 10) continue;
-    const s = sprite('rock', { seed: `rock${i}`, size: r() > 0.7 ? 2 : 1 });
+    const s = sprite('rock', { seed: vseed('rock', i, 6), size: r() > 0.7 ? 2 : 1 });
     ctx.drawImage(s.canvas, Math.round(x - s.ax), Math.round(y - s.ay));
   }
 }
 
 function fillRegionGround(ras, x0, y0, w, h, colorAt, n2, seed) {
+  // colorAt returns one of a small set of tones; pack what it returns
+  // once per distinct string rather than once per pixel.
   // An organic edge: the region's ground fades into the valley with noise.
   for (let y = y0; y < y0 + h; y += 1) for (let x = x0; x < x0 + w; x += 1) {
     const ex = Math.min(x - x0, x0 + w - x) / w, ey = Math.min(y - y0, y0 + h - y) / h;
@@ -581,18 +690,30 @@ export function buildWorldScene(state, atmo, opts = {}) {
     // stage ladder is walked by how much of the Rootwood has been learned.
     const LADDER = ['sprout', 'young', 'in_leaf', 'mature'];
     const t = wr();
-    const reach = 0.5 + G.wood * 3.2;                     // 0.5 → 3.7
-    const stage = LADDER[Math.max(0, Math.min(3, Math.round(t * reach)))];
-    statics.push({ x, y, sprite: sprite('tree', { stage, seed: `wild${i}`, season, kind: pine ? 'pine' : 'broad' }) });
+    // Even an abandoned wood keeps a few full trees; the rest of it comes
+    // up around them. Without them a young wood is a field of dots.
+    const veteran = i % 9 === 0;
+    const reach = 0.6 + G.wood * 3.1;
+    const stage = veteran ? (G.wood > 0.4 ? 'mature' : 'in_leaf')
+      : LADDER[Math.max(0, Math.min(3, Math.round(t * reach)))];
+    statics.push({ x, y, sprite: sprite('tree', { stage, seed: vseed('wild', i), season, kind: pine ? 'pine' : 'broad' }) });
   }
   // Scrub on the wood floor, so young ground is not bare moss. It thins as
   // the trees close over it.
   {
     const br = rng('wood-scrub');
-    const scrub = Math.round(26 - G.wood * 12);
+    // Scrub thins as the canopy closes. Mostly tufts, not bushes: a floor
+    // of round bushes at map scale reads as lumps of moss.
+    const scrub = Math.round(18 - G.wood * 9);
     for (let i = 0; i < scrub; i += 1) {
       const x = 30 + br() * 280, y = 158 + br() * 172;
-      statics.push({ x, y, sprite: sprite(br() > 0.45 ? 'bush' : 'grassTuft', { seed: `ws${i}`, season }) });
+      statics.push({ x, y, sprite: sprite(br() > 0.74 ? 'bush' : 'grassTuft', { seed: vseed('ws', i, 8), season }) });
+    }
+    // Standing deadwood and old stumps: what is left of the wood that was
+    // here before it went quiet. They go as the new wood grows over them.
+    const snags = Math.round(7 - G.wood * 6);
+    for (let i = 0; i < snags; i += 1) {
+      statics.push({ x: 34 + br() * 272, y: 162 + br() * 166, sprite: sprite('stump', { seed: vseed('sn', i, 5) }) });
     }
   }
   // A few trees scattered over the whole valley, so no field is empty.
@@ -601,7 +722,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
     const x = 20 + vr() * 600, y = 210 + vr() * 440;
     if (regionAt(x, y) && regionAt(x, y).slug !== 'meadow') continue;
     if (Math.hypot(x - POND.cx, y - POND.cy) < 80 || Math.abs(x - 350) < 24) continue;
-    statics.push({ x, y, sprite: sprite('tree', { stage: vr() > 0.5 ? 'in_leaf' : 'young', seed: `vt${i}`, season, kind: vr() > 0.5 ? 'pine' : 'broad' }) });
+    statics.push({ x, y, sprite: sprite('tree', { stage: vr() > 0.5 ? 'in_leaf' : 'young', seed: vseed('vt', i, 8), season, kind: vr() > 0.5 ? 'pine' : 'broad' }) });
   }
   // Fireflies in the wood at night, more with every Ancient.
   if (night && !isWinter) {
@@ -619,8 +740,27 @@ export function buildWorldScene(state, atmo, opts = {}) {
   if (night) lamps.push({ x: hearth.anchor.x - 8, y: hearth.anchor.y - 10, r: 22, a: 0.5, color: PIGMENT.windowLight });
   if (state.hearth.level >= 4 && night) lamps.push({ x: hearth.anchor.x + 19, y: hearth.anchor.y - 14, r: 16, a: 0.5, color: PIGMENT.lantern });
   if (state.hearth.practicedToday) life.push(smoke({ x: hearth.anchor.x + 11, y: hearth.anchor.y - 34 }));
-  const catSys = hearthCat({ x: hearth.anchor.x + 14, y: hearth.anchor.y + 4 });
-  life.push(catSys);
+
+  /* ---- Wick. He is the only person who lives here, so he has to be
+          somewhere whenever the learner looks. His circuit runs from the
+          Hearth door out to whatever the valley is asking about today —
+          which means the learner's eye follows him to the right place
+          without a single instruction. ---- */
+  {
+    const asking = REGIONS.find((x) => x.slug === state.asking);
+    const far = asking?.anchor ?? REGIONS.find((x) => x.slug === 'meadow').anchor;
+    const mid = { x: Math.round((hearth.anchor.x + far.x) / 2), y: Math.round((hearth.anchor.y + far.y) / 2) };
+    life.push(companion({
+      route: [
+        [hearth.anchor.x + 16, hearth.anchor.y + 4],
+        [hearth.anchor.x + 34, hearth.anchor.y - 6],
+        [mid.x, mid.y],
+        [far.x - 12, far.y + 10],
+      ],
+      night,
+      seed: `wick:${state.asking ?? 'home'}`,
+    }));
+  }
 
   /* ---- The Reading Room tower ---- */
   const rr = REGIONS.find((x) => x.slug === 'reading-room');
@@ -657,7 +797,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
     for (let i = 0; i < 5; i += 1) {
       const keep = i < Math.round(1 + G.reading * 4);
       if (!keep) continue;
-      statics.push({ x: rr.anchor.x - 50 + Math.round(yr() * 100), y: rr.anchor.y + 30 + Math.round(yr() * 26), sprite: sprite('grassTuft', { seed: `rrg${i}`, season }) });
+      statics.push({ x: rr.anchor.x - 50 + Math.round(yr() * 100), y: rr.anchor.y + 30 + Math.round(yr() * 26), sprite: sprite('grassTuft', { seed: vseed('t', i, 8), season }) });
     }
   }
 
@@ -679,7 +819,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
     const x = 20 + tr() * 120, y = 506 + tr() * 150;
     if (i >= G.brambles) continue;
     if (LANTERN_SPOTS.some((l) => Math.hypot(l.x - x, l.y - y) < 10)) continue;
-    statics.push({ x, y, sprite: sprite('bramble', { seed: `br${i}`, season, lit: i < state.thicket.lanterns }) });
+    statics.push({ x, y, sprite: sprite('bramble', { seed: vseed('br', i, 8), season, lit: i < state.thicket.lanterns }) });
   }
   LANTERN_SPOTS.forEach((l, i) => {
     const lit = i < state.thicket.lanterns;
@@ -705,7 +845,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
 
   /* ---- The Terraces: vines and a small hut at the top ---- */
   if (G.terraceHut) statics.push({ x: 530, y: 190, sprite: sprite('workshop', { kind: 'loom', level: 0, lit: night }), region: 'terraces', z: -2 });
-  for (let i = 0; i < Math.round(G.terraces * 6.4); i += 1) statics.push({ x: 450 + i * 30, y: 300 + (i % 2) * 6, sprite: sprite('bush', { seed: `tb${i}`, season, berries: i % 2 === 0 && state.terraces.level > 0 }) });
+  for (let i = 0; i < Math.round(G.terraces * 6.4); i += 1) statics.push({ x: 450 + i * 30, y: 300 + (i % 2) * 6, sprite: sprite('bush', { seed: vseed('tb', i, 5), season, berries: i % 2 === 0 && state.terraces.level > 0 }) });
 
   /* ---- The hamlet. Nobody builds a house in an empty valley; they
           build one when there is a reason to stay. Each is a real
@@ -717,12 +857,18 @@ export function buildWorldScene(state, atmo, opts = {}) {
       { x: 300, y: 560, level: 2 },
       { x: 128, y: 560, level: 2 },
       { x: 240, y: 660, level: 1 },
+      { x: 188, y: 676, level: 2 },
+      { x: 290, y: 684, level: 1 },
+      { x: 112, y: 604, level: 2 },
+      { x: 316, y: 626, level: 2 },
+      { x: 148, y: 664, level: 1 },
     ];
-    for (let i = 0; i < Math.min(G.houses, SPOTS.length); i += 1) {
+    const houses = Math.min(SPOTS.length, (G.houses ?? 0) + (state.built?.extraHouses ?? 0));
+    for (let i = 0; i < houses; i += 1) {
       const h = SPOTS[i];
       statics.push({ x: h.x, y: h.y, sprite: sprite('house', { level: h.level, lit: night, seed: `hh${i}` }), region: 'hearth' });
       if (night) lamps.push({ x: h.x, y: h.y - 8, r: 16, a: 0.36, color: PIGMENT.windowLight });
-      statics.push({ x: h.x + 16, y: h.y + 3, sprite: sprite('bush', { seed: `hhb${i}`, season }) });
+      statics.push({ x: h.x + 16, y: h.y + 3, sprite: sprite('bush', { seed: vseed('tb', i, 5), season }) });
     }
   }
 
@@ -731,11 +877,37 @@ export function buildWorldScene(state, atmo, opts = {}) {
   statics.push({ x: 300, y: 690, sprite: sprite('tree', { stage: 'in_leaf', seed: 'w-tree', season, kind: 'pine' }) });
   statics.push({ x: 396, y: 700, sprite: sprite('rock', { seed: 'w-rock', size: 2 }) });
 
+  /* ---- Beyond: the works that never run out. Each waymark posts the
+          road further out of the valley; each planting puts a stand of
+          trees along the wood's edge. There is no last one. ---- */
+  {
+    const marks = state.built?.waymarks ?? 0;
+    for (let i = 0; i < marks; i += 1) {
+      const y = 672 + i * 9;
+      const x = 352 + (i % 2 ? 14 : -14);
+      statics.push({ x, y, sprite: sprite('signpost', { arrows: 1 + (i % 2) }), region: 'wilds' });
+      statics.push({ x: x + (i % 2 ? -22 : 22), y: y + 3, sprite: sprite('lantern', { lit: true }), region: 'wilds' });
+      lamps.push({ x: x + (i % 2 ? -22 : 22), y: y - 7, r: night ? 15 : 8, a: night ? 0.55 : 0.16, color: PIGMENT.lantern });
+    }
+    const plantings = state.built?.plantings ?? 0;
+    if (plantings > 0) {
+      const pr = rng('plantings');
+      for (let i = 0; i < plantings * 14; i += 1) {
+        // Rows along the wood's southern edge, marching east as the
+        // plantings go on: an orchard, not a scatter.
+        const row = Math.floor(i / 7);
+        const x = 34 + (i % 7) * 21 + row * 6 + Math.round(pr() * 3);
+        const y = 336 + row * 11 + Math.round(pr() * 3);
+        statics.push({ x, y, sprite: sprite('tree', { stage: i % 4 === 0 ? 'in_leaf' : 'young', seed: vseed('plant', i, 8), season }) });
+      }
+    }
+  }
+
   /* ---- The works: everything Amber, Ink, Thread and Ember have built.
           This is the whole point of the economy — the valley is visibly
           the sum of what the learner has understood. ---- */
   const built = state.built ?? {};
-  if (built.meadowHives) for (let i = 0; i < 3; i += 1) statics.push({ x: 62 + i * 22, y: 388 + (i % 2) * 8, sprite: sprite('hive', { seed: `mh${i}` }), region: 'meadow' });
+  if (built.meadowHives) for (let i = 0; i < 3; i += 1) statics.push({ x: 62 + i * 22, y: 388 + (i % 2) * 8, sprite: sprite('hive', { seed: vseed('mh', i, 3) }), region: 'meadow' });
   if (built.pondLanterns) {
     for (let i = 0; i < 6; i += 1) {
       const a = (i / 6) * Math.PI * 2;
@@ -1030,9 +1202,8 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
       for (let i = 0; i < 26; i += 1) pxl.blob(Math.floor(cr() * W), 1 + Math.floor(cr() * 18 * cy), 4 + Math.floor(cr() * 5), 3 + Math.floor(cr() * 3), c.light, cr, 0.35);
       pxl.outline(ramp(c.dark).dark);
       // Gaps: erase a few small holes so daylight shows between the leaves.
-      pxl.ctx.globalCompositeOperation = 'destination-out';
-      for (let i = 0; i < 9; i += 1) pxl.blob(Math.floor(cr() * W), 3 + Math.floor(cr() * 22 * cy), 3 + Math.floor(cr() * 4), 2 + Math.floor(cr() * 3), '#000', cr, 0.4);
-      pxl.ctx.globalCompositeOperation = 'source-over';
+      for (let i = 0; i < 9; i += 1) pxl.punch(Math.floor(cr() * W), 3 + Math.floor(cr() * 22 * cy), 3 + Math.floor(cr() * 4), 2 + Math.floor(cr() * 3), cr, 0.4);
+      pxl.flush();
       ctx.drawImage(pxl.canvas, 0, 0);
       // Two great trunks frame the grove.
       const trunk = ramp(PIGMENT.trunk);
@@ -1054,7 +1225,7 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
       if (portrait) {
         const br = rng(`backwood:${grove.slug}`);
         for (let i = 0; i < 18; i += 1) {
-          const bs = sprite('tree', { stage: br() > 0.5 ? 'mature' : 'in_leaf', seed: `bw${grove.slug}${i}`, season, kind: br() > 0.6 ? 'pine' : 'broad' });
+          const bs = sprite('tree', { stage: br() > 0.5 ? 'mature' : 'in_leaf', seed: vseed('bw', i), season, kind: br() > 0.6 ? 'pine' : 'broad' });
           ctx.drawImage(bs.canvas, Math.round(br() * (W + 40) - 20 - bs.ax), Math.round(76 + br() * 26 - bs.ay));
         }
         // A soft shadow under them, to seat the wall on the floor.
@@ -1065,8 +1236,8 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
       }
       const tr = rng(`tufts:${grove.slug}`);
       const floorTop = portrait ? 72 : 70;
-      for (let i = 0; i < (portrait ? 44 : 30); i += 1) { const s = sprite('grassTuft', { seed: `gt${i}`, season }); ctx.drawImage(s.canvas, Math.floor(tr() * W), floorTop + Math.floor(tr() * (H - floorTop - 6))); }
-      for (let i = 0; i < (portrait ? 12 : 6); i += 1) { const s = sprite('flowerPatch', { seed: `gf${i}`, n: 3, colors: [2, 3, 6], w: 10, h: 7 }); ctx.drawImage(s.canvas, Math.floor(tr() * W), floorTop + 20 + Math.floor(tr() * (H - floorTop - 30))); }
+      for (let i = 0; i < (portrait ? 44 : 30); i += 1) { const s = sprite('grassTuft', { seed: vseed('t', i, 8), season }); ctx.drawImage(s.canvas, Math.floor(tr() * W), floorTop + Math.floor(tr() * (H - floorTop - 6))); }
+      for (let i = 0; i < (portrait ? 12 : 6); i += 1) { const s = sprite('flowerPatch', { seed: vseed('gf', i, 6), n: 3, colors: [2, 3, 6], w: 10, h: 7 }); ctx.drawImage(s.canvas, Math.floor(tr() * W), floorTop + 20 + Math.floor(tr() * (H - floorTop - 30))); }
     },
     update(dt) { ff?.update(dt); bf?.update(dt); },
     objects(view, t) {
@@ -1130,7 +1301,7 @@ export function buildFieldScene(field, atmo) {
         else { ctx.fillStyle = mix(grass.light, PIGMENT.sand, 0.5); ctx.fillRect(Math.round(cx), Math.round(cy), 1, 1); }
       });
       const tr = rng(`ftufts:${field.id}`);
-      for (let i = 0; i < 16; i += 1) { const s = sprite('grassTuft', { seed: `ft${i}`, season }); ctx.drawImage(s.canvas, Math.floor(tr() * W), 44 + Math.floor(tr() * 90)); }
+      for (let i = 0; i < 16; i += 1) { const s = sprite('grassTuft', { seed: vseed('t', i, 8), season }); ctx.drawImage(s.canvas, Math.floor(tr() * W), 44 + Math.floor(tr() * 90)); }
       const tree = sprite('tree', { stage: 'in_leaf', seed: `ftree-${field.id}`, season });
       ctx.drawImage(tree.canvas, 4, 46 - tree.h + 4);
     },
@@ -1168,7 +1339,7 @@ export function buildPondScene(pond, atmo) {
       for (let y = C.cy - C.ry + 2; y < C.cy; y += 2) for (let x = (y & 2) ? 1 : 0; x < W; x += 4) { const d = ((x - C.cx) ** 2) / (C.rx ** 2) + ((y - C.cy) ** 2) / (C.ry ** 2); if (d < 0.9) { ctx.fillStyle = mix(body.base, sky[2], 0.35); ctx.fillRect(x, y, 2, 1); } }
       const lr = rng('pond-lilies-2');
       const lilies = Math.min(14, 3 + Math.floor(pond.mastered / 12));
-      for (let i = 0; i < lilies; i += 1) { const a = lr() * Math.PI * 2, rad = 0.5 + lr() * 0.45; const s = sprite('lilypad', { seed: `pl${i}`, bloom: i % 3 === 0 && season !== 'winter' }); ctx.drawImage(s.canvas, Math.round(C.cx + Math.cos(a) * C.rx * rad - s.ax), Math.round(C.cy + Math.sin(a) * C.ry * rad - s.ay)); }
+      for (let i = 0; i < lilies; i += 1) { const a = lr() * Math.PI * 2, rad = 0.5 + lr() * 0.45; const s = sprite('lilypad', { seed: vseed('lily', i, 6), bloom: i % 3 === 0 && season !== 'winter' }); ctx.drawImage(s.canvas, Math.round(C.cx + Math.cos(a) * C.rx * rad - s.ax), Math.round(C.cy + Math.sin(a) * C.ry * rad - s.ay)); }
       const reedsS = sprite('reeds', { seed: 'preeds' });
       ctx.drawImage(reedsS.canvas, 24, 60); ctx.drawImage(reedsS.canvas, 284, 104); ctx.drawImage(reedsS.canvas, 140, 130);
       const tree = sprite('tree', { stage: 'mature', seed: 'pond-tree', season });

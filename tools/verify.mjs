@@ -1867,7 +1867,16 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     };
     const survey = economy.surveyWorks(emptyState);
     if (survey.some((w) => w.ready)) bad('world economy: nothing can be built before anything is learned');
-    if (survey.length !== economy.WORKS.length) bad('world economy: the survey must cover every work');
+    // The survey covers the settled arc PLUS the next of each repeatable
+    // work, so the valley can never tell a learner they have finished.
+    if (survey.length !== economy.WORKS.length + economy.ENDLESS_WORKS.length) bad('world economy: the survey must cover every work and the next of each endless one');
+    if (!economy.ENDLESS_WORKS.length) bad('world economy: progression must not be finite');
+    for (const tpl of economy.ENDLESS_WORKS) {
+      const one = economy.endlessInstance(tpl, 1), five = economy.endlessInstance(tpl, 5);
+      if (economy.bagTotal(five.cost) <= economy.bagTotal(one.cost)) bad(`world economy: ${tpl.id} must cost more every time`);
+      if (!economy.endlessById(one.id)) bad(`world economy: ${one.id} must resolve back to a work`);
+      if (one.standing.test(emptyState)) bad(`world economy: ${tpl.id} must ask for learning first`);
+    }
     if (!economy.nextWork(emptyState)) bad('world economy: a new valley must still be told what it is working towards');
     if (economy.titleFor(1) === economy.titleFor(20)) bad('world economy: titles must grow with level');
     if (problems.length === b0) ok(`stars follow accuracy then pace, four crafts from four abilities, ${economy.WORKS.length} works that need learning before crafts`);

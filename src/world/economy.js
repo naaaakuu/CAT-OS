@@ -428,14 +428,127 @@ export const WORKS = Object.freeze([
   },
 ]);
 
+
+/* ------------------------------------------------------------------ */
+/* Beyond: the works that never run out                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * CAT preparation does not finish, so neither does the valley.
+ *
+ * The twenty-one works above are finite on purpose: they are the arc of
+ * a place being settled. These are not. Each one can be built again and
+ * again; every build costs more and asks more of the learner's record,
+ * and the valley answers by growing in a direction that has no end —
+ * more neighbours, and more road.
+ *
+ * A repeatable work is a template. `instance(n)` returns the n-th build
+ * as an ordinary work, so everything downstream — the Workshop, the
+ * purse, the build veil, the map — treats it exactly like the others.
+ */
+
+const ORDINALS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
+function ordinal(n) { return ORDINALS[n - 1] ?? `${n}th`; }
+
+/** The places the road out goes, in order. Adding a name adds a work. */
+export const WAYMARKS = Object.freeze([
+  { name: 'the Ridge', line: 'The first rise out of the valley. From the top you can see the tower.' },
+  { name: 'Copperbeck', line: 'A mill town on fast water, two days south.' },
+  { name: 'the Long Water', line: 'A lake so still the mountains are in it twice.' },
+  { name: 'Anselm’s Bridge', line: 'Five arches, and nobody remembers who Anselm was.' },
+  { name: 'the Winter Road', line: 'It is only open half the year, and it goes somewhere worth it.' },
+  { name: 'Haldenmoor', line: 'Heather to the horizon, and one lit window.' },
+  { name: 'the Old Library', line: 'Further than anyone in the valley has been.' },
+]);
+
+export const ENDLESS_WORKS = Object.freeze([
+  {
+    id: 'hamlet-house', region: 'hearth', stage: 4, kind: 'endless',
+    art: ['house', { level: 2, lit: true, seed: 'work' }],
+    name: (n) => (n === 1 ? 'A house for a neighbour' : `A ${ordinal(n)} neighbour`),
+    line: (n) => (n === 1
+      ? 'Someone has asked to settle here. A roof, two windows and a chimney.'
+      : `Word has got round. A ${ordinal(n)} family would like to live in your valley.`),
+    after: (n) => `${n === 1 ? 'A neighbour' : `A ${ordinal(n)} family`} has moved into the hamlet.`,
+    cost: (n) => ({ amber: 160 + (n - 1) * 90, ink: 80 + (n - 1) * 45, thread: 80 + (n - 1) * 45, ember: 2 + n }),
+    standing: (n) => ({
+      line: `Earn ${30 + (n - 1) * 22} stars.`,
+      test: (s) => s.stars >= 30 + (n - 1) * 22,
+    }),
+    effect: (n) => ({ extraHouses: n }),
+  },
+  {
+    id: 'waymark', region: 'wilds', stage: 4, kind: 'endless',
+    art: ['signpost', { arrows: 2 }],
+    name: (n) => `The road to ${WAYMARKS[(n - 1) % WAYMARKS.length].name}`,
+    line: (n) => `${WAYMARKS[(n - 1) % WAYMARKS.length].line} Post the road and a waymark, and the valley stops being the whole of the world.`,
+    after: (n) => `The road out runs as far as ${WAYMARKS[(n - 1) % WAYMARKS.length].name}.`,
+    cost: (n) => ({ amber: 120 + (n - 1) * 80, ink: 120 + (n - 1) * 80, thread: 120 + (n - 1) * 80, ember: 3 + n * 2 }),
+    standing: (n) => ({
+      line: `Read ${6 + (n - 1) * 5} passages at three stars.`,
+      test: (s) => s.reading.threeStar >= 6 + (n - 1) * 5,
+    }),
+    effect: (n) => ({ waymarks: n }),
+  },
+  {
+    id: 'planting', region: 'rootwood', stage: 4, kind: 'endless',
+    art: ['tree', { stage: 'mature', seed: 'work-plant', season: 'summer' }],
+    name: (n) => (n === 1 ? 'A planting' : `A ${ordinal(n)} planting`),
+    line: () => 'A stand of young trees along the wood’s edge, set out in rows and left to it.',
+    after: (n) => `${n === 1 ? 'A new stand' : `A ${ordinal(n)} stand`} of trees is growing at the wood's edge.`,
+    cost: (n) => ({ amber: 220 + (n - 1) * 120, ink: 40, thread: 40, ember: 1 + n }),
+    standing: (n) => ({
+      line: `Hold ${120 + (n - 1) * 90} words for good.`,
+      test: (s) => s.meadow.mastered + s.pond.mastered + s.thicket.mastered >= 120 + (n - 1) * 90,
+    }),
+    effect: (n) => ({ plantings: n }),
+  },
+]);
+
+const ENDLESS_BY_ID = new Map(ENDLESS_WORKS.map((w) => [w.id, w]));
+
+/** How many of a repeatable work are already standing. */
+export function endlessCount(builtIds, id) {
+  const p = `endless:${id}:`;
+  let n = 0;
+  for (const b of builtIds) if (String(b).startsWith(p)) n += 1;
+  return n;
+}
+
+/** The n-th build of a repeatable work, as an ordinary work. */
+export function endlessInstance(tpl, n) {
+  const standing = tpl.standing(n);
+  return {
+    id: `endless:${tpl.id}:${n}`,
+    region: tpl.region, stage: tpl.stage, kind: 'endless', template: tpl.id, nth: n,
+    art: tpl.art,
+    name: tpl.name(n),
+    line: tpl.line(n),
+    after: tpl.after(n),
+    cost: tpl.cost(n),
+    standing,
+    effect: tpl.effect(n),
+    requires: [],
+  };
+}
+
+/** Resolve an id that may be a repeatable build. */
+export function endlessById(id) {
+  const m = /^endless:([a-z-]+):(\d+)$/.exec(String(id ?? ''));
+  if (!m) return null;
+  const tpl = ENDLESS_BY_ID.get(m[1]);
+  return tpl ? endlessInstance(tpl, Number(m[2])) : null;
+}
+
 export const WORK_STAGES = Object.freeze([
   { n: 1, name: 'Settling', line: 'The first marks you leave on the valley.' },
   { n: 2, name: 'Building', line: 'Paths, floors and lanterns. The valley starts to hold together.' },
   { n: 3, name: 'Flourishing', line: 'The works that need every craft at once.' },
+  { n: 4, name: 'Beyond', line: 'These never run out. Every one costs more and asks more than the last.' },
 ]);
 
 const WORK_BY_ID = new Map(WORKS.map((w) => [w.id, w]));
-export function workById(id) { return WORK_BY_ID.get(id) ?? null; }
+export function workById(id) { return WORK_BY_ID.get(id) ?? endlessById(id); }
 
 /**
  * Every work, annotated against the learner's world:
@@ -449,7 +562,16 @@ export function workById(id) { return WORK_BY_ID.get(id) ?? null; }
 export function surveyWorks(state) {
   const built = new Set(state.builds ?? []);
   const purse = state.purse ?? emptyBag();
-  return WORKS.map((w) => {
+  // The finite arc, and then the next one of each thing the valley can
+  // always take more of. Only the NEXT instance is ever offered, so
+  // "Beyond" is three cards, not an infinite scroll.
+  const all = [...WORKS];
+  for (const tpl of ENDLESS_WORKS) {
+    const n = endlessCount(state.builds ?? [], tpl.id);
+    for (let i = 1; i <= n; i += 1) all.push(endlessInstance(tpl, i));
+    all.push(endlessInstance(tpl, n + 1));
+  }
+  return all.map((w) => {
     const reqs = w.requires ?? [];
     const blocked = reqs.filter((r) => !built.has(r));
     const isBuilt = built.has(w.id);
@@ -471,7 +593,10 @@ export function surveyWorks(state) {
 /** The one work the valley should be pointing at: buildable now, else the
  *  nearest thing worth working towards. */
 export function nextWork(state) {
-  const all = surveyWorks(state).filter((w) => !w.built && w.blockedBy.length === 0);
+  // "Beyond" is never what the valley points at while a settled work is
+  // still open: an endless work is somewhere to put a surplus, not the
+  // next thing a learner should aim at.
+  const all = surveyWorks(state).filter((w) => !w.built && w.blockedBy.length === 0 && w.kind !== 'endless');
   const ready = all.filter((w) => w.ready);
   if (ready.length) return ready.sort((a, b) => a.stage - b.stage || bagTotal(a.cost) - bagTotal(b.cost))[0];
   const standing = all.filter((w) => w.hasStanding);

@@ -98,7 +98,7 @@ export async function renderHearth(outlet, { storage }) {
     if (ready) return `${ready === 1 ? 'One work is' : `${ready} works are`} ready to build. This is where the valley changes.`;
     const next = state.nextWork;
     if (next) return `Next: <b>${escapeHTML(next.name)}</b>. ${next.hasStanding ? 'You have the standing — it needs crafts.' : escapeHTML(next.standing.line)}`;
-    return 'Every work in the valley is standing. The rest is reading.';
+    return 'Every work the valley was settled with is standing. What is <b>Beyond</b> never runs out.';
   };
   lineEl.innerHTML = headline();
 
@@ -120,7 +120,7 @@ export async function renderHearth(outlet, { storage }) {
         if (!open.length && !done.length) return '';
         return `
         <section class="stage">
-          <h2 class="stage__name">${escapeHTML(st.name)} <span>${done.length}/${st.works.length}</span></h2>
+          <h2 class="stage__name">${escapeHTML(st.name)} <span>${st.n === 4 ? `${done.length} built` : `${done.length}/${st.works.length}`}</span></h2>
           <p class="stage__line">${escapeHTML(st.line)}</p>
           <div class="shelf">${[...open, ...done].map(workCard).join('')}</div>
         </section>`;

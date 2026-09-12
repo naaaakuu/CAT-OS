@@ -55,6 +55,9 @@ export class WorldRenderer {
     this.tctx.imageSmoothingEnabled = false;
     this.terrainDirty = true;
     this.sctx = screen.getContext('2d', { alpha: false });
+    // A handle on the canvas, so a screenshot harness (and a curious
+    // developer in the console) can ask the camera what it is doing.
+    screen.__renderer = this;
     this.cam = { x: this.worldW / 2, y: this.worldH / 2, zoom: 1, vx: 0, vy: 0 };
     this.cssW = 0; this.cssH = 0;
     this.time = 0;
@@ -113,7 +116,22 @@ export class WorldRenderer {
   /** Snap a zoom to whole device pixels per world pixel. */
   snap(z) { const d = z * this.dpr; return clamp((d >= 2 ? Math.round(d) : d) / this.dpr, this.minZoom(), this.maxZoom()); }
 
-  minZoom() { return Math.max(this.minZoomOpt, Math.min(this.cssW / this.worldW, this.cssH / this.worldH) * 0.98); }
+  /**
+   * How far out the camera may go.
+   *
+   * A 'cover' scene is a place you are standing in, so it may never zoom
+   * out past the point where the world stops covering the frame: a map
+   * shrinking into a band of haze with grass above and below it is a
+   * diagram, not a valley, and it is the fastest way to make a game feel
+   * like a web page. 'contain' scenes (the small hero panels) still use
+   * the old floor, where letterboxing is the whole point.
+   */
+  minZoom() {
+    const cover = Math.max(this.cssW / this.worldW, this.cssH / this.worldH);
+    const contain = Math.min(this.cssW / this.worldW, this.cssH / this.worldH);
+    const floor = this.fit === 'cover' ? cover : contain * 0.98;
+    return Math.max(this.minZoomOpt, floor);
+  }
   maxZoom() { return this.maxZoomOpt; }
 
   clampCamera() {

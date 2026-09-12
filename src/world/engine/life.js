@@ -370,3 +370,70 @@ export function ducks({ cx, cy, rx, ry, count = 3, seed = 'ducks' }) {
     get y() { return cy; },
   };
 }
+
+/**
+ * Wick, walking the valley.
+ *
+ * He is not decoration and he is not a tutorial: he is the one character
+ * who lives here, so he has to be somewhere, doing something, whenever
+ * the learner looks. He walks a slow circuit between the Hearth and
+ * wherever the valley is asking for attention, stops, sits, looks around,
+ * and at night carries his lantern lit.
+ *
+ * @param {object} o { route: [[x,y]...], night, seed }
+ */
+export function companion({ route, night = false, seed = 'wick' }) {
+  const r = rng(seed);
+  const speed = 0.0085;                       // world px per ms — an amble
+  let t = 0, leg = 0, p = 0, dir = 1;
+  let rest = 1800 + r() * 2600;               // he starts sitting
+  let blinkAt = 2400;
+  let pos = { x: route[0][0], y: route[0][1] };
+  let facing = 1;
+  const legs = Math.max(1, route.length - 1);
+  return {
+    kind: 'companion',
+    update(dt) {
+      t += dt; blinkAt -= dt;
+      if (blinkAt <= -170) blinkAt = 2800 + r() * 4200;
+      if (rest > 0) { rest -= dt; return; }
+      const from = route[leg], to = route[leg + 1];
+      if (!from || !to) { leg = 0; dir = 1; p = 0; return; }
+      const dist = Math.hypot(to[0] - from[0], to[1] - from[1]) || 1;
+      p += (speed * dt) / dist;
+      if (p >= 1) {
+        p = 0;
+        leg += dir;
+        // He turns round at either end and sits a while when he gets there.
+        if (leg >= legs) { leg = legs - 1; dir = -1; rest = 4000 + r() * 7000; }
+        else if (leg < 0) { leg = 0; dir = 1; rest = 5000 + r() * 9000; }
+        else if (r() > 0.65) rest = 1600 + r() * 3200;
+      }
+      const a = route[leg], b = route[leg + 1];
+      if (a && b) {
+        const q = dir > 0 ? p : 1 - p;
+        pos = { x: a[0] + (b[0] - a[0]) * q, y: a[1] + (b[1] - a[1]) * q };
+        facing = (b[0] - a[0]) * dir >= 0 ? 1 : -1;
+      }
+    },
+    draw(ctx) {
+      const moving = rest <= 0;
+      const s = sprite('wickSmall', {
+        pose: moving ? 'walk' : 'sit',
+        frame: Math.floor(t / 400) % 2,
+        lamp: night, lit: true, blink: blinkAt <= 0,
+      });
+      ctx.save();
+      ctx.translate(Math.round(pos.x), Math.round(pos.y));
+      if (facing < 0) ctx.scale(-1, 1);
+      ctx.drawImage(s.canvas, -s.ax, -s.ay);
+      ctx.restore();
+    },
+    lights() {
+      if (!night) return [];
+      return [{ x: pos.x + facing * 7, y: pos.y - 8, r: 16, a: 0.5, color: PIGMENT.lantern }];
+    },
+    get y() { return pos.y; },
+    get at() { return { x: pos.x, y: pos.y }; },
+  };
+}

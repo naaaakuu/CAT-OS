@@ -7,8 +7,11 @@
  * next answer:
  *
  *   1. THE VERDICT     right or not, and what the answer was.
- *   2. WHY             one sentence on how a strong reader gets there.
- *   3. THE TRAP        why the option THEY chose was built to tempt them.
+ *   2. THE TRAP        why the option THEY chose was built to tempt them.
+ *                      This is first after a wrong answer, because it is
+ *                      the one thing that changes the next one. A reader
+ *                      who has just missed a question will read one box.
+ *   3. WHY             one sentence on how a strong reader gets there.
  *   4. [Show the full working] — the reasoning in full, the evidence
  *      paragraph, every other distractor, and the habit worth keeping.
  *
@@ -80,7 +83,22 @@ class CatExplanation extends HTMLElement {
     const mine = distractors.find((d) => d.option === chosen) ?? null;
     const others = distractors.filter((d) => d.option !== chosen);
     const habit = ex.reading_habit ?? ex.question_type_note ?? '';
-    const why = firstSentence(ex.correct_reasoning);
+    // A wrong answer already has the trap to read; the "why" beside it is
+    // a short second line, not a paragraph. A right answer has no trap, so
+    // the reasoning is the whole of what is worth reading.
+    const why = firstSentence(ex.correct_reasoning, correct ? 200 : 130);
+
+    const WHY_HTML = why.head ? `
+        <div class="block">
+          <div class="label">${correct ? 'Why' : 'Why ' + escapeHTML(q.correct) + ' is right'}</div>
+          <p>${escapeHTML(why.head)}</p>
+        </div>` : '';
+    const TRAP_HTML = mine ? `
+        <div class="block trap">
+          <div class="label">The trap</div>
+          ${mine.trap_type ? `<span class="trap__kind">${escapeHTML(TRAP_NAME[mine.trap_type] ?? String(mine.trap_type).replaceAll('_', ' '))}</span>` : ''}
+          <p>${escapeHTML(mine.why_wrong)}</p>
+        </div>` : '';
 
     this.innerHTML = `
       <style>
@@ -168,18 +186,7 @@ class CatExplanation extends HTMLElement {
             : `You chose ${escapeHTML(chosen)}. The answer is <b>${escapeHTML(q.correct)}</b>.`}</span>
       </div>
 
-      ${why.head ? `
-        <div class="block">
-          <div class="label">Why</div>
-          <p>${escapeHTML(why.head)}</p>
-        </div>` : ''}
-
-      ${mine ? `
-        <div class="block trap">
-          <div class="label">The trap</div>
-          ${mine.trap_type ? `<span class="trap__kind">${escapeHTML(TRAP_NAME[mine.trap_type] ?? String(mine.trap_type).replaceAll('_', ' '))}</span>` : ''}
-          <p>${escapeHTML(mine.why_wrong)}</p>
-        </div>` : ''}
+      ${correct ? '' : TRAP_HTML}${WHY_HTML}${correct ? TRAP_HTML : ''}
 
       <button type="button" class="more" id="more" aria-expanded="false" aria-controls="working">Show the full working</button>
       <div class="working" id="working" hidden>

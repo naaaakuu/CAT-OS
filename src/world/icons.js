@@ -19,7 +19,7 @@ export const PLACE_MARK = Object.freeze({
   meadow: 'flower',
   pond: 'koi',
   thicket: 'lantern',
-  'reading-room': 'tower',
+  'reading-room': 'book',
   terraces: 'vine',
   quarter: 'workshop',
   loom: 'workshop',

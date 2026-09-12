@@ -25,15 +25,98 @@ function makeCanvas(w, h) {
   return c;
 }
 
+/* Colour strings repeat constantly across a valley's worth of sprites,
+   so parsing them is memoised, and the packed value is written straight
+   into the pixel buffer. */
+const LITTLE_ENDIAN = (() => {
+  const b = new ArrayBuffer(4);
+  new Uint32Array(b)[0] = 0x01020304;
+  return new Uint8Array(b)[0] === 0x04;
+})();
+const packCache = new Map();
+function pack(colour) {
+  if (colour === null || colour === undefined) return 0;      // erase
+  let v = packCache.get(colour);
+  if (v !== undefined) return v;
+  let r = 0, g = 0, b = 0, a = 255;
+  const c = String(colour);
+  if (c[0] === '#') {
+    const n = parseInt(c.slice(1), 16);
+    if (c.length === 9) { r = (n >>> 24) & 255; g = (n >>> 16) & 255; b = (n >>> 8) & 255; a = n & 255; }
+    else if (c.length === 4) { r = ((n >> 8) & 15) * 17; g = ((n >> 4) & 15) * 17; b = (n & 15) * 17; }
+    else { r = (n >> 16) & 255; g = (n >> 8) & 255; b = n & 255; }
+  } else {
+    const m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+))?/.exec(c);
+    if (m) { r = +m[1] | 0; g = +m[2] | 0; b = +m[3] | 0; a = m[4] === undefined ? 255 : Math.round(+m[4] * 255); }
+  }
+  v = a === 0 ? 0
+    : (LITTLE_ENDIAN ? ((a << 24) | (b << 16) | (g << 8) | r) : ((r << 24) | (g << 16) | (b << 8) | a)) >>> 0;
+  packCache.set(colour, v);
+  return v;
+}
+const ALPHA_OF = LITTLE_ENDIAN ? (v) => (v >>> 24) & 255 : (v) => v & 255;
+
+/**
+ * A tiny pixel surface.
+ *
+ * Pixels are written into a Uint32Array and put on the canvas once, at
+ * the end. Drawing them one fillRect at a time — which is what this did —
+ * costs a canvas call per pixel, and a valley is a few hundred thousand
+ * of them the first time it opens.
+ *
+ * A recipe that genuinely needs the 2D context (compositing, drawImage)
+ * can still take `.ctx`; the buffer is written out first and read back
+ * before the next buffer write, so the two never disagree.
+ */
 export class Pix {
   constructor(w, h) {
     this.w = w; this.h = h;
     this.canvas = makeCanvas(w, h);
-    this.ctx = this.canvas.getContext('2d');
-    this.ctx.imageSmoothingEnabled = false;
+    this._ctx = this.canvas.getContext('2d', { willReadFrequently: true });
+    this._ctx.imageSmoothingEnabled = false;
+    this._img = this._ctx.createImageData(w, h);
+    this._buf = new Uint32Array(this._img.data.buffer);
+    this._dirty = false;   // the buffer holds pixels the canvas has not seen
+    this._stale = false;   // the canvas holds pixels the buffer has not seen
   }
-  px(x, y, c) { this.ctx.fillStyle = c; this.ctx.fillRect(Math.round(x), Math.round(y), 1, 1); }
-  rect(x, y, w, h, c) { this.ctx.fillStyle = c; this.ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); }
+
+  /** The 2D context, for the few recipes that need a real draw call. */
+  get ctx() { this.flush(); this._stale = true; return this._ctx; }
+
+  /** Put the buffer on the canvas. */
+  flush() {
+    if (this._dirty) { this._ctx.putImageData(this._img, 0, 0); this._dirty = false; }
+    return this._ctx;
+  }
+
+  /** Pull the canvas back into the buffer, after a direct draw. */
+  _resync() {
+    if (!this._stale) return;
+    this._stale = false;
+    const img = this._ctx.getImageData(0, 0, this.w, this.h);
+    this._img = img;
+    this._buf = new Uint32Array(img.data.buffer);
+  }
+
+  px(x, y, c) {
+    this._resync();
+    const xi = Math.round(x), yi = Math.round(y);
+    if (xi < 0 || yi < 0 || xi >= this.w || yi >= this.h) return;
+    this._buf[yi * this.w + xi] = pack(c);
+    this._dirty = true;
+  }
+
+  rect(x, y, w, h, c) {
+    this._resync();
+    let x0 = Math.round(x), y0 = Math.round(y);
+    let x1 = x0 + Math.round(w), y1 = y0 + Math.round(h);
+    if (x0 < 0) x0 = 0; if (y0 < 0) y0 = 0;
+    if (x1 > this.w) x1 = this.w; if (y1 > this.h) y1 = this.h;
+    if (x1 <= x0 || y1 <= y0) return;
+    const v = pack(c), W = this.w, buf = this._buf;
+    for (let yy = y0; yy < y1; yy += 1) buf.fill(v, yy * W + x0, yy * W + x1);
+    this._dirty = true;
+  }
   hline(x0, x1, y, c) { this.rect(Math.min(x0, x1), y, Math.abs(x1 - x0) + 1, 1, c); }
   vline(x, y0, y1, c) { this.rect(x, Math.min(y0, y1), 1, Math.abs(y1 - y0) + 1, c); }
   disc(cx, cy, r, c) {
@@ -42,36 +125,56 @@ export class Pix {
       this.hline(cx - half, cx + half, cy + y, c);
     }
   }
-  /** An irregular ellipse — the leafy edge of a canopy or a bush. */
+  /**
+   * An irregular ellipse — the leafy edge of a canopy or a bush.
+   *
+   * The wobble only ever moves the edge between (1 − rough) and
+   * (1 + rough) of the plain ellipse, so a pixel well inside that band is
+   * in whatever the wobble does and a pixel well outside it is out. Only
+   * the rim has to ask for its angle, and the angle is the expensive part
+   * — this is the same picture, pixel for pixel, about five times faster,
+   * which is the difference between a mature valley opening at once and
+   * opening after a stall.
+   */
   blob(cx, cy, rx, ry, c, r = Math.random, rough = 0.18) {
     const bumps = 5 + Math.floor(r() * 3);
     const phase = r() * Math.PI * 2;
+    const inner = 1 - rough, outer = 1 + rough;
+    const irx2 = 1 / (rx * rx), iry2 = 1 / (ry * ry);
     for (let y = -ry - 1; y <= ry + 1; y += 1) {
+      const yy = y * y * iry2;
       for (let x = -rx - 1; x <= rx + 1; x += 1) {
-        const a = Math.atan2(y / ry, x / rx);
-        const wobble = 1 + rough * Math.sin(a * bumps + phase) * Math.cos(a * 2 + phase);
-        const d = (x * x) / (rx * rx * wobble) + (y * y) / (ry * ry * wobble);
-        if (d <= 1) this.px(cx + x, cy + y, c);
+        const base = x * x * irx2 + yy;
+        if (base > outer) continue;                 // outside whatever the rim does
+        if (base > inner) {                         // on the rim: ask the angle
+          const a = Math.atan2(y / ry, x / rx);
+          const wobble = 1 + rough * Math.sin(a * bumps + phase) * Math.cos(a * 2 + phase);
+          if (base > wobble) continue;
+        }
+        this.px(cx + x, cy + y, c);
       }
     }
   }
+
+  /** Punch a blob-shaped hole. Used for daylight between leaves. */
+  punch(cx, cy, rx, ry, r = Math.random, rough = 0.18) { this.blob(cx, cy, rx, ry, null, r, rough); }
   /** Trace a 1px outline around everything opaque. */
   outline(color = PIGMENT.outline, alphaFloor = 40) {
+    this._resync();
     const { w, h } = this;
-    const img = this.ctx.getImageData(0, 0, w, h);
-    const d = img.data;
+    const buf = this._buf;
     const solid = new Uint8Array(w * h);
-    for (let i = 0; i < w * h; i += 1) solid[i] = d[i * 4 + 3] > alphaFloor ? 1 : 0;
-    const [r, g, b] = hexRgb(color);
+    for (let i = 0; i < w * h; i += 1) solid[i] = ALPHA_OF(buf[i]) > alphaFloor ? 1 : 0;
+    const v = pack(color);
     for (let y = 0; y < h; y += 1) {
       for (let x = 0; x < w; x += 1) {
         const i = y * w + x;
         if (solid[i]) continue;
         const near = (x > 0 && solid[i - 1]) || (x < w - 1 && solid[i + 1]) || (y > 0 && solid[i - w]) || (y < h - 1 && solid[i + w]);
-        if (near) { d[i * 4] = r; d[i * 4 + 1] = g; d[i * 4 + 2] = b; d[i * 4 + 3] = 255; }
+        if (near) buf[i] = v;
       }
     }
-    this.ctx.putImageData(img, 0, 0);
+    this._dirty = true;
   }
   /** Dither one colour over another in a checker pattern inside a rect. */
   dither(x, y, w, h, c, phase = 0) {
@@ -79,10 +182,6 @@ export class Pix {
   }
 }
 
-function hexRgb(hex) {
-  const n = parseInt(hex.slice(1), 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-}
 
 /* ------------------------------------------------------------------ */
 /* Cache                                                               */
@@ -102,7 +201,7 @@ export function sprite(name, params = {}) {
   return s;
 }
 
-const done = (p, ax, ay) => ({ canvas: p.canvas, w: p.w, h: p.h, ax, ay });
+const done = (p, ax, ay) => { p.flush(); return { canvas: p.canvas, w: p.w, h: p.h, ax, ay }; };
 
 const urlCache = new Map();
 
@@ -1386,8 +1485,7 @@ function mark({ kind = 'tree' }) {
     }
     case 'lock': {
       p.rect(3, 7, 10, 8, st.base); p.rect(3, 7, 10, 1, st.light); p.rect(11, 7, 2, 8, st.shade);
-      p.rect(5, 2, 6, 5, 'rgba(0,0,0,0)');
-      p.vline(5, 3, 7, st.shade); p.vline(10, 3, 7, st.shade); p.hline(5, 10, 2, st.base);
+        p.vline(5, 3, 7, st.shade); p.vline(10, 3, 7, st.shade); p.hline(5, 10, 2, st.base);
       p.rect(7, 10, 2, 3, O);
       break;
     }
@@ -1461,12 +1559,53 @@ function pathPiece({ stone = false, w = 30, h = 22 }) {
   return done(p, Math.floor(w / 2), h - 1);
 }
 
+
+/**
+ * Wick at map scale. The 26-px Wick is for the screens where he speaks;
+ * put him on the valley and he stands half as tall as the cottage. This
+ * is the same cat at the size a cat actually is — charcoal, gold eyes,
+ * a cream bib, and the brass lamp that makes him himself.
+ */
+function wickSmall({ frame = 0, pose = 'sit', lamp = false, lit = true, blink = false }) {
+  const p = new Pix(15, 12);
+  const c = ramp('#43434E');
+  const cream = ramp('#EFE3CA');
+  const walking = pose === 'walk';
+  const y0 = walking ? 3 : 4;
+  // Tail: curled round the paws when sitting, out behind when walking.
+  if (walking) { p.rect(10, y0 + 3, 3, 2, c.base); p.px(13, y0 + 2, c.base); p.px(13, y0 + 1, c.shade); }
+  else { p.rect(9, y0 + 4, 3, 2, c.base); p.px(12, y0 + 3, c.base); p.px(12, y0 + 2, cream.base); }
+  // Body.
+  p.rect(3, y0 + 2, 7, 5, c.base);
+  p.rect(3, y0 + 2, 7, 1, c.light);
+  p.rect(5, y0 + 4, 3, 3, cream.base);
+  // Head, with two clear ears.
+  p.rect(2, y0 - 2, 6, 5, c.base);
+  p.rect(2, y0 - 2, 6, 1, c.light);
+  p.px(2, y0 - 3, c.base); p.px(7, y0 - 3, c.base);
+  if (!blink) { p.px(3, y0, '#F2C14E'); p.px(6, y0, '#F2C14E'); }
+  else { p.px(3, y0, c.dark); p.px(6, y0, c.dark); }
+  p.px(4, y0 + 1, '#C58B90');
+  // Paws, alternating when he pads about.
+  p.px(3, y0 + 7 - (frame % 2), cream.base);
+  p.px(8, y0 + 7, cream.base);
+  // The lamp, carried at night.
+  if (lamp) {
+    const t = ramp(PIGMENT.timber);
+    p.vline(11, y0 - 3, y0 + 1, t.dark);
+    p.rect(10, y0 + 1, 3, 3, lit ? PIGMENT.lantern : '#8C7A5C');
+    if (lit) p.px(11, y0 + 2, '#FFF6DE');
+  }
+  p.outline();
+  return done(p, 6, 11);
+}
+
 const RECIPES = {
   tree, flower, flowerPatch, grassTuft, bush, bramble, rock, stump, lilypad, reeds,
   cottage, tower, workshop, lantern, signpost, bridge, fence, terraceWall,
   koi, butterfly, bird, cat, catSmall, cloud, rootStone, marker, puff, wick, dock,
   hive, heron, arch, shrine, arbour, stall, well, villager, paving, stoneBridge, house,
-  deer, sheep, duck, dog, mark, pathPiece,
+  deer, sheep, duck, dog, mark, pathPiece, wickSmall,
 };
 
 export const RECIPE_NAMES = Object.freeze(Object.keys(RECIPES));
