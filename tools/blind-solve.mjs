@@ -40,12 +40,17 @@ const dir = path.join(ROOT, 'content', DIRS[type]);
 const files = () => fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort();
 const readF = (f) => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
 
+const asksItsOwnTitle = (item) => (item.meta?.question_types ?? (item.questions ?? []).map((q) => q.type ?? q.question_type)).includes('title_selection');
+
 /** What a candidate sees, and the keys, per file. */
 function split(item) {
   const m = item.meta;
   if (type === 'rc') {
     return {
-      shown: { id: m.id, title: item.passage.title, passage: item.passage.paragraphs.map((p) => p.text), questions: item.questions.map((q) => ({ id: q.id, stem: q.stem, options: q.options })) },
+      // A passage that asks the reader to title it must not ship its title:
+      // a blind reader found the answer sitting in the header. The app hides
+      // it for the same reason (modules/reading-comprehension/logic/spoilers.js).
+      shown: { id: m.id, ...(asksItsOwnTitle(item) ? {} : { title: item.passage.title }), passage: item.passage.paragraphs.map((p) => p.text), questions: item.questions.map((q) => ({ id: q.id, stem: q.stem, options: q.options })) },
       keys: Object.fromEntries(item.questions.map((q) => [q.id, q.correct])),
     };
   }

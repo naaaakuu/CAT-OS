@@ -9,6 +9,7 @@ import { groupByStage, recommendNext, STAGE_INFO } from '../../../core/learning/
 import { latestByPassage, listSessions } from '../logic/store.js';
 import { formatPercent } from '../../../core/utils/format.js';
 import { escapeHTML } from '../../../core/utils/format.js';
+import { displayTitle } from '../logic/spoilers.js';
 
 export async function renderBrowser(outlet, { storage }) {
   outlet.innerHTML = `
@@ -74,8 +75,8 @@ export async function renderBrowser(outlet, { storage }) {
         : '';
     return `
       <a class="list-item ${isNext ? 'list-item--next' : ''}" href="#/rc/session/${item.id}"
-         aria-label="${escapeHTML(item.title)}, ${escapeHTML(item.difficulty)}, about ${item.estimated_time_min} minutes">
-        <div class="list-item__title">${escapeHTML(item.title)}</div>
+         aria-label="${escapeHTML(displayTitle(item))}, ${escapeHTML(item.difficulty)}, about ${item.estimated_time_min} minutes">
+        <div class="list-item__title">${escapeHTML(displayTitle(item))}</div>
         <div class="list-item__meta">
           <span class="badge"><span class="dot dot--${escapeHTML(item.difficulty)}"></span>${escapeHTML(item.difficulty)}</span>
           <span class="badge">${escapeHTML(item.genre)}</span>

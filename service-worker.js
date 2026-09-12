@@ -85,6 +85,7 @@ const SHELL_FILES = [
   './src/shell/growth.js',
   './src/modules/reading-comprehension/index.js',
   './src/modules/reading-comprehension/logic/store.js',
+  './src/modules/reading-comprehension/logic/spoilers.js',
   './src/modules/reading-comprehension/screens/browser.js',
   './src/modules/reading-comprehension/screens/session.js',
   './src/modules/reading-comprehension/screens/second-look.js',

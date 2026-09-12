@@ -20,6 +20,7 @@
  */
 
 import { loadRCPassage, loadRCPassages } from '../../../core/content-loader/loader.js';
+import { displayTitle } from '../logic/spoilers.js';
 import { PracticeSession } from '../../../core/engine/session.js';
 import { recordPassageSightings } from '../../../core/engine/garden-gate.js';
 import { saveResults } from '../logic/store.js';
@@ -72,13 +73,13 @@ export async function renderSession(outlet, { storage }, params) {
     <section class="run">
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/reading-room" aria-label="Leave">×</a>
-        <div class="run__where"><div class="run__place">The Reading Room${night ? ' · Night Reading' : ''}</div><div class="run__what">${escapeHTML(passage.passage.title)}</div></div>
+        <div class="run__where"><div class="run__place">The Reading Room${night ? ' · Night Reading' : ''}</div><div class="run__what">${escapeHTML(displayTitle(passage))}</div></div>
       </div>
       <div class="run__body">
         <div class="brief">
           <p class="brief__eyebrow">${escapeHTML(stage)} · ${escapeHTML(m.genre ?? '')}</p>
-          <h1 class="brief__title">${escapeHTML(passage.passage.title)}</h1>
-          <p class="brief__line">${escapeHTML(m.theme ? m.theme[0].toUpperCase() + m.theme.slice(1) : '')}. Read it the way the exam reads it: once, closely, then answer from the text.</p>
+          <h1 class="brief__title">${escapeHTML(displayTitle(passage))}</h1>
+          <p class="brief__line">What it argues is for you to find. Read it the way the exam reads it: once, closely, then answer from the text.</p>
           <div class="brief__facts">
             <span class="brief__fact">${m.word_count ?? '—'} words</span>
             <span class="brief__fact">${passage.questions.length} questions</span>
