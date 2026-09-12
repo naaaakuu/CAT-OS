@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0027",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "The Discount and the Verdict",
+    "theme": "what a rising rate of guilty pleas actually measures",
+    "estimated_time_sec": 120,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "Because the discount offered for a guilty plea is set by the prosecution rather than by the strength of its case, a wide enough discount makes pleading rational irrespective of the likelihood of conviction, so the plea rate records the width of the discount at least as much as it records guilt.",
+      "scope": "The aggregate plea rate in common-law systems; the claim concerns what that rate measures, and expressly not whether innocent defendants are pleading guilty.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 4,
+      "domain_load": 3
+    },
+    "load_bearing": ["at least as much as", "a further question", "cannot settle", "even for a defendant with a good answer"],
+    "separating_element": "The correct option stops at what the plea rate measures; its nearest rival takes the one further step, to what the rate proves about innocence, which the final sentence says a rate cannot settle.",
+    "dna_traits": ["main_idea_detection", "inference_control", "certainty_reading", "evidence_vs_thesis"],
+    "mission": "add_nothing",
+    "learning_objective": "hold a conclusion at the point the author placed it when the argument plainly supports a more dramatic sentence one step further on",
+    "reasoning_patterns": ["sum.central_vs_supporting", "arg.causal_claim", "inf.vs_speculation", "sum.no_addition", "sum.certainty_kept"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists differ by one inference. Both keep the mechanism, that a wide enough discount makes pleading rational whatever the case, and both reject the naive reading of the plea rate. The rival then says the rate is evidence that innocent defendants are being convicted. The last sentence blocks precisely that: 'Whether innocent defendants are being induced to plead is a further question that a rate cannot settle.' Note too that the paragraph's own phrase is 'a defendant with a good answer', which is not a claim about innocence. The capping option prescribes a reform nobody in the paragraph proposes, and the option about the disappearing trial reports the setup and the mechanism while stopping short of the conclusion drawn from them.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about plea discounts and what aggregate plea rates can show; no specific text or jurisdiction's data adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item built on one inference too many. The near miss keeps the whole causal chain and adds the conclusion the last sentence refuses; the separating element is the difference between what a statistic measures and what it proves. Families: precision, addition, structure."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "In many common-law systems the share of cases resolved by a guilty plea has risen until the contested trial is the exception.",
+        "role": "setup"
+      },
+      {
+        "text": "The mechanism is structural: the sentence offered for a plea is discounted against the sentence expected after trial, and the width of that discount is set by the prosecution, not by the strength of its case.",
+        "role": "support"
+      },
+      {
+        "text": "As the discount widens, the calculation that makes pleading rational stops turning on the likelihood of conviction, since a large enough gap makes the certain lesser penalty the better bet even for a defendant with a good answer.",
+        "role": "support"
+      },
+      {
+        "text": "The plea rate therefore records the width of the discount at least as much as it records the incidence of guilt.",
+        "role": "thesis"
+      },
+      {
+        "text": "Whether innocent defendants are being induced to plead is a further question that a rate cannot settle; what the rate shows is that it has stopped measuring the thing it is taken to measure.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Since the plea discount is fixed by the prosecution and a wide enough discount makes pleading rational whatever the case against a defendant, the plea rate measures the discount at least as much as it measures guilt.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the plea rate is a measure of, and what does it refuse to conclude?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the rate measures, rather than that trials have become rare?",
+        "kept": "Good. The disappearance of the trial is the observation that opens the paragraph; the claim is what the resulting statistic can and cannot be read as recording.",
+        "drifted": "Reporting the rise in pleas, even with the discount as its cause, leaves out the conclusion the whole paragraph is built to reach."
+      },
+      {
+        "id": "addition",
+        "ask": "Does your sentence stop at what the rate measures, or has it said something about innocent defendants?",
+        "kept": "Exactly right, and this is the whole item. The author raises innocence only to set it aside as a question a rate cannot answer.",
+        "drifted": "The step from 'a defendant with a good answer' to 'an innocent defendant convicted' is one the paragraph deliberately does not take, and it is the most tempting sentence available here."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'at least as much as', or did your sentence say the rate measures only the discount?",
+        "kept": "Well held. The author does not deny that guilt contributes; the claim is that the discount contributes at least as much, which is a weaker and more defensible statement.",
+        "drifted": "Saying the rate has nothing to do with guilt goes beyond the text. The paragraph puts two things in the same measurement and refuses to rank them further."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Once the discount grows wide enough, pleading is rational whatever the case against a defendant, so a rising plea rate is evidence that innocent people are being convicted.",
+      "B": "The discount offered for a guilty plea ought to be capped, because a gap fixed by the prosecution rather than by the evidence renders the resulting plea rate meaningless.",
+      "C": "Because the discount for pleading is fixed by the prosecution and widens regardless of the case, the plea rate measures that discount at least as much as it measures guilt.",
+      "D": "The contested trial has become the exception because the sentence offered for a plea is discounted against the heavier sentence a defendant can expect after going to trial."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "Almost nobody goes to trial any more, and the paragraph explains why in terms of arithmetic rather than conscience. A defendant is offered a lighter sentence for pleading, and how much lighter is decided by the prosecution, which is not the same as being decided by how strong the evidence is. Once that gap is wide enough, taking the certain smaller punishment is the sensible move even if you have a decent defence. So when we count guilty pleas, part of what we are counting is the size of the gap. The author then stops. Whether that means innocent people are pleading guilty is a different question, and a headline rate cannot answer it.",
+      "correct_reasoning": "The correct option carries the cause, that the discount is set by the prosecution and widens independently of the case, and the conclusion drawn from it at the author's own strength: the rate measures the discount at least as much as guilt. It adds no claim about who is innocent, which is the boundary the final sentence draws.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "near_miss",
+          "secondary_archetype": "implication_addition",
+          "why_wrong": "Everything up to the comma is the paragraph's own reasoning. The last clause takes the step the author explicitly withholds: whether innocent defendants are being induced to plead is called a further question that a rate cannot settle. The text also says 'a defendant with a good answer', which is not the same as an innocent one.",
+          "seductive_element": "It reproduces the mechanism faithfully and then supplies the morally serious conclusion the reasoning seems to be heading towards, which makes it feel like the braver and more complete reading.",
+          "thinking_mistake": "Finishing an argument the author left open, and treating the fact that a conclusion is available as evidence that it was drawn."
+        },
+        {
+          "option": "B",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No reform is proposed anywhere in the paragraph, and 'meaningless' overshoots a claim that the rate records the discount at least as much as guilt, which leaves it meaning something.",
+          "seductive_element": "A structural criticism of this force seems to demand a remedy, and capping the discount is the obvious one to reach for.",
+          "thinking_mistake": "Summarising the reform a diagnosis suggests rather than the diagnosis the author actually offered."
+        },
+        {
+          "option": "D",
+          "archetype": "setup_as_payoff",
+          "secondary_archetype": null,
+          "why_wrong": "This joins the opening observation to the mechanism and stops there. The paragraph uses both to reach a conclusion about what the plea rate measures, and that conclusion is entirely missing here.",
+          "seductive_element": "It is accurate, it explains something, and it reads like a tidy account of the paragraph's first half.",
+          "thinking_mistake": "Mistaking the explanation of a phenomenon for the point being made about it."
+        }
+      ],
+      "reading_habit": "When an author names a further question and declines it, that question is the shape of the wrong answer. Read the declining sentence twice before choosing."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options here share a full chain of reasoning and part company in the last clause. The final sentence of the paragraph decides which of them the author would sign.",
+    "takeaway": "What a number stops measuring is one claim. What it proves about the people behind it is another."
+  }
+}

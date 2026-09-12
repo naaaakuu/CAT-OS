@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0049",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "anthropology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Cost They Paid Together",
+    "theme": "why elaborate initiation is found in some societies and absent in others",
+    "estimated_time_sec": 85,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "The distribution of elaborate initiation fits the solidarity explanation rather than the role-marking one, since it clusters where men must cooperate with non-kin on tasks where a defector would be costly and hard to detect; role-marking still occurs, but it is not what the elaborate cases are for.",
+      "scope": "Societies with elaborate male initiation compared with those that have none; the verdict concerns what the elaborate cases are for, not whether rites also mark roles.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": ["does not dispose of", "not what the elaborate cases are for", "the one that fits"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "surface_matching", "author_intent", "certainty_reading"],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "judge an option by the claim it makes rather than by how comfortably it echoes the paragraph's own phrasing",
+    "reasoning_patterns": ["struct.two_views_adjudication", "sum.qualification_kept", "comp.function_over_words", "sum.central_vs_supporting", "arg.evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that a rite tells a community a child has become an adult. It is the paragraph's own second sentence, and the last sentence confirms that every rite does this, which makes the option true. It is still not the claim: the paragraph adjudicates between two explanations on their distributions, and finds that role-marking is not what the elaborate cases are for. The option saying rites have nothing to do with adulthood and exist solely to bind men is refused by the same sentence from the other side. The option about where elaborate initiation is found reports the evidence rather than the verdict drawn from it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the distribution of male initiation rites; no specific ethnography or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An adjudication whose losing view remains true, which is the trap. Three distortion families: stance (the reported view adopted), language (the verdict turned into an exclusion), structure (the distributional evidence promoted over the verdict)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Two explanations are usually offered for why some societies put boys through long and painful initiations while others do nothing of the kind.",
+        "role": "setup"
+      },
+      {
+        "text": "The first is that the rite marks a transfer of role, announcing that a child has become an adult with adult claims and adult duties.",
+        "role": "support"
+      },
+      {
+        "text": "The second is that it manufactures loyalty among men who are not kin, by making them pay a cost together that none of them can afterwards disown.",
+        "role": "support"
+      },
+      {
+        "text": "The two predict different distributions, and the one that fits is the second: elaborate initiation clusters where men must cooperate with non-relatives on tasks in which a defector would be costly and hard to detect.",
+        "role": "evidence"
+      },
+      {
+        "text": "That does not dispose of the first explanation, which every rite also does; it says that marking a role is not what the elaborate cases are for.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Elaborate initiation fits the solidarity account rather than the role-marking one, because it clusters where men must cooperate with non-kin and defection is hard to spot; rites still mark roles, but that is not what the elaborate ones are for.",
+  "builder": {
+    "prompt": "In one sentence: which explanation does the paragraph find fits, and what does it say about the other?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say which explanation the distribution favours, and why?",
+        "kept": "Good. The adjudication is made on a prediction about where the elaborate rites should be found, and that is the evidence the verdict rests on.",
+        "drifted": "Describing what a rite does leaves the competition unresolved. The paragraph's work is testing two accounts against where elaborate initiation actually occurs."
+      },
+      {
+        "id": "stance",
+        "ask": "Is the explanation your sentence gives the one the paragraph endorses, or the one it sets aside?",
+        "kept": "Well held. The role-marking account is stated first and stated well, which is exactly why it is easy to carry away as the conclusion.",
+        "drifted": "The rite announcing a new adult is one of the two candidates. It survives as something every rite does, and it is not what the paragraph finds the elaborate cases are for."
+      },
+      {
+        "id": "certainty",
+        "ask": "Does your sentence keep the first explanation alive, or has it ruled role-marking out?",
+        "kept": "Exactly. The last sentence says the first explanation is not disposed of, so a summary must not convert a verdict about purpose into a denial of function.",
+        "drifted": "'Nothing to do with adulthood' and 'solely' overshoot. The author says every rite marks a role, and only that this is not what the elaborate cases are for."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Elaborate initiation fits the solidarity explanation rather than the role-marking one, though every rite still marks a role; that is not what the elaborate cases are for.",
+      "B": "An initiation rite announces to a whole community that a child has become an adult, with all the claims and all the duties that adulthood is held to bring with it.",
+      "C": "Initiation rites have nothing whatever to do with marking the passage into adulthood, and exist solely in order to bind unrelated men together into a reliable group.",
+      "D": "Elaborate initiation is found where men have to cooperate with people who are not their relatives on tasks in which a defector would be both costly and hard to spot."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Why do some societies put boys through gruelling initiations while others do not bother? Two answers are on offer. One says the rite announces that a child is now an adult. The other says it builds trust between men who are not related, by making them pay a heavy price together that none of them can later pretend not to have paid. These two answers predict different things about where such rites should turn up, and the second prediction is the one that matches: the elaborate rites cluster where men have to work with non-relatives on jobs where quietly shirking would be damaging and hard to catch. The author is careful at the end. The first answer is not wrong; every rite does mark a role. It is just not what the elaborate ones are for.",
+      "correct_reasoning": "The correct option names the winning account and the evidence it won on, and keeps the last sentence's refusal to dispose of the other: rites do mark roles, and that is not the purpose of the elaborate cases. It settles a question about function without denying a fact.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "owner_swap",
+          "secondary_archetype": null,
+          "why_wrong": "This is the first of the two competing accounts. The paragraph confirms that every rite does this and then finds that it is not what the elaborate cases are for, which means the option reports a truth that lost the adjudication.",
+          "seductive_element": "It is true within the paragraph, which makes it unusually hard to reject; the sentence that concedes it sits in the same line as the verdict against it.",
+          "thinking_mistake": "Choosing an option because nothing in it is false, when a summary has to carry what the paragraph concluded rather than what it granted."
+        },
+        {
+          "option": "C",
+          "archetype": "extreme_language",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the first explanation is not disposed of and that every rite marks a role. 'Nothing whatever to do with' and 'solely' turn a finding about purpose into an exclusion the author expressly refuses.",
+          "seductive_element": "It is the confident version of the paragraph's own verdict, and confident options look like the ones that have understood the argument.",
+          "thinking_mistake": "Hardening 'this is not what they are for' into 'this is not something they do'."
+        },
+        {
+          "option": "D",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the distributional finding on which the adjudication turns, reported without the adjudication. The paragraph uses it to decide between two explanations, and no verdict appears here.",
+          "seductive_element": "It is the most precise sentence in the paragraph and reads like a result, which makes it feel more substantial than a judgement between accounts.",
+          "thinking_mistake": "Summarising the evidence that settled a question rather than the answer it settled."
+        }
+      ],
+      "reading_habit": "In an adjudication, the losing account is often still true. Ask which one the author says the case is for, not which one you cannot fault."
+    }
+  },
+  "mentor": {
+    "challenge": "One wrong option here is entirely true, and the paragraph says so itself. Truth is not the test; being the point is.",
+    "takeaway": "An explanation can describe what something does and still not be what it is for."
+  }
+}

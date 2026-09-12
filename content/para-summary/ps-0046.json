@@ -1,0 +1,161 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0046",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "Where the Knowledge Goes",
+    "theme": "what limiting a legislator's tenure does to where expertise sits",
+    "estimated_time_sec": 105,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Term limits do remove entrenched members, but because a chamber is also a store of procedural and historical knowledge, shortening tenure relocates accumulated advantage to unelected staff, departments and lobbyists rather than abolishing it.",
+      "scope": "Legislatures that limit how long a member may serve; the claim concerns where accumulated advantage goes, and grants the benefits claimed for the reform.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": ["it is worth something", "does not abolish", "moves it"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "author_intent", "evidence_vs_thesis", "compression_skill"],
+    "mission": "find_the_thesis",
+    "learning_objective": "find the claim after a generous concession, and keep the concession in the summary rather than choosing between them",
+    "reasoning_patterns": ["struct.pivot", "sum.central_vs_supporting", "sum.stance_kept", "arg.concession", "sum.no_addition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that credits term limits with breaking up entrenched careers. The paragraph says that plainly and then says 'All of that happens, and it is worth something', which is the signature of a concession rather than a conclusion; the 'But' in the next sentence carries the claim. The option urging resistance to term limits turns a relocation argument into opposition, which the granted benefits will not support. The option about worse government makes a comparative judgement the paragraph never attempts, since nothing here compares outcomes between the two arrangements.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about legislative tenure and institutional memory; no specific legislature or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A concession stated at length and granted in full, then overturned without being withdrawn. Three distortion families: structure (the concession taken as the claim), stance (a relocation argument turned into opposition), addition (a comparative verdict on governance)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "The case for limiting how long a legislator may serve is easy to state: it removes the entrenched, opens seats to people who would never otherwise hold one, and breaks the arrangement by which a safe constituency becomes a career.",
+        "role": "setup"
+      },
+      {
+        "text": "All of that happens, and it is worth something.",
+        "role": "concession"
+      },
+      {
+        "text": "But a chamber is not only the people sitting in it.",
+        "role": "support"
+      },
+      {
+        "text": "It is also a store of knowledge about how a bill is drafted, who can be persuaded, and what was tried twenty years ago and why it failed.",
+        "role": "support"
+      },
+      {
+        "text": "When tenure is cut short that knowledge has to sit somewhere, and it sits with the permanent staff, with the departments, and with the lobbyists who have been in the room longest.",
+        "role": "evidence"
+      },
+      {
+        "text": "A term limit does not abolish accumulated advantage; it moves it to people nobody elected.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Term limits really do clear out entrenched members, but since a chamber is also a store of knowledge, shortening tenure shifts accumulated advantage to unelected staff and lobbyists instead of ending it.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a term limit actually does to accumulated advantage?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say where the advantage goes, rather than that entrenchment is broken?",
+        "kept": "Good. Breaking entrenched careers is granted in the second sentence; the claim is what happens to the knowledge those careers were holding.",
+        "drifted": "The opening sentence is the case for the reform, and the author accepts it. The point arrives after the 'But', and it is about relocation."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence oppose term limits, or describe what they do?",
+        "kept": "Exactly. The author grants the benefits and says they are worth something, which rules out reading the argument as a case against the reform.",
+        "drifted": "'Should be resisted' is a recommendation. The paragraph shows where an advantage moves, and a reader who has granted the benefits cannot convert that into opposition."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you claimed that a legislature with term limits is worse governed?",
+        "kept": "Well judged. Nothing here compares the quality of government under the two arrangements, only the location of accumulated knowledge.",
+        "drifted": "Worse governed is a verdict on outcomes, and the paragraph offers no comparison of outcomes. It says who ends up holding the advantage."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Limiting how long a legislator may serve genuinely breaks up entrenched careers and opens safe seats to people who would otherwise never hold one at all.",
+      "B": "Term limits ought to be resisted, since they hand a legislature's real business to officials and lobbyists whom no voter has ever had a chance to remove.",
+      "C": "Limiting tenure does remove entrenched members, but because a chamber is also a store of knowledge it relocates accumulated advantage to unelected staff and lobbyists.",
+      "D": "Since the knowledge has to sit somewhere, a legislature with term limits ends up worse governed than one in which members may serve for as long as they are elected."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "Capping how long someone can sit in a legislature does what its supporters say: the long-serving go, new people get in, and a safe seat stops being a career. The author accepts all of that. Then comes the complication. A chamber is not just a set of people; it is also a stock of know-how about drafting, about who can be talked round, about the attempt made twenty years ago that came to nothing. Shorten everyone's stay and that stock does not vanish. It ends up with the permanent officials, the departments and the lobbyists who never leave. So the reform does not get rid of accumulated advantage. It hands it to people no one voted for.",
+      "correct_reasoning": "The correct option keeps the concession the author grants and the claim that overturns it, that advantage is relocated rather than abolished, and names where it goes. It neither opposes the reform nor judges the resulting government.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the case for the reform, which the second sentence grants and the third begins to answer. The paragraph's own claim sits in the last sentence and is entirely absent here.",
+          "seductive_element": "It is stated at length and endorsed in the author's own words, which makes it the most obviously supported thing in the paragraph.",
+          "thinking_mistake": "Taking a fully granted concession for the conclusion, because nothing in it is contradicted."
+        },
+        {
+          "option": "B",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The author says the benefits of term limits really occur and are worth something, and recommends nothing. This option converts an argument about where advantage moves into a case against the reform.",
+          "seductive_element": "Handing influence to the unelected sounds like a decisive objection, and the paragraph's last phrase supplies the indignation.",
+          "thinking_mistake": "Reading an unwelcome consequence as a verdict, when the author has already credited the reform on the other side of the ledger."
+        },
+        {
+          "option": "D",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "Nothing in the paragraph compares how well the two arrangements govern. The claim is about who holds accumulated knowledge, which is a statement about location rather than about quality.",
+          "seductive_element": "It sounds like the natural conclusion of an argument about lost institutional memory, and comparative claims feel like the substantive ones.",
+          "thinking_mistake": "Converting a claim about where something ends up into a claim about how well things then go."
+        }
+      ],
+      "reading_habit": "A sentence like 'all of that happens, and it is worth something' is a concession being paid for in full. Expect the claim in the sentence after it, and keep the payment in your summary."
+    }
+  },
+  "mentor": {
+    "challenge": "The first sentence here is long, persuasive and granted outright. That is exactly why it is not the point.",
+    "takeaway": "Advantage that is broken up somewhere has usually gathered somewhere else. Ask where."
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0030",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "The Detail He Asked Not To Be Sent",
+    "theme": "when ignorance stops excusing: ignorance that was arranged rather than suffered",
+    "estimated_time_sec": 120,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "Ignorance excuses when it was suffered but not when it was arranged: where a person organised the conditions of their own not-knowing, that arrangement is the act to be judged, and responsibility attaches to the informational position they built rather than to what they happened to know.",
+      "scope": "Cases in which an agent deliberately arranged not to learn something; the claim is not about ignorance generally and not about failing to take care within a position one did not design.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": ["a misfortune", "a policy", "rather than about the care taken inside it"],
+    "separating_element": "The correct option withdraws the excuse only from ignorance that was arranged; its nearest rival withdraws it from ignorance the agent could have cured, which the closing sentence sets aside as a question about care rather than about the position built.",
+    "dna_traits": ["main_idea_detection", "scope_preservation", "language_precision", "evidence_vs_thesis"],
+    "mission": "ignore_examples",
+    "learning_objective": "hold a principle to the exact condition the author attached to it, rather than to the more familiar principle it resembles",
+    "reasoning_patterns": ["sum.example_vs_claim", "sum.central_vs_supporting", "scope.condition", "arg.principle", "sum.no_addition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists both withdraw the excuse from ignorance, and differ in how much they withdraw it from. The rival says ignorance stops excusing when it is the agent's own fault, so that anyone who could have found out is answerable. That is the ordinary doctrine of culpable ignorance, and it is wider than this paragraph. The closing sentence marks the boundary: responsibility attaches to how a person arranged what they could know, 'a question about the position built rather than about the care taken inside it', which is exactly the negligence standard the rival reaches for. The buyer who forbids the report is the illustration, not the claim, and the duty to inform oneself is a rule the paragraph never states.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General moral reasoning about arranged ignorance; no specific text or case adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item whose near miss is the textbook version of the same principle, one condition wider. The example is deliberately the most memorable sentence in the paragraph. Families: structure, addition, precision."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "We excuse a person who did harm without knowing, and we are right to, since blame follows what an agent chose and an unknown consequence was not chosen.",
+        "role": "setup"
+      },
+      {
+        "text": "The difficulty is that not-knowing is itself sometimes chosen.",
+        "role": "support"
+      },
+      {
+        "text": "A buyer who instructs his supplier never to send details of where the work is carried out has learned nothing, and has built the conditions under which he will go on learning nothing.",
+        "role": "example"
+      },
+      {
+        "text": "What the excuse rests on is that the ignorance was a misfortune; where it was a policy, the arrangement is the act to be judged, and the harm follows from it as surely as from an intention.",
+        "role": "thesis"
+      },
+      {
+        "text": "Responsibility then attaches not to what a person knew but to how they arranged what they could know, which is a question about the position built rather than about the care taken inside it.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "Ignorance excuses only when it was suffered; where a person arranged not to know, the arrangement is the act to be judged, so responsibility rests on the informational position they built rather than on what they knew.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say decides whether ignorance excuses a person?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name the distinction between ignorance suffered and ignorance arranged?",
+        "kept": "Good. The whole argument runs on that contrast, and any summary without it either excuses too much or too little.",
+        "drifted": "Without the contrast you have either a defence of the excuse or a refusal of it. The paragraph does neither; it says which sort of ignorance keeps the excuse."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence cover ignorance the agent arranged, or has it grown to cover ignorance the agent could have cured?",
+        "kept": "Exactly right, and this is the hardest line in the item. Failing to find out and arranging not to find out are different acts, and the last sentence separates them.",
+        "drifted": "The familiar principle that ignorance excuses only when it is not your own fault is wider than this paragraph. The author's condition is a position deliberately built, not care not taken."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a duty to inform oneself that the paragraph does not state?",
+        "kept": "Well judged. The author says when an excuse fails, which is a claim about blame, not a claim about what anyone is obliged to go and find out.",
+        "drifted": "A duty of inquiry is the natural next thought and a different proposition. This paragraph judges arrangements already made; it issues no instructions."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A buyer who instructs his supplier never to report where the work is carried out cannot afterwards plead ignorance of conditions he took trouble not to hear about.",
+      "B": "Ignorance excuses only where it was suffered; where arranged, the arrangement is the act to be judged, so blame rests on the position built rather than on what was known.",
+      "C": "Anyone who takes the benefit of a supply chain has a standing duty to find out the conditions inside it, whatever he has been told and whatever he has asked not to be told.",
+      "D": "Ignorance stops excusing once it is the agent's own fault, so a person who could readily have found out is answerable for the harm in the way a person who knew would be."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "If you hurt someone without knowing you would, we let you off, and that makes sense: you did not choose what you did not know. The paragraph then notices a case the excuse was not built for. Sometimes the not-knowing is itself something you set up, as when a buyer tells a supplier never to send him details of the workshop. He genuinely does not know. He also made sure of it. So the excuse only works when ignorance was bad luck. When it was a policy, the policy is the thing we judge, and the harm follows from it just as it would from an intention. What we are holding a person to, then, is the position they arranged to be in.",
+      "correct_reasoning": "The correct option keeps the condition the paragraph turns on, ignorance suffered against ignorance arranged, and keeps the conclusion the last sentence draws from it, that responsibility attaches to the position a person built. It withdraws the excuse from exactly the cases the author withdraws it from, and no others.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The buyer is the case brought in to show the difficulty; the two sentences after him state the principle it illustrates. A summary that stops with him reports the demonstration and leaves the claim unstated.",
+          "seductive_element": "It is the only concrete picture in an abstract paragraph, and it is the sentence a reader is most likely to be holding when the options appear.",
+          "thinking_mistake": "Letting the most vivid case stand for the principle, because a case can be checked against the text and a principle has to be assembled from it."
+        },
+        {
+          "option": "C",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": "scope_broadening",
+          "why_wrong": "The paragraph says when an excuse fails. It never imposes an obligation to inquire, and a standing duty on anyone who benefits from a supply chain covers people who arranged nothing at all.",
+          "seductive_element": "It is the reform the argument seems to be heading towards, and it sounds like the morally serious version of the same thought.",
+          "thinking_mistake": "Converting a claim about when blame attaches into a claim about what everyone is required to do."
+        },
+        {
+          "option": "D",
+          "archetype": "near_miss",
+          "secondary_archetype": "scope_broadening",
+          "why_wrong": "This is the familiar doctrine, and it is wider than the paragraph's. The closing sentence makes responsibility a question about the position a person arranged rather than about the care they took inside it, and 'could readily have found out' is a failure of care.",
+          "seductive_element": "It is the principle most readers already hold, it fits the buyer perfectly, and it differs from the claim by one word that is easy not to weigh.",
+          "thinking_mistake": "Recognising a familiar principle in a paragraph and summarising the familiar version instead of the one on the page."
+        }
+      ],
+      "reading_habit": "When a paragraph states a principle you already know, read its condition twice. Authors earn their keep by narrowing a familiar rule, and the familiar rule will be on the option list."
+    }
+  },
+  "mentor": {
+    "challenge": "You have met a version of this principle before. The paragraph's version is narrower, and one option is the version you already knew.",
+    "takeaway": "Not finding out and arranging not to find out are different acts, and only one of them is on trial here."
+  }
+}

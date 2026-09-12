@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0022",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "public-policy",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "Who Was Free on Tuesday",
+    "theme": "what attendance at a public consultation actually measures",
+    "estimated_time_sec": 65,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "A consultation meeting is evidence about who was able to attend it rather than a measure of what the district thinks, and this says nothing against the quality of the objections raised there.",
+      "scope": "Evening consultation meetings held at a single time and place; the claim is about what attendance measures, not about the merits of any argument made.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 1
+    },
+    "load_bearing": ["could attend", "not the same as", "None of this makes"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "scope_preservation", "author_intent"],
+    "mission": "protect_scope",
+    "learning_objective": "hold a claim to the one thing it is about, when a nearby and more dramatic claim is easy to reach from it",
+    "reasoning_patterns": ["sum.central_vs_supporting", "scope.too_broad", "sum.no_addition", "sum.stance_kept", "arg.evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that discounts the objections raised at such meetings. It follows honestly from the attendance finding and is the conclusion most readers draw on their own, but the fourth sentence exists to block it: 'a well-argued objection is not weakened by the fact that its author had a free Tuesday'. The option that widens the claim to written submissions and online surveys is beaten by the paragraph's own mechanism, which is about being in one building on one night. The option that proposes several meeting times recommends something the paragraph never asks for.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General observations about attendance at planning consultations; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item whose difficulty is entirely in the fourth sentence, which refuses the inference the evidence invites. Three distortion families: scope (the mechanism widened past what it explains), stance (a description turned into a discount), addition (a remedy imported)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A public consultation records the views of the people who could attend it, which is not the same as the views of the people it concerns.",
+        "role": "thesis"
+      },
+      {
+        "text": "Meetings are held in the evening, in one building, on one night, and the residents who can be there are those with settled hours, no caring duties and a stake large enough to justify the trip.",
+        "role": "support"
+      },
+      {
+        "text": "Councils that have compared attendance registers against their own population figures find the room older, more settled and more often owner-occupied than the district outside it.",
+        "role": "evidence"
+      },
+      {
+        "text": "None of this makes the objections raised in the room mistaken; a well-argued objection is not weakened by the fact that its author had a free Tuesday.",
+        "role": "qualification"
+      },
+      {
+        "text": "It means only that the meeting is evidence about who could come, and that a planner who treats it as a measure of local opinion has read a sample as a census.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Attendance at an evening consultation reflects who was able to come rather than what the district thinks, which limits what the meeting can measure without weakening the arguments made in it.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a consultation meeting is and is not evidence of?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what attendance measures, rather than only that the attenders are unusual?",
+        "kept": "Good. That the room skews older and more settled is the finding; the claim is what the finding licenses, which is a statement about availability and not about opinion.",
+        "drifted": "A description of who turns up is the support. The paragraph's claim is what such a room can be used as evidence for: who could come, not what the district thinks."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about the evening meeting, or has it grown to cover consultation in general?",
+        "kept": "Well held. Every reason the paragraph gives is about one building on one night, so the claim reaches exactly as far as that arrangement does.",
+        "drifted": "Written submissions and online surveys are never mentioned. The mechanism on offer is the physical trip, and a summary that covers methods with no trip in them has outrun its own explanation."
+      },
+      {
+        "id": "stance",
+        "ask": "Did your sentence keep the author's refusal to discount what was said in the room?",
+        "kept": "Exactly. The author separates who spoke from whether they were right, and the summary has to carry that separation or it changes sides.",
+        "drifted": "The fourth sentence blocks the easy inference. Saying the objections deserve less weight is the paragraph's argument turned against the very people it declines to dismiss."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Consultation of every kind, written submissions and online surveys included, reaches only the settled and comfortable and so cannot measure local opinion.",
+      "B": "A consultation meeting records who was free to attend rather than what the district thinks, though the objections raised there may still be perfectly sound.",
+      "C": "Since residents who attend a consultation are unrepresentative of the district, the objections raised at such meetings deserve less weight than planners give.",
+      "D": "Councils should hold their consultations at several times of day, so that attendance at the meeting finally matches the population it is meant to represent."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "An evening meeting in one hall can only hear from people who are free that evening and think the trip worth making, which is why the registers show an older and more settled room than the district around it. The paragraph then does something careful. It refuses to use that fact against the people who came: their arguments stand or fall on their own. What the skew limits is the use a planner can make of the meeting, which is evidence of who could attend and not a count of local opinion.",
+      "correct_reasoning": "The correct option keeps both halves the paragraph insists on: the meeting measures availability rather than opinion, and the arguments made in it are not thereby discounted. It also keeps the claim inside the arrangement that explains it, a meeting at a fixed time and place.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "Every reason the paragraph offers depends on having to be in one building on one night. Written submissions and online surveys impose no such trip, so this option carries the conclusion to cases the stated mechanism does not touch.",
+          "seductive_element": "It generalises in the direction the reader is already travelling, and consultation fatigue is a familiar complaint that makes the wider claim feel obvious.",
+          "thinking_mistake": "Letting a claim expand to the whole family of things the example belongs to, instead of holding it to what the paragraph's explanation can reach."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph states that the objections are not made mistaken by the skew, and that a good argument is not weakened by its author's free evening. This option converts a limit on what attendance measures into a reason to discount what was said.",
+          "seductive_element": "It sounds like the tough-minded conclusion, and it follows smoothly from the attendance figures if the fourth sentence is skimmed.",
+          "thinking_mistake": "Treating a point about who supplied the evidence as a verdict on the evidence itself."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No remedy appears anywhere in the paragraph. Staggered meeting times are a sensible response invented by the reader, and the confident promise that attendance would then match the population is stronger than anything the text supports.",
+          "seductive_element": "It answers the problem the paragraph raises, and a summary that solves something feels more useful than one that only describes.",
+          "thinking_mistake": "Summarising what ought to be done about a finding rather than what the author said the finding was."
+        }
+      ],
+      "reading_habit": "When a paragraph adds a sentence beginning 'none of this means', that sentence is naming the wrong summary in advance. Read it as a fence and check every option against it."
+    }
+  },
+  "mentor": {
+    "challenge": "The evidence here points somewhere the author declines to go. One sentence marks the boundary, and the options are arranged on both sides of it.",
+    "takeaway": "Knowing who could speak tells you what the room measures, not whether the speakers were right."
+  }
+}

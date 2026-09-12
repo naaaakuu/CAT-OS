@@ -1,0 +1,153 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0038",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Wait at the Ford",
+    "theme": "why settlements grew where a journey had to be broken",
+    "estimated_time_sec": 60,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "Towns tended to grow where a journey had to be interrupted, because the enforced wait created custom that a market could serve and the market then held the settlement in place; but this is a tendency rather than a law.",
+      "scope": "Medieval market towns at river crossings, generalised only as far as a tendency, since many crossings produced no town at all.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 1,
+      "qualifier_density": 2,
+      "domain_load": 1
+    },
+    "load_bearing": ["tend to", "a tendency and not a law", "plenty of crossings"],
+    "separating_element": null,
+    "dna_traits": ["certainty_reading", "main_idea_detection", "evidence_vs_thesis"],
+    "mission": "notice_certainty",
+    "learning_objective": "notice the difference between a pattern that often holds and a rule that always does, and keep the author's version",
+    "reasoning_patterns": ["sum.certainty_kept", "struct.specific_to_general", "arg.causal_claim", "sum.central_vs_supporting", "lang.often_vs_always"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option promising that a town will always appear at such a crossing. It captures the mechanism correctly and fails on the last clause of the paragraph, which says the rule is a tendency and not a law and that plenty of crossings never became anything at all. The option reporting where market towns stand is the observation with no explanation attached, and the option about towns whose original advantage has vanished extends the point about markets outlasting crossings into a claim about present-day places that the paragraph does not make.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General historical reasoning about the siting of market towns; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item with one clear mechanism and an explicit hedge in the final clause. Three distortion families: certainty (the tendency made a law), structure (the observation without the explanation), addition (a consequence for the present day)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Look at a map of medieval market towns and a pattern appears: a great many of them stand where a road met a river it could not simply cross.",
+        "role": "setup"
+      },
+      {
+        "text": "A ford or a bridge meant a wait, and a wait meant that goods came off the cart, that travellers wanted feeding, and that somebody found it worth setting up a stall.",
+        "role": "support"
+      },
+      {
+        "text": "Once a stall stood there a market followed, and the market held the settlement in place long after better crossings had been built downstream.",
+        "role": "evidence"
+      },
+      {
+        "text": "Towns tend to grow where a journey has to be interrupted, though the rule is a tendency and not a law: plenty of crossings never became anything at all.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Towns tended to grow where travel had to stop, because the wait created trade that a market could serve and the market then fixed the settlement, though many crossings produced nothing.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say about where towns grew, and how sure is it?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence explain why the interruption mattered, or only say where the towns are?",
+        "kept": "Good. The position on the map is the observation; the claim is the chain that runs from the wait to the stall to the market that outlasted the crossing.",
+        "drifted": "Saying that market towns stand at river crossings reports the pattern. The paragraph is about what produced it."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did your sentence keep 'tend to', or does it promise a town at every crossing?",
+        "kept": "Exactly. The last clause is there to stop the generalisation hardening, and a summary that keeps it keeps the author's actual claim.",
+        "drifted": "'Always' and 'wherever' are stronger than the text. The paragraph says plenty of crossings never became anything, which a rule would not allow."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a claim about towns as they stand today?",
+        "kept": "Well judged. The paragraph notes that markets outlasted their crossings, and stops there without commenting on whether such towns still make sense.",
+        "drifted": "That a town's original advantage has disappeared is a further thought. The text says only that the market kept the settlement where it was."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Towns tended to grow where a journey had to be broken, since the wait created a market that then held the settlement in place, though many crossings produced nothing.",
+      "B": "A town will always appear where a road meets a river that has to be forded, because travellers forced to stop there will need feeding and supplying while they wait.",
+      "C": "A great many of the medieval market towns stand at precisely the point at which an old road met a river that it could not simply cross without a ford or a bridge.",
+      "D": "Since a market outlasts the crossing that created it, a great many towns now stand in places whose original advantage has entirely disappeared from view."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Old market towns cluster at river crossings, and the paragraph explains why in a simple chain. A crossing forced a stop. A stop meant unloading, eating and waiting, which was worth someone's while to supply. A stall became a market, and once there was a market the town stayed put even when a better bridge went up further down the river. The last sentence generalises but refuses to overreach: journeys that must be broken tend to grow towns, and a good many crossings grew nothing.",
+      "correct_reasoning": "The correct option carries the causal chain, from the enforced wait to the market that anchored the settlement, and keeps the hedge the paragraph ends on, that many crossings produced nothing. It says as much as the author says and no more.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph calls its own rule a tendency and not a law, and adds that plenty of crossings never became anything. 'Always' contradicts the sentence it is drawn from.",
+          "seductive_element": "It states the mechanism correctly and with confidence, and confident sentences read like strong summaries.",
+          "thinking_mistake": "Hearing a pattern that often holds as a rule that must hold, because the explanation behind it sounds sufficient."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the observation the paragraph opens with, which the rest of the text exists to explain. No part of the explanation survives in it.",
+          "seductive_element": "It is factual, checkable against the first sentence, and free of any claim that could be wrong.",
+          "thinking_mistake": "Summarising the pattern a paragraph starts from instead of the account it offers of that pattern."
+        },
+        {
+          "option": "D",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the market held the settlement in place after better crossings were built. It never says the original advantage has vanished, nor comments on the towns as they now stand.",
+          "seductive_element": "It grows naturally out of the detail about better crossings downstream and sounds like the interesting modern upshot.",
+          "thinking_mistake": "Extending an observation about the past into a conclusion about the present that the author never reached."
+        }
+      ],
+      "reading_habit": "Read the last clause of a generalisation before choosing. Authors often put the limit there, and an option that ignores the limit will otherwise look like the confident answer."
+    }
+  },
+  "mentor": {
+    "challenge": "The explanation here is convincing enough to tempt you into a stronger rule than the author wrote down.",
+    "takeaway": "A tendency explains what usually happened. It does not promise what always will."
+  }
+}

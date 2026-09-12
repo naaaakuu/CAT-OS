@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0029",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "medicine-health",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "The Harm That Looked Like the Illness",
+    "theme": "why a medical practice is corrected faster when its harm announces itself",
+    "estimated_time_sec": 80,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "A practice is corrected quickly when the harm it causes appears as a distinct event and slowly when the harm is indistinguishable from the condition being treated, because only the first kind of evidence arrives without being sought.",
+      "scope": "Clinical practices whose harms differ in how visible they are; the claim is about the speed of correction, not about the diligence or motives of clinicians.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": ["not that doctors preferred", "had to be looked for", "at the same speed"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "surface_matching", "compression_skill"],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "choose the option that matches the paragraph's idea rather than the one that repeats the most of its vocabulary",
+    "reasoning_patterns": ["sum.central_vs_supporting", "comp.function_over_words", "sum.stance_kept", "arg.causal_claim", "sum.compression"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the bed-rest option, which reuses more of the paragraph's words than any other and is true of the case described. It is the illustration. The first sentence states the claim before the example arrives and the fourth restates it afterwards, which is what an example serving a claim looks like. The option blaming a comfortable convention is refused by the last sentence, which says the trouble was not preference but availability of evidence; and the option about practices surviving their evidence widens a claim about which harms get noticed into a claim about when medicine changes at all.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the visibility of iatrogenic harm; no specific text or trial adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A plain claim wrapped around a memorable example, written for the habit of matching ideas rather than vocabulary. Three distortion families: structure (the example promoted), stance (negligence imputed), scope (the claim widened to all practice change)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Medicine corrects a practice quickly when the damage it does is loud, and slowly when the damage is quiet.",
+        "role": "thesis"
+      },
+      {
+        "text": "Weeks of bed rest after surgery were standard for generations, and the harm they caused, in wasted muscle and clots and a slower return to ordinary life, looked exactly like the illness the rest had been prescribed for.",
+        "role": "evidence"
+      },
+      {
+        "text": "A patient moved too early who fainted in the corridor, by contrast, produced an event with a time, a place and a witness.",
+        "role": "support"
+      },
+      {
+        "text": "One kind of harm arrives with a name attached and the other is absorbed into the diagnosis, which is why the two are not corrected at the same speed.",
+        "role": "restatement"
+      },
+      {
+        "text": "The lesson is not that doctors preferred comfort to evidence, but that the evidence for one harm was lying about and the evidence for the other had to be looked for.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "A treatment's harm is corrected fast when it shows up as a distinct event and slowly when it is absorbed into the illness, because only the first kind of evidence presents itself without being sought.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say decides how quickly a harmful practice gets corrected?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence state the general claim, or does it describe what happened with bed rest?",
+        "kept": "Good. The bed-rest case is the illustration, and it sits between a sentence that states the claim and a sentence that restates it.",
+        "drifted": "Bed rest supplies the most specific material in the paragraph, which is exactly why it is easy to summarise instead of the idea it was chosen to demonstrate."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence accuse anyone, or does it keep the author's explanation about what evidence was available?",
+        "kept": "Exactly. The last sentence separates a failure of noticing from a failure of care, and a summary that blames has crossed that line.",
+        "drifted": "'Preferred a comfortable convention' is the reading the final sentence exists to refuse. The paragraph explains a delay without convicting anyone of it."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about which harms get noticed, or has it become a claim about when medicine changes at all?",
+        "kept": "Well judged. The comparison here is between two kinds of harm, and the claim reaches exactly as far as that comparison.",
+        "drifted": "Saying medicine changes only when a patient is visibly harmed covers every practice and every reason for changing one, which is far more than a claim about the visibility of damage."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Prolonged bed rest after surgery survived as standard practice because the wasted muscle and the clots that it caused were taken for the effects of the illness it was treating.",
+      "B": "A practice is corrected fast when its harm shows up as an identifiable event and slowly when it is absorbed into the illness, since only the first sort of evidence arrives unsought.",
+      "C": "Doctors were slow to abandon long bed rest after surgery because they trusted a comfortable and familiar convention more than the evidence that was then available to them.",
+      "D": "Medicine alters a practice only once a patient has been visibly harmed by it, which is why a great many treatments outlive the evidence that was once offered in support of them."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "Some damage done by treatment announces itself and some hides. The paragraph's example is the long bed rest that used to follow surgery. Lying still for weeks wastes muscle, encourages clots and slows recovery, and all of that looks like the illness the patient came in with, so nobody counted it as harm. Move a patient too soon, though, and they faint in the corridor in front of a nurse, and that is an incident with a date on it. So the two harms are not corrected at the same rate. The author adds that this is not a charge of negligence: one kind of evidence was simply lying about, and the other had to be hunted for.",
+      "correct_reasoning": "The correct option states the general claim the first and fourth sentences make, and keeps the reason the paragraph gives for it, that one kind of evidence presents itself and the other must be sought. It carries none of the example and none of the blame the last sentence refuses.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the illustration reported accurately. The paragraph states its claim before the bed rest arrives and restates it afterwards, which is what a case brought in to serve an idea looks like.",
+          "seductive_element": "It reuses more of the paragraph's own words than any other option, and every one of them can be checked against the text.",
+          "thinking_mistake": "Matching vocabulary rather than ideas, and letting the most detailed sentence stand in for the point it was supporting."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The last sentence rules this out in terms: the lesson is not that doctors preferred comfort to evidence. The paragraph's explanation is about which evidence existed to be seen, not about what clinicians were willing to look at.",
+          "seductive_element": "A practice that persisted for generations while harming people invites a culprit, and complacency is the readiest one.",
+          "thinking_mistake": "Supplying a motive when an author has offered a mechanism, and reading an account of a delay as an accusation."
+        },
+        {
+          "option": "D",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph compares two kinds of harm and says which is corrected sooner. It never claims that visible harm is the only thing that changes practice, nor that treatments generally outlive their evidence.",
+          "seductive_element": "It sounds like the large truth the example is pointing at, and its confident scope makes it read as the most consequential option available.",
+          "thinking_mistake": "Turning a comparison into a universal rule by dropping the other half of the comparison."
+        }
+      ],
+      "reading_habit": "When one sentence in a paragraph is far more concrete than the rest, ask what it is doing there. Examples are almost never the claim; they are the reason to believe it."
+    }
+  },
+  "mentor": {
+    "challenge": "The most quotable sentence here is not the point, and the option that repeats the most words is not the answer.",
+    "takeaway": "A harm with a date and a witness gets fixed first. That is a fact about evidence, not about character."
+  }
+}

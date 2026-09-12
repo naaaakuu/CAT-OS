@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0035",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "intellectual-history",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "bible_level": "elite",
+    "title": "The Shape and the Date",
+    "theme": "the two accounts of the origin of the idea of progress, and what each fails to explain",
+    "estimated_time_sec": 120,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "The two accounts of the origin of the idea of progress answer different questions, one explaining the shape of the idea and the other its date, so neither is sufficient on its own and the record does not fix the weight between them.",
+      "scope": "The origin of the modern idea of progress; the adjudication establishes that each account is partial and leaves their relative importance undetermined.",
+      "certainty": "hedged",
+      "stance": "cautionary"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 4,
+      "domain_load": 4
+    },
+    "load_bearing": ["neither is sufficient", "does not fix the weight", "but not its date", "but not the shape"],
+    "separating_element": "The correct option leaves the balance between the two accounts open; the nearest rival uses the paragraph's own dating argument to rank one above the other, which the closing clause says the record cannot do.",
+    "dna_traits": ["certainty_reading", "main_idea_detection", "scope_preservation", "author_intent"],
+    "mission": "keep_qualifiers",
+    "learning_objective": "keep an adjudication at the point of balance the author left it, rather than completing it into a verdict",
+    "reasoning_patterns": ["sum.qualification_kept", "struct.two_views_adjudication", "sum.certainty_kept", "sum.central_vs_supporting", "arg.qualification"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists both grasp that each account is partial. The rival then presses the paragraph's dating argument into a ranking: the eschatology sat unused for a thousand years, so the quarrel must be the decisive origin and the religious account merely supplies the form. The last clause forbids exactly that: 'neither is sufficient and the record does not fix the weight between them', and 'merely' contradicts the fourth sentence, which makes the shape one of the two things needing explanation rather than a decoration on the other. The option that states the secularisation thesis alone adopts a view the author only reports, and the methodological option recommends a practice the paragraph never proposes.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General historiographical reasoning about the origins of the idea of progress; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An adjudication that deliberately stops at balance. Families: stance, addition, precision. The near miss is the verdict the reader wants and the paragraph declines to reach."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Two accounts compete for the origin of the modern idea of progress.",
+        "role": "setup"
+      },
+      {
+        "text": "One traces it to Christian eschatology emptied of God: a history with a direction, a destination and a meaning, secularised into improvement.",
+        "role": "support"
+      },
+      {
+        "text": "The other finds it in the seventeenth-century quarrel over whether the moderns had surpassed the ancients, which was settled in the sciences, where work accumulates visibly and the moderns plainly had.",
+        "role": "support"
+      },
+      {
+        "text": "The first explains the shape of the idea but not its date, since the eschatology was available for a thousand years before anyone drew progress from it; the second explains the date but not the shape, since a victory in one field does not yield a directional history.",
+        "role": "evidence"
+      },
+      {
+        "text": "Taken together they answer different questions, where the form came from and where the confidence came from, and the honest position is that neither is sufficient and the record does not fix the weight between them.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Each account of the origin of progress explains only part of what needs explaining, one the form of the idea and the other its timing, so neither suffices alone and their relative weight is not something the record settles.",
+  "builder": {
+    "prompt": "In one sentence: how does the paragraph settle the competition between the two accounts?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what each account explains and what it fails to explain?",
+        "kept": "Good. The adjudication is a division of labour: form from one, timing from the other, and a gap in each where the other fits.",
+        "drifted": "Reporting that both accounts exist describes the setup. The fourth sentence does the work, by naming precisely what each one cannot reach."
+      },
+      {
+        "id": "certainty",
+        "ask": "Does your sentence leave the weight between the two accounts open, or has it decided which matters more?",
+        "kept": "Exactly right. The author names the honest position as one that refuses to rank them, and a summary that ranks has finished an argument the historian left open.",
+        "drifted": "The thousand-year delay is a strong argument and it is an argument about timing, not about importance. The closing clause says the record does not fix the weight."
+      },
+      {
+        "id": "stance",
+        "ask": "Is the position your sentence attributes to the author an adjudication, or one of the two accounts?",
+        "kept": "Well held. Both accounts are set out at length and with sympathy, which is what makes it easy to mistake either for the conclusion.",
+        "drifted": "The secularisation story is stated first and most memorably. It is reported here in order to be weighed, and the author endorses neither on its own."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Each account explains half of what needs explaining, the form in one case and the timing in the other, so neither suffices and the record leaves their weight open.",
+      "B": "The modern idea of progress is Christian eschatology with God taken out of it: a history with a direction and a destination, secularised into the promise of improvement.",
+      "C": "Since the eschatology lay unused for a thousand years, the quarrel over the moderns is the decisive origin, and the religious account merely supplies the shape of the idea.",
+      "D": "Historians would do better to stop hunting for a single origin of the idea of progress and to treat it instead as a convergence of several independent traditions."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Where did the idea that history improves come from? One story says it is Christianity with God removed: keep the direction and the destination, drop the deity, and you have progress. The other says it came out of the seventeenth-century argument about whether modern writers had beaten the ancients, an argument the sciences settled, because there the moderns obviously had. The paragraph then shows what each story cannot do. The religious one cannot explain why the idea appeared when it did, since the theology had been sitting there for a thousand years. The quarrel cannot explain the shape, since winning an argument about telescopes does not give you a history with a direction. So they answer different questions, and how much each contributed is not something the evidence decides.",
+      "correct_reasoning": "The correct option reproduces the division of labour the fourth sentence establishes and stops where the fifth stops, with neither account sufficient and the balance between them undetermined. It states a settled result about partiality and an unsettled one about weight, which is exactly the author's position.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "owner_swap",
+          "secondary_archetype": null,
+          "why_wrong": "This is the first of the two competing accounts, reported so that it can be weighed. The paragraph immediately says it cannot explain the date, which is the opposite of adopting it.",
+          "seductive_element": "It is the more striking of the two stories and is stated in the paragraph's own words, which makes it feel like the thesis rather than an exhibit.",
+          "thinking_mistake": "Taking a view an author sets out fully and fairly for a view the author holds."
+        },
+        {
+          "option": "C",
+          "archetype": "near_miss",
+          "secondary_archetype": "certainty_inflation",
+          "why_wrong": "The thousand-year delay is an argument about timing, and the paragraph uses it to show what the religious account cannot do rather than to rank the two. The closing clause says neither is sufficient and the record does not fix the weight, and 'merely supplies the shape' demotes one of the two things that needed explaining.",
+          "seductive_element": "It is built from the paragraph's own strongest piece of evidence and delivers the verdict the reader has been waiting for, differing from the key only in refusing to stop.",
+          "thinking_mistake": "Turning an argument about what an account cannot explain into an argument about how much it matters."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No advice to historians appears anywhere. The author weighs two accounts and reports what the record can and cannot settle, which is a finding rather than a recommendation about method.",
+          "seductive_element": "It sounds like the moral of a paragraph that finds both accounts partial, and methodological humility reads as the sophisticated response.",
+          "thinking_mistake": "Summarising the lesson an adjudication suggests for future work instead of the adjudication itself."
+        }
+      ],
+      "reading_habit": "When an author calls a position 'the honest position', read the rest of that sentence very slowly. It usually contains a refusal, and the refusal is the part options drop."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph gives you a powerful argument and then declines to use it for the thing you want to use it for.",
+    "takeaway": "Showing what an explanation cannot reach is not the same as showing how much it is worth."
+  }
+}

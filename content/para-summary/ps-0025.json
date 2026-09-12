@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0025",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "urban-studies",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "Twenty Minutes and a Parking Space",
+    "theme": "what closing a shopping street to traffic changes about the trade it can hold",
+    "estimated_time_sec": 105,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "On the available evidence, pedestrianisation changes the composition of a street's trade more than it raises the total, moving custom towards businesses people linger over and away from quick-errand shops, and it flatters streets that already gave visitors a reason to stay.",
+      "scope": "Shopping streets closed to traffic, over the two years or so that follow-up studies cover; the claim is about composition and about which streets the change suits.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 4,
+      "domain_load": 2
+    },
+    "load_bearing": ["on this evidence", "not so much", "already gave people a reason to stay", "within two years"],
+    "separating_element": null,
+    "dna_traits": ["certainty_reading", "main_idea_detection", "scope_preservation", "author_intent"],
+    "mission": "keep_qualifiers",
+    "learning_objective": "carry the hedges and the conditions of a claim into the summary, when a bolder version of the same claim is available and reads better",
+    "reasoning_patterns": ["sum.qualification_kept", "struct.pivot", "sum.central_vs_supporting", "lang.often_vs_always", "sum.no_addition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option telling councils to pedestrianise only streets that already invite lingering, because it carries the paragraph's own condition and therefore looks faithful. It fails on a single word: the author writes 'on this evidence, does not so much raise a street's trade as change the kind of trade it can hold', which is a description of what happens, and no sentence in the paragraph tells anyone what to do. The footfall option stops at the concession that the 'But' overturns, and the option about reliably destroying errand shops drops both the hedge and the condition that make the claim defensible.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General findings on the retail effects of pedestrianisation; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A concession-turn item where the thesis arrives fully qualified and the strongest distractor keeps the condition but changes the mood to imperative. Three distortion families: structure (the concession read as the point), certainty (the hedge stripped), addition (a recommendation the author never makes)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "When a shopping street is closed to traffic the traders along it almost always object, and their fear is not superstition: many of them live on customers who arrive, park and leave inside twenty minutes.",
+        "role": "setup"
+      },
+      {
+        "text": "The studies that follow such schemes are nonetheless consistent, reporting higher footfall and fewer empty units within two years.",
+        "role": "concession"
+      },
+      {
+        "text": "But the aggregate conceals a redistribution.",
+        "role": "support"
+      },
+      {
+        "text": "The gains collect around cafés, comparison shopping and anything a visitor dawdles over, while the losses fall on the chemist, the ironmonger and the trades whose customers came for one item and a short stay.",
+        "role": "evidence"
+      },
+      {
+        "text": "On this evidence pedestrianisation does not so much raise a street's trade as change the kind of trade it can hold, and it flatters the streets that already gave people a reason to stay.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "On the evidence so far, closing a street to cars shifts the composition of its trade towards businesses people linger over rather than raising trade overall, and it suits streets that already offered a reason to stay.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say pedestrianisation does to a street's trade, and under what condition?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the mix of trade changes, rather than that trade rises or falls?",
+        "kept": "Good. The rise in footfall and the traders' losses are both real in this paragraph, which is why the claim is about redistribution rather than about a total.",
+        "drifted": "A summary that reports either the gain or the loss has taken one side of a redistribution. The paragraph's point is that both happen and that the composition is what moves."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'on this evidence' and the sense that this is a tendency rather than a law?",
+        "kept": "Well held. The author writes from follow-up studies over two years, and a summary that promises what pedestrianisation reliably does has left the evidence behind.",
+        "drifted": "'Reliably' and 'wherever' are stronger than the text. The paragraph offers consistent findings over a short window, not a rule that holds in every high street."
+      },
+      {
+        "id": "addition",
+        "ask": "Does your sentence describe what happens, or has it started advising councils?",
+        "kept": "Exactly. The condition about streets that already invite lingering is an observation about where the effect is flattering, not a recommendation about where to build.",
+        "drifted": "Turning the condition into a policy is the subtlest drift available here, because the words survive and only the mood changes. The author reports; the option instructs."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Closing a street to cars tends to change which trades it can hold rather than simply lifting its trade, and it flatters streets that already invited people to linger.",
+      "B": "Studies of pedestrianised streets consistently report higher footfall and fewer empty units within two years, so the objections of the traders turn out to be misplaced.",
+      "C": "Pedestrianisation reliably destroys the shops whose customers come for a single item, wherever a council decides to close a shopping street to through traffic.",
+      "D": "Councils should pedestrianise only those streets that already give visitors a reason to linger, and leave the streets people use for quick errands open to cars."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Shopkeepers protest when a street is closed to cars, and the paragraph says they have a point: a lot of their custom is people who park for twenty minutes. Then it concedes the evidence against them, since footfall goes up and empty units go down. The 'But' is where the argument really starts. That headline figure is an average, and underneath it money is moving: towards cafés and browsing, away from the chemist and the ironmonger. So the honest description is not that trade rises but that a different sort of trade takes over, and the change looks best on streets that already had something to keep people there.",
+      "correct_reasoning": "The correct option keeps the redistribution the 'But' introduces, keeps the tendency wording rather than promising a result, and keeps the condition about streets that already invited lingering. It is the thesis sentence compressed without losing either of its two qualifications.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the sentence the 'But' is written to overturn. The paragraph grants the footfall finding and then shows what it hides, so treating the finding as the conclusion reverses the direction of the argument.",
+          "seductive_element": "It quotes the only hard numbers on offer and settles a dispute the first sentence set up, which feels like what a summary should do.",
+          "thinking_mistake": "Taking the last piece of evidence before the turn as the author's position, because it is the first thing in the paragraph that sounds like a result."
+        },
+        {
+          "option": "C",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The author writes 'on this evidence' and describes where losses fall, not a law about every scheme. 'Reliably destroys' and 'wherever' convert a two-year pattern into a guarantee, and they also drop the condition about streets that already invited lingering.",
+          "seductive_element": "It sides with the traders of the first sentence, whose fear the author calls reasonable, so it feels like the sympathetic reading.",
+          "thinking_mistake": "Hearing a consistent finding as an invariable one, and letting a strong verb stand in for a measured claim."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "Every element here is drawn from the paragraph except the instruction. The author says what pedestrianisation does and which streets it suits; no sentence tells a council where to do it or where to refrain.",
+          "seductive_element": "It carries the paragraph's own condition about lingering, so it reads as the most attentive option on the list rather than the most inventive.",
+          "thinking_mistake": "Converting a description of where an effect is favourable into advice about where to produce it."
+        }
+      ],
+      "reading_habit": "Check the mood of the verb before you check the content. An option that instructs cannot summarise a paragraph that describes, however many of its words it repeats."
+    }
+  },
+  "mentor": {
+    "challenge": "The strongest wrong option here keeps every idea in the paragraph and changes only what kind of sentence it is.",
+    "takeaway": "A condition is not a recommendation. Saying where something works is not saying where to do it."
+  }
+}

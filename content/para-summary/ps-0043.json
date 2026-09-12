@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0043",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "arts-culture",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "Behind the Screen",
+    "theme": "what a change in shortlists after screened auditions can and cannot show",
+    "estimated_time_sec": 80,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "Because a screen removes only what a panel can see while leaving the sound unchanged, a change in shortlists shows that something visible was contributing to the verdict, but does not identify what that something was.",
+      "scope": "Screened auditions and the inference the change licenses; the claim establishes the existence of a visual contribution, not its nature.",
+      "certainty": "mixed",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["does not say what", "may have been", "something visible"],
+    "separating_element": null,
+    "dna_traits": ["evidence_vs_thesis", "inference_control", "main_idea_detection", "scope_preservation"],
+    "mission": "evidence_vs_conclusion",
+    "learning_objective": "separate what an experiment establishes from the explanation a reader supplies for it",
+    "reasoning_patterns": ["arg.evidence_vs_conclusion", "sum.no_addition", "sum.central_vs_supporting", "inf.vs_speculation", "scope.abstraction_level"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option naming the visible factor as discrimination. The paragraph lists three candidates, a candidate's bearing, a reputation attached to a face, and nothing more articulate than an expectation about what a player of an instrument looks like, and says outright that the experiment does not say which. Two of the three are not discrimination in any ordinary sense. The option about identical sound reports the premise that licenses the inference rather than the inference; the option about all judgements made in the presence of the judged widens the claim beyond auditions altogether.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about what a screened audition can establish; no specific study or orchestra adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An item about the gap between an existence claim and an identification. Three distortion families: addition (the mechanism named), structure (the premise promoted), scope (the claim lifted out of auditions)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "When orchestras began hearing candidates from behind a screen the composition of their shortlists changed, and the change is evidence about the panel rather than about the playing.",
+        "role": "thesis"
+      },
+      {
+        "text": "The sound reaching the judges was the same in both arrangements; only what they could see had been taken away.",
+        "role": "support"
+      },
+      {
+        "text": "So whatever the screen removed had been contributing to the verdict, and it was not part of the performance.",
+        "role": "support"
+      },
+      {
+        "text": "What it was, the experiment does not say: the panels may have been reacting to a candidate's bearing, to a reputation attached to a face, or to nothing more articulate than an expectation of what a player of that instrument looks like.",
+        "role": "qualification"
+      },
+      {
+        "text": "The screen shows that something visible was being counted; it does not say what.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Since only the visible was removed while the sound stayed the same, the change in shortlists establishes that something a panel could see was being counted, without establishing what it was.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the screen establishes, and what does it leave open?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the screen establishes about the panel, rather than what it did to the shortlists?",
+        "kept": "Good. The change in shortlists is the observation; the claim is what that change licenses, which is that a visible factor was being counted.",
+        "drifted": "Reporting that the lists changed leaves the inference unmade. The paragraph's work is the step from an unchanged sound to a conclusion about the judges."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you named what the visible factor was?",
+        "kept": "Exactly right. The author offers three candidates and declines to choose, so a summary that chooses has done something the experiment could not.",
+        "drifted": "Bias is the name most readers supply. The paragraph lists bearing, reputation and plain expectation among the possibilities, and says the experiment does not decide."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about auditions, or about judgement in general?",
+        "kept": "Well held. The argument runs on one feature of this arrangement, that the sound was identical and only sight was removed.",
+        "drifted": "A claim about every judgement made in someone's presence covers interviews, examinations and trials, none of which supplies the controlled comparison this argument depends on."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The change in shortlists after screens were introduced shows that panels had been discriminating against candidates on grounds that had nothing to do with music.",
+      "B": "Since only the visible was removed, the change in shortlists shows that something a panel could see was affecting the verdict, without showing what it was.",
+      "C": "The sound that reached the judges was identical in both arrangements, and the only thing taken away from them was the sight of the person playing.",
+      "D": "Any judgement made in the presence of the person being judged will be affected by things that have nothing at all to do with the performance itself."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "Put a screen between the panel and the player and the lists of who gets through change. The music did not change: the same sound reached the same ears. The only difference was that the judges could no longer see. So something they had been seeing was going into the verdict, and it was not part of the playing. What that something was is another matter. It might have been how a candidate carried themselves, or a face the panel recognised, or nothing sharper than a vague sense of what a player of that instrument looks like. The screen proves that a visible something counted. It does not tell you its name.",
+      "correct_reasoning": "The correct option makes the inference the paragraph makes, from an unchanged sound to a visible factor in the verdict, and stops where the paragraph stops, at an existence claim without an identification. That gap is the last sentence.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph names three possibilities and refuses to choose among them, and two of the three, a familiar face and an expectation about how a player of an instrument looks, are not discrimination as the word is normally used.",
+          "seductive_element": "It is the explanation almost every reader supplies for this result, and it feels like the point of running the experiment in the first place.",
+          "thinking_mistake": "Filling in the mechanism an author deliberately left unnamed, and mistaking the filling-in for comprehension."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the premise that makes the inference possible, reported on its own. The conclusion drawn from it, that something visible was contributing to the verdict, is what the paragraph exists to state.",
+          "seductive_element": "It is precisely accurate and cannot be faulted against the text, which makes it feel like the safe choice.",
+          "thinking_mistake": "Summarising the controlled comparison rather than what the comparison was set up to show."
+        },
+        {
+          "option": "D",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The argument depends on a feature peculiar to this arrangement, an identical sound with only sight removed. Interviews and examinations offer no such comparison, and the paragraph never mentions them.",
+          "seductive_element": "It states the general moral the audition seems to illustrate, and general morals read like the deeper reading.",
+          "thinking_mistake": "Turning a claim licensed by one controlled comparison into a claim about judgement everywhere."
+        }
+      ],
+      "reading_habit": "Distinguish 'something was doing this' from 'this was doing it'. An experiment that removes one variable proves the first; the second is a name you supplied."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph proves that something was counted and then refuses to say what. One option says it anyway.",
+    "takeaway": "Knowing that a factor mattered is not knowing which factor it was."
+  }
+}

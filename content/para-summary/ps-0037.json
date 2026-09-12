@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0037",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "scientific-method",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Trials in the Drawer",
+    "theme": "why averaging the published studies overstates an effect",
+    "estimated_time_sec": 70,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "Because published studies are a selection of the studies run, and trials that found nothing are the least likely to be published, the average of a published literature is an average of successes and sits above the truth, though the distortion lies in the selection rather than in any individual study.",
+      "scope": "A reader averaging a published literature to judge whether a treatment works; the claim concerns the selection of studies, not the quality of any of them.",
+      "certainty": "asserted",
+      "stance": "cautionary"
+    },
+    "turn": { "present": true, "marker": "however" },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": ["not a random selection", "says nothing about whether", "in the selection rather than"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "inference_control", "evidence_vs_thesis", "author_intent"],
+    "mission": "add_nothing",
+    "learning_objective": "keep a summary to the author's diagnosis when the remedy is obvious and the author has not named it",
+    "reasoning_patterns": ["sum.no_addition", "cr.sampling", "sum.central_vs_supporting", "arg.causal_claim", "sum.stance_kept"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option telling journals to publish null results. The paragraph diagnoses a selection effect and never prescribes anything, and the fix is the reader's addition rather than the author's conclusion. The option saying the literature cannot be trusted is refused by the last sentence, which insists each study may be sound and puts the distortion in the selection; it also imputes a purpose to the selecting that the text does not. The option about null trials being hard to write up and place is the mechanism, reported before the conclusion it was introduced to support.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about publication selection in a research literature; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy-tier item whose whole difficulty is resisting the obvious remedy. Three distortion families: addition (the reform), stance (the literature condemned), structure (the mechanism promoted over the conclusion)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A reader who wants to know whether a treatment works will look up the studies and take the average of what they find.",
+        "role": "setup"
+      },
+      {
+        "text": "The studies they find, however, are the ones that were published, and what gets published is not a random selection of what was run.",
+        "role": "support"
+      },
+      {
+        "text": "A trial that found nothing is harder to write up, harder to place and easier to leave in a drawer, so the literature is thinner in null results than the research was.",
+        "role": "evidence"
+      },
+      {
+        "text": "The average of the published studies is therefore an average of the successes, and it will sit above the truth by an amount nobody in the calculation can see.",
+        "role": "thesis"
+      },
+      {
+        "text": "This says nothing about whether the individual studies were done well; each may be sound, and the distortion lives in the selection rather than in any of them.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Because null trials are the least likely to be published, averaging a published literature averages the successes and overstates the effect, even where every individual study is sound.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say goes wrong when a reader averages the published studies?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the average comes out too high, rather than only that null results go unpublished?",
+        "kept": "Good. The missing null results are the mechanism; the claim is what they do to the number a reader calculates from what remains.",
+        "drifted": "Reporting that null trials are hard to publish stops one step short. The paragraph is about the consequence for anyone who averages what did get published."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you told journals or researchers what they ought to do?",
+        "kept": "Exactly right. The remedy is obvious, which is precisely why noticing that the author never states it is the skill this paragraph trains.",
+        "drifted": "Publishing null results is the standard fix and it is nowhere in the text. A summary carries the diagnosis, and leaves the treatment to whoever wants to propose one."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence keep the author's point that the individual studies may be perfectly sound?",
+        "kept": "Well held. The last sentence puts the fault in the selection rather than in the research, and a summary that condemns the literature has moved the blame.",
+        "drifted": "'Cannot be trusted' is a verdict on the studies. The author says each may be well done and that the distortion arises between them, not inside any of them."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Journals ought to undertake to publish the trials that found nothing, so that a reader averaging a literature is not misled by everything left in a drawer somewhere.",
+      "B": "The published literature on a treatment cannot be trusted, since the studies that make it into print have been selected to show the treatment in a good light.",
+      "C": "A trial that found nothing is harder to write up and harder to place than one that found something, which is why so many of them are never even submitted at all.",
+      "D": "Since null trials are least likely to be published, the average of a literature is an average of successes and sits above the truth, though each study may be sound."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "If you want to know whether something works, you read the studies and take an average. The trouble is what you are averaging. Published studies are not a fair sample of the studies that were done, because a trial that found nothing is a dispiriting thing to write up and a hard thing to place, so a lot of them never leave the drawer. What survives into print leans towards the results that found something. Average those and you get a number that is too high, and nothing in the calculation tells you by how much. The author is careful at the end: this is not a complaint about the studies themselves, which may each be perfectly good. The damage is done by which ones you can see.",
+      "correct_reasoning": "The correct option states the consequence the paragraph is built to reach, that the published average sits above the truth, keeps the mechanism that produces it, and keeps the last sentence's insistence that individual studies may be sound.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph diagnoses a selection effect and recommends nothing. Publishing null results is the reader's remedy imported into a text that never proposes it.",
+          "seductive_element": "It is the obvious and sensible response to the problem described, and a summary that fixes something feels more valuable than one that only diagnoses.",
+          "thinking_mistake": "Answering the question the paragraph raises rather than reporting the answer the paragraph gave."
+        },
+        {
+          "option": "B",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The last sentence says each study may be sound and locates the distortion in the selection. 'Selected to show the treatment working' also suggests a purpose behind the selection that the paragraph never alleges.",
+          "seductive_element": "It sounds like the hard-headed conclusion, and the mechanism described really does bias what a reader sees.",
+          "thinking_mistake": "Hearing an account of how a bias arises as a charge against the people whose work is biased."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the mechanism, reported before the conclusion drawn from it. The paragraph uses the difficulty of publishing null results to explain why an average of the literature comes out too high, and that consequence is missing here.",
+          "seductive_element": "It is the most practical and recognisable sentence in the paragraph, and it is true of research life as most readers know it.",
+          "thinking_mistake": "Summarising the cause and leaving out the effect the cause was brought in to explain."
+        }
+      ],
+      "reading_habit": "When a paragraph describes a problem with an obvious fix, check whether the author ever proposed one. The fix will be on the option list whether or not it is in the text."
+    }
+  },
+  "mentor": {
+    "challenge": "The repair for this problem is so obvious that you may finish the paragraph believing you read it. Check whether you did.",
+    "takeaway": "A set of good studies can still add up to a wrong number, if you can only see some of them."
+  }
+}

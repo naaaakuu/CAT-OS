@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0024",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "environment",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "The Fires That Were Not Allowed",
+    "theme": "why a century of extinguishing small forest fires produced larger ones",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "Suppressing frequent low fires did not remove fire from these forests but stored the fuel those fires used to consume, which shows that taking a disturbance out of a system adapted to it postpones the disturbance rather than abolishing it; the policy was nonetheless a reasonable one at the time.",
+      "scope": "Forests in which frequent low-intensity fire was part of the system, and the general lesson about disturbances a system has adapted to; the claim does not extend to calling the policy an error.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["were not careless", "a reasonable response", "had adapted to it"],
+    "separating_element": null,
+    "dna_traits": ["author_intent", "main_idea_detection", "scope_preservation", "compression_skill"],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep an author's explicit refusal to blame when the causal story they tell reads like an indictment",
+    "reasoning_patterns": ["sum.stance_kept", "struct.specific_to_general", "arg.causal_claim", "sum.no_addition", "scope.abstraction_level"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that calls the century of suppression a sustained error. The first three sentences do read as an indictment, and a reader who stops there will sign it. The fourth sentence is written to stop exactly that: 'The foresters were not careless: the policy was a reasonable response to what was known, and in the settled valleys it saved a great deal.' The universal option drops the phrase 'a system that had adapted to it', which is the condition the whole generalisation rests on; and the option recommending managed burning proposes a policy the paragraph never raises.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General fire-ecology reasoning about fuel accumulation; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A causal story that invites a verdict the author withholds. Three distortion families: stance (the correction turned into a condemnation), scope (the generalisation stripped of its condition), addition (a management prescription imported)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "For most of the last century the forest services of several countries put out every fire they could reach, and the area burned each year fell steadily.",
+        "role": "setup"
+      },
+      {
+        "text": "It has since climbed again, and the fires that now break out are markedly harder to stop than the ones that were being suppressed.",
+        "role": "evidence"
+      },
+      {
+        "text": "The frequent low fires that were prevented had been consuming the litter, the scrub and the young stems on which a hot fire depends, so each decade of success left more to burn than the decade before it.",
+        "role": "support"
+      },
+      {
+        "text": "The foresters were not careless: the policy was a reasonable response to what was known, and in the settled valleys it saved a great deal.",
+        "role": "concession"
+      },
+      {
+        "text": "What the record shows is that taking a disturbance out of a system that had adapted to it does not abolish the disturbance but stores it, and the stored version arrives on terms nobody has chosen.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Extinguishing frequent small fires stored rather than removed the fuel they used to burn, so severe fires returned; a disturbance taken out of a system adapted to it is postponed, not abolished, and the policy was still reasonable in its day.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say suppression did to fire, and how does it judge the people who suppressed?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say that the fuel was stored rather than that fires simply returned?",
+        "kept": "Good. The return of fire is the observation; the claim is the mechanism that connects the quiet decades to the fierce ones, which is accumulation.",
+        "drifted": "Reporting that severe fires came back leaves out the reason the paragraph exists to give: what the small fires had been removing, and where it went instead."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence blame the foresters, or does it keep the author's judgement that the policy was reasonable?",
+        "kept": "Well held. The author explains a failure without convicting anyone of it, and a summary that convicts has changed the author's position, not tightened it.",
+        "drifted": "'Mistake' and 'error' are your words, not the author's. The fourth sentence says the policy was a reasonable response to what was known and that it saved a great deal."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the condition that the system had adapted to the disturbance?",
+        "kept": "Exactly. The generalisation is about systems already shaped by the thing being removed; without that clause it becomes a claim about suppression everywhere.",
+        "drifted": "Nothing here says that every suppressed disturbance returns larger. The claim is limited to a system that had adapted to the disturbance in the first place."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A century spent extinguishing every forest fire was a sustained error, whose cost is the fiercer fires now burning through the fuel that the policy let gather.",
+      "B": "Suppressing a natural disturbance always produces a larger version of it in the end, whatever the system involved and however long the suppression is kept up.",
+      "C": "Putting out the small fires stored rather than removed the fuel they had consumed, so the fiercer fires are the deferred cost of a policy that was reasonable in its day.",
+      "D": "Forest services should now let low fires burn, since a century of suppression has shown that the fuel they would have consumed arrives on terms nobody chooses."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "Foresters spent a century stopping fires, and for a long while it worked: less burned each year. Then the trend reversed, and the fires that came were worse. The reason is what the small fires had been doing. They ate the litter and scrub that a big fire needs, so every year of successful suppression added to the pile. The author refuses to turn this into an accusation. Given what was known, the policy made sense and protected inhabited valleys. The point is a general one about systems: take out a disturbance a system has grown around, and you have not removed it, you have saved it up for a day you do not pick.",
+      "correct_reasoning": "The correct option keeps the mechanism the paragraph exists to explain, that the fuel was stored rather than removed, and keeps the author's explicit judgement that the policy was reasonable at the time. Both halves are stated in the text, and only this option carries both.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the foresters were not careless and that the policy was a reasonable response to what was known. This option takes the causal account and converts it into a verdict the author has already declined to give.",
+          "seductive_element": "The first three sentences read like a case for the prosecution, and the option is the summing-up that a reader has half written by the time the fourth sentence arrives.",
+          "thinking_mistake": "Hearing an explanation of how something went wrong as a judgement that someone was at fault."
+        },
+        {
+          "option": "B",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The generalisation in the last sentence is about a system that had adapted to the disturbance. Strip that clause and the claim covers every suppression of every disturbance anywhere, which is far more than the fuel argument can carry.",
+          "seductive_element": "It sounds like the law the paragraph is reaching for, and big principles feel like better summaries than qualified ones.",
+          "thinking_mistake": "Promoting a conditional generalisation into an unconditional one because the condition is a quiet subordinate clause."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "Nothing in the paragraph proposes a course of action. Managed burning is a plausible response to the analysis, and it is the reader's response, not the author's.",
+          "seductive_element": "The analysis seems to demand a remedy, and the option supplies the one most readers would name if asked.",
+          "thinking_mistake": "Answering the question the paragraph provokes instead of the question it addresses."
+        }
+      ],
+      "reading_habit": "Find the sentence that defends somebody before you choose. Authors who intend blame rarely trouble to write one, and its presence usually rules out the harshest option on the list."
+    }
+  },
+  "mentor": {
+    "challenge": "Three sentences build a case, and the fourth declines to press charges. Notice which one the options have decided to believe.",
+    "takeaway": "Explaining how a policy failed is not the same as saying it should never have been tried."
+  }
+}

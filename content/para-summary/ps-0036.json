@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0036",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "The Carving Nobody Here Owns",
+    "theme": "what the word authentic certifies in the trade in objects made for visitors",
+    "estimated_time_sec": 100,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "In the trade in objects made for visitors, the word authentic certifies the provenance a buyer can check and not what the object was made for, which is why it can be entirely accurate and still be heard as more than it says.",
+      "scope": "Craft objects produced for visitors; the claim is about what the word certifies in that trade, not about the skill of the makers or the quality of what they make.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": ["in this trade", "entirely accurate", "heard as more than it says"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "language_precision", "scope_preservation"],
+    "mission": "find_the_thesis",
+    "learning_objective": "pick out the claim a paragraph makes about a word when the facts it assembles are more striking than the claim",
+    "reasoning_patterns": ["sum.central_vs_supporting", "scope.condition", "sum.stance_kept", "comp.function_over_words", "sum.compression"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option reporting both facts, that the carvings are locally made and that nobody local owns one. It is accurate and it contains the paradox, which is why it reads as the point. It is not: the opening sentence states the claim before those facts arrive and the closing sentence restates it afterwards, and neither is about the carvings. The option calling the label designed to mislead is refused by 'entirely accurate', since the paragraph insists the word is true. The option making authenticity always a claim about buyers drops the opening phrase that ties the claim to this trade.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about authenticity claims in craft markets; no specific place or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A claim about a word, wrapped around two facts that are more memorable than it. Three distortion families: structure (the facts promoted over the claim), stance (accuracy read as deception), scope (the claim lifted out of the trade it was made about)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "In the trade in objects made for visitors, authenticity is a claim about what the buyer can check rather than about how anyone in the place actually lives.",
+        "role": "thesis"
+      },
+      {
+        "text": "The carvings sold at the harbour are made in the town, from materials cut nearby, by hands trained in the workshop next door.",
+        "role": "support"
+      },
+      {
+        "text": "They are also made to a specification set by what visitors expect a carving from that town to look like, and no household there keeps one.",
+        "role": "support"
+      },
+      {
+        "text": "Both facts hold at once, and the label certifies the provenance while the sale depends on the buyer reading it as a guarantee that the object belongs to the life of the town.",
+        "role": "qualification"
+      },
+      {
+        "text": "What the word names, then, is where a thing was made and not what it was made for, which is why it can be entirely accurate and still be heard as more than it says.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "In this trade the word authentic certifies where an object was made, which a buyer can verify, rather than what it was made for, so it can be strictly true and still be taken to promise a place in local life.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the word authentic certifies in this trade, and what does it not?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the word certifies, rather than describing the carvings?",
+        "kept": "Good. The carvings are the demonstration; the claim is about what a label can and cannot vouch for, and it is stated before they appear and again after.",
+        "drifted": "The two facts about the carvings are the most striking material here, which is exactly why they stand in so easily for the idea they were assembled to show."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence keep the author's insistence that the word is accurate?",
+        "kept": "Exactly. The argument is more interesting because nothing false is being said, and a summary that alleges deception loses the point rather than sharpening it.",
+        "drifted": "'Designed to mislead' is your charge, not the author's. The paragraph says the word is entirely accurate and that the buyer hears more in it than it states."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about this trade, or about the word authentic wherever it appears?",
+        "kept": "Well held. The first words of the paragraph fix the setting, and the argument depends on a market in which the buyer is a visitor who can check origin and little else.",
+        "drifted": "A claim about authenticity in general covers wine, signatures and restored buildings, none of which this paragraph has examined."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The carvings sold at the harbour are made locally by trained hands, and yet not a single household in the town keeps one of them for its own use.",
+      "B": "In this trade the word authentic certifies where a thing was made, not what it was made for, so it can be exact and still be heard as more.",
+      "C": "The trade in objects made for visitors sells a manufactured image of a place under a label carefully designed to mislead the people who buy it.",
+      "D": "Authenticity is always a claim about the buyer rather than about the maker, which is why the word does so little real work wherever it is used."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "Two things are true of the carvings on the harbour front. They really are made in the town, by local people, out of local wood. They are also made to look the way visitors think a carving from that town should look, and nobody who lives there owns one. The label 'authentic' attaches to the first fact, which is the one a buyer can check. What the buyer takes from it is something else: that the object has a place in the life of the town. The paragraph's point is about the word. It vouches for origin, not for purpose, so it can be perfectly true and still be carrying a promise it never made.",
+      "correct_reasoning": "The correct option states what the word certifies and what it does not, which is the claim made in the first sentence and restated in the last. It also keeps the paragraph's insistence that the label is exact, which is what makes the gap interesting rather than fraudulent.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "These are the two supporting facts, reported faithfully and left to speak for themselves. The paragraph uses them to make a claim about what a word certifies, and that claim is entirely absent here.",
+          "seductive_element": "It contains the paradox, it is concrete, and every clause can be matched against the text, which makes it feel like the most defensible option available.",
+          "thinking_mistake": "Letting the evidence for a claim stand in for the claim, because evidence is easier to verify than an idea."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the word is entirely accurate. Deception requires a false statement, and the author's argument is precisely that nothing false is said and the buyer hears more than was stated.",
+          "seductive_element": "The gap between what is certified and what is understood looks like a trick, and indignation is the readiest response to it.",
+          "thinking_mistake": "Converting a point about what a true statement does not cover into an accusation that someone lied."
+        },
+        {
+          "option": "D",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph opens by fixing its subject as the trade in objects made for visitors, and its argument depends on a buyer who can verify origin and nothing else. Lifted out of that market, the claim covers cases the text never examined.",
+          "seductive_element": "It promotes a local observation into a general thesis about a much-used word, which reads as the more ambitious summary.",
+          "thinking_mistake": "Discarding the opening phrase that sets a claim's boundary, because such phrases rarely feel like content."
+        }
+      ],
+      "reading_habit": "When a paragraph is about a word, the claim will be a sentence saying what the word does and does not cover. Find that sentence before you read the examples that surround it."
+    }
+  },
+  "mentor": {
+    "challenge": "The two facts here are more memorable than the idea that joins them, and one option offers you the facts alone.",
+    "takeaway": "A word can be perfectly true and still be doing work it never promised to do."
+  }
+}

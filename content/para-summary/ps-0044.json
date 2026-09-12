@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0044",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "sociology",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "The Subscription That Replaced a Duty",
+    "theme": "what a mutual-aid association trades away when it hires staff",
+    "estimated_time_sec": 100,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "When a mutual-aid association hires staff it buys reliability with reciprocity, a price that goes unnoticed because the thing given up was never counted; this describes a trade rather than argues against making it.",
+      "scope": "Associations that move from member obligation to paid delivery; the paragraph describes the exchange and expressly declines to condemn it.",
+      "certainty": "asserted",
+      "stance": "cautionary"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["not an argument against making it", "helps nobody", "never counted"],
+    "separating_element": null,
+    "dna_traits": ["author_intent", "main_idea_detection", "compression_skill", "inference_control"],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep an author's refusal to condemn when the analysis they have just written reads like an indictment",
+    "reasoning_patterns": ["sum.stance_kept", "sum.central_vs_supporting", "arg.qualification", "sum.no_addition", "arg.causal_claim"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option saying the association has given up what made it worth belonging to. The middle of the paragraph supports that reading and the last sentence forbids it: 'This is a description of a trade, not an argument against making it; an association that collapses under its own obligations helps nobody.' The option about work being done on time by somebody accountable reports the gain and drops the cost, which is half of a trade. The option advising associations to keep staff to a minimum turns the description into a rule of management.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the professionalisation of member associations; no specific organisation or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An analysis that reads as a lament until its final sentence declines to be one. Three distortion families: stance (the trade turned into a loss), structure (the benefit taken as the point), addition (a management rule imported)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "An association that has run on the obligations of its members reaches a point where the work exceeds what members can decently be asked to do, and it hires somebody.",
+        "role": "setup"
+      },
+      {
+        "text": "The hire solves the problem it was made for: the work now gets done on time, by a person who can be held to it, whether or not anybody feels like doing it that week.",
+        "role": "support"
+      },
+      {
+        "text": "It also changes what the members are: a duty dischargeable by paying a subscription is a different kind of duty, and people who were responsible for one another become people who are served.",
+        "role": "evidence"
+      },
+      {
+        "text": "The association buys reliability with reciprocity, and the price is invisible because the thing given up was never counted in the first place.",
+        "role": "thesis"
+      },
+      {
+        "text": "This is a description of a trade, not an argument against making it; an association that collapses under its own obligations helps nobody.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Hiring staff gives an association reliable work at the cost of the reciprocity among its members, an unnoticed price because it was never measured, though the exchange may still be worth making.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say an association gains and loses by hiring staff, and how does it judge that?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name both sides of the exchange, the reliability gained and the reciprocity given up?",
+        "kept": "Good. A trade needs two sides in the summary, and the paragraph's word is 'buys', which implies something handed over as well as something received.",
+        "drifted": "Reporting only the gain, or only the loss, turns a trade into a benefit or a lament. The claim is that one was exchanged for the other."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence condemn the hiring, or keep the author's refusal to?",
+        "kept": "Exactly. The last sentence is written to stop the analysis becoming a verdict, and it gives a reason: an association crushed by its own duties is no use to anybody.",
+        "drifted": "'Given up what made it worth belonging to' is the reading the final sentence declines. Describing what a choice costs is not the same as saying it should not be made."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you advised associations on how much staff to employ?",
+        "kept": "Well judged. The paragraph explains what a hire changes and stops; the question of how much staffing is right is never raised.",
+        "drifted": "Keeping paid staff to a minimum is a rule of management, and the author offers an account of a trade rather than a policy for making it."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "An association that hires staff to do what its members once did for one another has given up the very thing that made belonging to it worth anything at all.",
+      "B": "Once an association employs somebody, the work gets done on time and by a person who can be held to it, whether or not any member feels like doing it that week.",
+      "C": "Hiring staff buys an association reliability at the cost of reciprocity among members, a price unnoticed because it was never counted, though the trade may be worth it.",
+      "D": "Associations ought to keep their paid staff to a bare minimum, so that the obligations members owe to one another are not quietly replaced by the paying of a subscription."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "A group that has always relied on its members doing things for each other eventually has more to do than it can decently ask of anyone, so it employs someone. That works: the job now gets done on time by a person who answers for it. But something else changes at the same moment. A duty you can discharge by paying your subscription is a different sort of duty, and members who were responsible for one another become members who are served. So the association has swapped one good thing for another, reliability for reciprocity, and the swap goes unnoticed because nobody was ever measuring the reciprocity. The author is careful to say this is not an objection. A group that drowns in its own obligations is no use to anyone.",
+      "correct_reasoning": "The correct option names both sides of the exchange, explains why the cost goes unnoticed, and keeps the last sentence's refusal to treat the trade as a mistake. All three elements are stated in the text.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The final sentence says this is a description of a trade and not an argument against making it, and adds that an association collapsing under its obligations helps nobody. This option converts the cost into a verdict.",
+          "seductive_element": "The middle of the paragraph reads like an elegy for mutual obligation, and the option is the sentence a sympathetic reader has already half written.",
+          "thinking_mistake": "Hearing an account of what something costs as a claim that it should not have been bought."
+        },
+        {
+          "option": "B",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is one half of the exchange, reported accurately. The paragraph's claim is that the reliability was bought with something, and nothing of the price survives in this option.",
+          "seductive_element": "It is unarguably true within the paragraph and describes the reason the hire is made, which makes it feel like the practical summary.",
+          "thinking_mistake": "Taking the solved problem for the point, when the author introduced it in order to name what solving it cost."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph never advises on staffing levels, and its last sentence leans the other way by defending the decision to hire when obligations become unbearable.",
+          "seductive_element": "It sounds like the prudent lesson of the analysis, and moderation is an easy recommendation to attribute to a balanced author.",
+          "thinking_mistake": "Turning a description of a trade into a rule about how much of it to make."
+        }
+      ],
+      "reading_habit": "When an author says 'this is a description, not an argument against', the sentence is naming the wrong summary. Read every option against it before choosing."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph sounds like a lament for four sentences, and the fifth refuses to be one.",
+    "takeaway": "Naming what a decision costs is not the same as saying it was the wrong decision."
+  }
+}

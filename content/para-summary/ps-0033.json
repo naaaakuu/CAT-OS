@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0033",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "architecture",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Frame That Was Never Needed",
+    "theme": "why buildings designed to be adaptable are seldom the ones adapted",
+    "estimated_time_sec": 90,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "Buildings designed for adaptability are seldom the ones adapted, because what actually blocks a conversion is legal, financial and occupational rather than structural, so flexibility was engineered into the dimension that was not binding.",
+      "scope": "Conversions of existing buildings as recorded in surveys; the claim locates the binding constraint and expressly does not cost the design strategy.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["seldom", "rarely structural", "not a verdict", "which nothing here has costed"],
+    "separating_element": null,
+    "dna_traits": ["evidence_vs_thesis", "main_idea_detection", "inference_control", "author_intent"],
+    "mission": "evidence_vs_conclusion",
+    "learning_objective": "distinguish a finding about where a constraint sits from the judgement about value that the finding seems to deliver",
+    "reasoning_patterns": ["arg.evidence_vs_conclusion", "sum.central_vs_supporting", "sum.no_addition", "arg.causal_claim", "inf.vs_speculation"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option calling the money wasted. It follows so naturally that the author writes a sentence to forbid it: the finding is 'about where the constraint sits, not a verdict on whether designing for change is worth the money, which nothing here has costed'. A cheap provision against an unlikely need can still be worth buying, and the paragraph has priced nothing. The warehouses option reports the survey and stops before the explanation it was gathered for; the fashion option supplies a motive the paragraph assigns to nobody.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about adaptive reuse and design for flexibility; no specific survey adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A finding whose obvious moral the author declines to draw, and says so. Three distortion families: addition (the verdict the paragraph refuses), structure (the survey result promoted over the explanation), stance (a motive imputed to designers)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Since the 1960s architects have designed for change: long spans so that walls can move, raised floors for services, frames meant to outlast three uses.",
+        "role": "setup"
+      },
+      {
+        "text": "Surveys of buildings that have actually been converted find that they are seldom these; they are more often warehouses and Victorian mills with heavy frames, deep sills and no intention behind them at all.",
+        "role": "evidence"
+      },
+      {
+        "text": "What stops a conversion is rarely structural: it is the lease, the fire code, the valuation that prices a building as its current use, and the sheer difficulty of emptying it.",
+        "role": "support"
+      },
+      {
+        "text": "Flexibility, in other words, was engineered into the one dimension that was not binding.",
+        "role": "thesis"
+      },
+      {
+        "text": "That is a finding about where the constraint sits, not a verdict on whether designing for change is worth the money, which nothing here has costed.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Buildings meant to be adaptable are rarely the ones converted, because conversions are blocked by leases, codes and valuations rather than by structure, so the flexibility was built into a dimension that did not constrain anything.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say explains which buildings get converted, and what does it decline to judge?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name where the real constraint sits, rather than which buildings get converted?",
+        "kept": "Good. The survey result is the puzzle; the claim is the explanation, that the binding obstacles are legal and financial rather than structural.",
+        "drifted": "Reporting that mills and warehouses are the ones reused leaves the paragraph's work undone. The point is why, and the why is that structure was never the thing in the way."
+      },
+      {
+        "id": "addition",
+        "ask": "Does your sentence stop at where the constraint sits, or has it decided the money was wasted?",
+        "kept": "Exactly right. A provision that is cheap and rarely needed can still be worth buying, and the author says outright that nothing here has been costed.",
+        "drifted": "'Wasted' is a judgement about value, and the last sentence refuses it by name. Showing that a constraint was not binding is not the same as pricing the insurance against it."
+      },
+      {
+        "id": "stance",
+        "ask": "Have you attributed a motive to the architects, such as fashion or vanity?",
+        "kept": "Well judged. The paragraph describes a mismatch between what was designed for and what actually binds, and blames nobody for it.",
+        "drifted": "Professional fashion is your explanation, not the author's. The text says where the constraint sits and says nothing about why designers looked elsewhere."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Adaptable buildings are rarely the ones converted, since what blocks a conversion is legal rather than structural, so flexibility was built where nothing was binding.",
+      "B": "Since the obstacles that prevent a conversion are legal and financial rather than structural, the money spent on frames designed for change has largely been money wasted.",
+      "C": "The buildings that get converted are old warehouses and mills, whose heavy frames and deep sills were put there with no thought of any later use for them at all.",
+      "D": "Architects designing for change have been indulging a professional fashion, since the buildings that end up reused are precisely the ones nobody meant to be reusable."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Architects have spent sixty years building in the ability to change: wide spans, floors you can run pipes under, structures meant to see out several uses. Then look at what actually gets converted. It is the old mill and the warehouse, put up by people with no such plan, whose heavy frames happen to suit. The reason is that structure was never what stood in the way. Conversions die on leases, fire regulations, valuations tied to the present use, and the job of getting everyone out. So the flexibility was engineered into the one dimension that was not holding anything up. The author then stops short of the obvious moral: no one here has worked out what the flexibility cost.",
+      "correct_reasoning": "The correct option carries the explanation the paragraph exists to give, that the binding constraints are legal and financial, and the conclusion drawn from it, that flexibility was built into a dimension that did not bind. It reaches no verdict on value, which is where the final sentence stops.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The last sentence forbids this: the finding is about where the constraint sits and not a verdict on whether designing for change is worth the money, which nothing in the paragraph has costed.",
+          "seductive_element": "It is the conclusion the evidence appears to hand over, and it is the sentence most readers have already composed by the time they reach the options.",
+          "thinking_mistake": "Treating a demonstration that something was not needed as a demonstration that paying for it was a mistake."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the survey finding, reported accurately and left unexplained. The paragraph uses it to reach a claim about which constraint binds, and that claim is absent here.",
+          "seductive_element": "It contains the paragraph's most concrete material and carries the pleasing irony that the unplanned buildings are the adaptable ones.",
+          "thinking_mistake": "Summarising the surprise rather than the explanation the surprise was introduced to motivate."
+        },
+        {
+          "option": "D",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "No motive is assigned to anyone in the paragraph. The author explains a mismatch between what was designed for and what binds, and expressly declines to pass judgement on the practice.",
+          "seductive_element": "A sixty-year effort aimed at the wrong constraint invites a culprit, and professional fashion is the first one to hand.",
+          "thinking_mistake": "Converting an account of a misdirected effort into an accusation against the people who made it."
+        }
+      ],
+      "reading_habit": "Ask what kind of sentence the paragraph ends on. A final sentence that refuses a judgement is a fence, and the option on the far side of it will always look like the boldest reading."
+    }
+  },
+  "mentor": {
+    "challenge": "The evidence here points straight at a verdict, and the closing sentence refuses to deliver it. One option delivers it anyway.",
+    "takeaway": "Showing that a constraint was not binding is not the same as showing the insurance was not worth buying."
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0032",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "mathematics-logic",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "Random Against What",
+    "theme": "what a claim that a sequence is random can and cannot assert",
+    "estimated_time_sec": 105,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Calling a sequence random states a relation between that sequence and a particular battery of tests rather than a property the sequence possesses on its own, because a pattern no test looks for remains invisible to the battery.",
+      "scope": "Claims of randomness about finite sequences certified by statistical testing; the paragraph grants that such tests do catch crude failures and does not say randomness is unattainable.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": ["a relation", "never about the sequence alone", "not useless"],
+    "separating_element": null,
+    "dna_traits": ["scope_preservation", "main_idea_detection", "language_precision", "inference_control"],
+    "mission": "protect_scope",
+    "learning_objective": "keep a claim at the size the argument supports, when the same argument seems to license a far more dramatic denial",
+    "reasoning_patterns": ["scope.condition", "struct.pivot", "sum.central_vs_supporting", "lang.absolute_vs_qualified", "sum.no_addition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option saying nothing can ever be shown to be random. It travels the paragraph's own road and goes one town too far. The text says a pattern that no test looks for is invisible to that battery, which makes the certificate relative; it never says every sequence contains a pattern waiting to be found, and it opens by granting that the tests catch something real. The concession option stops at that grant and never reaches the 'But'. The option recommending that certifiers publish their battery converts a claim about what a word means into advice about disclosure.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about statistical randomness testing; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "Protecting scope against the seductive stronger claim. Three distortion families: structure (the concession read as the thesis), scope (the relational claim inflated into an impossibility claim), addition (a disclosure rule the paragraph never proposes)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A sequence of digits is called random when it has no pattern, which sounds like a property the sequence carries about with it.",
+        "role": "setup"
+      },
+      {
+        "text": "The intuition is not useless: an inspector who spots a repeated block, or counts too few sevens, has found something real, and crude generators fail exactly such tests.",
+        "role": "concession"
+      },
+      {
+        "text": "But passing a test is not the same as having no pattern.",
+        "role": "support"
+      },
+      {
+        "text": "A regularity that no test in the battery looks for is invisible to the battery, and a generator certified against one collection of tests can be trivially predictable to a machine that tries another.",
+        "role": "evidence"
+      },
+      {
+        "text": "So a claim of randomness is always a claim about a relation, between this sequence and that set of tests, and never about the sequence by itself, which is why the word has to be said with its tests attached.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Because a regularity no test looks for stays invisible to it, calling a sequence random asserts a relation between the sequence and a chosen battery of tests rather than a property it holds on its own.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a claim of randomness is a claim about?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the claim is relational, rather than that the tests are imperfect?",
+        "kept": "Good. Imperfect tests would mean we sometimes get it wrong. The paragraph says something stronger and stranger: there is no sequence-only fact for the tests to be imperfect about.",
+        "drifted": "Reporting that batteries can miss things stops at the evidence. The conclusion is about what the word 'random' can mean, which is a relation and not a property."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence say randomness is relative to a battery, or that it can never be established at all?",
+        "kept": "Well held. Relative is not empty. A certificate still says something; it says what it was tested against.",
+        "drifted": "Nothing here says every sequence hides a pattern. The claim is that a certificate is always indexed to a battery, which leaves certificates meaning something rather than nothing."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you started recommending what certifiers or users ought to do?",
+        "kept": "Exactly. The closing clause about saying the word with its tests attached describes what the claim amounts to, not a rule about publishing.",
+        "drifted": "Disclosure is the practical thought the argument invites, and the paragraph never reaches for it. A summary states what the author argued and stops there."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Statistical batteries do real work, since a repeated block or a shortage of sevens is a genuine failure of just the kind that crude generators reliably produce.",
+      "B": "Nothing can ever be shown to be random, because any sequence at all will contain some pattern that one test or another would eventually manage to reveal.",
+      "C": "Since a regularity no test looks for stays invisible, calling a sequence random asserts a relation between it and a chosen battery, not a property it holds alone.",
+      "D": "Anyone certifying a generator as random should publish the battery it was measured against, so that users can judge what the certificate does and does not cover."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "We talk as though randomness were something a sequence has, like length. The paragraph agrees that the ordinary tests are worth running: spot a repeating block or too few sevens and you have caught a bad generator. Then it makes its move. Passing a test is not the same as having no pattern, because a regularity nobody thought to test for is simply not visible to the test. A generator that sails through one battery can be easy meat for a machine that tries a different one. So when we say a sequence is random we are always saying something about a pair, the sequence and the tests it faced, and never about the sequence on its own.",
+      "correct_reasoning": "The correct option keeps the reason, that an untested regularity is invisible, and the conclusion at the author's exact size: randomness is a relation between sequence and battery rather than a property of the sequence. It neither denies that tests find anything nor promises that nothing can be certified.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the ground the author gives away before the argument begins. The 'But' in the next sentence exists to say that this genuine usefulness does not amount to what the word is taken to mean.",
+          "seductive_element": "It is true, it is in the paragraph, and it defends a practice the reader probably wants defended, which makes it feel like the balanced reading.",
+          "thinking_mistake": "Taking the concession for the conclusion because it is the first thing in the paragraph that sounds like a verdict."
+        },
+        {
+          "option": "B",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says a regularity no test looks for is invisible to that battery. It never claims that every sequence contains such a regularity, and it begins by granting that the tests catch something real, which an impossibility claim would deny.",
+          "seductive_element": "It is the dramatic version of the same insight and feels like the courageous conclusion, and it is only one inference beyond what the text supports.",
+          "thinking_mistake": "Turning a claim that a certificate is relative into a claim that no certificate is worth anything."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The last clause of the paragraph says the word has to be spoken with its tests attached, which is a statement about what the claim means. This option reads it as an instruction about what certifiers ought to publish.",
+          "seductive_element": "It borrows the paragraph's closing image and puts it to practical use, which makes it look like the most operational reading available.",
+          "thinking_mistake": "Hearing a point about the content of a claim as a recommendation about how to report it."
+        }
+      ],
+      "reading_habit": "When an argument shows that a certificate is relative to its test, ask whether the author said the certificate means less or means something different. Those are two conclusions, and only one is usually on the page."
+    }
+  },
+  "mentor": {
+    "challenge": "The argument here supports a modest conclusion and a spectacular one. Only the modest one is written down.",
+    "takeaway": "Relative to a test is not the same as worthless. Keep the index, do not throw away the measurement."
+  }
+}

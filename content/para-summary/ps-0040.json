@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0040",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "bible_level": "elite",
+    "title": "The Afternoon It Went",
+    "theme": "why a defended exchange rate can break with no change in the fundamentals",
+    "estimated_time_sec": 125,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "Because the cost of defending a fixed rate rises with the expectation that it will be abandoned, both holding and breaking are self-consistent over a wide range of underlying conditions, so within that range a break can occur with no movement in the fundamentals and the news blamed for it may never have existed.",
+      "scope": "Defended exchange rates inside the range where both outcomes are self-consistent; outside that range the paragraph makes no claim.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 5,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 4,
+      "domain_load": 4
+    },
+    "load_bearing": ["over a wide range", "within that range", "need not have moved", "may be looking for"],
+    "separating_element": "The correct option keeps the restriction to the range in which both outcomes are self-consistent; the nearest rival drops it and makes expectation the cause of currency collapses generally.",
+    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "scope_preservation", "inference_control"],
+    "mission": "ignore_examples",
+    "learning_objective": "keep a conditional mechanism inside the condition that makes it work, when the unconditional version is the memorable slogan",
+    "reasoning_patterns": ["sum.example_vs_claim", "arg.causal_claim", "scope.condition", "sum.certainty_kept", "sum.central_vs_supporting"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists share the mechanism and differ over a boundary. The rival says currency crises are caused by expectations rather than fundamentals, full stop. The paragraph twice fences the claim: 'over a wide range of underlying conditions' both outcomes are self-consistent, and 'within that range the fundamentals need not have moved at all'. Outside that range the paragraph says nothing, and an unconditional claim about crises is not what it argued. The dating option takes the paragraph's example, the speech or the figure released that morning, and treats it as where explanation must start, which is the very habit the last sentence questions.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about self-fulfilling expectations in defended exchange rates; no specific episode or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item where the example is a whole sentence and the near miss is the slogan version of the mechanism. Families: structure, precision, addition. The separating element is a range, stated twice."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A defended exchange rate can hold for years and then go in an afternoon, and the search afterwards is always for the news that did it.",
+        "role": "setup"
+      },
+      {
+        "text": "What makes that search unpromising is that the cost of defending a rate depends on what the market expects: if nobody expects abandonment the defence is cheap, and if everybody expects it the interest a central bank must offer becomes ruinous.",
+        "role": "support"
+      },
+      {
+        "text": "Over a wide range of underlying conditions both outcomes are therefore consistent with themselves, and which one obtains is settled by expectation rather than by arithmetic.",
+        "role": "support"
+      },
+      {
+        "text": "The collapse everybody remembers is usually dated to a speech, or to a figure released that morning.",
+        "role": "example"
+      },
+      {
+        "text": "But within that range the fundamentals need not have moved at all, and a search for the news that caused the break may be looking for something that was never there.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Because defending a rate grows costlier as abandonment is expected, both holding and breaking are self-consistent over a range of conditions, so inside that range a break can happen without the fundamentals moving.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say can make a defended rate break, and how far does the claim reach?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence explain why expectation can decide the outcome, rather than asserting that it does?",
+        "kept": "Good. The mechanism is that the cost of the defence rises with the expectation of failure, which is what allows two outcomes to be stable at once.",
+        "drifted": "Saying expectations matter states a result without its engine. The paragraph's work is showing why belief about the outcome changes the price of producing it."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the restriction to the range in which both outcomes hold, or does your sentence cover currency collapses generally?",
+        "kept": "Exactly right, and this is the item. The author fences the claim twice, and outside the fence the fundamentals are back in charge.",
+        "drifted": "'Crises are caused by expectations' is the slogan version. The paragraph says that over a wide range both outcomes are consistent, and confines its claim to that range."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'need not have moved' and 'may be looking for', or has your sentence declared the news irrelevant?",
+        "kept": "Well held. The author says the fundamentals need not have moved, not that they never do, and that the search may be futile rather than that it always is.",
+        "drifted": "Turning 'may' into 'does' overstates a careful sentence. The claim is about what is possible inside the range, not about what happens every time."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A currency collapse can usually be traced to the speech or the figure released on the morning that it happened, which is where any explanation of it has to start.",
+      "B": "Since defending a rate costs more the more its abandonment is expected, currency crises are caused by the expectations of the market rather than by the fundamentals.",
+      "C": "Since defending a rate costs more the more its abandonment is expected, a break can occur inside that range with no movement in the fundamentals at all.",
+      "D": "A central bank should abandon a fixed rate before expectations turn against it, since the defence becomes ruinously dear at exactly the moment it is most needed."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "A pegged rate can sit still for years and then collapse between lunch and closing, and everyone immediately asks what the news was. The paragraph explains why that question may have no answer. Defending a peg is cheap when nobody thinks you will give up and ruinous when everybody does, because the interest you have to offer depends on what the market believes you will do. That means there is a broad band of economic conditions in which holding and breaking are both perfectly stable outcomes, and what decides between them is belief rather than any number. Inside that band, nothing underneath has to have changed. The speech everyone later blames may simply have been the thing that was happening at the time.",
+      "correct_reasoning": "The correct option keeps the mechanism, that the cost of defence rises with the expectation of abandonment, and keeps the boundary the paragraph states twice, that the claim holds inside the range where both outcomes are self-consistent. It says a break can occur without the fundamentals moving, which is exactly the modal the author used.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": "stance_flip",
+          "why_wrong": "The speech and the morning figure are the paragraph's example of what people do afterwards, and the final sentence says that search may be looking for something that was never there. This option adopts the habit the paragraph questions.",
+          "seductive_element": "It is the most concrete sentence available and matches how every collapse is in fact reported, which makes it feel like the sensible historical view.",
+          "thinking_mistake": "Taking the illustration of a mistake for the account being offered, because the illustration is the only picture in the paragraph."
+        },
+        {
+          "option": "B",
+          "archetype": "near_miss",
+          "secondary_archetype": "scope_broadening",
+          "why_wrong": "The mechanism is right and the fence is gone. The paragraph confines the claim to a wide but bounded range of underlying conditions, inside which both outcomes are self-consistent; a general claim about what causes currency crises covers cases the argument does not reach.",
+          "seductive_element": "It is the memorable formulation of exactly this mechanism, and it differs from the key by a clause that reads like throat-clearing.",
+          "thinking_mistake": "Dropping a range from a conditional claim, because ranges feel like hedging rather than content."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No advice to central banks appears in the paragraph. The rising cost of defence is offered as an explanation of how two outcomes can both be stable, not as a reason to act at a particular moment.",
+          "seductive_element": "It converts the analysis into a policy that seems to follow from it, and practical conclusions read as the point of economic writing.",
+          "thinking_mistake": "Summarising the advice an analysis suggests instead of the analysis the author wrote."
+        }
+      ],
+      "reading_habit": "When a claim arrives with a range attached, the range is doing work. Check whether an option that drops it is still saying what the argument can support."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options carry the same mechanism. One of them keeps a phrase about how far it reaches, and that phrase appears twice in the paragraph.",
+    "takeaway": "Inside the range, belief decides. Outside it, the numbers still do, and the author never forgot that."
+  }
+}

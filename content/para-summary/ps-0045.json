@@ -1,0 +1,153 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0045",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "linguistics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The River Keeps Its Name",
+    "theme": "why place names outlive the languages that coined them",
+    "estimated_time_sec": 70,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "Names tend to survive a change of language better than ordinary words do, because a name is learned as a label rather than understood as a word and so passes on untranslated; but this is a tendency, and names can still be swept away.",
+      "scope": "River and hill names in regions that have undergone language shift, stated as a tendency with an explicit exception where settlers arrive in numbers.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 1,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["tend to", "though not reliably", "in a single generation"],
+    "separating_element": null,
+    "dna_traits": ["certainty_reading", "main_idea_detection", "scope_preservation"],
+    "mission": "keep_qualifiers",
+    "learning_objective": "keep the limit an author attaches to a tendency, when the mechanism behind it sounds strong enough to be a rule",
+    "reasoning_patterns": ["sum.certainty_kept", "struct.specific_to_general", "arg.causal_claim", "sum.central_vs_supporting", "lang.often_vs_always"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option promising that a name survives any change of language. It reproduces the mechanism exactly, and the last clause of the paragraph removes it: the survival is 'not reliable', settlers who arrive in numbers rename freely, and a name can be lost in a single generation. The option that reports names being older than the languages spoken there is the observation with the explanation stripped out, and the option about anything learned as a whole outlasting what is understood carries a claim about names to every kind of unanalysed material.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about toponymic survival across language shift; no specific region or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A clean mechanism with an explicit limit in the last clause. Three distortion families: certainty (the tendency hardened), structure (the observation without the explanation), scope (names widened to everything learned unanalysed)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "In many regions the names of the rivers and the hills are older than any language now spoken there.",
+        "role": "setup"
+      },
+      {
+        "text": "A name is learned as a label rather than as a word with parts, so a newcomer can take it over without knowing, or needing to know, what it once meant.",
+        "role": "support"
+      },
+      {
+        "text": "Ordinary vocabulary has no such protection: it is understood, and what is understood can be translated and replaced.",
+        "role": "evidence"
+      },
+      {
+        "text": "Names therefore tend to survive a change of language better than words do, though not reliably: settlers who arrive in numbers rename freely, and a name can be lost in a single generation.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Names tend to outlast a change of language better than ordinary words, because they are taken over as labels rather than understood and translated, though they can still be lost.",
+  "builder": {
+    "prompt": "In one sentence: why do names outlast languages, according to the paragraph, and how far does the claim go?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence give the reason names survive, rather than only reporting that they do?",
+        "kept": "Good. The reason is the whole argument: a label can be handed on without being understood, and what is understood is what gets translated.",
+        "drifted": "That old names outlast languages is the observation the paragraph opens with. The claim is the mechanism that explains it."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'tend to' and the acknowledgement that names are sometimes lost?",
+        "kept": "Exactly. The final clause is there to stop a good mechanism from becoming a law, and the summary has to carry it.",
+        "drifted": "'Any change of language' is stronger than the text. The paragraph says settlers arriving in numbers rename freely and a name can go in a single generation."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about names, or about everything that is learned without being understood?",
+        "kept": "Well held. The comparison the paragraph draws is between names and ordinary vocabulary, and its evidence is entirely about places.",
+        "drifted": "Formulae, songs and habits are never discussed here. A claim about all unanalysed material rests on arguments the paragraph has not made."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A place name will survive any change of language at all, because nobody needs to know what such a name means in order to go on using it every day.",
+      "B": "In a great many regions the names given to the rivers and the hills turn out to be a good deal older than any of the languages spoken there today.",
+      "C": "Anything at all that is learned as a whole rather than understood will outlast what is understood, wherever one language gradually gives way to another.",
+      "D": "Names tend to outlive a change of language because they are learned as labels, not understood, though settlers in numbers can sweep them away."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "Rivers and hills in many places carry names that are older than any language now heard there. The reason is that a name is not really a word to the people who inherit it. It is a label, and you can use a label perfectly well without knowing what it once described, so it passes from one population to the next untouched. Ordinary words are different: people know what they mean, and anything understood can be translated and swapped for a local equivalent. So names travel through a change of language better than vocabulary does. Not always, though. Where settlers arrive in force they rename as they please, and an old name can disappear inside one generation.",
+      "correct_reasoning": "The correct option carries the mechanism, that a name is taken over as a label rather than understood, and keeps the limit the last clause sets, that names can still be swept away. It reports a tendency, which is the author's own word.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says names survive better than words but not reliably, and names the exception: settlers arriving in numbers rename freely and a name can be lost in a single generation.",
+          "seductive_element": "The mechanism it states is exactly the paragraph's own, and a mechanism that sounds sufficient invites the reader to promote it into a rule.",
+          "thinking_mistake": "Letting a convincing explanation license a stronger claim than the author was prepared to make."
+        },
+        {
+          "option": "B",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the opening observation, which the rest of the paragraph exists to explain. Nothing of the explanation, and nothing of the comparison with ordinary vocabulary, appears here.",
+          "seductive_element": "It is a striking fact and it cannot be wrong, since it is lifted from the first sentence.",
+          "thinking_mistake": "Summarising the phenomenon a paragraph sets out to account for rather than the account it gives."
+        },
+        {
+          "option": "C",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph compares names with ordinary vocabulary, and every piece of evidence in it concerns places. Extending the claim to all unanalysed material covers cases the argument has not examined.",
+          "seductive_element": "It states the general principle the names appear to instance, and general principles look like the deeper summary.",
+          "thinking_mistake": "Abstracting away from the category an author argued about, on the assumption that a wider claim is a better one."
+        }
+      ],
+      "reading_habit": "Read past the colon in a final sentence. Authors often put a mechanism before it and the exception after it, and only the exception decides between the options."
+    }
+  },
+  "mentor": {
+    "challenge": "The explanation here is good enough to sound like a law. The last clause of the paragraph says it is not one.",
+    "takeaway": "A word survives by not being understood. That is a tendency, not a guarantee."
+  }
+}

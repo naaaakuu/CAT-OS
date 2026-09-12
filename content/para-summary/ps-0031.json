@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0031",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "psychology",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "The Zip You Could Not Explain",
+    "theme": "why people overrate their grasp of mechanisms but not of facts",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "The confidence people show about mechanisms is not overclaiming but a report of how readily the knowledge could be reached rather than of how much of it is held, and since that feeling is usually accurate the error survives correction.",
+      "scope": "Self-ratings of understanding for mechanisms; the paragraph notes that ratings of facts and of rehearsed procedures are well calibrated, so the claim does not cover self-knowledge in general.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 4,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["specific to mechanisms", "usually right", "not how much they hold"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "certainty_reading", "scope_preservation", "author_intent"],
+    "mission": "watch_the_turn",
+    "learning_objective": "wait for the turn before fixing the paragraph's explanation, when the pre-turn reading is the one every reader already believes",
+    "reasoning_patterns": ["struct.pivot", "sum.central_vs_supporting", "lang.contrast_marker", "sum.certainty_kept", "scope.abstraction_level"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the overclaiming option, which is the reading the third sentence offers and the 'But' immediately removes. It is defeated by the calibration finding: the same people are accurate about facts and about rehearsed procedures, so a general habit of boasting cannot be what is happening. The second rival takes the paragraph's explanation and turns the feeling into a reliable guide, which loses the author's 'usually' and with it the fact that this is still an error. The option about people being poor judges of their own knowledge in general drops the word 'specific'.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about self-assessed understanding of mechanisms; no specific study adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "The turn arrives in the fourth sentence and is carried by a calibration finding rather than by a contrast word alone. Three distortion families: logic (the turn collapsed), scope (the claim generalised past mechanisms), certainty (the hedge on 'usually' removed)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Ask people how well they understand a zip, a cistern or a bicycle gear and they answer with confidence; ask them to explain one and the confidence fails in the first sentence.",
+        "role": "setup"
+      },
+      {
+        "text": "Invited to rate themselves again afterwards they mark themselves down, and the lower rating holds.",
+        "role": "evidence"
+      },
+      {
+        "text": "The obvious reading is vanity, a routine small overclaiming that a moment of honesty punctures.",
+        "role": "concession"
+      },
+      {
+        "text": "But the same people are well calibrated about facts and about procedures they have rehearsed, so the inflation is specific to mechanisms.",
+        "role": "support"
+      },
+      {
+        "text": "What they are reporting is not how much they hold but how readily they could get hold of it, and for mechanisms that sit in objects and in other people that feeling is usually right, which is why the error survives being corrected.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "People's confidence about mechanisms reports how easily the knowledge could be reached rather than how much they hold, and because that feeling is usually accurate the inflation returns after being corrected.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say people are actually reporting when they say they understand a mechanism?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the confidence is a report of, rather than that it is misplaced?",
+        "kept": "Good. That the confidence collapses under questioning is the observation; the claim is what the feeling was tracking in the first place.",
+        "drifted": "Saying people overestimate their understanding is the reading the fourth sentence overturns. The paragraph explains the feeling rather than merely convicting it."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about mechanisms, or about self-knowledge in general?",
+        "kept": "Well held. The calibration finding is what narrows the claim, and without that narrowing there is no argument left, only a complaint.",
+        "drifted": "The paragraph says the inflation is specific to mechanisms, and rests the whole explanation on that. A claim about knowledge in general contradicts the sentence it came from."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'usually right', or has the feeling become a reliable guide?",
+        "kept": "Exactly. 'Usually' is what makes the survival of the error intelligible without making the error disappear.",
+        "drifted": "If the feeling were reliable there would be nothing to correct. The author says it is usually right, which is precisely why a wrong case does not retrain it."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "People routinely overclaim how much they understand, and a single request for an explanation is enough to puncture the boast and to keep it punctured.",
+      "B": "People are generally poor judges of what they know, rating their own understanding far higher than any demand that they explain it would ever justify.",
+      "C": "Because a mechanism can always be looked up or asked about, the sense of understanding one is a reliable guide to what a person could readily find out at need.",
+      "D": "Confidence about mechanisms reports how easily knowledge could be reached, not how much is held, and it survives because that feeling is usually right."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "People say they understand how a zip works, then cannot get through a sentence explaining it, and afterwards rate themselves lower. The easy conclusion is that we are all mild boasters. The paragraph blocks that: the same people judge their factual knowledge and their practised skills accurately, so this is not a general habit of exaggeration. Something narrower is going on. When we say we understand a mechanism, we are reporting how easily we could get at the knowledge rather than how much of it is in our heads, and mechanisms live in the objects around us and in the people who service them. Usually that feeling is a good one, which is why being caught out once does not cure it.",
+      "correct_reasoning": "The correct option states what the confidence is a report of, which is the claim the last sentence makes, and keeps 'usually', the hedge that explains why the error returns. It also stays inside the boundary the calibration finding sets, which is mechanisms rather than knowledge at large.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "contrast_collapse",
+          "secondary_archetype": null,
+          "why_wrong": "This is the obvious reading the paragraph names and then removes. The calibration finding rules out a general habit of overclaiming, and the last sentence explains why the correction does not stick, which this option asserts that it does.",
+          "seductive_element": "It is stated in the paragraph in almost these words, and the first two sentences appear to demonstrate it before any turn arrives.",
+          "thinking_mistake": "Settling on the explanation a paragraph offers first, because it arrives before the evidence that was gathered to displace it."
+        },
+        {
+          "option": "B",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The fourth sentence says the inflation is specific to mechanisms, and gives the reason: the same people are well calibrated about facts and rehearsed procedures. A claim about knowledge in general contradicts the sentence that carries the argument.",
+          "seductive_element": "It sounds like the large psychological truth the examples are pointing at, and wider claims read as more substantial summaries.",
+          "thinking_mistake": "Dropping the word that limits a finding, on the assumption that a summary should state the biggest version of it."
+        },
+        {
+          "option": "C",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The author writes that the feeling is usually right, which leaves room for the failure the paragraph opened with. 'Reliable guide' removes that room and turns an explained error into no error at all.",
+          "seductive_element": "It has the paragraph's own explanation in it, and it flatters the reader by making the confidence sensible rather than mistaken.",
+          "thinking_mistake": "Hearing an explanation of why a mistake is natural as a demonstration that it was not a mistake."
+        }
+      ],
+      "reading_habit": "When a paragraph names the obvious reading, expect it to be the option that will be offered to you. Read on until you find what the author put in its place."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph hands you an explanation early and takes it back in the fourth sentence. Notice what it puts there instead, and how firmly.",
+    "takeaway": "A feeling that is usually right is the hardest kind to correct, and that is the point rather than an aside."
+  }
+}

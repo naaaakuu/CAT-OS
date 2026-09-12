@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0039",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "literature-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "The White Space Between Chapters",
+    "theme": "what the breaks between chapters do to a reader",
+    "estimated_time_sec": 80,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Although the chapter break began as a convenience and often remains one, a novelist who uses it deliberately makes it an instrument that governs the reader's pace and expectations rather than a container for the prose.",
+      "scope": "Chapter division in novels where the device is handled deliberately; the paragraph concedes that in many books it is still only packaging.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": ["in many books it is still no more than that", "not a container", "alongside it"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "surface_matching", "scope_preservation", "compression_skill"],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "choose by what an option claims rather than by how much of the paragraph's vocabulary it reuses",
+    "reasoning_patterns": ["struct.pivot", "sum.central_vs_supporting", "comp.function_over_words", "scope.abstraction_level", "sum.no_addition"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that keeps the break a printer's convenience. It is granted in the second sentence and then overturned by the 'But' in the third, and its added claim that the break has remained mere packaging 'in most novels' is stronger than the concession the author actually made. The option covering every formal division from paragraph to volume widens a claim about chapter breaks to a claim about form in general. The option about the attentive reader promises an understanding the paragraph never mentions; nothing here is said about what readers gain from noticing.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about chapter division as a technique; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "The concession is generous enough to look like a thesis, and the turn is a single short sentence. Three distortion families: structure (the concession kept), scope (the claim widened to all formal division), addition (a benefit for readers invented)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A chapter break looks like packaging: a convenience for the printer, and for readers who need somewhere to put the book down.",
+        "role": "setup"
+      },
+      {
+        "text": "It began that way, and in many books it is still no more than that.",
+        "role": "concession"
+      },
+      {
+        "text": "But a novelist who knows the device is writing in the gaps.",
+        "role": "support"
+      },
+      {
+        "text": "A break can hold a reader over a sentence that would pass unnoticed in mid-page, can hurry three years by in a line of white space, or can force a question to be carried into a scene that has nothing to do with it.",
+        "role": "evidence"
+      },
+      {
+        "text": "The division is not a container for the prose but an instrument played alongside it, and what it governs is the reader's pace and the reader's expectations.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "In deliberate hands the break between chapters is not a container for the prose but a device played alongside it, governing how fast a reader moves and what the reader expects.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph claim a chapter break is, once a novelist uses it deliberately?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the break does to the reader, rather than what it is for?",
+        "kept": "Good. Packaging is what the break is for; pace and expectation are what it does, and the last sentence puts the claim on the second of those.",
+        "drifted": "Describing the break as a resting place is the concession the 'But' overturns. The claim is about control exercised through the gap."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about chapter breaks, or about formal divisions in general?",
+        "kept": "Well held. Everything in the paragraph concerns one device, and the three effects described are all effects of a chapter-sized gap.",
+        "drifted": "Paragraphs, sections and volumes are never mentioned. A claim about all formal division would need arguments this paragraph has not made."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you promised anything about what readers gain by noticing the breaks?",
+        "kept": "Exactly. The paragraph is about what a novelist does with the device, and says nothing about how a reader should attend to it.",
+        "drifted": "Better understanding for the attentive reader is a natural next thought and a claim the text never makes. The author describes a technique, not a way of reading."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The chapter break began as a printer's convenience and in most novels has remained one, a place to pause in rather than a technique the writer is using.",
+      "B": "Every formal division in a novel, from the paragraph to the volume, is a deliberate instrument for shaping the way a reader moves through the whole book.",
+      "C": "A reader who attends to where the chapters fall will understand a novel rather better than one who attends only to the sentences inside them.",
+      "D": "In a novelist's hands the break between chapters is not a container for the prose but a device that governs the reader's pace and expectations."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "A chapter break looks like nothing much: somewhere for the printer to start a new page and for you to stop reading. The paragraph agrees that is where it came from, and that in plenty of books it is still all it amounts to. Then it turns. A writer who understands the device works in the gap itself. Put the break after an ordinary sentence and the sentence becomes a cliffhanger. Put three years in the white space and they pass in a moment. End on a question and the reader carries it into a scene that has nothing to do with it. So the break is not the box the prose sits in; it is something the writer plays alongside the prose, and what it controls is how fast you go and what you are expecting.",
+      "correct_reasoning": "The correct option keeps the turn's conclusion in the author's own terms, an instrument rather than a container, and names the two things it governs, pace and expectation. It also keeps the claim inside deliberate practice, which is where the third sentence puts it.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the ground the author gives away before the 'But'. It also hardens the concession, since the paragraph says many books use the break as packaging while this option says most do.",
+          "seductive_element": "It repeats the paragraph's opening almost word for word, and the opening is the part a reader has held longest by the time the options arrive.",
+          "thinking_mistake": "Matching vocabulary rather than argument, and taking the sentence the turn was written to overturn."
+        },
+        {
+          "option": "B",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "Every effect described here belongs to a chapter-sized gap. Paragraphs and volumes appear nowhere, and a claim about all formal division rests on arguments the paragraph has not made.",
+          "seductive_element": "It sounds like the principle the chapter break is an instance of, and larger principles read as better summaries.",
+          "thinking_mistake": "Promoting a claim about one device into a claim about the whole category it belongs to."
+        },
+        {
+          "option": "C",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph describes what a novelist does with the break. It makes no claim about what a reader gains by watching for it, and offers no comparison between kinds of reader.",
+          "seductive_element": "It turns an observation about craft into practical advice, which feels like the useful thing to take away from a paragraph about technique.",
+          "thinking_mistake": "Converting a claim about how something is made into a claim about how it should be read."
+        }
+      ],
+      "reading_habit": "Count how many of the paragraph's own words an option reuses, then ignore the count. The option that repeats the opening is usually repeating the part the author was about to argue against."
+    }
+  },
+  "mentor": {
+    "challenge": "One option here is built almost entirely from the paragraph's first two sentences. Those are the sentences the third one exists to answer.",
+    "takeaway": "A generous concession is still a concession. The claim is what comes after it."
+  }
+}

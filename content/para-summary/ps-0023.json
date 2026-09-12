@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0023",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "The Errors That Never Complained",
+    "theme": "why a reversal rate on appealed moderation decisions cannot measure accuracy",
+    "estimated_time_sec": 105,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "Because an appeal requires a user to notice a decision, judge it wrong and know how to contest it, the reversal rate describes the appealing population rather than the decisions, and so cannot settle whether moderation is accurate.",
+      "scope": "The published reversal rate on appealed content-moderation decisions; the claim concerns what that one statistic can establish, not how accurate moderation actually is.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "however" },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": ["It does not follow", "in either direction", "nobody has counted"],
+    "separating_element": null,
+    "dna_traits": ["evidence_vs_thesis", "inference_control", "certainty_reading", "main_idea_detection"],
+    "mission": "evidence_vs_conclusion",
+    "learning_objective": "stop at the conclusion the paragraph actually draws when the evidence seems to license a stronger one in a particular direction",
+    "reasoning_patterns": ["arg.evidence_vs_conclusion", "sum.central_vs_supporting", "inf.vs_speculation", "sum.no_addition", "cr.sampling"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that says the published rate understates how often decisions are wrong. It is what the third sentence appears to set up, and it is the conclusion most readers reach unaided. The last sentence refuses it in words: 'It does not follow that moderation is inaccurate, since nobody has counted the silent cases', and the fourth sentence gives the reason, that the figure moves when people get better at appealing and again when they give up, which is movement in both directions rather than a bias one way. The option about users never learning why a post vanished is a true step in the analysis rather than its conclusion, and the bad-faith option imports a motive the paragraph never assigns.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about platform transparency statistics; no specific text or company report adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "The item turns on the difference between 'this number cannot show X' and 'not-X'. Three distortion families: structure (a step in the analysis promoted to the claim), addition (the implication the author declines to draw), stance (a motive imputed to the publishers)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Large platforms now publish the proportion of appealed moderation decisions they reverse, and offer it as a measure of how accurate their decisions are.",
+        "role": "setup"
+      },
+      {
+        "text": "An appeal, however, is lodged only by a user who noticed the decision, judged it wrong and knew the route for contesting it, and those three conditions select a narrow slice of everything the system does.",
+        "role": "support"
+      },
+      {
+        "text": "A post removed in error whose author never discovered why it vanished produces no appeal, and so contributes nothing at all to the published figure.",
+        "role": "evidence"
+      },
+      {
+        "text": "The rate is therefore a statistic about the appealing population: it rises when users become more practised at contesting decisions and falls when they give up, and neither movement is a change in the decisions themselves.",
+        "role": "thesis"
+      },
+      {
+        "text": "It does not follow that moderation is inaccurate, since nobody has counted the silent cases; what follows is that this figure cannot settle the question in either direction.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Since appeals come only from users who noticed, objected and knew how to complain, the reversal rate measures the appealing population rather than the decisions, and so cannot show moderation to be accurate or inaccurate.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the published reversal rate is, and what does it refuse to conclude from that?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the reversal rate is a statistic about, rather than only that appeals are rare?",
+        "kept": "Good. The selection of appellants is the reason; the claim is what the resulting number measures, which is the appealing population and not the decision system.",
+        "drifted": "That few users appeal is the mechanism. The paragraph's claim is what that mechanism does to the statistic: it makes the figure a description of who complains."
+      },
+      {
+        "id": "certainty",
+        "ask": "Does your sentence stop at 'cannot show', or has it decided which way the truth lies?",
+        "kept": "Exactly right. The author says the figure settles nothing in either direction, and a summary that keeps that symmetry keeps the argument.",
+        "drifted": "Saying the rate understates the error rate is a verdict on accuracy. The paragraph says the number moves with practice and with discouragement, so it does not lean one way."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a reason why platforms publish the figure, or a remedy for it?",
+        "kept": "Well judged. The paragraph analyses a statistic; it never enters the intentions of the people who release it.",
+        "drifted": "Concealment, public relations and better metrics are all natural next thoughts, and none of them is in the text. A summary states the author's argument and stops."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Because users whose posts vanish are often never told why, many wrongful removals on the largest platforms are never contested by anyone at all.",
+      "B": "Since the errors that produce no appeal are invisible to it, the published reversal rate understates how often moderation decisions are genuinely wrong.",
+      "C": "Platforms publish reversal rates in order to look accountable, knowing the figure omits the errors that the people affected never think to contest.",
+      "D": "A reversal rate on appeals measures the population that appeals, so the figure cannot show that moderation is accurate, nor that it is inaccurate."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "A platform reports how many of the decisions people challenged it later reversed, and treats that as a score for its own accuracy. The paragraph points out who is in that sample. To appeal, you had to see the decision, think it wrong and know where to complain, so the sample is made of people with all three. Anyone whose post was wrongly removed without their ever learning why is simply absent. So the number describes the complainers: it goes up when they get better at complaining and down when they stop bothering. The author then refuses the obvious next step. Nobody has counted the missing cases, so the figure proves nothing about accuracy, in either direction.",
+      "correct_reasoning": "The correct option keeps the claim about what the statistic is a statistic of, and keeps the author's refusal symmetrical: the figure cannot establish accuracy and cannot establish inaccuracy. That double negative is the paragraph's last sentence, stated at exactly its strength.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the third sentence, faithfully reported. It is the step that explains why the sample is selective, and the paragraph uses it to reach a conclusion about what the published rate measures, which this option never arrives at.",
+          "seductive_element": "Every word of it is defensible against the text, and it is the most concrete and human sentence in the paragraph.",
+          "thinking_mistake": "Summarising the most vivid link in a chain of reasoning rather than the claim the chain was built to support."
+        },
+        {
+          "option": "B",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph explicitly declines this: nobody has counted the silent cases, so the figure settles nothing either way. It also says the rate rises with practice and falls with discouragement, which is movement in both directions rather than a one-sided bias.",
+          "seductive_element": "Missing errors sound like they must pull the number down, and the option reads as the rigorous conclusion a careful analyst would draw.",
+          "thinking_mistake": "Completing an argument the author deliberately stopped, and mistaking the finishing of it for having understood it."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "No motive is assigned to anyone in the paragraph. The author analyses what a number can support, and says nothing about whether those publishing it know or intend what the analysis shows.",
+          "seductive_element": "Suspicion of platform transparency is widely shared, and the option feels like the honest reading of why such figures get released.",
+          "thinking_mistake": "Reading a critique of a measure as an accusation against the people who use it."
+        }
+      ],
+      "reading_habit": "When an author writes 'it does not follow that', the sentence after it is the claim and the sentence before it is the temptation. Summarise the claim and leave the temptation in the options."
+    }
+  },
+  "mentor": {
+    "challenge": "The analysis here points hard in one direction and then stops. Notice exactly where it stops, because one option has walked on without it.",
+    "takeaway": "A number that cannot prove something also cannot disprove it. Keep both halves of that refusal."
+  }
+}

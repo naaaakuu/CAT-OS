@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0047",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "The Belief You Cannot Buy",
+    "theme": "why belief cannot be adopted at will, and where a demand on a believer can fall",
+    "estimated_time_sec": 100,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "Belief cannot be adopted at will because a belief aims at truth and a state produced by an inducement would be answering to the inducement instead; what remains is indirect control over reading and consulting, and that is where a demand on a believer can sensibly fall.",
+      "scope": "The direct voluntary adoption of belief; the paragraph allows indirect control and locates legitimate demands there, without saying what anyone must do.",
+      "certainty": "asserted",
+      "stance": "neutral"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 3
+    },
+    "load_bearing": ["not weakness of will", "indirect control", "a narrower place"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "inference_control", "evidence_vs_thesis", "language_precision"],
+    "mission": "add_nothing",
+    "learning_objective": "resist converting a claim about where a demand can fall into a statement of what that demand requires",
+    "reasoning_patterns": ["sum.no_addition", "sum.central_vs_supporting", "arg.principle", "comp.function_over_words", "arg.causal_claim"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option imposing a duty to read widely and consult opponents. The paragraph says where a demand can sensibly fall, which is a claim about the possible location of an obligation, and then observes that this place is narrower than the demands people usually make; it never states the obligation itself. The arm-raising option is the illustration that opens the argument. The option explaining belief by upbringing and circumstance replaces a claim about what a belief is with a claim about what causes beliefs, and the second sentence rules that out by saying the reason is not weakness of will but the kind of state a belief is.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General philosophical reasoning about the involuntariness of belief; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A constitutive explanation that is easily swapped for a causal one, closing on a location claim that is easily swapped for a duty. Three distortion families: addition (the duty stated), structure (the illustration promoted), scope (a different kind of explanation substituted)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Offer a person money to raise an arm and the arm goes up; offer the same money to believe that it is raining and nothing whatever happens.",
+        "role": "setup"
+      },
+      {
+        "text": "The reason is not weakness of will but the kind of state a belief is: a belief aims at truth, and a state produced by an inducement would be answering to the inducement instead.",
+        "role": "support"
+      },
+      {
+        "text": "Nobody can both believe something and hold in mind that the reason they believe it has nothing to do with whether it is so.",
+        "role": "support"
+      },
+      {
+        "text": "What is left is indirect control: what a person reads, whom they consult, which questions they let themselves keep open.",
+        "role": "evidence"
+      },
+      {
+        "text": "That is where a demand on a believer can sensibly fall, and it is a narrower place than the demands people usually make of one another's opinions.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Belief cannot be taken up at will, because a belief aims at truth and one bought by an inducement would not, so the only demands that can sensibly reach a believer concern what they read and whom they consult.",
+  "builder": {
+    "prompt": "In one sentence: why does the paragraph say belief cannot be chosen, and what does it say follows for demands on believers?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence explain why belief resists the will, rather than only that it does?",
+        "kept": "Good. The reason is what a belief is for: it answers to truth, and a state bought with money would be answering to the money.",
+        "drifted": "Reporting that we cannot decide to believe gives the phenomenon without the account. The paragraph's work is in the second and third sentences."
+      },
+      {
+        "id": "addition",
+        "ask": "Does your sentence say where a demand can fall, or has it stated the demand?",
+        "kept": "Exactly right. The author marks out a region in which an obligation could sensibly sit and declines to fill it with any particular duty.",
+        "drifted": "A duty to read widely or to consult those who disagree is the obvious content to pour into that region, and the paragraph pours none. It says only where such a demand could land."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your explanation about what a belief is, or about what causes people's beliefs?",
+        "kept": "Well held. The second sentence rules out weakness of will and points at the nature of the state, which is a different sort of explanation from upbringing or circumstance.",
+        "drifted": "Saying that beliefs are formed by background replaces a claim about what belief is with a claim about where beliefs come from, and the paragraph explicitly sets the second aside."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Since only indirect control is available, everyone has a standing duty to read widely and to consult those who disagree with them before they settle on an opinion.",
+      "B": "Belief cannot be taken up at will because it aims at truth, so the only demands that can sensibly reach a believer concern what they read and whom they consult.",
+      "C": "A person offered money will raise an arm on request but cannot in the same way produce the belief that it happens to be raining outside the window now.",
+      "D": "People cannot simply decide what to believe, because their convictions are formed by upbringing and by circumstance rather than by any choice of their own."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "Pay someone to lift an arm and they lift it. Pay them to believe it is raining and nothing happens at all. The paragraph says this is not a failure of nerve. A belief is the sort of state that answers to how things are, and one produced by a payment would be answering to the payment, which is a different thing. You cannot hold a belief while also keeping in view that your reason for holding it has nothing to do with its truth. What is left is the roundabout route: choosing what to read, whom to ask, which questions to leave open. That is the only place where a demand on someone's beliefs can sensibly land, and it is a smaller place than the demands we usually make.",
+      "correct_reasoning": "The correct option keeps the reason belief resists the will, that it aims at truth, and the conclusion about where a demand can sensibly fall, which is the reading and consulting the fourth sentence describes. It states a location for demands rather than a demand.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says where a demand on a believer can sensibly fall, and adds that this is narrower than what people usually demand. It never issues the demand, and a duty binding everyone is exactly the kind of requirement the last clause is measuring against.",
+          "seductive_element": "It supplies the obvious content for the space the argument opens, and an ethical conclusion feels like the natural destination of a philosophical paragraph.",
+          "thinking_mistake": "Filling a space an author marked out, and mistaking the filling for what the author said."
+        },
+        {
+          "option": "C",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the opening illustration. It sets up the puzzle the next two sentences explain and the last one draws a conclusion from, and none of that survives here.",
+          "seductive_element": "It is the only concrete image in an abstract paragraph, and it is the sentence a reader has most firmly in mind by the end.",
+          "thinking_mistake": "Reporting the demonstration a paragraph opens with rather than the account it was opened to motivate."
+        },
+        {
+          "option": "D",
+          "archetype": "category_shift",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph explains the impossibility by what a belief is, and says in terms that the reason is not weakness of will. Upbringing and circumstance are a story about where beliefs come from, which is a different kind of explanation and not the one offered.",
+          "seductive_element": "It reaches the same headline, that belief is not chosen, by a route most readers already find persuasive.",
+          "thinking_mistake": "Accepting an option because its conclusion matches, without checking that the reason behind it is the author's."
+        }
+      ],
+      "reading_habit": "When an author says where an obligation could sensibly sit, check whether they ever said what it requires. Marking out a space is not the same as filling it."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph opens a space for a demand and refuses to say what the demand is. One option says it for the author.",
+    "takeaway": "You can choose what you read. You cannot choose what reading it makes you believe."
+  }
+}

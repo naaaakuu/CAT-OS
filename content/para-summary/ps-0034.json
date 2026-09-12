@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0034",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "media",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "The Repair Nobody Sees",
+    "theme": "why a correction reaches a fraction of the audience the error reached",
+    "estimated_time_sec": 120,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "The small reach of a correction follows from what a correction is, a claim about a claim addressed only to those still holding the original and carrying no novelty for the machinery that spread the error, rather than from any indifference to accuracy; repair therefore belongs before publication, without correcting afterwards being pointless.",
+      "scope": "Published corrections and how far they travel; the claim is structural and says nothing about the good faith of any particular outlet.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "but" },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 4,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 4,
+      "domain_load": 2
+    },
+    "load_bearing": ["not a measure of", "but not that correcting is pointless", "rather than after it"],
+    "separating_element": "The correct option keeps the author's refusal to call correcting pointless; the nearest rival draws the same structural conclusion and moves the whole effort upstream instead, which the final clause declines to do.",
+    "dna_traits": ["author_intent", "main_idea_detection", "inference_control", "language_precision"],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep the half of a conclusion that protects what the author is not willing to abandon, when the other half is the memorable one",
+    "reasoning_patterns": ["sum.stance_kept", "arg.causal_claim", "sum.central_vs_supporting", "sum.no_addition", "struct.conclusion"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists agree on the cause and on the conclusion that low reach reflects the nature of a correction rather than an outlet's carelessness. They part on one word. The rival moves the effort to pre-publication checking 'instead', and the paragraph's last clause says the opposite: 'but not that correcting is pointless, since the record a correction creates is read by people who come to the story later'. The option about outlets knowing a correction will be unseen imports a cynicism the paragraph assigns to no one, and the option about the audience never exceeding the error's reports the mechanism and stops before the conclusion.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the structure and reach of published corrections; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item where the near miss keeps the whole causal argument and discards a subordinate clause. Families: stance, structure, precision. The stance being protected is the author's refusal of both cynicism and futility."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A correction is a claim about a claim, and it can be understood only by someone who is still holding the original.",
+        "role": "setup"
+      },
+      {
+        "text": "That fixes its audience before anyone has read it: the audience cannot exceed the people who saw the error, and it shrinks again to those who remember it well enough for the repair to attach to anything.",
+        "role": "support"
+      },
+      {
+        "text": "Distribution does the rest, since the machinery that carried the first story was answering to novelty, and a correction has none to offer.",
+        "role": "support"
+      },
+      {
+        "text": "The low reach of corrections is therefore a property of what a correction is, and not a measure of how seriously an outlet takes accuracy.",
+        "role": "thesis"
+      },
+      {
+        "text": "It follows that the repair has to be attempted before publication rather than after it, but not that correcting is pointless, since the record a correction creates is read by those who come to the story later.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Corrections reach few readers because of what a correction is rather than because outlets are careless about accuracy, so repair belongs before publication, though issuing corrections still has a purpose.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say explains the small reach of corrections, and what does it refuse to conclude from that?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the reach is limited by what a correction is, rather than by how corrections are presented?",
+        "kept": "Good. The argument is structural: an audience bounded by the error's, a memory requirement, and no novelty to carry it. Presentation is never mentioned.",
+        "drifted": "Placement, prominence and design are the usual complaints about corrections and none of them appears here. The paragraph's cause is the form of the utterance itself."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the clause that correcting is not thereby pointless?",
+        "kept": "Exactly right, and this is the item. The author uses the structural argument to move effort upstream and refuses to let it abolish the correction.",
+        "drifted": "Moving the effort to pre-publication checking 'instead' quietly drops the author's protection of the practice, and the record a correction leaves for later readers is the reason given."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you attributed a motive to outlets, such as knowing the correction will go unread?",
+        "kept": "Well judged. The fourth sentence exists precisely to separate a structural fact from a judgement about how seriously accuracy is taken.",
+        "drifted": "Cynicism about corrections is widely shared and entirely absent from this paragraph, which says the low reach is not a measure of an outlet's seriousness."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Outlets are aware that a correction will be read by almost nobody, which is why the promise to publish one costs them so little and reassures their readers so much.",
+      "B": "A correction can only be grasped by a reader who is still holding the original story, so its audience can never be larger than the audience the error itself reached.",
+      "C": "Corrections reach few people because of what a correction is, not because outlets are careless, so repair belongs before publication though correcting is not pointless.",
+      "D": "Corrections reach few people because of what a correction is rather than through any indifference to accuracy, so the effort should move to checking before publication instead."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "A correction is a strange kind of sentence: it is about another sentence, so it only makes sense to someone who has the first one in mind. That alone caps who it can reach, and the cap tightens because people have to remember the error clearly enough for the repair to stick to it. On top of that, whatever carried the original story was looking for novelty, and a correction is the least novel thing in the world. So corrections travel badly because of what they are, not because newspapers do not care. The author draws one lesson and blocks another: get the repair in before publication, but do not conclude that correcting afterwards is a waste, because later readers meet the corrected record.",
+      "correct_reasoning": "The correct option keeps both halves of the closing sentence: the effort belongs before publication, and correcting afterwards still has a point. It also keeps the fourth sentence's refusal to read low reach as a measure of how seriously accuracy is taken.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "stance_flip",
+          "secondary_archetype": "implication_addition",
+          "why_wrong": "The paragraph says the low reach is not a measure of how seriously an outlet takes accuracy. This option converts a structural finding into knowing behaviour and gives outlets a motive the text assigns to nobody.",
+          "seductive_element": "It is the reading a sceptical reader arrives with, and the facts of the paragraph fit it perfectly well if the fourth sentence is passed over.",
+          "thinking_mistake": "Hearing an explanation of why something fails as an accusation that somebody wanted it to."
+        },
+        {
+          "option": "B",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the first stage of the argument, stated accurately. The paragraph adds the memory requirement and the novelty problem, and then draws a conclusion about what the low reach does and does not show, none of which is here.",
+          "seductive_element": "It is the cleanest and most quotable line of reasoning in the paragraph and can be verified against the opening sentences word for word.",
+          "thinking_mistake": "Summarising the first move of an argument because it is the one most easily held in mind."
+        },
+        {
+          "option": "D",
+          "archetype": "near_miss",
+          "secondary_archetype": "implication_addition",
+          "why_wrong": "Everything before the comma is the paragraph's own conclusion. The word 'instead' is what fails: the author says repair belongs before publication but explicitly not that correcting is pointless, and gives the reason, the record later readers meet.",
+          "seductive_element": "It draws the practical lesson from a structural argument and sounds like the decisive version of the same thought, differing from the key by one adverb.",
+          "thinking_mistake": "Letting a conclusion swallow the qualification attached to it, because the conclusion is the memorable half."
+        }
+      ],
+      "reading_habit": "When a sentence runs 'it follows that X, but not that Y', both halves are load bearing. An option with X and without the refusal of Y is half the author's position."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options share a full argument and differ by one small word near the end. The paragraph's last clause is where that word is settled.",
+    "takeaway": "Showing where a repair belongs is not the same as saying the old repair should stop."
+  }
+}

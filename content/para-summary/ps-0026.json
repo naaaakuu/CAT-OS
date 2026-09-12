@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0026",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "human-behaviour",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "The Favour Nobody Asked For",
+    "theme": "why people ask for help less often than they would be granted it",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "People ask for help less often than they would receive it because they model the request from the cost of granting it rather than from what the person asked actually experiences, which makes the shortfall an error of perspective rather than timidity.",
+      "scope": "Small everyday requests between people who already know one another; the claim explains why the asking does not happen, not how much help is given when it does.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "but" },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": ["not shyness but", "from the wrong side"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "compression_skill", "author_intent"],
+    "mission": "find_the_thesis",
+    "learning_objective": "separate the mechanism a paragraph explains from the claim the mechanism is there to establish",
+    "reasoning_patterns": ["sum.central_vs_supporting", "arg.causal_claim", "sum.no_addition", "comp.function_over_words", "scope.abstraction_level"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option describing what the person asked is attending to: being chosen, the awkwardness of refusing, the pleasure of helping. Every word of that is in the paragraph, and it is the more interesting half of the mechanism. It is not the claim. The fourth sentence names the claim outright, 'not shyness but a failure of simulation: we model the request from the wrong side of it', and a summary of one side of a comparison cannot carry a claim about the mismatch between the two. The shyness option is refused in those same words, and the networks option turns a closing observation into a prediction about who ends up better connected.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about help-seeking and perspective taking; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "The thesis is stated plainly in the fourth sentence and buried between two more quotable ones. Three distortion families: structure (half the mechanism promoted), scope (the claim recast as a trait), addition (the closing observation extended into a prediction)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "People who need a small favour often decide against asking for it, and when questioned later they say they did not want to impose.",
+        "role": "setup"
+      },
+      {
+        "text": "Rehearsing the request, the asker attends to the cost of granting it: the interruption, the lost half hour, the awkwardness of being put upon.",
+        "role": "support"
+      },
+      {
+        "text": "The person asked attends to something else entirely, having been singled out, finding refusal uncomfortable and enjoying the small authority of being useful, so the event the asker simulates is not the event the helper has.",
+        "role": "evidence"
+      },
+      {
+        "text": "The shortfall is not shyness but a failure of simulation: we model the request from the wrong side of it.",
+        "role": "thesis"
+      },
+      {
+        "text": "Its cost is quiet and cumulative, since each favour not asked for is also a conversation that did not take place.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "People under-ask for help because they imagine the request from the giver's cost rather than the giver's experience, which makes the gap a mistake of perspective rather than timidity.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say causes people to ask for less help than they would get?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name the mismatch between the two points of view, rather than describing one of them?",
+        "kept": "Good. Each side is interesting on its own, but the claim lives in the difference between them, and only a sentence about the mismatch carries it.",
+        "drifted": "Describing what the helper feels, or what the asker dreads, gives half of a comparison. The paragraph's claim is that the two do not match and that the asker uses the wrong one."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence call this a mistake in reasoning, or a feature of a person?",
+        "kept": "Well judged. The author rules out shyness explicitly, which makes this a claim about how anyone models a request rather than about what some people are like.",
+        "drifted": "Reaching for timidity or reserve turns a general error of perspective into a personality trait, and the paragraph denies that reading in the very sentence that states the claim."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you promised any outcome, such as better networks for people who ask more?",
+        "kept": "Exactly. The last sentence observes what is lost; it does not forecast what would be gained by behaving differently.",
+        "drifted": "'People who ask more are better connected' is a prediction, and the paragraph never makes one. Noting a cost is not the same as promising a benefit for avoiding it."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "People ask for less help than they would get because they picture the request from the giver's cost rather than the giver's experience, which is misjudgement, not timidity.",
+      "B": "Those asked for a favour are thinking about having been singled out and about the discomfort of refusing, rather than about the half hour that granting it will take from them.",
+      "C": "Shyness keeps people from making small requests of those around them, and the isolation that follows is one of the quieter costs of a reserved and private temperament.",
+      "D": "Since every unasked favour is a conversation that never happened, the people who are readiest to make small requests end up with wider and sturdier networks around them."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "We talk ourselves out of asking for small favours, and we explain it by saying we did not want to be a nuisance. The paragraph looks at what is going on in each head. The person about to ask is running the favour as a bill: your time, your interruption, your trouble. The person who would be asked is having a different experience altogether, one of being picked out, of not wanting to say no, of quite liking being useful. So the asker is predicting an event that will not occur. That is not nerves, it is modelling the thing from the wrong end. And the cost accumulates quietly, because a favour never requested is also a conversation that never happens.",
+      "correct_reasoning": "The correct option states the mismatch and names it as a misjudgement rather than a trait, which is exactly the move the fourth sentence makes. It keeps the direction of the error, that the asker uses the cost of granting rather than the experience of being asked.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is one half of the comparison the paragraph builds. It is accurate about the helper and says nothing about the asker, so it cannot carry a claim whose whole content is that the two do not match.",
+          "seductive_element": "It is the freshest observation in the paragraph and the one a reader is most likely to remember, and it can be checked against the text word for word.",
+          "thinking_mistake": "Summarising the most surprising sentence rather than the sentence the surprising one was assembled to support."
+        },
+        {
+          "option": "C",
+          "archetype": "category_shift",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the shortfall is not shyness. This option restores the explanation the author rejects and recasts a general error of perspective as a feature of certain personalities.",
+          "seductive_element": "The first sentence quotes people saying they did not want to impose, which sounds like diffidence until the fourth sentence renames it.",
+          "thinking_mistake": "Accepting the explanation that people give for their own behaviour as the explanation the author endorses."
+        },
+        {
+          "option": "D",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The closing sentence records what is lost when a request is not made. It makes no claim about the people who do ask, and the paragraph never says that asking more produces a better network.",
+          "seductive_element": "It reads as the practical upshot, and it borrows the paragraph's own last image about the conversation that did not take place.",
+          "thinking_mistake": "Turning a stated cost into an unstated benefit, on the assumption that the paragraph must be building towards advice."
+        }
+      ],
+      "reading_habit": "When a paragraph compares two points of view, the claim is almost never inside either one. Look for the sentence about the distance between them."
+    }
+  },
+  "mentor": {
+    "challenge": "Two of these sentences are memorable and one is the point. They are not the same sentence.",
+    "takeaway": "When a paragraph says 'not X but Y', Y is the claim and X is an option waiting to be chosen."
+  }
+}

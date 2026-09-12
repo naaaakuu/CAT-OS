@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0028",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "markets",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Price That Would Not Fall",
+    "theme": "why prices fall less than expected in a downturn, and how far the evidence settles it",
+    "estimated_time_sec": 85,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Managers' own accounts point to the relational explanation of sticky prices rather than the cost-of-changing one, but because they are self-reports of the more creditable motive the evidence is suggestive rather than decisive; what it does establish is that the mechanical story is too small to carry the effect alone.",
+      "scope": "Explanations of why prices fall less than expected in a downturn, adjudicated on what managers say; the verdict is limited by the kind of evidence it rests on.",
+      "certainty": "hedged",
+      "stance": "cautionary"
+    },
+    "turn": { "present": true, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 4,
+      "domain_load": 2
+    },
+    "load_bearing": ["suggestive rather than decisive", "far more often", "on its own"],
+    "separating_element": null,
+    "dna_traits": ["certainty_reading", "main_idea_detection", "author_intent", "evidence_vs_thesis"],
+    "mission": "notice_certainty",
+    "learning_objective": "carry an author's grading of their own evidence into the summary instead of reporting the verdict as settled",
+    "reasoning_patterns": ["sum.certainty_kept", "struct.two_views_adjudication", "arg.evidence", "sum.central_vs_supporting", "lang.modal_verbs"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option saying that surveys establish the relational explanation. It has the direction of the adjudication exactly right and fails on one word: the author writes that the survey result is 'suggestive rather than decisive', and gives the reason, that managers are explaining themselves and the relational motive is the more creditable one. The option that says the surveys cannot decide anything keeps the caveat and drops the verdict the author does reach, that the mechanical story is too small on its own. The reprinting option adopts the explanation the paragraph finds insufficient.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General accounts of price stickiness and manager surveys; no specific text or dataset adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An adjudication that reaches a verdict and grades it in the same sentence. Three distortion families: certainty (the verdict hardened), structure (the caveat promoted over the verdict), stance (the rejected view adopted as the author's)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Prices in a downturn fall a good deal less than the textbook expects, and two explanations compete for the gap.",
+        "role": "setup"
+      },
+      {
+        "text": "The first is mechanical: altering a price costs something in reprinting, renegotiating and reprogramming, and a firm will not pay that cost for a small adjustment.",
+        "role": "support"
+      },
+      {
+        "text": "The second is relational: a firm that cuts in a slump must raise again in the recovery, and regular customers read the increase as opportunism, so the price is held to protect a relationship rather than to save on printing.",
+        "role": "support"
+      },
+      {
+        "text": "Asked directly, managers reach for the second explanation far more often than the first.",
+        "role": "evidence"
+      },
+      {
+        "text": "That is suggestive rather than decisive, since managers are explaining their own conduct and the relational motive is the more creditable of the two; what can be said is that the mechanical story looks too small to carry the effect on its own.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Managers' answers favour the relational explanation of sticky prices over the cost-of-changing one, but as self-reports they are suggestive rather than decisive; what is clear is that the mechanical account cannot carry the effect alone.",
+  "builder": {
+    "prompt": "In one sentence: which explanation does the paragraph lean towards, and how firmly does it commit to it?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say which explanation the evidence favours, rather than only that two explanations exist?",
+        "kept": "Good. A summary of a weighing has to report the weight. Saying only that there are two accounts describes the setup and leaves out the adjudication.",
+        "drifted": "The paragraph does take a side, and it says why: managers reach for the relational account, and the mechanical one looks too small on its own."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did your sentence keep 'suggestive rather than decisive', or does it report the matter as settled?",
+        "kept": "Exactly. The author names the weakness of the evidence in the same breath as the verdict, and a summary that keeps only the verdict has strengthened the argument on the author's behalf.",
+        "drifted": "'Establish' and 'show' are stronger than the text allows. Managers are describing their own behaviour, and the flattering explanation is the one they choose."
+      },
+      {
+        "id": "stance",
+        "ask": "Is the view your sentence attributes to the author the one the author actually leans towards?",
+        "kept": "Well held. The mechanical explanation is stated fairly and then found insufficient, and a summary must not hand it back to the author as their own position.",
+        "drifted": "The costs of reprinting and renegotiating are set out at length, which makes them easy to mistake for the conclusion. The paragraph presents that view in order to weigh it."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Surveys of managers establish that prices are held steady in a slump to protect relations with regular customers rather than to avoid the cost of making the change.",
+      "B": "Since managers explaining their own conduct will reach for the more creditable motive, what they say about pricing cannot decide between the two competing explanations.",
+      "C": "Firms hold their prices in a slump because reprinting, renegotiating and reprogramming cost a good deal more than the small adjustment would ever save them.",
+      "D": "Managers' answers favour the relational explanation over the cost-of-changing one, but as self-reports they only suggest; the mechanical account is too small alone."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "When demand falls, prices ought to fall with it, and they do not fall nearly enough. Two stories are on offer. One says changing a price is itself expensive, so firms do not bother for small moves. The other says a cut now means an unpopular rise later, and regulars will call that profiteering, so the price is held to keep the customer rather than to save the printing. Managers, when asked, mostly tell the second story. The author accepts the direction but not the strength of that finding, because people explaining themselves pick the nicer motive. What survives is a weaker conclusion: whatever else is going on, printing costs are too slight to explain it by themselves.",
+      "correct_reasoning": "The correct option reports the direction of the adjudication, the reason for discounting it, and the one thing the author is willing to state firmly. It keeps the difference between a leaning and a finding, which is the sentence the paragraph ends on.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The author calls the survey evidence suggestive rather than decisive, and explains why: these are self-reports, and the relational motive is the flattering one. 'Establish' turns a leaning into a finding.",
+          "seductive_element": "It gets the direction of the argument exactly right, and the paragraph really does prefer the relational account, so only one word is out of place.",
+          "thinking_mistake": "Reading a preference between explanations as a demonstration of one, and losing the sentence that grades the evidence."
+        },
+        {
+          "option": "B",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The caution about self-reports is the author's qualification, not the author's conclusion. The paragraph goes on to state what can be said, that the mechanical story is too small on its own, and this option ends before that.",
+          "seductive_element": "It sounds properly sceptical, and scepticism reads like rigour when an author has just criticised their own evidence.",
+          "thinking_mistake": "Treating a limitation on a conclusion as a refusal to reach one."
+        },
+        {
+          "option": "C",
+          "archetype": "owner_swap",
+          "secondary_archetype": null,
+          "why_wrong": "This is the first of the two competing explanations, set out so that it can be weighed. The paragraph ends by saying it is too small to carry the effect on its own, which is the opposite of adopting it.",
+          "seductive_element": "It is stated in the paragraph's own vocabulary and has the tidy feel of an economic explanation, which makes it easy to mistake for the position on offer.",
+          "thinking_mistake": "Taking a view the author reports for a view the author holds, because the reporting is neutral and detailed."
+        }
+      ],
+      "reading_habit": "In a paragraph that weighs two accounts, read the last sentence twice: once for which way it leans, and once for how hard it is willing to lean."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph picks a side and then tells you how much to trust the pick. Both halves belong in the summary.",
+    "takeaway": "Asking people why they did something is evidence. It is not proof, and a careful author says which."
+  }
+}

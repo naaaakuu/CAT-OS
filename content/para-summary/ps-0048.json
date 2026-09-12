@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0048",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "contemporary-society",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "No Longer Late",
+    "theme": "what happened to the shared timetable of adult life",
+    "estimated_time_sec": 85,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "As the institutions that once synchronised the milestones of adult life loosened, the shared timetable came apart and with it any public answer to whether one is late; this may account for some of the reported unease about being behind, but the connection is plausible rather than demonstrated.",
+      "scope": "The dispersal of the ages at which adult milestones occur, with a hedged suggestion about reported unease; the causal link is offered as plausible only.",
+      "certainty": "hedged",
+      "stance": "cautionary"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 4,
+      "domain_load": 2
+    },
+    "load_bearing": ["It may be that", "some of", "plausible and has not been demonstrated"],
+    "separating_element": null,
+    "dna_traits": ["certainty_reading", "main_idea_detection", "inference_control", "author_intent"],
+    "mission": "notice_certainty",
+    "learning_objective": "carry a suggestion at the strength the author gave it, when the same sentence without its hedges would be a much better line",
+    "reasoning_patterns": ["sum.certainty_kept", "arg.causal_claim", "sum.central_vs_supporting", "lang.modal_verbs", "inf.vs_speculation"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option saying the lost timetable is what has produced the feeling of being behind. The paragraph writes 'It may be that this accounts for some of the reported unease' and then withdraws even that a little: 'The connection is plausible and has not been demonstrated: the same decades changed a great deal else.' Two hedges, a modal and a partial quantifier, and an explicit alternative. The option about ages spreading across a decade reports the effect without the conclusion, and the option about people arranging their own lives turns the paragraph's causal order around, since the institutions loosening is what the text puts first.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the desynchronisation of adult milestones; no specific text or survey adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "Two hedges and a named alternative in the closing sentences, against a distractor that removes all three. Three distortion families: certainty (the suggestion hardened into a cause), structure (the effect reported without the conclusion), logic (the causal order reversed)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "The order in which adult life used to be assembled, leaving home, a first steady wage, a household, children, was set less by choice than by institutions: conscription, the apprenticeship, the rules under which a mortgage was granted.",
+        "role": "setup"
+      },
+      {
+        "text": "As those loosened the sequence came apart, and the ages at which people do each of these things now spread across a decade or more.",
+        "role": "support"
+      },
+      {
+        "text": "What went with the sequence was a public answer to the question of whether one is late.",
+        "role": "evidence"
+      },
+      {
+        "text": "It may be that this accounts for some of the reported unease about being behind; without a shared timetable there is nothing left to be behind, and yet the feeling is widely described.",
+        "role": "thesis"
+      },
+      {
+        "text": "The connection is plausible and has not been demonstrated: the same decades changed a great deal else.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "As the institutions that set the order of adult life loosened, the shared timetable dissolved along with any public measure of lateness, which may explain part of the reported unease about being behind, though the link is undemonstrated.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say changed, and how firmly does it link that change to the feeling of being behind?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name what dissolved, a public answer to whether one is late, rather than only that ages have spread out?",
+        "kept": "Good. The spread of ages is the visible effect; the loss of a shared standard for lateness is what the argument actually turns on.",
+        "drifted": "Reporting that people now do things at widely different ages stops at the observation. The paragraph goes on to what disappeared with the sequence."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'may' and 'some of', or does your sentence say the lost timetable produced the feeling?",
+        "kept": "Exactly. There are two hedges in that sentence and a further retreat in the next, and a summary that drops them makes a claim the author declined to make.",
+        "drifted": "'Is what has produced' asserts a cause. The author offers a possible partial explanation and then says it is undemonstrated, naming other changes in the same decades."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added an explanation of your own for the unease, or a remedy for it?",
+        "kept": "Well judged. The paragraph names one candidate, grades it, and mentions that other things changed too, without going further.",
+        "drifted": "Social media, insecure work and the rest are the usual candidates, and none of them is in this text. The author's alternative is left deliberately unnamed."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The loss of a common timetable for adult life is what has produced the widespread modern feeling of being behind where one really ought by now to be.",
+      "B": "The ages at which people leave home, earn a steady wage and set up a household now spread right across a decade or more, where once they fell close together.",
+      "C": "Because people now feel free to arrange their lives in whatever order suits them, the institutions that once fixed the sequence have gradually lost their authority.",
+      "D": "As the institutions setting the order of adult life loosened, the shared timetable dissolved, which may explain some unease though the link is undemonstrated."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "The order in which people used to become adults was not really chosen. Conscription, apprenticeships and mortgage rules put the steps in a queue, and everybody's queue looked much the same. Those arrangements weakened, the queue broke up, and now the age at which any given step happens varies by ten years or more. Something else went with it: a public standard by which you could be late. The author then offers a thought, carefully. Perhaps that explains part of the widely reported feeling of being behind, which is odd when there is no longer anything to be behind. And then the author steps back: it is a plausible connection, nobody has shown it, and plenty of other things changed in the same years.",
+      "correct_reasoning": "The correct option keeps the causal story about institutions and the timetable, and keeps the grading the author gives the suggestion that follows: it may explain some of the unease, and the link has not been demonstrated. Both hedges survive.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The author writes that this may account for some of the reported unease, and then adds that the connection is plausible and has not been demonstrated, since the same decades changed much else. This option states as the cause what the text offers as a possibility.",
+          "seductive_element": "It is the same idea with the qualifications shaved off, and it reads as the crisp version of exactly what the paragraph is getting at.",
+          "thinking_mistake": "Treating hedges as decoration on a claim rather than as part of it."
+        },
+        {
+          "option": "B",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the effect described in the second sentence, with nothing of what the paragraph makes of it. The loss of a public standard for lateness, and the suggestion that follows, are both missing.",
+          "seductive_element": "It is factual, undeniable within the text, and it is the concrete change the whole paragraph is built around.",
+          "thinking_mistake": "Summarising the observable change rather than the account offered of what the change did."
+        },
+        {
+          "option": "C",
+          "archetype": "cause_effect_reversal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph puts the institutions first: the sequence was set by them, and it came apart as they loosened. This option makes a change in what people want the cause of the institutional change, reversing the order the text gives.",
+          "seductive_element": "It is the more flattering story, in which people chose their freedom, and it uses the paragraph's own vocabulary of sequence and authority.",
+          "thinking_mistake": "Swapping the direction of a causal claim because the reversed version matches a familiar account of the period."
+        }
+      ],
+      "reading_habit": "Count the hedges in the sentence that carries the conclusion. If there are two, an option with none of them is making a different claim, however similar it sounds."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph's most interesting sentence is also its most heavily qualified, and one option has tidied the qualifications away.",
+    "takeaway": "'May account for some of' is a measured claim. Say it any more firmly and it stops being the author's."
+  }
+}

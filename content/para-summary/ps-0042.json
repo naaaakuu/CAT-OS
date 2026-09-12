@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0042",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "education",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Evening's Work",
+    "theme": "why the argument about homework depends on the age of the pupil",
+    "estimated_time_sec": 65,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Both sides of the homework argument are describing something real, but at different ages: the effect is slight in the primary years and clearer in the final years of school, so the disagreement is partly about which pupils are being discussed.",
+      "scope": "Homework in school, divided by the age of the pupil; the adjudication is that the dispute is partly a confusion of two populations.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": { "present": false, "marker": null },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 1
+    },
+    "load_bearing": ["at different ages", "very little", "partly about"],
+    "separating_element": null,
+    "dna_traits": ["scope_preservation", "main_idea_detection", "certainty_reading"],
+    "mission": "protect_scope",
+    "learning_objective": "keep a finding attached to the group it was found in, when half of it would make a tidier headline",
+    "reasoning_patterns": ["scope.population", "struct.two_views_adjudication", "sum.qualification_kept", "sum.central_vs_supporting", "sum.stance_kept"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that takes the primary-years finding as decisive. It is true of the younger pupils and it drops the other half of the same sentence, which reports a clearer effect in the last years of school. The paragraph's conclusion is that both sides are right about different ages, so a summary built on one age settles nothing. The option about quiet rooms and helpful parents adopts the second of the two views rather than the adjudication between them, and the option about setting no homework before the final years turns a finding into a timetable.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about how homework findings differ by age; no specific study adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation adjudication where the resolution is a population split rather than a winner. Three distortion families: language (half the finding taken as the whole), stance (one of the two views adopted), addition (a scheduling rule)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Arguments about homework are usually conducted as though homework were one thing.",
+        "role": "setup"
+      },
+      {
+        "text": "One side says it builds the habit of working without a teacher standing over you, which is the habit school exists to install.",
+        "role": "support"
+      },
+      {
+        "text": "The other says it mostly measures the quiet room and the helpful parent, so that it rewards households rather than pupils.",
+        "role": "support"
+      },
+      {
+        "text": "Studies that look separately at younger and older pupils find very little effect in the primary years and a clearer one in the last years of school.",
+        "role": "evidence"
+      },
+      {
+        "text": "Both sides are describing something real, at different ages, which means the disagreement is partly about which children are being talked about.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "The two sides of the homework argument are each right about a different age group, since the effect is slight for younger pupils and clearer for older ones, so the dispute is partly about who is being discussed.",
+  "builder": {
+    "prompt": "In one sentence: how does the paragraph settle the argument about homework?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say that the two sides are right about different ages, rather than naming a winner?",
+        "kept": "Good. The resolution is a split rather than a verdict, and a summary that picks a side has reported one of the two views instead of the adjudication.",
+        "drifted": "Neither view is refuted here. The paragraph's move is to notice that they are not talking about the same children."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence keep both age groups, or has it kept only the primary-years finding?",
+        "kept": "Exactly. The same sentence reports a clearer effect later on, and a summary that stops halfway through it is quoting selectively.",
+        "drifted": "'Homework makes very little difference' is true of the younger pupils only. Carried across the whole of school it contradicts the second half of the evidence."
+      },
+      {
+        "id": "stance",
+        "ask": "Is the position in your sentence the author's, or one of the two sides being weighed?",
+        "kept": "Well judged. Both views are set out sympathetically, which is what makes either of them easy to mistake for the conclusion.",
+        "drifted": "The claim about quiet rooms and helpful parents is one side of the argument. The author reports it in order to weigh it, and then finds it right about some pupils and not others."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Both sides are right about different ages, since homework does little in primary years and more in the last years of school, so the argument is about which pupils are meant.",
+      "B": "Homework makes very little difference to how well any children do at school, which is the finding that ought to settle the argument between the two sides for good.",
+      "C": "Homework mostly measures whether a child has a quiet room and a helpful parent at home, so that it rewards the household rather than the pupil sitting the paper.",
+      "D": "Schools should set no homework at all before the final years of school, which is the point at which it begins to make a difference to what pupils actually learn."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "People argue about homework as though it were a single practice. One camp says it teaches children to work on their own, which is what school is for. The other says it mainly records who has a quiet room and a parent with time, so it scores families rather than children. The evidence, when younger and older pupils are looked at separately, gives each camp a share: almost nothing in the primary years, something clearer in the last years of school. So both descriptions are accurate, about different children, and a good part of the quarrel comes from not saying which children are meant.",
+      "correct_reasoning": "The correct option keeps both halves of the evidence and states the conclusion the paragraph draws from them, that each side is describing a different age group and the disagreement is partly about which pupils are in view. It names no winner, which is what the last sentence declines to do.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "This is the first half of the evidence sentence, without the second. The same sentence reports a clearer effect in the last years of school, which is what stops the finding from settling anything.",
+          "seductive_element": "It is accurate as far as it goes, it is quoted from the paragraph, and it delivers the decisive result a summary seems to want.",
+          "thinking_mistake": "Taking the half of a finding that makes a headline and leaving the half that makes it complicated."
+        },
+        {
+          "option": "C",
+          "archetype": "owner_swap",
+          "secondary_archetype": null,
+          "why_wrong": "This is the second of the two competing views, stated so that it can be weighed. The paragraph finds it true of some pupils and not of others, which is not the same as endorsing it.",
+          "seductive_element": "It is the more pointed of the two views and it is stated in the paragraph's own words, which makes it read as the conclusion rather than the exhibit.",
+          "thinking_mistake": "Taking a view an author reports fairly for the view the author holds."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph makes no recommendation to schools. It reports where an effect is slight and where it is clearer, and concludes about what the disagreement is really over.",
+          "seductive_element": "It converts the age finding into a policy, and a rule that could be acted on feels like a more useful summary than a diagnosis.",
+          "thinking_mistake": "Summarising what should be done about a finding instead of what the finding was said to show."
+        }
+      ],
+      "reading_habit": "When evidence is reported for two groups, check that your summary still contains both. Half of a finding is the most convincing kind of wrong answer."
+    }
+  },
+  "mentor": {
+    "challenge": "The evidence sentence here has two halves and one of them makes a much better headline.",
+    "takeaway": "Two people can both be right and still disagree, if they are describing different people."
+  }
+}

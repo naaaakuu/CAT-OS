@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0041",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "religion-belief",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Books Beside the Book",
+    "theme": "why commentary accumulates around a text that cannot be changed",
+    "estimated_time_sec": 65,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "Commentary accumulates around a text held to be unalterable because the work of applying it to new circumstances has to be done beside it, and that accumulation is not a decline but the mechanism by which a fixed text goes on being usable.",
+      "scope": "Texts held to be beyond alteration and the commentary traditions that grow around them; the claim concerns why the commentary grows and what its growth signifies.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 1
+    },
+    "load_bearing": ["That looks like", "the opposite", "goes on being usable"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "author_intent", "certainty_reading"],
+    "mission": "watch_the_turn",
+    "learning_objective": "wait for the sentence after the turn before deciding what a paragraph thinks of the process it has described",
+    "reasoning_patterns": ["struct.pivot", "sum.stance_kept", "arg.causal_claim", "sum.central_vs_supporting", "lang.contrast_marker"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option about the original being buried under its explanations. The paragraph writes that sentence itself, as the reading it is about to reject, and the 'But' turns it over: the commentary is how a fixed text stays usable. The option about any widely studied text being replaced by its commentary drops the condition that the text cannot be altered, which is the whole cause of the accumulation. The option sending students back to the original recommends something the paragraph never proposes and inverts its judgement while doing so.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about commentary traditions around fixed texts; no specific tradition's text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item on a marked turn, where the pre-turn sentence is written to be attractive. Three distortion families: logic (the turn collapsed), scope (the condition of unalterability dropped), addition (a recommendation about how to study)."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A text held to be beyond alteration still has to be applied to circumstances its authors never met.",
+        "role": "setup"
+      },
+      {
+        "text": "Since the words cannot move, the work of fitting them to a new case has to be done beside them, and it too gets written down.",
+        "role": "support"
+      },
+      {
+        "text": "Over centuries the commentary grows until it is longer than the text and is what a student actually reads.",
+        "role": "evidence"
+      },
+      {
+        "text": "That looks like a decline, as though the original had been buried under its own explanations.",
+        "role": "concession"
+      },
+      {
+        "text": "But it is the opposite: the commentary is the mechanism by which a fixed text goes on being usable, and a scripture with no commentary is one that has stopped being asked anything.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Commentary grows around an unalterable text because application must be done alongside it, and that growth keeps the text usable rather than burying it.",
+  "builder": {
+    "prompt": "In one sentence: why does commentary accumulate around such a text, and what does the paragraph make of the accumulation?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence give the reason the commentary grows, rather than only reporting that it does?",
+        "kept": "Good. The cause is that the text cannot be altered while the circumstances keep changing, so the fitting has to happen somewhere else.",
+        "drifted": "That commentary outgrows its text is the observation. The paragraph explains why it must, and the explanation is what makes the last sentence possible."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence treat the growth as a loss or as the thing that keeps the text alive?",
+        "kept": "Exactly. The author writes the gloomy reading down and then rejects it in the next sentence, which is why a summary must not end on it.",
+        "drifted": "'Buried under its explanations' is the paragraph's own phrase for the view it overturns. Everything after 'But' points the other way."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about texts that cannot be altered, or about any text that is much studied?",
+        "kept": "Well held. Unalterability is the cause of the whole process: if the words could be revised, the fitting would happen inside them.",
+        "drifted": "A claim about widely studied texts in general loses the condition that produces the effect, and turns a mechanism into an observation about popularity."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "In time the commentary on a sacred text grows longer than the text itself and buries the original beneath the accumulated weight of its own explanations.",
+      "B": "Commentary piles up around a text that cannot be altered because application has to happen beside it, and that growth is what keeps the text usable.",
+      "C": "Any text that is widely studied will in the end be replaced in practice by the body of writing that has gradually accumulated around it over the centuries.",
+      "D": "Students should be sent back to the original text rather than to its commentaries, which have grown until they obscure the very thing they were written to serve."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "If a text cannot be changed, and the world it is applied to keeps changing, the adjusting has to happen somewhere. It happens next to the text, in writing, and it piles up. After a few centuries the commentary is longer than the book and is what students spend their time on. That can look like a sad story, the original vanishing under its own footnotes. The paragraph says it is the reverse. The commentary is how a fixed text carries on being useful, and the sign of a dead scripture is not a mountain of commentary but the absence of one, because nobody is putting questions to it any more.",
+      "correct_reasoning": "The correct option gives the cause, that the words cannot move so the fitting is done beside them, and keeps the judgement the turn delivers, that the growth is what keeps the text usable. Both halves come from the final sentence.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "contrast_collapse",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph states this itself, as the appearance it is about to correct, and the next sentence begins 'But it is the opposite'. Taking it as the conclusion reverses the argument.",
+          "seductive_element": "It is written in the paragraph's own words and describes a real fact about such traditions, which makes it feel checkable rather than mistaken.",
+          "thinking_mistake": "Stopping at the sentence before the turn, because it sounds like a verdict and arrives first."
+        },
+        {
+          "option": "C",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The cause of the whole process is that the text cannot be altered. A widely studied text that can be revised absorbs its own adjustments, so the claim does not reach the wider class this option covers.",
+          "seductive_element": "It sounds like the general law behind the case, and the mechanism seems plausible enough once the condition has been forgotten.",
+          "thinking_mistake": "Dropping the condition that drives a mechanism, on the way to a claim that covers more ground."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No recommendation about study appears anywhere, and the paragraph's verdict runs the other way: the commentary is what keeps the text in use rather than what obscures it.",
+          "seductive_element": "Return to the sources is a familiar and appealing instruction, and it seems to follow from the observation that students read the commentary.",
+          "thinking_mistake": "Turning a description of how a tradition works into advice about how it ought to be taught."
+        }
+      ],
+      "reading_habit": "When a paragraph writes down the reading you were forming, expect a 'But' in the next sentence. Authors state a view in order to answer it as often as to endorse it."
+    }
+  },
+  "mentor": {
+    "challenge": "The fourth sentence says exactly what you were thinking. That is what it is for.",
+    "takeaway": "Growth around a fixed thing can be a sign of life rather than of burial."
+  }
+}
