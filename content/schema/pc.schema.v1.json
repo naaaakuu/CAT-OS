@@ -1,0 +1,125 @@
+{
+  "$id": "pc.schema.v1",
+  "title": "CAT OS Para Completion content item, schema v1",
+  "description": "A paragraph with one sentence missing (usually the last); four candidate sentences, one of which completes it. The correct option continues the paragraph's topic, scope, stance and function; each wrong option is an engineered trap named from the taxonomy's placement_traps (a plausible sentence that breaks continuity in a nameable way). Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": ["schema_version", "meta", "paragraph", "question", "explanation", "mentor"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "meta": {
+      "type": "object",
+      "required": ["id", "type", "version", "status", "quality_score", "genre", "difficulty", "difficulty_numeric", "tier", "title", "theme", "estimated_time_sec", "gap_function", "primary_trap", "reasoning_patterns", "difficulty_vector", "learning_objective", "source", "date_added", "batch_id", "reviewer_notes", "quality"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^pc-[0-9]{4}$" },
+        "type": { "const": "pc" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "quality_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "genre": { "enum": ["philosophy", "psychology", "economics", "sociology", "anthropology", "history", "political-theory", "science", "technology-ethics", "environment", "architecture", "arts-culture", "literature-theory", "linguistics", "culture", "education", "law", "ethics", "media", "institutions", "human-behaviour", "markets", "public-policy", "scientific-method", "intellectual-history", "contemporary-society", "mathematics-logic", "medicine-health", "urban-studies", "religion-belief"] },
+        "difficulty": { "enum": ["easy", "medium", "hard"] },
+        "difficulty_numeric": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "tier": { "enum": ["foundation", "easy", "medium", "advanced", "cat", "cat-plus", "ninety-nine", "premium"] },
+        "title": { "type": "string", "minLength": 3 },
+        "theme": { "type": "string", "minLength": 3 },
+        "estimated_time_sec": { "type": "integer", "minimum": 30, "maximum": 240 },
+        "gap_function": { "enum": ["conclusion", "consequence", "example", "qualification", "contrast_turn", "explanation", "restatement", "next_step", "implication", "resolution", "opening"] },
+        "primary_trap": { "enum": ["wrong_reference_target", "local_fit_global_break", "topic_match_function_mismatch", "premature_conclusion", "redundant_restatement", "scope_jump", "contradicts_neighbour", "stance_shift", "wrong_connective", "tense_break", "new_topic_introduced", "right_idea_wrong_position", "summary_where_development_needed", "attractive_generality"] },
+        "reasoning_patterns": { "type": "array", "minItems": 2, "maxItems": 6, "items": { "type": "string", "pattern": "^(comp|inf|arg|scope|lang|struct|elim|meta|disc|sum|word|cr)\\.[a-z_]+$" } },
+        "difficulty_vector": {
+          "type": "object",
+          "required": ["stance_subtlety", "scope_precision", "distractor_closeness", "concept_abstractness", "syntactic_complexity"],
+          "additionalProperties": false,
+          "properties": {
+            "stance_subtlety": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "scope_precision": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "distractor_closeness": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "concept_abstractness": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "syntactic_complexity": { "type": "integer", "minimum": 1, "maximum": 5 }
+          }
+        },
+        "learning_objective": { "type": "string", "minLength": 10 },
+        "source": {
+          "type": "object",
+          "required": ["publication", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication": { "type": "string", "minLength": 1 },
+            "url": { "type": ["string", "null"] },
+            "author": { "type": ["string", "null"] },
+            "date_accessed": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+            "usage_note": { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id": { "type": "string", "pattern": "^batch-pc-[0-9]{3}$" },
+        "reviewer_notes": { "type": "string" },
+        "quality": {
+          "type": "object",
+          "required": ["status", "adversarial_review", "blind_solve"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["draft", "reviewed", "verified"] },
+            "adversarial_review": { "type": "string", "minLength": 40 },
+            "blind_solve": {
+              "type": ["object", "null"],
+              "required": ["solver", "agreed", "total"],
+              "additionalProperties": false,
+              "properties": { "solver": { "type": "string", "minLength": 1 }, "agreed": { "type": "integer", "minimum": 0 }, "total": { "type": "integer", "minimum": 1 }, "notes": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "paragraph": {
+      "type": "object",
+      "required": ["sentences", "gap_index"],
+      "additionalProperties": false,
+      "properties": {
+        "sentences": { "type": "array", "minItems": 2, "maxItems": 7, "items": { "type": "string", "minLength": 15 } },
+        "gap_index": { "type": "integer", "minimum": 0, "maximum": 7, "description": "Where the blank sits: the index in the sentence list at which the missing sentence belongs (sentences.length = the blank is at the end)." }
+      }
+    },
+    "question": {
+      "type": "object",
+      "required": ["stem", "options", "correct"],
+      "additionalProperties": false,
+      "properties": {
+        "stem": { "type": "string", "minLength": 10 },
+        "options": { "type": "object", "required": ["A", "B", "C", "D"], "additionalProperties": false,
+          "properties": { "A": { "type": "string", "minLength": 15 }, "B": { "type": "string", "minLength": 15 }, "C": { "type": "string", "minLength": 15 }, "D": { "type": "string", "minLength": 15 } } },
+        "correct": { "enum": ["A", "B", "C", "D"] }
+      }
+    },
+    "explanation": {
+      "type": "object",
+      "required": ["what_the_gap_needs", "correct_reasoning", "distractors", "method"],
+      "additionalProperties": false,
+      "properties": {
+        "what_the_gap_needs": { "type": "string", "minLength": 40, "description": "Before the options: the function, scope and stance the missing sentence must have, derived from the paragraph alone." },
+        "correct_reasoning": { "type": "string", "minLength": 60 },
+        "distractors": {
+          "type": "array", "minItems": 3, "maxItems": 3,
+          "items": { "type": "object", "required": ["option", "trap_type", "why_wrong", "seductive_element"], "additionalProperties": false,
+            "properties": {
+              "option": { "enum": ["A", "B", "C", "D"] },
+              "trap_type": { "enum": ["wrong_reference_target", "local_fit_global_break", "topic_match_function_mismatch", "premature_conclusion", "redundant_restatement", "scope_jump", "contradicts_neighbour", "stance_shift", "wrong_connective", "tense_break", "new_topic_introduced", "right_idea_wrong_position", "summary_where_development_needed", "attractive_generality"] },
+              "why_wrong": { "type": "string", "minLength": 30 },
+              "seductive_element": { "type": "string", "minLength": 10 }
+            } }
+        },
+        "method": { "type": "string", "minLength": 40 }
+      }
+    },
+    "mentor": {
+      "type": "object",
+      "required": ["challenge", "takeaway"],
+      "additionalProperties": false,
+      "properties": {
+        "challenge": { "type": "string", "minLength": 20 },
+        "takeaway": { "type": "string", "minLength": 20 }
+      }
+    }
+  }
+}

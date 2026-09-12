@@ -170,6 +170,14 @@ export const EARN = Object.freeze({
   verbal: (stars, correct = 0, flawless = false) => ({
     amber: 0, ink: 0, thread: 8 + 6 * stars + 5 * correct, ember: emberFor(stars, flawless),
   }),
+  /** A set from one of the content engine's banks. Placement and
+   *  completion are verbal structure (Thread); arguments are reading
+   *  (Ink); the word bank is word knowledge (Amber). Smaller sets pay a
+   *  little less than a whole passage or a tier of the Quarter. */
+  bank: (mod, stars, correct = 0, flawless = false) => (
+    mod === 'wb' ? { amber: 6 + 5 * stars + 2 * correct, ink: 0, thread: 0, ember: emberFor(stars, flawless) }
+      : mod === 'cr' ? { amber: 0, ink: 8 + 6 * stars + 3 * correct, thread: 0, ember: emberFor(stars, flawless) }
+        : { amber: 0, ink: 0, thread: 6 + 5 * stars + 3 * correct, ember: emberFor(stars, flawless) }),
   /** A family on the Vine Terraces (Word DNA). */
   wd: (stars, correct = 0) => ({
     amber: 8 + 5 * correct, ink: 0, thread: 4 * stars, ember: stars >= 3 ? 1 : 0,

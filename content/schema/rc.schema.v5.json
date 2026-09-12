@@ -1,0 +1,1247 @@
+{
+  "$id": "rc.schema.v5",
+  "title": "CAT OS Reading Comprehension content item, schema v5",
+  "description": "Schema v5 = v4 (the full Learning Page) plus the pattern layer of the content engine (content/taxonomy/varc-taxonomy.json). Passages may be short (120 words) to long (900); genres widen to thirty; each passage carries its organising structure, viewpoint count, tone, an eight-dimension difficulty vector and the reasoning patterns it exercises; each question names its ledger skill, patterns, the mistake it targets, a prediction target where prediction is the skill, and a per-question difficulty triple; each distractor names one of thirty-five trap types; the explanation gains expert_notice (what an expert sees in the passage before the options); and a quality block records the adversarial review and the blind solve. v1–v4 files remain valid under their own schemas; versions are appended, never edited. Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "meta",
+    "passage",
+    "questions",
+    "vocabulary",
+    "mentor"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 5
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "version",
+        "status",
+        "quality_score",
+        "genre",
+        "difficulty",
+        "difficulty_numeric",
+        "stage",
+        "skills",
+        "word_count",
+        "question_count",
+        "question_types",
+        "theme",
+        "estimated_time_min",
+        "source",
+        "date_added",
+        "batch_id",
+        "prompt_version",
+        "reviewer_notes",
+        "length_class",
+        "structure",
+        "viewpoints",
+        "tone",
+        "difficulty_vector",
+        "reasoning_patterns",
+        "quality",
+        "vocab_extracted"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^rc-[0-9]{4}$"
+        },
+        "type": {
+          "const": "rc"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "review",
+            "accepted",
+            "rejected",
+            "retired"
+          ]
+        },
+        "quality_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "genre": {
+          "enum": [
+            "philosophy",
+            "psychology",
+            "economics",
+            "sociology",
+            "anthropology",
+            "history",
+            "political-theory",
+            "science",
+            "technology-ethics",
+            "environment",
+            "architecture",
+            "arts-culture",
+            "literature-theory",
+            "linguistics",
+            "culture",
+            "education",
+            "law",
+            "ethics",
+            "media",
+            "institutions",
+            "human-behaviour",
+            "markets",
+            "public-policy",
+            "scientific-method",
+            "intellectual-history",
+            "contemporary-society",
+            "mathematics-logic",
+            "medicine-health",
+            "urban-studies",
+            "religion-belief"
+          ]
+        },
+        "difficulty": {
+          "enum": [
+            "easy",
+            "medium",
+            "hard"
+          ]
+        },
+        "difficulty_numeric": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "stage": {
+          "enum": [
+            "foundation",
+            "developing",
+            "intermediate",
+            "advanced",
+            "elite"
+          ]
+        },
+        "skills": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": {
+            "enum": [
+              "main-idea-extraction",
+              "inference",
+              "tone-detection",
+              "argument-tracking",
+              "trap-recognition",
+              "vocabulary-in-context",
+              "structure-mapping",
+              "evidence-anchoring",
+              "scope-control",
+              "qualifier-tracking",
+              "reference-tracking",
+              "concession-tracking",
+              "causal-reasoning",
+              "elimination",
+              "prediction",
+              "application"
+            ]
+          }
+        },
+        "word_count": {
+          "type": "integer",
+          "minimum": 120,
+          "maximum": 900
+        },
+        "question_count": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 6
+        },
+        "question_types": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "enum": [
+              "main_idea",
+              "title_selection",
+              "primary_purpose",
+              "author_purpose",
+              "author_attitude",
+              "tone",
+              "specific_detail",
+              "except",
+              "not_true",
+              "phrase_in_context",
+              "vocabulary_in_context",
+              "inference",
+              "implication",
+              "must_be_true",
+              "cannot_be_inferred",
+              "agree_disagree",
+              "application",
+              "comparative",
+              "strengthen",
+              "weaken",
+              "assumption",
+              "paragraph_function",
+              "role_of_detail",
+              "logical_structure",
+              "relationship",
+              "best_characterization",
+              "scope"
+            ]
+          }
+        },
+        "theme": {
+          "type": "string",
+          "minLength": 3
+        },
+        "estimated_time_min": {
+          "type": "number",
+          "minimum": 1
+        },
+        "source": {
+          "type": "object",
+          "required": [
+            "publication",
+            "url",
+            "author",
+            "date_accessed",
+            "usage_note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "publication": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "author": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "date_accessed": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "usage_note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "date_added": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "batch_id": {
+          "type": "string",
+          "pattern": "^batch-rc-[0-9]{3}$"
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewer_notes": {
+          "type": "string"
+        },
+        "vocab_extracted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "length_class": {
+          "enum": [
+            "short",
+            "medium",
+            "long"
+          ]
+        },
+        "structure": {
+          "enum": [
+            "thesis_support",
+            "view_critique_replacement",
+            "two_views_adjudication",
+            "phenomenon_explanation",
+            "history_of_an_idea",
+            "concession_thesis",
+            "problem_diagnosis_prescription",
+            "definition_application",
+            "narrative_reflection",
+            "dialectic",
+            "claim_qualification",
+            "analogy_driven",
+            "question_answer",
+            "comparison_contrast"
+          ],
+          "description": "The passage’s organising pattern (taxonomy rc_structures)."
+        },
+        "viewpoints": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
+          "description": "How many distinct positions the passage voices."
+        },
+        "tone": {
+          "type": "string",
+          "minLength": 3,
+          "description": "The author’s attitude in one or two words, e.g. \"measured, sceptical\"."
+        },
+        "difficulty_vector": {
+          "type": "object",
+          "required": [
+            "lexical",
+            "syntactic",
+            "abstraction",
+            "inference_depth",
+            "distractor_similarity",
+            "reasoning_depth",
+            "structural_ambiguity",
+            "time_pressure"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "lexical": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "syntactic": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "abstraction": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "inference_depth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "distractor_similarity": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "reasoning_depth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "structural_ambiguity": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "time_pressure": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            }
+          },
+          "description": "Eight independent dials, 1–5 (taxonomy difficulty_dimensions). A passage can be lexically easy and inferentially hard."
+        },
+        "reasoning_patterns": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "enum": [
+              "comp.explicit_detail",
+              "comp.paraphrase",
+              "comp.central_idea",
+              "comp.supporting_idea",
+              "comp.purpose",
+              "comp.intent",
+              "comp.organization",
+              "comp.reference_tracking",
+              "comp.function_over_words",
+              "comp.attention_span",
+              "inf.directly_implied",
+              "inf.strongly_supported",
+              "inf.necessary",
+              "inf.reasonable_implication",
+              "inf.vs_speculation",
+              "inf.author_view_application",
+              "inf.logical_gap",
+              "inf.author_vs_reported",
+              "arg.premise",
+              "arg.conclusion",
+              "arg.assumption",
+              "arg.qualification",
+              "arg.concession",
+              "arg.counterargument",
+              "arg.rebuttal",
+              "arg.causal_claim",
+              "arg.analogy",
+              "arg.generalization",
+              "arg.example",
+              "arg.principle",
+              "arg.evidence",
+              "arg.evidence_vs_conclusion",
+              "arg.correlation_vs_causation",
+              "arg.description_vs_evaluation",
+              "arg.example_vs_principle",
+              "arg.necessary_vs_sufficient",
+              "scope.too_broad",
+              "scope.too_narrow",
+              "scope.population",
+              "scope.time_period",
+              "scope.condition",
+              "scope.abstraction_level",
+              "scope.true_but_off_question",
+              "lang.absolute_vs_qualified",
+              "lang.some_vs_all",
+              "lang.may_vs_must",
+              "lang.often_vs_always",
+              "lang.implicit_negation",
+              "lang.double_negative",
+              "lang.comparative",
+              "lang.temporal_qualifier",
+              "lang.causal_wording",
+              "lang.modal_verbs",
+              "lang.subtle_negation",
+              "lang.overstatement",
+              "lang.contrast_marker",
+              "lang.concession_marker",
+              "lang.tone_shift",
+              "lang.pronoun_reference",
+              "struct.contrast",
+              "struct.continuation",
+              "struct.cause_effect",
+              "struct.problem_solution",
+              "struct.claim_evidence",
+              "struct.claim_counterclaim",
+              "struct.chronology",
+              "struct.analogy",
+              "struct.definition",
+              "struct.example",
+              "struct.qualification",
+              "struct.pivot",
+              "struct.conclusion",
+              "struct.transition",
+              "struct.general_to_specific",
+              "struct.specific_to_general",
+              "struct.question_answer",
+              "struct.view_critique_replacement",
+              "struct.two_views_adjudication",
+              "struct.phenomenon_explanation",
+              "struct.history_of_an_idea",
+              "elim.predict_first",
+              "elim.systematic",
+              "elim.attractive_unsupported",
+              "elim.weak_distractor",
+              "elim.partial_solve",
+              "elim.time_pressure",
+              "elim.near_tie",
+              "meta.ambiguity",
+              "meta.contradiction",
+              "meta.attention",
+              "disc.pronoun_antecedent",
+              "disc.demonstrative",
+              "disc.repeated_noun",
+              "disc.lexical_chain",
+              "disc.chronology",
+              "disc.cause_effect",
+              "disc.contrast",
+              "disc.concession",
+              "disc.example_after_claim",
+              "disc.general_to_specific",
+              "disc.specific_to_general",
+              "disc.definition_then_application",
+              "disc.question_then_answer",
+              "disc.claim_then_evidence",
+              "disc.problem_then_solution",
+              "disc.rhetorical_pivot",
+              "disc.transition_word",
+              "disc.implicit_transition",
+              "disc.opening_sentence",
+              "disc.closing_sentence",
+              "disc.given_new",
+              "disc.parallelism",
+              "disc.tense_continuity",
+              "disc.stance_continuity",
+              "disc.topic_progression",
+              "disc.scope_continuity",
+              "disc.function_slot",
+              "disc.competing_ending",
+              "disc.competing_opener",
+              "sum.central_vs_supporting",
+              "sum.example_vs_claim",
+              "sum.qualification_kept",
+              "sum.stance_kept",
+              "sum.certainty_kept",
+              "sum.no_addition",
+              "sum.compression",
+              "sum.minor_detail_dropped",
+              "word.context_clue",
+              "word.morphology",
+              "word.root_family",
+              "word.prefix_logic",
+              "word.suffix_logic",
+              "word.register",
+              "word.connotation",
+              "word.near_synonym",
+              "word.confusable_pair",
+              "word.unfamiliar_decoding",
+              "word.polysemy",
+              "word.tone_of_word",
+              "cr.assumption_gap",
+              "cr.strengthen",
+              "cr.weaken",
+              "cr.flaw",
+              "cr.paradox",
+              "cr.inference",
+              "cr.principle",
+              "cr.parallel_reasoning",
+              "cr.evaluate",
+              "cr.conclusion",
+              "cr.role_of_statement",
+              "cr.sampling",
+              "cr.alternative_cause"
+            ]
+          },
+          "description": "The union of the patterns its questions exercise, plus the structural patterns the passage itself is built on."
+        },
+        "quality": {
+          "type": "object",
+          "required": [
+            "status",
+            "adversarial_review",
+            "blind_solve"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "draft",
+                "reviewed",
+                "verified"
+              ]
+            },
+            "adversarial_review": {
+              "type": "string",
+              "minLength": 40,
+              "description": "The second pass, written down: which distractor a strong candidate would argue for, and why the key still stands. Never blank on verified content."
+            },
+            "blind_solve": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "solver",
+                "agreed",
+                "total"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "solver": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "agreed": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "total": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "description": "A fresh reader answered the questions without the key. agreed/total is the agreement; disagreements were adjudicated and the item repaired before verified."
+            }
+          }
+        }
+      }
+    },
+    "passage": {
+      "type": "object",
+      "required": [
+        "title",
+        "paragraphs",
+        "reading_time_min"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^rc-[0-9]{4}-p[0-9]+$"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 40
+              }
+            }
+          }
+        },
+        "reading_time_min": {
+          "type": "number",
+          "minimum": 1
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "skill",
+          "patterns",
+          "target_mistake",
+          "prediction_target",
+          "difficulty",
+          "secondary_skills",
+          "stem",
+          "options",
+          "correct",
+          "estimated_time_sec",
+          "explanation"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^rc-[0-9]{4}-q[0-9]+$"
+          },
+          "type": {
+            "enum": [
+              "main_idea",
+              "title_selection",
+              "primary_purpose",
+              "author_purpose",
+              "author_attitude",
+              "tone",
+              "specific_detail",
+              "except",
+              "not_true",
+              "phrase_in_context",
+              "vocabulary_in_context",
+              "inference",
+              "implication",
+              "must_be_true",
+              "cannot_be_inferred",
+              "agree_disagree",
+              "application",
+              "comparative",
+              "strengthen",
+              "weaken",
+              "assumption",
+              "paragraph_function",
+              "role_of_detail",
+              "logical_structure",
+              "relationship",
+              "best_characterization",
+              "scope"
+            ]
+          },
+          "stem": {
+            "type": "string",
+            "minLength": 10
+          },
+          "options": {
+            "type": "object",
+            "required": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "A": {
+                "type": "string",
+                "minLength": 1
+              },
+              "B": {
+                "type": "string",
+                "minLength": 1
+              },
+              "C": {
+                "type": "string",
+                "minLength": 1
+              },
+              "D": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "correct": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "estimated_time_sec": {
+            "type": "integer",
+            "minimum": 20,
+            "maximum": 240,
+            "description": "The time target for this question at CAT pace."
+          },
+          "explanation": {
+            "type": "object",
+            "required": [
+              "correct_reasoning",
+              "expert_notice",
+              "passage_anchor",
+              "question_type_note",
+              "reading_habit",
+              "distractors"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "correct_reasoning": {
+                "type": "string",
+                "minLength": 40
+              },
+              "passage_anchor": {
+                "type": "string",
+                "minLength": 2
+              },
+              "question_type_note": {
+                "type": "string",
+                "minLength": 10
+              },
+              "reading_habit": {
+                "type": "string",
+                "minLength": 15,
+                "description": "One transferable habit of expert readers that this question practices, phrased as advice the student can apply to ANY passage. Shown as 'Make it a habit'."
+              },
+              "distractors": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "option",
+                    "trap_type",
+                    "why_wrong",
+                    "seductive_element"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "option": {
+                      "enum": [
+                        "A",
+                        "B",
+                        "C",
+                        "D"
+                      ]
+                    },
+                    "trap_type": {
+                      "enum": [
+                        "too_broad",
+                        "too_narrow",
+                        "wrong_population",
+                        "wrong_condition",
+                        "wrong_abstraction_level",
+                        "temporal_distortion",
+                        "comparison_distortion",
+                        "opposite_direction",
+                        "reversed_causation",
+                        "misattributed_view",
+                        "reported_view_as_author",
+                        "criticism_as_rejection",
+                        "concession_as_position",
+                        "out_of_scope",
+                        "common_knowledge_intrusion",
+                        "unsupported_inference",
+                        "true_but_insufficient",
+                        "prescriptive_leap",
+                        "correlation_as_causation",
+                        "true_but_irrelevant",
+                        "wrong_structural_role",
+                        "example_as_thesis",
+                        "extreme_language",
+                        "overstatement",
+                        "weakened_version",
+                        "possibility_as_certainty",
+                        "necessary_as_sufficient",
+                        "over_intense_tone",
+                        "wrong_valence_tone",
+                        "emotional_appeal",
+                        "passage_language_shifted",
+                        "near_synonym_confusion",
+                        "sophisticated_sounding",
+                        "half_right",
+                        "fact_right_interpretation_wrong"
+                      ]
+                    },
+                    "why_wrong": {
+                      "type": "string",
+                      "minLength": 25
+                    },
+                    "seductive_element": {
+                      "type": "string",
+                      "minLength": 10
+                    }
+                  }
+                }
+              },
+              "expert_notice": {
+                "type": "string",
+                "minLength": 30,
+                "description": "What an expert reader notices in the passage — the evidence, the function, the qualifier — before looking at any option."
+              }
+            }
+          },
+          "skill": {
+            "enum": [
+              "specific_detail",
+              "vocabulary_in_context",
+              "logical_structure",
+              "paragraph_function",
+              "main_idea",
+              "author_purpose",
+              "tone",
+              "inference",
+              "scope",
+              "application",
+              "strengthen_weaken",
+              "argument"
+            ],
+            "description": "The ledger skill this question trains (taxonomy rc_type_skill maps type → skill; the loader enforces the map)."
+          },
+          "patterns": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "items": {
+              "enum": [
+                "comp.explicit_detail",
+                "comp.paraphrase",
+                "comp.central_idea",
+                "comp.supporting_idea",
+                "comp.purpose",
+                "comp.intent",
+                "comp.organization",
+                "comp.reference_tracking",
+                "comp.function_over_words",
+                "comp.attention_span",
+                "inf.directly_implied",
+                "inf.strongly_supported",
+                "inf.necessary",
+                "inf.reasonable_implication",
+                "inf.vs_speculation",
+                "inf.author_view_application",
+                "inf.logical_gap",
+                "inf.author_vs_reported",
+                "arg.premise",
+                "arg.conclusion",
+                "arg.assumption",
+                "arg.qualification",
+                "arg.concession",
+                "arg.counterargument",
+                "arg.rebuttal",
+                "arg.causal_claim",
+                "arg.analogy",
+                "arg.generalization",
+                "arg.example",
+                "arg.principle",
+                "arg.evidence",
+                "arg.evidence_vs_conclusion",
+                "arg.correlation_vs_causation",
+                "arg.description_vs_evaluation",
+                "arg.example_vs_principle",
+                "arg.necessary_vs_sufficient",
+                "scope.too_broad",
+                "scope.too_narrow",
+                "scope.population",
+                "scope.time_period",
+                "scope.condition",
+                "scope.abstraction_level",
+                "scope.true_but_off_question",
+                "lang.absolute_vs_qualified",
+                "lang.some_vs_all",
+                "lang.may_vs_must",
+                "lang.often_vs_always",
+                "lang.implicit_negation",
+                "lang.double_negative",
+                "lang.comparative",
+                "lang.temporal_qualifier",
+                "lang.causal_wording",
+                "lang.modal_verbs",
+                "lang.subtle_negation",
+                "lang.overstatement",
+                "lang.contrast_marker",
+                "lang.concession_marker",
+                "lang.tone_shift",
+                "lang.pronoun_reference",
+                "struct.contrast",
+                "struct.continuation",
+                "struct.cause_effect",
+                "struct.problem_solution",
+                "struct.claim_evidence",
+                "struct.claim_counterclaim",
+                "struct.chronology",
+                "struct.analogy",
+                "struct.definition",
+                "struct.example",
+                "struct.qualification",
+                "struct.pivot",
+                "struct.conclusion",
+                "struct.transition",
+                "struct.general_to_specific",
+                "struct.specific_to_general",
+                "struct.question_answer",
+                "struct.view_critique_replacement",
+                "struct.two_views_adjudication",
+                "struct.phenomenon_explanation",
+                "struct.history_of_an_idea",
+                "elim.predict_first",
+                "elim.systematic",
+                "elim.attractive_unsupported",
+                "elim.weak_distractor",
+                "elim.partial_solve",
+                "elim.time_pressure",
+                "elim.near_tie",
+                "meta.ambiguity",
+                "meta.contradiction",
+                "meta.attention",
+                "disc.pronoun_antecedent",
+                "disc.demonstrative",
+                "disc.repeated_noun",
+                "disc.lexical_chain",
+                "disc.chronology",
+                "disc.cause_effect",
+                "disc.contrast",
+                "disc.concession",
+                "disc.example_after_claim",
+                "disc.general_to_specific",
+                "disc.specific_to_general",
+                "disc.definition_then_application",
+                "disc.question_then_answer",
+                "disc.claim_then_evidence",
+                "disc.problem_then_solution",
+                "disc.rhetorical_pivot",
+                "disc.transition_word",
+                "disc.implicit_transition",
+                "disc.opening_sentence",
+                "disc.closing_sentence",
+                "disc.given_new",
+                "disc.parallelism",
+                "disc.tense_continuity",
+                "disc.stance_continuity",
+                "disc.topic_progression",
+                "disc.scope_continuity",
+                "disc.function_slot",
+                "disc.competing_ending",
+                "disc.competing_opener",
+                "sum.central_vs_supporting",
+                "sum.example_vs_claim",
+                "sum.qualification_kept",
+                "sum.stance_kept",
+                "sum.certainty_kept",
+                "sum.no_addition",
+                "sum.compression",
+                "sum.minor_detail_dropped",
+                "word.context_clue",
+                "word.morphology",
+                "word.root_family",
+                "word.prefix_logic",
+                "word.suffix_logic",
+                "word.register",
+                "word.connotation",
+                "word.near_synonym",
+                "word.confusable_pair",
+                "word.unfamiliar_decoding",
+                "word.polysemy",
+                "word.tone_of_word",
+                "cr.assumption_gap",
+                "cr.strengthen",
+                "cr.weaken",
+                "cr.flaw",
+                "cr.paradox",
+                "cr.inference",
+                "cr.principle",
+                "cr.parallel_reasoning",
+                "cr.evaluate",
+                "cr.conclusion",
+                "cr.role_of_statement",
+                "cr.sampling",
+                "cr.alternative_cause"
+              ]
+            },
+            "description": "The reasoning patterns a strong reader uses here — the WHY of the question."
+          },
+          "target_mistake": {
+            "type": "string",
+            "minLength": 15,
+            "description": "The specific mistake this question is built to catch, e.g. \"reading the conceded view in p2 as the author’s\"."
+          },
+          "prediction_target": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 20,
+            "description": "What the learner should be able to say BEFORE seeing the options, or null when the type is not prediction-friendly."
+          },
+          "difficulty": {
+            "type": "object",
+            "required": [
+              "inference_depth",
+              "distractor_similarity",
+              "reasoning_depth"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "inference_depth": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "distractor_similarity": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "reasoning_depth": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              }
+            }
+          },
+          "secondary_skills": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "enum": [
+                "specific_detail",
+                "vocabulary_in_context",
+                "logical_structure",
+                "paragraph_function",
+                "main_idea",
+                "author_purpose",
+                "tone",
+                "inference",
+                "scope",
+                "application",
+                "strengthen_weaken",
+                "argument",
+                "jumble",
+                "placement",
+                "summary",
+                "completion",
+                "odd_one_out",
+                "word_meaning",
+                "word_pair",
+                "loanword",
+                "root",
+                "word_part",
+                "word_precision"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "vocabulary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "word",
+          "passage_use",
+          "meaning_here",
+          "difficulty"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "word": {
+            "type": "string",
+            "minLength": 2
+          },
+          "passage_use": {
+            "type": "string",
+            "minLength": 5
+          },
+          "meaning_here": {
+            "type": "string",
+            "minLength": 5
+          },
+          "difficulty": {
+            "enum": [
+              "easy",
+              "medium",
+              "hard"
+            ]
+          }
+        }
+      }
+    },
+    "mentor": {
+      "type": "object",
+      "required": [
+        "challenge",
+        "one_sentence_summary",
+        "main_idea",
+        "simple_explanation",
+        "why_difficult",
+        "author_intention",
+        "paragraph_journey",
+        "tone_progression",
+        "key_transitions",
+        "misunderstanding",
+        "traps_summary",
+        "reading_lesson",
+        "real_world",
+        "takeaway",
+        "reflection_question"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "challenge": {
+          "type": "string",
+          "minLength": 20,
+          "description": "Shown BEFORE reading: one sentence on what will test the reader. No spoilers of answers."
+        },
+        "one_sentence_summary": {
+          "type": "string",
+          "minLength": 30,
+          "description": "The whole passage honestly compressed into ONE sentence. The first thing revealed on the Learning Page — the line the reader checks their own summary against."
+        },
+        "main_idea": {
+          "type": "string",
+          "minLength": 30,
+          "description": "The whole passage in one or two plain sentences."
+        },
+        "simple_explanation": {
+          "type": "string",
+          "minLength": 200,
+          "description": "The passage retold in extremely plain English, as a brilliant teacher sitting beside the student would retell it. A beginner must be able to follow every sentence. Paragraph breaks with \\n\\n allowed."
+        },
+        "why_difficult": {
+          "type": "string",
+          "minLength": 60,
+          "description": "Exactly where this passage makes readers struggle — the abstraction, the pivot, the qualified claim — named plainly and without blame. Shown as 'Why this passage was difficult'."
+        },
+        "author_intention": {
+          "type": "string",
+          "minLength": 30,
+          "description": "What the author is trying to do to the reader, in plain words."
+        },
+        "paragraph_journey": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": [
+              "paragraph_id",
+              "role",
+              "note"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "paragraph_id": {
+                "type": "string",
+                "pattern": "^rc-[0-9]{4}-p[0-9]+$"
+              },
+              "role": {
+                "type": "string",
+                "minLength": 3,
+                "description": "Two-to-four word structural role, e.g. 'Sets the puzzle'."
+              },
+              "note": {
+                "type": "string",
+                "minLength": 20,
+                "description": "One or two sentences in VERY simple language: what this paragraph does, explained as to a friend."
+              }
+            }
+          }
+        },
+        "tone_progression": {
+          "type": "string",
+          "minLength": 20,
+          "description": "How the voice moves across the passage, in one or two sentences."
+        },
+        "key_transitions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "minLength": 15
+          },
+          "description": "The hinge moments where the argument turns, quoted or located plainly."
+        },
+        "misunderstanding": {
+          "type": "string",
+          "minLength": 30,
+          "description": "Why students genuinely misread THIS passage: the specific wrong mental model a hurried reader builds, and what causes it. Shown as 'Why readers misread it'."
+        },
+        "traps_summary": {
+          "type": "string",
+          "minLength": 30,
+          "description": "The distractor patterns this passage used, as advice for next time."
+        },
+        "reading_lesson": {
+          "type": "string",
+          "minLength": 60,
+          "description": "The ONE permanent, transferable reading habit this passage builds — following contrast, separating examples from arguments, tracking the author's opinion, respecting qualifiers, holding inference boundaries — stated as advice for any future passage. Shown as 'The reading lesson'."
+        },
+        "real_world": {
+          "type": "string",
+          "minLength": 30,
+          "description": "Where the reader will meet this idea outside the exam."
+        },
+        "takeaway": {
+          "type": "string",
+          "minLength": 20,
+          "description": "One memorable sentence to keep."
+        },
+        "reflection_question": {
+          "type": "string",
+          "minLength": 15,
+          "pattern": "\\?$",
+          "description": "One thoughtful question the reader can sit with after the page. Must end with a question mark. Shown beside the reflection card."
+        }
+      }
+    }
+  }
+}

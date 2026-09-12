@@ -1,0 +1,103 @@
+{
+  "$id": "cr.schema.v1",
+  "title": "CAT OS Critical Reasoning bundle, schema v1",
+  "description": "A bundle of short-argument reasoning items in the CAT verbal register: an argument of two to six sentences, a stem of one kind (assumption, strengthen, weaken, inference, flaw, conclusion, paradox, evaluate, parallel, principle, role), four options, one correct. The explanation lays the argument bare — premises, conclusion, the unstated link — before it judges any option, and every wrong option is a trap named from the taxonomy's cr_traps. Bundled ten to a file. Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": ["schema_version", "meta", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "meta": {
+      "type": "object",
+      "required": ["id", "type", "version", "status", "band", "title", "item_count", "estimated_time_sec", "source", "date_added", "batch_id", "reviewer_notes", "quality"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^cr-[0-9]{4}$" },
+        "type": { "const": "cr" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "band": { "enum": ["core", "stretch", "elite"] },
+        "title": { "type": "string", "minLength": 3 },
+        "item_count": { "type": "integer", "minimum": 5, "maximum": 15 },
+        "estimated_time_sec": { "type": "integer", "minimum": 45, "maximum": 180, "description": "Per item, at CAT pace." },
+        "source": {
+          "type": "object",
+          "required": ["publication", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication": { "type": "string", "minLength": 1 },
+            "usage_note": { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id": { "type": "string", "pattern": "^batch-cr-[0-9]{3}$" },
+        "reviewer_notes": { "type": "string" },
+        "quality": {
+          "type": "object",
+          "required": ["status", "adversarial_review", "blind_solve"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["draft", "reviewed", "verified"] },
+            "adversarial_review": { "type": "string", "minLength": 40 },
+            "blind_solve": {
+              "type": ["object", "null"],
+              "required": ["solver", "agreed", "total"],
+              "additionalProperties": false,
+              "properties": { "solver": { "type": "string", "minLength": 1 }, "agreed": { "type": "integer", "minimum": 0 }, "total": { "type": "integer", "minimum": 1 }, "notes": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array", "minItems": 5, "maxItems": 15,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "genre", "skill", "patterns", "difficulty", "argument", "stem", "options", "correct", "explanation"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^cr-[0-9]{4}-[0-9]{2}$" },
+          "kind": { "enum": ["assumption", "strengthen", "weaken", "inference", "flaw", "conclusion", "paradox", "evaluate", "parallel", "principle", "role"] },
+          "genre": { "enum": ["philosophy", "psychology", "economics", "sociology", "anthropology", "history", "political-theory", "science", "technology-ethics", "environment", "architecture", "arts-culture", "literature-theory", "linguistics", "culture", "education", "law", "ethics", "media", "institutions", "human-behaviour", "markets", "public-policy", "scientific-method", "intellectual-history", "contemporary-society", "mathematics-logic", "medicine-health", "urban-studies", "religion-belief"] },
+          "skill": { "enum": ["argument", "strengthen_weaken", "inference", "logical_structure", "application"] },
+          "patterns": { "type": "array", "minItems": 1, "maxItems": 4, "items": { "type": "string", "pattern": "^(comp|inf|arg|scope|lang|struct|elim|meta|disc|sum|word|cr)\\.[a-z_]+$" } },
+          "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "argument": { "type": "string", "minLength": 80, "maxLength": 900 },
+          "stem": { "type": "string", "minLength": 15 },
+          "options": { "type": "object", "required": ["A", "B", "C", "D"], "additionalProperties": false,
+            "properties": { "A": { "type": "string", "minLength": 10 }, "B": { "type": "string", "minLength": 10 }, "C": { "type": "string", "minLength": 10 }, "D": { "type": "string", "minLength": 10 } } },
+          "correct": { "enum": ["A", "B", "C", "D"] },
+          "explanation": {
+            "type": "object",
+            "required": ["structure", "correct_reasoning", "distractors", "method"],
+            "additionalProperties": false,
+            "properties": {
+              "structure": {
+                "type": "object",
+                "required": ["premises", "conclusion", "gap"],
+                "additionalProperties": false,
+                "properties": {
+                  "premises": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 10 } },
+                  "conclusion": { "type": "string", "minLength": 10 },
+                  "gap": { "type": ["string", "null"], "minLength": 10, "description": "The unstated link the argument leans on (null for inference/conclusion/role items where the question is not about a gap)." }
+                }
+              },
+              "correct_reasoning": { "type": "string", "minLength": 40 },
+              "distractors": {
+                "type": "array", "minItems": 3, "maxItems": 3,
+                "items": { "type": "object", "required": ["option", "trap_type", "why_wrong", "seductive_element"], "additionalProperties": false,
+                  "properties": {
+                    "option": { "enum": ["A", "B", "C", "D"] },
+                    "trap_type": { "enum": ["restates_premise", "restates_conclusion", "opposite_effect", "irrelevant_information", "scope_shift", "too_strong_to_be_necessary", "wrong_link", "explains_wrong_side", "partial_parallel", "attacks_premise", "correlation_causation", "alternative_cause_ignored"] },
+                    "why_wrong": { "type": "string", "minLength": 25 },
+                    "seductive_element": { "type": "string", "minLength": 10 }
+                  } }
+              },
+              "method": { "type": "string", "minLength": 40 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

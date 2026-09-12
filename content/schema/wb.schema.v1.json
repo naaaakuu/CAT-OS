@@ -1,0 +1,95 @@
+{
+  "$id": "wb.schema.v1",
+  "title": "CAT OS Word Bank bundle, schema v1",
+  "description": "A bundle of reasoning-based vocabulary questions of one kind. context: a word inside a real sentence, four senses, one forced by the sentence. decode: a word the learner has probably never met, its parts shown after the answer, meaning inferred from morphology plus context. confusable: a sentence with a blank and look-alike words, one of which the sentence wants. register / connotation / synonym_distinction: near-synonyms separated by room, colouring or degree. Every wrong option is a trap named from the taxonomy's word_traps; every item names its ledger skill and patterns. Bundled twenty-ish to a file so the app fetches one file per round. Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": ["schema_version", "meta", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": 1 },
+    "meta": {
+      "type": "object",
+      "required": ["id", "type", "version", "status", "kind", "band", "title", "item_count", "estimated_time_sec", "source", "date_added", "batch_id", "reviewer_notes", "quality"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "pattern": "^wb-[0-9]{4}$" },
+        "type": { "const": "wb" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["draft", "review", "accepted", "rejected", "retired"] },
+        "kind": { "enum": ["context", "decode", "confusable", "register", "connotation", "synonym_distinction"] },
+        "band": { "enum": ["core", "stretch", "elite"] },
+        "title": { "type": "string", "minLength": 3 },
+        "item_count": { "type": "integer", "minimum": 8, "maximum": 30 },
+        "estimated_time_sec": { "type": "integer", "minimum": 20, "maximum": 90, "description": "Per item, at CAT pace." },
+        "source": {
+          "type": "object",
+          "required": ["publication", "usage_note"],
+          "additionalProperties": false,
+          "properties": {
+            "publication": { "type": "string", "minLength": 1 },
+            "usage_note": { "type": "string", "minLength": 1 }
+          }
+        },
+        "date_added": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "batch_id": { "type": "string", "pattern": "^batch-wb-[0-9]{3}$" },
+        "reviewer_notes": { "type": "string" },
+        "quality": {
+          "type": "object",
+          "required": ["status", "adversarial_review", "blind_solve"],
+          "additionalProperties": false,
+          "properties": {
+            "status": { "enum": ["draft", "reviewed", "verified"] },
+            "adversarial_review": { "type": "string", "minLength": 40 },
+            "blind_solve": {
+              "type": ["object", "null"],
+              "required": ["solver", "agreed", "total"],
+              "additionalProperties": false,
+              "properties": { "solver": { "type": "string", "minLength": 1 }, "agreed": { "type": "integer", "minimum": 0 }, "total": { "type": "integer", "minimum": 1 }, "notes": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array", "minItems": 8, "maxItems": 30,
+      "items": {
+        "type": "object",
+        "required": ["id", "word", "skill", "patterns", "difficulty", "stem", "options", "correct", "explanation"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^wb-[0-9]{4}-[0-9]{2}$" },
+          "word": { "type": "string", "minLength": 2, "description": "The word under test. For confusable items, the word the sentence wants." },
+          "skill": { "enum": ["vocabulary_in_context", "word_precision", "word_pair", "root", "word_part", "word_meaning"] },
+          "patterns": { "type": "array", "minItems": 1, "maxItems": 4, "items": { "type": "string", "pattern": "^(comp|inf|arg|scope|lang|struct|elim|meta|disc|sum|word|cr)\\.[a-z_]+$" } },
+          "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "stem": { "type": "string", "minLength": 20, "description": "The sentence, with the tested word inside it (context/decode/register/connotation/synonym_distinction) or a blank written as ____ (confusable)." },
+          "options": { "type": "object", "required": ["A", "B", "C", "D"], "additionalProperties": false,
+            "properties": { "A": { "type": "string", "minLength": 1 }, "B": { "type": "string", "minLength": 1 }, "C": { "type": "string", "minLength": 1 }, "D": { "type": "string", "minLength": 1 } } },
+          "correct": { "enum": ["A", "B", "C", "D"] },
+          "parts": { "type": "array", "items": { "type": "object", "required": ["text", "gloss"], "additionalProperties": false,
+            "properties": { "text": { "type": "string", "minLength": 1 }, "gloss": { "type": "string", "minLength": 1 } } },
+            "description": "decode items: the morphemes and what each contributes, shown after the answer." },
+          "explanation": {
+            "type": "object",
+            "required": ["clue", "correct_reasoning", "distractors", "method"],
+            "additionalProperties": false,
+            "properties": {
+              "clue": { "type": "string", "minLength": 20, "description": "The exact thing in the sentence (or in the word’s parts) that settles the meaning — what an expert notices before the options." },
+              "correct_reasoning": { "type": "string", "minLength": 30 },
+              "distractors": {
+                "type": "array", "minItems": 3, "maxItems": 3,
+                "items": { "type": "object", "required": ["option", "trap_type", "why_wrong"], "additionalProperties": false,
+                  "properties": {
+                    "option": { "enum": ["A", "B", "C", "D"] },
+                    "trap_type": { "enum": ["dictionary_sense_not_context", "near_synonym_wrong_degree", "wrong_connotation", "wrong_register", "false_cognate", "literal_parts_only", "wrong_root", "context_mismatch", "confusable_twin", "antonym_lure", "sound_alike", "collocation_clash", "prefix_misread"] },
+                    "why_wrong": { "type": "string", "minLength": 20 }
+                  } }
+              },
+              "method": { "type": "string", "minLength": 30, "description": "The reusable move: how to get this kind of word right when you meet one you do not know." }
+            }
+          }
+        }
+      }
+    }
+  }
+}

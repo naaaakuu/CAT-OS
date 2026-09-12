@@ -167,7 +167,7 @@ export async function renderSecondLook(outlet, { storage }) {
         locked = true;
         const chosen = btn.dataset.k;
         const correct = chosen === q.correct;
-        answers.push({ question_id: q.id, passage_id: it.passage.meta.id, type: q.type ?? null, chosen, is_correct: correct, time_ms: 0 });
+        answers.push({ question_id: q.id, passage_id: it.passage.meta.id, type: q.type ?? null, skill: q.skill ?? null, patterns: q.patterns ?? [], trap: correct ? null : (q.explanation?.distractors?.find((d) => d.option === chosen)?.trap_type ?? null), chosen, is_correct: correct, time_ms: 0 });
         for (const b of body.querySelectorAll('.vopt')) {
           b.disabled = true;
           if (b.dataset.k === q.correct) b.classList.add('is-correct');

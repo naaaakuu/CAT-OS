@@ -9,8 +9,9 @@
 import { verbalStars, EARN, bagEntries } from './economy.js';
 import { play } from './audio.js';
 
-const REGION_OF = { pj: 'loom', ps: 'table', ooo: 'bench', wd: 'terraces' };
-const NAME_OF = { loom: 'The Loom', table: 'The Summary Table', bench: 'The Stranger’s Bench', terraces: 'The Vine Terraces' };
+const REGION_OF = { pj: 'loom', ps: 'table', ooo: 'bench', wd: 'terraces', sp: 'loom', pc: 'table', cr: 'reading-room' };
+const NAME_OF = { loom: 'The Loom', table: 'The Summary Table', bench: 'The Stranger’s Bench', terraces: 'The Vine Terraces', 'reading-room': 'The Reading Room', meadow: 'The Meadow', pond: 'The Mirror Pond' };
+const BANK_MODULES = new Set(['sp', 'pc', 'wb', 'cr']);
 
 /**
  * @param {object} session  the stored session record (module, score, duration_ms, item_ids)
@@ -18,10 +19,12 @@ const NAME_OF = { loom: 'The Loom', table: 'The Summary Table', bench: 'The Stra
  * @returns {{ region, stars, ink, html }}
  */
 export function worldReward(session, items = []) {
-  const region = REGION_OF[session.module] ?? 'loom';
-  const targetSec = items.reduce((n, it) => n + (it?.meta?.estimated_time_sec ?? 90), 0) || 90 * (session.score?.total ?? 1);
+  const region = session.region ?? REGION_OF[session.module] ?? 'loom';
+  const targetSec = session.target_sec ?? (items.reduce((n, it) => n + (it?.meta?.estimated_time_sec ?? it?.time_sec ?? 90), 0) || 90 * (session.score?.total ?? 1));
   const res = session.module === 'wd' ? { stars: session.score?.correct ? Math.min(3, 1 + session.score.correct) : 0, accuracy: session.score?.accuracy ?? 0, inTime: true } : verbalStars(session, targetSec);
-  const earned = session.module === 'wd' ? EARN.wd(res.stars, session.score?.correct ?? 0) : EARN.verbal(res.stars, session.score?.correct ?? 0, res.flawless === true);
+  const earned = session.module === 'wd' ? EARN.wd(res.stars, session.score?.correct ?? 0)
+    : BANK_MODULES.has(session.module) ? EARN.bank(session.module, res.stars, session.score?.correct ?? 0, res.flawless === true)
+      : EARN.verbal(res.stars, session.score?.correct ?? 0, res.flawless === true);
   const won = bagEntries(earned);
   const stars = res.stars;
   const html = `
@@ -29,13 +32,13 @@ export function worldReward(session, items = []) {
       <div class="world-reward__stars" aria-label="${stars} of 3 stars">${'★'.repeat(stars)}<span class="off">${'★'.repeat(3 - stars)}</span></div>
       <div class="world-reward__lead">
         <p class="world-reward__title">${stars === 3 ? 'Accurate and in time.' : stars === 2 ? 'Accurate, over time.' : stars === 1 ? 'Completed, with misses.' : 'Not yet.'}</p>
-        <p class="world-reward__line">${NAME_OF[region]} remembers this set. <a href="#/world">Back to the valley</a></p>
+        <p class="world-reward__line">${NAME_OF[region] ?? 'The valley'} remembers this set. <a href="#/world">Back to the valley</a></p>
       </div>
       <span class="world-reward__won">${won.map((c) => `<span class="craft craft--${c.key}"><i></i>+${c.amount}</span>`).join('')}</span>
     </div>`;
   sessionStorage.setItem('world:focus', region);
   sessionStorage.setItem('world:changed', region);
-  sessionStorage.setItem('world:change-line', `${NAME_OF[region]}: <b>${stars} star${stars === 1 ? '' : 's'}</b>`);
+  sessionStorage.setItem('world:change-line', `${NAME_OF[region] ?? 'The valley'}: <b>${stars} star${stars === 1 ? '' : 's'}</b>`);
   // The crafts fly into the purse on the way back, exactly as they do
   // after a round or a passage.
   if (won.length) sessionStorage.setItem('world:earned', JSON.stringify(earned));

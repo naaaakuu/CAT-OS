@@ -535,23 +535,28 @@ for (const p of listed) {
   if (p === './') continue;
   if (!existsSync(join(root, p))) bad(`service worker precaches missing file: ${p}`);
 }
-// every content file should be precached
-for (const file of rcFiles) {
-  const path = `./${rcDir}/${file}`;
-  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+// The banks are not precached (see service-worker.js): every bank file
+// must be in the library manifest instead, and every manifest entry must
+// exist. Reference content is still precached below.
+const manifest = readJSON('content/manifest.json');
+const manifestSet = new Set(manifest.files);
+for (const p of manifest.files) {
+  if (!existsSync(join(root, p))) bad(`manifest lists a missing file: ${p}`);
+  if (listed.includes(`./${p}`)) bad(`${p} is both precached and in the manifest; pick one`);
 }
-for (const file of pjFiles) {
-  const path = `./${pjDir}/${file}`;
-  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+for (const [dir, files] of [[rcDir, rcFiles], [pjDir, pjFiles], [psDir, psFiles], [oooDir, oooFiles]]) {
+  for (const file of files) {
+    const p = `${dir}/${file}`;
+    if (!manifestSet.has(p)) bad(`bank file not in content/manifest.json: ${p} (run node tools/build-manifest.mjs)`);
+  }
 }
-for (const file of psFiles) {
-  const path = `./${psDir}/${file}`;
-  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
+for (const dir of ['content/sentence-placement', 'content/para-completion', 'content/word-bank', 'content/critical-reasoning']) {
+  if (!existsSync(join(root, dir))) continue;
+  for (const file of readdirSync(join(root, dir)).filter((f) => f.endsWith('.json'))) {
+    if (!manifestSet.has(`${dir}/${file}`)) bad(`bank file not in content/manifest.json: ${dir}/${file} (run node tools/build-manifest.mjs)`);
+  }
 }
-for (const file of oooFiles) {
-  const path = `./${oooDir}/${file}`;
-  if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
-}
+if (!listed.includes('./content/manifest.json')) bad('library manifest not precached');
 for (const file of wdFiles) {
   const path = `./${wdDir}/${file}`;
   if (!listed.includes(path)) bad(`content file not in service worker precache: ${path}`);
@@ -573,10 +578,7 @@ for (const kind of bundleKinds) {
 if (!listed.includes('./content/index.json')) bad('registry not precached');
 // Every schema version on disk must be precached — offline validation needs it.
 for (const f of readdirSync(join(root, 'content/schema'))) {
-  if ((f.startsWith('rc.schema.v') || f.startsWith('pj.schema.v') || f.startsWith('ps.schema.v') || f.startsWith('ooo.schema.v') || f.startsWith('wd.schema.v')
-       || f.startsWith('vocab.schema.v') || f.startsWith('lg.schema.v')
-       || f.startsWith('lex.schema.v') || f.startsWith('loan.schema.v') || f.startsWith('twin.schema.v'))
-      && !listed.includes(`./content/schema/${f}`)) {
+  if (f.endsWith('.json') && !listed.includes(`./content/schema/${f}`)) {
     bad(`schema not precached: ${f}`);
   }
 }
@@ -2189,6 +2191,164 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
   if (problems.length === before) ok('the companion, the welcome, the map and the feedback all hold');
 }
 
+
+/* ================================================================== */
+/* The content engine (2026-09-12): the four banks, the pattern layer,  */
+/* the taxonomy, the registry rows the banks add, and the corpus QC.    */
+/* ================================================================== */
+
+console.log('\n18. The content engine: banks (schema + consistency) and registry rows');
+{
+  const { bankConsistencyIssues, normalizeBankItem } = await mod('src/core/content-loader/loader.js');
+  const BANK_DIRS = { sp: 'content/sentence-placement', pc: 'content/para-completion', wb: 'content/word-bank', cr: 'content/critical-reasoning' };
+  const bankFiles = {};
+  let bankCount = 0, itemCount = 0;
+  for (const [type, dir] of Object.entries(BANK_DIRS)) {
+    const schemasOf = {};
+    for (const f of readdirSync(join(root, 'content/schema'))) {
+      if (f.startsWith(`${type}.schema.v`)) schemasOf[f.match(/v(\d+)/)[1]] = readJSON(`content/schema/${f}`);
+    }
+    bankFiles[type] = existsSync(join(root, dir)) ? readdirSync(join(root, dir)).filter((f) => f.endsWith('.json')).sort() : [];
+    for (const file of bankFiles[type]) {
+      const id = file.replace('.json', '');
+      let item;
+      try { item = readJSON(`${dir}/${file}`); } catch (e) { bad(`${file}: invalid JSON — ${e.message}`); continue; }
+      const schema = schemasOf[String(item.schema_version ?? 1)];
+      if (!schema) { bad(`${file}: no ${type} schema for version ${item.schema_version}`); continue; }
+      const { valid, errors } = validate(schema, item);
+      if (!valid) { errors.forEach((e) => bad(`${file}: ${e}`)); continue; }
+      const issues = bankConsistencyIssues(type, id, item);
+      if (issues.length) { issues.forEach((i) => bad(`${file}: ${i}`)); continue; }
+      // Every item normalises into the one shape the bank screen draws.
+      try {
+        if (type === 'sp' || type === 'pc') normalizeBankItem(type, item);
+        else for (const it of item.items) normalizeBankItem(type, item, it.id);
+      } catch (e) { bad(`${file}: does not normalise — ${e.message}`); continue; }
+      bankCount += 1;
+      itemCount += item.items?.length ?? 1;
+      // Registry row: existence + the mirror fields the screens read.
+      const entry = registry.items.find((i) => i.id === id);
+      if (!entry) { bad(`file ${id}.json has no registry entry (run node tools/build-index.mjs)`); continue; }
+      const m = item.meta;
+      if (entry.type !== type) bad(`${id}: registry type ≠ ${type}`);
+      if (entry.status !== m.status) bad(`${id}: registry status ≠ file`);
+      if (entry.title !== m.title) bad(`${id}: registry title ≠ file`);
+      if (type === 'sp' || type === 'pc') {
+        if (entry.tier !== m.tier) bad(`${id}: registry tier ≠ file`);
+        if (entry.difficulty_numeric !== m.difficulty_numeric) bad(`${id}: registry difficulty_numeric ≠ file`);
+        if (entry.estimated_time_sec !== m.estimated_time_sec) bad(`${id}: registry estimated_time_sec ≠ file`);
+      } else {
+        if ((entry.item_ids ?? []).join(',') !== item.items.map((i) => i.id).join(',')) bad(`${id}: registry item_ids ≠ file`);
+        if (entry.band !== m.band) bad(`${id}: registry band ≠ file`);
+        if (type === 'wb' && entry.kind !== m.kind) bad(`${id}: registry kind ≠ file`);
+      }
+    }
+    for (const entry of registry.items.filter((i) => i.type === type)) {
+      if (!bankFiles[type].includes(`${entry.id}.json`)) bad(`registry lists ${type} ${entry.id} but no file exists`);
+    }
+  }
+  // v5 passage rows carry the pattern layer the curator aims by.
+  for (const entry of registry.items.filter((i) => i.type === 'rc' && i.schema_version >= 5)) {
+    if (!Array.isArray(entry.patterns) || !Array.isArray(entry.skills_trained) || !Array.isArray(entry.traps)) bad(`${entry.id}: v5 registry row lacks patterns / skills_trained / traps (run node tools/build-index.mjs)`);
+  }
+  if (problems.length === 0) ok(`${bankCount} bank files (${itemCount} items) valid, normalisable and registered`);
+}
+
+console.log('\n19. The taxonomy ↔ the schemas ↔ the code');
+{
+  const tax = readJSON('content/taxonomy/varc-taxonomy.json');
+  const taxo = await mod('src/core/learning/taxonomy.js');
+  const review = await mod('src/core/learning/review.js');
+  const same = (a, b) => JSON.stringify([...a].sort()) === JSON.stringify([...b].sort());
+  const rc5 = readJSON('content/schema/rc.schema.v5.json');
+  if (!same(rc5.properties.questions.items.properties.type.enum, tax.rc_question_types.map((t) => t.key))) bad('rc v5 question types ≠ taxonomy rc_question_types');
+  if (!same(rc5.properties.questions.items.properties.explanation.properties.distractors.items.properties.trap_type.enum, tax.trap_types.map((t) => t.key))) bad('rc v5 trap types ≠ taxonomy trap_types');
+  if (!same(rc5.properties.meta.properties.reasoning_patterns.items.enum, tax.reasoning_patterns.map((p) => p.id))) bad('rc v5 reasoning patterns ≠ taxonomy');
+  if (!same(rc5.properties.meta.properties.genre.enum, tax.rc_genres)) bad('rc v5 genres ≠ taxonomy rc_genres');
+  if (!same(rc5.properties.meta.properties.structure.enum, tax.rc_structures)) bad('rc v5 structures ≠ taxonomy rc_structures');
+  for (const name of ['sp', 'pc']) {
+    const s = readJSON(`content/schema/${name}.schema.v1.json`);
+    if (!same(s.properties.explanation.properties.distractors.items.properties.trap_type.enum, tax.verbal.placement_traps.map((t) => t.key))) bad(`${name} trap types ≠ taxonomy placement_traps`);
+    if (!same(s.properties.meta.properties.genre.enum, tax.rc_genres)) bad(`${name} genres ≠ taxonomy`);
+  }
+  const wb = readJSON('content/schema/wb.schema.v1.json');
+  if (!same(wb.properties.items.items.properties.explanation.properties.distractors.items.properties.trap_type.enum, tax.verbal.word_traps.map((t) => t.key))) bad('wb trap types ≠ taxonomy word_traps');
+  const cr = readJSON('content/schema/cr.schema.v1.json');
+  if (!same(cr.properties.items.items.properties.explanation.properties.distractors.items.properties.trap_type.enum, tax.verbal.cr_traps.map((t) => t.key))) bad('cr trap types ≠ taxonomy cr_traps');
+  if (!same(cr.properties.items.items.properties.kind.enum, tax.verbal.cr_kinds)) bad('cr kinds ≠ taxonomy cr_kinds');
+  // The code mirror.
+  if (JSON.stringify(taxo.RC_TYPE_SKILL) !== JSON.stringify(tax.rc_type_skill)) bad('taxonomy.js RC_TYPE_SKILL ≠ taxonomy rc_type_skill');
+  for (const t of tax.rc_question_types) {
+    if (t.prediction !== taxo.RC_PREDICTION_TYPES.has(t.key)) bad(`taxonomy.js RC_PREDICTION_TYPES disagrees on ${t.key}`);
+    if (!(t.key in taxo.RC_TYPE_SKILL)) bad(`taxonomy.js RC_TYPE_SKILL lacks ${t.key}`);
+  }
+  const allTraps = [...tax.trap_types.map((t) => t.key), ...tax.verbal.placement_traps.map((t) => t.key), ...tax.verbal.word_traps.map((t) => t.key), ...tax.verbal.cr_traps.map((t) => t.key)];
+  for (const t of allTraps) if (!(t in taxo.TRAP_FAMILY)) bad(`taxonomy.js TRAP_FAMILY lacks ${t}`);
+  for (const t of tax.trap_types) if (taxo.TRAP_FAMILY[t.key] !== t.family) bad(`taxonomy.js TRAP_FAMILY[${t.key}] is ${taxo.TRAP_FAMILY[t.key]}, taxonomy says ${t.family}`);
+  // Every ledger skill in the taxonomy is a SKILL the valley can point at.
+  const ledgerKeys = new Set(review.SKILLS.map((s) => s.key));
+  for (const s of tax.skills.filter((x) => x.kind === 'ledger')) if (!ledgerKeys.has(s.key)) bad(`review.js SKILLS lacks ledger skill ${s.key}`);
+  for (const s of tax.skills) for (const p of s.prereqs) if (!tax.skills.some((x) => x.key === p)) bad(`taxonomy skill ${s.key} has unknown prereq ${p}`);
+  // Every RC trap has a name a learner can read and a mentor pattern.
+  const explSrc = readFileSync(join(root, 'src/ui/components/cat-explanation.js'), 'utf8');
+  const voice = await mod('src/core/mentor/voice.js');
+  for (const t of allTraps) if (!new RegExp(`^\\s*${t}:`, 'm').test(explSrc)) bad(`cat-explanation.js has no reader-facing name for trap ${t}`);
+  for (const t of tax.trap_types) if (!voice.TRAP_PATTERNS[t.key]) bad(`voice.js TRAP_PATTERNS lacks ${t.key} (the mentor could not name it)`);
+  for (const t of tax.rc_question_types) if (!voice.TYPE_LABELS[t.key] || !voice.TYPE_ADVICE[t.key]) bad(`voice.js lacks a label or advice for question type ${t.key}`);
+  if (problems.length === 0) ok(`${tax.rc_question_types.length} question types, ${allTraps.length} trap types, ${tax.reasoning_patterns.length} patterns, ${tax.skills.length} skills — JSON, schemas and code agree`);
+}
+
+console.log('\n20. Bank engine dry run (session · set picking · rest · stars · ledger)');
+{
+  const { BankSession, pickSet, computeBankScore } = await mod('src/core/engine/bank-session.js');
+  const { verbalStars, EARN } = await mod('src/world/economy.js');
+  const { skillLedger, trapLedger, weakTrapFamilies, patternLedger, weakPatterns, isRested } = await mod('src/core/learning/review.js');
+  const mk = (i, skill = 'placement') => ({ id: `x-${i}`, type: 'sp', kind: 'placement', label: 'placement', skill, patterns: ['disc.pronoun_antecedent'], stem: 's', options: { A: 'a', B: 'b', C: 'c', D: 'd' }, correct: 'B', distractors: [{ option: 'A', trap_type: 'wrong_reference_target' }, { option: 'C', trap_type: 'scope_jump' }, { option: 'D', trap_type: 'premature_conclusion' }], time_sec: 60, explanation: {}, body: {} });
+  const items = [mk(1), mk(2), mk(3)];
+  let t = 1000;
+  const s = new BankSession(items, { module: 'sp', setId: 'sp-set:foundation', region: 'loom' }, { now: () => t });
+  s.markItemShown(); t += 5000; const v1 = s.answer('B');
+  if (!v1.is_correct || v1.trap !== null) bad('bank session: a right answer records no trap');
+  s.next(); s.markItemShown(); t += 7000; const v2 = s.answer('A');
+  if (v2.is_correct || v2.trap !== 'wrong_reference_target') bad('bank session: a wrong answer records the distractor’s trap');
+  s.next(); s.skip();
+  const { session, attempts } = s.finish();
+  if (session.module !== 'sp' || session.region !== 'loom' || session.target_sec !== 180) bad('bank session: module/region/target_sec not recorded');
+  if (session.answers.length !== 3 || attempts.length !== 3) bad('bank session: one answer and one attempt per item');
+  if (session.answers[1].skill !== 'placement' || session.answers[1].trap !== 'wrong_reference_target') bad('bank session: answers carry skill and trap');
+  if (computeBankScore(session.answers).marks !== 3) bad('bank session: +3 / 0 marking');
+  const st = verbalStars(session, session.target_sec);
+  if (typeof st.stars !== 'number') bad('bank session: stars derive from the record');
+  const bag = EARN.bank('sp', 3, 2, false);
+  if (!(bag.thread > 0 && bag.ink === 0 && bag.amber === 0)) bad('EARN.bank: placement pays Thread only');
+  if (!(EARN.bank('wb', 2, 2, false).amber > 0) || !(EARN.bank('cr', 2, 2, false).ink > 0)) bad('EARN.bank: the word bank pays Amber, arguments pay Ink');
+  // Picking a set: unsolved first; a missed item rests; a solved one comes last.
+  const pool = [mk(1), mk(2), mk(3), mk(4)];
+  const later = new Date(Date.now() - 60_000).toISOString();
+  const sessions = [{ module: 'sp', finished_at: later, answers: [{ item_id: 'x-1', is_correct: true }, { item_id: 'x-2', is_correct: false }] }];
+  const pick = pickSet(pool, sessions, 'sp', 2, (at, n) => isRested(at, n));
+  if (pick.map((p) => p.id).join(',') !== 'x-3,x-4') bad(`pickSet: expected x-3,x-4 (unsolved, rested first), got ${pick.map((p) => p.id).join(',')}`);
+  const pick2 = pickSet(pool, sessions, 'sp', 4, (at, n) => isRested(at, n));
+  if (pick2.length !== 4 || pick2[2].id !== 'x-2') bad('pickSet: when the pool is short, the most-missed come back for review');
+  // The ledgers read bank answers.
+  const led = skillLedger([session], []);
+  if (!led.get('placement') || led.get('placement').seen !== 2) bad('skillLedger: bank answers count under their skill');
+  const tl = trapLedger([session]);
+  if (tl.total !== 1 || tl.families.get('direction')?.n !== 1) bad('trapLedger: a missed bank item counts under its trap family');
+  const many = [{ module: 'sp', finished_at: later, answers: [1, 2, 3].map((i) => ({ item_id: `y-${i}`, is_correct: false, trap: 'scope_jump' })) }];
+  if (weakTrapFamilies(trapLedger(many))[0]?.key !== 'scope') bad('weakTrapFamilies: three scope misses name the scope family');
+  const pl = patternLedger([{ module: 'rc', finished_at: later, answers: [1, 2, 3, 4].map((i) => ({ question_id: `q${i}`, is_correct: i === 4, patterns: ['inf.vs_speculation'] })) }]);
+  if (weakPatterns(pl)[0]?.key !== 'inf.vs_speculation') bad('weakPatterns: a pattern missed three times in four is weak');
+  if (problems.length === 0) ok('bank session, set picking, rest, stars, crafts and the three ledgers behave');
+}
+
+console.log('\n21. Corpus QC (tools/qc-corpus.mjs — hard checks)');
+{
+  const { runCorpusQC } = await mod('tools/qc-corpus.mjs');
+  const { errors, warnings, stats } = runCorpusQC();
+  for (const e of errors) bad(`corpus: ${e}`);
+  if (!errors.length) ok(`corpus clean: ${stats.counts.rc} passages / ${stats.questions.rc} questions · ${stats.counts.pj} PJ · ${stats.counts.ps} PS · ${stats.counts.ooo} OOO · ${stats.counts.sp} SP · ${stats.counts.pc} PC · ${stats.questions.wb ?? 0} word-bank items · ${stats.questions.cr ?? 0} arguments · ${stats.distinct_patterns} patterns · ${stats.distinct_traps} trap types in use · ${warnings.length} soft warning(s)`);
+}
 
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {

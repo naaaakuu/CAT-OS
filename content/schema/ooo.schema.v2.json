@@ -1,0 +1,950 @@
+{
+  "$id": "ooo.schema.v2",
+  "title": "CAT OS Odd One Out content item, schema v2",
+  "description": "Schema v2 = v1 plus the pattern layer of the content engine (content/taxonomy/varc-taxonomy.json): meta.reasoning_patterns names the discourse and reasoning patterns the item exercises, meta.genre widens to the thirty taxonomy genres, and meta.quality records the adversarial review and blind solve. v1 files remain valid under v1; versions are appended, never edited. Original v1 description: One Odd One Out item: five topically related sentences of which exactly four form a coherent paragraph and one must be excluded (ODD_MAN_OUT_BIBLE TL;DR). The design axis is the Bible's single most important principle: the outlier is ON TOPIC but OUT OF STRUCTURE, defined by the discourse relation it cannot enter, never by the topic it is about (Bible §4). The metadata implements Bible §13: the seven way violation taxonomy (§4 a to g), the difficulty vector with topical_overlap as the primary lever (§6), the two engineered traps (§5, Trap A = a belonging sentence looks odd, Trap B = the outlier looks like it belongs), cohesion signals per Halliday and Hasan tie (§3), the bounded Reading DNA extension (§8, exactly four new traits plus two inherited), and the §11 validation gates (uniqueness, reconstruction, heuristic adversarial, trap audit) which must all pass before an item ships. The explanation implements §12: reconstruct the core paragraph, assign each core sentence its discourse role and name the ties, name the precise structural principle the outlier violates, and expose the trap. exclusion_analysis tags every core sentence with the §7 solver pattern that makes it tempting to exclude, so a learner's exact pick powers precise Reading DNA diagnosis. Format facts (five sentences, TITA, +3/0) are carried as configuration with a verification note, never as timeless fact (Bible §1, Recommendation 1). Validation subset: see src/core/content-loader/validator.js.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "meta",
+    "sentences",
+    "outlier",
+    "core_order",
+    "builder",
+    "explanation",
+    "mentor"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "version",
+        "status",
+        "quality_score",
+        "genre",
+        "difficulty",
+        "difficulty_numeric",
+        "tier",
+        "title",
+        "theme",
+        "estimated_time_sec",
+        "format",
+        "spine_type",
+        "nucleus",
+        "violation_type",
+        "difficulty_vector",
+        "traps",
+        "cohesion_signals",
+        "dna_traits",
+        "mission",
+        "validation",
+        "learning_objective",
+        "source",
+        "date_added",
+        "batch_id",
+        "prompt_version",
+        "reviewer_notes",
+        "reasoning_patterns",
+        "quality"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ooo-[0-9]{4}$"
+        },
+        "type": {
+          "const": "ooo"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "review",
+            "accepted",
+            "rejected",
+            "retired"
+          ]
+        },
+        "quality_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Rubric score; items below 85 do not ship, and a failed §11 validation gate overrides any score."
+        },
+        "genre": {
+          "enum": [
+            "philosophy",
+            "psychology",
+            "economics",
+            "sociology",
+            "anthropology",
+            "history",
+            "political-theory",
+            "science",
+            "technology-ethics",
+            "environment",
+            "architecture",
+            "arts-culture",
+            "literature-theory",
+            "linguistics",
+            "culture",
+            "education",
+            "law",
+            "ethics",
+            "media",
+            "institutions",
+            "human-behaviour",
+            "markets",
+            "public-policy",
+            "scientific-method",
+            "intellectual-history",
+            "contemporary-society",
+            "mathematics-logic",
+            "medicine-health",
+            "urban-studies",
+            "religion-belief"
+          ]
+        },
+        "difficulty": {
+          "enum": [
+            "easy",
+            "medium",
+            "hard"
+          ]
+        },
+        "difficulty_numeric": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "tier": {
+          "enum": [
+            "foundation",
+            "easy",
+            "medium",
+            "advanced",
+            "cat",
+            "cat-plus",
+            "ninety-nine",
+            "premium"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "description": "A quiet display name for lists and the Learning Page. Must never hint at the outlier."
+        },
+        "theme": {
+          "type": "string",
+          "minLength": 3
+        },
+        "estimated_time_sec": {
+          "type": "integer",
+          "minimum": 45,
+          "maximum": 240
+        },
+        "format": {
+          "type": "object",
+          "required": [
+            "sentence_count",
+            "response",
+            "marking",
+            "format_verified"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "sentence_count": {
+              "const": 5,
+              "description": "Five sentences, stable 2016 to 2025 (Bible §1). Do not conflate with para jumbles, which moved to four."
+            },
+            "response": {
+              "enum": [
+                "TITA",
+                "MCQ"
+              ]
+            },
+            "marking": {
+              "type": "string",
+              "minLength": 3,
+              "description": "The per cycle convention, for display beside its verification note. Currently +3/0 with no negative marking on TITA."
+            },
+            "format_verified": {
+              "type": "string",
+              "minLength": 4,
+              "description": "When and against what the format facts were last verified (Bible Recommendation 1). Never present format as timeless fact."
+            }
+          }
+        },
+        "spine_type": {
+          "enum": [
+            "narrative",
+            "argument",
+            "expository",
+            "descriptive"
+          ],
+          "description": "The core paragraph's spine (Bible §13 core_paragraph.spine_type)."
+        },
+        "nucleus": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "description": "Presentation label of the RST nucleus, the core sentence carrying the paragraph's central purpose (Bible §3). Must be a core sentence, never the outlier."
+        },
+        "violation_type": {
+          "enum": [
+            "topically_alien",
+            "wrong_scope",
+            "general_vs_specific",
+            "stance_shift",
+            "thread_break",
+            "method_vs_finding",
+            "example_no_claim"
+          ],
+          "description": "The outlier's crime, from the Bible §4 taxonomy: (a) topically related but structurally alien, (b) right topic at the wrong scope, (c) a definitional or general statement inside a specific narrative, (d) a stance or tone shift, (e) a broken narrative or argument thread, (f) method versus finding, (g) an example that fits no claim."
+        },
+        "difficulty_vector": {
+          "type": "object",
+          "required": [
+            "topical_overlap",
+            "violation_subtlety",
+            "violation_locus",
+            "abstractness_vocab",
+            "length_syntax_load",
+            "core_structure_strength",
+            "decoy_load"
+          ],
+          "additionalProperties": false,
+          "description": "The Bible §6 vector. topical_overlap is the PRIMARY lever: higher overlap between outlier and core defeats topic matching and makes the item harder.",
+          "properties": {
+            "topical_overlap": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "violation_subtlety": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "violation_locus": {
+              "enum": [
+                "local",
+                "global",
+                "mixed"
+              ],
+              "description": "Where the outlier fails. Locally smooth but globally alien is the hardest regime (Bible §3, §6)."
+            },
+            "abstractness_vocab": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "length_syntax_load": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "core_structure_strength": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "How strongly cued the core's spine is. Stronger = the outlier stands out more (easier); looser = harder, and below 3 an item risks unfairness (Bible §6 dimension 6)."
+            },
+            "decoy_load": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            }
+          }
+        },
+        "traps": {
+          "type": "object",
+          "required": [
+            "primary",
+            "secondary",
+            "description"
+          ],
+          "additionalProperties": false,
+          "description": "The two engineered traps (Bible §5). A = a belonging sentence is given a surface feature that screams misfit. B = the true outlier is given strong local hooks so it appears to belong.",
+          "properties": {
+            "primary": {
+              "enum": [
+                "A",
+                "B",
+                "none"
+              ]
+            },
+            "secondary": {
+              "enum": [
+                "A",
+                "B",
+                "none"
+              ]
+            },
+            "description": {
+              "type": "string",
+              "minLength": 10,
+              "description": "How the trap is built in this item, for the trap audit. Plain register."
+            }
+          }
+        },
+        "cohesion_signals": {
+          "type": "object",
+          "required": [
+            "reference",
+            "substitution",
+            "ellipsis",
+            "conjunction",
+            "lexical_overlap"
+          ],
+          "additionalProperties": false,
+          "description": "Which Halliday and Hasan ties bind the core (Bible §3, §13): present or absent per tie. lexical_overlap true also flags the classic camouflage, shared vocabulary masking a missing structural fit.",
+          "properties": {
+            "reference": {
+              "type": "boolean"
+            },
+            "substitution": {
+              "type": "boolean"
+            },
+            "ellipsis": {
+              "type": "boolean"
+            },
+            "conjunction": {
+              "type": "boolean"
+            },
+            "lexical_overlap": {
+              "type": "boolean"
+            }
+          }
+        },
+        "dna_traits": {
+          "type": "array",
+          "minItems": 1,
+          "description": "The bounded Reading DNA extension (Bible §8): exactly four new traits, plus two inherited from Para Jumbles, cross referenced rather than duplicated. Do not invent traits beyond these.",
+          "items": {
+            "enum": [
+              "coherence_monitoring",
+              "candidate_model_maintenance",
+              "relatedness_vs_belonging",
+              "ambiguity_tolerance",
+              "given_new_tracking",
+              "connective_reading"
+            ]
+          }
+        },
+        "mission": {
+          "enum": [
+            "protect_continuity",
+            "find_the_branch",
+            "track_the_direction",
+            "notice_topic_stability",
+            "build_before_eliminating",
+            "test_the_ties",
+            "watch_the_scope",
+            "hold_the_purpose"
+          ],
+          "description": "The one structural reading skill this item foregrounds. Shown as Today's Mission before solving; copy lives in src/core/mentor/ooo-voice.js."
+        },
+        "validation": {
+          "type": "object",
+          "required": [
+            "uniqueness_of_answer",
+            "reconstruction_check",
+            "heuristic_adversarial",
+            "trap_audit",
+            "expert_reviewed"
+          ],
+          "additionalProperties": false,
+          "description": "The Bible §11 gates. An item ships only if every gate holds: exactly one removal yields coherence, the core has a defensible near unique ordering, shallow heuristic solvers do NOT select the answer, and the traps do not create a second defensible answer.",
+          "properties": {
+            "uniqueness_of_answer": {
+              "enum": [
+                "pass",
+                "fail"
+              ]
+            },
+            "reconstruction_check": {
+              "enum": [
+                "pass",
+                "fail"
+              ]
+            },
+            "heuristic_adversarial": {
+              "enum": [
+                "pass",
+                "fail"
+              ],
+              "description": "pass = a solver playing only surface heuristics (topic keywords, tense or tone difference, pronoun or connective presence) does NOT reliably find the answer. Required from the medium tier up (Bible §10)."
+            },
+            "trap_audit": {
+              "enum": [
+                "pass",
+                "fail"
+              ]
+            },
+            "expert_reviewed": {
+              "type": "boolean"
+            }
+          }
+        },
+        "learning_objective": {
+          "type": "string",
+          "minLength": 10
+        },
+        "source": {
+          "type": "object",
+          "required": [
+            "publication",
+            "url",
+            "author",
+            "date_accessed",
+            "usage_note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "publication": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "author": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "date_accessed": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "usage_note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "date_added": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "batch_id": {
+          "type": "string",
+          "pattern": "^batch-ooo-[0-9]{3}$"
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewer_notes": {
+          "type": "string"
+        },
+        "reasoning_patterns": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "enum": [
+              "comp.explicit_detail",
+              "comp.paraphrase",
+              "comp.central_idea",
+              "comp.supporting_idea",
+              "comp.purpose",
+              "comp.intent",
+              "comp.organization",
+              "comp.reference_tracking",
+              "comp.function_over_words",
+              "comp.attention_span",
+              "inf.directly_implied",
+              "inf.strongly_supported",
+              "inf.necessary",
+              "inf.reasonable_implication",
+              "inf.vs_speculation",
+              "inf.author_view_application",
+              "inf.logical_gap",
+              "inf.author_vs_reported",
+              "arg.premise",
+              "arg.conclusion",
+              "arg.assumption",
+              "arg.qualification",
+              "arg.concession",
+              "arg.counterargument",
+              "arg.rebuttal",
+              "arg.causal_claim",
+              "arg.analogy",
+              "arg.generalization",
+              "arg.example",
+              "arg.principle",
+              "arg.evidence",
+              "arg.evidence_vs_conclusion",
+              "arg.correlation_vs_causation",
+              "arg.description_vs_evaluation",
+              "arg.example_vs_principle",
+              "arg.necessary_vs_sufficient",
+              "scope.too_broad",
+              "scope.too_narrow",
+              "scope.population",
+              "scope.time_period",
+              "scope.condition",
+              "scope.abstraction_level",
+              "scope.true_but_off_question",
+              "lang.absolute_vs_qualified",
+              "lang.some_vs_all",
+              "lang.may_vs_must",
+              "lang.often_vs_always",
+              "lang.implicit_negation",
+              "lang.double_negative",
+              "lang.comparative",
+              "lang.temporal_qualifier",
+              "lang.causal_wording",
+              "lang.modal_verbs",
+              "lang.subtle_negation",
+              "lang.overstatement",
+              "lang.contrast_marker",
+              "lang.concession_marker",
+              "lang.tone_shift",
+              "lang.pronoun_reference",
+              "struct.contrast",
+              "struct.continuation",
+              "struct.cause_effect",
+              "struct.problem_solution",
+              "struct.claim_evidence",
+              "struct.claim_counterclaim",
+              "struct.chronology",
+              "struct.analogy",
+              "struct.definition",
+              "struct.example",
+              "struct.qualification",
+              "struct.pivot",
+              "struct.conclusion",
+              "struct.transition",
+              "struct.general_to_specific",
+              "struct.specific_to_general",
+              "struct.question_answer",
+              "struct.view_critique_replacement",
+              "struct.two_views_adjudication",
+              "struct.phenomenon_explanation",
+              "struct.history_of_an_idea",
+              "elim.predict_first",
+              "elim.systematic",
+              "elim.attractive_unsupported",
+              "elim.weak_distractor",
+              "elim.partial_solve",
+              "elim.time_pressure",
+              "elim.near_tie",
+              "meta.ambiguity",
+              "meta.contradiction",
+              "meta.attention",
+              "disc.pronoun_antecedent",
+              "disc.demonstrative",
+              "disc.repeated_noun",
+              "disc.lexical_chain",
+              "disc.chronology",
+              "disc.cause_effect",
+              "disc.contrast",
+              "disc.concession",
+              "disc.example_after_claim",
+              "disc.general_to_specific",
+              "disc.specific_to_general",
+              "disc.definition_then_application",
+              "disc.question_then_answer",
+              "disc.claim_then_evidence",
+              "disc.problem_then_solution",
+              "disc.rhetorical_pivot",
+              "disc.transition_word",
+              "disc.implicit_transition",
+              "disc.opening_sentence",
+              "disc.closing_sentence",
+              "disc.given_new",
+              "disc.parallelism",
+              "disc.tense_continuity",
+              "disc.stance_continuity",
+              "disc.topic_progression",
+              "disc.scope_continuity",
+              "disc.function_slot",
+              "disc.competing_ending",
+              "disc.competing_opener",
+              "sum.central_vs_supporting",
+              "sum.example_vs_claim",
+              "sum.qualification_kept",
+              "sum.stance_kept",
+              "sum.certainty_kept",
+              "sum.no_addition",
+              "sum.compression",
+              "sum.minor_detail_dropped",
+              "word.context_clue",
+              "word.morphology",
+              "word.root_family",
+              "word.prefix_logic",
+              "word.suffix_logic",
+              "word.register",
+              "word.connotation",
+              "word.near_synonym",
+              "word.confusable_pair",
+              "word.unfamiliar_decoding",
+              "word.polysemy",
+              "word.tone_of_word",
+              "cr.assumption_gap",
+              "cr.strengthen",
+              "cr.weaken",
+              "cr.flaw",
+              "cr.paradox",
+              "cr.inference",
+              "cr.principle",
+              "cr.parallel_reasoning",
+              "cr.evaluate",
+              "cr.conclusion",
+              "cr.role_of_statement",
+              "cr.sampling",
+              "cr.alternative_cause"
+            ]
+          }
+        },
+        "quality": {
+          "type": "object",
+          "required": [
+            "status",
+            "adversarial_review",
+            "blind_solve"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "draft",
+                "reviewed",
+                "verified"
+              ]
+            },
+            "adversarial_review": {
+              "type": "string",
+              "minLength": 40,
+              "description": "The second pass, written down: which distractor a strong candidate would argue for, and why the key still stands. Never blank on verified content."
+            },
+            "blind_solve": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "solver",
+                "agreed",
+                "total"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "solver": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "agreed": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "total": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "description": "A fresh reader answered the questions without the key. agreed/total is the agreement; disagreements were adjudicated and the item repaired before verified."
+            }
+          }
+        }
+      }
+    },
+    "sentences": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "description": "The five sentences in PRESENTATION order, scrambled so that order never signals the answer (Bible §10 step 6). Labels are display identity only.",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "minLength": 40
+          }
+        }
+      }
+    },
+    "outlier": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "description": "The one sentence that cannot enter the core's discourse structure. On topic by design; out of structure by construction."
+    },
+    "core_order": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "enum": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ]
+      },
+      "description": "The four core sentences in the author's paragraph order, as presentation labels. Must exclude the outlier and cover every other label exactly once. The Paragraph Builder mode and the reconstruction layer of every explanation run on this."
+    },
+    "builder": {
+      "type": "object",
+      "required": [
+        "prompt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "minLength": 20,
+          "description": "The construct mode invitation: one line asking the learner to build the four sentence paragraph before judging anything. Construction before elimination (Bible §7 remediation, Recommendation 5)."
+        }
+      }
+    },
+    "explanation": {
+      "type": "object",
+      "required": [
+        "spine_note",
+        "core_roles",
+        "links",
+        "violation_named",
+        "why_it_breaks",
+        "trap_exposed",
+        "exclusion_analysis",
+        "detection_habit"
+      ],
+      "additionalProperties": false,
+      "description": "The §12 explanation design, in order: reconstruct the core, assign discourse roles and name the ties, name the violated principle and why the outlier cannot attach, expose the trap, and leave one transferable habit.",
+      "properties": {
+        "spine_note": {
+          "type": "string",
+          "minLength": 40,
+          "description": "§12 layer 1: the core paragraph the four sentences form, its order and its spine (opening, development, close), in plain words."
+        },
+        "core_roles": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "§12 layer 2: one entry per core sentence IN CORE ORDER, naming its discourse role and why it sits where it sits.",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "role",
+              "why_here"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ]
+              },
+              "role": {
+                "enum": [
+                  "topic",
+                  "background",
+                  "development",
+                  "example",
+                  "contrast",
+                  "concession",
+                  "evidence",
+                  "cause_effect",
+                  "definition",
+                  "conclusion",
+                  "restatement",
+                  "question",
+                  "answer"
+                ]
+              },
+              "why_here": {
+                "type": "string",
+                "minLength": 30
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "The three joins between consecutive core sentences, each naming the cohesive tie that binds them (Halliday and Hasan taxonomy plus the given new chain, Bible §3). Ties are named so the learner reads structure, not vocabulary.",
+          "items": {
+            "type": "object",
+            "required": [
+              "from",
+              "to",
+              "tie",
+              "explanation"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "from": {
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ]
+              },
+              "to": {
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ]
+              },
+              "tie": {
+                "enum": [
+                  "reference",
+                  "conjunction",
+                  "lexical",
+                  "substitution",
+                  "ellipsis",
+                  "given_new"
+                ]
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 20
+              }
+            }
+          }
+        },
+        "violation_named": {
+          "type": "string",
+          "minLength": 40,
+          "description": "§12 layer 3, first half: the precise structural principle the outlier violates (scope, stance, given new chain, general versus specific, thread, method versus finding), named in this item's own terms."
+        },
+        "why_it_breaks": {
+          "type": "string",
+          "minLength": 40,
+          "description": "§12 layer 3, second half: WHY the outlier cannot attach. No antecedent for its reference, introduces a dimension nothing else takes up, competes with the nucleus, or answers a question the paragraph never asked."
+        },
+        "trap_exposed": {
+          "type": "string",
+          "minLength": 40,
+          "description": "§12 layer 4: why the outlier LOOKED like it belonged (shared vocabulary, a pronoun, a connective) and, when Trap A is planted, why a belonging sentence looked odd. Recalibrates the learner from surface heuristics toward structural fit."
+        },
+        "exclusion_analysis": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "One entry per CORE sentence: the §7 solver pattern that makes it tempting to exclude, and what the paragraph loses without it (the uniqueness test, taught). A learner's exact pick maps to exactly one tagged pattern, powering precise Reading DNA diagnosis.",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "mistake_type",
+              "why_tempting",
+              "what_breaks"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "E"
+                ]
+              },
+              "mistake_type": {
+                "enum": [
+                  "surface_oddity",
+                  "lexical_pull",
+                  "premature_closure",
+                  "hardest_to_place",
+                  "no_uniqueness_test",
+                  "connective_assumption",
+                  "local_smoothness"
+                ],
+                "description": "The Bible §7 taxonomy: eliminating on a surface feel (Trap A), following lexical overlap (Trap B's shadow), deciding before constructing, confusing hard to place with does not fit, skipping the uniqueness test, assuming a connective needs a neighbour, or trusting local smoothness over global fit."
+              },
+              "why_tempting": {
+                "type": "string",
+                "minLength": 20
+              },
+              "what_breaks": {
+                "type": "string",
+                "minLength": 30
+              }
+            }
+          }
+        },
+        "detection_habit": {
+          "type": "string",
+          "minLength": 30,
+          "description": "One transferable habit of strong detectors this item practices, phrased for ANY future item. Shown as Make it a habit."
+        }
+      }
+    },
+    "mentor": {
+      "type": "object",
+      "required": [
+        "challenge",
+        "takeaway"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "challenge": {
+          "type": "string",
+          "minLength": 20,
+          "description": "Shown before solving, under the mission: one sentence on what will test the reader. No spoilers of the answer."
+        },
+        "takeaway": {
+          "type": "string",
+          "minLength": 20,
+          "description": "One memorable sentence to keep."
+        }
+      }
+    }
+  }
+}

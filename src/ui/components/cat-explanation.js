@@ -37,6 +37,74 @@ const TRAP_NAME = {
   too_broad: 'wider than the passage',
   near_synonym_confusion: 'a near-synonym that changes the claim',
   half_right: 'right about half the passage',
+  /* The content engine's twenty-five (content/taxonomy/varc-taxonomy.json). */
+  wrong_population: 'the wrong people',
+  wrong_condition: 'the condition dropped',
+  wrong_abstraction_level: 'the right idea at the wrong altitude',
+  temporal_distortion: 'the wrong time',
+  comparison_distortion: 'a comparison the passage never made',
+  reversed_causation: 'cause and effect swapped',
+  misattributed_view: 'the right view, the wrong owner',
+  reported_view_as_author: 'the view the author set up to attack',
+  criticism_as_rejection: 'a criticism read as a rejection',
+  concession_as_position: 'a concession read as the author’s position',
+  common_knowledge_intrusion: 'true in the world, absent from the text',
+  unsupported_inference: 'a reasonable guess the text does not make',
+  true_but_insufficient: 'true, but not enough',
+  prescriptive_leap: 'a recommendation the author never made',
+  correlation_as_causation: 'cause invented from correlation',
+  example_as_thesis: 'an example mistaken for the point',
+  overstatement: 'right direction, too strong',
+  weakened_version: 'right direction, too weak',
+  possibility_as_certainty: 'may became must',
+  necessary_as_sufficient: 'needed for it, read as enough for it',
+  over_intense_tone: 'the right attitude, too much of it',
+  wrong_valence_tone: 'the wrong side entirely',
+  emotional_appeal: 'attractive, but the passage never said it',
+  sophisticated_sounding: 'sounds cleverer than the answer',
+  fact_right_interpretation_wrong: 'the right fact, the wrong reading of it',
+  /* Sentence placement and paragraph completion. */
+  wrong_reference_target: 'the pronoun bound to the wrong noun',
+  local_fit_global_break: 'fits its neighbours, breaks the paragraph',
+  topic_match_function_mismatch: 'the right topic, the wrong job',
+  premature_conclusion: 'closes the paragraph too early',
+  redundant_restatement: 'says again what the neighbour just said',
+  scope_jump: 'widens or narrows the paragraph',
+  contradicts_neighbour: 'contradicts the sentence beside it',
+  stance_shift: 'changes sides',
+  wrong_connective: 'the connective points the wrong way',
+  tense_break: 'breaks the time frame',
+  new_topic_introduced: 'introduces something never picked up',
+  right_idea_wrong_position: 'belongs in the paragraph, but not there',
+  summary_where_development_needed: 'a summary where the paragraph is still building',
+  attractive_generality: 'a broad, quotable sentence the paragraph never needed',
+  /* The word bank. */
+  dictionary_sense_not_context: 'a real sense of the word, not the one used',
+  near_synonym_wrong_degree: 'a near-synonym at the wrong strength',
+  wrong_connotation: 'the same meaning with the wrong feeling',
+  wrong_register: 'right meaning, wrong room',
+  false_cognate: 'looks like a word it is not',
+  literal_parts_only: 'the parts added up too literally',
+  wrong_root: 'the wrong root recognised',
+  context_mismatch: 'fits the word, not the sentence',
+  confusable_twin: 'the look-alike',
+  antonym_lure: 'the opposite, dressed as the answer',
+  sound_alike: 'sounds like the right word',
+  collocation_clash: 'does not go with its neighbours',
+  prefix_misread: 'the prefix read the wrong way',
+  /* Arguments. */
+  restates_premise: 'restates a premise',
+  restates_conclusion: 'restates the conclusion',
+  opposite_effect: 'does the opposite of what was asked',
+  irrelevant_information: 'true and beside the point',
+  scope_shift: 'shifts the argument’s scope',
+  too_strong_to_be_necessary: 'more than the argument needs',
+  wrong_link: 'supports the wrong link',
+  explains_wrong_side: 'explains one fact, not the tension',
+  partial_parallel: 'shares the topic, not the structure',
+  attacks_premise: 'denies the evidence instead of the reasoning',
+  correlation_causation: 'reads correlation as cause',
+  alternative_cause_ignored: 'ignores another cause',
   /* Older and verbal-module names, kept so nothing ever renders raw. */
   scope_shift: 'wider than the text',
   scope_creep: 'wider than the text',
@@ -51,6 +119,12 @@ const TRAP_NAME = {
   plausible_inference: 'a reasonable guess the text does not make',
   word_association: 'a word you recognise from the passage',
 };
+
+/** A trap type, said as a reader would say it — for screens that name a
+ *  trap outside this component (the bank's closing lesson). */
+export function trapName(key) {
+  return TRAP_NAME[key] ?? String(key ?? '').replaceAll('_', ' ');
+}
 
 /** One sentence, at most — the rest is waiting behind the working. The cut
  *  has to read as a finished thought: an explanation that stops on a

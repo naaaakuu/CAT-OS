@@ -22,6 +22,8 @@
  * and it travels inside a backup for free.
  */
 
+import { RC_TYPE_SKILL, TRAP_FAMILY, TRAP_FAMILY_LINE } from './taxonomy.js';
+
 /* ------------------------------------------------------------------ */
 /* The skills                                                          */
 /* ------------------------------------------------------------------ */
@@ -40,10 +42,16 @@ export const SKILLS = Object.freeze([
   { key: 'specific_detail', name: 'Detail', group: 'reading', where: 'reading-room', line: 'Reading once, closely.' },
   { key: 'vocabulary_in_context', name: 'Words in context', group: 'reading', where: 'reading-room', line: 'A common word, used narrowly.' },
   { key: 'strengthen_weaken', name: 'Strengthen and weaken', group: 'reading', where: 'reading-room', line: 'Find the load-bearing assumption.' },
+  { key: 'scope', name: 'Scope', group: 'reading', where: 'reading-room', line: 'How far the claim actually reaches.' },
+  { key: 'application', name: 'Application', group: 'reading', where: 'reading-room', line: 'The author’s rule, applied to a new case.' },
+  { key: 'argument', name: 'Argument', group: 'reading', where: 'reading-room', line: 'Premise, conclusion, and the gap between.' },
   { key: 'jumble', name: 'Paragraph order', group: 'verbal', where: 'loom', line: 'The order the author wrote.' },
+  { key: 'placement', name: 'Sentence placement', group: 'verbal', where: 'loom', line: 'The one seat a sentence can take.' },
   { key: 'summary', name: 'Summary', group: 'verbal', where: 'table', line: 'The point, protected from what almost says it.' },
+  { key: 'completion', name: 'Paragraph completion', group: 'verbal', where: 'table', line: 'The sentence the paragraph was building towards.' },
   { key: 'odd_one_out', name: 'Odd one out', group: 'verbal', where: 'bench', line: 'The sentence that never belonged.' },
   { key: 'word_meaning', name: 'Word meanings', group: 'words', where: 'meadow', line: 'The CAT lists, held for good.' },
+  { key: 'word_precision', name: 'Precision', group: 'words', where: 'meadow', line: 'Register, connotation, the nearer synonym.' },
   { key: 'word_pair', name: 'Confusable words', group: 'words', where: 'pond', line: 'Words that look alike and are not.' },
   { key: 'loanword', name: 'Borrowed words', group: 'words', where: 'thicket', line: 'What English took, and from where.' },
   { key: 'root', name: 'Roots', group: 'words', where: 'rootwood', line: 'One root opens a family of words.' },
@@ -55,7 +63,7 @@ export function skill(key) { return SKILL_BY_KEY.get(key) ?? null; }
 export function skillName(key) { return SKILL_BY_KEY.get(key)?.name ?? String(key ?? '').replace(/_/g, ' '); }
 
 /** Which skill a session's answers train, when the answer does not say. */
-const MODULE_SKILL = Object.freeze({ pj: 'jumble', ps: 'summary', ooo: 'odd_one_out', wd: 'word_part' });
+const MODULE_SKILL = Object.freeze({ pj: 'jumble', ps: 'summary', ooo: 'odd_one_out', wd: 'word_part', sp: 'placement', pc: 'completion', cr: 'argument', wb: 'vocabulary_in_context' });
 const REGION_SKILL = Object.freeze({ meadow: 'word_meaning', pond: 'word_pair', thicket: 'loanword', rootwood: 'root', terraces: 'word_part' });
 
 /* ------------------------------------------------------------------ */
@@ -119,9 +127,10 @@ export function skillLedger(sessions, learning = [], now = Date.now()) {
     const mod = s.module ?? 'rc';
     for (const a of s.answers ?? []) {
       if (a.is_correct === null || a.is_correct === undefined) continue;
-      // A passage question names its own skill; everything else is named
-      // by the bench it was solved at.
-      const key = (mod === 'rc' || mod === 'rc2') ? a.type : MODULE_SKILL[mod];
+      // An answer that names its own skill (v5 passages, every bank item)
+      // is believed; an older passage question is mapped from its type;
+      // everything else is named by the bench it was solved at.
+      const key = a.skill ?? ((mod === 'rc' || mod === 'rc2') ? (RC_TYPE_SKILL[a.type] ?? a.type) : MODULE_SKILL[mod]);
       answer(key, a.is_correct === true, s.finished_at, (a.time_ms ?? 0) > 90_000);
     }
   }
@@ -197,11 +206,99 @@ function routeFor(where, state) {
 
 /**
  * Which passage trains a skill best: the ones that ask about it, that the
- * learner has not already read well.
- * @param {Array} items rc registry rows (with question_types)
+ * learner has not already read well. A v5 row lists the ledger skills its
+ * questions train; an older row lists question types, which for the
+ * original nine are the same names.
+ * @param {Array} items rc registry rows (with question_types / skills)
  */
 export function passagesForSkill(items, key, best) {
   if (!key) return [];
-  return items.filter((i) => (i.question_types ?? []).includes(key))
+  return items.filter((i) => (i.skills_trained ?? i.question_types ?? []).includes(key))
+    .filter((i) => (best?.get(i.id)?.stars ?? 0) < 3);
+}
+
+/* ------------------------------------------------------------------ */
+/* The pattern layer: which traps keep working, which patterns slip    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Every trap the learner has fallen for, anywhere, counted by trap and by
+ * family. An answer carries `trap` (the trap_type of the distractor it
+ * chose) since the content engine; older answers carry nothing and are
+ * simply not counted. Nothing is stored: derived, like the ledger.
+ * @returns {{ traps: Map<string,{n,lastAt,recent}>, families: Map<string,{n,lastAt}>, total: number }}
+ */
+export function trapLedger(sessions) {
+  const traps = new Map();
+  const families = new Map();
+  let total = 0;
+  const ordered = [...sessions].sort((a, b) => String(a.finished_at ?? '').localeCompare(String(b.finished_at ?? '')));
+  for (const s of ordered) {
+    for (const a of s.answers ?? []) {
+      if (!a.trap || a.is_correct !== false) continue;
+      total += 1;
+      const t = traps.get(a.trap) ?? { key: a.trap, n: 0, lastAt: 0, recent: 0 };
+      t.n += 1;
+      const at = a.answered_at ?? s.finished_at;
+      t.lastAt = Math.max(t.lastAt, Date.parse(at) || 0);
+      traps.set(a.trap, t);
+      const fam = TRAP_FAMILY[a.trap] ?? 'other';
+      const f = families.get(fam) ?? { key: fam, n: 0, lastAt: 0, line: TRAP_FAMILY_LINE[fam] ?? '' };
+      f.n += 1;
+      f.lastAt = Math.max(f.lastAt, Date.parse(at) || 0);
+      families.set(fam, f);
+    }
+  }
+  // "recent": how many of the last twelve misses were this trap.
+  const lastMisses = ordered.flatMap((s) => (s.answers ?? []).filter((a) => a.trap && a.is_correct === false).map((a) => a.trap)).slice(-12);
+  for (const key of lastMisses) { const t = traps.get(key); if (t) t.recent += 1; }
+  return { traps, families, total };
+}
+
+/**
+ * The trap families worth naming: at least `min` misses, sorted by count.
+ * One family is enough to act on; the caller shows one.
+ */
+export function weakTrapFamilies(ledger, { min = 3, n = 2 } = {}) {
+  return [...ledger.families.values()].filter((f) => f.n >= min).sort((a, b) => b.n - a.n).slice(0, n);
+}
+
+/**
+ * Every reasoning pattern the learner has met, with accuracy. Answers on
+ * v5 passages and bank items carry `patterns`; the ledger is the honest
+ * read on "inference versus speculation" and its hundred siblings.
+ * @returns {Map<string,{key,seen,correct,acc}>}
+ */
+export function patternLedger(sessions) {
+  const m = new Map();
+  for (const s of sessions) {
+    for (const a of s.answers ?? []) {
+      if (a.is_correct === null || a.is_correct === undefined) continue;
+      for (const p of a.patterns ?? []) {
+        const e = m.get(p) ?? { key: p, seen: 0, correct: 0, acc: 0 };
+        e.seen += 1;
+        if (a.is_correct) e.correct += 1;
+        e.acc = e.correct / e.seen;
+        m.set(p, e);
+      }
+    }
+  }
+  return m;
+}
+
+/** Patterns met at least `min` times with accuracy under `below`, weakest first. */
+export function weakPatterns(ledger, { min = 4, below = 0.7, n = 3 } = {}) {
+  return [...ledger.values()].filter((e) => e.seen >= min && e.acc < below)
+    .sort((a, b) => a.acc - b.acc || b.seen - a.seen).slice(0, n);
+}
+
+/**
+ * Which passages exercise a reasoning pattern the learner keeps missing,
+ * not yet read well — the content engine's aim, one level finer than
+ * question type. v5 rows carry `patterns`.
+ */
+export function passagesForPattern(items, patternKey, best) {
+  if (!patternKey) return [];
+  return items.filter((i) => (i.patterns ?? []).includes(patternKey))
     .filter((i) => (best?.get(i.id)?.stars ?? 0) < 3);
 }

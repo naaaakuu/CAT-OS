@@ -17,6 +17,8 @@ import { registerPS } from './modules/para-summary/index.js';
 import { registerOOO } from './modules/odd-one-out/index.js';
 import { registerWD } from './modules/word-dna/index.js';
 import { registerLanguageGarden } from './modules/language-garden/index.js';
+import { registerBank } from './modules/verbal-bank/index.js';
+import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
 import { loadValley } from './world/companion.js';
 import { syncStage, unmountStage } from './world/stage.js';
@@ -738,6 +740,7 @@ async function boot() {
   registerOOO(router, { storage });
   registerWD(router, { storage }); // soft-hidden from nav (see CONTINUE_INFO); routes stay live
   registerLanguageGarden(router, { storage });
+  registerBank(router, { storage });
   registerWorld(router, { storage });
 
   // 1.0.0: the world is the application. A cold open lands in the valley;
@@ -777,7 +780,8 @@ async function boot() {
     const h = location.hash;
     const isSession = h.startsWith('#/rc/session') || h.startsWith('#/rc/mentor') ||
                       h.startsWith('#/pj/session') || h.startsWith('#/ps/session') ||
-                      h.startsWith('#/ooo/session') || h.startsWith('#/wd/session');
+                      h.startsWith('#/ooo/session') || h.startsWith('#/wd/session') ||
+                      h.startsWith('#/bank/session');
     if (!isSession) {
       stopFocusNoise();
     }
@@ -827,6 +831,11 @@ async function boot() {
 
       const registration = await navigator.serviceWorker.register('./service-worker.js');
       registration.update();
+      // The rest of the library — every passage, jumble, summary and bank
+      // file the content engine ships — arrives in the background, a few
+      // files at a time, once the valley is painted and the phone is idle.
+      // The service worker's fetch handler keeps each one for offline use.
+      startLibrarySync({ delayMs: 9000 });
       setInterval(() => registration.update(), 30 * 60 * 1000);
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') registration.update();

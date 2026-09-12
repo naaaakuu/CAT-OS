@@ -137,6 +137,56 @@ export function collections(s, content) {
     }));
   }
 
+  /* ---- The content engine's banks: placement and completion by tier,
+          arguments by band, the word bank by kind. New bundles become new
+          sets the moment they are registered. ---- */
+  {
+    const banks = s.banks ?? {};
+    const solvedIn = (mod, ids) => ids.filter((id) => banks[mod]?.solvedIds?.has(id)).length;
+    for (const [mod, name, mark, route] of [
+      ['sp', 'Sentence placement', 'workshop', '#/world/place/loom'],
+      ['pc', 'Paragraph completion', 'workshop', '#/world/place/table'],
+    ]) {
+      const rows = content?.[mod] ?? [];
+      const tiers = [...new Set(rows.map((r) => r.tier))];
+      const ORDER = ['foundation', 'easy', 'medium', 'advanced', 'cat', 'cat-plus', 'ninety-nine', 'premium'];
+      for (const tier of ORDER.filter((t) => tiers.includes(t))) {
+        const ids = rows.filter((r) => r.tier === tier).map((r) => r.id);
+        out.push(set({
+          id: `bank:${mod}:${tier}`, group: 'verbal', mark,
+          name: `${name} · ${tier.replace('-', ' ')}`, what: 'solved',
+          have: solvedIn(mod, ids), total: ids.length, unit: 'items',
+          route, line: mod === 'sp' ? 'The Loom' : 'The Summary Table',
+          hard: Math.max(0, ORDER.indexOf(tier)) / 7,
+        }));
+      }
+    }
+    for (const r of content?.cr ?? []) {
+      const ids = r.item_ids ?? [];
+      if (!ids.length) continue;
+      out.push(set({
+        id: `bank:cr:${r.id}`, group: 'reading', mark: 'book',
+        name: r.title, what: 'arguments seen through',
+        have: solvedIn('cr', ids), total: ids.length, unit: 'arguments',
+        route: '#/world/place/reading-room', line: 'The Reading Room · arguments',
+        hard: r.band === 'elite' ? 0.8 : r.band === 'stretch' ? 0.5 : 0.25,
+      }));
+    }
+    for (const r of content?.wb ?? []) {
+      const ids = r.item_ids ?? [];
+      if (!ids.length) continue;
+      const region = { confusable: 'pond', decode: 'terraces' }[r.kind] ?? 'meadow';
+      const mark = region === 'pond' ? 'koi' : region === 'terraces' ? 'vine' : 'flower';
+      out.push(set({
+        id: `bank:wb:${r.id}`, group: 'words', mark,
+        name: r.title, what: 'answered the CAT way',
+        have: solvedIn('wb', ids), total: ids.length, unit: 'words',
+        route: `#/world/place/${region}`, line: `${{ pond: 'The Mirror Pond', terraces: 'The Vine Terraces' }[region] ?? 'The Meadow'} · ${String(r.kind).replace('_', ' ')}`,
+        hard: r.band === 'elite' ? 0.7 : r.band === 'stretch' ? 0.4 : 0.15,
+      }));
+    }
+  }
+
   /* ---- Pace: the embers. This one is meant never to finish — the
           target climbs a rung every time it is reached, which is how a
           progression stays alive after the corpus is done. ---- */

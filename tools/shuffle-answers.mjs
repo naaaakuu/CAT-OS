@@ -76,11 +76,24 @@ for (const file of files) {
       d.option = oldToNew[d.option];
     }
 
+    // Rewrite any letter the PROSE names ("Option B states…"), so the
+    // explanations keep telling the truth after the shuffle. (The first
+    // shuffle did not do this, and 122 explanations went stale — found
+    // and repaired by the content engine's corpus QC, 2026-09-12.)
+    const remap = (s) => String(s ?? '').replace(/\b([Oo]ption)s?\s+([A-D])\b/g, (m, word, l) => `${word} ${oldToNew[l] ?? l}`);
+    const ex = q.explanation;
+    ex.correct_reasoning = remap(ex.correct_reasoning);
+    if (ex.expert_notice) ex.expert_notice = remap(ex.expert_notice);
+    for (const d of ex.distractors) { d.why_wrong = remap(d.why_wrong); d.seductive_element = remap(d.seductive_element); }
+
     after[q.correct]++;
   }
 
   if (WRITE) {
-    writeFileSync(fp, JSON.stringify(passage, null, 2) + '\n', 'utf8');
+    // Keep each file's own line endings (the repository is mixed).
+    const raw = readFileSync(fp, 'utf8');
+    const eol = raw.includes('\r\n') ? '\r\n' : '\n';
+    writeFileSync(fp, JSON.stringify(passage, null, 2).split('\n').join(eol) + eol, 'utf8');
   }
 }
 

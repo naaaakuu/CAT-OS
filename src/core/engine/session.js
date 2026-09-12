@@ -13,6 +13,7 @@
  */
 
 import { computeScore } from './scoring.js';
+import { RC_TYPE_SKILL } from '../learning/taxonomy.js';
 
 export class PracticeSession {
   #passage;
@@ -47,12 +48,17 @@ export class PracticeSession {
   answer(option) {
     const q = this.current;
     const is_correct = option === q.correct;
+    // The trap the chosen distractor was built from travels with the
+    // answer, so the ledger can say WHICH pull keeps working — "scope"
+    // rather than "question 3" — without reopening the passage.
+    const trap = is_correct ? null : (q.explanation?.distractors?.find((d) => d.option === option)?.trap_type ?? null);
     this.#answers.set(q.id, {
       chosen: option,
       is_correct,
+      trap,
       time_ms: this.now() - this.#questionShownAt,
     });
-    return { is_correct, correct: q.correct };
+    return { is_correct, correct: q.correct, trap };
   }
 
   /** Skip the current question (recorded as unanswered). */
@@ -83,7 +89,11 @@ export class PracticeSession {
     const ordered = this.#passage.questions.map((q) => ({
       question_id: q.id,
       type: q.type ?? null,
-      ...(this.#answers.get(q.id) ?? { chosen: null, is_correct: null, time_ms: 0 }),
+      // v5 questions name the ledger skill and the reasoning patterns they
+      // exercise; older ones are mapped from their type by the ledger.
+      skill: q.skill ?? RC_TYPE_SKILL[q.type] ?? null,
+      patterns: q.patterns ?? [],
+      ...(this.#answers.get(q.id) ?? { chosen: null, is_correct: null, trap: null, time_ms: 0 }),
     }));
     const score = computeScore(ordered);
 

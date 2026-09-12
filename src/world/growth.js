@@ -31,11 +31,17 @@ export function grown(g, lo, hi) { return Math.round(lo + (hi - lo) * clamp01(g)
  */
 export function deriveGrowth(s) {
   const wood = rise(s.rootwood.metCount * 2 + s.rootwood.grownCount * 3, Math.max(12, s.rootwood.total * 3));
-  const meadow = rise(s.meadow.known + s.meadow.mastered, 260);
+  const meadow = rise(s.meadow.known + s.meadow.mastered + Math.floor((s.banks?.wb?.solved ?? 0) / 2), 260);
   const pond = rise(s.pond.known + s.pond.mastered, 120);
   const thicket = rise(s.thicket.known + s.thicket.mastered, 110);
-  const reading = rise(s.reading.read * 2 + s.reading.wellRead, 34);
-  const quarterSolved = s.loom.solved + s.table.solved + s.bench.solved;
+  // The content engine's banks count where they are played: arguments in
+  // the Reading Room, placement and completion in the Quarter, the word
+  // bank with the Meadow — a set of six is worth about one item of the
+  // older, longer kinds.
+  const banks = s.banks ?? {};
+  const bankSolved = (k) => banks[k]?.solved ?? 0;
+  const reading = rise(s.reading.read * 2 + s.reading.wellRead + Math.floor(bankSolved('cr') / 4), 34);
+  const quarterSolved = s.loom.solved + s.table.solved + s.bench.solved + Math.floor((bankSolved('sp') + bankSolved('pc')) / 4);
   const quarter = rise(quarterSolved, 56);
   const terraces = rise(s.terraces.done, 20);
   const wilds = rise(s.wilds.runs, 8);

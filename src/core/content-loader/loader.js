@@ -18,6 +18,10 @@
  */
 
 import { validate } from './validator.js';
+import {
+  RC_TYPE_SKILL, RC_PREDICTION_TYPES, WB_KIND_SKILL, CR_KIND_SKILL, TIER_RANGE,
+  lengthClassOf, difficultyLabel,
+} from '../learning/taxonomy.js';
 
 export class ContentError extends Error {
   constructor(message, issues = []) {
@@ -68,9 +72,16 @@ async function loadSchema(name) {
   return schemaCache.get(name);
 }
 
-/** The registry: one entry per content item ever created. */
+/** The registry: one entry per content item ever created. Parsed once per
+ *  page: with the content engine's banks the index is a thousand-odd rows,
+ *  and six screens asking for it on a cold open used to mean six parses. A
+ *  failed load is forgotten so a later attempt can retry (offline → online). */
+let registryPromise = null;
 export function loadRegistry() {
-  return fetchJSON('content/index.json');
+  if (!registryPromise) {
+    registryPromise = fetchJSON('content/index.json').catch((err) => { registryPromise = null; throw err; });
+  }
+  return registryPromise;
 }
 
 /** Registry entries for practicable RC items (accepted or in review). */
@@ -883,6 +894,72 @@ export function consistencyIssues(id, item) {
       if (jid !== paraIds[i]) issues.push(`mentor journey[${i}] is ${jid}, expected ${paraIds[i]}`);
     });
   }
+  // v5: the pattern layer. Every fact the curator and the ledger will read
+  // off this file has to be true of the file.
+  if ((item.schema_version ?? 1) >= 5) issues.push(...rcV5Issues(item));
+  return issues;
+}
+
+/** v5 truths (content/taxonomy/varc-taxonomy.json is the authority; the
+ *  code mirror is core/learning/taxonomy.js). */
+function rcV5Issues(item) {
+  const issues = [];
+  const m = item.meta;
+  const words = item.passage.paragraphs.reduce((n, p) => n + p.text.trim().split(/\s+/).length, 0);
+  if (Math.abs(words - m.word_count) > Math.max(12, m.word_count * 0.1)) {
+    issues.push(`meta.word_count ${m.word_count} but the passage has about ${words} words`);
+  }
+  const cls = lengthClassOf(m.word_count);
+  if (m.length_class !== cls) issues.push(`length_class "${m.length_class}" ≠ word_count ${m.word_count} (maps to "${cls}")`);
+  const label = difficultyLabel(m.difficulty_numeric);
+  if (m.difficulty !== label) issues.push(`difficulty "${m.difficulty}" ≠ numeric ${m.difficulty_numeric} (maps to "${label}")`);
+  // question_types is exactly the set of types asked, sorted.
+  const asked = [...new Set(item.questions.map((q) => q.type))].sort();
+  if ([...m.question_types].sort().join(',') !== asked.join(',')) {
+    issues.push(`meta.question_types [${m.question_types.join(', ')}] ≠ the types asked [${asked.join(', ')}]`);
+  }
+  // The time target is the reading time plus the questions' own targets.
+  const expected = item.passage.reading_time_min + item.questions.reduce((n, q) => n + q.estimated_time_sec, 0) / 60;
+  if (Math.abs(m.estimated_time_min - expected) > Math.max(0.5, expected * 0.25)) {
+    issues.push(`estimated_time_min ${m.estimated_time_min} is far from reading time + question targets (${expected.toFixed(1)} min)`);
+  }
+  const patternSet = new Set(m.reasoning_patterns);
+  const vocabWords = new Set(item.vocabulary.map((v) => v.word.toLowerCase()));
+  for (const w of m.vocab_extracted) {
+    if (!vocabWords.has(String(w).toLowerCase())) issues.push(`vocab_extracted "${w}" is not in the vocabulary block`);
+  }
+  for (const q of item.questions) {
+    const want = RC_TYPE_SKILL[q.type];
+    if (want && q.skill !== want) issues.push(`${q.id}: type "${q.type}" trains "${want}", but skill is "${q.skill}"`);
+    for (const p of q.patterns) {
+      if (!patternSet.has(p)) issues.push(`${q.id}: pattern "${p}" is not in meta.reasoning_patterns`);
+    }
+    if (RC_PREDICTION_TYPES.has(q.type) && q.prediction_target === null) {
+      issues.push(`${q.id}: "${q.type}" is a prediction type; prediction_target must be written`);
+    }
+    // The four options must be four different sentences, and no option
+    // may be so much longer than the rest that length is the tell.
+    const texts = Object.values(q.options).map((t) => t.trim());
+    if (new Set(texts.map((t) => t.toLowerCase())).size !== 4) issues.push(`${q.id}: options repeat`);
+    const lens = texts.map((t) => t.length);
+    if (Math.max(...lens) > 2.2 * Math.min(...lens) && Math.max(...lens) - Math.min(...lens) > 40) {
+      issues.push(`${q.id}: option lengths are unbalanced (${Math.min(...lens)}–${Math.max(...lens)} chars)`);
+    }
+    // Explanations may not name option letters: keys are rebalanced by
+    // tools/shuffle-answers.mjs, which cannot rewrite prose.
+    const mentions = (s) => [...String(s ?? '').matchAll(/\b[Oo]ption\s+([A-D])\b/g)].map((x) => x[1]);
+    for (const l of mentions(q.explanation.correct_reasoning)) if (l !== q.correct) issues.push(`${q.id}: correct_reasoning names option ${l}; the key is ${q.correct}`);
+    for (const d of q.explanation.distractors) {
+      for (const l of mentions(d.why_wrong)) if (l !== d.option) issues.push(`${q.id}: distractor ${d.option} prose names option ${l}`);
+    }
+    const anchor = q.explanation.passage_anchor;
+    if (!item.passage.paragraphs.some((p) => p.id === anchor) && !/^rc-[0-9]{4}-p[0-9]+(,\s*rc-[0-9]{4}-p[0-9]+)*$/.test(anchor)) {
+      issues.push(`${q.id}: passage_anchor "${anchor}" is not a paragraph id`);
+    }
+  }
+  if (m.quality.status === 'verified' && !m.quality.blind_solve) {
+    issues.push('quality.status "verified" requires a blind_solve record');
+  }
   return issues;
 }
 
@@ -1110,4 +1187,265 @@ export async function contextByWord() {
     pack.__byWord = new Map(pack.entries.map((e) => [e.word.toLowerCase(), e]));
   }
   return pack.__byWord;
+}
+
+/* ------------------------------------------------------------------ */
+/* The item banks of the content engine — Sentence Placement (sp-*),  */
+/* Para Completion (pc-*), the Word Bank (wb-*, bundles) and          */
+/* Arguments (cr-*, bundles). Same boundary discipline as everything  */
+/* above: schema validation + cross-field consistency before anything */
+/* renders; a normaliser turns any of the four into the one item      */
+/* shape the bank engine and screen work on.                          */
+/* ------------------------------------------------------------------ */
+
+const BANK_DIR = Object.freeze({ sp: 'sentence-placement', pc: 'para-completion', wb: 'word-bank', cr: 'critical-reasoning' });
+const BANK_ID = Object.freeze({ sp: /^sp-[0-9]{4}$/, pc: /^pc-[0-9]{4}$/, wb: /^wb-[0-9]{4}$/, cr: /^cr-[0-9]{4}$/ });
+const bankMemo = { sp: new Map(), pc: new Map(), wb: new Map(), cr: new Map() };
+const LETTERS4 = ['A', 'B', 'C', 'D'];
+
+/** Registry entries for practicable bank items/bundles of one type. */
+export async function listBankItems(type) {
+  if (!BANK_DIR[type]) throw new ContentError(`"${type}" is not a content bank.`);
+  return listBundleItems(type);
+}
+export const listSPItems = () => listBankItems('sp');
+export const listPCItems = () => listBankItems('pc');
+export const listWBItems = () => listBankItems('wb');
+export const listCRItems = () => listBankItems('cr');
+
+/** Load one bank file (an sp/pc item, or a wb/cr bundle), validated (memoized per page). */
+export function loadBankFile(type, id) {
+  if (!BANK_DIR[type]) return Promise.reject(new ContentError(`"${type}" is not a content bank.`));
+  return memoized(bankMemo[type], id, async (fileId) => {
+    if (!BANK_ID[type].test(fileId)) throw new ContentError(`"${fileId}" is not a valid ${type} content id.`);
+    const item = await fetchJSON(`content/${BANK_DIR[type]}/${fileId}.json`);
+    const schema = await loadSchema(`${type}.schema.v${item.schema_version ?? 1}.json`);
+    const { valid, errors } = validate(schema, item);
+    if (!valid) throw new ContentError(`${fileId} failed schema validation.`, errors);
+    const issues = bankConsistencyIssues(type, fileId, item);
+    if (issues.length) throw new ContentError(`${fileId} failed consistency checks.`, issues);
+    return item;
+  });
+}
+
+/** Load several bank files → Map(id → file); failures are absent. */
+export async function loadBankFiles(type, ids) {
+  const map = new Map();
+  await Promise.all([...new Set(ids)].map(async (id) => {
+    try { map.set(id, await loadBankFile(type, id)); } catch { /* skip */ }
+  }));
+  return map;
+}
+
+/** Cross-field truths of the four banks. Exported so tools/verify.mjs
+ *  applies the identical rules. */
+export function bankConsistencyIssues(type, id, item) {
+  const issues = [];
+  const m = item.meta;
+  if (m.id !== id) issues.push(`meta.id "${m.id}" ≠ file id "${id}"`);
+  const oneQuestion = (q, label, distractors) => {
+    const texts = LETTERS4.map((l) => String(q.options[l] ?? '').trim());
+    if (new Set(texts.map((t) => t.toLowerCase())).size !== 4) issues.push(`${label}: options repeat`);
+    const wrong = distractors.map((d) => d.option);
+    if (new Set(wrong).size !== 3) issues.push(`${label}: distractor options are not 3 distinct letters`);
+    if (wrong.includes(q.correct)) issues.push(`${label}: distractor analysis includes the correct option`);
+    if ([...new Set([...wrong, q.correct])].sort().join('') !== 'ABCD') issues.push(`${label}: options analysed do not cover A, B, C, D`);
+    const mentions = (s) => [...String(s ?? '').matchAll(/\b[Oo]ption\s+([A-D])\b/g)].map((x) => x[1]);
+    for (const d of distractors) for (const l of mentions(d.why_wrong)) if (l !== d.option) issues.push(`${label}: distractor ${d.option} prose names option ${l}`);
+  };
+  const tierCheck = () => {
+    const label = difficultyLabel(m.difficulty_numeric);
+    if (m.difficulty !== label) issues.push(`difficulty "${m.difficulty}" ≠ numeric ${m.difficulty_numeric} (maps to "${label}")`);
+    const range = TIER_RANGE[m.tier];
+    if (range && (m.difficulty_numeric < range[0] || m.difficulty_numeric > range[1])) {
+      issues.push(`tier "${m.tier}" carries difficulty_numeric ${range[0]}–${range[1]}, not ${m.difficulty_numeric}`);
+    }
+    if (m.quality.status === 'verified' && !m.quality.blind_solve) issues.push('quality.status "verified" requires a blind_solve record');
+  };
+
+  if (type === 'sp') {
+    tierCheck();
+    const ns = item.paragraph.sentences.map((s) => s.n);
+    if (ns.join(',') !== ns.map((_, i) => i + 1).join(',')) issues.push('paragraph sentences must be numbered 1..n in order');
+    const q = item.question;
+    oneQuestion(q, m.id, item.explanation.distractors);
+    const positions = LETTERS4.map((l) => q.option_positions[l]);
+    if (new Set(positions).size !== 4) issues.push('option_positions repeat a slot');
+    for (const p of positions) if (p > ns.length) issues.push(`option position ${p} is beyond the paragraph (${ns.length} sentences)`);
+    if (q.option_positions[q.correct] !== item.missing.position) {
+      issues.push(`correct option ${q.correct} sits at position ${q.option_positions[q.correct]}, but missing.position is ${item.missing.position}`);
+    }
+    if (item.missing.position === 0 && item.explanation.clue_before !== null) issues.push('the slot opens the paragraph; clue_before must be null');
+    if (item.missing.position === ns.length && item.explanation.clue_after !== null) issues.push('the slot closes the paragraph; clue_after must be null');
+    if (item.missing.position > 0 && item.explanation.clue_before === null) issues.push('clue_before must name what the previous sentence demands');
+    if (item.missing.position < ns.length && item.explanation.clue_after === null) issues.push('clue_after must name what the next sentence depends on');
+    if (item.paragraph.sentences.some((s) => s.text.trim() === item.missing.text.trim())) issues.push('the missing sentence is still in the paragraph');
+  } else if (type === 'pc') {
+    tierCheck();
+    if (item.paragraph.gap_index > item.paragraph.sentences.length) issues.push(`gap_index ${item.paragraph.gap_index} is beyond the paragraph`);
+    const q = item.question;
+    oneQuestion(q, m.id, item.explanation.distractors);
+    if (item.paragraph.sentences.some((s) => s.trim() === q.options[q.correct].trim())) issues.push('the completing sentence is still in the paragraph');
+    const gapAtEnd = item.paragraph.gap_index === item.paragraph.sentences.length;
+    if (m.gap_function === 'opening' && item.paragraph.gap_index !== 0) issues.push('gap_function "opening" but the gap is not at index 0');
+    if (m.gap_function === 'conclusion' && !gapAtEnd) issues.push('gap_function "conclusion" but the gap is not at the end');
+  } else if (type === 'wb' || type === 'cr') {
+    if (m.item_count !== item.items.length) issues.push(`meta.item_count ${m.item_count} ≠ ${item.items.length} items`);
+    const seen = new Set();
+    item.items.forEach((it, i) => {
+      if (!it.id.startsWith(`${id}-`)) issues.push(`items[${i}].id "${it.id}" not under ${id}`);
+      if (seen.has(it.id)) issues.push(`items[${i}].id "${it.id}" repeats`);
+      seen.add(it.id);
+      oneQuestion(it, it.id, it.explanation.distractors);
+      if (type === 'wb') {
+        const allowed = WB_KIND_SKILL[m.kind] ?? [];
+        if (!allowed.includes(it.skill)) issues.push(`${it.id}: kind "${m.kind}" trains ${allowed.join('/')}, not "${it.skill}"`);
+        const stem = it.stem;
+        if (m.kind === 'confusable') {
+          if (!stem.includes('____')) issues.push(`${it.id}: a confusable stem must carry a blank written as ____`);
+          if (!LETTERS4.some((l) => it.options[l].trim().toLowerCase() === it.word.trim().toLowerCase())) issues.push(`${it.id}: the wanted word "${it.word}" is not one of the options`);
+        } else {
+          const w = it.word.toLowerCase().split(' ')[0];
+          const probe = w.slice(0, Math.max(4, w.length - 3));
+          if (!stem.toLowerCase().includes(probe)) issues.push(`${it.id}: the stem does not contain "${it.word}"`);
+        }
+        if (m.kind === 'decode') {
+          if (!Array.isArray(it.parts) || it.parts.length < 2) issues.push(`${it.id}: decode items need at least two parts`);
+          else {
+            const joined = it.parts.map((p) => p.text).join('').toLowerCase().replace(/[^a-z]/g, '');
+            const word = it.word.toLowerCase().replace(/[^a-z]/g, '');
+            if (joined !== word) issues.push(`${it.id}: parts join to "${joined}", not "${word}"`);
+          }
+        } else if (it.parts) issues.push(`${it.id}: only decode items carry parts`);
+      } else {
+        const allowed = CR_KIND_SKILL[it.kind] ?? [];
+        if (!allowed.includes(it.skill)) issues.push(`${it.id}: kind "${it.kind}" trains ${allowed.join('/')}, not "${it.skill}"`);
+        const gapKinds = ['assumption', 'strengthen', 'weaken', 'flaw', 'evaluate', 'principle', 'paradox'];
+        if (gapKinds.includes(it.kind) && !it.explanation.structure.gap) issues.push(`${it.id}: a ${it.kind} item must name the argument's gap`);
+      }
+    });
+    if (m.quality.status === 'verified' && !m.quality.blind_solve) issues.push('quality.status "verified" requires a blind_solve record');
+  }
+  return issues;
+}
+
+/** The registry's word-bank bundles for one place (by kind), and the
+ *  CR bundles by band — what a place screen lists. */
+export const WB_KINDS_BY_REGION = Object.freeze({
+  meadow: ['context', 'register', 'connotation', 'synonym_distinction'],
+  pond: ['confusable'],
+  terraces: ['decode'],
+});
+
+/**
+ * One item shape for the bank engine and screen, whatever the bank:
+ *   { id, type, kind, label, skill, patterns, stem, options, correct,
+ *     distractors, time_sec, difficulty, explanation:{…cat-explanation shape},
+ *     body:{ … what the screen draws above the stem } }
+ * @param {'sp'|'pc'|'wb'|'cr'} type
+ * @param {object} file   the loaded file (sp/pc item, or a wb/cr bundle)
+ * @param {string} [itemId] for bundles: which item
+ */
+export function normalizeBankItem(type, file, itemId = null) {
+  if (type === 'sp') {
+    const q = file.question;
+    return {
+      id: file.meta.id, type, kind: 'placement', label: 'sentence placement',
+      skill: 'placement', patterns: file.meta.reasoning_patterns, difficulty: file.meta.difficulty_numeric,
+      tier: file.meta.tier, genre: file.meta.genre, title: file.meta.title,
+      stem: q.stem, options: q.options, correct: q.correct, distractors: file.explanation.distractors,
+      time_sec: file.meta.estimated_time_sec,
+      explanation: {
+        correct_reasoning: file.explanation.correct_reasoning,
+        question_type_note: [file.explanation.clue_before, file.explanation.clue_after].filter(Boolean).join(' '),
+        reading_habit: file.explanation.method,
+        passage_anchor: null,
+        distractors: file.explanation.distractors,
+      },
+      body: { kind: 'sp', sentences: file.paragraph.sentences, missing: file.missing.text, positions: q.option_positions },
+      mentor: file.mentor,
+    };
+  }
+  if (type === 'pc') {
+    const q = file.question;
+    return {
+      id: file.meta.id, type, kind: file.meta.gap_function, label: 'paragraph completion',
+      skill: 'completion', patterns: file.meta.reasoning_patterns, difficulty: file.meta.difficulty_numeric,
+      tier: file.meta.tier, genre: file.meta.genre, title: file.meta.title,
+      stem: q.stem, options: q.options, correct: q.correct, distractors: file.explanation.distractors,
+      time_sec: file.meta.estimated_time_sec,
+      explanation: {
+        correct_reasoning: file.explanation.correct_reasoning,
+        question_type_note: file.explanation.what_the_gap_needs,
+        reading_habit: file.explanation.method,
+        passage_anchor: null,
+        distractors: file.explanation.distractors,
+      },
+      body: { kind: 'pc', sentences: file.paragraph.sentences, gap_index: file.paragraph.gap_index },
+      mentor: file.mentor,
+    };
+  }
+  const it = file.items.find((x) => x.id === itemId);
+  if (!it) throw new ContentError(`${itemId} is not in ${file.meta.id}.`);
+  if (type === 'wb') {
+    return {
+      id: it.id, type, kind: file.meta.kind, label: WB_LABEL[file.meta.kind] ?? 'word in context',
+      skill: it.skill, patterns: it.patterns, difficulty: it.difficulty,
+      band: file.meta.band, bundle: file.meta.id, title: file.meta.title, word: it.word,
+      stem: it.stem, options: it.options, correct: it.correct, distractors: it.explanation.distractors,
+      time_sec: file.meta.estimated_time_sec,
+      explanation: {
+        correct_reasoning: it.explanation.correct_reasoning,
+        question_type_note: it.explanation.clue,
+        reading_habit: it.explanation.method,
+        passage_anchor: null,
+        distractors: it.explanation.distractors,
+      },
+      body: { kind: 'wb', wbKind: file.meta.kind, word: it.word, parts: it.parts ?? null },
+      mentor: null,
+    };
+  }
+  return {
+    id: it.id, type, kind: it.kind, label: CR_LABEL[it.kind] ?? it.kind,
+    skill: it.skill, patterns: it.patterns, difficulty: it.difficulty,
+    band: file.meta.band, bundle: file.meta.id, title: file.meta.title, genre: it.genre,
+    stem: it.stem, options: it.options, correct: it.correct, distractors: it.explanation.distractors,
+    time_sec: file.meta.estimated_time_sec,
+    explanation: {
+      correct_reasoning: it.explanation.correct_reasoning,
+      question_type_note: `Premises: ${it.explanation.structure.premises.join(' ')} Conclusion: ${it.explanation.structure.conclusion}${it.explanation.structure.gap ? ` The gap: ${it.explanation.structure.gap}` : ''}`,
+      reading_habit: it.explanation.method,
+      passage_anchor: null,
+      distractors: it.explanation.distractors,
+    },
+    body: { kind: 'cr', argument: it.argument, structure: it.explanation.structure },
+    mentor: null,
+  };
+}
+
+const WB_LABEL = Object.freeze({
+  context: 'word in context', decode: 'decode the word', confusable: 'the right twin',
+  register: 'register', connotation: 'connotation', synonym_distinction: 'the nearer synonym',
+});
+const CR_LABEL = Object.freeze({
+  assumption: 'assumption', strengthen: 'strengthen', weaken: 'weaken', inference: 'inference',
+  flaw: 'the flaw', conclusion: 'the conclusion', paradox: 'resolve the paradox', evaluate: 'evaluate',
+  parallel: 'parallel reasoning', principle: 'the principle', role: 'role of the statement',
+});
+
+/** Every playable item of a bank, normalised, from its registry rows —
+ *  one file fetch per item (sp/pc) or per bundle (wb/cr). */
+export async function loadBankItemsFromRows(type, rows) {
+  if (type === 'sp' || type === 'pc') {
+    const files = await loadBankFiles(type, rows.map((r) => r.id));
+    return rows.map((r) => files.get(r.id)).filter(Boolean).map((f) => normalizeBankItem(type, f));
+  }
+  const files = await loadBankFiles(type, rows.map((r) => r.id));
+  const out = [];
+  for (const r of rows) {
+    const f = files.get(r.id);
+    if (!f) continue;
+    for (const it of f.items) out.push(normalizeBankItem(type, f, it.id));
+  }
+  return out;
 }

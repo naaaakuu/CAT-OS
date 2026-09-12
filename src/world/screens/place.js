@@ -219,7 +219,7 @@ export async function renderPlace(outlet, { storage }, params) {
               <div class="tile__bar ${done ? 'tile__bar--gold' : ''}"><i style="width:${Math.round(f.summary.bloom * 100)}%"></i></div>
             </a>`;
           }).join('')}
-        </div>`);
+        </div>`) + wbShelf(region.slug, content, state);
       for (const b of more.querySelectorAll('[data-group]')) b.addEventListener('click', () => { group = b.dataset.group; play('page'); renderFields(); });
     };
     renderFields();
@@ -262,7 +262,8 @@ export async function renderPlace(outlet, { storage }, params) {
         <p class="sub">${escapeHTML(STAGE_INFO[g.stage]?.description ?? '')}</p>
         <div class="g-list">
           ${g.items.map((it, i) => { const b = rd.best.get(it.id); return `<a class="g-row ${rec?.item.id === it.id ? 'g-row--next' : ''}" href="#/rc/session/${it.id}"><span class="g-row__num">${i + 1}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${escapeHTML(it.genre)} · ${it.difficulty} · ~${it.estimated_time_min} min · ${it.question_count} Q${b ? ` · best ${Math.round(b.accuracy * 100)}%${b.flawless ? ' · flawless' : ''}` : ''}</span></span><span class="g-row__stars" aria-label="${b?.stars ?? 0} stars">${starHTML(b?.stars ?? 0)}</span></a>`; }).join('')}
-        </div>`).join(''))}`;
+        </div>`).join(''))}
+      ${bankBundleList('cr', content.cr, state, 'Arguments', 'Short arguments in the CAT register: find the assumption, weaken the link, name the flaw. Five at a time, unsolved first.')}`;
     more.querySelector('#night-toggle')?.addEventListener('click', async (e) => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; await storage.put(STORES.SETTINGS, { id: 'world:night-reading', value: on }); e.currentTarget.setAttribute('aria-pressed', String(on)); e.currentTarget.textContent = on ? 'On' : 'Off'; play('tap'); });
     return;
   }
@@ -280,7 +281,8 @@ export async function renderPlace(outlet, { storage }, params) {
       next ? { href: `#/wd/session/${next.id}`, label: next.title, sub: `${String(next.kind).replace('_', ' ')} · notice the shared piece, predict it, then apply it to a word never taught` } : null,
       'Every unit here ends with a word you were never shown. That is the test that matters.');
     more.innerHTML = section('The vines', 'Prefixes, suffixes, foreign words and CAT vocabulary, learned by pattern: notice, predict, reveal, apply.',
-      kinds.map((k) => `<h3 class="shelf">${escapeHTML(String(k).replace('_', ' '))}</h3><div class="g-list">${content.wd.filter((i) => i.kind === k).map((it) => `<a class="g-row" href="#/wd/session/${it.id}"><span class="g-row__num">${done.has(it.id) ? '✓' : '·'}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${it.member_count ?? ''} words${it.estimated_time_sec ? ` · ~${Math.round(it.estimated_time_sec / 60)} min` : ''}</span></span></a>`).join('')}</div>`).join(''));
+      kinds.map((k) => `<h3 class="shelf">${escapeHTML(String(k).replace('_', ' '))}</h3><div class="g-list">${content.wd.filter((i) => i.kind === k).map((it) => `<a class="g-row" href="#/wd/session/${it.id}"><span class="g-row__num">${done.has(it.id) ? '✓' : '·'}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${it.member_count ?? ''} words${it.estimated_time_sec ? ` · ~${Math.round(it.estimated_time_sec / 60)} min` : ''}</span></span></a>`).join('')}</div>`).join(''))
+      + bankBundleList('wb', (content.wb ?? []).filter((b) => b.kind === 'decode'), state, 'Words you were never shown', 'A word you have probably never met, its sentence, and four meanings. Take it apart — prefix, root, suffix — and the sentence settles the rest.');
     return;
   }
 
@@ -303,9 +305,61 @@ export async function renderPlace(outlet, { storage }, params) {
       <div class="tiles">
         ${tiers.map((t) => { const inTier = items.filter((it) => it.tier === t.id); const s = inTier.filter((it) => solved.has(it.id)).length; const done = inTier.length > 0 && s === inTier.length; return `<a class="tile ${rec && rec.item.tier === t.id ? 'tile--next' : ''} ${done ? 'tile--done' : ''}" href="#/${prefix}/session/${t.id}"><p class="tile__name">${escapeHTML(t.label)}</p><p class="tile__meta">${s} of ${inTier.length} ${unit}</p><div class="tile__bar ${done ? 'tile__bar--gold' : ''}"><i style="width:${inTier.length ? Math.round((s / inTier.length) * 100) : 0}%"></i></div></a>`; }).join('')}
       </div>
-      <p class="sub" style="margin-top:14px"><a href="#/${prefix}/about">How this craft works</a> · <a href="#/${prefix}">The full journey</a></p>`);
+      <p class="sub" style="margin-top:14px"><a href="#/${prefix}/about">How this craft works</a> · <a href="#/${prefix}">The full journey</a></p>`)
+      + (kind === 'loom' ? bankTierTiles('sp', content.sp, state, 'Sentence placement', 'A paragraph with one sentence taken out. Find the one seat it can take: the pronoun that needs an owner, the “but” that needs something to push against. Six at a time, unsolved first.') : '')
+      + (kind === 'table' ? bankTierTiles('pc', content.pc, state, 'Paragraph completion', 'A paragraph that stops one sentence early. Decide what the gap needs — a reason, an example, a turn, a landing — before you read the options. Six at a time, unsolved first.') : '');
     return;
   }
+}
+
+/* ---- The content engine's banks, as shelves inside the places ---- */
+
+/** The same section frame renderPlace uses, for the module-level shelves. */
+const section = (title, sub, html) => `
+    <section class="place__section">
+      <h2>${escapeHTML(title)}</h2>
+      ${sub ? `<p class="sub">${sub}</p>` : ''}
+      ${html}
+    </section>`;
+
+const BANK_TIERS = ['foundation', 'easy', 'medium', 'advanced', 'cat', 'cat-plus', 'ninety-nine', 'premium'];
+const WB_REGION_KINDS = { meadow: ['context', 'register', 'connotation', 'synonym_distinction'], pond: ['confusable'], terraces: ['decode'] };
+
+/** Placement / completion: one tile per tier, played six at a time. */
+function bankTierTiles(type, rows, state, title, lead) {
+  if (!rows?.length) return '';
+  const solved = state.banks?.[type]?.solvedIds ?? new Set();
+  const tiers = BANK_TIERS.filter((t) => rows.some((r) => r.tier === t));
+  return section(title, lead, `<div class="tiles">${tiers.map((t) => {
+    const inTier = rows.filter((r) => r.tier === t);
+    const s = inTier.filter((r) => solved.has(r.id)).length;
+    const done = inTier.length > 0 && s === inTier.length;
+    return `<a class="tile ${done ? 'tile--done' : ''}" href="#/bank/session/${type}/${t}"><p class="tile__name">${escapeHTML(t.replace('-', ' '))}</p><p class="tile__meta">${s} of ${inTier.length}</p><div class="tile__bar ${done ? 'tile__bar--gold' : ''}"><i style="width:${Math.round((s / inTier.length) * 100)}%"></i></div></a>`;
+  }).join('')}</div>`);
+}
+
+/** Word bank / arguments: one row per bundle. */
+function bankBundleList(type, rows, state, title, lead) {
+  if (!rows?.length) return '';
+  const solved = state.banks?.[type]?.solvedIds ?? new Set();
+  const BAND = { core: 0, stretch: 1, elite: 2 };
+  const sorted = [...rows].sort((a, b) => (BAND[a.band] ?? 0) - (BAND[b.band] ?? 0) || a.id.localeCompare(b.id));
+  return section(title, lead, `<div class="g-list">${sorted.map((r) => {
+    const ids = r.item_ids ?? [];
+    const s = ids.filter((id) => solved.has(id)).length;
+    const done = ids.length > 0 && s === ids.length;
+    return `<a class="g-row" href="#/bank/session/${type}/${r.id}"><span class="g-row__num">${done ? '✓' : '·'}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.title)}</span><span class="g-row__meta">${escapeHTML(String(r.kind ?? '').replace('_', ' '))}${r.kind ? ' · ' : ''}${escapeHTML(r.band ?? '')} · ${s} of ${ids.length}</span></span></a>`;
+  }).join('')}</div>`);
+}
+
+/** The word-bank shelves a vocabulary place shows (Meadow / Pond / Terraces). */
+function wbShelf(regionSlug, content, state) {
+  const kinds = WB_REGION_KINDS[regionSlug] ?? [];
+  const rows = (content.wb ?? []).filter((b) => kinds.includes(b.kind));
+  const copy = regionSlug === 'pond'
+    ? ['The right twin, in a sentence', 'A sentence with a gap and the look-alikes that could fill it. Only one of them does the job the sentence needs.']
+    : ['Words, asked the CAT way', 'A word inside a real sentence, four senses, one forced by the sentence — and the near-synonyms that differ by register, colouring or degree.'];
+  return bankBundleList('wb', rows, state, copy[0], copy[1]);
 }
 
 function pill(text) { return `<span class="hud__pill">${escapeHTML(text)}</span>`; }

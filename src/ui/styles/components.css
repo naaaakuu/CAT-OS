@@ -4355,3 +4355,60 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   line-height: var(--leading-body);
   color: #E6DCC6;
 }
+
+/* ------------------------------------------------------------------ */
+/* The verbal bank (src/modules/verbal-bank): placement, completion,   */
+/* the word bank and arguments share one screen.                       */
+/* ------------------------------------------------------------------ */
+
+.bank-body { margin: var(--space-3) 0 var(--space-4); }
+.bank-para {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+.bank-para--numbered { list-style: none; padding: 0; }
+.bank-para--numbered li { position: relative; padding-left: 28px; margin-bottom: var(--space-2); }
+.bank-n {
+  position: absolute; left: 0; top: 0.15em;
+  min-width: 20px; height: 20px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: var(--text-2xs); font-weight: var(--weight-bold);
+  background: var(--color-surface-2, rgba(0,0,0,0.06)); color: var(--color-ink-3);
+}
+.bank-para__placed { background: var(--color-correct-subtle, rgba(60,140,80,0.10)); border-radius: var(--radius-md); padding-top: 6px; padding-bottom: 6px; }
+.bank-para__placed .bank-n { background: var(--color-correct-ink); color: #fff; }
+.bank-missing {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-surface-2, rgba(0,0,0,0.04));
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.bank-missing p { margin: 0; }
+.bank-missing .psx__label { margin-bottom: var(--space-1); }
+.bank-blank {
+  display: inline-block; min-width: 5.5em;
+  border-bottom: 2px solid var(--color-ink-3);
+  color: transparent; line-height: 1;
+}
+.bank-filled { background: var(--color-correct-subtle, rgba(60,140,80,0.14)); color: inherit; border-radius: 3px; padding: 0 3px; }
+.bank-sentence { margin: 0; font-size: var(--text-lg); line-height: 1.55; }
+.bank-word { font-style: normal; font-weight: var(--weight-bold); text-decoration: underline; text-decoration-color: var(--color-accent); text-underline-offset: 3px; }
+.bank-parts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--space-3); }
+.bank-part {
+  display: inline-flex; flex-direction: column; gap: 2px;
+  padding: 6px 10px; border-radius: var(--radius-md);
+  background: var(--color-surface-2, rgba(0,0,0,0.05));
+  font-size: var(--text-sm);
+}
+.bank-part small { color: var(--color-ink-3); font-size: var(--text-2xs); }
+.bank-argument {
+  margin: 0; padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-ink-3);
+  font-size: var(--text-base); line-height: 1.6;
+  background: var(--color-surface-2, rgba(0,0,0,0.04));
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.bank-takeaway { margin: var(--space-3) 0 0; font-style: italic; color: var(--color-ink-2); }

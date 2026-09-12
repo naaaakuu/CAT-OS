@@ -11,7 +11,7 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-import { listLGItems, listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems } from '../core/content-loader/loader.js';
+import { listLGItems, listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, listBankItems } from '../core/content-loader/loader.js';
 import { computePlantState } from '../core/engine/garden-session.js';
 import { GROVES } from '../modules/language-garden/logic/groves.js';
 import { deriveEngagement } from '../core/engagement/stats.js';
@@ -48,9 +48,10 @@ let contentCache = null;
 export async function loadWorldContent() {
   if (contentCache) return contentCache;
   const safe = (p) => p.catch(() => []);
-  const [lgRegistry, rc, pj, ps, ooo, wd, meadowFields, pondFields, thicketFields] = await Promise.all([
+  const [lgRegistry, rc, pj, ps, ooo, wd, meadowFields, pondFields, thicketFields, sp, pc, wb, cr] = await Promise.all([
     safe(listLGItems()), safe(listRCItems()), safe(listPJItems()), safe(listPSItems()), safe(listOOOItems()), safe(listWDItems()),
     safe(listFields('meadow')), safe(listFields('pond')), safe(listFields('thicket')),
+    safe(listBankItems('sp')), safe(listBankItems('pc')), safe(listBankItems('wb')), safe(listBankItems('cr')),
   ]);
   const families = [...lgRegistry]
     .sort((a, b) => String(a.id).localeCompare(String(b.id)))
@@ -59,7 +60,7 @@ export async function loadWorldContent() {
       root: { label: i.title, origin_language: i.root_origin ?? '', core_meaning: i.root_meaning ?? '' },
       members: { length: i.member_count ?? 0 },
     }));
-  contentCache = { families, rc, pj, ps, ooo, wd, fields: { meadow: meadowFields, pond: pondFields, thicket: thicketFields } };
+  contentCache = { families, rc, pj, ps, ooo, wd, sp, pc, wb, cr, fields: { meadow: meadowFields, pond: pondFields, thicket: thicketFields } };
   return contentCache;
 }
 
@@ -170,6 +171,28 @@ export function deriveWorldState(content, records, now = Date.now()) {
     verbal[slug] = { module: mod, total: reg.length, solved: solved.size, tried: tried.size, tiers: tiers.length, tiersCleared, stars: starTotal, sets: bestBySet.size, level: levelFromCleared(solved.size, Math.max(1, Math.ceil(reg.length / 4))), sessions: ms.length };
   }
 
+  /* ---- The content engine's banks: placement, completion, arguments, words ----
+          Stars per set and solved ids per bank; the session record carries
+          its own time target, so no content file is opened here. ---- */
+  const banks = {};
+  for (const mod of ['sp', 'pc', 'wb', 'cr']) {
+    const reg = content[mod] ?? [];
+    const total = reg.reduce((n, r) => n + (r.item_ids?.length ?? 1), 0);
+    const ms = sessions.filter((s) => s.module === mod);
+    const solvedIds = new Set(), tried = new Set();
+    const bestBySet = new Map();
+    for (const s of ms) {
+      for (const a of s.answers ?? []) { const id = a.item_id ?? a.question_id; if (a.is_correct !== null) tried.add(id); if (a.is_correct === true) solvedIds.add(id); }
+      const res = verbalStars(s, s.target_sec ?? (s.score?.total ?? 1) * 60);
+      const key = s.set_id ?? s.passage_id;
+      const prev = bestBySet.get(key);
+      if (!prev || res.stars > prev.stars) bestBySet.set(key, res);
+    }
+    let stars = 0;
+    for (const r of bestBySet.values()) stars += r.stars;
+    banks[mod] = { module: mod, total, solved: solvedIds.size, solvedIds, tried: tried.size, stars, sets: bestBySet.size, sessions: ms.length };
+  }
+
   /* ---- Terraces: Word DNA ---- */
   const wdSessions = sessions.filter((s) => s.module === 'wd');
   const wdDone = new Set();
@@ -228,6 +251,12 @@ export function deriveWorldState(content, records, now = Date.now()) {
     earned = addBag(earned, EARN.secondLook(r.stars, s.score?.correct ?? 0, r.flawless));
   }
   for (const s of wdSessions) earned = addBag(earned, EARN.wd(s.score?.accuracy === 1 ? 3 : 1, s.score?.correct ?? 0));
+  for (const mod of ['sp', 'pc', 'wb', 'cr']) {
+    for (const s of sessions.filter((x) => x.module === mod)) {
+      const r = verbalStars(s, s.target_sec ?? (s.score?.total ?? 1) * 60);
+      earned = addBag(earned, EARN.bank(mod, r.stars, s.score?.correct ?? 0, r.flawless));
+    }
+  }
   for (const s of gardenSessions) earned = addBag(earned, EARN.garden(s.session_type, s.clean === true));
   for (const r of rounds) earned = addBag(earned, EARN.round(r.stars ?? 0, r.score?.correct ?? 0, r.flawless === true));
   for (const g of gauntlets) earned = addBag(earned, EARN.gauntlet(g.stars ?? 0, g.score?.correct ?? 0));
@@ -285,6 +314,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
   if (wdSessions.length) placesVisited.add('terraces');
   for (const r of rounds) placesVisited.add(r.region);
   if (gauntlets.length) placesVisited.add('wilds');
+  for (const s of sessions) if (['sp', 'pc', 'wb', 'cr'].includes(s.module)) placesVisited.add(s.region ?? { sp: 'loom', pc: 'table', cr: 'reading-room', wb: 'meadow' }[s.module]);
   const hearth = {
     level: built.hearthLevel,
     practicedToday,
@@ -318,7 +348,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
 
   const state = {
     atmo, now, isNew, today,
-    rootwood, reading, ...verbal, terraces, meadow, pond, thicket, wilds,
+    rootwood, reading, ...verbal, banks, terraces, meadow, pond, thicket, wilds,
     hearth, purse, earned, spent, stars: starTotal,
     builds: builtIds, builtSet, built,
     placesVisited: placesVisited.size, placesSeen: placesVisited,
@@ -506,7 +536,8 @@ function todaySummary({ sessions, gardenSessions, rounds, gauntlets, rcById, dat
   let rcTwoStar = 0;
   for (const s of rcToday) { const st = rcStars(s, rcById.get(s.passage_id)?.estimated_time_min).stars; if (st >= 2) rcTwoStar += 1; if (st === 3) threeStars += 1; regions.add('reading-room'); }
   let verbalCorrect = 0;
-  for (const s of sessions.filter((x) => x.module && x.module !== 'wd' && isToday(x))) { verbalCorrect += s.score?.correct ?? 0; regions.add({ pj: 'loom', ps: 'table', ooo: 'bench' }[s.module] ?? s.module); }
+  for (const s of sessions.filter((x) => x.module && x.module !== 'wd' && x.module !== 'wb' && isToday(x))) { verbalCorrect += s.score?.correct ?? 0; regions.add(s.region ?? { pj: 'loom', ps: 'table', ooo: 'bench', sp: 'loom', pc: 'table', cr: 'reading-room' }[s.module] ?? s.module); }
+  for (const s of sessions.filter((x) => x.module === 'wb' && isToday(x))) regions.add(s.region ?? 'meadow');
   const wdToday = sessions.filter((x) => x.module === 'wd' && isToday(x));
   if (wdToday.length) regions.add('terraces');
   const gardenToday = gardenSessions.filter(isToday);
