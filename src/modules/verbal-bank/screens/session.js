@@ -261,7 +261,7 @@ export async function renderBankSession(outlet, { storage }, params) {
       <section class="screen">
         <div class="session-bar"><a href="${back}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The valley')}</a></div>
         <article class="moment">
-          <p class="screen__eyebrow">${escapeHTML(bank.name)} · ${escapeHTML(resolved.label ?? '')}</p>
+          <p class="screen__eyebrow">${escapeHTML(String(resolved.label ?? '').toLowerCase().startsWith(bank.name.toLowerCase()) ? resolved.label : `${bank.name} · ${resolved.label ?? ''}`)}</p>
           <h1 class="moment__opening">${escapeHTML(lesson.opening)}</h1>
           ${lesson.title ? `
           <div class="moment__lesson">
