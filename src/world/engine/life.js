@@ -382,11 +382,12 @@ export function ducks({ cx, cy, rx, ry, count = 3, seed = 'ducks' }) {
  *
  * @param {object} o { route: [[x,y]...], night, seed }
  */
-export function companion({ route, night = false, seed = 'wick' }) {
+export function companion({ route, night = false, seed = 'wick', start = 'home' }) {
   const r = rng(seed);
   const speed = 0.0085;                       // world px per ms — an amble
-  let t = 0, leg = 0, p = 0, dir = 1;
-  let rest = 1800 + r() * 2600;               // he starts sitting
+  const legs0 = Math.max(1, route.length - 1);
+  let t = 0, leg = start === 'far' ? legs0 - 1 : 0, p = start === 'far' ? 1 : 0, dir = start === 'far' ? -1 : 1;
+  let rest = start === 'far' ? 7000 + r() * 5000 : 1800 + r() * 2600;   // he starts sitting
   let blinkAt = 2400;
   let pos = { x: route[0][0], y: route[0][1] };
   let facing = 1;

@@ -94,7 +94,18 @@ export async function renderWorld(outlet, { storage }) {
   const canvas = outlet.querySelector('#world-canvas');
   if (!canvas?.isConnected) return;
 
-  const scene = buildWorldScene(state, state.atmo);
+  /* ---- Arrival, or a return ---- */
+  const focusSlug = sessionStorage.getItem('world:focus');
+  const changedSlug = sessionStorage.getItem('world:changed');
+  const changeLine = sessionStorage.getItem('world:change-line');
+  const earnedRaw = sessionStorage.getItem('world:earned');
+  const wickRaw = sessionStorage.getItem('world:wick');
+  const unlockedRaw = sessionStorage.getItem('world:unlocked');
+  for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked', 'world:wick']) sessionStorage.removeItem(k);
+
+  // The scene is told where the valley is pointing, so Wick is already
+  // standing at whatever the learner has been sent to look at.
+  const scene = buildWorldScene(state, state.atmo, { focus: changedSlug || focusSlug || null });
   const renderer = new WorldRenderer(canvas, scene, {
     worldW: WORLD_W, worldH: WORLD_H, fit: 'cover', minZoom: 0.42, maxZoom: 4,
     initialZoom: 1.0,
@@ -107,14 +118,6 @@ export async function renderWorld(outlet, { storage }) {
   // show the country around the valley.
   const homeZoom = () => Math.max(renderer.fitZoom(), renderer.snap(1.0));
 
-  /* ---- Arrival, or a return ---- */
-  const focusSlug = sessionStorage.getItem('world:focus');
-  const changedSlug = sessionStorage.getItem('world:changed');
-  const changeLine = sessionStorage.getItem('world:change-line');
-  const earnedRaw = sessionStorage.getItem('world:earned');
-  const wickRaw = sessionStorage.getItem('world:wick');
-  const unlockedRaw = sessionStorage.getItem('world:unlocked');
-  for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked', 'world:wick']) sessionStorage.removeItem(k);
   // A slow open must not also be a slow reveal: if the valley took a while
   // to load, everything arrives at once instead of in sequence.
   const slow = performance.now() - askedAt > 1100;

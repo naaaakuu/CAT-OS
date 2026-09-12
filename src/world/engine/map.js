@@ -747,7 +747,11 @@ export function buildWorldScene(state, atmo, opts = {}) {
           which means the learner's eye follows him to the right place
           without a single instruction. ---- */
   {
-    const asking = REGIONS.find((x) => x.slug === state.asking);
+    // Wherever the valley is pointing: the place that just changed if
+    // something did, otherwise whatever is asking for attention. He is
+    // standing at the thing you built when you come to look at it.
+    const toward = opts.focus ?? state.asking;
+    const asking = REGIONS.find((x) => x.slug === toward);
     const far = asking?.anchor ?? REGIONS.find((x) => x.slug === 'meadow').anchor;
     const mid = { x: Math.round((hearth.anchor.x + far.x) / 2), y: Math.round((hearth.anchor.y + far.y) / 2) };
     life.push(companion({
@@ -758,7 +762,9 @@ export function buildWorldScene(state, atmo, opts = {}) {
         [far.x - 12, far.y + 10],
       ],
       night,
-      seed: `wick:${state.asking ?? 'home'}`,
+      seed: `wick:${toward ?? 'home'}`,
+      // Standing at the far end already, when he has been sent there.
+      start: opts.focus ? 'far' : 'home',
     }));
   }
 

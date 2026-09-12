@@ -88,9 +88,12 @@
 
 .hud { padding: calc(env(safe-area-inset-top) + 10px) 10px 0; gap: 10px; }
 .hud__card {
-  background: var(--g-panel);
-  -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Opaque, not frosted. Everything that floats over the valley sits on a
+     canvas that repaints every frame, so a blurred backdrop is re-blurred
+     every frame with it — the one thing that made the map drop frames on
+     a phone. See the note on .op. */
+  background: var(--g-paper);
+  border: 1px solid rgba(120, 96, 56, 0.16);
   box-shadow: var(--g-shadow-soft);
   padding: 7px 14px 7px 8px;
   border-radius: 999px;
@@ -105,9 +108,8 @@
 .purse {
   display: inline-flex; align-items: center; gap: 12px;
   padding: 8px 13px; border-radius: 999px; text-decoration: none;
-  background: var(--g-panel);
-  -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: var(--g-paper);
+  border: 1px solid rgba(120, 96, 56, 0.16);
   box-shadow: var(--g-shadow-soft);
   opacity: 0; transform: translateY(-8px);
   transition: opacity 600ms var(--g-ease), transform 600ms var(--g-ease), box-shadow 300ms;
@@ -214,9 +216,13 @@
   max-width: 420px;
   display: flex; align-items: center; gap: 12px;
   padding: 12px 14px; border-radius: 18px; text-decoration: none; color: var(--g-ink);
-  background: var(--g-panel);
-  -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* No backdrop-filter. These are four large cards sitting over a map that
+     is animating every frame — clouds, water, a cat — so a blurred backdrop
+     is re-rasterised on every one of them, and the valley dropped every
+     fourth frame for it (p95 33.3 ms → 16.8 ms when they came off). A warm
+     opaque panel reads better over pixel art anyway. */
+  background: var(--g-paper);
+  border: 1px solid rgba(120, 96, 56, 0.16);
   box-shadow: var(--g-shadow);
   opacity: 0; transform: translateY(16px);
   transition: opacity 600ms var(--g-ease), transform 600ms var(--g-ease);
@@ -264,9 +270,8 @@
 
 /* The place card lifted off the map */
 .place-card {
-  background: var(--g-panel);
-  -webkit-backdrop-filter: blur(20px) saturate(150%); backdrop-filter: blur(20px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: var(--g-paper);
+  border: 1px solid rgba(120, 96, 56, 0.16);
   box-shadow: var(--g-shadow);
 }
 .place-card__ready { margin: 10px 0 0; font-size: 12.5px; font-weight: 700; color: #96650A; }
