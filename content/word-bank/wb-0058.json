@@ -1,0 +1,828 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wb-0058",
+    "type": "wb",
+    "version": 1,
+    "status": "accepted",
+    "kind": "register",
+    "band": "stretch",
+    "title": "Register · the room's own verb",
+    "item_count": 20,
+    "estimated_time_sec": 40,
+    "source": {
+      "publication": "original",
+      "usage_note": "Every sentence, option and explanation composed for CAT OS. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wb-002",
+    "reviewer_notes": "The stretch register bundle: the rooms are subtler — an academic hedge, a court's ruling, a communiqué, a forecast, a leaflet, an opinion column's escalation — and several options are formal but wrong in sense.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Item 1: 'hint' was kept as a distractor because 'the data hint' is journalistic and personifying; the academic verb is 'suggest'. Item 11: 'arrive' was removed from the options because forecasts do say 'rain will arrive from the west'; the options offered are unmistakably wrong rooms. Item 18: 'stop' was replaced because 'her grief did not stop' is plain but not wrong; the offered options are slang, slang and bureaucratic. Item 16: the escalation 'not merely unwise; it is X' requires X to be stronger than 'unwise', which rules out 'not ideal' and 'suboptimal' on degree as well as register.",
+      "blind_solve": null
+    }
+  },
+  "items": [
+    {
+      "id": "wb-0058-01",
+      "word": "suggest",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "lang.modal_verbs",
+        "word.near_synonym"
+      ],
+      "difficulty": 3,
+      "stem": "The data ____ that the effect, if real, is small.",
+      "options": {
+        "A": "prove",
+        "B": "suggest",
+        "C": "scream",
+        "D": "hint"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'If real' is a hedge; the sentence belongs to a cautious academic report, and its verb must hedge at the same strength.",
+        "correct_reasoning": "'The data suggest' is the standard academic formula for evidence that points without settling; it matches the caution of 'if real'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Prove' claims certainty that 'if real' immediately withdraws; the sentence would contradict itself."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Scream' is journalistic hyperbole; data do not scream in a report."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Hint' personifies the data in a chatty way; it belongs to a column, not a paper."
+          }
+        ],
+        "method": "Academic prose calibrates verbs to evidence: suggest, indicate, show, demonstrate. Match the verb's strength to the hedges around it ('if real', 'may', 'appears')."
+      }
+    },
+    {
+      "id": "wb-0058-02",
+      "word": "held",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.polysemy"
+      ],
+      "difficulty": 3,
+      "stem": "The court ____ that the contract had been frustrated.",
+      "options": {
+        "A": "held",
+        "B": "figured",
+        "C": "felt",
+        "D": "reckoned"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'The court' and the legal term 'frustrated' (of a contract) place the sentence in a law report, where a court's ruling has its own verb.",
+        "correct_reasoning": "In legal English a court 'holds' — rules as a matter of law — and 'held that' is the formula of every law report.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Figured' is colloquial American; no court figures."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Felt' makes a ruling a feeling, which is exactly what a judgment claims not to be."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Reckoned' is conversational estimation, not a legal finding."
+          }
+        ],
+        "method": "Institutions have verbs of their own: a court holds, a jury finds, a committee resolves, a minister announces. The subject tells you which verb the room uses."
+      }
+    },
+    {
+      "id": "wb-0058-03",
+      "word": "considerable",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.near_synonym",
+        "lang.overstatement"
+      ],
+      "difficulty": 3,
+      "stem": "It was, he allowed, a ____ inconvenience to have lost the house.",
+      "options": {
+        "A": "massive",
+        "B": "huge",
+        "C": "considerable",
+        "D": "mega"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'He allowed' and the deadpan 'inconvenience' for losing a house make this understatement — a dry, formal voice that must not shout.",
+        "correct_reasoning": "'Considerable' is the formal understater's adjective: it admits magnitude without raising its voice, in keeping with the irony of calling the loss an inconvenience.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Massive' breaks the understatement; the joke depends on not exclaiming."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Huge' is everyday and informal, wrong for the dry, formal voice of 'he allowed'."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Mega' is slang; it destroys the sentence's tone entirely."
+          }
+        ],
+        "method": "When a sentence is being ironic through understatement, the adjective must keep a straight face. Choose the formal, measured word, never the intensifier."
+      }
+    },
+    {
+      "id": "wb-0058-04",
+      "word": "rose",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 2,
+      "stem": "Revenue ____ 8% in the third quarter, driven by subscriptions.",
+      "options": {
+        "A": "shot up",
+        "B": "ballooned",
+        "C": "climbed up",
+        "D": "rose"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "A percentage, a quarter, 'driven by' — the register of a financial report, which states movements without excitement or alarm.",
+        "correct_reasoning": "'Rose 8%' is the neutral reporting verb of financial prose; it states the change and nothing more.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Shot up' is informal and excitable; a report does not exclaim."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Ballooned' implies unhealthy or alarming growth, usually of costs; it colours a neutral fact."
+          },
+          {
+            "option": "C",
+            "trap_type": "collocation_clash",
+            "why_wrong": "'Climbed' would do, but 'climbed up 8%' doubles the direction; the phrasal form is clumsy in a report."
+          }
+        ],
+        "method": "Financial and statistical prose uses plain verbs of movement — rose, fell, increased, declined. Any verb that adds drama or judgement is the wrong room."
+      }
+    },
+    {
+      "id": "wb-0058-05",
+      "word": "stood",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 2,
+      "stem": "A heron ____ at the water's edge, motionless as a post.",
+      "options": {
+        "A": "stood",
+        "B": "was positioned",
+        "C": "hung out",
+        "D": "was stationed"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'Motionless as a post' is a simile from nature writing; the verb must be as plain and observant as the image.",
+        "correct_reasoning": "'Stood' is the naturalist's verb — simple, exact, and content to let the simile do the work.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Was positioned' is administrative and implies someone placed the bird."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Hung out' is slang for loitering; it turns a heron into a teenager."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Was stationed' is military — sentries are stationed — and imports a purpose the bird does not have."
+          }
+        ],
+        "method": "In observational description the simplest verb is usually right; verbs with an implied agent (positioned, stationed) or a social colouring (hung out) are wrong rooms."
+      }
+    },
+    {
+      "id": "wb-0058-06",
+      "word": "persist",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 2,
+      "stem": "Contact your doctor if the symptoms ____ for more than a week.",
+      "options": {
+        "A": "hang around",
+        "B": "linger",
+        "C": "persist",
+        "D": "drag on"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'Contact your doctor if the symptoms…' is the patient-information leaflet, whose register is plain, formal and neutral.",
+        "correct_reasoning": "'Persist' is the leaflet's own word for symptoms that continue; it is neutral and clinical in the plain register such leaflets use.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Hang around' is slang; a leaflet does not chat."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Linger' is gentle and almost pleasant — a scent lingers — the wrong colouring for symptoms in advice."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Drag on' is informal and weary, the voice of a sufferer rather than an instruction."
+          }
+        ],
+        "method": "Medical advice uses neutral verbs of continuation: persist, continue, worsen. Verbs with a mood (linger, drag on) belong to narrative, not instruction."
+      }
+    },
+    {
+      "id": "wb-0058-07",
+      "word": "waned",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.near_synonym"
+      ],
+      "difficulty": 3,
+      "stem": "The dynasty's authority ____ during the long minority of the young king.",
+      "options": {
+        "A": "tanked",
+        "B": "fell apart",
+        "C": "went downhill",
+        "D": "waned"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "'Dynasty', 'authority', 'the long minority of the young king' — scholarly historical narrative, formal and measured.",
+        "correct_reasoning": "'Waned' is the historian's verb for authority that diminishes gradually; it is formal and exact about slowness, which the 'long minority' implies.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Tanked' is slang for a sudden collapse of a price or a performance."
+          },
+          {
+            "option": "B",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Fell apart' is informal and describes collapse, not the gradual decline a long minority produces."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Went downhill' is conversational, the language of anecdote rather than history."
+          }
+        ],
+        "method": "Historical prose prefers verbs of gradual change with a formal pedigree — waned, declined, eroded. Colloquial verbs of collapse are wrong in both register and pace."
+      }
+    },
+    {
+      "id": "wb-0058-08",
+      "word": "requests",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register"
+      ],
+      "difficulty": 2,
+      "stem": "The committee ____ the pleasure of your company at the annual dinner.",
+      "options": {
+        "A": "wants",
+        "B": "requests",
+        "C": "would love",
+        "D": "is after"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'The pleasure of your company' is the fixed phrase of a formal invitation, and it has a fixed verb.",
+        "correct_reasoning": "'Requests the pleasure of your company' is the invitation's formula; no other verb belongs to the phrase.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Wants' is blunt and informal, and it breaks a formula that has no room for bluntness."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Would love' is warm and casual, the voice of a friend's text, not a committee's card."
+          },
+          {
+            "option": "D",
+            "trap_type": "collocation_clash",
+            "why_wrong": "'Is after the pleasure of your company' is not English; 'after' means seeking, and the phrase collapses."
+          }
+        ],
+        "method": "Some phrases are formulas with one verb ('requests the pleasure', 'begs to inform', 'regrets to announce'). Recognise the formula and the verb is given."
+      }
+    },
+    {
+      "id": "wb-0058-09",
+      "word": "raises",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 3,
+      "stem": "This function ____ an error if the file cannot be opened.",
+      "options": {
+        "A": "chucks",
+        "B": "hurls",
+        "C": "raises",
+        "D": "flings"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'This function', 'an error', 'if the file cannot be opened' — software documentation, which uses its own technical vocabulary.",
+        "correct_reasoning": "In programming, a function 'raises' (or throws) an error; 'raises' is the documented term, neutral and exact.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Chucks' is slang; documentation does not chuck anything."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Hurls' is violent and literary; it adds force a technical description does not want."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Flings' is casual and vivid, the wrong tone for a manual."
+          }
+        ],
+        "method": "Technical fields own their verbs. If the sentence is documentation, the verb is the field's term of art, however odd it would sound elsewhere."
+      }
+    },
+    {
+      "id": "wb-0058-10",
+      "word": "turns",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register"
+      ],
+      "difficulty": 3,
+      "stem": "The argument ____ on a distinction that the author never makes explicit.",
+      "options": {
+        "A": "turns",
+        "B": "leans",
+        "C": "banks",
+        "D": "rides"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'The argument…', 'a distinction', 'never makes explicit' — philosophical or critical prose, which has an idiom for what an argument depends on.",
+        "correct_reasoning": "'The argument turns on' is the critic's idiom: the argument pivots on a point. It is formal and exact.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Leans on' is informal and vaguer — support rather than pivot."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Banks on' is colloquial and means counts on, which an argument does not do."
+          },
+          {
+            "option": "D",
+            "trap_type": "collocation_clash",
+            "why_wrong": "'Rides on' is used of outcomes ('everything rides on the vote'), not of arguments and distinctions."
+          }
+        ],
+        "method": "Critical and philosophical prose has fixed idioms — an argument turns on, rests on, hinges on. Choose the idiom of the room; casual phrasal verbs will feel wrong to any reader of the genre."
+      }
+    },
+    {
+      "id": "wb-0058-11",
+      "word": "spread",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 2,
+      "stem": "Showers will ____ from the west during the afternoon.",
+      "options": {
+        "A": "barge in",
+        "B": "materialise",
+        "C": "saunter in",
+        "D": "spread"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "'Showers will… from the west during the afternoon' is a weather forecast, whose verbs are plain and impersonal.",
+        "correct_reasoning": "'Spread from the west' is forecast idiom: neutral, spatial, without personification.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Barge in' is slang and treats the showers as rude guests."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Materialise' suggests appearing from nowhere, a touch of the uncanny that a forecast avoids."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Saunter in' is playful personification, a columnist's joke rather than a forecaster's sentence."
+          }
+        ],
+        "method": "Forecasts, timetables and notices personify nothing. When the subject is weather or a process, the plain spatial or temporal verb is the register."
+      }
+    },
+    {
+      "id": "wb-0058-12",
+      "word": "comprises",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.polysemy"
+      ],
+      "difficulty": 3,
+      "stem": "The property ____ three bedrooms and a south-facing garden.",
+      "options": {
+        "A": "has got",
+        "B": "comprises",
+        "C": "holds",
+        "D": "is stuffed with"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'The property', 'south-facing' — an estate agent's particulars, a formal listing register with its own conventional verbs.",
+        "correct_reasoning": "'Comprises' is the listing's verb for what a property consists of; it is formal and exact.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Has got' is spoken English; a listing would never print it."
+          },
+          {
+            "option": "C",
+            "trap_type": "context_mismatch",
+            "why_wrong": "'Holds' means contains as a container does; a property does not hold bedrooms."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Is stuffed with' is slang and implies overcrowding."
+          }
+        ],
+        "method": "Listings and specifications describe composition with formal verbs: comprises, consists of, includes. Spoken forms and container verbs are wrong."
+      }
+    },
+    {
+      "id": "wb-0058-13",
+      "word": "resolves",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 3,
+      "stem": "The novel's final chapter ____ the themes the opening had set in motion.",
+      "options": {
+        "A": "wraps up",
+        "B": "resolves",
+        "C": "finishes off",
+        "D": "ties up"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'The novel's final chapter', 'themes', 'set in motion' — literary criticism, which speaks of themes being resolved.",
+        "correct_reasoning": "'Resolves' is the critic's verb: themes are resolved as a chord is resolved, brought to a settled close. It is formal and carries the right musical sense.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Wraps up' is informal — a meeting wraps up — and flattens the critical register."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Finishes off' can mean kills or disposes of; it colours the ending as brutal."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Ties up' is informal, from 'ties up loose ends', and suggests tidiness rather than resolution."
+          }
+        ],
+        "method": "Criticism borrows vocabulary from music and structure: resolve, develop, counterpoint. Phrasal verbs from everyday life sound amateur in a critical sentence."
+      }
+    },
+    {
+      "id": "wb-0058-14",
+      "word": "pursued",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 2,
+      "stem": "Officers ____ the vehicle after it failed to stop.",
+      "options": {
+        "A": "chased down",
+        "B": "hunted",
+        "C": "went after",
+        "D": "pursued"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "'Officers', 'the vehicle', 'failed to stop' — a police statement, formal and impersonal.",
+        "correct_reasoning": "'Pursued' is the statement's verb: formal, neutral, and the term the police themselves use.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Chased down' is informal and implies capture, which the sentence does not report."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Hunted' makes the driver prey, a colouring a neutral statement avoids."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Went after' is conversational; a statement does not chat."
+          }
+        ],
+        "method": "Official statements report actions in formal, neutral verbs. Reject verbs that add an outcome (chased down) or an attitude (hunted)."
+      }
+    },
+    {
+      "id": "wb-0058-15",
+      "word": "dissolves",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.polysemy"
+      ],
+      "difficulty": 2,
+      "stem": "The compound ____ readily in water at room temperature.",
+      "options": {
+        "A": "dissolves",
+        "B": "melts",
+        "C": "vanishes",
+        "D": "disappears"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'The compound', 'readily', 'at room temperature' — a chemistry description, which names the process precisely.",
+        "correct_reasoning": "'Dissolves' names the process — a solid entering solution — which is what a compound does in water. It is the technical term.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "context_mismatch",
+            "why_wrong": "'Melts' is a different process, solid to liquid by heat, not by solution."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Vanishes' describes what an observer sees, in non-technical and slightly magical language."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Disappears' is everyday and says nothing about the process."
+          }
+        ],
+        "method": "Science names processes, not appearances. Choose the verb that says what happens to the substance, not how it looks to the eye."
+      }
+    },
+    {
+      "id": "wb-0058-16",
+      "word": "reckless",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "lang.overstatement",
+        "word.near_synonym"
+      ],
+      "difficulty": 3,
+      "stem": "The proposal is not merely unwise; it is ____.",
+      "options": {
+        "A": "suboptimal",
+        "B": "not ideal",
+        "C": "reckless",
+        "D": "a bit much"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'Not merely X; it is Y' is an escalation: Y must be stronger than 'unwise'. The voice is an editorial's, formal and forceful.",
+        "correct_reasoning": "'Reckless' is stronger than unwise and belongs to the opinion column's register; it completes the escalation the sentence's shape demands.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Suboptimal' is technical and weak — weaker than unwise — so it fails the escalation and the room."
+          },
+          {
+            "option": "B",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Not ideal' is milder than unwise; after 'not merely unwise' it collapses the sentence."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'A bit much' is colloquial and mild, the wrong room and the wrong strength."
+          }
+        ],
+        "method": "'Not merely A; B' requires B to outrank A. Check both the register of the sentence and the strength ladder before choosing."
+      }
+    },
+    {
+      "id": "wb-0058-17",
+      "word": "closed",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.polysemy"
+      ],
+      "difficulty": 2,
+      "stem": "The chair ____ the meeting at 4.15 p.m.",
+      "options": {
+        "A": "shut down",
+        "B": "closed",
+        "C": "wrapped up",
+        "D": "killed"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'The chair', a precise time — the minutes of a meeting, a formal record with fixed phrasing.",
+        "correct_reasoning": "'The chair closed the meeting' is the minutes' formula; 'closed' is the formal verb for ending proceedings.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "context_mismatch",
+            "why_wrong": "'Shut down' means stopped from operating, as a factory or a website; it does not describe ending a meeting."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Wrapped up' is informal; minutes do not wrap."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Killed' is slang and violent."
+          }
+        ],
+        "method": "Minutes and records use formal verbs with fixed meanings: opened, closed, adjourned, resolved. Informal verbs are wrong even when the meaning is close."
+      }
+    },
+    {
+      "id": "wb-0058-18",
+      "word": "abate",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register"
+      ],
+      "difficulty": 3,
+      "stem": "Her grief did not ____; it merely learned to keep quiet.",
+      "options": {
+        "A": "quit",
+        "B": "pack up",
+        "C": "cease operations",
+        "D": "abate"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "'It merely learned to keep quiet' is a literary personification of grief; the verb before it must belong to the same elevated, quiet register.",
+        "correct_reasoning": "'Abate' — to lessen, to die down — is the literary verb for grief, storms and fevers; it matches the sentence's restraint and its personification.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Quit' is colloquial; grief does not quit in a sentence of this kind."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Pack up' is slang for stopping; it is comic where the sentence is grave."
+          },
+          {
+            "option": "C",
+            "trap_type": "collocation_clash",
+            "why_wrong": "'Cease operations' is corporate; grief has no operations to cease, and the phrase makes the personification absurd."
+          }
+        ],
+        "method": "When a sentence personifies an emotion in a grave register, the verb must be one literature uses for feelings and weather — abate, subside, ebb — not the language of jobs or companies."
+      }
+    },
+    {
+      "id": "wb-0058-19",
+      "word": "warren",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.connotation"
+      ],
+      "difficulty": 3,
+      "stem": "The old town is a ____ of lanes, courtyards and hidden squares.",
+      "options": {
+        "A": "jumble",
+        "B": "mess",
+        "C": "warren",
+        "D": "tangle"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'Hidden squares' is charmed, not complaining; the sentence reads like a travel guide, whose register makes intricacy attractive.",
+        "correct_reasoning": "'Warren' is the travel writer's word for a delightful maze of lanes; it names intricacy with affection, matching 'hidden squares'.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Jumble' implies disorder that needs sorting — mild disapproval where the sentence admires."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Mess' is informal and plainly disapproving."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Tangle' suggests something one gets caught in — closer to a complaint than 'hidden squares' allows."
+          }
+        ],
+        "method": "Travel writing praises what it describes. Between near-synonyms for intricacy, choose the one that carries charm rather than the ones that carry disorder."
+      }
+    },
+    {
+      "id": "wb-0058-20",
+      "word": "falls",
+      "skill": "word_precision",
+      "patterns": [
+        "word.register",
+        "word.polysemy"
+      ],
+      "difficulty": 2,
+      "stem": "When the price rises, the quantity demanded ____.",
+      "options": {
+        "A": "falls",
+        "B": "drops off",
+        "C": "takes a hit",
+        "D": "goes down the drain"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'The quantity demanded' is textbook economics; the law of demand is stated in plain, symmetrical verbs — rises, falls.",
+        "correct_reasoning": "'Falls' mirrors 'rises' and is the textbook's neutral verb for a decrease.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Drops off' is informal and suggests dwindling attention rather than a measured quantity."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Takes a hit' is journalistic slang."
+          },
+          {
+            "option": "D",
+            "trap_type": "context_mismatch",
+            "why_wrong": "'Goes down the drain' means is wasted, a different idea altogether."
+          }
+        ],
+        "method": "Textbook statements are symmetrical and plain: rises pairs with falls, increases with decreases. Match the verb to its partner in the sentence."
+      }
+    }
+  ]
+}

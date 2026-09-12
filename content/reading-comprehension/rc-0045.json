@@ -1,0 +1,322 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0045",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "sociology",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "inference",
+      "main-idea-extraction",
+      "vocabulary-in-context",
+      "qualifier-tracking"
+    ],
+    "word_count": 305,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "title_selection",
+      "vocabulary_in_context"
+    ],
+    "theme": "why reforms produce consequences their designers did not intend: a reform as a move that invites a reply, not a repair to a machine",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "An analogy-driven short: the repair versus the move, carried by the chess image and three one-line examples. The final paragraph qualifies the analogy (people are not opponents), and every question is designed to punish readers who take the vehicle of the analogy for the claim.",
+    "length_class": "short",
+    "structure": "analogy_driven",
+    "viewpoints": 1,
+    "tone": "assured, corrective",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "lang.absolute_vs_qualified",
+      "arg.analogy",
+      "comp.central_idea",
+      "struct.analogy",
+      "scope.too_narrow",
+      "word.context_clue",
+      "word.polysemy",
+      "comp.reference_tracking",
+      "arg.qualification"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the rival is the option that a reform which anticipates people's replies 'will produce no consequences its designers did not intend'; the passage recommends asking what people will do but promises nothing, and its last clause, the reform is 'whatever remains once they have answered', keeps the outcome open. The opponents option is killed by p3's 'does not require that the people a reform addresses be imagined as opponents'. Q2: 'The Opponent in Every Reform' is the tempting title because the chess image dominates the middle paragraph; p3 disowns the opponent reading explicitly, and 'Why Every Reform Fails' dies on 'This does not make reform futile'. Q3: the option 'a prediction of what the affected population will do' is the near-tie for the word 'drawing', because p3 discusses the drawing and prediction in one sentence; that sentence says the reformer must 'stop reading the drawing as a prediction', so the drawing is what gets misread, not the prediction.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "malfunction",
+      "futile"
+    ]
+  },
+  "passage": {
+    "title": "The Repair That Was a Move",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0045-p1",
+        "text": "A reform is usually drawn up the way a repair is: here is the system, here is the faulty part, here is the replacement, here is the improved output. The drawing is honest, and it is usually right about everything it contains. What it cannot contain is the one thing that separates a society from a machine. A machine's parts do not notice that they have been repaired. People do."
+      },
+      {
+        "id": "rc-0045-p2",
+        "text": "It is closer to the truth to say that a reform is not a repair but a move. Imagine a chess player who plans four moves ahead on the assumption that the opposing pieces will stay where they are. Every move in the plan is legal, every calculation is correct, and the plan fails at the first reply, not because the player miscalculated but because the plan had no room for a reply at all. The rent cap is followed by the withdrawal of flats from the market; the licensing requirement is followed by an unlicensed trade; the scholarship for the poorest students is followed by families arranging to appear poorer. None of these replies was a malfunction. Each was a second move by people who had understood the first."
+      },
+      {
+        "id": "rc-0045-p3",
+        "text": "This does not make reform futile, and it does not require that the people a reform addresses be imagined as opponents; many replies are cooperative, and some improve on the design. What it requires is that the reformer stop reading the drawing as a prediction. The drawing shows the first move. The consequence the designers 'did not intend' is almost never something they failed to foresee about the system; it is something they never asked about the players. The competent question is not 'what will this change do?' but 'what will people do about it?', and the reform is whatever remains once they have answered."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0045-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "lang.absolute_vs_qualified",
+        "arg.analogy"
+      ],
+      "target_mistake": "upgrading the author's recommended question into a guarantee, or reading the chess opponent literally despite the final paragraph's disclaimer",
+      "prediction_target": "The learner should predict that a correct inference will concern the source of unintended consequences: not a wrong calculation about the system but an unasked question about the people, as p2's 'not because the player miscalculated' and p3's 'never asked about the players' together establish.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "People affected by a reform generally respond to it as opponents who want to see its purpose defeated.",
+        "B": "What reformers call an unintended consequence usually follows from a question they never asked, not a sum they got wrong.",
+        "C": "A reform that anticipates people's replies will produce no consequences its designers did not intend.",
+        "D": "Rent caps, licensing requirements and scholarships are the reforms most likely to provoke evasive replies."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two sentences in two paragraphs carry the same distinction. In p2 the plan fails 'not because the player miscalculated but because the plan had no room for a reply'; in p3 the unintended consequence 'is almost never something they failed to foresee about the system; it is something they never asked about the players'. Calculation versus question is the passage's spine.",
+        "correct_reasoning": "The correct option is that spine restated: the unintended consequence is usually a reply nobody asked about, not an error in the drawing, which p1 says 'is usually right about everything it contains'. Its 'usually' matches the passage's 'almost never' and 'usually', and it adds no guarantee and no villain.",
+        "passage_anchor": "rc-0045-p3",
+        "question_type_note": "An inference question over an analogy is answered from the sentences that state the analogy's point, not from the image; the distractors here take the image literally, promise more than the author does, or turn illustrations into a ranking.",
+        "reading_habit": "When a passage says 'not because X but because Y', that contrast is the claim it most wants you to keep. Find the option that preserves both halves at the passage's own strength.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 3 rules this out in so many words: the argument 'does not require that the people a reform addresses be imagined as opponents; many replies are cooperative, and some improve on the design'.",
+            "seductive_element": "The chess opponent is the passage's central image, and the three examples in p2 all look like evasion."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The author recommends asking what people will do, but never says the answer can be known or that asking removes unintended consequences; the closing clause leaves the reform as 'whatever remains once they have answered', an outcome still open.",
+            "seductive_element": "It reads like the natural reward for following the author's advice."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The three reforms are illustrations of a general point about replies; the passage neither ranks reforms by their likelihood of provoking replies nor compares these three with any others.",
+            "seductive_element": "The three examples are vivid and all of one kind, which invites a generalisation about that kind."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0045-q2",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.analogy",
+        "scope.too_narrow"
+      ],
+      "target_mistake": "titling the passage after the vehicle of its analogy (the opponent) or after one example, or inflating its qualified claim into a verdict on all reform",
+      "prediction_target": "The learner should be able to say: the title must name the passage's contrast, a reform is a move that gets a reply rather than a repair to a machine, without making people into enemies or reform into a lost cause.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "Why Every Reform Fails",
+        "B": "The Opponent in Every Reform",
+        "C": "Not a Repair but a Move",
+        "D": "Rent Caps and Their Consequences"
+      },
+      "correct": "C",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage's claim is a contrast stated in its own words at the start of p2: 'a reform is not a repair but a move'. Everything else, the chess player, the three examples and the closing advice, serves that contrast, and p3 explicitly limits it: reform is not futile and people are not opponents.",
+        "correct_reasoning": "The correct title is the passage's own thesis sentence compressed, and it survives the final paragraph: it says nothing about failure or enemies, only about what kind of thing a reform is. A title is the main idea in a few words, and this is the only option that is the idea rather than its image, its example or an exaggeration of it.",
+        "passage_anchor": "rc-0045-p2",
+        "question_type_note": "A title question is a main-idea question at the highest altitude; the standard decoys are the analogy's vehicle, a single example, and the thesis pushed past the author's qualification.",
+        "reading_habit": "Before choosing a title, check it against the passage's last paragraph, where authors most often limit their claim; a title the last paragraph contradicts cannot be right however well it fits the middle.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says 'This does not make reform futile', and its examples fail for a stated reason, the drawing read as a prediction, not as a law; a title claiming every reform fails contradicts the author's own qualification.",
+            "seductive_element": "The three examples in p2 all end badly, which makes universal failure feel like the moral."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 3 rejects the opponent reading explicitly, 'it does not require that the people a reform addresses be imagined as opponents', and notes that many replies are cooperative; the title would enshrine the very misreading the author disowns.",
+            "seductive_element": "The chess image is the most memorable thing in the passage, and an opponent is what a chess player faces."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The rent cap is one of three one-line illustrations in p2; a title built on it would leave out the analogy, the other examples and the general claim about reforms and replies.",
+            "seductive_element": "It is concrete, and the rent cap is the first example the reader meets."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0045-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "taking 'drawing' in its everyday sense of a picture, or attaching it to the prediction or the reply that the passage places beside it",
+      "prediction_target": "The learner should paraphrase from p1 before looking: the drawing is the reformer's plan of the system, the faulty part, the replacement and the improved output.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "As used in the passage, the word 'drawing' most nearly refers to",
+      "options": {
+        "A": "an illustration produced to persuade the public that a reform will succeed",
+        "B": "the second move that the people addressed by a reform make in reply to it",
+        "C": "a forecast of how the affected population will respond to a reform",
+        "D": "the reformer's plan of the system and of the change to be made within it"
+      },
+      "correct": "D",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The word is defined by its first use: a reform 'is usually drawn up the way a repair is: here is the system, here is the faulty part, here is the replacement, here is the improved output'. 'The drawing' in the next sentence is that plan. Paragraph 3 then contrasts the drawing with a prediction and with the reply, which fixes what it is not.",
+        "correct_reasoning": "The correct option is the plan described in p1 and named 'the drawing' in the sentence that follows. Every later use keeps that sense: the drawing 'shows the first move', and the reformer must 'stop reading the drawing as a prediction', which only makes sense if the drawing is the plan and the prediction something else.",
+        "passage_anchor": "rc-0045-p1",
+        "question_type_note": "A word-in-context question is settled by the sentence that introduces the word; the everyday sense and the other nouns the passage sets beside the word are the standard decoys.",
+        "reading_habit": "When a common word is used oddly, go back to its first appearance and read the sentence before it; authors usually define a borrowed word by the list or image that precedes it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage concerns persuading the public; the drawing is the reformer's own account of the system, and its audience is the reformer.",
+            "seductive_element": "A drawing in the everyday sense is a picture made to be shown, and reforms are indeed sold to the public."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The reply is what the drawing cannot contain; p3 says the drawing 'shows the first move', and the second move belongs to the people, not to the plan.",
+            "seductive_element": "It borrows 'second move' and 'reply' from the same paragraphs in which the drawing is discussed."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Paragraph 3 says the reformer must 'stop reading the drawing as a prediction'; the drawing is the thing that gets mistaken for a forecast, so it cannot be one.",
+            "seductive_element": "The words 'drawing' and 'prediction' sit in one sentence, and a hurried reader joins them."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "malfunction",
+      "passage_use": "None of these replies was a malfunction.",
+      "meaning_here": "a failure of a machine or system to work as designed",
+      "difficulty": "easy"
+    },
+    {
+      "word": "futile",
+      "passage_use": "This does not make reform futile",
+      "meaning_here": "pointless; incapable of producing any useful result",
+      "difficulty": "medium"
+    },
+    {
+      "word": "prescribed",
+      "passage_use": "here is the system, here is the faulty part",
+      "meaning_here": "laid down in advance as the required way",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "An analogy carries the whole argument here. Watch for the moment the author limits the analogy, because two of the questions are built on that limit.",
+    "one_sentence_summary": "Reforms produce consequences their designers did not intend because a reform is not a repair to a machine but a move to which people reply, and the designers' plan, honest about the system, never asked what the people would do.",
+    "main_idea": "A reform is planned like a repair, but people notice being changed and respond, as an opponent replies to a chess move. The consequences nobody intended are usually those replies. So the reformer's question should not be what the change will do but what people will do about it.",
+    "simple_explanation": "When people plan a reform, they draw it like fixing a machine: here is the broken part, here is the new part, here is the better result. The drawing is usually right about everything in it. But a machine's parts do not notice they have been fixed. People do.\n\nSo the author says a reform is not a repair; it is a move, like a move in chess. Imagine a player who plans four moves ahead as if the other side's pieces will never move. Every step is legal and every calculation is right, and the plan collapses the moment the opponent replies. Real reforms fail the same way. Cap rents, and landlords take their flats off the market. Require a licence, and an unlicensed trade appears. Give scholarships to the poorest, and families arrange to look poorer. None of that is the system breaking. It is people making their move after understanding yours.\n\nThen comes the limit. This does not mean reform is hopeless, and it does not mean people are enemies; many replies are helpful, and some make the reform better. What it means is that the reformer must stop treating the drawing as a prediction. The drawing shows only the first move. The consequences 'nobody intended' were rarely mistakes about the system; they were questions nobody asked about the people. The right question is not 'what will this change do?' but 'what will people do about it?'",
+    "why_difficult": "The chess image is so strong that readers carry its vocabulary, opponents and defeat, into the final paragraph, where the author quietly takes both away. The examples all end in evasion, which invites a moral the passage does not draw. And the word 'drawing' is used in a borrowed sense that a reader must fix from the first sentence and hold against two nearby nouns, the prediction and the reply.",
+    "author_intention": "To replace one picture of reform, the repair, with another, the move, and to make the reader see that 'unintended consequences' is usually a polite name for a question the designers never asked.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0045-p1",
+        "role": "The repair picture",
+        "note": "A reform is planned like a repair, and the plan is usually right about everything it contains. What it cannot contain is that people, unlike machine parts, notice."
+      },
+      {
+        "paragraph_id": "rc-0045-p2",
+        "role": "The move picture",
+        "note": "A reform is a move that gets a reply, like chess against an opponent the plan ignored. Three reforms are followed by three replies, none of them a malfunction."
+      },
+      {
+        "paragraph_id": "rc-0045-p3",
+        "role": "Limits and redirects",
+        "note": "Reform is not futile and people are not enemies. The reformer must stop reading the drawing as a prediction and ask instead what people will do about the change."
+      }
+    ],
+    "tone_progression": "Descriptive and faintly ironic in the first paragraph, confident and illustrative in the second, and corrective in the third, where the author reins in the analogy and ends on a redirected question rather than a verdict.",
+    "key_transitions": [
+      "'It is closer to the truth to say that a reform is not a repair but a move.' (start of paragraph 2) — the analogy is replaced.",
+      "'This does not make reform futile, and it does not require that the people a reform addresses be imagined as opponents' (start of paragraph 3) — the analogy is limited before it is applied."
+    ],
+    "misunderstanding": "Readers who love the chess image summarise the passage as 'people fight reforms, so reforms fail'. The author says neither: the replies may be cooperative, and reform is not futile. The claim is about where unintended consequences come from, an unasked question rather than a miscalculation, and the passage ends by supplying the question.",
+    "traps_summary": "This set rewards readers who hold the analogy at the author's strength. Options that make people opponents, that promise reforms free of surprises, that rank the examples, or that read 'drawing' as a picture or a forecast all come from taking the image further than the third paragraph allows.",
+    "reading_lesson": "When an analogy carries an argument, find the sentence where the author says what the analogy is for and the sentence where the author says where it stops. Answer every question from those two sentences, never from the image itself, which the exam will always offer you as an option.",
+    "real_world": "Every pricing change, every new rule at work and every incentive scheme is a first move; the people it addresses will make the second, and the results you did not intend are their reply.",
+    "takeaway": "Ask not what a change will do but what people will do about it; the answer is the reform you actually made.",
+    "reflection_question": "Think of a rule you introduced, at home or at work, that produced something you did not intend: which question about the people affected did you never ask?"
+  }
+}

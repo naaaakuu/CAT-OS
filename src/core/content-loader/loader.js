@@ -1304,6 +1304,11 @@ export function bankConsistencyIssues(type, id, item) {
         if (m.kind === 'confusable') {
           if (!stem.includes('____')) issues.push(`${it.id}: a confusable stem must carry a blank written as ____`);
           if (!LETTERS4.some((l) => it.options[l].trim().toLowerCase() === it.word.trim().toLowerCase())) issues.push(`${it.id}: the wanted word "${it.word}" is not one of the options`);
+        } else if (stem.includes('____')) {
+          // Register / connotation / synonym items may use a blank; the
+          // wanted word is then the correct option itself.
+          if (m.kind === 'context' || m.kind === 'decode') issues.push(`${it.id}: ${m.kind} items show the word in its sentence, not a blank`);
+          if (String(it.options[it.correct]).trim().toLowerCase() !== it.word.trim().toLowerCase()) issues.push(`${it.id}: with a blank, "word" must be the correct option ("${it.options[it.correct]}")`);
         } else {
           const w = it.word.toLowerCase().split(' ')[0];
           const probe = w.slice(0, Math.max(4, w.length - 3));

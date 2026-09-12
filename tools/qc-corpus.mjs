@@ -79,7 +79,7 @@ export function runCorpusQC() {
   const hygiene = (text, where) => {
     const t = String(text ?? '');
     if (/  /.test(t)) warnings.push(`${where}: double space`);
-    if (/ [,.;:?!]/.test(t)) warnings.push(`${where}: space before punctuation`);
+    if (/ [,;:?!]| \.(?!\.\.)/.test(t)) warnings.push(`${where}: space before punctuation`);
     if (t !== t.trim()) warnings.push(`${where}: leading or trailing space`);
   };
   const letterMentions = (text, where, expected) => {

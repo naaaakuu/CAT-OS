@@ -1,0 +1,828 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "wb-0060",
+    "type": "wb",
+    "version": 1,
+    "status": "accepted",
+    "kind": "connotation",
+    "band": "core",
+    "title": "Connotation · the same meaning, a different colour",
+    "item_count": 20,
+    "estimated_time_sec": 35,
+    "source": {
+      "publication": "original",
+      "usage_note": "Every sentence, option and explanation composed for CAT OS. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-wb-002",
+    "reviewer_notes": "The first connotation bundle: each sentence carries an attitude in its other words — admiration, complaint, alarm, tenderness — and only one of four near-synonyms carries the same attitude. The traps are the approving word in a disapproving sentence and the reverse, plus the word at the wrong strength.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Item 7: 'conventional' is the live rival to 'formulaic'; it is milder and neutral, while 'familiar beats in a familiar order, with nothing at stake' describes a formula, which is a charge. Item 12: 'detailed' is neutral and true of the account, but the sentence's point is that details were invented, which 'embellished' names and 'detailed' does not. Item 19: 'overpowering' would fit a sentence that complained; this one does not — a chapel, lilies, scent that lingers — so the approving 'heady' is the match.",
+      "blind_solve": null
+    }
+  },
+  "items": [
+    {
+      "id": "wb-0060-01",
+      "word": "meticulous",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "Everyone in the office admired his ____ attention to detail; nothing left his desk with an error in it.",
+      "options": {
+        "A": "fussy",
+        "B": "nitpicking",
+        "C": "obsessive",
+        "D": "meticulous"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "'Admired' sets the colouring: the sentence approves of the attention to detail, so the adjective must approve too.",
+        "correct_reasoning": "'Meticulous' praises care; it is the only option whose colouring matches 'admired' and the flawless result the sentence reports.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Fussy' disapproves — care that irritates — and cannot sit beside 'admired'."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Nitpicking' is informal and hostile; it belongs to a complaint, not an admiring sentence."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Obsessive' pushes care into pathology; the sentence describes a virtue, not a compulsion."
+          }
+        ],
+        "method": "Find the verdict word in the sentence — 'admired', 'complained', 'feared' — and choose the near-synonym that shares its attitude."
+      }
+    },
+    {
+      "id": "wb-0060-02",
+      "word": "concise",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "The report was ____ and to the point, and the committee thanked her for it.",
+      "options": {
+        "A": "concise",
+        "B": "curt",
+        "C": "skimpy",
+        "D": "abrupt"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'Thanked her for it' approves of the brevity. The adjective must praise shortness, not complain of it.",
+        "correct_reasoning": "'Concise' is brevity as a virtue — everything needed, nothing more — which is what a committee thanks a writer for.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Curt' is brevity as rudeness; nobody thanks a curt report."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Skimpy' is informal and implies too little — a report short on what it should contain."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Abrupt' suggests an ending that came too suddenly, a fault rather than a merit."
+          }
+        ],
+        "method": "Brevity has an approving word (concise), a neutral word (brief) and disapproving words (curt, terse, skimpy). Let the sentence's reaction pick the colour."
+      }
+    },
+    {
+      "id": "wb-0060-03",
+      "word": "recklessness",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "inf.reasonable_implication"
+      ],
+      "difficulty": 2,
+      "stem": "He spent money with a ____ that left his family anxious about the winter.",
+      "options": {
+        "A": "generosity",
+        "B": "open-handedness",
+        "C": "recklessness",
+        "D": "liberality"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'Left his family anxious about the winter' is the verdict: the spending is a danger, not a virtue.",
+        "correct_reasoning": "'Recklessness' is spending as a fault — heedless of consequences — which is exactly what a family anxious about the winter has suffered.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Generosity' praises the spending; a sentence about a frightened family is not praising it."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Open-handedness' is warm and informal, and approving; it does not fit the alarm in the sentence."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Liberality' is formal praise for giving freely; the consequence clause forbids praise."
+          }
+        ],
+        "method": "Read to the end of the sentence before choosing. The consequence clause ('that left his family anxious') tells you which colouring the noun must carry."
+      }
+    },
+    {
+      "id": "wb-0060-04",
+      "word": "resolute",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "The negotiator's ____ refusal to move on price wore the other side down and won the contract.",
+      "options": {
+        "A": "stubborn",
+        "B": "resolute",
+        "C": "pig-headed",
+        "D": "inflexible"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'Won the contract' is the outcome the sentence admires, so the refusal is being praised as firmness, not blamed as obstinacy.",
+        "correct_reasoning": "'Resolute' is firmness as a virtue; it matches a sentence that credits the refusal with a victory.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Stubborn' is firmness as a fault; it would suit a sentence about a lost deal, not a won one."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Pig-headed' is slang and openly insulting."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Inflexible' is at best neutral and usually a criticism — a quality that loses deals in most sentences."
+          }
+        ],
+        "method": "The same behaviour has a praising name and a blaming name (resolute / stubborn, thrifty / mean, confident / arrogant). The sentence's outcome tells you which is being used."
+      }
+    },
+    {
+      "id": "wb-0060-05",
+      "word": "domineering",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "The new manager's ____ style — every decision announced, none explained — emptied the department within a year.",
+      "options": {
+        "A": "decisive",
+        "B": "authoritative",
+        "C": "domineering",
+        "D": "assertive"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'None explained' and 'emptied the department' condemn the style; the adjective must condemn it too.",
+        "correct_reasoning": "'Domineering' names authority exercised as bullying — the colouring the parenthesis and the consequence both demand.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Decisive' praises the same behaviour; the sentence is not praising it."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Authoritative' means commanding respect through competence — the opposite of a style that drives people out."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Assertive' is mild and often approving; it is far too gentle for a manager who emptied a department."
+          }
+        ],
+        "method": "A dash or parenthesis that explains the behaviour ('every decision announced, none explained') is the author's judgement. Match the adjective to the judgement, not to the behaviour alone."
+      }
+    },
+    {
+      "id": "wb-0060-06",
+      "word": "modest",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "She was ____ about her achievements, mentioning the prize only when asked directly.",
+      "options": {
+        "A": "secretive",
+        "B": "cagey",
+        "C": "evasive",
+        "D": "modest"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "She does answer when asked directly, so nothing is being hidden; the reticence is a grace, not a concealment.",
+        "correct_reasoning": "'Modest' names reticence about one's own achievements as a virtue — exactly the behaviour of someone who mentions a prize only when asked.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Secretive' implies concealment for a reason; she conceals nothing when asked."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Cagey' is informal and suspicious, the word for someone dodging a question — which she does not."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Evasive' accuses; the sentence reports a quiet virtue, not an evasion."
+          }
+        ],
+        "method": "Ask what the behaviour is being read as — hiding, or holding back? The clause 'only when asked directly' shows holding back, which takes the approving word."
+      }
+    },
+    {
+      "id": "wb-0060-07",
+      "word": "formulaic",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym",
+        "elim.near_tie"
+      ],
+      "difficulty": 3,
+      "stem": "Critics called the film's plot ____: familiar beats in a familiar order, with nothing at stake.",
+      "options": {
+        "A": "classic",
+        "B": "formulaic",
+        "C": "conventional",
+        "D": "time-honoured"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "The colon explains the charge: familiar beats in a familiar order, nothing at stake. That is the description of a formula being followed, and 'critics called' makes it a complaint.",
+        "correct_reasoning": "'Formulaic' is the critics' word for a plot assembled from a recipe; it is disapproving and specific, matching both the tone and the description after the colon.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Classic' praises familiarity; critics who found nothing at stake were not praising."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Conventional' is the near-tie: neutral, and mild. The description after the colon is harsher than mild — it names a formula, not merely a convention."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Time-honoured' is warm and respectful, the opposite of a critic's complaint."
+          }
+        ],
+        "method": "When two options share a colouring, choose the one whose strength matches the sentence's evidence. A description that lists faults wants the stronger, more specific word."
+      }
+    },
+    {
+      "id": "wb-0060-08",
+      "word": "eloquent",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "The senator's ____ speech, delivered without notes, moved even her opponents.",
+      "options": {
+        "A": "eloquent",
+        "B": "glib",
+        "C": "slick",
+        "D": "wordy"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'Moved even her opponents' is admiration; the adjective must admire the speaking.",
+        "correct_reasoning": "'Eloquent' is fluency as a gift — persuasive and felt — the only option a sentence about moving one's opponents can carry.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Glib' is fluency as a fault: smooth and shallow. Glib speeches do not move opponents."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Slick' is informal and suspicious, the word for a salesman's patter."
+          },
+          {
+            "option": "D",
+            "trap_type": "context_mismatch",
+            "why_wrong": "'Wordy' is a complaint about length, not a description of effect, and it contradicts the praise."
+          }
+        ],
+        "method": "Fluency has a praising word (eloquent), a neutral word (fluent) and blaming words (glib, slick). Choose by the effect the sentence reports."
+      }
+    },
+    {
+      "id": "wb-0060-09",
+      "word": "immaculate",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation"
+      ],
+      "difficulty": 2,
+      "stem": "The inspector found the kitchen ____ — every surface scrubbed, every knife in its place.",
+      "options": {
+        "A": "immaculate",
+        "B": "sterile",
+        "C": "clinical",
+        "D": "fastidious"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "The dash lists the evidence with quiet approval; nothing in the sentence finds the cleanliness cold or excessive.",
+        "correct_reasoning": "'Immaculate' is cleanliness praised — spotless, well kept — matching an inspector's satisfied list.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Sterile' carries coldness and lifelessness; it turns a compliment into a chill."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Clinical' suggests a hospital's impersonal cleanliness, a colouring the sentence does not invite."
+          },
+          {
+            "option": "D",
+            "trap_type": "collocation_clash",
+            "why_wrong": "'Fastidious' describes a person's care, not a room; a kitchen cannot be fastidious."
+          }
+        ],
+        "method": "Some near-synonyms add a chill (sterile, clinical) and some add a person (fastidious). Check that the option describes the right thing with the colouring the sentence wants."
+      }
+    },
+    {
+      "id": "wb-0060-10",
+      "word": "prying",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "Their ____ questions about her salary and her marriage made the dinner unbearable.",
+      "options": {
+        "A": "curious",
+        "B": "searching",
+        "C": "prying",
+        "D": "interested"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'Made the dinner unbearable' condemns the questions, and salary and marriage are private matters — the questions intrude.",
+        "correct_reasoning": "'Prying' names curiosity that intrudes on what is private; it carries the resentment the sentence expresses.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Curious' is neutral to warm; it does not explain an unbearable dinner."
+          },
+          {
+            "option": "B",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Searching' questions are penetrating and often admirable, the questions of a good interviewer — not an intrusion."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Interested' is approving; it describes attention that flatters rather than offends."
+          }
+        ],
+        "method": "Curiosity has a scale of colourings: interested, curious, inquisitive, nosy, prying. The subject matter (private things) and the result (an unbearable dinner) place the sentence at the hostile end."
+      }
+    },
+    {
+      "id": "wb-0060-11",
+      "word": "homely",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 3,
+      "stem": "The old inn was ____ rather than grand: low beams, worn chairs, and a fire that had been lit every evening for a century.",
+      "options": {
+        "A": "shabby",
+        "B": "run-down",
+        "C": "dilapidated",
+        "D": "homely"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "'Rather than grand' contrasts two kinds of merit, and the list after the colon is affectionate — a fire lit every evening for a century is praise.",
+        "correct_reasoning": "'Homely' (in the British sense: plain, comfortable, welcoming) is the affectionate opposite of grand, which is what the sentence's tender inventory describes.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Shabby' is worn-ness as neglect; the century-old fire says the place is cared for."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Run-down' is informal and disapproving, the word for a place nobody minds any more."
+          },
+          {
+            "option": "C",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Dilapidated' means falling apart; worn chairs are not a collapsing building."
+          }
+        ],
+        "method": "'X rather than Y' contrasts two goods or two faults, not a good and a fault. If Y is praise ('grand'), X is a different kind of praise."
+      }
+    },
+    {
+      "id": "wb-0060-12",
+      "word": "embellished",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "inf.reasonable_implication"
+      ],
+      "difficulty": 3,
+      "stem": "The witness gave a ____ account, adding details that could not have been visible from where he stood.",
+      "options": {
+        "A": "vivid",
+        "B": "embellished",
+        "C": "thorough",
+        "D": "detailed"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'Details that could not have been visible' is an accusation: the witness added what he could not have seen. The adjective must carry that charge.",
+        "correct_reasoning": "'Embellished' means decorated with invented additions — an account improved beyond the truth — which is exactly what the sentence's evidence implies.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Vivid' praises; the sentence is undermining the account, not admiring it."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Thorough' credits the witness with completeness, when the details are suspect."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Detailed' is neutral and true as far as it goes, but it misses the point the clause makes — that the details were invented."
+          }
+        ],
+        "method": "When a sentence supplies evidence against what it describes, the adjective must name the fault the evidence proves. Neutral truth is not enough; the word has to carry the charge."
+      }
+    },
+    {
+      "id": "wb-0060-13",
+      "word": "transparent",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.polysemy"
+      ],
+      "difficulty": 2,
+      "stem": "The charity's accounts were ____: every rupee traceable, every decision minuted.",
+      "options": {
+        "A": "exposed",
+        "B": "bare",
+        "C": "naked",
+        "D": "transparent"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "The list after the colon is praise — traceable money, minuted decisions — so the adjective must name openness as a virtue.",
+        "correct_reasoning": "'Transparent', of accounts, means open to inspection and honest; it is the approving word for the openness the colon describes.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Exposed' suggests something laid open against its will, a scandal rather than a virtue."
+          },
+          {
+            "option": "B",
+            "trap_type": "context_mismatch",
+            "why_wrong": "'Bare' accounts would be empty or minimal, not open; the sense does not fit."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Naked' is a vivid figure that adds embarrassment; it is the wrong tone for a compliment about bookkeeping."
+          }
+        ],
+        "method": "Openness has an approving technical word (transparent) and words that make it a humiliation (exposed, naked). A sentence that lists virtues wants the first."
+      }
+    },
+    {
+      "id": "wb-0060-14",
+      "word": "generous",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "He was ____ in his praise, and the young author left the meeting glowing.",
+      "options": {
+        "A": "unrestrained",
+        "B": "generous",
+        "C": "excessive",
+        "D": "gushing"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'Left the meeting glowing' approves of the praise and its effect; the adjective must approve of it too.",
+        "correct_reasoning": "'Generous in his praise' is the approving idiom for praise given freely and warmly, and the glow it produced confirms the colouring.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Unrestrained' hints that restraint was called for; it is a shade critical and stronger than the sentence needs."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Excessive' is a judgement that the praise was too much — a complaint, not a compliment."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Gushing' is informal and mocking; it belittles both the praiser and the praised."
+          }
+        ],
+        "method": "Praise itself has colourings: generous (approving), lavish (neutral to critical), excessive and gushing (critical). The effect the sentence reports ('glowing') fixes the colouring."
+      }
+    },
+    {
+      "id": "wb-0060-15",
+      "word": "suppression",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "The regime's ____ of the press left the country with one newspaper and no news.",
+      "options": {
+        "A": "suppression",
+        "B": "regulation",
+        "C": "oversight",
+        "D": "management"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'One newspaper and no news' is the outcome, and it condemns whatever produced it. The noun must name an act of force, not administration.",
+        "correct_reasoning": "'Suppression' names the silencing of the press as an abuse; it matches both 'regime' and the outcome.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Regulation' is neutral and lawful; it does not produce a country with no news."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Oversight' is mild and even approving — supervision in the public interest."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Management' is the regime's own euphemism, far too soft for what the sentence describes."
+          }
+        ],
+        "method": "Power over something has a euphemism, a neutral term and an accusing term (management / regulation / suppression). Let the consequences named in the sentence choose the term."
+      }
+    },
+    {
+      "id": "wb-0060-16",
+      "word": "local",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 3,
+      "stem": "The village doctor was ____ in the best sense: he knew every family and treated them at their kitchen tables.",
+      "options": {
+        "A": "provincial",
+        "B": "parochial",
+        "C": "local",
+        "D": "small-town"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "'In the best sense' warns that the word has a worse sense, and the colon shows the best sense: rootedness and care. The adjective must be one whose plain meaning is a virtue here.",
+        "correct_reasoning": "'Local' is neutral, and the sentence turns it into praise by explaining it; the doctor's virtue is that he belongs to the place.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Provincial' is a sneer — narrow, unsophisticated — and 'in the best sense' cannot rescue it, because the sentence is about knowing families, not about breadth of mind."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Parochial' means narrow-minded; it is almost always a criticism, and nothing after the colon concerns narrowness of mind."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_register",
+            "why_wrong": "'Small-town' is informal and faintly condescending, the voice of someone from the city."
+          }
+        ],
+        "method": "'In the best sense' signals a word with two colourings. Pick the word whose good sense is the one the explanation describes; a word that only has a bad sense is not rescued by the phrase."
+      }
+    },
+    {
+      "id": "wb-0060-17",
+      "word": "contemptuous",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "The prosecutor's ____ tone — every sentence a sneer — turned the jury against her.",
+      "options": {
+        "A": "contemptuous",
+        "B": "confident",
+        "C": "spirited",
+        "D": "firm"
+      },
+      "correct": "A",
+      "explanation": {
+        "clue": "'Every sentence a sneer' describes the tone; 'turned the jury against her' judges it. The adjective must name scorn.",
+        "correct_reasoning": "'Contemptuous' is a tone of scorn — the sneer named — and it explains why a jury would turn against the speaker.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Confident' praises; confidence does not lose juries, and it is not a sneer."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Spirited' is approving — lively, brave — and has nothing of the sneer in it."
+          },
+          {
+            "option": "D",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Firm' is neutral and far too mild for a tone made of sneers."
+          }
+        ],
+        "method": "A parenthesis that shows the behaviour ('every sentence a sneer') is a definition; choose the adjective that means what the parenthesis shows."
+      }
+    },
+    {
+      "id": "wb-0060-18",
+      "word": "naive",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 3,
+      "stem": "The scheme was ____ in the way that only a plan drawn up by people who had never visited the district could be.",
+      "options": {
+        "A": "ambitious",
+        "B": "naive",
+        "C": "bold",
+        "D": "imaginative"
+      },
+      "correct": "B",
+      "explanation": {
+        "clue": "'Drawn up by people who had never visited the district' is a criticism: the plan lacks knowledge of its subject. The adjective must name that lack.",
+        "correct_reasoning": "'Naive' names a plan innocent of the facts it needed — the fault the sentence attributes to planners who never visited.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Ambitious' praises scope; the sentence criticises ignorance, not scope."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Bold' admires daring; there is no admiration in a sentence that mocks the planners' absence."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Imaginative' is a compliment, and the sentence's irony points the other way."
+          }
+        ],
+        "method": "When the sentence's explanation is ironic ('in the way that only… could be'), the adjective is a criticism dressed politely. Choose the fault the irony identifies."
+      }
+    },
+    {
+      "id": "wb-0060-19",
+      "word": "heady",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 3,
+      "stem": "The ____ scent of the lilies filled the chapel and lingered in everyone's coats.",
+      "options": {
+        "A": "overpowering",
+        "B": "cloying",
+        "C": "heady",
+        "D": "sickly"
+      },
+      "correct": "C",
+      "explanation": {
+        "clue": "Nothing in the sentence complains: a chapel, lilies, a scent that lingers. Without a complaint, the adjective must be the one that does not complain.",
+        "correct_reasoning": "'Heady' is a strong scent enjoyed — intoxicating — the only option whose colouring is neutral to approving, matching a sentence that reports rather than objects.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Overpowering' turns strength into discomfort; the sentence gives no sign that anyone was overpowered."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Cloying' means sickly-sweet to the point of disgust; that is a complaint the sentence does not make."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Sickly' is disapproving and would need a sentence that objects to the scent."
+          }
+        ],
+        "method": "When a sentence contains no verdict word at all, the neutral or approving near-synonym is the safe one; the disapproving options need a complaint to attach to."
+      }
+    },
+    {
+      "id": "wb-0060-20",
+      "word": "evasive",
+      "skill": "word_precision",
+      "patterns": [
+        "word.connotation",
+        "word.near_synonym"
+      ],
+      "difficulty": 2,
+      "stem": "The minister's ____ answer — a paragraph that touched every subject but the one raised — was quoted for weeks.",
+      "options": {
+        "A": "thoughtful",
+        "B": "diplomatic",
+        "C": "comprehensive",
+        "D": "evasive"
+      },
+      "correct": "D",
+      "explanation": {
+        "clue": "'Every subject but the one raised' is a definition of avoiding the question; 'quoted for weeks' says it became notorious.",
+        "correct_reasoning": "'Evasive' names an answer that avoids the question; the dash shows the avoidance and the notoriety confirms the colouring.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Thoughtful' praises; an answer that dodges the question is not being praised."
+          },
+          {
+            "option": "B",
+            "trap_type": "near_synonym_wrong_degree",
+            "why_wrong": "'Diplomatic' is a polite word for tact; the answer is worse than tactful, it is a dodge, and the sentence's mockery says so."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_connotation",
+            "why_wrong": "'Comprehensive' admires breadth; here breadth is the trick, and the sentence is not admiring it."
+          }
+        ],
+        "method": "A dash that shows what the answer did ('touched every subject but the one raised') is the author's verdict. Name the fault the dash describes, at its full strength."
+      }
+    }
+  ]
+}

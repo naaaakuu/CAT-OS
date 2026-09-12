@@ -1,0 +1,324 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0042",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "religion-belief",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "structure-mapping",
+      "inference",
+      "argument-tracking",
+      "evidence-anchoring"
+    ],
+    "word_count": 334,
+    "question_count": 3,
+    "question_types": [
+      "except",
+      "inference",
+      "main_idea"
+    ],
+    "theme": "how the category of the sacred moved from the property of the gods to whatever a community sets apart and forbids, and whether extending it to godless societies was a discovery or a redefinition",
+    "estimated_time_min": 6,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-01",
+    "reviewer_notes": "A short history-of-an-idea in three stages, closing on an unresolved dispute. The EXCEPT question tests stage-tracking (which stage said what); the inference question lives on the defenders' single sentence; the main-idea question offers each stage's content as a thesis.",
+    "length_class": "short",
+    "structure": "history_of_an_idea",
+    "viewpoints": 4,
+    "tone": "expository, lightly sceptical",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "struct.history_of_an_idea",
+      "meta.attention",
+      "inf.strongly_supported",
+      "inf.author_vs_reported",
+      "lang.absolute_vs_qualified",
+      "comp.central_idea",
+      "scope.too_narrow",
+      "struct.chronology",
+      "arg.causal_claim"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival for the exception is the sociology-not-theology option, which a reader may file under the third stage because the extension to godless societies feels like the sociological moment; but p2 says in so many words that the reversal 'turned the study of the sacred from theology into sociology'. The god-ownership option is p1's understanding, which p2 exists to reverse. Q2: the strongest wrong case is 'remains the best account for societies that still worship gods'; it dies on the defenders' 'always' — if the prohibition was always the phenomenon, the god-based account was a mistaken description even where gods were believed in. The critics' 'stopped finding anything' is about the third step and belongs to the other side. Q3: the option stating that prohibition, not divinity, creates sacredness is the tempting one because it is the passage's boldest sentence; it drops the first stage and, more decisively, presents as settled what the final paragraph leaves 'disputed'.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "profane",
+      "constituted"
+    ]
+  },
+  "passage": {
+    "title": "Set Apart and Forbidden",
+    "reading_time_min": 1.9,
+    "paragraphs": [
+      {
+        "id": "rc-0042-p1",
+        "text": "The word 'sacred' began its life as a description. In the languages that first used it, sacred things were the property of the gods: a grove, a day, a portion of the harvest, a building. The profane was, literally, what lay in front of the temple, outside it, and so it was simply everything else. On this understanding sacredness was a quality that a thing possessed, and to ask what made something sacred was to ask which god it belonged to."
+      },
+      {
+        "id": "rc-0042-p2",
+        "text": "The scholars who founded the comparative study of religion reversed the direction of the question. What sacred things had in common, they noticed, was not any quality of their own — a stone, a word, a season and an animal share nothing — but the way a community treated them: set apart, hedged with prohibitions, approached only in prescribed ways. The prohibition did not follow from the sacredness; it constituted it. A thing was sacred because it was forbidden, not forbidden because it was sacred. This reversal turned the study of the sacred from theology into sociology. To learn what a society holds sacred, one no longer asked its priests; one looked for what it would not allow to be touched, spoken or mixed."
+      },
+      {
+        "id": "rc-0042-p3",
+        "text": "The third step followed almost by itself. If the sacred is a matter of separation and prohibition rather than of gods, then societies without gods have sacred things too: a flag that must not touch the ground, a founding document that may be altered only by special procedures, a human body that may not be bought or sold. A category that began as a description of the gods' property ended as an instrument for finding the untouchable in any society, including those that believed they had abolished it. Whether this was a discovery or merely a redefinition remains disputed. Critics object that a concept which finds sacredness everywhere has stopped finding anything. Defenders reply that the prohibition was always the phenomenon, and the gods were only ever its explanation."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0042-q1",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "struct.history_of_an_idea",
+        "meta.attention"
+      ],
+      "target_mistake": "assigning a claim to the wrong stage of the idea's history, so that the first understanding's god-ownership looks like part of the second, or the second's turn to sociology looks like part of the third",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the second understanding of the sacred, introduced by the founders of the comparative study of religion, held each of the following EXCEPT:",
+      "options": {
+        "A": "that sacred things share no quality of their own, only the treatment a community gives them",
+        "B": "that a thing is sacred because of the particular god to whom it belongs",
+        "C": "that the prohibitions around a thing are the source of its sacredness rather than a result of it",
+        "D": "that the sacred was a subject for sociology rather than for theology"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage is a history in three stages, and each paragraph is one stage. The second stage is paragraph 2, whose claims are: no shared quality, only shared treatment; prohibition constitutes sacredness; the study moves from theology to sociology. Belonging to a god is the first stage's answer, the very thing paragraph 2 'reversed'.",
+        "correct_reasoning": "Three options paraphrase the three claims of paragraph 2. The remaining one, that a thing is sacred because of the god it belongs to, is paragraph 1's understanding: 'to ask what made something sacred was to ask which god it belonged to'. The second understanding was defined by rejecting exactly that, so it is the exception.",
+        "passage_anchor": "rc-0042-p2",
+        "question_type_note": "An EXCEPT question in a history-of-an-idea passage is a stage-matching task: tick each option against the paragraph that owns the stage named in the stem, and the exception is the claim that belongs to a different stage.",
+        "reading_habit": "When a passage tells the history of an idea, write one line per stage as you read: who, what changed, what it implied. Detail questions will then offer you the right claim from the wrong stage.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is paragraph 2's observation that 'a stone, a word, a season and an animal share nothing' except 'the way a community treated them'; a reader matching words rather than claims may not recognise the paraphrase and reject it.",
+            "seductive_element": "The plain wording looks nothing like the passage's list of examples."
+          },
+          {
+            "option": "C",
+            "trap_type": "reversed_causation",
+            "why_wrong": "Paragraph 2 states this directly: 'The prohibition did not follow from the sacredness; it constituted it.' A reader who remembers the arrow the other way round will think this option reverses the passage, when it is the passage.",
+            "seductive_element": "The sentence is a chiasmus, and chiasmus is easy to remember backwards."
+          },
+          {
+            "option": "D",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "The move to sociology is made in paragraph 2, 'This reversal turned the study of the sacred from theology into sociology', not in the third stage; a reader who associates sociology with the godless societies of paragraph 3 misplaces the claim.",
+            "seductive_element": "The extension to flags and founding documents feels like the sociological moment."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0042-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.author_vs_reported",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "giving the critics' objection to the defenders, or restricting the defenders' 'always' to societies without gods",
+      "prediction_target": "The learner should predict from the defenders' sentence alone: if the prohibition was always the phenomenon and the gods only ever its explanation, then the first understanding took the explanation for the thing itself.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "The defenders' reply in the final paragraph implies that, in their view, the original understanding of the sacred",
+      "options": {
+        "A": "widened the category until it could no longer distinguish anything from anything else",
+        "B": "was a superstition that the comparative study of religion has since discredited",
+        "C": "remains the best account of sacredness for societies that still worship gods",
+        "D": "mistook an explanation of the phenomenon for the phenomenon itself"
+      },
+      "correct": "D",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The defenders speak one sentence: 'the prohibition was always the phenomenon, and the gods were only ever its explanation'. Paragraph 1 says the original understanding located sacredness in belonging to a god. Put the two together: what the first understanding treated as sacredness itself was, on the defenders' account, only its explanation.",
+        "correct_reasoning": "If the phenomenon was always the prohibition and the gods were only ever its explanation, then an understanding that defined the sacred as the gods' property was describing the explanation and calling it the phenomenon. The correct option states that consequence and nothing more; it does not say the explanation was false, only that it was mistaken for the thing it explained.",
+        "passage_anchor": "rc-0042-p3",
+        "question_type_note": "An inference about a reported party is answered from that party's own words; the other party's words and the author's framing are the decoys, and 'always' fixes how far the reply reaches.",
+        "reading_habit": "When a passage ends with 'critics say… defenders reply…', copy each side's sentence out separately before answering anything about either. Then test the option against that sentence only.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "misattributed_view",
+            "why_wrong": "This is the critics' objection, and it is aimed at the third step, the extension of the category to every society, not at the original understanding; the defenders answer this objection rather than make it.",
+            "seductive_element": "It is the most quotable line in the final paragraph and sounds like a verdict on a mistake."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The defenders keep the gods as an explanation of the prohibition; they demote the first understanding, they do not call it a superstition or say it has been discredited, and the passage reports the whole matter as still 'disputed'.",
+            "seductive_element": "It takes the defenders' side and pushes their demotion of the gods to a dismissal."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The defenders say the prohibition was 'always' the phenomenon, which leaves no society, god-worshipping or not, in which the god-based account describes the phenomenon rather than its explanation.",
+            "seductive_element": "It seems fair-minded to let each account keep its own territory, and the passage's godless examples suggest the new account is for the new cases."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0042-q3",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.history_of_an_idea",
+        "scope.too_narrow",
+        "inf.author_vs_reported"
+      ],
+      "target_mistake": "taking the boldest sentence of the second stage for the thesis, or adopting one side of the closing dispute as the author's conclusion",
+      "prediction_target": "The learner should be able to say: the sacred began as what belongs to the gods, became whatever a community sets apart and forbids, was then found in societies without gods, and whether that was a discovery or a redefinition is still argued.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "scope"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Sacredness is produced by prohibition rather than by divinity, and so every society, whether or not it has gods, turns out to possess sacred things of its own.",
+        "B": "The sacred was redefined from what belongs to the gods to whatever a community sets apart and forbids, which extended the category to godless societies and left its status disputed.",
+        "C": "Because the modern concept of the sacred discovers sacredness in every society it examines, including those without gods, it has stopped identifying anything distinctive at all.",
+        "D": "The study of religion advanced once scholars stopped asking priests what was sacred and began observing what their societies refused to allow to be touched, spoken or mixed."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "A history-of-an-idea passage has its main idea in the trajectory, not in any one stage: description (p1), reversal (p2), extension (p3), and then the author's own framing of the result, 'Whether this was a discovery or merely a redefinition remains disputed'. The winner must contain the movement and the open ending.",
+        "correct_reasoning": "The correct option follows the passage's own arc, from the gods' property to whatever is set apart and forbidden, through the extension to godless societies, and it keeps the author's final stance, which is to report a dispute rather than settle it. It is the only option that is neither one stage nor one side.",
+        "passage_anchor": "rc-0042-p3",
+        "question_type_note": "For a passage that narrates how an idea changed, the main idea is the change and what the change showed; options that state one stage's content as a settled truth are describing a paragraph, not the passage.",
+        "reading_habit": "Before reading main-idea options, ask whether the author ends by deciding or by reporting a disagreement. If the author reports one, any option that decides it is out.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This states the content of the second and third stages as an established fact; it omits the first stage and, more importantly, the closing paragraph, where the author treats the extension to every society as 'disputed' rather than as a result.",
+            "seductive_element": "It is the passage's boldest and most memorable claim, stated in the passage's own confident register."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the critics' objection in the final paragraph, which the author reports alongside the defenders' reply without adopting either; the passage's stance is that the matter 'remains disputed'.",
+            "seductive_element": "It is the last objection the reader meets, and it sounds like a conclusion."
+          },
+          {
+            "option": "D",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The turn from asking priests to observing prohibitions is one consequence of the second stage, offered in paragraph 2 to illustrate the reversal; it says nothing of the extension to godless societies or of the dispute, and 'advanced' is an evaluation the author never makes.",
+            "seductive_element": "It is the paragraph's most concrete image and reads like a moral for the whole story."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "profane",
+      "passage_use": "The profane was, literally, what lay in front of the temple, outside it",
+      "meaning_here": "not sacred; belonging to ordinary life outside the set-apart sphere",
+      "difficulty": "medium"
+    },
+    {
+      "word": "constituted",
+      "passage_use": "The prohibition did not follow from the sacredness; it constituted it.",
+      "meaning_here": "made up or created; was what the thing consisted of",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hedged",
+      "passage_use": "set apart, hedged with prohibitions, approached only in prescribed ways",
+      "meaning_here": "surrounded and protected, as if by a hedge",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "One idea, three stages, and a dispute at the end that the author does not settle. Keep track of which stage says what, and of who is speaking in the last four sentences.",
+    "one_sentence_summary": "The sacred began as whatever belonged to the gods, was redefined as whatever a community sets apart and forbids, and was then found in societies without gods, a move whose status as discovery or redefinition is still argued.",
+    "main_idea": "The category of the sacred changed from a description of the gods' property into a rule about separation and prohibition, which allowed scholars to find sacred things in secular societies. Whether that extension discovered something or merely renamed it remains contested.",
+    "simple_explanation": "The word 'sacred' started out meaning something simple: things that belong to the gods, such as a grove, a day or a building. Everything else was 'profane', which literally meant 'in front of the temple', outside it. If you asked why a thing was sacred, the answer was: because it belongs to this god.\n\nThen the first scholars to compare religions turned the question round. They noticed that sacred things have nothing in common as things: a stone, a word, a season, an animal. What they share is how people treat them: kept apart, surrounded by rules, approached only in certain ways. So, they said, the rules are not a result of the thing being sacred. The rules are what make it sacred. That changed the subject from theology to sociology: to find what a society holds sacred, do not ask its priests; look at what it will not let anyone touch, say or mix.\n\nThe third step follows naturally. If sacredness is about separation and rules, not gods, then societies with no gods have sacred things too: a flag that must not touch the ground, a constitution that can only be changed by special procedures, a body that cannot be bought or sold. The idea that began as a description of the gods' property ended up as a tool for finding the untouchable anywhere, even in societies that think they have no such thing.\n\nThe author ends without deciding. Critics say a concept that finds sacredness everywhere has stopped finding anything. Defenders reply that the rules were always the real thing, and the gods were only ever the explanation people gave for them.",
+    "why_difficult": "The passage narrates instead of arguing, so readers look for a thesis and pick the boldest sentence, 'A thing was sacred because it was forbidden', which is one stage, not the whole. The last paragraph then hands the microphone to two parties in four sentences, and a reader who does not mark the change of speaker will give the critics' line or the defenders' line to the author. The inference question depends on one word, 'always', in the defenders' reply.",
+    "author_intention": "To show how a category can travel from theology to sociology by a reversal of one causal arrow, and to leave the reader holding the open question of whether the travelling concept still means anything.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0042-p1",
+        "role": "The original meaning",
+        "note": "Sacred things were the gods' property; profane meant everything outside the temple. Sacredness was a quality a thing had, and the question was which god owned it."
+      },
+      {
+        "paragraph_id": "rc-0042-p2",
+        "role": "The reversal",
+        "note": "Scholars noticed sacred things share nothing but their treatment: set apart and forbidden. The prohibition makes the sacred, not the reverse, so the study becomes sociology."
+      },
+      {
+        "paragraph_id": "rc-0042-p3",
+        "role": "The extension and the dispute",
+        "note": "If sacredness is prohibition, godless societies have sacred things too: flags, constitutions, bodies. Was that a discovery or a redefinition? Critics and defenders disagree, and the author does not decide."
+      }
+    ],
+    "tone_progression": "Plainly expository through the first two stages, with a quiet relish for the reversal in the middle paragraph, then evenly balanced at the close, where the author states both sides of the dispute and declines to join either.",
+    "key_transitions": [
+      "'The scholars who founded the comparative study of religion reversed the direction of the question.' (start of paragraph 2) — the description becomes a theory.",
+      "'The third step followed almost by itself.' (start of paragraph 3) — the theory is extended past the gods.",
+      "'Whether this was a discovery or merely a redefinition remains disputed.' (paragraph 3) — the author steps back and lets two sides speak."
+    ],
+    "misunderstanding": "Hurried readers remember the passage as an argument that 'the sacred is really just prohibition' and treat the critics or the defenders as the author, depending on which they read last. But the passage is a history with an unresolved ending: it reports the reversal and the extension, and its own last word is 'disputed'.",
+    "traps_summary": "The set offers you claims from the wrong stage of the history, the critics' line as the author's, the defenders' demotion of the gods inflated into a dismissal, and the second stage's boldest sentence as the thesis. Track the stage and the speaker for every sentence and each trap falls away.",
+    "reading_lesson": "In a passage that tells the history of an idea, keep a running line for each stage and a separate line for each voice at the end. The main idea is the movement between the stages plus whatever the author says about it last, and no single stage, however striking, is the passage.",
+    "real_world": "Arguments about whether a flag, a monument, a constitution or a body may be treated as ordinary property are arguments about the sacred in exactly the passage's second sense, and they are conducted by people who would deny having anything sacred at all.",
+    "takeaway": "A thing is sacred because it is forbidden, or forbidden because it is sacred: which way the arrow points is the whole history of the idea.",
+    "reflection_question": "What in your own life may not be touched, sold or joked about, and would you call it sacred if the word did not sound religious?"
+  }
+}

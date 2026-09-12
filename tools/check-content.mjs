@@ -41,6 +41,51 @@ const schemaFor = (type, v) => {
   if (!schemaCache.has(key)) schemaCache.set(key, JSON.parse(readFileSync(join(root, 'content/schema', key), 'utf8')));
   return schemaCache.get(key);
 };
+/* Taxonomy ids: a file may only name skills, patterns and traps that exist.
+   qc-corpus catches invented ids across the corpus; catching them per file is
+   what lets an author fix their own batch before it reaches the registry. */
+const tax = JSON.parse(readFileSync(join(root, 'content/taxonomy/varc-taxonomy.json'), 'utf8'));
+const keys = (arr) => new Set((arr ?? []).map((t) => (typeof t === 'string' ? t : t.key ?? t.id)));
+const TAX = {
+  pattern: new Set(tax.reasoning_patterns.map((p) => p.id)),
+  skill: new Set(tax.skills.map((s) => s.key)),
+  trap: {
+    rc: keys(tax.trap_types),
+    sp: keys(tax.verbal.placement_traps),
+    wb: keys(tax.verbal.word_traps),
+    cr: keys(tax.verbal.cr_traps),
+    pj: keys(tax.verbal.pj_traps),
+    ps: keys(tax.verbal.ps_archetypes),
+    ooo: keys(tax.verbal.ooo_violations),
+  },
+};
+TAX.trap.pc = TAX.trap.sp;
+for (const set of Object.values(TAX.trap)) set.add('none');
+const ANY_TRAP = new Set([...TAX.trap.rc, ...TAX.trap.sp, ...TAX.trap.wb, ...TAX.trap.cr]);
+const TAXONOMY_TYPES = new Set(['rc', 'pj', 'ps', 'ooo', 'sp', 'pc', 'wb', 'cr', 'wd']);
+
+function taxonomyIssues(type, item) {
+  if (!TAXONOMY_TYPES.has(type)) return [];
+  const out = [];
+  const traps = TAX.trap[type] ?? ANY_TRAP;
+  const walk = (v, p) => {
+    if (!v || typeof v !== 'object') return;
+    if (Array.isArray(v)) { v.forEach((x, i) => walk(x, p + '[' + i + ']')); return; }
+    for (const [k, x] of Object.entries(v)) {
+      const where = p + '.' + k;
+      if ((k === 'patterns' || k === 'reasoning_patterns') && Array.isArray(x)) {
+        for (const pid of x) if (!TAX.pattern.has(pid)) out.push(where + ': pattern "' + pid + '" is not in the taxonomy');
+      } else if (k === 'skill' && typeof x === 'string') {
+        if (!TAX.skill.has(x)) out.push(where + ': skill "' + x + '" is not in the taxonomy');
+      } else if ((k === 'trap_type' || k === 'primary_trap') && typeof x === 'string') {
+        if (!traps.has(x)) out.push(where + ': trap "' + x + '" is not in the taxonomy for ' + type);
+      } else walk(x, where);
+    }
+  };
+  walk(item, item.meta?.id ?? '$');
+  return out;
+}
+
 const MENTION = /\b[Oo]ptions?\s+([A-D])\b/g;
 const WEAK = /\b(is|are) (correct|right|wrong|incorrect) because (it|this|the option) (is|isn't|is not) (supported|stated|mentioned|in the passage)\b/i;
 
@@ -49,7 +94,7 @@ function proseIssues(type, item) {
   const walk = (v, p) => {
     if (typeof v === 'string') {
       if (/  /.test(v)) out.push(`${p}: double space`);
-      if (/ [,.;:?!]/.test(v)) out.push(`${p}: space before punctuation`);
+      if (/ [,;:?!]| \.(?!\.\.)/.test(v)) out.push(`${p}: space before punctuation`);
       if (v !== v.trim() && v.length > 1) out.push(`${p}: leading or trailing space`);
       if (WEAK.test(v)) out.push(`${p}: explains nothing ("is correct because it is supported") — teach the reasoning`);
       if (/\b(realize|recognize|analyze|color|behavior|center|favor|organize)\b/.test(v)) out.push(`${p}: American spelling — the corpus uses British spelling`);
@@ -88,7 +133,8 @@ for (const file of files) {
   const { valid, errors } = validate(schema, item);
   const issues = valid ? (CHECK[type]?.(id, item) ?? []) : [];
   const prose = valid ? proseIssues(type, item) : [];
-  const all = [...errors, ...issues, ...prose];
+  const taxo = valid ? taxonomyIssues(type, item) : [];
+  const all = [...errors, ...issues, ...prose, ...taxo];
   if (all.length) { failed += 1; console.log(`  !!  ${id}: ${all.length} problem(s)`); for (const x of all) console.log(`        - ${x}`); }
   else {
     const extra = type === 'rc' ? ` · ${item.meta.word_count} words · ${item.questions.length} Q · keys ${item.questions.map((q) => q.correct).join('')}` : (type === 'wb' || type === 'cr') ? ` · ${item.items.length} items · keys ${item.items.map((q) => q.correct).join('')}` : '';
