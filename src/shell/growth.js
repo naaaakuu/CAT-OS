@@ -1,228 +1,317 @@
 /**
- * growth.js (shell screen) — the reader's growth, made visible.
+ * growth.js (shell screen) — your reach.
  *
- * This is deliberately NOT a mistake notebook, a history page, or a
- * statistics screen. It answers three humane questions, forward-facing:
+ * Rebuilt for the 2026-09-12 brief (§17). This screen used to be a page of
+ * observations about reading. It is now the game's progression screen, and
+ * it answers one question before the learner reads a word:
  *
- *   How do I read?            (Reading DNA — evidence-gated observations)
- *   What have I collected?    (the one-lesson-per-session concepts)
- *   What did I say about it?  (the reader's own reflections)
+ *     how is my character getting stronger?
  *
- * No marks appear anywhere on this screen. Everything is derived from
- * stored sessions + content (dna.js) or read from the learning store;
- * nothing here judges, everything reveals.
+ * Four abilities, four trees. A tree at its sixth stage is not a number
+ * dressed up — it is the same sprite the valley itself is made of, at the
+ * stage the learner's own record has earned, so the picture and the world
+ * are telling the same truth in the same language.
  *
- * Lives in src/shell/ — the first extracted shell screen (the
- * extraction ROADMAP_V2 anticipated). Imports core/ and ui/ only.
+ *   READING     passages finished, stars taken, the type you keep missing
+ *   VOCABULARY  words, roots, twins, loanwords and word parts held
+ *   VERBAL      jumbles, summaries and strangers solved
+ *   PACE        right AND inside the clock — the rarest of the four
+ *
+ * Everything analytical that lived here before — the Reading DNA, the
+ * lessons kept, the learner's own reflections — is still here, under
+ * "The numbers". Nothing was deleted; the default changed.
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
 import { loadRCPassages, listRCItems, loadPJItems, loadPSItems, loadOOOItems, loadWDItems } from '../core/content-loader/loader.js';
 import { deriveDNA } from '../core/mentor/dna.js';
-import { derivePJDNA } from '../core/mentor/pj-dna.js';
-import { derivePSDNA } from '../core/mentor/ps-dna.js';
-import { deriveOOODNA } from '../core/mentor/ooo-dna.js';
-import { deriveWDDNA } from '../core/mentor/wd-dna.js';
 import { listLessons, listReflections } from '../core/mentor/records.js';
-import { RECALL_RETIRED_AFTER } from '../core/mentor/lesson.js';
 import { escapeHTML, formatDate } from '../core/utils/format.js';
+import { loadWorld } from '../world/state.js';
+import { readingWeakness, typeName, weaknessLine } from '../world/curator.js';
+import { sprite } from '../world/engine/sprites.js';
+import { loadValley, valleyName } from '../world/companion.js';
+import { craft } from '../world/economy.js';
 
-const KIND_LABEL = {
-  growth: 'Growth',
-  strength: 'Working for you',
-  watch: 'Keep an eye on',
-};
+/** The six stages a tree can stand at, and what each one is called when
+ *  the thing growing is an ability rather than an oak. */
+const TIERS = [
+  { stage: 'seed', name: 'Not started', at: 0 },
+  { stage: 'sprout', name: 'Seedling', at: 0.02 },
+  { stage: 'young', name: 'Taking root', at: 0.12 },
+  { stage: 'in_leaf', name: 'Growing', at: 0.3 },
+  { stage: 'mature', name: 'Strong', at: 0.56 },
+  { stage: 'ancient', name: 'Deep', at: 0.8 },
+];
+
+function tierFor(p) {
+  let t = TIERS[0];
+  for (const x of TIERS) if (p >= x.at) t = x;
+  return t;
+}
+
+/** 0–3 stars for an ability, from the same two demands CAT makes. */
+function starsFor(p) { return p >= 0.75 ? 3 : p >= 0.45 ? 2 : p >= 0.15 ? 1 : 0; }
 
 export async function renderGrowth(outlet, { storage }) {
   outlet.innerHTML = `
-    <section class="screen">
-      <p class="screen__eyebrow">Growth</p>
-      <h1>How your reading is changing</h1>
+    <section class="screen growth">
       <div id="growth-body" aria-busy="true">
-        <div class="skeleton skeleton--line" style="width: 55%"></div>
+        <div class="skeleton skeleton--line" style="width: 45%"></div>
         <div class="skeleton"></div><div class="skeleton"></div>
       </div>
-    </section>
-  `;
+    </section>`;
   const body = outlet.querySelector('#growth-body');
 
-  let sessions = [];
-  let lessons = [];
-  let reflections = [];
-  let items = [];
+  let world = null, valley = { name: null }, sessions = [], lessons = [], reflections = [], items = [];
   try {
-    [sessions, lessons, reflections, items] = await Promise.all([
-      storage.getAll(STORES.SESSIONS),
-      listLessons(storage),
-      listReflections(storage),
+    [world, valley, sessions, lessons, reflections, items] = await Promise.all([
+      loadWorld(storage).catch(() => null),
+      loadValley(storage).catch(() => ({ name: null })),
+      storage.getAll(STORES.SESSIONS).catch(() => []),
+      listLessons(storage).catch(() => []),
+      listReflections(storage).catch(() => []),
       listRCItems().catch(() => []),
     ]);
-  } catch { /* storage unavailable — the empty state below still renders */ }
-  const titles = new Map(items.map((i) => [i.id, i.title]));
-  body.removeAttribute('aria-busy');
+  } catch { /* the empty state below still renders */ }
 
-  /* ---- Before the first session: an invitation, not an apology ---- */
-  if (sessions.length === 0) {
+  if (!body.isConnected) return;
+  const s = world?.state ?? null;
+
+  if (!s || (s.reading.read === 0 && s.meadow.met === 0 && s.rootwood.metCount === 0)) {
+    body.removeAttribute('aria-busy');
     body.innerHTML = `
-      <div class="empty">
-        <div class="empty__glyph" aria-hidden="true">❦</div>
-        <h2>Your reading story starts here</h2>
-        <p>Read your first passage and the mentor starts listening — quietly
-        noticing how you read, what's working, and the one thing worth
-        adjusting next. No scores live on this page. Only growth.</p>
-        <a class="btn btn--primary" href="#/rc">Read the first passage</a>
+      <div class="reach__empty">
+        <canvas class="reach__seed" width="96" height="112" aria-hidden="true"></canvas>
+        <h1>Nothing has grown yet</h1>
+        <p>Four things grow here: your reading, your words, your grip on an argument, and your speed under a clock. One session starts all of them.</p>
+        <a class="g-cta" href="#/world">Into the valley<span class="arrow" aria-hidden="true">→</span></a>
       </div>`;
+    paintTree(body.querySelector('.reach__seed'), 'sprout', 4);
     return;
   }
 
-  const rcSessions = sessions.filter((s) => s.module !== 'pj' && s.module !== 'ps' && s.module !== 'ooo' && s.module !== 'wd');
-  const pjSessions = sessions.filter((s) => s.module === 'pj');
-  const psSessions = sessions.filter((s) => s.module === 'ps');
-  const oooSessions = sessions.filter((s) => s.module === 'ooo');
-  const wdSessions = sessions.filter((s) => s.module === 'wd');
-  const passages = await loadRCPassages(rcSessions.map((s) => s.passage_id));
-  const dna = deriveDNA(rcSessions, passages);
-  const pjItems = await loadPJItems(pjSessions.flatMap((s) => s.item_ids ?? []));
-  const pjDNA = derivePJDNA(pjSessions, pjItems);
-  const psItems = await loadPSItems(psSessions.flatMap((s) => s.item_ids ?? []));
-  const psDNA = derivePSDNA(psSessions, psItems);
-  const oooItems = await loadOOOItems(oooSessions.flatMap((s) => s.item_ids ?? []));
-  const oooDNA = deriveOOODNA(oooSessions, oooItems);
-  const wdItems = await loadWDItems(wdSessions.flatMap((s) => s.item_ids ?? []));
-  const wdDNA = deriveWDDNA(wdSessions, wdItems);
+  /* ---- The four abilities, measured ---- */
+  const rcW = readingWeakness(sessions);
+  const abilities = measure(s, rcW);
+  const weakest = [...abilities].sort((a, b) => a.p - b.p)[0];
+  const strongest = [...abilities].sort((a, b) => b.p - a.p)[0];
 
-  const dnaCard = (o) => `
-    <div class="dna dna--${o.kind}">
-      <div class="dna__kind">${KIND_LABEL[o.kind]}</div>
-      <div class="dna__title">${escapeHTML(o.title)}</div>
-      <p class="dna__body">${escapeHTML(o.body)}</p>
-      <p class="dna__evidence">${escapeHTML(o.evidence)}</p>
-    </div>`;
-
-  /* ---- How you read ---- */
-  const dnaHTML = dna.observations.length === 0 ? `
-    <div class="card">
-      <p class="muted" style="margin:0">The mentor is still listening. Patterns
-      only appear here once there is enough evidence to be fair about them —
-      usually after a few more sessions. Nothing is being missed.</p>
-    </div>` : dna.observations.map(dnaCard).join('');
-
-  /* ---- How you order (Para Jumbles DNA) ---- */
-  const pjDnaHTML = pjSessions.length === 0 ? '' : `
-    <div class="stage-head"><h2>How you order</h2><div class="rule"></div></div>
-    ${pjDNA.observations.length === 0 ? `
-      <div class="card">
-        <p class="muted" style="margin:0">Your jumble solving is being watched
-        with the same fairness: patterns appear only once the evidence clears
-        the floor. Keep solving.</p>
-      </div>` : pjDNA.observations.map(dnaCard).join('')}`;
-
-  /* ---- How you summarise (Para Summary DNA) ---- */
-  const psDnaHTML = psSessions.length === 0 ? '' : `
-    <div class="stage-head"><h2>How you summarise</h2><div class="rule"></div></div>
-    ${psDNA.observations.length === 0 ? `
-      <div class="card">
-        <p class="muted" style="margin:0">Your summarising is being watched
-        with the same fairness: patterns appear only once the evidence clears
-        the floor. Keep going.</p>
-      </div>` : psDNA.observations.map(dnaCard).join('')}`;
-
-  /* ---- How you detect (Odd One Out DNA) ---- */
-  const oooDnaHTML = oooSessions.length === 0 ? '' : `
-    <div class="stage-head"><h2>How you detect</h2><div class="rule"></div></div>
-    ${oooDNA.observations.length === 0 ? `
-      <div class="card">
-        <p class="muted" style="margin:0">Your detection is being watched
-        with the same fairness: patterns appear only once the evidence clears
-        the floor. Keep going.</p>
-      </div>` : oooDNA.observations.map(dnaCard).join('')}`;
-
-  /* ---- How you decode (Word DNA) ---- */
-  const wdDnaHTML = wdSessions.length === 0 ? '' : `
-    <div class="stage-head"><h2>How you decode</h2><div class="rule"></div></div>
-    ${wdDNA.observations.length === 0 ? `
-      <div class="card">
-        <p class="muted" style="margin:0">Your decoding is being watched with
-        the same fairness: patterns appear only once the evidence clears the
-        floor. Keep meeting families.</p>
-      </div>` : wdDNA.observations.map(dnaCard).join('')}
-    <p class="hint" style="margin: 0 0 var(--space-3)"><a href="#/wd/garden">Open your Word Garden</a></p>`;
-
-  /* ---- Concepts you've collected ---- */
-  const recent = lessons.slice(0, 8);
-  const lessonsHTML = recent.length === 0 ? `
-    <p class="muted">Finish a session and the mentor keeps its one lesson here.</p>
-  ` : `
-    ${recent.map((l) => {
-      const absorbed = (l.recall_count ?? 0) >= RECALL_RETIRED_AFTER;
-      const isPJ = l.module === 'pj';
-      const isPS = l.module === 'ps';
-      const isOOO = l.module === 'ooo';
-      const isWD = l.module === 'wd';
-      const lessonHref = isPJ
-        ? (l.item_id ? `#/pj/learn/${escapeHTML(l.item_id)}` : '#/pj')
-        : isPS
-          ? (l.item_id ? `#/ps/learn/${escapeHTML(l.item_id)}` : '#/ps')
-          : isOOO
-            ? (l.item_id ? `#/ooo/learn/${escapeHTML(l.item_id)}` : '#/ooo')
-            : isWD
-              ? (l.item_id ? `#/wd/learn/${escapeHTML(l.item_id)}` : '#/wd')
-              : `#/rc/mentor/${escapeHTML(l.passage_id)}`;
-      const lessonPlace = isPJ ? 'Para Jumbles'
-        : isPS ? 'Para Summary'
-          : isOOO ? 'Odd One Out'
-            : isWD ? 'Word DNA'
-              : (titles.get(l.passage_id) ?? l.passage_id);
-      return `
-      <div class="row">
-        <div class="row__lead">
-          <span class="row__icon" aria-hidden="true">${absorbed ? '✓' : '◌'}</span>
-          <div>
-            <div class="row__label">${escapeHTML(l.title)}</div>
-            <div class="row__hint">${escapeHTML(formatDate(l.created_at))} ·
-              <a href="${lessonHref}">${escapeHTML(lessonPlace)}</a></div>
-          </div>
-        </div>
-        ${absorbed
-          ? '<span class="badge badge--success">Absorbed</span>'
-          : (l.recall_count ?? 0) > 0
-            ? `<span class="badge">Recalled ${l.recall_count} of ${RECALL_RETIRED_AFTER}</span>`
-            : '<span class="badge badge--info">Fresh</span>'}
-      </div>`;
-    }).join('')}
-    <p class="hint" style="margin-top: var(--space-3)">A concept is absorbed after
-    ${RECALL_RETIRED_AFTER} successful twenty-second recalls — then it retires, quietly.</p>`;
-
-  /* ---- In your own words ---- */
-  const latestReflection = reflections[0] ?? null;
-  const reflectionHTML = latestReflection ? `
-    <div class="card">
-      <h2>In your own words</h2>
-      <p class="growth-quote"><span class="growth-quote__starter">${escapeHTML(latestReflection.prompt)}</span>
-        ${escapeHTML(latestReflection.text)}</p>
-      <p class="row__hint">${escapeHTML(formatDate(latestReflection.updated_at))} ·
-        <a href="#/rc/mentor/${escapeHTML(latestReflection.passage_id)}">${escapeHTML(titles.get(latestReflection.passage_id) ?? latestReflection.passage_id)}</a></p>
-    </div>` : '';
-
+  body.removeAttribute('aria-busy');
   body.innerHTML = `
-    <p class="muted" style="margin-top: calc(-1 * var(--space-2)); margin-bottom: var(--space-4)">
-      What the mentor has noticed — observations, never judgments. No scores
-      live on this page.</p>
+    <header class="reach__head">
+      <p class="reach__eyebrow">Your reach</p>
+      <h1 class="reach__name">${escapeHTML(valleyName(valley))}</h1>
+      <p class="reach__line">${headline(strongest, weakest, rcW)}</p>
+    </header>
 
-    <div class="stage-head"><h2>How you read</h2><div class="rule"></div></div>
-    ${dnaHTML}
+    <div class="reach">
+      ${abilities.map((a) => `
+        <article class="ability ability--${a.craft}" data-key="${a.key}">
+          <canvas class="ability__tree" width="128" height="168" aria-hidden="true" data-stage="${a.tier.stage}"></canvas>
+          <div class="ability__body">
+            <p class="ability__what">${escapeHTML(a.name)}</p>
+            <p class="ability__tier">${escapeHTML(a.tier.name)}</p>
+            <p class="ability__line">${a.line}</p>
+          </div>
+          <div class="ability__stars" aria-label="${a.stars} of 3">${'★'.repeat(a.stars)}${'☆'.repeat(3 - a.stars)}</div>
+          <div class="ability__bar" aria-hidden="true"><i style="width:${Math.round(a.p * 100)}%"></i></div>
+        </article>`).join('')}
+    </div>
 
-    ${pjDnaHTML}
+    <section class="reach__next">
+      <p class="reach__nextlabel">What would move most</p>
+      <h2>${escapeHTML(weakest.name)}</h2>
+      <p>${escapeHTML(weakest.advice)}</p>
+      <a class="g-cta" href="${weakest.href}">${escapeHTML(weakest.cta)}<span class="arrow" aria-hidden="true">→</span></a>
+    </section>
 
-    ${psDnaHTML}
+    <details class="reach__numbers">
+      <summary>The numbers</summary>
+      <div id="numbers"></div>
+    </details>`;
 
-    ${oooDnaHTML}
+  for (const cv of body.querySelectorAll('.ability__tree')) paintTree(cv, cv.dataset.stage, 3);
 
-    ${wdDnaHTML}
+  /* ---- The numbers: everything this screen used to say, on request ---- */
+  const numbers = body.querySelector('#numbers');
+  body.querySelector('.reach__numbers')?.addEventListener('toggle', async (e) => {
+    if (!e.currentTarget.open || numbers.dataset.done) return;
+    numbers.dataset.done = '1';
+    numbers.innerHTML = '<div class="skeleton"></div>';
+    numbers.innerHTML = await renderNumbers({ s, rcW, sessions, lessons, reflections, items, storage });
+  }, true);
+}
 
-    <div class="stage-head"><h2>Concepts you've collected</h2><div class="rule"></div></div>
-    <div class="card">${lessonsHTML}</div>
+/* ------------------------------------------------------------------ */
+/* Measuring                                                           */
+/* ------------------------------------------------------------------ */
 
-    ${reflectionHTML}
-  `;
+function measure(s, rcW) {
+  const clamp01 = (n) => Math.max(0, Math.min(1, n));
+
+  /* READING — how much of the corpus has been read, weighted by how well. */
+  const readP = s.reading.passages ? s.reading.read / s.reading.passages : 0;
+  const starP = s.reading.maxStars ? s.reading.stars / s.reading.maxStars : 0;
+  const reading = clamp01(readP * 0.45 + starP * 0.55);
+
+  /* VOCABULARY — every word-shaped thing the valley knows about. */
+  const vocabHeld = s.meadow.mastered + s.pond.mastered + s.thicket.mastered
+    + s.rootwood.metCount * 6 + s.terraces.done * 8;
+  const vocabAll = Math.max(1, s.meadow.total + s.pond.total + s.thicket.total
+    + s.rootwood.total * 6 + s.terraces.total * 8);
+  const vocab = clamp01(vocabHeld / vocabAll);
+
+  /* VERBAL — the three benches of the Quarter. */
+  const vSolved = s.loom.solved + s.table.solved + s.bench.solved;
+  const vAll = Math.max(1, s.loom.total + s.table.total + s.bench.total);
+  const verbal = clamp01(vSolved / vAll);
+
+  /* PACE — Embers are only ever struck by a three-star run, so the share of
+     runs that struck one IS the measure of right-and-in-time. */
+  // Every finished run is a chance at an Ember and almost none of them
+  // take it, so the share of runs that did IS the pace measure.
+  const runs = s.reading.read + s.loom.solved + s.table.solved + s.bench.solved
+    + s.rootwood.grownCount + (s.wilds.runs ?? 0);
+  const pace = clamp01((s.earned?.ember ?? 0) / Math.max(24, runs * 0.9));
+
+  const weakType = rcW?.weakest ? typeName(rcW.weakest) : null;
+
+  return [
+    {
+      key: 'reading', name: 'Reading', craft: 'ink', p: reading, tier: tierFor(reading), stars: starsFor(reading),
+      line: `<b>${s.reading.read}</b> of ${s.reading.passages} passages · <b>${s.reading.stars}</b> stars`,
+      advice: weakType
+        ? `${weakType} questions are the ones getting away. The next passage the curator picks will be heavy on them.`
+        : 'More passages, against the clock. Reading is the one ability that only grows by reading.',
+      href: '#/world/place/reading-room', cta: 'To the Reading Room',
+    },
+    {
+      key: 'vocab', name: 'Vocabulary', craft: 'amber', p: vocab, tier: tierFor(vocab), stars: starsFor(vocab),
+      line: `<b>${s.meadow.mastered + s.pond.mastered + s.thicket.mastered}</b> words held · <b>${s.rootwood.metCount}</b> root families`,
+      advice: s.meadow.due + s.pond.due + s.thicket.due > 8
+        ? `${s.meadow.due + s.pond.due + s.thicket.due} words are due for another look. Catching them is worth more than meeting new ones.`
+        : 'Roots move this fastest: one family opens a dozen words at once.',
+      href: s.meadow.due > 6 ? '#/round/meadow' : '#/world/place/rootwood',
+      cta: s.meadow.due > 6 ? 'A round in the Meadow' : 'Into the Rootwood',
+    },
+    {
+      key: 'verbal', name: 'Verbal', craft: 'thread', p: verbal, tier: tierFor(verbal), stars: starsFor(verbal),
+      line: `<b>${vSolved}</b> of ${vAll} solved at the Quarter`,
+      advice: 'Jumbles, summaries and strangers train the same muscle: seeing the shape of an argument before you agree with it.',
+      href: '#/world/place/loom', cta: 'To the Quarter',
+    },
+    {
+      key: 'pace', name: 'CAT pace', craft: 'ember', p: pace, tier: tierFor(pace), stars: starsFor(pace),
+      line: `<b>${s.earned?.ember ?? 0}</b> Embers struck · three stars means right <i>and</i> in time`,
+      advice: 'Accuracy first, then speed. Take a run you could already do well and try to do it inside the pace ring.',
+      href: '#/world/place/wilds', cta: 'To the Wilds',
+    },
+  ];
+}
+
+function headline(strongest, weakest, rcW) {
+  const bits = [];
+  if (strongest.p > 0.05) bits.push(`Your <b>${escapeHTML(strongest.name.toLowerCase())}</b> is the furthest along.`);
+  if (weakest.p < strongest.p - 0.05) bits.push(`Your <b>${escapeHTML(weakest.name.toLowerCase())}</b> has the most room.`);
+  if (!bits.length) bits.push('All four are just starting.');
+  if (rcW?.weakest) bits.push(`Inside reading, it is <b>${escapeHTML(typeName(rcW.weakest))}</b>.`);
+  return bits.join(' ');
+}
+
+/* ------------------------------------------------------------------ */
+/* The numbers                                                         */
+/* ------------------------------------------------------------------ */
+
+async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, storage }) {
+  const out = [];
+
+  /* Reading, by question type — the actual learner model, shown plainly
+     for anyone who wants it. The game itself never needs this screen. */
+  const rows = [...(rcW?.byType ?? new Map()).entries()]
+    .filter(([, e]) => e.n >= 2)
+    .sort((a, b) => a[1].acc - b[1].acc);
+  if (rows.length) {
+    out.push(`
+      <div class="nums">
+        <p class="nums__label">Reading, by question type</p>
+        ${rows.map(([t, e]) => `
+          <div class="nums__row">
+            <span>${escapeHTML(typeName(t))}</span>
+            <span class="nums__bar"><i style="width:${Math.round(e.acc * 100)}%"></i></span>
+            <b>${Math.round(e.acc * 100)}%</b>
+            <small>${e.n} seen</small>
+          </div>`).join('')}
+      </div>`);
+  }
+
+  /* The places, counted. */
+  out.push(`
+    <div class="nums">
+      <p class="nums__label">The valley, counted</p>
+      ${[
+        ['Passages read', `${s.reading.read} / ${s.reading.passages}`],
+        ['Reading stars', `${s.reading.stars} / ${s.reading.maxStars}`],
+        ['Words in bloom', `${s.meadow.mastered} / ${s.meadow.total}`],
+        ['Twins told apart', `${s.pond.mastered} / ${s.pond.total}`],
+        ['Loanwords', `${s.thicket.mastered} / ${s.thicket.total}`],
+        ['Root families met', `${s.rootwood.metCount} / ${s.rootwood.total}`],
+        ['Word parts climbed', `${s.terraces.done} / ${s.terraces.total}`],
+        ['Quarter solved', `${s.loom.solved + s.table.solved + s.bench.solved} / ${s.loom.total + s.table.total + s.bench.total}`],
+        ['Works built', `${s.builds.length} / ${s.works.length}`],
+        ['Days practised', String(s.hearth.activeDays)],
+        ['Longest run', `${s.hearth.streak.best} days`],
+      ].map(([k, v]) => `<div class="nums__row nums__row--plain"><span>${escapeHTML(k)}</span><b>${escapeHTML(v)}</b></div>`).join('')}
+    </div>`);
+
+  /* The mentor's observations, if reading has given it enough to see. */
+  try {
+    const rcSessions = sessions.filter((x) => !x.module && x.passage_id);
+    if (rcSessions.length >= 2) {
+      const passages = await loadRCPassages(items.map((i) => i.id)).catch(() => []);
+      const dna = deriveDNA(rcSessions, passages);
+      const obs = (dna?.observations ?? []).slice(0, 4);
+      if (obs.length) {
+        out.push(`
+          <div class="nums">
+            <p class="nums__label">How you read</p>
+            ${obs.map((o) => `<p class="nums__obs"><b>${escapeHTML(o.title ?? '')}</b> ${escapeHTML(o.body ?? o.text ?? '')}</p>`).join('')}
+          </div>`);
+      }
+    }
+  } catch { /* observations are a bonus, never a requirement */ }
+
+  if (lessons.length) {
+    out.push(`
+      <div class="nums">
+        <p class="nums__label">Lessons kept (${lessons.length})</p>
+        ${lessons.slice(0, 6).map((l) => `<p class="nums__obs"><b>${escapeHTML(l.title ?? '')}</b>${l.recall ? ` — ${escapeHTML(l.recall)}` : ''}</p>`).join('')}
+      </div>`);
+  }
+  if (reflections.length) {
+    out.push(`
+      <div class="nums">
+        <p class="nums__label">What you said about it</p>
+        ${reflections.slice(0, 4).map((r) => `<p class="nums__obs"><i>${escapeHTML(r.text ?? '')}</i><small> — ${escapeHTML(formatDate(r.updated_at ?? ''))}</small></p>`).join('')}
+      </div>`);
+  }
+
+  return out.join('');
+}
+
+/* ------------------------------------------------------------------ */
+/* The trees                                                           */
+/* ------------------------------------------------------------------ */
+
+function paintTree(cv, stage, scale = 3) {
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  const s = sprite('tree', { stage, seed: `reach:${stage}`, season: 'summer' });
+  const z = Math.max(1, Math.min(scale, Math.floor(cv.height / s.h), Math.floor(cv.width / s.w)));
+  const w = s.w * z, h = s.h * z;
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  // Bottom-aligned and centred: four trees on one ground line, so their
+  // heights are the comparison the screen is making.
+  ctx.drawImage(s.canvas, Math.round((cv.width - w) / 2), cv.height - h - 4, w, h);
 }

@@ -19,6 +19,7 @@ import { registerOOO } from './modules/odd-one-out/index.js';
 import { registerWD } from './modules/word-dna/index.js';
 import { registerLanguageGarden } from './modules/language-garden/index.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
+import { loadValley } from './world/companion.js';
 import { syncStage, unmountStage } from './world/stage.js';
 import { silenceWorld, musicEnabled, setMusicEnabled } from './world/audio.js';
 import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
@@ -934,7 +935,14 @@ async function boot() {
   // 1.0.0: the world is the application. A cold open lands in the valley;
   // every learning room is a place in it. The old routes stay registered so
   // nothing that linked to them breaks.
-  router.start('/world');
+  // A learner who has never been welcomed meets Wick first, in a valley
+  // that has not been named yet. Every later cold open lands in the valley.
+  let opening = '/world';
+  try {
+    const valley = await loadValley(storage);
+    if (!valley.awakened_at && (!location.hash || location.hash === '#/' || location.hash === '#/world')) opening = '/awaken';
+  } catch { /* the valley is the safe default */ }
+  router.start(opening);
 
   // Chrome destroys place: inside the world — the valley, a place, a round,
   // a Rootwood session — the app's header and tab bar are hidden and every

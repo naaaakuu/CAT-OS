@@ -4,7 +4,25 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-12 — 1.1.0, the final world rebuild: four crafts made by four CAT abilities, twenty-one works that need learning before crafts, a curator that chooses what to practise out of the whole corpus, place screens that are places, and sixteen new Word DNA units from the previously unconnected prefix/suffix reference. App version 1.1.0._
+_Last updated: 2026-09-12 — 1.2.0, the second rebuild: a companion who lives in the valley and welcomes you into it, a first five minutes that names the place and lights it, nine pins instead of eleven, a pond that is a destination, a valley that fills the frame, crafts that explain themselves, feedback that fits on a phone, Growth as four trees, and a drag that costs one frame. App version 1.2.0._
+
+## What changed in 1.2.0
+
+| System | State | Notes |
+|---|---|---|
+| **Wick, the companion** (`world/companion.js`, `engine/sprites.js`) | **shipped (1.2.0)** | The one character who speaks: a charcoal cat with a brass lantern, drawn at 26 × 22 for a portrait and 11 × 9 for the map. His script, his homecoming line (chosen by what is true of the world), and a line for every place. Voice rules are enforced by `verify.mjs` §17 — no "study", no "well done", no exclamation marks, nothing over 96 characters |
+| **The first five minutes** (`world/screens/awaken.js`, route `#/awaken`) | **shipped (1.2.0)** | A cold open on a profile that has never been welcomed lands here, not on the map: night, one lamp, five lines, a sign to name the valley, six real words from the high-frequency band, then dawn over the valley they just named — terrain and sky repainted night → dawn → morning, lamps out, music warmed, crafts flying into a purse they have never seen. Ends by pointing at the first buildable work |
+| **The valley's name** | **shipped (1.2.0)** | Stored in settings (so it travels in backups), shown in the HUD, the menu, Growth and Wick's own lines. Three seeded suggestions on the sign; a typed name is tidied into a place name and capped |
+| **Nine pins, and the Quarter** (`world/regions.js`, `screens/world.js`) | **shipped (1.2.0)** | The three verbal workshops share one pin whose card offers the three benches; all three routes are untouched. Every pin carries a drawn mark instead of a system emoji, and off-screen places pin to the rim rather than vanishing |
+| **The valley fills the frame** | **shipped (1.2.0)** | The home camera sits at the zoom that covers this screen, so no phone shows a slab of sky and a dead band of grass. Zoomed out, the country around the valley is painted: a gradient sky with its own stars above the ridge, three receding wooded ridges and mist below the road |
+| **The Mirror Pond** (`engine/map.js`) | **shipped (1.2.0)** | A real shoreline (a wobbling radial with a bay and an inlet), four flat bands of depth with a ragged seam, wet sand in the bay and grass elsewhere, reeds round the shallow shore, a raft of lilies, a plank dock, and the sheen the pond is named for |
+| **Crafts explain themselves** (`world/craft-ui.js`) | **shipped (1.2.0)** | Every craft chip anywhere in the game opens a sheet: what this craft *is* as an ability, where to earn it (as places you can walk to), and the nearest unbuilt work it pays for |
+| **One menu, three places** (`world/menu.js`, `ui/components/cat-nav.js`) | **shipped (1.2.0)** | The thumb rail is Valley / Hearth / Growth. Settings moved behind a ☰ in the valley's corner, with Growth, the Workshop, Your standing and Settings. Every row lands where it said it would (`?you=1` added to the Hearth) |
+| **Feedback that fits on a phone** (`ui/components/cat-explanation.js`, the three `teach.js`) | **shipped (1.2.0)** | Verdict → one reason → the trap *they* fell into, named in English → the whole teardown behind one disclosure. ~65 words by default where it was ~185. Nothing deleted; the default changed. The verdict scrolls itself into view, and the sticky answer bar no longer sits on the lesson |
+| **Growth** (`shell/growth.js`) | **shipped (1.2.0)** | Four abilities, four trees at the stage the record has earned, a tier name, stars and one line of numbers; then the one ability with the most room, said as a next action. Everything the screen used to be lives under "The numbers" |
+| **The Hearth** | **shipped (1.2.0)** | Wick on the step, a lamp by the door, flowers and tufts in the band a phone actually shows |
+| **Interaction cost** (`engine/canvas.js`, `screens/world.js`) | **shipped (1.2.0)** | `pointermove` no longer calls `draw()` — coalesced touch events were painting the same frame two or three times over. The world stops simulating while a finger is down, the pins only touch the DOM when the camera moved, and the pin dots lost their backdrop blur. Drag went from p50 33 ms / max 100 ms to p50 16.7 ms / max 33 ms in headless software rendering at dpr 3 |
+| **Verification** | **shipped (1.2.0)** | §17 added: Wick's voice and register, naming, the nine pins and the Quarter's resolution, both Wick sprites, and the promise that feedback stays short. 552 checks pass |
 
 ## What changed in 1.1.0
 
@@ -31,6 +49,9 @@ _Last updated: 2026-09-12 — 1.1.0, the final world rebuild: four crafts made b
 | PWA shell (index.html, manifest, icons) | **shipped** | Installable; relative paths → GitHub Pages subpath safe; `start_url` is the valley |
 | Service worker / offline caching | **shipped** | Shell cache v31 + content cache v13, cache-first by exact URL; ~640 content files precached; registration waits for the first screen to paint (1.0.0) |
 | Design tokens + base styles + `game.css` | **shipped (1.0.0)** | Tokens and base unchanged; `game.css` is the world's interface language (glass HUD, place sheets, run frame, star reveal, tiles/rows) and restyles the shared chrome under `[data-world]` |
+| **The welcome** (`world/screens/awaken.js`) | **shipped (1.2.0)** | Route `#/awaken`; `app.js` sends a never-welcomed learner there on a cold open. Immersive chrome, no tab bar |
+| **The companion** (`world/companion.js`) | **shipped (1.2.0)** | Wick's identity, voice and the valley's name; the only module that owns any of the three |
+| **The menu** (`world/menu.js`) | **shipped (1.2.0)** | One ☰, four honest rows, mounted by the valley's HUD |
 | Hash router | **shipped** | Param routes; 404; modules register their own routes; the world registers `/world`, `/world/place/:slug`, `/round/:region` and `/round/:region/:field`; a query after a route is a hint for the screen, never part of the match (1.1.0) |
 | `StorageAdapter` + IndexedDB adapter | **shipped** | DB `cat-os` v2; stores: settings, attempts, sessions, learning. New record kinds in `learning` (all additive, all in backups): `lex-mastery`, `lex-round`, `gauntlet-run`, `world-build`, `world-quest` |
 | Backup & Restore | **shipped** | Format v2; the whole world derives from records, so a backup carries the valley |

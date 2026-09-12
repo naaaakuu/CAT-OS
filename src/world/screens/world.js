@@ -18,10 +18,13 @@
 import { WorldRenderer } from '../engine/canvas.js';
 import { buildWorldScene } from '../engine/map.js';
 import { particles } from '../engine/life.js';
-import { REGIONS, regionBySlug, WORLD_W, WORLD_H } from '../regions.js';
+import { sprite as wickSprite } from '../engine/sprites.js';
+import { REGIONS, MAP_PLACES, QUARTER, regionBySlug, WORLD_W, WORLD_H } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { EARN, CRAFTS, addBag } from '../economy.js';
-import { purseHTML, chips as craftChips } from '../craft-ui.js';
+import { purseHTML, chips as craftChips, wireCraftTaps } from '../craft-ui.js';
+import { mountMenu } from '../menu.js';
+import { loadValley, valleyName, homecoming } from '../companion.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled, setMusicEnabled } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
@@ -48,10 +51,22 @@ export function regionStat(slug, s) {
   }
 }
 
-/** A tiny glyph shown on the map pin: what this place is measured in. */
-const PIN_GLYPH = {
-  rootwood: '🌳', meadow: '🌼', pond: '🐟', thicket: '🏮', 'reading-room': '📖',
-  terraces: '🍇', loom: '🧵', table: '📝', bench: '🪑', hearth: '🏠', wilds: '⛰',
+/**
+ * The mark on a pin. Drawn, not typed: a system emoji in a hand-painted
+ * valley is the one thing that makes the whole world look like a web page.
+ * One weight, one language, sized to read at 14px.
+ */
+const M = (d, extra = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}${extra}</svg>`;
+const PIN_MARK = {
+  rootwood: M('<path d="M12 3.2 7 10h2.7l-4.2 5.6h3.4L6.2 20h11.6l-2.7-4.4h3.4L14.3 10H17Z"/><path d="M12 20v1.8"/>'),
+  meadow: M('<circle cx="12" cy="11" r="2.4"/><path d="M12 8.6V5M12 13.4V17M9.6 11H6M14.4 11H18M10.3 9.3 8 7M13.7 9.3 16 7M10.3 12.7 8 15M13.7 12.7 16 15"/>'),
+  pond: M('<path d="M3 13c2.5-2.4 5-2.4 7.5 0s5 2.4 7.5 0"/><path d="M3 18c2.5-2.4 5-2.4 7.5 0s5 2.4 7.5 0"/><path d="M17 4.5 21 8l-4 3.5Z"/>'),
+  thicket: M('<path d="M9 4h6l-1 3h-4Z"/><rect x="8" y="7" width="8" height="8" rx="2"/><path d="M12 15v4"/>'),
+  'reading-room': M('<path d="M7 4h10v16H7Z"/><path d="M10 8h4M10 12h4M10 16h4"/><path d="M5 20h14"/>'),
+  terraces: M('<path d="M4 8h16M4 13h16M4 18h16"/><path d="M8 8V5M16 13v-5M11 18v-5"/>'),
+  quarter: M('<path d="M4 11 8 7l4 4v9H4Z"/><path d="M13 13 17 9l4 4v7h-8Z"/><path d="M7 16h2"/>'),
+  hearth: M('<path d="M4 11 12 4l8 7"/><path d="M6.5 9.8V20h11V9.8"/><path d="M10 20v-5h4v5"/>'),
+  wilds: M('<path d="M3 19 9 8l4 6 2-3 7 8Z"/><path d="M9 8 7 5"/>'),
 };
 
 export async function renderWorld(outlet, { storage }) {
@@ -68,16 +83,25 @@ export async function renderWorld(outlet, { storage }) {
     </section>`;
 
   const askedAt = performance.now();
-  let world;
+  let world, valley;
   try {
-    world = await loadWorld(storage);
+    // One wait, not two: the valley's records and its name are fetched
+    // together so a fast tap through the valley cannot land between them.
+    [world, valley] = await Promise.all([
+      loadWorld(storage),
+      loadValley(storage).catch(() => ({ name: null })),
+    ]);
   } catch (err) {
+    if (!outlet.isConnected) return;
     outlet.innerHTML = `<section class="screen"><h1>The valley will not open</h1><div class="card"><p>${escapeHTML(err.message)}</p></div></section>`;
     return;
   }
   const { state } = world;
+  const placeName = valleyName(valley);
+  // Navigated away while the valley was loading: the outlet has been
+  // rewritten by another screen and there is nothing of ours left in it.
   const canvas = outlet.querySelector('#world-canvas');
-  if (!canvas.isConnected) return; // navigated away while loading
+  if (!canvas?.isConnected) return;
 
   const scene = buildWorldScene(state, state.atmo);
   const renderer = new WorldRenderer(canvas, scene, {
@@ -85,14 +109,21 @@ export async function renderWorld(outlet, { storage }) {
     initialZoom: 1.0,
     onTap: (w) => onTap(w),
   });
+  // The zoom at which the valley covers this particular screen. Everything
+  // that says "settle here" uses it, so no arrival, return or tap ever
+  // leaves a bar of sky at the top and dead grass at the bottom. Zooming
+  // out by hand still works — that view is the map, and it is allowed to
+  // show the country around the valley.
+  const homeZoom = () => Math.max(renderer.fitZoom(), renderer.snap(1.0));
 
   /* ---- Arrival, or a return ---- */
   const focusSlug = sessionStorage.getItem('world:focus');
   const changedSlug = sessionStorage.getItem('world:changed');
   const changeLine = sessionStorage.getItem('world:change-line');
   const earnedRaw = sessionStorage.getItem('world:earned');
+  const wickRaw = sessionStorage.getItem('world:wick');
   const unlockedRaw = sessionStorage.getItem('world:unlocked');
-  for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked']) sessionStorage.removeItem(k);
+  for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked', 'world:wick']) sessionStorage.removeItem(k);
   // A slow open must not also be a slow reveal: if the valley took a while
   // to load, everything arrives at once instead of in sequence.
   const slow = performance.now() - askedAt > 1100;
@@ -102,33 +133,42 @@ export async function renderWorld(outlet, { storage }) {
   const focus = focusSlug ? regionBySlug(focusSlug) : null;
 
   if (focus) {
+    renderer.cam.zoom = Math.max(renderer.cam.zoom, homeZoom());
     renderer.lookAt(focus.anchor.x, focus.anchor.y - 30, { animate: false });
     if (changedSlug) setTimeout(() => burst(focus.anchor.x, focus.anchor.y - 20), 400);
     if (changeLine) setTimeout(() => notice(changeLine, 'place'), 600);
   } else if (state.isNew && !reduce) {
     // The whole valley first — you must see what you are inheriting —
     // then the camera settles on the house you live in.
-    renderer.cam.zoom = renderer.snap(Math.max(renderer.minZoom(), 0.62));
-    renderer.lookAt(WORLD_W / 2, 150, { animate: false });
-    setTimeout(() => renderer.lookAt(hearthRegion.anchor.x, hearthRegion.anchor.y - 70, { zoom: renderer.snap(1.1), duration: 3400 }), 1100);
+    renderer.cam.zoom = homeZoom();
+    renderer.lookAt(WORLD_W / 2, 170, { animate: false });
+    setTimeout(() => renderer.lookAt(hearthRegion.anchor.x, hearthRegion.anchor.y - 70, { zoom: homeZoom(), duration: 3400 }), 1100);
     outlet.querySelector('.world').insertAdjacentHTML('beforeend', `<div class="world__wordmark" aria-hidden="true">CAT OS<small>The valley</small></div><p class="world__hint">Drag to explore · tap a place to enter</p>`);
     enter('.world__wordmark', 200); setTimeout(() => outlet.querySelector('.world__wordmark')?.classList.add('is-out'), 3800);
     enter('.world__hint', 2600); setTimeout(() => outlet.querySelector('.world__hint')?.classList.add('is-out'), 9000);
   } else {
-    renderer.cam.zoom = renderer.snap(Math.max(renderer.minZoom(), 0.8));
-    renderer.lookAt(hearthRegion.anchor.x, hearthRegion.anchor.y - 100, { animate: false });
-    if (!reduce) setTimeout(() => renderer.lookAt(hearthRegion.anchor.x, hearthRegion.anchor.y - 70, { zoom: renderer.snap(1.1), duration: 1400 }), 250);
+    renderer.cam.zoom = homeZoom();
+    renderer.lookAt(hearthRegion.anchor.x, hearthRegion.anchor.y - 120, { animate: false });
+    if (!reduce) setTimeout(() => renderer.lookAt(hearthRegion.anchor.x, hearthRegion.anchor.y - 70, { duration: 1400 }), 250);
   }
   renderer.start();
+  // The first ResizeObserver pass can arrive after the camera was set, with
+  // the canvas still unsized at construction time; re-assert the framing on
+  // the next two frames so the opening shot is never a fit-zoom accident.
+  if (!focus && !state.isNew) {
+    const settle = () => { if (renderer.cam.zoom < homeZoom()) { renderer.cam.zoom = homeZoom(); renderer.clampCamera(); } };
+    requestAnimationFrame(() => { settle(); requestAnimationFrame(settle); });
+  }
 
   /* ---- Map pins: every place, named, so the valley reads at a glance ---- */
   const pinsEl = outlet.querySelector('#pins');
   const pinFor = new Map();
-  pinsEl.innerHTML = REGIONS.map((r) => {
-    const asking = state.asking === r.slug;
-    const ready = state.readyWorks.some((w) => w.region === r.slug);
-    return `<a class="pin ${asking ? 'is-asking' : ''} ${ready ? 'is-ready' : ''}" data-slug="${r.slug}" href="${r.route}" tabindex="-1">
-      <span class="pin__dot" style="--pin:${r.color}">${PIN_GLYPH[r.slug] ?? ''}</span>
+  pinsEl.innerHTML = MAP_PLACES.map((r) => {
+    const slugs = r.members ?? [r.slug];
+    const asking = slugs.includes(state.asking);
+    const ready = state.readyWorks.some((w) => slugs.includes(w.region));
+    return `<a class="pin ${asking ? 'is-asking' : ''} ${ready ? 'is-ready' : ''}" data-slug="${r.slug}" href="${r.route ?? '#/world'}" tabindex="-1">
+      <span class="pin__dot" style="--pin:${r.color}">${PIN_MARK[r.slug] ?? ''}</span>
       <span class="pin__name">${escapeHTML(r.name.replace(/^The /, ''))}</span>
     </a>`;
   }).join('');
@@ -139,27 +179,39 @@ export async function renderWorld(outlet, { storage }) {
       e.preventDefault();
       const r = regionBySlug(el.dataset.slug);
       play('tap');
-      renderer.lookAt(r.anchor.x, r.anchor.y - 20, { duration: 600 });
+      renderer.lookAt(r.anchor.x, r.anchor.y - 20, { zoom: Math.max(renderer.cam.zoom, homeZoom()), duration: 600 });
       showCard(r);
     });
   }
   let pinRaf = 0;
+  let pinKey = '';
   const placePins = () => {
     const z = renderer.cam.zoom;
+    // Nine pins × (a transform write + an opacity write) every frame was
+    // nine style recalcs per frame for a camera that had not moved. The
+    // camera's own geometry is the only thing these positions depend on.
+    const key = `${Math.round(renderer.cam.x)}|${Math.round(renderer.cam.y)}|${z.toFixed(3)}|${renderer.cssW}|${renderer.cssH}`;
+    if (key === pinKey) { pinRaf = requestAnimationFrame(placePins); return; }
+    pinKey = key;
     const tight = z < 0.5;
-    for (const r of REGIONS) {
+    for (const r of MAP_PLACES) {
       const el = pinFor.get(r.slug);
       if (!el) continue;
       const s = renderer.toScreen(r.anchor.x, r.anchor.y - (r.kind === 'learn' ? 34 : 26));
-      // A pin sits where its place sits. Off the edge it fades out rather
-      // than being pushed onto the rim, where several would stack.
-      const far = s.x < 8 || s.x > renderer.cssW - 8 || s.y < 54 || s.y > renderer.cssH - 8;
-      const edge = s.x < 70 || s.x > renderer.cssW - 70 || s.y < 100 || s.y > renderer.cssH - 60;
-      const x = s.x;
-      const y = Math.max(54, s.y);
+      // The valley is wider than a phone. A place that has gone off the
+      // side is pinned to the rim instead of disappearing, small and
+      // nameless — so the learner can always see that there is more
+      // valley over there, and drag to it. (Their world y's are far
+      // enough apart that the rim never becomes a stack.)
+      const L = 22, R = renderer.cssW - 22, T = 64, B = renderer.cssH - 132;
+      const off = s.x < L || s.x > R || s.y < T || s.y > B;
+      const x = Math.max(L, Math.min(R, s.x));
+      const y = Math.max(T, Math.min(B, s.y));
+      const near = !off && (s.x < 70 || s.x > renderer.cssW - 70 || s.y < 110 || s.y > renderer.cssH - 150);
       el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px) translate(-50%, -100%)`;
-      el.style.opacity = far ? '0' : edge ? '0.55' : '1';
+      el.style.opacity = off ? '0.62' : near ? '0.82' : '1';
       el.classList.toggle('is-tight', tight);
+      el.classList.toggle('is-off', off);
     }
     pinRaf = requestAnimationFrame(placePins);
   };
@@ -170,15 +222,14 @@ export async function renderWorld(outlet, { storage }) {
   const hud = outlet.querySelector('#hud');
   const renderHud = () => {
     hud.innerHTML = `
-      <a class="hud__card" href="#/world/place/hearth" aria-label="The Hearth: your standing and your works">
-        <span class="hud__avatar" aria-hidden="true">${escapeHTML(state.hearth.title[0])}</span>
-        <span><span class="hud__title">${escapeHTML(state.hearth.title)}</span><span class="hud__sub">★ ${state.stars}${state.builds.length ? ` · ${state.builds.length} built` : ''}${state.hearth.streak.current ? ` · ${state.hearth.streak.current}-day run` : ''}</span></span>
+      <a class="hud__card" href="#/world/place/hearth" aria-label="${escapeHTML(placeName)}: your standing and your works">
+        <span class="hud__avatar" aria-hidden="true">${escapeHTML(placeName[0])}</span>
+        <span><span class="hud__title">${escapeHTML(placeName)}</span><span class="hud__sub">★ ${state.stars}${state.builds.length ? ` · ${state.builds.length} built` : ''}${state.hearth.streak.current ? ` · ${state.hearth.streak.current}-day run` : ''}</span></span>
       </a>
       <div class="hud__stack">
         <a class="purse" href="#/world/place/hearth?works=1" id="purse" aria-label="Your crafts">${purseHTML(state.purse)}</a>
-        <div class="hud__icons">
+        <div class="hud__icons" id="hud-icons">
           <button class="hud__icon" id="hud-sound" aria-pressed="${musicEnabled()}" aria-label="Music and ambience">${musicEnabled() ? ICON_SOUND_ON : ICON_SOUND_OFF}</button>
-          <a class="hud__icon" href="#/settings" aria-label="Settings">${ICON_GEAR}</a>
         </div>
       </div>`;
     hud.querySelector('#hud-sound').addEventListener('click', async (e) => {
@@ -191,6 +242,8 @@ export async function renderWorld(outlet, { storage }) {
     });
   };
   renderHud();
+  mountMenu(hud.querySelector('#hud-icons'), { storage });
+  wireCraftTaps(hud, () => state);
   enter('.hud__card', 300); enter('.purse', 420); enter('.hud__icons', 480);
 
   /* ---- What is worth doing now ---- */
@@ -238,6 +291,33 @@ export async function renderWorld(outlet, { storage }) {
     setTimeout(() => notice(`${fresh.length === 1 ? 'An ask is done' : `${fresh.length} asks are done`} · ${craftChips(paid, { sign: '+' })}`, 'quest'), changeLine ? 2800 : 1000);
   })();
 
+  /* ---- Wick, in the corner, saying one thing ---- */
+  let wickTimer = 0;
+  function wickSays(line) {
+    // Wick speaks on a timer; by the time it fires the learner may already
+    // be somewhere else, and the valley he was going to speak over is gone.
+    const host = outlet.querySelector('.world');
+    if (!host) return;
+    let el = outlet.querySelector('#world-wick');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'wickline';
+      el.id = 'world-wick';
+      el.innerHTML = `<canvas class="wickline__face" width="42" height="36" aria-hidden="true"></canvas><p></p>`;
+      host.appendChild(el);
+      const cv = el.querySelector('canvas');
+      const cx = cv.getContext('2d');
+      cx.imageSmoothingEnabled = false;
+      const sp = wickSprite('wick', { pose: 'look', lamp: false, lit: true });
+      cx.drawImage(sp.canvas, 8, 0, 14, 13, 2, 2, 14 * 2.4, 13 * 2.4);
+      el.addEventListener('click', () => el.classList.remove('is-in'));
+    }
+    el.querySelector('p').textContent = line;
+    requestAnimationFrame(() => el.classList.add('is-in'));
+    clearTimeout(wickTimer);
+    wickTimer = setTimeout(() => el.classList.remove('is-in'), 7000);
+  }
+
   /* ---- Notices ---- */
   const noticeEl = outlet.querySelector('#world-notice');
   let noticeTimer = 0;
@@ -281,14 +361,11 @@ export async function renderWorld(outlet, { storage }) {
     } catch { /* the numbers are already right */ }
   }
 
-  /* ---- Back after a while: say what the valley did without you ---- */
-  if (!focus && state.awayDays >= 2) {
-    const due = state.rootwood.dueCount + state.meadow.due + state.pond.due + state.thicket.due;
-    const bits = [];
-    if (due) bits.push(`<b>${due}</b> ${due === 1 ? 'thing is' : 'things are'} ready to revisit`);
-    if (state.readyWorks.length) bits.push(`<b>${state.readyWorks.length}</b> ${state.readyWorks.length === 1 ? 'work' : 'works'} can be built`);
-    const line = bits.length ? bits.join(' · ') : 'The valley has been quiet.';
-    setTimeout(() => notice(`${state.awayDays} days away. ${line}.`, 'place'), reduce ? 200 : 1800);
+  /* ---- Coming home: Wick says the one useful thing ---- */
+  if (wickRaw) setTimeout(() => wickSays(wickRaw), reduce ? 400 : 2000);
+  else if (!focus) {
+    const line = homecoming(state, { awayDays: state.awayDays, name: placeName });
+    if (line) setTimeout(() => wickSays(line), reduce ? 300 : 1700);
   }
 
   /* ---- Something new can be built: the loudest thing the world says ---- */
@@ -314,6 +391,7 @@ export async function renderWorld(outlet, { storage }) {
   let shown = null;
   function showCard(region) {
     shown = region.slug;
+    if (region.members) { showQuarterCard(region); return; }
     const stat = regionStat(region.slug, state);
     const ready = state.readyWorks.filter((w) => w.region === region.slug);
     card.hidden = false;
@@ -331,6 +409,33 @@ export async function renderWorld(outlet, { storage }) {
     card.querySelector('#place-enter').addEventListener('click', () => { sessionStorage.setItem('world:focus', region.slug); play('open'); });
     scene.focus = region.slug;
   }
+  /** The Quarter: one yard, three benches. The card is the chooser, so
+   *  the map keeps one pin and the learner still gets three doors. */
+  function showQuarterCard(region) {
+    const rooms = region.members.map((m) => regionBySlug(m)).filter(Boolean);
+    card.hidden = false;
+    card.innerHTML = `
+      <button class="place-card__close" id="place-close" aria-label="Close">×</button>
+      <p class="place-card__eyebrow">${escapeHTML(region.skill)}</p>
+      <h2 class="place-card__name">${escapeHTML(region.name)}</h2>
+      <p class="place-card__line">${escapeHTML(region.line)}</p>
+      <div class="quarter__rooms">
+        ${rooms.map((r) => `
+          <a class="quarter__room" href="${r.route}" data-slug="${r.slug}">
+            <b>${escapeHTML(r.name.replace(/^The /, ''))}</b>
+            <small>${escapeHTML(r.skill ?? '')}</small>
+            <span>${regionStat(r.slug, state)}</span>
+          </a>`).join('')}
+      </div>`;
+    requestAnimationFrame(() => card.classList.add('is-shown'));
+    nowEl.classList.add('is-hidden');
+    card.querySelector('#place-close').addEventListener('click', hideCard);
+    for (const a of card.querySelectorAll('.quarter__room')) {
+      a.addEventListener('click', () => { sessionStorage.setItem('world:focus', a.dataset.slug); play('open'); });
+    }
+    scene.focus = region.slug;
+  }
+
   function hideCard() {
     shown = null;
     card.classList.remove('is-shown');

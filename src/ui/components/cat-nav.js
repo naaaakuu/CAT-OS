@@ -42,11 +42,12 @@ const ICONS = {
          </svg>`,
 };
 
+// Three places, and no fourth. Settings is administration, and lives
+// behind the valley's ☰ (src/world/menu.js) — never in the thumb rail.
 const ITEMS = [
   { path: '/world',    label: 'Valley',   icon: ICONS.valley },
   { path: '/world/place/hearth', label: 'Hearth', icon: ICONS.practice },
   { path: '/growth',   label: 'Growth',   icon: ICONS.growth },
-  { path: '/settings', label: 'Settings', icon: ICONS.settings },
 ];
 
 class CatNav extends HTMLElement {

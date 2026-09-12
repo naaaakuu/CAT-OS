@@ -4,6 +4,118 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 1.2.0 — Someone lives here (2026-09-12)
+
+The valley was beautiful and empty, and it opened on a map with eleven
+labelled pins, four unexplained numbers and no one in it. This release is
+about the difference between a world and a diagram.
+
+### Wick
+
+There is now one character in CAT OS who speaks. Wick is a small charcoal
+cat with amber eyes and a brass lantern; he keeps the valley's lamps, and
+when you arrive he has been keeping exactly one of them alight, alone, for
+a long time. He is drawn by the same sprite factory as the trees — 26 × 22
+in a portrait, 11 × 9 on the map, where he is the cat who already sat by
+the Hearth door.
+
+His voice has rules, and `tools/verify.mjs` §17 enforces them: short
+sentences, no "study", no "well done", no "unlocked", no exclamation marks,
+nothing longer than one breath. He notices; he does not congratulate.
+
+### The first five minutes
+
+A profile that has never been welcomed no longer opens on the map. It opens
+on `#/awaken`: the valley at night, one lamp burning, and five lines. Then
+a wooden sign, where the learner names the place — the name is kept in
+settings, travels in backups, and is what the HUD, the menu, Growth and Wick
+call this valley from then on. Then one small thing: six words from the
+high-frequency band, a real round against the real corpus writing real
+mastery records, with nothing else on the screen.
+
+Then dawn. The terrain repaints from night through dawn to morning, the sky
+beyond the ridge follows it, the lamps go out, the music warms, and the
+crafts they earned fly into a purse they are seeing for the first time.
+"There. That was you."
+
+The transformation is scripted, not purchased — they have not earned a
+building yet and pretending otherwise would be a lie. What they *have*
+earned is real, and the welcome's last act is to point at the first work
+their Amber can actually pay for.
+
+### The map reads
+
+- **Nine pins, not eleven.** The three verbal workshops stand in one yard
+  and share one pin, the Quarter, whose card offers the three benches. All
+  three routes, slugs, crafts and content are untouched.
+- **Drawn marks, not emoji.** A fir, a flower, water and a fish, a lantern,
+  a book, terrace steps, two roofs, a hearth, a mountain — one hand, the
+  world's own.
+- **The valley fills the frame.** The home camera sits at the zoom that
+  covers this screen. Zoomed out, the country around the valley is painted
+  for it, and places off the side pin to the rim rather than vanishing.
+- **The Mirror Pond is a place.** A wobbling shoreline with a bay and an
+  inlet, four bands of depth, wet sand, reeds, lilies, koi, a plank dock,
+  and the sheen it is named for.
+
+### What a craft is
+
+Every craft chip in the game is now tappable, and opens one sheet: what
+this craft *is* as an ability ("Ember is your accuracy at CAT pace"), where
+to earn it as places you can walk to, and the nearest unbuilt work it pays
+for. Ability → craft → work → the valley changes, legible from any link.
+
+### What you are told after you answer
+
+A learner who has just got a question wrong reads four lines, not fourteen.
+Every answering screen now shows the verdict, one reason, and the trap
+*they* fell into — named in English ("points the other way", "too
+absolute") rather than as a database value — with the full teardown behind
+one disclosure. About 65 words where there were about 185. Nothing was
+deleted; the default changed, because the default is what gets read. The
+verdict now scrolls itself into view, and the sticky answer bar no longer
+sits on top of the lesson.
+
+### Growth
+
+Four abilities, four trees, each at the stage the learner's own record has
+earned — the same tree sprite the valley is made of. A tier name, stars,
+one line of numbers, and then the single ability with the most room, said
+as a next action. Everything the screen used to be is under "The numbers".
+
+### Navigation
+
+The thumb rail is Valley, Hearth, Growth. Settings is administration and
+does not get a quarter of it: one ☰ in the valley's corner opens a painted
+sheet with Growth, the Workshop, Your standing and Settings. Every row goes
+somewhere that exists and shows what it said it would.
+
+### Interaction
+
+`pointermove` was calling `draw()` directly. Touch hardware delivers moves
+faster than frames and coalesces them into bursts, so a fast drag painted
+the same frame two or three times over, on top of the rAF loop. It now marks
+the frame dirty and lets the one loop draw it once. The world also stops
+simulating while a finger is down, the map pins only touch the DOM when the
+camera actually moved, and the pin dots lost the backdrop blur that was
+being re-rasterised on every one of those moves.
+
+Measured in headless Chrome with software rendering at dpr 3: a drag went
+from p50 33.3 ms / p95 49.9 ms / max 100 ms to p50 16.7 ms / p95 16.8–33 ms
+/ max 33 ms. `draw()` itself costs 2.3–4.4 ms depending on framing.
+
+### Fixed
+
+- The build veil is mounted on `document.body` and was only removed by
+  tapping "See it" — leaving the Hearth any other way left it hanging over
+  every screen that followed.
+- `renderWorld` threw on a null canvas when the learner navigated away
+  while the valley was loading; the valley's records and its name are now
+  fetched in one `Promise.all`, and the guard is optional-chained.
+- Wick's homecoming line threw when the timer fired after the learner had
+  already left the valley.
+- `cleanValleyName` capitalised after an apostrophe ("Wren'S Fold").
+
 ## 1.1.4 — 2026-09-12 — The second look
 
 Reviewing your own mistakes is the highest-yield hour in CAT preparation,

@@ -1780,7 +1780,11 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
       slugs.add(r.slug);
       if (!(r.anchor.x >= 0 && r.anchor.x <= regions.WORLD_W && r.anchor.y >= 0 && r.anchor.y <= regions.WORLD_H)) bad(`world regions: ${r.slug} anchor is off the map`);
       const hit = regions.regionAt(r.anchor.x, r.anchor.y);
-      if (hit?.slug !== r.slug) bad(`world regions: touching ${r.slug}'s anchor resolves to ${hit?.slug ?? 'nothing'}`);
+      // The three workshops of the Quarter stand in one yard, and the map
+      // deliberately resolves all three to the Quarter (regions.js): three
+      // pins twenty pixels apart is three overlapping labels and no map.
+      const want = r.inQuarter ? 'quarter' : r.slug;
+      if (hit?.slug !== want) bad(`world regions: touching ${r.slug}'s anchor resolves to ${hit?.slug ?? 'nothing'}, not ${want}`);
       for (const k of ['name', 'line', 'verb', 'route']) if (!r[k]) bad(`world regions: ${r.slug} is missing ${k}`);
       if (!r.route.startsWith('#/')) bad(`world regions: ${r.slug} route is not a hash route`);
     }
@@ -2038,6 +2042,135 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
   }
 
   if (problems.length === before) ok('the world derives honestly from records; the places, the rules, the rounds and the sounds agree');
+}
+
+
+/* ------------------------------------------------------------------ */
+/* 17. The companion, the first five minutes, and the map that reads   */
+/* ------------------------------------------------------------------ */
+
+console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins · feedback)');
+{
+  const before = problems.length;
+  const companion = await mod('src/world/companion.js');
+  const regions = await mod('src/world/regions.js');
+  const sprites = await mod('src/world/engine/sprites.js');
+
+  /* ---- Wick's voice ---- */
+  {
+    const b0 = problems.length;
+    const lines = [
+      ...companion.OPENING,
+      companion.NAMING.ask, companion.NAMING.after('Alder Hollow'),
+      companion.FIRST_TASK.offer, companion.FIRST_TASK.during, companion.FIRST_TASK.after,
+      ...companion.DAWN,
+    ];
+    // The one character who speaks must never sound like a study app.
+    const banned = /\b(study|revise|practice makes|well done|great job|awesome|congratulations|score|XP|streak|level up|unlocked)\b/i;
+    for (const l of lines) {
+      if (typeof l !== 'string' || !l.trim()) bad('companion: an empty line in Wick’s script');
+      else if (banned.test(l)) bad(`companion: Wick says a forbidden word — "${l}"`);
+      else if (l.length > 96) bad(`companion: a line too long to read in one breath — "${l.slice(0, 40)}…"`);
+      else if ((l.match(/!/g) ?? []).length) bad(`companion: Wick does not exclaim — "${l}"`);
+    }
+    if (companion.OPENING.length < 4) bad('companion: the opening is too short to introduce a world');
+    if (companion.WICK.name !== 'Wick') bad('companion: the companion has been renamed without the docs');
+
+    /* Homecoming answers the state it is given, never nothing. */
+    const empty = { readyWorks: [], rootwood: { dueCount: 0 }, meadow: { due: 0 }, pond: { due: 0 }, thicket: { due: 0 }, builds: [] };
+    if (!companion.homecoming(empty, { awayDays: 0, name: 'Alder Hollow' })) bad('companion: homecoming says nothing on a quiet day');
+    if (!companion.homecoming({ ...empty, readyWorks: [{}, {}] }, {})) bad('companion: homecoming ignores works that are ready');
+    const away = companion.homecoming(empty, { awayDays: 9, name: 'Alder Hollow' });
+    if (!/\b9\b/.test(away)) bad('companion: a long absence is not acknowledged');
+    if (/\b(should|must|need to|don’t forget)\b/i.test(away)) bad('companion: Wick nags about being away');
+
+    /* Every place has a line, so no place is ever silent. */
+    for (const r of regions.REGIONS) {
+      if (r.kind !== 'learn' && r.slug !== 'hearth' && r.slug !== 'wilds') continue;
+      if (r.inQuarter) continue;
+      if (!companion.atPlace(r.slug, { readyWorks: [] })) bad(`companion: nothing to say at ${r.slug}`);
+    }
+    if (problems.length === b0) ok(`Wick speaks ${lines.length} lines, all in register, and has something to say at every place`);
+  }
+
+  /* ---- Naming a valley ---- */
+  {
+    const b0 = problems.length;
+    const { cleanValleyName, nameSuggestions, valleyName, isUnawakened } = companion;
+    if (cleanValleyName('  alder   hollow ') !== 'Alder Hollow') bad('companion: a typed name is not tidied into a place name');
+    if (cleanValleyName('') !== '') bad('companion: an empty name must stay empty, not become a default');
+    if (cleanValleyName('x'.repeat(80)).length > 28) bad('companion: a name is not capped');
+    if (cleanValleyName("wren's fold") !== "Wren's Fold") bad('companion: an apostrophe breaks capitalisation');
+    const ideas = nameSuggestions('7');
+    if (ideas.length !== 3) bad('companion: the sign must offer exactly three names');
+    if (new Set(ideas).size !== ideas.length) bad('companion: the three suggestions are not distinct');
+    if (String(nameSuggestions('7')) !== String(ideas)) bad('companion: suggestions are not stable for the same day');
+    if (valleyName(null) !== 'the valley') bad('companion: an unnamed valley has no honest fallback');
+    if (!isUnawakened({ name: 'x', awakened_at: null })) bad('companion: a named but unwelcomed valley is not detected');
+    if (isUnawakened({ awakened_at: '2026-01-01' })) bad('companion: a welcomed valley is offered the welcome again');
+    if (problems.length === b0) ok('a valley can be named, tidied, capped and remembered');
+  }
+
+  /* ---- The map: nine places, and the Quarter that makes it nine ---- */
+  {
+    const b0 = problems.length;
+    const { MAP_PLACES, QUARTER, regionAt, regionBySlug } = regions;
+    if (MAP_PLACES.length !== regions.REGIONS.filter((r) => !r.inQuarter).length + 1) bad('world regions: MAP_PLACES is not every place outside the Quarter, plus the Quarter');
+    if (MAP_PLACES.length > 9) bad(`world regions: ${MAP_PLACES.length} pins is more than a phone map can label`);
+    for (const m of QUARTER.members) {
+      const r = regionBySlug(m);
+      if (!r) bad(`world regions: the Quarter claims ${m}, which is not a place`);
+      else if (!r.inQuarter) bad(`world regions: ${m} is in the Quarter but not marked inQuarter`);
+      else if (regionAt(r.anchor.x, r.anchor.y)?.slug !== 'quarter') bad(`world regions: ${m} does not resolve to the Quarter`);
+    }
+    // Nothing in MAP_PLACES may be inside the Quarter, or it would double up.
+    for (const p of MAP_PLACES) if (p.inQuarter) bad(`world regions: ${p.slug} is drawn twice`);
+    if (regionBySlug('quarter') !== QUARTER) bad('world regions: the Quarter is not addressable by slug');
+    if (problems.length === b0) ok(`${MAP_PLACES.length} pins on the map, three benches in one Quarter, every slug still reachable`);
+  }
+
+  /* ---- Wick is drawn, at both the sizes the world needs ----
+     A recipe only runs where there is a canvas, so under Node we check that
+     the recipes exist and that the drawing code is there; the browser tour
+     is what proves they look like a cat. */
+  {
+    const b0 = problems.length;
+    for (const name of ['wick', 'catSmall', 'dock']) {
+      if (!sprites.RECIPE_NAMES.includes(name)) bad(`sprites: no "${name}" recipe`);
+    }
+    const src = readFileSync(join(root, 'src/world/engine/sprites.js'), 'utf8');
+    for (const [what, re] of [
+      ['poses', /pose === 'look'/], ['eyes that blink', /if \(blink\)/], ['a lamp he can put out', /lit \? PIGMENT\.lantern/],
+      ['a map-scale Wick', /function catSmall\(/], ['a dock', /function dock\(/],
+    ]) if (!re.test(src)) bad(`sprites: Wick is missing ${what}`);
+    // The companion must be drawn bigger in a portrait than on the map.
+    const bigW = /function wick\([^)]*\)\s*\{\s*const p = new Pix\((\d+)/.exec(src)?.[1];
+    const smallW = /function catSmall\([^)]*\)\s*\{\s*const p = new Pix\((\d+)/.exec(src)?.[1];
+    if (!bigW || !smallW || Number(smallW) >= Number(bigW)) bad('sprites: the map-scale Wick is not smaller than the portrait one');
+    if (Number(smallW) > 14) bad('sprites: the map-scale Wick is too big to stand beside a cottage');
+    if (problems.length === b0) ok(`Wick is drawn at both scales (${bigW}px and ${smallW}px wide), and the dock exists`);
+  }
+
+  /* ---- Feedback stays short by default ---- */
+  {
+    const b0 = problems.length;
+    const src = readFileSync(join(root, 'src/ui/components/cat-explanation.js'), 'utf8');
+    if (!/class="working" id="working" hidden/.test(src)) bad('feedback: the full teardown is not hidden by default');
+    if (!/THE TRAP|class="label">The trap/.test(src)) bad('feedback: the trap the learner fell into is not named');
+    // Every trap type the corpus uses must have a human name, or the screen
+    // shows a database value to a person.
+    const names = src.slice(src.indexOf('const TRAP_NAME = {'), src.indexOf('};', src.indexOf('const TRAP_NAME = {')));
+    for (const t of ['opposite_direction', 'out_of_scope', 'extreme_language', 'passage_language_shifted', 'wrong_structural_role', 'true_but_irrelevant', 'too_narrow', 'too_broad', 'near_synonym_confusion', 'half_right']) {
+      if (!names.includes(t)) bad(`feedback: trap type "${t}" has no plain-English name`);
+    }
+    for (const f of ['src/modules/para-summary/logic/teach.js', 'src/modules/para-jumbles/logic/teach.js', 'src/modules/odd-one-out/logic/teach.js']) {
+      const t = readFileSync(join(root, f), 'utf8');
+      if (!/<summary>The full working<\/summary>/.test(t)) bad(`feedback: ${f} does not fold its teardown`);
+    }
+    if (problems.length === b0) ok('the answer screen shows a verdict, a reason and one trap; the teardown is one tap away');
+  }
+
+  if (problems.length === before) ok('the companion, the welcome, the map and the feedback all hold');
 }
 
 

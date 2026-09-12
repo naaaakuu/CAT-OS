@@ -164,15 +164,30 @@ export function renderPlain(item) {
 }
 
 /** The full teaching layer, all layers in Bible order. */
+
+/** Everything that used to be mandatory, now behind one disclosure. A
+ *  learner who has just answered reads about four lines; the teardown is
+ *  for the learner who asks for it, and it is one tap away. */
+function working(html) {
+  if (!String(html).trim()) return '';
+  return `
+    <details class="xwork">
+      <summary>The full working</summary>
+      <div class="xwork__body">${html}</div>
+    </details>`;
+}
+
 export function renderTeaching(item, answer) {
   return `
     <div class="pjx">
       ${renderAssembled(item)}
-      ${renderShape(item)}
-      ${renderMoves(item)}
       ${renderLinks(item, answer)}
-      ${renderTemptations(item, answer)}
-      ${renderTrap(item)}
+      ${working(`
+        ${renderShape(item)}
+        ${renderMoves(item)}
+        ${renderTemptations(item, answer)}
+        ${renderTrap(item)}
+      `)}
       ${renderPlain(item)}
     </div>`;
 }

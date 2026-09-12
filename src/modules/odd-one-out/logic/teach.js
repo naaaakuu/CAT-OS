@@ -204,16 +204,31 @@ export function renderTakeaway(item) {
 }
 
 /** The full teaching layer, in Bible §12 order, revealed by tier depth. */
+
+/** Everything that used to be mandatory, now behind one disclosure. A
+ *  learner who has just answered reads about four lines; the teardown is
+ *  for the learner who asks for it, and it is one tap away. */
+function working(html) {
+  if (!String(html).trim()) return '';
+  return `
+    <details class="xwork">
+      <summary>The full working</summary>
+      <div class="xwork__body">${html}</div>
+    </details>`;
+}
+
 export function renderTeaching(item, answer) {
   const depth = teachDepth(item.meta.tier);
   return `
     <div class="oox">
       ${renderCore(item)}
-      ${renderRoles(item, { depth })}
       ${renderViolation(item, answer)}
       ${renderTrap(item, answer, { depth })}
-      ${depth >= 3 ? renderAnatomy(item, { depth }) : ''}
-      ${renderHabit(item)}
+      ${working(`
+        ${renderRoles(item, { depth })}
+        ${depth >= 3 ? renderAnatomy(item, { depth }) : ''}
+        ${renderHabit(item)}
+      `)}
       ${renderTakeaway(item)}
     </div>`;
 }

@@ -14,6 +14,8 @@
 
 import { WorldRenderer } from '../engine/canvas.js';
 import { buildGroveScene, buildBackdropScene } from '../engine/map.js';
+import { sprite } from '../engine/sprites.js';
+import { atPlace } from '../companion.js';
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { starHTML } from './result.js';
@@ -57,6 +59,7 @@ export async function renderPlace(outlet, { storage }, params) {
       </div>
       <a class="place__back" href="#/world" id="back">← The valley</a>
       <div class="place__hero-stat" id="hero-stat"></div>
+      <div class="placewick" id="placewick" hidden><canvas width="36" height="30" aria-hidden="true"></canvas><p></p></div>
       <div class="sheet" id="sheet">
         <button class="sheet__grip" id="grip" aria-expanded="false" aria-label="Show everything here"><i aria-hidden="true"></i></button>
         <div class="sheet__top" id="top"></div>
@@ -70,6 +73,26 @@ export async function renderPlace(outlet, { storage }, params) {
   const sheet = outlet.querySelector('#sheet');
   const grip = outlet.querySelector('#grip');
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', region.slug); play('close'); });
+
+  /* Wick meets you at the door of every place, once, and says the one thing
+     that is true of it. He never repeats himself in a session. */
+  {
+    const line = atPlace(region.slug, state);
+    const seen = sessionStorage.getItem('wick:place') === region.slug;
+    const el = outlet.querySelector('#placewick');
+    if (line && !seen && el) {
+      sessionStorage.setItem('wick:place', region.slug);
+      const cx = el.querySelector('canvas').getContext('2d');
+      cx.imageSmoothingEnabled = false;
+      const sp = sprite('wick', { pose: 'look', lamp: false, lit: true });
+      cx.drawImage(sp.canvas, 8, 0, 14, 13, 1, 1, 14 * 2, 13 * 2);
+      el.querySelector('p').textContent = line;
+      el.hidden = false;
+      setTimeout(() => el.classList.add('is-in'), 700);
+      setTimeout(() => el.classList.remove('is-in'), 7200);
+      el.addEventListener('click', () => el.classList.remove('is-in'));
+    }
+  }
 
   let open = false;
   const setOpen = (v) => {

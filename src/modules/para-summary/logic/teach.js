@@ -183,16 +183,50 @@ export function renderTakeaway(item) {
 }
 
 /** The full teaching layer, in Bible order, revealed by tier depth. */
+
+/**
+ * The trap they fell into — and only that one. A learner who has just
+ * answered reads about four lines; spending them on the three options
+ * they did NOT choose is spending them on nothing. The full teardown is
+ * still rendered, inside `working()`, one tap below.
+ */
+function theTrap(item, answer) {
+  const chosen = answer?.chosen ?? null;
+  if (!chosen) return '';
+  const d = (item.question?.explanation?.distractors ?? []).find((x) => x.option === chosen);
+  if (!d) return '';
+  const kind = d.archetype ?? d.trap_type ?? '';
+  return `
+    <div class="xtrap">
+      <p class="xtrap__label">The trap</p>
+      ${kind ? `<span class="xtrap__kind">${escapeHTML(String(kind).replaceAll('_', ' '))}</span>` : ''}
+      <p>${escapeHTML(d.why_wrong)}</p>
+    </div>`;
+}
+
+/** Everything that used to be mandatory, now behind one disclosure. */
+function working(html) {
+  if (!String(html).trim()) return '';
+  return `
+    <details class="xwork">
+      <summary>The full working</summary>
+      <div class="xwork__body">${html}</div>
+    </details>`;
+}
+
 export function renderTeaching(item, answer) {
   const depth = teachDepth(item.meta.tier);
   return `
     <div class="psx">
-      ${renderCompression(item, { depth })}
       ${renderWhyBest(item)}
-      ${renderDistractors(item, answer, { depth })}
-      ${depth >= 4 ? renderSeparating(item) : ''}
-      ${depth >= 3 ? renderAnatomy(item) : ''}
-      ${renderHabit(item)}
+      ${theTrap(item, answer)}
+      ${working(`
+        ${renderCompression(item, { depth })}
+        ${renderDistractors(item, answer, { depth })}
+        ${depth >= 4 ? renderSeparating(item) : ''}
+        ${depth >= 3 ? renderAnatomy(item) : ''}
+        ${renderHabit(item)}
+      `)}
       ${renderTakeaway(item)}
     </div>`;
 }

@@ -69,7 +69,7 @@ export const REGIONS = Object.freeze([
     route: '#/world/place/thicket', color: '#3F6B3F',
   },
   {
-    slug: 'loom', name: 'The Loom', kind: 'learn',
+    slug: 'loom', name: 'The Loom', kind: 'learn', inQuarter: true,
     line: 'Para Jumbles. Four sentences, one order: weave the paragraph the author wrote.',
     verb: 'Sit at the loom',
     skill: 'Para jumbles',
@@ -77,7 +77,7 @@ export const REGIONS = Object.freeze([
     route: '#/world/place/loom', color: '#8A6C9C',
   },
   {
-    slug: 'table', name: 'The Summary Table', kind: 'learn',
+    slug: 'table', name: 'The Summary Table', kind: 'learn', inQuarter: true,
     line: 'Para Summary. Find the author’s point and protect it from the options that almost say it.',
     verb: 'Sit at the table',
     skill: 'Para summary',
@@ -85,7 +85,7 @@ export const REGIONS = Object.freeze([
     route: '#/world/place/table', color: '#C6533A',
   },
   {
-    slug: 'bench', name: 'The Stranger’s Bench', kind: 'learn',
+    slug: 'bench', name: 'The Stranger’s Bench', kind: 'learn', inQuarter: true,
     line: 'Odd One Out. Build the paragraph, and the sentence that never belonged shows itself.',
     verb: 'Take the bench',
     skill: 'Odd one out',
@@ -102,14 +102,38 @@ export const REGIONS = Object.freeze([
   },
 ]);
 
-const BY_SLUG = new Map(REGIONS.map((r) => [r.slug, r]));
+/**
+ * The Quarter: the three verbal workshops stand in one yard, and at map
+ * scale three pins twenty pixels apart is three overlapping labels and no
+ * information. So the map shows one place — the Quarter — and the card it
+ * opens offers the three benches inside it. The three regions themselves
+ * are untouched: same slugs, same routes, same crafts, same content.
+ */
+export const QUARTER = Object.freeze({
+  slug: 'quarter', name: 'The Quarter', kind: 'quarter',
+  line: 'Three workshops in one yard: the order of sentences, the point of a paragraph, and the one that never belonged.',
+  skill: 'Verbal reasoning',
+  verb: 'Into the Quarter',
+  anchor: { x: 508, y: 556 }, hit: { x: 388, y: 500, w: 250, h: 110 },
+  members: ['loom', 'table', 'bench'],
+  color: '#8A6C9C',
+});
+
+/** What the map draws a pin for: every region except the three inside the
+ *  Quarter, plus the Quarter itself, in map order. */
+export const MAP_PLACES = Object.freeze([
+  ...REGIONS.filter((r) => !r.inQuarter),
+  QUARTER,
+]);
+
+const BY_SLUG = new Map([...REGIONS, QUARTER].map((r) => [r.slug, r]));
 export function regionBySlug(slug) { return BY_SLUG.get(slug) ?? null; }
 
 /** The region under a world point, or null. Smaller hit boxes win when
  *  they overlap a larger one (the Quarter's buildings sit in a shared yard). */
 export function regionAt(x, y) {
   let best = null;
-  for (const r of REGIONS) {
+  for (const r of MAP_PLACES) {
     const h = r.hit;
     if (x >= h.x && x <= h.x + h.w && y >= h.y && y <= h.y + h.h) {
       if (!best || h.w * h.h < best.hit.w * best.hit.h) best = r;

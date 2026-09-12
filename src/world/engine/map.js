@@ -20,7 +20,44 @@ import { WORLD_W, WORLD_H, REGIONS, GROVE_SPOTS, LANTERN_SPOTS, regionAt } from 
 /* Geometry shared by the painter and the scene                        */
 /* ------------------------------------------------------------------ */
 
-export const POND = { cx: 340, cy: 388, rx: 58, ry: 32 };
+export const POND = { cx: 338, cy: 390, rx: 74, ry: 41 };
+
+/**
+ * The pond's shoreline is not an ellipse. `pondR(angle)` returns how far
+ * the water reaches at that bearing — a slow wobble with one real bay on
+ * the west shore, so the bank has somewhere to put a beach and a dock.
+ * Everything that asks "is this water?" goes through here, so the water,
+ * the shallows, the sand, the grass and the props all agree.
+ */
+export function pondR(a) {
+  const w = 1
+    + 0.105 * Math.sin(a * 2 + 0.6)
+    + 0.07 * Math.sin(a * 3 - 1.2)
+    + 0.045 * Math.sin(a * 5 + 2.1)
+    + 0.022 * Math.sin(a * 8 - 0.4);
+  // A bay on the west-south-west shore (the side the path arrives on).
+  const d = ((a - Math.PI * 0.92) % (Math.PI * 2) + Math.PI * 3) % (Math.PI * 2) - Math.PI;
+  const bay = Math.exp(-(d * d) / 0.18);
+  // …and a narrow inlet on the north-east shore where the river comes in.
+  const d2 = ((a + Math.PI * 0.42) % (Math.PI * 2) + Math.PI * 3) % (Math.PI * 2) - Math.PI;
+  const inlet = Math.exp(-(d2 * d2) / 0.05);
+  return w - 0.2 * bay + 0.1 * inlet;
+}
+
+/** Fill the pond's true outline into a mask context, scaled by `k`. */
+function fillPond(m, k = 1, dx = 0, dy = 0) {
+  m.beginPath();
+  const N = 96;
+  for (let i = 0; i <= N; i += 1) {
+    const a = (i / N) * Math.PI * 2;
+    const r = pondR(a) * k;
+    const x = POND.cx + dx + Math.cos(a) * POND.rx * r;
+    const y = POND.cy + dy + Math.sin(a) * POND.ry * r;
+    if (i === 0) m.moveTo(x, y); else m.lineTo(x, y);
+  }
+  m.closePath();
+  m.fill();
+}
 const RIVER = smooth([[398, 186], [386, 230], [370, 288], [356, 338], [340, 360], [348, 424], [364, 470], [350, 520], [334, 570], [352, 620], [340, 672], [346, 720]]);
 
 /** Catmull-Rom subdivision so a hand-placed polyline flows like water. */
@@ -67,7 +104,12 @@ class Raster {
 }
 
 /** Point-in-ellipse test. */
-const inPond = (x, y, pad = 0) => ((x - POND.cx) ** 2) / ((POND.rx + pad) ** 2) + ((y - POND.cy) ** 2) / ((POND.ry + pad) ** 2) <= 1;
+const inPond = (x, y, pad = 0) => {
+  const dx = x - POND.cx, dy = y - POND.cy;
+  const a = Math.atan2(dy, dx);
+  const r = pondR(a);
+  return (dx * dx) / ((POND.rx * r + pad) ** 2) + (dy * dy) / ((POND.ry * r + pad) ** 2) <= 1;
+};
 
 function distToPolyline(px, py, pts) {
   let best = Infinity;
@@ -278,16 +320,74 @@ export function paintTerrain(ctx, atmo, state) {
   const waterBody = ramp(hour === 'night' ? '#213B5E' : hour === 'dusk' ? '#5F6BA8' : hour === 'dawn' ? '#7FA8D6' : PIGMENT.water);
   const bank = ramp(PIGMENT.sand);
   {
-    // Three masks: the bank (widest), the body, and the deep channel.
     const riverW = (y) => riverHalfWidth(y) * 2;
-    const bankM = strokeMask(W, H, (m) => { strokeRiver(m, RIVER, (y) => riverW(y) + 3); fillEllipse(m, POND.cx, POND.cy, POND.rx + 3, POND.ry + 3); });
-    const bodyM = strokeMask(W, H, (m) => { strokeRiver(m, RIVER, riverW); fillEllipse(m, POND.cx, POND.cy, POND.rx, POND.ry); });
-    const deepM = strokeMask(W, H, (m) => { strokeRiver(m, RIVER, (y) => riverW(y) * 0.45); fillEllipse(m, POND.cx, POND.cy, POND.rx - 14, POND.ry - 14); });
+    // Five masks. Depth is bands, not noise: a pond painted in two tones
+    // with a checker between them reads as static, and a pond painted in
+    // four flat steps reads as water you could wade into.
+    const bankM = strokeMask(W, H, (m) => { strokeRiver(m, RIVER, (y) => riverW(y) + 3); fillPond(m, 1.08); });
+    const bodyM = strokeMask(W, H, (m) => { strokeRiver(m, RIVER, riverW); fillPond(m, 1); });
+    const midM = strokeMask(W, H, (m) => { fillPond(m, 0.9); });
+    const deepM = strokeMask(W, H, (m) => { fillPond(m, 0.72, 2, 3); });
+    const deepestM = strokeMask(W, H, (m) => { fillPond(m, 0.46, 4, 5); });
+    const riverDeepM = strokeMask(W, H, (m) => { strokeRiver(m, RIVER, (y) => riverW(y) * 0.45); });
+
+    const shallow = mix(waterBody.base, PIGMENT.sand, 0.34);
+    const mid = waterBody.base;
+    const deep = mix(waterBody.base, waterBody.shade, 0.6);
+    const deepest = waterBody.shade;
+    const nEdge = noise2('pond-edge');
+    const nSand = noise2('pond-sand');
+    // A one-pixel ragged seam between two depths, so the step is a shoreline
+    // and not a drawn curve.
+    const ragged = (x, y, t) => nEdge(x / 3.5, y / 3.5) > t;
+
     for (let y = 150; y < H; y += 1) for (let x = 0; x < W; x += 1) {
       const i = y * W + x;
-      if (deepM[i]) px(x, y, waterBody.shade);
-      else if (bodyM[i]) px(x, y, waterBody.base);
-      else if (bankM[i]) px(x, y, (x + y) & 1 ? bank.base : bank.shade);
+      const pond = bodyM[i] && inPond(x, y, 1);
+      if (pond) {
+        let c = shallow;
+        if (deepestM[i]) c = deepest;
+        else if (deepM[i]) c = ragged(x, y, 0.62) ? deepest : deep;
+        else if (midM[i]) c = ragged(x, y, 0.66) ? deep : mid;
+        else c = ragged(x, y, 0.7) ? mid : shallow;
+        px(x, y, c);
+        continue;
+      }
+      if (bodyM[i]) { px(x, y, riverDeepM[i] ? deep : mid); continue; }
+      if (!bankM[i]) continue;
+      // The shore. Sand in the western bay and where the river runs out;
+      // everywhere else the grass comes down to wet stone.
+      const inBay = x < POND.cx - POND.rx * 0.3 && Math.abs(y - POND.cy) < POND.ry * 1.0;
+      const nearRiver = distToPolyline(x, y, RIVER) < riverW(y) + 4;
+      if (inBay || nearRiver) px(x, y, nSand(x / 7, y / 7) > 0.52 ? bank.light : bank.base);
+      else if (nSand(x / 6, y / 6) > 0.62) px(x, y, bank.shade);
+      else px(x, y, mix(grass.shade, bank.shade, 0.45));
+    }
+
+    /* The mirror. A pale band across the pond's northern water, where the
+       sky lands on it, and a scatter of flat highlights that give the
+       surface a plane. This, and not the outline, is why it is a pond. */
+    const sheen = mix(waterBody.light, '#FFFFFF', hour === 'night' ? 0.18 : 0.5);
+    const nSheen = noise2('pond-sheen');
+    for (let y = POND.cy - POND.ry; y < POND.cy + POND.ry * 0.2; y += 1) {
+      for (let x = POND.cx - POND.rx; x < POND.cx + POND.rx; x += 1) {
+        if (!inPond(x, y, -3)) continue;
+        const d = (POND.cy - y) / (POND.ry * 1.1);          // 1 at the top edge
+        const v = nSheen(x / 13, y / 5);
+        // Short, flat, well spaced: a surface catching light, not scratches.
+        if (v > 0.80 - d * 0.22 && (y % 3 === 0) && ((x + y) % 9) < 5) px(x, y, sheen);
+      }
+    }
+    /* A brighter line just inside the shore, all the way round: the light
+       that catches on the meniscus. */
+    const N = 260;
+    for (let j = 0; j < N; j += 1) {
+      const ang = (j / N) * Math.PI * 2;
+      if ((j >> 1) % 4 === 0) continue;
+      const r = pondR(ang) * 0.965;
+      const x = Math.round(POND.cx + Math.cos(ang) * POND.rx * r);
+      const y = Math.round(POND.cy + Math.sin(ang) * POND.ry * r);
+      px(x, y, sheen);
     }
   }
   // Snow settles on the ground in winter: a light dither over the grass.
@@ -300,15 +400,28 @@ export function paintTerrain(ctx, atmo, state) {
 
   // Pond edge sparkle and lily pads are baked; koi are alive (scene).
   const rr = rng('pond-lilies');
-  const lilies = Math.min(9, 2 + Math.floor((state?.pond?.mastered ?? 0) / 25));
+  const lilies = Math.min(14, 4 + Math.floor((state?.pond?.mastered ?? 0) / 18));
   for (let i = 0; i < lilies; i += 1) {
-    const a = rr() * Math.PI * 2, rad = 0.55 + rr() * 0.35;
+    // A raft of pads in the north-east corner, where the water is still.
+    const a = -0.9 + rr() * 1.5;
+    const rad = 0.5 + rr() * 0.34;
     const s = sprite('lilypad', { seed: `lily${i}`, bloom: i % 3 === 0 && !isWinter });
     ctx.drawImage(s.canvas, Math.round(POND.cx + Math.cos(a) * POND.rx * rad - s.ax), Math.round(POND.cy + Math.sin(a) * POND.ry * rad - s.ay));
   }
-  const reedsS = sprite('reeds', { seed: 'reeds1' });
-  ctx.drawImage(reedsS.canvas, POND.cx + POND.rx - 16, POND.cy - 8);
-  ctx.drawImage(reedsS.canvas, POND.cx - POND.rx + 2, POND.cy + 4);
+  // Reeds all round the shallow shore, thickest away from the beach.
+  const reedAngles = [0.25, 0.55, 0.85, 1.15, 1.5, 1.85, 2.2, 4.35, 4.75, 5.1, 5.5, 5.85];
+  reedAngles.forEach((a, i) => {
+    const s = sprite('reeds', { seed: `reeds${i}` });
+    const r = pondR(a) * (1.0 + (i % 2) * 0.03);
+    ctx.drawImage(s.canvas,
+      Math.round(POND.cx + Math.cos(a) * POND.rx * r - s.ax),
+      Math.round(POND.cy + Math.sin(a) * POND.ry * r - s.ay + 2));
+  });
+  // The dock, walking out of the western bay.
+  {
+    const d = sprite('dock', { w: 26, h: 8 });
+    ctx.drawImage(d.canvas, Math.round(POND.cx - POND.rx * 0.92 - 4), Math.round(POND.cy - 4));
+  }
   // Bridges.
   const b1 = sprite('bridge', { w: BRIDGE.w }); ctx.drawImage(b1.canvas, BRIDGE.x - b1.ax, BRIDGE.y - b1.ay);
   const b2 = sprite('bridge', { w: BRIDGE_N.w }); ctx.drawImage(b2.canvas, BRIDGE_N.x - b2.ax, BRIDGE_N.y - b2.ay);
@@ -364,6 +477,12 @@ function drawDisc(ras, cx, cy, r, c) {
  * @param {object} [opts] { focus: slug|null }
  * @returns a Scene for WorldRenderer
  */
+/** A hex colour at an alpha, for gradients that fade to nothing. */
+function hexAlpha(hex, a) {
+  const n = parseInt(String(hex).slice(1), 16);
+  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+}
+
 export function buildWorldScene(state, atmo, opts = {}) {
   const { hour, season, weather } = atmo;
   const night = hour === 'night' || hour === 'dusk';
@@ -503,12 +622,13 @@ export function buildWorldScene(state, atmo, opts = {}) {
   if (built.pondLanterns) {
     for (let i = 0; i < 6; i += 1) {
       const a = (i / 6) * Math.PI * 2;
-      const x = POND.cx + Math.cos(a) * (POND.rx + 9), y = POND.cy + Math.sin(a) * (POND.ry + 7);
+      const r = pondR(a);
+      const x = POND.cx + Math.cos(a) * (POND.rx * r + 9), y = POND.cy + Math.sin(a) * (POND.ry * r + 7);
       statics.push({ x, y, sprite: sprite('lantern', { lit: true }), region: 'pond' });
       lamps.push({ x, y: y - 10, r: night ? 18 : 9, a: night ? 0.6 : 0.18, color: PIGMENT.lantern });
     }
   }
-  if (built.pondHeron) statics.push({ x: POND.cx - 44, y: POND.cy - 14, sprite: sprite('heron', {}), region: 'pond' });
+  if (built.pondHeron) statics.push({ x: POND.cx - 54, y: POND.cy - 20, sprite: sprite('heron', {}), region: 'pond' });
   if (built.thicketArch) statics.push({ x: 74, y: 512, sprite: sprite('arch', {}), region: 'thicket' });
   if (built.rootShrine) statics.push({ x: GROVE_SPOTS.hearts.x, y: GROVE_SPOTS.hearts.y + 14, sprite: sprite('shrine', { lit: night }), region: 'rootwood' });
   if (built.rootShrine && night) lamps.push({ x: GROVE_SPOTS.hearts.x, y: GROVE_SPOTS.hearts.y + 6, r: 18, a: 0.5, color: PIGMENT.lantern });
@@ -583,14 +703,21 @@ export function buildWorldScene(state, atmo, opts = {}) {
 
   const scene = {
     backdrop: (SKY[hour] ?? SKY.morning)[0],
+    hour,
+    atmo,
+    get edgeKey() { return this.hour; },
     time: 0,
     focus: opts.focus ?? null,
-    terrain(ctx) { paintTerrain(ctx, atmo, state); },
+    terrain(ctx) { paintTerrain(ctx, this.atmo ?? atmo, state); },
     /** Everything outside the 640 × 720 map: more sky above the mountains,
      *  and haze below the road out. A tall phone must never see a bar. */
     beyond(ctx, { ox, oy, z, w, h, worldH, worldW }) {
-      const sky = SKY[hour] ?? SKY.morning;
-      const li = LIGHT[hour] ?? LIGHT.morning;
+      // `this.hour` so a screen can move the clock (the first dawn does)
+      // and the sky above the ridge moves with it.
+      const hr = this.hour ?? hour;
+      const isNight = hr === 'night' || hr === 'dusk';
+      const sky = SKY[hr] ?? SKY.morning;
+      const li = LIGHT[hr] ?? LIGHT.morning;
       const lit = (c) => (li.strength > 0 ? mix(c, li.tint, li.strength) : c);
       /* The sides, on a screen wider than the valley: the same sky above
          the same horizon, the same land below, so the map never floats in
@@ -610,31 +737,57 @@ export function buildWorldScene(state, atmo, opts = {}) {
         }
       }
       if (oy > 0) {
-        ctx.fillStyle = lit(sky[0]);
+        // The map's own sky runs sky[0] → sky[1] over its top 196 rows; this
+        // continues that gradient upward so the two never meet at a step.
+        const g = ctx.createLinearGradient(0, 0, 0, oy + 2);
+        g.addColorStop(0, lit(mix(sky[0], isNight ? '#05091F' : '#8FC6F2', 0.45)));
+        g.addColorStop(1, lit(sky[0]));
+        ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, oy + 2);
-        if (night) {
-          // Stars keep going above the ridge.
+        if (isNight || hr === 'dawn') {
           const sr = rng('beyond-stars');
-          ctx.fillStyle = 'rgba(255,255,255,0.55)';
-          for (let i = 0; i < 60; i += 1) ctx.fillRect(Math.floor(sr() * w), Math.floor(sr() * Math.max(1, oy)), 2, 2);
+          const a = (LIGHT[hr] ?? LIGHT.night).stars ?? 0.5;
+          for (let i = 0; i < 90; i += 1) {
+            const sx = Math.floor(sr() * w), sy = Math.floor(sr() * Math.max(1, oy));
+            ctx.fillStyle = `rgba(255,255,255,${(0.25 + sr() * 0.5) * a})`;
+            ctx.fillRect(sx, sy, 2, 2);
+          }
         }
       }
       const bottom = oy + worldH * z;
       if (bottom < h) {
-        const near = lit(mix(PIGMENT.pine, '#2E4A38', 0.45));
-        const far = lit(mix(PIGMENT.pine, '#16261C', 0.75));
+        const depth = h - bottom;
         const g = ctx.createLinearGradient(0, bottom - 2, 0, h);
-        g.addColorStop(0, near);
-        g.addColorStop(1, far);
+        g.addColorStop(0, lit(mix(PIGMENT.pine, '#40684A', 0.4)));
+        g.addColorStop(0.45, lit(mix(PIGMENT.pine, '#27462F', 0.6)));
+        g.addColorStop(1, lit(mix(PIGMENT.pine, '#101E17', 0.85)));
         ctx.fillStyle = g;
-        ctx.fillRect(0, bottom - 2, w, h - bottom + 2);
-        // A ragged treeline hides the seam where the map stops.
-        const tr = rng('beyond-trees');
-        ctx.fillStyle = far;
-        for (let x = 0; x < w; x += 6) {
-          const hgt = 6 + Math.floor(tr() * 16);
-          ctx.fillRect(x, bottom - 2, 6, hgt);
+        ctx.fillRect(0, bottom - 2, w, depth + 2);
+        // Three wooded ridges walking away from the valley, front one darkest:
+        // the country south of the road, seen from the last hill.
+        const bands = [
+          { at: 0.0, hgt: 0.16, tone: mix(PIGMENT.pine, '#33583C', 0.45), step: Math.max(5, Math.round(z * 5)) },
+          { at: 0.3, hgt: 0.22, tone: mix(PIGMENT.pine, '#22402C', 0.6), step: Math.max(7, Math.round(z * 8)) },
+          { at: 0.62, hgt: 0.3, tone: mix(PIGMENT.pine, '#152A1E', 0.78), step: Math.max(9, Math.round(z * 12)) },
+        ];
+        let bi = 0;
+        for (const b of bands) {
+          const br = rng('beyond-band' + bi);
+          const top = bottom - 2 + depth * b.at;
+          ctx.fillStyle = lit(b.tone);
+          for (let x = -b.step; x < w + b.step; x += b.step) {
+            const hgt = Math.round(depth * b.hgt * (0.45 + br() * 0.9));
+            ctx.fillRect(x, top, b.step + 1, Math.max(2, hgt));
+          }
+          ctx.fillRect(0, top + Math.round(depth * b.hgt * 0.5), w, h - top);
+          bi += 1;
         }
+        // Mist lying in the folds, so the eye stops here rather than at a seam.
+        const mg = ctx.createLinearGradient(0, bottom - 2, 0, bottom + depth * 0.5);
+        mg.addColorStop(0, hexAlpha(lit(sky[0]), isNight ? 0.22 : 0.26));
+        mg.addColorStop(1, hexAlpha(lit(sky[0]), 0));
+        ctx.fillStyle = mg;
+        ctx.fillRect(0, bottom - 2, w, depth * 0.5);
       }
     },
     update(dt, t) {
@@ -977,7 +1130,7 @@ export function buildBuildingScene(kind, level, atmo, extra = {}) {
   const n2 = noise2(`bscene-${kind}`);
   const grass = ramp((SEASON[season] ?? SEASON.summer).grass);
   const sm = kind === 'cottage' && extra.practicedToday ? smoke({ x: 160 + 11, y: 118 - 34, seed: 'hs' }) : null;
-  const catSys = kind === 'cottage' ? hearthCat({ x: 176, y: 122, seed: 'hero-cat' }) : null;
+  const catSys = kind === 'cottage' ? hearthCat({ x: 176, y: 122, seed: 'hero-cat', recipe: 'wick', lamp: true, lit: night }) : null;
   const bf = season !== 'winter' && !night ? butterflies({ rect: { x: 20, y: 60, w: 280, h: 60 }, count: 2, seed: `bf-${kind}` }) : null;
   const lamps = [];
   if (night) lamps.push({ x: kind === 'cottage' ? 152 : 176, y: kind === 'cottage' ? 108 : 102, r: 20, a: 0.45, color: PIGMENT.windowLight });
@@ -1219,12 +1372,27 @@ export function buildBackdropScene(slug, state, atmo) {
       treeline(ctx, HOR - 8, 4, 'pine', 'mature');
       scatter(ctx, 'rock', 5, HOR + 16, HOR + 120, { size: 2 });
     } else {
+      treeline(ctx, HOR - 6, 3, 'broad', 'mature');
       const s = sprite('cottage', { level: state?.hearth?.level ?? 1, lit: night, smoke: false });
       ctx.drawImage(s.canvas, 120 - s.ax, HOR + 56 - s.ay);
       lamps.push({ x: 120, y: HOR + 36, r: night ? 34 : 20, a: night ? 0.55 : 0.16, color: PIGMENT.windowLight });
-      treeline(ctx, HOR - 6, 3, 'broad', 'mature');
+      // A lamp by the door, lit after dark: the one Wick keeps.
+      {
+        const ln = sprite('lantern', { lit: true });
+        ctx.drawImage(ln.canvas, 92 - ln.ax, HOR + 58 - ln.ay);
+        lamps.push({ x: 92, y: HOR + 48, r: night ? 26 : 14, a: night ? 0.6 : 0.14, color: PIGMENT.lantern });
+      }
+      // Wick, on the step. He is the reason this screen is a home and not
+      // a building, and he is the same cat who does the talking.
+      {
+        const wk = sprite('wick', { pose: 'sit', lamp: false, lit: true });
+        ctx.drawImage(wk.canvas, 152 - wk.ax, HOR + 64 - wk.ay);
+      }
       if (state?.built?.stonePaths) for (let x = 0; x < W; x += 14) { const pv = sprite('paving', { w: 16, seed: `hp${x}` }); ctx.drawImage(pv.canvas, x - 2, HOR + 64); }
-      scatter(ctx, 'flowerPatch', 4, HOR + 70, HOR + 120, { n: 6, colors: [0, 1, 3], w: 18, h: 9 });
+      // In the band a phone actually shows, not below the sheet.
+      scatter(ctx, 'flowerPatch', 5, HOR + 22, HOR + 70, { n: 6, colors: [0, 1, 3], w: 18, h: 9 });
+      scatter(ctx, 'grassTuft', 8, HOR + 16, HOR + 76, { size: 2 });
+      scatter(ctx, 'bush', 3, HOR + 10, HOR + 40, {});
     }
   };
 

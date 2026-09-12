@@ -260,6 +260,11 @@ export async function renderSession(outlet, { storage }, params) {
         ex.data = { question: session.current, chosen };
         explanationSlot.innerHTML = '';
         explanationSlot.appendChild(ex);
+        // The verdict is under four options — off the bottom of a phone.
+        // Nothing appearing where nobody is looking has ever taught anyone.
+        requestAnimationFrame(() => {
+          ex.querySelector('.verdict')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
       }
       function onSubmit() {
         if (!selected) return;

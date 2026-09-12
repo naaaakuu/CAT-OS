@@ -610,6 +610,33 @@ function bird({ frame = 0, dark = true }) {
   return done(p, 3, 2);
 }
 
+/**
+ * Wick at map scale. The valley is drawn at 640 × 720 world pixels, where
+ * the whole cottage is thirty across — so the companion who is 26 × 22 in
+ * a portrait is 11 × 9 here. Same charcoal, same cream chest, same amber
+ * eye: small enough to belong on the map, recognisable enough to be him.
+ */
+function catSmall({ frame = 0, sitting = true }) {
+  const p = new Pix(11, 9);
+  const c = ramp('#4A4550');
+  const cream = ramp('#EFE3CA');
+  // Tail, curling back with a cream tip.
+  p.rect(8, 5, 2, 2, c.base); p.px(10, 4, c.base); p.px(10, 3, cream.base);
+  // Body and head.
+  p.rect(2, 4, 6, 4, c.base);
+  p.rect(3, 4, 4, 1, c.light);
+  p.rect(4, 5, 3, 3, cream.base);
+  p.rect(1, 1, 5, 4, c.base);
+  p.px(1, 0, c.base); p.px(5, 0, c.base);              // ears
+  p.px(2, 2, '#F2C14E'); p.px(4, 2, '#F2C14E');        // eyes
+  p.px(3, 3, '#C58B90');                                // nose
+  // Front paws, alternating when he pads about.
+  p.px(2, 8 - (frame % 2), cream.base);
+  p.px(6, 8, cream.base);
+  p.outline();
+  return done(p, 5, 8);
+}
+
 function cat({ frame = 0 }) {
   const p = new Pix(9, 7);
   const c = ramp(PIGMENT.cat);
@@ -926,10 +953,119 @@ function dog({ frame = 0 }) {
   return done(p, 5, 8);
 }
 
+/* ------------------------------------------------------------------ */
+/* Wick — the companion                                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Wick, the lamp-keeper: a small charcoal cat with a cream chest, amber
+ * eyes and a brass lantern he never puts down for long. He is the one
+ * character in the valley drawn at a size you can read an expression on
+ * (20x20 rather than the 9x7 background cat), because he is the only one
+ * who ever speaks.
+ *
+ * Poses: 'sit' (at rest, tail curled), 'look' (chin up, ears forward),
+ * 'walk' (legs alternate with frame). `lamp` places the lantern beside
+ * him and `lit` decides whether it is burning — the whole first
+ * experience turns on that one flame.
+ */
+function wick({ pose = 'sit', frame = 0, lamp = true, lit = true, blink = false }) {
+  const p = new Pix(26, 22);
+  const c = ramp('#4A4550');          // charcoal fur
+  const cream = ramp('#EFE3CA');      // chest, muzzle, paws, tail tip
+  const up = pose === 'look';
+  const top = up ? 1 : 2;             // where the head starts
+
+  /* Tail — sweeps out right and curls up, cream at the tip. */
+  const curl = up ? 1 : 0;
+  p.rect(19, 17, 3, 2, c.base);
+  p.rect(21, 15, 2, 3, c.base);
+  p.rect(22, 12 - curl, 2, 4, c.base);
+  p.rect(21, 10 - curl, 2, 2, cream.base);
+  p.px(21, 10 - curl, cream.light);
+
+  /* Body — shoulders narrow, seat wide. */
+  p.rect(11, top + 9, 9, 4, c.base);
+  p.rect(10, top + 12, 11, 5, c.base);
+  p.rect(10, top + 12, 11, 1, mix(c.base, c.light, 0.5));
+  p.rect(10, top + 16, 11, 1, c.shade);
+  p.px(10, top + 12, c.shade); p.px(20, top + 12, c.shade);
+  /* Chest blaze */
+  p.rect(13, top + 11, 5, 6, cream.base);
+  p.rect(13, top + 11, 5, 1, cream.light);
+  p.px(13, top + 16, cream.shade); p.px(17, top + 16, cream.shade);
+
+  /* Front paws — they alternate only when he walks. */
+  const lift = pose === 'walk' ? (frame % 2) : 0;
+  p.rect(11, top + 16 - lift, 2, 2, cream.base);
+  p.rect(18, top + 16 - (pose === 'walk' ? 1 - lift : 0), 2, 2, cream.base);
+
+  /* Ears — separated by a gap of sky, so they read as ears. */
+  for (const ex of [10, 17]) {
+    p.rect(ex, top + 1, 3, 1, c.base);
+    p.px(ex + (ex === 10 ? 1 : 1), top, c.base);
+    p.px(ex + 1, top + 1, '#96707A');
+  }
+
+  /* Head — a rounded box under the ears. */
+  p.rect(10, top + 2, 10, 8, c.base);
+  p.px(10, top + 2, c.shade); p.px(19, top + 2, c.shade);
+  p.px(10, top + 9, c.shade); p.px(19, top + 9, c.shade);
+
+  /* Eyes — amber, a pupil, a catch-light. */
+  const ey = top + 5;
+  if (blink) { p.rect(12, ey + 1, 2, 1, c.dark); p.rect(16, ey + 1, 2, 1, c.dark); }
+  else {
+    p.rect(12, ey, 2, 2, '#F2C14E'); p.rect(16, ey, 2, 2, '#F2C14E');
+    p.px(13, ey, '#2A2230'); p.px(13, ey + 1, '#2A2230');
+    p.px(16, ey, '#2A2230'); p.px(16, ey + 1, '#2A2230');
+    p.px(12, ey, '#FFF3CF'); p.px(17, ey, '#FFF3CF');
+  }
+
+  /* Muzzle — a pink nose over a cream chin. */
+  p.px(14, top + 7, '#C58B90'); p.px(15, top + 7, '#C58B90');
+  p.rect(13, top + 8, 4, 1, cream.base);
+  p.px(13, top + 8, c.base); p.px(16, top + 8, c.base);
+  /* Whiskers */
+  p.px(9, top + 7, cream.shade); p.px(20, top + 7, cream.shade);
+
+  /* The lantern he keeps. */
+  if (lamp) {
+    const t = ramp(PIGMENT.timber);
+    p.vline(4, 9, 19, t.dark); p.vline(3, 9, 19, t.base);
+    p.rect(2, 19, 4, 2, t.shade);
+    p.rect(1, 3, 6, 6, lit ? '#A8813E' : '#6E6152');
+    p.rect(2, 4, 4, 4, lit ? PIGMENT.lantern : '#7C6A52');
+    p.rect(3, 5, 2, 2, lit ? '#FFF6D8' : '#8E7C62');
+    p.rect(2, 2, 4, 1, t.dark); p.px(4, 1, t.dark);
+  }
+
+  p.outline();
+  return done(p, 15, 20);
+}
+
+/** A short plank dock, walking out over the shallows. */
+function dock({ w = 22, h = 9 }) {
+  const p = new Pix(w, h + 6);
+  const t = ramp(PIGMENT.timber);
+  // Posts first, in the water.
+  for (let x = 2; x < w - 1; x += 6) { p.vline(x, h - 1, h + 5, t.dark); p.px(x + 1, h + 2, t.shade); }
+  // Planks running out from the shore.
+  for (let y = 0; y < h; y += 1) {
+    const c = y % 3 === 0 ? t.light : y % 3 === 1 ? t.base : t.shade;
+    p.hline(0, w - 1, y, c);
+  }
+  p.hline(0, w - 1, 0, t.light);
+  p.hline(0, w - 1, h - 1, t.dark);
+  for (let x = 0; x < w; x += 4) p.vline(x, 0, h - 1, mix(t.base, t.dark, 0.35));
+  p.outline();
+  return done(p, Math.floor(w / 2), h - 1);
+}
+
 const RECIPES = {
   tree, flower, flowerPatch, grassTuft, bush, bramble, rock, stump, lilypad, reeds,
   cottage, tower, workshop, lantern, signpost, bridge, fence, terraceWall,
-  koi, butterfly, bird, cat, cloud, rootStone, marker, puff,
+  koi, butterfly, bird, cat, catSmall, cloud, rootStone, marker, puff, wick, dock,
   hive, heron, arch, shrine, arbour, stall, well, villager, paving, stoneBridge,
   deer, sheep, duck, dog,
 };

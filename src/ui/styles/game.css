@@ -534,3 +534,57 @@
 :root[data-room] .screen__eyebrow { color: var(--g-ink-3); }
 :root[data-room] cat-nav { background: var(--g-glass); border-top: 1px solid var(--g-line); }
 :root[data-room] cat-nav a[aria-current="page"] { color: var(--g-accent); background: rgba(47,107,79,0.1); }
+
+/* ============================================================
+   Answering: what you read in the four seconds after you choose.
+
+   The rule (the 2026-09-12 brief, §11): verdict, then one reason, then
+   the trap you actually fell into — and the whole teardown behind a
+   disclosure for the learner who wants it. Nothing was deleted; the
+   default changed, because the default is what gets read.
+   ============================================================ */
+
+.xtrap {
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: rgba(198, 83, 58, 0.09);
+  margin: 12px 0;
+}
+.xtrap__label {
+  margin: 0 0 1px;
+  font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--g-danger, #C6533A);
+}
+.xtrap__kind {
+  display: inline-block; margin-bottom: 3px;
+  font-size: 12px; font-weight: 600; color: var(--g-danger, #C6533A);
+}
+.xtrap p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--g-ink); }
+
+.xwork { margin: 14px 0 4px; }
+.xwork > summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 0;
+  font-size: 14px; font-weight: 700;
+  color: var(--g-accent);
+}
+.xwork > summary::-webkit-details-marker { display: none; }
+.xwork > summary::after { content: "▾"; font-size: 10px; transition: transform 180ms var(--g-ease); }
+.xwork[open] > summary::after { transform: rotate(180deg); }
+.xwork[open] > summary { margin-bottom: 4px; }
+.xwork__body { padding-top: 2px; }
+
+/* The sticky answer bar must not sit ON the lesson. It carries the card's
+   own paper up behind it, with a short fade, so the last line of an
+   explanation ends cleanly above the button instead of behind it. */
+.run__actions {
+  padding-top: 16px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--g-paper-2) 34%);
+}
+:root[data-world] .card:has(> .run__actions) { padding-bottom: 4px; }
+/* The verdict is scrolled to when it appears; leave room for the run bar
+   above it, and a longer fade under the sticky answer bar. */
+cat-explanation .verdict { scroll-margin-top: 86px; }
+.run__actions { padding-top: 26px; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--g-paper-2) 46%); }

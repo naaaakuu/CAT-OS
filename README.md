@@ -13,6 +13,13 @@ never browse a library: a curator chooses what is worth meeting next out of
 what you have mastered, what is due, how hard you can currently work, and
 what your own answers say you are weak at.
 
+The first time you open it, none of that is on the screen. It is night, the
+valley has gone dark, and a small cat called **Wick** has been keeping one
+lamp alight, waiting. He asks you to name the place. Then he asks you to do
+one small thing — six words, about a minute — and when you look up, the sun
+is coming over the valley you just named. That is the whole game, explained
+by doing it once.
+
 - **The Rootwood** — 51 Latin and Greek root families (217 words): take a word
   apart, build one nobody taught you, and a tree grows in one of six groves.
 - **The Meadow** — the CAT word lists: 2,577 high-, medium- and low-frequency
@@ -35,7 +42,11 @@ what your own answers say you are weak at.
   you were never shown.
 - **The Hearth** — home and the Workshop: the four crafts you have made, the
   twenty-one works you can build with them, the day's three asks, and the
-  honest read on where you stand.
+  honest read on where you stand. Wick sits on the step.
+- **Growth** — four abilities as four trees, each at the stage your own
+  record has earned: Reading, Vocabulary, Verbal and CAT pace. Under them,
+  the one that would move most, said as a next action. Under *that*, every
+  number, for anyone who wants it.
 - **The Wilds** — the weekly Gauntlet: the same thirty questions all week —
   words from three places and nine asked the way CAT asks them, inside a
   real sentence — three minutes, against your own best.

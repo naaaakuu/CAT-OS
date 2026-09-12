@@ -37,7 +37,11 @@ export async function renderHearth(outlet, { storage }) {
   }
   let { state } = world;
   const atmo = state.atmo;
+  // A query after the route is a hint for this screen, never part of the
+  // match (the router strips it): ?works=1 opens the Workshop, ?you=1 the
+  // standing. The menu is the only thing that sends them.
   const openWorks = location.hash.includes('works=1');
+  const openYou = location.hash.includes('you=1');
 
   outlet.innerHTML = `
     <section class="place place--hearth">
@@ -195,7 +199,7 @@ export async function renderHearth(outlet, { storage }) {
   }
 
   const TABS = { works: renderWorks, today: renderToday, you: renderYou };
-  let current = openWorks ? 'works' : state.readyWorks.length ? 'works' : 'today';
+  let current = openYou ? 'you' : openWorks ? 'works' : state.readyWorks.length ? 'works' : 'today';
   const select = (name) => {
     current = name;
     for (const t of outlet.querySelectorAll('.tab')) t.classList.toggle('is-on', t.dataset.tab === name);
@@ -226,6 +230,11 @@ export async function renderHearth(outlet, { storage }) {
       </div>`;
     document.body.appendChild(veil);
     requestAnimationFrame(() => veil.classList.add('is-in'));
+    // It is mounted on the body, not the outlet, so the router will never
+    // take it away: it has to take itself away on any navigation, or it
+    // hangs over every screen the learner visits next.
+    const dropVeil = () => { veil.remove(); window.removeEventListener('hashchange', dropVeil); };
+    window.addEventListener('hashchange', dropVeil);
     try {
       await storage.put(STORES.LEARNING, {
         id: `build:${w.id}`, kind: 'world-build', module: 'world',
@@ -238,6 +247,7 @@ export async function renderHearth(outlet, { storage }) {
       sessionStorage.setItem('world:focus', w.region);
       sessionStorage.setItem('world:changed', w.region);
       sessionStorage.setItem('world:change-line', `<b>${escapeHTML(w.name)}</b> — ${escapeHTML(w.after ?? '')}`);
+      sessionStorage.setItem('world:wick', builtLine(w));
       play('open');
     });
     // Refresh in place too, so staying on the Hearth shows the truth.
@@ -251,6 +261,20 @@ export async function renderHearth(outlet, { storage }) {
     } catch { /* the veil still tells the truth */ }
     building = false;
   }
+}
+
+/** What Wick says when he sees the thing you built. He notices; he never
+ *  congratulates, and he never says the word "unlocked". */
+function builtLine(w) {
+  const name = String(w.name ?? '').replace(/^A |^The /, '');
+  const lines = [
+    `The ${name.toLowerCase()}. That wasn't here yesterday.`,
+    `Look at that. A ${name.toLowerCase()}.`,
+    `So that's what the ${name.toLowerCase()} looks like.`,
+  ];
+  let n = 0;
+  for (const ch of String(w.id ?? '')) n = (n + ch.charCodeAt(0)) % 997;
+  return lines[n % lines.length];
 }
 
 export { REGIONS };

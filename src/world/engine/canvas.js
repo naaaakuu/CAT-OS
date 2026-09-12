@@ -60,6 +60,10 @@ export class WorldRenderer {
     this.time = 0;
     this.running = false;
     this.lastTs = 0;
+    // True while a finger or the mouse is on the canvas: the frame loop
+    // skips world simulation for as long as it is.
+    this.interacting = false;
+    this.dirty = true;
     this.onTap = opts.onTap ?? null;
     this.onMove = opts.onMove ?? null;
     this.overlay = null; // optional (ctx, view) painter after lighting
@@ -159,6 +163,7 @@ export class WorldRenderer {
     const pos = (e) => { const r = el.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
     this.#onDown = (e) => {
       if (e.button !== undefined && e.button !== 0) return;
+      this.interacting = true;
       el.setPointerCapture?.(e.pointerId);
       const p = pos(e);
       this.#pointers.set(e.pointerId, p);
@@ -188,11 +193,16 @@ export class WorldRenderer {
       const dt = Math.max(1, now - (this.#lastMove?.t ?? now - 16));
       this.cam.vx = (-dx / this.cam.zoom) / dt * 16; this.cam.vy = (-dy / this.cam.zoom) / dt * 16;
       this.#lastMove = { t: now };
-      this.draw();
+      // NOT this.draw(). Pointer moves are delivered faster than frames on
+      // most touch hardware (and coalesced events arrive in bursts), so
+      // drawing here painted the same frame two or three times over. Mark
+      // it dirty and let the one rAF loop do exactly one draw per frame.
+      this.invalidate();
     };
     this.#onUp = (e) => {
       const p = pos(e);
       this.#pointers.delete(e.pointerId);
+      if (this.#pointers.size === 0) this.interacting = false;
       if (this.#pointers.size < 2) this.#pinch = null;
       if (this.#dragging && this.#pointers.size === 0) {
         this.#dragging = false;
@@ -215,7 +225,7 @@ export class WorldRenderer {
       else if (e.key === '+' || e.key === '=') this.zoomAt(this.cssW / 2, this.cssH / 2, clamp(this.cam.zoom * 1.2, this.minZoom(), this.maxZoom()));
       else if (e.key === '-') this.zoomAt(this.cssW / 2, this.cssH / 2, clamp(this.cam.zoom / 1.2, this.minZoom(), this.maxZoom()));
       else return;
-      e.preventDefault(); this.clampCamera(); this.draw();
+      e.preventDefault(); this.clampCamera(); this.invalidate();
     };
     el.addEventListener('pointerdown', this.#onDown);
     el.addEventListener('pointermove', this.#onMovePtr);
@@ -233,7 +243,14 @@ export class WorldRenderer {
     const after = this.toWorld(sx, sy);
     this.cam.x += before.x - after.x; this.cam.y += before.y - after.y;
     this.clampCamera();
-    this.draw();
+    this.invalidate();
+  }
+
+  /** The camera changed: draw on the next frame. A still scene with no loop
+   *  running draws immediately, because nothing else ever will. */
+  invalidate() {
+    this.dirty = true;
+    if (!this.running) this.draw();
   }
 
   /* ---------------- loop ---------------- */
@@ -275,8 +292,13 @@ export class WorldRenderer {
       this.cam.vx *= Math.pow(0.9, dt / 16); this.cam.vy *= Math.pow(0.9, dt / 16);
       this.clampCamera();
     }
-    this.scene.update?.(dt, this.time);
+    // While the camera is in someone's hand, the valley holds still: the
+    // ducks, the butterflies, the smoke and the weather are not what the
+    // learner is looking at during a drag, and simulating them is the one
+    // cost a pan cannot afford. They pick up exactly where they left off.
+    if (!this.interacting) this.scene.update?.(dt, this.time);
     this.draw();
+    this.dirty = false;
     this.#raf();
   }
 
@@ -361,7 +383,9 @@ export class WorldRenderer {
   #edge(which, view) {
     const fn = this.scene[which];
     if (!fn) return;
-    const key = `${view.ox}|${view.oy}|${view.z.toFixed(3)}|${view.w}|${view.h}`;
+    // A scene whose edges depend on more than the camera (the hour, say)
+    // says so through `edgeKey`; otherwise the geometry alone is enough.
+    const key = `${view.ox}|${view.oy}|${view.z.toFixed(3)}|${view.w}|${view.h}|${this.scene.edgeKey ?? ''}`;
     let slot = this.#edges[which];
     if (!slot) {
       const c = document.createElement('canvas');

@@ -20,7 +20,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 32;
+const CACHE_VERSION = 33;
 const CONTENT_VERSION = 13;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -127,6 +127,8 @@ const SHELL_FILES = [
   './src/world/index.js',
   './src/world/regions.js',
   './src/world/state.js',
+  './src/world/companion.js',
+  './src/world/menu.js',
   './src/world/economy.js',
   './src/world/lexicon.js',
   './src/world/audio.js',
@@ -142,6 +144,7 @@ const SHELL_FILES = [
   './src/world/craft-ui.js',
   './src/world/screens/backdrop.js',
   './src/world/screens/world.js',
+  './src/world/screens/awaken.js',
   './src/world/screens/place.js',
   './src/world/screens/round.js',
   './src/world/screens/result.js',

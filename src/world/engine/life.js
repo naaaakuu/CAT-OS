@@ -160,18 +160,27 @@ export function koi({ cx, cy, rx, ry, count = 3, seed = 'koi' }) {
   };
 }
 
-/** The Hearth cat: sits by the door, flicks its tail, sometimes walks a few steps. */
-export function hearthCat({ x, y, seed = 'cat' }) {
+/**
+ * Wick by the Hearth door: sits, flicks his tail, pads a few steps and
+ * settles again. `recipe` picks the scale — 'catSmall' for the map, 'wick'
+ * for a hero scene where he is close enough to have an expression.
+ */
+export function hearthCat({ x, y, seed = 'cat', recipe = 'catSmall', lamp = false, lit = true }) {
   const r = rng(seed);
   let t = 0, dx = 0, target = 0, next = 4000;
+  let blinkAt = 3000;
   return {
     update(dt) {
-      t += dt; next -= dt;
+      t += dt; next -= dt; blinkAt -= dt;
+      if (blinkAt <= -160) blinkAt = 2600 + r() * 3400;
       if (next <= 0) { target = Math.round((r() - 0.5) * 14); next = 5000 + r() * 8000; }
       if (dx < target) dx += 0.01 * dt; else if (dx > target) dx -= 0.01 * dt;
     },
     draw(ctx) {
-      const s = sprite('cat', { frame: Math.floor(t / 700) % 2 });
+      const moving = Math.abs(target - dx) > 1;
+      const s = recipe === 'wick'
+        ? sprite('wick', { pose: moving ? 'walk' : 'sit', frame: Math.floor(t / 420) % 2, lamp, lit, blink: blinkAt <= 0 })
+        : sprite('catSmall', { frame: Math.floor(t / 700) % 2 });
       ctx.save();
       ctx.translate(Math.round(x + dx), y);
       if (target < dx) ctx.scale(-1, 1);
