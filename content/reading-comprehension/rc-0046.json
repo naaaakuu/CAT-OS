@@ -74,8 +74,13 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q3 is where a strong candidate is most likely to go wrong, and the live rival is the option that calls the historian safe because a narrow vote makes the alternative easy to establish. A narrow vote does satisfy the minimal rewrite, and the passage does treat such a case as the good one; but the fourth paragraph says in terms that a well-made counterfactual 'does not establish what would have happened', so satisfying the condition is a licence to run the exercise, not a warrant for its result. Q2's near miss is the option about tracing consequences as long as the record stays detailed, which sounds like ordinary evidential prudence; the second paragraph blocks it by naming the limit as one 'set by the alternative itself and not by how thoroughly the actual past happens to be documented'. Q4's rival is the option that two historians may disagree about a turning point without disagreeing about events, which reads like a paradox invented by the candidate; it is forced by the first paragraph's identification of a causal claim with a counterfactual. Q5's rival is the option that the author defends the method against the no-evidence objection: true of the first paragraph only, and the last paragraph grants that objection almost everything it asked for.",
-      "blind_solve": null
+      "adversarial_review": "Q3 is where a strong candidate is most likely to go wrong, and the live rival is the option that calls the historian safe because a narrow vote makes the alternative easy to establish. A narrow vote does satisfy the minimal rewrite, and the passage does treat such a case as the good one; but the fourth paragraph says in terms that a well-made counterfactual 'does not establish what would have happened', so satisfying the condition is a licence to run the exercise, not a warrant for its result. Q2's near miss is the option about tracing consequences as long as the record stays detailed, which sounds like ordinary evidential prudence; the second paragraph blocks it by naming the limit as one 'set by the alternative itself and not by how thoroughly the actual past happens to be documented'. Q4's rival is the option that two historians may disagree about a turning point without disagreeing about events, which reads like a paradox invented by the candidate; it is forced by the first paragraph's identification of a causal claim with a counterfactual. Q5 (all four options rebuilt as compound purposes; the key had been the only one naming two jobs, and the longest by a fifth): the rival is still the option that the author defends the method against the no-evidence objection, now paired with restoring its standing. The first half is true of the first paragraph only, the last paragraph grants that objection almost everything it asked for, and nothing in the piece is a rehabilitation. The other two pair a real move with an addition the text refuses — a charge of bad faith, where the author says only that the objection is in one respect self-defeating, and a sorting by audience, where the sorting is by method.",
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 5,
+        "total": 5,
+        "notes": "full agreement; q5 rebalanced after this pass — awaiting re-solve"
+      }
     },
     "vocab_extracted": [
       "precipitated",
@@ -355,37 +360,37 @@
       ],
       "stem": "The author's purpose in the passage is best described as an attempt to",
       "options": {
-        "A": "defend counterfactual history from the objection that events which did not happen have left no evidence behind",
-        "B": "show that historians who refuse counterfactual reasoning cannot account for the causes of anything at all",
-        "C": "separate the counterfactuals that entertain a general reader from those that persuade other historians",
-        "D": "replace the question whether the method is legitimate with a test of which uses are disciplined, and to say what those show"
+        "A": "defend counterfactual history from the charge that it rests on no evidence, and to restore the method's standing among historians",
+        "B": "show that historians who refuse counterfactual reasoning already use it, and that their objection is therefore made in bad faith",
+        "C": "separate the counterfactuals written to entertain a general reader from those written to persuade, and to recommend the second",
+        "D": "replace the question whether the method is legitimate with a test of which uses are disciplined, and to say what those uses show"
       },
       "correct": "D",
       "estimated_time_sec": 80,
       "explanation": {
         "expert_notice": "Each paragraph announces its office. The first dissolves the yes-or-no question by making causal history counterfactual already; the second says 'the useful question is not whether to run them but which of them can be run well' and supplies two conditions; the third applies them; the fourth states the yield. A purpose statement has to carry the change of question and the yield together.",
-        "correct_reasoning": "The correct option names the operation rather than the subject. The passage does not argue that counterfactual history is permissible and stop; it converts an argument about permission into a test, applies the test to two kinds of case, and then limits what passing it is worth, which is why the last paragraph exists at all. Both halves of the option correspond to halves of the piece.",
+        "correct_reasoning": "The correct option names the operation rather than the subject. The passage does not argue that counterfactual history is permissible and stop; it converts an argument about permission into a test, applies the test to two kinds of case, and then limits what passing it is worth, which is why the last paragraph exists at all. Every option here offers two jobs, so the pairing decides nothing; what decides it is that only this pair reaches the fourth paragraph, where the yield of a disciplined counterfactual is priced.",
         "passage_anchor": "rc-0046-p2",
-        "question_type_note": "A purpose question wants the verb of the whole passage. If an option describes what only the opening does, it has named a movement rather than the piece.",
+        "question_type_note": "A purpose question wants the verb of the whole passage. If an option describes what only the opening does, it has named a movement rather than the piece — and pairing that movement with a second job does not make it the whole.",
         "reading_habit": "Ask what question the passage ends up answering, not what question it starts from. Authors who reframe a debate almost always announce the new question in a single sentence, usually early in the second paragraph.",
         "distractors": [
           {
             "option": "A",
             "trap_type": "too_narrow",
-            "why_wrong": "That defence occupies the first paragraph and is over by the second, and the closing paragraph concedes the objection most of what it asked for by admitting that the evidence for an alternative past does not exist.",
-            "seductive_element": "It describes the passage's opening move accurately and matches the reputation such an essay is expected to be defending."
+            "why_wrong": "The defence occupies the first paragraph and is over by the second, and nothing is restored: the closing paragraph concedes the objection most of what it asked for by admitting that the evidence for an alternative past does not exist and cannot be manufactured by care. It also says the objectors often reach the author's own conclusion by other means, which is not how a rehabilitation ends.",
+            "seductive_element": "It describes the passage's opening move accurately, and the first sentence's remark about the method's poor reputation makes rehabilitation sound like the errand the piece is on."
           },
           {
             "option": "B",
             "trap_type": "overstatement",
-            "why_wrong": "The passage says such historians already reason counterfactually without noticing, which is the opposite of an incapacity; it adds that they often reach the author's own conclusion about contingency by other means.",
-            "seductive_element": "The first paragraph does catch the objectors in an inconsistency, and an inconsistency feels like it should ground a stronger charge."
+            "why_wrong": "The first half is the first paragraph exactly, and the second half is a charge the passage never makes: the objection is called serious and then 'in one respect, self-defeating', which is a fault in the position rather than in the honesty of those who hold it.",
+            "seductive_element": "The first paragraph does catch the objectors relying on what they reject, and an inconsistency feels as though it should ground a stronger charge than the author is willing to bring."
           },
           {
             "option": "C",
             "trap_type": "passage_language_shifted",
-            "why_wrong": "The division drawn is between counterfactuals that meet two stated conditions and those that do not, which is a matter of method rather than of audience; entertainment appears once, in the final sentence, as what is left over after the sorting has been done.",
-            "seductive_element": "The passage does end on the word entertainment and does mention a contrast with what other historians will accept, so an audience-based division sounds like its own."
+            "why_wrong": "The division drawn is between counterfactuals that meet two stated conditions and those that do not, which is a matter of method rather than of audience; entertainment appears once, in the final sentence, as what is left over after the sorting has been done, and the passage recommends nothing to a reader in search of one kind or the other.",
+            "seductive_element": "The passage does end on the word entertainment and does contrast what will persuade historians with what will not, so an audience-based division sounds like its own, and a recommendation is what a sorting seems to be for."
           }
         ]
       }

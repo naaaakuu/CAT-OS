@@ -76,8 +76,13 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Every hard option in this set is built from a reader who stopped at the end of the fourth paragraph. Q3's rival says an arrangement surviving disclosure must be aimed at the chooser's good; the fifth paragraph denies it in one sentence, allowing an honest arrangement aimed at something harmful. Q4's rival is that passing the test shows an arrangement worth adopting, the same slide from a necessary test to a sufficient one. Q5's rival is triumphant, which would be right if the paragraph did not exist, and the paragraph exists in order to mark two limits. Q6's rival is the option that objections to nudging have no force, which is the second paragraph's premise promoted to the conclusion; the passage uses it only to say the objection has been badly aimed, and then re-aims it. Q1's rival is the claim that people cannot predict what any individual will choose, which is true of the world and irrelevant to why the complaint fails.",
-      "blind_solve": null
+      "adversarial_review": "Every hard option in this set is built from a reader who stopped at the end of the fourth paragraph. Q3 (options levelled: the key had been the longest and the only one carrying a trailing qualifier, so all four now claim something and then qualify it): the rival still says an arrangement surviving disclosure must be aimed at the chooser's good, and the fifth paragraph denies it in one sentence, allowing an honest arrangement aimed at something harmful. Its second rival has been replaced, since the old one lived on the approval sentence that q4 now tests; the new one has the surviving arrangement working on deliberation instead of habit, and dies on 'because seeing a thing first really does make it easier to take', which is the habit still doing the work with the sign up. Q4 (rewritten: it and q3 both ran on the fifth paragraph's sentence about answering one question and being silent on a second, which is one sentence too few to carry two of six questions; it now runs on the third paragraph's setting-aside of approval): the live rival reads a chooser's objection as evidence of manipulation, which is tempting because the paragraph opens on what people resent — but the same sentence rules out what the chooser would think in both directions, and offers people disapproving of things that are good for them as its example. The second rival ties being welcome to surviving description, and the fifth paragraph parts those two by naming helpful arrangements that lose part of their force when they are described. Q5's rival is triumphant, which would be right if the paragraph did not exist, and the paragraph exists in order to mark two limits. Q6's rival is the option that objections to nudging have no force, which is the second paragraph's premise promoted to the conclusion; the passage uses it only to say the objection has been badly aimed, and then re-aims it. Q1's rival is the claim that people cannot predict what any individual will choose, which is true of the world and irrelevant to why the complaint fails.",
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 6,
+        "total": 6,
+        "notes": "full agreement; q3 rebalanced and q4 rewritten onto new material after this pass — awaiting re-solve"
+      }
     },
     "vocab_extracted": [
       "neutral",
@@ -245,16 +250,16 @@
       ],
       "stem": "It can be inferred from the passage that an arrangement which goes on working after it has been fully explained",
       "options": {
-        "A": "must be aimed at something that is good for the chooser himself",
-        "B": "is one that no chooser anywhere would have any reason to object to",
-        "C": "does not in fact influence the chooser's decision in any way",
+        "A": "must be aimed at the chooser's own good, whatever he happens to think of it",
+        "B": "no longer works on the chooser's habits, since he now decides the matter deliberately",
+        "C": "does not in fact influence the chooser's decision, which is now entirely his own",
         "D": "has passed the author's test, which still leaves open whether it ought to be used"
       },
       "correct": "D",
       "estimated_time_sec": 75,
       "explanation": {
         "expert_notice": "The last paragraph does two things and says so: the test answers one question, whether an arrangement manipulates, and is silent about a second, whether what people are being steered towards is good for them. It then supplies the case that proves the silence, an honest arrangement pushing someone towards harm.",
-        "correct_reasoning": "Surviving disclosure is exactly what the test measures, so an arrangement that does survive has passed it. What the passage refuses to add is any conclusion about the destination, which is why it says announcing an arrangement does not improve matters in the least when the arrangement points somewhere bad. The correct option grants the pass and withholds the verdict, which is the author's own position.",
+        "correct_reasoning": "Surviving disclosure is exactly what the test measures, so an arrangement that does survive has passed it. What the passage refuses to add is any conclusion about the destination, which is why it says announcing an arrangement does not improve matters in the least when the arrangement points somewhere bad. The correct option grants the pass and withholds the verdict, which is the author's own position. Every option here attaches a second clause to its claim, so the qualifying is common to all four; what separates them is whether the second clause takes anything back or quietly adds a verdict.",
         "passage_anchor": "rc-0054-p5",
         "question_type_note": "When an author proposes a test and then limits it, inference questions ask you to keep the limit. The strongest wrong answers are the ones that would be right if the limiting paragraph did not exist.",
         "reading_habit": "Whenever a passage offers a test, ask what the test does not measure. Authors who are worth reading say so, usually in the paragraph after the test is introduced, and that sentence is where most of the questions live.",
@@ -263,19 +268,19 @@
             "option": "A",
             "trap_type": "necessary_as_sufficient",
             "why_wrong": "The final paragraph denies precisely this, allowing an arrangement that is announced with perfect honesty and still pushes a chooser towards something that harms him.",
-            "seductive_element": "The two examples in the passage happen to line up, a wholesome one that survives disclosure and a shabby one that does not, which suggests the test tracks goodness."
+            "seductive_element": "The two examples in the passage happen to line up, a wholesome one that survives disclosure and a shabby one that does not, and the closing clause borrows the passage's own low opinion of approval, which makes the whole claim sound like the author's."
           },
           {
             "option": "B",
             "trap_type": "unsupported_inference",
-            "why_wrong": "The passage rules approval out as a test in the third paragraph, remarking that plenty of people disapprove of things that are good for them, so nothing follows about what every chooser would accept.",
-            "seductive_element": "An arrangement that works even after being explained sounds like one nobody could reasonably mind."
+            "why_wrong": "The sentence that makes the salad case work says the opposite: a good many people still take it 'because seeing a thing first really does make it easier to take', so the same habit is doing the same work with the sign in place. Disclosure changes whether an effect depends on ignorance, not whether it runs through deliberation.",
+            "seductive_element": "Explaining an arrangement sounds like an invitation to think it over, and a reader expects an honest nudge to work by persuading rather than by placing."
           },
           {
             "option": "C",
             "trap_type": "opposite_direction",
             "why_wrong": "The point of the surviving case is that it does influence people and carries on doing so in the open; the passage explains why, since seeing a thing first really does make it easier to take.",
-            "seductive_element": "Disclosure is expected to neutralise influence, so an arrangement that is permissible after disclosure can seem to be one that no longer works."
+            "seductive_element": "Disclosure is expected to neutralise influence, so an arrangement that is permissible after disclosure can seem to be one that no longer works, and the closing clause flatters the chooser by handing the decision back to him."
           }
         ]
       }
@@ -289,50 +294,50 @@
         "arg.qualification",
         "arg.necessary_vs_sufficient"
       ],
-      "target_mistake": "collapsing the passage's two questions into one, so that passing the first counts as an answer to the second",
-      "prediction_target": "The learner should be able to say: the paragraph splits the judgement in two and hands the test only the first half.",
+      "target_mistake": "putting the chooser's approval back in as the thing the test measures, so that objecting to an arrangement becomes evidence that it manipulates and welcoming it becomes evidence that it does not",
+      "prediction_target": "The learner should be able to say beforehand: the test asks whether an arrangement keeps working once it has been explained, and that is a different question from whether the chooser likes it, so the two can come apart in either direction.",
       "difficulty": {
         "inference_depth": 3,
         "distractor_similarity": 4,
         "reasoning_depth": 3
       },
       "secondary_skills": [
-        "main_idea",
+        "scope",
         "argument"
       ],
-      "stem": "Which of the following follows from the final paragraph?",
+      "stem": "The author sets aside the question whether the chooser would approve of an arrangement. It follows that",
       "options": {
-        "A": "An arrangement that passes the test is thereby shown to be worth adopting.",
-        "B": "An arrangement that is aimed at a bad end will always turn out to fail the test sooner or later.",
-        "C": "Two separate questions have to be asked about a nudge, and the test answers only the first.",
-        "D": "The test should be abandoned, since it cannot settle the cases that matter most."
+        "A": "an arrangement the chooser objects to has, by that objection alone, been shown to manipulate him",
+        "B": "an arrangement the chooser would welcome is one that goes on working once it has been described",
+        "C": "an arrangement may pass the test although the person it acts upon would rather it were not there",
+        "D": "whether an arrangement manipulates depends on what the chooser makes of where it is steering him"
       },
       "correct": "C",
       "estimated_time_sec": 75,
       "explanation": {
-        "expert_notice": "The paragraph is built on the word one and the word second. It answers one question, whether the arrangement manipulates, and it is silent about a second, whether the destination is good. The closing lines then put the same structure in another way by calling it a first question rather than a last one.",
-        "correct_reasoning": "The implication is a division of labour. Deciding what to think of a nudge takes two judgements, and the author has supplied a method for one of them while saying plainly that the other is untouched. The correct option states the division without adding a verdict about either half, which is as far as the paragraph goes.",
-        "passage_anchor": "rc-0054-p5",
-        "question_type_note": "An implication question wants what the text commits its author to, not what it says. Where a paragraph separates two questions, the implication is usually the separation itself.",
-        "reading_habit": "Count the questions an author says he is answering. When the number is smaller than the number the topic requires, the missing one is where the implication questions are set.",
+        "expert_notice": "The third paragraph stops to throw one criterion away before the real one arrives: 'Notice that the question is not whether the chooser would approve of the arrangement; plenty of people disapprove of things that are good for them, and approval is a poor test of anything.' What replaces it is a question about the arrangement rather than about the chooser's opinion of it, namely whether the thing carries on working once it has been explained.",
+        "correct_reasoning": "If approval is not what the test measures, then a chooser's dislike cannot be what makes an arrangement fail it, and whatever survives disclosure survives whether or not he is pleased. The salad is the worked case: the sign explains the placement and a good many people take the salad anyway, 'because seeing a thing first really does make it easier to take', a mechanism that goes on working in a chooser who resents the whole arrangement. The correct option claims only that the two can come apart, which is exactly what setting approval aside commits the author to.",
+        "passage_anchor": "rc-0054-p3",
+        "question_type_note": "An implication question wants what the text commits its author to rather than what it states. When an author discards one criterion in favour of another, the implication is that the two can disagree, and an option is right only if it keeps that disagreement one-sided in the direction the text allows.",
+        "reading_habit": "When a passage throws out one test on the way to proposing another, write both down. Most of the wrong answers in this form quietly reinstate the discarded test, either as evidence for the verdict or as an extra condition on it.",
         "distractors": [
           {
             "option": "A",
-            "trap_type": "necessary_as_sufficient",
-            "why_wrong": "The paragraph exists to block this step, allowing an arrangement that is announced with perfect honesty and still harms the chooser; passing the test clears an arrangement of one charge and recommends nothing.",
-            "seductive_element": "A test proposed at length in the previous paragraph feels as if it must deliver a verdict, and this is the verdict a reader expects it to deliver."
+            "trap_type": "opposite_direction",
+            "why_wrong": "Disapproval goes out with approval in the same sentence, which rules out what the chooser would think of the arrangement and then gives an example running the other way, of people disapproving of things that are good for them. What settles the charge is whether the effect survives being described, and a chooser's objection is no evidence about that.",
+            "seductive_element": "Resentment is where the paragraph begins — what people resent is being influenced in a way that depends on their not knowing — so an objection feels like the very thing the test was built to detect."
           },
           {
             "option": "B",
-            "trap_type": "unsupported_inference",
-            "why_wrong": "The passage supplies the counter-example itself. An arrangement pointed at something harmful may be described honestly and go on working, which is why the author has to introduce a second question at all.",
-            "seductive_element": "The one arrangement in the passage that fails the test is also the shabbiest, which makes a rule out of a coincidence between two examples."
+            "trap_type": "comparison_distortion",
+            "why_wrong": "Being welcome and surviving description are kept apart, and the last paragraph names the cases where they separate: some genuinely helpful arrangements 'probably lose part of their force when they are described', which is the kind a chooser would welcome and which does not simply carry on as before.",
+            "seductive_element": "In both worked examples the honest arrangement is also the agreeable one, so a reader has watched the two travel together and has not yet seen them part."
           },
           {
             "option": "D",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The paragraph opens by calling the test worth having and closes by calling it a good first question; the hard middle cases are named as its limit, not as grounds for discarding it.",
-            "seductive_element": "A paragraph spent listing what a method cannot do reads as a retraction if the opening and closing sentences are skimmed."
+            "trap_type": "wrong_condition",
+            "why_wrong": "This makes the verdict on manipulation turn on the chooser's view of the destination, which the passage excludes twice: approval is refused as a test in the third paragraph, and the fifth says the test is silent about whether the thing people are being steered towards is any good for them.",
+            "seductive_element": "The passage does insist that the destination matters, so carrying it into the manipulation question looks like taking the author's second point seriously rather than mixing his two questions."
           }
         ]
       }
