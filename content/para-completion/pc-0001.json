@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0001",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Confidence of the Lie Detector",
+    "theme": "why experience makes lie detectors more confident rather than more accurate",
+    "estimated_time_sec": 70,
+    "gap_function": "consequence",
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": ["disc.function_slot", "disc.stance_continuity", "struct.cause_effect", "disc.closing_sentence"],
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 2, "distractor_closeness": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "decide what the last sentence must do — draw the consequence of the sentence before it — before reading the options",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-12", "usage_note": "Original composition in CAT register for CAT OS. General findings on lie detection accuracy; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pc-001",
+    "reviewer_notes": "An early-tier completion: the paragraph builds to one claim (experience gives certainty, not accuracy) and the gap must draw its consequence. The stance-shift decoy is optimistic where the paragraph is sceptical.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The optimistic option about teaching lie detection is the strongest rival because it sounds like the kind of sentence a paragraph about a problem ends on. It fails on stance and support: the paragraph reports that experience does not improve accuracy and offers no evidence that training does, so a recommendation contradicts the paragraph's own scepticism. The 'harmless vanity' option contradicts the point sentence 4 is building toward — certainty without accuracy is exactly what makes the vanity costly.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Most people believe they are better than average at telling when someone is lying.",
+      "In controlled studies, however, the accuracy of untrained observers hovers just above chance, and the confident do no better than the hesitant.",
+      "Police officers, judges and customs agents, who might be expected to have learned from experience, score about the same as everyone else.",
+      "What experience gives them is not accuracy but certainty."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "This suggests that lie detection can be taught, provided the training concentrates on accuracy rather than on confidence.",
+      "B": "Untrained observers, by contrast, tend to rely on facial cues that professionals have long learned to ignore.",
+      "C": "The cost of that certainty is that a confident misjudgement is acted upon, while a hesitant one is checked.",
+      "D": "Believing oneself a good judge of character is, after all, a common and largely harmless vanity."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has just made its sharpest claim: experience produces certainty without accuracy. A closing sentence must draw the consequence of that claim, in the same sceptical register, at the same scope — professionals who judge lies. It must not introduce a remedy the paragraph has not earned, and it must not soften the point.",
+    "correct_reasoning": "The correct option takes 'certainty' from the last sentence and says why it matters: a confident misjudgement is acted upon, a hesitant one is checked. That is the consequence the paragraph has been building toward, it keeps the sceptical stance, and 'that certainty' ties it to the sentence before with a definite reference that nothing else in the paragraph could satisfy.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "stance_shift",
+        "why_wrong": "The paragraph is sceptical throughout and has just reported that experience does not improve accuracy; a hopeful claim that lie detection can be taught contradicts that stance and rests on nothing the paragraph offers.",
+        "seductive_element": "Paragraphs about problems often end with a solution, and the phrase 'accuracy rather than confidence' echoes the last sentence."
+      },
+      {
+        "option": "B",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "Sentence 3 says professionals score about the same as untrained observers, so a contrast in which professionals have learned to ignore misleading cues contradicts the paragraph's own evidence.",
+        "seductive_element": "'By contrast' sounds like a paragraph developing its point, and facial cues are what everyone associates with lie detection."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The sentence before the gap has just shown why the vanity is not harmless — certainty without accuracy is exactly the problem — so a closing line calling it harmless reverses the paragraph's direction while sounding wise.",
+        "seductive_element": "It is quotable and gently worldly, and 'after all' makes it sound like a conclusion."
+      }
+    ],
+    "method": "Before reading the options, say what the last sentence has to do — here, draw the consequence of certainty without accuracy — and in what tone. Then test each option against that job. A sentence that changes the paragraph's stance, contradicts its evidence or sounds like a moral for a different paragraph is out, however elegant it is."
+  },
+  "mentor": {
+    "challenge": "The paragraph stops one sentence early, just after its sharpest claim. Decide what that claim demands next before any option tries to decide for you.",
+    "takeaway": "The last sentence does the job the sentence before it set up — never a new job."
+  }
+}

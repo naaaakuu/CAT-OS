@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0020",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "sociology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Ceremony That Outlives Its Creed",
+    "theme": "why rituals survive the beliefs that once justified them",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: CAT 2025 used 2 four-sentence TITA jumbles per slot; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["article_given_new", "lexical_repetition", "substitution_ellipsis", "connective_implicit"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["lexical_decoy"],
+    "dna_traits": ["surface_matching", "global_tracking", "ending_judgement"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 3,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 1,
+      "competing_endings": 3,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "let a phrase like 'in each case' fix the position of a sentence that otherwise sounds like a closing generalisation",
+    "reasoning_patterns": ["disc.competing_ending", "disc.given_new", "disc.example_after_claim", "disc.lexical_chain", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival order puts the mechanism sentence (D) before the examples (B), the shape a reader expects: claim, explanation, illustration. It is defeated by D's opening 'In each case', which requires cases already on the page; B supplies them. A cannot open because 'the belief' and 'the ceremony' are definite references to C's 'doctrine behind a ritual'. CBAD, which links C's 'ritual' straight to B's funerals and feasts, breaks because A's 'Long after the belief has faded' is the direct answer to C's assumption and cannot follow a list of examples it never mentions.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General sociology of ritual; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pj-002",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); the v2 exemplar",
+    "reviewer_notes": "A medium-tier jumble engineered so that the expected shape (claim, mechanism, examples) is wrong and the actual shape (claim, examples, generalisation) is fixed by one phrase. Heuristic solvers who order by 'general before specific' lose here."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Long after the belief has faded, the ceremony remains, and it remains because it still does something the belief was never needed for.",
+      "role": "contrast"
+    },
+    {
+      "label": "B",
+      "text": "A funeral gathers the scattered; a harvest feast marks the turn of the year; a graduation tells a family that a stage is over.",
+      "role": "example"
+    },
+    {
+      "label": "C",
+      "text": "It is tempting to assume that when people stop believing in the doctrine behind a ritual, the ritual will shortly follow it into disuse.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "In each case the ceremony coordinates: it brings people to one place at one time and tells them what the occasion means.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["C", "A", "B", "D"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "C introduces 'the doctrine behind a ritual' and the assumption that the ritual will die with it. A answers that assumption directly — 'Long after the belief has faded, the ceremony remains' — and its definite phrases 'the belief' and 'the ceremony' can only refer to what C set up."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "A ends on an open claim: the ceremony 'still does something'. B shows the something — three ceremonies, each doing a job. Examples follow the claim they illustrate."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "D opens with 'In each case', which needs cases already on the page. B's funeral, feast and graduation are the cases, and D names what they have in common."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph argues against an assumption. It states the assumption, contradicts it with a claim, illustrates the claim with three cases, and then draws the general lesson from the cases. The move from examples to generalisation at the end is what makes this jumble different from the usual claim-then-example shape.",
+    "movement": [
+      { "label": "C", "why_here": "C sets up the assumption everything else answers. It needs nothing before it, and it introduces the ritual and the doctrine that A will refer to as 'the ceremony' and 'the belief'." },
+      { "label": "A", "why_here": "A is the turn: the ceremony survives the belief because it does something else. Its definite references depend on C, and its unfinished 'does something' asks for the examples that follow." },
+      { "label": "B", "why_here": "B supplies the something, three times over. Each ceremony is shown doing a job that has nothing to do with doctrine." },
+      { "label": "D", "why_here": "D generalises from the three cases with 'In each case', names the job as coordination, and lands the paragraph. Its opening phrase is why it cannot come before B." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CADB",
+        "trap_type": "competing_ending",
+        "why_tempting": "Explain before you illustrate is the shape most paragraphs take, so D's mechanism seems to belong right after A's claim, with the vivid examples as a closing flourish.",
+        "where_it_breaks": "D says 'In each case'. Placed before B, there are no cases yet for the phrase to point at. The author wrote the examples first and the generalisation after; the phrase records that order."
+      },
+      {
+        "order": "CBAD",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "C mentions a ritual and B lists rituals, so the two seem to belong together.",
+        "where_it_breaks": "A's 'Long after the belief has faded, the ceremony remains' answers C's assumption sentence by sentence. Put B between them and the answer arrives after a list it never refers to, while A's open 'does something' has nothing left to point forward to."
+      }
+    ],
+    "trap_named": "This jumble is built to punish a habit, not a misreading. Readers who order by shape — general statement, then examples — put the mechanism before the cases. The author did the reverse, and left a marker: 'In each case'. A phrase that counts things must come after the things.",
+    "solving_habit": "Before deciding on the paragraph's shape, look for phrases that point at a plural — 'in each case', 'both', 'these examples'. They fix a sentence after the things they count, whatever the paragraph's shape seems to want."
+  },
+  "mentor": {
+    "challenge": "Two of these sentences sound like endings. One of them counts the other's examples, and counting comes after.",
+    "paragraph_plain": "People assume that when a belief dies, the ceremony built on it dies too. It usually does not. The ceremony keeps going because it does a job the belief was never needed for: a funeral brings scattered people together, a harvest feast marks the year's turn, a graduation tells a family that something is over. In each case, the ceremony gathers people in one place and tells them what the moment means.",
+    "takeaway": "A sentence that says 'in each case' has already seen the cases. Put it after them."
+  }
+}

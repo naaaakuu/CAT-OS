@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0002",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Bond Nobody Signed",
+    "theme": "reputation as a posted bond, and why preferring the established firm is rational",
+    "estimated_time_sec": 90,
+    "clue_types": ["connective_explicit", "article_given_new", "synonym_hypernym"],
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.transition_word", "disc.given_new", "disc.pronoun_antecedent", "struct.cause_effect", "disc.rhetorical_pivot"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "learning_objective": "resolve 'This is why' to the sentence that actually supplies a cause, and notice that a later sentence's definite reference ('the new firm') can only be licensed by the missing one",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-12", "usage_note": "Original composition in CAT register for CAT OS. General economics of reputation; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-sp-001",
+    "reviewer_notes": "A CAT-tier placement: three of the four slots read smoothly for one sentence, and only the pair of clues (a causal connective that needs a mechanism; a definite reference that needs an introduction) fixes the seat.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "After sentence 3 is the live rival: 'This is why we trust the old firm over the new one' reads as a conclusion drawn from the new firm's difficulty. It is defeated because sentence 3 says 'The new firm's difficulty' — a definite noun phrase that assumes a new firm has been mentioned, and only the missing sentence mentions one. After sentence 1 is also plausible for a fast reader: 'This is why' can seem to follow from 'cannot be bought'; but sentence 1 describes the asset without giving any mechanism that would explain trust, and the mechanism (the promise, the bond) arrives in sentence 2.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A reputation is a strange kind of asset: it is built slowly, spent quickly, and cannot be bought from anyone who already has one." },
+      { "n": 2, "text": "Because it is so expensive to acquire, a good reputation is also a promise; its holder has more to lose from a single betrayal than the betrayal could ever gain." },
+      { "n": 3, "text": "The new firm's difficulty is not that it is dishonest but that it has posted no bond; its honesty, however real, is not yet visible to anyone." },
+      { "n": 4, "text": "What looks like consumer prejudice is, on this reading, a rough but rational way of pricing information that nobody can inspect directly." }
+    ]
+  },
+  "missing": {
+    "text": "This is why we trust the old firm over the new one even when the new one's product is, by every measurable standard, the same.",
+    "position": 2,
+    "function": "the consequence drawn from the promise mechanism in sentence 2, which introduces the old and new firms that sentence 3 then contrasts"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"This is why we trust the old firm over the new one even when the new one's product is, by every measurable standard, the same.\"",
+    "options": {
+      "A": "Before sentence 1",
+      "B": "After sentence 1",
+      "C": "After sentence 2",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 0, "B": 1, "C": 2, "D": 3 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "'This is why' demands a cause, and sentence 2 is the only sentence that gives one: a reputation is a promise because its holder has more to lose from betrayal than betrayal could gain. Trusting the old firm follows from that mechanism, not from sentence 1's description of reputation as a strange asset. Then sentence 3 opens with 'The new firm's difficulty' — a definite phrase that assumes a new firm has already been introduced — and only the missing sentence introduces one. Between 2 and 3 is the one seat that both the connective and the reference allow.",
+    "clue_before": "Sentence 2 supplies the mechanism — a reputation is a promise backed by what its holder stands to lose — which is the cause 'This is why' has to point at.",
+    "clue_after": "Sentence 3 begins 'The new firm's difficulty', a definite reference that needs the new firm to have been introduced; the missing sentence is where it enters.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_connective",
+        "why_wrong": "A paragraph cannot open with 'This is why': the connective needs a cause already on the page, and at the opening there is nothing for it to point at.",
+        "seductive_element": "The sentence states the paragraph's most concrete claim, and concrete claims often open paragraphs."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "After sentence 1, 'This is why' would bind to the fact that reputation cannot be bought — a description, not a mechanism that explains trust. The explanation of trust is the promise in sentence 2, which would then arrive after the conclusion it supports.",
+        "seductive_element": "Sentence 1 is about reputation and the missing sentence is about trusting reputations, so the topic matches closely."
+      },
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Read with sentence 3 alone, the sentence sounds like a conclusion about the new firm's problem. But sentence 3 already speaks of 'the new firm' as something known; placing the introduction of the new firm after that sentence leaves sentence 3 referring to a firm the reader has not met.",
+        "seductive_element": "It reads smoothly as a moral drawn from sentence 3, and 'this' seems to summarise the bond argument."
+      }
+    ],
+    "method": "A causal connective — 'this is why', 'hence', 'so' — must sit immediately after the sentence that supplies the cause, not merely after a sentence on the same topic. Then run the reference check forward: any later sentence that says 'the new firm', 'the second view', 'such cases' has to come after the sentence that introduced them. When both checks point at the same seat, you are done."
+  },
+  "mentor": {
+    "challenge": "Three of the four slots read smoothly for this sentence. Only one satisfies the connective at its front and the definite reference in the sentence that must follow it.",
+    "takeaway": "'This is why' points at a cause, not at a topic; and a definite noun phrase points back at an introduction."
+  }
+}

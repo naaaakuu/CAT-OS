@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0021",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "public-policy",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "The Bus That Emptied No Cars",
+    "theme": "what free public transport actually changes",
+    "estimated_time_sec": 75,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Free public transport mainly moves people who already walked or cycled onto buses, so its real benefit is mobility for those without cars rather than fewer cars on the road.",
+      "scope": "Cities that have introduced free fares, as reported by their own surveys.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": { "present": true, "marker": "But" },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 3,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 2,
+      "domain_load": 1
+    },
+    "load_bearing": ["mainly", "rather than"],
+    "separating_element": null,
+    "dna_traits": ["main_idea_detection", "author_intent", "evidence_vs_thesis", "certainty_reading"],
+    "mission": "watch_the_turn",
+    "learning_objective": "locate the claim after the turn and keep the author's final qualification, which rescues the policy from the option that calls it worthless",
+    "reasoning_patterns": ["sum.central_vs_supporting", "sum.stance_kept", "sum.qualification_kept", "struct.pivot", "lang.contrast_marker"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that calls free transport worthless: it follows the turn correctly and captures the failure to reduce traffic, but the paragraph's last sentence explicitly denies 'worthless' and names the real benefit. The ridership option is what a reader who stops at sentence two would choose; the 'But' that opens sentence three is the whole item. The prescriptive option adds a policy the author never proposes.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS. General findings on fare-free transit; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-ps-002",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); the v2 exemplar",
+    "reviewer_notes": "A concession-turn item where the last sentence does real work: it keeps the author from the conclusion the evidence seems to invite. Three distortion families: logic (the turn collapsed), stance (flipped to dismissal), addition (a prescription)."
+  },
+  "paragraph": {
+    "sentences": [
+      { "text": "It seems obvious that making buses free should take cars off the road.", "role": "setup" },
+      { "text": "Cities that have tried it report large rises in ridership, which looks like success.", "role": "concession" },
+      { "text": "But surveys of the new riders find that most of them previously walked or cycled, and only a small minority have left a car at home.", "role": "evidence" },
+      { "text": "Free fares mainly change how people who were already not driving get around.", "role": "thesis" },
+      { "text": "The lesson is not that free transport is worthless, but that its benefit is access for the carless rather than relief for the roads.", "role": "qualification" }
+    ]
+  },
+  "ideal_summary": "Free public transport mostly shifts walkers and cyclists onto buses rather than drivers out of cars, so its real value is mobility for people without cars, not less traffic.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say free public transport actually does, and what is its real benefit?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say who the new bus riders mostly are, rather than just reporting that ridership rose?",
+        "kept": "Good. The rise in ridership is the concession; the claim is about who rides and what that means for cars.",
+        "drifted": "The ridership rise is the sentence before the turn. The paragraph's claim is what the surveys found afterwards: mostly walkers and cyclists, few former drivers."
+      },
+      {
+        "id": "stance",
+        "ask": "Did your sentence keep the author's last move — that the policy is not worthless, only differently useful?",
+        "kept": "Well held. The author corrects an expectation without dismissing the policy; a summary that drops the benefit for the carless drops the author's stance.",
+        "drifted": "'Fails' or 'worthless' overshoots. The author explicitly refuses that reading and names a real benefit: access for people without cars."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'mainly' or 'mostly', or did your sentence say free fares do nothing for traffic?",
+        "kept": "Right. A small minority did leave a car at home; the claim is about what mostly happens.",
+        "drifted": "Nothing in the paragraph says no driver switched. The author's word is 'mainly', and a summary that turns it into 'never' says more than the surveys support."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Free public transport increases ridership substantially, which shows that it succeeds in its aim of taking cars off the road.",
+      "B": "Because free fares mainly attract people who already walked or cycled, their real benefit is mobility for those without cars rather than fewer cars on the road.",
+      "C": "Free public transport is worthless as a transport policy, since the evidence shows it fails to reduce traffic in the cities that have tried it.",
+      "D": "Cities should charge for public transport and spend the savings on cycle lanes, since free buses only draw riders away from walking and cycling."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "The paragraph starts with an expectation — free buses, fewer cars — and a fact that seems to confirm it: ridership rises. Then it turns. The new riders are mostly people who were walking or cycling; few were driving. So free fares mainly change how non-drivers travel. The author ends by refusing the cynical reading: the policy is not worthless, its benefit is simply different — access for the carless, not relief for the roads.",
+      "correct_reasoning": "The correct option follows the turn, keeps the hedge ('mainly'), and preserves the author's final stance: a corrected expectation, not a condemnation. It states the cause (who the new riders are) and the reframed benefit exactly as the last two sentences do.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "contrast_collapse",
+          "secondary_archetype": null,
+          "why_wrong": "This stops at the concession. The 'But' in sentence three exists to overturn exactly this reading: ridership rose, and it was not the drivers who came.",
+          "seductive_element": "It is true that ridership rose and that this 'looks like success' — the paragraph says so in those words.",
+          "thinking_mistake": "Reading the sentence before the turn as the point, because it is the first thing that sounds like a result."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The author explicitly says the lesson is 'not that free transport is worthless'. This option takes the failure to reduce traffic and turns it into a verdict the paragraph refuses.",
+          "seductive_element": "It follows the turn correctly and gets the traffic finding right; only the stance is wrong.",
+          "thinking_mistake": "Hearing a corrected expectation as a dismissal — treating 'it does not do what you thought' as 'it does nothing'."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph recommends nothing. Charging fares and building cycle lanes are policies imported from outside the text, and 'only draw riders away' overstates a finding the author reports as 'mainly'.",
+          "seductive_element": "It sounds like the practical conclusion a sensible reader might draw from the surveys.",
+          "thinking_mistake": "Summarising what should be done about the facts instead of what the author said the facts are."
+        }
+      ],
+      "reading_habit": "When a paragraph ends with 'the lesson is not X but Y', the summary must contain Y and must not contain X. Check the last sentence against every option before you choose."
+    }
+  },
+  "mentor": {
+    "challenge": "One sentence in this paragraph looks like a result and is not. The turn comes after it, and the last line decides how far the turn goes.",
+    "takeaway": "A correction is not a condemnation. Keep the author's 'not worthless' as carefully as the author's 'mainly'."
+  }
+}

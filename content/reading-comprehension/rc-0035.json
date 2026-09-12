@@ -1,0 +1,518 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0035",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "public-policy",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "structure-mapping",
+      "inference",
+      "application",
+      "concession-tracking"
+    ],
+    "word_count": 630,
+    "question_count": 6,
+    "question_types": [
+      "agree_disagree",
+      "application",
+      "best_characterization",
+      "except",
+      "paragraph_function",
+      "phrase_in_context"
+    ],
+    "theme": "the precautionary principle as a choice of default under uncertainty, adjudicated between its critics and its defenders",
+    "estimated_time_min": 10.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-002",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); authored as the long-passage exemplar",
+    "reviewer_notes": "The long exemplar: three voices (critics, defenders, author), a genuine adjudication in the fourth paragraph and a closing move that turns the quarrel into a shared problem. Six questions across six types; the application question is the set's near-tie.",
+    "length_class": "long",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "judicious, even-handed",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "inf.author_vs_reported",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "inf.author_view_application",
+      "comp.function_over_words",
+      "comp.explicit_detail",
+      "word.context_clue",
+      "scope.condition",
+      "arg.necessary_vs_sufficient",
+      "elim.near_tie",
+      "lang.implicit_negation",
+      "meta.attention",
+      "arg.qualification",
+      "comp.paraphrase"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q6 (application) is the near-tie: the groundwater compound meets all three triggers named in p3 (plausible threat, irreversible harm, uncertainty), while the bicycle-lane case meets uncertainty but not irreversibility and the additive meets neither; a strong candidate may argue the proven-harm case is 'grave', but p3 makes uncertainty a trigger and proven harm is its absence. Q1: the option calling the principle empty or paralysing is the critics' view, which the author endorses only for the slogan (p4 'stated as a slogan'); the option must carry the author's whole position, including the defensible default. Q2: 'ordinary weighing' is tempting because p3 says it applies outside the trigger, but the stem gives no trigger information and the author's point in p5 is that 'permit until harm is shown' is itself a default choice.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "caricature",
+      "paralysing",
+      "default"
+    ]
+  },
+  "passage": {
+    "title": "Which Error Would You Rather Make?",
+    "reading_time_min": 2.9,
+    "paragraphs": [
+      {
+        "id": "rc-0035-p1",
+        "text": "When a new technology or an unfamiliar chemical arrives, two instincts collide. One says: do not act against it until harm has been shown. The other says: do not permit it until safety has been shown. The second instinct has a name, the precautionary principle, and since the 1990s it has travelled from environmental treaties into ordinary regulatory life, where it now governs decisions about food, medicines and industrial processes, and appears in the fine print of trade disputes and the preambles of city ordinances. Its appeal is easy to state. The costs of some harms are irreversible, and waiting for proof can mean waiting until the damage is done."
+      },
+      {
+        "id": "rc-0035-p2",
+        "text": "The principle's critics make an argument that is less about values than about logic. Every action, they observe, carries risk, and so does every refusal to act. A ban on a pesticide is a decision to accept whatever the pests would have destroyed; a delay in approving a drug is a decision to accept the deaths the drug would have prevented. Precaution, on this view, is not caution at all. It is a rule that counts only one kind of harm — the harm of doing — and lets the harm of not doing pass unrecorded. Taken strictly, a principle that forbids every risky action forbids everything, including inaction, and so gives no guidance whatever."
+      },
+      {
+        "id": "rc-0035-p3",
+        "text": "Defenders reply that the critics are attacking a caricature. No serious version of the principle demands proof of safety, which is impossible for anything. It demands two narrower things: that the burden of producing evidence fall on whoever proposes the novel intervention, and that the absence of evidence not be treated as evidence of absence. Nor is the principle indifferent to the costs of inaction. It is triggered by a specific combination — a plausible threat, harm that would be serious or irreversible, and genuine scientific uncertainty — and outside that combination the ordinary weighing of costs and benefits applies as it always did. The principle, in this telling, is a rule about who must speak first, not a rule that only one side may speak."
+      },
+      {
+        "id": "rc-0035-p4",
+        "text": "Both sides are partly right, and the disagreement between them is more instructive than either position. The critics are right that the principle, stated as a slogan, is either empty or paralysing; the defenders are right that its serious formulations are neither. What those formulations actually do is shift a default. In the absence of knowledge, some rule must decide what happens in the meantime — permit until proven harmful, or restrain until shown acceptably safe — and the choice between these defaults is a moral choice about which error a society would rather make. The precautionary principle is the claim that, where the possible harm is grave and cannot be undone, the error of wrongly restraining is preferable to the error of wrongly permitting."
+      },
+      {
+        "id": "rc-0035-p5",
+        "text": "That claim can be argued with, and should be, case by case. It cannot be dismissed as illogical, because the alternative default is no less a choice. What the quarrel obscures is that neither side has escaped the problem of acting under uncertainty. The critic who says 'wait for evidence of harm' has chosen a default just as surely as the defender who says 'wait for evidence of safety'; he has simply chosen the one whose costs fall later and on someone else. The farmer whose crop is lost to a banned pesticide and the patient whose drug arrives a year late are real; so are the children downstream of a plant that was permitted on the strength of nobody having looked. The honest question is not whether to have a precautionary rule but where to set its trigger — and that is a question the slogans on both sides were designed to avoid."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0035-q1",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "struct.two_views_adjudication",
+        "inf.author_vs_reported",
+        "arg.qualification"
+      ],
+      "target_mistake": "reporting a view the author only partly endorses (the critics' 'empty or paralysing') as the author's whole position, or attributing the defenders' charge of caricature to the author",
+      "prediction_target": "The learner should be able to say: the author grants the critics the slogan and the defenders the serious version, and holds that the principle is a defensible choice of default whose trigger must be argued case by case.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "scope"
+      ],
+      "stem": "Which of the following best characterises the author's own position on the precautionary principle?",
+      "options": {
+        "A": "It is the only honest response to acting under uncertainty, since the alternative default counts only one kind of harm.",
+        "B": "It is a caricature constructed by its critics and corresponds to no rule that regulators actually apply.",
+        "C": "It is empty as a slogan but, in its serious forms, a defensible choice of default whose trigger must be argued case by case.",
+        "D": "It is empty or paralysing, because a rule that forbids every risky action forbids inaction as well and so gives no guidance."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The author's voice arrives in p4 ('Both sides are partly right') and p5. Everything before it is reported: p2 is the critics, p3 the defenders. A characterisation of the author's position has to be built from p4–p5 alone, and p4 splits the verdict — slogan to the critics, serious formulations to the defenders.",
+        "correct_reasoning": "The correct option reproduces p4's split verdict (empty as a slogan; serious forms are neither empty nor paralysing), p4's account of what the serious forms do (choose a default), and p5's conclusion (the claim 'can be argued with, and should be, case by case'; the real question is 'where to set its trigger'). It is the only option that is the author's, not a party's.",
+        "passage_anchor": "rc-0035-p4",
+        "question_type_note": "A best-characterisation question on a three-voice passage is answered from the author's own paragraphs; the two reported positions are offered as options precisely because half-attentive readers adopt whichever voice spoke last.",
+        "reading_habit": "In any passage with 'critics say' and 'defenders reply', mark where the author starts speaking in their own voice and answer characterisation questions from that point on only.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The author calls the principle a defensible choice that should be argued case by case, never 'the only honest response'; and 'counts only one kind of harm' is the critics' charge against precaution, here turned on the alternative, which the passage does not do.",
+            "seductive_element": "It takes the author's side in p5 and pushes it one step further than the author goes."
+          },
+          {
+            "option": "B",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The defenders say the critics attack a caricature; the author does not say the principle is a caricature, and p1 says it governs real decisions about food, medicines and industrial processes.",
+            "seductive_element": "It uses the word 'caricature' from p3 and sounds like a verdict."
+          },
+          {
+            "option": "D",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the critics' argument from p2, which the author accepts only against the principle 'stated as a slogan' and explicitly rejects for its serious formulations.",
+            "seductive_element": "The author does endorse part of it in p4, and it is the passage's most memorable piece of logic."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0035-q2",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.author_vs_reported",
+        "lang.implicit_negation"
+      ],
+      "target_mistake": "treating 'permit until harm is shown' as the neutral, non-precautionary position when the author's point is that it is a default choice too",
+      "prediction_target": "The learner should predict: the author would say this regulator has chosen a default and thereby made a moral choice about which error to risk, whether or not they realise it.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "The author would most likely agree that a regulator who says 'we will permit the substance until harm has been demonstrated'",
+      "options": {
+        "A": "has avoided the error of counting only one kind of harm that the precautionary principle commits",
+        "B": "has made a moral choice about which error is preferable, whether or not the regulator recognises it as one",
+        "C": "is applying the ordinary weighing of costs and benefits that the principle itself endorses outside its trigger",
+        "D": "must first produce evidence that the substance is acceptably safe before it can be used"
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "P5 addresses this regulator directly: 'The critic who says \"wait for evidence of harm\" has chosen a default just as surely as the defender'. P4 says the choice between defaults 'is a moral choice about which error a society would rather make'. Put the two together and the answer is forced.",
+        "correct_reasoning": "The regulator's statement is the 'permit until proven harmful' default named in p4. The author holds that choosing any default is a moral choice about which error to risk (p4), and that those who choose this one have chosen 'just as surely' as the precautionary side, 'simply' with costs that fall later and elsewhere (p5). The option's 'whether or not the regulator recognises it' matches 'the slogans on both sides were designed to avoid' that question.",
+        "passage_anchor": "rc-0035-p5",
+        "question_type_note": "Author-agreement questions apply the author's stated view to a new case; the reported views are decoys, and the author's view here is that there is no neutral default.",
+        "reading_habit": "When an author says both sides have made the same kind of choice, any option that lets one side off — as neutral, as merely ordinary, as having avoided the choice — contradicts the author.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "misattributed_view",
+            "why_wrong": "Counting only one kind of harm is the critics' charge against precaution (p2); the author neither endorses it as a verdict on the principle nor exempts the permitting default from it — p5 says the permitting critic has merely chosen the harm that falls 'later and on someone else'.",
+            "seductive_element": "It uses the passage's most quotable criticism and flatters the regulator's stance as logically superior."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "P3 does say ordinary weighing applies outside the trigger, but the stem describes a blanket default, not a case outside the trigger, and the author's p5 point is that this stance is itself a default choice, not a neutral weighing.",
+            "seductive_element": "It borrows a true statement from p3 and offers the regulator a respectable description."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the precautionary default, the reverse of what the regulator has chosen; the author's point is about what the permitting default implies, not that it must be replaced.",
+            "seductive_element": "It restates the principle the passage is about, and p3's burden-of-evidence language makes it sound like a requirement."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0035-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.rebuttal",
+        "arg.counterargument"
+      ],
+      "target_mistake": "labelling the defenders' reply as the author's concession or compromise, or describing a detail the paragraph contains instead of the job it does",
+      "prediction_target": "The learner should be able to say: p3 is the defenders' rebuttal, which narrows the principle to a burden-of-evidence rule with a specific trigger — the author's own verdict comes only in p4.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The third paragraph functions primarily to",
+      "options": {
+        "A": "illustrate how the principle travelled from environmental treaties into the regulation of food and medicines",
+        "B": "explain why proof of safety is impossible, and therefore why the principle can never be applied in practice",
+        "C": "concede the critics' logical point on the author's behalf before a compromise is offered in the fourth paragraph",
+        "D": "present the defenders' reply, which narrows the principle to a rule about the burden of evidence with a specific trigger"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph opens 'Defenders reply' and closes 'in this telling' — both markers of a reported position. Between them it does two things: denies the caricature and states what the serious principle demands (burden of evidence; absence of evidence; a three-part trigger). That narrowing is the paragraph's work, and it is done in the defenders' voice.",
+        "correct_reasoning": "The correct option names the speaker (the defenders), the move (a reply to the critics), and the content of the move (narrowing the principle to a burden-of-evidence rule with a trigger). It describes the function of the paragraph within the debate, which is what the question asks.",
+        "passage_anchor": "rc-0035-p3",
+        "question_type_note": "Paragraph-function questions in a debate passage require two things: whose voice the paragraph is in, and what that voice is doing. Options that get the content right but the voice wrong are the standard trap.",
+        "reading_habit": "Tag each paragraph of a debate passage with its speaker before its content: 'critics', 'defenders', 'author'. A function option that assigns a move to the wrong speaker is out no matter how accurately it summarises the paragraph.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "The principle's spread into regulation is stated in p1, not p3, and it is background, not a move in the argument.",
+            "seductive_element": "It is true of the passage and mentions areas the reader remembers."
+          },
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "P3 does say proof of safety is impossible — but as the defenders' reason for denying that the principle demands it, not as a reason the principle cannot be applied; the paragraph's conclusion is the reverse.",
+            "seductive_element": "It quotes a real claim from the paragraph and draws the conclusion the critics would like."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The paragraph is the defenders' rebuttal, not the author's concession; the author does not speak until p4, where the concession to the critics is made in the author's own voice and applies only to the slogan.",
+            "seductive_element": "Concede-then-compromise is a familiar essay shape, and p4 does offer a kind of adjudication."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0035-q4",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "inf.author_vs_reported",
+        "comp.paraphrase",
+        "meta.attention"
+      ],
+      "target_mistake": "failing to match a paraphrase of the critics' case, or confusing the defenders' description of the principle with the critics' description of it",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [],
+      "stem": "According to the passage, each of the following is part of the critics' case against the precautionary principle EXCEPT:",
+      "options": {
+        "A": "The principle places the burden of producing evidence on whoever proposes a novel intervention.",
+        "B": "Refusing to act carries risks of its own, just as acting does.",
+        "C": "The principle records the harms of action while leaving the harms of inaction unrecorded.",
+        "D": "A rule that forbids every risky action would forbid inaction as well."
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The critics' case is p2, and it has three parts: every refusal to act carries risk; precaution counts only the harm of doing; strictly applied it forbids everything, including inaction. The burden-of-evidence description is the defenders' account of the principle in p3, not part of any charge against it.",
+        "correct_reasoning": "Three options paraphrase the three limbs of p2. The remaining option comes from p3, where the defenders say the serious principle 'demands… that the burden of producing evidence fall on whoever proposes the novel intervention'. It is a description offered in the principle's defence, not a criticism, so it is the exception.",
+        "passage_anchor": "rc-0035-p2",
+        "question_type_note": "An EXCEPT question is three verification tasks and one exclusion. Each of the three true options is a paraphrase, so the work is matching claims, not words; the exception is usually something true of the passage but belonging to a different speaker or paragraph.",
+        "reading_habit": "For EXCEPT questions, tick each option against the paragraph the stem points at, in your own words. The option you cannot tick is the answer — and it will often be true somewhere else in the passage.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This paraphrases p2's 'Every action… carries risk, and so does every refusal to act'; a reader matching words rather than claims may miss it because 'refusal to act' has become 'refusing to act'.",
+            "seductive_element": "The wording is plainer than the passage's, so it does not look like a quotation."
+          },
+          {
+            "option": "C",
+            "trap_type": "misattributed_view",
+            "why_wrong": "This is p2's 'counts only one kind of harm… and lets the harm of not doing pass unrecorded', the core of the critics' case; a reader who remembers p3's insistence that the principle is 'not indifferent to the costs of inaction' may wrongly file the charge under the defenders.",
+            "seductive_element": "The defenders answer exactly this point, which makes it feel like their material."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "This is p2's final sentence: 'a principle that forbids every risky action forbids everything, including inaction'. It is the critics' reductio, not a neutral observation, and it belongs to their case.",
+            "seductive_element": "The author later endorses this point against the slogan, so it can feel like the author's rather than the critics'."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0035-q5",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "lang.implicit_negation",
+        "arg.necessary_vs_sufficient"
+      ],
+      "target_mistake": "reading the double negation backwards, or merging this clause with the burden-of-evidence clause beside it",
+      "prediction_target": "The learner should paraphrase before looking: not having found evidence of harm is not the same as having found evidence that there is no harm.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "In the third paragraph, the demand that \"the absence of evidence not be treated as evidence of absence\" most nearly means that",
+      "options": {
+        "A": "a lack of proof that something is harmful should not be taken as proof that it is safe",
+        "B": "regulators should not act against a substance until evidence of harm has been collected",
+        "C": "whoever proposes a new intervention must supply whatever evidence is missing",
+        "D": "a threat that cannot be proven should be treated as though it had been proven"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The phrase is a chiasmus: absence of evidence (nobody has found harm) versus evidence of absence (someone has shown there is no harm). The defenders are saying the first must not be mistaken for the second — which is exactly the mistake the 'permit until harm is shown' default makes.",
+        "correct_reasoning": "Unpacked, the clause says: not having evidence of harm is not evidence that harm is absent. The correct option states that in plain words — no proof of harm is not proof of safety — at the same strength, without adding a rule about who must act or how.",
+        "passage_anchor": "rc-0035-p3",
+        "question_type_note": "A phrase built on a reversal is tested by asking the learner to unfold it; the distractors are the reversal read backwards, the neighbouring clause, and an inflated version.",
+        "reading_habit": "For any phrase of the form 'X of Y is not Y of X', write both halves out as plain sentences before choosing. The half the author denies is usually the one the exam offers you.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Waiting for evidence of harm before acting is precisely treating absence of evidence as evidence of absence; the clause forbids that, so this option states its opposite.",
+            "seductive_element": "It sounds like a cautious, evidence-based rule, and 'evidence of harm' echoes the phrase."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "This is the other demand in the same sentence — the burden of producing evidence — not the meaning of the clause about absence of evidence; the two are listed as 'two narrower things'.",
+            "seductive_element": "It is genuinely part of what the defenders say in the same sentence."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The clause asks that a lack of proof not be treated as proof of safety; it does not ask that an unproven threat be treated as proven, which would be the mirror-image error.",
+            "seductive_element": "It pushes the precautionary side's logic to a strong form that its critics accuse it of holding."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0035-q6",
+      "type": "application",
+      "skill": "application",
+      "patterns": [
+        "inf.author_view_application",
+        "scope.condition",
+        "elim.near_tie",
+        "arg.necessary_vs_sufficient"
+      ],
+      "target_mistake": "applying the principle on the strength of one trigger (uncertainty, or gravity) when the passage requires all three together",
+      "prediction_target": "The learner should extract the rule first: the serious principle applies only where there is a plausible threat, serious or irreversible harm, and genuine uncertainty — all three at once.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "inference"
+      ],
+      "stem": "Which of the following situations best fits the passage's account of when the serious formulations of the precautionary principle apply?",
+      "options": {
+        "A": "A well-studied food additive is proposed for a new product; its risks are small, known and easily reversed.",
+        "B": "A novel compound is proposed for release into groundwater; its long-term effects are unknown, and any contamination could not be undone.",
+        "C": "A city debates a new bicycle lane whose effects on traffic are uncertain but modest and easily reversed.",
+        "D": "A practice that has caused proven and serious harm for decades is proposed for renewal under new management."
+      },
+      "correct": "B",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "P3 states the trigger as 'a specific combination — a plausible threat, harm that would be serious or irreversible, and genuine scientific uncertainty', and p4 repeats it: 'where the possible harm is grave and cannot be undone'. The rule needs all its parts; the question is which case has all of them.",
+        "correct_reasoning": "The groundwater compound is novel (a plausible threat from an unfamiliar intervention), its effects are unknown (uncertainty), and contamination 'could not be undone' (irreversible harm). It is the only option that satisfies every part of the trigger; the others each lack at least one, and p3 says that outside the combination 'the ordinary weighing of costs and benefits applies'.",
+        "passage_anchor": "rc-0035-p3",
+        "question_type_note": "Application questions reward extracting the author's rule as a rule — here a three-part conjunction — and then testing each option against every part. Options that satisfy one part loudly are the decoys.",
+        "reading_habit": "When a passage defines a trigger as a combination, write the parts as a checklist and score each option out of the total. Never let a vivid single feature — 'irreversible', 'unknown' — carry an option on its own.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "Small, known and reversible risks fail every part of the trigger; this is the ordinary cost-benefit case the defenders say the principle leaves alone.",
+            "seductive_element": "It concerns food regulation, which p1 names as an area the principle governs."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "Uncertainty is present, but the harm is modest and reversible, so the combination is incomplete; the principle is triggered by uncertainty about grave, irreversible harm, not by uncertainty as such.",
+            "seductive_element": "It is the near-tie: it foregrounds the word 'uncertain', which readers remember as the principle's whole trigger."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The harm is serious, but it is proven, and the principle is a rule for acting under uncertainty; where harm is demonstrated, no default is needed because the evidence has arrived.",
+            "seductive_element": "Its harm is the gravest of the four, and gravity is one of the trigger's parts."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "caricature",
+      "passage_use": "the critics are attacking a caricature",
+      "meaning_here": "a distorted, exaggerated version of a position that is easier to attack than the real one",
+      "difficulty": "medium"
+    },
+    {
+      "word": "paralysing",
+      "passage_use": "stated as a slogan, is either empty or paralysing",
+      "meaning_here": "making all action impossible by forbidding every option",
+      "difficulty": "medium"
+    },
+    {
+      "word": "default",
+      "passage_use": "What those formulations actually do is shift a default",
+      "meaning_here": "the rule that applies automatically when nothing has been decided",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Three voices speak here: critics, defenders, and finally the author. The questions live on the boundaries between them, and the author does not arrive until the fourth paragraph.",
+    "one_sentence_summary": "The precautionary principle is empty as a slogan but, in its serious forms, a defensible choice of which error to risk under uncertainty — and its critics have made the same kind of choice without admitting it.",
+    "main_idea": "Critics say precaution is illogical because inaction has costs too; defenders say the real principle only shifts the burden of evidence and applies only where harm would be grave, irreversible and uncertain. The author says both are partly right: any rule for acting under uncertainty is a choice of default, and the honest argument is about where to set the trigger, not whether to have one.",
+    "simple_explanation": "When something new arrives — a chemical, a technology — someone has to decide what happens before we know whether it is safe. One instinct says allow it until it is shown to be harmful. The other says hold it back until it is shown to be safe. The second is called the precautionary principle.\n\nThe critics say the principle is bad logic. Doing nothing also has costs: ban a pesticide and the pests eat the crop; delay a drug and people the drug would have saved die. Precaution, they say, only counts the harm of acting and ignores the harm of not acting. Pushed to the limit it forbids everything, so it tells you nothing.\n\nThe defenders say that is not the real principle. The real one does not demand proof of safety, which nobody can give. It asks two things: whoever wants to introduce the new thing must bring the evidence, and 'we have found no harm' must not be mistaken for 'we have found it is safe'. And it only switches on when three things are true together — a real threat, harm that would be severe or permanent, and genuine uncertainty. Everywhere else, ordinary cost-benefit thinking carries on.\n\nThe author steps in and gives each side half. The slogan is empty; the serious version is not. What the serious version really does is choose a default — what happens while we wait for knowledge. Allowing until harm appears, or holding back until safety appears: both are choices about which mistake we would rather make. Precaution says that where the harm would be terrible and permanent, wrongly holding back is the better mistake.\n\nThen the last turn. You can argue with that, case by case, but you cannot call it illogical, because the other default is just as much a choice — one whose costs land later and on other people. Both sides face the same problem: acting without knowing. The real question is where to set the trigger, and the slogans on both sides exist to avoid saying so.",
+    "why_difficult": "The author does not speak until the fourth paragraph, and the two reported positions are each stated persuasively enough to be mistaken for the thesis. The fourth paragraph then splits its verdict — one half to each side — so readers who want a winner take away the wrong one. The three-part trigger in paragraph three is easy to remember as one word, 'uncertainty', which the application question punishes.",
+    "author_intention": "To take a quarrel that both sides fight with slogans and show that it is really a disagreement about where to set a trigger, so that the reader stops asking who is right and starts asking the better question.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0035-p1",
+        "role": "Sets the two instincts",
+        "note": "Permit until harm is shown, or hold back until safety is shown. The second is the precautionary principle, now everywhere in regulation, and its appeal is that some harms cannot be undone."
+      },
+      {
+        "paragraph_id": "rc-0035-p2",
+        "role": "The critics' case",
+        "note": "Not acting has costs too. Precaution counts only the harm of doing, and taken strictly it forbids everything, so it guides nothing."
+      },
+      {
+        "paragraph_id": "rc-0035-p3",
+        "role": "The defenders' reply",
+        "note": "The real principle demands only a burden of evidence and a refusal to read 'no harm found' as 'safe'; it switches on only for grave, irreversible, uncertain harm."
+      },
+      {
+        "paragraph_id": "rc-0035-p4",
+        "role": "The author adjudicates",
+        "note": "Both partly right. The serious principle chooses a default — which mistake to risk while we do not know — and that is a moral choice, not a logical error."
+      },
+      {
+        "paragraph_id": "rc-0035-p5",
+        "role": "Turns the quarrel round",
+        "note": "The permitting side has chosen a default too, one whose costs fall later and elsewhere. The honest question is where to set the trigger — the question the slogans avoid."
+      }
+    ],
+    "tone_progression": "Neutral exposition, then each side given its strongest voice, then a measured verdict that grants and withholds in the same breath, and a closing sentence with a quiet edge against slogans on both sides.",
+    "key_transitions": [
+      "'Defenders reply that the critics are attacking a caricature.' (start of paragraph 3) — the second voice enters.",
+      "'Both sides are partly right, and the disagreement between them is more instructive than either position.' (start of paragraph 4) — the author finally speaks.",
+      "'What the quarrel obscures is that neither side has escaped the problem of acting under uncertainty.' (paragraph 5) — the debate is reframed as a shared problem."
+    ],
+    "misunderstanding": "Readers who take the critics' logic at face value carry 'precaution is illogical' through the whole passage and are surprised to find the author defending a version of it; readers who are moved by the defenders carry 'the critics attack a caricature' and miss that the author agrees the slogan deserves the attack. The fourth paragraph's 'both sides are partly right' is not a shrug — it assigns exactly which part to whom.",
+    "traps_summary": "The set offers you each reported view as the author's, offers the slogan's emptiness as the whole verdict, and offers 'uncertainty' alone as the principle's trigger. Every correct answer requires holding two things at once: whose voice, and which part of the combination.",
+    "reading_lesson": "In a passage that reports two sides before judging, decide for every sentence whose voice it is in, and treat the author's verdict as a distribution — this much to one side, that much to the other — rather than a winner. Options that hand the whole verdict to one side are always available and always wrong.",
+    "real_world": "Every debate about a new drug, a new pesticide, an AI system or a vaccine mandate is this argument in disguise; knowing that both 'wait for harm' and 'wait for safety' are choices of default makes the shouting easier to see through.",
+    "takeaway": "There is no neutral rule for acting before you know; the only honest question is which mistake you would rather make.",
+    "reflection_question": "In a decision you face now, which default have you adopted without noticing — and who pays if it is wrong?"
+  }
+}

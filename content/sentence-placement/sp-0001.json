@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0001",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "The Machine That Needed No Permission",
+    "theme": "how the bicycle changed women's mobility in the 1890s",
+    "estimated_time_sec": 60,
+    "clue_types": ["demonstrative", "article_given_new", "lexical_repetition"],
+    "primary_trap": "right_idea_wrong_position",
+    "reasoning_patterns": ["disc.demonstrative", "disc.given_new", "disc.pronoun_antecedent", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 2, "competing_slots": 2, "concept_abstractness": 1, "syntactic_complexity": 2 },
+    "learning_objective": "find a sentence's seat by resolving 'this reason' backwards and 'the moralists' forwards",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-12", "usage_note": "Original composition in CAT register for CAT OS. General social history of the bicycle; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-sp-001",
+    "reviewer_notes": "The journey's opening placement item: one backward clue ('exactly this reason') and one forward clue (sentence 3's definite 'the moralists'), so the slot is fixed from both sides. Teaches the two-direction check gently.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The tempting slot is the end of the paragraph, where 'exactly this reason' could bind to the freedom described in sentence 4 (a journey without a chaperone). It is defeated by sentence 3, which begins 'The moralists lost' — a definite reference to people the paragraph has not yet introduced unless the missing sentence sits before it. After sentence 1 fails because sentence 1 states a fact (an ordinary possession), not a reason anyone could welcome or oppose.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "In the 1890s the bicycle passed from a novelty into an ordinary possession in much of Europe and North America." },
+      { "n": 2, "text": "For women in particular, it offered something that had long been scarce: a way of travelling alone, quickly, and without asking anyone's leave." },
+      { "n": 3, "text": "The moralists lost, and quickly: long skirts caught in the spokes, and shorter, divided garments followed the wheel almost at once." },
+      { "n": 4, "text": "Within a generation, a journey that had once required a chaperone or a carriage required only a machine and a free afternoon." }
+    ]
+  },
+  "missing": {
+    "text": "Reformers welcomed the machine for exactly this reason, and moralists opposed it for the same one.",
+    "position": 2,
+    "function": "the reaction to the freedom sentence 2 describes, which introduces the moralists sentence 3 then refers to"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Reformers welcomed the machine for exactly this reason, and moralists opposed it for the same one.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 3, "D": 4 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence points in two directions. 'Exactly this reason' looks back to a reason, and only sentence 2 supplies one: a way of travelling alone and without permission is something reformers would welcome and moralists would fear. Sentence 3 then looks back to the sentence: 'The moralists lost' assumes moralists have already been introduced, and nothing in the paragraph introduces them except the missing sentence. Between 2 and 3 is the only seat that satisfies both.",
+    "clue_before": "Sentence 2 ends on a reason — a way of travelling alone, quickly, and without asking anyone's leave — which is what 'exactly this reason' needs to point at.",
+    "clue_after": "Sentence 3 opens with 'The moralists lost', a definite reference to people the paragraph has not yet mentioned; the missing sentence is what introduces them.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "After sentence 1, 'exactly this reason' would have to point at the bicycle becoming an ordinary possession, which is a fact about ownership, not a reason anyone would welcome or oppose the machine.",
+        "seductive_element": "The bicycle has just been named, so 'the machine' reads smoothly."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Placed after sentence 3, the sentence reads acceptably with sentence 4, but it leaves sentence 3's 'The moralists lost' referring to people who have not yet appeared, and 'this reason' would point at a change in clothing rather than at a freedom.",
+        "seductive_element": "Reformers and moralists arguing about skirts sounds like a natural continuation of the clothing sentence."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "At the end, 'this reason' can bind to the freedom in sentence 4, which makes the slot feel right — but sentence 3 has already said the moralists lost, so a sentence introducing the moralists cannot come after it.",
+        "seductive_element": "Sentence 4 restates the very freedom the missing sentence is about, and a sentence about reactions can sound like a closing thought."
+      }
+    ],
+    "method": "Check both directions. First find what the sentence's own references — 'this', 'the same one' — must point back to. Then read the sentence after each candidate slot and ask whether it depends on something only the missing sentence provides. A sentence has to be pulled from behind and pushed from in front; one direction is never enough."
+  },
+  "mentor": {
+    "challenge": "The sentence to place says 'exactly this reason' and names the moralists. One of those words needs something before it; the other is needed by something after it.",
+    "takeaway": "A placed sentence must be demanded by its neighbour behind and required by its neighbour ahead."
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0034",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "linguistics",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "inference",
+      "main-idea-extraction",
+      "vocabulary-in-context",
+      "scope-control"
+    ],
+    "word_count": 202,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "phrase_in_context",
+      "primary_purpose"
+    ],
+    "theme": "pause and interruption norms in conversation as culturally variable and pre-reflective, and why awareness alone does not change them",
+    "estimated_time_min": 4,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-002",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); authored as the short-passage exemplar",
+    "reviewer_notes": "A short passage of the kind CAT has used for one-paragraph or two-paragraph sets: low lexical load, one clean idea, and an inference question that requires combining two paragraphs.",
+    "length_class": "short",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 1,
+    "tone": "observational, wry",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "comp.purpose",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "scope.too_narrow",
+      "lang.absolute_vs_qualified",
+      "word.context_clue",
+      "struct.phenomenon_explanation",
+      "struct.contrast"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q2: the strongest case against the key is that 'may come to misjudge' goes beyond the text; but p2 establishes that the norm is felt as a judgement before any fact is consulted, and p3 says the original rhythm 'begins to feel strange' after long exposure — feeling strange IS the judgement p2 describes, so the inference is forced, not speculative. The option linking long pauses to warm interruption is the tempting decoy: both facts are in p1, but as separate observations. Q1: the recommendation option is attractive because the passage discusses advice; p3 says such advice rarely works.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "invitation",
+      "tellingly"
+    ]
+  },
+  "passage": {
+    "title": "The Length of a Silence",
+    "reading_time_min": 1.1,
+    "paragraphs": [
+      {
+        "id": "rc-0034-p1",
+        "text": "In some speech communities a pause of a full second in conversation is an invitation: the floor is open, and whoever wishes may take it. In others the same pause is a wound. Interruption, too, is not one thing. What one group hears as rudeness another hears as warmth — the eager overlap of people who are, at last, talking about something that matters to them."
+      },
+      {
+        "id": "rc-0034-p2",
+        "text": "These differences are easy to describe and surprisingly hard to feel. A listener does not experience a long pause as 'a pause of unusual length by my community's standards'; she experiences it as awkwardness, as coldness, as the other person's failure to hold up their end. The norm is invisible precisely because it operates before interpretation begins. By the time we notice the silence, we have already judged it."
+      },
+      {
+        "id": "rc-0034-p3",
+        "text": "This is why cross-cultural advice of the form 'be aware that pause norms differ' so rarely changes anything. Awareness is a fact held in mind; the judgement is made faster than any fact can be consulted. What does change behaviour is exposure long enough for the other rhythm to become one's own — at which point, tellingly, the original rhythm begins to feel strange in its turn."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0034-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "scope.too_narrow",
+        "struct.phenomenon_explanation"
+      ],
+      "target_mistake": "mistaking a paragraph's example (interruption as rudeness or warmth) or its closing observation for the passage's purpose, or turning the author's diagnosis into advice",
+      "prediction_target": "The learner should say: the author is explaining that pause norms vary by culture and are judged before we can think, which is why merely knowing about them changes little.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "main_idea"
+      ],
+      "stem": "The author's primary purpose in the passage is to",
+      "options": {
+        "A": "recommend that people who work across cultures study their counterparts' pause norms before they meet",
+        "B": "show that interruption is heard as rudeness in some communities and as warmth in others",
+        "C": "argue that conversational norms such as pause length vary by culture and are judged before conscious thought, which limits what awareness alone can achieve",
+        "D": "explain why the perception of a long silence as awkward is a universal feature of human conversation"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "Three paragraphs, three jobs: p1 shows the variation, p2 explains why it is felt rather than known, p3 draws the consequence for advice. A purpose statement has to cover the consequence, because that is where the passage lands.",
+        "correct_reasoning": "The correct option spans all three paragraphs: variation (p1), pre-reflective judgement (p2: 'before interpretation begins'), and the limit on awareness (p3: such advice 'rarely changes anything'). It names an argument, which is what the passage makes, at the passage's own altitude.",
+        "passage_anchor": "rc-0034-p2",
+        "question_type_note": "Primary-purpose questions want the verb and the object of the whole passage — here 'argue that … which limits …' — not the content of one paragraph.",
+        "reading_habit": "For a purpose question, finish the sentence 'The author wrote this to…' with a verb before you look; then reject any option whose verb (recommend, show, explain) does not match what the passage actually does.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The passage gives no recommendation; its point in p3 is that awareness of the kind such study would produce 'rarely changes anything', so this advice runs against the argument.",
+            "seductive_element": "The passage discusses cross-cultural advice, so an option that offers some feels on topic."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is one illustration inside the first paragraph; it says nothing about the pre-reflective judgement of p2 or the limits of awareness in p3, which are where the passage's argument lives.",
+            "seductive_element": "It is entirely true and is the passage's most vivid contrast."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage's opening point is that the same silence is an invitation in one community and a wound in another; its whole argument depends on the perception not being universal.",
+            "seductive_element": "The passage does say the judgement is universal in speed — 'faster than any fact can be consulted' — and a hurried reader transfers that universality to its content."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0034-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "linking two facts the passage states separately as if it had connected them, or upgrading 'rarely' to 'never'",
+      "prediction_target": "The learner should predict that any correct inference must combine p2 (judgement precedes thought) with p3 (an absorbed rhythm makes the old one feel strange).",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "Communities that tolerate long pauses are also the communities in which interruption is heard as warmth.",
+        "B": "A person who has fully absorbed a second community's conversational rhythm may come to misjudge speakers from her own original community.",
+        "C": "Explicit instruction about differing pause norms produces no change at all in how listeners judge a silence.",
+        "D": "The judgement that a pause is awkward is made only after the listener has consciously measured its length."
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Two sentences do the work: p2's 'by the time we notice the silence, we have already judged it' establishes that feeling a rhythm as strange is a judgement; p3's 'the original rhythm begins to feel strange in its turn' applies that to someone who has absorbed another rhythm. Put together, they force the correct option.",
+        "correct_reasoning": "If long exposure makes another community's rhythm one's own and the original rhythm then 'feels strange' (p3), and if feeling a rhythm as strange is already a judgement of the speaker as cold or rude (p2), then such a person is liable to misjudge her own original community. The option's 'may' matches the passage's cautious register; nothing stronger is claimed.",
+        "passage_anchor": "rc-0034-p3",
+        "question_type_note": "An inference question rewards the option that two or more sentences force together; each distractor here fails on exactly one word — 'also', 'no change at all', 'only after'.",
+        "reading_habit": "Test each option against its own strongest word: 'also' claims a link, 'at all' claims an absolute, 'only after' claims an order. Find that word in the passage or let the option go.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The passage describes pause norms and interruption norms as two separate kinds of variation; it never says the communities that hold one hold the other.",
+            "seductive_element": "Both facts are stated in the first paragraph, one after the other, which makes a link between them feel already made."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says such advice 'so rarely changes anything', a claim about how seldom it works, not a claim that it never works at all.",
+            "seductive_element": "The tone of p3 is dismissive of awareness, and dismissiveness reads as an absolute."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "P2 says the opposite: the judgement is made before interpretation begins, and 'by the time we notice the silence, we have already judged it'.",
+            "seductive_element": "It uses the passage's own material — noticing, judging, a pause's length — in a plausible-sounding sequence."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0034-q3",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "struct.contrast"
+      ],
+      "target_mistake": "reading the metaphor literally or importing an intent the sentence never assigns",
+      "prediction_target": "The learner should paraphrase from the contrast: the same pause that opens the floor in one community is felt as a painful breach in another.",
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [],
+      "stem": "In the first paragraph, the statement that in some communities \"the same pause is a wound\" most nearly means that the pause is",
+      "options": {
+        "A": "an injury serious enough to bring the conversation to an end",
+        "B": "a deliberate insult offered by the speaker who fell silent",
+        "C": "an opening that invites the other person to take the floor",
+        "D": "a breach that the participants feel as painful and unwelcome"
+      },
+      "correct": "D",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The sentence is built on a contrast: in one community the pause is 'an invitation', in another 'a wound'. The wound is the opposite of an invitation — something felt as hurtful rather than welcoming — and nothing in the sentence says who inflicted it or how badly.",
+        "correct_reasoning": "The correct option keeps the metaphor at the strength and scope the sentence gives it: the pause is felt as a painful breach, in contrast with the invitation it would be elsewhere. It attributes no intent and no consequence beyond the feeling.",
+        "passage_anchor": "rc-0034-p1",
+        "question_type_note": "A phrase-in-context question on a metaphor is settled by the contrast the sentence sets up; the literal image and any imported motive are the standard decoys.",
+        "reading_habit": "Read the clause on the other side of the contrast first; a metaphor's meaning is usually the mirror image of whatever it is set against.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "A wound is felt as hurtful, but the sentence says nothing about the conversation ending; that consequence is added, and a pause that 'ends' conversation would not be 'the same pause' that elsewhere opens it.",
+            "seductive_element": "It takes the image at its literal strength."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage locates the wound in the listener's experience, not in the speaker's intent; p2 later insists the judgement happens before anyone interprets anything, deliberate or not.",
+            "seductive_element": "Wounds are usually inflicted by someone, so an intending speaker feels implied."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the other half of the contrast — the invitation — which the sentence explicitly opposes to the wound.",
+            "seductive_element": "It is exactly what the same pause means one sentence earlier."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "invitation",
+      "passage_use": "a pause of a full second in conversation is an invitation",
+      "meaning_here": "a signal that the other person is welcome to speak",
+      "difficulty": "easy"
+    },
+    {
+      "word": "tellingly",
+      "passage_use": "at which point, tellingly, the original rhythm begins to feel strange",
+      "meaning_here": "in a way that reveals something significant",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Three short paragraphs, one idea that gets sharper each time. The last question depends on carrying paragraph two into paragraph three.",
+    "one_sentence_summary": "How long a pause is allowed in conversation differs between communities and is judged before we can think about it, which is why simply knowing about the difference changes almost nothing.",
+    "main_idea": "The rules for silence and interruption vary between cultures. We do not experience those rules as rules; we experience a long pause directly as awkwardness. Because the judgement happens before thought, being told that norms differ rarely helps — only long exposure does, and then the old rhythm starts to feel wrong.",
+    "simple_explanation": "In some places, if you stop talking for a second, that means 'your turn'. In other places the same second feels painful, like something has gone wrong. Interrupting is the same: rude to one group, friendly and excited to another.\n\nThe author's second point is the important one. We do not feel these rules as rules. When someone pauses too long by our standards, we do not think 'ah, a longer pause than my culture allows'. We just feel that they are being cold, or awkward. The judgement is instant. By the time we notice the silence, we have already decided what it means.\n\nThat is why telling people 'be aware that other cultures pause differently' almost never works. Knowing a fact is slow; the feeling is fast. What actually changes you is living with the other rhythm long enough that it becomes yours — and then, revealingly, your own old rhythm starts to feel strange.",
+    "why_difficult": "The passage is easy to read and easy to under-read. Its argument is not in the examples of paragraph one but in the claim of paragraph two that the judgement precedes thought; the inference question requires combining that claim with the last sentence of paragraph three, which readers who stop at the examples cannot do.",
+    "author_intention": "To make a familiar piece of advice ('be aware that cultures differ') look inadequate by showing what kind of thing a conversational norm actually is.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0034-p1",
+        "role": "Shows the variation",
+        "note": "The same pause is an invitation in one place and a wound in another; interruption is rudeness to one group and warmth to another."
+      },
+      {
+        "paragraph_id": "rc-0034-p2",
+        "role": "Explains the mechanism",
+        "note": "We do not feel the norm as a norm; we feel the pause as coldness. The judgement is made before interpretation, so the rule stays invisible."
+      },
+      {
+        "paragraph_id": "rc-0034-p3",
+        "role": "Draws the consequence",
+        "note": "Advice about differing norms rarely works, because knowing is slower than judging. Only long exposure changes the rhythm — and then the old one feels strange."
+      }
+    ],
+    "tone_progression": "Descriptive and slightly playful in the first paragraph, analytical in the second, and quietly ironic at the close, where the cure turns out to reproduce the problem in reverse.",
+    "key_transitions": [
+      "'These differences are easy to describe and surprisingly hard to feel.' (start of paragraph 2) — the passage moves from what varies to why the variation is invisible.",
+      "'This is why cross-cultural advice… so rarely changes anything.' (start of paragraph 3) — the mechanism becomes a verdict on a familiar remedy."
+    ],
+    "misunderstanding": "Readers remember the examples — the second of silence, the warm interruption — and summarise the passage as 'cultures have different conversation rules'. That is paragraph one. The passage is about why those rules are felt rather than known, and what that does to advice.",
+    "traps_summary": "The options here join facts the passage kept apart, upgrade 'rarely' to 'never', and reverse the order of judging and noticing. Each fails on one word; find that word before you choose.",
+    "reading_lesson": "In a short passage, the argument is usually one sentence in the middle paragraph, and the last paragraph applies it. Find the sentence that explains rather than describes, and carry it into every question.",
+    "real_world": "The next time someone's pause or interruption annoys you, notice how fast the annoyance arrived — before you had any chance to remember where they grew up.",
+    "takeaway": "A norm you cannot feel as a norm cannot be corrected by being told about it.",
+    "reflection_question": "Which of your own conversational judgements — about pauses, volume, overlap — arrive too fast for you to have chosen them?"
+  }
+}

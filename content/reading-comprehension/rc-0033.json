@@ -1,0 +1,446 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0033",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "institutions",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "qualifier-tracking",
+      "inference",
+      "concession-tracking",
+      "trap-recognition"
+    ],
+    "word_count": 395,
+    "question_count": 5,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "paragraph_function",
+      "phrase_in_context",
+      "weaken"
+    ],
+    "theme": "unexplained organisational rules as the residue of forgotten failures, and the discipline of reconstructing a rule's purpose before removing it",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-002",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); authored as the v5 exemplar",
+    "reviewer_notes": "The exemplar for the pattern layer: a claim that is then qualified, so that both the confident reformer and the reverent traditionalist are traps. The near-tie is in the weaken question.",
+    "length_class": "medium",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "measured, gently ironic",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "comp.central_idea",
+      "arg.qualification",
+      "arg.concession",
+      "struct.qualification",
+      "inf.author_view_application",
+      "inf.necessary",
+      "comp.function_over_words",
+      "lang.absolute_vs_qualified",
+      "arg.assumption",
+      "elim.near_tie",
+      "word.context_clue",
+      "comp.paraphrase",
+      "arg.evidence_vs_conclusion"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1: a strong candidate argues for the option that says organisations remember what members forget and such rules should be kept — it is the passage's most quotable sentence. It loses on p4, which names reverence as an error, and on p3's 'not a licence', which asks for inquiry, not retention. Q5: the option about rigidly followed rules causing most failures is the near-tie; it bears on the cost of keeping rules in general, but the burden-of-proof claim rests on the presumption that unexplained rules encode live lessons, and only the large-study option attacks that presumption directly. Q2: 'evidence the lesson is lost' is tempting because p2 says the origin is lost; but p2 also says the rule keeps doing its work — the lesson lives in the rule, not in anyone's memory.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "sclerotic",
+      "licence",
+      "vantage"
+    ]
+  },
+  "passage": {
+    "title": "The Rule Nobody Can Explain",
+    "reading_time_min": 2.2,
+    "paragraphs": [
+      {
+        "id": "rc-0033-p1",
+        "text": "Every organisation carries rules that nobody present can justify: a form that must be signed twice, a report nobody reads, a step that adds a day to a process that should take an hour. The reformer's instinct is obvious, and it is not a foolish one: strike out what cannot be defended. But the instinct rests on an assumption worth examining — that a rule with no visible reason has no reason."
+      },
+      {
+        "id": "rc-0033-p2",
+        "text": "Most rules are not designed; they are deposited. A procedure acquires a step because something once went badly — a payment sent twice, a patient given the wrong dose — and the people who were there added a check. They rarely wrote down why. Within a decade they had moved on, and the check remained, doing its work silently, its origin lost. From inside, such a rule looks like friction. From the vantage of the failure that produced it, it looks like the scar tissue of a lesson learned. The organisation remembers what its members have forgotten."
+      },
+      {
+        "id": "rc-0033-p3",
+        "text": "This is why the confident reformer so often succeeds at first and regrets it later. Removing a rule whose purpose is invisible feels costless, because the harm it prevented is, by construction, no longer occurring. The failure returns only after the removal, sometimes years after, and by then no one connects the two events; the reform is remembered as a success and the failure as bad luck. The lesson is not that every old rule should be kept. It is that the burden of proof runs the other way: before a rule is removed, someone should be able to say what would go wrong without it — and if no one can, that is a reason for inquiry, not a licence."
+      },
+      {
+        "id": "rc-0033-p4",
+        "text": "The argument has a limit, and it is worth stating plainly. Some rules really are fossils: the failure they guarded against belongs to a world that no longer exists — a technology retired, a risk now regulated elsewhere, a fraud that the accounting system makes impossible. An organisation that treats every unexplained rule as sacred becomes exactly the sclerotic bureaucracy the reformer is right to fear. The discipline, then, is neither reverence nor demolition. It is the modest, unglamorous work of reconstruction: asking what a rule was for, finding out, and only then deciding — which is slower than either instinct, and better than both."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0033-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "arg.qualification",
+        "lang.absolute_vs_qualified"
+      ],
+      "target_mistake": "taking the passage's most quotable sentence (the organisation remembers what its members forgot) for its thesis, and so missing the p4 limit and the p3 demand for inquiry",
+      "prediction_target": "Before the options, the learner should be able to say: unexplained rules often encode forgotten failures, so they should be presumed purposeful and investigated before removal — but not kept blindly, since some are fossils.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best captures the central argument of the passage?",
+      "options": {
+        "A": "Organisations remember their failures better than their members do, so rules that appear to be mere friction should be kept in place.",
+        "B": "Reformers who remove old rules tend to succeed at first and fail later, because the harms those rules prevented return without anyone connecting the two events.",
+        "C": "Bureaucracies become sclerotic when they treat every rule as sacred, so reform should proceed by removing whatever cannot be defended.",
+        "D": "Unexplained rules should be presumed to have had a purpose and removed only once that purpose has been reconstructed, since some, though not all, encode lessons from forgotten failures."
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage moves in three beats: p1 questions the reformer's assumption, p2–p3 argue that unexplained rules are usually deposited lessons so the burden of proof falls on removal, and p4 limits the claim — some rules are fossils, and reverence is its own error. A thesis must hold all three, especially the last.",
+        "correct_reasoning": "The correct option is the only one that keeps both halves of the author's position: the presumption of purpose and the reconstruction step from p3 ('someone should be able to say what would go wrong without it'), and the qualification from p4 ('some rules really are fossils'). Its 'some, though not all' is exactly the author's altitude, and 'removed only once that purpose has been reconstructed' is p4's closing programme.",
+        "passage_anchor": "rc-0033-p3",
+        "question_type_note": "A main-idea question over a claim-then-qualification passage is settled by the qualification: the winning option must survive the final paragraph, not just the middle ones.",
+        "reading_habit": "When a passage ends with 'the argument has a limit', treat the limit as part of the thesis. Any main-idea option that would make the author blush in the last paragraph is out.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The author never concludes that such rules should be kept; the conclusion is conditional — inquire, reconstruct, then decide — and p4 explicitly calls keeping every unexplained rule the road to sclerosis.",
+            "seductive_element": "It quotes the passage's most memorable sentence almost word for word."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the mechanism p3 describes on the way to its point, not the point itself; it says nothing about what should be done, which is what the argument is for.",
+            "seductive_element": "It is entirely true of the passage, and the story of the regretted reform is its most vivid moment."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the reformer's instinct from p1, which the author examines and then constrains; p4 grants the fear of sclerosis but rejects demolition as the remedy.",
+            "seductive_element": "It borrows the author's own concession in p4 and the phrase 'cannot be defended' from p1."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0033-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.necessary",
+        "arg.qualification"
+      ],
+      "target_mistake": "reading 'its origin lost' in p2 as meaning the lesson is lost, when the passage's point is that the rule itself carries the lesson; and reading p3's burden of proof as a case for keeping",
+      "prediction_target": "The learner should predict: the author would say such a rule is a case for finding out before deciding anything — neither remove it nor enshrine it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "application"
+      ],
+      "stem": "It can be inferred that the author would regard a rule whose original purpose no one in the organisation can currently reconstruct as",
+      "options": {
+        "A": "a fossil that ought to be removed, since a rule that no one can explain has no living function",
+        "B": "evidence that the organisation has already lost the lesson the rule was introduced to preserve",
+        "C": "a case for investigation before any decision, rather than grounds for either keeping or removing it",
+        "D": "sacred, because the harm it prevents is, by construction, invisible to those who would remove it"
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The author states a rule for exactly this case: 'if no one can, that is a reason for inquiry, not a licence' (p3), and p4 turns it into a programme — 'asking what a rule was for, finding out, and only then deciding'. Inference questions on this passage are settled by that sentence pair.",
+        "correct_reasoning": "The correct option applies the author's own test. An unreconstructed purpose licenses neither removal (p3: 'not a licence') nor reverence (p4: reverence produces sclerosis); it licenses inquiry. The option's 'rather than grounds for either' mirrors 'neither reverence nor demolition'.",
+        "passage_anchor": "rc-0033-p3",
+        "question_type_note": "Author-view inference questions ask what follows from the author's stated criteria applied to a case; the answer is forced by the criteria, not by what seems sensible about old rules.",
+        "reading_habit": "When an author lays down a test ('if no one can, then…'), copy it out mentally as a rule and apply it mechanically to the case in the stem. The right option will read like the rule's output.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is precisely the inference p3 forbids: the inability to explain a rule is 'a reason for inquiry, not a licence' to remove it; fossils are identified by reconstruction, not by ignorance.",
+            "seductive_element": "It uses p4's own word, 'fossil', and sounds like brisk common sense."
+          },
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "P2 does say the origin is lost, but it also says the check 'remained, doing its work silently' — the lesson survives in the rule even when no one remembers it, which is the whole point of 'the organisation remembers what its members have forgotten'.",
+            "seductive_element": "It restates a fact from p2 and draws the conclusion a hurried reader would draw from 'its origin lost'."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The author asks for a presumption strong enough to require inquiry, not sanctity; p4 names treating unexplained rules as sacred as the error that produces sclerotic bureaucracy.",
+            "seductive_element": "It reuses p3's 'by construction' reasoning about invisible harm, which is genuinely the author's."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0033-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.concession",
+        "struct.qualification"
+      ],
+      "target_mistake": "mistaking a qualification for a reversal, or describing what the paragraph contains (an example of a retired technology) instead of what it does",
+      "prediction_target": "The learner should be able to say: the last paragraph concedes the reformer's fear is legitimate and then narrows the thesis to a middle course — reconstruction, not reverence or demolition.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "The final paragraph primarily serves to",
+      "options": {
+        "A": "concede that the reformer's fear is sometimes justified, and then restate the author's position as a middle course between two errors",
+        "B": "reverse the argument of the preceding paragraphs by acknowledging that most unexplained rules are in fact obsolete",
+        "C": "supply the example of a retired technology in order to illustrate how organisations deposit rules over time",
+        "D": "recommend that organisations adopt reverence for inherited procedures as a safeguard against sclerosis"
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph opens by announcing a limit ('The argument has a limit'), grants the reformer's fear in the reformer's own terms ('the sclerotic bureaucracy the reformer is right to fear'), and then closes by rejecting both instincts in favour of reconstruction. That shape — concede, then reposition — is the job.",
+        "correct_reasoning": "The correct option names both moves in order: the concession (some rules are fossils; sclerosis is a real danger) and the restatement of the thesis as 'neither reverence nor demolition' but reconstruction. It describes the function, not the content.",
+        "passage_anchor": "rc-0033-p4",
+        "question_type_note": "Paragraph-function questions ask what work a paragraph does for the argument. Label the moves ('grants… then narrows') before reading options, and reject any option that names a move the paragraph does not make.",
+        "reading_habit": "A final paragraph that begins with 'a limit' or 'to be sure' is almost always a concession followed by a repositioning. Read to the end before deciding whether the author has given ground or merely marked it.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The paragraph limits the argument; it does not reverse it, and it says 'some rules really are fossils', never 'most' — the presumption of purpose survives the paragraph intact.",
+            "seductive_element": "The paragraph does open by conceding something, and a concession can feel like a retreat."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The retired technology is mentioned, but as an example of a rule whose reason has died — a fossil — not of how rules are deposited, which p2 explained.",
+            "seductive_element": "It names something that really appears in the paragraph and attaches it to a real idea from the passage."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph identifies reverence for unexplained rules as the cause of sclerosis, not its safeguard, and rejects it alongside demolition.",
+            "seductive_element": "It links two words the paragraph really uses, reverence and sclerosis, in a plausible-sounding order."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0033-q4",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "reading the metaphor's vehicle (scar, injury) instead of its tenor in this sentence (a protective residue of a lesson)",
+      "prediction_target": "The learner should paraphrase from the sentence itself: the rule is what a past harm left behind, protecting against its recurrence.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [],
+      "stem": "In the second paragraph, the phrase \"the scar tissue of a lesson learned\" most nearly refers to",
+      "options": {
+        "A": "a permanent injury that the organisation sustained in its failure and never fully recovered from",
+        "B": "a lasting protective adaptation that formed in response to a past harm",
+        "C": "a visible reminder that the people who made the original mistake have since moved on",
+        "D": "an imperfection that ought to be removed once the harm beneath it has healed"
+      },
+      "correct": "B",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The sentence contrasts two views of the same rule: 'from inside' it looks like friction; 'from the vantage of the failure' it looks like scar tissue. The scar is the good view, the one that sees the rule as what the failure produced — a check that keeps 'doing its work silently'.",
+        "correct_reasoning": "In context the phrase names the residue a past failure leaves behind — a check that was added because something went wrong and that goes on protecting against it. 'Lasting protective adaptation formed in response to a past harm' is that residue, read the way the sentence intends: as the mark of a lesson, not of a wound.",
+        "passage_anchor": "rc-0033-p2",
+        "question_type_note": "Phrase-in-context questions on a metaphor are settled by the sentence's own contrast, not by the dictionary meaning of the image; here the surrounding sentence says what the scar stands for.",
+        "reading_habit": "For any metaphor, ask what job the image is doing in its sentence — praising, warning, explaining — before you translate it. The dictionary sense of the image is the standard trap.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This takes the literal sense of scarring as damage; the sentence uses the scar as evidence of healing and protection, the mark of a lesson rather than an unrecovered loss.",
+            "seductive_element": "Scars really are injuries, and 'permanent' sounds like 'the check remained'."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The people moving on is a fact from the same paragraph, but the scar is a figure for the rule's protective function, not a reminder of anyone's departure.",
+            "seductive_element": "It reuses the paragraph's own detail ('moved on') beside the phrase in question."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "Nothing in the sentence recommends removal; the metaphor belongs to the view that sees the rule as valuable, and the passage's own advice is reconstruction before any decision.",
+            "seductive_element": "It reads like the reformer's instinct from p1, which the passage has just described sympathetically."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0033-q5",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "arg.assumption",
+        "elim.near_tie",
+        "arg.evidence_vs_conclusion"
+      ],
+      "target_mistake": "choosing a statement that bears on the cost of keeping rules in general instead of the one that attacks the specific presumption the burden-of-proof claim rests on",
+      "prediction_target": "The learner should first name the assumption: unexplained rules usually encode failures that would recur. The weakener is whatever shows unexplained rules mostly do not.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "Which of the following, if true, would most weaken the author's claim that the burden of proof should fall on those who wish to remove an unexplained rule?",
+      "options": {
+        "A": "Organisations that periodically audit their procedures report higher staff satisfaction than those that leave them unexamined.",
+        "B": "In a large study of unexplained rules, those whose origins were eventually reconstructed had overwhelmingly been introduced for reasons that no longer applied.",
+        "C": "Most failures that organisations suffer are caused by rules that were followed too rigidly rather than by rules that were removed.",
+        "D": "Employees who added a check after a failure usually remember why they did so for the rest of their careers."
+      },
+      "correct": "B",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "expert_notice": "The burden-of-proof claim rests on p2's presumption: an unexplained rule is probably a deposited lesson that is still doing work. Weaken the presumption and the burden loses its footing. Anything that leaves the presumption standing, however true, does not weaken this claim.",
+        "correct_reasoning": "If unexplained rules, once reconstructed, turn out overwhelmingly to have guarded against risks that no longer exist, then the presumption that such a rule is 'scar tissue of a lesson learned' is usually false, and the case for placing the burden on the remover collapses; the reformer's instinct would be right most of the time. This option attacks the exact premise the claim needs.",
+        "passage_anchor": "rc-0033-p2, rc-0033-p3",
+        "question_type_note": "Weaken questions are about the link between evidence and conclusion. Name the assumption first, then look for the option that makes that assumption less likely; options that merely make the topic look different are decoys.",
+        "reading_habit": "Before reading weaken options, write the argument as 'because X, therefore Y' and underline what X needs to be true. The weakener hits that need; everything else is noise dressed as evidence.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "Staff satisfaction has no bearing on whether unexplained rules encode live lessons; the author would in any case welcome periodic examination, which is the reconstruction p4 calls for.",
+            "seductive_element": "It sounds like evidence in favour of doing something about old rules."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This raises the cost of keeping rules in general, but it leaves the presumption untouched: unexplained rules could still encode live lessons even if rigid rule-following causes more failures overall, and the author's claim is only about who must justify a removal.",
+            "seductive_element": "It is the near-tie: a real cost of the author's programme, and it reads like a rebuttal of the whole essay."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "If the people who added a check remember why, reconstruction is easy and the burden the author proposes is trivially met; this makes the author's programme more workable, not less.",
+            "seductive_element": "It contradicts a detail in p2 ('they rarely wrote down why'), which feels like it must damage the argument somewhere."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "sclerotic",
+      "passage_use": "becomes exactly the sclerotic bureaucracy the reformer is right to fear",
+      "meaning_here": "rigid and unresponsive, having lost the ability to change",
+      "difficulty": "hard"
+    },
+    {
+      "word": "licence",
+      "passage_use": "that is a reason for inquiry, not a licence",
+      "meaning_here": "a permission or justification to act",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vantage",
+      "passage_use": "From the vantage of the failure that produced it",
+      "meaning_here": "a position from which something is seen or judged",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The author agrees with the reformer, then disagrees, then agrees again. Track which sentences are the author's own verdict and which are ground given to the other side.",
+    "one_sentence_summary": "A rule nobody can explain is usually the residue of a forgotten failure, so it should be investigated and understood before it is removed — but not kept blindly, because some rules really are dead.",
+    "main_idea": "Most old rules were added because something went wrong, and they keep working after everyone has forgotten why. So the person who wants to remove one should first find out what it was for. Some rules are genuinely obsolete, though, so the answer is neither keeping everything nor cutting everything: it is finding out.",
+    "simple_explanation": "Think of any workplace. There is always some rule that seems pointless — a form signed twice, a report nobody reads. The obvious thing to do is to get rid of it.\n\nThe author says: wait. Most rules were not designed by anyone. They appeared because something once went badly, and the people who were there added a check so it would not happen again. They did not write down why. Years later those people have left, but the check is still there, still quietly preventing the problem. From where you stand, it looks like pointless friction. From the point of view of the disaster that created it, it looks like a scar — the sign that a lesson was learned.\n\nThat is why removing such a rule often looks like a success at first. The harm it was preventing does not happen straight away; it comes back later, and nobody connects the two. So, the author says, the person who wants to remove a rule should be the one who has to explain what would go wrong without it. If nobody can, that is a reason to investigate — not permission to cut.\n\nThen comes the limit. Some rules really are dead: the danger they guarded against is gone. Treating every rule as sacred makes an organisation stiff and stupid, which is exactly what the reformer fears. So the answer is not to worship rules and not to demolish them. It is the slow, dull work of finding out what a rule was for, and only then deciding.",
+    "why_difficult": "The passage sympathises with the reformer in the first paragraph, argues against the reformer in the middle two, and then hands part of the case back to the reformer in the last. Readers who fix the author's position after paragraph three overshoot; readers who anchor on the opening sentence never catch the turn. The quotable line about organisational memory is also stronger than the author's actual conclusion, which is conditional.",
+    "author_intention": "To slow down a confident instinct — cut what you cannot justify — by showing what unexplained rules usually are, without handing readers the opposite instinct instead.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0033-p1",
+        "role": "Names the instinct",
+        "note": "Shows the pointless-looking rules everyone recognises and the reformer's obvious response, then flags the hidden assumption: no visible reason means no reason."
+      },
+      {
+        "paragraph_id": "rc-0033-p2",
+        "role": "Explains where rules come from",
+        "note": "Rules are deposited by failures, not designed. The check outlives the memory of why it was added, so the organisation remembers what its people forgot."
+      },
+      {
+        "paragraph_id": "rc-0033-p3",
+        "role": "Draws the consequence",
+        "note": "Removing such a rule feels free because the harm is invisible; the failure comes back later and nobody links it. So the burden of proof falls on the remover — and not knowing is a reason to inquire, not a licence."
+      },
+      {
+        "paragraph_id": "rc-0033-p4",
+        "role": "Marks the limit",
+        "note": "Some rules are fossils, and worshipping rules makes bureaucracies rigid. The answer is neither reverence nor demolition but reconstruction: find out, then decide."
+      }
+    ],
+    "tone_progression": "Sympathetic to the reformer at the start, quietly corrective through the middle, and even-handed at the end, where both instincts are named as errors and a slower discipline is preferred to either.",
+    "key_transitions": [
+      "'But the instinct rests on an assumption worth examining' (end of paragraph 1) — the sympathy ends and the examination begins.",
+      "'The lesson is not that every old rule should be kept.' (paragraph 3) — the author refuses the conclusion a hurried reader has just reached.",
+      "'The argument has a limit, and it is worth stating plainly.' (start of paragraph 4) — the qualification that completes the thesis."
+    ],
+    "misunderstanding": "Hurried readers file this as 'an essay in defence of old rules'. The middle paragraphs are so vivid — the silent check, the failure that returns years later — that the memorable sentence 'the organisation remembers what its members have forgotten' becomes the thesis in memory. But the author's conclusion is procedural, not protective: find out, then decide. Anyone whose summary contains 'keep' rather than 'investigate' has summarised paragraph two, not the passage.",
+    "traps_summary": "This passage punishes both instincts. Options that keep every rule quote the passage's memorable line while dropping its condition; options that cut every rule borrow the reformer's language from paragraph one and the concession from paragraph four. The correct answers live in the conditional sentences: 'if no one can, that is a reason for inquiry', 'only then deciding'.",
+    "reading_lesson": "When an author says 'the lesson is not…' or 'the argument has a limit', the thesis is being narrowed in front of you. Carry the narrowed version, not the vivid earlier one, into every question — the exam will offer you the vivid version as a distractor.",
+    "real_world": "Every time you inherit a process at work, a family custom, or a line in a contract that nobody can explain, you face exactly this choice, and the quick answer in either direction is the expensive one.",
+    "takeaway": "Not knowing why a rule exists is a reason to find out, not a reason to act.",
+    "reflection_question": "Which rule in your own life have you kept or dropped without ever learning what it was for?"
+  }
+}

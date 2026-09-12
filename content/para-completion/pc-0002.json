@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0002",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Argument That Is a Tradition",
+    "theme": "a tradition as an extended argument about its own purpose, and what it becomes when the argument stops",
+    "estimated_time_sec": 90,
+    "gap_function": "implication",
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": ["disc.function_slot", "disc.closing_sentence", "arg.qualification", "struct.definition", "disc.stance_continuity", "scope.abstraction_level"],
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 5, "syntactic_complexity": 3 },
+    "learning_objective": "complete an abstract paragraph by finishing the implication its penultimate sentence leaves hanging, at the paragraph's level of generality",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-12", "usage_note": "Original composition in CAT register for CAT OS. A general philosophical idea about traditions as arguments; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-pc-001",
+    "reviewer_notes": "A CAT-tier completion where the penultimate sentence is a negation ('has not reached agreement') that demands its positive counterpart. The specific-example decoy and the prescriptive decoy both match the topic and miss the function.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The recommendation to encourage dissent is the strongest rival: it is consistent with the paragraph's values and sounds like a sensible closing line. It fails because the gap sits after 'A tradition that has stopped arguing has not reached agreement' — a sentence that says what such a tradition is not and demands to be told what it is; advice about young members answers a question the paragraph never asked. The religious-traditions option narrows an abstract paragraph to one case at its very last sentence, where the paragraph needs to land, not to illustrate.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "It is tempting to treat a tradition as a body of answers handed down, to be accepted or rejected whole.",
+      "But a tradition is better understood as an argument extended through time about what the tradition itself is for.",
+      "Its members disagree, sometimes bitterly, and the disagreement is not a sign that the tradition is failing; it is the form the tradition's life takes.",
+      "A tradition that has stopped arguing has not reached agreement."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "It has finally resolved the questions its founders left open, and can hand its answers down intact to those who follow.",
+      "B": "This is why traditions ought to encourage disagreement among their younger members rather than suppress it.",
+      "C": "Religious traditions in particular show how disagreement can persist for centuries without dissolving the community that carries it.",
+      "D": "It has stopped being a tradition at all and become a monument: admired, perhaps, but no longer inhabited."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The sentence before the gap is a negation: a tradition that has stopped arguing 'has not reached agreement'. A negation of that shape sets up its positive counterpart — if not agreement, then what? The closing sentence must say what such a tradition has become, at the same level of abstraction as the rest of the paragraph, and in keeping with its claim that argument is the form a tradition's life takes.",
+    "correct_reasoning": "The correct option completes the thought the negation began: if argument is the tradition's life, a tradition that has stopped arguing is no longer alive — it has become a monument, admired but not inhabited. 'It has stopped being' picks up 'has stopped arguing' and 'has not reached agreement' as the same subject, and the image of the monument keeps the paragraph abstract and lands it.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence before the gap says exactly that such a tradition has not reached agreement; an option claiming it has resolved its founders' questions and can hand down answers intact contradicts that sentence and restores the view the paragraph rejected in its opening line.",
+        "seductive_element": "It reads as a natural sequel to 'has stopped arguing', and its 'handed down' vocabulary matches the paragraph's first sentence."
+      },
+      {
+        "option": "B",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The paragraph describes what a tradition is; it never turns to what traditions ought to do. The gap needs the positive counterpart of a negation, not advice about younger members, which answers a question the paragraph has not asked.",
+        "seductive_element": "It is consistent with the paragraph's values, and 'This is why' makes it sound like a conclusion."
+      },
+      {
+        "option": "C",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph has stayed general throughout, and its last sentence has to land the argument; dropping to one kind of tradition at the close narrows the scope and leaves the negation before the gap unanswered.",
+        "seductive_element": "It supports the paragraph's claim with a plausible case, and examples feel like evidence."
+      }
+    ],
+    "method": "When the sentence before a gap says what something is not ('has not reached agreement'), the gap almost always needs what it is. Name that demand first, and hold the paragraph's altitude: a closing sentence that narrows to an example, or turns description into advice, has changed jobs even if it agrees with everything above it."
+  },
+  "mentor": {
+    "challenge": "The paragraph's last given sentence tells you what a silent tradition is not. Your job is to hear the question that leaves hanging.",
+    "takeaway": "A negation before a gap asks for its positive; keep the altitude, and do not switch from what a thing is to what it ought to do."
+  }
+}
