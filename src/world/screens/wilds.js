@@ -11,8 +11,9 @@ import { regionBySlug } from '../regions.js';
 import { WorldRenderer } from '../engine/canvas.js';
 import { buildBackdropScene } from '../engine/map.js';
 import { listFields, loadField, loadLedger, buildQuestion, buildContextQuestion, LexRound, applyAnswer, loadContext } from '../lexicon.js';
-import { roundStars, EARN } from '../economy.js';
+import { roundStars, EARN, WAYMARKS } from '../economy.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, newlyBuildable, loadWorldContent } from '../state.js';
+import { icon } from '../icons.js';
 import { newlyFinished } from '../collections.js';
 import { rng } from '../engine/palette.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
@@ -93,9 +94,41 @@ export async function renderWilds(outlet, { storage }) {
             ${runs.slice(0, 12).map((r) => `<div class="g-row"><span class="g-row__num">${r.score.correct}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.week)} · ${formatClock(r.duration_ms)}${r === allBest ? ' · best' : ''}</span><span class="g-row__meta">${formatDate(r.finished_at)}${lit && r.splits ? ` · Meadow ${r.splits.meadow ?? 0} · Pond ${r.splits.pond ?? 0} · Thicket ${r.splits.thicket ?? 0}` : ''}</span></span><span class="g-row__stars">${starHTML(r.stars ?? 0)}</span></div>`).join('') || '<div class="g-empty">The road is empty. Take the first run.</div>'}
           </div>
         </div>
+        <div class="place__section" id="road-out"></div>
       </div>
     </section>`;
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'wilds'); play('close'); });
+
+  /* ---- How far the road goes. Every waymark built in the Workshop posts
+          it one place further, and the valley stops being the whole of the
+          world. Nothing here is a reward for showing up: each one asked
+          for more three-star passages than the last. ---- */
+  (async () => {
+    const slot = outlet.querySelector('#road-out');
+    if (!slot) return;
+    let st = null;
+    try { st = (await loadWorld(storage)).state; } catch { return; }
+    if (!slot.isConnected) return;
+    const built = st.built?.waymarks ?? 0;
+    slot.innerHTML = `
+      <h2>The road out</h2>
+      <p class="sub">${built
+        ? `Posted as far as <b>${escapeHTML(WAYMARKS[(built - 1) % WAYMARKS.length].name)}</b>. Nobody from the valley has been further.`
+        : 'It runs to the ridge and stops. Nobody has posted it further.'}</p>
+      <div class="road">
+        ${WAYMARKS.slice(0, Math.max(3, built + 2)).map((w, i) => `
+          <div class="road__stop ${i < built ? 'is-reached' : i === built ? 'is-next' : ''}">
+            <span class="road__mark">${icon(i < built ? 'road' : 'lock', { size: 18 })}</span>
+            <span class="road__body">
+              <b>${escapeHTML(w.name)}</b>
+              <span>${escapeHTML(i <= built ? w.line : 'Further than the road goes.')}</span>
+            </span>
+          </div>`).join('')}
+      </div>
+      <p class="sub">${built < WAYMARKS.length
+        ? `The next waymark asks for <b>${6 + built * 5} passages at three stars</b>, and is built at the Hearth.`
+        : 'Every waymark is posted. The road keeps going.'}</p>`;
+  })();
 
   /* The road out, painted behind the records. */
   let heroR = null;
