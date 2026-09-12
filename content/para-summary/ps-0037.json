@@ -63,13 +63,13 @@
       "sum.stance_kept"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "The live rival is the option telling journals to publish null results. The paragraph diagnoses a selection effect and never prescribes anything, and the fix is the reader's addition rather than the author's conclusion. The option saying the literature cannot be trusted is refused by the last sentence, which insists each study may be sound and puts the distortion in the selection; it also imputes a purpose to the selecting that the text does not. The option about null trials being hard to write up and place is the mechanism, reported before the conclusion it was introduced to support.",
+      "status": "reviewed",
+      "adversarial_review": "The live rival is now the option that grants each study may be perfectly sound and then declares the literature untrustworthy. It borrows the author's own qualification, which makes it look like the careful reading, but the last sentence places the distortion in the selection rather than in the work, and the paragraph's finding is that the average sits above the truth by a measurable amount, not that the literature is worthless; 'selected to show the treatment working' also imputes a purpose the text assigns to nobody. The option telling journals to publish null results imports a remedy the paragraph never proposes. The option about null trials being hard to write up and place is the mechanism, reported before the conclusion it was introduced to support.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 1,
         "total": 1,
-        "notes": "full agreement"
+        "notes": "full agreement; options rewritten 2026-09-13 to remove the shape tells (a genuine concessive clause now sits in a distractor); awaits re-solve"
       }
     },
     "source": {
@@ -136,7 +136,7 @@
     "stem": "Which option best captures the essence of the paragraph?",
     "options": {
       "A": "Journals ought to undertake to publish the trials that found nothing, so that a reader averaging a literature is not misled by everything left in a drawer somewhere.",
-      "B": "The published literature on a treatment cannot be trusted, since the studies that make it into print have been selected to show the treatment in a good light.",
+      "B": "Although each published study may itself be perfectly sound, the literature cannot be trusted, since what reaches print has been selected to show the treatment working.",
       "C": "A trial that found nothing is harder to write up and harder to place than one that found something, which is why so many of them are never even submitted at all.",
       "D": "Since null trials are least likely to be published, the average of a literature is an average of successes and sits above the truth, though each study may be sound."
     },
@@ -157,9 +157,9 @@
           "option": "B",
           "archetype": "stance_flip",
           "secondary_archetype": null,
-          "why_wrong": "The last sentence says each study may be sound and locates the distortion in the selection. 'Selected to show the treatment working' also suggests a purpose behind the selection that the paragraph never alleges.",
-          "seductive_element": "It sounds like the hard-headed conclusion, and the mechanism described really does bias what a reader sees.",
-          "thinking_mistake": "Hearing an account of how a bias arises as a charge against the people whose work is biased."
+          "why_wrong": "The concession is the paragraph's own; the conclusion drawn from it is not. The author locates the distortion in the selection and says only that the published average sits above the truth, whereas 'cannot be trusted' abandons the literature altogether and 'selected to show the treatment working' imputes a purpose the text never alleges.",
+          "seductive_element": "It opens with the very sentence that ought to protect the studies and convicts the literature anyway, which sounds like a reader who has already disposed of the obvious objection.",
+          "thinking_mistake": "Hearing an account of how a bias arises as a charge against the people whose work is biased, and treating a concession as an objection already answered."
         },
         {
           "option": "C",

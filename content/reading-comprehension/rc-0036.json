@@ -71,13 +71,13 @@
       "arg.evidence_vs_conclusion"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q1: the live rival is the option calling the pilot's effect size 'irrelevant to the decision to extend it'. It is built from the author's own emphasis on attention as the binding constraint, and a hurried reader will take 'not sufficient' for 'not needed'. It dies on the sentence 'whether the thing works at all is a real question, and it has to be answered before the second one is worth asking' — a question that must be answered first is not irrelevant. Q2: the rival is 'detached and descriptive, declining to choose'; the author does describe both accounts at length, but 'Both accounts are true, and both misdescribe the problem' and 'refine an estimate of the wrong quantity' are verdicts, not description. Q3: the rival reads the loan as a promise that the effect will reappear under the same conditions; the sentence itself defines the loan by what is spent, not by what is promised — 'the same scrutiny, divided among four hundred sites, is no longer scrutiny'. Q4: the dilution option is tempting because the passage states it sympathetically and never calls it false; it loses because the author's conclusion turns on the two questions being different, which that option denies by treating the gap as closable by resources. Q5: the rival says an intervention needing close supervision 'will fail' at scale; the passage licenses only that such an intervention is expensive in the input the system cannot extend, and its own prescription is to look for pilots that survive neglect, which presupposes some do.",
+      "status": "reviewed",
+      "adversarial_review": "Q1: the live rival is the option calling the pilot's effect size 'irrelevant to the decision to extend it'. It is built from the author's own emphasis on attention as the binding constraint, and a hurried reader will take 'not sufficient' for 'not needed'. It dies on the sentence 'whether the thing works at all is a real question, and it has to be answered before the second one is worth asking' — a question that must be answered first is not irrelevant. Q2 (option set rebuilt: the old one offered two caricatures and a neutral filler around the measured answer, so the architecture alone gave the key away; all three distractors are now readings a careful candidate could defend). The live rival is the appreciative option, because the concessions really are there — 'Both accounts are true', a full sympathetic paragraph each, 'None of this makes the pilot worthless' — and it dies on the second half of the same sentence, 'both misdescribe the problem', together with 'an estimate of the wrong quantity': a caution added to an account leaves the account standing, and calling its quantity the wrong one does not. The scornful option is built from the one arch sentence in the passage and is refuted by the courtesy of every sentence around it and by a closing paragraph that gives advice instead of a verdict on the literature. The resigned option is built from 'neither has produced a reliable way of saying in advance' and from attention being fixed in a way budgets are not, and it dies on the prescription that ends the passage, a pilot run by ordinary staff and visited rarely whose smaller number 'will mean more'. Q3: the rival reads the loan as a promise that the effect will reappear under the same conditions; the sentence itself defines the loan by what is spent, not by what is promised — 'the same scrutiny, divided among four hundred sites, is no longer scrutiny'. Q4: the dilution option is tempting because the passage states it sympathetically and never calls it false; it loses because the author's conclusion turns on the two questions being different, which that option denies by treating the gap as closable by resources. Q5: the rival says an intervention needing close supervision 'will fail' at scale; the passage licenses only that such an intervention is expensive in the input the system cannot extend, and its own prescription is to look for pilots that survive neglect, which presupposes some do.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 5,
         "total": 5,
-        "notes": "full agreement"
+        "notes": "full agreement, but the reader reported that the tone question was answerable from the shape of its options alone: two caricatures and a detached filler flanking the measured answer. The four options of that question have since been rewritten so that each distractor is a defensible misreading of the author's attitude — the concessions taken for agreement, the one arch sentence taken for scorn, the sober diagnosis taken for resignation — and the item awaits a re-solve."
       }
     },
     "vocab_extracted": [
@@ -179,8 +179,8 @@
         "arg.description_vs_evaluation",
         "inf.author_vs_reported"
       ],
-      "target_mistake": "reading the long, fair-minded exposition of two rival accounts as neutrality, or reading the refusal of both as hostility",
-      "prediction_target": "The learner should be able to say before the options: the author is even-handed in exposition but not neutral in judgement, and corrects without heat.",
+      "target_mistake": "hearing the author's concessions as agreement with the two accounts, hearing the one arch sentence about sophistication as scorn, or hearing the admission that nobody can forecast the drop as defeat",
+      "prediction_target": "The learner should be able to say before the options: the author grants both accounts and then rules against both, and he does it coolly and with a remedy of his own already in hand.",
       "difficulty": {
         "inference_depth": 3,
         "distractor_similarity": 4,
@@ -191,37 +191,37 @@
       ],
       "stem": "The tone of the passage is best described as",
       "options": {
-        "A": "exasperated by the failures of evaluators and dismissive of the pilot as a method",
-        "B": "partisan: sympathetic to the selection account and visibly impatient with the dilution one",
-        "C": "analytical and quietly corrective, fair to both accounts and satisfied with neither",
-        "D": "detached and descriptive, declining to choose between the two accounts it reports"
+        "A": "appreciative of both accounts, adding the practical caution they had left unstated",
+        "B": "wry and a little scornful of a literature that measures well and aims badly",
+        "C": "analytical and quietly corrective, crediting both accounts and adopting neither",
+        "D": "resigned: confident in the diagnosis, but treating the gap itself as beyond remedy"
       },
       "correct": "C",
       "estimated_time_sec": 60,
       "explanation": {
-        "expert_notice": "Tone lives in the verdict words. Here they are mild and decisive at once: 'Both accounts are true, and both misdescribe the problem'; corrections that 'refine with great sophistication an estimate of the wrong quantity'; 'None of this makes the pilot worthless'. There is no ridicule anywhere and no abstention either.",
-        "correct_reasoning": "The correct option keeps both halves of that voice. The passage is analytical — it separates two questions and names the scarce input — and corrective, since it tells the reader that both existing remedies aim at the wrong quantity. 'Fair to both accounts and satisfied with neither' is the passage's own posture: each account is granted its truth in its own paragraph and then refused a role in the conclusion.",
+        "expert_notice": "Tone lives in the verdict words, and four places in this passage carry them. 'Both accounts are true, and both misdescribe the problem' concedes and overrules in a single flat sentence. The existing corrections 'refine with great sophistication an estimate of the wrong quantity', which is arch, and is the only arch sentence in five paragraphs. 'None of this makes the pilot worthless' keeps the method the author has just criticised. And the closing lines say which pilot to commission, which is advice rather than complaint.",
+        "correct_reasoning": "The correct option keeps all three parts of that voice. Analytical is the method: the fourth paragraph separates two questions, one about the intervention and one about the organisation, and names the input that binds, which is attention rather than money. Quietly corrective is the temperature: the verdict arrives without a single intensifier, and the fault is found in what the two accounts measure rather than in anyone who holds them. Crediting both and adopting neither is what the passage visibly does, giving each account a sympathetic paragraph and then leaving both outside the argument it goes on to make.",
         "passage_anchor": "rc-0036-p4",
         "question_type_note": "Tone questions are decided by judgement words, not by subject matter. Topic words tell you what the passage is about; only evaluative words tell you where the author stands, and intensity is a separate decision from direction.",
-        "reading_habit": "Underline every word in which the author passes judgement rather than reports. If those words are few and mild, reject the loud options; if they exist at all, reject the option that says the author takes no position.",
+        "reading_habit": "Read the concessions and the verdict as one voice rather than two. An author who grants a view its truth and then rules against it is neither agreeing with it nor attacking it, and the tone you want is the one word that fits both movements at once.",
         "distractors": [
           {
             "option": "A",
-            "trap_type": "over_intense_tone",
-            "why_wrong": "The direction is not wrong but the volume is: the author calls the existing corrections sophisticated and the pilot's question real, which is not the language of exasperation or dismissal.",
-            "seductive_element": "A passage that says two established accounts misdescribe their subject can read as an attack if the reader skips the concessions."
+            "trap_type": "concession_as_position",
+            "why_wrong": "Appreciation is what the concessions look like when they are read on their own. The passage does say that both accounts are true, does give each of them a paragraph at full strength, and does refuse to call the pilot worthless. It also says that both 'misdescribe the problem' and that their remedies refine 'an estimate of the wrong quantity'. A caution added to an account leaves the account standing; calling the measured quantity the wrong one does not.",
+            "seductive_element": "Two of the five paragraphs are spent stating other people's positions generously, and generosity towards a view is easily heard as assent to it."
           },
           {
             "option": "B",
-            "trap_type": "misattributed_view",
-            "why_wrong": "The passage treats the two accounts identically — a paragraph each, stated at full strength, then refused together in one sentence — so neither is the author's favourite and neither is singled out for impatience.",
-            "seductive_element": "The selection account appears second and sounds tougher-minded, which readers often take as a sign of the author's sympathy."
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The direction is right and the volume is not. One sentence is arch, the one about sophistication spent on the wrong quantity, and everything around it is courteous: the existing corrections are granted their sophistication, the pilot's first question is called a real one that has to be answered, and the passage ends by saying which pilot to commission rather than by scoring against anyone. Scorn does not hand its target a better method.",
+            "seductive_element": "The remark about great sophistication is genuinely dry, and a reader who takes that one sentence's temperature for the passage's hears a literature being mocked."
           },
           {
             "option": "D",
             "trap_type": "weakened_version",
-            "why_wrong": "Description stops at the fourth paragraph: 'both misdescribe the problem' is a judgement, and the final paragraph tells the reader which pilot is worth commissioning, which no abstaining author does.",
-            "seductive_element": "Two-thirds of the passage is careful exposition of other people's views, which feels like neutrality until the pivot is noticed."
+            "why_wrong": "The diagnosis is sure and the pessimism is added. The passage does say that attention is fixed in a way budgets are not, and that nothing in a pilot's design separates the intervention's own contribution from the care around it. It then prescribes: a pilot 'run by ordinary staff, visited rarely, supported by nothing the system could not supply to every site at once', whose smaller number 'will mean more'. An author with a design to recommend has not given the problem up.",
+            "seductive_element": "The first paragraph admits that nobody can say in advance which programmes will suffer the drop, and a reader who carries that admission to the end hears the closing advice as consolation rather than as a proposal."
           }
         ]
       }

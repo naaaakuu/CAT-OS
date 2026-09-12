@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": null },
+    "turn": {
+      "present": true,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 3,
@@ -38,9 +41,15 @@
       "qualifier_density": 2,
       "domain_load": 3
     },
-    "load_bearing": ["almost always"],
+    "load_bearing": [
+      "almost always"
+    ],
     "separating_element": null,
-    "dna_traits": ["author_intent", "main_idea_detection", "certainty_reading"],
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "certainty_reading"
+    ],
     "mission": "watch_the_turn",
     "learning_objective": "find the thesis after an unmarked turn, and refuse the opening view it corrects",
     "source": {
@@ -53,7 +62,7 @@
     "date_added": "2026-07-11",
     "batch_id": "batch-ps-001",
     "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
-    "reviewer_notes": "First soft-turn item: the turn is carried by tells a different story, not by a however. The concession trap states the familiar ideal of self-made genius. Owner review pending."
+    "reviewer_notes": "First soft-turn item: the turn is carried by tells a different story, not by a however. The concession trap states the familiar ideal of self-made genius. Owner review pending. Options rewritten 2026-09-13 so that a distractor now carries a genuine concessive clause and the key is no longer the only qualifying option; awaits re-solve."
   },
   "paragraph": {
     "sentences": [
@@ -104,13 +113,13 @@
     "options": {
       "A": "The highest intellectual achievement is thinking that stands on its own, since any debt to others limits what a thinker can claim as new.",
       "B": "All of philosophy's landmark ideas, without exception, are transformations of material their authors borrowed from other thinkers.",
-      "C": "Great thinkers are distinguished by the use they make of borrowed ideas, which is why philosophy no longer prizes originality at all.",
+      "C": "Great thinkers are distinguished by the use they make of borrowed ideas, so although the word survives, philosophy no longer prizes originality.",
       "D": "Original thought is best understood not as owing nothing to others but as the distinctive transformation of what a thinker inherits."
     },
     "correct": "D",
     "explanation": {
       "paragraph_meaning": "The paragraph opens with a flattering picture: the original thinker as someone who owes nobody anything. Then it turns, without a however, on the phrase tells a different story. Philosophy's great ideas are almost always reworkings of borrowed ones, and greatness lies in the reworking, in pressing an inherited thought until it gives up something new. Originality is redefined: not a debt-free starting point, but a way of handling what you receive.",
-      "correct_reasoning": "Option D states the post-turn claim with the correction intact: not the absence of debts, but their transformation. It keeps the author's corrective stance and adds no history the paragraph does not contain. It is the redefinition, compressed.",
+      "correct_reasoning": "The correct option states the post-turn claim with the correction intact: not the absence of debts, but their transformation. It keeps the author's corrective stance and adds no history the paragraph does not contain. It is the redefinition, compressed.",
       "distractors": [
         {
           "option": "A",
@@ -132,9 +141,9 @@
           "option": "C",
           "archetype": "half_truth",
           "secondary_archetype": null,
-          "why_wrong": "The opening clause is the author's own point. The tail then claims philosophy no longer prizes originality at all, when the paragraph redefines originality precisely to keep valuing it.",
-          "seductive_element": "A verified first half buys trust that the unexamined second half quietly spends.",
-          "thinking_mistake": "The poisoned tail: accepting an option on the strength of its opening clause."
+          "why_wrong": "The opening clause is the author's own point, and conceding that the word survives does not save the tail. The paragraph redefines originality precisely in order to go on valuing it, as 'less a starting point than a way of handling what one receives', which is a revaluation rather than an abandonment.",
+          "seductive_element": "A verified first half buys trust, and the concession in the middle makes the overreach at the end sound like a distinction the writer has drawn carefully.",
+          "thinking_mistake": "The poisoned tail: accepting an option on the strength of its opening clause and a well-placed concession."
         }
       ],
       "reading_habit": "Not every turn announces itself with however. Watch for quieter hinges, tells a different story, in fact, the truth is, and treat everything before the hinge as scaffolding."

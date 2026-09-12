@@ -27,7 +27,10 @@
       "certainty": "hedged",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": "But" },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
     "difficulty_dials": {
       "abstraction": 2,
       "syntax": 2,
@@ -38,15 +41,29 @@
       "qualifier_density": 2,
       "domain_load": 1
     },
-    "load_bearing": ["mainly", "rather than"],
+    "load_bearing": [
+      "mainly",
+      "rather than"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "author_intent", "evidence_vs_thesis", "certainty_reading"],
+    "dna_traits": [
+      "main_idea_detection",
+      "author_intent",
+      "evidence_vs_thesis",
+      "certainty_reading"
+    ],
     "mission": "watch_the_turn",
     "learning_objective": "locate the claim after the turn and keep the author's final qualification, which rescues the policy from the option that calls it worthless",
-    "reasoning_patterns": ["sum.central_vs_supporting", "sum.stance_kept", "sum.qualification_kept", "struct.pivot", "lang.contrast_marker"],
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "sum.stance_kept",
+      "sum.qualification_kept",
+      "struct.pivot",
+      "lang.contrast_marker"
+    ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The live rival is the option that calls free transport worthless: it follows the turn correctly and captures the failure to reduce traffic, but the paragraph's last sentence explicitly denies 'worthless' and names the real benefit. The ridership option is what a reader who stops at sentence two would choose; the 'But' that opens sentence three is the whole item. The prescriptive option adds a policy the author never proposes.",
+      "adversarial_review": "The live rival is the option that calls free transport worthless: it follows the turn correctly and captures the failure to reduce traffic, but the paragraph's last sentence explicitly denies 'worthless' and names the real benefit. The ridership option is what a reader who stops at sentence two would choose; the 'But' that opens sentence three is the whole item. The option telling cities to charge fares and fund cycle lanes also recommends something, so the recommendation itself separates nothing; it fails because it prescribes a policy where the paragraph prescribes only a standard of judgement, and because 'only' overstates the author's 'mainly'.",
       "blind_solve": null
     },
     "source": {
@@ -59,15 +76,30 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-ps-002",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); the v2 exemplar",
-    "reviewer_notes": "A concession-turn item where the last sentence does real work: it keeps the author from the conclusion the evidence seems to invite. Three distortion families: logic (the turn collapsed), stance (flipped to dismissal), addition (a prescription)."
+    "reviewer_notes": "A concession-turn item where the last sentence does real work: it keeps the author from the conclusion the evidence seems to invite. Three distortion families: logic (the turn collapsed), stance (flipped to dismissal), addition (a prescription). Key reworded 2026-09-13 to carry the recommendation the paragraph itself makes, so that a prescriptive option is no longer a reliable negative signal; awaits re-solve. A distractor rewritten 2026-09-13 to carry a genuine concessive clause, so that conceding no longer marks the key; awaits re-solve."
   },
   "paragraph": {
     "sentences": [
-      { "text": "It seems obvious that making buses free should take cars off the road.", "role": "setup" },
-      { "text": "Cities that have tried it report large rises in ridership, which looks like success.", "role": "concession" },
-      { "text": "But surveys of the new riders find that most of them previously walked or cycled, and only a small minority have left a car at home.", "role": "evidence" },
-      { "text": "Free fares mainly change how people who were already not driving get around.", "role": "thesis" },
-      { "text": "The lesson is not that free transport is worthless, but that its benefit is access for the carless rather than relief for the roads.", "role": "qualification" }
+      {
+        "text": "It seems obvious that making buses free should take cars off the road.",
+        "role": "setup"
+      },
+      {
+        "text": "Cities that have tried it report large rises in ridership, which looks like success.",
+        "role": "concession"
+      },
+      {
+        "text": "But surveys of the new riders find that most of them previously walked or cycled, and only a small minority have left a car at home.",
+        "role": "evidence"
+      },
+      {
+        "text": "Free fares mainly change how people who were already not driving get around.",
+        "role": "thesis"
+      },
+      {
+        "text": "The lesson is not that free transport is worthless, but that its benefit is access for the carless rather than relief for the roads.",
+        "role": "qualification"
+      }
     ]
   },
   "ideal_summary": "Free public transport mostly shifts walkers and cyclists onto buses rather than drivers out of cars, so its real value is mobility for people without cars, not less traffic.",
@@ -98,14 +130,14 @@
     "stem": "Which option best captures the essence of the paragraph?",
     "options": {
       "A": "Free public transport increases ridership substantially in the cities that have tried it, which shows it is taking cars off the road.",
-      "B": "Free fares mainly draw riders who already walked or cycled, so their real benefit is access for the carless, not fewer cars on the road.",
-      "C": "Free public transport is worthless as a transport policy, since surveys show it fails to reduce traffic in the cities that have tried it.",
+      "B": "Free fares mainly draw riders who already walked or cycled, so they should be judged by access for the carless, not by traffic relief.",
+      "C": "Free public transport is worthless as a transport policy: ridership does rise, but the surveys show that it fails to reduce traffic.",
       "D": "Cities should charge for public transport and fund cycle lanes instead, since free buses only draw riders away from walking and cycling."
     },
     "correct": "B",
     "explanation": {
       "paragraph_meaning": "The paragraph starts with an expectation — free buses, fewer cars — and a fact that seems to confirm it: ridership rises. Then it turns. The new riders are mostly people who were walking or cycling; few were driving. So free fares mainly change how non-drivers travel. The author ends by refusing the cynical reading: the policy is not worthless, its benefit is simply different — access for the carless, not relief for the roads.",
-      "correct_reasoning": "The correct option follows the turn, keeps the hedge ('mainly'), and preserves the author's final stance: a corrected expectation, not a condemnation. It states the cause (who the new riders are) and the reframed benefit exactly as the last two sentences do.",
+      "correct_reasoning": "The correct option follows the turn, keeps the hedge, and preserves the author's final stance: a corrected expectation rather than a condemnation. The last sentence states what the lesson is, so a summary is entitled to carry it as a standard of judgement; access for the carless rather than relief for the roads is the author's own pair. Note that another option also tells the reader what to do, so the presence of a recommendation settles nothing here.",
       "distractors": [
         {
           "option": "A",
@@ -119,17 +151,17 @@
           "option": "C",
           "archetype": "stance_flip",
           "secondary_archetype": null,
-          "why_wrong": "The author explicitly says the lesson is 'not that free transport is worthless'. This option takes the failure to reduce traffic and turns it into a verdict the paragraph refuses.",
-          "seductive_element": "It follows the turn correctly and gets the traffic finding right; only the stance is wrong.",
-          "thinking_mistake": "Hearing a corrected expectation as a dismissal — treating 'it does not do what you thought' as 'it does nothing'."
+          "why_wrong": "Granting the rise in ridership is the paragraph's own move and licenses nothing further. The author says in terms that the lesson is 'not that free transport is worthless', and names the benefit that remains, so this option turns a corrected expectation into a verdict the text refuses.",
+          "seductive_element": "It concedes the finding that looks like success before dismissing the policy, which reads like a writer who has weighed the good news; it also follows the turn correctly and gets the traffic result right.",
+          "thinking_mistake": "Hearing a corrected expectation as a dismissal, and treating a conceded benefit as one already answered."
         },
         {
           "option": "D",
           "archetype": "prescriptive_swap",
           "secondary_archetype": null,
-          "why_wrong": "The paragraph recommends nothing. Charging fares and building cycle lanes are policies imported from outside the text, and 'only draw riders from walking and cycling' overstates a finding the author reports as 'mainly'.",
-          "seductive_element": "It sounds like the practical conclusion a sensible reader might draw from the surveys.",
-          "thinking_mistake": "Summarising what should be done about the facts instead of what the author said the facts are."
+          "why_wrong": "The paragraph recommends no change of policy. Charging fares and funding cycle lanes are imported from outside a text that draws a lesson about how free transport should be valued rather than a case for abandoning it, and 'only draw riders away from walking and cycling' overstates a finding the author reports as 'mainly'.",
+          "seductive_element": "It sounds like the practical conclusion a sensible reader might draw from the surveys, and the paragraph does end in a lesson, which makes a recommendation feel licensed.",
+          "thinking_mistake": "Taking a lesson about how to judge a policy for a lesson about which policy to adopt."
         }
       ],
       "reading_habit": "When a paragraph ends with 'the lesson is not X but Y', the summary must contain Y and must not contain X. Check the last sentence against every option before you choose."

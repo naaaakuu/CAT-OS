@@ -64,13 +64,13 @@
       "sum.certainty_kept"
     ],
     "quality": {
-      "status": "verified",
+      "status": "reviewed",
       "adversarial_review": "The two finalists differ by one inference. Both keep the mechanism, that a wide enough discount makes pleading rational whatever the case, and both reject the naive reading of the plea rate. The rival then says the rate is evidence that innocent defendants are being convicted. The last sentence blocks precisely that: 'Whether innocent defendants are being induced to plead is a further question that a rate cannot settle.' Note too that the paragraph's own phrase is 'a defendant with a good answer', which is not a claim about innocence. The capping option prescribes a reform nobody in the paragraph proposes, and the option about the disappearing trial reports the setup and the mechanism while stopping short of the conclusion drawn from them.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 1,
         "total": 1,
-        "notes": "full agreement"
+        "notes": "full agreement; key reworded 2026-09-13 to carry the recommendation the paragraph itself makes, so that a prescriptive option is no longer a reliable negative signal; awaits re-solve"
       }
     },
     "source": {
@@ -138,13 +138,13 @@
     "options": {
       "A": "Once the discount grows wide enough, pleading is rational whatever the case against a defendant, so a rising plea rate is evidence that innocent people are being convicted.",
       "B": "The discount offered for a guilty plea ought to be capped, because a gap fixed by the prosecution rather than by the evidence renders the resulting plea rate meaningless.",
-      "C": "Because the discount for pleading is fixed by the prosecution and widens regardless of the case, the plea rate measures that discount at least as much as it measures guilt.",
+      "C": "Because the discount is fixed by the prosecution and widens regardless of the case, the plea rate must be read as a measure of that discount at least as much as of guilt.",
       "D": "The contested trial has become the exception because the sentence offered for a plea is discounted against the heavier sentence a defendant can expect after going to trial."
     },
     "correct": "C",
     "explanation": {
       "paragraph_meaning": "Almost nobody goes to trial any more, and the paragraph explains why in terms of arithmetic rather than conscience. A defendant is offered a lighter sentence for pleading, and how much lighter is decided by the prosecution, which is not the same as being decided by how strong the evidence is. Once that gap is wide enough, taking the certain smaller punishment is the sensible move even if you have a decent defence. So when we count guilty pleas, part of what we are counting is the size of the gap. The author then stops. Whether that means innocent people are pleading guilty is a different question, and a headline rate cannot answer it.",
-      "correct_reasoning": "The correct option carries the cause, that the discount is set by the prosecution and widens independently of the case, and the conclusion drawn from it at the author's own strength: the rate measures the discount at least as much as guilt. It adds no claim about who is innocent, which is the boundary the final sentence draws.",
+      "correct_reasoning": "The correct option carries the cause, that the discount is set by the prosecution and widens independently of the case, and the conclusion drawn from it at the author's own strength: the rate measures the discount at least as much as guilt. The thesis sentence licenses stating that as a rule of reading. It adds no claim about who is innocent, which is the boundary the final sentence draws.",
       "distractors": [
         {
           "option": "A",
@@ -158,8 +158,8 @@
           "option": "B",
           "archetype": "prescriptive_swap",
           "secondary_archetype": null,
-          "why_wrong": "No reform is proposed anywhere in the paragraph, and 'meaningless' overshoots a claim that the rate records the discount at least as much as guilt, which leaves it meaning something.",
-          "seductive_element": "A structural criticism of this force seems to demand a remedy, and capping the discount is the obvious one to reach for.",
+          "why_wrong": "No reform is proposed anywhere in the paragraph: it says what the rate has stopped measuring, not what the discount should be set at. 'Meaningless' also overshoots a claim that the rate records the discount at least as much as guilt, which leaves it meaning something.",
+          "seductive_element": "A structural criticism of this force seems to demand a remedy, and capping the discount is the obvious one to reach for; the correct reading also tells you what to do with the figure, so telling somebody what to do is no longer the giveaway.",
           "thinking_mistake": "Summarising the reform a diagnosis suggests rather than the diagnosis the author actually offered."
         },
         {

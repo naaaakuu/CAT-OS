@@ -62,13 +62,13 @@
       "arg.evidence"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "The live rival is the option that discounts the objections raised at such meetings. It follows honestly from the attendance finding and is the conclusion most readers draw on their own, but the fourth sentence exists to block it: 'a well-argued objection is not weakened by the fact that its author had a free Tuesday'. The option that widens the claim to written submissions and online surveys is beaten by the paragraph's own mechanism, which is about being in one building on one night. The option that proposes several meeting times recommends something the paragraph never asks for.",
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that grants the objections are often well argued and then discounts them anyway. Its concession makes it look like the careful reading, and it follows honestly from the attendance registers, but the fourth sentence exists to block exactly that step: 'a well-argued objection is not weakened by the fact that its author had a free Tuesday'. The option that concedes the same point and then widens the claim to written submissions and online surveys is beaten by the paragraph's own mechanism, which is about being in one building on one night. The option proposing several meeting times recommends something the paragraph never asks for and promises a match it never predicts.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 1,
         "total": 1,
-        "notes": "full agreement"
+        "notes": "full agreement; options rewritten 2026-09-13 to remove the shape tells (a genuine concessive clause now sits in a distractor); awaits re-solve; x; key reworded 2026-09-13 to carry the recommendation the paragraph itself makes, so that a prescriptive option is no longer a reliable negative signal; awaits re-solve"
       }
     },
     "source": {
@@ -134,39 +134,39 @@
   "question": {
     "stem": "Which option best captures the essence of the paragraph?",
     "options": {
-      "A": "Consultation of every kind, written submissions and online surveys included, reaches only the settled and comfortable and so cannot measure local opinion.",
-      "B": "A consultation meeting records who was free to attend rather than what the district thinks, though the objections raised there may still be perfectly sound.",
-      "C": "Since residents who attend a consultation are unrepresentative of the district, the objections raised at such meetings deserve less weight than planners give.",
-      "D": "Councils should hold their consultations at several times of day, so that attendance at the meeting finally matches the population it is meant to represent."
+      "A": "Although a well-argued objection stands on its merits, consultation of every kind, written submissions included, reaches only the settled and cannot measure opinion.",
+      "B": "A consultation records who was free to attend, so it should not be treated as a measure of what the district thinks, though the objections raised may still be sound.",
+      "C": "Residents at a consultation are unrepresentative of the district, so although their objections are well argued, those objections deserve less weight than planners give.",
+      "D": "Councils should hold their consultations at several times of day and in several places, so that attendance finally matches the population it is meant to represent."
     },
     "correct": "B",
     "explanation": {
       "paragraph_meaning": "An evening meeting in one hall can only hear from people who are free that evening and think the trip worth making, which is why the registers show an older and more settled room than the district around it. The paragraph then does something careful. It refuses to use that fact against the people who came: their arguments stand or fall on their own. What the skew limits is the use a planner can make of the meeting, which is evidence of who could attend and not a count of local opinion.",
-      "correct_reasoning": "The correct option keeps both halves the paragraph insists on: the meeting measures availability rather than opinion, and the arguments made in it are not thereby discounted. It also keeps the claim inside the arrangement that explains it, a meeting at a fixed time and place.",
+      "correct_reasoning": "The correct option keeps both halves the paragraph insists on: the meeting measures availability rather than opinion, and the arguments made in it are not thereby discounted. The last sentence says a planner who treats the meeting as a measure of local opinion has read a sample as a census, so the summary is entitled to state that as an instruction. It also keeps the claim inside the arrangement that explains it, a meeting at a fixed time and place.",
       "distractors": [
         {
           "option": "A",
           "archetype": "scope_broadening",
           "secondary_archetype": null,
-          "why_wrong": "Every reason the paragraph offers depends on having to be in one building on one night. Written submissions and online surveys impose no such trip, so this option carries the conclusion to cases the stated mechanism does not touch.",
-          "seductive_element": "It generalises in the direction the reader is already travelling, and consultation fatigue is a familiar complaint that makes the wider claim feel obvious.",
-          "thinking_mistake": "Letting a claim expand to the whole family of things the example belongs to, instead of holding it to what the paragraph's explanation can reach."
+          "why_wrong": "Every reason the paragraph offers depends on having to be in one building on one night, and written submissions and online surveys impose no such trip. Granting that a good objection stands on its merits is free; it does not license carrying the conclusion to cases the stated mechanism cannot reach.",
+          "seductive_element": "It opens by conceding the paragraph's own qualification, so the widened claim that follows sounds like a careful reader's conclusion rather than an overreach.",
+          "thinking_mistake": "Letting a claim expand to the whole family of things the example belongs to, and treating a concession borrowed from the text as a warrant for the expansion."
         },
         {
           "option": "C",
           "archetype": "stance_flip",
           "secondary_archetype": null,
-          "why_wrong": "The paragraph states that the objections are not made mistaken by the skew, and that a good argument is not weakened by its author's free evening. This option converts a limit on what attendance measures into a reason to discount what was said.",
-          "seductive_element": "It sounds like the tough-minded conclusion, and it follows smoothly from the attendance figures if the fourth sentence is skimmed.",
-          "thinking_mistake": "Treating a point about who supplied the evidence as a verdict on the evidence itself."
+          "why_wrong": "The paragraph grants that the objections are often well argued and then refuses the very inference this option draws from it: a well-argued objection is not weakened by the fact that its author had a free Tuesday. Conceding their quality and discounting them anyway is the move the fourth sentence exists to block.",
+          "seductive_element": "It concedes the point that ought to save the objections and discounts them regardless, which reads like a writer who has weighed the qualification rather than missed it.",
+          "thinking_mistake": "Treating a point about who supplied the evidence as a verdict on the evidence itself, and mistaking a concession made in passing for one that has been answered."
         },
         {
           "option": "D",
           "archetype": "prescriptive_swap",
           "secondary_archetype": null,
-          "why_wrong": "No remedy appears anywhere in the paragraph. Staggered meeting times are a sensible response invented by the reader, and the confident promise that attendance would then match the population is stronger than anything the text supports.",
-          "seductive_element": "It answers the problem the paragraph raises, and a summary that solves something feels more useful than one that only describes.",
-          "thinking_mistake": "Summarising what ought to be done about a finding rather than what the author said the finding was."
+          "why_wrong": "No remedy appears anywhere in the paragraph. Staggered meeting times are a response invented by the reader, and the confident promise that attendance would then match the population is stronger than anything the text supports: the paragraph tells a planner how to read a meeting, not how to run one.",
+          "seductive_element": "It answers the problem the paragraph raises, and a summary that solves something feels more useful than one that only describes; the closing sentence does end in an instruction of its own, which makes a remedy feel invited.",
+          "thinking_mistake": "Taking a rule about how to read evidence for a rule about how to gather it."
         }
       ],
       "reading_habit": "When a paragraph adds a sentence beginning 'none of this means', that sentence is naming the wrong summary in advance. Read it as a fence and check every option against it."

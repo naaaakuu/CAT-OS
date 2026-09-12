@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 2,
       "syntax": 2,
@@ -38,9 +41,15 @@
       "qualifier_density": 1,
       "domain_load": 1
     },
-    "load_bearing": ["recent"],
+    "load_bearing": [
+      "recent"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "scope_preservation", "inference_control"],
+    "dna_traits": [
+      "main_idea_detection",
+      "scope_preservation",
+      "inference_control"
+    ],
     "mission": "find_the_thesis",
     "learning_objective": "locate the claim when the paragraph opens with colourful background instead of the point",
     "source": {
@@ -53,7 +62,7 @@
     "date_added": "2026-07-11",
     "batch_id": "batch-ps-001",
     "prompt_version": "in-repo authored (Para Summary milestone); PARA SUMMARY BIBLE frameworks applied",
-    "reviewer_notes": "The opening sentence is deliberately the most colourful and the least central: a setup trap, a cause invention, and a category stretch guard the thesis. Owner review pending."
+    "reviewer_notes": "The opening sentence is deliberately the most colourful and the least central: a setup trap, a cause invention, and a category stretch guard the thesis. Owner review pending. Options rewritten 2026-09-13 so that a distractor now carries a genuine concessive clause and the key is no longer the only qualifying option; awaits re-solve."
   },
   "paragraph": {
     "sentences": [
@@ -104,13 +113,13 @@
     "options": {
       "A": "Nineteenth century concert audiences applauded between movements, demanded encores mid-symphony, and chatted during the music.",
       "B": "Concert silence is a recent invention, adopted once audiences came to believe that great music deserves undivided attention.",
-      "C": "Etiquette in the arts is never really timeless; the manners expected of audiences everywhere are recent, learned inventions.",
-      "D": "The silence expected at classical concerts is not an age-old norm but a recently created habit audiences had to be taught."
+      "C": "Though it took decades of campaigning, no etiquette in the arts is timeless: audience manners everywhere are recent inventions.",
+      "D": "The silence expected at classical concerts is not an age-old norm but a recently created habit that audiences had to be taught."
     },
     "correct": "D",
     "explanation": {
       "paragraph_meaning": "The paragraph contrasts two worlds. In the nineteenth century, concert audiences clapped, shouted and chatted. Today they sit in silence, and we assume that silence is how music was always heard. The author's point is that the silence is new: an invention pushed by conductors and critics over decades, a learned habit wearing the costume of timeless etiquette.",
-      "correct_reasoning": "Option D carries the exact claim, that the norm is recent and taught, at the paragraph's width, one norm in one setting, and with the author's corrective edge intact: not age-old, but created. Nothing from the colourful setup is promoted, and no motive is invented.",
+      "correct_reasoning": "The correct option carries the exact claim, that the norm is recent and taught, at the paragraph's width, one norm in one setting, and with the author's corrective edge intact: not age-old, but created. Nothing from the colourful setup is promoted, and no motive is invented.",
       "distractors": [
         {
           "option": "A",
@@ -132,9 +141,9 @@
           "option": "C",
           "archetype": "scope_broadening",
           "secondary_archetype": null,
-          "why_wrong": "The paragraph makes a claim about one norm, concert silence. This option turns it into a rule about all manners in all arts, a reach the text never attempts.",
-          "seductive_element": "Broader statements feel more like summaries, as though generality were the same as importance.",
-          "thinking_mistake": "Over-generalization: mistaking a wider claim for a more complete one."
+          "why_wrong": "The paragraph makes a claim about one norm in one setting, and the decades of campaigning it reports are the evidence for that single case. Granting them licenses nothing wider: a rule about all manners in all arts is a reach the text never attempts.",
+          "seductive_element": "It opens with the paragraph's own evidence, so the wider claim sounds like something the argument has earned rather than something added on to it.",
+          "thinking_mistake": "Over-generalisation: mistaking a wider claim for a more complete one, and treating borrowed evidence as support for the extra width."
         }
       ],
       "reading_habit": "When a paragraph opens with colour, ask what the colour is for. The claim it serves usually sits one or two sentences later, wearing plainer clothes."

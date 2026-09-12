@@ -63,13 +63,13 @@
       "cr.sampling"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "The live rival is the option that says the published rate understates how often decisions are wrong. It is what the third sentence appears to set up, and it is the conclusion most readers reach unaided. The last sentence refuses it in words: 'It does not follow that moderation is inaccurate, since nobody has counted the silent cases', and the fourth sentence gives the reason, that the figure moves when people get better at appealing and again when they give up, which is movement in both directions rather than a bias one way. The option about users never learning why a post vanished is a true step in the analysis rather than its conclusion, and the bad-faith option imports a motive the paragraph never assigns.",
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that says the published rate understates how often decisions are wrong while conceding that nobody can say by how much. The hedge makes it look scrupulous, and it is the conclusion most readers reach unaided, but the last sentence refuses the direction and not merely the size: 'It does not follow that moderation is inaccurate, since nobody has counted the silent cases.' The fourth sentence gives the reason, that the figure moves when people get better at appealing and again when they give up, which is movement in both directions rather than a bias one way. The option about users never learning why a post vanished is a true step in the analysis rather than its conclusion, and the bad-faith option imports a motive the paragraph never assigns.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 1,
         "total": 1,
-        "notes": "full agreement"
+        "notes": "full agreement; key reworded 2026-09-13 to carry the recommendation the paragraph itself makes, so that a prescriptive option is no longer a reliable negative signal; awaits re-solve; a distractor rewritten 2026-09-13 to carry a genuine concessive clause, so that conceding no longer marks the key; awaits re-solve"
       }
     },
     "source": {
@@ -135,15 +135,15 @@
   "question": {
     "stem": "Which option best captures the essence of the paragraph?",
     "options": {
-      "A": "Because users whose posts vanish are often never told why, many wrongful removals on the largest platforms are never contested by anyone at all.",
-      "B": "Since the errors that produce no appeal are invisible to it, the published reversal rate understates how often moderation decisions are genuinely wrong.",
+      "A": "Because users whose posts vanish are often never told why, a great many wrongful removals on the largest platforms are never contested by anyone at all.",
+      "B": "Since the errors that produce no appeal are invisible to it, the rate understates how often decisions are genuinely wrong, though nobody can say by how much.",
       "C": "Platforms publish reversal rates in order to look accountable, knowing the figure omits the errors that the people affected never think to contest.",
-      "D": "A reversal rate on appeals measures the population that appeals, so the figure cannot show that moderation is accurate, nor that it is inaccurate."
+      "D": "A reversal rate measures the population that appeals, so the figure ought not to be offered as evidence that moderation is accurate, or that it is not."
     },
     "correct": "D",
     "explanation": {
       "paragraph_meaning": "A platform reports how many of the decisions people challenged it later reversed, and treats that as a score for its own accuracy. The paragraph points out who is in that sample. To appeal, you had to see the decision, think it wrong and know where to complain, so the sample is made of people with all three. Anyone whose post was wrongly removed without their ever learning why is simply absent. So the number describes the complainers: it goes up when they get better at complaining and down when they stop bothering. The author then refuses the obvious next step. Nobody has counted the missing cases, so the figure proves nothing about accuracy, in either direction.",
-      "correct_reasoning": "The correct option keeps the claim about what the statistic is a statistic of, and keeps the author's refusal symmetrical: the figure cannot establish accuracy and cannot establish inaccuracy. That double negative is the paragraph's last sentence, stated at exactly its strength.",
+      "correct_reasoning": "The correct option keeps the claim about what the statistic is a statistic of, and keeps the author's refusal symmetrical: the figure cannot establish accuracy and cannot establish inaccuracy. The last sentence says in terms what follows, that this figure cannot settle the question in either direction, which is why the summary may put it as a rule about what the figure ought not to be offered for.",
       "distractors": [
         {
           "option": "A",
@@ -157,9 +157,9 @@
           "option": "B",
           "archetype": "implication_addition",
           "secondary_archetype": null,
-          "why_wrong": "The paragraph explicitly declines this: nobody has counted the silent cases, so the figure settles nothing either way. It also says the rate rises with practice and falls with discouragement, which is movement in both directions rather than a one-sided bias.",
-          "seductive_element": "Missing errors sound like they must pull the number down, and the option reads as the rigorous conclusion a careful analyst would draw.",
-          "thinking_mistake": "Completing an argument the author deliberately stopped, and mistaking the finishing of it for having understood it."
+          "why_wrong": "Conceding that the size of the gap is unknown does not rescue the direction of the claim. The paragraph declines the direction itself: nobody has counted the silent cases, so the figure settles nothing either way, and the rate rises when users grow practised and falls when they give up, which is movement both ways rather than a one-sided bias.",
+          "seductive_element": "Missing errors sound as though they must pull the number down, and the hedge about how much makes the option read like the disciplined version of that thought.",
+          "thinking_mistake": "Completing an argument the author deliberately stopped, and letting a concession about magnitude stand in for a warrant about direction."
         },
         {
           "option": "C",
