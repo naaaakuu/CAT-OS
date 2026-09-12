@@ -227,10 +227,14 @@ export async function renderHearth(outlet, { storage }) {
   }
 
   async function renderYou() {
+    // The settled arc is finite and its count means something; Beyond is
+    // not, so it is counted, never divided.
+    const settled = state.works.filter((w) => w.kind !== 'endless');
     let weakness = null;
     try { weakness = readingWeakness(world.records.sessions); } catch { /* none */ }
     const lines = standingLines(state, weakness);
     panel.innerHTML = `
+      <p class="standing__stage">The valley is <b>${escapeHTML((state.stage?.name ?? 'Bare ground').toLowerCase())}</b>. ${escapeHTML(state.stage?.line ?? '')}</p>
       <div class="standing">
         ${lines.map((l) => `<p>${escapeHTML(l)}</p>`).join('')}
       </div>
@@ -242,7 +246,8 @@ export async function renderHearth(outlet, { storage }) {
           ['Words in memory', String(state.meadow.known + state.pond.known + state.thicket.known)],
           ['Words for good', String(state.meadow.mastered + state.pond.mastered + state.thicket.mastered)],
           ['Verbal items solved', String(state.loom.solved + state.table.solved + state.bench.solved)],
-          ['Works built', `${state.works.filter((w) => w.built).length}/${state.works.length}`],
+          ['Works built', `${settled.filter((w) => w.built).length}/${settled.length}`],
+          ['Beyond', String(state.works.filter((w) => w.kind === 'endless' && w.built).length)],
           ['Days in the valley', String(state.hearth.activeDays)],
         ].map(([k, v]) => `<div class="figure"><b>${escapeHTML(v)}</b><span>${escapeHTML(k)}</span></div>`).join('')}
       </div>

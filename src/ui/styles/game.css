@@ -97,8 +97,17 @@
 }
 .hud__card.is-in { opacity: 1; transform: none; }
 .hud__avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--g-gold-2), var(--g-gold)); display: grid; place-items: center; font-family: var(--g-display); font-weight: 700; color: #4A3A10; font-size: 14px; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.12); }
-.hud__title { font-family: var(--g-display); font-size: 15px; font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; }
-.hud__sub { font-size: 11px; color: var(--g-ink-2); margin-top: 2px; }
+/* The HUD card is one line and one line under it, always. A valley named
+   'Bramble Hush' wrapping onto three lines on a narrow phone turns the
+   corner of the map into a paragraph. */
+.hud__title {
+  font-family: var(--g-display); font-size: 15px; font-weight: 600; line-height: 1.1; letter-spacing: -0.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40vw;
+}
+.hud__sub {
+  font-size: 11px; color: var(--g-ink-2); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40vw;
+}
 .hud__stack { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
 .hud__pill {
   display: inline-flex; align-items: center; gap: 6px;

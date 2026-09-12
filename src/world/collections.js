@@ -166,7 +166,8 @@ export function collections(s, content) {
   out.push(set({
     id: 'works', group: 'pace', mark: 'cottage',
     name: 'Works standing', what: 'built',
-    have: s.works.filter((w) => w.built).length, total: s.works.length, unit: 'works',
+    have: s.works.filter((w) => w.built && w.kind !== 'endless').length,
+    total: s.works.filter((w) => w.kind !== 'endless').length, unit: 'works',
     route: '#/world/place/hearth?works=1',
     line: 'Everything your learning has built', hard: 0.4,
   }));
