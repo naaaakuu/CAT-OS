@@ -133,10 +133,22 @@ export async function renderWorld(outlet, { storage }) {
   const focus = focusSlug ? regionBySlug(focusSlug) : null;
 
   if (focus) {
-    renderer.cam.zoom = Math.max(renderer.cam.zoom, homeZoom());
-    renderer.lookAt(focus.anchor.x, focus.anchor.y - 30, { animate: false });
-    if (changedSlug) setTimeout(() => burst(focus.anchor.x, focus.anchor.y - 20), 400);
-    if (changeLine) setTimeout(() => notice(changeLine, 'place'), 600);
+    const home = homeZoom();
+    if (changedSlug && !reduce) {
+      // Something was built here. Come in on it: the valley from above, then
+      // a slow fall onto the place that changed, then the sparks. A work is
+      // the biggest thing that happens in this game and it gets a shot.
+      renderer.cam.zoom = renderer.snap(Math.max(renderer.minZoom(), home * 0.62));
+      renderer.lookAt(focus.anchor.x, focus.anchor.y - 90, { animate: false });
+      setTimeout(() => renderer.lookAt(focus.anchor.x, focus.anchor.y - 24, { zoom: renderer.snap(home * 1.45), duration: 2200 }), 260);
+      setTimeout(() => burst(focus.anchor.x, focus.anchor.y - 20), 1700);
+      setTimeout(() => renderer.lookAt(focus.anchor.x, focus.anchor.y - 30, { zoom: home, duration: 1600 }), 3400);
+    } else {
+      renderer.cam.zoom = Math.max(renderer.cam.zoom, home);
+      renderer.lookAt(focus.anchor.x, focus.anchor.y - 30, { animate: false });
+      if (changedSlug) setTimeout(() => burst(focus.anchor.x, focus.anchor.y - 20), 400);
+    }
+    if (changeLine) setTimeout(() => notice(changeLine, 'place'), changedSlug && !reduce ? 2100 : 600);
   } else if (state.isNew && !reduce) {
     // The whole valley first — you must see what you are inheriting —
     // then the camera settles on the house you live in.

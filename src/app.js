@@ -11,7 +11,6 @@ import { STORES } from './core/storage/storage-adapter.js';
 import { downloadBackup, importAll } from './core/storage/backup.js';
 import { Router } from './core/router/router.js';
 import { toast } from './ui/components/cat-toast.js';
-import { formatPercent, formatDate } from './core/utils/format.js';
 import { registerRC } from './modules/reading-comprehension/index.js';
 import { registerPJ } from './modules/para-jumbles/index.js';
 import { registerPS } from './modules/para-summary/index.js';
@@ -215,212 +214,21 @@ async function gardenHomeCard() {
   }
 }
 
-async function renderHome(outlet) {
-  const now = new Date();
-  const hour = now.getHours();
-  const greeting = hour < 12 ? 'Good morning.' : hour < 18 ? 'Good afternoon.' : 'Good evening.';
-  const dateLine = now.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
+/**
+ * The two routes the world replaced.
+ *
+ * `#/home` was a dashboard — a greeting, a Continue card, a module list —
+ * and `#/practice` was the list of rooms beyond the Gate. Since 1.0.0 the
+ * valley is both of those things, and since 1.2.0 the first thing a new
+ * learner sees is Wick standing in it. Keeping the old screens alive
+ * behind a hash meant two answers to "where am I?", so the screens are
+ * gone and the addresses simply come home. Old links, old bookmarks and
+ * an installed PWA whose start_url predates the world all still work.
+ */
+function renderHome() { location.replace('#/world'); }
+function renderPractice() { location.replace('#/world'); }
 
-  let sessions = [];
-  let items = [];
-  try {
-    [sessions, items] = await Promise.all([
-      storage.getAll(STORES.SESSIONS),
-      listRCItems().catch(() => []),
-    ]);
-  } catch { /* storage unavailable — Home still renders below */ }
 
-  const stats = deriveEngagement(sessions);
-  const titles = new Map(items.map((i) => [i.id, i.title]));
-
-  /* ---- Today: goal, streak, level, week — one calm card ---- */
-  const goalDone = stats.streaks.practicedToday;
-  const todayHTML = `
-    <div class="card">
-      <div class="row" style="padding-top: 0">
-        <div class="row__lead">
-          <span class="row__icon" aria-hidden="true">${goalDone ? '✓' : '○'}</span>
-          <div>
-            <div class="row__label">Today's goal · one session</div>
-            <div class="row__hint">${goalDone ? 'Done for today' : 'One passage keeps the habit'}</div>
-          </div>
-        </div>
-        <span class="badge ${stats.streaks.current > 0 ? 'badge--success' : ''}"
-              aria-label="Streak: ${stats.streaks.current} days">
-          ✦ ${stats.streaks.current}-day streak</span>
-      </div>
-      <div style="margin: var(--space-4) 0"><cat-xp-bar></cat-xp-bar></div>
-      <cat-week-strip></cat-week-strip>
-    </div>`;
-
-  /* ---- Statistics — quiet, tabular, honest ---- */
-  const statsHTML = stats.sessions === 0 ? '' : `
-    <div class="stat-grid">
-      <div class="stat"><b>${stats.sessions}</b><span>Sessions</span></div>
-      <div class="stat"><b>${stats.answered}</b><span>Answered</span></div>
-      <div class="stat"><b>${stats.answered ? formatPercent(stats.accuracy) : '—'}</b><span>Accuracy</span></div>
-      <div class="stat"><b>${formatDuration(stats.timeMs)}</b><span>Studied</span></div>
-      <div class="stat"><b>${stats.streaks.best}</b><span>Best streak</span></div>
-      <div class="stat"><b>${stats.level.level}</b><span>Level</span></div>
-    </div>`;
-
-  /* ---- Continue learning (journey-aware, reason stated) ---- */
-  const next = recommendNext(items, sessions);
-  const continuing = stats.sessions > 0 ? await recommendContinue(sessions) : null;
-  const continueHTML = stats.sessions === 0 ? `
-    <div class="card">
-      <h2>Reading Comprehension</h2>
-      <p class="muted">Read deeply, answer carefully, and learn exactly why each
-      option is right or wrong. Everything works offline and stays on your device.</p>
-      <a class="btn btn--primary btn--block" href="#/rc">Start practicing</a>
-    </div>` : continuing ? `
-    <div class="card">
-      <h2>Continue your ${continuing.info.noun}</h2>
-      <p class="muted"><em>${continuing.next.item.title}</em> — ${continuing.next.tier.label}${continuing.next.item.difficulty ? `, ${continuing.next.item.difficulty}` : ''}, ~${continuing.next.item.estimated_time_min} min.</p>
-      <p class="hint" style="margin-bottom: var(--space-3)">${continuing.next.reason}</p>
-      <a class="btn btn--primary btn--block" href="#${continuing.info.prefix}/session/${continuing.next.item.id}">${continuing.info.verb}</a>
-    </div>` : next ? `
-    <div class="card">
-      <h2>Continue your journey</h2>
-      <p class="muted"><em>${next.item.title}</em> — ${next.item.stage}, ${next.item.difficulty}, ~${next.item.estimated_time_min} min.</p>
-      <p class="hint" style="margin-bottom: var(--space-3)">${next.reason}</p>
-      <a class="btn btn--primary btn--block" href="#/rc/session/${next.item.id}">Read it now</a>
-    </div>` : `
-    <div class="card">
-      <h2>The library is read</h2>
-      <p class="muted">New passages arrive through the content pipeline.</p>
-      <a class="btn btn--primary btn--block" href="#/rc">Open the library</a>
-    </div>`;
-
-  /* ---- Your garden: one calm line, never a score (Bible §6.5) ---- */
-  const gardenHTML = await gardenHomeCard();
-
-  /* ---- Achievements — unlocked count + the three most recent tiers ---- */
-  const evaluated = evaluate(stats);
-  const unlocked = evaluated.filter((a) => a.unlocked);
-  const achievementsHTML = stats.sessions === 0 ? '' : `
-    <div class="card">
-      <h2>Achievements</h2>
-      <p class="row__hint" style="margin-bottom: var(--space-2)">${unlocked.length} of ${evaluated.length} unlocked</p>
-      ${unlocked.slice(-3).reverse().map((a) => `
-        <div class="row">
-          <div class="row__lead">
-            <span class="row__icon" aria-hidden="true">${a.glyph}</span>
-            <div>
-              <div class="row__label">${a.title}</div>
-              <div class="row__hint">${a.description}</div>
-            </div>
-          </div>
-          <span class="badge badge--success">Unlocked</span>
-        </div>`).join('')}
-    </div>`;
-
-  /* ---- Recent practice (RC and PJ sessions share the store) ---- */
-  const recent = [...sessions].sort((a, b) => b.finished_at.localeCompare(a.finished_at)).slice(0, 3);
-  const recentHTML = recent.length === 0 ? '' : `
-    <div class="card">
-      <h2>Recent practice</h2>
-      ${recent.map((s) => {
-        const isPJ = s.module === 'pj';
-        const isPS = s.module === 'ps';
-        const isOOO = s.module === 'ooo';
-        const isWD = s.module === 'wd';
-        const count = s.item_ids?.length ?? s.score.total;
-        const label = isPJ
-          ? `Para Jumbles · ${count} jumble${count === 1 ? '' : 's'}`
-          : isPS
-            ? `Para Summary · ${count} paragraph${count === 1 ? '' : 's'}`
-            : isOOO
-              ? `Odd One Out · ${count} item${count === 1 ? '' : 's'}`
-              : isWD
-                ? `Word DNA · ${count} famil${count === 1 ? 'y' : 'ies'}`
-                : (titles.get(s.passage_id) ?? s.passage_id);
-        const href = isPJ ? '#/pj' : isPS ? '#/ps' : isOOO ? '#/ooo' : isWD ? '#/wd' : `#/rc/review/${s.passage_id}`;
-        const isJourney = isPJ || isPS || isOOO || isWD;
-        return `
-        <div class="row">
-          <div class="row__lead">
-            <span class="row__icon" aria-hidden="true">${s.score.accuracy >= 0.5 ? '✓' : '·'}</span>
-            <div>
-              <div class="row__label">${label}</div>
-              <div class="row__hint">${formatDate(s.finished_at)} · ${s.score.correct}/${s.score.total} correct</div>
-            </div>
-          </div>
-          <a class="hint" href="${href}" aria-label="Review ${label}">${isJourney ? 'Journey' : 'Review'}</a>
-        </div>`;
-      }).join('')}
-    </div>`;
-
-  outlet.innerHTML = `
-    <section class="screen">
-      <p class="screen__eyebrow">${dateLine}</p>
-      <h1 class="greeting">${greeting}</h1>
-      <p class="muted" style="margin-top: calc(-1 * var(--space-4)); margin-bottom: var(--space-4)">${dashboardLine(stats)}</p>
-      ${todayHTML}
-      ${statsHTML}
-      ${continueHTML}
-      ${gardenHTML}
-      ${achievementsHTML}
-      ${recentHTML}
-    </section>
-  `;
-  outlet.querySelector('cat-xp-bar').data = stats.level;
-  outlet.querySelector('cat-week-strip').days = stats.week;
-}
-
-/* Beyond the Gate (0.16.0). The valley is home; this is the road out of it —
-   the reading and reasoning rooms of CAT OS, each a place rather than a
-   "question type" (Bible §19.2: the Garden hands the learner off to the
-   reading, it never wraps it). No badges, no "Available": a place that is
-   listed exists. The wordless skyline above the list is the valley seen
-   from the road, so the way back is never in doubt. */
-const GATE_PLACES = [
-  { href: '#/rc',  name: 'The Reading Room', line: 'Long passages, read the way the exam reads them, with a mentor who notices how you read.' },
-  { href: '#/ps',  name: 'The Summary Table', line: 'Find the author’s point and protect it from the options that almost say it.' },
-  { href: '#/pj',  name: 'The Loom', line: 'Four sentences, one order. Rebuild the paragraph the author actually wrote.' },
-  { href: '#/ooo', name: 'The Stranger’s Bench', line: 'Build the paragraph, and the sentence that never belonged shows itself.' },
-];
-
-function renderPractice(outlet) {
-  // 1.0.0: the road beyond the Gate is the world itself.
-  location.replace('#/world');
-  if (outlet) return;
-  const hour = new Date().getHours();
-  const time = hour < 5 ? 'night' : hour < 8 ? 'dawn' : hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : hour < 20 ? 'dusk' : 'night';
-  outlet.innerHTML = `
-    <section class="screen gate-road" data-time="${time}">
-      <a class="gate-road__back" href="#/garden" aria-label="Back to the valley">
-        <svg class="gate-road__skyline" viewBox="0 0 360 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-          <defs>
-            <linearGradient id="gate-sky" x1="0" y1="0" x2="0" y2="1">
-              <stop class="gate-sky-stop gate-sky-stop--top" offset="0%"/>
-              <stop class="gate-sky-stop gate-sky-stop--bottom" offset="100%"/>
-            </linearGradient>
-          </defs>
-          <rect width="360" height="120" fill="url(#gate-sky)"/>
-          <path class="gate-ridge gate-ridge--far" d="M0,86 Q40,58 84,70 Q126,40 176,64 Q222,34 262,60 Q308,44 360,72 L360,120 L0,120 Z"/>
-          <path class="gate-ridge gate-ridge--near" d="M0,104 Q60,88 110,96 Q150,80 200,94 Q260,82 300,98 Q330,92 360,100 L360,120 L0,120 Z"/>
-          <g class="gate-wood">
-            <ellipse cx="82" cy="92" rx="16" ry="12"/><ellipse cx="104" cy="96" rx="14" ry="10"/><ellipse cx="62" cy="98" rx="13" ry="9"/>
-          </g>
-          <rect class="gate-road__ground" x="0" y="106" width="360" height="14"/>
-        </svg>
-        <span class="gate-road__home">← The valley</span>
-      </a>
-      <div class="gate-road__body">
-        <p class="screen__eyebrow">Beyond the Gate</p>
-        <h1 class="gate-road__title">The road out of the valley</h1>
-        <div class="gate-road__places">
-          ${GATE_PLACES.map((p) => `
-            <a class="gate-place" href="${p.href}">
-              <span class="gate-place__name">${p.name}</span>
-              <span class="gate-place__line">${p.line}</span>
-            </a>`).join('')}
-        </div>
-      </div>
-    </section>
-  `;
-}
 
 function renderSettings(outlet) {
   outlet.innerHTML = `

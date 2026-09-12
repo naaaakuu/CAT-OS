@@ -433,49 +433,98 @@ function cottage({ level = 1, lit = false, smoke = false }) {
 /** The Reading Room: a library tower that gains floors with mastery.
  *  `floors` 1–5, `lit` how many windows glow, `observatory` the dome. */
 function tower({ floors = 1, lit = 0, observatory = false, night = false }) {
-  const floorH = 11;
-  const h = 14 + floors * floorH + (observatory ? 10 : 0);
-  const w = 30;
-  const p = new Pix(w, h);
+  const floorH = 12;
+  const W = 26;
+  // A reading stage always sits on top of whatever floors have been earned:
+  // the tower is a tower on day one, and grows taller, never wider.
+  const stageH = 13;
+  const baseH = 9;
+  const spireH = observatory ? 13 : 16;
+  const h = baseH + floors * floorH + stageH + spireH;
+  const p = new Pix(W, h);
   const stone = ramp(PIGMENT.stoneWarm);
   const roof = ramp(PIGMENT.roofWarm);
   const timber = ramp(PIGMENT.timber);
-  const gx = 15, ground = h - 1;
-  const bodyTop = ground - floors * floorH - 2;
-  // Body with a lit left edge and a shaded right
-  p.rect(6, bodyTop, 18, floors * floorH + 2, stone.base);
-  p.rect(6, bodyTop, 2, floors * floorH + 2, stone.light);
-  p.rect(20, bodyTop, 4, floors * floorH + 2, stone.shade);
-  // Floor lines and windows: two per floor, glowing per `lit`
+  const gx = 13, ground = h - 1;
+
+  /* The plinth: wider than the shaft, so the tower stands rather than floats. */
+  p.rect(3, ground - baseH + 1, 21, baseH, stone.shade);
+  p.rect(3, ground - baseH + 1, 2, baseH, stone.base);
+  p.rect(3, ground - baseH + 1, 21, 1, stone.light);
+  p.rect(3, ground, 21, 1, stone.dark);
+
+  /* The shaft. */
+  const shaftTop = ground - baseH - floors * floorH;
+  p.rect(6, shaftTop, 15, floors * floorH + 2, stone.base);
+  p.rect(6, shaftTop, 2, floors * floorH + 2, stone.light);
+  p.rect(18, shaftTop, 3, floors * floorH + 2, stone.shade);
+  // One window per floor, centred, glowing per `lit`.
   let winIndex = 0;
   for (let f = 0; f < floors; f += 1) {
-    const y = ground - (f + 1) * floorH + 2;
-    p.hline(6, 23, y + floorH - 1, stone.dark);
-    for (const wx of [9, 17]) {
-      const on = winIndex < lit;
-      p.rect(wx, y + 2, 4, 5, on ? PIGMENT.windowLight : night ? '#2C3A55' : '#8FB8D8');
-      p.rect(wx, y + 1, 4, 1, timber.dark); p.rect(wx, y + 7, 4, 1, timber.dark);
-      p.px(wx + 1, y + 2, on ? '#FFF3CC' : '#B7D6EA');
-      winIndex += 1;
-    }
+    const y = ground - baseH - (f + 1) * floorH + 3;
+    p.hline(6, 20, y + floorH - 2, stone.dark);
+    const on = winIndex < lit;
+    p.rect(11, y, 5, 6, on ? PIGMENT.windowLight : night ? '#2C3A55' : '#8FB8D8');
+    p.rect(10, y - 1, 7, 1, timber.dark);
+    p.rect(10, y + 6, 7, 1, timber.dark);
+    p.px(12, y, on ? '#FFF3CC' : '#B7D6EA');
+    winIndex += 1;
   }
-  // Door
-  p.rect(13, ground - 8, 5, 8, timber.base); p.rect(13, ground - 8, 1, 8, timber.light); p.rect(12, ground - 9, 7, 1, timber.dark);
-  // Roof or observatory
+
+  /* The reading stage: a tall arched window that is lit whenever anything is. */
+  const stageTop = shaftTop - stageH;
+  p.rect(5, stageTop, 17, stageH, stone.base);
+  p.rect(5, stageTop, 2, stageH, stone.light);
+  p.rect(19, stageTop, 3, stageH, stone.shade);
+  p.hline(4, 22, stageTop, stone.dark);
+  p.hline(4, 22, stageTop + stageH - 1, stone.dark);
+  {
+    const on = lit > 0;
+    const glass = on ? PIGMENT.windowLight : night ? '#2C3A55' : '#8FB8D8';
+    p.rect(10, stageTop + 4, 7, 7, glass);
+    // The arch.
+    p.rect(11, stageTop + 2, 5, 2, glass);
+    p.rect(12, stageTop + 1, 3, 1, glass);
+    p.px(11, stageTop + 4, on ? '#FFF3CC' : '#B7D6EA');
+    p.px(13, stageTop + 1, timber.dark);
+    for (const bx of [9, 17]) p.vline(bx, stageTop + 2, stageTop + 11, timber.dark);
+    p.vline(13, stageTop + 2, stageTop + 10, timber.dark);
+  }
+
+  /* Door, on the plinth. */
+  p.rect(11, ground - 7, 5, 7, timber.base);
+  p.rect(11, ground - 7, 1, 7, timber.light);
+  p.rect(10, ground - 8, 7, 1, timber.dark);
+  p.px(15, ground - 4, PIGMENT.gold);
+
+  /* Spire, or the Observatory's dome. */
   if (observatory) {
     const dome = ramp('#6C8FA6');
-    p.rect(5, bodyTop - 1, 20, 2, stone.dark);
-    for (let y = bodyTop - 11; y <= bodyTop - 3; y += 1) { const half = Math.floor(Math.sqrt(64 - (y - (bodyTop - 3)) ** 2)); p.hline(gx - half, gx + half, y, dome.base); p.hline(gx - half, gx - half + 3, y, dome.light); }
-    p.rect(gx - 1, bodyTop - 12, 3, 3, PIGMENT.gold);
-    p.vline(gx, bodyTop - 14, bodyTop - 12, timber.dark);
-    p.rect(gx - 2, bodyTop - 8, 4, 4, '#1C2A45'); p.px(gx - 1, bodyTop - 7, PIGMENT.gold);
+    p.rect(4, stageTop - 2, 19, 2, stone.dark);
+    for (let y = stageTop - 11; y <= stageTop - 3; y += 1) {
+      const half = Math.floor(Math.sqrt(Math.max(0, 64 - (y - (stageTop - 3)) ** 2)));
+      p.hline(gx - half, gx + half, y, dome.base);
+      p.hline(gx - half, gx - half + 3, y, dome.light);
+    }
+    p.rect(gx - 1, stageTop - 13, 3, 3, PIGMENT.gold);
+    p.vline(gx, stageTop - 15, stageTop - 13, timber.dark);
+    p.rect(gx - 2, stageTop - 8, 4, 4, '#1C2A45');
+    p.px(gx - 1, stageTop - 7, PIGMENT.gold);
   } else {
-    for (let y = 0; y < 10; y += 1) { const half = 1 + y * 1.1; p.hline(Math.round(gx - half), Math.round(gx + half), bodyTop - 10 + y, y < 3 ? roof.light : roof.base); p.hline(Math.round(gx + half) - 1, Math.round(gx + half), bodyTop - 10 + y, roof.shade); }
-    p.hline(4, 25, bodyTop - 1, roof.dark);
-    p.px(gx, bodyTop - 12, PIGMENT.gold);
+    // A steep slate spire: the shape you can name from the far side of the map.
+    for (let i = 0; i < spireH - 3; i += 1) {
+      const y = stageTop - 1 - i;
+      // i counts upward from the eaves, so the spire has to narrow with it.
+      const half = Math.max(0, Math.round((spireH - 4 - i) * 0.62));
+      p.hline(gx - half, gx + half, y, i > spireH * 0.55 ? roof.light : roof.base);
+      p.px(gx + half, y, roof.shade);
+    }
+    p.hline(3, 22, stageTop - 1, roof.dark);
+    p.hline(4, 21, stageTop - 2, roof.base);
+    p.vline(gx, stageTop - spireH + 2, stageTop - spireH + 4, timber.dark);
+    p.px(gx, stageTop - spireH + 1, PIGMENT.gold);
   }
-  // A banner when the tower is tall
-  if (floors >= 3) { p.rect(24, bodyTop + 4, 1, 8, timber.dark); p.rect(25, bodyTop + 4, 4, 5, '#C6533A'); p.px(26, bodyTop + 6, PIGMENT.gold); }
+
   p.outline();
   return done(p, gx, ground);
 }

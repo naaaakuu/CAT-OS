@@ -1005,7 +1005,8 @@
 .wickline {
   position: absolute; z-index: 12;
   left: 12px; right: 12px;
-  bottom: calc(env(safe-area-inset-bottom) + 122px);
+  /* Clear of the "worth doing now" rail, whose cards are ~150px tall. */
+  bottom: calc(env(safe-area-inset-bottom) + 158px);
   display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 8px;
   padding: 8px 12px 8px 8px;
   border-radius: 16px;

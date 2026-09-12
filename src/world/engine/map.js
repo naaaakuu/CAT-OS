@@ -563,8 +563,28 @@ export function buildWorldScene(state, atmo, opts = {}) {
     const f = Math.floor(i / 2), side = i % 2 ? 4 : -4;
     lamps.push({ x: rr.anchor.x + side, y: rr.anchor.y - 8 - f * 11, r: 10, a: 0.35, color: PIGMENT.windowLight });
   }
-  statics.push({ x: rr.anchor.x - 26, y: rr.anchor.y + 6, sprite: sprite('tree', { stage: 'in_leaf', seed: 'rr-tree', season, kind: 'pine' }) });
-  statics.push({ x: rr.anchor.x + 30, y: rr.anchor.y + 10, sprite: sprite('bush', { seed: 'rrb', season }) });
+  // The reading yard: a low wall, benches under the trees, a lamp by the
+  // door, and a stand of pines behind the tower to give it a horizon.
+  {
+    const yr = rng('rr-yard');
+    // One continuous run at one height: four fence sprites at different
+    // y's read as dropped slats, not as a yard.
+    for (const dx of [-39, -13, 13, 39]) {
+      statics.push({ x: rr.anchor.x + dx, y: rr.anchor.y + 27, sprite: sprite('fence', { w: 26 }), z: -1 });
+    }
+    for (const [dx, dy, kind, stage] of [[-30, 4, 'pine', 'mature'], [-44, -10, 'pine', 'in_leaf'], [34, -6, 'pine', 'mature'], [46, 6, 'broad', 'in_leaf']]) {
+      statics.push({ x: rr.anchor.x + dx, y: rr.anchor.y + dy, sprite: sprite('tree', { stage, seed: `rr-t${dx}`, season, kind }) });
+    }
+    statics.push({ x: rr.anchor.x - 20, y: rr.anchor.y + 16, sprite: sprite('bush', { seed: 'rrb1', season }) });
+    statics.push({ x: rr.anchor.x + 26, y: rr.anchor.y + 14, sprite: sprite('bush', { seed: 'rrb2', season }) });
+    statics.push({ x: rr.anchor.x + 16, y: rr.anchor.y + 2, sprite: sprite('lantern', { lit: night }) });
+    if (night) lamps.push({ x: rr.anchor.x + 16, y: rr.anchor.y - 8, r: 18, a: 0.5, color: PIGMENT.lantern });
+    // A reader on the bench once the tower has been climbed a little.
+    if (state.reading.read >= 4) statics.push({ x: rr.anchor.x - 24, y: rr.anchor.y + 18, sprite: sprite('villager', { colour: 3 }) });
+    for (let i = 0; i < 5; i += 1) {
+      statics.push({ x: rr.anchor.x - 50 + Math.round(yr() * 100), y: rr.anchor.y + 30 + Math.round(yr() * 26), sprite: sprite('grassTuft', { seed: `rrg${i}`, season }) });
+    }
+  }
 
   /* ---- The Quarter: loom, table, bench ---- */
   for (const [slug, kind] of [['loom', 'loom'], ['table', 'table'], ['bench', 'bench']]) {
