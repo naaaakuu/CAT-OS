@@ -26,14 +26,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIRS = { rc: 'reading-comprehension', ps: 'para-summary', sp: 'sentence-placement', pc: 'para-completion', cr: 'critical-reasoning', wb: 'word-bank' };
+const DIRS = { rc: 'reading-comprehension', ps: 'para-summary', sp: 'sentence-placement', pc: 'para-completion', cr: 'critical-reasoning', wb: 'word-bank', ooo: 'odd-one-out', pj: 'para-jumbles' };
 const argv = process.argv.slice(2);
 const [mode, type] = argv;
 const flag = (name) => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : null; };
 const has = (name) => argv.includes(name);
 
 if (!DIRS[type] || !['strip', 'compare', 'record'].includes(mode)) {
-  console.error('usage: blind-solve.mjs strip|compare|record <rc|ps|sp|pc|cr|wb> …');
+  console.error('usage: blind-solve.mjs strip|compare|record <rc|ps|sp|pc|cr|wb|ooo|pj> …');
   process.exit(2);
 }
 const dir = path.join(ROOT, 'content', DIRS[type]);
@@ -53,6 +53,14 @@ function split(item) {
       shown: { id: m.id, ...(asksItsOwnTitle(item) ? {} : { title: item.passage.title }), passage: item.passage.paragraphs.map((p) => p.text), questions: item.questions.map((q) => ({ id: q.id, stem: q.stem, options: q.options })) },
       keys: Object.fromEntries(item.questions.map((q) => [q.id, q.correct])),
     };
+  }
+  if (type === 'ooo') {
+    // Four or five sentences, one of which does not belong. The key is its label.
+    return { shown: { id: m.id, instruction: 'One sentence does not belong with the others. Give its label.', sentences: item.sentences }, keys: { [m.id]: item.outlier } };
+  }
+  if (type === 'pj') {
+    // The key is an ordering, not a letter: compare joins it into one string.
+    return { shown: { id: m.id, instruction: 'Put these sentences into the one order that makes a coherent paragraph. Answer as the labels in order, e.g. "BDAC".', sentences: item.sentences }, keys: { [m.id]: item.correct_order.join('') } };
   }
   if (type === 'ps') {
     return { shown: { id: m.id, paragraph: item.paragraph.sentences.map((s) => s.text).join(' '), stem: item.question.stem, options: item.question.options }, keys: { [m.id]: item.question.correct } };
@@ -101,7 +109,8 @@ for (const f of files()) {
   const { keys } = split(item);
   const qids = Object.keys(keys).filter((q) => q in given);
   if (!qids.length) continue;
-  const dis = qids.filter((q) => String(given[q]).toUpperCase() !== keys[q]).map((q) => ({ qid: q, key: keys[q], given: String(given[q]).toUpperCase(), note: notes[q] ?? null }));
+  const norm = (v) => String(v).toUpperCase().replace(/[^A-Z]/g, '');
+  const dis = qids.filter((q) => norm(given[q]) !== norm(keys[q])).map((q) => ({ qid: q, key: keys[q], given: norm(given[q]), note: notes[q] ?? null }));
   report.push({ file: f, id: item.meta.id, agreed: qids.length - dis.length, total: qids.length, disagreements: dis });
 }
 
