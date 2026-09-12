@@ -49,10 +49,14 @@ export class WorldRenderer {
     this.world.width = this.worldW; this.world.height = this.worldH;
     this.wctx = this.world.getContext('2d', { alpha: false });
     this.wctx.imageSmoothingEnabled = false;
-    this.terrainCache = document.createElement('canvas');
-    this.terrainCache.width = this.worldW; this.terrainCache.height = this.worldH;
+    // Terrain is half a million pixels and about half a second of work, so
+    // a scene that changes its light (a sunrise) keeps one baked canvas per
+    // key and the change becomes a blit. `warmTerrain(keys)` bakes them
+    // ahead of time; without it a dawn stops dead twice to paint one.
+    this.terrainCaches = new Map();
+    this.terrainKey = null;
+    this.terrainCache = this.#terrainCanvasFor('default');
     this.tctx = this.terrainCache.getContext('2d', { alpha: false });
-    this.tctx.imageSmoothingEnabled = false;
     this.terrainDirty = true;
     this.sctx = screen.getContext('2d', { alpha: false });
     // A handle on the canvas, so a screenshot harness (and a curious
@@ -320,14 +324,62 @@ export class WorldRenderer {
     this.#raf();
   }
 
-  invalidateTerrain() { this.terrainDirty = true; }
+  #terrainCanvasFor(key) {
+    let c = this.terrainCaches.get(key);
+    if (!c) {
+      c = document.createElement('canvas');
+      c.width = this.worldW; c.height = this.worldH;
+      const ctx = c.getContext('2d', { alpha: false });
+      ctx.imageSmoothingEnabled = false;
+      c.__painted = false;
+      this.terrainCaches.set(key, c);
+    }
+    return c;
+  }
+
+  /** The key the scene is currently painting under. */
+  #terrainKey() { return this.scene?.terrainKey ?? this.scene?.hour ?? 'default'; }
+
+  /**
+   * Paint the terrain for one or more scene states now, so that switching
+   * to them later costs nothing. `prepare(key)` must put the scene into
+   * that state; it is called once per key and then undone by the caller.
+   */
+  warmTerrain(keys, prepare) {
+    const was = this.#terrainKey();
+    for (const key of keys) {
+      if (this.terrainCaches.get(key)?.__painted) continue;
+      prepare?.(key);
+      const c = this.#terrainCanvasFor(key);
+      const ctx = c.getContext('2d', { alpha: false });
+      ctx.imageSmoothingEnabled = false;
+      this.scene.terrain(ctx, { w: this.worldW, h: this.worldH, time: this.time });
+      c.__painted = true;
+    }
+    prepare?.(was);
+  }
+
+  invalidateTerrain() {
+    this.terrainDirty = true;
+    const c = this.terrainCaches.get(this.#terrainKey());
+    if (c) c.__painted = false;
+  }
 
   /* ---------------- drawing ---------------- */
 
   draw() {
     const { wctx, worldW, worldH } = this;
+    const key = this.#terrainKey();
+    if (key !== this.terrainKey) {
+      this.terrainKey = key;
+      this.terrainCache = this.#terrainCanvasFor(key);
+      this.tctx = this.terrainCache.getContext('2d', { alpha: false });
+      this.tctx.imageSmoothingEnabled = false;
+      if (!this.terrainCache.__painted) this.terrainDirty = true;
+    }
     if (this.terrainDirty) {
       this.scene.terrain(this.tctx, { w: worldW, h: worldH, time: this.time });
+      this.terrainCache.__painted = true;
       this.terrainDirty = false;
     }
     wctx.drawImage(this.terrainCache, 0, 0);

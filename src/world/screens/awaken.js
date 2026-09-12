@@ -210,6 +210,17 @@ export async function renderAwaken(outlet, { storage }) {
 
   const sky = outlet.querySelector('#awaken-sky');
   sky.classList.add('is-dawn');
+  // Bake dawn and morning before the light starts moving. Painting half a
+  // million pixels mid-animation stopped the sunrise dead, twice, in the
+  // three seconds this whole product is selling.
+  try {
+    renderer.warmTerrain(['dawn', 'morning', 'night'], (hr) => {
+      scene.hour = hr;
+      scene.atmo = { ...atmo, hour: hr };
+    });
+  } catch { /* the sunrise still runs, it just repaints */ }
+  scene.hour = 'night';
+  scene.atmo = { ...atmo, hour: 'night' };
   let painted = 'night';
   await animate(3600, (p) => {
     dawn = p;
@@ -220,7 +231,8 @@ export async function renderAwaken(outlet, { storage }) {
     if (hr !== painted) {
       painted = hr;
       scene.atmo = { ...atmo, hour: hr };
-      renderer.invalidateTerrain();
+      // No invalidate: the renderer swaps to the canvas already baked for
+      // this hour, which is a blit.
     }
   });
   if (gone()) return;
