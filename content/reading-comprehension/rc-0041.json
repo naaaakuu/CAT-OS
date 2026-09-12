@@ -77,8 +77,13 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1: the live rival is the option that the hypocrisy charge fails because a manner claims nothing about feeling. It is true, and it is the passage's sharpest single sentence, but it is the third paragraph's job rather than the argument; the fourth paragraph says 'That is the whole argument' about something else. Q2: the rival reads 'decided in advance' as decided by a community rather than by an individual; the surrounding sentences define it against deciding 'from scratch each time', which is about timing and effort rather than about who chose. Q3: the rival for the paragraph's function is the option naming the central claim, since the paragraph does contain the passage's best line; but the paragraph is answering a charge laid in the paragraph before it, and the claim itself is announced only in the next one. Q4: the natural rival is that courtesy without warmth is worth less, which is the ordinary view and the one the passage inverts — 'what makes it valuable is precisely that it did not have to be felt'. Q5: the near-tie is the option that an excluding code will lose its power to put anyone at ease; the passage says only that the same rule can be used either way in a given situation, and forecasts nothing. Q6: the rival limits the claim to people who feel warmth towards one another, which the third and fourth paragraphs remove from the account entirely.",
-      "blind_solve": null
+      "adversarial_review": "Q1: the live rival is the option that the hypocrisy charge fails because a manner claims nothing about feeling. It is true, and it is the passage's sharpest single sentence, but it is the third paragraph's job rather than the argument; the fourth paragraph says 'That is the whole argument' about something else. Q2: the rival reads 'decided in advance' as decided by a community rather than by an individual; the surrounding sentences define it against deciding 'from scratch each time', which is about timing and effort rather than about who chose. Q3 (rewritten, and moved onto the fourth paragraph because its old form tested the hypocrisy reply that the first and last questions already reward): the live rival has the paragraph recasting morality as settled habit in place of judgement, which is exactly where the sentences about the expense of noticing, weighing and deciding seem to be heading; it dies on 'Manners are the part of this work that has been decided in advance', a part and not the whole, and on 'This is not a substitute for morality.' The second rival takes the closing guard for the paragraph's business, and the paragraph's own opening — 'That is the whole argument' — says where that business lies. The cost-of-attention option is true of one sentence and is the premise the argument starts from. The key is the only option that reaches the paragraph's destination, the person whose mood is not consulted as against the one who is kind whenever moved and 'cannot be relied upon'. Q4: the natural rival is that courtesy without warmth is worth less, which is the ordinary view and the one the passage inverts — 'what makes it valuable is precisely that it did not have to be felt'. Q5: the near-tie is the option that an excluding code will lose its power to put anyone at ease; the passage says only that the same rule can be used either way in a given situation, and forecasts nothing. Q6: the rival limits the claim to people who feel warmth towards one another, which the third and fourth paragraphs remove from the account entirely.",
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 6,
+        "total": 6,
+        "notes": "full agreement; q3 rewritten after this pass onto the fourth paragraph's reliability argument, because its old form repeated ground already covered by q1 and q6 — awaiting re-solve"
+      }
     },
     "vocab_extracted": [
       "arbitrary",
@@ -231,11 +236,11 @@
       "skill": "paragraph_function",
       "patterns": [
         "comp.function_over_words",
-        "arg.rebuttal",
+        "arg.principle",
         "struct.qualification"
       ],
-      "target_mistake": "naming the content of the paragraph, or promoting it to the passage's thesis, instead of naming the job it does for the argument",
-      "prediction_target": "The learner should be able to say: this paragraph is answering the charge laid in the paragraph before it, by separating a manner from a claim about feeling.",
+      "target_mistake": "offering the paragraph's opening premise or its closing guard as the work the paragraph is doing, or converting a claim about dependability into a ranking of habit above feeling",
+      "prediction_target": "The learner should be able to say: this paragraph states the argument itself — consideration is too expensive to produce on demand, manners have done the deciding already, so what is offered survives a bad mood.",
       "difficulty": {
         "inference_depth": 2,
         "distractor_similarity": 4,
@@ -244,39 +249,39 @@
       "secondary_skills": [
         "logical_structure"
       ],
-      "stem": "The third paragraph primarily serves to",
+      "stem": "The fourth paragraph primarily serves to",
       "options": {
-        "A": "concede that a courtesy performed without feeling is a kind of dishonesty",
-        "B": "use the example of the host and the early guest to show how a code of manners is passed on",
-        "C": "answer an objection by showing that a manner makes no claim about the performer's feelings",
-        "D": "state the passage's central claim that manners are a part of morality rather than a substitute for it"
+        "A": "explain why taking others into account costs more attention than an ordinary day allows",
+        "B": "recast morality as a matter of settled habit rather than of judgement",
+        "C": "show why consideration that no longer waits on mood can be counted on every day",
+        "D": "concede that manners are no substitute for the morality whose form they take"
       },
       "correct": "C",
       "estimated_time_sec": 70,
       "explanation": {
-        "expert_notice": "The paragraph opens by pointing back — 'The second charge is the easier to answer' — and closes with a definition that dissolves the charge: hypocrisy is the claim of a feeling one does not have, and a manner claims nothing about feeling. Everything between is one example serving that definition.",
-        "correct_reasoning": "The correct option names the job. The objection from the previous paragraph was that an unfelt courtesy is a small lie, and this paragraph refuses it by distinguishing an action from a statement: the host asserts nothing, so there is nothing to be false. The example of the tired host is there to make the distinction visible, not to introduce a new claim, and the argument proper begins only in the paragraph that follows.",
-        "passage_anchor": "rc-0041-p3",
-        "question_type_note": "Paragraph-function questions ask what a paragraph does, not what it says. Label the move — concedes, answers, illustrates, narrows — before reading the options, and reject any option naming a move the paragraph does not make.",
-        "reading_habit": "A paragraph that begins by referring back to a charge is almost always a reply. Find the sentence the reply turns on, and check that the option you choose describes that sentence's work rather than its content.",
+        "expert_notice": "The paragraph announces itself — 'That is the whole argument, and it can be put plainly' — and then runs one line of reasoning to its end. Consideration done from scratch is expensive; manners are the part already decided; 'the conversion matters most on the days when it would not have been summoned'; and the person who is kind whenever moved to be kind 'cannot be relied upon'.",
+        "correct_reasoning": "The correct option names where that reasoning lands. Every step is in service of dependability: the cost of noticing and weighing is raised only to explain why consideration cannot be produced fresh each time, and the two people at the end are set side by side to separate being pleasant from being reliable. The last sentence puts it as a promise 'that their mood is not consulted about', which is the same claim in the paragraph's own idiom, and that is what the paragraph exists to establish.",
+        "passage_anchor": "rc-0041-p4",
+        "question_type_note": "Paragraph-function questions ask what a paragraph does, not what it says. Label the move — concedes, answers, illustrates, narrows, argues — before reading the options, and reject any option naming a move the paragraph does not make.",
+        "reading_habit": "In a paragraph that carries an argument, find the sentence everything else is working towards, and check your option against that sentence rather than against the most striking one. Premises and guards are both easy to mistake for the point.",
         "distractors": [
           {
             "option": "A",
-            "trap_type": "wrong_structural_role",
-            "why_wrong": "The paragraph denies precisely this: 'None of this is a lie, because none of it is a statement.' The dishonesty charge belongs to the paragraph before, where it is reported rather than granted.",
-            "seductive_element": "The passage does concede a great deal elsewhere, so a reader in the habit of expecting concessions finds one here."
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The expense is real and is stated here, but it is the premise the paragraph argues from rather than the thing it argues; the sentences after it are all about what manners do with that expense, and the paragraph ends on reliability rather than on how tiring consideration is.",
+            "seductive_element": "It reports the paragraph's second sentence accurately, and a claim you can point to in the text feels like an answer."
           },
           {
             "option": "B",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "The host and the early guest really are in the paragraph, but they illustrate the gap between an action and a claim about feeling; how a code is transmitted is a topic of the first paragraph, not of this one.",
-            "seductive_element": "It names the most concrete thing in the paragraph and attaches it to an idea the passage does discuss somewhere."
+            "trap_type": "overstatement",
+            "why_wrong": "Manners are called 'the part of this work that has been decided in advance', a part and not the whole, and the paragraph closes by refusing the exchange outright: 'This is not a substitute for morality.' Judgement is not displaced, only spared where a decision has already been taken.",
+            "seductive_element": "The talk of noticing and weighing being too expensive does sound as though something is about to be put in the place of judging, and habit is the obvious candidate."
           },
           {
             "option": "D",
-            "trap_type": "wrong_abstraction_level",
-            "why_wrong": "The central claim is announced at the start of the next paragraph, 'That is the whole argument', and stated there in full; this paragraph clears an objection out of the way so that the claim can be made.",
-            "seductive_element": "The paragraph contains the passage's best-turned sentence, and the best sentence feels like the thesis."
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The sentence is there, but it guards the claim rather than being it, and it is not a concession at all: the paragraph opens 'That is the whole argument', which locates the paragraph's business in the argument the guard protects.",
+            "seductive_element": "It sits in the paragraph's closing lines, and a reader who remembers endings better than middles will take the last qualification for the point."
           }
         ]
       }

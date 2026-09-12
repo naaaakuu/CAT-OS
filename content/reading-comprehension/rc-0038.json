@@ -73,8 +73,13 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1: the live rival is the option about dispersed communities losing cooking practices first, which is genuinely the passage's most striking finding; it fails because it is the final paragraph's consequence rather than the passage's project, and the first paragraph announces that project as separating two rules that have been treated as one. Q2: the rival is the elegiac option, since the closing sentences describe a wall coming down; the flat diction there — 'the ordinary operation of timetables' — and the absence of any evaluative word about the loss make mourning an addition rather than a reading. Q3: the near-tie is the option that prohibitions lapse first under dispersal; it reverses the asymmetry the fourth paragraph states, and the reversal is easy to make because the second paragraph dwells on how visible prohibitions are to outsiders rather than on how durable they are. Q4: the option that a procedure lapses only when belief in the classification fails is the strongest rival, and the third paragraph refuses it outright — 'a procedure therefore fails for reasons that have nothing to do with conviction'. Q5: the literal 'easily carried' sense of portable is the rival; the sentence that follows defines the word for this passage as asking nothing of the keeper's surroundings and nothing of anyone else.",
-      "blind_solve": null
+      "adversarial_review": "Q1: the live rival is the option about dispersed communities losing cooking practices first, which is genuinely the passage's most striking finding; it fails because it is the final paragraph's consequence rather than the passage's project, and the first paragraph announces that project as separating two rules that have been treated as one. Q2: the rival is the elegiac option, since the closing sentences describe a wall coming down; the flat diction there — 'the ordinary operation of timetables' — and the absence of any evaluative word about the loss make mourning an addition rather than a reading. Q3 (rewritten): two rivals are live. The option that prohibitions lapse first under dispersal remains the near-tie, since the second paragraph dwells on how visible prohibitions are to outsiders rather than on how durable they are, and it dies on the fourth paragraph's own order of events — 'the procedures go first while the prohibitions remain'. The second rival runs that same paragraph backwards, treating a tradition that still looks intact to outsiders as proof that it has stopped organising anyone's day; the text says only that a dispersed community's tradition can look intact, and a community still performing its procedures looks intact because it is. The key stays inside the passage's currency of cost: abstention is paid by one person, coordination by a group, so a rule that survives alone reports nothing about what people still do together. Q4: the option that a procedure lapses only when belief in the classification fails is the strongest rival, and the third paragraph refuses it outright — 'a procedure therefore fails for reasons that have nothing to do with conviction'. Q5: the literal 'easily carried' sense of portable is the rival; the sentence that follows defines the word for this passage as asking nothing of the keeper's surroundings and nothing of anyone else.",
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 5,
+        "total": 5,
+        "notes": "full agreement; q3 rewritten after this pass, because its keyed option reached for a term the passage never uses — awaiting re-solve"
+      }
     },
     "vocab_extracted": [
       "portable",
@@ -227,7 +232,7 @@
         "inf.vs_speculation",
         "arg.causal_claim"
       ],
-      "target_mistake": "reversing the asymmetry because the second paragraph makes prohibitions sound like the fragile, exposed part of a tradition",
+      "target_mistake": "reversing the asymmetry because the second paragraph makes prohibitions sound like the fragile, exposed part of a tradition, or turning the fourth paragraph's remark about what a tradition can look like into a way of telling that it is hollow",
       "prediction_target": "The learner should predict that a supported inference follows from who pays the cost: a rule one person can keep says something about that person, and a rule requiring several says something about whether they are still together.",
       "difficulty": {
         "inference_depth": 4,
@@ -240,15 +245,15 @@
       "stem": "Which of the following can be inferred from the passage?",
       "options": {
         "A": "The food rules that outsiders find hardest to understand are the ones a community defends most fiercely.",
-        "B": "A rule that one person can keep alone is a weaker sign of a group's cohesion than one that cannot.",
+        "B": "A rule that can be kept alone shows less about what a community still does together than one that cannot.",
         "C": "Prohibitions are the first of a community's food rules to lapse once its members have been dispersed.",
-        "D": "Any practice that requires several people to perform it disappears once a community has been dispersed."
+        "D": "A tradition that still looks intact to outsiders has already stopped organising anyone's day."
       },
       "correct": "B",
       "estimated_time_sec": 90,
       "explanation": {
-        "expert_notice": "The passage defines each kind of rule by who pays for it. A prohibition costs abstention, 'a cost one person can pay alone'; a procedure costs coordination, and 'coordination is paid by a group'. That difference is what the inference questions are built on.",
-        "correct_reasoning": "The correct option follows from the two costs. A prohibition kept tells you only that one person paid a cost one person can pay; a procedure kept tells you that the people it needs were assembled, with their vessels and hours and memory, because there is no other way it could have happened. So the persistence of a rule that can be kept alone is worse evidence about the group than the persistence of one that cannot, which is exactly why dispersal removes the second while the first survives.",
+        "expert_notice": "The passage defines each kind of rule by who pays for it. A prohibition costs abstention, 'a cost one person can pay alone'; a procedure costs coordination, and 'coordination is paid by a group'. The last paragraph turns that into a warning about what a surviving rule proves: the tradition 'can look intact from either side of the boundary long after it has stopped organising anyone's day'.",
+        "correct_reasoning": "The correct option follows from the two costs. A prohibition still kept tells you only that one person went without something, which one person can do in a canteen among strangers; a procedure still performed tells you that the people it needs were there, with the vessels and the hours and the memory it presumes, because there is no other way it could have happened. So the rule anyone can keep alone reports least about what the passage calls a boundary maintained by what people did together, which is exactly why a tradition reduced to its prohibitions can look intact after it has stopped organising anyone's day.",
         "passage_anchor": "rc-0038-p3",
         "question_type_note": "Inference questions on a contrast passage are decided by the axis of the contrast; here the axis is cost, and every option has to be tested against who pays.",
         "reading_habit": "When an author distinguishes two things by a single property, write that property down and check each option against it. Options that swap the two sides of the axis feel right because both halves are in the passage.",
@@ -267,9 +272,9 @@
           },
           {
             "option": "D",
-            "trap_type": "too_broad",
-            "why_wrong": "The claim in the passage is about food procedures and is stated as what happens first under dispersal, not as a law about every collective practice, and the mechanism it gives is a shortage of available participants rather than a certainty of extinction.",
-            "seductive_element": "It generalises the passage's own logic and sounds like the abstract version of the argument a reader has just followed."
+            "trap_type": "unsupported_inference",
+            "why_wrong": "This runs the fourth paragraph's sentence backwards. The passage says that a community put under dispersal can look intact long after its procedures have gone; it never says that looking intact is a symptom of that, and a community whose procedures are all still running looks intact to outsiders for the straightforward reason that it is.",
+            "seductive_element": "It is built entirely from the passage's most memorable sentence, and an appearance the author warns about is easily promoted into a test the author never offers."
           }
         ]
       }

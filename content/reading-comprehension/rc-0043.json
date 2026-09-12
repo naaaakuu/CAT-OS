@@ -70,8 +70,13 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1: the live rival makes an interest in the belief the trigger for the explanation mattering; the passage anticipates that substitution and blocks it — 'What is doing the work here is not the impurity of his motive. It is the insensitivity of the process' — and adds that an interested party who followed the evidence is in no difficulty. Q2: the rival reads the phrase as having run out of arguments; the surrounding sentences say the demand for a cause 'arrives only after the verdict', so the disagreement is settled rather than exhausted. Q3: the strongest rival restates the second paragraph's observation about when people ask for explanations, which is a premise the passage has already asserted rather than something the criterion needs; negating it leaves the criterion standing. The correct assumption fails the negation test loudly: if an insensitive process did lend support, the coincidence argument collapses. Q4: the rival calls origin questions always rhetorical, which the passage's own 'nine times in ten' and its whole third paragraph refuse.",
-      "blind_solve": null
+      "adversarial_review": "Q1: the live rival makes an interest in the belief the trigger for the explanation mattering; the passage anticipates that substitution and blocks it — 'What is doing the work here is not the impurity of his motive. It is the insensitivity of the process' — and adds that an interested party who followed the evidence is in no difficulty. Q2: the rival reads the phrase as having run out of arguments; the surrounding sentences say the demand for a cause 'arrives only after the verdict', so the disagreement is settled rather than exhausted. Q3 (rewritten): the live rival is the option restating the second paragraph's observation about when people ask for explanations — the passage does assert it, which is exactly why a reader matching content rather than testing dependence stops there; negate it, let people ask about origins as readily when they agree, and the coin flip is still a coincidence and the coincidence still not a reason, so the third paragraph never leaned on it. The key is the step the paragraph takes in silence, from 'the route he took gave him nothing' to 'he has nothing': deny it, allow reasons he never used to support what he believes, and the paid man may be perfectly well placed after all, leaving no case in which a causal story bears on standing. The motive option stays tempting because the paid believer opens the paragraph, but 'not the impurity of his motive' refuses it in the next breath, and the third option's claim about every explicable belief contradicts the first paragraph. Q4: the rival calls origin questions always rhetorical, which the passage's own 'nine times in ten' and its whole third paragraph refuse.",
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 4,
+        "total": 4,
+        "notes": "full agreement; q3 rewritten after this pass, because its keyed assumption was effectively stated in the paragraph — awaiting re-solve"
+      }
     },
     "vocab_extracted": [
       "insensitivity",
@@ -223,8 +228,8 @@
         "inf.logical_gap",
         "cr.assumption_gap"
       ],
-      "target_mistake": "choosing an observation the passage has already asserted, or a version of the needed assumption strengthened until the argument no longer requires it",
-      "prediction_target": "The learner should name the gap before the options: the passage moves from 'the process would have produced the belief anyway' to 'the belief gets no support from it', and something unstated links those.",
+      "target_mistake": "choosing a sentence the paragraph already asserts, or an observation borrowed from the previous paragraph, instead of the step the paragraph takes without writing it down",
+      "prediction_target": "The learner should name the gap before the options: the paragraph shows only that the paid man's route gave him nothing, and concludes that he has nothing, so it is quietly ruling out any other source of support.",
       "difficulty": {
         "inference_depth": 4,
         "distractor_similarity": 4,
@@ -239,13 +244,13 @@
         "A": "Every belief for which a causal explanation exists was produced by a process indifferent to the truth.",
         "B": "People ask for an explanation of a belief more readily when they reject it than when they share it.",
         "C": "An explanation undermines a belief only if the believer stood to gain from holding that belief.",
-        "D": "A process that would have produced the same belief whether or not it was true lends it no support."
+        "D": "A belief gets no support from reasons that played no part in the believer's coming to hold it."
       },
       "correct": "D",
       "estimated_time_sec": 95,
       "explanation": {
-        "expert_notice": "The paragraph's step is short and unstated: because the process would have produced the belief anyway, the belief's truth 'would now be a coincidence, and a coincidence is not a reason'. Between the description of the process and the verdict about support there is a bridge the author never writes out.",
-        "correct_reasoning": "The correct option is that bridge, and the negation test shows it. Suppose a process that runs the same way whether or not the belief is true did lend the belief some support. Then the coin-flipper and the paid believer would have reasons after all, the coincidence remark would be false, and the whole exception collapses back into the rule the passage began by defending. An assumption whose denial destroys the argument is the one the argument depends on.",
+        "expert_notice": "The paragraph says outright that a belief produced by a blind process is true only by coincidence, and that 'a coincidence is not a reason'. Notice what that establishes and what it does not: it shows that the route the man took gave him nothing. The paragraph then treats him as having nothing at all, and that second step is never written down.",
+        "correct_reasoning": "The correct option supplies exactly that unwritten step, and negation proves it load-bearing. Suppose reasons a believer never used could still support what he believes. Then the man who was paid, or who let a coin decide, might hold a belief the available evidence amply supports, and the blindness of his own route would settle nothing about its standing; the paragraph's promised 'real case in which a causal story bears on a belief's standing' would not exist. The exception survives only if support has to come through the route actually taken, which is also why the paragraph's other man is safe: he is the one who 'looked hard at the evidence and then followed it'.",
         "passage_anchor": "rc-0043-p3",
         "question_type_note": "Assumption questions are settled by negation, not by plausibility. Deny the option; if the argument still stands, the option was not load-bearing.",
         "reading_habit": "Write the argument as premise and conclusion and look for the word that appears in the conclusion but not in the premise. The assumption is usually the sentence that would license that word.",
@@ -253,13 +258,13 @@
           {
             "option": "A",
             "trap_type": "extreme_language",
-            "why_wrong": "The argument needs only that some processes are insensitive to the truth, and the first paragraph insists that every belief has a history including the correct ones, so this would contradict the passage as well as overshoot its needs.",
+            "why_wrong": "The paragraph only supposes a belief produced by a process that would have produced it anyway; it needs no claim about every explicable belief, and the first paragraph insists that every belief has a history, the correct ones included, so this contradicts the passage as well as overshooting it.",
             "seductive_element": "It sounds like the bold general principle standing behind the paragraph, and strong-sounding statements read as foundations."
           },
           {
             "option": "B",
             "trap_type": "true_but_insufficient",
-            "why_wrong": "This is asserted outright in the previous paragraph as an observation about how people argue; negate it and the third paragraph's account of coin flips and coincidences is untouched, so it is not what that argument rests on.",
+            "why_wrong": "This is asserted outright in the previous paragraph as an observation about how people argue, and the question asks what the third paragraph rests on; negate it, so that people ask about origins just as readily when they agree, and the coin flip is still a coincidence and the coincidence still not a reason.",
             "seductive_element": "It is unmistakably the passage's own claim, and a reader who is matching content rather than testing dependence will take that as sufficient."
           },
           {

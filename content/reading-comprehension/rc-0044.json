@@ -76,8 +76,13 @@
     ],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "Q1: the rival describes the error rather than the explanation of it — a failure to grasp that a wheel has no memory — and the passage names the explanation exactly, as the expectation that a short stretch shows a long one's proportions. Q2: the rival treats the same-evening detail as evidence of how common the errors are; the sentence after it states its job, that whatever generates the expectation generates both, which is an argument about explanatory adequacy rather than about prevalence. Q3: the near-tie reverses the mapping, giving continuation to the fixed-mechanism assumption; the third paragraph attaches continuation to the unknown generator and temporariness to the known character. Q4: the same reversal is the live rival in the applied case, and the second observer's drifted machine is by construction a generator still being estimated, so the run is information rather than a departure. Q5: the strongest rival says streak expectations are always justified; the closing paragraph grants only that the inference is valid in form and then names two ways it goes wrong in fact — a steadier generator than it looked, or an effect too small to show in four attempts. Q6: the rival offers the standard account as the passage's own position, which the second paragraph declares under-determined.",
-      "blind_solve": null
+      "adversarial_review": "Q1: the rival describes the error rather than the explanation of it — a failure to grasp that a wheel has no memory — and the passage names the explanation exactly, as the expectation that a short stretch shows a long one's proportions. Q2 (rewritten): the live rival is the option crediting the same-evening man with the paragraph's earlier point, that the textbook belief cannot by itself fix a direction. That point is true of the paragraph and finished before the example, in 'It will not tell you which way to lean next, and the two errors lean opposite ways'; the 'Nor' that opens the following sentence marks a second objection, and it is that one the example is evidence for, since one man leaning both ways in an evening is a fact about reasoners rather than about what a belief can fix. The older prevalence reading survives as the careless rival, and dies because nothing in the passage counts heads and the argument would stand if the man were unique. Q3: the near-tie reverses the mapping, giving continuation to the fixed-mechanism assumption; the third paragraph attaches continuation to the unknown generator and temporariness to the known character. Q4: the same reversal is the live rival in the applied case, and the second observer's drifted machine is by construction a generator still being estimated, so the run is information rather than a departure. Q5: the strongest rival says streak expectations are always justified; the closing paragraph grants only that the inference is valid in form and then names two ways it goes wrong in fact — a steadier generator than it looked, or an effect too small to show in four attempts. Q6: the rival offers the standard account as the passage's own position, which the second paragraph declares under-determined.",
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 6,
+        "total": 6,
+        "notes": "full agreement; q2 rewritten after this pass, because its keyed option claimed more than the cited example establishes — awaiting re-solve"
+      }
     },
     "vocab_extracted": [
       "under-determined",
@@ -177,8 +182,8 @@
         "arg.evidence",
         "struct.claim_evidence"
       ],
-      "target_mistake": "treating a detail offered as a test of an explanation as though it were offered to show how common the behaviour is",
-      "prediction_target": "The learner should be able to say before the options: this detail is there to rule out an explanation, because one belief held by one person at one time cannot point in two directions.",
+      "target_mistake": "reading the observation as a claim about how common the errors are, or crediting it with the point the sentence before last had already made, instead of the escape route it is placed there to close",
+      "prediction_target": "The learner should be able to say before the options: the sentence just before this one denies that the difference is a difference between people, so the observation is there to shut that door — one man, one evening, both errors.",
       "difficulty": {
         "inference_depth": 3,
         "distractor_similarity": 4,
@@ -190,16 +195,16 @@
       ],
       "stem": "The author notes that the same person, on the same evening, will wait for black at the wheel and back the player who cannot miss, chiefly in order to",
       "options": {
-        "A": "show that a single mistaken belief cannot account for both errors at once",
+        "A": "close off the suggestion that the two errors belong to different sorts of reasoner",
         "B": "establish that most people commit at least one of the two errors regularly",
         "C": "concede that the standard explanation does succeed in the case of the wheel",
-        "D": "suggest that people reason less well when their own money is at stake"
+        "D": "demonstrate that the belief the textbooks invoke cannot by itself fix a direction"
       },
       "correct": "A",
       "estimated_time_sec": 75,
       "explanation": {
-        "expert_notice": "The detail is bracketed by its job. Before it: the belief 'will not tell you which way to lean next, and the two errors lean opposite ways'. After it: 'Whatever produces the expectation is producing both of them.' The observation is doing logical work, not descriptive work.",
-        "correct_reasoning": "The correct option names that work. If the difference between the two errors were a difference between people, a single belief could still explain each of them separately, one belief in one head. The same person doing both, unaware of any change of mind, closes that escape: whatever produces the expectations is one thing and is being switched by the situation, which is precisely what the replacement account then supplies.",
+        "expert_notice": "The word before the detail decides it. 'Nor is the difference a difference between people' adds a second objection to the one already made a sentence earlier, and the same-evening observation is the evidence for that second objection. The sentence after it draws the consequence: 'Whatever produces the expectation is producing both of them.'",
+        "correct_reasoning": "The correct option names the escape the observation blocks. Once the belief has been shown to fix no direction, an obvious rescue remains: perhaps the two errors are simply made by two sorts of reasoner, each leaning his own way, so that one belief still explains each of them separately. A man who waits for black and backs the streak on the same evening, 'without any sense of having changed his mind about anything in between', is a counter-example to that rescue, which is why the next sentence can conclude that one and the same thing produces both and is switched by the situation.",
         "passage_anchor": "rc-0044-p2",
         "question_type_note": "A role-of-detail question asks what a fact is for. Name the claim on either side of the detail first; the answer will be the option that makes the detail serve that claim.",
         "reading_habit": "When a vivid particular appears in the middle of an argument, read the sentence after it before deciding what it is doing. Authors almost always say what a detail has just established.",
@@ -207,7 +212,7 @@
           {
             "option": "B",
             "trap_type": "too_broad",
-            "why_wrong": "Nothing in the passage counts how many people make these errors or how often; the argument would work in exactly the same way if the person described were rare, since the point is that one belief cannot produce opposite expectations.",
+            "why_wrong": "Nothing in the passage counts how many people make these errors or how often, and the argument would work identically if the man described were the only one of his kind; what it needs is that a single reasoner does both, not that many reasoners do either.",
             "seductive_element": "The example is written as though it were an everyday scene, and everyday scenes read as claims about prevalence."
           },
           {
@@ -218,9 +223,9 @@
           },
           {
             "option": "D",
-            "trap_type": "fact_right_interpretation_wrong",
-            "why_wrong": "Both halves of the example involve money and the passage draws no contrast between staked and unstaked reasoning; its contrast is between a wheel and a player, that is, between two kinds of source.",
-            "seductive_element": "The scene is a gambler's evening, and it is natural to assume the stakes are the point of it."
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "That work is finished before the example arrives, in 'It will not tell you which way to lean next, and the two errors lean opposite ways', and the 'Nor' opening the next sentence signals a further objection rather than more support for the old one. Splitting the errors between two sorts of reasoner would never have given the belief the power to fix a direction on its own, so what the example closes is a different escape.",
+            "seductive_element": "It states the paragraph's charge against the textbook account correctly, and a detail inside an argument is easily credited with the whole argument's job."
           }
         ]
       }
