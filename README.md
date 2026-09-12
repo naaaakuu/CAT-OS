@@ -20,6 +20,16 @@ one small thing — six words, about a minute — and when you look up, the sun
 is coming over the valley you just named. That is the whole game, explained
 by doing it once.
 
+And the valley it comes up over is **nearly empty**: sixteen saplings, some
+scrub and old stumps, one small house, stepping stones across the river,
+three spots marked and waiting in the wood, heather and bare earth over the
+rest. Nothing in the map is a constant — the wood, the terraces cut into
+the hill, the workshops in the Quarter, the bridges, the neighbours and the
+people walking between them all arrive because you learned something. The
+valley grows from *bare ground* through *a clearing*, *a settlement*, *a
+hamlet*, *a village*, *a town* to *a valley known for its readers*, and it
+never runs out of somewhere further to go.
+
 - **The Rootwood** — 51 Latin and Greek root families (217 words): take a word
   apart, build one nobody taught you, and a tree grows in one of six groves.
 - **The Meadow** — the CAT word lists: 2,577 high-, medium- and low-frequency
@@ -40,16 +50,33 @@ by doing it once.
 - **The Vine Terraces** — 28 Word DNA units: prefixes, suffixes, roots,
   foreign words and CAT vocabulary learned by pattern, each ending in a word
   you were never shown.
-- **The Hearth** — home and the Workshop: the four crafts you have made, the
-  twenty-one works you can build with them, the day's three asks, and the
-  honest read on where you stand. Wick sits on the step.
+- **The Hearth** — home and the Workshop: a shelf of small buildings, each
+  card a picture of the thing it will build. Twenty-one works in three
+  arcs, and then **Beyond** — a house for a neighbour, the road posted one
+  waymark further out, a planting at the wood's edge — which can be built
+  again and again, each one dearer and asking more of your record than the
+  last. Nothing here can be bought before the learning that earns it.
 - **Growth** — four abilities as four trees, each at the stage your own
-  record has earned: Reading, Vocabulary, Verbal and CAT pace. Under them,
-  the one that would move most, said as a next action. Under *that*, every
-  number, for anyone who wants it.
+  record has earned: Reading, Vocabulary, Verbal and CAT pace, with the
+  six-stage ladder under each. Then the **collections**: about 124 finite
+  sets — a grove of roots, a letter of the word lists, a language of the
+  Thicket, a stage of passages — sorted so the one nearest finishing is
+  first, so there is always something you only need four more of. Under
+  *that*, every number, for anyone who wants it.
 - **The Wilds** — the weekly Gauntlet: the same thirty questions all week —
   words from three places and nine asked the way CAT asks them, inside a
   real sentence — three minutes, against your own best.
+
+## What the game knows about you
+
+Every answer anywhere in the valley feeds one ledger of the seventeen
+abilities CAT's verbal section actually tests, and the valley points at the
+one that is slipping — in a sentence, never a dashboard. A question you
+missed **rests** before it comes back (twenty minutes, then a day, then
+three days, then most of a week): handing it back straight away measures
+whether you remember which letter was right. What comes back first is a
+different question on the same skill, and the Reading Room will pick a
+passage that actually asks about it.
 
 ## The four crafts
 

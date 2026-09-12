@@ -4,6 +4,106 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 1.3.0 — The valley you built (2026-09-12)
+
+On the owner's "FINAL PRODUCT TRANSFORMATION" brief. 1.2.0 was a beautiful
+world that a first-time learner *inherited*: ninety wild trees, four
+terraces already cut into the hill, three workshops standing, two bridges.
+Nothing they did could make it look like theirs. This release is about the
+difference between a world you are shown and a world you made.
+
+### The valley begins empty
+
+Nothing the map paints is a constant any more. `src/world/growth.js`
+derives how much of each part of the valley exists yet, from the same
+records as everything else, and every count the painter uses comes from
+there. A new valley is sixteen saplings and scrub, old stumps, one small
+house, stepping stones across the river, three spots marked and waiting in
+the wood, and heather and bare earth over the open ground.
+
+Learning puts the wood in (16 → 158 trees), cuts the terraces one bench at
+a time, raises the three workshops out of their frames, replaces the
+stepping stones with planks and then with stone, and brings the
+neighbours — up to ten houses and seven people walking between them. The
+curve is a square root, so the first twenty words change the valley more
+than the next two hundred.
+
+The valley also has a stage now — bare ground, a clearing, a settlement, a
+hamlet, a village, a town, a valley known for its readers — shown beside
+the stars, and Wick notices the first time you come home to a new one.
+
+### Beyond
+
+The Workshop had twenty-one works and then said "every work in the valley
+is standing", which is the one thing a CAT progression must never say.
+Stage 4 holds repeatable works: a house for a neighbour, the road posted
+one waymark further out toward a place you have never been, a planting
+along the wood's edge. Each costs more and asks more of your record than
+the last. Only the next of each is offered, so Beyond is three cards.
+
+### Collections
+
+About 124 finite sets, derived from the corpus rather than authored, so
+new content becomes new sets with no code: a grove of roots, a letter of
+the CAT lists, a language of the Thicket, a stage of passages, a bench of
+the Quarter. Growth shows the six closest to done — penalised by
+difficulty, because two Elite passages left is not "nearly finished" in
+any useful sense — and finishing one is announced on the result screen.
+
+A learner can now think *"four left"* about something every single day.
+
+### A missed question rests
+
+Re-asking the same question with the same four options ten minutes later
+measures whether you remember which letter was right. A missed item now
+rests: twenty minutes, then a day, then three days, then most of a week.
+The Reading Room's second look and the Quarter's three benches both
+honour it, and when everything that got away is still resting the screen
+says *"Resting"* and offers a passage that asks the same type instead.
+
+The content index carries each passage's question types now, so a weakness
+in inference produces a passage that actually asks about inference.
+
+### The Workshop is a shelf of small buildings
+
+Two across, each card carrying a picture of the thing it will build, its
+name and one state word. The cost, the standing, the shortfall and the
+Build button are one tap away. A wall of twenty-one cards each carrying
+four paragraphs is a settings page.
+
+### One icon language
+
+Twenty-three 16 × 16 pixel marks, drawn by the same hand as the world. The
+map pins, the thumb rail, the craft chips, the menu, the collections and
+the Hearth all carry them; every stroke glyph and typographic dingbat is
+gone. A resource sheet now answers "what can I build with it?" with
+pictures of the next three works it pays for.
+
+### Performance
+
+- Every sprite was drawn with one canvas call per pixel. `Pix` writes into
+  a `Uint32Array` and reaches the canvas once: cold scene build for a full
+  valley **1825 ms → 62 ms**.
+- `blob()` called `Math.atan2` once per pixel of its bounding box; it now
+  asks only at the rim. Same picture, pixel for pixel, five times faster.
+- Scatter sprites share a pool of twelve variants.
+- The valley opened all fifty-one root-family files to draw fifty-one
+  trees and label them. The three fields it wanted are in the index now:
+  content load **1676 ms → 145 ms**, route change to a painted valley
+  **3242 ms → 1064 ms**, idle frame p95 **33.4 ms → 16.8 ms**.
+
+### Also
+
+- Wick walks the valley, from the Hearth out to whatever it is asking
+  about, at the size a cat actually is.
+- A wrong answer leads with the trap, not with a paragraph about how a
+  strong reader would have got there.
+- A 'cover' camera may not zoom out past the point where the valley covers
+  the frame.
+- The Quarter's plots have a yard: a worn track, cut timber, a bench and a
+  signpost — and the place screen and the map finally agree about whether
+  a workshop exists.
+
 ## 1.2.0 — Someone lives here (2026-09-12)
 
 The valley was beautiful and empty, and it opened on a map with eleven

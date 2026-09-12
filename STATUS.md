@@ -4,7 +4,29 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-12 — 1.2.0, the second rebuild: a companion who lives in the valley and welcomes you into it, a first five minutes that names the place and lights it, nine pins instead of eleven, a pond that is a destination, a valley that fills the frame, crafts that explain themselves, feedback that fits on a phone, Growth as four trees, and a drag that costs one frame. App version 1.2.0._
+_Last updated: 2026-09-12 — 1.3.0, the final product transformation: a valley that starts empty and is built entirely out of what the learner learned, a Workshop that is a shelf of small buildings, 124 collections you can finish, works that never run out, a missed question that rests before it comes back, one icon language drawn by the same hand as the world, and an open three times faster than it was. App version 1.3.0._
+
+## What changed in 1.3.0
+
+| System | State | Notes |
+|---|---|---|
+| **The valley begins empty** (`world/growth.js`) | **shipped (1.3.0)** | Nothing the map paints is a constant any more. Trees, scrub, stumps, terraces, workshops, bridges, houses, people, rocks and tufts are all derived from records through one growth model with a square-root curve, so the first twenty words change the valley more than the next two hundred. A new valley is sixteen saplings, a small house, stepping stones and three spots marked for planting |
+| **The wild recedes** (`engine/map.js`) | **shipped (1.3.0)** | Untended ground is heather, bracken, bare earth and scree, strongest at the very beginning and fading as the place is worked. Barren had to be beautiful, not empty |
+| **The valley has a stage** | **shipped (1.3.0)** | Bare ground → a clearing → a settlement → a hamlet → a village → a town → a valley known for its readers. On the HUD beside the stars, and Wick notices the first time you come home to a new one. `verify.mjs` refuses a stage nobody has a line for |
+| **The Workshop is a shelf** (`screens/hearth.js`) | **shipped (1.3.0)** | Two across, each card a picture of the thing it builds, its name and one state word. Cost, standing, shortfall and the Build button live in a sheet one tap away. Every work now carries its own art |
+| **Beyond** (`world/economy.js`) | **shipped (1.3.0)** | Three repeatable works — a house for a neighbour, the road posted one waymark further out, a planting at the wood's edge — each costing and asking more than the last, and each visible on the map. The valley can never say "you have built everything" |
+| **Collections** (`world/collections.js`) | **shipped (1.3.0)** | ~124 finite sets derived from the corpus, so new content becomes new sets with no code. Growth shows the six closest to done, penalised by difficulty so nobody is sent to Elite because it has two left; the rest are one tap away by craft. Finishing one is announced on the result screen |
+| **The skill ledger** (`core/learning/review.js`) | **shipped (1.3.0)** | Every answer anywhere feeds one ledger of seventeen CAT abilities. The valley points at the one that is slipping, in one sentence, in Wick's register — never a dashboard |
+| **A missed question rests** | **shipped (1.3.0)** | Twenty minutes, then a day, then three, then most of a week. The second look and the Quarter both honour it, and when everything that got away is resting the screen says so and offers a passage that asks the same type instead |
+| **The curator aims** (`tools/index-derived.mjs`) | **shipped (1.3.0)** | The content index carries each passage's question types, so a weakness in inference actually produces a passage that asks about inference |
+| **One icon language** (`world/icons.js`, `engine/sprites.js` `mark`) | **shipped (1.3.0)** | Twenty-three 16 × 16 pixel marks drawn by the same hand as the world. Map pins, the thumb rail, craft chips, the menu, collections and the Hearth all carry them; the stroke glyphs and typographic dingbats are gone |
+| **A resource shows what it builds** (`world/craft-ui.js`) | **shipped (1.3.0)** | The craft sheet answers "what can I build with it?" with pictures of the next three works it pays for, and "where do I earn it?" with each place's own mark |
+| **Growth** | **shipped (1.3.0)** | The four trees stand on ground, carry the six-stage ladder as pips with the next stage named, and fill their bars on arrival. The empty state shows four bare plots with a seed in each instead of a paragraph saying there are four |
+| **Performance** (`engine/sprites.js`, `engine/map.js`, `world/state.js`) | **shipped (1.3.0)** | Pixels go into a `Uint32Array` and reach the canvas once (cold scene build 1825 → 62 ms); `blob()` asks for an angle only at the rim; scatter shares twelve variants; the valley no longer opens fifty-one root-family files to draw fifty-one trees (content load 1676 → 145 ms). Route change to a painted valley: **3242 → 1064 ms**. Idle frame p95 33.4 → 16.8 ms |
+| **A deliberate camera** (`engine/canvas.js`) | **shipped (1.3.0)** | A 'cover' scene may not zoom out past the point where the valley covers the frame |
+| **Wick lives here** (`engine/life.js` `companion`) | **shipped (1.3.0)** | He walks a circuit from the Hearth out to whatever the valley is asking about, sits, looks around and carries the lamp lit after dark — at map scale, at the size a cat actually is (`wickSmall`) |
+| **Verification** | **shipped (1.3.0)** | §16 covers repeatable works (each must cost more every time, must ask for learning first, and must resolve back to a work); §17 covers every stage line. All checks pass |
+
 
 ## What changed in 1.2.0
 
