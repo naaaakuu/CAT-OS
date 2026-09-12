@@ -230,7 +230,10 @@ export async function renderRound(outlet, { storage }, params) {
         result: result.stars,
         facts: [
           { label: 'Right', value: `${result.record.score.correct}/${result.record.score.total}`, good: result.stars.accuracy >= 0.75 },
-          { label: 'Per word', value: `${(result.record.score.avg_ms / 1000).toFixed(1)}s`, good: result.stars.inTime },
+          // Inside the pace is only a good number if the answers were right:
+          // fast and wrong is the habit CAT punishes hardest, and a gold
+          // figure under a one-star round would be teaching it.
+          { label: 'Per word', value: `${(result.record.score.avg_ms / 1000).toFixed(1)}s`, good: result.stars.inTime && result.stars.accuracy >= 0.5 },
           { label: 'Time', value: formatClock(result.record.duration_ms) },
         ],
         earned: result.earned,

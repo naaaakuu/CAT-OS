@@ -22,6 +22,10 @@ _Last updated: 2026-09-12 — 1.2.0, the second rebuild: a companion who lives i
 | **Growth** (`shell/growth.js`) | **shipped (1.2.0)** | Four abilities, four trees at the stage the record has earned, a tier name, stars and one line of numbers; then the one ability with the most room, said as a next action. Everything the screen used to be lives under "The numbers" |
 | **The Hearth** | **shipped (1.2.0)** | Wick on the step, a lamp by the door, flowers and tufts in the band a phone actually shows |
 | **Interaction cost** (`engine/canvas.js`, `screens/world.js`) | **shipped (1.2.0)** | `pointermove` no longer calls `draw()` — coalesced touch events were painting the same frame two or three times over. The world stops simulating while a finger is down, the pins only touch the DOM when the camera moved, and the pin dots lost their backdrop blur. Drag went from p50 33 ms / max 100 ms to p50 16.7 ms / max 33 ms in headless software rendering at dpr 3 |
+| **The Reading Room's tower** (`engine/sprites.js`) | **shipped (1.2.0)** | A plinth, a shaft that grows a floor at a time, an arched reading stage and a slate spire (the Observatory dome replaces it when built). 26 × 50 at one floor. It stands in a walled yard with pines, a lamp and a reader |
+| **A sky with no seam** (`engine/map.js`, `multiplyTint`) | **shipped (1.2.0)** | The edge painters tint the way the renderer tints — a multiply, not a lerp — so the country beyond the ridge and the map's own sky are the same sky at every hour |
+| **The dashboard, retired** (`app.js`) | **shipped (1.2.0)** | `#/home` and `#/practice` come home to the valley; the pre-world screens and `GATE_PLACES` are gone (−180 lines) |
+| **Pace is only good with accuracy** | **shipped (1.2.0)** | A 1/12 round no longer prints its speed in gold: fast and wrong is the habit CAT punishes hardest |
 | **Verification** | **shipped (1.2.0)** | §17 added: Wick's voice and register, naming, the nine pins and the Quarter's resolution, both Wick sprites, and the promise that feedback stays short. 552 checks pass |
 
 ## What changed in 1.1.0

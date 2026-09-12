@@ -104,6 +104,37 @@ Measured in headless Chrome with software rendering at dpr 3: a drag went
 from p50 33.3 ms / p95 49.9 ms / max 100 ms to p50 16.7 ms / p95 16.8–33 ms
 / max 33 ms. `draw()` itself costs 2.3–4.4 ms depending on framing.
 
+### The landmarks
+
+- **The Reading Room is a tower.** At one floor its sprite was 30 wide and
+  25 tall, which is a garden shed; reading is the hardest thing CAT asks
+  and its landmark should say so. It is now a plinth, a shaft that grows a
+  floor at a time, an arched reading stage that lights when anything is
+  lit, and a steep slate spire with a gold finial — 26 × 50 at one floor,
+  26 × 71 with the Observatory. It stands in a yard now, too: fence,
+  pines, bushes, a lamp by the door and a reader on the path.
+- **The sky is continuous.** The country beyond the ridge was tinted by
+  lerping toward the hour's colour while the map itself is tinted by
+  multiplying by it — two operations on one colour, meeting at a line,
+  which is why every dusk and dawn had a step across the sky. The edge
+  painters now do exactly what the renderer does.
+- **The Rootwood has a ceiling.** Its canopy was a flat orange slab in
+  autumn. An autumn canopy seen from underneath is that colour with the
+  whole wood's shade behind it: four passes dark to light, small clusters
+  for texture, and gaps punched back out where the sky gets through.
+- **The dashboard is retired.** `#/home` still rendered the pre-world
+  Home screen — a greeting, a Continue card, a module list — which is
+  exactly what the valley replaced. Both `#/home` and `#/practice` now
+  come home to the valley; app.js loses 180 lines.
+- **No colour emoji** anywhere in the world's own chrome.
+
+### Honesty
+
+Fast and wrong is not a good result, and the round screen was printing
+the pace in gold after a 1/12 round — teaching the one habit CAT punishes
+hardest. Pace reads as good only when the accuracy behind it was real
+(round, passage and second-look results).
+
 ### Fixed
 
 - The build veil is mounted on `document.body` and was only removed by

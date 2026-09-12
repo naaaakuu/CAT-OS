@@ -335,7 +335,8 @@ export async function renderSession(outlet, { storage }, params) {
         result: res,
         facts: [
           { label: 'Right', value: `${s.score.correct}/${s.score.total}`, good: res.accuracy >= 0.75 },
-          { label: 'Time', value: formatClock(s.duration_ms), good: res.inTime },
+          // Fast and wrong is not a good result (see round.js).
+          { label: 'Time', value: formatClock(s.duration_ms), good: res.inTime && res.accuracy >= 0.5 },
           { label: 'Target', value: formatClock(targetMs) },
         ],
         earned,

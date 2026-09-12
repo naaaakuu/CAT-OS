@@ -228,7 +228,7 @@ export async function renderSecondLook(outlet, { storage }) {
         facts: [
           { label: 'Right', value: `${correct}/${total}`, good: res.accuracy >= 0.75 },
           { label: 'Settled', value: String(settled), good: settled > 0 },
-          { label: 'Time', value: formatClock(record.duration_ms), good: res.inTime },
+          { label: 'Time', value: formatClock(record.duration_ms), good: res.inTime && res.accuracy >= 0.5 },
         ],
         earned,
         worldLine,
