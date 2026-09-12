@@ -263,9 +263,17 @@ function tree({ stage = 'young', seed = 'tree', season = 'summer', kind = 'broad
 
   if (stage === 'open_ground' || stage === 'seed') {
     const soil = ramp(PIGMENT.earth);
-    p.blob(gx, ground - 2, 5, 2, soil.base, r, 0.1);
-    p.hline(gx - 3, gx + 2, ground - 3, soil.light);
-    if (stage === 'seed') { p.px(gx, ground - 4, '#F3E6C4'); p.px(gx + 1, ground - 4, '#E9D6A7'); }
+    p.blob(gx, ground - 2, 6, 2, soil.base, r, 0.12);
+    p.blob(gx, ground - 2, 4, 1, soil.shade, r, 0.14);
+    p.hline(gx - 4, gx + 3, ground - 4, soil.light);
+    if (stage === 'seed') {
+      // A seed set in turned earth, with the first pale shoot out of it.
+      // A bare mound at map scale reads as a bun; this reads as a start.
+      p.rect(gx - 1, ground - 6, 3, 3, '#F3E6C4');
+      p.px(gx, ground - 6, '#FFF7E2'); p.px(gx + 1, ground - 4, '#D8BE8C');
+      p.px(gx, ground - 7, canopy.light); p.px(gx, ground - 8, canopy.light);
+      p.px(gx - 1, ground - 8, canopy.base);
+    }
     p.outline();
     return done(p, gx, ground);
   }

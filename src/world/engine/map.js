@@ -1634,7 +1634,11 @@ export function buildBackdropScene(slug, state, atmo) {
       if (state?.terraces?.arbour) { const s = sprite('arbour', {}); ctx.drawImage(s.canvas, 120 - s.ax, HOR + 4 - s.ay); }
       scatter(ctx, 'bush', 6, HOR + 4, HOR + 120, { berries: true });
     } else if (slug === 'loom' || slug === 'table' || slug === 'bench') {
-      const s = sprite('workshop', { kind: slug, level: state?.[slug]?.level ?? 0, lit: night });
+      // A workshop nobody has worked is still a frame here, exactly as it
+      // is on the map: the two views must never disagree about whether a
+      // building exists.
+      const worked = (state?.[slug]?.solved ?? 0) >= 1;
+      const s = sprite('workshop', { kind: slug, level: worked ? (state?.[slug]?.level ?? 0) : -1, lit: night });
       ctx.drawImage(s.canvas, 116 - s.ax, HOR + 56 - s.ay);
       if (night || state?.built?.quarterLamps) {
         const l = sprite('lantern', { lit: true });
@@ -1647,8 +1651,42 @@ export function buildBackdropScene(slug, state, atmo) {
         ctx.drawImage(st.canvas, 70 - st.ax, HOR + 80 - st.ay);
         const wl = sprite('well', {}); ctx.drawImage(wl.canvas, 168 - wl.ax, HOR + 84 - wl.ay);
       }
+      // The yard: a worn track up to the door, the craft's own materials
+      // stacked beside it, and a bench. The plot has to look like somewhere
+      // a person works, whether or not the workshop is standing yet.
+      {
+        const dirt = ramp(PIGMENT.path);
+        for (let y = HOR + 56; y < H; y += 1) {
+          const t = (y - (HOR + 56)) / Math.max(1, H - HOR - 56);
+          const half = Math.round(6 + t * 26);
+          for (let x = 116 - half; x <= 116 + half; x += 1) {
+            if (x < 0 || x >= W) continue;
+            const edge = Math.abs(x - 116) / half;
+            if (edge > 0.82 && n2(x / 4, y / 4) < 0.5) continue;
+            ctx.fillStyle = n2(x / 3, y / 3) > 0.66 ? dirt.light : dirt.base;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+        const timber = ramp(PIGMENT.timber);
+        // A neat stack of cut boards beside the plot, each one drawn, with
+        // the end grain catching the light: a solid brown block reads as a
+        // chocolate bar, not as a craft's materials.
+        for (let i = 0; i < 5; i += 1) {
+          const y = HOR + 62 - i * 2;
+          ctx.fillStyle = i % 2 ? timber.base : mix(timber.base, timber.shade, 0.5);
+          ctx.fillRect(64, y, 15, 2);
+          ctx.fillStyle = timber.light; ctx.fillRect(64, y, 15, 1);
+          ctx.fillStyle = timber.dark; ctx.fillRect(78, y, 1, 2);
+        }
+        ctx.fillStyle = timber.dark; ctx.fillRect(64, HOR + 64, 15, 1);
+        const bn = sprite('fence', { w: 22 });
+        ctx.drawImage(bn.canvas, 156 - bn.ax, HOR + 80 - bn.ay);
+        const sp = sprite('signpost', { arrows: 1 });
+        ctx.drawImage(sp.canvas, 66 - sp.ax, HOR + 86 - sp.ay);
+      }
       treeline(ctx, HOR - 2, 2, 'broad', 'mature');
-      scatter(ctx, 'grassTuft', 12, HOR + 10, HOR + 150);
+      scatter(ctx, 'grassTuft', 26, HOR + 10, HOR + 150);
+      scatter(ctx, 'rock', 5, HOR + 30, HOR + 150);
     } else if (slug === 'wilds') {
       for (let y = HOR; y < H; y += 1) {
         const t = (y - HOR) / (H - HOR);

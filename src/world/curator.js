@@ -369,16 +369,27 @@ function shuffle(arr, r) {
  * item never tried comes before the one tried and missed.
  * @returns {{ item, why, kind }|null}
  */
-export function nextVerbal(registry, sessions, moduleKey, seed = 'v') {
+export function nextVerbal(registry, sessions, moduleKey, seed = 'v', now = Date.now()) {
   const solved = new Set(), tried = new Set();
-  for (const s of sessions) {
+  // When each item was last missed, and how often — a set handed straight
+  // back measures which order the learner remembers, not whether they can
+  // find it. See core/learning/review.js.
+  const miss = new Map();
+  const ordered = [...sessions].sort((a, b) => String(a.finished_at ?? '').localeCompare(String(b.finished_at ?? '')));
+  for (const s of ordered) {
     if (s.module !== moduleKey) continue;
     for (const a of s.answers ?? []) {
       const id = a.item_id ?? a.question_id;
       if (a.is_correct !== null) tried.add(id);
       if (a.is_correct === true) solved.add(id);
+      else if (a.is_correct === false) {
+        const m = miss.get(id) ?? { n: 0, at: null };
+        m.n += 1; m.at = s.finished_at ?? m.at;
+        miss.set(id, m);
+      }
     }
   }
+  const rested = (id) => { const m = miss.get(id); return !m || isRested(m.at, m.n, now); };
   const byTier = new Map();
   for (const it of registry) {
     const t = it.tier ?? 'medium';
@@ -394,11 +405,14 @@ export function nextVerbal(registry, sessions, moduleKey, seed = 'v') {
       const it = fresh.sort((a, b) => (a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5) || a.id.localeCompare(b.id))[0];
       return { item: it, kind: 'new', why: tierLine(t) };
     }
-    const missed = items.filter((i) => tried.has(i.id) && !solved.has(i.id));
-    if (missed.length) return { item: missed[Math.floor(r() * missed.length)], kind: 'retry', why: 'You have seen this one and it got away. Try it again.' };
+    const missed = items.filter((i) => tried.has(i.id) && !solved.has(i.id) && rested(i.id));
+    if (missed.length) return { item: missed[Math.floor(r() * missed.length)], kind: 'retry', why: 'You have seen this one and it got away. Enough time has passed to mean something.' };
   }
-  const all = registry;
-  return all.length ? { item: all[Math.floor(r() * all.length)], kind: 'again', why: 'Every rung is clear. Take one again, against the clock.' } : null;
+  // Everything is either solved or still resting: take a solved one again,
+  // against the clock, which is the other half of what CAT asks.
+  const all = registry.filter((i) => rested(i.id));
+  const pool = all.length ? all : registry;
+  return pool.length ? { item: pool[Math.floor(r() * pool.length)], kind: 'again', why: 'Every rung is clear. Take one again, against the clock.' } : null;
 }
 
 const TIER_LINES = {

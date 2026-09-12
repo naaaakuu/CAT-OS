@@ -96,12 +96,24 @@ export async function renderGrowth(outlet, { storage }) {
     body.removeAttribute('aria-busy');
     body.innerHTML = `
       <div class="reach__empty">
-        <canvas class="reach__seed" width="96" height="112" aria-hidden="true"></canvas>
-        <h1>Nothing has grown yet</h1>
-        <p>Four things grow here: your reading, your words, your grip on an argument, and your speed under a clock. One session starts all of them.</p>
+        <h1>Four things grow here</h1>
+        <p>Your reading, your words, your grip on an argument, and your speed under a clock. One session starts all of them.</p>
+        <div class="seedlings">
+          ${[
+            ['reading', 'Reading', 'ink', 'Passages, against the clock'],
+            ['vocab', 'Vocabulary', 'amber', 'Words, roots and word parts'],
+            ['verbal', 'Verbal', 'thread', 'The shape of an argument'],
+            ['pace', 'CAT pace', 'ember', 'Right, and inside the time'],
+          ].map(([k, name, cr, line]) => `
+            <div class="seedling ability--${cr}">
+              <span class="seedling__plate"><canvas class="seedling__tree" width="120" height="150" aria-hidden="true"></canvas></span>
+              <b>${escapeHTML(name)}</b>
+              <span>${escapeHTML(line)}</span>
+            </div>`).join('')}
+        </div>
         <a class="g-cta" href="#/world">Into the valley<span class="arrow" aria-hidden="true">→</span></a>
       </div>`;
-    paintTree(body.querySelector('.reach__seed'), 'sprout', 4);
+    for (const cv of body.querySelectorAll('.seedling__tree')) paintTree(cv, 'seed', 6);
     return;
   }
 
