@@ -1,0 +1,339 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0094",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "inference",
+      "argument-tracking",
+      "vocabulary-in-context",
+      "scope-control",
+      "main-idea-extraction"
+    ],
+    "word_count": 318,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "author_purpose",
+      "vocabulary_in_context"
+    ],
+    "theme": "the usual line between risk and uncertainty redrawn, since a probability can always be supplied and what actually separates the two cases is whether the list of outcomes is closed, which splits forecasting failure into a wrong number that more observation can repair and a short list that no amount of observation can lengthen",
+    "estimated_time_min": 5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-06",
+    "reviewer_notes": "Short, dense and built on one substitution: not whether the odds are known but whether the list is closed. The final paragraph concedes that the partition is not clean and then refuses the practice the concession might seem to excuse, which is where the purpose question separates from the definitional reading.",
+    "length_class": "short",
+    "structure": "comparison_contrast",
+    "viewpoints": 2,
+    "tone": "dry, corrective, conceding once",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.contrast",
+      "struct.definition",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.purpose",
+      "comp.intent",
+      "comp.function_over_words",
+      "arg.qualification",
+      "arg.concession",
+      "arg.necessary_vs_sufficient",
+      "inf.reasonable_implication",
+      "inf.strongly_supported",
+      "scope.condition",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about approximate probabilities, which is the case the passage says more observation does repair, so it names the situation in which data is most useful rather than least. Q2's rival is the option about defining two terms used loosely, which is true of the first paragraph alone and leaves the third paragraph's split between two kinds of failure and two kinds of remedy entirely unexplained. Q3's rival is the option glossing the word as shorter than it might have been, which describes the open list rather than the closed one and inverts the sentence it is taken from.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "closed",
+      "enumerated",
+      "partition",
+      "defensible"
+    ]
+  },
+  "passage": {
+    "title": "The Number He Will Give You",
+    "reading_time_min": 1.8,
+    "paragraphs": [
+      {
+        "id": "rc-0094-p1",
+        "text": "The distinction between risk and uncertainty is usually drawn by the probabilities. Under risk the odds are known; under uncertainty they are not. Put that way it does not survive contact with practice, because a number can always be produced. Ask a forecaster for the chance of a thing nobody has yet seen and he will give you one. It will be defensible, it will have been arrived at by a method, and it will be a number."
+      },
+      {
+        "id": "rc-0094-p2",
+        "text": "The line worth drawing runs elsewhere. What separates the two cases is not whether the probabilities are known but whether the list of outcomes is closed. A die has six faces and nothing else can happen, so the arithmetic may proceed; the odds might be quite unknown, and they are at any rate the odds of something. Most of what forecasters are asked about has no closed list. The outcomes are the ones somebody has thought of, and the set is open at an end nobody can see."
+      },
+      {
+        "id": "rc-0094-p3",
+        "text": "So the two failures differ in kind, and the difference decides what can be done about them. A forecast of the first sort fails by a wrong number, and a wrong number is repairable: more observations, a better model, a corrected weight. A forecast of the second sort fails by a short list, and no quantity of observation lengthens a list, because observations are recorded under the headings the list already has. The distinction is not a clean partition of the world, admittedly; every real list is closed at one end and open at the other, and the honest question is how much of the probability sits in the part that was enumerated. The habit of treating the two failures as one, and answering both with more data, survives none of this. A wrong number is a reason to measure again. A short list is a reason to stop believing the total."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0094-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "scope.condition",
+        "struct.contrast"
+      ],
+      "target_mistake": "choosing the case in which the passage says more observation works, because uncertainty about a number feels like the situation in which more data is needed",
+      "prediction_target": "The learner should predict that the answer will describe an open list rather than an imprecise number, since observation is said to repair only the second.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred that the author would regard the collection of further data as least useful where",
+      "options": {
+        "A": "the probabilities attached to the outcomes already listed are known only approximately",
+        "B": "the forecaster has no experience of the field he is being asked about",
+        "C": "most of the probability lies outside the outcomes anyone has thought to enumerate",
+        "D": "the outcomes are numerous, so that any one of them, though listed, has a very small probability"
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph attaches a remedy to each failure. A wrong number is repairable by more observations, a better model or a corrected weight; a short list is not, because observations are recorded under the headings the list already has. The passage then names the honest question as how much of the probability sits in the enumerated part.",
+        "correct_reasoning": "The correct option is the case in which the second failure dominates. If the bulk of the probability lies among outcomes nobody has listed, then every additional observation is filed under an existing heading and the missing part of the distribution stays missing however long the collecting goes on. That is the one situation in which the passage says data cannot help, and it is stated in the sentence about headings.",
+        "passage_anchor": "rc-0094-p3",
+        "question_type_note": "An inference question about a remedy is decided by the sentence that says why the remedy works, and then by finding the case where that reason fails to apply.",
+        "reading_habit": "When an author distinguishes two failures, attach a remedy to each as you read. Most distractors will describe the failure whose remedy is the one the question is asking you to rule out.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the repairable case. The passage says a wrong number can be answered with more observations, a better model or a corrected weight, so approximate probabilities over a settled list are exactly where further data does its work.",
+            "seductive_element": "It is the live rival, because approximate knowledge feels like the condition that more measurement is for, and uncertainty is the word the whole passage is about."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The forecaster's experience never enters the argument. What the passage distinguishes are properties of the problem, a closed or an open list, and it says nothing about who is doing the forecasting.",
+            "seductive_element": "Unfamiliarity with a field is an obvious reason for a bad forecast, and a reader supplying his own account of failure will reach for it."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "A long list is still a closed one. The passage's difficulty is with outcomes that are absent altogether, not with outcomes that are present and individually improbable, and it says the arithmetic may proceed as soon as nothing else can happen.",
+            "seductive_element": "Small probabilities and long lists both sound like the territory of the unpredictable, and the option borrows the paragraph's vocabulary of outcomes and probability."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0094-q2",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.intent",
+        "arg.concession"
+      ],
+      "target_mistake": "reading the passage as a piece of definition when its point is that two kinds of failure need two kinds of response",
+      "prediction_target": "The learner should be able to name a verb and an object: shift a familiar distinction onto a new criterion, and draw a practical difference from the shift.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's purpose in the passage is chiefly",
+      "options": {
+        "A": "to show that forecasts of rare events are wrong more often than their authors admit, and to say why",
+        "B": "to show that probability is the wrong instrument for most of what forecasters are asked",
+        "C": "to define two terms that economists, though they use them constantly, have long used loosely, and to fix the usage",
+        "D": "to move a familiar distinction onto a different line, so that its two failures call for different remedies"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The first paragraph rejects the usual criterion because a number can always be supplied. The second substitutes another, whether the list is closed. The third spends its whole length on what the substitution buys, which is that one failure can be answered with data and the other cannot.",
+        "correct_reasoning": "The correct option names both moves. The relocation is from known probabilities to a closed list, and the payoff is the split between a wrong number, which measurement repairs, and a short list, which measurement cannot reach. A purpose that stops at the relocation leaves the longest paragraph unexplained, and the closing pair of sentences is about what to do rather than about what to call things.",
+        "passage_anchor": "rc-0094-p2, rc-0094-p3",
+        "question_type_note": "Purpose is a verb with an object. Where a passage replaces one criterion with another, the object includes what the replacement makes possible, not merely the replacement.",
+        "reading_habit": "Ask what a passage would lose if its last paragraph were removed. If the answer is the whole point, no purpose that omits that paragraph can be right.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No claim about how often forecasts are wrong appears anywhere, and no comparison is made between what forecasters admit and what happens. The passage is about which failures can be repaired, not about their frequency or about anybody's candour.",
+            "seductive_element": "A piece arguing that some forecasts cannot be improved sounds like it must be reporting a poor record, and readers supply the indictment."
+          },
+          {
+            "option": "B",
+            "trap_type": "sophisticated_sounding",
+            "why_wrong": "Probability is never rejected. The passage keeps the arithmetic and says it may proceed as soon as the list is closed, locating the trouble in the completeness of the list rather than in the use of numbers at all.",
+            "seductive_element": "It is the grandest available reading of a passage about the limits of forecasting, and grandeur is easily mistaken for the point."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "Definition occupies the first two paragraphs and is then put to work, and fixing anybody's usage is never proposed. Offered as the purpose it makes the whole third paragraph, with its two failures and its two remedies, into an illustration of a terminological point.",
+            "seductive_element": "It is the live rival, because the passage really does argue about how a distinction should be drawn, and definitional essays are common in this subject."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0094-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "struct.definition"
+      ],
+      "target_mistake": "taking an everyday sense of a common word instead of the one the following sentence defines",
+      "prediction_target": "The learner should paraphrase from the sentence that follows, which glosses the term by a die with six faces and nothing else that can happen.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "inference"
+      ],
+      "stem": "As it is used in the second paragraph, the word closed most nearly means",
+      "options": {
+        "A": "kept from the people who will have to use the forecast",
+        "B": "complete, so that nothing outside it could possibly happen",
+        "C": "agreed upon by the forecasters who drew it up",
+        "D": "shorter than it might have been, and so incomplete"
+      },
+      "correct": "B",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The next sentence supplies the definition by example. A die has six faces and nothing else can happen, so the arithmetic may proceed, and the contrast drawn a moment later is a set open at an end nobody can see.",
+        "correct_reasoning": "The correct option is that example generalised. What matters about the die is not how many faces it has but that the enumeration exhausts the possibilities, which is why the probabilities can be unknown and the list still closed. The whole argument depends on this sense, since a list which is complete can be worked with and one which is not cannot be lengthened by observation.",
+        "passage_anchor": "rc-0094-p2",
+        "question_type_note": "A word-in-context question is settled by the sentence the author uses to illustrate the word, especially when a contrasting case follows within a few lines.",
+        "reading_habit": "When a common word is used as a technical term, read the example the author attaches to it. He has told you which of its senses he intends, and the dictionary's other senses will be among the options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Nothing is being withheld from anybody. The passage is describing a property of the set of outcomes, and its illustration is a die, which conceals nothing from anyone who looks at it.",
+            "seductive_element": "Closed most commonly means shut against people, and forecasts genuinely are things prepared by one party for another."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Agreement plays no part in the argument. A die's list is closed by the nature of the die rather than by anybody's consent, and the passage's open lists are open because outcomes exist that nobody has thought of.",
+            "seductive_element": "Lists of outcomes in real forecasting are settled by committees, and a reader importing that practice will find this option familiar."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This describes the other side of the contrast. A short list is the third paragraph's name for the failing case, and the word in question is the property the die has and the failing case lacks.",
+            "seductive_element": "It is the live rival, because the passage's phrase a short list is memorable and sits close by, so a reader matching vocabulary rather than position attaches it to the wrong term."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "closed",
+      "passage_use": "whether the list of outcomes is closed",
+      "meaning_here": "complete, admitting nothing beyond what it contains",
+      "difficulty": "medium"
+    },
+    {
+      "word": "enumerated",
+      "passage_use": "sits in the part that was enumerated",
+      "meaning_here": "set out item by item in a list",
+      "difficulty": "medium"
+    },
+    {
+      "word": "partition",
+      "passage_use": "not a clean partition of the world",
+      "meaning_here": "a division into parts that do not overlap",
+      "difficulty": "hard"
+    },
+    {
+      "word": "defensible",
+      "passage_use": "It will be defensible",
+      "meaning_here": "able to be justified if challenged",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A familiar pair of terms is taken apart and put back together on a different hinge. Watch what the author says the new hinge lets you do, because the questions are about the consequence rather than about the definition.",
+    "one_sentence_summary": "Risk and uncertainty are usually separated by whether the probabilities are known, which fails because a forecaster can always supply a number, so the line should instead be drawn by whether the list of outcomes is closed, and once it is drawn there the two kinds of forecasting failure come apart, a wrong number that further observation can repair and a short list that further observation cannot lengthen, since new observations are filed under the headings the list already has.",
+    "main_idea": "The usual account says risk is when you know the odds and uncertainty is when you do not. That will not do, because a number can always be produced for anything. The real difference is whether the list of possible outcomes is complete. If it is, the sums can be done however shaky the numbers. If it is not, the missing outcomes stay missing no matter how much data arrives, because data gets recorded under existing headings. So one failure is a reason to measure again and the other is a reason to stop trusting the total.",
+    "simple_explanation": "People usually explain the difference between risk and uncertainty like this: with risk you know the odds, with uncertainty you do not. It sounds clean, and it falls apart the moment you try to use it, because you can always get a number out of somebody. Ask a forecaster the chance of something nobody has ever seen happen and he will give you a figure. He will have a method, he will be able to defend it, and it will be a number.\n\nThe author says the line should be drawn somewhere else entirely. The question is not whether you know the probabilities. It is whether the list of possible outcomes is complete. A die has six faces and nothing else can happen. You might have no idea how the die is weighted, but at least you know what the possibilities are, so the arithmetic can go ahead. Most of what forecasters are actually asked about has no such list. The outcomes on the page are the ones somebody thought of, and the set trails off at an end that nobody can see.\n\nOnce you draw the line there, something useful follows. The two ways a forecast fails are not the same kind of thing, and they need different responses.\n\nThe first kind fails because of a wrong number. That is fixable: take more observations, build a better model, correct the weight you gave something.\n\nThe second kind fails because of a short list, and no amount of observation fixes that. The reason is simple and rather chilling. New observations get recorded under the headings the list already has. If a possibility is not on the list, your data collection will never bump into it; it will just keep filling in the boxes you already drew.\n\nThe author is honest that this is not a tidy division of the world. Every real list is complete at one end and open at the other, and the useful question is how much of the probability sits in the part you actually wrote down.\n\nBut he refuses to let that honesty excuse the usual habit, which is to treat both failures as the same thing and answer both by gathering more data. A wrong number tells you to measure again. A short list tells you to stop believing the total.",
+    "why_difficult": "The passage is short and every sentence carries weight, so a reader who skims the middle paragraph loses the substitution the whole argument depends on. The second difficulty is that the word uncertainty invites the thought that the answer must involve unknown probabilities, whereas the author has just said probabilities are always available and put the weight on something else entirely. The third is the concession near the end, which admits that the division is not clean and is easily mistaken for a retreat, although the very next sentence uses it to sharpen the practical advice.",
+    "author_intention": "To stop the reader from hearing uncertainty as a statement about how confident anybody feels, and to make him ask instead whether the possibilities have been enumerated, because only that question decides whether more information would help.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0094-p1",
+        "role": "Rejects the usual line",
+        "note": "Risk is where you know the odds, uncertainty where you do not. That fails, because somebody will always give you a number."
+      },
+      {
+        "paragraph_id": "rc-0094-p2",
+        "role": "Draws a new one",
+        "note": "The real question is whether the list of outcomes is complete. A die is complete; most forecasting problems are not."
+      },
+      {
+        "paragraph_id": "rc-0094-p3",
+        "role": "Draws the consequence",
+        "note": "A wrong number can be repaired by more data. A short list cannot, because data goes under the headings you already have. And the two must not be answered the same way."
+      }
+    ],
+    "tone_progression": "It opens dry and slightly impatient with a definition that will not work, becomes expository and careful as the replacement is set out, and ends firm, conceding once that the world is untidy and then issuing two flat sentences of practical instruction.",
+    "key_transitions": [
+      "'The line worth drawing runs elsewhere.' (opening of paragraph 2) — the criterion is replaced.",
+      "'no quantity of observation lengthens a list' (paragraph 3) — the reason the second failure is beyond repair.",
+      "'The habit of treating the two failures as one survives none of this' (paragraph 3) — the concession is made and then fenced."
+    ],
+    "misunderstanding": "The common wrong model keeps the old criterion after reading the new one, so that uncertainty goes on meaning shaky probabilities; the passage says the probabilities may be quite unknown and the list still closed, which is exactly the case where data helps. The second wrong model reads the concession about untidiness as a withdrawal of the distinction, when it is offered in order to convert the distinction into a question of proportion, namely how much of the probability sits in the part that was enumerated.",
+    "traps_summary": "This set offers the repairable failure as the one data cannot reach, a definitional purpose in place of a practical one, a recommendation nobody made, a long list mistaken for an open one, and an everyday sense of a word the author has just defined by example. Asking which of the two failures an option is about answers all three.",
+    "reading_lesson": "When an author rejects a familiar criterion and substitutes another, do not stop at the substitution: the point of such a passage is always what the new criterion lets you do, and the questions will be built on the consequence rather than on the definition. The companion habit is to attach a remedy to each case as soon as an author divides a problem in two, since most distractors in such sets are the right remedy filed under the wrong case.",
+    "real_world": "The same split runs through any assessment of what might go wrong: a safety case that assigns probabilities to the failures somebody listed, a bank's model of the markets it has seen, a project plan with a register of risks. In each, the question worth asking before commissioning more analysis is whether the trouble is a number that could be measured better or a possibility that never made it onto the page.",
+    "takeaway": "More data can correct a number you got wrong; it cannot tell you about the box you never drew.",
+    "reflection_question": "In the last forecast you relied on, how much of what could happen was actually on the list?"
+  }
+}

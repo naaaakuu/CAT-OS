@@ -1,0 +1,411 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0095",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "causal-reasoning",
+      "tone-detection",
+      "main-idea-extraction"
+    ],
+    "word_count": 445,
+    "question_count": 4,
+    "question_types": [
+      "not_true",
+      "inference",
+      "tone",
+      "main_idea"
+    ],
+    "theme": "the familiar complaint that prices climb quickly and fall slowly answered by pointing out that appetite is symmetrical and cannot produce an asymmetry, and explained instead by the buyer's information, since a rise in costs is public and removes the point of searching while a fall is invisible at the counter and nobody searches until he learns there is something to find",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-06",
+    "reviewer_notes": "The argument turns on a single logical observation, that a constant cannot explain a difference, and everything else follows from it. The author is lightly amused rather than measured, which is deliberate: the tone options are not a caricature pair flanking a middle, and the correct one names an attitude with a definite colour.",
+    "length_class": "medium",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 2,
+    "tone": "wry, patient, exact about what the evidence shows",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "struct.contrast",
+      "struct.cause_effect",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "comp.intent",
+      "arg.causal_claim",
+      "arg.concession",
+      "arg.qualification",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.description_vs_evaluation",
+      "arg.correlation_vs_causation",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "scope.condition",
+      "lang.tone_shift",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the true option that the explanation requires no understanding between sellers, which a reader may flag because it sounds like a claim about the world rather than about the argument; the last sentence of the passage states it directly by describing an arrangement in which nobody conspires and the slow fall appears anyway. Q2's rival is the option about recovering the cost of changing a posted price, which the passage grants as part of the gap and which therefore feels like the author's answer, although his own account times the fall by what buyers learn. Q3's rival is the sympathetic reading, available because the passage concedes that some of the gap may be sharp practice after all; the concession is one clause long and sits inside a paragraph that denies the pattern is evidence of anything of the kind. Q4's rival is the option about the cost of changing a posted price offered as the thesis, which is the same conceded fragment raised to the status of the explanation.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "symmetrical",
+      "asymmetry",
+      "wholesale",
+      "undercut"
+    ]
+  },
+  "passage": {
+    "title": "The Rate the Bank Pays",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0095-p1",
+        "text": "When the cost of something a shop sells goes up, the price on the shelf follows within days. When the cost goes down, the price on the shelf follows slowly, and sometimes takes months to arrive. The pattern is durable and has been found in fuel, in groceries, and in the rates that banks charge and pay, and it is one of the few economic regularities that customers notice for themselves and resent."
+      },
+      {
+        "id": "rc-0095-p2",
+        "text": "The suspicion that follows is natural enough: sellers are quick to take and slow to give, and the gap is the measure of their appetite. The trouble with appetite as an explanation is that it is symmetrical. A seller who wants money wants it in both directions, and has precisely as much reason to cut a price when a rival might otherwise take his customers as to raise one when his costs allow. Greed is a constant, and a constant cannot explain a difference. A market of saints, each of whom would reduce his price the moment a customer looked elsewhere, would produce the same graph."
+      },
+      {
+        "id": "rc-0095-p3",
+        "text": "What is not symmetrical is what the buyer knows. A rise in costs is public. It has been on the news, it has happened to every seller at once, and the buyer both expects the higher price and understands that hunting for a seller who escaped the increase is unlikely to repay the afternoon. So he pays, and the seller loses nothing by asking. A fall in costs is equally public in the wholesale market and invisible at the counter. Nothing tells the buyer that what he is being asked has become high relative to what a seller could now accept, so he does not begin to look, and while nobody is looking no seller loses anything by leaving the price where it was. The fall therefore waits on the buyers finding out, and finding out happens one buyer at a time."
+      },
+      {
+        "id": "rc-0095-p4",
+        "text": "An explanation of this kind earns its keep by saying where the pattern should be weaker, and this one does. Where the input price is quoted publicly and buyers can read it for themselves, and where the same buyer returns often enough to notice, the asymmetry should shrink, which is a thing the record can be asked about. Rival explanations are not excluded. Some of the gap is certainly the ordinary cost of changing a posted price, and some of it may be exactly the sharp practice people suspect. The pattern is still not evidence of sharp practice. An arrangement in which no seller ever conspires with another, and every seller would undercut the moment it paid him to, produces the same slow fall."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0095-q1",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "arg.rebuttal"
+      ],
+      "target_mistake": "keeping the appetite explanation as the passage's own because it is the one the reader arrived with and the passage discusses it at length",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument",
+        "scope"
+      ],
+      "stem": "Which of the following is NOT true, according to the passage?",
+      "options": {
+        "A": "A seller who raises his price when his costs rise can expect that his customers will already have heard why.",
+        "B": "The explanation offered does not require any seller to have an understanding with another, though it does not exclude one.",
+        "C": "The asymmetry should be smaller where buyers can read the input price for themselves.",
+        "D": "The size of the gap between the two speeds is a measure of how much the sellers want money."
+      },
+      "correct": "D",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The second paragraph quotes the suspicion and then disposes of it twice, once by logic and once by image. The gap is said to be the measure of their appetite; greed is a constant and a constant cannot explain a difference; and a market of saints would produce the same graph.",
+        "correct_reasoning": "The correct option is the suspicion the passage exists to refuse, stated in its own words. Wanting money is a thing every seller does at every moment, so it is present when prices rise quickly and equally present when they fall slowly, and the second paragraph says in terms that a constant cannot explain a difference. The other three options can each be traced to a sentence.",
+        "passage_anchor": "rc-0095-p2",
+        "question_type_note": "A NOT-true question is a verification exercise. Check each option against the text; the false one is often the explanation the passage was written to displace.",
+        "reading_habit": "When an author rejects a popular explanation, expect to meet it again among the options, stated plainly and without attribution. Ask whether the passage asserts it or answers it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The third paragraph says exactly this in other words. A rise in costs has been on the news and has happened to every seller at once, which is why the buyer expects the higher price and does not search.",
+            "seductive_element": "The claim is assembled from two separate sentences rather than stated in one, so a reader matching phrases will not find it whole and may conclude it was never made."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_broad",
+            "why_wrong": "The final sentence states it directly, describing an arrangement in which no seller conspires with another and every seller would undercut the moment it paid him to, and saying that this produces the same slow fall. The qualifying clause matches the passage's own admission that rival explanations are not excluded.",
+            "seductive_element": "It is the live rival, because it reads as a claim about how markets actually are rather than about what the argument requires, and the caution in its second half looks like an option writer's hedge."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "This is the fourth paragraph's own prediction, offered as the thing that earns the explanation its keep: where the input price is quoted publicly and the buyer returns often, the asymmetry should shrink.",
+            "seductive_element": "A reader who has taken the pattern to be universal will treat any statement about where it weakens as an invention, and the sentence is the least vivid in the passage."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0095-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.causal_claim",
+        "struct.cause_effect"
+      ],
+      "target_mistake": "timing the fall by something the sellers do, when the mechanism times it by something the buyers come to know",
+      "prediction_target": "The learner should predict that the answer will make the buyers, not the sellers, the thing the fall is waiting for.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument",
+        "scope"
+      ],
+      "stem": "It can be inferred that, on the author's account, the fall in a price after a fall in costs is completed",
+      "options": {
+        "A": "as soon as the sellers with the lowest costs decide to reduce their prices",
+        "B": "only when every seller has learned that his own costs have fallen",
+        "C": "as buyers learn, one at a time, that there is now something to be gained by looking around",
+        "D": "when the cost of changing a posted price has been recovered from the higher margin"
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph ends by naming the clock. The fall waits on the buyers finding out, and finding out happens one buyer at a time; until a buyer begins to look, no seller loses anything by leaving the price where it was.",
+        "correct_reasoning": "The correct option is that sentence stated as a consequence. The mechanism makes a seller's incentive to cut depend on the risk of losing a customer who is searching, so the pace of the fall is set by how quickly buyers come to know there is something to find. Nothing in the account waits on sellers, who are described as knowing about their own costs at once.",
+        "passage_anchor": "rc-0095-p3",
+        "question_type_note": "An inference about timing is answered by finding what the passage says the process is waiting for. Options that name a different actor have changed the mechanism.",
+        "reading_habit": "When an explanation turns on information, ask who has it and who does not. The asymmetry in knowledge is usually the whole of the argument, and it tells you which party sets the pace.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "A low-cost seller has no reason to cut while nobody is looking, which is the paragraph's central point. The decision to reduce a price is described as worth taking only when a customer might otherwise be lost, so this names the actor without the condition that moves him.",
+            "seductive_element": "Competition is normally described as starting with whoever can afford to move first, and that story is so familiar that its missing premise goes unnoticed."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Sellers are not the ignorant party. The passage says a fall in costs is public in the wholesale market and invisible at the counter, so the sellers know at once and the buyers do not.",
+            "seductive_element": "It matches the shape of an information story while putting the ignorance on the wrong side, and readers who have registered that somebody is in the dark may not check who."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The fourth paragraph grants that some of the gap is the ordinary cost of changing a posted price, which makes this a partial contributor rather than the account's own timing. The stem asks about the author's account, and his clock is the buyers' learning.",
+            "seductive_element": "It is the live rival, because the passage does concede this explanation in so many words, and a concession stated calmly is easily promoted to the author's position."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0095-q3",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "arg.description_vs_evaluation",
+        "comp.intent"
+      ],
+      "target_mistake": "reading a one-clause concession that some of the gap may be sharp practice as the author's own verdict on the suspicion",
+      "prediction_target": "The learner should be able to say: he thinks the suspicion an understandable one and shows that nothing about it is needed, using a joke about saints.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "main_idea"
+      ],
+      "stem": "The author's attitude towards the popular suspicion that the pattern shows sharp practice is best described as",
+      "options": {
+        "A": "treating it as natural and unnecessary, since sellers of perfect virtue would produce the same pattern",
+        "B": "sympathetic to it, since he takes the suspicion to be correct in most of the markets that he considers",
+        "C": "scornful of a public that reasons about prices from nothing better than its own irritation",
+        "D": "indifferent, treating a question about motive as one that economics cannot settle"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The evaluative work is done by two sentences. The suspicion is called natural enough, which grants the impulse without granting the conclusion; and the paragraph ends with a market of saints producing the same graph, which is at once the joke and the argument.",
+        "correct_reasoning": "The correct option keeps both halves of what the passage does. The author does not think the customers foolish: he calls the suspicion natural enough and later allows that some of the gap may indeed be sharp practice. He thinks the inference unnecessary, because his own mechanism generates the whole pattern with nobody behaving badly at all, which is exactly what the sentence about a market of saints is for.",
+        "passage_anchor": "rc-0095-p2, rc-0095-p4",
+        "question_type_note": "Tone is two decisions, valence and intensity, and a passage that jokes about its opponents' conclusion is neither neutral nor hostile. Find the sentence that carries the joke.",
+        "reading_habit": "Look for the place where an author makes his argument and his attitude in the same sentence. A vivid counter-example is usually doing both jobs, and it fixes the tone more reliably than any adjective in the passage.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "The concession runs the other way. The passage allows that some of the gap may be sharp practice and then denies that the pattern is evidence of it, which is a refusal of the suspicion's inference rather than agreement with its conclusion.",
+            "seductive_element": "It is the live rival, because the fourth paragraph really does leave room for the suspicion to be right in particular cases, and readers convert a permitted possibility into an endorsement."
+          },
+          {
+            "option": "C",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "The suspicion is called natural enough in the sentence that introduces it, and the customers are credited with noticing a real regularity for themselves. Nothing here treats the public as reasoning badly, only as reasoning from a premise that cannot do the work.",
+            "seductive_element": "The saints sentence is teasing, and teasing at an argument reads as contempt for the people who hold it."
+          },
+          {
+            "option": "D",
+            "trap_type": "weakened_version",
+            "why_wrong": "The author settles a good deal. He rules out appetite as an explanation on logical grounds, supplies a mechanism of his own, and states a prediction the record could be asked about, none of which is the behaviour of someone declining to decide.",
+            "seductive_element": "The paragraph about rival explanations is generous enough to look like a refusal to choose, and evenhandedness is habitually mistaken for having no position."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0095-q4",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.phenomenon_explanation",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "promoting one of the conceded partial explanations to the status of the passage's own account",
+      "prediction_target": "The learner should be able to compress the passage first: the gap comes from what buyers do not know, and no bad behaviour is needed to produce it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Sellers raise prices quickly and lower them slowly because they prefer to keep the difference, and competition between them is too weak to prevent it.",
+        "B": "The asymmetry is produced by what the buyer knows rather than by what the seller intends, and would appear without any collusion at all.",
+        "C": "The cost of changing a posted price explains why prices do not move as soon as costs do, in both directions alike.",
+        "D": "The buyer's information sets the pace of the fall, and sellers hold the price up by agreeing among themselves."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage has two movements. The second paragraph removes intention from the explanation by pointing out that a constant cannot explain a difference, and the third supplies what varies instead, which is what the buyer knows in each direction. The fourth then insists that the pattern is not evidence of anything the second paragraph ruled out.",
+        "correct_reasoning": "The correct option carries both halves, and each paragraph is needed for it. The phenomenon is stated, appetite is disqualified as symmetrical, the information asymmetry is supplied as the thing that does vary, and the last paragraph makes the negative claim explicit by describing a market of non-conspirators producing the same slow fall. An option that keeps only the mechanism loses the point of the whole second paragraph.",
+        "passage_anchor": "rc-0095-p2, rc-0095-p3",
+        "question_type_note": "In a passage that explains a phenomenon, the main idea is the explanation plus whatever the explanation displaces. Test each option by asking which paragraph it makes unnecessary.",
+        "reading_habit": "When an author shows that a popular cause cannot produce an effect, keep his reason in the summary. The negative half of such an argument is usually the half the questions are built on.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the natural suspicion set out at the head of the second paragraph so that it can be dismantled in the next three sentences, and the passage denies the second clause as well by describing a market in which every seller would undercut the moment it paid him to.",
+            "seductive_element": "It is the explanation the reader arrives with and the one most people would give, and it is stated in the passage without any signal that it belongs to somebody else."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "The fourth paragraph offers this as one contributor among others, conceded in a single clause, and the passage nowhere says it operates in both directions alike. Raised to the main idea it displaces the author's own mechanism and makes the whole third paragraph into background.",
+            "seductive_element": "It is the live rival, because it is a real explanation the passage endorses in part, and partial endorsements are easily read as the author's settled view."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The first clause is the passage's own conclusion and the second is what its last paragraph denies, saying that a market in which no seller ever conspires, and every seller would undercut the moment it paid him to, produces the same slow fall.",
+            "seductive_element": "The opening clause is exactly right, which carries a reader straight past a second clause restoring the accusation the whole passage was written to remove."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "symmetrical",
+      "passage_use": "as an explanation is that it is symmetrical",
+      "meaning_here": "the same in both directions, and so unable to favour one",
+      "difficulty": "medium"
+    },
+    {
+      "word": "asymmetry",
+      "passage_use": "the asymmetry should shrink",
+      "meaning_here": "the difference between how a thing behaves in two directions",
+      "difficulty": "medium"
+    },
+    {
+      "word": "wholesale",
+      "passage_use": "equally public in the wholesale market",
+      "meaning_here": "the trade between suppliers rather than with the public",
+      "difficulty": "medium"
+    },
+    {
+      "word": "undercut",
+      "passage_use": "every seller would undercut the moment it paid him to",
+      "meaning_here": "sell below a rival's price in order to take his trade",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A complaint everybody has made is answered by a single logical observation about what a constant can and cannot explain. Find that observation, because the rest of the passage is built on it and two of the four questions are decided by it.",
+    "one_sentence_summary": "Prices climb faster than they fall, and the natural explanation by sellers' appetite fails because appetite pulls in both directions and a constant cannot produce a difference, so the asymmetry must come from the one thing that does differ between the two cases, namely what the buyer knows, since a cost increase is public and makes searching pointless while a cost reduction is invisible at the counter and nobody searches until he learns there is something to find, which means the pattern would appear in a market where nobody behaved badly at all.",
+    "main_idea": "When costs rise, shelf prices rise at once; when costs fall, they drift down for months. The usual explanation is greed, and greed cannot be the answer, because a seller who wants money wants it in both directions and a constant cannot explain a difference. What does differ is the buyer's information. A cost rise is public, so he expects the new price and does not shop around. A cost fall is invisible to him, so he does not start looking, and while nobody is looking no seller gains by cutting. The fall waits on buyers finding out, one at a time.",
+    "simple_explanation": "You have noticed this yourself. When the price of oil or wheat or borrowing goes up, the price you pay goes up almost immediately. When it comes back down, the price you pay takes ages to follow. It happens with fuel, with groceries, with bank rates, and it annoys everybody.\n\nThe obvious explanation is that shops are greedy: quick to take, slow to give, and the delay is them pocketing the difference.\n\nHere is the problem with that. Greed works in both directions. A shopkeeper who loves money has just as much reason to cut his price when he is worried about losing you to the shop next door as he has to raise it when his costs let him. Greed is always there, in both situations, at the same strength. Something that is always the same cannot explain why two situations come out differently. The author puts it sharply: a market full of saints, each of whom would drop his price the second a customer glanced elsewhere, would produce exactly the same graph.\n\nSo what is different between the two cases? What the customer knows.\n\nWhen costs go up, everybody knows. It has been on the news. It has happened to every shop at once. So you expect the higher price, and you also know that spending an afternoon looking for a shop that somehow escaped the increase is almost certainly a waste of time. You pay, and the shop loses nothing by charging.\n\nWhen costs go down, the people in the trade know immediately, and you do not. Nothing at the till tells you that what you are being asked has become high compared with what a shop could now afford to accept. So you do not start looking. And as long as nobody is looking, no shop loses anything by leaving the price alone. The price only comes down as customers gradually find out there is something to be gained by shopping around, and that happens one customer at a time.\n\nThe author then does the thing a good explanation should do: he says where his own account predicts the effect will be weaker. Where the underlying price is published and customers can read it, and where the same customer comes back often enough to notice, the gap should shrink. That is something you could go and check.\n\nHe is also careful not to claim too much. Some of the delay is simply the cost of changing the prices on the shelf. Some of it may really be sharp practice. What he refuses is the leap from the pattern to the accusation, because a market in which nobody ever conspires, and everybody would undercut the moment it paid them to, produces the very same slow fall.",
+    "why_difficult": "The passage asks the reader to give up an explanation that feels obviously right, and the argument against it is logical rather than empirical, which makes it easy to skim past; readers who miss the sentence about a constant explaining a difference end up thinking the author merely prefers a different story. The second difficulty is the fourth paragraph, which concedes two rival explanations in consecutive clauses, so that both are available to be promoted to the passage's own view. The third is the tone, which is lightly amused rather than severe, and which a reader looking for either indignation or neutrality will mislabel.",
+    "author_intention": "To take a familiar grievance seriously enough to explain it, while removing the accusation it usually carries, so that the reader stops reading a graph as evidence of anybody's character and starts asking what each side of a transaction is in a position to know.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0095-p1",
+        "role": "States the pattern",
+        "note": "Prices go up quickly and come down slowly. It happens in fuel, groceries and bank rates, and customers notice it themselves."
+      },
+      {
+        "paragraph_id": "rc-0095-p2",
+        "role": "Disqualifies the usual cause",
+        "note": "Greed cannot be the reason, because it pulls both ways. A constant cannot explain a difference. Saints would produce the same graph."
+      },
+      {
+        "paragraph_id": "rc-0095-p3",
+        "role": "Supplies the mechanism",
+        "note": "A cost rise is public and makes searching pointless. A cost fall is invisible at the counter, so nobody searches, and nobody has to cut."
+      },
+      {
+        "paragraph_id": "rc-0095-p4",
+        "role": "Predicts and limits",
+        "note": "Where the input price is published and buyers return often, the gap should shrink. Other causes are allowed, but the pattern is not proof of any of them."
+      }
+    ],
+    "tone_progression": "It opens flatly descriptive, turns lightly comic as the greed explanation is taken apart and a market of saints is produced, becomes patient and mechanical through the account of what each party knows, and ends careful, granting rivals their share and refusing the inference the whole essay was written against.",
+    "key_transitions": [
+      "'Greed is a constant, and a constant cannot explain a difference.' (paragraph 2) — the popular explanation is disqualified in one line.",
+      "'What is not symmetrical is what the buyer knows.' (opening of paragraph 3) — the replacement arrives, and the rest of the paragraph is its working out.",
+      "'The pattern is still not evidence of sharp practice.' (paragraph 4) — concessions are made and then fenced off from the conclusion."
+    ],
+    "misunderstanding": "The commonest wrong model has the author saying that shops are not greedy, which he never claims; he says greed is present in both directions and therefore cannot be what makes them different. The second wrong model promotes one of his conceded rivals, usually the cost of changing a posted price, into the passage's explanation, which leaves the entire third paragraph doing nothing. Both misreadings survive because the fourth paragraph is generous, and generosity in a closing paragraph is regularly mistaken for the author's settled position.",
+    "traps_summary": "This set offers the rejected appetite explanation as the passage's own, a conceded partial cause as the mechanism, the sellers rather than the buyers as the thing the fall waits for, and sympathy with a suspicion the passage takes apart. Asking whether the author asserts a thing or merely allows it answers all four.",
+    "reading_lesson": "When a passage rejects an explanation on logical rather than factual grounds, find the sentence that does the work, usually one saying that the proposed cause is present in both cases and so cannot distinguish them, because every question about the author's position will turn on whether you kept that sentence. The companion habit is to treat a closing paragraph's concessions as loans: an author who says other explanations are not excluded has not adopted any of them, and the option that promotes one of them will look like the most reasonable answer on the page.",
+    "real_world": "The same asymmetry of information governs any charge that is easy to notice going up and hard to notice coming down: a mobile tariff, an insurance renewal, a subscription that quietly stopped being competitive, a savings rate that never quite follows the headline. In each case the useful question is not whether the seller is honest but whether anything in your week would tell you that it is time to look.",
+    "takeaway": "A price falls at the speed at which its buyers find out there is something to be gained by looking.",
+    "reflection_question": "Which of the prices you pay every month would you not notice becoming uncompetitive, and what would it take for you to find out?"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0019",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "Breathing After Dark",
+    "theme": "why some desert plants take in gas at night and pay for it in growth",
+    "estimated_time_sec": 85,
+    "clue_types": [
+      "connective_explicit",
+      "article_given_new",
+      "temporal_sequence"
+    ],
+    "primary_trap": "right_idea_wrong_position",
+    "reasoning_patterns": [
+      "disc.transition_word",
+      "disc.problem_then_solution",
+      "disc.given_new",
+      "disc.cause_effect"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 3,
+      "competing_slots": 4,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "seat a solution between the problem that provokes it and the new difficulty it creates",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General plant physiology explained from first principles in the text; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "A problem-solution chain in which the missing sentence is the first move; the sentence after it says 'the hour the pores are open', which is the clue that fixes the seat, and the later storage sentence would repeat the night opening if the sentence were seated beyond it.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about sunlight, since that sentence speaks of open pores and the missing sentence explains the opening. It fails because the phrase is 'the hour the pores are open', which treats the timing as settled, and because the difficulty described there exists only as a consequence of the night opening: the problem cannot precede the move that creates it. The opening slot is the other candidate and is refused by 'therefore', which needs a ruinous exchange stated above it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A leaf cannot take in carbon dioxide without opening pores through which water escapes, and in a desert that exchange is ruinous."
+      },
+      {
+        "n": 2,
+        "text": "The difficulty is that sunlight, which the plant needs for the rest of the process, is absent at the hour the pores are open."
+      },
+      {
+        "n": 3,
+        "text": "The answer is chemical storage: the gas is fixed after dark into an acid, held overnight, and released next day behind closed pores for the light to work on."
+      },
+      {
+        "n": 4,
+        "text": "The arrangement is costly, since building and unbuilding the acid takes energy a plant in a wetter place can spend on growing."
+      },
+      {
+        "n": 5,
+        "text": "So the trick is common where water is scarce and rare where it is not, and its users grow slowly even in a generous year."
+      }
+    ]
+  },
+  "missing": {
+    "text": "Some desert plants therefore open their pores at night, when the air is cool and the water lost per unit of gas taken in is far smaller.",
+    "position": 1,
+    "function": "the move that answers the ruinous daytime exchange and creates the timing problem the next sentence states"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Some desert plants therefore open their pores at night, when the air is cool and the water lost per unit of gas taken in is far smaller.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "Before sentence 1",
+      "C": "After sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": {
+      "A": 3,
+      "B": 0,
+      "C": 1,
+      "D": 2
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "'Therefore' needs a cost already stated, and the first sentence states it: a pore that admits gas loses water, which in a desert is ruinous. The sentence after the slot then says sunlight is absent 'at the hour the pores are open' — a phrase that assumes the pores have been put on a night shift, which only the missing sentence does. The seat between the ruinous exchange and the difficulty that night working creates is fixed by the connective behind it and the assumption in front of it.",
+    "clue_before": "Sentence 1 supplies the cost that 'therefore' points at: gas cannot be taken in without losing water, and in a desert the loss is ruinous.",
+    "clue_after": "Sentence 2 speaks of 'the hour the pores are open' and calls the absence of sunlight a difficulty, both of which presuppose that the opening has been moved to the night.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The storage sentence has already said the gas is fixed after dark and released next day, so a sentence announcing that the pores open at night repeats what the reader has just been told, and the two sentences before it are left referring to open pores and a difficulty that nothing has produced.",
+        "seductive_element": "Night appears in both sentences, and a reader who has just met the acid may welcome a reminder of when it is made."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_connective",
+        "why_wrong": "A paragraph cannot open with 'therefore': the word points at a reason that has to be on the page already, and the reason — the ruinous exchange of water for gas — is stated in the sentence that would follow.",
+        "seductive_element": "The sentence names the phenomenon the paragraph is about, and a reader placing by subject rather than by connective will start there."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is needed, but one seat earlier: here the difficulty about sunlight has already been raised, and that difficulty exists only because the pores now open at night, so the paragraph would state the problem created by a move before making the move.",
+        "seductive_element": "The sentence about sunlight mentions open pores, so an account of why they are open seems to be the natural next line."
+      }
+    ],
+    "method": "In a problem-solution paragraph, place by the chain rather than by the topic: every solution answers a cost stated above it and creates the difficulty stated below it. A connective such as 'therefore' or 'so' fixes the first half of that chain, and a phrase in the next sentence that treats something as already arranged fixes the second."
+  },
+  "mentor": {
+    "challenge": "One sentence calls the absence of sunlight a difficulty. Ask what has to have happened for that to be a difficulty at all.",
+    "takeaway": "A solution sits after the problem it answers and before the new problem it makes."
+  }
+}

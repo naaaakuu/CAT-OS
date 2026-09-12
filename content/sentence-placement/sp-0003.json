@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0003",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "mathematics-logic",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "A Guarantee You Cannot Cash",
+    "theme": "what a proof of existence that produces no example does and does not license",
+    "estimated_time_sec": 85,
+    "clue_types": [
+      "article_given_new",
+      "lexical_repetition",
+      "connective_implicit"
+    ],
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": [
+      "disc.given_new",
+      "disc.claim_then_evidence",
+      "disc.topic_progression",
+      "disc.scope_continuity"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 3,
+      "competing_slots": 3,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "place a sentence by the definite noun phrase that the following sentence can only use once the sentence has supplied it",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General discussion of non-constructive proof; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The forward clue is a definite noun phrase — 'The contradiction' — that nothing but the missing sentence introduces; the backward clue is the class of proofs the first sentence names, which 'the usual route' has to be the route of. The opening slot is the live rival and it widens the paragraph from one kind of proof to proof in general.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the opening slot, where the sentence reads as a crisp statement of how mathematical argument works and lets the paragraph begin with a method. Two things kill it: 'the kind' has no kind to point back at before sentence 1 names one, and as an opening the sentence describes every proof by contradiction rather than the narrow class the whole paragraph is about, which the last sentence explicitly narrows again. The slot after sentence 2 is the other candidate, because a sentence that derives a contradiction seems to explain the contradiction just mentioned; but sentence 2 says 'The contradiction' as something already known, and nothing before it supplies one.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A proof can establish that something exists without producing a single example of it."
+      },
+      {
+        "n": 2,
+        "text": "The contradiction is decisive and also silent: it rules out a world in which the object is missing, and says nothing about where the object sits."
+      },
+      {
+        "n": 3,
+        "text": "Anyone who wanted the object itself is left where they began, holding a guarantee they cannot cash."
+      },
+      {
+        "n": 4,
+        "text": "It does not follow that such proofs are second-rate, since knowing that a search must succeed changes how long a sensible person is willing to search."
+      },
+      {
+        "n": 5,
+        "text": "What follows is narrower: a proof of this kind settles a question about what there is, not a question about any method of finding it."
+      }
+    ]
+  },
+  "missing": {
+    "text": "The usual route is to assume that nothing of the kind exists and then to derive a contradiction from that assumption alone.",
+    "position": 1,
+    "function": "the mechanism behind the claim in sentence 1, and the sentence that introduces the contradiction sentence 2 treats as given"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The usual route is to assume that nothing of the kind exists and then to derive a contradiction from that assumption alone.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "Before sentence 1",
+      "C": "After sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": {
+      "A": 3,
+      "B": 0,
+      "C": 1,
+      "D": 2
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence has a hook at each end. 'The usual route' is the route of something, and the only thing named as having a route is the class of proofs in sentence 1 — proofs that establish existence without producing an example. At the other end, sentence 2 opens with 'The contradiction', a definite noun phrase that treats a contradiction as already introduced; nothing in the paragraph introduces one except the missing sentence. The seat immediately after sentence 1 is the only one that answers both demands at once.",
+    "clue_before": "Sentence 1 names a kind of proof — existence established without an example — which is what 'the usual route' and 'nothing of the kind' must point back at.",
+    "clue_after": "Sentence 2 begins 'The contradiction is decisive', assuming a contradiction the reader has already met; the missing sentence is where that contradiction is derived.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is certainly needed by this paragraph, but by sentence 3 the paragraph has already spent two sentences on what the contradiction does and does not deliver; explaining where the contradiction came from after 'a guarantee they cannot cash' leaves sentences 2 and 3 talking about a step the reader has not been shown.",
+        "seductive_element": "It reads like a clarification a careful writer might add once the consequences have been laid out, and 'that assumption' sits comfortably beside the abstract talk of guarantees."
+      },
+      {
+        "option": "B",
+        "trap_type": "scope_jump",
+        "why_wrong": "As an opening, the sentence makes the paragraph a description of proof by contradiction generally, whereas everything after it is about one narrow class of results — and the final sentence goes out of its way to say the claim is narrower. 'Nothing of the kind' also has no kind to point at before sentence 1 supplies one.",
+        "seductive_element": "A paragraph about a method can plausibly begin with the method, and the sentence is the most concrete line available for an opening."
+      },
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Two sentences about contradiction sitting side by side read perfectly well here, and the sentence that follows carries on without complaint; what breaks is behind the slot, since the paragraph has already called it 'The contradiction' one sentence before anything produced one.",
+        "seductive_element": "A reader who has just been told that a contradiction is decisive naturally wants to know how it was reached, and this sentence answers exactly that."
+      }
+    ],
+    "method": "Work from the definite noun phrases. A sentence that begins 'The contradiction', 'The new firm', 'The objection' is claiming that something has already been introduced; find the sentence that introduces it and the slot is fixed from in front. Then check the other end: what does the candidate sentence's own 'the kind', 'this reason', 'such cases' need behind it? A seat that satisfies only one end is a trap."
+  },
+  "mentor": {
+    "challenge": "One sentence in this paragraph uses 'The contradiction' as though you had already met one. You have not — unless the missing sentence sits above it.",
+    "takeaway": "A definite article is a receipt: it says the thing was handed over earlier. Find the hand-over and you have found the slot."
+  }
+}

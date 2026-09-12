@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0009",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "religion-belief",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "Written Against Somebody",
+    "theme": "a creed as the negative record of the positions its authors were refusing",
+    "estimated_time_sec": 120,
+    "clue_types": ["demonstrative", "connective_implicit", "article_given_new"],
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.demonstrative", "disc.rhetorical_pivot", "disc.topic_progression"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "distinguish the sentence that states a thesis from the sentence that evidences it, and place each at the slot whose function it performs",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of creeds and doctrinal formulation; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Premium: the paragraph is thesis, evidence, two consequences, restatement, and three of the four slots are on topic. The decisive word is 'this' in the evidence sentence, which can only look backwards at a claim the evidence supports.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about redundant-looking clauses, where the sentence reads beautifully as the conclusion drawn from that evidence. It is refused by four words: that sentence calls the clauses 'the best evidence for this', and evidence for a claim cannot precede the claim it is offered for. The final slot is the second rival, and it fails because the closing sentence already says the same thing in other words, so the paragraph would deliver its verdict twice in succession.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A creed looks like a summary of what a community believes, and is almost always read as one." },
+      { "n": 2, "text": "The clauses that look most redundant are the best evidence for this: a phrase insisting on two things nobody had thought to separate marks the place where somebody had separated them." },
+      { "n": 3, "text": "This is why creeds accumulate rather than tighten: each generation's argument leaves its sediment, and no later council can drop a clause without appearing to concede the point it was written to deny." },
+      { "n": 4, "text": "It also explains the silences, since a creed says nothing about questions its authors never had to fight over." },
+      { "n": 5, "text": "A confession, read this way, is less a portrait of a faith than a map of the places where it was contested." }
+    ]
+  },
+  "missing": {
+    "text": "Read beside the disputes of its own decade, it turns out to be a list of sentences somebody was refusing to say.",
+    "position": 1,
+    "function": "the turn that replaces the received reading in sentence 1 with the claim the following sentence is evidence for"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Read beside the disputes of its own decade, it turns out to be a list of sentences somebody was refusing to say.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 4, "D": 1 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence's 'it' needs a creed, and its 'turns out to be' needs a prior reading to correct; the first sentence supplies both, saying what a creed looks like and how it is almost always read. The sentence after the slot then calls the redundant-looking clauses 'the best evidence for this' — and evidence is offered for a claim, so the claim has to stand above it. The claim that clauses record refusals is exactly what redundant-looking clauses would evidence, while the received reading in the first sentence is not something that evidence would support. Only the seat between them satisfies the correction behind and the evidence in front.",
+    "clue_before": "Sentence 1 states the reading the paragraph means to overturn — a creed read as a summary of belief — which is what 'it turns out to be' has to be turning out against.",
+    "clue_after": "Sentence 2 calls the redundant-looking clauses 'the best evidence for this', and a claim must already be on the page for evidence to be evidence for it.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The topic is right and the sentence sounds like the conclusion the clause evidence has earned, but the slot needs a consequence and this is the thesis: the sentence above it has already called those clauses evidence for a claim, and the claim would then arrive after its own support.",
+        "seductive_element": "A vivid piece of evidence followed by the general point it establishes is the commonest shape in expository prose, and the two sentences share their subject exactly."
+      },
+      {
+        "option": "B",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "By this point the paragraph has started drawing out consequences — why creeds accumulate, and next why they fall silent — and a restatement of the governing claim interrupts that development; the sentence about silences begins 'It also explains', which continues the previous consequence and not a thesis restated between them.",
+        "seductive_element": "The sentence sounds like a fair summary of the accumulation argument, and 'somebody was refusing to say' chimes with the point a council cannot concede."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "Placed immediately before the closing sentence, the claim is made twice over: the last sentence already says a confession is a map of the places where a faith was contested, which is the same verdict in other words, and the evidence sentence is still left pointing at a claim that has not been made.",
+        "seductive_element": "Two adjacent sentences in the same key sound like a deliberate crescendo rather than a repetition."
+      }
+    ],
+    "method": "Name the job of each sentence in the paragraph — thesis, evidence, consequence, restatement — before you try any slot. A sentence that states a general claim goes above the sentence that calls itself evidence, and a sentence that draws a consequence goes below it. When two slots both read well, the word 'this', 'such' or 'that' in a neighbouring sentence usually settles which way the support is flowing."
+  },
+  "mentor": {
+    "challenge": "One sentence in this paragraph describes itself as evidence. Ask what claim it could be evidence for, and where that claim has to stand.",
+    "takeaway": "Evidence follows the claim it supports; a paragraph never argues for a proposition it has not yet made."
+  }
+}

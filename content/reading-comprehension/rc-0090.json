@@ -1,0 +1,413 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0090",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "evidence-anchoring",
+      "scope-control",
+      "vocabulary-in-context"
+    ],
+    "word_count": 512,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "weaken",
+      "phrase_in_context"
+    ],
+    "theme": "the maxim that chance favours the prepared mind held against the objection that it is assembled from its successes and defined by its outcome, and settled by giving up the claim that preparation makes accidents likelier while keeping the claim that a precise expectation is what lets an anomaly be taken for a finding rather than a fault, whose only practical consequence is about how a laboratory spends time",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-06",
+    "reviewer_notes": "A dialectic in which the author gives the objectors half of the original claim and keeps the other half, so both the famous maxim and its debunking are available as wrong answers to the main idea question. The final paragraph is where the practical consequence lives, and it is deliberately smaller and less quotable than the moral the histories draw.",
+    "length_class": "medium",
+    "structure": "dialectic",
+    "viewpoints": 3,
+    "tone": "argumentative, concessive by halves, practical at the end",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.claim_counterclaim",
+      "struct.pivot",
+      "struct.contrast",
+      "struct.qualification",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "comp.reference_tracking",
+      "comp.organization",
+      "comp.purpose",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.concession",
+      "arg.qualification",
+      "arg.generalization",
+      "arg.evidence_vs_conclusion",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "cr.weaken",
+      "cr.sampling",
+      "scope.condition",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about closer observation, which every version of the maxim in popular circulation implies and which the third paragraph denies in a subordinate clause, saying the unprepared observer is not watching less closely. Q2's rivals are the two positions the passage adjudicates between, the histories' moral about alertness and the objectors' verdict that the claim cannot be tested; the passage gives each of them exactly half and its own sentence about time belongs to neither. Q3's rival is the option about anomalies turning out to be faults, which sounds damaging and is in fact the third paragraph's own premise, since the working assumption is stated there to be repair. Q4's rival is the option about the field lacking settled theory, which moves the claim from the researcher's own expectation to the state of a discipline, whereas the sentence is about what a particular observer holds at a particular bench.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "anomaly",
+      "serendipity",
+      "allocate",
+      "vaguer"
+    ]
+  },
+  "passage": {
+    "title": "The Plate Spoiled Overnight",
+    "reading_time_min": 2.9,
+    "paragraphs": [
+      {
+        "id": "rc-0090-p1",
+        "text": "Chance favours the prepared mind. The sentence is a century and a half old and has never had to defend itself, and the histories supply its examples in bulk: a plate spoiled overnight, a dish contaminated by something that drifted in at a window, an instrument that would not stop humming however carefully it was cleaned. In each account an accident arrives, a mind ready for it turns the accident into a discovery, and the moral drawn is that discovery cannot be organised, so that the most a laboratory can do is keep its people alert."
+      },
+      {
+        "id": "rc-0090-p2",
+        "text": "The objection to this is stronger than its comfortable fame suggests. The claim is assembled entirely out of the cases in which the accident paid. Nothing is heard from the thousand equally prepared minds whose dishes were also spoiled and whose careers produced nothing, and nothing from the unprepared who noticed something anyway and were written up as lucky. A rule built only out of its successes is not a rule but a description of what success looked like afterwards. The word prepared makes matters worse, because it is fixed by the outcome: whoever saw it was prepared and whoever missed it was not, so no case can be brought against the claim, since no case is allowed to count as one."
+      },
+      {
+        "id": "rc-0090-p3",
+        "text": "Both parties are arguing about the wrong term. Preparation does not make the accident likelier, which is the claim the objection destroys, and it should be given up without regret because nothing depends on it. What preparation changes is what the accident is taken for. An anomaly arrives in every laboratory as a nuisance: something has gone wrong with the apparatus, or with the sample, or with the night's work, and the working assumption is repair. To treat it instead as a finding is a decision, and what makes that decision available is holding a theory precise enough to say that this particular result should not have happened. The unprepared observer sees a mess, not because he is watching less closely, but because he has nothing that the mess contradicts."
+      },
+      {
+        "id": "rc-0090-p4",
+        "text": "Two things follow, and only one of them is the familiar moral. Serendipity, described this way, is a property of the response and not of the event, so it cannot be planned for directly; there is nothing to schedule. A response, however, takes time, and time is the one thing a laboratory does allocate. An anomaly can be followed only by somebody permitted to stop doing the work he is paid for, for a week, without explaining himself twice. It is fair to say that this account is also hard to test: what the same researcher would have made of the same anomaly while holding a vaguer theory is not something anybody can observe. Their conclusion still does not follow. An empty claim has no consequences; this one has a consequence, and it is not the consequence the histories draw. The useful instruction is not to tell researchers to be alert. It is to buy them the week in which alertness can be afforded."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0090-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "scope.condition"
+      ],
+      "target_mistake": "reading preparation as heightened attention, which is the popular sense of the maxim and the one the third paragraph explicitly sets aside",
+      "prediction_target": "The learner should predict that the answer will name a precise expectation the result can contradict, since that is what the paragraph says makes the decision available.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred from the third paragraph that an anomaly is more likely to be treated as a finding by a researcher who",
+      "options": {
+        "A": "has been trained to observe more closely than his colleagues have been",
+        "B": "holds a theory precise enough to rule this particular result out beforehand",
+        "C": "has met a similar accident before and remembers what came of it then",
+        "D": "expects the apparatus to fail, and is therefore not surprised when something goes wrong"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The paragraph states the mechanism and then guards it. What makes the decision available is holding a theory precise enough to say that this particular result should not have happened; and the observer who misses it is said to do so not because he is watching less closely but because he has nothing the mess contradicts.",
+        "correct_reasoning": "The correct option is that mechanism restated. The anomaly can only register as a finding if something in the researcher's own expectations forbids it, because otherwise the default reading, that the apparatus or the sample has misbehaved, has nothing to argue with. The passage's second clause is there precisely to rule out the attentional reading, which is why the inference is forced rather than merely reasonable.",
+        "passage_anchor": "rc-0090-p3",
+        "question_type_note": "An inference question is decided by the sentence that names a mechanism, and by any clause the author has attached to keep a rival mechanism out.",
+        "reading_habit": "When an author explains why somebody fails at something, read the clause beginning not because. It is placed there to forbid exactly the explanation a reader was about to supply.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "The paragraph denies this in the same sentence that states the mechanism, saying the unprepared observer is not watching less closely. Attention is the popular reading of the maxim and it is the reading the author is at pains to remove.",
+            "seductive_element": "It is the live rival, because keeping people alert is the moral the first paragraph reports, and most readers arrive with that version of the maxim already installed."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Prior experience of accidents is nowhere in the passage. What is required is a theory that forbids the result, which a researcher may hold on his first day and which a veteran of many spoiled plates may not hold at all.",
+            "seductive_element": "Experience is the obvious candidate for what makes one observer better than another, and the histories the passage cites are full of practised hands."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Expecting failure destroys the mechanism rather than supplying it. The passage says the working assumption is already repair, and a researcher who expects the apparatus to misbehave has nothing the result can contradict.",
+            "seductive_element": "Readiness for the unexpected sounds like exactly what preparation should mean, and the word surprised belongs to the same family of ideas the maxim trades in."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0090-q2",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.claim_counterclaim",
+        "arg.concession"
+      ],
+      "target_mistake": "handing the passage to one of the two positions it adjudicates, rather than to the division it makes between them",
+      "prediction_target": "The learner should be able to say before the options: half the old claim goes, half survives, and what survives turns out to be about how a laboratory spends its time.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Preparation cannot be arranged in advance, so discovery cannot be planned, and a laboratory can only keep its people alert.",
+        "B": "The claim that chance favours the prepared mind is drawn only from its successes and so, although memorable, cannot be tested.",
+        "C": "Anomalies arrive constantly in laboratories, and are very often caused by faults in the apparatus or the sample rather than by anything in nature.",
+        "D": "Preparation decides not the odds of an accident but what it is taken for, so what a laboratory must supply is time rather than vigilance."
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph splits the original claim in two, giving away the half about likelihood and keeping the half about interpretation. The fourth then draws the one consequence that survives the split, saying an anomaly can be followed only by somebody permitted to stop his paid work for a week.",
+        "correct_reasoning": "The correct option holds the split and the consequence together. Every paragraph is needed for it: the maxim supplies the claim, the objection removes the half about likelihood, the third paragraph names what preparation actually does, and the fourth converts that into a statement about allocated time. An option that keeps only the maxim or only the objection makes two of the four paragraphs redundant.",
+        "passage_anchor": "rc-0090-p3, rc-0090-p4",
+        "question_type_note": "In a passage that adjudicates, the main idea is the verdict rather than either of the positions judged. Test each option by asking which paragraphs it would let you skip.",
+        "reading_habit": "When an author concedes half a claim and keeps the other half, write both halves down. The main idea of such a passage is always the boundary between them, never one side of it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the moral the first paragraph reports the histories as drawing, and the last paragraph refuses it by name, saying the useful instruction is not to tell researchers to be alert but to buy them the week. The claim that preparation cannot be arranged is the passage's reason for talking about time instead.",
+            "seductive_element": "It is the most quotable sentence in the passage and arrives first, so a reader who fixes the thesis early takes a reported moral for the author's own."
+          },
+          {
+            "option": "B",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The author grants the sampling objection against one half of the maxim and then refuses its conclusion in terms, saying an empty claim has no consequences and this one has a consequence. Untestability is conceded about his own account, not adopted as the verdict.",
+            "seductive_element": "It is the live rival, because the second paragraph is the passage's most forceful, and the author himself admits in the fourth that his version is hard to test."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This is a premise of the third paragraph, where the working assumption on meeting an anomaly is said to be repair. It is offered to explain why interpreting an anomaly as a finding takes a decision, and it settles nothing about what makes that decision possible.",
+            "seductive_element": "It is the only concrete generalisation in the passage about what actually happens in laboratories, and concrete claims feel like the substance of an argument."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0090-q3",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.weaken",
+        "arg.evidence_vs_conclusion",
+        "cr.sampling"
+      ],
+      "target_mistake": "attacking a premise the account already grants, or attacking the practical consequence in the last paragraph rather than the account in the third",
+      "prediction_target": "The learner should predict that a weakener will break the link between holding a precise theory and following an anomaly up, without denying that anomalies are usually faults.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most weaken the account given in the third paragraph?",
+      "options": {
+        "A": "Most anomalies recorded in laboratory notebooks are found on investigation to be faults in the apparatus.",
+        "B": "Several celebrated discoveries were made by researchers with no formal training in the field concerned.",
+        "C": "Researchers holding no definite expectation followed up anomalies just as often as those whose theories ruled the result out.",
+        "D": "Laboratories that set aside unallocated time publish no more papers than laboratories that do not."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The account has a single load-bearing link: a precise expectation is what converts an anomaly from a fault to be repaired into a result to be pursued. Everything else in the paragraph, including the claim that anomalies usually are faults, is supplied as background to that link.",
+        "correct_reasoning": "The correct option breaks the link directly. If researchers with no definite expectation pursue anomalies at the same rate as those whose theories forbid the result, then the precise theory is not what makes the pursuit available, and the paragraph's explanation of why the unprepared observer sees only a mess loses its ground. Nothing in the option denies any fact the paragraph asserts, which is what a weakener should look like.",
+        "passage_anchor": "rc-0090-p3",
+        "question_type_note": "A weakener attacks the step from evidence to conclusion, not the evidence. Name the link in your own words before reading the options, and reject anything that argues with a premise the author has already granted.",
+        "reading_habit": "Ask which sentence the argument would lose if the option were true. If the answer is a sentence the author offered as background, you are looking at a distractor.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The paragraph asserts this itself, saying the working assumption on meeting an anomaly is repair. An option that repeats a premise cannot damage the conclusion drawn from it, and this premise is the very thing that makes the author's decision point necessary.",
+            "seductive_element": "It sounds deflationary and arrives with the authority of notebooks and investigations, which makes it read as evidence against a romantic story about discovery."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_population",
+            "why_wrong": "Training is not the account's term. What the paragraph requires is a theory precise enough to forbid the result, which an untrained outsider may hold and a well-trained insider may lack, so the statistic leaves the link untouched.",
+            "seductive_element": "Outsiders making discoveries feels like a direct blow to any account that makes expertise the engine, and preparation is easily read as training."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "This bears on the fourth paragraph's practical consequence rather than on the third paragraph's account, and it measures published papers rather than anomalies pursued. The stem asks about the account, and the account would survive the finding intact.",
+            "seductive_element": "It is the live rival, because it attacks something the passage really does claim, and a reader who has kept the whole argument in view may not notice that the stem has narrowed the target."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0090-q4",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "moving the claim from what a particular observer expects to what a discipline has established, which changes the level the sentence is pitched at",
+      "prediction_target": "The learner should paraphrase the phrase from its own sentence before looking: there is nothing in this observer's expectations for the result to be in conflict with.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "specific_detail"
+      ],
+      "stem": "The phrase nothing that the mess contradicts, as used in the third paragraph, refers to",
+      "options": {
+        "A": "the absence of an expectation precise enough for the result to conflict with it",
+        "B": "a failure to notice that anything unusual has occurred at all",
+        "C": "the want of any settled body of theory in the field in which the researcher happens to work",
+        "D": "an unwillingness to admit that the apparatus may have been at fault"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The working definition is planted two sentences earlier. What makes the decision available is holding a theory precise enough to say that this particular result should not have happened, so the thing a mess can contradict is an expectation of that kind, and the phrase names its absence.",
+        "correct_reasoning": "The correct option is that paraphrase. Contradiction needs two terms: the result, and something the result conflicts with. The passage supplies the second term as a theory precise enough to forbid the outcome, and the observer described as seeing only a mess is the one who has no such term available, which is why the same sentence rules out any explanation in terms of attention.",
+        "passage_anchor": "rc-0090-p3",
+        "question_type_note": "A phrase-in-context question is settled from the sentences immediately around the phrase. Paraphrase it yourself first; the options that survive your paraphrase are usually one.",
+        "reading_habit": "When a phrase describes a lack, ask what would have to be present. The passage almost always names the missing thing a sentence or two earlier, in plainer language.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The clause immediately before the phrase excludes this, saying the observer is not watching less closely. He has seen the mess; what he lacks is anything for it to argue against.",
+            "seductive_element": "Missing something is the natural reading of failing to make a discovery, and the popular version of the maxim is entirely about noticing."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The sentence is about one observer at one bench, not about the state of a discipline. A field may be richly supplied with theory while the person looking at the plate holds no expectation precise enough to be contradicted by it.",
+            "seductive_element": "It is the live rival, because theory is the right word and a field without settled theory would indeed leave its workers with less to contradict, which makes the shift in level easy to miss."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Willingness is never in question. The passage describes the assumption of fault as the default that everybody starts from, not as a stubbornness anybody has to overcome, and the contrast drawn is between observers who hold a precise expectation and observers who do not.",
+            "seductive_element": "Faults in the apparatus are named in the same paragraph, and the idea of a researcher refusing to admit error is a familiar figure in writing about science."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "anomaly",
+      "passage_use": "An anomaly arrives in every laboratory as a nuisance",
+      "meaning_here": "a result that departs from what was expected",
+      "difficulty": "medium"
+    },
+    {
+      "word": "serendipity",
+      "passage_use": "Serendipity, described this way, is a property of the response",
+      "meaning_here": "a valuable discovery arrived at through an unsought accident",
+      "difficulty": "hard"
+    },
+    {
+      "word": "allocate",
+      "passage_use": "time is the one thing a laboratory does allocate",
+      "meaning_here": "assign a share of a limited resource to a purpose",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vaguer",
+      "passage_use": "the same anomaly while holding a vaguer theory",
+      "meaning_here": "less exact, and so forbidding fewer outcomes",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A famous saying is attacked, and the author agrees with half the attack. Keep track of which half he gives away and which he keeps, because the main idea and the weakening question are both decided by that division.",
+    "one_sentence_summary": "The maxim that chance favours the prepared mind survives its own best objection only in part, since the half claiming that preparation makes accidents more likely is assembled from successes and should be abandoned, while the half worth keeping is that a precise expectation is what allows an anomaly to be read as a finding rather than as a fault, which makes serendipity a property of the response and leaves a laboratory with one practical lever, the time in which an anomaly can be followed.",
+    "main_idea": "Chance favours the prepared mind is usually taken to mean that alert people get luckier. The objection is that the saying is built only from the cases that paid off, and that prepared is defined by the outcome, so nothing can count against it. The author accepts that against one half of the claim: preparation does not make accidents likelier. What it does is change what an accident is taken for, since a result can only register as a finding if some precise expectation forbade it. That makes serendipity a matter of response rather than event, and its one practical consequence concerns time.",
+    "simple_explanation": "There is a famous line: chance favours the prepared mind. The stories behind it are all the same shape. Something goes wrong in a laboratory, a plate is spoiled, a dish gets contaminated, an instrument hums when it should be silent, and somebody who was ready for it turns the mishap into a discovery. The usual lesson people take is that you cannot plan discovery, so just keep everyone alert.\n\nThe objection to this is better than it usually gets credit for. Look at how the claim was built. It is made entirely out of the times the accident paid off. You never hear about the thousand equally well-prepared scientists whose dishes also got spoiled and who found nothing. You never hear about the unprepared people who noticed something anyway and got called lucky. A rule made only from its successes is not really a rule; it is a description of what winning looked like afterwards. And the word prepared is the worst part, because it is decided by the result. If you saw it, you were prepared. If you missed it, you were not. So nothing can ever count as evidence against the saying.\n\nThe author's move is to say both sides have hold of the wrong word. He gives the objectors one thing straight away: preparation does not make accidents more likely. That half of the claim should go, and nothing is lost.\n\nWhat preparation actually changes is what an accident gets treated as. Here is the key idea. When something odd happens in a laboratory, the normal first thought is that something has broken: the equipment, the sample, last night's work. Your default is repair. To decide that the odd thing is a result rather than a fault is a choice, and what makes that choice available is having a theory exact enough to say that this particular outcome should not have happened. The person who just sees a mess is not watching less carefully than anyone else. He simply has nothing that the mess argues against.\n\nTwo things follow. The first is that serendipity, described this way, belongs to the response and not to the event, so you cannot put it in a diary. There is nothing to schedule.\n\nThe second is the useful one. A response takes time, and time is something a laboratory really does hand out. An anomaly can only be followed by somebody who is allowed to drop his paid work for a week without having to justify it twice.\n\nThe author then gives the objectors their best point again: his own version is also hard to test, because you cannot observe what the same person would have done with a vaguer theory. But he refuses their conclusion. An empty claim has no consequences, and this one has one. It just is not the consequence the stories draw. The instruction is not to tell scientists to stay alert. It is to buy them the week in which staying alert is affordable.",
+    "why_difficult": "The passage gives away half of a famous claim and keeps the other half, so readers who remember only that the maxim was attacked answer the main idea question with the attack, and readers who remember only that it was rescued answer with the maxim. The second difficulty is that the mechanism in the third paragraph is not attention, which is the sense everybody arrives with, and the sentence that rules attention out is a subordinate clause easily read past. The third is the last paragraph, whose consequence is deliberately less quotable than the moral it replaces and which grants the objectors a real point about its own testability before refusing their verdict.",
+    "author_intention": "To rescue a maxim by narrowing it, so that the reader stops treating discovery as a reward for alertness and starts treating it as something a precise expectation makes visible and a week of unallocated time makes possible.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0090-p1",
+        "role": "States the maxim",
+        "note": "Chance favours the prepared mind, with the usual stock of spoiled plates and humming instruments, and the usual moral about keeping people alert."
+      },
+      {
+        "paragraph_id": "rc-0090-p2",
+        "role": "Puts the objection",
+        "note": "The claim is built only from its successes, and prepared is defined by the outcome, so nothing can count against it."
+      },
+      {
+        "paragraph_id": "rc-0090-p3",
+        "role": "Divides the claim",
+        "note": "Give up the part about likelihood. Keep the part about interpretation: only a precise expectation lets an anomaly be a finding rather than a fault."
+      },
+      {
+        "paragraph_id": "rc-0090-p4",
+        "role": "Draws the consequence",
+        "note": "Serendipity belongs to the response, so it cannot be scheduled, but the response needs time. Buy the week rather than preaching alertness."
+      }
+    ],
+    "tone_progression": "It opens in the comfortable register of the anecdote it is about to disturb, sharpens into genuine hostility while the objection is put, becomes cool and surgical as the claim is divided, and ends practical and slightly dry, refusing a famous moral in favour of a smaller one about budgets.",
+    "key_transitions": [
+      "'Both parties are arguing about the wrong term.' (opening of paragraph 3) — the dispute is dissolved rather than settled.",
+      "'What preparation changes is what the accident is taken for.' (paragraph 3) — the surviving half of the maxim is named.",
+      "'Their conclusion still does not follow.' (paragraph 4) — a concession is granted and its reach immediately restricted."
+    ],
+    "misunderstanding": "Two opposite wrong models form. The first treats the passage as a debunking, so the reader leaves holding that the maxim is untestable folklore, which the third and fourth paragraphs refuse by keeping a half of it and drawing a consequence from that half. The second treats it as a defence of alertness, which the third paragraph forbids in a clause stating that the unprepared observer is not watching less closely. Both readings are available because the author's own position is built out of a concession plus a rescue, and readers habitually keep only one of the two.",
+    "traps_summary": "This set offers the histories' moral as the thesis, the objectors' verdict as the thesis, a premise of the account as an attack on it, a claim about a discipline in place of a claim about an observer, and attention in place of expectation. Sorting each option into maxim, objection, mechanism or consequence answers all four.",
+    "reading_lesson": "When a passage stages an attack on a familiar claim, watch for the moment the author divides that claim in two, because the verdict is almost never that the claim stands or falls, and every question will be built on which half went. The companion habit is to look for a clause beginning not because: it is placed there to block the explanation the reader was about to supply from ordinary knowledge, and a distractor will be waiting to supply it.",
+    "real_world": "The same division applies wherever an outcome is credited to a quality of mind: the investor with a nose for a bargain, the editor who spots a talent, the doctor who catches the rare case. In each the honest question is not whether the person is alert but whether they hold an expectation exact enough for the odd case to conflict with it, and whether their week has room in it to follow the conflict up.",
+    "takeaway": "An accident can only be a discovery for somebody who already believed it should not have happened.",
+    "reflection_question": "What would have to be true for the next odd result in your own work to strike you as a finding rather than as something to be fixed?"
+  }
+}

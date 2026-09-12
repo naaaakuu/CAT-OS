@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0018",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Umbrella and Two Answers",
+    "theme": "the difference between the cause of an action and the consideration acted on",
+    "estimated_time_sec": 80,
+    "clue_types": ["pronoun_ref", "demonstrative", "parallelism"],
+    "primary_trap": "wrong_reference_target",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.demonstrative", "disc.claim_then_evidence", "disc.parallelism"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 3, "competing_slots": 4, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "learning_objective": "check what a plural pronoun would have to range over at each slot before accepting the slot",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General philosophy of action; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The trap is a list: the sentence about causes ends with three of them, so a sentence saying 'only one of them can be contested' finds a false antecedent there. The closing 'That asymmetry' fixes the true seat.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about being moved by a drug, a habit or a fear. Placed there, 'only one of them can be contested' looks as though it ranges over those three causes, which is a false antecedent: the contrast the sentence draws is between a reason and a cause, not among causes. The sentence that would follow also begins by saying neither answer discredits the other, which pairs it with the sentence above the slot rather than with an intervening remark, and the closing 'That asymmetry' then has to reach back across it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Asked why a man took an umbrella, we can answer in two ways that do not compete." },
+      { "n": 2, "text": "One answer names what he was responding to, the forecast or the cloud; the other gives the consideration he acted on, that he did not want to be wet." },
+      { "n": 3, "text": "The second is not the first told from inside, since a person can be moved by something that formed no part of his thinking: a drug, a habit, a fear he would deny." },
+      { "n": 4, "text": "Neither answer discredits the other, because they answer different questions and both can be true of the same umbrella." },
+      { "n": 5, "text": "That asymmetry is what makes the language of reasons indispensable to blame and useless as a description of the nervous system." }
+    ]
+  },
+  "missing": {
+    "text": "Which one is asked for matters, because only one of them can be contested: a reason can be called a bad reason, and adrenaline cannot be called mistaken.",
+    "position": 4,
+    "function": "the consequence drawn once both answers have been granted, and the asymmetry the last sentence points back at"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Which one is asked for matters, because only one of them can be contested: a reason can be called a bad reason, and adrenaline cannot be called mistaken.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 3, "D": 4 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "'Only one of them' has to range over the two answers, and the paragraph is safest about that once it has said, in the sentence about neither discrediting the other, that the two are answers to different questions and both true. The sentence that follows begins 'That asymmetry', which needs an asymmetry between the two — one contestable, one not — and no earlier sentence draws one: the earlier sentences establish that the answers differ, not that they differ in this particular way. The seat between the concession and the closing use of the asymmetry is the only one that supplies what each side needs.",
+    "clue_before": "Sentence 4 grants that both answers are true and answer different questions, which is exactly the point at which it becomes worth asking which of them a question is asking for.",
+    "clue_after": "Sentence 5 opens 'That asymmetry', and the only asymmetry available is between an answer that can be called mistaken and one that cannot.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The opening sentence promises two ways of answering but has not said what either is, so a sentence about which of them is contestable arrives before the reader can tell one from the other, and the sentence that follows then introduces both as new.",
+        "seductive_element": "'Two ways that do not compete' seems to hand the pronoun its antecedent immediately, and a reader is impatient to know why the distinction matters."
+      },
+      {
+        "option": "B",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "At this point the paragraph has described the two answers but not yet defended their difference; the claim that only one can be contested is the payoff of that defence, and it would arrive before the sentence showing that a cause can operate outside a person's thinking altogether.",
+        "seductive_element": "The two answers have just been laid side by side, which makes any comparison between them feel due."
+      },
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "The sentence above this slot ends with three causes — a drug, a habit, a denied fear — so 'only one of them' reads as a claim about those three rather than about the two kinds of answer, and the sentence that follows pairs with the one above the slot by saying neither answer discredits the other.",
+        "seductive_element": "A remark about what can and cannot be contested sits naturally beside adrenaline and habit, which are exactly the things nobody argues with."
+      }
+    ],
+    "method": "Before accepting a slot, read the candidate sentence's pronouns as a hostile reader would: what is the nearest plausible antecedent at this seat, and is it the one the sentence needs? A list in the preceding sentence will capture a plural pronoun whether or not it was meant to. Then check the sentence after the slot for a demonstrative that only your sentence can satisfy."
+  },
+  "mentor": {
+    "challenge": "Ask what 'only one of them' would be understood to mean at each slot. One of the slots offers a list of three causes for the pronoun to land on.",
+    "takeaway": "A pronoun takes the nearest antecedent that fits, not the one you intended; place the sentence where the nearest fit is the right one."
+  }
+}

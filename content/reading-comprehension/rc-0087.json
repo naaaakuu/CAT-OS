@@ -1,0 +1,408 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0087",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "media",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "vocabulary-in-context",
+      "structure-mapping",
+      "scope-control"
+    ],
+    "word_count": 563,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "title_selection",
+      "vocabulary_in_context",
+      "paragraph_function"
+    ],
+    "theme": "the century-old quarrel over whether advertising informs or persuades broken by an analogy with the marble front of a bank, where the message is carried by the expenditure rather than by the content, and then bounded at the joint the analogy exposes, since the expense certifies only that the seller expects to meet the buyer again and therefore certifies nothing in a market of single sales",
+    "estimated_time_min": 8,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-06",
+    "reviewer_notes": "The analogy is pressed for a paragraph and then deliberately broken, and the break is where three of the four questions are decided. The last paragraph grants the persuasion camp two things in a row and then refuses their conclusion, which makes the concession itself available as a distractor for the structural question.",
+    "length_class": "medium",
+    "structure": "analogy_driven",
+    "viewpoints": 3,
+    "tone": "brisk, explanatory, precise about its own limits",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.analogy",
+      "struct.contrast",
+      "struct.qualification",
+      "struct.claim_counterclaim",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "comp.organization",
+      "comp.purpose",
+      "arg.analogy",
+      "arg.concession",
+      "arg.qualification",
+      "arg.counterargument",
+      "inf.reasonable_implication",
+      "inf.strongly_supported",
+      "scope.condition",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about a product everybody has already heard of, which the third paragraph names as something the account explains rather than as a case where the account fails; the expenditure keeps its meaning there, since a firm with nothing to gain from being remembered would not renew the outlay. Q2's rival is the title about the manufacture of wants, which is the persuasion camp's position stated as the passage's own, and the last paragraph hands them only the single-sale markets. Q3's rival is the option reading the marble as a guarantee that the bank will still be open, which is the passage's mechanism raised one degree, since the stone shows only what the bank expected and the whole analogy rests on expectation rather than on assurance. Q4's rival is the option that the paragraph answers the objection about quality, which inverts what it does: it grants the objection in terms, saying the expenditure says nothing whatever about whether the product is any good.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "security",
+      "conspicuously",
+      "certifies",
+      "extravagance"
+    ]
+  },
+  "passage": {
+    "title": "The Marble on the Front",
+    "reading_time_min": 3.2,
+    "paragraphs": [
+      {
+        "id": "rc-0087-p1",
+        "text": "Two accounts of advertising have been in circulation for a century and neither has driven the other out. On the first, an advertisement is a piece of information: it tells a buyer that a thing exists, who makes it, where it may be had and at what price, and a market in which nobody knew any of that would be a poorer market for everybody in it. On the second, an advertisement is an instrument of persuasion: it does not report a want but manufactures one, and the buyer who goes home with the product has been moved rather than informed. For a hundred years the two camps have argued about the truth of what advertisements say. That is the error, because a great many advertisements say almost nothing."
+      },
+      {
+        "id": "rc-0087-p2",
+        "text": "Consider the marble on the front of an old bank. Nobody takes the stone as a statement. It asserts nothing, and the question whether it is true does not arise. Yet it tells a depositor something he has every reason to believe, because a bank that expected to be wound up inside five years would not have paid for it. The stone is a security posted against the bank's own future: money laid out in a form that cannot be carried away, and lost entirely on the day the doors shut. What the depositor reads is not the marble but the expenditure. A good deal of advertising works in exactly that way. A buyer who cannot judge a shampoo from the bottle can judge that somebody has spent a fortune on being remembered, and the only seller with a reason to spend it is one who expects the buyer back."
+      },
+      {
+        "id": "rc-0087-p3",
+        "text": "Read like that, several puzzles come apart at once. It explains why so many advertisements are empty of content and conspicuously expensive, which on the informative account is simply waste. It explains why firms go on advertising goods that nobody in the country could have failed to hear of. It explains why cheap-looking advertising for an expensive purchase unsettles a buyer in a way that no argument in the copy can repair, and why the same buyer is untroubled by extravagance he is himself paying for. And it explains the hundred-year deadlock, since both camps were reading the copy while the message was in the bill."
+      },
+      {
+        "id": "rc-0087-p4",
+        "text": "The analogy also shows where it stops, which is the useful part of it. The marble informs the depositor only because the bank wants him next year. Where a seller does not expect to meet the buyer again, the expenditure certifies nothing: the restaurant by the station, the stall at the fair, the firm selling a thing a household buys once in a lifetime. There the outlay is recovered from the single sale it produces, and what remains is very close to what the persuasion camp always said advertising was. Two further points should be granted to that camp even in the favourable cases. The expenditure shows only that the seller expects to be judged again; it says nothing whatever about whether the product is any good, and a buyer who reads it as a promise of quality has read more than is on the page. Neither point, however, reaches the conclusion the persuasion camp wants. The question has no general answer. It is settled market by market, by whether the seller is counting on a second meeting."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0087-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "scope.condition",
+        "arg.analogy"
+      ],
+      "target_mistake": "treating the cases the account explains in the third paragraph as cases where the account runs out, instead of finding the condition the fourth paragraph names",
+      "prediction_target": "The learner should predict that the answer will name the condition the analogy needs, which is that the seller expects to meet the buyer a second time.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred that a lavish advertising campaign tells a buyer least about the seller where",
+      "options": {
+        "A": "the seller has no reason to expect the buyer to come back a second time",
+        "B": "the product is one that nobody in the country could have failed to hear of already",
+        "C": "the advertisement makes a specific claim about the product that a buyer could check",
+        "D": "the cost of the campaign is obvious to the buyer, though an obvious expense may still invite suspicion"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fourth paragraph states the condition and then lists the cases that fail it. The marble informs the depositor only because the bank wants him next year; where a seller does not expect to meet the buyer again, the expenditure certifies nothing, and the examples given are the station restaurant, the fairground stall and the once-in-a-lifetime purchase.",
+        "correct_reasoning": "The correct option is the passage's own condition stated negatively, and on the passage's own side of the relation. The mechanism is that an outlay recoverable only over repeated sales is one a seller with no future in the market would not make; where he expects no second meeting, the outlay is recovered from the single sale and no longer distinguishes the seller who expects to be judged from the seller who does not.",
+        "passage_anchor": "rc-0087-p4",
+        "question_type_note": "An inference question built on an analogy is usually answered by the joint at which the author breaks the analogy, because that is where he has said what the comparison was resting on.",
+        "reading_habit": "When a passage says a device works because of something, ask what happens when that something is absent. Authors who press an analogy nearly always answer that question themselves, and the answer is where the questions live.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The third paragraph names this among the puzzles the account solves rather than among the cases it cannot reach. A firm with no interest in being remembered next year would not renew the outlay, so the expenditure keeps its meaning even where the name is already universally known.",
+            "seductive_element": "Advertising a famous product looks like the plainest possible waste, and a reader who has fixed on information as the thing advertising carries will read familiarity as leaving nothing to carry."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Checkable claims are never discussed. The passage's observation is that many advertisements say almost nothing, and it draws from this that the message sits in the bill rather than in the copy; it nowhere says that a checkable claim weakens what the bill conveys.",
+            "seductive_element": "It sounds like the informative account's best case, and a reader looking for where the author's argument would fail naturally reaches for the case with actual information in it."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Visible expense is the mechanism rather than an obstacle to it. The passage says advertisements are conspicuously expensive, that the depositor reads the expenditure, and that cheap-looking advertising for a costly purchase is what unsettles a buyer.",
+            "seductive_element": "Suspicion of extravagance is a familiar consumer reflex, and the passage does record a buyer being unsettled, though by the opposite thing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0087-q2",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.condition",
+        "arg.analogy"
+      ],
+      "target_mistake": "titling the passage by the vehicle of its analogy or by one of the puzzles it solves, rather than by the claim plus the limit it insists on",
+      "prediction_target": "The learner should be able to compress the passage first: what the expense tells a buyer, and the one condition under which it tells him anything.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "What Advertisements Say, and Why It Hardly Matters",
+        "B": "What an Advertiser's Expense Says, and When It Says Nothing",
+        "C": "The Manufacture of Wants, and Where It Stops",
+        "D": "The Marble Front, the Nervous Depositor and the Price of Stone"
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage has two movements of equal weight. The middle paragraphs argue that the information in an advertisement is carried by its cost, and the last paragraph spends its whole length on the condition that makes the cost informative and on the markets where the condition fails.",
+        "correct_reasoning": "A title is the main idea in a few words, and it must need every paragraph. The correct option carries the claim and the limit together: what the expense says, and when it says nothing. Anything that keeps only the claim makes the fourth paragraph an afterthought, and anything that keeps only the limit loses the mechanism the limit applies to.",
+        "passage_anchor": "rc-0087-p2, rc-0087-p4",
+        "question_type_note": "Title questions obey the same altitude rules as main idea. Test each candidate by asking which paragraph it would let you skip.",
+        "reading_habit": "Before reading the titles on offer, write your own in six words. A title you have made yourself is the fastest way to see that a tempting option covers only half the passage.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The emptiness of advertising copy is one of four puzzles the account is said to solve, and it appears in a single sentence. A title built on it leaves the analogy, the condition and the whole final paragraph outside the passage's subject.",
+            "seductive_element": "It is a genuine and memorable observation, and it comes at the point where the reader first feels the argument paying off."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Manufacturing wants is the persuasion camp's phrase, introduced in the first paragraph as one of the two positions the passage sets aside, and the limit the passage draws is on its own account rather than on theirs. The author gives that camp the single-sale markets and expressly refuses them the general conclusion.",
+            "seductive_element": "It is the live rival, because the last paragraph does hand the persuasion account a whole class of markets, and a reader who takes a concession for a verdict will read it as the passage's own view."
+          },
+          {
+            "option": "D",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The bank is the vehicle of an analogy, introduced to make a point about expenditure and dropped as soon as the point has been made, and the price of the stone matters only as a figure for what a seller stands to lose. Titling the passage by it puts the illustration where the claim should be.",
+            "seductive_element": "The image is the most concrete thing in the passage and the most likely to be remembered, and analogies often do supply the titles of essays that use them."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0087-q3",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "struct.analogy"
+      ],
+      "target_mistake": "taking a common sense of the word from the banking setting, or raising the author's expectation into an assurance",
+      "prediction_target": "The learner should paraphrase from the clause that follows the word, which glosses it as money laid out in a form that cannot be carried away and is lost when the doors shut.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "inference"
+      ],
+      "stem": "As it is used in the second paragraph, the word security most nearly means",
+      "options": {
+        "A": "the protection of a building and the people inside it",
+        "B": "a guarantee that the bank will still be open for business in five years",
+        "C": "something of value put beyond recovery, and forfeit entirely if a promise fails",
+        "D": "a document recording a share in the ownership of a firm"
+      },
+      "correct": "C",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The author glosses the word in the same sentence, with a colon. A security posted against the bank's own future is money laid out in a form that cannot be carried away, and lost entirely on the day the doors shut. The two properties, irrecoverable and forfeit on failure, are exactly what the argument then uses.",
+        "correct_reasoning": "The correct option is that gloss compressed. The stone matters because the bank cannot get the money back and loses it if it does not last, which is what makes the outlay something only a bank with a future would undertake. A sense that leaves out the forfeiture would leave the analogy with no mechanism, since the whole argument turns on what the seller stands to lose.",
+        "passage_anchor": "rc-0087-p2",
+        "question_type_note": "A word-in-context question is settled by the clause in which the author introduces the word, particularly where a colon follows. He has taken the decision out of your hands.",
+        "reading_habit": "When a familiar word appears in an unfamiliar setting, read the next clause before choosing. Authors who use a word narrowly almost always define it on the spot, and the dictionary's commonest sense is in the options on purpose.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This is the word's commonest everyday sense and the sentence excludes it. What is described is money spent and irrecoverable, not anything that keeps a building or its occupants safe, and safety plays no part in the argument that follows.",
+            "seductive_element": "Banks and security belong together in ordinary speech, and the passage's setting keeps guards and vaults in the reader's mind."
+          },
+          {
+            "option": "B",
+            "trap_type": "possibility_as_certainty",
+            "why_wrong": "The stone shows what the bank expected, not what is assured. The passage says a bank that expected to be wound up inside five years would not have paid, which licenses an inference about the bank's own expectation and nothing about what will in fact happen.",
+            "seductive_element": "It is the live rival, because it names the very thing the depositor wants to know, and a reader who has followed the mechanism will accept the conclusion at one degree more certainty than it was offered."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Shares and ownership are nowhere in the passage. This is a real financial sense of the word imported from outside the sentence, and the sentence describes an outlay on a building rather than an instrument anybody holds.",
+            "seductive_element": "It is the technical sense a reader is proud of knowing, and financial vocabulary feels appropriate in a paragraph about a bank."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0087-q4",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.organization",
+        "arg.concession"
+      ],
+      "target_mistake": "reading a paragraph that grants two objections as one that answers them, because the passage's own argument has been going well until that point",
+      "prediction_target": "The learner should be able to say: this paragraph names what the analogy needs in order to work, and gives away the cases in which it is not present.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "The fourth paragraph functions chiefly to",
+      "options": {
+        "A": "concede that some advertisements make claims no buyer could check, and set those cases aside",
+        "B": "extend the account of the first three paragraphs to every market in which sellers advertise",
+        "C": "name the condition the analogy rests on, and hand the cases that fail it to the other camp",
+        "D": "answer the objection that an expensive advertisement, though costly, still says nothing about quality"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph announces its job in its first sentence, saying the analogy also shows where it stops and calling that the useful part. It then states the condition, lists three markets in which the condition is absent, says that what remains there is close to the persuasion account, and grants two further points before refusing the general conclusion.",
+        "correct_reasoning": "The correct option names the job rather than the content. A paragraph that marks a boundary is doing structural work: it converts a general claim into a conditional one and assigns the excluded cases to the rival account. That is why the passage can end by saying the question has no general answer and is settled market by market.",
+        "passage_anchor": "rc-0087-p4",
+        "question_type_note": "A paragraph-function question asks what the paragraph is for. Where a paragraph opens by saying where something stops, its job is to bound the argument rather than to add to it.",
+        "reading_habit": "Distinguish granting an objection from rebutting one. An author who writes that a point should be granted has stopped arguing about it, and the sentences after the grant are where his own position resumes.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Unverifiable claims are neither conceded nor set aside anywhere. The paragraph's concessions are that the expense shows only an expectation of being judged again and that it says nothing about quality, and its main work is the condition it states before either of them.",
+            "seductive_element": "The paragraph is visibly conceding things, so an option that names a concession feels right even when the concession named is not the one on the page."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph narrows the account instead of extending it. It removes the single-sale markets, gives them to the persuasion camp, and ends by denying that the question has any general answer at all.",
+            "seductive_element": "Three paragraphs of successful explanation set up the expectation of a triumphant generalisation, and readers finish passages in the direction they were travelling."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The objection is named accurately and then the verb is wrong. The passage grants it outright, saying the expenditure says nothing whatever about whether the product is any good and that a buyer who reads it as a promise of quality has read more than is on the page.",
+            "seductive_element": "It is the live rival, because the objection really is raised in this paragraph, and a reader who has watched the author solve four puzzles in a row expects the fifth thing raised to be solved too."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "security",
+      "passage_use": "The stone is a security posted against the bank's own future",
+      "meaning_here": "something valuable pledged and lost if an undertaking fails",
+      "difficulty": "hard"
+    },
+    {
+      "word": "conspicuously",
+      "passage_use": "empty of content and conspicuously expensive",
+      "meaning_here": "in a way that is meant to be noticed",
+      "difficulty": "medium"
+    },
+    {
+      "word": "certifies",
+      "passage_use": "the expenditure certifies nothing",
+      "meaning_here": "vouches for, gives a buyer grounds to believe",
+      "difficulty": "medium"
+    },
+    {
+      "word": "extravagance",
+      "passage_use": "untroubled by extravagance he is himself paying for",
+      "meaning_here": "spending beyond what the purpose strictly requires",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "An old quarrel is broken open by a comparison with a building. Watch the last paragraph closely, because the author spends it saying exactly when his own comparison stops working, and two of the four questions are decided there.",
+    "one_sentence_summary": "The hundred-year argument about whether advertising informs or persuades has been conducted over the content of advertisements, whereas in many markets the message is carried by the expenditure itself, as the marble on a bank front tells a depositor something without asserting anything, though the comparison holds only where the seller expects to meet the buyer again, so that in markets of single sales the expense certifies nothing and the persuasion account is very nearly right.",
+    "main_idea": "Advertising is usually described either as information or as persuasion, and both camps read the copy. Much advertising has almost no copy worth reading. What it carries is an expenditure, and an expenditure of that kind is made only by a seller who expects to be in business long enough to recover it, which is why it tells a buyer something even when the advertisement says nothing. That mechanism needs repeat custom. Where the seller expects one sale and no more, the expense means nothing, and the persuasion account takes over.",
+    "simple_explanation": "People have been arguing for a hundred years about what advertising is. One side says it is information: it tells you the thing exists, who makes it, where to get it, what it costs. The other side says it is persuasion: it does not tell you about a want you had, it creates the want.\n\nBoth sides spend their time on the words in the advertisement. The author says that is the mistake, because in an enormous number of cases the advertisement barely says anything.\n\nSo what is it doing? Here is his comparison. Think of an old bank with a heavy marble front. Nobody thinks the marble is making a statement. You cannot ask whether it is true. And yet it tells a depositor something worth knowing, because a bank that thought it would be closed in five years would never have spent that money. The stone is money the bank cannot get back and will lose completely if it shuts. What the depositor is really reading is the size of the bill.\n\nAdvertising often works the same way. You cannot tell whether a shampoo is any good by looking at the bottle. You can tell that somebody has spent a fortune making sure you remember the name, and the only sort of seller who has a reason to spend that is one who is expecting you to come back.\n\nThat one idea tidies up several puzzles. It explains why so many advertisements are expensive and say nothing, which looks like pure waste if advertising is supposed to be information. It explains why companies keep advertising things everybody has already heard of. It explains why a cheap-looking advertisement for something expensive makes you uneasy no matter what the words say. And it explains why the old argument never ended: both sides were reading the copy when the message was in the bill.\n\nThen comes the honest part. The comparison only works because the bank wants you next year. If a seller does not expect to see you again, the money he spends proves nothing. Think of the restaurant next to the station, the stall at a fair, the company selling something a family buys once in a lifetime. There the advertising is paid for out of that single sale, and it really is much closer to what the persuasion side always said.\n\nHe gives that side two more things. The expense only shows the seller expects to be judged again. It says nothing at all about whether the product is good, and anyone who treats it as a promise of quality has read more than is there.\n\nBut he refuses their big conclusion. Advertising is not persuasion everywhere. There is no general answer at all. The answer changes market by market, depending on one thing: is the seller counting on meeting you a second time?",
+    "why_difficult": "The argument is carried by an analogy, so readers must keep track of which feature of the bank is doing the work; those who fix on solidity or reassurance rather than on irrecoverable expenditure lose the vocabulary question and the inference. The second difficulty is the fourth paragraph, which arrives after three paragraphs of successful explanation and then narrows everything that came before, so a reader travelling in the direction of a generalisation has to stop and reverse. The third is that the same paragraph grants two objections outright, which is easily read as answering them.",
+    "author_intention": "To move a stale dispute off the content of advertisements and onto their cost, and then to stop the reader from taking the new account further than it goes by naming the one market condition it depends on.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0087-p1",
+        "role": "Sets the quarrel",
+        "note": "Information or persuasion. Both camps argue about whether advertisements tell the truth, and many advertisements barely say anything."
+      },
+      {
+        "paragraph_id": "rc-0087-p2",
+        "role": "Introduces the analogy",
+        "note": "A bank's marble front asserts nothing and still tells a depositor something, because only a bank with a future would spend the money."
+      },
+      {
+        "paragraph_id": "rc-0087-p3",
+        "role": "Presses the analogy",
+        "note": "It explains empty advertisements, advertising for famous names, unease at cheap campaigns, and why the old argument never ended."
+      },
+      {
+        "paragraph_id": "rc-0087-p4",
+        "role": "Breaks it, and bounds the claim",
+        "note": "The mechanism needs a second meeting. Without one the expense proves nothing, and the persuasion camp gets those markets, but not the general conclusion."
+      }
+    ],
+    "tone_progression": "It opens with the dry impatience of someone closing a long argument, becomes almost pleased as the analogy is pressed and puzzle after puzzle gives way, and then turns careful and self-limiting, handing whole markets to the other side before refusing the one thing they want.",
+    "key_transitions": [
+      "'That is the error, because a great many advertisements say almost nothing.' (close of paragraph 1) — the quarrel is dismissed and the subject changes from content to cost.",
+      "'What the depositor reads is not the marble but the expenditure.' (paragraph 2) — the mechanism is named in a single sentence.",
+      "'The analogy also shows where it stops, which is the useful part of it.' (opening of paragraph 4) — the argument turns on itself and begins setting limits."
+    ],
+    "misunderstanding": "Readers finish with one of two wrong models. The first is that the author has replaced both old accounts with a third that covers everything, which the fourth paragraph refuses by handing whole classes of market back to the persuasion camp. The second is that expensive advertising is being defended as a sign of quality, which the same paragraph denies in terms; what the expenditure shows is that the seller expects to be judged again, and a reader who upgrades expectation into assurance has walked into the passage's most carefully built trap.",
+    "traps_summary": "This set offers a puzzle the account solves as a case where it fails, the rival camp's slogan as the passage's title, the analogy's vehicle as its subject, an expectation raised into a guarantee, and a concession dressed as a rebuttal. Asking of every option whether it belongs to the quarrel, the mechanism or the limit sorts all four.",
+    "reading_lesson": "When an argument is carried by an analogy, find the exact feature doing the work before you evaluate anything, and then read on for the joint at which the author breaks it, because a good analogical passage always names its own condition and the questions are built on that condition rather than on the comparison. The companion habit is to watch for the verb: granting a point and answering it look the same on the page and do opposite things to the argument.",
+    "real_world": "The same reading applies wherever a costly and uninformative gesture is made in public: a company taking an office in an expensive street, a firm sponsoring a stadium, a candidate opening a constituency office a year before the vote, a contractor offering a long guarantee. In each case the question worth asking is not what the gesture says but what it would cost the person making it to walk away.",
+    "takeaway": "When an advertisement tells you nothing, read the bill: it is the part the seller could not have afforded to fake.",
+    "reflection_question": "Which of the people you deal with have put something at risk that they would lose by treating you badly, and which have not?"
+  }
+}

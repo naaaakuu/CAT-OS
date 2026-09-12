@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0026",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "contemporary-society",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "Shouting at the Wrong Desk",
+    "theme": "what happens to redress when complaint moves from the body that can remedy it to an audience that cannot",
+    "estimated_time_sec": 120,
+    "clue_types": [
+      "article_given_new",
+      "demonstrative",
+      "pronoun_ref"
+    ],
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": [
+      "disc.opening_sentence",
+      "disc.given_new",
+      "disc.cause_effect",
+      "disc.topic_progression"
+    ],
+    "difficulty_vector": {
+      "reference_density": 5,
+      "transition_ambiguity": 3,
+      "competing_slots": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "identify the sentence that states the shift a whole paragraph reasons about, and refuse slots where it would read as a verdict",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General discussion of public complaint and redress; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "An opener that reads like a conclusion, which is what makes the middle slots tempting. The forward clue is 'The move', a definite phrase in the first visible sentence that nothing else licenses.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the two sentences weighing the audience against the manager, where the sentence lands as the summing-up of that comparison. It is a conclusion reached with three sentences still to come, and it leaves both earlier sentences stranded: the first speaks of 'The move' and the second of 'It', neither of which has anything to name. The slot immediately after the first sentence is the other candidate and fails on the same definite phrase, which would be pointing at a sentence below it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "The move is rational for the complainant, since the audience replies within minutes and the manager does not reply at all."
+      },
+      {
+        "n": 2,
+        "text": "It is also a poor substitute, because an audience can agree and cannot issue a refund, and what it offers is the relief of being believed."
+      },
+      {
+        "n": 3,
+        "text": "Firms have adapted to the venue rather than to the grievance: the response team is larger than the department whose failures it apologises for."
+      },
+      {
+        "n": 4,
+        "text": "Redress becomes a function of visibility, so a customer with a following is answered and a customer without one waits."
+      },
+      {
+        "n": 5,
+        "text": "None of this is anybody's decision, which is what makes it hard to argue with: every party is doing the reasonable thing, and the sum is a queue ordered by audience size."
+      }
+    ]
+  },
+  "missing": {
+    "text": "A complaint that would once have gone to a manager now goes to an audience.",
+    "position": 0,
+    "function": "the shift the whole paragraph is about, and the move the first visible sentence calls rational"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A complaint that would once have gone to a manager now goes to an audience.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 4",
+      "C": "Before sentence 1",
+      "D": "After sentence 1"
+    },
+    "option_positions": {
+      "A": 2,
+      "B": 4,
+      "C": 0,
+      "D": 1
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The first sentence you are shown begins 'The move is rational for the complainant' and then weighs an audience against a manager. A move has to have been made for the definite article to be doing its work, and the only sentence that makes one is the missing sentence, which takes a complaint from the manager to the audience. The sentence itself points backwards at nothing — no demonstrative, no connective, no comparison — and every sentence after it works with the two parties it names. That is the profile of a paragraph's first line rather than of its conclusion.",
+    "clue_before": null,
+    "clue_after": "Sentence 1 says 'The move' and compares the audience's reply with the manager's silence, both of which need the shift from one to the other to have been stated already.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "Here the sentence reads as the verdict of the comparison just completed, which is exactly the trouble: it settles the paragraph's subject with three sentences still to run, and it leaves 'The move' and 'It' in the two sentences above pointing at nothing at all.",
+        "seductive_element": "After a rational advantage and a poor substitute have been weighed, a flat statement of what has changed sounds like the conclusion a reader has been led to."
+      },
+      {
+        "option": "B",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence states what the paragraph is about, but placed here it arrives after the consequences have been drawn: firms have already adapted to a venue nobody has named, and redress has already been made a function of a visibility nobody has explained.",
+        "seductive_element": "It reads as a plain restatement before the final sentence, and the final sentence's talk of a queue seems to follow from it."
+      },
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "With the sentence about a poor substitute below it, the slot reads smoothly, since both sentences weigh the audience against the manager. The sentence above it is ruined: it has already called something 'The move' and already compared the audience's speed with the manager's silence.",
+        "seductive_element": "A sentence that names the two parties looks like a gloss on the sentence that has just compared them."
+      }
+    ],
+    "method": "When one option is the opening slot, stop reading forwards and audit the definite phrases instead. Every 'the move', 'the shift', 'the arrangement' in the paragraph must be licensed by something above it; if only the candidate sentence licenses them and the candidate itself points nowhere, it opens the paragraph, however much it reads like a conclusion."
+  },
+  "mentor": {
+    "challenge": "The first sentence you can see calls something 'The move'. Nothing has moved yet — unless the missing sentence sits above it.",
+    "takeaway": "A plain sentence that introduces two parties and refers to nothing is an opener, even when it sounds like a verdict."
+  }
+}

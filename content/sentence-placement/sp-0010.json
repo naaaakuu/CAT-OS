@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0010",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "intellectual-history",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Invitation at the Foot of the Page",
+    "theme": "why the footnote was adopted by historians: an answer to rival accounts rather than a habit of pedantry",
+    "estimated_time_sec": 110,
+    "clue_types": [
+      "tense_continuity",
+      "pronoun_ref",
+      "temporal_sequence"
+    ],
+    "primary_trap": "tense_break",
+    "reasoning_patterns": [
+      "disc.tense_continuity",
+      "disc.pronoun_antecedent",
+      "disc.problem_then_solution",
+      "disc.chronology"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 3,
+      "competing_slots": 4,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "follow a paragraph's movement from past narration to present consequence and place the hinge sentence at the join",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General intellectual history of scholarly citation; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The paragraph runs past, past, past, hinge, present, present. The hinge is confirmed by 'It survives for that reason', which needs both a thing and a reason; the late slot is attractive and breaks the time frame by returning to the past after the paragraph has arrived in the present.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about the modern reader, where the origin of the device reads as an explanatory aside. Two things refuse it: the sentence there begins 'It survives for that reason', so both the pronoun and the reason would be pointing at a sentence below them, and the paragraph, having moved into the present tense, would step back into the past and then return. The early slot beside the seventeenth-century scholar is the other candidate and is refused by 'such exchanges', since no exchange has yet taken place in the paragraph.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "Historians did not always have to say where they had got a fact from."
+      },
+      {
+        "n": 2,
+        "text": "In the seventeenth century a scholar could compile a chronicle out of earlier chronicles and be thought diligent rather than careless."
+      },
+      {
+        "n": 3,
+        "text": "What changed was not conscience but exposure: rival confessional histories were being written about the same events, and a claim with nothing behind it could be denied by the other side at no cost."
+      },
+      {
+        "n": 4,
+        "text": "It survives for that reason and not out of pedantry: a modern reader who will never open the volume cited is reassured by the fact that somebody could."
+      },
+      {
+        "n": 5,
+        "text": "The apparatus is a standing promise, and the tedium everyone complains about is the premium on the insurance."
+      }
+    ]
+  },
+  "missing": {
+    "text": "The note at the foot of the page was the device that settled such exchanges, by turning an assertion into an invitation to go and look.",
+    "position": 3,
+    "function": "the solution to the problem set out in sentence 3, and the antecedent of the pronoun and the reason the next sentence opens with"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The note at the foot of the page was the device that settled such exchanges, by turning an assertion into an invitation to go and look.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 5"
+    },
+    "option_positions": {
+      "A": 2,
+      "B": 3,
+      "C": 4,
+      "D": 5
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence says it settled 'such exchanges', which requires exchanges to have been described; the third sentence describes them, with rival histories written about the same events and unsupported claims denied at no cost. In the other direction the fourth sentence begins 'It survives for that reason', and both halves of that phrase need the missing sentence: 'It' needs the device, and 'that reason' needs the purpose the device was adopted for. The paragraph also turns from past narration to present consequence at exactly this point, and the missing sentence is the last past-tense step before the turn.",
+    "clue_before": "Sentence 3 supplies the quarrel — rival confessional histories, and a claim that could be denied for nothing — which is what 'such exchanges' points back at.",
+    "clue_after": "Sentence 4 opens 'It survives for that reason', so the device and the reason for it must both have been given in the sentence immediately above.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The slot sits inside the account of how scholarship once worked, and what it needs is the next step of that account; the sentence supplies the remedy instead, and settles 'such exchanges' when the paragraph has described a practice rather than a dispute.",
+        "seductive_element": "The period is right, and a sentence about a scholar borrowing from earlier chronicles invites an immediate remark about citing them."
+      },
+      {
+        "option": "C",
+        "trap_type": "tense_break",
+        "why_wrong": "The paragraph moves from past narration to present consequence and stays there; this slot puts a past-tense account of the device's origin after the present-tense sentence about the modern reader, and leaves 'It survives for that reason' pointing downwards at a sentence the reader has not yet met.",
+        "seductive_element": "The sentence reads as a historical gloss on the reassurance just described, and a writer might well add the origin where its effect is being felt."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs in the paragraph but not at the end, where the closing image of a premium and an insurance has already drawn the moral; the two preceding sentences are left speaking of an apparatus and a survival whose subject has never been named.",
+        "seductive_element": "Ending on the origin of the convention sounds like a neat closing of the circle the first sentence opened."
+      }
+    ],
+    "method": "Track the tenses as a shape. Most expository paragraphs move once, from what happened to what follows now, and rarely move back; a sentence in the older tense belongs on the older side of that hinge. Then confirm with the first pronoun after the slot: 'It', 'they', 'that reason' must all find their objects above, never below."
+  },
+  "mentor": {
+    "challenge": "Find the sentence where the paragraph stops narrating and starts explaining what is true now. The sentence you are placing is the last one on the far side of that line.",
+    "takeaway": "A paragraph's tenses move in one direction; a sentence that sends the reader back has been seated too late."
+  }
+}

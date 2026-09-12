@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0027",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "public-policy",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Inspector Who Used to Build Them",
+    "theme": "what an accusation of regulatory capture has to show, and why a biography is not it",
+    "estimated_time_sec": 110,
+    "clue_types": [
+      "demonstrative",
+      "article_given_new",
+      "connective_implicit"
+    ],
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": [
+      "disc.demonstrative",
+      "disc.rhetorical_pivot",
+      "disc.claim_then_evidence",
+      "disc.given_new"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 4,
+      "competing_slots": 5,
+      "concept_abstractness": 5,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "resist placing the most quotable sentence first, and find the seat fixed by a rejection behind and a demonstrative in front",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General discussion of regulatory capture; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The sentence is the paragraph's definition and its most quotable line, which is why the opening slot has to be argued away rather than dismissed. The forward clue is 'That test', which needs a criterion rather than a correction.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the opening slot, where the definition of capture reads as the thesis the rest of the paragraph applies. Placed there it answers a biographical inference the paragraph has not yet reported, so the first sentence's exhibit and the second sentence's 'The inference is too quick' arrive as objections to a claim already refused; the paragraph would be correcting an error before anyone had made it. The slot after the exhibit is the second candidate, and it makes 'The inference' in the next sentence point at the definition rather than at the inference from biography.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A regulator recruited from the industry it regulates is the standing exhibit in every argument about capture."
+      },
+      {
+        "n": 2,
+        "text": "The inference is too quick: that recruitment is also what lets an inspector tell a rehearsed answer from a true one, and an agency of outsiders is not incorruptible but ignorant."
+      },
+      {
+        "n": 3,
+        "text": "That test is more demanding than the usual one, since it asks not where an official came from but where the officials who ruled generously have gone."
+      },
+      {
+        "n": 4,
+        "text": "It also explains why the remedy that works is a waiting period rather than a background check, and why agencies resist the period more than the check."
+      },
+      {
+        "n": 5,
+        "text": "The charge is worth making because it can fail: a charge that every experienced regulator is captured has become a description of experience."
+      }
+    ]
+  },
+  "missing": {
+    "text": "Capture is a claim about incentives rather than about biographies, and the incentive that matters is the job after this one.",
+    "position": 2,
+    "function": "the replacement criterion offered once the biographical inference has been refused, and the test the next sentence measures"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Capture is a claim about incentives rather than about biographies, and the incentive that matters is the job after this one.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "Before sentence 1",
+      "C": "After sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": {
+      "A": 3,
+      "B": 0,
+      "C": 1,
+      "D": 2
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The paragraph reports an inference from biography and then refuses it, which leaves the reader owed an account of what capture actually is; the missing sentence supplies one and names the incentive it turns on. In front, the next sentence begins 'That test is more demanding than the usual one' — a test is a criterion, and neither the exhibit nor the refusal of it offers a criterion. Only the missing sentence does, and it does so in the terms the next sentence uses, asking where officials go rather than where they came from.",
+    "clue_before": "Sentence 2 rejects the inference from a regulator's past without putting anything in its place, which is the strongest demand a paragraph can make for a replacement criterion.",
+    "clue_after": "Sentence 3 says 'That test' and contrasts where an official came from with where generous officials have gone, which requires a criterion about the job after this one to have been stated above.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Between the demanding test and the practical remedy the sentence reads well, and a waiting period is plainly a rule about the next job. The sentence above it has already said 'That test', though, with no test behind it, and the refusal two sentences up is still waiting for the replacement it promised.",
+        "seductive_element": "The remedy discussed just below is a rule about future employment, so a sentence about the job after this one looks like its natural introduction."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "It is the broadest and most quotable line in the paragraph, which is why the front seems to be its place, but the contrast it draws answers an inference from biography that nobody has yet drawn; the exhibit and the correction that follow would then be arguing against a reading the paragraph had already replaced.",
+        "seductive_element": "Paragraphs about a contested concept often open by defining it, and the sentence defines this one in a single line."
+      },
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Placed after the exhibit, the definition intervenes before the correction, so 'The inference is too quick' in the next sentence takes the definition as its nearest antecedent rather than the argument from a regulator's past employment, and the objection is aimed at the wrong target.",
+        "seductive_element": "The exhibit invites an immediate answer, and this is the answer the paragraph eventually gives."
+      }
+    ],
+    "method": "A refusal creates a vacancy: when a paragraph says an explanation is too quick or an inference is wrong, the sentence that fills the vacancy comes next. Confirm with the demonstrative that follows — 'that test', 'that account', 'that standard' — by asking what kind of thing it names; a correction is not a test, and an example is not a criterion."
+  },
+  "mentor": {
+    "challenge": "One sentence refuses an inference without replacing it, and a later one refers to 'That test'. The vacancy and the reference are the same seat.",
+    "takeaway": "The most quotable sentence is usually the answer to something; find what it answers before you put it first."
+  }
+}

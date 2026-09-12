@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0017",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "scientific-method",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "Named Before the Numbers",
+    "theme": "what lodging an analysis in advance actually certifies, and what it is mistaken for",
+    "estimated_time_sec": 95,
+    "clue_types": [
+      "article_given_new",
+      "demonstrative",
+      "connective_implicit"
+    ],
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": [
+      "disc.problem_then_solution",
+      "disc.given_new",
+      "disc.demonstrative",
+      "disc.scope_continuity"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 3,
+      "competing_slots": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "notice that a restrictive opening phrase would narrow the whole paragraph, and place the restricted sentence where the paragraph is already narrow",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General discussion of pre-specified analysis in research; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The sentence carries its own restriction — a study that tests one named outcome — which is harmless in the middle of the paragraph and governs everything if the sentence opens it. The count 'exactly one thing' is picked up by 'That single guarantee' in the next sentence.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the opening slot, where the sentence looks like a clean statement of what the practice is worth. Placed there its restrictive opening phrase becomes the frame of the whole paragraph, which then proceeds to talk about researchers, readers and promises in general and closes on a claim about procedure at large; the paragraph would be answering a question about one class of study while stating conclusions about all of them. The slot after the sentence on the mistaken larger guarantee is the other candidate, refused by 'That single guarantee', which needs a count the sentence has not yet given.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A researcher who decides after seeing the data which outcome counts as success has not cheated, but has borrowed a freedom the arithmetic of significance does not allow."
+      },
+      {
+        "n": 2,
+        "text": "The remedy now in use is to write the analysis down beforehand and lodge it where it cannot be edited."
+      },
+      {
+        "n": 3,
+        "text": "That single guarantee is regularly mistaken for a larger one, as though registering a study had also made it well designed and large enough."
+      },
+      {
+        "n": 4,
+        "text": "The distinction decides what a reader may conclude: the register says the question was not chosen to fit the answer, and leaves the others where they stood."
+      },
+      {
+        "n": 5,
+        "text": "A promise about procedure is not a warrant about truth, and treating the two as one is how a safeguard becomes a seal of approval."
+      }
+    ]
+  },
+  "missing": {
+    "text": "In a study that tests one named outcome, the lodged document buys exactly one thing: it fixes which test was intended before the numbers were seen.",
+    "position": 2,
+    "function": "the statement of what the remedy in sentence 2 delivers, and the count that the next sentence calls a single guarantee"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"In a study that tests one named outcome, the lodged document buys exactly one thing: it fixes which test was intended before the numbers were seen.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "Before sentence 1"
+    },
+    "option_positions": {
+      "A": 1,
+      "B": 2,
+      "C": 3,
+      "D": 0
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence speaks of 'the lodged document', which exists only once the paragraph has described writing an analysis down and lodging it where it cannot be edited. It also says the document buys 'exactly one thing', and the next sentence begins 'That single guarantee' — a phrase that needs a count, not merely a description, in the sentence above it. Seated between the remedy and the confusion about it, the restriction the sentence carries applies to the one place it belongs, the narrow claim about what the document certifies.",
+    "clue_before": "Sentence 2 introduces the lodged, uneditable document; the missing sentence is the first to say what that document actually delivers.",
+    "clue_after": "Sentence 3 says 'That single guarantee', which requires the guarantee to have been named and counted immediately before.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The subject is right, but the slot needs the remedy itself and this sentence states the remedy's limit; 'the lodged document' also refers to something the paragraph has not yet produced, since the lodging is described in the sentence that would follow.",
+        "seductive_element": "The problem of choosing an outcome after seeing the data invites an immediate account of what fixes it, and the sentence mentions exactly that fixing."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Between the inflated guarantee and the distinction drawn next, the sentence reads as a correction and nothing in front of it objects. The sentence above it is the casualty: it has already called the guarantee single, and the count that makes it single would arrive afterwards.",
+        "seductive_element": "The sentence reads as a correction of the inflated claim just described, and corrections often follow the error they correct."
+      },
+      {
+        "option": "D",
+        "trap_type": "scope_jump",
+        "why_wrong": "As the opening line, the qualifying phrase about studies that test one named outcome becomes the frame for everything after it, so a paragraph whose later sentences speak of researchers, readers and promises in general would be restricted to a single class of study; the closing claim about procedure and truth is stated for all of them.",
+        "seductive_element": "A crisp statement of what a practice is worth makes an attractive first sentence, and the restriction reads at speed like precision rather than narrowing."
+      }
+    ],
+    "method": "Read any qualifying phrase at the front of the sentence as a frame, then ask how much of the paragraph would fall inside it at each slot. A restriction that is harmless in the middle of a paragraph governs the whole of it from the opening. After that, use the counts: 'one thing', 'two consequences', 'the single guarantee' bind sentences together as tightly as pronouns do."
+  },
+  "mentor": {
+    "challenge": "The sentence begins with a restriction. Ask what the paragraph would be about if that restriction were the first thing a reader met.",
+    "takeaway": "Where a sentence sits decides how far its qualifiers reach; at the top of a paragraph, a qualifier governs everything below it."
+  }
+}

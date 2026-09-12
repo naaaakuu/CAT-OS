@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0015",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "institutions",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "Spend It by March",
+    "theme": "how a rule that forbids carrying a budget forward manufactures the waste it was meant to prevent",
+    "estimated_time_sec": 90,
+    "clue_types": ["article_given_new", "demonstrative", "connective_implicit"],
+    "primary_trap": "summary_where_development_needed",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.given_new", "disc.cause_effect", "disc.concession"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "hold a verdict back until the paragraph has produced the thing it is a verdict about",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of annual budgeting rules; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The paragraph runs rule, rationale, effect, verdict, resistance, close. The verdict cannot precede the effect, because it says 'The waste', and the sentence about the obvious repair has officials agreeing where the fault lies — the naming and the agreement bracket the seat.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot immediately after the rationale, where a reader wants the retort as soon as the rule has been defended. It is a summary of a case the paragraph has not yet made: at that point nothing wasteful has happened, since the March conversion of balances into furniture is described in the sentence that would follow, so 'The waste' has nothing to name. The slot after the sentence about the obvious repair is the second candidate, and it fails because that sentence already has officials agreeing where the fault lies, which is the verdict the missing sentence delivers.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Public bodies are told what they may spend in a year and forbidden to carry the remainder into the next." },
+      { "n": 2, "text": "The rule has a good reason behind it: a department that could bank a surplus would have reason to underspend, and the legislature would lose control of the total." },
+      { "n": 3, "text": "Its effect is that every March the unspent balance becomes a liability, and money held back for prudence must be turned into furniture or consultancy before the clock runs out." },
+      { "n": 4, "text": "The obvious repair, a small carry-over, is resisted by the very people who agree that the fault lies with the rule, because it reopens the question the annual limit was written to close." },
+      { "n": 5, "text": "So the practice survives, defended by nobody and produced by a rule everyone can justify." }
+    ]
+  },
+  "missing": {
+    "text": "The waste is not the manager's but the rule's, and it falls hardest on whoever was most careful during the year.",
+    "position": 3,
+    "function": "the verdict on the March spending described in sentence 3, and the judgement the next sentence says even the opponents of reform agree with"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The waste is not the manager's but the rule's, and it falls hardest on whoever was most careful during the year.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "After sentence 4",
+      "C": "Before sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 3, "B": 4, "C": 0, "D": 2 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence opens with 'The waste', which asks the reader to have seen some, and the paragraph produces it in exactly one place: the March conversion of an unspent balance into furniture or consultancy. It also says the waste falls hardest on the careful, which only makes sense once we know that the money being converted was money held back for prudence. In front, the sentence about the obvious repair describes its opponents as people who agree that the fault lies with the rule, and the paragraph has put that verdict to nobody until the missing sentence delivers it. The seat between the March scramble and the resistance to reform is the only one both ends allow.",
+    "clue_before": "Sentence 3 supplies the waste itself — prudent balances spent on furniture before the year ends — and makes the careful manager the one with a balance to burn.",
+    "clue_after": "Sentence 4 says the repair is resisted by people who agree that the fault lies with the rule, which requires the blame to have been laid on the rule immediately above.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the closing sentence this reads as the moral of the story, and the two sit together comfortably. But the sentence above the slot already has officials agreeing that the fault lies with the rule, so the paragraph would report agreement with a verdict it has not yet delivered.",
+        "seductive_element": "A sentence that blames the rule rather than the officials is a natural last word in a paragraph that ends by saying the practice is defended by nobody."
+      },
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "As an opening, 'The waste' names something the reader has not been shown, and 'the rule' has not been stated either; the sentence would also settle the blame before the paragraph has conceded that the rule has a serious reason behind it.",
+        "seductive_element": "It is the sharpest sentence available and states the point the paragraph is going to prove, which makes it sound like a first line."
+      },
+      {
+        "option": "D",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "Here the paragraph has stated the rule and granted its rationale, and what it needs next is what the rule actually does in March; a verdict on the waste summarises an argument that has not yet been made, and 'The waste' refers to conduct the reader has not seen.",
+        "seductive_element": "A defence of the rule invites an immediate objection, and this sentence is the objection in its strongest form."
+      }
+    ],
+    "method": "Ask what each sentence is for: the rule, the reason for it, the effect, the verdict, the reform. A verdict is a response to an effect, so it cannot be seated above the sentence that describes the effect, however natural the objection feels at the moment the rule is being defended. Then let the definite phrases confirm it."
+  },
+  "mentor": {
+    "challenge": "The sentence begins 'The waste'. Find where the paragraph actually shows something being wasted, and notice which later sentence points back at it.",
+    "takeaway": "A verdict has to follow the evidence that provokes it, even when the objection feels due earlier."
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0012",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "arts-culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "Hung in the Order of a Life",
+    "theme": "how a chronological retrospective manufactures a development the painter never had",
+    "estimated_time_sec": 120,
+    "clue_types": ["connective_implicit", "article_given_new", "lexical_repetition"],
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.given_new", "disc.rhetorical_pivot", "disc.topic_progression"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "separate the verdict of an argument from the step that earns it, and refuse a slot where the verdict would precede its mechanism",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of exhibition practice; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The sentence contains 'thereby', which requires the mechanism to be on the page, and it supplies the circling that the following sentence concedes. The early slot is the trap a quick reader takes because the opening sentence invites a rebuttal at once.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot right after the opening, where the sentence answers the claim that chronological hanging is the least interpretative thing a museum can do. It lands there as the paragraph's verdict with four sentences still to run, and 'thereby' has no process to point at, since the direction that a line of pictures acquires is described only in the sentence that would follow. The slot after the hedging curators is the other candidate, refused by 'the circling', a definite phrase whose painter has not yet circled anything.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A retrospective hangs an artist's work in the order it was made, which sounds like the least interpretative thing a museum could do." },
+      { "n": 2, "text": "Chronology is an argument even so: laid in a line, forty years of pictures acquire a direction, and each canvas becomes a step towards the last." },
+      { "n": 3, "text": "The better exhibitions know it and hedge, saying an artist 'returned to' a motif rather than advanced through one, which concedes the circling without giving up the line." },
+      { "n": 4, "text": "The rooms themselves cannot hedge, since a visitor walks through them in one direction and no other." },
+      { "n": 5, "text": "None of this makes the practice dishonest: an exhibition must have a shape, and a shape is a claim about what mattered." }
+    ]
+  },
+  "missing": {
+    "text": "A painter who circled one problem for a decade, abandoned it, and came back by accident is thereby given a purpose he would not have recognised.",
+    "position": 2,
+    "function": "the cost of the chronological argument set out in sentence 2, and the source of the circling that sentence 3 concedes"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A painter who circled one problem for a decade, abandoned it, and came back by accident is thereby given a purpose he would not have recognised.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 4, "D": 1 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "'Thereby' is the hinge: the sentence says a painter is given a purpose by something, and the only process on the page that could give him one is the line of canvases acquiring a direction, described in the sentence about chronology as an argument. Forward, the next sentence says that the better exhibitions 'concede the circling' — a definite reference to circling that exists nowhere else in the paragraph. The seat immediately after the chronology sentence is where the instrument precedes its casualty and the casualty precedes the concession made about him.",
+    "clue_before": "Sentence 2 describes what a line of pictures does — it confers a direction and makes each canvas a step — which is the process 'thereby' points back at.",
+    "clue_after": "Sentence 3 says the hedging wording 'concedes the circling', which requires a painter who has already been shown circling a problem rather than advancing through it.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here the circling arrives after the sentence that concedes it, so the definite phrase in that sentence has nothing behind it, and the hedge is described as an admission before the paragraph has said what is being admitted.",
+        "seductive_element": "Curatorial hedging and a painter who returns to a motif by accident are the same observation in two registers, so the sentences sound made for each other."
+      },
+      {
+        "option": "C",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "At this point the paragraph is developing a practical consequence — that a room, unlike a caption, cannot qualify anything — and is one sentence from its concession; the verdict on the painter recaps an argument that has already been made and delays the turn, while the concession about circling two sentences above is still left unsupported.",
+        "seductive_element": "The sentence reads as the summing-up a reader is ready for just before a closing concession."
+      },
+      {
+        "option": "D",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "The opening sentence invites a rebuttal, and this sentence sounds like one, but it is the conclusion of an argument that has not yet been made: 'thereby' points at a mechanism the paragraph supplies only afterwards, and the verdict on the painter arrives with four sentences still to run.",
+        "seductive_element": "A claim that something is uninterpretative practically demands an immediate counterexample, and a wronged painter is the most vivid one available."
+      }
+    ],
+    "method": "Find the words in the sentence that presuppose work already done — 'thereby', 'for that reason', 'even so' — and refuse any slot where that work has not yet been performed. Then ask what the sentence leaves behind for later sentences to use: a concession, a count, a noun used definitely. The seat is where the presupposition is satisfied behind and the debt is paid in front."
+  },
+  "mentor": {
+    "challenge": "The sentence says a painter is 'thereby' given a purpose. By what? And which later sentence concedes something that only this sentence could have shown?",
+    "takeaway": "A conclusion cannot be seated above the mechanism that produces it, however keenly the opening sentence invites an answer."
+  }
+}

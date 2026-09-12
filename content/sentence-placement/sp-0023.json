@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0023",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "urban-studies",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Rent That Lets a Thing Start",
+    "theme": "why old buildings house the enterprises that new buildings cannot afford to house",
+    "estimated_time_sec": 90,
+    "clue_types": ["demonstrative", "article_given_new", "parallelism"],
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": ["disc.demonstrative", "disc.cause_effect", "disc.claim_then_evidence", "disc.given_new"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "tell a premise from the consequence drawn from it, and refuse the slot where the paragraph is owed the consequence",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General urban economics of building age and rent; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The clue in front is 'That difference', which needs two rents to have been compared. The strongest wrong slot pairs the sentence with the other half of the same comparison, where the paragraph is owed a conclusion rather than a premise.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot beside the sentence about new construction earning its own cost, because the two sentences are the two halves of one comparison and read as a matched pair. The slot is wrong because what follows is a 'therefore' sentence drawing the conclusion, so the seat needs a consequence and would be given a premise; and the sentence two above, which begins 'That difference', would be left with no difference behind it. The late slot is dismissed by the same phrase and by the fact that the conclusion has already been drawn.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A district of old buildings is usually valued for its appearance, and defended on that ground when somebody proposes to clear it." },
+      { "n": 2, "text": "That difference decides which enterprises can start there: the ones with no record, no collateral and no idea whether they will exist in a year." },
+      { "n": 3, "text": "New construction must earn its own cost from the first tenant, so it can house only businesses that already work." },
+      { "n": 4, "text": "A quarter that has been entirely rebuilt is therefore not a richer version of the old one, but a place where a particular kind of beginning has become impossible." },
+      { "n": 5, "text": "The awkwardness for a city is that the enterprises which eventually pay for new buildings are the ones that could not have started in them." }
+    ]
+  },
+  "missing": {
+    "text": "Its more important property is arithmetic: a building whose construction cost was paid off two generations ago can be let for a rent no new building can charge.",
+    "position": 1,
+    "function": "the replacement of the aesthetic case with the financial one, and the source of the difference the next sentence reasons from"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Its more important property is arithmetic: a building whose construction cost was paid off two generations ago can be let for a rent no new building can charge.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 3, "D": 4 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "'Its more important property' is a comparison with a property already named, and the first sentence names one: the district's appearance, which is what its defenders rely on. In front, the next sentence begins 'That difference decides which enterprises can start there' — and the only difference the paragraph could be pointing at is the gap between a rent an old building can charge and a rent a new one must. The seat directly after the aesthetic case satisfies the comparison behind it and supplies the difference in front of it.",
+    "clue_before": "Sentence 1 gives the property the missing sentence ranks below its own — the appearance a district is valued and defended for.",
+    "clue_after": "Sentence 2 opens 'That difference', which requires two rents to have been set against each other in the sentence immediately above.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Placed here the arithmetic arrives after the sentence that reasons from 'That difference', so the demonstrative has no difference to point at and the enterprises with no collateral are explained by something the reader meets afterwards.",
+        "seductive_element": "Cheap rents and businesses that may not exist in a year are obviously connected, so the sentences seem to belong side by side in either order."
+      },
+      {
+        "option": "C",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The sentence and its proposed neighbour are the two halves of one comparison, which is what makes the slot attractive; but the sentence that follows begins 'A quarter that has been entirely rebuilt is therefore', so the seat is owed the conclusion drawn from the comparison and would be given another premise, while 'That difference' two sentences above is still unexplained.",
+        "seductive_element": "Old rents and new costs are the same thought from both sides, and pairing them reads like careful exposition."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence carries the paragraph's mechanism, but at this point the conclusion has already been drawn about rebuilt quarters, and the closing sentence is about what follows for a city; the mechanism would arrive after everything that rests on it.",
+        "seductive_element": "A concrete financial fact reads well as a late clincher, and the sentence about rebuilt quarters invites an explanation."
+      }
+    ],
+    "method": "Decide what job the slot is advertising before you try to fill it. If the sentence after the slot begins 'therefore' or 'so', the slot wants a premise's consequence, not a second premise; if it begins with a demonstrative, the slot wants whatever that demonstrative names. Matching the subject matter is not the same as filling the vacancy."
+  },
+  "mentor": {
+    "challenge": "One sentence starts 'That difference' before any two things have been compared. Another starts 'therefore'. Each is advertising what the slot above it must contain.",
+    "takeaway": "Two sentences on the same subject are not interchangeable: ask which one the paragraph is waiting for."
+  }
+}

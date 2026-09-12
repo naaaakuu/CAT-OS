@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0024",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "linguistics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Sounds Still in the Spelling",
+    "theme": "why English spelling preserves a pronunciation that stopped being spoken",
+    "estimated_time_sec": 80,
+    "clue_types": ["tense_continuity", "temporal_sequence", "article_given_new"],
+    "primary_trap": "tense_break",
+    "reasoning_patterns": ["disc.tense_continuity", "disc.chronology", "disc.cause_effect", "disc.given_new"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 3, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "place the hinge sentence where a paragraph turns from its history into its present, using a phrase such as ever since as a dated pointer",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General history of English orthography; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The paragraph is present, past, past, hinge, present, present. 'Ever since' and 'the press' both point at the printing sentence, and the sentence after the gap speaks of 'the two' parting company, which needs the pair named.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot early on, after spelling has been called a record, where the sentence sounds like the point that observation is heading for. It is refused by 'ever since' and 'the press': both demand a moment in the past that the paragraph has not reached, and the sentence would announce the outcome of a sequence before the sequence begins, pushing the paragraph from the present back into the past and then forward again. The slot beside the fourteenth-century reader is the other candidate and fails for the same reason with a different word, since printing has not yet been mentioned.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "English spelling is often called irrational, which is unfair to it: it is a record, and records are not built to be efficient." },
+      { "n": 2, "text": "The letters in 'knight' were all pronounced when the spelling was fixed, and a reader of the fourteenth century would have sounded every one of them." },
+      { "n": 3, "text": "Printing arrived while the vowels were still moving and the consonants were still falling silent, and it froze a pronunciation that had another century of change ahead of it." },
+      { "n": 4, "text": "What looks like an arbitrary rule is therefore usually a date: the silent letters mark the sounds a word had at the moment the two parted company." },
+      { "n": 5, "text": "A learner told this does not spell any better, but stops feeling insulted by the language, which is worth something." }
+    ]
+  },
+  "missing": {
+    "text": "The spelling has stayed where the press left it ever since, and the speech has gone on without it.",
+    "position": 3,
+    "function": "the hinge from the historical account to the present state, and the naming of the two things sentence 4 says parted company"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The spelling has stayed where the press left it ever since, and the speech has gone on without it.\"",
+    "options": {
+      "A": "Before sentence 1",
+      "B": "After sentence 1",
+      "C": "After sentence 2",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 0, "B": 1, "C": 2, "D": 3 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "Two words in the sentence are dated: 'the press', which needs printing to have been mentioned, and 'ever since', which needs a moment for the counting to start from. The sentence about printing freezing a pronunciation supplies both. In front, the next sentence says the silent letters mark the sounds a word had 'at the moment the two parted company', and the two are the spelling and the speech, a pair named only by the missing sentence. It is also where the paragraph stops narrating and starts describing what is now true.",
+    "clue_before": "Sentence 3 puts the press into the paragraph and fixes the moment the spelling was frozen, which is what 'the press' and 'ever since' both point back at.",
+    "clue_after": "Sentence 4 speaks of 'the two' parting company, which requires the spelling and the speech to have been set against each other immediately above.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "As an opening the sentence refers to a press nobody has mentioned and counts 'ever since' from a moment that has not been given, so both of its pointers reach back past the beginning of the paragraph.",
+        "seductive_element": "It states the paragraph's governing fact in a single line, and a reader placing by importance rather than by reference will put it first."
+      },
+      {
+        "option": "B",
+        "trap_type": "tense_break",
+        "why_wrong": "The paragraph moves from a judgement in the present into a historical account and only then returns; here the outcome of that history would be announced before the history begins, so the tenses run present, present perfect, past, past, and 'ever since' dates itself from a moment the reader reaches two sentences later.",
+        "seductive_element": "Calling spelling a record invites the observation that it has stayed put, so the two sentences sound like a single thought."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is needed, but not before the printing press exists in the paragraph: here 'the press' names something first mentioned in the sentence that would follow, and the narrative of vowels still moving would arrive after the reader has been told that everything stopped.",
+        "seductive_element": "A sentence about fourteenth-century pronunciation seems to call for a remark about what happened to the spelling afterwards."
+      }
+    ],
+    "method": "Treat dating expressions as references: 'ever since', 'by then', 'from that point' all need a moment already on the page, exactly as a pronoun needs a noun. Then check the direction of the tenses; a paragraph that has turned from its history to the present rarely turns back, so the sentence that makes the turn sits at the join."
+  },
+  "mentor": {
+    "challenge": "The sentence says 'ever since'. Since when? Find the sentence that gives the date, and put it above.",
+    "takeaway": "A time phrase points backwards as firmly as a pronoun does; place the sentence where its moment already exists."
+  }
+}

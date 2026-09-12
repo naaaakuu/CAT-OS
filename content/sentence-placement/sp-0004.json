@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0004",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "political-theory",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "The Officer Who Could Stop Nobody",
+    "theme": "why a traffic officer is obeyed: authority as something granted, not imposed",
+    "estimated_time_sec": 60,
+    "clue_types": ["demonstrative", "article_given_new", "lexical_repetition"],
+    "primary_trap": "wrong_reference_target",
+    "reasoning_patterns": ["disc.demonstrative", "disc.given_new", "disc.definition_then_application"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 2, "competing_slots": 2, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "resolve a demonstrative phrase to the exact noun it names rather than to the nearest idea on the same topic",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General political theory of authority; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "A gentle two-direction item: 'That grant' has exactly one antecedent in the paragraph, and the closing sentence's 'the cheaper of the two' cannot be read until the two have been named. Suitable as an early placement item.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about her physical advantage, where a reader takes 'That grant' to mean the drivers' compliance and hears a natural contrast with force. It fails on one word: 'grant'. Nothing has been granted until the third sentence says the drivers grant her the right to give the instruction, and until then the paragraph has described only what the officer lacks. The opening slot is dismissed faster: a paragraph cannot begin by calling something 'That grant' when nothing has been offered.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A police officer who directs traffic at a broken signal is obeyed by drivers who could easily ignore her." },
+      { "n": 2, "text": "Her physical advantage over a line of cars is nothing: if every driver decided to go, she could stop none of them." },
+      { "n": 3, "text": "What she has instead is something the drivers grant her — the right to give that instruction in that place." },
+      { "n": 4, "text": "Authority is therefore the cheaper of the two and the more fragile, since it lasts exactly as long as the granting does." }
+    ]
+  },
+  "missing": {
+    "text": "That grant is the difference between power and authority: power makes refusal costly, while authority makes it wrong.",
+    "position": 3,
+    "function": "the naming of the distinction the first three sentences have been illustrating, which the closing sentence then compares"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"That grant is the difference between power and authority: power makes refusal costly, while authority makes it wrong.\"",
+    "options": {
+      "A": "Before sentence 1",
+      "B": "After sentence 1",
+      "C": "After sentence 2",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 0, "B": 1, "C": 2, "D": 3 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence begins 'That grant', which is a pointer at a specific thing already handed over in the text. Only sentence 3 hands anything over: the drivers grant her the right to give that instruction. The sentence also names two terms, power and authority, and the closing sentence then says 'Authority is therefore the cheaper of the two' — a comparison that is unreadable until both terms have been put on the page. The seat after sentence 3 is where the pointer finds its object and the comparison finds its pair.",
+    "clue_before": "Sentence 3 says the drivers grant her the right to give the instruction; that act of granting is the only thing 'That grant' can be pointing at.",
+    "clue_after": "The last sentence calls authority 'the cheaper of the two' and reasons 'therefore', which requires the two to have been named and the distinction drawn immediately before.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_connective",
+        "why_wrong": "A paragraph cannot open with 'That grant': the demonstrative announces something the reader has been given already, and at the opening the reader has been given nothing. The definition would also arrive before the case it is drawn from, turning an illustration into an afterthought.",
+        "seductive_element": "The sentence states the paragraph's governing distinction, and governing distinctions often open a paragraph of political theory."
+      },
+      {
+        "option": "B",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "After the first sentence the paragraph has shown obedience but nothing else: no grant has been made and no powerlessness described, so a sentence contrasting power with authority has only one half of its contrast available and 'That grant' points at the drivers' obedience, which is a consequence rather than a grant.",
+        "seductive_element": "Drivers obeying an officer who cannot compel them looks like the very distinction the sentence draws, so the sentence seems to be explaining what has just been observed."
+      },
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here 'That grant' would have to bind to the officer's lack of physical advantage, which is not something granted to her but something she does not have; and the sentence that follows opens 'What she has instead', introducing as new the very right the missing sentence would already have called a grant.",
+        "seductive_element": "The sentence about her physical weakness is exactly where a reader expects the word power, so the distinction seems to be answering it."
+      }
+    ],
+    "method": "Treat 'this', 'that' and 'such' as instructions to look backwards for one specific noun, not for the general topic. Name the noun out loud; if the sentence before a candidate slot does not contain it, the slot is wrong however well the topics match. Then check the sentence after the slot for a comparison or a count that only the missing sentence supplies."
+  },
+  "mentor": {
+    "challenge": "The sentence begins with a pointer. Only one sentence in the paragraph puts anything into the officer's hands for it to point at.",
+    "takeaway": "'That' points at a noun, not at a topic — find the noun and you have found the seat."
+  }
+}

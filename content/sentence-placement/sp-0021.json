@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0021",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "Three Seconds to Take Over",
+    "theme": "why an automated system that hands control back at the last moment redistributes blame rather than work",
+    "estimated_time_sec": 120,
+    "clue_types": ["pronoun_ref", "stance_continuity", "connective_implicit"],
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": ["disc.stance_continuity", "disc.concession", "disc.rhetorical_pivot", "disc.pronoun_antecedent"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "read a paragraph's concessions as structure, and refuse a slot that would make the argument endorse what it has already refused",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of supervisory automation and responsibility; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Defence, concession, turn, verdict, counter-concession, recommendation. The turn is the missing sentence; seated one slot early it makes the paragraph refute and then endorse, which is the failure the item teaches to hear.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot immediately after the defence of automation as a partnership, where the refutation seems to belong beside the claim it refutes. Placed there, the next sentence — which says the defence holds wherever the person stays in the loop, and calls a supervisor who intervenes twice an hour a supervisor still — becomes an endorsement arriving after the refutation, so the paragraph changes sides twice in three sentences. The opening slot is dismissed by 'it' in 'What breaks it', which would have no partnership to break.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Automation is usually defended as a partnership: the machine takes the routine and the person keeps the judgement." },
+      { "n": 2, "text": "The defence holds where the person stays in the loop, and a supervisor who intervenes twice an hour is a supervisor still." },
+      { "n": 3, "text": "Calling the resulting failure human error is therefore a strange use of the phrase, since the error is what the design elicited." },
+      { "n": 4, "text": "None of this argues for removing the person, because a system with nobody to answer for it is worse than one with somebody who answers unfairly." },
+      { "n": 5, "text": "It argues for a different question at the design stage: not whether a person could intervene, but whether a person who had done nothing for an hour could." }
+    ]
+  },
+  "missing": {
+    "text": "What breaks it is the quiet hour: attention does not survive a long stretch of correct behaviour, and the handover is demanded at the least recoverable moment.",
+    "position": 2,
+    "function": "the turn that limits the concession in sentence 2 and produces the failure the next sentence refuses to call human error"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"What breaks it is the quiet hour: attention does not survive a long stretch of correct behaviour, and the handover is demanded at the least recoverable moment.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "Before sentence 1",
+      "C": "After sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 3, "B": 0, "C": 1, "D": 2 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The paragraph is built as defence, concession, turn. The second sentence says where the defence holds — wherever the person stays in the loop — and the missing sentence names the case that is not like that, the long stretch of nothing followed by a handover at the worst possible moment. The sentence after the slot then speaks of 'the resulting failure' and concludes 'therefore', both of which require a failure to have been produced immediately above. Seated after the concession, the sentence limits what has been granted and supplies what the verdict is drawn from.",
+    "clue_before": "Sentence 2 concedes that the partnership works while the person stays in the loop, which is exactly the condition 'What breaks it' names the exception to.",
+    "clue_after": "Sentence 3 says 'the resulting failure' and reasons 'therefore', so a failure and its cause must both stand in the sentence directly above.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Between the verdict on human error and the refusal to remove the person, the sentence reads as an elaboration and offends nothing local. It leaves the sentence above it calling a failure 'the resulting failure' when no failure has occurred, and drawing a conclusion with 'therefore' from a concession about attentive supervisors.",
+        "seductive_element": "The talk of what the design elicited invites a description of the design, and the quiet hour is that description."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "As an opening the sentence says 'What breaks it' with nothing for the pronoun to break; the partnership it refers to is described in the sentence that would follow, and a paragraph cannot begin by naming the exception to a rule it has not stated.",
+        "seductive_element": "The sentence is the most arresting line in the paragraph and states its real subject, which tempts a reader to lead with it."
+      },
+      {
+        "option": "C",
+        "trap_type": "stance_shift",
+        "why_wrong": "Here the refutation lands immediately beside the defence, and the sentence that follows then grants that the defence holds and that an intervening supervisor is a supervisor still, so the paragraph would attack the partnership and endorse it in consecutive sentences instead of conceding first and turning afterwards.",
+        "seductive_element": "An objection normally sits next to the claim it answers, and 'it' seems to point straight back at the partnership just described."
+      }
+    ],
+    "method": "Map the stance before you consider slots: which sentence states the view, which grants it something, which turns against it, which takes something back. A turn seated above the concession makes the paragraph endorse what it has already refused, and that is visible without reading a single pronoun. Then use the pronouns and the 'therefore' to confirm the seat the stance has chosen."
+  },
+  "mentor": {
+    "challenge": "Notice which sentence grants the defence its best case. A sentence that breaks the defence has to come after that, not before it.",
+    "takeaway": "Concede, then turn. A paragraph that turns first appears to change its mind twice, and no author writes that way."
+  }
+}

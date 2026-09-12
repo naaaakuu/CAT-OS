@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0005",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "Who Signs and Who Pays",
+    "theme": "why the law's named payer of a charge is not the party who bears it, and what settles the share",
+    "estimated_time_sec": 120,
+    "clue_types": [
+      "lexical_repetition",
+      "article_given_new",
+      "connective_implicit",
+      "parallelism"
+    ],
+    "primary_trap": "right_idea_wrong_position",
+    "reasoning_patterns": [
+      "disc.given_new",
+      "disc.cause_effect",
+      "disc.example_after_claim",
+      "disc.topic_progression"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 4,
+      "competing_slots": 5,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 4
+    },
+    "learning_objective": "place an illustrative sentence at the rule it illustrates rather than at the earlier sentence that only raises the topic",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General economics of who bears a charge; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Premium: the sentence could follow any of three sentences on topic, and only two words decide it — 'the same rule', which needs a rule and not merely a process, and 'there' in the next sentence, which needs a place. Written so that the rival one seat early is genuinely attractive.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot one seat earlier, after the sentence about the parties adjusting the price until the charge is shared. A strong candidate argues that sharing a charge is the rule, so a subsidy running the other way belongs immediately there. What defeats it is that the sentence about adjustment states only that a share happens, not what fixes it, whereas the illustration turns entirely on what fixes it: a city that cannot build is a side with nowhere else to go, which is the rule stated in the next sentence. The end slot is the second rival and is killed by 'The tenants there', a phrase that needs a city the paragraph has not yet mentioned.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "Every tax is written as a charge on somebody in particular — the employer, the seller, the landlord — and the argument about it is conducted in those terms."
+      },
+      {
+        "n": 2,
+        "text": "The statute cannot decide who ends up poorer, because the parties go on adjusting the price between them until the charge is shared out."
+      },
+      {
+        "n": 3,
+        "text": "How it is shared depends on which of them finds it easier to walk away: the side with somewhere else to go concedes least."
+      },
+      {
+        "n": 4,
+        "text": "The tenants there are not being cheated; they are bidding against one another with more money, in a market the payment did nothing to enlarge."
+      },
+      {
+        "n": 5,
+        "text": "So the useful question is never who signs the cheque, but which side can more easily do without the bargain."
+      }
+    ]
+  },
+  "missing": {
+    "text": "A subsidy follows the same rule in reverse, which is why money paid to tenants in a city that cannot build ends up in the hands of landlords.",
+    "position": 3,
+    "function": "the illustration of the rule stated in sentence 3, and the sentence that supplies the city and the tenants the next sentence speaks of as known"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A subsidy follows the same rule in reverse, which is why money paid to tenants in a city that cannot build ends up in the hands of landlords.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "After sentence 4",
+      "C": "After sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": {
+      "A": 3,
+      "B": 4,
+      "C": 1,
+      "D": 2
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "'The same rule' requires a rule, and only sentence 3 states one: the side with somewhere else to go concedes least. The illustration is built on precisely that rule — a city that cannot build is a market in which one side has nowhere else to go — so it follows the statement of the rule rather than any earlier sentence about charges being shared. The next sentence then says 'The tenants there', a phrase with a place in it; the only place in the paragraph is the city the missing sentence names. Between the rule and the tenants is the single seat that both ends allow.",
+    "clue_before": "Sentence 3 states the rule that decides the share — the side that can walk away concedes least — which is the rule the missing sentence says a subsidy follows in reverse.",
+    "clue_after": "Sentence 4 speaks of 'The tenants there', assuming both a set of tenants and a city; neither has appeared unless the missing sentence has already named them.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "At the end the sentence reads as a closing illustration before the final generalisation, but the sentence about tenants bidding against one another has already said 'The tenants there', and no tenants and no city exist in the paragraph until the missing sentence introduces them.",
+        "seductive_element": "A concrete case just before a summarising last line is a familiar shape, and the landlords in the illustration chime with the landlords named in the opening list."
+      },
+      {
+        "option": "C",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The subject matches — a landlord appears in both sentences — but the job does not: at this point the paragraph has to explain why the statute cannot settle the matter, and an illustration of a rule arrives instead, with 'the same rule' pointing at an opening sentence that states no rule at all.",
+        "seductive_element": "The word landlord appears in both sentences, and a reader tracking the repeated noun feels the thread continue."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "Sentence 2 says the charge gets shared out but not what fixes the share; the illustration depends on what fixes it, since its whole force is that a city which cannot build leaves one side unable to withdraw. Placed here, the case arrives before the principle it is a case of, and sentence 3 then states as new the rule the example has already assumed.",
+        "seductive_element": "Sharing a charge sounds exactly like a rule, so 'the same rule in reverse' seems to have found its antecedent one sentence early."
+      }
+    ],
+    "method": "When a sentence says 'the same rule', 'this principle' or 'for that reason', ask what would have to be true for the reference to be exact, not merely apt: a rule is a statement of what decides something, not a report that something happens. Then look for a word in the following sentence — a place, a count, a name — that the paragraph can only have acquired from the sentence you are placing."
+  },
+  "mentor": {
+    "challenge": "Three sentences here are about a charge being shared. Only one of them states the rule that decides the share, and only one word in the sentence after the gap tells you where a city has to have been named.",
+    "takeaway": "An example sits with the principle it exemplifies, not with the sentence that merely raised the subject."
+  }
+}

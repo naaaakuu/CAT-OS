@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0025",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "architecture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "As Deep as the Window Is High",
+    "theme": "why old workrooms have tall windows and high ceilings, and why the rule is returning",
+    "estimated_time_sec": 65,
+    "clue_types": ["connective_explicit", "pronoun_ref", "lexical_repetition"],
+    "primary_trap": "wrong_connective",
+    "reasoning_patterns": ["disc.transition_word", "disc.cause_effect", "disc.pronoun_antecedent"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "check what the connective in the following sentence would point at before accepting a slot",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of daylighting in older buildings; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "An early-tier item whose wrong slots are all diagnosed by asking what 'That is why', 'for the same reason' and 'a different reason' would be pointing at; the correct seat is the only one that leaves all three pointing at the daylight rule.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot straight after the daylight rule, where a fact about the rule's survival seems to follow the rule naturally. It breaks the sentence below it: 'That is why the windows of old schoolrooms run almost to the ceiling' would then explain tall windows by the slowness of building habits rather than by the reach of daylight. The end slot is the other candidate and is refused by the closing sentence, which says the rule is being rediscovered 'for a different reason' and needs the earlier reason immediately above it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Before electric light, the depth of a room was set by the height of its windows: daylight reaches about twice as far into a room as the head of the window is high." },
+      { "n": 2, "text": "That is why the windows of old schoolrooms and workshops run almost to the ceiling, and why the sill is often low enough to be inconvenient." },
+      { "n": 3, "text": "Ceilings were built high for the same reason, and not, as is usually said, for grandeur; a high ceiling was what allowed a tall window." },
+      { "n": 4, "text": "It is being rediscovered now for a different reason, since a room lit by a window costs nothing to light and one lit by a lamp does not." }
+    ]
+  },
+  "missing": {
+    "text": "The rule survived the arrival of the electric lamp by about a generation, because habits in building change more slowly than the equipment inside them.",
+    "position": 3,
+    "function": "the fate of the daylight rule once lighting changed, and the antecedent of the pronoun and the earlier reason the last sentence contrasts with"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The rule survived the arrival of the electric lamp by about a generation, because habits in building change more slowly than the equipment inside them.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 4, "D": 1 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The paragraph states a rule about daylight and then spends two sentences showing it at work in windows and in ceilings; the missing sentence is what becomes of the rule when electric light arrives. The sentence that follows begins 'It is being rediscovered now for a different reason', which needs two things from immediately above: a rule for 'It' to name, and an earlier reason for the new one to be different from. Only the seat after the ceilings sentence leaves the two explanatory connectives above it pointing at daylight, where they belong.",
+    "clue_before": "Sentence 3 completes the account of the rule in use — windows tall, ceilings high — so the paragraph is ready to say what happened to the rule afterwards.",
+    "clue_after": "Sentence 4 says the rule is being rediscovered 'for a different reason', which requires the rule and its original reason to have been carried to the sentence above.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "The sentence that follows this slot says ceilings were built high 'for the same reason', and the nearest reason would then be the slowness of building habits rather than the reach of daylight, which is the reason the paragraph means.",
+        "seductive_element": "Old schoolrooms and the survival of an old rule sound like the same subject, so the sentences seem to belong together."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs to the argument, but placed after the closing line it leaves 'It is being rediscovered now for a different reason' with no rule to name and no earlier reason to contrast with, so the last sentence has to reach back three sentences for both.",
+        "seductive_element": "A remark about how long a habit lasted makes an agreeable final observation about an old building practice."
+      },
+      {
+        "option": "D",
+        "trap_type": "wrong_connective",
+        "why_wrong": "Here the sentence stands between the daylight rule and the sentence beginning 'That is why', so the tall windows of old schoolrooms would be explained by the slow pace of change in building habits instead of by how far daylight reaches into a room.",
+        "seductive_element": "Following a rule immediately with the fact that it survived is a natural order, and both sentences are about the rule itself."
+      }
+    ],
+    "method": "Read the sentence after each candidate slot and ask what its connective would be pointing at once your sentence is in place. 'That is why', 'for the same reason' and 'a different reason' each reach back to the nearest fitting item, so a sentence dropped in front of them changes what they explain. The right slot is the one where every connective still points where the argument needs it to."
+  },
+  "mentor": {
+    "challenge": "Three sentences here explain something by pointing back at a reason. Put the sentence where none of those pointers is disturbed.",
+    "takeaway": "Inserting a sentence moves what the next connective points at; check the pointer, not only the fit."
+  }
+}

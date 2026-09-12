@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0016",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "The Wall That Collected the Tolls",
+    "theme": "why towns went on maintaining walls that had stopped being defences",
+    "estimated_time_sec": 75,
+    "clue_types": ["article_given_new", "temporal_sequence", "connective_implicit"],
+    "primary_trap": "contradicts_neighbour",
+    "reasoning_patterns": ["disc.opening_sentence", "disc.given_new", "struct.phenomenon_explanation", "disc.chronology"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 2, "competing_slots": 3, "concept_abstractness": 2, "syntactic_complexity": 3 },
+    "learning_objective": "spot the sentence that states the puzzle a paragraph exists to explain, and test late slots against the paragraph's chronology",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General urban history of town walls and tolls; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "An opener whose strongest rival is the closing slot, where the paragraph has already demolished the walls. Written so that the contradiction is a matter of dates rather than of tone.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the end slot, where the sentence reads as a summarising observation about how long walls outlived their military use. It is refused by the sentence above it, which says the walls came down within a generation once the tolls were abolished: a paragraph cannot report the demolition and then report that the towns went on repairing them. The slot after the fiscal explanation is the other candidate, and it leaves that sentence's 'The reason' with nothing to be the reason for.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "The reason was fiscal rather than military: a wall with four gates in it is a machine for collecting a toll on everything that enters." },
+      { "n": 2, "text": "A council that let the masonry decay was not saving money; it was inviting carts to come in through the gap and pay nothing." },
+      { "n": 3, "text": "This explains a pattern that looks like nostalgia in the records: walls kept in repair by towns nobody had threatened for a century, and gatehouses rebuilt more handsomely than any defence required." },
+      { "n": 4, "text": "When the tolls were abolished the walls came down within a generation, and the stone went into the roads that replaced them." }
+    ]
+  },
+  "missing": {
+    "text": "Long after cannon had made town walls useless in a siege, the towns went on repairing them.",
+    "position": 0,
+    "function": "the puzzle the whole paragraph exists to explain, and the fact the first sentence's explanation is an explanation of"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Long after cannon had made town walls useless in a siege, the towns went on repairing them.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 4",
+      "C": "Before sentence 1",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 4, "C": 0, "D": 1 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The first sentence you are shown begins 'The reason was fiscal rather than military', which presupposes two things: a fact in need of a reason, and a military explanation worth ruling out. The missing sentence supplies both at once, since a wall still being repaired after cannon had made it useless is exactly a fact whose military explanation has just failed. Nothing else in the paragraph supplies them, and the sentence itself points backwards at nothing, which is what an opening sentence looks like.",
+    "clue_before": null,
+    "clue_after": "Sentence 1 answers a question with 'The reason was fiscal rather than military', so the paragraph must already have set out a practice that looks military and is not.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is the paragraph's premise, but by this point two sentences have already taken it for granted: one explains why the walls were kept up, the other says what a council lost by letting them decay. Stating the practice here introduces as news what the paragraph has been reasoning from.",
+        "seductive_element": "The sentence about decaying masonry is about maintenance, so a sentence about towns going on repairing walls seems to continue the thought."
+      },
+      {
+        "option": "B",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence above this slot has the walls coming down within a generation and their stone going into the roads; putting the towns back to repairing them afterwards makes the paragraph contradict its own chronology in consecutive sentences.",
+        "seductive_element": "It reads as a closing summary of how long the walls survived their usefulness, which is roughly what the paragraph has been about."
+      },
+      {
+        "option": "D",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Placed after the fiscal explanation, the fact arrives once the paragraph has already given the reason for it, so 'The reason' at the start of that sentence has nothing behind it to be a reason for, and the contrast with a military motive is left hanging.",
+        "seductive_element": "Explanation followed by the case it explains is a shape that reads acceptably at speed, and both sentences mention walls and defence."
+      }
+    ],
+    "method": "When a paragraph begins by giving a reason, look for the puzzle it answers; that puzzle is either the sentence you are placing or the paragraph is incomplete. Then test every late slot against the timeline: a sentence that puts an activity back in progress after the paragraph has ended it is contradicting its neighbour, however well it sums the argument up."
+  },
+  "mentor": {
+    "challenge": "The paragraph's first visible sentence gives a reason. Ask what fact needed one, and check the dates before you accept a late slot.",
+    "takeaway": "An explanation needs its puzzle stated first, and a chronology will not run backwards to accommodate a good-sounding last line."
+  }
+}

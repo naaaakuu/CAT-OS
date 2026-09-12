@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0014",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "markets",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Price of Selling It Again",
+    "theme": "why the resale market sets part of the price of a new durable good",
+    "estimated_time_sec": 60,
+    "clue_types": ["article_given_new", "lexical_repetition", "demonstrative"],
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": ["disc.given_new", "disc.cause_effect", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 2, "transition_ambiguity": 2, "competing_slots": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "reject a slot where the sentence would repeat its neighbour, and find the slot whose next sentence needs the noun it introduces",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General market reasoning about durable goods and resale; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "An early-tier item where the decisive clue is a pairing in the last sentence — the expense and the discount as one fact seen twice — and the tempting slot is the one where the sentence would say the opening sentence over again in reverse.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening sentence, where the penalty for a weak resale price seems to follow immediately from the reward for a strong one. It is the same claim turned round, so the paragraph would make its first point twice, and the word 'neglect' would have nothing to name, since nobody has yet been described as taking care of a resale price. The end slot is the other candidate and is refused by the closing sentence, which adds the discount to the expense and needs both of them above it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A car that will be easy to sell in four years is worth more today than one that will not." },
+      { "n": 2, "text": "Part of the price of anything durable is the price somebody else will pay for it afterwards, which is why two machines that work equally well can fetch very different sums." },
+      { "n": 3, "text": "Manufacturers behave as though they know this: they keep parts available for a decade and are slow to change a model, and both of those choices are expensive." },
+      { "n": 4, "text": "The expense and the discount are one fact seen from two sides: the second-hand market is not a rival to the new one but part of what the new one sells." }
+    ]
+  },
+  "missing": {
+    "text": "A brand that neglects the resale price pays for the neglect at the showroom, in a discount it can never withdraw.",
+    "position": 3,
+    "function": "the penalty that matches the expensive care described in sentence 3, and the discount the last sentence pairs with that expense"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A brand that neglects the resale price pays for the neglect at the showroom, in a discount it can never withdraw.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 4, "D": 1 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The word 'neglect' needs something to be neglected, and the paragraph establishes the care first: manufacturers keep parts available and change models slowly, at a cost. The missing sentence states what happens to a firm that does not bother, and the last sentence then sets that discount against the expense as one fact seen twice, which requires both of them to be on the page. Between the expensive care and the sentence that points back at a discount is the one seat that answers both demands.",
+    "clue_before": "Sentence 3 describes manufacturers spending money to protect a resale price, which is the care that a brand described as neglectful must be failing to take.",
+    "clue_after": "Sentence 4 adds the expense to the discount and calls the two one fact, so the paragraph must contain a discount as well as the expensive care above it.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "At this point the paragraph has stated a general principle about durable goods but has described nobody attending to a resale price, so 'the neglect' names a failure to do something that has not yet been shown as a practice; the sentence about manufacturers then introduces that practice after the failure has been judged.",
+        "seductive_element": "A general rule followed at once by what happens when a firm ignores it is a natural order, and both sentences talk about price."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs to the argument, but placed last it arrives after the conclusion it supports, and the closing sentence is left pairing an expense with a discount when only the expense has been mentioned.",
+        "seductive_element": "A concrete penalty makes a satisfying final line, and the paragraph does end on the commercial consequence."
+      },
+      {
+        "option": "D",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The opening sentence already says that an easy sale later is worth money today; a brand losing that money at the showroom is the same claim turned round, so the paragraph would make its opening point twice before doing anything with it, and the general rule that follows would then be a third telling.",
+        "seductive_element": "The two sentences are the two faces of one idea, which is exactly what makes the pairing feel natural."
+      }
+    ],
+    "method": "Before you place a sentence, ask what it adds that its proposed neighbour has not already said; a sentence that is the mirror image of the one above it is a repetition, not a development. Then look for a later sentence that adds two things together — an expense and a discount, two costs, both halves of a bargain — and check that the paragraph actually contains both of them."
+  },
+  "mentor": {
+    "challenge": "The last sentence adds an expense to a discount. The four sentences you can see contain the expense and no discount.",
+    "takeaway": "Say what the sentence adds. If it only turns its neighbour round, the slot beside that neighbour is the wrong one."
+  }
+}

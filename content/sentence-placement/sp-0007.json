@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0007",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "Thirty, or Reasonable",
+    "theme": "why the choice between a bright-line rule and an open standard is a trade rather than a safer option",
+    "estimated_time_sec": 95,
+    "clue_types": ["demonstrative", "stance_continuity", "connective_implicit"],
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": ["disc.rhetorical_pivot", "disc.demonstrative", "disc.stance_continuity", "disc.concession"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "learning_objective": "place a turn after the concession it answers, and use a later demonstrative to confirm the seat",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General jurisprudence of rules and standards; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The turn must come after the concession, not beside the claim it eventually defeats. 'That difference in visibility' in the following sentence is the confirming clue, and the paragraph's stance — even-handed, not pro-standard — is what the early slot destroys.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot immediately after the received teaching, where a reader feels the answer should sit next to the claim it answers. Placing it there makes the paragraph refuse the teaching and then, in the next sentence, explain approvingly that the teaching has a reason behind it — an argument that changes sides in consecutive sentences. The later slot is the second rival, and it is refused by the phrase 'that difference in visibility', since no cost in the paragraph is quiet or audible unless the missing sentence has said so.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Lawyers are taught that a clear rule is the safer instrument and an open standard an indulgence granted to judges." },
+      { "n": 2, "text": "The teaching has a reason behind it: a number can be obeyed by a driver who has never read a judgment, and a standard cannot." },
+      { "n": 3, "text": "Once that difference in visibility is allowed for, neither device is the cautious one in general, since a road, where everyone must judge quickly and alike, is not a boardroom." },
+      { "n": 4, "text": "Courts move between the two accordingly, hardening a standard into a list of factors when the guessing grows expensive, and softening a rule with exceptions when its crudeness begins to embarrass them." },
+      { "n": 5, "text": "Either movement is a price being renegotiated rather than a failure of nerve." }
+    ]
+  },
+  "missing": {
+    "text": "What makes the comparison unfair is that a rule's costs are paid quietly, by the cases it fits badly, while a standard's costs arrive as visible disagreement.",
+    "position": 2,
+    "function": "the turn that answers the concession in sentence 2 and supplies the difference in visibility sentence 3 allows for"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"What makes the comparison unfair is that a rule's costs are paid quietly, by the cases it fits badly, while a standard's costs arrive as visible disagreement.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 4, "D": 1 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The paragraph runs claim, concession, turn. The teaching is stated; the second sentence grants it a real reason; the missing sentence is the turn that says why the comparison nevertheless flatters the rule, because one instrument's costs are invisible and the other's are audible. The next sentence then begins 'Once that difference in visibility is allowed for' — and nothing in the paragraph has made any cost quiet or audible until the missing sentence does. The seat between the concession and the sentence that uses its result is the only one both ends permit.",
+    "clue_before": "Sentence 2 concedes what the rule genuinely does better, and a sentence beginning 'What makes the comparison unfair' is the answer a concession like that invites.",
+    "clue_after": "Sentence 3 opens 'Once that difference in visibility is allowed for', and no cost above it has been described as quiet or as audible except in the missing sentence.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here the explanation of the hidden costs would arrive after the sentence that has already allowed for 'that difference in visibility', so the phrase points at a contrast the reader has not met, and the conclusion about roads and boardrooms is drawn from a premise supplied afterwards.",
+        "seductive_element": "The sentence looks like a gloss on the conclusion just reached, and glosses commonly follow the line they explain."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the sentence about courts hardening and softening their instruments, the language of quiet and visible costs reads smoothly and seems to diagnose the drift. But two sentences earlier the paragraph has already allowed for a difference in visibility that nothing has described, and the closing sentence treats the price as something the reader has been shown being paid.",
+        "seductive_element": "Costs that embarrass a court chime with costs that arrive as visible disagreement, so the slot feels like the natural home of the vocabulary."
+      },
+      {
+        "option": "D",
+        "trap_type": "stance_shift",
+        "why_wrong": "Placed immediately after the teaching, the sentence refuses it at once; the following sentence then explains, with evident sympathy, that the teaching has a reason behind it. The paragraph would attack a view and defend it in consecutive sentences, when its actual movement is to concede first and turn afterwards.",
+        "seductive_element": "An objection normally sits next to the claim it objects to, and the word comparison seems to point straight back at the pair the first sentence sets up."
+      }
+    ],
+    "method": "Read the paragraph for its stance before you read the options: find where it grants something and where it turns. A turn belongs after the concession, not next to the claim it eventually defeats, because a paragraph that refuses and then concedes has changed sides. Confirm the seat with the first demonstrative that follows it."
+  },
+  "mentor": {
+    "challenge": "One sentence here concedes something to the received teaching. Ask whether the sentence you are placing answers the teaching or answers the concession.",
+    "takeaway": "Claim, concession, turn: the turn goes after the concession, or the paragraph appears to change its mind twice."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0011",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "psychology",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "Practise Alone, Perform in Company",
+    "theme": "why being watched helps a practised skill and harms one still being learnt",
+    "estimated_time_sec": 110,
+    "clue_types": [
+      "connective_explicit",
+      "article_given_new",
+      "parallelism"
+    ],
+    "primary_trap": "wrong_connective",
+    "reasoning_patterns": [
+      "disc.transition_word",
+      "disc.cause_effect",
+      "disc.given_new",
+      "disc.claim_then_evidence"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 5,
+      "competing_slots": 4,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "check that a causal connective points at a cause that actually yields the effect claimed, not merely at a related mechanism",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General psychology of performance before an audience; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The paragraph offers a mechanism and then a two-branch consequence; the missing sentence is the branching step. The rival slot leaves 'That is why' pointing at a mechanism that explains a lift but not a split, which is the precise failure the item teaches.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence beginning 'That is why', where the split between help and harm reads as an expansion of the contrast just drawn. It fails on the connective: 'That is why' would then point only at arousal favouring the strongest response, which explains a lift and not a divergence, and the divergence is what the sentence goes on to assert. The slot before the arousal sentence is the other candidate, and it fails because the missing sentence speaks of 'the strongest response' as a known quantity, which nothing above it has supplied.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "An audience makes people better at what they can already do and worse at what they are still learning."
+      },
+      {
+        "n": 2,
+        "text": "The usual explanation is arousal: being watched raises the general level of activation, and activation favours whichever response is already strongest."
+      },
+      {
+        "n": 3,
+        "text": "That is why one audience can act as encouragement in one room and as sabotage in the next, with nothing about the audience itself changing."
+      },
+      {
+        "n": 4,
+        "text": "The advice that follows is unwelcome to anyone who enjoys company: practise alone, and perform in front of people."
+      },
+      {
+        "n": 5,
+        "text": "It is also harder to act on than it sounds; the line between practised and still learning is not visible from the inside."
+      }
+    ]
+  },
+  "missing": {
+    "text": "For a practised skill the strongest response is the right one, so the lift lands where it helps; for a new skill it is whatever error the learner has repeated most.",
+    "position": 2,
+    "function": "the branching step that turns the arousal mechanism into two opposite outcomes, which the next sentence draws its consequence from"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"For a practised skill the strongest response is the right one, so the lift lands where it helps; for a new skill it is whatever error the learner has repeated most.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 1",
+      "C": "After sentence 2",
+      "D": "After sentence 3"
+    },
+    "option_positions": {
+      "A": 4,
+      "B": 1,
+      "C": 2,
+      "D": 3
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence treats 'the strongest response' as something the reader has already been given, and only the arousal sentence supplies it, with activation favouring whichever response is already strongest. It is also the step that turns one mechanism into two outcomes, and the sentence after the slot needs exactly that: 'That is why one audience can act as encouragement in one room and as sabotage in the next' is a consequence of a split, not of a lift. Arousal alone predicts more of whatever a person tends to do; only the missing sentence explains why that is help in one case and harm in the other.",
+    "clue_before": "Sentence 2 introduces the strongest response and says activation favours it; the missing sentence takes that phrase as given and asks what the strongest response happens to be.",
+    "clue_after": "Sentence 3 opens 'That is why' and asserts opposite effects in two rooms, which requires a cause that divides into two branches rather than one that simply raises performance.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Next to the advice about practising alone the sentence reads as its justification, and the pairing is comfortable. But the advice has already been derived from the split, the sentence after it begins 'It is also harder to act on', continuing the advice rather than a mechanism, and the connective two sentences above is left explaining a divergence nobody has established.",
+        "seductive_element": "Practised against still learning appears in both sentences, so the vocabulary seems to continue seamlessly."
+      },
+      {
+        "option": "B",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The topic is identical and the job is not: the paragraph here owes the reader a mechanism, which the next sentence supplies as arousal, while this sentence is the branching that the mechanism has to be in place for — it speaks of 'the strongest response' as a term already defined.",
+        "seductive_element": "The opening sentence draws the same two-case contrast, so the missing sentence looks like an immediate elaboration of it."
+      },
+      {
+        "option": "D",
+        "trap_type": "wrong_connective",
+        "why_wrong": "Here the sentence beginning 'That is why' points only at arousal favouring the strongest response, a mechanism that predicts more of whatever a person already does and therefore explains a lift, not the opposite outcomes the sentence claims; the step that makes the outcomes opposite would follow the conclusion it licenses.",
+        "seductive_element": "The sentence about encouragement and sabotage is itself a two-branch sentence, so a two-branch explanation seems to belong immediately beside it."
+      }
+    ],
+    "method": "When a paragraph contains 'that is why', 'hence' or 'so', state the effect in your own words and ask what a cause would have to do to produce exactly that effect. A mechanism that raises a quantity cannot explain two opposite results; the sentence that splits the mechanism into cases must sit above the sentence that reports the split."
+  },
+  "mentor": {
+    "challenge": "One sentence claims that the same audience helps in one room and harms in the next. Ask whether the sentence above it explains a difference or only an increase.",
+    "takeaway": "A causal connective has to reach a cause of the right shape, not merely a cause on the right subject."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0013",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Promise on the Cover",
+    "theme": "genre as a contract between reader and writer that decides what can count as a surprise",
+    "estimated_time_sec": 95,
+    "clue_types": [
+      "article_given_new",
+      "lexical_repetition",
+      "connective_implicit"
+    ],
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": [
+      "disc.given_new",
+      "disc.definition_then_application",
+      "disc.claim_then_evidence",
+      "disc.topic_progression"
+    ],
+    "difficulty_vector": {
+      "reference_density": 3,
+      "transition_ambiguity": 3,
+      "competing_slots": 4,
+      "concept_abstractness": 4,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "use a comparative — works better than what? — to rule out the opening slot a quotable sentence seems to deserve",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General literary theory of genre; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Built so that the most quotable slot is the wrong one: the sentence reads like a thesis and would open the paragraph happily were it not for 'works better', which needs the account it improves on, and for the definite 'the agreement' two sentences later.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the opening slot. The sentence is the paragraph's governing idea and the most quotable line in it, so a reader who places by weight puts it first. Two words refuse the slot: 'works better' is a comparison, and the account it works better than — genre as a recipe of features — is stated in the sentence that would follow, so the comparison would point forwards. The slot after the attention sentence is the other candidate, and it leaves that sentence's 'the agreement' with no agreement anywhere above it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "A genre is usually described as a set of features — a detective, a corpse, a solution — as though it were a recipe."
+      },
+      {
+        "n": 2,
+        "text": "What the agreement fixes is not content but the shape of attention: a reader who knows a corpse is coming reads chapter one as a search for one."
+      },
+      {
+        "n": 3,
+        "text": "Surprise is therefore a property of genres, not of events: a wedding ending a comedy surprises nobody, and the same wedding ending a novel of adultery is a scandal."
+      },
+      {
+        "n": 4,
+        "text": "It also explains why the admired works in a form are so often the ones that break it: only a reader holding a contract can be shown a breach."
+      },
+      {
+        "n": 5,
+        "text": "A form that promised nothing would not be free, merely unable to disappoint."
+      }
+    ]
+  },
+  "missing": {
+    "text": "A genre works better understood as a contract: the reader agrees in advance what to expect, and the writer gains the power to withhold it.",
+    "position": 1,
+    "function": "the replacement account that answers the recipe description and supplies the agreement the next sentence analyses"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A genre works better understood as a contract: the reader agrees in advance what to expect, and the writer gains the power to withhold it.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "Before sentence 1",
+      "D": "After sentence 1"
+    },
+    "option_positions": {
+      "A": 2,
+      "B": 3,
+      "C": 0,
+      "D": 1
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "'Works better' is a comparative and needs a rival account behind it; the paragraph supplies exactly one, the description of a genre as a recipe of features, and the missing sentence displaces it. In front, the next sentence begins 'What the agreement fixes', treating an agreement as already made — and the only agreement in the paragraph is the one the missing sentence describes between reader and writer. The seat between the recipe and the analysis of the agreement is fixed from both sides.",
+    "clue_before": "Sentence 1 gives the account being improved on — genre as a recipe of features — which is what 'works better' has to be better than.",
+    "clue_after": "Sentence 2 says 'What the agreement fixes', a definite reference that requires an agreement to have been struck in the sentence above it.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "The paragraph is developing consequences at this point — what surprise turns out to be, and why breaking a form is admired — and the governing account restated in the middle of that is a recap where the next step is due; the sentence above it is also left saying 'the agreement' with no agreement behind it.",
+        "seductive_element": "A sentence about shaping a reader's attention seems to be leading up to the idea of a bargain, so the contract sounds like the conclusion just reached."
+      },
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It reads smoothly between the claim about surprise and the point about admired breaches, since both turn on expectation. But two sentences above, 'the agreement' and 'therefore' are both left with nothing behind them, so a slot that suits its neighbours has broken the sentences that come earlier.",
+        "seductive_element": "The sentence about breaking a form mentions a contract, so introducing the contract just before it feels like the tidy order."
+      },
+      {
+        "option": "C",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The sentence is the broadest and most quotable in the paragraph, which is exactly why it seems to belong at the front; but a paragraph that opens by saying one account works better than another has not said what the other is, and the recipe description in the first sentence is what the comparison needs behind it.",
+        "seductive_element": "It states the governing idea in one line, and governing ideas are where paragraphs are expected to begin."
+      }
+    ],
+    "method": "Treat every comparative — 'works better', 'is less useful', 'the stronger version' — as a backward pointer with a named object. Ask what the sentence is being compared with and find where the paragraph says it; if that sentence is below your slot, the slot is wrong, however well the sentence would serve as a thesis. Then confirm with the first definite noun phrase after the slot."
+  },
+  "mentor": {
+    "challenge": "The sentence you are placing says a genre works better as a contract. Better than what, and where does the paragraph say it?",
+    "takeaway": "The most quotable sentence is not automatically the opening sentence; a comparison has to face something already on the page."
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0022",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "media",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "The Hour Nobody Breaks",
+    "theme": "why competing newsrooms honour an embargo, and what the exceptions reveal about the reason",
+    "estimated_time_sec": 115,
+    "clue_types": ["demonstrative", "article_given_new", "connective_implicit"],
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.demonstrative", "struct.phenomenon_explanation", "disc.claim_then_evidence", "disc.given_new"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 5, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "learning_objective": "refuse a slot that reads smoothly forwards but strands a demonstrative in the sentence behind it",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of news embargoes; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The strongest wrong slot reads better forwards than the correct one does: it continues 'repeat player' with the access mechanism. It is refused only by looking backwards at 'That sanction', which courtesy cannot satisfy.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about repeat players, where the access mechanism reads as a natural expansion of that phrase and leads smoothly into the released reporter. It is refused by the sentence immediately above it, which begins 'That sanction': the only candidates behind it would be courtesy and the observation that courtesy is the wrong explanation, neither of which is a sanction. The slot after the opening is the other candidate, and it makes the paragraph give the right answer and then dismiss the wrong one.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "An embargo asks a reporter to sit on a story until a stated hour, a strange thing for a competitive trade to honour." },
+      { "n": 2, "text": "The usual explanation is courtesy, and it is the wrong one: courtesy would not survive the first correspondent who found it expensive." },
+      { "n": 3, "text": "That sanction explains the shape of the practice better than manners do, since embargoes hold where the source is a repeat player and dissolve where it is not." },
+      { "n": 4, "text": "It also explains the one recognised excuse, since a reporter who gets the story elsewhere is released from the hour: the penalty was never about the story but about the invitation." },
+      { "n": 5, "text": "What looks like a profession policing its own manners is a market in future access, priced in hours." }
+    ]
+  },
+  "missing": {
+    "text": "What holds the rule is access: the office that issues the embargo also issues the invitations, and a title that breaks one is not told next time.",
+    "position": 2,
+    "function": "the replacement explanation demanded by sentence 2's rejection, and the sanction sentence 3 points back at"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"What holds the rule is access: the office that issues the embargo also issues the invitations, and a title that breaks one is not told next time.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 4, "D": 1 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The second sentence rejects an explanation and leaves the question standing, which is the strongest possible demand for a replacement; the missing sentence supplies it. Looking forward, the next sentence opens 'That sanction', and a sanction is a penalty somebody suffers — not courtesy, and not the observation that courtesy is inadequate. The only penalty in the paragraph is not being told next time, which the missing sentence introduces. Both the rejection behind and the demonstrative in front point at the same seat.",
+    "clue_before": "Sentence 2 dismisses courtesy as the explanation, so the paragraph owes the reader the explanation that actually holds the rule.",
+    "clue_after": "Sentence 3 begins 'That sanction', which requires a penalty to have been named; the threat of not being told next time is the only one available.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Read forwards this is the smoothest slot in the paragraph: the sentence expands 'repeat player' into the mechanism behind it and leads naturally into the released reporter. Read backwards it is impossible, because the sentence above it has already said 'That sanction' and nothing behind that phrase is a sanction at all.",
+        "seductive_element": "Access and invitations are precisely what makes a source a repeat player, so the sentence appears to be the elaboration the previous line was asking for."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The sentence above this slot has already explained the excuse by saying the penalty was never about the story but about the invitation, so introducing the invitation and the penalty afterwards repeats it, and the two earlier references to a sanction remain unexplained.",
+        "seductive_element": "The invitation appears in both sentences, which makes them sound like a deliberate pairing."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "Placed here the paragraph gives the right explanation first and then turns to dismiss courtesy, so the sentence calling courtesy 'the wrong one' answers a question that has already been settled and the rejection loses its point.",
+        "seductive_element": "A puzzle stated in the opening sentence invites an immediate answer, and this is the answer the paragraph eventually gives."
+      }
+    ],
+    "method": "Test every slot in both directions, and distrust the one that only reads well forwards. A demonstrative in the sentence above a slot — 'that sanction', 'this concession', 'such a penalty' — is a requirement, and it is satisfied by a particular kind of thing, not merely by the nearest sentence on the same subject."
+  },
+  "mentor": {
+    "challenge": "One sentence begins 'That sanction'. Ask what counts as a sanction, and whether anything above it qualifies.",
+    "takeaway": "Reading forwards finds slots that fit; reading backwards finds the slot that is forced."
+  }
+}

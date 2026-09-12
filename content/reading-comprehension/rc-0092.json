@@ -1,0 +1,412 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0092",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "tone-detection",
+      "inference",
+      "main-idea-extraction",
+      "vocabulary-in-context"
+    ],
+    "word_count": 452,
+    "question_count": 4,
+    "question_types": [
+      "phrase_in_context",
+      "tone",
+      "inference",
+      "primary_purpose"
+    ],
+    "theme": "two accounts of what became of the idea of progress after the twentieth century, one holding that the evidence destroyed it and one that it merely changed address from the moral to the technical, adjudicated by granting the second the better description and the first the better sense of the loss, since a claim about departments cannot license the argument that a present cost is redeemed by the direction of the whole",
+    "estimated_time_min": 7,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-06",
+    "reviewer_notes": "The adjudication splits rather than picks, giving each account half of the verdict, and the final paragraph then refuses two comfortable conclusions in a row: that the loss was regrettable and that nothing was lost but a word. The tone question is built on the second of those refusals, which readers reliably hear as either mourning or relief.",
+    "length_class": "medium",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "plain, judicious, unsentimental at the close",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.contrast",
+      "struct.qualification",
+      "struct.history_of_an_idea",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "comp.purpose",
+      "comp.intent",
+      "comp.organization",
+      "comp.function_over_words",
+      "arg.concession",
+      "arg.qualification",
+      "arg.counterargument",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.author_vs_reported",
+      "scope.abstraction_level",
+      "lang.tone_shift",
+      "lang.temporal_qualifier",
+      "word.context_clue",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about retreating to defensible positions, which imports a defeat the second account expressly avoids, since its whole claim is that the idea lost no adherents and merely changed what it was said about. Q2's rival is the relieved reading, built from the sentence granting that a case can be made for the idea's deserving to go; the author makes that case available and adopts none of it, and the sentences on either side insist that something real was lost. Q3's rival is the option that such a person holds the old idea in a modest form, which the closing sentences deny in terms by saying that people who speak of progress in the plural are not saying a smaller version of what their grandparents said. Q4's rival is the option about the changing vocabulary of historians, which is a real observation in the second account and is used there as evidence, not as the passage's subject.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "benign",
+      "adherents",
+      "underwrite",
+      "redeemed"
+    ]
+  },
+  "passage": {
+    "title": "The Word in Quotation Marks",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0092-p1",
+        "text": "For something like two centuries, educated opinion in Europe held that human affairs were, on the whole and over time, getting better, and that the improvement was not a run of good luck but the shape of history itself. Wars were setbacks inside a movement. Ignorance was being cleared away. The direction was settled and only the pace was in doubt. Then came the twentieth century. What the idea did next is disputed, and the two accounts on offer are harder to tell apart than they look."
+      },
+      {
+        "id": "rc-0092-p2",
+        "text": "The first says it died. The wars, the camps, the bomb: the evidence against a benign direction was simply too heavy, and educated opinion put the idea down. The confident histories stopped being written. The word itself acquired quotation marks, and by the nineteen-seventies a historian who used it without irony was dating himself as surely as if he had worn a wing collar. On this account progress was a nineteenth-century faith, and faiths can be destroyed by evidence."
+      },
+      {
+        "id": "rc-0092-p3",
+        "text": "The second says it did not die but changed address. What collapsed was a claim about morals and politics, and that claim was only ever one application of the idea. The same people who will not say that mankind improves say without hesitation that surgery improves, that aircraft improve, that this year's harvest is better protected than last year's. Nobody argues about the direction in those cases, and nobody supposes the improvement accidental. The idea did not lose its adherents. It lost its subject, and found a narrower one."
+      },
+      {
+        "id": "rc-0092-p4",
+        "text": "The second account is the better description, and the first is right about what was lost. Both halves of that sentence are needed. The habit of expecting improvement plainly survived, which is why the same person can deny progress in general and assume it in every particular without feeling any strain. A claim about departments, however, cannot do the work the old claim did. The old claim licensed an argument of a particular kind, that a cost borne now is redeemed by the direction the whole is travelling in, and no department can underwrite that. A better anaesthetic justifies nothing outside the operating theatre. It does not follow that the loss was a bad one, and a case can be made that an idea which redeems present suffering by future direction was exactly the idea that deserved to go. It would be a different thing altogether to say that nothing has changed except our vocabulary. Something was being done with the old idea that is not being done with the new one, and people who speak of progress in the plural are not saying a modest version of what their grandparents said. They are saying something else."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0092-q1",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "scope.abstraction_level",
+        "comp.paraphrase"
+      ],
+      "target_mistake": "reading a change in what an idea is said about as a defeat suffered by the idea, when the paragraph has just denied that it lost anybody",
+      "prediction_target": "The learner should paraphrase from the two sentences before the phrase: the same expectation, now attached to surgery and aircraft rather than to mankind.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "specific_detail"
+      ],
+      "stem": "In the third paragraph, the phrase it lost its subject, and found a narrower one means that the idea",
+      "options": {
+        "A": "kept its form, and the range of things it was applied to contracted",
+        "B": "was taken up by specialists after the general public abandoned it",
+        "C": "became harder to state, because its supporters could no longer agree what it covered",
+        "D": "was defeated in argument and withdrew to positions that were easier to defend"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The sentence before the phrase supplies its meaning. The same people who will not say mankind improves say that surgery improves and that aircraft improve, and nobody in those cases argues about the direction. The sentence immediately before the phrase adds that the idea did not lose its adherents, which rules out any reading in which it was beaten.",
+        "correct_reasoning": "The correct option is that contrast put plainly. The expectation of improvement is unchanged in shape, since the direction is still assumed and the improvement still treated as no accident; what has changed is the size of the territory the expectation is made about, from mankind to surgery and harvests. The word subject is doing the work of naming what a claim is about, not what somebody believes.",
+        "passage_anchor": "rc-0092-p3",
+        "question_type_note": "A phrase-in-context question is settled by the sentences on either side of the phrase, especially where one of them tells you what did not change.",
+        "reading_habit": "When an author says a thing lost one property and gained another, check the sentence before for what he insists it kept. Options that take away the kept property are the distractors.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_population",
+            "why_wrong": "Nobody changes hands in this paragraph. The examples are what ordinary educated people say without hesitation about surgery and aircraft, and the sentence just before states that the idea did not lose its adherents at all.",
+            "seductive_element": "Narrower suggests a smaller and more expert audience, and the word specialists fits the technical examples the paragraph uses."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No difficulty of statement and no disagreement among supporters is described. The paragraph's point is the opposite, that in its new territory the claim is made without hesitation and nobody argues about the direction.",
+            "seductive_element": "Ideas that change their scope often do become contested, and a reader supplying the usual history of a concept will expect confusion to follow."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "This is the first account's story imported into the second. The second exists precisely to deny that the idea was beaten, and it accounts for the same evidence by saying the idea changed address rather than lost ground.",
+            "seductive_element": "It is the live rival, because retreat to defensible positions is exactly what a narrowing usually means in the history of a doctrine, and the passage's previous paragraph has just described a defeat."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0092-q2",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "arg.description_vs_evaluation",
+        "arg.concession"
+      ],
+      "target_mistake": "reading the sentence that allows a case against the old idea as the author making that case, and so hearing relief where the paragraph insists on a loss",
+      "prediction_target": "The learner should be able to say: he refuses to mourn, and refuses to pretend nothing went.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "main_idea"
+      ],
+      "stem": "The tone of the final paragraph is best described as",
+      "options": {
+        "A": "nostalgic for a confidence he believes the century destroyed, though he grants it was never universal",
+        "B": "unsentimental about a loss he nonetheless insists has occurred",
+        "C": "impatient with historians who go on using a word they no longer mean",
+        "D": "relieved that an idea he regards as dangerous has at last been given up"
+      },
+      "correct": "B",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The paragraph makes two refusals in consecutive sentences. It does not follow that the loss was a bad one, and a case can be made against the old idea; and then, what that case does not establish is the comfortable view that nothing has changed except our vocabulary. The author declines to grieve and declines to be consoled.",
+        "correct_reasoning": "The correct option names both halves. The loss is asserted flatly, in the claim that something was being done with the old idea that is not being done with the new, and it is asserted without any suggestion that it should be regretted, since the author allows a case for saying the idea deserved to go. That combination, an insisted loss and a withheld verdict about its value, is the whole of the paragraph's voice.",
+        "passage_anchor": "rc-0092-p4",
+        "question_type_note": "Tone is set by judgement words, and an author who supplies a case without adopting it has told you where he stands by not standing there.",
+        "reading_habit": "When a writer says a case can be made for something, check the next sentence before assigning him the case. Authors introduce arguments in order to limit them at least as often as to endorse them.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "No longing appears anywhere. The paragraph allows that the old idea may have deserved to go and confines itself to saying what it did that the new one cannot, which is a description of a function rather than an expression of regret.",
+            "seductive_element": "Insisting that something real was lost sounds like mourning, and readers habitually convert a stated loss into a felt one."
+          },
+          {
+            "option": "C",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "Historians are not criticised at all. Their changed usage appears in the second paragraph as evidence for the first account, reported without complaint, and the final paragraph is arguing about what the idea did rather than about how anybody writes.",
+            "seductive_element": "The remark about quotation marks and wing collars is the passage's one flash of wit, and wit is easily heard as impatience."
+          },
+          {
+            "option": "D",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The case for saying the idea deserved to go is offered and left standing without being adopted, and the very next sentence says what it fails to establish. The paragraph's own assertion is that something was lost, which is not the sentence of a relieved writer.",
+            "seductive_element": "It is the live rival, because an idea that redeems present suffering by future direction sounds sinister when stated that way, and the author is the one who stated it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0092-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "treating the surviving version of the idea as a smaller edition of the old one, which the closing sentences refuse",
+      "prediction_target": "The learner should predict that the answer will describe the person as holding the idea in its narrowed form rather than as confused or exceptional.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "main_idea"
+      ],
+      "stem": "It can be inferred that a person who denies that mankind improves while expecting next year's treatments to be better than this year's is, on the author's account,",
+      "options": {
+        "A": "confused, since the two beliefs cannot both be held at once",
+        "B": "unusual, and the exception the second account was built to explain",
+        "C": "holding the old idea in a modest form, as his grandparents would have recognised it",
+        "D": "holding the idea in the only form that has survived, which has departments and no whole"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph describes exactly this person: the same people who will not say mankind improves say that surgery improves. The fourth explains why there is no strain, since the habit of expectation survived while its subject shrank, and then insists that the plural version is not a smaller edition of the singular one.",
+        "correct_reasoning": "The correct option puts him where the passage puts him. He is not an anomaly but the ordinary case the second account was built from, and what he holds is the narrowed idea: improvement expected in particular departments, with no claim about the whole to hold them together. The closing sentences forbid describing this as the old idea in reduced form, because they say he is saying something else.",
+        "passage_anchor": "rc-0092-p3, rc-0092-p4",
+        "question_type_note": "An inference about a described person is usually a question about which of the passage's categories he belongs to. Find the sentence where he is described before judging him.",
+        "reading_habit": "When a passage says two beliefs are held without strain, do not accept any option that calls the holder confused. The author has already told you the combination is comfortable, and explained why.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph says such a person feels no strain at all, and the third offers the combination as something the same people say routinely. The passage explains the pairing rather than convicting anybody of a contradiction.",
+            "seductive_element": "The two beliefs really do look incompatible when placed side by side, and a reader who has not reached the explanation will supply the obvious verdict."
+          },
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The second account was built out of this case, not to accommodate it as an exception. The third paragraph presents it as what the same people say without hesitation, which makes the person typical rather than unusual.",
+            "seductive_element": "Accounts are often constructed to handle awkward cases, and a reader who has registered that the person matters to the argument may misidentify how."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Every word here is the passage's and the claim underneath is the one it denies. The final sentences say that people who speak of progress in the plural are not saying a modest version of what their grandparents said, and that they are saying something else.",
+            "seductive_element": "It is the live rival, because a narrowed claim does sound like a modest claim, and the passage's own talk of a narrower subject invites the substitution."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0092-q4",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.intent",
+        "struct.two_views_adjudication"
+      ],
+      "target_mistake": "naming one of the two accounts as the passage's own position, or taking the evidence for an account as the subject of the passage",
+      "prediction_target": "The learner should be able to name a verb and an object: judge between two stories about an idea's fate, and then say what the version that survived cannot do.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to show that the idea of progress was destroyed in the twentieth century, and to say how little of it remains",
+        "B": "to warn that an idea which redeems present costs by a future direction ought to be resisted wherever it reappears",
+        "C": "to decide between two accounts of an idea's fate, and to say what the survivor should no longer be asked to do",
+        "D": "to describe how the vocabulary of historians changed over a century, and what the change of usage revealed"
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The structure states the purpose. A disputed question is posed at the end of the first paragraph, each account gets a paragraph of its own, and the last paragraph opens by dividing the verdict between them and then spends its length on what the surviving version fails to license.",
+        "correct_reasoning": "The correct option carries both movements. The adjudication is explicit, giving the second account the better description and the first the better sense of the loss, and the remainder of the paragraph is an argument about function: a claim about departments cannot redeem a present cost by the direction of the whole. A purpose that stops at the verdict leaves the longest stretch of the passage unaccounted for.",
+        "passage_anchor": "rc-0092-p1, rc-0092-p4",
+        "question_type_note": "Primary purpose is a verb with an object, and in a passage that judges between two views the judgement plus its consequence is the object, never one of the views.",
+        "reading_habit": "Count how many paragraphs a candidate purpose needs. In a two-views passage, any option that could be stated after reading only one of the views has named a part rather than the whole.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the first account, set out in the second paragraph so that it can be weighed, and the passage says something did survive rather than that little remains. The verdict is that the second account describes what happened better, since the habit of expecting improvement plainly held on in a narrower territory.",
+            "seductive_element": "It is the most dramatic material in the passage, with wars and camps and the bomb, and dramatic material is what readers carry away as the point."
+          },
+          {
+            "option": "B",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The author states that a case can be made along these lines and then declines to make it, saying only what the case fails to establish. No recommendation to resist anything appears, and the paragraph’s own assertion is that something real was lost.",
+            "seductive_element": "The description of the old idea as redeeming present suffering by future direction is written sharply enough to sound like an indictment."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The quotation marks and the wing collar are one sentence of evidence inside the first account, and what the change of usage revealed is exactly what the two accounts disagree about. Offered as the purpose, they make the adjudication and the argument about what the old claim licensed into decoration.",
+            "seductive_element": "It is the live rival, because the observation about how historians write is the passage’s most concrete and most memorable piece of history."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "benign",
+      "passage_use": "the evidence against a benign direction",
+      "meaning_here": "kindly in its tendency, working out for the good",
+      "difficulty": "medium"
+    },
+    {
+      "word": "adherents",
+      "passage_use": "The idea did not lose its adherents",
+      "meaning_here": "people who hold to a belief or a movement",
+      "difficulty": "medium"
+    },
+    {
+      "word": "underwrite",
+      "passage_use": "no department can underwrite that",
+      "meaning_here": "provide the backing that makes a claim good",
+      "difficulty": "hard"
+    },
+    {
+      "word": "redeemed",
+      "passage_use": "a cost borne now is redeemed by the direction",
+      "meaning_here": "made worth bearing by something that comes later",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two stories are told about the same event and the author refuses to pick one outright. Watch the first sentence of the last paragraph, which hands each account half the verdict, and then watch him refuse two comfortable conclusions in a row.",
+    "one_sentence_summary": "After two centuries in which educated opinion treated improvement as the shape of history, the twentieth century left two competing accounts, that the idea died under the weight of the evidence and that it merely moved from morals and politics to surgery and aircraft, and the author judges the second the better description while granting the first that something real was lost, since a claim about particular departments cannot license the old argument that a present cost is redeemed by the direction the whole is travelling in.",
+    "main_idea": "For two centuries the improvement of human affairs was treated as the shape of history rather than as luck. After the twentieth century, one account says the idea was destroyed and another says it simply moved to narrower ground, since the same people who deny that mankind improves take it for granted that surgery does. The author says the second describes what happened and the first understands what went: the narrowed idea cannot justify a present cost by the direction of the whole, which is what the old one was for.",
+    "simple_explanation": "For about two hundred years, educated people in Europe believed that human life was getting better over time, and that this was not luck but the shape of history itself. Wars were setbacks inside a movement that was still going forward. Ignorance was being cleared away. Nobody doubted the direction; they only argued about the speed.\n\nThen the twentieth century happened, and people disagree about what became of that belief.\n\nThe first story is that it died. The wars, the camps, the bomb. The evidence against a kindly direction was just too heavy, so educated opinion dropped the idea. Confident histories stopped being written. The word started appearing in quotation marks, and by the nineteen-seventies a historian who used it seriously sounded old-fashioned. On this story, progress was a nineteenth-century faith, and evidence killed it.\n\nThe second story is that it did not die; it moved house. What collapsed was one particular use of the idea, the one about morals and politics. Look at what the same people say now. They will not say that mankind is improving, but they will say without blinking that surgery improves, that aircraft improve, that this year's crops are better protected than last year's. Nobody argues about the direction there, and nobody thinks it is an accident. So the idea did not lose its believers. It lost what it was about, and picked up something smaller.\n\nThe author's verdict is split. He thinks the second story describes what actually happened, because the habit of expecting improvement obviously survived. That is why one person can say history goes nowhere and still assume next year's treatment will be better, without feeling any tension at all.\n\nBut he thinks the first story understands what was lost. A belief about particular fields cannot do what the old belief did. The old belief licensed a certain kind of argument: put up with this now, because the whole thing is heading somewhere. A better anaesthetic cannot say that. It justifies nothing outside the operating theatre.\n\nHe is careful twice at the end. First, he does not say the loss was bad. You could argue that an idea which excuses present suffering by pointing at the future was exactly the idea that should have gone. He lets that argument stand without making it his own.\n\nSecond, and this is his real point, he refuses the comfortable conclusion that nothing changed except our words. Something was being done with the old idea that is not being done with the new one. People who talk about progress in the plural are not saying a smaller version of what their grandparents said. They are saying a different thing.",
+    "why_difficult": "The two accounts are close enough that readers merge them, and the verdict does not pick a winner but divides one, which leaves people unsure who the author agrees with. The second difficulty is a sentence near the end that supplies an argument against the old idea without adopting it, and a hurried reader hears relief where the paragraph insists on a loss. The third is the final move, which distinguishes a narrowed claim from a modest version of the old claim, a distinction that sounds like hair-splitting until you notice what the old claim was being used for.",
+    "author_intention": "To stop the reader treating the fate of a big idea as a simple death or a simple survival, and to make him notice what the surviving version can no longer be used to argue.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0092-p1",
+        "role": "Sets up the question",
+        "note": "For two centuries improvement was taken to be the shape of history. Then the twentieth century, and a dispute about what happened next."
+      },
+      {
+        "paragraph_id": "rc-0092-p2",
+        "role": "First account",
+        "note": "It died. The evidence was too heavy, the confident histories stopped, the word got quotation marks."
+      },
+      {
+        "paragraph_id": "rc-0092-p3",
+        "role": "Second account",
+        "note": "It moved. The same people who deny that mankind improves are sure that surgery does. It lost its subject and found a smaller one."
+      },
+      {
+        "paragraph_id": "rc-0092-p4",
+        "role": "Divides the verdict",
+        "note": "The second describes it better; the first understands the loss. Departments cannot justify a present cost by the direction of the whole. And no, this is not just a change of vocabulary."
+      }
+    ],
+    "tone_progression": "It opens with the measured summary of a historian describing a settled belief, becomes brisk and slightly amused while the first account is put, stays level through the second, and then turns dry and exacting, granting one point, allowing an argument it declines to make, and closing on a flat refusal.",
+    "key_transitions": [
+      "'What the idea did next is disputed' (close of paragraph 1) — the question the rest of the passage answers.",
+      "'The second account is the better description, and the first is right about what was lost.' (opening of paragraph 4) — the verdict is split between the two accounts in one sentence.",
+      "'It would be a different thing altogether to say that nothing has changed except our vocabulary.' (paragraph 4) — the last and most important refusal."
+    ],
+    "misunderstanding": "Readers finish holding one of two wrong models. The first is that the author sides with the death story, because it comes with the strongest material and the most memorable sentence about quotation marks; his verdict is that the other account describes what happened better. The second is that he is glad the old idea went, which comes from reading a case he supplies as a case he makes, and which the surrounding sentences contradict by insisting that something was lost and that the change is not merely verbal.",
+    "traps_summary": "This set offers a narrowing read as a retreat, one of the two accounts as the passage's purpose, the evidence for an account as its subject, relief in place of an unsentimental verdict, and the surviving idea described as a modest version of the old one. Asking which paragraph each option belongs to, and whether the author states it or merely allows it, answers all four.",
+    "reading_lesson": "When a passage sets two accounts against each other, expect the verdict to divide rather than to choose, and read the first sentence of the closing paragraph as the place where the division is made. The companion habit is to treat any sentence of the form a case can be made as a loan rather than a possession: authors introduce such cases in order to bound them, and the sentence immediately afterwards usually says exactly how far they reach.",
+    "real_world": "The same split shows up in how organisations talk about themselves. Few now claim that their industry is making the world better, and everyone claims that this year's product is better than last year's. The question worth asking is which arguments the larger claim used to license, and who is now making those arguments with nothing behind them.",
+    "takeaway": "An idea can keep all its believers and still stop being able to do the one job it was invented for.",
+    "reflection_question": "Which of the improvements you count on could justify a cost you are being asked to bear now, and which of them simply cannot?"
+  }
+}

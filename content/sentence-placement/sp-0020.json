@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0020",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "human-behaviour",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The News Nobody Wants to Carry",
+    "theme": "why bad news travels slowly and arrives softened, and what an organisation would have to buy to prevent it",
+    "estimated_time_sec": 100,
+    "clue_types": [
+      "demonstrative",
+      "connective_explicit",
+      "article_given_new"
+    ],
+    "primary_trap": "new_topic_introduced",
+    "reasoning_patterns": [
+      "disc.demonstrative",
+      "disc.cause_effect",
+      "disc.claim_then_evidence",
+      "disc.topic_progression"
+    ],
+    "difficulty_vector": {
+      "reference_density": 4,
+      "transition_ambiguity": 3,
+      "competing_slots": 4,
+      "concept_abstractness": 3,
+      "syntactic_complexity": 3
+    },
+    "learning_objective": "place a prescriptive sentence after the cause that licenses it and before the sentence that contrasts with it",
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General discussion of reluctance to transmit unwelcome information; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The prescription has to sit where a cause has just been given and where the next sentence can say 'the opposite of this'. The early slot is attractive to a reader who reaches for the practical upshot before the paragraph has supplied a mechanism.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the early slot, just after the paragraph has ruled out tenderness towards the recipient. A reader in a hurry hears the practical upshot as the obvious next move, but the organisation arrives there with nothing to justify it: 'therefore' would point at a denial rather than a cause, and the two sentences that follow return to the messenger's own exposure without ever using the organisation the sentence brings in. The slot before the closing sentence is the second candidate, and it is refused because the sentence above it already says most arrangements do 'the opposite of this'.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "n": 1,
+        "text": "People asked to pass on bad news take longer over it than over good news of the same weight, and shorten it when they do."
+      },
+      {
+        "n": 2,
+        "text": "The delay is not tenderness towards the recipient, since it appears even when the recipient is a stranger who will never be met again."
+      },
+      {
+        "n": 3,
+        "text": "It is the messenger's discomfort at being the face attached to the information, and his correct suspicion that some of the dislike will stick to him."
+      },
+      {
+        "n": 4,
+        "text": "Most arrangements do the opposite of this, since a manager who hears of a problem early asks who else knew and for how long."
+      },
+      {
+        "n": 5,
+        "text": "By the time the news is undeniable it has passed through several people, each rounding it towards what he would rather report."
+      }
+    ]
+  },
+  "missing": {
+    "text": "An organisation that wants accurate reporting therefore has to pay for it, by making the carrying of bad news a service rather than an admission.",
+    "position": 3,
+    "function": "the prescription that follows from the messenger's exposure and the arrangement the next sentence says most bodies invert"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"An organisation that wants accurate reporting therefore has to pay for it, by making the carrying of bad news a service rather than an admission.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 5"
+    },
+    "option_positions": {
+      "A": 2,
+      "B": 3,
+      "C": 4,
+      "D": 5
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "'Therefore' needs a cause, and the paragraph supplies exactly one: the messenger's discomfort at being the face attached to the news, and his correct expectation that some of the dislike will attach to him. A cost of that kind is what an organisation would have to compensate, which is what the missing sentence proposes. The next sentence then says most arrangements do 'the opposite of this', a phrase that needs an arrangement to have been described; the only arrangement in the paragraph is the one the missing sentence recommends.",
+    "clue_before": "Sentence 3 gives the mechanism — the messenger pays personally for carrying the news — which is the cost that makes accurate reporting something an organisation must buy.",
+    "clue_after": "Sentence 4 says most arrangements do 'the opposite of this', which requires a described arrangement immediately above it to be the opposite of.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "At this point the paragraph has only ruled out an explanation, so 'therefore' would draw a remedy from a denial; worse, the organisation arrives and is then dropped, since the sentence that follows returns to the messenger's own discomfort and the paragraph does not touch institutional design again until after it.",
+        "seductive_element": "Once compassion has been ruled out, a reader expects the practical consequence, and the sentence is the only practical one on offer."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Diagnosis followed by remedy is a comfortable local reading, and the closing sentence accepts it without difficulty. The sentence above the slot does not: it contrasts what most arrangements do with 'the opposite of this', and the arrangement being contrasted would then stand below it.",
+        "seductive_element": "A remedy reads well immediately after the diagnosis of what managers actually do, and the two sentences are both about organisations."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The prescription belongs in this paragraph, but placed at the end it follows the description of the damage it was meant to prevent, and the sentence about most arrangements is left pointing back at an arrangement nobody has proposed.",
+        "seductive_element": "A recommendation makes a natural last line, especially after a paragraph that has just described the news arriving distorted."
+      }
+    ],
+    "method": "A prescriptive sentence is still a link in a chain: it needs the cause above it that makes the prescription necessary, and it usually leaves something behind for the next sentence to contrast with or qualify. Find the sentence that says 'the opposite of this' or 'most bodies do otherwise' and the prescription is the sentence directly above it."
+  },
+  "mentor": {
+    "challenge": "One sentence says most arrangements do the opposite of something. Ask what arrangement has been described, and where.",
+    "takeaway": "Advice has a seat like any other sentence: after the reason for it, before the sentence that measures practice against it."
+  }
+}

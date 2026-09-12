@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0008",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "anthropology",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Brother Who Was Not There",
+    "theme": "why oral genealogies stay accurate about the present by quietly revising the past",
+    "estimated_time_sec": 110,
+    "clue_types": ["article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.given_new", "disc.specific_to_general", "disc.claim_then_evidence", "disc.topic_progression"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 3, "competing_slots": 5, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "learning_objective": "use a definite noun phrase inside the sentence being placed to rule out every slot that precedes the thing it names",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General anthropology of oral genealogy; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The sentence carries a definite phrase of its own ('the new brother') as well as being needed by the last sentence's 'the charge of dishonesty'. Both clues point at the same seat, and the two early slots are attractive for different reasons.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about which names survive, where the talk of invention seems to answer the suggestion that genealogies are shaped by present convenience. It fits its neighbours and breaks the paragraph: the brother the sentence calls new has not yet been produced, and he is produced in the sentence that would follow it. The end slot is the second rival, and it leaves the closing sentence's 'the charge of dishonesty' with no charge and no accuser anywhere above it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A lineage that can recite twelve generations is not thereby preserving twelve generations of information." },
+      { "n": 2, "text": "Anthropologists working with oral genealogies find the lists stable at both ends and soft in the middle: the founder is fixed, the living known, the names between come and go." },
+      { "n": 3, "text": "The names that survive are those that explain a present arrangement: a shared pasture, a debt, a marriage that must be shown permissible." },
+      { "n": 4, "text": "When that arrangement lapses the ancestor who licensed it grows hazy; a rival branch's founder acquires a brother he did not have." },
+      { "n": 5, "text": "That is why the charge of dishonesty never sticks: the list is an excellent record, not of who descended from whom, but of who owes what to whom." }
+    ]
+  },
+  "missing": {
+    "text": "An outsider calls the new brother an invention; nobody inside the lineage experiences him so, since the men who revise the list report what their neighbours already treat as true.",
+    "position": 4,
+    "function": "the exoneration that answers sentence 4's fabricated kinsman and supplies the accusation the final sentence dismisses"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"An outsider calls the new brother an invention; nobody inside the lineage experiences him so, since the men who revise the list report what their neighbours already treat as true.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 4",
+      "D": "After sentence 5"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 4, "D": 5 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence names 'the new brother' as somebody the reader has met, and exactly one sentence produces him: the one in which a rival branch's founder acquires a brother he did not have. The sentence also puts an accusation into the paragraph — an outsider calling the revision an invention — and the last sentence begins 'That is why the charge of dishonesty never sticks', which needs a charge to have been brought. The seat between the fabricated kinsman and the dismissal of the charge is the only one that answers both.",
+    "clue_before": "Sentence 4 supplies the brother who did not exist; 'the new brother' is a definite reference that can point at nothing else in the paragraph.",
+    "clue_after": "Sentence 5 dismisses 'the charge of dishonesty', which requires somebody to have made the charge; the outsider in the missing sentence is the only accuser available.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "After the description of lists soft in the middle, the only revision on the page is names dropping out, and a name that is forgotten is not a brother who has been added; there is no new brother yet for the definite phrase to name, and nobody has yet done anything an outsider would call invention.",
+        "seductive_element": "Names coming and going is the first hint of unreliability, and a defence of the lineage feels due as soon as the unreliability is admitted."
+      },
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It reads well here, as an answer to the suggestion that the surviving names are the convenient ones, and the sentence after it continues the paragraph smoothly. What breaks is the reference: the brother the sentence calls new is produced in the sentence that would come after it, so the defence precedes the act it defends.",
+        "seductive_element": "A list pruned to suit a present arrangement sounds like invention already, so the rebuttal appears to have arrived at exactly the right moment."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs in this paragraph and states its defence, but placed last it leaves the preceding sentence announcing that 'the charge of dishonesty never sticks' when no charge has been made, and 'That is why' then points at the fabricated brother rather than at any reason for acquitting anybody.",
+        "seductive_element": "A defence of the people studied is a natural closing note, and the sentence's calm generality sounds like a final judgement."
+      }
+    ],
+    "method": "Search the sentence you are placing for its own definite noun phrases before you look at the slots. 'The new brother', 'the objection', 'the second reading' each name something the paragraph must already have produced, which rules out every slot above the sentence that produces it. Then find what the paragraph later treats as given and check that only your slot supplies it."
+  },
+  "mentor": {
+    "challenge": "The sentence mentions a new brother as though you had met him, and the last sentence dismisses a charge as though somebody had made one. Both conditions have to be satisfied at once.",
+    "takeaway": "The sentence you are placing has references of its own; they rule out slots just as firmly as the paragraph's do."
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0089",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "evidence-anchoring",
+      "scope-control"
+    ],
+    "word_count": 342,
+    "question_count": 3,
+    "question_types": [
+      "main_idea",
+      "inference",
+      "specific_detail"
+    ],
+    "theme": "a ceiling on a price described through the queue rather than through the crossing lines, so that the interesting question becomes who obtained the good and what they handed over, with the answer that the price was paid in another currency and that this currency, unlike money, is spent without being received by anybody",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-06",
+    "reviewer_notes": "A short passage built as a question and its answer, where the payoff is not the shortage but the difference between a payment that is transferred and one that is merely spent. The last paragraph concedes a redistributive purpose and then refuses the inference readers most want to draw, which is where the main idea question is decided.",
+    "length_class": "short",
+    "structure": "question_answer",
+    "viewpoints": 1,
+    "tone": "brisk, illustrative, unsentimental",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.question_answer",
+      "struct.contrast",
+      "struct.qualification",
+      "struct.cause_effect",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "arg.causal_claim",
+      "arg.concession",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "scope.condition",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about the shortage, which is true, is in the passage, and is the very thing the first paragraph calls correct and uninteresting; the passage exists to ask what happened after the shortage rather than to report it. Q2's rival is the option that a disguised deposit is lost to everybody, which uses the third paragraph's language about a payment nobody receives and attaches it to a payment that plainly reaches the landlord, since the third paragraph makes money the transferred case. Q3's rival is the option that queuing buyers could not have paid in money, which takes the concession in the final paragraph, where hours are said to be a currency the poor may find easier, and converts an easier currency into an impossible one.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "ceiling",
+      "currency",
+      "transfer",
+      "dissipated"
+    ]
+  },
+  "passage": {
+    "title": "The Cousin Who Knows the Agent",
+    "reading_time_min": 1.9,
+    "paragraphs": [
+      {
+        "id": "rc-0089-p1",
+        "text": "A ceiling is placed on the rent, or the bread, or the petrol. The textbook answer follows at once: at the fixed price more is wanted than is offered, and the difference is called a shortage. The answer is correct, and also the least interesting thing that can be said, because it stops exactly where the questions begin. The flat is still let to somebody. Who is that somebody, and what did they hand over?"
+      },
+      {
+        "id": "rc-0089-p2",
+        "text": "Nothing was ever free, and the ceiling did not make it so. What it did was change the currency. What the landlord may no longer take in money is taken in other things: in waiting, in the trouble of searching, in a deposit paid under another name, in the tenant whose cousin knows the agent. A queue is a price expressed in hours. So is a waiting list, and so is an afternoon on the telephone spent by somebody who would rather have paid twenty pounds and gone out."
+      },
+      {
+        "id": "rc-0089-p3",
+        "text": "Here is the consequence worth having. A price paid in money is a transfer. The buyer is poorer and the seller richer by the same sum, and what one loses the other has. A price paid in hours is not a transfer. The hours stood in the queue are not received by the seller; they are not received by anyone. They are simply dissipated, like heat. So the ceiling does not merely fail to make the good cheaper. It converts part of what buyers pay from something somebody gets into something nobody gets."
+      },
+      {
+        "id": "rc-0089-p4",
+        "text": "This is not an argument against every ceiling. Where the point of the rule is which people get the good rather than how much is paid for it, and where hours are a currency the poor can find more easily than money, the change of currency may be what was intended, and the waste is the price of the redistribution. None of which makes the good any cheaper. The ceiling changed who pays, and in what, and how much of the payment survives the paying."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0089-q1",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "struct.question_answer",
+        "arg.qualification"
+      ],
+      "target_mistake": "offering the shortage as the main idea, when the passage names the shortage in order to set it aside as the least interesting thing that can be said",
+      "prediction_target": "The learner should be able to compress the passage before reading the options: the ceiling swaps the currency, and the new currency is destroyed rather than handed to anyone.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "scope"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "A ceiling on a price produces a shortage, because at the lower price more is wanted than is offered, and the good then goes to whoever arrives first.",
+        "B": "A ceiling does not remove the price but changes the currency it must be paid in, and the new currency is spent rather than transferred.",
+        "C": "Every ceiling converts the whole of what a buyer pays into waiting that reaches nobody.",
+        "D": "Controls on prices should be avoided, since the waiting they produce, though unpriced, costs more than the money saved."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The first paragraph names the shortage, calls the answer correct, and then calls it the least interesting thing that can be said, which is an author telling you where his passage is not going. The questions he asks instead are who got the flat and what they handed over, and the two paragraphs that follow answer them in order.",
+        "correct_reasoning": "The correct option is those two answers joined. The second paragraph supplies the currency, listing waiting, searching, disguised deposits and the cousin who knows the agent; the third supplies the property that makes the currency matter, since hours stood in a queue are received by nobody. A statement of the main idea that stops at the shortage accounts for the paragraph the author set aside and none of the three he wrote afterwards.",
+        "passage_anchor": "rc-0089-p2, rc-0089-p3",
+        "question_type_note": "Main idea is decided by which paragraphs an option needs. When an author calls a true statement uninteresting, he has marked it as setup rather than thesis.",
+        "reading_habit": "Watch for the sentence in which a writer sets a correct answer aside. Whatever question he asks immediately afterwards is the question the passage exists to answer.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the textbook answer as the first paragraph reports it, and the next sentence says it stops exactly where the questions begin. The second clause is wrong on its own account as well, since the passage's list of how the good is obtained includes the tenant whose cousin knows the agent, which is not a matter of arriving first.",
+            "seductive_element": "It is the live rival, because it is true, it is the first substantive claim in the passage, and it is what most readers have been taught to say about a ceiling."
+          },
+          {
+            "option": "C",
+            "trap_type": "extreme_language",
+            "why_wrong": "The third paragraph converts part of what buyers pay and not the whole of it, and the second lists currencies that do reach the landlord, among them a deposit paid under another name. The fourth paragraph also refuses to speak about every ceiling, allowing that where the object was to change who gets the good, the change of currency may be what was wanted.",
+            "seductive_element": "It is the passage's own mechanism with the quantifiers stripped out, so a reader who has just grasped the mechanism recognises every word of it."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The fourth paragraph opens by refusing this in terms, saying the passage is not an argument against every ceiling, and no comparison of the size of the waiting against the size of the saving appears anywhere.",
+            "seductive_element": "Three paragraphs of accumulating cost read like the case for a recommendation, and readers supply the conclusion an argument of that shape usually carries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0089-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "struct.contrast"
+      ],
+      "target_mistake": "treating every payment made under a ceiling as the kind that reaches nobody, when the passage separates the transferred currencies from the dissipated one",
+      "prediction_target": "The learner should predict that the answer will turn on the third paragraph's contrast between a payment somebody receives and a payment nobody receives.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "specific_detail"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A tenant who pays a disguised deposit has lost something, though the landlord has gained nothing by it.",
+        "B": "Where a price is fixed below the level at which the market would clear, the good will in the end go unsold entirely.",
+        "C": "The buyers who obtain the good under a ceiling are those who value it most highly.",
+        "D": "A buyer who queues and a buyer who pays in money may give up as much, and only one payment reaches a seller."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Two paragraphs have to be held together. The second says the payment is made in several currencies, some of which, like the deposit under another name, still go to the landlord. The third says that money is a transfer and hours are not, because the hours are received by nobody.",
+        "correct_reasoning": "The correct option joins the second paragraph to the third. The passage itself puts the two currencies on one scale, setting an afternoon on the telephone against twenty pounds, so two buyers can give up as much by different routes; and the third paragraph says that one of those routes is a transfer while the other is received by nobody. That is precisely the conversion it describes, from something somebody gets into something nobody gets.",
+        "passage_anchor": "rc-0089-p2, rc-0089-p3",
+        "question_type_note": "An inference question rewards combining a list with a property. Where a passage names several forms of a thing and then distinguishes them by one feature, the inference lives in the distinction.",
+        "reading_habit": "When an author divides a category in two, test each option by asking which half it belongs to. Half the wrong answers in such sets are true of one half and asserted of both.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "A deposit under another name is money, and money is the case the third paragraph calls a transfer. The landlord has it, which is exactly what the queue's hours lack, so this puts the wrong currency on the wrong side of the passage's central distinction.",
+            "seductive_element": "It is the live rival, because the disguised deposit feels like the shadiest item on the list, and moral disapproval attaches easily to the idea of a payment that benefits nobody."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The first paragraph says the opposite in the sentence that launches the argument: the flat is still let to somebody. The passage's whole subject is who obtained the good and what they handed over, which presupposes that the good was obtained.",
+            "seductive_element": "Shortage is the word the reader arrives with, and a shortage sounds like something that ends in empty shelves rather than in queues."
+          },
+          {
+            "option": "C",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Nothing about valuation is claimed. The passage's list of the ways the good is obtained includes patience, free afternoons and the tenant whose cousin knows the agent, none of which measures how much anybody wants the flat.",
+            "seductive_element": "It is what a market is usually credited with achieving, and a reader who knows that story will supply it where the passage has deliberately put a different list."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0089-q3",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "struct.contrast"
+      ],
+      "target_mistake": "naming a property of the people who queue instead of the property of the payment that the third paragraph actually states",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, what distinguishes a price paid in hours from a price paid in money is that",
+      "options": {
+        "A": "the hours are received neither by the seller nor by anybody else, and are simply spent",
+        "B": "the hours are paid by buyers who, though willing, could not have paid in money",
+        "C": "the hours are harder for a buyer to measure than a sum of money is",
+        "D": "the hours are counted as a loss by the buyer and as a gain by the seller"
+      },
+      "correct": "A",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The third paragraph states both sides of the contrast in consecutive sentences. In the money case the buyer is poorer and the seller richer by the same sum; in the hours case the hours are not received by the seller and are not received by anyone, but simply dissipated.",
+        "correct_reasoning": "The correct option is the second of those sentences. The distinction the passage draws is about where the payment goes, not about who makes it or how it is felt, which is why the closing line can say that part of what buyers pay has been converted from something somebody gets into something nobody gets.",
+        "passage_anchor": "rc-0089-p3",
+        "question_type_note": "A detail question on a contrast is settled by which property the author actually attaches to which side. Put a finger on the sentence before matching any option.",
+        "reading_habit": "When two things are set against each other, write each stated property in the column it belongs to as you read. Distractors are built from real properties filed under the wrong heading, or from properties nobody stated at all.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The fourth paragraph says hours may be a currency the poor can find more easily than money, which is a claim about relative ease. Inability to pay is a different and stronger claim, and the passage's own example is somebody who would rather have paid twenty pounds and gone out.",
+            "seductive_element": "It is the live rival, because the concession really is about the poor, and easier to find slides into could not have paid without the reader noticing the step."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Measurement is never mentioned. The passage treats the hours as perfectly countable, calling a queue a price expressed in hours and setting an afternoon on the telephone against a sum of twenty pounds.",
+            "seductive_element": "The intangibility of time is the first difference most readers would name between waiting and paying, and it sounds like the sort of thing an economist would say."
+          },
+          {
+            "option": "D",
+            "trap_type": "reversed_causation",
+            "why_wrong": "This describes the money case and attaches it to the hours. In the money case the seller's gain matches the buyer's loss; in the hours case the paragraph says expressly that the seller receives nothing at all.",
+            "seductive_element": "The two halves of the sentence have the shape of the transfer the paragraph describes, and a reader carrying the transfer forward will not notice which currency it belonged to."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "ceiling",
+      "passage_use": "A ceiling is placed on the rent",
+      "meaning_here": "a legal maximum above which a price may not go",
+      "difficulty": "easy"
+    },
+    {
+      "word": "currency",
+      "passage_use": "What it did was change the currency",
+      "meaning_here": "whatever a buyer actually hands over in order to get the good",
+      "difficulty": "medium"
+    },
+    {
+      "word": "transfer",
+      "passage_use": "A price paid in money is a transfer",
+      "meaning_here": "a movement of value from one party to another, losing nothing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "dissipated",
+      "passage_use": "They are simply dissipated, like heat",
+      "meaning_here": "scattered and used up without reaching anybody",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "The passage states the familiar answer in its second sentence and then calls it the least interesting thing that can be said. Follow the question it asks instead, because all three questions are decided after that point rather than before it.",
+    "one_sentence_summary": "A ceiling on a price does not abolish the price but changes the currency it is paid in, from money into waiting, searching and acquaintance, and the difference that matters is that money paid is money somebody receives whereas hours queued are received by nobody, so part of what buyers pay is converted from a transfer into a pure loss, which may still be worth accepting where the object of the rule was to change who gets the good.",
+    "main_idea": "Put a legal maximum on a price and the usual answer is that a shortage appears. True, and not the point. The good still goes to somebody, and that somebody still pays. The payment simply moves into other currencies: time in a queue, effort in searching, a disguised deposit, a useful cousin. The crucial difference is that money paid is money received, while hours spent waiting are received by nobody and vanish. So the ceiling converts part of the price into pure waste, which may nevertheless be a price worth paying if the point of the rule was to change who gets the good.",
+    "simple_explanation": "Suppose the government says nobody may charge more than a certain rent, or more than a certain price for bread or petrol. The standard answer is that you get a shortage: at that price, more people want the thing than there is of it.\n\nThat is true. It is also, the author says, the dullest possible thing to say, because it stops right where the interesting part starts. The flat still gets rented to somebody. So who is that somebody, and what did they actually give up to get it?\n\nHere is the answer. Nothing was ever free, and capping the price did not make it free. It changed what the price is paid in. Whatever the landlord is no longer allowed to take in money, he takes in other forms: you wait, you spend weeks searching, you hand over a deposit that is called something else, or you happen to be the person whose cousin knows the letting agent. A queue is simply a price written in hours instead of pounds. So is a waiting list. So is the whole afternoon you spent on the phone when you would honestly have preferred to pay twenty pounds and go out.\n\nNow the part that matters most. When you pay money, that money goes somewhere. You are poorer by a hundred pounds and the seller is richer by a hundred pounds. Nothing has vanished; it has moved. When you pay in hours, nothing moves. The three hours you stood in the queue are not collected by the seller. They are not collected by anybody at all. They just disappear, the way heat does.\n\nSo the cap does not only fail to make the thing cheaper. It takes part of what buyers hand over and turns it from something a person receives into something nobody receives.\n\nThe author then refuses to turn this into a blanket verdict. If the whole point of the rule was to change which people end up with the good, and if time is a currency that poorer people can find more easily than money, then swapping the currency may be exactly what was wanted, and the wasted hours are the cost of doing it.\n\nWhat he will not allow is the comfortable belief that the cap made anything cheaper. It changed who pays, what they pay in, and how much of what they pay survives being paid.",
+    "why_difficult": "The passage is short and lexically easy and still catches readers, because it sets aside the answer they were taught in its third sentence and then builds everything on a distinction between two kinds of payment that looks like a technicality until it is used. The second difficulty is that the second paragraph lists several currencies and the third paragraph's property is true of only one of them, so a reader who carries the whole list forward gets the inference wrong. The third is the last paragraph, which concedes a purpose and then refuses the verdict the concession seems to invite.",
+    "author_intention": "To move the reader's attention off the shortage, which everybody can already state, and onto the two questions the shortage hides, so that a price control stops looking like a reduction in price and starts looking like a change in what the price is made of.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0089-p1",
+        "role": "Asks the question",
+        "note": "The cap causes a shortage. True and dull. The flat still gets let, so who got it and what did they pay?"
+      },
+      {
+        "paragraph_id": "rc-0089-p2",
+        "role": "Answers it",
+        "note": "The price did not disappear; it changed currency. Waiting, searching, a deposit under another name, the right cousin."
+      },
+      {
+        "paragraph_id": "rc-0089-p3",
+        "role": "Draws the consequence",
+        "note": "Money paid is money received. Hours queued are received by nobody. Part of the price stops being a transfer and becomes a loss."
+      },
+      {
+        "paragraph_id": "rc-0089-p4",
+        "role": "Concedes, and limits",
+        "note": "If the aim was to change who gets the good, the waste may be the cost of doing it. But nothing was made cheaper."
+      }
+    ],
+    "tone_progression": "It opens flatly, almost impatiently, with a textbook answer it declines to dwell on, warms into concrete illustration in the middle, becomes precise and slightly severe at the distinction between transfer and waste, and closes even-handed, granting a purpose and withdrawing a comfort.",
+    "key_transitions": [
+      "'The answer is correct, and it is also the least interesting thing that can be said' (paragraph 1) — the familiar result is set aside and the real question is asked.",
+      "'A price paid in hours is not a transfer.' (paragraph 3) — the passage's whole payoff arrives in six words.",
+      "'None of which makes the good any cheaper.' (paragraph 4) — a grant is made and immediately measured."
+    ],
+    "misunderstanding": "Two wrong models form. The first keeps the shortage as the point, so the reader answers a question about the main idea with the thing the author called uninteresting. The second generalises the third paragraph to every currency in the second, so that all the ways of paying under a ceiling become losses that reach nobody, when a disguised deposit plainly reaches the landlord and is exactly the transferred case. The passage's argument lives in the difference between those two kinds of payment, and a reader who flattens them has nothing left to reason with.",
+    "traps_summary": "This set offers the textbook shortage as the thesis, a recommendation the passage refuses in its opening sentence of the last paragraph, a verdict on fairness drawn from a concession about ease, a transferred payment described as a vanished one, and the buyer who prefers to queue described as one who could not pay. Deciding which paragraph each option belongs to answers all three.",
+    "reading_lesson": "When a passage states a well-known result and then calls it obvious, uninteresting or incomplete, treat that sentence as a signpost: everything the author cares about lies on the far side of it, and the well-known result will reappear among the options as the most comfortable wrong answer. The companion habit is to notice when an author divides one category into two, since from that moment every claim must be checked against the half it belongs to rather than against the category as a whole.",
+    "real_world": "The same accounting applies to anything obtained by waiting rather than by paying: a queue for a hospital appointment, a ballot for a school place, a line outside a restaurant that refuses reservations, a scheme whose paperwork takes six hours to complete. In each case the question worth asking is not only who ends up with the thing but whether what they spent to get it has gone anywhere.",
+    "takeaway": "A price you pay in money goes to somebody; a price you pay in hours goes nowhere at all.",
+    "reflection_question": "Which of the things you waited for this year cost you time that nobody on the other side of the counter ever received?"
+  }
+}
