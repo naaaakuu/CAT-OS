@@ -477,6 +477,21 @@ function drawDisc(ras, cx, cy, r, c) {
  * @param {object} [opts] { focus: slug|null }
  * @returns a Scene for WorldRenderer
  */
+/**
+ * The hour's light, applied the way `WorldRenderer.draw` applies it: a
+ * multiply by mix(white, tint, strength), not a lerp toward the tint. The
+ * edge painters have to use this or the sky beyond the ridge meets the map's
+ * own sky at a visible step every dusk and dawn.
+ */
+function multiplyTint(hex, tint, strength) {
+  if (!(strength > 0)) return hex;
+  const m = mix('#FFFFFF', tint, strength);
+  const c = parseInt(String(hex).slice(1), 16);
+  const t = parseInt(String(m).slice(1), 16);
+  const ch = (shift) => Math.round((((c >> shift) & 255) * ((t >> shift) & 255)) / 255);
+  return `#${((1 << 24) + (ch(16) << 16) + (ch(8) << 8) + ch(0)).toString(16).slice(1)}`;
+}
+
 /** A hex colour at an alpha, for gradients that fade to nothing. */
 function hexAlpha(hex, a) {
   const n = parseInt(String(hex).slice(1), 16);
@@ -738,7 +753,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
       const isNight = hr === 'night' || hr === 'dusk';
       const sky = SKY[hr] ?? SKY.morning;
       const li = LIGHT[hr] ?? LIGHT.morning;
-      const lit = (c) => (li.strength > 0 ? mix(c, li.tint, li.strength) : c);
+      const lit = (c) => multiplyTint(c, li.tint, li.strength);
       /* The sides, on a screen wider than the valley: the same sky above
          the same horizon, the same land below, so the map never floats in
          a coloured box. */
@@ -786,9 +801,9 @@ export function buildWorldScene(state, atmo, opts = {}) {
         // Three wooded ridges walking away from the valley, front one darkest:
         // the country south of the road, seen from the last hill.
         const bands = [
-          { at: 0.0, hgt: 0.16, tone: mix(PIGMENT.pine, '#33583C', 0.45), step: Math.max(5, Math.round(z * 5)) },
-          { at: 0.3, hgt: 0.22, tone: mix(PIGMENT.pine, '#22402C', 0.6), step: Math.max(7, Math.round(z * 8)) },
-          { at: 0.62, hgt: 0.3, tone: mix(PIGMENT.pine, '#152A1E', 0.78), step: Math.max(9, Math.round(z * 12)) },
+          { at: 0.0, hgt: 0.2, tone: mix(PIGMENT.pine, '#3E6A47', 0.35), step: Math.max(5, Math.round(z * 5)) },
+          { at: 0.3, hgt: 0.26, tone: mix(PIGMENT.pine, '#24462E', 0.62), step: Math.max(7, Math.round(z * 8)) },
+          { at: 0.62, hgt: 0.34, tone: mix(PIGMENT.pine, '#0E1F16', 0.86), step: Math.max(9, Math.round(z * 12)) },
         ];
         let bi = 0;
         for (const b of bands) {
@@ -915,17 +930,28 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
       const skyH = portrait ? 56 : 44;
       for (let y = 0; y < skyH; y += 1) { ctx.fillStyle = mix(sky[1], sky[2], y / skyH); ctx.fillRect(0, y, W, 1); }
       // A canopy ceiling: overlapping dark masses along the top edge.
-      const c = ramp(season === 'autumn' ? PIGMENT.autumn : season === 'winter' ? '#6F8677' : PIGMENT.canopyDeep);
-      const canopyH = portrait ? 70 : 70;
+      // Deep enough to be a ceiling. An autumn canopy seen from underneath
+      // is not the colour of an autumn canopy seen from above: it is that
+      // colour with the whole wood's shade behind it.
+      const canopyTone = season === 'autumn' ? mix(PIGMENT.autumn, PIGMENT.canopyDeep, 0.42)
+        : season === 'winter' ? '#5E7466' : PIGMENT.canopyDeep;
+      const c = ramp(canopyTone);
+      const canopyH = portrait ? 72 : 70;
       const pxl = new Pix(W, canopyH);
       const cr = rng(`canopy:${grove.slug}`);
       const cy = portrait ? 1.7 : 1;
-      // A ceiling of leaves: dense dark masses along the top, base-tone
-      // masses below them, a few lit clusters where the light comes through.
-      for (let i = 0; i < 30; i += 1) pxl.blob(Math.floor(cr() * W), Math.floor(cr() * 26 * cy) - 6, 22 + Math.floor(cr() * 18), 12 + Math.floor(cr() * 8), c.dark, cr, 0.22);
-      for (let i = 0; i < 22; i += 1) pxl.blob(Math.floor(cr() * W), 2 + Math.floor(cr() * 22 * cy), 16 + Math.floor(cr() * 14), 8 + Math.floor(cr() * 6), c.base, cr, 0.25);
-      for (let i = 0; i < 10; i += 1) pxl.blob(Math.floor(cr() * W), Math.floor(cr() * 14 * cy), 8 + Math.floor(cr() * 8), 4 + Math.floor(cr() * 3), c.light, cr, 0.25);
+      // Three passes, dark to light, then a scatter of small clusters so the
+      // ceiling has leaves in it rather than being one shape; then gaps,
+      // punched back out, where the sky gets through.
+      for (let i = 0; i < 34; i += 1) pxl.blob(Math.floor(cr() * W), Math.floor(cr() * 26 * cy) - 8, 22 + Math.floor(cr() * 18), 12 + Math.floor(cr() * 8), c.dark, cr, 0.26);
+      for (let i = 0; i < 26; i += 1) pxl.blob(Math.floor(cr() * W), 2 + Math.floor(cr() * 22 * cy), 15 + Math.floor(cr() * 13), 8 + Math.floor(cr() * 6), c.shade, cr, 0.3);
+      for (let i = 0; i < 20; i += 1) pxl.blob(Math.floor(cr() * W), 4 + Math.floor(cr() * 20 * cy), 9 + Math.floor(cr() * 9), 5 + Math.floor(cr() * 4), c.base, cr, 0.32);
+      for (let i = 0; i < 26; i += 1) pxl.blob(Math.floor(cr() * W), 1 + Math.floor(cr() * 18 * cy), 4 + Math.floor(cr() * 5), 3 + Math.floor(cr() * 3), c.light, cr, 0.35);
       pxl.outline(ramp(c.dark).dark);
+      // Gaps: erase a few small holes so daylight shows between the leaves.
+      pxl.ctx.globalCompositeOperation = 'destination-out';
+      for (let i = 0; i < 9; i += 1) pxl.blob(Math.floor(cr() * W), 3 + Math.floor(cr() * 22 * cy), 3 + Math.floor(cr() * 4), 2 + Math.floor(cr() * 3), '#000', cr, 0.4);
+      pxl.ctx.globalCompositeOperation = 'source-over';
       ctx.drawImage(pxl.canvas, 0, 0);
       // Two great trunks frame the grove.
       const trunk = ramp(PIGMENT.trunk);
@@ -1426,10 +1452,10 @@ export function buildBackdropScene(slug, state, atmo) {
     terrain,
     beyond(ctx, { oy, z, w, h }) {
       const s = SKY[hour] ?? SKY.morning;
-      const tinted = mix(s[0], softened.tint, softened.strength);
+      const tinted = multiplyTint(s[0], softened.tint, softened.strength);
       if (oy > 0) { ctx.fillStyle = tinted; ctx.fillRect(0, 0, w, oy + 2); }
       const bottom = oy + H * z;
-      if (bottom < h) { ctx.fillStyle = mix(mix(grass.shade, '#121B2C', 0.62), softened.tint, softened.strength); ctx.fillRect(0, bottom - 2, w, h - bottom + 2); }
+      if (bottom < h) { ctx.fillStyle = multiplyTint(mix(grass.shade, '#121B2C', 0.62), softened.tint, softened.strength); ctx.fillRect(0, bottom - 2, w, h - bottom + 2); }
     },
     update() { /* still */ },
     objects() { return []; },

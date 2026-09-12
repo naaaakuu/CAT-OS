@@ -33,7 +33,10 @@ import { renderWilds } from './wilds.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 
 const STAGE_WORD = { open_ground: 'Unmet', seed: 'A seed', sprout: 'Sprout', young: 'Young', in_leaf: 'In leaf', mature: 'Mature', ancient: 'Ancient' };
-const STAGE_GLYPH = { open_ground: '◌', seed: '·', sprout: '🌱', young: '🌿', in_leaf: '🌳', mature: '🌳', ancient: '🌲' };
+/** A tree's stage, in one typographic mark. Deliberately not emoji: the
+ *  valley draws its own trees, and a system glyph beside them looks like a
+ *  different product. */
+const STAGE_GLYPH = { open_ground: '◌', seed: '·', sprout: '\u2027', young: '\u2038', in_leaf: '\u25B4', mature: '\u25B2', ancient: '\u2663' };
 
 export async function renderPlace(outlet, { storage }, params) {
   const region = regionBySlug(params.slug);
@@ -152,7 +155,7 @@ export async function renderPlace(outlet, { storage }, params) {
       gold: pick.kind === 'due',
     } : null;
     let selected = rw.groves.find((g) => g.families.some((x) => x.id === f?.id)) ?? rw.groves[0];
-    heroStat.innerHTML = pill(`🌳 ${rw.grownCount} grown`);
+    heroStat.innerHTML = pill(`\u2663 ${rw.grownCount} grown`);
     const renderGrove = () => {
       const fams = selected.families;
       const scene = buildGroveScene(selected, fams, atmo, { selected: f?.id ?? null, portrait: true, heroId: f?.id ?? null });
