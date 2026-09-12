@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0051",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Bone That Is Not Lighter",
+    "theme": "why a flying bird's hollow bones answer a problem of stiffness rather than one of weight",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "C",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is about mass carried in flight, and the paragraph opens by denying that mass is the point, so the stray sentence sounds like the objection the exposition is answering. The decoy is the closing sentence about diving birds, which introduces a new group and reads like an exception bolted on."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "ambiguity_tolerance"],
+    "mission": "notice_topic_stability",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "see that two sentences can use the same word, mass, at two different levels of a problem, and that only one of those levels is the paragraph's",
+    "reasoning_patterns": ["scope.abstraction_level", "disc.cause_effect", "scope.true_but_off_question", "comp.function_over_words", "struct.contrast"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the closing sentence about diving birds with dense bones: it introduces a new group at the end and looks like an exception attached after the explanation had finished. It stays because the claim that hollowness solves shape rather than weight predicts exactly that such birds are possible, and an explanation that makes a prediction and then refuses to state it has stopped short. The sentence about fuel and take-off mass is about the same animals and the same word, and it works at the level of a whole journey, where the paragraph works at the level of one bone in bending; nothing in the exposition can receive a fuel budget or hand one on.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of avian bone structure and bending stiffness; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An elite scope item in which the shared word does the camouflage. Both the core and the outlier are about mass in flight, but one is about the mass of a whole bird over a journey and the other about where mass sits within a single bone."
+  },
+  "sentences": [
+    { "label": "A", "text": "Across a long migration the fuel a bird carries is the quantity that runs out, and the mass it lifts at take-off decides how far it can go before it must feed again." },
+    { "label": "B", "text": "Stiffness is what a wing bone needs, since it is loaded hardest in bending on the downstroke, and a bone that flexes gives back part of the stroke that drives the bird forward." },
+    { "label": "C", "text": "A flying bird's skeleton weighs about what the skeleton of a comparable mammal weighs, and what has changed is not its mass but the arrangement of it." },
+    { "label": "D", "text": "Material carried away from the centre of a bone resists bending far better than the same material packed around the axis, so a hollow tube is stiffer than a rod of equal weight." },
+    { "label": "E", "text": "So the hollowness answers a problem of shape rather than one of weight, which is why several diving birds have dense bones without contradicting anything." }
+  ],
+  "outlier": "A",
+  "core_order": ["C", "D", "B", "E"],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of why a bird's bones are hollow, from what the skeleton weighs to the birds whose bones are dense. The sentence working at the scale of a whole journey is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one piece of anatomy in four steps. It opens by removing the expected answer, since the skeleton is no lighter than a mammal's, and points at arrangement instead. The second step gives the mechanical fact, that material set away from the axis resists bending better, the third says why bending is the load that matters for a wing, and the fourth draws the conclusion and shows it accommodating the birds whose bones are dense. Correction, mechanics, need, conclusion.",
+    "core_roles": [
+      { "label": "C", "role": "topic", "why_here": "It states the fact that makes the usual explanation impossible, and its distinction between mass and arrangement is the frame everything else fills in." },
+      { "label": "D", "role": "development", "why_here": "It supplies the mechanical principle that the arrangement exploits, and its equal weight repeats the opening's point in physical terms." },
+      { "label": "B", "role": "development", "why_here": "It says why stiffness rather than strength or lightness is the relevant demand, which is what makes the principle apply to this animal." },
+      { "label": "E", "role": "conclusion", "why_here": "'So' draws the conclusion and immediately tests it on the awkward case, which is how an explanation shows it has understood its own limits." }
+    ],
+    "links": [
+      { "from": "C", "to": "D", "tie": "lexical", "explanation": "'The arrangement of it' is answered directly by material carried away from the centre, so the second sentence specifies what the first only named." },
+      { "from": "D", "to": "B", "tie": "reference", "explanation": "'Stiffness' and 'bending' are the terms the previous sentence introduced, and this sentence explains why a wing needs exactly them." },
+      { "from": "B", "to": "E", "tie": "conjunction", "explanation": "'So' gathers the mechanics and the demand into the conclusion, and the dense-boned divers are the test of it." }
+    ],
+    "violation_named": "The odd sentence is about the mass a bird lifts and the distance it can fly before feeding. The four core sentences are about where material sits inside a single bone and what that does to bending. Both use the vocabulary of weight in flight, and they use it at two different levels of one subject, only one of which the paragraph occupies.",
+    "why_it_breaks": "The chain runs from a comparison of skeletons, through a fact about cross-sections, to the load on a wing, to a conclusion about shape. A fuel budget over a migration cannot be handed to a statement about bending, and the conclusion about diving birds needs a claim about stiffness rather than a claim about range. The stray sentence also answers a question the paragraph explicitly sets aside, since the opening has already said that mass is not what changed.",
+    "trap_exposed": "The camouflage is the shared word. Because the paragraph opens by denying that lightness is the answer, a sentence about the mass a bird must lift sounds like the objection being answered, and a reader will file it as the paragraph's other side. It is not an objection, because it is not about bones at all. The decoy is the closing sentence, whose divers arrive late and look like an exception appended to a finished explanation.",
+    "exclusion_analysis": [
+      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It spends its length denying something rather than explaining anything, so a reader may treat it as a preliminary clearing of the ground.", "what_breaks": "Without it the paragraph explains hollowness without ever saying why the obvious explanation fails, and the conclusion about shape rather than weight corrects nothing." },
+      { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "It is a general statement of mechanics with no bird in it, which makes it look like a principle imported from engineering.", "what_breaks": "Without it the paragraph asserts that arrangement matters and never says how, so the need for stiffness has no mechanism to be met by." },
+      { "label": "B", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence describing what the animal is doing, and the downstroke gives it a different texture from the physics around it.", "what_breaks": "Without it the mechanics apply to nothing in particular, and the conclusion that hollowness is a solution has no problem stated for it to solve." },
+      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "Its diving birds arrive from nowhere at the end, which makes the sentence look like an exception someone remembered late.", "what_breaks": "Without it the explanation never states its conclusion and never faces the case that appears to refute it, leaving a reader with mechanics and no verdict." }
+    ],
+    "detection_habit": "When two sentences share a keyword, ask what each of them is really about. A word like weight can belong to one paragraph about bones and another about journeys, and only one of those is the paragraph in front of you."
+  },
+  "mentor": {
+    "challenge": "Every sentence here is about birds and the weight they carry. Four of them are inside a single bone, and one is somewhere over the sea.",
+    "takeaway": "A shared word is not a shared subject. Ask what each sentence is measuring."
+  }
+}

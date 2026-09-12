@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0048",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "The Wrong Name That Will Not Move",
+    "theme": "why a word on the tip of the tongue is blocked by the near miss that keeps arriving instead",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "A",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier announces a third factor, and the paragraph contains a mechanism and a complication that a quick reader will count as the first two, so the reference finds a false anchor. The decoy is the closing sentence, which turns into advice and an anecdote and so changes register at the end."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["connective_reading", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "count what a paragraph has actually listed before accepting a sentence that claims to continue the list",
+    "reasoning_patterns": ["comp.reference_tracking", "disc.lexical_chain", "disc.cause_effect", "comp.purpose", "disc.topic_progression"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the closing sentence, which gives advice and then an anecdote about the name arriving twenty minutes later, so its register differs from the explanation before it. It stays because which is why draws both halves from the strengthening of the wrong path, and because an account of a block is unfinished until it says what happens when the effort stops. The sentence about a third factor claims to continue a list the paragraph never made: a mechanism and a complication are not numbered factors, nothing here concerns what was heard last week, and no later sentence returns to it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of tip-of-the-tongue states and blocking; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A medium-tier thread break with a deliberately countable false anchor. The item teaches the learner to check what a paragraph has actually enumerated rather than what it feels as though it enumerated."
+  },
+  "sentences": [
+    { "label": "A", "text": "What has failed is the link between the meaning, which is fully present, and the sound, which is stored apart from it and reached by a different route." },
+    { "label": "B", "text": "Which is why the advice to keep trying is poor advice, and why the name so often arrives unasked twenty minutes after the search has been abandoned." },
+    { "label": "C", "text": "The word you cannot find is not missing, since you can usually say how many syllables it has and which letter it begins with." },
+    { "label": "D", "text": "The state is made worse by the near miss: a wrong word of roughly the right shape arrives instead, and every arrival strengthens the path to itself." },
+    { "label": "E", "text": "That third factor is the one nobody can control, since a name heard often in the past week will surface whether it is wanted or not." }
+  ],
+  "outlier": "E",
+  "core_order": ["C", "A", "D", "B"],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of the word you cannot reach, from what is actually missing to what finally works. The sentence continuing a list the paragraph never made is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one familiar failure in four steps. It opens by showing that the word is not lost, since its shape is available, then locates the failure in the link between meaning and sound. The third step adds the complication that makes the state persist, a wrong word of the right shape whose path grows stronger with every arrival, and the fourth draws the practical consequence. Symptom, mechanism, complication, consequence.",
+    "core_roles": [
+      { "label": "C", "role": "topic", "why_here": "It states the puzzle in the form that makes it a puzzle, that quite a lot of the word is available while the word is not." },
+      { "label": "A", "role": "cause_effect", "why_here": "'What has failed' answers the puzzle directly by naming the broken connection, which the complication then acts on." },
+      { "label": "D", "role": "development", "why_here": "It explains why the failure does not simply resolve, and the strengthening path is what the closing advice is about." },
+      { "label": "B", "role": "conclusion", "why_here": "'Which is why' draws both halves of its claim from the strengthening just described, and closes the account with what happens when the effort stops." }
+    ],
+    "links": [
+      { "from": "C", "to": "A", "tie": "reference", "explanation": "'What has failed' points at the odd half-availability just described and supplies its explanation." },
+      { "from": "A", "to": "D", "tie": "lexical", "explanation": "'The state' names the condition the previous sentence analysed, and the near miss is a second event inside the same machinery of sound and route." },
+      { "from": "D", "to": "B", "tie": "conjunction", "explanation": "'Which is why' takes the strengthening of the wrong path as its premise, so the advice follows from the mechanism rather than from experience." }
+    ],
+    "violation_named": "The odd sentence presents itself as the third item of a list. The paragraph has no list: it has a symptom, a mechanism, a complication and a consequence, and none of them was offered as a numbered factor. The sentence is continuing an enumeration that exists only in its own opening words.",
+    "why_it_breaks": "Its content is also unclaimed. Recency, what a person happens to have heard in the past week, is not mentioned anywhere in the core, and nothing after it could use it: the closing sentence is about what happens when the search is given up, not about which words intrude. So the sentence arrives with a tie that points nowhere and leaves behind a topic nobody picks up.",
+    "trap_exposed": "The camouflage is countability. A reader who has met a mechanism and then a complication will readily accept that two things have been listed, and the words that third factor will seem to fit. The decoy is the closing sentence, which turns into advice and then into an everyday observation, so a reader sorting by register may drop the one sentence that completes the explanation.",
+    "exclusion_analysis": [
+      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It is phrased as a denial rather than a claim, so a reader may treat it as an aside before the explanation begins.", "what_breaks": "Without it nothing establishes that the word is partly available, and the failed link explains a failure the paragraph never described." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It is the most technical sentence in the set and names no experience, so a reader may hold it aside while placing the others.", "what_breaks": "Without it the paragraph reports a symptom and jumps to an aggravation, with the mechanism that both of them concern left unstated." },
+      { "label": "D", "mistake_type": "surface_oddity", "why_tempting": "Its colon and its image of a wrong word arriving give it a livelier texture than the sentences around it.", "what_breaks": "Without it nothing explains why the state persists, and the advice at the end has no strengthening path to be advice about." },
+      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "It gives advice and then an anecdote, which makes it look like a practical addition to an explanation that had already finished.", "what_breaks": "Without it the account describes a trap and never says how it ends, so the reader is left with a mechanism and no exit from it." }
+    ],
+    "detection_habit": "When a sentence says the third, the other, or the same again, count what the paragraph has actually enumerated. A feeling that two things have been listed is not a list."
+  },
+  "mentor": {
+    "challenge": "Five sentences about the name you cannot reach. One of them continues a list, and your job is to check whether the list was ever started.",
+    "takeaway": "Count before you accept. A sentence can inherit a place in a series the paragraph never opened."
+  }
+}

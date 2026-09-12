@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0045",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "religion-belief",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Road Is the Observance",
+    "theme": "why the journey rather than the destination is the thing a pilgrimage performs",
+    "estimated_time_sec": 70,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "C",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is set at the same shrine among the same travellers and describes a real practice, which is enough camouflage at this tier. The decoy is the sentence about the carriage, which brings in a controversy and a second traveller just as the explanation seemed settled."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring"],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "look for the handoff between sentences, and see that a sentence set in the same place can receive nothing and pass nothing on",
+    "reasoning_patterns": ["disc.topic_progression", "comp.purpose", "disc.cause_effect", "scope.true_but_off_question"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about the traveller who takes the carriage: it introduces a controversy and a second kind of traveller, and a reader may treat the quarrel as a departure from the explanation. It stays because its this is why draws directly on the claim that the distance is meant to cost something, and because the carriage is the case that proves the cost is the point. The sentence about registers of claimed cures is set at the same shrine and joins nothing here: the explanation runs from journey to cost to controversy to arrival, and what a committee does with a claim is a different subject that begins and ends inside one sentence.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of pilgrimage as an observance of the road; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An easy-tier item where the outlier shares the setting and nothing else. The decoy teaches that a sentence introducing a quarrel can still be the sentence that proves the paragraph's point."
+  },
+  "sentences": [
+    { "label": "A", "text": "This is why shortening the road has always been contentious, and why the traveller who takes the carriage is felt to have kept the destination and lost the observance." },
+    { "label": "B", "text": "Many shrines keep a register in which visitors set down the cures they claim, and a committee examines the entries before any of them is published." },
+    { "label": "C", "text": "A pilgrimage is not a visit, and the difference is that the journey itself is part of what is being performed." },
+    { "label": "D", "text": "The distance is meant to cost something: the walker arrives having spent weeks unable to do anything else, so the arrival is the end of an effort rather than the start of a look around." },
+    { "label": "E", "text": "The shrine, in other words, is where a long obedience is finally put down, and it can do nothing of the kind for somebody who has carried nothing to it." }
+  ],
+  "outlier": "B",
+  "core_order": ["C", "D", "A", "E"],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of why a pilgrimage is a journey rather than a visit. The sentence that shares the shrine but receives nothing and passes nothing on is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one practice in four steps. It opens with the distinction, a pilgrimage against a visit, and locates it in the journey rather than the arrival. The second step says what the journey is for, a cost paid in weeks that could not be spent otherwise, the third shows the cost mattering by way of the traveller who shortens the road, and the fourth restates what the shrine therefore is. Distinction, cost, test, restatement.",
+    "core_roles": [
+      { "label": "C", "role": "topic", "why_here": "It states the distinction the whole paragraph explains, and everything after it is an answer to the question of why the journey should count." },
+      { "label": "D", "role": "development", "why_here": "It gives the content of that claim, the cost of the distance, which both of the following sentences use." },
+      { "label": "A", "role": "evidence", "why_here": "'This is why' takes the cost as its premise and shows it working, in the reaction to a traveller who has avoided paying it." },
+      { "label": "E", "role": "conclusion", "why_here": "'In other words' restates the whole account from the destination's side, which can only be done once the road has been given its meaning." }
+    ],
+    "links": [
+      { "from": "C", "to": "D", "tie": "lexical", "explanation": "'The distance' takes up the journey named in the first sentence and says what it is for." },
+      { "from": "D", "to": "A", "tie": "conjunction", "explanation": "'This is why' makes the controversy a consequence of the cost, so the quarrel is evidence rather than a new subject." },
+      { "from": "A", "to": "E", "tie": "reference", "explanation": "'Somebody who has carried nothing to it' points back at the traveller in the carriage and turns the case into the paragraph's closing claim." }
+    ],
+    "violation_named": "The odd sentence is set at the same shrines and among the same travellers, and it belongs to a different discussion: what a shrine does with claims of healing, and who examines them. The four core sentences are about what a journey performs, and none of them concerns what happens after an arrival or what any institution does with a testimony.",
+    "why_it_breaks": "The core is a chain of handoffs. The distinction gives the journey, the journey gives its cost, the cost explains the quarrel about carriages, the quarrel gives the closing image of a burden put down. A register of claimed cures takes nothing from any of those and offers nothing to the next sentence, so wherever it stands the chain is interrupted and then resumed unchanged.",
+    "trap_exposed": "The camouflage is the setting: the same shrines, the same visitors, and a practice that sounds exactly like the kind of detail an account of pilgrimage might include. Sharing a place is the cheapest tie there is. The decoy is the sentence about the carriage, which brings in a quarrel and so looks like a change of subject, though it is the paragraph's only evidence that the cost is the point.",
+    "exclusion_analysis": [
+      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It is the most general sentence in the set and reads like a definition, so a reader wanting particulars may treat it as expendable.", "what_breaks": "Without it the paragraph never says what a pilgrimage is being distinguished from, and the cost, the quarrel and the closing image explain a practice nobody has named." },
+      { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "It contains a colon, a walker and a conclusion in one movement, so its role is easy to misjudge on a first pass.", "what_breaks": "Without it the paragraph asserts that the journey matters and never says why, and this is why in the next sentence has no reason to point at." },
+      { "label": "A", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence that mentions a disagreement, and disagreements usually belong to arguments rather than to explanations.", "what_breaks": "Without it the claim about cost is never tested, and the closing sentence's traveller who carried nothing appears from nowhere." },
+      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "Its in other words signals restatement, so a reader may treat it as a repetition the paragraph could spare.", "what_breaks": "Without it the explanation ends on a quarrel and never says what the destination is for, which is the half of the account the opening promised." }
+    ],
+    "detection_habit": "Ask where each sentence takes its material from and what it leaves for the next one. A sentence set in the same place, among the same people, can still receive nothing and give nothing."
+  },
+  "mentor": {
+    "challenge": "Five sentences about pilgrims and shrines. Four of them hand something to the next sentence, and one simply stands in the same courtyard.",
+    "takeaway": "Same place is not same paragraph. Look for the handoff, not the scenery."
+  }
+}

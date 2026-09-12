@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0049",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "medicine-health",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Patients Who Were Always Going to Be Well",
+    "theme": "why lowering the line for a diagnosis improves survival figures without lengthening anybody's life",
+    "estimated_time_sec": 115,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "example_no_claim",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is a clinic, a tablet and a number, exactly the kind of particular a numerical argument seems to want, and it is the only sentence in which a patient does anything. The decoy is the sentence about numerator and denominator, whose arithmetic register is unlike the rest."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "ask what claim a clinical particular is supposed to support, and see that an example about the same patients can belong to an argument the paragraph is not making",
+    "reasoning_patterns": ["arg.example_vs_principle", "disc.example_after_claim", "comp.supporting_idea", "scope.true_but_off_question", "disc.claim_then_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about entering the numerator and the denominator: its arithmetic is unlike anything around it, so a reader eliminating by register may take it for an import. It stays because it is the only sentence that says how the mildest cases raise the figure, and because the closing claim about comparing decades needs the figure to have been shown moving. The sentence about a third of patients stopping their tablets is a genuine clinical finding with no claim here to serve: the argument concerns who is counted, not whether treatment is taken, and nothing in it turns on what patients do after a diagnosis.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of diagnostic thresholds and survival statistics; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The outlier is the sentence a reader wants in an argument made of numbers: a real patient doing something. It illustrates adherence, which the argument never mentions, and that is the whole test."
+  },
+  "sentences": [
+    { "label": "A", "text": "In one clinic a third of the patients given a daily tablet had stopped taking it within six months, though nearly all of them said at the next appointment that they had not." },
+    { "label": "B", "text": "They enter the numerator and the denominator of every survival figure alike, and they lift the fraction by being counted rather than by being helped." },
+    { "label": "C", "text": "When the threshold for a diagnosis is lowered, survival improves without a single person living a day longer." },
+    { "label": "D", "text": "The people brought in by the new line are by definition the mildest cases, and although a few of them will have been helped, most would have done well whether or not anybody had gone looking." },
+    { "label": "E", "text": "So a comparison of survival across two decades, or across two countries, is partly a comparison of where each of them drew the line, and the figures themselves say nothing about that." }
+  ],
+  "outlier": "A",
+  "core_order": ["C", "D", "B", "E"],
+  "builder": {
+    "prompt": "Build the four-sentence argument about what a lowered threshold does to a survival figure. The clinical particular that supports no claim in it is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. It opens with the claim in its sharpest form, that survival can improve while nobody lives longer, then identifies the people responsible for the improvement, the mildest cases that the new line brings in. The third move shows exactly how they lift the figure, by appearing on both sides of the fraction, and the fourth states what follows for any comparison between places or times. Claim, who, how, consequence.",
+    "core_roles": [
+      { "label": "C", "role": "topic", "why_here": "It states the paradox the argument exists to dissolve, and the rest of the paragraph is the dissolution of it." },
+      { "label": "D", "role": "development", "why_here": "It names the group that produces the effect, and its by definition is what makes the argument an analysis rather than a guess about outcomes." },
+      { "label": "B", "role": "evidence", "why_here": "'They' continues the same group and supplies the arithmetic, which is the step at which the paradox stops being mysterious." },
+      { "label": "E", "role": "conclusion", "why_here": "'So' turns the mechanism into a warning about comparisons, which is the use the whole argument was assembled for." }
+    ],
+    "links": [
+      { "from": "C", "to": "D", "tie": "reference", "explanation": "'The new line' refers to the lowered threshold of the opening, and the people it admits are the ones the paradox turns on." },
+      { "from": "D", "to": "B", "tie": "reference", "explanation": "'They' continues the mildest cases without renaming them, so the arithmetic is about exactly the group just defined." },
+      { "from": "B", "to": "E", "tie": "conjunction", "explanation": "'So' draws the consequence from the movement of the fraction, and the figures in the closing sentence are the figures just shown moving." }
+    ],
+    "violation_named": "The odd sentence is an example with no claim to attach to. It reports what patients did with their tablets, and adherence is not a subject of this argument. Every claim here is about who is counted as having the disease and what counting them does to a fraction, and no step depends on what any patient does afterwards.",
+    "why_it_breaks": "The chain is tight: a lowered line, the people it admits, their effect on the fraction, the consequence for comparisons. An example about stopping treatment receives nothing from the definition of the mildest cases and gives nothing to the arithmetic, and it cannot even serve as a complication, since the argument would go through unchanged whether patients took their tablets faithfully or not.",
+    "trap_exposed": "The camouflage is humanity. An argument made of thresholds and fractions seems to want a real clinic and real patients, and the stray sentence is the only place where anybody does anything. Wanting an example is not the same as having a claim for it to serve. The decoy is the arithmetic sentence, whose numerator and denominator feel imported from a statistics lesson, though it is the only sentence that shows the figure moving.",
+    "exclusion_analysis": [
+      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It states the conclusion at the outset, so a reader may treat it as a summary that stands apart from the working which follows.", "what_breaks": "Without it the paragraph explains a movement in the figures that it never reports, and the closing warning about comparisons answers a question nobody has asked." },
+      { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "It defines a group rather than asserting anything about the numbers, so its role in an argument about statistics is easy to miss.", "what_breaks": "Without it the they of the next sentence has no antecedent, and the arithmetic operates on people the paragraph has never identified." },
+      { "label": "B", "mistake_type": "surface_oddity", "why_tempting": "Its register is arithmetical where everything else is clinical or evaluative, which makes it feel like a sentence from a different discipline.", "what_breaks": "Without it the argument asserts that mild cases raise survival and never shows how, so the paradox is restated rather than explained." },
+      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "It introduces decades and countries, a wider frame than anything before it, so it can look like the opening of a separate discussion.", "what_breaks": "Without it the argument explains an artefact and never says where the artefact does damage, which is the only reason the analysis matters." }
+    ],
+    "detection_habit": "For every concrete clinical sentence, name the claim it supports in the paragraph's own words. A real finding about the same patients can still be evidence for an argument nobody here is making."
+  },
+  "mentor": {
+    "challenge": "Four of these sentences are about counting, and one is about a patient with a tablet. The human sentence is the one to examine most carefully, not the one to keep most readily.",
+    "takeaway": "An argument wants the evidence its claim needs. Anything else is only company."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0050",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "Three Volumes and a Subscription",
+    "theme": "how a lending arrangement set the length of a novel, and what happened to the form when the arrangement ended",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "E",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier states the moral of the story before the story has been told, which is a shape readers expect and welcome. The decoy is the sentence about novelists padding and breaking their books, which leaves commerce for craft and so looks like a branch off the narrative."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "recognise a moral offered in advance of its story, and test whether any sentence of the story actually uses it",
+    "reasoning_patterns": ["scope.abstraction_level", "disc.chronology", "arg.example_vs_principle", "comp.organization", "disc.given_new"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about novelists writing to the required length: it leaves the counting house for the writing desk, so a reader following the commercial thread may call it a branch. It stays because it is the link between an arrangement and a form, and without it the closing claim that the replacement was a different shape has nothing to be different from. The general sentence about every literary form carrying the marks of its distribution is the moral of this story told in advance, and no sentence in the story leans on it: the narrative moves from a subscription to a price to a practice to a collapse, and a general law of forms does no work at any of those stages.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the three-decker novel and circulating libraries; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A narrative whose outlier is its own moral. The item is built to punish the reader who assembles a paragraph around the most quotable sentence rather than around the sequence of events."
+  },
+  "sentences": [
+    { "label": "A", "text": "Publishers priced the three volumes at a figure no private reader would pay, and the libraries took nearly the whole of each edition." },
+    { "label": "B", "text": "When the largest libraries refused the format in the 1890s the three-volume novel was gone within two years, and the single-volume book that replaced it was a different shape in ways nobody had planned." },
+    { "label": "C", "text": "Every literary form carries the marks of the arrangements by which it reached its readers, and those marks are plainest in the features that a later age mistakes for choices." },
+    { "label": "D", "text": "A subscriber to a circulating library paid by the year and borrowed one volume at a time, so a novel in three parts could be out with three readers at once." },
+    { "label": "E", "text": "Novelists wrote to the length the arrangement required, padding where the story was thin and breaking it where a volume had to end on something unsettled." }
+  ],
+  "outlier": "C",
+  "core_order": ["D", "A", "E", "B"],
+  "builder": {
+    "prompt": "Build the four-sentence story of the three-volume novel, from the subscription that made it profitable to the two years in which it vanished. The sentence that states the moral instead of telling the story is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one commercial history in four stages. It opens with the lending arrangement, a yearly subscription and one volume at a time, which made three parts more valuable than one. The second stage is the pricing that followed, aimed at libraries rather than readers, the third is what novelists did to fit the length, and the fourth is the collapse when the libraries withdrew, and the differently shaped book that took its place. Arrangement, price, practice, collapse.",
+    "core_roles": [
+      { "label": "D", "role": "background", "why_here": "It supplies the mechanism the whole history rests on, that three volumes could serve three subscribers at the same time." },
+      { "label": "A", "role": "development", "why_here": "It gives the pricing that the lending mechanism made rational, and it establishes who the real customer was." },
+      { "label": "E", "role": "development", "why_here": "'The arrangement' names the commercial system just described, and this is the stage at which it reaches the writing itself." },
+      { "label": "B", "role": "conclusion", "why_here": "It removes the arrangement and reports what happened to the form, which is the only ending a story of this kind can have." }
+    ],
+    "links": [
+      { "from": "D", "to": "A", "tie": "given_new", "explanation": "The three-part novel out with three readers is now given, and the new material is the price that this made possible." },
+      { "from": "A", "to": "E", "tie": "reference", "explanation": "'The arrangement' gathers the subscription and the pricing into one object, which is what novelists are said to be writing for." },
+      { "from": "E", "to": "B", "tie": "lexical", "explanation": "'The format' and 'a different shape' answer the length and the volume breaks just described, so the collapse is a collapse of that practice." }
+    ],
+    "violation_named": "The odd sentence states a general law about literary forms and their means of distribution. The four core sentences narrate one form, one trade and one decade, and every step of the story is a particular fact about a particular arrangement. The general law is what this story would illustrate, not a stage within it.",
+    "why_it_breaks": "Nothing in the narrative uses the law. The subscription explains the price, the price explains who is served, the practice explains the shape of the books, and the withdrawal explains the collapse; at no point does a sentence need the premise that forms in general bear such marks. A story also moves, and a law does not: wherever the general sentence is placed, the sequence pauses to state its own moral and then resumes.",
+    "trap_exposed": "The camouflage is the shape of an essay. Readers expect a general opening followed by a case, so the stray sentence is easy to install at the front with the history as its illustration. The test is whether the story leans on it, and the story leans on a subscription instead. The decoy is the sentence about padding and volume endings, which leaves commerce for craft and looks like a departure, though it is the link without which the ending has nothing to compare.",
+    "exclusion_analysis": [
+      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It is about lending rather than about novels, so a reader who has decided the paragraph is about literature may treat it as background that could be assumed.", "what_breaks": "Without it nothing explains why three volumes were worth more than one, and the pricing, the padding and the collapse all rest on an arrangement never described." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It concerns prices and editions, and a reader sorting the story by literary events may not find a stage for a commercial one.", "what_breaks": "Without it the libraries never become the real customer, and the length novelists are said to be writing for has no one imposing it." },
+      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence about writing, and its padding and unsettled endings read like criticism rather than history.", "what_breaks": "Without it the arrangement never reaches the books, and the different shape at the end of the story has nothing it can be different from." },
+      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "It is the longest sentence and covers a decade in a clause, which makes it feel like a summary appended to the story.", "what_breaks": "Without it the story describes a system and never ends, and the claim that the form was made by the arrangement is never tested by removing the arrangement." }
+    ],
+    "detection_habit": "When a paragraph tells a story, look for the sentence that states what the story means. Unless a later sentence actually uses it, the moral is a visitor and the events are the paragraph."
+  },
+  "mentor": {
+    "challenge": "One of these sentences is the lesson you would draw at the end. Build the history first, and see whether any part of it needs the lesson to be told.",
+    "takeaway": "A story that has to state its own moral has not been given a moral; it has been given a lodger."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0046",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "economics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Discount That Never Arrives",
+    "theme": "why a payment made to buyers ends up wherever supply is slowest to grow",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "D",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier names the very people the argument implies are the beneficiaries, so it feels like the paragraph saying openly what it has been implying. The decoy is the sentence about supply that can expand, which appears to contradict the sentence before it and so reads like an intruder from a different case."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "ambiguity_tolerance"],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "fail",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "tell a sentence that draws a consequence from one that delivers a verdict, and notice that indignation is a different job from analysis even when both are about the same people",
+    "reasoning_patterns": ["arg.description_vs_evaluation", "disc.stance_continuity", "struct.contrast", "comp.purpose"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the sentence about supply that can expand: it appears to take back what the previous sentence asserted, so a reader may treat it as a contradiction imported from elsewhere. It stays because the opening made the answer depend on how quickly supply can grow, which requires both cases, and because the closing question about who could raise their price needs the second case to have any bite. The sentence about landlords and ministerial courage stops analysing and starts accusing, and the analysis has named no country, no policy and no minister for the accusation to attach to.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the incidence of subsidies paid to buyers; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An easy-tier stance break placed where indignation is most natural. The core is careful and conditional throughout, which is what makes the one accusing sentence impossible to fit."
+  },
+  "sentences": [
+    { "label": "A", "text": "If the number of places or houses or seats is fixed for the moment, the extra money meets the same quantity as before, and the price simply rises to absorb it." },
+    { "label": "B", "text": "So the useful question about a payment of this kind is not who receives the cheque, but who was in a position to raise a price when the cheque arrived." },
+    { "label": "C", "text": "Landlords have been pocketing this transfer for a generation, and not one minister has yet had the courage to say as much anywhere a microphone could hear him." },
+    { "label": "D", "text": "A grant paid to buyers does not stay with buyers, and where it settles depends on how quickly the thing being bought can be supplied." },
+    { "label": "E", "text": "Where supply can expand, the grant is divided: part of it lowers the price and part calls forth the extra units, and the division follows the ease of expanding." }
+  ],
+  "outlier": "C",
+  "core_order": ["D", "A", "E", "B"],
+  "builder": {
+    "prompt": "Build the four-sentence argument about where a grant to buyers actually ends up. The sentence that has stopped reasoning and started accusing is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. It opens with the claim and the condition it depends on, that a grant to buyers settles wherever supply is slow to respond, then takes the first case, a fixed quantity, where the price absorbs the money. The third move takes the other case, where supply can grow and the money is divided, and the fourth turns the pair into the question worth asking about any such payment. Claim, case, case, rule.",
+    "core_roles": [
+      { "label": "D", "role": "topic", "why_here": "It states the claim and names the variable the rest of the argument turns on, so both of the cases that follow are answers to it." },
+      { "label": "A", "role": "development", "why_here": "It works the first case through, and the price rising to absorb the money is the clearest form of the claim." },
+      { "label": "E", "role": "contrast", "why_here": "It supplies the second case, without which the claim would look like a blanket assertion rather than a conditional one." },
+      { "label": "B", "role": "conclusion", "why_here": "'So' draws from both cases the question a reader can carry away, which is the only thing the two cases were laid out to produce." }
+    ],
+    "links": [
+      { "from": "D", "to": "A", "tie": "conjunction", "explanation": "The if clause takes up the condition just named, how quickly the thing can be supplied, and fixes it at one extreme." },
+      { "from": "A", "to": "E", "tie": "lexical", "explanation": "'Where supply can expand' answers the fixed quantity of the previous sentence and works the same condition at its other setting." },
+      { "from": "E", "to": "B", "tie": "conjunction", "explanation": "'So' collects both settings into a single question, which is why it needs the two sentences before it rather than either alone." }
+    ],
+    "violation_named": "The four core sentences reason about where money goes and under what conditions. The odd sentence delivers a verdict on a group of people and on the politicians who will not name them. That is a change of stance, from an analysis that is careful to stay conditional to an accusation that is not conditional at all.",
+    "why_it_breaks": "The argument has named no country, no market and no policy, so there is nothing for a charge against landlords or ministers to attach to, and the sentence that follows any position it might take is busy with a question rather than a complaint. The accusation also settles what the argument is at pains to leave open, since the whole point is that the answer varies with the ease of supply.",
+    "trap_exposed": "The camouflage is that the accusation names exactly the people the analysis implies will benefit, so it reads as the paragraph finally saying out loud what it has been hinting. An implication is not a stage. The decoy is the sentence about expanding supply, which looks as though it is contradicting the sentence before it, when in fact it is completing the condition the argument opened with.",
+    "exclusion_analysis": [
+      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It states the conclusion in its first clause, so a reader may think the paragraph has already ended and treat it as a summary standing apart.", "what_breaks": "Without it neither case has a claim to be a case of, and the closing question asks about a payment the paragraph has never described." },
+      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "Its list of places, houses and seats makes it sound like an illustration rather than one half of a two-part analysis.", "what_breaks": "Without it the argument never shows the extreme in which the whole grant is absorbed, and the division described afterwards has nothing to be divided against." },
+      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It appears to take back the previous sentence, so a reader hunting for a misfit will notice the apparent contradiction first.", "what_breaks": "Without it the argument becomes the blanket claim that a grant never helps a buyer, which the opening sentence's condition expressly refuses." },
+      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "It changes from statement to question and addresses the reader, which makes its register different from everything before it.", "what_breaks": "Without it the paragraph sets out two cases and never says what to do with them, so the analysis stops one step before it becomes useful." }
+    ],
+    "detection_habit": "Notice when a sentence stops being conditional. An analysis that keeps saying if and where cannot absorb a sentence that has already decided who is guilty."
+  },
+  "mentor": {
+    "challenge": "Five sentences about who really keeps a subsidy. One of them says the thing the others are carefully not saying, which is why it is worth a second look.",
+    "takeaway": "Analysis and accusation can point at the same people and still belong to different paragraphs."
+  }
+}

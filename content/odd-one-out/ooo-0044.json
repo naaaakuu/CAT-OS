@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0044",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "technology-ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Box Everybody Ticks",
+    "theme": "how a doubtful assumption about assent was replaced by a stored record of a click",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "B",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is about agreements made without a signature, which is precisely the story's subject, and it arrives with a trend and a share, the furniture of importance. The decoy is the opening sentence about printed terms inside a box, the only one with no screen in it."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": true,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "mission": "build_before_eliminating",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "build a narrative of one development before judging any sentence, so that an aggregate statistic about the same practice can be seen to have no place in the sequence",
+    "reasoning_patterns": ["scope.abstraction_level", "disc.chronology", "scope.too_broad", "comp.organization", "disc.given_new"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival is the opening sentence about terms printed inside a box: it belongs to a world without screens, and a reader matching on the click may drop it as prehistory. It stays because the disquiet in the next sentence is disquiet about exactly that arrangement, and because the button is introduced as the answer to a problem this sentence is the only source of. The sentence about the share of consumer spending is about the same practice at the scale of whole economies; the story it interrupts runs from a wrapper to a courtroom to a button to a record, and no stage of it can receive or pass on a twenty-year trend.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of assent by click in consumer contracts; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A narrative about a doctrine's small steps, with an outlier that offers the aggregate importance of the practice. The item rewards building the sequence first: once the four stages are in order, the statistic has no stage to occupy."
+  },
+  "sentences": [
+    { "label": "A", "text": "Commerce conducted without a signature now accounts for the larger part of consumer spending in most economies, a share that has risen in every one of the last twenty years." },
+    { "label": "B", "text": "The button did what the wrapper could not: it produced a record, timed and stored, that this person had been shown the words and had gone on anyway." },
+    { "label": "C", "text": "When software first came in boxes the terms were printed inside, and the purchaser was told that opening the wrapper counted as accepting them." },
+    { "label": "D", "text": "A doubtful assumption about assent had become a documented fact about a click, and the question of whether anyone had read anything quietly stopped being asked." },
+    { "label": "E", "text": "Courts were uneasy about a bargain whose terms could not be read before it was struck, and the unease was answered by moving the terms to a screen and adding a button." }
+  ],
+  "outlier": "A",
+  "core_order": ["C", "E", "B", "D"],
+  "builder": {
+    "prompt": "Build the four-sentence story of how a click came to stand for agreement, from the printed terms to the stored record. The sentence that belongs to no stage of that story is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one development in four stages. It opens with terms printed inside a box and a purchaser told that opening it meant accepting them, then reports the courts' unease and the response to it, a screen and a button. The third stage says what the button achieved that the wrapper could not, a stored record of having been shown the words, and the fourth states what the sequence amounted to. Arrangement, objection, fix, outcome.",
+    "core_roles": [
+      { "label": "C", "role": "background", "why_here": "It describes the practice the rest of the story revises, and it is the only sentence that shows terms a buyer could not read in advance." },
+      { "label": "E", "role": "development", "why_here": "It gives the objection to that practice and the response in one movement, which is the turn the whole story is built on." },
+      { "label": "B", "role": "development", "why_here": "'The button did what the wrapper could not' compares the fix directly with the arrangement it replaced, and says what was gained." },
+      { "label": "D", "role": "conclusion", "why_here": "Its past perfect closes the sequence by naming what the change had done to the question of assent, which only makes sense once the record exists." }
+    ],
+    "links": [
+      { "from": "C", "to": "E", "tie": "reference", "explanation": "'A bargain whose terms could not be read before it was struck' names exactly the arrangement the previous sentence described." },
+      { "from": "E", "to": "B", "tie": "lexical", "explanation": "'The button' and 'the wrapper' are the two objects the previous sentences introduced, and the comparison needs both of them." },
+      { "from": "B", "to": "D", "tie": "given_new", "explanation": "The stored record is now given, and the new material is what having it did to the question the courts had been worried about." }
+    ],
+    "violation_named": "The odd sentence measures the practice across whole economies over twenty years. The story it stands in moves from one arrangement to one objection to one fix, and every sentence of it can be placed at a point in that development. A share of consumer spending is the same subject viewed from an altitude the narrative never occupies.",
+    "why_it_breaks": "A narrative is held together by succession: each sentence takes the situation the previous one left and changes it. The aggregate sentence changes nothing, because it reports a condition rather than a step, and nothing after it could use a trend, since what follows is a claim about what a stored record did to a legal question. Wherever it is placed, the sequence pauses for a statistic and then resumes where it had stopped.",
+    "trap_exposed": "The camouflage is significance. The stray sentence tells the reader that the subject matters, in the subject's own words, and a reader who wants a paragraph to justify itself will keep it gratefully. The decoy is the opening, which mentions no screen and no click at all and so looks like prehistory, though it is the only sentence that supplies the problem everything after it answers.",
+    "exclusion_analysis": [
+      { "label": "C", "mistake_type": "lexical_pull", "why_tempting": "It is set before screens existed and shares none of the story's later vocabulary, so a reader matching on the click finds nothing in it.", "what_breaks": "Without it the courts are uneasy about nothing in particular, and the button answers a difficulty the paragraph never described." },
+      { "label": "E", "mistake_type": "hardest_to_place", "why_tempting": "It contains both an objection and a remedy, so a reader sorting the story into single steps may not know which step to call it.", "what_breaks": "Without it the story jumps from a printed wrapper to a button with the reason for the change missing, and the comparison in the next sentence has no occasion." },
+      { "label": "B", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence with a colon and a flourish, and its record, timed and stored, reads like a phrase from a different register.", "what_breaks": "Without it nothing says what the new arrangement achieved, and the documented fact of the closing sentence refers to a document the story never produced." },
+      { "label": "D", "mistake_type": "no_uniqueness_test", "why_tempting": "It summarises rather than narrates and delivers a quiet verdict, so it can look like a comment appended from outside the story.", "what_breaks": "Without it the sequence stops at a technical improvement and never says what the improvement did to the question the courts had raised." }
+    ],
+    "detection_habit": "Build the sequence before you judge a sentence, then try to give each sentence a place in it. A true statement that describes a condition rather than a step has no place in a story, however large the number it carries."
+  },
+  "mentor": {
+    "challenge": "Five sentences about agreeing to terms nobody reads. One of them tells you how much money is involved, which is not the same as telling you what happened next.",
+    "takeaway": "In a story every sentence is a step. A statistic is a standing still, however impressive."
+  }
+}
