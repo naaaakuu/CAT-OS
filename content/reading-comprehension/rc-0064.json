@@ -1,0 +1,470 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0064",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "structure-mapping",
+      "inference",
+      "concession-tracking"
+    ],
+    "word_count": 606,
+    "question_count": 5,
+    "question_types": [
+      "author_purpose",
+      "implication",
+      "inference",
+      "paragraph_function",
+      "phrase_in_context"
+    ],
+    "theme": "two explanations of the absence of war between the strongest states, one about price and one about what counts as a reason, adjudicated as answers to different questions, with the relative weight of the two left as a quantity the record does not contain",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "The adjudication is unusual: the author declines to rank the two accounts and instead assigns each a different question, which is a verdict rather than a shrug. The distractors are built from readers who expect a winner, since a division of labour reads as indecision until the fourth paragraph's two clauses are compared.",
+    "length_class": "long",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "measured, adjudicating",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "struct.claim_counterclaim",
+      "struct.qualification",
+      "struct.contrast",
+      "comp.purpose",
+      "comp.function_over_words",
+      "comp.organization",
+      "comp.paraphrase",
+      "comp.central_idea",
+      "arg.counterargument",
+      "arg.rebuttal",
+      "arg.causal_claim",
+      "arg.qualification",
+      "arg.evidence",
+      "inf.author_vs_reported",
+      "inf.reasonable_implication",
+      "inf.strongly_supported",
+      "scope.condition",
+      "scope.abstraction_level",
+      "word.context_clue",
+      "lang.comparative",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Every question in this set can be failed by supplying the winner the passage refuses to name. Q1's live rival is the option that the two are rivals and the evidence favours the second, which survives only if the fourth paragraph's opening clause is skipped, where the author says they are not really rivals and answer different questions. Q2's rival reads furniture as the instruments of politics, which the sentence forbids by listing what was done by means of war in the clauses that follow. Q3's rival says neither account can be tested against the other, which the fourth paragraph contradicts by naming the wars against weaker opponents as the place they come apart. Q4's rival is the option that the second account explains more of the period, a ranking the fifth paragraph calls a quantity the record does not contain. Q5's rival is the option that the last paragraph restates the verdict more cautiously; it does not restate anything, it names what the verdict fails to supply.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "furniture",
+      "repertoire",
+      "arithmetic"
+    ]
+  },
+  "passage": {
+    "title": "The Wars That Did Not Come",
+    "reading_time_min": 3.3,
+    "paragraphs": [
+      {
+        "id": "rc-0064-p1",
+        "text": "For most of recorded European history, war between the strongest states was the ordinary furniture of politics: a recurring instrument, expected, budgeted for, and used. Dynasties rose and fell by it. Provinces changed owners by it. The map was redrawn every second generation, and the redrawing was not thought to require any special explanation, since everybody understood what such wars were for. Then, in the second half of the twentieth century, they stopped. The great powers armed heavily, quarrelled without interruption, fought through clients and in distant places, and did not fight one another. The run has now outlasted any comparable stretch since the modern state system was assembled, which makes it either the most important development of the period or an accident that has not yet finished happening."
+      },
+      {
+        "id": "rc-0064-p2",
+        "text": "The first explanation is about arithmetic. Weapons arrived that would destroy the winner of a war along with the loser, and a war whose profits cannot be collected is not worth beginning. On this account nothing at all changed in anybody's wishes. The ambitions that produced the old wars are intact; what changed was the price, and the price rose past the reach of any aim a state might hold. The explanation has the merits of its simplicity. It predicts that the restraint will hold exactly as long as the arithmetic does, that it will be firmest between the best-armed rivals, and that it will say nothing whatever about how those same states behave towards everybody else."
+      },
+      {
+        "id": "rc-0064-p3",
+        "text": "The second explanation is about what counts as a reason. Over the same decades, conquest quietly stopped being something a government could announce. Trade tied economies to one another, alliances and institutions made the costs of aggression collective, and, more slowly, the taking of territory ceased to be an aim that a state could present to its own population as legitimate. On this account the wishes changed and not merely the price. A war begun to acquire a province has become unavailable in something like the way a duel has become unavailable for settling a private insult: not because the arithmetic forbids it, but because nobody can any longer explain why one would."
+      },
+      {
+        "id": "rc-0064-p4",
+        "text": "The two are usually set against each other, and they are not really rivals. They answer different questions. The first explains why a particular pair of heavily armed states, wishing each other ill, did not proceed to fight; the second explains why a whole class of war aim disappeared from the repertoire, including among states that held no such weapons and faced no such arithmetic. Where the two can be made to come apart is in the wars the great powers did fight, against opponents who could not destroy them. Deterrence has nothing to say about those at all. The second account predicts that even there the old aim would be missing, and that is roughly what the record shows: many wars, several of them long and very destructive, and almost none of them ending with the victor keeping the ground."
+      },
+      {
+        "id": "rc-0064-p5",
+        "text": "What follows is a division of labour rather than a verdict, and a division of labour is not a prediction. Both mechanisms were present throughout the period; neither can be switched off and the decades run again. If the peace were to break, we should learn which of them had been carrying the weight, and that is not a piece of knowledge anybody ought to wish for. Until then the honest position is that two explanations fit one stretch of time, that they explain different parts of it, and that how much of the restraint each was producing is a quantity the record does not contain."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0064-q1",
+      "type": "implication",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "inf.author_vs_reported",
+        "arg.qualification"
+      ],
+      "target_mistake": "supplying a winner where the author has divided the questions instead, so that one account is taken to have beaten the other",
+      "prediction_target": "The learner should be able to say: since the two accounts answer different questions, both can be right about their own question, and the verdict is not a ranking.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "scope"
+      ],
+      "stem": "Which of the following is most strongly implied by the author's adjudication?",
+      "options": {
+        "A": "Neither of the two explanations accounts for anything that happened during the period.",
+        "B": "The two explanations are rivals, and the evidence of the period favours the second one.",
+        "C": "A period may be explained by two mechanisms without either being wrong about its part.",
+        "D": "The absence of war between the strongest states shows that conquest no longer pays."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fourth paragraph opens by refusing the frame the reader arrived with: the two are usually set against each other, and they are not really rivals, because they answer different questions. Everything after that sentence is an assignment of questions rather than an award of points.",
+        "correct_reasoning": "If one account explains why an armed pair did not fight and the other explains why a class of war aim vanished everywhere, then both can hold at once, each about the thing it addresses. That is what the passage means by a division of labour, and the fifth paragraph confirms it by treating the remaining question, how much of the restraint each produced, as unanswered rather than as settled.",
+        "passage_anchor": "rc-0064-p4",
+        "question_type_note": "An implication question takes the author's claim one honest step. Where an author declines to rank two accounts, the honest step is that both can stand, and the three-step versions are the ones that pick a winner.",
+        "reading_habit": "When a passage sets up two explanations, check whether the author's paragraph chooses between them or re-describes the question. If it re-describes the question, every ranking option is out before it is read.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage assigns each account a real job and says the record roughly bears out the second account's prediction about the smaller wars. Declining to weigh two explanations is not dismissing them.",
+            "seductive_element": "The last paragraph's insistence that the decades cannot be run again reads as scepticism, and scepticism about measurement is easily heard as scepticism about the accounts."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The second half is defensible and the first is refused in the fourth paragraph's second sentence. Because the two answer different questions, the evidence about the smaller wars tells in favour of one account without telling against the other.",
+            "seductive_element": "It is the live rival, because the fourth paragraph really does produce evidence that fits one account, and evidence in a two-sided passage is expected to settle a contest."
+          },
+          {
+            "option": "D",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the first explanation stated as a finding. The author treats it as an account of one thing only, the restraint between heavily armed rivals, and notes that it says nothing whatever about how those states behaved elsewhere.",
+            "seductive_element": "It is the explanation offered first, the simplest of the two, and the one the passage credits with the merits of its simplicity."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0064-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "struct.contrast"
+      ],
+      "target_mistake": "reading a metaphor at its literal strength, so that furniture becomes either an instrument or an immovable fixture",
+      "prediction_target": "The learner should paraphrase from the colon that follows: something recurring, expected and unremarkable enough to need no explanation.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the first paragraph, the phrase \"the ordinary furniture of politics\" most nearly means",
+      "options": {
+        "A": "the instruments through which politics was conducted rather than its aims",
+        "B": "a normal and unremarkable part of the scene",
+        "C": "the settled arrangements that politics rested on and could not alter",
+        "D": "the ceremonial forms that surrounded political decisions"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The colon after the phrase supplies the gloss: a recurring instrument, expected, budgeted for, and used. Three sentences later the paragraph adds that the redrawing of the map was not thought to require any special explanation, which is what it is for something to be ordinary furniture.",
+        "correct_reasoning": "The correct option keeps the phrase at the strength the sentence gives it. Furniture is what a room has without anyone remarking on it, and the paragraph's point is that great-power war was once unremarkable rather than shocking. That reading is needed for the paragraph to make its contrast, since what has since become strange is precisely the thing that used to need no explaining.",
+        "passage_anchor": "rc-0064-p1",
+        "question_type_note": "A phrase question on a metaphor is settled by the clause the author uses to unpack it, which here follows the colon. The literal properties of the image are the standard decoys.",
+        "reading_habit": "With a metaphor, ask which property of the object is being borrowed. Furniture can be useful, heavy or decorative; the sentence around it tells you which of those the author wanted.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Instrument is the passage’s own word, taken from the clause that glosses the phrase, and that clause goes on to say such wars were expected and budgeted for. Keeping the usefulness and dropping the unremarkableness leaves the passage’s vocabulary attached to a different claim.",
+            "seductive_element": "It is the live rival, because the word instrument appears in the very clause that glosses the phrase, which makes it look like the intended sense."
+          },
+          {
+            "option": "C",
+            "trap_type": "overstatement",
+            "why_wrong": "Furniture here is ordinary, not immovable, and the passage exists to describe how this piece of it was removed. An unalterable foundation could not simply stop, which is what the paragraph says happened.",
+            "seductive_element": "Furniture suggests fixtures, and the paragraph's opening sweep across centuries makes permanence feel like the point."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage concerns the forms or language surrounding decisions. The clauses around the phrase are about what wars were used to do, namely to raise and topple dynasties and to move provinces from one owner to another.",
+            "seductive_element": "Ceremony is a common sense of ordinary political furniture in other contexts, and the paragraph has a formal, panoramic tone that suits it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0064-q3",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.two_views_adjudication"
+      ],
+      "target_mistake": "describing the passage as a comparison that ends without a decision, when the fourth paragraph reaches one and names the evidence for it",
+      "prediction_target": "The learner should be able to say: the author is separating two explanations that have been treated as competitors, and saying which question each answers.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's chief purpose in the passage is to",
+      "options": {
+        "A": "establish that the peace among the great powers was produced by the fear of destruction",
+        "B": "warn that the peace will end as soon as some state again believes that conquest pays",
+        "C": "compare two explanations and show that neither of them can be tested against the other",
+        "D": "show that two explanations treated as rivals answer different questions, and say which"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The shape of the passage announces the purpose. One paragraph of fact, one for each explanation, and then a fourth that does not weigh them but re-describes what each is an explanation of, before pointing at the evidence that separates their territories.",
+        "correct_reasoning": "The correct option names that move and the fact that it is completed. The author does not leave the reader with two possibilities; he assigns the restraint between armed rivals to one account and the disappearance of a class of war aim to the other, and he supports the assignment from the wars fought against weaker opponents, where only one of the two accounts has anything to say.",
+        "passage_anchor": "rc-0064-p4",
+        "question_type_note": "A purpose question wants the verb of the whole passage. In a two-views passage the verb belongs to the adjudicating paragraph, and it is worth checking whether that paragraph ranks, divides or refuses.",
+        "reading_habit": "Ask what the author does with the two views once both are on the page. Ranking, dividing and dismissing look alike from a distance and give completely different purpose statements.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the first of the two reported accounts, and the fourth paragraph confines it to one question, saying that deterrence has nothing to say about the wars the great powers did fight.",
+            "seductive_element": "It is the explanation most readers hold already and the one the passage describes first and most approvingly for its simplicity."
+          },
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "The remark about the peace breaking occupies one sentence of the final paragraph, and it is there to say what would be learned rather than to issue a warning. Four paragraphs of explanation cannot be the setting for a single closing aside.",
+            "seductive_element": "The sentence is the most dramatic in the passage, and closing sentences are where readers expect a purpose to be revealed."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The comparison is real and the second clause is not. The fourth paragraph names precisely where the two come apart, in the wars fought against opponents who could not destroy the great powers, and reports what the record there shows.",
+            "seductive_element": "It is the live rival, because the fifth paragraph does say the decades cannot be run again, and a reader who meets that first hears the whole passage as a refusal to decide."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0064-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.evidence",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "converting the evidence about the smaller wars into a ranking of the two accounts, which the last paragraph refuses",
+      "prediction_target": "The learner should predict that the smaller wars are being used to test one account's prediction about war aims, so the inference will concern how those wars ended.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred from the passage that the wars the great powers did fight during the period",
+      "options": {
+        "A": "were fought against states that were themselves capable of destroying them",
+        "B": "seldom ended with the victor keeping the territory it had taken",
+        "C": "were produced by the same institutions that kept the great powers at peace",
+        "D": "show that the second account explains more of the period than the first does"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fourth paragraph sets up a test and then reports its result in the same breath. The second account predicts that the old aim would be missing even in wars against weaker opponents, and the paragraph says that is roughly what the record shows, before listing what the record contains.",
+        "correct_reasoning": "The old aim is the acquisition of territory, defined in the third paragraph as a war begun to acquire a province. If that aim is missing from the wars actually fought, then those wars did not end in the victor's keeping the ground, which is exactly the last item the fourth paragraph lists. The inference joins the prediction to the report.",
+        "passage_anchor": "rc-0064-p4",
+        "question_type_note": "When a passage names a prediction and then says the record roughly bears it out, the inference question usually asks what the record must therefore contain. Convert the prediction into an observable before reading the options.",
+        "reading_habit": "Whenever an author writes that something is roughly what the record shows, ask what exactly would have to be in the record. The answer to that question is nearly always the answer to the question being asked.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph specifies the opposite, describing these as wars against opponents who could not destroy them, which is why deterrence has nothing to say about them.",
+            "seductive_element": "The passage is largely about heavily armed rivals, and a reader carries that relationship into every war it mentions."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The institutions appear once, in the third paragraph, as one reason the costs of aggression became collective. No causal claim connecting them to the wars that were fought appears anywhere.",
+            "seductive_element": "Institutions and alliances do drag states into distant conflicts in ordinary discussion, so the reader supplies a connection the passage never makes."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "This is the ranking the passage declines. The fourth paragraph says the two are not rivals, and the fifth calls how much of the restraint each produced a quantity the record does not contain.",
+            "seductive_element": "It is the live rival, because the evidence in the fourth paragraph really does fit one account and not the other, and a reader takes a fit for a score."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0064-q5",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.qualification",
+        "scope.condition"
+      ],
+      "target_mistake": "treating a paragraph that names the limits of a verdict as a restatement of the verdict, or as a late concession to one side",
+      "prediction_target": "The learner should be able to say: the last paragraph exists to say what the division of labour does not give us, because the period cannot be run twice.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "scope"
+      ],
+      "stem": "The final paragraph functions primarily to",
+      "options": {
+        "A": "summarise the two explanations once more before the passage is brought to a close",
+        "B": "concede that the first of the two explanations was the correct one after all",
+        "C": "recommend that governments make preparations for the peace coming to an end",
+        "D": "mark what the adjudication does not supply, since the period cannot be run twice"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph opens by naming its own subject: what follows is a division of labour rather than a verdict, and a division of labour is not a prediction. It then gives the reason, that both mechanisms ran together and neither can be switched off, and closes on a quantity the record does not contain.",
+        "correct_reasoning": "The correct option describes that job. Nothing new is claimed and nothing already claimed is withdrawn; the paragraph fixes the boundary of a result the reader has just been given, by pointing out that assigning each account a question still leaves their relative weight unmeasured. The reason offered is about evidence, not about either account's merits.",
+        "passage_anchor": "rc-0064-p5",
+        "question_type_note": "Paragraph-function questions ask for a job. A closing paragraph that names limits is doing different work from one that restates, and the difference shows in whether any new content appears.",
+        "reading_habit": "For a final paragraph, ask whether it repeats, extends or limits. A paragraph that begins by saying what its own result is not is limiting, and should never be described as a summary.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "Neither explanation is restated here. The paragraph refers to the two mechanisms only to say that both ran throughout and that neither can be isolated, which is a claim about what can be measured.",
+            "seductive_element": "It is the live rival, because final paragraphs usually do summarise, and this one mentions both accounts in its first two sentences."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "No concession to either side is made. The paragraph says the decades cannot be run again and that the share each mechanism carried is not in the record, which withholds the victory from both.",
+            "seductive_element": "A sentence about the peace breaking and the weight being revealed sounds like a nod to the harder-headed of the two accounts."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The only remark about the peace breaking says that such knowledge is not something anybody ought to wish for, which is the opposite of advice to prepare for it. The passage issues no recommendation of any kind.",
+            "seductive_element": "A closing paragraph about an uncertain future invites a practical conclusion, and the reader supplies the one the author withheld."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "furniture",
+      "passage_use": "the ordinary furniture of politics",
+      "meaning_here": "a familiar fitting of the scene, so usual that nobody remarks on it",
+      "difficulty": "medium"
+    },
+    {
+      "word": "repertoire",
+      "passage_use": "disappeared from the repertoire",
+      "meaning_here": "the set of actions available to be performed at all",
+      "difficulty": "medium"
+    },
+    {
+      "word": "arithmetic",
+      "passage_use": "The first explanation is about arithmetic",
+      "meaning_here": "the cold reckoning of what a course of action would cost and gain",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two explanations, each given a full paragraph, and then an adjudication that does not pick a winner. Work out what the fourth paragraph does instead, because it does decide something.",
+    "one_sentence_summary": "The long absence of war between the strongest states has two explanations, one about a price that rose beyond reach and one about an aim that stopped being sayable, and the author's verdict is that they answer different questions rather than compete, leaving the share each carried as something the record cannot show.",
+    "main_idea": "One account says great-power war stopped because weapons made it unprofitable; wishes were unchanged and only the price moved. The other says conquest ceased to be an aim a government could avow, so the wishes changed too. The author argues these are not rivals: the first explains restraint between armed pairs, the second explains why a class of war aim vanished everywhere, and the wars the great powers did fight, which deterrence cannot touch, fit the second. What remains unknown is how much each mechanism contributed.",
+    "simple_explanation": "For centuries, big states fought each other regularly. It was normal. Kings rose and fell that way, and provinces changed hands that way, and nobody thought it needed explaining.\n\nThen, in the second half of the twentieth century, it stopped. The most powerful states armed themselves heavily, argued constantly, fought smaller wars in other places through other people, and never fought each other directly. That has now gone on longer than any similar quiet period in modern history.\n\nThe first explanation is about cost. New weapons meant that winning a war would destroy the winner too. You cannot collect your winnings, so the war is not worth starting. Notice what this explanation says: nobody's ambitions changed. Only the price did. So it predicts that the peace lasts exactly as long as the weapons do, that it is strongest between the two best-armed rivals, and that it says nothing about how those states treat anybody else.\n\nThe second explanation is about what you can say out loud. Over the same years, taking land stopped being something a government could announce as a goal. Trade tied economies together, alliances made attacking expensive for everyone, and slowly conquest stopped being a respectable reason. On this view the wishes themselves changed. Starting a war to grab a province is now a bit like fighting a duel over an insult: not impossible, just impossible to explain.\n\nThe author then says something unexpected. These two are usually treated as opponents, and they are not. They answer different questions. The first one explains why two heavily armed enemies did not fight. The second explains why a whole kind of war aim disappeared, including among countries with no such weapons at all. And there is a place to test them: the wars the big powers did fight, against much weaker countries. Deterrence says nothing about those. The second explanation predicts that even there nobody would keep the land, and that is roughly what happened.\n\nThe last point is a warning. This gives you a division of labour, not a prediction. Both things were true at once, and you cannot switch one off and replay the decades. If the peace ever breaks we will find out which one was doing the heavy lifting, which is not a discovery to hope for. Until then, both explanations fit, they cover different parts of the story, and how much each contributed is simply not in the record.",
+    "why_difficult": "The passage looks like a contest and is not one. Readers trained to expect a winner reach the fourth paragraph, find evidence that fits one account, and award the match, missing the sentence two lines above that says the two are not really rivals. The fifth paragraph then withholds even the ranking that such evidence seems to justify, and its reason is about what can be measured rather than about the accounts themselves, which is an unfamiliar kind of conclusion.",
+    "author_intention": "To stop a familiar argument being conducted as a contest, by showing that the two sides are explaining different things, and then to keep the reader from converting that into a score.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0064-p1",
+        "role": "States the fact",
+        "note": "Great-power war used to be ordinary and unremarkable. Then it stopped, for longer than any comparable period, while the same states quarrelled and armed and fought elsewhere."
+      },
+      {
+        "paragraph_id": "rc-0064-p2",
+        "role": "The first explanation",
+        "note": "Weapons made winning worthless, so the price rose out of reach. Wishes unchanged. It predicts restraint between the best-armed rivals and says nothing about anyone else."
+      },
+      {
+        "paragraph_id": "rc-0064-p3",
+        "role": "The second explanation",
+        "note": "Conquest stopped being a reason a government could give. Trade, alliances and legitimacy changed what could be wanted out loud, not merely what could be afforded."
+      },
+      {
+        "paragraph_id": "rc-0064-p4",
+        "role": "The adjudication",
+        "note": "They are not rivals; they answer different questions. The wars against weaker opponents separate them, and there the record fits the second account, which predicted no taking of ground."
+      },
+      {
+        "paragraph_id": "rc-0064-p5",
+        "role": "Limits the verdict",
+        "note": "A division of labour is not a prediction. Both ran together and the decades cannot be replayed, so how much each contributed is not in the record."
+      }
+    ],
+    "tone_progression": "Panoramic and slightly detached over the long historical sweep, then even-handed and technical as each explanation is given its best form, decisive in the fourth paragraph without becoming partisan, and finally sober, closing on a wish that a certain kind of evidence never arrives.",
+    "key_transitions": [
+      "'Then, in the second half of the twentieth century, they stopped.' (paragraph 1) — the fact to be explained arrives after a long run-up.",
+      "'The two are usually set against each other, and they are not really rivals.' (opening of paragraph 4) — the contest is refused and replaced by a division of questions.",
+      "'What follows is a division of labour rather than a verdict.' (opening of paragraph 5) — the result is given its boundary."
+    ],
+    "misunderstanding": "Readers finish with a winner. Those impressed by the weapons keep the first account and read the fourth paragraph as a hedge; those impressed by the argument about legitimacy see the evidence about the smaller wars and read it as a victory. Both misreadings come from treating the fourth paragraph as a scoreboard when its first two sentences say the accounts are not competing. The fifth paragraph then denies the ranking explicitly, and denies it for a reason about evidence rather than about merit, which is easy to read as modesty.",
+    "traps_summary": "The options here award the match the passage refuses, take a metaphor at its literal strength, describe an adjudication as an inability to decide, and turn a closing limit into a summary or a warning. Each is answered from the two sentences in which the author says what kind of result he has reached.",
+    "reading_lesson": "When two explanations are set out at length, read the author's paragraph for what it does with them rather than for which one it mentions approvingly: ranking, dividing and dismissing are three different verdicts, and only one of them licenses an option that names a winner. The habit matters most in passages about history and policy, where a reader's own opinion supplies the verdict the author declined to give.",
+    "real_world": "The same distinction is worth carrying into arguments about why crime fell, why a company survived, or why an epidemic ended: several mechanisms were running together, and fitting the record is not the same as having carried the weight.",
+    "takeaway": "Two explanations that fit the same period may be answering two different questions, and neither has beaten the other.",
+    "reflection_question": "For something that stopped happening in your own life, can you tell whether the cost rose or the reason disappeared?"
+  }
+}

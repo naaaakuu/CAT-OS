@@ -1,0 +1,396 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0059",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "structure-mapping",
+      "inference",
+      "vocabulary-in-context"
+    ],
+    "word_count": 466,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "logical_structure",
+      "main_idea",
+      "vocabulary_in_context"
+    ],
+    "theme": "the shared-pasture parable as an idealisation on the model of a frictionless plane: its inevitability is manufactured by what was removed to build it, so it forecasts well only where those removals are real, and the error is treating a result got by subtraction as a law",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "The analogy with a frictionless plane is not decoration; it supplies the passage's whole standard of judgement, which is why the structure question is answerable only by a reader who noticed that the physics paragraph is an argument rather than an illustration. The fourth paragraph then refuses to reject the model, which is what makes the wholesale-dismissal option in the main-idea question the natural mistake.",
+    "length_class": "medium",
+    "structure": "analogy_driven",
+    "viewpoints": 2,
+    "tone": "measured, corrective",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.analogy",
+      "struct.qualification",
+      "struct.claim_evidence",
+      "comp.organization",
+      "comp.central_idea",
+      "arg.analogy",
+      "arg.generalization",
+      "arg.example",
+      "arg.concession",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "scope.condition",
+      "scope.abstraction_level",
+      "lang.absolute_vs_qualified",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that the parable is mistaken wherever its herdsmen could in fact have spoken to one another, which is the exact mirror of the key and is refused by the physics paragraph: the frictionless result is called exact and useful and about a plane that does not exist, so a case that falls outside an idealisation does not falsify it. Q2's rival is the option describing a general principle illustrated by fisheries and the atmosphere, which names a paragraph and a half and leaves out the comparison that supplies the passage's whole standard of judgement. Q3's rival is the methodological moral about testing a model's assumptions, which is true to the last paragraph and floats a level above the passage's actual claim about where the inevitability comes from. Q4's rival is the commercial sense of purchase, killed by the clause that follows it, where the parable loses its hold when the removed features are restored.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "purchase",
+      "idealisation",
+      "subtraction"
+    ]
+  },
+  "passage": {
+    "title": "The Pasture Without Neighbours",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0059-p1",
+        "text": "The parable is told in a few lines. A pasture is open to all. Each herdsman takes the whole benefit of an extra animal and bears only a share of the damage done to the grass, so each adds one, and then one more, until nothing grows. The moral usually drawn from it is that whatever is held in common is doomed, and that the only escape is to divide the land among owners or to put an official in charge of it. Stated that way, the argument sounds less like an observation about pastures than like a proof."
+      },
+      {
+        "id": "rc-0059-p2",
+        "text": "It is worth asking what kind of proof it is. Consider how a physicist reasons about a ball rolling across a plane with no friction. Nothing in the world is frictionless, and the physicist knows it. He removes friction in order to see what one force does when nothing is interfering with it, and the answer he arrives at is exact, useful, and about a plane that does not exist. Nobody reads the result and concludes that a ball set rolling down a real street will never stop. The idealisation is honoured for what it isolates and then corrected by everything it left out."
+      },
+      {
+        "id": "rc-0059-p3",
+        "text": "The pasture is an idealisation of the same kind, and it is worth naming what was removed to build it. The herdsmen do not speak to one another. They cannot see how many animals anybody else has put out. They have no way of making a rule between them, and no way of enforcing one if they made it. They will not meet again, and nothing that happens on the grass will follow them anywhere else. The parable gets its purchase from what has been taken away, and it loses its hold the moment any of it is put back. These are not properties of sharing. They are properties of a crowd of strangers."
+      },
+      {
+        "id": "rc-0059-p4",
+        "text": "None of which means the model should be thrown away. An idealisation can be the right description of a case, and some cases are very nearly the pasture: an ocean fishery worked by fleets from a dozen countries, an atmosphere nobody can be kept out of. Where users really are numerous, unknown to one another and unable to exclude anyone, the removed features are genuinely missing and the forecast is a good one. The error is narrower than a bad model, and harder to see. It is to treat a result obtained by subtraction as a law, and then to stop asking, case by case, whether the things subtracted are in fact absent. Friction at least can be measured. Whether a group of users can watch and punish one another is a question about the world, and it is the question the parable is most often used to avoid."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0059-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "scope.condition"
+      ],
+      "target_mistake": "treating a case that falls outside an idealisation's assumptions as a counter-example to the idealisation",
+      "prediction_target": "The learner should predict that, since an idealisation is exact about conditions that do not obtain, a real case which survives lies outside the model rather than against it.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A shared resource whose users can watch one another will never be destroyed by them.",
+        "B": "A shared resource that survives does not show the parable to be mistaken.",
+        "C": "The parable is mistaken wherever its herdsmen could in fact have spoken to one another.",
+        "D": "Fisheries and the atmosphere are the only resources the parable can be applied to."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The second paragraph settles how idealisations are to be judged before the pasture is judged by it. The frictionless result is exact, useful and about a plane that does not exist, and nobody treats a rolling ball that stops as a refutation of it. The pasture is then said to be an idealisation of the same kind.",
+        "correct_reasoning": "If the parable holds exactly under conditions it has itself removed, then a real case in which those conditions do not obtain lies outside its reach rather than against it. A surviving commons shows only that something the parable subtracted is present, which is precisely what the passage says the reader should be checking, case by case. The inference keeps the model's standing intact while denying it the last word.",
+        "passage_anchor": "rc-0059-p2",
+        "question_type_note": "When a passage supplies a standard for judging a kind of argument before applying it, the inference questions are usually about that standard rather than about the case. Locate the standard first.",
+        "reading_habit": "When an author compares an argument to something from another field, ask what the comparison licenses you to say. An analogy introduced early is almost always a rule the rest of the passage will be judged by.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says the parable loses its hold when the removed features are restored, which is a claim about the argument rather than a guarantee about the grass. Nothing here promises that a watched resource survives.",
+            "seductive_element": "The third paragraph lists watching among the things whose absence produces ruin, and a reader converts the absence of a cause into the presence of a cure."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the key turned round, and the physics paragraph forbids it: a result about a plane that does not exist is not refuted by the plane's not existing. A case with speaking herdsmen is one the model was never about.",
+            "seductive_element": "It is the live rival, because the third paragraph really is a list of what the parable gets wrong about ordinary people, and mistaken is the word a reader reaches for."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The fourth paragraph offers those two as cases that are very nearly the pasture, and then states the condition in general terms: numerous users, unknown to one another, unable to exclude anyone. Any case meeting it qualifies.",
+            "seductive_element": "They are the only applications the passage names, and a reader takes a list of examples for a list of permitted cases."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0059-q2",
+      "type": "logical_structure",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "struct.analogy",
+        "arg.analogy"
+      ],
+      "target_mistake": "treating the physics paragraph as an illustration that could be deleted, when it supplies the standard by which the parable is then judged",
+      "prediction_target": "The learner should be able to say: a parable is told, an analogy from physics fixes how such arguments are to be read, and the parable is then assessed by what the analogy shows was removed.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "paragraph_function",
+        "main_idea"
+      ],
+      "stem": "Which of the following best describes how the passage is organised?",
+      "options": {
+        "A": "A familiar conclusion is reported, the objections to it are answered, and it is reaffirmed with new examples.",
+        "B": "Two rival explanations of a phenomenon are compared, and the older of the two is rejected as unusable.",
+        "C": "A parable is stated, likened to a device from physics, and assessed by what the likeness shows was removed.",
+        "D": "A general principle is laid down and then illustrated by cases taken from fisheries and the atmosphere."
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Each paragraph has one job and the second is the hinge. It leaves the pasture entirely to describe how a physicist uses a frictionless plane, and it ends with a rule: the idealisation is honoured for what it isolates and then corrected by everything it left out. The third paragraph applies that rule and the fourth sets its limits.",
+        "correct_reasoning": "The correct option names the three moves in order and gets the analogy's job right. The physics is not an ornament beside the argument; it establishes what an idealisation is entitled to claim, and only with that in hand does the list of things the parable removed become a criticism rather than a complaint. The assessment in the fourth paragraph then follows from the same rule.",
+        "passage_anchor": "rc-0059-p2",
+        "question_type_note": "Structure questions ask for the skeleton, and the commonest error is to demote the paragraph that supplies the passage's standard of judgement to the status of an example.",
+        "reading_habit": "For each paragraph, ask whether the passage could be written without it. A paragraph that could be cut is an illustration; one that could not is a move in the argument, and structure options are decided by which is which.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Nothing is reaffirmed. The moral of the first paragraph, that whatever is held in common is doomed, is exactly what the rest of the passage narrows, and no objection to it is answered anywhere.",
+            "seductive_element": "The fourth paragraph does begin by protecting the model, so a reader who meets that sentence first can hear the whole passage as a defence."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "There is only one explanation on offer. The frictionless plane is not a rival account of pastures but a case of the same kind of reasoning, brought in to show how such reasoning should be read, and the passage then refuses to reject anything.",
+            "seductive_element": "Two extended cases sitting side by side look like a comparison, and comparison is the shape readers expect when an essay changes subject at a paragraph break."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The fishery and the atmosphere appear in two clauses of the last paragraph, and they illustrate the limit on the criticism rather than a principle stated at the start. The passage begins with a story, not a principle.",
+            "seductive_element": "General-then-specific is the commonest essay shape, and the last paragraph really does move from a statement to two cases."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0059-q3",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.abstraction_level",
+        "arg.concession"
+      ],
+      "target_mistake": "reading a criticism of how the parable is used as a rejection of the parable, or rising to a general moral about models and losing the claim about where the inevitability came from",
+      "prediction_target": "The learner should be able to say: the parable's inevitability is manufactured by what it leaves out, so it predicts well only where those things are really absent.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "The parable is a poor argument that has misled those who go on repeating it.",
+        "B": "Shared resources are safe wherever their users can speak to one another and enforce a rule.",
+        "C": "Economists ought to test whether a model's assumptions hold before applying it to a case.",
+        "D": "The parable's inevitability comes from what it removes, so it forecasts only where those things are absent."
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The fourth paragraph names the error with unusual precision: it is narrower than a bad model, and it consists in treating a result obtained by subtraction as a law. That sentence tells the reader where the main idea sits, since it identifies both what is wrong and what is not wrong.",
+        "correct_reasoning": "The correct option keeps the two halves the passage insists on. The ruin in the parable is produced by the removals listed in the third paragraph, which is why it is inevitable there; and because those removals are sometimes real, the model forecasts well in the fishery and the atmosphere. Neither half can be dropped without turning the passage into something it spends a paragraph denying.",
+        "passage_anchor": "rc-0059-p4",
+        "question_type_note": "In a passage that criticises something and then protects it, the main idea has to survive both movements. Options built from either movement alone are the standard pair of decoys.",
+        "reading_habit": "When an author writes a sentence beginning none of which means, treat what follows as a boundary on the claim you have just read, and make sure your summary stays inside it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The fourth paragraph opens by refusing this and the second has already granted the form its due, calling the frictionless result exact and useful. What is criticised is a use of the model, not the model.",
+            "seductive_element": "Three paragraphs of subtraction precede the rescue, and a reader who has been counting faults expects a verdict against the thing at fault."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Speaking to one another and enforcing a rule are the passage’s own items, listed among the things the parable removed. Putting them back is said to cost the parable its hold, which withdraws a prediction rather than issuing the opposite one, and safety is claimed for no arrangement anywhere.",
+            "seductive_element": "It is the cheerful conclusion the third paragraph seems to invite, and it uses the passage's own list of what the herdsmen cannot do."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "This is a rule about models in general, and the passage is arguing about one model in particular, saying where its conclusion came from and when it can be relied on. At this altitude the pasture drops out and with it everything the passage established.",
+            "seductive_element": "It is the live rival: entirely compatible with the last paragraph, respectable in tone, and the moral a reader is likely to have drawn for himself while reading."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0059-q4",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy"
+      ],
+      "target_mistake": "taking the commercial sense of a common word when the clause beside it has already fixed a different one",
+      "prediction_target": "The learner should paraphrase from the second half of the sentence: whatever purchase is, the parable loses it when the removed features are restored, so it is something like a grip.",
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [],
+      "stem": "In the third paragraph, the word \"purchase\" is used to mean",
+      "options": {
+        "A": "the grip by which the argument takes hold of a reader",
+        "B": "the price that must be paid before something can be had",
+        "C": "the flaw that makes the argument easy to dismiss",
+        "D": "the proof that makes the conclusion impossible to resist"
+      },
+      "correct": "A",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The sentence supplies its own gloss in its second half: the parable gets its purchase from what has been taken away, and it loses its hold the moment any of it is put back. Hold and purchase are doing the same work on either side of the comma.",
+        "correct_reasoning": "The correct option is the sense the parallel forces. Something that can be got from an absence and lost when the absence is filled is a grip rather than a payment, and the surrounding paragraph is about why the story is persuasive, not about what anything costs. The word carries its physical sense of traction, applied to an argument.",
+        "passage_anchor": "rc-0059-p3",
+        "question_type_note": "A word-in-context question is usually settled inside its own sentence, and most often by a matching word in the neighbouring clause. The dictionary's commonest sense is the decoy.",
+        "reading_habit": "When a familiar word looks odd, look for a second word in the same sentence that is doing the same job. Authors who use a word in a narrow sense almost always leave its plain twin nearby.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "This is the word's commonest sense and the sentence cannot take it: nothing is being bought, and a price is not something one gets from what has been taken away or loses when it is restored.",
+            "seductive_element": "It is the live rival, because the buying sense is the first that occurs to anyone, and the passage is an economics passage, which makes a commercial reading feel at home."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The clause describes what the parable has while its assumptions hold and what it then loses, which is a strength rather than a defect. A flaw is not something an argument gets from a subtraction and loses when the subtraction is reversed.",
+            "seductive_element": "The paragraph is a catalogue of what the parable leaves out, so a reader expects the key sentence to name a weakness."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "Purchase here is traction, not proof. The first paragraph has already noted with some distance that the argument merely sounds like a proof, and the whole passage is engaged in resisting the conclusion it supposedly establishes.",
+            "seductive_element": "Both words describe why an argument persuades, and the passage does say the parable sounds like a proof."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "purchase",
+      "passage_use": "The parable gets its purchase from what has been taken away",
+      "meaning_here": "grip, the traction by which an argument holds",
+      "difficulty": "hard"
+    },
+    {
+      "word": "idealisation",
+      "passage_use": "The idealisation is honoured for what it isolates",
+      "meaning_here": "a deliberately simplified picture built by removing complications on purpose",
+      "difficulty": "medium"
+    },
+    {
+      "word": "subtraction",
+      "passage_use": "a result obtained by subtraction as a law",
+      "meaning_here": "the removal of features in order to see one force acting alone",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The paragraph about physics is not a decoration. Work out what it is licensing the author to say before you reach the pasture again.",
+    "one_sentence_summary": "The shared-pasture story reaches its ruinous conclusion only because it has removed everything that ordinarily surrounds a shared resource, so it should be read the way a physicist reads a frictionless plane: exact about conditions that mostly do not obtain, and a good forecast only where they do.",
+    "main_idea": "The parable's inevitability is manufactured by its assumptions, which strip out talking, watching, rule-making and meeting again. That makes it an idealisation rather than a law. Idealisations are useful and sometimes exactly right, as with an ocean fishery or the atmosphere, and the mistake is to stop asking whether the things the model removed are really missing in the case at hand.",
+    "simple_explanation": "The old story goes like this. A field is open to everyone. If you add one more animal you get all the benefit, while the damage to the grass is shared out among everybody. So you add one. So does everyone else. The field is ruined. People draw a big conclusion from this: anything owned in common is doomed, so either divide it up or put someone in charge.\n\nThe author asks what sort of argument that really is, and answers with an example from physics. A physicist works out how a ball rolls on a surface with no friction. There is no such surface anywhere. He removes friction on purpose, so that he can see one force by itself, and the answer he gets is precise and genuinely useful. But nobody then claims that a football kicked down a real road will roll forever.\n\nThe field in the story is the same kind of thing. Look at what has been taken out of it. The herdsmen never speak. They cannot see each other's animals. They cannot agree a rule, and could not enforce one if they did. They never meet again. Take any one of those back, and the story stops working. So what is being described is not sharing. It is a crowd of strangers.\n\nThe last point is the careful one. This does not mean the story is useless. Sometimes the world really does look like that: a fishery out at sea with fleets from a dozen countries, or the air, which nobody can be shut out of. There the missing pieces really are missing, and the forecast is a good one. The mistake is smaller and sneakier than using a bad model. It is taking a result you got by removing things and treating it as a law, then never checking whether those things are actually absent in the case in front of you. Friction you can at least measure. Whether a group of people can watch each other and punish cheats is a question about real life, and it is exactly the question the story is usually used to skip.",
+    "why_difficult": "The passage asks the reader to hold a criticism and a defence of the same thing at once. Three paragraphs list what the parable leaves out, which reads as demolition, and then the fourth says the model should not be thrown away and names two cases where it is right. Readers who have been keeping score arrive at the last paragraph with a verdict already formed and have to revise it. The other difficulty is the analogy: the physics paragraph looks like an aside and is in fact the standard everything afterwards is judged by.",
+    "author_intention": "To stop the reader using a famous story as a proof, by showing that its conclusion is a consequence of its assumptions, while leaving him able to use the same story where its assumptions are true.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0059-p1",
+        "role": "Tells the story",
+        "note": "Everyone adds one more animal because the gain is theirs and the damage is shared, so the grass goes. People conclude that common ownership always ends this way."
+      },
+      {
+        "paragraph_id": "rc-0059-p2",
+        "role": "Supplies the standard",
+        "note": "A physicist removes friction to see one force on its own. The answer is exact and about a surface that does not exist, and nobody thinks a real ball rolls forever."
+      },
+      {
+        "paragraph_id": "rc-0059-p3",
+        "role": "Applies the standard",
+        "note": "List what the story removed: talking, seeing, rule-making, enforcement, meeting again. Put any of it back and the story stops working. Those are features of strangers, not of sharing."
+      },
+      {
+        "paragraph_id": "rc-0059-p4",
+        "role": "Sets the limits",
+        "note": "The model is not to be discarded. Sometimes the removals are real, as at sea or in the air. The error is treating a result got by removal as a law and never checking the case."
+      }
+    ],
+    "tone_progression": "Detached while the story is retold, patient and faintly schoolmasterly through the physics, sharper as the removals are listed one by one, and finally even-handed, giving the model back its proper use before naming the habit that misuses it.",
+    "key_transitions": [
+      "'It is worth asking what kind of proof it is.' (opening of paragraph 2) — the passage stops arguing about pastures and starts arguing about arguments.",
+      "'The pasture is an idealisation of the same kind.' (opening of paragraph 3) — the physics is applied and the list of removals begins.",
+      "'None of which means the model should be thrown away.' (opening of paragraph 4) — the criticism is given its boundary."
+    ],
+    "misunderstanding": "The commonest wrong picture is that the author has refuted the parable. He has not; he has reclassified it. A second wrong picture forms in readers who notice the rescue but not the criticism, and who conclude that the passage is a defence of the model. The passage's own position is narrower than either: the conclusion is sound given the assumptions, the assumptions are sometimes met, and the fault lies in not asking which case you are in.",
+    "traps_summary": "The options in this set turn a criticism into a rejection, turn the absence of a cause into the presence of a cure, promote the last paragraph's moral about models to the status of the main idea, and offer the commercial sense of a word whose neighbouring clause has already fixed it. Each is answered by returning to the sentence that draws the boundary.",
+    "reading_lesson": "When an author judges an argument by comparing it with a different kind of argument, the comparison is a rule and not an illustration, and everything after it is being measured against that rule. Find the sentence in which the comparison is stated as a principle, and carry that sentence into every question. The habit transfers to any passage where a familiar claim is reclassified rather than refuted, which is one of the commonest shapes in serious prose.",
+    "real_world": "The same move is available whenever someone says a result is what economics predicts: ask what the model removed in order to predict it, and whether those things are missing here.",
+    "takeaway": "A conclusion reached by taking things away is a conclusion about a world with those things taken away.",
+    "reflection_question": "When you last used a simple model to explain something complicated, what did the model leave out, and was it really absent?"
+  }
+}

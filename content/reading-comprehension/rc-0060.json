@@ -1,0 +1,470 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0060",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "institutions",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "main-idea-extraction",
+      "structure-mapping",
+      "inference",
+      "scope-control"
+    ],
+    "word_count": 464,
+    "question_count": 5,
+    "question_types": [
+      "inference",
+      "main_idea",
+      "not_true",
+      "paragraph_function",
+      "scope"
+    ],
+    "theme": "meetings judged by information transfer, the one thing they do worst: borrowing the anthropological sense of ritual to show that a meeting distributes responsibility before witnesses, while insisting that naming a function settles nothing about whether a particular meeting is worth its cost",
+    "estimated_time_min": 9,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "A definition is borrowed, applied to three familiar complaints, and then explicitly refused the status of a defence. The fourth paragraph is the whole difficulty of the set: readers who have enjoyed the reframing read it as decoration and answer four of the five questions as though the passage were defending meetings.",
+    "length_class": "medium",
+    "structure": "definition_application",
+    "viewpoints": 2,
+    "tone": "dry, reframing",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.definition",
+      "struct.example",
+      "struct.qualification",
+      "struct.general_to_specific",
+      "comp.function_over_words",
+      "comp.central_idea",
+      "comp.organization",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "arg.principle",
+      "arg.qualification",
+      "arg.concession",
+      "arg.example",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.author_vs_reported",
+      "scope.condition",
+      "scope.abstraction_level",
+      "scope.true_but_off_question",
+      "lang.absolute_vs_qualified",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The whole set is built on the seam between the third paragraph, which explains what meetings do, and the fourth, which denies that the explanation defends any of them. Q1's live rival is the option making the fourth paragraph introduce the closing test, which is the fifth paragraph's job; the fourth introduces nothing and instead withdraws a defence it says should not be mistaken for one. Q2's rival is the option that a written notice distributes responsibility more cheaply, which inverts the passage's own contrast between a notice that leaves no trace of who read it and a room in which everyone sees who heard. Q3's false statement is the claim that a meeting distributes responsibility poorly, which the third paragraph asserts in the opposite direction. Q4's rival is the option that complaints about meetings mistake a social form for an administrative failure, which is true of the third paragraph and cannot survive the fourth, where an organisation that found a function for every meeting is said to have discovered nothing about their worth. Q5's rival is the condition about decisions taken elsewhere, which is one of three applications rather than a limit on the account.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "ratifies",
+      "conveys",
+      "witnesses"
+    ]
+  },
+  "passage": {
+    "title": "What the Room Is For",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0060-p1",
+        "text": "Three complaints are made about meetings, and they are usually made in the same breath. There is the meeting that could have been an email. There is the standing meeting, which recurs every Tuesday and which nobody has the authority to cancel. And there is the meeting called to settle something that was in fact settled the week before, in a corridor, by two people. The verdict passed on all three is identical: waste, and a failure of organisation."
+      },
+      {
+        "id": "rc-0060-p2",
+        "text": "Anthropologists have a word for acts of this shape, and it is worth borrowing. A ritual is an act whose point lies in its being performed, in front of the people it concerns, rather than in anything it conveys. Its content is often known already to everyone in the room, and that is not a defect in it: a wedding tells the guests nothing the invitation had not told them. What a ritual produces is not knowledge but a shared record that something has been done before witnesses."
+      },
+      {
+        "id": "rc-0060-p3",
+        "text": "Set the three complaints against that definition and they change shape. The meeting that ratifies a decision already taken turns a private understanding into a public one, after which those present can be held to it in a way no corridor conversation allows. The Tuesday meeting nobody cancels is a standing demonstration that the group still exists and that its members still answer to one another; suspend it for a quarter and notice what has to be rebuilt. And the meeting that could have been an email is doing the one thing an email cannot. A written notice distributes information and leaves no trace of who has read it. A room distributes responsibility, because everybody in it can see who else heard."
+      },
+      {
+        "id": "rc-0060-p4",
+        "text": "None of this is a defence of meetings, and it should not be mistaken for one. Rituals can be badly made. They can run too long, recur too often, be held before the wrong witnesses, or continue after the thing they once marked has stopped mattering. An organisation that discovered a function for every meeting in its calendar would have discovered nothing whatever about whether those meetings are worth what they cost, which is a separate question and a harder one."
+      },
+      {
+        "id": "rc-0060-p5",
+        "text": "What the account changes is the question. Could this have been an email judges a meeting by the one thing it is worst at, and the answer is nearly always yes, which is why the complaint is so satisfying and so useless. The question that can be answered is narrower: what has to be witnessed here, by whom, and how often. Put in that form it has real answers, and a good many of them are that the witnessing is not needed at all, or is needed by four people rather than by fourteen."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0060-q1",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "arg.qualification",
+        "arg.description_vs_evaluation"
+      ],
+      "target_mistake": "assigning the fourth paragraph the closing paragraph's job of proposing a better test, or reading it as further application of the definition",
+      "prediction_target": "The learner should be able to say: the fourth paragraph exists to stop the third from being read as an excuse, and it adds no new function and no new test.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "main_idea"
+      ],
+      "stem": "The fourth paragraph functions primarily to",
+      "options": {
+        "A": "supply further examples of the ritual function set out in the paragraph before it",
+        "B": "stop the account just given from being taken as a defence of meetings",
+        "C": "concede that the borrowed definition of ritual is too broad to be of use",
+        "D": "introduce the test that the closing paragraph then applies to particular meetings"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph opens by saying what it is not doing: none of this is a defence of meetings, and it should not be mistaken for one. It then lists ways a ritual can be badly made and ends by separating the question of function from the question of worth. Nothing in it advances the account; the whole paragraph is a fence around it.",
+        "correct_reasoning": "The correct option names that fence. A reader who has just been shown that three despised meetings all do real work is about to conclude that the meetings are therefore justified, and this paragraph blocks the step before it is taken, saying that finding a function for every meeting in a calendar establishes nothing about whether they are worth their cost. The job is preventive, which is why the paragraph adds no new material.",
+        "passage_anchor": "rc-0060-p4",
+        "question_type_note": "A paragraph-function question asks for a job, not a summary. Paragraphs that begin by denying something are almost always doing preventive work on the paragraph before them.",
+        "reading_habit": "When a paragraph opens with none of this, read it as a limit on what you have just been given rather than as the next step. Authors put such paragraphs where they expect a reader to over-read.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The examples all sit in the paragraph before, where the ratified decision, the Tuesday meeting and the email are worked through in turn. What this paragraph lists is ways a ritual can fail, which is the opposite kind of item.",
+            "seductive_element": "It does contain a list, and a list following three worked cases looks like a continuation of them."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The definition is never withdrawn or narrowed. What the paragraph denies is that the definition settles anything about value, and it goes on using the word ritual without apology in its next sentence.",
+            "seductive_element": "A paragraph that begins by taking something back sounds as though it must be taking back the thing just before it, which was the definition's application."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "The test arrives in the closing paragraph, which states it as three questions about what must be witnessed, by whom and how often. This paragraph only establishes that some test is still owed.",
+            "seductive_element": "It is the live rival, because the paragraph does raise the question of worth, and raising a question feels like introducing the answer to it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0060-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "arg.principle"
+      ],
+      "target_mistake": "keeping information transfer as the measure of a meeting after the passage has replaced it with what the participants can afterwards be held to",
+      "prediction_target": "The learner should predict that since a ritual's content may be known to everyone present, learning nothing cannot be what shows a meeting to have failed.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "main_idea"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A meeting at which nobody learns anything new has failed in the purpose a meeting has.",
+        "B": "A written notice distributes responsibility more cheaply than a meeting in a room ever could.",
+        "C": "Once a meeting's ritual function has been identified, the meeting has been justified.",
+        "D": "A meeting at which nobody learns anything may still leave those present differently placed."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Two sentences have to be put together. The second paragraph says a ritual's content is often known already to everyone in the room and that this is not a defect. The third says that after the ratifying meeting those present can be held to the decision in a way no corridor conversation allows. Knowledge unchanged, position changed.",
+        "correct_reasoning": "The correct option states exactly that combination and no more. Nothing has been transmitted, and yet something has altered: a private understanding has become public, and the people who watched it become public are now answerable for it. The option's modest wording matches the passage, which claims a change in standing rather than any particular benefit.",
+        "passage_anchor": "rc-0060-p3",
+        "question_type_note": "An inference question on a definitional passage usually asks what follows once the author's definition has replaced the reader's. Test each option against the new definition rather than the familiar one.",
+        "reading_habit": "When an author redefines what a familiar thing is for, ask what now counts as that thing failing. The old failure condition will be waiting among the options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This keeps the standard the passage sets out to remove. The wedding example is there precisely to show that telling the participants nothing new is no defect, and the closing paragraph calls information the one thing a meeting is worst at.",
+            "seductive_element": "It is the assumption nearly every reader brings to the subject, and the passage states it sympathetically in its first paragraph before turning on it."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage's contrast runs the other way in both halves: a written notice distributes information and leaves no trace of who has read it, while a room distributes responsibility. Cost is not compared at all.",
+            "seductive_element": "It is built entirely from the passage's own vocabulary, and the cheapness of an email is such common ground that the reader supplies it himself."
+          },
+          {
+            "option": "C",
+            "trap_type": "overstatement",
+            "why_wrong": "The fourth paragraph denies this in its own sentence: an organisation that found a function for every meeting in its calendar would have discovered nothing about whether those meetings are worth their cost.",
+            "seductive_element": "Three paragraphs of successful reframing make a justification feel like the natural destination, and the denial is quieter than the reframing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0060-q3",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "struct.definition"
+      ],
+      "target_mistake": "reading a claim about responsibility backwards because the surrounding paragraph is busy conceding what meetings cannot do",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "Which of the following is NOT true, according to the passage?",
+      "options": {
+        "A": "A meeting distributes responsibility poorly, since nobody present need commit himself.",
+        "B": "The content of a ritual may be familiar to everyone taking part without that counting against it.",
+        "C": "Identifying what a meeting is for does not settle whether it is worth what it costs.",
+        "D": "A written message reaches people without recording which of them have read it."
+      },
+      "correct": "A",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The third paragraph ends on the sentence this question is built from, and it is emphatic: a room distributes responsibility, because everybody in it can see who else heard. Three of the options restate the passage; one reverses that sentence and adds a reason the passage never gives.",
+        "correct_reasoning": "The correct answer is the reversal. The passage makes the distribution of responsibility the thing a meeting does best and an email cannot do at all, and it explains why in the same breath, by the mutual visibility of everyone in the room. A statement that meetings distribute responsibility poorly contradicts the sentence in which the passage's central contrast lands.",
+        "passage_anchor": "rc-0060-p3",
+        "question_type_note": "In a NOT-true question the false option usually keeps the passage's topic and flips its direction. Compare the verb and its direction, not the nouns, since the nouns will match in every option.",
+        "reading_habit": "For each option in a NOT-true set, find the sentence it came from and check whether the option points the same way. An option that names the right sentence and reverses it is the commonest answer in this form.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The second paragraph says the content of a ritual is often known already to everyone in the room and that this is not a defect in it, then proves the point with a wedding and its invitation. The claim is the passage's, in different words.",
+            "seductive_element": "Rewritten without the wedding, the sentence loses the image a reader filed it under, so a faithful paraphrase looks unfamiliar."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "This is the fourth paragraph's closing claim, which separates the question of function from the question of worth and calls the second a separate and harder one. Being an aside does not make it unsaid.",
+            "seductive_element": "It sits in the paragraph readers treat as a qualification rather than as content, and qualifications are the sentences most often forgotten when a stem asks what the passage states."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "The third paragraph says exactly this of a written notice, that it distributes information and leaves no trace of who has read it. It is half of the passage's own comparison rather than an invented one.",
+            "seductive_element": "The comparison is made in a subordinate clause and in passing, so a reader remembers the conclusion about responsibility and not the premise about traces."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0060-q4",
+      "type": "main_idea",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "inf.author_vs_reported",
+        "arg.concession"
+      ],
+      "target_mistake": "stopping at the reframing in the third paragraph and treating the passage as a rehabilitation of meetings",
+      "prediction_target": "The learner should be able to say: meetings are being measured by the thing they do worst, their real work is producing a witnessed record, and that work still has to earn its cost.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": {
+        "A": "Most meetings waste time that better written communication could easily have saved.",
+        "B": "Meetings work by being witnessed, not by informing, and must still earn their cost.",
+        "C": "Complaints about meetings mistake a social form for a failure of administration.",
+        "D": "The recurring meeting nobody cancels exists to show that the group is still in being."
+      },
+      "correct": "B",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage has two movements and a main idea must survive both. The third paragraph relocates what a meeting does; the fourth insists that relocating it settles nothing about worth, and the fifth turns that insistence into a question with real answers, some of them negative.",
+        "correct_reasoning": "The correct option carries both movements in one sentence. The relocation is there in working by being witnessed rather than by informing, which is what the borrowed definition supplies, and the reservation is there in earning their cost, which is the fourth paragraph's separate and harder question. Removing either half produces one of the other options.",
+        "passage_anchor": "rc-0060-p4",
+        "question_type_note": "Where a passage reframes something and then refuses to absolve it, the main idea has two clauses. Options with one clause are built from readers who stopped at the more enjoyable movement.",
+        "reading_habit": "Count the turns in a passage before choosing a main idea. If the author turns twice, an option that turns once has left a paragraph out, and it will be the paragraph that qualifies.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the verdict of the opening paragraph, reported as what is usually said, and the rest of the passage is written against it. The closing lines call that complaint satisfying and useless.",
+            "seductive_element": "It is the received opinion on the subject and the passage gives it a whole paragraph before answering it."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "This is the third paragraph's achievement offered as the whole passage. The fourth paragraph immediately denies that identifying the social form excuses anything, and the fifth ends with cases where the witnessing is not needed at all.",
+            "seductive_element": "It is the live rival, and it is the sentence a reader composes for himself somewhere in the middle of the passage, which makes it feel like a conclusion he has earned."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "This is the second of three applications inside one paragraph, offered to show the definition working. A main idea that covers one example cannot account for the definition it came from or the limit placed on it afterwards.",
+            "seductive_element": "The Tuesday meeting is the most vivid of the three cases and carries the passage's only piece of practical advice, about suspending it for a quarter."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0060-q5",
+      "type": "scope",
+      "skill": "scope",
+      "patterns": [
+        "scope.condition",
+        "scope.true_but_off_question",
+        "elim.near_tie"
+      ],
+      "target_mistake": "turning one of the three worked applications into a condition on the whole account, or reading the account as a refutation of the complaints it reframes",
+      "prediction_target": "The learner should be able to say: the account is about what meetings do and is explicitly denied any power to justify a particular meeting.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "main_idea"
+      ],
+      "stem": "Which of the following best states the limit the author places on the account of meetings as rituals?",
+      "options": {
+        "A": "It applies only to meetings whose decisions have in fact been taken somewhere else.",
+        "B": "It holds in organisations large enough for the members not to know one another.",
+        "C": "It explains what a meeting does without showing that any meeting is worth holding.",
+        "D": "It shows that the usual complaints about meetings were mistaken from the start."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The limit is stated in a single sentence of the fourth paragraph: an organisation that discovered a function for every meeting in its calendar would have discovered nothing about whether those meetings are worth what they cost. The passage even labels the leftover as a separate question and a harder one.",
+        "correct_reasoning": "The correct option reports that sentence and nothing else. The account is explanatory, and the author denies it any evaluative power at all, which is why the closing paragraph has to supply a different question to do the evaluating. Keeping the two apart is the whole of the limit, and the passage attaches no condition about size, subject or setting anywhere.",
+        "passage_anchor": "rc-0060-p4",
+        "question_type_note": "A scope question asks how far a claim reaches. Look for the sentence in which the author names what his own claim does not do; that sentence, rather than the claim itself, is usually the answer.",
+        "reading_habit": "When an author says a question is separate, write down which question. Scope options are made by attaching the author's answer to the question he set aside.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The ratified decision is one of three applications, and the other two, the standing Tuesday meeting and the meeting that might have been an email, involve no decision taken elsewhere. A case worked through is not a condition imposed.",
+            "seductive_element": "It is the live rival: the first and most persuasive application, and the one in which the ritual reading does its most surprising work."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Size is never mentioned. The closing paragraph's only number distinguishes four witnesses from fourteen, and it does so to show that the right question has answers rather than to restrict where the account applies.",
+            "seductive_element": "Rituals and witnesses suggest strangers and scale, and the reader supplies a condition the passage did not."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The complaints survive. The fourth paragraph grants that rituals can run too long, recur too often and outlive what they marked, and the fifth ends by saying many meetings need no witnessing at all.",
+            "seductive_element": "Three complaints are taken apart one after another in the third paragraph, which reads as a refutation until the paragraph after it arrives."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "ratifies",
+      "passage_use": "The meeting that ratifies a decision already taken",
+      "meaning_here": "formally confirms in public what had already been agreed elsewhere",
+      "difficulty": "medium"
+    },
+    {
+      "word": "conveys",
+      "passage_use": "rather than in anything it conveys",
+      "meaning_here": "communicates or passes on to those present",
+      "difficulty": "easy"
+    },
+    {
+      "word": "witnesses",
+      "passage_use": "be held before the wrong witnesses",
+      "meaning_here": "the people whose seeing the act is what gives it its force",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A word is borrowed, three familiar complaints are rebuilt with it, and then the author refuses to let you use the rebuild as an excuse. The fourth paragraph is the one to read twice.",
+    "one_sentence_summary": "Meetings are condemned for failing at information transfer, which is the one thing they do worst; borrowing the anthropologist's sense of ritual shows that what a meeting actually produces is a record made before witnesses, though naming that function settles nothing about whether any particular meeting is worth its cost.",
+    "main_idea": "The usual complaints judge a meeting by what it tells people. A ritual, in the anthropological sense, works by being performed in front of the people concerned, and its content may be known to all of them already. Read that way, the ratifying meeting, the uncancellable weekly meeting and the meeting that might have been an email are all distributing responsibility rather than information. That explains what they do; it does not show that any of them is worth holding, which the author treats as a separate and harder question.",
+    "simple_explanation": "People complain about three kinds of meeting. The one that should have been an email. The one every Tuesday that nobody is allowed to cancel. And the one held to decide something two people already decided in a corridor. All three get the same verdict: waste.\n\nThe author borrows a word from anthropology. A ritual is something whose whole point is that it is done, in front of the people it concerns. It does not have to tell anyone anything. A wedding does not inform the guests; they knew from the invitation. What it produces is a shared record that a thing was done, and that everyone saw it done.\n\nNow look at the three complaints again. The meeting that confirms a decision turns a private agreement into a public one, and afterwards people can be held to it in a way a corridor chat does not allow. The Tuesday meeting is a standing proof that the group still exists and still answers to itself; stop it for three months and see what has to be rebuilt. And the meeting that could have been an email is doing the thing an email cannot: an email hands out information and leaves no sign of who read it, while a room hands out responsibility, because everyone in it can see who else was there.\n\nThen the author stops you. This is not a defence of meetings. Rituals can be done badly. Too long, too often, in front of the wrong people, or long after whatever they marked has stopped mattering. Finding a purpose for every meeting on the calendar tells you nothing about whether those meetings are worth their cost.\n\nSo the real change is the question. Asking could this have been an email measures a meeting by its worst skill, and the answer is nearly always yes, which is why the complaint feels so good and does so little. The better question is: what has to be witnessed here, by whom, and how often? That has real answers, and plenty of them are that nothing needs witnessing, or that four people are enough rather than fourteen.",
+    "why_difficult": "The passage performs a reversal that is genuinely pleasurable, and pleasure makes readers stop early. Three despised things are shown to be doing serious work, and the natural next thought is that they have been vindicated. The fourth paragraph blocks exactly that thought, in flat sentences and without repeating itself, and the fifth then shows that the reframing produces negative answers as easily as positive ones. A reader who keeps only the reversal will find that four of the five questions have an option written for him.",
+    "author_intention": "To replace a satisfying complaint with a question that can actually be answered, while refusing the reader the comfort of concluding either that meetings are a waste or that they are all justified.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0060-p1",
+        "role": "States the complaint",
+        "note": "Three familiar meetings that everyone objects to, and one shared verdict: waste and bad organisation."
+      },
+      {
+        "paragraph_id": "rc-0060-p2",
+        "role": "Supplies the definition",
+        "note": "A ritual is an act whose point is being performed in front of the people it concerns. The content can be old news, as at a wedding. What it makes is a record before witnesses."
+      },
+      {
+        "paragraph_id": "rc-0060-p3",
+        "role": "Applies it three times",
+        "note": "Confirming a decision makes it public and binding; the weekly meeting proves the group still exists; and a room hands out responsibility where an email only hands out information."
+      },
+      {
+        "paragraph_id": "rc-0060-p4",
+        "role": "Refuses the defence",
+        "note": "None of this justifies anything. Rituals can be badly made, and finding a function for a meeting says nothing about whether it is worth its cost."
+      },
+      {
+        "paragraph_id": "rc-0060-p5",
+        "role": "Replaces the question",
+        "note": "Could this have been an email judges a meeting by its weakest skill. Ask instead what has to be witnessed, by whom and how often, and many answers will be none or fewer."
+      }
+    ],
+    "tone_progression": "Wry while the familiar grievances are rehearsed, brisk and technical through the definition, quietly pleased while the three cases turn over, and then deliberately cold in the last two paragraphs, where the author takes away the excuse his own argument has just manufactured.",
+    "key_transitions": [
+      "'Anthropologists have a word for acts of this shape, and it is worth borrowing.' (opening of paragraph 2) — the passage leaves the complaint and fetches a definition.",
+      "'None of this is a defence of meetings, and it should not be mistaken for one.' (opening of paragraph 4) — the reframing is denied any excusing power.",
+      "'What the account changes is the question.' (opening of paragraph 5) — the payoff is stated as a change of test rather than a change of verdict."
+    ],
+    "misunderstanding": "Readers finish with one of two wrong summaries. The first is the received complaint, unchanged: meetings waste time and email would do. The second, and the likelier one after such an enjoyable reversal, is that the author has defended meetings by showing what they are for. He does neither. He says the usual test measures the wrong thing, supplies a test that measures the right thing, and expects that test to condemn a good many meetings on its own terms.",
+    "traps_summary": "The options here give the fourth paragraph the fifth paragraph's job, invert a contrast between an email and a room, promote one worked application to a condition on the whole account, and offer the reframing without the reservation attached to it. Each is answered from the two sentences that separate function from worth.",
+    "reading_lesson": "When an author explains why a criticised practice exists, watch for the paragraph in which he denies that the explanation is a justification, and treat that denial as part of the thesis rather than as modesty. Almost every wrong option in a passage of this shape is the explanation with the denial removed. The habit transfers to any passage that answers what is this for before answering whether it is worth it, which is the commonest shape in writing about institutions.",
+    "real_world": "The same question applies to a quarterly review, a family dinner, a signing ceremony or a court hearing: not what was communicated, but who needed to see it happen, and whether that number is smaller than the number invited.",
+    "takeaway": "Knowing what something is for is not the same as knowing that it is worth doing.",
+    "reflection_question": "For a meeting you attend regularly, who actually needs to see it happen, and would the answer embarrass anyone?"
+  }
+}

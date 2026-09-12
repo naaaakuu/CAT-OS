@@ -1,0 +1,333 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0062",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "evidence-anchoring",
+      "trap-recognition"
+    ],
+    "word_count": 301,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "phrase_in_context",
+      "primary_purpose"
+    ],
+    "theme": "whether a qualification adds a capacity or reveals one: the two accounts make the same predictions about earnings, so the evidence the dispute is usually fought with cannot decide it, and only cases where certificate and course come apart can",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "Three hundred words with three voices and a turn in the last paragraph that is about evidence rather than about the two accounts. The set's difficulty is that the author endorses neither side, so every option that adopts one of them is wrong however faithfully it reports it.",
+    "length_class": "short",
+    "structure": "dialectic",
+    "viewpoints": 3,
+    "tone": "dialectical, dissatisfied with the usual evidence",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.claim_counterclaim",
+      "struct.pivot",
+      "struct.contrast",
+      "comp.purpose",
+      "comp.organization",
+      "comp.paraphrase",
+      "arg.counterargument",
+      "arg.evidence",
+      "arg.evidence_vs_conclusion",
+      "arg.causal_claim",
+      "inf.author_vs_reported",
+      "inf.strongly_supported",
+      "inf.necessary",
+      "cr.evaluate",
+      "cr.inference",
+      "scope.abstraction_level",
+      "lang.causal_wording",
+      "word.context_clue",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the money reading of expensive, which the colon in the same sentence forbids by explaining the expense as a cost borne unequally by different kinds of student rather than as a fee. Q2's rival is the option that the disagreement is therefore not a real one, which converts a finding about evidence into a finding about the question; the last paragraph does the reverse, naming the evidence that would settle it and regretting that the argument was not fought there. Q3's rival is the option that the passage argues for the revealing account, which is the second of two positions reported at equal length and with equal sympathy, and which the third paragraph declines to endorse by showing that both accounts predict the same figures.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "premium",
+      "revealed",
+      "adjudicate"
+    ]
+  },
+  "passage": {
+    "title": "What the Certificate Records",
+    "reading_time_min": 1.6,
+    "paragraphs": [
+      {
+        "id": "rc-0062-p1",
+        "text": "The teaching account is the one everybody begins with. A demanding course changes the person who completes it. It leaves behind knowledge, certainly, but more importantly it leaves habits: a tolerance for confusion, the capacity to hold a long argument in mind for an afternoon without losing its shape, a practised willingness to be told that one is wrong. Employers pay graduates more because graduates can do more, and what they can do was put there by the teaching. On this account the employer is paying for something that was added."
+      },
+      {
+        "id": "rc-0062-p2",
+        "text": "The signalling account begins from a difficulty the first ignores. An employer cannot see, across a table, which applicant is persistent and quick; and a demanding course is expensive in a particular way, since it costs the persistent and the quick less than it costs anybody else. Merely finishing it therefore sorts the applicants, whether or not it improves any of them. Here the employer is paying for something that was revealed. The claim is not that the course teaches nothing. It is that what the employer is buying was in the student beforehand."
+      },
+      {
+        "id": "rc-0062-p3",
+        "text": "The quarrel is usually conducted with earnings figures, and that is where it goes wrong. Both accounts predict that graduates earn more. Both predict that the premium is larger where the course is harder to finish. Both predict that it survives for decades. A measurement on which two rival explanations agree cannot adjudicate between them, however large the sample. What would separate them is a case in which the certificate and the course come apart: a student who completes the work and is refused the certificate, or one who is granted the certificate without the work. Such cases are rare, awkward and small, and they are where the argument ought to have been fought all along."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0062-q1",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "struct.contrast"
+      ],
+      "target_mistake": "reading expense as money when the clause that follows has already defined it as a burden borne unequally",
+      "prediction_target": "The learner should paraphrase from the rest of the sentence: the cost falls more heavily on some students than on others, and on exactly the ones the employer is trying to exclude.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the second paragraph, the statement that a demanding course is \"expensive in a particular way\" most nearly means that",
+      "options": {
+        "A": "the fees charged for it are higher than the fees charged for an ordinary course",
+        "B": "it imposes the same burden on everyone who attempts it, whatever their ability",
+        "C": "the time it consumes can never be recovered once the course has been completed",
+        "D": "the burden it imposes varies with precisely the quality an employer wants to detect"
+      },
+      "correct": "D",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The sentence explains itself after the semicolon, and the explanation is about who bears the cost: it costs the persistent and the quick less than it costs anybody else. The paragraph has opened by saying that persistence and quickness are exactly what an employer cannot see.",
+        "correct_reasoning": "The correct option joins those two halves. The particular way in which the course is expensive is that its price is not the same for everyone, and the thing that changes the price is the very trait the employer is trying to identify. That is why merely finishing sorts the applicants, which is the sentence the phrase exists to set up.",
+        "passage_anchor": "rc-0062-p2",
+        "question_type_note": "A phrase question turns on the qualifier. Here the whole weight is on in a particular way, which announces that the ordinary sense of the adjective is not the one being used.",
+        "reading_habit": "When an author writes that something is true in a particular way, stop and find the clause that says which way. He has warned you that the plain reading will be wrong.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Fees would fall equally on every student and could not sort anybody, which is the work the sentence goes on to give the expense. The cost named in the clause is borne by the student's effort, not by the student's bank.",
+            "seductive_element": "It is the live rival, because expensive means money almost everywhere else, and the passage is an economics passage in which prices are being discussed."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The clause says the opposite: the course costs the persistent and the quick less than it costs anybody else. An equal burden is precisely what would make finishing it useless as a sorting device.",
+            "seductive_element": "A demanding course does look like the same course for everyone, and the passage's word expensive suggests a single stated price."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing is said about whether the cost can be recovered afterwards. The paragraph is concerned only with how the cost is distributed among different students beforehand, which is what allows it to identify them.",
+            "seductive_element": "Time spent on a course is irrecoverable, and the observation is both true and adjacent to a passage about what a course is worth."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0062-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.necessary",
+        "arg.evidence_vs_conclusion"
+      ],
+      "target_mistake": "turning the claim that the usual evidence cannot decide the question into the claim that there is nothing to decide",
+      "prediction_target": "The learner should predict that any finding both accounts already predict will leave the dispute exactly where it was.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "argument",
+        "scope"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A finding that the premium is larger for harder courses would favour neither account.",
+        "B": "The signalling account holds that a demanding course teaches its students nothing at all.",
+        "C": "Since both accounts predict the same figures, the question they divide over is not a real one.",
+        "D": "Employers would pay no premium if certificates could be had without doing any of the work."
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The third paragraph lists three predictions, attributes each to both accounts, and then states the rule that follows: a measurement on which two rival explanations agree cannot adjudicate between them, however large the sample. The larger premium for harder courses is the second item on that list.",
+        "correct_reasoning": "The correct option applies the stated rule to a case the passage has already placed inside it. If both accounts expect the premium to rise with the difficulty of the course, then observing that rise confirms what each side already believed and moves neither. The inference needs nothing beyond the paragraph's own list and its own rule.",
+        "passage_anchor": "rc-0062-p3",
+        "question_type_note": "When a passage names evidence that cannot decide a question, expect an inference question offering that evidence back as decisive for one side. Check the list before you check the reasoning.",
+        "reading_habit": "Whenever an author says two explanations make the same prediction, write the prediction down. Any option that treats it as support for either side is finished before it is read.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The second paragraph contains this sentence with its negation attached: the claim is not that the course teaches nothing. Dropping the denial leaves the passage’s own words asserting exactly what it was at pains to refuse.",
+            "seductive_element": "The account's whole point is that improvement is beside the point for the employer, which sounds very like a denial that improvement occurs."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage’s finding is about one measurement, that earnings figures cannot adjudicate, and this enlarges it into a verdict on the question itself. Having said what the figures cannot do, the paragraph names the evidence that would settle the matter and regrets that the argument was not fought there.",
+            "seductive_element": "It is the live rival, because two theories with identical predictions are often said to be the same theory, and the reader supplies that principle himself."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage offers the certificate without the course as a case that would separate the two accounts, which requires the outcome to be unknown in advance. Predicting the result would remove the reason for looking.",
+            "seductive_element": "It sounds like what the signalling account must say, and a reader who has been persuaded by that account finishes its argument on its behalf."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0062-q3",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "cr.evaluate"
+      ],
+      "target_mistake": "taking the second of two reported accounts for the author's own because it arrives later and answers the first",
+      "prediction_target": "The learner should be able to say: the author is not choosing between the accounts but disqualifying the evidence the choice is usually made with, and naming better evidence.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is to",
+      "options": {
+        "A": "settle a long dispute between two accounts of why graduates are paid more than others",
+        "B": "show that the usual evidence cannot decide between two accounts, and name what could",
+        "C": "argue that a demanding course is valuable chiefly for what it reveals about the student",
+        "D": "explain why an employer cannot tell which of two applicants is the more persistent"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The first two paragraphs are symmetrical, each ending in a matched formula about what the employer is paying for, added in one and revealed in the other. The author's own voice arrives only in the third paragraph, and it does not take a side; it audits the evidence and then points somewhere else.",
+        "correct_reasoning": "The correct option names both halves of that third paragraph. The audit is the list of shared predictions and the rule that follows from it; the recommendation is the pair of cases in which certificate and course come apart. Neither account is preferred anywhere in the passage, and the closing regret is about where the argument was fought rather than about who should win it.",
+        "passage_anchor": "rc-0062-p3",
+        "question_type_note": "In a passage with two reported positions, the purpose lives in the paragraph where neither is being reported. Find where the author stops saying on this account and start there.",
+        "reading_habit": "Mark the sentence where reported speech ends. In a three-part passage the last part is usually the author's, and a purpose option drawn from either of the first two is reporting rather than purpose.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "Nothing is settled. The third paragraph explains why the available evidence cannot settle it and calls the cases that could rare, awkward and small, which is a description of an argument still open.",
+            "seductive_element": "A passage that states two positions and then speaks in its own voice usually delivers a verdict, and readers expect the third paragraph to supply one."
+          },
+          {
+            "option": "C",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the second account, reported at the same length and with the same sympathy as the first. The paragraph that follows treats it as one of two rivals whose shared predictions make the usual evidence useless.",
+            "seductive_element": "It is the live rival: the account arrives second, answers a difficulty the first ignored, and is the more surprising of the two, all of which make it sound like a conclusion."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The employer's blindness is one premise inside the second account, offered to explain why sorting would be worth paying for. It occupies a clause, and the passage's own contribution comes two paragraphs later.",
+            "seductive_element": "It is the most concrete claim in the passage and the only one stated as a plain fact about the world rather than as part of an account."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "premium",
+      "passage_use": "the premium is larger where the course is harder to finish",
+      "meaning_here": "the extra amount paid above what others are paid",
+      "difficulty": "medium"
+    },
+    {
+      "word": "revealed",
+      "passage_use": "paying for something that was revealed",
+      "meaning_here": "made visible, as opposed to brought into being",
+      "difficulty": "easy"
+    },
+    {
+      "word": "adjudicate",
+      "passage_use": "cannot adjudicate between them",
+      "meaning_here": "decide which of two competing claims is the right one",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two accounts, given equal weight and equal sympathy, and then a third paragraph that refuses to choose between them. Work out what the refusal is actually about.",
+    "one_sentence_summary": "A qualification may raise earnings because the course adds a capacity or because finishing it reveals one, and since both accounts predict the same wage figures, the evidence the dispute is usually conducted with cannot decide it; only cases where the certificate and the course come apart can.",
+    "main_idea": "One account says a demanding course changes the student and employers pay for the change. The other says the course is cheaper for the persistent and the quick, so finishing it identifies them, and employers pay for the identification. Both predict the same earnings figures, so those figures settle nothing. The evidence that would settle it is the rare case where someone gets the course without the certificate or the certificate without the course.",
+    "simple_explanation": "Why do people with a hard qualification earn more?\n\nThe first answer is the obvious one. The course changes you. You come out knowing things, and, more importantly, able to do things: sit with confusion, follow a long argument without losing the thread, take correction. Employers pay more because you can do more, and the course put that there.\n\nThe second answer starts somewhere else. An employer meeting you for half an hour cannot tell whether you are persistent and quick. Now notice something about a hard course: it is not equally hard for everyone. For the persistent and the quick it costs less. So simply getting through it picks those people out, even if it taught them nothing. On this view the employer is paying for information about you, not for anything the course gave you. Note the careful bit: this is not the claim that the course teaches nothing. It is the claim that what the employer is buying was already there.\n\nNow the author's own point. People argue about this with salary figures, and that cannot work. Both stories say graduates earn more. Both say the gap is bigger for harder courses. Both say it lasts for decades. If two explanations make the same prediction, then finding that the prediction comes true tells you nothing about which is right, no matter how much data you collect.\n\nSo what would help? Pull the two things apart. Find someone who did all the work and was refused the certificate, or someone handed the certificate without doing the work. Those cases are rare and untidy, and they are the ones the argument should have been about from the start.",
+    "why_difficult": "Three hundred words carry three positions, and the third one is not a verdict but a complaint about method, which readers do not expect and can miss entirely. The second account is also the more interesting of the two, so the natural error is to take it for the author's, particularly since it arrives second and answers a gap in the first. The last paragraph's rule, that a shared prediction cannot decide between rivals, is stated once and must then be applied to a list that was given before it.",
+    "author_intention": "To stop a familiar argument being conducted with evidence that cannot possibly settle it, by showing that the two sides agree about everything the evidence measures.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0062-p1",
+        "role": "The first account",
+        "note": "A hard course changes you, leaving knowledge and habits behind. Employers pay for what was added to you."
+      },
+      {
+        "paragraph_id": "rc-0062-p2",
+        "role": "The second account",
+        "note": "An employer cannot see who is persistent and quick. A hard course costs those people less, so finishing it identifies them. Employers pay for what was revealed, and the account does not deny that teaching happens."
+      },
+      {
+        "paragraph_id": "rc-0062-p3",
+        "role": "The author's audit",
+        "note": "Both accounts predict the same earnings, the same gap for harder courses and the same persistence, so earnings data cannot choose between them. What would choose is a case where certificate and course come apart."
+      }
+    ],
+    "tone_progression": "Even-handed and unhurried while the two accounts are given their best form, and then noticeably sharper in the last paragraph, where the usual way of settling the question is dismissed in one sentence and a better way named with some impatience.",
+    "key_transitions": [
+      "'The signalling account begins from a difficulty the first ignores.' (opening of paragraph 2) — the second position enters by naming a gap rather than by contradicting.",
+      "'The quarrel is usually conducted with earnings figures, and that is where it goes wrong.' (opening of paragraph 3) — the author stops reporting and starts auditing the evidence.",
+      "'A measurement on which two rival explanations agree cannot adjudicate between them.' (paragraph 3) — the rule that disqualifies the usual evidence."
+    ],
+    "misunderstanding": "Readers reach the end believing the author has endorsed the second account, because it comes last among the reported positions, repairs a hole in the first and is the more counter-intuitive of the two. He endorses neither. A second misreading takes the shared predictions to show that the two accounts say the same thing, and so that the disagreement is empty. The passage says the reverse: the disagreement is real and has been fought with the wrong evidence.",
+    "traps_summary": "The options here read a cost as a fee, hand the author the more interesting of two reported accounts, and convert the failure of one kind of evidence into the emptiness of the question. Each is answered from the third paragraph, which is the only place the author speaks for himself.",
+    "reading_lesson": "When two explanations are set out at equal length, do not assume the passage is choosing between them; check whether the author's own paragraph is about the accounts at all, since it may instead be about the evidence. Learning to spot a passage whose conclusion is methodological rather than substantive protects you from the whole family of options that hand the author one of the positions he was merely reporting. The move is common in writing about economics, medicine and policy.",
+    "real_world": "The same audit applies to any claim that an activity improves the people who do it, from military service to competitive sport to an internship: ask what a sceptic would predict, and whether the figures being quoted would look any different.",
+    "takeaway": "Evidence that both sides already expect is not evidence for either of them.",
+    "reflection_question": "For a belief you hold about what some experience does to people, what would you expect to see if the experience changed nobody and merely selected them?"
+  }
+}

@@ -1,0 +1,534 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0058",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "scientific-method",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "stage": "foundation",
+    "skills": [
+      "causal-reasoning",
+      "evidence-anchoring",
+      "inference",
+      "structure-mapping"
+    ],
+    "word_count": 639,
+    "question_count": 6,
+    "question_types": [
+      "author_purpose",
+      "comparative",
+      "inference",
+      "specific_detail",
+      "tone",
+      "weaken"
+    ],
+    "theme": "what makes a controlled experiment able to show a cause is the unrelated sorting rather than the laboratory, so events in the world can do the same work, at the price of having to argue that the sorting was unrelated instead of knowing it",
+    "estimated_time_min": 9.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "A long passage written at foundation level: short sentences, everyday words, an explicitly signposted view-critique-replacement shape and a fifth paragraph that states the cost in three parallel suppositions. The difficulty that remains is entirely one of holding the replacement's condition, that the sorting must owe nothing to the outcome, which every question tests from a different side.",
+    "length_class": "long",
+    "structure": "view_critique_replacement",
+    "viewpoints": 2,
+    "tone": "plain-spoken, constructive",
+    "difficulty_vector": {
+      "lexical": 1,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 2,
+      "reasoning_depth": 2,
+      "structural_ambiguity": 1,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.view_critique_replacement",
+      "struct.problem_solution",
+      "struct.claim_evidence",
+      "struct.qualification",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.purpose",
+      "comp.intent",
+      "comp.central_idea",
+      "arg.causal_claim",
+      "arg.correlation_vs_causation",
+      "arg.qualification",
+      "arg.example",
+      "arg.description_vs_evaluation",
+      "inf.directly_implied",
+      "inf.strongly_supported",
+      "cr.weaken",
+      "cr.alternative_cause",
+      "scope.condition",
+      "lang.absolute_vs_qualified",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the keener-pupils option, which is true of the passage and is the illustration rather than the reason; the stem asks why ordinary observation cannot show a cause, and the second paragraph gives the reason one sentence above the example. Q2's rival is the option that families near the motorway were neither richer nor poorer, which a candidate defends as relevant to selection, but it removes a difference between the groups and so pushes the conclusion the other way. Q3's rival is the laboratory option, which the third paragraph refuses in four short sentences ending in the coin. Q4's rival is the detached reading, which cannot survive a passage that calls the price one to be stated plainly, calls the new picture truer, and says the older rule shut whole subjects out. Q5's rival is the descriptive option naming the fourth paragraph's list of events, which covers one paragraph of six. Q6's rival is the option that a natural experiment is always less secure, which the last paragraph denies in terms by saying one question may be answered as securely as anything done in a laboratory.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "assignment",
+      "apparatus",
+      "securely"
+    ]
+  },
+  "passage": {
+    "title": "The Coin, Not the Laboratory",
+    "reading_time_min": 3.5,
+    "paragraphs": [
+      {
+        "id": "rc-0058-p1",
+        "text": "For a long time there was only one respectable way to show that one thing causes another. You take a group of people, split them into two halves by chance, change one thing for one half, leave the other half alone, and compare what happens. Anything short of that was correlation, and correlation was not to be trusted. On this view whole subjects were shut out. History, much of economics, the study of schools and towns: these could describe the world, but they were not allowed to explain it."
+      },
+      {
+        "id": "rc-0058-p2",
+        "text": "The rule was not fussiness. It answers a real difficulty. When people choose for themselves which group they are in, the two groups differ before anything at all is done to them. The pupils who sign up for the extra class are the keener pupils. The towns that build a bypass are the towns that were already growing. If the keener pupils do better later, nobody can say whether the class did it or whether they would have done better anyway. The difference you wanted to measure and the difference that was there at the start are mixed together, and no amount of care with the numbers will pull them apart."
+      },
+      {
+        "id": "rc-0058-p3",
+        "text": "Now look again at what the controlled experiment actually supplies. It is not the laboratory. It is not the equipment, and it is certainly not the white coat. It is the coin. The one thing the experiment has that ordinary watching lacks is that people were put into their groups for a reason that had nothing to do with the thing being studied. State the rule in those words and it stops being a rule about places. What is needed is not a laboratory but an assignment that owes nothing to the outcome."
+      },
+      {
+        "id": "rc-0058-p4",
+        "text": "Assignments of that kind happen in the world without anyone arranging them. A school admits children by a birthday cut-off, so two children born a week apart begin school a year apart. A city runs a lottery for a small number of housing places. A river divides two districts that fell under different laws for reasons settled centuries ago. A strike closes some schools for a month and leaves others open. Nobody designed any of these as an experiment, and that is exactly what makes them useful: the world did the sorting, and it did the sorting for reasons of its own. Researchers call them natural experiments."
+      },
+      {
+        "id": "rc-0058-p5",
+        "text": "There is a price, and it should be stated plainly. In a laboratory you know the sorting was by chance because you did it yourself. In a natural experiment you have to argue that it was as good as chance, and that argument is about the world rather than about the numbers. Suppose the birthday cut-off also fixes the age at which a young person may take paid work. Suppose the families who won the housing lottery were the ones organised enough to fill in the form. Suppose the river divides two kinds of soil as well as two sets of laws. In each case the sorting was not unrelated to the outcome after all, and the whole apparatus fails quietly, with nothing in the figures to show that anything has gone wrong."
+      },
+      {
+        "id": "rc-0058-p6",
+        "text": "So the method does not remove the need for judgement. It moves it, out of the arithmetic and into a claim about how people came to be where they are. The old rule drew its line between subjects, letting some of them explain and forbidding the rest. The new one draws its line between occasions. Inside a single subject, one question may be answered as securely as anything done in a laboratory and the next may not be answerable at all, depending on whether the world has happened to supply a coin. That is a less tidy picture than the old one, and a truer one."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0058-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "arg.correlation_vs_causation",
+        "struct.claim_evidence"
+      ],
+      "target_mistake": "answering with the vivid illustration about keener pupils instead of the reason the paragraph gives one sentence above it",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the reason ordinary watching cannot show that one thing caused another is that",
+      "options": {
+        "A": "people who choose a treatment for themselves are keener, so the treatment looks effective",
+        "B": "the groups being compared may already have differed before anything was done to them",
+        "C": "the effects being looked for are usually too small to notice outside a laboratory",
+        "D": "any difference that appears afterwards is always caused by something nobody measured"
+      },
+      "correct": "B",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The second paragraph states its reason and then illustrates it twice. The reason is the sentence about people choosing for themselves, after which the two groups differ before anything at all is done to them; the keen pupils and the growing towns are what that sentence looks like in practice.",
+        "correct_reasoning": "The correct option is that sentence in other words. Once the groups differ at the start, the difference you wanted to measure and the difference that was already there are mixed together, and the paragraph adds that no amount of care with the numbers will pull them apart. That is the whole of the difficulty the controlled experiment exists to answer.",
+        "passage_anchor": "rc-0058-p2",
+        "question_type_note": "A detail question is answered from one sentence, and the sentence wanted is usually the general one rather than the memorable example beside it. Decide which of the two the stem is asking for before reading the options.",
+        "reading_habit": "When a paragraph gives a reason and then two examples of it, underline the reason. Examples are what you remember and general claims are what questions ask for, which is why the two need marking differently.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "This is the paragraph's first illustration rather than its reason. Keenness is one particular way in which two groups can differ at the start, and the paragraph offers a second, about growing towns, to show that the reason is wider than either case.",
+            "seductive_element": "It is the live rival: entirely true, taken from the right paragraph, and much easier to picture than the general sentence it illustrates."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Size of effect is never mentioned. The difficulty the passage names is that two differences are mixed together, which would remain even if the effect were enormous.",
+            "seductive_element": "Small effects are a familiar complaint about research outside a laboratory, so the option sounds like something the passage would say."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The passage says nobody can say whether the class did it or whether the pupils would have done better anyway. Not knowing which of two explanations holds is the opposite of knowing that one of them always does.",
+            "seductive_element": "It sounds like a strong statement of the same worry, and readers accept an absolute when it points in the direction the passage was already pointing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0058-q2",
+      "type": "weaken",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.weaken",
+        "cr.alternative_cause",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "attacking the measurements or the period instead of the one thing the passage says a natural experiment depends on, that the sorting owed nothing to the outcome",
+      "prediction_target": "The learner should predict that the weakener will show the supposedly innocent sorting to have been connected after all to something that affects the outcome.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "argument"
+      ],
+      "stem": "A researcher points out that a motorway built in the 1960s follows a line the engineers chose purely for its gradient, and concludes from this that growing up beside the motorway lowered children's exam results. Which of the following, if true, would most weaken that conclusion?",
+      "options": {
+        "A": "Exam results across the region as a whole were lower then than they are today.",
+        "B": "Families living close to the motorway were neither richer nor poorer than families living further away.",
+        "C": "The researcher measured noise levels at only a handful of points along the route.",
+        "D": "The engineers' chosen gradient follows the valley floor where the region's factories stood."
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The fifth paragraph supplies the test in three suppositions, all of the same shape: the sorting turns out to have been tied to something else that bears on the outcome. The researcher's whole case rests on the gradient being chosen for a reason with nothing to do with children's schooling, so that is the claim a weakener has to reach.",
+        "correct_reasoning": "If the gradient the engineers followed is the same valley floor the factories had occupied, then the road did not sort families at random with respect to anything that matters. Children beside the motorway are also children beside old industry, and everything that comes with it. The sorting was not unrelated to the outcome after all, which is exactly the failure the passage says leaves no trace in the figures.",
+        "passage_anchor": "rc-0058-p5",
+        "question_type_note": "A weaken question asks you to break the step from the evidence to the conclusion, not to find a fault in the study's housekeeping. Identify the one assumption the conclusion rests on, then look for the option that denies it.",
+        "reading_habit": "Before reading the options of a weaken question, finish the sentence: this argument only works if… Whatever completes it is the target, and options that criticise something else are decoration.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "A change in results over time affects both groups alike and leaves the comparison between them untouched. The argument is about a difference between those near the road and those further from it, which a regional trend does not speak to.",
+            "seductive_element": "It sounds like a caution about a study of the past, and cautions of that kind are usually the right instinct."
+          },
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This removes a difference between the groups rather than adding one, so it makes the sorting look more innocent and the conclusion easier to hold. It is a strengthener offered where a weakener was asked for.",
+            "seductive_element": "It is the live rival, because income near a road is exactly the sort of thing the passage warns about, and a reader who has learned to look for it grabs the option that mentions it."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Noise readings form no part of the argument as stated. The conclusion rests on the route having been chosen for a reason unconnected with schooling, and a thin set of measurements of something else leaves that claim exactly where it was.",
+            "seductive_element": "It is the kind of objection that sounds rigorous, and a motorway makes noise the first thing a reader thinks of."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0058-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.directly_implied",
+        "inf.strongly_supported",
+        "scope.condition"
+      ],
+      "target_mistake": "keeping the laboratory as the thing that makes a study trustworthy after the passage has replaced it with the reason behind the sorting",
+      "prediction_target": "The learner should predict that trust will depend on the reason people ended up in one group rather than another, since that is the only thing the third paragraph leaves standing.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "It can be inferred from the passage that a natural experiment deserves more trust when",
+      "options": {
+        "A": "the event that sorted people into groups had nothing to do with the outcome being studied",
+        "B": "the event that sorted people into groups took place inside a laboratory",
+        "C": "the number of people the event happened to sort was unusually large for a study of its kind",
+        "D": "the researcher decided in advance which group each person would be placed in"
+      },
+      "correct": "A",
+      "estimated_time_sec": 65,
+      "explanation": {
+        "expert_notice": "The third paragraph strips the controlled experiment down to one feature and names it twice: people were put into their groups for a reason that had nothing to do with the thing being studied, and what is needed is an assignment that owes nothing to the outcome. Whatever earns trust has to be that feature, since nothing else survives the stripping.",
+        "correct_reasoning": "The correct option is the surviving feature stated as a condition. The fifth paragraph confirms it from the other side by listing the ways a natural experiment goes wrong, and every one of them is a case of the sorting turning out to be connected to the outcome after all. Trust therefore rises and falls with that connection and with nothing else the passage names.",
+        "passage_anchor": "rc-0058-p3",
+        "question_type_note": "When a passage removes several features of a thing and keeps one, expect a question asking what a case must have. The answer is the kept feature, and the discarded ones are waiting in the options.",
+        "reading_habit": "When an author says it is not this, not this, not this, but that, write down only the last item. The list of rejections exists to make one thing memorable, and the questions will be about that one thing.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The third paragraph refuses the laboratory in four short sentences before naming the coin, and the sixth says the old rule's line between subjects has been replaced by a line between occasions. A natural experiment is by definition not conducted in a laboratory.",
+            "seductive_element": "The laboratory is where the passage begins and is the standard by which everything else is being measured, so it keeps its authority in a reader's mind after the author has withdrawn it."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Numbers of people are never made a condition of anything. The passage's examples run from a city lottery to one river and one strike, and it treats them as good or bad according to why the sorting happened rather than how many it touched.",
+            "seductive_element": "Bigger studies are generally believed to be better, and the belief is brought to the passage rather than taken from it."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage's word assignment means the way the world put people into groups, and the fourth paragraph insists that nobody designed these events as experiments. A researcher who decided the groups in advance would be running the controlled experiment the passage is offering an alternative to.",
+            "seductive_element": "Assignment sounds like something a person does, and the whole first paragraph describes a researcher doing exactly that."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0058-q4",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "arg.description_vs_evaluation",
+        "arg.qualification",
+        "comp.intent"
+      ],
+      "target_mistake": "taking the fifth paragraph's list of failures for scepticism, or the sixth paragraph's verdict for unqualified enthusiasm",
+      "prediction_target": "The learner should be able to say: the author is on the method's side and has spent a whole paragraph on what it costs, so the answer must carry both.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "author_purpose",
+        "main_idea"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "celebratory, presenting a method that has removed an old difficulty",
+        "B": "detached, reporting what researchers do without judging it",
+        "C": "sceptical, doubting that anything outside a laboratory shows a cause",
+        "D": "approving but careful, welcoming a method while stating what it costs"
+      },
+      "correct": "D",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "Two sentences fix the attitude. The fifth paragraph opens by saying there is a price and that it should be stated plainly, and the sixth closes by calling the new picture less tidy and truer. An author who says both is neither neutral nor carried away.",
+        "correct_reasoning": "The correct option holds the two together. The passage recommends the method by dismantling the old rule and by calling the resulting picture truer, and it spends its longest paragraph on the three ways the method fails and on the fact that it fails without warning. Welcoming something while naming its cost is what those two moves add up to.",
+        "passage_anchor": "rc-0058-p6",
+        "question_type_note": "Tone is set by judgement words, not topic words. A passage that praises and then warns needs an answer with two halves; single-word answers of either kind are built for readers who stopped early.",
+        "reading_habit": "Collect the author's verdict words as you read: plainly, quietly, truer, not fussiness. Four of them usually settle a tone question before you reach the options.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The last paragraph says the method does not remove the need for judgement but moves it, and the paragraph before shows the method failing with nothing in the figures to show it. Removing the old difficulty is precisely what the author denies.",
+            "seductive_element": "The passage does end on a favourable verdict, and a reader who weights the last line alone hears only the approval in it."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "The author says the old rule shut whole subjects out, that the price should be stated plainly, and that the new picture is the truer one. Three verdicts in six paragraphs is not the record of someone reporting from a distance.",
+            "seductive_element": "The style is unexcited and the examples are handled evenly, which readers often mistake for an absence of opinion."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the position the passage sets out in order to replace. The first paragraph gives it as what was once believed, and the third takes it apart by showing that the laboratory was never the thing doing the work.",
+            "seductive_element": "The fifth paragraph really is a catalogue of failures, and a reader who meets it without the sixth takes the warnings for the verdict."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0058-q5",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.central_idea",
+        "struct.view_critique_replacement"
+      ],
+      "target_mistake": "describing the fourth paragraph's list of events as though cataloguing them were the point of the passage",
+      "prediction_target": "The learner should be able to say: the author is shifting where the requirement of an experiment sits, from the place a study happens to the reason people were sorted.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's chief purpose in the passage is to",
+      "options": {
+        "A": "move the requirement of an experiment from where a study is done to how people came to be sorted",
+        "B": "warn readers that a study carried out outside a laboratory should always be treated with suspicion",
+        "C": "describe the kinds of event that researchers have been able to use as natural experiments",
+        "D": "argue that history and economics can now be studied with the certainty that physics enjoys"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The passage's shape announces its purpose. A rule is stated, its real point is separated from its trappings, the separated point is found occurring in the world, and the cost of the move is set out. The hinge is the sentence saying that the rule stops being a rule about places.",
+        "correct_reasoning": "The correct option names that hinge. Nothing about the old requirement is abandoned; it is relocated, so that the question to ask of a study is no longer where it was carried out but why the people in it ended up where they did. Every later paragraph does work for that relocation, including the fifth, which says what the new question is hard to answer.",
+        "passage_anchor": "rc-0058-p3",
+        "question_type_note": "A purpose question wants the verb of the whole passage. In a view-critique-replacement passage that verb almost always belongs to the replacement, not to the view being replaced or the examples supporting the new one.",
+        "reading_habit": "Ask what the passage would lose if you deleted each paragraph. The one you cannot delete without the rest becoming pointless is where the purpose lives.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The passage exists to show that a study outside a laboratory can be as secure as one inside it when the sorting is unrelated to the outcome, and the last paragraph says so in exactly those terms.",
+            "seductive_element": "The fifth paragraph is a list of ways such studies go wrong, and a reader who takes a caution for a conclusion finishes the passage suspicious."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_narrow",
+            "why_wrong": "The list of cut-offs, lotteries, rivers and strikes fills one paragraph of six, and it is there to show that the replaced requirement is sometimes met in the world. A catalogue is the evidence here, not the purpose.",
+            "seductive_element": "The examples are the most concrete and most memorable part of the passage, and a purpose option that mentions them feels anchored."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The closing paragraph says one question may be answerable and the very next one not at all, which is a claim about occasions rather than a promise about subjects. Certainty is not offered to any field.",
+            "seductive_element": "The first paragraph does complain that whole subjects were shut out, so a reader expects the passage to end by letting them back in wholesale."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0058-q6",
+      "type": "comparative",
+      "skill": "inference",
+      "patterns": [
+        "comp.paraphrase",
+        "arg.qualification",
+        "scope.condition"
+      ],
+      "target_mistake": "ranking natural experiments below controlled ones when the passage's difference is about what must be argued rather than about how secure the answer is",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "scope"
+      ],
+      "stem": "According to the passage, a natural experiment differs from a controlled experiment chiefly in that",
+      "options": {
+        "A": "it studies larger groups of people over much longer stretches of time",
+        "B": "its conclusions concern towns and schools rather than individual people",
+        "C": "the claim that the sorting was unrelated to the outcome must be argued, not known",
+        "D": "the conclusions it reaches are always less secure than those of a laboratory"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The fifth paragraph states the comparison in two sentences and nowhere else. In a laboratory you know the sorting was by chance because you did it yourself; in a natural experiment you have to argue that it was as good as chance, and the argument is about the world rather than about the numbers.",
+        "correct_reasoning": "The correct option is that pair compressed. What changes between the two methods is the standing of one claim: in the laboratory it is something the researcher has done and therefore knows, and outside it is something he must make a case for, using facts about how people came to be where they are. Everything else the passage says about natural experiments follows from that single change.",
+        "passage_anchor": "rc-0058-p5",
+        "question_type_note": "A comparison question is answered from the sentence where the two things are actually set side by side. Options that compare them on some other dimension are inventing a comparison the passage never made.",
+        "reading_habit": "Find the sentence where both terms appear together before reading the options. If an option compares the two on a feature that sentence does not mention, the passage has not made that comparison.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "Neither size nor duration is ever compared. The passage's examples include a single strike lasting a month and a lottery for a small number of places, so the option describes a contrast the text does not draw.",
+            "seductive_element": "Studies of rivers and centuries-old boundaries feel large and slow beside a laboratory, so the comparison seems to have been made somewhere."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The examples run through children starting school, families winning housing places and pupils in an extra class, so the method is applied to individuals throughout. The passage never restricts what a natural experiment can be about.",
+            "seductive_element": "Rivers, districts and strikes are the examples that stay in the memory, and they are all large things."
+          },
+          {
+            "option": "D",
+            "trap_type": "extreme_language",
+            "why_wrong": "The last paragraph says one question may be answered as securely as anything done in a laboratory. What varies is whether the world has supplied a suitable event, not whether the answer is permanently second class.",
+            "seductive_element": "It is the live rival, because a whole paragraph of failures has just been read, and a ranking feels like the natural conclusion of a list of risks."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "assignment",
+      "passage_use": "an assignment that owes nothing to the outcome",
+      "meaning_here": "the way people came to be put into one group rather than another",
+      "difficulty": "medium"
+    },
+    {
+      "word": "apparatus",
+      "passage_use": "the whole apparatus fails quietly",
+      "meaning_here": "the machinery of the argument, taken as a working whole",
+      "difficulty": "medium"
+    },
+    {
+      "word": "securely",
+      "passage_use": "as securely as anything done in a laboratory",
+      "meaning_here": "with as little room for doubt",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "Six short paragraphs with an obvious shape: an old rule, what was right about it, what it got wrong, the replacement, the price, the verdict. The work is in holding one condition steady across all six.",
+    "one_sentence_summary": "What lets a controlled experiment show a cause is not the laboratory but the fact that people were sorted for reasons unconnected to what is being studied, so events in the world can do the same job, at the price of having to argue for that unconnectedness instead of knowing it.",
+    "main_idea": "The only thing a controlled experiment supplies that ordinary observation lacks is a sorting into groups made for reasons unrelated to the outcome. Events in the world sometimes sort people that way by accident, and studies built on them can be as good as laboratory work. The difference is that the researcher must now argue, from facts about the world, that the sorting really was unrelated.",
+    "simple_explanation": "Suppose you want to know whether an extra class helps pupils. You cannot just compare the ones who took it with the ones who did not, because the pupils who signed up were probably keener in the first place. If they do better later, you cannot tell whether the class did it or their keenness did.\n\nThe old answer was: run a proper experiment. Split people into two groups by tossing a coin, give one group the class, and compare. Since the coin decided who got what, the two groups were alike at the start, and any difference at the end must come from the class. Anything else was not good enough, which meant that history, economics and the study of schools and towns could only describe things, never explain them.\n\nThen the author asks a simple question: what exactly is the experiment giving you? Not the room. Not the equipment. Just the coin. The one useful feature is that people were put into groups for a reason that had nothing to do with what you are measuring.\n\nAnd that happens in the world on its own. A school takes children by birthday, so a child born a week later starts a year later. A city picks housing tenants by lottery. A river separates two districts that ended up under different laws centuries ago. A strike shuts some schools and not others. Nobody set these up as experiments, and that is the point: the world did the sorting for its own reasons.\n\nThere is a catch. In a laboratory you know the sorting was random because you did it. Out in the world you have to argue that it was as good as random, and that argument is about real life, not about your figures. Maybe the birthday rule also fixes when a young person may start work. Maybe the people who won the housing lottery were the ones organised enough to fill in the form. Maybe the river divides the soil as well as the law. In any of those cases the study is broken, and nothing in the numbers will tell you so.\n\nSo the method does not get rid of judgement. It moves it somewhere else. And the line has moved too: it no longer runs between subjects, allowing some to explain and forbidding others, but between occasions, so that one question in a field may be answerable and the next may not be.",
+    "why_difficult": "Very little here is difficult to read, and that is where the difficulty comes from: a reader moves quickly and carries away the examples rather than the condition. The condition is one clause, that the sorting owed nothing to the outcome, and every question turns on it. The second trap is the fifth paragraph, which spends its whole length on how the method fails; a reader who stops there leaves with the impression that the author distrusts natural experiments, which the final paragraph contradicts.",
+    "author_intention": "To take a rule most readers accept without inspecting it, show which part of it was doing the work, and put that part somewhere the reader can use it on studies he meets outside a laboratory.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0058-p1",
+        "role": "The old rule",
+        "note": "Only a controlled experiment counted as showing a cause. That shut out history, economics and the study of schools and towns, which could describe but not explain."
+      },
+      {
+        "paragraph_id": "rc-0058-p2",
+        "role": "Why the rule existed",
+        "note": "When people choose their own group, the groups already differ. Keener pupils, growing towns. Afterwards you cannot tell which difference produced the result."
+      },
+      {
+        "paragraph_id": "rc-0058-p3",
+        "role": "What actually does the work",
+        "note": "Not the room or the equipment, but the coin. The useful feature is that people were sorted for a reason unconnected to the thing being studied."
+      },
+      {
+        "paragraph_id": "rc-0058-p4",
+        "role": "The replacement",
+        "note": "Such sortings happen by themselves: birthday cut-offs, housing lotteries, an old river boundary, a strike. Nobody designed them, and that is what makes them usable."
+      },
+      {
+        "paragraph_id": "rc-0058-p5",
+        "role": "The price",
+        "note": "In a laboratory you know the sorting was random. Outside it you have to argue that it was, using facts about the world. If the sorting was tied to something else, the study fails and the figures look normal."
+      },
+      {
+        "paragraph_id": "rc-0058-p6",
+        "role": "The verdict",
+        "note": "Judgement is not removed, only moved. The line now runs between occasions rather than between subjects, which is untidier and truer."
+      }
+    ],
+    "tone_progression": "Even and explanatory at the start, brisker and slightly impatient while the laboratory's trappings are cleared away, generous over the examples, frank about the cost, and quietly decided at the close, where a less tidy picture is preferred for being a truer one.",
+    "key_transitions": [
+      "'Now look again at what the controlled experiment actually supplies.' (opening of paragraph 3) — the critique begins and the laboratory starts losing its authority.",
+      "'There is a price, and it should be stated plainly.' (opening of paragraph 5) — the replacement is made to pay.",
+      "'So the method does not remove the need for judgement. It moves it.' (opening of paragraph 6) — the verdict is given its exact shape."
+    ],
+    "misunderstanding": "Two wrong pictures form easily. The first keeps the laboratory as the standard, so that natural experiments become a second-best to be used when nothing better is available; the passage says instead that the laboratory was never what mattered. The second takes the fifth paragraph's three failures as the author's verdict, which would make the passage a warning rather than a recommendation. The sixth paragraph settles both, and it is the shortest paragraph in the piece.",
+    "traps_summary": "The options here offer an example where a reason was asked for, attack a study's measurements rather than its sorting, keep the laboratory as the source of trust, and rank the two methods where the passage refuses to. Each is answered by returning to the single condition about how people came to be sorted.",
+    "reading_lesson": "When an author strips something down and says what is left is the only part that matters, write that part down as a condition and carry it through the rest of the passage. Every question in a passage of this shape is a test of whether you kept the condition, and the discarded features are precisely what the wrong options are made of. The habit transfers to any passage that asks what a familiar practice is really for.",
+    "real_world": "Anyone reading about whether a new policy worked is meeting this question: not whether the study was careful, but why the people who got the policy were the ones who got it.",
+    "takeaway": "Before believing that something worked, ask how the people it happened to came to be the ones it happened to.",
+    "reflection_question": "Think of a comparison you have made recently between two groups of people; what decided which group anyone was in?"
+  }
+}

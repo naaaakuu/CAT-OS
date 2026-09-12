@@ -1,0 +1,413 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0061",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "scope-control",
+      "qualifier-tracking"
+    ],
+    "word_count": 524,
+    "question_count": 4,
+    "question_types": [
+      "assumption",
+      "best_characterization",
+      "inference",
+      "specific_detail"
+    ],
+    "theme": "the paired case built to test doing against allowing removes the competing claims that make the two duties different in kind, so its verdict describes the case rather than the distinction, and the author refuses to convert that into a defence of the distinction",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "The passage answers its own opening question by attacking a method rather than a verdict, and the final paragraph refuses the conclusion most readers will already have drawn. Every question in the set is decided by that refusal, which is why the option converting the rationing point into a verdict about guilt is the live rival throughout.",
+    "length_class": "medium",
+    "structure": "question_answer",
+    "viewpoints": 2,
+    "tone": "exacting, unhurried",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.question_answer",
+      "struct.claim_counterclaim",
+      "struct.qualification",
+      "struct.pivot",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.organization",
+      "comp.central_idea",
+      "arg.assumption",
+      "arg.qualification",
+      "arg.concession",
+      "arg.counterargument",
+      "arg.principle",
+      "arg.necessary_vs_sufficient",
+      "inf.author_vs_reported",
+      "inf.strongly_supported",
+      "inf.necessary",
+      "inf.logical_gap",
+      "cr.assumption_gap",
+      "scope.condition",
+      "scope.abstraction_level",
+      "lang.absolute_vs_qualified",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival across this set is the option that turns the rationing argument into a verdict, so that allowing harm comes out less wrong than doing it. The last paragraph forbids it twice, saying that the watcher is plainly not less guilty in the engineered case and that whether the feature justifies the judgement is a further question nothing here answers. Q1's rival lists motive and outcome while denying that what each man risked was equalised, which the second paragraph contradicts by equalising the cost to the agent. Q2's rival is the verdict just described; the key instead characterises the answer as a refusal of the method. Q3's rival is the assumption that ordinary judgements are reliable guides to what is right, which is more than the argument needs, since the argument requires only that the judgement be produced by the feature the case deletes. Q4's rival says that no duty to prevent arises where only one person needs help, whereas the passage says the two duties there become the same duty, which is the opposite of one of them vanishing.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "engineered",
+      "discharged",
+      "rationed"
+    ]
+  },
+  "passage": {
+    "title": "Two Cousins and a Bottle",
+    "reading_time_min": 2.8,
+    "paragraphs": [
+      {
+        "id": "rc-0061-p1",
+        "text": "Is it worse to bring about a harm than to let one happen? Ordinary morality answers yes without much hesitation, and philosophy has a standard way of embarrassing the answer. Take two men who each stand to inherit from a cousin. The first puts poison in the cousin's glass. The second, arriving to do the same, finds that the cousin has reached for the wrong bottle by mistake, and says nothing, watching, ready to act if the mistake is noticed. Both wanted the death, both got it, and neither ran any risk the other did not. Readers who consider the pair carefully report that they can find no difference between the men, and the conclusion usually drawn is that the distinction between doing and allowing is a moral illusion, kept alive by motive and squeamishness."
+      },
+      {
+        "id": "rc-0061-p2",
+        "text": "Notice first what sort of object the pair is. It is engineered. Identical motive, identical outcome, identical certainty of success, identical cost to the man acting: everything has been held fixed except the one feature under examination, which is the point of building it that way. And that is the objection. In order to isolate the distinction, the case has had to remove the conditions under which the distinction does any work, and those conditions are not incidental to ordinary life. They are the shape of it."
+      },
+      {
+        "id": "rc-0061-p3",
+        "text": "Consider what the two requirements ask of a person across a whole life. A prohibition on doing harm can be discharged completely, by everyone, at every moment, and simply by doing nothing. A requirement to prevent harm cannot be discharged at all. At any hour there is more harm in the world that could be prevented than any person could prevent, and the claims compete with one another, so the requirement must be rationed: by nearness, by capacity, by the role a person occupies. The rationing is not a flaw to be tidied away later. Without it the second requirement cannot be stated as a requirement at all."
+      },
+      {
+        "id": "rc-0061-p4",
+        "text": "That is where the ordinary judgement comes from. What a reader registers, when he judges the poisoner more harshly, is not that the act was worse taken on its own. It is that the poisoner has broken a demand no circumstance excuses, while the watcher has failed a demand that every living person fails continuously and must. The engineered pair deletes exactly this. It names one victim, one agent, one opportunity and no competing claim, and where there is only one claim the two requirements collapse into the same requirement. That the difference vanishes there is not a discovery about the difference. It is a description of the case."
+      },
+      {
+        "id": "rc-0061-p5",
+        "text": "None of which rescues the strong claim. The watcher is not less guilty; in the case as built he is plainly not, and anyone who says otherwise is reading his own comfort into it. What has been shown is narrower and only methodological: the paired case cannot carry the weight put on it, because the feature it deletes is the feature that explains the judgement it is testing. Whether that feature also justifies the judgement is a further question, and nothing said here answers it."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0061-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "struct.claim_counterclaim"
+      ],
+      "target_mistake": "remembering that the case equalises motive and result and forgetting that it equalises risk as well, which is the clause the whole objection later depends on",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 4,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "logical_structure"
+      ],
+      "stem": "According to the passage, the paired case is built so that the two men are alike in",
+      "options": {
+        "A": "motive, outcome, certainty of success and the cost run",
+        "B": "motive and outcome, though not in the risk each of them ran",
+        "C": "everything except how near each of the two men stood to the cousin",
+        "D": "every respect the passage treats as morally relevant at all"
+      },
+      "correct": "A",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The second paragraph lists the equalised features in a single line: identical motive, identical outcome, identical certainty of success, identical cost to the man acting. The first paragraph has already said the same thing in narrative form, with neither man running any risk the other did not.",
+        "correct_reasoning": "The correct option is that list. The four items matter later, because the author's objection is not that the case cheats on any of them but that holding all four fixed is precisely what strips out the competing claims. A reader who has the list can see that the case is honestly built and still fails at the job it was built for.",
+        "passage_anchor": "rc-0061-p2",
+        "question_type_note": "A detail question about a constructed example is asking whether you registered the construction. The list of what an example holds fixed is usually stated once, quickly, and is load-bearing for the argument that follows.",
+        "reading_habit": "When an author says a case has been engineered, write down every feature he says was held fixed. The objection he is about to make almost always concerns something not on that list.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The first clause matches the text and the second contradicts it. The opening paragraph says neither man ran any risk the other did not, and the second paragraph equalises the cost to the man acting explicitly.",
+            "seductive_element": "It is the live rival: motive and outcome are the two items a reader retains, and the watcher does feel like the safer of the two men, which makes unequal risk sound right."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nearness belongs to the third paragraph, where it is one of the ways a requirement to prevent harm has to be rationed across a whole life. It plays no part in how the pair is built, and both men are at the cousin's side.",
+            "seductive_element": "Nearness is the most concrete of the rationing terms, and readers who meet it later carry it back to the case they read first."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "This is the disputed point stated as a fact. The whole argument of the passage is that the case leaves out something the author treats as bearing on the judgement, namely the competing claims that make one requirement rationable and the other not.",
+            "seductive_element": "The case really is designed to equalise everything except the feature under test, so a reader hears its designers' intention as the author's verdict."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0061-q2",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "inf.author_vs_reported",
+        "arg.qualification"
+      ],
+      "target_mistake": "converting the argument about how the two requirements differ into a verdict that allowing harm is the lesser wrong, which the last paragraph forbids",
+      "prediction_target": "The learner should be able to say: the author attacks the instrument rather than the verdict, showing that the case deletes what would explain the judgement it is testing, and then declines to draw a moral conclusion from that.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "main_idea",
+        "scope"
+      ],
+      "stem": "Which of the following best characterises the author's answer to the question with which the passage opens?",
+      "options": {
+        "A": "The distinction is an illusion, and motive does the work we mistakenly credit to it.",
+        "B": "The paired case cannot settle the question, since it deletes what produces the judgement.",
+        "C": "Allowing harm is the lesser wrong, because only the duty to prevent harm has to be rationed at all.",
+        "D": "The distinction holds only where an agent has no personal stake in the harm that occurs."
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The last paragraph labels the author's own result: what has been shown is narrower and only methodological. Two sentences later it separates explanation from justification and says nothing here answers the second. A characterisation has to stay inside that label.",
+        "correct_reasoning": "The correct option reports the finding at the altitude the author sets for it. The case is honestly built, its verdict within the case is accepted, and what is denied is the case's authority over the general question, on the ground that it removes the competing claims that make one requirement dischargeable and the other not. That is an objection to an instrument, not a ruling on two men.",
+        "passage_anchor": "rc-0061-p5",
+        "question_type_note": "A best-characterisation question asks for a verb and an object. Where an author refuses to answer the question he raised, an option that answers it is wrong however well it fits the earlier paragraphs.",
+        "reading_habit": "When a passage ends with a sentence beginning what has been shown is, treat that sentence as the author's own summary and check every option against it before checking it against anything else.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the conclusion the first paragraph attributes to others, that the distinction is a moral illusion kept alive by motive and squeamishness, and the remaining four paragraphs exist to deny that the case establishes it.",
+            "seductive_element": "It is stated last in the opening paragraph and stated with confidence, which is where readers habitually expect a thesis to sit."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The premise is the passage's own and the conclusion is refused in the passage's own words: the watcher is not less guilty, and whether the rationing justifies the ordinary judgement is called a further question that nothing here answers.",
+            "seductive_element": "It is the live rival, because it is the conclusion the third and fourth paragraphs seem to be heading towards, and it rewards a reader who followed the argument closely up to the point where it stops."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_condition",
+            "why_wrong": "No condition about stakes appears anywhere. Both men in the case stand to inherit, and the feature the author says the case deletes is the competition between claims, not the presence or absence of an interest in the outcome.",
+            "seductive_element": "The inheritance is the first concrete fact in the passage, and a reader looking for the condition that makes the case unrepresentative may fasten on the most vivid one."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0061-q3",
+      "type": "assumption",
+      "skill": "argument",
+      "patterns": [
+        "cr.assumption_gap",
+        "arg.assumption",
+        "inf.logical_gap"
+      ],
+      "target_mistake": "choosing a claim strong enough to support the argument instead of the one the argument cannot do without",
+      "prediction_target": "The learner should be able to say: the objection only works if the judgement being tested owes something to the feature the case removes, since otherwise removing it would cost nothing.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "inference",
+        "logical_structure"
+      ],
+      "stem": "The author's objection to the paired case depends on which of the following assumptions?",
+      "options": {
+        "A": "A moral requirement is defective if it cannot be obeyed by everyone at every single moment.",
+        "B": "Ordinary judgements about harm are generally reliable guides to what is actually right.",
+        "C": "No imagined case can establish anything at all about a distinction in morality.",
+        "D": "The judgement the case tests is produced, at least partly, by the feature it removes."
+      },
+      "correct": "D",
+      "estimated_time_sec": 100,
+      "explanation": {
+        "expert_notice": "The objection has a shape worth drawing before the options are read. The case deletes competing claims; the ordinary judgement is explained by competing claims; therefore the case cannot test the ordinary judgement. The middle step is the one the author argues for in the fourth paragraph, and it is what the whole objection rests on.",
+        "correct_reasoning": "The correct option is that middle step stated as a condition. Negate it and the objection disappears: if the ordinary judgement owed nothing to the competition between claims, deleting the competition would cost the case nothing and its verdict would stand. The option is also as weak as it can be while still doing the work, saying only at least partly, which is all the argument requires.",
+        "passage_anchor": "rc-0061-p4",
+        "question_type_note": "Assumption questions want the claim the argument cannot survive without, not the strongest claim that would help it. Negate each candidate and watch whether the conclusion falls.",
+        "reading_habit": "Test an assumption option by denying it out loud. If the argument still works with the denial in place, the option was never necessary, however sympathetic it sounds.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The phrase is lifted from the third paragraph, where a prohibition on doing harm can be discharged completely, by everyone, at every moment. There the words describe one requirement’s special ease; here they become a test of soundness that the same paragraph refuses, calling the rationing no flaw to be tidied away.",
+            "seductive_element": "The paragraph does dwell on the impossibility of discharging the second requirement, and a reader takes an emphasised difficulty for a criticism."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The argument needs the judgement to be explained by the deleted feature, not to be correct. The last paragraph is explicit that whether the feature justifies the judgement is a further question, so the author's case survives even if ordinary judgements are unreliable.",
+            "seductive_element": "It is the live rival, because a reader who has watched an author defend an ordinary judgement assumes he must think it sound, and nothing in the middle paragraphs discourages that."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The objection is to one case and to one use of it. The author accepts the case's verdict within the case, saying the watcher is plainly not less guilty there, which he could not do if imagined cases established nothing.",
+            "seductive_element": "Attacking a thought experiment looks like attacking thought experiments, and the wider claim sounds like the principle behind the narrower one."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0061-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.necessary",
+        "scope.condition"
+      ],
+      "target_mistake": "reading the collapse of the two requirements in a single-claim case as one of them ceasing to apply there",
+      "prediction_target": "The learner should predict that since the two requirements coincide in the engineered case and diverge across a life, sameness in one case is compatible with difference in kind.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A person who has harmed nobody has met every moral demand that falls upon him.",
+        "B": "Where only one person needs help, no requirement to prevent harm arises at all.",
+        "C": "Two requirements may coincide in a case and still differ in what they ask of a life.",
+        "D": "The force of a requirement to prevent harm depends on how many other people could have acted."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "Two statements sit at different scales and both are the author's. Across a life, one requirement can be discharged completely and the other cannot be discharged at all. Inside the engineered case, where there is one claim and no competition, the two collapse into the same requirement. The inference is simply that both can be true together.",
+        "correct_reasoning": "The correct option states that compatibility without adding to it. If sameness in a single case were enough to show sameness of requirement, the author's third paragraph would be contradicting his fourth, and he clearly intends neither to be given up. What follows is that a verdict reached in one engineered case tells you about the case, which is exactly what the fourth paragraph concludes.",
+        "passage_anchor": "rc-0061-p4",
+        "question_type_note": "When a passage makes claims at two scales, the inference question usually asks what follows from holding both. Options that suppress one of the scales are the standard decoys.",
+        "reading_habit": "Ask of every claim whether it is about a single case or about a whole life. Two claims that seem to conflict usually answer different questions, and the inference is often just that they can stand together.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The third paragraph says the requirement to prevent harm cannot be discharged at all and the fourth that every living person fails it continuously. Meeting one requirement completely is precisely what leaves the other outstanding.",
+            "seductive_element": "The passage does say a prohibition on doing harm can be discharged completely by doing nothing, and a reader carries that completeness across to the whole of morality."
+          },
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The passage says that where there is only one claim the two requirements collapse into the same requirement, which has both of them applying and coinciding. One of them disappearing would leave nothing for the poisoner to have broken.",
+            "seductive_element": "It is the live rival, because collapse sounds like loss, and the fourth paragraph is describing a case in which the difference between the men vanishes."
+          },
+          {
+            "option": "D",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The rationing terms the passage names are nearness, capacity and role, and it offers them to show why the requirement must be limited rather than to grade its force. Numbers of available helpers are never mentioned.",
+            "seductive_element": "Competing claims and shared responsibility are close neighbours in ordinary thinking, so a reader supplies the arithmetic the passage left out."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "engineered",
+      "passage_use": "It is engineered",
+      "meaning_here": "deliberately built so as to produce one particular effect",
+      "difficulty": "medium"
+    },
+    {
+      "word": "discharged",
+      "passage_use": "can be discharged completely, by everyone, at every moment",
+      "meaning_here": "fully satisfied, so that nothing further is owed",
+      "difficulty": "hard"
+    },
+    {
+      "word": "rationed",
+      "passage_use": "so the requirement must be rationed",
+      "meaning_here": "limited and shared out, because it cannot possibly be met in full",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "A famous kind of test case is described, accepted on its own terms, and then denied the authority everyone gives it. The last paragraph takes back a conclusion you will already have drawn.",
+    "one_sentence_summary": "The paired case designed to show that doing and allowing harm are morally alike reaches that verdict only because it removes the competing claims that make a prohibition dischargeable and a duty of rescue not, so its result describes the case rather than the distinction, without thereby showing that the distinction is justified.",
+    "main_idea": "A prohibition on doing harm can be met completely by everyone at once; a requirement to prevent harm cannot be met at all and must be rationed. That asymmetry is what our ordinary judgement registers. The engineered pair, by holding everything else fixed, removes the competition between claims, and in a case with one claim the two requirements coincide. So the case shows nothing about the distinction, though it also does not show that the distinction is sound.",
+    "simple_explanation": "The question is simple: is killing worse than letting die?\n\nPhilosophers test it with a pair of stories. Two men each expect to inherit from a cousin. One poisons him. The other was going to, but finds the cousin has picked up the wrong bottle by accident, so he just stands there and watches, ready to step in if anything goes wrong. Same wish, same result, same risk. Most people say the two men are just as bad as each other, and conclude that the difference between doing and allowing is not real.\n\nThe author points out what kind of story that is. It has been built on purpose so that everything is identical except the one thing being tested. That is what makes it a clean test. It is also the problem.\n\nHere is why. Think about what the two rules ask of you over a whole life. Do not harm anyone: you can obey that completely, every minute, by doing nothing at all. Prevent harm: you can never obey that completely. At any moment there is more suffering you could stop than you could possibly stop, and the demands pull against each other, so the rule has to be cut down to size, by who is near you, what you can do, what job you hold. That cutting down is not sloppiness. Without it the rule could not be stated.\n\nAnd that, the author says, is what we are actually noticing. The poisoner broke a rule that nothing excuses. The watcher failed a rule everybody fails all the time and cannot help failing. Now look at the story again: one victim, one chance, nobody else asking for help. With only one claim in the picture, the two rules become the same rule. So of course the difference disappears. That tells you about the story, not about the difference.\n\nThe last bit is important. The author does not conclude that the watcher is less guilty. In that story he plainly is not. All that has been shown is that the story cannot settle the big question, because it throws away the very thing that would explain our answer to it. Whether that thing makes our answer right is a different question, and the passage does not try to settle it.",
+    "why_difficult": "The argument has a shape readers are not used to: it accepts the verdict in the case, accepts the case's honesty, and attacks only its authority. A reader who is following well will reach the fourth paragraph with a conclusion forming, that allowing harm really is the lesser wrong, and the fifth paragraph then refuses it flatly. Holding a defence of an intuition's origin apart from a defence of the intuition is the hardest move in the passage, and every question is built on that seam.",
+    "author_intention": "To stop a familiar thought experiment from being treated as decisive, by showing that it succeeds as a test only by deleting the conditions that would explain the answer being tested, and to stop the reader from converting that into a moral verdict of his own.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0061-p1",
+        "role": "Poses the question",
+        "note": "Is doing harm worse than allowing it? Two cousins, one poisoner and one watcher, everything else identical. Most readers find no difference, and conclude the distinction is an illusion."
+      },
+      {
+        "paragraph_id": "rc-0061-p2",
+        "role": "Inspects the instrument",
+        "note": "The pair was built to equalise motive, outcome, certainty and risk. That is what makes it a clean test, and also what makes it remove the conditions the distinction depends on."
+      },
+      {
+        "paragraph_id": "rc-0061-p3",
+        "role": "Names the asymmetry",
+        "note": "A ban on doing harm can be obeyed completely by everyone by doing nothing. A duty to prevent harm can never be obeyed completely, so it has to be rationed by nearness, capacity and role."
+      },
+      {
+        "paragraph_id": "rc-0061-p4",
+        "role": "Answers the question",
+        "note": "That asymmetry is what our judgement registers. The case has one victim and no competing claims, so the two duties coincide there. The difference vanishing describes the case."
+      },
+      {
+        "paragraph_id": "rc-0061-p5",
+        "role": "Refuses the bonus",
+        "note": "This does not make the watcher less guilty, and it does not show the distinction is justified. Only the test has been disqualified."
+      }
+    ],
+    "tone_progression": "Neutral while the question and the case are laid out, analytical and slightly forensic while the case is taken apart, more assured in the fourth paragraph where the answer lands, and then deliberately cold at the end, where the author denies himself the conclusion his argument seems to have earned.",
+    "key_transitions": [
+      "'Notice first what sort of object the pair is. It is engineered.' (opening of paragraph 2) — attention moves from the verdict to the instrument that produced it.",
+      "'That is where the ordinary judgement comes from.' (opening of paragraph 4) — the asymmetry is converted into an explanation of the intuition.",
+      "'None of which rescues the strong claim.' (opening of paragraph 5) — the author refuses the moral conclusion his own argument invites."
+    ],
+    "misunderstanding": "Most readers finish believing the author has defended the ordinary view, so that letting die comes out less wrong than killing. He has defended only the origin of the ordinary view. The fifth paragraph separates explaining a judgement from justifying it and declines the second job in a single sentence, but it arrives after four paragraphs of momentum, and a reader who has been persuaded will often read it as modesty rather than as the point.",
+    "traps_summary": "The options here hand the author the conclusion the reported view reached, hand him the verdict his own argument seems to be heading towards, and offer assumptions stronger than the argument needs. Each is answered from the fifth paragraph's two denials, which are the shortest sentences in the passage.",
+    "reading_lesson": "Learn to separate an explanation of why people believe something from a defence of the belief, because authors who supply the first are constantly read as supplying the second. When a passage explains the origin of a judgement, look for the sentence that says whether the origin justifies it, and if the author declines to say, refuse every option that decides for him. The habit transfers to any passage about intuitions, biases or received opinions, where this confusion is the standard trap.",
+    "real_world": "The same move settles arguments about neglect and cruelty, about a state that fails to feed and a state that starves, and about any comparison between what an institution did and what it merely permitted.",
+    "reflection_question": "When you last judged someone more harshly for acting than for standing by, were you weighing the act or the excuse available to each?",
+    "takeaway": "A test that removes the thing that would explain your answer cannot be used to check your answer."
+  }
+}

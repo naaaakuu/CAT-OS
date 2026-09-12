@@ -1,0 +1,456 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0056",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "literature-theory",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "main-idea-extraction",
+      "inference",
+      "argument-tracking",
+      "scope-control"
+    ],
+    "word_count": 427,
+    "question_count": 5,
+    "question_types": [
+      "agree_disagree",
+      "except",
+      "inference",
+      "primary_purpose",
+      "strengthen"
+    ],
+    "theme": "the untranslatable word as a claim that has shrunk: it began as a claim about what speakers could think, retreated under testing to a claim about what one word can carry, and now records only how many words a rendering takes, so what is lost is form rather than meaning",
+    "estimated_time_min": 8.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "An easy passage whose difficulty is entirely chronological: three stages of one claim, each weaker than the last, and a closing concession that keeps a real loss in the picture. Every question is decided by which stage an option belongs to, which is why the discarded first stage is offered back three times.",
+    "length_class": "medium",
+    "structure": "history_of_an_idea",
+    "viewpoints": 2,
+    "tone": "explanatory, gently deflationary",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 3,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.chronology",
+      "struct.qualification",
+      "comp.purpose",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.central_idea",
+      "arg.concession",
+      "arg.qualification",
+      "arg.generalization",
+      "arg.evidence",
+      "inf.strongly_supported",
+      "inf.author_vs_reported",
+      "inf.reasonable_implication",
+      "cr.strengthen",
+      "scope.time_period",
+      "scope.abstraction_level",
+      "lang.temporal_qualifier",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Every question in this set can be got wrong in the same way, by answering from the stage of the history the option belongs to rather than the stage the stem asks about. Q1's live rival is the option that nothing of consequence is lost in translation, which a reader builds out of the second paragraph and which the fourth paragraph refuses in three words: the loss is real. Q2's rival is the option whose first clause is the passage's own finding about explanation and whose second clause denies any loss at all; the same three words settle it. Q3's exception is the claim about hearers who cannot come to understand, which is the discarded first stage and not the modern use the stem asks about. Q4's rival says that disagreement about the label is disagreement about meaning, which the third paragraph forecloses by making the boundary a matter of taste rather than of evidence. Q5's rival is the paragraph of explanation, which is genuine evidence against the first stage and says nothing about what the modern label reports; the key instead shows the label tracking the receiving language's stock of words, which is what the author claims it now records.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "retreated",
+      "render",
+      "economy"
+    ]
+  },
+  "passage": {
+    "title": "The Word That Needs a Sentence",
+    "reading_time_min": 2.3,
+    "paragraphs": [
+      {
+        "id": "rc-0056-p1",
+        "text": "Collections of untranslatable words are a popular genre, and the idea behind them is a good deal older than the genre. In the nineteenth century a language's vocabulary was often read as a map of its speakers' minds. A word with no equivalent elsewhere was taken as evidence that its speakers held a concept the rest of us lacked, and a list of such words was therefore a list of things other people could think and we could not. On that understanding, untranslatability was a discovery about the reach of thought."
+      },
+      {
+        "id": "rc-0056-p2",
+        "text": "The claim did not survive being pressed. If a word named a concept unavailable to outsiders, outsiders ought not to be able to acquire it; yet a paragraph of explanation is usually enough, and the pupil afterwards uses the idea as freely as a native speaker does. Scholars who went looking for the exception kept finding instead that what a foreign word named could be explained, understood and then employed. The claim therefore retreated to safer ground. Nobody now argues that the concept cannot be had. What is said instead is that it cannot be carried by a single word."
+      },
+      {
+        "id": "rc-0056-p3",
+        "text": "The retreat has continued quietly ever since, and the modern use of the term is its end point. A word is called untranslatable when putting it into another language takes a phrase, a clause or a footnote. Nothing about minds is being claimed at all. What is being recorded is that one language has packed into a single item what another must assemble out of several, and the test applied is length. A word that would need eight English words to render counts; a word that needs two does not; and where the boundary falls between them is a matter of taste rather than of evidence."
+      },
+      {
+        "id": "rc-0056-p4",
+        "text": "The history is worth keeping in view, because the two claims point a translator in opposite directions. If a concept were genuinely unavailable, translation would be impossible and the honest course would be to leave the word standing in the original. If the concept is available but expensive, translation is possible and the cost is paid in length, rhythm and emphasis. That cost is not nothing. A poem is partly its economy, and a line that carried one word in the original carries a clause in English, which alters the pace at which a reader arrives at its close. The loss is real. It is a loss of form rather than of meaning, and the pleasure taken in untranslatable words depends on not noticing which of the two has gone."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0056-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "struct.history_of_an_idea",
+        "arg.concession"
+      ],
+      "target_mistake": "taking the demolition in the second paragraph for the whole passage and missing the fourth paragraph's insistence that a real loss remains",
+      "prediction_target": "The learner should be able to say: the author is tracking one claim as it shrinks from a claim about minds to a claim about word counts, and then naming what is genuinely lost even after the shrinking.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is to",
+      "options": {
+        "A": "advise translators to leave a word in its original form when English would need a whole clause to render it",
+        "B": "trace a claim's retreat from the reach of thought to the economy of expression, and name what is genuinely lost",
+        "C": "show that nothing of consequence is lost when a word without an equivalent is rendered into another language",
+        "D": "explain why books collecting words that resist translation have become so popular with general readers"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The passage is organised by time. The first paragraph gives the claim in its strongest form, the second records the pressure that broke it, the third states what is left of it, and the fourth asks what the difference between the versions costs. A purpose statement has to carry both halves: the shrinking, and the loss that survives it.",
+        "correct_reasoning": "The correct option names the movement the passage actually performs and stops where the passage stops. Untranslatability begins as a discovery about the reach of thought, is pushed back by the finding that a paragraph of explanation suffices, and ends as a report about how many words a rendering takes. The fourth paragraph then refuses to treat that as a demolition, since a poem is partly its economy and the loss of form is real. Nothing in the option goes beyond either move.",
+        "passage_anchor": "rc-0056-p4",
+        "question_type_note": "A primary-purpose question wants the verb of the whole passage, not of its liveliest paragraph. Where a passage takes something apart and then rescues part of it, the verb has to cover the rescue.",
+        "reading_habit": "When a passage ends by conceding something, check whether your one-line summary of it has room for the concession. If it has not, the summary is of the middle of the passage rather than of the passage.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "Leaving the word standing appears inside a conditional the author rejects: it would be the honest course if the concept were genuinely unavailable, and the whole second paragraph says it is not. A hypothetical consequence of a discarded premise is not advice.",
+            "seductive_element": "The sentence really is in the passage and really does describe a course of action, and the paragraph around it is about what translators should do."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The closing paragraph says the cost is not nothing and then, in three words, that the loss is real. What the author denies is that the loss is one of meaning, which is a different denial from the one this option makes.",
+            "seductive_element": "It is the live rival, because the second and third paragraphs do nothing but subtract from the claim, and a reader who stops there has met only subtraction."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_narrow",
+            "why_wrong": "The popularity of such collections is the first clause of the passage and a half-clause of the last sentence; between them lies a history of a claim, which this option leaves out entirely.",
+            "seductive_element": "The closing line does explain where the pleasure of such books comes from, so a reader who weights the final sentence heavily can take the genre for the subject."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0056-q2",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_vs_reported",
+        "comp.paraphrase",
+        "arg.qualification"
+      ],
+      "target_mistake": "reading the passage's argument against the nineteenth-century claim as an argument that translation costs nothing",
+      "prediction_target": "The learner should predict that the author will agree with a statement locating the modern label in the vocabularies of two languages, and refuse both the old claim about minds and any claim that nothing is lost.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "main_idea"
+      ],
+      "stem": "With which of the following statements would the author most likely agree?",
+      "options": {
+        "A": "A language that has no word for something shows a limit in what its speakers are able to think.",
+        "B": "Since a foreign word can be explained in a paragraph, nothing is lost when it is translated.",
+        "C": "Calling a word untranslatable now reports a difference between vocabularies, not between minds.",
+        "D": "A translator should protect a poem's economy even where doing so means departing from the sense."
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph states the modern use and then says what it is not: nothing about minds is being claimed at all. What is being recorded is that one language has packed into a single item what another must assemble out of several. Those two sentences are the author's own position and answer the question directly.",
+        "correct_reasoning": "The correct option is that pair of sentences compressed. The label, as it is now used, describes the stock of single words two languages happen to have, and the author says so explicitly before making the test one of length. Choosing it also requires noticing that the author has not thereby said the translation is free, which is the point of the following paragraph.",
+        "passage_anchor": "rc-0056-p3",
+        "question_type_note": "An agreement question lives on the line between what an author reports and what an author holds. In a passage that narrates a claim's history, everything before the final stage is reported.",
+        "reading_habit": "Before reading the options of an agreement question, say out loud which sentences in the passage are the author speaking for himself. In a historical narrative that is usually the last stage and the commentary on it.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the nineteenth-century reading set out in the first paragraph, and the second paragraph is devoted to its failure: a paragraph of explanation is usually enough, after which the pupil uses the idea as freely as a native speaker.",
+            "seductive_element": "It is the most quotable idea in the passage and is stated at length before it is answered, which is how a reported view acquires the sound of a thesis."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The first half is the passage's own finding; the second half runs into the sentence that the loss is real. What the author denies is that meaning is lost, and he is at pains to say that length, rhythm and emphasis are.",
+            "seductive_element": "It is the live rival, because the first clause is drawn straight from the passage and the second seems to be the obvious consequence of it."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No instruction to translators is issued anywhere. The passage describes what a translator is choosing between and what each choice costs, and it never says which cost ought to be paid.",
+            "seductive_element": "The closing paragraph is about form and economy, and a reader who has just been shown a loss expects to be told how to avoid it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0056-q3",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "scope.time_period"
+      ],
+      "target_mistake": "answering from the first stage of the history when the stem asks about the last one",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 1,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "According to the passage, each of the following is true of the way the word untranslatable is used now EXCEPT:",
+      "options": {
+        "A": "The test that decides the question is how much room a rendering has to take up.",
+        "B": "No claim is being made about what the speakers of a language are able to think.",
+        "C": "Where the line falls is settled by taste rather than by evidence.",
+        "D": "The word names something that hearers of another language cannot understand."
+      },
+      "correct": "D",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The stem fixes a date. Three of the four statements sit inside the third paragraph, which describes the modern use and nothing else; the fourth belongs to the first paragraph, where untranslatability was still a discovery about the reach of thought.",
+        "correct_reasoning": "The exception is the discarded first stage. The second paragraph kills it outright by reporting that scholars who went looking for a concept outsiders could not acquire kept finding instead that it could be explained, understood and then employed, and the third paragraph then states that nothing about minds is being claimed at all. Everything else in the list is a sentence of the third paragraph in other words.",
+        "passage_anchor": "rc-0056-p3",
+        "question_type_note": "An EXCEPT question is three verifications and one exclusion. Where a passage narrates stages, the exception is usually a true statement about the wrong stage, which is why the stem's time words are worth underlining.",
+        "reading_habit": "In a passage organised as a history, write a one-word label beside each paragraph for the stage it describes. Then answer any detail question by first deciding which label the stem is pointing at.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says the test applied is length, and illustrates it with a word needing eight English words against one needing two; room taken up is the same test in plainer words, so it is verified rather than excluded.",
+            "seductive_element": "The option's wording appears nowhere in the passage, which makes a faithful paraphrase look like an invention."
+          },
+          {
+            "option": "B",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "The third paragraph says exactly this, in a sentence of its own: nothing about minds is being claimed at all. A reader who carries the first paragraph forward hears the whole passage as still discussing minds.",
+            "seductive_element": "Minds are the subject of the opening paragraph and the most memorable thing in the passage, so a denial of them reads as a claim the passage never made."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "This closes the third paragraph word for word in substance: where the boundary falls is a matter of taste rather than of evidence. It is an aside about the modern use, and asides are still statements.",
+            "seductive_element": "It sounds like a judgement the author is passing rather than a description he is giving, and readers exclude judgements when a stem asks what a passage says."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0056-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "treating untranslatability as a property a word carries about with it, when the passage has made it a relation between two vocabularies",
+      "prediction_target": "The learner should predict that if the test is what the receiving language must assemble, then the label depends on which language is receiving.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A word that another language must render with a clause names something its speakers had never conceived.",
+        "B": "The size of a language's vocabulary is a good measure of the range of its literature.",
+        "C": "The same word may count as untranslatable into one language and not into another.",
+        "D": "Disagreement about whether a word is untranslatable is a disagreement about what the word means."
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph defines the modern label with two languages in the sentence, not one: what is being recorded is that one language has packed into a single item what another must assemble out of several. A property stated with two terms in it cannot belong to either term alone.",
+        "correct_reasoning": "If the test is how much the receiving language has to assemble, then changing the receiving language changes the result. A word that English can only render with a clause may have a single ready equivalent somewhere else, and the passage's own description of the test then returns a different verdict. The inference is one step and the step is the definition itself.",
+        "passage_anchor": "rc-0056-p3",
+        "question_type_note": "When a passage redefines a term as a relation between two things, expect a question that asks what follows from its being a relation. The commonest wrong answer treats the relation as a property of one side.",
+        "reading_habit": "Count the nouns in an author's definition. If two things are named in it, any option that speaks of only one of them has quietly changed the definition.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The second paragraph spends its length denying precisely this, and the third repeats the denial: nothing about minds is being claimed at all. The clause measures a vocabulary, not a history of thought.",
+            "seductive_element": "It is the idea the passage opens with, and opening ideas are the ones a hurried reader carries to the questions."
+          },
+          {
+            "option": "B",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Literature enters only as a poem whose economy a translation disturbs. Nothing in the passage compares languages by the size of their vocabularies or by what their literatures can reach.",
+            "seductive_element": "The passage is about words and about poetry, and a claim joining the two sounds like the kind of thing it has been arguing."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The third paragraph forecloses it: where the boundary falls is a matter of taste rather than of evidence, so two people who agree entirely about what a word means can still divide over whether it earns the label.",
+            "seductive_element": "It is the live rival, because a dispute about a word does ordinarily turn on meaning, and the option keeps the passage's own subject matter while changing what the dispute is about."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0056-q5",
+      "type": "strengthen",
+      "skill": "strengthen_weaken",
+      "patterns": [
+        "cr.strengthen",
+        "arg.evidence",
+        "elim.near_tie"
+      ],
+      "target_mistake": "strengthening the step the passage has already completed, that concepts can be acquired, instead of the claim about what the modern label reports",
+      "prediction_target": "The learner should predict that the strengthener will show the label tracking the receiving language's stock of words rather than anything about its speakers.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument",
+        "inference"
+      ],
+      "stem": "Which of the following, if true, would most strengthen the author's account of what the modern label records?",
+      "options": {
+        "A": "Speakers whose language has a single word for a feeling grasp it more readily than speakers who need a clause.",
+        "B": "A line of poetry loses some of its pace when a word in the original becomes a clause in the translation.",
+        "C": "Learners given a paragraph of explanation go on to use a foreign concept as fluently as native speakers do.",
+        "D": "Words that English renders with a clause lose the label wherever a single native word happens to exist."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The claim under test is narrow and belongs to the third paragraph: the modern label records how much the receiving language must assemble. Evidence for it has to be evidence about when the label is and is not applied, not about what speakers can think or what translation costs.",
+        "correct_reasoning": "If the same foreign word attracts the label in English and loses it wherever a ready equivalent exists, then the label is varying with the receiving language's stock of single words and with nothing else. That is the author's claim turned into a prediction and confirmed, which is what a strengthener does: it makes the claim more likely without adding a new one.",
+        "passage_anchor": "rc-0056-p3",
+        "question_type_note": "A strengthen question requires the exact claim first. Options that support a neighbouring claim the passage has already established are the standard decoys, because they are true, relevant to the topic and useless to the step being tested.",
+        "reading_habit": "Write the claim to be strengthened in one sentence before reading the options, and check that your sentence has the same subject as the stem. Half of strengthen errors are strengthenings of the wrong sentence.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This supports the claim the passage has abandoned, that a single word marks a difference in what its speakers can reach. It props up the first stage of the history against the author rather than for him.",
+            "seductive_element": "It sounds like evidence that single words matter, and the author does insist that packing into a single word matters."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "This is the fourth paragraph's concession restated, and the concession is about what translation costs. The claim being tested is about what the label reports, which the cost of a translation leaves untouched.",
+            "seductive_element": "It is the passage's own material, stated accurately, and agreeing with an author feels like supporting him."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This is the finding that forced the retreat, already established in the second paragraph. Showing again that concepts can be acquired does nothing to show what the word is being used to record once that battle is over.",
+            "seductive_element": "It is the live rival, because it is the passage's most decisive piece of evidence, and a reader reaches for the strongest evidence rather than the relevant one."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "retreated",
+      "passage_use": "The claim therefore retreated to safer ground",
+      "meaning_here": "gave up its strong form and fell back to a weaker one that is harder to attack",
+      "difficulty": "easy"
+    },
+    {
+      "word": "render",
+      "passage_use": "A word that would need eight English words to render",
+      "meaning_here": "put into another language",
+      "difficulty": "medium"
+    },
+    {
+      "word": "economy",
+      "passage_use": "A poem is partly its economy",
+      "meaning_here": "the practice of saying much in few words",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "One claim, told in three versions, each weaker than the last. Keep track of which version a sentence belongs to, because the questions are built at the joins.",
+    "one_sentence_summary": "The idea that some words cannot be translated began as a claim that other people could think what we cannot, shrank under testing into a claim that a concept cannot be carried by one word, and now records only how many words a rendering takes, which means the loss in translation is one of form rather than of meaning.",
+    "main_idea": "Untranslatability used to mean that a concept was out of reach for outsiders. Testing showed that outsiders acquire such concepts easily, so the claim shrank until it now means only that a rendering takes several words instead of one. That is a report about two vocabularies rather than about two minds, and what a translation loses is rhythm and economy rather than sense.",
+    "simple_explanation": "You have probably seen lists of foreign words that supposedly cannot be translated. The idea behind them is old. In the nineteenth century people thought a language's words showed what its speakers were able to think, so a word with no English equivalent meant those speakers had an idea we could not have.\n\nThat turned out to be wrong. If the idea were really out of reach, you would not be able to teach it to an outsider. But you can. Explain the word for a paragraph and the learner starts using the idea straight away, as comfortably as anyone born to it. So the claim got smaller. Nobody says any more that you cannot have the concept. They say only that you cannot fit it into one word.\n\nAnd it has kept getting smaller. Today a word gets called untranslatable when putting it into English takes a phrase, a clause or a footnote. That is a fact about how the two languages package things, not about anyone's mind. One language has a ready-made word; the other has to build the thing out of parts. How many parts are too many is a matter of taste.\n\nThe author's last point matters. Do not conclude that translation is free. If a concept were really unavailable, translation would be impossible, and you would simply leave the foreign word on the page. But if the concept is available and merely takes longer to say, you can translate, and you pay in length and rhythm. In a poem that is a genuine loss, because part of what a poem is doing is saying a lot in a very small space. What you lose is the shape, not the sense. The fun of untranslatable-word lists depends on people not noticing which of the two has gone.",
+    "why_difficult": "The passage never announces its stages. It narrates them, so a reader who is not tracking time will hold all three versions of the claim in mind at once and answer questions from whichever version is most memorable, which is always the first. The second difficulty is the ending: after three paragraphs of subtraction the fourth stops subtracting, and readers who have settled into the rhythm of demolition miss the sentence that says the loss is real.",
+    "author_intention": "To show that a fashionable idea has quietly changed its meaning, so that the reader stops taking the excitement attached to the old version as though it still belonged to the new one.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0056-p1",
+        "role": "The strong first version",
+        "note": "In the nineteenth century a word with no equivalent was treated as proof that its speakers had a thought we could not have. Untranslatability was about the limits of thinking."
+      },
+      {
+        "paragraph_id": "rc-0056-p2",
+        "role": "The version fails",
+        "note": "If the thought were out of reach, outsiders could not be taught it. They can, in about a paragraph, and afterwards they use it freely. So the claim falls back: not that you cannot have the idea, only that you cannot fit it in one word."
+      },
+      {
+        "paragraph_id": "rc-0056-p3",
+        "role": "What is left of it",
+        "note": "Now a word is untranslatable when the rendering needs a phrase or a footnote. That is a statement about the two languages' stock of words, and the dividing line is a matter of taste."
+      },
+      {
+        "paragraph_id": "rc-0056-p4",
+        "role": "What still costs something",
+        "note": "The two versions send translators opposite ways. Since the concept is available, translation is possible but is paid for in length and rhythm. A poem loses its economy, which is a real loss of form rather than of meaning."
+      }
+    ],
+    "tone_progression": "Reportorial while the old claim is set out, briskly corrective while it is dismantled, drier still while the modern use is described, and finally careful, slowing down to protect the one thing that really does go missing.",
+    "key_transitions": [
+      "'The claim did not survive being pressed.' (opening of paragraph 2) — the first version is put under test and begins to give way.",
+      "'The retreat has continued quietly ever since, and the modern use of the term is its end point.' (opening of paragraph 3) — the history arrives at the present.",
+      "'That cost is not nothing.' (paragraph 4) — the passage stops subtracting and defends a residue."
+    ],
+    "misunderstanding": "Readers build one of two wrong pictures. The first keeps the nineteenth-century claim alive, so that untranslatability still sounds like proof that other people think differently, and every option about minds looks answerable. The second overcorrects: having watched the claim shrink for three paragraphs, the reader concludes that nothing is lost in translation at all, and walks straight past the sentence saying the loss is real. The passage's position is between them, and it is stated only in the last four lines.",
+    "traps_summary": "The options here offer the discarded first version back as the author's view, take a conditional consequence for advice, and stop the argument one paragraph early so that nothing appears to be lost. Each is repaired by asking which stage of the history a statement belongs to.",
+    "reading_lesson": "When a passage narrates how an idea changed, label each stage as you pass it and keep the labels beside you for the questions. Almost every distractor in a historical passage is a true statement about the wrong stage, and such an option cannot be caught by asking whether it is in the passage, only by asking when it was in the passage. The habit transfers to any passage that reports what was once believed before saying what is believed now.",
+    "real_world": "The same shrinkage happens to words like addictive, exponential and literally: a term that once carried a strong technical claim survives as a loose one, and the excitement attached to the old sense is still being charged for the new.",
+    "takeaway": "An idea can keep its name long after it has given up the claim that made it interesting.",
+    "reflection_question": "Which words do you use with the confidence of their older, stronger meaning, and would you still use them if you said out loud what they now claim?"
+  }
+}

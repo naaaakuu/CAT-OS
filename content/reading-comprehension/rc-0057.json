@@ -1,0 +1,328 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0057",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "media",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "inference",
+      "scope-control",
+      "qualifier-tracking",
+      "vocabulary-in-context"
+    ],
+    "word_count": 316,
+    "question_count": 3,
+    "question_types": [
+      "inference",
+      "phrase_in_context",
+      "title_selection"
+    ],
+    "theme": "two audience failures that are routinely confused: one is an omission that exposure repairs, the other an account of the opposition that exposure feeds, and what marks the second is not isolation but a discount fixed in advance that nothing the discounted source does can move",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-12",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-12",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-03",
+    "reviewer_notes": "Three hundred words carrying a distinction, a consequence and a qualification that takes most of the third paragraph. The qualification is the hard part: the passage refuses to make discounting a source a fault, so every option that treats scepticism itself as the failing is out, and the deciding property is whether the discount can be moved by evidence.",
+    "length_class": "short",
+    "structure": "claim_qualification",
+    "viewpoints": 1,
+    "tone": "analytical, carefully qualified",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.qualification",
+      "struct.contrast",
+      "struct.definition",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "arg.qualification",
+      "arg.causal_claim",
+      "inf.strongly_supported",
+      "inf.necessary",
+      "scope.condition",
+      "scope.abstraction_level",
+      "lang.contrast_marker",
+      "word.context_clue",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option that widening a reader's range of sources leaves him no better off, which a candidate defends from the sentence that exposure is the diet of the second condition; the second paragraph attaches that to one case only and says of the other that supplying the missing voice repairs it and that the repair scales. The key survives because the passage says the second condition is one in which the other side is heard constantly, so a count of sources cannot separate the two. Q2's rival reads rebuttal as a successful answer on the merits; the sentence makes the rebuttal something the dissenting voice arrives already carrying, supplied by the standing account rather than earned against the argument, and the following sentence says each new dissenter only makes the account more plausible. Q3's rival is the title about wider reading, which names the remedy the passage grants for the first condition and denies for the second; the key takes the third paragraph's own closing formulation, where the deciding property is named as immunity rather than isolation.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "omission",
+      "diet",
+      "immunity"
+    ]
+  },
+  "passage": {
+    "title": "Heard and Discounted",
+    "reading_time_min": 1.7,
+    "paragraphs": [
+      {
+        "id": "rc-0057-p1",
+        "text": "Two complaints about modern audiences are routinely run together, and they describe different structures. In the first, a person does not encounter the other side at all: the feeds are narrow, the acquaintances agree, and the arguments against have simply never arrived. Call that an omission. In the second, the other side is heard constantly, and heard through a standing account of why it should not be believed, an account that names its motives, its backers and its record of having been wrong before. Nothing has been left out. Something has been added."
+      },
+      {
+        "id": "rc-0057-p2",
+        "text": "The difference matters because the obvious remedy fits only the first. Where the trouble is an omission, supplying the missing voice repairs it, and the repair scales: more sources, wider feeds, the habit of reading the opposition in its own words. Where the trouble is the standing account, the missing voice was never missing, and more of it arrives with its rebuttal attached. Each new dissenter is one further instance of the discredited kind, and the account grows more plausible with every one it absorbs. Exposure, which is the cure for the first condition, is the diet of the second."
+      },
+      {
+        "id": "rc-0057-p3",
+        "text": "The distinction is easier to state than to apply, and it would be a poor reader who used it as a name for people he disagreed with. Discounting a source is not in itself a vice. Someone who has learned that a particular outlet invents its quotations is reasoning well when he stops trusting it. What separates the two cases is not the discount but the conditions attached to it. An ordinary judgement about a source can be moved by what that source does next; the standing account cannot be, since it has already explained in advance whatever the source might do. Immunity, not isolation, is the property worth naming, and it is much the harder of the two to see from outside."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0057-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.necessary",
+        "scope.condition"
+      ],
+      "target_mistake": "carrying the verdict on exposure across from the second condition to the first, where the passage says the repair works and scales",
+      "prediction_target": "The learner should predict that the inference will follow from the second condition being one in which the other side is already heard: whatever tells the two apart, it is not how much a reader reads.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "scope",
+        "logical_structure"
+      ],
+      "stem": "Which of the following can most reasonably be inferred from the passage?",
+      "options": {
+        "A": "A reader who stops trusting a source he has found unreliable has entered the second condition.",
+        "B": "Whether a reader is in the second condition cannot be settled by counting the sources he consults.",
+        "C": "Widening a reader's range of sources leaves him no better placed than he was before he widened it.",
+        "D": "The second condition is the work of those who supply the standing account rather than of those who accept it."
+      },
+      "correct": "B",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The first paragraph makes the second condition one in which the other side is heard constantly, and the second paragraph adds that fresh dissenters are absorbed rather than resisted. A diagnosis that depends on how much opposition a reader meets therefore cannot distinguish the two structures, because the reader in the worse one may meet more of it.",
+        "correct_reasoning": "The correct option follows from the passage's own description of what the second condition is. Nothing has been left out there; something has been added, and the thing added is an account. So a tally of sources returns the same figure for a reader who has been repaired and a reader who is being fed, and the third paragraph confirms where the difference actually lies, in whether the discount can be moved by what a source does next.",
+        "passage_anchor": "rc-0057-p1",
+        "question_type_note": "When a passage defines two conditions that look alike from the outside, an inference question usually asks what cannot be used to tell them apart. The measurement the passage rules out is the one it has just shown to be equal across both.",
+        "reading_habit": "Whenever an author says two situations differ, ask which observable features they share. Those shared features are what the inference questions will be built on, and every option that diagnoses by one of them is out.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The third paragraph rules this out in two sentences: discounting a source is not in itself a vice, and the reader who has caught an outlet inventing its quotations is reasoning well when he stops trusting it.",
+            "seductive_element": "The passage's villain is an account that discredits sources, so any discrediting looks like the thing being complained of."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "This lifts a verdict that the second paragraph attaches to one case only. Where the trouble is an omission, that paragraph says the missing voice repairs it and that the repair scales; the failure of exposure is stated of the standing account alone.",
+            "seductive_element": "It is the live rival, because the memorable last line of that paragraph makes exposure sound discredited in general, and the option simply drops the clause that limits it."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nobody is said to supply the account. The passage describes a structure in which a reader's own judgement about a class of sources has become unrevisable, and it never asks where that judgement came from.",
+            "seductive_element": "An account with motives and backers in it sounds like something manufactured, so a reader supplies an author for it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0057-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.paraphrase",
+        "struct.contrast"
+      ],
+      "target_mistake": "reading rebuttal as an answer won on the merits rather than as something the dissenting voice is received already carrying",
+      "prediction_target": "The learner should paraphrase from the sentence that follows: the dissenter is filed as one more instance of a discredited kind, so the objection is discounted before it is weighed.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "In the second paragraph, the statement that more of the missing voice \"arrives with its rebuttal attached\" most nearly means that",
+      "options": {
+        "A": "the dissenting voice comes with a ready reason for discounting it, so hearing it changes nothing",
+        "B": "the dissenting voice is met with a stronger argument than the one it has itself offered",
+        "C": "the dissenting voice is kept from reaching the audience in the first place",
+        "D": "the dissenting voice turns out to be weaker than the sources the audience has already chosen to trust"
+      },
+      "correct": "A",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The sentence after the phrase explains it: each new dissenter is one further instance of the discredited kind, and the account grows more plausible with every one it absorbs. The rebuttal is therefore not produced in answer to the dissenter; it was ready before the dissenter spoke, and is attached on arrival.",
+        "correct_reasoning": "The correct option keeps both halves of the image. The reason for dismissal travels with the voice rather than being earned against it, which is why the standing account gains from each new instance instead of being tested by it. Nothing is added about the quality of either argument, because the phrase says nothing about quality.",
+        "passage_anchor": "rc-0057-p2",
+        "question_type_note": "A phrase question on a metaphor is settled by the sentence the author uses to unpack it, which is usually the one immediately after. Options that make the metaphor a judgement of merit are the standard decoys.",
+        "reading_habit": "Read one sentence past a striking phrase before choosing. Authors who coin an image almost always explain it in plain words in the next breath, and that plain sentence is the answer.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "A rebuttal in ordinary use is an answer that engages and defeats; here it is supplied in advance by the standing account, which is why the passage says each dissenter makes that account more plausible rather than less.",
+            "seductive_element": "It is the live rival, because the dictionary sense of the word really is an answer given on the merits, and nothing in the phrase itself announces otherwise."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The first paragraph is explicit that in this condition the other side is heard constantly, and the second says the missing voice was never missing. Blocking the voice is the other structure, the one the passage calls an omission.",
+            "seductive_element": "Both conditions end with the dissenting view failing to land, so a reader collapses them into the more familiar one."
+          },
+          {
+            "option": "D",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "No comparison of strength between the dissenter and the trusted sources appears anywhere. The passage's point is that the dissenter's argument is not weighed at all, since a reason for discounting it is already in place.",
+            "seductive_element": "The standing account does cite motives, backers and past error, which sounds like the raw material of a comparison."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0057-q3",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "scope.abstraction_level",
+        "arg.qualification"
+      ],
+      "target_mistake": "titling the passage from its first condition or its rejected remedy instead of from the property the third paragraph names as decisive",
+      "prediction_target": "The learner should be able to say: a title must name the thing that makes the second structure what it is, which the passage says is a discount nothing can move.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "scope"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "Why We Never Hear the Other Side",
+        "B": "The Case Against Distrusting a Source",
+        "C": "Immunity, Not Isolation",
+        "D": "How Wider Reading Repairs a Narrow Mind"
+      },
+      "correct": "C",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The passage ends by naming its own subject: immunity, not isolation, is the property worth naming. Everything before it is arranged to earn that line, since the first paragraph separates the structures, the second shows why the remedy divides them, and the third fixes the deciding property.",
+        "correct_reasoning": "The correct title takes the author's closing formulation and carries the whole argument at the right altitude. It keeps the contrast the passage is built on, points at the structure the passage says is the harder one, and commits to the claim that what matters is not what a reader fails to meet but what his judgement can no longer be moved by.",
+        "passage_anchor": "rc-0057-p3",
+        "question_type_note": "A title question is a main-idea question with a word limit. In a claim-and-qualification passage the title has to survive the qualification, so test each option against the final paragraph rather than the first.",
+        "reading_habit": "Ask which paragraph an option's title would let you skip. A title that leaves the last paragraph looking optional has named the setup rather than the claim.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "This names the first structure, the omission, which the passage introduces only to set the second beside it. The condition the passage spends two paragraphs on is one in which the other side is heard constantly.",
+            "seductive_element": "It is the complaint most readers arrive with, and it is genuinely the subject of the passage's opening lines."
+          },
+          {
+            "option": "B",
+            "trap_type": "criticism_as_rejection",
+            "why_wrong": "The third paragraph refuses this in terms: discounting a source is not in itself a vice, and the reader who abandons an outlet that invents quotations is reasoning well. A complaint about one unrevisable discount has been enlarged into a case against distrust as such.",
+            "seductive_element": "The passage's whole second structure is built out of distrust, so a title condemning distrust looks like a summary of it."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Repairs is the passage’s own verb and it belongs to the first condition alone; of the second the same paragraph says exposure is the diet rather than the cure. The words are borrowed and the claim underneath them has been widened to cover the whole passage.",
+            "seductive_element": "It is the live rival, because the passage really does endorse wider reading somewhere, and the endorsement is the most practical sentence in it."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "omission",
+      "passage_use": "Call that an omission",
+      "meaning_here": "a case of something simply being left out rather than rejected",
+      "difficulty": "easy"
+    },
+    {
+      "word": "diet",
+      "passage_use": "is the diet of the second",
+      "meaning_here": "what feeds and sustains something, rather than what cures it",
+      "difficulty": "medium"
+    },
+    {
+      "word": "immunity",
+      "passage_use": "Immunity, not isolation, is the property worth naming",
+      "meaning_here": "being beyond the reach of anything that would otherwise count against a judgement",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "Three hundred words, two structures that look identical from outside, and a third paragraph that takes back the easy way of telling them apart. Read the last four sentences twice.",
+    "one_sentence_summary": "One audience failure is an omission that more reading repairs, the other is a ready-made account of the opposition that more reading only confirms, and what marks the second is not that the dissenting voice is absent but that no dissenting voice could now change the judgement about it.",
+    "main_idea": "Two complaints get run together. In the first, the other side is never heard, and supplying it works. In the second, the other side is heard all the time and arrives already discredited, so exposure strengthens rather than weakens the position. The author then refuses to call distrust itself the fault: the deciding property is whether the judgement about a source could still be moved by what that source does.",
+    "simple_explanation": "People complain about audiences in two different ways, and the two are not the same thing.\n\nThe first is simple absence. Your feed is narrow, your friends agree with you, and the arguments on the other side have never reached you. Something is missing. The fix is obvious and it works: read more, read wider, read your opponents in their own words.\n\nThe second is stranger. Here you hear the other side all the time. What you also have is a ready explanation of why those people should not be believed, their motives, who pays them, how often they have been wrong. Nothing is missing from this picture. Something extra has been put into it.\n\nAnd that changes what happens when you read more. Every new opponent you meet is filed as one more example of the sort of person you already have a reason to ignore, so the explanation looks better each time. The very thing that cures the first problem feeds the second.\n\nThe author then adds a warning. Do not use this as an insult for people you disagree with, and do not conclude that distrusting a source is a fault. If a newspaper has been caught making up quotations, refusing to believe it is good thinking, not bad. The real difference is whether your judgement could ever change. An ordinary judgement can be moved by what the source does next. The other kind cannot, because it has already accounted in advance for anything the source might do. That is what the author calls immunity, and it is far harder to spot from the outside than plain isolation.",
+    "why_difficult": "The passage keeps two things separate that share every visible symptom, and then in its last paragraph makes a move most readers do not expect: it declines to condemn the behaviour that the whole second structure is built out of. A reader who has been collecting evidence that scepticism about sources is the villain arrives at the third paragraph with the wrong thesis and must rebuild it from the sentence about conditions attached to the discount. The short length makes this harder rather than easier, since there is no repetition to correct a first impression.",
+    "author_intention": "To stop the reader using one complaint's remedy on the other's problem, and then to stop him using the distinction as a term of abuse by fixing exactly which property does the work.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0057-p1",
+        "role": "Separates the structures",
+        "note": "One case is simply not meeting the other side. The other is meeting it constantly through a ready explanation of why it should not be believed. Nothing left out; something put in."
+      },
+      {
+        "paragraph_id": "rc-0057-p2",
+        "role": "Shows why it matters",
+        "note": "More reading fixes the first and feeds the second, because every new opponent is absorbed as another example of the discredited kind."
+      },
+      {
+        "paragraph_id": "rc-0057-p3",
+        "role": "Qualifies the claim",
+        "note": "Distrusting a source can be perfectly good reasoning. What matters is whether the distrust could still be moved by evidence. Being unmovable, not being cut off, is the thing to name."
+      }
+    ],
+    "tone_progression": "Brisk and diagnostic while the two structures are laid out, faintly grim at the close of the second paragraph where the cure turns into the disease, and then careful and self-restraining in the third, which spends most of its length preventing the reader from over-applying what he has just been given.",
+    "key_transitions": [
+      "'Nothing has been left out. Something has been added.' (end of paragraph 1) — the two structures are given their decisive contrast in eight words.",
+      "'Exposure, which is the cure for the first condition, is the diet of the second.' (end of paragraph 2) — the consequence lands.",
+      "'The distinction is easier to state than to apply.' (opening of paragraph 3) — the author turns on his own distinction and starts fixing its limits."
+    ],
+    "misunderstanding": "Most readers finish with the idea that the passage is against distrust, or against reading widely, and both are wrong. It is against neither. It says that reading widely repairs one condition and nourishes another, and that distrust becomes the second condition only when it has stopped being revisable. Because the third paragraph gives its qualification in quiet, unemphatic sentences, a reader carrying a thesis from the first two paragraphs can pass straight through it.",
+    "traps_summary": "The options here lift a verdict off the condition it was attached to, read a metaphor at its dictionary strength, and offer as a title the remedy the passage half endorses. Each is answered by asking which of the two structures the sentence in question was about.",
+    "reading_lesson": "When an author draws a distinction and then spends a paragraph qualifying it, the qualification is where the claim actually lives, and every statement made before it is provisional. Read such a passage backwards once: take the final formulation and check which earlier sentences it narrows. The habit protects you against the commonest error in a short passage, which is to answer from the vivid opening rather than the careful close.",
+    "real_world": "The same shape turns up in any long-running dispute where each side has an explanation of the other's motives ready before the other has spoken: office factions, litigation, family arguments about money.",
+    "takeaway": "The question is not how much of the other side you hear, but whether anything it could say would change your mind.",
+    "reflection_question": "For a source you have stopped believing, can you name something it might publish tomorrow that would make you trust it again?"
+  }
+}
