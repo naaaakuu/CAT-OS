@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0009",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "markets",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Side That Pays Nothing",
+    "theme": "why a market with two kinds of customer gives one side away, and the factual bet hidden in the decision",
+    "estimated_time_sec": 95,
+    "gap_function": "contrast_turn",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": ["disc.rhetorical_pivot", "disc.function_slot", "struct.pivot", "disc.given_new", "elim.near_tie"],
+    "learning_objective": "identify the turn a paragraph needs by reading the example that follows the gap and asking what it is an example of",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of pricing where two groups of customers need each other; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap is an instance of a platform discovering it had subsidised the wrong half. The turn must therefore be about identifying the harder side, not about any other weakness of the arrangement, which is what the fragility decoy offers.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the fragility option: it turns, it concedes, and a subsidised side being bought away by a rival is a genuine risk of this arrangement. It fails because the sentence after the gap is a case of a firm being wrong about which side was harder to attract, and fragility does not make that an instance of anything. The restatement option is the other tempting one, since it explains the rule elegantly; but the paragraph has stated the rule already, and a paragraph that turns cannot turn by saying the same thing again.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A venue that charges one kind of customer nothing and the other a great deal is not being chivalrous; it is pricing a market in which each side wants the other to be there.",
+      "The rule that follows is simple enough: charge the side that is harder to attract less, and take it back from the side that will not come without them.",
+      "A marketplace that gave its buyers free entry and charged sellers for access has more than once found that buyers were the easy half all along, and that it had been subsidising the wrong people for years.",
+      "The price that looks like generosity is a bet on a question of fact."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Pricing, in other words, is never simply a matter of covering what a thing costs and then adding the margin that the market will bear.",
+      "B": "What the rule does not settle is which side that is, and firms have been wrong about it often enough for the mistake to be familiar.",
+      "C": "In effect the scarcer side of the market is being paid, in the currency of a lower price, for the service of turning up at all.",
+      "D": "Even so, the arrangement is a fragile one, since the subsidised side can be bought away by any rival prepared to pay more for it."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has stated a pricing rule and then, after the gap, gives a case of a firm that followed it and got it wrong. The gap has to be the turn that makes the case an instance of something: it must identify what the rule leaves undecided, and it must leave the paragraph pointing at the question the last sentence calls a question of fact.",
+    "correct_reasoning": "The correct option turns on the one thing the rule assumes and does not supply — knowing which side is harder to attract — and announces that firms get it wrong often. The marketplace that discovered its buyers were the easy half is then exactly the promised mistake, made familiar, and the closing line about a bet on a question of fact lands on the question the turn opened.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A broad remark about pricing not being cost plus margin is true and is already implied by the first two sentences; it identifies nothing for the following case to be an instance of, and the closing line about a question of fact has no antecedent.",
+        "seductive_element": "'In other words' makes it feel like the paragraph's own idea being raised to a principle, and it is the widest sentence on offer."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "This restates the rule the previous sentence has just given, in prettier words; a paragraph that has said charge the harder side less does not need to be told that the harder side is being paid to turn up, and no turn has taken place.",
+        "seductive_element": "The reframing as payment is elegant and feels like analysis rather than repetition, which is precisely how a restatement gets in."
+      },
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It turns, and the risk it names is real, but the case that follows is about misidentifying the harder side rather than about losing it to a competitor, so the paragraph's next sentence stops being an illustration of anything.",
+        "seductive_element": "'Even so' is the signature of a contrast turn, and fragility is a plausible complication for an arrangement built on subsidy."
+      }
+    ],
+    "method": "Where the gap is a turn, read the sentence after it as evidence and ask what claim it is evidence for. A case of a firm being wrong about which side to subsidise can only illustrate a turn about identifying that side. Options that turn to a different complication, or that repeat the rule in new words, fail that test however well they are phrased."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap is somebody's expensive mistake. Name the claim it is a mistake about before choosing.",
+    "takeaway": "A turn is judged by what it makes the next sentence an instance of, not by how convincingly it announces a turn."
+  }
+}

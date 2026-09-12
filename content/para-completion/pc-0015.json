@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0015",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "scientific-method",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "The Result You Already Know",
+    "theme": "why a well-built experiment includes a condition whose outcome is settled in advance, and what a failure there means",
+    "estimated_time_sec": 95,
+    "gap_function": "example",
+    "primary_trap": "right_idea_wrong_position",
+    "reasoning_patterns": ["disc.example_after_claim", "disc.function_slot", "disc.demonstrative", "struct.claim_evidence", "disc.given_new"],
+    "learning_objective": "fill an example slot with an instance the following sentence can point at, rather than with the generalisation the instance is meant to support",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 4, "distractor_closeness": 5, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of controls in experimental design; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap says 'If nothing dies on that plate', which needs a plate to have been put on the bench. Two options now supply one, and the second supplies the wrong kind: a blind reader had solved an earlier draft by taking the only concrete option, so the untreated-plate decoy was written to remove that shortcut and make the direction of the control do the work.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the untreated plate, which is concrete, supplies an antecedent for 'that plate', and describes a precaution any laboratory really does take. It is killed by the sentence after the gap: on an untreated plate nothing dying is the wanted result, so 'if nothing dies on that plate the day's results are void' becomes nonsense, and the previous sentence asked for a condition in which something is already known to happen, which is the opposite device. The option about negative results being under-reported is right about the paragraph's world but belongs after the argument rather than inside it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A negative result is ambiguous in a way a positive one is not: the effect may be absent, or the apparatus may simply have failed to register anything at all.",
+      "The remedy is to run, alongside the test itself, a condition in which something is already known to happen.",
+      "If nothing dies on that plate, the day's results are not negative; they are void."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "This is why the absence of an effect is reported so much less often, and so much less confidently, than the presence of one, in almost any field.",
+      "B": "A laboratory testing whether a compound kills a bacterium puts a known antibiotic on a third plate, to see whether a death can show at all.",
+      "C": "The same laboratory will also put out a plate with nothing added to it at all, to check that the bacterium does not simply die unaided.",
+      "D": "Every well-designed study checks its own instruments first, though fields differ in how openly they report the checks that they ran."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The second sentence states the remedy in the abstract, and the sentence after the gap says 'If nothing dies on that plate', pointing at a plate and at a death. Neither has been mentioned. The gap must therefore be the concrete instance that supplies both, and it must be an instance of the remedy just described — a condition included because its outcome is already known.",
+    "correct_reasoning": "The correct option puts the abstract remedy on a bench. It introduces the third plate the next sentence points at and gives that plate a known outcome, a death, which is precisely what the next sentence's 'nothing dies' negates. The antibiotic is not there to be tested, since its effect is already known; it is there so that the plates can be asked whether they are capable of showing anything, which is the remedy the previous sentence described.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The under-reporting of negative results belongs to this paragraph's subject but comes after the argument is complete, not in the middle of it; placed here it leaves the following sentence pointing at a plate that no sentence has put on the bench.",
+        "seductive_element": "It picks up the first sentence about the ambiguity of negative results and reads as a thoughtful development of it."
+      },
+      {
+        "option": "C",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "This is a control of the other kind — a plate on which nothing is expected to happen — so it is not an instance of the remedy just described, which was a condition in which something is already known to happen; and it makes the next sentence absurd, since nothing dying on an untreated plate is the result the laboratory is hoping for rather than a void day.",
+        "seductive_element": "It is concrete, it puts a plate on the bench for the following sentence to point at, and an untreated plate is a real and familiar precaution."
+      },
+      {
+        "option": "D",
+        "trap_type": "scope_jump",
+        "why_wrong": "It widens a specific point about interpreting negative results into a claim about every well-designed study in every field, and supplies neither the plate nor the known outcome the next sentence depends on.",
+        "seductive_element": "It concedes that fields differ, which reads as scrupulous, and its breadth makes it feel like the sentence a serious methodological paragraph would contain."
+      }
+    ],
+    "method": "An example slot is verified by the sentence after it, and by more than a demonstrative. Ask which option puts the named thing into the paragraph — 'that plate' — and then ask whether the sentence still makes sense with that thing in place. Two candidates can both supply a plate; only one makes 'if nothing dies on it, the day is void' a sensible thing to say."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap points at a plate. Nothing so far has put one on the bench, and only one option does.",
+    "takeaway": "Where the next sentence says 'that', the gap has to have introduced the thing. A definition is not an introduction."
+  }
+}

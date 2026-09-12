@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0024",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "sociology",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "The Woman at the Bus Stop",
+    "theme": "why the daily strangers we never speak to are missed when they disappear, and why speaking would spoil it",
+    "estimated_time_sec": 60,
+    "gap_function": "resolution",
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.closing_sentence", "disc.function_slot"],
+    "learning_objective": "resolve a small puzzle by naming what the two odd feelings have in common, rather than by repeating the puzzle",
+    "difficulty_vector": { "stance_subtlety": 1, "scope_precision": 2, "distractor_closeness": 2, "concept_abstractness": 2, "syntactic_complexity": 1 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general observation about recurring strangers in daily routines; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "A foundation item with plain sentences and a genuine two-part puzzle: she is missed, and she cannot be greeted. The resolution has to cover both halves, which is what rules out the restatement and the warm generalisation.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the warm line about cities being full of people we half know and being lonelier without them. It concedes, it is likeable, and it is about the right phenomenon. It fails on the second half of the puzzle: the paragraph has asked why greeting her now would be awkward, and a remark about city loneliness leaves that untouched. The restatement of the oddness simply says the puzzle again and calls it an ending.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "There is a woman at the bus stop every morning, and in four years neither of you has said a word.",
+      "Then one week she is not there, and you find yourself wondering what has become of her.",
+      "It seems an odd thing to feel about a stranger, and odder still that saying good morning to her now would be awkward for you both."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "The relationship is real, and what keeps it comfortable is that neither of you has ever taken it further.",
+      "B": "It is a strange thing to miss somebody you have never once spoken to and would not know quite how to greet.",
+      "C": "Cities are full of people we half know, and though we never speak to them, we would all be lonelier without them.",
+      "D": "The sensible thing, of course, is to say good morning tomorrow and put an end to four years of this silliness."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph sets out two feelings that look contradictory: you miss her, and yet you could not comfortably speak to her. A closing sentence has to make both of them reasonable at once, which means naming what the connection actually is and why its silence is part of it, rather than choosing one feeling and explaining the other away.",
+    "correct_reasoning": "The correct option says that the connection is genuine, which accounts for missing her, and that it has stayed comfortable precisely because it was never taken further, which accounts for the awkwardness of speaking now. One sentence, both halves, and nothing is added that the little story has not supplied.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It repeats the sentence immediately above the gap, which has already called the feeling odd and the greeting awkward; the paragraph would end by stating its puzzle a second time instead of settling it.",
+        "seductive_element": "It reads as a neat summing-up, and its wording is close enough to the paragraph's own to feel like a natural last line."
+      },
+      {
+        "option": "C",
+        "trap_type": "attractive_generality",
+        "why_wrong": "It moves from this woman to cities in general and explains only why such people matter, leaving the awkwardness of speaking to her — half the puzzle — entirely untouched.",
+        "seductive_element": "It is warm and quotable, it concedes the silence, and broad endings feel like the proper close for a small observation."
+      },
+      {
+        "option": "D",
+        "trap_type": "stance_shift",
+        "why_wrong": "The paragraph treats both feelings as reasonable and worth explaining; dismissing four years as silliness takes a position against them rather than resolving the tension between them.",
+        "seductive_element": "It is brisk and practical, and readers who find the whole thing sentimental will want the paragraph to say so."
+      }
+    ],
+    "method": "When a paragraph ends by naming two feelings that seem to pull against each other, the closing sentence must cover both. Test each option twice, once against each feeling. An option that explains only the first, however pleasing, has left the paragraph where it was."
+  },
+  "mentor": {
+    "challenge": "Two odd feelings are put side by side: you miss her, and you could not greet her. One sentence must make both make sense.",
+    "takeaway": "A resolution explains every piece of the puzzle it was given; explaining half of it is not an ending."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0025",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "science",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Same Answer, Arrived at Twice",
+    "theme": "what the repeated appearance of one biological solution licenses, and what it does not say about the lineages",
+    "estimated_time_sec": 100,
+    "gap_function": "restatement",
+    "primary_trap": "summary_where_development_needed",
+    "reasoning_patterns": ["disc.function_slot", "disc.demonstrative", "arg.generalization", "struct.definition", "disc.given_new"],
+    "learning_objective": "replace a loose formulation with the precise one the next sentence refers back to, using the demonstrative as the check",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 5, "distractor_closeness": 4, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of repeated solutions in unrelated lineages; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap opens with 'That narrowness', which nothing before the gap supplies. Only a restatement that says how few answers the problem admits can bind it, which makes the slot tight despite the abstraction.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that convergence is one of the best-attested patterns in comparative biology: it is true, it sounds like the paragraph's own verdict, and a reader who has understood the point will feel it has been made. It is refused by the opening words of the next sentence, 'That narrowness', which need a claim about how few solutions exist; a statement about how well attested a pattern is supplies no narrowness at all. The option reinstating that evolution does repeat itself contradicts the sentence directly above the gap.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The camera eye has appeared in animals whose last common ancestor had no eyes at all, and so has the wing, and so has the trick of straining small food out of large volumes of water.",
+      "It is often said that evolution repeats itself, which is not quite what these cases show.",
+      "That narrowness is the finding, and it is a claim about the problem rather than about any tendency in the lineages that happened to solve it."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Convergence of this kind is one of the best-attested patterns in the whole of comparative biology, and one of the oldest to have been noticed.",
+      "B": "Evolution does repeat itself, then, and the repetitions are regular enough to be predicted in advance of anybody going out to look for them.",
+      "C": "What repeats is the solution and not the history: the same problem, set by the same physics to bodies of the same size, admits of very few answers.",
+      "D": "Living things are far less various than the display in any museum would lead a visitor to suppose, though the differences that remain matter the most."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The second sentence rejects a loose formulation — that evolution repeats itself — without supplying the accurate one, and the sentence after the gap opens with 'That narrowness'. The gap must therefore be the corrected statement, and it must contain a narrowness: something about how few options are available, expressed as a fact about the problem rather than about the animals.",
+    "correct_reasoning": "The correct option makes the correction in one move. It separates what recurs (the solution) from what does not (the lineage), and it explains the recurrence by the smallness of the set of workable answers, given the same physical demands at a similar scale. That smallness is the narrowness the next sentence names, and its location in the problem rather than in the organisms is exactly what that sentence goes on to insist upon.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "It reports the standing of the pattern instead of stating it precisely, so the correction promised by the previous sentence is never made and the following sentence's 'That narrowness' has nothing to refer to.",
+        "seductive_element": "It sounds authoritative and settled, and a reader who has grasped the point may accept a statement of its importance as a statement of the point."
+      },
+      {
+        "option": "B",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence directly above the gap says that 'evolution repeats itself' is not quite what the cases show; reinstating it, and adding predictability, contradicts that line and abandons the correction the paragraph announced.",
+        "seductive_element": "It is the boldest claim available and picks up the paragraph's own phrase, which makes it feel like the idea being defended rather than the one being refused."
+      },
+      {
+        "option": "D",
+        "trap_type": "scope_jump",
+        "why_wrong": "A claim about how various living things are in general is wider than the paragraph's subject, which is why one solution recurs; it also puts the narrowness in the organisms, which the next sentence explicitly denies.",
+        "seductive_element": "It concedes, it has a pleasing shape, and 'less various than they look' sounds like a sharper version of the same thought."
+      }
+    ],
+    "method": "When a sentence says a familiar formulation is 'not quite' right, the gap owes you the right one. Use the demonstrative that follows as a fitting test: 'That narrowness' can only point at a sentence that has stated a narrowness. An option that says the point is important, or that restores the rejected formulation, will fail that test every time."
+  },
+  "mentor": {
+    "challenge": "One phrase after the gap points back at a noun the paragraph has not yet used. Find it, and the missing sentence has to contain it.",
+    "takeaway": "A demonstrative at the start of the next sentence is a fitting instruction; obey it before you judge which option sounds wisest."
+  }
+}

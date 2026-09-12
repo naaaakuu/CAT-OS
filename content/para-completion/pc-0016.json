@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0016",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "religion-belief",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Words Nobody Translates",
+    "theme": "why congregations keep a liturgical language they cannot construe, and what the unintelligibility performs",
+    "estimated_time_sec": 95,
+    "gap_function": "explanation",
+    "primary_trap": "new_topic_introduced",
+    "reasoning_patterns": ["disc.function_slot", "struct.phenomenon_explanation", "disc.given_new", "disc.stance_continuity", "struct.contrast"],
+    "learning_objective": "supply the explanation a paragraph has ruled the alternatives out for, and check it against the sentence that elaborates it",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of liturgical languages and resistance to vernacular translation; no specific tradition or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap contrasts a vernacular prayer as something somebody wrote and can revise. That contrast only works if the gap has said what the old language secures: words received rather than composed. The music decoy is the named trap and is pleasant enough to be chosen by a reader who has stopped tracking the thread.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the nostalgia option, which concedes that the attachment is respectable and then declines to take it seriously as theology. It has the same surface shape as the answer — an explanation of the resistance — but the second sentence has already dismissed the family of explanations that treat the congregation as not knowing its own mind, and the sentence after the gap contrasts authorship and revision, which nostalgia does not touch. The restatement of the congregation's evident care repeats the second sentence and advances nothing.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Congregations that could not construe a line of the language have gone on hearing their liturgy in it, and have resisted, sometimes furiously, every offer to put it into their own.",
+      "The obvious explanation — that they do not know what is good for them — is contradicted by the resistance itself, which is not the conduct of people indifferent to the words.",
+      "A prayer in the vernacular is a prayer somebody wrote, and can be revised next year by somebody else."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "What the old language does is mark the words as received rather than composed, so that nobody present can be suspected of choosing them.",
+      "B": "Music is the deeper attachment in any case, and a congregation will accept an unfamiliar text far sooner than it will accept a new tune.",
+      "C": "The attachment is best explained as nostalgia, which is respectable enough but ought not to be dressed up as a matter of doctrine.",
+      "D": "Plainly, then, a congregation can care a great deal about the words of a service whose meaning it is quite unable to follow at all."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph poses a puzzle and rejects the condescending explanation of it, so the gap must supply a better one. The sentence after the gap is a contrast — a vernacular prayer is something somebody wrote and somebody else can revise — which tells you the axis the explanation has to run on: authorship, and whether the words are anyone's to choose.",
+    "correct_reasoning": "The correct option explains the resistance by what the old language does rather than by what the congregation lacks. Words nobody present could have written are words nobody present can be suspected of having chosen, and that is exactly the property the following sentence shows a vernacular prayer to lack, since it has an author and can be amended. The explanation also honours the second sentence by crediting the congregation with knowing what it is defending.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "Music arrives from nowhere and is picked up by nothing; the sentence after the gap is about texts, authorship and revision, and a claim about tunes leaves that contrast without the thing it is contrasting with.",
+        "seductive_element": "It is a shrewd observation about congregations that many readers will recognise as true, and it appears to deepen the paragraph by going one better."
+      },
+      {
+        "option": "C",
+        "trap_type": "stance_shift",
+        "why_wrong": "The second sentence has already refused explanations that treat the congregation as not understanding its own attachment, and this one does the same work in politer clothes; it also leaves the contrast about authorship in the next sentence unexplained.",
+        "seductive_element": "Its concession that nostalgia is respectable sounds even-handed, and nostalgia is the explanation most readers arrive with."
+      },
+      {
+        "option": "D",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It restates the conclusion the second sentence has already drawn from the resistance, so the paragraph makes the same observation twice and still has no explanation to offer.",
+        "seductive_element": "'Plainly, then' has the cadence of a step in an argument, and the sentence is unimpeachably true of the paragraph."
+      }
+    ],
+    "method": "When a paragraph names a puzzle and knocks down the obvious explanation, the gap is the replacement. Do not choose it by plausibility alone: read the sentence after the gap and find the axis it argues on — here authorship and revisability — then take the option that explains the puzzle along that axis and no other."
+  },
+  "mentor": {
+    "challenge": "The paragraph has refused the easy explanation. The sentence after the gap tells you which property the real one must turn on.",
+    "takeaway": "An explanation is checked against the sentence that elaborates it; if that sentence's contrast has nothing to bite on, the explanation is wrong."
+  }
+}

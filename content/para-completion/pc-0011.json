@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0011",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "arts-culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Repair You Are Meant to Find",
+    "theme": "how a conservator's retouching settles a quarrel between the visitor's picture and the honesty of the record",
+    "estimated_time_sec": 105,
+    "gap_function": "resolution",
+    "primary_trap": "summary_where_development_needed",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.function_slot", "disc.closing_sentence", "arg.qualification", "struct.two_views_adjudication"],
+    "learning_objective": "resolve a stated deadlock by finding the sentence that gives each side the thing it was defending, rather than declaring the deadlock genuine",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 5, "distractor_closeness": 5, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of retouching in the conservation of paintings; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The fourth sentence reports that the question is settled the same way everywhere, which rules out both the recap and the case-by-case ending: the closer must name one answer that satisfies the two stated demands at once. An earlier draft ended that sentence on an unsettleable quarrel, which left the recap defensible; a blind reader flagged it and it was tightened.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence saying both positions are defensible and the outcome depends on the institution and the object: it is measured, it is true of many disputes, and it is the ending a cautious reader expects. It is refused by two words in the fourth sentence — the answer is 'the same' and it is reached 'in workshop after workshop', which is incompatible with an outcome that varies by institution, object and century. The option awarding the case to the visitor is the other real candidate, and the same sentence refuses it, since neither side gives up what it is defending.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A conservator filling a loss in a painting can match the surrounding paint so exactly that no visitor will ever find the join.",
+      "The argument for doing so is that people came to look at a picture and not at a wound, and that a distracting scar is itself a kind of damage.",
+      "The argument against is that a repair nobody can detect makes a claim about the artist's hand which the conservator is in no position to make.",
+      "Neither side will give up what it is defending, and yet the question is not left open: the same answer is arrived at in workshop after workshop."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "Both positions, then, are defensible, and which prevails depends on the institution, the object, and the century in which the work was last treated.",
+      "B": "Most galleries now retouch to an invisible finish and let the visitor assume the paint is the artist's, which is what the visitor came for.",
+      "C": "It is settled by a repair that vanishes where people stand and declares itself under a lens: the visitor keeps the picture, the record the truth.",
+      "D": "Every act of conservation is an interpretation of the object it treats, though the trade has been slow to say so where visitors can hear."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has stated two demands and named what each side will not surrender: an undistracted view for the visitor, and a record that does not attribute the conservator's paint to the artist. The fourth sentence then closes off every easy ending — it says the question is not left open, and that the same answer is reached everywhere. The closing sentence must therefore state one answer, the same one each time, which nevertheless leaves both sides holding what they refused to give up.",
+    "correct_reasoning": "The correct option splits the question by viewing condition rather than by party. A repair that is invisible from where people stand gives the first side exactly what it asked for, and one that is detectable under magnification leaves the record able to say which paint is whose. Both stated demands are met, nobody has surrendered anything, and the sentence lands on the two terms the paragraph itself introduced.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "It recaps the two arguments and hands the decision to circumstance, which is exactly what the fourth sentence rules out: if the answer varied with the institution, the object and the century, it could not be the same answer reached in workshop after workshop.",
+        "seductive_element": "Even-handedness reads as maturity after a paragraph that has set two good arguments against each other, and the list of institution, object and period has the texture of real practice."
+      },
+      {
+        "option": "B",
+        "trap_type": "stance_shift",
+        "why_wrong": "Letting the visitor assume the paint is the artist's is precisely the claim the third sentence says the conservator is in no position to make, so this gives the case to one side; the fourth sentence has ruled that out by saying neither side gives up what it is defending.",
+        "seductive_element": "It is concrete and describes a practice, which fits a paragraph that has just said the same answer is reached everywhere, and it answers the visitor's demand exactly."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A claim that all conservation is interpretation stands above the dispute instead of settling it, and it quietly concedes the third side's case while pretending to be neutral; the visitor's demand is simply dropped.",
+        "seductive_element": "It is the most quotable sentence available, and its concession about what the trade will admit gives it an air of insider candour."
+      }
+    ],
+    "method": "When a paragraph reports that a hard question is settled the same way everywhere, and then stops, it is asking you for the settlement. List what each side refuses to give up and look for the option that supplies both. Options that pick a winner contradict the set-up; options that hand the outcome to circumstance contradict the sameness; options that praise the difficulty restate it. The resolution is usually a distinction not yet drawn — here, between two distances at which one repair is seen."
+  },
+  "mentor": {
+    "challenge": "Two demands, each non-negotiable, and a question that is nevertheless settled the same way everywhere. Find the distinction that lets one answer meet both.",
+    "takeaway": "A resolution divides the case; it does not award it. If an option leaves one side with nothing, it has not resolved anything."
+  }
+}

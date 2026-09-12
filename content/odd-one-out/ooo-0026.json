@@ -34,7 +34,7 @@
     "traps": {
       "primary": "B",
       "secondary": "A",
-      "description": "The outlier keeps the board, the teacher and the schoolroom, and its subject is the very change the story tells, so a topic check and a period check both keep it. The decoy is the opening sentence, the only one with no board in it, which a reader scanning for the shared object may throw out first."
+      "description": "The outlier takes the same kind of subject as the spine, the board's arrival itself, and keeps the teacher and the schoolroom, so a topic check, a period check and a look at the opening words all keep it. Nothing on its surface says historian. The decoy is the opening sentence, the only one with no board in it, which a reader scanning for the shared object may throw out first."
     },
     "cohesion_signals": {
       "reference": true,
@@ -56,8 +56,13 @@
     "reasoning_patterns": ["disc.chronology", "comp.function_over_words", "arg.description_vs_evaluation", "disc.tense_continuity", "comp.purpose"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival is the opening sentence about the queue at the master's desk: it is the only sentence with no board in it, and a reader matching on the shared object will drop it first. It stays because a story about an ending needs the thing that ended, and because the next sentence's 'ended the queue' has no antecedent without it. The sentence about inventories and bills of sale survives every surface check, shares the period, the room and the furniture, and still belongs to a different paragraph: it tells the reader how the change is known rather than what the change did, and no sentence in the story asks how anyone knows.",
-      "blind_solve": null
+      "adversarial_review": "The rival is the opening sentence about the queue at the master's desk: it is the only sentence with no board in it, and a reader matching on the shared object will drop it first. It stays because a story about an ending needs the thing that ended, and because the next sentence's 'ended the queue' has no antecedent without it. The sentence about inventories and bills of sale survives every surface check. Its subject is the board's arrival, exactly the subject the story turns on; it shares the period, the room and the furniture; and it names no scholar anywhere. It still belongs to a different paragraph, because it says how that arrival is now recovered rather than what it did, and no sentence in the story asks how anyone knows.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported that the outlier could be picked from its opening subject alone, which announced a modern scholar where every other sentence took a schoolroom subject. Repaired by rewriting it in the passive, with the board's arrival as its subject, and by lengthening it so it is no longer the shortest sentence in the set. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -76,7 +81,7 @@
     { "label": "B", "text": "Before anything was written on the front wall, a class was a queue: each child came to the master's desk in turn, recited, was corrected, and went back to a bench to wait." },
     { "label": "C", "text": "A room of separate pupils under one roof had become a year group with a syllabus, and the teacher's day was rebuilt around the minutes in which everyone attended to the same thing." },
     { "label": "D", "text": "The large dark slate fixed across the front of the room, which reached ordinary schools in the early nineteenth century, ended the queue by making one correction visible to everybody at once." },
-    { "label": "E", "text": "Historians reconstruct the board's arrival from inventories, bills of sale and the complaints of inspectors, since no teacher thought a change of furniture worth writing down." }
+    { "label": "E", "text": "The board's arrival has to be reconstructed from school inventories, from bills of sale, and from the complaints of inspectors, since no teacher thought a change of furniture worth writing down." }
   ],
   "outlier": "E",
   "core_order": ["B", "D", "A", "C"],
@@ -96,9 +101,9 @@
       { "from": "D", "to": "A", "tie": "reference", "explanation": "'Exploit that' points at the new fact just established, that one correction is now visible to everyone, and cannot be read without it." },
       { "from": "A", "to": "C", "tie": "given_new", "explanation": "The class moving as one body is now given, and the closing sentence adds the new material: what that made of the room and of the teacher's day." }
     ],
-    "violation_named": "The four core sentences narrate a change in a schoolroom. The odd sentence tells the reader how historians know about that change, from inventories, bills and inspectors' complaints. It is a statement of method inside a story of events, and a story has no stage at which its own sources are discussed.",
-    "why_it_breaks": "Nothing in the narrative raises the question of evidence, and nothing after the stray sentence could use an answer to it: the sentences on either side of any position it might take are busy handing on a sequence of events. Its tense is the historian's present while the story runs in the past, and its subject is a set of documents that never appear in the room the paragraph is describing.",
-    "trap_exposed": "The camouflage is that the stray sentence is about the very object the story is about, in the very period the story covers, and it even repeats the paragraph's explanation for why the change went unremarked. Shared object, shared period, shared explanation, and still a different job. The decoy pulls the other way: the sentence about the queue never mentions the board, which is exactly what a reader matching on nouns throws out.",
+    "violation_named": "The four core sentences narrate a change in a schoolroom. The odd sentence tells the reader how that change is now recovered, from inventories, bills and inspectors' complaints. It is a statement of method inside a story of events, and a story has no stage at which its own sources are discussed.",
+    "why_it_breaks": "Nothing in the narrative raises the question of evidence, and nothing after the stray sentence could use an answer to it: the sentences on either side of any position it might take are busy handing on a sequence of events. Its tense is the standing present of the archive while the story runs in the past, and the documents it depends on never appear in the room the paragraph is describing.",
+    "trap_exposed": "The camouflage is thorough. The stray sentence takes as its subject the very event the story turns on, it keeps the period and the furniture, and it mentions no scholar, so nothing in its opening words gives it away. Shared object, shared period, shared voice, and still a different job. The decoy pulls the other way: the sentence about the queue never mentions the board, which is exactly what a reader matching on nouns throws out.",
     "exclusion_analysis": [
       { "label": "B", "mistake_type": "lexical_pull", "why_tempting": "It is the only sentence that never mentions the board, so a reader matching on the shared object finds nothing in it to hold on to.", "what_breaks": "Without it the story opens on an object with nothing to change, and 'ended the queue' refers to an arrangement the paragraph never showed." },
       { "label": "D", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence carrying a date, and its relative clause gives it the flavour of an encyclopaedia entry dropped into a story.", "what_breaks": "Without it the paragraph never brings in the thing it is about, and the following sentence's 'that' has no new fact to point at." },
@@ -108,7 +113,7 @@
     "detection_habit": "In a narrative, ask of each sentence whether it happened. A sentence about how the events came to be known is about the historian's desk, not about the room where the events took place."
   },
   "mentor": {
-    "challenge": "Five sentences about a slate on a schoolroom wall, all of them true of the same century. Build the story, and notice which one is standing outside it looking in.",
+    "challenge": "Five sentences about a slate on a schoolroom wall, all of them true of the same century, and none of them announcing itself. Build the story, and notice which one is standing outside it looking in.",
     "takeaway": "What happened and how we know it happened are two paragraphs. Only one of them is being written here."
   }
 }

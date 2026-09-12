@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0013",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "mathematics-logic",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "An Exception and a Counterexample",
+    "theme": "the condition under which a case that a rule gets wrong is an exception rather than a refutation",
+    "estimated_time_sec": 105,
+    "gap_function": "qualification",
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": ["disc.function_slot", "arg.qualification", "arg.generalization", "scope.condition", "disc.given_new"],
+    "learning_objective": "supply the exact condition a hedged sentence has promised, and refuse an option that widens the paragraph into a claim about everything",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 5, "distractor_closeness": 4, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general point about generalisations, exceptions and refutation; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The third sentence concedes that the shrug is not always a dodge, which obliges the gap to say when. The sentence after the gap supplies a test for the amended rule, so the gap must be a condition that such a test could operate on.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option defining an exception as a counterexample its owner has declined to accept. It is sharp, it is quotable, and a strong candidate can argue that the paragraph is building to it. It is refused by the sentence directly above the gap, which grants that the shrug is not always a dodge: if every exception were a refusal, the concession would be false and the following sentence's test — does the amended rule forbid anything new — would have nothing to discriminate between.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A single case that a general claim gets wrong is fatal to the claim as stated, which is why mathematicians go looking for one.",
+      "Outside mathematics the same discovery is usually met with a shrug: the rule still holds, we are told, and this is merely an exception.",
+      "The shrug is not always a dodge.",
+      "The test is whether the amended rule now forbids something it did not forbid before; if it forbids less and predicts nothing new, the exception has been bought rather than found."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "It is honest where the case can be excluded by a condition stated independently of it, and dishonest where the condition was invented for it.",
+      "B": "No rule about human affairs survives contact with the cases for long, though the better rules survive a good deal longer than the worse ones.",
+      "C": "An exception, properly speaking, is simply a counterexample that the owner of the rule has declined to accept as being one of those.",
+      "D": "Mathematicians, after all, enjoy the advantage of working with objects whose definitions are complete before the argument begins."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The third sentence concedes that the shrug is sometimes legitimate, which leaves a question the paragraph must answer at once: when. The sentence after the gap then offers a test applied to 'the amended rule'. So the gap has to be the qualification itself — a condition separating the legitimate exception from the dishonest one, stated in a form that the test in the next sentence can check.",
+    "correct_reasoning": "The correct option supplies the condition on which the whole distinction turns: whether the excluding clause was available independently of the troublesome case or was manufactured for it. That is precisely what the following test measures, since a condition stated independently narrows the rule in a way that forbids new things, while one invented to fit the case removes content and predicts nothing.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph is drawing a line between two ways of treating a recalcitrant case; a verdict that no rule about human affairs survives its cases widens the subject to every generalisation about people and supplies no condition for the following test to apply.",
+        "seductive_element": "It concedes in a way that sounds worldly and experienced, and it flatters the reader's sense that real subjects are messier than mathematics."
+      },
+      {
+        "option": "C",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence immediately above the gap grants that the shrug is not always a dodge; defining every exception as a refused counterexample makes it always a dodge, and leaves the test in the next sentence with nothing to distinguish.",
+        "seductive_element": "It is the sharpest line on offer, it flatters the mathematician's standard set in the first sentence, and it feels like the paragraph's tough conclusion."
+      },
+      {
+        "option": "D",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "It explains why mathematics differs instead of stating when an exception is legitimate, so the concession above the gap stays unredeemed and the amended rule the next sentence tests is never introduced.",
+        "seductive_element": "It is true, it picks up the first sentence's contrast, and explaining the difference feels like the natural thing to do after mentioning it."
+      }
+    ],
+    "method": "A sentence that concedes something 'not always' has promised a boundary, and the gap after it is where the boundary is drawn. Read on for the test the paragraph applies, and choose the option whose condition that test could actually check. Options that generalise the point, or that take the concession back, both fail — one for widening, one for contradicting."
+  },
+  "mentor": {
+    "challenge": "The paragraph has just admitted that the shrug is sometimes honest. It now owes you a rule for when, and one option pays.",
+    "takeaway": "After a 'not always', expect a condition. An option that widens the subject is not the condition, however true it sounds."
+  }
+}

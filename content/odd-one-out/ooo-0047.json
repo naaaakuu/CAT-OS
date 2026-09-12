@@ -34,7 +34,7 @@
     "traps": {
       "primary": "B",
       "secondary": "A",
-      "description": "The outlier is about the same committees and the same referred cases, and it sounds like the sentence that would tell a reader whether any of this works. The decoy is the closing sentence, whose final clause about people with nothing to gain is the only judgement in a set of description."
+      "description": "The outlier opens on the committee's own file, so its subject is a thing in the room, and it sounds like the sentence that would tell a reader whether any of this works. Nothing in its first words names a researcher. The decoy is the closing sentence, whose final clause about people with nothing to gain is the only judgement in a set of description."
     },
     "cohesion_signals": {
       "reference": true,
@@ -56,8 +56,13 @@
     "reasoning_patterns": ["arg.description_vs_evaluation", "disc.chronology", "comp.function_over_words", "comp.organization"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival is the closing sentence, whose last clause about people with nothing to gain is the only evaluation in an otherwise plain description, so a reader eliminating by texture may take it. It stays because it is the final stage of the meeting, the point at which something leaves the room, and because the opinion it names answers the request the meeting opened with. The sentence about comparing referred cases across two years describes how somebody would study these committees, and the paragraph is describing what happens at one table from the first speaker to the last document.",
-      "blind_solve": null
+      "adversarial_review": "The rival is the closing sentence, whose last clause about people with nothing to gain is the only evaluation in an otherwise plain description, so a reader eliminating by texture may take it. It stays because it is the final stage of the meeting, the point at which something leaves the room, and because the opinion it names answers the request the meeting opened with. The sentence about the file of referrals now begins with an object the committee itself keeps, so it cannot be picked out by its opening words; what disqualifies it is that setting one year's file beside another's occupies no moment in the morning being described, and the description never asks whether the practice works.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported that the outlier could be picked from its opening subject alone, which announced researchers where every other sentence took a subject from inside the room. Repaired by giving it the committee's own file as its subject and removing the named researchers, and by lengthening it so it is no longer the shortest sentence in the set. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -73,7 +78,7 @@
   },
   "sentences": [
     { "label": "A", "text": "The discussion that follows is deliberately slow, and each person at the table is asked in turn what the family would say, what the nurse would say, and what a stranger reading the notes in a year would say." },
-    { "label": "B", "text": "Researchers who wanted to know whether such meetings change anything have compared the cases referred in one year with similar cases from the year before." },
+    { "label": "B", "text": "The committee's own file of referrals has been set beside the file for the year before, to establish whether meetings of this kind change any decision at all." },
     { "label": "C", "text": "A hospital's ethics committee meets around a table with the notes of a single case in front of it, and nobody in the room will be treating the patient." },
     { "label": "D", "text": "The clinician who asked for the meeting speaks first, and is made to say what he wants to do before he says what he is afraid of." },
     { "label": "E", "text": "At the end the committee writes an opinion rather than an instruction, and it goes back to the clinician carrying the weight of having been looked at by people with nothing to gain." }
@@ -96,9 +101,9 @@
       { "from": "D", "to": "A", "tie": "lexical", "explanation": "'The discussion that follows' takes the first speech as given and moves the description to what comes after it." },
       { "from": "A", "to": "E", "tie": "conjunction", "explanation": "'At the end' closes the sequence the previous sentences have been moving through, so the opinion arrives after the voices have been heard." }
     ],
-    "violation_named": "The four core sentences describe what happens in a room. The odd sentence describes how somebody would find out whether such rooms accomplish anything, by comparing referred cases across two years. That is a statement of method standing in a description of a practice, and the description never asks whether the practice works.",
-    "why_it_breaks": "The paragraph is ordered by time: the room, the first speaker, the discussion, the end. A comparison of two years of cases occupies no moment in that morning and can be placed neither before the first speech nor after the opinion. It also takes nothing from the sentence before it and leaves nothing for the sentence after, since what follows it needs a discussion to have happened.",
-    "trap_exposed": "The camouflage is usefulness. The stray sentence answers the question a reader is most likely to be asking, whether any of this makes a difference, and it uses the paragraph's own nouns. The description has not raised that question. The decoy is the closing sentence, whose final clause is the only judgement in the set, though it is the stage at which the meeting's product leaves the room.",
+    "violation_named": "The four core sentences describe what happens in a room. The odd sentence describes how somebody would find out whether such rooms accomplish anything, by setting one year's referrals beside another's. That is a statement of method standing in a description of a practice, and the description never asks whether the practice works.",
+    "why_it_breaks": "The paragraph is ordered by time: the room, the first speaker, the discussion, the end. Two years of files occupy no moment in that morning, and the sentence can be placed neither before the first speech nor after the opinion. It also takes nothing from the sentence before it and leaves nothing for the sentence after, since what follows it needs a discussion to have happened.",
+    "trap_exposed": "The camouflage is usefulness, and now also ownership. The stray sentence answers the question a reader is most likely to be asking, whether any of this makes a difference; it uses the paragraph's own nouns; and it opens on a thing the committee itself keeps, so its first words look like another stage of the morning. The description has not raised that question. The decoy is the closing sentence, whose final clause is the only judgement in the set, though it is the stage at which the meeting's product leaves the room.",
     "exclusion_analysis": [
       { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It describes furniture and attendance rather than any action, so a reader looking for what happens may treat it as preamble.", "what_breaks": "Without it there is no room and no case, and the clinician, the discussion and the opinion all belong to a meeting the reader has never been shown." },
       { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "It concerns one man's speech rather than the committee, so it can look like a detail rather than a stage.", "what_breaks": "Without it the discussion has nothing to discuss, and the opinion at the end goes back to a clinician who has not been introduced." },

@@ -21,7 +21,7 @@
       "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
     },
     "macro_pattern": "general_to_specific",
-    "cohesion_signals": ["lexical_repetition", "connective_explicit", "article_given_new"],
+    "cohesion_signals": ["lexical_repetition", "connective_explicit", "article_given_new", "demonstrative"],
     "primary_trap": "none",
     "secondary_traps": [],
     "dna_traits": ["opener_heuristic", "surface_matching"],
@@ -39,15 +39,20 @@
       "topic_unfamiliarity": 1,
       "plausible_orderings": 2
     },
-    "num_plausible_orderings": 2,
+    "num_plausible_orderings": 3,
     "heuristic_adversarial": false,
     "nucleus": "C",
-    "learning_objective": "start from the widest sentence, and place a sentence that opens 'The explanation is' after the thing it explains",
+    "learning_objective": "start from the widest sentence, and let a demonstrative and a negative continuation each name the one sentence they are able to follow",
     "reasoning_patterns": ["disc.general_to_specific", "disc.example_after_claim", "disc.opening_sentence", "disc.transition_word"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The one real rival puts the two closing sentences the other way round, ending on the explanation because an explanation sounds conclusive. It fails on the connective: the sentence about experience begins 'Nor does', which has to continue a statement that something else does not help, and the only such statement is the one about imagination leaving the interruptions out. The example sentence cannot open either, since 'Students asked to say when they will finish an essay' is a case of a claim that has not yet been made.",
-      "blind_solve": null
+      "adversarial_review": "Two rivals are worth arguing. The first puts the two closing sentences the other way round, ending on the explanation because an explanation sounds conclusive; it fails because the sentence about experience begins 'Nor does', which has to continue a statement that something else does not help, and the only such statement is the clause saying that a more careful plan does not help. The second promotes that same sentence to second place, immediately after the opening claim, on the grounds that a claim about a mistake invites a remark about what fails to cure it; it fails because the opening claim says only that the underestimate repeats, not that anything has been tried and failed, so 'Nor' would be continuing nothing. The explanation sentence is fixed from the other side as well: 'these students' is a demonstrative, and the only students in the paragraph are the ones in the example.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but defended a second order, attaching the sentence beginning 'Nor does experience' directly to the opening claim. Repaired by removing the opening claim's statement that the mistake survives correction, by giving the explanation sentence the negative clause that 'Nor' must continue, and by anchoring that sentence to the example with a demonstrative. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -59,7 +64,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-pj-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
-    "reviewer_notes": "A foundation-tier jumble with no engineered trap: one general claim, one case, one explanation and one closing qualification, each carrying a plain signal. It exists to teach the two habits the harder items assume — open with the sentence that needs nothing before it, and let explicit connectives place the rest."
+    "reviewer_notes": "A foundation-tier jumble with no engineered trap: one general claim, one case, one explanation and one closing qualification, each carrying a plain signal. It exists to teach the two habits the harder items assume — open with the sentence that needs nothing before it, and let explicit connectives place the rest. The explanation sentence is deliberately double-anchored, by a demonstrative looking back to the example and by a negative clause that the closing 'Nor' has to continue, so that only one order survives."
   },
   "sentences": [
     {
@@ -69,17 +74,17 @@
     },
     {
       "label": "B",
-      "text": "Nor does experience of our own lateness help, since each new task feels like the one job that will run to plan.",
+      "text": "Nor does experience of our own lateness help, since each new task presents itself as the one job that will go as it should.",
       "role": "conclusion"
     },
     {
       "label": "C",
-      "text": "Almost everybody underestimates how long a piece of work will take, and the mistake survives every correction.",
+      "text": "Almost everybody underestimates how long a piece of work will take, and the same person will underestimate the next piece by about as much.",
       "role": "topic"
     },
     {
       "label": "D",
-      "text": "The explanation is that we plan by imagining the work going as it should, while the interruptions that actually arrive are the ones imagination leaves out.",
+      "text": "The explanation is that these students, like the rest of us, plan by imagining the work going as it should, and a more careful plan does not help, since the interruptions that actually arrive are the ones imagination leaves out.",
       "role": "cause_effect"
     }
   ],
@@ -90,45 +95,51 @@
       "to": "A",
       "device": "thematic_development",
       "reliability": "medium",
-      "explanation": "C makes a claim about almost everybody and about a mistake that survives correction. A is the case of it: one group of people, one kind of estimate, and the same estimate made again after it has been shown wrong."
+      "explanation": "C makes a claim about almost everybody and about an underestimate that repeats at the same size. A is the case of it: one group of people, one kind of estimate, and a second date named just as confidently after the first has been missed."
     },
     {
       "from": "A",
       "to": "D",
-      "device": "causal_chain",
+      "device": "demonstrative_reference",
       "reliability": "high",
-      "explanation": "D opens 'The explanation is', which needs something already described to explain. A has just described the behaviour in detail — a date named, missed, and confidently named again."
+      "explanation": "D opens 'The explanation is', which needs something already described to explain, and then says 'these students'. The only students in the paragraph are the ones in A, so D cannot stand anywhere before it."
     },
     {
       "from": "D",
       "to": "B",
       "device": "logical_connector",
       "reliability": "high",
-      "explanation": "B begins 'Nor does', which continues a statement that something fails to help. D has just said that imagination leaves out precisely what delays us; B adds that experience does not make up the gap."
+      "explanation": "B begins 'Nor does', which continues a statement that something fails to help, and D is the only sentence that contains one: a more careful plan does not help. B adds that experience does not help either, and closes on D's own phrase, the work going as it should."
     }
   ],
   "explanation": {
-    "macro_pattern_note": "The paragraph moves from the widest statement to the narrowest support and then back out again: a claim about almost everybody, a single familiar case, the mechanism behind the case, and a closing sentence that blocks the obvious objection. Nothing is hidden here; every joint is marked by a word you can point at.",
+    "macro_pattern_note": "The paragraph moves from the widest statement to the narrowest support and then back out again: a claim about almost everybody, a single familiar case, the mechanism behind the case, and a closing sentence that blocks the obvious objection. Nothing is hidden here; every joint is marked by a word you can point at, and the mechanism sentence is pinned from both sides, by a demonstrative looking back and by a negative that the closing sentence has to continue.",
     "movement": [
-      { "label": "C", "why_here": "C needs nothing before it and names the subject of every other sentence: how long work takes, and a mistake about it that correction does not cure. Only a sentence this wide can open." },
-      { "label": "A", "why_here": "A supplies the case. It illustrates both halves of C — the underestimate, in the missed date, and the survival of the mistake, in the equally confident date that follows." },
-      { "label": "D", "why_here": "D explains what A has just shown. Its opening words announce that an explanation is coming, so the thing explained must already be on the page in full." },
-      { "label": "B", "why_here": "B closes by answering the objection a reader is now forming: surely being late teaches you. Its 'Nor' attaches it to D's account of why planning misleads, and it hands nothing on." }
+      { "label": "C", "why_here": "C needs nothing before it and names the subject of every other sentence: how long work takes, and an underestimate that comes back the same size. Only a sentence this wide can open." },
+      { "label": "A", "why_here": "A supplies the case. It illustrates both halves of C — the underestimate, in the missed date, and the repetition, in the equally confident date that follows." },
+      { "label": "D", "why_here": "D explains what A has just shown, and names the people who showed it. Its opening words announce an explanation, and 'these students' will not point anywhere else." },
+      { "label": "B", "why_here": "B closes by answering the objection a reader is now forming: surely being late teaches you. Its 'Nor' can only continue D's statement that a more careful plan does not help, and it hands nothing on." }
     ],
     "tempting_orders": [
       {
         "order": "CABD",
         "trap_type": "competing_ending",
         "why_tempting": "An explanation feels like a destination, so a solver who has placed the claim and the case wants the mechanism last and treats the sentence about experience as a further piece of evidence.",
-        "where_it_breaks": "The sentence about experience begins with 'Nor does'. Put immediately after the students, it continues nothing: no earlier sentence has said that anything fails to help. The word needs the explanation in front of it."
+        "where_it_breaks": "The sentence about experience begins with 'Nor does'. Put immediately after the students, it continues nothing: no earlier sentence has said that anything fails to help. It also leaves 'these students' stranded at the end, pointing back over a sentence that has changed the subject."
+      },
+      {
+        "order": "CBAD",
+        "trap_type": "misleading_connective",
+        "why_tempting": "A claim about a mistake that keeps happening seems to invite a remark about what does not cure it, so the sentence beginning 'Nor does experience' looks like a natural second, extending the opening before the example arrives.",
+        "where_it_breaks": "'Nor' continues a negative, and the opening sentence contains none: it says the underestimate repeats, not that any remedy has been tried. The only sentence that reports a failed remedy is the one saying that a more careful plan does not help, and that sentence is also held in place by 'these students', which needs the example in front of it."
       }
     ],
-    "trap_named": "No trap was set in this item; the risk is impatience. Solvers who fix the first two sentences quickly often stop reading the connectives and order the last two by feel. 'Nor', 'The explanation is', 'therefore' and 'in each case' are instructions, and they decide the tail of a paragraph more reliably than any sense of what sounds final.",
-    "solving_habit": "Read the first two words of every sentence before you order anything. A sentence that starts with a connective is telling you what has to stand in front of it, and that is usually cheaper information than working out the argument."
+    "trap_named": "No trap was set in this item; the risk is impatience. Solvers who fix the first sentence quickly often stop reading the connectives and order the rest by feel, and a negative continuation is the easiest of all to misplace, because 'Nor' will attach itself to any sentence that has the general flavour of a difficulty. It does not want a difficulty; it wants a statement that something has failed to help, and only one sentence here contains one.",
+    "solving_habit": "Read the first two words of every sentence before you order anything, then say out loud what those words demand. 'Nor' demands a stated failure, not a general complaint; 'these' demands a group already named. A connective that has been given a precise demand will usually name its own neighbour."
   },
   "mentor": {
-    "challenge": "Three of these sentences announce, in their opening words, what must come before them. Find those words first and the order will assemble itself.",
-    "paragraph_plain": "Nearly everyone thinks work will take less time than it does, and being wrong about it does not seem to teach us much. Students promise a date for an essay, miss it, and promise the same sort of date next time. The reason is that when we plan we picture the job going smoothly, and the interruptions that actually turn up are exactly the things we never picture. Even knowing we are usually late does not help, because every new job feels like the one that will finally go to plan.",
-    "takeaway": "A sentence beginning 'Nor' or 'The explanation is' is not free to go anywhere; it has already told you what it follows."
+    "challenge": "Three of these sentences announce, in their opening words, what must come before them. One of them is fussier than it looks: work out exactly what its 'Nor' is continuing.",
+    "paragraph_plain": "Nearly everyone thinks work will take less time than it does, and the same person will be out by about as much on the next job. Students promise a date for an essay, miss it, and promise the same sort of date next time. The explanation is that these students, like the rest of us, plan by picturing the job going smoothly, and planning more carefully does not help, because the interruptions that actually turn up are exactly the things we never picture. Knowing we are usually late does not help either, because every new job presents itself as the one that will finally go as it should.",
+    "takeaway": "A sentence beginning 'Nor' has already told you what it follows: not a subject, but a stated failure."
   }
 }

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0018",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "intellectual-history",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "Published by Post",
+    "theme": "why a letter to a learned society counted as publication, and what the practice had already supplied before journals existed",
+    "estimated_time_sec": 85,
+    "gap_function": "conclusion",
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.closing_sentence", "disc.function_slot", "struct.history_of_an_idea", "disc.lexical_chain"],
+    "learning_objective": "close a historical paragraph on the claim its middle sentences established, not on the detail of the sentence immediately above",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 3, "distractor_closeness": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of scientific correspondence before journals; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The paragraph's pivot is the third sentence, which says the register rather than the letter was the public thing. The decoy about printing being a convenience fits the fourth sentence and quietly contradicts that pivot, which is the local fit and global break in its cleanest form.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option calling the journal a printer's convenience that arrived when the correspondence had grown too large to read aloud. It follows the fourth sentence beautifully and sounds like a historian's deflation. But the paragraph has located the essential thing in the register — a dated public entry — and this option locates it in the volume of post and the mechanics of printing, which the third sentence has already ruled out as the point. The restatement of the register's use against a rival is true and repeats the sentence that made it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Before there were journals, a discovery was announced by writing to somebody who knew everybody.",
+      "The secretary of a learned society received the letter, read it aloud at the next meeting, entered the date in the register and wrote back.",
+      "The register is the point: the letter was private, the entry was not, and the entry fixed a date that could be produced later against a rival.",
+      "When the society began printing the letters it received, it was not inventing a new kind of publication so much as making the register easier to consult."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "The journal was a printer's convenience, then, arriving just as the correspondence grew too bulky to be read aloud at a meeting.",
+      "B": "The date in the register, in other words, could be produced against a rival who claimed the same discovery afterwards.",
+      "C": "What the correspondence had already supplied was the thing a journal exists to supply: a public record of who said what, and when.",
+      "D": "Learned societies have always been in the business of deciding whose name goes on a result, though they rarely put it in those words."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The third sentence isolates the register as the working part, and the fourth says that printing merely made it easier to consult. A closing sentence must state what follows about the correspondence itself: that it was already doing the job a journal does. The claim has to be about function rather than about the mechanics of printing, because the paragraph has just denied that printing changed the kind of thing being done.",
+    "correct_reasoning": "The correct option names the function the paragraph has been isolating — a public record of authorship and date — and awards it to the correspondence, which is precisely what the third and fourth sentences together establish. It uses the paragraph's own two variables, who and when, and it lands the argument the fourth sentence was building towards instead of adding a new observation.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It follows the sentence about printing perfectly, but the paragraph has located the essential thing in the dated public entry, not in the volume of post or the economics of printing; calling the journal a convenience of bulk sets aside the pivot the third sentence made.",
+        "seductive_element": "It is deflationary in a way that sounds historically sophisticated, and it picks up the previous sentence's subject word for word."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The third sentence has already said the entry fixed a date that could be produced against a rival; repeating it as a conclusion leaves the paragraph ending where its middle already was.",
+        "seductive_element": "'In other words' reads as a writer tightening the point, and the sentence is the paragraph's most concrete claim, which makes it feel like the important one."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A claim about what societies have always been doing abandons the specific finding — that the correspondence performed a journal's function — and its concession about vocabulary adds a knowingness the paragraph has not earned.",
+        "seductive_element": "It is broad, quotable and true enough, and generalising at the close is a habit many readers mistake for concluding."
+      }
+    ],
+    "method": "Find the sentence that says what the paragraph thinks the working part is — often flagged, as here, by a phrase like 'is the point'. The closing sentence has to cash that, not the sentence directly above the gap. An option that follows the last given line smoothly while stepping around the paragraph's pivot is the standard trap of this type."
+  },
+  "mentor": {
+    "challenge": "One sentence in this paragraph announces what the whole thing turns on. Close on that, not on the line nearest the gap.",
+    "takeaway": "Smooth continuation is not completion: check the closer against the paragraph's pivot, not against its last sentence."
+  }
+}

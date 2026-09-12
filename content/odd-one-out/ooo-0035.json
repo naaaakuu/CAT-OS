@@ -34,7 +34,7 @@
     "traps": {
       "primary": "B",
       "secondary": "A",
-      "description": "The outlier is a vivid particular about the same volumes, in a paragraph that already contains one vivid particular, so it looks like the second half of a pair. The decoy is that other particular, the pointer from a doctrine to superstition, which a reader suspicious of examples may drop instead."
+      "description": "The outlier is a vivid particular about the same volumes, in a paragraph that already contains one vivid particular, so it looks like the second half of a pair. It has been cut to the length of its neighbours, given the description's own vocabulary of entries, readers and directing, and is no longer the only sentence carrying a count, since the opening now numbers the volumes. The decoy is that other particular, the pointer from a doctrine to superstition, which a reader suspicious of examples may drop instead."
     },
     "cohesion_signals": {
       "reference": true,
@@ -56,8 +56,13 @@
     "reasoning_patterns": ["arg.example_vs_principle", "disc.example_after_claim", "comp.supporting_idea", "comp.organization", "scope.true_but_off_question"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival is the sentence about a piece on a doctrine that ends by pointing at superstition: it is an illustration in a set that appears to need only one, and a reader pruning examples may take it. It stays because it is the only place the device is shown working, and because the closing sentence's opinion in the margins has nothing to refer to without it. The forty columns and the plates are an illustration of scale and thoroughness; no sentence in the paragraph claims either, and the description is entirely about what a pointer can do that a sentence cannot.",
-      "blind_solve": null
+      "adversarial_review": "The rival is the sentence about a piece on a doctrine that ends by pointing at superstition: it is an illustration in a set that appears to need only one, and a reader pruning examples may take it. It stays because it is the only place the device is shown working, and because the closing sentence's opinion in the margins has nothing to refer to without it. The forty columns and the plates are an illustration of scale and thoroughness; no sentence in the paragraph claims either, and the description is entirely about what a pointer can do that a sentence cannot. That sentence now runs to the same length as the rest, uses the description's own vocabulary, entry, reader and directing, and is no longer the only sentence with a number in it, so the choice between the two particulars has to be made on what each one is a particular of.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported the outlier as doubly cheap, being both the off-genre sentence and conspicuously the longest in the item. Repaired by cutting its list to two items and bringing it to the length of its neighbours. A second blind solve agreed again and reported that the outlier was still the only sentence carrying none of the description's cross-reference vocabulary and the only one with a figure; it has since been given the entry and the reader, and the opening sentence now numbers the volumes. A third blind solve agreed and reported the outlier still the only sentence carrying no member of the cross-reference word family. Its plates now direct the reader's eye, so the family is complete across all five sentences and only the claim each particular serves separates them. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -73,8 +78,8 @@
   },
   "sentences": [
     { "label": "A", "text": "An article on a point of doctrine that closes by directing the reader to the article on superstition has made no statement a censor could quote, and has still said something no reader will miss." },
-    { "label": "B", "text": "The entry for a single mechanical trade could run to forty columns, with folding plates that showed every tool on the bench, the order of the operations, and the exact position of the workman's hands at each stage." },
-    { "label": "C", "text": "At the foot of many articles in the great eighteenth-century encyclopaedias stands a word in small capitals, directing the reader to another entry." },
+    { "label": "B", "text": "The entry for a single mechanical trade could run to forty columns, and its plates directed the reader's eye to every tool on the bench and to the workman's hands at each stage." },
+    { "label": "C", "text": "At the foot of many articles in the seventeen folio volumes of the great eighteenth-century encyclopaedias stands a word in small capitals, directing the reader to another entry." },
     { "label": "D", "text": "The device belongs to the apparatus rather than to the prose, which is why so much of an encyclopaedia's opinion has to be looked for in its margins and in its order." },
     { "label": "E", "text": "Some of these directions do the ordinary work of a reference, and others send the reader somewhere the article has given him no obvious reason to go." }
   ],
@@ -86,7 +91,7 @@
   "explanation": {
     "spine_note": "The core describes one small device in four steps. It opens with the thing itself, a word in small capitals at the foot of an article, then divides the class in two: ordinary references, and directions with no obvious warrant. The third step shows the second kind at work, pointing from a doctrine to superstition and thereby saying what no sentence had to say, and the fourth locates the device in the apparatus rather than in the prose. Object, division, instance, placement.",
     "core_roles": [
-      { "label": "C", "role": "topic", "why_here": "It is the only sentence that says what the object physically is and where it sits, which everything after it takes for granted." },
+      { "label": "C", "role": "topic", "why_here": "It is the only sentence that says what the object physically is, where it sits and how large the work it sits in is, all of which everything after it takes for granted." },
       { "label": "E", "role": "development", "why_here": "'These directions' picks up the pointer just described and splits it into the two kinds the rest of the description needs." },
       { "label": "A", "role": "example", "why_here": "It shows the second kind doing its work, and it is the only sentence in which the device actually says anything." },
       { "label": "D", "role": "conclusion", "why_here": "'The device' names what has just been demonstrated and places it, drawing the consequence for where a reader has to look for opinion." }
@@ -96,9 +101,9 @@
       { "from": "E", "to": "A", "tie": "lexical", "explanation": "The article that sends a reader somewhere with no obvious reason is exactly the case the next sentence exhibits, so the instance answers the category." },
       { "from": "A", "to": "D", "tie": "given_new", "explanation": "What a pointer can say without stating is now given, and the closing sentence adds the new material, where in a volume such saying lives." }
     ],
-    "violation_named": "The odd sentence is an example without a claim. The description is about what a cross-reference can do that a sentence cannot, and every part of it concerns pointing, direction and the space between two articles. Forty columns and engraved plates illustrate the scale and thoroughness of the enterprise, which no sentence here asserts, denies or uses.",
+    "violation_named": "The odd sentence is an example without a claim. The description is about what a cross-reference can do that a sentence cannot, and every part of it concerns pointing, direction and the space between two articles. Forty columns and engraved plates illustrate the scale and thoroughness of the enterprise, which no sentence here asserts, denies or uses. The sentence is no longer marked out by its length, its vocabulary or its arithmetic; it is marked out only by the claim it fails to serve.",
     "why_it_breaks": "The core is a chain of definite reference: this word, these directions, this case, the device. The stray sentence enters that chain with a noun the chain does not contain, an entry considered on its own, and leaves nothing behind for the closing sentence to place. It would sit naturally in a description of the encyclopaedia's ambition. This description is about its margins.",
-    "trap_exposed": "The camouflage is that a description of a book may reasonably contain particulars, and this one already contains one, so the stray sentence presents itself as the second of a pair. The decoy is the genuine particular: because it is the more argumentative of the two, a reader who is pruning illustrations often removes the sentence in which the device is the only time shown working.",
+    "trap_exposed": "The camouflage is that a description of a book may reasonably contain particulars, and this one already contains one, so the stray sentence presents itself as the second of a pair. Nothing about its size, its nouns or its numbers separates it from that pair. The decoy is the genuine particular: because it is the more argumentative of the two, a reader who is pruning illustrations often removes the sentence in which the device is the only time shown working.",
     "exclusion_analysis": [
       { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It is pure physical description, a word and its position on a page, so a reader looking for the paragraph's idea may treat it as furniture.", "what_breaks": "Without it nothing says what the device is, and the directions, the instance and the apparatus all describe an object the reader has never been shown." },
       { "label": "E", "mistake_type": "hardest_to_place", "why_tempting": "It divides a class without deciding anything, which makes it look like a transitional sentence that could be spared.", "what_breaks": "Without it the paragraph moves from a pointer in general to a pointer that accuses, with the distinction that makes the second kind remarkable left out." },
@@ -108,7 +113,7 @@
     "detection_habit": "For every concrete sentence, finish the phrase this is an example of, using only words the paragraph has already used. If the phrase cannot be finished, the example is visiting from another argument."
   },
   "mentor": {
-    "challenge": "Two of these sentences are vivid particulars about the same volumes, and both are true. Only one of them illustrates what this paragraph is describing.",
+    "challenge": "Two of these sentences are vivid particulars about the same volumes, both true and much the same size. Only one of them illustrates what this paragraph is describing.",
     "takeaway": "A particular has to be a particular of something. Name the claim it serves, or let it go."
   }
 }

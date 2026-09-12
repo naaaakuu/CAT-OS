@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0008",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "environment",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Second Animal on the Island",
+    "theme": "why removing one introduced species can release another that it had been holding down",
+    "estimated_time_sec": 95,
+    "gap_function": "consequence",
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": ["disc.cause_effect", "disc.function_slot", "struct.cause_effect", "disc.given_new", "arg.causal_claim"],
+    "learning_objective": "state the consequence a described mechanism actually produces, without upgrading it into a verdict on the whole practice",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of interacting introduced species on islands; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The paragraph sets up a two-predator arrangement and the gap must say what happens when one of them is taken out first. The reversed-mechanism decoy is the near-tie: it describes a release, but of the wrong animal, and the sentence after the gap shows which way the release ran.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The near-tie is the option in which the rats, released from predation, multiply and strip the nests: it uses the paragraph's own release logic and its own vocabulary. It is killed by the word 'first' in the situation the paragraph has set up — the rats are what is being removed, so they cannot be the population that is released, and only the cats are left to be redirected. The verdict option about leaving damaged islands alone is the general trap; the sentence after the gap reports that manuals now require both animals to be removed together, which is advice the paragraph would not give if intervention were to be abandoned.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Seabird colonies collapse when rats reach an island, and the obvious repair is to take the rats off it.",
+      "Where rats are the only introduced mammal this works, and the birds are back within a few breeding seasons.",
+      "Where cats were landed later, however, the two populations have been holding each other down: the cats live largely on rats, and the rats are kept below the density at which they would find every nest.",
+      "The two islands where this was learned the expensive way are in every handbook now, and eradication plans since have insisted that both animals come off together."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Every removal of a species has effects on species that were never the target of the removal, and some of them are severe.",
+      "B": "Ecological repair is therefore a gamble, and though the aim is decent, the safest course on a damaged island is to leave it alone.",
+      "C": "The rats, released from the predation that had been holding them down, then multiply to the density at which they find every nest.",
+      "D": "Take the rats away first and the cats, with nothing else left to live on, turn to the colony the whole operation was meant to rescue."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The third sentence describes a balance between two introduced animals and says what each does to the other. The gap must state the consequence of disturbing that balance from one side, and the sentence after it — plans now insist both animals come off together — tells you which side: something went wrong when one was removed on its own, and the sentence must say what.",
+    "correct_reasoning": "The correct option follows the mechanism the paragraph has just laid out. If cats live largely on rats, removing the rats leaves the cats without their food, and the only other abundant prey is the colony the project exists to protect. That is the consequence the following sentence treats as an expensive lesson, and it explains precisely why plans now require both animals to be taken off at once.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It converts one described failure into a verdict on intervention as such, which the next sentence contradicts by reporting that eradication plans were amended rather than abandoned; the paragraph also opened with a case where removal worked.",
+        "seductive_element": "It concedes the good intention before delivering the caution, which is the shape of a wise conclusion, and scepticism about intervention is a familiar and respectable position."
+      },
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "The animal being removed is the rat, so the rats cannot be the population released by the removal; the predator left without its food is the cat, and the paragraph has said so in the sentence immediately before.",
+        "seductive_element": "It borrows the paragraph's own phrases about density and nests, and release from predation is the correct kind of mechanism, applied to the wrong member of the pair."
+      },
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The gap needs the particular consequence that made two islands famous; a general statement that removals have effects on non-target species names no consequence at all, and leaves the following sentence's insistence on removing both animals unexplained.",
+        "seductive_element": "It is unarguably true, it is the lesson people take from such cases, and generality feels safe when a mechanism is intricate."
+      }
+    ],
+    "method": "When a paragraph has set out a mechanism with two moving parts, do not reach for the moral. Ask which part the next event disturbs and what the mechanism then does. Here the next sentence names the correction that was adopted, which fixes both the direction of the failure and its size: a correction to the method, not an abandonment of it."
+  },
+  "mentor": {
+    "challenge": "Two introduced animals, each holding the other down. Work out what happens when only one of them is taken away, and in which direction.",
+    "takeaway": "A consequence sentence follows the machinery; a verdict sentence leaves it. Check which the paragraph's next line is expecting."
+  }
+}

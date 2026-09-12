@@ -23,7 +23,7 @@
     "macro_pattern": "argumentative",
     "cohesion_signals": ["lexical_repetition", "connective_explicit", "article_given_new", "synonym_hypernym"],
     "primary_trap": "lexical_decoy",
-    "secondary_traps": [],
+    "secondary_traps": ["competing_opener"],
     "dna_traits": ["surface_matching", "opener_heuristic"],
     "difficulty_vector": {
       "vocabulary_load": 1,
@@ -33,21 +33,26 @@
       "concept_abstractness": 2,
       "dependency_chain_length": 2,
       "transition_ambiguity": 2,
-      "competing_openings": 1,
+      "competing_openings": 3,
       "competing_endings": 2,
       "lexical_decoys": 3,
       "topic_unfamiliarity": 1,
-      "plausible_orderings": 2
+      "plausible_orderings": 3
     },
-    "num_plausible_orderings": 2,
+    "num_plausible_orderings": 3,
     "heuristic_adversarial": false,
     "nucleus": "A",
-    "learning_objective": "resist joining two sentences because they share a word, and let 'In fact' and 'therefore' place the argument instead",
-    "reasoning_patterns": ["disc.contrast", "disc.claim_then_evidence", "disc.transition_word", "disc.lexical_chain"],
+    "learning_objective": "resist joining two sentences because they share a word, and ask what a definite phrase such as 'the test' needs before it can open anything",
+    "reasoning_patterns": ["disc.contrast", "disc.claim_then_evidence", "disc.transition_word", "disc.lexical_chain", "disc.competing_opener"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The live rival joins the two sentences that both speak of the wall, putting the closing sentence about a curator's decisions straight after the opening complaint about wasted space. It breaks twice: that sentence contains 'therefore', which needs an argument in front of it and would have none, and the sentence beginning 'In fact' would then be correcting the curator rather than the visitor, when the mistaken impression it answers belongs to the visitor. The sentence about hanging two pictures close together cannot open, since its point is only visible once a claim about emptiness has been made for it to test.",
-      "blind_solve": null
+      "adversarial_review": "Two rivals are live. The first joins the two sentences that both speak of the wall, putting the closing sentence about a curator's decisions straight after the opening complaint about wasted space. It breaks twice: that sentence contains 'therefore', which needs an argument in front of it and would have none, and the sentence beginning 'In fact' would then be correcting the curator rather than the visitor, when the mistaken impression it answers belongs to the visitor. The second rival opens on the sentence about hanging two pictures close together, which now announces itself as a test that is easy to run and so reads like a confident first line. It breaks twice over. A test is a test of something, and 'The test' is a definite phrase requiring a claim already on the page; and the sentence reports that the eye can no longer tell where one picture ends and the next begins, a 'no longer' that presupposes the claim in the sentence beginning 'In fact'. That sentence cannot itself come first, since it corrects an impression the visitors have to have been given. The same 'no longer' also forbids the milder rearrangement that puts the test second and the correction third.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported the item over in seconds, the opener being the only sentence without an anaphor and the closer carrying 'therefore'. Repaired by giving the evidence sentence a definite phrase, 'The test', that reads as an opening gambit while strictly requiring the claim it tests, so the first position now has two candidates. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -59,7 +64,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-pj-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
-    "reviewer_notes": "A foundation-tier argumentative jumble whose only difficulty is a repeated noun. 'Wall' appears in the first and last sentences of the correct order, which invites a solver to glue them; the connectives override the repetition. Written to teach that a shared word is a hypothesis, not a link."
+    "reviewer_notes": "A foundation-tier argumentative jumble with two difficulties. 'Wall' appears in the first and last sentences of the correct order, which invites a solver to glue them; the connectives override the repetition. And the evidence sentence opens on 'The test', which reads as a self-sufficient first line, so the opener can no longer be fixed by looking for the one sentence with no backward reference. Written to teach that a shared word is a hypothesis, not a link, and that a definite phrase is a demand."
   },
   "sentences": [
     {
@@ -74,7 +79,7 @@
     },
     {
       "label": "C",
-      "text": "Hang two pictures close together and they begin to argue: the reds of one pull at the reds of the other, and neither is seen on its own terms.",
+      "text": "The test is easy to run: hang two pictures close together and the eye can no longer say where one stops and the next starts, the reds of each pulling at the reds of the other.",
       "role": "evidence"
     },
     {
@@ -97,7 +102,7 @@
       "to": "C",
       "device": "thematic_development",
       "reliability": "medium",
-      "explanation": "A claims that the emptiness separates one painting from the next. C is the test of that claim: take the emptiness away, hang two pictures close, and watch them interfere with each other."
+      "explanation": "A claims that the emptiness tells the eye where one painting ends and the next begins. C announces itself as 'The test' and then reports that the eye can no longer tell exactly that, which presupposes a state in which it could. Both the definite phrase and the 'no longer' point back at A and can be satisfied nowhere else."
     },
     {
       "from": "C",
@@ -110,9 +115,9 @@
   "explanation": {
     "macro_pattern_note": "This is a small argument in four moves: a common mistake, the correction, the evidence for the correction, and the consequence for whoever hangs the pictures. The correction is marked by 'In fact' and the consequence by 'therefore', which is why the paragraph can be assembled without knowing anything about galleries.",
     "movement": [
-      { "label": "D", "why_here": "D states the view the paragraph exists to answer. It needs nothing before it, and everything after it is addressed to the visitors it describes." },
+      { "label": "D", "why_here": "D states the view the paragraph exists to answer. It needs nothing before it, and everything after it is addressed to the visitors it describes. It is the opener not because it is the only sentence that could start but because it is the only one that owes nothing." },
       { "label": "A", "why_here": "A is the turn. 'In fact' announces that a wrong impression is being corrected, and the impression is the one D has just reported." },
-      { "label": "C", "why_here": "C shows what happens when the emptiness A defends is removed. Evidence follows the claim it supports, and this evidence is unintelligible before the claim." },
+      { "label": "C", "why_here": "C shows what happens when the emptiness A defends is removed. Its opening phrase sounds like the beginning of an essay, but a test needs something to be a test of, and its 'no longer' needs a sentence in which the eye still could." },
       { "label": "B", "why_here": "B draws the consequence for the curator and closes the loop back to the bare wall. Its 'therefore' means it cannot stand before the argument it concludes." }
     ],
     "tempting_orders": [
@@ -121,14 +126,20 @@
         "trap_type": "lexical_decoy",
         "why_tempting": "Two sentences talk about the wall, one calling it wasted space and one calling it a wall that seems to hold nothing. The repetition looks like a join, and the second sentence answers the first so neatly that it feels designed to follow it.",
         "where_it_breaks": "That sentence contains 'therefore'. Placed second, it concludes an argument that has not been made, and the sentence beginning 'In fact' would then be correcting a conclusion rather than the visitors' mistake. Repetition suggested the pair; the connective forbids it."
+      },
+      {
+        "order": "CDAB",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence about hanging two pictures close together opens by promising a test that is easy to run, which is how a good deal of criticism begins. It carries no pronoun, refers to nothing behind it, and gets to a concrete demonstration in its first clause, so a solver hunting for the sentence that needs nothing before it may settle on it and never look further.",
+        "where_it_breaks": "'The test' is definite, and a test has to be a test of a claim. At the head of the paragraph there is no claim, so the phrase names something the reader has not been given. The sentence then says the eye can no longer tell where one picture ends and the next begins, which presupposes a sentence in which it could, and the only one is the sentence beginning 'In fact'. Read the phrase as a demand rather than as a flourish and the sentence loses its claim to the first seat, and to any seat before the claim it tests."
       }
     ],
-    "trap_named": "The trap is the repeated noun. Setters place the same word in two sentences that must not touch, because a reader under time pressure joins on vocabulary before reading for function. A shared word tells you two sentences belong in the same paragraph; only a connective or a reference tells you they belong side by side.",
-    "solving_habit": "When two sentences share a striking word, treat the pairing as a guess and then look for a connective that confirms or refuses it. 'Therefore' and 'In fact' are stronger evidence than any amount of repeated vocabulary."
+    "trap_named": "Two traps are set. The first is the repeated noun: setters place the same word in two sentences that must not touch, because a reader under time pressure joins on vocabulary before reading for function. The second is a definite phrase dressed as an opening. 'The test is easy to run' has the confidence of a first line and no pronoun to give it away, and the habit of opening with the sentence that refers to nothing behind it will walk straight into it. A phrase like 'the test', 'the answer' or 'the difficulty' refers backwards whether or not it contains a pronoun.",
+    "solving_habit": "Two checks, in this order. When two sentences share a striking word, treat the pairing as a guess and look for a connective that confirms or refuses it. And before accepting any sentence as the opener, take each definite noun phrase in it and ask whether a reader coming to it cold could say what it names. If not, the sentence is owed something, and something has to come before it."
   },
   "mentor": {
-    "challenge": "Two sentences here speak of the same bare wall, and they must not be neighbours. One small word in each will tell you why.",
-    "paragraph_plain": "People walking round a gallery often think the blank wall between pictures is a waste, or that the museum has not got enough to show. It is not a waste: the gap is what lets your eye tell one picture from the next. Put two paintings close together and they start to interfere, the colours of each pulling at the other, so that you cannot look at either by itself. That is why deciding how far apart to hang things is the hardest part of a curator's job, and why the wall that appears to hold nothing is in fact holding two pictures apart.",
-    "takeaway": "Sentences that share a word are not necessarily neighbours; a connective outranks a repetition every time."
+    "challenge": "Two sentences here speak of the same bare wall, and they must not be neighbours. Two of them could be read as the opening, and only one of them owes nothing to a sentence in front of it.",
+    "paragraph_plain": "People walking round a gallery often think the blank wall between pictures is a waste, or that the museum has not got enough to show. It is not a waste: the gap is what lets your eye tell one picture from the next. The test is simple. Put two paintings close together and your eye can no longer tell where one stops and the next starts, the colours of each pulling at the other. That is why deciding how far apart to hang things is the hardest part of a curator's job, and why the wall that appears to hold nothing is in fact holding two pictures apart.",
+    "takeaway": "A sentence with no pronoun in it can still be reaching backwards. Definite phrases point too."
   }
 }

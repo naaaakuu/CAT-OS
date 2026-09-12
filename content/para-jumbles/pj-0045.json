@@ -33,21 +33,26 @@
       "concept_abstractness": 2,
       "dependency_chain_length": 2,
       "transition_ambiguity": 1,
-      "competing_openings": 2,
-      "competing_endings": 2,
+      "competing_openings": 3,
+      "competing_endings": 3,
       "lexical_decoys": 1,
       "topic_unfamiliarity": 1,
-      "plausible_orderings": 2
+      "plausible_orderings": 3
     },
-    "num_plausible_orderings": 2,
+    "num_plausible_orderings": 3,
     "heuristic_adversarial": false,
     "nucleus": "A",
-    "learning_objective": "let a phrase such as each of these fix a sentence immediately after the list it counts",
-    "reasoning_patterns": ["disc.problem_then_solution", "disc.demonstrative", "disc.given_new", "disc.cause_effect", "struct.problem_solution"],
+    "learning_objective": "let a phrase such as each of these fix a sentence immediately after the list it counts, and refuse to read a 'therefore' as proof that a sentence is the last one",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.demonstrative", "disc.given_new", "disc.cause_effect", "struct.problem_solution", "disc.competing_ending"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival keeps the sentence about time and nerve for last, since it names the people the policy was written for and reads like a moral. It fails at once: that sentence begins 'Each of these', and a phrase that counts has to follow the things it counts, which are the nine-page form, the office hours and the rule. A second rival opens on the list of reasons, because it carries no pronoun; that fails because 'The reasons' is a definite reference to an outcome nobody has yet described, and the only sentence describing one is the one about payments going uncollected.",
-      "blind_solve": null
+      "adversarial_review": "The rival keeps the sentence about time and nerve for last, and it is now the stronger rival, since that sentence carries the paragraph's only 'therefore', names the people the policy was written for, and reads like a moral. It fails at once: the sentence begins 'Each of these', and a phrase that counts has to follow the things it counts, which are the nine-page form, the office hours and the rule; in the last seat the only list behind it would be a shorter form and no form at all, which are remedies rather than obstacles. A second rival opens on the sentence about the cheapest reform, whose 'The cheapest reform' can be read as a general definite and which carries no connective at all, so it reads like a thesis the rest of the paragraph will support. That fails because a remedy cannot precede the problem it answers: 'not a larger payment but a shorter form' weighs two repairs for a shortfall nobody has yet reported, and forms have not been mentioned. The sentence about the reasons cannot open either, since it now names 'the shortfall' outright, and only the sentence about uncollected payments supplies one.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported the item over in seconds, with the ends as forced as the middle. Repaired by moving the concluding connective off the true closer onto the counting sentence, so that the counting sentence now looks like the landing, and by naming the shortfall in the list of reasons, which strengthens the block on that sentence opening and leaves the remedy as the live decoy opener. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -59,7 +64,7 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-pj-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
-    "reviewer_notes": "A beginner problem-and-solution item built on one very reliable device: a counting phrase. The list has to precede the sentence that counts it, and the surface signals all agree with the meaning, so a careful reader solves it directly."
+    "reviewer_notes": "A beginner problem-and-solution item built on one very reliable device, a counting phrase, and one deliberate disagreement between surface and meaning. The list has to precede the sentence that counts it, but that counting sentence now carries the paragraph's only 'therefore' and so advertises itself as the close, while the true closer opens on a general definite and reads like a thesis. The counting phrase settles both, which is the point."
   },
   "sentences": [
     {
@@ -74,12 +79,12 @@
     },
     {
       "label": "C",
-      "text": "Each of these costs an applicant time and nerve, and the households with least of either are exactly the ones the payment was written for.",
+      "text": "Each of these costs an applicant time and nerve, and the burden therefore falls hardest on the households with least of either, who are exactly the ones the payment was written for.",
       "role": "development"
     },
     {
       "label": "D",
-      "text": "The reasons are rarely mysterious: a form that runs to nine pages, an office that opens while people are at work, a rule that has to be understood before it can be used.",
+      "text": "The reasons for the shortfall are rarely mysterious: a form that runs to nine pages, an office that opens while people are at work, a rule that has to be understood before it can be used.",
       "role": "cause_effect"
     }
   ],
@@ -90,7 +95,7 @@
       "to": "D",
       "device": "given_new_flow",
       "reliability": "high",
-      "explanation": "'The reasons' is a definite reference and needs something to be the reasons for. The only thing in the set that calls for an explanation is the fact that offered payments go uncollected."
+      "explanation": "'The reasons for the shortfall' names an outcome as well as asking for one, and the only shortfall in the set is the money that is offered to poor households and never collected."
     },
     {
       "from": "D",
@@ -108,33 +113,33 @@
     }
   ],
   "explanation": {
-    "macro_pattern_note": "The paragraph states a problem, gives its causes, shows why the causes matter more than they look, and proposes a cheap repair. Problem, causes, why the causes bite, remedy. Because the remedy answers the causes, it has to come after them, and because one sentence counts the causes, it has to come immediately after the list.",
+    "macro_pattern_note": "The paragraph states a problem, gives its causes, shows why the causes matter more than they look, and proposes a cheap repair. Problem, causes, why the causes bite, remedy. Because the remedy answers the causes, it has to come after them, and because one sentence counts the causes, it has to come immediately after the list. The surface signals do not point the same way here: the third sentence carries the only 'therefore' and the fourth carries none, so a solver who ranks connectives above counting phrases will end the paragraph one sentence early.",
     "movement": [
       { "label": "B", "why_here": "It states the problem in a form that demands an explanation, and it introduces nothing by reference, which no other sentence here can claim." },
-      { "label": "D", "why_here": "It supplies the explanation and lays out the three obstacles that the next sentence counts. Its 'The reasons' points back at the uncollected payments." },
-      { "label": "C", "why_here": "It counts those obstacles and turns them into a point about who is hurt by them. 'Each of these' fixes it in the seat directly after the list." },
-      { "label": "A", "why_here": "The remedy, and the close. It answers the obstacles rather than the shortfall, which is the paragraph's real argument, and nothing follows from it." }
+      { "label": "D", "why_here": "It supplies the explanation and lays out the three obstacles that the next sentence counts. 'The reasons for the shortfall' names the money that went uncollected, so it cannot stand before the sentence that reports it." },
+      { "label": "C", "why_here": "It counts those obstacles and turns them into a point about who is hurt by them. Its 'therefore' makes it sound like the end of the paragraph, but 'Each of these' fixes it in the seat directly after the list, and a counting phrase outranks a connective." },
+      { "label": "A", "why_here": "The remedy, and the close. It carries no connective and opens on a general definite, so it can be mistaken for a thesis, but a repair cannot be offered before the damage: the shorter form answers obstacles the paragraph has to have described first." }
     ],
     "tempting_orders": [
       {
         "order": "BDAC",
         "trap_type": "competing_ending",
-        "why_tempting": "The sentence about time and nerve names the very households the payment was written for, which makes a pointed and rather moving place to stop, and the remedy looks like administrative detail that could go earlier.",
-        "where_it_breaks": "That sentence opens 'Each of these'. In the last seat the things being counted would be a shorter form and no form at all, which are remedies and not obstacles, so the count would be pointing at the wrong list. A counting phrase belongs immediately after the list it counts."
+        "why_tempting": "The sentence about time and nerve carries the paragraph's only 'therefore', names the very households the payment was written for, and ends on a pointed and rather moving note, which is everything a closing sentence usually has. The remedy, by contrast, reads like administrative detail that could go earlier.",
+        "where_it_breaks": "That sentence opens 'Each of these'. In the last seat the things being counted would be a shorter form and no form at all, which are remedies and not obstacles, so the count would be pointing at the wrong list. A counting phrase belongs immediately after the list it counts, and it outranks a connective, which can appear anywhere a writer wants an inference drawn."
       },
       {
-        "order": "DBCA",
+        "order": "ABDC",
         "trap_type": "competing_opener",
-        "why_tempting": "The list of reasons carries no pronoun and opens with a confident phrase, and a paragraph that begins with concrete obstacles feels like it is getting straight to business.",
-        "where_it_breaks": "'The reasons' is definite. Reasons for what? At this point nothing has happened that would need explaining, and the sentence about payments going uncollected is the only one that supplies a fact to be accounted for."
+        "why_tempting": "The sentence about the cheapest reform carries no connective, opens on a general definite that any reader can understand cold, and states a thesis of the kind that often heads a policy paragraph. A solver who has decided that the counting sentence must be the close has to find something else to open with, and this is the only candidate left.",
+        "where_it_breaks": "A repair cannot be offered before the damage. 'Not a larger payment but a shorter form' weighs two remedies for a shortfall the paragraph has not yet reported, and it treats forms as the obstacle before any form has been mentioned. Put it first and the paragraph explains at the end what it assumed at the beginning."
       }
     ],
-    "trap_named": "No trap is set here on purpose; the item exists to make one device automatic. Phrases that count, such as 'each of these', 'both', 'all three' and 'these obstacles', are among the most reliable signals in any jumble, because a count needs its members already on the page. Learn to place them first and the rest of a paragraph often falls out around them.",
-    "solving_habit": "Find the counting phrase before anything else. It gives you one certain join, and a certain join is worth more than several plausible ones."
+    "trap_named": "The trap is a connective standing where it does not belong to the ending. Solvers learn early that 'therefore', 'so' and 'then' mark the last sentence, and setters answer by putting the inference in the middle of the argument, where inferences are also drawn. Against that, phrases that count, such as 'each of these', 'both', 'all three' and 'these obstacles', are among the most reliable signals in any jumble, because a count needs its members already on the page. Where the two disagree, the count wins.",
+    "solving_habit": "Find the counting phrase before anything else. It gives you one certain join, and a certain join is worth more than several plausible ones, including the feeling that a sentence with 'therefore' in it must be the last."
   },
   "mentor": {
-    "challenge": "One sentence counts something. Find what it counts, and one join is settled for you.",
-    "paragraph_plain": "A payment that nobody claims helps nobody, and in most countries a surprising amount of the money offered to poor households is never collected. The reasons are rarely mysterious: a form that runs to nine pages, an office that is open only while people are at work, a rule you have to understand before you can use it. Each of those costs an applicant time and nerve, and the households with least of either are precisely the ones the payment was meant for. So the cheapest reform is often not a bigger payment but a shorter form, or no form at all in cases where the state already holds the facts it is asking people to supply.",
-    "takeaway": "A phrase that counts always sits just after the things it counts."
+    "challenge": "One sentence counts something and another looks like a thesis. Find what the count counts, and both ends of the paragraph are settled for you.",
+    "paragraph_plain": "A payment that nobody claims helps nobody, and in most countries a surprising amount of the money offered to poor households is never collected. The reasons for that shortfall are rarely mysterious: a form that runs to nine pages, an office that is open only while people are at work, a rule you have to understand before you can use it. Each of those costs an applicant time and nerve, so the weight falls hardest on the households with least of either, who are precisely the ones the payment was meant for. The cheapest reform is often not a bigger payment but a shorter form, or no form at all in cases where the state already holds the facts it is asking people to supply.",
+    "takeaway": "A phrase that counts always sits just after the things it counts, whatever connective is sitting somewhere else."
   }
 }

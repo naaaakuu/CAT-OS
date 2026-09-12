@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0026",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "architecture",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Room You Walk Through",
+    "theme": "how the corridor bought privacy for every room and quietly ended the meetings that used to happen by accident",
+    "estimated_time_sec": 70,
+    "gap_function": "qualification",
+    "primary_trap": "contradicts_neighbour",
+    "reasoning_patterns": ["disc.function_slot", "arg.qualification", "struct.qualification", "disc.given_new"],
+    "learning_objective": "insert the qualification a paragraph needs before its last example, and reject an option that denies the cost the example demonstrates",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 2, "distractor_closeness": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of the corridor and the plan of large houses; no specific building or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "An easy-tier qualification slot. The sentence after the gap reports that the household stopped meeting by accident, which is a cost; the option calling the change almost entirely a gain is therefore refused by the line that follows it rather than by anything subtle.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option about heating rooms separately, which is true of corridors, sits in the same period and sounds like a further consequence. It fails because the sentence after the gap describes servants being moved out of the rooms and a household that stopped meeting by accident — an elaboration of a cost, not of warmth — so the gap must be the qualification that cost belongs to. The option calling the change almost entirely a gain contradicts that same sentence directly.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "In a large house built before the eighteenth century, you reached the last room by walking through all the others.",
+      "The corridor put an end to that: every room could be entered from a passage, and a room could be left when the person in it wanted to be alone.",
+      "Servants, who had once been part of the traffic of every room, were moved into passages of their own, and the household stopped meeting by accident."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "The change was almost entirely a gain, since nothing was lost but the inconvenience of being walked through at all hours of the day.",
+      "B": "Every plan a building imposes is an argument about who should meet whom, though the argument is seldom made aloud by anyone.",
+      "C": "Corridors also made it possible to heat a house room by room, which changed how the rooms were used in the winter months.",
+      "D": "The privacy was bought at a price: a passage is a room nobody uses, and the people it separates now meet only by arrangement."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The second sentence records a clear benefit of the corridor, and the sentence after the gap records a consequence that is plainly a loss: servants removed from the rooms, and a household that no longer met by chance. The gap must be the turn between them — a qualification that names the cost of the privacy just praised, in terms the last sentence can then illustrate.",
+    "correct_reasoning": "The correct option supplies exactly that qualification. It grants the privacy, prices it, and states the cost in the currency the final sentence spends: meetings that used to happen on the way through a room now have to be arranged. The observation that a passage is a room nobody uses also keeps the paragraph in architectural terms rather than drifting into general commentary.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence after the gap describes a household that stopped meeting by accident, which is a loss; an option insisting that nothing was lost but an inconvenience contradicts the line immediately below it.",
+        "seductive_element": "It sounds like a brisk historical judgement, and the modern reader's preference for privacy makes the verdict easy to agree with."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A general claim about what every plan argues floats above the particular cost the next sentence illustrates, and it concedes nothing about the corridor itself, so the paragraph's turn never happens.",
+        "seductive_element": "It is the most quotable line on offer and its concession about arguments seldom made aloud gives it the air of expert insight."
+      },
+      {
+        "option": "C",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "Heating is a genuine consequence of separating rooms but not the one the paragraph is turning on; the servants and the end of accidental meetings elaborate a cost in company, which warmth does nothing to introduce.",
+        "seductive_element": "'Also' promises a further effect, the fact is plausible, and it stays on the subject of rooms and passages."
+      }
+    ],
+    "method": "A qualification slot sits between a benefit and its price, and the sentence after it tells you which price. Read that sentence first and name the currency — here, company rather than comfort or cost — then take the option that introduces a loss in that currency. Options that deny any loss, or that price a different one, both fail."
+  },
+  "mentor": {
+    "challenge": "The paragraph praises the corridor and then describes a household that stopped meeting by chance. Something has to sit between them.",
+    "takeaway": "Let the sentence after the gap tell you which cost is being counted; an option that denies there was a cost is refused by it."
+  }
+}

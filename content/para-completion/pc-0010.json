@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0010",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "education",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Comment Under the Mark",
+    "theme": "why written feedback goes unread when a grade is attached to it, and what follows for teachers who must also report",
+    "estimated_time_sec": 85,
+    "gap_function": "implication",
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": ["disc.function_slot", "disc.given_new", "struct.cause_effect", "inf.reasonable_implication"],
+    "learning_objective": "draw the implication a paragraph's diagnosis supports, and recognise a fluent repetition of the sentence before the gap",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 3, "distractor_closeness": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of marks and written comments on returned work; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The gap must name the implication that the remedy after it acts on: comments and marks do different work and cannot travel together. The restatement decoy is a polished version of the sentence immediately above the gap and is the commonest wrong answer in the type.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the restatement that once the pupil knows the grade the question they came with has been answered. It is true, it is the paragraph's own analysis and it reads as a proper 'in other words' summary — but it is the sentence directly above the gap with the word order changed, and the sentence after the gap describes schools separating marks from comments, a remedy that needs an implication about what the two do to each other rather than a second statement of the diagnosis.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Teachers who write careful comments on returned work often find the comments have no effect, and conclude that the pupils are not reading them.",
+      "They are usually right, and the reason is sitting at the top of the page.",
+      "A mark answers the question the pupil came with — how did I do — and once that is answered the paragraph underneath has nothing left to be for.",
+      "Schools that separate the two, handing back comments in one lesson and marks a week later, report that the comments are suddenly being argued about."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Once the pupil has the grade, in other words, the question that brought them to the page has already been answered.",
+      "B": "Assessment ought therefore to be kept out of schooling wherever the law does not positively require a school to report it.",
+      "C": "The comment and the mark do different work, and the comment's work is destroyed by the company that it keeps on the page.",
+      "D": "Pupils differ, though it is rarely the pupil most in need of the comment who is best placed to make use of it."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has diagnosed why comments go unread — the mark has already answered the pupil's question — and the sentence after the gap describes schools that hand the two back a week apart and find the comments are argued about. The gap must be the implication that connects them: something about the two doing different work, and about their doing it badly in each other's company.",
+    "correct_reasoning": "The correct option states the implication in the form the remedy requires. It separates the two functions and locates the damage in their proximity: the comment fails not because it was badly written but because of what is sharing the page with it. Moving the mark a week away is then the obvious thing to try, which is exactly what the last sentence reports schools doing, and the comments being argued about is the prediction confirmed.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "This is the sentence immediately above the gap rearranged; the paragraph would make its diagnosis twice and still owe the reader the step that makes handing marks back a week later an obvious experiment.",
+        "seductive_element": "'In other words' is the phrase of a careful writer consolidating a point, and the sentence is entirely true of the paragraph."
+      },
+      {
+        "option": "B",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph's finding concerns what a mark does to a comment on the same page; a recommendation to remove assessment from schooling wherever it is not legally required is a far larger claim, and the remedy that follows keeps both marks and comments.",
+        "seductive_element": "It sounds like a bold reformer's conclusion, and readers expect the word 'therefore' to be doing exactly this kind of work."
+      },
+      {
+        "option": "D",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "Differences between pupils are a real qualification but not an implication of the diagnosis, and they explain nothing about why moving the mark a week later should change how comments are received.",
+        "seductive_element": "It concedes, which makes it sound scrupulous, and the point about the weakest pupil benefiting least is one experienced teachers will recognise."
+      }
+    ],
+    "method": "Where a gap is followed by a remedy, the implication in the gap must be the one that makes the remedy obvious. Ask what would have to be true for separating marks and comments to work, and choose the option that says it. A sentence that only re-describes the problem cannot generate a treatment, however well it is phrased."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap is a school trying something. Decide what the paragraph must have concluded for that to be the thing to try.",
+    "takeaway": "An implication moves the argument on; a restatement moves the words around. The next sentence is what tells the two apart."
+  }
+}

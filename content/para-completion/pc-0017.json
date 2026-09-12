@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0017",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "contemporary-society",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "Four Means Something Went Wrong",
+    "theme": "why a five-point rating scale collapses into two points, and what the platform reads instead",
+    "estimated_time_sec": 85,
+    "gap_function": "opening",
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": ["disc.opening_sentence", "disc.function_slot", "disc.competing_opener", "disc.stance_continuity"],
+    "learning_objective": "open a paragraph with the sentence its later analysis presupposes, and refuse an opener whose verdict the paragraph goes on to contradict",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of compressed rating scales on service platforms; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "An opener for an analytic paragraph whose third sentence explicitly denies that the compression is a failure. The dismissive opener is the trap for a reader who matches topic and tone from the first two sentences only.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the opener declaring online ratings worthless. It fits the first two sentences, where the scale is shown collapsing and a three is read as a complaint, and it is the view most readers hold. It dies on the third sentence, which says in so many words that the compression is not a failure of the design, and on the fourth, where the platform is shown extracting a usable measure from what is left. The option about drivers and passengers rating each other is the near-tie: it fits the opening pair even better and has nothing to do with the compression the paragraph goes on to analyse.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The scale has five points and two of them are in use: five means the trip was fine, and anything at four or below means something went wrong.",
+      "Both parties know this, which is why a driver who receives a three treats it as a complaint and the passenger who gave it is startled to hear so.",
+      "The compression is not a failure of the design; it is what happens when a rating is read as a judgement on a person rather than a report on an experience.",
+      "What the platform is left with is a measure with almost no range, which it must supplement with the only number that still varies: how often the rare low score appears."
+    ],
+    "gap_index": 0
+  },
+  "question": {
+    "stem": "Which of the following sentences best opens the paragraph?",
+    "options": {
+      "A": "Online ratings are worthless, and the only surprising thing about them is how long they have been taken seriously by anybody.",
+      "B": "Every measurement alters the conduct of the people being measured, though the change is rarely as visible as it is here.",
+      "C": "Drivers and passengers rate each other after each trip, and the two ratings are not symmetrical in what they can cost.",
+      "D": "A rating scale with five points is not a scale with five points, as anyone who has given a driver a three can confirm."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The second sentence begins 'The scale has five points', treating a particular scale as already before the reader, and the paragraph goes on to analyse the compression of that scale without condemning it. The opener must therefore name the object, state the compression as the thing to be explained, and leave the paragraph free to say, two sentences later, that the compression is not a design failure.",
+    "correct_reasoning": "The correct option puts the paradox in the first line — a five-point scale that is not one — and grounds it in the experience the second sentence then unpacks, the three that is received as a complaint. It introduces the scale the next sentence refers to and commits the paragraph to an explanation rather than a verdict, which is exactly what the third and fourth sentences supply.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "stance_shift",
+        "why_wrong": "The third sentence states that the compression is not a failure of the design, and the fourth shows the platform still extracting a usable signal; an opening verdict of worthlessness puts the paragraph on a side it goes on to argue against.",
+        "seductive_element": "It matches the first two sentences, which do look like an exposé, and it voices the complaint most readers bring to the subject."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The paragraph is about a scale losing its range because a rating is taken personally, not about measurement changing conduct; the principle it announces is never used, and the second sentence cannot be its illustration.",
+        "seductive_element": "It concedes, it sounds like a law of social measurement, and readers expect an opening sentence to be the widest one in the paragraph."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It leads neatly into the sentences about drivers and passengers but commits the paragraph to an asymmetry in consequences; the rest of the paragraph is about the collapse of the scale itself, and the asymmetry is never mentioned again.",
+        "seductive_element": "Its vocabulary matches the following sentence exactly, and mutual rating really is the setting in which the whole thing takes place."
+      }
+    ],
+    "method": "For an opening gap, do not stop at the sentence below the blank. Read to the end and note anything the paragraph refuses — here, a sentence that explicitly denies a failure of design. Any opener that has already delivered the opposite verdict is out, however well it matches the tone of the first two lines."
+  },
+  "mentor": {
+    "challenge": "Two of these lead perfectly into the second sentence. Read to the end before you let either of them stand at the front.",
+    "takeaway": "An opener must survive the paragraph's own denials; check the sentence that says what the phenomenon is not."
+  }
+}

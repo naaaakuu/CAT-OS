@@ -23,7 +23,7 @@
     "macro_pattern": "abstract_to_concrete",
     "cohesion_signals": ["lexical_repetition", "article_given_new", "connective_explicit", "demonstrative"],
     "primary_trap": "anchor_pair",
-    "secondary_traps": [],
+    "secondary_traps": ["competing_opener"],
     "dna_traits": ["surface_matching", "opener_heuristic"],
     "difficulty_vector": {
       "vocabulary_load": 2,
@@ -33,21 +33,26 @@
       "concept_abstractness": 3,
       "dependency_chain_length": 3,
       "transition_ambiguity": 2,
-      "competing_openings": 2,
+      "competing_openings": 3,
       "competing_endings": 2,
       "lexical_decoys": 3,
       "topic_unfamiliarity": 1,
-      "plausible_orderings": 2
+      "plausible_orderings": 3
     },
-    "num_plausible_orderings": 2,
+    "num_plausible_orderings": 3,
     "heuristic_adversarial": false,
     "nucleus": "D",
-    "learning_objective": "break a pair of sentences that share a word by asking what a definite phrase such as 'the method' actually needs",
-    "reasoning_patterns": ["disc.general_to_specific", "disc.lexical_chain", "disc.given_new", "disc.transition_word"],
+    "learning_objective": "ask what a definite phrase such as 'the gain' or 'the method' actually needs, whether it is holding a pair apart or keeping a sentence out of the first seat",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.lexical_chain", "disc.given_new", "disc.transition_word", "disc.competing_opener"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The engineered rival glues the two sentences that use the language of retrieval and pushes the student's twenty minutes to the end. It fails because the sentence about discomfort speaks of 'the method', and a mechanism is not a method: the only practice described anywhere in the set is closing the book and writing down what you can remember, so that sentence has to come first. The sentence about the deepening path cannot open either, since it is introduced as 'The reason', which requires a claim already made.",
-      "blind_solve": null
+      "adversarial_review": "The engineered rival glues the two sentences that use the language of retrieval and pushes the student's twenty minutes to the end. It fails because the sentence about discomfort speaks of 'the method', and a mechanism is not a method: the only practice described anywhere in the set is closing the book and writing down what you can remember, so that sentence has to come first. A second rival opens on the sentence about the deepening path, which now begins 'The gain is mechanical rather than motivational' and so reads as a confident first line with no pronoun in it and a contrast that seems to stand on its own. It fails on the same principle as the first rival: 'the gain' is definite, and no gain has been claimed, so the sentence is owed something. The only sentence that owes nothing is the one saying memory is strengthened less by putting information in than by taking it out again. A third rival drops the mechanism to third place and lets the student follow the opening claim directly, since 'Hence' will draw a consequence from a claim as readily as from a mechanism; that one fails on 'that path', which names the path the mechanism sentence cuts deeper and which the opening claim never mentions.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported the item over in seconds, the opener being the only sentence in the set without a backward reference. Repaired by rewriting the mechanism sentence to open on 'The gain is mechanical rather than motivational', which reads as an opening line while still requiring the claim it explains, so the first position now has two candidates. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -59,12 +64,12 @@
     "date_added": "2026-09-12",
     "batch_id": "batch-pj-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
-    "reviewer_notes": "An easy-tier jumble that teaches the anchor-pair defence in its mildest form. Two sentences share the vocabulary of retrieval and look inseparable; the tail is settled by one definite phrase. Written so that a solver who reads for reference rather than for repetition gets it quickly."
+    "reviewer_notes": "An easy-tier jumble that teaches one defence twice over. Two sentences share the vocabulary of retrieval and look inseparable, and the tail is settled by the definite phrase 'the method'; the head is settled by the definite phrase 'the gain', which is written to look like the opening of an essay. Both ends of the paragraph turn on the same question, what a definite phrase is owed."
   },
   "sentences": [
     {
       "label": "A",
-      "text": "The reason is mechanical: every time a fact is retrieved rather than reread, the path back to it is cut a little deeper.",
+      "text": "The gain is mechanical rather than motivational: every time a fact is retrieved rather than reread, the path back to it is cut a little deeper.",
       "role": "cause_effect"
     },
     {
@@ -74,7 +79,7 @@
     },
     {
       "label": "C",
-      "text": "Hence the student who shuts the book and writes down what she can remember learns more in twenty minutes than the one who reads the chapter twice.",
+      "text": "Hence the student who shuts the book and writes down what she can remember cuts that path again and again, and learns more in twenty minutes than the one who reads the chapter twice.",
       "role": "example"
     },
     {
@@ -90,14 +95,14 @@
       "to": "A",
       "device": "causal_chain",
       "reliability": "high",
-      "explanation": "A opens 'The reason is mechanical', which requires a claim to explain. D has just made one, and A restates it as a process: taking information out becomes retrieving a fact, and the strengthening becomes a path cut deeper."
+      "explanation": "A opens on 'The gain', a definite phrase that requires a gain already claimed, and D has just claimed one. A then restates it as a process: taking information out becomes retrieving a fact, and the strengthening becomes a path cut deeper."
     },
     {
       "from": "A",
       "to": "C",
       "device": "logical_connector",
       "reliability": "high",
-      "explanation": "C's 'Hence' draws a practical consequence from the mechanism A describes. The student who writes from memory is retrieving; the one who rereads is not."
+      "explanation": "C's 'Hence' draws a practical consequence from the mechanism A describes, and 'that path' names the path A has just said is cut deeper by retrieval. The demonstrative will not reach the opening claim, which mentions no path at all, so C sits immediately after A."
     },
     {
       "from": "C",
@@ -110,9 +115,9 @@
   "explanation": {
     "macro_pattern_note": "The paragraph starts with a claim about memory in the abstract, gives the mechanism behind it, turns the mechanism into something a student can actually do, and ends by defending that practice against the way it feels. Each step is narrower than the one before, and the last sentence is the only one addressed to the learner's experience.",
     "movement": [
-      { "label": "D", "why_here": "D is the claim, and it is the only sentence that refers to nothing earlier. It also supplies the contrast — putting in against taking out — that every later sentence relies on." },
-      { "label": "A", "why_here": "A explains D. Its opening words announce an explanation, so the thing explained has to be in place, and the path cut deeper is the mechanism behind the claim just made." },
-      { "label": "C", "why_here": "C turns the mechanism into advice, with 'Hence' marking the step from how memory works to what a student should do. It is also the sentence that first names a practice." },
+      { "label": "D", "why_here": "D is the claim, and it is the only sentence that is owed nothing by what comes before it. It also supplies the contrast — putting in against taking out — that every later sentence relies on, and the gain that the next sentence calls mechanical." },
+      { "label": "A", "why_here": "A explains D. It sounds like an opening, but 'the gain' names something that has to have been claimed already, and the path cut deeper is the mechanism behind the claim just made." },
+      { "label": "C", "why_here": "C turns the mechanism into advice, with 'Hence' marking the step from how memory works to what a student should do, and 'that path' tying it to the sentence immediately before. It is also the sentence that first names a practice." },
       { "label": "B", "why_here": "B defends that practice, and it needs the practice to exist before it can call it a method. Ending here leaves the learner with the one thing most likely to make them abandon the technique." }
     ],
     "tempting_orders": [
@@ -121,14 +126,20 @@
         "trap_type": "anchor_pair",
         "why_tempting": "Two sentences use the language of retrieval, one saying the path is cut deeper each time a fact is retrieved and one saying the discomfort of trying to retrieve something is the method working. The repetition makes them look like a pair that has to stay together, and the student example then reads as a closing illustration.",
         "where_it_breaks": "The sentence about discomfort says 'the method'. A path cut deeper is a mechanism, not a method, and the only method in the paragraph is shutting the book and writing from memory. That sentence must therefore stand before the one about discomfort, whatever the shared vocabulary suggests."
+      },
+      {
+        "order": "ADCB",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence about the deepening path opens 'The gain is mechanical rather than motivational', which is exactly how a brisk essay begins: a contrast, no pronoun, no connective, and a concrete mechanism immediately afterwards. A solver using the rule that the opener is the sentence referring to nothing earlier will accept it, and the claim about memory then reads as a summary drawn from the mechanism.",
+        "where_it_breaks": "'The gain' is definite and names a benefit nobody has yet asserted. Worse, in that seat the claim about memory arrives after its own explanation and adds nothing the reader has not been told, so the paragraph moves from new information to old. The sentence that opens a paragraph is the one that is owed nothing, and a contrast is not the same as independence."
       }
     ],
-    "trap_named": "The trap is an anchor pair: two sentences joined in the solver's mind by a repeated word, so firmly that the pair is moved around the paragraph as a single block. The defence is to ask what each sentence needs rather than what it echoes. Here one sentence needs a method to refer to, and the sentence supplying a method is not the one that shares its vocabulary.",
-    "solving_habit": "When two sentences seem welded together by a repeated word, test the weld: ask whether either of them contains a definite phrase that the other cannot satisfy. If it does, the pair is a decoy and something has to come between them."
+    "trap_named": "The trap is an anchor pair: two sentences joined in the solver's mind by a repeated word, so firmly that the pair is moved around the paragraph as a single block. The defence is to ask what each sentence needs rather than what it echoes. Here one sentence needs a method to refer to, and the sentence supplying a method is not the one that shares its vocabulary. The same question guards the opening, where a sentence with no pronoun in it still needs a gain to have been claimed.",
+    "solving_habit": "Make the same test at both ends of the paragraph. When two sentences seem welded together by a repeated word, ask whether either contains a definite phrase the other cannot satisfy; and before you accept any sentence as the opener, ask whether its definite phrases could be understood by somebody who had read nothing else. Absence of a pronoun is not independence."
   },
   "mentor": {
-    "challenge": "Two sentences here share a word and feel like a pair. One of them mentions a method; make sure a method has been described first.",
-    "paragraph_plain": "You remember things better by getting them out of your head than by putting them in again. The reason is physical: each time you actually recall a fact instead of rereading it, the route back to that fact is worn a little deeper. So a student who closes the book and writes down everything she can remember learns more in twenty minutes than one who reads the chapter through twice. And the unpleasant strain of trying to recall something is not the technique going wrong; it is the technique doing its work.",
-    "takeaway": "A repeated word suggests a pair. A definite phrase like 'the method' proves an order."
+    "challenge": "Two sentences here share a word and feel like a pair, and two of them look as though they could open. In each case the deciding evidence is a small definite phrase and what it is owed.",
+    "paragraph_plain": "You remember things better by getting them out of your head than by putting them in again. The gain is mechanical rather than a matter of willpower: each time you actually recall a fact instead of rereading it, the route back to that fact is worn a little deeper. So a student who closes the book and writes down everything she can remember wears that route again and again, and learns more in twenty minutes than one who reads the chapter through twice. And the unpleasant strain of trying to recall something is not the technique going wrong; it is the technique doing its work.",
+    "takeaway": "A repeated word suggests a pair. A definite phrase like 'the gain', 'that path' or 'the method' proves an order."
   }
 }

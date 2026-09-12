@@ -34,7 +34,7 @@
     "traps": {
       "primary": "B",
       "secondary": "A",
-      "description": "The outlier speaks of a second restriction, and the paragraph does contain something that reads like a first one, the price paid at the top of the scale, so the reference finds a plausible but false anchor. The decoy is that same sentence about the price, which turns against the device just after it has been praised."
+      "description": "The outlier opens on 'Hence', so it presents itself as drawing a consequence, and 'the convention' reads as a plain name for the axis the paragraph has just defined. Both hooks hold on inspection of the words alone; neither holds on inspection of the argument, which has produced no premise from which the spread of a drawing habit could follow. The decoy is the sentence about the price paid at the top of the scale, which turns against the device just after it has been praised."
     },
     "cohesion_signals": {
       "reference": true,
@@ -52,12 +52,17 @@
       "trap_audit": "pass",
       "expert_reviewed": false
     },
-    "learning_objective": "test a backward reference against what the paragraph has actually said, and notice when a sentence is continuing a list, a warning or a dispute that exists only in its own first words",
-    "reasoning_patterns": ["comp.reference_tracking", "disc.lexical_chain", "scope.abstraction_level", "disc.topic_progression", "comp.organization"],
+    "learning_objective": "test a connective against the sentences around it, and notice when a sentence claims to follow from an argument that has produced no premise for it",
+    "reasoning_patterns": ["disc.transition_word", "lang.causal_wording", "disc.lexical_chain", "disc.topic_progression", "comp.organization"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival is the sentence about the price paid at the top of the scale: it criticises the device the paragraph has been explaining, so a reader may take it for an intruder from a sceptical paragraph. It stays because the closing claim, that the axis decides what matters, needs both what the scale shows and what it costs, and because its top and bottom continue the same axis the opening measured. The sentence about a second restriction fails on its own words: the paragraph has listed no restrictions, nobody has been caught out, and scales with an arbitrary zero appear once and are never mentioned again.",
-      "blind_solve": null
+      "adversarial_review": "The rival is the sentence about the price paid at the top of the scale: it criticises the device the paragraph has been explaining, so a reader may take it for an intruder from a sceptical paragraph. It stays because the closing claim, that the axis decides what matters, needs both what the scale shows and what it costs, and because its top and bottom continue the same axis the opening measured. The sentence beginning 'Hence' fails on the relation it asserts. A rule about equal ratios, a reading of rate off the page, and a loss of differences at the top are not premises from which the spread of a drawing habit follows, and no later sentence returns to that spread or to what the convention is now used for, so it hands nothing on either. The word promises a consequence and delivers a note on where the convention is used.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but noted that two items in the batch planted their outlier as an orphan demonstrative counting into a series that did not exist, which made the device recognisable. Repaired here by replacing that device with a false consequence connective attached to an idle report of where the convention spread; the companion item keeps the demonstrative. A second blind solve agreed with the key but reported that the replacement was the only sentence in the item with human actors and a date in it, which gave it away on texture; the printers and the nineteenth century have since been removed, and the sentence now keeps the description's own vocabulary of scales and orders of magnitude. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -69,10 +74,10 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-ooo-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
-    "reviewer_notes": "A cat-tier thread break with a deliberately plausible false anchor: the paragraph contains something a hurried reader will accept as the first restriction, which is what stops a pronoun-spotting heuristic from solving the item."
+    "reviewer_notes": "A cat-tier thread break whose false anchor is a connective rather than a pronoun. 'Hence' will attach itself to any preceding statement, and 'the convention' names the axis without needing an antecedent, so a reader checking only whether the opening words have something to hold on to will be satisfied. What fails is the relation: nothing in the description is a premise for a drawing habit changing trades."
   },
   "sentences": [
-    { "label": "A", "text": "That second restriction is the one that catches people out, since a scale whose zero is fixed by convention cannot be treated this way at all, however convenient the picture would be." },
+    { "label": "A", "text": "Hence the convention spread from the laboratory to the financial pages, where it is now the default for any series that runs over more than two or three orders of magnitude." },
     { "label": "B", "text": "What the eye then reads off the page is rate rather than amount: a quantity multiplying by a fixed factor each year draws a straight line, and the steeper the line the larger the factor." },
     { "label": "C", "text": "The axis is therefore a claim about what matters in the data, and a graph drawn on one has already decided that proportion is the thing worth looking at." },
     { "label": "D", "text": "On a logarithmic axis equal distances stand for equal ratios rather than equal differences, so the step from one to ten occupies exactly the width of the step from ten to a hundred." },
@@ -81,7 +86,7 @@
   "outlier": "A",
   "core_order": ["D", "B", "E", "C"],
   "builder": {
-    "prompt": "Build the four-sentence description of what a logarithmic axis does, from the rule to what drawing one commits you to. The sentence that reaches back for something the paragraph never said is your answer."
+    "prompt": "Build the four-sentence description of what a logarithmic axis does, from the rule to what drawing one commits you to. The sentence that announces a consequence the description never produces is your answer."
   },
   "explanation": {
     "spine_note": "The core describes one device in four steps. It states the rule that equal distances mean equal ratios, then what the eye can read off a page drawn that way, namely rate rather than amount. The third step names the cost, the disappearance of differences at the top of the scale, and the fourth draws the consequence: choosing the axis is already a choice about what the data are for. Rule, gain, cost, consequence.",
@@ -96,19 +101,19 @@
       { "from": "B", "to": "E", "tie": "lexical", "explanation": "'The price' answers the gain just described, and the pairing of gain and price holds the two sentences together." },
       { "from": "E", "to": "C", "tie": "conjunction", "explanation": "'Therefore' draws the conclusion from a gain and a cost taken together, so the closing claim needs both of the sentences before it." }
     ],
-    "violation_named": "The odd sentence continues a list the paragraph has never begun. It calls something the second restriction, which requires a first, and reports that people are caught out by it, which requires a discussion of common errors. The core states a rule, a gain, a cost and a consequence, and none of those is a restriction in a numbered series.",
-    "why_it_breaks": "Its reference fails on inspection. The paragraph does contain a cost, which a quick reader will accept as the first restriction, but that cost is about how a picture looks at the top of a scale, not about which quantities may be drawn on one at all. The stray sentence also leaves nothing behind: quantities with conventional zeros never return, and the closing sentence needs a gain and a cost rather than a class of excluded measurements.",
-    "trap_exposed": "The camouflage is a plausible anchor. Because the paragraph has just conceded a drawback, the words that second restriction find a place to attach, and a reader checking only whether a reference has something to point at will be satisfied. The decoy is that very drawback, which turns against the device just after it has been praised and so reads like a sceptic's interruption, though the closing conclusion cannot be drawn without it.",
+    "violation_named": "The odd sentence draws a consequence the paragraph has produced no premise for. 'Hence' announces that what follows is entailed by what precedes it, and what follows is a report of where the drawing habit spread to and what it is now used for. The core states a rule, a gain, a cost and a consequence, and none of them entails anything about where the convention was taken up or who resented it.",
+    "why_it_breaks": "The connective fails in both directions. Nothing before it can serve as its premise: that equal distances mean equal ratios, that the eye reads rate, that differences vanish at the top, are facts about how a picture works, not reasons why a trade adopted it. And nothing after it can use what it leaves: the financial pages and the default for long series never return, while the closing sentence needs a gain and a cost to weigh against each other. The sentence takes a seat by asserting a relation, and the relation is the thing that is missing.",
+    "trap_exposed": "The camouflage is a connective that never checks its own credentials. 'Hence' will sit after any statement whatever, and 'the convention' names the axis without requiring anything to have introduced it, so a reader who asks only whether the opening words have something to attach to will be satisfied twice over. The test is not whether a connective can attach but whether the relation it names actually holds. The decoy is the sentence about the price at the top of the scale, which turns against the device just after it has been praised and so reads like a sceptic's interruption, though the closing conclusion cannot be drawn without it.",
     "exclusion_analysis": [
       { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It reads like a definition from a textbook, flat and unargued, so a reader looking for the paragraph's idea may treat it as preliminary.", "what_breaks": "Without it nothing says what the axis does, so the straight line, the vanishing differences and the closing claim all describe a device the reader has never been shown." },
       { "label": "B", "mistake_type": "hardest_to_place", "why_tempting": "It packs a rule, a picture and a comparison into one sentence, which makes its role in the description hard to name quickly.", "what_breaks": "Without it the paragraph names a cost with no benefit to weigh it against, and the conclusion that the axis decides what matters loses half its evidence." },
       { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence that criticises the device, so its stance feels imported from a different, more sceptical paragraph.", "what_breaks": "Without it the description praises the axis and never says what it hides, and the closing claim that a choice has been made has nothing to be a choice between." },
       { "label": "C", "mistake_type": "no_uniqueness_test", "why_tempting": "It leaves geometry for a claim about what matters in data, which sounds like the beginning of an argument rather than the end of a description.", "what_breaks": "Without it the paragraph lists a gain and a cost and never says what follows, so the description stops before its point." }
     ],
-    "detection_habit": "When a sentence says the second, the same, or that other, count the first ones in the paragraph. A reference that finds something to attach to is not the same as a reference that fits what it attaches to."
+    "detection_habit": "When a sentence opens with hence, therefore or so, say out loud the premise it is claiming and check that the paragraph has supplied it. A connective will attach to anything; only the relation it names can be false."
   },
   "mentor": {
-    "challenge": "Five sentences about an axis that counts by ratios. One of them refers back to a restriction, and the paragraph does contain something that will pass for one if you do not look closely.",
-    "takeaway": "Check what a backward reference actually lands on. A near-fit anchor is how a stray sentence keeps its seat."
+    "challenge": "Five sentences about an axis that counts by ratios. One of them says that something follows, and the paragraph is perfectly willing to let it sit there if you do not ask from what.",
+    "takeaway": "A connective is a claim, not a courtesy. Make it prove the relation it announces."
   }
 }

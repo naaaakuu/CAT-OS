@@ -34,7 +34,7 @@
     "traps": {
       "primary": "B",
       "secondary": "A",
-      "description": "The outlier keeps the subject and offers itself as the comparison a fair account might make, which is enough disguise at this tier. The decoy is the sentence listing what is cut first, whose three quick items give it a texture unlike the explanation around it."
+      "description": "The outlier keeps the subject and offers itself as the comparison a fair account might make, and it opens on the constraint the explanation has been building, so its first clause reads as continuation. It imputes no motive to anybody, and it is not the only sentence in the set willing to appraise something, since the list of losses appraises them as slight. The decoy is that list, whose three quick items give it a texture unlike the explanation around it."
     },
     "cohesion_signals": {
       "reference": true,
@@ -52,12 +52,17 @@
       "trap_audit": "pass",
       "expert_reviewed": false
     },
-    "learning_objective": "follow an explanation from its constraint to its effect, and notice the sentence that has stopped explaining in order to take a side",
+    "learning_objective": "follow an explanation from its constraint to its effect, and notice the sentence that has stopped explaining in order to settle a question nobody asked",
     "reasoning_patterns": ["arg.description_vs_evaluation", "disc.stance_continuity", "disc.cause_effect", "comp.purpose"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival is the sentence naming what disappears first, the hesitations and the politeness: it is a list where everything around it is explanation, so a reader eliminating by texture may take it. It stays because the shortening announced in the opening has to be given a content before the hard case can be understood as hard, and because the joke that arrives early is the extreme version of exactly that shortening. The sentence about dubbing and self-congratulation is the only one that stops explaining and starts scoring a point, and it answers a quarrel the paragraph has never mentioned.",
-      "blind_solve": null
+      "adversarial_review": "The rival is the sentence naming what disappears first, the hesitations and the politeness: it is a list where everything around it is explanation, and it ends on a small appraisal of its own, so a reader eliminating by texture may take it. It stays because the shortening announced in the opening has to be given a content before the hard case can be understood as hard, because its verdict that these losses are slight is what makes the next sentence's case the hard one, and because the joke that arrives early is the extreme version of exactly that shortening. The sentence about dubbing is the one that cannot be placed: it settles a long quarrel between two practices, and the paragraph has never opened a quarrel, only explained a constraint. Nothing in it is heated, which is the point; what disqualifies it is the dispute it presumes, not the temperature at which it presumes it.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported that the outlier was the only evaluative sentence and the shortest in the set, so it could be found on texture alone. Repaired by lengthening it and softening its vocabulary, and by letting the list of losses close on an appraisal of its own, which also sharpens the step to the hardest case. A second blind solve agreed again and reported it still the only polemic, since it imputed a motive to audiences; the imputation has been removed and the sentence now reports a settled quarrel instead, so the break is the dispute it presumes rather than the heat it carries. A third blind solve agreed and reported the outlier still the only sentence making a cross-national claim. 'In most countries' has been removed, leaving the settled quarrel and nothing else to sort it by. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -69,14 +74,14 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-ooo-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
-    "reviewer_notes": "An easy-tier stance break in a field where opinions are plentiful, which is the point: the paragraph is explaining a constraint, and a verdict on a rival practice has no stage in that explanation."
+    "reviewer_notes": "An easy-tier stance break in a field where opinions are plentiful, which is the point: the paragraph is explaining a constraint, and an adjudication between rival practices has no stage in that explanation. The outlier is deliberately cool in tone, so that the learner cannot find it by looking for heat."
   },
   "sentences": [
     { "label": "A", "text": "A joke built on delay is the hardest case, since the line appears while the actor is still winding up and the reader reaches the ending first." },
-    { "label": "B", "text": "Dubbing spares an audience all of this, and the preference for subtitles among serious filmgoers is largely a form of self-congratulation." },
+    { "label": "B", "text": "Dubbing removes the constraint altogether, and the long quarrel between the two practices was settled long ago by habit rather than by anything on the screen." },
     { "label": "C", "text": "A subtitle has to fit a line the eye can take in at a glance, which means that most of what is said arrives shortened." },
     { "label": "D", "text": "The viewer therefore follows two performances slightly out of step, and grows so used to the gap that the film comes to seem as though it had been written that way." },
-    { "label": "E", "text": "What goes first is whatever carries no information: the hesitations, the repetitions, the politeness that pads the space around a request." }
+    { "label": "E", "text": "What goes first is whatever carries no information: the hesitations, the repetitions, the politeness that pads a request, none of which is much of a loss." }
   ],
   "outlier": "B",
   "core_order": ["C", "E", "A", "D"],
@@ -87,28 +92,28 @@
     "spine_note": "The core explains one constraint and follows it to its effect. It opens with the physical limit, a line the eye can take in at once, and the shortening that follows from it, then says what is cut first. The third sentence takes the hardest case, a joke that depends on timing, and shows the shortening at its most damaging, and the fourth states what the whole arrangement does to the person watching. Constraint, what is lost, hardest case, effect.",
     "core_roles": [
       { "label": "C", "role": "topic", "why_here": "It states the limit everything else follows from, and it is the only sentence that says why anything has to be cut at all." },
-      { "label": "E", "role": "development", "why_here": "'What goes first' answers the shortening just announced and gives it a content, which the hardest case then depends on." },
+      { "label": "E", "role": "development", "why_here": "'What goes first' answers the shortening just announced and gives it a content, and its closing verdict that little is lost is what the hardest case is then measured against." },
       { "label": "A", "role": "example", "why_here": "It takes the same shortening to its extreme, where the loss is not filler but timing, and so shows the constraint at full strength." },
       { "label": "D", "role": "conclusion", "why_here": "'Therefore' gathers the constraint and its worst case into a statement about the viewer, which is where the explanation was heading." }
     ],
     "links": [
       { "from": "C", "to": "E", "tie": "reference", "explanation": "'What goes first' refers to the shortening the previous sentence announced, and orders the losses it creates." },
-      { "from": "E", "to": "A", "tie": "lexical", "explanation": "The hardest case is set against the easy losses just listed, so the sentence continues the same scale rather than starting a new one." },
+      { "from": "E", "to": "A", "tie": "lexical", "explanation": "The hardest case is set against losses the previous sentence has just dismissed as slight, so the sentence continues the same scale rather than starting a new one." },
       { "from": "A", "to": "D", "tie": "conjunction", "explanation": "'Therefore' draws the consequence of a reader who is always slightly ahead, which is exactly the case just described." }
     ],
-    "violation_named": "The four core sentences explain how subtitling works and what it costs. The odd sentence leaves that explanation to deliver a verdict on people who prefer subtitles, and on a rival practice the paragraph has not been discussing. It is a change of stance, from an account to a judgement about taste.",
-    "why_it_breaks": "Nothing in the paragraph has raised a choice between two ways of translating a film, so the comparison answers a question nobody here has asked, and the sentence that follows is concerned with a viewer's adjustment rather than with a viewer's motives. The sentence also ends the enquiry: once the preference has been explained away as vanity, there is nothing for the closing sentence to conclude about.",
-    "trap_exposed": "The camouflage is that it sounds even-handed: it mentions the same films and the same audience, and it appears to offer the comparison a fair account owes. Fairness of that sort is not a tie. The decoy is the list of what disappears first, whose three quick items make it feel like an aside, though the hardest case is unintelligible without knowing what the ordinary losses are.",
+    "violation_named": "The four core sentences explain how subtitling works and what it costs, and one of them appraises the losses it has just listed as slight, which is a judgement the explanation needs. The odd sentence leaves the explanation to settle a standing dispute between subtitling and dubbing, a dispute the paragraph has not been conducting. It is a change of stance, from an account of how a constraint works to an adjudication between two practices.",
+    "why_it_breaks": "Nothing in the paragraph has raised a choice between two ways of translating a film, so the sentence answers a question nobody here has asked, and what follows it is concerned with what the constraint does to a viewer, not with how an argument between two industries came out. The sentence also ends the enquiry: once the matter has been settled by habit, there is nothing for the closing sentence to conclude about. Notice that the paragraph does appraise things; it appraises losses, which is part of describing them, and never adjudicates between practices.",
+    "trap_exposed": "The camouflage is that it sounds even-handed, dispassionate, and not at all like an intruder. It names the same films, its first clause takes up the very constraint the explanation has been building, it imputes no motive to anybody, and it appears to offer the comparison a fair account owes. Fairness of that sort is not a tie, and a paragraph that weighs its own subject has not thereby entered a dispute about which practice is better. The decoy is the list of what disappears first, whose three quick items make it feel like an aside, though the hardest case is unintelligible without knowing what the ordinary losses are and how little they cost.",
     "exclusion_analysis": [
       { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It states a technical limitation and no more, so a reader looking for the paragraph's idea may treat it as a preliminary that could be assumed.", "what_breaks": "Without it nothing explains why anything is shortened, and the losses, the joke and the viewer's adjustment all follow from a constraint the paragraph never states." },
-      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is a list of three items in a set of ordinary sentences, and lists always look like illustration that could be spared.", "what_breaks": "Without it the shortening has no content, and the hardest case is hard by comparison with nothing." },
+      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is a list of three items in a set of ordinary sentences, and it closes on a verdict, so it can look like illustration and opinion bolted together.", "what_breaks": "Without it the shortening has no content, and the hardest case is hard by comparison with nothing." },
       { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It is the only sentence about comedy, and a reader may take it for a specialised aside rather than a stage of the explanation.", "what_breaks": "Without it the paragraph never shows the loss doing real damage, and the two performances out of step in the last sentence have no case behind them." },
       { "label": "D", "mistake_type": "no_uniqueness_test", "why_tempting": "It concludes with a claim about habit and illusion that goes beyond anything the earlier sentences measured, so it can look like a different essay's ending.", "what_breaks": "Without it the explanation lists costs and never says what the costs come to for the person watching, which is the point the sequence was building." }
     ],
-    "detection_habit": "Ask whether the paragraph is explaining or arguing about taste. A sentence that ranks two practices, or the people who prefer them, needs a dispute to belong to, and an explanation is not a dispute."
+    "detection_habit": "An explanation is allowed to weigh what it describes; it is not allowed to settle a dispute it never opened. When a sentence adjudicates, ask what question it is answering, and whether the paragraph ever asked it."
   },
   "mentor": {
-    "challenge": "Five sentences about words on the bottom of a screen. Four of them work out what the constraint does, and one tells you what to think of people who like it.",
-    "takeaway": "The moment a sentence starts settling a preference, check whether the paragraph ever opened one."
+    "challenge": "Five sentences about words on the bottom of a screen, and more than one of them is willing to say what something is worth. Four are working out what the constraint does; one is closing an argument the others never started.",
+    "takeaway": "The moment a sentence settles a question, check whether the paragraph ever asked it."
   }
 }

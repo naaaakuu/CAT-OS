@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0012",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "What Cannot Be Demanded",
+    "theme": "the principle that an obligation presupposes an ability, and the narrower form it has to take to survive arranged inability",
+    "estimated_time_sec": 105,
+    "gap_function": "restatement",
+    "primary_trap": "contradicts_neighbour",
+    "reasoning_patterns": ["disc.function_slot", "arg.qualification", "struct.definition", "disc.given_new", "lang.temporal_qualifier"],
+    "learning_objective": "restate a principle in the precise form the next sentence tests, instead of abandoning or repeating it",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 5, "distractor_closeness": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general treatment of the principle that obligation presupposes ability; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap sorts two drivers: the one whose brakes fail is excused, the one who never had them checked is not. Only a restatement that moves the required ability to the moment the obligation was taken on can produce that sorting, which makes the gap tightly determined.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option holding that inability never excuses, since anyone looking far enough ahead could have arranged to be able. It answers the hard cases decisively and has the flavour of a tough-minded philosophical move. It is killed twice: by the first sentence, which grants the principle as near unarguable, and by the sentence after the gap, which excuses the driver whose brakes fail — a driver this option convicts. The restatement of the hard cases is the subtler trap, since a reader who has understood the paragraph may mistake its own summary for the sharpened principle the argument needs.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "It is said that one cannot be obliged to do what one cannot do, and the principle looks unarguable: a demand that cannot be met is not a demand but a complaint.",
+      "The trouble starts with the cases people actually argue about, in which the inability was arranged by the person who now pleads it — the debtor who has spent the money, the witness who drank until he could not remember.",
+      "So stated, it excuses the driver whose brakes fail on the hill and says nothing whatever for the driver who never had them looked at."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "What such cases show is that inability never excuses, since anyone who looked far enough ahead could have arranged in good time to be able.",
+      "B": "The principle has therefore to be put more narrowly: an obligation presupposes an ability when it was taken on, not when it falls due.",
+      "C": "In each of these cases the person now pleading the inability is precisely the person whose own earlier choices had produced it.",
+      "D": "Moral principles hold well enough in the ordinary case, though it is the awkward ones that show what the principle was ever for."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The sentence after the gap begins 'So stated', which requires a statement immediately before it, and then sorts two drivers in opposite directions: failed brakes excuse, unchecked brakes do not. The gap must therefore be a reformulation of the principle — not its abandonment and not a summary of the hard cases — and it must be reformulated on exactly the axis that separates those two drivers.",
+    "correct_reasoning": "The correct option keeps the principle and relocates the ability it requires to the moment the obligation was assumed. That single move handles the debtor and the witness, who were able when they took the obligation on, and it produces the sorting the next sentence reports: brakes that fail on the hill leave a driver unable through no arrangement of his own, while brakes never looked at were within his power at the time the duty attached.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The opening sentence grants that a demand which cannot be met is no demand, and the sentence after the gap excuses the driver whose brakes fail; a principle under which inability never excuses contradicts both, and would leave that driver convicted.",
+        "seductive_element": "It disposes of the awkward cases in one stroke, and the appeal to foresight sounds like the rigorous position a hard-headed paragraph might be building to."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It describes the cases the previous sentence has just described, so 'So stated' in the following sentence has no statement of a principle to refer back to, and nothing has been sharpened.",
+        "seductive_element": "It is accurate and reads like a writer drawing the common thread out of two examples, which is a real move — just not the one this gap needs."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A remark about principles in general replaces the principle under discussion instead of restating it, and no reformulation is offered for the next sentence to apply to the two drivers.",
+        "seductive_element": "It concedes gracefully and sounds like earned philosophical wisdom, which is exactly the register the paragraph has been using."
+      }
+    ],
+    "method": "'So stated' is a promise that the previous sentence was a statement. When you see it after a gap, the missing sentence is a formulation, and the sentence after it is a test: work out what the test sorts, and reverse-engineer the formulation that would sort it that way. Options that settle the issue instead of restating it, or that summarise the examples, cannot survive that phrase."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap excuses one driver and convicts another. Find the single change to the principle that produces exactly that split.",
+    "takeaway": "A restatement keeps the claim and sharpens it; if an option changes the verdict, it has replaced the principle rather than restated it."
+  }
+}

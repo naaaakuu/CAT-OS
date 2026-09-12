@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0020",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "linguistics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Polite Word Goes Blunt",
+    "theme": "why a gentler substitute acquires the force of the word it replaced, and what that locates the offence in",
+    "estimated_time_sec": 100,
+    "gap_function": "next_step",
+    "primary_trap": "tense_break",
+    "reasoning_patterns": ["disc.function_slot", "disc.question_then_answer", "disc.tense_continuity", "struct.phenomenon_explanation", "disc.given_new"],
+    "learning_objective": "take the next step a general process demands — the question it raises — instead of an instance of it or the verdict it eventually supports",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 4, "distractor_closeness": 5, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of successive replacement of words felt to be offensive; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap begins with a conditional about where the offence is carried, which only makes sense if the gap has asked what is surviving the replacement. The historical decoy is fluent and in the past tense, which the paragraph's description of a recurring process never uses.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that language cannot be reformed by decree and that the attempt comforts the reformer. It is the kind of line this argument is often used to support, and it concedes nothing to the reformer, which some readers will take for rigour. It fails on the last sentence, which calls the cycle a measure of work left undone rather than a reason to stop, and on the sentence immediately after the gap, whose conditional needs a question about what survives the replacement rather than a verdict on reform. The nineteenth-century option is fluent but narrates in the past where the paragraph has described a process that recurs.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A word is retired because it has become offensive, and a gentler one is put in its place.",
+      "Within a generation the gentler word is doing the same work, is heard in the same way, and a third has to be found.",
+      "If the offence were carried by the word, a new word would not inherit it; what it inherits is the attitude of the people using it, which nobody has asked to change.",
+      "The treadmill is therefore not evidence that the reform failed but a measure of how much of the work it left for somebody else."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "The pattern is regular enough to be worth asking what exactly is being replaced, since something is plainly surviving the replacement.",
+      "B": "Speakers in the nineteenth century went through this cycle with the words for poverty, abandoning three of them in fifty years.",
+      "C": "Language cannot be reformed by decree, then, and the attempt does more for the comfort of the reformer than for anybody else.",
+      "D": "Nevertheless, a few replacements do last, and the ones that last are those the speakers chose for themselves rather than being given."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The first two sentences describe a cycle; the sentence after the gap opens with a conditional about where the offence is carried and ends by naming what is inherited. That conditional needs a question in front of it — specifically, a question about what is being replaced and what persists. The gap is a next step in the reasoning, not a case and not the verdict, and it must be in the paragraph's general present tense.",
+    "correct_reasoning": "The correct option converts the observed cycle into the question the rest of the paragraph answers: if the substitution keeps failing, what is it that survives? That is exactly the question the following sentence takes up when it tests whether the offence lives in the word, and it prepares the final sentence's judgement that the cycle measures unfinished work rather than a failed reform.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "tense_break",
+        "why_wrong": "The paragraph describes a process that recurs, in the general present; a sentence in the narrative past about one century and one set of words changes the kind of claim being made and offers an instance where the argument needs its next step.",
+        "seductive_element": "The example is apt and concrete, and a paragraph about a recurring pattern does look as though it wants a case to point at."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It draws the verdict two sentences early, and the verdict it draws is the one the last sentence refuses: the paragraph concludes that the treadmill measures work left undone, not that reform is futile.",
+        "seductive_element": "It is the moral most readers expect this observation to lead to, and its dismissal of the reformer sounds like hard-headedness."
+      },
+      {
+        "option": "D",
+        "trap_type": "wrong_connective",
+        "why_wrong": "'Nevertheless' promises a counterweight to something already asserted, and nothing before the gap has been asserted for it to qualify; the exception it introduces is also never picked up again.",
+        "seductive_element": "Naming exceptions feels scrupulous, and the distinction between words chosen and words issued is plausible enough to seem like the paragraph's next move."
+      }
+    ],
+    "method": "Read the sentence after a mid-paragraph gap for its logical shape. A conditional that tests where a property lives is an answer, and answers need questions; so the gap is the question. Then check tense: a paragraph describing a recurring process cannot take a narrative past without changing what it is claiming."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap tests where the offence lives. Work out what question that test is answering.",
+    "takeaway": "Next-step sentences are usually the question the following sentence answers; an example or a verdict fills the slot without moving the argument."
+  }
+}

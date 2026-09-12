@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0019",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "medicine-health",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Medicine That Makes Nothing Better",
+    "theme": "why treatment for a condition with no symptoms is abandoned by patients who are attending carefully to how they feel",
+    "estimated_time_sec": 95,
+    "gap_function": "conclusion",
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": ["disc.closing_sentence", "disc.function_slot", "struct.claim_evidence", "disc.stance_continuity", "arg.evidence_vs_conclusion"],
+    "learning_objective": "close on the reinterpretation the paragraph's last sentence has set up, rather than on a practical remark about the same subject",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of adherence to treatment for conditions without symptoms; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The fourth sentence dismisses forgetfulness and leaves a patient who is not forgetting anything. The closer must say what he is doing instead, and the paragraph has laid the answer out in its first two sentences: he is attending to evidence that has been arranged to point the wrong way.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option defending reminders as cheap and worth issuing anyway. It concedes, it is practical, and after a sentence that has just criticised the reminder remedy it reads as a fair-minded qualification. It fails because the fourth sentence ends by describing a patient who is not forgetting anything, which leaves a question about what he is doing — and a note on the cost-effectiveness of pill boxes answers a different one. The option reinstating forgetfulness contradicts that same sentence outright.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A patient taking a drug for high blood pressure feels no better for taking it, because there was nothing to feel in the first place.",
+      "What he does feel, if the dose is not quite right, is tired, or unsteady when he stands, or obliged to plan his day around a tablet.",
+      "Adherence studies find the pattern this predicts: the conditions people stop treating are the ones that do not hurt.",
+      "The usual explanation is forgetfulness and the usual remedy a reminder, but a patient who stops because the evidence of his senses is against the drug is not forgetting anything."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "Reminders and pill boxes do help a little, and they are cheap enough to issue even though the difficulty they address is not the one described.",
+      "B": "Medicine asks patients to trust a number over a sensation, and the trust it asks for is not always deserved by the numbers involved.",
+      "C": "Forgetfulness, in short, explains a good deal more of this failure than doctors and their patients have ever been willing to admit.",
+      "D": "He is doing what patients are asked to do, attending to how he feels, in an illness that has arranged for that evidence to point the wrong way."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The fourth sentence rejects the standard explanation and leaves a patient defined only negatively: he is not forgetting. A closing sentence has to say what he is doing instead, and the paragraph has already supplied the materials — a condition that cannot be felt and a treatment that can. The closer must stay with this patient and must not soften into general commentary or reinstate the explanation just refused.",
+    "correct_reasoning": "The correct option completes the negation: the patient is following the instruction every patient is given, to notice how he feels, and in this illness that instruction misleads because the disease is silent while the drug is not. It uses both facts the paragraph opened with, keeps the sceptical but unresentful stance, and turns the adherence failure into a consequence of attentiveness rather than of carelessness.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "It defends a remedy the paragraph has just set aside as aimed at the wrong thing; the gap needs a positive account of the patient's behaviour, and a note on the price of pill boxes supplies nothing of the kind.",
+        "seductive_element": "It concedes the paragraph's criticism while rescuing something practical from it, which is the shape of a balanced conclusion."
+      },
+      {
+        "option": "B",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph never questions the number; its whole point is that the patient's own evidence runs against a drug that is working invisibly, and doubt about whether the numbers deserve trust is a claim it has not made.",
+        "seductive_element": "The opposition between number and sensation is genuinely the paragraph's material, reassembled into a broader scepticism that sounds profound."
+      },
+      {
+        "option": "C",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence directly above the gap says this patient is not forgetting anything, so a closer reinstating forgetfulness as the main explanation contradicts the paragraph one line after it made the point.",
+        "seductive_element": "It sounds like a corrective to a clever argument, and the suggestion that doctors will not admit something has the ring of candour."
+      }
+    ],
+    "method": "When the sentence before a gap says what somebody is not doing, the gap owes you what they are doing. Write that sentence in your head before reading the options, using only material the paragraph has already given you. Anything that comments on remedies, or widens into a verdict on the profession, is answering a question the negation did not ask."
+  },
+  "mentor": {
+    "challenge": "The paragraph ends by telling you what the patient is not doing. Say what he is doing before you look at the options.",
+    "takeaway": "A negation demands its positive. Options that turn to remedies or to the profession are changing the subject."
+  }
+}

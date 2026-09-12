@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0021",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "public-policy",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "Eleven Minutes an Applicant",
+    "theme": "why a policy is whatever the counter does with it, and what a reform that changes only the wording changes",
+    "estimated_time_sec": 105,
+    "gap_function": "consequence",
+    "primary_trap": "wrong_connective",
+    "reasoning_patterns": ["disc.cause_effect", "disc.function_slot", "struct.cause_effect", "disc.given_new", "arg.qualification"],
+    "learning_objective": "state the consequence a two-part mechanism produces, and reject an option whose connective asks for a concession the paragraph has not made",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 5, "distractor_closeness": 5, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of how written rules become counter routines; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap explains what evaluations calling something implementation failure are really describing, which requires the gap to have said that a reform of the wording leaves the operative part untouched. The 'even so' decoy offers a remedy in the consequence slot and concedes against nothing.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option beginning 'Even so', which says the routine is the cheapest part of a policy to change because it needs no legislation. It is constructive, it concedes, and it is about the same two objects. It fails twice: the paragraph has asserted nothing that a concession could push against at that point, and the sentence after the gap requires a consequence about reforms that miss the routine, not a suggestion about how to reach it. The verdict that administration defeats every intention is refused by the second sentence, which explicitly clears the clerk of defiance.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A rule arrives at the counter as a sentence and leaves it as a routine: which form is handed over first, which question is asked in what tone, what counts as a complete answer.",
+      "The clerk is not defying the rule when she does this; a sentence cannot be applied without being turned into an order of operations, and somebody has to do the turning.",
+      "The sentence is written by people with a year to consider it; the routine is written by somebody with eleven minutes an applicant.",
+      "It is why evaluations that report implementation failure are so often describing a faithful translation of a sentence into a routine that nobody costed."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Even so, the routine is the cheapest part of a policy to alter, since changing it requires no legislation and no new money at all.",
+      "B": "So a reform that rewrites the sentence and leaves the eleven minutes untouched has changed the policy in the one place it does not operate.",
+      "C": "Administration defeats every intention that reaches it, which is the oldest and the least welcome finding in the study of government.",
+      "D": "A rule, in other words, has to be turned into an order of operations by somebody before it can be applied to any applicant whatever."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has separated a policy into two parts — the sentence ministers write and the routine the counter builds — and has said who writes each and under what pressure. The gap must state the consequence of that division, and the sentence after it tells you which consequence: one that explains why reforms are later recorded as implementation failures when nothing was in fact disobeyed.",
+    "correct_reasoning": "The correct option draws the consequence the division forces. If the operative part of a policy is the routine, then a reform confined to the wording has acted on the inert half, and the applicant meets the old routine under a new name. That is exactly what the following sentence reports evaluators finding, and it keeps the paragraph's insistence that nobody has defied anything.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_connective",
+        "why_wrong": "'Even so' asks the reader to set aside a claim just made, and the previous sentence about a year against eleven minutes is not a claim this concedes against; it also offers a remedy where the paragraph needs the consequence its next sentence explains.",
+        "seductive_element": "It is constructive and true — routines really are cheap to change — and the concessive opening mimics the rhythm of a sophisticated argument."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "The second sentence takes care to say the clerk is not defying the rule, so a verdict that administration defeats every intention overstates the paragraph and makes the faithful translation described afterwards inexplicable.",
+        "seductive_element": "It is grand and memorable, and it flatters the reader's suspicion that officialdom swallows every reform."
+      },
+      {
+        "option": "D",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "This repeats the second half of the second sentence almost exactly, so the paragraph states its premise twice and the consequence the following sentence depends on is never drawn.",
+        "seductive_element": "'In other words' signals consolidation, and the sentence is the paragraph's own idea, which makes repetition feel like emphasis."
+      }
+    ],
+    "method": "Where a paragraph splits a thing into a written part and an operating part, the consequence slot is about what happens when you act on the wrong one. Read the sentence after the gap for the phenomenon being explained — here, evaluations that report failure where there was obedience — and choose the option that makes that phenomenon follow."
+  },
+  "mentor": {
+    "challenge": "The paragraph has divided a policy in two and told you who writes each half under what pressure. Say what follows for a reform.",
+    "takeaway": "A connective is a promise about what came before. 'Even so' with nothing to concede is a decoy however sensible the sentence is."
+  }
+}

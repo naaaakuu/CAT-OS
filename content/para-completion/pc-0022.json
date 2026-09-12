@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0022",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "anthropology",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "Kin on One Side Only",
+    "theme": "why counting descent through a single line removes a problem of competing claims, and what it cannot remove",
+    "estimated_time_sec": 95,
+    "gap_function": "contrast_turn",
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": ["disc.rhetorical_pivot", "disc.function_slot", "struct.pivot", "disc.given_new", "struct.problem_solution"],
+    "learning_objective": "turn a paragraph at the point its solution stops working, and see which turn the following sentence is the consequence of",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of unilineal descent and the treatment of the uncounted side; no specific society or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap reports elaborate arrangements for the line that is not counted, which can only be the consequence of a turn about that line continuing to exist. The property verdict is the premature close and is genuinely attractive, since the paragraph's first two sentences are about inheritance.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the verdict that the arrangement is best understood as a device for holding property together across generations. The paragraph's second sentence does mention the herd and the name, so the reading is available, and it has the finality readers like. It fails because the sentence after the gap begins 'So the societies that trace descent most strictly' and then describes elaborate provision for the uncounted side — a consequence that follows only from a turn saying the uncounted side is still there and still needed. A verdict about property makes that sentence a non sequitur.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Everyone has relatives on both sides, and a society that recognised all of them equally would have to decide, at every death and every quarrel, which of two crowds had the better claim.",
+      "A rule that counts descent through one line only removes the question before it can be put: the herd, the name and the feud all travel in one direction, and nobody has to adjudicate between two sets of cousins of equal standing.",
+      "So the societies that trace descent most strictly are also the ones with the most elaborate provision for the line they refuse to count — the mother's brother and his licensed indulgence, the gifts that go the other way, the visits nobody may decline."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "The arrangement is best understood, then, as a device for keeping property together as it passes from one generation to the next undivided.",
+      "B": "In such a system two sets of cousins can never find themselves holding claims of exactly equal standing against one and the same estate.",
+      "C": "What the rule cannot do is stop the other side existing, and the relatives it writes out are the ones whose help is wanted at harvest.",
+      "D": "Kinship systems are, above all, ways of settling who may ask what of whom, though no system has ever settled the question completely."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has posed a problem and shown how a one-sided descent rule dissolves it. The sentence after the gap begins 'So' and reports that the strictest societies make the most elaborate provision for the line they do not count. That consequence requires a turn immediately before it: something the rule fails to achieve, concerning precisely the uncounted relatives.",
+    "correct_reasoning": "The correct option turns at exactly the right joint. The rule settles claims, but the people whose claims it cancels are still alive, still nearby and still needed for work that has nothing to do with inheritance. Elaborate provision for that side is then the obvious consequence, and the following sentence's list of devices reads as the societies' own repair for the very gap the turn has named.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "It closes the paragraph on a verdict where a turn is needed, and the verdict makes the next sentence unaccountable: societies that have solved the property problem have no reason to build elaborate arrangements for the relatives they excluded.",
+        "seductive_element": "The herd and the name in the previous sentence make property feel like the paragraph's real subject, and 'then' gives the option the cadence of a conclusion."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "It says again what the previous sentence has already said about two sets of cousins of equal standing, so nothing turns and the 'So' that opens the following sentence has no new claim to draw on.",
+        "seductive_element": "It is a faithful and confident summary of the mechanism, which is easy to mistake for a step in the argument."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A definition of kinship systems in general stands above the particular failure the next sentence is a consequence of, and its concession that nothing is ever settled completely is too vague to generate any specific provision for the uncounted line.",
+        "seductive_element": "It concedes and generalises in one breath, which reads as the voice of the discipline, and it is the broadest sentence offered."
+      }
+    ],
+    "method": "A turn is placed by what it has to make possible. Read the sentence after the gap and name the consequence it reports — here, elaborate arrangements for exactly the relatives the rule ignores — then ask which candidate would produce it. Verdicts and restatements produce nothing, which is how you can tell them from turns."
+  },
+  "mentor": {
+    "challenge": "The last sentence reports societies working hard on the very relatives their rule ignores. Ask what must have been said just before it.",
+    "takeaway": "A contrast turn names what the solution leaves unsolved; if the sentence after the gap has no cause, you have chosen a verdict instead."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0004",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "The Chamber That Cannot Win",
+    "theme": "why a weaker second chamber survives: its authority depends on its inability to prevail",
+    "estimated_time_sec": 105,
+    "gap_function": "opening",
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.opening_sentence", "disc.function_slot", "disc.competing_opener", "scope.abstraction_level", "arg.qualification"],
+    "learning_objective": "choose an opening sentence by testing every candidate against the paragraph's last claim, not only against the sentence that follows it",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 5, "distractor_closeness": 5, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general argument about bicameral legislatures; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "A premium opener. The decoy that calls the second chamber a survival with no job of its own fits the two sentences that follow it perfectly and is refused only by the third, which says what the arrangement actually produces. The broad constitutional opener is the trap for a reader who thinks the first sentence should be the biggest sentence.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The strongest rival is the abolitionist opener, since a reader who works forward finds a paragraph that looks as though it is stating an objection and then testing the replies. Two things kill it. The third sentence speaks of 'the very weakness that makes the chamber look indefensible', and only an opener that has called the chamber weaker than the first gives that phrase an antecedent; and the last sentence separates a chamber that could veto from one that can only delay, which refuses the premise that this chamber obstructs. The property-and-birth opener is the other live rival: it leads beautifully into the defences and their demolition, and it dies on the sentence that asserts the arrangement does produce something and names it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "The defence usually offered is that such a chamber supplies expertise, or continuity, or a brake on a majority in a hurry.",
+      "None of that survives much pressure: expertise can be hired, continuity is what a permanent civil service is for, and a brake operated by people nobody elected invites the obvious complaint about who is operating it.",
+      "What the arrangement actually produces is narrower and more durable, and it depends on the very weakness that makes the chamber look indefensible: a compulsory second reading by people who did not draft the proposal and who cannot be blamed for abandoning it.",
+      "A chamber that could veto would be answerable for the outcome; a chamber that can only delay is answerable for nothing except the quality of its objections."
+    ],
+    "gap_index": 0
+  },
+  "question": {
+    "stem": "Which of the following sentences best opens the paragraph?",
+    "options": {
+      "A": "Second chambers survive from an age when property and birth sat alongside numbers, and have not since been given a job of their own.",
+      "B": "Every constitution must decide how much of its power to put beyond a temporary majority, though no formula has ever settled the amount.",
+      "C": "Most legislatures keep a second chamber that is deliberately weaker than the first, and nobody designing one now would think to invent it.",
+      "D": "The case against a second chamber has always been the simple one: a body that can obstruct the elected ought to be elected itself."
+    },
+    "correct": "C"
+  },
+  "explanation": {
+    "what_the_gap_needs": "Two things in the paragraph reach back for an opener. The second sentence begins 'The defence usually offered', which presupposes something already named and already in need of defending; and the third refers to 'the very weakness that makes the chamber look indefensible', a definite noun phrase that no later sentence supplies. The opener must therefore introduce a second chamber, say that it is the weaker one, and put a question over it without committing the paragraph to a verdict, since the paragraph goes on to dismiss the usual defences and then mount one of its own.",
+    "correct_reasoning": "The correct option is the only one that supplies both hooks. It names the institution, records the feature the rest of the paragraph turns on — that the chamber is deliberately the weaker of the two, which is the weakness the third sentence refers back to — and raises the puzzle in its mildest form, that nobody would invent it now, which is exactly what 'the defence usually offered' answers. That leaves room for the defences to be dismissed and for the paragraph's own answer, which is that the weakness is the point: a chamber that can only delay is answerable for nothing but its objections.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It runs smoothly into the defence and its demolition, but the paragraph then says what the arrangement actually produces and names the job in a clause; an opener asserting that the chamber has not since been given a job of its own is contradicted by the paragraph's own conclusion.",
+        "seductive_element": "The historical explanation is plausible and sounds authoritative, and it makes the demolition of the usual defences read as confirmation."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The paragraph never discusses putting powers beyond a majority's reach; it discusses a device that delays and cannot block. An opener at that altitude introduces a subject the following sentence cannot be the defence of.",
+        "seductive_element": "It is the grandest sentence available, and first sentences are widely believed to be the place for the grandest claim."
+      },
+      {
+        "option": "D",
+        "trap_type": "stance_shift",
+        "why_wrong": "It commits the paragraph to the abolitionist case, which the last sentence refuses by distinguishing a chamber that could veto from one that can only delay and treating the inability to prevail as what makes the second useful; it also leaves the third sentence's 'very weakness' without anything to refer to, since an objection is not a weakness.",
+        "seductive_element": "It sets up the demolition of the standard defences as though the paragraph were about to agree with it, and it is the objection most readers already hold."
+      }
+    ],
+    "method": "An opening sentence is fixed by the whole paragraph, not by the sentence beneath it. Sweep the paragraph for definite phrases that nothing inside it introduces — 'the defence usually offered', 'the very weakness' — and ask which candidate supplies them; then test the survivors against the paragraph's own claim. Openers that pre-judge the verdict, or that float one level above the subject, fail even when they lead perfectly into the next line."
+  },
+  "mentor": {
+    "challenge": "Three of these would carry you comfortably into the second sentence. Only one of them can still be standing at the last.",
+    "takeaway": "Test an opener against the paragraph's conclusion: a first sentence that the ending contradicts is a decoy, however well it starts."
+  }
+}

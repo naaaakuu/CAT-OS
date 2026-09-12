@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0003",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "ethics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "A Promise to the Dead",
+    "theme": "why a promise made to someone now dead still binds, and what the obligation was attached to when it was made",
+    "estimated_time_sec": 70,
+    "gap_function": "explanation",
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": ["disc.function_slot", "disc.stance_continuity", "struct.phenomenon_explanation", "disc.given_new"],
+    "learning_objective": "fill a mid-paragraph gap by asking what the sentence after it is explaining, and refuse an option that changes the paragraph's side",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 2, "distractor_closeness": 3, "concept_abstractness": 3, "syntactic_complexity": 2 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general ethical question about promissory obligation; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "An early-tier mid-gap: the sentence after the gap begins 'That is why', so the gap must be the explanation that sentence draws its conclusion from. The stance decoy concedes that the promise matters and then withdraws the duty, which is the one thing the paragraph is holding on to.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that calls the kept promise a kindness rather than a duty: it concedes the feeling, sounds humane, and explains why nobody enforces it. It is killed by the sentence after the gap, which calls the thing felt in private an obligation and treats its unenforceability as a feature; an explanation that has just dissolved the duty leaves that sentence with nothing to be about. The option restating that the dead cannot be harmed repeats the sentence before the gap and would leave the paragraph saying the same thing twice with nothing gained.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "People who would not dream of breaking a promise to a friend will ask, quite seriously, whether a promise made to someone now dead still binds.",
+      "The doubt has an honest source: the person who was promised cannot be disappointed, cannot complain, and cannot be made worse off by anything that is done now.",
+      "That is why the obligation is felt most sharply in private, where there is nobody to be told and nothing that could be enforced."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "The obligation was created when the promise was accepted, and nothing in that exchange made the promisee's survival one of its terms.",
+      "B": "A promise still matters to the one who made it, though with nobody left to be wronged, keeping it is a kindness rather than a duty.",
+      "C": "The dead, after all, cannot be harmed by what the living do, and can take no further interest in what becomes of their wishes.",
+      "D": "The law makes its own provision for the wishes of the dead, through wills and executors that depend on nobody's goodwill."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The sentence before the gap states the difficulty — the promisee can no longer be affected by anything. The sentence after the gap begins 'That is why' and treats the obligation as real, private and unenforceable. So the gap must be the explanation that both of those depend on: it has to say where the obligation comes from, in a way that survives the promisee's absence and does not need an audience.",
+    "correct_reasoning": "The correct option relocates the obligation from the promisee's present condition to the moment the promise was accepted, and adds that the promisee's continued existence was never a condition of it. That answers the doubt raised before the gap without denying it, and it is exactly what makes the following sentence follow: an obligation whose terms were settled between two people at one moment needs no witness now, which is why it presses hardest where nobody is watching.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "stance_shift",
+        "why_wrong": "The paragraph treats the obligation as genuine and then explains why it is felt in private; an option that downgrades it to a kindness takes the sceptical side the paragraph is answering, and leaves the following sentence describing the sharp private pull of something that has just been declared optional.",
+        "seductive_element": "It concedes the feeling before withdrawing the duty, which reads as balance, and it neatly explains why no one can enforce such a promise."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "This says again, in other words, what the sentence before the gap has just said about the promisee being beyond harm; the paragraph would state the difficulty twice and still have no explanation for the obligation the next sentence describes.",
+        "seductive_element": "It uses the paragraph's own vocabulary and the confident cadence of 'after all', which makes repetition sound like a step."
+      },
+      {
+        "option": "D",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "Wills and executors are the right topic and the wrong job: the gap has to explain a private obligation that the next sentence says nothing could enforce, and an account of enforcement machinery answers the opposite question.",
+        "seductive_element": "It is true, it is about obligations to the dead, and institutions feel like solid ground when an argument has become abstract."
+      }
+    ],
+    "method": "With a mid-paragraph gap, read the sentence after it first. A sentence beginning 'That is why' is a conclusion looking for its premise, and it tells you the shape of what is missing: here, a reason the obligation exists that does not depend on anybody still being there to be wronged. Then reject options that deny the thing the next sentence takes for granted, however reasonable they sound on their own."
+  },
+  "mentor": {
+    "challenge": "The missing sentence sits between a difficulty and a 'That is why'. Work out what the second one needs before you look at what is on offer.",
+    "takeaway": "An explanation has to leave standing whatever the next sentence assumes; an option that dissolves the problem has not explained it."
+  }
+}

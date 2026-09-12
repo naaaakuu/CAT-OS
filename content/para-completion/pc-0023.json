@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0023",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "The Price of Paying as You Go",
+    "theme": "why the same goods cost a poorer household more, and what that does to comparisons made in money",
+    "estimated_time_sec": 90,
+    "gap_function": "implication",
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": ["disc.function_slot", "inf.reasonable_implication", "struct.specific_to_general", "disc.given_new", "scope.abstraction_level"],
+    "learning_objective": "draw the implication that the sentence after the gap depends on, and refuse the broad sentiment the same evidence invites",
+    "difficulty_vector": { "stance_subtlety": 3, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of why small and instalment purchases cost more per unit; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The closing sentence is about a threshold at which cheaper terms become available, which needs an implication about purchasing power rather than about market design. The broad sentiment is the primary trap and is the option most readers will feel is the right note to strike.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the line that markets are not designed with the poorest customer in mind. It is true of everything the paragraph has described and it is the sentiment the examples invite. It fails because the sentence after the gap is about what a rise in income is worth at the point where the cheap tariff and the large packet come within reach, which follows from a claim about purchasing power and not from a claim about whom markets are designed for. The budgeting option contradicts the third sentence, which says none of this can be corrected by advice.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A household that cannot buy the large packet buys the small one, and pays more per kilogram for it.",
+      "It buys electricity by the coin because the cheaper tariff wants a bank record it does not have, and it pays for the washing machine over fifty weeks because it cannot pay for it in one.",
+      "None of this is a mistake and none of it can be corrected by advice: each purchase is the cheapest one available to a household that has to get through the week.",
+      "A rise in income that carries a household over the line where the cheap tariff and the large packet come within reach is therefore worth more than the same rise anywhere else on the scale."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Markets, in short, are not designed with the poorest customer in mind, and the evidence is on every shelf in the shop.",
+      "B": "Two households with the same money do not have the same purchasing power, which is awkward for a poverty line drawn in money.",
+      "C": "Poverty ought therefore to be measured by what a household can buy rather than by what it earns, in every country and at every level.",
+      "D": "Better budgeting would remove a good deal of this difference, though the habits involved take a long time to acquire in practice."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has assembled a set of cases in which having less money makes the same goods cost more, and has ruled out both error and advice as explanations. The last sentence then claims that a rise in income is worth more at one particular point on the scale. The gap must be the implication that licenses that claim, and it has to be about money and what it buys, since the last sentence is about a threshold in purchasing terms.",
+    "correct_reasoning": "The correct option states the implication precisely where the paragraph's evidence puts it: identical incomes are not identical in what they command, because the cheaper ways of buying are unavailable below a certain level. That is exactly what makes a rise that crosses the threshold worth more than a rise of the same size elsewhere, and it is awkward for counting poverty in money, as the last sentence quietly assumes.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A verdict about whom markets are designed for is broader than the evidence and does nothing to explain the threshold in the final sentence, which depends on what a given income can buy rather than on anybody's intentions.",
+        "seductive_element": "It is the sentiment the examples invite, it is quotable, and 'in short' makes it sound like the paragraph drawing its own moral."
+      },
+      {
+        "option": "C",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph supports a claim about purchasing power, not a recommendation about how poverty should be measured everywhere and at every level; the universal reach is exactly what the evidence about a threshold cannot carry.",
+        "seductive_element": "It sounds like a serious methodological conclusion and picks up the paragraph's real concern with how money is counted."
+      },
+      {
+        "option": "D",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence immediately above the gap says the pattern cannot be corrected by advice and that each purchase is already the cheapest available; attributing the difference to budgeting reverses it one line later.",
+        "seductive_element": "It concedes that habits take time, which makes it sound sympathetic rather than censorious, and the idea is the common one."
+      }
+    ],
+    "method": "An implication is fixed by what the paragraph does next. Read the closing sentence and ask what must be true for it to follow. Here it turns on a threshold in what money can buy, so the missing sentence has to be about purchasing power. Options that rise to a sentiment about markets, or prescribe a measurement, leave that threshold unexplained."
+  },
+  "mentor": {
+    "challenge": "The last sentence says a pay rise is worth more at one point on the scale than at another. Work out what it needs you to have been told.",
+    "takeaway": "Pick the implication the next sentence uses, not the one the examples make you feel."
+  }
+}

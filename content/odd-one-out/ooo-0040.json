@@ -34,7 +34,7 @@
     "traps": {
       "primary": "B",
       "secondary": "A",
-      "description": "The outlier is about the same documents and mentions comparison, which is what an argument about reading documents seems to want. The decoy is the sentence claiming that the longest charters come from the most quarrelsome relationships, a surprising assertion that reads like a separate thesis."
+      "description": "The outlier is about the same documents, takes the same kind of subject as the spine, the surviving charters themselves, and mentions comparison, which is what an argument about reading documents seems to want. It is no longer than the sentences around it, carries no scholarly apparatus on its surface, and shares the paragraph's vocabulary of dispute, naming an arrangement long disputed and used all the same. The decoy is the sentence claiming that the longest charters come from the most quarrelsome relationships, a surprising assertion that reads like a separate thesis."
     },
     "cohesion_signals": {
       "reference": true,
@@ -56,8 +56,13 @@
     "reasoning_patterns": ["arg.description_vs_evaluation", "comp.function_over_words", "disc.claim_then_evidence", "comp.purpose", "scope.true_but_off_question"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival is the claim that the longest charters come from the most quarrelsome relationships rather than the strongest towns: it is the boldest sentence in the set and sounds like a thesis of its own, so a reader may treat it as an intrusion. It stays because its so follows directly from the principle that a liberty is written down when it is disputed, and because it is the argument's only testable consequence. The sentence about modern editions grouping charters by century and settlement size describes how the evidence has been arranged for study, and no step of the argument uses the arrangement; the reasoning is about what a clause means, not about how the documents are shelved.",
-      "blind_solve": null
+      "adversarial_review": "The rival is the claim that the longest charters come from the most quarrelsome relationships rather than the strongest towns: it is the boldest sentence in the set and sounds like a thesis of its own, so a reader may treat it as an intrusion. It stays because its so follows directly from the principle that a liberty is written down when it is disputed, and because it is the argument's only testable consequence. The sentence about how the surviving charters are shelved describes the arrangement of the evidence, and no step of the argument uses the arrangement; the reasoning is about what a clause means, not about where the documents stand. It is now the same length and the same shape as its neighbours, so a reader who was eliminating the longest or the most bookish sentence has nothing to go on.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported the outlier as doubly cheap, being both conspicuously the longest sentence in the item and the only one written in the language of scholarly editions. Repaired by cutting it to the length of its neighbours, giving it the surviving charters as its subject, and removing the editions and printed formulas. A second blind solve agreed again and reported that it was still the only contented sentence in a paragraph of source-scepticism; it now carries a dispute of its own, over an arrangement long disputed and universally used, which matches the paragraph's temperature and its vocabulary of conflict without giving the argument anything to use. A third blind solve agreed and reported the outlier still the only sentence with no word of conflict in it, where the argument runs on disputing, doubt, denial and quarrels. The arrangement it names is now long disputed and used all the same, which supplies the missing vocabulary without supplying a step. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -76,12 +81,12 @@
     { "label": "B", "text": "The absence of a clause therefore proves very little, since it may mean the right was never held, or that it was never in doubt, and the document cannot tell the two apart." },
     { "label": "C", "text": "A town charter reads like a list of what the townsmen had won, and it is better read as a list of what somebody had been denying them." },
     { "label": "D", "text": "So the longest charters come not from the strongest towns but from the most quarrelsome relationships, where every point had to be fought over separately." },
-    { "label": "E", "text": "Surviving charters are gathered in modern editions which group them by the century of issue and by the size of the settlement, and which print the standard formulas in full, so that comparison across regions is straightforward." }
+    { "label": "E", "text": "The charters that survive are shelved by the century of issue and by the size of the settlement, an arrangement long disputed, universally used, and convenient when comparing regions." }
   ],
   "outlier": "E",
   "core_order": ["C", "A", "D", "B"],
   "builder": {
-    "prompt": "Build the four-sentence argument about what a charter actually records, from the claim to what a missing clause can and cannot show. The sentence about how the documents are arranged for study is your answer."
+    "prompt": "Build the four-sentence argument about what a charter actually records, from the claim to what a missing clause can and cannot show. The sentence that no step of that argument uses is your answer."
   },
   "explanation": {
     "spine_note": "The core argues one point in four steps. It opens by replacing the natural reading of a charter with a better one, a list of denials rather than a list of victories, then gives the reason: things are written down when they are contested. The third step draws the surprising consequence about which towns have the longest charters, and the fourth states the limit the reading imposes on any argument from silence. Claim, reason, consequence, limit.",
@@ -96,19 +101,19 @@
       { "from": "A", "to": "D", "tie": "conjunction", "explanation": "'So' draws a consequence from the principle just stated, and the consequence is about exactly the quarrels the principle describes." },
       { "from": "D", "to": "B", "tie": "conjunction", "explanation": "'Therefore' extends the same reasoning from what a long charter shows to what a missing clause fails to show." }
     ],
-    "violation_named": "The odd sentence describes how the surviving documents have been collected and arranged for scholars. The four core sentences argue about what a clause in such a document means. A statement about the organisation of an archive and a statement about the meaning of its contents answer different questions, and only the second is being answered here.",
-    "why_it_breaks": "No step of the argument uses the arrangement. The principle concerns why anything is written down at all, the consequence concerns the length of particular charters, and the limit concerns what a silence can support. Grouping by century and settlement would matter to an argument that counted charters; this one reads them. The sentence therefore takes nothing from its neighbour and leaves nothing for the next.",
-    "trap_exposed": "The camouflage is the word comparison. An argument about how to read documents sounds as though it should welcome a sentence about comparing them, and the vocabulary matches throughout. The decoy is the boldest sentence in the set, the one about quarrelsome relationships, which sounds like a thesis of its own and is in fact the consequence that makes the thesis testable.",
+    "violation_named": "The odd sentence describes how the surviving documents have been arranged. The four core sentences argue about what a clause in such a document means. A statement about the order of an archive and a statement about the meaning of its contents answer different questions, and only the second is being answered here.",
+    "why_it_breaks": "No step of the argument uses the arrangement. The principle concerns why anything is written down at all, the consequence concerns the length of particular charters, and the limit concerns what a silence can support. Shelving by century and settlement would matter to an argument that counted charters; this one reads them. Its scepticism does not rescue it either, since being sceptical about a filing system is not being sceptical about a clause. The sentence therefore takes nothing from its neighbour and leaves nothing for the next.",
+    "trap_exposed": "The camouflage is the word comparison, and it is no longer given away by bulk. An argument about how to read documents sounds as though it should welcome a sentence about comparing them; the vocabulary matches throughout; the subject is the surviving charters, exactly what the argument is about; the sentence is no longer than its neighbours; and it is as unimpressed by its subject as everything around it. The decoy is the boldest sentence in the set, the one about quarrelsome relationships, which sounds like a thesis of its own and is in fact the consequence that makes the thesis testable.",
     "exclusion_analysis": [
       { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It is the only sentence that states the ordinary view before correcting it, so a reader who has taken the point may think the correction alone would do.", "what_breaks": "Without it the paragraph explains a reading it never states, and the reason, the consequence and the limit all support a claim the reader has to supply." },
       { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It is a general principle with no charter in it, which makes it look like a maxim borrowed from elsewhere.", "what_breaks": "Without it the claim is asserted and never explained, and both the consequence and the limit follow from nothing." },
       { "label": "D", "mistake_type": "surface_oddity", "why_tempting": "Its claim is counterintuitive and stated flatly, so it reads like a separate thesis rather than a step in this one.", "what_breaks": "Without it the argument never says what its reading predicts, and the reader is asked to accept an interpretation that is never brought against the documents." },
       { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "It is about what cannot be shown rather than what can, so it feels like a caveat appended after the argument had finished.", "what_breaks": "Without it the argument yields a reading but no rule, and the reader is left able to admire the point and unable to use it." }
     ],
-    "detection_habit": "Ask whether a sentence belongs to the evidence or to the handling of the evidence. Catalogues, editions and sampling belong to the second, and an argument about meaning rarely has a seat for them."
+    "detection_habit": "Ask whether a sentence belongs to the evidence or to the handling of the evidence. Shelving, cataloguing and sampling belong to the second, and an argument about meaning rarely has a seat for them, however plainly they are written."
   },
   "mentor": {
-    "challenge": "Five sentences about old town charters, all of them things a historian might say. Only four of them are arguing about what the documents mean.",
+    "challenge": "Five sentences about old town charters, all of them things a historian might say, all of them about the same length. Only four are arguing about what the documents mean.",
     "takeaway": "How the evidence is arranged is a different paragraph from what the evidence shows."
   }
 }

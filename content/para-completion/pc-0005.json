@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0005",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "human-behaviour",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Advice You Would Give a Friend",
+    "theme": "why the same decision is easier to settle when it belongs to somebody else, and what that licenses you to do",
+    "estimated_time_sec": 70,
+    "gap_function": "conclusion",
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": ["disc.closing_sentence", "disc.function_slot", "struct.problem_solution", "disc.stance_continuity"],
+    "learning_objective": "close a paragraph with the practical lesson its own analysis has earned, rather than with a related observation about the same topic",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 3, "distractor_closeness": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general observation about deciding for oneself and for others; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "A paragraph that genuinely ends in a recommendation, so the correct option is the one that tells the reader what to do. The decoy about advisers is the same topic doing a different job, and the deliberation decoy contradicts the sentence that rules out information as the difference.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about friends being too quick with advice, which is true, sits on the paragraph's own subject and even concedes something. It fails because the paragraph has spent four sentences establishing an asymmetry in the decider, not a fault in the adviser, and its last sentence must cash that asymmetry rather than turn to a second party's shortcomings. The deliberation option is refused outright by the third sentence, which says the difference is not information.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Ask someone what a friend should do about a difficult job offer and the answer arrives in a sentence.",
+      "Ask the same person what they themselves should do about the same offer, and the sentence dissolves into a list of considerations that will not resolve.",
+      "The difference is not information; they know their own case far better than they know the friend's.",
+      "What distance removes is the pull of the particular — the colleague who will be disappointed, the fear of looking foolish, the small comforts that are hard to weigh and harder to give up."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "Friends are quick with advice partly because it costs them nothing to be wrong about a life they will not have to live.",
+      "B": "So when a decision will not settle, you should ask what you would tell a friend in it, and then take your own answer seriously.",
+      "C": "People turn out to be poor judges of their own lives, whatever they may be able to see clearly in anybody else's.",
+      "D": "Since the trouble is really a shortage of information about oneself, one should deliberate for longer before deciding."
+    },
+    "correct": "B"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has established one asymmetry and explained it: the same person decides quickly for a friend and slowly for themselves, and the reason is distance from particular pulls rather than any difference in knowledge. A closing sentence has to do something with that finding, and the only thing it licenses is a move the reader can make — borrowing the distance deliberately.",
+    "correct_reasoning": "The correct option turns the paragraph's explanation into the instruction it supports: if distance is what produces the clean answer, then manufacture the distance by asking what you would tell a friend. It keeps the paragraph's subject (the person deciding), uses exactly the mechanism the paragraph named, and adds the qualification the argument needs — that the borrowed answer is to be taken seriously rather than merely noted.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The paragraph is about one person's two vantage points, not about the reliability of advisers; a closing line on what advice costs the adviser answers a question the paragraph never raised and leaves the finding unused.",
+        "seductive_element": "It is shrewd, it is about advice, and the cynical note reads as the kind of thing a wise paragraph ends on."
+      },
+      {
+        "option": "C",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The paragraph claims something narrow — that particular attachments clog a decision the person is inside — not that people cannot judge their own lives; the wider claim also throws away the practical use the analysis was building toward.",
+        "seductive_element": "It is the broadest sentence on offer and has the ring of a concluding verdict, which is what many readers expect a last sentence to be."
+      },
+      {
+        "option": "D",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The third sentence states plainly that the difference is not information, so a conclusion diagnosing a shortage of information and prescribing more deliberation contradicts the paragraph two sentences after it made the point.",
+        "seductive_element": "'More thought will sort it out' is the ordinary advice, and the word 'oneself' makes it sound as though it has absorbed the paragraph."
+      }
+    ],
+    "method": "Where a paragraph diagnoses a mechanism, ask what the mechanism lets you do before reading the options. A paragraph that has isolated the working part usually ends by using it, so the recommendation can be the answer here — the test is whether the paragraph's own analysis earns it, not whether the sentence tells you what to do."
+  },
+  "mentor": {
+    "challenge": "The paragraph has just named the working part of the difference. Decide what a last sentence could honestly do with it before you look.",
+    "takeaway": "A closing recommendation is fine when the paragraph has earned it; what is never fine is a closing sentence the paragraph's evidence has already refused."
+  }
+}

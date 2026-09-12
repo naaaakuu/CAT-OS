@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0007",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "What the Ending Does to the Rest",
+    "theme": "why a remembered ordeal is dominated by its worst moment and its last one rather than by how long it lasted",
+    "estimated_time_sec": 80,
+    "gap_function": "next_step",
+    "primary_trap": "wrong_connective",
+    "reasoning_patterns": ["disc.function_slot", "disc.given_new", "struct.claim_evidence", "disc.implicit_transition"],
+    "learning_objective": "use a term in the sentence after the gap to work out what the missing sentence must have introduced",
+    "difficulty_vector": { "stance_subtlety": 2, "scope_precision": 3, "distractor_closeness": 4, "concept_abstractness": 2, "syntactic_complexity": 3 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general description of how remembered discomfort is summarised; no specific study or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap refers to 'the patients in the longer version', a term nothing before the gap has introduced. The gap must therefore propose the manipulation, and every option that draws the moral instead leaves that phrase unattached.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that turns memory into a summary written at the end: it is the paragraph's own idea, it concedes, and it sounds like the sentence the argument is heading for. It is refused by the sentence after the gap, which speaks of 'the patients in the longer version' — a group no summary sentence has created. The 'by contrast' option is the other real candidate; its connective promises an opposition to what precedes it, and there is none, since nothing before the gap has been asserted for it to cut against.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Ask people to rate an unpleasant medical procedure afterwards, and how long it lasted barely shows up in the rating.",
+      "What shows up is the worst moment and the last one.",
+      "The patients in the longer version, who had endured everything the others had and then some, remembered the whole episode as markedly less unpleasant.",
+      "The extra minutes had done nothing for them at the time; they had merely changed which moment was last."
+    ],
+    "gap_index": 2
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "That suggests an uncomfortable experiment: extend the procedure by a few minutes of milder discomfort, and ask the same question again.",
+      "B": "By contrast, patients who were told in advance how long the procedure would take rated the experience no differently afterwards.",
+      "C": "Memory is a summary of an experience rather than a record of it, and the summary is mostly written at the end, though not only there.",
+      "D": "Doctors have known for a long time that patients are poor at predicting how much pain an operation is going to cause them."
+    },
+    "correct": "A"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The sentence after the gap talks about 'the patients in the longer version', and nothing before the gap has mentioned two versions of anything. The missing sentence must therefore be the step that creates them: it has to propose the manipulation the paragraph goes on to report, and it has to follow naturally from the claim that the worst and the last moments are what register.",
+    "correct_reasoning": "The correct option proposes exactly the test the preceding claim invites — add time at a lower intensity, so that the final moment changes while everything else is held — and it supplies the 'longer version' the next sentence needs. The word 'uncomfortable' also keeps the paragraph honest about what is being suggested, which is that more suffering may produce a better memory.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "wrong_connective",
+        "why_wrong": "'By contrast' announces an opposition, and the sentence before the gap has asserted nothing that a finding about forewarning could cut against; the manipulation it does describe is not one the next sentence can be reporting, since it produces no longer version.",
+        "seductive_element": "It has the texture of a real result and the connective makes it feel like the disciplined next move in a report of findings."
+      },
+      {
+        "option": "C",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "This is the conclusion the paragraph is working towards, placed where the paragraph still needs a step; put here it leaves the following sentence referring to a longer version that no sentence has introduced.",
+        "seductive_element": "It is the most quotable line available and states the paragraph's real idea, which makes it feel like the sentence a strong reader would predict."
+      },
+      {
+        "option": "D",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "Predicting pain in advance is a different subject from how an ordeal is rated afterwards, and nothing later in the paragraph picks it up; the gap is left doing no work at all.",
+        "seductive_element": "It is adjacent to the topic, plausible on its own, and the appeal to what doctors have long known lends it authority."
+      }
+    ],
+    "method": "When a gap sits in the middle, read forward for a term the paragraph has not yet introduced. 'The patients in the longer version' is such a term, and it converts the question from 'what would sound good here' into 'which option creates a longer version'. Only one usually does, and the option that states the paragraph's moral is normally the one competing with it."
+  },
+  "mentor": {
+    "challenge": "One phrase after the gap refers to something the paragraph has not yet given you. Find it, and the missing sentence has to supply it.",
+    "takeaway": "A mid-paragraph gap is fixed by what comes after it: look for the new term the next sentence treats as already known."
+  }
+}

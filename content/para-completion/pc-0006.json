@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0006",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "institutions",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Number That Protects the Absent",
+    "theme": "the quorum as a guarantee given to the member who is not in the room, and what it fixes about attribution",
+    "estimated_time_sec": 100,
+    "gap_function": "conclusion",
+    "primary_trap": "tense_break",
+    "reasoning_patterns": ["disc.closing_sentence", "disc.function_slot", "disc.tense_continuity", "arg.qualification", "struct.view_critique_replacement"],
+    "learning_objective": "land an analytic paragraph on the claim it has been building, and recognise an option that swaps analysis for a piece of history",
+    "difficulty_vector": { "stance_subtlety": 4, "scope_precision": 4, "distractor_closeness": 4, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general analysis of quorum rules in deliberative bodies; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The paragraph argues in the analytic present and hands the closer two things to bind: the reconstrual of the rule as a condition of validity, and the assurance given to the absent member. The historical decoy is fluent, relevant and in the wrong tense for a paragraph that has made no historical claim at all.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the broad line about rules of procedure never being neutral, which concedes and sounds like the wisdom such a paragraph might close on. It fails on scope and on function: the paragraph's last two sentences are about validity and about the absent member specifically, and a verdict about who wins under procedural rules abandons both. The medieval-chapters option is the trap for a reader who reaches for illustration at the end; the paragraph has made no claim about the past, and a sentence in the narrative past leaves the argument unfinished while appearing to decorate it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A quorum is usually explained as a guard against the small and the unrepresentative: a handful of members should not be able to act for the whole.",
+      "But the rule says nothing about whether those present are representative, and it does nothing to stop a bare quorum from deciding whatever it likes.",
+      "What it does is make attendance a condition of validity, so that a decision taken by too few is not a bad decision but no decision at all.",
+      "The member who stays away is thereby given something: not a veto, but an assurance that the question cannot be disposed of by the simple device of not telling him it was coming."
+    ],
+    "gap_index": 4
+  },
+  "question": {
+    "stem": "Which of the following sentences best completes the paragraph?",
+    "options": {
+      "A": "Medieval chapters fixed their quorums at two-thirds and quarrelled for a century about which of the absent might be counted present by proxy.",
+      "B": "Rules of procedure are never neutral between the parties, though the bias each of them carries is usually one that nobody actually chose.",
+      "C": "A well-attended meeting remains the only real guarantee that the decision reached in it will be a sound one worth acting on later.",
+      "D": "The quorum protects the absent rather than the present, by fixing what a body must look like before its voice counts as the body's."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has replaced one account of the quorum with another and then stated what the new account gives the absent member. The closing sentence must gather both halves: the beneficiary (the member not in the room) and the mechanism (validity, not quality, of what the meeting does). It must stay in the analytic present the whole paragraph has used, and it must not claim more for the rule than the second sentence allows.",
+    "correct_reasoning": "The correct option names the beneficiary the fourth sentence identified and then says how the protection works, in the vocabulary the third sentence established: the rule settles when a decision counts as the body's own. That is the paragraph's argument completed rather than extended, and it stops exactly where the paragraph's own limits are, saying nothing about whether what the body decides is wise.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "tense_break",
+        "why_wrong": "The paragraph is an analysis in the present tense that has made no claim about any period; a sentence in the narrative past about what chapters once fixed changes the kind of sentence the paragraph is making and leaves its argument standing unfinished.",
+        "seductive_element": "It is on topic, it is concrete where the paragraph has become abstract, and the detail about counting the absent seems to echo the sentence before the gap."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "The paragraph's last two sentences are about validity and about the member who is not there; a verdict about procedural rules in general drops both and asserts a partiality the paragraph has taken care not to claim.",
+        "seductive_element": "It is quotable, it concedes in a way that sounds scrupulous, and closing on a general truth feels like the natural shape of an ending."
+      },
+      {
+        "option": "C",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The third sentence draws its distinction precisely: a decision taken by too few is not a poor decision but no decision, so a closer that makes attendance a guarantee of soundness contradicts the paragraph's central move.",
+        "seductive_element": "It sounds like the practical moral of a paragraph about attendance, and the phrase 'well-attended' picks up the paragraph's own subject."
+      }
+    ],
+    "method": "Before the options, say what the paragraph has left in the air: here, a reconstrued rule and a named beneficiary. Then check each candidate on three dials at once — does it bind what is loose, does it stay inside the claim the paragraph has already limited, and is it the same kind of sentence the paragraph has been making? A shift into narrative fails the third even when it passes the first two."
+  },
+  "mentor": {
+    "challenge": "The paragraph has told you who the rule quietly serves. The last sentence has to say how it serves him without promising anything more.",
+    "takeaway": "An analytic paragraph ends with an analytic sentence; an illustration at the close leaves the argument where it was and merely dresses it."
+  }
+}

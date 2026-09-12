@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0027",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "What the Case Turns Out to Have Decided",
+    "theme": "why the binding part of a judgement is fixed by the courts that come after it, and what that does to a judge's reach",
+    "estimated_time_sec": 105,
+    "gap_function": "implication",
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": ["disc.function_slot", "inf.reasonable_implication", "struct.definition", "disc.given_new", "arg.qualification"],
+    "learning_objective": "keep an implication at the paragraph's own altitude, and recognise the option that promotes it into a claim about everything",
+    "difficulty_vector": { "stance_subtlety": 5, "scope_precision": 5, "distractor_closeness": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general account of how the binding part of a judgement is identified; no specific case or text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap gives advice to a judge who wants to be followed, which requires an implication about who settles what a judgement decided. The reader-not-author option is the scope jump and is the most attractive wrong answer in the set.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that legal meaning, like all meaning, is made by readers rather than authors. It is elegant, it generalises the paragraph's own finding and it will feel like the deep version of it. It fails on altitude and on what follows: the next sentence tells a judge how to make a point survive, which presupposes that something about the original judgement still constrains the sorting, whereas a claim that readers make all meaning removes the constraint the advice depends on. The option calling precedent a vocabulary rather than a constraint fails against the same sentence for the same reason.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "A judgement binds later courts in its ratio — the proposition the decision actually turned on — and not in the observations that surround it.",
+      "But no judge marks the ratio as he writes: it is not a section of the text, and two lawyers reading the same judgement will draw its boundary in different places.",
+      "The boundary is drawn, in the end, by the courts that come afterwards, when they decide which part of the reasoning they are obliged to follow and which they may put aside as an aside.",
+      "A judge who wants to be followed on a point must therefore make the point indispensable to the result, since nothing else he says will survive the sorting."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "It follows that legal meaning, like meaning of every other kind, is made by its readers rather than by its authors, however careful.",
+      "B": "In practice, then, the line between the ratio and the rest is drawn by the judges who apply a case rather than by the one who first decided it.",
+      "C": "Precedent is therefore less a constraint upon judges than a vocabulary in which they describe choices they were free to make anyway.",
+      "D": "A court's power over the future is thus exercised for it by its successors, who settle what it decided long after it can say anything more."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The paragraph has established that the binding part of a judgement is identified only by later courts. The sentence after the gap advises a judge on how to make a point survive that identification, which tells you two things about the missing sentence: it must draw the implication for the deciding court's own influence, and it must leave that influence real enough for the advice to be worth taking.",
+    "correct_reasoning": "The correct option says what the third sentence implies for the court that wrote the judgement: its reach into the future is genuine but is administered by others, after it has lost the power to explain itself. The following sentence then follows naturally as the only move still open to such a court — make the point structural, so that the later sorting cannot discard it.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "scope_jump",
+        "why_wrong": "The paragraph is about one doctrine and the courts that operate it; promoting the finding into a claim about meaning of every kind leaves the level of the argument, and it dissolves the constraint that makes the next sentence's advice worth giving.",
+        "seductive_element": "It is the grandest option and it looks like the paragraph's insight made universal, which many readers treat as a sign of depth."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "This repeats the third sentence, which has already said that the boundary is drawn by the courts that come afterwards; the paragraph would say it twice and the implication about a court's reach would never be drawn.",
+        "seductive_element": "'In practice, then' gives it the rhythm of an inference, and it is an entirely accurate account of what the paragraph has established."
+      },
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "Difficulty in locating the ratio does not show that judges are free; the final sentence assumes a real constraint, because a point made indispensable to the result does survive, which is the opposite of unconstrained choice.",
+        "seductive_element": "It is the sceptical conclusion this observation is usually recruited for, and the contrast between constraint and vocabulary is memorably put."
+      }
+    ],
+    "method": "Fix the altitude before choosing. Ask what the paragraph is about — here, one doctrine and the courts working it — and refuse any option that answers a bigger question, however true. Then check the sentence after the gap: advice about how to make a point survive only makes sense if the implication has left a real constraint in place."
+  },
+  "mentor": {
+    "challenge": "The paragraph says later courts decide what an earlier one decided. Draw the implication for the earlier court, and no wider than that.",
+    "takeaway": "The broadest option is rarely the answer; an implication stays at the level the paragraph has been arguing on."
+  }
+}

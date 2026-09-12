@@ -34,7 +34,7 @@
     "traps": {
       "primary": "A",
       "secondary": "none",
-      "description": "The decoy is the sentence of concrete particulars, a widow indoors and a name unspoken, whose texture is unlike the reasoning around it. The outlier itself is lightly disguised: it keeps the paragraph's nouns and adopts the calm of an observation, which is enough at this tier."
+      "description": "The decoy is the sentence of concrete particulars, a widow indoors and a name unspoken, whose texture is unlike the reasoning around it. The outlier is disguised by its manner: it keeps the paragraph's nouns, states its verdict as a plain reckoning of costs, and is not the only sentence here that judges, since the opening complains about how the custom is usually classified."
     },
     "cohesion_signals": {
       "reference": true,
@@ -52,12 +52,17 @@
       "trap_audit": "pass",
       "expert_reviewed": false
     },
-    "learning_objective": "see that a paragraph explaining a practice and a sentence judging it are doing different work, and that the judgement also reaches further than anything the explanation claims",
+    "learning_objective": "tell a judgement that serves an explanation from one that replaces it, and see that the second also reaches further than anything the explanation claims",
     "reasoning_patterns": ["arg.description_vs_evaluation", "disc.stance_continuity", "scope.abstraction_level", "comp.purpose"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The rival is the sentence listing the restrictions, a widow keeping to the house and a name left unspoken: it is the only concrete sentence in a set of reasoning, and its list makes it feel like illustration bolted on. It stays because the restrictions it names are precisely the ones the next sentence says are lifted on a single day, which is the whole evidence for the claim. The sentence about cruelty is the only one that stops explaining and starts assessing, and it assesses a whole class of observances rather than the practice the others are working on.",
-      "blind_solve": null
+      "adversarial_review": "The rival is the sentence listing the restrictions, a widow keeping to the house and a name left unspoken: it is the only concrete sentence in a set of reasoning, and its list makes it feel like illustration bolted on. It stays because the restrictions it names are precisely the ones the next sentence says are lifted on a single day, which is the whole evidence for the claim. A second rival is the opening, which now carries a complaint of its own about the custom being filed under superstition; that complaint is the reason the explanation is being offered at all, and the paragraph answers it in the last line. The sentence weighing what a long mourning takes against what the ceremony returns is the one that cannot be placed: it settles the worth of the practice, which nothing here has asked about, and settles it for a class of observances rather than for the custom the others are working on.",
+      "blind_solve": {
+        "solver": "independent blind reader, batch review 2026-09-13",
+        "agreed": 1,
+        "total": 1,
+        "notes": "First blind solve agreed with the key but reported that the outlier was the only evaluative sentence in the set and could be picked on tone alone. Repaired by rewriting it as a plain reckoning of costs in the paragraph's own register, and by giving the opening a judgement of its own about how the custom is usually classified, so that the break is a change of task rather than a change of temperature. Awaits re-solve."
+      }
     },
     "source": {
       "publication": "original",
@@ -69,46 +74,46 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-ooo-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
-    "reviewer_notes": "A foundation item on the plainest stance break there is: four sentences explain what a practice does, one decides what it is worth. The decoy teaches the beginner not to exclude a sentence for having a different texture."
+    "reviewer_notes": "A foundation item on the plainest stance break there is: four sentences explain what a practice does, one decides what it is worth. Two sentences carry opinions, so the break cannot be found by tone, and the decoy teaches the beginner not to exclude a sentence for having a different texture."
   },
   "sentences": [
-    { "label": "A", "text": "In many societies the dead are buried twice, once soon after the death and again months or years later, when the bones are cleaned and carried to a common resting place." },
+    { "label": "A", "text": "In many societies the dead are buried twice, once shortly after death and again months or years later, when the bones are cleaned and carried to a common resting place; the custom is too readily filed under superstition." },
     { "label": "B", "text": "When the bones are finally moved, those restrictions end on the same day, which suggests the ceremony marks the close of a term the living have been serving." },
     { "label": "C", "text": "The interval between the two burials is not empty, and it is the survivors who fill it: a widow keeps to the house, a household gives no feasts, a name goes unspoken." },
     { "label": "D", "text": "The body, in other words, supplies the calendar for a repair that is being carried out among the living rather than performed upon the dead." },
-    { "label": "E", "text": "Observances of this length strike the modern reader as a cruelty visited on the bereaved, who are held in mourning long after grief has finished its work." }
+    { "label": "E", "text": "Mourning of this length takes more from a household than the ceremony at its close gives back, and such observances shorten steadily wherever they are let alone." }
   ],
   "outlier": "E",
   "core_order": ["A", "C", "B", "D"],
   "builder": {
-    "prompt": "Build the four-sentence explanation of what the second burial is actually marking. The sentence that judges the practice instead of explaining it is your answer."
+    "prompt": "Build the four-sentence explanation of what the second burial is actually marking. The sentence that has settled what the practice is worth, rather than working out what it does, is your answer."
   },
   "explanation": {
     "spine_note": "The core argues one point in four steps. It opens with the practice, two burials separated by a long interval, then shows that the interval is filled by rules the living keep. The third sentence notes that those rules end on the day the bones are moved, and draws the inference that the ceremony closes a term served by the mourners; the fourth states the conclusion in a line. Practice, interval, inference, point.",
     "core_roles": [
-      { "label": "A", "role": "topic", "why_here": "It describes the custom the paragraph is about, and it is the only sentence that establishes that there are two burials at all." },
+      { "label": "A", "role": "topic", "why_here": "It describes the custom the paragraph is about, it is the only sentence that establishes that there are two burials at all, and its complaint about the usual filing is what the explanation exists to answer." },
       { "label": "C", "role": "development", "why_here": "It fills the interval the first sentence opened, and supplies the restrictions the argument will need to observe ending." },
       { "label": "B", "role": "evidence", "why_here": "'Those restrictions' picks up the list just given and reports the fact the whole inference rests on, that they stop together on one day." },
-      { "label": "D", "role": "conclusion", "why_here": "'In other words' compresses the inference into the paragraph's point, that the calendar belongs to the mourners and the body only keeps it." }
+      { "label": "D", "role": "conclusion", "why_here": "'In other words' compresses the inference into the paragraph's point, that the calendar belongs to the mourners and the body only keeps it, which is the answer to the filing the opening objected to." }
     ],
     "links": [
       { "from": "A", "to": "C", "tie": "lexical", "explanation": "'The interval between the two burials' names the gap the first sentence created, so the second sentence begins from exactly what the first left." },
       { "from": "C", "to": "B", "tie": "reference", "explanation": "'Those restrictions' points back at the widow, the household and the unspoken name; without that list the phrase has nothing to hold." },
       { "from": "B", "to": "D", "tie": "conjunction", "explanation": "'In other words' signals restatement at a higher level, taking the inference just drawn and putting it as the paragraph's claim." }
     ],
-    "violation_named": "The four core sentences explain what the practice does. The odd sentence decides what it is worth, and decides against it. That is a change of stance, from an account written from inside the custom to a verdict delivered from outside it, and nothing in the paragraph invites or answers a verdict.",
-    "why_it_breaks": "The judgement also reaches much further than anything the core claims. The core is working on one custom and one interval; the stray sentence speaks of observances of this length in general and of what the modern reader feels about them. It receives nothing from the sentence before it and gives nothing to the sentence after, because a paragraph that is explaining cannot use a sentence that has already finished assessing.",
-    "trap_exposed": "The disguise is calmness. The stray sentence does not shout; it keeps the paragraph's subject, its register and its unhurried rhythm, so a reader listening for a raised voice hears nothing wrong. The planted decoy is the sentence of particulars, a widow indoors, a household that gives no feasts, a name unspoken, which has a texture unlike everything around it and is nonetheless the sentence the inference depends on.",
+    "violation_named": "The four core sentences explain what the practice does. The opening judges too, but it judges a way of describing the custom and so sets the explanation going. The odd sentence judges the custom itself, weighing what it costs a household against what it returns, and decides against it. That is a change of stance, from an account of what a practice is doing to a verdict on whether it is worth doing, and nothing in the paragraph invites or answers a verdict of that kind.",
+    "why_it_breaks": "The judgement also reaches much further than anything the core claims. The core is working on one custom and one interval; the stray sentence speaks of observances of this length as a class and predicts what becomes of them wherever they are unenforced. It receives nothing from the sentence before it and gives nothing to the sentence after, because a paragraph that is working out what a practice marks cannot use a sentence that has already priced it.",
+    "trap_exposed": "The disguise is bookkeeping. The stray sentence does not shout, and it does not pity anybody; it keeps the paragraph's nouns, weighs a cost against a return in the flat voice the rest of the set uses, and arrives in a paragraph whose first sentence has already permitted itself an opinion. A reader who eliminates the sentence with feeling in it will find nothing to eliminate. The planted decoy is the sentence of particulars, a widow indoors, a household that gives no feasts, a name unspoken, which has a texture unlike everything around it and is nonetheless the sentence the inference depends on.",
     "exclusion_analysis": [
-      { "label": "A", "mistake_type": "premature_closure", "why_tempting": "It reads like a definition from a reference book, flat and unargued, while the rest of the set is reasoning.", "what_breaks": "Without it there is no second burial in the paragraph, so the interval, the restrictions and the day the bones are moved all refer to a custom the reader has never been shown." },
+      { "label": "A", "mistake_type": "premature_closure", "why_tempting": "Most of it reads like a definition from a reference book, and then it ends on an opinion about how the custom is classified, which can look like a second sentence bolted to a first.", "what_breaks": "Without it there is no second burial in the paragraph, so the interval, the restrictions and the day the bones are moved all refer to a custom the reader has never been shown, and the closing point answers nobody." },
       { "label": "C", "mistake_type": "surface_oddity", "why_tempting": "Its three concrete particulars sit oddly among abstract sentences, so it feels like an illustration borrowed from somewhere else.", "what_breaks": "Without it 'those restrictions' in the next sentence has no antecedent, and the argument asserts that something ends without ever saying what." },
       { "label": "B", "mistake_type": "hardest_to_place", "why_tempting": "It both reports a fact and draws a conclusion from it, so a reader deciding whether it is evidence or claim may set it aside.", "what_breaks": "Without it the paragraph jumps from a list of mourning rules to a conclusion about calendars, with the observation that joins them missing." },
       { "label": "D", "mistake_type": "no_uniqueness_test", "why_tempting": "It says in a single line what the sentence before it has already suggested, so it can look like a repetition the set could spare.", "what_breaks": "Without it the argument stops at a suggestion and never states the point, and the contrast between work done among the living and work done on the dead is never made." }
     ],
-    "detection_habit": "Ask of each sentence whether it is explaining or judging. A paragraph that explains has no slot for a verdict, however quietly the verdict is delivered."
+    "detection_habit": "Do not ask which sentence has an opinion; ask what its opinion is about. A judgement on how a thing is usually described can open an explanation, and a judgement on whether the thing is worth doing ends one."
   },
   "mentor": {
-    "challenge": "Five sentences on one funeral custom. Four of them are working out what it does; watch for the one that has already decided what to think of it.",
-    "takeaway": "Explaining and judging are different jobs. A sentence that has finished judging cannot join a paragraph that is still explaining."
+    "challenge": "Five sentences on one funeral custom, and more than one of them is willing to judge. Four are working out what the custom does; watch for the one that has decided what it is worth.",
+    "takeaway": "An opinion is not a misfit by itself. Ask whether it starts the paragraph's work or finishes it prematurely."
   }
 }

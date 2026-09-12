@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "pc-0014",
+    "type": "pc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Anniversary the Calendar Chose",
+    "theme": "why public commemoration falls on round intervals, and whom the arithmetic shows such occasions to be addressed to",
+    "estimated_time_sec": 110,
+    "gap_function": "implication",
+    "primary_trap": "wrong_reference_target",
+    "reasoning_patterns": ["disc.function_slot", "disc.pronoun_antecedent", "inf.reasonable_implication", "disc.demonstrative", "scope.abstraction_level"],
+    "learning_objective": "draw an implication about the paragraph's real subject, and detect an option whose opening pronoun has attached itself to the nearest noun instead",
+    "difficulty_vector": { "stance_subtlety": 5, "scope_precision": 5, "distractor_closeness": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. A general argument about the timing of public commemoration; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pc-002",
+    "reviewer_notes": "The sentence after the gap explains why commemorations thin as a generation thins and why a hundredth is a different kind of occasion. Only an implication about the audience can support both, which is what makes the decoy built on the number system's indifference detectable.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option beginning with a pronoun that picks up the number system's indifference and turns it into the point — a date chosen by arithmetic cannot be accused of favouring one account of events. It is elegant and it uses the paragraph's own material, but its subject is the calendar rather than the occasion, and the sentence after the gap explains why commemorations thin as the generation present thins, which follows only from a claim about who is being assembled. The option asserting that a decade is the span over which memory holds is the other candidate, and it contradicts the third sentence, which says the interval comes from the number system and not from anything about grief.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      "Nothing about a disaster makes its tenth year different from its ninth, and nobody believes otherwise.",
+      "Yet the tenth is when the wreath is laid, the archive is opened, and the survivors are gathered and asked to speak.",
+      "The interval is supplied by the number system, which has no opinion about grief, and the occasion is then assembled to fit it.",
+      "That is why such days thin out as the generation that was present thins, and why a hundredth, arriving when nobody is left, is a different kind of occasion altogether."
+    ],
+    "gap_index": 3
+  },
+  "question": {
+    "stem": "Which of the following sentences best fills the gap in the paragraph?",
+    "options": {
+      "A": "Its indifference is the point: a date fixed by arithmetic cannot be accused of preferring one account of what happened, which is what makes it usable.",
+      "B": "Commemoration is one of the ways a community tells itself who it is, though it seldom admits how much of the telling has been arranged.",
+      "C": "The round number is not arbitrary after all, since a decade is about the span over which a community's memory can be relied on to hold.",
+      "D": "These occasions are addressed to those who must be assembled rather than to the event, since only an audience needs a date it can see coming."
+    },
+    "correct": "D"
+  },
+  "explanation": {
+    "what_the_gap_needs": "The third sentence has established that the timing comes from outside the event, and the sentence after the gap explains two things by it: that such days thin as the generation present thins, and that a hundredth is a different kind of occasion. The gap must be the implication both of those follow from, which means it has to be about whom the occasion is for, not about the calendar that supplied the date.",
+    "correct_reasoning": "The correct option draws the implication at the level of the occasion: if the date is set by arithmetic rather than by anything in the event, then what the date is fitted to is the convening of people, and a convening needs a date that can be anticipated. Both of the following sentence's consequences then follow directly — attendance falls as the people who were present disappear, and an occasion held when none of them remain is doing something else entirely.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Its opening pronoun attaches to the number system, the nearest available noun, so the sentence becomes a claim about the neutrality of arithmetic; the following sentence's explanation of thinning attendance cannot be drawn from the calendar's impartiality.",
+        "seductive_element": "It reuses the phrase about having no opinion, and the defence of a neutral date is a genuinely clever thought that reads like the paragraph's pay-off."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "A statement that commemoration is how a community tells itself who it is stands at a height from which neither the thinning nor the hundredth can be derived, and it drops the arithmetic the paragraph has been building on.",
+        "seductive_element": "It concedes in a knowing way and is the most quotable sentence offered, which makes it feel like the conclusion of a cultural argument."
+      },
+      {
+        "option": "C",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The third sentence says the interval comes from a number system with no opinion about grief; making the decade a measure of how long memory holds contradicts it and reinstates exactly the connection the paragraph has denied.",
+        "seductive_element": "It rescues the round number from arbitrariness, which many readers will be quietly wanting, and it sounds like a finding rather than an assumption."
+      }
+    ],
+    "method": "Identify the paragraph's subject before you read the options, and then check what each option's first word is about. Here the subject is the occasion, not the calendar; an option that opens with a pronoun reaching back to the nearest noun has quietly changed subjects. Then confirm by asking whether the sentence after the gap can be derived from the candidate — both of its consequences, not one."
+  },
+  "mentor": {
+    "challenge": "The sentence after the gap explains two things at once. Only one implication can carry both, so test each candidate against both.",
+    "takeaway": "An option that opens with a pronoun is making a claim about whatever that pronoun grabs. Check that it grabbed the paragraph's subject."
+  }
+}
