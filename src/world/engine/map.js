@@ -266,8 +266,10 @@ export function paintTerrain(ctx, atmo, state) {
   fillRegionGround(ras, 14, 500, 132, 162, (x, y) => (n2(x / 18, y / 18) > 0.5 ? thA : thB), n2, 'thicket');
   // Terraces: stepped bands of warm stone on the north-east hill.
   const terraceLevel = state?.terraces?.level ?? 0;
+  // The hill is bare until the terraces are cut, one bench at a time.
+  const terraceBands = state?.growth?.terraceBands ?? 4;
   const terr = ramp(PIGMENT.terrace), terrA = mix(grass.base, PIGMENT.terrace, 0.55), terrB = mix(grass.light, PIGMENT.terrace, 0.45);
-  for (let i = 0; i < 4; i += 1) {
+  for (let i = 0; i < terraceBands; i += 1) {
     const y0 = 192 + i * 28, x0 = 440 + i * 6, w = 180 - i * 12;
     for (let y = y0; y < y0 + 28; y += 1) for (let x = x0; x < x0 + w; x += 1) {
       const edge = x - x0 < 2 || x0 + w - x < 3;
@@ -423,8 +425,18 @@ export function paintTerrain(ctx, atmo, state) {
     ctx.drawImage(d.canvas, Math.round(POND.cx - POND.rx * 0.92 - 4), Math.round(POND.cy - 4));
   }
   // Bridges.
-  const b1 = sprite('bridge', { w: BRIDGE.w }); ctx.drawImage(b1.canvas, BRIDGE.x - b1.ax, BRIDGE.y - b1.ay);
-  const b2 = sprite('bridge', { w: BRIDGE_N.w }); ctx.drawImage(b2.canvas, BRIDGE_N.x - b2.ax, BRIDGE_N.y - b2.ay);
+  // Before the valley is worked, the river is crossed on stones.
+  if (state?.growth?.bridges === false) {
+    for (const b of [BRIDGE, BRIDGE_N]) {
+      for (let i = 0; i < 4; i += 1) {
+        const st = sprite('rock', { seed: `ford${b.x}${i}`, size: 1 });
+        ctx.drawImage(st.canvas, Math.round(b.x - 10 + i * 7 - st.ax), Math.round(b.y + ((i % 2) ? 2 : -2) - st.ay));
+      }
+    }
+  } else {
+    const b1 = sprite('bridge', { w: BRIDGE.w }); ctx.drawImage(b1.canvas, BRIDGE.x - b1.ax, BRIDGE.y - b1.ay);
+    const b2 = sprite('bridge', { w: BRIDGE_N.w }); ctx.drawImage(b2.canvas, BRIDGE_N.x - b2.ax, BRIDGE_N.y - b2.ay);
+  }
 
   /* ---- Ground cover: flowers by mastery, tufts, rocks — baked ---- */
   const r = rng('cover');
@@ -438,15 +450,19 @@ export function paintTerrain(ctx, atmo, state) {
     ctx.drawImage(s.canvas, Math.round(x - s.ax), Math.round(y - s.ay));
     ctx.globalAlpha = 1;
   }
-  for (let i = 0; i < 90; i += 1) {
+  const tufts = state?.growth?.tufts ?? 90;
+  for (let i = 0; i < 96; i += 1) {
     const x = 20 + r() * 600, y = 200 + r() * 500;
+    if (i >= tufts) continue;
     if (inPond(x, y, 6) || distToPolyline(x, y, RIVER) < 8) continue;
     if (regionAt(x, y)?.slug === 'rootwood' || regionAt(x, y)?.slug === 'thicket') continue;
     const s = sprite('grassTuft', { seed: `t${i}`, season });
     ctx.drawImage(s.canvas, Math.round(x - s.ax), Math.round(y - s.ay));
   }
-  for (let i = 0; i < 14; i += 1) {
+  const rocks = state?.growth?.rocks ?? 14;
+  for (let i = 0; i < 16; i += 1) {
     const x = 20 + r() * 600, y = 210 + r() * 480;
+    if (i >= rocks) continue;
     if (inPond(x, y, 10) || distToPolyline(x, y, RIVER) < 10) continue;
     const s = sprite('rock', { seed: `rock${i}`, size: r() > 0.7 ? 2 : 1 });
     ctx.drawImage(s.canvas, Math.round(x - s.ax), Math.round(y - s.ay));
@@ -503,11 +519,23 @@ export function buildWorldScene(state, atmo, opts = {}) {
   const night = hour === 'night' || hour === 'dusk';
   const isWinter = season === 'winter';
   const r = rng('scene');
+  // Nothing below is a constant. Every count comes from what has been
+  // learned (see growth.js): a new valley is nearly bare on purpose.
+  const G = state.growth ?? { wildTrees: 7, valleyTrees: 3, brambles: 4, houses: 0, folk: 0, terraceHut: false, readingYard: false, loomBuilt: false, tableBuilt: false, benchBuilt: false, wood: 0, valley: 0, reading: 0, terraces: 0 };
   const statics = []; // objects that never move, built once
   const lamps = [];   // static lights
   const life = [];    // updatable systems
 
   /* ---- The Rootwood: one tree per family, in its grove ---- */
+  // Three spots in the whole wood are marked as ready to plant — the next
+  // three, in groves already begun where there are any. More than that and
+  // the wood reads as a field of stakes rather than a wood.
+  const waitingIds = new Set(
+    state.rootwood.families
+      .filter((f) => f.stage === 'open_ground')
+      .slice(0, 3)
+      .map((f) => f.id),
+  );
   const groveOf = new Map();
   for (const f of state.rootwood.families) {
     if (!groveOf.has(f.grove)) groveOf.set(f.grove, []);
@@ -516,6 +544,8 @@ export function buildWorldScene(state, atmo, opts = {}) {
   for (const [grove, fams] of groveOf) {
     const spot = GROVE_SPOTS[grove] ?? GROVE_SPOTS.edge;
     const gr = rng(`grove:${grove}`);
+    // Unplanted ground is not fifty marked stones: it is the next two or
+    // three spots, cleared and waiting. The rest of the wood is just wood.
     fams.forEach((f, i) => {
       // A ring of stands around the clearing, front row bigger.
       const a = (i / fams.length) * Math.PI * 2 + gr() * 0.4;
@@ -523,6 +553,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
       const x = spot.x + Math.cos(a) * rad * 1.4, y = spot.y + Math.sin(a) * rad * 0.7;
       const stage = f.stage;
       if (stage === 'open_ground') {
+        if (!waitingIds.has(f.id)) return;
         statics.push({ x, y, sprite: sprite('rootStone', { seed: f.id }), id: f.id, region: 'rootwood' });
       } else {
         statics.push({ x, y, sprite: sprite('tree', { stage, seed: f.id, season, vigor: Math.round(f.vigor * 4) / 4, landmark: f.landmark, due: f.due }), id: f.id, region: 'rootwood' });
@@ -535,18 +566,38 @@ export function buildWorldScene(state, atmo, opts = {}) {
   // Wild trees fill the Rootwood around the groves — the wood is a wood
   // before anything is planted, and thickens as the learner grows.
   const wr = rng('wildwood');
-  const wildCount = 90 + Math.min(50, state.rootwood.grownCount * 2);
-  for (let i = 0; i < wildCount; i += 1) {
+  // Seven trees on the first morning; a wood of a hundred and fifty when
+  // the roots have been learned. The order is fixed, so a tree that grew
+  // yesterday is in the same place today.
+  const wildCount = G.wildTrees;
+  for (let i = 0; i < 160; i += 1) {
     const x = 26 + wr() * 288, y = 152 + wr() * 180;
+    if (i >= wildCount) continue;
     let tooClose = false;
     for (const g of Object.values(GROVE_SPOTS)) if (Math.hypot((x - g.x) / 1.4, y - g.y) < 24) { tooClose = true; break; }
     if (tooClose) continue;
     const pine = wr() > 0.6;
-    statics.push({ x, y, sprite: sprite('tree', { stage: wr() > 0.75 ? 'mature' : wr() > 0.3 ? 'in_leaf' : 'young', seed: `wild${i}`, season, kind: pine ? 'pine' : 'broad' }) });
+    // A young wood is saplings and scrub; an old one is full crowns. The
+    // stage ladder is walked by how much of the Rootwood has been learned.
+    const LADDER = ['sprout', 'young', 'in_leaf', 'mature'];
+    const t = wr();
+    const reach = 0.5 + G.wood * 3.2;                     // 0.5 → 3.7
+    const stage = LADDER[Math.max(0, Math.min(3, Math.round(t * reach)))];
+    statics.push({ x, y, sprite: sprite('tree', { stage, seed: `wild${i}`, season, kind: pine ? 'pine' : 'broad' }) });
+  }
+  // Scrub on the wood floor, so young ground is not bare moss. It thins as
+  // the trees close over it.
+  {
+    const br = rng('wood-scrub');
+    const scrub = Math.round(26 - G.wood * 12);
+    for (let i = 0; i < scrub; i += 1) {
+      const x = 30 + br() * 280, y = 158 + br() * 172;
+      statics.push({ x, y, sprite: sprite(br() > 0.45 ? 'bush' : 'grassTuft', { seed: `ws${i}`, season }) });
+    }
   }
   // A few trees scattered over the whole valley, so no field is empty.
   const vr = rng('valley-trees');
-  for (let i = 0; i < 26; i += 1) {
+  for (let i = 0; i < G.valleyTrees; i += 1) {
     const x = 20 + vr() * 600, y = 210 + vr() * 440;
     if (regionAt(x, y) && regionAt(x, y).slug !== 'meadow') continue;
     if (Math.hypot(x - POND.cx, y - POND.cy) < 80 || Math.abs(x - 350) < 24) continue;
@@ -582,39 +633,51 @@ export function buildWorldScene(state, atmo, opts = {}) {
   // door, and a stand of pines behind the tower to give it a horizon.
   {
     const yr = rng('rr-yard');
-    // One continuous run at one height: four fence sprites at different
-    // y's read as dropped slats, not as a yard.
-    for (const dx of [-39, -13, 13, 39]) {
-      statics.push({ x: rr.anchor.x + dx, y: rr.anchor.y + 27, sprite: sprite('fence', { w: 26 }), z: -1 });
+    // The yard is walled and planted only once the tower has been read in.
+    if (G.readingYard) {
+      // One continuous run at one height: four fence sprites at different
+      // y's read as dropped slats, not as a yard.
+      for (const dx of [-39, -13, 13, 39]) {
+        statics.push({ x: rr.anchor.x + dx, y: rr.anchor.y + 27, sprite: sprite('fence', { w: 26 }), z: -1 });
+      }
     }
-    for (const [dx, dy, kind, stage] of [[-30, 4, 'pine', 'mature'], [-44, -10, 'pine', 'in_leaf'], [34, -6, 'pine', 'mature'], [46, 6, 'broad', 'in_leaf']]) {
+    const pines = [[-30, 4, 'pine', 'mature'], [-44, -10, 'pine', 'in_leaf'], [34, -6, 'pine', 'mature'], [46, 6, 'broad', 'in_leaf']]
+      .slice(0, Math.round(G.reading * 4.4));
+    for (const [dx, dy, kind, stage] of pines) {
       statics.push({ x: rr.anchor.x + dx, y: rr.anchor.y + dy, sprite: sprite('tree', { stage, seed: `rr-t${dx}`, season, kind }) });
     }
-    statics.push({ x: rr.anchor.x - 20, y: rr.anchor.y + 16, sprite: sprite('bush', { seed: 'rrb1', season }) });
-    statics.push({ x: rr.anchor.x + 26, y: rr.anchor.y + 14, sprite: sprite('bush', { seed: 'rrb2', season }) });
-    statics.push({ x: rr.anchor.x + 16, y: rr.anchor.y + 2, sprite: sprite('lantern', { lit: night }) });
-    if (night) lamps.push({ x: rr.anchor.x + 16, y: rr.anchor.y - 8, r: 18, a: 0.5, color: PIGMENT.lantern });
+    if (G.readingYard) {
+      statics.push({ x: rr.anchor.x - 20, y: rr.anchor.y + 16, sprite: sprite('bush', { seed: 'rrb1', season }) });
+      statics.push({ x: rr.anchor.x + 26, y: rr.anchor.y + 14, sprite: sprite('bush', { seed: 'rrb2', season }) });
+      statics.push({ x: rr.anchor.x + 16, y: rr.anchor.y + 2, sprite: sprite('lantern', { lit: night }) });
+      if (night) lamps.push({ x: rr.anchor.x + 16, y: rr.anchor.y - 8, r: 18, a: 0.5, color: PIGMENT.lantern });
+    }
     // A reader on the bench once the tower has been climbed a little.
     if (state.reading.read >= 4) statics.push({ x: rr.anchor.x - 24, y: rr.anchor.y + 18, sprite: sprite('villager', { colour: 3 }) });
     for (let i = 0; i < 5; i += 1) {
+      const keep = i < Math.round(1 + G.reading * 4);
+      if (!keep) continue;
       statics.push({ x: rr.anchor.x - 50 + Math.round(yr() * 100), y: rr.anchor.y + 30 + Math.round(yr() * 26), sprite: sprite('grassTuft', { seed: `rrg${i}`, season }) });
     }
   }
 
   /* ---- The Quarter: loom, table, bench ---- */
-  for (const [slug, kind] of [['loom', 'loom'], ['table', 'table'], ['bench', 'bench']]) {
+  // A workshop stands only once its craft has been worked. Before that
+  // the plot holds a frame, a stack of timber and the idea of a building.
+  for (const [slug, kind, up] of [['loom', 'loom', G.loomBuilt], ['table', 'table', G.tableBuilt], ['bench', 'bench', G.benchBuilt]]) {
     const reg = REGIONS.find((x) => x.slug === slug);
-    const level = state[slug]?.level ?? 0;
+    const level = up ? (state[slug]?.level ?? 0) : -1;
     statics.push({ x: reg.anchor.x, y: reg.anchor.y, sprite: sprite('workshop', { kind, level, lit: night }), region: slug });
-    if (night && (level >= 1 || kind === 'bench')) lamps.push({ x: reg.anchor.x + (kind === 'bench' ? 13 : 16), y: reg.anchor.y - (kind === 'bench' ? 22 : 17), r: 16, a: 0.45, color: PIGMENT.lantern });
+    if (up && night && (level >= 1 || kind === 'bench')) lamps.push({ x: reg.anchor.x + (kind === 'bench' ? 13 : 16), y: reg.anchor.y - (kind === 'bench' ? 22 : 17), r: 16, a: 0.45, color: PIGMENT.lantern });
   }
-  statics.push({ x: 470, y: 548, sprite: sprite('tree', { stage: 'mature', seed: 'sq-tree', season }) });
-  statics.push({ x: 560, y: 640, sprite: sprite('tree', { stage: 'in_leaf', seed: 'sq-tree2', season }) });
+  if (G.quarter > 0.25) statics.push({ x: 470, y: 548, sprite: sprite('tree', { stage: 'mature', seed: 'sq-tree', season }) });
+  if (G.quarter > 0.5) statics.push({ x: 560, y: 640, sprite: sprite('tree', { stage: 'in_leaf', seed: 'sq-tree2', season }) });
 
   /* ---- The Thicket: brambles and thirteen lanterns ---- */
   const tr = rng('thicket');
-  for (let i = 0; i < 16; i += 1) {
+  for (let i = 0; i < 22; i += 1) {
     const x = 20 + tr() * 120, y = 506 + tr() * 150;
+    if (i >= G.brambles) continue;
     if (LANTERN_SPOTS.some((l) => Math.hypot(l.x - x, l.y - y) < 10)) continue;
     statics.push({ x, y, sprite: sprite('bramble', { seed: `br${i}`, season, lit: i < state.thicket.lanterns }) });
   }
@@ -623,7 +686,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
     statics.push({ x: l.x, y: l.y, sprite: sprite('lantern', { lit }), region: 'thicket' });
     if (lit) lamps.push({ x: l.x, y: l.y - 10, r: night ? 14 : 8, a: night ? 0.55 : 0.2, color: PIGMENT.lantern });
   });
-  statics.push({ x: 60, y: 520, sprite: sprite('tree', { stage: 'mature', seed: 'th-tree', season, kind: 'pine' }) });
+  statics.push({ x: 60, y: 520, sprite: sprite('tree', { stage: G.thicket > 0.5 ? 'mature' : G.thicket > 0.2 ? 'in_leaf' : 'young', seed: 'th-tree', season, kind: 'pine' }) });
 
   /* ---- The Meadow: butterflies and pollen scale with bloom ---- */
   const bloom = state.meadow.total ? state.meadow.mastered / state.meadow.total : 0;
@@ -631,7 +694,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
     life.push(butterflies({ rect: { x: 40, y: 356, w: 220, h: 100 }, count: 2 + Math.min(8, Math.round(bloom * 12) + state.meadow.fieldsDone) }));
     if (hour !== 'night') life.push(particles({ kind: 'pollen', rect: { x: 40, y: 356, w: 220, h: 100 }, count: 10 + Math.round(bloom * 30), seed: 'pollen' }));
   }
-  statics.push({ x: 44, y: 372, sprite: sprite('tree', { stage: 'in_leaf', seed: 'md-tree', season }) });
+  statics.push({ x: 44, y: 372, sprite: sprite('tree', { stage: G.meadow > 0.55 ? 'mature' : G.meadow > 0.2 ? 'in_leaf' : 'young', seed: 'md-tree', season }) });
   statics.push({ x: 250, y: 456, sprite: sprite('stump', { seed: 's1' }) });
 
   /* ---- The Mirror Pond: koi per mastered set ---- */
@@ -641,8 +704,27 @@ export function buildWorldScene(state, atmo, opts = {}) {
   if (night) lamps.push({ x: POND.cx, y: POND.cy, r: 40, a: 0.12, color: '#9FB9E8' });
 
   /* ---- The Terraces: vines and a small hut at the top ---- */
-  statics.push({ x: 530, y: 190, sprite: sprite('workshop', { kind: 'loom', level: 0, lit: night }), region: 'terraces', z: -2 });
-  for (let i = 0; i < 6; i += 1) statics.push({ x: 450 + i * 30, y: 300 + (i % 2) * 6, sprite: sprite('bush', { seed: `tb${i}`, season, berries: i % 2 === 0 && state.terraces.level > 0 }) });
+  if (G.terraceHut) statics.push({ x: 530, y: 190, sprite: sprite('workshop', { kind: 'loom', level: 0, lit: night }), region: 'terraces', z: -2 });
+  for (let i = 0; i < Math.round(G.terraces * 6.4); i += 1) statics.push({ x: 450 + i * 30, y: 300 + (i % 2) * 6, sprite: sprite('bush', { seed: `tb${i}`, season, berries: i % 2 === 0 && state.terraces.level > 0 }) });
+
+  /* ---- The hamlet. Nobody builds a house in an empty valley; they
+          build one when there is a reason to stay. Each is a real
+          cottage at a real spot, added in a fixed order. ---- */
+  {
+    const SPOTS = [
+      { x: 268, y: 620, level: 1 },
+      { x: 166, y: 628, level: 1 },
+      { x: 300, y: 560, level: 2 },
+      { x: 128, y: 560, level: 2 },
+      { x: 240, y: 660, level: 1 },
+    ];
+    for (let i = 0; i < Math.min(G.houses, SPOTS.length); i += 1) {
+      const h = SPOTS[i];
+      statics.push({ x: h.x, y: h.y, sprite: sprite('house', { level: h.level, lit: night, seed: `hh${i}` }), region: 'hearth' });
+      if (night) lamps.push({ x: h.x, y: h.y - 8, r: 16, a: 0.36, color: PIGMENT.windowLight });
+      statics.push({ x: h.x + 16, y: h.y + 3, sprite: sprite('bush', { seed: `hhb${i}`, season }) });
+    }
+  }
 
   /* ---- The Wilds: a signpost at the road out ---- */
   statics.push({ x: 356, y: 676, sprite: sprite('signpost', { arrows: 2 }), region: 'wilds' });
@@ -710,8 +792,7 @@ export function buildWorldScene(state, atmo, opts = {}) {
 
   // Villagers: the valley stops being scenery and becomes a settlement.
   // One walks for every three works standing, up to six.
-  const worksBuilt = (state.builds ?? []).length;
-  const folk = Math.min(6, Math.floor(worksBuilt / 2));
+  const folk = Math.min(6, G.folk ?? 0);
   if (folk > 0) {
     const routes = [
       [[214, 592], [280, 560], [340, 520], [300, 470]],

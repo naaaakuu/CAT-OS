@@ -22,6 +22,8 @@ import {
   emptyBag, addBag, subBag, surveyWorks, nextWork,
 } from './economy.js';
 import { listFields, ledgerFromRecords, summarizeLedger, fieldSummary } from './lexicon.js';
+import { deriveGrowth, valleyStage } from './growth.js';
+import { skillLedger, nextSkill, weakSkills } from '../core/learning/review.js';
 import { hourWord, seasonWord, weatherWord } from './engine/palette.js';
 
 /* ------------------------------------------------------------------ */
@@ -310,6 +312,18 @@ export function deriveWorldState(content, records, now = Date.now()) {
     quests, todaySum, stream, engagement, awayDays, lastRunAt,
   };
 
+  /* ---- Which CAT abilities are settled, and which are slipping ----
+          Every answer anywhere in the valley feeds one ledger, so the
+          valley can point at the right bench without the learner ever
+          reading an analytics screen. See core/learning/review.js. ---- */
+  state.skills = skillLedger(sessions, learning, now);
+  state.weakSkills = weakSkills(state.skills);
+  state.nextSkill = nextSkill(state.skills, state);
+
+  /* ---- How much of the valley exists yet ---- */
+  state.growth = deriveGrowth(state);
+  state.stage = valleyStage(state.growth.valley);
+
   /* ---- What the valley is building next, and who is asking ---- */
   state.works = surveyWorks(state);
   state.nextWork = nextWork(state);
@@ -384,6 +398,16 @@ function buildOpportunities(s, content) {
     const q = openAsks[0];
     push({ id: `ask:${q.id}`, region: q.region, kind: 'ask', weight: 76, badge: q.goal > 1 ? `${q.done}/${q.goal}` : 'Today',
       title: q.title, line: q.line, href: `#/world/place/${q.region}` });
+  }
+
+  /* The one ability that is slipping. This is the whole of "the game
+     knows what I need" — it reads every answer the learner has given
+     anywhere and points at one bench, in a sentence, with no dashboard. */
+  if (s.nextSkill && s.nextSkill.kind !== 'new') {
+    const n = s.nextSkill;
+    push({ id: `skill:${n.skill.key}`, region: n.skill.where ?? 'hearth', kind: 'skill', weight: 80,
+      badge: n.kind === 'fading' ? 'Going quiet' : 'Worth the time',
+      title: n.skill.name, line: n.why, href: n.route });
   }
 
   /* Unread passages, tuned to where the learner actually is. */

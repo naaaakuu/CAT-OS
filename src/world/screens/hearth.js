@@ -4,10 +4,13 @@
  * The Hearth answers "what am I building?", "what do I need?" and "what
  * should I practise to get it?" in one place. Three panels:
  *
- *   WORKSHOP  every work the valley can hold, in three stages. Each shows
- *             its cost in crafts (short ones marked), the standing it
- *             asks of your learning, and — when both are met — a Build
- *             button that changes the world for good.
+ *   WORKSHOP  every work the valley can hold, as a shelf of small
+ *             buildings: a picture of the thing, its name, and whether
+ *             it is ready. Tap one and it opens — the cost in crafts,
+ *             what your learning must already be, and the Build button
+ *             that changes the world for good. A wall of twenty cards
+ *             each carrying four paragraphs is a settings page; this is
+ *             meant to feel like a workbench.
  *   TODAY     the day's three asks, and what they pay.
  *   STANDING  the honest read on where this learner is, and the records.
  *
@@ -20,7 +23,8 @@ import { buildBackdropScene } from '../engine/map.js';
 import { regionBySlug, REGIONS } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { WORK_STAGES, bagEntries, CRAFTS } from '../economy.js';
-import { costChips, purseHTML, chips as craftChips } from '../craft-ui.js';
+import { costChips, purseHTML, chips as craftChips, wireCraftTaps } from '../craft-ui.js';
+import { workArt, craftIcon, placeIcon, icon } from '../icons.js';
 import { standing as standingLines, readingWeakness } from '../curator.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
@@ -85,6 +89,8 @@ export async function renderHearth(outlet, { storage }) {
   startMusic('hearth', { hour: atmo.hour, warmth }); startAmbience('hearth', atmo);
 
   const panel = outlet.querySelector('#panel');
+  wireCraftTaps(panel, () => state);
+  wireCraftTaps(outlet.querySelector('.place__hero-stat'), () => state);
   const lineEl = outlet.querySelector('#hearth-line');
 
   const headline = () => {
@@ -101,12 +107,12 @@ export async function renderHearth(outlet, { storage }) {
     const byStage = WORK_STAGES.map((st) => ({ ...st, works: state.works.filter((w) => w.stage === st.n) }));
     panel.innerHTML = `
       <div class="purse-row" aria-label="Your crafts">${CRAFTS.map((c) => `
-        <div class="purse-row__c craft--${c.key}">
-          <i aria-hidden="true"></i>
+        <button class="purse-row__c craft craft--${c.key}" data-craft="${c.key}">
+          ${craftIcon(c.key, { size: 22 })}
           <b>${state.purse[c.key] ?? 0}</b>
           <span>${c.name}</span>
           <small>${escapeHTML(c.from)}</small>
-        </div>`).join('')}
+        </button>`).join('')}
       </div>
       ${byStage.map((st) => {
         const open = st.works.filter((w) => !w.built);
@@ -116,34 +122,82 @@ export async function renderHearth(outlet, { storage }) {
         <section class="stage">
           <h2 class="stage__name">${escapeHTML(st.name)} <span>${done.length}/${st.works.length}</span></h2>
           <p class="stage__line">${escapeHTML(st.line)}</p>
-          ${open.map(workCard).join('')}
-          ${done.length ? `<div class="stage__done">${done.map((w) => `<span class="built">✓ ${escapeHTML(w.name)}</span>`).join('')}</div>` : ''}
+          <div class="shelf">${[...open, ...done].map(workCard).join('')}</div>
         </section>`;
       }).join('')}`;
-    for (const btn of panel.querySelectorAll('[data-build]')) {
-      btn.addEventListener('click', () => build(btn.dataset.build));
+    for (const el of panel.querySelectorAll('[data-work]')) {
+      el.addEventListener('click', () => { play('tap'); openWork(el.dataset.work); });
     }
   }
 
+  /** One small building on the shelf. Everything it says, it says in one
+   *  glance: the picture, the name, and its one state word. */
   function workCard(w) {
-    const blocked = w.blockedBy.length > 0;
-    const cls = w.ready ? 'is-ready' : blocked ? 'is-blocked' : w.hasStanding ? 'is-waiting' : 'is-locked';
+    const cls = w.built ? 'is-built' : w.ready ? 'is-ready' : w.blockedBy.length ? 'is-blocked' : w.hasStanding ? 'is-waiting' : 'is-locked';
+    const flag = w.built ? 'Standing'
+      : w.ready ? 'Build it'
+        : w.blockedBy.length ? 'Later'
+          : w.hasStanding ? 'Short' : 'Not yet';
+    // The one number that matters on a card: how close this work is.
+    const need = bagEntries(w.cost).reduce((n, c) => n + c.amount, 0);
+    const have = bagEntries(w.cost).reduce((n, c) => n + Math.min(c.amount, state.purse[c.key] ?? 0), 0);
+    const pct = w.built ? 100 : Math.round((have / Math.max(1, need)) * 100);
     return `
-      <article class="work ${cls}">
-        <div class="work__head">
-          <h3 class="work__name">${escapeHTML(w.name)}</h3>
-          ${w.ready ? '<span class="work__flag">Ready</span>' : ''}
-        </div>
-        <p class="work__line">${escapeHTML(w.line)}</p>
-        <div class="work__cost">${costChips(w.cost, state.purse)}</div>
-        <p class="work__standing ${w.hasStanding ? 'is-met' : ''}">
-          <span class="tick" aria-hidden="true">${w.hasStanding ? '✓' : '○'}</span>${escapeHTML(w.standing.line)}
-        </p>
-        ${blocked ? `<p class="work__blocked">Needs ${escapeHTML(w.blockedBy.join(', '))} first.</p>` : ''}
-        ${w.ready ? `<button class="g-cta g-cta--gold" data-build="${w.id}">Build it<span class="arrow" aria-hidden="true">→</span></button>`
-          : !w.hasStanding ? `<p class="work__hint">Practise to earn the standing.</p>`
-            : blocked ? '' : `<p class="work__hint">Short: ${escapeHTML(bagEntries(w.missing).map((c) => `${c.amount} ${c.name}`).join(', '))}. ${escapeHTML(whereToEarn(w.missing))}</p>`}
-      </article>`;
+      <button class="wk ${cls}" data-work="${w.id}" aria-label="${escapeHTML(w.name)}">
+        <span class="wk__plate">${workArt(w, 58)}${w.built ? '<span class="wk__tick" aria-hidden="true">✓</span>' : ''}</span>
+        <span class="wk__name">${escapeHTML(w.name)}</span>
+        <span class="wk__flag">${flag}</span>
+        ${w.built ? '' : `<span class="wk__bar"><i style="width:${pct}%"></i></span>`}
+      </button>`;
+  }
+
+  /** The detail, on tap: what it is, what it costs, what it asks, and —
+   *  when both are true — the one button that changes the valley. */
+  let sheet = null;
+  function closeWork() { sheet?.remove(); sheet = null; }
+  function openWork(id) {
+    const w = state.works.find((x) => x.id === id);
+    if (!w) return;
+    closeWork();
+    sheet = document.createElement('div');
+    sheet.className = 'wksheet';
+    const short = bagEntries(w.missing);
+    sheet.innerHTML = `
+      <div class="wksheet__scrim" data-close></div>
+      <div class="wksheet__card" role="dialog" aria-label="${escapeHTML(w.name)}">
+        <button class="wksheet__close" data-close aria-label="Close">×</button>
+        <div class="wksheet__plate">${workArt(w, 112)}</div>
+        <p class="wksheet__where">${placeIcon(w.region, { size: 15 })}${escapeHTML(regionBySlug(w.region)?.name ?? '')}</p>
+        <h2 class="wksheet__name">${escapeHTML(w.name)}</h2>
+        <p class="wksheet__line">${escapeHTML(w.built ? (w.after ?? w.line) : w.line)}</p>
+        ${w.built ? '<p class="wksheet__built">Standing in the valley.</p>' : `
+          <div class="wksheet__rows">
+            <div class="wkrow ${w.affordable ? 'is-met' : ''}">
+              <span class="wkrow__k">Costs</span>
+              <span class="wkrow__v">${costChips(w.cost, state.purse)}</span>
+            </div>
+            <div class="wkrow ${w.hasStanding ? 'is-met' : ''}">
+              <span class="wkrow__k">Asks</span>
+              <span class="wkrow__v">${escapeHTML(w.standing.line)}</span>
+            </div>
+            ${w.blockedBy.length ? `<div class="wkrow"><span class="wkrow__k">First</span><span class="wkrow__v">${escapeHTML(w.blockedBy.join(', '))}</span></div>` : ''}
+          </div>
+          ${w.ready
+            ? `<button class="g-cta g-cta--gold" data-build="${w.id}">Build it<span class="arrow" aria-hidden="true">→</span></button>`
+            : !w.hasStanding
+              ? `<a class="g-cta g-cta--quiet" href="${regionBySlug(w.region)?.route ?? '#/world'}">Go and earn it<span class="arrow" aria-hidden="true">→</span></a>`
+              : w.blockedBy.length ? ''
+                : `<p class="wksheet__hint">Short ${escapeHTML(short.map((c) => `${c.amount} ${c.name}`).join(', '))}. ${escapeHTML(whereToEarn(w.missing))}</p>`}
+        `}
+      </div>`;
+    document.body.appendChild(sheet);
+    requestAnimationFrame(() => sheet?.classList.add('is-in'));
+    for (const el of sheet.querySelectorAll('[data-close]')) el.addEventListener('click', () => { play('close'); closeWork(); });
+    const b = sheet.querySelector('[data-build]');
+    if (b) b.addEventListener('click', () => { closeWork(); build(w.id); });
+    // Mounted on the body, so it has to take itself away on any navigation.
+    const drop = () => { closeWork(); window.removeEventListener('hashchange', drop); };
+    window.addEventListener('hashchange', drop);
   }
 
   function whereToEarn(missing) {

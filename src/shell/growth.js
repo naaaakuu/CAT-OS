@@ -17,6 +17,12 @@
  *   VERBAL      jumbles, summaries and strangers solved
  *   PACE        right AND inside the clock — the rarest of the four
  *
+ * Under the trees are the COLLECTIONS: every finite set in the corpus —
+ * a grove of roots, a letter of the CAT lists, a language in the Thicket,
+ * a stage of passages — sorted so the one nearest finishing is first. A
+ * learner has to be able to think "I only need three more" about
+ * something every day, and a percentage has never once said that.
+ *
  * Everything analytical that lived here before — the Reading DNA, the
  * lessons kept, the learner's own reflections — is still here, under
  * "The numbers". Nothing was deleted; the default changed.
@@ -32,6 +38,8 @@ import { readingWeakness, typeName, weaknessLine } from '../world/curator.js';
 import { sprite } from '../world/engine/sprites.js';
 import { loadValley, valleyName } from '../world/companion.js';
 import { craft } from '../world/economy.js';
+import { collections, closest, tally, GROUPS } from '../world/collections.js';
+import { icon, craftIcon } from '../world/icons.js';
 
 /** The six stages a tree can stand at, and what each one is called when
  *  the thing growing is an ability rather than an oak. */
@@ -94,6 +102,9 @@ export async function renderGrowth(outlet, { storage }) {
   /* ---- The four abilities, measured ---- */
   const rcW = readingWeakness(sessions);
   const abilities = measure(s, rcW);
+  const sets = collections(s, world?.content ?? null);
+  const near = closest(sets, 6);
+  const score = tally(sets);
   const weakest = [...abilities].sort((a, b) => a.p - b.p)[0];
   const strongest = [...abilities].sort((a, b) => b.p - a.p)[0];
 
@@ -126,12 +137,43 @@ export async function renderGrowth(outlet, { storage }) {
       <a class="g-cta" href="${weakest.href}">${escapeHTML(weakest.cta)}<span class="arrow" aria-hidden="true">→</span></a>
     </section>
 
+    <section class="sets">
+      <h2 class="sets__head">
+        <span>Collections</span>
+        <b>${score.done ? `${score.done} of ${score.total} finished` : `${score.total} sets to finish`}</b>
+      </h2>
+      <p class="sets__line">Every set the valley keeps. These are the six closest to done.</p>
+      <div class="sets__grid" id="sets-grid">${near.map(setCard).join('')}</div>
+      <details class="sets__all">
+        <summary>All collections</summary>
+        <div id="sets-all"></div>
+      </details>
+    </section>
+
     <details class="reach__numbers">
       <summary>The numbers</summary>
       <div id="numbers"></div>
     </details>`;
 
   for (const cv of body.querySelectorAll('.ability__tree')) paintTree(cv, cv.dataset.stage, 3);
+
+  /* ---- All the collections, on request. There are a hundred and more of
+          them; six is the screen, the rest is the shelf behind it. ---- */
+  const allBox = body.querySelector('#sets-all');
+  body.querySelector('.sets__all')?.addEventListener('toggle', (e) => {
+    if (!e.currentTarget.open || allBox.dataset.done) return;
+    allBox.dataset.done = '1';
+    allBox.innerHTML = GROUPS.map((g) => {
+      const mine = sets.filter((c) => c.group === g.key && c.total > 0)
+        .sort((a, b) => Number(b.done) - Number(a.done) || a.left - b.left);
+      if (!mine.length) return '';
+      const done = mine.filter((c) => c.done).length;
+      return `<section class="sets__group">
+        <h3>${craftIcon(g.craft, { size: 16 })}${escapeHTML(g.name)}<b>${done}/${mine.length}</b></h3>
+        <div class="sets__grid">${mine.map(setCard).join('')}</div>
+      </section>`;
+    }).join('');
+  }, true);
 
   /* ---- The numbers: everything this screen used to say, on request ---- */
   const numbers = body.querySelector('#numbers');
@@ -141,6 +183,24 @@ export async function renderGrowth(outlet, { storage }) {
     numbers.innerHTML = '<div class="skeleton"></div>';
     numbers.innerHTML = await renderNumbers({ s, rcW, sessions, lessons, reflections, items, storage });
   }, true);
+}
+
+/**
+ * One collection, as a card small enough that six of them fit on a phone
+ * without scrolling: the mark, the name, and how many are left. The word
+ * on a card is never a percentage — it is "Two to go".
+ */
+function setCard(c) {
+  const p = Math.round(c.p * 100);
+  return `<a class="setc ${c.done ? 'is-done' : ''} ${c.started ? '' : 'is-new'} ${c.close ? 'is-close' : ''}" href="${c.route}">
+    <span class="setc__mk">${icon(c.mark, { size: 22 })}</span>
+    <span class="setc__body">
+      <b class="setc__name">${escapeHTML(c.name)}</b>
+      <span class="setc__n">${c.done ? 'Finished' : `${c.have}<i>/${c.total}</i> ${escapeHTML(c.unit)}`}</span>
+    </span>
+    <span class="setc__near">${c.done ? '✓' : escapeHTML(c.near)}</span>
+    <span class="setc__bar" aria-hidden="true"><i style="width:${p}%"></i></span>
+  </a>`;
 }
 
 /* ------------------------------------------------------------------ */

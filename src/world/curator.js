@@ -21,6 +21,7 @@
 
 import { loadLexItem, loadTwinItem, loadLoanItem } from '../core/content-loader/loader.js';
 import { rng } from './engine/palette.js';
+import { isRested, passagesForSkill } from '../core/learning/review.js';
 import { wordStatus, REGION_KIND, ROUND_SIZE } from './lexicon.js';
 
 /* ------------------------------------------------------------------ */
@@ -147,7 +148,14 @@ export function nextPassage(content, best, weakness, seed = 'rc') {
 
   const atReach = unread.filter((p) => p.stage === stage);
   const below = unread.filter((p) => RC_STAGES.indexOf(p.stage) < reach);
-  const pool = atReach.length ? atReach : below.length ? below : unread;
+  let pool = atReach.length ? atReach : below.length ? below : unread;
+  // If one question type keeps getting away, the next passage should
+  // actually ASK that type — saying so in a line and then handing over a
+  // passage that never tests it is advice, not teaching.
+  if (weakness?.weakest) {
+    const aimed = passagesForSkill(pool, weakness.weakest, best);
+    if (aimed.length) pool = aimed;
+  }
   if (pool.length) {
     // Easiest-first within the stage keeps the ladder honest.
     const sorted = [...pool].sort((a, b) => (a.difficulty_numeric ?? 5) - (b.difficulty_numeric ?? 5) || a.id.localeCompare(b.id));
@@ -458,7 +466,7 @@ export function standing(state, weakness) {
  * @param {object} [weakness] readingWeakness(sessions), to weight by type
  * @returns {Array<{question_id, passage_id, type, misses, lastMissAt, weight}>}
  */
-export function missedQuestions(sessions, weakness = null) {
+export function missedQuestions(sessions, weakness = null, now = Date.now()) {
   const byQ = new Map();
   const ordered = [...sessions].filter((s) => !s.module && s.finished_at)
     .sort((a, b) => String(a.finished_at).localeCompare(String(b.finished_at)));
@@ -475,8 +483,13 @@ export function missedQuestions(sessions, weakness = null) {
     }
   }
   const weak = weakness?.weakest ?? null;
+  // A question missed ten minutes ago is RESTING: giving it back now
+  // measures which letter they remember, not whether they can do it.
+  // See core/learning/review.js — the rung grows with every miss.
   return [...byQ.values()]
     .filter((r) => !r.settled && r.misses > 0)
+    .map((r) => ({ ...r, rested: isRested(r.lastMissAt, r.misses, now) }))
+    .filter((r) => r.rested)
     .map((r) => ({ ...r, weight: r.misses * 2 + (r.type && r.type === weak ? 3 : 0) + (r.lastMissAt ? 1 : 0) }))
     .sort((a, b) => b.weight - a.weight || String(b.lastMissAt).localeCompare(String(a.lastMissAt)));
 }

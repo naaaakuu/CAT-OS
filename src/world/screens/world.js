@@ -25,6 +25,7 @@ import { EARN, CRAFTS, addBag } from '../economy.js';
 import { purseHTML, chips as craftChips, wireCraftTaps } from '../craft-ui.js';
 import { mountMenu } from '../menu.js';
 import { loadValley, valleyName, homecoming } from '../companion.js';
+import { placeIcon } from '../icons.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled, setMusicEnabled } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
@@ -52,22 +53,12 @@ export function regionStat(slug, s) {
 }
 
 /**
- * The mark on a pin. Drawn, not typed: a system emoji in a hand-painted
- * valley is the one thing that makes the whole world look like a web page.
- * One weight, one language, sized to read at 14px.
+ * The mark on a pin is the valley's own pixel art (see world/icons.js):
+ * a tree for the wood, a koi for the pond, a lantern for the thicket. A
+ * stroke icon from a web icon set in a hand-painted valley is the one
+ * thing that makes the whole world look like a page with a game on it.
  */
-const M = (d, extra = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}${extra}</svg>`;
-const PIN_MARK = {
-  rootwood: M('<path d="M12 3.2 7 10h2.7l-4.2 5.6h3.4L6.2 20h11.6l-2.7-4.4h3.4L14.3 10H17Z"/><path d="M12 20v1.8"/>'),
-  meadow: M('<circle cx="12" cy="11" r="2.4"/><path d="M12 8.6V5M12 13.4V17M9.6 11H6M14.4 11H18M10.3 9.3 8 7M13.7 9.3 16 7M10.3 12.7 8 15M13.7 12.7 16 15"/>'),
-  pond: M('<path d="M3 13c2.5-2.4 5-2.4 7.5 0s5 2.4 7.5 0"/><path d="M3 18c2.5-2.4 5-2.4 7.5 0s5 2.4 7.5 0"/><path d="M17 4.5 21 8l-4 3.5Z"/>'),
-  thicket: M('<path d="M9 4h6l-1 3h-4Z"/><rect x="8" y="7" width="8" height="8" rx="2"/><path d="M12 15v4"/>'),
-  'reading-room': M('<path d="M7 4h10v16H7Z"/><path d="M10 8h4M10 12h4M10 16h4"/><path d="M5 20h14"/>'),
-  terraces: M('<path d="M4 8h16M4 13h16M4 18h16"/><path d="M8 8V5M16 13v-5M11 18v-5"/>'),
-  quarter: M('<path d="M4 11 8 7l4 4v9H4Z"/><path d="M13 13 17 9l4 4v7h-8Z"/><path d="M7 16h2"/>'),
-  hearth: M('<path d="M4 11 12 4l8 7"/><path d="M6.5 9.8V20h11V9.8"/><path d="M10 20v-5h4v5"/>'),
-  wilds: M('<path d="M3 19 9 8l4 6 2-3 7 8Z"/><path d="M9 8 7 5"/>'),
-};
+const PIN_MARK = new Proxy({}, { get: (_t, slug) => placeIcon(String(slug), { size: 20, className: 'pin__mk' }) });
 
 export async function renderWorld(outlet, { storage }) {
   document.documentElement.setAttribute('data-world', '');
@@ -261,16 +252,19 @@ export async function renderWorld(outlet, { storage }) {
   /* ---- What is worth doing now ---- */
   const nowEl = outlet.querySelector('#now');
   const renderNow = () => {
-    const items = state.opportunities.slice(0, 3);
+    const items = state.opportunities.slice(0, 4);
     if (!items.length) { nowEl.innerHTML = ''; return; }
     nowEl.innerHTML = `
       <div class="now__rail">
         ${items.map((o) => `
           <a class="op op--${o.kind}" href="${o.href}" data-slug="${o.region}">
-            <span class="op__badge">${escapeHTML(o.badge ?? '')}</span>
-            <span class="op__title">${escapeHTML(o.title)}</span>
-            <span class="op__line">${escapeHTML(o.line)}</span>
-            <span class="op__where">${escapeHTML(regionBySlug(o.region)?.name ?? '')}</span>
+            <span class="op__mk">${placeIcon(o.region, { size: 30 })}</span>
+            <span class="op__body">
+              <span class="op__badge">${escapeHTML(o.badge ?? '')}</span>
+              <span class="op__title">${escapeHTML(o.title)}</span>
+              <span class="op__where">${escapeHTML(regionBySlug(o.region)?.name ?? '')}</span>
+            </span>
+            <span class="op__go" aria-hidden="true">→</span>
           </a>`).join('')}
       </div>`;
     for (const el of nowEl.querySelectorAll('.op')) {

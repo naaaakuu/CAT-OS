@@ -7,12 +7,13 @@
  */
 
 import { CRAFTS, bagEntries, craft } from './economy.js';
+import { craftIcon } from './icons.js';
 
 /** One craft chip: the pigment dot and a number. */
 export function chip(key, amount, { sign = '', className = '' } = {}) {
   const c = craft(key);
   if (!c) return '';
-  return `<span class="craft craft--${key} ${className}" data-craft="${key}" title="${c.name}"><i aria-hidden="true"></i><b>${sign}${amount}</b><span class="craft__name">${c.name}</span></span>`;
+  return `<span class="craft craft--${key} ${className}" data-craft="${key}" title="${c.name}">${craftIcon(key, { size: 15 })}<b>${sign}${amount}</b><span class="craft__name">${c.name}</span></span>`;
 }
 
 /** Every non-zero craft in a bag, as chips. */
@@ -25,7 +26,7 @@ export function costChips(cost, purse) {
   return bagEntries(cost).map((c) => {
     const have = purse?.[c.key] ?? 0;
     const short = have < c.amount;
-    return `<span class="craft craft--${c.key} ${short ? 'is-short' : 'is-met'}" data-craft="${c.key}" title="${c.name}"><i aria-hidden="true"></i><b>${short ? `${have}/${c.amount}` : c.amount}</b><span class="craft__name">${c.name}</span></span>`;
+    return `<span class="craft craft--${c.key} ${short ? 'is-short' : 'is-met'}" data-craft="${c.key}" title="${c.name}">${craftIcon(c.key, { size: 15 })}<b>${short ? `${have}/${c.amount}` : c.amount}</b><span class="craft__name">${c.name}</span></span>`;
   }).join('');
 }
 
@@ -42,7 +43,7 @@ export function purseHTML(purse, { showZero = true } = {}) {
   return CRAFTS.filter((c) => showZero || (purse?.[c.key] ?? 0) > 0)
     .map((c) => {
       const n = purse?.[c.key] ?? 0;
-      return `<span class="craft craft--${c.key} ${n ? '' : 'is-zero'}" data-craft="${c.key}"><i aria-hidden="true"></i><b>${n}</b></span>`;
+      return `<span class="craft craft--${c.key} ${n ? '' : 'is-zero'}" data-craft="${c.key}">${craftIcon(c.key, { size: 16 })}<b>${n}</b></span>`;
     }).join('');
 }
 

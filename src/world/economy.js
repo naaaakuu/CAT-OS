@@ -212,6 +212,8 @@ export const REGION_CRAFT = Object.freeze({
  *            is what stops the economy becoming a grind: you cannot buy
  *            a second floor on the Reading Room without having read.
  *   after    one line, present tense, of what the valley looks like now
+ *   art      the sprite that IS this thing, so the Workshop can be a
+ *            shelf of small buildings rather than a page of paragraphs
  *
  * `stage` groups works into three arcs so the Workshop never shows a
  * wall of twenty: Settling, Building, Flourishing.
@@ -222,6 +224,7 @@ export const WORKS = Object.freeze([
   /* ---------------- Stage 1 · Settling ---------------- */
   {
     id: 'hearth-chimney', region: 'hearth', stage: 1, name: 'A chimney',
+    art: ['cottage', { level: 2, lit: false, smoke: true }],
     line: 'Stone and a good flue, so the cottage can hold a fire.',
     after: 'Smoke rises from the Hearth on every day you practise.',
     cost: { amber: 40, ink: 0, thread: 0, ember: 0 },
@@ -230,6 +233,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'meadow-path', region: 'meadow', stage: 1, name: 'A trodden path',
+    art: ['pathPiece', { stone: false }],
     line: 'The grass between the fields is walked flat and edged with stones.',
     after: 'A pale path runs through the Meadow.',
     cost: { amber: 70, ink: 0, thread: 0, ember: 0 },
@@ -238,6 +242,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'rr-lamp', region: 'reading-room', stage: 1, name: 'A reading lamp',
+    art: ['lantern', { lit: true }],
     line: 'One good lamp in the window of the Reading Room.',
     after: 'The Reading Room window is lit after dark.',
     cost: { amber: 0, ink: 60, thread: 0, ember: 0 },
@@ -246,6 +251,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'quarter-lamps', region: 'loom', stage: 1, name: 'Lamps in the Quarter',
+    art: ['lantern', { lit: true }],
     line: 'A lamp outside each workshop door, so the craftsmen can work late.',
     after: 'The Quarter glows after dusk.',
     cost: { amber: 0, ink: 0, thread: 70, ember: 0 },
@@ -256,6 +262,7 @@ export const WORKS = Object.freeze([
   /* ---------------- Stage 2 · Building ---------------- */
   {
     id: 'hearth-boxes', region: 'hearth', stage: 2, name: 'Flower boxes',
+    art: ['cottage', { level: 3, lit: true }],
     line: 'Boxes under both windows, planted from the Meadow.',
     after: 'Flowers hang under the Hearth’s windows.',
     cost: { amber: 120, ink: 40, thread: 0, ember: 0 },
@@ -265,6 +272,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'rr-floor-2', region: 'reading-room', stage: 2, name: 'A second floor',
+    art: ['tower', { floors: 2, lit: 2, night: false }],
     line: 'Another storey on the Reading Room, and shelves to fill it.',
     after: 'The Reading Room stands two floors tall.',
     cost: { amber: 60, ink: 160, thread: 0, ember: 1 },
@@ -274,6 +282,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'pond-lanterns', region: 'pond', stage: 2, name: 'Lanterns on the water',
+    art: ['lantern', { lit: true }],
     line: 'Paper lanterns strung between the bridge posts of the Mirror Pond.',
     after: 'The Mirror Pond glows after dark.',
     cost: { amber: 150, ink: 0, thread: 40, ember: 2 },
@@ -282,6 +291,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'thicket-path', region: 'thicket', stage: 2, name: 'The lantern path',
+    art: ['pathPiece', { stone: false }],
     line: 'A cut path through the brambles, posted for lanterns.',
     after: 'A path winds through the Thicket, ready for its lanterns.',
     cost: { amber: 130, ink: 30, thread: 0, ember: 0 },
@@ -290,6 +300,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'stone-paths', region: 'hearth', stage: 2, name: 'Stone the valley paths',
+    art: ['pathPiece', { stone: true }],
     line: 'Every track between the places, laid in pale stone. The valley stops being a clearing and starts being a home.',
     after: 'Stone paths join every place in the valley.',
     cost: { amber: 140, ink: 70, thread: 70, ember: 1 },
@@ -298,6 +309,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'meadow-hives', region: 'meadow', stage: 2, name: 'Three beehives',
+    art: ['hive', { seed: "art" }],
     line: 'White hives at the top of the field, and bees all summer.',
     after: 'Bees work the Meadow from the three white hives.',
     cost: { amber: 200, ink: 0, thread: 0, ember: 1 },
@@ -307,6 +319,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'quarter-square', region: 'table', stage: 2, name: 'The Quarter’s square',
+    art: ['well', {}],
     line: 'Cobbles, a bench and two market stalls between the three workshops.',
     after: 'A cobbled square with stalls sits in the Quarter.',
     cost: { amber: 80, ink: 40, thread: 200, ember: 2 },
@@ -316,6 +329,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'terrace-arbour', region: 'terraces', stage: 2, name: 'An arbour',
+    art: ['arbour', {}],
     line: 'A wooden arbour at the top of the terraces for the vines to climb.',
     after: 'Vines climb an arbour on the Vine Terraces.',
     cost: { amber: 180, ink: 30, thread: 60, ember: 0 },
@@ -326,6 +340,7 @@ export const WORKS = Object.freeze([
   /* ---------------- Stage 3 · Flourishing ---------------- */
   {
     id: 'hearth-lantern', region: 'hearth', stage: 3, name: 'A lantern by the door',
+    art: ['cottage', { level: 4, lit: true }],
     line: 'Iron and glass, lit every dusk.',
     after: 'A lantern burns by the Hearth’s door each night.',
     cost: { amber: 220, ink: 90, thread: 90, ember: 3 },
@@ -335,6 +350,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'rr-floor-3', region: 'reading-room', stage: 3, name: 'A third floor',
+    art: ['tower', { floors: 3, lit: 4, night: false }],
     line: 'The Reading Room becomes a tower, and can be seen from the Wilds.',
     after: 'The Reading Room rises three floors above the valley.',
     cost: { amber: 100, ink: 320, thread: 80, ember: 3 },
@@ -344,6 +360,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'river-bridges', region: 'hearth', stage: 3, name: 'Stone bridges',
+    art: ['stoneBridge', { w: 34 }],
     line: 'The two plank crossings replaced with arched stone.',
     after: 'Two stone bridges arch over the river.',
     cost: { amber: 200, ink: 120, thread: 120, ember: 3 },
@@ -353,6 +370,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'pond-heron', region: 'pond', stage: 3, name: 'The heron’s reeds',
+    art: ['heron', {}],
     line: 'Reeds and a shallow shelf at the pond’s north edge. Herons come to still water.',
     after: 'A heron stands in the Mirror Pond’s reeds.',
     cost: { amber: 280, ink: 60, thread: 60, ember: 2 },
@@ -362,6 +380,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'thicket-arch', region: 'thicket', stage: 3, name: 'The traveller’s arch',
+    art: ['arch', {}],
     line: 'A stone arch at the Thicket’s mouth, carved with every tongue you have learned from.',
     after: 'A carved arch stands at the mouth of the Thicket.',
     cost: { amber: 320, ink: 80, thread: 80, ember: 3 },
@@ -371,6 +390,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'rootwood-shrine', region: 'rootwood', stage: 3, name: 'The root shrine',
+    art: ['shrine', { lit: true }],
     line: 'A low stone shrine in the oldest clearing, where the first roots were found.',
     after: 'A shrine stands among the oldest roots.',
     cost: { amber: 300, ink: 60, thread: 60, ember: 4 },
@@ -379,6 +399,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'wilds-lanterns', region: 'wilds', stage: 3, name: 'Lanterns on the road out',
+    art: ['signpost', { arrows: 2 }],
     line: 'The road beyond the valley, lit — and your Gauntlet records keep their splits.',
     after: 'The road out of the valley is lit all the way to the ridge.',
     cost: { amber: 200, ink: 160, thread: 160, ember: 5 },
@@ -387,6 +408,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'observatory', region: 'reading-room', stage: 3, name: 'The Observatory',
+    art: ['tower', { floors: 3, lit: 5, observatory: true, night: false }],
     line: 'A copper dome above the third floor — and Night Reading, where passages run at a tighter clock for the flawless mark.',
     after: 'A copper dome crowns the Reading Room. Night Reading is open.',
     cost: { amber: 240, ink: 480, thread: 200, ember: 8 },
@@ -396,6 +418,7 @@ export const WORKS = Object.freeze([
   },
   {
     id: 'hearth-vane', region: 'hearth', stage: 3, name: 'Ivy and a weathervane',
+    art: ['cottage', { level: 5, lit: true, smoke: true }],
     line: 'The cottage becomes the oldest house in the valley.',
     after: 'Ivy covers the Hearth, and a weathervane turns on its ridge.',
     cost: { amber: 400, ink: 200, thread: 200, ember: 6 },

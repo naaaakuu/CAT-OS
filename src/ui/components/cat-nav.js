@@ -6,48 +6,18 @@
  * listens to hashchange to know which item is active, and navigation
  * itself is plain anchor hashes handled by the Router.
  *
- * 0.6.0: text glyphs replaced by a matched set of inline stroke
- * icons (one weight, one corner radius) so the chrome reads as one
- * hand. Inline SVG keeps them offline and theme-aware for free.
+ * 1.3.0: the rail carries the valley's own pixel marks (world/icons.js),
+ * not stroke glyphs — the chrome is made of the same pixels as the map.
  */
 
-const ICONS = {
-  // The valley (0.16.0): a hill with one tree — the way home from anywhere
-  // beyond the Gate. Replaces the dashboard's house glyph.
-  valley: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-           <path d="M3 19.5 C7 13.5 10.5 12 13 13.5 C15.5 11 19 11.5 21 19.5 Z"/>
-           <path d="M7.5 13.2 V9.8"/>
-           <circle cx="7.5" cy="7.6" r="2.6"/>
-         </svg>`,
-  practice: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-           <path d="M4 11.5 L12 4.5 L20 11.5"/>
-           <path d="M6 10.5 V19.5 H18 V10.5"/>
-           <path d="M10 19.5 V14 H14 V19.5"/>
-         </svg>`,
-  growth: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-           <path d="M12 20 V11"/>
-           <path d="M12 13 C12 9 9.5 6.5 5 6 C5.3 10.5 7.8 12.8 12 13 Z"/>
-           <path d="M12 11 C12 8 14 5.8 18.5 5.4 C18.3 9.3 16 11 12 11 Z"/>
-           <path d="M7 20 H17"/>
-         </svg>`,
-  settings: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-           stroke-linecap="round" aria-hidden="true">
-           <path d="M4 7.5 H20 M4 12 H20 M4 16.5 H20"/>
-           <circle cx="9.5" cy="7.5" r="2" fill="var(--color-surface)"/>
-           <circle cx="14.5" cy="12" r="2" fill="var(--color-surface)"/>
-           <circle cx="8" cy="16.5" r="2" fill="var(--color-surface)"/>
-         </svg>`,
-};
+import { icon } from '../../world/icons.js';
 
 // Three places, and no fourth. Settings is administration, and lives
 // behind the valley's ☰ (src/world/menu.js) — never in the thumb rail.
 const ITEMS = [
-  { path: '/world',    label: 'Valley',   icon: ICONS.valley },
-  { path: '/world/place/hearth', label: 'Hearth', icon: ICONS.practice },
-  { path: '/growth',   label: 'Growth',   icon: ICONS.growth },
+  { path: '/world',    label: 'Valley',   mark: 'valley' },
+  { path: '/world/place/hearth', label: 'Hearth', mark: 'cottage' },
+  { path: '/growth',   label: 'Growth',   mark: 'sprout' },
 ];
 
 class CatNav extends HTMLElement {
@@ -91,11 +61,17 @@ class CatNav extends HTMLElement {
           color: var(--color-accent);
           background: var(--color-accent-subtle);
         }
-        cat-nav svg { width: 1.35rem; height: 1.35rem; display: block; }
+        cat-nav .ico {
+          width: 1.45rem; height: 1.45rem; display: block;
+          image-rendering: pixelated;
+          filter: saturate(0.5) opacity(0.62);
+          transition: filter var(--duration-fast) var(--ease-out);
+        }
+        cat-nav a[aria-current="page"] .ico { filter: none; }
       </style>
       ${ITEMS.map((i) => `
         <a href="#${i.path}" data-path="${i.path}">
-          ${i.icon}
+          ${icon(i.mark, { size: 22 })}
           <span>${i.label}</span>
         </a>`).join('')}
     `;

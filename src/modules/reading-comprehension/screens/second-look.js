@@ -45,7 +45,12 @@ export async function renderSecondLook(outlet, { storage }) {
   const weakness = readingWeakness(sessions);
   const missed = missedQuestions(sessions, weakness).slice(0, SIZE);
   if (!missed.length) {
-    outlet.innerHTML = frameEmpty();
+    // Either nothing got away, or everything that did is still resting.
+    // The two are different facts and the learner deserves the right one:
+    // being told "nothing got away" an hour after missing four questions
+    // reads as a bug. See core/learning/review.js.
+    const resting = countResting(sessions);
+    outlet.innerHTML = frameEmpty(resting, weakness);
     return;
   }
 
@@ -248,11 +253,23 @@ function frameError(message) {
   return `<section class="run"><div class="run__body"><div class="brief"><h1 class="brief__title">The second look will not open</h1><p class="brief__line">${escapeHTML(message)}</p><a class="g-btn" href="#/world/place/reading-room">Back to the Reading Room</a></div></div></section>`;
 }
 
-function frameEmpty() {
+/** How many missed questions exist but are still resting. */
+function countResting(sessions) {
+  const all = missedQuestions(sessions, null, Date.now() + 10 * 365 * 86400000).length;
+  const now = missedQuestions(sessions, null).length;
+  return Math.max(0, all - now);
+}
+
+function frameEmpty(resting = 0, weakness = null) {
+  const weak = weakness?.weakest ? typeName(weakness.weakest) : null;
+  const title = resting ? 'Resting' : 'Nothing got away';
+  const line = resting
+    ? `${resting} question${resting === 1 ? '' : 's'} you missed ${resting === 1 ? 'is' : 'are'} waiting a while before coming back — answering one an hour later only proves you remember the letter. ${weak ? `In the meantime, a passage that asks about ${weak.toLowerCase()} is worth more.` : 'A new passage is worth more.'}`
+    : 'Every question you have missed, you have since answered right. Read a new passage and the second look will fill again.';
   return `<section class="run"><div class="run__body"><div class="brief">
     <p class="brief__eyebrow">Reading comprehension</p>
-    <h1 class="brief__title">Nothing got away</h1>
-    <p class="brief__line">Every question you have missed, you have since answered right. Read a new passage and the second look will fill again.</p>
+    <h1 class="brief__title">${title}</h1>
+    <p class="brief__line">${line}</p>
     <a class="g-cta" href="#/world/place/reading-room">Back to the Reading Room<span class="arrow" aria-hidden="true">→</span></a>
   </div></div></section>`;
 }

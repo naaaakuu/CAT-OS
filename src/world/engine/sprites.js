@@ -104,6 +104,30 @@ export function sprite(name, params = {}) {
 
 const done = (p, ax, ay) => ({ canvas: p.canvas, w: p.w, h: p.h, ax, ay });
 
+const urlCache = new Map();
+
+/**
+ * A sprite as a data URL, for the interface. HTML cannot point at an
+ * OffscreenCanvas, so the pixels are copied into a real canvas once and
+ * kept. Use this anywhere the UI wants an icon — never an emoji, never a
+ * stroke glyph.
+ * @param {number} [scale] whole-number upscale, nearest neighbour.
+ */
+export function spriteURL(name, params = {}, scale = 1) {
+  const key = `${cacheGen}|${name}|${JSON.stringify(params)}|${scale}`;
+  let u = urlCache.get(key);
+  if (u) return u;
+  const s = sprite(name, params);
+  const c = document.createElement('canvas');
+  c.width = s.w * scale; c.height = s.h * scale;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(s.canvas, 0, 0, c.width, c.height);
+  u = c.toDataURL('image/png');
+  urlCache.set(key, u);
+  return u;
+}
+
 /* ------------------------------------------------------------------ */
 /* Trees                                                               */
 /* ------------------------------------------------------------------ */
@@ -538,6 +562,25 @@ function workshop({ kind = 'loom', level = 0, lit = false }) {
   const roof = ramp(kind === 'loom' ? '#8A6C9C' : kind === 'table' ? '#C6533A' : '#5D7F90');
   const timber = ramp(PIGMENT.timber);
   const gx = 20, ground = 33;
+  // Level −1: the plot, before anyone works this craft. Four corner posts,
+  // a ridge beam and a stack of cut timber — a building about to happen.
+  if (level < 0) {
+    const stone = ramp(PIGMENT.stoneWarm);
+    p.rect(7, 29, 26, 3, stone.base);          // the footing
+    p.rect(7, 29, 26, 1, stone.light);
+    p.rect(7, 31, 26, 1, stone.shade);
+    for (const x of [8, 17, 31]) { p.vline(x, 16, 30, timber.base); p.px(x + 1, 16, timber.shade); }
+    p.hline(8, 31, 15, timber.dark);            // the ridge beam
+    p.hline(8, 31, 16, timber.base);
+    p.vline(24, 20, 30, timber.shade);          // a leaning stud
+    // A stack of cut timber and a sawhorse on the ground.
+    p.rect(2, 26, 9, 2, timber.base); p.rect(2, 28, 9, 2, timber.shade);
+    p.px(3, 25, timber.light); p.px(8, 25, timber.light);
+    p.rect(34, 27, 4, 1, timber.base); p.px(34, 28, timber.shade); p.px(37, 28, timber.shade);
+    if (kind === 'bench') { p.rect(12, 24, 12, 2, stone.base); p.rect(12, 24, 12, 1, stone.light); }
+    p.outline();
+    return done(p, gx, ground);
+  }
   if (kind === 'bench') {
     // A stone bench under a great lantern post; a small tree beside it at higher levels.
     p.rect(8, 26, 22, 3, ramp(PIGMENT.stoneWarm).base); p.rect(8, 26, 22, 1, ramp(PIGMENT.stoneWarm).light);
@@ -719,14 +762,30 @@ function cloud({ seed = 'c', w = 30 }) {
 }
 
 /** A root-stone: an unmet root family, standing as a carved stone. */
+/**
+ * Ground made ready for a family that has not been grown yet: a ring of
+ * turned earth, a stone at its lip and a stake with a blank tag. It has
+ * to read as somewhere something is going to happen — a scatter of grey
+ * pebbles reads as litter, and a wood full of them reads as a quarry.
+ */
 function rootStone({ seed = 'rs' }) {
   const r = rng(seed);
-  const p = new Pix(10, 9);
+  const p = new Pix(12, 12);
+  const soil = ramp(mix(PIGMENT.path, '#4A3A2C', 0.45));
   const s = ramp('#A9A395');
-  p.blob(5, 5, 4, 3, s.shade, r, 0.12); p.blob(4, 4, 3, 3, s.base, r, 0.15);
-  p.px(3, 2, s.light); p.px(4, 3, s.dark); p.px(5, 4, s.dark); p.px(5, 3, s.dark);
+  const timber = ramp(PIGMENT.timber);
+  // Turned earth, a shallow oval.
+  p.blob(6, 9, 5, 2, soil.base, r, 0.16);
+  p.blob(6, 9, 4, 2, soil.shade, r, 0.2);
+  p.hline(2, 9, 8, soil.light);
+  // One stone set at the lip.
+  p.rect(2, 8, 3, 2, s.base); p.px(2, 8, s.light); p.px(4, 9, s.dark);
+  // A stake with a blank tag, leaning a little.
+  p.vline(8, 2, 9, timber.base); p.px(8, 2, timber.light);
+  p.rect(6, 3, 4, 3, '#E3D6B4'); p.rect(6, 3, 4, 1, '#F2E8CE');
+  p.px(7, 4, mix(PIGMENT.outline, '#E3D6B4', 0.4));
   p.outline();
-  return done(p, 5, 8);
+  return done(p, 6, 11);
 }
 
 /** A glowing star marker for a place that is asking for attention. */
@@ -1111,12 +1170,303 @@ function dock({ w = 22, h = 9 }) {
   return done(p, Math.floor(w / 2), h - 1);
 }
 
+/**
+ * A small house in the hamlet. Humbler than the Hearth on purpose: the
+ * learner's own cottage must stay the landmark. The seed picks the roof,
+ * so no two neighbours are the same house.
+ */
+function house({ level = 1, lit = false, seed = 'h' }) {
+  const r = rng(`house:${seed}`);
+  const p = new Pix(30, 28);
+  const roofs = ['#7C5A46', '#8A6C9C', '#5D7F90', '#B0714A', '#6E8C5A'];
+  const wall = ramp(mix(PIGMENT.wallLit, ['#F2E3C6', '#E9D9BE', '#EFE0CA'][Math.floor(r() * 3)], 0.5));
+  const roof = ramp(roofs[Math.floor(r() * roofs.length)]);
+  const timber = ramp(PIGMENT.timber);
+  const gx = 15, ground = 27;
+  const bw = level >= 2 ? 20 : 17;
+  const x0 = gx - Math.floor(bw / 2);
+  // Body
+  p.rect(x0, 14, bw, 13, wall.base);
+  p.rect(x0, 14, bw, 1, wall.light);
+  p.rect(x0 + bw - 3, 14, 3, 13, wall.shade);
+  p.vline(x0, 14, 26, timber.base); p.vline(x0 + bw - 1, 14, 26, timber.shade);
+  p.hline(x0, x0 + bw - 1, 26, timber.dark);
+  // Roof
+  for (let y = 0; y < 8; y += 1) {
+    const half = 3 + y * 1.3;
+    p.hline(Math.round(gx - half), Math.round(gx + half), 6 + y, y < 3 ? roof.light : roof.base);
+    p.hline(Math.round(gx + half) - 1, Math.round(gx + half), 6 + y, roof.shade);
+  }
+  p.hline(gx - 12, gx + 12, 14, roof.dark);
+  // Door and a window
+  p.rect(gx - 2, 20, 4, 7, timber.base); p.vline(gx - 2, 20, 26, timber.light);
+  p.rect(x0 + 2, 18, 4, 4, lit ? PIGMENT.windowLight : '#8FB8D8');
+  p.rect(x0 + 1, 17, 6, 1, timber.dark); p.rect(x0 + 1, 22, 6, 1, timber.dark);
+  if (level >= 2) {
+    p.rect(x0 + bw - 7, 18, 4, 4, lit ? PIGMENT.windowLight : '#8FB8D8');
+    p.rect(x0 + bw - 8, 17, 6, 1, timber.dark); p.rect(x0 + bw - 8, 22, 6, 1, timber.dark);
+    const st = ramp(PIGMENT.stone);
+    p.rect(gx + 6, 3, 3, 7, st.base); p.vline(gx + 6, 3, 9, st.light); p.rect(gx + 5, 2, 5, 1, st.dark);
+  }
+  p.outline();
+  return done(p, gx, ground);
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Marks: the icon language                                            */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A 16 x 16 pixel mark. Every icon in CAT OS is one of these — the places
+ * on the map, the four crafts, the tabs, the collections — so a button in
+ * the interface is made of the same pixels as the valley behind it.
+ *
+ * Rules, so the set reads as one hand: 16 x 16, a one-pixel dark outline,
+ * light from the upper left, at most four tones from one ramp, and a
+ * silhouette that survives being shown at 14 px.
+ */
+function mark({ kind = 'tree' }) {
+  const p = new Pix(16, 16);
+  const O = PIGMENT.outline;
+  const t = ramp(PIGMENT.timber);
+  const st = ramp(PIGMENT.stoneWarm);
+
+  switch (kind) {
+    /* ---- Places ---- */
+    case 'tree': {                                    // the Rootwood
+      const c = ramp(PIGMENT.canopy);
+      p.rect(7, 10, 2, 5, t.base); p.px(7, 10, t.light); p.px(9, 13, t.shade);
+      p.px(6, 13, t.shade); p.px(10, 12, t.shade);
+      p.blob(8, 6, 6, 5, c.base, rng('mk-tree'), 0.18);
+      p.blob(6, 5, 4, 3, c.light, rng('mk-tree2'), 0.2);
+      p.blob(10, 8, 3, 2, c.shade, rng('mk-tree3'), 0.2);
+      break;
+    }
+    case 'flower': {                                  // the Meadow
+      const g = ramp(PIGMENT.canopy);
+      p.vline(8, 8, 14, g.base); p.px(8, 14, g.shade);
+      p.rect(4, 10, 3, 2, g.base); p.px(4, 9, g.light);
+      p.rect(9, 12, 3, 2, g.shade);
+      p.disc(8, 6, 3, '#F2678E');
+      p.disc(8, 6, 1, PIGMENT.gold);
+      p.px(6, 4, '#F79CB4'); p.px(10, 4, '#F79CB4');
+      break;
+    }
+    case 'koi': {                                     // the Mirror Pond
+      const w = ramp(PIGMENT.water);
+      p.rect(1, 10, 14, 4, w.base); p.rect(1, 10, 14, 1, w.light);
+      p.blob(7, 7, 4, 3, '#E8873F', rng('mk-koi'), 0.1);
+      p.px(6, 6, '#F6B26B'); p.px(8, 8, '#C9612A');
+      p.px(11, 6, '#E8873F'); p.px(12, 5, '#E8873F'); p.px(12, 8, '#E8873F');
+      p.px(5, 7, '#FFFFFF'); p.px(4, 7, O);
+      break;
+    }
+    case 'lantern': {                                 // the Thicket
+      p.vline(8, 1, 3, t.dark); p.hline(6, 10, 3, t.dark);
+      p.rect(5, 4, 7, 8, PIGMENT.lantern);
+      p.rect(5, 4, 7, 1, '#FFF0C0'); p.rect(5, 11, 7, 1, t.dark);
+      p.vline(5, 4, 11, t.base); p.vline(11, 4, 11, t.shade);
+      p.px(7, 7, '#FFF6DE'); p.px(8, 8, '#FFF6DE');
+      p.rect(7, 12, 3, 2, t.base);
+      break;
+    }
+    case 'tower': {                                   // the Reading Room
+      const slate = ramp('#4E5B74');
+      // A narrow shaft on a wider plinth, under a slate spire: tall, and
+      // unmistakably not a house.
+      p.rect(5, 4, 7, 9, st.base); p.vline(5, 4, 12, st.light); p.rect(10, 4, 2, 9, st.shade);
+      p.rect(3, 13, 11, 2, st.base); p.hline(3, 13, 13, st.light); p.hline(3, 13, 14, st.shade);
+      for (let y = 0; y < 4; y += 1) { const h = y; p.hline(8 - h, 8 + h, 3 - y + 3, y < 2 ? slate.light : slate.base); }
+      p.px(8, 0, PIGMENT.gold);
+      p.hline(4, 12, 4, slate.dark);
+      p.rect(7, 6, 2, 3, PIGMENT.windowLight); p.px(7, 6, '#FFF6DE');
+      p.rect(7, 10, 2, 3, t.base); p.px(7, 10, t.light);
+      break;
+    }
+    case 'vine': {                                    // the Vine Terraces
+      const g = ramp(PIGMENT.canopy);
+      // Two stone benches cut into a hill, with a vine over the upper one
+      // and a bunch of grapes hanging from it.
+      p.rect(0, 11, 16, 4, st.base); p.hline(0, 15, 11, st.light); p.hline(0, 15, 14, st.shade);
+      p.rect(2, 5, 13, 3, st.base); p.hline(2, 14, 5, st.light); p.hline(2, 14, 7, st.shade);
+      p.hline(2, 14, 4, mix(PIGMENT.terrace, '#FFFFFF', 0.3));
+      p.vline(4, 1, 5, g.shade);
+      p.hline(4, 12, 1, g.base);
+      p.px(6, 0, g.light); p.px(9, 0, g.light); p.px(12, 1, g.light);
+      p.px(3, 2, g.base); p.px(11, 2, g.base);
+      // grapes
+      p.px(8, 2, '#8E5FA8'); p.px(9, 2, '#8E5FA8'); p.px(8, 3, '#7A4C94'); p.px(9, 3, '#A377BD');
+      p.px(7, 12, g.base); p.px(13, 12, g.base);
+      break;
+    }
+    case 'workshop': {                                // the Quarter
+      const roof = ramp('#8A6C9C');
+      const wall = ramp('#E6D2B0');
+      p.rect(3, 7, 11, 8, wall.base); p.rect(3, 7, 11, 1, wall.light); p.rect(12, 7, 2, 8, wall.shade);
+      for (let y = 0; y < 4; y += 1) p.hline(8 - 4 - y + 4, 8 + y + 1, 3 + y, y < 2 ? roof.light : roof.base);
+      p.hline(1, 15, 7, roof.dark);
+      p.rect(7, 10, 3, 5, t.base); p.px(7, 10, t.light);
+      p.rect(4, 9, 2, 2, PIGMENT.windowLight); p.rect(11, 9, 2, 2, PIGMENT.windowLight);
+      break;
+    }
+    case 'cottage': {                                 // the Hearth
+      const roof = ramp(PIGMENT.roof);
+      const wall = ramp(PIGMENT.wallLit);
+      p.rect(3, 8, 11, 7, wall.base); p.rect(3, 8, 11, 1, wall.light); p.rect(12, 8, 2, 7, wall.shade);
+      for (let y = 0; y < 5; y += 1) { const h = 2 + y * 1.3; p.hline(Math.round(8 - h), Math.round(8 + h), 3 + y, y < 2 ? roof.light : roof.base); }
+      p.hline(1, 14, 8, roof.dark);
+      p.rect(7, 11, 3, 4, t.base); p.px(7, 11, t.light);
+      p.rect(4, 10, 2, 2, PIGMENT.windowLight); p.rect(11, 10, 2, 2, PIGMENT.windowLight);
+      p.rect(11, 2, 2, 3, st.base); p.px(11, 2, st.light);
+      break;
+    }
+    case 'road': {                                    // the Wilds
+      p.rect(1, 12, 14, 3, mix(PIGMENT.path, '#FFFFFF', 0.1));
+      p.hline(1, 14, 12, PIGMENT.pathEdge);
+      p.vline(4, 4, 13, t.base); p.px(4, 4, t.light);
+      p.rect(5, 5, 8, 3, ramp('#7C5A46').base); p.rect(5, 5, 8, 1, ramp('#7C5A46').light);
+      p.px(12, 6, PIGMENT.gold);
+      p.px(9, 11, mix(PIGMENT.path, O, 0.4)); p.px(6, 13, mix(PIGMENT.path, O, 0.4));
+      break;
+    }
+
+    /* ---- The four crafts ---- */
+    case 'amber': case 'ink': case 'thread': case 'ember': {
+      const col = { amber: ['#E9A13B', '#FFD27A', '#A86818'], ink: ['#3B7BD6', '#8FC0FF', '#22508F'], thread: ['#9C6BC0', '#D6B4F0', '#6B4488'], ember: ['#D2542F', '#FF9C6B', '#8E2F16'] }[kind];
+      // A cut stone: a facet up the left, a shadow down the right.
+      for (let y = 0; y < 7; y += 1) { const half = 1 + y; p.hline(8 - half, 7 + half, 2 + y, col[0]); }
+      for (let y = 0; y < 6; y += 1) { const half = 7 - y; p.hline(8 - half, 7 + half, 9 + y, col[0]); }
+      for (let y = 0; y < 6; y += 1) p.hline(8 - (1 + y), 7, 2 + y, col[1]);
+      for (let y = 0; y < 5; y += 1) p.hline(8, 7 + (6 - y), 10 + y, col[2]);
+      p.px(6, 4, '#FFFFFF'); p.px(7, 5, '#FFFFFF');
+      break;
+    }
+
+    /* ---- Tabs and collections ---- */
+    case 'valley': {
+      const m = ramp(PIGMENT.mountain);
+      const g = ramp(PIGMENT.canopy);
+      p.rect(0, 11, 16, 4, g.base); p.hline(0, 15, 11, g.light);
+      for (let y = 0; y < 8; y += 1) { p.hline(4 - y * 0.5 | 0, 4 + y * 0.6 | 0, 11 - y, y > 5 ? PIGMENT.mountainSnow : m.base); }
+      for (let y = 0; y < 10; y += 1) { p.hline(10 - y * 0.5 | 0, 10 + y * 0.7 | 0, 11 - y, y > 7 ? PIGMENT.mountainSnow : m.shade); }
+      p.px(7, 13, g.shade); p.px(12, 13, g.shade);
+      break;
+    }
+    case 'sprout': {                                  // Growth
+      const g = ramp(PIGMENT.canopy);
+      p.rect(1, 12, 14, 3, mix(PIGMENT.path, '#4A3A2C', 0.4));
+      p.hline(1, 14, 12, mix(PIGMENT.path, '#4A3A2C', 0.2));
+      p.vline(8, 4, 12, g.shade);
+      // Two leaves, one each side, both cupped upward.
+      p.hline(4, 7, 7, g.base); p.hline(5, 7, 6, g.light); p.px(4, 8, g.shade); p.hline(5, 7, 8, g.base);
+      p.hline(9, 12, 9, g.base); p.hline(9, 11, 8, g.light); p.px(12, 10, g.shade); p.hline(9, 11, 10, g.base);
+      p.px(8, 3, g.light); p.px(8, 4, g.light);
+      break;
+    }
+    case 'book': {
+      p.rect(2, 3, 12, 11, '#EFE3C8'); p.rect(2, 3, 12, 1, '#FFFFFF');
+      p.vline(8, 3, 13, ramp('#7C5A46').base);
+      p.rect(1, 2, 3, 13, ramp('#8A4B3A').base); p.vline(1, 2, 14, ramp('#8A4B3A').light);
+      p.rect(12, 2, 3, 13, ramp('#8A4B3A').shade);
+      for (const y of [6, 8, 10]) { p.hline(4, 7, y, '#C3B393'); p.hline(10, 12, y, '#C3B393'); }
+      break;
+    }
+    case 'star': {
+      const g = PIGMENT.gold;
+      // A five-point star, drawn row by row so the arms are even.
+      const ROWS = [[7, 8], [7, 8], [6, 9], [6, 9], [1, 14], [2, 13], [3, 12], [4, 11], [4, 11], [3, 12], [3, 5], [2, 4], [1, 3]];
+      const RIGHT = { 10: [10, 12], 11: [11, 13], 12: [12, 14] };
+      ROWS.forEach((r, y) => { p.hline(r[0], r[1], y + 1, g); });
+      for (const [y, r] of Object.entries(RIGHT)) p.hline(r[0], r[1], Number(y) + 1, g);
+      p.hline(5, 10, 5, '#FFE9A8'); p.hline(6, 9, 4, '#FFE9A8');
+      p.px(6, 6, '#FFF6DE'); p.px(7, 6, '#FFF6DE');
+      p.px(5, 9, mix(g, PIGMENT.outline, 0.3)); p.px(10, 9, mix(g, PIGMENT.outline, 0.3));
+      break;
+    }
+    case 'lock': {
+      p.rect(3, 7, 10, 8, st.base); p.rect(3, 7, 10, 1, st.light); p.rect(11, 7, 2, 8, st.shade);
+      p.rect(5, 2, 6, 5, 'rgba(0,0,0,0)');
+      p.vline(5, 3, 7, st.shade); p.vline(10, 3, 7, st.shade); p.hline(5, 10, 2, st.base);
+      p.rect(7, 10, 2, 3, O);
+      break;
+    }
+    case 'clock': {
+      p.disc(8, 8, 6, '#EFE3C8'); p.disc(8, 8, 5, '#FFFFFF');
+      p.vline(8, 4, 8, O); p.hline(8, 11, 8, O);
+      p.px(8, 2, PIGMENT.gold); p.px(2, 8, PIGMENT.gold); p.px(14, 8, PIGMENT.gold); p.px(8, 14, PIGMENT.gold);
+      break;
+    }
+    case 'cat': {                                     // Wick, with his lantern
+      const f = ramp('#43434E');
+      // Body, sitting, tail curled round the front.
+      p.rect(4, 9, 7, 6, f.base); p.rect(4, 9, 7, 1, f.light); p.rect(9, 9, 2, 6, f.shade);
+      p.rect(3, 13, 9, 2, f.base); p.hline(3, 11, 14, f.shade);
+      // Head, and two clear ears with light between them.
+      p.rect(4, 4, 7, 6, f.base); p.rect(4, 4, 7, 1, f.light);
+      p.px(4, 2, f.base); p.px(4, 3, f.base); p.px(5, 3, f.base);
+      p.px(10, 2, f.base); p.px(10, 3, f.base); p.px(9, 3, f.base);
+      p.px(5, 6, '#F4C95D'); p.px(9, 6, '#F4C95D');
+      p.px(7, 8, '#D8C0A0'); p.px(6, 8, f.dark); p.px(8, 8, f.dark);
+      // The lantern he carries — the one thing that makes him Wick.
+      p.vline(13, 5, 8, t.dark);
+      p.rect(12, 8, 3, 4, PIGMENT.lantern); p.px(13, 9, '#FFF6DE');
+      p.px(12, 12, t.dark); p.px(14, 12, t.dark);
+      break;
+    }
+    default: {
+      p.disc(8, 8, 5, st.base); p.disc(7, 7, 3, st.light);
+      break;
+    }
+  }
+  p.outline();
+  return done(p, 8, 15);
+}
+
+
+/**
+ * A piece of path, for the Workshop shelf: a track running away between
+ * two grass banks. A six-pixel strip of paving blown up four times reads
+ * as a fence; a path has to be seen going somewhere.
+ */
+function pathPiece({ stone = false, w = 30, h = 22 }) {
+  const p = new Pix(w, h);
+  const g = ramp(SEASON.summer.grass);
+  const st = ramp(PIGMENT.stoneWarm);
+  const dirt = ramp(PIGMENT.path);
+  const r = rng(stone ? 'path:stone' : 'path:earth');
+  // Grass either side.
+  for (let y = 0; y < h; y += 1) for (let x = 0; x < w; x += 1) p.px(x, y, r() > 0.6 ? g.light : g.base);
+  // The track: wider at the bottom, narrowing as it goes away.
+  for (let y = 0; y < h; y += 1) {
+    const t = y / (h - 1);
+    const half = Math.round(2.5 + t * 7);
+    const cx = Math.round(w / 2 + Math.sin(t * 2.2) * 2);
+    for (let x = cx - half; x <= cx + half; x += 1) {
+      if (x < 0 || x >= w) continue;
+      if (stone) {
+        const grid = (x % 5 === 0) || (y % 4 === 0);
+        p.px(x, y, grid ? st.shade : ((Math.floor(x / 5) + Math.floor(y / 4)) % 2 ? st.light : st.base));
+      } else {
+        p.px(x, y, r() > 0.72 ? dirt.light : dirt.base);
+      }
+    }
+    // A dithered edge, so the track is worn rather than cut.
+    if (cx - half - 1 >= 0 && ((y + 1) & 1)) p.px(cx - half - 1, y, mix(dirt.base, g.base, 0.5));
+    if (cx + half + 1 < w && (y & 1)) p.px(cx + half + 1, y, mix(dirt.base, g.base, 0.5));
+  }
+  // A tuft or two on the banks.
+  p.px(2, h - 5, g.shade); p.px(3, h - 6, g.shade); p.px(w - 3, h - 8, g.shade); p.px(w - 4, h - 7, g.shade);
+  p.outline();
+  return done(p, Math.floor(w / 2), h - 1);
+}
+
 const RECIPES = {
   tree, flower, flowerPatch, grassTuft, bush, bramble, rock, stump, lilypad, reeds,
   cottage, tower, workshop, lantern, signpost, bridge, fence, terraceWall,
   koi, butterfly, bird, cat, catSmall, cloud, rootStone, marker, puff, wick, dock,
-  hive, heron, arch, shrine, arbour, stall, well, villager, paving, stoneBridge,
-  deer, sheep, duck, dog,
+  hive, heron, arch, shrine, arbour, stall, well, villager, paving, stoneBridge, house,
+  deer, sheep, duck, dog, mark, pathPiece,
 };
 
 export const RECIPE_NAMES = Object.freeze(Object.keys(RECIPES));
