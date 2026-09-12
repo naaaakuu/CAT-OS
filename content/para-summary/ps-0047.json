@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "neutral"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 5,
       "syntax": 3,
@@ -38,16 +41,36 @@
       "qualifier_density": 2,
       "domain_load": 3
     },
-    "load_bearing": ["not weakness of will", "indirect control", "a narrower place"],
+    "load_bearing": [
+      "not weakness of will",
+      "indirect control",
+      "a narrower place"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "inference_control", "evidence_vs_thesis", "language_precision"],
+    "dna_traits": [
+      "main_idea_detection",
+      "inference_control",
+      "evidence_vs_thesis",
+      "language_precision"
+    ],
     "mission": "add_nothing",
     "learning_objective": "resist converting a claim about where a demand can fall into a statement of what that demand requires",
-    "reasoning_patterns": ["sum.no_addition", "sum.central_vs_supporting", "arg.principle", "comp.function_over_words", "arg.causal_claim"],
+    "reasoning_patterns": [
+      "sum.no_addition",
+      "sum.central_vs_supporting",
+      "arg.principle",
+      "comp.function_over_words",
+      "arg.causal_claim"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option imposing a duty to read widely and consult opponents. The paragraph says where a demand can sensibly fall, which is a claim about the possible location of an obligation, and then observes that this place is narrower than the demands people usually make; it never states the obligation itself. The arm-raising option is the illustration that opens the argument. The option explaining belief by upbringing and circumstance replaces a claim about what a belief is with a claim about what causes beliefs, and the second sentence rules that out by saying the reason is not weakness of will but the kind of state a belief is.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

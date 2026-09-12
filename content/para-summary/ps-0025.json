@@ -27,7 +27,10 @@
       "certainty": "hedged",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": "But" },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
     "difficulty_dials": {
       "abstraction": 3,
       "syntax": 4,
@@ -38,16 +41,37 @@
       "qualifier_density": 4,
       "domain_load": 2
     },
-    "load_bearing": ["on this evidence", "not so much", "already gave people a reason to stay", "within two years"],
+    "load_bearing": [
+      "on this evidence",
+      "not so much",
+      "already gave people a reason to stay",
+      "within two years"
+    ],
     "separating_element": null,
-    "dna_traits": ["certainty_reading", "main_idea_detection", "scope_preservation", "author_intent"],
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "scope_preservation",
+      "author_intent"
+    ],
     "mission": "keep_qualifiers",
     "learning_objective": "carry the hedges and the conditions of a claim into the summary, when a bolder version of the same claim is available and reads better",
-    "reasoning_patterns": ["sum.qualification_kept", "struct.pivot", "sum.central_vs_supporting", "lang.often_vs_always", "sum.no_addition"],
+    "reasoning_patterns": [
+      "sum.qualification_kept",
+      "struct.pivot",
+      "sum.central_vs_supporting",
+      "lang.often_vs_always",
+      "sum.no_addition"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option telling councils to pedestrianise only streets that already invite lingering, because it carries the paragraph's own condition and therefore looks faithful. It fails on a single word: the author writes 'on this evidence, does not so much raise a street's trade as change the kind of trade it can hold', which is a description of what happens, and no sentence in the paragraph tells anyone what to do. The footfall option stops at the concession that the 'But' overturns, and the option about reliably destroying errand shops drops both the hedge and the condition that make the claim defensible.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

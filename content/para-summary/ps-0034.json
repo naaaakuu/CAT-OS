@@ -27,7 +27,10 @@
       "certainty": "mixed",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": "but" },
+    "turn": {
+      "present": true,
+      "marker": "but"
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 4,
@@ -38,16 +41,36 @@
       "qualifier_density": 4,
       "domain_load": 2
     },
-    "load_bearing": ["not a measure of", "but not that correcting is pointless", "rather than after it"],
+    "load_bearing": [
+      "not a measure of",
+      "but not that correcting is pointless",
+      "rather than after it"
+    ],
     "separating_element": "The correct option keeps the author's refusal to call correcting pointless; the nearest rival draws the same structural conclusion and moves the whole effort upstream instead, which the final clause declines to do.",
-    "dna_traits": ["author_intent", "main_idea_detection", "inference_control", "language_precision"],
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "inference_control",
+      "language_precision"
+    ],
     "mission": "hold_the_stance",
     "learning_objective": "keep the half of a conclusion that protects what the author is not willing to abandon, when the other half is the memorable one",
-    "reasoning_patterns": ["sum.stance_kept", "arg.causal_claim", "sum.central_vs_supporting", "sum.no_addition", "struct.conclusion"],
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "arg.causal_claim",
+      "sum.central_vs_supporting",
+      "sum.no_addition",
+      "struct.conclusion"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The two finalists agree on the cause and on the conclusion that low reach reflects the nature of a correction rather than an outlet's carelessness. They part on one word. The rival moves the effort to pre-publication checking 'instead', and the paragraph's last clause says the opposite: 'but not that correcting is pointless, since the record a correction creates is read by people who come to the story later'. The option about outlets knowing a correction will be unseen imports a cynicism the paragraph assigns to no one, and the option about the audience never exceeding the error's reports the mechanism and stops before the conclusion.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

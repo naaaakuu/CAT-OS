@@ -27,7 +27,10 @@
       "certainty": "mixed",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": "however" },
+    "turn": {
+      "present": true,
+      "marker": "however"
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 4,
@@ -38,16 +41,36 @@
       "qualifier_density": 3,
       "domain_load": 2
     },
-    "load_bearing": ["It does not follow", "in either direction", "nobody has counted"],
+    "load_bearing": [
+      "It does not follow",
+      "in either direction",
+      "nobody has counted"
+    ],
     "separating_element": null,
-    "dna_traits": ["evidence_vs_thesis", "inference_control", "certainty_reading", "main_idea_detection"],
+    "dna_traits": [
+      "evidence_vs_thesis",
+      "inference_control",
+      "certainty_reading",
+      "main_idea_detection"
+    ],
     "mission": "evidence_vs_conclusion",
     "learning_objective": "stop at the conclusion the paragraph actually draws when the evidence seems to license a stronger one in a particular direction",
-    "reasoning_patterns": ["arg.evidence_vs_conclusion", "sum.central_vs_supporting", "inf.vs_speculation", "sum.no_addition", "cr.sampling"],
+    "reasoning_patterns": [
+      "arg.evidence_vs_conclusion",
+      "sum.central_vs_supporting",
+      "inf.vs_speculation",
+      "sum.no_addition",
+      "cr.sampling"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option that says the published rate understates how often decisions are wrong. It is what the third sentence appears to set up, and it is the conclusion most readers reach unaided. The last sentence refuses it in words: 'It does not follow that moderation is inaccurate, since nobody has counted the silent cases', and the fourth sentence gives the reason, that the figure moves when people get better at appealing and again when they give up, which is movement in both directions rather than a bias one way. The option about users never learning why a post vanished is a true step in the analysis rather than its conclusion, and the bad-faith option imports a motive the paragraph never assigns.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

@@ -27,7 +27,10 @@
       "certainty": "hedged",
       "stance": "cautionary"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 3,
       "syntax": 4,
@@ -38,16 +41,36 @@
       "qualifier_density": 4,
       "domain_load": 2
     },
-    "load_bearing": ["It may be that", "some of", "plausible and has not been demonstrated"],
+    "load_bearing": [
+      "It may be that",
+      "some of",
+      "plausible and has not been demonstrated"
+    ],
     "separating_element": null,
-    "dna_traits": ["certainty_reading", "main_idea_detection", "inference_control", "author_intent"],
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "inference_control",
+      "author_intent"
+    ],
     "mission": "notice_certainty",
     "learning_objective": "carry a suggestion at the strength the author gave it, when the same sentence without its hedges would be a much better line",
-    "reasoning_patterns": ["sum.certainty_kept", "arg.causal_claim", "sum.central_vs_supporting", "lang.modal_verbs", "inf.vs_speculation"],
+    "reasoning_patterns": [
+      "sum.certainty_kept",
+      "arg.causal_claim",
+      "sum.central_vs_supporting",
+      "lang.modal_verbs",
+      "inf.vs_speculation"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option saying the lost timetable is what has produced the feeling of being behind. The paragraph writes 'It may be that this accounts for some of the reported unease' and then withdraws even that a little: 'The connection is plausible and has not been demonstrated: the same decades changed a great deal else.' Two hedges, a modal and a partial quantifier, and an explicit alternative. The option about ages spreading across a decade reports the effect without the conclusion, and the option about people arranging their own lives turns the paragraph's causal order around, since the institutions loosening is what the text puts first.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

@@ -27,7 +27,10 @@
       "certainty": "hedged",
       "stance": "cautionary"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 5,
       "syntax": 4,
@@ -38,16 +41,37 @@
       "qualifier_density": 4,
       "domain_load": 4
     },
-    "load_bearing": ["neither is sufficient", "does not fix the weight", "but not its date", "but not the shape"],
+    "load_bearing": [
+      "neither is sufficient",
+      "does not fix the weight",
+      "but not its date",
+      "but not the shape"
+    ],
     "separating_element": "The correct option leaves the balance between the two accounts open; the nearest rival uses the paragraph's own dating argument to rank one above the other, which the closing clause says the record cannot do.",
-    "dna_traits": ["certainty_reading", "main_idea_detection", "scope_preservation", "author_intent"],
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "scope_preservation",
+      "author_intent"
+    ],
     "mission": "keep_qualifiers",
     "learning_objective": "keep an adjudication at the point of balance the author left it, rather than completing it into a verdict",
-    "reasoning_patterns": ["sum.qualification_kept", "struct.two_views_adjudication", "sum.certainty_kept", "sum.central_vs_supporting", "arg.qualification"],
+    "reasoning_patterns": [
+      "sum.qualification_kept",
+      "struct.two_views_adjudication",
+      "sum.certainty_kept",
+      "sum.central_vs_supporting",
+      "arg.qualification"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The two finalists both grasp that each account is partial. The rival then presses the paragraph's dating argument into a ranking: the eschatology sat unused for a thousand years, so the quarrel must be the decisive origin and the religious account merely supplies the form. The last clause forbids exactly that: 'neither is sufficient and the record does not fix the weight between them', and 'merely' contradicts the fourth sentence, which makes the shape one of the two things needing explanation rather than a decoration on the other. The option that states the secularisation thesis alone adopts a view the author only reports, and the methodological option recommends a practice the paragraph never proposes.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

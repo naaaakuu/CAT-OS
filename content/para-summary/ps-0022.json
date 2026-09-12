@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 2,
       "syntax": 2,
@@ -38,16 +41,35 @@
       "qualifier_density": 1,
       "domain_load": 1
     },
-    "load_bearing": ["could attend", "not the same as", "None of this makes"],
+    "load_bearing": [
+      "could attend",
+      "not the same as",
+      "None of this makes"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "scope_preservation", "author_intent"],
+    "dna_traits": [
+      "main_idea_detection",
+      "scope_preservation",
+      "author_intent"
+    ],
     "mission": "protect_scope",
     "learning_objective": "hold a claim to the one thing it is about, when a nearby and more dramatic claim is easy to reach from it",
-    "reasoning_patterns": ["sum.central_vs_supporting", "scope.too_broad", "sum.no_addition", "sum.stance_kept", "arg.evidence"],
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "scope.too_broad",
+      "sum.no_addition",
+      "sum.stance_kept",
+      "arg.evidence"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option that discounts the objections raised at such meetings. It follows honestly from the attendance finding and is the conclusion most readers draw on their own, but the fourth sentence exists to block it: 'a well-argued objection is not weakened by the fact that its author had a free Tuesday'. The option that widens the claim to written submissions and online surveys is beaten by the paragraph's own mechanism, which is about being in one building on one night. The option that proposes several meeting times recommends something the paragraph never asks for.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

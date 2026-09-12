@@ -27,7 +27,10 @@
       "certainty": "mixed",
       "stance": "neutral"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 3,
       "syntax": 3,
@@ -38,16 +41,36 @@
       "qualifier_density": 3,
       "domain_load": 2
     },
-    "load_bearing": ["does not say what", "may have been", "something visible"],
+    "load_bearing": [
+      "does not say what",
+      "may have been",
+      "something visible"
+    ],
     "separating_element": null,
-    "dna_traits": ["evidence_vs_thesis", "inference_control", "main_idea_detection", "scope_preservation"],
+    "dna_traits": [
+      "evidence_vs_thesis",
+      "inference_control",
+      "main_idea_detection",
+      "scope_preservation"
+    ],
     "mission": "evidence_vs_conclusion",
     "learning_objective": "separate what an experiment establishes from the explanation a reader supplies for it",
-    "reasoning_patterns": ["arg.evidence_vs_conclusion", "sum.no_addition", "sum.central_vs_supporting", "inf.vs_speculation", "scope.abstraction_level"],
+    "reasoning_patterns": [
+      "arg.evidence_vs_conclusion",
+      "sum.no_addition",
+      "sum.central_vs_supporting",
+      "inf.vs_speculation",
+      "scope.abstraction_level"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option naming the visible factor as discrimination. The paragraph lists three candidates, a candidate's bearing, a reputation attached to a face, and nothing more articulate than an expectation about what a player of an instrument looks like, and says outright that the experiment does not say which. Two of the three are not discrimination in any ordinary sense. The option about identical sound reports the premise that licenses the inference rather than the inference; the option about all judgements made in the presence of the judged widens the claim beyond auditions altogether.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

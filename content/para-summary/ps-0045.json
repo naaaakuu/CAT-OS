@@ -27,7 +27,10 @@
       "certainty": "hedged",
       "stance": "neutral"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 2,
       "syntax": 2,
@@ -38,16 +41,35 @@
       "qualifier_density": 3,
       "domain_load": 2
     },
-    "load_bearing": ["tend to", "though not reliably", "in a single generation"],
+    "load_bearing": [
+      "tend to",
+      "though not reliably",
+      "in a single generation"
+    ],
     "separating_element": null,
-    "dna_traits": ["certainty_reading", "main_idea_detection", "scope_preservation"],
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "scope_preservation"
+    ],
     "mission": "keep_qualifiers",
     "learning_objective": "keep the limit an author attaches to a tendency, when the mechanism behind it sounds strong enough to be a rule",
-    "reasoning_patterns": ["sum.certainty_kept", "struct.specific_to_general", "arg.causal_claim", "sum.central_vs_supporting", "lang.often_vs_always"],
+    "reasoning_patterns": [
+      "sum.certainty_kept",
+      "struct.specific_to_general",
+      "arg.causal_claim",
+      "sum.central_vs_supporting",
+      "lang.often_vs_always"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option promising that a name survives any change of language. It reproduces the mechanism exactly, and the last clause of the paragraph removes it: the survival is 'not reliable', settlers who arrive in numbers rename freely, and a name can be lost in a single generation. The option that reports names being older than the languages spoken there is the observation with the explanation stripped out, and the option about anything learned as a whole outlasting what is understood carries a claim about names to every kind of unanalysed material.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

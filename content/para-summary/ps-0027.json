@@ -27,7 +27,10 @@
       "certainty": "mixed",
       "stance": "corrective"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 5,
       "syntax": 4,
@@ -38,16 +41,37 @@
       "qualifier_density": 4,
       "domain_load": 3
     },
-    "load_bearing": ["at least as much as", "a further question", "cannot settle", "even for a defendant with a good answer"],
+    "load_bearing": [
+      "at least as much as",
+      "a further question",
+      "cannot settle",
+      "even for a defendant with a good answer"
+    ],
     "separating_element": "The correct option stops at what the plea rate measures; its nearest rival takes the one further step, to what the rate proves about innocence, which the final sentence says a rate cannot settle.",
-    "dna_traits": ["main_idea_detection", "inference_control", "certainty_reading", "evidence_vs_thesis"],
+    "dna_traits": [
+      "main_idea_detection",
+      "inference_control",
+      "certainty_reading",
+      "evidence_vs_thesis"
+    ],
     "mission": "add_nothing",
     "learning_objective": "hold a conclusion at the point the author placed it when the argument plainly supports a more dramatic sentence one step further on",
-    "reasoning_patterns": ["sum.central_vs_supporting", "arg.causal_claim", "inf.vs_speculation", "sum.no_addition", "sum.certainty_kept"],
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "arg.causal_claim",
+      "inf.vs_speculation",
+      "sum.no_addition",
+      "sum.certainty_kept"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The two finalists differ by one inference. Both keep the mechanism, that a wide enough discount makes pleading rational whatever the case, and both reject the naive reading of the plea rate. The rival then says the rate is evidence that innocent defendants are being convicted. The last sentence blocks precisely that: 'Whether innocent defendants are being induced to plead is a further question that a rate cannot settle.' Note too that the paragraph's own phrase is 'a defendant with a good answer', which is not a claim about innocence. The capping option prescribes a reform nobody in the paragraph proposes, and the option about the disappearing trial reports the setup and the mechanism while stopping short of the conclusion drawn from them.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

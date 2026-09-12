@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": null },
+    "turn": {
+      "present": true,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 3,
@@ -38,16 +41,36 @@
       "qualifier_density": 3,
       "domain_load": 2
     },
-    "load_bearing": ["were not careless", "a reasonable response", "had adapted to it"],
+    "load_bearing": [
+      "were not careless",
+      "a reasonable response",
+      "had adapted to it"
+    ],
     "separating_element": null,
-    "dna_traits": ["author_intent", "main_idea_detection", "scope_preservation", "compression_skill"],
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "scope_preservation",
+      "compression_skill"
+    ],
     "mission": "hold_the_stance",
     "learning_objective": "keep an author's explicit refusal to blame when the causal story they tell reads like an indictment",
-    "reasoning_patterns": ["sum.stance_kept", "struct.specific_to_general", "arg.causal_claim", "sum.no_addition", "scope.abstraction_level"],
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "struct.specific_to_general",
+      "arg.causal_claim",
+      "sum.no_addition",
+      "scope.abstraction_level"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option that calls the century of suppression a sustained error. The first three sentences do read as an indictment, and a reader who stops there will sign it. The fourth sentence is written to stop exactly that: 'The foresters were not careless: the policy was a reasonable response to what was known, and in the settled valleys it saved a great deal.' The universal option drops the phrase 'a system that had adapted to it', which is the condition the whole generalisation rests on; and the option recommending managed burning proposes a policy the paragraph never raises.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

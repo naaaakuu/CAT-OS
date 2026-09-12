@@ -27,7 +27,10 @@
       "certainty": "mixed",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": "But" },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 3,
@@ -38,16 +41,36 @@
       "qualifier_density": 3,
       "domain_load": 2
     },
-    "load_bearing": ["specific to mechanisms", "usually right", "not how much they hold"],
+    "load_bearing": [
+      "specific to mechanisms",
+      "usually right",
+      "not how much they hold"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "certainty_reading", "scope_preservation", "author_intent"],
+    "dna_traits": [
+      "main_idea_detection",
+      "certainty_reading",
+      "scope_preservation",
+      "author_intent"
+    ],
     "mission": "watch_the_turn",
     "learning_objective": "wait for the turn before fixing the paragraph's explanation, when the pre-turn reading is the one every reader already believes",
-    "reasoning_patterns": ["struct.pivot", "sum.central_vs_supporting", "lang.contrast_marker", "sum.certainty_kept", "scope.abstraction_level"],
+    "reasoning_patterns": [
+      "struct.pivot",
+      "sum.central_vs_supporting",
+      "lang.contrast_marker",
+      "sum.certainty_kept",
+      "scope.abstraction_level"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the overclaiming option, which is the reading the third sentence offers and the 'But' immediately removes. It is defeated by the calibration finding: the same people are accurate about facts and about rehearsed procedures, so a general habit of boasting cannot be what is happening. The second rival takes the paragraph's explanation and turns the feeling into a reliable guide, which loses the author's 'usually' and with it the fact that this is still an error. The option about people being poor judges of their own knowledge in general drops the word 'specific'.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

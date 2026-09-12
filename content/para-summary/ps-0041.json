@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": "But" },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
     "difficulty_dials": {
       "abstraction": 2,
       "syntax": 2,
@@ -38,16 +41,35 @@
       "qualifier_density": 1,
       "domain_load": 1
     },
-    "load_bearing": ["That looks like", "the opposite", "goes on being usable"],
+    "load_bearing": [
+      "That looks like",
+      "the opposite",
+      "goes on being usable"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "author_intent", "certainty_reading"],
+    "dna_traits": [
+      "main_idea_detection",
+      "author_intent",
+      "certainty_reading"
+    ],
     "mission": "watch_the_turn",
     "learning_objective": "wait for the sentence after the turn before deciding what a paragraph thinks of the process it has described",
-    "reasoning_patterns": ["struct.pivot", "sum.stance_kept", "arg.causal_claim", "sum.central_vs_supporting", "lang.contrast_marker"],
+    "reasoning_patterns": [
+      "struct.pivot",
+      "sum.stance_kept",
+      "arg.causal_claim",
+      "sum.central_vs_supporting",
+      "lang.contrast_marker"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option about the original being buried under its explanations. The paragraph writes that sentence itself, as the reading it is about to reject, and the 'But' turns it over: the commentary is how a fixed text stays usable. The option about any widely studied text being replaced by its commentary drops the condition that the text cannot be altered, which is the whole cause of the accumulation. The option sending students back to the original recommends something the paragraph never proposes and inverts its judgement while doing so.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "cautionary"
     },
-    "turn": { "present": true, "marker": "however" },
+    "turn": {
+      "present": true,
+      "marker": "however"
+    },
     "difficulty_dials": {
       "abstraction": 2,
       "syntax": 2,
@@ -38,16 +41,36 @@
       "qualifier_density": 2,
       "domain_load": 2
     },
-    "load_bearing": ["not a random selection", "says nothing about whether", "in the selection rather than"],
+    "load_bearing": [
+      "not a random selection",
+      "says nothing about whether",
+      "in the selection rather than"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "inference_control", "evidence_vs_thesis", "author_intent"],
+    "dna_traits": [
+      "main_idea_detection",
+      "inference_control",
+      "evidence_vs_thesis",
+      "author_intent"
+    ],
     "mission": "add_nothing",
     "learning_objective": "keep a summary to the author's diagnosis when the remedy is obvious and the author has not named it",
-    "reasoning_patterns": ["sum.no_addition", "cr.sampling", "sum.central_vs_supporting", "arg.causal_claim", "sum.stance_kept"],
+    "reasoning_patterns": [
+      "sum.no_addition",
+      "cr.sampling",
+      "sum.central_vs_supporting",
+      "arg.causal_claim",
+      "sum.stance_kept"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option telling journals to publish null results. The paragraph diagnoses a selection effect and never prescribes anything, and the fix is the reader's addition rather than the author's conclusion. The option saying the literature cannot be trusted is refused by the last sentence, which insists each study may be sound and puts the distortion in the selection; it also imputes a purpose to the selecting that the text does not. The option about null trials being hard to write up and place is the mechanism, reported before the conclusion it was introduced to support.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

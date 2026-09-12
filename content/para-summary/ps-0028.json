@@ -27,7 +27,10 @@
       "certainty": "hedged",
       "stance": "cautionary"
     },
-    "turn": { "present": true, "marker": null },
+    "turn": {
+      "present": true,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 3,
       "syntax": 3,
@@ -38,16 +41,36 @@
       "qualifier_density": 4,
       "domain_load": 2
     },
-    "load_bearing": ["suggestive rather than decisive", "far more often", "on its own"],
+    "load_bearing": [
+      "suggestive rather than decisive",
+      "far more often",
+      "on its own"
+    ],
     "separating_element": null,
-    "dna_traits": ["certainty_reading", "main_idea_detection", "author_intent", "evidence_vs_thesis"],
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "author_intent",
+      "evidence_vs_thesis"
+    ],
     "mission": "notice_certainty",
     "learning_objective": "carry an author's grading of their own evidence into the summary instead of reporting the verdict as settled",
-    "reasoning_patterns": ["sum.certainty_kept", "struct.two_views_adjudication", "arg.evidence", "sum.central_vs_supporting", "lang.modal_verbs"],
+    "reasoning_patterns": [
+      "sum.certainty_kept",
+      "struct.two_views_adjudication",
+      "arg.evidence",
+      "sum.central_vs_supporting",
+      "lang.modal_verbs"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option saying that surveys establish the relational explanation. It has the direction of the adjudication exactly right and fails on one word: the author writes that the survey result is 'suggestive rather than decisive', and gives the reason, that managers are explaining themselves and the relational motive is the more creditable one. The option that says the surveys cannot decide anything keeps the caveat and drops the verdict the author does reach, that the mechanical story is too small on its own. The reprinting option adopts the explanation the paragraph finds insufficient.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

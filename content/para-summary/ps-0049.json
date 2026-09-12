@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 3,
       "syntax": 3,
@@ -38,16 +41,36 @@
       "qualifier_density": 3,
       "domain_load": 3
     },
-    "load_bearing": ["does not dispose of", "not what the elaborate cases are for", "the one that fits"],
+    "load_bearing": [
+      "does not dispose of",
+      "not what the elaborate cases are for",
+      "the one that fits"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "surface_matching", "author_intent", "certainty_reading"],
+    "dna_traits": [
+      "main_idea_detection",
+      "surface_matching",
+      "author_intent",
+      "certainty_reading"
+    ],
     "mission": "match_ideas_not_words",
     "learning_objective": "judge an option by the claim it makes rather than by how comfortably it echoes the paragraph's own phrasing",
-    "reasoning_patterns": ["struct.two_views_adjudication", "sum.qualification_kept", "comp.function_over_words", "sum.central_vs_supporting", "arg.evidence"],
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "sum.qualification_kept",
+      "comp.function_over_words",
+      "sum.central_vs_supporting",
+      "arg.evidence"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option that a rite tells a community a child has become an adult. It is the paragraph's own second sentence, and the last sentence confirms that every rite does this, which makes the option true. It is still not the claim: the paragraph adjudicates between two explanations on their distributions, and finds that role-marking is not what the elaborate cases are for. The option saying rites have nothing to do with adulthood and exist solely to bind men is refused by the same sentence from the other side. The option about where elaborate initiation is found reports the evidence rather than the verdict drawn from it.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

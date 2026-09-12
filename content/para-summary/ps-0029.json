@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 3,
       "syntax": 2,
@@ -38,16 +41,36 @@
       "qualifier_density": 2,
       "domain_load": 2
     },
-    "load_bearing": ["not that doctors preferred", "had to be looked for", "at the same speed"],
+    "load_bearing": [
+      "not that doctors preferred",
+      "had to be looked for",
+      "at the same speed"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "surface_matching", "compression_skill"],
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "surface_matching",
+      "compression_skill"
+    ],
     "mission": "match_ideas_not_words",
     "learning_objective": "choose the option that matches the paragraph's idea rather than the one that repeats the most of its vocabulary",
-    "reasoning_patterns": ["sum.central_vs_supporting", "comp.function_over_words", "sum.stance_kept", "arg.causal_claim", "sum.compression"],
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "comp.function_over_words",
+      "sum.stance_kept",
+      "arg.causal_claim",
+      "sum.compression"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the bed-rest option, which reuses more of the paragraph's words than any other and is true of the case described. It is the illustration. The first sentence states the claim before the example arrives and the fourth restates it afterwards, which is what an example serving a claim looks like. The option blaming a comfortable convention is refused by the last sentence, which says the trouble was not preference but availability of evidence; and the option about practices surviving their evidence widens a claim about which harms get noticed into a claim about when medicine changes at all.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

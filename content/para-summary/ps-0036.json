@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 3,
@@ -38,16 +41,36 @@
       "qualifier_density": 2,
       "domain_load": 2
     },
-    "load_bearing": ["in this trade", "entirely accurate", "heard as more than it says"],
+    "load_bearing": [
+      "in this trade",
+      "entirely accurate",
+      "heard as more than it says"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "evidence_vs_thesis", "language_precision", "scope_preservation"],
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "language_precision",
+      "scope_preservation"
+    ],
     "mission": "find_the_thesis",
     "learning_objective": "pick out the claim a paragraph makes about a word when the facts it assembles are more striking than the claim",
-    "reasoning_patterns": ["sum.central_vs_supporting", "scope.condition", "sum.stance_kept", "comp.function_over_words", "sum.compression"],
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "scope.condition",
+      "sum.stance_kept",
+      "comp.function_over_words",
+      "sum.compression"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option reporting both facts, that the carvings are locally made and that nobody local owns one. It is accurate and it contains the paradox, which is why it reads as the point. It is not: the opening sentence states the claim before those facts arrive and the closing sentence restates it afterwards, and neither is about the carvings. The option calling the label designed to mislead is refused by 'entirely accurate', since the paragraph insists the word is true. The option making authenticity always a claim about buyers drops the opening phrase that ties the claim to this trade.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

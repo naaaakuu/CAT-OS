@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "cautionary"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 4,
@@ -38,16 +41,36 @@
       "qualifier_density": 3,
       "domain_load": 2
     },
-    "load_bearing": ["not an argument against making it", "helps nobody", "never counted"],
+    "load_bearing": [
+      "not an argument against making it",
+      "helps nobody",
+      "never counted"
+    ],
     "separating_element": null,
-    "dna_traits": ["author_intent", "main_idea_detection", "compression_skill", "inference_control"],
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "compression_skill",
+      "inference_control"
+    ],
     "mission": "hold_the_stance",
     "learning_objective": "keep an author's refusal to condemn when the analysis they have just written reads like an indictment",
-    "reasoning_patterns": ["sum.stance_kept", "sum.central_vs_supporting", "arg.qualification", "sum.no_addition", "arg.causal_claim"],
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "sum.central_vs_supporting",
+      "arg.qualification",
+      "sum.no_addition",
+      "arg.causal_claim"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option saying the association has given up what made it worth belonging to. The middle of the paragraph supports that reading and the last sentence forbids it: 'This is a description of a trade, not an argument against making it; an association that collapses under its own obligations helps nobody.' The option about work being done on time by somebody accountable reports the gain and drops the cost, which is half of a trade. The option advising associations to keep staff to a minimum turns the description into a rule of management.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

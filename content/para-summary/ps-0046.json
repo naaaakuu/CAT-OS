@@ -27,7 +27,10 @@
       "certainty": "asserted",
       "stance": "corrective"
     },
-    "turn": { "present": true, "marker": "But" },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
     "difficulty_dials": {
       "abstraction": 4,
       "syntax": 4,
@@ -38,16 +41,36 @@
       "qualifier_density": 3,
       "domain_load": 3
     },
-    "load_bearing": ["it is worth something", "does not abolish", "moves it"],
+    "load_bearing": [
+      "it is worth something",
+      "does not abolish",
+      "moves it"
+    ],
     "separating_element": null,
-    "dna_traits": ["main_idea_detection", "author_intent", "evidence_vs_thesis", "compression_skill"],
+    "dna_traits": [
+      "main_idea_detection",
+      "author_intent",
+      "evidence_vs_thesis",
+      "compression_skill"
+    ],
     "mission": "find_the_thesis",
     "learning_objective": "find the claim after a generous concession, and keep the concession in the summary rather than choosing between them",
-    "reasoning_patterns": ["struct.pivot", "sum.central_vs_supporting", "sum.stance_kept", "arg.concession", "sum.no_addition"],
+    "reasoning_patterns": [
+      "struct.pivot",
+      "sum.central_vs_supporting",
+      "sum.stance_kept",
+      "arg.concession",
+      "sum.no_addition"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option that credits term limits with breaking up entrenched careers. The paragraph says that plainly and then says 'All of that happens, and it is worth something', which is the signature of a concession rather than a conclusion; the 'But' in the next sentence carries the claim. The option urging resistance to term limits turns a relocation argument into opposition, which the granted benefits will not support. The option about worse government makes a comparative judgement the paragraph never attempts, since nothing here compares outcomes between the two arrangements.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",

@@ -27,7 +27,10 @@
       "certainty": "hedged",
       "stance": "neutral"
     },
-    "turn": { "present": false, "marker": null },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
     "difficulty_dials": {
       "abstraction": 2,
       "syntax": 2,
@@ -38,16 +41,35 @@
       "qualifier_density": 2,
       "domain_load": 1
     },
-    "load_bearing": ["tend to", "a tendency and not a law", "plenty of crossings"],
+    "load_bearing": [
+      "tend to",
+      "a tendency and not a law",
+      "plenty of crossings"
+    ],
     "separating_element": null,
-    "dna_traits": ["certainty_reading", "main_idea_detection", "evidence_vs_thesis"],
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "evidence_vs_thesis"
+    ],
     "mission": "notice_certainty",
     "learning_objective": "notice the difference between a pattern that often holds and a rule that always does, and keep the author's version",
-    "reasoning_patterns": ["sum.certainty_kept", "struct.specific_to_general", "arg.causal_claim", "sum.central_vs_supporting", "lang.often_vs_always"],
+    "reasoning_patterns": [
+      "sum.certainty_kept",
+      "struct.specific_to_general",
+      "arg.causal_claim",
+      "sum.central_vs_supporting",
+      "lang.often_vs_always"
+    ],
     "quality": {
-      "status": "reviewed",
+      "status": "verified",
       "adversarial_review": "The live rival is the option promising that a town will always appear at such a crossing. It captures the mechanism correctly and fails on the last clause of the paragraph, which says the rule is a tendency and not a law and that plenty of crossings never became anything at all. The option reporting where market towns stand is the observation with no explanation attached, and the option about towns whose original advantage has vanished extends the point about markets outlasting crossings into a claim about present-day places that the paragraph does not make.",
-      "blind_solve": null
+      "blind_solve": {
+        "solver": "blind reviewer (fresh session, no key)",
+        "agreed": 1,
+        "total": 1,
+        "notes": "full agreement"
+      }
     },
     "source": {
       "publication": "original",
