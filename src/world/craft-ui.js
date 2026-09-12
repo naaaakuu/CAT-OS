@@ -7,7 +7,7 @@
  */
 
 import { CRAFTS, bagEntries, craft } from './economy.js';
-import { craftIcon } from './icons.js';
+import { craftIcon, placeIcon, workArt } from './icons.js';
 
 /** One craft chip: the pigment dot and a number. */
 export function chip(key, amount, { sign = '', className = '' } = {}) {
@@ -97,6 +97,12 @@ const IS = {
  * @param {object} state the derived world state (for the purse and the
  *        next work this craft is needed for); optional
  */
+/** The place slug inside a route like '#/world/place/meadow'. */
+function slugOf(href) {
+  const m = /place\/([a-z-]+)/.exec(String(href ?? ''));
+  return m ? m[1] : 'hearth';
+}
+
 export function openCraftSheet(key, state) {
   const c = craft(key);
   if (!c) return;
@@ -104,9 +110,14 @@ export function openCraftSheet(key, state) {
   const have = state?.purse?.[key] ?? 0;
   // The nearest work this craft is actually needed for — the honest answer
   // to "what is this for?", not a catalogue.
-  const next = (state?.works ?? [])
+  // The nearest three works this craft is actually needed for, with the
+  // picture of each: a learner asking "what is Ink for?" wants to see the
+  // lantern path, not to read the words "the lantern path".
+  const pays = (state?.works ?? [])
     .filter((w) => !w.built && (w.cost?.[key] ?? 0) > 0)
-    .sort((a, b) => (a.stage - b.stage) || ((a.cost[key] ?? 0) - (b.cost[key] ?? 0)))[0] ?? null;
+    .sort((a, b) => (a.stage - b.stage) || ((a.cost[key] ?? 0) - (b.cost[key] ?? 0)))
+    .slice(0, 3);
+  const next = pays[0] ?? null;
 
   const el = document.createElement('div');
   el.className = 'craftsheet';
@@ -115,7 +126,7 @@ export function openCraftSheet(key, state) {
     <section class="craftsheet__card craft-of--${key}" role="dialog" aria-label="${c.name}">
       <button class="craftsheet__close" data-close aria-label="Close">×</button>
       <header class="craftsheet__head">
-        <span class="craftsheet__gem craft--${key}" aria-hidden="true"><i></i></span>
+        <span class="craftsheet__gem">${craftIcon(key, { size: 44 })}</span>
         <div>
           <h2 class="craftsheet__name">${c.name}</h2>
           <p class="craftsheet__is">${c.name} is ${IS[key]}.</p>
@@ -125,15 +136,18 @@ export function openCraftSheet(key, state) {
       <p class="craftsheet__line">${c.line}</p>
       <p class="craftsheet__label">Earn it by</p>
       <ul class="craftsheet__where">
-        ${(EARNED_AT[key] ?? []).map((p) => `<li><a href="${p.href}"><b>${p.name}</b><span>${p.what}</span><i aria-hidden="true">→</i></a></li>`).join('')}
+        ${(EARNED_AT[key] ?? []).map((p) => `<li><a href="${p.href}">${placeIcon(slugOf(p.href), { size: 22 })}<span class="craftsheet__wh"><b>${p.name}</b><span>${p.what}</span></span><i aria-hidden="true">→</i></a></li>`).join('')}
       </ul>
       ${next ? `
         <p class="craftsheet__label">It pays for</p>
-        <a class="craftsheet__work" href="#/world/place/hearth?works=1">
-          <b>${next.name}</b>
-          <span>${next.cost[key]} ${c.name}${Object.keys(next.cost).filter((k) => k !== key && next.cost[k] > 0).length ? ', and more' : ''}</span>
-          <i aria-hidden="true">→</i>
-        </a>` : ''}
+        <div class="craftsheet__pays">
+          ${pays.map((w) => `
+            <a class="paycard" href="#/world/place/hearth?works=1">
+              <span class="paycard__plate">${workArt(w, 52)}</span>
+              <b>${w.name}</b>
+              <span>${w.cost[key]} ${c.name}${Object.keys(w.cost).filter((k) => k !== key && w.cost[k] > 0).length ? ' +' : ''}</span>
+            </a>`).join('')}
+        </div>` : ''}
     </section>`;
   document.body.appendChild(el);
   requestAnimationFrame(() => el.classList.add('is-in'));

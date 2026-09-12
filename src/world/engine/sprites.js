@@ -1489,6 +1489,19 @@ function mark({ kind = 'tree' }) {
       p.rect(7, 10, 2, 3, O);
       break;
     }
+    case 'gear': {
+      const m = ramp('#8C8577');
+      // Eight teeth on a ring, with a dark hub: the shape survives at 14px
+      // where a thin-stroke cog does not.
+      p.disc(8, 8, 6, m.base);
+      p.disc(6, 6, 4, m.light);
+      for (const [dx, dy] of [[0, -8], [0, 7], [-8, 0], [7, 0], [-6, -6], [5, -6], [-6, 5], [5, 5]]) {
+        p.rect(8 + dx - (dx === 0 ? 1 : 0), 8 + dy - (dy === 0 ? 1 : 0), dx === 0 ? 3 : 2, dy === 0 ? 3 : 2, m.shade);
+      }
+      p.disc(8, 8, 2, PIGMENT.outline);
+      p.px(6, 6, '#FFFFFF');
+      break;
+    }
     case 'clock': {
       p.disc(8, 8, 6, '#EFE3C8'); p.disc(8, 8, 5, '#FFFFFF');
       p.vline(8, 4, 8, O); p.hline(8, 11, 8, O);

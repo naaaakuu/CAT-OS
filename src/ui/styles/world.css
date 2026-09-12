@@ -1021,10 +1021,12 @@
 }
 .gmenu__row:active { background: var(--g-paper-3); }
 .gmenu__glyph {
-  width: 34px; height: 34px; border-radius: 10px;
-  display: grid; place-items: center; font-size: 16px;
-  background: var(--g-paper-3);
+  width: 36px; height: 36px; border-radius: 11px;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 32% 26%, #FFFCF3, #EFE1C4 76%);
+  box-shadow: inset 0 0 0 1px rgba(60, 46, 24, 0.14);
 }
+.gmenu__glyph .ico { width: 24px; height: 24px; image-rendering: pixelated; display: block; }
 .gmenu__row b { display: block; font-size: 15px; font-weight: 700; }
 .gmenu__row small { display: block; font-size: 12px; color: var(--g-ink-3); margin-top: 1px; }
 .gmenu__go { color: var(--g-ink-3); font-size: 16px; }
@@ -1056,11 +1058,7 @@
 }
 .craftsheet__head { display: grid; grid-template-columns: 46px 1fr auto; align-items: center; gap: 12px; }
 .craftsheet__gem { width: 46px; height: 46px; display: grid; place-items: center; }
-.craftsheet__gem i {
-  width: 26px; height: 26px; border-radius: 8px; transform: rotate(45deg);
-  background: linear-gradient(135deg, var(--gem-2), var(--gem));
-  box-shadow: 0 0 18px var(--gem-2), inset 0 1px 0 rgba(255,255,255,0.5);
-}
+.craftsheet__gem .ico { width: 44px; height: 44px; image-rendering: pixelated; display: block; }
 .craftsheet__name { margin: 0; font-family: var(--font-display, inherit); font-size: 26px; line-height: 1; color: var(--g-ink); }
 .craftsheet__is { margin: 3px 0 0; font-size: 14px; color: var(--g-ink-2); }
 .craftsheet__have { text-align: right; }
@@ -1072,16 +1070,35 @@
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--g-ink-3);
 }
 .craftsheet__where { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
-.craftsheet__where a, .craftsheet__work {
-  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px;
-  padding: 10px 10px; border-radius: 11px;
+.craftsheet__where a {
+  display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: 11px;
   background: var(--g-paper); text-decoration: none; color: var(--g-ink);
 }
-.craftsheet__where a:active, .craftsheet__work:active { background: var(--g-paper-3); }
-.craftsheet__where b, .craftsheet__work b { font-size: 14px; font-weight: 700; }
-.craftsheet__where span, .craftsheet__work span { display: block; font-size: 12px; color: var(--g-ink-3); grid-column: 1; }
-.craftsheet__where i, .craftsheet__work i { grid-row: 1 / 3; color: var(--g-ink-3); font-style: normal; }
-.craftsheet__work { background: var(--g-paper-3); }
+.craftsheet__where a:active { background: var(--g-paper-3); }
+.craftsheet__where .ico { width: 22px; height: 22px; image-rendering: pixelated; display: block; margin: 0 auto; }
+.craftsheet__wh { display: block; min-width: 0; }
+.craftsheet__where b { display: block; font-size: 14px; font-weight: 700; }
+.craftsheet__where .craftsheet__wh > span { display: block; font-size: 12px; color: var(--g-ink-3); }
+.craftsheet__where i { color: var(--g-ink-3); font-style: normal; }
+
+/* What it pays for, with the picture of the thing. */
+.craftsheet__pays { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.paycard {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 6px 10px; border-radius: 13px; text-align: center;
+  background: var(--g-paper); text-decoration: none; color: var(--g-ink);
+}
+.paycard:active { background: var(--g-paper-3); }
+.paycard__plate {
+  width: 100%; height: 54px; border-radius: 10px; overflow: hidden;
+  display: grid; place-items: end center; padding-bottom: 3px;
+  background: linear-gradient(#EFE7D5 0%, #E3DCC6 62%, #CFD9B4 62%, #C4D0A6 100%);
+  box-shadow: inset 0 0 0 1px rgba(60, 46, 24, 0.1);
+}
+.paycard__plate .ico--art { image-rendering: pixelated; display: block; max-height: 50px; width: auto; }
+.paycard b { font-size: 11.5px; font-weight: 700; line-height: 1.15; }
+.paycard > span { font-size: 10.5px; color: var(--g-ink-3); font-variant-numeric: tabular-nums; }
 .craft-of--amber { --gem: var(--c-amber); --gem-2: var(--c-amber-2); }
 .craft-of--ink { --gem: var(--c-ink); --gem-2: var(--c-ink-2); }
 .craft-of--thread { --gem: var(--c-thread); --gem-2: var(--c-thread-2); }
@@ -1155,12 +1172,26 @@
 .ability--amber { --tone: var(--c-amber); --tone-2: var(--c-amber-2); }
 .ability--thread { --tone: var(--c-thread); --tone-2: var(--c-thread-2); }
 .ability--ember { --tone: var(--c-ember); --tone-2: var(--c-ember-2); }
-.ability__tree {
-  width: 64px; height: 84px;
-  image-rendering: pixelated;
-  align-self: end;
-  margin-bottom: -4px;
+/* Ground to stand on: a seedling floating in white space reads as a
+   missing image, and the whole point of the tree is that you can see how
+   far it has to go. */
+.ability__plate {
+  width: 75px; height: 93px; flex: none;
+  border-radius: 13px; overflow: hidden;
+  display: grid; place-items: end center;
+  background: linear-gradient(#EFE7D5 0%, #E5DECA 66%, #CFD9B4 66%, #C2CFA2 100%);
+  box-shadow: inset 0 0 0 1px rgba(60, 46, 24, 0.1);
 }
+.ability__tree { width: 75px; height: 93px; image-rendering: pixelated; display: block; }
+.ability__what { display: flex; align-items: center; gap: 6px; }
+.ability__what .ico { image-rendering: pixelated; }
+.ability__pips { display: flex; align-items: center; gap: 4px; margin: 6px 0 0; }
+.ability__pips i {
+  width: 9px; height: 4px; border-radius: 2px; flex: none;
+  background: rgba(60, 46, 24, 0.16);
+}
+.ability__pips i.is-on { background: var(--tone, var(--g-accent)); }
+.ability__pips small { margin-left: 6px; font-size: 10.5px; font-weight: 700; color: var(--g-ink-3); }
 .ability__body { min-width: 0; }
 .ability__what {
   margin: 0; font-size: 11px; font-weight: 800;

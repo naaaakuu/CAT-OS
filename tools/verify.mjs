@@ -2064,6 +2064,7 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
   const companion = await mod('src/world/companion.js');
   const regions = await mod('src/world/regions.js');
   const sprites = await mod('src/world/engine/sprites.js');
+  const growth = await mod('src/world/growth.js');
 
   /* ---- Wick's voice ---- */
   {
@@ -2073,6 +2074,8 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
       companion.NAMING.ask, companion.NAMING.after('Alder Hollow'),
       companion.FIRST_TASK.offer, companion.FIRST_TASK.during, companion.FIRST_TASK.after,
       ...companion.DAWN,
+      // Every line he says when the valley becomes something else.
+      ...growth.VALLEY_STAGES.map((st) => companion.stageLine(st.name)).filter(Boolean),
     ];
     // The one character who speaks must never sound like a study app.
     const banned = /\b(study|revise|practice makes|well done|great job|awesome|congratulations|score|XP|streak|level up|unlocked)\b/i;
@@ -2083,6 +2086,10 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
       else if ((l.match(/!/g) ?? []).length) bad(`companion: Wick does not exclaim — "${l}"`);
     }
     if (companion.OPENING.length < 4) bad('companion: the opening is too short to introduce a world');
+    // A valley that changes in silence is a number going up.
+    for (const st of growth.VALLEY_STAGES.slice(1)) {
+      if (!companion.stageLine(st.name)) bad(`companion: the valley becomes "${st.name}" and nobody says anything`);
+    }
     if (companion.WICK.name !== 'Wick') bad('companion: the companion has been renamed without the docs');
 
     /* Homecoming answers the state it is given, never nothing. */

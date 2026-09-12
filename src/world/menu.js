@@ -15,14 +15,18 @@
 import { play } from './audio.js';
 import { escapeHTML } from '../core/utils/format.js';
 import { loadValley, valleyName } from './companion.js';
+import { icon } from './icons.js';
 
 const ICON = {
   menu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>`,
   close: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>`,
 };
 
+/* Pixel marks, drawn by the same hand as the valley (world/icons.js).
+   A typographic dingbat in a hand-painted world is a web page showing
+   through. */
 const GLYPH = {
-  growth: '❧', journey: '✦', collections: '❦', records: '★', settings: '⚙', sound: '♪', backup: '⤓',
+  growth: 'sprout', journey: 'workshop', collections: 'book', records: 'star', settings: 'gear',
 };
 
 /** What the menu offers, in the order it offers it. Every row goes
@@ -80,7 +84,7 @@ export function mountMenu(host, ctx) {
         <ul class="gmenu__list">
           ${ITEMS.map((i) => `
             <li><a class="gmenu__row" href="${i.href}">
-              <span class="gmenu__glyph" aria-hidden="true">${GLYPH[i.glyph]}</span>
+              <span class="gmenu__glyph" aria-hidden="true">${icon(GLYPH[i.glyph] ?? 'star', { size: 24 })}</span>
               <span><b>${escapeHTML(i.label)}</b><small>${escapeHTML(i.line)}</small></span>
               <span class="gmenu__go" aria-hidden="true">→</span>
             </a></li>`).join('')}

@@ -24,7 +24,7 @@ import { loadWorld } from '../state.js';
 import { EARN, CRAFTS, addBag } from '../economy.js';
 import { purseHTML, chips as craftChips, wireCraftTaps } from '../craft-ui.js';
 import { mountMenu } from '../menu.js';
-import { loadValley, valleyName, homecoming } from '../companion.js';
+import { loadValley, valleyName, homecoming, stageLine } from '../companion.js';
 import { placeIcon } from '../icons.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled, setMusicEnabled } from '../audio.js';
@@ -227,7 +227,7 @@ export async function renderWorld(outlet, { storage }) {
     hud.innerHTML = `
       <a class="hud__card" href="#/world/place/hearth" aria-label="${escapeHTML(placeName)}: your standing and your works">
         <span class="hud__avatar" aria-hidden="true">${escapeHTML(placeName[0])}</span>
-        <span><span class="hud__title">${escapeHTML(placeName)}</span><span class="hud__sub">★ ${state.stars}${state.builds.length ? ` · ${state.builds.length} built` : ''}${state.hearth.streak.current ? ` · ${state.hearth.streak.current}-day run` : ''}</span></span>
+        <span><span class="hud__title">${escapeHTML(placeName)}</span><span class="hud__sub">★ ${state.stars} · ${escapeHTML(state.stage?.name ?? 'Bare ground')}${state.hearth.streak.current ? ` · ${state.hearth.streak.current}-day run` : ''}</span></span>
       </a>
       <div class="hud__stack">
         <a class="purse" href="#/world/place/hearth?works=1" id="purse" aria-label="Your crafts">${purseHTML(state.purse)}</a>
@@ -367,8 +367,20 @@ export async function renderWorld(outlet, { storage }) {
     } catch { /* the numbers are already right */ }
   }
 
+  /* ---- A valley that has become something else. Said once, the first
+          time the learner comes home to it. ---- */
+  let stageSaid = null;
+  try {
+    const key = 'world:stage-seen';
+    const seen = localStorage.getItem(key);
+    const now = state.stage?.name ?? null;
+    if (now && seen && seen !== now) stageSaid = stageLine(now);
+    if (now && seen !== now) localStorage.setItem(key, now);
+  } catch { /* private mode: the line is a nicety, not a feature */ }
+
   /* ---- Coming home: Wick says the one useful thing ---- */
   if (wickRaw) setTimeout(() => wickSays(wickRaw), reduce ? 400 : 2000);
+  else if (stageSaid) setTimeout(() => wickSays(stageSaid), reduce ? 500 : 2400);
   else if (!focus) {
     const line = homecoming(state, { awayDays: state.awayDays, name: placeName });
     if (line) setTimeout(() => wickSays(line), reduce ? 300 : 1700);

@@ -52,6 +52,12 @@ const TIERS = [
   { stage: 'ancient', name: 'Deep', at: 0.8 },
 ];
 
+/** What this ability becomes next, so the ladder shows somewhere to go. */
+function nextTierName(tier) {
+  const i = TIERS.findIndex((t) => t.stage === tier.stage);
+  return i >= 0 && i < TIERS.length - 1 ? `Next: ${TIERS[i + 1].name}` : 'Deep';
+}
+
 function tierFor(p) {
   let t = TIERS[0];
   for (const x of TIERS) if (p >= x.at) t = x;
@@ -119,11 +125,16 @@ export async function renderGrowth(outlet, { storage }) {
     <div class="reach">
       ${abilities.map((a) => `
         <article class="ability ability--${a.craft}" data-key="${a.key}">
-          <canvas class="ability__tree" width="128" height="168" aria-hidden="true" data-stage="${a.tier.stage}"></canvas>
+          <span class="ability__plate">
+            <canvas class="ability__tree" width="150" height="186" aria-hidden="true" data-stage="${a.tier.stage}"></canvas>
+          </span>
           <div class="ability__body">
-            <p class="ability__what">${escapeHTML(a.name)}</p>
+            <p class="ability__what">${craftIcon(a.craft, { size: 14 })}${escapeHTML(a.name)}</p>
             <p class="ability__tier">${escapeHTML(a.tier.name)}</p>
             <p class="ability__line">${a.line}</p>
+            <p class="ability__pips" aria-label="Stage ${TIERS.findIndex((t) => t.stage === a.tier.stage) + 1} of ${TIERS.length}">${
+              TIERS.map((t, i) => `<i class="${i <= TIERS.findIndex((x) => x.stage === a.tier.stage) ? 'is-on' : ''}"></i>`).join('')
+            }<small>${escapeHTML(nextTierName(a.tier))}</small></p>
           </div>
           <div class="ability__stars" aria-label="${a.stars} of 3">${'★'.repeat(a.stars)}${'☆'.repeat(3 - a.stars)}</div>
           <div class="ability__bar" aria-hidden="true"><i style="width:${Math.round(a.p * 100)}%"></i></div>
@@ -155,7 +166,13 @@ export async function renderGrowth(outlet, { storage }) {
       <div id="numbers"></div>
     </details>`;
 
-  for (const cv of body.querySelectorAll('.ability__tree')) paintTree(cv, cv.dataset.stage, 3);
+  for (const cv of body.querySelectorAll('.ability__tree')) paintTree(cv, cv.dataset.stage, 4);
+  // The bars fill from nothing on arrival: progress that moves is read as
+  // progress; progress already at its mark is read as a printed figure.
+  for (const bar of body.querySelectorAll('.ability__bar i')) {
+    const w = bar.style.width; bar.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = w; }));
+  }
 
   /* ---- All the collections, on request. There are a hundred and more of
           them; six is the screen, the rest is the shelf behind it. ---- */

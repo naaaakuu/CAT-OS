@@ -130,6 +130,22 @@ export function homecoming(state, { awayDays = 0, name = 'the valley' } = {}) {
   return 'Quiet day. Good weather for it.';
 }
 
+/**
+ * What Wick says the first time the valley reaches a new stage. He does
+ * not congratulate and he does not explain — he notices, the way someone
+ * who lives somewhere notices it changing.
+ */
+const STAGE_LINES = Object.freeze({
+  'A clearing': 'There are tracks between the places now. Somebody walks them.',
+  'A settlement': 'Someone put a roof up by the river. Word gets round.',
+  'A hamlet': 'Two chimneys going this morning. Used to be one.',
+  'A village': 'The Quarter was still lit when I came past. That is new.',
+  'A town': 'People come here to read now. I have stopped counting them.',
+  'A valley known for its readers': 'Somebody on the road asked me the way here. By name.',
+});
+
+export function stageLine(stageName) { return STAGE_LINES[stageName] ?? null; }
+
 /** A line for a place the learner is standing in, said once on arrival. */
 export function atPlace(slug, state) {
   switch (slug) {
