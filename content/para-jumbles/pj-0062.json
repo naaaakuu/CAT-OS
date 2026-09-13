@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0062",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "law",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Claim the Court Will Not Hear",
+    "theme": "what justifies a rule of limitation that turns away claims no court has examined, and why the clock runs from when a claimant could have sued",
+    "estimated_time_sec": 155,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "question_answer",
+    "cohesion_signals": ["article_given_new", "connective_explicit", "demonstrative", "stance_continuity"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["anchor_pair", "false_pronoun_binding"],
+    "dna_traits": ["opener_heuristic", "inference_implicit", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "let a comparative such as the better answer place a sentence after the answer it improves on",
+    "reasoning_patterns": ["disc.question_then_answer", "disc.concession", "disc.demonstrative", "disc.competing_opener", "struct.question_answer"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence about witnesses dying and documents being lost. It begins on a bare general statement with no backward reference, it is the explanation every reader has heard, and a paragraph about limitation could perfectly well start there. It is refused by what follows in the same sentence: 'the usual answer' needs a question already asked, and 'it is incomplete' can only be said of an answer to something. A second rival puts the question next to the answer that matters and treats the familiar explanation as an aside; 'the better answer' is then a comparative with nothing to be better than. A third binds 'bears that out' to the opening description of the rule rather than to the claim about triability, which makes the detail about the clock evidence for a proposition it does not support.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General jurisprudence of limitation periods; no specific statute, jurisdiction, case or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-plus question-and-answer item in which the decoy opener is the answer everybody already knows. Its head is a bare general statement and its tie is in the relative clause that follows. The inferential connective sits in the third seat and the paragraph closes on the design of the rule rather than on a verdict about it."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Witnesses die and documents are lost, which is the usual answer and a sound one as far as it goes, but it is incomplete, since it would licence a judge to admit an old claim whenever the evidence happened to have survived.",
+      "role": "concession"
+    },
+    {
+      "label": "B",
+      "text": "The better answer is that a defendant's capacity to answer is part of what makes a claim triable at all, and the period therefore measures what a court may fairly ask of him rather than the age of the wrong.",
+      "role": "answer"
+    },
+    {
+      "label": "C",
+      "text": "The shape of the rule bears that out: the clock runs from the day the claimant could first have sued rather than from the day the wrong was done, and it stops for a claimant who could not have known that he had been wronged, which is a calendar built around what can fairly be asked rather than around what can still be proved.",
+      "role": "evidence"
+    },
+    {
+      "label": "D",
+      "text": "A limitation period turns away claims no court has examined, some of which would have succeeded, and the question is what could possibly justify a rule of that kind.",
+      "role": "question"
+    }
+  ],
+  "correct_order": ["D", "A", "B", "C"],
+  "links": [
+    {
+      "from": "D",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'The usual answer' names a reply, and a reply needs a question. The only question in the set asks what could justify a rule that turns away claims nobody has examined."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "parallel_structure",
+      "reliability": "high",
+      "explanation": "'The better answer' is a comparative: it needs a first answer to improve on, and the first answer is the one about witnesses dying and documents being lost, which the same sentence calls incomplete."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Bears that out' points at a proposition, and the sentence names which one at its end: a calendar built around what can fairly be asked. That phrase belongs to the answer about triability, and to no other sentence in the set."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A question, the answer everybody gives, the objection that shows it is not enough, and a better answer confirmed by the way the rule is actually built. The paragraph does not reject the familiar explanation; it keeps it and shows what it fails to account for, which is why the two answers have to arrive in that order and cannot be exchanged.",
+    "movement": [
+      { "label": "D", "why_here": "It sets the puzzle, and it is the only sentence that describes the rule rather than reasoning about it. Everything after this is either an answer or a test of one." },
+      { "label": "A", "why_here": "The familiar answer, conceded and then limited. Its objection — that the answer would let an old claim in whenever the papers survived — is what creates the demand for something better." },
+      { "label": "B", "why_here": "The better answer, and the nucleus. 'Better' fixes it after the answer it improves on, and its 'therefore' draws the paragraph's inference in the third seat rather than the last." },
+      { "label": "C", "why_here": "The confirmation, and the close. 'That' is the claim about what a court may fairly ask, which the sentence then names in its own last clause, and the two features described — when the clock starts, when it stops — are exactly what that claim predicts. The paragraph ends on the design of the rule rather than on approval of it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ADBC",
+        "trap_type": "competing_opener",
+        "why_tempting": "'Witnesses die and documents are lost' is a flat general statement with nothing pointing backwards at its head, and it is the explanation every reader has met. A paragraph on limitation that began there and then complicated itself would be entirely conventional.",
+        "where_it_breaks": "The sentence calls itself 'the usual answer' and then says 'it is incomplete'. Both phrases require a question to have been asked: an answer is an answer to something, and incompleteness is measured against what was wanted. The question about what could justify the rule is in the sentence this order puts second."
+      },
+      {
+        "order": "DBAC",
+        "trap_type": "anchor_pair",
+        "why_tempting": "The question and the answer the writer endorses look like the paragraph's spine, and the sentence about witnesses and documents reads like an aside that could be dropped in anywhere. Solvers who identify a question-and-answer shape often join those two first.",
+        "where_it_breaks": "'The better answer' is a comparative with nothing behind it to be better than. The paragraph would also concede and demolish the familiar explanation after it had already been replaced, so the objection about evidence that happened to survive would be arguing against a position nobody still held."
+      },
+      {
+        "order": "DCAB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'The shape of the rule bears that out' can be bound to the opening description — a rule that turns away claims nobody has examined — which makes the sentence read as elaboration of the puzzle, and the two answers then follow in an order that still sounds like an argument.",
+        "where_it_breaks": "What the clock rules actually bear out is that the period is about what a defendant can fairly be asked, and that proposition appears only in the sentence about triability. Bound to the opening description, the demonstrative would be claiming that a start date proves the rule turns away good claims, which is not something a start date could show."
+      }
+    ],
+    "trap_named": "The trap is the familiar answer placed first. Readers expect a paragraph to open on what is commonly said and then improve on it, and this sentence begins with a bare general statement that supports the expectation. Against it stand two ordinary words: an answer and an incompleteness both presuppose a question. The defence is to treat words such as answer, reply, objection, remedy and solution as reference terms, exactly like pronouns, since each of them names a relation to something said earlier.",
+    "solving_habit": "Ask of every candidate opener whether it is a move in a conversation. Answers, objections and concessions all point at something already said, and none of them can be the first thing on the page."
+  },
+  "mentor": {
+    "challenge": "The most familiar sentence here would make a good opening, and it names itself as a reply. Find what it is replying to.",
+    "paragraph_plain": "A limitation period turns away claims that no court has looked at, some of which would have won, and the question is what could possibly justify a rule like that. Witnesses die and documents go missing, which is the usual answer and a decent one as far as it goes, but it is incomplete, because it would allow a judge to let an old claim through whenever the evidence happened to have survived. The better answer is that a defendant's ability to answer is part of what makes a claim triable at all, so the period measures what a court may fairly ask of him rather than the age of the wrong. The shape of the rule supports that: the clock starts on the day the claimant could first have sued rather than the day the wrong was done, and it stops for a claimant who could not have known he had been wronged — a calendar built around what can fairly be asked rather than around what can still be proved.",
+    "takeaway": "An answer, an objection and a remedy are all reference words. Each one needs something earlier to point at."
+  }
+}

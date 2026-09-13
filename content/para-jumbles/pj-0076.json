@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0076",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "The Part He Cannot Arrange",
+    "theme": "why an apology has to be capable of being refused, and what an apology delivered before witnesses takes away from the person it names",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["pronoun_ref", "article_given_new", "connective_explicit", "stance_continuity"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["generic_the", "anchor_pair"],
+    "dna_traits": ["surface_matching", "opener_heuristic", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 3,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "resolve a bare pronoun by what the sentence says is being done to the person, not by the nearest available noun",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.claim_then_evidence", "disc.given_new", "disc.cause_effect", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival puts the sentence beginning 'He is told' into the second seat, because the opening sentence supplies a person addressed for the pronoun to bind to and because the public apology is the vivid case a reader wants early. The clause that refuses it is 'exactly the thing he had been left to withhold', which needs the account of what an apology transfers and who alone can hand it back, and that account is in the sentence this order jumps over. A second rival opens on that account, which begins 'Nothing is transferred' and reads like a thesis; it is refused by 'the other party' and 'the offender', two definite phrases with nobody behind them. A third welds the two general sentences about refusal, which leaves 'that audience' with no audience anywhere in front of it for the demonstrative to collect.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General moral philosophy of apology and forgiveness; no specific incident, person or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An advanced argumentative item with three people in play — the offender, the wronged party and the audience — and a bare pronoun that can be bound to the wrong one. The block is not the pronoun but the clause beside it. The inference marker sits in the third seat and the paragraph closes on what the audience does rather than on a rule."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "He is told, in front of an audience, that the matter is closed, and the closing was not his to do but exactly the thing he had been left to withhold, which is why the public apology is so often resented by the person it names.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "An apology that cannot be refused is not an apology but an announcement, and the difference is visible in what the person addressed is left able to do.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "An offender who wants to be forgiven has to make himself refusable, and that audience, gathered to prove his sincerity, is exactly what takes the refusal away.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "Nothing is transferred unless the other party can decline, because what is offered is a standing the offender gave away and only the wronged party can hand back.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The other party' and 'the offender' are both definite, and the pair they belong to is introduced in the opening sentence, which sets an apology against the person addressed."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'He' is the wronged party, and the clause that identifies him is 'exactly the thing he had been left to withhold', which needs the account of a standing only the wronged party can hand back."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'That audience' is a demonstrative with exactly one possible referent, the audience in front of which the matter was declared closed. It cannot point at an audience the paragraph introduces after it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim, the account that makes the claim more than a definition, the case in which the account bites, and the conclusion about what an offender can and cannot do for himself. Three people are in play throughout — the one who apologises, the one wronged, and the witnesses — and every join in the paragraph turns on keeping them apart.",
+    "movement": [
+      { "label": "B", "why_here": "It states the distinction and names the two parties an apology involves. Nothing in it refers backwards, and the definite phrases in the next sentence are collected from it." },
+      { "label": "D", "why_here": "The account, and the nucleus. It says what an apology actually hands over and why only one person can hand it back, which is what makes refusal constitutive rather than optional." },
+      { "label": "A", "why_here": "The case. 'He' is the wronged party, identified by the clause about what he had been left to withhold, and the sentence shows the account biting: the closing was performed by somebody who had no standing to perform it. Its 'which is why' does the paragraph's inferential work in the third seat." },
+      { "label": "C", "why_here": "The conclusion, and the close. It gathers the argument into a paradox about the offender's position, and 'that audience' points back at the one already assembled, so it can stand nowhere earlier." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BADC",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'He is told, in front of witnesses' finds a candidate immediately: the opening sentence has just named the person addressed. The public apology is also the concrete case in the set, and solvers like to reach the case early, treating the account of what an apology transfers as theory that can follow.",
+        "where_it_breaks": "The same sentence says the closing was 'exactly the thing he had been left to withhold'. Nothing has been left to anybody: the account of a standing that the offender gave away and only the wronged party can hand back is in the sentence this order pushes behind it. The pronoun binds, and the clause beside it does not."
+      },
+      {
+        "order": "DBAC",
+        "trap_type": "generic_the",
+        "why_tempting": "'The other party' and 'the offender' are the standing definites of moral argument, the way a lawyer says the plaintiff, so they read as roles rather than as references to anybody the paragraph has named. The sentence then looks like a general principle with no pronoun at its head, stating the mechanism the rest illustrates.",
+        "where_it_breaks": "It contains 'the other party' and 'the offender', both definite and both unintroduced in the first seat. Other than what? An apology and a person addressed have to be on the page before either phrase means anything, and they are supplied by the sentence this order puts second."
+      },
+      {
+        "order": "BCDA",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences state the paragraph's rule in general terms, one defining an apology by refusability and one telling an offender to make himself refusable, and they answer each other so directly that a solver will put them together and treat the rest as commentary.",
+        "where_it_breaks": "The second of the pair says 'that audience', and no audience has been mentioned for the demonstrative to collect. The audience appears only in the sentence about a matter being declared closed, which this order moves to the end, where it would be explaining a resentment the paragraph had already accounted for."
+      }
+    ],
+    "trap_named": "The trap is a bare pronoun in a paragraph with three people in it. 'He' will bind to whichever man a reader has most recently pictured, and the opening sentence offers one. What decides the reference is not the pronoun but the predicate: this man is being told that a matter is closed and is described as having been left something to withhold, which can only be the wronged party after the account of what an apology transfers. Read what is being done to the person, and the pronoun follows.",
+    "solving_habit": "In any paragraph with more than two people, resolve a pronoun by the action attached to it rather than by proximity. Ask who could be doing or suffering this, and only then look for the noun."
+  },
+  "mentor": {
+    "challenge": "Three people appear in this paragraph and one sentence starts with 'He'. Proximity will give you the wrong one.",
+    "paragraph_plain": "An apology that cannot be refused is not an apology but an announcement, and the difference shows in what the person addressed is left able to do. Nothing is actually transferred unless the other party can decline, because what is being offered is a standing the offender gave away and only the wronged party can hand back. He is told, in front of an audience, that the matter is closed, and the closing was not his to do but precisely the thing he had been left to withhold, which is why a public apology is so often resented by the person it names. An offender who wants to be forgiven has to make himself refusable, and that audience, gathered to demonstrate his sincerity, is exactly what takes the refusal away.",
+    "takeaway": "Resolve a pronoun by what is happening to the person, not by which noun is nearest."
+  }
+}

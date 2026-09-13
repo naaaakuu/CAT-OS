@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0059",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "education",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "Marked Without Names",
+    "theme": "how an examination introduced to make a candidate's connections invisible created a new thing that had to be bought",
+    "estimated_time_sec": 125,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["temporal_sequence", "demonstrative", "article_given_new", "lexical_repetition"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["generic_the", "anchor_pair"],
+    "dna_traits": ["ending_judgement", "surface_matching", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 3,
+      "competing_endings": 4,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "keep a chronology from closing one step early when the penultimate event is more quotable than the last",
+    "reasoning_patterns": ["disc.chronology", "disc.demonstrative", "disc.competing_ending", "disc.given_new", "struct.chronology"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival ends on the coaching trade, which has everything a closing sentence usually has: it is the ironic reversal, it names the households the reform was for, and it lands on a phrase that sounds like a moral. The sentence that actually closes is refused that treatment by its own vocabulary: it says what the reform made 'buyable', and nothing is bought anywhere in the set except by the fee in the trade sentence, so the trade has to stand in front of it. A second rival opens on that same trade sentence, whose 'the paper' and 'the letter' can be read as general definites; both are introduced elsewhere, and 'within two decades' would be counting from nothing. A third welds the two sentences about what stands in front of a household, which puts the coaching trade before the examination that created it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General history of competitive written examination and patronage; no specific country, service, reform or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A chronological item with a contested close. The penultimate event is the ironic one and reads like the end of the story; the true close is the sentence that names what the reform exchanged, and it is held in place by a single word about purchase. No connective appears in the final seat."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The offices had been filled by recommendation for as long as anybody could remember, and the letter that secured a place said a great deal about its writer and almost nothing about its subject.",
+      "role": "background"
+    },
+    {
+      "label": "B",
+      "text": "Within two decades a trade had grown up to prepare candidates for the paper, so a fee now stood where the letter had stood, in front of the same households.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "What the reform had made invisible was patronage, and what it made visible, and buyable, was preparation.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "A paper marked without names was introduced to remove exactly that, and for a while it did: the lists began to carry the sons of men nobody had heard of.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["A", "D", "B", "C"],
+  "links": [
+    {
+      "from": "A",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'To remove exactly that' points at a defect already described, and the defect is a letter that reports on its writer rather than on the candidate. Nothing else in the set is a thing that could be removed."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "temporal_marker",
+      "reliability": "high",
+      "explanation": "'Within two decades' counts from an event, and the event is the introduction of the anonymous paper. 'The paper' in the same sentence has to have been introduced too, and only one sentence introduces it."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The closing sentence says preparation became 'buyable'. The only purchase anywhere in the paragraph is the fee charged by the coaching trade, so the sentence describing the trade must stand in front of the sentence that names what was bought."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A chronology with a sting: an old practice, the reform aimed at it, the adaptation that followed the reform, and a sentence naming the exchange that has taken place. Three of the four sentences are events and one is an accounting of them, and the accounting has to come last because it prices what the third event introduced.",
+    "movement": [
+      { "label": "A", "why_here": "The starting state. It introduces both the offices and the letter, and it points at nothing behind it, which no other sentence here can claim." },
+      { "label": "D", "why_here": "The reform, defined by what it removes. 'Exactly that' is the letter's irrelevance to the candidate, and the result reported — unknown men's sons on the lists — is what makes the next development ironic rather than merely commercial." },
+      { "label": "B", "why_here": "The adaptation, dated from the reform by 'within two decades'. Its 'so' draws the inference in the third seat, and the image of a fee standing where a letter had stood is what the final sentence turns into an account." },
+      { "label": "C", "why_here": "The reckoning, and the close. It states what was exchanged for what, and its word 'buyable' depends on the fee described immediately before it. The paragraph ends on the terms of the trade rather than on a judgement of it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ADCB",
+        "trap_type": "competing_ending",
+        "why_tempting": "The sentence about the coaching trade is the ironic reversal the whole paragraph is built towards: it names a fee standing where a letter used to stand, and it ends on the households the reform was supposed to help. Solvers close on irony, and the accounting sentence looks like a piece of summary that could sit anywhere.",
+        "where_it_breaks": "The accounting sentence says the reform made preparation 'buyable'. In the third seat nothing has been bought: no fee, no trade, no price of any kind has appeared, because the sentence that supplies all three has been pushed behind it. A word about purchase needs a purchase in front of it."
+      },
+      {
+        "order": "BADC",
+        "trap_type": "generic_the",
+        "why_tempting": "'Within two decades a trade had grown up to prepare candidates for the paper' reads like a chronicle opening, and both 'the paper' and 'the letter' can be taken as the general definites of a writer describing a familiar system to readers who know it.",
+        "where_it_breaks": "'Within two decades' counts from something, and in the first seat there is nothing to count from. The paper is introduced two sentences later, and the letter one sentence later, so the definite articles are pointing forwards at their own antecedents."
+      },
+      {
+        "order": "ABDC",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences describe what stands between a household and an office — a letter in one, a fee in the other — and the parallel is exact enough that a solver will want them adjacent, treating the sentence about the anonymous paper as background to be fitted in afterwards.",
+        "where_it_breaks": "The trade exists to prepare candidates 'for the paper', and the paper has not been introduced. The chronology also reverses: a trade that grew up in response to an examination would be standing in front of the examination that produced it, and 'within two decades' would be dated from a state of affairs that had not changed."
+      }
+    ],
+    "trap_named": "The trap is the quotable penultimate event. A chronology of reform usually ends on the irony, and here the irony is one step from the end, with a plainer sentence behind it doing the accounting. The defence is not taste but reference: ask what each candidate closer needs. A sentence that calls something buyable needs a price, a sentence that says 'the other half' needs two halves, and a sentence that counts needs its list. Where a sentence needs something, it cannot stand in front of the sentence that supplies it, however well it would have ended the paragraph.",
+    "solving_habit": "When two sentences both sound like endings, ask which one uses a word the other supplies. Vocabulary of purchase, of counting and of comparison all point backwards, and whichever sentence points is the later one."
+  },
+  "mentor": {
+    "challenge": "Two sentences here could end the paragraph. One of them uses a word the other pays for.",
+    "paragraph_plain": "The offices had been filled by recommendation for as long as anyone could remember, and the letter that won a place told you a great deal about the man who wrote it and almost nothing about the man it was for. A paper marked without names was brought in to get rid of precisely that, and for a while it worked: the lists started to include the sons of men nobody had heard of. Within twenty years a trade had grown up coaching candidates for the paper, so a fee now stood where the letter had stood, in front of the very same households. What the reform had made invisible was patronage, and what it made visible, and purchasable, was preparation.",
+    "takeaway": "A word about buying needs a price behind it. That settles which of two endings comes second."
+  }
+}

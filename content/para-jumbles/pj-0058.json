@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0058",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "architecture",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Face You Cannot Avoid",
+    "theme": "why a building's street elevation is the one part of a private structure that is a public matter, and what follows for the codes that govern it",
+    "estimated_time_sec": 185,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["demonstrative", "article_given_new", "connective_explicit", "parallelism"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["anchor_pair", "generic_the"],
+    "dna_traits": ["opener_heuristic", "global_tracking", "inference_implicit", "wm_long_chain"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 5,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "read an exclusion such as everything else as a backward reference to the set it excludes from",
+    "reasoning_patterns": ["disc.competing_opener", "disc.contrast", "disc.demonstrative", "disc.claim_then_evidence", "struct.claim_evidence", "lang.comparative"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence about the face a building shows to people with no business there. It is generic at the head, states the paragraph's idea in one line, and has the rhetorical lift a thesis is expected to have. What refuses it is a two-word exclusion buried in its second clause: the owner 'chose everything else about it for himself', and everything else is a remainder, which needs the set it is a remainder of. The only sentence that supplies one says that nearly everything a building does for its owner happens indoors. A second rival welds the two general sentences together, leaving 'That asymmetry' pointing at no asymmetry; a third opens on the codes, whose 'that understanding' has nothing behind it and which are in any case the paragraph's conclusion rather than its premise.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument in architectural theory about street elevations and design control; no specific building, city, code or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A ninety-nine item whose decoy opener is stronger than the true one on every surface measure: it is generic, thesis-shaped and quotable, and the only thing against it is a remainder phrase in its second clause. The inference marker sits in the third seat and the paragraph closes on what codes actually contain rather than on a verdict about taste."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The one thing a building does for people with no business there at all is show them a face, and the owner, who chose everything else about it for himself, looks at that face only on the way in.",
+      "role": "contrast"
+    },
+    {
+      "label": "B",
+      "text": "The codes that survive argument are drawn on that understanding: they say almost nothing about style and a great deal about height, shadow and the width of pavement left in daylight.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "That asymmetry is what turns a private wall into a public question, and the question is therefore about an imposition rather than about taste, since somebody is being obliged to look.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "Nearly everything a building does for the person who paid for it happens indoors, where he can see it, use it and change his mind about it.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "A", "C", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "A",
+      "device": "parallel_structure",
+      "reliability": "high",
+      "explanation": "'Everything else about it' is a remainder, and a remainder needs the set it was taken from. The set is what a building does indoors for the person who paid for it, which the opening sentence describes and nothing else in the set does."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That asymmetry' points at an unequal pair, and the pair is an owner who glances at the face on his way in and a public that sees it whether or not it has any business with the building."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That understanding' is the understanding just reached, that the question is about an imposition rather than about taste. The codes described then measure exactly what an imposition consists of."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "An argument in four moves: a general truth about where a building's value falls, the single exception to it, what the exception implies about who has standing to complain, and finally what the best regulation looks like once the implication is accepted. The paragraph never states its conclusion as a verdict; it states it as a fact about the contents of good codes, which is why the last sentence is evidence.",
+    "movement": [
+      { "label": "D", "why_here": "It establishes the rule the rest of the paragraph carves an exception out of, and it is the only sentence that describes without pointing. It also supplies the set that the next sentence takes a remainder from." },
+      { "label": "A", "why_here": "The exception, and the sentence that makes the argument possible. Its 'everything else about it' is a remainder of the indoor list just given, and its two viewers, the owner and the passer-by, are the halves of the asymmetry the following sentence names." },
+      { "label": "C", "why_here": "The inference, and the nucleus. It converts an observation about who looks into a claim about who is imposed upon, and its 'therefore' does the paragraph's reasoning in the third seat rather than the fourth." },
+      { "label": "B", "why_here": "The close, and it closes on evidence. 'That understanding' is the imposition claim, and what follows is a report of what durable codes actually regulate: height, shadow and pavement, none of which is a matter of style." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ADCB",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence about the face shown to people with no business there is generic at the head, states the paragraph's central idea in a single clause, and has the balance an opening thesis usually has. The sentence about indoor value then reads as elaboration, and the argument still appears to run forwards.",
+        "where_it_breaks": "It says the owner 'chose everything else about it for himself'. Everything else is a remainder, and a remainder cannot be taken before the whole has been described. The whole is the list of things a building does indoors for the person who paid for it, and in this order it arrives after the exception has already been carved out of it."
+      },
+      {
+        "order": "DCAB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences are general and abstract while one is concrete; a solver who has grouped the abstract pair will keep them together, reading the sentence about the face as the illustration that follows the reasoning rather than as the step that produces it.",
+        "where_it_breaks": "'That asymmetry' points at an inequality that has not been described. Nothing in the opening sentence is asymmetrical: it says only that a building's value falls indoors. The asymmetry is the owner's glance against the public's unavoidable view, which this order has moved behind the sentence that names it."
+      },
+      {
+        "order": "BDAC",
+        "trap_type": "generic_the",
+        "why_tempting": "'The codes that survive argument' reads like the general definite of an essay on design control, and beginning with what regulation actually does is a respectable way into an argument about why it does it.",
+        "where_it_breaks": "The sentence says the codes are drawn 'on that understanding', and in the first seat there is no understanding to draw on. The regulation is also where the argument arrives, not where it starts: height, shadow and pavement are only intelligible as measures once somebody has said that the matter at issue is an imposition."
+      }
+    ],
+    "trap_named": "The trap is a thesis-shaped sentence that has been made dependent by a remainder. 'Everything else', 'the rest', 'the others', 'apart from that' all quietly claim a set the reader has already been given, and they are easy to read past because they sit in the middle of a clause and sound like emphasis rather than reference. The defence is to test every candidate opener not at its head but at its subordinate clauses, where a writer hides the tie.",
+    "solving_habit": "Read candidate openers to the full stop. The words that forbid a sentence the first seat are usually not its first words: look for remainders, comparatives and quiet demonstratives in the second half of the sentence."
+  },
+  "mentor": {
+    "challenge": "The sentence that sounds most like the thesis is tied down by two words in its middle. They are not a pronoun.",
+    "paragraph_plain": "Almost everything a building does for the person who paid for it happens inside, where he can see it, use it and change his mind about it. The single thing it does for people with no business there at all is present them with a face, and the owner, who chose everything else about the building to suit himself, looks at that face only on his way in. That imbalance is what turns a private wall into a public matter, and the matter is therefore one of imposition rather than of taste, because somebody is being made to look. The codes that survive scrutiny are written on that basis: they say very little about style and a great deal about height, shadow and how much pavement is left in daylight.",
+    "takeaway": "'Everything else' is a remainder, and a remainder needs its whole to be already on the page."
+  }
+}

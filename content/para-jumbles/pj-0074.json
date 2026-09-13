@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0074",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "intellectual-history",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Ancestor Appointed Later",
+    "theme": "why a discipline's founding text is chosen by the field that came after it, and what the choice records about that field rather than about the past",
+    "estimated_time_sec": 135,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "abstract_to_concrete",
+    "cohesion_signals": ["article_given_new", "pronoun_ref", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "misleading_connective",
+    "secondary_traps": ["generic_the", "anchor_pair"],
+    "dna_traits": ["surface_matching", "opener_heuristic", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 3,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "place a meanwhile by whose story it interrupts rather than by the seat a contrast usually takes",
+    "reasoning_patterns": ["disc.transition_word", "disc.pronoun_antecedent", "disc.contrast", "disc.given_new", "struct.history_of_an_idea"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival pulls the sentence carrying 'meanwhile' into the second seat, where a contrast usually falls and where it seems to set the author against the field that adopted him. It is refused by its first two words: 'Its author' needs a book, and the only book in the set arrives in the sentence this order jumps over. A second rival opens on that book, whose 'the honour' can be read as the general definite of a familiar academic custom; the honour is the founder's post, which the opening sentence is alone in describing. A third welds the two general sentences about appointment, which leaves 'therefore' inferring from nothing and 'that man' naming nobody.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument about disciplinary origin stories; no specific field, book, author or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An advanced item whose device is a single adverb. 'Meanwhile' marks a simultaneous story and therefore looks early, but the story it runs alongside is the book's rather than the field's, so it belongs one seat later. A possessive pronoun settles it in two words, which is the point of the item."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A founding text is therefore a retrospective appointment, and a history that opens with one is reporting a decision of its own profession rather than the event that man thought he was taking part in.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "The book that ends up with the honour is rarely the first of its kind and never the most read in its own decade; what it has is a sentence the later field can quote as a programme.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "A field acquires its founder long after it has acquired its practitioners, and the appointment is made by people looking for an ancestor rather than by anybody who was present at the time.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "Its author, meanwhile, took himself to be settling an argument inside a subject that already existed, and would not have recognised the description now attached to him.",
+      "role": "contrast"
+    }
+  ],
+  "correct_order": ["C", "B", "D", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "B",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The honour' is definite and names the post just described, that of a field's founder. Without the sentence about appointing an ancestor there is no honour for a book to end up with."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'Its author' needs a book, and only one sentence puts a book on the page. The 'meanwhile' then runs the author's story alongside the book's, which is the story just told."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That man' is a demonstrative, and it singles out somebody already on the page. A book alone would license 'its author'; only the sentence reporting what he took himself to be doing puts a man there for 'that man' to select, along with the event he thought he was in."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "An abstraction about how fields acquire founders, narrowed to the kind of book that gets chosen, narrowed again to the man who wrote it, and then generalised into a claim about what origin stories report. The paragraph descends and then lifts, and the descent has to happen in that order because each step introduces the thing the next one refers to.",
+    "movement": [
+      { "label": "C", "why_here": "It states the claim in the abstract and names the appointment that everything else in the paragraph refers back to. It is also the only sentence that introduces rather than points." },
+      { "label": "B", "why_here": "The narrowing. 'The honour' is the founder's post just described, and this sentence supplies the book that the next sentence needs before it can supply an author." },
+      { "label": "D", "why_here": "The contrast, and the sentence the item is built around. 'Meanwhile' really does mark a simultaneous story, but the story it runs alongside is the book's career, not the field's, so it sits third. 'Its author' makes that unarguable." },
+      { "label": "A", "why_here": "The conclusion, and the close. Its 'therefore' gathers the whole argument, and 'that man' singles out the person whose self-understanding the sentence immediately before has just reported." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDBA",
+        "trap_type": "misleading_connective",
+        "why_tempting": "'Meanwhile' announces that two things were happening at once, and the obvious pair is the field appointing an ancestor and the author getting on with his own argument. Placed second the sentence looks like the paragraph's turn, and the account of the book then reads as the detail that follows.",
+        "where_it_breaks": "The sentence opens 'Its author'. A possessive pronoun needs an owner, and the owner is the book, which this order puts afterwards. The simultaneity is also with the book's later career rather than with the field's search, so the contrast has nothing to run alongside in the second seat."
+      },
+      {
+        "order": "BCDA",
+        "trap_type": "generic_the",
+        "why_tempting": "'The honour' can be taken as the general definite of a writer describing an academic custom his readers already know, in which case the sentence introduces the subject rather than pointing back at it. It is also the most concrete line in the set and carries no pronoun at its head.",
+        "where_it_breaks": "The honour is the post of founder, and only the other general sentence describes one. In the first seat the definite article points at nothing, and the paragraph would explain which book receives an appointment before saying that fields make appointments at all."
+      },
+      {
+        "order": "CABD",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences are general statements about appointment and retrospection, and they answer each other so neatly that a solver will want them adjacent, treating the book and its author as illustration to be added afterwards.",
+        "where_it_breaks": "The second of the pair begins 'A founding text is therefore', and nothing has been said from which that follows: the opening sentence reports a practice, not a reason. It also speaks of 'that man' and what he thought he was taking part in, and nobody has been mentioned at all for the demonstrative to single out."
+      }
+    ],
+    "trap_named": "The trap is an adverb of simultaneity. 'Meanwhile', 'at the same time' and 'all this while' tell a reader that two stories are running together, and a solver's instinct is to start the second story early, near the beginning of the first. But simultaneity fixes a sentence relative to the story it accompanies, and here that story is the book's rather than the field's. The defence is to name both strands before placing the adverb, and then to look for a pronoun, which will usually settle it in two words.",
+    "solving_habit": "When you meet 'meanwhile', ask what the other thing is that was happening. Then check the sentence's first pronoun: an owner has to be on the page before a possessive can claim one."
+  },
+  "mentor": {
+    "challenge": "One adverb says two things were going on at once. Decide which two before you decide where the sentence goes.",
+    "paragraph_plain": "A field gets its founder long after it has got its practitioners, and the appointment is made by people looking for an ancestor rather than by anyone who was there at the time. The book that ends up with the honour is rarely the first of its kind and never the most read in its own decade; what it has is a sentence the later field can quote as a programme. Its author, meanwhile, thought he was settling an argument inside a subject that already existed, and would not have recognised the description now attached to him. A founding text is therefore a retrospective appointment, and a history that begins with one is reporting a decision made by its own profession rather than the event that man thought he was taking part in.",
+    "takeaway": "'Meanwhile' is relative to a story. Find the story before you find the seat."
+  }
+}

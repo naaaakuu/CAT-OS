@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0060",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "Who Does the Watching Now",
+    "theme": "why a guarantee on deposits transfers the work of watching a bank rather than removing it, and what the uninsured reveal about the transfer",
+    "estimated_time_sec": 195,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["former_latter", "article_given_new", "demonstrative", "connective_explicit"],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": ["generic_the", "false_pronoun_binding"],
+    "dna_traits": ["surface_matching", "global_tracking", "wm_long_chain", "opener_heuristic"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 4,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 5,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "refuse to make neighbours of two sentences that share a subject when a counting phrase demands a third between them",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.repeated_noun", "disc.demonstrative", "disc.competing_opener", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival makes neighbours of the two sentences about depositors — the one explaining why an insured depositor stops asking questions and the one reporting how uninsured balances behave — because they share a subject, a vocabulary and an obvious explanatory relation. That pairing strands the last sentence's opening phrase, 'The missing half', which needs a paragraph that has already divided the work of watching into two halves, and only the sentence about the supervisor does that. A second rival opens on the supervisor sentence, which is thesis-shaped and carries no connective; it is refused by 'the arrangement' and 'its second half', neither of which has anything to collect in the first seat. A third rival places that same sentence immediately after the opening claim, binding 'its' to the guarantee rather than to the arrangement of watching, which leaves the two halves unexplained.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General economics of deposit guarantees and bank monitoring; no specific country, scheme, institution or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A ninety-nine claim-and-evidence item whose trap is a pair of sentences with the same subject. The evidence belongs at the end, but it is written so that it reads perfectly well beside the mechanism it illustrates; only a counting phrase in its first three words forbids that. The inference marker sits in the second seat and the paragraph ends on the behaviour of depositors rather than on a recommendation."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The second of those descriptions is the one to attend to, because the work of watching does not vanish when the guarantee arrives but changes hands: a depositor with nothing left to lose has no reason to ask what the bank is doing with his money, so the asking has to be paid for.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "A supervisor is not an addition to the arrangement but its second half, and a guarantee introduced without one has not abolished the watching, only the watchers.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "A guarantee on small deposits is defended as a device for preventing panics, which it is, and described as costless, which it is not.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "The missing half can be read off the depositors: the large balances that sit outside the guarantee move at the first bad rumour, and the insured ones, in the same week, do not move at all.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "A", "B", "D"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "former_latter_reference",
+      "reliability": "high",
+      "explanation": "'The second of those descriptions' counts, and it needs two descriptions already on the page. The only sentence offering two is the one that calls a guarantee a device for preventing panics and then calls it costless."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Its second half' presupposes that the arrangement has been divided, and the division is the one just made: watching done by depositors, and watching that has to be paid for because they have stopped."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'The missing half' selects from a pair of halves, and the halves are named only in the sentence about the supervisor. Without it the phrase counts nothing."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim in two parts, the part that matters explained, the conclusion that follows from the explanation, and then the evidence that shows the conclusion is not merely a piece of reasoning. The paragraph is built so that each sentence borrows a count from the one before it — two descriptions, two halves, the missing half — which is what makes the order recoverable at all.",
+    "movement": [
+      { "label": "C", "why_here": "It states both of the things usually said about a deposit guarantee, concedes the first and denies the second, and points nowhere but outward. The pair it offers is what the next sentence counts from." },
+      { "label": "A", "why_here": "It picks the second description and explains it: watching is transferred rather than abolished, because an insured depositor has no reason to ask anything. Its 'so' does the paragraph's inferential work in the second seat." },
+      { "label": "B", "why_here": "The conclusion, and the nucleus. Having divided the watching into the part depositors did and the part that now has to be paid for, it names the supervisor as the second half rather than as an extra." },
+      { "label": "D", "why_here": "The evidence, and the close. 'The missing half' can only be read once halves exist, and the paragraph ends on what depositors actually do in a bad week rather than on advice about what anybody should do." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CADB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences here are about depositors: one explains why an insured depositor stops asking questions, the other reports that uninsured balances run and insured ones sit still. Explanation followed by illustration is the most natural pairing in the set, and a solver who fixes it early will feel the paragraph has been solved from the middle outwards.",
+        "where_it_breaks": "The evidence opens 'The missing half'. Halves exist only once the sentence about the supervisor has divided the arrangement into two, and that sentence has been pushed to the end. A counting phrase cannot collect from a sentence that follows it, however well the two depositor sentences read together."
+      },
+      {
+        "order": "BCAD",
+        "trap_type": "generic_the",
+        "why_tempting": "'The arrangement' reads like the general definite of a writer describing something every reader of financial pages knows about — deposit insurance and the supervision that comes with it — so the sentence looks self-sufficient. It is also the paragraph's thesis, opens on an indefinite noun and has the epigrammatic finish solvers associate with a first line.",
+        "where_it_breaks": "'The arrangement' and 'its second half' both point backwards, and in the first seat neither finds anything: no arrangement has been described and nothing has been divided. The sentence also denies that a supervisor is an addition before the paragraph has given anybody a reason to think he might be."
+      },
+      {
+        "order": "CBAD",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'Its second half' can be bound to the guarantee named in the opening sentence, in which case the supervisor sentence reads as the immediate consequence of calling the guarantee not costless, and the explanation that follows reads as elaboration.",
+        "where_it_breaks": "A guarantee has no halves. The thing divided into two is the work of watching, and the division is made in the sentence about the depositor who has stopped asking questions, which this order places afterwards. The paragraph would name a second half before there was a first."
+      }
+    ],
+    "trap_named": "The trap is a shared subject mistaken for a join. Two sentences about depositors look like a pair because one seems to explain the other, and in a paragraph of four sentences a confident pair fixes everything else. But a counting phrase outranks a thematic resemblance: 'the second of those', 'its second half' and 'the missing half' each need their members already on the page, and following that chain gives the order without any appeal to what reads well.",
+    "solving_habit": "Find the counting phrases first and lay them end to end. They form a spine that no amount of shared subject matter can bend, and a spine of three certain joins is worth more than any number of plausible neighbours."
+  },
+  "mentor": {
+    "challenge": "Two sentences here are about depositors and want to be neighbours. A phrase of three words in a third sentence forbids it.",
+    "paragraph_plain": "A guarantee on small deposits is defended as a way of preventing panics, which it is, and described as costless, which it is not. The second of those descriptions is the one worth examining, because the work of watching a bank does not disappear when a guarantee arrives; it changes hands. A depositor who has nothing left to lose has no reason to ask what the bank is doing with his money, so somebody has to be paid to ask instead. A supervisor, then, is not an extra bolted onto the arrangement but the other half of it, and a guarantee set up without one has not ended the watching, only the watchers. You can see which half is missing by looking at depositors: the large balances that sit outside the guarantee move at the first bad rumour, while the insured ones, in the same week, do not move at all.",
+    "takeaway": "Counting phrases build a spine. Shared subject matter only builds a suspicion."
+  }
+}

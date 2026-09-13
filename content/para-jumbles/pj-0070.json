@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0070",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "sociology",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Column Beside the Names",
+    "theme": "why a contribution that can be read against its neighbours becomes a statement about standing rather than a gift",
+    "estimated_time_sec": 155,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "specific_to_general",
+    "cohesion_signals": ["article_given_new", "demonstrative", "lexical_repetition", "parallelism"],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": ["competing_opener", "generic_the"],
+    "dna_traits": ["surface_matching", "opener_heuristic", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "keep two sentences about the same object apart when a demonstrative demands a transformation between them",
+    "reasoning_patterns": ["disc.specific_to_general", "disc.repeated_noun", "disc.demonstrative", "disc.competing_opener", "struct.specific_to_general"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival makes neighbours of the two sentences that mention the envelope, which is the most conspicuous repeated noun in the set and the natural frame for a paragraph: the scene, then what the scene costs. The join strands 'that exchange' in the closing sentence, because the exchange is the conversion of a gift into a statement about standing, and the sentence describing it would be left behind. A second rival opens on that conversion, which is generic and thesis-shaped; it is refused by its second clause, which praises a mechanism nobody is compelled to use before any mechanism has been described. A third opens on the mechanism itself, taking 'the column' for a general definite, when the column is ruled on the envelope in the sentence that would then follow it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General sociology of visible giving and status; no specific workplace, charity or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-plus item whose trap is a repeated noun at the two ends of the paragraph. The envelope frames the piece, which makes the two sentences that name it look adjacent, and only a demonstrative in the final sentence forbids the join. The decoy opener is the general claim, tied down by a clause about a mechanism."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A sum that can be read against its neighbours stops being a gift and becomes a statement about standing, and a mechanism nobody is compelled to use is the more effective for that.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "The envelope goes round the office with the names already written on it and a column ruled beside them for what each person gave.",
+      "role": "example"
+    },
+    {
+      "label": "C",
+      "text": "Nobody is obliged to look at the column, and everybody does, which is the whole of the mechanism: the sum is legible, and so is its position among the sums above it.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "The same envelope collects more money than a private appeal and buys less goodwill, which is what that exchange costs.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["B", "C", "A", "D"],
+  "links": [
+    {
+      "from": "B",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The column' is definite, and the column is ruled on the envelope in the sentence before. Nothing else in the set puts one on a page."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "thematic_development",
+      "reliability": "high",
+      "explanation": "The general claim praises 'a mechanism nobody is compelled to use', which is a description of what the previous sentence has just called the whole of the mechanism: nobody has to look, and everybody does."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That exchange' names a trade already described, and the trade is a gift turning into a statement about standing. Without it the closing sentence prices nothing."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "One office scene, the mechanism inside it, the general claim the mechanism supports, and a closing sentence that prices the general claim in the currency of the scene. The paragraph widens and then returns, which is what makes its two mentions of the envelope look like a frame rather than what they are, the first and last steps of an argument that has two sentences in between.",
+    "movement": [
+      { "label": "B", "why_here": "The scene, and the only sentence that introduces rather than refers: the envelope, the names and the column all enter here. Everything definite later in the paragraph is collected from it." },
+      { "label": "C", "why_here": "The mechanism. 'The column' is the one just ruled, and the observation that nobody has to look while everybody does is what the next sentence calls a mechanism nobody is compelled to use." },
+      { "label": "A", "why_here": "The general claim, and the nucleus. It states the transformation — gift into statement about standing — that the final sentence puts a price on, and it is the only sentence in the set written about no particular office." },
+      { "label": "D", "why_here": "The close. 'The same envelope' returns to the scene, and 'that exchange' points at the transformation just named, so the sentence can stand nowhere but immediately after it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDCA",
+        "trap_type": "anchor_pair",
+        "why_tempting": "The envelope is the most conspicuous repeated noun in the set, and the two sentences that name it read as a natural pair: here is the envelope, and here is what the envelope costs. A solver who fixes that pair has a frame, and frames are hard to give up once they have been found.",
+        "where_it_breaks": "The second of the pair ends 'which is what that exchange costs'. No exchange has taken place: the trade of a gift for a statement about standing is described in the sentence this order pushes to the end, so the demonstrative would be pricing something the reader has not been shown."
+      },
+      {
+        "order": "ABCD",
+        "trap_type": "competing_opener",
+        "why_tempting": "The general claim is the paragraph's idea, opens on an indefinite noun phrase, contains no pronoun and would serve as a thesis for any piece about visible giving. A solver who prefers to see the argument before the anecdote will take it.",
+        "where_it_breaks": "Its second clause says that a mechanism nobody is compelled to use is the more effective for it. In the first seat no mechanism has been described, and the definite comparison has nothing to be more effective than. The scene also introduces every object the rest of the paragraph refers to definitely."
+      },
+      {
+        "order": "CBAD",
+        "trap_type": "generic_the",
+        "why_tempting": "'Nobody is obliged to look at the column, and everybody does' is the sharpest line in the set, and 'the column' can be read as the general definite of a writer describing a familiar office ritual that needs no introduction.",
+        "where_it_breaks": "The column is ruled beside the names on the envelope, and that sentence would be standing behind this one. A paragraph does not refer definitely to a thing it introduces afterwards, and the scene is also what the closing sentence returns to with 'the same envelope'."
+      }
+    ],
+    "trap_named": "The trap is a repeated noun at the two ends of a paragraph. A word that appears in the first and last sentences usually signals a frame, and a frame tempts a solver to make the two sentences neighbours so that the frame can be admired early. What forbids it here is a demonstrative: 'that exchange' needs a transformation to have happened, and the transformation takes two sentences to arrange. A repeated noun tells you a paragraph is about one thing; it never tells you which sentences touch.",
+    "solving_habit": "When the same object appears twice, ask what has changed about it between the two mentions. The sentences that make the change are the ones that go in between."
+  },
+  "mentor": {
+    "challenge": "The same object is named at both ends of this paragraph. That is a frame, not a join.",
+    "paragraph_plain": "The envelope goes round the office with the names already written on it and a column ruled beside them for what each person gave. Nobody is obliged to look at that column, and everybody does, which is the whole of the mechanism: the amount is legible, and so is where it sits among the amounts above it. A sum that can be read against its neighbours stops being a gift and becomes a statement about standing, and a mechanism nobody is compelled to use is all the more effective for that. The same envelope collects more money than a private appeal and buys less goodwill, which is what the exchange costs.",
+    "takeaway": "A word repeated at both ends of a paragraph marks the frame. The work happens between the two mentions."
+  }
+}

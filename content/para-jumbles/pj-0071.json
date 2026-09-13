@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0071",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 82,
+    "genre": "urban-studies",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "beginner",
+    "title": "Why the Shop Is on the Corner",
+    "theme": "why a small shop stands at a junction rather than halfway along a street, and what happens to it when the junction is closed",
+    "estimated_time_sec": 70,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "question_answer",
+    "cohesion_signals": ["article_given_new", "connective_explicit", "lexical_repetition", "demonstrative"],
+    "primary_trap": "generic_the",
+    "secondary_traps": ["misleading_connective", "lexical_decoy"],
+    "dna_traits": ["opener_heuristic", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 2,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": false,
+    "nucleus": "D",
+    "learning_objective": "keep an answer behind its question even when the answer reads like a fact anybody could state first",
+    "reasoning_patterns": ["disc.question_then_answer", "disc.given_new", "disc.cause_effect", "struct.question_answer"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence about the corner plot, whose definite article looks general and whose content is a fact anybody could state without preamble. It is refused by its own last clause, 'which is very nearly the whole of the answer', since an answer needs a question, and the only question in the set asks why the shop stands at the junction. A second rival pulls the sentence carrying 'therefore' into the second seat, where 'twice the work' has no two streams behind it. A third opens on the closure of a junction, which reads like a scene; its closing clause speaks of the rent finding its level again, and no rent has been mentioned.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General urban economics of corner sites and footfall; no specific city, street, shop or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A beginner question-and-answer item whose decoy opener is the answer itself, written so that it reads like a free-standing fact. The tie is in its final clause. The inference marker sits in the third seat and the paragraph ends on what happens when a junction closes."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Where a junction has been closed and the traffic sent round, the corner shop shuts within a year or two and the one halfway along the terrace does not, which is the rent finding its level again.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "Why the small shop stands at the junction and not halfway along the street is a question with a duller answer than most people expect.",
+      "role": "question"
+    },
+    {
+      "label": "C",
+      "text": "The same frontage therefore does twice the work, which is why the rent on it is higher and why the trades that take it are the ones selling what people buy without planning to.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "The corner plot is passed by two streams of walkers instead of one and can be seen from both before anybody has decided where to buy bread, which is very nearly the whole of the answer.",
+      "role": "answer"
+    }
+  ],
+  "correct_order": ["B", "D", "C", "A"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Very nearly the whole of the answer' names a reply, and a reply needs a question. The only question asks why the shop stands at the junction rather than halfway along the street."
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "'Twice the work' counts the two streams of walkers described immediately before, and 'the same frontage' refers to the corner plot. Neither phrase has anything to collect earlier in the paragraph."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The closing sentence ends on 'the rent finding its level again', which needs a rent already reported as high, and the higher rent on a corner frontage is named in the sentence before."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A question, the answer, what follows from the answer, and a test of the whole account. The test is placed last because it is the only sentence that could be wrong: everything before it is reasoning, and closing a junction is the experiment that reasoning invites.",
+    "movement": [
+      { "label": "B", "why_here": "It asks the question and warns that the answer is dull, which is what stops a reader looking for something more interesting. It introduces the junction and the shop, and refers to nothing behind it." },
+      { "label": "D", "why_here": "The answer, and the nucleus. Two streams of walkers instead of one, and visibility from both, are the facts the rest of the paragraph spends; its final clause identifies it as an answer, which is what keeps it out of the first seat." },
+      { "label": "C", "why_here": "The consequence. 'Twice the work' counts what the previous sentence has just supplied, and its 'therefore' does the paragraph's reasoning in the third seat rather than at the close." },
+      { "label": "A", "why_here": "The test, and the close. Closing the junction removes one of the two streams, and the corner shop fails while its neighbour does not. The paragraph ends on the rent returning to its level, which is what the previous sentence predicted." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DBCA",
+        "trap_type": "generic_the",
+        "why_tempting": "'The corner plot is passed by two streams of walkers instead of one' is a plain fact, and the definite article reads like the general definite of a writer describing corner sites in general. Beginning with the fact and asking the question afterwards is a shape some writers do use.",
+        "where_it_breaks": "The sentence ends 'which is very nearly the whole of the answer'. An answer needs a question, and in the first seat there is none; the question about why the shop stands at the junction arrives afterwards, so the paragraph would be answering something it had not yet asked."
+      },
+      {
+        "order": "BCDA",
+        "trap_type": "misleading_connective",
+        "why_tempting": "A sentence carrying 'therefore' looks like the immediate consequence of whatever has just been said, and a solver who has placed the question first will want the reasoning to begin at once.",
+        "where_it_breaks": "'The same frontage therefore does twice the work' counts to two, and nothing has been counted. The two streams of walkers are in the sentence this order moves behind it, and 'the same frontage' also needs a frontage that has not yet been mentioned."
+      },
+      {
+        "order": "ABDC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "Two sentences share almost all their vocabulary — junction, corner, shop, the terrace — and a solver who has spotted the overlap will keep them together, with the concrete scene of a closed junction in front because paragraphs about towns so often open on one.",
+        "where_it_breaks": "It ends on 'the rent finding its level again', which requires a rent that has been reported as standing above its level. The higher rent on a corner frontage appears two sentences later, and 'again' claims a return to a state the paragraph has not described."
+      }
+    ],
+    "trap_named": "The trap is an answer that reads like a fact. Facts can open paragraphs and answers cannot, and the difference is often a single clause at the end of the sentence: 'which is the answer', 'that is why', 'hence the rule'. The defence is to read each candidate opener to the full stop and ask whether it is making a move in an exchange. A sentence that identifies itself as a reply has already told you something stands in front of it.",
+    "solving_habit": "Read to the end of every sentence before placing it. The clause that fixes a sentence's seat is very often its last one."
+  },
+  "mentor": {
+    "challenge": "One sentence looks like a plain fact for eighteen words and then tells you it is an answer.",
+    "paragraph_plain": "Why the small shop stands at the junction and not halfway along the street is a question with a duller answer than most people expect. The corner plot is passed by two streams of walkers instead of one, and it can be seen from both before anybody has decided where to buy bread, which is very nearly the whole of the answer. The same frontage therefore does twice the work, which is why the rent on it is higher and why the trades that take it are the ones selling what people buy without planning to. Where a junction has been closed and the traffic sent round, the corner shop shuts within a year or two while the one halfway along the terrace does not, which is the rent finding its level again.",
+    "takeaway": "A fact can open a paragraph. An answer cannot, and it usually says so at the end of the sentence."
+  }
+}

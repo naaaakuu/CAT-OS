@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0068",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "philosophy",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "When the Case Changed Its Job",
+    "theme": "how the philosophical thought experiment moved from exposing a contradiction to eliciting a reaction, and what that licensed an objector to say",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["temporal_sequence", "article_given_new", "lexical_repetition", "stance_continuity"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["lexical_decoy", "anchor_pair"],
+    "dna_traits": ["opener_heuristic", "surface_matching", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 3,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 4,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "treat an inversion such as the other way round as a backward reference to the arrangement it inverts",
+    "reasoning_patterns": ["disc.chronology", "disc.competing_opener", "disc.lexical_chain", "disc.contrast", "struct.history_of_an_idea"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence dating the change, because 'In the last hundred years' is how a history begins and because the sentence describes the modern practice a reader is likely to recognise. It is refused by 'the other way round', which is an inversion and therefore needs the arrangement it inverts to be on the page; the only description of that arrangement is the account of cases built to force a contradiction. A second rival is pulled by a repeated phrase, since two sentences speak of the older kind of case, and welds them together; that strands 'The difference', which needs two jobs already described. A third welds the two sentences that talk about arguments and premises, which leaves 'the change' naming nothing.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General history of philosophical method and the status of intuitions; no specific philosopher, case or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier chronology whose decoy opener carries a date, which is the strongest surface signal of a first sentence there is. The refusal is an inversion phrase in the middle of the same sentence. A repeated phrase about the older kind of case supplies a second, purely lexical temptation."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The imaginary cases philosophers built for two centuries were arguments in disguise: a situation was described so that a principle could be shown to contradict itself, and anybody who followed the description had to accept the contradiction.",
+      "role": "background"
+    },
+    {
+      "label": "B",
+      "text": "The difference shows in what a rival is now allowed to say: he can report a different reaction and be taken seriously, which would have been no answer at all to the older kind of case.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "Whether the change counts as a loss depends on what a philosopher is thought to have to work with, and the rival's report is only a complaint if intuitions were meant to be premises.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "In the last hundred years the cases have been built the other way round: the description is arranged so that a reader will have a reaction, and the reaction is then counted as evidence about the principle.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["A", "D", "B", "C"],
+  "links": [
+    {
+      "from": "A",
+      "to": "D",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "'The other way round' inverts an arrangement, and the arrangement is the older one, in which a description was built so that a principle would contradict itself. An inversion cannot precede the thing it inverts."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'The difference' needs two things to differ, and the two are the jobs the cases were built to do. Only after both have been described does the phrase have anything to name."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The rival's report' is a definite reference to a report already made, and the only rival who reports anything is the one allowed to say he had a different reaction. The closing sentence weighs a move the previous sentence has just shown to be available."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A history of a method in three steps, with a verdict withheld to the end. The old practice, the inverted new one, the symptom by which the inversion can be detected, and then a refusal to call the change a loss without first settling what philosophers are entitled to use. Because each step is described against the one before it, the chronology and the argument are the same sequence.",
+    "movement": [
+      { "label": "A", "why_here": "It describes the older practice in full and introduces nothing by reference. Two later sentences point at it, one by inverting it and one by naming 'the older kind of case'." },
+      { "label": "D", "why_here": "The change, dated and defined as an inversion. 'The other way round' fixes it immediately after the arrangement it reverses, and the pair of jobs it completes is what the next sentence measures." },
+      { "label": "B", "why_here": "The symptom. Once there are two jobs there is a difference, and the difference is visible in what an objector may now say without being dismissed. The phrase 'the older kind of case' looks back across two sentences rather than one." },
+      { "label": "C", "why_here": "The verdict, withheld and then qualified rather than delivered. 'The rival's report' is the different reaction just described, and the paragraph ends by making the complaint conditional rather than by settling it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DABC",
+        "trap_type": "competing_opener",
+        "why_tempting": "The sentence begins 'In the last hundred years', and a date at the head of a sentence is the strongest surface signal of an opener that a chronological paragraph offers. It also describes the practice a modern reader recognises, so the account of the older cases then reads as background supplied afterwards.",
+        "where_it_breaks": "The same sentence says the cases are now built 'the other way round'. An inversion names an arrangement it reverses, and the arrangement — a description built so that a principle contradicts itself — is in the sentence this order puts second. A date can open a paragraph; an inversion cannot."
+      },
+      {
+        "order": "ABCD",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "Two sentences speak of the older kind of case in almost the same words, and a repeated phrase is the signal solvers trust most. Putting them side by side produces a paragraph that seems to describe the old practice and then say what was wrong with it.",
+        "where_it_breaks": "The second of the pair opens 'The difference', which needs two things already described. Only one job has been described at that point, so the sentence would be measuring a gap with one side missing, and the account of the new practice would arrive after the symptom it explains."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "One sentence calls the old cases arguments in disguise and another asks whether intuitions were meant to be premises; both are about what counts as a piece of reasoning, and a solver who has spotted that they answer each other will make them neighbours.",
+        "where_it_breaks": "The second of the pair begins 'Whether the change counts as a loss', and no change has been reported. It also weighs 'the rival's report', which is the report of a different reaction, and that report is two sentences further on."
+      }
+    ],
+    "trap_named": "The trap is a date used as bait. Chronological paragraphs do usually open on a time marker, so a sentence beginning 'In the last hundred years' feels settled before it has been read. But the same sentence says the cases are now built the other way round, and inversions — 'the other way round', 'the reverse', 'in the opposite direction', 'no longer' — are backward references as strict as any pronoun. The defence is to rank references above surface signals of position, however reliable those signals usually are.",
+    "solving_habit": "Treat inversions as pointers. 'The other way round' and 'no longer' both claim an arrangement the reader has already been given, and the sentence that gave it stands in front, whatever date the inverting sentence carries."
+  },
+  "mentor": {
+    "challenge": "One sentence carries a date, which usually means it opens. Read on four words and it turns into a backward reference.",
+    "paragraph_plain": "For two centuries the imaginary cases philosophers built were arguments in disguise: a situation was described in such a way that a principle could be shown to contradict itself, and anyone who followed the description had to accept the contradiction. In the last hundred years the cases have been built the other way round: the description is arranged so that a reader will have a reaction, and the reaction is then counted as evidence about the principle. The difference shows up in what an opponent is now allowed to say: he can report a different reaction and be taken seriously, which would have been no reply at all to the older sort of case. Whether that change counts as a loss depends on what one thinks a philosopher has to work with, and the opponent’s report is only a complaint if intuitions were supposed to be premises.",
+    "takeaway": "A date is a surface signal. An inversion is evidence, and it points backwards."
+  }
+}

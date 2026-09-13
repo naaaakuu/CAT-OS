@@ -1,0 +1,159 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0065",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "medicine-health",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Column That Keeps the Name",
+    "theme": "what happens to the patients left behind when a cause is found for part of a syndrome and the name travels with the cause",
+    "estimated_time_sec": 210,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: five-sentence TITA jumble, the top-tier variant of the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "abstract_to_concrete",
+    "cohesion_signals": ["demonstrative", "article_given_new", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["competing_opener", "generic_the"],
+    "dna_traits": ["ending_judgement", "opener_heuristic", "wm_long_chain", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 4,
+      "inference_load": 5,
+      "syntactic_complexity": 5,
+      "reference_density": 5,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 5,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 5,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 5
+    },
+    "num_plausible_orderings": 6,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "refuse a verdict the closing seat when a later sentence names the thing the verdict invents",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.demonstrative", "disc.competing_ending", "disc.cause_effect", "struct.phenomenon_explanation"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival ends on the judgement that a category of that kind is a poor thing to be told you have and a poor thing to study. It is the paragraph's most quotable sentence, it carries the moral, and it reads as the conclusion the whole argument was built towards. The refusal is a phrase in the sentence about two columns: 'the negative definition' is a definite reference to a definition made nowhere but in that judgement, so the judgement must stand in front of it. A second rival opens on the judgement for the same reasons in reverse — it is generic, indefinite at its head and thesis-shaped — and is refused by 'of that kind', which selects a category the paragraph has not yet described. A third opens on the sentence beginning 'The move', taking the definite article as general; the move is named in the sentence that would then follow it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument about disease classification and diagnosis by exclusion; no specific condition, marker, trial or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A premium five-sentence item in which one sentence is written to be both the best opener and the best closer on surface evidence, and is neither. Two small phrases settle it: 'of that kind' looking backwards and 'the negative definition' looking backwards from the sentence after it. The inference marker sits in the second seat and the paragraph ends on a fact about the literature."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A disease can be named by what the patient reports or by what is found to be producing it, and medicine has spent most of its history moving names from the first kind to the second.",
+      "role": "topic"
+    },
+    {
+      "label": "B",
+      "text": "The move looks like progress and is, but it leaves a by-product nobody plans: when a cause is found for part of a complaint the name travels with the cause, and the patients without it are therefore left holding a word that now means only the absence of a test.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "In practice the split shows up as two columns where there was one: a marker, a trial and a clinic in the first, and in the second the old name, the negative definition and the patients who were there first.",
+      "role": "example"
+    },
+    {
+      "label": "D",
+      "text": "The second column grows quieter in the literature every year, not because anything in it has been solved but because 'no abnormality identified' is not a finding anybody can publish.",
+      "role": "evidence"
+    },
+    {
+      "label": "E",
+      "text": "A category of that kind is a poor thing to be told you have and a poor thing to study, since its members have nothing in common but what they were found not to have.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["A", "B", "E", "C", "D"],
+  "links": [
+    {
+      "from": "A",
+      "to": "B",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The move' is a definite reference to a movement already described, and the only one is the moving of names from what a patient reports to what is found to be producing it."
+    },
+    {
+      "from": "B",
+      "to": "E",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'A category of that kind' selects a kind of category, and the kind has just been described: a word that now means only the absence of a test."
+    },
+    {
+      "from": "E",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The second column is said to hold 'the negative definition', a definite phrase whose definition is made only in the sentence about a group whose members have nothing in common but what they were found not to have."
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'The second column' counts, and the two columns are set out immediately before. Without them the closing sentence is about nothing at all."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "An abstraction pursued until it becomes a ward and a filing system. The paragraph states how diseases get their names, describes the by-product of renaming them, judges the category the by-product creates, shows what that looks like in practice, and ends with what happens to it in print. Each step names something the next step points at, which is what makes a five-sentence chain recoverable.",
+    "movement": [
+      { "label": "A", "why_here": "It sets out the two ways of naming a disease and the direction of travel between them. It introduces everything by description and points at nothing, which no other sentence in the set can claim." },
+      { "label": "B", "why_here": "The by-product, and the nucleus. 'The move' collects the movement just described, and its 'therefore' does the paragraph's inferential work in the second seat rather than at the close." },
+      { "label": "E", "why_here": "The judgement on what is left. 'Of that kind' selects the category just created, and the definition it gives — a group with nothing in common but an absence — is the thing the next sentence files under a heading." },
+      { "label": "C", "why_here": "The concrete picture. Two columns where there was one, and the second holding 'the negative definition', which is a definite reference to what the previous sentence defined." },
+      { "label": "D", "why_here": "The close, and it closes on evidence. 'The second column' can only be counted once two exist, and the paragraph ends on a fact about publication rather than on a verdict about medicine." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ABCDE",
+        "trap_type": "competing_ending",
+        "why_tempting": "The judgement about a category defined by absence is the line a reader would underline: it is general, it is about patients rather than about filing, and it delivers the moral the rest of the paragraph has been building towards. Solvers are trained to close on the sentence that widens, and this one widens.",
+        "where_it_breaks": "The sentence about two columns says the second holds 'the negative definition'. That is a definite reference, and the definition it points at — a group whose members have nothing in common but what they were found not to have — is made in the judgement itself. Moved to the end, the judgement would be defining a term the paragraph had already used twice."
+      },
+      {
+        "order": "EABCD",
+        "trap_type": "competing_opener",
+        "why_tempting": "The same sentence is the best candidate for the first seat on surface evidence: it begins with an indefinite noun phrase, contains no pronoun, states a general claim about categories, and would make a strong thesis for a paragraph about classification.",
+        "where_it_breaks": "'Of that kind' selects from a set of kinds, and in the first seat the paragraph has described none. The category in question is the one created when a name travels with a cause, and the sentence that creates it is two places behind in this order."
+      },
+      {
+        "order": "BAECD",
+        "trap_type": "generic_the",
+        "why_tempting": "'The move looks like progress and is' can be read as the general definite of a writer addressing readers who know what modern diagnosis has been doing, and the sentence carries the paragraph's key idea about by-products.",
+        "where_it_breaks": "The move is the shift from naming by complaint to naming by cause, and the only sentence that describes it would then follow the sentence that evaluates it. The paragraph would also concede that something looks like progress before saying what the something is."
+      }
+    ],
+    "trap_named": "The trap is a sentence built to be attractive at both ends. Written generically, with an indefinite subject and no connective, it recommends itself as an opener; written as a judgement about people rather than about procedure, it recommends itself as a close. Neither appearance is evidence. What is evidence is that one phrase in it points backwards, 'of that kind', and one phrase in another sentence points backwards at it, 'the negative definition'. Two pointers put a sentence in one seat and nowhere else.",
+    "solving_habit": "For each candidate closer, ask whether any other sentence uses a term this one defines. If one does, the candidate is not the close, however completely it seems to finish the argument."
+  },
+  "mentor": {
+    "challenge": "One sentence here looks like the best opening and the best ending in the set. Two short phrases put it in the middle.",
+    "paragraph_plain": "A disease can be named for what the patient reports or for what is found to be causing it, and medicine has spent most of its history moving names from the first sort to the second. The move looks like progress and is, but it leaves a by-product nobody plans: when a cause is found for part of a complaint, the name goes with the cause, and the patients who do not have it are left holding a word that now means only the absence of a test. A category like that is a poor thing to be told you have and a poor thing to study, because its members share nothing except what they were found not to have. In practice the split appears as two columns where there used to be one: a marker, a trial and a clinic in the first, and in the second the old name, the negative definition and the patients who were there first. The second column gets quieter in the journals every year, not because anything in it has been solved but because 'no abnormality identified' is not a finding anyone can publish.",
+    "takeaway": "If another sentence uses a term this one defines, this one is not the ending."
+  }
+}

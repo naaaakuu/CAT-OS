@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0066",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 82,
+    "genre": "media",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "The Line Underneath",
+    "theme": "why a photograph asserts nothing until a caption does it for the photograph, and what the caption can then do to what a reader remembers seeing",
+    "estimated_time_sec": 70,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["article_given_new", "lexical_repetition", "connective_explicit", "parallelism"],
+    "primary_trap": "none",
+    "secondary_traps": ["generic_the", "anchor_pair"],
+    "dna_traits": ["opener_heuristic", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 3,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "A",
+    "learning_objective": "find the sentence that first names a thing, and keep every definite reference to it behind that sentence",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.given_new", "disc.example_after_claim", "struct.general_to_specific"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival opens on the sentence about captions, which is indefinite at its head and states the paragraph's mechanism outright, so it reads like a thesis. It is refused by 'the missing sentence': something must already have been said to be missing, and the only sentence that says a photograph shows without saying is the one this order displaces. A second rival makes neighbours of the two sentences about pictures, on the ground that they share a subject; that leaves the crowd outside the building depending on 'the line beneath it' when no line has been mentioned.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument about photographs, captions and assertion; no specific photograph, publication or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy general-to-specific item with no engineered device beyond given and new. Its interest is that the sentence explaining the mechanism reads like a thesis and would open the paragraph comfortably but for two words. The paragraph closes with its inference marker, which is where this argument genuinely lands."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The photograph is therefore evidence of what stood in front of the lens and of very little else, and the queue, the protest and the congregation are all the work of the line underneath.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "A caption supplies the missing sentence, and because that sentence cannot be seen in the image, nothing in the image is able to contradict it.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "One picture of a crowd outside a building is a queue, a protest or a congregation depending on the line beneath it, and a reader who has been told which will remember having seen it.",
+      "role": "example"
+    },
+    {
+      "label": "D",
+      "text": "A photograph shows and does not say, which is the source both of its authority and of its uselessness as a record.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "B", "C", "A"],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The missing sentence' is definite: something has to have been reported as absent, and the absence is in the claim that a photograph shows and does not say."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "The crowd is a queue or a protest 'depending on the line beneath it', and the line beneath is the caption introduced in the sentence before. Without it the example has no variable to turn."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "The conclusion names the queue, the protest and the congregation as the caption's work, and all three are supplied by the example immediately before it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A general claim about what a photograph can and cannot do, the mechanism that fills the gap, one case that shows the mechanism turning, and the conclusion drawn from the case. The paragraph narrows steadily, and its last sentence collects three words from the example, which is what pins the two of them together.",
+    "movement": [
+      { "label": "D", "why_here": "It states the property the whole paragraph works from, that an image shows without asserting, and it introduces the absence that the next sentence fills." },
+      { "label": "B", "why_here": "The mechanism. 'The missing sentence' is the one the photograph cannot say, and the point that nothing in the image can contradict a caption is what makes the example alarming rather than merely interesting." },
+      { "label": "C", "why_here": "The case, and the only concrete thing in the set. It depends on 'the line beneath it', which is the caption just introduced, and it supplies the three readings the conclusion lists." },
+      { "label": "A", "why_here": "The conclusion, and the close. Its 'therefore' draws the inference at the end, which is honest here, and its three nouns are collected from the sentence before it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDCA",
+        "trap_type": "generic_the",
+        "why_tempting": "'The missing sentence' can be heard as a stock phrase rather than a reference — the sentence a picture is always missing — in which case it introduces an idea instead of collecting one. The line then opens on an indefinite noun phrase, carries no pronoun or demonstrative, and states the paragraph's mechanism in eight words.",
+        "where_it_breaks": "'The missing sentence' is a definite reference to something reported absent, and nothing has gone missing in the first seat. The claim that a photograph shows and does not say is what creates the gap, and in this order it arrives afterwards, explaining a lack the paragraph has already filled."
+      },
+      {
+        "order": "DCBA",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences are about pictures and one is about captions, so a solver grouping by subject will keep the picture sentences together and treat the caption as the explanation that follows the illustration.",
+        "where_it_breaks": "The crowd is a queue, a protest or a congregation 'depending on the line beneath it', and no line has been mentioned. The example needs the caption already on the page, because the caption is the thing being varied."
+      }
+    ],
+    "trap_named": "There is no device hidden here; the item practises the plainest rule in the subject. A definite phrase such as 'the missing sentence' or 'the line beneath it' is a receipt for something the paragraph has already handed over, and the sentence that handed it over stands in front. Sentences that sound like theses are not exempt from this, which is the only thing that makes the item worth doing.",
+    "solving_habit": "Go through the set marking every 'the'. For each one, ask which sentence first put that thing on the page; the answer gives you the joins without any judgement about what reads well."
+  },
+  "mentor": {
+    "challenge": "One sentence here would make a fine opening except for the word 'missing'.",
+    "paragraph_plain": "A photograph shows and does not say, which is the source both of its authority and of its uselessness as a record. A caption supplies the sentence the picture is missing, and because that sentence cannot be seen in the image, nothing in the image can contradict it. One picture of a crowd outside a building is a queue, a protest or a congregation depending on the line beneath it, and a reader who has been told which will remember having seen it. The photograph is therefore evidence of what stood in front of the lens and of very little else, and the queue, the protest and the congregation are all the work of the line underneath.",
+    "takeaway": "'The missing sentence' is a receipt. Somebody has already handed you the loss."
+  }
+}

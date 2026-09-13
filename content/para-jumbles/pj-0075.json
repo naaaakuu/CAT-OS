@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0075",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "public-policy",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "Written Twice",
+    "theme": "why the schedule of exemptions rather than the operative clause carries what a policy actually does",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["former_latter", "connective_explicit", "article_given_new", "lexical_repetition"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["generic_the", "misleading_connective"],
+    "dna_traits": ["ending_judgement", "opener_heuristic", "premature_closure"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 3,
+      "competing_endings": 4,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "B",
+    "learning_objective": "let an instruction stand before the demonstration that applies it, even when the instruction is the more quotable sentence",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.competing_ending", "disc.example_after_claim", "disc.cause_effect", "struct.general_to_specific"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival ends on the instruction to read the schedule first, which carries the paragraph's 'therefore', gives the reader something to do, and is by some distance the most quotable line. The example about packaging then goes third, where its closing clause strands: 'that question' points at the question about who was in the room, and only the instruction asks it. A second rival opens on the example, which is concrete and free of backward reference at its head, and founders on the same clause. A third pulls the instruction into the second seat, where 'therefore' has only the observation that a rule is written twice, which gives no reason to read either half first.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument about statutory exemptions and policy drafting; no specific statute, levy, industry or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An advanced item whose closing seat is contested by an instruction. Instructions feel terminal because they hand the reader a task, and this one also carries the connective; the example that must follow it is held in place by a single participial phrase. The decoy opener is that same example, which reads as a concrete first line."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Every rule of general application is written twice: once in the clause that states it, and once in the list of those it does not apply to.",
+      "role": "topic"
+    },
+    {
+      "label": "B",
+      "text": "Reading a policy therefore means reading its schedule first and asking who was in the room when it was drafted, rather than what the clause announces it is for.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "The second list is where the politics went, since a rule nobody is exempt from has to be fought in public, while an exemption can be granted in a schedule nobody reads.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "A levy on packaging that exempts the smallest producers is a levy on large ones, and the same levy with the exemption set a little higher is a subsidy for whoever sits just below the new line; that question, and not the clause, tells you which of the two you have.",
+      "role": "example"
+    }
+  ],
+  "correct_order": ["A", "C", "B", "D"],
+  "links": [
+    {
+      "from": "A",
+      "to": "C",
+      "device": "former_latter_reference",
+      "reliability": "high",
+      "explanation": "'The second list' counts, and the two lists are the clause that states a rule and the list of those it does not apply to. Nothing else in the set offers a pair to count from."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Therefore' needs a reason for reading the schedule before the clause, and the reason is that the politics went into the schedule because an exemption can be granted unobserved."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "The example ends on 'that question', and exactly one sentence asks a question: who was in the room when the policy was drafted. The demonstrative has one possible antecedent and it is immediately in front."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A general truth about how rules are drafted, the political reason it matters, the instruction that follows, and a worked case in which the instruction is applied. The paragraph narrows from every rule to one levy, and the last sentence is a demonstration rather than a verdict, which is why the sentence that sounds like the conclusion is not the final one.",
+    "movement": [
+      { "label": "A", "why_here": "It states the general claim and creates the pair — the clause and the list — that the next sentence counts from. It refers to nothing behind it, which no other sentence here can say." },
+      { "label": "C", "why_here": "The reason. 'The second list' is the exemption list just named, and the asymmetry it describes, between a fight in public and a grant in a schedule, is what makes the instruction worth giving." },
+      { "label": "B", "why_here": "The instruction, and the nucleus. Its 'therefore' rests on the asymmetry immediately above it, and it supplies the method that the final sentence applies." },
+      { "label": "D", "why_here": "The worked case, and the close. Two settings of one exemption turn the same levy into a tax and a subsidy, and the closing clause performs the instruction rather than restating it, which is what a demonstration does." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ACDB",
+        "trap_type": "competing_ending",
+        "why_tempting": "The instruction is the most quotable sentence in the set, it carries the paragraph's 'therefore', and it hands the reader something to do, which is how policy writing usually ends. The packaging example looks like the illustration a writer would place in the middle before drawing the lesson.",
+        "where_it_breaks": "The example ends on 'that question', and the only question asked anywhere is who was in the room when the policy was drafted. This order moves the sentence that asks it to the end, leaving the demonstrative with nothing to point at. A demonstration cannot precede the rule it demonstrates."
+      },
+      {
+        "order": "DACB",
+        "trap_type": "generic_the",
+        "why_tempting": "The sentence refers to 'the schedule' as though any reader of statutes knows which part of an instrument that is, which makes the reference look like a fact about the world rather than a pointer into the paragraph. A levy on packaging is also concrete and specific, and opening on a case is a standard shape for a paragraph about policy.",
+        "where_it_breaks": "The same closing phrase refuses it: 'that question' points at a question nobody has asked, and 'the clause' is definite when no clause has been mentioned. The paragraph also moves from every rule to one levy, so the case is where it arrives rather than where it starts."
+      },
+      {
+        "order": "ABCD",
+        "trap_type": "misleading_connective",
+        "why_tempting": "A sentence carrying 'therefore' seems to belong immediately after the claim it draws on, and the claim that a rule is written twice is right there in the first seat. The sentence about where the politics went then reads as elaboration.",
+        "where_it_breaks": "Being written twice is no reason to read either half first. The reason is that one half can be altered unobserved while the other has to be fought over in public, and that sentence is the one this order pushes behind the inference it licenses."
+      }
+    ],
+    "trap_named": "The trap is an instruction in the closing seat. Telling the reader what to do feels like the end of an argument, and this instruction carries the connective as well, so two habits point the same way. What refuses it is a participial phrase in another sentence: 'read first' is an application, and applications follow the rule they apply. Where a paragraph ends on a worked case, the instruction is one seat earlier, and the case will quietly cite it.",
+    "solving_habit": "Check whether any sentence performs a method rather than stating one, and find the demonstrative that names it. A sentence that says 'done this way, you see such and such' is applying an instruction, and the instruction stands directly in front of it."
+  },
+  "mentor": {
+    "challenge": "One sentence tells you what to do and one sentence does it. The doing comes second.",
+    "paragraph_plain": "Every rule of general application is written twice: once in the clause that states it, and once in the list of those it does not apply to. The second list is where the politics went, because a rule nobody is exempt from has to be fought over in public, while an exemption can be handed out in a schedule nobody reads. Reading a policy therefore means reading its schedule first and asking who was in the room when it was drafted, rather than what the clause says it is for. A levy on packaging that exempts the smallest producers is a levy on the large ones, and the same levy with the exemption set a little higher is a subsidy for whoever sits just below the new line; that question, and not the clause, tells you which of the two you are looking at.",
+    "takeaway": "A sentence that performs a method stands behind the sentence that gives it."
+  }
+}

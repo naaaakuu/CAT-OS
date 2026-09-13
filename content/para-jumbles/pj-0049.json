@@ -41,7 +41,7 @@
     },
     "num_plausible_orderings": 3,
     "heuristic_adversarial": true,
-    "nucleus": "A",
+    "nucleus": "B",
     "learning_objective": "refuse a general-sounding statement the opening seat when a degree phrase inside it points back at a description",
     "reasoning_patterns": ["disc.competing_opener", "disc.demonstrative", "disc.claim_then_evidence", "disc.pronoun_antecedent", "struct.claim_evidence"],
     "quality": {
@@ -64,13 +64,13 @@
   "sentences": [
     {
       "label": "A",
-      "text": "The suspicion such a run attracts is therefore a claim about the procedure that produced the figures rather than about the figures themselves, which is what keeps it short of an accusation.",
-      "role": "conclusion"
+      "text": "Instruments are noisy in ways no theory models, and a run that clean is less probable than a scattered one even when the proposition under test is exactly right.",
+      "role": "evidence"
     },
     {
       "label": "B",
-      "text": "Nothing in a laboratory looks more like success than a set of readings that sits on the predicted curve with no stray point anywhere.",
-      "role": "topic"
+      "text": "The suspicion such a run attracts is therefore a claim about the procedure that produced the figures rather than about the figures themselves, which is what keeps it short of an accusation.",
+      "role": "conclusion"
     },
     {
       "label": "C",
@@ -79,28 +79,28 @@
     },
     {
       "label": "D",
-      "text": "Instruments are noisy in ways no theory models, and a run that clean is less probable than a scattered one even when the proposition under test is exactly right.",
-      "role": "evidence"
+      "text": "Nothing in a laboratory looks more like success than a set of readings that sits on the predicted curve with no stray point anywhere.",
+      "role": "topic"
     }
   ],
-  "correct_order": ["B", "D", "A", "C"],
+  "correct_order": ["D", "A", "B", "C"],
   "links": [
     {
-      "from": "B",
-      "to": "D",
+      "from": "D",
+      "to": "A",
       "device": "demonstrative_reference",
       "reliability": "high",
       "explanation": "'A run that clean' is a degree phrase: it names a standard of cleanliness that some earlier sentence has to have set, and the only description of one is readings sitting on the predicted curve with no stray point."
     },
     {
-      "from": "D",
-      "to": "A",
+      "from": "A",
+      "to": "B",
       "device": "logical_connector",
       "reliability": "high",
       "explanation": "'Therefore' needs a premise that makes suspicion reasonable, and the premise is that a clean run is the less probable outcome even for a true proposition. Nothing else in the set supplies a reason to be suspicious of success."
     },
     {
-      "from": "A",
+      "from": "B",
       "to": "C",
       "device": "pronoun_reference",
       "reliability": "high",
@@ -110,26 +110,26 @@
   "explanation": {
     "macro_pattern_note": "The paragraph argues, in four moves, that a familiar reaction is reasonable and that it is reasonable about something other than what it appears to be about. An observation about what success looks like, a fact that makes that appearance improbable, the inference the fact licenses, and finally what acting on the inference consists of. The argument is cumulative, so no sentence can be lifted over the one that supplies its premise.",
     "movement": [
-      { "label": "B", "why_here": "It sets the scene by naming the thing everybody admires, and it is the only sentence that describes rather than refers. The description it supplies, a curve with no stray point, is what two later sentences depend on." },
-      { "label": "D", "why_here": "It produces the awkward fact, that noise makes a clean run less likely than a ragged one. Its 'a run that clean' measures itself against the description just given, which is why it cannot stand at the front however general its opening clause sounds." },
-      { "label": "A", "why_here": "The inference, and the nucleus. 'Therefore' draws on the improbability just stated, and the sentence redirects the reader's suspicion from the numbers to the procedure that produced them." },
+      { "label": "D", "why_here": "It sets the scene by naming the thing everybody admires, and it is the only sentence that describes rather than refers. The description it supplies, a curve with no stray point, is what two later sentences depend on." },
+      { "label": "A", "why_here": "It produces the awkward fact, that noise makes a clean run less likely than a ragged one. Its 'a run that clean' measures itself against the description just given, which is why it cannot stand at the front however general its opening clause sounds." },
+      { "label": "B", "why_here": "The inference, and the nucleus. 'Therefore' draws on the improbability just stated, and the sentence redirects the reader's suspicion from the numbers to the procedure that produced them." },
       { "label": "C", "why_here": "It shows what the inference costs in practice: three questions about how the data were handled. Its opening 'it' is the suspicion, so it has to follow the sentence that names one, and the paragraph ends on procedure rather than on a verdict." }
     ],
     "tempting_orders": [
       {
-        "order": "BDCA",
+        "order": "DACB",
         "trap_type": "competing_ending",
         "why_tempting": "Solvers are taught that the sentence carrying 'therefore' is the paragraph's landing, and this one also reads like a moral, since it draws a careful distinction and protects the scientist from a charge of fraud. The referee's three questions look like the sort of practical detail a writer gets out of the way in the middle.",
         "where_it_breaks": "The checklist opens 'A referee acting on it'. In the third seat there is no suspicion behind it for the referee to act on, because the sentence that names the suspicion has been moved to the end. A pronoun cannot wait two sentences for an antecedent that arrives after it."
       },
       {
-        "order": "DBAC",
+        "order": "ADBC",
         "trap_type": "competing_opener",
         "why_tempting": "The statement about instruments being noisy is a flat general truth with no pronoun, no demonstrative and no connective at its head. A solver looking for the sentence that introduces rather than refers will take it, and the rest then falls into a respectable order.",
         "where_it_breaks": "Its second clause says 'a run that clean'. That measures cleanliness against a standard, and the only standard in the set is the set of readings sitting on the predicted curve with no stray point anywhere. In the first seat the phrase compares the run to nothing."
       },
       {
-        "order": "BADC",
+        "order": "DBAC",
         "trap_type": "misleading_connective",
         "why_tempting": "An inference placed straight after the opening observation looks like the natural second move, and 'the suspicion such a run attracts' picks up the run that has just been described, so the join reads smoothly on the surface.",
         "where_it_breaks": "'Therefore' has nothing to work on. The observation that clean data look like success is not a reason to be suspicious of them; the reason is the improbability of such a run under noise, and that sentence has been pushed behind the inference it was meant to license."

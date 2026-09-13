@@ -41,12 +41,12 @@
     },
     "num_plausible_orderings": 5,
     "heuristic_adversarial": true,
-    "nucleus": "D",
+    "nucleus": "C",
     "learning_objective": "read a comparative as a backward reference, and let an abstract paragraph end on its instance rather than on its most quotable line",
     "reasoning_patterns": ["disc.general_to_specific", "disc.example_after_claim", "disc.demonstrative", "disc.competing_ending", "struct.claim_evidence", "lang.comparative"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The live rival ends on the sentence that separates accuracy from safety, and it is a strong rival: that sentence carries the paragraph's 'then', states the distinction the whole argument exists to draw, and is the only line anybody would quote. It is refused by four words in the translation example, 'What safety of that kind', which cannot select a kind of safety before any kind has been named. A second rival opens on the sentence about the shape of a system's mistakes, which is generic, thesis-shaped and free of pronouns; the refusal is the comparative 'matters more', which needs something ranked below it, and only accuracy is ever ranked. A third rival draws the accuracy-and-safety distinction immediately after the opening claim, where 'that manner' has no manner behind it to decide anything.",
+      "adversarial_review": "The live rival ends on the sentence that separates accuracy from safety, and it is a strong rival: that sentence carries the paragraph's 'then', states the distinction the whole argument exists to draw, and is the only line anybody would quote. It is refused by the opening of the translation example, 'That pairing of machine and user': no other sentence puts a person beside a machine, so the demonstrative has exactly one possible antecedent and it is the sentence this order would displace. A second rival opens on the sentence about the shape of a system's mistakes, which is generic, thesis-shaped and free of pronouns; the refusal is the comparative 'matters more', which needs something ranked below it, and only accuracy is ever ranked. A third rival draws the accuracy-and-safety distinction immediately after the opening claim, where 'that manner' has no manner behind it to decide anything.",
       "blind_solve": null
     },
     "source": {
@@ -64,36 +64,36 @@
   "sentences": [
     {
       "label": "A",
-      "text": "What safety of that kind looks like can be seen in a translation engine: one that returns broken grammar is repaired by the first reader who meets it, while one that returns a fluent sentence with a negation quietly dropped is repaired by nobody, and the reader acting on it never learns that he was the only check there was.",
-      "role": "example"
-    },
-    {
-      "label": "B",
-      "text": "Accuracy belongs to the machine, then, while the property that manner decides — safety, in the only sense a user has any interest in — belongs to the machine together with whoever is standing next to it, and the second cannot be read off the first however many decimal places the first is quoted to.",
-      "role": "development"
-    },
-    {
-      "label": "C",
       "text": "The moral properties of a machine are looked for in its accuracy, which is the one property its builders can report and its buyers can compare.",
       "role": "topic"
     },
     {
-      "label": "D",
+      "label": "B",
+      "text": "Accuracy belongs to the machine, while the property that manner decides — safety, in the only sense a user has any interest in — belongs to the machine together with whoever is standing next to it, and the second cannot be read off the first however many decimal places the first is quoted to.",
+      "role": "development"
+    },
+    {
+      "label": "C",
       "text": "The shape of a system's mistakes matters more and is harder to advertise, so the question worth asking is not how often it is wrong but whether a wrong answer arrives wearing the same manner as a right one.",
       "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "That pairing of machine and user is easiest to see in a translation engine: one that returns broken grammar is repaired by the first reader who meets it, while one that returns a fluent sentence with a negation quietly dropped is repaired by nobody, and the reader acting on it never learns that he was the only check there was.",
+      "role": "example"
     }
   ],
-  "correct_order": ["C", "D", "B", "A"],
+  "correct_order": ["A", "C", "B", "D"],
   "links": [
     {
-      "from": "C",
-      "to": "D",
+      "from": "A",
+      "to": "C",
       "device": "parallel_structure",
       "reliability": "high",
       "explanation": "'Matters more' is a comparative with no second term of its own. Something must already have been offered as the thing that matters, and the only candidate is accuracy, which the opening sentence names as the property everyone reports and compares."
     },
     {
-      "from": "D",
+      "from": "C",
       "to": "B",
       "device": "demonstrative_reference",
       "reliability": "high",
@@ -101,35 +101,35 @@
     },
     {
       "from": "B",
-      "to": "A",
+      "to": "D",
       "device": "demonstrative_reference",
       "reliability": "high",
-      "explanation": "'Safety of that kind' selects one sense of safety from among others, and the sense has just been defined as a property of the machine together with whoever is standing next to it."
+      "explanation": "'That pairing of machine and user' points at a pairing already made, and exactly one sentence makes one: safety belongs to the machine together with whoever is standing next to it. Neither the opening claim nor the sentence about manner puts a person beside a machine at all."
     }
   ],
   "explanation": {
     "macro_pattern_note": "The paragraph moves from an abstraction to the case that shows what the abstraction costs. It begins with where moral judgement is usually looked for, replaces the criterion, restates the replacement as a distinction between two kinds of property, and only then produces a machine you can picture. Because the case is introduced as an instance of a term defined one sentence earlier, the concrete example has to come last, which is the opposite of where its vividness suggests it belongs.",
     "movement": [
-      { "label": "C", "why_here": "It names the received criterion and explains why it is the received one: accuracy is reportable and comparable. It introduces everything by description and refers to nothing, which is what an opener does." },
-      { "label": "D", "why_here": "The replacement, and the nucleus. Its comparative, 'matters more', ranks the shape of a system's mistakes above the criterion just named, and its 'so' draws the inference in the second seat rather than at the close." },
+      { "label": "A", "why_here": "It names the received criterion and explains why it is the received one: accuracy is reportable and comparable. It introduces everything by description and refers to nothing, which is what an opener does." },
+      { "label": "C", "why_here": "The replacement, and the nucleus. Its comparative, 'matters more', ranks the shape of a system's mistakes above the criterion just named, and its 'so' draws the inference in the second seat rather than at the close." },
       { "label": "B", "why_here": "The distinction, built out of the previous sentence's word 'manner'. It separates a property of the machine from a property of the machine and its user together, and it names the second, which the last sentence then illustrates." },
-      { "label": "A", "why_here": "The instance, and the close. 'Safety of that kind' can only mean the sense defined immediately before, and the paragraph ends with a reader who does not know he is the last line of defence, which is evidence rather than verdict." }
+      { "label": "D", "why_here": "The instance, and the close. 'That pairing' can only be the machine-and-user pairing just defined, and the paragraph ends with a reader who does not know he is the last line of defence, which is evidence rather than verdict." }
     ],
     "tempting_orders": [
       {
-        "order": "CDAB",
+        "order": "ACDB",
         "trap_type": "competing_ending",
         "why_tempting": "The sentence separating accuracy from safety is the most quotable line in the set, it carries the paragraph's inferential 'then', and it ends on a flourish about decimal places. Everything a solver has been taught about closing sentences points at it, and the translation engine reads like the illustration a writer would put in the middle before drawing the moral.",
-        "where_it_breaks": "The translation engine is introduced as 'What safety of that kind looks like'. A phrase of that form selects one sense of a term from several, and no sense of safety has been named at that point; the sentence naming one would be standing behind it. The example cannot illustrate a definition it precedes."
+        "where_it_breaks": "The translation engine is introduced as 'That pairing of machine and user'. A demonstrative of that shape needs a pairing already made, and only one sentence makes one, by saying that safety belongs to the machine together with whoever is standing next to it. In this order that sentence stands behind the example that points at it."
       },
       {
-        "order": "DCBA",
+        "order": "CABD",
         "trap_type": "competing_opener",
         "why_tempting": "'The shape of a system's mistakes matters more and is harder to advertise' is generic, confident and thesis-shaped: no pronoun, no demonstrative, no connective at its head, and the rest of the paragraph does support it. A solver looking for the author's proposition will find it here.",
         "where_it_breaks": "'Matters more' is a comparative, and a comparative with nothing to compare itself to is an unfinished sentence. What it outranks is accuracy, and accuracy is named in the sentence about what builders report and buyers compare, which in the first seat has not been said."
       },
       {
-        "order": "CBDA",
+        "order": "ABCD",
         "trap_type": "misleading_connective",
         "why_tempting": "The distinction between a property of the machine and a property of the machine plus its user reads like the immediate philosophical consequence of the opening claim, and its 'then' invites a solver to place it as soon as the paragraph has something to draw a consequence from.",
         "where_it_breaks": "It speaks of 'the property that manner decides'. No manner has been described in that seat: the manner in question — a wrong answer arriving dressed as a right one — is defined in the sentence this order moves behind it, so the demonstrative selects from an empty set."
@@ -140,7 +140,7 @@
   },
   "mentor": {
     "challenge": "The most quotable sentence here is not the last one, and the most thesis-like sentence is not the first. Two small words settle both.",
-    "paragraph_plain": "We look for the moral qualities of a machine in its accuracy, because accuracy is the one thing its builders can report and its buyers can compare. But the shape of a system's mistakes matters more and is much harder to advertise, so the question worth asking is not how often it is wrong but whether a wrong answer turns up looking exactly like a right one. Accuracy, then, is a property of the machine; the property that manner decides — safety, in the only sense a user cares about — is a property of the machine together with whoever is standing next to it, and you cannot read the second off the first however precisely the first is quoted. You can see what that kind of safety means in a translation engine: one that produces broken grammar is corrected by the first person who reads it, while one that produces a fluent sentence with the 'not' quietly missing is corrected by nobody, and the reader who acts on it never discovers that he was the only check in the system.",
+    "paragraph_plain": "We look for the moral qualities of a machine in its accuracy, because accuracy is the one thing its builders can report and its buyers can compare. But the shape of a system's mistakes matters more and is much harder to advertise, so the question worth asking is not how often it is wrong but whether a wrong answer turns up looking exactly like a right one. Accuracy is a property of the machine; the property that manner decides — safety, in the only sense a user cares about — is a property of the machine together with whoever is standing next to it, and you cannot read the second off the first however precisely the first is quoted. You can see that pairing at work in a translation engine: one that produces broken grammar is corrected by the first person who reads it, while one that produces a fluent sentence with the 'not' quietly missing is corrected by nobody, and the reader who acts on it never discovers that he was the only check in the system.",
     "takeaway": "A comparative is a backward reference. 'More' than what has to be behind you."
   }
 }

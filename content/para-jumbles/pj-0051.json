@@ -23,7 +23,7 @@
     "macro_pattern": "claim_evidence",
     "cohesion_signals": ["article_given_new", "pronoun_ref", "demonstrative", "lexical_repetition"],
     "primary_trap": "generic_the",
-    "secondary_traps": ["misleading_connective", "competing_opener"],
+    "secondary_traps": ["misleading_connective", "false_pronoun_binding"],
     "dna_traits": ["opener_heuristic", "inference_implicit", "global_tracking"],
     "difficulty_vector": {
       "vocabulary_load": 3,
@@ -64,18 +64,18 @@
   "sentences": [
     {
       "label": "A",
-      "text": "The comparison that shows it is between appeals carrying one named child and appeals carrying two: the first collect more, and the fall begins at the second name rather than at the hundredth.",
-      "role": "evidence"
+      "text": "The generosity a stranger's photograph produces is not a quantity of sympathy divided among the people standing in it.",
+      "role": "topic"
     },
     {
       "label": "B",
-      "text": "Fundraisers reached that conclusion long before anyone measured it: the letter arriving in December carries a name, an age and a photograph, and puts the number of people in the same position, if it appears at all, in the last line.",
-      "role": "example"
+      "text": "The comparison that shows it is between appeals carrying one named child and appeals carrying two: the first collect more, and the shortfall appears as soon as the second name does, not at the hundredth.",
+      "role": "evidence"
     },
     {
       "label": "C",
-      "text": "The generosity a stranger's photograph produces is not a quantity of sympathy divided among the people standing in it.",
-      "role": "topic"
+      "text": "Fundraisers were selling that relation long before anyone measured it: the letter arriving in December carries a name, an age and a photograph, and puts the number of people in the same position, if it appears at all, in the last line.",
+      "role": "example"
     },
     {
       "label": "D",
@@ -83,17 +83,17 @@
       "role": "development"
     }
   ],
-  "correct_order": ["C", "A", "D", "B"],
+  "correct_order": ["A", "B", "D", "C"],
   "links": [
     {
-      "from": "C",
-      "to": "A",
+      "from": "A",
+      "to": "B",
       "device": "pronoun_reference",
       "reliability": "high",
       "explanation": "'The comparison that shows it' needs a proposition for the comparison to show, and the only proposition in the set is the claim that generosity is not a quantity being divided."
     },
     {
-      "from": "A",
+      "from": "B",
       "to": "D",
       "device": "lexical_bridge",
       "reliability": "high",
@@ -101,37 +101,37 @@
     },
     {
       "from": "D",
-      "to": "B",
+      "to": "C",
       "device": "demonstrative_reference",
       "reliability": "high",
-      "explanation": "'That conclusion' points at a conclusion rather than at a finding, and the only sentence that concludes anything is the one about buying a relation rather than a share of sympathy."
+      "explanation": "'That relation' points at a relation already named, and only one sentence names one: what the giver buys is a relation with somebody. Neither the opening claim nor the comparison mentions a relation at all."
     }
   ],
   "explanation": {
     "macro_pattern_note": "A claim, the comparison that tests it, the explanation of why the comparison came out that way, and finally a practice that was already built on the explanation before anyone had tested it. The paragraph is cumulative in the strict sense: each sentence uses a term the sentence before it introduced, which is why the order is fixed even though three of the four sentences begin on a definite phrase.",
     "movement": [
-      { "label": "C", "why_here": "It states the claim, and it is the only sentence whose definite phrases point outside the paragraph: a stranger's photograph and the people standing in it need no introduction from anywhere else in the set." },
-      { "label": "A", "why_here": "The evidence, announced as such. 'The comparison that shows it' identifies what it is evidence for, and it supplies the two numbers — the second name and the hundredth — that the next sentence spends." },
+      { "label": "A", "why_here": "It states the claim, and it is the only sentence whose definite phrases point outside the paragraph: a stranger's photograph and the people standing in it need no introduction from anywhere else in the set." },
+      { "label": "B", "why_here": "The evidence, announced as such. 'The comparison that shows it' identifies what it is evidence for, and it supplies the two numbers — the second name and the hundredth — that the next sentence spends." },
       { "label": "D", "why_here": "The explanation, and the nucleus. It says what the giver is actually buying, and its 'so' draws the inference in the middle of the paragraph rather than at the end. It cannot precede the comparison because its force depends on where the drop begins." },
-      { "label": "B", "why_here": "The close, and it closes on a practice rather than a verdict. 'That conclusion' is the relation-not-aggregate point, and the December letter shows fundraisers acting on it before anybody had produced the comparison." }
+      { "label": "C", "why_here": "The close, and it closes on a practice rather than a verdict. 'That relation' is the one the previous sentence says a giver is buying, and the December letter shows fundraisers selling it before anybody had produced the comparison." }
     ],
     "tempting_orders": [
       {
-        "order": "DCAB",
+        "order": "DABC",
         "trap_type": "generic_the",
         "why_tempting": "'What the giver buys' is a generic subject of exactly the kind a thesis uses: no pronoun, no demonstrative, no connective at the head, and a general claim about givers rather than about any particular appeal. A solver who wants the paragraph's idea at the front will find it there and feel confirmed by how well the rest reads as support.",
         "where_it_breaks": "The sentence spends numbers it has not been given. It says the drop is already there at the second name, and it sets that against a number large enough to exhaust a feeling; both belong to the comparison between appeals carrying one child and appeals carrying two. In the first seat there is no second name and no counting for it to belong to."
       },
       {
-        "order": "CDAB",
+        "order": "ADBC",
         "trap_type": "misleading_connective",
         "why_tempting": "The explanation reads as the immediate consequence of the claim — the claim says generosity is not a quantity divided, the explanation says what it is instead — and the inferential 'so' inside it invites a solver to place it as soon as the paragraph has something to infer from.",
         "where_it_breaks": "The inference is about where the drop begins, and nothing has yet reported a drop. The sentence that does report one announces itself as 'the comparison that shows it', which is an offer to demonstrate a claim that the paragraph would by then have already explained and left behind."
       },
       {
-        "order": "ACDB",
-        "trap_type": "competing_opener",
-        "why_tempting": "Paragraphs of this shape often open on the finding and work outwards, and the comparison is the most concrete sentence in the set. A solver who distrusts abstract openings will prefer it to a sentence about quantities of sympathy.",
+        "order": "BADC",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'The comparison that shows it' can be read with the loose forward-looking 'it' of ordinary speech — the comparison that shows it is between one child and two — in which case the pronoun refers to the rest of the sentence rather than to anything earlier, and the finding becomes a self-standing opening of the kind claim-and-evidence paragraphs often use.",
         "where_it_breaks": "It opens 'The comparison that shows it'. In the first seat 'it' has nothing to refer to, and a sentence that announces itself as a demonstration cannot be the first thing said."
       }
     ],
@@ -140,7 +140,7 @@
   },
   "mentor": {
     "challenge": "Three sentences here begin on a definite or generic phrase. Only one of them points at something outside the paragraph.",
-    "paragraph_plain": "The generosity a stranger's photograph produces is not a fixed amount of sympathy being shared out among the people in the picture. The comparison that demonstrates this sets appeals naming one child against appeals naming two: the ones naming one collect more, and the decline appears at the second name, not at the hundredth. What the giver is buying is a relationship with somebody, and you cannot have a relationship with a group however small the group is, so the loss is already there at the second name, long before any number big enough to wear a feeling out. Fundraisers worked this out well before anyone measured it, which is why the letter that lands in December gives you a name, an age and a photograph, and leaves the number of others in the same situation, if it mentions it at all, to the final line.",
+    "paragraph_plain": "The generosity a stranger's photograph produces is not a fixed amount of sympathy being shared out among the people in the picture. The comparison that demonstrates this sets appeals naming one child against appeals naming two: the ones naming one collect more, and the shortfall appears as soon as the second name does, not at the hundredth. What the giver is buying is a relationship with somebody, and you cannot have a relationship with a group however small the group is, so the loss is already there at the second name, long before any number big enough to wear a feeling out. Fundraisers were selling that relationship well before anyone measured it: the letter that lands in December gives you a name, an age and a photograph, and leaves the number of others in the same situation, if it mentions it at all, to the final line.",
     "takeaway": "A generic subject can still be tied down. Follow the numbers a sentence spends."
   }
 }

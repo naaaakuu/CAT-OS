@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0061",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 82,
+    "genre": "markets",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "beginner",
+    "title": "Half Past Six on the Fish Stall",
+    "theme": "why the price of a perishable good falls as the day ends, and what that shows a price to be",
+    "estimated_time_sec": 70,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "specific_to_general",
+    "cohesion_signals": ["article_given_new", "demonstrative", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "generic_the",
+    "secondary_traps": ["anchor_pair", "competing_opener"],
+    "dna_traits": ["opener_heuristic", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": false,
+    "nucleus": "B",
+    "learning_objective": "distinguish a definite article that means any seller at all from one that means the seller just described",
+    "reasoning_patterns": ["disc.specific_to_general", "disc.given_new", "disc.demonstrative", "struct.specific_to_general"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence beginning 'The seller is comparing two sums', because that is exactly how a short economics paragraph often begins: a generic actor, a present tense, no pronoun. What refuses it is 'the box', which is the box of fish on the stall and nothing else, and 'in this trade', which needs a trade to have been named. A second rival makes neighbours of the two sentences that carry examples, the stall and the coats, on the ground that they are the concrete pair; that strands 'The same comparison', which needs a comparison already set out. A third opens on the general claim about prices, which is where a specific-to-general paragraph ends rather than begins, and whose closing clause names coats and seats that have not appeared.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General microeconomics of perishability and clearance pricing; no specific market, trader or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A beginner item whose only real difficulty is a definite article that can be read two ways. 'The seller' looks generic and would make a serviceable opening; 'the box' in the same sentence is specific and forbids it. The paragraph closes with its general claim and carries the inference marker there rather than in the middle."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The seller is comparing two sums: what the box will fetch in the next hour and what it will fetch tomorrow, which in this trade is nothing at all.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "A price is not a fact about a thing but a guess about how long it can wait, which is why the coats move in March and the seats go at the door.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "At six in the evening the fish on the last stall costs half what it cost at nine, and nobody standing there believes the fishmonger has grown generous.",
+      "role": "example"
+    },
+    {
+      "label": "D",
+      "text": "The same comparison runs, more slowly, behind a shop full of winter coats in March and a theatre with forty empty seats ten minutes before the curtain.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The box' and 'this trade' are both specific: the box is the fish on the stall and the trade is fishmongering. Neither can be collected by a reader who has not been shown the stall first."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'The same comparison' needs a comparison to have been set out, and the only one is between what the box fetches in the next hour and what it fetches tomorrow."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The closing claim ends on 'the coats' and 'the seats', and both are introduced in the sentence about the shop in March and the theatre before the curtain."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "One scene, the reasoning behind it, two more cases at a slower speed, and then the rule that covers all three. The paragraph widens steadily, which is why the general claim cannot come first: it is the only sentence whose examples are drawn from the sentences in front of it.",
+    "movement": [
+      { "label": "C", "why_here": "The scene. It introduces the stall, the fish and the hour, and it is the only sentence that describes rather than points. Everything definite in the paragraph is collected from here." },
+      { "label": "A", "why_here": "The reasoning inside the scene. Its 'the box' is the fish already described, and the two sums it weighs are what the next sentence calls the same comparison." },
+      { "label": "D", "why_here": "The widening. The coats and the seats are the same calculation on a longer clock, and they supply the two instances the final sentence points back at." },
+      { "label": "B", "why_here": "The rule, and the close. It says what a price is, and its 'which is why' explains the coats and the seats rather than announcing them, so it has to stand after the sentence that produced them." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ACDB",
+        "trap_type": "generic_the",
+        "why_tempting": "'The seller is comparing two sums' reads like the opening of any short piece of economic writing: a generic actor, the present tense, no pronouns and a promise of an explanation. Read that way the fish stall becomes the illustration that follows the principle.",
+        "where_it_breaks": "The same sentence says 'the box' and 'in this trade'. A box that has not been mentioned cannot be referred to definitely, and the trade in question is fishmongering, which the stall sentence supplies. The definite articles here are specific, not generic, and they are pointing at a sentence that would be standing behind them."
+      },
+      {
+        "order": "CDAB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences carry the concrete cases — the stall in the evening, the coats in March, the seats before the curtain — and a solver who groups by texture will put the vivid pair together and treat the sentence about two sums as the abstract part that follows.",
+        "where_it_breaks": "The sentence about coats and seats begins 'The same comparison', which requires a comparison to have been made. The only comparison in the set is between what the box fetches now and what it fetches tomorrow, and this order puts it afterwards."
+      },
+      {
+        "order": "BCAD",
+        "trap_type": "competing_opener",
+        "why_tempting": "The general claim about what a price is has the ring of a thesis, and plenty of paragraphs do state their rule first and then illustrate it. It also carries no pronoun and no demonstrative at its head.",
+        "where_it_breaks": "Its second half names 'the coats' and 'the seats' as things the reader already knows about, and in the first seat neither has been mentioned. The paragraph is also built to widen, from one stall to two slower markets to a rule, and opening on the rule leaves the widening with nowhere to go."
+      }
+    ],
+    "trap_named": "The trap is the double life of the word 'the'. English uses it for what has just been named and for what everybody knows about in general, and a sentence can look generic at its head while being tied down three words later. The defence is to test each definite phrase separately: 'the seller' could be anybody, but 'the box' could not, and one specific reference is enough to fix the sentence.",
+    "solving_habit": "Read every definite phrase in a candidate opener and ask whether a reader arriving cold could supply it. One that could not is the end of the argument, whatever the others suggest."
+  },
+  "mentor": {
+    "challenge": "One sentence begins like a general rule and contains a word that points at a particular box of fish.",
+    "paragraph_plain": "At six in the evening the fish on the last stall costs half what it cost at nine, and nobody standing there imagines the fishmonger has become generous. He is weighing two sums: what the box will fetch in the next hour, and what it will fetch tomorrow, which in this trade is nothing at all. The same calculation runs, more slowly, behind a shop full of winter coats in March and a theatre with forty empty seats ten minutes before the curtain. A price is not a fact about a thing but an estimate of how long it can wait, which is why the coats move in March and the seats go at the door.",
+    "takeaway": "'The seller' could be anybody. 'The box' could not, and that is what fixes the sentence."
+  }
+}

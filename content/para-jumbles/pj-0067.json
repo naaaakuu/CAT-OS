@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0067",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 82,
+    "genre": "literature-theory",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "beginner",
+    "title": "The Line Before the First Line",
+    "theme": "why a poem's title is part of the poem rather than a label attached to the outside of it",
+    "estimated_time_sec": 70,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["pronoun_ref", "article_given_new", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["generic_the"],
+    "dna_traits": ["surface_matching", "opener_heuristic"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 3,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "B",
+    "learning_objective": "read a pronoun's clause to the end before deciding which earlier sentence it attaches to",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.claim_then_evidence", "disc.given_new", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival puts the sentence beginning 'Change it' second, because there is a title in the opening sentence for the pronoun to attach to and the example is the liveliest thing in the set. What refuses it is the phrase that follows: 'Change it and the guess changes' needs a guess, and the only guess in the paragraph is the one a reader makes about what kind of attention to bring. A second rival opens on the sentence beginning 'The title does the work', taking the definite article as general; the opening sentence would then introduce a title indefinitely after the paragraph had already discussed one.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General argument in poetics about titles; the two invented titles are written for the item and no poem or critical text is adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A beginner argumentative item whose device is a pronoun that has a plausible antecedent one sentence too early. The block is a noun in the same clause rather than the pronoun itself, which is the habit the item teaches. The inference marker sits on the closing sentence, which is where this argument lands."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The title does the work an opening sentence does in prose, telling a reader what kind of attention to bring, and it does so before the first line can correct the guess.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "Treating the title as a label attached to the work is therefore a mistake about where the work begins, and a poet who prints 'Untitled' has made the move rather than avoided it.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "A title is the one line of a poem written for somebody who has not started reading it yet.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "Change it and the guess changes: the same fourteen lines called 'Spring' and called 'The Last Visit' are not the same fourteen lines, because the reader arrives expecting something else.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "The opening sentence introduces a title indefinitely; the next takes it as given and says what it does. The definite article marks the second as the later of the two."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'Change it and the guess changes' needs a guess, and the guess is the reader's expectation about what kind of attention to bring, which is named only in the sentence before."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "The conclusion follows from the demonstration that two titles make two poems out of one set of lines; without that demonstration 'therefore' would be inferring from a description rather than from a result."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim, what the claim amounts to in practice, a test of it, and the conclusion the test licenses. Four moves in the plainest possible argumentative order, held together by one noun that appears in two consecutive sentences and by a pronoun that has to reach for the right one of two titles.",
+    "movement": [
+      { "label": "C", "why_here": "It introduces the title and says the one thing about it that the argument needs: it is addressed to somebody who has not begun. Nothing in it refers backwards." },
+      { "label": "A", "why_here": "The mechanism, and the sentence that supplies the word 'guess'. It compares a title to an opening sentence in prose and notes that it acts before anything can correct it." },
+      { "label": "D", "why_here": "The test. Two titles over the same fourteen lines produce two poems, and the change it reports is a change in the guess, which is why it cannot stand before the sentence that names one." },
+      { "label": "B", "why_here": "The conclusion, and the close. Its 'therefore' draws on the demonstration, and the remark about a poet who prints 'Untitled' extends the claim rather than repeating it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDAB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'Change it' finds a title in the opening sentence without any difficulty, and the example of two titles over the same fourteen lines is the most vivid thing in the set, so a solver will want it early, with the comparison to prose openings following as explanation.",
+        "where_it_breaks": "The clause is 'Change it and the guess changes'. A guess has to have been made, and the only guess anywhere is the reader's guess about what kind of attention to bring, which appears in the sentence this order pushes behind it. The pronoun binds correctly; the noun beside it does not."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "generic_the",
+        "why_tempting": "'The title does the work an opening sentence does in prose' can be read as a general definite, meaning titles in general, and the sentence states the paragraph's idea in a single comparison, which is what an opening sentence often does.",
+        "where_it_breaks": "The other sentence introduces 'a title' with an indefinite article, as the line written for somebody who has not started reading. A paragraph does not introduce a thing indefinitely after it has already been discussed definitely, and the claim about where the work begins would then have no premise behind it."
+      }
+    ],
+    "trap_named": "The trap is a pronoun that binds perfectly well one sentence too early. Solvers check whether a pronoun has an antecedent and stop there; the test is whether the rest of the clause has one too. Here 'it' is satisfied immediately, and 'the guess' is not, so the sentence has to move one seat later. The habit is to read the whole clause a pronoun governs and look for the second reference, which is usually the one doing the real work.",
+    "solving_habit": "When a pronoun fits, keep reading. The words after it often need an antecedent of their own, and that one decides the seat."
+  },
+  "mentor": {
+    "challenge": "One pronoun here attaches comfortably to the first sentence. The noun three words later does not.",
+    "paragraph_plain": "A title is the one line of a poem written for someone who has not yet started reading it. It does the job an opening sentence does in prose, telling the reader what sort of attention to bring, and it does so before the first line has a chance to correct the guess. Change the title and the guess changes: the same fourteen lines called 'Spring' and called 'The Last Visit' are not the same fourteen lines, because the reader turns up expecting something different. Treating the title as a label stuck on the outside of the work is therefore a mistake about where the work begins, and a poet who prints 'Untitled' has made the move rather than dodged it.",
+    "takeaway": "A pronoun that fits proves nothing on its own. Read to the end of the clause."
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0072",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "anthropology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "Walking the Line With the Children",
+    "theme": "how a society without writing keeps a land boundary by choosing witnesses who will outlive the dispute",
+    "estimated_time_sec": 125,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["article_given_new", "connective_explicit", "lexical_repetition", "temporal_sequence"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["anchor_pair", "generic_the"],
+    "dna_traits": ["opener_heuristic", "inference_implicit", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 4,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "distinguish a general maxim that opens a paragraph from one that has a definite article pointing back into it",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.given_new", "disc.cause_effect", "disc.competing_opener", "struct.problem_solution"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the maxim about adults remembering what they have reason to remember, which is aphoristic, general and free of connectives, and which states the difficulty the rest of the paragraph solves. The refusal is three words inside it: 'the line' is definite, and the only line anywhere is the boundary described in the sentence about a society with nowhere else to keep one. A second rival welds the problem to the remedy, treating the sentence about lapsing reasons as background; the remedy's 'therefore' then infers an annual walk from the bare fact that boundaries live in memory, which gives no reason to repeat anything. A third opens on the remedy itself, whose definite phrasing reads like a familiar custom being introduced.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General anthropology of oral boundary maintenance; no specific community, custom, place or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An advanced problem-and-solution item whose decoy opener is a maxim. Maxims open paragraphs constantly, which is what makes the definite article inside this one easy to miss. The inference marker sits in the third seat and the paragraph closes on the custom itself rather than on a verdict about it."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The remedy found in many places is therefore to walk the line once a year with the children of the village, stopping at every stone, and to make each stop memorable by something done to the child there.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "A boundary that exists in nobody's memory is not a boundary, and a society without writing has no other place to keep one.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "Adults remember what they have reason to remember, and the reasons that fix the line in one generation are exactly the ones that will have lapsed in the next.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "It is the smallest person present who is beaten, ducked or handed a coin at the boundary stone, because the witness who matters is the one who will still be alive when the dispute arrives.",
+      "role": "conclusion"
+    }
+  ],
+  "correct_order": ["B", "C", "A", "D"],
+  "links": [
+    {
+      "from": "B",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The reasons that fix the line' uses a definite article for a line the paragraph must already have supplied, and the only one is the boundary a society without writing has nowhere to keep but in memory."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Therefore' needs a difficulty that an annual repetition answers, and the difficulty is that the reasons fixing a line in one generation lapse in the next. Without it there is nothing for a yearly walk to repair."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The boundary stone' and 'the smallest person present' both collect from the remedy: the stones the walk stops at, and the children who are walked along the line."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A problem stated in one line, the reason the obvious answer fails, the remedy that answers the reason, and the detail of the remedy that shows what it was really designed for. The paragraph is a piece of reverse engineering: it ends by explaining a custom that would look merely cruel if the first three sentences had not been read.",
+    "movement": [
+      { "label": "B", "why_here": "It states the problem and introduces the boundary, and it is the only sentence that refers to nothing behind it. Two later sentences use a definite article that this sentence licenses." },
+      { "label": "C", "why_here": "The reason the obvious answer fails. Remembering is not enough, because the motive for remembering expires with the generation that had it, and that expiry is what the remedy is built against." },
+      { "label": "A", "why_here": "The remedy, and the nucleus. Its 'therefore' draws on the failure just described and does the paragraph's inferential work in the third seat. It supplies the stones and the children that the last sentence names." },
+      { "label": "D", "why_here": "The close, and the explanation of the custom's oddest feature. Picking the smallest person present only makes sense once the problem is understood as one about survival rather than about accuracy." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CBAD",
+        "trap_type": "competing_opener",
+        "why_tempting": "'Adults remember what they have reason to remember' is a maxim, and maxims open paragraphs all the time. It contains no connective, no demonstrative and no obvious pointer, and it states the difficulty the rest of the paragraph exists to solve.",
+        "where_it_breaks": "The second half says 'the reasons that fix the line'. The definite article needs a line already on the page, and the only one is the boundary in the sentence this order puts second. In the first seat the maxim is about nothing in particular, and the paragraph would introduce its subject after commenting on it."
+      },
+      {
+        "order": "BACD",
+        "trap_type": "anchor_pair",
+        "why_tempting": "A paragraph that opens on a problem seems to want its remedy next, and the sentence about adults and lapsing reasons reads like a piece of background that could be fitted in afterwards. Solvers who name the shape early often fix that pair before reading closely.",
+        "where_it_breaks": "The remedy begins 'The remedy found in many places is therefore', and in the second seat 'therefore' has only the claim that a boundary lives in memory. That gives no reason to repeat anything annually. What makes repetition necessary is the lapsing of the reasons, which this order moves behind the remedy it justifies."
+      },
+      {
+        "order": "ABCD",
+        "trap_type": "generic_the",
+        "why_tempting": "'The remedy found in many places' reads like the general definite of an anthropologist introducing a widespread custom, and describing the custom before explaining it is a perfectly ordinary way to begin.",
+        "where_it_breaks": "A remedy cannot precede the trouble it remedies, and the sentence says so itself with 'therefore'. It also speaks of walking 'the line', which is the boundary introduced in the sentence that would follow it, so the definite article points forward at its own antecedent."
+      }
+    ],
+    "trap_named": "The trap is a maxim with a definite article in it. General statements about how people behave are the commonest openers in serious prose, so a solver's ear accepts one immediately; but a maxim can be written about a particular case, and the give-away is a 'the' that only the paragraph can supply. Here 'the line' is the boundary, not any line, and that single article moves the sentence out of the first seat.",
+    "solving_habit": "Test a general-sounding sentence by asking whether you could understand it as the first thing you read. If one phrase in it would leave you asking 'which one?', the sentence has an antecedent somewhere and is not the opener."
+  },
+  "mentor": {
+    "challenge": "One sentence is a maxim about people in general, and one article inside it is about a particular boundary.",
+    "paragraph_plain": "A boundary that exists in nobody's memory is not a boundary, and a society without writing has nowhere else to keep one. Adults remember what they have reason to remember, and the reasons that fix a line in one generation are precisely the ones that will have lapsed in the next. The remedy found in many places is therefore to walk the line once a year with the village children, stopping at every stone, and to make each stop memorable by something done to the child there. It is the smallest person present who gets beaten, ducked or handed a coin at the boundary stone, because the witness who matters is the one who will still be alive when the dispute finally arrives.",
+    "takeaway": "A maxim can still be about one particular thing. Look for the article that says which."
+  }
+}

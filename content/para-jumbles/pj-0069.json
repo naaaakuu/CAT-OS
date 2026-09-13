@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0069",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "contemporary-society",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "Nobody Calls Without Warning",
+    "theme": "why the unannounced visit disappeared without any rule against it, and who is still entitled to make one",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["article_given_new", "demonstrative", "connective_explicit", "stance_continuity"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["generic_the", "misleading_connective"],
+    "dna_traits": ["ending_judgement", "opener_heuristic", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 4,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "let a paragraph end on its list of cases when the verdict it would rather end on is what the list is evidence for",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.competing_ending", "disc.given_new", "disc.cause_effect", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival closes on the sentence about visits becoming things to be agreed, which carries the inferential connective and ends on loneliness, so it has both of the marks solvers use to identify a last sentence. The list of people who still arrive unannounced then goes in the middle, where it strands its own first phrase: 'bears that out' needs a proposition, and the proposition it bears out is precisely the one about agreement. A second rival opens on the sentence about the message sent an hour ahead, reading 'The message' as a general definite; it is refused by 'the older practice', which needs a practice already described, and only the opening sentence describes one. A third pulls the inferential sentence into the second seat, where 'therefore' has the observation but not the mechanism behind it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General social observation about visiting practices; no specific study, community or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier item whose closing seat is genuinely contested: the verdict carries the connective and the sentimental line, and the true closer is a list. Only a three-word phrase, 'bears that out', separates them. The decoy opener is a sentence about the message everybody sends, whose definite article looks generic."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The message sent an hour ahead is described as consideration, and it is, but what it protects is the right to be found doing nothing and to refuse to be seen doing it, and that is why the older practice lapsed without anybody objecting to it.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "Who still arrives unannounced bears that out: children, close relatives of the very old, and neighbours with a practical errand, which is to say the people who have never needed one of those agreements.",
+      "role": "evidence"
+    },
+    {
+      "label": "C",
+      "text": "A visit has therefore become a thing to be agreed rather than offered, and the people most likely to be lonely are the ones with the fewest standing agreements.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "Nothing in any book of manners forbids calling on a friend without warning, and yet almost nobody does it, which is a change nobody voted for.",
+      "role": "topic"
+    }
+  ],
+  "correct_order": ["D", "A", "C", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "A",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The older practice' is a definite reference to a practice already named, and the only one is calling on a friend without warning, which the opening sentence reports as permitted and abandoned."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Therefore' needs a mechanism to infer from, and the mechanism is that an advance message protects the right not to be seen. Without it the conclusion about agreement rests on the bare fact that nobody calls."
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "The list ends on 'one of those agreements', a demonstrative that needs standing agreements already named, and only the verdict names them. That also settles what 'bears that out' points at: the claim about agreement, not the mechanism before it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "An observation that a practice has vanished without being forbidden, the mechanism that explains the vanishing, the conclusion the mechanism licenses, and the cases that test the conclusion. The paragraph deliberately ends on its evidence rather than on its verdict, which is why the sentence carrying 'therefore' sits third.",
+    "movement": [
+      { "label": "D", "why_here": "It sets the puzzle — nothing forbids the practice and nobody performs it — and it is the only sentence that introduces the practice rather than referring to it as older, or as something now agreed." },
+      { "label": "A", "why_here": "The mechanism. It concedes that the advance message is considerate and then says what the consideration protects, and its closing clause names 'the older practice', which fixes it after the sentence that describes one." },
+      { "label": "C", "why_here": "The conclusion, and the nucleus. Its 'therefore' draws on the mechanism directly above it, and it converts a change in manners into a claim about who ends up alone." },
+      { "label": "B", "why_here": "The evidence, and the close. 'One of those agreements' can only count the standing agreements named in the verdict, which fixes this sentence after it and settles what 'bears that out' refers to." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DABC",
+        "trap_type": "competing_ending",
+        "why_tempting": "The sentence about visits becoming things to be agreed has both of the marks a closing sentence usually has: it carries the paragraph's 'therefore' and it ends on the people most likely to be lonely, which is where a piece of social observation naturally lands. The list of exceptions reads like detail that belongs in the middle.",
+        "where_it_breaks": "The list closes on 'one of those agreements'. Standing agreements are named in exactly one sentence, the verdict, and this order puts it afterwards, so the demonstrative counts nothing. That also settles the looser question of what 'bears that out' points at: not the mechanism, which is about being seen, but the claim about agreement."
+      },
+      {
+        "order": "ADCB",
+        "trap_type": "generic_the",
+        "why_tempting": "'The message sent an hour ahead' reads like the general definite of a writer describing a habit every reader has, and the sentence states the paragraph's mechanism in full, which makes it look like the thesis.",
+        "where_it_breaks": "Its last clause says 'the older practice lapsed without anybody objecting to it'. No practice has been described as older, or as lapsed, at that point; the sentence about nothing in any book of manners forbidding a call is where the practice enters the paragraph, and this order puts it second."
+      },
+      {
+        "order": "DCAB",
+        "trap_type": "misleading_connective",
+        "why_tempting": "A sentence carrying 'therefore' looks as though it should follow the observation immediately: the practice has vanished, therefore a visit must now be agreed. The mechanism then reads as elaboration of the conclusion rather than as its premise.",
+        "where_it_breaks": "In the second seat 'therefore' has only the bare fact that nobody calls. What licenses the conclusion is the account of what an advance message protects, and that account is in the sentence this order moves behind it, where it would be explaining a conclusion the paragraph had already drawn."
+      }
+    ],
+    "trap_named": "The trap is a verdict that wants the last seat. It carries the connective, it widens from manners to loneliness, and it is the sentence a reader would quote, so every instinct puts it at the end. What overrules the instinct is a phrase in another sentence: 'bears that out' is a promise to demonstrate, and a demonstration has to follow the thing demonstrated. Where a paragraph ends on evidence, the verdict is one seat earlier, and the evidence will say so in its first three words.",
+    "solving_habit": "Look for phrases such as 'bears that out', 'the evidence is', 'you can see it in' and 'which shows'. Each of them names a claim that must already be on the page, and each of them is a closing sentence far more often than a verdict is."
+  },
+  "mentor": {
+    "challenge": "One sentence has the connective and the moral. Another says it is about to prove something. Only one of them can be last.",
+    "paragraph_plain": "Nothing in any book of manners forbids calling on a friend without warning, and yet almost nobody does it, which is a change nobody voted for. The message sent an hour ahead is described as consideration, and it is, but what it protects is the right to be found doing nothing and to refuse to be seen doing it, and that is why the old practice lapsed without anyone objecting. A visit has therefore become something to be agreed rather than offered, and the people most likely to be lonely are those with the fewest standing agreements. You can see it in who still turns up unannounced: children, close relatives of the very old, and neighbours with a practical errand — which is to say, the people who have never needed one of those agreements.",
+    "takeaway": "A sentence that promises to bear something out cannot be the thing it bears out."
+  }
+}

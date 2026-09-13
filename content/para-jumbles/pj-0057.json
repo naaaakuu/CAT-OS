@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0057",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "institutions",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "After Discussion, Agreed",
+    "theme": "why a minute book records decisions and not the argument that produced them, and whom the omission protects",
+    "estimated_time_sec": 115,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "general_to_specific",
+    "cohesion_signals": ["pronoun_ref", "article_given_new", "demonstrative", "connective_implicit"],
+    "primary_trap": "false_pronoun_binding",
+    "secondary_traps": ["generic_the", "lexical_decoy"],
+    "dna_traits": ["surface_matching", "opener_heuristic", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 2,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "check every candidate antecedent for a pronoun before you let it fix a sentence's seat",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.general_to_specific", "disc.given_new", "disc.cause_effect", "struct.general_to_specific"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival pulls the closing sentence up to second place, because its 'Their' finds a perfectly good plural in the opening sentence — the people who were in the room — and the sentence reads as the natural next thought about them. It breaks on two counts: an answer needs a threat, and no threat has been described that early, and the argument the book declines to record presupposes the omission, which is reported in the sentence this order jumps over. A second rival opens on the general hypothetical about a body that recorded who resisted, which has no backward reference at its head and states the paragraph's reason outright; it is refused by its own last clause, 'the omission is protection rather than laziness', since no omission has been named. A third rival opens on the description of what the book contains, taking 'The book' for a general definite; the opening sentence would then introduce a book indefinitely after the paragraph had already described it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General institutional practice in minute-taking and committee record; no specific organisation, meeting or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A medium item built on one pronoun with two available antecedents, one of them wrong and nearer to hand. The decoy opener is a general hypothetical whose block sits in its final clause, so a solver who reads only sentence heads will take it. The inference marker sits in the third seat and the paragraph closes on a consequence stated as fact."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Every committee leaves two records of itself, one in the memories of the people who were in the room and one in a book, and only the book outlives them.",
+      "role": "topic"
+    },
+    {
+      "label": "B",
+      "text": "Their answer is to say nothing in the room, and the argument the book declines to record moves to a corridor where nothing at all is written down.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "The book contains decisions and almost nothing else: a proposal, a name to move it, an outcome, and for the hour of argument in between, the words 'after discussion'.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "A body that recorded who resisted a decision would be a body whose members could be held afterwards to what they said before they lost, so the omission is protection rather than laziness.",
+      "role": "cause_effect"
+    }
+  ],
+  "correct_order": ["A", "C", "D", "B"],
+  "links": [
+    {
+      "from": "A",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "The opening sentence introduces a book as one of two records; the next takes it as given and says what is in it. The definite article is doing backward reference, which is why the description cannot come first."
+    },
+    {
+      "from": "C",
+      "to": "D",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "'The omission is protection rather than laziness' names an omission, and the only thing omitted anywhere is the hour of argument that the book reduces to two words."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'Their answer' needs people under a threat, and the members who could be held to what they said before they lost are the only candidates. The people in the room, mentioned earlier, are under no threat at that point in the paragraph."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A general observation about institutional memory, narrowed twice and then followed to its consequence. The paragraph says what every committee leaves behind, what one of those records actually contains, why it contains so little, and what the people described do about it. Each narrowing depends on the one before, so the sequence is the argument rather than an arrangement of it.",
+    "movement": [
+      { "label": "A", "why_here": "It introduces both records and says which survives, and it is the only sentence that names its subjects rather than pointing at them. Everything after it takes the book as given." },
+      { "label": "C", "why_here": "The narrowing. It reports what the surviving record contains, and the quoted formula, 'after discussion', is the omission the next sentence explains." },
+      { "label": "D", "why_here": "The reason, and the nucleus. It is written as a hypothetical about any body at all, which is what makes it look like an opener, but its closing clause names 'the omission', and only the previous sentence supplies one. Its 'so' draws the inference in the third seat." },
+      { "label": "B", "why_here": "The consequence, and the close. 'Their' picks up the members who could be held to what they said, and the paragraph ends not on a verdict but on where the argument goes instead." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "ABCD",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "The closing sentence begins 'Their answer', and the opening sentence has just supplied a plural — the people who were in the room — that fits the pronoun exactly. Read that way the paragraph seems to move briskly from the two records to what the participants do about them, and the rest reads as explanation.",
+        "where_it_breaks": "An answer implies a threat, and in the second seat nothing has threatened anybody. The threat is the possibility of being held afterwards to what you said before you lost, which appears two sentences later. The pronoun also has to reach past its correct antecedent, the members of a body that recorded resistance, to find the earlier one."
+      },
+      {
+        "order": "DACB",
+        "trap_type": "generic_the",
+        "why_tempting": "The hypothetical states the paragraph's reason outright and ends on 'the omission', which reads like the general definite of a writer naming a well-known silence — everybody knows minutes leave the argument out. Taken that way the sentence explains a familiar thing rather than pointing at one, and it opens on an indefinite noun phrase with nothing behind it for fifteen words.",
+        "where_it_breaks": "Its final clause says 'the omission is protection rather than laziness'. Nothing has been omitted yet. The omission is the hour of argument that the book reduces to the words 'after discussion', and that sentence stands behind this one in every admissible order."
+      },
+      {
+        "order": "CADB",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "Two sentences turn on the word book, one reporting that only the book outlives the people in the room and the other saying what the book contains, and a solver who has found the repeated noun will keep the pair together. Beginning with the description also puts the concrete sentence where solvers like concrete sentences to be.",
+        "where_it_breaks": "The other sentence introduces 'a book' with an indefinite article, as one of two records a committee leaves. A paragraph does not name a thing indefinitely after it has already described it definitely, and the description also assumes the reader knows which of the two records is meant."
+      }
+    ],
+    "trap_named": "The trap is a pronoun with two possible antecedents, the wrong one earlier and more visible. 'Their' will bind to any plural a reader has in mind, and the people who were in the room are the most memorable plural in the set; the sentence, however, is about people under a specific threat, and only one sentence creates one. The defence is to read the whole clause the pronoun governs and ask what the people in it are doing. If they are answering something, find what threatened them.",
+    "solving_habit": "Never bind a pronoun to the first plural that fits. Ask what the sentence says those people are doing, and look for the sentence that puts them in a position to do it."
+  },
+  "mentor": {
+    "challenge": "One pronoun here has two possible owners. The nearer one is the wrong one, and the sentence tells you so if you read to the end of it.",
+    "paragraph_plain": "Every committee leaves two records of itself: one in the memories of the people who were there, and one in a book, and only the book outlasts them. The book holds decisions and very little else — a proposal, somebody to move it, a result, and, for the hour of argument in between, the phrase 'after discussion'. A body that wrote down who had resisted a decision would be a body whose members could later be held to whatever they had said before losing the vote, so the silence is protection rather than laziness. Their response is to say nothing in the room at all, and the argument the book refuses to record moves out to a corridor where nothing whatever is written down.",
+    "takeaway": "A pronoun points at the people doing what the sentence describes, not at the nearest plural you can remember."
+  }
+}

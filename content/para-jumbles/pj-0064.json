@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0064",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 83,
+    "genre": "culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "Play It Again, But Not That",
+    "theme": "why an audience will ask to hear a song twice in one evening and will never ask to hear a joke twice",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "hypothesis_support",
+    "cohesion_signals": ["connective_explicit", "article_given_new", "lexical_repetition", "parallelism"],
+    "primary_trap": "misleading_connective",
+    "secondary_traps": ["generic_the"],
+    "dna_traits": ["surface_matching", "opener_heuristic"],
+    "difficulty_vector": {
+      "vocabulary_load": 1,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 3,
+      "competing_openings": 2,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 1,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "A",
+    "learning_objective": "place a however by the account it answers rather than in the seat where a turn usually falls",
+    "reasoning_patterns": ["disc.contrast", "disc.transition_word", "disc.claim_then_evidence", "struct.contrast"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival puts the sentence carrying 'however' second, where a turn normally sits in a four-sentence paragraph, so that the two halves of the contrast stand either side of it. It is refused by the clause that follows: the song sentence says that the knowledge which kills the joke is exactly what a song is for, and nothing has yet killed any joke. A second rival opens on the joke sentence, whose 'The joke' can be read as a general definite; the opening sentence then introduces the comparison between asking for a song again and never asking for a joke again after half of it has already been explained.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General aesthetics of surprise and recognition in performance; no specific performer, work or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy hypothesis-and-support item whose single device is a contrast marker placed one seat later than habit expects. The two accounts have to arrive in order because the second is written against the first by name. The closing sentence carries the inference marker, which is the honest place for it here."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The test is therefore not how good the material is but whether its effect survives being expected, which is why only one of the two can be asked for twice.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "An audience will ask for a song again on the same evening and will never ask for a joke again, which suggests that the two are not doing the same kind of work.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "A song, however, pays out on recognition, so the knowledge that kills the joke is exactly what the song is for.",
+      "role": "contrast"
+    },
+    {
+      "label": "D",
+      "text": "The joke pays out once, at the moment its second meaning arrives, and a listener who already holds that meaning has nothing left to be surprised by.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "D", "C", "A"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The joke' is definite, and the joke in question is the one nobody asks to hear again. The opening sentence is the only place where a joke is put on the page."
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "'The knowledge that kills the joke' refers to an account already given, in which a listener who holds the second meaning has nothing left to be surprised by. The 'however' contrasts with that account, not with the opening observation."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "medium",
+      "explanation": "The closing generalisation needs both accounts behind it: it speaks of 'the two', and the two are the joke that cannot survive expectation and the song that lives on it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "An observation that looks like a curiosity, two explanations that dissolve it, and a test drawn from the pair. The two explanations are not interchangeable: the second is written against the first by name, so the joke has to be accounted for before the song can be contrasted with it.",
+    "movement": [
+      { "label": "B", "why_here": "It reports the observation and proposes that something is being missed, and it is the only sentence that introduces both a song and a joke rather than referring to one of them." },
+      { "label": "D", "why_here": "The first half of the explanation. 'The joke' collects the joke from the observation, and the account it gives — one payment, at the arrival of a second meaning — is what the next sentence names." },
+      { "label": "C", "why_here": "The second half, and the turn. Its 'however' answers the account of the joke, and the clause 'the knowledge that kills the joke' makes the dependence explicit. Its 'so' draws the small inference in the third seat." },
+      { "label": "A", "why_here": "The test, and the close. It speaks of 'the two', which requires both accounts to be on the page, and it converts a contrast between two kinds of performance into a rule that applies to any material at all." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BCDA",
+        "trap_type": "misleading_connective",
+        "why_tempting": "'However' marks a turn, and in a four-sentence paragraph the turn is expected in the second seat, directly after the observation. Read that way the paragraph sets a puzzle, turns, and then explains both halves, which is a perfectly ordinary shape.",
+        "where_it_breaks": "The song sentence says that 'the knowledge that kills the joke' is what a song is for. In the second seat nothing has killed a joke: the account of a joke paying out once, and of a listener with nothing left to be surprised by, is the sentence this order pushes behind it. The contrast is with that account, not with the observation."
+      },
+      {
+        "order": "DBCA",
+        "trap_type": "generic_the",
+        "why_tempting": "'The joke pays out once' can be read as a general definite — the joke as a form, rather than a particular joke — and a paragraph about comic timing could reasonably begin by saying how jokes work before observing what audiences do about them.",
+        "where_it_breaks": "The observation about audiences introduces the joke and the song together, as the pair the paragraph is about, and an introduction cannot follow the explanation of half of it. The opening sentence would also be proposing that the two are not doing the same work after one of them had already been analysed."
+      }
+    ],
+    "trap_named": "The trap is a contrast marker placed by habit rather than by what it denies. 'However' really does mark this paragraph's turn, but the turn is against an account of how a joke works, not against the observation that opens the paragraph, and the account is a whole sentence away. The defence is to finish the sentence the marker introduces and name the proposition it contradicts; then find the sentence that asserts that proposition, and put the marker directly after it.",
+    "solving_habit": "Ask what the 'however' is denying. A contrast marker points at a claim, not at a seat, and the claim is usually in the sentence immediately in front of it."
+  },
+  "mentor": {
+    "challenge": "One sentence turns against something. Decide what it is turning against before you decide where it goes.",
+    "paragraph_plain": "An audience will ask for a song again on the same evening and will never ask for a joke again, which suggests the two are not doing the same job. A joke pays out once, at the moment its second meaning lands, and a listener who already has that meaning has nothing left to be surprised by. A song, by contrast, pays out on recognition, so the knowledge that ruins the joke is precisely what the song is for. The test is therefore not how good the material is but whether its effect survives being expected, which is why only one of the two can be asked for twice.",
+    "takeaway": "A turn word points at a claim, not at a position in the paragraph."
+  }
+}

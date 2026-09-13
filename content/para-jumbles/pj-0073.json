@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0073",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "linguistics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "The Sound of Choosing",
+    "theme": "the hypothesis that hesitation noises mark the points where a speaker's planning is hardest, and the prediction that makes it testable",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "hypothesis_support",
+    "cohesion_signals": ["article_given_new", "pronoun_ref", "lexical_repetition", "connective_explicit"],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": ["competing_opener", "generic_the"],
+    "dna_traits": ["surface_matching", "opener_heuristic", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 3,
+      "lexical_decoys": 5,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "put a finding behind the prediction it confirms, however closely its vocabulary matches an earlier sentence",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.lexical_chain", "disc.given_new", "disc.competing_opener", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival joins the two sentences full of linguistic particulars — the ums and ers in one, the rare word and the pronoun in the other — because they are the two concrete sentences and they share a vocabulary. That leaves the finding ending on 'the prediction holds wherever anyone has looked for it', with no prediction anywhere behind it. A second rival opens on the finding, since a cross-linguistic fact is a strong first line; 'the noises' is definite and is introduced two sentences later, and the same closing clause has nothing to hold. A third opens on the hypothesis, reading 'The better hypothesis' as a general definite; 'better' needs a worse one, and the only account of these noises as failures of the machinery is the sentence it would displace.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General psycholinguistics of disfluency; no specific corpus, study or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier item in which every sentence talks about speech, so the lexical field is worthless and the two most concrete sentences are the ones a matcher will pair. The spine is a comparative, a definite article and a named prediction. The paragraph closes on what a listener is being told, with no connective in the final seat."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "In every language anybody has counted, the noises fall in front of the rare word rather than the common one and in front of the name rather than the pronoun, which is exactly what the prediction required.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "The noises speakers make when they are not saying anything, the ums and the ers and the long vowel on a word like 'the', are usually treated as failures of the machinery.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "A speaker about to choose is audibly choosing, and a listener who waits through the noise is being told, quite reliably, that the rare word or the name is on its way.",
+      "role": "conclusion"
+    },
+    {
+      "label": "D",
+      "text": "The better hypothesis is that they are not noise at all but the sound of a decision being taken, which predicts where they will fall instead of merely excusing them.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "parallel_structure",
+      "reliability": "high",
+      "explanation": "'The better hypothesis' is a comparative and needs an account already on the page to be better than. The only account offered is that these noises are failures of the machinery."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'Exactly what the prediction required' names a prediction, and the only prediction made anywhere is the one about where the noises will fall."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The closing sentence tells a listener that 'the rare word or the name' is coming. Both phrases are definite, and both categories exist in the paragraph only because the finding immediately before it counted them."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A received view, a better hypothesis stated so that it predicts something, the counted result that the prediction survives, and what the result means for an ordinary listener. The paragraph is a small piece of scientific method, and its order is the order of the method: you cannot report that a prediction held before you have made one.",
+    "movement": [
+      { "label": "B", "why_here": "It states the received view and introduces the noises themselves, with examples. It is the only sentence that describes them rather than referring to them as 'they' or as 'the noises'." },
+      { "label": "D", "why_here": "The hypothesis, and the nucleus. 'Better' fixes it after the view it improves on, and the clause about predicting rather than excusing is what turns an interpretation into something a count could refute." },
+      { "label": "A", "why_here": "The result. It reports where the noises actually fall and says in its final clause that this is what the prediction required, which is a reference to the sentence that made one." },
+      { "label": "C", "why_here": "The close, and it closes on the listener rather than on a verdict. 'The rare word' and 'the name' are definite, and both are collected from the finding, so the sentence cannot stand in front of the count that produced them." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BADC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "Two sentences are full of linguistic particulars — ums, ers and a long vowel in one, rare words, names and pronouns in the other — and they are the only concrete sentences in the set. A solver who joins by vocabulary will put them together and treat the hypothesis as the theory that follows the data.",
+        "where_it_breaks": "The finding ends 'which is exactly what the prediction required'. In the second seat no prediction has been made; the sentence that makes one is the hypothesis, which this order moves behind the result that confirms it. Shared vocabulary is the weakest evidence in a paragraph where every sentence is about speech."
+      },
+      {
+        "order": "ABDC",
+        "trap_type": "competing_opener",
+        "why_tempting": "'In every language anybody has counted' is the kind of cross-linguistic claim that opens serious writing about language, and the sentence carries no pronoun at its head. Beginning with the striking fact and explaining it afterwards is a perfectly ordinary shape.",
+        "where_it_breaks": "It refers to 'the noises' as though the reader knew which, and it ends by naming a prediction. Both point backwards: the noises are described, with examples, in the sentence that would follow it, and the prediction is made two sentences later."
+      },
+      {
+        "order": "DBAC",
+        "trap_type": "generic_the",
+        "why_tempting": "'The better hypothesis' can be read as the general definite of a writer reporting where the field has settled, and the sentence states the paragraph's idea outright, which is what solvers expect of a first line.",
+        "where_it_breaks": "'Better' is a comparative, and there is nothing yet for it to beat. The account it improves on — that the noises are failures of the machinery — is in the sentence this order puts second, and the pronoun 'they' in the hypothesis has nothing to refer to in the first seat."
+      }
+    ],
+    "trap_named": "The trap is a paragraph whose vocabulary is uniform. Everything here is about speaking, so lexical matching can pair any two sentences and will pair the two concrete ones, which look as though they belong together and do not. What still works is the small machinery: a comparative that needs a worse case, a definite article that needs an introduction, and a named prediction that needs to have been made. Those three fix all four sentences without a single appeal to how well two of them read side by side.",
+    "solving_habit": "When every sentence shares a topic, ignore the topic. Comparatives, definite articles and named claims are what remain, and they are enough."
+  },
+  "mentor": {
+    "challenge": "The two most concrete sentences here want to be neighbours. One of them reports that a prediction held.",
+    "paragraph_plain": "The noises speakers make when they are not saying anything — the ums, the ers, the long vowel on a word like 'the' — are usually treated as failures of the machinery. The better hypothesis is that they are not noise at all but the sound of a decision being taken, which predicts where they will fall rather than merely excusing them. In every language anyone has counted, the noises come in front of the rare word rather than the common one, and in front of the name rather than the pronoun, which is exactly what the prediction required. A speaker who is about to choose is audibly choosing, and a listener who waits through the noise is being told, quite reliably, that the rare word or the name is on its way.",
+    "takeaway": "A reported confirmation has to stand behind the prediction it confirms."
+  }
+}
