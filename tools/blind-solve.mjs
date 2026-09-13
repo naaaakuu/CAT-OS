@@ -10,7 +10,12 @@
  * reviewer misread (recorded as such) or the item is ambiguous and is
  * rewritten. Only then is an item marked verified.
  *
- *   node tools/blind-solve.mjs strip   <type> --out <dir> [ids…|--unverified]
+ *   node tools/blind-solve.mjs strip   <type> --out <dir> [ids…|--unverified] [--no-text]
+ *
+ * --no-text removes the passage and gives the reader only stems and options.
+ * A reader should score at chance. If a passage's questions can be answered
+ * from the option sets alone, the correct options are paraphrasing one another
+ * and the questions are testing the coherence of the key rather than reading.
  *   node tools/blind-solve.mjs compare <type> <answers.json>
  *   node tools/blind-solve.mjs record  <type> <answers.json> --solver <name> [--verify]
  *
@@ -95,9 +100,13 @@ if (mode === 'strip') {
     return true;
   });
   const batch = [];
-  for (const f of chosen) batch.push(split(readF(f)).shown);
+  for (const f of chosen) {
+    const shown = split(readF(f)).shown;
+    if (has('--no-text')) { delete shown.passage; delete shown.paragraph; delete shown.sentences; delete shown.title; for (const it of shown.items ?? []) delete it.argument; }
+    batch.push(shown);
+  }
   const file = path.join(out, `${type}-blind-${Date.now().toString(36)}.json`);
-  fs.writeFileSync(file, JSON.stringify({ type, count: batch.length, instructions: 'Answer every question from the text alone. Return {"<question id>": "A|B|C|D"} for every id, plus, for any question where two options seemed defensible, a one-line note under "notes": {"<id>": "…"}.', items: batch }, null, 1));
+  fs.writeFileSync(file, JSON.stringify({ type, count: batch.length, instructions: has('--no-text') ? 'The text has been withheld deliberately. Answer every question anyway, from the options alone, and say how confident you are. You should be near chance; if you are not, say what let you do better.' : 'Answer every question from the text alone. Return {"<question id>": "A|B|C|D"} for every id, plus, for any question where two options seemed defensible, a one-line note under "notes": {"<id>": "…"}.', items: batch }, null, 1));
   console.log(`${batch.length} ${type} file(s) stripped → ${file}`);
   process.exit(0);
 }
