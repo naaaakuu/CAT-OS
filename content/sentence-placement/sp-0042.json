@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0042",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 83,
+    "genre": "arts-culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "Before the Doors",
+    "theme": "why a concert programme places the unfamiliar work before the interval rather than after it",
+    "estimated_time_sec": 50,
+    "clue_types": ["parallelism", "pronoun_ref", "connective_implicit"],
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": ["disc.contrast", "disc.cause_effect", "disc.parallelism"],
+    "difficulty_vector": { "reference_density": 2, "transition_ambiguity": 2, "competing_slots": 2, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "complete a two-part contrast in the right order, so that the half beginning 'Played first' has a 'played last' above it",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of concert programming practice; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The clue is a parallel pair: a sentence opening 'Played first' needs the other half of the contrast immediately above it. The tempting slot is the one where the missing sentence would arrive after that half and say it over again in reverse.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence beginning 'Played first', where the two halves of the contrast seem to belong together in either order. Put there, the paragraph says that a work played first reaches everybody and then that a work played last would reach fewer, which is one fact stated twice; and the sentence above is left opening a contrast whose other half has not been supplied. The slot beside the composers is the second candidate, and it strands that contrast for two sentences while reading as their complaint.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Concert programmes put the unfamiliar piece before the interval and the famous one after it." },
+      { "n": 2, "text": "The reason is not artistic but architectural: the doors are the only place an audience can leave without being seen." },
+      { "n": 3, "text": "Played first instead, it is heard by everybody who came, whatever they came for." },
+      { "n": 4, "text": "Composers understand the arrangement and dislike it all the same, since an audience waiting for the famous piece is an audience listening past them." },
+      { "n": 5, "text": "The habit is defended as generosity to new music and is at least as much a defence of the box office." }
+    ]
+  },
+  "missing": {
+    "text": "A new work played last would be heard by a thinner hall, and the thinning would be reported as the verdict on it.",
+    "position": 2,
+    "function": "the first half of the contrast the next sentence completes, and the consequence the doors make possible"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A new work played last would be heard by a thinner hall, and the thinning would be reported as the verdict on it.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 5"
+    },
+    "option_positions": { "A": 4, "B": 2, "C": 3, "D": 5 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence below the slot begins 'Played first instead', and 'instead' is the decisive word: it is the second half of a contrast and cannot be the first half, so it needs a 'played last' directly above it, and it needs an 'it' already named as a new work. The missing sentence supplies both in one move. Behind the slot, the doors have just been identified as the only place an audience can leave unseen, which is what makes a thinner hall possible at all. The seat between the doors and the completed contrast satisfies the pronoun, the parallel and the cause together.",
+    "clue_before": "Sentence 2 explains that the interval is the audience's one chance to leave unnoticed, which is the condition a thinner hall depends on.",
+    "clue_after": "Sentence 3 opens 'Played first instead', and 'instead' demands the alternative arrangement immediately above it, as well as a work for the pronoun to name.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The sentence above this slot has just said that a work played first reaches everybody who came; saying that a work played last would reach a thinner hall is that same fact turned round, so the paragraph makes its one observation twice. Its 'instead' is also left with no alternative arrangement above it, since the sentence before it explains the doors rather than proposing a running order.",
+        "seductive_element": "The two halves of a comparison sit naturally side by side, and a reader who has just met one half expects the other next."
+      },
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the composers' complaint the thin hall and the unfair verdict read as their grievance and fit the neighbours well. But the contrast two sentences above has by then been half-stated for two lines, and the closing defence of the practice would follow a fresh complaint rather than the case that has been made.",
+        "seductive_element": "Composers disliking the arrangement and a work being judged by an emptying hall belong to the same picture."
+      },
+      {
+        "option": "D",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The last slot wants a verdict on the practice, and the closing sentence supplies one by weighing generosity against the box office; a statement of the mechanism does the wrong job there, and the mechanism is in any case needed three sentences earlier to make the contrast intelligible.",
+        "seductive_element": "The sentence is about how a new work is judged, and the closing line is about how the practice is defended, so the two look like a matched pair."
+      }
+    ],
+    "method": "When a visible sentence opens with a bare participle or an inverted phrase — Played first, Read aloud, Taken alone — it is half of a comparison, and the other half has to be directly above it. Settle that first; then check the pronoun in the visible half has something to point at, and the two constraints will usually leave one seat."
+  },
+  "mentor": {
+    "challenge": "One sentence begins 'Played first'. Ask what it is being compared with, and where that comparison is made.",
+    "takeaway": "Half a contrast needs its other half above it, not below."
+  }
+}

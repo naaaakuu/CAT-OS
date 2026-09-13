@@ -1,0 +1,392 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0115",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "architecture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "structure-mapping",
+      "inference",
+      "vocabulary-in-context",
+      "causal-reasoning"
+    ],
+    "word_count": 452,
+    "question_count": 4,
+    "question_types": [
+      "best_characterization",
+      "inference",
+      "relationship",
+      "vocabulary_in_context"
+    ],
+    "theme": "the suburb explained as a picture that existed for a century before cheap distance let anybody build it, so that builders put up scenery a script already called for, with the stage-set analogy pressed through the composed front and the unplanned spaces and then broken at the joint where a set is dismantled and a suburb is not",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-08",
+    "reviewer_notes": "The analogy is used and then broken in the same paragraph, so the reading that treats it as an accusation of falsity has to be refused by a sentence rather than by tone; that sentence is planted at the end. Transport is made necessary and explicitly not sufficient, which is what separates the author's account from the technological one. Three rivals — transport as the cause, the set as a pretence, and the expired form as a case for replacement — own one option in each question.",
+    "length_class": "medium",
+    "structure": "analogy_driven",
+    "viewpoints": 2,
+    "tone": "observant, matter-of-fact",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.analogy",
+      "struct.cause_effect",
+      "comp.organization",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "arg.analogy",
+      "arg.causal_claim",
+      "arg.necessary_vs_sufficient",
+      "inf.strongly_supported",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "blind_solve": null,
+      "adversarial_review": "Three rivals hold one option in each of the four questions. The first is the technological account: the tram built the suburb and the idea came afterwards. The passage makes cheap distance necessary and then denies it the rest of the work, since when building became possible nobody designed anything and what went up was the picture already in circulation; the inference item keys against the sufficiency version of this reading. The second, and the live rival, is the analogy taken as an accusation: a stage set is a pretence, so the suburb is a fake. The passage refuses it in the closing lines, where the scenery outliving the play is called not an accusation of falsity and the form is said never to have been pretending. The third is the reforming reading, on which an expired script is a case for replacement; the passage answers it flatly by saying the streets will still be there in a century and by ending on what we have to go on using. The vocabulary item places the thesis in miniature in a distractor, so the option that sounds most like the argument is the one that does not define the word."
+    },
+    "vocab_extracted": [
+      "dear",
+      "elevation",
+      "detached"
+    ]
+  },
+  "passage": {
+    "title": "Six Miles and a Few Pence",
+    "reading_time_min": 2.5,
+    "paragraphs": [
+      {
+        "id": "rc-0115-p1",
+        "text": "The suburb was an idea for about a century before it was a place. It can be found in the essays and the sermons and, most completely, in the paintings: a house standing on its own, a garden around it, the working day happening somewhere out of sight, and a family at home in the middle of the afternoon. Hardly anybody lived like that. Land near a town was too dear to give over to a garden, and land cheap enough was too far to be reached on foot, so the picture stayed a picture."
+      },
+      {
+        "id": "rc-0115-p2",
+        "text": "What changed was the price of distance. The tram and then the suburban railway turned six miles into an hour and a few pence, and the obstacle that had kept the picture unbuilt was simply removed. Here is the strange part. When it became possible to build the thing, nobody designed it. The houses that went up were not a new answer to a new problem; they were the picture, built. The detached or half-detached house, the gate, the lawn at the front, the earning separated from the living: every element had been drawn and described for decades. The builders were not inventing a form. They were putting up the scenery that a script already called for."
+      },
+      {
+        "id": "rc-0115-p3",
+        "text": "The comparison is worth pressing, because a stage set has a particular kind of incompleteness. It is built to be seen from one direction, so whatever faces the audience is composed and whatever does not is however it happened to come out. That is a fair description of the street elevation of a suburban house and of the back of the same house. It is a fairer description still of the ground between the houses, the way to the shops, the places the children would actually use, none of which appears on any drawing and none of which was anybody's intention. What was designed in a suburb is what the picture had contained."
+      },
+      {
+        "id": "rc-0115-p4",
+        "text": "But the analogy breaks at one joint, and the break is the point. A set is struck when the run ends. Nobody strikes a suburb. The script these streets were built for, with one earner leaving in the morning, one adult at home and a childhood spent within calling distance, has been quietly withdrawn, and the streets are still there and will be there in a century. So the scenery has outlived the play. That is not an accusation of falsity: real lives are lived in these houses, and the form was never pretending to be anything. It is a plainer difficulty. We have inherited the set of a production nobody is staging, and we go on using the doors where the carpenters happened to put them."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0115-q1",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "comp.function_over_words",
+        "struct.analogy"
+      ],
+      "target_mistake": "describing the passage by the technology that appears in its second paragraph, or by the accusation the closing lines refuse to make",
+      "prediction_target": "The learner should be able to say beforehand: the author explains a built form by a picture that preceded it, uses a theatrical comparison, and then says exactly where the comparison stops working.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best characterises what the author does in the passage?",
+      "options": {
+        "A": "traces the way in which new forms of transport brought a new kind of settlement into being",
+        "B": "argues that the suburb imitates a country life that it was never in a position to provide",
+        "C": "shows that a form built for one way of living ought to be replaced now that the living has changed",
+        "D": "explains a built form by the picture that came before it, and presses an analogy until it breaks"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The passage announces both of its moves. The second paragraph ends with builders 'putting up the scenery that a script already called for', and the fourth opens with 'the analogy breaks at one joint, and the break is the point'. A characterisation has to include the breaking as well as the comparing.",
+        "correct_reasoning": "The correct option names what the author does in order. A picture is shown to exist before the thing; the removal of an obstacle is shown to have let it be built rather than to have designed it; the theatrical comparison is then pressed through the composed front and the unplanned ground between the houses, and finally broken at the point where a set is taken down and a suburb is not. Every paragraph has a place in that description.",
+        "passage_anchor": "rc-0115-p2, rc-0115-p4",
+        "question_type_note": "Characterisation questions are answered in verbs. When a passage runs on an analogy, check whether the author also limits it, since a limited analogy and an asserted one are different pieces of work.",
+        "reading_habit": "Say what the author does to the material, paragraph by paragraph, before reading the options. An option that describes only the most memorable paragraph will usually be wrong on the others.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "Transport appears as the removal of an obstacle, not as the maker of a form: the passage says that when building became possible 'nobody designed it', and that every element had been drawn and described for decades. A history of transport would have no use for the first paragraph at all.",
+            "seductive_element": "The tram and the railway are the only concrete causes named, and stories about suburbs are usually told as stories about commuting."
+          },
+          {
+            "option": "B",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The passage denies this in its final lines: the scenery outliving the play 'is not an accusation of falsity', real lives are lived there, and 'the form was never pretending to be anything'. The comparison is about how the thing was composed, not about what it claims to be.",
+            "seductive_element": "Calling a place scenery sounds like calling it fake, and the reader supplies the accusation before the author declines it."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No recommendation is made. The passage says the streets 'are still there and will be there in a century' and ends with what we have to go on using, which describes an inheritance rather than proposing a demolition.",
+            "seductive_element": "An expired script sounds like a case for rebuilding, and the last paragraph is where a reader expects a proposal to arrive."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0115-q2",
+      "type": "vocabulary_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "struct.analogy"
+      ],
+      "target_mistake": "choosing the option that restates the passage's argument, or the everyday sense of the word, instead of the theatrical sense the sentence requires",
+      "prediction_target": "Before the options the learner should be able to say: the word belongs to the theatre and is paired with the end of a run, so it must describe what happens to a set when the production finishes.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the last paragraph, “A set is struck when the run ends” uses “struck” to mean",
+      "options": {
+        "A": "dismantled and carried away once it is no longer needed for the performance",
+        "B": "exposed as mere scenery once the play that justified it has come to an end",
+        "C": "left standing in place after the traffic that once supplied it has gone elsewhere",
+        "D": "cleared from the site so that something better suited to the time can be built"
+      },
+      "correct": "A",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The word arrives inside the theatrical comparison and is fixed by the clause it sits in: a run ending is what happens to a production, and the next sentence, 'Nobody strikes a suburb', tells you the word names something that could have been done and was not.",
+        "correct_reasoning": "The correct option is the theatre's own sense of the word: taking the set apart and removing it when the production closes. The argument needs exactly that meaning, because the contrast it draws is between scenery that goes away at the end and streets that stay. Any reading on which the set remains would make the following sentence pointless.",
+        "passage_anchor": "rc-0115-p4",
+        "question_type_note": "When a passage borrows a technical word from the field its analogy comes from, the answer is that field's meaning. Options offering the word's everyday sense, or the passage's thesis, are the standard pair of decoys.",
+        "reading_habit": "Substitute your candidate meaning into the sentence and read the sentence after it. A meaning that makes the following sentence redundant is the wrong meaning.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "sophisticated_sounding",
+            "why_wrong": "This restates the passage's own conclusion instead of defining the word, and it restates it in a form the passage rejects, since the closing lines deny any accusation of falsity. A definition has to be something one could put into the sentence in place of the word.",
+            "seductive_element": "It sounds like the thesis, and a reader who has followed the argument will recognise the thought and mistake recognition for definition."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Standing after the traffic has gone is what the passage says happens to the suburb, not to the set; the whole point of the sentence is the contrast between the two. Reading the word this way collapses the difference the paragraph was built to draw.",
+            "seductive_element": "The passage really does describe streets left behind by a way of life, and that image is a page away from the word."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage proposes a replacement, and the sentence is about what happens routinely at the end of a theatrical run rather than about an improvement. Clearing a site for something better imports a plan the author never offers.",
+            "seductive_element": "Striking sounds destructive, and demolition followed by rebuilding is the familiar fate of an outdated building."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0115-q3",
+      "type": "relationship",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "arg.causal_claim",
+        "struct.analogy"
+      ],
+      "target_mistake": "putting the transport first in the order of explanation, because it is the only physical cause the passage names",
+      "prediction_target": "The learner should be able to say beforehand: the picture existed first and could not be built; the transport removed the obstacle and supplied no design.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "inference"
+      ],
+      "stem": "The relationship the passage draws between the idea of the suburb and the transport that made it possible is that",
+      "options": {
+        "A": "the idea came first and waited, and the transport removed the obstacle that had kept it unbuilt",
+        "B": "the transport came first, and the idea was produced afterwards to make sense of what had been built",
+        "C": "the transport supplied a picture of country living which the suburb then imitated in miniature",
+        "D": "the two belonged to a single arrangement which has ended, leaving the form without a purpose"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The first paragraph establishes the picture and the obstacle in one sentence: land near a town was too dear and land cheap enough was too far, 'so the picture stayed a picture'. The second names what changed — the price of distance — and then insists that when building became possible, 'nobody designed it'.",
+        "correct_reasoning": "The correct option keeps that order and that division of labour. The idea is a century older than the place; the transport does one job, which is to make a distance affordable, and it contributes nothing to the form, since every element had been drawn and described already. The passage's word for what the tram did is that the obstacle 'was simply removed'.",
+        "passage_anchor": "rc-0115-p1, rc-0115-p2",
+        "question_type_note": "Relationship questions ask how two things in a passage stand to each other. Look for the sentence that says what one of them did and did not do, rather than for the one that says which came first.",
+        "reading_habit": "When a passage names an enabling condition, check what it explicitly refuses to credit that condition with. Authors who mean to separate an obstacle from a cause usually say so in a single line.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The passage opens with a century in which the idea existed and could not be built, and describes the houses that finally went up as 'the picture, built'. Reversing the order leaves the first paragraph, and the phrase about a script already calling for scenery, with nothing to do.",
+            "seductive_element": "Physical causes usually come first in explanations of how places were made, and the tram is the only piece of machinery in the passage."
+          },
+          {
+            "option": "C",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The picture in this passage comes from essays, sermons and paintings, and the transport supplies nothing but affordable distance. An imitation of country living is also close to the accusation of pretence that the final lines rule out.",
+            "seductive_element": "Gardens and detachment do suggest a rural model, and the word imitation fits the scenery comparison the passage is running."
+          },
+          {
+            "option": "D",
+            "trap_type": "half_right",
+            "why_wrong": "Something has indeed been withdrawn, but the passage says it is the script — one earner leaving, one adult at home — rather than the transport, and it is careful to say that what remains is not thereby false. The relationship asked about is the one at the origin, which this option skips entirely.",
+            "seductive_element": "It borrows the strongest idea in the closing paragraph, and a form outliving its purpose does sound like a description of the relation between two things that have ended together."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0115-q4",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.necessary_vs_sufficient",
+        "elim.near_tie"
+      ],
+      "target_mistake": "converting the enabling condition into a sufficient cause, or the theatrical comparison into a charge of pretence",
+      "prediction_target": "Before the options the learner should be able to say: only what the picture contained was designed, so a part of a suburb outside the picture was left to happen.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "Wherever a tramway or a suburban railway was built, a suburb of this kind followed in due course.",
+        "B": "The people who moved into the early suburbs were pretending to a country life they did not have.",
+        "C": "A built form whose justification has lapsed will in time be replaced by one that fits the present.",
+        "D": "A part of a suburb that nobody would see from the road is unlikely to have been designed at all."
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph draws the consequence of building from a picture: what faces the audience is composed and 'whatever does not is however it happened to come out'. It then names the unseen parts — the ground between houses, the way to the shops — and says none of them 'was anybody's intention'.",
+        "correct_reasoning": "The correct option generalises that observation by one step. If only what the picture contained was designed, and the picture was composed to be looked at from the front, then the parts of a suburb outside the view are precisely the parts nobody drew. The passage supplies the rule and two instances of it, and asks for nothing further.",
+        "passage_anchor": "rc-0115-p3",
+        "question_type_note": "When an analogy is used to explain a feature of something, the inference on offer is usually another instance of the same feature. Check that the instance falls inside what the analogy was said to cover.",
+        "reading_habit": "After an author presses an analogy, ask what else it predicts. The safe inference is the next case of the pattern; the unsafe ones are the judgements the analogy suggests but the author withholds.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "Transport is given one job in this account, removing an obstacle, and is explicitly denied the rest: when building became possible, nobody designed anything, and what went up was a picture that had been in circulation for a century. A line without that picture behind it is not shown to produce anything.",
+            "seductive_element": "The passage does make cheap distance the thing that changed, and it is easy to promote the only named cause into a complete one."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The closing lines refuse exactly this: the scenery outliving the play 'is not an accusation of falsity', and the form 'was never pretending to be anything'. The comparison describes how the place was composed, not a claim its inhabitants were making.",
+            "seductive_element": "Scenery and stage sets carry a suggestion of pretence in ordinary speech, and the passage runs the comparison for two paragraphs before disclaiming it."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The passage says the opposite about these streets: they 'are still there and will be there in a century', and the difficulty it describes is that we go on using doors placed by carpenters working to a withdrawn script. Nothing in it suggests that built forms adjust to the lives lived in them.",
+            "seductive_element": "It sounds like the natural moral of a story about an expired purpose, and readers expect an essay of this kind to end by predicting a correction."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "dear",
+      "passage_use": "Land near a town was too dear to give over to a garden",
+      "meaning_here": "expensive; costly relative to what it would be used for",
+      "difficulty": "medium"
+    },
+    {
+      "word": "elevation",
+      "passage_use": "the street elevation of a suburban house",
+      "meaning_here": "the face of a building as seen from one side",
+      "difficulty": "hard"
+    },
+    {
+      "word": "detached",
+      "passage_use": "The detached or half-detached house",
+      "meaning_here": "standing on its own, sharing no wall with a neighbour",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "An everyday place is explained by a comparison, and the comparison is then deliberately broken. Watch for the sentence that says which part of it does not hold, because that is where the argument actually is.",
+    "one_sentence_summary": "The suburb existed as a picture for a century before cheap transport let anybody build it, so when the houses went up nobody was designing a form, and the parts that were composed are the parts the picture contained, while the streets themselves outlive the way of life they were composed for.",
+    "main_idea": "Essays and paintings described the detached house in a garden long before people could live in one, because near land was expensive and cheap land was unreachable. The tram and the railway removed that obstacle and supplied no design. What went up was the picture, built. Like a stage set it was composed to be seen from one side, and unlike a stage set it is never taken down when the play ends.",
+    "simple_explanation": "Before the suburb existed, the idea of it did. You can find it in old essays and especially in paintings: a house standing alone, a garden round it, work happening somewhere else, a family at home in the afternoon. Almost nobody actually lived that way, because land near town cost too much for a garden and land far out was too far to walk.\n\nThen travel became cheap. Trams and suburban trains made six miles cost an hour and a few pence. The obstacle vanished.\n\nAnd here is the interesting bit: when building finally became possible, nobody sat down and designed anything. The houses that went up were simply the picture, made real. The separate house, the gate, the front lawn, work kept away from home — all of it had been drawn and described for decades. The builders were putting up scenery for a script that already existed.\n\nThe author then pushes the theatre comparison. A stage set is built to be looked at from one direction, so the front is carefully arranged and the back is whatever it ends up being. That describes a suburban house very well: a composed front elevation, an unconsidered back. And it describes even better the bits nobody drew at all — the gaps between houses, the route to the shops, the places children actually play.\n\nThen the comparison breaks, and the break is the point. When a play finishes, the set is taken apart and removed. Nobody takes a suburb apart. The life it was built for — one person going out to earn, one staying home, children playing within earshot — has quietly gone, and the streets will still be there in a hundred years.\n\nThe author is careful to say this is not an accusation. Nobody is faking anything; real lives happen there. It is just an awkward situation: we have inherited the set of a play nobody performs, and we use the doors where the carpenters happened to put them.",
+    "why_difficult": "The analogy is doing two opposite jobs in the same passage, and readers usually notice only one. For two paragraphs it explains how the place was composed; in the last paragraph it is deliberately broken, and the break carries the argument. The word scenery also arrives with a moral charge the author does not intend, so a reader has to hold the comparison at arm's length while using it. Finally, the transport is the only physical cause named and is easily promoted into the explanation, which the second paragraph blocks in a single sentence.",
+    "author_intention": "To show that a familiar landscape was copied from a picture rather than designed for a problem, and to explain, without blaming anybody, why parts of it fit so badly now.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0115-p1",
+        "role": "The idea first",
+        "note": "The detached house in its garden was described and painted for a century before anyone could live in one. Land was either too dear or too far."
+      },
+      {
+        "paragraph_id": "rc-0115-p2",
+        "role": "The obstacle removed",
+        "note": "Cheap travel made distance affordable. But nobody designed the new suburb: builders simply put up the picture that already existed."
+      },
+      {
+        "paragraph_id": "rc-0115-p3",
+        "role": "The analogy pressed",
+        "note": "A stage set is composed from one side only. So is a suburban house, and the spaces between the houses were nobody's plan at all."
+      },
+      {
+        "paragraph_id": "rc-0115-p4",
+        "role": "The analogy broken",
+        "note": "Sets are taken down when the run ends; suburbs are not. The way of life has gone and the streets remain, which is a difficulty rather than a deception."
+      }
+    ],
+    "tone_progression": "Curious and pictorial at the start, briskly explanatory when the obstacle is removed, absorbed in the comparison through the third paragraph, and careful at the close, where the author stops the comparison from turning into a complaint.",
+    "key_transitions": [
+      "'Here is the strange part. When it became possible to build the thing, nobody designed it.' (paragraph 2) — the technology is denied the credit.",
+      "'The comparison is worth pressing, because a stage set has a particular kind of incompleteness.' (paragraph 3) — the analogy begins to do work.",
+      "'But the analogy breaks at one joint, and the break is the point.' (paragraph 4) — the comparison is limited, and the limit becomes the argument."
+    ],
+    "misunderstanding": "The usual misreading turns the passage into a complaint about fakery, because scenery suggests pretence and the essay uses the word four times. The final lines deny it outright. A second misreading makes the tram the maker of the suburb, which the second paragraph blocks by saying that nobody designed anything once building became possible; the transport removed an obstacle and did nothing else. A third expects a recommendation at the end and finds an inheritance instead.",
+    "traps_summary": "Options here are built by promoting an enabling condition into a cause, by taking an analogy past the joint at which the author breaks it, and by supplying the recommendation an essay of this shape usually ends with. When a writer both uses and limits a comparison, the limiting sentence is where most of the questions are decided.",
+    "reading_lesson": "When a passage runs on an analogy, read for the place where the author says it stops. An analogy that is never limited is decoration, and one that is limited is an argument: the point being made is almost always located at the joint, and the wrong answers will be the things the comparison suggests on its own, which the author has taken care not to say.",
+    "real_world": "The same pattern turns up wherever a form outlives its reason: the office floor designed for paper, the school day arranged around a farming year, the wedding built for a household that no longer exists.",
+    "takeaway": "Much of what we live inside was copied from a picture, and pictures are composed from one side only.",
+    "reflection_question": "Which arrangement in your own life was built for a script that has quietly been withdrawn?"
+  }
+}

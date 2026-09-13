@@ -1,0 +1,394 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0111",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "arts-culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "foundation",
+    "skills": [
+      "concession-tracking",
+      "argument-tracking",
+      "main-idea-extraction",
+      "vocabulary-in-context",
+      "structure-mapping"
+    ],
+    "word_count": 442,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "paragraph_function",
+      "phrase_in_context",
+      "title_selection"
+    ],
+    "theme": "the social explanation of our respect for difficult art conceded and then found insufficient, since it cannot say why only some difficulties are honoured; the difficulties that are honoured are those whose removal would remove what the work had to say, which yields a test applicable only after the fact and no preference for hard works over easy ones",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-08",
+    "reviewer_notes": "The concession is stated in the opening paragraph without hedging, so the snobbery reading is genuinely available and has to be defeated by the second paragraph's test rather than by tone. The closing sentences are written to block the opposite overreach, that demanding work is better work. Three rivals — snobbery, effort justification and difficulty as a mark of quality — each own one option in all four questions.",
+    "length_class": "medium",
+    "structure": "concession_thesis",
+    "viewpoints": 2,
+    "tone": "candid, unsentimental",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "arg.concession",
+      "arg.counterargument",
+      "arg.qualification",
+      "lang.concession_marker",
+      "comp.central_idea",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "comp.organization",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "word.context_clue",
+      "struct.analogy",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "blind_solve": null,
+      "adversarial_review": "Three rivals hold one option in each question. The first is snobbery, which the passage concedes in its opening lines and then defeats with a test rather than a denial: if the sorting were what we admired, any difficulty would serve, and the small type and the reels in the wrong order show that it does not. The second, and the live rival, is effort justification — the labour a reader spends becomes the value the reader finds — which is attractive because the passage is entirely about effort, and which the same two examples kill, since they cost effort and buy nothing. The third is difficulty as a mark of quality, refused in the closing sentences: where an effect can be had simply, having it simply is the whole of the achievement. The phrase item is decided by the clause that defines the toll gate in place, a charge collected on the way to something that would have been just as good without it, so the option about standing and the option about the value conferred by payment are both readings of the image rather than readings of the sentence."
+    },
+    "vocab_extracted": [
+      "obliging",
+      "sorts",
+      "indistinguishable"
+    ]
+  },
+  "passage": {
+    "title": "The Toll Gate and the Road",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0111-p1",
+        "text": "Start with the worst case, because the worst case is true. A good deal of the respect paid to difficult art is social. Long novels are bought more often than they are finished, and the ones that are finished get mentioned. A difficulty sorts an audience, and anybody who has come through it can say so, which is a way of saying something about oneself without appearing to. Nobody who has spent an evening among people discussing a famously hard film should pretend that this is rare."
+      },
+      {
+        "id": "rc-0111-p2",
+        "text": "But the explanation is too obliging. If what we admired were the sorting, then any difficulty would serve. Print a novel in a type too small to read in comfort and it will take longer and cost more effort, and nobody will boast of having finished it. Show a film with the reels in the wrong order and the audience does not divide into the worthy and the rest; it divides into those who leave and those who stay out of politeness. The difficulties we honour are of a particular kind, and an explanation that cannot say which kind has not explained much."
+      },
+      {
+        "id": "rc-0111-p3",
+        "text": "The kind we honour is the kind that cannot be taken out without taking out what the work had to say. A novel that spends two hundred pages establishing a household is not being inefficient about the household; those pages are how a reader comes to know a place in the way the book is about knowing places, and a summary would deliver the information and none of the knowledge. A piece of music that refuses to settle on a beat is not withholding one; the listener's continual searching is what the piece is made of, and a version with a steady pulse would be a different and much smaller work. In cases like these the difficulty is not standing in front of the work. It is the work, arriving in the only form it has."
+      },
+      {
+        "id": "rc-0111-p4",
+        "text": "That gives us a test, though only afterwards. Ask whether the same effect could have been delivered in an easier form. Where it could, the difficulty was a toll gate, a charge collected on the way to something that would have been just as good without it. Where it could not, the difficulty was the road. From outside the two are indistinguishable, which is why the argument never ends and why criticism is worth having: somebody has to go in and report. And none of this makes a hard work better than an easy one. Where an effect can be had simply, having it simply is not a compromise. It is the whole of the achievement."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0111-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.vs_speculation",
+        "arg.qualification"
+      ],
+      "target_mistake": "converting a defence of certain difficulties into a preference for difficulty, or keeping the opening concession as the passage's verdict",
+      "prediction_target": "Before the options the learner should be able to say: the passage defends difficulty only where it is inseparable from the effect, and says plainly that an effect available simply is best had simply.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "A reader who claims to have enjoyed a demanding novel is usually reporting a social fact rather than an experience.",
+        "B": "A work that costs a reader a great deal of effort will end by being valued in proportion to the effort it cost.",
+        "C": "A work whose effect could have been produced more simply is not made better by the labour it demands.",
+        "D": "An art form that asks little of its audience will before long have very little that it can say to them."
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The last three sentences are a guard rail: 'none of this makes a hard work better than an easy one. Where an effect can be had simply, having it simply is not a compromise. It is the whole of the achievement.' An author who writes that has told you which inference is available and which is blocked.",
+        "correct_reasoning": "The correct option is the guard rail applied to a single work. The passage defends difficulty only in the case where removing it removes what the work had to say; where the same effect was available in an easier form, the difficulty is called a toll gate, a charge collected on the way to something just as good without it. So labour spent on an avoidable difficulty adds nothing to the work.",
+        "passage_anchor": "rc-0111-p4",
+        "question_type_note": "When a passage defends something within a condition, the inference tested is nearly always what happens outside the condition. Read the closing qualification before the options.",
+        "reading_habit": "Find the sentence where an author stops the reader going one step further, and expect a question about that step. Those sentences are written because the step is tempting.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The passage grants that 'a good deal' of the respect is social, which is a share rather than the whole, and the third paragraph describes the experience of these works as real and describable. A claim about what readers are usually doing makes the concession into the conclusion the second paragraph refuses.",
+            "seductive_element": "The opening is unusually frank about snobbery, and a reader who is pleased by that frankness will carry it forward as the passage's verdict."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The second paragraph supplies two counter-examples on purpose. Tiny type and reels in the wrong order both cost real effort, and neither buys any admiration. Effort in this account attaches to nothing by itself; what matters is whether removing the difficulty would remove the effect.",
+            "seductive_element": "It is a real and familiar mechanism, and the passage's subject is effort throughout, so the two feel like the same claim."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "This is the position the closing lines rule out. The passage's defence is conditional on the difficulty being inseparable from the effect, and it ends by calling a simply delivered effect the whole of the achievement rather than a concession to an audience.",
+            "seductive_element": "The third paragraph's examples are all demanding works described admiringly, which makes a general preference for demanding art sound like the moral."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0111-q2",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "comp.paraphrase",
+        "elim.near_tie"
+      ],
+      "target_mistake": "titling the passage from the paragraph that is conceded rather than from the distinction the whole piece is built to draw",
+      "prediction_target": "The learner should be able to say beforehand: the passage separates two things the same word is used for, and the title should name that separation.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "author_purpose",
+        "logical_structure"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "Two Things Called Difficulty",
+        "B": "The Badge of the Unfinished Novel",
+        "C": "What the Reader's Effort Buys",
+        "D": "In Praise of Demanding Art"
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The fourth paragraph names two cases and gives each an image: the toll gate, which could have been avoided, and the road, which could not. The whole piece exists to keep those apart, and its final sentences refuse to prefer either kind of work.",
+        "correct_reasoning": "The correct title names that division, which is the only description under which every paragraph has a job: the concession describes one kind, the counter-examples show that the two are not the same thing, the third paragraph characterises the second kind, and the test tells them apart. A title has to cover the whole argument, and this is the only one that leaves nothing out.",
+        "passage_anchor": "rc-0111-p4",
+        "question_type_note": "A title question is a main-idea question with less room. Test a candidate title by asking which paragraphs it would lead a reader to expect, and reject the ones that predict only part of the passage.",
+        "reading_habit": "Before looking at the options, say what the passage is dividing, comparing or correcting. Titles that name a side rather than the division are the standard trap.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "This titles the first paragraph only. What follows is an argument that the social account cannot explain which difficulties are honoured, so a title built from it would mislead a reader about three quarters of the piece.",
+            "seductive_element": "The unfinished novel is the most vivid thing in the passage and it arrives first, which is where readers look for a title."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Effort is everywhere in the passage, but the argument denies that effort purchases anything on its own: the small type and the reels in the wrong order cost effort and buy nothing. What decides the value is whether the difficulty can be removed without loss.",
+            "seductive_element": "It uses the passage's own vocabulary and sounds like the question the piece is asking, though it names a rival account."
+          },
+          {
+            "option": "D",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage explicitly declines to praise difficulty as such, and ends by saying that where an effect can be had simply, having it simply is the whole of the achievement. A title in praise of demanding art would contradict the last two sentences.",
+            "seductive_element": "The middle of the passage defends hard works warmly, and a reader who stops before the final qualification will hear advocacy."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0111-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.organization",
+        "arg.counterargument"
+      ],
+      "target_mistake": "reading the paragraph's examples as evidence for the social account it is actually being used to limit",
+      "prediction_target": "The learner should be able to say beforehand: this paragraph tests the social explanation by asking what it would predict, and shows the prediction failing.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "argument"
+      ],
+      "stem": "The second paragraph functions primarily to",
+      "options": {
+        "A": "show that the social explanation cannot account for which difficulties are actually honoured",
+        "B": "supply the evidence that our admiration is really a matter of standing rather than of art itself",
+        "C": "explain the process by which the effort a reader spends attaches itself to a work's value",
+        "D": "establish that serious art has to make demands if it is to be taken seriously at all"
+      },
+      "correct": "A",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph opens with 'But the explanation is too obliging' and immediately turns the account into a prediction: 'If what we admired were the sorting, then any difficulty would serve.' Two cases follow in which a difficulty is real and nobody is honoured for surviving it.",
+        "correct_reasoning": "The correct option describes exactly that movement. The paragraph does not deny that art confers standing; it shows that standing cannot be the whole explanation, because it fails to distinguish the difficulties we admire from the ones we merely put up with. That failure is what makes the next paragraph necessary, and it is the paragraph's whole function.",
+        "passage_anchor": "rc-0111-p2",
+        "question_type_note": "Paragraph-function questions are answered by the paragraph's relation to its neighbours. Ask what the passage could not do next if this paragraph were deleted.",
+        "reading_habit": "Whenever a paragraph begins by stating what a theory would predict, expect the prediction to fail. The function of such a paragraph is nearly always to limit the theory rather than to support it.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The evidence for the social account is in the first paragraph, which is the concession. This paragraph exists to show the account falling short, and its two examples are cases where difficulty produces no standing at all.",
+            "seductive_element": "Both paragraphs discuss audiences and status, so a reader tracking topic rather than function will take the second for a continuation of the first."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "No process of that kind is described anywhere in the passage, and the paragraph's examples work against it: the small type costs effort and adds nothing. The account being tested here is about sorting an audience, not about effort becoming value.",
+            "seductive_element": "It sounds like a psychological explanation of the same phenomenon, and the paragraph is full of effort that produces no admiration."
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The passage never claims that art must be demanding, and its closing lines say the opposite. This paragraph is about which difficulties earn respect, which leaves entirely open whether a work needed to be difficult at all.",
+            "seductive_element": "The paragraph dismisses two kinds of pointless difficulty, which can be heard as a defence of the genuine article and then as a demand for it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0111-q4",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.function_over_words",
+        "struct.analogy"
+      ],
+      "target_mistake": "reading the image for its associations with exclusivity or with paying one's way, when the sentence defines it in place",
+      "prediction_target": "Before the options the learner should be able to say: the phrase is glossed by the clause after it, so it must mean an avoidable charge on the way to something no better for it.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the last paragraph, calling a difficulty “a toll gate” conveys that it is",
+      "options": {
+        "A": "a charge that admits only those willing to pay for the standing it confers",
+        "B": "an obstacle on the way to something that would have been as good without it",
+        "C": "a price whose payment is what makes a reader value what lies on the far side",
+        "D": "a barrier that keeps an art form from sinking to the level of its own audience"
+      },
+      "correct": "B",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The image is defined in its own sentence: a toll gate is 'a charge collected on the way to something that would have been just as good without it'. The contrast one line later — where the difficulty could not be removed, it 'was the road' — fixes what the gate is being contrasted with.",
+        "correct_reasoning": "The correct option is that gloss. The point of the image is that a toll gate is separable from the journey: you could have reached the same place by another route and arrived at exactly the same thing. That is what makes it the name for a difficulty the work did not need, and what makes the road the name for one it did.",
+        "passage_anchor": "rc-0111-p4",
+        "question_type_note": "When a passage supplies an image and then explains it, the explanation is the answer. Readings drawn from what the image usually suggests elsewhere are the distractors.",
+        "reading_habit": "Read the clause after a metaphor before you interpret the metaphor. Authors who coin an image in an argument almost always define it on the spot, and the definition beats the association.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Standing belongs to the first paragraph's conceded account, not to this sentence, which says what is on the far side of the gate would have been just as good without the charge. The image is about what the payment is not needed for, rather than about who is admitted.",
+            "seductive_element": "A gate that charges for entry suggests exclusivity, and the passage has already discussed difficulty as something that sorts an audience."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "This makes the payment do something valuable, which is the opposite of the sentence's point: the destination 'would have been just as good without it'. The passage's two counter-examples exist to show that paying in effort creates no value of its own.",
+            "seductive_element": "It is the near-tie, and it is a real theory about why people prize what they have worked for, which the passage discusses without ever endorsing."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage assigns difficulty a protective role, and the closing sentences deny that hard works are better. The image is used to identify a difficulty that was not worth its price, not one that defends anything.",
+            "seductive_element": "Barriers protect as well as exclude, and readers who arrive expecting a defence of high art will supply the protective sense."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "obliging",
+      "passage_use": "But the explanation is too obliging.",
+      "meaning_here": "too willing to supply what is wanted; suspiciously convenient",
+      "difficulty": "hard"
+    },
+    {
+      "word": "sorts",
+      "passage_use": "A difficulty sorts an audience",
+      "meaning_here": "divides a group into kinds by some test",
+      "difficulty": "easy"
+    },
+    {
+      "word": "indistinguishable",
+      "passage_use": "From outside the two are indistinguishable",
+      "meaning_here": "impossible to tell apart without going further in",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The passage opens by agreeing with the cynical view of difficult art, and then spends three paragraphs showing that the agreement does not settle anything. Watch where the agreement stops.",
+    "one_sentence_summary": "Much of the prestige of difficult art really is social, but that cannot explain why only some difficulties are admired, and the ones that are turn out to be those whose removal would remove what the work had to say.",
+    "main_idea": "Difficulty in art is two different things wearing one name. Sometimes it is a charge collected on the way to an effect that could have been delivered more easily. Sometimes it is the only form the effect has, so that an easier version would be a different and smaller work. Telling them apart requires going in, and neither kind makes a hard work better than an easy one.",
+    "simple_explanation": "Some art is hard work, and we tend to respect it for that. The obvious explanation is snobbery: finishing a difficult book is something you can mention, and mentioning it says something flattering about you. The author agrees that a lot of it really is this.\n\nBut then comes the test. If we admired difficulty just because it sorts people into those who managed and those who did not, then any difficulty would do. Print a book in tiny type and it becomes harder work, and nobody is proud of finishing it. Show a film with the reels in the wrong order and people do not feel superior for staying; they stay to be polite. So we only honour certain kinds of difficulty, and snobbery cannot say which.\n\nThe kind we honour, says the author, is the kind you cannot remove without removing the point. A novel that takes two hundred pages to settle you into a household is not being slow: those pages are how you come to know the place, and a summary would give you the facts and none of the knowing. Music that never settles into a beat is not hiding one: your searching for it is the piece.\n\nSo here is a test, though you can only apply it afterwards: could the same effect have been delivered more easily? If yes, the difficulty was a toll gate — a charge on the way to something that was no better for it. If no, the difficulty was the road itself.\n\nAnd one last thing, which is easy to miss: none of this means hard art is better. If something can be done simply, doing it simply is not cutting corners. It is the achievement.",
+    "why_difficult": "The passage agrees with the reader's cynicism in its first paragraph and with the reader's enthusiasm in its third, so whichever attitude a reader brought will be confirmed somewhere and can be carried out as the conclusion. The argument itself lives in a move that is easy to skim: turning the social account into a prediction and then showing the prediction fail. The last three sentences then quietly block the opposite overreach, and they are the sentences most readers lose.",
+    "author_intention": "To make an argument about difficult art that survives the cynical explanation instead of ignoring it, and to leave the reader with a test rather than a verdict.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0111-p1",
+        "role": "Grants the cynical case",
+        "note": "Much of the respect for difficult art is social. Finishing a hard book is something people mention, and that is a way of talking about yourself."
+      },
+      {
+        "paragraph_id": "rc-0111-p2",
+        "role": "Shows it is not enough",
+        "note": "If sorting people were the point, any difficulty would work. Tiny type and jumbled reels are hard and nobody admires anyone for enduring them."
+      },
+      {
+        "paragraph_id": "rc-0111-p3",
+        "role": "Names the other kind",
+        "note": "Some difficulties cannot be taken out without taking out the point. The two hundred pages are how you come to know the place; the missing beat is the piece."
+      },
+      {
+        "paragraph_id": "rc-0111-p4",
+        "role": "Gives the test and the limit",
+        "note": "Ask whether the effect could have come more easily. And remember that an effect delivered simply is not a lesser achievement."
+      }
+    ],
+    "tone_progression": "Blunt at the start, where the least flattering explanation is accepted without argument; warmer in the middle, where two demanding works are described from inside; and level at the close, where the author declines to turn the defence into a preference.",
+    "key_transitions": [
+      "'But the explanation is too obliging.' (paragraph 2) — the concession ends and the argument begins.",
+      "'The kind we honour is the kind that cannot be taken out without taking out what the work had to say.' (paragraph 3) — the thesis in one line.",
+      "'And none of this makes a hard work better than an easy one.' (paragraph 4) — the limit that stops the defence becoming a doctrine."
+    ],
+    "misunderstanding": "Readers leave with one of two positions the passage refuses. The first is that admiration for difficult art is snobbery, which the second paragraph disproves by finding difficulties that confer no standing whatever. The second is that difficulty is a mark of quality, which the last three sentences deny outright. Both misreadings come from stopping at a paragraph the author wrote as a stage rather than as a destination.",
+    "traps_summary": "Options here are built from the two halves of the passage taken separately, and from a third account the passage never endorses, in which effort spent creates the value found. Where an essay concedes a view and then limits it, expect the conceded view and the unlimited thesis to appear as answers, and check each against the paragraph that stands between them.",
+    "reading_lesson": "When a passage opens by agreeing with an objection, read on for the sentence that turns the objection into a prediction, because that sentence is where the argument starts. Everything before it is ground the author has given away, and options built from it will be true statements that the passage has already left behind.",
+    "real_world": "The same distinction is worth having about hard software, difficult exams and complicated bureaucracy: some of the effort is the thing being done, and some is a charge collected on the way to a result that was available more cheaply.",
+    "takeaway": "Before admiring a difficulty, ask what would be lost if somebody removed it.",
+    "reflection_question": "Which difficult thing you admire would survive being made easy, and what does your answer say about why you admired it?"
+  }
+}

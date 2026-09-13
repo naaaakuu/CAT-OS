@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0028",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "Better or Worse Than What",
+    "theme": "why the line between a threat and an offer depends on a baseline the parties were already disputing",
+    "estimated_time_sec": 105,
+    "clue_types": ["lexical_repetition", "connective_implicit", "parallelism"],
+    "primary_trap": "redundant_restatement",
+    "reasoning_patterns": ["disc.cause_effect", "disc.repeated_noun", "disc.problem_then_solution", "disc.function_slot"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "place a sentence by the pair of things a later sentence counts, and refuse a slot where the sentence would make its neighbour's complaint twice",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General moral philosophy of coercion, offers and baselines; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The decisive clue is a count: the closing sentence sorts a dispute into two halves, and only the missing sentence performs the division. The word 'Owed' also has exactly one antecedent, in the sentence about the moral baseline, which rules out both early slots.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot straight after the sentence that asks 'Better or worse than what', where the objection seems to want completing at once. Put there, the missing sentence makes the same complaint the paragraph has just made — that the measuring point decides the hard cases — before any repair has been proposed for it to be a verdict on, and the word 'Owed' has nothing above it to quote, since the moral baseline arrives two sentences later. The slot after the example about the works is the other candidate, and it fails on the same missing antecedent while leaving the closing sentence counting two halves where the paragraph has produced none.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A threat voids the consent it extracts and an offer does not, and the line is drawn by asking whether the proposal leaves its recipient better or worse off." },
+      { "n": 2, "text": "Better or worse than what: the test is silent about the point it measures from, and that point decides the hard cases." },
+      { "n": 3, "text": "An owner who will close unless wages are halved is threatening against last year's pay and offering against a closure he could lawfully declare." },
+      { "n": 4, "text": "The usual repair makes the baseline moral: what matters is not what the recipient had but what the proposer owed him." },
+      { "n": 5, "text": "A rule that sorts a dispute into a settled half and the original one is worth keeping, but it is not a bright line." }
+    ]
+  },
+  "missing": {
+    "text": "Owed was the word the parties were already fighting over, so the test settles one half and returns the other to the quarrel it was called to end.",
+    "position": 4,
+    "function": "the cost of the moral baseline, and the division into two halves that the closing sentence counts"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Owed was the word the parties were already fighting over, so the test settles one half and returns the other to the quarrel it was called to end.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "After sentence 4",
+      "C": "After sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 3, "B": 4, "C": 1, "D": 2 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "Two things have to be true at once. The sentence quotes the word 'Owed', and the paragraph uses that word in exactly one place, where the repair is described as making the baseline moral, so nothing earlier gives it an antecedent. The closing sentence then counts: it sorts a dispute into a settled half and the original one, which needs a division into halves to have been made, and only the missing sentence makes it. The seat between the moral baseline and the sentence that counts its halves is the one place that answers both demands.",
+    "clue_before": "Sentence 4 introduces 'owed' as the new measure, and a sentence beginning 'Owed was the word' is the objection that a newly introduced measure invites.",
+    "clue_after": "Sentence 5 sorts the dispute into a settled half and the original one, so the paragraph must already have divided it into two, which nothing above the missing sentence does.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The sentence above this slot has just said that the test is silent about its measuring point and that the point decides the hard cases; a sentence saying the test returns half the question to the original quarrel is that complaint made a second time, before any repair has been offered for it to be a verdict on.",
+        "seductive_element": "An objection that opens 'Better or worse than what' seems to want finishing immediately, and both sentences are about the same failure of the test."
+      },
+      {
+        "option": "C",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "After the opening statement of the test, the paragraph needs the difficulty with it, not a verdict on how much of a dispute it can settle; and 'Owed' names a measure nobody has proposed yet, since the moral baseline is three sentences away.",
+        "seductive_element": "The sentence sounds like the thesis the paragraph is going to argue for, and a thesis often sits directly under the claim it corrects."
+      },
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Beside the example of the works the language of quarrelling parties fits smoothly, but the only debt the paragraph has mentioned by this point is wages, and 'Owed' is left pointing at that rather than at the moral baseline introduced afterwards; the closing count of two halves is also still unsupplied.",
+        "seductive_element": "An owner and a workforce are parties with something to fight over, so 'the parties were already fighting' seems to name the people in the example."
+      }
+    ],
+    "method": "Look for a sentence that counts, and check that the paragraph contains what it counts. Where a later line sorts something into two parts, two halves, both sides, the division has to have been performed above it. Then confirm with a quoted word: a sentence that picks up a term in inverted commas or in its bare form can only follow the sentence that put the term into play."
+  },
+  "mentor": {
+    "challenge": "The last sentence divides a dispute into two halves. Count the halves the four visible sentences actually produce.",
+    "takeaway": "A sentence that counts is a receipt for something above it; find what it counts before you look at the options."
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0051",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "technology-ethics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "Taking It Back",
+    "theme": "why a reversible action is not merely protection against error but the condition of anybody exploring a program at all",
+    "estimated_time_sec": 65,
+    "clue_types": ["lexical_repetition", "connective_implicit", "article_given_new"],
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.cause_effect", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 2, "competing_slots": 3, "concept_abstractness": 3, "syntactic_complexity": 2 },
+    "learning_objective": "let a slot's job decide the sentence: a gap after a bare claim wants the received view, not the correction of it",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of reversibility in interface design; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The clue is 'that same person' in the fourth sentence, which needs a person already described doing something. The rival slot puts the correction above the view it corrects, so that 'undersells it' is complaining about an account the paragraph has already improved on.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening claim, where a statement of what reversibility really does seems the obvious next step. The gap there wants the received view, which the following sentence supplies by calling the feature a protection against mistakes and saying that this undersells it; put the correction above that line and the paragraph complains of an underselling after having already sold the thing at full price. The last slot is the other candidate, and it leaves 'that same person' with nobody to be the same as.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "The cheapest safety feature a program can have is the one that lets a person put something back." },
+      { "n": 2, "text": "It is usually defended as protection against mistakes, which undersells it considerably." },
+      { "n": 3, "text": "Remove the undo and that same person reads the manual, asks a colleague who is busy, or simply never uses the feature at all." },
+      { "n": 4, "text": "The cost of an irreversible interface is therefore paid in the parts of it nobody ever finds." }
+    ]
+  },
+  "missing": {
+    "text": "A person who knows an action can be taken back will try things, and trying things is how anybody learns a program.",
+    "position": 2,
+    "function": "the fuller account the previous sentence says is missing, and the person the next sentence calls the same one"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A person who knows an action can be taken back will try things, and trying things is how anybody learns a program.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "Before sentence 1",
+      "C": "After sentence 3",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 2, "B": 0, "C": 3, "D": 1 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "One sentence says the usual defence undersells the feature, which is a debt: the reader is owed the fuller account immediately. The missing sentence is that account. Looking forward, the next visible sentence begins 'Remove the undo and that same person', and 'that same person' needs somebody already described, doing something that removal would stop. Nobody in the paragraph is described until the missing sentence produces the person who tries things. A debt behind and a pronoun in front leave one seat, and the argument about learning is what turns the closing line about undiscovered parts into a conclusion.",
+    "clue_before": "Sentence 2 says the usual defence undersells the feature, which obliges the paragraph to say what it has left out.",
+    "clue_after": "Sentence 3 speaks of 'that same person', and no person has been described before the missing sentence introduces one.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "Right subject, wrong job. The gap here wants the received view of the feature, which the next sentence supplies by calling it protection against mistakes and adding that this undersells it; the correction placed above that line leaves the paragraph objecting to an account it has already improved upon, so the complaint arrives after the repair.",
+        "seductive_element": "The opening sentence names the feature, and a sentence saying what the feature actually achieves looks like the natural second line."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is wanted one seat earlier. Here 'that same person' in the sentence above has nobody to be the same as, and the explanation of what reversibility buys arrives after the description of what its absence costs, so the reader meets the consequence before the mechanism.",
+        "seductive_element": "Explaining after showing is a defensible order, and the sentence does read as the moral of the manual and the busy colleague."
+      },
+      {
+        "option": "B",
+        "trap_type": "attractive_generality",
+        "why_wrong": "As an opening it is a broad claim about how people learn software, which takes the place of the sentence that actually has to introduce the feature; the reader is told what somebody does when an action can be taken back before being told that any program offers such a thing, and the pronoun two sentences later is stranded throughout.",
+        "seductive_element": "It states the paragraph's real thesis, and a thesis-first opening is always tempting."
+      }
+    ],
+    "method": "When a visible sentence says that the usual account is wrong, incomplete or an underselling, it has created a debt the very next sentence must settle. Find the debt, then look forward for a pronoun or a phrase like 'that same person' and check the slot puts its antecedent above it."
+  },
+  "mentor": {
+    "challenge": "A visible sentence says the usual defence undersells the feature. The paragraph then has to say what it leaves out. Where?",
+    "takeaway": "A complaint that an account is incomplete is a promise to complete it, and the completion comes next."
+  }
+}

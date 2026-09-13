@@ -1,0 +1,321 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0109",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "philosophy",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "structure-mapping",
+      "trap-recognition"
+    ],
+    "word_count": 348,
+    "question_count": 3,
+    "question_types": [
+      "best_characterization",
+      "inference",
+      "not_true"
+    ],
+    "theme": "why an appeal to what is natural survives its own refutation: the word can only be used after somebody has selected which of nature's facts count, so it carries a verdict disguised as a description and shifts the burden of proof, which makes the effective reply a question about the selection rather than a denial of the inference",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-08",
+    "reviewer_notes": "A short passage whose difficulty is entirely structural: the familiar refutation is conceded in the first paragraph and the argument begins after it, so the option built from the concession is the strongest distractor in two of the three questions. The closing sentence is written to block the general is-ought reading, and the sentence about sharpening the definition is written to block the vagueness reading.",
+    "length_class": "short",
+    "structure": "phenomenon_explanation",
+    "viewpoints": 2,
+    "tone": "patient, faintly amused",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.phenomenon_explanation",
+      "comp.organization",
+      "comp.function_over_words",
+      "comp.explicit_detail",
+      "arg.principle",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.vs_speculation",
+      "scope.abstraction_level",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "blind_solve": null,
+      "adversarial_review": "Three rivals own an option in each of the three questions. The first is emptiness: the word says nothing and should be dropped, which is the concession the first paragraph makes and the third paragraph overturns by showing what the word accomplishes and by noting that normal, healthy and human will do the same work, so an argument without the word is not thereby an argument without the move. The second is vagueness: the word fails because nobody can fix its boundary. It is killed in terms — grant the tidiest boundary you like and the selecting still has to be done afterwards, on grounds the boundary does not supply. The third, and the live rival, is the general principle that no fact can establish a conclusion about conduct; it is attractive because the passage concedes it in the first paragraph and because it is true, and it is refused as a characterisation of the passage by the closing sentence, which says that facts bear on how people should live constantly, through a standard that has to be stated. The NOT item keys on that closing sentence: the option denying any bearing at all is the one the author would refuse, while the three true options are drawn one from each of the other readings."
+    },
+    "vocab_extracted": [
+      "recruited",
+      "conceded",
+      "refutation"
+    ]
+  },
+  "passage": {
+    "title": "Nobody Stops Using It",
+    "reading_time_min": 1.9,
+    "paragraphs": [
+      {
+        "id": "rc-0109-p1",
+        "text": "Anybody who argues about how people ought to live has been told that the word natural does no work, and almost nobody stops using it. The objection is old and not hard to state. Nature contains care and cruelty, the nursing of the young and the eating of them; for any fact recruited on one side of a moral question another lies ready on the other. So the fact that something occurs in nature cannot settle whether it should occur among us. This is generally conceded, often cheerfully, and the word comes back two paragraphs later."
+      },
+      {
+        "id": "rc-0109-p2",
+        "text": "A term that survives refutation that comfortably is probably not doing the job it appears to do. Consider what has to happen before it can be used. Nature presents an unmanageable quantity of facts, and only a few get mentioned. Somebody has picked those few out, and the picking was done on some view of which facts matter here. That view is the moral claim. The word therefore arrives with a verdict already inside it and offers itself as an observation. Sharpening the definition does not help: grant the tidiest boundary you like between the natural and the made, and the selecting still has to be done afterwards, on grounds the boundary does not supply."
+      },
+      {
+        "id": "rc-0109-p3",
+        "text": "That is also why the word is worth having. A verdict invites an argument; a description has to be disproved. To call an arrangement natural is to move the burden across the table, so that the objector has the work to do and the choosing behind the claim is never examined. The trick is not in the syllables: normal will do it, and healthy, and human. No refutation of the inference from nature to duty touches this, which is why it has landed harmlessly for two centuries. The reply that works is a question: which facts were counted, and what standard picked them out? None of this makes facts about human beings irrelevant to how they should live. They bear on it constantly, but through a standard that has to be stated, and can then be disputed."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0109-q1",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "comp.function_over_words",
+        "struct.phenomenon_explanation"
+      ],
+      "target_mistake": "describing the passage by the objection it concedes in its first paragraph rather than by the explanation it builds afterwards",
+      "prediction_target": "The learner should be able to say beforehand: the author takes a refutation as already granted and then explains why the word survives it, ending with the question that gets underneath it.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "author_purpose",
+        "main_idea"
+      ],
+      "stem": "Which of the following best characterises what the author does in the passage?",
+      "options": {
+        "A": "demonstrates that a familiar word is empty, and urges that moral arguments be conducted without it entirely",
+        "B": "explains why a word refuted long ago stays useful to its users, and names the question that exposes it",
+        "C": "traces the confusion produced by a word whose boundary between kinds nobody has ever managed to fix",
+        "D": "argues that no fact about how the world is can establish a conclusion about how anybody ought to act"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The first paragraph ends by granting the objection, and the second opens with the puzzle that granting it creates: 'A term that survives refutation that comfortably is probably not doing the job it appears to do.' Everything after that sentence is an account of the job it is actually doing.",
+        "correct_reasoning": "The correct option names both halves of the passage's work. It explains the survival — the word moves the burden of proof, so a verdict is presented as a description — and it identifies the reply the author recommends in place of the useless refutation: which facts were counted, and what standard picked them out. A characterisation that stops at the refutation describes only the paragraph the author treats as finished business.",
+        "passage_anchor": "rc-0109-p2, rc-0109-p3",
+        "question_type_note": "Characterisation questions are answered in verbs. Say what the author does to the material in order, and reject options whose verbs belong to a paragraph the author is only clearing away.",
+        "reading_habit": "When a passage concedes an argument early, treat that concession as the ground floor rather than the destination. The thesis is always what the author builds on top of what has been granted.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The third paragraph opens by saying the opposite, that this is 'why the word is worth having', and it goes on to point out that the same move can be made with normal, healthy and human. Dropping the word would leave the selection and the shifted burden exactly where they were.",
+            "seductive_element": "The first paragraph really does grant that the word settles nothing, and a reader who files the passage under debunking will expect a recommendation to stop using it."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "Vagueness is raised and dismissed in one sentence: grant the tidiest boundary you like, and the selecting still has to be done afterwards on grounds the boundary does not supply. The author's diagnosis is about what a speaker chooses, not about where a line falls.",
+            "seductive_element": "Words about nature really are hard to define, and a complaint about fuzzy boundaries is the objection a reader arrives already carrying."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "This is the premise the passage begins from rather than the thesis it reaches, and the final two sentences guard against taking it as the author's conclusion: facts about human beings bear on how people should live constantly, once a standard is stated.",
+            "seductive_element": "It is the most famous idea in the neighbourhood and the first paragraph appears to be arguing for it, so a reader recognises it and stops looking."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0109-q2",
+      "type": "not_true",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "taking the passage's concession that nature settles nothing for a general denial that facts about people can bear on how they should live",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope"
+      ],
+      "stem": "Which of the following would the author NOT accept?",
+      "options": {
+        "A": "The objection to arguing from what is natural is easy to state, and it is conceded almost every time.",
+        "B": "Somebody who calls an arrangement natural has already applied a view about which facts matter.",
+        "C": "Facts about how human beings are made can have no bearing on how human beings ought to live.",
+        "D": "A precise boundary between what is natural and what is made would leave the difficulty in place."
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The last two sentences of the passage exist to stop one inference: 'None of this makes facts about human beings irrelevant to how they should live. They bear on it constantly, but through a standard that has to be stated.' An author who writes that sentence has told you which option is the odd one.",
+        "correct_reasoning": "The correct answer is the one claim the passage explicitly refuses. What the author denies is that an appeal to nature settles a moral question by itself; what the author affirms is that facts bear on such questions through a standard, which can then be argued about. The three remaining statements are made in the passage almost in its own words, one in each paragraph.",
+        "passage_anchor": "rc-0109-p3",
+        "question_type_note": "In a NOT question every option is engineered to sound like the passage. Work by locating the three that can be pointed to, rather than by judging which sounds least plausible.",
+        "reading_habit": "When an essay ends with a sentence beginning 'none of this means', underline it. Authors write those sentences precisely because the reading they block is the one readers were about to take.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Both halves sit in the first paragraph, which calls the objection old and not hard to state and then reports that this is generally conceded, often cheerfully. A reader may hesitate because the author calls the refutation harmless, but an argument can be granted every time it is made and still change nothing.",
+            "seductive_element": "The passage's verdict that the refutation lands harmlessly can be misheard as a claim that the objection is obscure or seldom put."
+          },
+          {
+            "option": "B",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This is the second paragraph's central step: somebody has picked out a few facts from an unmanageable number, and 'the picking was done on some view of which facts matter here'. It is the claim the whole explanation rests on rather than one the author would reject.",
+            "seductive_element": "It attributes something to every speaker without exception, and sweeping attributions are usually the ones a passage turns out to have qualified."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The passage states it directly: sharpening the definition does not help, because the selecting still has to be done afterwards on grounds the boundary does not supply. A reader who remembers only that the passage discusses definitions may recall the topic and reverse the verdict.",
+            "seductive_element": "It sounds like a concession the author would resist, since fixing a definition is the standard repair for a troublesome word."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0109-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.description_vs_evaluation",
+        "elim.near_tie"
+      ],
+      "target_mistake": "assuming that because the inference from nature to duty is invalid, exposing its invalidity must weaken the appeal that trades on it",
+      "prediction_target": "Before the options the learner should be able to say: the word's work is done by the shifted burden and not by the inference, so refuting the inference leaves the work untouched.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "An argument conducted without the word would be one in which nothing had been smuggled past the reader.",
+        "B": "Showing that nature settles nothing leaves the word's usefulness untouched, since it never rested on the inference.",
+        "C": "Two people who agreed exactly on where nature ends would have nothing left to disagree about here.",
+        "D": "Facts about human beings enter a moral argument only as decoration, the real work having been done before they arrive."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph says where the value lies — in moving the burden across the table — and then draws the consequence in one clause: 'No refutation of the inference from nature to duty touches this, which is why it has landed harmlessly for two centuries.'",
+        "correct_reasoning": "The correct option is that consequence stated as a general point. If what the word buys is the appearance of description, then defeating the argument from nature to duty removes something the speaker was not relying on. This also explains the fact the first paragraph reports, that people concede the objection cheerfully and go on using the word, which no other option accounts for.",
+        "passage_anchor": "rc-0109-p3",
+        "question_type_note": "When a passage explains why a standard objection keeps failing, the inference on offer is usually about the mismatch between what the objection attacks and what the target relies on.",
+        "reading_habit": "Ask what a move actually buys its user before you ask whether it is valid. Objections that miss the purchase can be unanswerable and still change nothing.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "half_right",
+            "why_wrong": "The passage names three substitutes in a single sentence — normal will do it, and healthy, and human — so removing one word leaves the move available. What is smuggled is the selection of facts, and the selection does not depend on which word carries it.",
+            "seductive_element": "It follows from the natural reading of a debunking essay, in which naming a trick is supposed to disarm it."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The passage anticipates this and refuses it: with the tidiest boundary granted, the selecting still has to be done afterwards on grounds the boundary does not supply. Agreement about where nature ends leaves the whole of the disagreement about which of its facts count.",
+            "seductive_element": "Settling definitions is the ordinary way of ending a verbal dispute, and the passage does spend a sentence on definitions."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The closing sentences say the reverse: such facts bear on how people should live constantly, though through a standard that has to be stated. What the passage calls decorative is an appeal that hides the standard, not the facts themselves.",
+            "seductive_element": "The essay spends most of its length showing that a verdict was reached before the facts appeared, which makes a general demotion of facts sound like its conclusion."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "recruited",
+      "passage_use": "for any fact recruited on one side of a moral question",
+      "meaning_here": "brought in to serve an argument's purpose",
+      "difficulty": "medium"
+    },
+    {
+      "word": "conceded",
+      "passage_use": "This is generally conceded, often cheerfully",
+      "meaning_here": "granted as true by the person being argued with",
+      "difficulty": "medium"
+    },
+    {
+      "word": "refutation",
+      "passage_use": "A term that survives refutation that comfortably",
+      "meaning_here": "a demonstration that an argument does not work",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The passage grants the objection you were expecting it to make, and then starts. Watch for the moment the subject stops being whether the argument is valid and becomes why it keeps working anyway.",
+    "one_sentence_summary": "Appeals to what is natural survive their own refutation because the word can only be used after somebody has silently chosen which facts of nature count, so it delivers a verdict in the costume of a description and puts the burden of proof on whoever objects.",
+    "main_idea": "Everyone agrees that nature contains too much to settle a moral question, and the word natural is used regardless. The reason is that using it requires a prior choice of which facts to mention, and that choice is the moral claim. Presented as a description, the claim makes the objector do the work. So the useful reply is not that nature proves nothing, but a question about which facts were counted and why.",
+    "simple_explanation": "People often argue that something is right or wrong because it is natural or unnatural. Philosophers have been pointing out for centuries that this proves nothing, because nature contains everything: animals that care for their young and animals that eat them. Whatever you want to claim, nature has an example.\n\nEveryone agrees with this, and everyone keeps using the word anyway. The author says that is the interesting fact, and that it tells you the word is doing a different job from the one it looks like it is doing.\n\nHere is the job. Nature contains a vast number of facts, and a speaker mentions only a handful. Somebody had to choose that handful, and they chose it because they already thought those facts mattered. That thought is the moral opinion. So by the time the word is spoken, the opinion has already been formed, and the word simply dresses it up as an observation.\n\nMaking the definition of natural more precise does not fix this, because even with a perfect definition somebody still has to decide which natural facts count.\n\nAnd this is exactly why the word is useful to whoever uses it. An opinion can be argued with; a description has to be disproved. So calling something natural pushes the work onto the other person. Other words do the same thing: normal, healthy, human.\n\nThe author's advice is therefore not to repeat that nature proves nothing, which everybody already accepts. It is to ask a question: which facts of nature are you counting, and what made those the ones that matter? And the author is careful to add that facts about people do matter to how we should live, but only once someone states the standard that makes them matter.",
+    "why_difficult": "Everything the reader expects to be the conclusion is placed in the first paragraph and treated as already settled, so a reader who recognises the familiar point stops reading for argument and starts reading for confirmation. The real claim is one level up: not that the appeal fails, but why an appeal that fails keeps being made, which requires holding an explanation of a practice and a verdict on the practice apart. The last two sentences then reverse the direction again, and a reader who has taken the passage for a general attack on facts in ethics will find them puzzling.",
+    "author_intention": "To move the reader from refuting a bad argument to understanding what makes it worth using, and so to supply a reply that actually costs its target something.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0109-p1",
+        "role": "Grants the objection",
+        "note": "Nature contains everything, so pointing at it settles nothing. Everybody agrees, and everybody goes on using the word."
+      },
+      {
+        "paragraph_id": "rc-0109-p2",
+        "role": "Explains the survival",
+        "note": "Before the word can be used, somebody has to pick which facts of nature to mention. That choice is already the moral opinion, dressed as an observation."
+      },
+      {
+        "paragraph_id": "rc-0109-p3",
+        "role": "Names the pay-off and the reply",
+        "note": "Calling something natural pushes the work onto the objector, which is why the standard refutation never bites. Ask instead which facts were counted and why."
+      }
+    ],
+    "tone_progression": "Mildly amused at the spectacle of a refuted word going on working, businesslike while the mechanism is set out, and precise at the end, where the author stops enjoying the problem and hands over a usable question and a warning against overreach.",
+    "key_transitions": [
+      "'This is generally conceded, often cheerfully, and the word comes back two paragraphs later.' (paragraph 1) — the puzzle the essay is actually about.",
+      "'A term that survives refutation that comfortably is probably not doing the job it appears to do.' (paragraph 2) — the pivot from validity to function.",
+      "'None of this makes facts about human beings irrelevant to how they should live.' (paragraph 3) — the guard against the overreaching reading."
+    ],
+    "misunderstanding": "Most readers come away with the essay they expected: that the word is meaningless and ought to be abandoned, or that no fact can bear on a moral question. Both readings are built from the first paragraph, which the author has conceded rather than argued, and both are contradicted later — the first by the sentence saying the word is worth having, the second by the closing lines about standards that have to be stated.",
+    "traps_summary": "The distractors here are made from three real ideas the passage handles and refuses to endorse: that the word is empty, that its trouble is vagueness, and that facts never bear on conduct. Each is stated somewhere near the text's own words. When a passage concedes something early, expect the concession to come back as an answer option.",
+    "reading_lesson": "Learn to separate a verdict on an argument from an explanation of why people keep making it. Passages of this shape concede the verdict in the opening paragraph and spend the rest of their length on the explanation, and nearly every wrong option is the conceded verdict handed back to you. When you can say what the author treats as already settled, you can see what is left for the argument to do.",
+    "real_world": "The same move runs through advertising and public argument whenever a contested judgement is delivered as a plain description: traditional, commonsense, organic, realistic. Each has a selection inside it and each asks the objector to disprove a fact.",
+    "takeaway": "Whenever a claim arrives dressed as an observation, ask who chose which facts would be observed.",
+    "reflection_question": "Which of the descriptions you use most confidently about people would turn out, if you examined them, to contain a verdict you have never argued for?"
+  }
+}

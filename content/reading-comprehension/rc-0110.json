@@ -1,0 +1,390 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0110",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "history",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "structure-mapping",
+      "evidence-anchoring"
+    ],
+    "word_count": 469,
+    "question_count": 4,
+    "question_types": [
+      "inference",
+      "logical_structure",
+      "primary_purpose",
+      "specific_detail"
+    ],
+    "theme": "the early state survey map read as an administrative instrument rather than a description: an office could act only on a boundary that answered yes or no about a village, so the line was drawn in the shape administration required, was made true afterwards by patrols and customs posts, and should be tested against the papers produced when somebody disputed it",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-08",
+    "reviewer_notes": "The propaganda reading is the strong rival throughout and is separated from the author's by one stated fact: the working sheets were confidential and their reader was a clerk with a ledger, which makes display the wrong explanation of the line's shape. The three rivals — unreliability, propaganda and general constructivism — each own one option in every question.",
+    "length_class": "medium",
+    "structure": "problem_diagnosis_prescription",
+    "viewpoints": 2,
+    "tone": "explanatory, quietly corrective",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.problem_solution",
+      "struct.cause_effect",
+      "comp.organization",
+      "comp.explicit_detail",
+      "comp.purpose",
+      "arg.causal_claim",
+      "arg.evidence",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "scope.abstraction_level",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "blind_solve": null,
+      "adversarial_review": "Three rivals hold an option in each of the four questions. The first is unreliability: these maps mislead, so a historian should prefer written records. The passage grants the misleading and refuses the conclusion, since its closing advice is to read the map for what its maker needed to do and to set it beside the papers of dispute, not to put it away. The second, and the live rival, is propaganda: the line asserted a claim and made it look like a fact. It is attractive because the passage is about power, and it is killed by the sentence stating that the working sheets were confidential, kept in ministries, and drawn for a clerk with a ledger rather than for any public: a document nobody was shown cannot have been drawn to impress. The third is general constructivism, that describing a thing brings it into being. The passage refuses the shortcut by making the line come true through a named sequence — patrols, customs posts, conscription lists, a generation of habit — which is a claim about what offices did and not about what representation does. The inference item keys on that sequence: a map wrong when drawn can be right a century later, which only the author's account allows."
+    },
+    "vocab_extracted": [
+      "allegiance",
+      "exclusive",
+      "instrument"
+    ]
+  },
+  "passage": {
+    "title": "A Line Over Unclimbed Hills",
+    "reading_time_min": 2.6,
+    "paragraphs": [
+      {
+        "id": "rc-0110-p1",
+        "text": "Open an atlas of the eighteenth century and the border between two kingdoms is a line, thin and unbroken, running over hills that nobody had climbed. The temptation is to read it as a record: this is where the frontier ran. In most of Europe it is nothing of the kind, and the habit of taking it for one has quietly shaped a great deal of what has been written about the period."
+      },
+      {
+        "id": "rc-0110-p2",
+        "text": "What lay on the ground was not a line but a thickness. A village might owe grain to one lord and military service to another; a stretch of pasture might be used in common by people who paid taxes on both sides of nothing in particular; a monastery might answer to neither prince and to a bishop two hundred miles away. Allegiance was graded, and it changed with the season, with a marriage, with the fortunes of a lawsuit. There was no edge out there for a cartographer to copy, which is the first thing to notice about the confident line he drew."
+      },
+      {
+        "id": "rc-0110-p3",
+        "text": "He drew it because his employer needed one. A government can tax only what it can find, conscript only whom it can count, and police only where it can say it has authority, and each of those operations begins with a clerk who must answer a question about a particular village with a yes or a no. Grades and seasons are useless to him. So the surveyors went out, and what came back was a boundary of the kind an office can work with: continuous, exclusive, and reproducible on paper by anybody with a pen. These sheets were not display pieces. Most were confidential, kept in ministries and deliberately unpublished, and the reader they were drawn for was an official with a ledger open beside him. Then the line began to come true. Patrols walked it, customs posts were built on it, conscription lists were compiled from it, and within a generation the people living there had learned which side they were on. The map was an instrument, and the territory grew to fit it."
+      },
+      {
+        "id": "rc-0110-p4",
+        "text": "For a historian this suggests a discipline rather than a prohibition. Ask first what the makers of a map needed to be able to do, since the form of what they drew will have been settled by the form of their problem. Then set the map beside the papers that were generated when somebody disagreed with it: petitions, boundary suits, the complaints of a village that found itself paying twice. Those documents preserve the older arrangement, because they were written by people to whom it still mattered. A map of this period is good evidence of an ambition, and later of a fact it helped to create. It is poor evidence of the country it claims to describe."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0110-q1",
+      "type": "specific_detail",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "supplying a motive of display or assertion for the shape of the line when the passage gives an administrative reason for it",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "According to the passage, borders were drawn as continuous and exclusive lines because",
+      "options": {
+        "A": "the written records of the period were too confused for any other kind of boundary to be recovered",
+        "B": "a firm line asserted a kingdom's claim to its territory more forcefully than a description of a zone",
+        "C": "a map makes real whatever it represents, so drawing the boundary was what created the boundary",
+        "D": "the offices that used them could act only on a boundary that answered yes or no about a village"
+      },
+      "correct": "D",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The third paragraph gives the reason twice, once as a principle and once as a picture: a government taxes what it can find and conscripts whom it can count, and every such operation 'begins with a clerk who must answer a question about a particular village with a yes or a no'. The sentence that follows — grades and seasons are useless to him — names what the old arrangement could not supply.",
+        "correct_reasoning": "The correct option restates that requirement. The shape of the line is explained by the shape of the administrative question: a continuous exclusive boundary is what a yes-or-no enquiry about a village needs, which a zone of graded allegiance cannot provide. The passage then draws the consequence, that what came back from the surveyors was a boundary 'of the kind an office can work with'.",
+        "passage_anchor": "rc-0110-p3",
+        "question_type_note": "A detail question about a stated cause is answered from the sentence that states it. The decoys will be motives that are plausible for the same actors and that the passage never assigns.",
+        "reading_habit": "When a passage explains why something took a particular form, look for the sentence describing what the maker had to be able to do with it. Form usually follows the user's question, not the maker's intention to impress.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_condition",
+            "why_wrong": "The passage's difficulty is not that the old arrangement was badly recorded but that it had no edge at all: allegiance was graded and moved with the season, so there was nothing out there to copy. The written material is introduced later as unusually useful evidence, not as a wreck.",
+            "seductive_element": "The second paragraph does describe a tangle of overlapping dues, and confusion in the sources is the ordinary explanation historians expect for a tidy map."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Assertion needs an audience, and the passage says these sheets had almost none: most were confidential, kept in ministries and deliberately unpublished, and the reader they were drawn for was an official with a ledger. A document nobody is shown cannot be doing its work by being emphatic.",
+            "seductive_element": "Maps and national claims belong together in the reader's mind, and the passage is plainly about the reach of the state."
+          },
+          {
+            "option": "C",
+            "trap_type": "reversed_causation",
+            "why_wrong": "The passage makes the line come true afterwards and by stages: patrols, customs posts, conscription lists, a generation of habit. Treating the drawing itself as what created the boundary puts the effect in the place of the cause and loses the sequence the third paragraph sets out.",
+            "seductive_element": "The passage really does say the territory grew to fit the map, which sounds like the drawing having creative power on its own."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0110-q2",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.organization",
+        "struct.problem_solution"
+      ],
+      "target_mistake": "reading a correction of how a source is used as either a warning against the source or an exposure of the motives behind it",
+      "prediction_target": "The learner should be able to say beforehand: the author wants to change what a historian takes a map to be evidence of, and ends by saying how to use one.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to warn historians that maps of this period mislead, and that written sources are the safer material",
+        "B": "to show how the craft of surveying was used to make the ambitions of governments look like facts",
+        "C": "to illustrate the general principle that describing something is one of the ways of bringing it about",
+        "D": "to explain what such a map actually records, and to say what a historian should ask of one"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The last paragraph announces its own function: 'For a historian this suggests a discipline rather than a prohibition.' A prohibition is what the passage declines to issue, and the two sentences that follow are instructions rather than complaints.",
+        "correct_reasoning": "The correct option keeps both halves of the passage's work. The middle paragraphs establish what the line is a record of — an office's need for an answer it could act on, and later a state of affairs the line itself produced — and the last paragraph converts that into a way of reading: ask what the maker needed to do, then test the map against the papers of dispute. A purpose that ended in a verdict on maps would have no use for those instructions.",
+        "passage_anchor": "rc-0110-p4",
+        "question_type_note": "Where a passage ends in advice, the purpose usually includes the advice. Check whether the option you choose explains why the final paragraph exists.",
+        "reading_habit": "Ask what the reader is supposed to do differently after finishing. An option that leaves the closing paragraph unexplained is describing a shorter piece than the one in front of you.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "concession_as_position",
+            "why_wrong": "The passage grants that the line is poor evidence of the country it depicts, and then says this 'suggests a discipline rather than a prohibition', going on to explain what the map is good evidence of. Written material is brought in as a partner for the map rather than as a replacement for it.",
+            "seductive_element": "The first paragraph's complaint and the last sentence's verdict both sound like a warning, and warning historians off a source is a familiar kind of article."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage's vocabulary of taxing, conscripting and policing describes what an administration had to do, not a campaign to make anything look like anything. Its own account of the sheets — confidential, unpublished, drawn for a clerk — removes the audience that making a claim look like a fact would require.",
+            "seductive_element": "Power is everywhere in the passage, and the phrase about the territory growing to fit the map reads like the conclusion of an argument about propaganda."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage explains one case by a mechanism specific to it: an office's yes-or-no question, followed by patrols, customs posts and conscription lists over a generation. A general principle about description would make that sequence unnecessary, and would not yield the advice the last paragraph gives.",
+            "seductive_element": "The line coming true is the most striking idea in the passage, and it resembles a famous general claim that a reader may already hold."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0110-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "inf.strongly_supported",
+        "struct.cause_effect"
+      ],
+      "target_mistake": "missing that the passage makes the map's accuracy change over time, so that the same line is false as a description and later true as one",
+      "prediction_target": "Before the options the learner should be able to say: the line was not true when drawn and was made true afterwards, so a map's accuracy here depends on when you ask.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "A boundary that a map described wrongly when it was drawn may describe the same place correctly a century later.",
+        "B": "Where a map and a written record disagree about a border, the historian should prefer the written record.",
+        "C": "A map that was kept in a ministry and never published could not have done the work the passage describes.",
+        "D": "Any description of a place will, if it is repeated for long enough, end by producing the very thing it describes."
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph puts a sequence after the drawing: 'Then the line began to come true. Patrols walked it, customs posts were built on it, conscription lists were compiled from it', until the inhabitants had learned which side they were on. The last paragraph confirms it in a phrase — later evidence of a fact the map helped to create.",
+        "correct_reasoning": "The correct option follows from that sequence. The line was not a description when it was drawn, because there was nothing of that shape to describe; it became one because the state acted on it for a generation. So the same document changes its evidential status with the date at which you consult it, which is exactly what the passage's closing distinction between an ambition and a fact records.",
+        "passage_anchor": "rc-0110-p3",
+        "question_type_note": "When a passage describes something becoming true over time, expect an inference about the difference between two dates. Options that state a permanent verdict miss the movement.",
+        "reading_habit": "Whenever an author says a thing came true, ask what it was before and what made the change. The inference nearly always lives in the gap between those two states.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The advice given is narrower: set the map beside the papers of dispute, which preserve the older arrangement because they were written by people to whom it still mattered. That is a reason to read the two together, and the passage explicitly prefers a discipline to a prohibition.",
+            "seductive_element": "The passage is severe about what maps record, so a rule elevating documents over maps sounds like the practical form of its complaint."
+          },
+          {
+            "option": "C",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "Confidentiality is where the passage locates the ordinary case, not an exception: most sheets were kept in ministries and deliberately unpublished, and the reader they were drawn for was an official with a ledger. The work they did was administrative, and an administration does not need an audience.",
+            "seductive_element": "It picks up a real detail from the passage, and a map with no public seems useless to anybody who has taken the piece to be about display."
+          },
+          {
+            "option": "D",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage supplies a mechanism rather than a magic: patrols, customs posts, conscription lists and habit, all of them things a state with officers can do. Repetition alone does nothing in this account, and most descriptions are made by people who cannot send anybody to walk a line.",
+            "seductive_element": "The sentence about the territory growing to fit the map invites a general law, and general laws are easier to carry away than mechanisms."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0110-q4",
+      "type": "logical_structure",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.organization",
+        "struct.problem_solution",
+        "elim.near_tie"
+      ],
+      "target_mistake": "describing the organisation by the most vivid paragraph rather than by the movement from a habit of reading to the conditions of the evidence and then to a method",
+      "prediction_target": "The learner should be able to say beforehand: a reading habit is questioned, the conditions under which the document was made are set out, and a way of using it is proposed.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "paragraph_function",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best describes the organisation of the passage?",
+      "options": {
+        "A": "A source is introduced, its errors are catalogued, and a more reliable class of source is recommended in its place.",
+        "B": "A habit of reading is questioned, the conditions that produced the document are set out, and a way of using it is proposed.",
+        "C": "The motives of a set of institutions are exposed, and the instruments they employed are shown to have served those motives.",
+        "D": "A general principle about representation is stated at the outset and then illustrated by a single historical example."
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "Each paragraph announces its job. The first names a temptation, the second says what was actually on the ground, the third says why the line was drawn anyway and how it became true, and the fourth opens with 'For a historian this suggests a discipline rather than a prohibition.'",
+        "correct_reasoning": "The correct option tracks that sequence. What is questioned at the start is a way of reading rather than the map itself; the middle explains the conditions under which the document was produced, which is what makes the reading wrong; and the close converts the explanation into a procedure. Every paragraph has a place in this description, which is the test a structural option has to pass.",
+        "passage_anchor": "rc-0110-p1, rc-0110-p4",
+        "question_type_note": "Structure questions are answered by paragraph function rather than by content. Read your candidate option against each paragraph in turn and discard it as soon as one paragraph has no role.",
+        "reading_habit": "Summarise each paragraph in two or three words before you look at the options. An option that leaves a paragraph unaccounted for is wrong however well it fits the rest.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "No paragraph catalogues errors, and nothing is recommended in the map's place. The fourth paragraph asks for the map to be read beside the papers of dispute and then states what it is good evidence of, which is a use rather than a replacement.",
+            "seductive_element": "The opening does correct a mistake and the closing does mention other documents, so the shape is nearly right and fails only at the verbs."
+          },
+          {
+            "option": "C",
+            "trap_type": "misattributed_view",
+            "why_wrong": "Nothing is exposed, because nothing is hidden: the employer's need is stated plainly and is administrative rather than discreditable. This description also leaves the last paragraph, which is addressed to historians rather than to states, with no function at all.",
+            "seductive_element": "Instruments, employers and the reach of government are all in the passage, and exposure is the shape such material usually takes."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The passage opens with an atlas and a temptation, not with a principle, and the general claim about representation is one it deliberately does not make, preferring a chain of patrols, posts and lists. The case is the argument here rather than an illustration of something already asserted.",
+            "seductive_element": "The idea that the map made the territory sounds like a principle, and readers who meet it in the third paragraph may remember it as having come first."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "allegiance",
+      "passage_use": "Allegiance was graded, and it changed with the season",
+      "meaning_here": "the loyalty and obligations owed to a lord or ruler",
+      "difficulty": "medium"
+    },
+    {
+      "word": "exclusive",
+      "passage_use": "continuous, exclusive, and reproducible on paper",
+      "meaning_here": "admitting only one holder; not shared with any other authority",
+      "difficulty": "medium"
+    },
+    {
+      "word": "instrument",
+      "passage_use": "The map was an instrument, and the territory grew to fit it",
+      "meaning_here": "a tool used to get something done rather than a record of it",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A familiar object — a border on an old map — is taken apart. Notice early whether the author is attacking the map, the people who drew it, or the way historians read it.",
+    "one_sentence_summary": "The clean border on an eighteenth-century map records not a frontier that existed but the kind of answer an administration needed, and because states then acted on it for a generation the line eventually became the thing it had falsely described.",
+    "main_idea": "On the ground, borders were zones of overlapping and shifting obligation, with nothing for a surveyor to copy. Governments needed to know which village was theirs, so they had lines drawn that an office could use. Patrols, customs posts and conscription lists then made the lines real. So a map of this period is evidence of an administrative need, and later of a fact it produced, rather than of the country it shows.",
+    "simple_explanation": "In an old atlas, the border between two kingdoms looks like a neat thin line over the mountains. It is tempting to think somebody went and found that border. Mostly, nobody did.\n\nOn the ground there was no line. A village might owe grain to one lord and soldiers to another. A field might be shared by people who paid taxes in two different places. A monastery might obey neither prince. Loyalty came in degrees and changed with the season, a marriage, or a court case. There was simply no edge to copy.\n\nSo why the line? Because the government needed one. You can only tax people you can find, only conscript people you can count, and only police places where you can say you are in charge. All of that starts with a clerk who has to answer a simple question about one village: ours, or not ours? Degrees and seasons are no use to him.\n\nSurveyors were sent out, and they brought back the kind of border an office can use: unbroken, belonging to one side only, easy to copy. These were not posters. Most were secret working documents kept in ministries. The person they were drawn for was a clerk with an account book.\n\nThen something happened. Soldiers patrolled the line. Customs posts were built on it. Lists of men for the army were made from it. Within about thirty years, people living there knew which side they were on. The map had changed the country.\n\nFor a historian, the author says, this is not a reason to throw maps away. It is a reason to ask what the map's makers needed to be able to do, and then to read the map alongside the arguments it caused — petitions, lawsuits, villages complaining that they were being taxed twice. Those papers still show the older world, because the people writing them still lived in it.",
+    "why_difficult": "The passage keeps two ideas in play that readers tend to collapse: the map was wrong, and the map came true. Holding both requires noticing that the second happens later and by specific means. There is also a strong ready-made reading — maps as propaganda — which fits everything except one sentence, and that sentence is a quiet aside about confidential sheets and a clerk. Readers who miss it will find an option built for them in every question.",
+    "author_intention": "To change what a historian thinks an old map is evidence of, and to replace a vague suspicion of such maps with two specific questions to ask of one.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0110-p1",
+        "role": "Names the temptation",
+        "note": "An old map shows a clean border, and we read it as a report of where the border was. Usually it is not."
+      },
+      {
+        "paragraph_id": "rc-0110-p2",
+        "role": "Shows the ground",
+        "note": "Real frontiers were thick zones: shared fields, split obligations, loyalty that changed with the season. There was no edge to copy."
+      },
+      {
+        "paragraph_id": "rc-0110-p3",
+        "role": "Gives the reason and the consequence",
+        "note": "Officials needed a yes-or-no answer about each village, so surveyors produced a line an office could use. Patrols and customs posts then made it real."
+      },
+      {
+        "paragraph_id": "rc-0110-p4",
+        "role": "Turns it into method",
+        "note": "Do not discard the map. Ask what its makers had to do, and read it beside the petitions and lawsuits that disagreed with it."
+      }
+    ],
+    "tone_progression": "Lightly ironic at the opening image of a line over unclimbed hills, plain and expository through the middle where the administrative reason is set out, and practical at the end, where the author stops explaining and starts instructing.",
+    "key_transitions": [
+      "'There was no edge out there for a cartographer to copy' (paragraph 2) — the problem is stated in one clause.",
+      "'He drew it because his employer needed one.' (paragraph 3) — the diagnosis, and the sentence the whole argument rests on.",
+      "'For a historian this suggests a discipline rather than a prohibition.' (paragraph 4) — the turn from explanation to method."
+    ],
+    "misunderstanding": "The commonest misreading is that the passage is an exposure of cartography as a servant of power, in which the line is a claim dressed as a fact. Everything about the subject encourages it, and only one sentence blocks it: the sheets were confidential and drawn for a clerk, so they cannot have been persuading anybody. A second misreading takes the closing verdict as advice to distrust maps, when the author has just said the opposite and given two ways of using them.",
+    "traps_summary": "Three ready-made stories are offered back to you as options: maps are unreliable, maps are propaganda, and describing a thing makes it real. Each matches part of the passage and each is refused by a specific sentence. When a passage offers an explanation you have met before, look for the detail the author has planted to rule it out.",
+    "reading_lesson": "When a passage explains why a document has the form it has, find the sentence describing what its maker needed to be able to do with it, and treat that as the key to every later question. Documents take the shape of the work they were made for, and options that substitute a motive — to impress, to claim, to deceive — for that work will look plausible until you ask who was ever going to see the thing.",
+    "real_world": "The same reading applies to organisation charts, job titles and the categories on official forms: each is built to make some operation possible, and each slowly turns the thing it misdescribed into something that matches it.",
+    "takeaway": "A document drawn to be acted on tells you what its owner needed, not what the world was like.",
+    "reflection_question": "Which of the categories that describe you were invented so that somebody could act on them, and how much have you grown to fit them?"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0037",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "law",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "Which Way to Fail",
+    "theme": "why the burden of proof falls on whoever asks a court to disturb the position the parties are already in",
+    "estimated_time_sec": 75,
+    "clue_types": ["connective_implicit", "lexical_repetition", "parallelism"],
+    "primary_trap": "topic_match_function_mismatch",
+    "reasoning_patterns": ["disc.definition_then_application", "disc.cause_effect", "disc.claim_then_evidence", "disc.function_slot"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 3, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "learning_objective": "settle a debt the sentence above has just announced, rather than one a later sentence could have taken from anywhere",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General jurisprudence on the allocation of the burden of proof; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Rebuilt after review found that two slots both put the sentence above the exchange it prices, so the forward clue could not discriminate between them. The sentence about where the burden falls now ends by announcing that the usual reason is the wrong one, which is a debt only the next seat can settle.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening sentence, since a rule announced as telling a court which way to fail seems to want its rationale at once. Two things refuse it. The gap there needs the rule's content, which the following sentence supplies by saying on whom the burden falls; and that sentence ends by promising that the usual reason is not the right one, so placing the correction above it makes the paragraph announce a correction it has already delivered. The last slot is the other candidate, and it leaves the exchange two sentences earlier weighing two mistakes that have never been priced.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A court that cannot decide has to decide anyway, and the burden of proof is the rule telling it which way to fail." },
+      { "n": 2, "text": "It falls on whoever asks the court to change the position the parties are already in, and the reason for that is not the one most people give." },
+      { "n": 3, "text": "The cost of leaving a wrong untouched is real, but the rule accepts it in exchange for never disturbing a settled position on no evidence at all." },
+      { "n": 4, "text": "Presumed innocent is the same rule in its sharpest form, not a separate courtesy owed to the accused." }
+    ]
+  },
+  "missing": {
+    "text": "The rule is not about who is likelier to be lying but about which mistake is cheaper to make when nothing has been shown.",
+    "position": 2,
+    "function": "the promised correction of the usual reason, which prices the two mistakes the next sentence trades between"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The rule is not about who is likelier to be lying but about which mistake is cheaper to make when nothing has been shown.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 1",
+      "C": "After sentence 2",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 4, "B": 1, "C": 2, "D": 3 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence about where the burden falls ends by saying that the reason for it is not the one most people give, which is a debt payable immediately: the very next sentence has to name the wrong reason and the right one. The missing sentence does exactly that, refusing the account from likely liars and substituting the comparison of two mistakes. Looking forward, the sentence after the slot is an exchange, a real cost accepted in return for never disturbing a settled position, and an exchange needs both its items priced above it. The announced debt behind and the trade in front leave one seat.",
+    "clue_before": "Sentence 2 promises that the usual reason is the wrong one, which obliges the next sentence to say what the right one is.",
+    "clue_after": "Sentence 3 accepts one cost in exchange for avoiding another, and a trade of that kind needs the two mistakes already set against each other.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The topic is right and the job is wrong. The gap here needs the content of the rule, which the following sentence gives by naming who carries the burden; and that sentence then ends by promising a correction of the usual reason, which the paragraph would already have made, so the announcement arrives after the thing it announces.",
+        "seductive_element": "The opening line calls the rule a way of choosing which way to fail, which sounds like an invitation to explain the choice immediately."
+      },
+      {
+        "option": "D",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The sentence above has already weighed the two errors against each other and announced which the rule prefers to risk; saying that the rule is about which mistake is cheaper is that same weighing a second time, and the promise made two sentences earlier is left unpaid while the paragraph pays it twice over in different words.",
+        "seductive_element": "The two sentences use the same idea of a cost, so one reads as the crisp formulation of the other."
+      },
+      {
+        "option": "A",
+        "trap_type": "attractive_generality",
+        "why_wrong": "At the end it is the quotable formulation of the principle, but the paragraph lands on the presumption of innocence as the rule in its sharpest form, and putting a general statement after that leaves the exchange two sentences above weighing two mistakes nothing has priced.",
+        "seductive_element": "It is the clearest statement of the thesis in the item, and a clear thesis makes a tempting last line."
+      }
+    ],
+    "method": "When a sentence ends by saying that the usual account is wrong, incomplete or not the real reason, it has opened a debt that the very next sentence must settle; that is a tighter constraint than a demand two or three sentences further down, which several slots could satisfy. Settle the adjacent debt first, then confirm with the trade or the count below."
+  },
+  "mentor": {
+    "challenge": "One sentence ends by saying the reason is not the one most people give. The paragraph then owes you the reason. Where does it pay?",
+    "takeaway": "A promise made at the end of a sentence is kept by the sentence immediately after it."
+  }
+}

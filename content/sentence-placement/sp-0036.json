@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0036",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "medicine-health",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "A Few Thousand, Then a Few Million",
+    "theme": "why rare harms of a medicine surface only after licensing, and what that makes a licence a decision about",
+    "estimated_time_sec": 80,
+    "clue_types": ["article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.opening_sentence", "disc.given_new", "disc.cause_effect", "disc.problem_then_solution"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "recognise a slot that reads beautifully with its neighbours and leaves a definite phrase further up with nothing to name",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General reasoning about drug licensing and post-marketing surveillance; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "An opener item. The confirming clue is the definite phrase 'The gap' in the first visible sentence, which has nothing to name unless the missing sentence has already set a few thousand against a few million. The rival slot is the one where the sentence supplies the arithmetic the next sentence invokes, and reads perfectly there.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot before the sentence that accuses critics of misreading the arithmetic, because the sentence supplies exactly that arithmetic and the two read as a single move. Two sentences above, however, 'The gap is not a matter of care' is left pointing at a gap the paragraph has never opened, and the cost argument that follows it explains a difficulty nobody has stated. The slot after the cost argument is the second candidate and fails the same test one line earlier, with the scale arriving as an afterthought to the reasoning it was needed to motivate.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "The gap is not a matter of care: a trial large enough to catch a harm that occurs once in ten thousand courses would cost more than the medicine will ever earn." },
+      { "n": 2, "text": "So the rare harm is found after approval, by clinicians who notice a pattern and report it, which is a slower and dirtier instrument than a trial." },
+      { "n": 3, "text": "Calling that a regulatory failure misreads the arithmetic: a licence was never a certificate of safety but a judgement that the remaining uncertainty was worth carrying." },
+      { "n": 4, "text": "What can fairly be demanded is that the system relied on afterwards be funded as part of the licence." }
+    ]
+  },
+  "missing": {
+    "text": "A licence, whatever else it is, is a decision taken on a few thousand volunteers and then asked to hold good for a few million patients.",
+    "position": 0,
+    "function": "the opening statement of scale, which the next sentence calls the gap and the later sentence calls the arithmetic"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A licence, whatever else it is, is a decision taken on a few thousand volunteers and then asked to hold good for a few million patients.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "Before sentence 1",
+      "C": "After sentence 3",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 1, "B": 0, "C": 3, "D": 2 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The first visible sentence begins 'The gap', a definite phrase that asks the reader to have been shown one, and the paragraph never opens a gap anywhere else: the only distance in it is between the few thousand tested and the few million treated. That sentence then denies one explanation of the gap, carelessness, and supplies another, cost, which is a denial that needs its subject already on the page. The same scale is what the later sentence calls the arithmetic. A sentence that two later sentences refer back to, and that refers back to nothing itself, is the paragraph's opening line.",
+    "clue_before": null,
+    "clue_after": "Sentence 1 opens 'The gap is not a matter of care', and nothing in the visible paragraph has opened a gap for that phrase to name.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Put here the sentence supplies precisely the arithmetic that the next sentence accuses critics of misreading, and the two lines read as one move. Two sentences above, though, 'The gap' is left naming nothing at all, and the argument from cost is offered as an explanation of a difficulty the paragraph has not yet stated.",
+        "seductive_element": "The following sentence says the critics misread the arithmetic, so a statement of the arithmetic immediately before it feels not merely allowed but required."
+      },
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is the paragraph's premise and is wanted one seat earlier. Here the sentence above it still opens on 'The gap' with nothing behind it, and the scale arrives as an afterthought to the cost reasoning it exists to motivate.",
+        "seductive_element": "Following the expense of a large trial with the numbers that make it expensive looks like ordinary exposition."
+      },
+      {
+        "option": "C",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "By this point the paragraph has delivered its verdict on what a licence is, and the slot wants the consequence of that verdict, which the closing sentence provides; a restatement of the scale is the same subject doing the wrong job, and the verdict above it is left invoking an arithmetic that appears only underneath it.",
+        "seductive_element": "The sentence sounds like a summary of what a licence really is, and it sits next to a sentence making exactly that kind of claim."
+      }
+    ],
+    "method": "Hunt for a definite phrase in the visible text that has no antecedent — the gap, the difficulty, the exception, the trade. If exactly one sentence could create it and that sentence is the one you are placing, the slot is immediately above the phrase. Beware the slot that supplies a word the next line happens to use: local fit is the commonest way of stranding something further up."
+  },
+  "mentor": {
+    "challenge": "A visible sentence starts 'The gap'. Nothing you can see opens a gap. Ask what would have to be true above it.",
+    "takeaway": "Find the orphaned definite phrase first; the slot is directly above whatever would adopt it."
+  }
+}

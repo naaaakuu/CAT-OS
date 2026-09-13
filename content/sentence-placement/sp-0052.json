@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0052",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "media",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "Several Seconds of Now",
+    "theme": "how a delay introduced against obscenity became a standing editorial discretion that no viewer can detect",
+    "estimated_time_sec": 90,
+    "clue_types": ["tense_continuity", "temporal_sequence", "article_given_new"],
+    "primary_trap": "tense_break",
+    "reasoning_patterns": ["disc.chronology", "disc.tense_continuity", "disc.cause_effect", "disc.closing_sentence"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "use the paragraph's move from past to present as a boundary, and let a later definite noun name what the missing sentence introduced",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of broadcast delay and editorial discretion; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Rebuilt after a blind reader placed the sentence a seat lower: the original forward clue was the word 'now', which the sentence about the delay's introduction already satisfied. The forward clue is now 'The opportunity', a definite noun with exactly one possible source.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence listing what is cut, where the summary of how the device changed reads as the verdict on that list. Placed there, 'The opportunity' in the sentence above has no opportunity to name, and a past-tense sentence narrating a beginning and a becoming arrives after the paragraph has moved into the present tense to describe the practice. The slot beside the concealment is the other candidate, and there the closing 'So' would draw its conclusion from a piece of history rather than from the undetectability it actually rests on.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Live broadcasting is not quite live, and has not been since the 1950s." },
+      { "n": 2, "text": "The delay was introduced against obscenity, and a hand on a button was the whole of the technology it required." },
+      { "n": 3, "text": "The opportunity is exercised on a protester, a collapse, or a question nobody wanted asked, and no viewer can tell any of it from a fault on the line." },
+      { "n": 4, "text": "Nothing in the practice announces itself, and the several seconds are not mentioned in the billing." },
+      { "n": 5, "text": "So the honesty of live television rests on a convention rather than on the word live, which stopped describing the arrangement long ago." }
+    ]
+  },
+  "missing": {
+    "text": "What began as a guard against a word became a standing opportunity to decide what an audience would be shown.",
+    "position": 2,
+    "function": "the hinge from the original purpose to the present practice, introducing the opportunity the next sentence names"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"What began as a guard against a word became a standing opportunity to decide what an audience would be shown.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "After sentence 4",
+      "C": "After sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 3, "B": 4, "C": 1, "D": 2 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "One visible sentence begins 'The opportunity is exercised', a definite noun offered as already known, and nothing in the paragraph confers an opportunity on anybody except the missing sentence. That fixes the slot directly above it. The same seat is confirmed from behind, since 'What began as a guard against a word' names an origin, and the origin is given once, in the delay introduced against obscenity with a hand on a button. It is also the join between the paragraph's tenses: the history is told in the past and the practice described in the present, and a sentence that runs from began to became belongs on the boundary rather than inside either half.",
+    "clue_before": "Sentence 2 describes the delay's original purpose and its crude equipment, which is the beginning the missing sentence names.",
+    "clue_after": "Sentence 3 says 'The opportunity is exercised' as though an opportunity had been established, and none has been.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "tense_break",
+        "why_wrong": "By this point the paragraph has moved into the present tense to describe what is done with the seconds today, and a sentence narrating a beginning and a becoming arrives after the change it announces; the sentence above it is also left opening on 'The opportunity' with no opportunity anywhere before it.",
+        "seductive_element": "The list of things cut is exactly what the standing opportunity consists of, so the sentence reads as the summary of it."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs to the paragraph and is wanted one seat later. Here the reader is told what the device became before being told what it was, since the obscenity and the hand on the button are described in the sentence below, so 'a guard against a word' summarises an origin the paragraph has not yet given.",
+        "seductive_element": "The opening line says live broadcasting has not been live since the 1950s, which sounds like an invitation to say what happened to it."
+      },
+      {
+        "option": "B",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the concealment the sentence reads as the explanation of why nothing announces itself, and the two sit together well. But the closing sentence opens 'So', and its conclusion about honesty resting on a convention follows from the undetectability directly above it rather than from a piece of history; the definite opportunity two sentences earlier is also still unfed.",
+        "seductive_element": "A standing opportunity that nobody can detect is one thought, so splitting it across these two sentences feels natural."
+      }
+    ],
+    "method": "Where a paragraph narrates an origin and then describes a present practice, there is one join between the tenses, and a sentence built as 'what began as X became Y' belongs on it. Then confirm with the definite nouns: a phrase like 'The opportunity' or 'The practice' offered as known has to have been conferred by a sentence above, and usually the one immediately above."
+  },
+  "mentor": {
+    "challenge": "A visible sentence says 'The opportunity is exercised'. Ask who was given an opportunity, and where.",
+    "takeaway": "A definite noun introduced as known is a debt. The sentence that grants it sits directly above."
+  }
+}

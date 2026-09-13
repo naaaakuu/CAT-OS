@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0044",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "markets",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Line Nobody Withdraws",
+    "theme": "why a catalogue keeps a loss-making line: it is the price buyers use to read every other price",
+    "estimated_time_sec": 105,
+    "clue_types": ["pronoun_ref", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "contradicts_neighbour",
+    "reasoning_patterns": ["disc.cause_effect", "disc.pronoun_antecedent", "disc.problem_then_solution", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 5, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "learning_objective": "refuse a slot at which the paragraph would explain something the next sentence says nobody can explain",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General market reasoning about reference pricing within a product range; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The decisive test is the sentence about accountants: it says the refusal cannot be fully explained, so the explanation cannot stand above it. Forward, 'not a loss at all' needs the demonstration that withdrawal saves nothing.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening sentence, where 'Remove it' seems to answer 'never withdrawn' directly. Put there, the paragraph explains in one line why removal saves nothing and in the next reports that the people who refuse removal cannot fully explain their refusal, so it asserts and denies the availability of the explanation in consecutive sentences. The slot after the accountants is the second candidate, and it fails because the buyer and the anchoring price it speaks of as given are introduced only in the sentence below it.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Every catalogue contains a line that loses money and is never withdrawn." },
+      { "n": 2, "text": "Accountants propose the withdrawal annually, and the proposal is annually refused by people who cannot fully explain the refusal." },
+      { "n": 3, "text": "The line is what a buyer opens the catalogue to check, and the price it carries is read as a statement about every other price in the book." },
+      { "n": 4, "text": "So the line is not a loss at all but a price paid for the credibility of the ones beside it." },
+      { "n": 5, "text": "A firm that judges each product on its own account will therefore keep trimming the very item that makes the others believable." }
+    ]
+  },
+  "missing": {
+    "text": "Remove it and nothing is saved, because the buyer's estimate of the whole range moves with the one price he was using to anchor it.",
+    "position": 3,
+    "function": "the demonstration that the apparent saving is illusory, which the next sentence converts into a verdict"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Remove it and nothing is saved, because the buyer's estimate of the whole range moves with the one price he was using to anchor it.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 3, "D": 4 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence speaks of 'the buyer' and of 'the one price he was using to anchor it' as things already established, and exactly one sentence establishes them: the line a buyer opens the catalogue to check, whose price is read as a statement about every other price. The sentence below the slot then begins 'So the line is not a loss at all', a verdict that needs the demonstration that removing it saves nothing, which the missing sentence alone provides. The slot between the anchoring price and the verdict is the only one that receives its definite phrases from above and pays for the conclusion below.",
+    "clue_before": "Sentence 3 makes the line the price a buyer reads every other price against, which is what 'the one price he was using to anchor it' refers back to.",
+    "clue_after": "Sentence 4 concludes that the line is not a loss at all, and that conclusion needs the showing that withdrawal saves nothing.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "Placed here the paragraph explains, plainly and in one sentence, why removal would save nothing, and then says in the next that the people who refuse removal cannot fully explain the refusal. It would be asserting that the explanation is obvious and unavailable in consecutive lines, and the accountants' annual proposal would arrive as a puzzle already solved.",
+        "seductive_element": "'Remove it' answers 'never withdrawn' so directly that the two sentences seem made to sit together."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here 'the buyer' and 'the one price he was using to anchor it' are offered as known when neither has appeared; the only people in the paragraph so far are accountants and the colleagues who refuse them, and no price has been described as anchoring anything. The sentence that would supply both follows afterwards.",
+        "seductive_element": "The refusal that nobody can explain seems to be crying out for the explanation, and this is the explanation."
+      },
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the verdict the sentence reads as its proof and the two share a vocabulary. But the verdict opens 'So', which makes it a conclusion drawn from what precedes it, and what precedes it would then be the anchoring price without the showing that removal saves nothing; the closing sentence would follow a mechanism rather than the judgement it depends on.",
+        "seductive_element": "Verdict first and evidence after is a legitimate order in some prose, and the two sentences do use the same terms."
+      }
+    ],
+    "method": "Use a sentence that describes the state of knowledge as a boundary: if the paragraph says a thing is unexplained, unnoticed or disputed, the explanation cannot already be sitting above it. Then confirm the seat by the definite phrases in the sentence you are placing — the buyer, the anchor, the figure — and check each has been introduced before the slot rather than after."
+  },
+  "mentor": {
+    "challenge": "One visible sentence says the refusal cannot be fully explained. Ask what that forbids from standing above it.",
+    "takeaway": "A paragraph that reports a puzzle cannot have solved it one line earlier."
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0041",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "Fewer Joins",
+    "theme": "why an interruption costs more than the minutes it occupies, and why the cost never appears in a record of time",
+    "estimated_time_sec": 55,
+    "clue_types": ["demonstrative", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "attractive_generality",
+    "reasoning_patterns": ["disc.cause_effect", "disc.demonstrative", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 2, "transition_ambiguity": 2, "competing_slots": 3, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "let a later word that has no antecedent — a join, a piece, a gap — tell you where its parent sentence has to sit",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of interruption and resumption cost in work; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The word 'joins' in the fourth visible sentence is the clue, and nothing cuts the morning into pieces until the missing sentence does. The tempting slot is the last one, where the sentence reads as the memorable closing line.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the end of the paragraph, where a sentence contrasting a morning in six pieces with a morning in two makes a satisfying last word. Placed there it leaves the request for 'fewer joins' pointing at nothing, since no sentence above has cut a morning into parts, and it displaces the closing observation about the timesheet, which is what the paragraph has been building towards. The slot after the opening is the other candidate, where 'That is why' would explain the diary entry rather than the rebuilding.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A colleague's question takes ninety seconds, and the diary records ninety seconds." },
+      { "n": 2, "text": "The work does not resume where it stopped: the half-built picture of the problem has to be put together again, and that takes longer than the question did." },
+      { "n": 3, "text": "People who protect their mornings are not asking for more hours but for fewer joins." },
+      { "n": 4, "text": "The cost is invisible in a timesheet, which is why the person interrupting is the last to believe in it." }
+    ]
+  },
+  "missing": {
+    "text": "That is why a morning cut into six pieces yields less than a morning of the same length cut into two.",
+    "position": 2,
+    "function": "the consequence of the rebuilding cost, and the division into pieces that the next sentence calls joins"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"That is why a morning cut into six pieces yields less than a morning of the same length cut into two.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 1",
+      "C": "After sentence 4",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 2, "B": 1, "C": 4, "D": 3 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "'That is why' demands a cause directly above it, and the paragraph contains one: the picture of the problem has to be rebuilt, and the rebuilding costs more than the interruption. The sentence below the slot then asks for 'fewer joins', a word that needs a morning already broken into parts, and nothing breaks a morning into parts except the missing sentence. A cause behind and an unexplained noun in front leave one seat, and the contrast of six pieces with two also gives the request for fewer joins something to be fewer than.",
+    "clue_before": "Sentence 2 supplies the rebuilding cost, which is the only thing in the paragraph that 'That is why' can point at.",
+    "clue_after": "Sentence 3 asks for 'fewer joins', and no sentence above it has divided a morning into pieces that could have joins between them.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "attractive_generality",
+        "why_wrong": "At the end it is the broad, quotable line the paragraph never needed, since the closing observation about the timesheet is where the argument actually lands; and the request for fewer joins, two sentences above, is left with no pieces to be the joins between.",
+        "seductive_element": "It is the most memorable formulation in the item and reads like the moral of the whole paragraph."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here 'That is why' can only point at the diary recording ninety seconds, which would make the record of the time the reason a fragmented morning yields less; the actual cause, the rebuilding, arrives in the next sentence and is left explaining nothing.",
+        "seductive_element": "The opening sentence is about the minutes an interruption takes, and a sentence about a morning cut into pieces seems to continue the arithmetic."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs to the argument and is wanted one seat earlier. Placed after the request for fewer joins, it supplies the pieces only once the sentence above has already relied on them, and 'That is why' reaches back past an intervening sentence to find its cause.",
+        "seductive_element": "Joins and pieces belong to the same picture, so the two sentences look like neighbours whichever way round they are put."
+      }
+    ],
+    "method": "Scan the visible sentences for a noun used as though it had already been introduced — joins, pieces, the gap, the exception. Its parent sentence has to sit above it, and usually immediately above. Then check the sentence you are placing for a backward pointer of its own, and make the two constraints meet."
+  },
+  "mentor": {
+    "challenge": "One sentence asks for fewer joins. Find where the paragraph cuts anything into parts.",
+    "takeaway": "A noun that arrives as though already known is a signpost: its introduction sits just above."
+  }
+}

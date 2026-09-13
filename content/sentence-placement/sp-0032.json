@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0032",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "sociology",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Decade It Has Left Behind",
+    "theme": "why a district's reputation stays accurate: the belief reaches the people choosing where to live and makes the next decade's figures",
+    "estimated_time_sec": 100,
+    "clue_types": ["demonstrative", "connective_implicit", "parallelism"],
+    "primary_trap": "wrong_reference_target",
+    "reasoning_patterns": ["disc.demonstrative", "disc.cause_effect", "disc.problem_then_solution", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "learning_objective": "make a word like 'both' find two things that are actually on the page, and check that a later demonstrative still has its antecedent",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General sociology of neighbourhood reputation and residential sorting; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "'Both' has to find the two candidate explanations, which exist only once the sentence about slow outsiders has framed them as alternatives. Confirmed forward by 'Each of those decisions', which is stranded if the slot moves down.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening sentence, where 'It is a fact about both' seems to gather the district and its reputation, the two things the reader has just been given. That reading makes the rest of the sentence false, since the sentence goes on to describe a belief and the decisions it produces, which are not the district and the reputation; and the alternative the word 'both' refuses has not been proposed yet. The slot after the list of decisions is the second candidate, and it fails because 'Each of those decisions' would then be pointing at nothing.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A district acquires a reputation from a decade it has since left behind, and the reputation goes on being accurate." },
+      { "n": 2, "text": "The usual explanation is that outsiders are slow to update, which would make the persistence a fact about them rather than about the place." },
+      { "n": 3, "text": "Each of those decisions is small and defensible: a family that can choose goes elsewhere, a landlord lets on short leases, a shop that needs a settled street closes." },
+      { "n": 4, "text": "None of it requires anybody to be mistaken about the district as it now is." },
+      { "n": 5, "text": "The reputation is not a lagging description but a live ingredient, which is why a campaign to correct it is doing something other than telling the truth." }
+    ]
+  },
+  "missing": {
+    "text": "It is a fact about both: the belief reaches the people deciding where to live, and their decisions are what the next decade's figures will record.",
+    "position": 2,
+    "function": "the answer to the either-or the previous sentence sets up, and the decisions the next sentence enumerates"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"It is a fact about both: the belief reaches the people deciding where to live, and their decisions are what the next decade's figures will record.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 1",
+      "C": "After sentence 3",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 4, "B": 1, "C": 3, "D": 2 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "Two demands meet at one seat. The sentence answers a question of the form 'about them or about the place', and only one sentence poses that alternative, the one attributing the persistence to slow outsiders rather than to the district; without it, 'both' has no pair to refuse. Looking forward, the next visible sentence begins 'Each of those decisions', a demonstrative that needs decisions to have been named, and the missing sentence is the only place any are. Put it anywhere else and one of the two fails.",
+    "clue_before": "Sentence 2 frames the persistence as a fact about outsiders rather than about the place, which is exactly the either-or that 'a fact about both' declines.",
+    "clue_after": "Sentence 3 opens 'Each of those decisions', and no decisions exist in the paragraph until the missing sentence supplies them.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here 'both' can only gather the district and its reputation, the two things named so far, and the sentence then says something those two do not support, since what follows is about a belief and the choices it produces. The alternative the word is refusing has also not been offered, so the refusal answers nobody.",
+        "seductive_element": "The opening sentence hands the reader exactly two nouns, which makes 'both' feel as though it has just been satisfied."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs to the argument and is wanted one seat earlier. Placed after the list, the sentence above it opens 'Each of those decisions' with no decisions anywhere before it, and the list arrives as an explanation of a claim the paragraph has not yet made.",
+        "seductive_element": "Naming the decisions and then generalising about what the figures record is a defensible order, and the list reads as an illustration of the very mechanism the sentence describes."
+      },
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the sentence about nobody being mistaken, the language of belief and record reads smoothly and seems to prepare the closing verdict. But the alternative posed three sentences earlier is then never answered, and the list of decisions is left pointing back at a sentence that names none.",
+        "seductive_element": "The closing verdict is about the reputation as an ingredient, so a sentence explaining how a belief enters the figures seems to belong immediately before it."
+      }
+    ],
+    "method": "Treat a counting word as a demand: 'both', 'either', 'the other', 'neither' must find their items already on the page, and the items must be the ones that make the sentence true rather than merely the nearest pair of nouns. Then look one line down for a demonstrative that would be stranded, and let the two tests meet."
+  },
+  "mentor": {
+    "challenge": "One visible sentence begins 'Each of those decisions'. Nothing you can see names a decision. That is the shape of the gap.",
+    "takeaway": "'Both' needs two candidates on the page, and the right two: check the rest of the sentence is still true of them."
+  }
+}

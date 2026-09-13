@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0040",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 94,
+    "genre": "intellectual-history",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Silence Where It Happened",
+    "theme": "why long controversies end by the question being replaced rather than answered, and what a history of argument therefore misses",
+    "estimated_time_sec": 115,
+    "clue_types": ["article_given_new", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "premature_conclusion",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.example_after_claim", "disc.cause_effect", "disc.closing_sentence"],
+    "difficulty_vector": { "reference_density": 5, "transition_ambiguity": 5, "competing_slots": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "keep a double verdict below the case it judges, and let a later count of descriptions confirm the seat",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General history of ideas on how controversies close; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The confirming clue is a count: 'Both descriptions' needs exactly two readings to have been offered, and only the missing sentence offers any. The backward clue is 'the episode', which has one referent, the vitalist case. The rival slot closes the argument before the case has been narrated.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence that states the mechanism, where the verdict about neither side conceding reads as the natural completion of it. Placed there it closes the account before any case has been told, so 'the episode' names nothing and the vitalists arrive afterwards as an illustration of a judgement already delivered. The slot beside the sentence that dismisses both descriptions is the other candidate, and it fails because the descriptions would then be counted before they had been given.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Long disputes rarely end in a concession, and the histories that record one are usually written by the winner's students." },
+      { "n": 2, "text": "What happens instead is that the question stops being asked, because a new way of working has made it unaskable in its old form." },
+      { "n": 3, "text": "The vitalists were not refuted by any decisive experiment, and the vocabulary in which a vital force could be posited simply stopped being the vocabulary that chemistry used." },
+      { "n": 4, "text": "Both descriptions miss what actually moved, which was the set of questions a laboratory could be equipped to answer." },
+      { "n": 5, "text": "A history of argument will therefore record silence exactly where the change happened, and will find its drama in the years before it." }
+    ]
+  },
+  "missing": {
+    "text": "Neither side conceded and neither was left standing, which is why the episode reads as a defeat to one generation and as a fashion to the next.",
+    "position": 3,
+    "function": "the double verdict on the narrated case, supplying the two descriptions the next sentence dismisses"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Neither side conceded and neither was left standing, which is why the episode reads as a defeat to one generation and as a fashion to the next.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 1",
+      "C": "After sentence 2",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 4, "B": 1, "C": 2, "D": 3 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence after the slot opens 'Both descriptions', and a count of that kind is a receipt: two descriptions must already have been offered, and the paragraph offers none until the missing sentence names a defeat and a fashion. Behind the slot, 'the episode' is definite and needs a particular case, and the paragraph narrates exactly one, the chemists who stopped having a vocabulary for a vital force. So the seat is fixed by a count looking forward and by a definite phrase looking back, and only the slot between the case and its dismissal satisfies both.",
+    "clue_before": "Sentence 3 narrates the one case in the paragraph, which is the only thing 'the episode' can name.",
+    "clue_after": "Sentence 4 begins 'Both descriptions', so two readings must already be on the page, and nothing above the missing sentence supplies any.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "Here the paragraph has stated its mechanism and still owes the reader the case that shows it, and the sentence delivers the verdict on how the whole affair reads to later generations before any affair has been narrated. 'The episode' is left naming nothing, and the vitalists then arrive as an illustration of a judgement already passed.",
+        "seductive_element": "The sentence completes the mechanism so neatly that it reads as the second half of it, and it is the most conclusive-sounding line available."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_connective",
+        "why_wrong": "Placed after the opening claim, the sentence is followed by one beginning 'What happens instead', and there is then nothing for 'instead' to be an alternative to, since the sentence above agrees that neither side concedes rather than proposing the concession the next line displaces.",
+        "seductive_element": "An opening claim about disputes that end without a concession seems to invite exactly this expansion of it."
+      },
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the sentence that dismisses both descriptions, the pair of readings reads as a clarification of them and sits comfortably. But the dismissal would then be counting two descriptions before either has been given, and the closing sentence about silence would follow a fresh pair of judgements rather than the paragraph's verdict.",
+        "seductive_element": "The two sentences name the same two readings, so putting them side by side feels like tidying rather than moving."
+      }
+    ],
+    "method": "Look for the sentence that counts — both, either, the three of them, each of these — and treat the count as a debt the paragraph must already have paid. Then test the definite phrases in the sentence you are placing: a word like 'the episode' or 'the case' demands a particular thing narrated, not a general claim, and a verdict cannot be seated above the evidence it judges."
+  },
+  "mentor": {
+    "challenge": "A visible sentence says 'Both descriptions'. Count the descriptions the paragraph actually contains.",
+    "takeaway": "A verdict sits under its case, never over it — and a later count tells you exactly where the case must end."
+  }
+}

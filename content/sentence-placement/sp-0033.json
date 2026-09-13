@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0033",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "mathematics-logic",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "What the Writing Refuses to Notice",
+    "theme": "why a notation earns its keep by the distinctions it suppresses, and what the suppression costs",
+    "estimated_time_sec": 105,
+    "clue_types": ["connective_implicit", "lexical_repetition", "parallelism"],
+    "primary_trap": "right_idea_wrong_position",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.example_after_claim", "disc.cause_effect", "disc.concession"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "seat a principle above the example that is described as deliberate, and refuse a slot that would make the paragraph praise and blame in consecutive lines",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General reflection on mathematical notation and what it suppresses; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The clue pair is 'on purpose' and 'the reward': the numerals sentence describes a deliberate blurring and calls its consequence a payment, so the principle that names the blurring and the payment has to sit above it. The near miss is the slot one place later, where the example arrives before the rule it instantiates.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about positional numerals, on the reasonable ground that a principle may be drawn out of the example that shows it. Put there, the numerals are said to blur the columns 'on purpose' and to yield a 'reward' while the paragraph has stated no purpose and promised no payment, so two evaluative words in that sentence are left unredeemed. The slot after the sentence about cost is the other candidate, and it makes the paragraph commend a refusal in the line immediately after charging it with a loss, without any turn between them.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Notation is usually praised for what it shows, which gets the compliment the wrong way round." },
+      { "n": 2, "text": "Positional numerals make the thousands column and the units column look alike on purpose, and the multiplication algorithm every child learns is the reward." },
+      { "n": 3, "text": "The same refusal has a price, since a distinction the writing suppresses is one nobody is prompted to ask about." },
+      { "n": 4, "text": "Historians of algebra keep finding results that lay available for a century and were not taken, and the notation of the period explains the delay better than the wit of the people living in it." },
+      { "n": 5, "text": "A symbol system is a proposal about what may safely be forgotten, and it is adopted or refused on that." }
+    ]
+  },
+  "missing": {
+    "text": "A notation earns its keep by what it declines to distinguish, so that steps differing only in ways nobody needs become one step.",
+    "position": 1,
+    "function": "the inverted principle the opening sentence promises, and the purpose the numerals are then said to serve"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A notation earns its keep by what it declines to distinguish, so that steps differing only in ways nobody needs become one step.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 5",
+      "C": "After sentence 2",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 1, "B": 5, "C": 2, "D": 3 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The opening sentence says the usual compliment is the wrong way round and stops there, so the paragraph owes the reader the right way round, which is what the missing sentence supplies. The sentence below the slot then pays that debt twice: the columns are blurred 'on purpose', and the algorithm is 'the reward'. A purpose needs a purpose stated, and a reward needs something for which it is the payment. Only the seat between the reversed compliment and the example makes both of those words point at anything, and the later sentence about a price then has a benefit to set a price against.",
+    "clue_before": "Sentence 1 announces that the praise is backwards without saying what the correct praise is, which is a debt the next sentence has to settle.",
+    "clue_after": "Sentence 2 says the columns are made alike 'on purpose' and calls the algorithm 'the reward', and neither word has anything to refer to unless the purpose and the payment have been stated above it.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is needed, one seat earlier. Here the example comes first, so the numerals blur the columns on a purpose the paragraph has not named and produce a reward for which no benefit has been claimed, and the reversed compliment in the opening line is left with nothing to reverse to.",
+        "seductive_element": "Drawing the principle out of the example just given is a standard movement, and the sentence does read as the lesson the numerals teach."
+      },
+      {
+        "option": "D",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence above this slot has just said that the refusal carries a price and hides questions; a sentence declaring that declining to distinguish is how a notation earns its keep puts the commendation and the charge side by side with no turn between them, so the paragraph appears to argue against itself in two consecutive lines.",
+        "seductive_element": "The two sentences are the two faces of one idea, which makes the pairing feel like balance rather than contradiction."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "At the end it repeats the closing sentence, which has already said that a symbol system proposes what may be forgotten and is judged on that; the paragraph would make its last point twice, and the promise in the opening line would go unpaid through every sentence in between.",
+        "seductive_element": "It is the most quotable formulation in the item, and a general statement of the thesis is a natural-sounding last word."
+      }
+    ],
+    "method": "Read the visible sentences for words that report a settled decision or a completed transaction — on purpose, the reward, accordingly, the price. Each of them is a receipt, and the thing it is a receipt for must already be above it. Where a paragraph opens by calling a common view backwards, the corrected version is owed immediately, not after the example."
+  },
+  "mentor": {
+    "challenge": "One sentence says a blurring is done 'on purpose' and calls a result 'the reward'. Ask where the purpose is stated and what the reward is payment for.",
+    "takeaway": "Words like purpose, reward and price are receipts. The thing they are receipts for has to be above them."
+  }
+}

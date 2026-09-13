@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0049",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "The First Taster",
+    "theme": "why a warning colour is a bargain struck at the level of the brood rather than the individual",
+    "estimated_time_sec": 85,
+    "clue_types": ["lexical_repetition", "pronoun_ref", "stance_continuity"],
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": ["disc.cause_effect", "disc.contrast", "disc.claim_then_evidence", "disc.stance_continuity"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "follow a paragraph that concedes an appearance before overturning it, and refuse a slot that would make it concede after it has overturned",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General evolutionary reasoning about warning colouration; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The second visible sentence answers a phrase word for word — 'not a bad bargain for its siblings' — so the phrase it denies has to stand immediately above it. The rival slot puts the concession after the denial and turns the paragraph round twice.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about siblings, where the loss of the eaten caterpillar reads as the qualification the argument deserves. Placed there, the paragraph says the arrangement is not a bad bargain and then that it looks like a bad bargain, and then that the colours are worth the loss, so it concedes after it has answered and changes sides twice in three lines. The last slot is the other candidate, and it leaves that denial with nothing above it to deny for the whole length of the paragraph.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A caterpillar advertising its poison tells a predator something it can only have learnt by eating one." },
+      { "n": 2, "text": "It is not a bad bargain for its siblings, which carry the same colours and the same chemistry and are left alone for a season." },
+      { "n": 3, "text": "The colours therefore have to be worth the loss at the level of the family rather than the individual, and broods that sit together do better than broods that scatter." },
+      { "n": 4, "text": "Where the young disperse, the signal is commoner in adults that are hard to kill outright, since a predator has to survive its lesson too." }
+    ]
+  },
+  "missing": {
+    "text": "The first taster pays for the whole brood, which looks like a bad bargain for the caterpillar that is eaten.",
+    "position": 1,
+    "function": "the apparent loss that the next sentence denies in the same words"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The first taster pays for the whole brood, which looks like a bad bargain for the caterpillar that is eaten.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 1"
+    },
+    "option_positions": { "A": 4, "B": 2, "C": 3, "D": 1 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The second visible sentence begins 'It is not a bad bargain for its siblings', and a denial in those words needs the assertion in those words directly above it: something must have been called a bad bargain, and something must be available for 'It' to name. The missing sentence supplies both. Behind the slot, the opening sentence has just said the predator can only have learnt by eating one caterpillar, which is exactly the taster the missing sentence charges for the brood. The paragraph's movement is appearance first, correction second, and only this seat preserves it.",
+    "clue_before": "Sentence 1 says the lesson can only be learnt by eating one, which produces the single victim the missing sentence prices.",
+    "clue_after": "Sentence 2 denies that it is a bad bargain for the siblings, and a denial of that form needs the phrase it contradicts immediately above it.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "stance_shift",
+        "why_wrong": "Here the paragraph first says the arrangement is not a bad bargain, then that it looks like a bad bargain, then that the colours are worth the loss. It would concede after answering the objection and turn round twice in three sentences, when its movement is to grant the appearance once and then dispose of it.",
+        "seductive_element": "A qualification acknowledging the individual's loss reads as fairness, and the sentence does add something the case about siblings leaves out."
+      },
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs at the top of the argument and is wanted three seats earlier. At the end it reopens the individual's loss after the paragraph has settled the accounting at the level of the family and moved on to broods that scatter, and the denial in the second sentence spends the whole paragraph with no assertion above it to contradict.",
+        "seductive_element": "The closing sentence is about what a predator must survive, so a line about what the first victim pays reads as the matching cost on the other side."
+      },
+      {
+        "option": "C",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The sentence above this slot has already settled the accounting at the level of the family, so a line saying that one caterpillar pays for the brood makes the same point a second time and offers the appearance of a loss the paragraph has finished dissolving; the sentence about dispersal would then follow a repetition rather than the family-level conclusion it builds on.",
+        "seductive_element": "The word loss appears in the sentence above, which makes a line about who bears it look like the natural expansion."
+      }
+    ],
+    "method": "Where a visible sentence denies something in a particular form of words, treat those words as a socket: the assertion they contradict must sit directly above. Then check the paragraph's direction, because an item that grants an appearance and then corrects it cannot grant the appearance again after the correction."
+  },
+  "mentor": {
+    "challenge": "A visible sentence says it is not a bad bargain for the siblings. Find where the paragraph calls anything a bad bargain.",
+    "takeaway": "A denial needs its assertion directly above it, in the same words."
+  }
+}

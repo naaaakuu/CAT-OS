@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0046",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "Swept for Six Hundred Years",
+    "theme": "why a settlement destroyed in a night is a better record than one kept tidy, and what the advantage costs",
+    "estimated_time_sec": 85,
+    "clue_types": ["article_given_new", "lexical_repetition", "parallelism"],
+    "primary_trap": "wrong_reference_target",
+    "reasoning_patterns": ["disc.opening_sentence", "disc.contrast", "disc.given_new", "disc.concession"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 3, "competing_slots": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "notice a phrase like 'the other sort', which cannot be read generically and must have a first sort above it",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General reasoning about archaeological deposits and destruction horizons; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Rebuilt after a blind reader found two admissible slots: the original first sentence began 'The ordinary house', which reads perfectly well as a generic definite with no antecedent, so nothing forced the opener. 'The other sort of site' cannot be read generically and fixes the slot.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the description of the swept site, where the comparison reads as the contrast being drawn at the moment it is wanted, and where 'The fire' in the next sentence sits directly against 'burned in a night'. It is refused by the first three words of the paragraph: 'The other sort' is not a phrase English allows to open anything, since it names the second member of a pair and there is no first member unless the missing sentence supplies one. The slot after the sentence about the price is the other candidate, and it strands that phrase for three sentences while reading as a verdict the paragraph has earned.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "The other sort of site is swept, its broken pots are carried out, and what survives in the floor is whatever was too small to be worth removing." },
+      { "n": 2, "text": "The fire stops the sweeping, and the assemblage lying under the collapse is the one that was actually in use that afternoon." },
+      { "n": 3, "text": "The advantage is bought at a price, since a single afternoon is not a century and the catastrophe may itself have been the reason the room was unusual." },
+      { "n": 4, "text": "A historian therefore reads a disaster twice: once for what it preserved and once for what it was." }
+    ]
+  },
+  "missing": {
+    "text": "A settlement that burned in a night tells a historian more than one that was tidied for six hundred years.",
+    "position": 0,
+    "function": "the opening claim, supplying the first member of the pair the next sentence calls the other sort, and the fire the sentence after that names"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A settlement that burned in a night tells a historian more than one that was tidied for six hundred years.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "Before sentence 1",
+      "C": "After sentence 1",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 2, "B": 0, "C": 1, "D": 3 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "Two phrases in the visible text are unfed, and one of them cannot be repaired by any reading. 'The other sort of site' names the second member of a pair, and unlike a generic definite it is meaningless without a first member; the paragraph supplies none. The next sentence then speaks of 'The fire' as already known, and none has been lit. One sentence supplies both, since it sets a settlement that burned against one that was tidied for centuries, and it takes nothing in return: no pronoun, no demonstrative, no phrase pointing outside itself. A sentence that everything depends on and that depends on nothing is the paragraph's first line.",
+    "clue_before": null,
+    "clue_after": "Sentence 1 opens 'The other sort of site', which is the second half of a pair whose first half the paragraph has not given, and sentence 2 then treats 'The fire' as already mentioned.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here the comparison arrives after the swept site has already been called 'the other sort', so that phrase spends its sentence naming the second member of a pair with no first member anywhere; the reader is asked to hold a contrast before either side of it exists.",
+        "seductive_element": "A description of the tidy case followed immediately by the contrast is a natural movement, and the sentence does introduce the fire that the next line needs."
+      },
+      {
+        "option": "A",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "By this point both halves of the comparison have been described, so stating the comparison reads as a recap at the moment the paragraph turns to what the advantage costs; and the two unfed phrases above it have by then run for two full sentences without anything to point at.",
+        "seductive_element": "Drawing the comparison once both cases are on the page looks like good order, and the sentence does sum them up."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "After the qualification the sentence reads as the quotable judgement the paragraph has earned, but the closing line about reading a disaster twice is the judgement it has actually been building, and a broad claim inserted in front of it separates that line from the price it answers.",
+        "seductive_element": "It is the boldest sentence available, and a bold claim recovered after a concession is a familiar rhetorical shape."
+      }
+    ],
+    "method": "Separate the definite phrases that could be generic from the ones that could not. 'The ordinary house' can open a paragraph, because English lets a definite stand for a type; 'the other sort', 'the second of these', 'the latter' cannot, because they name a member of a pair. An unfeedable phrase of that kind tells you the slot lies above it."
+  },
+  "mentor": {
+    "challenge": "The first visible sentence says 'The other sort of site'. The other sort as against which first sort? The paragraph never says.",
+    "takeaway": "Some definites can stand alone and some cannot. 'The other', 'the latter', 'the second' always need their partner already on the page."
+  }
+}

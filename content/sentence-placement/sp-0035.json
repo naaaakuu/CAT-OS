@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0035",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "economics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "title": "The Coin in the Hedge",
+    "theme": "why a refundable deposit on a container is a payment for clearing litter rather than an incentive to recycle",
+    "estimated_time_sec": 95,
+    "clue_types": ["pronoun_ref", "connective_implicit", "stance_continuity"],
+    "primary_trap": "stance_shift",
+    "reasoning_patterns": ["disc.pronoun_antecedent", "disc.rhetorical_pivot", "disc.cause_effect", "disc.stance_continuity"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "track a paragraph's stance across its sentences and refuse a slot that would make it endorse before it has finished doubting",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General economic reasoning about deposit-refund schemes; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The paragraph doubts a defence, names the case the defence ignores, then credits the scheme on other grounds. The missing sentence is the credit, and it cannot precede the doubting without turning the argument round twice. 'It reaches them' binds to the hedge bottles and to nothing else.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening sentence, where the mechanism seems to belong beside the claim it explains. Put there, the paragraph commends the scheme and then, in the very next sentence, calls its defence weak and says it buys behaviour it already had, so the argument changes sides twice in three lines when its real movement is to doubt first and credit afterwards. The slot after the sentence about households is the other candidate, and it fails because 'them' would bind to the bottles that were coming back anyway, of which the sentence is untrue.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A deposit added to a bottle's price and refunded on its return is defended as a way of making households recycle." },
+      { "n": 2, "text": "As a defence it is weak: the households that bring bottles back are largely the ones already sorting their waste, so the scheme buys a behaviour it mostly had." },
+      { "n": 3, "text": "The interesting bottles are the ones dropped in a hedge, which no household will ever carry home and which the scheme was not designed to reach." },
+      { "n": 4, "text": "The scheme is therefore a payment for clearing, dressed as an incentive to recycle, and it is decently good at what it actually is." },
+      { "n": 5, "text": "Judging it by household return rates measures the one part that was never in doubt." }
+    ]
+  },
+  "missing": {
+    "text": "It reaches them by somebody else's hand, since a refundable coin turns litter into a thing worth stopping for.",
+    "position": 3,
+    "function": "the mechanism that answers the unreached bottles, and the clearer whose work the next sentence calls a payment"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"It reaches them by somebody else's hand, since a refundable coin turns litter into a thing worth stopping for.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "After sentence 1",
+      "C": "After sentence 4",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 3, "B": 1, "C": 4, "D": 2 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence answers a problem and hands on a person. The problem is stated once: bottles dropped in a hedge that no household will carry home and that the scheme was not designed to reach, so 'them' has exactly one set of things to name and 'reaches' answers the word used against the scheme. The person is the passer-by who stops for the coin, and the sentence after the slot calls the whole arrangement a payment for clearing, which needs somebody doing the clearing. The seat between the unreached bottles and the verdict on the payment is the only one that takes its pronoun from above and supplies the clearer below.",
+    "clue_before": "Sentence 3 says the hedge bottles are the ones the scheme was not designed to reach, which is the objection a sentence beginning 'It reaches them' is built to answer.",
+    "clue_after": "Sentence 4 calls the scheme a payment for clearing, and a payment for clearing needs somebody who clears, which nothing above the missing sentence supplies.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "stance_shift",
+        "why_wrong": "Immediately after the stated defence, the sentence credits the scheme with reaching what nobody else will; the next sentence then calls the defence weak and says the scheme buys behaviour it already had. The paragraph would endorse, disparage and endorse again, when its movement is to doubt the usual defence first and credit the scheme on a different ground afterwards.",
+        "seductive_element": "A claim followed at once by the mechanism that makes it true is the most ordinary shape there is, and the coin does explain the defence just stated."
+      },
+      {
+        "option": "D",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here 'them' can only reach for the bottles just mentioned, which are the ones households were bringing back anyway; of those the sentence is plainly false, since they need no passer-by. The hedge bottles it is true of arrive in the following sentence.",
+        "seductive_element": "The sentence above ends on bottles and households, so a sentence about reaching bottles seems to have found its subject."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the verdict the coin and the clearing sit together so comfortably that the slot reads as an expansion of it. But the verdict opens 'therefore' and would then be drawing its conclusion from a premise supplied underneath it, and the hedge bottles two sentences above are left as an objection the paragraph raises and never meets.",
+        "seductive_element": "The words 'payment for clearing' and 'a thing worth stopping for' belong to the same picture, which makes the pairing feel inevitable."
+      }
+    ],
+    "method": "Follow the stance sentence by sentence before you look at the slots: where does the paragraph doubt, and where does it turn? A credit placed before the doubting has finished makes the argument change sides twice. Then check the pronoun: 'them' must name the set that makes the sentence true, not simply the last plural noun."
+  },
+  "mentor": {
+    "challenge": "The paragraph doubts a defence before it credits the scheme. Ask which of those two jobs the sentence you are placing does.",
+    "takeaway": "Place a sentence by where the argument has got to, not only by where its words fit."
+  }
+}

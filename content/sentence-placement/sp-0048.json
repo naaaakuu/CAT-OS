@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0048",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "Declining to Answer",
+    "theme": "why refusing a question whose presupposition is the point at issue is a move in the argument rather than an evasion",
+    "estimated_time_sec": 105,
+    "clue_types": ["lexical_repetition", "connective_implicit", "article_given_new"],
+    "primary_trap": "new_topic_introduced",
+    "reasoning_patterns": ["disc.general_to_specific", "disc.example_after_claim", "disc.cause_effect", "disc.closing_sentence"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "place a costing sentence directly above the line that calls the cost a charge, and refuse a slot where its subject is dropped as soon as it is raised",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General philosophy of presupposition and loaded questions; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The closing sentence calls the device a charge for making an argument, and a charge needs a price already named. The tempting slot is beside the comic example, where the audience and the cost of refusing are introduced and then abandoned while the paragraph moves to political argument.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the example, where the picture of a man declining to answer sits vividly beside the man who has never falsified anything. Placed there, it brings in an audience and a cost that the next two sentences never touch, since the paragraph moves to political argument and then to what refusal contests; the subject is raised and dropped. The slot after the sentence about political argument is the second candidate, and it prices a refusal before the paragraph has said that refusing is the only way to contest a presupposition.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Some questions cannot be answered without conceding something, because the concession has been built into the form of the question rather than into either of the answers." },
+      { "n": 2, "text": "Asked when he stopped falsifying his results, a man who has never falsified any has no answer available that is merely true." },
+      { "n": 3, "text": "The example is comic and the structure is not: much of political argument consists of questions whose presuppositions are the matter actually in dispute." },
+      { "n": 4, "text": "Refusing such a question therefore looks like evasion and is in fact the only available way of contesting the presupposition." },
+      { "n": 5, "text": "Which is why the device works: it is not an argument that wins but a charge for making one." }
+    ]
+  },
+  "missing": {
+    "text": "The cost of refusing falls on the refuser, since an audience hears a man decline to answer and rarely hears what he declines.",
+    "position": 4,
+    "function": "the price of the only available move, which the closing sentence calls a charge"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The cost of refusing falls on the refuser, since an audience hears a man decline to answer and rarely hears what he declines.\"",
+    "options": {
+      "A": "After sentence 3",
+      "B": "After sentence 1",
+      "C": "After sentence 4",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 3, "B": 1, "C": 4, "D": 2 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The closing sentence says the device is not an argument that wins but a charge for making one, and a charge is a price, which has to have been named. The missing sentence names it: the refuser pays, because an audience registers the refusal and not its grounds. Behind the slot, the paragraph has just established that refusing is the only available way of contesting the presupposition, so a sentence beginning 'The cost of refusing' has something whose cost it can state. A price behind the closing line and an established move above it leave one seat between them.",
+    "clue_before": "Sentence 4 establishes refusal as the only way to contest a presupposition, which is what makes its cost worth stating rather than merely a fact about rudeness.",
+    "clue_after": "Sentence 5 calls the device a charge for making an argument, and a charge requires a price to have been put on something.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "Here the sentence brings in an audience and the cost of a refusal, and nothing for two sentences takes either up: the paragraph turns instead to political argument and then to what refusing contests. The audience is introduced and abandoned, and the closing line's charge is separated from the price by the whole argument.",
+        "seductive_element": "The comic example already has a man who cannot answer, so a sentence about a man declining to answer seems to be finishing the picture."
+      },
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is needed, one seat later. Placed here it prices a refusal before the paragraph has said that refusal is the only available way of contesting the presupposition, so the sentence below explains why the move looks like evasion after the reader has already been told what it costs the person making it.",
+        "seductive_element": "Political argument and a sceptical audience belong together, and a warning about how a refusal is received reads well beside them."
+      },
+      {
+        "option": "B",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The subject is right and the job is wrong. The gap after a bare structural claim wants the case that shows it, which the next sentence supplies with the man who has never falsified anything; a costing does the wrong work there, and it prices a refusal nobody has yet made, so the example then arrives as an illustration of a cost rather than of a trap.",
+        "seductive_element": "The opening claim is about questions that force a concession, and the natural next thought is what happens to somebody who will not play."
+      }
+    ],
+    "method": "Read the last visible sentence for a word that presupposes accounting — a charge, a price, the cost, worth it — and make sure the paragraph has done the accounting above it. Then check that whatever the sentence you are placing brings in is used again: a subject introduced and dropped is the mark of a wrong slot even when it reads well where you put it."
+  },
+  "mentor": {
+    "challenge": "The closing sentence calls the device a charge for making an argument. Ask where the paragraph names a price.",
+    "takeaway": "Anything a sentence introduces should be picked up afterwards; if nothing picks it up, you have put it in the wrong place."
+  }
+}

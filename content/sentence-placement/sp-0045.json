@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0045",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "institutions",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "Review or Examine",
+    "theme": "why a committee fights hardest over its terms of reference and hardly at all over its recommendations",
+    "estimated_time_sec": 60,
+    "clue_types": ["lexical_repetition", "connective_implicit", "temporal_sequence"],
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": ["disc.cause_effect", "disc.claim_then_evidence", "disc.general_to_specific"],
+    "difficulty_vector": { "reference_density": 2, "transition_ambiguity": 3, "competing_slots": 3, "concept_abstractness": 3, "syntactic_complexity": 2 },
+    "learning_objective": "keep a general claim general until the paragraph has earned the particular case, and let a 'That is why' find its cause",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of committee procedure and terms of reference; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The closing sentence opens 'That is why' and needs a cause that explains both halves of its verdict, the seriousness of the two meetings and the settledness of the recommendations. Only the missing sentence supplies the timing that does it.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening claim, where naming what a member stands to lose feels like the natural way to justify it. It drops the paragraph from committees in general to one member and one word before any word has been quoted, and the next sentence then climbs back out to members in general, so the scale moves down and up for no reason. The last slot is the other candidate, and it leaves the closing sentence drawing a two-part verdict from a cause that will not support the second part.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "The longest argument in the life of a committee is usually about its terms of reference." },
+      { "n": 2, "text": "Members who will later agree about every recommendation spend two meetings on whether the word 'review' should be 'examine'." },
+      { "n": 3, "text": "Outsiders read the whole performance as procedural vanity, and insiders know better: the wording decides which objections will be in order a year later." },
+      { "n": 4, "text": "That is why the two meetings are the serious part of the work and the recommendations are the part already settled." }
+    ]
+  },
+  "missing": {
+    "text": "A member who loses the word has lost every argument it would have let him raise, before anybody has proposed anything.",
+    "position": 3,
+    "function": "the personal consequence of the wording, and the timing that makes the recommendations settled in advance"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A member who loses the word has lost every argument it would have let him raise, before anybody has proposed anything.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 4",
+      "C": "After sentence 1",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 2, "B": 4, "C": 1, "D": 3 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The closing sentence opens 'That is why' and then makes a double claim: the two meetings are the serious work, and the recommendations are already settled. A cause has to explain both halves, and only the missing sentence does, because it says the arguments are lost before anybody has proposed anything — which is exactly what makes a later recommendation a formality. Behind the slot, 'the word' has an antecedent at last, since the insiders' sentence has just explained that the wording governs which objections will be in order. Neither neighbour can spare it.",
+    "clue_before": "Sentence 3 says the wording decides which objections will be admissible later, which is what gives 'the word' its meaning and its stakes.",
+    "clue_after": "Sentence 4 begins 'That is why' and claims that the recommendations are already settled, which needs the point about losing arguments before anything is proposed.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "scope_jump",
+        "why_wrong": "Here the paragraph has made a claim about committees and the sentence drops immediately to one member and one word, before any word has been quoted or any stake explained; the following sentence then climbs back out to members in general, so the paragraph narrows and widens for no reason the argument can use.",
+        "seductive_element": "A general claim about the longest argument invites an immediate statement of what is at stake in it, and this is that statement."
+      },
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "The paragraph has described the odd behaviour and still owes the reason for it, which the insiders' sentence supplies. Delivering the consequence first makes that sentence redundant as news, since outsiders are said to misread a practice the paragraph has already explained, and the reason for the loss would arrive after the loss has been declared.",
+        "seductive_element": "Two meetings spent on one word cry out for a line saying what the word is worth, and this line says it."
+      },
+      {
+        "option": "B",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is needed, one seat earlier. Placed after the closing line, it leaves that line opening 'That is why' and drawing a double claim from a cause that supports only half of it, since nothing then explains why the recommendations should count as already settled.",
+        "seductive_element": "It is the sharpest sentence in the item, and a sharp statement of the stake makes a satisfying last word."
+      }
+    ],
+    "method": "Read the last sentence first when it begins 'That is why' or 'So': its claim tells you what the cause above it must explain, and a double claim needs a cause that covers both halves. Then watch the scale, because a paragraph that has just made a general claim does not drop to a single person and climb back out again in three lines."
+  },
+  "mentor": {
+    "challenge": "The closing sentence says the recommendations are already settled. Ask which sentence could make that true.",
+    "takeaway": "A 'That is why' has to explain everything it claims, not merely the nearest half of it."
+  }
+}

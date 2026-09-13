@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0031",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "environment",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "Four Metres of Edge",
+    "theme": "why the width of a wildlife corridor decides which animals use it, and why its traffic can measure its failure",
+    "estimated_time_sec": 75,
+    "clue_types": ["article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "scope_jump",
+    "reasoning_patterns": ["disc.given_new", "disc.cause_effect", "disc.specific_to_general", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 3, "competing_slots": 3, "concept_abstractness": 3, "syntactic_complexity": 3 },
+    "learning_objective": "keep a paragraph at the scale it has chosen, and place a sentence by the two things a later verdict has to add together",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General conservation reasoning about habitat corridors and edge effects; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The verdict 'busy and useless at once' needs both halves on the page: the traffic comes from the survey, the uselessness only from the missing sentence. The tempting wrong slot is the one that leaves the valley for a law about every narrow strip just as the paragraph has come down to one field.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the verdict, where the sentence reads as the principle the case illustrates. Placed there it takes the paragraph out of the valley and into a rule about every narrow strip, immediately before the closing sentence brings it back to one field and one figure, and the verdict above it is left adding a traffic to an uselessness that has not been established. The slot beside the opening measurement is the other candidate, and it fails because 'The movement' would name a movement no sentence has yet reported.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "The corridor joining the two reserves in this valley is four metres wide, and it was signed off because four metres was a width nobody had ruled out." },
+      { "n": 2, "text": "Its annual survey reports movement along the strip, and the file has recorded the link as working for six years." },
+      { "n": 3, "text": "So the corridor is busy and useless at once, and six years of traffic measure the failure rather than the link." },
+      { "n": 4, "text": "The cost of widening it is the field beside it, which is the conversation the four-metre figure was chosen to avoid." }
+    ]
+  },
+  "missing": {
+    "text": "The movement is foxes, crows and roe deer, and a strip this narrow is all edge, which no interior species will cross whatever it joins.",
+    "position": 2,
+    "function": "the identification of the traffic and the reason it is the wrong traffic, which the verdict then adds to the six years"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The movement is foxes, crows and roe deer, and a strip this narrow is all edge, which no interior species will cross whatever it joins.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 3, "D": 4 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The verdict that follows adds two things together: the corridor is busy, and it is useless. The survey supplies the first, since it reports movement and six years of records. Nothing supplies the second until the missing sentence names what the movement consists of and says that the animals the reserves exist to hold will not enter a strip that narrow. The sentence also opens on 'The movement', a definite phrase that needs a movement already reported, and exactly one sentence reports one. The slot between the survey and the verdict is the only one that both takes its reference from above and pays for the sentence below.",
+    "clue_before": "Sentence 2 reports movement and a file that records the link as working, which is the claim a sentence beginning 'The movement is' exists to inspect.",
+    "clue_after": "Sentence 3 calls the corridor busy and useless at once, and the paragraph has to contain both a traffic and a reason the traffic is worthless.",
+    "distractors": [
+      {
+        "option": "C",
+        "trap_type": "scope_jump",
+        "why_wrong": "Here the sentence turns one valley into a law about every narrow strip, 'whatever it joins', at the moment the paragraph has finished with the general and come down to a single field and a single figure; and the verdict immediately above it would be adding a traffic to an uselessness the reader has not been given.",
+        "seductive_element": "A verdict followed by the principle that explains it is a natural order, and the general clause does sound like the lesson the case is meant to teach."
+      },
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Straight after the measurement, 'The movement' has nothing to name, since no movement has been reported yet; the sentence would also answer the survey before the survey has been produced, leaving the file's six clean years to arrive as news after they have been explained away.",
+        "seductive_element": "'A strip this narrow' points straight back at four metres, which makes the slot beside the measurement feel like the sentence's home."
+      },
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "At the end the sentence reads as the summary the case has earned, and the language of narrow strips sits well beside a sentence about widening. But the verdict two lines above is then unsupported, and the closing sentence, which is the paragraph's landing on cost, is displaced by a fact that three earlier sentences needed.",
+        "seductive_element": "The final sentence is about widening, so a sentence about what narrowness does seems to complete the thought."
+      }
+    ],
+    "method": "Find the sentence that adds two things together — busy and useless, cheap and unusable, quick and wrong — and check that the paragraph contains both. Then watch the scale: a paragraph that has narrowed to one case does not step back out to a general law and then return, so a slot that forces that movement is refused even when the sentence is true."
+  },
+  "mentor": {
+    "challenge": "One sentence calls the corridor busy and useless at once. Which of the visible sentences gives you the second half of that?",
+    "takeaway": "A two-part verdict is a receipt for two things above it; supply both before you choose a slot."
+  }
+}

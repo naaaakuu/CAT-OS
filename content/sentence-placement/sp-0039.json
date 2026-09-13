@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0039",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 83,
+    "genre": "religion-belief",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "Agreement About When",
+    "theme": "why a congregation that sings stays together where one that recites drifts apart",
+    "estimated_time_sec": 55,
+    "clue_types": ["connective_explicit", "lexical_repetition", "article_given_new"],
+    "primary_trap": "wrong_connective",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.transition_word", "disc.cause_effect"],
+    "difficulty_vector": { "reference_density": 2, "transition_ambiguity": 3, "competing_slots": 2, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "check that a connective in the visible text still points the right way once the sentence has been placed",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of congregational singing and collective timing; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "A foundation item built on one word: the visible 'So' has to draw its consequence from a remedy, and if the remedy is moved the consequence is drawn from the problem instead. The closing sentence's 'the tune' confirms the seat.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence beginning 'So', where the mention of a tune seems to explain what has just been asserted. Move the sentence there and the 'So' draws its consequence directly from the drifting and the loud voices, which would mean that a congregation stays together because it falls apart. The closing sentence's phrase 'the tune' also has nothing to name until the missing sentence introduces one, so the last line is left pointing at an instrument the paragraph never mentions.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A congregation reciting a text together drifts apart within a line, and the loudest voices decide where everyone else is." },
+      { "n": 2, "text": "So nobody has to listen for the pace and nobody can set it, and a room of strangers stays together for four verses." },
+      { "n": 3, "text": "The words matter, of course, but a congregation could have been given them to read." },
+      { "n": 4, "text": "What the tune adds is the one thing reading aloud cannot supply, which is agreement about when." }
+    ]
+  },
+  "missing": {
+    "text": "Singing removes the difficulty, because a tune tells every voice how long each syllable is to last.",
+    "position": 1,
+    "function": "the remedy from which the next sentence draws its consequence, and the tune the last sentence names"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Singing removes the difficulty, because a tune tells every voice how long each syllable is to last.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 3",
+      "C": "After sentence 1",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 2, "B": 3, "C": 1, "D": 4 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The second visible sentence begins 'So', and a consequence has to follow from something that can produce it. What follows is that nobody must listen for the pace and nobody can set it, which is a description of a congregation held together, not of one drifting apart. Only the missing sentence gives that consequence a cause. The same slot also satisfies the opening sentence, whose drift and loud voices are the difficulty the sentence says is removed, and the closing line, which speaks of 'the tune' as though one had been mentioned. Put the sentence anywhere else and the 'So' draws a conclusion from the problem.",
+    "clue_before": "Sentence 1 sets out the difficulty — drift within a line and the loudest voices deciding — which is what a sentence saying the difficulty is removed must follow.",
+    "clue_after": "Sentence 2 opens with 'So', and the consequence it states can only follow from a remedy, not from the drifting described above it.",
+    "distractors": [
+      {
+        "option": "A",
+        "trap_type": "wrong_connective",
+        "why_wrong": "Moving the sentence below the 'So' leaves that connective joining the drifting congregation to the congregation that stays together, so the paragraph asserts that nobody can set the pace because the loudest voices are setting it. The connective would be pointing at the wrong sentence.",
+        "seductive_element": "The mention of a tune reads as the explanation of the claim just made, and explanations commonly follow the claims they support."
+      },
+      {
+        "option": "B",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "Here the sentence says that a tune fixes the length of each syllable, and the line immediately after says that what the tune adds is agreement about when; the paragraph would make the same point twice in consecutive sentences, and the 'So' two lines above would still be drawing its consequence from the drifting.",
+        "seductive_element": "The concession about words seems to call for the answer about tunes, and the two sentences do belong to the same comparison."
+      },
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The remedy belongs to the paragraph and is wanted at the top. Placed last it arrives after the closing sentence has already said what the tune adds, so the point is made twice in a row; and three lines above, the 'So' is still drawing its consequence from the drifting congregation rather than from anything that could produce it.",
+        "seductive_element": "The final sentence names the tune, so a line explaining what a tune does seems to belong immediately beside it."
+      }
+    ],
+    "method": "Read every connective in the visible text as a constraint on the slot. 'So', 'therefore', 'instead', 'even so' each require a particular kind of sentence directly above them, and a placement that puts the wrong kind there is refused however well the sentence reads where you have put it."
+  },
+  "mentor": {
+    "challenge": "One visible sentence begins with 'So'. Ask what it is a consequence of, and whether the sentence above it could produce that consequence.",
+    "takeaway": "Place the sentence, then re-read the connectives. If one of them now points at the wrong thing, the slot is wrong."
+  }
+}

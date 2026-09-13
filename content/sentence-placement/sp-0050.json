@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0050",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "human-behaviour",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "Part of the Floor",
+    "theme": "why a permanent warning stops being read, and why the expensive half of a warning is taking it down",
+    "estimated_time_sec": 110,
+    "clue_types": ["lexical_repetition", "connective_implicit", "parallelism"],
+    "primary_trap": "local_fit_global_break",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.cause_effect", "disc.claim_then_evidence", "disc.closing_sentence"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 5, "competing_slots": 5, "concept_abstractness": 4, "syntactic_complexity": 3 },
+    "learning_objective": "spot the slot that reads perfectly and makes the sentence below it a repetition, and place by the half of a prescription that is otherwise unearned",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General reasoning about habituation to warnings and signage; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The prescription has two halves — signs that change when the danger changes, and signs that are absent when it is absent — and only the second half needs the missing sentence. The rival slot supplies the diagnosis one line early and turns the sentence about worn-out expectation into a restatement.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the failed enlargement, where the aphorism reads as the diagnosis that explains why a bigger sign buys only a fortnight, and where it fits its neighbours perfectly. What it breaks is the sentence below it, which then repeats the same diagnosis in slower words, and the second half of the prescription two sentences later, which argues for a sign being absent on grounds the paragraph has spent rather than saved. The opening slot is the other candidate and is refused because no sign has yet been put up for the aphorism to be about.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A notice saying the floor is slippery is read once and thereafter is part of the floor." },
+      { "n": 2, "text": "The usual response is to make it larger, which buys a fortnight." },
+      { "n": 3, "text": "What has worn out is not the sign's visibility but the reader's expectation that it carries news." },
+      { "n": 4, "text": "Signs that go on working are the ones that change when the danger changes and are missing altogether when the danger is absent." },
+      { "n": 5, "text": "The maintenance cost of a warning is therefore the cost of taking it down again, which is the part nobody budgets for." }
+    ]
+  },
+  "missing": {
+    "text": "A sign that is right every day has never once told anybody anything he did not assume.",
+    "position": 3,
+    "function": "the reason the expectation dies, which earns the second half of the next sentence's prescription"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A sign that is right every day has never once told anybody anything he did not assume.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 3",
+      "C": "Before sentence 1",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 1, "B": 3, "C": 0, "D": 2 },
+    "correct": "B"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence after the slot makes a prescription in two parts: a sign should change when the danger changes, and should be missing altogether when the danger is absent. The first part follows from the worn-out expectation already described. The second does not: nothing yet explains why a sign left standing in safe conditions is worse than harmless, and the missing sentence is what supplies it, by pointing out that a permanently accurate sign has never once carried information. Behind the slot it also completes the diagnosis it follows, saying why the expectation of news dies. Only this seat pays for the half of the prescription that is otherwise unearned.",
+    "clue_before": "Sentence 3 locates the failure in the reader's expectation that the sign carries news, and the missing sentence says why that expectation is correct to die.",
+    "clue_after": "Sentence 4 asks for signs that are absent when the danger is absent, which needs an argument that a permanently accurate sign is informationally empty.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "It reads perfectly here, as the diagnosis of why a bigger notice buys only a fortnight, and nothing in the two neighbouring lines objects. What it breaks is underneath: the sentence about the worn-out expectation becomes the same diagnosis in slower words, and the prescription two lines further on loses the argument that was meant to earn its second half.",
+        "seductive_element": "A failed remedy invites the explanation at once, and the aphorism explains that failure exactly."
+      },
+      {
+        "option": "A",
+        "trap_type": "premature_conclusion",
+        "why_wrong": "Here the paragraph delivers its diagnosis before describing the remedy that fails, so the usual response of enlarging the notice arrives as a proposal after the reader has been shown why size is beside the point, and the sentence about expectation then explains something twice over.",
+        "seductive_element": "The opening image of a notice that becomes part of the floor seems to want its explanation immediately."
+      },
+      {
+        "option": "C",
+        "trap_type": "attractive_generality",
+        "why_wrong": "As an opening it is the quotable maxim, but 'a sign that is right every day' presumes a sign the paragraph has not yet put up, and it takes the first line's work of introducing the notice and the habituation that follows; the prescription three sentences later is then argued for by a claim the reader met before the problem existed.",
+        "seductive_element": "It is the sharpest sentence in the item and sounds exactly like a thesis."
+      }
+    ],
+    "method": "Where a later sentence prescribes two things, check each half separately against what the paragraph has established. A half that is not yet paid for tells you what the missing sentence has to do, and therefore where it sits. And distrust the slot that reads best: local comfort is what a well-built item offers you instead of the answer."
+  },
+  "mentor": {
+    "challenge": "One sentence asks for signs that are missing when the danger is absent. Ask what argument would make that reasonable, and whether the paragraph contains it.",
+    "takeaway": "Test each half of a prescription for its own support. The unsupported half is the shape of the gap."
+  }
+}

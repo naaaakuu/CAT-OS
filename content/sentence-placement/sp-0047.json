@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0047",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "scientific-method",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Runs That Are Not Results",
+    "theme": "why the earliest runs of an experiment are discarded on purpose, and the one point at which the practice turns dishonest",
+    "estimated_time_sec": 65,
+    "clue_types": ["lexical_repetition", "connective_implicit", "parallelism"],
+    "primary_trap": "right_idea_wrong_position",
+    "reasoning_patterns": ["disc.example_after_claim", "disc.cause_effect", "disc.claim_then_evidence"],
+    "difficulty_vector": { "reference_density": 3, "transition_ambiguity": 2, "competing_slots": 3, "concept_abstractness": 3, "syntactic_complexity": 2 },
+    "learning_objective": "let a counting phrase such as 'neither of those' tell you that two items must already be named above it",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of laboratory practice and stopping rules; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "'Neither of those' is a count, and only the missing sentence puts two items on the page. The rival slot is one seat lower, where the examples read as an elaboration of the verdict that has just counted them.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence that begins 'Neither of those', because a pair of concrete examples reads naturally as an expansion of a judgement just delivered. Placed there, the judgement counts two items before either exists, and the reader meets a bath and a detector only after being told that neither of them is a result. The slot before the sentence about discarding is the other candidate, and it makes 'Discarding them' refer to the bath and the detector rather than to the earliest runs.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A laboratory notebook usually records more runs than the paper does, and the missing ones are the earliest." },
+      { "n": 2, "text": "Discarding them is not a tidying of the evidence but a decision about when the apparatus began to be the apparatus the method section describes." },
+      { "n": 3, "text": "Neither of those is a result, which is why dropping them costs a reader nothing and dropping a late run costs him everything." },
+      { "n": 4, "text": "So the rule that makes the practice honest is not about how many runs are discarded but about when the rule was written down." }
+    ]
+  },
+  "missing": {
+    "text": "A bath still climbing to temperature and a detector still settling are two states of a machine rather than two findings about the world.",
+    "position": 2,
+    "function": "the two concrete cases the next sentence counts, and the content of the claim about when the apparatus begins"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"A bath still climbing to temperature and a detector still settling are two states of a machine rather than two findings about the world.\"",
+    "options": {
+      "A": "After sentence 2",
+      "B": "After sentence 4",
+      "C": "After sentence 1",
+      "D": "After sentence 3"
+    },
+    "option_positions": { "A": 2, "B": 4, "C": 1, "D": 3 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence below the slot opens 'Neither of those', which is a count of two, and the paragraph names two of anything in exactly one place. That settles the slot from in front. From behind, the preceding sentence claims that discarding early runs is a decision about when the apparatus began to be the described apparatus, and that claim is abstract until somebody says what an unfinished apparatus looks like; the bath and the detector are what a reader needs in order to accept it. A count forward and an unredeemed claim backward meet at one seat.",
+    "clue_before": "Sentence 2 asserts that the question is when the apparatus began to be the apparatus described, which is a claim asking to be shown rather than stated.",
+    "clue_after": "Sentence 3 opens 'Neither of those', so two items must already be named, and nothing above the missing sentence names any.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence is wanted one seat earlier. Here the verdict counting two items stands above the only sentence that supplies any, so the reader is told that neither of them is a result before meeting either; the examples then arrive as an afterthought to a judgement already made about them.",
+        "seductive_element": "Concrete examples following a general verdict is a perfectly ordinary movement, and these examples do illustrate what the verdict has said."
+      },
+      {
+        "option": "C",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Placed here, the sentence below begins 'Discarding them', and 'them' now reaches for the bath and the detector rather than for the earliest runs, so the paragraph would be discussing the discarding of two pieces of equipment; the earliest runs, which the opening sentence introduced, lose the pronoun that was meant for them.",
+        "seductive_element": "Naming the unready apparatus immediately after the missing early runs looks like the shortest route from observation to explanation."
+      },
+      {
+        "option": "B",
+        "trap_type": "topic_match_function_mismatch",
+        "why_wrong": "The last slot wants the practical consequence, which the closing sentence supplies by locating honesty in when the rule was written; a pair of examples is the right subject doing the wrong job there, and the count two sentences above remains unpaid throughout.",
+        "seductive_element": "The examples are the most concrete thing in the item, and ending on something concrete feels like good writing."
+      }
+    ],
+    "method": "Treat 'neither', 'both', 'the three of them' and 'either' as counts that the paragraph has to have paid already. Find the count, count what the visible sentences actually supply, and the shortfall tells you what the missing sentence is for and therefore where it sits."
+  },
+  "mentor": {
+    "challenge": "A visible sentence says 'Neither of those'. Count how many things the paragraph has named for it to refuse.",
+    "takeaway": "If a sentence counts two and the page holds none, the gap is directly above the counting."
+  }
+}

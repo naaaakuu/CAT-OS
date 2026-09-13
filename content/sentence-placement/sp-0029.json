@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0029",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 85,
+    "genre": "education",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "Forty Minutes for Everything",
+    "theme": "why a school day is cut into equal periods that suit no subject, and who pays for the arrangement",
+    "estimated_time_sec": 50,
+    "clue_types": ["article_given_new", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "summary_where_development_needed",
+    "reasoning_patterns": ["disc.cause_effect", "disc.claim_then_evidence", "disc.given_new"],
+    "difficulty_vector": { "reference_density": 2, "transition_ambiguity": 2, "competing_slots": 2, "concept_abstractness": 2, "syntactic_complexity": 2 },
+    "learning_objective": "count what a later sentence counts, and place the sentence that supplies the items",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of school timetabling; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Rebuilt after a blind reader found the original version unforced: no seam broke, and the slot rested on rhetorical taste. The clue is now a count — 'Both allocations' needs two allocations already named, and only the missing sentence names any.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the two consequences, where the sentence reads as the lesson they teach. It is a summary arriving where the paragraph is still building, since the next sentence has timetablers defending the arrangement and a defence needs its reason to be new; and the sentence above the slot opens 'Both allocations', a count of two that nothing on the page has paid. Only the seat between the bare fact and the consequences supplies the teacher and the room that the count is a count of.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A school day is cut into periods of the same length, and the length has nothing to do with how long any subject needs." },
+      { "n": 2, "text": "Both allocations hold for the year, which is why an experiment needing seventy minutes is broken across two days and a twelve-minute test leaves a room standing empty." },
+      { "n": 3, "text": "Timetablers know this and keep the arrangement, because the alternative is a grid that must be solved again whenever one class moves." },
+      { "n": 4, "text": "The cost falls on whichever subjects have work that does not divide neatly, which is why those are the departments for ever asking for a double period." }
+    ]
+  },
+  "missing": {
+    "text": "The equal period exists so that every teacher and every room in the school can be handed out in a single operation each year.",
+    "position": 1,
+    "function": "the reason for the equal period, naming the two allocations the next sentence counts"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The equal period exists so that every teacher and every room in the school can be handed out in a single operation each year.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 3, "D": 4 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence below the slot begins 'Both allocations', and a count of two is a receipt: two things must already have been handed out, and the paragraph hands out nothing until the missing sentence gives away every teacher and every room. That single word 'Both' rules out every slot lower down, because a count cannot be paid from underneath. Behind the slot, the opening sentence states the practice and withholds the reason for it, saying only that the length answers to nothing in the subjects, so the reason is exactly what is owed next. One seat pays the count in front and the debt behind.",
+    "clue_before": "Sentence 1 gives the practice and no reason for it, and its 'nothing to do with how long any subject needs' invites the question of what the length does answer to.",
+    "clue_after": "Sentence 2 opens 'Both allocations', so two allocations must already be on the page, and nothing above the missing sentence allocates anything.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "Here the sentence reads as the moral of the two consequences, but the paragraph is still building: what comes next is the timetablers' defence, and a defence has to answer a reason already given rather than restate one delivered a line earlier. The count above the slot is also left unpaid, since 'Both allocations' would be pointing at nothing.",
+        "seductive_element": "Two concrete consequences followed by the general point behind them is a natural order, and the sentence does sound like a conclusion drawn from them."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the timetablers' defence the sentence reads as part of that defence and sits comfortably. But the defence already supplies its own reason, the grid that would have to be solved again, so the paragraph would give two separate reasons in consecutive sentences while the count two lines above has gone unpaid throughout.",
+        "seductive_element": "Both sentences are about why the arrangement is kept, so the vocabulary of scheduling seems to belong here."
+      },
+      {
+        "option": "D",
+        "trap_type": "attractive_generality",
+        "why_wrong": "As a last line it is a broad statement the paragraph never needed, since the closing sentence has already landed on who pays for the arrangement; and the reason it carries is wanted at the top, where a count and two consequences are waiting on it.",
+        "seductive_element": "It is the most quotable sentence available and makes a tidy final verdict on the whole practice."
+      }
+    ],
+    "method": "Treat a counting word as a debt the paragraph must already have paid. 'Both', 'neither', 'the two of them', 'each of those' all require their items above, so a count on the page with nothing above it to count tells you both what the missing sentence must supply and that the slot lies higher up."
+  },
+  "mentor": {
+    "challenge": "A visible sentence begins 'Both allocations'. Count how many allocations the paragraph actually makes.",
+    "takeaway": "A count cannot be paid from below. Find what is being counted, and put the sentence that supplies it above."
+  }
+}

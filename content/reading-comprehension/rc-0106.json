@@ -1,0 +1,324 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0106",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "education",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "intermediate",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "vocabulary-in-context",
+      "evidence-anchoring"
+    ],
+    "word_count": 347,
+    "question_count": 3,
+    "question_types": [
+      "author_purpose",
+      "inference",
+      "phrase_in_context"
+    ],
+    "theme": "the two standard accounts of the lecture's survival adjudicated as answers to different questions: cost explains how large lectures are and not why they are still held, while the performance the defenders describe is real but true of a minority, so the form is kept for one reason and praised for another",
+    "estimated_time_min": 5.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-08",
+    "reviewer_notes": "Built as four symmetric columns: the author's adjudication, the cost account taken whole, the pedagogical defence taken whole, and the general law that convenience beats pedagogy. Each column owns exactly one option in each of the three questions, so an option set read without the passage offers four coherent readings and no frequency cue.",
+    "length_class": "short",
+    "structure": "two_views_adjudication",
+    "viewpoints": 3,
+    "tone": "dry, adjudicating",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 3,
+      "inference_depth": 3,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 2
+    },
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "arg.evidence_vs_conclusion",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "scope.abstraction_level",
+      "word.context_clue",
+      "comp.function_over_words",
+      "comp.purpose",
+      "comp.intent",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "blind_solve": null,
+      "adversarial_review": "Three rival readings compete with the author's across all three questions. The first is the cost account taken as the whole explanation: the lecture survives because it is the cheapest hour an institution can buy. It holds an option in every question (the affordability prediction in the inference item, the timetable reading of 'at dictation speed', the rationalisation purpose) and dies on one sentence: the wealthiest institutions, which could afford to teach in eights, still fill their largest rooms twice a day, which is why the passage says cost explains how big lectures are and not why they are held. The second is the pedagogical defence taken whole, on which a lecture shows a mind meeting a difficulty and print cannot; it dies on 'Most lecturers present settled results at dictation speed, and a book does that better', which limits the defence to a minority and makes the textbook reader's supposed loss imaginary in the ordinary case. The third is the general law that institutional convenience overrides teaching; the passage refuses it by granting the performance is real and worth keeping, and by ending on a question about which of two reforms is meant rather than on a verdict about institutions. The live rival on the purpose question is the defence, because the third paragraph opens by conceding it; the words that settle it are 'it is a description of a minority of lectures' and 'praised for the second', which make the author's object the relation between the two accounts rather than either of them."
+    },
+    "vocab_extracted": [
+      "dislodge",
+      "warrant",
+      "answerable"
+    ]
+  },
+  "passage": {
+    "title": "Three Hundred in a Room",
+    "reading_time_min": 1.9,
+    "paragraphs": [
+      {
+        "id": "rc-0106-p1",
+        "text": "No arrangement in higher education is criticised as often as the lecture, and none has proved harder to dislodge. Two explanations are usually offered, and they are rarely set against each other. The first is economic. One room, one salary and three hundred students make the hour the cheapest unit of teaching an institution can buy, and timetables, contracts and degree regulations have been fitted around that unit for so long that to abolish it is to rebuild everything attached to it. The second is pedagogical. A lecture is the one occasion on which a student watches a mind meet a difficulty as it happens: choosing which objection to take up, hesitating, doubling back. A book shows the finished conclusion and hides the choosing that produced it."
+      },
+      {
+        "id": "rc-0106-p2",
+        "text": "The economic account is plainly right about quantity. Where funding is thinnest the lectures are largest, and the small seminar is the first thing a stretched department gives up. But it predicts more than it can deliver. If cost were the whole story the lecture would thin out wherever money is no object, and it does not: the wealthiest institutions, which could afford to teach in eights, still fill their largest rooms twice a day. Cost explains how big lectures are, not why they are still held."
+      },
+      {
+        "id": "rc-0106-p3",
+        "text": "The pedagogical defence survives that test and fails a different one. What it describes is real, and nobody who has seen it done wants to lose it. But it is a description of a minority of lectures. Most lecturers present settled results at dictation speed, and a book does that better, since a book can be stopped and read again. So the defence is true of an exception and is offered on behalf of the rule; the form is kept for the first reason and praised for the second, and the praise borrows its warrant from hours that most students never sit in. Anyone proposing to reform the lecture might usefully say which of the two they mean to change, since a reform aimed at the cost is not answerable to the defence."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0106-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "arg.evidence_vs_conclusion",
+        "scope.abstraction_level"
+      ],
+      "target_mistake": "collapsing the two accounts into one, so that whichever account the reader finds more attractive is made to explain both how many lectures there are and why the form survives",
+      "prediction_target": "Before the options the learner should be able to say: quality and quantity have been assigned to different explanations, so a change to one of them leaves the other's question still open.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following can be inferred from the passage?",
+      "options": {
+        "A": "An institution that replaced its least impressive lecturers would not thereby be holding any fewer lectures.",
+        "B": "Where an institution can afford to teach in groups of eight, the lecture theatre gives way to the seminar room.",
+        "C": "A student who reads the textbook instead of attending the lecture has missed the reasoning that produced the conclusions in it.",
+        "D": "In education generally, the arrangements that survive are those that suit the timetable rather than those that teach."
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The second paragraph ends with a division of labour stated in one short sentence: 'Cost explains how big lectures are, not why they are still held.' The third paragraph then restricts the rival account to 'a minority of lectures'. A reader who has both restrictions in hand can see that neither account covers the other's ground.",
+        "correct_reasoning": "The correct option follows from the two restrictions together. How well a lecture is given belongs to the defence, while the number of lectures held belongs to the account of the timetable, where the unit survives on cost and on the contracts and regulations fitted around it. Improving the lecturers changes the quality of an hour and leaves untouched the reason that hour exists. The defence, on the author's own account, describes something real; but it describes what a minority of lecturers do, so an institution that accepts it entirely has accounted for a small part of its own timetable. The rest is left to the reason the second paragraph gives for the form's persistence, which the defence never mentions. Nothing stronger is claimed here, and nothing weaker would use both halves of the passage.",
+        "passage_anchor": "rc-0106-p2, rc-0106-p3",
+        "question_type_note": "When a passage adjudicates between two explanations by assigning each a question it does answer, the inference item tests whether the reader kept the assignment; the standard trap is an option that lets one explanation do all the work.",
+        "reading_habit": "When an author says an account explains one thing and not another, write the two things down separately. Most wrong options are built by letting one of them quietly cover both.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage tests this prediction and reports that it fails: the wealthiest institutions, which could afford to teach in eights, still fill their largest rooms twice a day. Cost is granted authority over the size of a lecture, never over whether one is held.",
+            "seductive_element": "The first paragraph makes the economic case so completely that a reader carries its logic forward and supplies the conclusion the author declines to draw."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The defence is limited in the third paragraph to a minority of lectures; of the rest the passage says a book does the same job better because it can be stopped and read again. So for the ordinary lecture the textbook reader has missed nothing the passage identifies.",
+            "seductive_element": "It restates the most appealing sentence in the passage, the one about watching a mind meet a difficulty, and applies it to the reader's own experience of skipping a class."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The passage adjudicates one case and grants the teaching claim real force within it: what the defence describes 'is real, and nobody who has seen it done wants to lose it'. A general law about which arrangements survive in education is a level above anything the passage establishes.",
+            "seductive_element": "The conclusion has the cadence of a worldly generalisation, and the passage's cost paragraph appears to supply the evidence for one."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0106-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.function_over_words",
+        "elim.near_tie"
+      ],
+      "target_mistake": "reading the phrase as a comment on pace, because dictation is slow, instead of as a comment on what is handed over and what the room is left to do",
+      "prediction_target": "Before the options the learner should be able to say: the phrase is doing the work of the comparison that follows it, so it must describe delivery that a book could take over entirely.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "specific_detail"
+      ],
+      "stem": "In the third paragraph, the phrase “at dictation speed” conveys that such lecturers",
+      "options": {
+        "A": "are working at the pace that a cheaply staffed and crowded timetable forces upon them",
+        "B": "slow the material to the rate at which a difficult argument can actually be followed",
+        "C": "hand over finished conclusions in a form that leaves the room only transcription to do",
+        "D": "impose upon the room the uniformity that any large institution requires of its teaching"
+      },
+      "correct": "C",
+      "estimated_time_sec": 60,
+      "explanation": {
+        "expert_notice": "The phrase sits between two things that fix it. In front of it stand the words 'present settled results'; behind it stands the comparison 'a book does that better, since a book can be stopped and read again'. Whatever the phrase means, it must name something a book could do instead.",
+        "correct_reasoning": "The correct option keeps both. What is delivered is already settled, and what the audience does with it is write it down; that is exactly the transaction print performs better, because print waits. The phrase is therefore about the transfer, not about tempo: a lecturer who went slowly but showed the choosing would not be lecturing at dictation speed at all, since nothing about the first paragraph's mind meeting a difficulty could be transcribed straight.",
+        "passage_anchor": "rc-0106-p3",
+        "question_type_note": "A phrase question is settled by the job the phrase does in its sentence. Read the clause on either side of it first, and let the comparison the author draws tell you what the phrase must mean.",
+        "reading_habit": "When a phrase is followed by a comparison, use the comparison as the definition. The author has told you what the thing is like; the meaning has to be something that likeness could hold.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Speed is taken out of the phrase and reattached to the funding argument of the previous paragraph. The sentence itself concerns what a lecturer presents and what a book can replace, and the economic account was closed off two sentences earlier as an explanation of size rather than of conduct.",
+            "seductive_element": "The passage really does have a paragraph about cheapness and crowding, so an option that speaks of a crowded timetable sounds like it is quoting the argument back."
+          },
+          {
+            "option": "B",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Dictation is slow, so the ear supplies deliberate pacing, which would be a compliment. The sentence gives the phrase to the lecturers the author is criticising, and pairs it with a book that does the job better; a pace tuned to difficulty is the thing the passage praises in the first paragraph and withholds here.",
+            "seductive_element": "It is the everyday association of the word, and it lets the option read as a description of careful teaching rather than of poor teaching."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Uniformity imposed across an institution appears nowhere in the passage. The sentence is about one lecturer's relation to one room's notebooks, and the author's complaint is that print could take the whole of it over.",
+            "seductive_element": "The passage elsewhere talks about timetables, contracts and regulations, which primes a reader to expect a point about institutional standardisation."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0106-q3",
+      "type": "author_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.intent",
+        "struct.two_views_adjudication",
+        "arg.qualification"
+      ],
+      "target_mistake": "taking the paragraph the author concedes most warmly, or the account the author grants first, for the position the passage was written to reach",
+      "prediction_target": "The learner should be able to say beforehand: the author is not choosing between the two accounts but assigning each its question, and then measuring how much of the practice the second one covers.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The author's main purpose in the passage is",
+      "options": {
+        "A": "to show that the lecture owes its survival to cost, and that its pedagogical defence is a rationalisation",
+        "B": "to defend the lecture against its critics by naming the one thing it can do that print cannot",
+        "C": "to show that what a university keeps is decided by its timetable rather than by its teachers",
+        "D": "to separate why the lecture survives from why it is praised, and to say how far the praise reaches"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "Each of the last two paragraphs ends by conceding something and then limiting it. Cost is 'plainly right about quantity' and then confined to size; the defence describes something 'real' and is then confined to a minority. A purpose built from two limitations is a purpose of separation.",
+        "correct_reasoning": "The correct option names both moves the passage performs. It divides the question 'why is the form still here' from the question 'why is it admired', gives the first to the economic account and the second to the performance, and then measures the second against the timetable, finding that it fits a minority of hours. The closing advice, that a reformer should say which of the two they mean to change, is the practical consequence of the separation and would be pointless under any reading that picked a winner.",
+        "passage_anchor": "rc-0106-p3",
+        "question_type_note": "Purpose questions are decided by what the author does with the material, not by which claim sounds most important. In an adjudication, look for the sentence that assigns each account its own question.",
+        "reading_habit": "In a passage that sets two explanations side by side, ask what each is allowed to explain. Options that hand everything to one of them are describing a passage with only one paragraph of argument.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "concession_as_position",
+            "why_wrong": "Cost is granted the first and largest concession, which is what makes this tempting, but the author immediately refuses to let it carry the survival of the form, and calls the rival account's description real rather than a rationalisation. A purpose of exposure would have no use for the third paragraph's opening sentence.",
+            "seductive_element": "The economic case is stated with the most detail and the most confidence, and debunking is the shape a reader expects an essay about an unloved institution to have."
+          },
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "The defence is reported, then bounded. The passage says it 'is a description of a minority of lectures' and that the praise 'borrows its warrant from hours that most students never sit in', which is not how a piece written in the defence's service would put it.",
+            "seductive_element": "The most vivid writing in the passage is the sentence about watching a mind meet a difficulty, and vivid writing is easily read as advocacy."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage's subject is one form and the two accounts given of it, and it takes trouble to keep a genuine teaching claim alive inside its verdict. An essay illustrating a general contest between convenience and judgement would not need the third paragraph's concession or its closing advice about reform.",
+            "seductive_element": "Timetables, contracts and buildings are all named early, which makes a reader expect the familiar thesis that institutions serve themselves."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "dislodge",
+      "passage_use": "none has proved harder to dislodge",
+      "meaning_here": "to shift something out of the settled position it occupies",
+      "difficulty": "medium"
+    },
+    {
+      "word": "warrant",
+      "passage_use": "the praise borrows its warrant from hours that most students never sit in",
+      "meaning_here": "the grounds that entitle someone to make a claim",
+      "difficulty": "medium"
+    },
+    {
+      "word": "answerable",
+      "passage_use": "a reform aimed at the cost is not answerable to the defence",
+      "meaning_here": "obliged to meet an objection or to justify itself to it",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "Two explanations of the same stubborn fact are laid out, and the author agrees with parts of both. Decide what each one is allowed to explain before you decide which is right.",
+    "one_sentence_summary": "The lecture survives because it is the cheapest hour an institution can buy and is defended because a few lecturers show a mind at work, so the form is kept for one reason and praised for another, and the praise fits only a minority of the hours actually taught.",
+    "main_idea": "Two accounts of the lecture's durability are usually offered separately. Cost explains how large lectures are but not why they are still held, since rich institutions lecture too. The teaching defence is true but applies to a minority of lecturers. So the reason the form persists and the reason it is admired are different reasons, and a reformer needs to say which one is being addressed.",
+    "simple_explanation": "People complain about lectures constantly, and yet lectures do not go away. Two reasons are usually given.\n\nThe first is money. One teacher and one room can hold three hundred students, so the lecture is the cheapest way to teach an hour, and everything else in a university has been arranged around it: rooms, timetables, contracts, rules about degrees.\n\nThe second is about teaching. In a lecture you can watch somebody actually think: pick up a problem, hesitate, change direction, decide what to leave out. A book only shows you the finished answer and hides all the deciding.\n\nThe author then tests both. The money reason is clearly right about size, because poor departments have the biggest classes. But if money were the whole story, rich universities would stop lecturing, and they have not. So money explains how big a lecture is, not why it still exists.\n\nThe teaching reason passes that test but fails another. It describes something genuine, but only some lecturers do it. Most simply read out finished conclusions, and a book does that better because you can stop and reread a book.\n\nSo the conclusion is a split. The form stays because of cost. It is praised because of a performance that most students never see. If you want to reform lectures, you have to say which of the two you are trying to change, because an argument about cost is not answerable to the teaching defence.",
+    "why_difficult": "The passage agrees with both sides and rejects both sides, which leaves a reader with no obvious winner to carry into the questions. Each of the last two paragraphs opens with a concession warm enough to be mistaken for a verdict, and only the sentence that follows takes the concession back within a stated limit. Readers who file the passage under 'lectures are cheap' or under 'lectures are irreplaceable' will find an option matching each, and both are built to be attractive.",
+    "author_intention": "To stop two arguments that answer different questions from being used as though they were rivals, and to make anyone defending the lecture say how many lectures the defence actually covers.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0106-p1",
+        "role": "Sets out both cases",
+        "note": "The lecture is attacked constantly and never dies. Two reasons are offered: it is the cheapest hour to teach, and it is the only place you watch somebody think in real time."
+      },
+      {
+        "paragraph_id": "rc-0106-p2",
+        "role": "Tests the cost case",
+        "note": "Cost is right about size, since poor departments have the biggest classes. But rich universities still lecture, so cost cannot be why the form survives."
+      },
+      {
+        "paragraph_id": "rc-0106-p3",
+        "role": "Tests and limits the defence",
+        "note": "The teaching claim is real but describes a minority of lecturers. So the form is kept for one reason and praised for another, and a reformer should say which one they are aiming at."
+      }
+    ],
+    "tone_progression": "Even-handed and slightly dry at the start, sharper in the middle when the cost account is caught predicting too much, and coolest at the end, where the defence is granted in full and then measured against what most lecturers actually do.",
+    "key_transitions": [
+      "'But it predicts more than it can deliver.' (paragraph 2) — the cost account is turned from an explanation into a bounded one.",
+      "'The pedagogical defence survives that test and fails a different one.' (paragraph 3) — the pivot that stops the passage from becoming a defence of lecturing.",
+      "'So the defence is true of an exception and is offered on behalf of the rule' — the sentence the whole adjudication was built to reach."
+    ],
+    "misunderstanding": "Hurried readers pick a side the author never picks. Those who enjoy the cost paragraph leave with the impression that the teaching defence has been exposed as a cover story, which the third paragraph explicitly denies by calling the performance real. Those moved by the sentence about watching a mind meet a difficulty leave with the impression that the passage defends lecturing, which the same paragraph denies by confining that description to a minority of hours.",
+    "traps_summary": "Two habits are punished. One is letting a granted account do more work than it was granted: cost is allowed size and is then offered survival. The other is promoting an exception to a rule: the admired lecture is real and rare, and options will quietly describe it as though it were what happens every morning.",
+    "reading_lesson": "When a passage weighs two explanations, do not ask which one the author prefers. Ask what question each one is allowed to answer, and write those two questions down separately. Most wrong options in an adjudication are made by taking a claim the author granted for one question and letting it settle the other, which is invisible unless you have kept the two apart on paper.",
+    "real_world": "The same split runs through arguments about open-plan offices, printed newspapers and hospital ward rounds: the reason a practice survives is usually financial, and the reason it is defended is usually an excellent version of it that few people ever encounter.",
+    "takeaway": "A practice can be kept for one reason and praised for another, and the praise is often a portrait of the exception.",
+    "reflection_question": "Which of the routines you defend would you still defend if you had to describe the ordinary version rather than the best one you have seen?"
+  }
+}

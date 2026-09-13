@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0030",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "More Like Its Period Than the Period",
+    "theme": "why a revived style makes a claim the original could not make, since the first version was never chosen",
+    "estimated_time_sec": 115,
+    "clue_types": ["demonstrative", "lexical_repetition", "stance_continuity"],
+    "primary_trap": "contradicts_neighbour",
+    "reasoning_patterns": ["disc.demonstrative", "disc.rhetorical_pivot", "disc.repeated_noun", "disc.stance_continuity", "disc.cause_effect"],
+    "difficulty_vector": { "reference_density": 5, "transition_ambiguity": 5, "competing_slots": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "bind a demonstrative to the only thing in the paragraph it can name, and reject a slot where the sentence would deny what its neighbour has just asserted",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General reflection on revivalism and reconstruction in design; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "Two things settle the slot: 'That' can only name the over-typical look of a reconstruction, and the sentence after the slot needs features that have been picked out before they can be set together. The premium-tier difficulty is that the sentence reads plausibly beside three of the four candidates.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about the joiner who expressed no preference, where a reader takes 'That' to name the absence of choice and hears a defence of the historical record. Put there, the paragraph asserts in one sentence that nobody chose the style and in the next that the state of affairs is a survey's product, which is the opposite claim about the same thing. The slot beside the revival's claim is the other candidate, and it is refused because 'picked out and set together' would then have nothing above it that has picked anything out.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A style brought back after fifty years is never the style that went away, however exactly the details are matched." },
+      { "n": 2, "text": "The first time nobody chose it: it was simply how things were made, and the joiner who cut that moulding was expressing no preference." },
+      { "n": 3, "text": "A revival is a preference, and the preference shows, which is why a careful reconstruction looks more like its period than the period ever did." },
+      { "n": 4, "text": "So the revival makes a claim the original could not make: that these features, picked out and set together, are worth having again." },
+      { "n": 5, "text": "Nothing in the joinery has to differ for the claim to be there, which is why the long argument about revivals is never settled by anybody looking harder at the work itself." }
+    ]
+  },
+  "missing": {
+    "text": "That is not a failure of research but its product, since a survey can only hand back the features it has already picked out as characteristic.",
+    "position": 3,
+    "function": "the reclassification of the over-typical look as a result rather than a fault, and the picking-out that the next sentence sets together"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"That is not a failure of research but its product, since a survey can only hand back the features it has already picked out as characteristic.\"",
+    "options": {
+      "A": "After sentence 4",
+      "B": "After sentence 1",
+      "C": "After sentence 3",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 4, "B": 1, "C": 3, "D": 2 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence opens on a bare 'That', and the paragraph offers exactly one thing for it to name: a reconstruction looking more like its period than the period ever did. It then says what a survey does, which is pick features out as characteristic. The next sentence speaks of features 'picked out and set together', and nothing above supplies a picking-out unless the missing sentence has done it. So the seat is fixed twice over, once by the demonstrative looking back and once by the participle looking forward, and only one slot satisfies both.",
+    "clue_before": "Sentence 3 ends on an apparent fault — a reconstruction more typical than its period — which a sentence beginning 'That is not a failure' is built to answer.",
+    "clue_after": "Sentence 4 says the features were 'picked out and set together', and only the missing sentence has anything picking features out.",
+    "distractors": [
+      {
+        "option": "D",
+        "trap_type": "contradicts_neighbour",
+        "why_wrong": "The sentence above this slot insists that nobody chose the style, that it was simply how things were made and that the joiner expressed no preference; a sentence calling that state of affairs the product of a survey makes the paragraph assert in consecutive lines both that no one selected anything and that a selection produced it.",
+        "seductive_element": "'That' seems to reach for the nearest striking claim, and the vocabulary of research sits naturally beside a sentence about how things used to be made."
+      },
+      {
+        "option": "B",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here 'That' can only name the exact matching of details in the opening sentence, so the sentence would deny that matching details is a failure, which nobody has suggested; and it defends a survey before the paragraph has any reconstruction, any researcher or any characteristic feature in it.",
+        "seductive_element": "An opening claim followed at once by a qualification of it is a common shape, and the sentence does read as a caution against taking the first line too harshly."
+      },
+      {
+        "option": "A",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the sentence about the claim a revival makes, the talk of surveys and characteristic features reads as a gloss and fits its neighbours comfortably. But 'picked out and set together' in the sentence above would then refer to a picking-out that has not happened, and the apparent fault two sentences earlier is left standing as a criticism the paragraph never answers.",
+        "seductive_element": "The two sentences share the idea of features being identified, so the slot feels like the natural home of the vocabulary."
+      }
+    ],
+    "method": "When a sentence opens on a bare demonstrative, list every candidate it could name and keep only the ones that make the rest of the sentence true. Then read forward for a participle or a definite phrase that reports work already done — picked out, allowed for, agreed — and check that the slot puts the work above it. A seat confirmed from both directions is the seat."
+  },
+  "mentor": {
+    "challenge": "One sentence describes features as 'picked out and set together'. Find where the paragraph picks anything out.",
+    "takeaway": "A demonstrative looks back and a past participle looks back too; a slot that satisfies only one of them is the wrong slot."
+  }
+}

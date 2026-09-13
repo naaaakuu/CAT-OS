@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0034",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Clause That Answers to Nothing",
+    "theme": "why an amendment clause cannot be authorised by the document it governs, and what holds it in place instead",
+    "estimated_time_sec": 105,
+    "clue_types": ["demonstrative", "connective_explicit", "article_given_new"],
+    "primary_trap": "new_topic_introduced",
+    "reasoning_patterns": ["disc.demonstrative", "disc.problem_then_solution", "disc.cause_effect", "disc.concession"],
+    "difficulty_vector": { "reference_density": 5, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "use a small word like 'either' as a counter of previous failures, and place an elimination before the sentence that assumes the field is clear",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General constitutional theory on amendment rules and self-reference; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "'The moment' needs the founding act named, and 'either' needs a first failure already recorded; the two together admit one slot. The tempting error is the early one, where the regress arrives before anybody has appealed to the founders and is then never taken up.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the opening sentence, where the regress about founders needing a rule to adopt a rule reads as the natural next thought. Placed there it brings in an unwritten earlier rule that no later sentence touches, and the paragraph goes on to discuss the document and the founding act as though the point had never been made. The slot after the sentence about answering to nothing is the second candidate, and it is refused because 'The moment' would have no moment above it and 'either' would have only one failure to be the second of.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A constitution tells a legislature what it may not do, and the amendment clause tells everybody how that instruction may itself be altered." },
+      { "n": 2, "text": "Every other article is answerable to the amendment clause, and the clause is answerable to nothing inside the document." },
+      { "n": 3, "text": "Defenders say the founding act supplies the missing authority, which moves the problem out of the text altogether and into a moment nobody now alive attended." },
+      { "n": 4, "text": "What holds the clause in place is that officials go on treating it as binding, which is a fact about present conduct rather than about origins." },
+      { "n": 5, "text": "A settlement resting on conduct is not thereby weak, though it is vulnerable in a different way from one resting on a text." }
+    ]
+  },
+  "missing": {
+    "text": "The moment will not carry it either, since the founders needed some rule to adopt the rule, and that earlier rule is nowhere written.",
+    "position": 3,
+    "function": "the second elimination, which clears the field the next sentence's cleft assumes has been cleared"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The moment will not carry it either, since the founders needed some rule to adopt the rule, and that earlier rule is nowhere written.\"",
+    "options": {
+      "A": "After sentence 5",
+      "B": "After sentence 1",
+      "C": "After sentence 3",
+      "D": "After sentence 2"
+    },
+    "option_positions": { "A": 5, "B": 1, "C": 3, "D": 2 },
+    "correct": "C"
+  },
+  "explanation": {
+    "correct_reasoning": "Two small words fix the seat. 'The moment' is definite and needs a moment already named, which happens once, where defenders relocate the authority into the founding act. 'Either' counts: it says this is the second thing that will not carry the clause, so a first failure must already stand, and the paragraph records one, the document that answers to nothing inside itself. The sentence that follows then begins 'What holds the clause in place is', a construction that presupposes the other candidates have been dealt with. Only the slot after the founders' defence satisfies the reference, the count and the cleft at once.",
+    "clue_before": "Sentence 3 puts the authority into a founding moment, which is the only antecedent in the paragraph for 'The moment'.",
+    "clue_after": "Sentence 4 says what does hold the clause in place, and a cleft of that form assumes the rival explanations have already been cleared away.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "new_topic_introduced",
+        "why_wrong": "Here the sentence brings in the founders and an unwritten earlier rule, and nothing afterwards picks either up: the paragraph proceeds to discuss the document, then the founding act, then present conduct, so the regress is raised and abandoned. 'Either' also has no earlier failure to be second to, since nothing has yet failed.",
+        "seductive_element": "A clause that says how it may itself be altered invites the regress immediately, and raising it early feels like the sharpest possible opening move."
+      },
+      {
+        "option": "D",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Straight after the sentence about answering to nothing, 'The moment' has no moment to name, since the founding act is introduced afterwards; the reader is left attaching it to the act of adopting the constitution as a guess, and the word 'either' is counting a failure the paragraph has only half recorded.",
+        "seductive_element": "The sentence above ends on the clause's lack of internal authority, which is precisely the difficulty this sentence extends."
+      },
+      {
+        "option": "A",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The elimination belongs to the argument, but at the end it arrives after the paragraph has already named what does hold the clause in place and qualified that answer; the cleft two sentences above would then be clearing a field with a candidate still standing in it.",
+        "seductive_element": "The regress is the most forceful point in the paragraph, and forceful points are often saved for last."
+      }
+    ],
+    "method": "Read the counting words. 'Either', 'also', 'again', 'the other' all report that something has happened before, and the slot has to have it above. Then find the sentence built as 'What does X is…': that shape announces that the rivals have been disposed of, so every elimination must sit above it."
+  },
+  "mentor": {
+    "challenge": "The sentence says the moment will not carry it 'either'. Find the first thing that failed to carry it, and the moment that is the second.",
+    "takeaway": "Small words count. 'Either' is a claim that something has already failed; check the paragraph contains the first failure."
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0043",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "Whose Period Is It",
+    "theme": "why translations are remade every generation although the original they render is left alone",
+    "estimated_time_sec": 100,
+    "clue_types": ["demonstrative", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "summary_where_development_needed",
+    "reasoning_patterns": ["disc.demonstrative", "disc.contrast", "disc.cause_effect", "disc.problem_then_solution"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 4, "competing_slots": 4, "concept_abstractness": 4, "syntactic_complexity": 4 },
+    "learning_objective": "seat a definition above the demonstrative that depends on it, and refuse a recap where the paragraph still owes an argument",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General literary theory on retranslation and the dating of a rendering; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "'Those assumptions' in the second visible sentence has no antecedent anywhere in the paragraph, which fixes the slot; the rival is the seat one place lower, where the sentence recaps at the exact point the paragraph turns to refute the usual explanation.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot after the sentence about the next generation, where the general formulation reads as the summing-up of what has been shown. It is a recap where the paragraph still owes its central piece of work, the refusal of the explanation from language change; and it leaves 'Those assumptions' pointing at nothing, since no assumptions have been named above it. The slot beside the sentence about what dates is the other candidate, and there the missing sentence says again what that sentence has just said more precisely.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "A novel written in 1890 is still read in its own words, and the translation made in 1890 is not." },
+      { "n": 2, "text": "Those assumptions are invisible to the translator and glaring to the next generation, which is why retranslation is a trade and restoration of the original is not." },
+      { "n": 3, "text": "The explanation usually offered is a different one and explains too little: language changes, but the source language changes as fast and the source text is left alone." },
+      { "n": 4, "text": "What dates is the choice, made sentence by sentence, about what may be said outright to a reader who cannot be asked." },
+      { "n": 5, "text": "A translation therefore has a period in a way a novel does not, and its period is the translator's rather than the author's." }
+    ]
+  },
+  "missing": {
+    "text": "The difference is that a translation is a reading, and a reading carries the assumptions of the year it was made in.",
+    "position": 1,
+    "function": "the account of the asymmetry, naming the assumptions the next sentence points back at"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"The difference is that a translation is a reading, and a reading carries the assumptions of the year it was made in.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 5",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 5, "D": 4 },
+    "correct": "A"
+  },
+  "explanation": {
+    "correct_reasoning": "The second visible sentence opens 'Those assumptions', a demonstrative that cannot invent its own antecedent, and no sentence in the paragraph names any assumptions. The missing sentence names them, so it must sit directly above that line. The opening sentence also states a bare asymmetry — the novel read in its own words, the translation not — and offers no account of it, which is precisely what a sentence beginning 'The difference is that' supplies. One slot answers the debt behind it and feeds the demonstrative in front of it.",
+    "clue_before": "Sentence 1 sets the asymmetry down without explaining it, and 'The difference is that' is the form an explanation of an asymmetry takes.",
+    "clue_after": "Sentence 2 begins 'Those assumptions', and nothing above it in the paragraph has mentioned an assumption of any kind.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "summary_where_development_needed",
+        "why_wrong": "Here the sentence reads as a summing-up of what has been established, but the paragraph is still building: the next thing it does is refuse the usual explanation from language change, which is the argument the case depends on. And the sentence above the slot would still be opening on assumptions the reader has never been given.",
+        "seductive_element": "A general formulation after two specific claims is a natural rhythm, and the sentence does read as the principle behind them."
+      },
+      {
+        "option": "D",
+        "trap_type": "redundant_restatement",
+        "why_wrong": "The sentence above this slot has already said exactly what dates, and said it more precisely, naming the sentence-by-sentence choice about what may be stated outright. A line saying that a reading carries the assumptions of its year adds nothing to it, and the demonstrative three sentences above is left stranded throughout.",
+        "seductive_element": "The two sentences make the same point at different levels of abstraction, so one looks like the gloss on the other."
+      },
+      {
+        "option": "C",
+        "trap_type": "right_idea_wrong_position",
+        "why_wrong": "The sentence belongs to the paragraph and is wanted at the top. Placed at the end it repeats the closing sentence, which has already assigned the period to the translator, so the argument finishes where it began; and every sentence above it has been running with an unexplained demonstrative.",
+        "seductive_element": "It is the clearest statement of the thesis, and a clear statement of the thesis is a tempting last line."
+      }
+    ],
+    "method": "Find the demonstrative that has no antecedent — those assumptions, that difference, such cases — and put the sentence that creates it immediately above. Then check the other end: a paragraph that opens by stating a puzzle without explaining it is owed the explanation at once, and a recap offered before the central argument has been made is not the next step but a pause."
+  },
+  "mentor": {
+    "challenge": "A visible sentence begins 'Those assumptions'. Nothing you can see mentions an assumption. That is the gap.",
+    "takeaway": "A demonstrative cannot make its own antecedent. Find the orphan, and place the parent directly above it."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "id": "sp-0038",
+    "type": "sp",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "anthropology",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "What These People Do",
+    "theme": "the convention of describing a people in the timeless present, and the correction a returning fieldworker could not state",
+    "estimated_time_sec": 110,
+    "clue_types": ["tense_continuity", "lexical_repetition", "connective_implicit"],
+    "primary_trap": "tense_break",
+    "reasoning_patterns": ["disc.tense_continuity", "disc.problem_then_solution", "disc.cause_effect", "disc.example_after_claim"],
+    "difficulty_vector": { "reference_density": 4, "transition_ambiguity": 5, "competing_slots": 5, "concept_abstractness": 5, "syntactic_complexity": 4 },
+    "learning_objective": "hold a paragraph's time frame in view, and place a sentence by the two things a proposed repair has to answer to",
+    "source": { "publication": "original", "url": null, "author": null, "date_accessed": "2026-09-13", "usage_note": "Original composition in CAT register for CAT OS. General discussion of ethnographic writing conventions; no specific text adapted. Personal study only." },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-sp-002",
+    "reviewer_notes": "The paragraph demonstrates the convention in the present tense before turning to its history in the past, and one candidate slot falls inside the demonstration. The forward clue is 'The repair was not a new tense but a date', which needs a fault already named and already identified as a fault of tense.",
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the slot immediately after the present-tense illustration, where the correction seems overdue and the contrast with the fishing and the seclusion is at its sharpest. Put there it breaks the time frame the paragraph has deliberately built, since the illustration is the convention being performed and the past tense arrives before the convention has been named or defended; 'the earlier book' would also have no later moment to be earlier than. The slot beside the defence is the other candidate, and it seats the objection above the removal of the year that the objection depends on.",
+      "blind_solve": null
+    }
+  },
+  "paragraph": {
+    "sentences": [
+      { "n": 1, "text": "Monographs of a certain period describe their subjects in the present tense." },
+      { "n": 2, "text": "The men fish in the lagoon, the widow returns to her brother's compound, the initiate is secluded for a season." },
+      { "n": 3, "text": "The convention was defended as a way of describing a system rather than an afternoon, and it did make an account read like an anatomy rather than a diary." },
+      { "n": 4, "text": "It also removed the year, so that a practice observed once in 1928 became simply what these people do." },
+      { "n": 5, "text": "The repair was not a new tense but a date, since a sentence that says when is a sentence that can be contradicted." },
+      { "n": 6, "text": "What the convention had quietly bought was immunity from the only evidence that could have corrected it." }
+    ]
+  },
+  "missing": {
+    "text": "Fieldworkers who returned found villages trading with a mining town for a generation, and the earlier book offered no tense in which a practice could stop.",
+    "position": 4,
+    "function": "the correction that the removal of the year makes unstatable, and the fault the proposed repair answers"
+  },
+  "question": {
+    "stem": "Where does the following sentence best fit in the paragraph? \"Fieldworkers who returned found villages trading with a mining town for a generation, and the earlier book offered no tense in which a practice could stop.\"",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 4"
+    },
+    "option_positions": { "A": 1, "B": 2, "C": 3, "D": 4 },
+    "correct": "D"
+  },
+  "explanation": {
+    "correct_reasoning": "The sentence after the slot calls something a repair and says the repair was a date rather than a tense, which requires two things above it: a fault, and the fault already diagnosed as one of tense. The missing sentence supplies both, and no other sentence supplies either. Behind the slot, the removal of the year has just turned one observation in 1928 into what these people do, which is exactly the situation a returning fieldworker walks into. The paragraph also runs present tense for the demonstration and past for the history, and the sentence is in the past, which rules out the slots inside the demonstration.",
+    "clue_before": "Sentence 4 removes the year and freezes one observation into a permanent custom, which is the condition that makes the returning fieldworker's difficulty possible.",
+    "clue_after": "Sentence 5 says the repair was not a new tense but a date, and a repair needs a fault, stated above it and stated as a fault of tense.",
+    "distractors": [
+      {
+        "option": "B",
+        "trap_type": "tense_break",
+        "why_wrong": "The two sentences around this slot are the convention being performed: men fish, a widow returns, an initiate is secluded, all in the timeless present the paragraph is describing. A past-tense report of fieldworkers who returned cuts the demonstration in half, and it speaks of 'the earlier book' before any book has been dated or any later visit established.",
+        "seductive_element": "The present-tense illustration is exactly what the sentence exposes, so the correction feels most forceful pressed up against it."
+      },
+      {
+        "option": "C",
+        "trap_type": "local_fit_global_break",
+        "why_wrong": "Beside the defence of the convention the objection reads as the rebuttal and the two sit together naturally. But the mechanism the fieldworkers run into, the removal of the year, is stated in the sentence below, so the objection precedes its own explanation, and that sentence then adds a fresh charge after the case has been made.",
+        "seductive_element": "A defence answered immediately by contrary evidence is the most familiar shape in argumentative prose."
+      },
+      {
+        "option": "A",
+        "trap_type": "wrong_reference_target",
+        "why_wrong": "Here 'the earlier book' has neither a book nor a later moment to be earlier than, since only a genre of monograph has been mentioned; and the sentence separates the announcement of the convention from the three clauses that demonstrate it, leaving those clauses to read as what the fieldworkers found.",
+        "seductive_element": "A claim about a convention followed at once by the trouble it causes is a natural order, and the sentence does name the convention's central defect."
+      }
+    ],
+    "method": "Watch the tense as a boundary, not as decoration: where a paragraph performs something in one tense and discusses it in another, a slot inside the performance is closed to a sentence in the other. Then find the sentence that proposes a repair and ask what fault it repairs; the fault has to be above it, and described in the same terms the repair uses."
+  },
+  "mentor": {
+    "challenge": "One sentence calls something a repair and says it was a date rather than a tense. Find the fault it repairs, and check the paragraph has called that fault a matter of tense.",
+    "takeaway": "A repair names its fault. If the fault is not above the repair, the slot is wrong."
+  }
+}
