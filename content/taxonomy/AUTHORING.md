@@ -90,15 +90,32 @@ A reader was given seventeen passages from this corpus **with the passage text d
 
 The cause is structural, and it is the deepest defect this corpus has had. Distractors are written per question to be wrong about the passage; keys are written to be right about it. So across one passage's questions the keys form a single mutually consistent reading and the distractors form none. Find the consistent column and you have every answer, having read nothing.
 
-### What does not fix it
+### What does not fix it — two constructions, both measured, both failed
 
-Carrying **one** coherent rival reading through every question — the obvious repair — was piloted on ten passages and rewrote sixty-five per cent of every option set. Text-free solving fell from 43/43 to 42/43. It fails for a reason worth knowing: a single rival carried through every question becomes *the most frequent idea in the pool*, and the most frequent idea is identifiably the rejected one. Subtraction replaces coherence. Two readers found this independently.
+**One rival carried through every question.** Piloted on ten passages; sixty-five per cent of every option set rewritten. Text-free solving went from 43/43 to 42/43. It fails because a single rival becomes the most frequent idea in the pool, and the most frequent idea is identifiably the rejected one. Subtraction replaces coherence.
 
-### What does fix it
+**Symmetric columns — four complete readings, each owning one option in every question.** This was the pilot's own recommendation, drawn from the one passage that had resisted every reader. A batch of ten was then *built* that way from scratch. It scored **41 of 42 text-free**, no better than repair and no better than the corpus baseline.
 
-**Symmetric columns.** Build three complete rival readings of the passage, each owning one option in **every** question, including the strengthen and weaken questions. All four columns then appear equally often, so neither coherence nor frequency selects anything, and only the text decides. In the pilot exactly one passage had this shape — by accident of its question mix — and every reader named it as the one where their method failed.
+The reader explained why, and the explanation kills the idea: *"the options are laid out one thesis-family per option, and the same four families recur across every question. Once you commit to a family in any one question, every other question in that passage collapses to a single survivor."* One six-question passage was answered by one determination. Two questions in another passage were the same question twice, in different words. The columns are not a defence — they are the elimination mechanism, made tidy.
 
-It costs more than distractor repair because it is a **question-design** decision: it works only where questions are argument-level, and it is defeated by stacking global questions (main idea, purpose, title) on one passage, since a global key *is* a compressed abstract of the passage by definition of the type.
+So the passage that resisted in the pilot resisted for some other reason, and one passage was too small a sample to tell which.
+
+### The current hypothesis, which is untested
+
+The same reader's prescription, recorded here as a hypothesis and not as a rule, because nothing in this section has survived measurement yet:
+
+> Stop giving each distractor a thesis-family identity that persists across the passage's questions. Distractors should be **locally wrong for local reasons** — misattributed scope, right idea wrong paragraph, true but not stated — not members of a rival reading a candidate can rule out wholesale.
+
+Whoever tries it next: measure it the same way, and expect it to fail too. Three things are worth more than another prescription:
+
+- **Do not put the passage's finding in a stem.** One stem read "why most of his changes made no difference" and killed an entire option family across three questions before any option was read.
+- **EXCEPT and NOT questions are confessions.** Three of their four options are the author's own claims, stated as true. One such option eliminated a whole family from four other questions in its passage. Use them rarely, and never beside a strengthen question.
+- **A figure-gloss question can be answered from English alone** — "strike a set", "toll gate", "arithmetic versus cast" — and if the rest of the set leans on that figure, one gloss delivers five questions.
+- **Vary the key's register.** In the column-built batch the main-idea key was identifiable by punctuation: it was the option with the semicolon or the em-dash.
+
+### What is actually established
+
+Only this: the option pool of a multi-question passage encodes its passage, and none of the constructions tried so far has stopped it. The cheap fixes below are real and confirmed dead by four readers — apply them always — but they address surface, not this.
 
 ### The types that leak structurally, and what to do
 
