@@ -52,7 +52,7 @@ export async function renderSession(outlet, { storage }, params) {
       <section class="screen">
         <h1>Can't open this passage</h1>
         <div class="card"><p>${escapeHTML(err.message)}</p>
-        <p class="muted"><a href="#/world/place/reading-room">Back to the Reading Room</a></p></div>
+        <p class="muted"><a href="#/world/place/reading-room">Back to the Reading House</a></p></div>
       </section>`;
     return;
   }
@@ -73,7 +73,7 @@ export async function renderSession(outlet, { storage }, params) {
     <section class="run">
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/reading-room" aria-label="Leave">×</a>
-        <div class="run__where"><div class="run__place">The Reading Room${night ? ' · Night Reading' : ''}</div><div class="run__what">${escapeHTML(displayTitle(passage))}</div></div>
+        <div class="run__where"><div class="run__place">The Reading House${night ? ' · Night Reading' : ''}</div><div class="run__what">${escapeHTML(displayTitle(passage))}</div></div>
       </div>
       <div class="run__body">
         <div class="brief">
@@ -134,7 +134,7 @@ export async function renderSession(outlet, { storage }, params) {
     const barHTML = (what) => `
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/reading-room" aria-label="Leave the passage">×</a>
-        <div class="run__where"><div class="run__place">The Reading Room</div><div class="run__count" id="what">${what}</div></div>
+        <div class="run__where"><div class="run__place">The Reading House</div><div class="run__count" id="what">${what}</div></div>
         <div class="run__pace"><span class="run__clock" id="clock">${formatClock(targetMs)}</span><div class="run__ring" id="ring" aria-hidden="true"></div></div>
       </div>`;
     const tickClock = () => {
@@ -333,7 +333,7 @@ export async function renderSession(outlet, { storage }, params) {
       cue('mentor');
       renderResult(outlet, {
         region: 'reading-room',
-        eyebrow: `The Reading Room · ${passage.passage.title}`,
+        eyebrow: `The Reading House · ${passage.passage.title}`,
         title: res.flawless ? 'Flawless' : res.stars === 3 ? 'CAT pace' : 'Passage complete',
         result: res,
         facts: [
@@ -348,9 +348,9 @@ export async function renderSession(outlet, { storage }, params) {
         unlocked,
         extraHTML: mentorHTML + reviewHTML,
         actions: [
-          { label: 'Understand this passage', href: `#/rc/mentor/${passage.meta.id}`, primary: true },
-          { label: 'Back to the Reading Room', href: '#/world/place/reading-room' },
-          { label: 'Back to the valley', href: '#/world' },
+          { label: 'Back to the village', href: '#/world', primary: true },
+          { label: 'Understand this passage', href: `#/rc/mentor/${passage.meta.id}` },
+          { label: 'Back to the Reading House', href: '#/world/place/reading-room' },
         ],
       });
     }

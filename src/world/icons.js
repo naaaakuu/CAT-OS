@@ -1,77 +1,55 @@
 /**
  * icons.js — the interface's icon language.
  *
- * Every icon in CAT OS is a pixel mark drawn by the same hand as the
- * valley (see `mark` in engine/sprites.js). Nothing here is an emoji and
- * nothing is a stroke glyph from an icon set: a system icon inside a
- * hand-painted world is the one thing that makes the whole product look
- * like a web page with a game stuck on top.
- *
- * `icon(kind)` gives an <img> you can put anywhere. It is a data URL, so
- * it needs no network, no build step and no sprite sheet.
+ * Every icon in CAT OS is drawn by the same hand as the village (see
+ * village/art.js). Nothing here is an emoji and nothing is a stroke glyph
+ * from an icon set: a system icon inside a hand-painted world is the one
+ * thing that makes the whole product look like a web page with a game
+ * stuck on top.
  */
 
-import { spriteURL, sprite as spriteMeta } from './engine/sprites.js';
+import { artIMG, artURL } from '../village/art.js';
+import { PLACE_BUILDING, buildingById } from '../village/defs.js';
+import { thing } from './economy.js';
 
-/** Which mark stands for which place. */
-export const PLACE_MARK = Object.freeze({
-  rootwood: 'tree',
-  meadow: 'flower',
-  pond: 'koi',
-  thicket: 'lantern',
-  'reading-room': 'book',
-  terraces: 'vine',
-  quarter: 'workshop',
-  loom: 'workshop',
-  table: 'workshop',
-  bench: 'workshop',
-  hearth: 'cottage',
-  wilds: 'road',
+/** Older mark names, mapped to the village's glyphs. */
+const GLYPH = Object.freeze({
+  tree: 'root', flower: 'bloom', koi: 'bloom', lantern: 'bloom', book: 'page', vine: 'root', workshop: 'thread', cottage: 'house',
+  road: 'road', sprout: 'sprout', star: 'star', gear: 'gear', amber: 'bloom', ink: 'page', thread: 'thread', ember: 'star',
+  valley: 'house', lock: 'lock', check: 'check', hammer: 'hammer', coin: 'coin', page: 'page', bloom: 'bloom', root: 'root',
+  scroll: 'scroll', board: 'board', heart: 'heart', bell: 'bell', clock: 'clock', cat: 'cat', arrow: 'arrow',
 });
 
-/** Which mark stands for which craft. */
-export const CRAFT_MARK = Object.freeze({ amber: 'amber', ink: 'ink', thread: 'thread', ember: 'ember' });
-
-/**
- * One icon, as markup.
- * @param {string} kind  a mark kind (see `mark` in sprites.js)
- * @param {object} [opts] class name and rendered size in px
- */
+/** One icon, as markup. */
 export function icon(kind, { className = '', size = 18, alt = '' } = {}) {
-  let src = '';
-  try { src = spriteURL('mark', { kind }, 4); } catch { return ''; }
-  return `<img class="ico ${className}" src="${src}" width="${size}" height="${size}" alt="${alt}"${alt ? '' : ' aria-hidden="true"'} draggable="false">`;
+  try { return artIMG('icon', { glyph: GLYPH[kind] ?? kind, size: 20 }, { size, className, alt }); } catch { return ''; }
 }
 
-/** The icon for a place. */
-export function placeIcon(slug, opts) { return icon(PLACE_MARK[slug] ?? 'valley', opts); }
+/** The icon for a place: its building's good, or the building itself. */
+export function placeIcon(slug, opts = {}) {
+  const b = buildingById(PLACE_BUILDING[slug] ?? slug);
+  if (b?.good) return icon(b.good, opts);
+  if (b?.id === 'hearth') return icon('house', opts);
+  if (b?.id === 'road') return icon('road', opts);
+  if (b?.id === 'market') return icon('board', opts);
+  return icon('star', opts);
+}
 
-/** The icon for a craft. */
-export function craftIcon(key, opts) { return icon(CRAFT_MARK[key] ?? 'amber', opts); }
+/** The icon for a good or coins. */
+export function craftIcon(key, opts = {}) { return icon(thing(key)?.glyph ?? 'star', opts); }
+export const goodIcon = craftIcon;
 
 /** A raw data URL, for CSS backgrounds and canvas draws. */
 export function iconURL(kind, scale = 4) {
-  try { return spriteURL('mark', { kind }, scale); } catch { return ''; }
+  try { return artURL('icon', { glyph: GLYPH[kind] ?? kind, size: 20 }, scale); } catch { return ''; }
 }
 
-/**
- * A sprite scaled to sit inside a box of `box` CSS pixels, nearest
- * neighbour, whole numbers only — a building drawn at 2.37× is mush, and
- * mush is what makes pixel art look like a stock illustration.
- */
-export function fitSprite(name, params = {}, box = 64) {
-  let s;
-  try { s = spriteMeta(name, params); } catch { return ''; }
-  const b = typeof box === 'number' ? { w: box * 2.6, h: box } : box;
-  const scale = Math.max(1, Math.min(Math.floor(b.w / s.w), Math.floor(b.h / s.h)));
-  let src = '';
-  try { src = spriteURL(name, params, scale); } catch { return ''; }
-  return `<img class="ico ico--art" src="${src}" width="${s.w * scale}" height="${s.h * scale}" alt="" aria-hidden="true" draggable="false">`;
+/** The picture of a building at a level, sized to a CSS box. */
+export function buildingArt(id, level = 1, box = 64) {
+  const b = buildingById(id);
+  if (!b?.art) return icon('road', { size: Math.round(box * 0.6) });
+  return artIMG('building', { id: b.art, level: Math.max(1, level) }, { size: box, className: 'ico--art' });
 }
 
-/** The picture of a work, for the Workshop. */
-export function workArt(work, box = 64) {
-  const a = work?.art;
-  if (!a) return icon('star', { size: 28 });
-  return fitSprite(a[0], a[1] ?? {}, box);
-}
+/** Kept for older call sites: a work's picture is its building's picture. */
+export function workArt(work, box = 64) { return buildingArt(work?.building ?? work?.id ?? 'hearth', work?.level ?? 1, box); }

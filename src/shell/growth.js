@@ -35,7 +35,7 @@ import { listLessons, listReflections } from '../core/mentor/records.js';
 import { escapeHTML, formatDate } from '../core/utils/format.js';
 import { loadWorld } from '../world/state.js';
 import { readingWeakness, typeName, weaknessLine } from '../world/curator.js';
-import { sprite } from '../world/engine/sprites.js';
+import { art } from '../village/art.js';
 import { loadValley, valleyName } from '../world/companion.js';
 import { craft } from '../world/economy.js';
 import { collections, closest, tally, GROUPS } from '../world/collections.js';
@@ -273,7 +273,7 @@ function measure(s, rcW) {
       advice: weakType
         ? `${weakType} questions are the ones getting away. The next passage the curator picks will be heavy on them.`
         : 'More passages, against the clock. Reading is the one ability that only grows by reading.',
-      href: '#/world/place/reading-room', cta: 'To the Reading Room',
+      href: '#/world/place/reading-room', cta: 'To the Reading House',
     },
     {
       key: 'vocab', name: 'Vocabulary', craft: 'amber', p: vocab, tier: tierFor(vocab), stars: starsFor(vocab),
@@ -347,7 +347,8 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
         ['Root families met', `${s.rootwood.metCount} / ${s.rootwood.total}`],
         ['Word parts climbed', `${s.terraces.done} / ${s.terraces.total}`],
         ['Quarter solved', `${s.loom.solved + s.table.solved + s.bench.solved} / ${s.loom.total + s.table.total + s.bench.total}`],
-        ['Works built', `${s.builds.length} / ${s.works.length}`],
+        ['Buildings standing', `${s.village.buildings.filter((b) => b.built).length} / ${s.village.buildings.length}`],
+        ['Orders delivered', String(s.village.ordersDone)],
         ['Days practised', String(s.hearth.activeDays)],
         ['Longest run', `${s.hearth.streak.best} days`],
       ].map(([k, v]) => `<div class="nums__row nums__row--plain"><span>${escapeHTML(k)}</span><b>${escapeHTML(v)}</b></div>`).join('')}
@@ -392,13 +393,13 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
 /* The trees                                                           */
 /* ------------------------------------------------------------------ */
 
-function paintTree(cv, stage, scale = 3) {
+function paintTree(cv, stage) {
   if (!cv) return;
   const ctx = cv.getContext('2d');
-  ctx.imageSmoothingEnabled = false;
-  const s = sprite('tree', { stage, seed: `reach:${stage}`, season: 'summer' });
-  const z = Math.max(1, Math.min(scale, Math.floor(cv.height / s.h), Math.floor(cv.width / s.w)));
-  const w = s.w * z, h = s.h * z;
+  const size = { seed: 0.45, sprout: 0.55, young: 0.7, in_leaf: 0.85, mature: 1, ancient: 1.15 }[stage] ?? 0.8;
+  const s = art('tree', { kind: 'round', size, seed: `reach:${stage}`, tone: stage === 'ancient' ? 1 : 0 }, 3);
+  const z = Math.min(1, (cv.height - 6) / (s.h * 3), (cv.width - 4) / (s.w * 3));
+  const w = s.w * 3 * z, h = s.h * 3 * z;
   ctx.clearRect(0, 0, cv.width, cv.height);
   // Bottom-aligned and centred: four trees on one ground line, so their
   // heights are the comparison the screen is making.

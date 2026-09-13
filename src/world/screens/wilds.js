@@ -8,10 +8,11 @@
  */
 
 import { regionBySlug } from '../regions.js';
-import { WorldRenderer } from '../engine/canvas.js';
-import { buildBackdropScene } from '../engine/map.js';
+import { VillageRenderer as WorldRenderer } from '../../village/renderer.js';
+import { buildBackdropScene } from '../../village/scene.js';
+import { WAYMARKS } from '../../village/defs.js';
 import { listFields, loadField, loadLedger, buildQuestion, buildContextQuestion, LexRound, applyAnswer, loadContext } from '../lexicon.js';
-import { roundStars, EARN, WAYMARKS } from '../economy.js';
+import { roundStars, EARN } from '../economy.js';
 import { loadWorld, loadWorldRecords, deriveWorldState, newlyBuildable, loadWorldContent } from '../state.js';
 import { icon } from '../icons.js';
 import { newlyFinished } from '../collections.js';
@@ -79,7 +80,7 @@ export async function renderWilds(outlet, { storage }) {
 
   outlet.innerHTML = `
     <section class="place place--page place--wilds" aria-label="The Wilds">
-      <div class="place__hero place__hero--short"><canvas id="wilds-hero"></canvas><a class="place__back" href="#/world" id="back">← The valley</a>
+      <div class="place__hero place__hero--short"><canvas id="wilds-hero"></canvas><a class="place__back" href="#/world" id="back">← The village</a>
         <div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:40px 20px 0"><div><div style="font-family:var(--g-display);font-size:40px;letter-spacing:0.12em;opacity:0.95">THE WILDS</div><div style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.7;margin-top:6px">Week ${escapeHTML(week.slice(-2))} · the Gauntlet</div></div></div>
       </div>
       <div class="place__body">
@@ -109,7 +110,8 @@ export async function renderWilds(outlet, { storage }) {
     let st = null;
     try { st = (await loadWorld(storage)).state; } catch { return; }
     if (!slot.isConnected) return;
-    const built = st.built?.waymarks ?? 0;
+    // The road is posted one waymark per Gauntlet run at three stars, and lit by the Road Out's second level.
+    const built = Math.min(WAYMARKS.length, (st.wilds?.stars >= 3 ? 1 : 0) + Math.floor((st.wilds?.runs ?? 0) / 3) + Math.max(0, (st.village?.levels?.get('road') ?? 0) - 1));
     slot.innerHTML = `
       <h2>The road out</h2>
       <p class="sub">${built
@@ -126,7 +128,7 @@ export async function renderWilds(outlet, { storage }) {
           </div>`).join('')}
       </div>
       <p class="sub">${built < WAYMARKS.length
-        ? `The next waymark asks for <b>${6 + built * 5} passages at three stars</b>, and is built at the Hearth.`
+        ? `The road posts itself further with every third run, and is lit from the village map.`
         : 'Every waymark is posted. The road keeps going.'}</p>`;
   })();
 
@@ -137,7 +139,7 @@ export async function renderWilds(outlet, { storage }) {
     const canvas = outlet.querySelector('#wilds-hero');
     if (canvas?.isConnected) {
       const scene = buildBackdropScene('wilds', w.state, w.state.atmo);
-      heroR = new WorldRenderer(canvas, scene, { worldW: scene.W, worldH: scene.H, fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
+      heroR = new WorldRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
       heroR.lookAt(scene.W / 2, 116, { animate: false });
       heroR.start();
       const off = () => { heroR?.destroy(); window.removeEventListener('hashchange', off); };
@@ -268,7 +270,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>`,
       actions: [
         { label: 'Run again', href: '#/world/place/wilds', primary: true, onClick: () => { location.hash = '#/world/place/wilds'; setTimeout(() => document.querySelector('#run')?.click(), 400); } },
-        { label: 'Back to the valley', href: '#/world' },
+        { label: 'Back to the village', href: '#/world' },
       ],
     });
   }

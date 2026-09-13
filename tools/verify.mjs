@@ -1770,7 +1770,6 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
   const lexicon = await mod('src/world/lexicon.js');
   const state = await mod('src/world/state.js');
   const worldAudio = await mod('src/world/audio.js');
-  const sprites = await mod('src/world/engine/sprites.js');
   const palette = await mod('src/world/engine/palette.js');
 
   /* ---- Regions: unique, on the map, reachable, each with its words ---- */
@@ -1795,7 +1794,7 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     if (problems.length === b0) ok(`${regions.REGIONS.length} places, every anchor inside its own hit box, ${regions.LANTERN_SPOTS.length} lantern spots`);
   }
 
-  /* ---- Economy: stars, ink, quests, upgrades ---- */
+  /* ---- Economy: stars, goods, orders, the village's worth ---- */
   {
     const b0 = problems.length;
     const rc = (correct, total, min, target) => economy.rcStars({ score: { total, correct }, duration_ms: min * 60000 }, target);
@@ -1810,78 +1809,53 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     if (economy.roundStars({ correct: 11, total: 12, avgMs: 9000, targetMs: 7000 }).stars !== 2) bad('world economy: a 92% round over pace must be 2 stars');
     if (economy.roundStars({ correct: 6, total: 12, avgMs: 5000 }).stars !== 1) bad('world economy: half right is 1 star');
     if (economy.verbalStars({ score: { total: 2, correct: 2, attempted: 2 }, duration_ms: 100000 }, 150).stars !== 3) bad('world economy: a clean verbal set in time must be 3 stars');
-    /* The four crafts: each place makes one kind, embers only at pace. */
-    if (economy.CRAFT_KEYS.join() !== 'amber,ink,thread,ember') bad('world economy: the four crafts are amber, ink, thread, ember');
-    for (let s = 0; s <= 3; s += 1) {
-      if (!(economy.EARN.rc(s, 4).ink > 0)) bad('world economy: a finished passage must make Ink');
-      if (!(economy.EARN.round(s, 8).amber > 0)) bad('world economy: a finished round must make Amber');
-      if (!(economy.EARN.verbal(s, 1).thread > 0)) bad('world economy: a finished verbal set must make Thread');
-      if (economy.EARN.rc(s, 4).amber !== 0) bad('world economy: reading must never make Amber');
-      if (economy.EARN.round(s, 8).ink !== 0) bad('world economy: a word round must never make Ink');
-      if (economy.EARN.verbal(s, 1).amber !== 0) bad('world economy: the Quarter must never make Amber');
+    /* Four goods, one per learning building, and coins. */
+    if (economy.GOOD_KEYS.join() !== 'pages,blooms,roots,thread') bad('world economy: the four goods are pages, blooms, roots, thread');
+    if (economy.BAG_KEYS[0] !== 'coins') bad('world economy: coins are the one currency');
+    for (let st = 0; st <= 3; st += 1) {
+      if (!(economy.EARN.rc(st, 4).pages > 0)) bad('world economy: a finished passage must make Pages');
+      if (!(economy.EARN.round(st, 8).blooms > 0)) bad('world economy: a finished round must make Blooms');
+      if (!(economy.EARN.verbal(st, 1).thread > 0)) bad('world economy: a finished verbal set must make Thread');
+      if (!(economy.EARN.garden('grow', true).roots > 0)) bad('world economy: a grown family must make Roots');
+      if (economy.EARN.rc(st, 4).blooms !== 0 || economy.EARN.rc(st, 4).coins !== 0) bad('world economy: reading makes Pages only');
+      if (economy.EARN.round(st, 8).pages !== 0) bad('world economy: a word round must never make Pages');
+      if (economy.EARN.verbal(st, 1).blooms !== 0) bad('world economy: the Loom must never make Blooms');
     }
-    if (!(economy.EARN.rc(3, 4).ink > economy.EARN.rc(0, 4).ink)) bad('world economy: more stars must mean more Ink');
-    if (economy.EARN.rc(2, 4).ember !== 0) bad('world economy: two stars must not strike an ember');
-    if (economy.EARN.rc(3, 4).ember !== 1) bad('world economy: three stars must strike one ember');
-    if (economy.EARN.rc(3, 4, true).ember !== 2) bad('world economy: a flawless run must strike two embers');
+    if (economy.goodsFor(0) !== 1 || economy.goodsFor(3) !== 3 || economy.goodsFor(3, true) !== 4) bad('world economy: one good per star, never nothing, one more for flawless');
+    if (!(economy.EARN.rc(3, 4).pages > economy.EARN.rc(0, 4).pages)) bad('world economy: more stars must mean more Pages');
+    if (!(economy.EARN.gauntlet(3, 20).coins > economy.EARN.gauntlet(0, 0).coins)) bad('world economy: the Gauntlet pays coins, more for stars');
     /* Bag arithmetic. */
-    const bagA = economy.addBag(economy.emptyBag(), { amber: 10, ink: 4, thread: 0, ember: 1 });
-    if (bagA.amber !== 10 || bagA.ember !== 1) bad('world economy: addBag must add every craft');
-    if (economy.subBag(bagA, { amber: 20, ink: 0, thread: 0, ember: 0 }).amber !== 0) bad('world economy: a purse can never go negative');
-    if (economy.canAfford(bagA, { amber: 11, ink: 0, thread: 0, ember: 0 })) bad('world economy: canAfford must refuse what the purse cannot cover');
-    if (!economy.canAfford(bagA, { amber: 10, ink: 4, thread: 0, ember: 1 })) bad('world economy: canAfford must accept an exact cost');
-    const q1 = economy.questsForDate('2026-09-11'), q2 = economy.questsForDate('2026-09-11'), q3 = economy.questsForDate('2026-09-12');
-    if (q1.length !== 3 || new Set(q1.map((q) => q.id)).size !== 3) bad('world economy: a day must have three distinct quests');
-    if (q1.map((q) => q.id).join() !== q2.map((q) => q.id).join()) bad('world economy: the same date must give the same quests');
-    if (![q1, q3].some((q) => q.some((x) => ['meadow', 'pond', 'thicket'].includes(x.region)))) bad('world economy: one quest a day is vocabulary');
-    for (const q of economy.QUEST_POOL) {
-      const p = q.progress({ rc: 0, rcTwoStar: 0, garden: 0, lexCorrect: { meadow: 0, pond: 0, thicket: 0 }, roundTwoStar: { meadow: 0, pond: 0, thicket: 0 }, verbalCorrect: 0, wd: 0, regions: new Set(), threeStars: 0 });
-      if (!(p.done === 0 && p.goal > 0)) bad(`world economy: quest ${q.id} must start at 0 of a positive goal`);
-      if (!regions.regionBySlug(q.region)) bad(`world economy: quest ${q.id} points at an unknown place ${q.region}`);
+    const bagA = economy.addBag(economy.emptyBag(), { coins: 10, pages: 4, thread: 1 });
+    if (bagA.coins !== 10 || bagA.thread !== 1) bad('world economy: addBag must add every key');
+    if (economy.subBag(bagA, { coins: 20 }).coins !== 0) bad('world economy: a purse can never go negative');
+    if (economy.canAfford(bagA, { coins: 11 })) bad('world economy: canAfford must refuse what the purse cannot cover');
+    if (!economy.canAfford(bagA, { coins: 10, pages: 4, thread: 1 })) bad('world economy: canAfford must accept an exact cost');
+    /* Orders: the first is one Page; the rest are deterministic, priced, and only ask for goods the village makes. */
+    const ctx = { available: ['pages', 'blooms'], level: 2, payMul: {}, marketMul: 1, givers: [] };
+    const first = economy.orderFor(0, 0, ctx);
+    if (first.needs.pages !== 1 || !first.first) bad('world economy: the first order is one Page from Ada');
+    if (first.pay !== 40) bad('world economy: the first order pays what the Word Garden costs');
+    const o1 = economy.orderFor(1, 3, ctx), o2 = economy.orderFor(1, 3, ctx);
+    if (JSON.stringify(o1.needs) !== JSON.stringify(o2.needs) || o1.pay !== o2.pay) bad('world economy: an order must be the same order every time it is derived');
+    for (let k = 0; k < 3; k += 1) for (let n = 0; n < 12; n += 1) {
+      const o = economy.orderFor(k, n, ctx);
+      for (const key of economy.GOOD_KEYS) if ((o.needs[key] ?? 0) > 0 && !ctx.available.includes(key)) bad(`world economy: order ${o.id} asks for ${key}, which nothing makes yet`);
+      if (economy.goodsTotal(o.needs) < 1) bad(`world economy: order ${o.id} asks for nothing`);
+      if (!(o.pay >= 10)) bad(`world economy: order ${o.id} pays nothing`);
+      if (!o.giver?.name || !o.reason) bad(`world economy: order ${o.id} has nobody behind it`);
     }
-    /* The works: every one costs crafts, asks for standing, and is reachable. */
-    const ids = new Set();
-    let multi = 0;
-    for (const u of economy.WORKS) {
-      if (ids.has(u.id)) bad(`world economy: duplicate work ${u.id}`);
-      ids.add(u.id);
-      const total = economy.bagTotal(u.cost);
-      if (!(total > 0)) bad(`world economy: work ${u.id} must cost crafts`);
-      if (economy.bagEntries(u.cost).length >= 3) multi += 1;
-      if (typeof u.standing?.test !== 'function' || !u.standing.line) bad(`world economy: work ${u.id} must ask for standing, in words`);
-      if (!u.after) bad(`world economy: work ${u.id} must say what the valley looks like after`);
-      for (const req of u.requires ?? []) if (!economy.WORKS.some((x) => x.id === req)) bad(`world economy: work ${u.id} requires an unknown ${req}`);
-      if (!regions.regionBySlug(u.region)) bad(`world economy: work ${u.id} belongs to an unknown place`);
-      if (!(u.stage >= 1 && u.stage <= 3)) bad(`world economy: work ${u.id} must sit in one of the three stages`);
-    }
-    if (multi < 6) bad('world economy: the valley must hold several works that need three crafts at once');
-    if (economy.WORKS.filter((u) => u.cost.ember > 0).length < 6) bad('world economy: embers must gate the later works');
-    /* Every craft must be spendable, or a place makes nothing anyone wants. */
-    for (const k of economy.CRAFT_KEYS) if (!economy.WORKS.some((u) => (u.cost[k] ?? 0) > 0)) bad(`world economy: nothing in the valley costs ${k}`);
-    /* An empty world can build nothing, and the survey says why. */
-    const emptyState = {
-      builds: [], purse: economy.emptyBag(),
-      hearth: { activeDays: 0, streak: { best: 0, current: 0 } },
-      meadow: { met: 0, known: 0, mastered: 0 }, pond: { mastered: 0 }, thicket: { lanterns: 0 },
-      reading: { read: 0, wellRead: 0, threeStar: 0 }, rootwood: { grownCount: 0 },
-      loom: { solved: 0 }, table: { solved: 0 }, bench: { solved: 0 },
-      terraces: { done: 0 }, wilds: { runs: 0 }, stars: 0, placesVisited: 0,
-    };
-    const survey = economy.surveyWorks(emptyState);
-    if (survey.some((w) => w.ready)) bad('world economy: nothing can be built before anything is learned');
-    // The survey covers the settled arc PLUS the next of each repeatable
-    // work, so the valley can never tell a learner they have finished.
-    if (survey.length !== economy.WORKS.length + economy.ENDLESS_WORKS.length) bad('world economy: the survey must cover every work and the next of each endless one');
-    if (!economy.ENDLESS_WORKS.length) bad('world economy: progression must not be finite');
-    for (const tpl of economy.ENDLESS_WORKS) {
-      const one = economy.endlessInstance(tpl, 1), five = economy.endlessInstance(tpl, 5);
-      if (economy.bagTotal(five.cost) <= economy.bagTotal(one.cost)) bad(`world economy: ${tpl.id} must cost more every time`);
-      if (!economy.endlessById(one.id)) bad(`world economy: ${one.id} must resolve back to a work`);
-      if (one.standing.test(emptyState)) bad(`world economy: ${tpl.id} must ask for learning first`);
-    }
-    if (!economy.nextWork(emptyState)) bad('world economy: a new valley must still be told what it is working towards');
+    if (!(economy.orderFor(0, 10, ctx).pay > economy.orderFor(0, 1, ctx).pay)) bad('world economy: later orders must pay more');
+    const cov = economy.orderCoverage({ needs: economy.bag({ pages: 3, blooms: 1 }) }, economy.bag({ pages: 2, blooms: 5 }));
+    if (cov.deliverable || cov.missing.pages !== 1 || cov.pct !== 0.75) bad('world economy: coverage must count what is missing');
+    /* Worth, level, stage: a new village is level 1 and a camp; more of everything is more. */
+    const base = economy.worthOf({ levels: new Map([['hearth', 1], ['reading', 1]]) });
+    if (economy.levelFor(base).n !== 1) bad('world economy: a new village is level 1');
+    if (economy.stageFor(base).name !== 'A camp') bad('world economy: a new village is a camp');
+    const more = economy.worthOf({ levels: new Map([['hearth', 2], ['reading', 3], ['garden', 2], ['market', 1]]), plots: 2, houses: 3, ordersDone: 30, stars: 40 });
+    if (!(more > base) || economy.levelFor(more).n <= 1) bad('world economy: building, delivering and learning must raise the level');
+    if (economy.stageFor(more).at <= 0) bad('world economy: a worked village must have left the camp');
     if (economy.titleFor(1) === economy.titleFor(20)) bad('world economy: titles must grow with level');
-    if (problems.length === b0) ok(`stars follow accuracy then pace, four crafts from four abilities, ${economy.WORKS.length} works that need learning before crafts`);
+    if (problems.length === b0) ok('stars follow accuracy then pace; four goods, one currency; orders are deterministic and only ask for what the village makes');
   }
 
   /* ---- Lexicon: real content into real questions, and an honest ledger ---- */
@@ -1932,8 +1906,8 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     const result = round.finish();
     if (result.record.kind !== 'lex-round' || result.record.score.total !== 12) bad('world lexicon: a finished round yields a lex-round record of twelve answers');
     if (result.record.score.correct !== 8) bad(`world lexicon: expected 8 correct in the dry run, got ${result.record.score.correct}`);
-    if (!(result.earned?.amber > 0)) bad('world lexicon: a finished round earns Amber');
-    if (result.earned.ink !== 0 || result.earned.thread !== 0) bad('world lexicon: a word round makes Amber only');
+    if (!(result.earned?.blooms > 0)) bad('world lexicon: a finished round earns Blooms');
+    if (result.earned.pages !== 0 || result.earned.thread !== 0) bad('world lexicon: a word round makes Blooms only');
     /* The curator composes a round across bundles, due words first. */
     const curator = await mod('src/world/curator.js');
     const fields = await lexicon.listFields('meadow');
@@ -1990,38 +1964,52 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     if (problems.length === b0) ok('real words become one-correct questions; the ledger climbs only when due and never demotes below met');
   }
 
-  /* ---- State: the world derived from records ---- */
+  /* ---- State: the world, and the village, derived from records ---- */
   {
     const b0 = problems.length;
-    const content = { families: [], rc: [{ id: 'rc-0001', estimated_time_min: 6 }], pj: [], ps: [], ooo: [], wd: [], fields: { meadow: [{ id: 'lex-high-a', total: 100 }], pond: [], thicket: [] } };
+    const content = { families: [], rc: [{ id: 'rc-0001', estimated_time_min: 6 }], pj: [], ps: [], ooo: [], wd: [], sp: [], pc: [], wb: [], cr: [], fields: { meadow: [{ id: 'lex-high-a', total: 100 }], pond: [], thicket: [] } };
     const empty = state.deriveWorldState(content, { sessions: [], learning: [] }, Date.parse('2026-09-11T10:00:00Z'));
-    if (!empty.isNew || economy.bagTotal(empty.purse) !== 0 || empty.stars !== 0) bad('world state: an empty world is new, with an empty purse and no stars');
-    if (empty.readyWorks.length !== 0) bad('world state: an empty world can build nothing');
-    if (!empty.opportunities.length) bad('world state: a new learner must still be told where to begin');
-    if (empty.quests.length !== 3) bad('world state: three quests a day');
+    const ev = empty.village;
+    if (!empty.isNew || economy.bagTotal(empty.purse) !== 0 || empty.stars !== 0) bad('world state: an empty world is new, with nothing in store and no stars');
+    if (!ev || ev.levels.size !== 2 || !ev.builtIds.has('hearth') || !ev.builtIds.has('reading')) bad('world state: a new village has a Hearth and a Reading House and nothing else');
+    if (ev.readyBuilds.length !== 0 || ev.readyPlots.length !== 0) bad('world state: an empty village can build nothing');
+    if (ev.orders.length !== 1 || !ev.orders[0].first || ev.orders[0].deliverable) bad('world state: a new village has one order, the first, not yet deliverable');
+    if (!ev.tip || ev.tip.kind !== 'learn' || ev.tip.building !== 'reading') bad('world state: a new learner is pointed at the Reading House');
+    if (ev.level.n !== 1 || ev.stage.name !== 'A camp') bad('world state: a new village is level 1, a camp');
     const t0 = Date.parse('2026-09-11T09:00:00Z');
     const rcSession = { id: 's1', passage_id: 'rc-0001', started_at: new Date(t0).toISOString(), finished_at: new Date(t0 + 5 * 60000).toISOString(), duration_ms: 5 * 60000, score: { total: 4, correct: 3, attempted: 4, accuracy: 0.75 }, answers: [] };
     const learning = [
       { id: 'lexm:lex-high-a-0001', kind: 'lex-mastery', entry_id: 'lex-high-a-0001', bundle_id: 'lex-high-a', region: 'meadow', level: 3, next_at: null },
       { id: 'lex-round-1', kind: 'lex-round', region: 'meadow', bundle_id: 'lex-high-a', finished_at: new Date(t0).toISOString(), score: { correct: 10, total: 12 }, stars: 2 },
-      { id: 'build:hearth-chimney', kind: 'world-build', work_id: 'hearth-chimney', region: 'hearth', finished_at: new Date(t0).toISOString() },
+      { id: 'vorder:0:0', kind: 'village-order', slot: 0, n: 0, needs: { pages: 1 }, paid: 40, giver: 'Ada', at: new Date(t0 + 6 * 60000).toISOString() },
+      { id: 'vbuild:garden:1', kind: 'village-build', building: 'garden', level: 1, cost: { coins: 40 }, at: new Date(t0 + 7 * 60000).toISOString() },
     ];
-    const s = state.deriveWorldState(content, { sessions: [rcSession], learning }, Date.parse('2026-09-11T10:00:00Z'));
-    if (s.reading.stars !== 3 || s.reading.litWindows !== 1) bad('world state: a 3/4 passage in time is three stars and a lit window');
-    if (s.meadow.mastered !== 1 || s.meadow.stars !== 2) bad('world state: the Meadow counts mastered words and best round stars');
-    const expectedInk = economy.EARN.rc(3, 3).ink;
-    const expectedAmber = economy.EARN.round(2, 10).amber;
-    if (s.earned.ink !== expectedInk) bad(`world state: reading makes Ink and only Ink (${s.earned.ink} vs ${expectedInk})`);
-    if (s.earned.amber !== expectedAmber) bad(`world state: a round makes Amber (${s.earned.amber} vs ${expectedAmber})`);
-    if (s.spent.amber !== 40) bad(`world state: a built work spends its cost (${s.spent.amber})`);
-    if (s.purse.amber !== Math.max(0, expectedAmber - 40)) bad('world state: the purse is earned minus spent, never negative');
-    if (s.hearth.level !== 2) bad('world state: the built chimney raises the Hearth to level 2');
-    if (!s.builds.includes('hearth-chimney')) bad('world state: a build record must stand in the valley');
-    if (s.works.find((w) => w.id === 'hearth-chimney')?.built !== true) bad('world state: the survey must know what is already built');
-    if (!s.hearth.practicedToday) bad('world state: a session today counts as practised today');
-    if (s.stars !== 5) bad(`world state: stars total across places (${s.stars})`);
-    if (state.worldChangeLine('reading-room', empty, s) === '') bad('world state: a change in the Reading Room must have a line');
-    if (problems.length === b0) ok('empty world is new; sessions become stars, windows, flowers and crafts; works subtract');
+    const s2 = state.deriveWorldState(content, { sessions: [rcSession], learning }, Date.parse('2026-09-11T10:00:00Z'));
+    const v = s2.village;
+    if (s2.reading.stars !== 3) bad('world state: a 3/4 passage in time is three stars');
+    if (s2.meadow.mastered !== 1 || s2.meadow.stars !== 2) bad('world state: the Meadow counts mastered words and best round stars');
+    const pages = economy.EARN.rc(3, 3).pages, blooms = economy.EARN.round(2, 10).blooms;
+    if (v.produced.pages !== pages) bad(`world state: reading makes Pages (${v.produced.pages} vs ${pages})`);
+    if (v.produced.blooms !== blooms) bad(`world state: a round makes Blooms (${v.produced.blooms} vs ${blooms})`);
+    if (v.stock.pages !== pages - 1) bad('world state: a delivered order takes its goods out of store');
+    if (v.coins !== 0) bad(`world state: coins are what orders paid minus what was built (${v.coins})`);
+    if (!v.builtIds.has('garden') || v.levels.get('garden') !== 1) bad('world state: a build record stands in the village');
+    if (v.ordersDone !== 1) bad('world state: delivered orders are counted');
+    if (v.orders[0].n !== 1 || v.orders[0].first) bad('world state: a delivered slot moves on to its next order');
+    if (!s2.hearth.practicedToday) bad('world state: a session today counts as practised today');
+    if (s2.stars !== 5) bad(`world state: stars total across places (${s2.stars})`);
+    if (state.worldChangeLine('reading-room', empty, s2) === '') bad('world state: a change in the Reading House must have a line');
+    if (!(v.worth > ev.worth)) bad('world state: building and delivering raise the village\'s worth');
+    /* Helpers: a level with a helper trickles goods on the clock, capped. */
+    const helperLearning = [...learning, { id: 'vbuild:reading:2', kind: 'village-build', building: 'reading', level: 2, cost: {}, at: new Date(t0).toISOString() }, { id: 'vbuild:reading:3', kind: 'village-build', building: 'reading', level: 3, cost: {}, at: new Date(t0).toISOString() }];
+    const later = state.deriveWorldState(content, { sessions: [rcSession], learning: helperLearning }, t0 + 30 * 3600e3).village;
+    const rb = later.buildingById('reading');
+    if (!rb.helper || rb.helper.available !== rb.helper.cap) bad(`world state: a helper left for thirty hours has made its cap (${rb.helper?.available})`);
+    const soon = state.deriveWorldState(content, { sessions: [rcSession], learning: helperLearning }, t0 + 4 * 3600e3).village;
+    if (soon.buildingById('reading').helper.available !== 1) bad('world state: a helper makes one every three hours');
+    const collected = state.deriveWorldState(content, { sessions: [rcSession], learning: [...helperLearning, { id: 'vcollect:reading:1', kind: 'village-collect', building: 'reading', good: 'pages', amount: 1, at: new Date(t0 + 4 * 3600e3).toISOString() }] }, t0 + 4 * 3600e3 + 60000).village;
+    if (collected.buildingById('reading').helper.available !== 0 || collected.stock.pages !== pages) bad('world state: collecting resets the helper and adds to store');
+    if (problems.length === b0) ok('empty village is a camp with one order; sessions become stars and goods; orders and builds move coins; helpers keep the clock');
   }
 
   /* ---- Audio identity and the sprite recipes ---- */
@@ -2030,14 +2018,16 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     for (const n of ['tap', 'open', 'star1', 'star2', 'star3', 'ink', 'quest', 'grow', 'build', 'correct', 'wrong', 'hurry', 'arrival']) if (!worldAudio.WORLD_SOUND_NAMES.includes(n)) bad(`world audio: missing sound ${n}`);
     if (Math.round(worldAudio.pitch(130.81, 'do', 1)) !== 262) bad('world audio: an octave above the tonic doubles the pitch');
     if (worldAudio.VALLEY_PHRASE.length !== 6) bad('world audio: the Valley Phrase has six notes');
-    for (const n of ['tree', 'flower', 'cottage', 'tower', 'workshop', 'lantern', 'koi', 'butterfly', 'bird', 'cat', 'cloud', 'rootStone', 'bridge',
-      'hive', 'heron', 'arch', 'shrine', 'arbour', 'stall', 'well', 'villager', 'paving', 'stoneBridge']) if (!sprites.RECIPE_NAMES.includes(n)) bad(`world sprites: missing recipe ${n}`);
+    {
+      const art = await mod('src/village/art.js');
+      for (const n of ['tree', 'flower', 'building', 'stall', 'lamp', 'koi', 'butterfly', 'bird', 'wick', 'cloud', 'fence', 'well', 'person', 'sheep', 'chicken', 'dog', 'duck', 'hive', 'cart', 'beds']) if (!art.RECIPE_NAMES.includes(n)) bad(`village art: missing recipe ${n}`);
+    }
     const r = palette.ramp('#4E9E4C');
     if (!(r.light !== r.base && r.shade !== r.base && r.dark !== r.shade)) bad('world palette: a ramp must have four distinct tones');
     if (!['spring', 'summer', 'autumn', 'winter'].includes(palette.seasonWord(new Date('2026-09-11')))) bad('world palette: a season for every date');
     if (palette.hourWord(new Date(2026, 8, 11, 22)) !== 'night' || palette.hourWord(new Date(2026, 8, 11, 9)) !== 'morning') bad('world palette: the hour words follow the clock');
     if (palette.weatherWord(new Date(2026, 8, 11)) !== palette.weatherWord(new Date(2026, 8, 11))) bad('world palette: the weather holds all day');
-    if (problems.length === b0) ok(`${worldAudio.WORLD_SOUND_NAMES.length} world sounds, ${sprites.RECIPE_NAMES.length} sprite recipes, ramps and seasons`);
+    if (problems.length === b0) ok(`${worldAudio.WORLD_SOUND_NAMES.length} world sounds, the village's art recipes, ramps and seasons`);
   }
 
   /* ---- No screen still imports the retired SVG world ---- */
@@ -2065,7 +2055,6 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
   const before = problems.length;
   const companion = await mod('src/world/companion.js');
   const regions = await mod('src/world/regions.js');
-  const sprites = await mod('src/world/engine/sprites.js');
   const growth = await mod('src/world/growth.js');
 
   /* ---- Wick's voice ---- */
@@ -2123,7 +2112,7 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
     if (ideas.length !== 3) bad('companion: the sign must offer exactly three names');
     if (new Set(ideas).size !== ideas.length) bad('companion: the three suggestions are not distinct');
     if (String(nameSuggestions('7')) !== String(ideas)) bad('companion: suggestions are not stable for the same day');
-    if (valleyName(null) !== 'the valley') bad('companion: an unnamed valley has no honest fallback');
+    if (valleyName(null) !== 'the village') bad('companion: an unnamed village has no honest fallback');
     if (!isUnawakened({ name: 'x', awakened_at: null })) bad('companion: a named but unwelcomed valley is not detected');
     if (isUnawakened({ awakened_at: '2026-01-01' })) bad('companion: a welcomed valley is offered the welcome again');
     if (problems.length === b0) ok('a valley can be named, tidied, capped and remembered');
@@ -2147,26 +2136,24 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
     if (problems.length === b0) ok(`${MAP_PLACES.length} pins on the map, three benches in one Quarter, every slug still reachable`);
   }
 
-  /* ---- Wick is drawn, at both the sizes the world needs ----
+  /* ---- The village's art: every person, building and good has a recipe ----
      A recipe only runs where there is a canvas, so under Node we check that
      the recipes exist and that the drawing code is there; the browser tour
-     is what proves they look like a cat. */
+     is what proves they look like a village. */
   {
     const b0 = problems.length;
-    for (const name of ['wick', 'catSmall', 'dock']) {
-      if (!sprites.RECIPE_NAMES.includes(name)) bad(`sprites: no "${name}" recipe`);
+    const art = await mod('src/village/art.js');
+    for (const name of ['wick', 'person', 'building', 'stall', 'tree', 'sheep', 'chicken', 'dog', 'duck', 'koi', 'icon', 'bubble', 'glow', 'scaffold', 'plotSign']) {
+      if (!art.RECIPE_NAMES.includes(name)) bad(`art: no "${name}" recipe`);
     }
-    const src = readFileSync(join(root, 'src/world/engine/sprites.js'), 'utf8');
+    const src = readFileSync(join(root, 'src/village/art.js'), 'utf8');
     for (const [what, re] of [
-      ['poses', /pose === 'look'/], ['eyes that blink', /if \(blink\)/], ['a lamp he can put out', /lit \? PIGMENT\.lantern/],
-      ['a map-scale Wick', /function catSmall\(/], ['a dock', /function dock\(/],
-    ]) if (!re.test(src)) bad(`sprites: Wick is missing ${what}`);
-    // The companion must be drawn bigger in a portrait than on the map.
-    const bigW = /function wick\([^)]*\)\s*\{\s*const p = new Pix\((\d+)/.exec(src)?.[1];
-    const smallW = /function catSmall\([^)]*\)\s*\{\s*const p = new Pix\((\d+)/.exec(src)?.[1];
-    if (!bigW || !smallW || Number(smallW) >= Number(bigW)) bad('sprites: the map-scale Wick is not smaller than the portrait one');
-    if (Number(smallW) > 14) bad('sprites: the map-scale Wick is too big to stand beside a cottage');
-    if (problems.length === b0) ok(`Wick is drawn at both scales (${bigW}px and ${smallW}px wide), and the dock exists`);
+      ['a cat that blinks', /if \(blink\)/], ['a lamp he carries at night', /withLamp/], ['a walking pose', /pose === 'walk'/],
+      ['people who work', /pose === 'work'/], ['people who cheer', /cheer/], ['windows that glow at night', /PAL\.glassNight/],
+    ]) if (!re.test(src)) bad(`art: the village is missing ${what}`);
+    const defs = await mod('src/village/defs.js');
+    for (const id of ['ada', 'bo', 'ines', 'nell', 'rafi']) if (!defs.CHARACTERS[id]?.look) bad(`art: ${id} has no look to be drawn with`);
+    if (problems.length === b0) ok(`${art.RECIPE_NAMES.length} art recipes, and every worker has a face`);
   }
 
   /* ---- Feedback stays short by default ---- */
@@ -2320,8 +2307,8 @@ console.log('\n20. Bank engine dry run (session · set picking · rest · stars 
   const st = verbalStars(session, session.target_sec);
   if (typeof st.stars !== 'number') bad('bank session: stars derive from the record');
   const bag = EARN.bank('sp', 3, 2, false);
-  if (!(bag.thread > 0 && bag.ink === 0 && bag.amber === 0)) bad('EARN.bank: placement pays Thread only');
-  if (!(EARN.bank('wb', 2, 2, false).amber > 0) || !(EARN.bank('cr', 2, 2, false).ink > 0)) bad('EARN.bank: the word bank pays Amber, arguments pay Ink');
+  if (!(bag.thread > 0 && bag.pages === 0 && bag.blooms === 0)) bad('EARN.bank: placement pays Thread only');
+  if (!(EARN.bank('wb', 2, 2, false).blooms > 0) || !(EARN.bank('cr', 2, 2, false).pages > 0)) bad('EARN.bank: the word bank pays Blooms, arguments pay Pages');
   // Picking a set: unsolved first; a missed item rests; a solved one comes last.
   const pool = [mk(1), mk(2), mk(3), mk(4)];
   const later = new Date(Date.now() - 60_000).toISOString();

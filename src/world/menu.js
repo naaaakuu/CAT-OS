@@ -1,7 +1,7 @@
 /**
  * menu.js — the one menu in the game.
  *
- * CAT OS has three places you go: the valley, the Hearth, and Growth.
+ * CAT OS has three places you go: the village, a building, and Growth.
  * Everything else — settings, sound, your collections, your records, the
  * backup file — is administration, and administration does not get a
  * fourth of the thumb rail. It lives behind one ☰ in the corner, opens
@@ -34,8 +34,7 @@ const GLYPH = {
  *  that lies about its destinations is worse than a shorter menu. */
 const ITEMS = [
   { href: '#/growth', label: 'Growth', line: 'How you are getting stronger', glyph: 'growth' },
-  { href: '#/world/place/hearth?works=1', label: 'The Workshop', line: 'What can be built next', glyph: 'journey' },
-  { href: '#/world/place/hearth?you=1', label: 'Your standing', line: 'Stars, streaks, titles and the Gauntlet', glyph: 'records' },
+  { href: '#/world/place/hearth?you=1', label: 'Your standing', line: 'Stars, streaks, records and what stands', glyph: 'records' },
   { href: '#/settings', label: 'Settings', line: 'Sound, text size, theme, your data', glyph: 'settings' },
 ];
 
@@ -76,7 +75,7 @@ export function mountMenu(host, ctx) {
       <nav class="gmenu__card" aria-label="Menu">
         <div class="gmenu__head">
           <div>
-            <p class="gmenu__eyebrow">Your valley</p>
+            <p class="gmenu__eyebrow">Your village</p>
             <h2 class="gmenu__name">${escapeHTML(valleyName(valley))}</h2>
           </div>
           <button class="gmenu__close" data-close aria-label="Close">${ICON.close}</button>

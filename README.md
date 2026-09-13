@@ -1,116 +1,98 @@
 # CAT OS
 
-**A living world that makes you better at CAT verbal ability by playing it.**
+**A village that grows because you get better at CAT verbal ability.**
 
 CAT OS is an offline-first Progressive Web App for the VARC section of India's
-Common Admission Test. It is not a study app with a game on top: it is a
-small, hand-drawn pixel-art valley you open, explore and grow, where every
-place is a real CAT skill and everything you learn changes the land.
+Common Admission Test. It is not a study app with a game on top: it is a small
+illustrated village you own, with people who work in it, and every building
+is a real CAT skill. Reading a passage makes Pages. Learning words makes
+Blooms. Taking a word apart makes Roots. Putting a paragraph in order makes
+Thread. Villagers post orders for those goods, delivering pays coins, and
+coins build, raise and open land. The village grows because you learn — and
+it says so, on the screen, at every moment:
 
-The loop is **learn → perform → earn → build → see the world change**. You
-never browse a library: a curator chooses what is worth meeting next out of
-~3,900 words, 51 root families, 32 passages and 59 verbal items, weighing
-what you have mastered, what is due, how hard you can currently work, and
-what your own answers say you are weak at.
+> *Read with Ada → up to 3 Pages · Ada's order needs 2 more.*
 
-The first time you open it, none of that is on the screen. It is night, the
-valley has gone dark, and a small cat called **Wick** has been keeping one
-lamp alight, waiting. He asks you to name the place. Then he asks you to do
-one small thing — six words, about a minute — and when you look up, the sun
-is coming over the valley you just named. That is the whole game, explained
-by doing it once.
+The learning underneath is serious CAT preparation: a content engine of
+authored, taxonomy-tagged, blind-solved items (115 passages, 76 jumbles, 77
+summaries, 81 odd-ones-out, 52 placements, 27 completions, 110 word-bank
+items, 51 root families, 2,577 CAT words, 401 confusable sets, 271 loanwords,
+28 Word DNA units), a curator that chooses what is worth meeting next, a
+ledger of the seventeen abilities the exam tests, and mentors who name the
+exact trap you fell for. The game is simple; the learning is not.
 
-And the valley it comes up over is **nearly empty**: sixteen saplings, some
-scrub and old stumps, one small house, stepping stones across the river,
-three spots marked and waiting in the wood, heather and bare earth over the
-rest. Nothing in the map is a constant — the wood, the terraces cut into
-the hill, the workshops in the Quarter, the bridges, the neighbours and the
-people walking between them all arrive because you learned something. The
-valley grows from *bare ground* through *a clearing*, *a settlement*, *a
-hamlet*, *a village*, *a town* to *a valley known for its readers*, and it
-never runs out of somewhere further to go.
+## The first minutes
 
-- **The Rootwood** — 51 Latin and Greek root families (217 words): take a word
-  apart, build one nobody taught you, and a tree grows in one of six groves.
-- **The Meadow** — the CAT word lists: 2,577 high-, medium- and low-frequency
-  words with meanings, synonyms and antonyms, played as timed twelve-word
-  rounds, three of them asked the way CAT asks — a word inside a real
-  sentence. Every word you master opens a flower that stays.
-- **The Mirror Pond** — 401 confusable word pairs and triples. Tell the twins
-  apart and koi arrive.
-- **The Thicket** — 271 loanwords from twelve languages. A lantern lights for
-  every language you learn.
-- **The Reading Room** — 32 CAT-register passages (136 questions) read
-  against the clock, and **the second look**: the questions that got away,
-  brought back with the evidence one tap away and the trap named. Three stars means three quarters right inside the
-  passage's own time; the tower gains floors and lit windows as you earn them.
-- **The Loom · The Summary Table · The Stranger's Bench** — Para Jumbles, Para
-  Summary and Odd One Out: eight-tier journeys with a mentor who names the
-  exact trap you fell for. The workshops grow as tiers are cleared.
-- **The Vine Terraces** — 28 Word DNA units: prefixes, suffixes, roots,
-  foreign words and CAT vocabulary learned by pattern, each ending in a word
-  you were never shown.
-- **The Hearth** — home and the Workshop: a shelf of small buildings, each
-  card a picture of the thing it will build. Twenty-one works in three
-  arcs, and then **Beyond** — a house for a neighbour, the road posted one
-  waymark further out, a planting at the wood's edge — which can be built
-  again and again, each one dearer and asking more of your record than the
-  last. Nothing here can be bought before the learning that earns it.
-- **Growth** — four abilities as four trees, each at the stage your own
-  record has earned: Reading, Vocabulary, Verbal and CAT pace, with the
-  six-stage ladder under each. Then the **collections**: about 124 finite
-  sets — a grove of roots, a letter of the word lists, a language of the
-  Thicket, a stage of passages — sorted so the one nearest finishing is
-  first, so there is always something you only need four more of. Under
-  *that*, every number, for anyone who wants it.
-- **The Wilds** — the weekly Gauntlet: the same thirty questions all week —
-  words from three places and nine asked the way CAT asks them, inside a
-  real sentence — three minutes, against your own best.
+Black; the CAT OS mark; the camera glides down from the whole village to
+your house. A small charcoal cat called **Wick** says four lines. Ada, at
+the Reading House, needs a Page — and Pages come from reading. You read a
+short passage (the real thing, against the clock). You come back, the Page
+flies into her house, she cheers, and the bubble over her door turns gold:
+*40 coins.* You deliver. Coins fly into your purse. Bo wants a patch of
+ground; you build the Word Garden under a scaffold and dust; Bo arrives at
+its door with an order for two Blooms. Then you name the place. That is the
+whole game, taught by doing it once.
+
+## The village
+
+| Building | Who | What it makes | From |
+|---|---|---|---|
+| **The Hearth** | Wick | — | home; five levels of house |
+| **The Reading House** | Ada, the reader | **Pages** | CAT passages against the clock, the second look, arguments |
+| **The Word Garden** | Bo, the gardener | **Blooms** | the CAT word lists, confusables, loanwords, the word bank — twelve-word rounds, some asked in a real sentence |
+| **The Root Workshop** | Ines, the root-scholar | **Roots** | 51 Latin and Greek families in the Rootwood, prefixes and suffixes, decoding |
+| **The Loom** | Nell, the weaver | **Thread** | para jumbles, summaries, odd one out, sentence placement, paragraph completion |
+| **The Market** | Rafi, the merchant | **Coins** | the order board: three, four, then five orders |
+| **The Road Out** | — | coins | the weekly Gauntlet, mixed and timed |
+
+Every building has levels. A level costs coins (sometimes goods) *and* asks
+for standing — three passages read well before a second floor, twelve items
+solved before the spool sign — so nothing is bought without the learning
+that earns it. A building's third level puts its worker to work on their
+own: a Page, a Bloom, a Root or a Thread every three hours, up to three,
+collected with a tap. It asks for real mastery first, and it never replaces
+you; you are the engine, the village handles the repetition.
+
+Land opens outward — the sheep pen by the pond, the orchard, the farm across
+the river, the mill, the square with its well — and neighbours move into
+houses you build for them, walk the paths, and post orders of their own.
+There is no last building.
+
+The village keeps what made the valley before it a place: the real clock,
+with the hour's light on everything and windows and lamps and the moon on
+the pond after dark; the seasons and seeded weather; the river's flow and
+glints; koi for every dozen confusables told apart; ducks, birds, butterflies
+and pollen, fireflies at night, leaves in autumn and petals in spring; trees
+that sway; chimney smoke on days you practised; and the music.
 
 ## What the game knows about you
 
-Every answer anywhere in the valley feeds one ledger of the seventeen
-abilities CAT's verbal section actually tests, and the valley points at the
-one that is slipping — in a sentence, never a dashboard. A question you
-missed **rests** before it comes back (twenty minutes, then a day, then
-three days, then most of a week): handing it back straight away measures
-whether you remember which letter was right. What comes back first is a
-different question on the same skill, and the Reading Room will pick a
-passage that actually asks about it.
-
-## The four crafts
-
-Each kind of thinking makes one kind of resource, and no place can make
-another place's:
-
-| Craft | Made by | Where |
-|---|---|---|
-| **Amber** | word knowledge | Meadow, Mirror Pond, Thicket, Rootwood, Terraces |
-| **Ink** | reading comprehension | the Reading Room |
-| **Thread** | verbal structure | the Loom, the Table, the Bench |
-| **Ember** | accuracy at CAT pace | three-star runs, clean revisits, the Gauntlet |
-
-Crafts are spent on **works** — stone paths, arched bridges, lanterns, the
-Reading Room's floors and its Observatory, beehives, the Quarter's square,
-the traveller's arch, the root shrine. Every work costs crafts *and* asks a
-standing of your record ("Read four passages at two stars or better"), so
-nothing in the valley can be bought before the learning that earns it, and
-the later works need three or four crafts at once. As works go up, villagers
-begin to walk the paths.
+Every answer anywhere feeds one ledger of the seventeen abilities CAT's
+verbal section tests, and the village's one card points at the one that is
+slipping — in a sentence, never a dashboard. A question you missed **rests**
+before it comes back (twenty minutes, then a day, then three days, then most
+of a week). About 124 finite **collections** — a grove of roots, a letter of
+the word lists, a stage of passages — are always there for anyone who wants
+to finish something.
 
 ## Principles
 
 - **No build step, ever.** Plain HTML, CSS and ES modules; no bundler, no
-  framework, no runtime CDN. The world engine is 2,000 lines of Canvas 2D.
+  framework, no runtime CDN. The village is drawn with the canvas path API
+  into cached sprites; there are no image assets and no emoji.
 - **Content is data, never code.** Every passage, family, word list and
   confusable pair is JSON in `content/`, registered in `content/index.json`
   and validated against a versioned schema at load time.
-- **Local-first.** Progress lives in IndexedDB on your device; the world is
-  derived from your records, so a backup carries the whole valley.
-- **Honest progression.** Stars are performance (accuracy, then pace). Ink is
-  earned only by finishing real practice and spent only on the world. Levels
-  of buildings are derived from mastery, never bought. No casino mechanics,
-  no guilt streaks, no locked learning content.
+- **Local-first.** Progress lives in IndexedDB on your device; the village is
+  derived from your records, so a backup carries the whole village.
+- **Honest progression.** Stars are performance (accuracy, then pace) and
+  are never spent. Goods come only from finished learning. Every build asks
+  for standing. No casino mechanics, no energy, no guilt streaks, no locked
+  learning content.
+- **Performance is part of the art direction.** Sprites are cached at the
+  exact device scale and blitted at whole pixels; the ground is one blit; the
+  hour's light is baked, not multiplied. A frame costs about 22 ms even under
+  software rasterisation.
 
 ## Running it
 
@@ -123,6 +105,8 @@ There is nothing to install or compile.
   `http://localhost:8000`.
 - **Install on iPhone:** open the hosted URL in Safari → Share → *Add to Home
   Screen*. It launches full-screen and works offline after the first open.
+- **Look at any hour:** in the console, `localStorage.setItem('catos:hour',
+  'night')` (dawn · morning · afternoon · dusk · night) and reload.
 
 ## Verifying the repository
 
@@ -132,45 +116,47 @@ node tools/verify.mjs
 
 Plain Node, no dependencies. It reuses the app's own validator to check every
 content file and schema, the registry, the service-worker precache, the
-module graph, the engines (reading, verbal crafts, Rootwood scheduler, world
-economy, vocabulary rounds, world-state derivation), the mentor voice, and a
-backup round trip. Exit 0 means the repository is internally consistent.
+module graph, the engines (reading, verbal crafts, Rootwood scheduler, the
+village economy and its derived state, vocabulary rounds), the mentor voice,
+the corpus QC, and a backup round trip. Exit 0 means the repository is
+internally consistent.
 
-To regenerate the vocabulary bundles from the owner's reference corpus:
-
-```sh
-node tools/build-lexicon.mjs
-```
+Other tools: `tools/check-content.mjs <file|dir>` (what content authors run),
+`tools/build-index.mjs`, `tools/build-manifest.mjs`, `tools/build-precache.mjs`,
+`tools/qc-corpus.mjs`, `tools/blind-solve.mjs`, `tools/build-lexicon.mjs`.
 
 ## Repository map
 
 | Path | What it is |
 |---|---|
 | `index.html`, `manifest.webmanifest`, `service-worker.js` | The PWA shell |
-| `src/world/` | **The world**: `engine/` (palette, procedural pixel sprites, canvas renderer, life, the map and hero scenes), `regions.js` (the places), `state.js` (the world derived from records), `economy.js` (stars, Ink, quests, upgrades), `lexicon.js` (vocabulary rounds and the mastery ledger), `audio.js` (music, ambience, interaction sounds), `screens/` (the valley, the places, rounds, results, the Hearth, the Wilds) |
-| `src/core/` | Logic with no UI: storage adapter, router, content loader + validator, session engines, scoring, engagement, the mentors |
-| `src/modules/` | The learning rooms: `reading-comprehension/` (the Reading Room's run), `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/`, `language-garden/` (the Rootwood's six-beat sessions on the world's canvas) |
-| `src/ui/` | Design tokens, base styles, `game.css` (the world's interface language), Web Components |
-| `content/` | JSON by type: `reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/`, `vocabulary/`, `language-garden/`, `lexicon/`, `twins/`, `loanwords/`; `content/schema/` holds the versioned schemas; `content/index.json` is the registry |
-| `tools/verify.mjs` | The offline self-check |
-| `tools/build-lexicon.mjs` | The reference-corpus → lexicon/twins/loanwords generator |
+| `src/village/` | **The village**: `defs.js` (the world as data — goods, people, buildings and levels, land, houses, orders, stages), `state.js` (the village derived from records), `art.js` (the sprite factory), `terrain.js`, `scene.js` (the living scene and building stills), `grove.js` (the Rootwood), `renderer.js` (the camera), `screens/village.js` (home) |
+| `src/world/` | **The world's rules and rooms**: `economy.js` (stars, goods, orders, worth), `state.js` (learning derived from records), `regions.js` (the places), `curator.js`, `collections.js`, `lexicon.js` (vocabulary rounds and the mastery ledger), `companion.js` (Wick), `audio.js` (music, ambience, sounds), `craft-ui.js` and `icons.js` (goods and icons in the interface), `screens/` (the places, rounds, results, your standing, the Gauntlet) |
+| `src/core/` | Logic with no UI: storage adapter, router, content loader + validator, session engines, scoring, the skill ledger, engagement, the mentors |
+| `src/modules/` | The learning rooms: `reading-comprehension/`, `para-jumbles/`, `para-summary/`, `odd-one-out/`, `word-dna/`, `language-garden/` (the Rootwood's six-beat sessions), `verbal-bank/` (placement, completion, the word bank, arguments) |
+| `src/ui/` | Design tokens, base styles, `game.css` (the world's interface language), `village.css` (the village screen), Web Components |
+| `content/` | JSON by type, `content/schema/` for the versioned schemas, `content/taxonomy/` for the skill/pattern/trap taxonomy and the authoring contract, `content/index.json` as the registry |
+| `tools/` | The offline self-check and the content tools |
 | `STATUS.md` / `CHANGELOG.md` | What exists now / what changed, when, and why |
 
-The product documents (the design authority, the module Bibles, the content
-pipeline) live in the `KNOWLEDGE/` folder beside this repository. For 1.0.0
-the creative authority is `KNOWLEDGE/01_KNOWLEDGE/CAT OS — THE WORLD (1.0).md`.
+The product documents (the creative authority, the module Bibles, the content
+pipeline) live in the `KNOWLEDGE/` folder beside this repository. The
+creative authority is `KNOWLEDGE/01_KNOWLEDGE/CAT OS — THE WORLD (1.0).md`,
+Part A (2.0).
 
 ## Working on CAT OS
 
 The non-negotiables from `PROJECT RULES.md`: no build step; content never
 hardcoded; storage only through the `StorageAdapter`; modules never import
-each other's screens (the world composes their pure logic); stable IDs
+each other's screens (the village composes their pure logic); stable IDs
 forever; docs updated with every structural change.
 
-Adding a place to the world: add a region to `src/world/regions.js`, draw it
-in `src/world/engine/map.js`, derive its state in `src/world/state.js`, give
-it a section in `src/world/screens/place.js`, and add its files to the
-service worker's precache list.
+Adding a building: describe it in `src/village/defs.js` (levels, costs,
+standing, the good it makes, its worker), give it a recipe in
+`src/village/art.js`, map its learning route in `PLACE_BUILDING` /
+`MODULE_BUILDING`, and add nothing else — the state, the scene, the sheets,
+the orders and the tip derive from the definition. Adding a world: another
+definition file shaped like `defs.js`.
 
 ## Status & license
 

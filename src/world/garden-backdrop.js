@@ -1,15 +1,14 @@
 /**
  * garden-backdrop.js — the Rootwood grove behind a session or a plant
- * page, drawn by the world engine: the family's own grove, every tree at
- * its true stage, the tended family marked. `grow()` plays the growth
- * moment in the scene itself — the tree rises out of the ground into its
- * new stage with one organic overshoot — so a tree is grown in the place
- * it will always stand.
+ * page, drawn in the village's art: the family's own grove, every tree at
+ * its true stage, the tended family front and centre. `grow()` plays the
+ * growth moment in the scene itself — the tree rises out of the ground
+ * into its new stage with one organic overshoot — so a tree is grown in
+ * the place it will always stand.
  */
 
-import { WorldRenderer } from './engine/canvas.js';
-import { buildGroveScene } from './engine/map.js';
-import { sprite } from './engine/sprites.js';
+import { VillageRenderer } from '../village/renderer.js';
+import { buildGroveScene } from '../village/grove.js';
 import { GROVES } from '../modules/language-garden/logic/groves.js';
 import { computePlantState } from '../core/engine/garden-session.js';
 import { hourWord, seasonWord, weatherWord } from './engine/palette.js';
@@ -40,15 +39,15 @@ export function mountGardenBackdrop(host, { family, allFamilies, allSessions, se
   });
   const date = new Date();
   const atmo = { hour: hourWord(date), season: seasonWord(date), weather: weatherWord(date) };
-  const scene = buildGroveScene(grove, views, atmo, { selected: null, portrait: true, heroId: family.meta.id });
+  const scene = buildGroveScene(grove, views, atmo, { selected: null, heroId: family.meta.id });
   const canvas = document.createElement('canvas');
   canvas.className = 'lgx__canvas';
   canvas.setAttribute('aria-hidden', 'true');
   host.appendChild(canvas);
-  const renderer = new WorldRenderer(canvas, scene, { worldW: scene.W, worldH: scene.H, fit: 'cover', pannable: false, minZoom: 0.5, maxZoom: 8 });
+  const renderer = new VillageRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.5, maxZoom: 8 });
   // Look at the tended tree: it stands in the upper half, above the veil.
   const tended = scene.objectsList.find((o) => o.id === family.meta.id);
-  if (tended) renderer.lookAt(tended.x, tended.y + 36, { animate: false });
+  if (tended) renderer.lookAt(tended.x, tended.y - 40, { animate: false });
   renderer.start();
 
   return {
@@ -58,20 +57,19 @@ export function mountGardenBackdrop(host, { family, allFamilies, allSessions, se
       return new Promise((resolve) => {
         const o = scene.objectsList.find((x) => x.id === family.meta.id);
         if (!o) { resolve(); return; }
-        const next = sprite('tree', { stage: postState.stage, seed: family.meta.id, season: atmo.season, vigor: Math.round((postState.vigor ?? 0) * 4) / 4, landmark: !!postState.landmark, due: 'none' });
-        o.sprite = next;
-        o.family = { ...o.family, stage: postState.stage, due: 'none', landmark: !!postState.landmark };
+        o.family = { ...o.family, stage: postState.stage, due: 'none', landmark: !!postState.landmark, vigor: postState.vigor ?? 0 };
+        o.art = scene.treeFor(o.family);
         // The camera leans in as the tree grows, so the moment fills the frame.
-        renderer.lookAt(o.x, o.y - 14, { zoom: Math.min(renderer.maxZoom(), renderer.cam.zoom * 1.6), duration: reduce ? 0 : 1500, animate: !reduce });
-        if (reduce) { o.scaleY = o.scaleX; resolve(); return; }
-        const base = o.scaleX;
+        renderer.lookAt(o.x, o.y - 30, { zoom: Math.min(renderer.maxZoom(), renderer.cam.zoom * 1.5), duration: reduce ? 0 : 1500, animate: !reduce });
+        if (reduce) { o.scale = 1; resolve(); return; }
         const start = performance.now();
         const D = 1500;
         const ease = (t) => { const c4 = (2 * Math.PI) / 3; return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1; };
-        const step = (now) => {
-          const t = Math.min(1, (now - start) / D);
-          o.scaleY = base * (0.15 + 0.85 * ease(t));
-          if (t < 1) requestAnimationFrame(step); else { o.scaleY = base; resolve(); }
+        const step = (nowT) => {
+          const t = Math.min(1, (nowT - start) / D);
+          o.scale = 0.15 + 0.85 * ease(t);
+          renderer.invalidate();
+          if (t < 1) requestAnimationFrame(step); else { o.scale = 1; resolve(); }
         };
         requestAnimationFrame(step);
       });

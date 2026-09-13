@@ -7,10 +7,11 @@
  */
 
 import { verbalStars, EARN, bagEntries } from './economy.js';
+import { chip } from './craft-ui.js';
 import { play } from './audio.js';
 
 const REGION_OF = { pj: 'loom', ps: 'table', ooo: 'bench', wd: 'terraces', sp: 'loom', pc: 'table', cr: 'reading-room' };
-const NAME_OF = { loom: 'The Loom', table: 'The Summary Table', bench: 'The Stranger’s Bench', terraces: 'The Vine Terraces', 'reading-room': 'The Reading Room', meadow: 'The Meadow', pond: 'The Mirror Pond' };
+const NAME_OF = { loom: 'The Loom', table: 'The Loom', bench: 'The Loom', terraces: 'The Root Workshop', 'reading-room': 'The Reading House', meadow: 'The Word Garden', pond: 'The Word Garden' };
 const BANK_MODULES = new Set(['sp', 'pc', 'wb', 'cr']);
 
 /**
@@ -32,13 +33,13 @@ export function worldReward(session, items = []) {
       <div class="world-reward__stars" aria-label="${stars} of 3 stars">${'★'.repeat(stars)}<span class="off">${'★'.repeat(3 - stars)}</span></div>
       <div class="world-reward__lead">
         <p class="world-reward__title">${stars === 3 ? 'Accurate and in time.' : stars === 2 ? 'Accurate, over time.' : stars === 1 ? 'Completed, with misses.' : 'Not yet.'}</p>
-        <p class="world-reward__line">${NAME_OF[region] ?? 'The valley'} remembers this set. <a href="#/world">Back to the valley</a></p>
+        <p class="world-reward__line">${NAME_OF[region] ?? 'The village'} keeps what this made. <a href="#/world">Back to the village</a></p>
       </div>
-      <span class="world-reward__won">${won.map((c) => `<span class="craft craft--${c.key}"><i></i>+${c.amount}</span>`).join('')}</span>
+      <span class="world-reward__won">${won.map((c) => chip(c.key, c.amount, { sign: '+' })).join('')}</span>
     </div>`;
   sessionStorage.setItem('world:focus', region);
   sessionStorage.setItem('world:changed', region);
-  sessionStorage.setItem('world:change-line', `${NAME_OF[region] ?? 'The valley'}: <b>${stars} star${stars === 1 ? '' : 's'}</b>`);
+  sessionStorage.setItem('world:change-line', `${NAME_OF[region] ?? 'The village'}: <b>${stars} star${stars === 1 ? '' : 's'}</b>`);
   // The crafts fly into the purse on the way back, exactly as they do
   // after a round or a passage.
   if (won.length) sessionStorage.setItem('world:earned', JSON.stringify(earned));

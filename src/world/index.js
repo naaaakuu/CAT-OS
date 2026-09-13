@@ -15,8 +15,7 @@
  *   /round/:region/:field        a vocabulary round (meadow | pond | thicket)
  */
 
-import { renderWorld } from './screens/world.js';
-import { renderAwaken } from './screens/awaken.js';
+import { renderVillage } from '../village/screens/village.js';
 import { renderPlace } from './screens/place.js';
 import { renderRound } from './screens/round.js';
 import { initWorldAudio } from './audio.js';
@@ -24,8 +23,8 @@ import { initWorldAudio } from './audio.js';
 export function registerWorld(router, context) {
   initWorldAudio(context.storage).catch(() => { /* defaults */ });
   router
-    .register({ path: '/awaken', title: 'Welcome', render: (outlet) => renderAwaken(outlet, context) })
-    .register({ path: '/world', title: 'The valley', render: (outlet) => renderWorld(outlet, context) })
+    .register({ path: '/awaken', title: 'Welcome', render: () => { location.replace('#/world'); } })
+    .register({ path: '/world', title: 'Your village', render: (outlet) => renderVillage(outlet, context) })
     .register({ path: '/world/place/:slug', title: 'A place', render: (outlet, params) => renderPlace(outlet, context, params) })
     .register({ path: '/round/:region', title: 'A round', render: (outlet, params) => renderRound(outlet, context, params) })
     .register({ path: '/round/:region/:field', title: 'A round', render: (outlet, params) => renderRound(outlet, context, params) });

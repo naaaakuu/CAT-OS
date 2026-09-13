@@ -168,7 +168,7 @@ export function collections(s, content) {
         id: `bank:cr:${r.id}`, group: 'reading', mark: 'book',
         name: r.title, what: 'arguments seen through',
         have: solvedIn('cr', ids), total: ids.length, unit: 'arguments',
-        route: '#/world/place/reading-room', line: 'The Reading Room · arguments',
+        route: '#/world/place/reading-room', line: 'The Reading House · arguments',
         hard: r.band === 'elite' ? 0.8 : r.band === 'stretch' ? 0.5 : 0.25,
       }));
     }
@@ -216,8 +216,8 @@ export function collections(s, content) {
   out.push(set({
     id: 'works', group: 'pace', mark: 'cottage',
     name: 'Works standing', what: 'built',
-    have: s.works.filter((w) => w.built && w.kind !== 'endless').length,
-    total: s.works.filter((w) => w.kind !== 'endless').length, unit: 'works',
+    have: s.village ? s.village.buildings.filter((b) => b.built).length : 0,
+    total: s.village ? s.village.buildings.length : 7, unit: 'buildings',
     route: '#/world/place/hearth?works=1',
     line: 'Everything your learning has built', hard: 0.4,
   }));

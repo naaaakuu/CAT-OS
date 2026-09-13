@@ -20,7 +20,6 @@ import { registerLanguageGarden } from './modules/language-garden/index.js';
 import { registerBank } from './modules/verbal-bank/index.js';
 import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
-import { loadValley } from './world/companion.js';
 import { syncStage, unmountStage } from './world/stage.js';
 import { silenceWorld, musicEnabled, setMusicEnabled } from './world/audio.js';
 import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
@@ -64,7 +63,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '1.1.4'; // keep in step with CHANGELOG.md
+const APP_VERSION = '2.0.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -348,7 +347,7 @@ function renderSettings(outlet) {
             <span class="row__icon" aria-hidden="true">♫</span>
             <div>
               <div class="row__label">Music and ambience</div>
-              <div class="row__hint">The valley's own music, wind, water and birds — needs Sounds on</div>
+              <div class="row__hint">The village's own music, wind, water and birds — needs Sounds on</div>
             </div>
           </div>
           <div class="segmented" id="garden-ambience-picker" role="group" aria-label="World music" data-sfx="off">
@@ -360,8 +359,8 @@ function renderSettings(outlet) {
           <div class="row__lead">
             <span class="row__icon" aria-hidden="true">⌂</span>
             <div>
-              <div class="row__label">Back to the valley</div>
-              <div class="row__hint">The world is the home screen</div>
+              <div class="row__label">Back to the village</div>
+              <div class="row__hint">The village is the home screen</div>
             </div>
           </div>
           <a class="btn" href="#/world">Open</a>
@@ -694,7 +693,7 @@ function renderNotFound(outlet) {
         <div class="empty__glyph" aria-hidden="true">?</div>
         <h2>Screen not found</h2>
         <p>That address doesn't exist. It may be from an older version.</p>
-        <a class="btn btn--primary" href="#/world">Back to the valley</a>
+        <a class="btn btn--primary" href="#/world">Back to the village</a>
       </div>
     </section>
   `;
@@ -748,12 +747,9 @@ async function boot() {
   // nothing that linked to them breaks.
   // A learner who has never been welcomed meets Wick first, in a valley
   // that has not been named yet. Every later cold open lands in the valley.
-  let opening = '/world';
-  try {
-    const valley = await loadValley(storage);
-    if (!valley.awakened_at && (!location.hash || location.hash === '#/' || location.hash === '#/world')) opening = '/awaken';
-  } catch { /* the valley is the safe default */ }
-  router.start(opening);
+  // 2.0.0: the village is the application, and the first minutes are the
+  // village screen itself, staged — so every cold open lands there.
+  router.start('/world');
 
   // Chrome destroys place: inside the world — the valley, a place, a round,
   // a Rootwood session — the app's header and tab bar are hidden and every
@@ -830,15 +826,15 @@ async function boot() {
       });
 
       const registration = await navigator.serviceWorker.register('./service-worker.js');
-      registration.update();
+      registration.update().catch(() => { /* offline, or a host that cannot serve the worker */ });
       // The rest of the library — every passage, jumble, summary and bank
       // file the content engine ships — arrives in the background, a few
       // files at a time, once the valley is painted and the phone is idle.
       // The service worker's fetch handler keeps each one for offline use.
       startLibrarySync({ delayMs: 9000 });
-      setInterval(() => registration.update(), 30 * 60 * 1000);
+      setInterval(() => registration.update().catch(() => {}), 30 * 60 * 1000);
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') registration.update();
+        if (document.visibilityState === 'visible') registration.update().catch(() => { /* offline, or a host that cannot serve the worker */ });
       });
     } catch (err) {
       console.warn('[CAT OS] service worker registration failed:', err);

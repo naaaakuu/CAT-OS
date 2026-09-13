@@ -4,7 +4,24 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-12 — 1.3.0, the final product transformation: a valley that starts empty and is built entirely out of what the learner learned, a Workshop that is a shelf of small buildings, 124 collections you can finish, works that never run out, a missed question that rests before it comes back, one icon language drawn by the same hand as the world, and an open three times faster than it was. App version 1.3.0._
+_Last updated: 2026-09-13 — 2.0.0, the village: a village management game whose economy is powered by getting better at CAT. Four goods and one currency, villagers who post orders, buildings with levels and helpers, land and neighbours, the first minutes staged on the village screen itself, a new illustrated art direction that keeps the light, the water and the life of the valley, and a renderer that blits every sprite at whole pixels. App version 2.0.0._
+
+## What changed in 2.0.0
+
+| System | State | Notes |
+|---|---|---|
+| **The village** (`src/village/screens/village.js`) | **shipped (2.0.0)** | The home screen is a village, not a map: the Hearth in the middle, five workers at their doors, animals, water, weather, a road out. HUD with the name and level, coins and the goods in store; bubbles over buildings; one card that says what to do, what it makes and why; building sheets; the Market board; the barn; deliveries, collection and construction with the goods and coins seen moving |
+| **The economy** (`src/world/economy.js`) | **shipped (2.0.0)** | Pages · Blooms · Roots · Thread, one per star (one more if flawless), and Coins. Orders are deterministic, only ask for what the village makes, and pay more as the village grows. Every build asks for standing earned by learning. Amber/Ink/Thread/Ember, the works, the asks and the Workshop are retired |
+| **The world as data** (`src/village/defs.js`) | **shipped (2.0.0)** | Goods, characters, seven buildings with levels (cost, standing, effect, art), five plots, ten houses, order reasons, stages. A second world is another file |
+| **The derived village** (`src/village/state.js`) | **shipped (2.0.0)** | Five record kinds → stock, coins, levels, open orders, helpers on the clock, worth → level → stage, the tip, the onboarding step. Nothing stored back; a backup carries the village |
+| **Helpers** | **shipped (2.0.0)** | Level three puts a worker to work alone — one good every three hours, capped — and asks for mastery first (eight passages read well, three at three stars; 120 words held; fourteen families grown; forty items solved with twelve at three stars) |
+| **The first minutes** | **shipped (2.0.0)** | The mark, the glide, Wick's four lines, Ada's one-Page order, the shortest foundation passage, the Page flying home, the delivery, the Word Garden built, the name — each step derived from records, so closing the app mid-way loses nothing. Played end to end in a real browser by `tour-loop.mjs` |
+| **The art** (`src/village/art.js`) | **shipped (2.0.0)** | 41 recipes drawn with the canvas path API into cached sprites: buildings at every level, five workers with poses (idle, walk, work, cheer, wave), Wick with his lamp, sheep, chickens, a dog, ducks, koi, trees in three poses, props, icons, bubbles. No image assets, no emoji |
+| **The environment, carried forward** (`scene.js`, `terrain.js`, `grove.js`) | **shipped (2.0.0)** | The hour's light on everything; windows, lamps and the moon on the pond at night; the river's flow and glints; koi per twelve twins; ducks; birds; butterflies and pollen; fireflies; leaves, petals, rain, snow, fog; cloud shadows; swaying trees; smoke; the Rootwood's grove and growth moment in the same hand. Music and ambience untouched |
+| **The renderer** (`src/village/renderer.js`) | **shipped (2.0.0)** | Snapped zoom, sprites at the exact device scale blitted at whole pixels, 1:1 ground, baked tint, cached glows and poses, warm-up after first paint. Software-raster home frame 386 → 22 ms by day; open → painted 1.3–1.6 s |
+| **Rooms and places** | **shipped (2.0.0)** | The learning rooms are unchanged in pedagogy; the place screens sit on the village's stills; results hand back with goods flying into the building that made them; "Your standing" replaces the Hearth's tabs |
+| **Verification** | **shipped (2.0.0)** | §16 covers goods, orders, worth and the derived village (helpers included); §17 the art and the workers. All checks pass |
+
 
 ## What changed in 1.3.0
 

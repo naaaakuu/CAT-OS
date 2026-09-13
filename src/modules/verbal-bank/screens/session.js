@@ -28,7 +28,7 @@ import '../../../ui/components/cat-timer.js';
 const TIERS = ['foundation', 'easy', 'medium', 'advanced', 'cat', 'cat-plus', 'ninety-nine', 'premium'];
 const BAND = { core: 0, stretch: 1, elite: 2 };
 const REGION_NAME = {
-  loom: 'The Loom', table: 'The Summary Table', bench: 'The Stranger’s Bench', 'reading-room': 'The Reading Room',
+  loom: 'The Loom', table: 'The Summary Table', bench: 'The Stranger’s Bench', 'reading-room': 'The Reading House',
   meadow: 'The Meadow', pond: 'The Mirror Pond', terraces: 'The Vine Terraces',
 };
 

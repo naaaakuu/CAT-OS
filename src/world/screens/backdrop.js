@@ -6,8 +6,8 @@
  * during a timed round.)
  */
 
-import { WorldRenderer } from '../engine/canvas.js';
-import { buildBackdropScene } from '../engine/map.js';
+import { VillageRenderer as WorldRenderer } from '../../village/renderer.js';
+import { buildBackdropScene } from '../../village/scene.js';
 
 /**
  * @param {HTMLCanvasElement} canvas
@@ -22,9 +22,7 @@ export function mountBackdrop(canvas, slug, state, atmo, opts = {}) {
   let renderer = null;
   try {
     const scene = buildBackdropScene(slug, state, atmo);
-    renderer = new WorldRenderer(canvas, scene, {
-      worldW: scene.W, worldH: scene.H, fit: 'cover', pannable: false, minZoom: 0.4, maxZoom: 8,
-    });
+    renderer = new WorldRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.4, maxZoom: 8 });
     renderer.lookAt(scene.W / 2, scene.focusY ?? scene.H * 0.55, { animate: false });
     if (opts.still === false) renderer.start(); else renderer.draw();
   } catch (err) {

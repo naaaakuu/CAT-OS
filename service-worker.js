@@ -26,7 +26,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 35;
+const CACHE_VERSION = 36;
 const CONTENT_VERSION = 14;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -137,6 +137,14 @@ const SHELL_FILES = [
   './src/modules/language-garden/screens/plant.js',
   './src/modules/language-garden/screens/session.js',
   './src/world/index.js',
+  './src/village/defs.js',
+  './src/village/art.js',
+  './src/village/state.js',
+  './src/village/scene.js',
+  './src/village/grove.js',
+  './src/village/terrain.js',
+  './src/village/renderer.js',
+  './src/village/screens/village.js',
   './src/world/regions.js',
   './src/world/state.js',
   './src/world/companion.js',
@@ -151,16 +159,10 @@ const SHELL_FILES = [
   './src/world/rewards.js',
   './src/world/garden-backdrop.js',
   './src/world/engine/palette.js',
-  './src/world/engine/sprites.js',
-  './src/world/engine/canvas.js',
-  './src/world/engine/life.js',
-  './src/world/engine/map.js',
   './src/world/curator.js',
   './src/world/stage.js',
   './src/world/craft-ui.js',
   './src/world/screens/backdrop.js',
-  './src/world/screens/world.js',
-  './src/world/screens/awaken.js',
   './src/world/screens/place.js',
   './src/world/screens/round.js',
   './src/world/screens/result.js',
@@ -168,6 +170,7 @@ const SHELL_FILES = [
   './src/world/screens/wilds.js',
   './src/ui/styles/game.css',
   './src/ui/styles/world.css',
+  './src/ui/styles/village.css',
   './src/ui/components/cat-nav.js',
   './src/ui/components/cat-plant.js',
   './src/ui/components/cat-jumble-board.js',

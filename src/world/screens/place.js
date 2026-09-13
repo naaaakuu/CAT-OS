@@ -12,14 +12,15 @@
  *   MORE    the full contents of the place, for the learner who wants it
  */
 
-import { WorldRenderer } from '../engine/canvas.js';
-import { buildGroveScene, buildBackdropScene } from '../engine/map.js';
-import { sprite } from '../engine/sprites.js';
+import { buildGroveScene } from '../../village/grove.js';
+import { VillageRenderer } from '../../village/renderer.js';
+import { buildBackdropScene } from '../../village/scene.js';
+import { art } from '../../village/art.js';
 import { atPlace } from '../companion.js';
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { starHTML } from './result.js';
-import { REGION_CRAFT, craft } from '../economy.js';
+import { REGION_GOOD, thing } from '../economy.js';
 import { nextPassage, nextVerbal, nextFamily, readingWeakness, typeName, missedQuestions, secondLookLine } from '../curator.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
@@ -52,7 +53,7 @@ export async function renderPlace(outlet, { storage }, params) {
   }
   const { state, content } = world;
   const atmo = state.atmo;
-  const madeHere = craft(REGION_CRAFT[region.slug] ?? 'amber');
+  const madeHere = thing(REGION_GOOD[region.slug] ?? 'blooms');
 
   outlet.innerHTML = `
     <section class="place" aria-label="${escapeHTML(region.name)}">
@@ -60,7 +61,7 @@ export async function renderPlace(outlet, { storage }, params) {
         <canvas id="hero" aria-label="${escapeHTML(region.name)}"></canvas>
         <div class="place__fade" aria-hidden="true"></div>
       </div>
-      <a class="place__back" href="#/world" id="back">← The valley</a>
+      <a class="place__back" href="#/world" id="back">← The village</a>
       <div class="place__hero-stat" id="hero-stat"></div>
       <div class="placewick" id="placewick" hidden><canvas width="36" height="30" aria-hidden="true"></canvas><p></p></div>
       <div class="sheet" id="sheet">
@@ -86,9 +87,8 @@ export async function renderPlace(outlet, { storage }, params) {
     if (line && !seen && el) {
       sessionStorage.setItem('wick:place', region.slug);
       const cx = el.querySelector('canvas').getContext('2d');
-      cx.imageSmoothingEnabled = false;
-      const sp = sprite('wick', { pose: 'look', lamp: false, lit: true });
-      cx.drawImage(sp.canvas, 8, 0, 14, 13, 1, 1, 14 * 2, 13 * 2);
+      const sp = art('wick', { pose: 'sit' }, 3);
+      cx.drawImage(sp.canvas, 0, 0, sp.canvas.width, sp.canvas.height * 0.62, 1, 1, 34, 24);
       el.querySelector('p').textContent = line;
       el.hidden = false;
       setTimeout(() => el.classList.add('is-in'), 700);
@@ -112,14 +112,14 @@ export async function renderPlace(outlet, { storage }, params) {
     renderer?.destroy();
     const canvas = outlet.querySelector('#hero');
     if (!canvas) return null;
-    renderer = new WorldRenderer(canvas, scene, { worldW: scene.W, worldH: scene.H, fit: 'cover', pannable: false, minZoom: 0.5, maxZoom: 6, onTap: opts.onTap });
+    renderer = new VillageRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.5, maxZoom: 6, onTap: opts.onTap });
     renderer.lookAt(scene.W / 2, scene.focusY ?? scene.H * 0.6, { animate: false });
     renderer.start();
     return renderer;
   };
   const onHash = () => { renderer?.destroy(); window.removeEventListener('hashchange', onHash); };
   window.addEventListener('hashchange', onHash);
-  const warmth = Math.min(1, (state.builds.length / 12) * 0.6 + Math.min(1, state.stars / 90) * 0.4);
+  const warmth = Math.min(1, (state.village.levels.size / 8) * 0.6 + Math.min(1, state.stars / 90) * 0.4);
   const onDown = () => { unlock(); startMusic(region.slug, { hour: atmo.hour, warmth }); startAmbience(region.slug, atmo); };
   window.addEventListener('pointerdown', onDown, { capture: true, once: true });
   startMusic(region.slug, { hour: atmo.hour, warmth }); startAmbience(region.slug, atmo);
@@ -158,7 +158,7 @@ export async function renderPlace(outlet, { storage }, params) {
     heroStat.innerHTML = pill(`\u2663 ${rw.grownCount} grown`);
     const renderGrove = () => {
       const fams = selected.families;
-      const scene = buildGroveScene(selected, fams, atmo, { selected: f?.id ?? null, portrait: true, heroId: f?.id ?? null });
+      const scene = buildGroveScene(selected, fams, atmo, { selected: f?.id ?? null, heroId: f?.id ?? null });
       mountHero(scene, { onTap: (w) => { const o = scene.hit(w.x, w.y); if (o?.family) { play('tap'); location.hash = o.family.stage === 'open_ground' || o.family.due !== 'none' ? `#/garden/session/${o.family.id}` : `#/garden/plant/${o.family.id}`; } } });
       head({ pct: rw.total ? rw.metCount / rw.total : 0, label: `${rw.metCount} / ${rw.total} families` }, cta, pick?.why);
       more.innerHTML = section('Six groves', 'Roots that share a field of meaning stand together. Choose a grove to walk.', `

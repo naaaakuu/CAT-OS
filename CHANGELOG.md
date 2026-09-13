@@ -4,6 +4,103 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 2.0.0 — The village (2026-09-13)
+
+On the owner's "COMPLETE WORLD/UI RECONCEPTION · HAY DAY-INSPIRED EDUCATIONAL
+VILLAGE" brief, with the preservation note that followed it. 1.3.0 was a
+valley that grew because the learner learned; it was still, at first glance,
+a pixel-art map with pins and a purse of four gems, and the loop — learn,
+earn a craft, build a work — happened in the database and was announced in
+a line. 2.0.0 is a village management game whose economy is powered by
+getting better at CAT verbal ability, built on top of the same content
+engine, curator, collections and records.
+
+### Learning is the economy, and says so
+
+- **Four goods, one currency.** Pages (the Reading House), Blooms (the Word
+  Garden), Roots (the Root Workshop), Thread (the Loom), and Coins. A
+  finished activity makes one of its building's good per star, one more if
+  flawless, never nothing. Villagers post **orders** for goods; delivering
+  pays coins; coins build, raise and open land. Amber, Ink, Thread-as-craft
+  and Ember are gone, and so are the twenty-one works, the day's asks and
+  the Workshop.
+- **Orders** (`src/world/economy.js`) are deterministic in (slot, n), only
+  ask for what the village can make, and pay by price, the maker's level
+  and the Market's. The first is Ada's — one Page, paying what the Word
+  Garden costs; the second is Bo's, two Blooms.
+- **Every build asks for standing** — three passages read well before a
+  second floor, twelve items solved before the spool sign — so nothing is
+  bought without the learning that earns it.
+- **Helpers are mastery.** A building's third level puts its worker to work
+  alone: a Page, a Bloom, a Root or a Thread every three hours, up to
+  three (six at level four), collected with a tap. It asks for real mastery
+  first and never replaces the learner.
+
+### The village is the home screen
+
+- `src/village/defs.js` is the world as data: goods, five workers (Ada, Bo,
+  Ines, Nell, Rafi) with looks and lines, seven buildings with levels
+  (cost, standing, effect, art), five plots of land, ten houses for
+  neighbours, order reasons, stages. A second world is another file.
+- `src/village/state.js` derives the village from five record kinds
+  (`village-build`, `village-order`, `village-collect`, `village-plot`,
+  `village-house`): stock, coins, levels, open orders, helpers, worth →
+  level → stage, the one tip, the onboarding step. Nothing is stored back.
+- `src/village/screens/village.js` is home: the HUD (name and level, coins,
+  the goods in store), bubbles over buildings (a gold check with coins, a
+  good with +n, a hammer, the good an order still needs), one card at the
+  bottom (what to do, what it makes, why), building sheets (the worker and
+  a line, the store, the orders, the one activity, the next level), the
+  Market board, the barn, land and houses, deliveries with coins flying to
+  the purse, collection, construction under a scaffold and dust, goods
+  flying into the building that made them on the way back from a run, and
+  Wick's lines.
+- **The first minutes are the village screen itself, staged**: the mark,
+  the glide down, Wick's four lines, Ada's request, the shortest foundation
+  passage, the Page flying home, the delivery, the Word Garden built, the
+  name. Every step is a fact about the records. `#/awaken` now redirects.
+
+### A new art direction, with the environment carried forward
+
+- `src/village/art.js` draws every building (with levels), person, animal,
+  tree, prop and icon with the canvas path API into cached sprites: rounded
+  forms, one light, a soft ground shadow, a warm outline. Nothing is an
+  image asset; nothing is an emoji. The pixel-art engine (`sprites.js`,
+  `map.js`, `canvas.js`, `life.js`) is retired; `palette.js` stays.
+- `src/village/terrain.js`, `scene.js` and `grove.js` keep what made the
+  valley a place: the real clock with the hour's light on everything, lit
+  windows and lamps and the moon on the pond after dark, the river's flow
+  and glints, koi and ducks, birds, butterflies and pollen, fireflies,
+  autumn leaves and spring petals, rain and snow and fog, cloud shadows,
+  trees swaying, chimney smoke, sheep and chickens and a dog once their
+  homes exist. The Rootwood's grove and the backdrop behind a root-family
+  session are redrawn in the same hand, growth moment included.
+- The music and ambience are untouched.
+
+### Performance
+
+- `src/village/renderer.js` draws straight to the screen through one
+  transform. Sprites are cached at the exact device scale and blitted at
+  whole pixels (the zoom snaps to quarter-pixel steps), the ground is one
+  1:1 blit, the hour's tint is baked into sprites and ground rather than
+  multiplied per frame, glows are cached sprites, sway is three cached
+  poses, flips are cached, and the leaning and tinted variants are warmed
+  two per frame after the first paint. Under headless software raster at
+  390 × 844 the home frame went from 386 ms to **22 ms** by day (16.6 ms
+  zoomed in); open to painted 1.3–1.6 s.
+- A developer hook, `localStorage['catos:hour']`, pins the clock for
+  testing every hour.
+
+### Elsewhere
+
+- `src/world/economy.js`, `state.js`, `craft-ui.js`, `icons.js`,
+  `companion.js` and `growth.js` were rewritten or reduced to serve the
+  village; `hearth.js` is now "Your standing"; the place screens keep their
+  sheets on the village's stills; the Reading Room is the Reading House.
+- `tools/verify.mjs` §16 covers the goods, the orders and the derived
+  village (helpers included); §17 covers the art recipes and every worker's
+  face. All checks pass. Service worker `CACHE_VERSION` 36.
+
 ## 1.3.0 — The valley you built (2026-09-12)
 
 On the owner's "FINAL PRODUCT TRANSFORMATION" brief. 1.2.0 was a beautiful

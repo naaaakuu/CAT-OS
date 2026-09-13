@@ -77,10 +77,10 @@ export function renderResult(outlet, o) {
         ${unlocked.length ? `
         <div class="unlockbar late">
           <div class="unlockbar__glow" aria-hidden="true"></div>
-          <p class="unlockbar__eyebrow">Ready to build</p>
+          <p class="unlockbar__eyebrow">Ready in the village</p>
           <p class="unlockbar__name">${escapeHTML(unlocked[0].name)}${unlocked.length > 1 ? ` <span>and ${unlocked.length - 1} more</span>` : ''}</p>
           <p class="unlockbar__line">${escapeHTML(unlocked[0].line ?? '')}</p>
-          <a class="unlockbar__go" href="#/world/place/hearth?works=1">Go to the Workshop</a>
+          <a class="unlockbar__go" href="#/world">Back to the village</a>
         </div>` : ''}
         <div class="late result__extra">${o.extraHTML ?? ''}</div>
         <div class="result__actions">

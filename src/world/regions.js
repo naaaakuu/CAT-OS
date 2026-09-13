@@ -15,14 +15,14 @@ export const WORLD_H = 720;
 export const REGIONS = Object.freeze([
   {
     slug: 'hearth', name: 'The Hearth', kind: 'home',
-    line: 'Home. Your quests, your collections, your records.',
+    line: 'Home. Your standing, your collections, your records.',
     verb: 'Come home',
     anchor: { x: 214, y: 566 }, hit: { x: 160, y: 500, w: 110, h: 80 },
     route: '#/world/place/hearth', color: '#F1E1C0',
   },
   {
     slug: 'rootwood', name: 'The Rootwood', kind: 'learn',
-    line: 'Latin and Greek roots. Take a word apart and a whole family of words opens.',
+    line: 'Latin and Greek roots, the Root Workshop’s wood. Take a word apart and a whole family of words opens.',
     verb: 'Walk into the wood',
     skill: 'Roots & word families',
     anchor: { x: 160, y: 262 }, hit: { x: 24, y: 150, w: 290, h: 180 },
@@ -45,9 +45,9 @@ export const REGIONS = Object.freeze([
     route: '#/world/place/pond', color: '#4D9FD3',
   },
   {
-    slug: 'reading-room', name: 'The Reading Room', kind: 'learn',
-    line: 'CAT passages against the clock. Read fast, read true, and the tower rises.',
-    verb: 'Climb the tower',
+    slug: 'reading-room', name: 'The Reading House', kind: 'learn',
+    line: 'CAT passages against the clock. Read fast, read true, and Ada makes Pages.',
+    verb: 'Read with Ada',
     skill: 'Reading comprehension',
     anchor: { x: 522, y: 404 }, hit: { x: 446, y: 320, w: 160, h: 130 },
     route: '#/world/place/reading-room', color: '#BFB4A2',

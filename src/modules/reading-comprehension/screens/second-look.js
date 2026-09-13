@@ -83,7 +83,7 @@ export async function renderSecondLook(outlet, { storage }) {
       <div class="run__veil" aria-hidden="true"></div>
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/reading-room" aria-label="Leave">×</a>
-        <div class="run__where"><div class="run__place">The Reading Room</div><div class="run__what" id="run-what">The second look</div></div>
+        <div class="run__where"><div class="run__place">The Reading House</div><div class="run__what" id="run-what">The second look</div></div>
         <div class="run__pace" id="pace" hidden><span class="run__clock" id="clock">0:00</span></div>
       </div>
       <div class="run__track" id="track-wrap" hidden><i id="track" style="width:0%"></i></div>
@@ -226,7 +226,7 @@ export async function renderSecondLook(outlet, { storage }) {
       const settled = answers.filter((a) => a.is_correct).length;
       renderResult(outlet, {
         region: 'reading-room',
-        eyebrow: 'The Reading Room · The second look',
+        eyebrow: 'The Reading House · The second look',
         title: res.stars === 3 ? 'Settled' : 'The second look',
         result: res,
         verdict: settled === total
@@ -242,7 +242,7 @@ export async function renderSecondLook(outlet, { storage }) {
         setsDone,
         unlocked,
         actions: [
-          { label: 'Back to the Reading Room', href: '#/world/place/reading-room', primary: true },
+          { label: 'Back to the Reading House', href: '#/world/place/reading-room', primary: true },
           { label: 'The valley', href: '#/world' },
         ],
       });
@@ -253,7 +253,7 @@ export async function renderSecondLook(outlet, { storage }) {
 }
 
 function frameError(message) {
-  return `<section class="run"><div class="run__body"><div class="brief"><h1 class="brief__title">The second look will not open</h1><p class="brief__line">${escapeHTML(message)}</p><a class="g-btn" href="#/world/place/reading-room">Back to the Reading Room</a></div></div></section>`;
+  return `<section class="run"><div class="run__body"><div class="brief"><h1 class="brief__title">The second look will not open</h1><p class="brief__line">${escapeHTML(message)}</p><a class="g-btn" href="#/world/place/reading-room">Back to the Reading House</a></div></div></section>`;
 }
 
 /** How many missed questions exist but are still resting. */
@@ -273,6 +273,6 @@ function frameEmpty(resting = 0, weakness = null) {
     <p class="brief__eyebrow">Reading comprehension</p>
     <h1 class="brief__title">${title}</h1>
     <p class="brief__line">${line}</p>
-    <a class="g-cta" href="#/world/place/reading-room">Back to the Reading Room<span class="arrow" aria-hidden="true">→</span></a>
+    <a class="g-cta" href="#/world/place/reading-room">Back to the Reading House<span class="arrow" aria-hidden="true">→</span></a>
   </div></div></section>`;
 }

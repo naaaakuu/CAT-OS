@@ -15,8 +15,8 @@ import { icon } from '../../world/icons.js';
 // Three places, and no fourth. Settings is administration, and lives
 // behind the valley's ☰ (src/world/menu.js) — never in the thumb rail.
 const ITEMS = [
-  { path: '/world',    label: 'Valley',   mark: 'valley' },
-  { path: '/world/place/hearth', label: 'Hearth', mark: 'cottage' },
+  { path: '/world',    label: 'Village',  mark: 'valley' },
+  { path: '/world/place/hearth', label: 'Standing', mark: 'cottage' },
   { path: '/growth',   label: 'Growth',   mark: 'sprout' },
 ];
 

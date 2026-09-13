@@ -1,152 +1,106 @@
 /**
- * craft-ui.js — the one place that turns a bag of crafts into markup, so
- * Amber, Ink, Thread and Ember look identical everywhere in the valley:
- * on the HUD, on a result, in the Workshop, on a work's cost.
+ * craft-ui.js — the one place that turns a bag of coins and goods into
+ * markup, so Pages, Blooms, Roots, Thread and Coins look identical
+ * everywhere: on the HUD, on a result, on an order, on a cost.
  *
  * Pure string building; no DOM, no storage.
  */
 
-import { CRAFTS, bagEntries, craft } from './economy.js';
-import { craftIcon, placeIcon, workArt } from './icons.js';
+import { bagEntries, thing } from './economy.js';
+import { artIMG } from '../village/art.js';
+import { GOODS, COINS, BUILDINGS } from '../village/defs.js';
 
-/** One craft chip: the pigment dot and a number. */
-export function chip(key, amount, { sign = '', className = '' } = {}) {
-  const c = craft(key);
-  if (!c) return '';
-  return `<span class="craft craft--${key} ${className}" data-craft="${key}" title="${c.name}">${craftIcon(key, { size: 15 })}<b>${sign}${amount}</b><span class="craft__name">${c.name}</span></span>`;
+/** The icon for a bag key (coins or a good). */
+export function goodIcon(key, { size = 16, className = '' } = {}) {
+  const t = thing(key);
+  return artIMG('icon', { glyph: t?.glyph ?? 'star', size: 20 }, { size, className });
+}
+/** Kept for older call sites. */
+export const craftIcon = goodIcon;
+
+/** One chip: the icon and a number. */
+export function chip(key, amount, { sign = '', className = '', name = false } = {}) {
+  const t = thing(key);
+  if (!t) return '';
+  return `<span class="craft craft--${key} ${className}" data-craft="${key}" title="${t.name}">${goodIcon(key, { size: 16 })}<b>${sign}${amount}</b>${name ? `<span class="craft__name">${amount === 1 && key !== 'coins' ? t.one : t.name}</span>` : ''}</span>`;
 }
 
-/** Every non-zero craft in a bag, as chips. */
-export function chips(bag, opts = {}) {
-  return bagEntries(bag).map((c) => chip(c.key, c.amount, opts)).join('');
+/** Every non-zero entry in a bag, as chips. */
+export function chips(bagObj, opts = {}) {
+  return bagEntries(bagObj).map((c) => chip(c.key, c.amount, opts)).join('');
 }
 
-/** A cost, with the crafts you cannot yet afford marked short. */
+/** A cost, with what you cannot yet afford marked short. */
 export function costChips(cost, purse) {
   return bagEntries(cost).map((c) => {
     const have = purse?.[c.key] ?? 0;
     const short = have < c.amount;
-    return `<span class="craft craft--${c.key} ${short ? 'is-short' : 'is-met'}" data-craft="${c.key}" title="${c.name}">${craftIcon(c.key, { size: 15 })}<b>${short ? `${have}/${c.amount}` : c.amount}</b><span class="craft__name">${c.name}</span></span>`;
+    return `<span class="craft craft--${c.key} ${short ? 'is-short' : 'is-met'}" data-craft="${c.key}" title="${c.name}">${goodIcon(c.key, { size: 16 })}<b>${short ? `${have}/${c.amount}` : c.amount}</b></span>`;
   }).join('');
 }
 
 /** A plain-text summary for aria labels and notices. */
-export function bagText(bag) {
-  const e = bagEntries(bag);
+export function bagText(bagObj) {
+  const e = bagEntries(bagObj);
   if (!e.length) return '';
-  return e.map((c) => `${c.amount} ${c.name}`).join(', ');
+  return e.map((c) => `${c.amount} ${c.amount === 1 && c.key !== 'coins' ? c.one : c.name}`).join(', ');
 }
 
-/** The four crafts in fixed order, for the HUD. Zeroes are dimmed, never hidden,
- *  so the learner sees the shape of the economy from the first day. */
+/** The coin pill for the HUD. */
+export function coinsHTML(n) {
+  return `<span class="craft craft--coins" data-craft="coins">${goodIcon('coins', { size: 18 })}<b>${n}</b></span>`;
+}
+
+/** Every good the village can make, in fixed order, for the barn. */
 export function purseHTML(purse, { showZero = true } = {}) {
-  return CRAFTS.filter((c) => showZero || (purse?.[c.key] ?? 0) > 0)
-    .map((c) => {
-      const n = purse?.[c.key] ?? 0;
-      return `<span class="craft craft--${c.key} ${n ? '' : 'is-zero'}" data-craft="${c.key}">${craftIcon(c.key, { size: 16 })}<b>${n}</b></span>`;
-    }).join('');
+  return GOODS.filter((g) => showZero || (purse?.[g.key] ?? 0) > 0)
+    .map((g) => { const n = purse?.[g.key] ?? 0; return `<span class="craft craft--${g.key} ${n ? '' : 'is-zero'}" data-craft="${g.key}">${goodIcon(g.key, { size: 16 })}<b>${n}</b></span>`; }).join('');
 }
 
 /* ------------------------------------------------------------------ */
-/* What a craft IS                                                     */
+/* What a good IS                                                      */
 /* ------------------------------------------------------------------ */
 
 /**
- * A craft is not money. It is a capability you have proved, and the
- * learner should never have to guess which one. Tapping any craft — in
- * the purse, on a cost, on a result — opens this: what it stands for,
- * what earns it, and the next thing in the valley it will pay for.
- *
- * Mounted once per screen; `openCraftSheet(key, state)` does the rest.
+ * Tapping any good — on the HUD, an order, a cost — opens this: what it
+ * is, who makes it, and what the learner does to make more.
  */
-
-/** Where each craft is made, as places the learner can actually go. */
-const EARNED_AT = {
-  amber: [
-    { name: 'The Meadow', href: '#/world/place/meadow', what: 'CAT word lists — meanings, synonyms, opposites' },
-    { name: 'The Rootwood', href: '#/world/place/rootwood', what: 'Latin and Greek roots, one family at a time' },
-    { name: 'The Mirror Pond', href: '#/world/place/pond', what: 'Words that look alike and are not' },
-    { name: 'The Vine Terraces', href: '#/world/place/terraces', what: 'Prefixes and suffixes' },
-    { name: 'The Thicket', href: '#/world/place/thicket', what: 'Words English borrowed' },
-  ],
-  ink: [
-    { name: 'The Reading Room', href: '#/world/place/reading-room', what: 'CAT passages against the clock' },
-  ],
-  thread: [
-    { name: 'The Loom', href: '#/world/place/loom', what: 'Para jumbles — the order the author wrote' },
-    { name: 'The Summary Table', href: '#/world/place/table', what: 'Para summary — the point, protected' },
-    { name: 'The Stranger’s Bench', href: '#/world/place/bench', what: 'Odd one out — the sentence that never belonged' },
-  ],
-  ember: [
-    { name: 'Anywhere', href: '#/world', what: 'Any three-star run: right, and inside the pace' },
-    { name: 'The Wilds', href: '#/world/place/wilds', what: 'The weekly Gauntlet — mixed and timed' },
-  ],
-};
-
-/** What this craft trains, said as a CAT ability rather than a resource. */
-const IS = {
-  amber: 'your word knowledge',
-  ink: 'your reading',
-  thread: 'your grip on how an argument is built',
-  ember: 'your accuracy at CAT pace',
-};
-
-/**
- * Open the sheet for one craft.
- * @param {string} key amber | ink | thread | ember
- * @param {object} state the derived world state (for the purse and the
- *        next work this craft is needed for); optional
- */
-/** The place slug inside a route like '#/world/place/meadow'. */
-function slugOf(href) {
-  const m = /place\/([a-z-]+)/.exec(String(href ?? ''));
-  return m ? m[1] : 'hearth';
-}
-
 export function openCraftSheet(key, state) {
-  const c = craft(key);
-  if (!c) return;
+  const t = thing(key);
+  if (!t) return;
   document.querySelector('.craftsheet')?.remove();
-  const have = state?.purse?.[key] ?? 0;
-  // The nearest work this craft is actually needed for — the honest answer
-  // to "what is this for?", not a catalogue.
-  // The nearest three works this craft is actually needed for, with the
-  // picture of each: a learner asking "what is Ink for?" wants to see the
-  // lantern path, not to read the words "the lantern path".
-  const pays = (state?.works ?? [])
-    .filter((w) => !w.built && (w.cost?.[key] ?? 0) > 0)
-    .sort((a, b) => (a.stage - b.stage) || ((a.cost[key] ?? 0) - (b.cost[key] ?? 0)))
-    .slice(0, 3);
-  const next = pays[0] ?? null;
-
+  const v = state?.village;
+  const have = v?.stock?.[key] ?? state?.purse?.[key] ?? 0;
+  const maker = BUILDINGS.find((b) => b.good === key);
+  const wanted = (v?.orders ?? []).filter((o) => (o.needs?.[key] ?? 0) > 0);
   const el = document.createElement('div');
   el.className = 'craftsheet';
   el.innerHTML = `
     <div class="craftsheet__scrim" data-close></div>
-    <section class="craftsheet__card craft-of--${key}" role="dialog" aria-label="${c.name}">
+    <section class="craftsheet__card craft-of--${key}" role="dialog" aria-label="${t.name}">
       <button class="craftsheet__close" data-close aria-label="Close">×</button>
       <header class="craftsheet__head">
-        <span class="craftsheet__gem">${craftIcon(key, { size: 44 })}</span>
+        <span class="craftsheet__gem">${goodIcon(key, { size: 44 })}</span>
         <div>
-          <h2 class="craftsheet__name">${c.name}</h2>
-          <p class="craftsheet__is">${c.name} is ${IS[key]}.</p>
+          <h2 class="craftsheet__name">${t.name}</h2>
+          <p class="craftsheet__is">${key === 'coins' ? 'Coins build, raise and open land. Orders pay them.' : t.line}</p>
         </div>
         <span class="craftsheet__have"><b>${have}</b><small>you have</small></span>
       </header>
-      <p class="craftsheet__line">${c.line}</p>
-      <p class="craftsheet__label">Earn it by</p>
-      <ul class="craftsheet__where">
-        ${(EARNED_AT[key] ?? []).map((p) => `<li><a href="${p.href}">${placeIcon(slugOf(p.href), { size: 22 })}<span class="craftsheet__wh"><b>${p.name}</b><span>${p.what}</span></span><i aria-hidden="true">→</i></a></li>`).join('')}
-      </ul>
-      ${next ? `
-        <p class="craftsheet__label">It pays for</p>
+      ${maker ? `
+        <p class="craftsheet__label">Made at</p>
+        <ul class="craftsheet__where">
+          <li><a href="${maker.activity.route}">${artIMG('building', { id: maker.art, level: 1 }, { size: 40 })}<span class="craftsheet__wh"><b>${maker.name}</b><span>${maker.activity.label} → one ${t.one} per star, one more if flawless</span></span><i aria-hidden="true">→</i></a></li>
+        </ul>` : `
+        <p class="craftsheet__label">Earned by</p>
+        <ul class="craftsheet__where">
+          <li><span>${artIMG('icon', { glyph: 'board', size: 20 }, { size: 28 })}<span class="craftsheet__wh"><b>Delivering orders</b><span>Every order on the board pays coins</span></span></span></li>
+          <li><span>${artIMG('icon', { glyph: 'road', size: 20 }, { size: 28 })}<span class="craftsheet__wh"><b>The Gauntlet</b><span>The road out pays in coins</span></span></span></li>
+        </ul>`}
+      ${wanted.length ? `
+        <p class="craftsheet__label">Wanted right now</p>
         <div class="craftsheet__pays">
-          ${pays.map((w) => `
-            <a class="paycard" href="#/world/place/hearth?works=1">
-              <span class="paycard__plate">${workArt(w, 52)}</span>
-              <b>${w.name}</b>
-              <span>${w.cost[key]} ${c.name}${Object.keys(w.cost).filter((k) => k !== key && w.cost[k] > 0).length ? ' +' : ''}</span>
-            </a>`).join('')}
+          ${wanted.slice(0, 3).map((o) => `<span class="paycard"><b>${o.giver.name}</b><span>${o.needs[key]} ${o.needs[key] === 1 ? t.one : t.name} · ${o.pay} coins</span></span>`).join('')}
         </div>` : ''}
     </section>`;
   document.body.appendChild(el);
@@ -158,12 +112,11 @@ export function openCraftSheet(key, state) {
   });
   const onKey = (e) => { if (e.key === 'Escape') { close(); window.removeEventListener('keydown', onKey); } };
   window.addEventListener('keydown', onKey);
+  const drop = () => { el.remove(); window.removeEventListener('hashchange', drop); };
+  window.addEventListener('hashchange', drop);
 }
 
-/**
- * Make every craft chip inside a root open its sheet. Delegated, so it
- * keeps working when the purse re-renders.
- */
+/** Make every chip inside a root open its sheet. Delegated. */
 export function wireCraftTaps(root, getState) {
   if (!root || root.dataset.craftWired) return;
   root.dataset.craftWired = '1';
@@ -175,3 +128,5 @@ export function wireCraftTaps(root, getState) {
     openCraftSheet(chipEl.dataset.craft, typeof getState === 'function' ? getState() : getState);
   }, true);
 }
+
+export { COINS, GOODS };

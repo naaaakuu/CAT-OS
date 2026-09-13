@@ -88,18 +88,5 @@ export function deriveGrowth(s) {
  * One honest line about how far the valley has come, for the map and for
  * the Hearth. Never a percentage — a place, at a stage.
  */
-export const VALLEY_STAGES = Object.freeze([
-  { at: 0.00, name: 'Bare ground', line: 'Quiet land, and room everywhere.' },
-  { at: 0.12, name: 'A clearing', line: 'Tracks between the places, and the first trees.' },
-  { at: 0.28, name: 'A settlement', line: 'Someone else has moved in.' },
-  { at: 0.46, name: 'A hamlet', line: 'Smoke from more than one chimney.' },
-  { at: 0.64, name: 'A village', line: 'The Quarter works late, and the wood is deep.' },
-  { at: 0.80, name: 'A town', line: 'People come here to read.' },
-  { at: 0.92, name: 'A valley known for its readers', line: 'And the road out is lit.' },
-]);
-
-export function valleyStage(g) {
-  let out = VALLEY_STAGES[0];
-  for (const s of VALLEY_STAGES) if ((g ?? 0) >= s.at) out = s;
-  return out;
-}
+export { STAGES as VALLEY_STAGES } from '../village/defs.js';
+export { stageFor as valleyStage } from './economy.js';

@@ -1,5 +1,7 @@
 > **2026-09-11 — superseded in direction by 1.0.0.** CAT OS is a game world now (see `README.md`, `STATUS.md`, `CHANGELOG.md` 1.0.0 and `KNOWLEDGE/01_KNOWLEDGE/CAT OS — THE WORLD (1.0).md`). The milestones below remain the history of how the learning rooms were built; new work is planned against the world, not against this roadmap.
 
+> **2026-09-13 — 2.0.0 changed the frame.** CAT OS is now a village management game whose economy is powered by learning (see `KNOWLEDGE/01_KNOWLEDGE/CAT OS — THE WORLD (1.0).md`, Part A, and `STATUS.md`). Where this roadmap talks about the valley's crafts, works, the Workshop or the awaken screen, read: goods, orders, buildings with levels, and the village's first minutes. The content and learning milestones below still stand.
+
 # ROADMAP_V2.md
 
 **The master roadmap for CAT OS, from release 0.4.0 to Version 2.0.**

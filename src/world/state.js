@@ -17,12 +17,10 @@ import { GROVES } from '../modules/language-garden/logic/groves.js';
 import { deriveEngagement } from '../core/engagement/stats.js';
 import { dayKey, shiftDay } from '../core/engagement/streaks.js';
 import { computeStreamLevel } from '../modules/language-garden/logic/effort.js';
-import {
-  rcStars, verbalStars, EARN, WORKS, workById, questsForDate, titleFor, levelFromCleared,
-  emptyBag, addBag, subBag, surveyWorks, nextWork,
-} from './economy.js';
+import { rcStars, verbalStars, titleFor, levelFromCleared, subBag } from './economy.js';
+import { deriveVillage, newlyReady, villageLine } from '../village/state.js';
 import { listFields, ledgerFromRecords, summarizeLedger, fieldSummary } from './lexicon.js';
-import { deriveGrowth, valleyStage } from './growth.js';
+import { deriveGrowth } from './growth.js';
 import { skillLedger, nextSkill, weakSkills } from '../core/learning/review.js';
 import { hourWord, seasonWord, weatherWord } from './engine/palette.js';
 
@@ -93,8 +91,6 @@ export function deriveWorldState(content, records, now = Date.now()) {
   const gardenSessions = learning.filter((r) => r.kind === 'garden-session').sort((a, b) => a.finished_at.localeCompare(b.finished_at));
   const seeds = learning.filter((r) => r.kind === 'garden-seed');
   const rounds = learning.filter((r) => r.kind === 'lex-round');
-  const builds = learning.filter((r) => r.kind === 'world-build');
-  const questClaims = learning.filter((r) => r.kind === 'world-quest');
   const gauntlets = learning.filter((r) => r.kind === 'gauntlet-run');
   const ledger = ledgerFromRecords(learning);
   const ledgerSummary = summarizeLedger(ledger, now);
@@ -229,66 +225,12 @@ export function deriveWorldState(content, records, now = Date.now()) {
     stars: gauntlets.reduce((n, g) => Math.max(n, g.stars ?? 0), 0),
   };
 
-  /* ---- The purse: what every finished run made, minus what was built ---- */
-  let earned = emptyBag();
-  for (const s of rcSessions) {
-    const r = rcStars(s, rcById.get(s.passage_id)?.estimated_time_min, s.night_reading ? 0.8 : 1);
-    earned = addBag(earned, EARN.rc(r.stars, s.score?.correct ?? 0, r.flawless));
-  }
-  for (const slug of ['loom', 'table', 'bench']) {
-    const mod = verbal[slug].module;
-    const reg = { loom: content.pj, table: content.ps, bench: content.ooo }[slug];
-    const byId = new Map(reg.map((i) => [i.id, i]));
-    for (const s of sessions.filter((x) => x.module === mod)) {
-      const ids = s.item_ids ?? (s.answers ?? []).map((a) => a.item_id ?? a.question_id);
-      const target = ids.reduce((n, id) => n + (byId.get(id)?.estimated_time_sec ?? 90), 0);
-      const r = verbalStars(s, target);
-      earned = addBag(earned, EARN.verbal(r.stars, s.score?.correct ?? 0, r.flawless));
-    }
-  }
-  for (const s of sessions.filter((x) => x.module === 'rc2')) {
-    const r = verbalStars(s, (s.score?.total ?? 6) * 80);
-    earned = addBag(earned, EARN.secondLook(r.stars, s.score?.correct ?? 0, r.flawless));
-  }
-  for (const s of wdSessions) earned = addBag(earned, EARN.wd(s.score?.accuracy === 1 ? 3 : 1, s.score?.correct ?? 0));
-  for (const mod of ['sp', 'pc', 'wb', 'cr']) {
-    for (const s of sessions.filter((x) => x.module === mod)) {
-      const r = verbalStars(s, s.target_sec ?? (s.score?.total ?? 1) * 60);
-      earned = addBag(earned, EARN.bank(mod, r.stars, s.score?.correct ?? 0, r.flawless));
-    }
-  }
-  for (const s of gardenSessions) earned = addBag(earned, EARN.garden(s.session_type, s.clean === true));
-  for (const r of rounds) earned = addBag(earned, EARN.round(r.stars ?? 0, r.score?.correct ?? 0, r.flawless === true));
-  for (const g of gauntlets) earned = addBag(earned, EARN.gauntlet(g.stars ?? 0, g.score?.correct ?? 0));
-  for (const q of questClaims) earned = addBag(earned, q.paid ?? EARN.ask());
-  let spent = emptyBag();
-  for (const b of builds) spent = addBag(spent, workById(b.work_id ?? b.upgrade_id)?.cost ?? b.cost ?? emptyBag());
-  const purse = subBag(earned, spent);
-
-  /* ---- The works standing in the valley ---- */
-  const builtIds = builds.map((b) => b.work_id ?? b.upgrade_id).filter(Boolean);
-  const builtSet = new Set(builtIds);
+  /* ---- Works that were derived from the old craft economy are gone; the
+          village (village/state.js) derives what stands from its own records. ---- */
   const built = { hearthLevel: 1, floors: 1 };
-  for (const id of builtIds) {
-    const w = workById(id);
-    if (!w?.effect) continue;
-    for (const [k, v] of Object.entries(w.effect)) {
-      if (typeof v === 'number') built[k] = Math.max(built[k] ?? 0, v);
-      else built[k] = v;
-    }
-  }
-  // The tower's floors also rise a little with reading alone, so the world
-  // still answers to learning between works.
-  built.floors = Math.max(built.floors, clamp(1 + Math.floor(reading.stars / 18), 1, 3));
-  reading.floors = built.floors;
-  reading.observatory = built.observatory === true;
-  pond.lanterns = built.pondLanterns === true;
-  pond.heron = built.pondHeron === true;
-  terraces.arbour = built.terraceArbour === true;
-  thicket.arch = built.thicketArch === true;
-  thicket.path = built.thicketPath === true;
-  meadow.hives = built.meadowHives === true;
-  meadow.path = built.meadowPath === true;
+  reading.floors = 1;
+  reading.observatory = false;
+  pond.lanterns = false; pond.heron = false; terraces.arbour = false; thicket.arch = false; thicket.path = false; meadow.hives = false; meadow.path = false;
 
   /* ---- The days this valley was worked ---- */
   const allRuns = [...sessions, ...gardenSessions, ...rounds, ...gauntlets];
@@ -322,7 +264,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
     level_xp: engagement.level,
     // The title reads the valley, not an XP bar: stars are the honest
     // measure of accuracy at pace, and works are what was built with them.
-    title: titleFor(Math.max(engagement.level.level, 1 + Math.floor(starTotalFor(reading, verbal, meadow, pond, thicket, wilds) / 14) + builtIds.length)),
+    title: titleFor(Math.max(engagement.level.level, 1 + Math.floor(starTotalFor(reading, verbal, meadow, pond, thicket, wilds) / 14))),
     activeDays: activeDays.size,
   };
 
@@ -330,14 +272,8 @@ export function deriveWorldState(content, records, now = Date.now()) {
   const starTotal = reading.stars + verbal.loom.stars + verbal.table.stars + verbal.bench.stars
     + meadow.stars + pond.stars + thicket.stars + wilds.stars;
 
-  /* ---- Today and the day's asks ---- */
+  /* ---- Today ---- */
   const todaySum = todaySummary({ sessions, gardenSessions, rounds, gauntlets, rcById, date });
-  const quests = questsForDate(today).map((q, i) => {
-    const p = q.progress(todaySum);
-    const done = p.done >= p.goal;
-    const claimed = questClaims.some((c) => c.id === `quest:${today}:${i}`);
-    return { ...q, index: i, done: p.done, goal: p.goal, complete: done, claimed, key: `quest:${today}:${i}` };
-  });
 
   const isNew = allRuns.length === 0;
   const stream = computeStreamLevel(gardenSessions);
@@ -349,10 +285,9 @@ export function deriveWorldState(content, records, now = Date.now()) {
   const state = {
     atmo, now, isNew, today,
     rootwood, reading, ...verbal, banks, terraces, meadow, pond, thicket, wilds,
-    hearth, purse, earned, spent, stars: starTotal,
-    builds: builtIds, builtSet, built,
+    hearth, stars: starTotal, built,
     placesVisited: placesVisited.size, placesSeen: placesVisited,
-    quests, todaySum, stream, engagement, awayDays, lastRunAt,
+    todaySum, stream, engagement, awayDays, lastRunAt,
   };
 
   /* ---- Which CAT abilities are settled, and which are slipping ----
@@ -363,16 +298,16 @@ export function deriveWorldState(content, records, now = Date.now()) {
   state.weakSkills = weakSkills(state.skills);
   state.nextSkill = nextSkill(state.skills, state);
 
-  /* ---- How much of the valley exists yet ---- */
+  /* ---- How much of the valley exists yet (kept for the collections) ---- */
   state.growth = deriveGrowth(state);
-  state.stage = valleyStage(state.growth.valley);
 
-  /* ---- What the valley is building next, and who is asking ---- */
-  state.works = surveyWorks(state);
-  state.nextWork = nextWork(state);
-  state.readyWorks = state.works.filter((w) => w.ready);
+  /* ---- The village: what stands, what is in store, what is wanted ---- */
+  state.village = deriveVillage(state, records, content, now);
+  state.purse = state.village.stock;
+  state.stage = state.village.stage;
+  state.builds = [...state.village.levels.keys()];
+  state.reading.observatory = (state.village.levels.get('reading') ?? 0) >= 4;
   state.asking = whoIsAsking(state);
-  state.opportunities = buildOpportunities(state, content);
   return state;
 }
 
@@ -382,141 +317,13 @@ function whoIsAsking(s) {
   if (s.meadow.due >= 5) return 'meadow';
   if (s.pond.due >= 5) return 'pond';
   if (s.thicket.due >= 5) return 'thicket';
-  const q = s.quests.find((x) => !x.complete);
-  if (q && s.hearth.practicedToday) return q.region;
   return null;
-}
-
-/* ------------------------------------------------------------------ */
-/* Opportunities — the small number of things worth doing right now     */
-/* ------------------------------------------------------------------ */
-
-/**
- * The home screen shows at most four of these. Each one is a real reason
- * to go somewhere, written as the valley would say it, with a weight so
- * the most useful thing sits at the top. Never a wall of information.
- *
- * @returns {Array<{id, region, kind, title, line, href, weight, badge}>}
- */
-function buildOpportunities(s, content) {
-  const out = [];
-  const push = (o) => out.push(o);
-
-  /* A first-time learner is given one clear door, not five. */
-  if (s.isNew) {
-    push({ id: 'first-read', region: 'reading-room', kind: 'start', weight: 100, badge: 'Start here',
-      title: 'Read your first passage', line: 'Six minutes, four questions. The Reading Room is where the valley begins.',
-      href: '#/world/place/reading-room' });
-    push({ id: 'first-words', region: 'meadow', kind: 'start', weight: 90, badge: 'Or',
-      title: 'Bloom your first field', line: 'Twelve words from the CAT lists, one at a time.',
-      href: '#/world/place/meadow' });
-    return out;
-  }
-
-  /* Something is ready to build — always the loudest card. */
-  for (const w of s.readyWorks.slice(0, 2)) {
-    push({ id: `build:${w.id}`, region: w.region, kind: 'build', weight: 95, badge: 'Ready to build',
-      title: w.name, line: w.line, href: '#/world/place/hearth?works=1' });
-  }
-
-  /* Spaced review that is genuinely due — the highest-value practice. */
-  if (s.rootwood.asking) {
-    const f = s.rootwood.asking;
-    push({ id: 'rootwood-due', region: 'rootwood', kind: 'due', weight: 88, badge: `${s.rootwood.dueCount} due`,
-      title: `${f.label} is ready to revisit`, line: `“${f.meaning}” — a root you have grown is asking to be walked again before it fades.`,
-      href: '#/world/place/rootwood' });
-  }
-  for (const [slug, name, noun] of [['meadow', 'The Meadow', 'words'], ['pond', 'The Mirror Pond', 'twins'], ['thicket', 'The Thicket', 'loanwords']]) {
-    const r = s[slug];
-    if (r.due >= 8) {
-      push({ id: `${slug}-due`, region: slug, kind: 'due', weight: 84 - (slug === 'meadow' ? 0 : 2), badge: `${r.due} due`,
-        title: `${r.due} ${noun} are fading`, line: `${name} keeps what you revisit. These are due today.`,
-        href: `#/world/place/${slug}` });
-    }
-  }
-
-  /* The day's asks, the one closest to done first. */
-  const openAsks = s.quests.filter((q) => !q.complete).sort((a, b) => (b.done / b.goal) - (a.done / a.goal));
-  if (openAsks.length) {
-    const q = openAsks[0];
-    push({ id: `ask:${q.id}`, region: q.region, kind: 'ask', weight: 76, badge: q.goal > 1 ? `${q.done}/${q.goal}` : 'Today',
-      title: q.title, line: q.line, href: `#/world/place/${q.region}` });
-  }
-
-  /* The one ability that is slipping. This is the whole of "the game
-     knows what I need" — it reads every answer the learner has given
-     anywhere and points at one bench, in a sentence, with no dashboard. */
-  if (s.nextSkill && s.nextSkill.kind !== 'new') {
-    const n = s.nextSkill;
-    push({ id: `skill:${n.skill.key}`, region: n.skill.where ?? 'hearth', kind: 'skill', weight: 80,
-      badge: n.kind === 'fading' ? 'Going quiet' : 'Worth the time',
-      title: n.skill.name, line: n.why, href: n.route });
-  }
-
-  /* Unread passages, tuned to where the learner actually is. */
-  if (s.reading.read < s.reading.passages) {
-    const next = pickNextPassage(s, content);
-    if (next) {
-      push({ id: 'read-next', region: 'reading-room', kind: 'new', weight: 72, badge: 'New passage',
-        title: next.title ?? 'A new passage', line: `${next.genre ?? 'Reading'} · about ${Math.round(next.estimated_time_min ?? 6)} minutes · ${next.question_count ?? 4} questions.`,
-        href: `#/rc/session/${next.id}` });
-    }
-  }
-
-  /* A workshop in the Quarter that has never been opened. */
-  for (const [slug, name, line] of [
-    ['loom', 'The Loom', 'Four sentences, one order. Weave the paragraph the author wrote.'],
-    ['table', 'The Summary Table', 'Find the author’s point and protect it from the options that almost say it.'],
-    ['bench', 'The Stranger’s Bench', 'Build the paragraph, and the sentence that never belonged shows itself.'],
-  ]) {
-    if (s[slug].sessions === 0) {
-      push({ id: `try:${slug}`, region: slug, kind: 'new', weight: 66, badge: 'Never opened',
-        title: name, line, href: `#/world/place/${slug}` });
-    }
-  }
-
-  /* The Gauntlet, once there is enough learned to be tested on. */
-  if (s.stars >= 12 && s.wilds.runs === 0) {
-    push({ id: 'gauntlet', region: 'wilds', kind: 'challenge', weight: 64, badge: 'Unlocked',
-      title: 'The road out is open', line: 'Mixed, timed, against your own best. The Wilds are where you find out.',
-      href: '#/world/place/wilds' });
-  }
-
-  out.sort((a, b) => b.weight - a.weight);
-  // Never show the same kind of card three times: a home screen that says
-  // "these are fading" three ways teaches nothing new on the second line.
-  const seen = new Map();
-  const spread = [];
-  for (const o of out) {
-    const n = seen.get(o.kind) ?? 0;
-    if (n >= (o.kind === 'build' ? 2 : 1)) { o.weight -= 30; continue; }
-    seen.set(o.kind, n + 1);
-    spread.push(o);
-  }
-  return spread.concat(out.filter((o) => !spread.includes(o)).sort((a, b) => b.weight - a.weight));
 }
 
 /** Stars, before the state object exists (the title needs them early). */
 function starTotalFor(reading, verbal, meadow, pond, thicket, wilds) {
   return reading.stars + verbal.loom.stars + verbal.table.stars + verbal.bench.stars
     + meadow.stars + pond.stars + thicket.stars + wilds.stars;
-}
-
-/** The passage the Reading Room should offer next: unread, at the stage
- *  the learner is actually reading well at. */
-function pickNextPassage(s, content) {
-  const read = s.reading.best;
-  const unread = content.rc.filter((p) => !read.has(p.id));
-  if (!unread.length) return null;
-  const order = ['foundation', 'developing', 'exam', 'elite'];
-  // The highest stage where at least two passages have been read well.
-  let reach = 0;
-  for (let i = 0; i < order.length; i += 1) {
-    const done = content.rc.filter((p) => p.stage === order[i] && (read.get(p.id)?.stars ?? 0) >= 2).length;
-    if (done >= 2) reach = Math.min(order.length - 1, i + 1);
-  }
-  const stage = order[reach];
-  return unread.find((p) => p.stage === stage) ?? unread[0];
 }
 
 /* ------------------------------------------------------------------ */
@@ -555,43 +362,19 @@ export function starGlyphs(n, max = 3) {
 /* What changed                                                        */
 /* ------------------------------------------------------------------ */
 
-/** A one-line description of what changed in the world after a result —
- *  the reward that can be SEEN. */
+/**
+ * One line about what a run did for the village — the reward that can be
+ * SEEN: the goods it made, and the order they bring closer.
+ */
 export function worldChangeLine(region, before, after) {
-  if (!before || !after) return '';
-  if (region === 'reading-room') {
-    if (after.reading.floors > before.reading.floors) return `The Reading Room rises to <b>${after.reading.floors} floors</b>.`;
-    if (after.reading.litWindows > before.reading.litWindows) return `A new window lights up in the Reading Room tower.`;
-    return after.reading.stars ? `The tower keeps your ${after.reading.stars} star${after.reading.stars === 1 ? '' : 's'}.` : 'The tower waits for your first star.';
-  }
-  if (region === 'meadow') {
-    const d = after.meadow.mastered - before.meadow.mastered;
-    if (after.meadow.fieldsDone > before.meadow.fieldsDone) return `A whole field of the Meadow is in <b>full bloom</b>.`;
-    if (d > 0) return `<b>${d} new flower${d === 1 ? '' : 's'}</b> open in the Meadow.`;
-    return `Buds appear where words were met.`;
-  }
-  if (region === 'pond') {
-    if (after.pond.koi > before.pond.koi) return `<b>A new koi</b> arrives in the Mirror Pond.`;
-    return `The pond remembers ${after.pond.mastered} twins told apart.`;
-  }
-  if (region === 'thicket') {
-    if (after.thicket.lanterns > before.thicket.lanterns) return `<b>A lantern lights</b> along the Thicket path.`;
-    return `The brambles part a little further.`;
-  }
-  if (region === 'rootwood') return `The Rootwood grows: <b>${after.rootwood.grownCount}</b> families standing.`;
-  if (region === 'wilds') return after.wilds.best > before.wilds.best ? `A new best in the Wilds: <b>${after.wilds.best} stars</b>.` : `The Wilds remember ${after.wilds.runs} run${after.wilds.runs === 1 ? '' : 's'}.`;
-  if (['loom', 'table', 'bench'].includes(region)) {
-    if (after[region].level > before[region].level) return `The workshop grows: <b>level ${after[region].level}</b>.`;
-    return `${after[region].solved} of ${after[region].total} solved here.`;
-  }
-  if (region === 'terraces') return `${after.terraces.done} of ${after.terraces.total} families on the terraces.`;
-  return '';
+  if (!before?.village || !after?.village) return '';
+  const made = subBag(after.village.produced, before.village.produced);
+  return villageLine(after.village, made);
 }
 
-/** Which works became buildable between two states — the strongest signal
- *  the valley can send, so it is announced above everything else. */
+/** What became buildable, deliverable or openable between two states — the
+ *  strongest signal the village can send, so it is announced above all. */
 export function newlyBuildable(before, after) {
-  if (!before || !after) return [];
-  const was = new Set((before.readyWorks ?? []).map((w) => w.id));
-  return (after.readyWorks ?? []).filter((w) => !was.has(w.id));
+  if (!before?.village || !after?.village) return [];
+  return newlyReady(before.village, after.village).map((t) => ({ id: t.id, name: t.name, line: t.line, kind: t.kind, building: t.building ?? null }));
 }

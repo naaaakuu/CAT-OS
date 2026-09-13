@@ -15,8 +15,8 @@
  * know this exists.
  */
 
-import { WorldRenderer } from './engine/canvas.js';
-import { buildBackdropScene } from './engine/map.js';
+import { VillageRenderer as WorldRenderer } from '../village/renderer.js';
+import { buildBackdropScene } from '../village/scene.js';
 import { loadWorld } from './state.js';
 
 /** Which place a route belongs to, or null for the shell's own pages. */
@@ -73,9 +73,7 @@ export async function syncStage(storage) {
     const canvas = layer.querySelector('.roomstage__canvas');
     const scene = buildBackdropScene(slug, state, state.atmo);
     renderer?.destroy();
-    renderer = new WorldRenderer(canvas, scene, {
-      worldW: scene.W, worldH: scene.H, fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8,
-    });
+    renderer = new WorldRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
     renderer.lookAt(scene.W / 2, scene.focusY ?? scene.H * 0.55, { animate: false });
     renderer.draw();                             // still: a room must not move
     requestAnimationFrame(() => layer.classList.add('is-in'));

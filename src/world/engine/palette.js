@@ -238,6 +238,9 @@ export const SEASON = Object.freeze({
 
 /** The hour of a Date, in the world's five words. */
 export function hourWord(date = new Date()) {
+  // A developer hook: localStorage catos:hour = dawn|morning|afternoon|dusk|night
+  // pins the village's clock, so every hour can be looked at and tested.
+  try { const o = globalThis.localStorage?.getItem("catos:hour"); if (o && ["dawn", "morning", "afternoon", "dusk", "night"].includes(o)) return o; } catch { /* no storage */ }
   const h = date.getHours();
   if (h < 5) return 'night';
   if (h < 8) return 'dawn';
