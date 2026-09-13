@@ -209,6 +209,122 @@ takeaway, and a reflection question ending in `?`.
 phrase from the passage that contains the word (the context pack is
 built from it), `meaning_here` the sense in this passage.
 
+## 4a. The RC quality contract
+
+§4 says what a passage must contain. This says what it must be worth.
+It comes out of the September 2026 audit, in which all 115 passages were
+read as a collection (`content/taxonomy/rc-quality-audit-2026-09.json`,
+rendered by `tools/rc-quality-report.mjs`). The corpus passed on prose
+and on honesty and failed on variety: 109 of 115 passages began from an
+account somebody else holds in order to correct it. Every rule below
+exists because the audit found something.
+
+**The reward test — write it before you write the passage.** Finish this
+sentence in one line: *the learner now knows that ___*. It must name a
+mechanism, a relationship, a distinction that does work, or a fact about
+the world. "That society is complex", "that we should think differently",
+"that there are trade-offs" are not rewards; they are the absence of one.
+If the sentence will not come, the passage has no business existing yet.
+Put it in `meta.theme`, which is where the audit reads it from.
+
+**Manufactured profundity is the failure mode, and it has a signature.**
+A good closing line carrying a thin argument (rc-0013), two asserted
+reasons where a mechanism was needed (rc-0029), a description with no
+opposing view taken seriously and nothing to concede (rc-0027), a famous
+argument reproduced with no new premise, case or consequence (rc-0028,
+rc-0030). Before submitting, ask of your own draft: strip the best three
+sentences out — is there still an argument underneath? If not, you have
+written the sentences and not the passage.
+
+**Topic novelty is not enough.** The audit's weakest passages are on
+perfectly good subjects. What sank them is that the *idea* was one the
+learner has already met: Goodhart's law, mere exposure, falsifiability,
+the attention economy. A canonical idea earns its place only when the
+passage adds something to it — rc-0021 adds the institutions that let a
+market exist at all, rc-0012 adds the in-principle/in-practice split. If
+you are writing about something famous, name in `reviewer_notes` what
+this passage adds that the standard account does not have.
+
+**Vary the argumentative move, and record it.** The corpus's real
+monotony is not vocabulary but gesture: received account → it is
+under-determined or answers a different question → sharper reconstruction
+→ a paragraph narrowing the author's own claim. It is an honest shape and
+it is now predictable. Per batch of ten, at most six may correct a
+received account. The other four must do something else, and the
+following all exist in the corpus as proof they work:
+
+- *exposition* — a mechanism explained for its own sake, with no rival
+  account as the target (rc-0021, rc-0089, rc-0113)
+- *aporia* — two commitments held, no resolution offered (rc-0023, rc-0025)
+- *history of an idea* — followed from origin to what it became, the
+  author adjudicating only at the end (rc-0042, rc-0112)
+- *narrative* — a scene carries the argument before any argument begins
+  (rc-0065, rc-0093, rc-0107)
+- *analogy* — imported, pressed through tests, broken at one joint, and
+  the break is the payload (rc-0073, rc-0087, rc-0115)
+- *adjudication* — two named accounts weighed as answers to different
+  questions (rc-0035, rc-0064, rc-0078)
+
+Still missing from the corpus entirely, and wanted: a passage that argues
+for an unpopular position with heat; a piece of sustained description or
+reportage whose reward is the thing described; a review; an exposition of
+a scientific phenomenon with no meta-argument about method attached.
+
+**Vary the voice.** The corpus has two voices, and they arrived by date
+rather than by design: an essayistic first-person-plural ("we weep at the
+death of a character") in rc-0001–rc-0032, and an impersonal analytic
+register everywhere after. Neither is wrong; having only two is. Nothing
+in 115 passages contains an exclamation mark, 10% use *I*, 11% open in a
+scene, 10% contain a date. Sentence means sit between 16 and 26 words in
+every single passage. Per batch, deliberately vary: person, sentence
+rhythm, paragraph count, temperature, and whether the author is amused,
+angry, puzzled, admiring or cold.
+
+**Do not close with the same cadence.** The clipped final sentence that
+relocates the subject — "Only the room it is standing in", "The reader
+has", "They are saying something else" — is superb and appears 21 times.
+Cap it at one in five. Check the corpus's closers before writing yours.
+
+**Difficulty comes from reasoning, and must be recorded as such.** The
+audit found nine passages whose plain diction had been recorded as ease
+of reasoning — rc-0078 tagged *easy* for a 749-word adjudication,
+rc-0058 tagged *foundation* for an argument that redefines what an
+experiment supplies. The eight dials in §13 are independent: move
+`lexical` and `syntactic` without moving `reasoning_depth` and
+`inference_depth` whenever the prose is plain and the thinking is not.
+The curator aims by these, so a wrong scalar hands an elite argument to a
+beginner.
+
+**Question surface must match the passage.** Seventeen passages carry
+three questions, and several are among the best ideas in the corpus —
+rc-0057 distinguishes an omission from a standing account in 316 words
+and gets three. If an idea will support five questions, give it the words
+to carry five. A short passage is a legitimate form; a short passage
+*because the author stopped* is a waste of the idea.
+
+**Questions must be answerable from this passage and no other.** A
+question whose stem has to gloss its own key term is testing something
+the passage did not say: rc-0026 asks a `vocabulary_in_context` question
+about *disinterested*, a word that appears nowhere in it. Every
+`vocabulary_in_context` and `phrase_in_context` stem must quote text that
+exists verbatim in the passage.
+
+**Corpus-level checks before a batch is done.** Run
+`node tools/rc-style-audit.mjs` and read three sections: shared 4-grams
+(a phrase in three or more passages is a tic — `and it is not` is in 15),
+nearest passage pairs, and closing moves. Run
+`node tools/rc-move-audit.mjs` for the voice census. No new title may
+repeat an existing shape: the corpus already has thirty of the form *The
+X That/Who [withholds the point]*, and rc-0077 and rc-0098 are "Out of
+His Own Mouth" and "Out of His Own Words". Then
+`node tools/rc-quality-report.mjs --check` to confirm the audit still
+covers every passage.
+
+**The bar.** Would a curious person read this if CAT did not exist? The
+audit answered YES for 99, MAYBE for 14, NO for 2. Keep that ratio or
+improve it. A passage is not finished when it is valid. It is finished
+when you would be glad a learner met it.
+
 ## 5. Para Jumbles (pj, schema v2 = v1 + patterns + quality)
 
 Four sentences (five or six for the top tiers). Do **not** shuffle an
