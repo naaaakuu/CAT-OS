@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0074",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "technology-ethics",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Car That Would Not Start",
+    "theme": "why a device that made a safety habit unnecessary was refused while a device that merely asks for it was accepted, and what the replacement settled",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "C",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier keeps the legislature, the repeal and the language of inconvenience, and the story itself ends on a judgement about what the replacement really is, so a verdict is not by itself out of place. The decoy is the sentence about consent, which leaves the history of a rule for a claim about what a driver has and has not done."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "tell a narrative that characterises an outcome from a sentence that passes sentence on the people who produced it, and check whether the story has recorded the quarrel",
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "disc.stance_continuity",
+      "disc.chronology",
+      "comp.purpose",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about consent: it leaves the history of a rule for a claim about what a driver has and has not done, and a reader following a story of legislation may call it philosophy dropped into a chronicle. It stays because the closing sentence says the chime keeps that moment and spends it, and this is the only sentence in which a moment is identified; remove it and the ending distinguishes two devices by a property the story never names. The sentence calling the repeal hard to defend is the intruder. The story does judge, characterising the replacement as a different device rather than a weaker one, but that judgement is about what a thing is, while this one is about what a legislature deserves to be told, and no sentence here records anyone defending or attacking the repeal.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of an interlock rule replaced by a warning device; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A medium-tier stance item whose core ends on a judgement of its own, so the shift cannot be found by looking for the first opinion. The outlier is excluded because its judgement needs a dispute the narrative never records, and because nothing before or after it uses a verdict on the legislature."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The objection was not to the belt, which the same drivers fastened when a light or a chime asked them to, but to a machine that made the asking unnecessary."
+    },
+    {
+      "label": "B",
+      "text": "What the machine removed was the moment of refusal, and a driver who has never once declined to fasten a belt has not consented to it either."
+    },
+    {
+      "label": "C",
+      "text": "The chime that replaced it is therefore not a weaker interlock but a different device, and a better-judged one, since it keeps that moment and spends it, and everything later built to prompt rather than to prevent inherits the settlement."
+    },
+    {
+      "label": "D",
+      "text": "A rule requiring new cars to refuse to start until the belt was fastened lasted less than a year before the legislature that had allowed it took it away."
+    },
+    {
+      "label": "E",
+      "text": "The repeal is hard to defend now, and a legislature that treats a few seconds of inconvenience as an injury has made every later safeguard harder to introduce than it needed to be."
+    }
+  ],
+  "outlier": "E",
+  "core_order": [
+    "D",
+    "A",
+    "B",
+    "C"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence story of the car that would not start, from the rule and its repeal to the device that replaced it. The sentence that passes sentence on the legislature is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one story in four stages. A rule requiring cars to refuse to start until the belt was fastened was repealed within a year; the objection was not to the belt, which the same drivers fastened when asked, but to a machine that made the asking unnecessary; what the machine removed was the moment of refusal, and a driver who never declines has not consented either; and the chime that replaced it is therefore a different device rather than a weaker one, and later prompting devices inherit that settlement. Rule and repeal, the real objection, what was removed, the settlement.",
+    "core_roles": [
+      {
+        "label": "D",
+        "role": "background",
+        "why_here": "It supplies the rule and its repeal, the events every later sentence is an interpretation of."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The objection' names what produced the repeal just reported, and this sentence locates it precisely, in the machine rather than in the belt."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'What the machine removed' picks up the machine just identified and says what its removal amounted to, which is the story's central claim."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "'That moment' names the interval the previous sentence identifies, and the closing sentence turns the episode into a settlement that later devices inherit."
+      }
+    ],
+    "links": [
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The objection' is the objection that produced the repeal just reported, and the sentence exists to say what it was not."
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'The machine' names the device the previous sentence identifies as the real target, so what it removed is stated in that sentence's terms."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'That moment' has exactly one antecedent, the moment of refusal the previous sentence describes, which is what the chime is said to keep."
+      }
+    ],
+    "violation_named": "The four core sentences narrate an episode and say what it established. The odd sentence rules on whether the repeal can be defended and on what the legislature has cost every later safeguard. That is a change of stance, from characterising an outcome to sentencing the people who produced it, and the story has recorded no defence, no attack and no later safeguard.",
+    "why_it_breaks": "A verdict needs a dispute. Nothing in the narrative reports anybody defending the repeal or complaining of it since, so the sentence answers a case the paragraph never opens, and the sentence after it is occupied with the difference between two devices rather than with anyone's conduct. It also introduces later safeguards and their difficulty, a subject that appears once and is picked up by nothing, while every core sentence opens on a phrase its neighbour supplied.",
+    "trap_exposed": "The camouflage is that the story is not neutral either: it calls the chime a different device rather than a weaker one, and speaks of a settlement. So the intruder cannot be found by listening for the first judgement. What separates it is what is being judged, a thing in every core sentence and a legislature in this one. The decoy is the sentence about consent, which leaves history for philosophy and looks like the departure, though the closing sentence's moment exists nowhere else.",
+    "exclusion_analysis": [
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports an event without interpreting it, so a reader who has grasped the argument may treat it as a date the paragraph could assume.",
+        "what_breaks": "Without it the objection named next has no repeal to have produced, and the story interprets an episode it never narrates."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It states what the objection was not before saying what it was, which makes its role harder to name than a plain report would be.",
+        "what_breaks": "Without it the machine whose removal the next sentence describes has never been distinguished from the belt, and the story loses the distinction it exists to draw."
+      },
+      {
+        "label": "B",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its claim about consent is the only philosophical sentence in a narrative of rules and devices, which makes its register feel imported.",
+        "what_breaks": "Without it 'that moment' in the closing sentence names nothing, and the difference between preventing and prompting is asserted without content."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It reaches forward to everything later built to prompt rather than prevent, which can look like a flourish appended to a finished story.",
+        "what_breaks": "Without it the episode is narrated and interpreted and never settled, so the story explains a repeal and says nothing about what replaced the device."
+      }
+    ],
+    "detection_habit": "When a narrative already judges, ask what each judgement is passed on. A story may characterise a device all it likes; the moment it sentences a legislature, look for the trial."
+  },
+  "mentor": {
+    "challenge": "This story has a verdict of its own at the end, so tone will not find the intruder. Ask who or what is being judged in each sentence.",
+    "takeaway": "Judging a thing is part of explaining it. Judging the people needs a quarrel the paragraph has to contain."
+  }
+}

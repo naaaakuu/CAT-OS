@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0078",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "psychology",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Note Instead of the Picture",
+    "theme": "why a large change can be missed by somebody watching closely, and why the failure is a property of how a scene is kept rather than a defect",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "A",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier speaks of an audience that has been warned, and the opening sentence says the watchers were told a change was coming, so the general remark appears to have been written for the paragraph. The decoy is the short sentence about the two versions side by side, which reads like a control condition rather than a step."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "catch a general remark that borrows a paragraph's own detail, and test it against the particular step it would have to be supporting",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "arg.example_vs_principle",
+      "comp.organization",
+      "disc.lexical_chain",
+      "disc.general_to_specific"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the short sentence about the same people identifying the change when the two versions are set side by side: it reads like a control condition dropped into an explanation, and a reader may call it evidence the paragraph could assume. It stays because the next sentence begins from the information being there, which only this sentence establishes, and because without it the account explains a failure that might simply be poor eyesight. The remark about demonstrations that still work on a warned audience is the visitor. It picks up the paragraph's own detail, since the watchers here were told a change was coming, but the exposition explains what a person keeps of a scene, and what a field preserves in its stock of demonstrations is a question it never asks.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of missing changes in a watched scene; no specific study adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An easy item whose general sentence is orthogonal by design, about what a field keeps rather than about what a person keeps, so it cannot be read as the paragraph's own claim stated broadly. Its hook is a single shared detail, the warning given in advance."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A note is enough for nearly everything a person does in a room, which is why the failure is ordinary rather than defective, and why it shows only when somebody is unkind enough to move the furniture."
+    },
+    {
+      "label": "B",
+      "text": "The failure is not one of eyesight, since the same people identify the change at once when the two versions are set side by side."
+    },
+    {
+      "label": "C",
+      "text": "If the information is there, what is missing is a stored picture, since the eye goes back to whatever the task needs and holds the rest of the scene as a note about where to look."
+    },
+    {
+      "label": "D",
+      "text": "A finding of that kind becomes a demonstration when it can be produced on demand, and the demonstrations a field keeps are the ones that still work on an audience that has been warned."
+    },
+    {
+      "label": "E",
+      "text": "People asked to watch a scene closely will miss a large change made while their eyes are briefly elsewhere, even when they have been told that a change is coming."
+    }
+  ],
+  "outlier": "D",
+  "core_order": [
+    "E",
+    "B",
+    "C",
+    "A"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of why a watched scene can change unnoticed, from the observation to what the failure actually shows. The sentence that is general about demonstrations rather than about seeing is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one failure in four moves. People watching closely miss a large change made while their eyes are elsewhere, even when warned; the failure is not one of eyesight, since the same people see the change when the versions are set side by side; if the information is there, what is missing is a stored picture, because the eye returns to what the task needs and keeps the rest as a note; and a note is enough for almost everything, which is why the failure is ordinary. Observation, first explanation removed, real explanation, verdict.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "topic",
+        "why_here": "It states the effect the paragraph exists to explain, and the warning it mentions is what makes the effect worth explaining at all."
+      },
+      {
+        "label": "B",
+        "role": "contrast",
+        "why_here": "'The failure' names the effect just reported and removes the explanation a reader would otherwise settle for."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "'If the information is there' takes over the previous sentence's demonstration and supplies the account that replaces eyesight."
+      },
+      {
+        "label": "A",
+        "role": "conclusion",
+        "why_here": "'A note' picks up the storage just described and turns the account into a verdict on the failure, which is where the explanation ends."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'The failure' has exactly one antecedent, the missed change the previous sentence reports."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "conjunction",
+        "explanation": "'If the information is there' takes as given what the previous sentence establishes, that the change can be identified when both versions are available."
+      },
+      {
+        "from": "C",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'A note' names the form of storage the previous sentence describes, so the verdict is passed on exactly that arrangement."
+      }
+    ],
+    "violation_named": "The four core sentences are about one failure and what a person keeps of a scene. The odd sentence states a general truth about how a field chooses its demonstrations. It is general where the exposition is particular, and general about a question the exposition never raises.",
+    "why_it_breaks": "Nothing in the explanation uses it. Eyesight is removed by the side-by-side comparison, the stored picture is replaced by a note, and the note explains why the failure is ordinary; at no step does a sentence need to know what makes a finding survive as a demonstration. Nothing afterwards returns to fields, audiences or demonstrations either, so the remark arrives with a general observation and hands nothing on.",
+    "trap_exposed": "The camouflage is a borrowed detail. The paragraph's watchers were told a change was coming, and the odd sentence speaks of an audience that has been warned, so it sounds as though it is explaining why this particular case is worth reporting. It is not: it is explaining what a discipline keeps, not what a person does. The decoy is the short sentence about the two versions side by side, which reads like a control condition, though the next sentence begins from exactly what it establishes. And the attachment test does not separate it: it opens by pointing back at the finding just reported.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports an effect with no explanation attached, so a reader who has grasped the account may treat it as an opening that could be assumed.",
+        "what_breaks": "Without it 'the failure' names nothing, and the paragraph explains and then judges an effect it never describes."
+      },
+      {
+        "label": "B",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the shortest sentence and reads like a laboratory control, which makes it look like a detail rather than a step.",
+        "what_breaks": "Without it the account of a missing picture has no ground, and the failure could still be simple poor eyesight."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the most abstract sentence in the set, and a note about where to look is an idea rather than a thing a reader can picture.",
+        "what_breaks": "Without it the closing sentence's note has never been introduced, and the paragraph removes one explanation without supplying another."
+      },
+      {
+        "label": "A",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It ends on a joke about moving furniture, which can look like a flourish rather than a part of the explanation.",
+        "what_breaks": "Without it the account explains the mechanism and never says what it shows, so the paragraph reports a failure and leaves it looking like a defect."
+      }
+    ],
+    "detection_habit": "When a general sentence repeats a small detail from the paragraph, treat the echo as a decoration and ask which step it supports. A borrowed word is not an argument."
+  },
+  "mentor": {
+    "challenge": "One sentence here picks up a detail from the paragraph and then talks about something else entirely. The echo is the disguise.",
+    "takeaway": "A shared word proves nothing. Ask which step of the explanation would be poorer without the sentence."
+  }
+}

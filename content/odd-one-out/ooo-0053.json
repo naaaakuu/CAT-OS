@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0053",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "environment",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The Marsh That Keeps Its Head Up",
+    "theme": "how a saltmarsh raises itself by catching silt, the self-correction that keeps it level with the sea, and the one thing it needs on the landward side",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "D",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The description appraises as it goes, calling the arrangement elegant, so the outlier's verdict does not stand out as the only judgement in the set; it also keeps the paragraph's own nouns, wall, marsh, season, century. The decoy is the sentence about the wall on the landward side, which introduces an obstacle and a human decision into a paragraph that had been describing silt and stems."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "coherence_monitoring",
+      "relatedness_vs_belonging",
+      "ambiguity_tolerance"
+    ],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "tell an appraising description from an argument for a policy, and notice when a sentence stops describing what a thing does and starts settling what somebody ought to do",
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "disc.stance_continuity",
+      "comp.purpose",
+      "disc.lexical_chain",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence that brings in the wall on the landward side: the description has been about tides, silt and stems, and a wall is a human object arriving from outside the natural process, so a reader following the mechanism will call it the intruder. It stays because the closing sentence speaks of the wall standing in the surf, and no other sentence puts a wall anywhere; remove it and the last sentence names an object the paragraph has never introduced. The sentence calling such walls indefensible is the intruder. It uses the paragraph's own vocabulary and it is not unreasonable, but the four core sentences describe what a marsh does and what it needs, and this one adjudicates what an authority should spend, which is a case the description never opens and nothing in it can settle.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of saltmarsh accretion and coastal squeeze; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A stance item where the description is itself mildly appreciative, so the shift cannot be caught by listening for the first judgement. What marks the outlier is that it argues about money and authorities, parties the description has never introduced, while the three joints of the core are definite phrases with single antecedents."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The strip then narrows from the seaward edge year by year, until the wall stands in the surf and takes, far less gracefully, the force that a hundred metres of marsh had been taking for it."
+    },
+    {
+      "label": "B",
+      "text": "That kind of wall is indefensible, and an authority that goes on paying to raise one is buying for a season what a restored marsh would have held for a century."
+    },
+    {
+      "label": "C",
+      "text": "A saltmarsh keeps its head above water by an arrangement of some elegance: each tide leaves a film of silt among the stems, and the stems grow up through what they have caught."
+    },
+    {
+      "label": "D",
+      "text": "That correction has one requirement, which is room on the landward side, and a wall built along that side leaves the marsh nowhere to go when the sea rises faster than the silt arrives, which is not a failure that arrives all at once."
+    },
+    {
+      "label": "E",
+      "text": "The arrangement corrects itself, since a marsh that has fallen behind is covered for longer by every tide and therefore keeps more of what the water carries."
+    }
+  ],
+  "outlier": "B",
+  "core_order": [
+    "C",
+    "E",
+    "D",
+    "A"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence description of how a saltmarsh keeps level with the sea, from the silt among the stems to the wall in the surf. The sentence that has stopped describing and started adjudicating is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core describes one arrangement in four steps. It states how a marsh rises, by catching silt that the stems then grow up through; it shows the arrangement correcting itself, since a marsh that has fallen behind is flooded for longer and keeps more; it names the single requirement of that correction, room on the landward side, and what a wall there does to it; and it follows the consequence to the point where the wall is taking the sea itself. Mechanism, self-correction, requirement, consequence.",
+    "core_roles": [
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It states the basic mechanism, silt caught among stems, on which everything the paragraph later says about correction and failure depends."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'The arrangement' takes the mechanism as given and shows it regulating itself, which is what makes the later failure surprising enough to be worth describing."
+      },
+      {
+        "label": "D",
+        "role": "contrast",
+        "why_here": "'That correction' names the regulating behaviour just described and states the one condition under which it cannot operate."
+      },
+      {
+        "label": "A",
+        "role": "conclusion",
+        "why_here": "'The strip' and 'the wall' are both introduced by the previous sentence, and this one carries the failure through to its end, which is where a description of a mechanism with a condition has to stop."
+      }
+    ],
+    "links": [
+      {
+        "from": "C",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The arrangement' points at the catching of silt just described and makes the next claim a property of exactly that process."
+      },
+      {
+        "from": "E",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'That correction' has one possible antecedent, the self-regulation the previous sentence sets out, and the requirement named belongs to it alone."
+      },
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The wall' and the narrowing strip are both supplied by the previous sentence, so the closing picture cannot be assembled without it."
+      }
+    ],
+    "violation_named": "The four core sentences describe what a marsh does, what keeps it level and what stops it. The odd sentence delivers a verdict on what a coastal authority is doing with its money. That is a change of stance, from describing a process to settling a dispute about expenditure, and the paragraph has recorded no dispute and no expenditure to settle.",
+    "why_it_breaks": "A verdict needs a case. Nothing in the description says that anybody proposed the wall, paid for it, or defended it, so the sentence answers an objection the paragraph never records, and the sentence after it is busy with the surf rather than with a budget. It also introduces parties, an authority and a season's spending, that appear once and are picked up by nothing, while every other sentence is held in place by a phrase its neighbour supplied.",
+    "trap_exposed": "The usual way to find a stance shift is to listen for the first judgement, and that will not work here: the description calls the arrangement elegant in its opening line, so evaluation is part of the paragraph's voice from the start. What separates the outlier is not that it appraises but what it appraises, a decision rather than a process, and the fact that nothing before or after it is about a decision. The decoy is the sentence about the wall on the landward side, which brings a human object into a paragraph of silt and stems and looks like the intrusion, though the closing sentence needs the wall it introduces. And the attachment test does not separate it: it opens by pointing backwards, at the wall just built along the landward side.",
+    "exclusion_analysis": [
+      {
+        "label": "C",
+        "mistake_type": "lexical_pull",
+        "why_tempting": "It is the only sentence with no sea wall, no failure and no loss in it, so a reader matching on the paragraph's drift towards damage finds nothing in it to hold.",
+        "what_breaks": "Without it 'the arrangement' points at nothing, and the self-correction described next is a correction of a process the reader has never been shown."
+      },
+      {
+        "label": "E",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It states a feedback in the abstract and mentions neither wall nor rising sea, so a reader assembling a story of loss cannot find a stage for it.",
+        "what_breaks": "Without it 'that correction' has no antecedent, and the requirement of room on the landward side becomes a requirement of nothing in particular."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the sentence where a human object enters, and its wall reads like an interruption of an otherwise natural description.",
+        "what_breaks": "Without it the closing sentence's wall has never been built, the narrowing strip has no cause, and the paragraph describes a self-correcting system with no condition on it."
+      },
+      {
+        "label": "A",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It is the longest sentence and covers years in a clause, which makes it feel like a summary added to a description that had already finished.",
+        "what_breaks": "Without it the paragraph stops at a marsh with nowhere to go and never says what becomes of it, so the requirement named in the previous sentence is never shown mattering."
+      }
+    ],
+    "detection_habit": "Ask what the four sentences are doing, describing or adjudicating, and then check what each sentence appraises. A description can admire freely; the moment a sentence values somebody's decision, look for the dispute it belongs to, and see whether the paragraph contains one."
+  },
+  "mentor": {
+    "challenge": "Five sentences about a marsh, a wall and a rising sea, and more than one of them has an opinion. The question is which opinion belongs to a description and which belongs to an argument about money.",
+    "takeaway": "A description may admire what it describes. It has still not joined a quarrel about what anyone should pay for."
+  }
+}

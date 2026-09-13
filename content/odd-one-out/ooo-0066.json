@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0066",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "law",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "What He Saw, Not What It Meant",
+    "theme": "why a witness is stopped from stating conclusions, and why the restriction relaxes where an observation cannot be reported without one",
+    "estimated_time_sec": 80,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "B",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier keeps the witness, the court and a rule courts enforce, so topic matching admits it at once. The decoy is the last sentence, whose examples of age and a smell of drink look like exceptions wandering away from the rule just explained."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "hold one question steady across four sentences and recognise a sentence about the same people that answers a different one",
+    "reasoning_patterns": [
+      "comp.purpose",
+      "scope.true_but_off_question",
+      "disc.lexical_chain",
+      "comp.organization",
+      "disc.function_slot"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the closing sentence, whose examples of a person's age and a smell of drink look like exceptions drifting away from the rule the paragraph has been defending. It stays because it names what the restriction is for in the paragraph's own terms, keeping the materials in the room, and because a rule stated without its limit is only half explained. The sentence about witnesses talking to one another in the corridor is the visitor. It concerns the same people and a real concern of courts, but the four core sentences explain why a witness may not state a conclusion, and nothing in them raises what witnesses say to each other while they wait.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the rule against opinion evidence; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A foundation item where the chain is deliberately visible: the rule, those people, the materials. The outlier is on topic but answers a neighbouring question, which is the mildest form of the violation and the right place for a learner to meet it."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A witness is asked what he saw and heard, and is stopped when he begins to say what he thought it meant."
+    },
+    {
+      "label": "B",
+      "text": "Keeping the materials in the room is what the restriction is for, which is why it relaxes as soon as an observation cannot be reported without a judgement, as with a person's age or a smell of drink."
+    },
+    {
+      "label": "C",
+      "text": "The rule looks like distrust of the witness, but its object is the division of labour in the room, since the conclusion belongs to the people who will have to give reasons for it."
+    },
+    {
+      "label": "D",
+      "text": "Those people cannot weigh a conclusion they have not been shown the materials for, and a witness who reports that a driver was reckless has taken the materials away with him."
+    },
+    {
+      "label": "E",
+      "text": "A witness who has waited all morning in a corridor will often have talked to the next witness, and courts that mind about this keep them apart."
+    }
+  ],
+  "outlier": "E",
+  "core_order": [
+    "A",
+    "C",
+    "D",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of why a witness is stopped from saying what he thought the events meant, ending with the cases where the rule gives way. The sentence that is about witnesses and answers a different question is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one rule in four moves. A witness is asked what he saw and stopped when he says what it meant; the rule is not distrust but a division of labour, since the conclusion belongs to the people who must give reasons for it; those people cannot weigh a conclusion whose materials they have not been shown, and a witness who reports recklessness has removed the materials; and keeping the materials in the room is what the restriction is for, which is why it relaxes when an observation cannot be reported without a judgement. Rule, purpose, reason, limit.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It states the practice the whole paragraph explains, and the distinction it draws between what was seen and what it meant is the distinction everything later rests on."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "'The rule' names the practice just described and replaces the obvious reading of it with the paragraph's own, a division of labour."
+      },
+      {
+        "label": "D",
+        "role": "cause_effect",
+        "why_here": "'Those people' points at the ones who must give reasons, and this sentence says why a conclusion from a witness disables them."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "'The materials' are the ones the previous sentence says a witness can carry off, and the limit stated here is the limit of exactly that purpose."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'The rule' has exactly one antecedent, the practice of stopping a witness that the previous sentence describes."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'Those people' names the ones who will have to give reasons, introduced in the previous sentence and nowhere else."
+      },
+      {
+        "from": "D",
+        "to": "B",
+        "tie": "lexical",
+        "explanation": "'The materials' repeats the noun the previous sentence uses for what a witness takes away, so the purpose named here is the purpose of keeping them."
+      }
+    ],
+    "violation_named": "The four core sentences answer one question: why a witness may not state a conclusion, and where the reason stops. The odd sentence is about what witnesses say to one another while they wait, and about a different precaution courts take. Same people, same building, different question.",
+    "why_it_breaks": "Nothing in the explanation has raised what happens outside the courtroom, and nothing afterwards could use it: the closing sentence needs the materials a conclusion would remove, not a pair of witnesses who have compared accounts. The sentence brings in a concern that arrives and leaves in one line, while every core sentence opens on something its neighbour has just supplied.",
+    "trap_exposed": "The disguise is topic. Witnesses, courts and a precaution appear in every sentence here, so matching on subject admits the stray one immediately. The question to ask is not what a sentence is about but what it answers. The decoy runs the other way: the closing sentence, with its age and its smell of drink, looks like a pair of exceptions drifting off the rule, when it is the sentence that states what the rule is for and therefore where it ends.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It merely reports what happens in a courtroom and makes no claim, so a reader who has found the explanation may treat it as scene-setting.",
+        "what_breaks": "Without it 'the rule' points at nothing, and the paragraph explains the purpose of a restriction it has never described."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It rejects one reading and offers another in the same sentence, which makes its role harder to name than a plain statement would be.",
+        "what_breaks": "Without it 'those people' has no antecedent, and the reason offered next is a reason for nobody in particular."
+      },
+      {
+        "label": "D",
+        "mistake_type": "lexical_pull",
+        "why_tempting": "Its reckless driver reads like an example rather than a step, so a reader collecting claims may treat it as an illustration the set could spare.",
+        "what_breaks": "Without it the closing sentence's materials have never been introduced, and the division of labour is asserted without a reason."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It ends on two exceptions, which can look like a qualification tacked on after the explanation was complete.",
+        "what_breaks": "Without it the paragraph explains why the rule exists and never says where it stops, so a rule with a known purpose is left with no limit."
+      }
+    ],
+    "detection_habit": "Write down the question the four sentences answer together, in one line, before you judge any of them. Sentences about the same people in the same place routinely answer different questions."
+  },
+  "mentor": {
+    "challenge": "Every sentence here is about witnesses in court, so the topic will not help you. Ask what each one is answering.",
+    "takeaway": "A true fact about the same people can still belong to the next paragraph along."
+  }
+}

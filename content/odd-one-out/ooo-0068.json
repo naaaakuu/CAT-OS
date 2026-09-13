@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0068",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "architecture",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "A Clause Bolted to the Front",
+    "theme": "how a building code that fixed a stair's width and reach but not its position produced a second front, and what its removal left behind",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "C",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier names the width, which the clause in the story fixes, and it is written in the same official voice as the rest, so it reads as another consequence of the same code. The decoy is the sentence about what the clause did not say, whose negative form makes it look like a remark rather than a stage."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "build_before_eliminating",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "separate the procedure by which something was recorded from the events a history is made of, and test the separation by asking which stage would miss it",
+    "reasoning_patterns": [
+      "disc.chronology",
+      "arg.evidence_vs_conclusion",
+      "comp.organization",
+      "disc.lexical_chain",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about what the clause did not say: it is phrased as an absence rather than an event, and a reader assembling a story out of things that happened may treat it as commentary. It stays because the next sentence opens with a therefore that needs exactly this silence as its premise, and because owners choosing the cheapest wall is unexplained without it. The sentence about inspectors and the weighted line is the visitor. It is written in the same official voice and it names the width the clause fixes, but it reports how a measurement was taken and filed, and no stage of the story uses a recorded figure: the stairs go up where they are cheapest, and they come down when a later code changes.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of external fire stairs and building codes; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A method sentence written in the period's own voice rather than in the voice of a modern investigator, which removes the usual texture tell. The exclusion rests on use: the narrative's four stages are caused by a clause, a silence, a price and a later code, and none of them needs a figure in a register."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Each such stair was recorded by an inspector who dropped a weighted line from the top landing to the pavement and entered the figure in the district register beside the width the clause had fixed."
+    },
+    {
+      "label": "B",
+      "text": "Owners therefore put it where it was cheapest, across the windows of the rooms that faced the street, and a generation of buildings acquired a second, rusting front in front of the one they had been designed with."
+    },
+    {
+      "label": "C",
+      "text": "When later codes required the stair to be enclosed and internal the bolted ones came down slowly and unevenly, and the gaps they left are now read as a style rather than as the residue of a clause."
+    },
+    {
+      "label": "D",
+      "text": "The iron stair bolted to the front of a tenement was not an architect's idea but a clause, added to a building code after a fire in which the single internal stair had been the only way down."
+    },
+    {
+      "label": "E",
+      "text": "The clause said where the stair had to reach and how wide it had to be, and said nothing about the elevation it would be bolted to."
+    }
+  ],
+  "outlier": "A",
+  "core_order": [
+    "D",
+    "E",
+    "B",
+    "C"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence story of the iron stair on the front of a building, from the fire that produced the clause to the gaps left when the stairs came down. The sentence that reports how such stairs were measured and filed is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one story in four stages. A fire produces a clause, and the stair on the front of a tenement is its issue rather than an architect's; the clause fixes reach and width and says nothing about which elevation; owners therefore bolt it to the cheapest wall, across the street-facing windows, and a generation of buildings gains a second front; and when later codes require the stair to be internal the bolted ones come down unevenly, leaving gaps now read as a style. Clause, silence, cheapest wall, removal.",
+    "core_roles": [
+      {
+        "label": "D",
+        "role": "background",
+        "why_here": "It supplies the fire and the clause that the whole story issues from, and the claim that the stair was legislation rather than design."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'The clause' names the addition just described, and its silence about the elevation is the premise the next stage turns on."
+      },
+      {
+        "label": "B",
+        "role": "cause_effect",
+        "why_here": "'Therefore' takes the silence just described as its cause, and this is the stage at which the code reaches the street elevation."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "'The bolted ones' are the stairs the previous sentence puts across the windows, and this stage removes them and says what was left, which is where the story ends."
+      }
+    ],
+    "links": [
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The clause' has exactly one antecedent, the addition to the building code the previous sentence describes."
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "'Therefore' makes the owners' choice a consequence of the silence just reported, so the stage cannot stand without the sentence before it."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'The bolted ones' names the stairs the previous sentence puts across the street-facing windows, so the removal is a removal of exactly those."
+      }
+    ],
+    "violation_named": "The four core sentences are stages of one history: a clause, its silence, the response to the silence, and what happened when a later code changed. The odd sentence describes how a stair was measured and what was entered in a register. That is procedure reported inside a narrative of consequences.",
+    "why_it_breaks": "No stage of the story uses a recorded figure. Owners choose a wall by price, not by anything in a register; the second front appears because of where they chose; the stairs come down because a later code requires enclosure. Nothing before the sentence produces the inspection and nothing after it returns to the register, so the sentence arrives with its own small procedure and leaves without handing anything on.",
+    "trap_exposed": "The camouflage is voice and vocabulary. The sentence is written in the same official register as the clause itself, its subject is an inspector rather than a modern investigator, and it names the width that the clause is said to have fixed, so it sounds like another consequence of the same code. The test is whether a later stage needs it. The decoy is the sentence about what the clause did not say, whose negative form reads like commentary, though the therefore in the next sentence has nothing else to rest on. And the attachment test does not separate it: it opens on each such stair and closes on the width the clause had fixed, reaching back into the story at both ends.",
+    "exclusion_analysis": [
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It is about a fire and a code rather than about a building, so a reader who has decided the story is architectural may treat it as preamble.",
+        "what_breaks": "Without it 'the clause' points at nothing, and a story about a legislated stair never says what was legislated or why."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence that says what did not happen, and a silence is easy to mistake for an aside.",
+        "what_breaks": "Without it the therefore in the next sentence has no premise, and owners choosing the cheapest wall becomes a coincidence rather than a consequence."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It carries two things at once, a decision and its effect on a generation of buildings, which makes its place in the sequence harder to name.",
+        "what_breaks": "Without it 'the bolted ones' names nothing, and the story never shows the clause reaching the street elevation at all."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It reaches into the present and offers a judgement about how the gaps are read, which can look like a coda rather than a stage.",
+        "what_breaks": "Without it the stairs are never removed, and a story about the residue of a clause stops before anything is left behind."
+      }
+    ],
+    "detection_habit": "In a history, ask of each sentence what caused it and what uses it. A sentence about how something was measured can be true, contemporary and beautifully in period, and still sit outside the chain of causes."
+  },
+  "mentor": {
+    "challenge": "One of these sentences tells you how the stairs were measured and filed. Find the stage of the story that would notice if it disappeared.",
+    "takeaway": "A stage of a story has a cause behind it and a use in front of it. A procedure often has neither."
+  }
+}

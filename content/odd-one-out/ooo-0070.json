@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0070",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "history",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "The List the Captain Drew",
+    "theme": "why a regiment's pay roll cannot be corrected into a headcount, and what a historian may still take from it",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "B",
+    "violation_type": "example_no_claim",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is a specimen from exactly the document under discussion and it shows the roll failing, which is what the argument is about, so it reads as the illustration the argument was building to. What it illustrates is a different defect, a question of who counted as effective rather than of a number inflated by an interest. The decoy is the sentence about the historian's fixed discount, which turns from the past to the practice of writing about it."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "name the exact claim an example is offered for, and notice when a genuine specimen demonstrates a defect the argument never alleges",
+    "reasoning_patterns": [
+      "arg.example_vs_principle",
+      "arg.evidence_vs_conclusion",
+      "comp.organization",
+      "disc.lexical_chain",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about the historian who applies a fixed discount: it leaves the seventeenth-century regiment for the modern study of it, and a reader keeping to the period will call it a change of subject. It stays because the closing sentence turns on what survives that objection, a phrase with exactly one antecedent, and because without it the argument shows the rolls to be inflated and never says why the inflation cannot simply be subtracted. The specimen roll with its drummer, boys and chaplain is the visitor. It is the right document and it shows the roll misleading, but the argument's complaint is that a number was swollen by the interest of the man who wrote it, and this specimen shows a number that is accurate on its own definition and merely counts people a reader would not have counted.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of muster and pay records as historical evidence; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The example is drawn from the same document, the same period and the same kind of failure, and is excluded only because the defect it exhibits is not the defect the argument alleges. This is the finest version of the example that serves no claim, and the explanation states the difference in one line."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The names on such a list outran the men in the ranks by a margin of a tenth or more that was tolerated rather than concealed, since the difference was understood to be part of the captain's income."
+    },
+    {
+      "label": "B",
+      "text": "What survives that objection is the direction of a change and not its size, so an argument that needs a size has to find a document drawn up by somebody who was not paid by the answer."
+    },
+    {
+      "label": "C",
+      "text": "One such roll, for a winter quarter, lists a drummer, two boys and a chaplain among its effectives, none of whom would have stood in a line of battle that spring."
+    },
+    {
+      "label": "D",
+      "text": "A regiment's pay roll is the best surviving record of its size and the worst evidence for it, because the captain who drew the money also compiled the list."
+    },
+    {
+      "label": "E",
+      "text": "A historian who corrects for that margin with a fixed discount has assumed the thing most in doubt, which is whether it held steady in the years when recruiting was hard."
+    }
+  ],
+  "outlier": "C",
+  "core_order": [
+    "D",
+    "A",
+    "E",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about what a regiment's pay roll can and cannot be used for, from the conflict of interest to what a historian may still take from it. The sentence that exhibits a different defect from the one alleged is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. A pay roll is the best record of a regiment's size and the worst evidence for it, because the man who drew the money wrote the list; the names outran the men by a margin that was tolerated, being part of the captain's income; a historian who subtracts a fixed discount assumes what is most in doubt, namely whether the margin held steady; and what survives is the direction of a change rather than its size. Conflict, margin, failed repair, residue.",
+    "core_roles": [
+      {
+        "label": "D",
+        "role": "topic",
+        "why_here": "It states the paradox the argument exists to resolve and names the conflict of interest that every later step depends on."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'Such a list' points at the roll just described, and this sentence gives the margin that the next two sentences argue about."
+      },
+      {
+        "label": "E",
+        "role": "contrast",
+        "why_here": "'That margin' names the gap just described and disposes of the obvious repair, which is what stands between the paradox and the conclusion."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "'That objection' names the difficulty just raised, and the closing sentence says what a historian is left with once the repair has failed."
+      }
+    ],
+    "links": [
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'Such a list' points at the roll compiled by the captain who drew the money, so the margin described belongs to exactly that document."
+      },
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'That margin' has one possible antecedent, the excess of names over men the previous sentence reports."
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That objection' names the difficulty the previous sentence raises against a fixed discount, so the residue is what survives it."
+      }
+    ],
+    "violation_named": "The odd sentence is a specimen, and a specimen must be a specimen of something the argument alleges. The argument alleges one defect: a number inflated because the man who wrote it was paid by it. The roll listing a drummer, two boys and a chaplain shows a different thing, a count that is accurate on its own definition and includes people a reader would not have counted.",
+    "why_it_breaks": "No step of the argument asks to be illustrated by it, and no step can use it. The margin is a matter of names without men, not of men with the wrong duties; the failed repair concerns whether that margin was steady; the residue concerns what a swollen figure can still show. A definitional quarrel about who counts as effective would need a different argument, and the paragraph never begins one. Nothing afterwards returns to drummers, boys or chaplains.",
+    "trap_exposed": "The camouflage is that the specimen is genuine and lands on the right document. It is a roll, from the right period, showing the roll misleading a reader, which is the paragraph's subject exactly. The joint that fails is the kind of failure: inflation by interest in the argument, over-inclusion by definition in the specimen. The decoy is the sentence about the historian's fixed discount, which leaves the period for the modern study of it and looks like the intruder, though the conclusion opens on the objection it alone raises. And the attachment test does not separate it: it opens on one such roll, pointing straight at the document the argument is about.",
+    "exclusion_analysis": [
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states a paradox in a single line and can look like a summary of the whole argument, which a reader may treat as separable.",
+        "what_breaks": "Without it 'such a list' points at nothing, and the margin described next belongs to a document the paragraph has not introduced."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It explains an old practice rather than advancing a claim, so a reader sorting the argument into steps may not find a step for it.",
+        "what_breaks": "Without it 'that margin' has no antecedent, and the objection to a fixed discount is an objection to correcting for nothing."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence about historians rather than about soldiers, which makes it look like a modern intrusion into a period argument.",
+        "what_breaks": "Without it 'that objection' names nothing, and the argument concludes that only direction survives without ever saying what defeated the repair."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It ends on advice about where to look next, which can read like a recommendation appended to an argument already complete.",
+        "what_breaks": "Without it the argument establishes that the rolls cannot be corrected and stops, leaving a document condemned and no account of what it is still good for."
+      }
+    ],
+    "detection_habit": "When an example arrives, state the defect it demonstrates and the defect the argument alleges, in the same words. Real specimens from the right archive can exhibit the wrong fault."
+  },
+  "mentor": {
+    "challenge": "One sentence gives you a real document doing exactly the sort of thing the argument complains of. Check that it is the same sort of thing.",
+    "takeaway": "An example is admitted by the claim it serves, not by the archive it comes from."
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0057",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "Good to Do, Not Wrong to Omit",
+    "theme": "why a theory that always requires the most good has no room for acts beyond duty, and why the two standard repairs close the space instead of describing it",
+    "estimated_time_sec": 135,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "B",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 5,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is a general remark about moral vocabulary, and the exposition's own complaint is that a theory lacks a vocabulary, so the word arrives already prepared for. The decoy is the long sentence setting out the two repairs, which leaves the paragraph's own claim to describe positions the paragraph does not hold."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "spot a general remark that borrows a paragraph's key word without entering its argument, and test it by asking which step of the argument would be poorer without it",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "arg.example_vs_principle",
+      "comp.organization",
+      "disc.lexical_chain",
+      "disc.general_to_specific"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the long sentence setting out the two repairs: it describes positions the paragraph does not hold and pulls in two directions at once, so a reader tracking the exposition's own claim may call it a survey the paragraph could have done without. It stays because the closing sentence opens on both repairs and says what they have in common, a count with exactly one antecedent, and because without them the verdict has nothing to be a verdict on. The remark about moral vocabulary being inherited is the visitor. It is true, it is about moral theory, and it lands on the very word the second sentence uses, but the exposition asks what a particular theory cannot state and what the attempts to fix that come to, and at no point does it need to know where moral words came from or who shaped them.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of acts beyond duty in moral theory; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The general sentence is deliberately orthogonal to the paragraph's claim rather than a generalisation of it, which is what stops a second four-sentence paragraph being buildable. Its camouflage is a single shared word, vocabulary, and the fact that a general opening followed by a case is a shape readers expect."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Two repairs have been attempted on that distance, and they pull in opposite directions: one raises the threshold of duty until the heroic becomes obligatory, the other discounts the acts until they are optional improvements on a duty already done."
+    },
+    {
+      "label": "B",
+      "text": "Both repairs close the space instead of describing it, which is why the category keeps coming back: what is being reported is a distinction ordinary judgement insists on, and a theory unable to state it has failed a test rather than exposed a confusion."
+    },
+    {
+      "label": "C",
+      "text": "The trouble is not that such acts are rare, but that the theory has no vocabulary for the distance between what is best and what is required, and that distance is exactly where the acts live."
+    },
+    {
+      "label": "D",
+      "text": "A theory that instructs us always to do the most good has no place for an act that is good to perform and not wrong to omit."
+    },
+    {
+      "label": "E",
+      "text": "The vocabulary is inherited rather than designed, and the words any theory has to work with were shaped in quarrels among people who had no theory at all and no wish for one."
+    }
+  ],
+  "outlier": "E",
+  "core_order": [
+    "D",
+    "C",
+    "A",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of what a maximising theory cannot say about acts beyond duty, from the gap in the theory to the verdict on the attempts to close it. The sentence that is general about moral words rather than about this gap is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one difficulty in four moves. It states the difficulty: a theory that always requires the most good has no place for an act that is good to do and not wrong to omit. It locates the difficulty precisely, in a missing vocabulary for the distance between best and required. It sets out the two repairs attempted on that distance, which pull in opposite directions. And it judges them together, since both close the space rather than describe it. Difficulty, location, repairs, verdict.",
+    "core_roles": [
+      {
+        "label": "D",
+        "role": "topic",
+        "why_here": "It states the difficulty the whole paragraph is about, and the distance the next sentence locates is the distance between the two terms named here."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "'Such acts' points back at the acts just defined, and the sentence moves the complaint from frequency to vocabulary, which is the paragraph's own diagnosis."
+      },
+      {
+        "label": "A",
+        "role": "contrast",
+        "why_here": "'That distance' names the gap just identified, and the two repairs are attempts on exactly it, set against each other so that a verdict is owed."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "'Both repairs' counts the pair just described and delivers the verdict the previous sentence's opposition demands."
+      }
+    ],
+    "links": [
+      {
+        "from": "D",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'Such acts' has one possible antecedent, the acts defined in the previous sentence as good to perform and not wrong to omit."
+      },
+      {
+        "from": "C",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'That distance' names the gap between best and required that the previous sentence has just identified as the thing the theory cannot say."
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'Both repairs' is a count whose only antecedent is the pair just set out, so the verdict cannot be delivered without them."
+      }
+    ],
+    "violation_named": "The four core sentences are specific throughout: one difficulty, one missing distinction, two named repairs, one verdict on them. The odd sentence states a general truth about the whole of moral vocabulary and where it came from. It is general where the exposition is particular, and it is general about something the exposition never raises.",
+    "why_it_breaks": "Nothing in the argument uses the claim. The difficulty is located by what the theory cannot state, the repairs are described by what each does to the gap, and the verdict rests on the fact that both close it. At no step does a sentence need to know that moral words were inherited rather than designed, and no sentence afterwards returns to their history. A general remark also has no place in a sequence: wherever it is put, the exposition pauses for an observation about the origin of words and then resumes exactly where it left off.",
+    "trap_exposed": "The camouflage is one word. The paragraph's own complaint is that a theory has no vocabulary for a certain distance, so a sentence about moral vocabulary appears to have been written for it, and readers expect a general statement followed by a case. The remark is also true, which helps it. The test is whether any step leans on it, and each step leans on the sentence beside it instead. The decoy is the long sentence describing the two repairs, which sets out views the paragraph does not hold and reads like a survey, though the verdict counts it and cannot be stated without it. And the attachment test does not separate it: it opens on a definite phrase that seems to collect the vocabulary the paragraph has just called missing.",
+    "exclusion_analysis": [
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It defines rather than argues, so a reader who has found the paragraph's claim may treat the definition as preliminary matter.",
+        "what_breaks": "Without it 'such acts' points at nothing, and the missing vocabulary is a vocabulary for a distance between terms the paragraph has never named."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It corrects a complaint nobody has made, that the acts are rare, which makes its role in the sequence hard to name quickly.",
+        "what_breaks": "Without it the two repairs are attempts on a distance the paragraph has not identified, and the diagnosis that the trouble is one of statement rather than of frequency is lost."
+      },
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is much the longest sentence and spends its whole length on positions the author rejects, so it reads like a digression into other people's views.",
+        "what_breaks": "Without it the closing verdict counts a pair the paragraph has not supplied, and the claim that the category keeps returning has no attempts to return from."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It gathers everything and adds a judgement about what a theory has failed at, which can look like a conclusion tacked on to an exposition already complete.",
+        "what_breaks": "Without it the two repairs are left pulling against each other with nothing said, and the paragraph raises an opposition it never settles."
+      }
+    ],
+    "detection_habit": "When a general sentence shares a paragraph's key word, ask which particular step would be poorer without it. A true generality that borrows the vocabulary and supplies no premise is a visitor, however well it reads."
+  },
+  "mentor": {
+    "challenge": "One sentence here is general where the others are exact, and it lands on the very word the argument is complaining about. Ask whether the argument leans on it or merely echoes it.",
+    "takeaway": "A quotable generality is not a premise. Make it earn a step, or show it the door."
+  }
+}

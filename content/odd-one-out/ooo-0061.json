@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0061",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "public-policy",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Schedule Nobody Wrote",
+    "theme": "how separately reasonable withdrawal rates add into a rate on extra earnings that no department designed and none can see",
+    "estimated_time_sec": 110,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "B",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier's subject is the rates themselves, not a team of researchers, and it describes a procedure that anyone reading the argument would want to exist, so it reads as the paragraph supplying its own footing. The decoy is the sentence comparing a family's rate on an extra hour with the rate paid by the best-paid people in the country, which sounds like a rhetorical flourish borrowed from a pamphlet."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "separate how a quantity is measured from what an argument does with it, and check whether any step of the argument actually rests on the measurement",
+    "reasoning_patterns": [
+      "arg.evidence_vs_conclusion",
+      "comp.organization",
+      "disc.lexical_chain",
+      "disc.topic_progression",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence comparing a family's rate on an extra hour with the rate the best-paid people face: it is the one sentence with a rhetorical edge, and a reader who suspects a pamphlet has been spliced into an argument will point at it. It stays because the closing sentence distinguishes the parts from the sum, and this sentence is the only place the sum is shown to be a quantity worth noticing; without it the argument asserts that separate tapers add and never says what they add to. The sentence about running a model household through each scheme is the visitor. Its subject is the rates, as the argument's is, and the procedure is one the argument would want to exist, but no step of the argument uses a computed figure: the addition is established by design, not by measurement, and nothing afterwards returns to the model household.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of overlapping benefit withdrawal rates; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An advanced item built so that the method sentence is not the sentence with the most technical surface. The core's three joints, that number, the addition and the parts against the sum, are each unusable without their neighbour, and the measurement sentence is the only one nothing leans on."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "That number is set by nobody, since each scheme is designed on its own and the withdrawal rates of three or four of them simply add where a household qualifies for all of them."
+    },
+    {
+      "label": "B",
+      "text": "Taken singly each taper is defensible, and taken together they compose a schedule nobody wrote, which is why a remedy aimed at any one of the parts will leave the sum exactly where it was."
+    },
+    {
+      "label": "C",
+      "text": "A benefit withdrawn as earnings rise is a tax on those earnings, whatever the statute calls it, and a household feels the two as one number."
+    },
+    {
+      "label": "D",
+      "text": "The rates are computed by running a model household through each scheme in turn and recording the change in net income against one extra pound of earnings, which is how the comparison is usually drawn."
+    },
+    {
+      "label": "E",
+      "text": "The addition is invisible to every department that produced a part of it, and it is why a family can face a higher rate on an extra hour of work than the best-paid people in the country face on theirs."
+    }
+  ],
+  "outlier": "D",
+  "core_order": [
+    "C",
+    "A",
+    "E",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about the rate a household actually faces on extra earnings, from the withdrawal that is a tax to the repair that will not work. The sentence that explains how such rates are measured is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. A benefit withdrawn as earnings rise is a tax, and a household feels the two as one number; that number is set by nobody, since separately designed schemes simply add; the addition is invisible to each department that made a part of it, and it can put a family above the best-paid people in the country; and since each taper is defensible alone, the repair has to be aimed at the sum rather than at any part. Claim, cause, consequence, remedy.",
+    "core_roles": [
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It establishes that withdrawal and tax are one quantity to the household, which is the single number the rest of the argument is about."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'That number' names the quantity just identified and gives the mechanism that produces it, which is the argument's central claim."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'The addition' names the adding just described and states its two consequences, invisibility to the designers and a rate that outruns the highest earners'."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "It sets the defensible parts against the indefensible sum, both of which the previous sentences have supplied, and names the only place a remedy can bite."
+      }
+    ],
+    "links": [
+      {
+        "from": "C",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'That number' has exactly one antecedent, the single figure a household is said to feel, and the sentence explains where it comes from."
+      },
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The addition' names the adding of withdrawal rates the previous sentence describes, so its invisibility is a property of that process."
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "lexical",
+        "explanation": "'The parts' and 'the sum' answer the departments each producing a part and the total the previous sentence makes visible, so the remedy is stated in its terms."
+      }
+    ],
+    "violation_named": "The four core sentences make an argument about what a rate is, how it comes to exist, what it does and where it can be repaired. The odd sentence explains how such a rate is measured, by running a model household through each scheme and recording the change against an extra pound. That is method reported inside an argument that never uses a measurement.",
+    "why_it_breaks": "The argument is established by design rather than by arithmetic. That withdrawal is a tax follows from what a household feels; that the rates add follows from the schemes being designed separately; the invisibility follows from the same fact; the remedy follows from the parts being defensible. None of these needs a figure, and no sentence afterwards mentions the model household, the pound of earnings or the comparison drawn from them. The sentence supplies a procedure nothing calls for and hands nothing on.",
+    "trap_exposed": "The camouflage is that the sentence answers a question a sceptical reader has already started asking, namely where such numbers come from, and its subject is the rates rather than any investigator, so it does not sound like a note on someone else's study. That is a plausible shape and not a tie. The decoy is the comparison between a family's rate on an extra hour and the rate the best-paid face, which reads like a flourish from a campaign, though it is the only place the sum is shown mattering, and the closing sentence needs a sum.",
+    "exclusion_analysis": [
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states a definition rather than a problem, so a reader who has grasped the argument may treat it as a preliminary the paragraph outgrew.",
+        "what_breaks": "Without it 'that number' points at nothing, and an argument about a rate never explains why a withdrawal counts as one."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the most administrative sentence in the set, with schemes and qualification rules in place of anything a household would recognise.",
+        "what_breaks": "Without it the addition named next has never happened, and the argument asserts an invisible total with nothing producing it."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It carries the only comparison with a rhetorical edge, which makes it sound like advocacy imported into an analysis.",
+        "what_breaks": "Without it the closing contrast between the parts and the sum has no sum to point at, and the argument never says why the addition matters to anybody."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It turns to what should be done, which can look like a recommendation appended to an argument that had already finished.",
+        "what_breaks": "Without it the paragraph describes a total nobody designed and stops, and the one practical thing that follows, where a repair must be aimed, is never said."
+      }
+    ],
+    "detection_habit": "When a paragraph contains a sentence about how something is measured, ask which later sentence uses the measurement. If the argument is carried by design rather than by figures, the measuring sentence is a guest."
+  },
+  "mentor": {
+    "challenge": "One of these sentences tells you how the numbers are arrived at. Before you keep it, find the step of the argument that could not be taken without it.",
+    "takeaway": "An argument that needs no figure has no use for the recipe that produces one."
+  }
+}

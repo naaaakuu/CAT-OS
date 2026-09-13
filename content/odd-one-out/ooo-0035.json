@@ -43,7 +43,11 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "candidate_model_maintenance"
+    ],
     "mission": "notice_topic_stability",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,13 @@
       "expert_reviewed": false
     },
     "learning_objective": "ask what each particular is a particular of, and see that two illustrations of the same object can serve two different descriptions",
-    "reasoning_patterns": ["arg.example_vs_principle", "disc.example_after_claim", "comp.supporting_idea", "comp.organization", "scope.true_but_off_question"],
+    "reasoning_patterns": [
+      "arg.example_vs_principle",
+      "disc.example_after_claim",
+      "comp.supporting_idea",
+      "comp.organization",
+      "scope.true_but_off_question"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the sentence about a piece on a doctrine that ends by pointing at superstition: it is an illustration in a set that appears to need only one, and a reader pruning examples may take it. It stays because it is the only place the device is shown working, and because the closing sentence's opinion in the margins has nothing to refer to without it. The forty columns and the plates are an illustration of scale and thoroughness; no sentence in the paragraph claims either, and the description is entirely about what a pointer can do that a sentence cannot. That sentence now runs to the same length as the rest, uses the description's own vocabulary, entry, reader and directing, and is no longer the only sentence with a number in it, so the choice between the two particulars has to be made on what each one is a particular of.",
@@ -77,38 +87,109 @@
     "reviewer_notes": "Two particulars, one description. The item is built so that pruning by suspicion of examples costs the learner the sentence the description depends on, while the genuine stray is the more charming of the two."
   },
   "sentences": [
-    { "label": "A", "text": "An article on a point of doctrine that closes by directing the reader to the article on superstition has made no statement a censor could quote, and has still said something no reader will miss." },
-    { "label": "B", "text": "The entry for a single mechanical trade could run to forty columns, and its plates directed the reader's eye to every tool on the bench and to the workman's hands at each stage." },
-    { "label": "C", "text": "At the foot of many articles in the seventeen folio volumes of the great eighteenth-century encyclopaedias stands a word in small capitals, directing the reader to another entry." },
-    { "label": "D", "text": "The device belongs to the apparatus rather than to the prose, which is why so much of an encyclopaedia's opinion has to be looked for in its margins and in its order." },
-    { "label": "E", "text": "Some of these directions do the ordinary work of a reference, and others send the reader somewhere the article has given him no obvious reason to go." }
+    {
+      "label": "A",
+      "text": "An article on a point of doctrine that closes by directing the reader to the article on superstition has made no statement a censor could quote, and has still said something no reader will miss."
+    },
+    {
+      "label": "B",
+      "text": "Some of these directions do the ordinary work of a reference, and others send the reader somewhere the article has given him no obvious reason to go."
+    },
+    {
+      "label": "C",
+      "text": "At the foot of many articles in the seventeen folio volumes of the great eighteenth-century encyclopaedias stands a word in small capitals, directing the reader to another entry."
+    },
+    {
+      "label": "D",
+      "text": "The device belongs to the apparatus rather than to the prose, which is why so much of an encyclopaedia's opinion has to be looked for in its margins and in its order."
+    },
+    {
+      "label": "E",
+      "text": "The entry for a single mechanical trade could run to forty columns, and its plates directed the reader's eye to every tool on the bench and to the workman's hands at each stage."
+    }
   ],
-  "outlier": "B",
-  "core_order": ["C", "E", "A", "D"],
+  "outlier": "E",
+  "core_order": [
+    "C",
+    "B",
+    "A",
+    "D"
+  ],
   "builder": {
     "prompt": "Build the four-sentence description of what a cross-reference does at the end of an article. The particular that illustrates nothing the description claims is your answer."
   },
   "explanation": {
     "spine_note": "The core describes one small device in four steps. It opens with the thing itself, a word in small capitals at the foot of an article, then divides the class in two: ordinary references, and directions with no obvious warrant. The third step shows the second kind at work, pointing from a doctrine to superstition and thereby saying what no sentence had to say, and the fourth locates the device in the apparatus rather than in the prose. Object, division, instance, placement.",
     "core_roles": [
-      { "label": "C", "role": "topic", "why_here": "It is the only sentence that says what the object physically is, where it sits and how large the work it sits in is, all of which everything after it takes for granted." },
-      { "label": "E", "role": "development", "why_here": "'These directions' picks up the pointer just described and splits it into the two kinds the rest of the description needs." },
-      { "label": "A", "role": "example", "why_here": "It shows the second kind doing its work, and it is the only sentence in which the device actually says anything." },
-      { "label": "D", "role": "conclusion", "why_here": "'The device' names what has just been demonstrated and places it, drawing the consequence for where a reader has to look for opinion." }
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It is the only sentence that says what the object physically is, where it sits and how large the work it sits in is, all of which everything after it takes for granted."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'These directions' picks up the pointer just described and splits it into the two kinds the rest of the description needs."
+      },
+      {
+        "label": "A",
+        "role": "example",
+        "why_here": "It shows the second kind doing its work, and it is the only sentence in which the device actually says anything."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "'The device' names what has just been demonstrated and places it, drawing the consequence for where a reader has to look for opinion."
+      }
     ],
     "links": [
-      { "from": "C", "to": "E", "tie": "reference", "explanation": "'Some of these directions' points at the word in small capitals just described and begins to sort the class it names." },
-      { "from": "E", "to": "A", "tie": "lexical", "explanation": "The article that sends a reader somewhere with no obvious reason is exactly the case the next sentence exhibits, so the instance answers the category." },
-      { "from": "A", "to": "D", "tie": "given_new", "explanation": "What a pointer can say without stating is now given, and the closing sentence adds the new material, where in a volume such saying lives." }
+      {
+        "from": "C",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'Some of these directions' points at the word in small capitals just described and begins to sort the class it names."
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "tie": "lexical",
+        "explanation": "The article that sends a reader somewhere with no obvious reason is exactly the case the next sentence exhibits, so the instance answers the category."
+      },
+      {
+        "from": "A",
+        "to": "D",
+        "tie": "given_new",
+        "explanation": "What a pointer can say without stating is now given, and the closing sentence adds the new material, where in a volume such saying lives."
+      }
     ],
     "violation_named": "The odd sentence is an example without a claim. The description is about what a cross-reference can do that a sentence cannot, and every part of it concerns pointing, direction and the space between two articles. Forty columns and engraved plates illustrate the scale and thoroughness of the enterprise, which no sentence here asserts, denies or uses. The sentence is no longer marked out by its length, its vocabulary or its arithmetic; it is marked out only by the claim it fails to serve.",
     "why_it_breaks": "The core is a chain of definite reference: this word, these directions, this case, the device. The stray sentence enters that chain with a noun the chain does not contain, an entry considered on its own, and leaves nothing behind for the closing sentence to place. It would sit naturally in a description of the encyclopaedia's ambition. This description is about its margins.",
     "trap_exposed": "The camouflage is that a description of a book may reasonably contain particulars, and this one already contains one, so the stray sentence presents itself as the second of a pair. Nothing about its size, its nouns or its numbers separates it from that pair. The decoy is the genuine particular: because it is the more argumentative of the two, a reader who is pruning illustrations often removes the sentence in which the device is the only time shown working.",
     "exclusion_analysis": [
-      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It is pure physical description, a word and its position on a page, so a reader looking for the paragraph's idea may treat it as furniture.", "what_breaks": "Without it nothing says what the device is, and the directions, the instance and the apparatus all describe an object the reader has never been shown." },
-      { "label": "E", "mistake_type": "hardest_to_place", "why_tempting": "It divides a class without deciding anything, which makes it look like a transitional sentence that could be spared.", "what_breaks": "Without it the paragraph moves from a pointer in general to a pointer that accuses, with the distinction that makes the second kind remarkable left out." },
-      { "label": "A", "mistake_type": "lexical_pull", "why_tempting": "It is one of two concrete sentences in the set, and a reader who has decided the paragraph needs only one illustration may drop either.", "what_breaks": "Without it the description says a device exists and never shows it doing anything, and the opinion the closing sentence sends us to the margins for is never demonstrated." },
-      { "label": "D", "mistake_type": "no_uniqueness_test", "why_tempting": "It rises from the page to a general remark about where opinion lives, so it reads like the first line of a different, grander paragraph.", "what_breaks": "Without it the description stops at a clever instance and never says what the instance shows about the book as a whole." }
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It is pure physical description, a word and its position on a page, so a reader looking for the paragraph's idea may treat it as furniture.",
+        "what_breaks": "Without it nothing says what the device is, and the directions, the instance and the apparatus all describe an object the reader has never been shown."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It divides a class without deciding anything, which makes it look like a transitional sentence that could be spared.",
+        "what_breaks": "Without it the paragraph moves from a pointer in general to a pointer that accuses, with the distinction that makes the second kind remarkable left out."
+      },
+      {
+        "label": "A",
+        "mistake_type": "lexical_pull",
+        "why_tempting": "It is one of two concrete sentences in the set, and a reader who has decided the paragraph needs only one illustration may drop either.",
+        "what_breaks": "Without it the description says a device exists and never shows it doing anything, and the opinion the closing sentence sends us to the margins for is never demonstrated."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It rises from the page to a general remark about where opinion lives, so it reads like the first line of a different, grander paragraph.",
+        "what_breaks": "Without it the description stops at a clever instance and never says what the instance shows about the book as a whole."
+      }
     ],
     "detection_habit": "For every concrete sentence, finish the phrase this is an example of, using only words the paragraph has already used. If the phrase cannot be finished, the example is visiting from another argument."
   },

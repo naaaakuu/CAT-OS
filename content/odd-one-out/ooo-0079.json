@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0079",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "medicine-health",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "title": "The Turn Given to Somebody Else",
+    "theme": "why sorting the injured by severity is recorded as a category rather than taken as a judgement, and what the tag does for the staff rather than for the patient",
+    "estimated_time_sec": 85,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "B",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is about the same hospital and the same patients, and it makes the kind of corrective point a careful argument often contains. Its object is the institution's results rather than the decision at the door. The decoy is the sentence about a decision taken in public, whose language of turns and fairness sounds social rather than clinical."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "keep hold of the object an argument is about, and notice a sentence that widens from one decision to a whole institution's results",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "comp.purpose",
+      "comp.organization",
+      "disc.lexical_chain",
+      "scope.too_broad"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about a decision taken in public that one person's turn has been given to another: its language of turns and fairness sounds social rather than clinical, and a reader may treat it as a moral aside. It stays because the next sentence opens on that decision and says what makes it easier to take and to defend; remove it and the tag is offered as a support for nothing. The sentence about what waits upstairs is the intruder. It is about the same hospital and the same patients, and it makes the sort of corrective point an argument often contains, but every other sentence is about one decision at the door, and this one is about the results of an institution.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of sorting the injured by severity; no specific protocol described. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A foundation scope item with a very strong core. The outlier is true, sympathetic and about the same building, and is excluded because it changes the object from a decision to an institution's results, which nothing in the argument produces or uses."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Whether such a room saves the people brought to it depends far more on what is waiting upstairs than on anything settled at the door."
+    },
+    {
+      "label": "B",
+      "text": "The tag is therefore a device for making a hard choice repeatable by people who are tired and watched, and it does nothing for the patient it is fastened to beyond recording what has already been decided."
+    },
+    {
+      "label": "C",
+      "text": "That decision is easier to make and to defend when it is recorded as a category rather than taken as a judgement, which is what the coloured tag supplies."
+    },
+    {
+      "label": "D",
+      "text": "Sorting by severity replaces that rule, and the replacement asks the staff for something a queue never asks: a decision, taken in public, that one person's turn has been given to another."
+    },
+    {
+      "label": "E",
+      "text": "A queue serves whoever arrived first, and in a room where some injuries cannot wait that rule would cost lives."
+    }
+  ],
+  "outlier": "A",
+  "core_order": [
+    "E",
+    "D",
+    "C",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about why the injured are sorted by severity and what the coloured tag is for. The sentence that moves from one decision to the hospital's results is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. A queue serves whoever arrived first, and in a room where some injuries cannot wait that rule would cost lives; sorting by severity replaces it and asks the staff for a decision taken in public that one person's turn has gone to another; that decision is easier to make and to defend as a recorded category than as a judgement, which is what the tag supplies; and the tag is therefore a device for the staff rather than for the patient. Rule refused, what the replacement costs, the support, what the tag is for.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "topic",
+        "why_here": "It states the rule the argument rejects and the reason, which is what makes a replacement necessary."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "'That rule' names the queue just described, and this sentence gives the replacement together with the burden it puts on the staff."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "'That decision' names the burden just described, and this sentence says what makes it bearable, which is where the tag enters."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "'The tag' names the object just introduced and states what it is really for, which is the claim the whole argument was assembled to make."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'That rule' has exactly one antecedent, the first-come order the previous sentence describes and condemns."
+      },
+      {
+        "from": "D",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'That decision' names the public choice to give one person's turn to another, which the previous sentence alone introduces."
+      },
+      {
+        "from": "C",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'The tag' is supplied by the previous sentence, so the closing claim about what it does is a claim about that object."
+      }
+    ],
+    "violation_named": "Every core sentence is about one decision taken at the door of a room and the device that supports it. The odd sentence is about whether a hospital saves the people brought to it, and about the capacity waiting upstairs. Same building, same patients, a different object.",
+    "why_it_breaks": "Nothing in the argument produces a claim about outcomes, and nothing in it could use one. The rule is refused because some injuries cannot wait, the replacement is hard because it is public, the tag helps because a category is easier to defend than a judgement; none of these needs to know what determines a hospital's results, and no sentence afterwards returns to beds, wards or survival.",
+    "trap_exposed": "The camouflage is that the sentence makes exactly the kind of corrective point a fair argument often contains, a reminder that the thing being discussed matters less than something else. That is a plausible shape and not a tie. The decoy is the sentence about a decision taken in public, whose language of turns and fairness sounds social rather than clinical, though the support described next is a support for precisely that decision. And the attachment test does not separate it: it opens on such a room, pointing back at the room where some injuries cannot wait.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It describes an ordinary queue rather than anything medical, so a reader who has found the argument may treat it as an aside.",
+        "what_breaks": "Without it 'that rule' points at nothing, and the replacement replaces something the paragraph has never stated."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its talk of turns and of a decision taken in public sounds like social comment in a clinical argument.",
+        "what_breaks": "Without it 'that decision' names nothing, and the tag is said to support a choice the paragraph has never described anyone making."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It contrasts a category with a judgement in one clause, which is an abstract move in an otherwise concrete argument.",
+        "what_breaks": "Without it the tag has never been introduced, and the closing claim about what the tag does names an object out of nowhere."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It says what the tag does not do for the patient, which can look like a qualification added after the argument was complete.",
+        "what_breaks": "Without it the argument explains why sorting is hard and stops, never saying what the device is actually for, which is the point it was built to reach."
+      }
+    ],
+    "detection_habit": "Say what object each sentence is about: a decision, a device, an institution. A true and sympathetic sentence about the larger object is still a sentence from a different paragraph."
+  },
+  "mentor": {
+    "challenge": "One of these sentences is about the hospital rather than about the moment at the door. It is true, and it is not part of this argument.",
+    "takeaway": "Hold the object steady. Widening from a decision to an institution is a change of subject wearing the same clothes."
+  }
+}

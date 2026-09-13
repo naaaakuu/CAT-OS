@@ -43,7 +43,10 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring"
+    ],
     "mission": "track_the_direction",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +56,12 @@
       "expert_reviewed": false
     },
     "learning_objective": "follow a description in the order its subject actually happens, and see that a sentence about studying the practice is standing outside the sequence",
-    "reasoning_patterns": ["arg.description_vs_evaluation", "disc.chronology", "comp.function_over_words", "comp.organization"],
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "disc.chronology",
+      "comp.function_over_words",
+      "comp.organization"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the closing sentence, whose last clause about people with nothing to gain is the only evaluation in an otherwise plain description, so a reader eliminating by texture may take it. It stays because it is the final stage of the meeting, the point at which something leaves the room, and because the opinion it names answers the request the meeting opened with. The sentence about the file of referrals now begins with an object the committee itself keeps, so it cannot be picked out by its opening words; what disqualifies it is that setting one year's file beside another's occupies no moment in the morning being described, and the description never asks whether the practice works.",
@@ -77,38 +85,109 @@
     "reviewer_notes": "A foundation item whose core is a plain sequence, so the learner can see the shape of the paragraph at a glance and feel the one sentence that is not part of the morning being described."
   },
   "sentences": [
-    { "label": "A", "text": "The discussion that follows is deliberately slow, and each person at the table is asked in turn what the family would say, what the nurse would say, and what a stranger reading the notes in a year would say." },
-    { "label": "B", "text": "The committee's own file of referrals has been set beside the file for the year before, to establish whether meetings of this kind change any decision at all." },
-    { "label": "C", "text": "A hospital's ethics committee meets around a table with the notes of a single case in front of it, and nobody in the room will be treating the patient." },
-    { "label": "D", "text": "The clinician who asked for the meeting speaks first, and is made to say what he wants to do before he says what he is afraid of." },
-    { "label": "E", "text": "At the end the committee writes an opinion rather than an instruction, and it goes back to the clinician carrying the weight of having been looked at by people with nothing to gain." }
+    {
+      "label": "A",
+      "text": "The discussion that follows is deliberately slow, and each person at the table is asked in turn what the family would say, what the nurse would say, and what a stranger reading the notes in a year would say."
+    },
+    {
+      "label": "B",
+      "text": "At the end the committee writes an opinion rather than an instruction, and it goes back to the clinician carrying the weight of having been looked at by people with nothing to gain."
+    },
+    {
+      "label": "C",
+      "text": "A hospital's ethics committee meets around a table with the notes of a single case in front of it, and nobody in the room will be treating the patient."
+    },
+    {
+      "label": "D",
+      "text": "The clinician who asked for the meeting speaks first, and is made to say what he wants to do before he says what he is afraid of."
+    },
+    {
+      "label": "E",
+      "text": "The committee's own file of referrals has been set beside the file for the year before, to establish whether meetings of this kind change any decision at all."
+    }
   ],
-  "outlier": "B",
-  "core_order": ["C", "D", "A", "E"],
+  "outlier": "E",
+  "core_order": [
+    "C",
+    "D",
+    "A",
+    "B"
+  ],
   "builder": {
     "prompt": "Build the four-sentence description of the meeting from the moment it sits down to the moment something leaves the room. The sentence that is not part of that morning is your answer."
   },
   "explanation": {
     "spine_note": "The core describes one meeting from beginning to end. It opens with the room, the notes and the fact that nobody present is treating the patient, then gives the first speaker and the order he is made to speak in. The third stage is the slow discussion and the voices each member is asked to supply, and the fourth is the end, an opinion rather than an instruction, going back to the person who asked for it. Room, first speaker, discussion, close.",
     "core_roles": [
-      { "label": "C", "role": "topic", "why_here": "It sets the room and the one fact that governs everything after it, that the people deciding are not the people acting." },
-      { "label": "D", "role": "development", "why_here": "It is the first thing that happens, and the order it imposes, want before fear, is what makes the discussion that follows possible." },
-      { "label": "A", "role": "development", "why_here": "It is the body of the meeting, and its three borrowed voices are the working method the room actually uses." },
-      { "label": "E", "role": "conclusion", "why_here": "It is the last stage, and the opinion leaving the room answers the request that opened it." }
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It sets the room and the one fact that governs everything after it, that the people deciding are not the people acting."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "It is the first thing that happens, and the order it imposes, want before fear, is what makes the discussion that follows possible."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "It is the body of the meeting, and its three borrowed voices are the working method the room actually uses."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "It is the last stage, and the opinion leaving the room answers the request that opened it."
+      }
     ],
     "links": [
-      { "from": "C", "to": "D", "tie": "reference", "explanation": "'The clinician who asked for the meeting' picks out one person from the table just described and starts the proceedings." },
-      { "from": "D", "to": "A", "tie": "lexical", "explanation": "'The discussion that follows' takes the first speech as given and moves the description to what comes after it." },
-      { "from": "A", "to": "E", "tie": "conjunction", "explanation": "'At the end' closes the sequence the previous sentences have been moving through, so the opinion arrives after the voices have been heard." }
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'The clinician who asked for the meeting' picks out one person from the table just described and starts the proceedings."
+      },
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "lexical",
+        "explanation": "'The discussion that follows' takes the first speech as given and moves the description to what comes after it."
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "conjunction",
+        "explanation": "'At the end' closes the sequence the previous sentences have been moving through, so the opinion arrives after the voices have been heard."
+      }
     ],
     "violation_named": "The four core sentences describe what happens in a room. The odd sentence describes how somebody would find out whether such rooms accomplish anything, by setting one year's referrals beside another's. That is a statement of method standing in a description of a practice, and the description never asks whether the practice works.",
     "why_it_breaks": "The paragraph is ordered by time: the room, the first speaker, the discussion, the end. Two years of files occupy no moment in that morning, and the sentence can be placed neither before the first speech nor after the opinion. It also takes nothing from the sentence before it and leaves nothing for the sentence after, since what follows it needs a discussion to have happened.",
     "trap_exposed": "The camouflage is usefulness, and now also ownership. The stray sentence answers the question a reader is most likely to be asking, whether any of this makes a difference; it uses the paragraph's own nouns; and it opens on a thing the committee itself keeps, so its first words look like another stage of the morning. The description has not raised that question. The decoy is the closing sentence, whose final clause is the only judgement in the set, though it is the stage at which the meeting's product leaves the room.",
     "exclusion_analysis": [
-      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It describes furniture and attendance rather than any action, so a reader looking for what happens may treat it as preamble.", "what_breaks": "Without it there is no room and no case, and the clinician, the discussion and the opinion all belong to a meeting the reader has never been shown." },
-      { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "It concerns one man's speech rather than the committee, so it can look like a detail rather than a stage.", "what_breaks": "Without it the discussion has nothing to discuss, and the opinion at the end goes back to a clinician who has not been introduced." },
-      { "label": "A", "mistake_type": "surface_oddity", "why_tempting": "Its three quoted perspectives give it a list-like shape that stands out against the plain sentences around it.", "what_breaks": "Without it the meeting begins and ends with nothing in between, and the deliberation the closing sentence claims to have weight is never shown." },
-      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "Its last clause passes a quiet judgement on the committee, which is unlike the neutral description before it.", "what_breaks": "Without it the description stops in mid-discussion, and nothing says what the meeting produces or where it goes." }
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It describes furniture and attendance rather than any action, so a reader looking for what happens may treat it as preamble.",
+        "what_breaks": "Without it there is no room and no case, and the clinician, the discussion and the opinion all belong to a meeting the reader has never been shown."
+      },
+      {
+        "label": "D",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It concerns one man's speech rather than the committee, so it can look like a detail rather than a stage.",
+        "what_breaks": "Without it the discussion has nothing to discuss, and the opinion at the end goes back to a clinician who has not been introduced."
+      },
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its three quoted perspectives give it a list-like shape that stands out against the plain sentences around it.",
+        "what_breaks": "Without it the meeting begins and ends with nothing in between, and the deliberation the closing sentence claims to have weight is never shown."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "Its last clause passes a quiet judgement on the committee, which is unlike the neutral description before it.",
+        "what_breaks": "Without it the description stops in mid-discussion, and nothing says what the meeting produces or where it goes."
+      }
     ],
     "detection_habit": "When a paragraph describes a practice in order, give each sentence a place in the sequence. A sentence about how the practice has been studied belongs to a different room altogether."
   },

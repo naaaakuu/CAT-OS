@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0063",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "human-behaviour",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "Twice From Somewhere Else",
+    "theme": "why averaging one person's two guesses helps a little, why the help shrinks when the guesses are close together, and what that turns the advice into",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "D",
+    "violation_type": "example_no_claim",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier shows one person giving two very different figures for the same quantity, which is the paragraph's own material, and it looks like an illustration of answers drawn from different parts of what somebody knows. The decoy is the short sentence reporting that the gain shrinks as the occasions come closer, which reads like a hedge rather than a step."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "name the claim an example is serving before admitting it, and notice when a plausible illustration ranks two answers where the paragraph only ever combines them",
+    "reasoning_patterns": [
+      "arg.example_vs_principle",
+      "comp.organization",
+      "disc.example_after_claim",
+      "disc.lexical_chain",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the short sentence saying that the gain is real but small and shrinks as the occasions come closer: it reads like a hedge dropped into an exposition, and a reader looking for the sentence that contributes least will point at it. It stays because the next sentence opens on that shrinkage and treats it as the thing to be explained, and because the closing advice compares its remedy with waiting, which only this sentence makes a live option. The sentence about judging a distance from a photograph and then on the ground is the visitor. It shows one person producing two very different figures, which is the paragraph's own material, but it then ranks one of them as the better, and the exposition never compares single answers for accuracy: it combines them. An example has to be an example of a claim, and the claim it fits is not made here.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of averaging repeated estimates from one person; no specific study adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The example is drawn from the same field, the same kind of person and the same task, and it fails on one joint only: the paragraph combines answers and never ranks them. The core's chain runs through the gain, that shrinkage and the instruction that follows, each of which is orphaned if its neighbour is removed."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The gain is real but small, and it shrinks as the two occasions are brought closer together."
+    },
+    {
+      "label": "B",
+      "text": "The same person judging a distance from a photograph and then on the ground gives two very different figures, and the one taken on the ground is the better of them."
+    },
+    {
+      "label": "C",
+      "text": "That shrinkage settles what is happening, since a second answer helps only so far as it is drawn from a different part of what the person knows, and an answer given a minute later is drawn from the same part as the first."
+    },
+    {
+      "label": "D",
+      "text": "The instruction that follows is not to guess twice but to guess twice from somewhere else, which is why asking a person to argue against their own first figure recovers more of the benefit than waiting a week does."
+    },
+    {
+      "label": "E",
+      "text": "Asking one person for the same estimate twice, with a long enough gap between the askings, produces a pair of answers whose average beats either of them."
+    }
+  ],
+  "outlier": "B",
+  "core_order": [
+    "E",
+    "A",
+    "C",
+    "D"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of what averaging one person's two guesses does, from the finding to the advice it licenses. The sentence that illustrates a claim the paragraph never makes is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one effect in four moves. Asking a person for the same estimate twice, with a gap, produces a pair whose average beats either; the gain is real but small and shrinks as the occasions come closer; that shrinkage settles the mechanism, since a second answer helps only so far as it is drawn from a different part of what the person knows; and the advice that follows is not to guess twice but to guess twice from somewhere else. Finding, limit, mechanism, instruction.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "topic",
+        "why_here": "It states the finding the paragraph exists to explain, and the pair of answers it produces is what every later sentence is about."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The gain' names the improvement just reported and adds the pattern, its shrinking with closeness, that the next sentence uses as evidence."
+      },
+      {
+        "label": "C",
+        "role": "cause_effect",
+        "why_here": "'That shrinkage' points at the pattern just given and converts it into the mechanism, which is the paragraph's central claim."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "'The instruction that follows' is drawn from the mechanism just stated, and its comparison with waiting answers the shrinking gain described earlier."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The gain' has exactly one antecedent, the improvement the average is said to deliver over either single answer."
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'That shrinkage' names the pattern the previous sentence reports, and the mechanism is offered as the explanation of it."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'The instruction that follows' follows from the mechanism just given, which is what makes arguing against a first figure better than simply waiting."
+      }
+    ],
+    "violation_named": "The odd sentence is an example, and an example must be an example of something. The four core sentences say what combining two answers does and why the combining works. The photograph and the ground produce two answers and then rank them, and the paragraph never ranks single answers for accuracy at all.",
+    "why_it_breaks": "No sentence before it asks to be illustrated by it and no sentence after it uses it. The mechanism concerns what a second answer is drawn from, not which viewing conditions are more reliable; the instruction concerns how to make the second draw differ, not which of two draws to trust. Taking the better figure is in fact the opposite of what the paragraph advises, which is to keep both and average them, so the example cannot even be pressed into service as a special case.",
+    "trap_exposed": "The camouflage is near-perfect material. One person, one quantity, two askings, two very different figures: that is the paragraph's own set-up, and a reader will hear the photograph and the ground as two different parts of what the man knows. The joint that fails is the last clause, which picks a winner. The decoy is the short sentence about the gain being real but small, which reads like a hedge and is in fact the evidence the mechanism is built on and the option the closing advice is measured against. And the attachment test does not separate it: it opens on the same person, which is precisely the paragraph's unit.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports a bare finding with no explanation, so a reader who has found the paragraph's idea may treat it as an opening the set could spare.",
+        "what_breaks": "Without it 'the gain' names nothing, and the paragraph explains and then advises about an effect it never states."
+      },
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is much the shortest sentence and sounds like a qualification rather than a step, which makes it look like padding.",
+        "what_breaks": "Without it 'that shrinkage' points at nothing, the mechanism loses the evidence it rests on, and the closing comparison with waiting has no reason to be made."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the longest sentence and states the mechanism in a phrase, a different part of what the person knows, that resists a quick picture.",
+        "what_breaks": "Without it the instruction follows from nothing, and the paragraph reports a shrinking benefit without ever saying what the benefit is made of."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It turns from explanation to advice, which can look like a practical afterthought attached to a finished account.",
+        "what_breaks": "Without it the mechanism is stated and never used, and the one thing the explanation was good for, knowing how to make a second guess worth having, is never said."
+      }
+    ],
+    "detection_habit": "Before you admit an example, say which sentence it is an example of, in the paragraph's own words. An instance built from exactly the right materials can still be doing a job the paragraph never asked for."
+  },
+  "mentor": {
+    "challenge": "One sentence here offers a case of a person answering the same question twice. Ask what the paragraph does with two answers before you decide it fits.",
+    "takeaway": "An example must serve a claim that is actually on the page, not the one it most resembles."
+  }
+}

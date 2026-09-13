@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0058",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "linguistics",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Verb That Paid for a Tense",
+    "theme": "why the hardening of a motion verb into a marker of the future runs one way only, and what that makes the history of a grammar a history of",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "A",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 5,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The core already contains a claim about every language, so the outlier is not the only sentence that reaches beyond the one phrase, and it names the same language, the same centuries and the same category. What it changes is the unit: it speaks of a grammar as a whole where every core sentence speaks of one construction's path. The decoy is the sentence about no language having been found to run the change backwards, whose sudden reach across all languages looks like the widest claim in the set."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
+    "mission": "find_the_branch",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "check the unit an argument is arguing about, and recognise a sentence that keeps the topic and the vocabulary while quietly changing what is being talked about",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "scope.too_broad",
+      "comp.organization",
+      "disc.topic_progression",
+      "arg.evidence_vs_conclusion"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence saying that no language has been found in which a future marker hardens back into a verb of travel: it reaches across every language at once, and a reader who has been told that the odd sentence is the one that overreaches will stop there. It stays because the next sentence explains the direction that only this sentence establishes, and because without it the one-way claim rests on a single phrase in a single language. The sentence about tenses gained and case endings lost is the intruder. Its reach is not the problem, since the set already contains a claim about all languages; its unit is. Every core sentence argues about the path of one construction, and this one states a trend in a whole grammar, which nothing before it prepares and nothing after it uses.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of how lexical material hardens into grammatical marking; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "Written against the catalogue tell that a wrong-scope outlier is simply the widest sentence in the set. The widest sentence here is a core sentence and carries the argument's only general evidence; the outlier is narrower in reach and wrong in unit, which can only be caught by asking what each sentence is a claim about."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "What is consumed in that way is not replaced, which is why the history reads as expenditure rather than as decay, and why a language pays for each new tense with a word it will not recover."
+    },
+    {
+      "label": "B",
+      "text": "The English phrase that now marks the future began as a verb of motion, and for a long stretch it did both jobs in the same sentences without anyone noticing that a second one had appeared."
+    },
+    {
+      "label": "C",
+      "text": "The same language gained most of its tense distinctions and lost most of its case endings in the same few centuries, so its grammar as a whole has moved its work from the noun to the verb."
+    },
+    {
+      "label": "D",
+      "text": "The change ran one way only: the motion sense was never recovered, and no language has been found in which a marker of the future has hardened back into a verb of travel."
+    },
+    {
+      "label": "E",
+      "text": "What fixes the direction is the spending, since a phrase that has given up its traveller and its destination has nothing left to buy them back with."
+    }
+  ],
+  "outlier": "C",
+  "core_order": [
+    "B",
+    "D",
+    "E",
+    "A"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about one phrase that turned into a tense, from the double duty it once did to what its history makes a grammar's history. The sentence that keeps the subject and changes what is being talked about is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves about a single construction. It reports that the phrase now marking the future began as a verb of motion and for a while did both jobs; it establishes that the change runs one way only, with no case anywhere of the reverse; it explains the one-way direction by what is spent at each step; and it draws the consequence, that the history is one of expenditure rather than of decay. Case, direction, explanation, consequence.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It supplies the construction the whole argument is about and the double duty that makes the later hardening a change rather than a coincidence."
+      },
+      {
+        "label": "D",
+        "role": "evidence",
+        "why_here": "'The change' names what the previous sentence has just described, and the sentence establishes the one-way direction that the rest of the argument has to explain."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'The direction' points at the one-way movement just established, and this sentence gives the reason for it, which is what the argument exists to supply."
+      },
+      {
+        "label": "A",
+        "role": "conclusion",
+        "why_here": "'In that way' names the spending just described, and the closing claim converts one construction's history into a description of what a grammar's history is."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'The change' has exactly one antecedent, the appearance of a second job for the phrase just described."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The direction' names the one-way movement the previous sentence establishes, so the explanation offered is an explanation of that and nothing else."
+      },
+      {
+        "from": "E",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'In that way' points at the spending just described, and the closing conclusion is drawn from that spending rather than from the one-way claim alone."
+      }
+    ],
+    "violation_named": "Every core sentence is a claim about the path of one construction: a phrase, its two jobs, its one-way hardening, what it spends on the way. The odd sentence is a claim about a whole grammar over a stretch of centuries, its tenses and its case endings taken together. The topic is the same and the unit is not.",
+    "why_it_breaks": "Nothing before it prepares a claim at that size, and nothing after it uses one. The explanation by spending is an explanation of what happens to a phrase, and the conclusion prices a tense against a word: neither needs, or could use, a statement about where the work of a grammar sits. The sentence also leaves nothing for its neighbours to take up, since no later sentence mentions nouns, cases or the balance between them, while every core sentence opens on a phrase its predecessor supplied.",
+    "trap_exposed": "The camouflage is that the sentence is not the widest in the set. A reader who has learned to look for the sentence that overreaches will find a core sentence making a claim about every language known, and stop there. The odd sentence names the same language, the same category and the same centuries, and reads like the kind of scene-setting an argument about a construction might want. The decoy is precisely that general core sentence, whose reach is sudden and whose absence would leave the one-way claim resting on a single phrase. And the attachment test does not separate it: it opens by pointing back at the language the first sentence names.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports a fact about one phrase and makes no argument, so a reader who has grasped the argument may treat it as an illustration that could be assumed.",
+        "what_breaks": "Without it 'the change' points at nothing, and an argument about a one-way hardening never says what hardened or from what."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence that reaches beyond English, and a reader scanning for the sentence that widens the field will land on it at once.",
+        "what_breaks": "Without it the direction the next sentence explains has never been established, and the argument explains a pattern it has not shown to exist."
+      },
+      {
+        "label": "E",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It states its explanation in a commercial metaphor, spending and buying back, which sits oddly among the grammatical vocabulary of the rest.",
+        "what_breaks": "Without it the closing sentence's 'in that way' names nothing, and the paragraph asserts a one-way change and never says what makes it one-way."
+      },
+      {
+        "label": "A",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It converts a narrow point into a claim about what a grammar's history is, which can look like an over-reaching flourish appended to an argument.",
+        "what_breaks": "Without it the argument establishes a direction and explains it and stops, and the reading it was built to displace, that such change is decay, is never displaced."
+      }
+    ],
+    "detection_habit": "Name the unit each sentence is talking about, not just its subject. A sentence can keep the topic, the period and the vocabulary, and still have quietly changed the thing that is being argued about."
+  },
+  "mentor": {
+    "challenge": "Five sentences about grammar changing, and one of them has switched from a phrase to a whole language while keeping the same words. The widest claim in the set is not the one you want.",
+    "takeaway": "Ask what each sentence is a claim about. Scope is not how far a sentence reaches but what it reaches for."
+  }
+}

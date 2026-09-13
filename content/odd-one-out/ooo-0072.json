@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0072",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "urban-studies",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "Stops Go On and Never Come Off",
+    "theme": "why an extra stop is always asked for by the people it helps and never by the people it costs, and what that does to a route over time",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "C",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier describes a measure producing a perverse result, which is the shape of the paragraph's own point, and it carries a distance in metres as the opening sentence carries a distance and a time. Its unit is different: a whole network judged by a coverage figure, where every core sentence is about one route and the people standing beside it. The decoy is the sentence separating the two groups by whether they can be asked, which reads like a procedural aside about consultation."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "hold a paragraph's unit steady, and recognise a sentence that keeps the subject and the shape of the argument while moving to a larger object",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "comp.purpose",
+      "disc.topic_progression",
+      "comp.organization",
+      "scope.too_broad"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence that divides the two groups by whether they can be asked: it reads like a procedural note about consultation rather than a step in an explanation, and a reader may treat it as a parenthesis. It stays because the next sentence says a consultation hears from one of the two groups, a count with exactly one antecedent, and because without it the asymmetry the whole paragraph rests on is asserted and never shown. The sentence about a network judged by a coverage share is the intruder. It has the paragraph's own shape, a measure producing a perverse result, and its own distance in metres, but every core sentence is about one route and the people beside it, while this is about a whole network and a statistic, which nothing here produces and nothing here uses.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of stop spacing on bus routes; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A scope item in which the outlier is not the widest-sounding sentence and does carry a number, as the opening does. The break is the unit, a network rather than a route, and it is confirmed by the chain: the people whose walk is shortened, one of the two groups and the accumulation each fail without their neighbour."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A consultation therefore hears from one of the two groups, which is why stops accumulate along a route and are hardly ever taken off one."
+    },
+    {
+      "label": "B",
+      "text": "Every extra stop on a route adds half a minute to every journey through it and takes a few hundred metres off somebody's walk, and the two effects fall on different people."
+    },
+    {
+      "label": "C",
+      "text": "The accumulation is not a failure of anybody's judgement but of the geometry of who is present, and a route grows slower by exactly the process that was meant to make it convenient."
+    },
+    {
+      "label": "D",
+      "text": "A network of such routes, judged by the share of residents living within four hundred metres of a stop, will be extended outwards rather than made quicker, since the measure counts doors and not journeys."
+    },
+    {
+      "label": "E",
+      "text": "The people whose walk is shortened are standing at the new stop and can be asked what they think of it; the people whose ride is lengthened are already on the bus and cannot."
+    }
+  ],
+  "outlier": "D",
+  "core_order": [
+    "B",
+    "E",
+    "A",
+    "C"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of why bus stops accumulate on a route, from the two effects of an extra stop to what the accumulation actually is. The sentence that changes the object from a route to a network is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one drift in four moves. An extra stop adds half a minute to every journey and takes a few hundred metres off somebody's walk, and the effects fall on different people; one of those groups is standing at the stop and can be asked, the other is on the bus and cannot; a consultation therefore hears from one side only, so stops accumulate and are hardly ever removed; and the accumulation is a fact about who is present rather than a failure of judgement. Two effects, two groups, one voice, the drift explained.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It states the trade the whole explanation turns on and establishes that its two sides fall on different people, which the next sentence identifies."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "It takes the two groups just distinguished and adds the fact that decides everything, that only one of them is available to be asked."
+      },
+      {
+        "label": "A",
+        "role": "cause_effect",
+        "why_here": "'One of the two groups' counts the pair just described, and this sentence draws the consequence for what happens to a route over time."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "'The accumulation' names the drift just described and says what kind of thing it is, which is the point the explanation was assembled to make."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The people whose walk is shortened' and their opposites are the two sides the previous sentence says the effects fall on."
+      },
+      {
+        "from": "E",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'One of the two groups' is a count whose only antecedent is the pair the previous sentence separates by whether they can be asked."
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'The accumulation' names the growth in stops the previous sentence reports, so the closing account is an account of exactly it."
+      }
+    ],
+    "violation_named": "Every core sentence is about one route: an extra stop on it, the people standing beside it or riding along it, and what happens to it over time. The odd sentence is about a network and about the measure by which a network is judged. The subject is the same and the object is not.",
+    "why_it_breaks": "Nothing before it produces a coverage statistic and nothing after it uses one. The drift here is explained by who is available to speak at a consultation, not by what an authority is scored on, and the closing sentence needs an accumulation of stops on a route rather than a network extended outwards. The sentence arrives with a measure and a threshold that appear once and are picked up by nothing, while every core sentence opens on something its neighbour supplied.",
+    "trap_exposed": "The camouflage is shape. A measure that counts the wrong thing and produces a perverse result is exactly the kind of point this paragraph makes, and the sentence even carries a distance in metres, as the opening carries a distance and a time, so texture will not separate them. What separates them is the object: a route with people beside it, against a network with a statistic. The decoy is the sentence about who can be asked, which reads like a note on consultation procedure, though the count in the next sentence has nothing else to count. And the attachment test does not separate it: it opens on a network of such routes, reaching back to the route the paragraph has been describing.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states an arithmetic trade rather than the paragraph's idea, so a reader who has found the idea may treat it as preliminary.",
+        "what_breaks": "Without it the two groups named next have never been created, and the explanation begins with a distinction nothing has drawn."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence about asking people anything, and its two clauses read like a procedural parenthesis.",
+        "what_breaks": "Without it 'one of the two groups' has nothing to count, and the claim that a consultation hears one side rests on nothing."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It compresses a consequence and a long-run pattern into one line, which makes its role easy to mistake for a summary.",
+        "what_breaks": "Without it 'the accumulation' names nothing, and the paragraph explains who can speak without ever saying what follows for the route."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It reclassifies rather than adds, saying what the drift is not, which can look like a flourish at the end of a finished explanation.",
+        "what_breaks": "Without it the paragraph reports that stops accumulate and never says why that is not anybody's mistake, which is the whole point of the account."
+      }
+    ],
+    "detection_habit": "Name the object each sentence is about, not just its topic. A sentence can repeat your argument's own shape, carry the same kind of number, and still have swapped one route for an entire network."
+  },
+  "mentor": {
+    "challenge": "One sentence here makes the same kind of point as the others about a measure that counts the wrong thing. Ask what it is counting, and about what.",
+    "takeaway": "Keep the unit in view. A paragraph about one route cannot use a fact about a whole network, however similar the moral."
+  }
+}

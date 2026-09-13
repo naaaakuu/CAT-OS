@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0081",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "Water Hanging From a Leaf",
+    "theme": "why the height a tree can reach is set by the tension its narrowest vessels will carry rather than by the strength of its wood",
+    "estimated_time_sec": 105,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "A",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier keeps the tension, the water and the leaf, and it offers the kind of historical note a good exposition often carries. What it actually does is take a side in a quarrel about the account's standing, which the exposition never mentions having. The decoy is the short sentence about a broken column filling with gas, whose bluntness makes it look like a fragment."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice when an explanation stops explaining a mechanism and starts adjudicating the standing of the explanation, and check whether the paragraph has introduced the dispute",
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "disc.stance_continuity",
+      "comp.purpose",
+      "disc.lexical_chain",
+      "comp.organization"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the short sentence about a broken column filling with gas: it is much the barest in the set and reads like a fragment of a technical note, so a reader may treat it as an aside. It stays because the next sentence speaks of that breakage and of the tension a tree must hold, both of which it alone supplies; remove it and the risk that rises with height is a risk of nothing. The sentence about the account having had to fight for its place is the intruder. It keeps the paragraph's own vocabulary and offers the sort of historical note an exposition often carries, but the four core sentences explain how water rises and what limits it, while this one rules on a dispute about the explanation's standing that the paragraph never records.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of water transport under tension in tall plants; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A stance shift into partisanship rather than into praise or blame, which is the version most often missed: the sentence is calm, informative and in period vocabulary, and it still moves the paragraph from explaining a mechanism to defending it against objectors nobody has introduced."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Height is therefore bought at a price that grows as it is spent, and the ceiling on a species is set less by the strength of its wood than by how much tension its narrowest vessels will carry."
+    },
+    {
+      "label": "B",
+      "text": "The taller the tree the greater the tension it must hold, so the risk of that breakage rises with exactly the height the tree is competing for."
+    },
+    {
+      "label": "C",
+      "text": "A column under tension can break, and when it breaks the vessel fills with gas and carries nothing thereafter."
+    },
+    {
+      "label": "D",
+      "text": "The tension account has had to fight for its place, and the objections raised against it look now more like a reluctance to accept water hanging from a leaf than like evidence."
+    },
+    {
+      "label": "E",
+      "text": "Water reaches the top of a tall tree because the column in each vessel is under tension, pulled from above as vapour leaves the leaves rather than pushed from below."
+    }
+  ],
+  "outlier": "D",
+  "core_order": [
+    "E",
+    "C",
+    "B",
+    "A"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of how water reaches the top of a tall tree and what limits the height, ending with what sets the ceiling on a species. The sentence that defends the explanation against its critics is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one mechanism in four steps. Water reaches the top of a tall tree because the column in each vessel is under tension, pulled from above; a column under tension can break, and a broken vessel fills with gas and carries nothing; the taller the tree the greater the tension, so the risk of that breakage rises with the very height being competed for; and height is therefore bought at a price that grows as it is spent, with the ceiling set by the tension the narrowest vessels will carry. Mechanism, failure, rising risk, limit.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "topic",
+        "why_here": "It states the mechanism the whole explanation rests on, and the tension it introduces is what the next three sentences are about."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "'A column under tension' names the arrangement just described and supplies the failure that the rest of the explanation measures."
+      },
+      {
+        "label": "B",
+        "role": "cause_effect",
+        "why_here": "'That breakage' names the failure just described and ties its likelihood to height, which is what turns a mechanism into a limit."
+      },
+      {
+        "label": "A",
+        "role": "conclusion",
+        "why_here": "It gathers the tension and the rising risk into a statement of what sets a species' ceiling, which is the point the explanation was built to reach."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'A column under tension' names the column the previous sentence puts under tension, so the failure described belongs to that arrangement."
+      },
+      {
+        "from": "C",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That breakage' has exactly one antecedent, the breaking column and the gas-filled vessel of the previous sentence."
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "tie": "conjunction",
+        "explanation": "'Therefore' draws the limit from the rising risk just established, so the closing claim cannot be made without the sentence before it."
+      }
+    ],
+    "violation_named": "The four core sentences explain how water rises and what sets a limit on height. The odd sentence rules on how well the explanation has been treated by its critics and on what their objections amounted to. That is a change of stance, from expounding a mechanism to defending its standing, and the exposition has introduced no critics and no dispute.",
+    "why_it_breaks": "A defence needs an attack. Nothing in the paragraph says that the account was contested, by whom or on what ground, so the sentence answers objections it alone reports, and the sentence after it is occupied with heights and vessels rather than with a century of argument. It also brings in a history of reception that nothing before prepares and nothing after uses, while every core sentence opens on a phrase its neighbour supplied.",
+    "trap_exposed": "The camouflage is calm and vocabulary. The sentence is measured, informative, and built from the paragraph's own words, tension, water, a leaf, and a note on how an account was received is the sort of thing a good exposition does sometimes carry. The test is whether the paragraph contains the dispute. The decoy is the short sentence about the vessel filling with gas, whose bluntness makes it look like a fragment, though the rising risk in the next sentence is a risk of exactly what it describes.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reads like a textbook definition, so a reader looking for the paragraph's idea may treat it as preliminary matter.",
+        "what_breaks": "Without it nothing has put the column under tension, and the breaking, the rising risk and the ceiling all describe a mechanism never stated."
+      },
+      {
+        "label": "C",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is much the shortest sentence and states a failure flatly, which makes it look like a technical aside rather than a step.",
+        "what_breaks": "Without it 'that breakage' names nothing, and the risk said to rise with height is a risk of nothing in particular."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It links two quantities in a single clause and can be mistaken for a restatement of the sentence before it.",
+        "what_breaks": "Without it the explanation never connects the failure to height, and the closing claim about a price growing as it is spent has nothing behind it."
+      },
+      {
+        "label": "A",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It leaves the mechanism for a claim about what limits a species, which sounds like a conclusion appended to a description.",
+        "what_breaks": "Without it the paragraph describes a risk that rises with height and never says what follows, so the explanation stops before its point."
+      }
+    ],
+    "detection_habit": "When a sentence tells you how an explanation has been received, ask whether the paragraph has introduced anybody to receive it. An exposition that has named no opponent has no use for a defence."
+  },
+  "mentor": {
+    "challenge": "One sentence here is about the theory rather than about the tree, and it is written in the same quiet voice as the rest.",
+    "takeaway": "Explaining a mechanism and defending an account are different jobs. The second needs opponents the paragraph has to supply."
+  }
+}

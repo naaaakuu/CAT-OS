@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0060",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "arts-culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "premium",
+    "title": "The Act Before the Corridor",
+    "theme": "how a break invented for trimming lamps and selling drink became a rule about where an act must end, and what that makes of the symmetry now taught as dramatic form",
+    "estimated_time_sec": 135,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "E",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The exposition is already opinionated, calling a taught property a mistake about where the property lives, so the outlier is not the only sentence with a view. It also keeps the paragraph's own furniture, the interval, the bell, the play. The decoy is the opening sentence about lamps and drink, whose practical detail reads like antiquarian scene-setting beside four sentences of argument."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
+    "mission": "build_before_eliminating",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "distinguish an exposition that judges an explanation from a sentence that takes a side in a quarrel about worth, and notice that the second needs a dispute the paragraph has not recorded",
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "disc.stance_continuity",
+      "comp.purpose",
+      "struct.history_of_an_idea",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the opening sentence about trimmed lamps and drink sold in the pause: it is the only antiquarian sentence in a paragraph of argument, and a reader assembling a claim about dramatic form may take it for scene-setting the argument could drop. It stays because the second sentence opens on that pause and imposes a requirement on writers because of it, and because the closing sentence's building with a bar in it is the very establishment this sentence describes. The sentence defending the interval against contempt is the intruder. It uses the paragraph's own furniture, but the four core sentences explain where a shape came from, while this one rules on whether the practice deserves its critics, a quarrel the exposition never records anybody having.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the theatre interval and act structure; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A premium stance item in which the core is not neutral. It judges an explanation, calling a taught property misplaced, so listening for the first opinion will not find the outlier. What marks the outlier is the kind of question it settles, worth rather than origin, and the fact that no sentence supplies it with an opponent."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The break in the middle of an evening's performance began as a practical necessity of an unglamorous kind, a pause in which lamps were trimmed and the audience was sold something to drink."
+    },
+    {
+      "label": "B",
+      "text": "That requirement outlived the lamps, and the shape it produced, a first act closing on a withheld answer and a second act rising from it, has been taught for fifty years as a property of drama."
+    },
+    {
+      "label": "C",
+      "text": "Necessity or not, it imposed a requirement on anyone writing for the house: the act before the break had to end on a question the audience would carry out to the corridor."
+    },
+    {
+      "label": "D",
+      "text": "The interval deserves better than the contempt it attracts, since a play that cannot survive twenty minutes of talk about itself is rarely a play worth returning to after the bell."
+    },
+    {
+      "label": "E",
+      "text": "What that shape is a property of is a building with a bar in it, which is why plays written for an unbroken run so often refuse the symmetry that looks, from a seat in a theatre, like form itself."
+    }
+  ],
+  "outlier": "D",
+  "core_order": [
+    "A",
+    "C",
+    "B",
+    "E"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of where the shape of a two-act evening came from, from the trimmed lamps to the plays that refuse the symmetry. The sentence that settles whether the practice deserves its critics is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one form in four moves. The break began as a practical necessity, lamps and drink; whatever its origin, it imposed a requirement on writers, that the act before it end on a question; the requirement outlived the lamps and the shape it produced is now taught as a property of drama; and the closing sentence says what the shape is really a property of, a building with a bar in it, which is why plays written for an unbroken run refuse it. Origin, requirement, survival, correction.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "background",
+        "why_here": "It supplies the pause the whole explanation rests on, and the establishment with lamps and drink that the closing sentence names again as a building with a bar in it."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "'It' names the break just described, and this is the step at which a practical arrangement reaches the writing, which is what the paragraph is about."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'That requirement' names the demand just stated, and this sentence carries it past its cause and into the teaching of drama, where the mistake the paragraph corrects is made."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "'That shape' names what the previous sentence has just described being taught, and the correction is the point the whole sequence was built to reach."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'It' has exactly one antecedent, the break just described, and 'necessity or not' takes over the account of its origin."
+      },
+      {
+        "from": "C",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That requirement' names the demand on writers the previous sentence states, and the shape that outlives the lamps is the shape that demand produced."
+      },
+      {
+        "from": "B",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'That shape' names the first-act-and-second-act pattern just described, so the correction is a correction about it and nothing else."
+      }
+    ],
+    "violation_named": "The four core sentences explain where a form came from and what it is a property of. The odd sentence rules on whether the practice deserves the contempt it attracts. That is a change of stance, from tracing an origin to defending a custom, and the exposition has recorded no attack for a defence to answer.",
+    "why_it_breaks": "A defence needs an accusation. Nothing in the paragraph says that the interval is despised, by whom, or on what ground, so the sentence answers a charge the exposition never enters, and the sentence after it is busy with buildings and unbroken runs rather than with the worth of a custom. It also brings in a test, whether a play survives twenty minutes of talk, that nothing before it prepares and nothing after it uses, while every core sentence opens on a phrase supplied by its neighbour.",
+    "trap_exposed": "The usual way to catch a stance shift is to find the first opinion, and that fails here: the core calls a taught property misplaced and describes a symmetry that only looks like form, so judgement is in the paragraph's voice from early on. What separates the outlier is the kind of question it settles. The core judges an explanation; the odd sentence judges a practice, and supplies itself with an opponent the paragraph has never introduced. The decoy is the opening line about lamps and drink, whose antiquarian detail reads like scene-setting, though the conclusion's building with a bar in it is exactly that establishment.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence of practical history, and trimmed lamps beside a claim about dramatic form read like decoration.",
+        "what_breaks": "Without it the requirement in the next sentence is imposed by nothing, and the closing building with a bar in it has never been described."
+      },
+      {
+        "label": "C",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It concedes the question of origin in three words and then states a rule, which makes its function easy to misread as an aside.",
+        "what_breaks": "Without it 'that requirement' points at nothing, and the shape said to outlive the lamps has never been shown being demanded of anyone."
+      },
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reads like the paragraph's conclusion, since it reaches the present day and names the mistake, so a reader may treat what follows as redundant.",
+        "what_breaks": "Without it the closing correction names a shape the paragraph has not described, and the requirement is never shown surviving the conditions that produced it."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It is the longest sentence and turns from history to a claim about plays written today, which can look like an addition rather than the point.",
+        "what_breaks": "Without it the exposition reports that a shape is taught as a property of drama and never corrects it, so the whole history is assembled and nothing is done with it."
+      }
+    ],
+    "detection_habit": "When a paragraph is already opinionated, stop asking which sentence has a view and ask what each view is about. An account can judge its own explanation all day; the moment a sentence defends the thing being explained, look for the accuser."
+  },
+  "mentor": {
+    "challenge": "This paragraph has opinions of its own, so you cannot find the intruder by listening for the first judgement. Ask instead what quarrel each judgement belongs to.",
+    "takeaway": "A defence needs an accusation. If the paragraph contains no accuser, the defence came from somewhere else."
+  }
+}

@@ -43,7 +43,11 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "candidate_model_maintenance", "coherence_monitoring"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "candidate_model_maintenance",
+      "coherence_monitoring"
+    ],
     "mission": "build_before_eliminating",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,13 @@
       "expert_reviewed": false
     },
     "learning_objective": "check that an example has a claim to serve, and see that two examples of the same general subject can belong to two different arguments",
-    "reasoning_patterns": ["arg.example_vs_principle", "disc.example_after_claim", "comp.supporting_idea", "arg.generalization", "comp.function_over_words"],
+    "reasoning_patterns": [
+      "arg.example_vs_principle",
+      "disc.example_after_claim",
+      "comp.supporting_idea",
+      "arg.generalization",
+      "comp.function_over_words"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the mechanism sentence, the one about each speaker's choice leaving the older word a little more firmly with the rest: it contains no example and no quoted word, so in a set full of vivid word histories it looks like filler. It stays because it converts a single case into the general process the closing sentence reasons from, and because the closing 'therefore' needs it. The sentence about the farm labourer who became a criminal is a real word history that serves no claim here: the argument is about a sense contracting when a rival takes the general load, and nothing in it concerns a word acquiring contempt.",
@@ -72,38 +82,109 @@
     "reviewer_notes": "Two word histories, one claim. The item trains the habit of asking what an example is an example of, at a tier where the example is genuinely interesting and genuinely on topic."
   },
   "sentences": [
-    { "label": "A", "text": "The retreat is not a decision but an accumulation: each time a speaker reaches for the newer word in the general sense, the older one is left a little more firmly with the remainder." },
-    { "label": "B", "text": "A word seldom narrows because speakers tire of its breadth; it narrows because a rival arrives that can carry part of the load." },
-    { "label": "C", "text": "'Villain' began as a word for a farm labourer and ended as a word for a criminal, its descent tracking the contempt of the people who wrote about the countryside." },
-    { "label": "D", "text": "'Meat' once covered food of any kind, and it held that reach until 'food' itself became an ordinary word, after which the older term withdrew to flesh." },
-    { "label": "E", "text": "A narrowing of this kind therefore dates the rival rather than the word, which is why the narrow sense is so often the younger of the two." }
+    {
+      "label": "A",
+      "text": "The retreat is not a decision but an accumulation: each time a speaker reaches for the newer word in the general sense, the older one is left a little more firmly with the remainder."
+    },
+    {
+      "label": "B",
+      "text": "A word seldom narrows because speakers tire of its breadth; it narrows because a rival arrives that can carry part of the load."
+    },
+    {
+      "label": "C",
+      "text": "'Villain' began as a word for a farm labourer and ended as a word for a criminal, its descent tracking the contempt of the people who wrote about the countryside."
+    },
+    {
+      "label": "D",
+      "text": "'Meat' once covered food of any kind, and it held that reach until 'food' itself became an ordinary word, after which the older term withdrew to flesh."
+    },
+    {
+      "label": "E",
+      "text": "A narrowing of this kind therefore dates the rival rather than the word, which is why the narrow sense is so often the younger of the two."
+    }
   ],
   "outlier": "C",
-  "core_order": ["B", "D", "A", "E"],
+  "core_order": [
+    "B",
+    "D",
+    "A",
+    "E"
+  ],
   "builder": {
     "prompt": "Build the four-sentence argument about why words narrow, claim first and example second. The word history that no claim here needs is your answer."
   },
   "explanation": {
     "spine_note": "The core argues one thesis in four moves. It opens with the claim, that narrowing follows the arrival of a rival rather than any weariness with breadth, then gives the case that shows it, a word for food of any kind retreating to flesh once a rival took the general sense. The third move states the mechanism in general terms, and the fourth draws the consequence for dating. Claim, case, mechanism, consequence.",
     "core_roles": [
-      { "label": "B", "role": "topic", "why_here": "It states the thesis and sets up the contrast between two explanations, which is the shape everything after it fills in." },
-      { "label": "D", "role": "example", "why_here": "It is the instance the claim predicts: a rival arrives, and only then does the older word give up its general sense." },
-      { "label": "A", "role": "development", "why_here": "'The retreat' names what the example has just shown and turns it into a process, which the closing sentence has to reason from." },
-      { "label": "E", "role": "conclusion", "why_here": "'Therefore' draws the usable consequence of the mechanism, that the narrowing dates the arrival of the rival and so makes the narrow sense the younger." }
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It states the thesis and sets up the contrast between two explanations, which is the shape everything after it fills in."
+      },
+      {
+        "label": "D",
+        "role": "example",
+        "why_here": "It is the instance the claim predicts: a rival arrives, and only then does the older word give up its general sense."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The retreat' names what the example has just shown and turns it into a process, which the closing sentence has to reason from."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "'Therefore' draws the usable consequence of the mechanism, that the narrowing dates the arrival of the rival and so makes the narrow sense the younger."
+      }
     ],
     "links": [
-      { "from": "B", "to": "D", "tie": "lexical", "explanation": "The claim's 'rival' and 'part of the load' return as a particular pair of words, one of which takes the general sense from the other." },
-      { "from": "D", "to": "A", "tie": "reference", "explanation": "'The retreat' points directly at the withdrawal just described, and would have nothing to name without it." },
-      { "from": "A", "to": "E", "tie": "conjunction", "explanation": "'Therefore' takes the accumulating process as its premise and states what follows about the age of the two senses." }
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "lexical",
+        "explanation": "The claim's 'rival' and 'part of the load' return as a particular pair of words, one of which takes the general sense from the other."
+      },
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The retreat' points directly at the withdrawal just described, and would have nothing to name without it."
+      },
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "'Therefore' takes the accumulating process as its premise and states what follows about the age of the two senses."
+      }
     ],
     "violation_named": "The odd sentence is an example with no claim to serve. It tells a true history of a word, but the change it records is a change in the attitude the word carries, while every claim in the paragraph is about a word's reach contracting once another word can take the general sense.",
     "why_it_breaks": "An example earns its seat by instantiating something. The claim here predicts an arriving rival and a load transferred; the stray sentence has no rival in it and no load, and nothing that follows could use it, since the mechanism sentence describes speakers choosing between two words and the closing sentence dates one against the other. It is an illustration in search of a thesis that this paragraph does not contain.",
     "trap_exposed": "The camouflage is form. It is a quoted word, a then and a now, and a cause, exactly like the example that belongs, and it is the more memorable of the pair. A reader who has decided that the paragraph is about words changing their meanings will keep both. The decoy works in reverse: the mechanism sentence carries no example at all and reads like connective tissue, though it is the sentence that makes a single history into an argument.",
     "exclusion_analysis": [
-      { "label": "B", "mistake_type": "premature_closure", "why_tempting": "Its first half denies something nobody has asserted, which can make it read like a reply to a paragraph the reader has not been given.", "what_breaks": "Without it the set becomes a pair of word histories with no thesis, and the closing sentence's 'a narrowing of this kind' has no kind to refer to." },
-      { "label": "D", "mistake_type": "lexical_pull", "why_tempting": "It is one of two sentences built on a quoted word, and a reader who suspects the set of containing one example too many may drop either of them.", "what_breaks": "Without it the claim is asserted and never shown, and 'the retreat' in the next sentence names a withdrawal the paragraph has not described." },
-      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It states no fact about any particular word and so reads like padding between two vivid illustrations.", "what_breaks": "Without it the argument moves from one case straight to a general rule about dating, with the step that makes the case general missing." },
-      { "label": "E", "mistake_type": "connective_assumption", "why_tempting": "'Therefore' promises a conclusion, and its point about dating introduces a use for the argument that nothing earlier announced.", "what_breaks": "Without it the paragraph explains a process and never says what the process is good for, so the thesis is left without its consequence." }
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Its first half denies something nobody has asserted, which can make it read like a reply to a paragraph the reader has not been given.",
+        "what_breaks": "Without it the set becomes a pair of word histories with no thesis, and the closing sentence's 'a narrowing of this kind' has no kind to refer to."
+      },
+      {
+        "label": "D",
+        "mistake_type": "lexical_pull",
+        "why_tempting": "It is one of two sentences built on a quoted word, and a reader who suspects the set of containing one example too many may drop either of them.",
+        "what_breaks": "Without it the claim is asserted and never shown, and 'the retreat' in the next sentence names a withdrawal the paragraph has not described."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It states no fact about any particular word and so reads like padding between two vivid illustrations.",
+        "what_breaks": "Without it the argument moves from one case straight to a general rule about dating, with the step that makes the case general missing."
+      },
+      {
+        "label": "E",
+        "mistake_type": "connective_assumption",
+        "why_tempting": "'Therefore' promises a conclusion, and its point about dating introduces a use for the argument that nothing earlier announced.",
+        "what_breaks": "Without it the paragraph explains a process and never says what the process is good for, so the thesis is left without its consequence."
+      }
     ],
     "detection_habit": "For every example, name the claim it is an example of, in the paragraph's own words. An example that needs you to invent the claim it serves is serving a different paragraph."
   },

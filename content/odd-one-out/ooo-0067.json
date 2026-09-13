@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0067",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "contemporary-society",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "One Action In, Six Out",
+    "theme": "why the difficulty of leaving a service is a servant of the figure the organisation is judged by, and why a remedy aimed at the steps will not hold",
+    "estimated_time_sec": 110,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "D",
+    "violation_type": "stance_shift",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The argument is itself judgemental, calling one account too kind and the friction a faithful servant, so the outlier is not the only sentence with a verdict in it. It also reuses the six steps, the subscription and the complaint. The decoy is the sentence about the figure counting a dead account as the equal of a wanted one, which reads like an aside about measurement in an argument about behaviour."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
+    "mission": "notice_topic_stability",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "tell an argument that judges an explanation from a sentence that judges the people in the story, and check whether the paragraph contains the quarrel the second one joins",
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "disc.stance_continuity",
+      "comp.purpose",
+      "disc.lexical_chain",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about the figure that counts an unused account as the equal of a wanted one: it is a remark about measurement in an argument about conduct, and a reader following the steps may call it a digression. It stays because the closing sentence contrasts the six steps with the figure they protect, and this is the only sentence in which that figure is described; remove it and the conclusion protects nothing. The sentence saying six steps are not much to ask of an adult is the intruder. The argument judges freely, so a verdict is not by itself out of place, but every core verdict is passed on an explanation, while this one is passed on the people complaining, and the paragraph records no complainant, no character and no dispute about what adults should tolerate.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of cancellation friction and the measures behind it; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A stance item whose core is opinionated throughout, so the shift has to be found by asking what each verdict is about. The core's chain runs through that account, what it is scored on and the figure they protect, each of which loses its antecedent if a neighbour is removed."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Six steps to end a subscription is not much to ask of an adult, and the complaint says more about how lightly people now enter agreements than about the companies they enter them with."
+    },
+    {
+      "label": "B",
+      "text": "Joining a service takes one action and leaving it takes six, and the asymmetry is usually put down to bad manners on the part of the designers."
+    },
+    {
+      "label": "C",
+      "text": "What it is scored on is the number of accounts open at the end of a month, a figure that counts an account nobody uses as the equal of an account somebody wants."
+    },
+    {
+      "label": "D",
+      "text": "The friction is therefore a faithful servant of the measure, and a remedy aimed at the six steps rather than at the figure they protect will simply produce six different ones."
+    },
+    {
+      "label": "E",
+      "text": "That account is too kind and too vague at once, because the six steps are not a decoration but an answer to the thing the organisation is scored on."
+    }
+  ],
+  "outlier": "A",
+  "core_order": [
+    "B",
+    "E",
+    "C",
+    "D"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about why leaving a service takes six steps, from the usual explanation to the remedy that will not hold. The sentence that passes judgement on the people complaining is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. Joining takes one action and leaving six, and the asymmetry is usually put down to bad manners; that account is too kind and too vague, since the steps answer what the organisation is scored on; what it is scored on is the number of accounts open at the end of a month, a figure indifferent to whether anybody wants them; and the friction is therefore a servant of the measure, so a remedy aimed at the steps will produce six new ones. Observation, rejected account, the measure, consequence.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It states the fact the argument explains and the explanation the argument rejects, which is where an argument that replaces an account has to begin."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'That account' names the reading just given and replaces it, pointing at the thing the organisation is scored on, which the next sentence identifies."
+      },
+      {
+        "label": "C",
+        "role": "evidence",
+        "why_here": "'What it is scored on' answers the phrase the previous sentence ends on, and the figure it describes is what the closing sentence says the friction protects."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "It gathers the steps and the figure, both supplied earlier, and draws the practical consequence that a remedy must be aimed at the measure."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'That account' has exactly one antecedent, the explanation by bad manners the previous sentence reports."
+      },
+      {
+        "from": "E",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'What it is scored on' picks up the phrase the previous sentence ends with and supplies its content, so the two sentences cannot be separated."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'The figure they protect' names the count of open accounts just described, which is what makes the friction a servant rather than a rudeness."
+      }
+    ],
+    "violation_named": "The four core sentences explain a practice by the measure behind it and say where a repair must be aimed. The odd sentence rules on the people who object, and on what their objection shows about them. That is a change of stance, from judging an explanation to judging a party, and the paragraph has introduced no party to judge.",
+    "why_it_breaks": "A verdict on complainants needs complainants. The paragraph records an asymmetry and a common explanation of it, never a person complaining, so the sentence answers an objection nobody in the paragraph has made, and the sentence after it is concerned with where a remedy should be aimed rather than with whether one is deserved. It also introduces a measure of character, how lightly people enter agreements, which nothing before prepares and nothing after uses.",
+    "trap_exposed": "The camouflage is that the paragraph is already opinionated: it calls one account too kind, and describes the friction as a faithful servant. A reader hunting for the first judgement will not find the intruder that way. What separates it is the object of the judgement, an explanation in every core sentence and a group of people in this one. The decoy is the sentence describing the figure, which reads like an aside about measurement, though it is the only place the thing the friction protects is ever described.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states the common view rather than the paragraph's, so a reader who has grasped the argument may treat it as something the argument outgrew.",
+        "what_breaks": "Without it 'that account' points at nothing, and the paragraph rejects an explanation it has never stated."
+      },
+      {
+        "label": "E",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It ends on a phrase rather than a claim, the thing the organisation is scored on, which makes it feel unfinished and easy to set aside.",
+        "what_breaks": "Without it the argument moves from bad manners to a description of a counting rule with no claim in between, and the rejection of the easy explanation is never made."
+      },
+      {
+        "label": "C",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence about measurement, and its definition of a monthly count reads like administrative detail.",
+        "what_breaks": "Without it 'the figure they protect' names nothing, and the conclusion that friction serves a measure has no measure to serve."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It offers advice about remedies, which can look like a recommendation added after an explanation was already complete.",
+        "what_breaks": "Without it the argument identifies a cause and stops, and the practical point, that fixing the steps leaves the cause untouched, is never made."
+      }
+    ],
+    "detection_habit": "In an argumentative paragraph, do not look for the sentence with a view; look at what each view is about. An argument may judge its own explanations all day, and still have no business judging the people in the story."
+  },
+  "mentor": {
+    "challenge": "Every sentence here has an opinion, so the intruder cannot be found by tone. Ask what each opinion is passed on.",
+    "takeaway": "When a paragraph starts judging people rather than explanations, check whether it has ever introduced them."
+  }
+}

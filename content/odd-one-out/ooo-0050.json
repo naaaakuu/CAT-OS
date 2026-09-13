@@ -43,7 +43,11 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
     "mission": "find_the_branch",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,13 @@
       "expert_reviewed": false
     },
     "learning_objective": "recognise a general remark that borrows a story's vocabulary without entering its sequence, and test whether any stage of the story needs it",
-    "reasoning_patterns": ["scope.abstraction_level", "disc.chronology", "arg.example_vs_principle", "comp.organization", "disc.given_new"],
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "disc.chronology",
+      "arg.example_vs_principle",
+      "comp.organization",
+      "disc.given_new"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the sentence about novelists writing to the required length: it leaves the counting house for the writing desk, so a reader following the commercial thread may call it a branch. It stays because the closing sentence names the padding and the suspended endings as the things the replacement book did without, and those two features exist nowhere else in the set; remove it and the ending points at nothing. The general sentence about how forms acquire their names is the one that cannot be placed. It is true, it is about literary forms, and the form in question is named by a number, which is why it reads as though the paragraph had produced it. But the story never discusses a name, a critic or a generation's impatience, and the chain runs subscription, price, practice, collapse without once needing to know what anybody called the thing.",
@@ -77,38 +87,109 @@
     "reviewer_notes": "A narrative whose outlier is a general remark standing at right angles to it. The item is built to punish the reader who assembles a paragraph around the most quotable sentence rather than around the sequence of events, and the quotable sentence has been kept clear of the argument the events make."
   },
   "sentences": [
-    { "label": "A", "text": "Publishers priced the three volumes at a figure no private reader would pay, and the libraries took nearly the whole of each edition." },
-    { "label": "B", "text": "When the largest libraries refused the format in the 1890s the three-volume novel was gone within two years, and the book that replaced it, needing neither the padding nor the suspended endings, was a different shape in ways nobody had planned." },
-    { "label": "C", "text": "Literary forms are usually named by the generation that has tired of them, and the name settles on a quantity where a critic would have preferred to record a quality." },
-    { "label": "D", "text": "A subscriber to a circulating library paid by the year and borrowed one volume at a time, so a novel in three parts could be out with three readers at once." },
-    { "label": "E", "text": "Novelists wrote to the length that customer required, padding where the story was thin and breaking off where a volume had to end on something unsettled." }
+    {
+      "label": "A",
+      "text": "Publishers priced the three volumes at a figure no private reader would pay, and the libraries took nearly the whole of each edition."
+    },
+    {
+      "label": "B",
+      "text": "When the largest libraries refused the format in the 1890s the three-volume novel was gone within two years, and the book that replaced it, needing neither the padding nor the suspended endings, was a different shape in ways nobody had planned."
+    },
+    {
+      "label": "C",
+      "text": "Literary forms are usually named by the generation that has tired of them, and the name settles on a quantity where a critic would have preferred to record a quality."
+    },
+    {
+      "label": "D",
+      "text": "A subscriber to a circulating library paid by the year and borrowed one volume at a time, so a novel in three parts could be out with three readers at once."
+    },
+    {
+      "label": "E",
+      "text": "Novelists wrote to the length that customer required, padding where the story was thin and breaking off where a volume had to end on something unsettled."
+    }
   ],
   "outlier": "C",
-  "core_order": ["D", "A", "E", "B"],
+  "core_order": [
+    "D",
+    "A",
+    "E",
+    "B"
+  ],
   "builder": {
     "prompt": "Build the four-sentence story of the three-volume novel, from the subscription that made it profitable to the two years in which it vanished. The sentence that no stage of that story needs is your answer."
   },
   "explanation": {
     "spine_note": "The core tells one commercial history in four stages. It opens with the lending arrangement, a yearly subscription and one volume at a time, which made three parts more valuable than one. The second stage is the pricing that followed, aimed at libraries rather than readers, the third is what novelists did for that customer, and the fourth is the collapse when the libraries withdrew, and the book that took its place, free of the padding and the suspended endings the third stage described. Arrangement, price, practice, collapse.",
     "core_roles": [
-      { "label": "D", "role": "background", "why_here": "It supplies the mechanism the whole history rests on, that three volumes could serve three subscribers at the same time." },
-      { "label": "A", "role": "development", "why_here": "It gives the pricing that the lending mechanism made rational, and it establishes who the real customer was." },
-      { "label": "E", "role": "development", "why_here": "'That customer' names the libraries just identified as the buyers, and this is the stage at which their requirements reach the writing itself." },
-      { "label": "B", "role": "conclusion", "why_here": "It removes the arrangement and reports what happened to the form, and the two features it says the replacement did without are the two this stage has just described." }
+      {
+        "label": "D",
+        "role": "background",
+        "why_here": "It supplies the mechanism the whole history rests on, that three volumes could serve three subscribers at the same time."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "It gives the pricing that the lending mechanism made rational, and it establishes who the real customer was."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'That customer' names the libraries just identified as the buyers, and this is the stage at which their requirements reach the writing itself."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "It removes the arrangement and reports what happened to the form, and the two features it says the replacement did without are the two this stage has just described."
+      }
     ],
     "links": [
-      { "from": "D", "to": "A", "tie": "given_new", "explanation": "The three-part novel out with three readers is now given, and the new material is the price that this made possible." },
-      { "from": "A", "to": "E", "tie": "reference", "explanation": "'That customer' points at the libraries that have just been shown taking whole editions, and it is their requirement that sets the length novelists wrote to." },
-      { "from": "E", "to": "B", "tie": "lexical", "explanation": "'Neither the padding nor the suspended endings' names the two practices the previous sentence has just described, so the replacement book is defined by what this stage supplied." }
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "given_new",
+        "explanation": "The three-part novel out with three readers is now given, and the new material is the price that this made possible."
+      },
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'That customer' points at the libraries that have just been shown taking whole editions, and it is their requirement that sets the length novelists wrote to."
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "lexical",
+        "explanation": "'Neither the padding nor the suspended endings' names the two practices the previous sentence has just described, so the replacement book is defined by what this stage supplied."
+      }
     ],
     "violation_named": "The odd sentence states a general rule about the naming of literary forms. The four core sentences narrate one form, one trade and one decade, and every step of the story is a particular fact about a particular arrangement. A rule about what critics and impatient generations call things is general where the story is specific, and it is general about something the story never touches.",
     "why_it_breaks": "Nothing in the narrative uses the rule, and the rule is not even about the narrative's subject. The subscription explains the price, the price explains who the customer was, the customer explains the shape of the books, and the withdrawal explains the collapse; at no stage does a sentence need to know what the form was called or who named it. A story also moves, and a maxim does not: wherever the general sentence is placed, the sequence stops for an observation about critics and then resumes where it had left off.",
     "trap_exposed": "The camouflage is a coincidence of vocabulary. The form this story is about is named by a number, so a rule about names that settle on quantities appears to have been written for the paragraph, and readers expect a general opening followed by a case. The test is whether the story leans on it, and the story leans on a subscription instead. The decoy is the sentence about padding and volume endings, which leaves commerce for craft and looks like a departure, though the closing sentence names those two features as the things the replacement book did without.",
     "exclusion_analysis": [
-      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It is about lending rather than about novels, so a reader who has decided the paragraph is about literature may treat it as background that could be assumed.", "what_breaks": "Without it nothing explains why three volumes were worth more than one, and the pricing, the padding and the collapse all rest on an arrangement never described." },
-      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "It concerns prices and editions, and a reader sorting the story by literary events may not find a stage for a commercial one.", "what_breaks": "Without it the libraries never become the real customer, and the length novelists are said to be writing for has no one imposing it." },
-      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence about writing, and its padding and unsettled endings read like criticism rather than history.", "what_breaks": "Without it the arrangement never reaches the books, and the closing sentence's padding and suspended endings name two practices the paragraph has never described." },
-      { "label": "B", "mistake_type": "no_uniqueness_test", "why_tempting": "It is the longest sentence and covers a decade in a clause, which makes it feel like a summary appended to the story.", "what_breaks": "Without it the story describes a system and never ends, and the claim that the form was made by the arrangement is never tested by removing the arrangement." }
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It is about lending rather than about novels, so a reader who has decided the paragraph is about literature may treat it as background that could be assumed.",
+        "what_breaks": "Without it nothing explains why three volumes were worth more than one, and the pricing, the padding and the collapse all rest on an arrangement never described."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It concerns prices and editions, and a reader sorting the story by literary events may not find a stage for a commercial one.",
+        "what_breaks": "Without it the libraries never become the real customer, and the length novelists are said to be writing for has no one imposing it."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence about writing, and its padding and unsettled endings read like criticism rather than history.",
+        "what_breaks": "Without it the arrangement never reaches the books, and the closing sentence's padding and suspended endings name two practices the paragraph has never described."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It is the longest sentence and covers a decade in a clause, which makes it feel like a summary appended to the story.",
+        "what_breaks": "Without it the story describes a system and never ends, and the claim that the form was made by the arrangement is never tested by removing the arrangement."
+      }
     ],
     "detection_habit": "When a paragraph tells a story, take each general sentence and ask which stage of the story would be poorer without it. A general remark that shares the story's nouns and answers none of its questions is a visitor, however well it reads."
   },

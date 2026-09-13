@@ -20,7 +20,7 @@
       "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
     },
     "spine_type": "argument",
-    "nucleus": "D",
+    "nucleus": "B",
     "violation_type": "topically_alien",
     "difficulty_vector": {
       "topical_overlap": 4,
@@ -43,7 +43,11 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "connective_reading"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "connective_reading"
+    ],
     "mission": "track_the_direction",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,13 @@
       "expert_reviewed": false
     },
     "learning_objective": "follow an argument's direction from problem to device to limit, and see that a sentence echoing the argument's theme is not thereby a stage of it",
-    "reasoning_patterns": ["disc.problem_then_solution", "arg.qualification", "comp.purpose", "disc.topic_progression", "scope.true_but_off_question"],
+    "reasoning_patterns": [
+      "disc.problem_then_solution",
+      "arg.qualification",
+      "comp.purpose",
+      "disc.topic_progression",
+      "scope.true_but_off_question"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the closing sentence, which says the device is weakest where it is most wanted: it concedes rather than advances, and a reader who thinks a paragraph should end on its strength will call it foreign. It stays because an argument that has claimed a mechanism must say where the mechanism stops, and because its 'renewed unread' answers the hearing promised two sentences earlier. The sentence about challenge procedures outliving the ministers who designed them shares the theme of institutional durability and the vocabulary of statutes, and still joins nothing: no sentence here concerns how decisions are contested, and the argument's chain runs from repeal to expiry to renewal without passing through a court.",
@@ -72,38 +82,109 @@
     "reviewer_notes": "The outlier here is built from the paragraph's own theme rather than its own topic, which is the harder camouflage: durability is what the argument is about, and the stray sentence is about durability in a department the argument never enters."
   },
   "sentences": [
-    { "label": "A", "text": "What that buys is not thrift but a hearing: a measure adopted in an emergency has to be defended once more in ordinary weather, in front of people who have since watched it work." },
-    { "label": "B", "text": "Statutes that create an agency commonly also fix the procedure by which its decisions may be challenged, and that procedure long outlives the ministers who designed it." },
-    { "label": "C", "text": "Repealing a law is far harder than passing one, because by then the people it suits are organised and know exactly what they stand to lose." },
-    { "label": "D", "text": "An expiry clause changes which side inertia is on, since the statute lapses on a fixed date unless the legislature votes again, so that silence now ends a programme instead of preserving it." },
-    { "label": "E", "text": "The device is weakest exactly where it is most wanted, since a programme with a large enough constituency will be renewed unread, and the clause then costs an afternoon and changes nothing." }
+    {
+      "label": "A",
+      "text": "What that buys is not thrift but a hearing: a measure adopted in an emergency has to be defended once more in ordinary weather, in front of people who have since watched it work."
+    },
+    {
+      "label": "B",
+      "text": "An expiry clause changes which side inertia is on, since the statute lapses on a fixed date unless the legislature votes again, so that silence now ends a programme instead of preserving it."
+    },
+    {
+      "label": "C",
+      "text": "Repealing a law is far harder than passing one, because by then the people it suits are organised and know exactly what they stand to lose."
+    },
+    {
+      "label": "D",
+      "text": "Statutes that create an agency commonly also fix the procedure by which its decisions may be challenged, and that procedure long outlives the ministers who designed it."
+    },
+    {
+      "label": "E",
+      "text": "The device is weakest exactly where it is most wanted, since a programme with a large enough constituency will be renewed unread, and the clause then costs an afternoon and changes nothing."
+    }
   ],
-  "outlier": "B",
-  "core_order": ["C", "D", "A", "E"],
+  "outlier": "D",
+  "core_order": [
+    "C",
+    "B",
+    "A",
+    "E"
+  ],
   "builder": {
     "prompt": "Build the four-sentence argument for an expiry date on a statute, from the problem it answers to the case where it fails. The sentence that is not a stage of that argument is your answer."
   },
   "explanation": {
     "spine_note": "The core argues in four stages, and each stage answers the one before it. It opens with the problem, that repeal is harder than enactment because a beneficiary becomes organised, then introduces the device that reverses the default. The third stage says what the reversal actually buys, a second defence in calmer conditions, and the fourth marks the limit: where the constituency is large the renewal is a formality. Problem, device, gain, limit.",
     "core_roles": [
-      { "label": "C", "role": "topic", "why_here": "It states the asymmetry the whole argument exists to address, and nothing before it is needed, since the difficulty of repeal is where the reasoning starts." },
-      { "label": "D", "role": "development", "why_here": "It answers the problem directly, and the word inertia takes the organised resistance of the previous sentence and names the force the device redirects." },
-      { "label": "A", "role": "development", "why_here": "'That' points at the reversal just described, and the sentence corrects a likely misreading of what the device is for." },
-      { "label": "E", "role": "conclusion", "why_here": "An argument that has claimed a mechanism has to state its limit, and 'renewed unread' is the exact failure of the hearing the sentence before promised." }
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It states the asymmetry the whole argument exists to address, and nothing before it is needed, since the difficulty of repeal is where the reasoning starts."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "It answers the problem directly, and the word inertia takes the organised resistance of the previous sentence and names the force the device redirects."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'That' points at the reversal just described, and the sentence corrects a likely misreading of what the device is for."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "An argument that has claimed a mechanism has to state its limit, and 'renewed unread' is the exact failure of the hearing the sentence before promised."
+      }
     ],
     "links": [
-      { "from": "C", "to": "D", "tie": "lexical", "explanation": "The organised beneficiaries of the first sentence are the inertia the second names, so the device is introduced as an answer rather than a topic." },
-      { "from": "D", "to": "A", "tie": "reference", "explanation": "'What that buys' has one antecedent only, the reversal of the default just described, and the sentence cannot be read without it." },
-      { "from": "A", "to": "E", "tie": "conjunction", "explanation": "'Renewed unread' negates the hearing just claimed, so the closing sentence takes back, in one case, exactly what the previous sentence granted." }
+      {
+        "from": "C",
+        "to": "B",
+        "tie": "lexical",
+        "explanation": "The organised beneficiaries of the first sentence are the inertia the second names, so the device is introduced as an answer rather than a topic."
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'What that buys' has one antecedent only, the reversal of the default just described, and the sentence cannot be read without it."
+      },
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "'Renewed unread' negates the hearing just claimed, so the closing sentence takes back, in one case, exactly what the previous sentence granted."
+      }
     ],
     "violation_named": "The odd sentence is about statutes, agencies and arrangements that outlast their authors, which is the paragraph's own theme, and it is nonetheless about something else entirely: how an agency's decisions may be contested. The argument runs from the difficulty of repeal to a device that reverses a default; challenge procedures are no stage of it.",
     "why_it_breaks": "Every core sentence receives the previous one's material and hands on its own. The stray sentence receives nothing, since nobody has mentioned challenge or the courts, and passes nothing on, since the next stage needs a hearing in a legislature rather than a hearing anywhere else. It also stops the argument's motion: the paragraph is travelling from a problem towards a limit, and the stray sentence stands still while making the same kind of noise.",
     "trap_exposed": "The camouflage is thematic rather than lexical. It says that something in a statute outlives the people who put it there, which is the very anxiety the argument is built on, so a reader matching the theme keeps it with satisfaction. The decoy is the closing concession, which looks like an objection from the other side of the debate, though a mechanism argument is unfinished until it says where the mechanism stops.",
     "exclusion_analysis": [
-      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It never mentions an expiry date and reads like the opening of a different argument about lobbying and entrenchment.", "what_breaks": "Without it the device answers no problem, and the claim that inertia has changed sides refers to a resistance the paragraph never described." },
-      { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "It is the longest sentence in the set and does three things at once, naming the device, its rule and its effect, so a reader may hold it aside while sorting the others.", "what_breaks": "Without it there is no device in the paragraph at all, and both the gain and the limit describe something that has never been introduced." },
-      { "label": "A", "mistake_type": "surface_oddity", "why_tempting": "Its metaphor of ordinary weather is the only figurative phrase in the set, which makes its register feel imported.", "what_breaks": "Without it the argument never says what the reversal is worth, and the closing failure, a renewal passed unread, is a failure of nothing the paragraph has claimed." },
-      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "It argues against the device it has just been describing, so a reader expecting a paragraph to end on its point may treat it as an intruder from the opposing case.", "what_breaks": "Without it the argument claims a mechanism and never marks where it stops, which is the difference between a case and an advertisement." }
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It never mentions an expiry date and reads like the opening of a different argument about lobbying and entrenchment.",
+        "what_breaks": "Without it the device answers no problem, and the claim that inertia has changed sides refers to a resistance the paragraph never described."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the longest sentence in the set and does three things at once, naming the device, its rule and its effect, so a reader may hold it aside while sorting the others.",
+        "what_breaks": "Without it there is no device in the paragraph at all, and both the gain and the limit describe something that has never been introduced."
+      },
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its metaphor of ordinary weather is the only figurative phrase in the set, which makes its register feel imported.",
+        "what_breaks": "Without it the argument never says what the reversal is worth, and the closing failure, a renewal passed unread, is a failure of nothing the paragraph has claimed."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It argues against the device it has just been describing, so a reader expecting a paragraph to end on its point may treat it as an intruder from the opposing case.",
+        "what_breaks": "Without it the argument claims a mechanism and never marks where it stops, which is the difference between a case and an advertisement."
+      }
     ],
     "detection_habit": "Say the paragraph's journey in four words before judging anything. A sentence can share the theme, the vocabulary and the field and still be standing outside the route the argument is travelling."
   },

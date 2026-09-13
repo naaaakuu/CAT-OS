@@ -43,7 +43,11 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "given_new_tracking"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
     "mission": "notice_topic_stability",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,13 @@
       "expert_reviewed": false
     },
     "learning_objective": "strip away the shared subject and ask what each sentence does with it, so that a general statement about the same institution can be tested for use",
-    "reasoning_patterns": ["scope.abstraction_level", "arg.example_vs_principle", "disc.claim_then_evidence", "comp.function_over_words", "struct.contrast"],
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "arg.example_vs_principle",
+      "disc.claim_then_evidence",
+      "comp.function_over_words",
+      "struct.contrast"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the short sentence about what needs the two-thirds and what needs nothing: it is the briefest in the set and its clipped symmetry makes it feel like an epigram dropped in. It stays because it is the only statement of the asymmetry, and the so of the next sentence draws its conclusion from exactly that asymmetry. The general sentence about majority rule being a procedure rather than a theory of what should be decided is true and well placed for a different paragraph; here no step turns on which questions are put beyond a vote, only on what happens to a question that is inside one.",
@@ -72,38 +82,109 @@
     "reviewer_notes": "A medium-tier item in which the outlier is the sentence most readers would use to introduce the topic. The core is short, tight and entirely about one mechanism, so the general claim can be shown to carry no link."
   },
   "sentences": [
-    { "label": "A", "text": "So the rule is neutral between people and partial between times, preferring a decision taken in the past to any taken now, whatever the merits of either." },
-    { "label": "B", "text": "A requirement of two-thirds is defended as a protection for minorities, and it protects whichever minority happens to like the arrangement already in force." },
-    { "label": "C", "text": "It is a real protection, then, but of a particular kind: it shelters those whom yesterday's majority favoured, and shelters them only for as long as yesterday holds." },
-    { "label": "D", "text": "The proposal must find the two-thirds; the existing rule need find nothing, since it is simply what remains when the vote has failed." },
-    { "label": "E", "text": "Majority rule is a decision procedure rather than a theory of what ought to be decided, which is why every constitution puts some questions beyond its reach." }
+    {
+      "label": "A",
+      "text": "So the rule is neutral between people and partial between times, preferring a decision taken in the past to any taken now, whatever the merits of either."
+    },
+    {
+      "label": "B",
+      "text": "A requirement of two-thirds is defended as a protection for minorities, and it protects whichever minority happens to like the arrangement already in force."
+    },
+    {
+      "label": "C",
+      "text": "It is a real protection, then, but of a particular kind: it shelters those whom yesterday's majority favoured, and shelters them only for as long as yesterday holds."
+    },
+    {
+      "label": "D",
+      "text": "The proposal must find the two-thirds; the existing rule need find nothing, since it is simply what remains when the vote has failed."
+    },
+    {
+      "label": "E",
+      "text": "Majority rule is a decision procedure rather than a theory of what ought to be decided, which is why every constitution puts some questions beyond its reach."
+    }
   ],
   "outlier": "E",
-  "core_order": ["B", "D", "A", "C"],
+  "core_order": [
+    "B",
+    "D",
+    "A",
+    "C"
+  ],
   "builder": {
     "prompt": "Build the four-sentence argument about whom a two-thirds rule actually protects. The sentence that states a general truth no step of the argument uses is your answer."
   },
   "explanation": {
     "spine_note": "The core argues in four moves. It opens by accepting the usual defence of the threshold and immediately narrowing it, then states the asymmetry that does the work: one side must find the votes and the other need not. The third move draws the conclusion, that the rule is impartial between persons and partial between moments, and the fourth grants that the protection is real while saying exactly what kind of protection it is. Claim, asymmetry, conclusion, concession.",
     "core_roles": [
-      { "label": "B", "role": "topic", "why_here": "It states the received defence and the correction together, which is the claim the rest of the paragraph has to make good." },
-      { "label": "D", "role": "evidence", "why_here": "It gives the mechanical fact the correction rests on, and its two clauses are the two sides the conclusion compares." },
-      { "label": "A", "role": "conclusion", "why_here": "'So' draws the consequence of the asymmetry, and the pairing of neutral and partial answers the defence quoted at the start." },
-      { "label": "C", "role": "concession", "why_here": "It grants what the defence got right and limits it, which a paragraph that began by half accepting a defence has to do before it stops." }
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It states the received defence and the correction together, which is the claim the rest of the paragraph has to make good."
+      },
+      {
+        "label": "D",
+        "role": "evidence",
+        "why_here": "It gives the mechanical fact the correction rests on, and its two clauses are the two sides the conclusion compares."
+      },
+      {
+        "label": "A",
+        "role": "conclusion",
+        "why_here": "'So' draws the consequence of the asymmetry, and the pairing of neutral and partial answers the defence quoted at the start."
+      },
+      {
+        "label": "C",
+        "role": "concession",
+        "why_here": "It grants what the defence got right and limits it, which a paragraph that began by half accepting a defence has to do before it stops."
+      }
     ],
     "links": [
-      { "from": "B", "to": "D", "tie": "lexical", "explanation": "'The two-thirds' is picked up from the claim and split into the two positions, the one that must reach it and the one that need not." },
-      { "from": "D", "to": "A", "tie": "conjunction", "explanation": "'So' makes the conclusion follow from the asymmetry rather than from the defence, which is what keeps the argument honest." },
-      { "from": "A", "to": "C", "tie": "reference", "explanation": "'A real protection, then' answers the word partial in the previous sentence, conceding the point while restating its limit." }
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "lexical",
+        "explanation": "'The two-thirds' is picked up from the claim and split into the two positions, the one that must reach it and the one that need not."
+      },
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "conjunction",
+        "explanation": "'So' makes the conclusion follow from the asymmetry rather than from the defence, which is what keeps the argument honest."
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'A real protection, then' answers the word partial in the previous sentence, conceding the point while restating its limit."
+      }
     ],
     "violation_named": "The odd sentence states what majority rule is in general and ends on what constitutions do with it. The four core sentences work through one specific mechanism: what a threshold does to a proposal and to the arrangement already in force. A general account of the place of majority rule sits above that, and nothing in the argument reaches for it.",
     "why_it_breaks": "The chain runs from a defence, through an asymmetry, to a conclusion about times, to a concession. A claim about questions being put beyond the reach of voting receives nothing from the asymmetry and offers nothing to the conclusion, since the argument's whole subject is a question that is inside the vote and is being decided by it. Placed anywhere, it changes the level for one sentence and changes back.",
     "trap_exposed": "The camouflage is framing. It reads like the sentence that tells you what kind of thing is under discussion, and paragraphs often contain one, so a reader assembles the set with it at the front and the specific argument as its illustration. The test is whether a later sentence uses the frame, and none does. The decoy is the shortest sentence in the set, whose clipped symmetry makes it look like an ornament rather than the argument's one piece of evidence.",
     "exclusion_analysis": [
-      { "label": "B", "mistake_type": "premature_closure", "why_tempting": "It contains both a received view and its correction, so a reader may feel the paragraph has already finished and treat it as a summary standing outside the rest.", "what_breaks": "Without it the argument has no claim to defend, and the asymmetry, the conclusion and the concession all answer a defence that was never quoted." },
-      { "label": "D", "mistake_type": "surface_oddity", "why_tempting": "It is the shortest sentence in the set and its two halves are almost a slogan, which makes it sound quotable rather than load-bearing.", "what_breaks": "Without it the conclusion that the rule is partial between times follows from nothing, and the paragraph asserts a bias it never demonstrates." },
-      { "label": "A", "mistake_type": "hardest_to_place", "why_tempting": "Its pairing of neutral and partial is abstract, and a reader may hold it aside while deciding whether it is the claim or the conclusion.", "what_breaks": "Without it the argument goes from a mechanical fact to a concession with the inference missing, so the concession concedes something never established." },
-      { "label": "C", "mistake_type": "no_uniqueness_test", "why_tempting": "It grants ground to the view the paragraph is criticising, which can look like a sentence from the other side of the debate.", "what_breaks": "Without it the argument overshoots, denying any protection at all, and the careful claim it began with, that the threshold protects a particular minority, is never brought home." }
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It contains both a received view and its correction, so a reader may feel the paragraph has already finished and treat it as a summary standing outside the rest.",
+        "what_breaks": "Without it the argument has no claim to defend, and the asymmetry, the conclusion and the concession all answer a defence that was never quoted."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the shortest sentence in the set and its two halves are almost a slogan, which makes it sound quotable rather than load-bearing.",
+        "what_breaks": "Without it the conclusion that the rule is partial between times follows from nothing, and the paragraph asserts a bias it never demonstrates."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its pairing of neutral and partial is abstract, and a reader may hold it aside while deciding whether it is the claim or the conclusion.",
+        "what_breaks": "Without it the argument goes from a mechanical fact to a concession with the inference missing, so the concession concedes something never established."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It grants ground to the view the paragraph is criticising, which can look like a sentence from the other side of the debate.",
+        "what_breaks": "Without it the argument overshoots, denying any protection at all, and the careful claim it began with, that the threshold protects a particular minority, is never brought home."
+      }
     ],
     "detection_habit": "Strip the shared subject away and ask what each sentence does with it. A sentence that frames the topic belongs only if a later sentence stands on the frame."
   },

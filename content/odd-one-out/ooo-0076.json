@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0076",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "The Machine With One Buyer",
+    "theme": "why an asset useful to only one customer is often never built, and what a long contract is actually purchasing when it is written",
+    "estimated_time_sec": 110,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "E",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier opens on a consequence marker and pairs the buyer with the supplier, which is the argument's own pairing, so it reads as a symmetry the argument was about to draw. The decoy is the sentence about what a contract must describe in advance, which sounds like drafting detail in an argument about investment."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "connective_reading",
+      "coherence_monitoring",
+      "relatedness_vs_belonging"
+    ],
+    "mission": "build_before_eliminating",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "test a claimed consequence against the premises the argument has actually supplied, and notice when a symmetrical-sounding addition follows from nothing",
+    "reasoning_patterns": [
+      "lang.causal_wording",
+      "disc.transition_word",
+      "arg.evidence_vs_conclusion",
+      "comp.organization",
+      "disc.lexical_chain"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about what a contract has to describe in advance: it reads like drafting detail in an argument about whether a machine gets built, and a reader may treat it as a technical aside. It stays because the closing sentence turns on the listing running out, a phrase whose only antecedent is here, and because without it the remedy is proposed and never shown to be difficult. The sentence about borrowing costs is the break. It opens on a consequence marker and pairs the buyer with the supplier, which is the argument's own pairing, but nothing before it concerns the cost of finance and nothing after it returns to a balance sheet, so it neither follows from what precedes it nor leaves anything for what comes next.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of investment in assets specific to one relationship; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A cat-tier thread break whose false anchor is a consequence marker plus a symmetry. Pairing the buyer with the supplier looks like the natural next move in an argument that has been about one of them, which is exactly why the relation has to be tested rather than accepted."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "It follows that the buyer's own borrowing costs matter as much as the supplier's, since the two are financing the same machine from opposite ends of one balance sheet."
+    },
+    {
+      "label": "B",
+      "text": "Both parties can see that prospect before the machine exists, which is why the machine is often not built at all, and the loss is not a bad bargain but an investment nobody made."
+    },
+    {
+      "label": "C",
+      "text": "The usual remedy for that failure is a long contract, and the usual difficulty with it is that a contract has to describe in advance the circumstances in which the price may move."
+    },
+    {
+      "label": "D",
+      "text": "A supplier who builds a machine that can serve only one buyer has, on the day it is finished, an asset worth whatever that buyer chooses to call it."
+    },
+    {
+      "label": "E",
+      "text": "What a long contract is really buying, then, is not a price but a procedure for disagreeing, and the clauses that matter are the ones naming who decides when the listing runs out."
+    }
+  ],
+  "outlier": "A",
+  "core_order": [
+    "D",
+    "B",
+    "C",
+    "E"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about the machine with only one possible customer, from the day it is finished to what a long contract is actually for. The sentence that announces a consequence the argument never produces is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. A supplier who builds a machine useful to one buyer holds an asset worth whatever that buyer says; both parties foresee this, so the machine is often never built, and the loss is an investment nobody made; the usual remedy is a long contract, whose usual difficulty is that it must list in advance the circumstances in which the price may move; and what such a contract is really buying is a procedure for disagreeing, with the decisive clauses naming who decides when the list runs out. Position, consequence, remedy, what the remedy really is.",
+    "core_roles": [
+      {
+        "label": "D",
+        "role": "topic",
+        "why_here": "It states the position the whole argument works from, an asset whose value is at the discretion of a single customer."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'That prospect' names the position just described and draws the consequence that matters, an investment that never happens."
+      },
+      {
+        "label": "C",
+        "role": "development",
+        "why_here": "'That failure' names the missing investment, and this sentence introduces the remedy together with the difficulty the conclusion resolves."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "'The listing' is the advance description the previous sentence requires, and the closing claim reinterprets the remedy in the light of its difficulty."
+      }
+    ],
+    "links": [
+      {
+        "from": "D",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That prospect' has one possible antecedent, the supplier's position on the day the machine is finished."
+      },
+      {
+        "from": "B",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'That failure' names the investment nobody made, so the remedy introduced is a remedy for exactly that."
+      },
+      {
+        "from": "C",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The listing' refers to the advance description of circumstances the previous sentence says a contract must contain, and the closing claim turns on its running out."
+      }
+    ],
+    "violation_named": "The odd sentence claims that something follows. What precedes it establishes a bargaining position, an investment that is therefore not made, and a remedy with a drafting difficulty. None of that entails anything about the cost at which either party borrows, or about the two of them financing one machine from opposite sides of a balance sheet.",
+    "why_it_breaks": "The connective fails in both directions. Nothing before it is a premise about finance, since the argument is about who can capture a value once an asset exists, not about what the asset costs to fund. And nothing after it uses what it leaves: the conclusion needs a contract, a listing and the person who decides when the listing runs out, none of which is a borrowing cost. No later sentence returns to balance sheets at all.",
+    "trap_exposed": "The camouflage is a consequence marker reinforced by a symmetry. An argument that has spent three sentences on the supplier looks as though it owes the buyer a sentence, so a claim that pairs them reads as the balance the paragraph was about to strike. A connective will sit after any statement whatever; only the relation it asserts can be false. The decoy is the sentence about what a contract must describe in advance, which sounds like drafting detail, though the conclusion cannot be stated without the listing it introduces.",
+    "exclusion_analysis": [
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It describes a situation rather than making a claim, so a reader who has found the argument may treat it as a set-up that could be assumed.",
+        "what_breaks": "Without it 'that prospect' points at nothing, and an argument about an investment nobody makes never says what deters it."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It packs a foresight, an outcome and a redescription of the loss into one sentence, which makes its role hard to name at speed.",
+        "what_breaks": "Without it 'that failure' names nothing, and the remedy introduced next is a remedy for a problem the paragraph has not stated."
+      },
+      {
+        "label": "C",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence about drafting, and a requirement to describe circumstances in advance reads like a lawyer's note.",
+        "what_breaks": "Without it the closing sentence's listing has never been required, and the claim that a contract buys a procedure has no difficulty to be an answer to."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It reinterprets rather than adds, saying what a contract really buys, which can look like a flourish at the end of an argument already made.",
+        "what_breaks": "Without it the argument names a remedy, raises a difficulty with it and stops, leaving the reader with a problem and a broken solution."
+      }
+    ],
+    "detection_habit": "When a sentence pairs a second party with the one you have been reading about, and opens on a consequence marker, say the premise aloud and look for it. Symmetry is a habit of prose, not a relation an argument has established."
+  },
+  "mentor": {
+    "challenge": "Three sentences here are about the supplier, and one offers you the buyer's side of the story. Ask whether the argument has produced anything that side follows from.",
+    "takeaway": "A connective claims a relation. Symmetry is not a relation, and neither is fairness to the other party."
+  }
+}

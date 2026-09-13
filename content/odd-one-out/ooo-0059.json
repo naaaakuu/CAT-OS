@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0059",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "markets",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "Both Prices at Once",
+    "theme": "what the gap between a dealer's buying and selling prices is paying for, and why the size a quote is good for is part of the price",
+    "estimated_time_sec": 110,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "E",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier keeps the dealer, the quote and the price, and its point, that the price taken is not the price quoted, sounds like the very distinction the description is drawing. The decoy is the sentence about the stated number of shares, which reads like a technicality in a paragraph that had been describing a service."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "notice_topic_stability",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice that a paragraph can stay on one subject while a sentence moves to a different question about it, and use the chain of definite phrases to tell which is which",
+    "reasoning_patterns": [
+      "comp.purpose",
+      "scope.true_but_off_question",
+      "disc.lexical_chain",
+      "disc.function_slot",
+      "comp.organization"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about a quote being good only up to a stated number of shares: it reads like a piece of trading-desk detail in a description of what a service costs, and a reader looking for the technicality that wandered in will settle on it. It stays because the closing sentence makes the stated number part of the price, and no other sentence supplies a stated number; remove it and the conclusion names something the paragraph has never mentioned. The sentence about clearing a position before the close is the visitor. It is about the same dealer in the same day, but the description asks what the gap between the two quotes is paying for, and this asks what the dealer does with what he has been left holding, a question no sentence here raises or answers.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of quoted two-way prices; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A cat-tier item in the highest-overlap regime the tier allows: all five sentences concern one dealer quoting two prices. The exclusion rests on the question being answered, and the core's three joints are a count and two definite phrases, each of which is orphaned if its neighbour goes."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A dealer who ends the day holding more of a share than he meant to will clear it before the close, and the price he takes is not the price he quoted."
+    },
+    {
+      "label": "B",
+      "text": "The gap between those two prices is what the service costs, and it is set less by his expenses than by the risk of dealing with somebody who knows more than he does."
+    },
+    {
+      "label": "C",
+      "text": "A dealer who undertakes to quote both a price at which he will buy and a price at which he will sell is supplying something nobody asks for by name, which is immediacy."
+    },
+    {
+      "label": "D",
+      "text": "That risk grows with the size of an order, which is why a dealer's quote is good only up to a stated number of shares and is withdrawn above it."
+    },
+    {
+      "label": "E",
+      "text": "The stated number is therefore part of the price, and it shrinks as the gap widens, whenever the flow of orders begins to look better informed than usual."
+    }
+  ],
+  "outlier": "A",
+  "core_order": [
+    "C",
+    "B",
+    "D",
+    "E"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence description of what a two-way quote is and what its gap is paying for, ending with the number of shares the quote is good for. The sentence that asks a different question about the same dealer is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core describes one arrangement in four steps. A dealer who quotes both a buying and a selling price is supplying immediacy; the gap between those two prices is what the service costs, and the cost is set by the risk of dealing with the better informed; that risk grows with the size of an order, so a quote is good only up to a stated number of shares; and the stated number is therefore part of the price and moves with the gap. Service, price, risk, the number the price is good for.",
+    "core_roles": [
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It names the arrangement and the service being supplied, without which the gap described next is a gap in nothing in particular."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'Those two prices' points at the pair just introduced, and this sentence says what the gap between them is for, which is the description's central claim."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "'That risk' names the risk just identified as the thing setting the gap, and this sentence follows it to the size of an order and to the number a quote is good for."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "'The stated number' names what the previous sentence has just introduced, and the description ends by folding it into the price rather than treating it as a technicality."
+      }
+    ],
+    "links": [
+      {
+        "from": "C",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'Those two prices' has exactly one antecedent, the buying and selling prices the previous sentence says the dealer undertakes to quote."
+      },
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'That risk' names the risk of dealing with a better-informed counterparty, which the previous sentence has just made the setter of the gap."
+      },
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The stated number' is supplied by the previous sentence alone, so the closing claim that it forms part of the price cannot be made without it."
+      }
+    ],
+    "violation_named": "The four core sentences answer one question: what the gap between a dealer's two quotes is paying for, and what else the answer makes part of the price. The odd sentence is about what a dealer does at the end of the day with a holding he did not want. That is a different question about the same person.",
+    "why_it_breaks": "Nothing in the description has raised the dealer's own position, and nothing afterwards could use it: the closing sentence needs a stated number and a gap that move together, not a holding disposed of at the close. The sentence introduces a dimension, what the dealer is left with, that arrives and leaves in a single line. Read beside any core sentence it is perfectly smooth, which is the difficulty; read against the question the four are jointly answering, it is answering the next one along.",
+    "trap_exposed": "The camouflage is a distinction that sounds like the paragraph's own. The description turns on a gap between two prices, and the odd sentence turns on a difference between a price quoted and a price taken, which a reader may hear as the same point made again. It is not: one is the charge for a service, the other is what a forced seller accepts. The decoy is the sentence about the stated number of shares, whose technical flavour looks imported, though the conclusion is a claim about exactly that number.",
+    "exclusion_analysis": [
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It defines the arrangement rather than saying anything about cost, so a reader who has found the paragraph's subject may treat it as an opening the set could spare.",
+        "what_breaks": "Without it 'those two prices' points at nothing, and a description of what a gap costs never says what the gap lies between."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It denies one explanation and supplies another in the same breath, which makes its role hard to name at speed.",
+        "what_breaks": "Without it the risk named in the next sentence has never been introduced, and the paragraph explains the size of a charge it has not identified."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence with a quantity of shares in it, and its withdrawal of a quote above a number reads like a desk technicality.",
+        "what_breaks": "Without it the closing sentence's stated number has never been stated, and the claim that risk sets the gap is never carried to anything a dealer actually does."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It gathers the previous points rather than adding a new one, so it can look like a restatement the description could end without.",
+        "what_breaks": "Without it the description stops at a quote being withdrawn above a size and never says that the size is itself a price, which is the point the sequence was built to reach."
+      }
+    ],
+    "detection_habit": "When every sentence names the same person and the same objects, stop matching on nouns and ask what question each sentence answers. A paragraph holds its topic steady far more often than it holds its question steady."
+  },
+  "mentor": {
+    "challenge": "All five sentences are about one dealer quoting two prices. Topic will not separate them; only the question they are answering will.",
+    "takeaway": "Same subject, different question, is the commonest disguise a stray sentence wears."
+  }
+}

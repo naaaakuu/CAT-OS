@@ -43,7 +43,11 @@
       "conjunction": false,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "ambiguity_tolerance"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
     "mission": "hold_the_purpose",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,13 @@
       "expert_reviewed": false
     },
     "learning_objective": "hold on to the question a paragraph is answering, so that a sentence answering a neighbouring question about the same arrangement can be recognised as a visitor",
-    "reasoning_patterns": ["comp.purpose", "scope.true_but_off_question", "disc.function_slot", "comp.function_over_words", "disc.topic_progression"],
+    "reasoning_patterns": [
+      "comp.purpose",
+      "scope.true_but_off_question",
+      "disc.function_slot",
+      "comp.function_over_words",
+      "disc.topic_progression"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The live rival is the long sentence about what a permanent appointment settles: it spends its whole length on the arrangement the paragraph is not recommending, and a reader impatient for the thread will call it a digression. It stays because the contrast is the exposition's entire engine, and because the closing sentence's 'those questions' has no antecedent without it. The sentence about outside candidates is the one that answers a different question: the core asks what the arrangement does to the office, never who ends up occupying it, and no sentence before or after takes up the field of applicants.",
@@ -72,38 +82,109 @@
     "reviewer_notes": "The hardest regime in the set: the outlier shares every noun with the core, is locally smooth beside any of them, and is the sort of sentence a good exposition often does contain. It is excluded only by the question the four sentences are jointly answering."
   },
   "sentences": [
-    { "label": "A", "text": "Candidates outside the organisation hesitate to apply for a post whose acting holder is visibly being tried out, so the field narrows in a way the advertisement never records." },
-    { "label": "B", "text": "A permanent appointment answers questions nobody has yet asked, whether the post outranks its neighbours and whether its holder sits on the committees the last holder sat on, and answers them in whatever way the first occupant happens to behave." },
-    { "label": "C", "text": "An acting appointment is usually read as a delay, a way of keeping a chair warm while the search for a real occupant goes on." },
-    { "label": "D", "text": "Its more useful property is that it postpones a precedent: the holder exercises the authority of the office without the appointment settling what the office is to become." },
-    { "label": "E", "text": "Leaving those questions open is what the provisional title is for, which is why organisations reach for it most readily when the shape of the job, rather than the choice of a person, is what is actually in dispute." }
+    {
+      "label": "A",
+      "text": "An acting appointment is usually read as a delay, a way of keeping a chair warm while the search for a real occupant goes on."
+    },
+    {
+      "label": "B",
+      "text": "A permanent appointment answers questions nobody has yet asked, whether the post outranks its neighbours and whether its holder sits on the committees the last holder sat on, and answers them in whatever way the first occupant happens to behave."
+    },
+    {
+      "label": "C",
+      "text": "Candidates outside the organisation hesitate to apply for a post whose acting holder is visibly being tried out, so the field narrows in a way the advertisement never records."
+    },
+    {
+      "label": "D",
+      "text": "Its more useful property is that it postpones a precedent: the holder exercises the authority of the office without the appointment settling what the office is to become."
+    },
+    {
+      "label": "E",
+      "text": "Leaving those questions open is what the provisional title is for, which is why organisations reach for it most readily when the shape of the job, rather than the choice of a person, is what is actually in dispute."
+    }
   ],
-  "outlier": "A",
-  "core_order": ["C", "D", "B", "E"],
+  "outlier": "C",
+  "core_order": [
+    "A",
+    "D",
+    "B",
+    "E"
+  ],
   "builder": {
     "prompt": "Build the four-sentence explanation of what an acting appointment does for the organisation that makes one. The sentence that is answering a different question about the same arrangement is your answer."
   },
   "explanation": {
     "spine_note": "The core explains one arrangement in four moves. It opens with the reading everyone gives an acting appointment, a delay, then replaces it with a better one, that the arrangement postpones a precedent. The third sentence supplies the contrast that makes the replacement intelligible, by showing what a permanent appointment quietly settles, and the fourth closes by naming the circumstances in which an organisation wants exactly that settlement withheld. Common reading, better reading, contrast, consequence.",
     "core_roles": [
-      { "label": "C", "role": "topic", "why_here": "It names the arrangement and states the received view of it, which the next sentence corrects; an exposition that replaces a reading has to state the reading first." },
-      { "label": "D", "role": "development", "why_here": "'Its more useful property' answers the received reading directly and states the paragraph's central claim, that what is postponed is a precedent rather than a decision about a person." },
-      { "label": "B", "role": "contrast", "why_here": "It explains the claim by showing the alternative at work: what gets settled, and how accidentally, when the appointment is permanent." },
-      { "label": "E", "role": "conclusion", "why_here": "'Those questions' collects the ones just listed and turns the contrast into a rule about when organisations use the device." }
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It names the arrangement and states the received view of it, which the next sentence corrects; an exposition that replaces a reading has to state the reading first."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "'Its more useful property' answers the received reading directly and states the paragraph's central claim, that what is postponed is a precedent rather than a decision about a person."
+      },
+      {
+        "label": "B",
+        "role": "contrast",
+        "why_here": "It explains the claim by showing the alternative at work: what gets settled, and how accidentally, when the appointment is permanent."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "'Those questions' collects the ones just listed and turns the contrast into a rule about when organisations use the device."
+      }
     ],
     "links": [
-      { "from": "C", "to": "D", "tie": "reference", "explanation": "'Its more useful property' refers to the arrangement just named and sets the new claim against the reading just given." },
-      { "from": "D", "to": "B", "tie": "lexical", "explanation": "'A permanent appointment' answers 'the appointment' of the previous sentence by naming the other kind, and shows what it settles that the first kind postpones." },
-      { "from": "B", "to": "E", "tie": "reference", "explanation": "'Those questions' has exactly one possible antecedent, the pair of questions just listed, so the closing sentence cannot be read without the sentence before it." }
+      {
+        "from": "A",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'Its more useful property' refers to the arrangement just named and sets the new claim against the reading just given."
+      },
+      {
+        "from": "D",
+        "to": "B",
+        "tie": "lexical",
+        "explanation": "'A permanent appointment' answers 'the appointment' of the previous sentence by naming the other kind, and shows what it settles that the first kind postpones."
+      },
+      {
+        "from": "B",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'Those questions' has exactly one possible antecedent, the pair of questions just listed, so the closing sentence cannot be read without the sentence before it."
+      }
     ],
     "violation_named": "The odd sentence is about acting appointments, uses the paragraph's own nouns and states a real cost, and yet it answers a question the four sentences never ask. Their subject is what the arrangement does to the office: which claims about the post it settles and which it holds open. The stray sentence is about who applies for the post, a different object with a different story.",
     "why_it_breaks": "Nothing in the core has raised the field of candidates, and nothing after it could use a narrowed field: the closing sentence needs the questions about rank and committees, not a shortlist. The stray sentence therefore introduces a dimension that arrives and leaves in one line. Read it beside any core sentence and it is smooth, which is the point; read the four as one answer to one question, and it is answering the next question along.",
     "trap_exposed": "The disguise is that it sounds like the qualification a fair exposition owes its reader, a cost to set against an advantage. That is a plausible shape, not a tie. The decoy runs the other way: the long sentence about permanent appointments seems to wander off the subject entirely, when it is in fact the contrast the whole explanation is built on, and the only source of the antecedent the last sentence needs.",
     "exclusion_analysis": [
-      { "label": "C", "mistake_type": "premature_closure", "why_tempting": "It states the ordinary view rather than the paragraph's view, so a reader who has grasped the argument may treat it as a throat-clearing sentence the paragraph outgrew.", "what_breaks": "Without it 'its more useful property' has no first property to be more useful than, and the correction becomes an assertion with nothing to correct." },
-      { "label": "D", "mistake_type": "hardest_to_place", "why_tempting": "It is the most abstract sentence in the set and states its claim in a single compressed phrase, so a reader may hold it aside while hunting for something easier to place.", "what_breaks": "Without it the paragraph moves from a received reading to a description of permanent appointments with no claim in between, and the closing sentence's 'the provisional title' names something the paragraph never explained." },
-      { "label": "B", "mistake_type": "surface_oddity", "why_tempting": "It is much the longest sentence, it is about the other kind of appointment, and its two embedded questions make it read like a digression.", "what_breaks": "Without it the central claim is never shown working, and 'those questions' in the last sentence points at nothing the paragraph contains." },
-      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "It repeats material the paragraph has already covered before adding its own point, so it can look like a restatement the set could spare.", "what_breaks": "Without it the exposition stops at a contrast and never says when an organisation would want the settlement withheld, which is the only place the explanation was going." }
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states the ordinary view rather than the paragraph's view, so a reader who has grasped the argument may treat it as a throat-clearing sentence the paragraph outgrew.",
+        "what_breaks": "Without it 'its more useful property' has no first property to be more useful than, and the correction becomes an assertion with nothing to correct."
+      },
+      {
+        "label": "D",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the most abstract sentence in the set and states its claim in a single compressed phrase, so a reader may hold it aside while hunting for something easier to place.",
+        "what_breaks": "Without it the paragraph moves from a received reading to a description of permanent appointments with no claim in between, and the closing sentence's 'the provisional title' names something the paragraph never explained."
+      },
+      {
+        "label": "B",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is much the longest sentence, it is about the other kind of appointment, and its two embedded questions make it read like a digression.",
+        "what_breaks": "Without it the central claim is never shown working, and 'those questions' in the last sentence points at nothing the paragraph contains."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It repeats material the paragraph has already covered before adding its own point, so it can look like a restatement the set could spare.",
+        "what_breaks": "Without it the exposition stops at a contrast and never says when an organisation would want the settlement withheld, which is the only place the explanation was going."
+      }
     ],
     "detection_habit": "State the question the four sentences are jointly answering in one line, then hold each sentence against it. Sentences about the same arrangement can answer neighbouring questions, and a neighbouring question is still a different paragraph."
   },

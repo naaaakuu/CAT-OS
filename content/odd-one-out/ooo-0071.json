@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0071",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "mathematics-logic",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "title": "The Fifth Stroke Laid Across",
+    "theme": "what the crossed fifth stroke of a tally adds to a row of identical marks, and what a tally kept without it loses",
+    "estimated_time_sec": 80,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "A",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 5,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier speaks of notations and marks, which is the paragraph's own vocabulary, and it has the quotable air of an opening. The decoy is the sentence about recovering a miscount, which introduces a second benefit and can look like an addition to a description that had already made its point."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "notice a general remark inside a description of one particular practice, and test it by asking which step of the description would be poorer without it",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "arg.example_vs_principle",
+      "comp.organization",
+      "disc.general_to_specific",
+      "disc.lexical_chain"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about recovering a miscount: it adds a second benefit just as the description seemed complete, and a reader who has taken counting at a glance for the point may treat it as an extra. It stays because the closing sentence says neither property belongs to the marks, a count with exactly two antecedents, and this sentence supplies one of them; remove it and the ending counts to two with only one thing to count. The remark about notations being copied from trade to trade is the visitor. It uses the paragraph's own words, and a general opening followed by a case is a shape readers expect, but the description explains what one stroke does to one kind of record, and where notations travel from is a question it never asks.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of grouped tally marks; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A foundation item with a very strong core: three joints, the crossed stroke, counting in blocks and neither property, the last of which is a count that fails outright if either of the two benefits is removed. The general remark is orthogonal by design, about where notations travel rather than about what this one does."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Neither property belongs to the marks themselves, and a tally kept without the fifth stroke records the same number while making it both unreadable and unrepairable."
+    },
+    {
+      "label": "B",
+      "text": "Notations of that sort are copied from trade to trade far more often than they are invented, and a mark that began in one kind of accounting will be found doing a different job in another."
+    },
+    {
+      "label": "C",
+      "text": "A tally is kept by cutting one stroke for each item and laying the fifth across the four before it."
+    },
+    {
+      "label": "D",
+      "text": "Counting in blocks is also what makes a miscount recoverable, because a counter who has lost his place need only find the last complete block and start again from there."
+    },
+    {
+      "label": "E",
+      "text": "The crossed stroke is not decoration, since it turns a row of identical marks into a row of blocks, and a block can be counted at a glance."
+    }
+  ],
+  "outlier": "B",
+  "core_order": [
+    "C",
+    "E",
+    "D",
+    "A"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence description of the tally and its crossed fifth stroke, ending with what a tally without it would lose. The sentence that is general about notations rather than about this one is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core describes one practice in four steps. A tally is cut one stroke at a time with the fifth laid across the four; the crossed stroke turns identical marks into blocks, and a block can be counted at a glance; counting in blocks also makes a miscount recoverable, since a counter can restart from the last complete block; and neither property belongs to the marks themselves, so a tally without the fifth stroke keeps the number and loses both. Practice, first property, second property, what is lost without them.",
+    "core_roles": [
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It describes the practice itself, and the crossed fifth stroke it introduces is what the two following sentences are about."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'The crossed stroke' names the mark just introduced and gives the first of the two properties the closing sentence counts."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "'Counting in blocks' repeats the arrangement the previous sentence produces, and this sentence adds the second property."
+      },
+      {
+        "label": "A",
+        "role": "conclusion",
+        "why_here": "'Neither property' counts the two just described and states what a tally without the crossed stroke would keep and what it would lose."
+      }
+    ],
+    "links": [
+      {
+        "from": "C",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The crossed stroke' has exactly one antecedent, the fifth mark laid across the four in the previous sentence."
+      },
+      {
+        "from": "E",
+        "to": "D",
+        "tie": "lexical",
+        "explanation": "'Counting in blocks' repeats the arrangement the previous sentence creates, so the second benefit is a benefit of the same grouping."
+      },
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'Neither property' is a count with exactly two antecedents, counting at a glance and recovering a miscount, one supplied by each of the two preceding sentences."
+      }
+    ],
+    "violation_named": "The four core sentences describe one practice and what one stroke in it does. The odd sentence states a general truth about notations at large, that they are borrowed between trades more often than they are invented. It is general where the description is particular, and general about a question the description never asks.",
+    "why_it_breaks": "Nothing in the description uses it. The blocks explain the glance, the blocks explain the recovery, and the two together explain what a tally without the crossed stroke loses; at no point does a step need to know where a notation came from or who else uses it. A general remark also has no place in a sequence: put it anywhere and the description pauses for an observation about borrowing, then resumes exactly where it stopped.",
+    "trap_exposed": "The camouflage is vocabulary and shape. The sentence talks about notations and marks, which are the paragraph's own words, and a general statement followed by an example is a familiar arrangement, so a reader may offer it the opening seat. The test is whether any particular step leans on it. The decoy is the sentence about recovering a miscount, which arrives after the point seemed made and looks like an extra, though the closing count of two properties cannot be made without it. And the attachment test does not separate it: it opens by pointing backwards at the tally just described.",
+    "exclusion_analysis": [
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It only says how the marks are cut, so a reader who has grasped the point about blocks may treat it as obvious and separable.",
+        "what_breaks": "Without it 'the crossed stroke' points at nothing, and a description of what the fifth stroke does never says what the fifth stroke is."
+      },
+      {
+        "label": "E",
+        "mistake_type": "lexical_pull",
+        "why_tempting": "Its claim that the stroke is not decoration reads like an aside, so a reader may take it for commentary rather than a step.",
+        "what_breaks": "Without it the blocks the next sentence counts in have never been formed, and the closing count of two properties is short by one."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It introduces a second benefit after the first has been stated, which can look like an addition the description could end without.",
+        "what_breaks": "Without it 'neither property' counts two things where the paragraph supplies one, and a tally without the stroke is said to lose something never described."
+      },
+      {
+        "label": "A",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It restates the benefits negatively rather than adding a new fact, so it can look like a summary the set could spare.",
+        "what_breaks": "Without it the description lists two conveniences and never says that they are the whole difference between one tally and another, which is the point it was built for."
+      }
+    ],
+    "detection_habit": "When a general sentence uses the paragraph's own words, ask which particular step would be poorer without it. If the answer is none, it is a visitor with a good vocabulary."
+  },
+  "mentor": {
+    "challenge": "Four of these sentences are about one way of cutting marks. The fifth is about notations in general, and it sounds like the sort of thing a paragraph opens with.",
+    "takeaway": "Sounding like an opening is not the same as being needed by anything that follows."
+  }
+}

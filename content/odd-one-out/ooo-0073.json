@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0073",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "political-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "title": "The Vote Withheld in Public",
+    "theme": "why a recorded abstention is punished more heavily than an absence although the two cost a party the same vote",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "C",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is about a division, about members not being in their seats and about the people who manage them, which is exactly the neighbourhood the argument works in. The decoy is the sentence about what an absence is consistent with, whose list of illness and a delayed train reads like anecdote in an argument about evidence."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "hold on to the question an argument is answering when several sentences share its furniture, and use the chain of reference to decide which of them the argument needs",
+    "reasoning_patterns": [
+      "comp.purpose",
+      "scope.true_but_off_question",
+      "disc.function_slot",
+      "comp.organization",
+      "disc.lexical_chain"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence listing what an absence is consistent with: illness, a delayed train, a calculation. It reads like anecdote beside an argument about evidence, and a reader may treat it as colour. It stays because the closing sentence disciplines the two differently, a count with exactly two antecedents, and this sentence supplies one of them; without it the argument contrasts an abstention with nothing. The sentence about a close division keeping members in the building is the visitor. It concerns the same chamber, the same divisions and the same managers, but the argument asks what a record of a vote can afterwards be used for, and this asks how the hours before a division are spent, a question nothing here raises or answers.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of abstention and absence in recorded votes; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An elite item in the highest-overlap regime available to the genre: all five sentences concern divisions, members and the people who manage them. Only the question separates them, and the core's chain runs through that absence, its readable counterpart and the two, the last of which is a count that fails if either member of the pair is removed."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A member who abstains in a recorded division is doing something an absent member is not, and the difference lies in what the record can afterwards be used for."
+    },
+    {
+      "label": "B",
+      "text": "That absence is unreadable, since it is consistent with illness, with a delayed train and with a calculation, and nobody can be held to it."
+    },
+    {
+      "label": "C",
+      "text": "That is why parties discipline the two differently although their arithmetic is identical: what is punished is the production of evidence rather than the loss of a vote."
+    },
+    {
+      "label": "D",
+      "text": "A recorded abstention is readable in one way only, as a refusal to supply a vote that was available, and it is the availability that turns it into a statement."
+    },
+    {
+      "label": "E",
+      "text": "A division of that kind, when it is expected to be close, will keep members in the building for hours, and the whips who keep them there trade those hours against business nobody wants taken late."
+    }
+  ],
+  "outlier": "E",
+  "core_order": [
+    "A",
+    "B",
+    "D",
+    "C"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about why an abstention and an absence, which cost a party the same vote, are not treated alike. The sentence that is about the same chamber and answers a different question is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. A member who abstains in a recorded division does something an absent member does not, and the difference is what the record can be used for afterwards; that absence is unreadable, being consistent with illness, a train or a calculation; a recorded abstention is readable in exactly one way, as a refusal to supply an available vote; and that is why the two are disciplined differently although their arithmetic is identical. Claim, first term, second term, consequence.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It states the claim the argument defends and names the pair, the abstainer and the absentee, that the next two sentences take in turn."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'That absence' picks up the absent member just mentioned and establishes the first half of the contrast, that nothing can be read off it."
+      },
+      {
+        "label": "D",
+        "role": "contrast",
+        "why_here": "It supplies the second half in the same terms, readable against unreadable, and locates the statement in the availability of the vote."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "'The two' counts the pair just characterised and draws the consequence about discipline, which is what the argument was assembled to explain."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That absence' points at the absent member the previous sentence introduces, so the unreadability described belongs to that case."
+      },
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "lexical",
+        "explanation": "'Readable in one way only' answers the unreadability just established, and the two sentences are built as one contrast."
+      },
+      {
+        "from": "D",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'The two' is a count whose antecedents are the absence and the abstention characterised in the preceding sentences, so the conclusion needs both."
+      }
+    ],
+    "violation_named": "The four core sentences answer one question: what a recorded vote and a missing one can be used to show, and what follows for how each is treated. The odd sentence is about how the hours before a close division are spent and what is traded for them. Same chamber, same actors, different question.",
+    "why_it_breaks": "Nothing in the argument has raised the management of time, and nothing afterwards could use it: the conclusion needs a pair that costs a party the same vote and differs in what it proves, not a night's business traded against attendance. The sentence introduces a dimension that arrives and leaves in one line. Beside any single core sentence it reads smoothly, which is the difficulty; against the question the four answer together, it is answering the one next door.",
+    "trap_exposed": "The camouflage is a shared world. Divisions, members, whips and the arithmetic of a vote appear throughout, so matching on subject admits the stray sentence at once, and it even mentions members who are not in their seats. The test is what each sentence is for. The decoy is the list of things an absence is consistent with, which reads like anecdote, though the conclusion's count of two has nothing to count without it. And the attachment test does not separate it: it opens by pointing back at the recorded division the argument began with.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states the claim in the abstract without giving either case, so a reader who has understood the contrast may treat it as a preface.",
+        "what_breaks": "Without it 'that absence' points at nothing, and the argument contrasts two things it has never put side by side."
+      },
+      {
+        "label": "B",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its illness and delayed train are the only everyday details in the set, which makes them look like colour rather than argument.",
+        "what_breaks": "Without it the abstention is readable in contrast to nothing, and the closing count of two is short by one."
+      },
+      {
+        "label": "D",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It repeats the shape of the previous sentence and then adds a clause about availability, which makes it easy to read as restatement.",
+        "what_breaks": "Without it the argument never says what an abstention shows, and the punishment of evidence in the conclusion has no evidence to punish."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It turns from what the record shows to how parties behave, which can look like an addition to an argument already made.",
+        "what_breaks": "Without it the paragraph establishes a difference in readability and never says what turns on it, so the puzzle about identical arithmetic is never answered."
+      }
+    ],
+    "detection_habit": "When every sentence shares the furniture, stop matching on nouns and write the question the four answer together. Neighbouring questions about the same institution make the most convincing intruders."
+  },
+  "mentor": {
+    "challenge": "Five sentences from the same chamber, with the same members and the same managers in them. Only one thing separates them, and it is not the subject.",
+    "takeaway": "Ask what a sentence is for. Sharing a world is not sharing a question."
+  }
+}

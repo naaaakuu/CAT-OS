@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0064",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "sociology",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "The Rota and the Auction",
+    "theme": "why an unpleasant shared job is distributed by a rule rather than by a bid, and what the rule is bought to keep quiet",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "B",
+    "violation_type": "general_vs_specific",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is a general statement about arrangements for sharing a burden, which is exactly what the argument is about, and it has the quotable air of a thesis, so a reader expecting a general opening followed by a case will seat it first. The decoy is the sentence about the auction's objection, which spends its length on a method nobody adopts."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "resist seating a quotable generality at the head of a paragraph, and test it instead against the particular step that would be poorer without it",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "arg.example_vs_principle",
+      "comp.organization",
+      "disc.general_to_specific",
+      "disc.lexical_chain"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about what would be wrong with an auction: it spends its whole length on a method the argument says nobody uses, and a reader tracking the rota will call it a detour. It stays because the next sentence says that a rota is silent about that reluctance, a phrase with exactly one antecedent, and because without the auction the paragraph has nothing the rota is being preferred to. The general sentence about membership is the visitor. It is about arrangements for sharing burdens, it sounds like the paragraph's thesis, and it is true, but the argument runs from an auction rejected to a silence purchased, and no step of it needs to know who counts as a member or how quickly the excluded learn their position.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of rotas and bidding for disliked tasks; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The general sentence is deliberately orthogonal, about membership rather than about reluctance, so it cannot be read as the paragraph's own claim stated broadly. That keeps a second four-sentence paragraph from being buildable while preserving the pull of a quotable opening."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The objection to an auction is not that it would fail, but that it would make the reluctance public and put a figure on it, and the figure would be remembered."
+    },
+    {
+      "label": "B",
+      "text": "That silence is what is being bought, which is why a rota survives being plainly inefficient and collapses the week somebody starts keeping a record of who swapped out of which turn."
+    },
+    {
+      "label": "C",
+      "text": "Arrangements of that sort are also statements of who counts as a member, and the people they leave out learn their position from them faster than the people they include."
+    },
+    {
+      "label": "D",
+      "text": "A rota says nothing about that reluctance, since it distributes the job by a rule that cannot be read as an opinion of the people it moves."
+    },
+    {
+      "label": "E",
+      "text": "A household or an office that has to share an unpleasant job almost never auctions it, although an auction would hand it to whoever minds it least."
+    }
+  ],
+  "outlier": "C",
+  "core_order": [
+    "E",
+    "A",
+    "D",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about why an unpleasant job is put on a rota instead of auctioned, ending with what the rota is actually buying. The sentence that is general about arrangements rather than about this one is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. Nobody auctions an unpleasant shared job, although an auction would allocate it efficiently; the objection is not that it would fail but that it would publish everyone's reluctance and price it; a rota says nothing about that reluctance, since its rule cannot be read as an opinion of anybody; and that silence is what the arrangement is bought for, which explains both its tolerance of inefficiency and its sudden collapse when records start being kept. Puzzle, objection, alternative, purchase.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "topic",
+        "why_here": "It states the puzzle the argument exists to solve, an efficient method that is available and almost never used."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The objection to an auction' answers the puzzle just posed and introduces the reluctance that the next sentence says a rota keeps quiet."
+      },
+      {
+        "label": "D",
+        "role": "contrast",
+        "why_here": "'That reluctance' names what the previous sentence says an auction would publish, and this sentence gives the rota's advantage in exactly those terms."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "'That silence' names the property just described and states what it is worth, which is the claim the whole argument was assembled to make."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The objection to an auction' points at the method the previous sentence says nobody adopts, so the sentence explains a refusal already on the page."
+      },
+      {
+        "from": "A",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'That reluctance' has one possible antecedent, the reluctance an auction is said to make public and to price."
+      },
+      {
+        "from": "D",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That silence' names the rota's refusal to say anything about reluctance, which the previous sentence establishes and nothing else supplies."
+      }
+    ],
+    "violation_named": "The four core sentences are about one comparison: an auction, a rota, and what the second keeps quiet that the first would publish. The odd sentence states a general truth about every arrangement for sharing a burden, and about membership rather than about reluctance. It is general where the argument is particular, and general about something the argument never raises.",
+    "why_it_breaks": "Nothing in the argument uses it. The puzzle is set by an unused method, the objection is about publicity, the rota's advantage is silence, and the conclusion prices that silence; none of these steps needs a claim about who counts as a member, and no sentence afterwards returns to members, inclusion or exclusion. A generality also has no place in a sequence: wherever it is put, the argument pauses for an observation about belonging and then resumes where it left off.",
+    "trap_exposed": "The disguise is the shape of an opening. A broad statement about arrangements for sharing burdens reads like a thesis, and readers expect a general claim followed by a case, so the sentence offers itself for the first seat. The test is whether the case leans on the claim, and this case leans on an auction instead. The decoy is the sentence about the objection to an auction, which spends its length on a method nobody uses and looks like a detour, though it supplies the reluctance the rota is later said to keep quiet. And the attachment test does not separate it: it opens by pointing backwards, at the rota and the auction just weighed against each other.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It poses a puzzle rather than making the paragraph's point, so a reader who has grasped the point may treat it as preliminary.",
+        "what_breaks": "Without it the objection in the next sentence answers nothing, and a paragraph about preferring a rota never says what it is preferred to."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It describes what would happen under a method nobody adopts, which makes its place in a sequence about rotas hard to name quickly.",
+        "what_breaks": "Without it 'that reluctance' points at nothing, and the rota's silence is silence about a subject the paragraph has never raised."
+      },
+      {
+        "label": "D",
+        "mistake_type": "lexical_pull",
+        "why_tempting": "It restates the rota's neutrality in terms already used, so a reader watching for repetition may take it for a sentence the set could spare.",
+        "what_breaks": "Without it 'that silence' has no antecedent, and the paragraph prices a property it has never attributed to a rota."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It adds a prediction about collapse that the argument had not promised, which can look like an extra rather than a conclusion.",
+        "what_breaks": "Without it the argument establishes that a rota is quiet and never says why that is worth having, so the puzzle it opened with is left unsolved."
+      }
+    ],
+    "detection_habit": "A quotable generality will always offer to open a paragraph. Make it pay for the seat: name the particular step that would be poorer without it, and if there is none, it is a visitor."
+  },
+  "mentor": {
+    "challenge": "One sentence here sounds like the thesis of the whole paragraph. Build the argument first and see whether the thesis is doing any of the work.",
+    "takeaway": "A sentence that could open any paragraph on the subject is not the opening of this one."
+  }
+}

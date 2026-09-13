@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0055",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "anthropology",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "The Name That Moves Up a Generation",
+    "theme": "why an adult in some societies is addressed by a child's name, and what the cases that have no child in them show the practice to be doing",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "D",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 5,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier opens on a consequence marker and offers the kind of qualification a careful argument usually does contain, a condition under which the practice is strongest, and it is built from the paragraph's own nouns, fathers, form of address, compound. The decoy is the sentence listing the three awkward cases, which reads like a digression collecting exceptions just as the argument seemed to be moving."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "connective_reading",
+      "coherence_monitoring",
+      "relatedness_vs_belonging"
+    ],
+    "mission": "track_the_direction",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "test a claimed consequence against the premises an argument has actually produced, and notice when a plausible qualification follows from nothing and is used by nothing",
+    "reasoning_patterns": [
+      "lang.causal_wording",
+      "disc.transition_word",
+      "arg.evidence_vs_conclusion",
+      "comp.organization",
+      "disc.lexical_chain"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence listing the woman, the childless adult with a fostered child and the parent whose child has died: it interrupts a clean argument with a catalogue of awkward cases, and a reader who has grasped the claim will call it an accumulation of exceptions the paragraph could spare. It stays because the next sentence opens on what those three cases share, a phrase with exactly one antecedent, and because without the three the compliment reading is never refuted and the argument's turn has nothing to turn on. The sentence about large households is the break. It announces a consequence, and the argument has produced no premise about the number of fathers in a compound or about anyone needing to be told apart; nothing after it returns to households, so it neither follows from what precedes it nor supplies anything to what comes next.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of naming an adult through a child; no specific ethnography adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The hardest regime in the set: the outlier is locally flawless, since a consequence marker will attach to any statement whatever, and it offers exactly the kind of qualification a good argument contains. What fails is the relation. The core's own joints are a count and two definite phrases, and the argument moves from a reading offered to a reading replaced without ever passing through household size."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "It is tempting to read the change as a compliment to the child, but the same form is used of a woman, of a childless adult through a fostered child, and of a parent whose child has died."
+    },
+    {
+      "label": "B",
+      "text": "In several societies a man's own name goes out of ordinary use when his first child is born, and he is addressed from then on as that child's father."
+    },
+    {
+      "label": "C",
+      "text": "The practice is therefore strongest where households are large, since a man with several brothers will be one of many fathers in a single compound and needs the fuller form to be told apart."
+    },
+    {
+      "label": "D",
+      "text": "That placement is what the name states, which is why the loss of one's own name is described by the people who undergo it as an arrival rather than as a deprivation."
+    },
+    {
+      "label": "E",
+      "text": "What those three cases share is not affection but position, since each of them names an adult by the relation that has just placed them in the order of generations."
+    }
+  ],
+  "outlier": "C",
+  "core_order": [
+    "B",
+    "A",
+    "E",
+    "D"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about what an adult's change of name is actually stating, from the custom itself to what the people who undergo it say about it. The sentence that announces a consequence the argument never produces is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core argues in four moves. It states the custom, that a man's own name falls out of use at the birth of his first child; offers the natural reading, that the change compliments the child, and blocks it with three cases in which the compliment cannot be what is meant; says what the three have in common, which is position rather than affection; and closes with the consequence, that losing the use of one's own name is felt as an arrival. Custom, reading blocked, replacement, consequence.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It states the practice the argument is about, and every later sentence is a claim about what this change of address is doing."
+      },
+      {
+        "label": "A",
+        "role": "contrast",
+        "why_here": "'The change' names the practice just described and sets the obvious reading against three uses of the same form that the reading cannot cover."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'Those three cases' collects the list just given and states what survives it, which is the argument's central claim."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "'That placement' points at the claim just made and draws from it the thing the argument was for, how the change is experienced by the people it happens to."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The change' points at the replacement of a man's name just described, and the sentence exists to reject a reading of exactly that change."
+      },
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'Those three cases' is a count with one possible antecedent, the woman, the childless adult and the bereaved parent just listed."
+      },
+      {
+        "from": "E",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'That placement' names the position the previous sentence has just identified, so the closing claim is drawn from it and from nothing else."
+      }
+    ],
+    "violation_named": "The odd sentence claims to state a consequence of the argument. The argument has established a custom, refused a reading of it, and replaced the reading with a claim about position in the order of generations. None of that entails anything about the size of households, the number of brothers in a compound, or the need to tell people apart.",
+    "why_it_breaks": "The connective fails in both directions. Nothing before it can serve as its premise, since a claim about what a name states is not a claim about how many people a name has to distinguish. And nothing after it can use what it leaves: the closing sentence needs the placement just established, not a condition under which the custom is commonest, and no later sentence returns to households, brothers or compounds. The sentence takes its seat by asserting a relation, and the relation is the thing missing.",
+    "trap_exposed": "The disguise is that a consequence marker will sit after any statement at all, and that the sentence offers the shape a careful argument often does contain, a condition under which a practice is strongest. It also borrows the paragraph's nouns, so a reader checking whether it has something to attach to will be satisfied twice over. The question is not whether a connective can attach but whether the relation it names holds. The decoy is the list of three awkward cases, which looks like a digression into exceptions and is in fact the only refutation the argument has, and the only antecedent the next sentence's count can take.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It merely reports a custom and makes no claim, so a reader who has found the argument's point may treat it as background that could be assumed.",
+        "what_breaks": "Without it 'the change' points at nothing, and the paragraph rejects a reading of a practice it has never described."
+      },
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is a list of three unlike cases in a paragraph of claims, and its bereaved parent and fostered child read like an accumulation of exceptions.",
+        "what_breaks": "Without it the compliment reading is never refuted, and 'those three cases' in the next sentence has nothing to count."
+      },
+      {
+        "label": "E",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It states its claim in the most compressed form in the set, position rather than affection, and a reader may hold it aside while looking for something easier to place.",
+        "what_breaks": "Without it the argument moves from a list of exceptions to a conclusion about placement that nothing has established, and 'that placement' names something the paragraph never supplies."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It brings in how the practice feels to those who undergo it, a new kind of evidence, which can look like an addition to an argument already complete.",
+        "what_breaks": "Without it the argument establishes what the name states and never says what turns on it, so the reading it fought for is never cashed."
+      }
+    ],
+    "detection_habit": "When a sentence says therefore, say aloud the premise it is claiming and check that the paragraph has produced it. A connective will attach to anything; only the relation it announces can be false."
+  },
+  "mentor": {
+    "challenge": "Five sentences about a custom of naming adults through their children. One of them says that something follows, and the paragraph will let it sit there unless you ask from what.",
+    "takeaway": "A qualification that follows from nothing and is used by nothing is a visitor, however reasonable it sounds."
+  }
+}

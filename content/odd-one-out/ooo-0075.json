@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0075",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "religion-belief",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "The Watcher and the Almanac",
+    "theme": "what changed when a rule tied to a visible sign at dawn was answered by a printed table, and why some communities keep both",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "C",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier explains the very instrument the exposition is about, and the core carries a figure of its own, a table four minutes out, so the outlier is not the only sentence with a quantity in it. The decoy is the sentence about keeping both the table and a watcher, whose apparent duplication reads like an antiquarian survival rather than a point."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "notice_topic_stability",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "separate an account of how an instrument is produced from an account of what adopting it changed, and check which of the two any later sentence requires",
+    "reasoning_patterns": [
+      "arg.evidence_vs_conclusion",
+      "comp.organization",
+      "disc.lexical_chain",
+      "disc.topic_progression",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about communities that keep both the table and a watcher: it describes what looks like a survival rather than a consequence, and a reader tracking the change may treat it as an afterword. It stays because it opens on the difference the previous sentence establishes and is the only place the exposition says what follows from that difference; remove it and the paragraph identifies a change in who can be wrong and does nothing with it. The sentence about how the tables are computed is the visitor. It explains the paragraph's own instrument and carries a quantity, as the core does, but the exposition is about what adopting a table did to responsibility, and no sentence in it needs to know the angle the calculation starts from or how the conversion is made.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of observation and calculation in fixing an observance; no specific tradition's rules are reproduced. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "Written so that the method sentence is not the only technical one: the core carries the sharper figure, a table four minutes out, and the outlier's subject is the tables themselves. The exclusion rests on use, since no step of the exposition requires anything about how the table is produced."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A rule that fixes the start of a fast by what an ordinary eye can see at dawn puts the decision in the hands of whoever is standing outside."
+    },
+    {
+      "label": "B",
+      "text": "The tables are computed from the sun's depression below the horizon, a figure fixed at a set number of degrees and then converted into clock time separately for each latitude and each day of the year."
+    },
+    {
+      "label": "C",
+      "text": "Communities that have noticed the difference keep both, announcing the table and appointing a watcher, which looks like duplication and is in fact the retention of somebody who can be answerable."
+    },
+    {
+      "label": "D",
+      "text": "That move is usually called a convenience, but it changed who could be wrong: an observer who misjudged the light was mistaken by himself, while a table four minutes out makes a whole province mistaken in the same direction."
+    },
+    {
+      "label": "E",
+      "text": "Once tables could be printed the same moment could be given in advance for every town in a province, and the decision moved from the courtyard to the almanac."
+    }
+  ],
+  "outlier": "B",
+  "core_order": [
+    "A",
+    "E",
+    "D",
+    "C"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of what happened when a rule read off the dawn sky was answered by a printed table, ending with the communities that keep both. The sentence that explains how the table is calculated is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one change in four moves. A rule fixed by what an ordinary eye can see puts the decision with whoever is outside; printed tables allow the same moment to be given in advance for every town, and the decision moves from the courtyard to the almanac; that move is usually called a convenience but it changes who can be wrong, one observer against a whole province; and communities that have noticed keep both, which retains somebody who can be answerable. Rule, change, consequence, response.",
+    "core_roles": [
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It describes the arrangement the whole exposition measures the change against, and puts the decision in the hands the table later takes it from."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'The same moment' is the moment the previous sentence has an observer determine, and this sentence moves the determining elsewhere."
+      },
+      {
+        "label": "D",
+        "role": "contrast",
+        "why_here": "'That move' names the shift just described and states what it actually altered, which is the exposition's central claim."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "'The difference' names the change in who can be wrong, and this sentence says what communities do about it, which is where the account ends."
+      }
+    ],
+    "links": [
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The same moment' points at the start of the fast that the previous sentence has an observer fix by eye."
+      },
+      {
+        "from": "E",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'That move' has one possible antecedent, the transfer of the decision from the courtyard to the almanac."
+      },
+      {
+        "from": "D",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'The difference' names the change in who can be wrong that the previous sentence establishes, so the response described is a response to it."
+      }
+    ],
+    "violation_named": "The four core sentences report what adopting a printed table did: where the decision sat, what the change altered, and what some communities do in consequence. The odd sentence reports how such a table is produced, from an angle below the horizon converted into clock time. That is method inside an exposition of consequences.",
+    "why_it_breaks": "No step of the exposition uses the manufacture. The move is established by where the decision sits, the consequence by how many people a single error carries, and the response by the wish to keep somebody answerable; none of these needs the angle, the conversion or the latitudes. Nothing afterwards returns to the calculation either, so the sentence supplies a procedure that is called for by nobody and handed on to nothing.",
+    "trap_exposed": "The camouflage is that the sentence explains the paragraph's own instrument, which is the most welcome thing a stray sentence can do, and it is not the only sentence with a quantity in it: the core's four minutes is the sharper figure. Its subject is the tables themselves rather than any investigator, so it does not read as a note about somebody's study. The decoy is the closing sentence about keeping both, whose duplication looks like antiquarian survival, though it is the only place the paragraph says what follows from the change.",
+    "exclusion_analysis": [
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It describes an older arrangement rather than the change, so a reader who has grasped the change may treat it as background.",
+        "what_breaks": "Without it 'the same moment' points at nothing, and the paragraph moves a decision that has never been placed anywhere."
+      },
+      {
+        "label": "E",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It reports a technical possibility and a shift in one breath, which makes it easy to mistake for a note on printing.",
+        "what_breaks": "Without it 'that move' has no antecedent, and the change in who can be wrong is a change from nothing to nothing."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the longest sentence, and its province mistaken in one direction sounds like rhetoric in an otherwise plain account.",
+        "what_breaks": "Without it 'the difference' in the closing sentence names nothing, and the retention of a watcher answers a problem the paragraph never states."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It describes a practice that looks redundant, so a reader may take the sentence itself for a redundancy.",
+        "what_breaks": "Without it the exposition identifies a change in responsibility and stops, and the point of noticing it, that somebody answerable can be kept, is never made."
+      }
+    ],
+    "detection_habit": "When a sentence explains how the paragraph's instrument is made, ask which later sentence needs the explanation. Being about the right object is not the same as being used by anything."
+  },
+  "mentor": {
+    "challenge": "One sentence here tells you how the table is worked out. It is about exactly the right thing; ask whether anything in the paragraph leans on it.",
+    "takeaway": "Helpfulness is not membership. A sentence earns its place by being needed, not by being welcome."
+  }
+}

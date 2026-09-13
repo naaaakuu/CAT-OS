@@ -43,7 +43,11 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["connective_reading", "coherence_monitoring", "relatedness_vs_belonging"],
+    "dna_traits": [
+      "connective_reading",
+      "coherence_monitoring",
+      "relatedness_vs_belonging"
+    ],
     "mission": "find_the_branch",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,12 @@
       "expert_reviewed": false
     },
     "learning_objective": "notice a sentence that resumes a discussion the paragraph has never held, and see that its definite articles are promising a history that is not there",
-    "reasoning_patterns": ["comp.reference_tracking", "disc.lexical_chain", "disc.topic_progression", "struct.contrast"],
+    "reasoning_patterns": [
+      "comp.reference_tracking",
+      "disc.lexical_chain",
+      "disc.topic_progression",
+      "struct.contrast"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the closing sentence about a body that wants both effects: it tells an institution what it has reason to do, and a reader taught to distrust advice will exclude it. It stays because it is the conclusion the two audiences argument has been building, and because its insiders levelled and outsiders informed name the two effects the paragraph has just distinguished. The sentence about the rule being relaxed fails a plainer test: there is no rule in the paragraph, no argument in progress and nothing about hair, and no later sentence picks any of it up.",
@@ -72,38 +81,109 @@
     "reviewer_notes": "An easy-tier thread break with a decoy that teaches a second lesson: a conclusion may sound like advice and still be the sentence the argument was built to reach."
   },
   "sentences": [
-    { "label": "A", "text": "By the time the rule was relaxed, the argument had moved on to hair and to jewellery, which no coat could ever have standardised." },
-    { "label": "B", "text": "The two effects are not in tension, because they work on different audiences: the wearers are being made alike, and everybody else is being told who is inside." },
-    { "label": "C", "text": "Inside the group a uniform levels: the expensive shoe and the cheap one vanish under the same coat, and no stranger can tell which family sent which child." },
-    { "label": "D", "text": "A body that wants both, its members levelled and its boundary legible, has every reason to dress them identically, whatever it says about smartness." },
-    { "label": "E", "text": "Outside the group the same coat does the opposite, announcing to everyone on the street which school, which regiment or which service the wearer belongs to." }
+    {
+      "label": "A",
+      "text": "Inside the group a uniform levels: the expensive shoe and the cheap one vanish under the same coat, and no stranger can tell which family sent which child."
+    },
+    {
+      "label": "B",
+      "text": "The two effects are not in tension, because they work on different audiences: the wearers are being made alike, and everybody else is being told who is inside."
+    },
+    {
+      "label": "C",
+      "text": "By the time the rule was relaxed, the argument had moved on to hair and to jewellery, which no coat could ever have standardised."
+    },
+    {
+      "label": "D",
+      "text": "A body that wants both, its members levelled and its boundary legible, has every reason to dress them identically, whatever it says about smartness."
+    },
+    {
+      "label": "E",
+      "text": "Outside the group the same coat does the opposite, announcing to everyone on the street which school, which regiment or which service the wearer belongs to."
+    }
   ],
-  "outlier": "A",
-  "core_order": ["C", "E", "B", "D"],
+  "outlier": "C",
+  "core_order": [
+    "A",
+    "E",
+    "B",
+    "D"
+  ],
   "builder": {
     "prompt": "Build the four-sentence argument about what a uniform does, inside the group and outside it. The sentence that picks up a discussion this paragraph never started is your answer."
   },
   "explanation": {
     "spine_note": "The core argues in four moves. It opens with what a uniform does inside the group, where differences disappear, then turns to what the same coat does outside it, where it declares membership. The third move removes the apparent contradiction by pointing at the two audiences, and the fourth draws the conclusion for any body that wants both results. Inside, outside, reconciliation, consequence.",
     "core_roles": [
-      { "label": "C", "role": "topic", "why_here": "It states the first of the two effects in concrete terms, and the shoes and the child give the argument something to be about before it becomes abstract." },
-      { "label": "E", "role": "contrast", "why_here": "'The same coat does the opposite' sets the second effect directly against the first, which is the contrast the rest of the argument has to resolve." },
-      { "label": "B", "role": "development", "why_here": "'The two effects' collects the pair just described and supplies the distinction, different audiences, that stops them from contradicting each other." },
-      { "label": "D", "role": "conclusion", "why_here": "It states what follows for an institution once the two effects are known to be compatible, which is the only place the argument was heading." }
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It states the first of the two effects in concrete terms, and the shoes and the child give the argument something to be about before it becomes abstract."
+      },
+      {
+        "label": "E",
+        "role": "contrast",
+        "why_here": "'The same coat does the opposite' sets the second effect directly against the first, which is the contrast the rest of the argument has to resolve."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'The two effects' collects the pair just described and supplies the distinction, different audiences, that stops them from contradicting each other."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "It states what follows for an institution once the two effects are known to be compatible, which is the only place the argument was heading."
+      }
     ],
     "links": [
-      { "from": "C", "to": "E", "tie": "reference", "explanation": "'The same coat' points back at the coat that has just made the shoes disappear, so the reversal is about one object and not two." },
-      { "from": "E", "to": "B", "tie": "substitution", "explanation": "'The two effects' stands in for the levelling and the announcing just described, and has nothing to substitute for without them." },
-      { "from": "B", "to": "D", "tie": "lexical", "explanation": "'Its members levelled and its boundary legible' restates the two audiences in the vocabulary of an institution, turning the distinction into a reason." }
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'The same coat' points back at the coat that has just made the shoes disappear, so the reversal is about one object and not two."
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "substitution",
+        "explanation": "'The two effects' stands in for the levelling and the announcing just described, and has nothing to substitute for without them."
+      },
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "lexical",
+        "explanation": "'Its members levelled and its boundary legible' restates the two audiences in the vocabulary of an institution, turning the distinction into a reason."
+      }
     ],
     "violation_named": "The odd sentence resumes a discussion the paragraph has never held. It speaks of the rule, as though a particular rule had been introduced, of the argument moving on, as though an argument had been reported, and of a relaxation nothing here has described. The core is not a history of a dress code; it is an account of what a uniform does.",
     "why_it_breaks": "Its definite articles are ties, and each of them reaches for something the set does not contain. It also offers nothing forward: hair and jewellery appear once and are never mentioned again, while the sentences around it are busy handing on a pair of effects and a pair of audiences. Insert it anywhere and the paragraph is briefly in the middle of a story, then out of it again.",
     "trap_exposed": "The camouflage is chronology. A sentence that begins by the time invites the reader to assume the earlier time exists, and a reader who is building a story rather than an argument will supply the missing history without noticing. The decoy is the closing sentence, which sounds like advice to an institution, though it is the conclusion the two preceding sentences were assembled to support.",
     "exclusion_analysis": [
-      { "label": "C", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence with domestic particulars in it, shoes and a child and a family, so its texture is unlike the reasoning around it.", "what_breaks": "Without it the paragraph has only one effect to reconcile, and 'the same coat' in the next sentence points at a coat that has done nothing yet." },
-      { "label": "E", "mistake_type": "no_uniqueness_test", "why_tempting": "It seems to repeat the previous sentence in reverse, so a hurried reader treats the two as a pair from which one could be spared.", "what_breaks": "Without it there is no contrast, and the claim that two effects are not in tension refers to a second effect the paragraph never stated." },
-      { "label": "B", "mistake_type": "hardest_to_place", "why_tempting": "It is the most abstract sentence in the set, and a reader may hold it aside while looking for something easier to place.", "what_breaks": "Without it the argument sets two opposite effects side by side and never explains how both can be true, which is the work the paragraph exists to do." },
-      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It reads like a recommendation, and a reader who expects an analysis to stay descriptive will treat the advice as foreign.", "what_breaks": "Without it the paragraph reconciles two effects and stops, never saying what follows for the institutions that arrange for both." }
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence with domestic particulars in it, shoes and a child and a family, so its texture is unlike the reasoning around it.",
+        "what_breaks": "Without it the paragraph has only one effect to reconcile, and 'the same coat' in the next sentence points at a coat that has done nothing yet."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It seems to repeat the previous sentence in reverse, so a hurried reader treats the two as a pair from which one could be spared.",
+        "what_breaks": "Without it there is no contrast, and the claim that two effects are not in tension refers to a second effect the paragraph never stated."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the most abstract sentence in the set, and a reader may hold it aside while looking for something easier to place.",
+        "what_breaks": "Without it the argument sets two opposite effects side by side and never explains how both can be true, which is the work the paragraph exists to do."
+      },
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reads like a recommendation, and a reader who expects an analysis to stay descriptive will treat the advice as foreign.",
+        "what_breaks": "Without it the paragraph reconciles two effects and stops, never saying what follows for the institutions that arrange for both."
+      }
     ],
     "detection_habit": "Test every the, this and by then against the other four sentences. A definite article is a claim that the reader has already met something, and a claim of that kind is easy to check and easy to fake."
   },

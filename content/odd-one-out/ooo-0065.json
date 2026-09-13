@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0065",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 92,
+    "genre": "intellectual-history",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "title": "Objections Before the Answer",
+    "theme": "how a teaching exercise that put the objections first left its order on the page, and what that does to a reader who takes the opening for the author",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "A",
+    "violation_type": "wrong_scope",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 5,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 4,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier opens on a phrase that attaches perfectly, exercises of this shape, and the core already contains an aggregate of its own about most treatises, so the outlier is not the only sentence that counts. Its unit is the tell: it describes what the universities did with their whole curriculum, where every core sentence describes one form's passage from floor to page. The decoy is the sentence about the fixed order of objections and answers, which reads like procedural detail beside the claim about reading."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
+    "mission": "watch_the_scope",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "ask what each sentence is a claim about rather than how wide it reaches, and notice a sentence that keeps the subject while enlarging the unit",
+    "reasoning_patterns": [
+      "scope.abstraction_level",
+      "scope.too_broad",
+      "comp.organization",
+      "disc.topic_progression",
+      "struct.history_of_an_idea"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about the fixed order in which objections came first and nothing could be granted unheard: it is procedural where the rest is about reading, and a reader impatient for the paragraph's point will call it a description of ceremony. It stays because the next sentence says that treatises kept that arrangement on the page, a phrase with exactly one antecedent, and because without the order there is nothing for the page to have kept. The sentence about the universities running their instruction on such exercises is the intruder. Its reach is not the fault, since the set already contains a claim about most treatises of two centuries; its unit is. The four core sentences describe one form moving from the floor to the page and what it does to a reader, and the extent of a curriculum is a fact about an institution that nothing here needs.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the disputation and its trace in written treatises; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The hardest scope regime: the outlier is not the widest sentence in the set and it attaches by a demonstrative that has a genuine antecedent. Only the unit separates it, and the core's three joints, the order, that arrangement and the opening pages, are each unusable without their neighbour."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A reader who takes the opening pages for the author's view has read a transcript of the opposition, which is the one mistake the form makes easy and the reason its chapters seem to change sides."
+    },
+    {
+      "label": "B",
+      "text": "Most treatises written in the two centuries afterwards kept that sequence on the page, so their authors state the objections to their own position before they state the position itself."
+    },
+    {
+      "label": "C",
+      "text": "The teaching exercise that shaped the medieval treatise put a thesis on the floor and required a named opponent to attack it in a fixed order."
+    },
+    {
+      "label": "D",
+      "text": "The order mattered more than the outcome: objections came first, the defence answered them one at a time, and nothing could be granted that had not first been raised."
+    },
+    {
+      "label": "E",
+      "text": "The universities of the period ran nearly all their instruction on exercises of this shape, from the first teaching of law to the examination of candidates for a degree."
+    }
+  ],
+  "outlier": "E",
+  "core_order": [
+    "C",
+    "D",
+    "B",
+    "A"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence description of how an exercise on the floor became an order on the page, ending with what it does to a reader who starts at the front. The sentence that keeps the subject and enlarges the unit is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core describes one form in four steps. A teaching exercise put a thesis on the floor and gave a named opponent the first word; the order mattered more than the outcome, objections first, answers one at a time, nothing granted unraised; most treatises of the following two centuries kept that order on the page, so their authors state the objections to their own position first; and a reader who takes the opening pages for the author's view has read the opposition. Exercise, order, page, consequence for the reader.",
+    "core_roles": [
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It names the exercise the description is about and introduces the fixed order that the next sentence unpacks and the page later inherits."
+      },
+      {
+        "label": "D",
+        "role": "definition",
+        "why_here": "'The order' names the sequence just mentioned and states what it consisted of, which is what a treatise is later said to have kept."
+      },
+      {
+        "label": "B",
+        "role": "development",
+        "why_here": "'That arrangement' points at the sequence just described and moves it from the floor to the page, which is the step the whole description turns on."
+      },
+      {
+        "label": "A",
+        "role": "conclusion",
+        "why_here": "'The opening pages' are the pages the previous sentence has just filled with objections, and this is the consequence for reading that the description exists to deliver."
+      }
+    ],
+    "links": [
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'The order' has one possible antecedent, the fixed order in which the opponent was required to attack, and the sentence states its content."
+      },
+      {
+        "from": "D",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That arrangement' names the sequence of objections and answers just set out, so what the page keeps is exactly this."
+      },
+      {
+        "from": "B",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The opening pages' are given their content by the previous sentence, which puts the objections before the position, so the misreading described is available only after it."
+      }
+    ],
+    "violation_named": "Every core sentence is a claim about one form: what the exercise required, what its order consisted of, what the page kept of it, and what a reader does with the result. The odd sentence is a claim about the extent of an institution's teaching, from law to examinations. The subject is the same and the unit is not.",
+    "why_it_breaks": "Nothing before it prepares a claim of that size and nothing after it uses one. The order on the page is established by what treatises kept; the misreading is established by where the objections sit; neither needs to know how much of a curriculum ran on exercises of the kind, and no later sentence mentions law, degrees or instruction in general. The sentence also leaves nothing behind: every core sentence opens on a phrase its predecessor supplied, and this one supplies nothing that is ever picked up.",
+    "trap_exposed": "The camouflage is a demonstrative that works. 'Exercises of this shape' has a real antecedent, so the usual test of whether an opening phrase has something to hold is passed, and the sentence is not the widest in the set: a core sentence already speaks of most treatises across two centuries. What marks it is that it changes what is being talked about, from a form to a syllabus. The decoy is the sentence on the fixed order, whose procedural detail reads like ceremony, though it is the only place the arrangement the page keeps is described.",
+    "exclusion_analysis": [
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It is about a room rather than about a book, so a reader who has decided the paragraph is about reading may treat it as background.",
+        "what_breaks": "Without it 'the order' points at nothing, and a description of an arrangement kept on the page never says where the arrangement came from."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence of pure procedure, and its three clauses about who speaks when read like ceremony rather than history.",
+        "what_breaks": "Without it 'that arrangement' has no content, and the treatises are said to keep something the reader has never been shown."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It carries the only quantity in the set, most treatises over two centuries, which makes it look like a statistic inserted into a description.",
+        "what_breaks": "Without it the form never reaches the page, and the closing sentence's opening pages contain nothing in particular."
+      },
+      {
+        "label": "A",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It turns from history to advice about reading, which can look like a moral appended to a description already complete.",
+        "what_breaks": "Without it the description explains where an order came from and never says what it costs a reader, so the one thing it was heading for is left unsaid."
+      }
+    ],
+    "detection_habit": "Ask of each sentence not how far it reaches but what it is a claim about. A sentence can attach perfectly, stay on the subject, and still have swapped the thing being described for the institution around it."
+  },
+  "mentor": {
+    "challenge": "One sentence here begins with a phrase that points straight back at the one before it. Attachment is not belonging: check what it is a claim about.",
+    "takeaway": "Scope is a question of unit, not of width. Name the thing each sentence is describing."
+  }
+}

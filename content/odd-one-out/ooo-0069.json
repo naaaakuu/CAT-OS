@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0069",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "title": "Opened Now or Put Aside",
+    "theme": "why two opposite conventions about opening a present are answers to the same risk, and what a traveller mistakes when calling one of them cold",
+    "estimated_time_sec": 125,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "E",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "mixed",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier opens on a phrase that attaches cleanly, the same two directions, and it develops what looks like a natural next thought, that one household may keep both conventions. The decoy is the sentence about the face that has to be arranged, whose sudden closeness to one person's embarrassment reads like an aside in a paragraph of comparison."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "coherence_monitoring",
+      "relatedness_vs_belonging",
+      "given_new_tracking"
+    ],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "follow one line of explanation and recognise a sentence that opens a second line nothing has prepared and nothing afterwards takes up",
+    "reasoning_patterns": [
+      "comp.organization",
+      "disc.topic_progression",
+      "disc.lexical_chain",
+      "struct.two_views_adjudication",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about the moment in which a face has to be arranged: it drops from a comparison of customs to one person's embarrassment, and a reader tracking the comparison may call it an aside. It stays because the closing sentence speaks of that risk, which nothing else in the set identifies, and because the asymmetry described before it is left unexplained without it. The sentence about households keeping one convention for kin and another for colleagues is the break. It attaches by a phrase that genuinely points backwards and offers the kind of development a paragraph might take, but the explanation runs from two customs to two defences to one risk, and mixing within a household follows from none of that and is used by nothing after it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of conventions for opening presents; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A thread break without a false connective. The outlier attaches by a real antecedent and simply starts a second line of development, which is the harder version of the violation to see: the reader has to notice that the line is never continued and never needed."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The two defences are not symmetrical: opening at once is defended by what it shows the giver, and setting aside is defended by what it spares the giver."
+    },
+    {
+      "label": "B",
+      "text": "What it spares is the moment in which a face has to be arranged, and a convention that removes that moment removes the possibility of a failure everybody in the room would have seen."
+    },
+    {
+      "label": "C",
+      "text": "A gift is opened in front of the person who brought it in some places and set aside unopened in others, and each convention is defended by the people who keep it as the polite one."
+    },
+    {
+      "label": "D",
+      "text": "Households differ in the same two directions, and a family that keeps the older convention for kin and the newer one for colleagues will apply both in a single evening."
+    },
+    {
+      "label": "E",
+      "text": "The conventions are therefore two answers to one risk, and a traveller who calls either of them cold has taken a different allocation of that risk for an absence of feeling."
+    }
+  ],
+  "outlier": "D",
+  "core_order": [
+    "C",
+    "A",
+    "B",
+    "E"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of two opposite conventions for receiving a present, ending with what a visitor gets wrong about the one he does not keep. The sentence that starts a second line of development is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains a contrast in four moves. A gift is opened at once in some places and put aside in others, and each side calls its own custom the polite one; the two defences are not symmetrical, since one appeals to what it shows the giver and the other to what it spares him; what it spares is the moment when a face has to be arranged, and removing that moment removes a visible failure; and the conventions are therefore two answers to one risk, which is what a traveller misses. Contrast, asymmetry, mechanism, verdict.",
+    "core_roles": [
+      {
+        "label": "C",
+        "role": "topic",
+        "why_here": "It puts both conventions on the table and notes that each is defended, which is what the next sentence takes apart."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The two defences' counts the defences just mentioned, and the asymmetry it finds is the observation the rest of the explanation works from."
+      },
+      {
+        "label": "B",
+        "role": "cause_effect",
+        "why_here": "'What it spares' picks up the second defence exactly as the previous sentence phrases it and says what the sparing consists of."
+      },
+      {
+        "label": "E",
+        "role": "conclusion",
+        "why_here": "'That risk' names the exposure just described, and the closing sentence turns the asymmetry into a single account of both customs."
+      }
+    ],
+    "links": [
+      {
+        "from": "C",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The two defences' is a count whose only antecedent is the pair of defences the previous sentence attributes to the keepers of each custom."
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'What it spares' repeats the previous sentence's own phrase for the second defence and supplies its content."
+      },
+      {
+        "from": "B",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'That risk' names the exposure of a face that has to be arranged, which the previous sentence alone establishes."
+      }
+    ],
+    "violation_named": "The four core sentences run one line: two customs, two unequal defences, the thing one of them spares, and a single risk that both answer. The odd sentence opens a second line, about variation inside a household and about mixing the two customs in one evening. Nothing before it prepares that line and nothing after it continues it.",
+    "why_it_breaks": "The explanation is about what each custom does for a giver. A family that uses one custom for relatives and another for colleagues raises a different matter, which people the customs are for, and the closing sentence needs a risk rather than a household. No sentence afterwards mentions kin, colleagues or an evening, so the line opens and closes in a single sentence, while every core sentence is held in place by a phrase its neighbour supplied.",
+    "trap_exposed": "The camouflage is an attachment that works. 'The same two directions' really does point back at the two customs, so the usual check, whether an opening phrase has something to hold, is passed. It also reads like a thought a paragraph might naturally go on to have. The test is not whether a sentence can attach but whether anything later needs what it leaves. The decoy is the sentence about the face that has to be arranged, whose narrowing to one person's embarrassment looks like a digression, though the closing sentence's risk exists nowhere else.",
+    "exclusion_analysis": [
+      {
+        "label": "C",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports the two customs without explaining anything, so a reader who has grasped the explanation may treat it as scene-setting.",
+        "what_breaks": "Without it 'the two defences' has nothing to count, and the paragraph compares defences of customs it has never named."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is built as a pair of parallel clauses that sound like restatement, so a reader watching for repetition may set it aside.",
+        "what_breaks": "Without it 'what it spares' picks up nothing, and the mechanism described next explains a defence the paragraph has not distinguished."
+      },
+      {
+        "label": "B",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It narrows suddenly to one person's face in a paragraph of general comparison, which makes its register feel imported.",
+        "what_breaks": "Without it 'that risk' in the closing sentence names nothing, and the asymmetry between the defences is left unexplained."
+      },
+      {
+        "label": "E",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It adds a traveller and a judgement about coldness, neither of which the paragraph promised, so it can look like an afterthought.",
+        "what_breaks": "Without it the paragraph explains one custom and leaves the two facing each other, and the point the asymmetry was assembled for is never made."
+      }
+    ],
+    "detection_habit": "When a sentence attaches cleanly, ask the second question: does anything later use what it leaves behind? A line of thought that opens and closes inside one sentence is a visitor, however well it joins on."
+  },
+  "mentor": {
+    "challenge": "One sentence here points back at the others perfectly well. Attachment is cheap; ask instead what the sentences after it do with what it says.",
+    "takeaway": "A thread has two ends. A sentence that ties on at one end and reaches nobody at the other has not joined the paragraph."
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0077",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "title": "Decline, and Pass It On",
+    "theme": "why a permission to refuse on conscience is paired with a duty to refer, and what the pairing becomes where the referral cannot be performed",
+    "estimated_time_sec": 130,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "descriptive",
+    "nucleus": "C",
+    "violation_type": "example_no_claim",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 4,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is a professional case of exactly the kind the description uses, and the core already carries a concrete case of its own, the district with one dispensing practice, so the outlier is not the only sentence with a particular situation in it. The decoy is that concrete core sentence, whose rural district reads like an illustration that could be cut."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "ambiguity_tolerance"
+    ],
+    "mission": "protect_continuity",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "name the claim a case is offered for, and notice when a case raises a question the description has not asked rather than illustrating one it has",
+    "reasoning_patterns": [
+      "arg.example_vs_principle",
+      "comp.purpose",
+      "disc.lexical_chain",
+      "comp.organization",
+      "disc.example_after_claim"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about a rural district with one dispensing practice: it is the only concrete place in a description of an arrangement, and a reader keeping the account general may treat it as an illustration that could be cut. It stays because the closing sentence opens on a referral that is a form of words, a phrase supplied here and nowhere else; remove it and the veto described at the end follows from nothing. The theatre nurse asked to count the instruments is the visitor. It is a professional case of the right kind, but it raises where an objection begins, and the description asks what the duty to refer does and what happens when it cannot be performed, a question about the second half of a pairing rather than about the size of the first.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of conscience clauses and duties to refer; no specific code or jurisdiction is described. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The outlier is a case from the same profession and the same kind of provision, and is excluded because it belongs to a different question, where participation begins. The core's joints, the pairing, the second half and a form of words, each collapse if a neighbour is removed."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The pairing is what makes the permission affordable, since the objector keeps his hands clean and the applicant keeps the service, and neither is asked to give way to the other."
+    },
+    {
+      "label": "B",
+      "text": "A professional permitted to decline a task on conscience is usually required, in the same provision, to pass the applicant on to somebody who will not decline."
+    },
+    {
+      "label": "C",
+      "text": "Where it is a form of words the arrangement has quietly become a veto, and the objector's conscience has acquired a reach over other people's affairs that the permission was drafted to deny it."
+    },
+    {
+      "label": "D",
+      "text": "It is affordable only where the second half can be performed, and in a rural district with one dispensing practice the referral is a form of words."
+    },
+    {
+      "label": "E",
+      "text": "The same provision leaves a theatre nurse who has declined to assist at a procedure liable to be asked to count the instruments afterwards, and it is the counting that some objectors refuse."
+    }
+  ],
+  "outlier": "E",
+  "core_order": [
+    "B",
+    "A",
+    "D",
+    "C"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence description of a permission to decline on conscience and the duty attached to it, ending with what the arrangement becomes where the duty cannot be met. The case that belongs to a different question is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core describes one arrangement in four steps. A professional allowed to decline on conscience is required in the same provision to pass the applicant on; the pairing is what makes the permission affordable, since neither party is asked to give way; it is affordable only where the second half can be performed, and where there is one practice the referral is a form of words; and where it is a form of words the arrangement has become a veto. Provision, why it works, its condition, what it becomes without the condition.",
+    "core_roles": [
+      {
+        "label": "B",
+        "role": "topic",
+        "why_here": "It states the two-part provision the whole description is about, and the second part is what the rest of the paragraph tests."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The pairing' names the two parts just described and explains why the arrangement is tolerable at all, which is the claim the next sentence qualifies."
+      },
+      {
+        "label": "D",
+        "role": "contrast",
+        "why_here": "It takes the affordability just asserted and names its condition, then gives the case in which the condition fails."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "'Where it is a form of words' picks up the failure just described and says what the arrangement then amounts to, which is the point the description was heading for."
+      }
+    ],
+    "links": [
+      {
+        "from": "B",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The pairing' has exactly one antecedent, the permission and the duty to refer that the previous sentence puts in a single provision."
+      },
+      {
+        "from": "A",
+        "to": "D",
+        "tie": "lexical",
+        "explanation": "'Affordable only where' picks up the affordability the previous sentence claims and attaches a condition to it, so the two cannot be separated."
+      },
+      {
+        "from": "D",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'Where it is a form of words' repeats the previous sentence's own description of a referral that cannot be performed."
+      }
+    ],
+    "violation_named": "The four core sentences describe one pairing and what happens when its second half fails. The odd sentence raises where an objection properly begins, whether counting instruments after a procedure is participation in it. That is a question about the size of the first half, and the description never asks it.",
+    "why_it_breaks": "No sentence here needs the boundary of participation. The pairing is affordable because the applicant still gets the service; the condition is that somebody else is available; the veto appears when nobody is. A case about what a nurse may be asked to do after declining bears on none of these, and no sentence afterwards returns to the scope of an objection, so the question opens and closes in one line.",
+    "trap_exposed": "The camouflage is that the case is of exactly the right kind, a professional, a conscience, a task declined, and that the description contains a concrete case of its own, so the odd sentence is not the only sentence with a particular situation in it. The test is which claim a case is offered for. The decoy is the core's own case, the district with one dispensing practice, which reads like an illustration that could be dropped, though the closing sentence's form of words comes from nowhere else. And the attachment test does not separate it: it opens on the same provision, the very clause the description started from.",
+    "exclusion_analysis": [
+      {
+        "label": "B",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports what provisions say rather than what the description argues, so a reader who has grasped the point may treat it as preamble.",
+        "what_breaks": "Without it 'the pairing' names nothing, and an account of why the arrangement works never says what its two parts are."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It explains an absence of conflict rather than an event, which makes its role in the sequence hard to name quickly.",
+        "what_breaks": "Without it the condition named next is a condition on nothing, and the paragraph never says why a permission to decline was tolerable in the first place."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence that names a place, and a rural dispensing practice reads like an example inserted into a general description.",
+        "what_breaks": "Without it the closing sentence's form of words has never been produced, and the veto appears with no failure behind it."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It delivers a verdict on the arrangement, which can look like a conclusion attached to a description that had already finished.",
+        "what_breaks": "Without it the description names a condition and a case where it fails and stops, leaving the reader with a broken condition and no account of the consequence."
+      }
+    ],
+    "detection_habit": "When a case arrives, say which sentence it is a case of. A case from the right profession, raising a real difficulty, can still belong to a question the paragraph has not asked."
+  },
+  "mentor": {
+    "challenge": "Two of these sentences give you a particular situation. Only one of them is a situation the description has a claim for.",
+    "takeaway": "A hard case is not an illustration until you can name the sentence it illustrates."
+  }
+}

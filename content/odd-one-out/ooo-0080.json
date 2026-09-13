@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0080",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "literature-theory",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "title": "The Line Nobody Wrote",
+    "theme": "how quotations invented by novelists and credited to poets who never existed showed what a chapter epigraph had been doing all along",
+    "estimated_time_sec": 110,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "B",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is about a device at the head of a chapter that flourished and then vanished, which is the story's own shape and very nearly its own subject. The decoy is the sentence about invented epigraphs vouching for nothing, whose flat logical move reads like commentary in a narrative."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "hold_the_purpose",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "hold a narrative's subject to one device and recognise a sentence about a neighbouring device that shares its position on the page",
+    "reasoning_patterns": [
+      "comp.purpose",
+      "scope.true_but_off_question",
+      "disc.chronology",
+      "disc.lexical_chain",
+      "comp.organization"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence saying that an invented epigraph vouches for nothing: it is a logical step rather than an event, and a reader assembling a history may treat it as commentary. It stays because the closing sentence says the fabricated ones exposed the borrowed ones rather than replacing them, which is only intelligible once the vouching has been shown to have failed; remove it and the story reports a fashion for invented quotations and never says what it revealed. The sentence about chapter headings that gave the events away is the visitor. It is about a device in the same position on the page, with the same kind of history, but the story follows what one device was doing and how that was exposed, and a heading that summarises is a different device whose disappearance nothing here explains or uses.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of epigraphs in fiction; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "The outlier sits in the same place on the page, in the same period, and has the same rise-and-fall shape as the story. Only the device differs, which is the narrowest version of a topically alien sentence and the reason the item sits at the advanced tier rather than lower."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Readers who could not place the line took the vouching on trust, and within a generation the quotations were being written by the novelists themselves and credited to poets who had never existed."
+    },
+    {
+      "label": "B",
+      "text": "The fabricated ones did not replace the borrowed ones so much as expose them, and a novelist choosing a real line today chooses it for the key it strikes rather than for the authority it lends."
+    },
+    {
+      "label": "C",
+      "text": "A heading that gave the chapter's events away in a phrase sat above many such quotations for generations and then vanished from the novel without anybody having argued about it in print."
+    },
+    {
+      "label": "D",
+      "text": "An invented epigraph vouches for nothing, so what the device had been doing had to be something else, and what it had been doing all along was setting a key before the first sentence."
+    },
+    {
+      "label": "E",
+      "text": "A quotation set at the head of a chapter began as a citation, offered by novelists who wanted a line of verse to vouch for a scene they thought might be doubted."
+    }
+  ],
+  "outlier": "C",
+  "core_order": [
+    "E",
+    "A",
+    "D",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence story of the epigraph, from the line borrowed to vouch for a scene to the novelist choosing one today. The sentence about a different device in the same corner of the page is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one story in four stages. A quotation at the head of a chapter began as a citation, meant to vouch for a doubtful scene; readers who could not place the line took the vouching on trust, and soon the quotations were being invented and credited to poets who never existed; an invented epigraph vouches for nothing, so the device must have been doing something else, namely setting a key; and the fabrications exposed the borrowings rather than replacing them. Origin, forgery, exposure, what remains.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "background",
+        "why_here": "It supplies the device and its original purpose, the vouching that the rest of the story undermines."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The line' and 'the vouching' are both supplied by the previous sentence, and this stage introduces the invented quotations the argument turns on."
+      },
+      {
+        "label": "D",
+        "role": "development",
+        "why_here": "'An invented epigraph' names what the previous stage produced, and this is where the story extracts its point from the forgery."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "'The fabricated ones' and 'the borrowed ones' are the two kinds the story has now assembled, and the closing sentence says what the first did to the second."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The line' and 'the vouching' both point at the citation the previous sentence describes, so the readers' trust is trust in exactly that."
+      },
+      {
+        "from": "A",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'An invented epigraph' names the kind the previous sentence introduces, which is what makes the inference available."
+      },
+      {
+        "from": "D",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'The fabricated ones' counts back to the invented quotations and sets them against the borrowed ones, so the closing claim needs both stages."
+      }
+    ],
+    "violation_named": "The four core sentences follow one device: what an epigraph was for, what forging one showed, and what choosing a real one means now. The odd sentence is about a chapter heading that summarises the chapter. Same corner of the page, same century, a different device.",
+    "why_it_breaks": "Nothing in the story causes the heading's disappearance and nothing in it uses that disappearance. The epigraph's history turns on a claim of authority being exposed as unnecessary; a summarising heading makes no claim of authority and its quiet end is explained by nothing here. No later sentence returns to headings or to what a chapter announces about itself, so the sentence brings a second device and takes it away again.",
+    "trap_exposed": "The camouflage is position and shape. Both devices sit at the head of a chapter, both belong to the same stretch of the novel's history, and both are described as flourishing and then going, so a reader matching on subject and on narrative form will admit the stray sentence. The test is whether any stage of this story needs it. The decoy is the sentence about invented epigraphs vouching for nothing, which is a logical step among events and so looks like commentary, though the conclusion is unintelligible without it. And the attachment test does not separate it: it names the quotations themselves and places itself above them on the page.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports an origin without saying anything the story does not repeat later, so a reader may treat it as scene-setting.",
+        "what_breaks": "Without it the vouching taken on trust has never been offered, and a story about a claim of authority never says what the claim was."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It moves from readers to novelists inside one sentence, which makes its place in a sequence of stages harder to name.",
+        "what_breaks": "Without it the invented epigraphs have never appeared, and the inference drawn next is drawn from nothing."
+      },
+      {
+        "label": "D",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence that reasons rather than narrates, so its logical tread feels imported into a history.",
+        "what_breaks": "Without it the story reports a fashion for forgery and never says what it revealed, and the closing claim about exposure has nothing behind it."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It reaches to the present day and to how novelists choose now, which can look like an appendix to a finished story.",
+        "what_breaks": "Without it the story stops at an inference and never says what became of the borrowed epigraph, which is the thing it set out to explain."
+      }
+    ],
+    "detection_habit": "When two devices share a position on the page, name the one your paragraph is following and hold every sentence to it. Neighbours in a book are not neighbours in an argument."
+  },
+  "mentor": {
+    "challenge": "Two things here live at the top of a chapter and both had a century and then vanished. Only one of them is the story being told.",
+    "takeaway": "Sharing a position on the page is not sharing a history. Name the device your paragraph is following."
+  }
+}

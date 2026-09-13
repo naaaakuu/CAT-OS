@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0054",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "institutions",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "When the Chair Speaks First",
+    "theme": "what a chair's early statement takes out of a committee's discussion, and why the bodies that have understood it change the order of business rather than the manners",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "expository",
+    "nucleus": "A",
+    "violation_type": "method_vs_finding",
+    "difficulty_vector": {
+      "topical_overlap": 5,
+      "violation_subtlety": 4,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The core carries its own figure, a discussion about a third shorter, so the outlier is not the only sentence with a quantity in it, and its subject is a comparison rather than a team of researchers. The decoy is the sentence reporting that the same members object freely when the chair speaks last, which reads like a stray control condition inserted into an explanation."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "separate a sentence that reports how a comparison was set up from the sentences that report what it showed, and test the separation by asking which of them any later sentence needs",
+    "reasoning_patterns": [
+      "arg.evidence_vs_conclusion",
+      "comp.organization",
+      "disc.lexical_chain",
+      "disc.topic_progression",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence saying that the same members raise the same objections once the chair has taken to speaking last: it reads like a note on a control condition dropped into an explanation, and a reader looking for the odd procedural sentence may seize on it. It stays because the sentence after it opens on the alternative it has just closed off, and because without it the explanation never rules out simple deference, which is the reading it exists to defeat. The sentence about meetings recorded in eleven organisations is the visitor. It is about the same material and it carries a quantity, as the opening sentence does, but it reports how the comparison was assembled rather than anything the comparison showed, and no sentence in the paragraph needs the eleven organisations, the two years or the matching to say what it says.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of speaking order in committees; no specific study adapted, and the figures are illustrative. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "Written against the catalogue tell that a method versus finding outlier is simply the sentence with the numbers in it. The core carries a figure of its own, the outlier's subject is a comparison rather than a research team, and the exclusion has to be made on the chain: the shortening, the alternative to deference and the account of the interval are each unusable without their neighbour."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "If it is not deference it is something about ownership, since an early statement removes the interval in which a position is still nobody's, and an objection to nobody's position costs the objector nothing, which leaves open what a body can do about it."
+    },
+    {
+      "label": "B",
+      "text": "Bodies that act on that account of the interval put the chair last by standing order rather than by encouragement, since a rule built into the order of business survives a difficult meeting and an exhortation does not."
+    },
+    {
+      "label": "C",
+      "text": "The comparison rests on meetings recorded in eleven organisations over two years, matched for size and for the kind of business they took."
+    },
+    {
+      "label": "D",
+      "text": "The shortening is not deference in any simple sense, because the same members raise the same objections in the same room once the chair has taken to speaking last."
+    },
+    {
+      "label": "E",
+      "text": "Where the chair states a view before anyone else speaks, the discussion that follows is about a third shorter and the objections raised in it are narrower."
+    }
+  ],
+  "outlier": "C",
+  "core_order": [
+    "E",
+    "D",
+    "A",
+    "B"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence explanation of what the chair's early statement does to a discussion, from the observed shortening to the remedy bodies actually adopt. The sentence that reports how the evidence was gathered rather than what it showed is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core explains one effect in four moves. It reports what happens when the chair speaks first, a shorter discussion with narrower objections; rules out the obvious explanation, since the same members object freely when the chair speaks last; supplies the explanation that survives, that an early statement removes the interval in which a position belongs to nobody; and ends with what bodies that accept the account actually do, which is to fix the order rather than exhort anybody. Effect, rejected cause, real cause, remedy.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "topic",
+        "why_here": "It states the effect the whole paragraph exists to explain, and both the rejected cause and the accepted one are candidates for exactly this shortening."
+      },
+      {
+        "label": "D",
+        "role": "contrast",
+        "why_here": "'The shortening' names the effect just reported and removes the reading a reader would otherwise settle for, which is what makes an explanation necessary."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'If it is not deference' takes the previous sentence's denial as given and supplies the account that replaces it, which is the paragraph's central claim."
+      },
+      {
+        "label": "B",
+        "role": "conclusion",
+        "why_here": "'That account of the interval' points at the claim just made and turns it into the practice a body adopts, which is where an explanation with a consequence ends."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'The shortening' has exactly one antecedent, the shorter discussion just reported, and the sentence exists to deny an explanation of it."
+      },
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "conjunction",
+        "explanation": "'If it is not deference' takes over the denial the previous sentence has just made and cannot be read without it."
+      },
+      {
+        "from": "A",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'That account of the interval' names the explanation just given, so the closing practice is a practice adopted on the strength of exactly this claim."
+      }
+    ],
+    "violation_named": "The four core sentences say what was found and what it means: an effect, a cause ruled out, a cause accepted, a practice adopted. The odd sentence says how the material was collected, how many organisations, over how long, and matched on what. That is method reported inside an exposition of findings.",
+    "why_it_breaks": "Nothing in the explanation rests on the design. The denial of deference rests on members behaving differently under a different order, not on the matching; the account of the interval rests on what an early statement removes; the closing practice rests on the account. No sentence needs to know that there were eleven organisations, and no sentence afterwards returns to them, so the sentence arrives with a body of detail and leaves without having handed anything on.",
+    "trap_exposed": "The camouflage is arithmetic and voice. A reader who has learned that the method sentence is the one with numbers in it will find a figure in the opening line as well, and the odd sentence's subject is a comparison rather than a team of investigators, so it sounds like the paragraph's own material. The test is the chain: every other sentence opens on a phrase its neighbour supplied. The decoy is the sentence about members objecting freely when the chair speaks last, which reads like a control condition recorded in passing, and is in fact the only thing standing between the paragraph and the explanation it rejects.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It reports a bare effect with no explanation attached, so a reader who has found the paragraph's idea may treat it as a preliminary the argument has outgrown.",
+        "what_breaks": "Without it 'the shortening' names nothing, and the paragraph explains and then remedies an effect it never states."
+      },
+      {
+        "label": "D",
+        "mistake_type": "local_smoothness",
+        "why_tempting": "It reads like evidence dropped into an explanation, and its members raising objections in the same room have the texture of an aside.",
+        "what_breaks": "Without it the next sentence opens on a denial nobody has made, and the explanation offered competes with a simpler one the paragraph never removes."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the most abstract sentence in the set, with an interval and an unowned position in place of anything a reader can picture.",
+        "what_breaks": "Without it the closing sentence points at an account of the interval that the paragraph has not given, and the remedy becomes a rule with no reason behind it."
+      },
+      {
+        "label": "B",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It turns from explanation to practice and offers advice about standing orders, which can look like an addition rather than a part.",
+        "what_breaks": "Without it the paragraph explains a mechanism and stops, and the one thing the explanation was good for, knowing which repair will hold, is never stated."
+      }
+    ],
+    "detection_habit": "Sort the sentences into what was found and how it was found, then ask which of them any later sentence actually uses. A design sentence can be true, relevant and well written and still be the one nothing in the paragraph leans on."
+  },
+  "mentor": {
+    "challenge": "One of these five sentences tells you how the evidence was assembled. Before you decide that this makes it the intruder, check which of the others would notice if it went.",
+    "takeaway": "A finding is used by the sentence after it. A description of the method is often used by nobody."
+  }
+}

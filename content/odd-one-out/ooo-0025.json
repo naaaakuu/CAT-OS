@@ -43,7 +43,10 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring"
+    ],
     "mission": "watch_the_scope",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +56,12 @@
       "expert_reviewed": false
     },
     "learning_objective": "tell a judgement that serves an explanation from one that replaces it, and see that the second also reaches further than anything the explanation claims",
-    "reasoning_patterns": ["arg.description_vs_evaluation", "disc.stance_continuity", "scope.abstraction_level", "comp.purpose"],
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "disc.stance_continuity",
+      "scope.abstraction_level",
+      "comp.purpose"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the sentence listing the restrictions, a widow keeping to the house and a name left unspoken: it is the only concrete sentence in a set of reasoning, and its list makes it feel like illustration bolted on. It stays because the restrictions it names are precisely the ones the next sentence says are lifted on a single day, which is the whole evidence for the claim. A second rival is the opening, which now carries a complaint of its own about the custom being filed under superstition; that complaint is the reason the explanation is being offered at all, and the paragraph answers it in the last line. The sentence weighing what a long mourning takes against what the ceremony returns is the one that cannot be placed: it settles the worth of the practice, which nothing here has asked about, and settles it for a class of observances rather than for the custom the others are working on.",
@@ -77,38 +85,109 @@
     "reviewer_notes": "A foundation item on the plainest stance break there is: four sentences explain what a practice does, one decides what it is worth. Two sentences carry opinions, so the break cannot be found by tone, and the decoy teaches the beginner not to exclude a sentence for having a different texture."
   },
   "sentences": [
-    { "label": "A", "text": "In many societies the dead are buried twice, once shortly after death and again months or years later, when the bones are cleaned and carried to a common resting place; the custom is too readily filed under superstition." },
-    { "label": "B", "text": "When the bones are finally moved, those restrictions end on the same day, which suggests the ceremony marks the close of a term the living have been serving." },
-    { "label": "C", "text": "The interval between the two burials is not empty, and it is the survivors who fill it: a widow keeps to the house, a household gives no feasts, a name goes unspoken." },
-    { "label": "D", "text": "The body, in other words, supplies the calendar for a repair that is being carried out among the living rather than performed upon the dead." },
-    { "label": "E", "text": "Mourning of this length takes more from a household than the ceremony at its close gives back, and such observances shorten steadily wherever they are let alone." }
+    {
+      "label": "A",
+      "text": "In many societies the dead are buried twice, once shortly after death and again months or years later, when the bones are cleaned and carried to a common resting place; the custom is too readily filed under superstition."
+    },
+    {
+      "label": "B",
+      "text": "When the bones are finally moved, those restrictions end on the same day, which suggests the ceremony marks the close of a term the living have been serving."
+    },
+    {
+      "label": "C",
+      "text": "Mourning of this length takes more from a household than the ceremony at its close gives back, and such observances shorten steadily wherever they are let alone."
+    },
+    {
+      "label": "D",
+      "text": "The body, in other words, supplies the calendar for a repair that is being carried out among the living rather than performed upon the dead."
+    },
+    {
+      "label": "E",
+      "text": "The interval between the two burials is not empty, and it is the survivors who fill it: a widow keeps to the house, a household gives no feasts, a name goes unspoken."
+    }
   ],
-  "outlier": "E",
-  "core_order": ["A", "C", "B", "D"],
+  "outlier": "C",
+  "core_order": [
+    "A",
+    "E",
+    "B",
+    "D"
+  ],
   "builder": {
     "prompt": "Build the four-sentence explanation of what the second burial is actually marking. The sentence that has settled what the practice is worth, rather than working out what it does, is your answer."
   },
   "explanation": {
     "spine_note": "The core argues one point in four steps. It opens with the practice, two burials separated by a long interval, then shows that the interval is filled by rules the living keep. The third sentence notes that those rules end on the day the bones are moved, and draws the inference that the ceremony closes a term served by the mourners; the fourth states the conclusion in a line. Practice, interval, inference, point.",
     "core_roles": [
-      { "label": "A", "role": "topic", "why_here": "It describes the custom the paragraph is about, it is the only sentence that establishes that there are two burials at all, and its complaint about the usual filing is what the explanation exists to answer." },
-      { "label": "C", "role": "development", "why_here": "It fills the interval the first sentence opened, and supplies the restrictions the argument will need to observe ending." },
-      { "label": "B", "role": "evidence", "why_here": "'Those restrictions' picks up the list just given and reports the fact the whole inference rests on, that they stop together on one day." },
-      { "label": "D", "role": "conclusion", "why_here": "'In other words' compresses the inference into the paragraph's point, that the calendar belongs to the mourners and the body only keeps it, which is the answer to the filing the opening objected to." }
+      {
+        "label": "A",
+        "role": "topic",
+        "why_here": "It describes the custom the paragraph is about, it is the only sentence that establishes that there are two burials at all, and its complaint about the usual filing is what the explanation exists to answer."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "It fills the interval the first sentence opened, and supplies the restrictions the argument will need to observe ending."
+      },
+      {
+        "label": "B",
+        "role": "evidence",
+        "why_here": "'Those restrictions' picks up the list just given and reports the fact the whole inference rests on, that they stop together on one day."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "'In other words' compresses the inference into the paragraph's point, that the calendar belongs to the mourners and the body only keeps it, which is the answer to the filing the opening objected to."
+      }
     ],
     "links": [
-      { "from": "A", "to": "C", "tie": "lexical", "explanation": "'The interval between the two burials' names the gap the first sentence created, so the second sentence begins from exactly what the first left." },
-      { "from": "C", "to": "B", "tie": "reference", "explanation": "'Those restrictions' points back at the widow, the household and the unspoken name; without that list the phrase has nothing to hold." },
-      { "from": "B", "to": "D", "tie": "conjunction", "explanation": "'In other words' signals restatement at a higher level, taking the inference just drawn and putting it as the paragraph's claim." }
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "lexical",
+        "explanation": "'The interval between the two burials' names the gap the first sentence created, so the second sentence begins from exactly what the first left."
+      },
+      {
+        "from": "E",
+        "to": "B",
+        "tie": "reference",
+        "explanation": "'Those restrictions' points back at the widow, the household and the unspoken name; without that list the phrase has nothing to hold."
+      },
+      {
+        "from": "B",
+        "to": "D",
+        "tie": "conjunction",
+        "explanation": "'In other words' signals restatement at a higher level, taking the inference just drawn and putting it as the paragraph's claim."
+      }
     ],
     "violation_named": "The four core sentences explain what the practice does. The opening judges too, but it judges a way of describing the custom and so sets the explanation going. The odd sentence judges the custom itself, weighing what it costs a household against what it returns, and decides against it. That is a change of stance, from an account of what a practice is doing to a verdict on whether it is worth doing, and nothing in the paragraph invites or answers a verdict of that kind.",
     "why_it_breaks": "The judgement also reaches much further than anything the core claims. The core is working on one custom and one interval; the stray sentence speaks of observances of this length as a class and predicts what becomes of them wherever they are unenforced. It receives nothing from the sentence before it and gives nothing to the sentence after, because a paragraph that is working out what a practice marks cannot use a sentence that has already priced it.",
     "trap_exposed": "The disguise is bookkeeping. The stray sentence does not shout, and it does not pity anybody; it keeps the paragraph's nouns, weighs a cost against a return in the flat voice the rest of the set uses, and arrives in a paragraph whose first sentence has already permitted itself an opinion. A reader who eliminates the sentence with feeling in it will find nothing to eliminate. The planted decoy is the sentence of particulars, a widow indoors, a household that gives no feasts, a name unspoken, which has a texture unlike everything around it and is nonetheless the sentence the inference depends on.",
     "exclusion_analysis": [
-      { "label": "A", "mistake_type": "premature_closure", "why_tempting": "Most of it reads like a definition from a reference book, and then it ends on an opinion about how the custom is classified, which can look like a second sentence bolted to a first.", "what_breaks": "Without it there is no second burial in the paragraph, so the interval, the restrictions and the day the bones are moved all refer to a custom the reader has never been shown, and the closing point answers nobody." },
-      { "label": "C", "mistake_type": "surface_oddity", "why_tempting": "Its three concrete particulars sit oddly among abstract sentences, so it feels like an illustration borrowed from somewhere else.", "what_breaks": "Without it 'those restrictions' in the next sentence has no antecedent, and the argument asserts that something ends without ever saying what." },
-      { "label": "B", "mistake_type": "hardest_to_place", "why_tempting": "It both reports a fact and draws a conclusion from it, so a reader deciding whether it is evidence or claim may set it aside.", "what_breaks": "Without it the paragraph jumps from a list of mourning rules to a conclusion about calendars, with the observation that joins them missing." },
-      { "label": "D", "mistake_type": "no_uniqueness_test", "why_tempting": "It says in a single line what the sentence before it has already suggested, so it can look like a repetition the set could spare.", "what_breaks": "Without it the argument stops at a suggestion and never states the point, and the contrast between work done among the living and work done on the dead is never made." }
+      {
+        "label": "A",
+        "mistake_type": "premature_closure",
+        "why_tempting": "Most of it reads like a definition from a reference book, and then it ends on an opinion about how the custom is classified, which can look like a second sentence bolted to a first.",
+        "what_breaks": "Without it there is no second burial in the paragraph, so the interval, the restrictions and the day the bones are moved all refer to a custom the reader has never been shown, and the closing point answers nobody."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "Its three concrete particulars sit oddly among abstract sentences, so it feels like an illustration borrowed from somewhere else.",
+        "what_breaks": "Without it 'those restrictions' in the next sentence has no antecedent, and the argument asserts that something ends without ever saying what."
+      },
+      {
+        "label": "B",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It both reports a fact and draws a conclusion from it, so a reader deciding whether it is evidence or claim may set it aside.",
+        "what_breaks": "Without it the paragraph jumps from a list of mourning rules to a conclusion about calendars, with the observation that joins them missing."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It says in a single line what the sentence before it has already suggested, so it can look like a repetition the set could spare.",
+        "what_breaks": "Without it the argument stops at a suggestion and never states the point, and the contrast between work done among the living and work done on the dead is never made."
+      }
     ],
     "detection_habit": "Do not ask which sentence has an opinion; ask what its opinion is about. A judgement on how a thing is usually described can open an explanation, and a judgement on whether the thing is worth doing ends one."
   },

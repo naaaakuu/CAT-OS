@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0062",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "media",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Column Left Empty",
+    "theme": "how a narrow blank column kept for late news trained a way of opening a newspaper that outlasted the column itself",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "narrative",
+    "nucleus": "C",
+    "violation_type": "thread_break",
+    "difficulty_vector": {
+      "topical_overlap": 3,
+      "violation_subtlety": 2,
+      "violation_locus": "global",
+      "abstractness_vocab": 2,
+      "length_syntax_load": 2,
+      "core_structure_strength": 4,
+      "decoy_load": 2
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier is set in the same building in the same years and reports a change of exactly the kind the story is made of, so it reads as another stage of the same history. The decoy is the sentence about readers looking at the column first, which leaves the printing house for the breakfast table just as the story seemed to be about machinery."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "coherence_monitoring",
+      "given_new_tracking",
+      "relatedness_vs_belonging"
+    ],
+    "mission": "test_the_ties",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "follow one thread through a short history and notice a sentence that reports a change in the same place at the same time without belonging to the sequence",
+    "reasoning_patterns": [
+      "disc.chronology",
+      "comp.organization",
+      "disc.lexical_chain",
+      "disc.given_new",
+      "comp.function_over_words"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence about readers looking at the column first: it leaves the machinery for the breakfast table, and a reader following a story about presses may call it a change of subject. It stays because the last sentence speaks of the habit the column had trained, and this is the only sentence in which a habit is trained; remove it and the ending names something the story never produced. The sentence about the composing room moving to the basement is the break. It happens in the same building in the same years, and it has the shape of a stage in a history, but the story runs from a blank column to the habit it left behind, and a move of the type-setters downstairs is a different change that nothing here causes and nothing here uses.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of late-news columns in newspapers; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "An easy-tier thread break that does not rely on a false connective. The outlier simply joins a second sequence, in the same place and period, and is caught by asking which stage of the column's story would miss it. The core's joints are a demonstrative, a place adverb and a named habit."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Readers learned to look there first, and a paper whose column stood blank on a night when something had happened lost buyers in the morning."
+    },
+    {
+      "label": "B",
+      "text": "The composing room that set the column was moved to the basement in those years, and the boys who had carried type up two flights were no longer needed."
+    },
+    {
+      "label": "C",
+      "text": "When plates could be changed in minutes the column was abandoned, and the habit it had trained, of opening a paper at its least finished corner, outlasted it by a generation."
+    },
+    {
+      "label": "D",
+      "text": "Until the presses could be stopped and started again cheaply, a newspaper left one narrow column of its front page empty when the pages went to the machines."
+    },
+    {
+      "label": "E",
+      "text": "That column was filled by hand in the last minutes before printing, with a result, a verdict or a death, set in whatever type was nearest."
+    }
+  ],
+  "outlier": "B",
+  "core_order": [
+    "D",
+    "E",
+    "A",
+    "C"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence story of the blank column, from the page that went to the machines with a hole in it to the habit that outlived the column. The sentence that reports a different change in the same building is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core tells one story in four stages. A newspaper left a narrow column empty because stopping the presses was expensive; the column was filled by hand in the last minutes with whatever had come in; readers learned to look there first, and a blank column on an eventful night cost the paper buyers; and when plates could be changed quickly the column went, leaving behind the habit it had trained. Cause, practice, consequence for readers, end and residue.",
+    "core_roles": [
+      {
+        "label": "D",
+        "role": "background",
+        "why_here": "It supplies the technical condition the whole story rests on, and the column whose fate every later sentence follows."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'That column' names the empty space just described, and this is the stage at which it is put to use."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'There' points at the column just shown being filled, and this stage moves the story from the printing house to the reader, where the habit is formed."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "It removes the condition the story opened with and reports what survived, and the habit it names is the one the previous sentence describes readers acquiring."
+      }
+    ],
+    "links": [
+      {
+        "from": "D",
+        "to": "E",
+        "tie": "reference",
+        "explanation": "'That column' has exactly one antecedent, the narrow empty column the previous sentence leaves on the page."
+      },
+      {
+        "from": "E",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'There' points at the column just shown being filled at the last minute, which is why readers have a reason to look at it first."
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "lexical",
+        "explanation": "'The habit it had trained' names the reading habit the previous sentence describes forming, so the closing residue cannot be stated without it."
+      }
+    ],
+    "violation_named": "The four core sentences follow one thread: a column left empty, filled, watched, and finally abandoned, with the habit surviving it. The odd sentence reports the composing room moving downstairs and boys losing their errands. That is a second change in the same building, and it belongs to a different sequence.",
+    "why_it_breaks": "Nothing in the column's story causes the move and nothing in it uses the move. The filling of the column was a matter of minutes before printing, not of which floor the type was set on; readers' habits owe nothing to the stairs; and the abandonment is explained by plates that could be changed quickly. No later sentence returns to the composing room or to the boys, so the sentence arrives with its own small history and leaves with it.",
+    "trap_exposed": "The camouflage is place and period. A move to the basement happens in the same building, in the same years, and has exactly the shape of a stage in a story of printing, so a reader matching on setting will admit it. The test is not whether a sentence could have happened alongside the others but whether the others need it. The decoy is the sentence about readers looking at the column first, which leaves the machinery for the breakfast table and looks like a departure, though it is the only place the habit named in the ending is formed. And the attachment test does not separate it: it names the column, and dates itself to those years, so it reads as a stage already placed in the sequence.",
+    "exclusion_analysis": [
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It is about presses rather than about news, so a reader who has decided the story is about journalism may treat it as technical background.",
+        "what_breaks": "Without it the column has never been left empty, and 'that column' in the next sentence points at nothing at all."
+      },
+      {
+        "label": "E",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "Its list of a result, a verdict and a death reads like a detail rather than an event, so a reader sorting the story into moments may not find one for it.",
+        "what_breaks": "Without it the column is never filled, and readers are said to look somewhere no sentence has put anything worth looking at."
+      },
+      {
+        "label": "A",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence outside the printing house, and buyers lost in the morning sound like commerce rather than production.",
+        "what_breaks": "Without it the habit named in the closing sentence has never been trained, and the story ends by preserving something it never created."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It is the longest sentence and reaches past the practice it describes, which can make it look like a summary added afterwards.",
+        "what_breaks": "Without it the column is never abandoned, and a story about a practice ended by better machinery stops before the machinery arrives."
+      }
+    ],
+    "detection_habit": "Lay the sentences out as stages of one story and ask, for each, which stage caused it and which stage uses it. A change that happened in the same place at the same time can still belong to a different history."
+  },
+  "mentor": {
+    "challenge": "Five sentences from one printing house. Four of them are stages of a single story, and one is a change that merely happened nearby.",
+    "takeaway": "Same building, same decade, different story. A stage has a cause behind it and a use in front of it."
+  }
+}

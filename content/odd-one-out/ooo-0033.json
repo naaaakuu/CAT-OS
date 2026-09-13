@@ -20,7 +20,7 @@
       "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
     },
     "spine_type": "expository",
-    "nucleus": "B",
+    "nucleus": "A",
     "violation_type": "method_vs_finding",
     "difficulty_vector": {
       "topical_overlap": 5,
@@ -43,7 +43,11 @@
       "conjunction": true,
       "lexical_overlap": true
     },
-    "dna_traits": ["relatedness_vs_belonging", "coherence_monitoring", "candidate_model_maintenance"],
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "candidate_model_maintenance"
+    ],
     "mission": "watch_the_scope",
     "validation": {
       "uniqueness_of_answer": "pass",
@@ -53,7 +57,13 @@
       "expert_reviewed": false
     },
     "learning_objective": "separate a sentence describing how an instrument is administered from the sentences explaining what its results mean, and notice that only one of the two is being written here",
-    "reasoning_patterns": ["arg.description_vs_evaluation", "comp.function_over_words", "disc.function_slot", "scope.true_but_off_question", "disc.given_new"],
+    "reasoning_patterns": [
+      "arg.description_vs_evaluation",
+      "comp.function_over_words",
+      "disc.function_slot",
+      "scope.true_but_off_question",
+      "disc.given_new"
+    ],
     "quality": {
       "status": "reviewed",
       "adversarial_review": "The rival is the sentence about sums named for cleaner rivers: it introduces an example and a fresh dimension, which objects attract the largest overstatement, so a reader who thinks the explanation closed a sentence earlier will drop it. It stays because its 'rival claims' is what the closing sentence calls competition, and because without it the account never predicts anything. The sentence about fixed wording and comparability across samples describes how the instrument is run; the four core sentences explain what its numbers are made of, and no step of that explanation turns on the procedure being standardised.",
@@ -72,38 +82,109 @@
     "reviewer_notes": "The outlier is the methods paragraph of a report standing in a paragraph of findings. It is written in the same register as the core and about the same instrument, so only the question each sentence answers separates them."
   },
   "sentences": [
-    { "label": "A", "text": "Such surveys set out a described situation and ask for a maximum sum, with the wording fixed in advance so that answers can be compared across samples and across years." },
-    { "label": "B", "text": "The gap is not simple dishonesty: a stated sum costs nothing, so it is assembled from what the thing seems to be worth, while a real payment is assembled from whatever else the money was about to do." },
-    { "label": "C", "text": "What the survey measures, then, is a valuation stripped of the competition that makes valuing difficult, which is a real quantity, though not the one the question appeared to ask for." },
-    { "label": "D", "text": "Ask people what they would pay for something and the answer comes back high, reliably and by a wide margin." },
-    { "label": "E", "text": "That is why the overstatement grows with the nobility of the object, since a sum named for cleaner rivers carries no rival claims with it and a sum handed over carries all of them." }
+    {
+      "label": "A",
+      "text": "The gap is not simple dishonesty: a stated sum costs nothing, so it is assembled from what the thing seems to be worth, while a real payment is assembled from whatever else the money was about to do."
+    },
+    {
+      "label": "B",
+      "text": "Such surveys set out a described situation and ask for a maximum sum, with the wording fixed in advance so that answers can be compared across samples and across years."
+    },
+    {
+      "label": "C",
+      "text": "What the survey measures, then, is a valuation stripped of the competition that makes valuing difficult, which is a real quantity, though not the one the question appeared to ask for."
+    },
+    {
+      "label": "D",
+      "text": "Ask people what they would pay for something and the answer comes back high, reliably and by a wide margin."
+    },
+    {
+      "label": "E",
+      "text": "That is why the overstatement grows with the nobility of the object, since a sum named for cleaner rivers carries no rival claims with it and a sum handed over carries all of them."
+    }
   ],
-  "outlier": "A",
-  "core_order": ["D", "B", "E", "C"],
+  "outlier": "B",
+  "core_order": [
+    "D",
+    "A",
+    "E",
+    "C"
+  ],
   "builder": {
     "prompt": "Build the four-sentence explanation of why named prices run high, from the finding to what the number really contains. The sentence that describes how the question is put rather than what the answer means is your answer."
   },
   "explanation": {
     "spine_note": "The core explains one finding in four steps. It opens with the finding itself, that stated sums run high and do so dependably, then refuses the easy explanation and supplies a better one: the two sums are built out of different materials. The third step uses that account to predict where the overstatement will be largest, and the fourth says what the survey number therefore is. Finding, mechanism, prediction, verdict.",
     "core_roles": [
-      { "label": "D", "role": "topic", "why_here": "It states the finding the rest of the paragraph explains, and its 'reliably' is what rules out treating the gap as noise." },
-      { "label": "B", "role": "development", "why_here": "'The gap' names what the opening reported, and this sentence gives the account everything after it uses, that a stated sum and a paid sum are assembled from different things." },
-      { "label": "E", "role": "development", "why_here": "'That is why' turns the account into a prediction, which is the test of an explanation and the step the closing verdict rests on." },
-      { "label": "C", "role": "conclusion", "why_here": "'Then' collects the mechanism and the prediction into a statement of what the instrument actually measures, which is where the exposition was going." }
+      {
+        "label": "D",
+        "role": "topic",
+        "why_here": "It states the finding the rest of the paragraph explains, and its 'reliably' is what rules out treating the gap as noise."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'The gap' names what the opening reported, and this sentence gives the account everything after it uses, that a stated sum and a paid sum are assembled from different things."
+      },
+      {
+        "label": "E",
+        "role": "development",
+        "why_here": "'That is why' turns the account into a prediction, which is the test of an explanation and the step the closing verdict rests on."
+      },
+      {
+        "label": "C",
+        "role": "conclusion",
+        "why_here": "'Then' collects the mechanism and the prediction into a statement of what the instrument actually measures, which is where the exposition was going."
+      }
     ],
     "links": [
-      { "from": "D", "to": "B", "tie": "reference", "explanation": "'The gap' refers to the distance between the named sum and the paid one that the opening has just reported." },
-      { "from": "B", "to": "E", "tie": "conjunction", "explanation": "'That is why' draws a consequence from the mechanism, so the prediction is not a new claim but the same claim applied." },
-      { "from": "E", "to": "C", "tie": "lexical", "explanation": "'The competition that makes valuing difficult' renames the rival claims of the previous sentence and turns them into the verdict." }
+      {
+        "from": "D",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'The gap' refers to the distance between the named sum and the paid one that the opening has just reported."
+      },
+      {
+        "from": "A",
+        "to": "E",
+        "tie": "conjunction",
+        "explanation": "'That is why' draws a consequence from the mechanism, so the prediction is not a new claim but the same claim applied."
+      },
+      {
+        "from": "E",
+        "to": "C",
+        "tie": "lexical",
+        "explanation": "'The competition that makes valuing difficult' renames the rival claims of the previous sentence and turns them into the verdict."
+      }
     ],
     "violation_named": "The odd sentence says how the instrument is administered: a described situation, a request for a maximum, wording held constant for comparability. The four core sentences say what its numbers are made of and what they are therefore worth. A statement of procedure and a statement of meaning answer different questions, and only one of them is being answered here.",
     "why_it_breaks": "Nothing in the explanation turns on the procedure. The mechanism concerns what a respondent's mind does with a costless sum, the prediction concerns which objects attract the largest overstatement, and the verdict concerns what the resulting number contains. Standardised wording is a virtue in a method and is irrelevant to all three, so the sentence receives no idea and passes none on.",
     "trap_exposed": "The camouflage is that it describes exactly the thing the paragraph is about, and it arrives in the register of a careful writer saying what the object under discussion is. Definition and description are the two commonest disguises a methods sentence wears. The decoy is the prediction about cleaner rivers, which brings in an example and a new dimension late, though it is the only sentence that shows the account doing any work.",
     "exclusion_analysis": [
-      { "label": "D", "mistake_type": "premature_closure", "why_tempting": "It is the shortest and plainest sentence in the set and reads like a remark rather than a step in an explanation.", "what_breaks": "Without it the paragraph explains a gap it has never reported, and the closing verdict corrects a reading of survey numbers that nobody in the paragraph has taken." },
-      { "label": "B", "mistake_type": "hardest_to_place", "why_tempting": "It opens by denying an accusation nobody has made, which can make it read as a reply to a paragraph the reader was not given.", "what_breaks": "Without it there is no account of the gap at all, and the prediction about noble objects has no mechanism to follow from." },
-      { "label": "E", "mistake_type": "surface_oddity", "why_tempting": "It is the only sentence with a concrete example in it, and its rivers stand out sharply against four lines of abstraction.", "what_breaks": "Without it the explanation never predicts anything, and the closing sentence's competition has no earlier form to be a restatement of." },
-      { "label": "C", "mistake_type": "no_uniqueness_test", "why_tempting": "Its concessive ending, a real quantity but not the one asked for, makes it look like a qualification added from outside the argument.", "what_breaks": "Without it the paragraph explains the overstatement and never says what the number is, leaving the reader with a warning instead of a finding." }
+      {
+        "label": "D",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It is the shortest and plainest sentence in the set and reads like a remark rather than a step in an explanation.",
+        "what_breaks": "Without it the paragraph explains a gap it has never reported, and the closing verdict corrects a reading of survey numbers that nobody in the paragraph has taken."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It opens by denying an accusation nobody has made, which can make it read as a reply to a paragraph the reader was not given.",
+        "what_breaks": "Without it there is no account of the gap at all, and the prediction about noble objects has no mechanism to follow from."
+      },
+      {
+        "label": "E",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence with a concrete example in it, and its rivers stand out sharply against four lines of abstraction.",
+        "what_breaks": "Without it the explanation never predicts anything, and the closing sentence's competition has no earlier form to be a restatement of."
+      },
+      {
+        "label": "C",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "Its concessive ending, a real quantity but not the one asked for, makes it look like a qualification added from outside the argument.",
+        "what_breaks": "Without it the paragraph explains the overstatement and never says what the number is, leaving the reader with a warning instead of a finding."
+      }
     ],
     "detection_habit": "Ask of each sentence whether it belongs to the methods or to the findings. A sentence about how a measurement is taken is not part of an explanation of what the measurement means, however exactly it names the instrument."
   },

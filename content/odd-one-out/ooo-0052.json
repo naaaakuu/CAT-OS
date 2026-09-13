@@ -1,0 +1,195 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ooo-0052",
+    "type": "ooo",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "scientific-method",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "medium",
+    "title": "The Arm That Had to Be Built",
+    "theme": "why the untreated arm of an experiment is a construction, and how what is put into it decides which rival explanation the comparison can exclude",
+    "estimated_time_sec": 100,
+    "format": {
+      "sentence_count": 5,
+      "response": "TITA",
+      "marking": "+3/0",
+      "format_verified": "2026-09: five sentences, TITA, +3 with no negative marking, consistent in released papers 2016 to 2025; re-verify against each new official paper"
+    },
+    "spine_type": "argument",
+    "nucleus": "D",
+    "violation_type": "topically_alien",
+    "difficulty_vector": {
+      "topical_overlap": 4,
+      "violation_subtlety": 3,
+      "violation_locus": "global",
+      "abstractness_vocab": 3,
+      "length_syntax_load": 3,
+      "core_structure_strength": 4,
+      "decoy_load": 3
+    },
+    "traps": {
+      "primary": "B",
+      "secondary": "A",
+      "description": "The outlier keeps every noun the core uses, arm, patients, treated, and states a real defect of comparisons, so it reads as the caution a fair argument owes its reader. The decoy is the clinical sentence contrasting patients left alone with patients visited as often as the treated ones, which drops from method to bedside just as the argument seemed abstract."
+    },
+    "cohesion_signals": {
+      "reference": true,
+      "substitution": false,
+      "ellipsis": false,
+      "conjunction": true,
+      "lexical_overlap": true
+    },
+    "dna_traits": [
+      "relatedness_vs_belonging",
+      "coherence_monitoring",
+      "given_new_tracking"
+    ],
+    "mission": "build_before_eliminating",
+    "validation": {
+      "uniqueness_of_answer": "pass",
+      "reconstruction_check": "pass",
+      "heuristic_adversarial": "pass",
+      "trap_audit": "pass",
+      "expert_reviewed": false
+    },
+    "learning_objective": "hold on to the one question an argument is answering, so that a true statement about the same apparatus can be seen to answer the next question along",
+    "reasoning_patterns": [
+      "comp.purpose",
+      "scope.true_but_off_question",
+      "disc.function_slot",
+      "disc.given_new",
+      "comp.organization"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the sentence contrasting patients who are left alone with patients who are visited as often as the treated ones: it reads like a clinical aside in a paragraph about the logic of comparison, and a reader tidying the argument will call it an illustration the argument could spare. It stays because the closing sentence speaks of a choice between those two arms, and the pair exists nowhere else in the set; without it the conclusion chooses between nothing. The sentence about patients who can tell which arm they are in is the visitor. It is true, it uses every noun the argument uses, and it names a genuine defect, but the argument asks what an arm is built out of and therefore what it can exclude, never who ends up standing in it, and no sentence before or after takes up the movement of patients between arms.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General account of the design of control conditions; no specific text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ooo-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ooo-003",
+    "reviewer_notes": "A medium-tier item whose outlier is a neighbouring question rather than a different subject. The chain is carried by three definite phrases, every such arm, those competitors, those two arms, each of which is orphaned the moment its neighbour is removed; the outlier opens with an indefinite noun phrase and is referred to by nothing."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Every such arm is in fact constructed, and what is put into it fixes which competing explanation the comparison can afterwards exclude."
+    },
+    {
+      "label": "B",
+      "text": "An arm of either kind loses a few patients to the other once they can tell which one they are in, and the ones who move are seldom a random selection."
+    },
+    {
+      "label": "C",
+      "text": "The commonest of those competitors is the attention itself, which is why an arm whose patients are simply left alone does a different job from an arm whose patients are visited as often as the treated ones."
+    },
+    {
+      "label": "D",
+      "text": "The choice between those two arms is therefore a choice of adversary, and an experiment conducted faultlessly against the weaker one has settled less than its report will claim."
+    },
+    {
+      "label": "E",
+      "text": "The untreated arm of an experiment is usually described as the absence of a treatment, a condition that looks as though it required no decisions from anybody."
+    }
+  ],
+  "outlier": "B",
+  "core_order": [
+    "E",
+    "A",
+    "C",
+    "D"
+  ],
+  "builder": {
+    "prompt": "Build the four-sentence argument about what an untreated arm actually is, from the description that makes it sound empty to what follows for an experiment that chose badly. The sentence that is answering a different question about the same apparatus is your answer."
+  },
+  "explanation": {
+    "spine_note": "The core makes one argument in four moves. It opens with the ordinary description of an untreated arm as a mere absence, corrects it by saying that such an arm is built and that its contents fix what the comparison can exclude, names the commonest thing it may fail to exclude, and closes by turning the whole matter into a choice of adversary that an otherwise faultless experiment can get wrong. Description, correction, the case at work, consequence.",
+    "core_roles": [
+      {
+        "label": "E",
+        "role": "topic",
+        "why_here": "It states the received account the argument exists to correct, and an argument that replaces a description has to put the description first."
+      },
+      {
+        "label": "A",
+        "role": "development",
+        "why_here": "'Every such arm' answers the description directly and states the claim the rest of the paragraph works out, that the contents of the arm fix what can be excluded."
+      },
+      {
+        "label": "C",
+        "role": "example",
+        "why_here": "It takes the competing explanations just named and shows the commonest of them deciding between two versions of the same arm."
+      },
+      {
+        "label": "D",
+        "role": "conclusion",
+        "why_here": "'Those two arms' collects the pair just set side by side and converts the whole argument into the choice an experimenter is actually making."
+      }
+    ],
+    "links": [
+      {
+        "from": "E",
+        "to": "A",
+        "tie": "reference",
+        "explanation": "'Every such arm' points back at the untreated arm just described, and the sentence contradicts what has just been said about it requiring no decisions."
+      },
+      {
+        "from": "A",
+        "to": "C",
+        "tie": "reference",
+        "explanation": "'Those competitors' has exactly one antecedent, the competing explanations the previous sentence says the arm's contents fix."
+      },
+      {
+        "from": "C",
+        "to": "D",
+        "tie": "reference",
+        "explanation": "'Those two arms' names the pair the previous sentence has just contrasted, so the closing choice cannot be stated without it."
+      }
+    ],
+    "violation_named": "The four core sentences answer one question: what an untreated arm is made of, and therefore which rival account the comparison can rule out. The odd sentence is about who ends up standing in an arm once the experiment is running. That is a different object with a different story, and it happens to be told in the same words.",
+    "why_it_breaks": "Nothing in the argument has raised the movement of patients between arms, and nothing afterwards could use it: the closing sentence needs a pair of arms differing in what was put into them, not a group thinned by people who worked out where they were. Read beside any single core sentence it is perfectly smooth, which is the difficulty; read against the question the four are jointly answering, it arrives with a new dimension and leaves with it in the same line.",
+    "trap_exposed": "The camouflage is that it sounds like the caution a careful argument owes its reader, a defect set against a design. That is a plausible shape and not a tie. Every joint in the core is a definite phrase whose antecedent is unique, and this sentence reaches backwards too, to an arm of either kind, then asks nothing of what it finds and is asked for nothing in return. The decoy runs the other way: the sentence about patients left alone and patients visited drops from the logic of comparison to the bedside and looks like a stray illustration, when it is the only place the pair named in the conclusion exists.",
+    "exclusion_analysis": [
+      {
+        "label": "E",
+        "mistake_type": "premature_closure",
+        "why_tempting": "It states the view the paragraph rejects rather than the paragraph's own view, so a reader who has grasped the claim may treat it as throat-clearing.",
+        "what_breaks": "Without it 'every such arm' points at nothing, and the correction becomes an assertion with no description to correct."
+      },
+      {
+        "label": "A",
+        "mistake_type": "hardest_to_place",
+        "why_tempting": "It is the most abstract sentence in the set and names no patient, no treatment and no result, so a reader sorting by concreteness struggles to find a seat for it.",
+        "what_breaks": "Without it the competing explanations are never introduced, so 'the commonest of those competitors' has nothing to be commonest among."
+      },
+      {
+        "label": "C",
+        "mistake_type": "surface_oddity",
+        "why_tempting": "It is the only sentence at the bedside, and its two kinds of patient read like clinical detail imported into a methodological argument.",
+        "what_breaks": "Without it the closing 'choice between those two arms' names a pair the paragraph never supplies, and the claim that contents decide exclusions is never shown working."
+      },
+      {
+        "label": "D",
+        "mistake_type": "no_uniqueness_test",
+        "why_tempting": "It leaves the apparatus for a judgement about what an experiment has settled, which sounds like a verdict appended to an argument that had already finished.",
+        "what_breaks": "Without it the paragraph describes how arms differ and never says what turns on the difference, so the argument stops one step before its point."
+      }
+    ],
+    "detection_habit": "Say in one line what question the four sentences are jointly answering, then hold each sentence against that line. A sentence can be true of the same apparatus, use the same nouns, and still be answering the question next door."
+  },
+  "mentor": {
+    "challenge": "Every sentence here is about the untreated arm of an experiment, and one of them names a real defect of such arms. A true defect is not the same as a sentence this argument has made room for.",
+    "takeaway": "Work out the question before you judge the answers. Sharing the nouns is not sharing the purpose."
+  }
+}
