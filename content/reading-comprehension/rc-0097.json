@@ -1,0 +1,534 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0097",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "linguistics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "stage": "foundation",
+    "skills": [
+      "concession-tracking",
+      "main-idea-extraction",
+      "inference",
+      "evidence-anchoring",
+      "vocabulary-in-context"
+    ],
+    "word_count": 642,
+    "question_count": 6,
+    "question_types": [
+      "agree_disagree",
+      "phrase_in_context",
+      "paragraph_function",
+      "assumption",
+      "inference",
+      "best_characterization"
+    ],
+    "theme": "the rate at which careful words are used up: the standard explanation, that an unchanged attitude reaches whatever word replaces the old one, is accepted in full and then shown to say nothing about speed, and the speed is traced to adoption as an official category, since a word repeated by clerks who feel nothing gathers the situation it stands beside, so the terms that last longest are the ones no institution found a use for",
+    "estimated_time_min": 10.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-07",
+    "reviewer_notes": "A foundation-stage passage whose difficulty is deliberately structural rather than lexical: every sentence is plain, but the author spends a whole paragraph agreeing with an explanation he is about to call incomplete, and readers who take agreement for the thesis answer the characterisation question with the concession. The mechanism paragraph insists twice that the speakers involved feel nothing, which is what kills the inverted version of the account.",
+    "length_class": "long",
+    "structure": "concession_thesis",
+    "viewpoints": 2,
+    "tone": "plain, patient, quietly sceptical of reform",
+    "difficulty_vector": {
+      "lexical": 2,
+      "syntactic": 2,
+      "abstraction": 2,
+      "inference_depth": 2,
+      "distractor_similarity": 3,
+      "reasoning_depth": 3,
+      "structural_ambiguity": 2,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.qualification",
+      "struct.claim_evidence",
+      "struct.cause_effect",
+      "struct.contrast",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "comp.organization",
+      "comp.reference_tracking",
+      "arg.concession",
+      "arg.assumption",
+      "arg.causal_claim",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.author_view_application",
+      "inf.logical_gap",
+      "scope.condition",
+      "lang.concession_marker",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option saying a replacement changes nothing at all about how the person named is treated, which takes the passage's claim that the opinion survives the change of word and stretches it into a claim about treatment that the passage never makes. Q2's rival is the option about a word sounding old-fashioned, which is a different process altogether: the phrase names the start of a word's exhaustion by use, not a drift of fashion, and the sentence attaches it to the moment of official adoption. Q3's rival is the option that the fourth paragraph restates the opening cycle in concrete terms, which is tempting because the forms and counters and reference numbers are the most concrete material in the passage; they are the machinery of an explanation the first paragraph never attempted, since the first paragraph raises no question about speed. Q4's rival is the option that a rarely used word always outlasts a much used one, which borrows the passage's own contrast and hardens it into a law the author does not need and does not assert, since his claim is about official repetition beside a fixed set of facts. Q5's rival is the option about a word used chiefly by people who feel strongly, which inverts the mechanism: the paragraph says twice that the clerk has no opinion and is reading a heading. Q6's rival is the option that he accepts the explanation for official words and doubts it elsewhere, which splits an explanation the author accepts without qualification for every case.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "neutral",
+      "considerate",
+      "repetitive",
+      "gather"
+    ]
+  },
+  "passage": {
+    "title": "The Words We Hand On",
+    "reading_time_min": 3.7,
+    "paragraphs": [
+      {
+        "id": "rc-0097-p1",
+        "text": "Every generation inherits a set of careful words for difficult things and hands on a different set. A term is brought in because it is neutral. It is used for a while by people who mean well by it. Then it begins to sound like the thing it was meant to soften, somebody proposes a replacement, and the round starts again. Anybody who has worked for twenty years in a hospital, a school or an office that pays benefits has watched at least one full turn of the wheel, and can name the word that was thought considerate when they started and is thought careless now."
+      },
+      {
+        "id": "rc-0097-p2",
+        "text": "The usual explanation of this is right, and it is worth setting out properly before anything is added to it. Words do not carry feeling in their sounds. A word takes its colour from what the people who use it think about the thing it names, and if that has not changed, the new word will pick up the old colour as surely as fresh paint on a damp wall picks up the damp. Nobody who replaces a word has thereby altered an opinion. The opinion is still there, attached to the same set of facts, and it reaches the replacement as soon as the replacement is in general use."
+      },
+      {
+        "id": "rc-0097-p3",
+        "text": "That explains why careful words wear out. It does not explain the thing about them that is genuinely puzzling, which is the first thing anybody who watches the process closely notices. They wear out at wildly different speeds. Some polite terms have lasted two hundred years and are still doing the work they were introduced to do. Others were proposed, adopted with enthusiasm, and were being apologised for within fifteen years. If the whole story were the transfer of an unchanged opinion, the transfer ought to take roughly as long in the one case as in the other. It does not come close."
+      },
+      {
+        "id": "rc-0097-p4",
+        "text": "The fast cases have one thing in common. In every one of them the new word was taken up as an official category: printed on a form, written at the head of a column, used in letters that begin with a reference number, spoken across a counter by a clerk who has said it eleven times already that morning. That, and not anybody's contempt, is what uses a word up. Consider who is speaking. The clerk has no opinion about the person in front of her; she is reading a heading. Yet each time the word is said in that setting it is said beside the thing the setting actually is, which may be a queue, a refusal, a separate room, a lower expectation. A word need not be spoken with scorn in order to gather what surrounds it. It need only be spoken often, in one place, next to the same facts. Official language is repetitive, public and slow to change, which is precisely the combination that does the gathering quickly."
+      },
+      {
+        "id": "rc-0097-p5",
+        "text": "A word kept out of the filing system has no such career. It is used seldom, by people who chose it, in company that varies from one occasion to the next, and it can go a lifetime without standing beside anything in particular. That is why the polite terms with the longest lives are so often the ones no institution ever found a use for, and why a reformer who persuades a ministry to adopt his word has, by succeeding, started the clock. The uncomfortable part is that the adoption is the victory, and nobody is going to argue that a kinder word should be kept off the forms in order to preserve it. The test, though, is there for anyone who wants to make it. Take the careful words in your own language that have lasted longest, and count how many have ever appeared at the top of a column."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0097-q1",
+      "type": "agree_disagree",
+      "skill": "inference",
+      "patterns": [
+        "inf.author_view_application",
+        "inf.strongly_supported",
+        "arg.concession"
+      ],
+      "target_mistake": "extending the claim that an opinion survives a change of word into a claim about how people are actually treated, which the passage never discusses",
+      "prediction_target": "The learner should predict that the answer will be the passage's added claim, that speed varies, rather than any version of the explanation it accepts in the second paragraph.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "scope"
+      ],
+      "stem": "The author would most likely agree with which of the following?",
+      "options": {
+        "A": "The sound of a word has more to do with how it is received than is usually supposed.",
+        "B": "A replacement may be well meant, but it changes nothing at all about how the person named is treated.",
+        "C": "Officials should be discouraged from adopting the new terms that reformers propose.",
+        "D": "Two careful words introduced for the same kind of thing may be used up at very different speeds."
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The third paragraph is where the author's own contribution begins, and it is stated as a fact about variation: some polite terms have lasted two hundred years, others were being apologised for within fifteen. Everything before it belongs to the explanation he is accepting from other people.",
+        "correct_reasoning": "The correct option is that observation in general form. It is the claim the rest of the passage exists to explain, and the author commits to it directly rather than conceding it, which is what an agree-question is asking about. The fourth and fifth paragraphs then tell us what makes the difference, and neither would be needed if the speeds were the same.",
+        "passage_anchor": "rc-0097-p3",
+        "question_type_note": "An agree-or-disagree question is answered from what the author asserts in his own voice, not from what he grants to somebody else. Find the paragraph where the passage stops reporting and starts arguing.",
+        "reading_habit": "When a passage spends a whole paragraph agreeing with a familiar explanation, do not mark that as the author's position. Look for the sentence that begins with a limit on it, because that is where he starts speaking for himself.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The second paragraph says the reverse in its second sentence, that words do not carry feeling in their sounds. The colour is said to come from what users think about the thing named, which is why a replacement acquires the old colour without sounding at all like the old word.",
+            "seductive_element": "Readers do have strong intuitions that harsh-sounding words feel harsh, and the passage is about how words come to sound unkind, which keeps the idea of sound in mind."
+          },
+          {
+            "option": "B",
+            "trap_type": "overstatement",
+            "why_wrong": "The passage says an opinion is not altered by renaming, which is a claim about the opinion and not about conduct. How anyone is treated is never discussed, and nothing here would license a statement that a change of word changes nothing whatever.",
+            "seductive_element": "It is the live rival, because it sounds like the hard-headed version of what the second paragraph says, and its concessive opening makes it read like a carefully measured claim."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The fifth paragraph forecloses this in terms, saying nobody is going to argue that a kinder word should be kept off the forms in order to preserve it. The author names a cost of adoption and expressly declines to turn it into advice.",
+            "seductive_element": "An explanation in which official adoption is what destroys a word invites the recommendation, and readers finish arguments in the direction they seem to be pointing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0097-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "reading the phrase as a delay before something happens, when it names the beginning of a process the passage has just described",
+      "prediction_target": "The learner should paraphrase before looking: from the day the word goes on the form, its wearing out begins.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 2
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "The phrase started the clock, as used in the final paragraph, refers to",
+      "options": {
+        "A": "the delay before officials agree to adopt a term that reformers have proposed",
+        "B": "the moment at which a word begins to sound old-fashioned to younger speakers",
+        "C": "the period a reformer waits before the public accepts a change in usage",
+        "D": "the point from which a newly adopted word begins to be used up by daily use"
+      },
+      "correct": "D",
+      "estimated_time_sec": 45,
+      "explanation": {
+        "expert_notice": "The whole of the preceding paragraph has described what official use does to a word: repetition, in one place, beside the same facts, which is what does the gathering quickly. The phrase arrives immediately after a reformer persuades a ministry to adopt his word, and the sentence says he has done it by succeeding.",
+        "correct_reasoning": "The correct option is that process named from its starting point. A clock that has been started is running, so the phrase must refer to something that begins at adoption and proceeds from there, and the only such thing in the passage is the using up of the word by repeated official use. The irony the sentence turns on is that the reformer's victory is what sets the process going.",
+        "passage_anchor": "rc-0097-p4, rc-0097-p5",
+        "question_type_note": "A phrase question is settled by what the surrounding sentences have already established, not by the phrase's ordinary uses elsewhere. Say what the phrase means here in your own words first.",
+        "reading_habit": "When a figure of speech appears at the end of a passage, look back for the process it is a figure for. Authors use images to compress something they have just spent a paragraph explaining.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "The clock starts at the moment of adoption, not before it. The sentence says the reformer has started it by succeeding, so whatever is now running began when the ministry said yes.",
+            "seductive_element": "A clock is naturally read as counting down to an event, and the paragraph does have a reformer waiting on a decision."
+          },
+          {
+            "option": "B",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Sounding old-fashioned is a different thing from being used up, and the passage nowhere describes fashion or the speech of the young. What wears the word out is described as the situation it stands beside, not the age of the people saying it.",
+            "seductive_element": "Words going out of date and words going sour both feel like the same story about language changing, and the passage is full of words that used to be acceptable."
+          },
+          {
+            "option": "C",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "Public acceptance is never mentioned. The passage's mechanism runs through forms, counters and columns, and the reformer's difficulty in it is not that people are slow to take his word up but that they take it up thoroughly.",
+            "seductive_element": "Campaigns for new words really do wait on public acceptance, and readers supply the part of the story the passage leaves out."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0097-q3",
+      "type": "paragraph_function",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.organization",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "reading the paragraph's counters and columns as scene-setting, when they are the machinery of the explanation it exists to give",
+      "prediction_target": "The learner should be able to say: this is where the author stops agreeing with other people and starts explaining, and what he explains is speed.",
+      "difficulty": {
+        "inference_depth": 2,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "main_idea"
+      ],
+      "stem": "The fourth paragraph chiefly serves to",
+      "options": {
+        "A": "show that a word's sounds begin to carry the feeling of what it names",
+        "B": "explain why the words that are taken up officially are used up fastest",
+        "C": "restate the cycle of the first paragraph in more concrete and more modern terms",
+        "D": "recommend that ministries be slower to adopt the words reformers propose"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The paragraph states its own conclusion in the middle of itself: that, and not anybody's contempt, is what uses a word up. Around that sentence sit the machinery, the form and the column and the clerk who has said it eleven times, and then the reason the machinery works, which is repetition in one place beside the same facts.",
+        "correct_reasoning": "The correct option names the job. This is the author's own contribution, and it supplies a cause for the difference in speeds that the previous paragraph had called unexplained. The clause about contempt belongs to the job rather than decorating it, since the mechanism has to work with speakers who feel nothing at all, which is exactly what distinguishes it from the explanation accepted earlier in the passage.",
+        "passage_anchor": "rc-0097-p4",
+        "question_type_note": "A paragraph-function question is answered by what the paragraph does for the argument around it, not by the material it happens to contain.",
+        "reading_habit": "When a paragraph contains a vivid list, read on for the sentence the list was bought for. It is usually a line or two away, and it is the paragraph's actual job.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The second paragraph rules this out for the whole passage, saying words do not carry feeling in their sounds, and the fourth adds nothing about sound. What the word collects is the situation it is spoken beside, which has no connection with how it is pronounced.",
+            "seductive_element": "The paragraph is about a word going bad through being said aloud thousands of times, and repetition and sound travel together in most readers' minds."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The cycle was established in the first paragraph and is not restated here. This paragraph explains something the first one never raised, namely why some words in that cycle are used up in fifteen years and others survive two hundred.",
+            "seductive_element": "It is the live rival, because the paragraph really is the most concrete in the passage, with its forms and counters and reference numbers, and concreteness reads as illustration."
+          },
+          {
+            "option": "D",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "No recommendation is made here or anywhere, and the fifth paragraph refuses one in terms, saying nobody is going to argue that a kinder word should be kept off the forms in order to preserve it. The paragraph gives a cause and stops.",
+            "seductive_element": "An explanation in which official adoption is what destroys a word points so plainly towards advice that readers supply the sentence the author withheld."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0097-q4",
+      "type": "assumption",
+      "skill": "argument",
+      "patterns": [
+        "arg.assumption",
+        "inf.logical_gap",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "choosing a hardened version of the passage's own contrast instead of the step the explanation actually needs",
+      "prediction_target": "The learner should predict that the assumption will be about how a word gets its colour, since the mechanism requires a source the accepted explanation did not provide.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "inference",
+        "logical_structure"
+      ],
+      "stem": "The explanation offered in the fourth paragraph depends on which of the following assumptions?",
+      "options": {
+        "A": "that a word can take its colour from the situations it records, not only from what its users feel",
+        "B": "that a word used rarely in conversation will always outlast one used often in public",
+        "C": "that the officials who use such terms privately share the public's opinions",
+        "D": "that reformers who propose replacements do so without consulting those described"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The accepted explanation in the second paragraph locates a word's colour in what its users think. The fourth paragraph then makes a clerk who has no opinion the engine of the fastest cases, and says the word gathers what surrounds it. Those two sentences cannot both be complete unless a second source of colour exists.",
+        "correct_reasoning": "The correct option supplies exactly that missing step. The argument runs: official use is frequent and public; the people doing it feel nothing; therefore what the word picks up must come from the setting rather than from the speakers. Deny that a situation can colour a word and the whole mechanism collapses back into the explanation the author had already accepted, and the difference in speeds is unexplained again.",
+        "passage_anchor": "rc-0097-p2, rc-0097-p4",
+        "question_type_note": "An assumption is the unstated thing the argument needs, not a stronger version of something already said. Ask what has to be true for the stated evidence to reach the stated conclusion.",
+        "reading_habit": "When an author accepts one account and then adds a mechanism, compare the two: the assumption is nearly always whatever the new mechanism requires that the accepted account did not supply.",
+        "distractors": [
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph insists twice that the clerk has no opinion about the person in front of her and is reading a heading. The explanation is interesting precisely because it does not need anybody to feel anything, and an assumption that restores hidden contempt would make it ordinary.",
+            "seductive_element": "It is a natural repair: readers who cannot see how a neutral word goes bad supply a hidden attitude, which is the very thing the author has taken out."
+          },
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage contrasts a word inside the filing system with one outside it, and gives reasons of place and repetition and fixed facts. Turning that into a law about rarity and frequency drops the setting, which is the part doing the work, and states with certainty a claim the author never needs.",
+            "seductive_element": "It is the live rival, because it uses the passage's own contrast and reads like a compact summary of the fifth paragraph rather than the overreach it is."
+          },
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Who is consulted about a proposed word is never mentioned, and the explanation of speed would be unaffected either way. A word chosen after wide consultation would still go on the form and still be said across the counter.",
+            "seductive_element": "Arguments about careful language frequently do turn on who was asked, and the passage's reformer invites the question."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0097-q5",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "scope.condition"
+      ],
+      "target_mistake": "inverting the mechanism, so that strong feeling rather than official repetition becomes what exhausts a word",
+      "prediction_target": "The learner should predict that the answer will describe a word that never becomes an administrative category.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 3,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "scope",
+        "specific_detail"
+      ],
+      "stem": "It can be inferred from the passage that a polite term is most likely to have a long life if it",
+      "options": {
+        "A": "is used chiefly by people who feel strongly about the thing that it names",
+        "B": "never becomes a heading under which people have to be counted",
+        "C": "is longer and less convenient to say than the term that it replaced",
+        "D": "replaces a term that had itself been introduced only a short time before"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The fifth paragraph answers the question directly before it is asked. A word kept out of the filing system is used seldom, by people who chose it, in varying company, and can go a lifetime without standing beside anything in particular, which is why the longest-lived terms are the ones no institution found a use for.",
+        "correct_reasoning": "The correct option is that condition stated as a test. The mechanism needs repetition in one place beside the same facts, and a word that never becomes a category is never repeated in that way, so nothing accumulates on it. The closing sentence turns this into an experiment the reader can run, by counting how many long-lived careful words have ever stood at the top of a column.",
+        "passage_anchor": "rc-0097-p5",
+        "question_type_note": "An inference about what makes something last is answered by reversing the passage's account of what destroys it. Find the mechanism first and then remove its fuel.",
+        "reading_habit": "When a passage explains why something fails quickly, ask what the slow cases must lack. Authors who build a mechanism usually supply that answer somewhere, often in a paragraph that looks like an afterthought.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The fourth paragraph makes the fastest cases turn on speakers who feel nothing at all, and says in terms that a word need not be spoken with scorn in order to gather what surrounds it. Strong feeling is not what the mechanism runs on.",
+            "seductive_element": "It is the intuitive account of how a word goes bad, and it survives in most readers even after the passage has replaced it."
+          },
+          {
+            "option": "D",
+            "trap_type": "true_but_irrelevant",
+            "why_wrong": "How recently the previous word was introduced plays no part in the explanation. What decides the speed is whether the new word is taken into official use, and a word replacing a very old term would be used up just as quickly if it went on the form.",
+            "seductive_element": "The passage is full of cycles and intervals, so a claim about the timing of the previous round sounds like the kind of thing it would care about."
+          },
+          {
+            "option": "C",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Length and convenience are never discussed, and the second paragraph rules out the family of explanations they belong to by saying words do not carry feeling in their sounds. A clumsy word on a form would be used up on schedule.",
+            "seductive_element": "The popular complaint against careful language is that it is cumbersome, and readers bring that complaint with them to any passage on the subject."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0097-q6",
+      "type": "best_characterization",
+      "skill": "logical_structure",
+      "patterns": [
+        "comp.central_idea",
+        "comp.organization",
+        "arg.concession"
+      ],
+      "target_mistake": "splitting the author's acceptance of the usual explanation, so that he is made to believe it only for the cases his own account covers",
+      "prediction_target": "The learner should be able to say: he agrees with it completely, and thinks it answers a different question from the one he is asking.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "main_idea",
+        "author_purpose"
+      ],
+      "stem": "Which of the following best characterises the author's position on the usual explanation of why careful words wear out?",
+      "options": {
+        "A": "He accepts it in full, and says it explains that words wear out but not how fast.",
+        "B": "He accepts it, though he draws from it the advice that replacements should be avoided.",
+        "C": "He accepts it for words used officially and doubts it for words used in private.",
+        "D": "He rejects it, putting an explanation in terms of official language in its place."
+      },
+      "correct": "A",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "Two sentences settle it. The second paragraph opens by calling the usual explanation right and worth setting out properly, and the third opens by saying that it explains why careful words wear out and does not explain the difference in speeds.",
+        "correct_reasoning": "The correct option puts those two sentences together, which is the whole of the author's stance. He takes nothing back from the explanation and adds a question it was never addressed to, and the remaining paragraphs answer that question with a mechanism of his own. Characterising a position means saying both what is granted and what is withheld, and here what is withheld is a scope rather than a truth.",
+        "passage_anchor": "rc-0097-p2, rc-0097-p3",
+        "question_type_note": "A characterisation question asks for the shape of a stance, not its content. Look for the two sentences where the author says what he accepts and what he thinks is still missing.",
+        "reading_habit": "Learn to tell incomplete from wrong. An author who says an explanation does not reach a certain question has not called it false, and options that convert the one into the other are the standard trap in concessive passages.",
+        "distractors": [
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "Nothing is rejected. The second paragraph calls the explanation right and the third repeats that it explains why words wear out, so the account about official language is added to it rather than substituted for it.",
+            "seductive_element": "The passage does spend two paragraphs on a mechanism of its own, and readers assume a new mechanism must have displaced the old one."
+          },
+          {
+            "option": "B",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The fifth paragraph refuses precisely this, saying nobody is going to argue that a kinder word should be kept off the forms in order to preserve it. The author names a cost and declines to convert it into advice.",
+            "seductive_element": "An argument that adoption is what destroys a word points so plainly towards a recommendation that readers supply the one the author withheld."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The acceptance is unqualified and covers every case, since the explanation is said to account for the wearing out as such. What the author adds is a second factor governing speed, which applies to official words without making the first explanation doubtful anywhere.",
+            "seductive_element": "It is the live rival, because the passage really does divide words into official and unofficial, and a reader who has that division in mind applies it to the wrong thing."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "neutral",
+      "passage_use": "A term is brought in because it is neutral",
+      "meaning_here": "carrying no judgement of its own about what it names",
+      "difficulty": "easy"
+    },
+    {
+      "word": "considerate",
+      "passage_use": "the word that was thought considerate when they started",
+      "meaning_here": "careful of the feelings of the person described",
+      "difficulty": "easy"
+    },
+    {
+      "word": "repetitive",
+      "passage_use": "Official language is repetitive, public and slow to change",
+      "meaning_here": "saying the same things in the same form again and again",
+      "difficulty": "medium"
+    },
+    {
+      "word": "gather",
+      "passage_use": "in order to gather what surrounds it",
+      "meaning_here": "collect and take on, without anybody intending it",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The author spends an entire paragraph agreeing with the explanation everybody already knows. Watch for the sentence where he stops agreeing and starts asking a different question, because that question is what the rest of the passage answers.",
+    "one_sentence_summary": "The familiar account of why careful words wear out, that a word takes its colour from what its users think and an unchanged opinion simply moves to the replacement, is accepted here without reservation and then shown to explain only that words wear out and not why some last two centuries and others fifteen years, a difference the author traces to adoption as an official category, since a word repeated across a counter by clerks who feel nothing about anybody gathers whatever the setting is, so the terms with the longest lives are the ones no institution found a use for.",
+    "main_idea": "Polite words are replaced, the replacements go sour, and the usual explanation is that attitudes, not words, carry the offence. That is true, and it says nothing about speed. What distinguishes the words used up in a decade from those that last two hundred years is official adoption: once a word is printed on a form and spoken at a counter, it is repeated constantly beside a fixed set of facts, and it collects them. So a reformer's success in getting his word adopted is what begins to destroy it.",
+    "simple_explanation": "Every generation is handed a set of polite words for awkward subjects and passes on a different set. A word is chosen because it sounds fair. People use it kindly for a while. Then it starts to sound like the thing it was supposed to soften, someone suggests a new word, and round we go again. Anybody who has spent twenty years in a hospital, a school or a benefits office has seen this happen at least once.\n\nThe usual explanation is correct, and the author says so plainly before adding anything. A word does not carry any feeling in its sounds. It gets its colour from what the people who say it think about the thing it names. If their opinion has not changed, the new word will pick up the old colour, the way fresh paint on a damp wall picks up the damp. Changing the word never changed the opinion, so the opinion arrives at the new word too.\n\nNow the part the author thinks nobody explains. These words do not wear out at anything like the same rate. Some polite terms are two hundred years old and still perfectly usable. Others were adopted with great enthusiasm and were being apologised for fifteen years later. If the only thing happening were an old attitude moving across to a new word, the move ought to take about as long every time. It does not.\n\nHis answer is that the quick cases all have one feature. The word was taken up officially. It went on a form. It became the heading of a column. It appeared in letters with reference numbers. It was said across a counter by a clerk who had already said it eleven times that morning.\n\nAnd here is the clever part: that is what uses a word up, not anybody's unkindness. Think about the clerk. She has no opinion at all about the person standing in front of her. She is reading a heading. But every single time she says the word, she says it right next to whatever that situation really is, which might be a queue, or a refusal, or a separate room, or a lower expectation. You do not have to say a word nastily for it to soak up what is around it. You only have to say it very often, in the same place, next to the same things. Official language is repetitive, public and slow to change, which is exactly the recipe for soaking things up fast.\n\nA word that stays out of the filing cabinet has a completely different life. It gets used now and then, by people who picked it deliberately, in all sorts of different company, and it may go a whole lifetime without standing next to anything in particular. So the polite words that survive longest tend to be the ones no institution ever needed.\n\nWhich leaves something uncomfortable. The reformer who finally gets a ministry to adopt his word has, by winning, started the process that will wear it out. The author does not turn this into advice, and says so: nobody is going to argue that a kinder word should be kept off the forms so that it lasts. He offers a test instead. Think of the careful words in your own language that have lasted longest, and count how many have ever been printed at the top of a column.",
+    "why_difficult": "The sentences are short and the vocabulary is ordinary, so the difficulty is entirely about who is speaking. A full paragraph is given to an explanation the author did not invent and does not dispute, and a reader who marks it as the thesis then has to make sense of a passage that appears to argue against itself. The second difficulty is that the mechanism is counter-intuitive: the people who wear the word out are the people with no feelings about it at all, which readers repeatedly repair by smuggling back the contempt the author removed. The third is the ending, which names a cost and then refuses to draw the obvious recommendation from it.",
+    "author_intention": "To leave the reader agreeing with the familiar explanation and yet holding a new question, so that the next time a careful word is proposed the reader asks not whether it is kinder but whether it is about to go on a form.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0097-p1",
+        "role": "Shows the cycle",
+        "note": "Polite words are introduced, wear out and get replaced. Anyone who has worked in a hospital or an office has watched a full round of it."
+      },
+      {
+        "paragraph_id": "rc-0097-p2",
+        "role": "Concedes the explanation",
+        "note": "The usual account is right: the feeling is in the opinion, not the sounds, so an unchanged opinion just moves to the new word."
+      },
+      {
+        "paragraph_id": "rc-0097-p3",
+        "role": "Names what is unexplained",
+        "note": "Fine, but speeds differ enormously. Two hundred years for some words, fifteen for others. The old account predicts no such difference."
+      },
+      {
+        "paragraph_id": "rc-0097-p4",
+        "role": "Gives the mechanism",
+        "note": "The fast ones all went official. Repeated by clerks who feel nothing, beside queues and refusals, the word collects the setting."
+      },
+      {
+        "paragraph_id": "rc-0097-p5",
+        "role": "Draws the consequence",
+        "note": "Words kept off the forms last. So the reformer's victory starts the clock, and here is a test you can run yourself."
+      }
+    ],
+    "tone_progression": "It begins conversational, almost resigned about a cycle everybody has watched, becomes careful and fair-minded while the accepted explanation is stated at its strongest, sharpens into curiosity at the unexplained difference, and ends dry, declining to give advice and handing the reader a test instead.",
+    "key_transitions": [
+      "'The usual explanation of this is right, and it is worth setting out properly before anything is added to it.' (opening of paragraph 2) — the concession is announced as a concession.",
+      "'It does not explain the thing about them that is genuinely puzzling.' (paragraph 3) — the author's own question arrives.",
+      "'That, and not anybody's contempt, is what uses a word up.' (paragraph 4) — the mechanism is stated and the intuitive explanation is pushed aside."
+    ],
+    "misunderstanding": "The commonest wrong model is that the author is attacking the usual explanation, because passages that dwell on a familiar view normally do. He is not: he calls it right, and repeats that it explains the wearing out. The second wrong model restores the contempt he took away, so that officials become quietly hostile and the word goes bad because of what they feel; the paragraph says twice that the clerk has no opinion and is reading a heading. The third reads the ending as a recommendation to keep kind words off official forms, which the passage explicitly declines to make.",
+    "traps_summary": "This set offers the sounds of words as an explanation the passage has ruled out, a recommendation the author refuses to make, the first paragraph's examples as the second paragraph's job, a hardened law about frequency in place of the actual assumption, and strong feeling in place of a clerk who feels nothing. Asking who is speaking, and whether a claim is about truth or about scope, answers all six.",
+    "reading_lesson": "When an author agrees with a familiar explanation at length, read on for the sentence that names what it does not reach, because in a concessive passage the thesis is always the unaddressed question and never the agreement. The companion habit is to keep incomplete and false apart: saying that an account explains one thing and not another leaves it entirely true, and every option that converts the limit into a rejection is built to catch readers who let the two blur.",
+    "real_world": "The same pattern shows up wherever a well-meant term becomes administrative: job titles invented to dignify work and worn smooth within a decade, categories on medical notes, the vocabulary of school reports, the names of grades and bands inside companies. In each case the word was not ruined by anybody's disdain; it was simply said thousands of times in one place, beside the same set of facts.",
+    "takeaway": "A word is not worn out by the people who dislike it but by the people who say it eleven times a morning and mean nothing by it.",
+    "reflection_question": "Which of the careful words you use every day has already been printed at the head of a column somewhere?"
+  }
+}

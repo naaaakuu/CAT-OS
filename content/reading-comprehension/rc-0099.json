@@ -1,0 +1,535 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0099",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "stage": "developing",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "qualifier-tracking",
+      "evidence-anchoring",
+      "scope-control"
+    ],
+    "word_count": 633,
+    "question_count": 6,
+    "question_types": [
+      "inference",
+      "phrase_in_context",
+      "implication",
+      "role_of_detail",
+      "title_selection",
+      "comparative"
+    ],
+    "theme": "self-deception redescribed as an unequal standard of evidence rather than as two contradictory beliefs, which removes the deceiver along with the contradiction, and is then refused the status of a solution, since an unequal threshold has to be aimed and the aiming requires that the content already be registered, with the account's one testable consequence being that the self-deceived man attends to his situation more closely than anybody else and is marked off from the merely mistaken by the work he does to keep the belief standing",
+    "estimated_time_min": 11.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-07",
+    "reviewer_notes": "The passage makes a claim and then spends two paragraphs refusing to let it be comfortable, and the second of those paragraphs says in terms that the puzzle has been moved rather than solved. Readers who take the third paragraph for the conclusion answer the implication question with a verdict the fourth withdraws. The closing portrait is engineered so that the observable sign of self-deception is the opposite of the sign a reader expects, which is what the role and comparative questions turn on.",
+    "length_class": "long",
+    "structure": "claim_qualification",
+    "viewpoints": 2,
+    "tone": "careful, unconsoling, reluctant to declare victory",
+    "difficulty_vector": {
+      "lexical": 3,
+      "syntactic": 3,
+      "abstraction": 4,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 4,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.qualification",
+      "struct.claim_evidence",
+      "struct.contrast",
+      "struct.definition",
+      "comp.central_idea",
+      "comp.function_over_words",
+      "comp.reference_tracking",
+      "comp.intent",
+      "comp.organization",
+      "arg.qualification",
+      "arg.example",
+      "arg.causal_claim",
+      "arg.description_vs_evaluation",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.vs_speculation",
+      "scope.condition",
+      "lang.comparative",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about an earlier decision not to look, which is exactly the thing the third paragraph forbids by saying nobody adopts the threshold and that there is no moment at which it could have been adopted. Q2's rival is the option about estimating how much evidence would settle the question, which reads the phrase as a calculation about quantity when the sentence is about content, since the sorting that precedes the unequal threshold is described as being by content. Q3's rival is the option that somebody who examines the evidence with unusual care is on this account deceiving himself, which reads the last paragraph's sign backwards into a diagnosis, whereas the passage says only that this is what the account predicts you would see, and describes the careful replies as those a careful person produces. Q4's rival is the option about accumulating evidence without understanding it, which borrows the portrait's material and misses its function, since the man's replies are expressly said not to be stupid. Q5's rival is the title naming the man who knew the figures, which is the illustration rather than the claim. Q6's rival is the option about whether the belief turns out to be false, which the last sentence removes by saying the belief may be equally false in both cases.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "systematic",
+      "threshold",
+      "registering",
+      "sincerity"
+    ]
+  },
+  "passage": {
+    "title": "Not the Belief but the Standard",
+    "reading_time_min": 3.6,
+    "paragraphs": [
+      {
+        "id": "rc-0099-p1",
+        "text": "A man is told, in detail and by people with no reason to mislead him, that his business will not last the year. He does not dispute the figures. He can produce them himself, from memory, with the dates. He also believes, in a way that is plainly not performance and that his family can see is not performance, that it will come right. The ordinary description of this is that he is lying to himself, and the ordinary description cannot be made to work. A liar has to know the thing he is concealing, and has to be the person from whom it is concealed, and those two requirements cannot be met at the same address."
+      },
+      {
+        "id": "rc-0099-p2",
+        "text": "A better description gives up the second belief altogether. What is doubled in self-deception is not the belief but the standard. Consider what anybody does with a piece of evidence. He asks whether it is good enough: whether the source is reliable, whether the sample is large, whether the interpretation offered is the only one available. Those questions have no fixed answers, and a small movement in how strictly they are put will decide whether a fact is admitted or held over. In the cases we call self-deception the movement is systematic. The welcome item is examined once and accepted; the unwelcome one is sent back for a confirmation that is never quite obtained. Nothing is believed and disbelieved at once. What is unequal is the threshold."
+      },
+      {
+        "id": "rc-0099-p3",
+        "text": "Two things have to be said about this at once, and the first is a loss. On such an account there is no deception in the case, and no deceiver. Nobody adopts the unequal threshold; it is not a policy, and there is no moment at which it could have been adopted, because the raising and the lowering happen inside the ordinary business of judging whether a piece of evidence is good enough, which is over before anything has been decided. The word deception survives only as a name for the result, in the way a river is said to have chosen its course."
+      },
+      {
+        "id": "rc-0099-p4",
+        "text": "The second thing is harder, and it is why the puzzle should not be called solved. An unequal threshold has to be aimed. Before the strictness can be raised for one item and lowered for another, something must have sorted the items, and the sorting is by content: this one is welcome, that one is not. Whatever does that has already taken the measure of the very thing it is keeping from him. The contradiction has not been removed from the man. It has been moved, out of the relation between two of his beliefs and into a question about how much registering is enough to count as knowing, and that question is open. An account that pretends otherwise is trading on the word mechanism."
+      },
+      {
+        "id": "rc-0099-p5",
+        "text": "One consequence is worth having, because it can be looked for. If the account is right, the self-deceived man is not the one who has stopped attending to his situation. He is the one who attends to it far more closely than anybody around him. He has the figures every week. He knows the objections to his position better than his advisers do and has a reply ready for each of them, and the replies are not stupid; they are the replies a careful person produces when a demanding standard is being applied to evidence he dislikes. The man who is merely mistaken presents no such picture. He has not looked, and the subject does not much interest him. So the difference between the two lies neither in the belief, which may be equally false in both, nor in the sincerity, which is complete in both. It lies in how much work is being done to keep the belief standing."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0099-q1",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "scope.condition",
+        "arg.causal_claim"
+      ],
+      "target_mistake": "restoring a decision or a policy behind the unequal threshold, which the third paragraph denies in terms",
+      "prediction_target": "The learner should predict that the answer will describe two different standards applied to two kinds of evidence, and will contain no act of choosing.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "argument",
+        "scope"
+      ],
+      "stem": "It can be inferred that, on the account the passage gives, a person deceiving himself",
+      "options": {
+        "A": "holds a true belief and a false one at the same moment without noticing the conflict",
+        "B": "applies a stricter test to the evidence that he would rather not have to accept",
+        "C": "believes what he does because he has had less evidence to go on than other people",
+        "D": "has decided, though not in so many words, not to look at the evidence against him"
+      },
+      "correct": "B",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The second paragraph states the account in two sentences at its end: nothing is believed and disbelieved at once, and what is unequal is the threshold. The mechanism is described immediately before that, as the welcome item accepted on one examination and the unwelcome one sent back for a confirmation never quite obtained.",
+        "correct_reasoning": "The correct option is that mechanism in the person's own terms. The account replaces a pair of beliefs with a pair of standards, so what distinguishes the self-deceiver is entirely a matter of how hard each piece of evidence is made to work before it is admitted. Nothing in the option describes an act, which matters, because the next paragraph says there was no moment at which any such act could have occurred.",
+        "passage_anchor": "rc-0099-p2",
+        "question_type_note": "An inference question about a redescription is answered by the redescription's own terms. Ask what the new account has replaced, and describe the person in the new vocabulary rather than the old.",
+        "reading_habit": "When an author says a familiar description cannot be made to work, watch for what he substitutes for it, and then refuse every option that still contains a piece of the description he threw away.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "opposite_direction",
+            "why_wrong": "This is the description the passage sets aside in its first paragraph and expressly denies in its second, which says that nothing is believed and disbelieved at once. The whole point of the redescription is that there is only one belief in the case.",
+            "seductive_element": "Holding two contradictory beliefs is what self-deception is popularly taken to be, and the opening scene is built to look exactly like it."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The third paragraph forbids it: nobody adopts the unequal threshold, it is not a policy, and there is no moment at which it could have been adopted. The looking is not avoided at all, as the last paragraph shows with a man who has the figures every week.",
+            "seductive_element": "It is the live rival, because its concessive phrasing seems to allow for the absence of any conscious decision, and readers accept a tacit choice where an explicit one has been ruled out."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "The quantity of evidence is never at issue. The man in the opening scene has been told in detail, does not dispute the figures, and can produce them from memory, so the account has to explain a belief held in the presence of the evidence rather than in its absence.",
+            "seductive_element": "Being badly informed is the ordinary explanation of a wrong belief, and readers reach for it before noticing that the scene has removed it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0099-q2",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "word.polysemy",
+        "comp.reference_tracking"
+      ],
+      "target_mistake": "reading the phrase as a judgement about quantity, when the sentence before it says the sorting is by content",
+      "prediction_target": "The learner should paraphrase before looking: whatever sorts the evidence has had to notice what the unwelcome item says.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference"
+      ],
+      "stem": "The phrase taken the measure of, as used in the fourth paragraph, refers to",
+      "options": {
+        "A": "an estimate of how much evidence would be needed to settle the question either way",
+        "B": "a comparison between the man's beliefs and the facts as other people see them",
+        "C": "a judgement, made early, about how much bad news the person is able to bear",
+        "D": "a registering of the unwelcome content sufficient to tell it from the welcome"
+      },
+      "correct": "D",
+      "estimated_time_sec": 50,
+      "explanation": {
+        "expert_notice": "The sentence before the phrase supplies its content exactly. Something must have sorted the items, and the sorting is by content: this one is welcome, that one is not. The phrase then says that whatever performs the sorting has done so to the very thing being kept from him.",
+        "correct_reasoning": "The correct option is that sentence restated. To sort by content is to have taken in enough of what each item says to place it on one side or the other, which is precisely why the paragraph refuses to call the puzzle solved: the sorting already involves a kind of acquaintance with the unwelcome fact. A reading that makes the phrase about amounts rather than about content removes the difficulty the paragraph exists to state.",
+        "passage_anchor": "rc-0099-p4",
+        "question_type_note": "A phrase question is decided by the sentence next to it, not by the phrase's usual sense in other contexts. Substitute your paraphrase back into the passage and see whether the argument still runs.",
+        "reading_habit": "When an idiom appears in the middle of an argument, ask what work the sentence needs it to do. The author chose the phrase for that work, and the options that fail are usually the ones that do different work perfectly well.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "near_synonym_confusion",
+            "why_wrong": "Measuring in the sense of estimating a quantity is the phrase's commonest use and not its use here. The paragraph is about a sorting done by content, and an estimate of how much evidence would be needed would not tell anything which side an item belonged on.",
+            "seductive_element": "It is the live rival, because the ordinary sense of taking a measure really is about amount, and the passage has just been discussing how strictly evidence is tested."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Nothing in the passage concerns what a person can bear, and the account has no room for such a judgement, since it works below the level at which anything about the person is assessed. The sorting described is of items of evidence, not of the man.",
+            "seductive_element": "Protective explanations of self-deception are familiar, and the paragraph does speak of something being kept from him."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_abstraction_level",
+            "why_wrong": "The phrase describes something going on within the person's own handling of evidence, not a comparison with anybody else's view. Other people appear in the passage only as the sources who told him and the advisers he out-argues.",
+            "seductive_element": "The opening scene does set the man's belief against what everybody around him knows, which keeps an external comparison in the reader's mind."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0099-q3",
+      "type": "implication",
+      "skill": "inference",
+      "patterns": [
+        "inf.reasonable_implication",
+        "arg.description_vs_evaluation",
+        "arg.qualification"
+      ],
+      "target_mistake": "reading the removal of the deceiver as a verdict about blame, or converting the observable sign into a necessary condition",
+      "prediction_target": "The learner should predict that the implication will follow from the paragraph that removes the deceiver, and will be about what the word deception is now doing.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "Which of the following is most strongly implied by the passage?",
+      "options": {
+        "A": "Calling the state a deception describes its result rather than anything its subject did.",
+        "B": "Somebody who examines the evidence with unusual care is, on this account, deceiving himself.",
+        "C": "Self-deception is a failing for which its subject should be held responsible.",
+        "D": "A belief arrived at through unequal thresholds is, though sincerely held, bound to be false."
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The third paragraph does two things in quick succession. It says there is no deception in the case and no deceiver, and it then says the word deception survives only as a name for the result, with a river choosing its course offered as the model for that kind of language.",
+        "correct_reasoning": "The correct option is that survival stated as an implication. If nobody adopts the threshold and there is no moment at which it could have been adopted, then the word cannot be reporting an act; what it reports is the state the process leaves the man in. The river comparison is doing exactly this work, since a river's choosing names an outcome and attributes no decision to the water.",
+        "passage_anchor": "rc-0099-p3",
+        "question_type_note": "An implication question takes the passage one honest step. Where an author explains that a word has been retained in a weakened sense, the implication is about what the word now reports.",
+        "reading_habit": "When an author keeps a familiar word while denying what it normally asserts, ask what is left of it. That residue is usually the implication such passages are built to support.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "The paragraph offers close attention as what the account predicts you would see in a self-deceived man, not as a test convicting anybody who shows it. Careful examination is also what an honest enquirer does, and the replies are expressly said to be the ones a careful person produces, which describes a manner of working rather than a diagnosis.",
+            "seductive_element": "It is the live rival, because the final paragraph really does make unusual attentiveness the mark of self-deception, and a mark is read backwards as a symptom the moment it is memorable."
+          },
+          {
+            "option": "C",
+            "trap_type": "prescriptive_leap",
+            "why_wrong": "The account removes the deceiver, and with him the act that blame would attach to. The third paragraph says there is no policy and no moment of adoption, which leaves the question of responsibility exactly where the passage declines to take it.",
+            "seductive_element": "Self-deception carries a strong flavour of culpability in ordinary use, and readers expect a passage that analyses it to arrive at a verdict."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage says the belief may be equally false in the self-deceived man and in the merely mistaken one, which is a remark about how little the truth of the belief distinguishes them. An unequal standard can admit a fact that happens to be true, and nothing here guarantees the outcome.",
+            "seductive_element": "The phrase unequal threshold sounds like a recipe for error, and readers convert a distorted process into a guaranteed falsehood without noticing the step."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0099-q4",
+      "type": "role_of_detail",
+      "skill": "paragraph_function",
+      "patterns": [
+        "comp.function_over_words",
+        "comp.organization",
+        "arg.example"
+      ],
+      "target_mistake": "reading the weekly figures and the ready replies as evidence of confusion, when they are offered as the account's testable sign",
+      "prediction_target": "The learner should be able to say: the portrait is there to show what the account predicts you would actually see, and it is the opposite of what a reader expects.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "logical_structure",
+        "inference"
+      ],
+      "stem": "The description of the man who has the figures every week chiefly serves to",
+      "options": {
+        "A": "show that self-deception is commonest among people who deal in figures",
+        "B": "supply the appearance the account predicts, which is the opposite of the expected one",
+        "C": "illustrate how much evidence a person may accumulate without ever understanding it",
+        "D": "concede that the account cannot explain every case of a mistaken belief"
+      },
+      "correct": "B",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The paragraph announces its own job in its first sentence: one consequence is worth having, because it can be looked for. The portrait then arrives as that consequence, and the paragraph ends by drawing the contrast with a man who has not looked and is not interested.",
+        "correct_reasoning": "The correct option names the job. An account that only redescribed the state would be untestable; this one earns its keep by predicting a particular appearance, and the prediction runs against expectation, since the self-deceived man turns out to be the most attentive person in the room rather than the least. That reversal is why the paragraph opens by saying the consequence can be looked for.",
+        "passage_anchor": "rc-0099-p5",
+        "question_type_note": "A why-does-the-author-mention question is answered by the claim the detail is bought for, which is usually stated in the sentence just before or just after it.",
+        "reading_habit": "When a passage says a consequence can be looked for, read the next few sentences as a prediction rather than as an illustration. They are telling you what would be seen if the account were right.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The figures belong to the particular example that opened the passage, not to a claim about which occupations are prone to this. Nothing anywhere compares the frequency of self-deception across kinds of people.",
+            "seductive_element": "The example is specific and commercial, and readers generalise from a single case to a population without registering that they have done so."
+          },
+          {
+            "option": "C",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The paragraph says the opposite about understanding, insisting that the replies are not stupid and that they are what a careful person produces under a demanding standard. Accumulation without comprehension would make him the merely mistaken man, who is the contrast case.",
+            "seductive_element": "It is the live rival, because it uses the portrait's own material, the weekly figures and the ready answers, and offers the deflating reading that a sceptical passage seems to invite."
+          },
+          {
+            "option": "D",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The paragraph concedes nothing; the concession in this passage is the fourth paragraph, which says the puzzle has been moved rather than solved. The last paragraph is the account's one positive prediction and its clearest success.",
+            "seductive_element": "The passage really does refuse to declare victory, so a reader who has caught that tone looks for the retreat in the wrong paragraph."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0099-q5",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "comp.intent",
+        "arg.example"
+      ],
+      "target_mistake": "titling the passage by its opening scene or by the description it exists to refuse",
+      "prediction_target": "The learner should compress the passage first: what is doubled is the standard, not the belief.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "author_purpose"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "Not the Belief but the Standard",
+        "B": "The Lie You Tell Yourself",
+        "C": "Why We Believe What We Want, Though We Know Better",
+        "D": "The Man Who Knew the Figures by Heart"
+      },
+      "correct": "A",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The claim is stated twice in the same paragraph, once as what is doubled and once as what is unequal: one belief rather than two, and a threshold raised for some evidence and lowered for other evidence.",
+        "correct_reasoning": "A title has to be the claim in a few words, and it must need the whole passage. The correct option is the second paragraph's own formulation, which names what is doubled and what is not: one belief, two standards. That is what the third paragraph strips of any deciding agent, what the fourth says cannot be aimed without some registering, and what the fifth makes observable in a man who has a reply for every objection.",
+        "passage_anchor": "rc-0099-p2",
+        "question_type_note": "Title questions obey main-idea rules. Reject any candidate that would survive the deletion of a whole paragraph, and any that names the scene rather than the argument.",
+        "reading_habit": "Write your own title in six words before looking. It is the quickest way to see that an attractive option is describing the example, or the view the passage was written to replace.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the ordinary description the first paragraph reports and then rejects as unworkable, on the ground that a liar would have to be both the one who knows and the one kept in the dark. A title cannot be the view a passage opens by dismantling.",
+            "seductive_element": "It is the phrase everybody uses for this condition, and it appears in the passage itself, which makes it feel like the subject rather than the target."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "Wishful belief in general is a far wider subject than this passage, which is about a specific mechanism, denies that any wanting operates as a motive, and spends a paragraph insisting that nobody in the case decides anything.",
+            "seductive_element": "It sounds like the natural title for anything on this topic, and the passage's welcome and unwelcome items look like wanting under another name."
+          },
+          {
+            "option": "D",
+            "trap_type": "example_as_thesis",
+            "why_wrong": "The businessman is an illustration, used once to set the puzzle and once to show the account's prediction. A title built on him would leave the second, third and fourth paragraphs, where the argument actually happens, with nothing to do.",
+            "seductive_element": "It is the most vivid thing in the passage and the part a reader carries away, and figures known by heart make an attractive phrase."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0099-q6",
+      "type": "comparative",
+      "skill": "inference",
+      "patterns": [
+        "lang.comparative",
+        "inf.strongly_supported",
+        "arg.description_vs_evaluation"
+      ],
+      "target_mistake": "separating the two cases by the falsity of the belief or by an avowable motive, both of which the passage removes",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "specific_detail",
+        "scope"
+      ],
+      "stem": "The passage distinguishes self-deception from ordinary mistaken belief chiefly by",
+      "options": {
+        "A": "the strength of the feeling that is attached to the belief",
+        "B": "whether the belief turns out, in the end, to be a false one",
+        "C": "the amount of work being done in order to go on holding the belief",
+        "D": "the presence of a motive the believer could state if asked"
+      },
+      "correct": "C",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "The last three sentences of the passage do the comparison explicitly. The merely mistaken man has not looked and is not much interested; the difference lies neither in the belief, which may be equally false in both, nor in the sincerity, which is complete in both; it lies in how much work is being done.",
+        "correct_reasoning": "The correct option is that final sentence. The comparison is settled by what the passage rules out as well as by what it keeps, since two of the obvious candidates are named and refused in the same sentence. What remains is effort, which fits the account, because an unequal threshold only produces its result by continually sending the unwelcome evidence back, and each return is work.",
+        "passage_anchor": "rc-0099-p5",
+        "question_type_note": "A comparative question is answered by finding where the passage itself compares. If the author has already said what the difference is not, half the options are gone before you start.",
+        "reading_habit": "When a passage ends by listing what a difference does not consist in, treat that list as an elimination key. Authors who write neither and nor are handing you the wrong answers in advance.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Intensity of feeling is never discussed. What the passage attributes to the self-deceived man is attention and industry, and the businessman's conviction is described as plainly not performance rather than as unusually strong.",
+            "seductive_element": "A belief held against the evidence feels like a belief held passionately, and readers supply the emotion the passage leaves out."
+          },
+          {
+            "option": "B",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The closing sentence removes this explicitly, saying the belief may be equally false in both cases. Truth and falsity sort beliefs; they do not sort the two conditions the passage is comparing.",
+            "seductive_element": "It is the live rival, because the opening scene is built around a belief that is going to turn out wrong, and the falsity of the belief is the most conspicuous fact in it."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The third paragraph denies that anything of the kind is available, since the threshold is not a policy and there is no moment at which it could have been adopted. A statable motive would restore the deceiver the account has taken away.",
+            "seductive_element": "Explanations of self-deception normally end in a motive, and readers finish the account in the shape they already know."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "systematic",
+      "passage_use": "In the cases we call self-deception the movement is systematic",
+      "meaning_here": "happening in the same direction every time rather than at random",
+      "difficulty": "medium"
+    },
+    {
+      "word": "threshold",
+      "passage_use": "What is unequal is the threshold",
+      "meaning_here": "the level a piece of evidence has to reach before it is accepted",
+      "difficulty": "medium"
+    },
+    {
+      "word": "registering",
+      "passage_use": "how much registering is enough to count as knowing",
+      "meaning_here": "taking something in, short of consciously acknowledging it",
+      "difficulty": "hard"
+    },
+    {
+      "word": "sincerity",
+      "passage_use": "nor in the sincerity, which is complete in both",
+      "meaning_here": "genuineness of the belief, without any pretence",
+      "difficulty": "easy"
+    }
+  ],
+  "mentor": {
+    "challenge": "A puzzle is set, a solution is offered, and then the author spends a paragraph explaining why he will not call it a solution. Notice which paragraph is the claim and which is the withdrawal, because two of the six questions are decided by telling them apart.",
+    "one_sentence_summary": "Describing self-deception as lying to oneself cannot work, since the liar would have to be the person deceived, and a better description doubles not the belief but the standard, so that welcome evidence is admitted on one examination while unwelcome evidence is sent back for a confirmation never obtained; this removes the deceiver but not the difficulty, because an unequal threshold must be aimed and the aiming requires that the unwelcome content already be registered, and the account's one testable consequence is that the self-deceived man is the most attentive person in the room, separated from the merely mistaken by the work he does to keep the belief standing.",
+    "main_idea": "Self-deception is not two contradictory beliefs but one belief maintained by two standards of evidence. That description removes the deceiver, since nobody adopts the unequal standard and there is no moment at which it could have been adopted. It does not remove the puzzle, because something must sort the evidence into welcome and unwelcome before the standards can differ, and that sorting already involves registering what is being avoided. The account's payoff is a prediction: the self-deceived man attends more closely than anyone, not less.",
+    "simple_explanation": "A man is told plainly, by people with no reason to lie to him, that his business will be gone within the year. He does not argue with the numbers. He knows them by heart, with the dates. And he also, genuinely, believes it will be fine. His family can see he is not putting it on.\n\nWe normally call this lying to yourself. The author says that phrase cannot actually work. A liar has to know the thing he is hiding, and he has to be the person it is hidden from, and one person cannot be both of those at once.\n\nSo here is a better way to describe it. What is doubled is not the belief. It is the standard.\n\nThink about what anybody does with a new piece of evidence. You ask yourself whether it is good enough. Is the source reliable? Is the sample big enough? Is that really the only way to read it? There are no fixed answers to those questions, and a tiny shift in how strictly you ask them decides whether a fact gets let in or put aside. In self-deception that shift goes the same way every time. Good news is checked once and accepted. Bad news is sent back for a confirmation that somehow never quite arrives. Nothing is believed and disbelieved at the same time. It is the entry requirement that is uneven.\n\nTwo things follow, and the first is a loss. On this account there is no deception and no deceiver. Nobody sits down and chooses the uneven standard. It is not a policy at all, and there is no moment when it could have been chosen, because all of it happens inside the ordinary work of deciding whether evidence is good enough, and that is finished before anything has been decided. The word deception survives only as a label for the result, in the way we say a river chose its course.\n\nThe second thing is harder, and it is why the author will not say the puzzle is solved. An uneven standard has to be pointed somewhere. Before you can be strict about one item and easy about another, something has to have sorted them, and it sorts them by what they say: this is welcome, that is not. Whatever does that sorting has already had a good look at exactly the thing it is keeping from him. So the contradiction has not been taken out of the man. It has been moved, from a clash between two of his beliefs into a question about how much noticing counts as knowing. That question is still open, and an account that pretends otherwise is hiding behind the word mechanism.\n\nOne thing does come out of it, and you can go and look for it. If this is right, the self-deceived man is not the one who has stopped paying attention. He is the one paying far more attention than anyone around him. He has the figures every week. He knows the arguments against him better than his advisers do, and he has an answer ready for each one, and the answers are not silly; they are exactly what a careful person produces when he is applying a very demanding standard to evidence he does not like. The man who is simply wrong looks nothing like that. He has not looked, and he is not very interested.\n\nSo the difference between them is not the belief, which may be just as false in both. It is not sincerity, which is complete in both. It is how much work is going into keeping the belief on its feet.",
+    "why_difficult": "The passage asks the reader to give up the picture of two beliefs, which is the only picture most readers have of this condition, and then refuses to replace it with a tidy one. The third paragraph removes the deceiver and looks like a conclusion; the fourth takes the comfort back and says the puzzle has been moved rather than solved, and readers who stopped at the third answer the implication question with a verdict the passage withdraws. The last difficulty is the portrait at the end, which reverses the expected appearance: the self-deceived man is the best informed person in the room, and readers who expect avoidance read his diligence as confusion.",
+    "author_intention": "To replace a picture the reader is certain of, two beliefs in one head, with one that is stranger and more accurate, and then to stop short of claiming that the replacement dissolves the problem, leaving the reader with a sharper puzzle rather than a solved one.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0099-p1",
+        "role": "Sets the puzzle",
+        "note": "A man knows the figures and still believes the business will survive. Calling it lying to yourself does not work, because one person cannot be both liar and dupe."
+      },
+      {
+        "paragraph_id": "rc-0099-p2",
+        "role": "States the claim",
+        "note": "What is doubled is the standard, not the belief. Welcome evidence gets in on one look; unwelcome evidence is sent back for a confirmation that never comes."
+      },
+      {
+        "paragraph_id": "rc-0099-p3",
+        "role": "Names the first loss",
+        "note": "So there is no deceiver and no decision. Nobody adopts the uneven standard. The word deception is left as a name for the result, like a river choosing its course."
+      },
+      {
+        "paragraph_id": "rc-0099-p4",
+        "role": "Refuses to call it solved",
+        "note": "The uneven standard has to be aimed, and aiming means sorting by content. So whatever sorts has already noticed the thing being kept from him."
+      },
+      {
+        "paragraph_id": "rc-0099-p5",
+        "role": "Makes it testable",
+        "note": "The prediction is surprising: the self-deceived man attends more, not less. The merely mistaken man has not looked. The difference is the work being done."
+      }
+    ],
+    "tone_progression": "It opens as narrative and sympathetic, becomes technical and dry while the mechanism is built, turns scrupulous in the two paragraphs that measure what the mechanism costs, and ends observational, offering a picture the reader can check against people he knows.",
+    "key_transitions": [
+      "'What is doubled in self-deception is not the belief but the standard.' (paragraph 2) — the redescription arrives, stated flatly.",
+      "'Two things have to be said about this at once, and the first is a loss.' (opening of paragraph 3) — the author begins pricing his own account.",
+      "'The contradiction has not been removed from the man. It has been moved.' (paragraph 4) — the claim to have solved the puzzle is expressly withdrawn."
+    ],
+    "misunderstanding": "The commonest wrong model is that the passage explains self-deception away, so that the reader finishes believing there was never anything puzzling in it. The fourth paragraph says the reverse, in terms, and calls an account that pretends otherwise a piece of word-play. The second wrong model restores a decision: readers who accept that there is no conscious lie still install a tacit choice not to look, which the third paragraph forbids by denying that any moment of adoption exists. The third reads the closing portrait as a picture of muddle, when the man's replies are said not to be stupid.",
+    "traps_summary": "This set offers the rejected description as an inference and again as a title, a tacit decision where the passage denies any decision, a sign promoted into a necessary condition, a verdict about blame the account has no room for, and the falsity of the belief as the difference the last sentence rules out. Asking whether a claim requires somebody to have done something answers four of the six.",
+    "reading_lesson": "When a passage offers a redescription, read on for the paragraph that says what the redescription costs, because in this shape of argument the author's real position is the claim minus its price, and options built from the claim alone will look exactly right. The companion habit is to notice a sentence that lists what a difference does not consist in: an author who writes neither this nor that has eliminated two options for you, and the remaining term is what the question will be built on.",
+    "real_world": "The same asymmetry is easy to watch in ordinary life and hard to watch in oneself: the reader who checks the credentials of a study that disagrees with him and not of the one that agrees, the manager who wants a second opinion only about the discouraging forecast, the patient who researches the reassuring diagnosis less thoroughly than the alarming one. In each case nobody has lied to anybody; the evidence has simply been asked to clear two different heights.",
+    "takeaway": "Self-deception is not believing two things at once; it is making one of them prove itself twice.",
+    "reflection_question": "Which piece of evidence have you recently sent back for confirmation, and would you have sent it back if it had pointed the other way?"
+  }
+}

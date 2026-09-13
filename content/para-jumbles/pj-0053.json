@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0053",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "mathematics-logic",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "title": "Nothing But What Was Put In",
+    "theme": "why a definition cannot be false and can still be a bad one, and what the test of a good definition actually measures",
+    "estimated_time_sec": 140,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "question_answer",
+    "cohesion_signals": ["article_given_new", "demonstrative", "connective_explicit", "lexical_repetition"],
+    "primary_trap": "lexical_decoy",
+    "secondary_traps": ["competing_opener", "false_pronoun_binding"],
+    "dna_traits": ["surface_matching", "opener_heuristic", "inference_implicit"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 5,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 3,
+      "competing_endings": 3,
+      "lexical_decoys": 5,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "C",
+    "learning_objective": "join sentences by the question each one answers rather than by the vocabulary they share",
+    "reasoning_patterns": ["disc.question_then_answer", "disc.concession", "disc.demonstrative", "disc.lexical_chain", "struct.question_answer"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is built out of vocabulary: three of the four sentences use the language of truth and error — correct, misdescribe, correspondence — and the sentence about definitions that survived a century sits most comfortably beside the one that says a definition cannot be false, since both end on the word truth or its cousin. That pairing strands 'that test', which has no test behind it once the sentence naming one has been pushed to the end. A second rival opens on 'Nothing follows from a definition except what was put into it', a flat general truth with no backward reference at its head; it closes with 'the answer is no', and in the first seat there is no question for it to answer. A third rival puts the concession second, binding its 'It' to the definition in the opening sentence; the concession's 'still' then concedes against a claim the paragraph has not yet made.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General philosophy of mathematical definition; no specific theorem, mathematician or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-tier question-and-answer item whose four sentences deliberately share a vocabulary of truth and falsity, so that surface matching produces a wrong pair. The real spine is a sequence of moves — question, answer, concession, verdict — and each joint is welded by a small word: the answer, still, that test."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The definitions that have survived a century of use are the ones that passed that test, and what they passed was a test of consequence rather than of correspondence.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "Nothing follows from a definition except what was put into it, so it cannot misdescribe anything the way a claim can, and on that ground the answer is no.",
+      "role": "answer"
+    },
+    {
+      "label": "C",
+      "text": "It can still be a bad definition, and the test is what it lets you prove: a boundary drawn in the wrong place leaves the theorems either trivial or unstatable.",
+      "role": "concession"
+    },
+    {
+      "label": "D",
+      "text": "A student meeting an unfamiliar definition for the first time nearly always asks whether it is the correct one, and the question deserves better than a shrug.",
+      "role": "question"
+    }
+  ],
+  "correct_order": ["D", "B", "C", "A"],
+  "links": [
+    {
+      "from": "D",
+      "to": "B",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'On that ground the answer is no' requires a question that can be answered yes or no, and the only one in the set is whether an unfamiliar definition is the correct one."
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "'It can still be a bad definition' concedes against a verdict just delivered. The verdict is that a definition cannot misdescribe anything, and without it the word 'still' has nothing to push against."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'Passed that test' points at a particular test, and only one sentence names a test: what a definition lets you prove. A demonstrative cannot collect a test that arrives after it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A question, a flat answer, a concession that takes most of the answer back, and a verdict on what the concession leaves standing. The shape is the argument: the paragraph refuses the student's question in the form it was asked, then rebuilds a better version of it, and the order of those two moves cannot be swapped without making the concession concede to nothing.",
+    "movement": [
+      { "label": "D", "why_here": "It asks the question, and it is the only sentence that introduces its subject rather than referring back to it. Everything after this either answers it, qualifies the answer, or judges the qualification." },
+      { "label": "B", "why_here": "The answer, given in the form the question invited. Its 'so' draws the inference in the second seat rather than the last, and its closing clause, 'the answer is no', is what ties it to the question in front of it." },
+      { "label": "C", "why_here": "The concession, and the nucleus. 'Still' marks a retreat from the verdict just given, and the sentence replaces the discarded test of truth with a working one: what the definition lets you prove." },
+      { "label": "A", "why_here": "The verdict, and the close. It reports what a century of use has selected for, and 'that test' can only be the test named immediately before. The paragraph ends on what survived rather than on an instruction." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DBAC",
+        "trap_type": "lexical_decoy",
+        "why_tempting": "The answer ends on what a definition cannot do — misdescribe — and the verdict ends on correspondence, which is the same idea in a longer word. Two sentences that finish on the vocabulary of truth look like a pair, and the concession, which talks about theorems and boundaries, looks like the odd one that can be tucked in anywhere.",
+        "where_it_breaks": "The verdict says the survivors 'passed that test'. In the third seat no test has been named, because the sentence that names one, the test of what a definition lets you prove, has been moved behind it. Shared vocabulary is a weaker signal than a demonstrative, and here the two disagree."
+      },
+      {
+        "order": "BDCA",
+        "trap_type": "competing_opener",
+        "why_tempting": "'Nothing follows from a definition except what was put into it' is a general principle stated without a pronoun, a demonstrative or a connective at its head, and it is the sort of sentence a philosophical paragraph often begins with.",
+        "where_it_breaks": "It ends 'on that ground the answer is no'. An answer needs a question, and in the first seat there is none; the question about whether an unfamiliar definition is the correct one arrives afterwards, where it reads as a puzzle the paragraph has already settled."
+      },
+      {
+        "order": "DCBA",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "The concession opens 'It can still be a bad definition', and there is a definition in the first sentence for 'It' to bind to. Read that way the paragraph seems to move briskly from the student's question to the answer that matters.",
+        "where_it_breaks": "'Still' concedes against something asserted, and the assertion it needs — that a definition cannot be false at all — is in the sentence this order pushes behind it. The paragraph would take back a claim it has not yet made, and would then make it."
+      }
+    ],
+    "trap_named": "The trap is a shared vocabulary standing in for a shared joint. This paragraph is about truth, so nearly every sentence in it uses a word from that family, and a solver who follows lexical chains will be pulled towards a pair the argument forbids. Words tell you that sentences belong in the same paragraph; only references, connectives and concessions tell you which sentence stands next to which. Where a lexical chain and a demonstrative disagree, the demonstrative decides.",
+    "solving_habit": "Before you join two sentences because they share a word, ask what question each of them answers. Two sentences can be about the same thing and still be three moves apart in the argument."
+  },
+  "mentor": {
+    "challenge": "Almost every sentence here talks about truth. That is the decoy; the joins are made of much smaller words.",
+    "paragraph_plain": "A student who meets an unfamiliar definition for the first time nearly always wants to know whether it is the right one, and the question deserves a proper reply. Nothing follows from a definition except what was built into it, so it cannot get the world wrong the way a claim can, and on that ground the answer is no. It can still be a bad definition, though, and the test is what it allows you to prove: draw the boundary in the wrong place and your theorems come out either trivial or impossible to state. The definitions that have lasted a century are the ones that passed that test, and what they passed was a test of usefulness, not of accuracy.",
+    "takeaway": "Shared words put sentences in the same paragraph. Only references put them side by side."
+  }
+}

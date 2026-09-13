@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0054",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 83,
+    "genre": "science",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "title": "Bending It Instead of Making More",
+    "theme": "why a lighthouse was seen further not by burning more oil but by aiming the light it already had",
+    "estimated_time_sec": 75,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "problem_solution",
+    "cohesion_signals": ["article_given_new", "lexical_repetition", "connective_explicit", "temporal_sequence"],
+    "primary_trap": "none",
+    "secondary_traps": ["anchor_pair", "competing_opener", "generic_the"],
+    "dna_traits": ["surface_matching", "opener_heuristic"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 2,
+      "concept_abstractness": 1,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 1,
+      "competing_openings": 3,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "C",
+    "learning_objective": "refuse a remedy the opening seat, and place the failed attempt between the problem and the repair",
+    "reasoning_patterns": ["disc.problem_then_solution", "disc.given_new", "disc.cause_effect", "struct.problem_solution"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The rival that costs most solvers a mark welds the problem straight onto the remedy, because a problem-and-solution paragraph seems to want its two halves together and the sentence about oil looks like background. That leaves the remedy answering the wrong thing: 'stop making light and start aiming it' is a reply to the burning of more oil, and the sentence describing the oil would then arrive after the glass had already replaced it. A second rival opens on the remedy itself, whose 'The remedy' can be read as the general definite of a familiar story; a remedy cannot precede the damage, and its 'the stray beams' has no beams to collect. A third rival opens on the keepers and the oil, taking 'the waste' as a general phrase; the waste is defined by the flame throwing its light in every direction, and that sentence would then follow the answer to it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General optics and lighthouse illumination; no specific lighthouse, engineer or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy problem-and-solution item with no engineered trap, but with two sentences that can be read as openers: a remedy announced with a definite article and a historical sentence about keepers whose 'the waste' looks general. Both are refused by what they presuppose. The inference marker sits in the second seat and the paragraph closes on a measured result."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The same lamp was then visible twice as far out, and the glass cost less than the oil it saved in a single winter.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "A flame at the top of a tower throws its light in every direction, and most of it goes into the sky, into the ground, or into the rock behind.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "The remedy was to stop making light and start aiming it, and rings of glass set around the lamp bend the stray beams into a single flat sheet that leaves the tower at about the height of a deck.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "Keepers answered the waste by burning more oil, so a night's light cost a great deal more without much gain in the distance at which a ship could pick it out.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["B", "D", "C", "A"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "'The waste' names something already described, and the description is the light going into the sky, the ground and the rock behind. Nothing else in the set wastes anything."
+    },
+    {
+      "from": "D",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'Stop making light and start aiming it' is a reply to an attempt to make more light, and the only such attempt is the burning of more oil. The remedy is defined by what it replaces."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "causal_chain",
+      "reliability": "high",
+      "explanation": "'The same lamp' and 'the glass' both point at the arrangement just described, and the result reported — twice the distance, at less cost than the oil — measures exactly what the rings were installed to change."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "Problem, failed answer, real answer, result. The failed answer is the sentence that makes the paragraph work: without it the remedy has nothing to correct, and the phrase 'stop making light' would be answering a question nobody had asked. Four sentences, each defined by the one before it.",
+    "movement": [
+      { "label": "B", "why_here": "It states the problem and introduces everything the rest of the paragraph refers to: a flame, a tower, and light going everywhere except where it is wanted. It is the only sentence that describes rather than points." },
+      { "label": "D", "why_here": "The obvious answer, and the wrong one. 'The waste' collects the scattered light of the first sentence, and its 'so' draws the cost-and-benefit conclusion in the middle of the paragraph rather than at the end." },
+      { "label": "C", "why_here": "The remedy, defined against the failure just described: not more light, but the same light aimed. Placed any earlier it would be repairing a fault the paragraph has not reported." },
+      { "label": "A", "why_here": "The result, and the close. 'The same lamp' insists that nothing was added to the source, which is the whole point, and the paragraph ends on a measurement rather than on a verdict." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BCDA",
+        "trap_type": "anchor_pair",
+        "why_tempting": "A paragraph that states a problem seems to want its solution next, and the sentence about keepers burning more oil reads like background detail that could sit anywhere. Solvers who have identified the shape as problem-and-solution often fix that pair before reading the rest.",
+        "where_it_breaks": "The remedy is stated as a contrast — stop making light, start aiming it — and the making of more light is in the sentence about oil. Put the oil afterwards and the paragraph replaces a practice it has not yet described, then describes it as though it were still in force."
+      },
+      {
+        "order": "CBDA",
+        "trap_type": "generic_the",
+        "why_tempting": "'The remedy was to stop making light and start aiming it' can be read as the general definite of a writer opening on a familiar story, and the sentence is the most quotable in the set.",
+        "where_it_breaks": "A remedy cannot be offered before the damage. In the first seat there is no waste for it to repair, and 'the stray beams' points at beams that have not been described as straying. The paragraph would explain at the end the problem it assumed at the start."
+      },
+      {
+        "order": "DBCA",
+        "trap_type": "competing_opener",
+        "why_tempting": "Keepers burning more oil is a concrete historical opening, and 'the waste' can be taken as a general phrase for the inefficiency of an open flame, which most readers would grant without an introduction.",
+        "where_it_breaks": "The waste is defined by the sentence about light going into the sky, the ground and the rock behind, and that sentence would then follow the attempt to answer it. The word is doing backward reference here, not general knowledge."
+      }
+    ],
+    "trap_named": "There is no hidden device in this item; the difficulty is the ordinary one of placing a repair. Two sentences read as though they could open, one because it begins with 'The remedy' and one because it begins with a historical subject, and both are refused by the same test: what does this sentence assume the reader already knows? A remedy assumes damage. An answer assumes a question. A waste assumes something wasted.",
+    "solving_habit": "In any problem-and-solution paragraph, find the failed attempt before you place the successful one. The remedy is usually written against the failure, not against the problem, and that is what fixes the middle."
+  },
+  "mentor": {
+    "challenge": "Three sentences could plausibly go second. Ask what each of them assumes has already been described.",
+    "paragraph_plain": "A flame at the top of a tower sends its light out in all directions, and most of it disappears into the sky, into the ground, or into the rock behind. Keepers responded to that waste by burning more oil, so a night's lighting cost far more without adding much to the distance at which a ship could see it. The answer turned out to be to stop producing light and start directing it: rings of glass placed around the lamp bend the escaping beams into a single flat sheet that leaves the tower at roughly the height of a ship's deck. The same lamp was then visible twice as far away, and the glass cost less than the oil it saved in one winter.",
+    "takeaway": "A repair is written against the last failed attempt, not against the original problem."
+  }
+}

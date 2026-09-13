@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0055",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "title": "The Pan Before the Recipe",
+    "theme": "why probate inventories date a change in cooking more honestly than the recipe books that describe it",
+    "estimated_time_sec": 115,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "hypothesis_support",
+    "cohesion_signals": ["article_given_new", "connective_explicit", "former_latter", "lexical_repetition"],
+    "primary_trap": "misleading_connective",
+    "secondary_traps": ["competing_opener", "generic_the"],
+    "dna_traits": ["surface_matching", "global_tracking", "opener_heuristic"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 4,
+      "competing_openings": 3,
+      "competing_endings": 2,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "place a contrast marker by the thing it contrasts with rather than by the seat a turn usually occupies",
+    "reasoning_patterns": ["disc.transition_word", "disc.contrast", "disc.given_new", "disc.claim_then_evidence", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival moves the sentence carrying 'however' into the second seat, because a paragraph that opens by ranking two kinds of document seems to want its turn immediately, and solvers place contrast markers by position rather than by what they deny. It is refused by three words: 'The other kind' counts, and what it counts is a kind of document already described, which is the recipe book. A second rival opens on the recipe book itself, a concrete and readable sentence; 'The readable one' has no pair behind it in the first seat. A third rival opens on the three counties, whose 'the inventories' reads like a general definite; it is refused by 'on that principle', which needs a principle stated, and only the sentence about neighbours with no interest in fashion states one.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General method in social and economic history, on probate inventories against printed recipe books; no specific county, document or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A medium item in which a 'however' is placed one seat later than habit expects. The counting phrase 'the other kind' is the hard evidence, and it disagrees with the connective; the counting phrase wins. The inferential 'therefore' sits in the second seat and the paragraph ends on the record rather than on a verdict."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "Three counties have been worked through on that principle, and the pan appears in the inventories a full generation before the dish appears in any book printed for that market, with no example yet of the sequence running the other way.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "The readable one is a recipe book, which records what its compiler thought worth recommending and therefore dates a fashion among households that could afford to buy books.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "Two kinds of document survive from the century in which the new crops reached ordinary kitchens, and the more readable of the two is the less trustworthy.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "The other kind, however, was drawn up after a death by neighbours with no interest in what anybody ought to be eating, and a list of that sort records the pans a man actually owned.",
+      "role": "contrast"
+    }
+  ],
+  "correct_order": ["C", "B", "D", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "B",
+      "device": "former_latter_reference",
+      "reliability": "high",
+      "explanation": "'The readable one' selects from a pair, and the pair is named only in the sentence about two kinds of document, where one is called more readable and less trustworthy than the other."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "contrast_signal",
+      "reliability": "high",
+      "explanation": "'The other kind' counts: it needs one kind to have been described already, and the described kind is the recipe book. The 'however' contrasts with what a recipe book records, not with the claim about readability."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'On that principle' points at a stated principle, and the principle is that a list made by disinterested neighbours records ownership rather than aspiration. 'The inventories' then has something to collect."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A hypothesis about evidence, followed by the support that makes it worth having. The paragraph ranks two kinds of record, describes each in turn, and then reports what happens when the ranking is applied. It is a claim about method rather than about food, which is why the last sentence is a finding and not a moral.",
+    "movement": [
+      { "label": "C", "why_here": "It sets the pair and states the hypothesis in one line: the document that is easier to read is the one to trust less. Nothing in it points anywhere but outward, which no other sentence here can say." },
+      { "label": "B", "why_here": "The first member of the pair, identified as such by 'the readable one'. Its 'therefore' draws the inference about what a recipe book can date, and the inference is drawn in the second seat, not the last." },
+      { "label": "D", "why_here": "The second member, and the nucleus. 'The other kind' fixes it immediately after the first, and its 'however' contrasts with what a compiler thought worth recommending, not with the opening claim about readability." },
+      { "label": "A", "why_here": "The support, and the close. 'On that principle' means the principle the previous sentence has just established, and the paragraph ends on the order in which the pan and the dish appear rather than on a judgement about it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDBA",
+        "trap_type": "misleading_connective",
+        "why_tempting": "'However' announces a turn, and in a paragraph that opens by ranking two things the turn is expected at once. A solver who places contrast markers by position will put the sentence in the second seat without finishing the clause it introduces.",
+        "where_it_breaks": "The sentence begins 'The other kind'. A phrase that counts needs the first member already on the page, and the first member is the recipe book, which this order pushes behind it. The contrast is with what a compiler recommends, and nothing has recommended anything yet."
+      },
+      {
+        "order": "BCDA",
+        "trap_type": "competing_opener",
+        "why_tempting": "The recipe book is the most concrete thing in the set, and a paragraph about historical evidence could reasonably start by describing a familiar source before explaining what is wrong with it.",
+        "where_it_breaks": "It opens 'The readable one', which selects one item from a pair. In the first seat there is no pair, and the sentence that supplies one — two kinds of document, the more readable being the less trustworthy — arrives afterwards, restating a distinction the paragraph has already used."
+      },
+      {
+        "order": "ACBD",
+        "trap_type": "generic_the",
+        "why_tempting": "'The inventories', 'the pan' and 'the dish' all read like the general definites of a historian writing for readers who know the field, and a striking finding is a defensible way to open a paragraph about method.",
+        "where_it_breaks": "The sentence says the counties were worked through 'on that principle', and in the first seat there is no principle to work on. The demonstrative needs the sentence about neighbours with no interest in what anybody ought to be eating, which in this order is at the very end."
+      }
+    ],
+    "trap_named": "The trap is a connective in an honest but unexpected place. The 'however' really does mark this paragraph's turn, but the turn is against the recipe book rather than against the opening ranking, so a solver who places contrast markers by habit lands one seat early. Against that stands a counting phrase: 'the other kind' needs a first kind on the page, and counting phrases are among the most reliable signals in any jumble. Where a connective and a count disagree, follow the count.",
+    "solving_habit": "Finish the sentence your connective introduces before you place it. Ask what proposition the 'however' denies, then find the sentence that asserts that proposition — it is the one that stands immediately in front."
+  },
+  "mentor": {
+    "challenge": "One sentence carries the turn word and one sentence counts to two. When they disagree about where the turn belongs, the count is the better evidence.",
+    "paragraph_plain": "Two kinds of document survive from the century when the new crops reached ordinary kitchens, and the one that is easier to read is the one to trust less. The readable one is the recipe book, which tells you what its compiler thought worth recommending and therefore dates a fashion among households wealthy enough to buy books. The other kind was drawn up after somebody died, by neighbours with no interest at all in what people ought to be eating, and a list like that records the pans a man really owned. Three counties have now been gone through on that basis, and the pan turns up in the inventories a full generation before the dish turns up in any book printed for that market, with no case yet of the order running the other way.",
+    "takeaway": "'The other kind' is arithmetic. It cannot stand until a first kind has been described."
+  }
+}

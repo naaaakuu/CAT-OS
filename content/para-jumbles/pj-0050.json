@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0050",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "religion-belief",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "Asking for Bread Without a Word",
+    "theme": "how a monastic rule against speech at working hours produced a sign lexicon large enough to be legislated against in its turn",
+    "estimated_time_sec": 125,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "narrative_chronological",
+    "cohesion_signals": ["temporal_sequence", "lexical_repetition", "demonstrative", "connective_implicit"],
+    "primary_trap": "anchor_pair",
+    "secondary_traps": ["competing_opener", "generic_the"],
+    "dna_traits": ["surface_matching", "opener_heuristic", "wm_long_chain"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 3,
+      "syntactic_complexity": 3,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 2,
+      "competing_openings": 4,
+      "competing_endings": 2,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 3,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "separate two sentences that share a vocabulary of prohibition by asking which of them the chronology allows first",
+    "reasoning_patterns": ["disc.chronology", "disc.lexical_chain", "disc.demonstrative", "disc.competing_opener", "struct.chronology"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival welds the two sentences about rules and legislating into a pair, because they share a whole vocabulary — forbid, prohibition, legislate, against — and a paragraph that opens on a rule seems to want its second thought about rules next. Put together they break twice: the closing sentence says 'a vocabulary of that size', and no size has been stated, and it complains of excessive signing before a single sign has been made. A second rival opens on the homely sentence about bread and doors, which reads like the start of a description of monastic life; the word 'still' refuses it, since something must already have been withdrawn for a need to persist in spite of it. A third rival opens on the manuals, whose 'the signs' can be taken for the general definite of a reader who knows what monastic sign language is; it fails on the chronology, because the signs are dated 'within a generation' by a sentence that would then follow the books teaching them.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General monastic history and the sign systems of silent houses; no specific order, rule, house or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A chronological item whose trap is a lexical field rather than a connective. Two sentences share the language of prohibition and want to be neighbours; the chronology forbids it. The opener is contested from two directions, by a domestic sentence that sounds like a beginning and by a sentence whose definite article can be read as general knowledge, and the inferential connective sits in the second seat rather than the last."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "A prohibition had been answered with a vocabulary of that size, and the houses that saw what was happening began legislating against excessive signing in the language they had used against speech.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "Bread still had to be asked for and a door still had to be pointed at, so within a generation each of those errands had a hand of its own.",
+      "role": "development"
+    },
+    {
+      "label": "C",
+      "text": "The rule read aloud at table did not forbid speech outright, only speech during the hours of work, which in a working house were most of the hours there were.",
+      "role": "background"
+    },
+    {
+      "label": "D",
+      "text": "The manuals written to teach the signs to novices run to several hundred entries, one for a visiting bishop, one for fish, one for the wish to be left alone.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["C", "B", "D", "A"],
+  "links": [
+    {
+      "from": "C",
+      "to": "B",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'Bread still had to be asked for' asserts that a need survived something. The only thing withdrawn anywhere in the set is speech during working hours, so the sentence about the rule has to stand in front of it."
+    },
+    {
+      "from": "B",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The manuals teach 'the signs', and the signs are the hands invented for errands one sentence earlier. Before that sentence there is nothing in the paragraph for the definite article to collect."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'A vocabulary of that size' measures itself against a stated size, and the only figure given anywhere is the several hundred entries in the manuals."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph is a short chronology with a sting at the end: a rule is made, the needs it did not abolish find another medium, the new medium grows into a lexicon, and the rule is finally turned against its own offspring. Every step is dated relative to the one before it, which is why the shape of the argument and the order of the sentences are the same thing here.",
+    "movement": [
+      { "label": "C", "why_here": "The rule, stated with the qualification that makes the rest possible: speech is forbidden at working hours, which are nearly all the hours. It is the only sentence that introduces without pointing at anything already given." },
+      { "label": "B", "why_here": "The immediate consequence. 'Still' locates it after a withdrawal, and 'within a generation' starts the clock that the rest of the paragraph runs on. Its 'so' draws the small inference early, where the chronology needs it." },
+      { "label": "D", "why_here": "The evidence of scale, a generation or more later. The manuals can only teach signs that exist, and the number they contain is what the last sentence measures itself against." },
+      { "label": "A", "why_here": "The upshot, and the close. It names the whole movement in one clause and then reports the houses turning the original prohibition on the thing the prohibition had created. 'Of that size' fixes it immediately after the count." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CABD",
+        "trap_type": "anchor_pair",
+        "why_tempting": "The sentence about the rule and the sentence about legislating share a whole vocabulary — forbid, prohibition, legislate, against, speech — and a solver who has found a lexical field usually trusts it. Read together they sound like a rule stated and then extended, which is a perfectly ordinary way for a paragraph about monastic discipline to begin.",
+        "where_it_breaks": "The second of the pair says 'a vocabulary of that size' when no size has been mentioned, and it complains of excessive signing before the paragraph has produced a single sign. Shared words are evidence that two sentences belong in the same paragraph, never evidence that they belong side by side."
+      },
+      {
+        "order": "BCDA",
+        "trap_type": "competing_opener",
+        "why_tempting": "Bread and a door make a concrete, unpretentious opening, and the sentence carries no pronoun and no demonstrative. A solver applying the rule that the opener is the sentence which refers to nothing will find it here rather than in the sentence beginning 'The rule'.",
+        "where_it_breaks": "'Still had to be asked for' says that a need persisted in spite of something. Nothing has been taken away yet in the first seat, so the word has no work to do, and the hand invented for each errand would be answering a silence the paragraph has not imposed."
+      },
+      {
+        "order": "DCBA",
+        "trap_type": "generic_the",
+        "why_tempting": "'The manuals written to teach the signs to novices' can be read as the general definite of a writer assuming his reader knows what monastic sign language was, in which case the sentence introduces the subject and the rest explains how it came about.",
+        "where_it_breaks": "The chronology reverses. The signs are dated by 'within a generation' in the sentence about bread and doors, so books teaching them cannot be described before they exist. The definite article is doing backward reference here, not general knowledge, and the sentence it points at is behind it."
+      }
+    ],
+    "trap_named": "The trap is a lexical field mistaken for an adjacency. Two sentences in this set are built from the same words because the paragraph's point is that the same words came round twice; a solver who welds them has been caught by the very repetition the author designed. The defence in a chronological paragraph is always to ask what each sentence presupposes has already happened, and to let the clock, not the vocabulary, decide who stands next to whom.",
+    "solving_habit": "When two sentences share a striking vocabulary, ask whether the repetition is a join or a return. A join puts them side by side; a return puts a whole development between them, and the return is what a good writer is usually doing."
+  },
+  "mentor": {
+    "challenge": "Two sentences here are made of the same words. That is the reason they must not be neighbours, not the reason they must be.",
+    "paragraph_plain": "The rule read out at mealtimes in these houses did not ban speech altogether, only speech during working hours, which in a busy monastery meant nearly all of them. Bread still had to be requested and doors still had to be indicated, so within a generation each of those small errands had acquired a hand sign of its own. The manuals written to teach the signs to new arrivals run to several hundred entries, with one for a visiting bishop, one for fish and one for the wish to be left alone. A ban had been answered by a vocabulary that large, and the houses that noticed what had happened started legislating against too much signing, in exactly the language they had once used against talking.",
+    "takeaway": "Repeated words can mean a writer has come back to a point, not that two sentences touch."
+  }
+}

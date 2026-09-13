@@ -1,0 +1,399 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0105",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "psychology",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "stage": "advanced",
+    "skills": [
+      "main-idea-extraction",
+      "tone-detection",
+      "inference",
+      "evidence-anchoring",
+      "argument-tracking"
+    ],
+    "word_count": 489,
+    "question_count": 4,
+    "question_types": [
+      "tone",
+      "inference",
+      "except",
+      "title_selection"
+    ],
+    "theme": "curiosity redescribed as a response to a visible gap rather than an appetite for knowledge, supported by a curve that falls at both ends, by the collapse of the state on receipt of an answer of any worth whatever, and by the possibility of installing it from outside, with the classroom advice to arouse curiosity criticised not for failing but for succeeding, since the gap closes exactly when the work begins",
+    "estimated_time_min": 7.5,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-07",
+    "reviewer_notes": "The tone question is deliberately built without a pair of caricatures flanking a measured answer: all four candidates are positions an intelligent reader could hold, and the key names two different attitudes to two different objects, the account and the lesson drawn from it. The closing paragraph defends the teacher and the pupils while condemning the advice, which is what kills the exasperated option.",
+    "length_class": "medium",
+    "structure": "thesis_support",
+    "viewpoints": 2,
+    "tone": "dry, admiring of the theory, unimpressed by its classroom use",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 4,
+      "inference_depth": 5,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.claim_evidence",
+      "struct.definition",
+      "struct.contrast",
+      "struct.conclusion",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.intent",
+      "comp.attention_span",
+      "arg.evidence",
+      "arg.generalization",
+      "arg.causal_claim",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.author_view_application",
+      "lang.tone_shift",
+      "scope.condition",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the exasperated option, since the final paragraph does end in a complaint; the complaint is aimed at a piece of advice rather than at the people who took it, and the same paragraph calls the advice sound, calls the attention it buys real, and ends by defending the pupils against the charge of laziness. Q2's rival is the option restoring the appetite comparison in a qualified form, which the first paragraph removes by pointing out that appetites rise as supply falls while this one rises as supply rises, and which the third refuses again by saying nobody can be made hungry by being told that food exists. Q3's rival is the option about a person who knows nothing not being curious, which reads like a premise rather than a support and is in fact the first paragraph's evidence for the whole account. Q4's rival is the title naming the classroom, which takes the last movement for the thesis and would leave the first two paragraphs unaccounted for.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "indifferent",
+      "installed",
+      "registered",
+      "listlessness"
+    ]
+  },
+  "passage": {
+    "title": "The Gap That Closes on the Answer",
+    "reading_time_min": 2.8,
+    "paragraphs": [
+      {
+        "id": "rc-0105-p1",
+        "text": "Curiosity is ordinarily described as an appetite for knowledge, which makes it a standing quality of a person, held in larger and smaller amounts like patience or a sweet tooth. The description does not survive the first thing anybody notices about it. Appetites rise as supply falls; this one rises as supply rises. A man who knows nothing whatever about the fourteenth century, or about the breeding of racing pigeons, is not curious about either. He is indifferent, and no quantity of ignorance will move him. Curiosity begins when he knows enough for the shape of what is missing to be visible to him, when there is a question he can put, with a place in it where an answer would go. It is not, then, a hunger for a substance. It is a response to a gap, and a gap has to have edges before anybody can see it."
+      },
+      {
+        "id": "rc-0105-p2",
+        "text": "Two things follow, and both can be watched. The first is the shape of the curve. Interest is absent at the bottom, where nothing is known; it is absent again at the top, where nothing is missing; and it stands at its height somewhere between, at the point where a person has just enough to be aware of what he lacks. The second is the collapse. The state ends at the instant the answer arrives, and it ends whether the answer was worth having or not. A date you could not recall and looked up, and had forgotten again within the minute, closed the gap as completely as a discovery would have closed it. Nothing in the feeling registered the difference, because the feeling was never about the value of the knowledge. It was about the hole."
+      },
+      {
+        "id": "rc-0105-p3",
+        "text": "The third observation settles the matter, because no appetite behaves like it. Curiosity can be installed from outside, in a person who did not have it a moment before, by the simple device of telling him that there is something about a subject he does not know. Nobody can be made hungry by being informed that food exists. And here the practical trouble begins, because that same fact is the basis of a piece of advice every teacher has been given: open the lesson by arousing curiosity, set a puzzle, withhold the answer. The advice is sound and the attention it buys is real. What is seldom said is when the attention is withdrawn. The gap closes on receipt of the answer, and receipt is the beginning of the work rather than its end, since nothing has yet been done with what has arrived. Curiosity will carry a class to the edge of a subject and will not carry it one step further, and a teacher who was sold it as a motive for the labour itself was sold an instrument for a job it was never shaped to do. The listlessness that follows is not evidence that the pupils were lazy."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0105-q1",
+      "type": "tone",
+      "skill": "tone",
+      "patterns": [
+        "lang.tone_shift",
+        "comp.intent",
+        "arg.qualification"
+      ],
+      "target_mistake": "attributing the closing complaint to the teachers, when the paragraph defends both the teachers and the pupils and blames the advice",
+      "prediction_target": "The learner should predict two attitudes to two objects: approval of the account itself, and something cooler directed at the use it has been put to.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "author_purpose",
+        "inference"
+      ],
+      "stem": "The tone of the passage is best described as",
+      "options": {
+        "A": "enthusiastic about the theory and confident about the lesson drawn from it",
+        "B": "detached and expository, declining to judge the uses made of the theory",
+        "C": "irritated by the theory’s vogue and severe on the teachers who repeat it",
+        "D": "appreciative of the account itself and dry about the lesson drawn from it"
+      },
+      "correct": "D",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The last paragraph divides its judgements carefully. The advice is called sound and the attention it buys real; the complaint is that what is seldom said is when the attention is withdrawn; and the closing sentence insists that the listlessness which follows is not evidence that the pupils were lazy.",
+        "correct_reasoning": "The correct option matches two attitudes to two objects. Towards the account the author is approving and does the work of building it, calling the third observation the one that settles the matter; towards the practical lesson he is level and unimpressed, saying the instrument was sold for a job it was never shaped to do. Neither half is loud, and the second is the drier of the two, which is exactly what the wording of the closing sentences delivers.",
+        "passage_anchor": "rc-0105-p3",
+        "question_type_note": "A tone question asks about attitude, and an author may hold different attitudes to different objects. Say what he approves of and what he does not before reading the options.",
+        "reading_habit": "When a passage ends in a complaint, check who is being blamed. Authors often criticise a practice while explicitly protecting the people who follow it, and options that transfer the blame to the people are the standard trap.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "over_intense_tone",
+            "why_wrong": "Nothing here is warm. The account is built in a flat, observational register, and the passage's final movement is an unillusioned statement of what the theory will not do, which is not how an enthusiast finishes.",
+            "seductive_element": "The author clearly believes the account and calls its third support decisive, and conviction is easily heard as enthusiasm."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "The first two paragraphs are indeed expository, but the third judges the use of the theory in plain terms, saying the instrument was sold for a job it was never shaped to do. Declining to judge is precisely what the passage stops doing at its turn.",
+            "seductive_element": "It is the safe answer in any tone question, and two-thirds of the passage really is straight exposition, so the option is accurate about everything except the ending."
+          },
+          {
+            "option": "C",
+            "trap_type": "wrong_valence_tone",
+            "why_wrong": "The teachers are not the target. The paragraph says the advice was sound, that a teacher was sold an instrument, and that the pupils' listlessness is not evidence of laziness, all of which distributes the fault away from the people in the room.",
+            "seductive_element": "It is the live rival, because the ending is unmistakably a complaint, and the readiest assumption is that a complaint about classroom practice is a complaint about the people practising it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0105-q2",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "scope.condition"
+      ],
+      "target_mistake": "restoring the appetite comparison in a qualified form, which the passage removes in its first paragraph and refuses again in its third",
+      "prediction_target": "The learner should predict that the answer will describe curiosity as something that can be created from outside, since that is the observation the passage calls decisive.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "It can be inferred from the passage that a person's curiosity about a subject",
+      "options": {
+        "A": "can be produced in him by somebody who merely tells him that there is something he does not know",
+        "B": "depends chiefly on how much knowing it would be worth to him, whatever else he knows",
+        "C": "grows steadily as he comes to learn more and more about it",
+        "D": "is the same in kind as hunger, though aimed at knowledge rather than at food"
+      },
+      "correct": "A",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph states the decisive observation and contrasts it with an appetite in the next sentence. Curiosity can be installed from outside in somebody who did not have it a moment before, simply by telling him there is something about a subject he does not know, whereas nobody can be made hungry by being told that food exists.",
+        "correct_reasoning": "The correct option is that observation stated as a general fact about people. It follows from the account rather than merely accompanying it: if the state is a response to a visible gap, then making a gap visible is sufficient to produce it, which is why the passage treats this as the observation that settles the matter and why it becomes the basis of the classroom advice discussed immediately afterwards.",
+        "passage_anchor": "rc-0105-p3",
+        "question_type_note": "An inference question is decided by what the author's own mechanism entails. Where a passage names one observation as decisive, the inference is usually drawn from that one.",
+        "reading_habit": "When an author says a particular fact settles a question, ask what the fact would have to be true of people generally. That generalisation is what an inference question will be built on.",
+        "distractors": [
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The curve described in the second paragraph falls at both ends. Interest is absent where nothing is known and absent again where nothing is missing, reaching its height in between, so steady growth with knowledge is the shape the passage denies.",
+            "seductive_element": "The first paragraph does say curiosity rises as supply rises, and a reader who stops there has half the curve and reads it as a straight line."
+          },
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The second paragraph removes the value of the knowledge from the account altogether, saying the state ends whether the answer was worth having or not, and that the feeling was never about the value of the knowledge but about the hole.",
+            "seductive_element": "Wanting to know things that will be useful is such an ordinary description of interest that readers supply it without noticing that the passage has explicitly excluded value."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is the description the passage sets out to replace, returned in a hedged form. Its first paragraph gives the reason it fails, that appetites rise as supply falls while this rises as supply rises, and the third adds that nobody can be made hungry by being told food exists.",
+            "seductive_element": "It is the live rival, because the concessive wording makes it sound like a careful qualification rather than the rejected view, and hunger is the metaphor the passage itself keeps using."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0105-q3",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.attention_span",
+        "arg.evidence"
+      ],
+      "target_mistake": "counting the rejected picture of curiosity as a standing quality of a person among the passage's supporting observations",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "argument"
+      ],
+      "stem": "The passage offers all of the following in support of its account of curiosity EXCEPT",
+      "options": {
+        "A": "that the state ends at the instant an answer arrives, however it was obtained",
+        "B": "that the state is present in some people far more strongly than in others",
+        "C": "that ignorance of a subject does not by itself produce curiosity about it",
+        "D": "that interest disappears again at the top of the range, where the gap has been closed"
+      },
+      "correct": "B",
+      "estimated_time_sec": 70,
+      "explanation": {
+        "expert_notice": "The supports are marked as supports. The first paragraph offers the man who knows nothing and is therefore indifferent; the second offers two things said to follow and to be watchable, the shape of the curve and the collapse. Nothing anywhere compares one person with another.",
+        "correct_reasoning": "The correct option belongs to the description the passage is arguing against. Treating curiosity as a standing quality held in larger and smaller amounts, like patience or a sweet tooth, is named in the opening sentence as part of the ordinary account and is said not to survive the first thing anybody notices about the feeling. Differences between people appear nowhere as evidence, and on the account given they would be beside the point, since the state is a response to a gap rather than a property somebody carries about with him.",
+        "passage_anchor": "rc-0105-p1, rc-0105-p2",
+        "question_type_note": "On an EXCEPT question, sort the options by where they come from. The answer is often not absent from the passage but present on the wrong side of the argument.",
+        "reading_habit": "When an author opens by stating the view he means to replace, keep a note of its vocabulary. Distractors and answers alike are built from it, and the difference is always which side of the turn the material sits on.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This is the second of the two things said to follow, given the name collapse, and illustrated by the date looked up and forgotten within the minute. The passage adds that nothing in the feeling registered the difference, which is the support the option restates.",
+            "seductive_element": "It sounds like a consequence of the theory rather than evidence for it, and readers hunting for the odd one out suspect anything that looks like a conclusion."
+          },
+          {
+            "option": "D",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The second paragraph supplies both ends of the curve, saying interest is absent at the bottom where nothing is known and absent again at the top where nothing is missing. The upper end is the half doing the work, since an appetite fed to satisfaction is not the model being offered.",
+            "seductive_element": "The lower end of the curve is the memorable half, so the upper end reads like something a reader has worked out for himself rather than an observation the passage made."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "The fourteenth century and the racing pigeons are the passage's first piece of evidence, offered to show that ignorance on its own produces indifference rather than interest. It is a support, and the one from which the whole account of gaps and edges is derived.",
+            "seductive_element": "It arrives so early that it reads as a premise being assumed rather than as an observation being offered, and premises do not feel like support."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0105-q4",
+      "type": "title_selection",
+      "skill": "main_idea",
+      "patterns": [
+        "comp.central_idea",
+        "comp.intent",
+        "struct.claim_evidence"
+      ],
+      "target_mistake": "titling the passage by its last movement, or by the appetite metaphor it exists to replace",
+      "prediction_target": "The learner should compress the passage first: curiosity is a response to a visible gap, and it ends the moment the gap is filled.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "author_purpose"
+      ],
+      "stem": "Which of the following would be the most appropriate title for the passage?",
+      "options": {
+        "A": "The Hunger That Feeds on Feeding",
+        "B": "What the Classroom Got Wrong About Attention",
+        "C": "Why People Want to Know Things",
+        "D": "The Gap That Closes on the Answer"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "The thesis and its most consequential property are stated in two different paragraphs and belong together. Curiosity is a response to a gap, and a gap has to have edges; and the state ends at the instant the answer arrives, whatever the answer was worth.",
+        "correct_reasoning": "A title is the claim in a few words and must need every paragraph. The correct option names the object, a gap, and the fact about it that drives the whole argument, that it closes on receipt. The first paragraph establishes the gap, the second gives the curve and the collapse, the third supplies the decisive support and then draws the practical consequence, which exists only because closing happens at the moment the answer lands.",
+        "passage_anchor": "rc-0105-p1, rc-0105-p2",
+        "question_type_note": "Title questions obey main-idea rules. Reject any candidate that would survive if a whole paragraph were deleted, and any that names the view being replaced.",
+        "reading_habit": "Write your own title in six words before reading the options. It is the fastest way to notice that a candidate has named the last section of a passage rather than its argument.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "Hunger is the description the passage exists to displace, and the first paragraph gives the reason: appetites rise as supply falls, while this rises as supply rises. A title built on the metaphor would advertise the account the author refuses.",
+            "seductive_element": "It is memorable and it catches something real, since the passage does say interest grows with what is already known, which is what makes the paradoxical phrasing attractive."
+          },
+          {
+            "option": "B",
+            "trap_type": "wrong_structural_role",
+            "why_wrong": "The classroom arrives in the last third and is a consequence drawn from the account rather than the account itself. A title naming it leaves the curve, the collapse and the observation about installing curiosity from outside with nothing to do.",
+            "seductive_element": "It is the live rival, because the passage's final movement is its most pointed and the part a reader carries away, and endings are habitually mistaken for theses."
+          },
+          {
+            "option": "C",
+            "trap_type": "too_broad",
+            "why_wrong": "The passage is not about why people want knowledge and says the feeling was never about the value of the knowledge at all. Its subject is narrower and more specific: what produces the state, and what ends it.",
+            "seductive_element": "It sounds like the natural title for anything on this subject, and generality in a title is easily mistaken for comprehensiveness."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "indifferent",
+      "passage_use": "He is indifferent, and no quantity of ignorance will move him",
+      "meaning_here": "having no interest either way in the matter",
+      "difficulty": "easy"
+    },
+    {
+      "word": "installed",
+      "passage_use": "Curiosity can be installed from outside",
+      "meaning_here": "put in place in somebody by an act from outside him",
+      "difficulty": "medium"
+    },
+    {
+      "word": "registered",
+      "passage_use": "Nothing in the feeling registered the difference",
+      "meaning_here": "took note of, in the way an instrument records a reading",
+      "difficulty": "medium"
+    },
+    {
+      "word": "listlessness",
+      "passage_use": "The listlessness that follows is not evidence that the pupils were lazy",
+      "meaning_here": "a flatness of energy, with no appetite for effort",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "A familiar feeling is given an unfamiliar definition, and then the definition is used against a piece of advice most teachers have been given. Watch where the author places the blame at the end, because the tone question is decided by exactly that.",
+    "one_sentence_summary": "Curiosity is not an appetite for knowledge, since appetites rise as supply falls and this one rises as supply rises; it is a response to a gap that has become visible, which explains why interest is absent both where nothing is known and where nothing is missing, why the state collapses the instant an answer arrives regardless of what the answer was worth, and why it can be installed in somebody merely by telling him what he does not know, and it is this last property that makes the classroom advice to arouse curiosity so misleading, since the gap closes exactly when the work begins.",
+    "main_idea": "Curiosity is a response to a gap rather than a hunger for knowledge. It requires enough knowledge for the missing piece to have a shape, it disappears when the gap is filled whatever the filling was worth, and it can be created in anybody by telling him there is something he does not know. That last property is why the advice to open a lesson by arousing curiosity works, and why it buys attention that is withdrawn at the moment the real work starts.",
+    "simple_explanation": "We usually talk about curiosity as if it were an appetite for knowledge, which makes it sound like something you have a certain amount of, the way you have patience or a sweet tooth.\n\nBut that description falls apart immediately. Appetites get stronger as you get less of the thing. Curiosity gets stronger as you get more. Somebody who knows nothing at all about the fourteenth century, or about breeding racing pigeons, is not curious about either one. He simply does not care, and piling on more ignorance will not change that. Curiosity only starts once you know enough for the missing piece to have a shape, once you can actually ask a question with a slot in it where an answer would go. So it is not a hunger for a substance. It is a reaction to a gap, and a gap needs edges before you can see it at all.\n\nTwo things follow, and you can watch both of them happen.\n\nFirst, the shape of the curve. At the bottom, where you know nothing, there is no interest. At the top, where nothing is missing, there is no interest either. The peak is in the middle, where you know just enough to notice what you are lacking.\n\nSecond, the collapse. The feeling stops the second the answer turns up, and it stops whether the answer was worth anything or not. That date you could not remember, looked up, and had forgotten again a minute later closed the gap just as completely as a real discovery would have. The feeling never noticed the difference, because it was never about how valuable the knowledge was. It was about the hole.\n\nThe third observation is the one that clinches it, because no appetite works like this. You can put curiosity into somebody who did not have it a second earlier, just by telling him there is something about a subject he does not know. You cannot make anyone hungry by telling him that food exists.\n\nAnd here is where the trouble starts, because that same fact is behind a piece of advice every teacher gets: open the lesson by arousing curiosity, set a puzzle, hold back the answer. The advice is sound, and the attention it buys is genuine.\n\nWhat nobody mentions is when that attention is taken away again. The gap closes the moment the answer arrives, and the arrival of the answer is the beginning of the work, not the end, because nothing has yet been done with it. Curiosity will carry a class right up to the edge of a subject and not one step further. A teacher who was sold it as a motive for the work itself was sold a tool for a job it was never designed to do. And the flatness that follows is not proof that the pupils were lazy.",
+    "why_difficult": "The passage replaces a description everybody uses with one that behaves in the opposite direction, and then asks the reader to hold a curve with two low ends rather than a straight line. The second difficulty is the collapse, which is stated in terms of value: the feeling ends whether or not the answer was worth having, which is easy to read past and which removes the most natural explanation of the whole phenomenon. The third is the ending, where the author criticises a practice while defending everybody involved in it, so a reader tracking the tone finds a complaint and has to work out who, if anybody, is being blamed.",
+    "author_intention": "To make the reader stop thinking of curiosity as fuel and start thinking of it as a door: excellent for getting somebody through, and no help at all once he is inside.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0105-p1",
+        "role": "Replaces the description",
+        "note": "Appetites rise as supply falls; this rises as supply rises. So curiosity is not hunger but a response to a gap, and gaps need edges."
+      },
+      {
+        "paragraph_id": "rc-0105-p2",
+        "role": "Two things you can watch",
+        "note": "Interest is low at both ends and highest in between. And it collapses the moment an answer arrives, however worthless the answer."
+      },
+      {
+        "paragraph_id": "rc-0105-p3",
+        "role": "The clincher, and the sting",
+        "note": "It can be installed from outside by telling somebody what he does not know. Which is why the classroom advice works, and why the attention ends exactly when the work starts."
+      }
+    ],
+    "tone_progression": "It opens brisk and corrective, settles into flat observation while the three supports are laid out, and turns dry at the close, praising the advice, blaming nobody in the room, and leaving a complaint that is all the sharper for being addressed to nobody in particular.",
+    "key_transitions": [
+      "'It is not, then, a hunger for a substance. It is a response to a gap.' (end of paragraph 1) — the thesis arrives once the old description has failed.",
+      "'The state ends at the instant the answer arrives, and it ends whether the answer was worth having or not.' (paragraph 2) — the property that makes the ending possible.",
+      "'What is seldom said is when the attention is withdrawn.' (paragraph 3) — the turn from theory to its practical cost."
+    ],
+    "misunderstanding": "The commonest wrong model is that the passage is attacking teachers for a mistake, which turns its final paragraph into a rebuke. The text calls the advice sound, says the attention it buys is real, and ends by defending the pupils from the charge of laziness; the complaint is that an instrument has been sold for the wrong job. The second wrong model keeps the appetite picture in a weakened form, treating curiosity as hunger aimed at knowledge, which the first paragraph rules out by pointing to the direction the feeling moves in, and the third rules out again with the remark about being told that food exists.",
+    "traps_summary": "This set offers exasperation with teachers where the passage blames a piece of advice, the appetite comparison returned in hedged form, the rejected picture of curiosity as a personal quality listed among the supports, and the closing complaint offered as the title. Asking which side of the first paragraph's turn a claim sits on answers three of the four.",
+    "reading_lesson": "When a passage ends in a complaint, identify its target before you describe the author's tone, because writers frequently condemn a practice while clearing everybody who follows it, and an option that moves the blame onto the people is the standard trap in tone questions built on such endings. The companion habit is to watch for a rejected description returning in a qualified form later in a set of options: a hedge does not repair a claim the passage refuted, and the qualification is usually there to make the rejected view sound like a careful one.",
+    "real_world": "The same limit applies wherever interest is manufactured before work is demanded: a headline that poses a question and is clicked for the answer, a documentary that opens on a mystery, a manager introducing a project with a puzzle, a trailer that is better than the film. In each case attention has been bought with a gap, and it is repaid on the spot, which is why so little of it survives to the part that takes effort.",
+    "takeaway": "Curiosity is a door, not fuel: it gets somebody into the room and has nothing left to give once he is there.",
+    "reflection_question": "Which of the things you were curious about this week did you stop caring about the instant you had the answer?"
+  }
+}

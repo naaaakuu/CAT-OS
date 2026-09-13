@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0051",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "human-behaviour",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "title": "One Name, Then Two",
+    "theme": "why an appeal naming two beneficiaries collects less than the same appeal naming one, and what that says about what a giver is buying",
+    "estimated_time_sec": 150,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "claim_evidence",
+    "cohesion_signals": ["article_given_new", "pronoun_ref", "demonstrative", "lexical_repetition"],
+    "primary_trap": "generic_the",
+    "secondary_traps": ["misleading_connective", "competing_opener"],
+    "dna_traits": ["opener_heuristic", "inference_implicit", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 4,
+      "reference_density": 5,
+      "concept_abstractness": 4,
+      "dependency_chain_length": 4,
+      "transition_ambiguity": 3,
+      "competing_openings": 5,
+      "competing_endings": 2,
+      "lexical_decoys": 3,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 4
+    },
+    "num_plausible_orderings": 4,
+    "heuristic_adversarial": true,
+    "nucleus": "D",
+    "learning_objective": "test a generic-sounding subject for the numbers it borrows before letting it open a paragraph",
+    "reasoning_patterns": ["disc.claim_then_evidence", "disc.given_new", "disc.competing_opener", "disc.pronoun_antecedent", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence beginning 'What the giver buys', because a bare generic subject is what theses are made of and the sentence states the paragraph's idea outright. It is refused by the numbers it borrows: it says the drop is already there at the second name, and both the second name and the counting it belongs to exist only in the sentence about appeals carrying one child and appeals carrying two. A second rival keeps the true opener first but promotes the explanation to second place, tempted by 'which is why', which reads as though it should follow the claim directly; the same borrowed numbers refuse it, and the sentence beginning 'The comparison that shows it' would then arrive after the matter it was brought in to show had been settled. A third rival opens on the comparison itself, on the ground that claim-and-evidence paragraphs often begin with the finding; 'it' has nothing to show in the first seat.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General behavioural work on charitable giving and identified beneficiaries; no specific study, charity or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "A cat-plus claim-and-evidence item in which three of the four sentences open on a definite or generic phrase and only one of them points outside the paragraph. The decoy opener is the explanation, which reads as a thesis until a reader checks where its numbers came from. The inferential connective sits in the third seat and the paragraph closes on a practice rather than a verdict."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The comparison that shows it is between appeals carrying one named child and appeals carrying two: the first collect more, and the fall begins at the second name rather than at the hundredth.",
+      "role": "evidence"
+    },
+    {
+      "label": "B",
+      "text": "Fundraisers reached that conclusion long before anyone measured it: the letter arriving in December carries a name, an age and a photograph, and puts the number of people in the same position, if it appears at all, in the last line.",
+      "role": "example"
+    },
+    {
+      "label": "C",
+      "text": "The generosity a stranger's photograph produces is not a quantity of sympathy divided among the people standing in it.",
+      "role": "topic"
+    },
+    {
+      "label": "D",
+      "text": "What the giver buys is a relation with somebody, and a relation cannot be had with an aggregate however small the aggregate is, so the drop is already there at the second name, long before any number big enough to exhaust a feeling.",
+      "role": "development"
+    }
+  ],
+  "correct_order": ["C", "A", "D", "B"],
+  "links": [
+    {
+      "from": "C",
+      "to": "A",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'The comparison that shows it' needs a proposition for the comparison to show, and the only proposition in the set is the claim that generosity is not a quantity being divided."
+    },
+    {
+      "from": "A",
+      "to": "D",
+      "device": "lexical_bridge",
+      "reliability": "high",
+      "explanation": "The explanation says the drop is there 'at the second name' and contrasts that with a number large enough to exhaust a feeling. Both the second name and the hundredth belong to the comparison, so the explanation has to stand behind it."
+    },
+    {
+      "from": "D",
+      "to": "B",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'That conclusion' points at a conclusion rather than at a finding, and the only sentence that concludes anything is the one about buying a relation rather than a share of sympathy."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "A claim, the comparison that tests it, the explanation of why the comparison came out that way, and finally a practice that was already built on the explanation before anyone had tested it. The paragraph is cumulative in the strict sense: each sentence uses a term the sentence before it introduced, which is why the order is fixed even though three of the four sentences begin on a definite phrase.",
+    "movement": [
+      { "label": "C", "why_here": "It states the claim, and it is the only sentence whose definite phrases point outside the paragraph: a stranger's photograph and the people standing in it need no introduction from anywhere else in the set." },
+      { "label": "A", "why_here": "The evidence, announced as such. 'The comparison that shows it' identifies what it is evidence for, and it supplies the two numbers — the second name and the hundredth — that the next sentence spends." },
+      { "label": "D", "why_here": "The explanation, and the nucleus. It says what the giver is actually buying, and its 'so' draws the inference in the middle of the paragraph rather than at the end. It cannot precede the comparison because its force depends on where the drop begins." },
+      { "label": "B", "why_here": "The close, and it closes on a practice rather than a verdict. 'That conclusion' is the relation-not-aggregate point, and the December letter shows fundraisers acting on it before anybody had produced the comparison." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "DCAB",
+        "trap_type": "generic_the",
+        "why_tempting": "'What the giver buys' is a generic subject of exactly the kind a thesis uses: no pronoun, no demonstrative, no connective at the head, and a general claim about givers rather than about any particular appeal. A solver who wants the paragraph's idea at the front will find it there and feel confirmed by how well the rest reads as support.",
+        "where_it_breaks": "The sentence spends numbers it has not been given. It says the drop is already there at the second name, and it sets that against a number large enough to exhaust a feeling; both belong to the comparison between appeals carrying one child and appeals carrying two. In the first seat there is no second name and no counting for it to belong to."
+      },
+      {
+        "order": "CDAB",
+        "trap_type": "misleading_connective",
+        "why_tempting": "The explanation reads as the immediate consequence of the claim — the claim says generosity is not a quantity divided, the explanation says what it is instead — and the inferential 'so' inside it invites a solver to place it as soon as the paragraph has something to infer from.",
+        "where_it_breaks": "The inference is about where the drop begins, and nothing has yet reported a drop. The sentence that does report one announces itself as 'the comparison that shows it', which is an offer to demonstrate a claim that the paragraph would by then have already explained and left behind."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "competing_opener",
+        "why_tempting": "Paragraphs of this shape often open on the finding and work outwards, and the comparison is the most concrete sentence in the set. A solver who distrusts abstract openings will prefer it to a sentence about quantities of sympathy.",
+        "where_it_breaks": "It opens 'The comparison that shows it'. In the first seat 'it' has nothing to refer to, and a sentence that announces itself as a demonstration cannot be the first thing said."
+      }
+    ],
+    "trap_named": "The trap is the generic subject. English lets a writer say 'the giver', 'the reader', 'the buyer' to mean anybody at all, and such a phrase looks like the beginning of an argument because so many arguments do begin that way. But a sentence can open generically and still be tied to its place by something further in — here by two numbers it did not introduce. The defence is to read past the subject: find every quantity, name and comparison a candidate opener uses, and ask which sentence supplied it.",
+    "solving_habit": "Underline the numbers. A sentence that mentions the second, the third, the hundredth or the last is standing in a count, and the count has to be somewhere behind it, whatever its opening words suggest."
+  },
+  "mentor": {
+    "challenge": "Three sentences here begin on a definite or generic phrase. Only one of them points at something outside the paragraph.",
+    "paragraph_plain": "The generosity a stranger's photograph produces is not a fixed amount of sympathy being shared out among the people in the picture. The comparison that demonstrates this sets appeals naming one child against appeals naming two: the ones naming one collect more, and the decline appears at the second name, not at the hundredth. What the giver is buying is a relationship with somebody, and you cannot have a relationship with a group however small the group is, so the loss is already there at the second name, long before any number big enough to wear a feeling out. Fundraisers worked this out well before anyone measured it, which is why the letter that lands in December gives you a name, an age and a photograph, and leaves the number of others in the same situation, if it mentions it at all, to the final line.",
+    "takeaway": "A generic subject can still be tied down. Follow the numbers a sentence spends."
+  }
+}

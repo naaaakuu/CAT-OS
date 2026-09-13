@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0049",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "scientific-method",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "title": "The Curve With No Stray Point",
+    "theme": "why a run of readings that fits a prediction too exactly invites suspicion, and why that suspicion is a claim about the procedure rather than about the numbers",
+    "estimated_time_sec": 120,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "argumentative",
+    "cohesion_signals": ["demonstrative", "connective_explicit", "pronoun_ref", "lexical_repetition"],
+    "primary_trap": "competing_ending",
+    "secondary_traps": ["competing_opener", "misleading_connective"],
+    "dna_traits": ["ending_judgement", "opener_heuristic", "global_tracking"],
+    "difficulty_vector": {
+      "vocabulary_load": 3,
+      "inference_load": 4,
+      "syntactic_complexity": 3,
+      "reference_density": 4,
+      "concept_abstractness": 3,
+      "dependency_chain_length": 3,
+      "transition_ambiguity": 3,
+      "competing_openings": 4,
+      "competing_endings": 4,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 3
+    },
+    "num_plausible_orderings": 3,
+    "heuristic_adversarial": true,
+    "nucleus": "A",
+    "learning_objective": "refuse a general-sounding statement the opening seat when a degree phrase inside it points back at a description",
+    "reasoning_patterns": ["disc.competing_opener", "disc.demonstrative", "disc.claim_then_evidence", "disc.pronoun_antecedent", "struct.claim_evidence"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival keeps the sentence carrying 'therefore' in the last seat, where solvers expect an inference to land, and pushes the referee's checklist into the middle. It is refused by one word: the checklist begins 'A referee acting on it', and the only thing a referee can act on here is the suspicion, which that very sentence is the one to name. A second rival opens on the statement about noisy instruments, which reads like a textbook thesis and carries no backward reference at its start; it is refused by 'a run that clean', a degree phrase whose cleanliness is described nowhere but in the sentence about readings sitting on the predicted curve. A third rival draws the inference immediately after the opening observation, which leaves 'therefore' with nothing improbable behind it to infer from.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General methodology of measurement and peer review; no specific study, laboratory or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An advanced argumentative item whose decoy opener is a flat general statement about instruments. It looks self-sufficient until a reader notices the degree phrase buried in its second clause. The closing seat is contested too: the sentence with 'therefore' sounds like the landing, and the true closer opens on an indefinite article, so both ends have to be argued rather than seen."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "The suspicion such a run attracts is therefore a claim about the procedure that produced the figures rather than about the figures themselves, which is what keeps it short of an accusation.",
+      "role": "conclusion"
+    },
+    {
+      "label": "B",
+      "text": "Nothing in a laboratory looks more like success than a set of readings that sits on the predicted curve with no stray point anywhere.",
+      "role": "topic"
+    },
+    {
+      "label": "C",
+      "text": "A referee acting on it asks which runs were called practice, which point was set aside as an obvious slip, and when the decision to stop collecting was taken.",
+      "role": "example"
+    },
+    {
+      "label": "D",
+      "text": "Instruments are noisy in ways no theory models, and a run that clean is less probable than a scattered one even when the proposition under test is exactly right.",
+      "role": "evidence"
+    }
+  ],
+  "correct_order": ["B", "D", "A", "C"],
+  "links": [
+    {
+      "from": "B",
+      "to": "D",
+      "device": "demonstrative_reference",
+      "reliability": "high",
+      "explanation": "'A run that clean' is a degree phrase: it names a standard of cleanliness that some earlier sentence has to have set, and the only description of one is readings sitting on the predicted curve with no stray point."
+    },
+    {
+      "from": "D",
+      "to": "A",
+      "device": "logical_connector",
+      "reliability": "high",
+      "explanation": "'Therefore' needs a premise that makes suspicion reasonable, and the premise is that a clean run is the less probable outcome even for a true proposition. Nothing else in the set supplies a reason to be suspicious of success."
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'A referee acting on it' needs something a referee could act on, and the only candidate is the suspicion, which is named in the sentence immediately before."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "The paragraph argues, in four moves, that a familiar reaction is reasonable and that it is reasonable about something other than what it appears to be about. An observation about what success looks like, a fact that makes that appearance improbable, the inference the fact licenses, and finally what acting on the inference consists of. The argument is cumulative, so no sentence can be lifted over the one that supplies its premise.",
+    "movement": [
+      { "label": "B", "why_here": "It sets the scene by naming the thing everybody admires, and it is the only sentence that describes rather than refers. The description it supplies, a curve with no stray point, is what two later sentences depend on." },
+      { "label": "D", "why_here": "It produces the awkward fact, that noise makes a clean run less likely than a ragged one. Its 'a run that clean' measures itself against the description just given, which is why it cannot stand at the front however general its opening clause sounds." },
+      { "label": "A", "why_here": "The inference, and the nucleus. 'Therefore' draws on the improbability just stated, and the sentence redirects the reader's suspicion from the numbers to the procedure that produced them." },
+      { "label": "C", "why_here": "It shows what the inference costs in practice: three questions about how the data were handled. Its opening 'it' is the suspicion, so it has to follow the sentence that names one, and the paragraph ends on procedure rather than on a verdict." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "BDCA",
+        "trap_type": "competing_ending",
+        "why_tempting": "Solvers are taught that the sentence carrying 'therefore' is the paragraph's landing, and this one also reads like a moral, since it draws a careful distinction and protects the scientist from a charge of fraud. The referee's three questions look like the sort of practical detail a writer gets out of the way in the middle.",
+        "where_it_breaks": "The checklist opens 'A referee acting on it'. In the third seat there is no suspicion behind it for the referee to act on, because the sentence that names the suspicion has been moved to the end. A pronoun cannot wait two sentences for an antecedent that arrives after it."
+      },
+      {
+        "order": "DBAC",
+        "trap_type": "competing_opener",
+        "why_tempting": "The statement about instruments being noisy is a flat general truth with no pronoun, no demonstrative and no connective at its head. A solver looking for the sentence that introduces rather than refers will take it, and the rest then falls into a respectable order.",
+        "where_it_breaks": "Its second clause says 'a run that clean'. That measures cleanliness against a standard, and the only standard in the set is the set of readings sitting on the predicted curve with no stray point anywhere. In the first seat the phrase compares the run to nothing."
+      },
+      {
+        "order": "BADC",
+        "trap_type": "misleading_connective",
+        "why_tempting": "An inference placed straight after the opening observation looks like the natural second move, and 'the suspicion such a run attracts' picks up the run that has just been described, so the join reads smoothly on the surface.",
+        "where_it_breaks": "'Therefore' has nothing to work on. The observation that clean data look like success is not a reason to be suspicious of them; the reason is the improbability of such a run under noise, and that sentence has been pushed behind the inference it was meant to license."
+      }
+    ],
+    "trap_named": "Two traps sit at the two ends. At the front, a sentence written as a bare generalisation invites the opener heuristic, and the evidence against it is a single degree phrase hidden mid-sentence: 'that clean' is as much a backward reference as 'this device' or 'those costs'. At the back, a connective is used as bait: 'therefore' marks an inference, and inferences are drawn wherever an argument needs one, including two sentences from the end. The defence is to rank references above connectives, and to read a whole sentence before deciding it is free-standing.",
+    "solving_habit": "Scan every candidate opener for words of degree and comparison, not just for pronouns. 'That clean', 'so few', 'as expensive', 'of that size' all point backwards as firmly as 'this' does, and they are much easier to read past."
+  },
+  "mentor": {
+    "challenge": "One sentence looks like a textbook opening and one sentence looks like a conclusion. Both appearances are arranged; the evidence that settles them is three words long.",
+    "paragraph_plain": "In a laboratory, nothing looks more convincing than a set of measurements that lands exactly on the predicted curve with no odd points at all. But instruments are noisy in ways theories do not describe, so a result that tidy is actually less likely than a messy one, even when the theory being tested is perfectly correct. The suspicion such a result attracts is therefore about how the numbers were produced, not about the numbers themselves, which is why it stops short of calling anyone dishonest. A referee who acts on that suspicion asks which runs were treated as practice, which point was quietly dropped as an obvious mistake, and when the decision to stop collecting data was taken.",
+    "takeaway": "'That clean' points backwards just as firmly as 'this' does, and it is far easier to read straight past."
+  }
+}

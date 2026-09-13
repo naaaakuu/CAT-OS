@@ -1,0 +1,481 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0098",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "technology-ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "structure-mapping",
+      "inference",
+      "scope-control",
+      "evidence-anchoring"
+    ],
+    "word_count": 727,
+    "question_count": 5,
+    "question_types": [
+      "primary_purpose",
+      "must_be_true",
+      "assumption",
+      "except",
+      "inference"
+    ],
+    "theme": "the demand that a decision be explained followed through three successive forms, from the administrative duty to give reasons, where a reason bound the decider and accuracy was not the test, to published code, to a produced explanation, to behavioural auditing, with each stage conceding that the deciding part cannot be read and moving inspection further from it, so that what has been lost is not access but the decider's exposure to his own words, and the form nobody has yet invented is a disclosure somebody can be held to",
+    "estimated_time_min": 11,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-07",
+    "reviewer_notes": "The first paragraph carries the whole argument by separating accuracy from bindingness, and it does so in a sentence readers habitually skim because it sounds like a concession about human fallibility. Every question in the set can be got wrong by restoring accuracy as the point of reason-giving. The final paragraph deliberately says that more is disclosed now than ever, so that the familiar complaint about secrecy is available as a wrong answer twice.",
+    "length_class": "long",
+    "structure": "history_of_an_idea",
+    "viewpoints": 2,
+    "tone": "historical, exact, quietly disappointed",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 5,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 4
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.chronology",
+      "struct.contrast",
+      "struct.definition",
+      "comp.purpose",
+      "comp.intent",
+      "comp.organization",
+      "comp.central_idea",
+      "comp.explicit_detail",
+      "comp.paraphrase",
+      "comp.function_over_words",
+      "comp.attention_span",
+      "arg.principle",
+      "arg.assumption",
+      "arg.conclusion",
+      "arg.qualification",
+      "arg.evidence",
+      "inf.necessary",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "inf.logical_gap",
+      "scope.abstraction_level",
+      "lang.comparative",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about automated decisions being less open to scrutiny than the decisions they replaced, which is the complaint the last paragraph refuses in terms by saying far more is disclosed today than any earlier applicant could have extracted; the loss the passage identifies is of a different kind. Q2's rival is the option that an explanation is less accurate than the decision it describes, which hardens the passage's careful claim that several faithful accounts can be produced into a ranking the author never makes. Q3's rival is the option that less is now disclosed, which is the same refused complaint arriving as an assumption; the argument needs the opposite, since it concedes the abundance of disclosure and locates the loss elsewhere. Q4's rival is the option about a simple account built to agree with the system near the case in hand, which sounds imported from a technical source and is in fact the third paragraph's own definition of what an explanation is; the exception is the one property, a true report of what moved the decider, that the passage withholds from the original practice and from all three of its successors. Q5's rival is the option calling auditing objectionable, which reads the passage's remark that auditing asserts nothing as disapproval, whereas the same paragraph calls it the most useful of the three and credits it with findings the other two could not have produced.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "tribunal",
+      "artefact",
+      "approximation",
+      "answerable"
+    ]
+  },
+  "passage": {
+    "title": "Out of His Own Words",
+    "reading_time_min": 4.2,
+    "paragraphs": [
+      {
+        "id": "rc-0098-p1",
+        "text": "The demand that a decision be explained is a great deal older than the machinery it is now made about, and where it began it meant something exact. An official who refused a licence, a tribunal that dismissed a claim, a board that passed a man over: each could be required to state the ground on which it had acted. What this produced was never a report of anybody's mental state. It could not have been, since nobody can see into an official's head, and the law knew as much. A reason in that setting was a commitment. Having stated the ground, the decider was held to it, so that the next case with the same features had to be decided the same way, or else the difference had to be named and defended. This is why a reason could be, considered as autobiography, quite false — the man may really have acted from irritation, or from tiredness at the end of a long list — and still do the whole of its work. Accuracy was not the test. Being bound was."
+      },
+      {
+        "id": "rc-0098-p2",
+        "text": "When decisions began to be produced by programs, the demand crossed over in the form that looked obvious. Publish the code. For some years the argument was conducted as though everything turned on whether a company could be compelled to do it, and then, in a few jurisdictions and a few procurement contracts, it was compelled. The result was instructive. The text of a program does not tell a reader what it will do with a particular application; to learn that, one has to run it, which is the very thing in dispute. And in the systems that had come to matter, the deciding part had not been written by anybody at all. It had been fitted, from a record of past cases, and it reads as a very long list of numbers on which the most attentive inspection in the world confers no understanding."
+      },
+      {
+        "id": "rc-0098-p3",
+        "text": "So the demand moved off the artefact and on to the decision. What was asked for now was an explanation: a statement of which features of this application had moved the result, and in which direction. That was a real advance, and it has a peculiar property which took some years to be noticed. Such statements are not read off the system. They are produced by a second procedure, which builds a simple account that agrees with the first one in the neighbourhood of the case in hand, and several such accounts, each faithful by its own measure, can be produced for a single decision. An approximation of a ground is not a ground."
+      },
+      {
+        "id": "rc-0098-p4",
+        "text": "So the demand moved once more, and its present form is the most modest and the most useful. Stop asking what the system is; test what it does. Put many cases through it, compare the outputs against outcomes somebody has specified in advance, and publish the comparison. Auditing of this kind has turned up real things that neither the code nor an explanation would have shown. It is also the furthest the idea has ever travelled from where it started, for a reason worth stating plainly. A profile of behaviour asserts nothing. Nobody has undertaken anything by it. Next quarter's system may behave differently, and no promise will have been broken, because none was made."
+      },
+      {
+        "id": "rc-0098-p5",
+        "text": "Read in order, the three stages have one shape. Each conceded that the thing which decides cannot be read, and moved the inspection a step further away from it: from the artefact, to an account of the artefact, to a record of its conduct. Set against the beginning, what has gone is not access. Far more is disclosed about an automated refusal today than any nineteenth-century applicant could have extracted about his. What has gone is the part of reason-giving that was never information in the first place, which is the decider's exposure to his own words. A reason could be argued with, because somebody had to stand behind it; a disclosure can only be checked. The form nobody has yet invented is the one in which a decider says in advance what will move a case, in terms the next case can be measured against, and is answerable when it is not. Until that exists, transparency will go on producing material, and the material will go on being called accountability."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0098-q1",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.intent",
+        "struct.history_of_an_idea"
+      ],
+      "target_mistake": "naming the familiar complaint about secrecy as the purpose, when the passage grants that disclosure has increased and locates the loss elsewhere",
+      "prediction_target": "The learner should be able to name a verb and an object before looking: follow one demand through three forms and say what each successive form stopped supplying.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 5,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to defend the older duty to give reasons against the objection that such reasons were often untrue",
+        "B": "to argue that publishing a program's code achieves nothing and that auditing should take its place",
+        "C": "to show that automated decisions are less open to scrutiny than the official decisions they replaced",
+        "D": "to follow a demand for explanation through its successive forms and name what each form gave up"
+      },
+      "correct": "D",
+      "estimated_time_sec": 80,
+      "explanation": {
+        "expert_notice": "Three paragraphs each begin by moving the demand somewhere new, and the last reads the three in order and says what the sequence amounts to: each stage conceded that the deciding thing cannot be read, and each moved the inspection further from it. The closing sentences then name what was surrendered on the way.",
+        "correct_reasoning": "The correct option names both halves of the passage's work, the tracing and the accounting. Every paragraph has a place in it: the administrative origin supplies the standard against which the later forms are measured, the three stages are the successive forms, and the final paragraph states the surrender as the loss of the decider's exposure to his own words. A purpose that stops at any one stage leaves the comparison with the origin doing nothing.",
+        "passage_anchor": "rc-0098-p1, rc-0098-p5",
+        "question_type_note": "A purpose question on a history is answered by what the history is for. Ask what the author would have lost by beginning at the second paragraph.",
+        "reading_habit": "When a passage narrates stages, look for the sentence that reads the stages together. Authors who arrange a sequence almost always tell you, near the end, what the sequence was arranged to show.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "too_narrow",
+            "why_wrong": "Publication of code occupies one paragraph of five, and auditing is not recommended as a replacement for it but described as the present form of the demand and the furthest from its origin. The passage's complaint about auditing is that nobody is bound by it, which is not an argument for adopting it.",
+            "seductive_element": "The second and fourth paragraphs really do dismiss one method and praise another, and readers assemble a recommendation out of the two verdicts."
+          },
+          {
+            "option": "C",
+            "trap_type": "half_right",
+            "why_wrong": "The final paragraph refuses this directly, saying that far more is disclosed about an automated refusal today than an earlier applicant could have extracted. The loss identified is not of access but of something that was never information.",
+            "seductive_element": "It is the live rival, because it is the standard complaint in this area and the passage is plainly dissatisfied, so a reader who has caught the dissatisfaction supplies the usual reason for it."
+          },
+          {
+            "option": "A",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The passage concedes that reasons could be false as autobiography and treats the concession as harmless rather than as a charge to be repelled. Nobody in the passage objects to the old practice, and the point of the concession is that accuracy was never what the practice was for.",
+            "seductive_element": "The first paragraph does raise the untruth of reasons and does answer it, which makes a defence look like the paragraph's business and therefore the passage's."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0098-q2",
+      "type": "must_be_true",
+      "skill": "inference",
+      "patterns": [
+        "inf.necessary",
+        "inf.strongly_supported",
+        "arg.principle"
+      ],
+      "target_mistake": "treating accuracy as the standard for reason-giving, which the first paragraph sets aside in its last two sentences",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 5,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "argument",
+        "scope"
+      ],
+      "stem": "Which of the following must be true on the account the passage gives?",
+      "options": {
+        "A": "An explanation of a decision, however faithful to the system, is less accurate than the decision itself.",
+        "B": "A system whose code has been published can be made to decide the next case as it decided the last.",
+        "C": "A statement that accurately describes how a decision was reached can fail to do what a reason did.",
+        "D": "The duty to give reasons was introduced in order to make officials' accounts of themselves truthful."
+      },
+      "correct": "C",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The first paragraph separates two things that ordinary usage runs together. A reason's work was to bind the decider for the next case; its truth as a description of his mental state was expressly declared not to be the test. The fourth and fifth paragraphs then apply the separation to disclosures that describe accurately and bind nobody.",
+        "correct_reasoning": "The correct option follows necessarily from that separation. If what a reason did was to commit its author, then a statement can have the other property, descriptive accuracy, in full measure and still not do the job, because nothing about being accurate creates an obligation for the next case. The passage supplies the instance itself: a behavioural profile can be entirely correct about what a system has done and asserts nothing about what it will do.",
+        "passage_anchor": "rc-0098-p1, rc-0098-p4",
+        "question_type_note": "A must-be-true question is about entailment, not plausibility. Find the distinction the passage draws and ask what cannot fail to follow from it.",
+        "reading_habit": "When an author separates two properties that usually travel together, test each option by asking whether it needs both. The answer to such a question is nearly always the one that needs only the separation itself.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The second paragraph says the opposite about published code, which does not tell a reader what the system will do with a particular application. Consistency between cases was a property of the older practice, secured by the decider's commitment, and nothing in the passage transfers it to disclosure of a text.",
+            "seductive_element": "Deciding like cases alike is the property the first paragraph makes central, so a reader carries it forward and attaches it to the first later form that mentions publication."
+          },
+          {
+            "option": "A",
+            "trap_type": "overstatement",
+            "why_wrong": "The third paragraph says several accounts, each faithful by its own measure, can be produced for a single decision, and that an approximation of a ground is not a ground. That is an objection about standing, not about accuracy, and no ranking of accuracy is offered anywhere.",
+            "seductive_element": "It is the live rival, because approximation does suggest inexactness, and a reader who has understood the paragraph's complaint reaches for the nearest measurable version of it."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph's final two sentences rule this out: accuracy was not the test, being bound was. A reason that misdescribed the decider's actual motive is said to have done the whole of its work, which would be impossible if truthfulness had been the purpose.",
+            "seductive_element": "Everything in ordinary language about giving reasons is about honesty, and the sentence that removes honesty from the account reads like a wry aside rather than the paragraph's conclusion."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0098-q3",
+      "type": "assumption",
+      "skill": "argument",
+      "patterns": [
+        "arg.assumption",
+        "inf.logical_gap",
+        "arg.conclusion"
+      ],
+      "target_mistake": "supplying a premise about diminished disclosure, which the passage denies, instead of the premise its conclusion actually needs",
+      "prediction_target": "The learner should predict that the assumption will say something about what accountability consists in, since the conclusion turns a loss of bindingness into a loss of accountability.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "inference",
+        "scope"
+      ],
+      "stem": "The closing argument of the passage depends on which of the following assumptions?",
+      "options": {
+        "A": "that being held to what one has said is part of what accountability is, and not only a means to it",
+        "B": "that the officials of the older system, though fallible, gave their reasons more carefully and at greater length",
+        "C": "that the people who build these systems would resist any duty that was stated in advance",
+        "D": "that less is now disclosed about an automated refusal than was once disclosed about an official one"
+      },
+      "correct": "A",
+      "estimated_time_sec": 90,
+      "explanation": {
+        "expert_notice": "The last paragraph concedes the abundance of disclosure and then says that what has gone is the decider's exposure to his own words, ending with the charge that material is being called accountability. That charge needs a premise about what accountability is, since on any purely informational account of it the modern position would be an improvement.",
+        "correct_reasoning": "The correct option supplies exactly that premise. The argument runs: disclosure has increased; bindingness has gone; therefore accountability has been lost. The step from the second fact to the conclusion holds only if bindingness is a constituent of accountability rather than one convenient route to it, because if it were merely a route, a different route, such as abundant public information, could serve instead. Denying the premise leaves the conclusion unsupported while every stated fact survives.",
+        "passage_anchor": "rc-0098-p5",
+        "question_type_note": "An assumption is what has to be added for the stated evidence to reach the stated conclusion. Try denying each candidate and see which one leaves the argument standing.",
+        "reading_habit": "When a passage concedes that things have improved on one measure and still concludes that something has been lost, look for an unstated claim about what the thing really consisted in. That claim is where such arguments live.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "comparison_distortion",
+            "why_wrong": "No comparison of care or of length is made anywhere, and the argument would be unaffected by either. The old practice is credited with a structural property, that the decider was bound by what he said, which held whether he had taken pains over the wording or not.",
+            "seductive_element": "Passages that measure the present against an older practice usually are saying the old one was done better, and readers supply the missing compliment."
+          },
+          {
+            "option": "C",
+            "trap_type": "out_of_scope",
+            "why_wrong": "What the builders of these systems would accept is never discussed. The passage says the binding form has not been invented, which is a claim about the forms available and not a prediction about who would resist one.",
+            "seductive_element": "The final sentences do propose a demanding new obligation, and readers expect an author who proposes one to have anticipated opposition to it."
+          },
+          {
+            "option": "D",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The paragraph asserts the reverse, that far more is disclosed today than any nineteenth-century applicant could have extracted, and the concession is load-bearing rather than incidental: it is what forces the loss to be located in something other than access.",
+            "seductive_element": "It is the live rival, because it is what a complaint about transparency is normally built on, and a reader who has not registered the concession will assume the argument rests on it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0098-q4",
+      "type": "except",
+      "skill": "specific_detail",
+      "patterns": [
+        "comp.explicit_detail",
+        "comp.paraphrase",
+        "comp.attention_span"
+      ],
+      "target_mistake": "supposing that one of the later forms restored the accuracy the original practice never required, instead of checking each form against its own paragraph",
+      "prediction_target": null,
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "scope",
+        "inference"
+      ],
+      "stem": "The passage attributes all of the following to one or another form of the demand for explanation EXCEPT",
+      "options": {
+        "A": "a comparison of outputs against outcomes settled in advance",
+        "B": "a text whose publication does not reveal what it will do with a case",
+        "C": "a simple account built to agree with the system near the case in hand",
+        "D": "a true account of what had in fact moved the person who decided"
+      },
+      "correct": "D",
+      "estimated_time_sec": 75,
+      "explanation": {
+        "expert_notice": "Each of the three later forms is defined in its own paragraph: a published text that does not tell a reader what it will do with a particular application; an explanation produced by a second procedure that agrees with the first near the case in hand; a comparison of outputs against outcomes somebody specified in advance. The one property no form is credited with is named in the first paragraph, where accuracy is said not to have been the test.",
+        "correct_reasoning": "The correct option names the thing the passage withholds from every stage in turn. The original practice worked although a reason could be, considered as autobiography, quite false, since accuracy was not the test and being bound was; and none of the later forms restores it, because a published text is not an account of a decision at all, an explanation is an approximation assembled afterwards, and a profile of behaviour describes conduct rather than what moved anybody. Answering means sweeping four paragraphs rather than searching one.",
+        "passage_anchor": "rc-0098-p1, rc-0098-p2, rc-0098-p3, rc-0098-p4",
+        "question_type_note": "On an EXCEPT question, find the sentence for each option in turn. The answer is the one with no sentence, or as here the one the passage denies of every case it describes.",
+        "reading_habit": "Read the sentences that say what something was not for as attentively as the ones that say what it was for. They are where EXCEPT questions and half the inference questions in any set are decided.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The second paragraph says exactly this: the text of a program does not tell a reader what it will do with a particular application, and to learn that one has to run it. The option paraphrases the sentence instead of quoting it, which is what makes it easy to pass over.",
+            "seductive_element": "It reads as a criticism of publication rather than as a description of what publication supplied, and a reader hunting for the exception looks for whatever sounds least like an attribute."
+          },
+          {
+            "option": "C",
+            "trap_type": "true_but_insufficient",
+            "why_wrong": "This is the third paragraph's account of how an explanation is made, where a second procedure builds a simple account agreeing with the first one in the neighbourhood of the case in hand. It is that form's defining feature rather than an incidental remark about it.",
+            "seductive_element": "It is the most technical of the four and sounds imported from outside the passage, which is the usual reason a reader suspects an option in this kind of question."
+          },
+          {
+            "option": "A",
+            "trap_type": "fact_right_interpretation_wrong",
+            "why_wrong": "The fourth paragraph describes auditing in these very terms, putting many cases through the system and comparing the outputs against outcomes somebody has specified in advance. It is the present form of the demand, not an addition somebody has made to it.",
+            "seductive_element": "It is the plainest and most procedural option on offer, and plainness reads as filler to a reader looking for the odd one out."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0098-q5",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "comp.function_over_words"
+      ],
+      "target_mistake": "reading the observation that auditing asserts nothing as disapproval of auditing, when the same paragraph calls it the most useful of the three forms",
+      "prediction_target": "The learner should predict that the answer will hold two things together, the usefulness the paragraph grants and the absence of any undertaking it names.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 4
+      },
+      "secondary_skills": [
+        "tone",
+        "scope"
+      ],
+      "stem": "It can be inferred that the author regards behavioural auditing as",
+      "options": {
+        "A": "incapable of revealing anything its designers do not already know about a system",
+        "B": "a temporary expedient that publication of the code will eventually supersede",
+        "C": "the most useful of the three forms, and also the one that binds nobody to anything",
+        "D": "objectionable in principle, and a retreat from the idea the passage began with"
+      },
+      "correct": "C",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The fourth paragraph makes two judgements in the same breath and does not reconcile them. Auditing is the most modest and the most useful form, and it has found real things the other two could not have shown; and a profile of behaviour asserts nothing, so nobody has undertaken anything by it.",
+        "correct_reasoning": "The correct option keeps both judgements, which is what the paragraph requires. The author's point is not that auditing is bad but that it is the furthest the idea has travelled from its origin, and the distance is measured by exactly this: it tells you a great deal and commits no one. A reader who resolves the tension in either direction, into praise or into rejection, has removed the observation the paragraph exists to make.",
+        "passage_anchor": "rc-0098-p4",
+        "question_type_note": "When a paragraph praises and criticises the same thing, the inference is usually the pair rather than either half. Check whether an option has quietly dropped one of them.",
+        "reading_habit": "Notice when an author declines to reconcile two verdicts about the same object. The refusal is deliberate, and options that tidy it into a single verdict are the standard trap in such paragraphs.",
+        "distractors": [
+          {
+            "option": "B",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "The sequence runs the other way. Publication of code is the earliest of the three forms and the one the passage reports as having been tried and found to answer nothing, while auditing is described as the present form, so nothing here points to a return.",
+            "seductive_element": "The word modest sounds like a stopgap, and readers of a passage arranged in stages expect a further stage to be coming."
+          },
+          {
+            "option": "A",
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The paragraph credits auditing with turning up real things that neither the code nor an explanation would have shown, which says the opposite about what it can reveal. What the author denies is not its power to find things but its power to bind anybody.",
+            "seductive_element": "A sceptical passage about transparency invites the assumption that every method mentioned is being deflated, and readers apply the scepticism where it was not aimed."
+          },
+          {
+            "option": "D",
+            "trap_type": "misattributed_view",
+            "why_wrong": "Nothing in the paragraph objects to auditing, which is called the most useful of the three. The retreat being described is the history of the demand, a movement the author narrates rather than blames on the method that stands at the end of it.",
+            "seductive_element": "It is the live rival, because the paragraph does end on a loss, and readers attach the author's regret to whatever was being discussed when the regret appeared."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "tribunal",
+      "passage_use": "a tribunal that dismissed a claim",
+      "meaning_here": "a body with authority to decide a dispute",
+      "difficulty": "medium"
+    },
+    {
+      "word": "artefact",
+      "passage_use": "the demand moved off the artefact and on to the decision",
+      "meaning_here": "the made object itself, as against what it does",
+      "difficulty": "hard"
+    },
+    {
+      "word": "approximation",
+      "passage_use": "An approximation of a ground is not a ground",
+      "meaning_here": "a close but inexact standing-in for something",
+      "difficulty": "medium"
+    },
+    {
+      "word": "answerable",
+      "passage_use": "and is answerable when it is not",
+      "meaning_here": "liable to be called on to account for a failure",
+      "difficulty": "medium"
+    }
+  ],
+  "mentor": {
+    "challenge": "The first paragraph makes a distinction that everything else depends on, and it makes it in a sentence that reads like a shrug. Work out what a reason was for in the old administrative setting before you go on, because every question in this set is decided by that answer.",
+    "one_sentence_summary": "The demand that a decision be explained began as an administrative duty in which a reason was a commitment rather than a description, so that a reason could misstate the decider's actual motive and still do its whole work, and when the demand was carried over to automated systems it passed through published code, then produced explanations, then behavioural auditing, each stage conceding that the deciding part cannot be read and moving inspection further from it, so that what has been lost is not access, which has increased, but the decider's exposure to his own words, and the form that would restore it has not been invented.",
+    "main_idea": "In its original setting, giving reasons bound the person who gave them: the next like case had to go the same way or the difference had to be defended, and the truth of the reason as a description of his motives was beside the point. Transplanted to automated decisions, the demand has moved from the code to an explanation to an audit of behaviour, each step supplying more information and less commitment. So the complaint worth making is not that too little is disclosed but that nothing disclosed binds anybody.",
+    "simple_explanation": "Long before computers, there was already a rule that certain decisions had to be explained. If an official turned down your licence, or a panel threw out your claim, you could make them say on what ground they had decided.\n\nNow here is the part that matters. That explanation was never meant to be a report of what was going on inside the official's head. Nobody can see inside anybody's head, and the law never pretended otherwise. What the stated ground did was tie him down. Once he had said it, he was stuck with it: the next person with the same situation had to get the same answer, or somebody had to explain what was different about them and defend the difference. So the reason might be completely untrue as a description of him. He might really have refused you because he was tired and irritable at the end of a long afternoon. It still did its job. Being honest was not the point. Being tied down was.\n\nThen decisions started coming out of software, and people asked for the same thing in the way that seemed obvious: show us the code. For years everyone argued about whether companies could be forced to. In a few places they were forced to, and it turned out to settle nothing. Reading a program does not tell you what it will do to your particular application; you would have to run it, and that was exactly what was being argued about. Worse, in the systems that really mattered, the deciding part had not been written by a person at all. It had been fitted automatically from records of old cases, and it looks like an enormous list of numbers that nobody can understand however hard they stare.\n\nSo the demand changed shape. Never mind the program, tell us about the decision: which things about this application pushed the result, and which way. That was genuinely better. But it has an odd feature. Those statements are not read out of the system. They are made by a second piece of software that builds a simple story matching the real system near your particular case, and you can build several different stories, each perfectly respectable by its own standard, for the same decision. A good imitation of a reason is not a reason.\n\nSo the demand changed shape again, into what we have now, which is the humblest version and the most useful. Forget what the system is. Test what it does. Push lots of cases through, compare the results with standards someone set beforehand, and publish the comparison. This really does catch things the other two methods never would have.\n\nAnd yet it is the furthest of all from where the idea started, for one plain reason. A description of how a system has behaved promises nothing. Nobody has agreed to anything. If next quarter's version behaves differently, no promise has been broken, because nobody made one.\n\nPut the three stages side by side and they have the same shape: each one admits that the deciding thing cannot be read, and moves the inspection one step away from it. What has been lost is not openness. Far more is published about an automated refusal now than any Victorian applicant could have got out of a clerk. What has been lost is the bit of reason-giving that was never information at all: somebody standing behind his words. You can argue with a reason. A disclosure you can only check. Nobody has yet built the version where the decider says in advance what will move a case, in words the next case can be held against, and has to answer when it is not. Until somebody does, we will keep producing material and calling it accountability.",
+    "why_difficult": "The passage asks the reader to hold apart two things that ordinary language fuses, the truth of an explanation and the obligation it creates, and it draws the distinction in a sentence that looks like an aside about tired officials. The second difficulty is that the narrative of three stages is genuinely a narrative: each paragraph reports a real improvement, so a reader tracking the author's attitude finds approval everywhere and has to work out what the author is nevertheless complaining about. The third is the last paragraph, which concedes that disclosure has increased, and readers who arrived expecting the usual complaint about secrecy read the concession as a slip rather than as the hinge of the argument.",
+    "author_intention": "To change what the reader asks for when a decision goes against him: not more information about how the decision was reached, but a statement somebody can be held to when the next case is decided differently.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0098-p1",
+        "role": "Fixes the original sense",
+        "note": "Officials had to state their ground. The point was not honesty but being tied down: the next like case had to go the same way, or the difference had to be defended."
+      },
+      {
+        "paragraph_id": "rc-0098-p2",
+        "role": "The first transplant",
+        "note": "Publish the code. Tried in a few places, and it answered nothing: a text does not tell you what it will do, and the deciding part was fitted rather than written."
+      },
+      {
+        "paragraph_id": "rc-0098-p3",
+        "role": "The demand retreats",
+        "note": "Ask instead which features moved this case. Better, but the statement is manufactured by a second procedure, and several rival faithful stories can be told."
+      },
+      {
+        "paragraph_id": "rc-0098-p4",
+        "role": "The present form",
+        "note": "Test behaviour across many cases and publish the comparison. The most useful of the three, and the one that commits absolutely nobody to anything."
+      },
+      {
+        "paragraph_id": "rc-0098-p5",
+        "role": "Reads the sequence",
+        "note": "Each stage moved inspection further from the deciding thing. What was lost was not access, which grew, but somebody standing behind his words."
+      }
+    ],
+    "tone_progression": "It opens precise and almost legal while the original practice is defined, becomes narrative and fair-minded through the three stages, crediting each with what it achieved, and ends flat and disappointed, refusing the familiar complaint about secrecy and naming a loss that nobody has proposed to repair.",
+    "key_transitions": [
+      "'Accuracy was not the test. Being bound was.' (end of paragraph 1) — the distinction the whole passage runs on.",
+      "'An approximation of a ground is not a ground.' (end of paragraph 3) — the second stage is credited and then measured against the original.",
+      "'Set against the beginning, what has gone is not access.' (paragraph 5) — the expected complaint is refused and the real loss named."
+    ],
+    "misunderstanding": "The commonest wrong model is that this is an argument about secrecy, in which companies hide what officials once had to reveal. The passage says the opposite, that far more is disclosed now, and the whole force of its conclusion depends on that concession. The second wrong model treats the author as hostile to auditing, because the paragraph on auditing ends in a complaint; the same paragraph calls it the most useful of the three forms and credits it with findings nothing else would have produced. Both readings come from attaching the author's evident dissatisfaction to whatever he happened to be describing when it appeared.",
+    "traps_summary": "This set offers the complaint about secrecy twice, once as the purpose and once as an assumption, a ranking of accuracy where the passage argues about standing, a recommendation assembled from two verdicts, the paragraph's own clauses dressed up as additions, and disapproval read off a sentence of praise. Asking whether a claim is about information or about obligation answers all five.",
+    "reading_lesson": "When an author concedes that things have improved on the obvious measure and still concludes that something has been lost, the whole argument lives in the distinction between the measure conceded and the thing claimed to be missing, so find that distinction and write both halves down. The companion habit is to resist tidying: a paragraph that calls the same thing the most useful and the least binding means both, and every option that resolves the pair into a single verdict has removed what the paragraph was written to say.",
+    "real_world": "The distinction is worth carrying into any encounter with an institution that tells you a great deal and promises nothing: a published policy that reserves the right to vary at any time, a service standard reported after the fact rather than undertaken in advance, a complaints report that counts outcomes without committing anyone to a rule. In each case the useful question is not how much has been disclosed but what the discloser could be held to next time.",
+    "takeaway": "A reason ties somebody down; a disclosure only tells you something, and the difference is the whole of accountability.",
+    "reflection_question": "When something has been explained to you at length, what exactly could you hold the explainer to the next time round?"
+  }
+}

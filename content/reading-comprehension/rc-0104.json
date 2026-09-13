@@ -1,0 +1,341 @@
+{
+  "schema_version": 5,
+  "meta": {
+    "id": "rc-0104",
+    "type": "rc",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "intellectual-history",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "stage": "advanced",
+    "skills": [
+      "argument-tracking",
+      "inference",
+      "vocabulary-in-context",
+      "concession-tracking",
+      "scope-control"
+    ],
+    "word_count": 333,
+    "question_count": 3,
+    "question_types": [
+      "phrase_in_context",
+      "primary_purpose",
+      "inference"
+    ],
+    "theme": "the shift by which genius stopped naming a spirit attached to a place and began naming a kind of person, argued not to be a discovery, since the category arrived exactly when a market in originality and a biographical form required it, and then credited anyway with a constitutive effect, because locating a work's source inside its maker turned a patron's instruction into interference, while the same relocation bought the untestable claim that failures are the price of the gift",
+    "estimated_time_min": 6,
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS; no external source adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-rc-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-rc-003, task rc-07",
+    "reviewer_notes": "A short passage carrying a full dialectic, so every sentence is load-bearing and the third paragraph reverses the apparent verdict of the second without withdrawing it. The last two sentences pair a gain and a cost that the author refuses to separate, which is where the inference question lives, and the phrase question is decided by a clause that follows the phrase rather than preceding it.",
+    "length_class": "short",
+    "structure": "dialectic",
+    "viewpoints": 3,
+    "tone": "dry, historical, unwilling to award a verdict",
+    "difficulty_vector": {
+      "lexical": 4,
+      "syntactic": 4,
+      "abstraction": 5,
+      "inference_depth": 4,
+      "distractor_similarity": 4,
+      "reasoning_depth": 5,
+      "structural_ambiguity": 3,
+      "time_pressure": 3
+    },
+    "reasoning_patterns": [
+      "struct.history_of_an_idea",
+      "struct.claim_counterclaim",
+      "struct.pivot",
+      "struct.contrast",
+      "comp.purpose",
+      "comp.intent",
+      "comp.reference_tracking",
+      "comp.function_over_words",
+      "arg.counterargument",
+      "arg.concession",
+      "arg.rebuttal",
+      "arg.qualification",
+      "inf.strongly_supported",
+      "inf.reasonable_implication",
+      "scope.time_period",
+      "word.context_clue",
+      "word.polysemy",
+      "elim.near_tie",
+      "elim.predict_first"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "Q1's live rival is the option about answerability to anything outside the artist, which lifts a phrase from the first paragraph's description of the new sense of the word and offers it where the sentence itself supplies a narrower referent, since the clause immediately following says that a patron's instruction became interference rather than the commission. Q2's rival is the option that the category was manufactured by a market needing originality priced, which is the second paragraph offered as the whole and leaves the third, where the author says what the made category then did, entirely unexplained. Q3's rival is the option that the older vocabulary could also have expressed the claim about failures, which the second paragraph forecloses by listing that vocabulary as terms for something acquired and therefore teachable, whereas the claim at issue treats failure as the price of an endowment nobody chose.",
+      "blind_solve": null
+    },
+    "vocab_extracted": [
+      "tutelary",
+      "propitiated",
+      "manufacture",
+      "unfalsifiability"
+    ]
+  },
+  "passage": {
+    "title": "A Spirit One Had",
+    "reading_time_min": 1.9,
+    "paragraphs": [
+      {
+        "id": "rc-0104-p1",
+        "text": "The word is much older than the idea, and for most of its life it named something standing outside the person. A genius was a presence attached to a place or a household, a tutelary spirit a man had rather than was, and it could be propitiated, neglected or lost. By the end of the eighteenth century the word named a kind of human being instead: rare, self-originating, answerable to nothing outside itself. Histories of the change generally treat it as a discovery, a real if uncommon type at last correctly described by people who had learned how to look."
+      },
+      {
+        "id": "rc-0104-p2",
+        "text": "The evidence does not support a discovery. Before the change, exceptional makers were praised in a vocabulary of skill, learning, judgement and industry, every term of it naming something acquired and therefore teachable. The new category appeared at the moment two institutions came to need it: a market in which originality had to be priced and told apart from competence, and a form of biography that required a life to have one explanation running through it. A category that arrives exactly when it is wanted, and in the vocabulary of the people who want it, has the marks of a manufacture rather than of a finding."
+      },
+      {
+        "id": "rc-0104-p3",
+        "text": "Yet calling it a manufacture settles less than it appears to. The new category did something no description could have done: it changed what an artist could refuse. Once the source of a work was located inside the maker, a patron's instruction became interference rather than the commission itself, and a body of work could be defended as a single argument rather than as a sequence of jobs done for money. That effect is not cancelled by the category's suspect origins, since a made thing can do real work. What the same relocation also bought was a claim nobody is able to test: that the failures are the price of the gift. Independence and unfalsifiability were purchased in one transaction, and they have not been separated since."
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rc-0104-q1",
+      "type": "phrase_in_context",
+      "skill": "vocabulary_in_context",
+      "patterns": [
+        "word.context_clue",
+        "comp.reference_tracking",
+        "word.polysemy"
+      ],
+      "target_mistake": "answering from the first paragraph's description of the new sense of the word instead of from the clause that follows the phrase",
+      "prediction_target": "The learner should paraphrase from the next clause before looking: what he could now treat as interference rather than as the job itself.",
+      "difficulty": {
+        "inference_depth": 3,
+        "distractor_similarity": 4,
+        "reasoning_depth": 3
+      },
+      "secondary_skills": [
+        "inference",
+        "specific_detail"
+      ],
+      "stem": "The phrase what an artist could refuse, as the third paragraph goes on to explain it, refers to",
+      "options": {
+        "A": "the commissions an artist might turn down once he had grown wealthy enough",
+        "B": "the duties a household owed to the spirit attached to its place",
+        "C": "a patron's instructions, which became interference rather than the commission",
+        "D": "answerability to anything outside himself, as the newer sense of the word had it"
+      },
+      "correct": "C",
+      "estimated_time_sec": 55,
+      "explanation": {
+        "expert_notice": "The phrase is explained by the clause immediately after it. Once the source of a work was located inside the maker, a patron's instruction became interference rather than the commission itself, and a body of work could be defended as a single argument.",
+        "correct_reasoning": "The correct option is that clause restated. The passage is describing a change in the standing of an instruction rather than in an artist's circumstances: the same words from a patron, unchanged, become an intrusion into a work whose source is now taken to be internal. That is why the effect is called constitutive and why the author says a description could not have produced it.",
+        "passage_anchor": "rc-0104-p3",
+        "question_type_note": "A phrase question is decided by the sentence around it. When a phrase is followed by a clause beginning with once or because, read that clause as the author's own gloss.",
+        "reading_habit": "When an abstract phrase is immediately followed by a concrete example, the example is the definition. Distractors will be built from material elsewhere in the passage that fits the phrase in general.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "common_knowledge_intrusion",
+            "why_wrong": "Wealth is never mentioned, and money enters the paragraph only in the phrase about jobs done for money, which describes what the new category allowed an artist to deny his work was. The change described is in what an instruction counts as, not in who can afford to decline one.",
+            "seductive_element": "Financial independence is the ordinary explanation of an artist's freedom to say no, and readers supply the mechanism they already have."
+          },
+          {
+            "option": "B",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "The household and its attached spirit belong to the first paragraph's account of the older sense, which the third paragraph has left behind. Nothing in the passage says anybody refused a duty to a tutelary presence.",
+            "seductive_element": "The passage's most vivid image is the spirit one had rather than was, and a reader hunting for a referent reaches for the concrete scene rather than the abstract clause beside the phrase."
+          },
+          {
+            "option": "D",
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "This borrows the first paragraph's phrase about being answerable to nothing outside oneself, which describes the new sense of the word in general. The phrase in question names the particular thing that answerability made refusable, and the sentence supplies it two clauses later.",
+            "seductive_element": "It is the live rival, because it uses the passage's own words and is true of the new category as a whole, so a reader who does not read on to the gloss will find nothing wrong with it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0104-q2",
+      "type": "primary_purpose",
+      "skill": "author_purpose",
+      "patterns": [
+        "comp.purpose",
+        "comp.intent",
+        "struct.claim_counterclaim"
+      ],
+      "target_mistake": "stopping at the second paragraph's verdict, which the third neither withdraws nor allows to settle the question",
+      "prediction_target": "The learner should be able to say before looking: concede that the category was made, then say what the made thing went on to do.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 5,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "main_idea",
+        "logical_structure"
+      ],
+      "stem": "The primary purpose of the passage is",
+      "options": {
+        "A": "to trace a word's history from the spirit of a place to a kind of person",
+        "B": "to argue that the category was manufactured by a market that needed originality priced",
+        "C": "to show that the older vocabulary of skill and judgement described such men better",
+        "D": "to grant that the category was made and to say what, having been made, it then did"
+      },
+      "correct": "D",
+      "estimated_time_sec": 85,
+      "explanation": {
+        "expert_notice": "The third paragraph opens by refusing to let the second settle anything, saying that calling the category a manufacture settles less than it appears to, and then names two consequences, one the author treats as a real gain and one he treats as a permanent cost.",
+        "correct_reasoning": "The correct option carries the concession and the movement past it, which is the passage's whole architecture. The first paragraph sets up the received account of a discovery, the second removes it, and the third grants the removal while insisting that a made category can still do constitutive work. A purpose that stops at the manufacture makes the longest paragraph of the three an afterthought.",
+        "passage_anchor": "rc-0104-p2, rc-0104-p3",
+        "question_type_note": "In a passage arranged as a dialectic, the purpose lives in the third movement. Ask what the author would have been unable to say if the passage had ended at the second.",
+        "reading_habit": "When a paragraph begins with yet or still after a strong verdict, expect the verdict to be kept and its consequences disputed. Authors who wanted to withdraw a verdict do not begin with a concessive.",
+        "distractors": [
+          {
+            "option": "A",
+            "trap_type": "too_narrow",
+            "why_wrong": "The history occupies the first paragraph and is there to set up a question about whether the change was a discovery. Offered as the purpose it leaves both the argument against discovery and the account of what the category did with nothing to do.",
+            "seductive_element": "The passage really does begin with an etymology, and openings are habitually mistaken for subjects."
+          },
+          {
+            "option": "B",
+            "trap_type": "half_right",
+            "why_wrong": "This is the second paragraph's conclusion, and the third opens by saying it settles less than it appears to. The author agrees that the category was manufactured; his point is that its origins do not cancel what it then accomplished.",
+            "seductive_element": "It is the live rival, because it is the passage's most forceful claim and the kind of debunking such essays usually exist to deliver."
+          },
+          {
+            "option": "C",
+            "trap_type": "misattributed_view",
+            "why_wrong": "The older vocabulary is described, not preferred. It is introduced to show that the terms in use before the change named acquired and teachable qualities, which is evidence that a new kind of category had to be built rather than a recommendation to return to the old one.",
+            "seductive_element": "A passage that calls a category a manufacture seems bound to prefer whatever it displaced, and the older terms are listed approvingly enough to suggest it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "rc-0104-q3",
+      "type": "inference",
+      "skill": "inference",
+      "patterns": [
+        "inf.strongly_supported",
+        "inf.reasonable_implication",
+        "arg.qualification"
+      ],
+      "target_mistake": "treating the untestable claim as a separable abuse rather than as part of what the relocation bought",
+      "prediction_target": "The learner should predict that the answer will say the claim cannot be brought before evidence at all, because of where the source of a work has been put.",
+      "difficulty": {
+        "inference_depth": 4,
+        "distractor_similarity": 4,
+        "reasoning_depth": 5
+      },
+      "secondary_skills": [
+        "argument",
+        "scope"
+      ],
+      "stem": "It can be inferred that, on the author's account, the claim that an artist's failures are the price of his gift",
+      "options": {
+        "A": "must be settled by conviction rather than by evidence, since what licenses it also shields it",
+        "B": "became available, though slowly, once critics had abandoned the older vocabulary",
+        "C": "is the one part of the new category the older vocabulary could also have expressed",
+        "D": "was the objection patrons brought most forcefully against the new description"
+      },
+      "correct": "A",
+      "estimated_time_sec": 95,
+      "explanation": {
+        "expert_notice": "The last two sentences name the claim and its status together. The relocation of a work's source into the maker bought a claim nobody is able to test, and independence and unfalsifiability were purchased in one transaction and have not been separated since.",
+        "correct_reasoning": "The correct option draws the consequence of being untestable. If the very move that makes the claim intelligible, putting the source of the work inside the artist, also removes any external standard against which failures could count, then no observation can bear on it either way, and what is left is the reader's conviction. The passage says this is not an accidental abuse but part of a single transaction, which is why the inference runs through the licensing and the shielding together.",
+        "passage_anchor": "rc-0104-p3",
+        "question_type_note": "An inference about a claim's status is answered by asking what could ever count against it. Where a passage says a claim cannot be tested, the inference is about what is left to decide it.",
+        "reading_habit": "When an author says two things were bought together and never separated, refuse any option that treats one of them as a later misuse. The pairing is the point of the sentence.",
+        "distractors": [
+          {
+            "option": "D",
+            "trap_type": "out_of_scope",
+            "why_wrong": "Patrons appear once, as the source of instructions that became interference, and no objection by anybody is recorded in the passage. The claim about failures is described as something the new arrangement bought, not as something anyone argued against.",
+            "seductive_element": "Patrons are the party the new category acts against, so a reader looking for opposition finds them already on the page."
+          },
+          {
+            "option": "B",
+            "trap_type": "temporal_distortion",
+            "why_wrong": "Nothing is said about the older vocabulary being abandoned, or about any sequence in which it was dropped before the new claim could be made. The passage's chronology is about when the category arrived and what it then permitted, not about what critics gave up first.",
+            "seductive_element": "The passage does set an older vocabulary against a newer one, and readers convert a contrast between two vocabularies into a succession with a date."
+          },
+          {
+            "option": "C",
+            "trap_type": "opposite_direction",
+            "why_wrong": "The older terms are listed as naming what is acquired and therefore teachable, which is precisely what a gift is not. A vocabulary of skill, learning, judgement and industry has no way of treating failure as the price of an endowment nobody chose.",
+            "seductive_element": "It is the live rival, because the claim about failures sounds like ordinary talk about the costs of a temperament, and readers underrate how much of it depends on the source having been relocated."
+          }
+        ]
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "tutelary",
+      "passage_use": "a tutelary spirit a man had rather than was",
+      "meaning_here": "acting as a guardian over a person or a place",
+      "difficulty": "hard"
+    },
+    {
+      "word": "propitiated",
+      "passage_use": "it could be propitiated, neglected or lost",
+      "meaning_here": "kept favourable by attention paid to it",
+      "difficulty": "hard"
+    },
+    {
+      "word": "manufacture",
+      "passage_use": "has the marks of a manufacture rather than of a finding",
+      "meaning_here": "something made to answer a need, as against something discovered",
+      "difficulty": "medium"
+    },
+    {
+      "word": "unfalsifiability",
+      "passage_use": "Independence and unfalsifiability were purchased in one transaction",
+      "meaning_here": "the property of a claim that no evidence could count against",
+      "difficulty": "hard"
+    }
+  ],
+  "mentor": {
+    "challenge": "Three short paragraphs, and each one turns on the last. Notice exactly what the third paragraph takes back from the second and what it lets stand, because the purpose question is decided there and the passage is too short to give you a second chance.",
+    "one_sentence_summary": "The word genius once named a spirit attached to a place, a thing a man had rather than was, and by the end of the eighteenth century it named a rare and self-originating kind of person; the change is usually reported as a discovery, but the category arrived exactly when a market needing originality priced and a biography needing one explanation for a life had use for it, which makes it a manufacture, and the author nevertheless credits it with a real effect, since locating a work's source inside its maker turned a patron's instruction into interference, while the same move bought the untestable claim that failures are the price of the gift.",
+    "main_idea": "Genius was not discovered as a human type; the category was built when a market in originality and a new form of biography required it. But a made category can still do real work. By putting the source of a work inside its maker, it changed what an artist could refuse, turning instructions into interference. It also bought a claim nobody can test, that failures are the price of the gift, and the two came together.",
+    "simple_explanation": "The word genius is far older than what we now mean by it, and for most of its history it pointed at something outside the person. A genius was a spirit belonging to a place or a household. You had one; you were not one. It could be looked after, ignored, or lost.\n\nBy the end of the seventeen hundreds the word meant a kind of person instead: rare, the source of his own work, answerable to nobody outside himself. Most histories tell this as a discovery, as though a real but unusual human type had finally been described properly by people who had learned how to look.\n\nThe author thinks the evidence points the other way. Before the change, outstanding makers were praised with words like skill, learning, judgement and hard work, and every one of those names something you pick up, which means something that can be taught. Then the new category turns up at exactly the moment two institutions needed one: an art market that had to put a price on originality and tell it apart from competence, and a style of biography that wanted a single thread running through a whole life. A category that shows up precisely when it is wanted, using the words of the people who want it, looks made rather than found.\n\nAnd yet, he says, calling it made settles less than you would think.\n\nThe new category did something no mere description could have done. It changed what an artist was able to refuse. Once everyone agreed that the source of a work lay inside the maker, a patron telling him what to paint stopped being the job itself and became interference with it. A lifetime of work could now be defended as one continuous argument instead of a string of paid commissions. That is a real change, and the fact that the category was invented does not undo it, because an invented thing can still do actual work.\n\nBut the same move bought something else, which is the sting in the tail. Putting the source of the work inside the artist also makes available a claim that nobody can ever check: that his failures are simply the price of his gift. There is no way to test that. Independence and untestability were bought in the same purchase, and nobody has managed to separate them since.",
+    "why_difficult": "Everything is compressed. Each paragraph reverses the one before it, and the third neither withdraws the second's verdict nor accepts its finality, which is an unusual shape to hold in so little space. The second difficulty is the phrase question, whose answer sits in a clause after the phrase, while the material that most readers reach for sits a paragraph earlier and uses the passage's own memorable language. The third is the ending, which pairs a gain with a cost and refuses to rank them, so a reader who wants a verdict finds two and takes whichever he arrived expecting.",
+    "author_intention": "To stop the reader treating the invention of a category as an exposure, and to show that a made category can reorganise a practice while also installing a claim that nothing can ever count against.",
+    "paragraph_journey": [
+      {
+        "paragraph_id": "rc-0104-p1",
+        "role": "Sets up the received account",
+        "note": "The word once named a spirit belonging to a place, something a man had. Later it named a kind of person, and historians call the change a discovery."
+      },
+      {
+        "paragraph_id": "rc-0104-p2",
+        "role": "Denies the discovery",
+        "note": "Earlier praise used words for acquired, teachable qualities. The new category appeared just when a market and a form of biography needed it."
+      },
+      {
+        "paragraph_id": "rc-0104-p3",
+        "role": "Says what the made thing did",
+        "note": "Being made does not cancel the effect. It turned instruction into interference, and it also bought a claim about failures that nothing can test."
+      }
+    ],
+    "tone_progression": "It opens in the neutral register of etymology, sharpens into something close to prosecution as the category's convenient arrival is described, and then turns even-handed at the last paragraph, awarding a gain and a cost without saying which is larger.",
+    "key_transitions": [
+      "'The evidence does not support a discovery.' (opening of paragraph 2) — the received account is rejected and the case against it begins.",
+      "'Yet calling it a manufacture settles less than it appears to.' (opening of paragraph 3) — the verdict is kept and denied the power to close the question.",
+      "'Independence and unfalsifiability were purchased in one transaction.' (final sentence) — the gain and the cost are tied together and refused a ranking."
+    ],
+    "misunderstanding": "The commonest wrong model is that the passage debunks genius, because the second paragraph is its most forceful and ends on the word manufacture. The third paragraph spends its whole length saying that this settles less than it appears to, and credits the category with a constitutive effect. The opposite wrong model treats the final paragraph as a rescue, in which the invention turns out to have been justified after all; the last two sentences attach a permanent and untestable claim to the same relocation, and say the two have never been separated.",
+    "traps_summary": "This set offers the vocabulary of the first paragraph as the referent for a phrase in the third, the second paragraph's verdict as the passage's purpose, financial independence as the source of artistic refusal, and an untestable claim treated as a later abuse rather than as part of the original purchase. Asking which paragraph an option belongs to answers all three.",
+    "reading_lesson": "When a passage runs thesis, refutation, and then a paragraph beginning with yet, resist the urge to read the third movement as a retraction: the author is normally keeping the refutation and denying that it disposes of the question, and the purpose of such a passage always lives in the third movement rather than the second. The companion habit is to read one clause further when an abstract phrase seems to need a referent, because authors routinely gloss such phrases immediately afterwards, and the distractors are built out of material from elsewhere that fits the phrase loosely.",
+    "real_world": "The same double effect appears wherever a category is invented and then does work: the idea of a profession, which both raises standards and licenses the claim that outsiders cannot judge; the idea of a founder, which concentrates credit and immunises failure; the idea of a vocation, which dignifies low pay. In each case the useful question is what the category makes refusable, and what it makes impossible to argue with.",
+    "takeaway": "A category can be manufactured and still change what people are able to refuse.",
+    "reflection_question": "Which of the categories you belong to makes some demand on you refusable, and which of your failures does it quietly excuse?"
+  }
+}

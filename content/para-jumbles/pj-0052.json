@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "pj-0052",
+    "type": "pj",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 84,
+    "genre": "arts-culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "title": "The Interruption on the Programme",
+    "theme": "how the encore travelled from a spontaneous demand in the middle of a concert to a rehearsed item at the end of it",
+    "estimated_time_sec": 90,
+    "format": {
+      "sentence_count": 4,
+      "response": "TITA",
+      "opener_given": false,
+      "closer_given": false,
+      "format_verified": "2026-09: four-sentence TITA jumble, the modern CAT default; re-verify against each new official paper"
+    },
+    "macro_pattern": "specific_to_general",
+    "cohesion_signals": ["temporal_sequence", "pronoun_ref", "article_given_new", "lexical_repetition"],
+    "primary_trap": "competing_opener",
+    "secondary_traps": ["anchor_pair", "false_pronoun_binding"],
+    "dna_traits": ["opener_heuristic", "surface_matching"],
+    "difficulty_vector": {
+      "vocabulary_load": 2,
+      "inference_load": 2,
+      "syntactic_complexity": 2,
+      "reference_density": 3,
+      "concept_abstractness": 2,
+      "dependency_chain_length": 2,
+      "transition_ambiguity": 2,
+      "competing_openings": 3,
+      "competing_endings": 1,
+      "lexical_decoys": 2,
+      "topic_unfamiliarity": 2,
+      "plausible_orderings": 2
+    },
+    "num_plausible_orderings": 2,
+    "heuristic_adversarial": false,
+    "nucleus": "B",
+    "learning_objective": "date a sentence by what it says has been moved, and refuse the opening seat to any sentence that reports a change of position",
+    "reasoning_patterns": ["disc.chronology", "disc.specific_to_general", "disc.pronoun_antecedent", "struct.specific_to_general"],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival opens on the sentence about lengthening programmes, which sounds like the beginning of a history of concert manners and whose 'the demand' can be taken for a general definite, the demand for an encore being a thing most readers already know about. It is refused by the word 'moved': a demand cannot be relocated to the end of the evening unless the paragraph has said where it used to be met, and only the dated sentence about players stopping in the middle of a piece says that. A second rival welds the two sentences about performers, on the ground that both describe what players do; that strands 'By the time it had a fixed position', which depends on a position having been fixed by the sentence it has jumped over.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General history of concert practice; no specific performer, hall, work or text adapted or quoted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-pj-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
+    "reviewer_notes": "An easy specific-to-general item whose only real difficulty is a decoy opener: a sentence of general history whose definite article looks like common knowledge until the reader asks where the demand was moved from. The inferential connective sits in the second seat, and the closing sentence carries none."
+  },
+  "sentences": [
+    {
+      "label": "A",
+      "text": "By the time it had a fixed position it had a fixed repertoire as well, and performers were arriving with two short pieces prepared and a show of reluctance ready.",
+      "role": "development"
+    },
+    {
+      "label": "B",
+      "text": "A gesture that began as a refusal to let the evening proceed is now the thing that completes it, rehearsed and reluctant on schedule, which is what generally becomes of an interruption a house decides to keep.",
+      "role": "conclusion"
+    },
+    {
+      "label": "C",
+      "text": "Programmes lengthened and halls grew colder about interruption, so the demand was moved to the end of the evening, where it could be met without breaking anything.",
+      "role": "development"
+    },
+    {
+      "label": "D",
+      "text": "At a concert in the seventeen-nineties an audience that liked a movement simply demanded it again, and the players stopped where they were and obliged.",
+      "role": "example"
+    }
+  ],
+  "correct_order": ["D", "C", "A", "B"],
+  "links": [
+    {
+      "from": "D",
+      "to": "C",
+      "device": "given_new_flow",
+      "reliability": "high",
+      "explanation": "'The demand was moved to the end of the evening' presupposes a place it was previously met, and the only sentence that puts it anywhere is the one where players stop in the middle of a work and play a movement again."
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "device": "pronoun_reference",
+      "reliability": "high",
+      "explanation": "'By the time it had a fixed position' refers to the practice acquiring the place the previous sentence has just assigned it. Before that sentence nothing in the paragraph has a position at all."
+    },
+    {
+      "from": "A",
+      "to": "B",
+      "device": "thematic_development",
+      "reliability": "medium",
+      "explanation": "The closing generalisation calls the gesture 'rehearsed and reluctant on schedule', which is a compression of the two prepared pieces and the show of reluctance described immediately before it."
+    }
+  ],
+  "explanation": {
+    "macro_pattern_note": "One dated scene, two steps of development, and a general rule drawn at the end. The paragraph travels from a particular evening in the seventeen-nineties to a claim about what happens to any interruption an institution decides to keep, so the specific must come first and the general last; the work is in the two middle sentences, which are ordered by what each says has already changed.",
+    "movement": [
+      { "label": "D", "why_here": "The scene, dated and concrete, and the only sentence that introduces the practice rather than reporting something about it. It also establishes where the demand used to be met, which is what the next sentence moves." },
+      { "label": "C", "why_here": "The first change: the demand is relocated to the end of the evening. Its 'so' draws the small inference early, and the relocation it reports is the position the following sentence takes for granted." },
+      { "label": "A", "why_here": "The second change, and the one that matters: a fixed position brings a fixed repertoire, and spontaneity becomes preparation. 'It' is the practice, which has just been given somewhere to stand." },
+      { "label": "B", "why_here": "The general claim, drawn from the case and stated for any case. It ends the paragraph because everything it summarises — the refusal, the schedule, the rehearsal — is behind it." }
+    ],
+    "tempting_orders": [
+      {
+        "order": "CDAB",
+        "trap_type": "competing_opener",
+        "why_tempting": "Lengthening programmes and hardening manners are how a history of concert-going would naturally begin, and 'the demand' can be read as the general definite of a writer assuming his reader knows what an encore is. The sentence also carries no pronoun of its own.",
+        "where_it_breaks": "'Moved to the end of the evening' is a report of relocation, and a relocation needs a starting point. The only sentence that says where the demand used to be met is the one about players stopping in the middle of a work, and in this order it arrives afterwards, introducing the practice the paragraph has already relocated."
+      },
+      {
+        "order": "DACB",
+        "trap_type": "anchor_pair",
+        "why_tempting": "Two sentences describe what the musicians do — stopping and obliging in one, arriving with pieces prepared in the other — and a solver who has spotted that they share a subject will want them side by side, with the sentence about programmes and halls treated as background that can go anywhere.",
+        "where_it_breaks": "'By the time it had a fixed position' assumes the position has been fixed, and the sentence that fixes it, by moving the demand to the end of the evening, has been jumped over. The paragraph would describe a settled repertoire before it has a settled slot to put one in."
+      },
+      {
+        "order": "ACDB",
+        "trap_type": "false_pronoun_binding",
+        "why_tempting": "'By the time it had a fixed position' can be read as a writer's way of starting mid-stride, with 'it' standing for the encore as a known institution, and the sentence is a strong summary of the whole change.",
+        "where_it_breaks": "In the first seat the pronoun has nothing behind it, and the paragraph would report the arrival of a fixed repertoire before the dated scene that shows the practice beginning as anything but fixed. The chronology runs backwards from the second sentence onwards."
+      }
+    ],
+    "trap_named": "The trap is a sentence of general history placed where a specific scene belongs. Its definite article, 'the demand', reads like the definite article of common knowledge, and its subject matter sounds like a beginning. The defence is to look for verbs of change — moved, replaced, lengthened, abandoned — and to ask what the earlier state was. A sentence that reports a change cannot be the first sentence, because the state it changes from has to be on the page.",
+    "solving_habit": "Treat every verb of relocation as a backward reference. 'Moved', 'shifted', 'returned' and 'became' all quietly claim a previous position, and the sentence that supplies it stands in front."
+  },
+  "mentor": {
+    "challenge": "One sentence sounds like the opening of a history and contains a word that forbids it the first seat. The word is a verb, not an article.",
+    "paragraph_plain": "At a concert in the seventeen-nineties, an audience that enjoyed a movement simply demanded to hear it again, and the players stopped where they were and repeated it. As programmes got longer and halls became less tolerant of interruptions, the demand was shifted to the end of the evening, where it could be satisfied without disrupting anything. Once it had a fixed place it acquired a fixed repertoire too, and performers began turning up with a couple of short pieces ready and a display of reluctance to go with them. A gesture that started as a refusal to let the evening continue is now the thing that rounds it off, rehearsed and reluctant on cue, which is usually what happens to an interruption an institution decides to keep.",
+    "takeaway": "A sentence that says something was moved is telling you where it used to be, and that is behind it."
+  }
+}
