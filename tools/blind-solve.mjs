@@ -40,6 +40,11 @@ const dir = path.join(ROOT, 'content', DIRS[type]);
 const files = () => fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort();
 const readF = (f) => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
 
+// A sentence carries its discourse role in the file — topic, concession,
+// conclusion. The app shows that only after the answer; a blind reader must
+// never see it, or the first and last sentence place themselves.
+const bare = (sentences) => sentences.map((x) => ({ label: x.label, text: x.text }));
+
 const asksItsOwnTitle = (item) => (item.meta?.question_types ?? (item.questions ?? []).map((q) => q.type ?? q.question_type)).includes('title_selection');
 
 /** What a candidate sees, and the keys, per file. */
@@ -56,11 +61,11 @@ function split(item) {
   }
   if (type === 'ooo') {
     // Four or five sentences, one of which does not belong. The key is its label.
-    return { shown: { id: m.id, instruction: 'One sentence does not belong with the others. Give its label.', sentences: item.sentences }, keys: { [m.id]: item.outlier } };
+    return { shown: { id: m.id, instruction: 'One sentence does not belong with the others. Give its label.', sentences: bare(item.sentences) }, keys: { [m.id]: item.outlier } };
   }
   if (type === 'pj') {
     // The key is an ordering, not a letter: compare joins it into one string.
-    return { shown: { id: m.id, instruction: 'Put these sentences into the one order that makes a coherent paragraph. Answer as the labels in order, e.g. "BDAC".', sentences: item.sentences }, keys: { [m.id]: item.correct_order.join('') } };
+    return { shown: { id: m.id, instruction: 'Put these sentences into the one order that makes a coherent paragraph. Answer as the labels in order, e.g. "BDAC".', sentences: bare(item.sentences) }, keys: { [m.id]: item.correct_order.join('') } };
   }
   if (type === 'ps') {
     return { shown: { id: m.id, paragraph: item.paragraph.sentences.map((s) => s.text).join(' '), stem: item.question.stem, options: item.question.options }, keys: { [m.id]: item.question.correct } };

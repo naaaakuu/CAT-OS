@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0051",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "science",
+    "difficulty": "medium",
+    "difficulty_numeric": 4,
+    "tier": "medium",
+    "bible_level": "intermediate",
+    "title": "The Flood That Comes Every Few Years",
+    "theme": "why the events that do most of the work on a river channel are too rare for an ordinary record and too common to count as disasters",
+    "estimated_time_sec": 85,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "Because what shapes a channel is the work an event does multiplied by how often it happens, most of that work is done by flows of middling size and middling rarity, so a record built to describe typical conditions captures the setting rather than the agent.",
+      "scope": "Measurement of sediment transport and channel change in rivers; the claim ranks contributions and does not declare rare floods unimportant.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 3,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "well enough",
+      "neither at the flood of the century nor at the everyday flow",
+      "every few years",
+      "does not follow",
+      "only that"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "certainty_reading",
+      "evidence_vs_thesis"
+    ],
+    "mission": "watch_the_turn",
+    "learning_objective": "follow a paragraph past its opening concession to the sentence the turn introduces, and keep the refusal the author attaches to it",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "sum.certainty_kept",
+      "arg.evidence_vs_conclusion",
+      "lang.contrast_marker",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option calling records of ordinary flow of little use. It has the right target and the wrong volume. The paragraph says such a record describes the channel in its usual condition 'well enough', and its last sentence refuses the stronger claim outright: the rarest floods are not unimportant, their rarity merely keeps their share below that of flows a river meets within a decade. The option that reports the small ordinary load is the paragraph's opening concession, true and pre-turn, and the word 'But' is there to say that the argument has not started. The option recommending that monitoring be rebuilt around the largest floods on record concedes the ordinary-day point and then proposes the very design the third sentence rules out, since the peak sits neither at the century flood nor at the everyday flow.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the magnitude and frequency of the events that move sediment; no specific study or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A medium item built on a turn that arrives in the third sentence and a refusal that arrives in the fifth. Families: structure, certainty, addition. The conceding option is also the prescriptive one; the key is a flat assertion."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Ask how much sediment a river moves and the honest answer depends on which days the gauge happened to be watching.",
+        "role": "setup"
+      },
+      {
+        "text": "On most days the load is small, and a record assembled from those days describes the channel in its usual condition well enough.",
+        "role": "concession"
+      },
+      {
+        "text": "But what decides the shape of a channel is the work an event does multiplied by how often it happens, and that product peaks neither at the flood of the century nor at the everyday flow; it peaks in between, at discharges a catchment sees every few years.",
+        "role": "thesis"
+      },
+      {
+        "text": "The consequence for measurement is awkward: a programme built to characterise typical conditions records the setting in which the work is done and misses the agent that does it.",
+        "role": "support"
+      },
+      {
+        "text": "It does not follow that the rarest floods are unimportant, only that their rarity keeps their share below that of the flows a river meets within a decade.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Because the work done on a channel is size multiplied by frequency, most of it falls to flows of middling size that recur every few years, so a record of typical days describes the setting rather than the agent of change.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say does most of the work of shaping a river, and what problem does that create for measurement?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say why the decisive flows are middling ones, rather than simply naming them?",
+        "kept": "Good. The reason is a product: how much an event does, multiplied by how often it arrives. Neither factor alone picks the winner.",
+        "drifted": "Naming the flows without the product leaves the claim looking arbitrary. It is the multiplication that puts the peak between the two extremes."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the paragraph's refusal to call the rarest floods unimportant?",
+        "kept": "Well held. The author ranks contributions, and ranking is not dismissal; the last sentence exists to stop the summary from going further than the argument.",
+        "drifted": "Turning 'their share is smaller' into 'they do not matter' is a different claim, and the paragraph declines it in so many words."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a recommendation about how monitoring ought to be designed?",
+        "kept": "Well judged. The paragraph reports a consequence and stops, and the design it would imply is not the one a careless reader reaches for.",
+        "drifted": "Rebuilding a programme around record floods answers the problem with the extreme the third sentence has just excluded."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Although ordinary records do describe a river's usual state, monitoring should be rebuilt around the largest floods on record if channel change is to be understood.",
+      "B": "Records of ordinary flows are of little use for understanding a channel, because the work that shapes it is done on days a gauge is unlikely to see.",
+      "C": "A channel is shaped mostly by flows big enough to matter and common enough to recur, so a record of typical days captures the setting and misses the agent.",
+      "D": "On most days a river carries very little sediment, so a record built from ordinary days describes the channel in its usual condition accurately enough."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "How much sediment a river moves depends on when you looked. Most days are quiet, and a record of quiet days is a fair picture of the river as it usually is. The trouble is that what actually shapes the channel is not the biggest event or the commonest one, but the combination of the two: how much a flow does, multiplied by how often it turns up. That combination peaks somewhere in the middle, at flows that arrive every few years. So a monitoring programme aimed at typical conditions ends up describing the stage rather than the actor. The author then draws a line: this ranks the rare floods below the middling ones, and does not say they count for nothing.",
+      "correct_reasoning": "The correct option keeps the mechanism and the ranking it produces. It says the decisive flows are both large enough to do work and frequent enough to recur, which is the product the third sentence describes, and it keeps the consequence in the author's own terms, a record of the setting rather than of the agent. It does not push the ranking into a dismissal.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No redesign is proposed in the paragraph, and the one offered here points at the extreme the argument has just excluded, since the peak of the product sits neither at the century flood nor at the everyday flow.",
+          "seductive_element": "It concedes what the paragraph concedes and then supplies the practical conclusion a reader expects a passage about measurement to end with.",
+          "thinking_mistake": "Answering the problem a paragraph raises instead of reporting the answer the paragraph gave."
+        },
+        {
+          "option": "B",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says a record of ordinary days describes the usual condition well enough, and that the decisive flows recur within a decade, so they are not days a gauge is unlikely to see. Calling such records of little use overshoots a claim about ranking.",
+          "seductive_element": "It sounds like the strong version of the author's point, and a summary that states a finding forcefully can feel more faithful than one that qualifies it.",
+          "thinking_mistake": "Reading a claim that something is outranked as a claim that it counts for nothing."
+        },
+        {
+          "option": "D",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the concession the paragraph makes before its turn, and the word 'But' at the head of the next sentence marks it as the position being left behind rather than the one being argued for.",
+          "seductive_element": "It is accurate, it is checkable against the text, and a reader in a hurry will have met it before the sentence that reverses its importance.",
+          "thinking_mistake": "Summarising the part of a paragraph that comes before the turn, because that part is where the reading was easiest."
+        }
+      ],
+      "reading_habit": "When a paragraph closes with 'it does not follow that', read the closing sentence as a fence and test every option against it before testing them against the argument."
+    }
+  },
+  "mentor": {
+    "challenge": "The sentence you meet first is the one the paragraph is about to argue against. Find the word that tells you so.",
+    "takeaway": "The events that change a landscape are rarely the ones that make the news, and rarely the ones a routine record is built to catch."
+  }
+}

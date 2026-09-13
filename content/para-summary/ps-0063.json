@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0063",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "architecture",
+    "difficulty": "hard",
+    "difficulty_numeric": 9,
+    "tier": "ninety-nine",
+    "bible_level": "elite",
+    "title": "The Road Cut Past the Back",
+    "theme": "how a dispute about why buildings are dressed at the front is settled by a case the usual evidence cannot reach",
+    "estimated_time_sec": 130,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Because both accounts of the dressed front predict the ornament usually offered as evidence, only the building that gains a second public side can decide between them, and there the ornament moves while the servicing stays, which awards the elevation to the display account and leaves the plan to the practical one.",
+      "scope": "The decorated front and plain back of ordinary buildings; the verdict is split between elevation and plan rather than given to one account entire.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 4
+    },
+    "load_bearing": [
+      "cannot decide between them",
+      "the ornament moves",
+      "the servicing stays where it was",
+      "leaves the first in possession of the plan"
+    ],
+    "separating_element": "The correct option keeps the split the last clause makes, display for the elevation and the practical account for the plan; the nearest rival awards the whole question to display and leaves the practical account explaining nothing.",
+    "dna_traits": [
+      "evidence_vs_thesis",
+      "main_idea_detection",
+      "inference_control",
+      "scope_preservation"
+    ],
+    "mission": "evidence_vs_conclusion",
+    "learning_objective": "keep the reason a verdict was reachable, when the verdict alone is the quotable half",
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "arg.evidence_vs_conclusion",
+      "sum.central_vs_supporting",
+      "sum.qualification_kept",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists open on the same clause about ornament moving and servicing staying, and part on how much they award. The rival gives the whole question to the social account and says the practical one explains nothing; the last clause of the paragraph says the moving case favours the second account 'for the elevation' and leaves the first 'in possession of the plan', so the practical account keeps the location of the drains. The option that the ornament settles nothing is the middle step, which is true and is the reason the discriminating case had to be found. The option refusing to prefer either concedes that each explains part and then declines the adjudication the paragraph performs.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the front and back elevations of ordinary buildings; no specific building, city or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite adjudication in which the usual evidence is shown to be useless and a discriminating case is produced. Families: structure, stance, precision. The separating element is a split verdict stated in one subordinate clause."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Most buildings are dressed at the front and left bare at the back, and two accounts of why compete.",
+        "role": "setup"
+      },
+      {
+        "text": "One is practical: deliveries, drains and waste need a side where appearance is not being paid for, and the plain elevation is where they are put.",
+        "role": "support"
+      },
+      {
+        "text": "The other is social: a façade is an address to the street, and ornament goes where it will be read.",
+        "role": "support"
+      },
+      {
+        "text": "The ornament itself cannot decide between them, since both accounts predict a decorated front, and the ornament is what is usually offered as evidence.",
+        "role": "evidence"
+      },
+      {
+        "text": "What decides is the building that acquires a second public side when a road is cut past its back: the servicing stays where it was and the ornament moves, which favours the second account for the elevation and leaves the first in possession of the plan.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "Since both accounts predict a decorated front, the ornament cannot settle the dispute; the building given a second public side can, because there the ornament moves and the servicing does not, so display explains the elevation while the practical account keeps the plan.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say cannot settle the dispute about dressed fronts, and what does it say settles it?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say why the ornament cannot decide the question?",
+        "kept": "Good. Both accounts predict a decorated front, so the decoration is evidence for neither, and the whole search for another case follows from that.",
+        "drifted": "A verdict without this step is a preference. The paragraph's move is to disqualify the usual evidence before producing evidence that discriminates."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the split, display for the elevation and the practical account for the plan?",
+        "kept": "Exactly right, and this is the item. The servicing does not move when the road is cut, which is precisely what the practical account predicts and keeps.",
+        "drifted": "Awarding everything to display leaves the drains unexplained, and the paragraph says in the same clause that the first account keeps the plan."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a judgement about which kind of architecture is better or more honest?",
+        "kept": "Well judged. The paragraph adjudicates between two explanations and never praises or blames either arrangement.",
+        "drifted": "Calling display dishonest or the practical account philistine imports an evaluation into a paragraph that is deciding a question of cause."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Both accounts of the dressed front predict the ornament that is usually produced as evidence for one of them, so the ornament by itself settles nothing at all.",
+      "B": "Ornament moves to a new public side while servicing stays put, so display decides the elevation and the practical account keeps the plan, which ornament alone could not show.",
+      "C": "Although each account explains part of the dressed front, neither can be preferred to the other, since the two of them predict exactly the same building in every case.",
+      "D": "Ornament moves to a new public side while servicing stays put, so the social account is right and the practical one explains nothing about how buildings are arranged."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "Buildings are usually smart at the front and plain at the back, and there are two stories about why. The practical story says the bins, the drains and the deliveries have to go somewhere, and that somewhere is the side nobody is paying to look at. The social story says a front is a speech addressed to the street, so the decoration goes where it will be read. The trouble is that both stories predict a decorated front, which is exactly what people point at when they argue for one of them, so the decoration proves nothing. The test is a building that suddenly gets a second public side because a road is cut behind it. The drains stay where they were; the ornament moves. So the display story explains the elevation, and the practical story keeps the plan.",
+      "correct_reasoning": "The correct option keeps the discriminating case and the split verdict drawn from it: ornament follows the public side, servicing does not, so display explains the elevation while the practical account retains the plan. It also keeps the evidential point that made the case necessary, that the ornament by itself could not have shown this.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": "scope_narrowing",
+          "why_wrong": "This is the middle step. Having disqualified the usual evidence, the paragraph goes on to find evidence that does discriminate and to state the verdict it produces, and neither appears here.",
+          "seductive_element": "It is a genuine and rather satisfying observation about the state of the argument, and readers trained to notice weak evidence will recognise it as the clever move.",
+          "thinking_mistake": "Stopping at the sentence that clears the ground, and taking the demolition of an argument for the conclusion of one."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flattening",
+          "secondary_archetype": "half_truth",
+          "why_wrong": "The paragraph does not leave the question open. It says both accounts predict the same front and then produces the case in which they predict different things, which is why a verdict is available at all.",
+          "seductive_element": "It concedes that each account explains something and then withholds judgement, which looks like the scrupulous reading of a paragraph that gives two views equal space.",
+          "thinking_mistake": "Treating even-handedness as the safe summary of any paragraph that presents two positions, without checking whether the author decided between them."
+        },
+        {
+          "option": "D",
+          "archetype": "near_miss",
+          "secondary_archetype": "scope_broadening",
+          "why_wrong": "The final clause divides the spoils: the display account wins the elevation and the practical account is left in possession of the plan. Saying the practical account explains nothing contradicts the very observation the test rested on, that the servicing stayed where it was.",
+          "seductive_element": "It repeats the key word for word until its last clause and states the winner more cleanly, and a decisive verdict reads like a better summary of an adjudication.",
+          "thinking_mistake": "Rounding a split decision up to a clean one, because a divided verdict feels like a failure to conclude."
+        }
+      ],
+      "reading_habit": "When a paragraph shows that the usual evidence cannot decide, look for the case it goes on to use instead. The summary has to contain both moves."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options share their opening clause. The paragraph's last words hand something back to the account that appears to lose.",
+    "takeaway": "When two explanations predict the same building, go looking for the building where they predict different things."
+  }
+}

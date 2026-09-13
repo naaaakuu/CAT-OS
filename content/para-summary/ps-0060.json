@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0060",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 94,
+    "genre": "ethics",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "The Branch on the Path",
+    "theme": "why what gratitude answers to is what a benefactor could have withheld, rather than the benefit received or the intention behind it",
+    "estimated_time_sec": 135,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Gratitude answers another person's will rather than an improvement in one's circumstances, so what is owed tracks what the benefactor could have withheld and chose not to, which is why a rescuer under a duty is owed less than one who was free to walk on.",
+      "scope": "What gratitude responds to and how much is owed; the claim is about the ground of the debt, not about how grateful people in fact feel.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "another's will",
+      "could have withheld and chose not to",
+      "under a duty to act",
+      "free to walk on"
+    ],
+    "separating_element": "The correct option grounds the debt in what the benefactor could have withheld; the nearest rival grounds it in the benefactor's intention, which the closing clause separates by owing less to a rescuer who intended the rescue but was under a duty to perform it.",
+    "dna_traits": [
+      "main_idea_detection",
+      "language_precision",
+      "inference_control",
+      "evidence_vs_thesis"
+    ],
+    "mission": "ignore_examples",
+    "learning_objective": "hold a criterion to the exact word the author chose, when a neighbouring and more familiar criterion fits most of the same cases",
+    "reasoning_patterns": [
+      "sum.example_vs_claim",
+      "sum.central_vs_supporting",
+      "arg.principle",
+      "sum.no_addition",
+      "lang.contrast_marker"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists agree that gratitude answers a will and not an improvement, and part on what the debt tracks. The rival puts it on the benefactor's intention to benefit, which fits the stranger and the road authority perfectly well. The last clause is built to separate them: a rescuer under a duty to act intends the rescue as fully as anyone and is owed less than one who was free to walk on, so intention cannot be what is being measured. What is measured is what could have been withheld. The option about the stranger and the authority is the paragraph's illustration, chosen to show that improvement alone is not enough. The option recommending gratitude towards institutions concedes that a benefit is a benefit and then reverses the conclusion the illustration was built to support.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General moral reasoning about the ground of gratitude; no specific philosopher or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item whose near miss is the adjacent criterion, intention, and whose separating case is one subordinate clause. Families: structure, precision, addition."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "It seems ungenerous, having been helped, to ask what the helper meant by it.",
+        "role": "concession"
+      },
+      {
+        "text": "A benefit is a benefit, and a person lifted out of trouble is in no position to audit the motives of whoever did the lifting.",
+        "role": "concession"
+      },
+      {
+        "text": "But gratitude is not a response to an improvement in one's circumstances; it is a response to another's will, which is why nobody thanks the weather.",
+        "role": "support"
+      },
+      {
+        "text": "The stranger who drags a fallen branch off the path is thanked, and the authority whose maintenance schedule happened to clear it that week is not, though the walker's morning is improved either way.",
+        "role": "example"
+      },
+      {
+        "text": "What is owed therefore tracks what the benefactor could have withheld and chose not to, which is why a rescuer under a duty to act is owed less than one who was free to walk on.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Gratitude responds to another's will rather than to an improvement in one's circumstances, so what is owed follows what the benefactor could have withheld and did not, which is why a duty-bound rescuer is owed less.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say gratitude is owed for, and what does it say the amount owed depends on?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say gratitude answers a will rather than an improvement?",
+        "kept": "Good. The weather improves mornings and is thanked by nobody, which is the shortest statement of the distinction the paragraph rests on.",
+        "drifted": "Saying gratitude is owed for benefits received puts the debt where the paragraph refuses to put it, and the weather is the counter-example."
+      },
+      {
+        "id": "scope",
+        "ask": "Does your sentence measure the debt by what could have been withheld, or by what the benefactor intended?",
+        "kept": "Exactly right, and this is the item. Intention fits most cases; the closing clause supplies the case where the two come apart.",
+        "drifted": "A rescuer under a duty intends the rescue completely, and the paragraph says he is owed less. So the measure cannot be intention."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you drawn a conclusion about institutions that the paragraph does not draw?",
+        "kept": "Well judged. The authority with a maintenance schedule appears as an illustration, and the paragraph reaches no verdict on what is owed to organisations as such.",
+        "drifted": "Extending or denying gratitude to institutions is a further question, and the text uses the schedule only to show that improvement alone earns nothing."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A walker thanks the stranger who drags a branch off the path and not the authority whose schedule cleared it, though his morning is improved in either case.",
+      "B": "Gratitude answers another's will rather than an improvement in one's circumstances, so what is owed follows the benefactor's intention in conferring the benefit.",
+      "C": "Gratitude answers another's will rather than an improvement in one's circumstances, so what is owed follows what the benefactor could have withheld and did not.",
+      "D": "Although a benefit remains a benefit whatever produced it, we should thank institutions as readily as individuals, since the good they do us is no less real."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "When someone has helped you it feels mean to start asking what they meant by it; you are hardly placed to audit their motives. The paragraph grants that and then turns. Gratitude, it says, is not a reaction to your circumstances improving, or we would thank the weather. It is a reaction to somebody's will. Hence the walker thanks the stranger who pulls the branch aside and does not thank the council whose schedule happened to clear it, although the morning is improved either way. And the amount owed follows what the benefactor could have refused to do and did not: a rescuer who was under a duty to act is owed less than one who could have walked past and did not.",
+      "correct_reasoning": "The correct option keeps the turn, that gratitude answers a will and not an improvement, and then keeps the exact measure the last sentence gives, what the benefactor could have withheld and chose not to. That measure is what makes the closing contrast work, since a rescuer under a duty could not have withheld the rescue and is therefore owed less despite intending it fully.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": "scope_narrowing",
+          "why_wrong": "The branch and the schedule are the illustration the paragraph uses to show that an improvement alone earns nothing. The claim they support, about will and about what could have been withheld, is not here.",
+          "seductive_element": "It is the only scene in the paragraph, it is accurate in every detail, and a reader under pressure remembers scenes better than criteria.",
+          "thinking_mistake": "Summarising the case that made an abstract point vivid, and leaving the abstract point behind."
+        },
+        {
+          "option": "B",
+          "archetype": "near_miss",
+          "secondary_archetype": "category_shift",
+          "why_wrong": "The turn is kept and the measure is changed. The paragraph grounds the debt in what could have been withheld, and its closing clause separates that from intention: a rescuer under a duty to act intends the rescue and is nonetheless owed less.",
+          "seductive_element": "Intention is the criterion most readers already associate with gratitude, it fits the stranger and the authority perfectly, and it differs from the key by three words at the end.",
+          "thinking_mistake": "Accepting a familiar criterion that agrees with the examples, instead of testing it against the one case the author added to break it."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": "stance_flip",
+          "why_wrong": "The paragraph makes no recommendation about institutions, and the reasoning runs the other way: an improvement that nobody chose to confer is exactly what the maintenance schedule illustrates and exactly what earns no thanks.",
+          "seductive_element": "It concedes the paragraph's own opening and then makes the generous-sounding move, which reads as the humane conclusion of an argument about gratitude.",
+          "thinking_mistake": "Turning an analysis of what a debt tracks into advice about whom to feel grateful towards, and reversing the analysis in the process."
+        }
+      ],
+      "reading_habit": "When two options share a whole clause and differ at the end, find the sentence the author added for no other reason than to separate them. It is usually the last one."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options agree about what gratitude answers and disagree about what fixes its size. One clause in the last sentence settles which measure the author is using.",
+    "takeaway": "You are grateful for what someone could have refused you, which is why the same rescue is worth more from a passer-by than from a lifeguard."
+  }
+}

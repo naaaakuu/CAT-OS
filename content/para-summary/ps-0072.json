@@ -1,0 +1,170 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0072",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "education",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Clock in the Examination Hall",
+    "theme": "what a mark from a paper that is long for its clock can and cannot be used to predict",
+    "estimated_time_sec": 60,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "A paper that is long for its clock measures speed together with understanding, so its mark should not be used to predict work in which nobody is timed, though it remains fair where the work itself is done under pressure and the objection lapses where candidates finish early.",
+      "scope": "Examinations whose length exceeds their time allowance; the claim limits the uses of a mark rather than denying that it measures anything.",
+      "certainty": "mixed",
+      "stance": "cautionary"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 1
+    },
+    "load_bearing": [
+      "two things at once",
+      "should not be used to predict",
+      "remains a fair measure where",
+      "only bites where the paper is long for its clock"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "scope_preservation",
+      "main_idea_detection",
+      "certainty_reading"
+    ],
+    "mission": "protect_scope",
+    "learning_objective": "keep a criticism inside the case it applies to, and keep the uses the author expressly allows",
+    "reasoning_patterns": [
+      "scope.condition",
+      "sum.qualification_kept",
+      "sum.central_vs_supporting",
+      "lang.absolute_vs_qualified"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival says a timed examination measures speed rather than understanding and that its marks are poor evidence of knowledge. The paragraph allows two things this denies: the mark remains a fair measure where the work itself must be done under pressure, and the objection applies only where the paper is long for its clock, since candidates who finish with time to spare are being marked on understanding alone. The option about the slow thorough candidate and the quick partial one is the analysis, accurate and prior to any conclusion. The option calling for longer papers concedes that two abilities are mixed and then proposes a reform the paragraph does not make.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about timed examinations and the uses of a mark; no specific examination or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item on a criticism with two fences. Families: certainty, structure, addition. Key and one distractor both prescribe, and the conceding option is the prescriptive distractor."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "An examination with more to do than there is time to do it in is measuring two things at once.",
+        "role": "thesis"
+      },
+      {
+        "text": "A candidate who understands everything and works slowly and a candidate who understands most of it and works quickly can leave the hall with the same mark, and nothing in the mark tells them apart.",
+        "role": "support"
+      },
+      {
+        "text": "So the score should not be used to predict work in which nobody is timed, though it remains a fair measure where the work itself has to be done under pressure.",
+        "role": "conclusion"
+      },
+      {
+        "text": "And the objection only bites where the paper is long for its clock; where candidates finish with time in hand, the mark is about understanding alone.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Where a paper is long for its clock the mark blends speed with understanding, so it should not be used to predict untimed work, though it still measures fairly where the work itself is pressured.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say such a mark mixes together, and what does it say the mark should and should not be used for?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the mark mixes two abilities, rather than that it measures the wrong one?",
+        "kept": "Good. Both candidates in the example know a great deal; the mark cannot separate what they know from how fast they wrote it down.",
+        "drifted": "Saying such a paper tests speed instead of understanding drops half the mixture, and the paragraph's whole difficulty is that both are in there."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the case where the mark is still fair, and the case where the objection lapses?",
+        "kept": "Exactly right. Timed work is fairly predicted by a timed test, and a paper everyone finishes is not affected by the argument at all.",
+        "drifted": "Without those two limits the claim becomes a verdict on examinations in general, which is more than an argument about clocks can carry."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a reform, such as lengthening the paper?",
+        "kept": "Well judged. The advice offered concerns what a mark may be used to predict, and says nothing about how papers ought to be set.",
+        "drifted": "Giving every candidate time to finish is a proposal about examinations; the paragraph is making a proposal about inferences."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A timed examination measures speed rather than understanding, so its marks are poor evidence of how much a candidate actually knows.",
+      "B": "Two candidates, one slow and thorough and the other quick and partial, can leave a timed examination hall holding exactly the same mark.",
+      "C": "The mark is fair where the work itself is pressed for time, but a paper long for its clock mixes two things and should not predict untimed work.",
+      "D": "Although a timed paper does mix two abilities, examinations should be lengthened until every candidate finishes, so that marks measure understanding alone."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "If a paper contains more work than the time allows, the mark records two different things: how much the candidate understood and how quickly the candidate worked. Somebody who understands all of it slowly and somebody who understands most of it quickly can finish with the same score, and the score itself gives no way of telling which is which. From this the paragraph draws a careful conclusion. Do not use such a mark to predict performance in work where nobody is holding a stopwatch. Where the job itself has to be done at speed, the mark is perfectly fair. And the whole objection applies only to papers that are too long for their clock; where candidates have time in hand, the mark is about understanding and nothing else.",
+      "correct_reasoning": "The correct option keeps the condition, a paper long for its clock, keeps the mixture rather than replacing it with a substitution, and keeps the restriction the paragraph places on the use of the mark, that it should not be used to predict untimed work. Both of those fences are stated in the text, one in the conclusion and one in the sentence after it.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the mark mixes the two rather than substituting one for the other, allows that it remains fair for timed work, and confines the objection to papers that are long for their clock. This option drops all three.",
+          "seductive_element": "It is the complaint most readers already have about examinations, and it states the paragraph's worry in the strongest available form.",
+          "thinking_mistake": "Turning a claim about what a measure confounds into a claim about what it fails to measure, and dropping the cases the author reserved."
+        },
+        {
+          "option": "B",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the illustration that shows the confusion of the two abilities. The paragraph then says what follows for the use of the mark, which is the part being asked about.",
+          "seductive_element": "It is vivid, precisely true, and the easiest sentence in the paragraph to confirm against the text.",
+          "thinking_mistake": "Summarising the demonstration rather than the conclusion it was constructed to support."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph recommends a limit on what a mark is used to predict, not a change to the paper. Conceding that two abilities are mixed does not introduce a proposal about examination design.",
+          "seductive_element": "It agrees with the analysis and then supplies the obvious remedy, which makes it read like the practical conclusion of the argument.",
+          "thinking_mistake": "Redirecting a recommendation about the use of evidence into a recommendation about how the evidence is produced."
+        }
+      ],
+      "reading_habit": "When a paragraph says a measure mixes two things, watch for the uses it still allows. A summary that bans them all has widened the complaint."
+    }
+  },
+  "mentor": {
+    "challenge": "The criticism here comes with two limits attached, one in each of the last two sentences.",
+    "takeaway": "A mark from a paper nobody can finish tells you about two abilities, and cannot tell you which one it is reporting."
+  }
+}

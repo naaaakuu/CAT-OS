@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0058",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "markets",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Last Price Anyone Paid",
+    "theme": "why a valuation built from the most recent trade in a thin market is an estimate wearing the clothes of an observation",
+    "estimated_time_sec": 75,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "In a market where trades are few, the last price is a fact about one buyer and one seller on one afternoon, so valuing a holding from it assumes that the next trade would resemble the last, an assumption that may hold in quiet conditions and need not hold when a sale is forced.",
+      "scope": "Markets in which trades are rare and large; the claim is about what such a valuation assumes, not that the figures are useless.",
+      "certainty": "hedged",
+      "stance": "cautionary"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "may hold while conditions are quiet",
+      "need not hold",
+      "one afternoon",
+      "widens exactly when"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "scope_preservation"
+    ],
+    "mission": "notice_certainty",
+    "learning_objective": "carry a hedge across into the summary, when the unhedged version makes the same point and sounds better",
+    "reasoning_patterns": [
+      "sum.certainty_kept",
+      "lang.may_vs_must",
+      "sum.central_vs_supporting",
+      "arg.assumption",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival declares such prices no guide at all. It agrees with the paragraph's direction and overshoots its volume: the text says the assumption 'may hold while conditions are quiet' and 'need not hold' when a holder is forced to sell, which is a statement about when a figure can be relied on rather than a denial that it carries information. The paragraph also calls the result an estimate presented as an observation, and an estimate is not nothing. The option describing what one buyer could raise and one seller needed is the analysis offered in support, accurate and short of the conclusion. The option recommending independent appraisal concedes that the last price is genuine information and then imports a remedy the paragraph never proposes.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about valuation in markets where trades are rare; no specific market or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item whose whole difficulty is two modal verbs. Families: certainty, structure, addition. The key is the shortest option and one distractor concedes, so neither length nor hedging points anywhere."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "In a market where a few large items change hands now and then, the last price paid is the only number there is, and everything else gets valued from it.",
+        "role": "setup"
+      },
+      {
+        "text": "That number is a fact about one buyer and one seller on one afternoon: what the buyer could raise, what the seller needed, and how long either was able to wait.",
+        "role": "support"
+      },
+      {
+        "text": "Using it to value the rest assumes that the next trade would resemble the last, which may hold while conditions are quiet and need not hold when a holder is selling into a market with no bidders in it.",
+        "role": "support"
+      },
+      {
+        "text": "A valuation built this way reports what one transaction showed and presents it as what a holding is worth, and the distance between those two claims widens exactly when somebody needs the figure to be reliable.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "In a thin market the latest price records one afternoon's bargain, so valuing a holding from it assumes the next trade would be like the last, which may hold in quiet conditions and need not hold under pressure.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a valuation drawn from the last trade assumes, and how confident is it that the assumption fails?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name the assumption, that the next trade would resemble the last?",
+        "kept": "Good. The paragraph's work is to expose a hidden step, not to complain about prices; the step is the resemblance between one trade and the next.",
+        "drifted": "Saying the price is unreliable reports a mood. The argument identifies exactly what has been taken for granted and when it stops being safe."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'may hold' and 'need not hold', or has your sentence declared the figure wrong?",
+        "kept": "Well held. The claim is conditional in both directions: quiet conditions make it reasonable and forced sales make it doubtful.",
+        "drifted": "Turning a conditional warning into a flat verdict is a bigger claim than the text makes, and the text distinguishes the two conditions explicitly."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a remedy, such as an independent valuation?",
+        "kept": "Well judged. The paragraph identifies an assumption and says when it fails; what to do instead is nowhere in it.",
+        "drifted": "Appraisal is a sensible response and belongs to the reader, not the author, whose sentence ends with the distance between two claims."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Prices in markets where trades are rare are no guide to what a holding is worth, since a single transaction settles the value of nothing beyond itself.",
+      "B": "The last price is real information, but it records one trade, so valuing a holding from it assumes the next would be like it, which may not hold.",
+      "C": "The price paid for a rarely traded item reflects what one buyer could raise and what one seller needed on the particular afternoon that the two of them met.",
+      "D": "Although the last price paid is genuine information, holdings in thin markets should be valued by an independent appraiser rather than by the most recent sale."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "When a market sees only occasional large trades, the price of the last one is the only hard number available, so everything else is valued by reference to it. But that number came out of a single meeting: what one buyer could lay hands on, what one seller was under pressure to accept, and how long either of them could afford to wait. Using it to price everything else quietly assumes that the next sale would look like the last. In calm conditions that may be a fair assumption. When somebody has to sell and nobody is bidding, it need not be. So the figures such markets produce are estimates dressed as observations, and the gap opens widest at the moment the number is most needed.",
+      "correct_reasoning": "The correct option keeps the assumption the paragraph exposes, that the next trade would resemble the last, and keeps the modality the text attaches to it, that this may fail rather than that it does fail. The paragraph says as much in both directions, allowing the assumption in quiet conditions and withdrawing it under pressure, and the summary carries both halves.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the assumption may hold while conditions are quiet, and calls the output an estimate presented as an observation. Declaring such prices no guide at all replaces a conditional warning with a flat dismissal.",
+          "seductive_element": "It is the author's direction stated with force, and a summary that commits to a verdict feels stronger than one that preserves two modal verbs.",
+          "thinking_mistake": "Reading a warning about when a number can be trusted as a claim that it never can be."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the supporting observation. The paragraph uses it to identify the assumption that follows and the conditions under which that assumption breaks, and neither of those appears here.",
+          "seductive_element": "It is exactly what the second sentence says, so it can be verified at a glance, and verifiability is comforting when the options are close.",
+          "thinking_mistake": "Selecting the statement that can be confirmed fastest rather than the one that carries the argument's conclusion."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No alternative method is proposed anywhere. The paragraph ends on the distance between what a transaction showed and what a holding is worth, and granting that the last price is real information does not put an appraiser into the text.",
+          "seductive_element": "It concedes the paragraph's own premise and then supplies the practical response that discussions of valuation usually end with.",
+          "thinking_mistake": "Answering the difficulty a paragraph raises instead of reporting the difficulty as the paragraph left it."
+        }
+      ],
+      "reading_habit": "Two modal verbs can be the whole item. When a paragraph says something may hold and need not hold, an option that says it does not hold has changed the claim."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph is careful about when its warning applies. One option states the warning without the when.",
+    "takeaway": "One afternoon's bargain becomes everybody's valuation, and the assumption doing that work goes unstated until it fails."
+  }
+}

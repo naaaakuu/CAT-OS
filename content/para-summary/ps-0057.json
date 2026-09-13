@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0057",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "law",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Receipt Nobody Kept",
+    "theme": "why a time limit on bringing a claim is a rule about the reliability of a trial rather than a reproach to the slow",
+    "estimated_time_sec": 75,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "A limitation period exists to keep a trial capable of deciding rather than to punish a claimant's delay, which is why it stops running where the claimant could not have known or the defendant concealed the facts.",
+      "scope": "Time limits on bringing civil claims and the explanation of their exceptions; a claim about what the rule protects, not about how long any period should be.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "rather than a reproach",
+      "asked to guess",
+      "the doctrine's own exceptions",
+      "a side effect rather than the point"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "author_intent"
+    ],
+    "mission": "add_nothing",
+    "learning_objective": "report the claim a paragraph makes about a rule's purpose without importing the motives or reforms the subject usually attracts",
+    "reasoning_patterns": [
+      "sum.no_addition",
+      "sum.central_vs_supporting",
+      "arg.evidence",
+      "sum.stance_kept",
+      "struct.claim_evidence"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option about forgotten witnesses and destroyed documents, which reproduces the paragraph's most concrete sentence and is entirely true. It is support: the paragraph uses the decay of proof to reach a claim about what the rule is for, and confirms that claim from the exceptions, which stop the clock exactly where delay has cost the defendant nothing. A summary stopping at the decay has left the argument at the point where it still looks like a complaint about old cases. The cynical option, that the rule rewards a defendant for silence, contradicts the sentence saying the clock stops where the defendant concealed the facts. The option about claims being barred before anyone looks at the evidence concedes the concealment rule and then imports a fact about litigation the paragraph never states.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about limitation periods and their exceptions; no jurisdiction, statute or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item where the support is more quotable than the claim. Families: structure, stance, addition. The conceding option is the prescriptive one and the key is a flat assertion."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A limitation period is a rule about evidence rather than a reproach to the claimant who was slow.",
+        "role": "thesis"
+      },
+      {
+        "text": "Witnesses forget, papers are destroyed on ordinary office schedules, and a defendant who has heard nothing for a decade has had no reason to keep the receipt that would have cleared him, so a court asked to decide after long enough is being asked to guess.",
+        "role": "support"
+      },
+      {
+        "text": "The doctrine's own exceptions say the same thing: the clock does not run against a claimant who could not have known of the injury, and it stops where the defendant concealed the facts.",
+        "role": "evidence"
+      },
+      {
+        "text": "Those are precisely the cases in which the delay has not cost the defendant his proof, or has cost it by his own doing.",
+        "role": "support"
+      },
+      {
+        "text": "What the rule protects is the possibility of a trial that can still decide something, and the claimant's diligence is a side effect rather than the point.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "A limitation period protects the possibility of a trial that can still decide, not the virtue of promptness, and its exceptions confirm this by stopping the clock wherever delay has not cost the defendant his proof.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a limitation period is for, and what does it offer as confirmation?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the rule protects, rather than only that old evidence is unreliable?",
+        "kept": "Good. The decay of proof is the reason; the claim is about what the rule is therefore for, which is a trial still capable of deciding.",
+        "drifted": "Describing forgotten witnesses tells the reader why old cases are hard. The paragraph uses that to say what the rule is doing and what it is not."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you use the exceptions, or did you leave them out as detail?",
+        "kept": "Well held. The exceptions are the test: they release the claimant exactly where delay has not destroyed the defendant's proof, which is what the theory predicts.",
+        "drifted": "The exceptions look like legal furniture and are in fact the evidence, since a rule that punished delay would not forgive a claimant who simply could not have known."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added facts about how often or how early the bar actually operates?",
+        "kept": "Well judged. The paragraph explains what the rule is for and reports nothing about how many claims it stops or when.",
+        "drifted": "How litigation works in practice is a different subject; the paragraph is about the purpose that any period is serving."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A time limit protects the possibility of a trial that can still decide, which is why it pauses where delay has not cost the defendant his proof, or has cost it by his own doing.",
+      "B": "Witnesses forget and papers are destroyed on ordinary schedules, so a court asked to decide a dispute a decade old is being asked to guess at what happened.",
+      "C": "Limitation periods reward a defendant for keeping quiet, since anyone who says nothing for long enough acquires a defence he has done nothing at all to earn.",
+      "D": "The rules on concealment do protect a claimant who could not have known, yet most claims are barred by the clock long before anybody looks at what evidence survives."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Time limits on suing are usually described as a penalty for sitting on your rights. The paragraph says they are really about proof. After ten years the witnesses have forgotten, the files have been shredded on the usual schedule, and the defendant threw away the receipt that would have settled it because nothing told him to keep it. A court in that position is not deciding, it is guessing. The exceptions confirm the diagnosis: the clock does not run against someone who could not have known he was injured, and it stops if the defendant hid the facts. Those are exactly the situations where the passage of time has not destroyed the defence, or where the defendant destroyed it himself. So the rule protects the trial, and the claimant's promptness is a by-product.",
+      "correct_reasoning": "The correct option states what the paragraph says the rule protects and then keeps the confirmation the paragraph builds its case on, that the clock pauses in precisely those situations where delay has not cost the defendant his proof, or has cost it by his own doing. The last sentence makes the claimant's diligence a side effect rather than the point, and this option keeps that ordering.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the support. The paragraph uses the decay of proof to establish what the rule is for and then tests the account against the exceptions; a summary that reports only the decay has stopped before either step.",
+          "seductive_element": "It is the most concrete and quotable sentence in the paragraph, it is plainly true, and it can be matched against the text word for word.",
+          "thinking_mistake": "Summarising the reason a claim is offered rather than the claim, because the reason is the part with pictures in it."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the clock stops where the defendant concealed the facts, which is the opposite of rewarding silence, and it explains the rule by what a court can still establish rather than by what a party has earned.",
+          "seductive_element": "It is the objection most readers have heard, and it feels like the sceptical reading a careful person arrives at when a rule favours one side.",
+          "thinking_mistake": "Replacing an account of a rule's function with a verdict on who benefits from it."
+        },
+        {
+          "option": "D",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "How many claims are barred, and at what stage, appears nowhere in the paragraph. The argument is about what the rule is for, and it reads the exceptions by whether delay destroyed the defence rather than by how often the bar bites.",
+          "seductive_element": "It concedes the exception the argument leans on and then supplies a fact about litigation that sounds like the reason the rule matters in practice.",
+          "thinking_mistake": "Filling an account of a rule's purpose with information about its operation, because the two feel like the same subject."
+        }
+      ],
+      "reading_habit": "When a paragraph explains a rule by its exceptions, the exceptions are evidence and not detail. An option that ignores them has ignored the argument's test."
+    }
+  },
+  "mentor": {
+    "challenge": "The most quotable sentence here is not the claim. Ask what the exceptions were brought in to prove.",
+    "takeaway": "The clock runs to keep a trial able to decide, and it stops wherever that reason stops applying."
+  }
+}

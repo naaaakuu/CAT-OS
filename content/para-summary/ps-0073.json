@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0073",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "arts-culture",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Frame Is Younger Than the Picture",
+    "theme": "why a gallery's period frame is an informed guess, and why the guess is not thereby a deception",
+    "estimated_time_sec": 75,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "Frames were fittings matched to rooms and replaced by successive owners, so what survives is the picture and not its setting, and a gallery's period frame is an informed guess that is not a deception because nothing is claimed that the label does not admit.",
+      "scope": "Frames on old paintings and how a modern display should be understood; the paragraph declines the charge of dishonesty.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "most",
+      "often",
+      "an informed guess",
+      "does not make the display a deception"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "author_intent",
+      "evidence_vs_thesis",
+      "main_idea_detection"
+    ],
+    "mission": "evidence_vs_conclusion",
+    "learning_objective": "stop where the evidence stops, when the evidence points towards a stronger accusation than the author makes",
+    "reasoning_patterns": [
+      "arg.evidence_vs_conclusion",
+      "sum.stance_kept",
+      "sum.central_vs_supporting",
+      "lang.absolute_vs_qualified",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival concedes that the label may admit the frame is modern and then says the gallery presents a modern composition as a historical one. The paragraph refuses that step in its last sentence: the guess being a guess does not make the display a deception, since nothing is claimed that the label does not admit. The option about inventories recording reframing beside new curtains is the evidence, vivid and short of the conclusion. The option saying old paintings have lost the frames they were made for replaces the paragraph's 'most' and 'often' with a flat claim the same evidence does not support.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about frames, inventories and gallery display; no specific collection, painting or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item where the evidence invites an accusation the author declines. Families: structure, stance, certainty. The conceding option is the stance flip."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Most old paintings hang in frames younger than themselves, often by a century or more.",
+        "role": "setup"
+      },
+      {
+        "text": "A frame was a fitting rather than a part of the work: it was matched to a room, replaced when the room changed, and changed again by each owner who wanted the picture to look like his other possessions.",
+        "role": "support"
+      },
+      {
+        "text": "Inventories record the reframing without comment, in the way they record the purchase of new curtains.",
+        "role": "evidence"
+      },
+      {
+        "text": "What survives is therefore the picture and not its setting, and a gallery that gives a painting a period frame is making an informed guess rather than restoring anything.",
+        "role": "conclusion"
+      },
+      {
+        "text": "That the guess is a guess does not make the display a deception, since nothing is being claimed that the label does not admit.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Frames were fittings replaced with rooms and owners, so what has survived is the painting rather than its setting, and a period frame in a gallery is an informed guess without being a deception.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a period frame in a gallery is, and what does it refuse to call it?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence explain why frames are younger, rather than only reporting that they are?",
+        "kept": "Good. A frame was a fitting matched to a room, so it changed with rooms and with owners, which is why so few are original.",
+        "drifted": "Reporting the age gap leaves the reader with a curiosity. The explanation is what turns it into a claim about what has survived."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the refusal to call the display a deception?",
+        "kept": "Exactly, and this is the item. The evidence points towards an accusation and the author declines to make it, giving a reason in the same sentence.",
+        "drifted": "Calling the period frame a modern composition passed off as history is the natural next step, and the last sentence exists to refuse it."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'most' and 'often', or has your sentence made this true of every painting?",
+        "kept": "Well held. The paragraph describes a prevailing pattern, not a law, and the inventories support a pattern.",
+        "drifted": "Saying the original frames are simply gone goes beyond what records of reframing can show."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Inventories record the reframing of pictures without any comment, so such an entry should be read exactly as the purchase of new curtains would be read.",
+      "B": "Frames were fittings replaced with rooms and owners, so a period frame in a gallery is an informed guess, though the display is not thereby a deception.",
+      "C": "A label may admit that a frame is modern, yet a gallery surrounding a picture with a period frame still presents a modern composition as a historical one.",
+      "D": "Old paintings have lost the frames they were made for, since owners replaced the setting whenever they wanted a picture to suit the room it hung in."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "The frame round an old painting is usually much newer than the painting, sometimes by a hundred years or more. That is because a frame was never treated as part of the work. It was a fitting, chosen to suit a room, swapped when the room was redone, and swapped again by the next owner who wanted his pictures to match his furniture. Old inventories note the reframing as flatly as they note new curtains. So what has come down to us is the painting, not its setting, and a museum that puts a period frame round a picture is making an educated guess rather than putting something back. The paragraph then stops: a guess openly labelled as such is not a lie.",
+      "correct_reasoning": "The correct option keeps the explanation, frames as fittings replaced with rooms and owners, keeps the conclusion that a period frame is an informed guess rather than a restoration, and keeps the refusal that follows it, that the guess is not a deception. The last sentence supplies a reason for that refusal, so it is part of the position rather than a politeness.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The inventories are the evidence for the explanation. The paragraph uses them to reach a claim about what has survived and about what a gallery is doing, and this option carries neither.",
+          "seductive_element": "It is the most concrete line in the paragraph and the one that sounds most like a discovery, so it feels like the thing worth reporting.",
+          "thinking_mistake": "Summarising the piece of evidence that made an argument possible, instead of the argument."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The closing sentence says the display is not a deception, because nothing is claimed that the label does not admit. Conceding the label and then describing the display as passing off a modern composition as historical is exactly the charge being refused.",
+          "seductive_element": "It concedes the very fact that clears the gallery and then presses the accusation anyway, which reads like a reader who has weighed the defence rather than missed it.",
+          "thinking_mistake": "Following evidence to the accusation it seems to support, past the sentence in which the author declines to make it."
+        },
+        {
+          "option": "D",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says most paintings hang in younger frames, often by a century or more. Records of reframing establish a prevailing practice, not that every setting was replaced without exception.",
+          "seductive_element": "It states the paragraph's pattern as a rule, and rules are easier to remember and sound more like findings than tendencies do.",
+          "thinking_mistake": "Rounding a hedged generalisation up to a universal, because the evidence for the tendency feels overwhelming."
+        }
+      ],
+      "reading_habit": "When a paragraph's evidence points at a scandal and its last sentence declines to name one, the decline is part of the claim."
+    }
+  },
+  "mentor": {
+    "challenge": "The evidence here would support a sharper conclusion than the author draws. One option draws it.",
+    "takeaway": "What came down to us is the picture; the frame is a well-informed opinion about what should go round it."
+  }
+}

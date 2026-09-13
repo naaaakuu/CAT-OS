@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0066",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "culture",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "The Name That Skipped a Generation",
+    "theme": "why the revival of first names is a cycle of association rather than of novelty",
+    "estimated_time_sec": 110,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "A name is worn by a cohort and carries that cohort's age while its members live, so it becomes usable again only once they are gone, which makes the apparent cycle of novelty in names a cycle of association.",
+      "scope": "First names and their revival; the generalisation offered is about tastes that appear to reach for novelty, and is stated as a possibility rather than a law.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "while that cohort is alive",
+      "only when the last of them has gone",
+      "may be waiting"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "scope_preservation"
+    ],
+    "mission": "find_the_thesis",
+    "learning_objective": "reach the generalisation a paragraph builds towards, rather than stopping at the observation that opened it",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "arg.generalization",
+      "arg.causal_claim",
+      "scope.abstraction_level",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option reporting the schedule: the names given now were last common among the generation now dying. That is the observation the paragraph opens with, and the paragraph spends three further sentences explaining it and then generalising it, so a summary stopping at the schedule has taken the phenomenon for the point. The option that names go and return because parents want novelty is the explanation the fourth sentence displaces, since on that account a name would return once it felt fresh rather than once its bearers had gone. The option extending the mechanism to all fashion concedes that a name carries an age and then applies the finding to tastes for which the paragraph offers no cohort at all.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the revival of personal names; no specific study, register or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A cat-plus item where the observation is vivid and the thesis is the last sentence. Families: structure, scope, logic. One distractor concedes and the key does not."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Names come back, and they come back on a schedule: the ones given to babies now were last common among the people who are dying now.",
+        "role": "setup"
+      },
+      {
+        "text": "The reason is not fashion in the ordinary sense, because a name is worn by a cohort, and while that cohort is alive the name carries its age.",
+        "role": "support"
+      },
+      {
+        "text": "It belongs to schoolteachers, or to grandmothers, or to the men who came back from a war, and a parent choosing it would be choosing the association along with the sound.",
+        "role": "support"
+      },
+      {
+        "text": "Only when the last of them has gone is the name empty enough to be heard as a sound rather than as a person.",
+        "role": "support"
+      },
+      {
+        "text": "What looks like a cycle of novelty is therefore a cycle of association, and a taste that appears to be reaching for the new may be waiting for something to be forgotten.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Because a name carries the age of the cohort wearing it, it can be used again only once that cohort has gone, so the apparent search for novelty in names is really a wait for an association to fade.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say brings a name back into use, and what does it conclude from that?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence explain the schedule, rather than only reporting it?",
+        "kept": "Good. The explanation is that a living cohort keeps a name occupied, which is why the gap is about as long as a life and not about as long as a fashion.",
+        "drifted": "Reporting that names return after a generation states the pattern. The paragraph's work is saying what makes the pattern that length."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'may be waiting', or has your sentence announced what such tastes are?",
+        "kept": "Well held. The last sentence offers the wider reading as a possibility, and a summary that states it as a finding has firmed up what the author left soft.",
+        "drifted": "The re-description of novelty as association is asserted for names and floated for tastes generally, and the modal verb is where that difference is kept."
+      },
+      {
+        "id": "scope",
+        "ask": "Have you extended the mechanism to fashion in general?",
+        "kept": "Well judged. The argument runs on a cohort of people who wear the name; the paragraph offers no equivalent for clothes or furniture.",
+        "drifted": "'All revivals are waits for the previous owners to die' is a larger claim, and the mechanism given here does not obviously reach things that nobody is."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The names given to babies now were last common among the generation that is dying now, so names return to use on a schedule of roughly a lifetime.",
+      "B": "A name does carry the age of the people who wear it, but all taste works this way, and every revival is a wait for the previous owners to die off.",
+      "C": "Names fall out of use because parents want something that sounds new, and they come back once enough time has passed for the novelty to be restored.",
+      "D": "What looks like a cycle of novelty in names is a cycle of association, since a name is usable again only when the people who wore it have gone."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "Names return, and they return on a fairly predictable schedule: today's babies carry the names of the people now dying. The paragraph says this is not fashion in the usual sense. A name is worn by a whole cohort, and as long as that cohort is alive the name is occupied by them. It sounds like a schoolteacher, or a grandmother, or a man who came back from a war, and choosing it means choosing that company. Only once those people have gone does the name become an empty sound again, free to be heard on its own. So what looks like an appetite for the new is really a wait for an association to fade.",
+      "correct_reasoning": "The correct option keeps the re-description the last sentence makes, novelty into association, and keeps the reason that supports it, that the name is unusable while its cohort survives. That re-description is what the earlier sentences exist to earn, and it is the only part of the paragraph that is a claim rather than a report or an explanation of one.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the opening observation. The paragraph then explains the schedule and generalises it, and a summary that stops here reports a pattern the author treats as the thing to be accounted for.",
+          "seductive_element": "It is exactly and verifiably what the first sentence says, and the schedule is the most concrete fact in the paragraph.",
+          "thinking_mistake": "Summarising the phenomenon a paragraph sets out to explain, rather than the explanation it reaches."
+        },
+        {
+          "option": "B",
+          "archetype": "scope_broadening",
+          "secondary_archetype": null,
+          "why_wrong": "The mechanism runs on a cohort of people who bear the name and keep it occupied. Conceding that much does not license extending the claim to tastes with no cohort attached, and the paragraph's own generalisation is offered as a possibility about some tastes rather than a rule about all.",
+          "seductive_element": "It grants the paragraph's mechanism and then makes the ambitious move the last sentence gestures at, which reads like following the author's lead.",
+          "thinking_mistake": "Taking a cautiously offered generalisation as permission to state a universal one."
+        },
+        {
+          "option": "C",
+          "archetype": "cause_effect_reversal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph denies that the cycle is driven by novelty and says so directly. On this account a name would return once it sounded fresh; the paragraph says it returns once its bearers are gone, which is a different clock.",
+          "seductive_element": "It is the everyday explanation of every revival, and it accounts for the same observation without requiring any of the paragraph's machinery.",
+          "thinking_mistake": "Keeping the explanation one arrived with, after the paragraph has replaced it with another."
+        }
+      ],
+      "reading_habit": "When a paragraph opens on a striking fact, expect the fact to be the thing explained. The claim usually lives in the sentence that re-describes it."
+    }
+  },
+  "mentor": {
+    "challenge": "The first sentence is the most memorable and the last sentence is the claim. One option is each.",
+    "takeaway": "A name is not old-fashioned; it is occupied, and it comes free when the tenants leave."
+  }
+}

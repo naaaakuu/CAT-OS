@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0054",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "environment",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Pond That Dries",
+    "theme": "why the drying that looks like a defect in a seasonal pond is the condition of everything that lives in it",
+    "estimated_time_sec": 65,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "The drying that makes a seasonal pond look unfinished is what keeps fish out and therefore what allows its unusual inhabitants to breed, so deepening such a pond replaces a habitat instead of improving one, without either kind of pond being the better.",
+      "scope": "Ponds that dry out annually and the advice to deepen them; the paragraph declines to argue against permanent ponds.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "what keeps fish out",
+      "replaces it",
+      "none of this argues against",
+      "unfinished version"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "scope_preservation"
+    ],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep the comparison an author refuses to make, when the argument seems to be leading straight to it",
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "sum.central_vs_supporting",
+      "arg.causal_claim",
+      "sum.no_addition",
+      "sum.example_vs_claim"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival ranks the two kinds of pond: it grants that a permanent pond supports plenty of life and then declares the drying one richer, advising the owner to leave it alone. The mechanism makes that ranking feel earned, and the paragraph blocks it in the last sentence: 'none of this argues against permanent ponds; it argues against treating one kind as an unfinished version of the other.' The option about a hollow holding water for five months is the paragraph's illustration, offered to show the mechanism at work. The option explaining the richness by a short breeding season substitutes an invented cause for the one actually given, which is the exclusion of fish.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about seasonal ponds and the advice to deepen them; no specific site or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item whose difficulty sits entirely in a refusal made in the last clause. Families: stance, structure, addition. The conceding option is also the prescriptive one."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A pond that vanishes every summer looks like a failed pond, and an owner who wants wildlife is usually advised to deepen it.",
+        "role": "setup"
+      },
+      {
+        "text": "But the drying is what keeps fish out, and fish eat the eggs and larvae of the animals such ponds are unusual for.",
+        "role": "support"
+      },
+      {
+        "text": "A hollow that holds water for five months and then cracks in the sun can carry species the permanent pond down the lane has not held for a century.",
+        "role": "example"
+      },
+      {
+        "text": "The feature that reads as a defect is the condition of everything living there, which is why deepening a seasonal pond does not improve it but replaces it with something commoner.",
+        "role": "thesis"
+      },
+      {
+        "text": "None of this argues against permanent ponds; it argues against treating one kind as an unfinished version of the other.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Drying is what excludes fish and so allows a seasonal pond's unusual species to breed, which is why deepening such a pond replaces a habitat rather than improving it, and not why one kind of pond beats the other.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the drying of a pond does, and what does it refuse to conclude from that?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence give the reason drying matters, rather than simply saying that seasonal ponds are special?",
+        "kept": "Good. The reason is exclusion: no water in summer means no fish, and no fish means the eggs survive. Without it the claim is an assertion about taste.",
+        "drifted": "Calling such ponds valuable states the conclusion without the mechanism that earns it, and the mechanism is one sentence long."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the author's refusal to rank the two kinds of pond?",
+        "kept": "Exactly right, and this is the item. The argument is against a way of seeing one pond as a defective version of another, not against deep water.",
+        "drifted": "Saying the seasonal pond is the better one is the step the last sentence exists to block, and it is easy to take because the mechanism seems to lead there."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you supplied a reason for the richness that the paragraph does not give?",
+        "kept": "Well judged. Only one cause is offered, and inventing a second, however plausible, changes what the paragraph argued.",
+        "drifted": "A short season, crowding, warmer water: all sound reasonable and none is in the text, which rests the whole case on fish."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Although a permanent pond supports plenty of life, ponds that dry out are the richer habitat, and an owner who wants wildlife should leave the deep ones alone.",
+      "B": "A hollow holding water for five months can carry species that the permanent pond down the lane has not held for a hundred years, despite looking like a failure.",
+      "C": "Seasonal ponds hold unusual animals because a short season forces everything living in them to breed quickly, which a pond that never dries has no reason to demand.",
+      "D": "Drying is what keeps fish out and so makes a seasonal pond what it is, so deepening one replaces a habitat instead of improving it, neither kind being the better pond."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "A pond that empties itself every summer looks unfinished, and the standard advice is to dig it deeper so that it holds water all year. The paragraph explains why that advice destroys the thing it means to help. Drying is what stops fish from establishing themselves, and fish eat exactly the eggs and larvae that make such ponds worth having. So the summer of cracked mud is not a flaw in the pond; it is the condition under which its inhabitants can exist at all, and a deepened pond is a different and commoner habitat rather than a better one. The author then stops short of the comparison a reader expects, and says the argument is not against permanent ponds but against treating one kind as an unfinished version of the other.",
+      "correct_reasoning": "The correct option keeps the mechanism, that drying excludes fish, keeps the consequence for the advice, that deepening replaces rather than improves, and keeps the refusal the last sentence makes, that neither kind of pond is thereby the better one. All three are in the paragraph, and a summary carrying only the first two has quietly taken a side the author declined to take.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The final sentence says none of this argues against permanent ponds. Granting that deep water supports life and then crowning the seasonal pond is exactly the ranking the author declines, and the advice to leave deep ponds alone is nowhere in the text.",
+          "seductive_element": "It concedes the point that might have saved the permanent pond and then follows the mechanism to what feels like its natural conclusion, which reads like a careful reader finishing the thought.",
+          "thinking_mistake": "Completing an argument in the direction it seems to be travelling, past the sentence in which the author stopped."
+        },
+        {
+          "option": "B",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The five-month hollow is the illustration that shows the mechanism working. The claim is about what drying does and what deepening therefore costs, which this option leaves out entirely.",
+          "seductive_element": "It is the most concrete sentence in the paragraph and the one a reader can picture, which makes it feel like the thing the paragraph was written to say.",
+          "thinking_mistake": "Keeping the example because it is memorable, and losing the general claim the example was recruited to support."
+        },
+        {
+          "option": "C",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph gives one cause, the exclusion of fish, and says so in a single sentence. A short breeding season is a plausible mechanism that the text never offers, and putting it in the summary replaces the argument with a different one.",
+          "seductive_element": "It sounds like the kind of explanation such a paragraph would give, and a reader who has grasped that drying matters may supply the reason from general knowledge.",
+          "thinking_mistake": "Filling in a mechanism from what one already believes, instead of reporting the mechanism the text supplied."
+        }
+      ],
+      "reading_habit": "When a paragraph ends with 'none of this argues against', that sentence names the summary you are about to write. Read it before choosing."
+    }
+  },
+  "mentor": {
+    "challenge": "The argument seems to be heading towards a verdict on which pond is better. The last sentence is about that verdict.",
+    "takeaway": "What looks like the flaw in a habitat is often the door that keeps its rivals out."
+  }
+}

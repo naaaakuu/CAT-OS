@@ -1,0 +1,170 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0067",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "scientific-method",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Order in the Method",
+    "theme": "why a published method should be read as an instruction for repeating a result rather than as a history of how it was found",
+    "estimated_time_sec": 60,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Because the order in a published method is the order that works rather than the order things happened in, a method should be read as an instruction for repeating a result and not as a record of how it was reached.",
+      "scope": "Published methods sections and how a reader should take them; the paragraph explicitly declines to call the arrangement dishonest.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 1,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "not dishonest",
+      "the order that works",
+      "an instruction for repeating",
+      "not as a record"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "evidence_vs_thesis"
+    ],
+    "mission": "add_nothing",
+    "learning_objective": "keep an author's explicit refusal to accuse, when the observation being made is the kind that usually comes with an accusation",
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "sum.no_addition",
+      "sum.central_vs_supporting",
+      "lang.contrast_marker"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival concedes that the tidy order is convenient and then calls the neatness a small dishonesty. The paragraph says the opposite in its first sentence, that there is nothing dishonest in a method reading like a narrative, because the reader needs the shortest route rather than the wrong turnings. The option about the shortest route is that concession stated on its own, accurate and pre-turn. The option demanding that journals publish an account of what actually happened proposes a reform the paragraph never raises, and it is prescriptive, as the key also is, so the recommendation itself decides nothing.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about how methods sections are written and read; no specific paper or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item whose difficulty is a refusal made in the first sentence and easy to lose. Families: structure, stance, addition. Key and one distractor both prescribe."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A published method reads like a narrative, and there is nothing dishonest in the fact that it does.",
+        "role": "concession"
+      },
+      {
+        "text": "A reader needs the shortest route to the result, not the wrong turnings that came before it.",
+        "role": "support"
+      },
+      {
+        "text": "But the order on the page is the order that works, which is rarely the order anything happened in: the control added after a puzzling result appears in the design, and the question that arrived last appears first.",
+        "role": "support"
+      },
+      {
+        "text": "So a method should be read as an instruction for repeating the work rather than as a record of how it was found, and a student who reads it as a history learns that enquiry is tidy.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Since a methods section is arranged in the order that works rather than the order events took, it should be read as an instruction for repeating a result and not as a history of how the result was reached.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a methods section is, and what does it say a reader should not take it for?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the order on the page is, namely the order that works?",
+        "kept": "Good. That is what makes the section useful and what makes it a poor history: the control invented halfway through appears in the design.",
+        "drifted": "Saying methods are simplified misses the specific point, which is about sequence rather than about omission."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the paragraph's refusal to call this dishonest?",
+        "kept": "Exactly. The first sentence grants the point before the argument starts, and a summary that turns the observation into an accusation has changed sides.",
+        "drifted": "Calling the neatness a small dishonesty is the natural next thought and the one the opening sentence rules out."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a demand on journals or authors that the paragraph never makes?",
+        "kept": "Well judged. The one instruction here is addressed to whoever is reading a method, and it says how to take it.",
+        "drifted": "Requiring a narrative of what actually happened is a reform, and the paragraph has just explained why the tidy version is the useful one."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Although a method reading like a narrative is no dishonesty, it should be read as an instruction for repeating a result and not as a record of the work.",
+      "B": "A methods section gives its reader the shortest route to a result instead of the wrong turnings that preceded it, and there is no dishonesty in that.",
+      "C": "The tidy order is convenient for the reader, yet a methods section misrepresents the work it describes, and its neatness is a small dishonesty.",
+      "D": "Journals should require authors to publish an account of what actually happened in the laboratory, so that students no longer come away believing enquiry is tidy."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "A methods section reads like a story, and the paragraph immediately says there is nothing crooked about that: what a reader wants is the quickest path to the result, not a tour of every dead end. But the sequence printed is the sequence that works, which is almost never the sequence that occurred. The extra control that somebody thought of after a confusing result is presented as part of the original design, and the question that only became clear at the end sits at the beginning. So the right way to read a method is as a set of instructions for doing the thing again. Read as a history it teaches a beginner that enquiry proceeds in a straight line.",
+      "correct_reasoning": "The correct option keeps the instruction the last sentence gives and the reason the third sentence supplies, that the printed order is the order that works and not the order events took. It carries the opening concession forward and makes no accusation, which matters because the paragraph spends its first sentence refusing one.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the concession the paragraph makes before its turn. The claim comes afterwards and concerns how the section should be read, which this option never reaches.",
+          "seductive_element": "It is true, it is in the text, and it captures the generous half of the paragraph, which reads as the balanced summary.",
+          "thinking_mistake": "Summarising the ground an author clears before arguing, because that part contains no difficulty."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The opening sentence says there is nothing dishonest in a method reading like a narrative. Conceding the convenience and then calling the neatness a dishonesty reverses the position the author took before the argument began.",
+          "seductive_element": "Observations about tidied-up accounts usually arrive as complaints, and this option supplies the complaint the reader expects to find.",
+          "thinking_mistake": "Hearing a description of how something is constructed as an allegation about why, when the author has explicitly declined to make one."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No demand on journals is made anywhere. The paragraph has just explained why the tidy sequence is the useful one for a reader who wants to repeat the work, and its instruction is about reading rather than about publishing.",
+          "seductive_element": "It ends on the paragraph's own worry about students and offers the institutional fix, which is how arguments about scientific writing usually conclude.",
+          "thinking_mistake": "Converting an instruction about how to read a document into a proposal about how documents should be written."
+        }
+      ],
+      "reading_habit": "When a paragraph's first sentence says something is not dishonest, that clause is doing work. Any option that accuses has left the author behind."
+    }
+  },
+  "mentor": {
+    "challenge": "The first sentence gives something away, and one option takes it back. Notice what the author refuses to say.",
+    "takeaway": "A method tells you how to do it again; it was never a diary of how it was done."
+  }
+}

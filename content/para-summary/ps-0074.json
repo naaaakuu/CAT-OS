@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0074",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "sociology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Rule the Neighbours Keep",
+    "theme": "why informal enforcement redistributes the costs of order rather than softening them, and why the author will not prefer either kind",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "Informal enforcement is not a gentler version of the formal kind but a different distribution of its costs, since its sanction is exclusion, which falls lightly on those with somewhere else to go and heavily on those without, giving a reason to ask who pays rather than to prefer either arrangement.",
+      "scope": "Rules enforced by neighbours rather than by an office; the claim compares distributions of cost and refuses a verdict between the two systems.",
+      "certainty": "asserted",
+      "stance": "neutral"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "only against somebody who has somewhere to be excluded from",
+      "a different distribution of its costs",
+      "a reason to look at who pays",
+      "rather than a reason to prefer either"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "scope_preservation"
+    ],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep an author's refusal to rank two arrangements, when the argument has just exposed a cost in one of them",
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "sum.central_vs_supporting",
+      "arg.concession",
+      "sum.no_addition",
+      "lang.contrast_marker"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival concedes that informal enforcement is quick and cheap and then calls it the harsher system because its sanction falls on those with least to fall back on. Every clause of that is drawn from the paragraph except the verdict, and the last sentence blocks the verdict: the finding is a reason to look at who pays 'rather than a reason to prefer either'. The option about a word instead of a penalty is the concession the paragraph opens with. The option recommending that informal rules be written down proposes a remedy nowhere in the text and one the argument does not obviously support, since writing a rule down does not alter who can afford to be excluded.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about informal and formal enforcement of rules; no specific community or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An advanced item where the stance is a refusal to conclude. Families: structure, stance, addition. The conceding option is the one that takes the side the author declines."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Rules kept by neighbours are cheaper and quicker than rules kept by an office, and they are applied by people who know the circumstances.",
+        "role": "concession"
+      },
+      {
+        "text": "Nothing is filed, and a first offence is usually met with a word rather than a penalty.",
+        "role": "concession"
+      },
+      {
+        "text": "But the sanction behind the word is exclusion, and exclusion works only against somebody who has somewhere to be excluded from.",
+        "role": "support"
+      },
+      {
+        "text": "It falls lightly on a person with other rooms to sit in and heavily on one who has none, and it is administered by whoever the enforcers already recognise.",
+        "role": "support"
+      },
+      {
+        "text": "Informal order is therefore not a gentler version of the formal kind but a different distribution of its costs, which is a reason to look at who pays rather than a reason to prefer either.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Informal enforcement does not soften the costs of order but distributes them differently, since exclusion presses hardest on those with nowhere else to go, which is a reason to ask who pays rather than to prefer either system.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say informal enforcement does to the costs of keeping order, and what does it decline to say?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say the costs are redistributed rather than reduced?",
+        "kept": "Good. The word costs nothing to say and exclusion costs a great deal to receive, and who receives it is the whole of the difference.",
+        "drifted": "Saying informal rules are cheap describes the concession. The claim is about where the expense reappears once you look at the sanction."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the refusal to prefer one arrangement to the other?",
+        "kept": "Exactly right, and this is the item. The paragraph exposes a cost and then expressly declines to turn the exposure into a verdict.",
+        "drifted": "Calling informal order the harsher system is the conclusion the evidence invites, and the final clause is there to stop it."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a remedy, such as writing the informal rules down?",
+        "kept": "Well judged. Nothing is proposed here, and writing a rule down would not change who can afford to be excluded by it.",
+        "drifted": "A reform is a natural response to a cost, and this paragraph identifies the cost and stops at asking who bears it."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Communities should write their informal rules down, so that people who cannot afford to be excluded are not left at the mercy of whoever does the recognising.",
+      "B": "Informal enforcement is quick and cheap, but it is the harsher system, since its sanction falls on exactly those people with the least to fall back on.",
+      "C": "Although informal rules are cheap and quick, they redistribute the costs of order rather than softening them, which is a reason to ask who pays, not to prefer either.",
+      "D": "Rules kept by neighbours are cheaper and quicker than rules kept by an office, and a first offence is met with a word rather than with any penalty."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "Rules enforced by neighbours look like the mild option. They cost nothing, they work fast, the people applying them know the situation, nothing goes on a file, and a first offence gets a quiet word instead of a fine. The paragraph grants all of that and then asks what stands behind the quiet word. The answer is exclusion, which only threatens somebody who has a place to be excluded from. A person with other rooms to sit in shrugs it off; a person with nowhere else does not. And it is handed out by whoever the enforcers already count as one of their own. So informal order has not made the costs of keeping order smaller. It has moved them, and the useful question is who they landed on, not which system is nicer.",
+      "correct_reasoning": "The correct option keeps the re-description the last sentence performs, from gentler to differently distributed, and keeps the refusal attached to it, that this is a reason to ask who pays rather than to prefer either arrangement. The refusal is not an aside: it is the clause that stops the argument from becoming a verdict.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No remedy is offered anywhere. Writing rules down would leave the sanction and its distribution untouched, since what makes exclusion uneven is having somewhere else to go rather than whether the rule was recorded.",
+          "seductive_element": "It answers the unfairness the paragraph has just described, and a summary that fixes something feels more complete than one that only locates it.",
+          "thinking_mistake": "Supplying the reform a diagnosis suggests, and attributing it to an author who stopped at the diagnosis."
+        },
+        {
+          "option": "B",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The final clause says the finding is a reason to look at who pays rather than a reason to prefer either kind. Conceding the speed and cheapness and then awarding the title of harsher system is precisely the ranking being refused.",
+          "seductive_element": "Every part of it except the verdict is taken from the paragraph, and the verdict is the one the evidence appears to demand.",
+          "thinking_mistake": "Treating an author's exposure of a cost as an author's judgement against the thing that carries it."
+        },
+        {
+          "option": "D",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "These are the two sentences the paragraph grants before it turns, and the turn is marked at the start of the third. The claim concerns what stands behind the quiet word, which this option never reaches.",
+          "seductive_element": "It is entirely true, entirely in the text, and describes the version of informal order that most readers already believe in.",
+          "thinking_mistake": "Summarising the ground an argument concedes, because the concession is the easiest part to read and comes first."
+        }
+      ],
+      "reading_habit": "When a final clause says 'rather than a reason to prefer either', the author has named the wrong summary in advance. Check the options against it before anything else."
+    }
+  },
+  "mentor": {
+    "challenge": "This paragraph uncovers a cost and then refuses to reach the verdict the cost suggests. One option reaches it anyway.",
+    "takeaway": "The quiet word is cheap for whoever says it; the price is paid by whoever has nowhere else to sit."
+  }
+}

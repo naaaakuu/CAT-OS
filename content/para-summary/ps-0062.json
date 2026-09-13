@@ -1,0 +1,172 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0062",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 93,
+    "genre": "mathematics-logic",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "ninety-nine",
+    "bible_level": "elite",
+    "title": "The Second Attempt",
+    "theme": "why an instructor's own comparison makes rebuke look effective and praise look harmful, and exactly how far that argument reaches",
+    "estimated_time_sec": 125,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "Because the luck that puts a performance at an extreme does not repeat, the next attempt sits closer to the middle whatever is said, so an instructor's comparison cannot detect what feedback does; it does not show that feedback does nothing, and the argument holds only where the measure carries a large component that does not repeat.",
+      "scope": "Measures mixing skill with luck, compared across successive attempts; the conclusion is about what the comparison can detect, not about the effects of praise or rebuke.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 4,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "cannot detect",
+      "does not show that feedback has none",
+      "only where",
+      "a large component that does not repeat"
+    ],
+    "separating_element": "The correct option keeps both limits, that the comparison cannot detect an effect and that the argument applies only where much of the measure fails to repeat; the nearest rival converts the first limit into a denial that feedback does anything.",
+    "dna_traits": [
+      "scope_preservation",
+      "inference_control",
+      "certainty_reading",
+      "main_idea_detection"
+    ],
+    "mission": "protect_scope",
+    "learning_objective": "distinguish a claim that evidence cannot show something from a claim that the something is not there, and keep the condition attached to both",
+    "reasoning_patterns": [
+      "scope.condition",
+      "sum.qualification_kept",
+      "arg.correlation_vs_causation",
+      "inf.logical_gap",
+      "arg.evidence_vs_conclusion"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists share the mechanism and part over what it licenses. The rival concludes that praise and rebuke have no effect and that instructors merely think otherwise. The last sentence forbids exactly that: the argument 'shows that this comparison cannot detect an effect of feedback; it does not show that feedback has none', and it adds a condition, that a large part of the measure must fail to repeat. The option about a very good attempt being followed by a less good one is the mechanism on its own, true and stopping before any conclusion about instruction. The option advising instructors to withhold comment concedes the movement towards the middle and then prescribes a policy the paragraph never mentions, on the strength of the very inference it refuses.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about extremes, repeatable and unrepeatable components, and what a before-and-after comparison can show; no specific study or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item on the difference between undetectable and absent. Families: structure, addition, precision. Two options share an opening clause and the separating element is the final sentence's pair of limits."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Take any performance that mixes skill with luck and pick out the extremes: the best attempts of a morning were made by people having a good day as well as a good year, and the worst by people having a bad one.",
+        "role": "support"
+      },
+      {
+        "text": "Whatever is said to either group afterwards, the next attempt will sit nearer the middle, because the luck that put them at the edges does not repeat.",
+        "role": "support"
+      },
+      {
+        "text": "An instructor who praises the best and rebukes the worst will therefore watch praise appear to spoil people and rebuke appear to improve them, and experience will not correct the impression, since every round supplies it again.",
+        "role": "conclusion"
+      },
+      {
+        "text": "The argument shows that this comparison cannot detect an effect of feedback; it does not show that feedback has none, and it applies only where the measure carries a large component that does not repeat.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Since the luck behind an extreme performance does not repeat, the next attempt moves towards the middle whatever was said, so an instructor's comparison cannot detect what feedback does, though it shows nothing about whether feedback works and holds only where much of the measure fails to repeat.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say an instructor's before-and-after comparison can show, and what does it say the comparison cannot show?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence give the reason the next attempt moves towards the middle?",
+        "kept": "Good. The reason is that the luck responsible for an extreme does not come back, which is why the movement happens whatever is said.",
+        "drifted": "Reporting the movement without the unrepeatable luck leaves a pattern with no cause, and the cause is what makes the instructor's inference fail."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the difference between 'cannot detect an effect' and 'there is no effect'?",
+        "kept": "Exactly right, and this is the item. The paragraph disqualifies a piece of evidence; it does not settle the question the evidence was meant to answer.",
+        "drifted": "Saying feedback does nothing is a claim about the world. The paragraph makes a claim about a comparison, and says so in the same sentence."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the condition, that a large part of the measure must fail to repeat?",
+        "kept": "Well held. Where performance is almost all skill the extremes are real and the movement is small, and the argument then has little to say.",
+        "drifted": "Without the condition the claim covers every measurement ever repeated, which is far more than an argument about luck can support."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Because the luck that produced an extreme performance does not repeat itself, a very good attempt is usually followed by a less good one, and a very bad one by better.",
+      "B": "The movement back towards the middle is real enough, but instructors should withhold both praise and rebuke until they can compare like performances with like.",
+      "C": "Since extremes are followed by less extreme attempts whatever is said, praise and rebuke have no effect on performance, and instructors who believe otherwise are deceived.",
+      "D": "Since extremes are followed by less extreme attempts whatever is said, the instructor's comparison can never detect what feedback does where much of the measure is luck."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "If a performance involves both skill and chance, the people at the very top of a morning were lucky as well as good, and the people at the bottom were unlucky as well as weak. The luck does not come back, so both groups drift towards the middle on their next attempt no matter what anybody says to them. An instructor who congratulates the top and scolds the bottom will therefore see praise seem to ruin people and scolding seem to fix them, and will see it again every single round, so experience only strengthens the illusion. The paragraph then draws the line carefully: this shows the comparison cannot detect an effect of feedback, not that there is no effect, and it applies where a big part of the measure is luck.",
+      "correct_reasoning": "The correct option keeps the mechanism and both of the limits the final sentence sets. It says the comparison cannot detect what feedback does, which is a statement about the evidence rather than about feedback, and it keeps the condition that much of the measure must be the unrepeatable part. Those two limits are the whole of the last sentence.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": "scope_narrowing",
+          "why_wrong": "This is the mechanism, correctly stated and stopping there. The paragraph uses it to explain why an instructor's impression is manufactured and then to say what that does and does not establish, and neither step is here.",
+          "seductive_element": "It is the piece of the argument that is easiest to verify and hardest to get wrong, which makes it attractive when the remaining options are close.",
+          "thinking_mistake": "Summarising the step of an argument one is most confident about, rather than the conclusion the argument was assembled to reach."
+        },
+        {
+          "option": "B",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": "implication_addition",
+          "why_wrong": "No advice to instructors appears in the paragraph, and the advice offered here rests on the inference the last sentence refuses, that the absence of visible effect is an absence of effect.",
+          "seductive_element": "It concedes the movement towards the middle and then does the practical thing with it, which is how discussions of teaching usually end.",
+          "thinking_mistake": "Turning a warning about a piece of evidence into instructions about conduct, and so smuggling back the conclusion the evidence could not support."
+        },
+        {
+          "option": "C",
+          "archetype": "near_miss",
+          "secondary_archetype": "certainty_inflation",
+          "why_wrong": "The mechanism is right and the limit is gone. The paragraph says the argument shows the comparison cannot detect an effect and expressly does not show that feedback has none, so a summary announcing that praise and rebuke do nothing states what the author declined to state.",
+          "seductive_element": "It is identical to the key for most of its length and reads as the punchy version of the same finding, the version people repeat.",
+          "thinking_mistake": "Treating evidence that fails to show an effect as evidence that there is no effect, which is the exact step the paragraph was written to block."
+        }
+      ],
+      "reading_habit": "Watch for the difference between 'this cannot show X' and 'X is false'. A paragraph that spends its last sentence on that difference is telling you where the answer lives."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options begin identically. The last sentence of the paragraph contains two limits, and one option keeps them.",
+    "takeaway": "An illusion that renews itself every round cannot be corrected by experience, and disqualifying the evidence is not the same as settling the question."
+  }
+}

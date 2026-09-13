@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0056",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "human-behaviour",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Drawer of Adaptors",
+    "theme": "which of two accounts of hoarding unused possessions fits what people actually keep",
+    "estimated_time_sec": 70,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Of the two usual explanations for keeping unused possessions, the evidence of what is actually kept favours the second: people hold on to what would be a nuisance to obtain again rather than to what cost them most, so the keeping guards against trouble rather than against admitting waste.",
+      "scope": "Everyday unused possessions and the two accounts offered for keeping them; the adjudication rests on which objects are kept and which are given away.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 1
+    },
+    "load_bearing": [
+      "settles the question",
+      "cost almost nothing",
+      "given away without ceremony",
+      "fits the second account"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "author_intent"
+    ],
+    "mission": "find_the_thesis",
+    "learning_objective": "find the verdict in a paragraph that gives two accounts equal room before deciding between them",
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "sum.central_vs_supporting",
+      "arg.evidence",
+      "sum.stance_kept",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the even-handed option, which reports that there are two explanations and that each covers part of what people keep. It has the shape of fairness and is the safe answer whenever a paragraph sets out two views. This paragraph does not divide the honours: it says what is actually kept settles the question, and then that the pattern fits the second account, with the first account nowhere endorsed. The option built on the fear of admitting waste is the account that loses. The option advising people to weigh the cost of replacement concedes that the fear is real and then issues a recommendation the paragraph never makes, converting a finding about behaviour into advice about how to behave.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about why unused possessions are kept; no specific study or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item whose trap is the appearance of balance. Families: structure, stance, addition. Both the key and one distractor are unhedged assertions, and the conceding option is the prescriptive one."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "People keep things they have not touched in years, and there are two usual explanations for it.",
+        "role": "setup"
+      },
+      {
+        "text": "The first is that parting with an object admits the money spent on it was wasted, so the object is kept in order to keep the admission away.",
+        "role": "support"
+      },
+      {
+        "text": "The second is that the owner is insuring against a future need, and the thing is kept because getting hold of another would be a nuisance.",
+        "role": "support"
+      },
+      {
+        "text": "What is actually kept settles the question better than either account's own arguments: the drawer fills with adaptors, odd keys and offcuts that cost almost nothing, while expensive items available in any high street shop are given away without ceremony.",
+        "role": "evidence"
+      },
+      {
+        "text": "The pattern fits the second account, and what the keeper is protecting turns out to be not the money but the trouble of laying hands on the thing again.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "What people actually keep, cheap awkward things rather than expensive replaceable ones, favours the second account: the object is held against the nuisance of obtaining another, not against admitting that money was wasted.",
+  "builder": {
+    "prompt": "In one sentence: which of the two explanations does the paragraph end up preferring, and what makes it prefer that one?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name a winner, or does it report that two explanations exist?",
+        "kept": "Good. The last sentence picks one, and a summary of an adjudication has to carry the verdict as well as the contest.",
+        "drifted": "Listing both accounts describes the first half of the paragraph. The evidence sentence exists precisely to decide between them."
+      },
+      {
+        "id": "stance",
+        "ask": "Does your sentence say what decided it, namely which objects are kept and which are given away?",
+        "kept": "Well held. The argument is not that one account sounds better; it is that only one predicts a drawer of cheap awkward things.",
+        "drifted": "A verdict without its evidence leaves the reader with a preference. The paragraph's move is to test both accounts against what is on the shelf."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you turned the finding into advice about what people should keep?",
+        "kept": "Well judged. The paragraph explains a habit; it never suggests the habit is a mistake or tells anyone to change it.",
+        "drifted": "Recommending that owners weigh the cost of replacement is a reasonable idea that appears nowhere here, and it quietly makes the paragraph disapprove."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Granted that the reluctance to admit wasted money is real enough, people should still ask what replacing a thing would actually cost them before deciding to keep it.",
+      "B": "Two accounts are given of why unused possessions are kept, and each of them explains part of what ends up in the drawers of an ordinary household.",
+      "C": "What people keep is what would be a nuisance to obtain again rather than what cost most, so the keeping insures against trouble, not against admitting waste.",
+      "D": "People hold on to possessions they never use because giving them up would be an admission that the money originally spent on them had been wasted."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "Why do people keep things they never use? One story says it is about money: throwing the thing out would be conceding that buying it was a mistake, so it stays. The other story says it is about supply: you might need it, and getting another would be a bother. The paragraph settles the argument by looking at what is in the drawer. What accumulates is adaptors, odd keys, offcuts, things that cost almost nothing, while expensive objects that any shop can supply are handed on without a pang. Only the second story predicts that. So what is being guarded is not the money that went out but the trouble of getting the thing back.",
+      "correct_reasoning": "The correct option carries the verdict and the reason for it. It names the pattern that decided the question, cheap awkward things kept and expensive replaceable things released, and states the conclusion the last sentence draws, that the protection is against trouble rather than against conceding waste. The adjudication, not the contest, is what the paragraph exists to deliver.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No advice is offered anywhere. The paragraph explains why a habit takes the shape it does, and conceding that the fear of waste is real does not turn an explanation into a recommendation about what to throw out.",
+          "seductive_element": "It grants one account and then does something practical with the other, which is how advice columns end and how readers expect useful writing to conclude.",
+          "thinking_mistake": "Reading an account of behaviour as a criticism of it, and finishing the paragraph with the instruction it never gave."
+        },
+        {
+          "option": "B",
+          "archetype": "stance_flattening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph does not divide the honours. It says what is actually kept settles the question, and that the pattern fits the second account; the first is left with nothing to explain.",
+          "seductive_element": "Balance sounds judicious, and in a paragraph that sets out two views an even-handed summary feels like the safe and grown-up reading.",
+          "thinking_mistake": "Mistaking the structure of a paragraph for its conclusion, and treating a fair hearing as an unfinished argument."
+        },
+        {
+          "option": "D",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the first of the two accounts, stated fairly and then defeated by the evidence, since the objects people actually keep are the ones that cost almost nothing.",
+          "seductive_element": "It is the explanation most readers already hold and the one the paragraph sets out first, so it arrives with both familiarity and textual support.",
+          "thinking_mistake": "Adopting the view a paragraph reports because it was reported carefully, without waiting to see which view the evidence is brought in to settle."
+        }
+      ],
+      "reading_habit": "When a paragraph lays out two accounts, find the sentence that tests them. The summary belongs to whichever account survives the test, not to the pair."
+    }
+  },
+  "mentor": {
+    "challenge": "Two explanations are given equal space. One option refuses to choose between them; the paragraph does not refuse.",
+    "takeaway": "What a drawer keeps is not what was dear to buy but what would be a nuisance to find again."
+  }
+}

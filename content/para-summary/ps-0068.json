@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0068",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 89,
+    "genre": "history",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Year After the Shortage",
+    "theme": "why the worst figures in a famine district often fall in the year the grain came back, and how firmly the records support it",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "A household that survives a famine by selling the means of earning is poorer once the grain returns, so the worst figures often fall in the following year, and the patchy records are enough to suggest that relief timed to the month of worst shortage is aimed at the wrong month.",
+      "scope": "Famine districts whose households sold productive assets; the evidence is described as patchy and the conclusion offered as a suggestion.",
+      "certainty": "hedged",
+      "stance": "cautionary"
+    },
+    "turn": {
+      "present": true,
+      "marker": "but"
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 4,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "often",
+      "the evidence is patchy",
+      "enough to suggest",
+      "the wrong month"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "inference_control"
+    ],
+    "mission": "notice_certainty",
+    "learning_objective": "keep the strength of a historical claim exactly where the author set it, when the mechanism itself invites more confidence",
+    "reasoning_patterns": [
+      "sum.certainty_kept",
+      "lang.may_vs_must",
+      "arg.causal_claim",
+      "sum.central_vs_supporting",
+      "arg.evidence"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival states the mechanism as an established fact: famine deaths occur mainly after the shortage, and such households cannot recover. The paragraph says the registers 'often' show it, that the evidence is patchy and the accounting of deaths unreliable, and that this is enough to suggest a conclusion rather than to establish one. The option about disease at relief works is a supporting strand offered inside the mechanism. The option about the households that owned least concedes the patchiness and then leans on the same records for a finding the paragraph never draws, one its own mechanism does not fit.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about asset sales, recovery and the timing of relief in famine years; no specific famine, region or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An advanced item where the mechanism is strong and the author's confidence is deliberately weak. Families: certainty, structure, addition. The conceding option is the prescriptive one."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "The registers of a famine district often show their worst figures in the year after the shortage ended.",
+        "role": "setup"
+      },
+      {
+        "text": "A household that survives a bad year by selling its plough, its animals and the strip of land nearest the road has bought its survival with the means of earning, so when prices fall the grain comes back to people who have nothing left to trade for it.",
+        "role": "support"
+      },
+      {
+        "text": "Disease follows, since bodies weakened over a year meet the crowding of relief works and the movement of people looking for wages.",
+        "role": "support"
+      },
+      {
+        "text": "The evidence is patchy and the counting of deaths in such years was rarely reliable, but it is enough to suggest that relief measured against the month of worst shortage is being measured against the wrong month.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "Households that survive a famine by selling what they live by are poorest once grain returns, so the worst figures often come afterwards, and the patchy records suggest that relief timed to the shortage is timed wrongly.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say happens after a famine's shortage ends, and how strongly does it say it?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what was sold, and why selling it matters?",
+        "kept": "Good. The plough and the animals are the means of earning, so survival was bought at the cost of the ability to buy anything later.",
+        "drifted": "Saying households became poor misses the shape of it: they converted the thing that produces income into food, which is why the return of grain does not help them."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'often', 'patchy' and 'enough to suggest'?",
+        "kept": "Exactly right, and this is the item. The mechanism is convincing and the author still declines to say the records establish it.",
+        "drifted": "Announcing that famine deaths occur mainly afterwards converts a suggestion drawn from unreliable counts into a demographic fact."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a finding about which households suffered most?",
+        "kept": "Well judged. The paragraph says a measurement is aimed at the wrong month and stops; who owned what before the famine is never discussed.",
+        "drifted": "The mechanism concerns households with something to sell, and a claim about the poorest is a different finding drawn from records the author has just called patchy."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Famine deaths occur mainly after the shortage has ended, since households that sold their means of production cannot recover once the grain has returned.",
+      "B": "Households that survive by selling what they live by are poorest once grain returns, so the records suggest relief is timed against the wrong month.",
+      "C": "Disease spreads in famine years because weakened bodies meet the crowding of relief works and the movement of people who are looking for wages.",
+      "D": "Although the records of such years are patchy, they show that the households worst hit were those that owned least before the shortage ever began."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "In a famine district the grimmest numbers often belong to the year after the crisis, not the year of it. The reason is what survival cost. A family that got through by selling the plough, the animals and the field by the road has eaten its own capacity to earn, so when prices come down and grain is available again, it is available to people with nothing left to sell. Sickness compounds it, because weakened bodies gather at relief works and on the roads. The author is careful about how much this proves: the evidence is patchy and the death counts were poor. It is enough, though, to suggest that relief judged against the month of worst shortage is judged against the wrong month.",
+      "correct_reasoning": "The correct option keeps the mechanism, survival purchased with the means of earning, and keeps the author's own strength of claim, that the records suggest a mistiming rather than establish a fact about mortality. The last sentence sets that strength explicitly, granting patchy evidence and unreliable counts before drawing anything at all.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says registers often show this, that the evidence is patchy and the counting unreliable, and that it is enough to suggest a conclusion. Stating where famine deaths mainly occur, and that such households cannot recover, asserts what the author declined to assert.",
+          "seductive_element": "The mechanism is persuasive, and a reader convinced by it naturally supplies the confidence the author withheld.",
+          "thinking_mistake": "Letting the strength of an explanation set the strength of the claim, instead of reading the sentence where the author sets it."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "Disease at the relief works is one strand inside the mechanism. The paragraph's conclusion is about when destitution falls and what that implies for a measurement, neither of which appears here.",
+          "seductive_element": "It is a complete and accurate sentence from the middle of the paragraph and needs no interpretation to verify.",
+          "thinking_mistake": "Choosing a supporting detail because it can be confirmed, when the question asks what the paragraph as a whole maintains."
+        },
+        {
+          "option": "D",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The mechanism runs on households that had a plough, animals and a strip of land to sell, and the paragraph says nothing about who owned least. It also calls the records patchy rather than treating them as showing a finding of that kind.",
+          "seductive_element": "It concedes the weakness of the evidence, which makes what follows sound measured, and then supplies the conclusion a reader expects a passage about famine to reach.",
+          "thinking_mistake": "Granting a limitation in passing and then leaning on the same records for a finding they were just said not to support."
+        }
+      ],
+      "reading_habit": "A convincing mechanism does not raise an author's confidence. Find the sentence where the evidence is described, and let it set the summary's strength."
+    }
+  },
+  "mentor": {
+    "challenge": "The explanation here is stronger than the evidence the author claims for it. One option borrows the strength of the explanation.",
+    "takeaway": "Some households pay for one bad year by selling the thing that would have paid for the next."
+  }
+}

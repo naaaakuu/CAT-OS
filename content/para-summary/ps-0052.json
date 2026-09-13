@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0052",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 94,
+    "genre": "public-policy",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "The Measure Nobody Will End",
+    "theme": "why a temporary measure outlives its emergency: removal produces a person who can be blamed and continuation produces none, within stated limits",
+    "estimated_time_sec": 135,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "Temporary measures persist because ending one produces a single identifiable person whom a later harm can be read back to, while continuing it produces nobody, and this asymmetry generalises to any arrangement built the same way, though only where the harm prevented is dramatic and the burden imposed is small and widely spread.",
+      "scope": "Arrangements whose removal creates a nameable decider and whose burden is small and dispersed; outside those conditions the paragraph says repeal is ordinary politics.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "but"
+    },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 5,
+      "turn_subtlety": 3,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 5,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "not a law",
+      "only where",
+      "small and widely spread",
+      "falls instead on people who can organise"
+    ],
+    "separating_element": "The correct option keeps the two conditions the last sentence attaches to the ratchet; the nearest rival states the same mechanism as a tendency of any measure introduced against a danger, which is what the paragraph declines to say.",
+    "dna_traits": [
+      "scope_preservation",
+      "main_idea_detection",
+      "inference_control",
+      "language_precision"
+    ],
+    "mission": "protect_scope",
+    "learning_objective": "keep a generalisation inside the conditions its own last sentence names, when the unconditional version is the one worth repeating",
+    "reasoning_patterns": [
+      "scope.condition",
+      "sum.qualification_kept",
+      "arg.generalization",
+      "sum.central_vs_supporting",
+      "arg.causal_claim"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists open on the same clause and part at the end. Both name the asymmetry between a nameable repealer and an unnameable renewer, so neither the mechanism nor the wording separates them. The rival closes by saying that any arrangement introduced against a danger will tend to outlive it; the paragraph's last sentence says the tendency is 'not a law' and holds 'only where' the harm prevented is dramatic and the burden small and widely spread, and adds that where the burden is concentrated on people who can organise, repeal becomes ordinary politics again. The option about officials acquiring an interest in what they administer is the account the second sentence sets aside before the argument begins. The option about the least necessary measures surviving concedes the dispersal point and then adds a judgement of merit that the argument is built to do without.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about the persistence of measures adopted in emergencies; no specific statute, government or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item where the near miss is the slogan version of a fenced generalisation and the two finalists share an opening clause. Families: structure, addition, precision. The separating element is a pair of conditions stated once, at the end."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Measures adopted for an emergency are seldom repealed when it ends; they are amended, renewed, and eventually called ordinary.",
+        "role": "setup"
+      },
+      {
+        "text": "The usual account blames the appetite of officials, but a plainer asymmetry does the work: whoever ends the measure acquires a name, and if the danger returns the decision will be read backwards from the harm, while the cost of keeping it falls thinly on people who never learn what they paid.",
+        "role": "support"
+      },
+      {
+        "text": "A minister who repeals stakes a reputation against an event nobody can date; one who renews has done nothing anyone can point at.",
+        "role": "support"
+      },
+      {
+        "text": "Any arrangement whose removal creates somebody to blame and whose continuation creates nobody tends to ratchet, whatever its subject.",
+        "role": "thesis"
+      },
+      {
+        "text": "The tendency is not a law: it holds only where the harm prevented is dramatic and the burden small and widely spread, and where it falls instead on people who can organise, repeal becomes ordinary politics again.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Emergency measures endure because repeal creates a nameable person a later harm can be blamed on while renewal creates none, a ratchet that operates in any arrangement built that way, but only where the danger is dramatic and the burden small and dispersed.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say keeps a temporary measure alive, and how far does it allow that explanation to reach?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence locate the asymmetry in who can be blamed, rather than in what officials want?",
+        "kept": "Good. The argument is deliberately indifferent to motive: a minister with no appetite for power faces the same lopsided bet as one who has it.",
+        "drifted": "Blaming the appetite of officials is the account the paragraph names and sets aside in the same sentence, using the word that introduces its own explanation."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the two conditions, a dramatic harm and a small, widely spread burden?",
+        "kept": "Exactly right, and this is the item. The author calls the tendency 'not a law' and then says precisely where it operates.",
+        "drifted": "'Emergency powers outlive their emergencies' is the memorable version. The paragraph says the ratchet needs a dispersed burden, and tells you what happens when the burden is concentrated instead."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a judgement about which measures were worth keeping in the first place?",
+        "kept": "Well judged. The argument is indifferent to merit: a necessary measure and a needless one face the same lopsided bet.",
+        "drifted": "Saying the survivors are the least necessary is a verdict on the measures, and the paragraph is explaining an incentive that operates whatever their merits."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Emergency measures survive because the officials who administer them acquire an interest in their continuation and will defend that interest against any review.",
+      "B": "A thinly spread cost does make renewal easy, but the measures that survive are therefore the ones that were least necessary when they were first introduced.",
+      "C": "Because ending a measure creates somebody who can be blamed and keeping it creates nobody, any arrangement adopted against a danger will tend to outlive that danger.",
+      "D": "Because ending a measure creates somebody who can be blamed and keeping it creates nobody, such arrangements ratchet, though only where the burden stays small and spread."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "Rules brought in for an emergency tend to stay. The easy explanation is that officials like the powers they hold, but the paragraph offers a colder one. Repeal has an author. If the bad thing happens afterwards, everyone will know whose signature removed the protection, and the decision will be judged by an event nobody could have dated. Renewal has no author at all, and its cost is shared out so thinly that nobody notices paying it. So the bet is lopsided, whatever the minister wants. The paragraph then generalises the shape, and immediately fences it: this is a tendency, not a law, and it needs a dramatic danger and a small, scattered burden. Put the burden on people who can organise, and repeal turns back into ordinary politics.",
+      "correct_reasoning": "The correct option keeps the mechanism, an identifiable repealer against an unidentifiable renewer, and keeps the fence the final sentence builds around it: the ratchet operates where the burden stays small and spread. That fence is the difference between a tendency the author will defend and a slogan the author expressly refuses, and the summary carries it.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": "owner_swap",
+          "why_wrong": "This is the account the paragraph names in order to replace it. The explanation offered instead is indifferent to what officials want, which is why it is introduced as the plainer asymmetry doing the work.",
+          "seductive_element": "It is the explanation most readers arrive with, and the paragraph states it in full before turning, so it has the authority of having appeared in the text.",
+          "thinking_mistake": "Taking the view a paragraph reports for the view it holds, because the report is fluent and the replacement arrives after a conjunction."
+        },
+        {
+          "option": "B",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "Nothing here rates measures by how necessary they were at the start. The asymmetry described concerns who can be blamed for ending one, and it works in exactly the same way on a measure that was urgently needed.",
+          "seductive_element": "It grants the paragraph's mechanism and then draws the cynical corollary that arguments of this shape usually end with, which makes it sound like the point rather than an addition.",
+          "thinking_mistake": "Attaching a verdict about merit to an argument deliberately built without one."
+        },
+        {
+          "option": "C",
+          "archetype": "near_miss",
+          "secondary_archetype": "scope_broadening",
+          "why_wrong": "The mechanism is stated correctly and the fence is gone. The closing sentence calls the tendency 'not a law' and confines it to cases where the harm is dramatic and the burden small and widely spread, adding that a concentrated burden restores ordinary politics.",
+          "seductive_element": "It is word for word the key until the final clause, and the clause it drops reads like the throat-clearing that careful writers add to claims they mean unconditionally.",
+          "thinking_mistake": "Treating a stated condition as decoration on a generalisation rather than as part of what is being generalised."
+        }
+      ],
+      "reading_habit": "When a paragraph says 'this is not a law' and then lists conditions, the list is the claim's shape. An option that keeps the mechanism and drops the list has kept the half that was never in dispute."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options begin with the same clause and end differently. The sentence that settles them is the one that begins by denying it has stated a law.",
+    "takeaway": "A rule survives because nobody has to sign for keeping it, and only while the people paying for it are too scattered to send anyone."
+  }
+}

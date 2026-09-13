@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0065",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "intellectual-history",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The First Textbook",
+    "theme": "why the shape of a discipline is often set by whoever first had to teach it, and the condition under which that holds",
+    "estimated_time_sec": 60,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "problem_analysis_implication",
+    "apex": {
+      "claim": "Because a founding book argues while a first textbook must decide what is taught, in what order and under what names, the shape of a discipline often comes from its first teacher rather than its founder, but only where the subject was taught before it had settled.",
+      "scope": "Disciplines taught before their arguments were finished; where the arguments were finished first, the textbook records rather than decides.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 1,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "often",
+      "only where",
+      "before it has settled",
+      "records rather than decides"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "scope_preservation",
+      "main_idea_detection",
+      "certainty_reading"
+    ],
+    "mission": "keep_qualifiers",
+    "learning_objective": "carry the condition a paragraph attaches to its own claim in its last sentence",
+    "reasoning_patterns": [
+      "sum.qualification_kept",
+      "scope.condition",
+      "sum.central_vs_supporting",
+      "lang.often_vs_always"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival says the shape of a discipline is set by whoever first had to teach it. It is the same claim with the two limiters removed, and the paragraph supplies both: 'often', and a final sentence confining the claim to subjects taught before they have settled, where otherwise the textbook records rather than decides. The option contrasting an argument with a syllabus is the analysis that supports the claim and stops before it. The option sending students to the founding book issues advice about reading that the paragraph never gives.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about founding works and first textbooks; no specific discipline, author or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item on two limiters. Families: certainty, structure, addition. The key carries a condition, and so does one distractor, so hedging is not a tell."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A subject is usually traced back to the book that founded it.",
+        "role": "setup"
+      },
+      {
+        "text": "But a founding book argues, and an argument can be disagreed with, whereas the first textbook has to decide what will be taught, in what order, and under what names.",
+        "role": "support"
+      },
+      {
+        "text": "Those decisions are inherited by everyone who learns the subject rather than debated by them.",
+        "role": "support"
+      },
+      {
+        "text": "So the shape of a discipline often comes from a teacher with a syllabus to fill rather than from the thinker it is named after.",
+        "role": "thesis"
+      },
+      {
+        "text": "This holds only where a subject is taught before it has settled; where the arguments were finished first, the textbook records rather than decides.",
+        "role": "qualification"
+      }
+    ]
+  },
+  "ideal_summary": "Since a founding book argues while a first textbook must settle what is taught and in what order, a discipline's shape often comes from its first teacher, but only where the subject was taught before its arguments were finished.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say gives a discipline its shape, and when does it say this happens?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say why a textbook shapes more than a founding book does?",
+        "kept": "Good. An argument invites disagreement and a syllabus does not; the textbook's choices are inherited rather than debated.",
+        "drifted": "Naming the textbook without the reason leaves the claim looking like a preference. The reason is that its decisions are never argued with."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the condition in the last sentence, about subjects taught before they had settled?",
+        "kept": "Exactly right. Where the arguments were finished first, the paragraph says the textbook records rather than decides, so the claim reaches only so far.",
+        "drifted": "'A discipline is shaped by its first teacher' drops a condition the author supplies in so many words, along with the word 'often'."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added advice about what students ought to read?",
+        "kept": "Well judged. The paragraph explains where a subject's shape comes from and recommends no reading list at all.",
+        "drifted": "Sending students to the founding work is a sensible thought and belongs to the reader; the paragraph is describing how a discipline acquires its outline."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Although a subject is named after its founding book, its shape often comes from the first textbook, but only where it was taught before it had settled.",
+      "B": "Students should be sent to the founding book rather than to the textbook that came after it, since only in the founding book are the decisions still open.",
+      "C": "A founding book argues and can be disagreed with, whereas a textbook has to decide what will be taught, in what order, and under what names.",
+      "D": "The shape of a discipline is set by whoever first had to teach it, because a syllabus makes the decisions that an argument is content to leave open."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "We name a subject after the book that started it. But that book is an argument, and arguments can be answered. The first textbook is a different kind of object: it has to say what will be taught, in what sequence, and what everything is to be called. Nobody argues with those choices; they are simply learned, and then passed on by people who learned them. So the outline of a field often comes from a teacher filling a syllabus rather than from the thinker on the spine. The paragraph then puts a boundary round the claim. It applies to subjects that were being taught while still unsettled. Where the arguing was finished first, the textbook is writing down a settlement rather than making one.",
+      "correct_reasoning": "The correct option keeps the claim and both of its limiters. It says the shape often comes from the textbook rather than always, and it keeps the condition the final sentence states, that the subject was taught before it had settled. Those limiters are the difference between what the paragraph argues and the slogan it would become without them.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "No advice about reading appears anywhere. The paragraph explains how a subject acquires its outline, and an explanation of that kind does not license a recommendation about which book to open.",
+          "seductive_element": "It follows naturally from the paragraph's own contrast and makes the improving suggestion that discussions of education usually end with.",
+          "thinking_mistake": "Converting a historical explanation into study advice, because the explanation seems to imply which book is worth more."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the contrast the paragraph draws in order to reach its claim. What follows from it, that a discipline's outline comes from the teacher and only under a stated condition, is the part being summarised.",
+          "seductive_element": "It is the most precisely worded sentence in the paragraph and can be checked against the text almost word for word.",
+          "thinking_mistake": "Summarising the reason offered for a claim instead of the claim, because the reason is the sentence that reads most carefully."
+        },
+        {
+          "option": "D",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says 'often' and then restricts the claim to subjects taught before they had settled, adding that elsewhere the textbook records rather than decides. Stating it without either of them drops both restrictions.",
+          "seductive_element": "It is the same idea stated more boldly, and a summary that generalises can feel like one that has understood the point rather than hedged it.",
+          "thinking_mistake": "Reading a word like 'often' and a closing condition as softening rather than as content."
+        }
+      ],
+      "reading_habit": "A last sentence beginning 'this holds only where' is not a footnote. It is half the claim, and the option that drops it is a different claim."
+    }
+  },
+  "mentor": {
+    "challenge": "The claim arrives in the fourth sentence and is fenced in the fifth. Both sentences belong in the summary.",
+    "takeaway": "The person who had to write the syllabus often decided more than the person who wrote the book."
+  }
+}

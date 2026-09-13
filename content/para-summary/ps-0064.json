@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0064",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "media",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Line Under the Photograph",
+    "theme": "why the claim in a published photograph lives in its caption, and why that does not make the picture decoration",
+    "estimated_time_sec": 100,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "A photograph shows without saying, so the assertion a paper can be held to lives in the caption and should be edited as an assertion, while the picture still does work the caption cannot and is therefore not decoration around it.",
+      "scope": "Published photographs and the captions beneath them; the claim concerns where the assertion lies, not whether pictures are informative.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "nevertheless"
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 3,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "shows; it does not say",
+      "nevertheless does the work",
+      "as the assertion it is",
+      "not be treated as decoration"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "language_precision"
+    ],
+    "mission": "hold_the_stance",
+    "learning_objective": "keep the half of a position that protects what the author refuses to give up, when the other half is the striking one",
+    "reasoning_patterns": [
+      "sum.stance_kept",
+      "sum.central_vs_supporting",
+      "sum.no_addition",
+      "arg.qualification",
+      "struct.claim_evidence"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival concedes that a picture fixes attention and then makes the photograph packaging round the claim, which is the closing clause turned inside out. That is the paragraph's own opening pushed one step further than the paragraph takes it, and the fourth sentence blocks the step: the picture does the work the caption cannot, making the reader believe he has seen something, and the closing clause refuses to treat the photograph as decoration. The option about complaints being aimed at the caption is the supporting observation, accurate and short of the conclusion. The option recommending captionless publication prescribes something the paragraph never entertains and would leave the reader with the dozen stories the picture is compatible with.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about photographs, captions and where a published assertion sits; no specific publication or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An advanced item where the memorable half of the claim is true and the protected half is a single clause. Families: language, stance, addition. Key and one distractor both prescribe."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A photograph shows; it does not say, and a newspaper is answerable for what it says.",
+        "role": "thesis"
+      },
+      {
+        "text": "The caption is where the claim lives: this is the place, this is the day, this is the man who did it.",
+        "role": "support"
+      },
+      {
+        "text": "Remove the caption and the picture is compatible with a dozen stories, which is why complaints arrive about the line underneath and almost never about the exposure.",
+        "role": "support"
+      },
+      {
+        "text": "The picture nevertheless does the work the caption cannot, fixing attention and leaving the reader convinced that he has seen something for himself.",
+        "role": "qualification"
+      },
+      {
+        "text": "So the caption should be edited as the assertion it is, and the photograph should not be treated as decoration arranged around it.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Because a photograph shows without saying, the claim a paper answers for sits in the caption and should be edited as an assertion, while the picture does work of its own and is not decoration.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the caption does, and what does it insist the photograph is not?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence locate the assertion in the caption rather than in the picture?",
+        "kept": "Good. The distinction between showing and saying is what the whole paragraph rests on, and it is stated in the first eight words.",
+        "drifted": "Saying the caption matters is weaker than the claim made here, which is that the caption is where the paper's assertion actually lives."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the refusal to call the photograph decoration?",
+        "kept": "Exactly. The author uses the argument to raise the caption's standing and expressly declines to lower the picture's.",
+        "drifted": "Concluding that a photograph asserts nothing and therefore counts for nothing is the step the fourth sentence exists to stop."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a recommendation about publishing pictures without captions?",
+        "kept": "Well judged. The only instruction here is to edit the caption as an assertion, which is the opposite of removing it.",
+        "drifted": "Publishing without captions would leave the reader with the dozen stories the paragraph says a bare picture is compatible with."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Newspapers should publish contested photographs without captions, so that readers are not told in advance what it is that they are supposed to be looking at.",
+      "B": "A picture does fix a reader's attention, but it asserts nothing, so a paper answers for the sentence beneath it and the photograph is packaging round the claim.",
+      "C": "The caption carries the claim a picture cannot make, so editors should treat it as an assertion, though the photograph is not thereby decoration arranged around it.",
+      "D": "Complaints about a newspaper photograph arrive about the caption beneath it and almost never about the picture, since a bare picture fits a dozen different stories."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "A picture shows you something; it does not make a statement. The statement is in the caption, which tells you the place, the day and the man, and a paper is answerable for statements. Strip the caption away and the same photograph will sit happily under a dozen different stories, which is why readers complain about the line underneath and not about the lens. But the paragraph refuses to conclude that the picture is therefore idle. The picture does something the words cannot: it holds attention, and it leaves the reader feeling he has seen the thing himself. So the caption deserves to be edited as the assertion it is, and the photograph is not to be treated as ornament arranged around a sentence.",
+      "correct_reasoning": "The correct option keeps both commitments the paragraph ends with: the caption is the assertion and is to be edited as one, and the photograph is not thereby decoration. The fourth sentence is what makes the second half load-bearing, since it gives the picture a job the caption cannot do. Note that the closing recommendation belongs to the author, so the presence of advice decides nothing here.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The recommendation in the paragraph is to edit the caption as an assertion, not to remove it. A picture published bare is compatible with a dozen stories, which the paragraph offers as a problem rather than as a remedy.",
+          "seductive_element": "It takes the paragraph's scepticism about captions and turns it into a bold editorial policy, and boldness reads as the point of a media argument.",
+          "thinking_mistake": "Inverting an instruction about care into an instruction about removal, because both express distrust of the same thing."
+        },
+        {
+          "option": "B",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "Calling the photograph packaging round the claim is the closing clause inverted, since the paragraph says in those words that it should not be treated as decoration arranged around the caption, and that it does work the caption cannot.",
+          "seductive_element": "It sounds like the author's argument taken to its logical end, and it concedes enough to read as a careful rather than a careless version of it.",
+          "thinking_mistake": "Following a distinction past the point where its author stopped, and dropping the clause that protected the other side."
+        },
+        {
+          "option": "D",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "This is the supporting observation, accurately reported. The paragraph uses it to reach a claim about where the assertion lies and a refusal about what the picture is, and this option carries neither.",
+          "seductive_element": "It is verifiable against the third sentence and states something a reader can immediately recognise from experience.",
+          "thinking_mistake": "Choosing the piece of a paragraph one can confirm, rather than the position the paragraph was written to take."
+        }
+      ],
+      "reading_habit": "When a paragraph adds a sentence beginning 'nevertheless', that sentence is protecting something. A summary without it has taken the argument further than the author would."
+    }
+  },
+  "mentor": {
+    "challenge": "One option follows this argument one step beyond its author. The sentence beginning with a concessive adverb is where the author stopped.",
+    "takeaway": "The picture is what makes you look; the sentence underneath is what the paper will have to defend."
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0077",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 94,
+    "genre": "philosophy",
+    "difficulty": "hard",
+    "difficulty_numeric": 10,
+    "tier": "premium",
+    "bible_level": "elite",
+    "title": "What Blame Is Doing",
+    "theme": "why the two standing accounts of blame survive each other's counter-examples, and what the author refuses to settle",
+    "estimated_time_sec": 140,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "The appraisal and address accounts of blame each fail on a case the other handles, but neither failure is decisive because the two are answering different questions about one practice, what blame asserts and what blame does, so a single account can be had only by deciding in advance which question matters.",
+      "scope": "The two standing accounts of blame and the counter-examples against them; the paragraph declines to prefer either and declines to merge them.",
+      "certainty": "asserted",
+      "stance": "neutral"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 5,
+      "syntax": 5,
+      "turn_subtlety": 2,
+      "distractor_closeness": 5,
+      "live_options": 2,
+      "stance_subtlety": 4,
+      "qualifier_density": 3,
+      "domain_load": 4
+    },
+    "load_bearing": [
+      "neither failure is fatal",
+      "different questions about one practice",
+      "only by deciding in advance",
+      "which question matters"
+    ],
+    "separating_element": "The correct option keeps the diagnosis that the accounts answer different questions, so that any single account presupposes a choice between the questions; the nearest rival treats them as two incomplete halves to be combined, which is what the closing sentence rules out.",
+    "dna_traits": [
+      "author_intent",
+      "main_idea_detection",
+      "inference_control",
+      "language_precision"
+    ],
+    "mission": "add_nothing",
+    "learning_objective": "report an adjudication that refuses a verdict, without supplying the verdict or the synthesis the reader wants",
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "sum.no_addition",
+      "sum.stance_kept",
+      "arg.counterargument",
+      "elim.near_tie"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The two finalists both refuse to crown a winner, and part on what they put in place of one. The rival says each account is incomplete and a full account will combine what both get right. The last sentence forbids the combination: the accounts answer different questions about one practice, and a single account is available 'only by deciding in advance which question matters', which is a choice rather than a synthesis. The option stating the appraisal view is one of the two positions reported. The option preferring the address account because unanswerable blame is useless concedes that each has a case it cannot handle and then supplies the verdict the paragraph withholds, on a criterion of usefulness the text never introduces.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about competing accounts of blame; no specific philosopher, school or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An elite item whose near miss is the synthesis rather than a verdict, which is the subtler thing to refuse. Families: structure, addition, precision."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Two accounts of blame are on offer, and each is strongest exactly where the other is weakest.",
+        "role": "setup"
+      },
+      {
+        "text": "On the first, to blame is to appraise: a judgement is formed that somebody acted badly, and it is true or false whether or not anyone ever hears it.",
+        "role": "support"
+      },
+      {
+        "text": "On the second, to blame is to address: a demand is made of somebody, and the point of making it is that it can be answered.",
+        "role": "support"
+      },
+      {
+        "text": "Appraisal cannot explain why blame is withdrawn when the wrongdoer meets the demand, since meeting it changes nothing about the act appraised, and address cannot explain blame of the dead, who are past answering and are blamed anyway.",
+        "role": "evidence"
+      },
+      {
+        "text": "Neither failure is fatal, because the two are answering different questions about one practice, what blame asserts and what blame does, and a reader who wants a single account will get one only by deciding in advance which question matters.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "The appraisal and address accounts of blame each break on a case the other handles, but the breakages are not decisive because the accounts answer different questions about one practice, so any single account requires choosing which question counts.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say about the two accounts of blame and about the objections to each?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say why the objections are not decisive?",
+        "kept": "Good. The counter-examples land, and they land against accounts aimed at different questions, which is why neither is refuted by the other's case.",
+        "drifted": "Reporting the two objections leaves the paragraph at its fourth sentence. The claim is the diagnosis of why the dispute survives them."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you supplied a winner the paragraph does not name?",
+        "kept": "Well judged. The author declines to prefer either account and says what a preference would actually consist in, namely a prior choice of question.",
+        "drifted": "Preferring the account that survives your favourite case is a verdict, and this paragraph is explaining why no verdict follows from the cases."
+      },
+      {
+        "id": "scope",
+        "ask": "Have you proposed that the two accounts be combined into one?",
+        "kept": "Exactly right, and this is the item. A combination assumes they are two halves of one answer; the paragraph says they are answers to two questions.",
+        "drifted": "'Each is incomplete and a full account combines them' is the accommodating reading, and the last clause says a single account requires choosing between the questions instead."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "To blame somebody is to appraise: a judgement is formed that the person acted badly, and that judgement is true or false whether or not anybody hears it.",
+      "B": "Although each account has a case it cannot handle, the address account should be preferred, since blame that nobody is in a position to answer is of no use.",
+      "C": "The two accounts of blame fail on different cases, so each is incomplete, and a full account of the practice will have to combine what both of them get right.",
+      "D": "The two accounts answer different questions about one practice, what blame asserts and what it does, so neither objection decides it and a single account picks a question."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "There are two ways of saying what blame is. One treats it as a judgement: this person behaved badly, and that is true or false regardless of whether anybody says so. The other treats it as a demand made of somebody, whose whole point is that it can be answered. Each is embarrassed by a case the other handles easily. If blame were only a judgement, it would be strange that blame is dropped when the offender makes amends, since the past act has not altered. If blame were only a demand, it would be strange that we blame the dead, who cannot answer. The paragraph's verdict is that neither embarrassment is fatal. The two are answering different questions, one about what blame says and one about what blame does, and choosing between them means choosing which question you care about.",
+      "correct_reasoning": "The correct option keeps the diagnosis rather than the contest. It states that the accounts address different questions about one practice, that the counter-examples therefore do not settle anything, and that a single account is obtained by choosing a question in advance. That last clause is the paragraph's own description of what a preference would amount to.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": "half_truth",
+          "why_wrong": "This is one of the two positions the paragraph reports, and the fourth sentence immediately names the case it cannot handle. Reporting a view the paragraph sets out is not reporting what the paragraph concludes.",
+          "seductive_element": "It is stated cleanly in the text and is the account most readers would give if asked what blaming is, so it carries both textual and intuitive support.",
+          "thinking_mistake": "Taking one of the views a paragraph presents for the view the paragraph holds, when the paragraph's own position is about the relation between them."
+        },
+        {
+          "option": "B",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": "stance_flip",
+          "why_wrong": "The paragraph names no winner, and this option supplies one on a criterion, usefulness, that the text never introduces. It also collides with the case the paragraph gives against the address account, since the dead are blamed although no demand can reach them.",
+          "seductive_element": "It concedes that both accounts have trouble, which sounds even-handed, and then does the decisive thing a reader expects an adjudication to do.",
+          "thinking_mistake": "Treating an explanation of why a dispute persists as an invitation to end it, and importing a standard from outside the argument to do so."
+        },
+        {
+          "option": "C",
+          "archetype": "near_miss",
+          "secondary_archetype": "implication_addition",
+          "why_wrong": "The closing sentence rules out exactly this. The accounts are not two halves of one answer but answers to two questions, and a single account arrives only by deciding in advance which question matters, which is a choice rather than a combination.",
+          "seductive_element": "It agrees with the key that neither account wins and offers the generous conclusion that philosophy usually reaches, and it differs from the key only in what it puts in place of a verdict.",
+          "thinking_mistake": "Reading 'neither is refuted' as 'both are partly right', and so converting a diagnosis of the dispute into a proposal for a synthesis."
+        }
+      ],
+      "reading_habit": "When a paragraph says two positions answer different questions, it has ruled out both the verdict and the merger. The summary is the diagnosis, not a repair."
+    }
+  },
+  "mentor": {
+    "challenge": "Two options both decline to pick a winner. Only one of them declines to do the other thing the author also refuses.",
+    "takeaway": "Some disagreements survive every counter-example because the sides are not answering the same question."
+  }
+}

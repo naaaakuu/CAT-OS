@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0069",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "literature-theory",
+    "difficulty": "hard",
+    "difficulty_numeric": 7,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "The Tic and the Contradiction",
+    "theme": "why minor characters are given a repeatable label and major ones a contradiction, as two answers to one problem of the reader's memory",
+    "estimated_time_sec": 110,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "The repeatable label given to a minor character and the contradiction given to a major one are two solutions to the same problem of the reader's memory: one figure must be recognisable on sight, the other must stay unfinished, so what looks like unequal care is an allocation.",
+      "scope": "Character drawing in long novels with many figures; the claim is about the function of the two devices, not about the quality of any writer's work.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 2,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "what looks like unequal care",
+      "an allocation of the reader's memory",
+      "cannot be filed and forgotten",
+      "cannot be finished"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "author_intent",
+      "compression_skill"
+    ],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "hold the single claim that joins two observations, when either observation alone is easy to state in the paragraph's own words",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "struct.cause_effect",
+      "sum.stance_kept",
+      "arg.causal_claim",
+      "sum.compression"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival concedes that minor characters are drawn economically and then explains the difference as unequal care, with the lesser figures sketched because they are not worth more. The last sentence names and rejects that reading: what looks like unequal care is an allocation of the reader's memory, and the tic is a solution rather than a shortcut. The option about repeatable phrases is one half of the mechanism reported in the paragraph's own words, true and detached from the claim that joins the halves. The option in which the contradiction comes first and the tic exists to set it off reverses the order of explanation, since the paragraph derives both devices from what the reader has to do with each figure.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about character drawing in long novels; no specific novel, author or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A cat-level item joining two observations under one function. Families: language, stance, logic. The conceding option is the one that flips the stance."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A reader meets forty people in a long novel and has to recognise each of them on sight, weeks later, in a different room.",
+        "role": "setup"
+      },
+      {
+        "text": "For most of them the cheapest solution is a label that repeats: a phrase, a limp, a habit of arriving late, so that recognition costs nothing and attention can go elsewhere.",
+        "role": "support"
+      },
+      {
+        "text": "The few who matter are given the opposite treatment, made to want two things at once or to act against what they have just said, because a character the reader must keep reinterpreting cannot be filed away and forgotten.",
+        "role": "support"
+      },
+      {
+        "text": "What looks like unequal care is therefore an allocation of the reader's memory: the tic is there so that a minor character can be recognised, and the contradiction is there so that a major one cannot be finished.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "The repeated label and the unresolved contradiction are two answers to one problem, the reader's memory: minor figures must be recognisable at once and major ones must resist being settled, so the difference is allocation rather than unequal care.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say the two ways of drawing a character are for?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence join the two devices under one purpose, or does it describe them separately?",
+        "kept": "Good. The point is that both answer the same question, what the reader must be able to do with this person, and give opposite answers because the requirements differ.",
+        "drifted": "Listing the tic and the contradiction reports the observations. The paragraph's claim is the single problem that produces both."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the refusal to read the difference as unequal care?",
+        "kept": "Exactly. The last sentence names that reading in order to replace it, so a summary that keeps it has taken the position being corrected.",
+        "drifted": "Saying the minor figures get less attention because they matter less is the natural reading and the one the paragraph explicitly reinterprets."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a judgement about which kind of writing is better?",
+        "kept": "Well judged. Nothing here praises contradiction or disparages the tic; both are described as solutions that fit their jobs.",
+        "drifted": "Preferring the complex character to the labelled one is a critical opinion, and this paragraph is describing an economy rather than awarding marks."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Minor characters are given a repeatable phrase or gesture, so a recurring tic should be read as a device for recognising somebody after many pages.",
+      "B": "Minor characters are drawn economically, while a novelist's real care goes to the few who matter, and the rest are sketched because they are worth no more.",
+      "C": "Repeatable labels and unresolved contradictions answer one problem, the reader's memory: one figure must be recognised at sight and the other can never be filed away.",
+      "D": "Because major characters contradict themselves and are remembered for it, novelists give minor ones a tic in order to make that contrast visible to the reader."
+    },
+    "correct": "C",
+    "explanation": {
+      "paragraph_meaning": "A long novel asks you to keep track of dozens of people and to know them again when they turn up forty pages later. For most of them the cheapest fix is a marker that recurs: a catchphrase, a limp, a habit of being late. Recognition then costs nothing and you can spend your attention elsewhere. The important characters are built the other way round: they want incompatible things, or do the opposite of what they have just announced, so you cannot finish them and put them away. The paragraph's conclusion is that this is not a matter of some characters being cared for more. It is a distribution of your memory, with the tic doing one job and the contradiction doing another.",
+      "correct_reasoning": "The correct option keeps the single claim that the paragraph's two observations were assembled to support: the devices are opposite because the demands are opposite, one figure needing instant recognition and the other needing to resist completion. That joint purpose is stated in the last sentence, which also refuses the reading in terms of unequal care.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "This is one half of the mechanism, correctly reported. The paragraph pairs it with the opposite treatment of major characters and explains both by a single requirement, and neither the pairing nor the explanation survives here.",
+          "seductive_element": "It is built from the paragraph's own words and is impossible to fault, which makes it feel like the cautious choice.",
+          "thinking_mistake": "Matching an option to the vocabulary of the text rather than to the claim the text builds, and accepting half a comparison as a summary of it."
+        },
+        {
+          "option": "B",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The closing sentence names unequal care as what the arrangement looks like and then replaces it with an allocation of the reader's memory. Conceding the economy of the minor figures does not restore the reading the paragraph has just set aside.",
+          "seductive_element": "It grants the paragraph's observation and then offers the judgement most readers already hold about major and minor characters.",
+          "thinking_mistake": "Keeping the appearance a paragraph names, after the paragraph has said what the appearance actually is."
+        },
+        {
+          "option": "D",
+          "archetype": "cause_effect_reversal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph derives both devices from what the reader must do with each figure. Here the contradiction comes first and the tic exists to set it off, which inverts the explanation and leaves the reader's memory out of it.",
+          "seductive_element": "Contrast between flat and rounded characters is a familiar critical idea, and this option supplies the familiar version of the paragraph's material.",
+          "thinking_mistake": "Rearranging a causal account into the more familiar order, so that the striking half becomes the cause rather than one of two effects."
+        }
+      ],
+      "reading_habit": "When a paragraph describes two opposite practices, look for the single requirement that produces both. The summary is the requirement, not either practice."
+    }
+  },
+  "mentor": {
+    "challenge": "Two devices are described and one sentence explains both. An option that keeps only one device has kept only half the argument.",
+    "takeaway": "A tic is there so you can stop thinking about someone; a contradiction is there so you cannot."
+  }
+}

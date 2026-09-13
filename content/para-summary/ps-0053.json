@@ -1,0 +1,169 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0053",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "technology-ethics",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Machine That Admits It",
+    "theme": "why a system that records its own failures should be read as handing the user a tool, while silence is a question rather than a reassurance",
+    "estimated_time_sec": 60,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "concession_turn_thesis",
+    "apex": {
+      "claim": "A record of a system's failures should be read as a tool given to the user rather than as an admission of poor quality, and the absence of such a record should be read as a question rather than as evidence that nothing goes wrong.",
+      "scope": "How a buyer should interpret the presence or absence of an error record; no claim that a logging system errs less often than a silent one.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 1,
+      "turn_subtlety": 2,
+      "distractor_closeness": 2,
+      "live_options": 1,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 1
+    },
+    "load_bearing": [
+      "not thereby working",
+      "whether anybody can find out",
+      "a question rather than a reassurance"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "author_intent"
+    ],
+    "mission": "evidence_vs_conclusion",
+    "learning_objective": "tell the observation a paragraph starts from apart from the conclusion it reaches, when the observation is the one most readers already hold",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "arg.evidence_vs_conclusion",
+      "sum.no_addition",
+      "lang.contrast_marker"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option saying a silent machine is making more mistakes. It sounds like the author's side of the argument, and a hurried reader takes the turn as a reversal of fact rather than of interpretation. The third sentence blocks it: the difference between the two machines 'is not in how often they go wrong but in whether anybody can find out'. The option that a log makes a product look faulty to a buyer is the concession the paragraph opens with and then turns against. The option demanding that manufacturers publish everything their machines record concedes that a log is useful and then imports a requirement the paragraph never raises, since the paragraph tells a reader how to read a record rather than telling a maker what to publish.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about error logs and how their presence is interpreted; no specific product or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item whose whole difficulty is one turn. Families: structure, certainty, addition. Both the key and one distractor prescribe, so the recommendation separates nothing."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A system that keeps a record of its own failures looks worse than one that keeps none, and buyers often read the record as a list of faults.",
+        "role": "concession"
+      },
+      {
+        "text": "But a device that reports nothing is not thereby working; it is only quiet, and its mistakes are being made where nobody is counting them.",
+        "role": "support"
+      },
+      {
+        "text": "The difference between the two is not in how often they go wrong but in whether anybody can find out.",
+        "role": "support"
+      },
+      {
+        "text": "So a record of failures should be read as a tool handed to the user, and its absence should be read as a question rather than as a reassurance.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "An error record should be treated as something useful given to the user rather than as an admission of poor quality, and its absence as a question rather than as evidence that nothing goes wrong.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a record of failures shows, and what does it say the absence of one shows?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what the two machines differ in, rather than which of them errs more?",
+        "kept": "Good. The third sentence puts the difference in visibility, not in frequency, and the whole conclusion rests on that distinction.",
+        "drifted": "The paragraph never ranks the machines by how often they fail. It ranks them by whether their failures can be found."
+      },
+      {
+        "id": "stance",
+        "ask": "Did your sentence keep the author's refusal to treat silence as reassuring?",
+        "kept": "Well held. The opening sentence describes a common reading; the word that starts the second sentence tells you the author is about to correct it.",
+        "drifted": "What buyers think is the paragraph's starting point. The conclusion is an instruction about how to read an absence instead."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a demand on manufacturers that the paragraph never makes?",
+        "kept": "Well judged. The advice here is addressed to whoever is reading the record, not to whoever is producing it.",
+        "drifted": "Requiring publication is a policy. The paragraph offers a way of interpreting silence, which is a different kind of claim."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A system that keeps a record of its own failures looks worse to a buyer than one that keeps none, because such a record reads like a published list of faults.",
+      "B": "Although such a record does make a machine look worse, it should be read as a tool for the user, and silence as a question rather than as a reassurance.",
+      "C": "A machine that keeps no record of its failures is going wrong more often than one that does, since nothing in it is set up to catch the mistakes.",
+      "D": "A record of failures is genuinely useful to the person using a machine, but makers should be required to publish everything their machines record, in full."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "A machine that lists its own errors looks shoddy next to one that says nothing, and buyers read the list as a catalogue of defects. The paragraph says that reading gets it backwards. Silence is not evidence of a machine working; it is evidence of nobody counting. The two machines may well go wrong just as often. What separates them is whether anyone can find out that they did. So the list is better understood as something handed to you than as something confessed to you, and a machine that offers no list is not reassuring you, it is leaving you with a question you cannot answer.",
+      "correct_reasoning": "The correct option keeps both halves of the closing sentence, the record as a tool and the silence as a question rather than a reassurance, and it says nothing about how often either machine fails, which is the distinction the middle of the paragraph draws. That refusal is stated in the middle of the paragraph, where the difference is placed in whether anybody can find out rather than in how often anything goes wrong.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the opening sentence, which reports how buyers read a record before the paragraph explains why that reading is a mistake. The word beginning the next sentence marks it as the view being corrected.",
+          "seductive_element": "It is a true description of what buyers do, it is stated in the text, and it is the first thing the reader meets.",
+          "thinking_mistake": "Summarising the situation a paragraph sets out to correct, because that part arrives before any turn has warned you."
+        },
+        {
+          "option": "C",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the difference between the two machines is not in how often they go wrong but in whether anybody can find out. Declaring the silent one worse converts a claim about visibility into a claim about frequency.",
+          "seductive_element": "It sounds like the author's side stated with conviction, and a reader who has caught the turn may take it as the point the turn was leading to.",
+          "thinking_mistake": "Hearing a correction about evidence as a correction about the facts, and adding certainty the author never claimed."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph tells a reader how to interpret a record and an absence. A duty on makers to publish is a policy the text never raises, and granting that logs are useful does not put that duty into the argument.",
+          "seductive_element": "It agrees with the paragraph's valuation of the record and then takes the step towards regulation that discussions of this kind usually take.",
+          "thinking_mistake": "Turning advice about how to read evidence into a rule about how evidence should be produced."
+        }
+      ],
+      "reading_habit": "When a paragraph opens with what most people think, expect the next sentence to turn. The summary belongs on the far side of the turn, not the near side."
+    }
+  },
+  "mentor": {
+    "challenge": "The first sentence is the view being corrected, and one option is that view restated. Find the word that announces the correction.",
+    "takeaway": "A machine that says nothing is not telling you it is well; it is telling you nobody is counting."
+  }
+}

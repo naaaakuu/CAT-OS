@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0075",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "linguistics",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Word That Arrived Alone",
+    "theme": "why a borrowed word resists its new language's endings at first, and how unevenly it acquires them",
+    "estimated_time_sec": 75,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "A borrowed word arrives without the family of related forms it had at home, because what crossed was a single use, so it resists its new language's endings at first and takes them only as it becomes common, and then unevenly.",
+      "scope": "Words borrowed as single uses; the claim is about the pattern of acquiring forms, and it allows that some borrowings acquire a full family and many do not.",
+      "certainty": "hedged",
+      "stance": "neutral"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 1,
+      "qualifier_density": 3,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "usually",
+      "at first",
+      "only when it becomes common enough",
+      "and then unevenly"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "certainty_reading",
+      "main_idea_detection",
+      "scope_preservation"
+    ],
+    "mission": "keep_qualifiers",
+    "learning_objective": "carry the words that make a linguistic claim a tendency, when the tendency is easier to state as a rule",
+    "reasoning_patterns": [
+      "sum.qualification_kept",
+      "lang.often_vs_always",
+      "sum.central_vs_supporting",
+      "arg.causal_claim",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival says borrowed words do not take the endings of the language that receives them. The paragraph says they resist them at first and begin taking them once they become common, and adds that the process is uneven, with some borrowings acquiring a full family. The option describing the family a word had at home is the mechanism's premise, accurate and prior to the claim. The option about speakers' uncertainty concedes that a borrowing arrives alone and then substitutes a different cause, awareness of foreign origin, for the one the paragraph gives, which is that no related forms crossed with it.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about loanwords and morphological integration; no specific language pair or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item on four small qualifiers. Families: certainty, structure, addition. The conceding option is the one that swaps the mechanism."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A word borrowed from another language usually arrives by itself.",
+        "role": "setup"
+      },
+      {
+        "text": "At home it belonged to a family, a verb and an adjective and an abstract noun built on one stem, and none of that travels with it, because what crossed was a single use in a single sentence.",
+        "role": "support"
+      },
+      {
+        "text": "So the borrowed word at first refuses the endings its new language hands out freely, and speakers work round it with phrases instead.",
+        "role": "support"
+      },
+      {
+        "text": "Only when it becomes common enough to be wanted in other positions does it start taking them, and then unevenly: some borrowings end up with a full family, and many keep one or two forms for good.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "A borrowing arrives without the related forms it had at home, so it resists its new language's endings at first and picks them up only as it becomes common, and then not evenly.",
+  "builder": {
+    "prompt": "In one sentence: why does the paragraph say a borrowed word resists the endings of its new language, and what does it say happens later?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence give the reason, that only a single use crossed?",
+        "kept": "Good. The family stayed behind, so there is no model in the new language for what the other forms of the word would be.",
+        "drifted": "Saying borrowings are treated as foreign is a different account. The paragraph's reason is about what did and did not travel."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep 'at first' and 'unevenly', or has your sentence made the resistance permanent?",
+        "kept": "Well held. The claim is about a sequence with an uncertain end, and the last clause says plainly that the outcome varies.",
+        "drifted": "'Borrowings do not take native endings' contradicts the sentence describing them starting to, once they are wanted in other positions."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you supplied a cause the paragraph does not give, such as speakers knowing the word is foreign?",
+        "kept": "Well judged. Awareness of origin is never mentioned; the account is entirely about the absence of related forms.",
+        "drifted": "A second plausible mechanism looks harmless and replaces the argument, since the paragraph explains the resistance without any appeal to what speakers notice."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A borrowing refuses its new language's endings at first, but it does so because it arrived without its family, and takes them as it becomes common.",
+      "B": "Borrowed words do not take the endings of the language that receives them, because they arrive as single uses rather than as families of related forms.",
+      "C": "At home a borrowed word belonged to a family of related forms, a verb and an adjective and an abstract noun all built upon a single stem.",
+      "D": "Although a borrowing does arrive alone, it is speakers' awareness of its foreign origin that keeps it from taking endings, and familiarity removes the awareness."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "When a language borrows a word, it usually borrows one word, not a set. In its own language that word had relatives, a verb, an adjective, an abstract noun, all built on the same stem, and none of them comes across, because what crossed was one use in one sentence. So the newcomer at first will not take the endings that the receiving language attaches to everything else, and speakers get round it by using phrases instead. Only when the word is wanted often enough, in enough positions, does it begin accepting those endings. Even then the process is patchy: a few borrowings acquire the whole family, and plenty settle permanently for a form or two.",
+      "correct_reasoning": "The correct option keeps the mechanism, that what crossed was a single use and the family stayed behind, and keeps the time limits attached to the effect, that the resistance holds at first and gives way as the word becomes common. Those two qualifiers are what make the claim a description of a process rather than a rule.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the word refuses the endings at first and starts taking them once it is wanted in other positions, and that some borrowings end up with a full family. A flat denial of that is a denial of the very development being described.",
+          "seductive_element": "It states the paragraph's mechanism with the right cause attached, and only the time words separate it from the key.",
+          "thinking_mistake": "Turning a stage of a process into a permanent state, because the stage is the part the paragraph explains."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the premise about what the word left behind. The paragraph uses it to explain the resistance and then describes how the resistance ends, and neither appears here.",
+          "seductive_element": "It is precisely worded, easily verified, and contains the vivid detail of the abandoned family.",
+          "thinking_mistake": "Reporting the setup of an explanation rather than the thing explained."
+        },
+        {
+          "option": "D",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "Awareness of foreign origin is never mentioned. The account given is that no related forms crossed, so there is nothing to model the endings on, and conceding that the word arrives alone does not license replacing that cause with another.",
+          "seductive_element": "It grants the paragraph's opening and then offers the explanation most readers would guess at, which feels like filling in what the author left implicit.",
+          "thinking_mistake": "Substituting a familiar mechanism for the stated one, because both predict the same behaviour in the easy cases."
+        }
+      ],
+      "reading_habit": "Words like 'at first' and 'unevenly' are the claim's shape. An option that removes them states a rule where the author described a process."
+    }
+  },
+  "mentor": {
+    "challenge": "Four small words in this paragraph limit the claim. One option keeps them and one option removes exactly those.",
+    "takeaway": "A word crosses the border alone, and has to earn its relatives on the other side."
+  }
+}

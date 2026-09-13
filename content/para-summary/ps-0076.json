@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0076",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 88,
+    "genre": "political-theory",
+    "difficulty": "easy",
+    "difficulty_numeric": 3,
+    "tier": "easy",
+    "bible_level": "intermediate",
+    "title": "The Precedent You Will Inherit",
+    "theme": "why the restraint of a governing majority comes from the prospect of losing office rather than from the character of its members",
+    "estimated_time_sec": 75,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "A majority restrains itself because the powers and exceptions it creates will be held and quoted by its opponents, so the safeguard is the prospect of losing office rather than the character of the people in it.",
+      "scope": "Governing majorities in systems where office changes hands; the claim locates the source of restraint, not the whole of what makes a system safe.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 3,
+      "syntax": 3,
+      "turn_subtlety": 1,
+      "distractor_closeness": 3,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "expects to govern for ever",
+      "will never have to live under",
+      "quoted back at it",
+      "rather than by the character of its members"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "author_intent"
+    ],
+    "mission": "find_the_thesis",
+    "learning_objective": "identify the claim a paragraph reaches when the two halves before it are a matched pair of illustrations",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "struct.cause_effect",
+      "sum.stance_kept",
+      "arg.causal_claim",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival concedes that the prospect of losing concentrates a majority's mind and then makes good character the condition of a safe system. The last sentence puts it the other way round: restraint is supplied by the prospect of losing rather than by the character of the members, and a system in which office changes hands is safer than one in which the same people are merely well brought up. The option about a permanent majority setting precedents it will never live under is one half of the paired illustration, true and prior to the claim. The option predicting that a departing majority will undo its own precedents converts a claim about what an incentive prevents into a claim about what it makes people do.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about alternation in office and procedural restraint; no specific country, party or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An easy item whose two support sentences are a matched pair, so the thesis is the only sentence that generalises. Families: structure, stance, addition. The conceding option is the stance flip."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A majority that expects to govern for ever has no reason to be careful with procedure.",
+        "role": "setup"
+      },
+      {
+        "text": "Every rule it bends is bent for its own benefit, and every precedent it sets is one it will never have to live under.",
+        "role": "support"
+      },
+      {
+        "text": "A majority that expects to lose the next election is differently placed: the power it takes today is the power its opponents will hold in two years, and the exception it carves out will be quoted back at it.",
+        "role": "support"
+      },
+      {
+        "text": "So the restraint of a governing party is supplied by the prospect of losing rather than by the character of its members, and a system in which office changes hands is safer than one in which the same people are merely well brought up.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "A majority is careful with procedure because the powers and exceptions it creates will pass to its opponents, so restraint comes from the prospect of losing office rather than from the quality of the people holding it.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say produces restraint in a governing majority, and what does it say does not?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say why the prospect of losing restrains, rather than only that it does?",
+        "kept": "Good. The reason is inheritance: today's power and today's exception will belong to the other side, and will be quoted back.",
+        "drifted": "Naming the prospect of losing without the inheritance leaves the claim unexplained, and the explanation is what the two middle sentences supply."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you keep the contrast with the character of the members?",
+        "kept": "Exactly. The paragraph is not saying good character is worthless; it is saying the safeguard is structural, and it makes the comparison explicitly.",
+        "drifted": "Dropping the comparison loses the point of the paragraph, which exists to relocate restraint from people to circumstances."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a prediction about what a majority does on its way out of office?",
+        "kept": "Well judged. The paragraph explains where restraint comes from and follows no party out of the door.",
+        "drifted": "Undoing precedents is a different behaviour from never setting them, and only the second is what the incentive described here produces."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Every precedent set by a permanent majority is one that it will never have to live under, so such a majority has no reason to be careful with procedure.",
+      "B": "A governing party's restraint comes from expecting to lose office rather than from the character of its members, which is what makes alternation the safeguard.",
+      "C": "The prospect of losing does concentrate a majority's mind, but a political system is secure just so far as those who hold office are of good character.",
+      "D": "A majority that expects to lose will spend its last months undoing the precedents it set, since every exception carved out today is quoted back tomorrow."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "A party that believes it will always be in charge has no incentive to treat procedure carefully. Every rule it bends, it bends for itself, and every precedent it sets is one it will never be on the receiving end of. A party that expects to lose the next election is in a completely different position: the powers it grabs now will be in its opponents' hands within a couple of years, and the exception it invents will be read back to it across the chamber. So what makes a majority behave is not the quality of the individuals in it but the likelihood of losing office, and a system where power actually changes hands is safer than one that relies on everyone being decent.",
+      "correct_reasoning": "The correct option keeps the paragraph's relocation of restraint from persons to circumstances, and keeps the contrast it is stated against, the character of the members. The two middle sentences are a matched pair of cases built to earn exactly that comparison, which only the final sentence makes.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is one half of the paired illustration. The paragraph sets it beside the opposite case and then draws a conclusion about where restraint comes from, and neither the pairing nor the conclusion is here.",
+          "seductive_element": "It is exactly what the second sentence says and needs no interpretation, which makes it the safest-looking option on a quick reading.",
+          "thinking_mistake": "Summarising one arm of a comparison, when the comparison exists to produce a claim that neither arm states."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The last sentence says restraint comes from the prospect of losing rather than from the character of the members, and that a system with alternation is safer than one relying on good upbringing. Conceding the first half and then making character the measure of security reverses the conclusion.",
+          "seductive_element": "It grants the paragraph's mechanism, so it sounds like a reader who has taken the argument on board before adding a qualification.",
+          "thinking_mistake": "Conceding a claim and then restoring the position it displaced, on the assumption that both can be true at once."
+        },
+        {
+          "option": "D",
+          "archetype": "implication_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the prospect of losing produces restraint, which is a reason precedents are not set in the first place. Nothing in it describes a majority dismantling its own work on the way out.",
+          "seductive_element": "It borrows the paragraph's own image of an exception quoted back and turns it into a prediction, which reads like an application of the argument rather than an extension of it.",
+          "thinking_mistake": "Converting a claim about what an incentive prevents into a claim about what it makes people do afterwards."
+        }
+      ],
+      "reading_habit": "When two sentences form a matched pair, the claim is usually the sentence that neither of them states. Look for the one that generalises across both."
+    }
+  },
+  "mentor": {
+    "challenge": "Two cases are set side by side. The summary is the sentence that could only be written after seeing both.",
+    "takeaway": "The power you take today is the power they will hold in two years, which is the only argument that has ever worked."
+  }
+}

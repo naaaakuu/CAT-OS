@@ -1,0 +1,169 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0071",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "religion-belief",
+    "difficulty": "easy",
+    "difficulty_numeric": 1,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Witness Who Already Knows",
+    "theme": "why swearing is common where records are thin rather than where belief is strong",
+    "estimated_time_sec": 60,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "An oath is a promise with a different witness, one held to know already, so oaths are demanded where ordinary checking fails, which makes the frequency of swearing a sign of thin records rather than a measure of belief.",
+      "scope": "The social distribution of oath-taking; the claim is about what frequent swearing indicates, not about whether oaths are sincere.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 2,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 1,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "a different witness",
+      "where ordinary checking fails",
+      "not the most devout but the least documented"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "author_intent"
+    ],
+    "mission": "watch_the_turn",
+    "learning_objective": "follow a paragraph to the conclusion its middle sentence sets up, when the conclusion reverses what the subject usually suggests",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "arg.causal_claim",
+      "sum.stance_kept",
+      "struct.claim_evidence"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival concedes that an oath calls a different witness and then says the amount of swearing in a society measures how seriously it takes its gods. The last sentence says the reverse: the places where swearing is common are not the most devout but the least documented, and the oath is an instrument for the gaps in a record. The option contrasting a promise with an oath is the support, correct and stopping before the conclusion. The option recommending that undocumented communities make more use of oaths turns a description of where oaths appear into advice about where they should be used.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about oaths and what their frequency indicates; no specific tradition, community or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item whose conclusion runs against the reader's expectation of the subject. Families: structure, stance, addition. The conceding option is the stance flip and the prescriptive one is a distractor, while the key asserts flatly."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "An oath is not a stronger promise; it is a promise with a different witness.",
+        "role": "thesis"
+      },
+      {
+        "text": "An ordinary promise is made to somebody who may or may not ever find out, while an oath is made before something held to know already, and the speaker accepts a penalty that no court has to administer.",
+        "role": "support"
+      },
+      {
+        "text": "That is why oaths are demanded where ordinary checking fails: over a boundary nobody surveyed, a debt nobody wrote down, a loyalty nobody can observe.",
+        "role": "support"
+      },
+      {
+        "text": "So the places where swearing is common are not the most devout but the least documented, and an oath is an instrument for the gaps in a record rather than a measure of what anybody believes.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "An oath calls a witness that is held to know already, so it is demanded wherever ordinary checking fails, which makes frequent swearing a sign of thin records rather than of strong belief.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say an oath is, and what does it say the frequency of oaths indicates?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say what makes an oath different, namely the witness rather than the strength?",
+        "kept": "Good. The first sentence refuses the obvious account, and everything after it depends on the witness being one that cannot be deceived.",
+        "drifted": "Treating an oath as a promise with more force behind it is the account the paragraph opens by rejecting."
+      },
+      {
+        "id": "stance",
+        "ask": "Did you reach the conclusion about where swearing is common?",
+        "kept": "Well held. The last sentence turns a claim about what oaths are into a claim about what their frequency shows, which is the paragraph's point.",
+        "drifted": "Describing the mechanism alone leaves out the inference the paragraph was building towards, and that inference runs against what the subject usually suggests."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you turned the finding into advice about when oaths should be used?",
+        "kept": "Well judged. The paragraph explains where oaths turn up and why, and recommends nothing to anybody.",
+        "drifted": "Telling undocumented communities to swear more converts an observation about distribution into a proposal about practice."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "A promise is made to somebody who may never find out, while an oath is made before something held to know already, and carries a penalty no court administers.",
+      "B": "Although an oath does call a different sort of witness, how much swearing goes on in a society is a fair measure of how seriously it takes its gods.",
+      "C": "Communities that keep no written records should make more use of oaths, but only where the parties share a belief in the witness being invoked.",
+      "D": "An oath calls a witness that is held to know already, so swearing is common where records are thin rather than where belief happens to be strong."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "An oath is not a promise said louder. It is a promise made in front of a different witness. An ordinary promise is made to a person who may never discover whether you kept it; an oath is made before something that is taken to know already, and the penalty is one no court has to impose. That explains where oaths are demanded: over the boundary nobody surveyed, the debt nobody wrote down, the loyalty nobody can watch. So the societies full of swearing are not the most pious but the worst documented. The oath is a device for the holes in a record, and its frequency tells you about the record rather than about anybody's faith.",
+      "correct_reasoning": "The correct option keeps the definition the first sentence gives, a promise before a witness held to know already, and keeps the inference the last sentence draws from it, that the frequency of swearing reflects thin documentation rather than strong belief. The middle sentences supply the link, since oaths are demanded exactly where ordinary checking fails.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the supporting contrast. The paragraph uses it to explain where oaths are demanded and then to draw a conclusion about what their frequency indicates, and neither step appears here.",
+          "seductive_element": "It is the most carefully worded sentence in the paragraph and is straightforwardly true, so it feels safe when the conclusion looks surprising.",
+          "thinking_mistake": "Stopping at the definition that made an inference possible, and leaving the inference behind."
+        },
+        {
+          "option": "B",
+          "archetype": "stance_flip",
+          "secondary_archetype": null,
+          "why_wrong": "The closing sentence says the places where swearing is common are the least documented rather than the most devout. Conceding that the witness is different does not rescue a conclusion the paragraph states in the opposite direction.",
+          "seductive_element": "It is what the subject matter suggests before the argument starts, and it concedes enough of the mechanism to sound like a reading that has followed the text.",
+          "thinking_mistake": "Letting the topic of a paragraph supply its conclusion, so that a passage about oaths is assumed to be about piety."
+        },
+        {
+          "option": "C",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph describes where oaths are found and explains why, and it advises nobody to swear. Its claim is about what the presence of oaths indicates, not about which communities ought to adopt them.",
+          "seductive_element": "It follows plausibly from the mechanism, and a recommendation feels like a more useful thing for a paragraph to have delivered.",
+          "thinking_mistake": "Reading an explanation of a practice as an endorsement of it."
+        }
+      ],
+      "reading_habit": "When a paragraph explains what an institution is for, check whether the last sentence turns that into a claim about where it will be found. That turn is usually the point."
+    }
+  },
+  "mentor": {
+    "challenge": "This paragraph ends somewhere its subject matter does not lead. One option ends where the subject matter leads instead.",
+    "takeaway": "Count the oaths and you have measured the filing system, not the faith."
+  }
+}

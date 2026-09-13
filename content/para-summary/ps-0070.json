@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0070",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "economics",
+    "difficulty": "medium",
+    "difficulty_numeric": 6,
+    "tier": "cat",
+    "bible_level": "cat",
+    "title": "What Makes the Note Good",
+    "theme": "how two accounts of why unbacked money is accepted divide the work between the interior of the practice and its edges",
+    "estimated_time_sec": 105,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "two_views_adjudication",
+    "apex": {
+      "claim": "Mutual acceptance explains why a currency continues to circulate but cannot explain how one begins or begins again, and the obligation to pay taxes in it is what does the work at those edges.",
+      "scope": "Why sellers accept an unbacked currency; the adjudication divides the question rather than awarding it to one account.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 3
+    },
+    "load_bearing": [
+      "describes the interior",
+      "cannot explain its edges",
+      "has to be made acceptable again",
+      "where the tax obligation does its work"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "scope_preservation"
+    ],
+    "mission": "ignore_examples",
+    "learning_objective": "keep a divided verdict divided, when one half of the division is the more striking claim",
+    "reasoning_patterns": [
+      "struct.two_views_adjudication",
+      "sum.example_vs_claim",
+      "sum.central_vs_supporting",
+      "scope.condition",
+      "arg.evidence"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival awards the whole question to the tax obligation: a currency is good because taxes must be paid in it. The paragraph grants the rival account the larger territory in so many words, saying that mutual acceptance describes the interior of the practice, and confines the tax obligation to the edges, where a currency must be made acceptable for the first time or after a collapse. The option built on prisoners and cigarettes takes the illustration for the finding, and the paragraph introduces it as what is 'usually produced as evidence' rather than as its own conclusion. The option saying the question cannot be settled concedes that taxes matter at the start and then denies the adjudication the paragraph performs, on the false ground that the two accounts predict the same behaviour everywhere.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about why an unbacked currency is accepted; no specific monetary episode or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A cat-level adjudication that divides rather than decides. Families: structure, stance, scope. The conceding option is the one that refuses to adjudicate."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Nothing obliges a shopkeeper to take a piece of printed paper in exchange for goods, and yet he does.",
+        "role": "setup"
+      },
+      {
+        "text": "One account says he takes it because the state will: taxes have to be paid in it, so somebody at the end of every chain needs the stuff.",
+        "role": "support"
+      },
+      {
+        "text": "The other says he takes it because everyone else does, and a thing everyone accepts is worth accepting whatever stands behind it.",
+        "role": "support"
+      },
+      {
+        "text": "Prisoners who settle debts in cigarettes are usually produced as evidence for the second, since no authority ever demanded cigarettes.",
+        "role": "example"
+      },
+      {
+        "text": "But the second account describes the interior of the practice and cannot explain its edges: a currency nobody yet accepts has to be made acceptable by something, and after a collapse it has to be made acceptable again, which is where the tax obligation does its work.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Mutual acceptance accounts for a currency in use but not for one starting or restarting, and it is the requirement to pay taxes in it that makes a currency acceptable at those two edges.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say each of the two accounts of money explains, and what does it say neither of them does alone?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence keep both jobs, the interior and the edges?",
+        "kept": "Good. The paragraph divides the question rather than settling it, and the division is the finding: circulation on one side, beginning and beginning again on the other.",
+        "drifted": "Giving the whole explanation to one account loses the structure of the argument, which is that each account is strong exactly where the other is silent."
+      },
+      {
+        "id": "scope",
+        "ask": "Did you keep the tax obligation at the edges, rather than making it the reason money works at all?",
+        "kept": "Well held. The text says mutual acceptance describes the interior, so the tax account is doing something narrower and more specific than explaining acceptance generally.",
+        "drifted": "'Money is good because taxes must be paid in it' takes the whole territory, including the part the paragraph hands to the other account."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you taken the cigarettes as the paragraph's own evidence?",
+        "kept": "Well judged. They are introduced as what is usually produced for the second account, and the sentence after them explains what that account cannot do.",
+        "drifted": "The prison example is the most concrete thing here and is reported rather than endorsed, which the phrase introducing it is careful to signal."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Mutual acceptance explains why a currency keeps circulating but not how one starts or restarts, and that is where the obligation to pay taxes in it does the work.",
+      "B": "Prisoners settling their debts in cigarettes show that a currency needs no authority behind it, only the confidence that other people will go on taking it in turn.",
+      "C": "The tax obligation matters at the beginning, but the question stays open either way, since the two accounts predict the same behaviour in the cases that arise.",
+      "D": "A currency is accepted because taxes must be paid in it, so the obligation owed to the state is what makes any money good, whatever else circulates alongside."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Nobody has to accept a banknote, and yet shopkeepers do. One explanation is that the state will accept it, because taxes must be paid in it, so somewhere down every chain there is a person who genuinely needs the stuff. The other is that everyone else accepts it, and something universally accepted is worth taking whatever lies behind it. Prison cigarettes are usually wheeled out for the second view, since no authority ever demanded cigarettes. The paragraph's answer is that the second explanation describes the practice from the inside and says nothing about its boundaries. A currency nobody accepts yet has to be made acceptable somehow, and so does one that has collapsed, and that is the job the tax obligation performs.",
+      "correct_reasoning": "The correct option keeps the division the last sentence draws: circulation is explained by mutual acceptance, while beginning and beginning again are explained by the obligation to pay taxes. Both halves are stated in the text, one as what the second account describes and the other as what it cannot reach.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The cigarettes are introduced as what is usually produced as evidence for one account, and the very next sentence explains what that account cannot do. The paragraph reports the example rather than resting on it.",
+          "seductive_element": "It is the only picture in the paragraph and it appears to prove something neat, which is exactly why the author mentions it before answering it.",
+          "thinking_mistake": "Taking an illustration that a paragraph attributes to other people as the paragraph's own conclusion."
+        },
+        {
+          "option": "C",
+          "archetype": "stance_flattening",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph does settle the question by dividing it, and it says the two accounts come apart precisely at the edges, where one explains a beginning and the other cannot, so they do not predict the same behaviour in the cases that matter.",
+          "seductive_element": "It concedes the paragraph's own point about beginnings and then adopts the judicious refusal to choose, which is the safe-looking summary of any two-view paragraph.",
+          "thinking_mistake": "Treating balance as the default reading, without checking the sentence where the author says which account fails and where."
+        },
+        {
+          "option": "D",
+          "archetype": "scope_narrowing",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph explicitly grants that mutual acceptance describes the interior of the practice, so the tax obligation is not what makes any money good. Its role is confined to the moments when acceptance has to be created or recreated.",
+          "seductive_element": "It is the paragraph's own conclusion stated more boldly, and boldness reads as clarity when both options point the same way.",
+          "thinking_mistake": "Promoting a claim about the boundary of a practice into a claim about the whole of it."
+        }
+      ],
+      "reading_habit": "When a paragraph adjudicates by dividing the labour, the summary needs both halves. An option holding the sharper half has taken a side the author refused to take."
+    }
+  },
+  "mentor": {
+    "challenge": "The paragraph gives each account something. One option gives everything to one of them, and it is not obviously the wrong one.",
+    "takeaway": "Everyone takes it because everyone takes it, which explains every day except the first one."
+  }
+}

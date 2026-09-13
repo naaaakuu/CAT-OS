@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0050",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 91,
+    "genre": "institutions",
+    "difficulty": "hard",
+    "difficulty_numeric": 8,
+    "tier": "cat-plus",
+    "bible_level": "cat",
+    "title": "Where the Meeting Already Ended",
+    "theme": "how a duty to publish proceedings relocates deliberation instead of exposing it, and what the duty can and cannot secure",
+    "estimated_time_sec": 115,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "claim_support_restatement",
+    "apex": {
+      "claim": "A duty to publish a body's proceedings decides where deliberation happens rather than opening it to view, so the duty reliably secures a record of decisions and of who is answerable for them while leaving the reasons unrecorded.",
+      "scope": "Bodies whose recorded words can later be quoted against the speaker; a claim about what publication secures, not about whether it is worth requiring.",
+      "certainty": "asserted",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 4,
+      "turn_subtlety": 2,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 3,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "where they will be held",
+      "reliably buys",
+      "which is not nothing",
+      "cannot buy"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "evidence_vs_thesis",
+      "scope_preservation"
+    ],
+    "mission": "ignore_examples",
+    "learning_objective": "separate the mechanism a paragraph explains from the balance sheet it draws with that mechanism, when the mechanism is the vivid part",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "sum.example_vs_claim",
+      "sum.no_addition",
+      "scope.too_broad",
+      "struct.claim_evidence"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that stops at the migration: once every sentence can be quoted against its speaker, the room announces positions and the persuading moves to the corridor. Nothing in it is false, and it reproduces the paragraph's most quotable sentence. It is beaten by the last two sentences, which exist to draw a balance: the requirement 'reliably buys' a record of decisions and of who is answerable, 'which is not nothing', and 'cannot buy' a record of reasons. A summary that reports only the migration has taken the support for the claim. The forty pages of unanimous resolutions are an illustration offered in passing, and the option that leads with them mistakes the picture for the argument. The option claiming that such bodies also record less of what they decide contradicts the other entry in the ledger, since publication reliably buys a record of decisions and of who may be asked about them.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about publication requirements and where deliberation goes; no specific body or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A cat-plus item whose difficulty is the distance between a mechanism and the ledger drawn from it. Families: structure, language, addition. The conceding option is the prescriptive one, so neither shape separates anything."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "A rule that a body's discussions be published does not make those discussions public; it decides where they will be held.",
+        "role": "thesis"
+      },
+      {
+        "text": "Once every sentence spoken in the room can be quoted back at its speaker, the room becomes the place where positions are announced, and the work of changing anybody's mind moves to the corridor, the lunch and the call that leaves no trace.",
+        "role": "support"
+      },
+      {
+        "text": "A committee whose minutes run to forty pages of unanimous resolutions is the familiar illustration: the record is complete and the deliberation is nowhere in it.",
+        "role": "example"
+      },
+      {
+        "text": "What the requirement reliably buys is a record of what was decided and of who may be asked about it afterwards, which is not nothing.",
+        "role": "support"
+      },
+      {
+        "text": "What it cannot buy is a record of reasons, because a reason is exactly what a member will not leave where somebody hunting for an inconsistency can find it.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Requiring a body to publish its proceedings moves the deliberation out of the recorded room rather than opening it, so the rule secures a record of decisions and of who is answerable while leaving reasons unrecorded.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a duty to publish proceedings actually achieves, and what does it say the duty cannot achieve?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name both halves of the ledger, what publication secures and what it cannot?",
+        "kept": "Good. The paragraph is not simply complaining about transparency; it is sorting what the rule delivers from what people expect of it.",
+        "drifted": "Saying only that the arguing moves to the corridor gives the mechanism without the accounting, and the last two sentences exist to do the accounting."
+      },
+      {
+        "id": "scope",
+        "ask": "Is your sentence about bodies whose words are recorded and quotable, or has it grown into a verdict on openness in general?",
+        "kept": "Well held. Every step of the reasoning turns on a speaker who can be quoted later, so the claim reaches exactly as far as that condition does.",
+        "drifted": "The paragraph gives one mechanism with one precondition. A claim about transparency rules of every kind covers arrangements in which nobody is quotable at all."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a second loss, such as the record of decisions suffering too?",
+        "kept": "Well judged. The paragraph is exact about what publication secures and what it forfeits, and the record of decisions sits on the surviving side.",
+        "drifted": "The caution the mechanism produces silences reasons; the author says in the same breath that decisions and answerability are still recorded, which is not nothing."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Because every sentence can be quoted back at its speaker, publication moves the arguing elsewhere, so the rule secures decisions and answerability but not reasons.",
+      "B": "Once every sentence can be quoted back at its speaker, a meeting becomes where positions are announced while the persuading happens somewhere else entirely.",
+      "C": "Forty pages of unanimous resolutions are what publication has made of committee deliberation, and the completeness of such a record is the measure of its emptiness.",
+      "D": "Bodies obliged to publish their proceedings therefore record less of what they decide, since the caution that silences reasons also shortens the resolutions."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Telling a committee that its proceedings will be published does not let the public watch it think. It tells the members where thinking is unsafe. If anything you say in the room can be read out against you later, the room turns into a place for announcing settled positions, and the persuading happens in corridors and over lunch, where nothing is written down. The paragraph then draws a careful balance. The rule does deliver something real: a record of what was decided and of the people who can be asked to justify it. What it does not and cannot deliver is a record of why, because a reason is the last thing anybody will leave lying about for a critic to find.",
+      "correct_reasoning": "The correct option keeps the paragraph's whole ledger. It states the mechanism, that publication relocates rather than reveals, and then keeps both entries the last two sentences insist on: decisions and answerability are secured, reasons are not. It also stays inside the condition that drives the argument, a room whose words can be quoted back.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "half_truth",
+          "secondary_archetype": null,
+          "why_wrong": "This reports the mechanism and stops. The paragraph uses the migration to draw a conclusion about what the requirement buys and cannot buy, and a summary that omits the ledger has given the support instead of the claim.",
+          "seductive_element": "It is accurate, it is the paragraph's most quotable sentence, and it can be checked word for word against the text, which makes omission feel like economy.",
+          "thinking_mistake": "Treating the most vivid true sentence in a paragraph as its point, rather than asking what the author does next with it."
+        },
+        {
+          "option": "C",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The forty pages of unanimous resolutions are introduced as a familiar illustration of the mechanism, not as the finding. The paragraph's claim is about what publication secures and forfeits in general, and the committee is one picture of it.",
+          "seductive_element": "It is the only concrete image in the paragraph, and concrete images are what a reader remembers when the abstract sentences have blurred.",
+          "thinking_mistake": "Summarising the illustration because it is the part that can be visualised, when the illustration was offered to make an argument visible rather than to be the argument."
+        },
+        {
+          "option": "D",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the opposite about that half of the ledger: publication reliably buys a record of what was decided and of who may be asked about it. Only the reasons go missing, and nothing suggests the resolutions shrink with them.",
+          "seductive_element": "It runs the paragraph's own mechanism one step further in the direction it was already travelling, which reads like a reader who followed the argument rather than one who stopped at it.",
+          "thinking_mistake": "Letting a mechanism run past the boundary its author drew, so that a loss in one column is assumed to be a loss in the other."
+        }
+      ],
+      "reading_habit": "When a paragraph says what something does buy and what it cannot buy, both entries are the claim. An option holding only one of them is half a ledger."
+    }
+  },
+  "mentor": {
+    "challenge": "One option is a true sentence lifted from the middle of the argument. Ask what the last two sentences were added to do.",
+    "takeaway": "Publishing the record tells you what was decided and who to ask; it was never going to tell you why."
+  }
+}

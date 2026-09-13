@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0055",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 86,
+    "genre": "urban-studies",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "Round Three Sides of a Block",
+    "theme": "how a one-way system trades delay at junctions for distance on the road, so that whether journeys improve depends on the trips",
+    "estimated_time_sec": 65,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "cause_effect_conclusion",
+    "apex": {
+      "claim": "A one-way system buys speed at junctions by adding distance to the road, so it is not faster or slower in itself and whether journeys improve depends on how long and how local the trips are.",
+      "scope": "One-way street systems and the journeys made on them; the claim is conditional on trip length and junction count and takes no side against the arrangement.",
+      "certainty": "mixed",
+      "stance": "neutral"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "depends on the mix",
+      "where trips are long",
+      "where trips are short and local",
+      "not faster or slower in itself"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "scope_preservation",
+      "main_idea_detection",
+      "certainty_reading"
+    ],
+    "mission": "keep_qualifiers",
+    "learning_objective": "carry a conditional verdict as a condition, when the unconditional version is shorter and sounds more decisive",
+    "reasoning_patterns": [
+      "sum.qualification_kept",
+      "scope.condition",
+      "struct.cause_effect",
+      "sum.central_vs_supporting",
+      "lang.absolute_vs_qualified"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival says one-way systems make journeys longer overall. It picks up the paragraph's most visible cost, the detour round three sides of a block, and states it as a verdict. The third sentence forbids that: where trips are long and junctions many, the saving at each junction outweighs the detour, and only where trips are short and local does it not. The option about flow rising through junctions is the first half of the causal chain, true and incomplete. The option about pollution concedes that the junction saving is real and then judges the scheme by a cost the paragraph never mentions, which is an addition dressed as a standard.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about one-way street systems and journey length; no specific city or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item on a conditional verdict. Families: certainty, structure, addition. The key carries a condition and so does one distractor, so hedging is not a signal."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Making a street one-way removes the turns that hold traffic up at its junctions, and the flow through those junctions duly rises.",
+        "role": "support"
+      },
+      {
+        "text": "What rises with it is the distance a driver has to cover, because a destination that used to be a left turn away is now reached by going round three sides of a block.",
+        "role": "support"
+      },
+      {
+        "text": "Whether the journey has improved therefore depends on the mix: where trips are long and junctions many, the saving at each junction outweighs the detour, and where trips are short and local it does not.",
+        "role": "qualification"
+      },
+      {
+        "text": "A one-way system is thus not faster or slower in itself; it trades time at junctions for distance on the road, and which way the trade falls is a question about the journeys people are making.",
+        "role": "conclusion"
+      }
+    ]
+  },
+  "ideal_summary": "A one-way system exchanges delay at junctions for extra distance, so it is neither fast nor slow in itself and whether journeys improve depends on how long and how local the trips are.",
+  "builder": {
+    "prompt": "In one sentence: what does the paragraph say a one-way system exchanges, and what does it say decides whether the exchange is worth making?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence name both sides of the trade, the junction saving and the added distance?",
+        "kept": "Good. One side alone is the case for the scheme or the case against it; the paragraph's point is that there are two sides and they move in opposite directions.",
+        "drifted": "Naming only the detour gives you an argument against one-way streets. The paragraph is describing an exchange, not opposing it."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the condition, that the answer depends on trip length and the number of junctions?",
+        "kept": "Exactly. The verdict is conditional in the text, and a summary that decides the question has answered something the author left open.",
+        "drifted": "'One-way streets make journeys longer' is a flat claim. The paragraph says the arithmetic goes one way for long trips and the other way for short ones."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a cost or a standard of judgement the paragraph never uses, such as pollution or noise?",
+        "kept": "Well judged. The only currencies here are time at junctions and distance on the road.",
+        "drifted": "Extra distance does have other costs, and none of them is in this paragraph, which measures the trade in the two units it named."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "One-way streets lengthen journeys overall, because the distance a driver adds by going round a block outweighs whatever time is saved at the junctions on the way.",
+      "B": "Flow through the junctions does rise, but a one-way system trades that saving for distance, so whether journeys improve depends on the trips being made.",
+      "C": "Taking the turns out of a street lets far more traffic through its junctions, which is why measured flow rises whenever a busy street is made one-way.",
+      "D": "Although the saving at each junction is real enough, one-way systems should be judged by the pollution the extra distance creates rather than by the time drivers lose."
+    },
+    "correct": "B",
+    "explanation": {
+      "paragraph_meaning": "One-way streets work by deleting the turns that jam a junction, and the traffic through the junction moves better as a result. The cost is that drivers now travel further, because somewhere that used to be one left turn away has to be approached round three sides of a block. So there are two effects pulling opposite ways, and which wins depends on the journeys. A long trip that crosses many junctions collects the saving many times and pays the detour once; a short local trip pays the detour and collects almost nothing. The paragraph therefore refuses to call the arrangement fast or slow, and describes it as a trade whose outcome is set by the pattern of trips.",
+      "correct_reasoning": "The correct option keeps both halves of the exchange, junction delay against road distance, and keeps the condition the third sentence supplies, that the answer turns on trip length and the number of junctions crossed. The last sentence says a one-way system is not faster or slower in itself, so a summary that names a winner has decided what the paragraph deliberately left open.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph says the detour outweighs the saving only where trips are short and local, and that the saving wins where trips are long and junctions many. This option takes one branch of a stated condition and reports it as the general result.",
+          "seductive_element": "The detour is the vivid, aggrieved detail that readers remember, and a summary that reaches a verdict feels more useful than one that lists conditions.",
+          "thinking_mistake": "Converting a conditional conclusion into a flat one, because the condition reads like hedging rather than like content."
+        },
+        {
+          "option": "C",
+          "archetype": "evidence_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "Flow rising at junctions is the first step of the chain, and the paragraph adds the distance that rises with it before drawing any conclusion. On its own it reports the case for one-way systems, not the paragraph's account of them.",
+          "seductive_element": "It is unambiguously supported by the opening sentence, and verifiable support is what a nervous reader looks for when the options are close.",
+          "thinking_mistake": "Choosing the option one can confirm fastest, rather than the one that covers the whole movement of the paragraph."
+        },
+        {
+          "option": "D",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph weighs time at junctions against distance on the road and proposes no standard of judgement at all. Pollution appears nowhere, and conceding that the junction saving is real does not license replacing the author's two currencies with a third.",
+          "seductive_element": "It grants the paragraph's own mechanism and then supplies the modern criterion a reader expects a discussion of traffic to arrive at.",
+          "thinking_mistake": "Judging an arrangement by the consideration one brings to it, instead of reporting the consideration the text actually used."
+        }
+      ],
+      "reading_habit": "When the last sentence says something is not X or Y in itself, the summary has to stay conditional. Look for the clause naming what the answer depends on."
+    }
+  },
+  "mentor": {
+    "challenge": "Two effects pull in opposite directions here. One option picks a winner; the paragraph says who wins depends on something.",
+    "takeaway": "A scheme that speeds up every junction can still slow down the journey, and which happens is a question about the journeys."
+  }
+}

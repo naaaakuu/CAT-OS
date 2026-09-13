@@ -1,0 +1,175 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0061",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 90,
+    "genre": "psychology",
+    "difficulty": "medium",
+    "difficulty_numeric": 5,
+    "tier": "advanced",
+    "bible_level": "advanced",
+    "title": "The Wording That Went",
+    "theme": "why the sentences people quote for decades are not evidence of stronger memory but material whose meaning lives in its form",
+    "estimated_time_sec": 95,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "phenomenon_mechanism_significance",
+    "apex": {
+      "claim": "Memory keeps the interpretation and discards the wording, so sentences quoted for decades are not cases of unusually strong memory but cases in which the wording is the meaning and cannot be discarded without it.",
+      "scope": "Ordinary memory for sentences and the apparent exceptions to it; the claim explains the exceptions rather than denying that wording is ever retained.",
+      "certainty": "hedged",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": true,
+      "marker": "But"
+    },
+    "difficulty_dials": {
+      "abstraction": 4,
+      "syntax": 3,
+      "turn_subtlety": 4,
+      "distractor_closeness": 4,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 3,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "the likelier reading",
+      "nothing special about the rememberer",
+      "an ordinary case of it",
+      "happens to live in its form"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "inference_control",
+      "evidence_vs_thesis"
+    ],
+    "mission": "watch_the_turn",
+    "learning_objective": "carry a paragraph past the reading it calls obvious to the reading it calls likelier, and keep the hedge that word carries",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "lang.contrast_marker",
+      "sum.certainty_kept",
+      "arg.causal_claim",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival is the option that reads quoted jokes and insults as proof that memory holds wording when the material matters enough. The paragraph states that reading and labels it the obvious one before offering the likelier one, in which the joke's wording is retained because it is the meaning rather than because the rememberer is doing anything unusual. The option denying that memory keeps wording at all overshoots the whole argument, which exists to explain the cases where wording is kept. The option about repetition concedes that a joke cannot survive a changed word and then supplies a mechanism, frequent retelling, that the paragraph never mentions and does not need, since its explanation requires nothing special about the rememberer at all.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about memory for meaning and for wording; no specific study or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "An advanced item whose turn is a re-description rather than a contradiction. Families: structure, certainty, addition. The conceding distractor is the one that adds a mechanism."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "Minutes after hearing a sentence we can report what it said and not how it said it.",
+        "role": "setup"
+      },
+      {
+        "text": "Memory stores the interpretation rather than the input: the words are the route to a meaning, and once the meaning has arrived the route stops being maintained.",
+        "role": "support"
+      },
+      {
+        "text": "But there are sentences people quote for decades, a joke, an insult, two lines of a song, and the obvious reading is that these are feats of unusually strong memory.",
+        "role": "concession"
+      },
+      {
+        "text": "The likelier reading is that in such sentences the wording is the meaning: alter a word of the joke and the joke is gone, so the form cannot be dropped without dropping the content, and nothing special about the rememberer is required.",
+        "role": "thesis"
+      },
+      {
+        "text": "What looks like an exception to the way memory works turns out to be an ordinary case of it, applied to material whose meaning happens to live in its form.",
+        "role": "restatement"
+      }
+    ]
+  },
+  "ideal_summary": "Memory keeps meaning and lets wording go, so the lines people quote for decades are not stronger memory but material in which the wording is the meaning and cannot be dropped separately.",
+  "builder": {
+    "prompt": "In one sentence: how does the paragraph explain the sentences people can quote word for word after many years?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence explain the exception by the material, rather than by the rememberer?",
+        "kept": "Good. The whole point is that nothing unusual is happening in the head; what is unusual is the sentence, whose meaning cannot be separated from its words.",
+        "drifted": "Saying such lines are remembered better puts the difference in the person. The paragraph puts it in the material and says so explicitly."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the difference between the obvious reading and the likelier one?",
+        "kept": "Well held. The author offers an explanation as more probable, not as proved, and a summary that announces the fact has added confidence the text withheld.",
+        "drifted": "The paragraph names one reading obvious and prefers another as likelier. Turning the preference into a demonstration overstates a careful sentence."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you supplied a mechanism the paragraph never offers, such as repetition?",
+        "kept": "Well judged. Only one explanation is on the table, and it needs nothing besides the inseparability of form and content in that kind of sentence.",
+        "drifted": "Frequent retelling is a plausible cause and appears nowhere here, and it quietly reinstates the idea that something special is going on in the rememberer."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "The jokes, insults and song lines that people quote for decades show that memory does hold wording exactly when the material matters enough to the hearer.",
+      "B": "Memory does not keep the wording of a sentence, only the meaning it carried, so a quotation offered from memory should be read as a paraphrase.",
+      "C": "A joke does not survive the changing of a word, but such lines stay with us because they are retold so often, and repetition is what fixes wording.",
+      "D": "Memory keeps meaning and drops wording, so lines quoted for decades are not stronger memory but material whose meaning cannot be had without its words."
+    },
+    "correct": "D",
+    "explanation": {
+      "paragraph_meaning": "Very soon after hearing something you can say what it meant but not how it was phrased, because what memory files is the interpretation, not the words that produced it. Against this stands an obvious objection: people quote jokes, insults and song lyrics exactly, decades later. The paragraph says the likelier explanation is not that these memories are stronger but that these sentences are different. In a joke the wording is the meaning, so throwing away the form would throw away the content, and the words stay because the meaning is made of them. Nothing special is happening in the rememberer. The apparent exception is the ordinary rule operating on unusual material.",
+      "correct_reasoning": "The correct option keeps both the rule and the re-description that follows the turn: memory keeps meaning, and the quoted lines are explained by what kind of sentence they are rather than by any extra power in the person quoting them. It says the meaning cannot be had without the words, which is the paragraph's reason for the wording surviving.",
+      "distractors": [
+        {
+          "option": "A",
+          "archetype": "concession_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "This is the reading the paragraph calls obvious and then declines. Its explanation places the difference in the rememberer, and the paragraph says nothing special about the rememberer is required.",
+          "seductive_element": "It is the natural first thought, it is stated in the text before the correction, and it accounts for the same evidence.",
+          "thinking_mistake": "Stopping at the objection a paragraph raises against itself, because the answer to it arrives in a sentence that looks like a restatement."
+        },
+        {
+          "option": "B",
+          "archetype": "tendency_to_universal",
+          "secondary_archetype": null,
+          "why_wrong": "The paragraph exists to explain cases in which wording is retained, so a claim that memory simply does not keep wording contradicts the very phenomenon under discussion.",
+          "seductive_element": "It states the paragraph's opening rule in its strongest form, and strength can look like fidelity when a summary has to be short.",
+          "thinking_mistake": "Hardening a general tendency into an absolute, and so denying the exception the paragraph was written to account for."
+        },
+        {
+          "option": "C",
+          "archetype": "information_addition",
+          "secondary_archetype": null,
+          "why_wrong": "Repetition is never mentioned. The explanation offered is that the wording is the meaning in such sentences, which is why it cannot be discarded, and this option replaces that account with a different one.",
+          "seductive_element": "It concedes the paragraph's own test, that a changed word kills the joke, and then supplies the mechanism most readers would guess at.",
+          "thinking_mistake": "Filling an explanatory gap from general knowledge when the paragraph has already filled it differently."
+        }
+      ],
+      "reading_habit": "When a paragraph names a reading 'obvious' and then offers another, the second is the claim. The first has been quoted in order to be answered."
+    }
+  },
+  "mentor": {
+    "challenge": "An objection is raised in the middle of this paragraph and answered in the next sentence. One option is the objection.",
+    "takeaway": "The lines you can still quote are not better remembered; they are sentences that cannot be paraphrased without being destroyed."
+  }
+}

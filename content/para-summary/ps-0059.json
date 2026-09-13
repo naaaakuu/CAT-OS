@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "meta": {
+    "id": "ps-0059",
+    "type": "ps",
+    "version": 1,
+    "status": "accepted",
+    "quality_score": 87,
+    "genre": "medicine-health",
+    "difficulty": "easy",
+    "difficulty_numeric": 2,
+    "tier": "foundation",
+    "bible_level": "foundation",
+    "title": "The Morning of the Discharge",
+    "theme": "why risk in a hospital gathers at the joins between teams rather than inside them, and where effort should therefore go",
+    "estimated_time_sec": 65,
+    "format": {
+      "option_count": 4,
+      "response": "MCQ",
+      "negative_marking": false,
+      "format_verified": "2026-09: recent CAT papers set Para Summary among the non-negative verbal questions; re-verify against each new official paper"
+    },
+    "architecture": "observation_explanation_generalization",
+    "apex": {
+      "claim": "Because a discharge moves a patient between people who never meet, everything the ward knew but never wrote down is lost at that moment, so risk gathers at the joins rather than inside the departments and effort should go to the handover.",
+      "scope": "The transfer of a patient between teams, and where effort to reduce harm is best spent; the claim is about joins, not about the competence of either team.",
+      "certainty": "mixed",
+      "stance": "corrective"
+    },
+    "turn": {
+      "present": false,
+      "marker": null
+    },
+    "difficulty_dials": {
+      "abstraction": 2,
+      "syntax": 2,
+      "turn_subtlety": 1,
+      "distractor_closeness": 2,
+      "live_options": 2,
+      "stance_subtlety": 2,
+      "qualifier_density": 2,
+      "domain_load": 2
+    },
+    "load_bearing": [
+      "often",
+      "never meet",
+      "at the joins",
+      "should count for more"
+    ],
+    "separating_element": null,
+    "dna_traits": [
+      "main_idea_detection",
+      "certainty_reading",
+      "compression_skill"
+    ],
+    "mission": "match_ideas_not_words",
+    "learning_objective": "match an option to the paragraph's idea rather than to its vocabulary, when a wrong option is built from the paragraph's own words",
+    "reasoning_patterns": [
+      "sum.central_vs_supporting",
+      "sum.minor_detail_dropped",
+      "sum.certainty_kept",
+      "arg.causal_claim",
+      "sum.no_addition"
+    ],
+    "quality": {
+      "status": "reviewed",
+      "adversarial_review": "The live rival repeats the paragraph's opening in the paragraph's own words and hardens it: the hour a stay ends is the most dangerous of the stay. The text says 'often', and its argument is about where risk gathers rather than about which hour tops a league table. The option built from the stopped tablet, the daughter and the stairs takes the illustrative list for the finding; the list is there to show what a written summary cannot carry. The option about keeping patients longer concedes that a discharge loses unwritten knowledge and then recommends a different intervention altogether, one aimed at the ward rather than at the join the paragraph identifies.",
+      "blind_solve": null
+    },
+    "source": {
+      "publication": "original",
+      "url": null,
+      "author": null,
+      "date_accessed": "2026-09-13",
+      "usage_note": "Original composition in CAT register for CAT OS. General reasoning about handovers and hospital discharge; no specific institution, study or text adapted. Personal study only."
+    },
+    "date_added": "2026-09-13",
+    "batch_id": "batch-ps-003",
+    "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md); batch-ps-003",
+    "reviewer_notes": "A foundation item on a handover. Families: structure, certainty, addition. Key and one distractor both prescribe, and one distractor concedes, so neither shape is a signal."
+  },
+  "paragraph": {
+    "sentences": [
+      {
+        "text": "The most dangerous hour of a hospital stay is often the one in which the stay ends.",
+        "role": "setup"
+      },
+      {
+        "text": "A discharge moves a patient from people who have watched him for a week to people who will read about him in a paragraph, and the two sets never meet.",
+        "role": "support"
+      },
+      {
+        "text": "Everything the ward knew and never wrote down stops there: the tablet the patient quietly gave up taking, the daughter who does the cooking, the stairs.",
+        "role": "example"
+      },
+      {
+        "text": "Harm therefore gathers at the joins rather than inside the departments, and an hour spent on the handover should count for more than an hour spent on either side of it.",
+        "role": "thesis"
+      }
+    ]
+  },
+  "ideal_summary": "Because a discharge passes a patient between teams that never meet, what the ward knew and never recorded is lost there, so harm collects at the joins and the handover deserves the effort.",
+  "builder": {
+    "prompt": "In one sentence: where does the paragraph say harm in a hospital collects, and what does it say follows for where effort should go?",
+    "checks": [
+      {
+        "id": "core",
+        "ask": "Does your sentence say why the join is dangerous, rather than only that discharge is?",
+        "kept": "Good. The reason is that two sets of people never meet, so the knowledge that was never written down has nowhere to go.",
+        "drifted": "Naming the dangerous hour repeats the observation. The paragraph explains it, and the explanation is what makes the conclusion about effort follow."
+      },
+      {
+        "id": "certainty",
+        "ask": "Did you keep the word 'often', or has your sentence made this the most dangerous hour outright?",
+        "kept": "Well held. The author is describing where risk gathers, not crowning a single hour, and the hedge keeps the claim about the pattern.",
+        "drifted": "An unhedged claim is a larger one, and the argument does not need it: a tendency is enough to move the effort."
+      },
+      {
+        "id": "addition",
+        "ask": "Have you added a remedy the paragraph does not give, such as longer stays?",
+        "kept": "Well judged. The only recommendation made is about where an hour of effort is best spent, and it points at the handover.",
+        "drifted": "Keeping patients longer treats the ward as the problem. The paragraph puts the problem between the ward and whatever comes next."
+      }
+    ]
+  },
+  "question": {
+    "stem": "Which option best captures the essence of the paragraph?",
+    "options": {
+      "A": "Harm in a hospital gathers where care is handed on rather than within the wards, so hospitals should count an hour on the handover for more than an hour elsewhere.",
+      "B": "A discharge does lose knowledge that was written down nowhere, but hospitals should keep patients in longer, at least where the household at home is unreliable.",
+      "C": "The hour in which a hospital stay ends is the most dangerous hour of that stay, because nobody on either side of a discharge has met the other.",
+      "D": "What a ward knows and never writes down, from a tablet quietly given up to the stairs at home, is lost at the moment a patient is sent out of it."
+    },
+    "correct": "A",
+    "explanation": {
+      "paragraph_meaning": "Leaving hospital is often the riskiest part of being in one. The reason is structural rather than personal: the people who have watched the patient for a week hand him to people who will meet him as a paragraph, and those two groups never speak. So everything the ward learned without writing it down, the tablet the patient stopped taking, the daughter who cooks, the flight of stairs waiting at home, simply stops at the door. That puts the danger in the join rather than in either department, which is why an hour spent improving the handover is worth more than an hour spent improving the care on either side of it.",
+      "correct_reasoning": "The correct option keeps the location of the risk, the join rather than the ward, and keeps the weighting the paragraph draws from it, an hour on the handover counting for more than an hour on either side rather than replacing it. It also avoids promoting the illustrative list into the claim and avoids hardening the paragraph's 'often' into a universal.",
+      "distractors": [
+        {
+          "option": "B",
+          "archetype": "prescriptive_swap",
+          "secondary_archetype": null,
+          "why_wrong": "The one recommendation in the paragraph puts the effort into the handover. Keeping patients longer aims at the ward instead, and conceding that a discharge loses unwritten knowledge does not make that the author's proposal.",
+          "seductive_element": "It accepts the paragraph's mechanism and then offers a humane remedy, so it reads like the practical conclusion of a sympathetic reader.",
+          "thinking_mistake": "Substituting a plausible response for the one the author named, because both are addressed to the same problem."
+        },
+        {
+          "option": "C",
+          "archetype": "certainty_inflation",
+          "secondary_archetype": null,
+          "why_wrong": "The opening sentence says the last hour is often the most dangerous, and the argument is about where risk collects, not about ranking hours. Dropping the word 'often' asserts something the paragraph carefully did not.",
+          "seductive_element": "It echoes the first sentence almost exactly and adds the confidence a reader expects from a summary that has understood the point.",
+          "thinking_mistake": "Taking a hedged observation as a firm one because the rest of the paragraph argues for it energetically."
+        },
+        {
+          "option": "D",
+          "archetype": "example_as_thesis",
+          "secondary_archetype": null,
+          "why_wrong": "The tablet, the daughter and the stairs are an illustration of what an unwritten record cannot carry. The paragraph's claim is about where harm gathers and what follows for effort, and neither survives in this option.",
+          "seductive_element": "It reuses the paragraph's most memorable words, and an option built from the text's own vocabulary feels like a faithful summary.",
+          "thinking_mistake": "Matching a summary to the words a paragraph used rather than to the claim those words were used to make."
+        }
+      ],
+      "reading_habit": "When an option reuses a paragraph's vocabulary word for word, check the claim rather than the words. Familiar wording is the cheapest kind of resemblance."
+    }
+  },
+  "mentor": {
+    "challenge": "One option is made almost entirely of the paragraph's own words. Ask whether it is making the paragraph's point.",
+    "takeaway": "Risk collects where responsibility changes hands, and the two hands rarely meet."
+  }
+}
