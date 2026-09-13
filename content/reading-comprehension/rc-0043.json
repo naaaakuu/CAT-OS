@@ -69,13 +69,13 @@
       "scope.condition"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q1: the live rival makes an interest in the belief the trigger for the explanation mattering; the passage anticipates that substitution and blocks it — 'What is doing the work here is not the impurity of his motive. It is the insensitivity of the process' — and adds that an interested party who followed the evidence is in no difficulty. Q2: the rival reads the phrase as having run out of arguments; the surrounding sentences say the demand for a cause 'arrives only after the verdict', so the disagreement is settled rather than exhausted. Q3 (rewritten): the live rival is the option restating the second paragraph's observation about when people ask for explanations — the passage does assert it, which is exactly why a reader matching content rather than testing dependence stops there; negate it, let people ask about origins as readily when they agree, and the coin flip is still a coincidence and the coincidence still not a reason, so the third paragraph never leaned on it. The key is the step the paragraph takes in silence, from 'the route he took gave him nothing' to 'he has nothing': deny it, allow reasons he never used to support what he believes, and the paid man may be perfectly well placed after all, leaving no case in which a causal story bears on standing. The motive option stays tempting because the paid believer opens the paragraph, but 'not the impurity of his motive' refuses it in the next breath, and the third option's claim about every explicable belief contradicts the first paragraph. Q4: the rival calls origin questions always rhetorical, which the passage's own 'nine times in ten' and its whole third paragraph refuse.",
+      "status": "reviewed",
+      "adversarial_review": "Three readings now run the length of the paper. The shadow is the motive reading: what damages a belief is the believer's stake in it, so the paid man is the model and interest is the test. It holds an option in every question (Q1 'whenever the believer had an interest', Q2 'his interest rather than his reasoning', Q3 'only if the believer stood to gain', Q4 the account of self-interest corrupting belief) and the third paragraph blocks it in two sentences placed immediately after the example that invites it: 'What is doing the work here is not the impurity of his motive. It is the insensitivity of the process', followed by an interested party who looked hard at the evidence and is 'in no difficulty whatever'. The second rival keeps the passage inside its second paragraph and reads the whole as an exposure of a familiar fallacy and of the bad faith with which the causal question is asked; it is refused by the hedge 'nine times in ten' and by two paragraphs spent building the exception and turning it into a test. The third rival takes the exception for a general licence and concludes that origins bear on standing after all, so that assessing a belief should include inquiring into its production; the first paragraph forbids it — every belief has a history, 'the correct ones included' — and the fourth paragraph says most explanations offered in argument fail the test and are therefore 'worth nothing'. Q3 remains the hardest item, because the motive option is drawn from the paragraph's own first example; the negation test settles it, since the paragraph survives intact when motive is removed and collapses when reasons unused by the believer are allowed to support his belief. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 4,
         "total": 4,
-        "notes": "full agreement"
+        "notes": "full agreement Options rebuilt against an explicit shadow thesis (a coherent rival reading carried across every question in the passage) so that the option sets no longer form a single consistent clique; the item awaits a re-solve. A second pass then removed the strength asymmetry two blind readers named as the residual channel: every distractor is now hedged no more strongly than its key, and where the passage itself asserts something flatly the key carries the absolute, so that the most cautious option is no longer reliably the answer. A third pass closed four key-to-key paraphrase and entailment leaks between questions, replaced the true options of the NOT item with framing rather than mechanism, and removed two distractors that hardening had made true. A fourth pass repaired two distractors that hardening had made defensible (an inference option entailed on a causal reading, and a purpose option with no false half) and removed a shape cue from the NOT item."
       }
     },
     "vocab_extracted": [
@@ -116,7 +116,7 @@
         "inf.vs_speculation",
         "arg.qualification"
       ],
-      "target_mistake": "replacing the passage's condition about the process with a condition about the believer's motive or interest, which the third paragraph explicitly refuses",
+      "target_mistake": "replacing the passage's condition about the process with a condition about the believer's motive, treating every explicable origin as damaging, or reading the second paragraph's observation as a rule about questioners",
       "prediction_target": "Before the options the learner should be able to say: what matters is whether the route to the belief would have given a different answer had the facts differed, so any safe inference will be about routes rather than about motives.",
       "difficulty": {
         "inference_depth": 3,
@@ -129,31 +129,31 @@
       ],
       "stem": "Which of the following can be inferred from the passage?",
       "options": {
-        "A": "Two people who hold the same belief for different reasons may not be equally entitled to it.",
-        "B": "A belief whose origin can be explained is, for that reason, less well supported than one that cannot.",
-        "C": "A person who cannot say why they hold a belief has no justification for continuing to hold it.",
+        "A": "A belief may be true and still be one its holder has no right to.",
+        "B": "A belief whose origin can be explained is, for that reason, in some doubt.",
+        "C": "A demand for the causes of a belief is a sign that the questioner has no argument left.",
         "D": "An explanation bears on a belief's standing whenever the believer had an interest in its being true."
       },
       "correct": "A",
       "estimated_time_sec": 85,
       "explanation": {
-        "expert_notice": "The passage puts the whole weight on the route rather than the belief. A belief reached by a process that would have delivered it anyway is a coincidence if true; a belief reached by looking at the evidence is not. Since two people can reach the same belief by those two different routes, entitlement is a property of the route.",
-        "correct_reasoning": "The correct option follows directly from that. The man who believes what a coin decided and the man who examined the evidence may hold the identical belief, yet the passage says the first has only a coincidence and the second is 'in no difficulty whatever'. If entitlement tracks the route and routes can differ while the belief is the same, then sameness of belief does not guarantee sameness of standing.",
+        "expert_notice": "The third paragraph separates two things that ordinarily travel together. Of the man who believes what a coin decided: 'His belief may still be true, but its being true would now be a coincidence, and a coincidence is not a reason.'",
+        "correct_reasoning": "The correct option is that separation stated generally. Truth is a property of what is believed; entitlement depends on the route by which it was reached, and the passage gives a case where the second fails while the first may hold. Nothing stronger is claimed: the option does not say such a belief is false, or likely to be false, only that being true would not by itself give its holder a right to it.",
         "passage_anchor": "rc-0043-p3",
-        "question_type_note": "Inference questions on a qualified claim are decided by the qualification. Hold the author's condition in its exact form, and check whether the option is stated in those terms or in some looser ones.",
-        "reading_habit": "When an author distinguishes a right case from a wrong case, write the discriminating feature down in the author's own words. Most wrong options swap that feature for a neighbouring one that sounds equivalent.",
+        "question_type_note": "An inference question is decided by what the sentences force. Where a passage insists that two properties can come apart, the safe inference is the one that lets them come apart and adds nothing about how often.",
+        "reading_habit": "When an author says a thing 'may still be true, but', write down what survives the but and what does not. The options will offer you the surviving half with the lost half quietly restored.",
         "distractors": [
           {
             "option": "B",
             "trap_type": "opposite_direction",
-            "why_wrong": "This is exactly the inference the first paragraph forbids: every belief has a history, the correct ones included, so having an explicable origin cannot count against a belief.",
-            "seductive_element": "The passage spends its third paragraph showing that an origin sometimes damages a belief, and a reader who takes the exception for the rule lands here."
+            "why_wrong": "This is exactly the inference the first paragraph forbids: every belief has a history, the correct ones included, so having an explicable origin cannot count against a belief at any strength.",
+            "seductive_element": "The passage spends its third paragraph showing that an origin sometimes damages a belief, and the softened wording makes the exception sound like a general tendency."
           },
           {
             "option": "C",
-            "trap_type": "unsupported_inference",
-            "why_wrong": "Nothing in the passage requires a believer to be able to narrate their own route; the test is about what the route would have done had the facts differed, which is a fact about the process rather than about the believer's self-knowledge.",
-            "seductive_element": "The passage is full of people being asked to account for their beliefs, so an obligation to account for oneself seems to be in the air."
+            "trap_type": "overstatement",
+            "why_wrong": "The passage says the demand arrives 'nine times in ten' after the verdict, which is a claim about how often and about what has already been settled, not about what the questioner has run out of. The third paragraph then describes a case in which the causal question is asked properly and bears on the belief's standing, which a sign of argumentative bankruptcy could not do.",
+            "seductive_element": "It is the worldly reading of the passage's most worldly paragraph, and the sentence about a question that sounds like curiosity and works as a dismissal invites the harder version."
           },
           {
             "option": "D",
@@ -172,7 +172,7 @@
         "word.context_clue",
         "comp.paraphrase"
       ],
-      "target_mistake": "reading the phrase as a description of exhaustion or withdrawal rather than of a judgement that has already been made",
+      "target_mistake": "reading the phrase as a description of exhaustion, of a verdict about the man's motives, or of his being unpersuadable, rather than of a judgement already made about whether he is right",
       "prediction_target": "The learner should paraphrase from the sentence before it: the causal question arrives after the verdict, so the disagreement is over before the question is asked.",
       "difficulty": {
         "inference_depth": 2,
@@ -185,7 +185,7 @@
       "stem": "In the second paragraph, \"to have finished disagreeing with him\" most nearly means",
       "options": {
         "A": "to have exhausted every argument one had against him",
-        "B": "to have given up the attempt to change his mind",
+        "B": "to have decided that his interest rather than his reasoning is doing the work",
         "C": "to have already settled that he is wrong, leaving only the cause to be found",
         "D": "to have concluded that no argument could ever have persuaded him"
       },
@@ -206,9 +206,9 @@
           },
           {
             "option": "B",
-            "trap_type": "out_of_scope",
-            "why_wrong": "Nothing is said about wanting to change anybody's mind or abandoning the attempt; the sentence describes a shift in what the questioner is asking about, not a decision to stop trying.",
-            "seductive_element": "Asking about causes instead of reasons does look like disengagement, and the paragraph is about a kind of giving up."
+            "trap_type": "wrong_condition",
+            "why_wrong": "The sentence says what has been finished, and it is the disagreement: the verdict is in and only the cause is still wanted. Whether the cause turns out to be an interest, an upbringing or a bad experience at twenty is the next question, and the first paragraph lists all three as the sorts of answer a biography supplies.",
+            "seductive_element": "Interest is the most vivid of the passage's causes and the one its central example uses, so a reader may read the phrase forward into the answer rather than back into the verdict."
           },
           {
             "option": "D",
@@ -241,9 +241,9 @@
       ],
       "stem": "The argument of the third paragraph depends on which of the following assumptions?",
       "options": {
-        "A": "Every belief for which a causal explanation exists was produced by a process indifferent to the truth.",
+        "A": "A belief for which a causal explanation exists was produced by a process indifferent to the truth.",
         "B": "People ask for an explanation of a belief more readily when they reject it than when they share it.",
-        "C": "An explanation undermines a belief only if the believer stood to gain from holding that belief.",
+        "C": "An explanation undermines a belief when the believer stood to gain from holding it.",
         "D": "A belief gets no support from reasons that played no part in the believer's coming to hold it."
       },
       "correct": "D",
@@ -258,8 +258,8 @@
           {
             "option": "A",
             "trap_type": "extreme_language",
-            "why_wrong": "The paragraph only supposes a belief produced by a process that would have produced it anyway; it needs no claim about every explicable belief, and the first paragraph insists that every belief has a history, the correct ones included, so this contradicts the passage as well as overshooting it.",
-            "seductive_element": "It sounds like the bold general principle standing behind the paragraph, and strong-sounding statements read as foundations."
+            "why_wrong": "The paragraph supposes only a belief produced by a process that would have produced it anyway; it needs no claim about explicable beliefs in general, and the first paragraph insists that every belief has a history, the correct ones included, so this contradicts the passage as well as overshooting it.",
+            "seductive_element": "It reads as the general principle standing behind the paragraph, and generality is what an assumption is expected to have."
           },
           {
             "option": "B",
@@ -285,7 +285,7 @@
         "comp.function_over_words",
         "struct.qualification"
       ],
-      "target_mistake": "describing the passage by its liveliest paragraph, so that the exception drawn in the second half disappears from the account of what the passage is doing",
+      "target_mistake": "describing the passage by its liveliest paragraph, by the example its exception is built on, or by a programme it never proposes, so that the carefully bounded exception disappears from the account",
       "prediction_target": "The learner should be able to say: the passage defends a distinction, explains why it is habitually ignored, and then states with care the single case in which it does not apply.",
       "difficulty": {
         "inference_depth": 3,
@@ -300,7 +300,7 @@
       "options": {
         "A": "an exposure of a common fallacy, illustrated by the ways people dismiss opinions they dislike",
         "B": "a defence of a distinction, followed by a precise statement of the one case where it does not hold",
-        "C": "a demonstration that questions about the origins of beliefs are always rhetorical rather than genuine",
+        "C": "an argument that a belief's origins have no bearing on the question of its truth",
         "D": "a proposal to replace the assessment of beliefs with an inquiry into what produces them"
       },
       "correct": "B",
@@ -320,9 +320,9 @@
           },
           {
             "option": "C",
-            "trap_type": "wrong_structural_role",
-            "why_wrong": "The passage says nine times in ten, not always, and its third paragraph exists to describe the genuine version of the question; an author who thought such questions always rhetorical would have no exception to draw.",
-            "seductive_element": "The dismissive use of the question is described with such force that the hedge in front of it is easy to lose."
+            "trap_type": "overstatement",
+            "why_wrong": "The passage spends half its length denying exactly this. The third paragraph promises 'a real case in which a causal story bears on a belief's standing' and delivers it, and the fourth turns that case into a test worth applying. An account of the passage as an unqualified dismissal of origins removes the qualification the second half is built on.",
+            "seductive_element": "It is the first paragraph stated at full strength, and the first paragraph really does say that a belief's having a history tells us nothing about whether it is correct."
           },
           {
             "option": "D",

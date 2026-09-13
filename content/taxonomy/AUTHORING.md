@@ -84,6 +84,41 @@ not systematically the longest, the most hedged, the only one without
 "always"/"never", or the only one that reuses passage words. Vary answer
 positions freely; the corpus QC checks balance across the whole bank.
 
+## 2a. The option set must not contain the passage
+
+A reader was given seventeen passages from this corpus **with the passage text deleted** — stems and four options only — and answered eighty of eighty. Para-summaries with their paragraphs deleted: six of six. Chance is one in four.
+
+The cause is structural, and it is the deepest defect this corpus has had. Distractors are written per question to be wrong about the passage; keys are written to be right about it. So across one passage's questions the keys form a single mutually consistent reading and the distractors form none. Find the consistent column and you have every answer, having read nothing.
+
+### What does not fix it
+
+Carrying **one** coherent rival reading through every question — the obvious repair — was piloted on ten passages and rewrote sixty-five per cent of every option set. Text-free solving fell from 43/43 to 42/43. It fails for a reason worth knowing: a single rival carried through every question becomes *the most frequent idea in the pool*, and the most frequent idea is identifiably the rejected one. Subtraction replaces coherence. Two readers found this independently.
+
+### What does fix it
+
+**Symmetric columns.** Build three complete rival readings of the passage, each owning one option in **every** question, including the strengthen and weaken questions. All four columns then appear equally often, so neither coherence nor frequency selects anything, and only the text decides. In the pilot exactly one passage had this shape — by accident of its question mix — and every reader named it as the one where their method failed.
+
+It costs more than distractor repair because it is a **question-design** decision: it works only where questions are argument-level, and it is defeated by stacking global questions (main idea, purpose, title) on one passage, since a global key *is* a compressed abstract of the passage by definition of the type.
+
+### The types that leak structurally, and what to do
+
+- **not_true / except** — the three non-keyed options must each be true, so the item hands over three propositions about the passage. Rebuilt three times in the pilot at mechanism, framing and adverb level; it stayed a top-three cue every time. Use sparingly, and never put an EXCEPT and a strengthen question on the same passage: a statement that is a wrong strengthener is thereby proved inert, which is what the EXCEPT question tests.
+- **application** — the scenario in the stem must instantiate the passage's conditions, so the stem states the mechanism. Keep the stem's scenario thin and put the conditions in the options.
+- **main_idea / primary_purpose / title_selection** — the key is a compressed abstract. Not fixable by distractor work; limit these to one per passage.
+- **tone** — the only type that stayed at chance throughout. Register is the one thing options do not leak.
+- **vocabulary_in_context** — should be the safest and ranked fifth, because keys restated the argument. Define the word in its sentence; if a thesis-in-miniature belongs anywhere, put it in a *distractor*.
+
+### The cheap fixes, which do work
+
+Confirmed dead by four independent readers after the pilot: option length as a cue, key-to-key paraphrase across questions, stem shape, shared opening clauses, "the most cautious option is the answer", and the vocabulary key that restates the thesis. Apply all of these always; they are cheap.
+
+### How to measure
+
+```
+node tools/blind-solve.mjs strip <type> --out <dir> --no-text <ids…>
+```
+then a fresh reader that sees only that file. But do not read the raw score alone: a four-to-six question option pool *is* in some measure a paraphrase of its passage, and a frontier reader may stay high however well the item is built. Report three things — the score, the reader's per-passage confidence, and **how many complete readings it could assemble**. In the pilot the score moved by one mark while the reader's self-estimate fell from 38–41 to 31 and it began reporting passages where it had to guess between several complete readings. Those two are the honest signal.
+
 ## 3. Explanations teach a method
 
 Never: *"Option B is correct because it is supported by the passage."*

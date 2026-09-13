@@ -62,13 +62,13 @@
       "struct.contrast"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q1: the finalist is the option saying a certificate 'guarantees its conclusion only to a reader who has understood it'; it dies on p2's definition, 'which anyone can check without understanding it'. The option about the decisive idea living in one or two steps is true of most proofs but describes where the explanation sits, not what a certificate is. Q2: a strong candidate argues for 'describe the difference between a proof that certifies and one that explains', because that distinction is the passage's most memorable move; but it is the diagnosis of paragraph 2 and the passage goes on to prescribe a way of reading in paragraph 3, so the purpose must include the remedy. The teacher-facing option fails because p2 says a proof 'must be' a certificate to count as a proof, and the remedy is addressed to readers. Q3: the option that routine steps 'no longer need to be checked' is the rival; p3 defers the checking to the second pass rather than dropping it.",
+      "status": "reviewed",
+      "adversarial_review": "Three readings of the complaint now compete across the three questions. The shadow puts the fault in the writing: proofs fail to persuade because they are set down as certificates, so the remedy is for authors to write the explanation in. It holds an option in every question (Q1 'leaving the idea behind it unwritten', Q2 the advice to teachers, Q3 the proof whose decisive step is marked) and it dies on two sentences: the explanation in most proofs 'lives in one or two steps' of the proof itself, so nothing is missing from the page; and the passage ends 'The certificate has not changed. The reader has.' The second rival puts the fault in checking: verification and understanding are held to be incompatible, so a reader should stop verifying. The third paragraph refuses it by keeping the verification and moving it — 'Only on the second pass verify the routine steps, quickly, as one checks arithmetic' — and the first paragraph's student understands nothing while checking everything, which shows misdirection rather than incompatibility. The third rival treats the passage as claiming that a chain of steps is only a proof when it explains; the second paragraph says the opposite in so many words, that a proof 'must be' a certificate to count as a proof. Q2 remains the live question, since the contrast is the passage's most memorable idea and a description of it is nearly a purpose; what settles it is the final paragraph, which is instructions for a reader and would be unmotivated if the piece existed to draw the distinction. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 3,
         "total": 3,
-        "notes": "full agreement"
+        "notes": "full agreement Options rebuilt against an explicit shadow thesis (a coherent rival reading carried across every question in the passage) so that the option sets no longer form a single consistent clique; the item awaits a re-solve. A second pass then removed the strength asymmetry two blind readers named as the residual channel: every distractor is now hedged no more strongly than its key, and where the passage itself asserts something flatly the key carries the absolute, so that the most cautious option is no longer reliably the answer. A third pass closed four key-to-key paraphrase and entailment leaks between questions, replaced the true options of the NOT item with framing rather than mechanism, and removed two distractors that hardening had made true. A fourth pass repaired two distractors that hardening had made defensible (an inference option entailed on a causal reading, and a purpose option with no false half) and removed a shape cue from the NOT item."
       }
     },
     "vocab_extracted": [
@@ -104,7 +104,7 @@
         "comp.paraphrase",
         "struct.definition"
       ],
-      "target_mistake": "attaching the definition of the explanation to the certificate, or accepting a finalist that reverses the one clause ('without understanding it') that defines the term",
+      "target_mistake": "attaching the definition of the explanation to the certificate, or adding to the definition a demand about checking or a complaint about what the writing leaves out",
       "prediction_target": null,
       "difficulty": {
         "inference_depth": 1,
@@ -117,8 +117,8 @@
       "stem": "According to the passage, a proof considered as a 'certificate' is one that",
       "options": {
         "A": "makes clear why its conclusion could not have been otherwise",
-        "B": "places its decisive idea in one or two steps among many routine ones",
-        "C": "guarantees its conclusion only to a reader who has understood it",
+        "B": "has to be verified step by step before its conclusion may be relied on",
+        "C": "guarantees its conclusion while leaving the idea behind it unwritten",
         "D": "can be checked, step by step, by a reader who does not understand it"
       },
       "correct": "D",
@@ -138,15 +138,15 @@
           },
           {
             "option": "B",
-            "trap_type": "true_but_irrelevant",
-            "why_wrong": "The passage does say that in most proofs the explanation lives in one or two steps, but that is a fact about where the persuasive idea sits, not the definition of a certificate, which is about checkability.",
-            "seductive_element": "It is true of the passage and uses its words 'decisive' and 'routine'."
+            "trap_type": "necessary_as_sufficient",
+            "why_wrong": "The defining clause says who is able to check a certificate, not what has to be done to it: 'a chain of steps that guarantees the conclusion, which anyone can check without understanding it'. The guarantee is in the chain, which is why the passage's own remedy leaves the routine steps unverified through a whole first reading and the conclusion still stands.",
+            "seductive_element": "Checking is what the word certificate suggests, and the student of the first paragraph does check every line, so the requirement feels like part of the definition."
           },
           {
             "option": "C",
-            "trap_type": "opposite_direction",
-            "why_wrong": "The defining clause is 'which anyone can check without understanding it'; this option makes understanding a condition of the guarantee, which reverses the one feature that makes a certificate a certificate.",
-            "seductive_element": "It keeps 'guarantees the conclusion' from the definition and changes only the last clause."
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "The passage puts the idea inside the certificate rather than outside it: in most proofs 'the explanation lives in one or two steps' of the proof, the moment a new object is introduced or a quantity rewritten. Nothing has been left unwritten; what the writing fails to do is mark which step matters.",
+            "seductive_element": "It sounds like the passage's complaint, and a reader who has met the phrase 'written as certificates' will supply the idea that something was therefore left out."
           }
         ]
       }
@@ -160,7 +160,7 @@
         "struct.problem_solution",
         "scope.too_narrow"
       ],
-      "target_mistake": "taking the passage's memorable distinction (certificate versus explanation) for its purpose, when the distinction is the diagnosis that serves a remedy",
+      "target_mistake": "taking the passage's memorable distinction for its purpose, or relocating the remedy from how a proof is read to how it is written or whether it should be checked at all",
       "prediction_target": "The learner should say: the author wants to explain why a proof that is valid can still leave a reader unconvinced, and to offer a way of reading proofs that fixes it.",
       "difficulty": {
         "inference_depth": 2,
@@ -173,37 +173,37 @@
       ],
       "stem": "The author's main purpose in the passage is to",
       "options": {
-        "A": "explain why a valid proof can leave its reader unpersuaded, and suggest a way of reading that repairs this",
-        "B": "argue that mathematics teachers should write their proofs as explanations rather than as certificates",
-        "C": "show that students who check every step of a proof with equal care are wasting most of their effort",
-        "D": "describe the difference between a proof that certifies a result and a proof that explains why it holds"
+        "A": "explain why a valid proof can leave its reader unpersuaded, and say how one ought to be read instead",
+        "B": "argue that mathematics teachers should write their proofs as explanations and not merely as certificates to be checked",
+        "C": "show that a reader who checks a proof carefully may still be unable to say why it works",
+        "D": "describe the difference between certifying a result and explaining it, and show what a reader gives up to get the second"
       },
       "correct": "A",
       "estimated_time_sec": 60,
       "explanation": {
-        "expert_notice": "The three paragraphs have three jobs and each announces itself: 'the complaint' (a problem), 'The trouble is' (a diagnosis), 'The remedy is' (a prescription). A purpose statement has to reach the third paragraph, because that is where the passage was going.",
-        "correct_reasoning": "The correct option has the verbs of all three paragraphs: it explains the problem (a valid proof that does not persuade), it covers the diagnosis (why this happens) and it includes the remedy (a way of reading). No other option contains the prescription, and the passage devotes its final paragraph to nothing else.",
+        "expert_notice": "Each paragraph supplies a verb: the first states a complaint, the second explains it, the third prescribes. A purpose has to account for the paragraph a passage ends on, and this one ends on instructions.",
+        "correct_reasoning": "The correct option has the verbs of all three paragraphs: it names the problem (a valid proof that does not persuade), it covers the diagnosis (why this happens, given where the explanation sits) and it includes the remedy, which is a way of reading rather than a way of writing. The passage spends its final paragraph on nothing else, and closes by locating the change in the reader: 'The certificate has not changed. The reader has.'",
         "passage_anchor": "rc-0040-p3",
-        "question_type_note": "A purpose question asks what the author is doing across the whole passage, not what the most striking paragraph contains; in a problem–diagnosis–remedy passage the purpose always includes the remedy.",
+        "question_type_note": "Purpose questions are decided by the paragraph a passage ends on. A recommendation in an option is not a warning sign where the passage itself recommends something.",
         "reading_habit": "Before reading the options, finish the sentence 'The author wrote this in order to…' with a verb for each paragraph; then reject any option that leaves out the paragraph the passage ends on.",
         "distractors": [
           {
             "option": "B",
             "trap_type": "prescriptive_leap",
-            "why_wrong": "The passage's advice is addressed to readers, not writers, and paragraph 2 says a proof 'must be' a certificate to count as a proof at all; the author never asks anyone to write proofs differently.",
-            "seductive_element": "The passage does contain a recommendation, and the teacher of paragraph 1 makes teachers seem like its audience."
+            "why_wrong": "The passage's advice is addressed to readers, not writers, and the second paragraph says a proof 'must be' a certificate to count as a proof at all; the author never asks anyone to write proofs differently, and the closing line puts the change in the reader.",
+            "seductive_element": "The passage does contain a recommendation, and the teacher of the first paragraph makes teachers seem like its audience."
           },
           {
             "option": "C",
             "trap_type": "too_narrow",
-            "why_wrong": "This is one sentence of the diagnosis, and it misstates it: the passage says the checking 'succeeds', so the effort is not wasted; it is misdirected, which is why the remedy redistributes attention rather than removing it.",
-            "seductive_element": "It restates the paragraph's most quotable complaint about equal care."
+            "why_wrong": "This is the first paragraph, and the first paragraph is the complaint the passage sets out to account for. A purpose has to cover the diagnosis in the second paragraph and the remedy in the third, and a passage that existed to report the student's predicament would have no reason to end with instructions for reading a proof twice.",
+            "seductive_element": "It is entirely true of the passage and states its opening scene exactly, which makes it feel like a safe, modest answer rather than an incomplete one."
           },
           {
             "option": "D",
-            "trap_type": "wrong_structural_role",
-            "why_wrong": "The distinction is real and central, but it is the diagnosis the author uses on the way to a remedy; a passage whose purpose was to describe the distinction would not end with instructions for reading twice.",
-            "seductive_element": "The certificate–explanation contrast is the passage's most memorable idea, and describing it feels like the whole point."
+            "trap_type": "wrong_condition",
+            "why_wrong": "Nothing is given up. The remedy keeps the whole of the certificate and moves it: 'Only on the second pass verify the routine steps, quickly, as one checks arithmetic.' The reader ends with the verification he would have had and the understanding he would not have had, which is why the passage closes 'The certificate has not changed. The reader has.'",
+            "seductive_element": "The first pass does tell a reader to check nothing, which sounds like a trade being proposed, and a purpose that names a cost sounds more candid than one that promises a repair."
           }
         ]
       }
@@ -217,8 +217,8 @@
         "inf.vs_speculation",
         "elim.attractive_unsupported"
       ],
-      "target_mistake": "turning 'check nothing on the first pass' into 'never check', or importing a plausible belief about proof length that the passage never states",
-      "prediction_target": "The learner should predict that any correct inference must follow from the certificate being checkable without understanding, or from the two-pass remedy, and must not go beyond what those sentences say.",
+      "target_mistake": "turning the first pass into a licence never to check, expecting the remedy to work on the page rather than on the reader, or making explanation a condition of proof-hood",
+      "prediction_target": "The learner should predict that a safe inference follows from the explanation living in one or two steps while the rest are routine, and must not add a permission or a change to the page that the passage never grants.",
       "difficulty": {
         "inference_depth": 2,
         "distractor_similarity": 3,
@@ -229,36 +229,36 @@
       ],
       "stem": "Which of the following can be inferred from the passage?",
       "options": {
-        "A": "Once the decisive step of a proof has been understood, its routine steps no longer need to be checked.",
-        "B": "The routine steps of a proof can be verified without grasping the idea that makes the proof work.",
-        "C": "Shorter proofs persuade more readily than longer ones, since they contain fewer routine steps.",
-        "D": "A chain of steps counts as a proof only if it explains why its conclusion could not have been otherwise."
+        "A": "Understanding the decisive step of a proof removes the need to check its routine ones.",
+        "B": "The attention a proof deserves is not spread evenly across its steps.",
+        "C": "A proof written so that its decisive step is marked would persuade a reader the same proof otherwise would not.",
+        "D": "A chain of steps counts as a proof when it explains why its conclusion could not have been otherwise."
       },
       "correct": "B",
       "estimated_time_sec": 70,
       "explanation": {
-        "expert_notice": "Two sentences carry the inference: the certificate 'anyone can check without understanding it' (p2), and the routine steps are verified on the second pass 'quickly, as one checks arithmetic' (p3). Checking is a different activity from understanding, and the routine steps are what get checked.",
-        "correct_reasoning": "If a certificate can be checked by someone who does not understand it, and the routine steps are the part of the proof that is merely checked, then the routine steps can be verified without grasping the decisive idea. That is exactly the situation of the student in paragraph 1, who checked everything and understood nothing. The option adds no strength and no new claim.",
+        "expert_notice": "One sentence in the second paragraph carries the whole diagnosis: in most proofs 'the explanation lives in one or two steps — the moment where a new object is introduced, or a quantity is rewritten in a form nobody asked for — while the remaining steps are routine'.",
+        "correct_reasoning": "The correct option is what that sentence entails. If the persuasive work is concentrated in one or two steps and the rest are routine, then the steps do not merit equal attention, which is exactly the mistake the passage attributes to the student who 'checks every step with equal care' and so gives the routine steps more than they need and the decisive step less than it deserves. The option claims only that the deserved attention is uneven, which is the passage's premise rather than an addition to it.",
         "passage_anchor": "rc-0040-p2",
-        "question_type_note": "An inference question rewards the option that the passage's own sentences force together, and punishes the options that push a sentence one step past what it says or import an outside belief.",
-        "reading_habit": "For each option, find the sentence it depends on and ask whether the option says more than that sentence; 'no longer need', 'only if' and a comparison the passage never made are the usual additions.",
+        "question_type_note": "An inference question is decided by what the sentences force, not by what they make plausible. The usual additions are a permission the passage never granted, a condition it never set, and a change to the page where the passage changed the reader.",
+        "reading_habit": "For each option, find the sentence it depends on and ask whether the option says more than that sentence. Watch for a removed obligation, for a redefinition, and for an option that moves the remedy from the reader to the text.",
         "distractors": [
           {
             "option": "A",
             "trap_type": "opposite_direction",
-            "why_wrong": "Paragraph 3 says to verify the routine steps on the second pass; the remedy postpones the checking and makes it quick, it does not remove it.",
-            "seductive_element": "The first pass 'check nothing' instruction is vivid, and a reader can remember it as the whole method."
+            "why_wrong": "The third paragraph keeps the verification and moves it: 'Only on the second pass verify the routine steps, quickly, as one checks arithmetic.' The method redistributes attention rather than removing any of it, and a proof whose routine steps went unchecked would not have been certified at all.",
+            "seductive_element": "The instruction to check nothing on the first reading is vivid, and a reader who remembers the method as one movement will let the understanding stand in for the rest."
           },
           {
             "option": "C",
-            "trap_type": "common_knowledge_intrusion",
-            "why_wrong": "Nothing in the passage compares proofs by length; its claim is about where the explanation sits within a proof, not about how many steps surround it.",
-            "seductive_element": "It sounds sensible, and 'fewer routine steps' borrows the passage's vocabulary."
+            "trap_type": "unsupported_inference",
+            "why_wrong": "The remedy asks the reader to do something marking cannot do for him: find the step 'that could not have been guessed', then 'ask what that step buys and why the author needed it'. Being told which line matters supplies neither question nor answer, and the passage puts the change where it can be checked, in its last two sentences: 'The certificate has not changed. The reader has.'",
+            "seductive_element": "It is the natural engineering response to the diagnosis, and the passage's own account of where the explanation lives makes marking the step sound like the obvious fix."
           },
           {
             "option": "D",
             "trap_type": "passage_language_shifted",
-            "why_wrong": "Paragraph 2 says the reverse: a proof must be a certificate to count as a proof, and the explanation is what persuades, not what qualifies a chain of steps as a proof.",
+            "why_wrong": "The second paragraph says the reverse: a proof must be a certificate to count as a proof, and the explanation is what persuades rather than what qualifies a chain of steps as a proof. Explaining is offered as the thing most proofs do badly while remaining proofs.",
             "seductive_element": "It reuses two of the passage's phrases, 'count as a proof' and 'could not have been otherwise', in a single confident sentence."
           }
         ]

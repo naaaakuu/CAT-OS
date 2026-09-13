@@ -64,13 +64,13 @@
       "arg.causal_claim"
     ],
     "quality": {
-      "status": "verified",
-      "adversarial_review": "Q1: the live rival for the exception is the sociology-not-theology option, which a reader may file under the third stage because the extension to godless societies feels like the sociological moment; but p2 says in so many words that the reversal 'turned the study of the sacred from theology into sociology'. The god-ownership option is p1's understanding, which p2 exists to reverse. Q2: the strongest wrong case is 'remains the best account for societies that still worship gods'; it dies on the defenders' 'always' — if the prohibition was always the phenomenon, the god-based account was a mistaken description even where gods were believed in. The critics' 'stopped finding anything' is about the third step and belongs to the other side. Q3: the option stating that prohibition, not divinity, creates sacredness is the tempting one because it is the passage's boldest sentence; it drops the first stage and, more decisively, presents as settled what the final paragraph leaves 'disputed'.",
+      "status": "reviewed",
+      "adversarial_review": "The EXCEPT question no longer works as a key to the passage. Its false option used to be the first understanding restated, which told a blind reader what the original account had been and supplied the premise the next question needed; the false option is now a misplacement of the second understanding's own reach, confining a general reversal to the godless societies of the third step, and a reader who has conflated the two stages will take it. Three readings then compete in the two questions that follow. The shadow is the critics' verdict adopted as the author's: a concept that finds the untouchable everywhere has stopped identifying anything. It dies on the passage's last word on the matter, which is that the question 'remains disputed' and that the defenders have a reply, reported at equal length and left standing. The second rival adopts the defenders instead and treats the extension as a recovery of what was always there, which the same sentence refuses in the same way. The third rival takes the methodological turn — asking priests replaced by observing prohibitions — for the story the passage is telling; that turn is one consequence of the second stage, offered in a single sentence, and it accounts for neither the extension nor the dispute. Every option in the main-idea question now names the disagreement, so mentioning it no longer identifies the answer; what separates them is whether the disagreement is reported or settled, and which stages the option covers. Q2's live rival remains the critics' objection, which is the most quotable line in the final paragraph and belongs to the wrong side of it. Strength parity was imposed across the set afterwards: no distractor in this file is quantified more strongly than its key, because a single overreaching option was found to condemn the whole reading it belonged to without the passage being read.",
       "blind_solve": {
         "solver": "blind reviewer (fresh session, no key)",
         "agreed": 3,
         "total": 3,
-        "notes": "full agreement"
+        "notes": "full agreement Options rebuilt against an explicit shadow thesis (a coherent rival reading carried across every question in the passage) so that the option sets no longer form a single consistent clique; the item awaits a re-solve. A second pass then removed the strength asymmetry two blind readers named as the residual channel: every distractor is now hedged no more strongly than its key, and where the passage itself asserts something flatly the key carries the absolute, so that the most cautious option is no longer reliably the answer. A third pass closed four key-to-key paraphrase and entailment leaks between questions, replaced the true options of the NOT item with framing rather than mechanism, and removed two distractors that hardening had made true. A fourth pass repaired two distractors that hardening had made defensible (an inference option entailed on a causal reading, and a purpose option with no false half) and removed a shape cue from the NOT item."
       }
     },
     "vocab_extracted": [
@@ -107,7 +107,7 @@
         "struct.history_of_an_idea",
         "meta.attention"
       ],
-      "target_mistake": "assigning a claim to the wrong stage of the idea's history, so that the first understanding's god-ownership looks like part of the second, or the second's turn to sociology looks like part of the third",
+      "target_mistake": "assigning a claim to the wrong stage of the idea's history, so that the extension performed at the third step looks like a limit on the second, or the second's turn to sociology looks like part of the third",
       "prediction_target": null,
       "difficulty": {
         "inference_depth": 2,
@@ -119,19 +119,19 @@
       ],
       "stem": "According to the passage, the second understanding of the sacred, introduced by the founders of the comparative study of religion, held each of the following EXCEPT:",
       "options": {
-        "A": "that sacred things share no quality of their own, only how their community treats them",
-        "B": "that a thing is sacred because of the particular god to whom it belongs",
-        "C": "that the prohibitions around a thing constitute its sacredness rather than follow from it",
-        "D": "that the sacred was a subject for sociology rather than for theology"
+        "A": "that what sacred things have in common is not a quality but the way their community treats them",
+        "B": "that the reversal it proposed was meant for societies that had given up their gods",
+        "C": "that the prohibitions around a thing constitute its sacredness",
+        "D": "that one could learn what a society held sacred without consulting its priests"
       },
       "correct": "B",
       "estimated_time_sec": 70,
       "explanation": {
-        "expert_notice": "The passage is a history in three stages, and each paragraph is one stage. The second stage is paragraph 2, whose claims are: no shared quality, only shared treatment; prohibition constitutes sacredness; the study moves from theology to sociology. Belonging to a god is the first stage's answer, the very thing paragraph 2 'reversed'.",
-        "correct_reasoning": "Three options paraphrase the three claims of paragraph 2. The remaining one, that a thing is sacred because of the god it belongs to, is paragraph 1's understanding: 'to ask what made something sacred was to ask which god it belonged to'. The second understanding was defined by rejecting exactly that, so it is the exception.",
+        "expert_notice": "The passage is three stages long and every stage has a boundary. The second understanding is a reversal of the question — what makes a thing sacred is how a community treats it — and it is made about sacred things in general, by scholars comparing societies that had gods. The extension to societies without them is a separate step, introduced as 'The third step'.",
+        "correct_reasoning": "Three of the options are the second stage's own claims: that sacred things share no quality of their own, that prohibition constitutes sacredness rather than following from it, and that the subject had thereby become sociology rather than theology. The remaining one puts a restriction on the second stage that belongs to the history of the third: the reversal was proposed about the sacred as such, and it is precisely because it made no reference to gods that the godless cases could later be brought under it. Confining it to societies that had given up their gods would leave the third step with nothing to extend.",
         "passage_anchor": "rc-0042-p2",
-        "question_type_note": "An EXCEPT question in a history-of-an-idea passage is a stage-matching task: tick each option against the paragraph that owns the stage named in the stem, and the exception is the claim that belongs to a different stage.",
-        "reading_habit": "When a passage tells the history of an idea, write one line per stage as you read: who, what changed, what it implied. Detail questions will then offer you the right claim from the wrong stage.",
+        "question_type_note": "An EXCEPT question on a staged history is a test of where claims sit, not of what is true. The false option is usually true of some stage, and wrong only about which one.",
+        "reading_habit": "When a passage tells the history of an idea, write one line per stage as you read: who, what changed, what it implied, and how wide it reached. Detail questions will then offer you the right claim from the wrong stage, or the right stage with the wrong reach.",
         "distractors": [
           {
             "option": "A",
@@ -147,9 +147,9 @@
           },
           {
             "option": "D",
-            "trap_type": "temporal_distortion",
-            "why_wrong": "The move to sociology is made in paragraph 2, 'This reversal turned the study of the sacred from theology into sociology', not in the third stage; a reader who associates sociology with the godless societies of paragraph 3 misplaces the claim.",
-            "seductive_element": "The extension to flags and founding documents feels like the sociological moment."
+            "trap_type": "passage_language_shifted",
+            "why_wrong": "Paragraph 2 ends on exactly this: 'To learn what a society holds sacred, one no longer asked its priests; one looked for what it would not allow to be touched, spoken or mixed.' It is the method the reversal made available.",
+            "seductive_element": "It is phrased as a possibility rather than as a doctrine, and a reader listing the second understanding's claims may not count a change of method among them."
           }
         ]
       }
@@ -175,9 +175,9 @@
       ],
       "stem": "The defenders' reply in the final paragraph implies that, in their view, the original understanding of the sacred",
       "options": {
-        "A": "widened the category until it no longer distinguished anything from anything else",
+        "A": "widened the category until it ceased to distinguish one thing from another",
         "B": "was a superstition which the comparative study of religion has discredited",
-        "C": "remains the right account for societies that still worship gods",
+        "C": "remains the right account wherever a society's priests can still be asked",
         "D": "mistook an explanation of the phenomenon for the phenomenon itself"
       },
       "correct": "D",
@@ -204,8 +204,8 @@
           {
             "option": "C",
             "trap_type": "wrong_condition",
-            "why_wrong": "The defenders say the prohibition was 'always' the phenomenon, which leaves no society, god-worshipping or not, in which the god-based account describes the phenomenon rather than its explanation.",
-            "seductive_element": "It seems fair-minded to let each account keep its own territory, and the passage's godless examples suggest the new account is for the new cases."
+            "why_wrong": "The defenders say the prohibition was 'always' the phenomenon, which leaves no society, god-worshipping or not, in which the god-based account describes the phenomenon rather than its explanation. Whether there are priests to ask bears on how the sacred is found, not on what it is.",
+            "seductive_element": "It seems fair-minded to let each account keep its own territory, and the passage's own contrast between asking priests and observing prohibitions supplies the territory."
           }
         ]
       }
@@ -220,7 +220,7 @@
         "scope.too_narrow",
         "inf.author_vs_reported"
       ],
-      "target_mistake": "taking the boldest sentence of the second stage for the thesis, or adopting one side of the closing dispute as the author's conclusion",
+      "target_mistake": "adopting one side of the closing dispute as the author's conclusion, or offering one stage of the history as the whole of it",
       "prediction_target": "The learner should be able to say: the sacred began as what belongs to the gods, became whatever a community sets apart and forbids, was then found in societies without gods, and whether that was a discovery or a redefinition is still argued.",
       "difficulty": {
         "inference_depth": 2,
@@ -233,10 +233,10 @@
       ],
       "stem": "Which of the following best states the main idea of the passage?",
       "options": {
-        "A": "Sacredness is produced by prohibition rather than by divinity, and so every society, whether or not it keeps gods, turns out to possess untouchable things of its own.",
+        "A": "The sacred was a matter of prohibition before it was a matter of gods, so extending the category to godless societies recovered something the older account had hidden, as its defenders maintain.",
         "B": "The sacred was redefined from what belongs to the gods to whatever a community sets apart and forbids, which extended the category to godless societies and left its status disputed.",
-        "C": "Because the modern concept of the sacred discovers sacredness in every society it examines, including those without gods, it has stopped identifying anything at all.",
-        "D": "The study of religion advanced once scholars stopped asking priests what was sacred and began observing what their societies refused to allow to be touched, spoken or mixed."
+        "C": "The sacred was redefined so widely that it now finds untouchable things in every society, which is why critics hold that the concept has stopped identifying anything.",
+        "D": "The study of religion advanced when scholars stopped asking priests what was sacred and began observing what a society would not allow to be touched, a change still argued over."
       },
       "correct": "B",
       "estimated_time_sec": 75,
@@ -249,21 +249,21 @@
         "distractors": [
           {
             "option": "A",
-            "trap_type": "too_narrow",
-            "why_wrong": "This states the content of the second and third stages as an established fact; it omits the first stage and, more importantly, the closing paragraph, where the author treats the extension to every society as 'disputed' rather than as a result.",
-            "seductive_element": "It is the passage's boldest and most memorable claim, stated in the passage's own confident register."
+            "trap_type": "reported_view_as_author",
+            "why_wrong": "This is the defenders' reply promoted to a finding. The passage gives it as one side of a dispute it declines to settle — 'Whether this was a discovery or merely a redefinition remains disputed' — and a main idea that decides the question reports something the passage does not say.",
+            "seductive_element": "It is the passage's boldest claim in the passage's own confident register, and the defenders get the last word, which readers hear as the author's."
           },
           {
             "option": "C",
             "trap_type": "reported_view_as_author",
-            "why_wrong": "This is the critics' objection in the final paragraph, which the author reports alongside the defenders' reply without adopting either; the passage's stance is that the matter 'remains disputed'.",
-            "seductive_element": "It is the last objection the reader meets, and it sounds like a conclusion."
+            "why_wrong": "This is the critics' objection, and attributing it to critics does not save it: an option that makes the critics' charge the shape of the whole passage still leaves out the first stage, the reversal, and the reply that the passage reports beside it.",
+            "seductive_element": "It names its source honestly, which makes it look like a careful summary rather than a partisan one, and the objection it reports is the most quotable line in the piece."
           },
           {
             "option": "D",
             "trap_type": "example_as_thesis",
-            "why_wrong": "The turn from asking priests to observing prohibitions is one consequence of the second stage, offered in paragraph 2 to illustrate the reversal; it says nothing of the extension to godless societies or of the dispute, and 'advanced' is an evaluation the author never makes.",
-            "seductive_element": "It is the paragraph's most concrete image and reads like a moral for the whole story."
+            "why_wrong": "The turn from asking priests to observing prohibitions is one consequence of the second stage, offered in a single sentence to illustrate the reversal; it says nothing of the extension to godless societies, and 'advanced' is an evaluation the author never makes.",
+            "seductive_element": "It is the passage's most concrete image and reads like a moral for the whole story, and it now carries the dispute clause that a reader may be using to identify the answer."
           }
         ]
       }
