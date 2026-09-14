@@ -84,8 +84,8 @@ export function cleanValleyName(raw) {
 export const OPENING = Object.freeze([
   'Oh. You came.',
   'I’m Wick. I keep the lamps around here.',
-  'This is your village. What’s left of it, anyway.',
-  'Ada’s been waiting at the Reading House. Go and see her.',
+  'This is your village. A house, a reading house, and Mira across the way.',
+  'Mira needs a Book for the school. Ada binds them. Go and see her.',
 ]);
 
 export const NAMING = Object.freeze({
@@ -106,9 +106,11 @@ export const DAWN = Object.freeze([
 
 /** Lines for the first loop, by onboarding step. */
 export const STEP_LINES = Object.freeze({
-  'first-read': 'Ada needs a Page. Pages come from reading.',
-  deliver: 'Those are yours to deliver. Tap Ada.',
-  build: 'Coins build things. Bo wants a patch of ground.',
+  'first-read': 'Ada binds Pages into Books. Pages come from reading. Tap the Reading House.',
+  binding: 'Ada’s binding. Give her a moment.',
+  collect: 'It’s on the shelf. Take it.',
+  deliver: 'Mira’s waiting at the board by the door. Give it to her.',
+  build: 'Coins build things. Bo wants a patch of ground for a garden.',
   name: 'It should have a name now.',
 });
 

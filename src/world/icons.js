@@ -14,10 +14,12 @@ import { thing } from './economy.js';
 
 /** Older mark names, mapped to the village's glyphs. */
 const GLYPH = Object.freeze({
-  tree: 'root', flower: 'bloom', koi: 'bloom', lantern: 'bloom', book: 'page', vine: 'root', workshop: 'thread', cottage: 'house',
-  road: 'road', sprout: 'sprout', star: 'star', gear: 'gear', amber: 'bloom', ink: 'page', thread: 'thread', ember: 'star',
+  tree: 'root', flower: 'bloom', koi: 'bloom', lantern: 'bloom', vine: 'root', workshop: 'thread', cottage: 'house',
+  road: 'road', sprout: 'sprout', star: 'star', gear: 'gear', amber: 'bloom', ember: 'star',
   valley: 'house', lock: 'lock', check: 'check', hammer: 'hammer', coin: 'coin', page: 'page', bloom: 'bloom', root: 'root',
-  scroll: 'scroll', board: 'board', heart: 'heart', bell: 'bell', clock: 'clock', cat: 'cat', arrow: 'arrow',
+  scroll: 'scroll', board: 'board', heart: 'heart', bell: 'bell', clock: 'clock', cat: 'cat', arrow: 'arrow', book: 'book', seed: 'seed', ink: 'ink', cloth: 'cloth', thread: 'thread',
+  music: 'music', sun: 'sun', house: 'house',
+  pages: 'page', books: 'book', seeds: 'seed', blooms: 'bloom', roots: 'root', coins: 'coin',
 });
 
 /** One icon, as markup. */
@@ -28,7 +30,7 @@ export function icon(kind, { className = '', size = 18, alt = '' } = {}) {
 /** The icon for a place: its building's good, or the building itself. */
 export function placeIcon(slug, opts = {}) {
   const b = buildingById(PLACE_BUILDING[slug] ?? slug);
-  if (b?.good) return icon(b.good, opts);
+  if (b?.raw) return icon(b.raw, opts);
   if (b?.id === 'hearth') return icon('house', opts);
   if (b?.id === 'road') return icon('road', opts);
   if (b?.id === 'market') return icon('board', opts);

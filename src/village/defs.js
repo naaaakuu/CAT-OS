@@ -2,96 +2,180 @@
  * defs.js — the VARC village, as data.
  *
  * Everything the village is made of is declared here and nowhere else:
- * the goods, the buildings and their levels, the people who work in them,
- * the plots of land that can be opened, the houses neighbours move into,
- * and the shapes of the orders villagers post. The map painter, the
- * screens and the economy all read this one file, so a second world (a
- * Data Interpretation harbour, a Quant quarry) is another file shaped
- * like this one, not another game.
+ * the goods and the chain that makes them, the buildings and their levels,
+ * the people who work in them, the neighbours who live here and post
+ * orders, the plots of land that can be opened, and the shapes of the
+ * stages the village grows through. The map painter, the screens and the
+ * economy all read this one file, so a second world (a Data Interpretation
+ * harbour, a Quant quarry) is another file shaped like this one.
+ *
+ * THE CHAIN, in one breath:
+ *   learning makes a RAW good (Pages, Seeds, Roots, Thread) that goes to
+ *   the building that wanted it → the worker there CRAFTS it into a MADE
+ *   good (Books, Blooms, Ink, Cloth) you can see on the shelf → you collect
+ *   it → a neighbour with a reason is waiting for it on the order board →
+ *   delivering pays COINS → coins build, and the village grows.
  *
  * Coordinates are world units on a 1200 × 1200 map. `at` is where a
- * building's front door meets the ground.
+ * building's front wall meets the ground, at its middle.
  */
 
-import { PAL } from './art.js';
+import { PAL } from './brush.js';
 
-export const WORLD = Object.freeze({ id: 'varc', name: 'the village', W: 1200, H: 1200, home: { x: 600, y: 600 } });
+export const WORLD = Object.freeze({ id: 'varc', name: 'the village', W: 1200, H: 1200, home: { x: 600, y: 650 } });
 
 /* ------------------------------------------------------------------ */
 /* Goods and coins                                                     */
 /* ------------------------------------------------------------------ */
 
 /**
- * Four goods, one per learning building, each made only by one kind of
- * thinking. A finished activity makes one per star (a flawless run makes
- * one more), so "Ada needs 3 Pages" means "about one good passage".
+ * Eight goods in four chains. A raw good is what the learner's thinking
+ * makes — one per star, one more for a flawless run — and it goes straight
+ * to its building's queue. A made good is what the worker there turns it
+ * into, one for one, on a short clock; only made goods are traded.
  */
 export const GOODS = Object.freeze([
-  { key: 'pages', name: 'Pages', one: 'Page', glyph: 'page', building: 'reading', color: '#C9A961', price: 22, line: 'Made by reading a passage well.' },
-  { key: 'blooms', name: 'Blooms', one: 'Bloom', glyph: 'bloom', building: 'garden', color: PAL.bloom, price: 16, line: 'Made by learning words.' },
-  { key: 'roots', name: 'Roots', one: 'Root', glyph: 'root', building: 'roots', color: PAL.root, price: 20, line: 'Made by taking words apart.' },
-  { key: 'thread', name: 'Thread', one: 'Thread', glyph: 'thread', building: 'loom', color: PAL.thread, price: 24, line: 'Made by putting paragraphs in order.' },
+  { key: 'pages', name: 'Pages', one: 'Page', glyph: 'page', kind: 'raw', building: 'reading', color: '#C9A961', line: 'Made by reading a passage well. Ada binds them into Books.' },
+  { key: 'books', name: 'Books', one: 'Book', glyph: 'book', kind: 'made', building: 'reading', from: 'pages', color: PAL.book, price: 26, line: 'Bound at the Reading House from the Pages you read.' },
+  { key: 'seeds', name: 'Seeds', one: 'Seed', glyph: 'seed', kind: 'raw', building: 'garden', color: PAL.seed, line: 'Made by learning words. Bo grows them into Blooms.' },
+  { key: 'blooms', name: 'Blooms', one: 'Bloom', glyph: 'bloom', kind: 'made', building: 'garden', from: 'seeds', color: PAL.bloom, price: 18, line: 'Grown in the Word Garden from the Seeds you learned.' },
+  { key: 'roots', name: 'Roots', one: 'Root', glyph: 'root', kind: 'raw', building: 'roots', color: PAL.root, line: 'Made by taking words apart. Ines boils them into Ink.' },
+  { key: 'ink', name: 'Ink', one: 'Ink', glyph: 'ink', kind: 'made', building: 'roots', from: 'roots', color: PAL.ink, price: 24, line: 'Boiled at the Root Workshop from the Roots you dug.' },
+  { key: 'thread', name: 'Thread', one: 'Thread', glyph: 'thread', kind: 'raw', building: 'loom', color: PAL.thread, line: 'Made by putting paragraphs in order. Nell weaves it into Cloth.' },
+  { key: 'cloth', name: 'Cloth', one: 'Cloth', glyph: 'cloth', kind: 'made', building: 'loom', from: 'thread', color: PAL.cloth, price: 28, line: 'Woven at the Loom from the Thread you spun.' },
 ]);
 export const GOOD_KEYS = Object.freeze(GOODS.map((g) => g.key));
+export const RAW_KEYS = Object.freeze(GOODS.filter((g) => g.kind === 'raw').map((g) => g.key));
+export const MADE_KEYS = Object.freeze(GOODS.filter((g) => g.kind === 'made').map((g) => g.key));
 const GOOD_BY_KEY = new Map(GOODS.map((g) => [g.key, g]));
 export function good(key) { return GOOD_BY_KEY.get(key) ?? null; }
+/** The made good a raw good becomes, or null. */
+export function madeFrom(rawKey) { return GOODS.find((g) => g.from === rawKey) ?? null; }
 export const COINS = Object.freeze({ key: 'coins', name: 'Coins', one: 'Coin', glyph: 'coin', color: PAL.coin });
 
 /* ------------------------------------------------------------------ */
 /* The people                                                          */
 /* ------------------------------------------------------------------ */
 
+/** The workers: one per building, each with a look, a job, and things to say. */
 export const CHARACTERS = Object.freeze({
   wick: { id: 'wick', name: 'Wick', role: 'the cat who keeps the lamps', building: 'hearth' },
   ada: {
-    id: 'ada', name: 'Ada', role: 'the reader', building: 'reading',
-    look: { skin: '#F1C7A2', hair: '#4A2E1F', style: 'bun', top: '#D9603F', bottom: '#4E4A5C', apron: '#F7E9CB', prop: 'book' },
+    id: 'ada', name: 'Ada', role: 'the bookbinder', building: 'reading',
+    look: { skin: '#F1C7A2', hair: '#4A2E1F', style: 'bun', top: '#D9603F', bottom: '#4E4A5C', apron: '#F7E9CB', prop: 'book', eyes: '#3A5A2A' },
     idle: ['A passage is a small argument. Find the point and the rest falls in.', 'Read it once, closely. Twice is for checking.', 'The clock is part of the reading.'],
-    asks: ['I need Pages for the schoolhouse.', 'Someone is waiting on a letter.', 'The board outside is bare.'],
+    working: ['Binding. Give me a minute.', 'Pages in, Books out. That is the whole trade.'],
+    ready: ['Bound and on the shelf. Take them.', 'Your Books are ready.'],
+    asks: ['Bring me Pages and I will bind them.', 'The shelf is bare. Read something.'],
   },
   bo: {
     id: 'bo', name: 'Bo', role: 'the gardener', building: 'garden',
-    look: { skin: '#C68863', hair: '#2E2A2A', style: 'short', top: '#5FA36B', bottom: '#5B4636', hat: 'straw', prop: 'can' },
+    look: { skin: '#C68863', hair: '#2E2A2A', style: 'short', top: '#5FA36B', bottom: '#5B4636', hat: 'straw', prop: 'can', eyes: '#2A2A2A' },
     idle: ['Every word that sticks is a flower that stays.', 'Twins first. The look-alikes are where marks go missing.', 'Twelve words, then look up. That is a round.'],
-    asks: ['I could use Blooms for the window boxes.', 'The hives want flowers.', 'A wedding wants Blooms by the weekend.'],
+    working: ['Growing. They need a minute and some water.', 'Seeds go in, Blooms come up.'],
+    ready: ['Blooms are up. Cut them before they drop.', 'Your Blooms are ready.'],
+    asks: ['Bring me Seeds and I will grow them.', 'The beds are empty. Learn a few words.'],
   },
   ines: {
-    id: 'ines', name: 'Ines', role: 'the root-scholar', building: 'roots',
-    look: { skin: '#E8B48F', hair: '#B9B0A6', style: 'bun', top: '#5C8FBB', bottom: '#4E4A5C', glasses: true, prop: 'lens' },
+    id: 'ines', name: 'Ines', role: 'the ink-maker', building: 'roots',
+    look: { skin: '#E8B48F', hair: '#B9B0A6', style: 'bun', top: '#5C8FBB', bottom: '#4E4A5C', glasses: true, prop: 'mortar', eyes: '#3A4A6A' },
     idle: ['Take a word apart and a dozen open.', 'Prefix, root, suffix. Then the sentence settles it.', 'Ten roots, a thousand words.'],
-    asks: ['The apothecary is asking for Roots.', 'I want Roots to plant along the road.', 'The winter store is low on Roots.'],
+    working: ['Boiling down. Ink takes patience.', 'Roots in, Ink out. Do not rush it.'],
+    ready: ['Bottled. Take the Ink before it thickens.', 'Your Ink is ready.'],
+    asks: ['Bring me Roots and I will make Ink.', 'The kettle is cold. Dig a root family.'],
   },
   nell: {
     id: 'nell', name: 'Nell', role: 'the weaver', building: 'loom',
-    look: { skin: '#8D5B3B', hair: '#1E1B1B', style: 'curly', top: '#8E6DB8', bottom: '#3A3846', prop: 'spool' },
+    look: { skin: '#8D5B3B', hair: '#1E1B1B', style: 'curly', top: '#8E6DB8', bottom: '#3A3846', prop: 'shuttle', eyes: '#2A2A2A' },
     idle: ['Sentences in the wrong order. Find the thread.', 'The pronoun needs an owner. Start there.', 'One sentence never belonged. It shows itself.'],
-    asks: ['The flags want mending. Thread, please.', 'A new sail needs Thread.', 'The festival banners are frayed.'],
+    working: ['Weaving. The shuttle does not like to be hurried.', 'Thread in, Cloth out.'],
+    ready: ['Off the loom and folded. Take it.', 'Your Cloth is ready.'],
+    asks: ['Bring me Thread and I will weave it.', 'The loom is idle. Put a paragraph in order.'],
   },
   rafi: {
     id: 'rafi', name: 'Rafi', role: 'the merchant', building: 'market',
-    look: { skin: '#D19A73', hair: '#7A4A2A', style: 'short', top: '#F6C445', bottom: '#4E4A5C', hat: 'cap', prop: 'basket' },
-    idle: ['Orders on the board. Bring what they ask and the coins are yours.', 'Every order is somebody in the village.', 'Deliver, and the board fills again.'],
-    asks: [],
+    look: { skin: '#D19A73', hair: '#7A4A2A', style: 'short', top: '#F6C445', bottom: '#4E4A5C', hat: 'cap', prop: 'basket', eyes: '#3A2F2A' },
+    idle: ['More orders on the board, better prices. That is what a market does.', 'Every order is somebody in the village.', 'Deliver, and the board fills again.'],
+    working: [], ready: [], asks: [],
   },
 });
 
-/* Neighbours who post orders once they have moved in. */
+/**
+ * The neighbours: people with a house, a job and reasons. Every order on
+ * the board is one of them asking for a made good for something in their
+ * life. The first, Mira, lives here from the first minute; the rest move
+ * in as their houses are built, in this order.
+ */
 export const NEIGHBOURS = Object.freeze([
-  { name: 'Old Tomas', look: { skin: '#F5CBA7', hair: '#D8D3CC', style: 'bald', top: '#7C8797', bottom: '#4E4A5C', glasses: true } },
-  { name: 'Mira', look: { skin: '#B57A55', hair: '#2B2222', style: 'long', top: '#4EA7A0', bottom: '#3A3846' } },
-  { name: 'The schoolhouse', look: { skin: '#F5CBA7', hair: '#B86F3A', style: 'short', top: '#5C8FBB', bottom: '#4E4A5C' } },
-  { name: 'Hal', look: { skin: '#E8B48F', hair: '#7A4A2A', style: 'short', top: '#E08B6A', bottom: '#5B4636', hat: 'cap' } },
-  { name: 'Priya', look: { skin: '#D19A73', hair: '#1E1B1B', style: 'long', top: '#D9603F', bottom: '#3A3846' } },
-  { name: 'The ferryman', look: { skin: '#B57A55', hair: '#4A2E1F', style: 'short', top: '#7C8797', bottom: '#4E4A5C', hat: 'scarf' } },
-  { name: 'Wren', look: { skin: '#F1C7A2', hair: '#D9B26B', style: 'curly', top: '#8E6DB8', bottom: '#4E4A5C' } },
-  { name: 'The innkeeper', look: { skin: '#C68863', hair: '#2B2222', style: 'short', top: '#F6C445', bottom: '#5B4636', apron: '#F7E9CB' } },
+  {
+    id: 'mira', name: 'Mira', role: 'the schoolteacher',
+    look: { skin: '#B57A55', hair: '#2B2222', style: 'long', top: '#4EA7A0', bottom: '#3A3846', glasses: true, prop: 'satchel', eyes: '#2A2A2A' },
+    reasons: { books: ['for the schoolhouse shelf', 'for Friday’s reading lesson', 'as a prize for the class'], ink: ['for the slates', 'for the school register'], blooms: ['for the classroom window'], cloth: ['for the school’s curtains'] },
+    greet: 'Mira teaches at the schoolhouse across the water. She needs Books.',
+  },
+  {
+    id: 'tomas', name: 'Old Tomas', role: 'the ferryman',
+    look: { skin: '#F5CBA7', hair: '#D8D3CC', style: 'bald', beard: true, top: '#7C8797', bottom: '#4E4A5C', hat: 'cap', eyes: '#4A5A7A' },
+    reasons: { cloth: ['for a new sail', 'to patch the ferry’s awning'], books: ['for the ferry timetable', 'to read on the crossing'], ink: ['for the tide book'], blooms: ['for the ferry’s prow'] },
+    greet: 'Tomas runs the ferry. His sail is more patch than sail.',
+  },
+  {
+    id: 'hal', name: 'Hal', role: 'the innkeeper',
+    look: { skin: '#E8B48F', hair: '#7A4A2A', style: 'short', top: '#E08B6A', bottom: '#5B4636', apron: '#F7E9CB', eyes: '#3A2F2A' },
+    reasons: { blooms: ['for the inn’s tables', 'for a wedding at the inn'], books: ['for the guests’ shelf'], cloth: ['for the inn’s tablecloths'], ink: ['for the guest book'] },
+    greet: 'Hal keeps the inn, and the inn is always short of something.',
+  },
+  {
+    id: 'priya', name: 'Priya', role: 'the apothecary',
+    look: { skin: '#D19A73', hair: '#1E1B1B', style: 'braid', top: '#D9603F', bottom: '#3A3846', hat: 'scarf', eyes: '#2A2A2A' },
+    reasons: { ink: ['for the remedy labels', 'for the herbal'], blooms: ['for the tinctures'], books: ['for the herbal'], cloth: ['for bandages'] },
+    greet: 'Priya makes remedies, and labels every one of them.',
+  },
+  {
+    id: 'wren', name: 'Wren', role: 'the letter-carrier',
+    look: { skin: '#F1C7A2', hair: '#D9B26B', style: 'bob', top: '#5C8FBB', bottom: '#4E4A5C', hat: 'beret', prop: 'satchel', eyes: '#3A5A2A' },
+    reasons: { ink: ['for the letters', 'for the addresses'], cloth: ['for a winter coat', 'for the mailbag'], books: ['for the almanac'], blooms: ['for a letter that needs one'] },
+    greet: 'Wren carries the letters. Everyone here writes more than you would think.',
+  },
+  {
+    id: 'anselm', name: 'Anselm', role: 'the bridge-keeper',
+    look: { skin: '#B57A55', hair: '#4A2E1F', style: 'short', beard: true, top: '#4EA7A0', bottom: '#4E4A5C', hat: 'hood', eyes: '#2A2A2A' },
+    reasons: { cloth: ['for the festival flags', 'for the bridge banner'], books: ['for the bridge ledger'], ink: ['for the toll book'], blooms: ['for the bridge posts'] },
+    greet: 'Anselm keeps the bridge. Nobody remembers who built it.',
+  },
+  {
+    id: 'dara', name: 'Dara', role: 'the baker',
+    look: { skin: '#C68863', hair: '#C2452F', style: 'bun', top: '#F6C445', bottom: '#5B4636', apron: '#FBF5E8', eyes: '#3A2F2A' },
+    reasons: { blooms: ['for a wedding cake'], cloth: ['for aprons'], books: ['for the recipes'], ink: ['for the price board'] },
+    greet: 'Dara bakes. The whole village smells of it by seven.',
+  },
+  {
+    id: 'kit', name: 'Kit', role: 'the fisher',
+    look: { skin: '#8D5B3B', hair: '#2B2222', style: 'curly', top: '#7C8797', bottom: '#3A3846', prop: 'rod', eyes: '#2A2A2A' },
+    reasons: { cloth: ['for a net', 'for a new sail'], blooms: ['for a grave by the wood'], books: ['for the long winter'], ink: ['for the catch book'] },
+    greet: 'Kit fishes the pond and the river, and knows every fish by name.',
+  },
+  {
+    id: 'sunniva', name: 'Sunniva', role: 'the beekeeper',
+    look: { skin: '#F5CBA7', hair: '#B86F3A', style: 'long', top: '#E5B84A', bottom: '#4E4A5C', hat: 'straw', eyes: '#3A5A2A' },
+    reasons: { blooms: ['for the hives', 'for the honey stall'], cloth: ['for the veil'], books: ['for the bee book'], ink: ['for the jar labels'] },
+    greet: 'Sunniva keeps bees, which means she keeps flowers.',
+  },
+  {
+    id: 'oren', name: 'Oren', role: 'the carpenter',
+    look: { skin: '#D19A73', hair: '#4A2E1F', style: 'short', top: '#B57B48', bottom: '#4E4A5C', apron: '#7F5331', prop: 'hammer', eyes: '#3A2F2A' },
+    reasons: { cloth: ['for the workshop awning'], books: ['for the plans'], ink: ['for the measurements'], blooms: ['for his mother'] },
+    greet: 'Oren builds. Half the roofs here are his.',
+  },
 ]);
+export function neighbourById(id) { return NEIGHBOURS.find((n) => n.id === id) ?? null; }
 
 /* ------------------------------------------------------------------ */
 /* Buildings                                                           */
 /* ------------------------------------------------------------------ */
 
 const std = (line, test) => ({ line, test });
+const H3 = 3 * 3600e3, H2 = 2 * 3600e3;
 
 /**
  * A building has levels. Level 1 is what stands when the building is
@@ -101,100 +185,106 @@ const std = (line, test) => ({ line, test });
  * record must already show — so nothing in the village is bought without
  * having been earned.
  *
- * `effect.helper` is automation: once the learner has proved the skill,
- * the building's worker makes a small trickle of its good on their own,
- * up to a cap. It is never enough to replace learning, and it is never
- * offered before the mastery that justifies it.
+ * `craft` is the building's clock: seconds per unit at each level, and a
+ * faster first unit so the first loop never waits. `effect.helper` is
+ * automation: once the learner has proved the skill, the worker makes a
+ * raw unit on their own now and then, up to a cap of uncollected goods.
+ * It is never enough to replace learning, and never offered before the
+ * mastery that justifies it.
  */
 export const BUILDINGS = Object.freeze([
   {
     id: 'hearth', name: 'The Hearth', kind: 'home', character: 'wick', art: 'hearth',
-    at: { x: 600, y: 640 }, hit: { w: 96, h: 76 },
-    line: 'Home. Wick keeps the lamps; you keep the rest.',
+    at: { x: 600, y: 650 }, hit: { w: 132, h: 112 },
+    line: 'Home. Wick keeps the lamps; you keep the rest. The order board stands by the door.',
     levels: [
       { n: 1, line: 'A small house with a good roof.' },
       { n: 2, name: 'A chimney', cost: { coins: 90 }, standing: std('Deliver 2 orders.', (v) => v.ordersDone >= 2), line: 'Stone and a good flue, so the house can hold a fire.', after: 'Smoke rises from the Hearth on every day you practise.' },
       { n: 3, name: 'Flower boxes', cost: { coins: 240, blooms: 3 }, standing: std('Master 30 words.', (v, s) => s.meadow.mastered + s.pond.mastered + s.thicket.mastered >= 30), line: 'Boxes under the windows, planted from the Word Garden.', after: 'Flowers hang under the Hearth’s windows, and a dog has moved in.' },
-      { n: 4, name: 'A lamp by the door', cost: { coins: 520, thread: 3, pages: 3 }, standing: std('Hold a seven-day streak.', (v, s) => s.hearth.streak.best >= 7), line: 'Iron and glass, lit every dusk.', after: 'A lantern burns by the Hearth’s door each night.' },
-      { n: 5, name: 'The oldest house', cost: { coins: 1200, pages: 6, blooms: 6, roots: 6, thread: 6 }, standing: std('Earn fifty stars.', (v, s) => s.stars >= 50), line: 'A dormer, a weathervane, and ivy.', after: 'The Hearth is the oldest house in the village, and looks it.' },
+      { n: 4, name: 'A lamp by the door', cost: { coins: 520, cloth: 3, books: 3 }, standing: std('Hold a seven-day streak.', (v, s) => s.hearth.streak.best >= 7), line: 'Iron and glass, lit every dusk.', after: 'A lantern burns by the Hearth’s door each night.' },
+      { n: 5, name: 'The oldest house', cost: { coins: 1200, books: 6, blooms: 6, ink: 6, cloth: 6 }, standing: std('Earn fifty stars.', (v, s) => s.stars >= 50), line: 'A dormer, a weathervane, and ivy.', after: 'The Hearth is the oldest house in the village, and looks it.' },
     ],
   },
   {
-    id: 'reading', name: 'The Reading House', kind: 'learn', character: 'ada', art: 'reading', good: 'pages',
+    id: 'reading', name: 'The Reading House', kind: 'learn', character: 'ada', art: 'reading', raw: 'pages', good: 'books',
     skill: 'Reading comprehension', place: 'reading-room',
-    at: { x: 742, y: 452 }, hit: { w: 112, h: 90 },
-    line: 'CAT passages against the clock. Ada makes Pages from what you read.',
-    activity: { label: 'Read a passage', verb: 'Read with Ada', route: '#/world/place/reading-room', minutes: 5, makes: 'pages' },
+    at: { x: 790, y: 470 }, hit: { w: 156, h: 124 },
+    line: 'CAT passages against the clock make Pages. Ada binds Pages into Books.',
+    activity: { label: 'Read a passage', verb: 'Read a passage', route: '#/world/place/reading-room', minutes: 5, makes: 'pages', brief: 'One short CAT passage, three questions, about five minutes.' },
+    craft: { secs: [40, 30, 20, 12], firstSecs: 9 },
     levels: [
       { n: 1, line: 'A small house with two big windows and a lamp.' },
-      { n: 2, name: 'A second floor', cost: { coins: 180, pages: 4 }, standing: std('Read 3 passages at two stars or better.', (v, s) => s.reading.wellRead >= 3), line: 'Another storey, and shelves to fill it. Orders for Pages pay more.', after: 'The Reading House stands two floors tall.', effect: { pay: 1.1 } },
-      { n: 3, name: 'The reading tower', cost: { coins: 560, pages: 8, roots: 2 }, standing: std('Read 8 passages well, 3 of them at three stars.', (v, s) => s.reading.wellRead >= 8 && s.reading.threeStar >= 3), line: 'A tower beside the house. Ada reads on her own now: a Page every three hours, up to three.', after: 'A tower rises beside the Reading House, and Ada works on her own.', effect: { pay: 1.2, helper: { every: 3 * 3600e3, cap: 3 } } },
-      { n: 4, name: 'The Observatory', cost: { coins: 1500, pages: 14, thread: 4, roots: 4 }, standing: std('Read 16 passages well, 6 at three stars.', (v, s) => s.reading.wellRead >= 16 && s.reading.threeStar >= 6), line: 'A copper dome, and Night Reading: passages at a tighter clock for the flawless mark.', after: 'A copper dome crowns the tower. Night Reading is open.', effect: { pay: 1.3, helper: { every: 2 * 3600e3, cap: 6 }, nightReading: true } },
+      { n: 2, name: 'A second floor', cost: { coins: 180, books: 4 }, standing: std('Read 3 passages at two stars or better.', (v, s) => s.reading.wellRead >= 3), line: 'Another storey, and shelves to fill it. Ada binds faster, and orders for Books pay more.', after: 'The Reading House stands two floors tall.', effect: { pay: 1.1 } },
+      { n: 3, name: 'The reading tower', cost: { coins: 560, books: 8, ink: 2 }, standing: std('Read 8 passages well, 3 of them at three stars.', (v, s) => s.reading.wellRead >= 8 && s.reading.threeStar >= 3), line: 'A tower beside the house. Ada reads on her own now: a Page every three hours, while the shelf has room.', after: 'A tower rises beside the Reading House, and Ada reads on her own.', effect: { pay: 1.2, helper: { every: H3, cap: 3 } } },
+      { n: 4, name: 'The Observatory', cost: { coins: 1500, books: 14, cloth: 4, ink: 4 }, standing: std('Read 16 passages well, 6 at three stars.', (v, s) => s.reading.wellRead >= 16 && s.reading.threeStar >= 6), line: 'A copper dome, and Night Reading: passages at a tighter clock for the flawless mark.', after: 'A copper dome crowns the tower. Night Reading is open.', effect: { pay: 1.3, helper: { every: H2, cap: 6 }, nightReading: true } },
     ],
   },
   {
-    id: 'garden', name: 'The Word Garden', kind: 'learn', character: 'bo', art: 'garden', good: 'blooms',
+    id: 'garden', name: 'The Word Garden', kind: 'learn', character: 'bo', art: 'garden', raw: 'seeds', good: 'blooms',
     skill: 'Vocabulary', place: 'meadow',
-    at: { x: 426, y: 566 }, hit: { w: 100, h: 84 },
-    line: 'The CAT word lists, the look-alike twins, the borrowed words. Bo grows Blooms from what you keep.',
-    activity: { label: 'Take a word round', verb: 'Plant with Bo', route: '#/round/meadow', minutes: 2, makes: 'blooms' },
+    at: { x: 400, y: 560 }, hit: { w: 136, h: 104 },
+    line: 'The CAT word lists, the look-alike twins, the borrowed words: every word you keep is a Seed. Bo grows Seeds into Blooms.',
+    activity: { label: 'Take a word round', verb: 'Take a word round', route: '#/round/meadow', minutes: 2, makes: 'seeds', brief: 'Twelve words, some inside a real sentence, about two minutes.' },
+    craft: { secs: [35, 26, 18, 10], firstSecs: 9 },
     unlock: { cost: { coins: 40 }, standing: std('Deliver your first order.', (v) => v.ordersDone >= 1), line: 'Bo has asked for a patch of ground and a shed.' },
     levels: [
       { n: 1, line: 'A shed and two beds.' },
-      { n: 2, name: 'A glasshouse', cost: { coins: 160, blooms: 4 }, standing: std('Bring 60 words to memory.', (v, s) => s.meadow.known + s.pond.known + s.thicket.known >= 60), line: 'Glass and white timber. Orders for Blooms pay more.', after: 'A glasshouse stands in the Word Garden.', effect: { pay: 1.1 } },
-      { n: 3, name: 'The hives', cost: { coins: 480, blooms: 8, pages: 2 }, standing: std('Hold 120 words for good.', (v, s) => s.meadow.mastered + s.pond.mastered + s.thicket.mastered >= 120), line: 'Bees work the beds. Bo makes a Bloom every three hours on his own, up to three.', after: 'Bees work the Word Garden, and Bo tends it alone.', effect: { pay: 1.2, helper: { every: 3 * 3600e3, cap: 3 } } },
-      { n: 4, name: 'The long garden', cost: { coins: 1300, blooms: 14, roots: 4, thread: 4 }, standing: std('Hold 300 words for good.', (v, s) => s.meadow.mastered + s.pond.mastered + s.thicket.mastered >= 300), line: 'Beds to the river, and a banner on the glasshouse.', after: 'The Word Garden runs all the way to the water.', effect: { pay: 1.3, helper: { every: 2 * 3600e3, cap: 6 } } },
+      { n: 2, name: 'A glasshouse', cost: { coins: 160, blooms: 4 }, standing: std('Bring 60 words to memory.', (v, s) => s.meadow.known + s.pond.known + s.thicket.known >= 60), line: 'Glass and white timber. Bo grows faster, and orders for Blooms pay more.', after: 'A glasshouse stands in the Word Garden.', effect: { pay: 1.1 } },
+      { n: 3, name: 'The hives', cost: { coins: 480, blooms: 8, books: 2 }, standing: std('Hold 120 words for good.', (v, s) => s.meadow.mastered + s.pond.mastered + s.thicket.mastered >= 120), line: 'Bees work the beds. Bo plants a Seed every three hours on his own, while the shelf has room.', after: 'Bees work the Word Garden, and Bo tends it alone.', effect: { pay: 1.2, helper: { every: H3, cap: 3 } } },
+      { n: 4, name: 'The long garden', cost: { coins: 1300, blooms: 14, ink: 4, cloth: 4 }, standing: std('Hold 300 words for good.', (v, s) => s.meadow.mastered + s.pond.mastered + s.thicket.mastered >= 300), line: 'Beds to the river, and a banner on the glasshouse.', after: 'The Word Garden runs all the way to the water.', effect: { pay: 1.3, helper: { every: H2, cap: 6 } } },
     ],
   },
   {
-    id: 'roots', name: 'The Root Workshop', kind: 'learn', character: 'ines', art: 'roots', good: 'roots',
+    id: 'roots', name: 'The Root Workshop', kind: 'learn', character: 'ines', art: 'roots', raw: 'roots', good: 'ink',
     skill: 'Roots & word parts', place: 'rootwood',
-    at: { x: 468, y: 346 }, hit: { w: 100, h: 84 },
-    line: 'Latin and Greek roots, prefixes and suffixes. Ines makes Roots from every family you take apart.',
-    activity: { label: 'Grow a root family', verb: 'Dig with Ines', route: '#/world/place/rootwood', minutes: 4, makes: 'roots' },
+    at: { x: 470, y: 330 }, hit: { w: 140, h: 114 },
+    line: 'Latin and Greek roots, prefixes and suffixes: every family you take apart is a Root. Ines boils Roots into Ink.',
+    activity: { label: 'Grow a root family', verb: 'Dig a root family', route: '#/world/place/rootwood', minutes: 4, makes: 'roots', brief: 'One root, its family of words, about four minutes.' },
+    craft: { secs: [45, 32, 22, 14], firstSecs: 10 },
     unlock: { cost: { coins: 120, blooms: 2 }, standing: std('Deliver 2 orders.', (v) => v.ordersDone >= 2), line: 'Ines wants a stone workshop by the wood.' },
     levels: [
       { n: 1, line: 'A stone workshop with a round window.' },
-      { n: 2, name: 'A chimney and a kiln', cost: { coins: 200, roots: 4 }, standing: std('Grow 6 root families.', (v, s) => s.rootwood.grownCount >= 6), line: 'Orders for Roots pay more.', after: 'Smoke rises from the Root Workshop.', effect: { pay: 1.1 } },
-      { n: 3, name: 'The store', cost: { coins: 520, roots: 8, pages: 2 }, standing: std('Grow 14 root families.', (v, s) => s.rootwood.grownCount >= 14), line: 'Barrels and a lamp. Ines digs a Root every three hours on her own, up to three.', after: 'The Root Workshop keeps a store, and Ines works it alone.', effect: { pay: 1.2, helper: { every: 3 * 3600e3, cap: 3 } } },
-      { n: 4, name: 'The second storey', cost: { coins: 1400, roots: 14, blooms: 4, thread: 4 }, standing: std('Grow 26 root families, 10 of them mature.', (v, s) => s.rootwood.grownCount >= 26 && s.rootwood.matureCount >= 10), line: 'A study above the workshop.', after: 'The Root Workshop has a study upstairs, and a banner.', effect: { pay: 1.3, helper: { every: 2 * 3600e3, cap: 6 } } },
+      { n: 2, name: 'A chimney and a kiln', cost: { coins: 200, ink: 4 }, standing: std('Grow 6 root families.', (v, s) => s.rootwood.grownCount >= 6), line: 'Ines boils faster, and orders for Ink pay more.', after: 'Smoke rises from the Root Workshop.', effect: { pay: 1.1 } },
+      { n: 3, name: 'The store', cost: { coins: 520, ink: 8, books: 2 }, standing: std('Grow 14 root families.', (v, s) => s.rootwood.grownCount >= 14), line: 'Barrels and a lamp. Ines digs a Root every three hours on her own, while the shelf has room.', after: 'The Root Workshop keeps a store, and Ines works it alone.', effect: { pay: 1.2, helper: { every: H3, cap: 3 } } },
+      { n: 4, name: 'The second storey', cost: { coins: 1400, ink: 14, blooms: 4, cloth: 4 }, standing: std('Grow 26 root families, 10 of them mature.', (v, s) => s.rootwood.grownCount >= 26 && s.rootwood.matureCount >= 10), line: 'A study above the workshop.', after: 'The Root Workshop has a study upstairs, and a banner.', effect: { pay: 1.3, helper: { every: H2, cap: 6 } } },
     ],
   },
   {
-    id: 'loom', name: 'The Loom', kind: 'learn', character: 'nell', art: 'loom', good: 'thread',
+    id: 'loom', name: 'The Loom', kind: 'learn', character: 'nell', art: 'loom', raw: 'thread', good: 'cloth',
     skill: 'Verbal reasoning', place: 'loom',
-    at: { x: 764, y: 748 }, hit: { w: 104, h: 84 },
-    line: 'Para jumbles, summaries, the odd one out. Nell makes Thread from every paragraph you put right.',
-    activity: { label: 'Solve a jumble set', verb: 'Weave with Nell', route: '#/world/place/loom', minutes: 5, makes: 'thread' },
-    unlock: { cost: { coins: 200, pages: 2, blooms: 2 }, standing: std('Deliver 3 orders.', (v) => v.ordersDone >= 3), line: 'Nell wants a timber workshop with an awning.' },
+    at: { x: 800, y: 790 }, hit: { w: 144, h: 112 },
+    line: 'Para jumbles, summaries, the odd one out: every paragraph you put right is Thread. Nell weaves Thread into Cloth.',
+    activity: { label: 'Solve a jumble set', verb: 'Solve a set', route: '#/world/place/loom', minutes: 5, makes: 'thread', brief: 'A set of jumbles or summaries against the clock, about five minutes.' },
+    craft: { secs: [45, 32, 22, 14], firstSecs: 10 },
+    unlock: { cost: { coins: 200, books: 2, blooms: 2 }, standing: std('Deliver 3 orders.', (v) => v.ordersDone >= 3), line: 'Nell wants a timber workshop with an awning.' },
     levels: [
       { n: 1, line: 'A timber workshop with a purple awning.' },
-      { n: 2, name: 'The spool sign', cost: { coins: 220, thread: 4 }, standing: std('Solve 12 items in the workshops.', (v, s) => s.loom.solved + s.table.solved + s.bench.solved >= 12), line: 'Orders for Thread pay more.', after: 'A spool sign hangs at the Loom.', effect: { pay: 1.1 } },
-      { n: 3, name: 'The upper room', cost: { coins: 600, thread: 8, pages: 2 }, standing: std('Solve 40 items, 12 of them at three stars.', (v, s) => s.loom.solved + s.table.solved + s.bench.solved >= 40 && s.loom.stars + s.table.stars + s.bench.stars >= 12), line: 'Nell weaves a Thread every three hours on her own, up to three.', after: 'The Loom has an upper room, and Nell works it alone.', effect: { pay: 1.2, helper: { every: 3 * 3600e3, cap: 3 } } },
-      { n: 4, name: 'The banner house', cost: { coins: 1500, thread: 14, pages: 4, roots: 4 }, standing: std('Solve 90 items in the workshops.', (v, s) => s.loom.solved + s.table.solved + s.bench.solved >= 90), line: 'Lamps and a banner.', after: 'The Loom glows after dusk.', effect: { pay: 1.3, helper: { every: 2 * 3600e3, cap: 6 } } },
+      { n: 2, name: 'The spool sign', cost: { coins: 220, cloth: 4 }, standing: std('Solve 12 items in the workshops.', (v, s) => s.loom.solved + s.table.solved + s.bench.solved >= 12), line: 'Nell weaves faster, and orders for Cloth pay more.', after: 'A spool sign hangs at the Loom.', effect: { pay: 1.1 } },
+      { n: 3, name: 'The upper room', cost: { coins: 600, cloth: 8, books: 2 }, standing: std('Solve 40 items, 12 of them at three stars.', (v, s) => s.loom.solved + s.table.solved + s.bench.solved >= 40 && s.loom.stars + s.table.stars + s.bench.stars >= 12), line: 'Nell spins a Thread every three hours on her own, while the shelf has room.', after: 'The Loom has an upper room, and Nell works it alone.', effect: { pay: 1.2, helper: { every: H3, cap: 3 } } },
+      { n: 4, name: 'The banner house', cost: { coins: 1500, cloth: 14, books: 4, ink: 4 }, standing: std('Solve 90 items in the workshops.', (v, s) => s.loom.solved + s.table.solved + s.bench.solved >= 90), line: 'Lamps and a banner.', after: 'The Loom glows after dusk.', effect: { pay: 1.3, helper: { every: H2, cap: 6 } } },
     ],
   },
   {
     id: 'market', name: 'The Market', kind: 'market', character: 'rafi', art: 'market',
-    at: { x: 600, y: 858 }, hit: { w: 104, h: 76 },
-    line: 'Rafi keeps the order board. Every order is somebody in the village asking for what you make.',
-    unlock: { cost: { coins: 60 }, standing: std('Deliver your first order.', (v) => v.ordersDone >= 1), line: 'Rafi has a cart and wants a stall.' },
+    at: { x: 600, y: 900 }, hit: { w: 156, h: 100 },
+    line: 'Rafi’s stall: more orders on the board, and better prices for everything the village makes.',
+    unlock: { cost: { coins: 60 }, standing: std('Deliver 2 orders.', (v) => v.ordersDone >= 2), line: 'Rafi has a cart and wants a stall.' },
     levels: [
       { n: 1, line: 'A stall with a striped awning. Three orders on the board.', effect: { slots: 3 } },
-      { n: 2, name: 'The market house', cost: { coins: 320, pages: 2, blooms: 2 }, standing: std('Deliver 8 orders.', (v) => v.ordersDone >= 8), line: 'A roof over the stall, and a fourth order on the board. Every order pays a little more.', after: 'The Market has a roof, and four orders on the board.', effect: { slots: 4, pay: 1.1 } },
-      { n: 3, name: 'The bell', cost: { coins: 900, pages: 4, blooms: 4, roots: 4, thread: 4 }, standing: std('Deliver 24 orders.', (v) => v.ordersDone >= 24), line: 'A lamp, a banner, five orders on the board, and better prices.', after: 'Five orders on the Market board, and a bell to ring when one is done.', effect: { slots: 5, pay: 1.25 } },
+      { n: 2, name: 'The market house', cost: { coins: 320, books: 2, blooms: 2 }, standing: std('Deliver 8 orders.', (v) => v.ordersDone >= 8), line: 'A roof over the stall, and a fourth order on the board. Every order pays a little more.', after: 'The Market has a roof, and four orders on the board.', effect: { slots: 4, pay: 1.1 } },
+      { n: 3, name: 'The bell', cost: { coins: 900, books: 4, blooms: 4, ink: 4, cloth: 4 }, standing: std('Deliver 24 orders.', (v) => v.ordersDone >= 24), line: 'A lamp, a banner, five orders on the board, and better prices.', after: 'Five orders on the Market board, and a bell to ring when one is done.', effect: { slots: 5, pay: 1.25 } },
     ],
   },
   {
     id: 'road', name: 'The Road Out', kind: 'challenge', character: null, art: null,
     skill: 'Mixed timed challenge', place: 'wilds',
-    at: { x: 600, y: 1040 }, hit: { w: 90, h: 60 },
+    at: { x: 600, y: 1080 }, hit: { w: 100, h: 70 },
     line: 'Beyond the village: the Gauntlet, mixed and timed, against your own best. It pays in coins.',
-    activity: { label: 'Run the Gauntlet', verb: 'Take the road out', route: '#/world/place/wilds', minutes: 8, makes: 'coins' },
+    activity: { label: 'Run the Gauntlet', verb: 'Take the road out', route: '#/world/place/wilds', minutes: 8, makes: 'coins', brief: 'Everything at once, fast, paid in coins.' },
     unlock: { cost: { coins: 250 }, standing: std('Earn 12 stars.', (v, s) => s.stars >= 12), line: 'A signpost and a lamp, and the road is open.' },
     levels: [
       { n: 1, line: 'A signpost at the edge of the village.' },
-      { n: 2, name: 'Lanterns on the road', cost: { coins: 700, thread: 4, pages: 4 }, standing: std('Finish 3 Gauntlet runs.', (v, s) => s.wilds.runs >= 3), line: 'The road lit as far as the ridge. Gauntlet runs pay half again.', after: 'The road out is lit all the way to the ridge.', effect: { pay: 1.5 } },
+      { n: 2, name: 'Lanterns on the road', cost: { coins: 700, cloth: 4, books: 4 }, standing: std('Finish 3 Gauntlet runs.', (v, s) => s.wilds.runs >= 3), line: 'The road lit as far as the ridge. Gauntlet runs pay half again.', after: 'The road out is lit all the way to the ridge.', effect: { pay: 1.5 } },
     ],
   },
 ]);
@@ -202,6 +292,11 @@ export const BUILDINGS = Object.freeze([
 const BUILDING_BY_ID = new Map(BUILDINGS.map((b) => [b.id, b]));
 export function buildingById(id) { return BUILDING_BY_ID.get(id) ?? null; }
 export function characterById(id) { return CHARACTERS[id] ?? null; }
+/** The building a raw good goes to. */
+export function buildingForRaw(rawKey) { return BUILDINGS.find((b) => b.raw === rawKey) ?? null; }
+
+/** The order board: by the Hearth's door, where neighbours come to ask. */
+export const BOARD = Object.freeze({ at: { x: 690, y: 672 }, hit: { w: 56, h: 60 } });
 
 /* Which building each learning place and module belongs to. */
 export const PLACE_BUILDING = Object.freeze({
@@ -224,28 +319,28 @@ export const MODULE_BUILDING = Object.freeze({
  */
 export const PLOTS = Object.freeze([
   {
-    id: 'pen', name: 'The sheep pen', at: { x: 300, y: 790 }, rect: { x: 220, y: 720, w: 170, h: 120 },
+    id: 'pen', name: 'The sheep pen', at: { x: 255, y: 780 }, rect: { x: 170, y: 690, w: 170, h: 120 },
     cost: { coins: 150 }, standing: std('Deliver 4 orders.', (v) => v.ordersDone >= 4),
     line: 'A fence, a trough, and three sheep who have nowhere else to be.', after: 'Sheep graze by the pond.',
   },
   {
-    id: 'orchard', name: 'The orchard', at: { x: 300, y: 300 }, rect: { x: 210, y: 210, w: 190, h: 170 },
+    id: 'orchard', name: 'The orchard', at: { x: 255, y: 350 }, rect: { x: 160, y: 190, w: 190, h: 170 },
     cost: { coins: 340, blooms: 4 }, standing: std('Hold 80 words for good.', (v, s) => s.meadow.mastered + s.pond.mastered + s.thicket.mastered >= 80),
     line: 'Rows of young trees on the rise above the workshop.', after: 'An orchard stands above the Root Workshop.',
   },
   {
-    id: 'farm', name: 'The farm', at: { x: 1010, y: 640 }, rect: { x: 930, y: 540, w: 230, h: 220 },
-    cost: { coins: 600, roots: 4, thread: 4 }, standing: std('Deliver 12 orders.', (v) => v.ordersDone >= 12),
+    id: 'farm', name: 'The farm', at: { x: 1060, y: 750 }, rect: { x: 950, y: 540, w: 220, h: 220 },
+    cost: { coins: 600, ink: 4, cloth: 4 }, standing: std('Deliver 12 orders.', (v) => v.ordersDone >= 12),
     line: 'Across the river: a barn, a cart, chickens, and hay.', after: 'A farm works the land across the river.',
   },
   {
-    id: 'mill', name: 'The mill', at: { x: 1010, y: 300 }, rect: { x: 930, y: 200, w: 230, h: 200 },
-    cost: { coins: 1100, pages: 6, blooms: 6 }, standing: std('Deliver 30 orders and earn 40 stars.', (v, s) => v.ordersDone >= 30 && s.stars >= 40),
+    id: 'mill', name: 'The mill', at: { x: 1060, y: 380 }, rect: { x: 950, y: 190, w: 220, h: 200 },
+    cost: { coins: 1100, books: 6, blooms: 6 }, standing: std('Deliver 30 orders and earn 40 stars.', (v, s) => v.ordersDone >= 30 && s.stars >= 40),
     line: 'A mill on the water, upstream of the bridge.', after: 'A mill turns on the river.',
   },
   {
-    id: 'square', name: 'The square', at: { x: 600, y: 520 }, rect: { x: 520, y: 470, w: 160, h: 90 },
-    cost: { coins: 900, pages: 4, blooms: 4, roots: 4, thread: 4 }, standing: std('Deliver 20 orders.', (v) => v.ordersDone >= 20),
+    id: 'square', name: 'The square', at: { x: 600, y: 515 }, rect: { x: 520, y: 430, w: 160, h: 90 },
+    cost: { coins: 900, books: 4, blooms: 4, ink: 4, cloth: 4 }, standing: std('Deliver 20 orders.', (v) => v.ordersDone >= 20),
     line: 'Cobbles, a well, and a bench between the Hearth and the Reading House.', after: 'The village has a square, and a well in it.',
   },
 ]);
@@ -253,34 +348,36 @@ const PLOT_BY_ID = new Map(PLOTS.map((p) => [p.id, p]));
 export function plotById(id) { return PLOT_BY_ID.get(id) ?? null; }
 
 /**
- * Houses for neighbours: the work that never runs out. Every house costs
- * more than the last and asks for more delivered orders, and every one is
- * a person who walks the paths and posts orders of their own.
+ * Houses for the neighbours: the work that never runs out. The first spot
+ * is Mira's cottage, there from the start; every later house costs more
+ * than the last and asks for more delivered orders, and every one is a
+ * person who walks the paths and posts orders of their own.
  */
 export const HOUSE_SPOTS = Object.freeze([
-  { x: 402, y: 820 }, { x: 868, y: 620 }, { x: 300, y: 660 }, { x: 900, y: 320 }, { x: 470, y: 960 }, { x: 760, y: 950 },
-  { x: 250, y: 470 }, { x: 900, y: 860 }, { x: 640, y: 1090 }, { x: 350, y: 1060 },
+  { x: 410, y: 800 }, { x: 1010, y: 460 }, { x: 240, y: 500 }, { x: 700, y: 280 }, { x: 470, y: 980 },
+  { x: 760, y: 985 }, { x: 1010, y: 900 }, { x: 330, y: 1055 }, { x: 900, y: 1060 }, { x: 150, y: 560 },
 ]);
 export const HOUSE = Object.freeze({
+  /** House n (1-based) is the n-th neighbour after Mira. */
   cost: (n) => ({ coins: 280 + (n - 1) * 160 }),
   standing: (n) => std(`Deliver ${6 + (n - 1) * 4} orders.`, (v) => v.ordersDone >= 6 + (n - 1) * 4),
-  name: (n) => (n === 1 ? 'A house for a neighbour' : `A ${ORDINALS[n - 1] ?? `${n}th`} neighbour`),
-  line: (n) => (n === 1 ? `${NEIGHBOURS[0].name} has asked to settle here. A roof, two windows and a chimney.` : `${NEIGHBOURS[(n - 1) % NEIGHBOURS.length].name} would like to live in your village.`),
-  after: (n) => `${NEIGHBOURS[(n - 1) % NEIGHBOURS.length].name} has moved in, and will be posting orders.`,
-  max: HOUSE_SPOTS.length,
+  who: (n) => NEIGHBOURS[Math.min(NEIGHBOURS.length - 1, n)],
+  name: (n) => `${HOUSE.who(n).name}’s house`,
+  line: (n) => `${HOUSE.who(n).name}, ${HOUSE.who(n).role}, has asked to settle here. A roof, two windows and a chimney.`,
+  after: (n) => `${HOUSE.who(n).name} has moved in, and will be posting orders.`,
+  max: HOUSE_SPOTS.length - 1,
 });
-const ORDINALS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
 
 /* ------------------------------------------------------------------ */
 /* Orders                                                              */
 /* ------------------------------------------------------------------ */
 
-/** Why somebody wants a good — one line, chosen by seed. */
+/** Why somebody wants a good when their own reasons run out — one line, chosen by seed. */
 export const ORDER_REASONS = Object.freeze({
-  pages: ['for the schoolhouse', 'to bind a book', 'for a letter home', 'for the notice board', 'to copy the almanac', 'for the ferry timetable'],
+  books: ['for the schoolhouse', 'for a letter home', 'for the notice board', 'to copy the almanac', 'for the ferry timetable', 'for the long winter'],
   blooms: ['for the window boxes', 'for a wedding', 'for the hives', 'for the festival', 'for the inn’s tables', 'for a grave by the wood'],
-  roots: ['for the apothecary', 'to plant along the road', 'for the winter store', 'for the kiln', 'for the mill garden', 'for the ferryman’s cure'],
-  thread: ['to mend the flags', 'for a new sail', 'for the festival banners', 'for the school’s curtains', 'for the market awning', 'for a winter coat'],
+  ink: ['for the letters', 'for the labels', 'for the register', 'for the ledger', 'for the notices', 'for the tide book'],
+  cloth: ['to mend the flags', 'for a new sail', 'for the festival banners', 'for the school’s curtains', 'for the market awning', 'for a winter coat'],
 });
 
 /** The places the road out goes, in order: what a Gauntlet run is walking toward. */
@@ -296,7 +393,7 @@ export const WAYMARKS = Object.freeze([
 
 /** The village's stages, by worth. Every stage has a line for Wick. */
 export const STAGES = Object.freeze([
-  { at: 0, name: 'A camp', line: 'A house, a reading room, and room everywhere.' },
+  { at: 0, name: 'A camp', line: 'A house, a reading house, a cottage, and room everywhere.' },
   { at: 44, name: 'A hamlet', line: 'Two chimneys, and a stall.' },
   { at: 90, name: 'A village', line: 'Workshops, a market, and people who come to it.' },
   { at: 170, name: 'A busy village', line: 'Every worker has work, and the board is never empty.' },

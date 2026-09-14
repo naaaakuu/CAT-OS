@@ -6,7 +6,7 @@
  * Pure string building; no DOM, no storage.
  */
 
-import { bagEntries, thing } from './economy.js';
+import { bagEntries, thing, madeFrom } from './economy.js';
 import { artIMG } from '../village/art.js';
 import { GOODS, COINS, BUILDINGS } from '../village/defs.js';
 
@@ -51,9 +51,11 @@ export function coinsHTML(n) {
   return `<span class="craft craft--coins" data-craft="coins">${goodIcon('coins', { size: 18 })}<b>${n}</b></span>`;
 }
 
-/** Every good the village can make, in fixed order, for the barn. */
+const BUILDINGS_CHAR = { reading: 'Ada', garden: 'Bo', roots: 'Ines', loom: 'Nell' };
+
+/** Every made good the village can trade, in fixed order, for the barn. */
 export function purseHTML(purse, { showZero = true } = {}) {
-  return GOODS.filter((g) => showZero || (purse?.[g.key] ?? 0) > 0)
+  return GOODS.filter((g) => g.kind === 'made').filter((g) => showZero || (purse?.[g.key] ?? 0) > 0)
     .map((g) => { const n = purse?.[g.key] ?? 0; return `<span class="craft craft--${g.key} ${n ? '' : 'is-zero'}" data-craft="${g.key}">${goodIcon(g.key, { size: 16 })}<b>${n}</b></span>`; }).join('');
 }
 
@@ -71,7 +73,9 @@ export function openCraftSheet(key, state) {
   document.querySelector('.craftsheet')?.remove();
   const v = state?.village;
   const have = v?.stock?.[key] ?? state?.purse?.[key] ?? 0;
-  const maker = BUILDINGS.find((b) => b.good === key);
+  const maker = BUILDINGS.find((b) => b.good === key || b.raw === key);
+  const raw = maker?.raw ? thing(maker.raw) : null;
+  const made = maker?.good ? thing(maker.good) : null;
   const wanted = (v?.orders ?? []).filter((o) => (o.needs?.[key] ?? 0) > 0);
   const el = document.createElement('div');
   el.className = 'craftsheet';
@@ -90,7 +94,7 @@ export function openCraftSheet(key, state) {
       ${maker ? `
         <p class="craftsheet__label">Made at</p>
         <ul class="craftsheet__where">
-          <li><a href="${maker.activity.route}">${artIMG('building', { id: maker.art, level: 1 }, { size: 40 })}<span class="craftsheet__wh"><b>${maker.name}</b><span>${maker.activity.label} → one ${t.one} per star, one more if flawless</span></span><i aria-hidden="true">→</i></a></li>
+          <li><a href="${maker.activity.route}">${artIMG('building', { id: maker.art, level: 1 }, { size: 40 })}<span class="craftsheet__wh"><b>${maker.name}</b><span>${t.kind === 'raw' ? `${maker.activity.label} → one ${t.one} per star, one more if flawless. ${BUILDINGS_CHAR[maker.id] ?? 'The worker'} turns them into ${made?.name ?? ''}.` : `${BUILDINGS_CHAR[maker.id] ?? 'The worker'} makes one ${t.one} from every ${raw?.one ?? 'unit'}. ${raw?.name ?? ''} come from: ${maker.activity.label.toLowerCase()}.`}</span></span><i aria-hidden="true">→</i></a></li>
         </ul>` : `
         <p class="craftsheet__label">Earned by</p>
         <ul class="craftsheet__where">

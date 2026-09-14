@@ -26,7 +26,7 @@
  * subpath. `self.registration.scope` resolves them correctly.
  */
 
-const CACHE_VERSION = 36;
+const CACHE_VERSION = 37;
 const CONTENT_VERSION = 14;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
@@ -139,6 +139,13 @@ const SHELL_FILES = [
   './src/world/index.js',
   './src/village/defs.js',
   './src/village/art.js',
+  './src/village/brush.js',
+  './src/village/art-nature.js',
+  './src/village/art-things.js',
+  './src/village/art-buildings.js',
+  './src/village/art-figures.js',
+  './src/village/next.js',
+  './src/shell/settings.js',
   './src/village/state.js',
   './src/village/scene.js',
   './src/village/grove.js',

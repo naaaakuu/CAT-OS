@@ -18,8 +18,7 @@
  * world calls unlock() on any pointerdown.
  */
 
-import { feedbackPrefs } from '../core/engagement/feedback.js';
-import { STORES } from '../core/storage/storage-adapter.js';
+import { feedbackPrefs, setFeedbackPref, onFeedbackChange } from '../core/engagement/feedback.js';
 
 const SEMI = { do: 0, re: 2, mi: 4, sol: 7, la: 9 };
 const DEGREES = ['do', 're', 'mi', 'sol', 'la'];
@@ -41,7 +40,10 @@ const state = {
 /* Graph                                                               */
 /* ------------------------------------------------------------------ */
 
-function gain() { const p = feedbackPrefs(); return p.sounds ? p.volume : 0; }
+/** Event sounds follow the sound-effects preference. */
+function gain() { const p = feedbackPrefs(); return p.sfx ? p.sfxVolume : 0; }
+/** The music and the ambience follow the music preference and its volume. */
+function musicGain() { const p = feedbackPrefs(); return p.music ? p.musicVolume : 0; }
 
 function ensure() {
   if (state.ctx) return true;
@@ -76,14 +78,21 @@ export function unlock() {
 
 export async function initWorldAudio(storage) {
   state.storage = storage;
-  try { const rec = await storage.get(STORES.SETTINGS, 'world:music'); state.music.on = rec?.value !== false; } catch { /* default on */ }
+  state.music.on = feedbackPrefs().music;
+  // The settings screen changes the preference; the world retunes live.
+  onFeedbackChange((p) => {
+    state.music.on = p.music;
+    if (!p.music) { stopMusic(); stopAmbience(); return; }
+    if (state.music.playing) { try { state.music.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain()), state.ctx.currentTime, 0.05); state.amb.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain()), state.ctx.currentTime, 0.05); } catch { /* fine */ } }
+    else if (state.music.region && state.unlocked) { startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth }); startAmbience(state.amb.region ?? state.music.region, { hour: state.music.hour }); }
+  });
 }
 
-export function musicEnabled() { return state.music.on; }
+export function musicEnabled() { return feedbackPrefs().music; }
 export async function setMusicEnabled(on) {
   state.music.on = !!on;
-  try { await state.storage?.put(STORES.SETTINGS, { id: 'world:music', value: !!on }); } catch { /* non-fatal */ }
-  if (!on) stopMusic(); else if (state.music.region) startMusic(state.music.region, { hour: state.music.hour });
+  try { if (state.storage) await setFeedbackPref(state.storage, 'music', !!on); } catch { /* non-fatal */ }
+  if (!on) { stopMusic(); stopAmbience(); } else if (state.music.region) startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
 }
 
 /* ------------------------------------------------------------------ */
@@ -188,13 +197,13 @@ export function startMusic(region = 'world', { hour = 'morning', warmth = 0 } = 
   const warm = Math.max(0, Math.min(1, warmth));
   state.music.warmth = warm;
   if (!state.music.on || !state.unlocked) return;
-  if (gain() <= 0 || !ensure()) return;
+  if (musicGain() <= 0 || !ensure()) return;
   if (state.music.playing && state.music.tonic === (TONIC[region] ?? TONIC.world) && state.music.hourPlaying === hour && Math.abs((state.music.warmthPlaying ?? 0) - warm) < 0.2) return;
   stopMusic(0.9);
   const c = state.ctx;
   const tonic = TONIC[region] ?? TONIC.world;
   const night = hour === 'night' || hour === 'dusk';
-  const bed = c.createGain(); bed.gain.setValueAtTime(0.0001, c.currentTime); bed.gain.exponentialRampToValueAtTime(1, c.currentTime + 2.5);
+  const bed = c.createGain(); bed.gain.setValueAtTime(0.0001, c.currentTime); bed.gain.exponentialRampToValueAtTime(Math.max(0.0001, musicGain()), c.currentTime + 2.5);
   bed.connect(state.master);
   const pads = [];
   // Two pads: the tonic and its fifth, each two detuned triangles through a
@@ -261,13 +270,13 @@ export function stopMusic(fade = 0.6) {
  * night, rain or snow-hush by weather.
  */
 export function startAmbience(region = 'world', { hour = 'morning', weather = 'clear', season = 'summer' } = {}) {
-  if (gain() <= 0 || !ensure() || !state.unlocked) { state.amb.region = region; return; }
+  if (musicGain() <= 0 || !ensure() || !state.unlocked) { state.amb.region = region; return; }
   const key = `${region}|${hour}|${weather}|${season}`;
   if (state.amb.key === key) return;
   stopAmbience(0.8);
   state.amb.key = key; state.amb.region = region;
   const c = state.ctx;
-  const g = c.createGain(); g.gain.setValueAtTime(0.0001, c.currentTime); g.gain.exponentialRampToValueAtTime(1, c.currentTime + 2);
+  const g = c.createGain(); g.gain.setValueAtTime(0.0001, c.currentTime); g.gain.exponentialRampToValueAtTime(Math.max(0.0001, musicGain()), c.currentTime + 2);
   g.connect(state.master);
   const nodes = [], timers = [];
   const night = hour === 'night' || hour === 'dusk';

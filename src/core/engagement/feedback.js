@@ -1,32 +1,32 @@
 /**
- * feedback.js — haptics and sound, both whisper-quiet, kept in step.
+ * feedback.js — haptics, sound effects, music and motion: the preferences,
+ * kept in step.
  *
- * This is the ORCHESTRATION layer. The sound language itself (every
- * synthesized voice) lives in audio.js; this file owns preferences,
+ * This is the ORCHESTRATION layer. The sound languages themselves live
+ * elsewhere (the shell's cues in audio.js; the village's music, ambience
+ * and event sounds in world/audio.js); this file owns the preferences,
  * maps semantic cues to a haptic pattern + a named sound, and installs
  * the app-wide press / toggle / paper delegation so every button feels
  * alive without each screen wiring it by hand.
  *
  * Preferences persist as settings records through the StorageAdapter:
- *   { id: 'haptics',      value: boolean }  — default ON where supported
- *   { id: 'sounds',       value: boolean }  — default OFF (opt-in)
- *   { id: 'sound-volume', value: 0..1 }     — master volume, default 0.7
+ *   { id: 'haptics',           value: boolean }  — default ON where supported
+ *   { id: 'sounds',            value: boolean }  — sound effects, default ON
+ *   { id: 'sound-volume',      value: 0..1 }     — sound effects volume, default 1
+ *   { id: 'world:music',       value: boolean }  — music and ambience, default ON
+ *   { id: 'world:music-volume', value: 0..1 }    — music volume, default 1
+ *   { id: 'motion',            value: 'full'|'reduced' } — default follows the OS
+ *
+ * Browsers do not let a page make a sound before the first gesture; the
+ * world unlocks its audio on the first tap, so music that is ON begins
+ * the moment the learner touches the village, and never before.
  *
  * Haptics: navigator.vibrate where available (mostly Android Chrome;
  * iOS Safari does not expose it — calls no-op silently, by design).
- * Haptics layer naturally with sound: cue() fires both at once, and the
- * short haptic durations here are tuned to sit under the sound envelopes.
- *
- * Sound: see audio.js. HONESTY NOTE: whether Web Audio is silenced by
- * the iOS hardware mute switch varies by iOS version and context — we
- * cannot detect it reliably, so we do the honest things instead: sound
- * defaults OFF, there is a Settings toggle AND a master volume, we never
- * play while the tab is hidden, and we never interrupt reading (no cue
- * fires from scrolling or from the reading surface itself).
  */
 
 import { STORES } from '../storage/storage-adapter.js';
-import { configureAudio, playSound, unlockAudio, queueWelcome, configureFocusNoise } from './audio.js';
+import { configureAudio, playSound, unlockAudio, queueWelcome } from './audio.js';
 
 /*
  * The cue table — the single source of truth mapping a semantic moment
@@ -61,80 +61,76 @@ export const CUE_SOUND_MAP = Object.freeze(
   Object.fromEntries(Object.entries(CUES).map(([k, v]) => [k, v.sound]))
 );
 
-const DEFAULT_VOLUME = 0.7;
-
 const state = {
   haptics: true,
-  sounds: false,
-  volume: DEFAULT_VOLUME,
-  focusNoise: false,
-  focusVolume: 0.35,
+  sfx: true,
+  sfxVolume: 1,
+  music: true,
+  musicVolume: 1,
+  motion: 'system',
   installed: false,
-  welcomeArmed: false, // the opening chime is queued at most once per app load
+  welcomeArmed: false,
+  listeners: new Set(),
 };
 
 export async function initFeedback(storage) {
   try {
-    const [h, s, v, fn, fv] = await Promise.all([
+    const [h, s, v, m, mv, mo] = await Promise.all([
       storage.get(STORES.SETTINGS, 'haptics'),
       storage.get(STORES.SETTINGS, 'sounds'),
       storage.get(STORES.SETTINGS, 'sound-volume'),
-      storage.get(STORES.SETTINGS, 'focus-noise'),
-      storage.get(STORES.SETTINGS, 'focus-volume'),
+      storage.get(STORES.SETTINGS, 'world:music'),
+      storage.get(STORES.SETTINGS, 'world:music-volume'),
+      storage.get(STORES.SETTINGS, 'motion'),
     ]);
     if (typeof h?.value === 'boolean') state.haptics = h.value;
-    if (typeof s?.value === 'boolean') state.sounds = s.value;
-    if (typeof v?.value === 'number' && Number.isFinite(v.value)) {
-      state.volume = Math.max(0, Math.min(1, v.value));
-    }
-    if (typeof fn?.value === 'boolean') state.focusNoise = fn.value;
-    if (typeof fv?.value === 'number' && Number.isFinite(fv.value)) {
-      state.focusVolume = Math.max(0, Math.min(1, fv.value));
-    }
+    if (typeof s?.value === 'boolean') state.sfx = s.value;
+    if (typeof v?.value === 'number' && Number.isFinite(v.value)) state.sfxVolume = Math.max(0, Math.min(1, v.value));
+    if (typeof m?.value === 'boolean') state.music = m.value;
+    if (typeof mv?.value === 'number' && Number.isFinite(mv.value)) state.musicVolume = Math.max(0, Math.min(1, mv.value));
+    if (mo?.value === 'full' || mo?.value === 'reduced' || mo?.value === 'system') state.motion = mo.value;
   } catch {
     /* defaults stand; feedback is never worth an error */
   }
-  configureAudio({ enabled: state.sounds, volume: state.volume });
-  configureFocusNoise({ enabled: state.focusNoise, volume: state.focusVolume });
-  // The opening chime sounds on the first gesture — armed once per load, so
-  // re-reading prefs (e.g. after a backup import) never replays it.
-  if (state.sounds && !state.welcomeArmed) {
+  configureAudio({ enabled: state.sfx, volume: state.sfxVolume });
+  if (state.sfx && !state.welcomeArmed) {
     state.welcomeArmed = true;
     queueWelcome();
   }
+  emit();
 }
 
 export function feedbackPrefs() {
-  return { 
-    haptics: state.haptics, 
-    sounds: state.sounds, 
-    volume: state.volume,
-    focusNoise: state.focusNoise,
-    focusVolume: state.focusVolume
+  return {
+    haptics: state.haptics,
+    sfx: state.sfx, sfxVolume: state.sfxVolume,
+    music: state.music, musicVolume: state.musicVolume,
+    motion: state.motion,
+    // Older call sites read these names.
+    sounds: state.sfx, volume: state.sfxVolume,
   };
 }
 
+/** True when the learner asked for less motion, or the OS did and they did not say otherwise. */
+export function motionReduced() {
+  if (state.motion === 'reduced') return true;
+  if (state.motion === 'full') return false;
+  try { return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false; } catch { return false; }
+}
+
+/** Be told when a preference changes (the world retunes its music live). */
+export function onFeedbackChange(fn) { state.listeners.add(fn); return () => state.listeners.delete(fn); }
+function emit() { for (const fn of state.listeners) { try { fn(feedbackPrefs()); } catch { /* a listener is never a blocker */ } } }
+
 export async function setFeedbackPref(storage, key, value) {
-  if (key === 'haptics') {
-    state.haptics = !!value;
-    await storage.put(STORES.SETTINGS, { id: 'haptics', value: state.haptics });
-  } else if (key === 'sounds') {
-    state.sounds = !!value;
-    configureAudio({ enabled: state.sounds });
-    await storage.put(STORES.SETTINGS, { id: 'sounds', value: state.sounds });
-  } else if (key === 'volume') {
-    state.volume = Math.max(0, Math.min(1, Number(value) || 0));
-    configureAudio({ volume: state.volume });
-    await storage.put(STORES.SETTINGS, { id: 'sound-volume', value: state.volume });
-  } else if (key === 'focusNoise') {
-    state.focusNoise = !!value;
-    configureFocusNoise({ enabled: state.focusNoise });
-    await storage.put(STORES.SETTINGS, { id: 'focus-noise', value: state.focusNoise });
-  } else if (key === 'focusVolume') {
-    state.focusVolume = Math.max(0, Math.min(1, Number(value) || 0));
-    configureFocusNoise({ volume: state.focusVolume });
-    await storage.put(STORES.SETTINGS, { id: 'focus-volume', value: state.focusVolume });
-  }
+  const put = (id, v) => storage.put(STORES.SETTINGS, { id, value: v });
+  if (key === 'haptics') { state.haptics = !!value; await put('haptics', state.haptics); }
+  else if (key === 'sfx' || key === 'sounds') { state.sfx = !!value; configureAudio({ enabled: state.sfx }); await put('sounds', state.sfx); }
+  else if (key === 'sfxVolume' || key === 'volume') { state.sfxVolume = Math.max(0, Math.min(1, Number(value) || 0)); configureAudio({ volume: state.sfxVolume }); await put('sound-volume', state.sfxVolume); }
+  else if (key === 'music') { state.music = !!value; await put('world:music', state.music); }
+  else if (key === 'musicVolume') { state.musicVolume = Math.max(0, Math.min(1, Number(value) || 0)); await put('world:music-volume', state.musicVolume); }
+  else if (key === 'motion') { state.motion = value === 'reduced' ? 'reduced' : value === 'full' ? 'full' : 'system'; await put('motion', state.motion); document.documentElement.toggleAttribute('data-reduced-motion', motionReduced()); }
+  emit();
 }
 
 function vibrate(pattern) {
@@ -178,18 +174,15 @@ export function installGlobalFeedback() {
 
   // Press / toggle micro-feedback for interactive elements.
   document.addEventListener('click', (e) => {
-    // Immersive screens own their own sound world (the Language Garden's quiet
-    // identity — §10: the commitment sound is the only tap sound in the
-    // Garden, and its taps must never trigger the shell's wooden tick). They
-    // fire their own cues at the code site; the shell stays out of the way.
+    // Immersive screens own their own sound world (the village and the
+    // Language Garden fire their own cues at the code site).
     if (document.documentElement.hasAttribute('data-immersive')) return;
     const el = e.target.closest?.(
       'button, a[href], [role="button"], .segmented__option, cat-option'
     );
     if (!el) return;
-    // A disabled control emits no click, but guard anyway.
     if (el.matches?.('[disabled], [aria-disabled="true"]')) return;
-    // Some groups manage their own honest demo (the Feedback settings).
+    // Some groups manage their own honest demo (the audio settings).
     if (el.closest?.('[data-sfx="off"]')) return;
 
     const isToggle = el.closest?.('.segmented') || el.closest?.('cat-option')

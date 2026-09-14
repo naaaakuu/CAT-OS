@@ -4,6 +4,122 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 2.1.0 — The living village (2026-09-14)
+
+On the owner's "VISUAL / GAMEPLAY RECONSTRUCTION 2.0 — THE VILLAGE MUST FEEL
+LIKE A REAL GAME" brief. 2.0.0 was functional and read as "canvas UI elements
+arranged on top of a map": flat buildings, circle-and-dot people, requests
+without causes, a dashboard card at the bottom, a Settings page with dead
+controls. 2.1.0 is the same economy, the same content engine and the same
+records, rebuilt to look and behave like a polished, living mobile village —
+in the spirit of Hay Day's readability and SimCity's growth, with its own art.
+
+### Dimensional art (`src/village/brush.js`, `art-buildings.js`, `art-figures.js`, `art-things.js`, `art-nature.js`)
+
+- **Buildings are solid things.** One oblique house builder draws a front
+  wall that faces the light, a side wall receding up and to the right, a
+  roof with a front slope and a gable or hip, eave shadows, a plinth, a door
+  with a step, windows with sills that glow at night, and the parts that make
+  each place itself: chimneys, dormers, a tower with a copper dome, a striped
+  awning, a hanging sign, a lamp by the door, a banner, a bell, a water wheel.
+  Stone, timber, plank and glass walls. Every named building at every level,
+  seeded cottages for neighbours, a barn, a mill, a schoolhouse, and a
+  three-stage scaffold.
+- **People are characters.** A new rig: proper proportions, faces with whites
+  and irises, brows, a mouth that smiles or shouts, seven hair silhouettes,
+  hats (straw, cap, scarf, beret, hood), aprons, glasses, beards; a four-frame
+  walk with counter-swinging arms; work animations per job (Ada turns pages,
+  Bo waters, Ines grinds, Nell throws a shuttle, a builder hammers); carrying
+  (crates, a stack of books, cloth, ink, flowers); cheer, wave, sit, blink.
+- **Wick is a companion.** A red collar with a bell, a lantern on a strap at
+  night; he sits and looks about, walks to wherever the village is pointing,
+  jumps for joy when something good happens, and sleeps on the Hearth's step
+  after dark.
+- 47 recipes in all, still nothing but the canvas path API, cached and blitted
+  at whole pixels.
+
+### Causality: the chain, the queue, the neighbours (`defs.js`, `economy.js`, `state.js`)
+
+- **Raw goods → made goods.** Learning makes Pages, Seeds, Roots and Thread —
+  one per star, one more if flawless — and each goes straight to its
+  building's queue. The worker crafts them one at a time on a short clock
+  (the first in nine seconds, then 30–45 s at level one, faster as the
+  building rises) into **Books, Blooms, Ink and Cloth**, which appear on a
+  shelf outside and are collected with a tap. Only made goods are traded.
+  Every building has a visible state: idle → working (a ring over the roof
+  counts down) → ready (a gold callout, the shelf fills) → collected.
+- **The queue is derived, not stored.** Every raw unit arrives at the moment
+  its session finished; a small simulation over the timeline gives the same
+  answer for a village opened a minute or a month later. Helpers (level three
+  and up) add raw units on a long clock while the shelf has room, and their
+  output is bound automatically — automation is mastery, and it never
+  replaces learning.
+- **Orders come from people with a reason.** Ten neighbours with jobs and
+  looks — Mira the schoolteacher, Old Tomas the ferryman, Hal the innkeeper,
+  Priya the apothecary, Wren the letter-carrier, Anselm the bridge-keeper,
+  Dara the baker, Kit the fisher, Sunniva the beekeeper, Oren the carpenter —
+  each with reasons per good ("for the schoolhouse shelf", "for a new sail").
+  Mira lives here from the first minute; the rest move in as houses are
+  built. The first order is Mira's: one Book for the schoolhouse.
+- **The order board** stands by the Hearth's door. A neighbour whose order
+  can be delivered walks to the board and waits there; delivering hands the
+  goods to that person, who cheers and walks home carrying them.
+
+### The world is the interface (`screens/village.js`, `village.css`)
+
+- **No dashboard.** The permanent bottom card and the dark Wick bar are gone.
+  Tapping a building opens a small paper card in which its worker speaks —
+  portrait, one line that fits the state, the queue strip (waiting → making →
+  ready), one big button (READ A PASSAGE → up to 3 Pages → Books, or COLLECT),
+  and the chain in one line. The learning entry is explicit and goes straight
+  into the curator's next passage, round, family or set (`src/village/next.js`).
+- **Callouts** over the world: ready ×N, a working ring with the seconds left,
+  Build / Raise, wanted, and the board's Deliver. Tapping a ready building
+  collects: the goods pop off the shelf and fly to the barn.
+- **Wick speaks from where he stands**, in a paper speech bubble anchored to
+  him in the world.
+- **Construction** is a sequence: coins and materials fly to the site, the
+  ground is cleared, the frame goes up, the walls rise under a builder's
+  hammer with dust and ticks, and the finished building settles in with a
+  bounce and sparkles while its worker cheers and Wick jumps.
+- **A closer camera** (a building takes a third of a phone's width), paper
+  panels with a wooden edge, tactile buttons with a bottom edge, a HUD of
+  the name and level, coins, the barn and sound.
+
+### A daily rhythm
+
+- Morning: workers walk from the yard to their doors. Day: they work when
+  the queue has something in it, wave and look about when it does not.
+  Dusk: warm light, workers on the benches, lamps lighting. Night: everyone
+  indoors, windows and lamps lit, fireflies over the garden and the pond,
+  the moon on the water, Wick asleep with his lantern.
+- The river has stone banks and a stone bridge; the pond has a jetty, a
+  rowboat that rocks, reeds and rings; the village has a cobbled yard,
+  woodpiles, laundry lines, benches, book carts, barrels, rabbits in the
+  wood.
+
+### Settings and audio
+
+- **Settings rebuilt** (`src/shell/settings.js`): Audio (music & ambience
+  on/off and volume; sound effects on/off and volume), Feel (haptics; reduce
+  motion — auto / full / less), Reading (reading size; theme), Your data
+  (export, import, storage used), About. Every control works and persists.
+  The brown-noise focus sound and the four "show the introduction again"
+  rows are gone.
+- **Audio defaults to on**: music and ambience on at full volume, sound
+  effects on. Browsers forbid sound before a gesture, so the village begins
+  its music on the first tap and remembers the preference; the settings
+  screen retunes it live.
+
+### Verification and performance
+
+- §16 covers the eight goods, the chain, the clock (one Book bound thirty
+  seconds after a passage, Ada on the next), the neighbours, the helper
+  filling the shelf to its cap; §17 reads every art file. All checks pass.
+- Software-raster home frame (a busy seeded village, 390×844 at 3×):
+  p50 16.6 ms by day, 21 ms at night; open → painted 1.4 s; ~400 scene
+  objects; 8–10 MB heap.
+
 ## 2.0.0 — The village (2026-09-13)
 
 On the owner's "COMPLETE WORLD/UI RECONCEPTION · HAY DAY-INSPIRED EDUCATIONAL

@@ -6,10 +6,14 @@
  * The whole economy in one breath:
  *
  *   LEARN   a passage, a word round, a root family, a jumble set — each
- *           belongs to one building and MAKES that building's good.
- *   GOODS   Pages · Blooms · Roots · Thread. One per star, so "3 Pages"
+ *           belongs to one building and MAKES that building's raw good.
+ *   RAW     Pages · Seeds · Roots · Thread. One per star, so "3 Pages"
  *           means "about one good passage". A flawless run makes one more.
- *   ORDERS  villagers ask for goods. Delivering pays COINS.
+ *           Raw goods go straight to the building's queue.
+ *   MADE    Books · Blooms · Ink · Cloth. The worker crafts them from the
+ *           raw goods, one for one, on a short clock. Only made goods trade.
+ *   ORDERS  neighbours ask for made goods, with reasons. Delivering pays
+ *           COINS.
  *   COINS   build, upgrade and open land. Nothing else is money.
  *   STARS   are performance — accuracy first, then pace — and they are
  *           the standing an upgrade asks for. They are never spent.
@@ -18,9 +22,9 @@
  */
 
 import { rng } from './engine/palette.js';
-import { GOODS, GOOD_KEYS, good, COINS, ORDER_REASONS, STAGES, CHARACTERS, NEIGHBOURS } from '../village/defs.js';
+import { GOODS, GOOD_KEYS, RAW_KEYS, MADE_KEYS, good, madeFrom, COINS, ORDER_REASONS, STAGES, NEIGHBOURS } from '../village/defs.js';
 
-export { GOODS, GOOD_KEYS, good, COINS };
+export { GOODS, GOOD_KEYS, RAW_KEYS, MADE_KEYS, good, madeFrom, COINS };
 
 /* ------------------------------------------------------------------ */
 /* Stars                                                               */
@@ -33,9 +37,6 @@ export { GOODS, GOOD_KEYS, good, COINS };
  *   2  three quarters right, but over the passage's target time
  *   3  three quarters right, within time — CAT pace and CAT accuracy
  * A 100% within time also sets `flawless`.
- * @param {object} session   stored session record (score, duration_ms)
- * @param {number} targetMin the passage's estimated_time_min
- * @param {number} [paceFactor] 1 by default; the Observatory's Night Reading uses 0.8
  */
 export function rcStars(session, targetMin, paceFactor = 1) {
   const acc = session.score?.total ? session.score.correct / session.score.total : 0;
@@ -76,7 +77,7 @@ export function roundStars({ correct, total, avgMs, targetMs = 7000 }) {
 export const STAR_WORDS = Object.freeze(['Not yet', 'Completed', 'Accurate', 'Excellent']);
 
 /* ------------------------------------------------------------------ */
-/* Bags: coins and the four goods                                      */
+/* Bags: coins and the goods                                           */
 /* ------------------------------------------------------------------ */
 
 export const BAG_KEYS = Object.freeze(['coins', ...GOOD_KEYS]);
@@ -101,6 +102,8 @@ export function bagEntries(b) {
   return BAG_KEYS.filter((k) => (b?.[k] ?? 0) > 0).map((k) => ({ ...THING.get(k), amount: b[k] }));
 }
 export function goodEntries(b) { return bagEntries(b).filter((e) => e.key !== 'coins'); }
+export function rawEntries(b) { return bagEntries(b).filter((e) => RAW_KEYS.includes(e.key)); }
+export function madeEntries(b) { return bagEntries(b).filter((e) => MADE_KEYS.includes(e.key)); }
 
 /* ------------------------------------------------------------------ */
 /* Earning — what a finished activity makes                            */
@@ -117,9 +120,9 @@ export const EARN = Object.freeze({
   /** A set at the Loom (jumbles, summaries, odd one out). */
   verbal: (stars, correct = 0, flawless = false) => bag({ thread: goodsFor(stars, flawless) }),
   /** A set from one of the content engine's banks: placement and
-   *  completion are Thread, arguments are Pages, the word bank is Blooms. */
+   *  completion are Thread, arguments are Pages, the word bank is Seeds. */
   bank: (mod, stars, correct = 0, flawless = false) => (
-    mod === 'wb' ? bag({ blooms: goodsFor(stars, flawless) })
+    mod === 'wb' ? bag({ seeds: goodsFor(stars, flawless) })
       : mod === 'cr' ? bag({ pages: goodsFor(stars, flawless) })
         : bag({ thread: goodsFor(stars, flawless) })),
   /** A family on the terraces (Word DNA). */
@@ -127,14 +130,14 @@ export const EARN = Object.freeze({
   /** A walk in the Rootwood: growing a family, or revisiting one. */
   garden: (type, clean) => bag({ roots: type === 'grow' ? 2 : clean ? 2 : 1 }),
   /** A vocabulary round in the Word Garden. */
-  round: (stars, correct = 0, flawless = false) => bag({ blooms: goodsFor(stars, flawless) }),
+  round: (stars, correct = 0, flawless = false) => bag({ seeds: goodsFor(stars, flawless) }),
   /** A Gauntlet run on the road out: mixed pressure, paid in coins. */
   gauntlet: (stars, correct = 0) => bag({ coins: 50 + 30 * (stars ?? 0) + 4 * correct }),
 });
 
-/** The good a place makes, for "what is made here". */
+/** The raw good a place makes, for "what is made here". */
 export const REGION_GOOD = Object.freeze({
-  meadow: 'blooms', pond: 'blooms', thicket: 'blooms', rootwood: 'roots', terraces: 'roots',
+  meadow: 'seeds', pond: 'seeds', thicket: 'seeds', rootwood: 'roots', terraces: 'roots',
   'reading-room': 'pages', loom: 'thread', table: 'thread', bench: 'thread', quarter: 'thread',
   wilds: 'coins', hearth: 'coins',
 });
@@ -146,33 +149,35 @@ export const REGION_GOOD = Object.freeze({
 /**
  * The n-th order in a slot. Deterministic in (slot, n), so the board
  * cannot change under a learner who is working toward it; the goods a
- * slot may ask for are the goods the village can make. Amounts grow with
- * how many orders that slot has already seen and with the village's
+ * slot may ask for are the MADE goods the village can make. Amounts grow
+ * with how many orders that slot has already seen and with the village's
  * level, and prices grow with the buildings that make each good.
  *
  * @param {number} slot
  * @param {number} n       how many orders this slot has delivered
- * @param {object} ctx     { available: string[], level: number, payMul: {good: mult}, marketMul: number, givers: [{name, look}] }
+ * @param {object} ctx     { available: made keys, level, payMul, marketMul, givers: [{id,name,look,role,reasons}] }
  */
 export function orderFor(slot, n, ctx = {}) {
   const r = rng(`order:${slot}:${n}`);
-  const available = (ctx.available ?? []).filter((k) => GOOD_KEYS.includes(k));
-  const avail = available.length ? available : ['pages'];
+  const available = (ctx.available ?? []).filter((k) => MADE_KEYS.includes(k));
+  const avail = available.length ? available : ['books'];
   const level = ctx.level ?? 1;
-  /* The very first order is the tutorial: Ada, one Page — any finished
+  const givers = ctx.givers?.length ? ctx.givers : DEFAULT_GIVERS;
+  /* The very first order is the tutorial: Mira, one Book — any finished
      passage delivers it, so the first loop lands in one read. It pays
      exactly what the Word Garden costs. */
   if (slot === 0 && n === 0) {
-    const needs = bag({ pages: 1 });
-    return { id: 'o:0:0', slot: 0, n: 0, giver: giverOf('ada'), needs, pay: 40, reason: 'for the schoolhouse', first: true };
+    const needs = bag({ books: 1 });
+    return { id: 'o:0:0', slot: 0, n: 0, giver: givers[0], needs, pay: 40, reason: 'for the schoolhouse shelf', first: true };
   }
-  /* The second order, once the Word Garden stands, is Bo asking for Blooms:
-     the learner meets the second kind of work on the second order. */
-  if (slot === 0 && n === 1 && avail.includes('blooms')) {
-    const needs = bag({ blooms: 2 });
-    return { id: 'o:0:1', slot: 0, n: 1, giver: giverOf('bo'), needs, pay: payFor(needs, ctx), reason: 'for the window boxes', first: false };
+  /* The second order asks for the second kind of work once it exists. */
+  if (slot === 0 && n === 1) {
+    const g1 = avail.includes('blooms') ? 'blooms' : avail[0];
+    const needs = bag({ [g1]: 2 });
+    const giver = givers[Math.min(givers.length - 1, 1)] ?? givers[0];
+    return { id: 'o:0:1', slot: 0, n: 1, giver, needs, pay: payFor(needs, ctx), reason: reasonFor(giver, g1, r), first: false };
   }
-  let g1 = GOOD_KEYS[(slot + n) % GOOD_KEYS.length];
+  let g1 = MADE_KEYS[(slot + n) % MADE_KEYS.length];
   if (!avail.includes(g1)) g1 = avail[(slot + n) % avail.length];
   const scale = 1 + Math.min(5, n * 0.22) + Math.max(0, level - 1) * 0.12;
   const needs = emptyBag();
@@ -183,14 +188,18 @@ export function orderFor(slot, n, ctx = {}) {
     const g2 = others[Math.floor(r() * others.length)];
     needs[g2] = Math.max(1, Math.round((0.8 + r() * 1.2) * scale * 0.8));
   }
-  const givers = ctx.givers?.length ? ctx.givers : DEFAULT_GIVERS;
   const giver = givers[Math.floor(r() * givers.length)];
-  const reasons = ORDER_REASONS[g1] ?? ['for the village'];
-  return { id: `o:${slot}:${n}`, slot, n, giver, needs, pay: payFor(needs, ctx), reason: reasons[Math.floor(r() * reasons.length)], first: false };
+  return { id: `o:${slot}:${n}`, slot, n, giver, needs, pay: payFor(needs, ctx), reason: reasonFor(giver, g1, r), first: false };
 }
 
-function giverOf(id) { const c = CHARACTERS[id]; return c ? { id: c.id, name: c.name, look: c.look ?? null } : { id, name: id, look: null }; }
-const DEFAULT_GIVERS = Object.freeze([giverOf('ada')]);
+function reasonFor(giver, key, r) {
+  const own = giver?.reasons?.[key];
+  const pool = own?.length ? own : (ORDER_REASONS[key] ?? ['for the village']);
+  return pool[Math.floor(r() * pool.length)];
+}
+
+function giverOf(nb) { return nb ? { id: nb.id, name: nb.name, look: nb.look ?? null, role: nb.role ?? '', reasons: nb.reasons ?? null } : null; }
+const DEFAULT_GIVERS = Object.freeze([giverOf(NEIGHBOURS[0])]);
 
 /** What an order pays: price per unit × the building's multiplier × the market's, plus a little for a bundle. */
 export function payFor(needs, ctx = {}) {
@@ -222,11 +231,10 @@ export function orderCoverage(order, stock) {
   return { pct: need ? have / need : 1, missing, deliverable: need > 0 && have >= need };
 }
 
-/** The people who can post orders right now: the workers, then the neighbours who have moved in. */
-export function giversFor(builtIds, houses) {
+/** The people who can post orders right now: the neighbours who have a house. */
+export function giversFor(houses) {
   const out = [];
-  for (const id of ['ada', 'bo', 'ines', 'nell']) if (builtIds.has(CHARACTERS[id].building)) out.push(giverOf(id));
-  for (let i = 0; i < houses; i += 1) { const nb = NEIGHBOURS[i % NEIGHBOURS.length]; out.push({ id: `nb:${i}`, name: nb.name, look: nb.look }); }
+  for (let i = 0; i < Math.max(1, houses); i += 1) { const nb = NEIGHBOURS[i]; if (nb) out.push(giverOf(nb)); }
   return out.length ? out : DEFAULT_GIVERS;
 }
 

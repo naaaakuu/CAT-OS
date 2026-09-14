@@ -5,13 +5,16 @@
 CAT OS is an offline-first Progressive Web App for the VARC section of India's
 Common Admission Test. It is not a study app with a game on top: it is a small
 illustrated village you own, with people who work in it, and every building
-is a real CAT skill. Reading a passage makes Pages. Learning words makes
-Blooms. Taking a word apart makes Roots. Putting a paragraph in order makes
-Thread. Villagers post orders for those goods, delivering pays coins, and
-coins build, raise and open land. The village grows because you learn — and
-it says so, on the screen, at every moment:
+is a real CAT skill. Reading a passage makes Pages, and Ada binds them into
+Books. Learning words makes Seeds, and Bo grows them into Blooms. Taking a
+word apart makes Roots, and Ines boils them into Ink. Putting a paragraph in
+order makes Thread, and Nell weaves it into Cloth. Your neighbours — a
+schoolteacher, a ferryman, an innkeeper — post orders for those goods with
+reasons, delivering pays coins, and coins build, raise and open land. The
+village grows because you learn — and it says so, on the screen, at every
+moment:
 
-> *Read with Ada → up to 3 Pages · Ada's order needs 2 more.*
+> *Mira needs 1 Book for the schoolhouse shelf. Bring me Pages and I will bind them.*
 
 The learning underneath is serious CAT preparation: a content engine of
 authored, taxonomy-tagged, blind-solved items (115 passages, 76 jumbles, 77
@@ -24,26 +27,33 @@ exact trap you fell for. The game is simple; the learning is not.
 ## The first minutes
 
 Black; the CAT OS mark; the camera glides down from the whole village to
-your house. A small charcoal cat called **Wick** says four lines. Ada, at
-the Reading House, needs a Page — and Pages come from reading. You read a
-short passage (the real thing, against the clock). You come back, the Page
-flies into her house, she cheers, and the bubble over her door turns gold:
-*40 coins.* You deliver. Coins fly into your purse. Bo wants a patch of
-ground; you build the Word Garden under a scaffold and dust; Bo arrives at
-its door with an order for two Blooms. Then you name the place. That is the
-whole game, taught by doing it once.
+your house. A small charcoal cat called **Wick** says four lines. Mira, the
+schoolteacher across the way, needs a Book — Ada binds Books from Pages, and
+Pages come from reading. You tap the Reading House; Ada tells you so herself,
+and one button starts a short passage (the real thing, against the clock).
+You come back: the Page flies into her house, a ring over the roof counts
+down, and a Book appears on the shelf outside. You take it. Mira is waiting
+at the order board by your door; you hand it to her, she cheers, and forty
+coins fly into your purse. Bo wants a patch of ground; you build the Word
+Garden under a scaffold, a builder's hammer and dust; Bo arrives at its
+door. Then you name the place. That is the whole game, taught by doing it
+once.
 
 ## The village
 
-| Building | Who | What it makes | From |
-|---|---|---|---|
-| **The Hearth** | Wick | — | home; five levels of house |
-| **The Reading House** | Ada, the reader | **Pages** | CAT passages against the clock, the second look, arguments |
-| **The Word Garden** | Bo, the gardener | **Blooms** | the CAT word lists, confusables, loanwords, the word bank — twelve-word rounds, some asked in a real sentence |
-| **The Root Workshop** | Ines, the root-scholar | **Roots** | 51 Latin and Greek families in the Rootwood, prefixes and suffixes, decoding |
-| **The Loom** | Nell, the weaver | **Thread** | para jumbles, summaries, odd one out, sentence placement, paragraph completion |
-| **The Market** | Rafi, the merchant | **Coins** | the order board: three, four, then five orders |
-| **The Road Out** | — | coins | the weekly Gauntlet, mixed and timed |
+| Building | Who | You make | They make | From |
+|---|---|---|---|---|
+| **The Hearth** | Wick | — | — | home; five levels of house; the order board by the door |
+| **The Reading House** | Ada, the bookbinder | **Pages** | **Books** | CAT passages against the clock, the second look, arguments |
+| **The Word Garden** | Bo, the gardener | **Seeds** | **Blooms** | the CAT word lists, confusables, loanwords, the word bank — twelve-word rounds, some asked in a real sentence |
+| **The Root Workshop** | Ines, the ink-maker | **Roots** | **Ink** | 51 Latin and Greek families in the Rootwood, prefixes and suffixes, decoding |
+| **The Loom** | Nell, the weaver | **Thread** | **Cloth** | para jumbles, summaries, odd one out, sentence placement, paragraph completion |
+| **The Market** | Rafi, the merchant | — | more orders, better prices | the order board: three, four, then five orders |
+| **The Road Out** | — | coins | — | the weekly Gauntlet, mixed and timed |
+
+A raw good goes straight to its building; the worker there crafts it, one
+for one, on a short clock (the first in nine seconds) into the made good
+that sits on the shelf outside until you collect it. Only made goods trade.
 
 Every building has levels. A level costs coins (sometimes goods) *and* asks
 for standing — three passages read well before a second floor, twelve items
