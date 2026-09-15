@@ -4,6 +4,130 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 2.1.1 — Launch readiness (2026-09-15)
+
+A launch-standard audit of 2.1.0 — "what would still feel unfinished, amateur,
+buggy, slow or unpolished?" — driven against the running app in a headless
+Chrome, then a systematic pass over what it found. No new features. Twenty-eight
+defects, each reproduced before the fix and measured after it.
+
+### The reading screen was unreadable
+
+- **The passage rendered at 1.14:1 contrast.** `world.css` gives `.run` a night
+  background and repaints only the BAR's colours light; the prose kept
+  `game.css`'s near-black ink. The design that fixes this already existed — the
+  `data-stage="reading-room"` block lifts the run onto the Reading Room's lit
+  stage — but `app.js` mounted a stage only for routes `isWorldRoute()` called
+  non-world, and `#/rc/session/` had been added to `isWorldRoute` so a timed run
+  would lose the tab bar. Immersive chrome and standing somewhere are different
+  questions, and are asked separately now. **1.14:1 → 13.4:1.**
+- The reading-room veil is much stronger: at the shared opacity a house, a face
+  and a fence competed with the argument on a five-minute timed passage.
+
+### Data safety and interruption
+
+- **Backup import in "replace" mode wiped the village.** `backup.stores?.[name] ?? []`
+  meant a v1 file — which predates the learning store — cleared `learning` and
+  wrote nothing back, and the entire world derives from that store. The payload
+  is validated in full before anything is cleared, and a store the file does not
+  declare is left alone.
+- **A service-worker update reloaded the tab mid-passage.** `controllerchange`
+  called `location.reload()` unconditionally, and both the 30-minute timer and
+  the every-tab-focus check can trigger it. Updates no longer start during a run,
+  and a controller change that lands anyway waits for the learner to leave it.
+
+### Three upgrades that did nothing
+
+- **Night Reading** was gated on `{kind:'world-build', upgrade_id:'observatory'}`,
+  a record shape 2.1 stopped writing. The Observatory — 1500 coins, 14 Books,
+  4 Cloth, 4 Ink, 16 passages read well — bought a toggle with nothing behind it.
+- **The Road Out's level 2** ("Gauntlet runs pay half again", 700 coins) was read
+  into `payMul[def.good]` and dropped, because a challenge has no `good`. Applied
+  now where Gauntlet coins are summed, and only to runs after the lanterns went
+  up, since coins derive from the whole record log.
+- **Reduce motion** did nothing in either direction: no stylesheet read the
+  attribute Settings wrote, and "Full" could not override an OS request. Both
+  halves answered in `base.css`. A 400ms transition now collapses to 0.01ms.
+
+### Numbers the product got wrong
+
+- The Road Out promised **"up to 3 coins"** for a run that pays 50 at worst and
+  188 for a strong one.
+- The Loom, the Table and the Bench billed **a whole tier — 8 to 13 items played
+  as one timed set** — at the length of its first item: "about 1 min" before
+  sixteen.
+
+### Rendering
+
+- **116 scaled props per view were drawn 10.5 device pixels off their anchors.**
+  `art()` documents anchors as world units at any raster scale, so the exact
+  blit path's `(exact ? 1 : sc)` dropped the scale on the path that runs in the
+  entire steady state.
+- **The pre-scaled ground reached 5400² (29.2 Mpx, ~117 MB) at max zoom**, past
+  Safari/iOS's per-canvas cap, where the allocation fails silently and the ground
+  blits blank. Above 16 Mpx it goes through the world transform instead. The
+  baked grounds are bounded now; nothing evicted them.
+- **Every scene rebuild teleported the living village back to its seeded start** —
+  after every collect, delivery and craft-ready tick, i.e. while the learner is
+  watching. The actor instances are carried across instead. Measured mid-stride:
+  9 of 9 unchanged, against 6 of 9 teleported before.
+- **Rain reseeded its generator every 90ms** and scattered 80 fresh drops, which
+  reads as flicker, not weather. Drops keep their column and speed and fall.
+- **The village canvas ignored reduced motion entirely** — a stylesheet cannot
+  reach inside a canvas. A still mode freezes time and stops `scene.update` while
+  the camera still pans. Measured over two seconds: 120 repaints before, 0 after.
+
+### Adaptivity
+
+- **The reading curator aimed a question TYPE at a list of SKILLS.** The names
+  coincide for the original nine only, so the aiming silently gave up for most
+  types while the Reading House said answers are "used to choose what you read
+  next". **10 of 27 types could aim a passage before; 27 of 27 now.**
+- **`pickSet`'s exhaustion fallback returned the just-missed items first**,
+  breaking the one rule the rest period exists to enforce. Rested items come
+  first now, still-resting ones last. `verify.mjs` §20's assertion encoded the
+  old order and has been updated with the reasoning written down.
+- **Garden Grow sessions counted as correct answers** in the root skill ledger.
+  A Grow is an introduction and carries no `clean` verdict, so `r.clean !== false`
+  scored every one of them right — hiding the learners who needed the Rootwood.
+- **Growth's mentor observations loaded all 115 passages** (3.57 MB) to build a
+  Map read only by the sessions' own `passage_id`.
+
+### Accessibility
+
+- **`#view` was `aria-live="polite"`**, so a running `<cat-timer>` made screen
+  readers read the clock aloud once a second, over the passage.
+- **Choosing an answer destroyed the focused button.** `<cat-option>` re-rendered
+  its innerHTML on every attribute change. The shell is built once and mutated in
+  place now; its stylesheet is one document-level sheet instead of one per option
+  per render.
+- **There was no keyboard route into the village at all** — its callouts carried
+  `tabindex="-1"` and the canvas key handler only pans. They are in the tab order
+  with a focus ring that reads on grass and on night, and focusing an off-screen
+  one brings the village to it.
+- **The popovers and sheets announced `role="dialog"` and honoured none of it.**
+  One shared helper names them from their own heading, moves focus in, traps Tab,
+  closes on Escape and hands focus back.
+- **Para Jumbles named every card with an `aria-label`**, which for a
+  name-from-content role replaces the content — so the sentence, which is the
+  entire task, was never read aloud.
+- **`--color-ink-3` failed AA on every surface** (3.05:1 on the desk, 2.59:1 in a
+  deep well) and **`.vbtn`** — the button that takes the learner into learning —
+  was white at **2.12:1**. Both fixed keeping their hue and the village's
+  brightness.
+
+### The arrival
+
+- The opening held opaque navy over the village for the ~2s the wordmark shows.
+  The renderer has the valley painted by the first frames, so the mark now sits
+  on a scrim with the establishing shot playing under it.
+
+### New
+
+- **`tools/check-contrast.mjs`** computes real WCAG relative-luminance ratios over
+  the design tokens in both themes plus the village's own buttons. `verify.mjs`
+  §22 runs it, so the palette cannot regress. 28 pairings, all AA.
+
 ## 2.1.0 — The living village (2026-09-14)
 
 On the owner's "VISUAL / GAMEPLAY RECONSTRUCTION 2.0 — THE VILLAGE MUST FEEL

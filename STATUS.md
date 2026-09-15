@@ -4,7 +4,40 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-14 — 2.1.0, the living village: the same learning economy rebuilt to look and behave like a polished mobile village game. Dimensional buildings and real characters drawn in an oblique projection; a raw→made production chain with visible building states and a derived queue; neighbours with jobs and reasons who wait at the order board; no dashboard — the world is the interface; a daily rhythm; a rebuilt Settings screen; audio on by default. App version 2.1.0._
+_Last updated: 2026-09-15 — 2.1.1, launch readiness: a defect pass over 2.1.0 driven against the running app. The reading screen was rendering passages at 1.14:1 and is now 13.4:1; backup import in "replace" mode could wipe the village; a service-worker update could end a timed passage; three paid upgrades did nothing; the curator could aim only 10 of 27 question types; the village had no keyboard route. 28 defects fixed, each reproduced and measured. New: tools/check-contrast.mjs, run by verify.mjs §22. App version 2.1.1._
+
+## What changed in 2.1.1 (launch readiness)
+
+_A defect pass, not a feature release. Every item below was reproduced against
+the running app in a headless Chrome and measured after the fix._
+
+| Area | State | Notes |
+|---|---|---|
+| **The reading screen** | **fixed (2.1.1)** | The passage was rendering at **1.14:1** — `world.css` darkens `.run` and repaints only the bar, while the prose kept `game.css`'s near-black ink. `#/rc/session/` had been added to `isWorldRoute`, which unmounted the very stage whose CSS makes the screen readable. Immersive chrome and standing somewhere are separate questions now. **13.4:1**, on a much stronger veil so the room does not compete with the argument |
+| **Data safety** | **fixed (2.1.1)** | Backup import in "replace" mode cleared every store before validating the file; a v1 backup wiped `learning`, where the whole world lives. Validated in full first; undeclared stores untouched |
+| **Interruption** | **fixed (2.1.1)** | A service-worker update called `location.reload()` on `controllerchange` — four minutes into a five-minute passage it ended the run and recorded nothing. Updates pause during a run; a late controller change waits |
+| **Dead upgrades** | **fixed (2.1.1)** | Night Reading (1500 coins) was gated on a record kind 2.1 stopped writing. The Road Out's level 2 (700 coins, "pay half again") was read and dropped. Reduce motion was inert in both directions |
+| **Wrong numbers** | **fixed (2.1.1)** | "Up to 3 coins" for a Gauntlet run paying 50–188. "About 1 min" for a tier of 8–13 items played as one timed set, on the Loom, the Table and the Bench |
+| **Rendering** | **fixed (2.1.1)** | 116 scaled props per view drawn 10.5 device px off their anchors; a 5400² (117 MB) ground canvas at max zoom, past iOS's per-canvas cap; the living village teleported back to its seeds on every rebuild (9 of 9 unchanged now, 6 of 9 teleported before); rain that flickered instead of falling |
+| **Adaptivity** | **fixed (2.1.1)** | The curator aimed question TYPES at SKILL keys — **10 of 27 types could aim a passage; 27 of 27 now**. `pickSet` returned just-missed items first. Garden Grow sessions counted as correct answers in the root ledger. Growth loaded all 115 passages to read three |
+| **Accessibility** | **fixed (2.1.1)** | `#view` was an `aria-live` region containing a per-second clock; answering destroyed the focused button; the village had no keyboard route at all; its dialogs honoured none of `role="dialog"`; Para Jumbles' `aria-label` hid the sentences; `--color-ink-3` and `.vbtn` failed AA |
+| **Reduced motion on canvas** | **fixed (2.1.1)** | The village is nothing but motion and CSS cannot reach inside a canvas. A still mode freezes time and `scene.update`; the camera still pans. **120 repaints per 2s → 0** |
+| **Contrast, verified** | **shipped (2.1.1)** | `tools/check-contrast.mjs` computes real WCAG ratios over the tokens in both themes plus the village buttons; `verify.mjs` §22 runs it. 28 pairings, all AA |
+
+### Known and not yet addressed
+
+| Item | Why it matters |
+|---|---|
+| Service-worker install is one atomic `addAll` of 594 requests | One dropped request on patchy mobile data and the offline promise silently does not happen |
+| A `CONTENT_VERSION` bump evicts the whole content cache | Deletes the library `library-sync` spent the learner's mobile data fetching |
+| A corrected content file cannot reach an installed learner | The fetch handler matches without a revision, so fixes need a cache wipe |
+| Arguments (6), Paragraph Completion (27) and the Word Bank run dry quickly | A daily learner reaches the bottom of Arguments in one sitting |
+| 153 ES modules and ~2.8 MB on a cold open; one failed module shows "Loading…" forever | The error handlers live inside `app.js`, so a boot failure has no surface |
+| The router has no staleness guard | Two overlapping renders can strand the learner on the wrong screen |
+| The trap and pattern ledgers are derived and never read | The copy for seven trap families is authored and never reaches a learner |
+| Off-screen callouts are `opacity: 0` | Keyboard users can now reach them (focus pans the camera); pointer users still cannot see what is off-screen |
+| The skill ledger has no time decay | A mastered-then-abandoned skill is never resurfaced |
+| ~76 KB of provably dead CSS, 309 raw hex literals, 29 distinct px font sizes | Four parallel design systems in six render-blocking stylesheets |
 
 ## What changed in 2.1.0
 
