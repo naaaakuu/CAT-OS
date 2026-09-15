@@ -16,18 +16,21 @@
  */
 
 import { renderVillage } from '../village/screens/village.js';
-import { renderPlace } from './screens/place.js';
-import { renderRound } from './screens/round.js';
 import { initWorldAudio } from './audio.js';
+
+/* The valley is the screen a cold open lands on, so it is the only one
+   imported eagerly. A place, a round and the Wilds are one tap away and
+   load then — the router awaits render, and the service worker has them
+   cached, so the wait is a cache read. */
 
 export function registerWorld(router, context) {
   initWorldAudio(context.storage).catch(() => { /* defaults */ });
   router
     .register({ path: '/awaken', title: 'Welcome', render: () => { location.replace('#/world'); } })
     .register({ path: '/world', title: 'Your village', render: (outlet) => renderVillage(outlet, context) })
-    .register({ path: '/world/place/:slug', title: 'A place', render: (outlet, params) => renderPlace(outlet, context, params) })
-    .register({ path: '/round/:region', title: 'A round', render: (outlet, params) => renderRound(outlet, context, params) })
-    .register({ path: '/round/:region/:field', title: 'A round', render: (outlet, params) => renderRound(outlet, context, params) });
+    .register({ path: '/world/place/:slug', title: 'A place', render: (outlet, params) => import('./screens/place.js').then((m) => m.renderPlace(outlet, context, params)) })
+    .register({ path: '/round/:region', title: 'A round', render: (outlet, params) => import('./screens/round.js').then((m) => m.renderRound(outlet, context, params)) })
+    .register({ path: '/round/:region/:field', title: 'A round', render: (outlet, params) => import('./screens/round.js').then((m) => m.renderRound(outlet, context, params)) });
 }
 
 /** The routes that belong to the world's immersive chrome (no header, no

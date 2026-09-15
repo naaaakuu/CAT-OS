@@ -14,9 +14,14 @@ import { icon } from '../../world/icons.js';
 
 // Three places, and no fourth. Settings is administration, and lives
 // behind the valley's ☰ (src/world/menu.js) — never in the thumb rail.
+// `valley` and `cottage` both alias to the same drawn `house` mark
+// (world/icons.js), so the rail shipped two identical roofs side by side and
+// the only way to tell Village from Standing was to read the label. Three
+// places, three marks: the village is a house, your standing is a star (it is
+// counted in stars), what is growing is a sprout.
 const ITEMS = [
   { path: '/world',    label: 'Village',  mark: 'valley' },
-  { path: '/world/place/hearth', label: 'Standing', mark: 'cottage' },
+  { path: '/world/place/hearth', label: 'Standing', mark: 'star' },
   { path: '/growth',   label: 'Growth',   mark: 'sprout' },
 ];
 

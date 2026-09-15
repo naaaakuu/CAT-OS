@@ -15,12 +15,11 @@
  *                              or `next`.
  */
 
-import { renderBankSession } from './screens/session.js';
-
 export function registerBank(router, context) {
   router.register({
     path: '/bank/session/:type/:set',
     title: 'Practice',
-    render: (outlet, params) => renderBankSession(outlet, context, params),
+    // Loaded when a set is opened, never at boot (see the RC module).
+    render: (outlet, params) => import('./screens/session.js').then((m) => m.renderBankSession(outlet, context, params)),
   });
 }

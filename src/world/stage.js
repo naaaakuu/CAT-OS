@@ -35,6 +35,23 @@ let renderer = null;
 let el = null;
 let token = 0;
 
+/**
+ * Dark mode is night, not an inversion (THE WORLD §12.6). The stage paints
+ * a real valley behind the prose, and in dark mode that valley has to be
+ * after sunset — otherwise the room is a daylit meadow with the theme's
+ * light ink on top, which is how the Reading Room once shipped at 1.14:1.
+ *
+ * Read from the DOM rather than importing shell/settings.js: the world
+ * layer does not depend on the shell, and `data-theme` is already the
+ * single source of truth that every stylesheet keys off.
+ */
+export function stageIsNight() {
+  const t = document.documentElement.getAttribute('data-theme');
+  if (t === 'dark') return true;
+  if (t === 'light') return false;
+  try { return !!globalThis.matchMedia?.('(prefers-color-scheme: dark)')?.matches; } catch { return false; }
+}
+
 function ensureLayer() {
   if (el?.isConnected) return el;
   el = document.createElement('div');
@@ -62,16 +79,19 @@ export function unmountStage() {
 export async function syncStage(storage) {
   const slug = stageFor(location.hash);
   if (!slug) { if (current) unmountStage(); return; }
-  if (slug === current) return;
+  const night = stageIsNight();
+  const key = `${slug}|${night ? 'night' : 'day'}`;
+  if (key === current) return;
   const mine = (token += 1);
-  current = slug;
+  current = key;
   document.documentElement.setAttribute('data-stage', slug);
   try {
     const { state } = await loadWorld(storage);
     if (mine !== token) return;                 // navigated away while loading
     const layer = ensureLayer();
     const canvas = layer.querySelector('.roomstage__canvas');
-    const scene = buildBackdropScene(slug, state, state.atmo);
+    const atmo = night ? { ...state.atmo, hour: 'night' } : state.atmo;
+    const scene = buildBackdropScene(slug, state, atmo);
     renderer?.destroy();
     renderer = new WorldRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
     renderer.lookAt(scene.W / 2, scene.focusY ?? scene.H * 0.55, { animate: false });

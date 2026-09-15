@@ -322,13 +322,13 @@ export async function renderMentor(outlet, { storage }, params) {
   // matches a garden family still open ground can be carried back and
   // planted as a seed, with a note about where it came from. The offer is
   // quiet, per-word, and disappears once nothing is left to carry.
-  let seedable = [];
-  try {
-    seedable = await findSeedableForPassage(storage, vocab);
-  } catch (err) {
-    console.error('[CAT OS] garden seed lookup failed:', err); // the page renders without the offer
-  }
-  const seedableByWord = new Map(seedable.map((s) => [s.word.toLowerCase(), s]));
+  //
+  // It is NOT awaited here. Answering "is any of this vocabulary a garden
+  // family on open ground?" means reading all fifty-one family files —
+  // 2.4 seconds on this machine, and almost always to conclude "none" —
+  // and until that resolved the router had nothing to paint, so the
+  // Learning Page opened on a blank screen. The page is the point; the
+  // offer is a quiet extra. It arrives when it arrives (below).
 
   const skills = item.meta.skills ?? [];
   const skillLabel = (s) => s.replaceAll('-', ' ');
@@ -406,17 +406,12 @@ export async function renderMentor(outlet, { storage }, params) {
 
         ${vocab.length ? section('Words worth keeping', `
           <div class="vocab">
-            ${vocab.map((v) => {
-              const seed = seedableByWord.get(v.word.toLowerCase());
-              return `
-              <div class="vocab__item">
+            ${vocab.map((v) => `
+              <div class="vocab__item" data-word="${escapeHTML(v.word.toLowerCase())}">
                 <div class="vocab__word">${escapeHTML(v.word)}</div>
                 <p class="vocab__use">“${escapeHTML(v.passage_use)}”</p>
                 <p class="vocab__meaning">${escapeHTML(v.meaning_here)}</p>
-                ${seed ? `<button class="vocab__carry" data-carry-family="${escapeHTML(seed.familyId)}"
-                    data-carry-word="${escapeHTML(seed.word)}">${escapeHTML(SEED_LINES.carryBack)}</button>` : ''}
-              </div>`;
-            }).join('')}
+              </div>`).join('')}
           </div>`) : ''}
 
         ${section('Keep this forever', `
@@ -458,11 +453,36 @@ export async function renderMentor(outlet, { storage }, params) {
     </section>
   `;
 
+  /* The Gate, inward (LANGUAGE_GARDEN_BIBLE §19.2): a word met here that
+     matches a garden family still on open ground can be carried back and
+     planted as a seed, with a note about where it came from. The offer is
+     quiet, per-word, and disappears once nothing is left to carry.
+
+     It arrives AFTER the page, never before it. Reading every garden family
+     to answer the question takes seconds and usually finds nothing; the
+     Learning Page must not wait behind that. If the learner has already
+     left, the appended buttons simply never appear. */
+  findSeedableForPassage(storage, vocab).then((seedable) => {
+    for (const seed of seedable) {
+      const item2 = outlet.querySelector(`.vocab__item[data-word="${CSS.escape(seed.word.toLowerCase())}"]`);
+      if (!item2 || item2.querySelector('.vocab__carry')) continue;
+      const btn = document.createElement('button');
+      btn.className = 'vocab__carry';
+      btn.dataset.carryFamily = seed.familyId;
+      btn.dataset.carryWord = seed.word;
+      btn.textContent = SEED_LINES.carryBack;
+      btn.addEventListener('click', () => carry(btn));
+      item2.appendChild(btn);
+    }
+  }).catch((err) => {
+    console.error('[CAT OS] garden seed lookup failed:', err); // the page keeps its words
+  });
+
   /* Carrying a word back through the Gate: one tap, one seed, one quiet
      confirmation in place. No celebration — a seed is intent, not an
      achievement (LANGUAGE_GARDEN_BIBLE §19.2, Law 5). */
-  for (const btn of outlet.querySelectorAll('.vocab__carry')) {
-    btn.addEventListener('click', async () => {
+  function carry(btn) {
+    return (async () => {
       try {
         await plantSeed(storage, {
           familyId: btn.dataset.carryFamily,
@@ -477,7 +497,7 @@ export async function renderMentor(outlet, { storage }, params) {
         console.error('[CAT OS]', err);
         toast('Could not carry the word back.', 'error');
       }
-    });
+    })();
   }
 
   /* Reflection: presentation in the component, persistence here (Rule 6). */

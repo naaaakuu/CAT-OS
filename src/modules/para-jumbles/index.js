@@ -15,13 +15,19 @@
  *   /pj/learn/:id    — a jumble's Learning Page (the full walkthrough)
  */
 
-import { renderPJIntro } from './screens/intro.js';
-import { renderPJBrowser } from './screens/browser.js';
-import { renderPJSession } from './screens/session.js';
-import { renderPJLearn } from './screens/learn.js';
-import { hasSeenPJIntro } from './logic/store.js';
+/*
+ * SCREENS ARE LOADED WHEN THEY ARE OPENED, never at boot. This is a
+ * no-build app, so every static `import` at the top of this file is one
+ * more HTTP request and a few more kilobytes before the VILLAGE — the
+ * screen a cold open actually lands on — can paint. The router awaits
+ * `render`, so an async render needs nothing from anyone; and
+ * service-worker.js precaches every screen below, so opening one offline
+ * is still a cache hit. `tools/module-graph.mjs` measures what is left.
+ */
 
 export function registerPJ(router, context) {
+  const intro = (outlet, opts) => import('./screens/intro.js').then((s) => s.renderPJIntro(outlet, context, opts));
+  const browser = (outlet) => import('./screens/browser.js').then((s) => s.renderPJBrowser(outlet, context));
   router
     .register({
       path: '/pj',
@@ -30,30 +36,27 @@ export function registerPJ(router, context) {
         // The first open shows the introduction, not questions — the
         // journey begins with understanding, and only then with solving.
         let seen = true;
-        try { seen = await hasSeenPJIntro(context.storage); } catch { /* storage down: browse */ }
-        if (!seen) {
-          renderPJIntro(outlet, context, {
-            firstTime: true,
-            onBegin: () => renderPJBrowser(outlet, context),
-          });
-        } else {
-          await renderPJBrowser(outlet, context);
-        }
+        try {
+          const store = await import('./logic/store.js');
+          seen = await store.hasSeenPJIntro(context.storage);
+        } catch { /* storage down: browse */ }
+        if (!seen) await intro(outlet, { firstTime: true, onBegin: () => browser(outlet) });
+        else await browser(outlet);
       },
     })
     .register({
       path: '/pj/about',
       title: 'About Para Jumbles',
-      render: (outlet) => renderPJIntro(outlet, context, { firstTime: false }),
+      render: (outlet) => intro(outlet, { firstTime: false }),
     })
     .register({
       path: '/pj/session/:set',
       title: 'Para Jumbles practice',
-      render: (outlet, params) => renderPJSession(outlet, context, params),
+      render: (outlet, params) => import('./screens/session.js').then((s) => s.renderPJSession(outlet, context, params)),
     })
     .register({
       path: '/pj/learn/:id',
       title: 'Learning Page',
-      render: (outlet, params) => renderPJLearn(outlet, context, params),
+      render: (outlet, params) => import('./screens/learn.js').then((s) => s.renderPJLearn(outlet, context, params)),
     });
 }

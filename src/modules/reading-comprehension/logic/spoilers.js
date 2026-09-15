@@ -15,7 +15,6 @@
  * The browser still lists most passages by title — you have to choose one
  * somehow — but a passage that asks you to title it is listed by its subject.
  */
-const A = new Set('aeiou');
 const spoken = (genre) => String(genre ?? 'ideas').replace(/-/g, ' ');
 
 /** Does this passage ask the reader to choose its title? */
@@ -28,6 +27,8 @@ export function asksItsOwnTitle(x) {
 /** The name to show before the passage has been read. */
 export function displayTitle(x) {
   if (!asksItsOwnTitle(x)) return x?.title ?? x?.passage?.title ?? x?.meta?.title ?? '';
-  const g = spoken(x?.genre ?? x?.meta?.genre);
-  return `${A.has(g[0]) ? 'An' : 'A'} untitled passage on ${g}`;
+  // The article belongs to "untitled", not to the genre that follows it, so
+  // it is always "An". Choosing it from the genre's first letter shipped
+  // "A untitled passage on public policy" to the browser list.
+  return `An untitled passage on ${spoken(x?.genre ?? x?.meta?.genre)}`;
 }

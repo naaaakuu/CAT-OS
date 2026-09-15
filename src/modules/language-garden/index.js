@@ -17,9 +17,6 @@
  *   /garden/journal         — the Journal (what you can read now, sightings)
  */
 
-import { renderPlant } from './screens/plant.js';
-import { renderGardenSession } from './screens/session.js';
-
 export function registerLanguageGarden(router, context) {
   router
     // 1.0.0: the valley and the Rootwood walk live in src/world/ now; the
@@ -37,12 +34,12 @@ export function registerLanguageGarden(router, context) {
     .register({
       path: '/garden/plant/:id',
       title: 'A plant',
-      render: (outlet, params) => renderPlant(outlet, context, params),
+      render: (outlet, params) => import('./screens/plant.js').then((m) => m.renderPlant(outlet, context, params)),
     })
     .register({
       path: '/garden/session/:id',
       title: 'The Rootwood',
-      render: (outlet, params) => renderGardenSession(outlet, context, params),
+      render: (outlet, params) => import('./screens/session.js').then((m) => m.renderGardenSession(outlet, context, params)),
     })
     .register({
       path: '/garden/journal',

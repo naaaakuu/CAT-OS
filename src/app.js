@@ -7,7 +7,6 @@
  */
 
 import { IndexedDBAdapter } from './core/storage/indexeddb-adapter.js';
-import { STORES } from './core/storage/storage-adapter.js';
 import { Router } from './core/router/router.js';
 import { toast } from './ui/components/cat-toast.js';
 import { registerRC } from './modules/reading-comprehension/index.js';
@@ -21,28 +20,8 @@ import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
 import { syncStage } from './world/stage.js';
 import { silenceWorld } from './world/audio.js';
-import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
-import { resetPSIntro, latestByItem as latestPSByItem } from './modules/para-summary/logic/store.js';
-import { resetOOOIntro, latestByItem as latestOOOByItem } from './modules/odd-one-out/logic/store.js';
-import { resetWDIntro } from './modules/word-dna/logic/store.js';
-import { recommendNextPJ } from './modules/para-jumbles/logic/tiers.js';
-import { recommendNextPS } from './modules/para-summary/logic/tiers.js';
-import { recommendNextOOO } from './modules/odd-one-out/logic/tiers.js';
-import { listGardenSessions, listGardenSeeds } from './modules/language-garden/logic/store.js';
-import { deriveValleyScene } from './modules/language-garden/logic/scene.js';
-import { unlockGardenAudio, setGardenLocation } from './modules/language-garden/logic/audio.js';
-import { EMPTY_DAY_LINES, pick as pickGardenLine } from './core/mentor/garden-voice.js';
-import { listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, loadWDItem, listLGItems, loadLGItems } from './core/content-loader/loader.js';
-import { deriveEngagement } from './core/engagement/stats.js';
-import { evaluate } from './core/engagement/achievements.js';
-import { dashboardLine } from './core/engagement/messages.js';
 import { initFeedback, installGlobalFeedback } from './core/engagement/feedback.js';
-import { renderSettings, loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/settings.js';
-import { formatDuration } from './core/utils/format.js';
-import { recommendNext } from './core/learning/journey.js';
-import { renderGrowth } from './shell/growth.js';
-import './ui/components/cat-xp-bar.js';
-import './ui/components/cat-week-strip.js';
+import { loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/prefs.js';
 import './ui/components/cat-nav.js';
 
 /* ------------------------------------------------------------------ */
@@ -70,105 +49,14 @@ const storage = new IndexedDBAdapter();
 /* Shell screens                                                       */
 /* ------------------------------------------------------------------ */
 
-/* Home's "Continue" card follows whichever journey the learner is
-   actually in, not just Reading Comprehension: it reads the most
-   recent session's module and asks that module's OWN recommender
-   (the same one its browser page already uses), so the app's most
-   prominent CTA never contradicts what the learner was just doing.
-   RC sessions carry no `module` field, so an absent/unrecognized
-   value returns null and renderHome falls through to the original
-   RC-only card below — no change for RC-only learners. */
-/* Word DNA soft-hidden here (0.14.0): the Language Garden is the
-   vocabulary surface now (owner decision — keep WD's routes, code and
-   data fully intact, just stop advertising it from Home/Practice).
-   Re-adding a `wd:` entry (see git history) is the one-line revert. */
-const CONTINUE_INFO = {
-  pj: { noun: 'Para Jumbles journey', verb: 'Solve it now', prefix: '/pj',
-    list: listPJItems, latest: latestPJByItem, recommend: recommendNextPJ },
-  ps: { noun: 'Para Summary journey', verb: 'Try it now', prefix: '/ps',
-    list: listPSItems, latest: latestPSByItem, recommend: recommendNextPS },
-  ooo: { noun: 'Odd One Out journey', verb: 'Try it now', prefix: '/ooo',
-    list: listOOOItems, latest: latestOOOByItem, recommend: recommendNextOOO },
-};
-
-async function recommendContinue(sessions) {
-  const lastModule = [...sessions].sort((a, b) => b.finished_at.localeCompare(a.finished_at))[0]?.module;
-  const info = CONTINUE_INFO[lastModule];
-  if (!info) return null;
-  try {
-    const [items, latest] = await Promise.all([info.list(), info.latest(storage)]);
-    const solvedIds = new Set([...latest.entries()].filter(([, a]) => a.is_correct === true).map(([id]) => id));
-    const triedIds = new Set([...latest.entries()].filter(([, a]) => a.is_correct !== null).map(([id]) => id));
-    const next = info.recommend(items, solvedIds, triedIds);
-    return next ? { info, next } : null;
-  } catch {
-    return null; // offline/uncached: Home falls back to the RC card
-  }
-}
-
-/* Today's Discovery: one word, chosen deterministically from today's
-   date (never random, so it stays the same across every open today,
-   and never server-driven, since the app is offline-first). Only
-   foreign/cat_vocab units qualify — these are words met, not roots to
-   practice — and it is a companion habit, surfaced below Continue,
-   never a replacement for the learner's primary journey
-   (WORD_DNA_BIBLE §9). */
-async function todaysDiscovery() {
-  try {
-    const items = (await listWDItems()).filter((i) => i.kind === 'foreign' || i.kind === 'cat_vocab');
-    if (items.length === 0) return null;
-    const dayNum = Number(new Date().toISOString().slice(0, 10).replaceAll('-', ''));
-    const chosen = items[dayNum % items.length];
-    const full = await loadWDItem(chosen.id);
-    const taught = full.members.filter((m) => !m.held_out);
-    if (taught.length === 0) return null;
-    return { unitId: chosen.id, word: taught[dayNum % taught.length] };
-  } catch {
-    return null; // offline/uncached: Home simply omits the widget
-  }
-}
-// Soft-hidden (0.14.0, owner decision): todaysDiscovery() above is kept
-// fully intact and correct, but Home no longer calls it or renders its
-// card — the Language Garden is the vocabulary surface now. Wiring it
-// back in is calling it once more and re-adding its card to the template.
-
-/* One calm, quiet line about the garden — never a score, never a list
-   (LANGUAGE_GARDEN_BIBLE §6.5). Distinct on purpose from the achievement-
-   flavoured "Continue your X journey" cards above: the garden earns its
-   own register even on Home. */
-async function gardenHomeCard() {
-  try {
-    const registry = await listLGItems();
-    if (registry.length === 0) return '';
-    const loaded = await loadLGItems(registry.map((i) => i.id));
-    const families = registry.map((i) => loaded.get(i.id)).filter(Boolean);
-    const sessions = await listGardenSessions(storage);
-    const gateSeeds = await listGardenSeeds(storage);
-    const scene = deriveValleyScene(families, sessions, Date.now(), gateSeeds);
-    const seed = `home-garden:${new Date().toDateString()}`;
-
-    let line;
-    if (scene.askingId) {
-      const asking = families.find((f) => f.meta.id === scene.askingId);
-      line = EMPTY_DAY_LINES.onePlantAsking(asking.root.label, seed);
-    } else if (sessions.length === 0) {
-      line = 'Your first plant is waiting.';
-    } else if (scene.openSeedId) {
-      line = pickGardenLine(seed, EMPTY_DAY_LINES.oneSeedReady);
-    } else {
-      line = pickGardenLine(seed, EMPTY_DAY_LINES.standAndClose);
-    }
-
-    return `
-      <div class="card">
-        <h2>Your garden</h2>
-        <p class="muted" style="margin-bottom: var(--space-3)">${line}</p>
-        <a class="btn btn--primary btn--block" href="#/world">Enter the valley</a>
-      </div>`;
-  } catch {
-    return ''; // offline/uncached: Home simply omits the widget
-  }
-}
+/* The Home and Practice screens are gone (1.0.0): the village is both.
+   The dashboard helpers that fed them — a per-module "Continue your
+   journey" card, Today's Discovery, a garden line — went with them in
+   2.1.2. They had been unreachable since Home became a redirect, and
+   they were dragging every module's store, tiers and loader, plus the
+   engagement stats and the garden's scene, into the boot graph: 66
+   modules and 590 KB a learner standing in the village never asked for.
+   Release 2.1.1 (commit 9a99828) has them if a dashboard ever returns. */
 
 /**
  * The two routes the world replaced.
@@ -230,15 +118,17 @@ async function boot() {
   const router = new Router(outlet)
     .register({ path: '/home',     title: 'Home',     render: renderHome })
     .register({ path: '/practice', title: 'Practice', render: renderPractice })
-    .register({ path: '/growth',   title: 'Growth',   render: (o) => renderGrowth(o, { storage }) })
-    .register({ path: '/settings', title: 'Settings', render: (o) => renderSettings(o, { storage, version: APP_VERSION }) })
+    // Both are shell screens one tap away, not the screen a cold open lands
+    // on, so they load when they are opened (see the RC module for why).
+    .register({ path: '/growth',   title: 'Growth',   render: (o) => import('./shell/growth.js').then((m) => m.renderGrowth(o, { storage })) })
+    .register({ path: '/settings', title: 'Settings', render: (o) => import('./shell/settings.js').then((m) => m.renderSettings(o, { storage, version: APP_VERSION })) })
     .registerNotFound({ title: 'Not found', render: renderNotFound });
 
   registerRC(router, { storage });
   registerPJ(router, { storage });
   registerPS(router, { storage });
   registerOOO(router, { storage });
-  registerWD(router, { storage }); // soft-hidden from nav (see CONTINUE_INFO); routes stay live
+  registerWD(router, { storage }); // soft-hidden from the nav since 0.14.0; its routes stay live
   registerLanguageGarden(router, { storage });
   registerBank(router, { storage });
   registerWorld(router, { storage });
@@ -282,11 +172,27 @@ async function boot() {
   applyImmersiveChrome();
   window.addEventListener('hashchange', applyImmersiveChrome);
 
+  /* The stage is a painted canvas, so it cannot follow a CSS variable:
+     switching to dark has to repaint the valley at night. Both the
+     explicit switch (settings.js fires catos:theme) and the system one
+     (a learner whose phone goes dark at sunset while the app is open). */
+  const restage = () => { syncStage(storage).catch(() => { /* the room still works */ }); };
+  window.addEventListener('catos:theme', restage);
+  try { globalThis.matchMedia?.('(prefers-color-scheme: dark)')?.addEventListener?.('change', restage); } catch { /* old browser */ }
+
   // The Rootwood's own session sounds (the key, the leaf taps, growth) keep
   // their location-aware state; the world engine now carries all ambience.
+  /* The Rootwood's own audio graph is 35 KB and belongs to one module; a
+     learner who never walks in should never pay for it. Both hooks below
+     load it on demand and are no-ops until then. */
+  let gardenAudioLoaded = false;
+  const gardenAudio = () => import('./modules/language-garden/logic/audio.js');
   const syncGardenLocation = () => {
     const h = location.hash;
-    setGardenLocation(h.startsWith('#/garden/session') ? 'session' : h.startsWith('#/garden/') ? 'inner' : null);
+    const where = h.startsWith('#/garden/session') ? 'session' : h.startsWith('#/garden/') ? 'inner' : null;
+    if (where === null && !gardenAudioLoaded) return;   // nothing to silence yet
+    gardenAudioLoaded = true;
+    gardenAudio().then((m) => m.setGardenLocation(where)).catch(() => { /* the room still works */ });
   };
   window.addEventListener('hashchange', syncGardenLocation);
   syncGardenLocation();
@@ -298,7 +204,10 @@ async function boot() {
   // engagement code about a specific module. Deliberately NOT {once:true}:
   // the first gesture may land before sound is even turned on in Settings,
   // and unlockGardenAudio() is a cheap no-op once the context is running.
-  window.addEventListener('pointerdown', unlockGardenAudio, { capture: true });
+  window.addEventListener('pointerdown', () => {
+    if (!gardenAudioLoaded) return;                      // never entered the Rootwood
+    gardenAudio().then((m) => m.unlockGardenAudio()).catch(() => { /* no sound */ });
+  }, { capture: true });
 
   // 3. Service worker — relative path so it works from a GitHub Pages
   //    subpath. Registration failure is non-fatal (e.g. plain HTTP).

@@ -16,14 +16,14 @@
  *   /wd/garden       — the Word Garden
  */
 
-import { renderWDIntro } from './screens/intro.js';
-import { renderWDTree } from './screens/tree.js';
-import { renderWDSession } from './screens/session.js';
-import { renderWDLearn } from './screens/learn.js';
-import { renderWDGarden } from './screens/garden.js';
-import { hasSeenWDIntro } from './logic/store.js';
+/*
+ * SCREENS ARE LOADED WHEN THEY ARE OPENED, never at boot — see
+ * src/modules/reading-comprehension/index.js for why.
+ */
 
 export function registerWD(router, context) {
+  const intro = (outlet, opts) => import('./screens/intro.js').then((m) => m.renderWDIntro(outlet, context, opts));
+  const tree = (outlet) => import('./screens/tree.js').then((m) => m.renderWDTree(outlet, context));
   router
     .register({
       path: '/wd',
@@ -32,35 +32,32 @@ export function registerWD(router, context) {
         // The first open shows the introduction, not words — the
         // journey begins with understanding, and only then with meeting words.
         let seen = true;
-        try { seen = await hasSeenWDIntro(context.storage); } catch { /* storage down: browse */ }
-        if (!seen) {
-          renderWDIntro(outlet, context, {
-            firstTime: true,
-            onBegin: () => renderWDTree(outlet, context),
-          });
-        } else {
-          await renderWDTree(outlet, context);
-        }
+        try {
+          const store = await import('./logic/store.js');
+          seen = await store.hasSeenWDIntro(context.storage);
+        } catch { /* storage down: browse */ }
+        if (!seen) await intro(outlet, { firstTime: true, onBegin: () => tree(outlet) });
+        else await tree(outlet);
       },
     })
     .register({
       path: '/wd/about',
       title: 'About Word DNA',
-      render: (outlet) => renderWDIntro(outlet, context, { firstTime: false }),
+      render: (outlet) => intro(outlet, { firstTime: false }),
     })
     .register({
       path: '/wd/session/:set',
       title: 'Word DNA practice',
-      render: (outlet, params) => renderWDSession(outlet, context, params),
+      render: (outlet, params) => import('./screens/session.js').then((m) => m.renderWDSession(outlet, context, params)),
     })
     .register({
       path: '/wd/learn/:id',
       title: 'Learning Page',
-      render: (outlet, params) => renderWDLearn(outlet, context, params),
+      render: (outlet, params) => import('./screens/learn.js').then((m) => m.renderWDLearn(outlet, context, params)),
     })
     .register({
       path: '/wd/garden',
       title: 'Word Garden',
-      render: (outlet) => renderWDGarden(outlet, context),
+      render: (outlet) => import('./screens/garden.js').then((m) => m.renderWDGarden(outlet, context)),
     });
 }

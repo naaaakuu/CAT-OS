@@ -15,13 +15,19 @@
  *   /ps/learn/:id    — an item's Learning Page (the full walkthrough)
  */
 
-import { renderPSIntro } from './screens/intro.js';
-import { renderPSBrowser } from './screens/browser.js';
-import { renderPSSession } from './screens/session.js';
-import { renderPSLearn } from './screens/learn.js';
-import { hasSeenPSIntro } from './logic/store.js';
+/*
+ * SCREENS ARE LOADED WHEN THEY ARE OPENED, never at boot. This is a
+ * no-build app, so every static `import` at the top of this file is one
+ * more HTTP request and a few more kilobytes before the VILLAGE — the
+ * screen a cold open actually lands on — can paint. The router awaits
+ * `render`, so an async render needs nothing from anyone; and
+ * service-worker.js precaches every screen below, so opening one offline
+ * is still a cache hit. `tools/module-graph.mjs` measures what is left.
+ */
 
 export function registerPS(router, context) {
+  const intro = (outlet, opts) => import('./screens/intro.js').then((s) => s.renderPSIntro(outlet, context, opts));
+  const browser = (outlet) => import('./screens/browser.js').then((s) => s.renderPSBrowser(outlet, context));
   router
     .register({
       path: '/ps',
@@ -30,30 +36,27 @@ export function registerPS(router, context) {
         // The first open shows the introduction, not questions — the
         // journey begins with understanding, and only then with choosing.
         let seen = true;
-        try { seen = await hasSeenPSIntro(context.storage); } catch { /* storage down: browse */ }
-        if (!seen) {
-          renderPSIntro(outlet, context, {
-            firstTime: true,
-            onBegin: () => renderPSBrowser(outlet, context),
-          });
-        } else {
-          await renderPSBrowser(outlet, context);
-        }
+        try {
+          const store = await import('./logic/store.js');
+          seen = await store.hasSeenPSIntro(context.storage);
+        } catch { /* storage down: browse */ }
+        if (!seen) await intro(outlet, { firstTime: true, onBegin: () => browser(outlet) });
+        else await browser(outlet);
       },
     })
     .register({
       path: '/ps/about',
       title: 'About Para Summary',
-      render: (outlet) => renderPSIntro(outlet, context, { firstTime: false }),
+      render: (outlet) => intro(outlet, { firstTime: false }),
     })
     .register({
       path: '/ps/session/:set',
       title: 'Para Summary practice',
-      render: (outlet, params) => renderPSSession(outlet, context, params),
+      render: (outlet, params) => import('./screens/session.js').then((s) => s.renderPSSession(outlet, context, params)),
     })
     .register({
       path: '/ps/learn/:id',
       title: 'Learning Page',
-      render: (outlet, params) => renderPSLearn(outlet, context, params),
+      render: (outlet, params) => import('./screens/learn.js').then((s) => s.renderPSLearn(outlet, context, params)),
     });
 }
