@@ -130,11 +130,16 @@ export async function launchChrome({ width = 390, height = 844, dpr = 1, port = 
       if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description ?? r.exceptionDetails.text);
       return r.result.value;
     },
-    /** A hash-only change is a SAME-document navigation: always reload. */
+    /**
+     * A hash-only change is a SAME-document navigation: always reload.
+     * `ignoreCache` on purpose — a gate that measures the browser's memory
+     * cache is a gate that keeps reporting a defect you have already fixed,
+     * which is worse than no gate at all.
+     */
     async open(url, wait = 3500) {
       await send('Page.navigate', { url });
       await new Promise((r) => setTimeout(r, 150));
-      await send('Page.reload', { ignoreCache: false });
+      await send('Page.reload', { ignoreCache: true });
       await new Promise((r) => setTimeout(r, wait));
     },
     /* A screenshot of a full-bleed canvas on a busy machine can miss a

@@ -16,7 +16,7 @@
   --g-paper-3: #E8DCC4;
   --g-ink: #23212B;
   --g-ink-2: #5C5646;
-  --g-ink-3: #655F4F;
+  --g-ink-3: #5E5848;
   --g-line: rgba(60, 48, 30, 0.13);
   --g-accent: #2E6B4B;
   --g-accent-2: #3C7F5A;
@@ -619,7 +619,7 @@
   --g-paper-3: #E8DCC4;
   --g-ink: #23212B;
   --g-ink-2: #5C5646;
-  --g-ink-3: #655F4F;
+  --g-ink-3: #5E5848;
   --g-line: rgba(60, 48, 30, 0.13);
   --g-panel: rgba(255, 251, 242, 0.94);
   --g-panel-edge: rgba(255, 255, 255, 0.5);
@@ -646,7 +646,10 @@
 .run__veil { position: fixed; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(10, 16, 38, 0.62), rgba(10, 16, 38, 0.86) 55%, rgba(10, 16, 38, 0.93)); }
 .run > *:not(.run__scene):not(.run__veil) { position: relative; z-index: 2; }
 .run__bar { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0; color: #fff; }
-.run__leave { background: rgba(255, 255, 255, 0.14); color: #fff; }
+/* The leave control is a white glyph on a translucent chip over a night
+   scene; at 0.14 the chip barely darkened the ground under it and the glyph
+   measured 4.4:1. A little more chip, not a different colour. */
+.run__leave { background: rgba(10, 16, 38, 0.42); color: #fff; }
 .run__place { color: rgba(255, 255, 255, 0.8); }
 .run__count { color: rgba(255, 255, 255, 0.84); }
 .run__what { color: #fff; }
@@ -910,7 +913,26 @@
 /* The Wilds: the road out, painted behind the records. */
 .place--wilds .place__hero { background: #0A1230; }
 .place--wilds .place__hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.place--wilds .place__hero > div { text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65); }
+/* The hero canvas paints the road out in daylight, and the wordmark on top
+   of it is white. A shadow is not a ground: "Week 38 · the Gauntlet"
+   measured 1.65:1 over the bright grass. A scrim is. */
+.place--wilds .place__hero::after {
+  /* `height: auto` on purpose: the shared rule this overrides pins the fade
+     to the bottom 60px, and with top, bottom AND height all specified the
+     height wins — the scrim covered the top strip only, and the wordmark
+     underneath it stayed at 1.65:1 over bright grass. */
+  content: ""; position: absolute; inset: 0; height: auto; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(8, 14, 34, 0.46), rgba(8, 14, 34, 0.3) 52%, rgba(8, 14, 34, 0.56));
+}
+/* The scene paints a bright bloom on the horizon, exactly where the wordmark
+   sits, so an even scrim is not enough: white type measured 1.9:1 over it.
+   The wordmark carries its own soft ground, and the valley still shows at
+   the edges. */
+.place--wilds .place__hero > div {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65); z-index: 1;
+  background: radial-gradient(70% 52% at 50% 46%, rgba(8, 14, 34, 0.82), rgba(8, 14, 34, 0.5) 62%, rgba(8, 14, 34, 0) 100%);
+}
+.place--wilds .place__back { z-index: 2; }
 .brief__fact.is-context { background: rgba(59, 123, 214, 0.13); border-color: rgba(59, 123, 214, 0.42); color: #1E4E96; }
 .vround__sentence mark { background: linear-gradient(transparent 52%, rgba(233, 185, 73, 0.55) 52%); color: inherit; font-weight: 700; padding: 0 1px; }
 
@@ -1578,10 +1600,15 @@
   display: grid; grid-template-columns: 34px 1fr; align-items: center; gap: 10px;
   padding: 9px 12px; border-radius: 13px;
   background: var(--g-paper-2); border: 1px solid var(--g-line);
-  opacity: 0.5;
+  /* A waymark the road has not reached is quieter, but its name is not a
+     rumour: at 0.5 the whole row went to 2.2:1 and "Copperbeck" to 3.2:1.
+     The mark fades; the words stay readable. */
+  opacity: 1;
 }
-.road__stop.is-reached { opacity: 1; }
-.road__stop.is-next { opacity: 0.9; border-color: var(--g-gold); box-shadow: 0 0 0 2px rgba(223, 162, 44, 0.16); }
+.road__stop:not(.is-reached):not(.is-next) { background: transparent; border-style: dashed; }
+.road__stop:not(.is-reached):not(.is-next) .road__mark { opacity: 0.45; }
+.road__stop:not(.is-reached):not(.is-next) .road__body b { color: var(--g-ink-2); font-weight: 600; }
+.road__stop.is-next { border-color: var(--g-gold); box-shadow: 0 0 0 2px rgba(223, 162, 44, 0.16); }
 .road__mark {
   width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
   background: radial-gradient(circle at 32% 26%, #FFFCF3, #EFE1C4 76%);

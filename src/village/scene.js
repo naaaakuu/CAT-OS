@@ -18,7 +18,7 @@
 import { rng, LIGHT } from '../world/engine/palette.js';
 import { art, PAL } from './art.js';
 import { WORLD, BUILDINGS, PLOTS, HOUSE_SPOTS, CHARACTERS, NEIGHBOURS, BOARD, PLACE_BUILDING } from './defs.js';
-import { paintTerrain, PATHS, POND, RIVER, BRIDGE, JETTY, HUB, nearPath, inPond, nearRiver, nearBuilding, inPlot } from './terrain.js';
+import { paintTerrain, PATHS, POND, RIVER, BRIDGE, JETTY, HUB, nearPath, inPond, nearRiver, nearBuilding, inPlot, placeable, invalidSpot } from './terrain.js';
 
 /* ------------------------------------------------------------------ */
 /* The path network                                                    */
@@ -615,7 +615,9 @@ export function buildVillageScene(state, atmo, opts = {}) {
     [480, 1110, 'pine', 1.1, 0], [640, 1000, 'round', 0.8, 1], [250, 860, 'round', 0.9, 2], [990, 1000, 'pine', 1.1, 0],
   ];
   for (const [x, y, kind, size, tone] of placedTrees) {
-    if (nearBuilding(x, y, 8) || inPlot(x, y) || nearPath(x, y, 16)) continue;
+    // Through the one guard, like every other scatter. This list used to test
+    // buildings, plots and paths only, and two of its trees stood in the water.
+    if (!placeable(x, y, { path: 16, building: 8, pond: 24, river: 36 })) continue;
     const treeParams = { kind, size, seed: `hp${(x + y) % 6}`, tone, autumn: season === 'autumn' && kind === 'round' };
     statics.push({ x, y, art: art('tree', treeParams), sway: (x * 7 + y) % 6, treeParams });
   }
@@ -625,9 +627,7 @@ export function buildVillageScene(state, atmo, opts = {}) {
     const edge = Math.min(x, WORLD.W - x, y * 1.4, (WORLD.H - y) * 1.6);
     const keep = tr() < (edge < 120 ? 0.95 : edge < 240 ? 0.55 : 0.3);
     if (!keep) continue;
-    if (nearPath(x, y, 26) || inPond(x, y, 40) || nearRiver(x, y, 46) || nearBuilding(x, y, 14) || inPlot(x, y)) continue;
-    if (Math.abs(x - BRIDGE.x) < 70 && Math.abs(y - BRIDGE.y) < 60) continue;
-    if (Math.abs(x - JETTY.x) < 60 && Math.abs(y - JETTY.y) < 40) continue;
+    if (!placeable(x, y, { path: 26, pond: 40, river: 46, building: 14 })) continue;
     const pine = tr() > 0.62;
     const size = [0.8, 1, 1.2, 1.4][Math.floor(tr() * 4)];
     const treeParams = { kind: pine ? 'pine' : 'round', size, seed: `t${i % 6}`, tone: Math.floor(tr() * 3), autumn: season === 'autumn' && !pine };
@@ -639,13 +639,13 @@ export function buildVillageScene(state, atmo, opts = {}) {
     const [px, py] = path[Math.floor(fr() * path.length)];
     const side = fr() > 0.5 ? 1 : -1;
     const x = px + side * (26 + fr() * 14), y = py + (fr() - 0.5) * 20;
-    if (inPond(x, y, 30) || nearRiver(x, y, 40) || nearBuilding(x, y, 20) || inPlot(x, y)) continue;
+    if (!placeable(x, y, { path: false, pond: 30, river: 40, building: 20 })) continue;
     statics.push({ x, y, art: art(fr() > 0.7 ? 'grassTuft' : 'flowerPatch', { seed: `pf${i}`, n: 5, w: 24, h: 14 }), scale: fr() > 0.7 ? 1.6 : 1.3 });
   }
   const br = rng('village-bushes');
   for (let i = 0; i < 80; i += 1) {
     const x = 60 + br() * (WORLD.W - 120), y = 80 + br() * (WORLD.H - 160);
-    if (nearPath(x, y, 22) || inPond(x, y, 30) || nearRiver(x, y, 40) || nearBuilding(x, y, 12) || inPlot(x, y)) continue;
+    if (!placeable(x, y, { path: 22, pond: 30, river: 40, building: 12 })) continue;
     const kind = br();
     statics.push({ x, y, art: art(kind > 0.55 ? 'bush' : kind > 0.25 ? 'flowerPatch' : 'grassTuft', { seed: `b${i}`, n: 5, berries: br() > 0.7, flowers: br() > 0.8 }), scale: kind > 0.55 ? 1 : 1.5 });
     if (kind > 0.55 && br() > 0.5) statics.push({ x: x + 22, y: y + 6, art: art('bush', { seed: `bb${i}`, size: 0.7 }) });
@@ -653,19 +653,22 @@ export function buildVillageScene(state, atmo, opts = {}) {
   const gr = rng('village-tufts');
   for (let i = 0; i < 160; i += 1) {
     const x = 40 + gr() * (WORLD.W - 80), y = 60 + gr() * (WORLD.H - 120);
-    if (nearPath(x, y, 14) || inPond(x, y, 24) || nearRiver(x, y, 34) || nearBuilding(x, y, 6) || inPlot(x, y)) continue;
+    if (!placeable(x, y, { path: 14, pond: 24, river: 34, building: 6 })) continue;
     statics.push({ x, y, art: art('grassTuft', { seed: `g${i % 8}` }), scale: 1.4 + (i % 3) * 0.3 });
   }
   for (let i = 0; i < 24; i += 1) {
     const x = 60 + br() * (WORLD.W - 120), y = 80 + br() * (WORLD.H - 160);
-    if (nearPath(x, y, 20) || inPond(x, y, 30) || nearRiver(x, y, 30) || nearBuilding(x, y, 26) || inPlot(x, y)) continue;
+    if (!placeable(x, y, { path: 20, pond: 30, river: 30, building: 26 })) continue;
     statics.push({ x, y, art: art(br() > 0.7 ? 'log' : 'rock', { seed: `r${i}`, size: 0.7 + br() * 0.9 }) });
   }
   // Reeds and a stump by the pond, stones along the river.
-  for (let i = 0; i < 6; i += 1) { const a = 0.9 + i * 0.42; statics.push({ x: POND.cx + Math.cos(a) * (POND.rx + 10), y: POND.cy + Math.sin(a) * (POND.ry + 8) + 6, art: art('reeds', { seed: `pr${i}`, n: 4 + (i % 3) }) }); }
-  for (let i = 0; i < 4; i += 1) { const a = 3.6 + i * 0.4; statics.push({ x: POND.cx + Math.cos(a) * (POND.rx + 8), y: POND.cy + Math.sin(a) * (POND.ry + 6) + 4, art: art('reeds', { seed: `pq${i}`, n: 3 + (i % 2) }) }); }
-  statics.push({ x: 236, y: 848, art: art('stump', { seed: 'ps' }) });
-  statics.push({ x: 858, y: 612, art: art('stoneWall', { w: 36 }) });
+  for (let i = 0; i < 6; i += 1) { const a = 0.9 + i * 0.42; statics.push({ x: POND.cx + Math.cos(a) * (POND.rx + 10), y: POND.cy + Math.sin(a) * (POND.ry + 8) + 6, art: art('reeds', { seed: `pr${i}`, n: 4 + (i % 3) }), waterside: true }); }
+  for (let i = 0; i < 4; i += 1) { const a = 3.6 + i * 0.4; statics.push({ x: POND.cx + Math.cos(a) * (POND.rx + 8), y: POND.cy + Math.sin(a) * (POND.ry + 6) + 4, art: art('reeds', { seed: `pq${i}`, n: 3 + (i % 2) }), waterside: true }); }
+  // Hand-placed, and checked like everything else: reeds belong ON the pond's
+  // rim, a stump belongs beside it, and the wall belongs on the river's bank.
+  // Anything here that fails the guard is a bug, not a decision.
+  statics.push({ x: 236, y: 848, art: art('stump', { seed: 'ps' }), waterside: true });
+  statics.push({ x: 858, y: 612, art: art('stoneWall', { w: 36 }), waterside: true });
   // Lamps in the yard and along the main street once there is a market.
   for (const [x, y] of [[540, 760], [660, 790]]) { statics.push({ x, y, art: art('lamp', { lit: dark }) }); addLamp(x, y - 22); }
   if (v.builtIds.has('market')) { for (const [x, y] of [[560, 850], [640, 860]]) { statics.push({ x, y, art: art('lamp', { lit: dark }) }); addLamp(x, y - 22); } }
@@ -701,6 +704,45 @@ export function buildVillageScene(state, atmo, opts = {}) {
     life.push(wick);
   }
 
+  /* ---- The invariant: nothing stands in the water or inside a wall ----
+
+     The scatters ask the guard before they place; these are the ones that
+     do NOT scatter — a bench 96px to the right of the Reading House, a bush
+     beside a cottage, a lamp by the market — positioned by hand relative to
+     their owner. Most are right. A few were not: the Reading House sits 115
+     pixels from the river, so its bench stood IN it, and two cottage bushes
+     landed inside the neighbouring house as the village grew.
+
+     Rather than hand-nudge each one and wait for the next building to move,
+     every placed object is checked here, once, at the end. A prop that lands
+     somewhere impossible is mirrored to the other side of whatever it
+     belongs beside; if that is impossible too it is dropped, because an
+     absent bush is invisible and a bush inside a wall is a bug. Objects that
+     belong at the water (reeds on the pond rim, the stone wall on the bank)
+     carry `waterside` and are left alone.
+
+     tools/check-world.mjs re-asks the same question of the scene the
+     renderer actually draws, so this cannot quietly stop working. */
+  {
+    let moved = 0, dropped = 0;
+    const nearestOwner = (x, y) => {
+      let best = null, bestD = Infinity;
+      for (const d of BUILDINGS) { const dd = (d.at.x - x) ** 2 + (d.at.y - y) ** 2; if (dd < bestD) { bestD = dd; best = d.at; } }
+      for (const sp of HOUSE_SPOTS) { const dd = (sp.x - x) ** 2 + (sp.y - y) ** 2; if (dd < bestD) { bestD = dd; best = sp; } }
+      return bestD < 260 * 260 ? best : null;
+    };
+    for (let i = statics.length - 1; i >= 0; i -= 1) {
+      const st = statics[i];
+      if (st.waterside || !invalidSpot(st.x, st.y)) continue;
+      const owner = nearestOwner(st.x, st.y);
+      const tries = [];
+      if (owner) tries.push([owner.x - (st.x - owner.x), st.y]);
+      tries.push([st.x, st.y + 42], [st.x, st.y - 42], [st.x - 56, st.y], [st.x + 56, st.y]);
+      const ok = tries.find(([tx, ty]) => !invalidSpot(tx, ty));
+      if (ok) { st.x = ok[0]; st.y = ok[1]; moved += 1; } else { statics.splice(i, 1); dropped += 1; }
+    }
+    if (moved || dropped) scenePlacementFixes = { moved, dropped };
+  }
   /* ---- Sky ---- */
   life.push(birds({ seed: 'sky' }));
   if (!dark) life.push(cloudShadows({ seed: 'sky', count: 3 }));
@@ -774,6 +816,7 @@ export function buildVillageScene(state, atmo, opts = {}) {
     backdrop: night ? '#1E3A20' : '#4F8E36',
     hour, atmo, season,
     life, lifeKey,          // so the next rebuild can carry these forward
+    statics,                // tools/check-world.mjs validates every anchor
     warm(bucket, tint = null) {
       if (!pending.length) return;
       warmSince += 1;
@@ -864,6 +907,8 @@ export function buildVillageScene(state, atmo, opts = {}) {
  * A portrait backdrop of one building at its level with its worker at the
  * door, on the village's ground. Painted once and left still.
  */
+export let scenePlacementFixes = null;
+
 export function buildBackdropScene(slug, state, atmo) {
   const bid = PLACE_BUILDING[slug] ?? 'hearth';
   const v = state?.village;

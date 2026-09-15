@@ -2365,6 +2365,78 @@ console.log('\n22. Colour contrast (tools/check-contrast.mjs — WCAG AA)');
   if (!failures.length) ok(`${lines.length} ink/surface pairings clear WCAG AA in light, dark and the village`);
 }
 
+console.log('\n23. World placement (tools/check-world.mjs — a real browser)');
+{
+  // Static reading cannot answer this: the scene is built by code that needs
+  // a canvas, and the defect the owner actually saw — a tree in the middle of
+  // the river — lived in one scatter whose filter list was shorter than its
+  // neighbours'. So this opens the village for real, four stages of growth by
+  // three hours of the day, and asks the terrain about every object drawn.
+  const { checkWorld } = await mod('tools/check-world.mjs');
+  const { skipped, problems, checked, waived } = await checkWorld();
+  if (skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
+  else {
+    for (const p of problems) bad('world: ' + p);
+    if (!problems.length) ok(`${checked} placed objects across four village states and three hours; none in the water, a wall or the yard (${waived} waterside by design)`);
+  }
+}
+
+console.log('\n24. Rendered contrast (tools/check-rendered-contrast.mjs — real pixels)');
+{
+  // §22 proves the PALETTE is sound and passed every release while the
+  // Reading Room rendered its passages at 1.14:1. This proves the SCREEN is:
+  // it opens each route in both themes, paints every glyph transparent,
+  // screenshots both, and measures the real ratio between the ink and
+  // whatever is actually behind it — a card, a gradient, a translucent veil
+  // over a canvas valley. About a minute per route, so the full sweep is
+  // opt-in and a release should always run it:
+  //     CATOS_FULL=1 node tools/verify.mjs
+  const full = process.env.CATOS_FULL === '1';
+  const { checkRenderedContrast, ROUTES } = await mod('tools/check-rendered-contrast.mjs');
+  const routes = full ? ROUTES : ROUTES.filter((r) => r.risk);
+  const { skipped, failures, checked } = await checkRenderedContrast({ routes });
+  if (skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
+  else {
+    for (const f of failures) bad(`contrast: [${f.theme}] ${f.hash} ${f.sel} is ${f.ratio}:1, needs ${f.need} ("${f.text}")`);
+    if (!failures.length) ok(`${checked} rendered text runs over ${routes.length} route(s) x 2 themes clear AA against what is actually behind them${full ? '' : ` (CATOS_FULL=1 sweeps all ${ROUTES.length})`}`);
+  }
+}
+
+console.log('\n25. The offline promise (precache lists, fingerprints, budgets)');
+{
+  // Three ways an offline-first app silently stops being offline-first:
+  // a new screen nobody added to the precache list, a changed file shipped
+  // under an unchanged cache version, and a boot that quietly grows until
+  // the first paint is a download. None of them has a symptom you can see.
+  const { coreFiles, shellFiles, precacheFiles, fingerprints } = await mod('tools/build-precache.mjs');
+  const { summary, BUDGET } = await mod('tools/module-graph.mjs');
+  const sw = readFileSync(join(root, 'service-worker.js'), 'utf8');
+
+  const listOf = (name) => {
+    const m = sw.match(new RegExp('const ' + name + ' = \\[([\\s\\S]*?)\\n\\];'));
+    return m ? [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]) : null;
+  };
+  for (const [name, want] of [['CORE_FILES', coreFiles()], ['SHELL_FILES', shellFiles()], ['CONTENT_FILES', precacheFiles()]]) {
+    const have = listOf(name);
+    if (!have) { bad(`service worker: ${name} not found`); continue; }
+    const missing = want.filter((f) => !have.includes(f));
+    const extra = have.filter((f) => !want.includes(f));
+    if (missing.length) bad(`service worker: ${name} is missing ${missing.length} file(s) — run tools/build-precache.mjs (${missing.slice(0, 3).join(', ')}…)`);
+    if (extra.length) bad(`service worker: ${name} lists ${extra.length} file(s) that are not on disk — run tools/build-precache.mjs (${extra.slice(0, 3).join(', ')}…)`);
+  }
+
+  const fp = fingerprints();
+  const inSW = (name) => (sw.match(new RegExp("const " + name + " = '([^']*)'")) ?? [])[1];
+  if (inSW('BUILD_ID') !== fp.shell) bad(`service worker: BUILD_ID is ${inSW('BUILD_ID')}, the shipped files hash to ${fp.shell} — run tools/build-precache.mjs, or installed learners keep the old code`);
+  if (inSW('CONTENT_ID') !== fp.content) bad(`service worker: CONTENT_ID is ${inSW('CONTENT_ID')}, the shipped content hashes to ${fp.content} — run tools/build-precache.mjs`);
+
+  const s = summary();
+  if (s.count > BUDGET.modules) bad(`cold open: ${s.count} modules, budget ${BUDGET.modules}. Load the new one where it is used, not in the bootstrap (tools/module-graph.mjs --why <file>)`);
+  if (s.bytes > BUDGET.bytes) bad(`cold open: ${Math.round(s.bytes / 1024)} KB of JavaScript, budget ${Math.round(BUDGET.bytes / 1024)} KB`);
+
+  if (problems.length === 0) ok(`${coreFiles().length} core + ${shellFiles().length} shell + ${precacheFiles().length} content files precached, fingerprints current, cold open ${s.count} modules / ${Math.round(s.bytes / 1024)} KB`);
+}
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');

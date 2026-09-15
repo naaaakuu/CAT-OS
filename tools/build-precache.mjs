@@ -24,10 +24,37 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import crypto from 'node:crypto';
 import { eagerGraph } from './module-graph.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SW = path.join(ROOT, 'service-worker.js');
+
+/**
+ * Every shippable app file on disk. SHELL_FILES was hand-maintained, so a new
+ * screen was offline-broken until somebody remembered to add it — and since
+ * screens are loaded on demand now, "offline-broken" means a tap that 404s.
+ * Derived from the tree instead: if it is in src/ and it is code or a style,
+ * it is precached.
+ */
+export function shellFiles() {
+  const out = new Set(coreFiles());
+  const walk = (rel) => {
+    const abs = path.join(ROOT, rel);
+    if (!fs.existsSync(abs)) return;
+    for (const name of fs.readdirSync(abs).sort()) {
+      const child = `${rel}/${name}`;
+      const st = fs.statSync(path.join(ROOT, child));
+      if (st.isDirectory()) walk(child);
+      else if (/\.(js|mjs|css)$/.test(name)) out.add(`./${child}`);
+    }
+  };
+  walk('src');
+  for (const icon of ['apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'maskable-512.png']) {
+    if (fs.existsSync(path.join(ROOT, 'assets/icons', icon))) out.add(`./assets/icons/${icon}`);
+  }
+  return [...out].sort();
+}
 
 /** Everything a cold open of the village fetches before it can paint. */
 export function coreFiles() {
@@ -61,6 +88,35 @@ export function precacheFiles() {
   return files;
 }
 
+/**
+ * A short hash of the CONTENT of every file in a list.
+ *
+ * The cache name carries this, so shipping a changed file always produces a
+ * new cache and an installed learner always gets the new code. Nothing used
+ * to enforce a CACHE_VERSION bump: ship a changed stylesheet without one and
+ * every installed learner stayed on the old one, forever, with no symptom
+ * anybody could see. A number a human has to remember is not a mechanism.
+ */
+export function fingerprint(files) {
+  const h = crypto.createHash('sha256');
+  for (const rel of files.slice().sort()) {
+    const abs = path.join(ROOT, rel.replace(/^\.\//, ''));
+    h.update(rel);
+    try { h.update(fs.readFileSync(abs)); } catch { h.update('missing'); }
+  }
+  return h.digest('hex').slice(0, 10);
+}
+
+/** The two fingerprints the worker should be carrying right now. */
+export function fingerprints() {
+  const core = coreFiles();
+  const shell = shellFiles();
+  return {
+    shell: fingerprint([...new Set([...core, ...shell])].filter((f) => f !== './')),
+    content: fingerprint(precacheFiles()),
+  };
+}
+
 /** Replace `const NAME = [ … \n];` with a fresh list, preserving EOL. */
 function rewriteList(lf, name, files) {
   const start = lf.indexOf(`const ${name} = [`);
@@ -76,13 +132,19 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const eol = raw.includes('\r\n') ? '\r\n' : '\n';
   let lf = raw.replace(/\r\n/g, '\n');
   const core = coreFiles();
+  const shell = shellFiles();
   const content = precacheFiles();
-  for (const [name, files] of [['CORE_FILES', core], ['CONTENT_FILES', content]]) {
+  for (const [name, files] of [['CORE_FILES', core], ['SHELL_FILES', shell], ['CONTENT_FILES', content]]) {
     const next = rewriteList(lf, name, files);
     if (next === null) { console.error(`${name} block not found in service-worker.js`); process.exit(1); }
     lf = next;
   }
+  // The fingerprints go in last, AFTER the lists, so they describe what the
+  // worker will actually ship.
+  const { shell: shellId, content: contentId } = fingerprints();
+  lf = lf.replace(/const BUILD_ID = '[^']*';/, `const BUILD_ID = '${shellId}';`);
+  lf = lf.replace(/const CONTENT_ID = '[^']*';/, `const CONTENT_ID = '${contentId}';`);
   const changed = lf !== raw.replace(/\r\n/g, '\n');
   if (changed) fs.writeFileSync(SW, lf.split('\n').join(eol));
-  console.log(`precache: ${core.length} core entries, ${content.length} content entries${changed ? ' (service-worker.js rewritten)' : ' (unchanged)'}`);
+  console.log(`precache: ${core.length} core, ${shell.length} shell, ${content.length} content entries · shell ${shellId} · content ${contentId}${changed ? ' (rewritten)' : ' (unchanged)'}`);
 }

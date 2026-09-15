@@ -26,6 +26,12 @@ export function stageFor(hash) {
   if (h.startsWith('#/ps')) return 'table';
   if (h.startsWith('#/ooo')) return 'bench';
   if (h.startsWith('#/wd')) return 'terraces';
+  // The second look paints its OWN night scene and veil (it is a review, held
+  // in cards, like a vocabulary round) — so it must not also get the Reading
+  // Room's lit stage. Two scenes were stacking, and the stage's rules then
+  // painted the run bar's dark ink onto the second-look's own dark scene:
+  // "The Reading House" at 1.16:1 above a running clock.
+  if (h === '#/rc/second-look') return null;
   if (h.startsWith('#/rc')) return 'reading-room';
   return null;
 }

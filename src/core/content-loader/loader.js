@@ -23,11 +23,26 @@ import {
   lengthClassOf, difficultyLabel,
 } from '../learning/taxonomy.js';
 
+/**
+ * Something the learner tried to open did not arrive.
+ *
+ * `message` is the sentence a LEARNER reads, because a dozen screens already
+ * render `err.message` straight onto the page and they were showing things
+ * like "Could not fetch content/reading-comprehension/rc-0184.json (offline
+ * and not cached?)". The path, the status code and the schema issues live in
+ * `detail` and go to the console, where the only person who wants them is.
+ *
+ * `kind` lets a screen say something better still: 'offline' is a state the
+ * learner can fix by reconnecting, and is worth naming.
+ */
 export class ContentError extends Error {
-  constructor(message, issues = []) {
-    super(issues.length ? `${message}\n- ${issues.join('\n- ')}` : message);
+  constructor(message, issues = [], { kind = 'missing', detail = '' } = {}) {
+    super(message);
     this.name = 'ContentError';
     this.issues = issues;
+    this.kind = kind;
+    this.detail = issues.length ? `${detail}\n- ${issues.join('\n- ')}` : detail;
+    if (this.detail) console.error('[CAT OS] content:', this.detail);
   }
 }
 
@@ -48,16 +63,23 @@ async function fetchJSON(path) {
       const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
       return JSON.parse(await readFile(join(root, path), 'utf8'));
     } catch (cause) {
-      throw new ContentError(`Could not read ${path} from disk (${cause.message}).`);
+      throw new ContentError('That could not be read from disk.', [], { kind: 'missing', detail: `${path}: ${cause.message}` });
     }
   }
   let res;
   try {
     res = await fetch(path);
   } catch (cause) {
-    throw new ContentError(`Could not fetch ${path} (offline and not cached?).`);
+    // The honest reading of a failed fetch in an offline-first app: this file
+    // has not been downloaded yet. Say that, and say what to do about it.
+    throw new ContentError(
+      navigator.onLine === false
+        ? 'This one is not on your device yet, and you are offline. Anything you have already opened still works; this will download the next time you are connected.'
+        : 'This one could not be downloaded just now. It usually works on a second try.',
+      [], { kind: 'offline', detail: `fetch failed: ${path}` },
+    );
   }
-  if (!res.ok) throw new ContentError(`Could not fetch ${path} (HTTP ${res.status}).`);
+  if (!res.ok) throw new ContentError('That is not here any more. It may have been renamed in a newer version.', [], { kind: 'missing', detail: `${path}: HTTP ${res.status}` });
   try {
     return await res.json();
   } catch {
@@ -69,7 +91,7 @@ async function fetchJSON(path) {
        network and heals it. Failing that, the caller still gets a clear
        error and its own recovery path. */
     evict(path);
-    throw new ContentError(`${path} could not be read. It may have been stored incompletely; it will be fetched again.`);
+    throw new ContentError('That was stored incompletely. It will be fetched again — try once more in a moment.', [], { kind: 'corrupt', detail: `${path}: not valid JSON` });
   }
 }
 
@@ -128,16 +150,16 @@ export async function loadRCPassages(ids) {
  */
 export async function loadRCPassage(id) {
   if (!/^rc-[0-9]{4}$/.test(id)) {
-    throw new ContentError(`"${id}" is not a valid RC content id.`);
+    throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `bad id in loadRCPassage: ${id}` });
   }
   const item = await fetchJSON(`content/reading-comprehension/${id}.json`);
 
   const schema = await loadSchema(`rc.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadRCPassage rejected ${id}` });
 
   const issues = consistencyIssues(id, item);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadRCPassage rejected ${id}` });
 
   return item;
 }
@@ -171,16 +193,16 @@ export async function loadPJItems(ids) {
 /** Load one PJ item by id, schema-validate it, and run consistency checks. */
 export async function loadPJItem(id) {
   if (!/^pj-[0-9]{4}$/.test(id)) {
-    throw new ContentError(`"${id}" is not a valid PJ content id.`);
+    throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `bad id in loadPJItem: ${id}` });
   }
   const item = await fetchJSON(`content/para-jumbles/${id}.json`);
 
   const schema = await loadSchema(`pj.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadPJItem rejected ${id}` });
 
   const issues = pjConsistencyIssues(id, item);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadPJItem rejected ${id}` });
 
   return item;
 }
@@ -284,16 +306,16 @@ export async function loadPSItems(ids) {
 /** Load one PS item by id, schema-validate it, and run consistency checks. */
 export async function loadPSItem(id) {
   if (!/^ps-[0-9]{4}$/.test(id)) {
-    throw new ContentError(`"${id}" is not a valid PS content id.`);
+    throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `bad id in loadPSItem: ${id}` });
   }
   const item = await fetchJSON(`content/para-summary/${id}.json`);
 
   const schema = await loadSchema(`ps.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadPSItem rejected ${id}` });
 
   const issues = psConsistencyIssues(id, item);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadPSItem rejected ${id}` });
 
   return item;
 }
@@ -450,16 +472,16 @@ export async function loadOOOItems(ids) {
 /** Load one OOO item by id, schema-validate it, and run consistency checks. */
 export async function loadOOOItem(id) {
   if (!/^ooo-[0-9]{4}$/.test(id)) {
-    throw new ContentError(`"${id}" is not a valid OOO content id.`);
+    throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `bad id in loadOOOItem: ${id}` });
   }
   const item = await fetchJSON(`content/odd-one-out/${id}.json`);
 
   const schema = await loadSchema(`ooo.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadOOOItem rejected ${id}` });
 
   const issues = oooConsistencyIssues(id, item);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadOOOItem rejected ${id}` });
 
   return item;
 }
@@ -607,16 +629,16 @@ export async function loadWDItems(ids) {
 /** Load one Word DNA unit by id, schema-validate it, and run consistency checks. */
 export async function loadWDItem(id) {
   if (!/^wd-[0-9]{4}$/.test(id)) {
-    throw new ContentError(`"${id}" is not a valid Word DNA content id.`);
+    throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `bad id in loadWDItem: ${id}` });
   }
   const item = await fetchJSON(`content/word-dna/${id}.json`);
 
   const schema = await loadSchema(`wd.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadWDItem rejected ${id}` });
 
   const issues = wdConsistencyIssues(id, item);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadWDItem rejected ${id}` });
 
   return item;
 }
@@ -730,14 +752,14 @@ export function loadVocabItem(id) {
 
 async function loadVocabItemUncached(id) {
   if (!/^vocab-[0-9]{4}$/.test(id)) {
-    throw new ContentError(`"${id}" is not a valid vocabulary content id.`);
+    throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `bad id in loadVocabItemUncached: ${id}` });
   }
   const item = await fetchJSON(`content/vocabulary/${id}.json`);
   const schema = await loadSchema(`vocab.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadVocabItemUncached rejected ${id}` });
   const issues = vocabConsistencyIssues(id, item);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadVocabItemUncached rejected ${id}` });
   return item;
 }
 
@@ -790,19 +812,19 @@ export function loadLGItem(id) {
 
 async function loadLGItemUncached(id) {
   if (!/^lg-[0-9]{4}$/.test(id)) {
-    throw new ContentError(`"${id}" is not a valid Language Garden content id.`);
+    throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `bad id in loadLGItemUncached: ${id}` });
   }
   const item = await fetchJSON(`content/language-garden/${id}.json`);
 
   const schema = await loadSchema(`lg.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadLGItemUncached rejected ${id}` });
 
   const vocabIds = item.members.map((m) => m.vocab_id);
   const vocabById = await loadVocabItems(vocabIds);
   const missing = vocabIds.filter((v) => !vocabById.has(v));
   if (missing.length) {
-    throw new ContentError(`${id} references vocabulary that failed to load.`, missing);
+    throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', missing, { kind: 'corrupt', detail: `loadLGItemUncached rejected ${id}` });
   }
 
   const resolved = {
@@ -814,7 +836,7 @@ async function loadLGItemUncached(id) {
   };
 
   const issues = lgConsistencyIssues(id, resolved);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadLGItemUncached rejected ${id}` });
 
   return resolved;
 }
@@ -1021,13 +1043,13 @@ async function listBundleItems(type) {
 
 /** Fetch one bundle, schema-validate it, run its consistency rules. */
 async function loadBundle(id, { idRe, dir, schemaName, label, check }) {
-  if (!idRe.test(id)) throw new ContentError(`"${id}" is not a valid ${label} bundle id.`);
+  if (!idRe.test(id)) throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `"${id}" is not a valid ${label} bundle id` });
   const item = await fetchJSON(`content/${dir}/${id}.json`);
   const schema = await loadSchema(`${schemaName}.schema.v${item.schema_version ?? 1}.json`);
   const { valid, errors } = validate(schema, item);
-  if (!valid) throw new ContentError(`${id} failed schema validation.`, errors);
+  if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `loadBundle rejected ${id}` });
   const issues = check(id, item);
-  if (issues.length) throw new ContentError(`${id} failed consistency checks.`, issues);
+  if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `loadBundle rejected ${id}` });
   return item;
 }
 
@@ -1221,7 +1243,7 @@ const LETTERS4 = ['A', 'B', 'C', 'D'];
 
 /** Registry entries for practicable bank items/bundles of one type. */
 export async function listBankItems(type) {
-  if (!BANK_DIR[type]) throw new ContentError(`"${type}" is not a content bank.`);
+  if (!BANK_DIR[type]) throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `"${type}" is not a content bank` });
   return listBundleItems(type);
 }
 export const listSPItems = () => listBankItems('sp');
@@ -1231,15 +1253,15 @@ export const listCRItems = () => listBankItems('cr');
 
 /** Load one bank file (an sp/pc item, or a wb/cr bundle), validated (memoized per page). */
 export function loadBankFile(type, id) {
-  if (!BANK_DIR[type]) return Promise.reject(new ContentError(`"${type}" is not a content bank.`));
+  if (!BANK_DIR[type]) return Promise.reject(new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `"${type}" is not a content bank` }));
   return memoized(bankMemo[type], id, async (fileId) => {
-    if (!BANK_ID[type].test(fileId)) throw new ContentError(`"${fileId}" is not a valid ${type} content id.`);
+    if (!BANK_ID[type].test(fileId)) throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `"${fileId}" is not a valid ${type} content id` });
     const item = await fetchJSON(`content/${BANK_DIR[type]}/${fileId}.json`);
     const schema = await loadSchema(`${type}.schema.v${item.schema_version ?? 1}.json`);
     const { valid, errors } = validate(schema, item);
-    if (!valid) throw new ContentError(`${fileId} failed schema validation.`, errors);
+    if (!valid) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', errors, { kind: 'corrupt', detail: `${fileId} failed schema validation` });
     const issues = bankConsistencyIssues(type, fileId, item);
-    if (issues.length) throw new ContentError(`${fileId} failed consistency checks.`, issues);
+    if (issues.length) throw new ContentError('This one is not built correctly and has been skipped. Nothing you have done is lost.', issues, { kind: 'corrupt', detail: `${fileId} failed consistency checks` });
     return item;
   });
 }
@@ -1407,7 +1429,7 @@ export function normalizeBankItem(type, file, itemId = null) {
     };
   }
   const it = file.items.find((x) => x.id === itemId);
-  if (!it) throw new ContentError(`${itemId} is not in ${file.meta.id}.`);
+  if (!it) throw new ContentError('That address does not point at anything. It may be from an older version.', [], { kind: 'missing', detail: `${itemId} is not in ${file.meta.id}` });
   if (type === 'wb') {
     return {
       id: it.id, type, kind: file.meta.kind, label: WB_LABEL[file.meta.kind] ?? 'word in context',

@@ -26,6 +26,13 @@ export const JETTY = { x: 372, y: 878, len: 40 };
 
 /** The yard in front of the Hearth: where every path meets. */
 export const HUB = { x: 600, y: 705 };
+/** The cobbles themselves — a hard surface, so nothing grows on it. The
+ *  ellipse matches the one paintTerrain draws (see 'The yard in front of the
+ *  Hearth' below); flowers were coming up through the paving stones. */
+export const YARD = { cx: HUB.x + 6, cy: HUB.y - 4, rx: 58, ry: 32 };
+export function inYard(x, y, pad = 0) {
+  return ((x - YARD.cx) ** 2) / ((YARD.rx + pad) ** 2) + ((y - YARD.cy) ** 2) / ((YARD.ry + pad) ** 2) <= 1;
+}
 
 /** Paths: every building to the yard, the road out, the pond, the bridge. */
 export const PATHS = [
@@ -82,6 +89,70 @@ export function nearBuilding(x, y, pad = 40) {
   return BUILDINGS.some(near) || HOUSE_SPOTS.some((s) => near({ at: s, hit: { w: 110, h: 90 } })) || near({ at: BOARD.at, hit: BOARD.hit });
 }
 export function inPlot(x, y) { return PLOTS.find((p) => x >= p.rect.x && x <= p.rect.x + p.rect.w && y >= p.rect.y && y <= p.rect.y + p.rect.h) ?? null; }
+
+/**
+ * Strictly INSIDE a wall — no clearance, no slack. `nearBuilding` is the
+ * scatter's "keep away from here" and is deliberately generous (it reaches
+ * 30px past the hit box to leave room for the roof that recedes up-right);
+ * this is the different, narrower question a validator has to ask, because a
+ * lamp beside a door is right and a lamp inside the kitchen is not.
+ */
+export function insideBuilding(x, y) {
+  const inside = (b) => x > b.at.x - b.hit.w / 2 && x < b.at.x + b.hit.w / 2 && y > b.at.y - b.hit.h && y < b.at.y;
+  return BUILDINGS.some(inside)
+    || HOUSE_SPOTS.some((s) => inside({ at: s, hit: { w: 96, h: 76 } }))
+    || inside({ at: BOARD.at, hit: BOARD.hit });
+}
+
+/**
+ * ONE answer to "may something stand here?", for every scatter in scene.js.
+ *
+ * Each loop used to carry its own list of checks, and the hand-placed trees
+ * carried a shorter list than the random ones: they tested paths, buildings
+ * and plots but not water. Two of the twenty-four then stood IN the river and
+ * the pond — visible from the opening camera, for three releases.
+ *
+ * Every placement goes through here now, so a rule added once applies
+ * everywhere and a new scatter cannot quietly opt out of the river.
+ * `tools/check-world.mjs` re-runs these same predicates over the real scene
+ * in a real browser and fails the build on any object that broke one.
+ *
+ * @param {number} x @param {number} y
+ * @param {object} pad  how much clearance this kind of thing needs
+ * @returns {string|null} the rule it breaks, or null if it may stand here
+ */
+export function whyNotPlaceable(x, y, {
+  path = 22, pond = 30, river = 40, building = 14, bridge = 70, jetty = 60, plots = true,
+} = {}) {
+  if (path !== false && nearPath(x, y, path)) return 'path';
+  if (pond !== false && inPond(x, y, pond)) return 'pond';
+  if (river !== false && nearRiver(x, y, river)) return 'river';
+  if (building !== false && nearBuilding(x, y, building)) return 'building';
+  if (plots && inPlot(x, y)) return 'plot';
+  if (bridge !== false && Math.abs(x - BRIDGE.x) < bridge && Math.abs(y - BRIDGE.y) < bridge - 10) return 'bridge';
+  if (jetty !== false && Math.abs(x - JETTY.x) < jetty && Math.abs(y - JETTY.y) < jetty - 20) return 'jetty';
+  if (inYard(x, y, 4)) return 'yard';
+  return null;
+}
+
+export function placeable(x, y, pads) { return whyNotPlaceable(x, y, pads) === null; }
+
+/**
+ * The invariant, as narrow as it goes: nothing may stand IN the water or
+ * INSIDE a wall. Not "keep clear of" — actually in.
+ *
+ * scene.js enforces it over every object it places, as the last thing it
+ * does, and tools/check-world.mjs re-asks it of the scene the renderer is
+ * actually drawing. One function, so the gate and the game cannot disagree
+ * about what counts.
+ */
+export function invalidSpot(x, y) {
+  if (inPond(x, y, 0)) return 'pond';
+  if (nearRiver(x, y, 14)) return 'river';
+  if (insideBuilding(x, y)) return 'building';
+  if (inYard(x, y, -6)) return 'yard';
+  return null;
+}
 
 /* ------------------------------------------------------------------ */
 /* Painting                                                            */

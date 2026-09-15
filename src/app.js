@@ -222,8 +222,19 @@ async function boot() {
   // guards that so a fresh visit doesn't get an extra reload).
   // 1.0.0: registration waits for the first screen to paint and settle, so a
   // cold open of the valley is never starved by the precache of ~700 files.
+  // The library sync does not depend on registration succeeding: it walks
+  // the manifest and lets whatever worker is already controlling the page
+  // keep the files. It used to live INSIDE the try below, so a registration
+  // that threw — a host that cannot serve the worker, a private window —
+  // meant the library was never fetched at all.
+  startLibrarySync({ delayMs: 7000 });
+
   if ('serviceWorker' in navigator) {
-    await new Promise((r) => setTimeout(r, 3500));
+    // Long enough for the valley to have painted, short enough that a
+    // thirty-second visit still installs something. At 3500 ms a learner who
+    // opened the app, looked, and closed it installed nothing at all — and
+    // the boot that wait was protecting is now 65 requests, not 153.
+    await new Promise((r) => setTimeout(r, 1200));
     try {
       const hadController = !!navigator.serviceWorker.controller;
       let refreshing = false;
@@ -236,32 +247,41 @@ async function boot() {
          comes back to the tab. That reload ends the run and records nothing.
          So: never update while a run is open, and if a controller change
          lands anyway, hold the reload until the learner leaves the run. */
-      const inRun = () => {
+      /* Three routes out of twenty were protected. A run is not the only
+         place a reload costs something: a Learning Page, a review, a lesson,
+         a browser half-scrolled and — worst of all — the RESULT screen, which
+         is where the stars, the goods and the coins are handed over. The old
+         rule reloaded the moment the learner LEFT a run, which is precisely
+         the navigation into that result. */
+      const busy = () => {
         const h = location.hash;
-        return /^#\/[a-z-]+\/session\//.test(h) || h.startsWith('#/round/') || h === '#/rc/second-look';
+        return /^#\/[a-z-]+\/session\//.test(h)          // any timed run
+          || h.startsWith('#/round/')                      // a vocabulary round
+          || h === '#/rc/second-look'
+          || /^#\/[a-z-]+\/(learn|mentor|review)\//.test(h) // reading, at length
+          || h.startsWith('#/garden/');                    // the Rootwood's six beats
       };
+      /* The one safe moment to swap the app under a learner is when they are
+         standing in the village with nothing open. Everywhere else the
+         reload waits. */
+      const idleAtHome = () => location.hash === '#/world' || location.hash === '';
       let pendingReload = false;
       const reloadNow = () => { refreshing = true; window.location.reload(); };
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!hadController || refreshing) return;
-        if (inRun()) { pendingReload = true; return; }
+        if (!idleAtHome()) { pendingReload = true; return; }
         reloadNow();
       });
       window.addEventListener('hashchange', () => {
-        if (pendingReload && !refreshing && !inRun()) reloadNow();
+        if (pendingReload && !refreshing && idleAtHome()) reloadNow();
       });
 
       const registration = await navigator.serviceWorker.register('./service-worker.js');
       const update = () => {
-        if (inRun()) return;                 // don't even start an install mid-run
+        if (busy()) return;                  // don't even start an install mid-read
         registration.update().catch(() => { /* offline, or a host that cannot serve the worker */ });
       };
       update();
-      // The rest of the library — every passage, jumble, summary and bank
-      // file the content engine ships — arrives in the background, a few
-      // files at a time, once the valley is painted and the phone is idle.
-      // The service worker's fetch handler keeps each one for offline use.
-      startLibrarySync({ delayMs: 9000 });
       setInterval(update, 30 * 60 * 1000);
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') update();

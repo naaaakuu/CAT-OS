@@ -25,15 +25,39 @@ const MANIFEST = 'content/manifest.json';
 const BATCH = 6;
 
 let running = false;
+let armed = false;
 let lastProgress = { done: 0, total: 0 };
 
-/** Start (or resume) the sync. Safe to call more than once. */
+/**
+ * Start (or resume) the sync. Safe to call more than once.
+ *
+ * It used to fire ONCE, six seconds after boot, and give up for the rest of
+ * the page's life if the conditions were not right at that instant. On any
+ * connection where the service worker had not taken control within six
+ * seconds — which is every real phone — `allowed()` was false, the sync
+ * returned immediately, and the learner's first visit downloaded none of the
+ * library. It came back only if they closed the app and opened it again.
+ *
+ * So it keeps trying: on a timer, when the tab comes back to the front, and
+ * when the browser says it is online again. Each pass is cheap when there is
+ * nothing to do — one `cache.keys()` and a set difference.
+ */
 export function startLibrarySync({ delayMs = 6000 } = {}) {
-  if (running || typeof window === 'undefined' || !('caches' in window) || !('fetch' in window)) return;
-  running = true;
-  const kick = () => sync().finally(() => { running = false; });
+  if (typeof window === 'undefined' || !('caches' in window) || !('fetch' in window)) return;
+  const kick = () => {
+    if (running) return;
+    running = true;
+    sync().finally(() => { running = false; });
+  };
   const idle = window.requestIdleCallback ?? ((fn) => setTimeout(fn, 200));
+  const soon = () => setTimeout(() => idle(kick, { timeout: 15000 }), 400);
   setTimeout(() => idle(kick, { timeout: 15000 }), delayMs);
+  if (armed) return;
+  armed = true;
+  setInterval(kick, 60_000);
+  window.addEventListener('online', soon);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') soon(); });
+  navigator.serviceWorker?.addEventListener?.('controllerchange', soon);
 }
 
 function allowed() {

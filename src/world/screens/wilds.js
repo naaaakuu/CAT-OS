@@ -81,7 +81,7 @@ export async function renderWilds(outlet, { storage }) {
   outlet.innerHTML = `
     <section class="place place--page place--wilds" aria-label="The Wilds">
       <div class="place__hero place__hero--short"><canvas id="wilds-hero"></canvas><a class="place__back" href="#/world" id="back">← The village</a>
-        <div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:40px 20px 0"><div><div style="font-family:var(--g-display);font-size:40px;letter-spacing:0.12em;opacity:0.95">THE WILDS</div><div style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.7;margin-top:6px">Week ${escapeHTML(week.slice(-2))} · the Gauntlet</div></div></div>
+        <div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:40px 20px 0"><div><div style="font-family:var(--g-display);font-size:40px;letter-spacing:0.12em;opacity:0.95">THE WILDS</div><div style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.92;margin-top:6px">Week ${escapeHTML(week.slice(-2))} · the Gauntlet</div></div></div>
       </div>
       <div class="place__body">
         <p class="place__eyebrow">${escapeHTML(region.skill)}</p>
