@@ -67,7 +67,7 @@ export function recommendNext(items, sessions) {
   const last = recent[0] ?? null;
   const lastItem = last ? byId.get(last.passage_id) : null;
   const lastWasHard = lastItem?.difficulty === 'hard';
-  const lastWasRough = last ? (last.score.attempted > 0 && last.score.accuracy < 0.5) : false;
+  const lastWasRough = last ? (last.score?.attempted > 0 && last.score?.accuracy < 0.5) : false;
 
   const unread = ordered.filter((i) => !attempted.has(i.id));
 

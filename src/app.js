@@ -28,7 +28,12 @@ import './ui/components/cat-nav.js';
 /* Global error handling — one calm surface, details in the console.  */
 /* ------------------------------------------------------------------ */
 
+/* index.html installs the first-line handlers before this file is even
+   requested — see the boot watchdog there, and why. These add the toast,
+   which needs a component this graph provides. */
 window.addEventListener('error', (e) => {
+  // The browser's own "I will retry next frame" notice, not a fault.
+  if (typeof e.message === 'string' && e.message.startsWith('ResizeObserver loop')) return;
   console.error('[CAT OS]', e.error ?? e.message);
   toast('Something went wrong. Details are in the console.', 'error');
 });
@@ -292,4 +297,8 @@ async function boot() {
   }
 }
 
-boot();
+/* The flag index.html's watchdog is waiting for. If the bootstrap throws on
+   its way here, the watchdog says so instead of leaving "Loading…" up. */
+boot().then(() => { window.__catosBooted = true; }).catch((err) => {
+  console.error('[CAT OS] boot failed', err);
+});

@@ -70,6 +70,7 @@ export function coreFiles() {
     './src/ui/styles/game.css',
     './src/ui/styles/world.css',
     './src/ui/styles/village.css',
+    './content/boot-index.json',
     './assets/icons/icon-192.png',
     './assets/icons/icon-512.png',
     ...js,
@@ -79,7 +80,8 @@ export function coreFiles() {
 export const PRECACHE_DIRS = ['schema', 'vocabulary', 'language-garden', 'word-dna', 'lexicon', 'loanwords', 'twins'];
 
 export function precacheFiles() {
-  const files = ['./content/index.json', './content/manifest.json', './content/context/pack.json'];
+  // boot-index.json first: it is what the village waits on.
+  const files = ['./content/boot-index.json', './content/index.json', './content/manifest.json', './content/context/pack.json'];
   for (const dir of PRECACHE_DIRS) {
     const abs = path.join(ROOT, 'content', dir);
     if (!fs.existsSync(abs)) continue;

@@ -28,11 +28,15 @@ export const XP_RULES = Object.freeze({
 
 /** XP earned by one session record (the shape stored in SESSIONS). */
 export function sessionXP(session) {
-  const s = session.score;
-  let xp = s.correct * XP_RULES.correct
-         + s.wrong * XP_RULES.wrong
+  /* A record that does not carry a score is worth no XP, not a crash. This
+     read alone took the whole derivation down — and with it the village,
+     which hides the tab bar, so the dead end had no way out and every reload
+     produced it again. */
+  const s = session?.score ?? {};
+  let xp = (s.correct ?? 0) * XP_RULES.correct
+         + (s.wrong ?? 0) * XP_RULES.wrong
          + XP_RULES.session;
-  const perfect = s.total >= XP_RULES.perfectMinQuestions
+  const perfect = (s.total ?? 0) >= XP_RULES.perfectMinQuestions
     && s.correct === s.total; // no wrong AND no skipped
   if (perfect) xp += XP_RULES.perfectBonus;
   return xp;

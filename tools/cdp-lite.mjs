@@ -72,10 +72,22 @@ export async function serveRepo(root = REPO_ROOT) {
  * Launch headless Chrome and return a small page API.
  * @param {{width?:number,height?:number,dpr?:number,port?:number}} opts
  */
-export async function launchChrome({ width = 390, height = 844, dpr = 1, port = 0 } = {}) {
+export async function launchChrome(opts = {}) {
+  let last;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try { return await launchOnce(opts); } catch (err) { last = err; await new Promise((r) => setTimeout(r, 800)); }
+  }
+  throw last;
+}
+
+async function launchOnce({ width = 390, height = 844, dpr = 1, port = 0 } = {}) {
   const chrome = findChrome();
   if (!chrome) throw new Error('no Chrome found (set CHROME_PATH)');
   const profile = mkdtempSync(join(tmpdir(), 'catos-gate-'));
+  // A random port in a wide range, because two gates (or a gate and a
+  // developer's own probe) starting at the same moment used to collide and
+  // the second one reported 'Chrome did not expose its debugging port' —
+  // which reads like a broken machine rather than a busy one.
   const debugPort = port || 9000 + Math.floor(Math.random() * 900);
   const proc = spawn(chrome, [
     '--headless=new', `--remote-debugging-port=${debugPort}`, `--user-data-dir=${profile}`,

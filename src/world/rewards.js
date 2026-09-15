@@ -22,7 +22,7 @@ const BANK_MODULES = new Set(['sp', 'pc', 'wb', 'cr']);
 export function worldReward(session, items = []) {
   const region = session.region ?? REGION_OF[session.module] ?? 'loom';
   const targetSec = session.target_sec ?? (items.reduce((n, it) => n + (it?.meta?.estimated_time_sec ?? it?.time_sec ?? 90), 0) || 90 * (session.score?.total ?? 1));
-  const res = session.module === 'wd' ? { stars: session.score?.correct ? Math.min(3, 1 + session.score.correct) : 0, accuracy: session.score?.accuracy ?? 0, inTime: true } : verbalStars(session, targetSec);
+  const res = session.module === 'wd' ? { stars: session.score?.correct ? Math.min(3, 1 + session.score?.correct) : 0, accuracy: session.score?.accuracy ?? 0, inTime: true } : verbalStars(session, targetSec);
   const earned = session.module === 'wd' ? EARN.wd(res.stars, session.score?.correct ?? 0)
     : BANK_MODULES.has(session.module) ? EARN.bank(session.module, res.stars, session.score?.correct ?? 0, res.flawless === true)
       : EARN.verbal(res.stars, session.score?.correct ?? 0, res.flawless === true);

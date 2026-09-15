@@ -20,7 +20,7 @@
  * from.
  */
 
-import { listLexItems, loadLexItem, listTwinItems, loadTwinItem, listLoanItems, loadLoanItem, loadContextPack, contextByWord } from '../core/content-loader/loader.js';
+import { listForBoot, listLexItems, loadLexItem, listTwinItems, loadTwinItem, listLoanItems, loadLoanItem, loadContextPack, contextByWord } from '../core/content-loader/loader.js';
 import { STORES } from '../core/storage/storage-adapter.js';
 import { rng } from './engine/palette.js';
 import { roundStars, EARN } from './economy.js';
@@ -44,9 +44,9 @@ const BAND_LABEL = { high: 'High frequency', medium: 'Medium frequency', low: 'L
 export async function listFields(region) {
   const kind = REGION_KIND[region];
   let rows = [];
-  if (kind === 'lex') rows = await listLexItems();
-  else if (kind === 'twin') rows = await listTwinItems();
-  else rows = await listLoanItems();
+  // The boot registry: the world only wants id, band, letter, language and a
+  // count, and the full index costs 807 KB to say them.
+  rows = await listForBoot(kind === 'lex' ? 'lex' : kind === 'twin' ? 'twin' : 'loan');
   return rows.map((r) => ({
     id: r.id, kind, region,
     name: kind === 'lex' ? `${(r.letter ?? '').toUpperCase()}` : kind === 'twin' ? `${(r.letter ?? '').toUpperCase()}` : (r.language ?? r.title ?? r.id),

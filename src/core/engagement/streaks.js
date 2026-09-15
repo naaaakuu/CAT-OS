@@ -54,12 +54,12 @@ export function deriveStreaks(sessions, now = new Date()) {
   const ordered = [...sessions].sort((a, b) => b.finished_at.localeCompare(a.finished_at));
   let perfectRun = 0;
   for (const s of ordered) {
-    if (s.score.total > 0 && s.score.correct === s.score.total) perfectRun += 1;
+    if (s.score?.total > 0 && s.score?.correct === s.score?.total) perfectRun += 1;
     else break;
   }
   let accuracyRun = 0;
   for (const s of ordered) {
-    if (s.score.attempted > 0 && s.score.accuracy >= 0.8) accuracyRun += 1;
+    if (s.score?.attempted > 0 && s.score?.accuracy >= 0.8) accuracyRun += 1;
     else break;
   }
 

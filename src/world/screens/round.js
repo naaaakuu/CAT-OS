@@ -24,12 +24,16 @@ import { play, silenceWorld, startAmbience } from '../audio.js';
 import { renderResult, formatClock } from './result.js';
 import { mountBackdrop } from './backdrop.js';
 import { escapeHTML } from '../../core/utils/format.js';
+import { toast } from '../../ui/components/cat-toast.js';
 
 const KEYS = ['A', 'B', 'C', 'D', 'E'];
 
 export async function renderRound(outlet, { storage }, params) {
   const region = regionBySlug(params.region);
-  if (!region) { location.hash = '#/world'; return; }
+  // replace(), not a hash assignment: a bad address pushed a history entry,
+  // so Back took the learner straight to the bad address again and they were
+  // trapped bouncing between the two.
+  if (!region) { location.replace('#/world'); return; }
   document.documentElement.setAttribute('data-world', '');
   silenceWorld();
 
@@ -61,7 +65,19 @@ export async function renderRound(outlet, { storage }, params) {
     outlet.innerHTML = `<section class="run"><div class="run__body"><h1 class="brief__title">This round will not open</h1><p class="brief__line">${escapeHTML(err.message)}</p><a class="g-btn" href="${region.route}">Back</a></div></section>`;
     return;
   }
-  if (!picks?.length) { location.hash = region.route; return; }
+  if (!picks?.length) {
+    /* This used to be a silent `location.hash = region.route`. With the word
+       lists unreachable, a learner tapped "Begin in the Meadow", the screen
+       flickered, and they were back where they started — forever, with no
+       message. "Nothing is due" and "nothing could be downloaded" are not
+       the same thing and must not look the same. */
+    outlet.innerHTML = `<section class="run"><div class="run__body"><div class="brief">
+      <h1 class="brief__title">Nothing to ask just yet</h1>
+      <p class="brief__line">Either every word here is resting, or the word lists have not reached this device. They arrive in the background.</p>
+      <p><button class="g-btn" onclick="location.reload()">Try again</button> <a class="g-btn" href="${region.route}">Back to ${escapeHTML(region.name)}</a></p>
+    </div></div></section>`;
+    return;
+  }
 
   const languages = region.slug === 'thicket' ? fields.map((f) => f.name) : [];
   let context = null;
@@ -212,7 +228,7 @@ export async function renderRound(outlet, { storage }, params) {
 
     async function finish() {
       const result = round.finish();
-      try { await saveRound(storage, round, result, ledger); } catch (err) { console.error('[CAT OS] round save failed', err); }
+      try { await saveRound(storage, round, result, ledger); } catch (err) { console.error('[CAT OS] round save failed', err); toast('This round finished but could not be saved.', 'error'); }
       let after = null;
       try { const records = await loadWorldRecords(storage); after = deriveWorldState(before.content, records); } catch { /* facts still show */ }
       const worldLine = after ? worldChangeLine(region.slug, before.state, after) : '';
@@ -231,11 +247,11 @@ export async function renderRound(outlet, { storage }, params) {
         title: result.stars.stars === 3 ? 'In full bloom' : 'Round complete',
         result: result.stars,
         facts: [
-          { label: 'Right', value: `${result.record.score.correct}/${result.record.score.total}`, good: result.stars.accuracy >= 0.75 },
+          { label: 'Right', value: `${result.record.score?.correct}/${result.record.score?.total}`, good: result.stars.accuracy >= 0.75 },
           // Inside the pace is only a good number if the answers were right:
           // fast and wrong is the habit CAT punishes hardest, and a gold
           // figure under a one-star round would be teaching it.
-          { label: 'Per word', value: `${(result.record.score.avg_ms / 1000).toFixed(1)}s`, good: result.stars.inTime && result.stars.accuracy >= 0.5 },
+          { label: 'Per word', value: `${(result.record.score?.avg_ms / 1000).toFixed(1)}s`, good: result.stars.inTime && result.stars.accuracy >= 0.5 },
           { label: 'Time', value: formatClock(result.record.duration_ms) },
         ],
         earned: result.earned,

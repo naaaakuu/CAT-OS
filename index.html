@@ -24,6 +24,48 @@
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
   <link rel="icon" href="./assets/icons/icon-192.png" type="image/png" />
 
+  <!--
+    THE BOOT WATCHDOG. Deliberately NOT a module, and deliberately first.
+
+    app.js installs the window `error` and `unhandledrejection` handlers — but
+    app.js is the top of a graph of fifty-five modules, and if any ONE of them
+    fails to load, app.js never evaluates and those handlers are never
+    installed. Blocking a single module and cold-opening the village produced
+    a screen that was identical at 500 ms and at thirty seconds: the shell's
+    "Loading…" placeholder, no console error a learner could see, no toast, no
+    way out. The error surface lived inside the thing that had failed.
+
+    So it lives here instead, in eight lines that cannot fail to load: the
+    handlers, a flag the bootstrap sets when it finishes, and a timer that
+    says so if it never does.
+  -->
+  <script>
+    window.__catos = { errors: [] };
+    window.addEventListener('error', function (e) {
+      // A ResizeObserver loop notification is the browser telling itself to
+      // try again next frame. It is not an error the learner did anything
+      // about, and it used to raise the app's "Something went wrong" toast
+      // twenty-seven times in one page load.
+      if (e && typeof e.message === 'string' && e.message.indexOf('ResizeObserver loop') === 0) return;
+      window.__catos.errors.push(String((e && (e.message || e.error)) || e));
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      window.__catos.errors.push(String((e && e.reason) || e));
+    });
+    setTimeout(function () {
+      if (window.__catosBooted) return;
+      var view = document.getElementById('view');
+      if (!view || !view.querySelector('.screen--loading')) return;
+      view.innerHTML = '<section class="screen"><div class="empty">'
+        + '<div class="empty__glyph" aria-hidden="true">·</div>'
+        + '<h2>CAT OS did not finish opening</h2>'
+        + '<p>Part of the app could not be downloaded. Everything you have done is still on this device.</p>'
+        + '<p><button class="btn btn--primary" onclick="location.reload()">Try again</button></p>'
+        + '</div></section>';
+      console.error('[CAT OS] boot watchdog fired', window.__catos.errors);
+    }, 8000);
+  </script>
+
   <!-- Styles: tokens first (variables), then base, then components -->
   <link rel="stylesheet" href="./src/ui/styles/tokens.css" />
   <link rel="stylesheet" href="./src/ui/styles/base.css" />
@@ -65,6 +107,8 @@
     </div>
   </noscript>
 
-  <script type="module" src="./src/app.js"></script>
+  <!-- If the bootstrap itself 404s, the watchdog above still fires; this
+       catches the case where the browser can tell us straight away. -->
+  <script type="module" src="./src/app.js" onerror="window.__catos.errors.push('app.js failed to load')"></script>
 </body>
 </html>

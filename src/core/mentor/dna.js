@@ -43,7 +43,7 @@ export function enrichAnswers(sessions, passages) {
     const item = passages.get(s.passage_id);
     if (!item) continue;
     const byId = new Map(item.questions.map((q) => [q.id, q]));
-    s.answers.forEach((a, index) => {
+    (s.answers ?? []).filter(Boolean).forEach((a, index) => {
       const q = byId.get(a.question_id);
       if (!q) return;
       let trap = null;
@@ -55,7 +55,7 @@ export function enrichAnswers(sessions, passages) {
         passage_id: s.passage_id,
         finished_at: s.finished_at,
         index,
-        last: index === s.answers.length - 1,
+        last: index === (s.answers ?? []).filter(Boolean).length - 1,
         question_id: a.question_id,
         type: q.type,
         chosen: a.chosen,
@@ -192,10 +192,12 @@ export function deriveDNA(sessions, passages) {
     let rushed = 0;
     let rushedMissed = 0;
     for (const s of ordered) {
-      const times = s.answers.map((a) => a.time_ms).filter((t) => t > 0);
+      const times = (s.answers ?? []).filter(Boolean).map((a) => a.time_ms).filter((t) => t > 0);
       if (times.length < 3) continue;
       const m = median(times);
-      const lastA = s.answers[s.answers.length - 1];
+      const rows2 = (s.answers ?? []).filter(Boolean);
+      const lastA = rows2[rows2.length - 1];
+      if (!lastA) continue;
       if (lastA.time_ms > 0 && lastA.time_ms < FLOORS.ENDING_RATIO * m) {
         rushed += 1;
         if (lastA.is_correct !== true) rushedMissed += 1;
@@ -218,10 +220,10 @@ export function deriveDNA(sessions, passages) {
       const item = passages.get(s.passage_id);
       const estimate = (item?.passage.reading_time_min ?? 0) * 60000;
       if (!estimate) continue;
-      const questionTime = s.answers.reduce((n, a) => n + a.time_ms, 0);
+      const questionTime = (s.answers ?? []).filter(Boolean).reduce((n, a) => n + a.time_ms, 0);
       const readingTime = Math.max(0, s.duration_ms - questionTime);
       if (readingTime < FLOORS.FASTPASS_RATIO * estimate
-          && s.score.attempted > 0 && s.score.accuracy < FLOORS.FASTPASS_ACC) {
+          && s.score?.attempted > 0 && s.score?.accuracy < FLOORS.FASTPASS_ACC) {
         quick += 1;
       }
     }
@@ -240,9 +242,9 @@ export function deriveDNA(sessions, passages) {
     const late = [];
     const day = [];
     for (const s of ordered) {
-      if (s.score.attempted === 0) continue;
+      if (s.score?.attempted === 0) continue;
       const hour = new Date(s.started_at).getHours();
-      (hour >= 21 || hour < 4 ? late : day).push(s.score.accuracy);
+      (hour >= 21 || hour < 4 ? late : day).push(s.score?.accuracy);
     }
     if (late.length >= FLOORS.EVENING_MIN && day.length >= FLOORS.EVENING_MIN) {
       const avg = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;

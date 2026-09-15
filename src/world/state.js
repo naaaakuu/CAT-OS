@@ -11,7 +11,7 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-import { listLGItems, listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, listBankItems } from '../core/content-loader/loader.js';
+import { listForBoot, listLGItems, listRCItems, listPJItems, listPSItems, listOOOItems, listWDItems, listBankItems } from '../core/content-loader/loader.js';
 import { computePlantState } from '../core/engine/garden-session.js';
 import { GROVES } from '../modules/language-garden/logic/groves.js';
 import { deriveEngagement } from '../core/engagement/stats.js';
@@ -45,11 +45,19 @@ let contentCache = null;
  */
 export async function loadWorldContent() {
   if (contentCache) return contentCache;
-  const safe = (p) => p.catch(() => []);
+  /* A registry that FAILED and a registry that is EMPTY are not the same
+     thing, and treating them the same is how one blocked request silently
+     zeroed a learner's entire world: the village opened looking normal with
+     no coins and an empty barn, the Reading House read 0/0, and Growth
+     showed the brand-new-learner screen to somebody with eight sessions and
+     fourteen stars. Worse, the result was memoised, so it stayed wrong for
+     the rest of the session even after the network came back. */
+  let failed = 0;
+  const safe = (p) => p.catch(() => { failed += 1; return []; });
   const [lgRegistry, rc, pj, ps, ooo, wd, meadowFields, pondFields, thicketFields, sp, pc, wb, cr] = await Promise.all([
-    safe(listLGItems()), safe(listRCItems()), safe(listPJItems()), safe(listPSItems()), safe(listOOOItems()), safe(listWDItems()),
+    safe(listForBoot('lg')), safe(listForBoot('rc')), safe(listForBoot('pj')), safe(listForBoot('ps')), safe(listForBoot('ooo')), safe(listForBoot('wd')),
     safe(listFields('meadow')), safe(listFields('pond')), safe(listFields('thicket')),
-    safe(listBankItems('sp')), safe(listBankItems('pc')), safe(listBankItems('wb')), safe(listBankItems('cr')),
+    safe(listForBoot('sp')), safe(listForBoot('pc')), safe(listForBoot('wb')), safe(listForBoot('cr')),
   ]);
   const families = [...lgRegistry]
     .sort((a, b) => String(a.id).localeCompare(String(b.id)))
@@ -58,8 +66,11 @@ export async function loadWorldContent() {
       root: { label: i.title, origin_language: i.root_origin ?? '', core_meaning: i.root_meaning ?? '' },
       members: { length: i.member_count ?? 0 },
     }));
-  contentCache = { families, rc, pj, ps, ooo, wd, sp, pc, wb, cr, fields: { meadow: meadowFields, pond: pondFields, thicket: thicketFields } };
-  return contentCache;
+  const content = { families, rc, pj, ps, ooo, wd, sp, pc, wb, cr, fields: { meadow: meadowFields, pond: pondFields, thicket: thicketFields }, partial: failed > 0 };
+  // Only a COMPLETE read is worth remembering. A partial one is returned so
+  // the screen can say so, and thrown away so the next navigation retries.
+  if (!failed) contentCache = content;
+  return content;
 }
 
 export async function loadWorldRecords(storage) {
@@ -153,8 +164,8 @@ export function deriveWorldState(content, records, now = Date.now()) {
     let starTotal = 0;
     const bestBySet = new Map();
     for (const s of ms) {
-      for (const a of s.answers ?? []) { const id = a.item_id ?? a.question_id; if (a.is_correct !== null) tried.add(id); if (a.is_correct === true) solved.add(id); }
-      const ids = s.item_ids ?? (s.answers ?? []).map((a) => a.item_id ?? a.question_id);
+      for (const a of (s.answers ?? []).filter(Boolean)) { const id = a.item_id ?? a.question_id; if (a.is_correct !== null) tried.add(id); if (a.is_correct === true) solved.add(id); }
+      const ids = s.item_ids ?? (s.answers ?? []).filter(Boolean).map((a) => a.item_id ?? a.question_id);
       const target = ids.reduce((n, id) => n + (byId.get(id)?.estimated_time_sec ?? 90), 0);
       const res = verbalStars(s, target);
       const key = s.set_id ?? ids.join(',');
@@ -178,7 +189,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
     const solvedIds = new Set(), tried = new Set();
     const bestBySet = new Map();
     for (const s of ms) {
-      for (const a of s.answers ?? []) { const id = a.item_id ?? a.question_id; if (a.is_correct !== null) tried.add(id); if (a.is_correct === true) solvedIds.add(id); }
+      for (const a of (s.answers ?? []).filter(Boolean)) { const id = a.item_id ?? a.question_id; if (a.is_correct !== null) tried.add(id); if (a.is_correct === true) solvedIds.add(id); }
       const res = verbalStars(s, s.target_sec ?? (s.score?.total ?? 1) * 60);
       const key = s.set_id ?? s.passage_id;
       const prev = bestBySet.get(key);
@@ -192,7 +203,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
   /* ---- Terraces: Word DNA ---- */
   const wdSessions = sessions.filter((s) => s.module === 'wd');
   const wdDone = new Set();
-  for (const s of wdSessions) for (const a of s.answers ?? []) if (a.is_correct === true) wdDone.add(a.item_id ?? a.question_id);
+  for (const s of wdSessions) for (const a of (s.answers ?? []).filter(Boolean)) if (a.is_correct === true) wdDone.add(a.item_id ?? a.question_id);
   const terraces = { total: content.wd.length, done: wdDone.size, level: clamp(Math.floor(wdDone.size / 3), 0, 4), stars: wdDone.size * 2, sessions: wdSessions.length };
 
   /* ---- Meadow, Pond, Thicket ---- */

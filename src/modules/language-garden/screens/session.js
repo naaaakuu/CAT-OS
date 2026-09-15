@@ -21,6 +21,7 @@
  */
 
 import { loadLGItem, listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
+import { toast } from '../../../ui/components/cat-toast.js';
 import { GardenSession, computePlantState, strugglingMembers } from '../../../core/engine/garden-session.js';
 import { listGardenSessions, sessionsForFamily, saveGardenSession, hasSeenGardenGrowth, markGardenGrowthSeen, listGardenSeeds } from '../logic/store.js';
 import { deriveValleyScene, nextReachPoolIndex, memberCheckOffset, isBiomeGrown } from '../logic/scene.js';
@@ -327,7 +328,12 @@ export async function renderGardenSession(outlet, context, params) {
     sessionEnded = true;
     const record = session.finish();
     lastRecord = record;
-    try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
+    try { await saveGardenSession(context.storage, record); } catch (err) {
+      // Not non-fatal: this is the learner's whole session. Every other module
+      // says so when a write fails; this one did not even log it.
+      console.error('[CAT OS] garden session save failed', err);
+      toast('This walk finished but could not be saved.', 'error');
+    }
     const postState = computePlantState([...history, record], Date.parse(record.finished_at));
     const line = GROWTH_LINES.firstGrow(family.root.label, session.id);
     // A first-ever grow can reach Sprout at most (§6.2) — never Mature — so
@@ -424,7 +430,12 @@ export async function renderGardenSession(outlet, context, params) {
     sessionEnded = true;
     const record = session.finish();
     lastRecord = record;
-    try { await saveGardenSession(context.storage, record); } catch { /* non-fatal */ }
+    try { await saveGardenSession(context.storage, record); } catch (err) {
+      // Not non-fatal: this is the learner's whole session. Every other module
+      // says so when a write fails; this one did not even log it.
+      console.error('[CAT OS] garden session save failed', err);
+      toast('This walk finished but could not be saved.', 'error');
+    }
     const finishedAt = Date.parse(record.finished_at);
     const postState = computePlantState([...history, record], finishedAt);
     // The line follows what actually happened, in order of rarity: a tree the

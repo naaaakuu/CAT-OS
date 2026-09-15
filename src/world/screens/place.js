@@ -41,7 +41,10 @@ const STAGE_GLYPH = { open_ground: '◌', seed: '·', sprout: '\u2027', young: '
 
 export async function renderPlace(outlet, { storage }, params) {
   const region = regionBySlug(params.slug);
-  if (!region) { location.hash = '#/world'; return; }
+  // replace(), not a hash assignment: a bad address pushed a history entry,
+  // so Back took the learner straight to the bad address again and they were
+  // trapped bouncing between the two.
+  if (!region) { location.replace('#/world'); return; }
   if (region.slug === 'hearth') return renderHearth(outlet, { storage });
   if (region.slug === 'wilds') return renderWilds(outlet, { storage });
   document.documentElement.setAttribute('data-world', '');

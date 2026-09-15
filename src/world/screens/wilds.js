@@ -21,6 +21,7 @@ import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, silenceWorld } from '../audio.js';
 import { renderResult, formatClock, starHTML } from './result.js';
 import { escapeHTML, formatDate } from '../../core/utils/format.js';
+import { toast } from '../../ui/components/cat-toast.js';
 
 export const GAUNTLET_SIZE = 30;
 export const GAUNTLET_MS = 3 * 60_000;
@@ -65,13 +66,17 @@ export async function composeGauntlet(week) {
 }
 
 export async function renderWilds(outlet, { storage }) {
+  /* "Run again" on the result screen arrives as #/world/place/wilds?run=1.
+     It used to navigate here and then auto-click #run on a 400 ms timer,
+     which lost the race two times in three. */
+  const autoRun = /[?&]run=1/.test(location.hash);
   document.documentElement.setAttribute('data-world', '');
   const region = regionBySlug('wilds');
   const week = weekKey();
   let runs = [];
   try { runs = (await storage.getAll(STORES.LEARNING)).filter((r) => r.kind === 'gauntlet-run').sort((a, b) => b.finished_at.localeCompare(a.finished_at)); } catch { /* none */ }
   const thisWeek = runs.filter((r) => r.week === week);
-  const best = (list) => [...list].sort((a, b) => (b.score.correct - a.score.correct) || (a.duration_ms - b.duration_ms))[0] ?? null;
+  const best = (list) => [...list].sort((a, b) => (b.score?.correct - a.score?.correct) || (a.duration_ms - b.duration_ms))[0] ?? null;
   const weekBest = best(thisWeek), allBest = best(runs);
   let beforeRecords = { sessions: [], learning: [] };
   try { beforeRecords = await loadWorldRecords(storage); } catch { /* the run still counts */ }
@@ -87,12 +92,12 @@ export async function renderWilds(outlet, { storage }) {
         <p class="place__eyebrow">${escapeHTML(region.skill)}</p>
         <h1 class="place__title">The Gauntlet</h1>
         <p class="place__line">${GAUNTLET_SIZE} questions — words from the Meadow, the Pond and the Thicket, and nine asked the way CAT asks them, inside a real sentence. The same ${GAUNTLET_SIZE} all week, in ${GAUNTLET_MS / 60000} minutes. No hints, no second tries. Beat your own best.</p>
-        <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week'}</small><span class="arrow" aria-hidden="true">→</span></button>
+        <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score?.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week'}</small><span class="arrow" aria-hidden="true">→</span></button>
         <div class="place__section">
           <h2>Records</h2>
-          <p class="sub">${allBest ? `All-time best: <b>${allBest.score.correct}/${GAUNTLET_SIZE}</b> in ${formatClock(allBest.duration_ms)} (${escapeHTML(allBest.week)}).` : 'No runs yet. The first one sets the mark.'}</p>
+          <p class="sub">${allBest ? `All-time best: <b>${allBest.score?.correct}/${GAUNTLET_SIZE}</b> in ${formatClock(allBest.duration_ms)} (${escapeHTML(allBest.week)}).` : 'No runs yet. The first one sets the mark.'}</p>
           <div class="g-list">
-            ${runs.slice(0, 12).map((r) => `<div class="g-row"><span class="g-row__num">${r.score.correct}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.week)} · ${formatClock(r.duration_ms)}${r === allBest ? ' · best' : ''}</span><span class="g-row__meta">${formatDate(r.finished_at)}${lit && r.splits ? ` · Meadow ${r.splits.meadow ?? 0} · Pond ${r.splits.pond ?? 0} · Thicket ${r.splits.thicket ?? 0}` : ''}</span></span><span class="g-row__stars">${starHTML(r.stars ?? 0)}</span></div>`).join('') || '<div class="g-empty">The road is empty. Take the first run.</div>'}
+            ${runs.slice(0, 12).map((r) => `<div class="g-row"><span class="g-row__num">${r.score?.correct}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.week)} · ${formatClock(r.duration_ms)}${r === allBest ? ' · best' : ''}</span><span class="g-row__meta">${formatDate(r.finished_at)}${lit && r.splits ? ` · Meadow ${r.splits.meadow ?? 0} · Pond ${r.splits.pond ?? 0} · Thicket ${r.splits.thicket ?? 0}` : ''}</span></span><span class="g-row__stars">${starHTML(r.stars ?? 0)}</span></div>`).join('') || '<div class="g-empty">The road is empty. Take the first run.</div>'}
           </div>
         </div>
         <div class="place__section" id="road-out"></div>
@@ -149,16 +154,27 @@ export async function renderWilds(outlet, { storage }) {
   window.addEventListener('pointerdown', () => { unlock(); startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' }); }, { capture: true, once: true });
   startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' });
 
-  outlet.querySelector('#run').addEventListener('click', async () => {
+  const startRun = async () => {
     play('open');
     silenceWorld();
     outlet.querySelector('#run').disabled = true;
     let picks, ledger, before;
+    /* Both of these used to be a silent `return`: the learner tapped the
+       biggest button on the screen, nothing happened, and the only evidence
+       was a line in a console they will never open. The button is the retry,
+       so it stays enabled — and it says what went wrong under its own label. */
+    const refuse = (line) => {
+      const btn = outlet.querySelector('#run');
+      if (btn) { btn.disabled = false; const small = btn.querySelector('small'); if (small) small.textContent = line; }
+      toast(line, 'error');
+    };
     try { [picks, ledger, before] = await Promise.all([composeGauntlet(week), loadLedger(storage), loadWorld(storage)]); }
-    catch (err) { outlet.querySelector('#run').disabled = false; console.error(err); return; }
-    if (picks.length < 10) { outlet.querySelector('#run').disabled = false; return; }
+    catch (err) { console.error('[CAT OS] the Gauntlet could not be composed', err); refuse(err?.message ?? 'This could not be set up just now. Try again in a moment.'); return; }
+    if (picks.length < 10) { refuse('There are not enough words on this device yet. They arrive in the background — try again in a minute.'); return; }
     runGauntlet(outlet, storage, { picks, ledger, before, week });
-  });
+  };
+  outlet.querySelector('#run').addEventListener('click', startRun);
+  if (autoRun) startRun();
 }
 
 function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
@@ -230,6 +246,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     const stars = roundStars({ correct, total, avgMs, targetMs: GAUNTLET_MS / total });
     const splits = { meadow: 0, pond: 0, thicket: 0 };
     for (const a of answers) if (a.correct) splits[a.region] += 1;
+    let saved = true;
     const record = { id: `gauntlet-${new Date(startedAt).toISOString().replace(/[:.]/g, '-')}`, kind: 'gauntlet-run', module: 'world', week, started_at: new Date(startedAt).toISOString(), finished_at: new Date(finishedAt).toISOString(), duration_ms: Math.min(GAUNTLET_MS, finishedAt - startedAt), score: { correct, total, answered: answers.length, accuracy: total ? correct / total : 0, avg_ms: Math.round(avgMs) }, splits, stars: stars.stars, flawless: stars.flawless, answers };
     try {
       await storage.put(STORES.LEARNING, record);
@@ -237,7 +254,14 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       const byRegion = new Map();
       for (const a of answers) { if (!a.bundle_id) continue; const q = questions.find((x) => x.entry.id === a.entry_id); if (!q?.bundle) continue; const key = `${a.region}|${a.bundle_id}`; if (!byRegion.has(key)) byRegion.set(key, { region: a.region, bundle: q.bundle, entries: [], answers: [] }); const g = byRegion.get(key); g.entries.push(q.entry); g.answers.push(a); }
       for (const g of byRegion.values()) { const fake = { region: g.region, bundle: g.bundle, entries: g.entries, answers: g.answers }; await saveLedgerOnly(storage, fake, ledger); }
-    } catch (err) { console.error('[CAT OS] gauntlet save failed', err); }
+    } catch (err) {
+      // Every other module says so when a finished session cannot be written.
+      // These three did not, and the result screen went on to hand over stars
+      // and goods that were never kept.
+      console.error('[CAT OS] gauntlet save failed', err);
+      saved = false;
+      toast('This run finished but could not be saved.', 'error');
+    }
     const earned = EARN.gauntlet(stars.stars, correct);
     let unlocked = [], setsDone = [];
     try {
@@ -249,15 +273,15 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     } catch { /* the run still counts */ }
 
     let prevBest = null;
-    try { const all = (await storage.getAll(STORES.LEARNING)).filter((r) => r.kind === 'gauntlet-run' && r.id !== record.id); prevBest = [...all].sort((a, b) => (b.score.correct - a.score.correct) || (a.duration_ms - b.duration_ms))[0] ?? null; } catch { /* none */ }
-    const isRecord = !prevBest || correct > prevBest.score.correct || (correct === prevBest.score.correct && record.duration_ms < prevBest.duration_ms);
+    try { const all = (await storage.getAll(STORES.LEARNING)).filter((r) => r.kind === 'gauntlet-run' && r.id !== record.id); prevBest = [...all].sort((a, b) => (b.score?.correct - a.score?.correct) || (a.duration_ms - b.duration_ms))[0] ?? null; } catch { /* none */ }
+    const isRecord = !prevBest || correct > prevBest.score?.correct || (correct === prevBest.score?.correct && record.duration_ms < prevBest.duration_ms);
     if (isRecord && answers.length) play('unlock', { delay: 1.6 });
     renderResult(outlet, {
       region: 'wilds',
       eyebrow: `The Wilds · ${week}`,
       title: isRecord ? 'A new record' : 'Gauntlet complete',
       result: stars,
-      verdict: isRecord ? `${correct} of ${total} in ${formatClock(record.duration_ms)}. Your best run, kept on the road.` : `${correct} of ${total} in ${formatClock(record.duration_ms)}. Best so far: ${prevBest.score.correct} in ${formatClock(prevBest.duration_ms)}.`,
+      verdict: isRecord ? `${correct} of ${total} in ${formatClock(record.duration_ms)}. Your best run, kept on the road.` : `${correct} of ${total} in ${formatClock(record.duration_ms)}. Best so far: ${prevBest.score?.correct} in ${formatClock(prevBest.duration_ms)}.`,
       facts: [
         { label: 'Right', value: `${correct}/${total}`, good: correct >= total * 0.75 },
         { label: 'Time', value: formatClock(record.duration_ms), good: record.duration_ms < GAUNTLET_MS },
@@ -269,7 +293,11 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
         setsDone,
       extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>`,
       actions: [
-        { label: 'Run again', href: '#/world/place/wilds', primary: true, onClick: () => { location.hash = '#/world/place/wilds'; setTimeout(() => document.querySelector('#run')?.click(), 400); } },
+        /* It used to navigate and then auto-click #run after 400 ms. Measured,
+           the button takes 43 ms, 1722 ms and 2579 ms to exist — so two times
+           in three the learner tapped "Run again", landed on the Wilds, and
+           the run never started. The screen starts it itself now. */
+        { label: 'Run again', href: '#/world/place/wilds?run=1', primary: true },
         { label: 'Back to the village', href: '#/world' },
       ],
     });

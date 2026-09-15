@@ -2422,6 +2422,10 @@ console.log('\n24. Rendered contrast (tools/check-rendered-contrast.mjs — real
 
 console.log('\n25. The offline promise (precache lists, fingerprints, budgets)');
 {
+  // Its OWN problems, not the run's: this section used to stay silent whenever
+  // any EARLIER section had failed, so a green §25 was indistinguishable from
+  // a §25 that never reported at all.
+  const before = problems.length;
   // Three ways an offline-first app silently stops being offline-first:
   // a new screen nobody added to the precache list, a changed file shipped
   // under an unchanged cache version, and a boot that quietly grows until
@@ -2452,7 +2456,25 @@ console.log('\n25. The offline promise (precache lists, fingerprints, budgets)')
   if (s.count > BUDGET.modules) bad(`cold open: ${s.count} modules, budget ${BUDGET.modules}. Load the new one where it is used, not in the bootstrap (tools/module-graph.mjs --why <file>)`);
   if (s.bytes > BUDGET.bytes) bad(`cold open: ${Math.round(s.bytes / 1024)} KB of JavaScript, budget ${Math.round(BUDGET.bytes / 1024)} KB`);
 
-  if (problems.length === 0) ok(`${coreFiles().length} core + ${shellFiles().length} shell + ${precacheFiles().length} content files precached, fingerprints current, cold open ${s.count} modules / ${Math.round(s.bytes / 1024)} KB`);
+  // Its OWN problems, not the run's: this used to stay silent whenever any
+  // earlier section had failed, so a green §25 was indistinguishable from a
+  // §25 that never reported.
+  if (problems.length === before) ok(`${coreFiles().length} core + ${shellFiles().length} shell + ${precacheFiles().length} content files precached, fingerprints current, cold open ${s.count} modules / ${Math.round(s.bytes / 1024)} KB`);
+}
+
+console.log('\n26. Hostile records (tools/check-hostile-records.mjs)');
+{
+  const before = problems.length;
+  // Content is schema-checked before it ships and code is checked by
+  // everything above. STORED RECORDS are neither: they were written by
+  // whichever version the learner had, or imported from a file somebody
+  // edited. One session row without a `score` used to throw a raw TypeError
+  // onto the VILLAGE — the screen that hides the tab bar — so the dead end
+  // had no links in it and every reload produced it again.
+  const { checkHostileRecords } = await mod('tools/check-hostile-records.mjs');
+  const { problems: hp, cases, records } = await checkHostileRecords();
+  for (const p of hp) bad('records: ' + p);
+  if (problems.length === before) ok(`${records} deliberately broken records through ${cases} derivations; the world still derives`);
 }
 
 console.log('\n─────────────────────────────────────');

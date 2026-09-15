@@ -122,6 +122,39 @@ export function loadRegistry() {
   return registryPromise;
 }
 
+/**
+ * THE BOOT REGISTRY — the same rows, without the curation metadata.
+ *
+ * content/index.json is 807 KB, and 42% of a cold open of the village was
+ * spent downloading it before a single pixel could be painted. Almost none
+ * of that weight is anything the world reads: reviewer notes, prompt
+ * versions, sources, quality scores, per-question pattern and trap lists and
+ * the passage themes account for most of it, and they belong to the browsers,
+ * the mentor and the tools. The world needs an id, a title, a tier, a stage
+ * and a duration.
+ *
+ * tools/build-index.mjs writes both files from the same source of truth, and
+ * verify.mjs fails if they disagree. The full registry is still there for
+ * everything that opens deeper than the village.
+ */
+let bootRegistryPromise = null;
+export function loadBootRegistry() {
+  if (!bootRegistryPromise) {
+    bootRegistryPromise = fetchJSON('content/boot-index.json')
+      // An older install may not have the slim file yet; the full one always
+      // works, it is just heavier.
+      .catch(() => loadRegistry())
+      .catch((err) => { bootRegistryPromise = null; throw err; });
+  }
+  return bootRegistryPromise;
+}
+
+/** Practicable rows of one type, from the BOOT registry. */
+export async function listForBoot(type) {
+  const registry = await loadBootRegistry();
+  return (registry.items ?? []).filter((i) => i.type === type && (i.status === 'accepted' || i.status === 'review'));
+}
+
 /** Registry entries for practicable RC items (accepted or in review). */
 export async function listRCItems() {
   const registry = await loadRegistry();

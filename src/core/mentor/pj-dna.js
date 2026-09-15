@@ -141,7 +141,7 @@ export function derivePJDNA(sessions, items) {
 
   /* ---- growth: learning velocity ---- */
   if (pjSessions.length >= PJ_FLOORS.VELOCITY_MIN) {
-    const accOf = (s) => (s.score.attempted > 0 ? s.score.accuracy : null);
+    const accOf = (s) => (s.score?.attempted > 0 ? s.score?.accuracy : null);
     const early = pjSessions.slice(0, 3).map(accOf).filter((x) => x !== null);
     const late = pjSessions.slice(-3).map(accOf).filter((x) => x !== null);
     if (early.length === 3 && late.length === 3) {

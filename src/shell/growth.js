@@ -92,6 +92,21 @@ export async function renderGrowth(outlet, { storage }) {
   if (!body.isConnected) return;
   const s = world?.state ?? null;
 
+  /* "Nothing here yet" and "I could not read what is here" look identical on
+     this screen and mean opposite things. If any registry failed to load,
+     say so and offer the retry — do not show a learner with a hundred
+     sessions the screen that welcomes a new one. */
+  if (world?.content?.partial || (!s && sessions.length)) {
+    body.removeAttribute('aria-busy');
+    body.innerHTML = `
+      <div class="reach__empty">
+        <h1>Your growth is still loading</h1>
+        <p>The library did not finish downloading, so this would not be the whole picture. Nothing is lost — it is all on this device.</p>
+        <p><button class="btn btn--primary" onclick="location.reload()">Try again</button></p>
+      </div>`;
+    return;
+  }
+
   if (!s || (s.reading.read === 0 && s.meadow.met === 0 && s.rootwood.metCount === 0)) {
     body.removeAttribute('aria-busy');
     body.innerHTML = `

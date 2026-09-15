@@ -148,7 +148,7 @@ export function derivePSDNA(sessions, items) {
 
   /* ---- growth: learning velocity ---- */
   if (psSessions.length >= PS_FLOORS.VELOCITY_MIN) {
-    const accOf = (s) => (s.score.attempted > 0 ? s.score.accuracy : null);
+    const accOf = (s) => (s.score?.attempted > 0 ? s.score?.accuracy : null);
     const early = psSessions.slice(0, 3).map(accOf).filter((x) => x !== null);
     const late = psSessions.slice(-3).map(accOf).filter((x) => x !== null);
     if (early.length === 3 && late.length === 3) {

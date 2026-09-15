@@ -180,6 +180,45 @@ for (const type of TYPE_ORDER) {
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* The boot registry                                                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The fields the WORLD reads off a registry row, and nothing else.
+ *
+ * index.json is 807 KB and 42% of a cold open of the village was spent
+ * downloading it before a single pixel could be painted. Almost none of that
+ * weight is anything the world reads — reviewer notes, prompt versions,
+ * sources, quality scores, per-question pattern and trap lists and the
+ * passage themes are for the browsers, the mentor and the tools.
+ *
+ * Keep this list in step with what src/world/ and src/village/ actually
+ * touch; verify.mjs fails if boot-index.json is stale.
+ */
+export const BOOT_FIELDS = Object.freeze([
+  'id', 'type', 'status', 'title', 'tier', 'stage',
+  'genre', 'difficulty', 'difficulty_numeric',
+  'estimated_time_min', 'estimated_time_sec',
+  'question_count', 'question_types', 'word_count',
+  'length_class', 'structure', 'skills_trained', 'skills',
+  'kind', 'kinds', 'genres', 'band', 'letter', 'entry_count', 'language',
+  'item_count', 'item_ids', 'member_count',
+  'root_origin', 'root_meaning', 'garden', 'word', 'gap_function', 'sentence_count',
+]);
+
+export function bootIndexFrom(index) {
+  return {
+    registry_version: index.registry_version,
+    description: 'The boot subset of index.json: only the fields src/world and src/village read. Written by tools/build-index.mjs — do not edit.',
+    items: (index.items ?? []).map((r) => {
+      const o = {};
+      for (const k of BOOT_FIELDS) if (r[k] !== undefined) o[k] = r[k];
+      return o;
+    }),
+  };
+}
+
 if (CHECK) {
   if (changed) { console.log(`registry is stale: ${changed} field(s) differ, ${appended.length} file(s) unregistered`); process.exit(1); }
   console.log('registry is current');
@@ -189,5 +228,14 @@ if (changed) {
   index.description = index.description.replace(/ Written by tools\/build-index\.mjs.*$/, '')
     + ' Written by tools/build-index.mjs from the files; rows are kept, mirror fields refreshed, new files appended.';
   fs.writeFileSync(INDEX, JSON.stringify(index, null, 2).split('\n').join(eol) + eol);
+}
+// The slim one is written every time, from whatever the full one now says,
+// so the two cannot drift even if nothing else changed.
+{
+  const boot = JSON.stringify(bootIndexFrom(index));
+  const at = INDEX.replace(/index\.json$/, 'boot-index.json');
+  const before = fs.existsSync(at) ? fs.readFileSync(at, 'utf8') : '';
+  if (before !== boot) fs.writeFileSync(at, boot);
+  console.log(`boot registry: ${Math.round(boot.length / 1024)} KB (full ${Math.round(JSON.stringify(index).length / 1024)} KB)`);
 }
 console.log(`registry: ${index.items.length} rows · ${changed} field(s) updated · ${appended.length} appended${appended.length ? ` (${appended.slice(0, 6).join(', ')}${appended.length > 6 ? ', …' : ''})` : ''}`);

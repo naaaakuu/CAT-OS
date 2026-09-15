@@ -68,8 +68,8 @@ const CONTENT_VERSION = 15;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '23b1a5a86e';
-const CONTENT_ID = '1572c97f5e';
+const BUILD_ID = '8f1d6a9d1c';
+const CONTENT_ID = 'eecafac21c';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
 const META_CACHE = 'cat-os-meta';
@@ -103,6 +103,7 @@ const CORE_FILES = [
   './src/ui/styles/game.css',
   './src/ui/styles/world.css',
   './src/ui/styles/village.css',
+  './content/boot-index.json',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './src/app.js',
@@ -169,6 +170,7 @@ const SHELL_FILES = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/maskable-512.png',
+  './content/boot-index.json',
   './index.html',
   './manifest.webmanifest',
   './src/app.js',
@@ -336,6 +338,7 @@ const SHELL_FILES = [
 ];
 
 const CONTENT_FILES = [
+  './content/boot-index.json',
   './content/index.json',
   './content/manifest.json',
   './content/context/pack.json',

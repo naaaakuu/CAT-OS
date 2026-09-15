@@ -39,7 +39,7 @@ export { GOODS, GOOD_KEYS, RAW_KEYS, MADE_KEYS, good, madeFrom, COINS };
  * A 100% within time also sets `flawless`.
  */
 export function rcStars(session, targetMin, paceFactor = 1) {
-  const acc = session.score?.total ? session.score.correct / session.score.total : 0;
+  const acc = session.score?.total ? session.score?.correct / session.score?.total : 0;
   const targetMs = Math.max(60_000, (targetMin ?? 6) * 60_000 * paceFactor);
   const inTime = (session.duration_ms ?? Infinity) <= targetMs * 1.1;
   let stars = 0;
@@ -52,7 +52,7 @@ export function rcStars(session, targetMin, paceFactor = 1) {
 /** Stars for a verbal set (PJ / PS / OOO): accuracy across the set, pace
  *  against the sum of the items' estimated seconds. */
 export function verbalStars(session, targetSec) {
-  const acc = session.score?.total ? session.score.correct / session.score.total : 0;
+  const acc = session.score?.total ? session.score?.correct / session.score?.total : 0;
   const targetMs = Math.max(45_000, (targetSec ?? 90) * 1000);
   const inTime = (session.duration_ms ?? Infinity) <= targetMs * 1.15;
   let stars = 0;

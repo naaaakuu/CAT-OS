@@ -87,7 +87,7 @@ export function deriveVillage(s, records, content, now = Date.now()) {
     if (['pj', 'ps', 'ooo'].includes(x.module)) {
       const reg = { pj: content.pj, ps: content.ps, ooo: content.ooo }[x.module] ?? [];
       const byId = new Map(reg.map((i) => [i.id, i]));
-      const ids = x.item_ids ?? (x.answers ?? []).map((a) => a.item_id ?? a.question_id);
+      const ids = x.item_ids ?? (x.answers ?? []).filter(Boolean).map((a) => a.item_id ?? a.question_id);
       const target = ids.reduce((n, id) => n + (byId.get(id)?.estimated_time_sec ?? 90), 0);
       const r = verbalStars(x, target);
       addUnits(EARN.verbal(r.stars, x.score?.correct ?? 0, r.flawless), at);

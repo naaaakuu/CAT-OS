@@ -66,7 +66,26 @@ export async function renderVillage(outlet, { storage }) {
     [world, valley] = await Promise.all([loadWorld(storage), loadValley(storage).catch(() => ({ name: null }))]);
   } catch (err) {
     if (!outlet.isConnected) return;
-    outlet.innerHTML = `<section class="screen"><h1>The village will not open</h1><div class="card"><p>${escapeHTML(err.message)}</p></div></section>`;
+    /* This is the screen every cold open lands on, and it hides the tab bar
+       (data-immersive), so a dead end here is a dead end with no links in it:
+       one malformed stored record used to put a raw JavaScript TypeError on
+       screen with nothing to tap and the identical result on every reload.
+       A sentence, a retry, and two ways out — and the technical text goes to
+       the console, where the only person who wants it is. */
+    console.error('[CAT OS] the village could not be derived', err);
+    outlet.innerHTML = `
+      <section class="screen">
+        <div class="empty">
+          <div class="empty__glyph" aria-hidden="true">·</div>
+          <h2>The village didn't open</h2>
+          <p>Something it needed didn't load. Nothing you have done is lost — it is all still on this device.</p>
+          <p>
+            <button class="btn btn--primary" onclick="location.reload()">Try again</button>
+            <a class="btn" href="#/growth">See your growth</a>
+            <a class="btn" href="#/settings">Settings</a>
+          </p>
+        </div>
+      </section>`;
     return;
   }
   const canvas = outlet.querySelector('#vg-canvas');
@@ -241,6 +260,13 @@ export async function renderVillage(outlet, { storage }) {
     clearTimeout(noticeTimer);
     noticeTimer = setTimeout(() => noticeEl.classList.remove('is-shown'), 4200);
   }
+  /* The library did not all arrive, so the coins, the barn and the stars on
+     this screen are lower than the truth. Said once, quietly, with the way to
+     fix it — rather than shown as fact. */
+  if (world?.content?.partial) {
+    setTimeout(() => notice('The library is still downloading, so some of this is not the whole picture. <a href="#/settings">Settings</a> shows how far it has got.'), 1800);
+  }
+
   const wickEl = outlet.querySelector('#vwick');
   let wickTimer = 0, wickAt = null;
   let tapGuardUntil = 0;
