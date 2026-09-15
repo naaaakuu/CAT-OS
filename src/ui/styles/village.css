@@ -148,6 +148,13 @@
 .vb__in { display: inline-flex; align-items: center; gap: 5px; animation: bubble-bob 2.4s ease-in-out infinite; }
 .vb.is-in { opacity: 1; }
 .vb.is-off { opacity: 0; pointer-events: none; }
+/* These float over painted canvas, so the ring needs its own contrast on both
+   the light grass and the night. A dark ring inside a white one reads on
+   either. (They are in the tab order now — see renderCallouts.) */
+.vb:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #1E2A16, 0 6px 14px rgba(30, 40, 20, 0.35);
+}
 .vb::after {
   content: ''; position: absolute; left: 50%; bottom: -10px; width: 13px; height: 13px;
   background: inherit; border-right: 2.5px solid var(--v-wood); border-bottom: 2.5px solid var(--v-wood);

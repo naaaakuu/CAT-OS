@@ -161,13 +161,26 @@ export async function renderVillage(outlet, { storage }) {
   const renderCallouts = () => {
     const specs = calloutSpec();
     calloutsEl.innerHTML = specs.map((s) => `
-      <button class="vb vb--${s.tone}" data-id="${escapeHTML(s.id)}" tabindex="-1" aria-label="${escapeHTML(String(s.text))} ${escapeHTML(s.sub ?? '')}">
+      <button class="vb vb--${s.tone}" data-id="${escapeHTML(s.id)}" aria-label="${escapeHTML(String(s.text))} ${escapeHTML(s.sub ?? '')}">
         <span class="vb__in">${s.ring ? `<span class="vb__ring" style="--p:${Math.round(s.ring.pct * 100)}%">${goodIcon(s.glyph, { size: 17 })}</span>` : (s.glyph === 'hammer' || s.glyph === 'check' || s.glyph === 'page') ? icon(s.glyph, { size: 24 }) : goodIcon(s.glyph, { size: 24 })}<b>${escapeHTML(String(s.text))}</b>${s.sub ? `<small>${escapeHTML(s.sub)}</small>` : ''}</span>
       </button>`).join('');
     calloutFor.clear();
     for (const el of calloutsEl.querySelectorAll('.vb')) {
       calloutFor.set(el.dataset.id, el);
       el.addEventListener('click', () => { play('tap'); tapCallout(el.dataset.id); });
+      /* The callouts are the village's whole answer to "what needs me" —
+         collect, deliver, build — and they carried tabindex="-1", so there
+         was no keyboard route to any of it: the canvas's own key handler only
+         pans. They are real buttons with labels, so simply letting them into
+         the tab order is enough. The one catch is that a callout whose
+         building is off-screen is opacity:0, and focusing something invisible
+         is worse than not reaching it — so focus brings the village to it,
+         which makes tabbing a tour of everything that wants attention. */
+      el.addEventListener('focus', () => {
+        if (!el.classList.contains('is-off')) return;
+        const a = scene.anchors.find((n) => n.id === el.dataset.id);
+        if (a) renderer.lookAt(a.x, a.y, { duration: motionReduced() ? 0 : 420 });
+      });
     }
     calloutKey = '';
     setTimeout(() => { for (const el of calloutsEl.querySelectorAll('.vb')) el.classList.add('is-in'); }, 30);
@@ -260,6 +273,49 @@ export async function renderVillage(outlet, { storage }) {
   const popEl = outlet.querySelector('#vpop');
   let popOpen = null;
   const portrait = (ch, size = 74) => (ch?.look ? artIMG('person', { ...ch.look, pose: 'idle' }, { size, className: 'vportrait' }) : ch?.id === 'wick' ? artIMG('wick', { pose: 'sit' }, { size, className: 'vportrait' }) : '');
+  /* ---- Modal plumbing, shared by the popovers and the sheets ----
+     Both announced themselves as role="dialog" and then honoured none of the
+     contract: no accessible name (so they were read as an unnamed dialog),
+     focus left behind on whatever opened them, Tab walking straight out into
+     the HUD and the canvas underneath while the scrim kept the pointer in,
+     and no Escape. All four are answered here rather than at six call sites. */
+  let modalSeq = 0;
+  let modalReturn = null;
+  const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+
+  function openModal(card, close) {
+    if (!card) return;
+    modalReturn = document.activeElement;
+    card.setAttribute('aria-modal', 'true');
+    const name = card.querySelector('.vpop__name, .vsheet__name, .vsign__label, h2, h3');
+    if (name) {
+      if (!name.id) name.id = `vmodal-name-${++modalSeq}`;
+      card.setAttribute('aria-labelledby', name.id);
+    } else {
+      card.setAttribute('aria-label', 'Dialog');
+    }
+    card.setAttribute('tabindex', '-1');
+    const onKey = (e) => {
+      if (e.key === 'Escape') { e.preventDefault(); play('close'); close(); return; }
+      if (e.key !== 'Tab') return;
+      const f = [...card.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+      if (!f.length) { e.preventDefault(); card.focus({ preventScroll: true }); return; }
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && (document.activeElement === first || document.activeElement === card)) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKey, true);
+    card.__keys = onKey;
+    requestAnimationFrame(() => { try { card.focus({ preventScroll: true }); } catch { /* fine */ } });
+  }
+
+  function closeModal(card) {
+    if (card?.__keys) { document.removeEventListener('keydown', card.__keys, true); card.__keys = null; }
+    const back = modalReturn;
+    modalReturn = null;
+    if (back && back.isConnected) { try { back.focus({ preventScroll: true }); } catch { /* fine */ } }
+  }
+
   function openPop(id) {
     const html = popHTML(id);
     if (!html) return;
@@ -270,10 +326,12 @@ export async function renderVillage(outlet, { storage }) {
     for (const el of popEl.querySelectorAll('[data-close]')) el.addEventListener('click', () => { play('close'); closePop(); });
     wireActions(popEl);
     wireCraftTaps(popEl, () => state);
+    openModal(popEl.querySelector('.vpop__card'), closePop);
   }
   function closePop() {
     if (!popOpen) return;
     popOpen = null;
+    closeModal(popEl.querySelector('.vpop__card'));
     popEl.classList.remove('is-in');
     setTimeout(() => { if (!popOpen) { popEl.hidden = true; popEl.innerHTML = ''; } }, 260);
   }
@@ -505,9 +563,11 @@ export async function renderVillage(outlet, { storage }) {
     for (const el of sheetEl.querySelectorAll('[data-close]')) el.addEventListener('click', () => { play('close'); closeSheet(); });
     wireActions(sheetEl);
     wireCraftTaps(sheetEl, () => state);
+    openModal(sheetEl.querySelector('.vsheet__card'), closeSheet);
   }
   function closeSheet() {
     sheetOpen = null;
+    closeModal(sheetEl.querySelector('.vsheet__card'));
     sheetEl.classList.remove('is-in');
     setTimeout(() => { if (!sheetOpen) { sheetEl.hidden = true; sheetEl.innerHTML = ''; } }, 280);
   }

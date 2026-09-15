@@ -145,6 +145,17 @@ class CatJumbleBoard extends HTMLElement {
           background: var(--color-wrong-bg);
           color: var(--color-wrong-ink);
         }
+        /* The card's state, for assistive tech only. It lives inside the
+           button so it joins the accessible name after the sentence text,
+           instead of replacing it the way an aria-label did. */
+        cat-jumble-board .jcard .jstate {
+          position: absolute;
+          width: 1px; height: 1px;
+          margin: -1px; padding: 0; border: 0;
+          overflow: hidden;
+          clip-path: inset(50%);
+          white-space: nowrap;
+        }
         cat-jumble-board .jcard .stag {
           flex: none;
           align-self: flex-start;
@@ -164,11 +175,11 @@ class CatJumbleBoard extends HTMLElement {
         }
       </style>
       ${this.#sentences.map((s) => `
-        <button type="button" class="jcard" data-label="${escapeHTML(s.label)}"
-                aria-label="Sentence ${escapeHTML(s.label)}">
+        <button type="button" class="jcard" data-label="${escapeHTML(s.label)}">
           <span class="slot" aria-hidden="true"></span>
           <span class="stag">${escapeHTML(s.label)}</span>
           <span class="text">${escapeHTML(s.text)}</span>
+          <span class="jstate"></span>
         </button>`).join('')}
     `;
     this.addEventListener('click', (e) => {
@@ -196,8 +207,8 @@ class CatJumbleBoard extends HTMLElement {
           const hit = placedAt === -1;
           card.classList.add(hit ? 'is-hit' : 'is-miss');
           slot.textContent = '·';
-          card.setAttribute('aria-label',
-            `Sentence ${label}: this one stands apart from the paragraph${hit ? ', as you judged' : `, but you placed it ${placedAt + 1}`}`);
+          const stX = card.querySelector('.jstate');
+          if (stX) stX.textContent = `This one stands apart from the paragraph${hit ? ', as you judged' : `, but you placed it ${placedAt + 1}`}.`;
           if (!hit) {
             const yours = document.createElement('span');
             yours.className = 'yours';
@@ -210,8 +221,8 @@ class CatJumbleBoard extends HTMLElement {
         const hit = placedAt === correctAt;
         card.classList.add(hit ? 'is-hit' : 'is-miss');
         slot.textContent = String(correctAt + 1);
-        card.setAttribute('aria-label',
-          `Sentence ${label}: the author placed it ${correctAt + 1}${hit ? ', where you placed it too' : placedAt === -1 ? '' : `, you placed it ${placedAt + 1}`}`);
+        const stY = card.querySelector('.jstate');
+        if (stY) stY.textContent = `The author placed it ${correctAt + 1}${hit ? ', where you placed it too' : placedAt === -1 ? '' : `, you placed it ${placedAt + 1}`}.`;
         if (!hit && placedAt !== -1) {
           const yours = document.createElement('span');
           yours.className = 'yours';
@@ -220,15 +231,22 @@ class CatJumbleBoard extends HTMLElement {
         }
       } else {
         card.removeAttribute('disabled');
+        /* The state goes in a hidden span INSIDE the button, never in an
+           aria-label. For a role that takes its name from content, aria-label
+           replaces that content — so naming the button "Sentence A, not
+           placed yet" meant a screen-reader user heard the label and the
+           instruction and never the sentence, which is the entire task. The
+           name now reads: the letter, the sentence, then the state. */
+        const st = card.querySelector('.jstate');
         if (placedAt === -1) {
           slot.textContent = '';
           card.setAttribute('aria-pressed', 'false');
-          card.setAttribute('aria-label', `Sentence ${label}, not placed yet. Tap to place next.`);
+          if (st) st.textContent = 'Not placed yet. Activate to place next.';
         } else {
           card.classList.add('is-placed');
           slot.textContent = String(placedAt + 1);
           card.setAttribute('aria-pressed', 'true');
-          card.setAttribute('aria-label', `Sentence ${label}, placed ${placedAt + 1}. Tap to take it back.`);
+          if (st) st.textContent = `Placed ${placedAt + 1}. Activate to take it back.`;
         }
       }
     }
