@@ -18,20 +18,95 @@
 import { rng, LIGHT } from '../world/engine/palette.js';
 import { art, PAL } from './art.js';
 import { WORLD, BUILDINGS, PLOTS, HOUSE_SPOTS, CHARACTERS, NEIGHBOURS, BOARD, PLACE_BUILDING } from './defs.js';
-import { paintTerrain, PATHS, POND, RIVER, BRIDGE, JETTY, HUB, nearPath, inPond, nearRiver, nearBuilding, inPlot, placeable, invalidSpot } from './terrain.js';
+import { paintTerrain, PATHS, POND, RIVER, BRIDGE, JETTY, HUB, nearPath, inPond, nearRiver, nearBuilding, inPlot, placeable, invalidSpot, cannotStand, insideBuilding, onBridgeDeck, RIVER_WATER } from './terrain.js';
 
 /* ------------------------------------------------------------------ */
 /* The path network                                                    */
 /* ------------------------------------------------------------------ */
 
 /** Named points the paths join, and which path joins which. */
-const NODES = {
-  yard: [600, 705], market: [600, 897], road: [600, 1200], reading: [790, 484], garden: [400, 574], roots: [470, 344],
-  loom: [800, 804], bridge: [905, 640], mira: [410, 814], jetty: [372, 878], across: [1010, 474], farm: [1010, 700], board: [690, 676],
+export const NODES = {
+  /* Every node sits ~14 units SOUTH of its building's base, because the
+     renderer sorts by y: a walker standing on the node has to draw IN FRONT
+     of the building, not inside it. The market's was 3 units NORTH of its
+     base, and three of the ten neighbours haunt the market — they walked up
+     to the stall and vanished into it. The jetty's was in the pond. */
+  yard: [600, 705], crossroad: [600, 930], market: [648, 916], road: [600, 1200], reading: [790, 484], garden: [400, 574], roots: [470, 344],
+  loom: [800, 812], bridge: [905, 640], mira: [410, 814], jetty: [400, 872], across: [1010, 474], farm: [1010, 700], board: [690, 676],
+  // The hollow: the seventh cottage sits alone south-west of the pond and had
+  // no node within two hundred units, so its neighbour set off across the
+  // water every time he went fishing.
+  hollow: [400, 1040],
+  // The sixth cottage stood below the farm with the farm node directly north
+  // of it, so its neighbour walked home straight down through his own roof.
+  eastfarm: [1022, 932],
 };
-const EDGES = [['yard', 'market', 0], ['market', 'road', 1], ['yard', 'reading', 2], ['yard', 'garden', 3], ['garden', 'roots', 4], ['reading', 'roots', 5], ['yard', 'loom', 6], ['loom', 'bridge', 7], ['garden', 'mira', 8], ['mira', 'jetty', 9], ['mira', 'market', 10], ['bridge', 'across', 11], ['bridge', 'farm', 12], ['yard', 'board', 13]];
-const HOUSE_NODE = ['mira', 'across', 'garden', 'roots', 'market', 'market', 'farm', 'jetty', 'market', 'garden'];
-const BUILDING_NODE = { hearth: 'yard', reading: 'reading', garden: 'garden', roots: 'roots', loom: 'loom', market: 'market', road: 'road', board: 'board' };
+const EDGES = [['yard', 'crossroad', 0], ['crossroad', 'road', 1], ['yard', 'reading', 2], ['yard', 'garden', 3], ['garden', 'roots', 4], ['reading', 'roots', 5], ['yard', 'loom', 6], ['loom', 'bridge', 7], ['garden', 'mira', 8], ['mira', 'jetty', 9], ['mira', 'crossroad', 10], ['bridge', 'across', 11], ['bridge', 'farm', 12], ['yard', 'board', 13], ['crossroad', 'market', 14], ['crossroad', 'hollow', 15], ['farm', 'eastfarm', 16]];
+export const HOUSE_NODE = ['mira', 'across', 'garden', 'roots', 'market', 'market', 'eastfarm', 'hollow', 'crossroad', 'garden'];
+export const BUILDING_NODE = { hearth: 'yard', reading: 'reading', garden: 'garden', roots: 'roots', loom: 'loom', market: 'market', road: 'road', board: 'board' };
+
+
+/**
+ * The first and last leg of every journey — door to path, path to door — was
+ * a straight line, and the path network is on the other side of whatever the
+ * person lives beside. Measured over the ten cottage spots: two walked
+ * through the Word Garden and the Root Workshop, two through the Market, one
+ * through a cottage, one across the POND and one across the RIVER off the
+ * bridge. Kit spent a fifth of his day standing on the water.
+ *
+ * This bends that leg around whatever is in the way: if the straight segment
+ * crosses water or a wall, it goes via the nearest point on the path network
+ * that does not. It is not a pathfinder and does not need to be — the node
+ * graph already handles everything except the last few steps.
+ */
+function approach(from, to) {
+  if (!crosses(from, to)) return [from, to];
+  const points = PATHS.flat();
+  // One bend, if one is enough.
+  let best = null;
+  let bestD = Infinity;
+  for (const pt of points) {
+    if (crosses(from, pt) || crosses(pt, to)) continue;
+    const d = Math.hypot(pt[0] - from[0], pt[1] - from[1]) + Math.hypot(pt[0] - to[0], pt[1] - to[1]);
+    if (d < bestD) { bestD = d; best = pt; }
+  }
+  if (best) return [from, best, to];
+  // Two, if it is not. Kit lives south-west of the pond and fishes off the
+  // jetty on its east side: no single waypoint gets him round the water, and
+  // without this he waded across it for a fifth of his day.
+  const reachableFrom = points.filter((p) => !crosses(from, p));
+  const reachableTo = points.filter((p) => !crosses(p, to));
+  let pair = null;
+  bestD = Infinity;
+  for (const a of reachableFrom) {
+    for (const b of reachableTo) {
+      if (crosses(a, b)) continue;
+      const d = Math.hypot(a[0] - from[0], a[1] - from[1]) + Math.hypot(b[0] - a[0], b[1] - a[1]) + Math.hypot(to[0] - b[0], to[1] - b[1]);
+      if (d < bestD) { bestD = d; pair = [a, b]; }
+    }
+  }
+  return pair ? [from, pair[0], pair[1], to] : [from, to];
+}
+
+/** Does the straight line a to b pass through water or a wall? */
+function crosses(a, b) {
+  const len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+  const n = Math.max(2, Math.ceil(len / 12));
+  for (let i = 0; i <= n; i += 1) {
+    const f = i / n;
+    const x = a[0] + (b[0] - a[0]) * f;
+    const y = a[1] + (b[1] - a[1]) * f;
+    const why = cannotStand(x, y);
+    if (!why) continue;
+    // A doorstep is up against a wall — that is what a doorstep is. Within
+    // thirty units of either end, a wall is not an obstacle, or every
+    // neighbour is trapped inside their own house and every candidate route
+    // is rejected. Water is never exempt, at either end.
+    if (why === 'building' && (f * len < 46 || (1 - f) * len < 46)) continue;
+    return true;
+  }
+  return false;
+}
 
 /** The polyline from one node to another along the paths (breadth-first over the little graph). */
 function routeBetween(a, b) {
@@ -92,7 +167,8 @@ function worker({ x, y, look, state, hour, seed, bench: benchAt, commuteFrom }) 
       let pose = cheering ? 'cheer' : walk ? 'walk' : dusk && benchAt ? 'sit' : mode;
       const frame = Math.floor(t / (pose === 'walk' ? 170 : pose === 'work' ? 380 : 620)) % 4;
       const bob = cheering ? -Math.abs(Math.sin(t / 160)) * 5 : 0;
-      const px = pose === 'sit' ? benchAt[0] : pos.x, py = pose === 'sit' ? benchAt[1] - 2 : pos.y;
+      // benchAt[1] is already the seat, two above the bench's own anchor.
+      const px = pose === 'sit' ? benchAt[0] : pos.x, py = pose === 'sit' ? benchAt[1] : pos.y;
       const out = [{ x: px, y: py, art: art('person', { ...look, pose, frame }), flip: face < 0, bob }];
       if (cheering) for (let i = 0; i < 3; i += 1) { const a = burst / 2600; out.push({ x: px + (i - 1) * 14, y: py - 56 - (1 - a) * 24 - i * 4, z: 900, alpha: Math.max(0, a), art: art('icon', { glyph: 'heart', size: 11 }) }); }
       return out;
@@ -110,6 +186,12 @@ function worker({ x, y, look, state, hour, seed, bench: benchAt, commuteFrom }) 
 function neighbour({ nb, spot, node, haunt, waiting, hour, index }) {
   const r = rng(`nb:${nb.id}`);
   const door = [spot.x + 8, spot.y + 8];
+  /* The step in front of the door. Without it, "walk to the door" was a
+     straight line from wherever the path left off — which for half the
+     cottages meant entering through a side wall. Everyone walks round to
+     the front and then in, which is both correct and what it looks like
+     people do. */
+  const step = [spot.x + 8, spot.y + 34];
   const night = hour === 'night';
   let t = r() * 5000;
   let route = [], leg = 0, p = 0, pause = 0, facing = 1;
@@ -118,9 +200,9 @@ function neighbour({ nb, spot, node, haunt, waiting, hour, index }) {
   let visible = false;
   let burst = 0;
   const speed = 0.032 + r() * 0.008;
-  const startRoute = (from, to) => { route = [from, ...routeBetween(node, to === 'home' ? node : to), ...(to === 'home' ? [door] : [])]; if (to !== 'home') route = [from, ...routeBetween(node, to)]; leg = 0; p = 0; };
-  const goBoard = () => { route = [pos.x === door[0] && pos.y === door[1] ? door : [pos.x, pos.y], ...routeBetween(node, 'board')]; leg = 0; p = 0; mode = 'toBoard'; visible = true; };
-  const goHome = (from) => { route = [[pos.x, pos.y], ...routeBetween(from, node), door]; leg = 0; p = 0; };
+  const startRoute = (from, to) => { route = [from, ...approach(step, NODES[node]), ...routeBetween(node, to).slice(1)]; leg = 0; p = 0; };
+  const goBoard = () => { route = [...approach([pos.x, pos.y], NODES[node]), ...routeBetween(node, 'board').slice(1)]; leg = 0; p = 0; mode = 'toBoard'; visible = true; };
+  const goHome = (from) => { route = [[pos.x, pos.y], ...routeBetween(from, node).slice(1), ...approach(NODES[node], step).slice(1), door]; leg = 0; p = 0; };
   if (waiting && !night) { goBoard(); leg = Math.max(0, route.length - 2); p = 0.999; }
   else if (!night && r() > 0.45) { visible = true; mode = 'out'; startRoute(door, haunt); leg = Math.floor(r() * Math.max(1, route.length - 2)); }
   else pause = 4000 + r() * 12000;
@@ -170,6 +252,22 @@ function neighbour({ nb, spot, node, haunt, waiting, hour, index }) {
 }
 
 /** Grazing animals in a rect: wander, stop, face where they go. */
+/**
+ * Shrink a grazing rectangle until every corner is ground an animal can
+ * stand on. Sheep were wandering into the cottage above the pen, because the
+ * rect was written relative to the plot and the plot has a neighbour.
+ */
+function grazeRect(rect) {
+  let { x, y, w, h } = rect;
+  for (let i = 0; i < 12; i += 1) {
+    const corners = [[x, y], [x + w, y], [x, y + h], [x + w, y + h], [x + w / 2, y + h / 2]];
+    if (!corners.some(([cx, cy]) => cannotStand(cx, cy))) break;
+    x += 6; y += 6; w -= 12; h -= 12;
+    if (w < 24 || h < 16) break;
+  }
+  return { x, y, w: Math.max(24, w), h: Math.max(16, h) };
+}
+
 function grazers({ rect, count, kind, seed }) {
   const r = rng(`graze:${seed}`);
   const herd = Array.from({ length: count }, (_, i) => ({ x: rect.x + r() * rect.w, y: rect.y + r() * rect.h, tx: 0, ty: 0, face: r() > 0.5 ? 1 : -1, pause: r() * 5000, t: r() * 3000, v: 0.012 + r() * 0.008, i }));
@@ -381,14 +479,34 @@ function cloudShadows({ seed, count = 4 }) {
  * comes back. At night he sleeps on the step with his lamp beside him.
  * He jumps for joy when something good happens, and comes when called.
  */
-function companion({ home, far, night, seed, start = 'home' }) {
+function companion({ home, far, night, seed, start = 'home', homeNode = 'yard', farNode = 'yard' }) {
   const r = rng(`wick:${seed}`);
   const speed = 0.024;
   let t = 0, rest = start === 'far' ? 6000 + r() * 5000 : 2200 + r() * 2600, blinkAt = 2400, lookAt = 5000;
   let pos = start === 'far' ? { x: far[0], y: far[1] } : { x: home[0], y: home[1] };
   let target = null, facing = 1, dest = start === 'far' ? 'far' : 'home';
   let burst = 0, sleeping = night;
-  const go = (to) => { target = { x: to[0], y: to[1] }; facing = to[0] >= pos.x ? 1 : -1; };
+  /* Wick walked in a straight line between the Hearth and whatever the
+     village was asking about, which put him inside the Hearth's front wall
+     on two of his four destinations and straight through the Market on the
+     other two: 276 of 900 measured ticks were inside a building. He takes
+     the paths now, like everybody else — `approach` bends the leg around
+     anything solid and the bend is walked as a queue. */
+  let queue = [];
+  const step = () => { target = queue.shift() ?? null; if (target) facing = target.x >= pos.x ? 1 : -1; };
+  /* The full route, not a straight line. Wick's circuit runs from the yard
+     to whatever the village is asking about, and the buildings are in the
+     way: measured over nine hundred ticks, two hundred and seventy-six of
+     them were inside one. He has a home node and a destination node, which
+     is everything routeBetween needs — the only unrouted parts left are the
+     few steps at each end, and `approach` bends those. */
+  const go = (to, toNode) => {
+    const a = homeNode === toNode || !toNode
+      ? approach([pos.x, pos.y], to)
+      : [...approach([pos.x, pos.y], NODES[homeNode]), ...routeBetween(homeNode, toNode).slice(1), ...approach(NODES[toNode], to).slice(1)];
+    queue = a.slice(1).map(([x, y]) => ({ x, y }));
+    step();
+  };
   return {
     kind: 'companion',
     update(dt) {
@@ -399,17 +517,17 @@ function companion({ home, far, night, seed, start = 'home' }) {
       if (sleeping) return;
       if (target) {
         const dx = target.x - pos.x, dy = target.y - pos.y, d = Math.hypot(dx, dy);
-        if (d < 2) { target = null; rest = dest === 'far' ? 6000 + r() * 9000 : 5000 + r() * 8000; return; }
+        if (d < 2) { if (queue.length) { step(); return; } target = null; rest = dest === 'far' ? 6000 + r() * 9000 : 5000 + r() * 8000; return; }
         pos.x += (dx / d) * speed * dt; pos.y += (dy / d) * speed * dt;
         return;
       }
       if (rest > 0) { rest -= dt; return; }
-      if (dest === 'home') { dest = 'far'; go(far); } else { dest = 'home'; go(home); }
+      if (dest === 'home') { dest = 'far'; go(far, farNode); } else { dest = 'home'; go(home, homeNode); }
     },
     /** Something good happened: a jump, three times. */
     celebrate(ms = 2400) { burst = ms; sleeping = false; },
     /** Come here. */
-    call(to) { sleeping = false; target = null; dest = 'far'; go(to); },
+    call(to) { sleeping = false; target = null; queue = []; dest = 'far'; go(to, farNode); },
     objects() {
       const out = [];
       if (burst > 0) { const k = Math.floor(burst / 400) % 2; out.push({ x: pos.x, y: pos.y, art: art('wick', { pose: k ? 'jump' : 'sit', frame: 0, lamp: night }), flip: facing < 0, bob: k ? -Math.abs(Math.sin(burst / 130)) * 8 : 0 }); if (k) out.push({ x: pos.x + (facing < 0 ? -18 : 18), y: pos.y - 34, z: 900, art: art('sparkle', { size: 1 }) }); return out; }
@@ -499,7 +617,7 @@ export function buildVillageScene(state, atmo, opts = {}) {
       statics.push({ x: def.at.x + 96, y: def.at.y + 34, art: art('crate', { kind: 'barrel' }) });
       statics.push({ x: def.at.x - 60, y: def.at.y + 46, art: art('flowerPatch', { seed: 'hf2', n: 6 }), scale: 1.3 });
       if (chim && bv.level >= 2 && practicedToday) life.push(smoke({ x: def.at.x - sprite.ax + chim[0], y: def.at.y - sprite.ay + chim[1], seed: 'hearth' }));
-      if (bv.level >= 3) life.push(grazers({ rect: { x: def.at.x - 70, y: def.at.y + 10, w: 140, h: 40 }, count: 1, kind: 'dog', seed: 'hearth-dog' }));
+      if (bv.level >= 3) life.push(grazers({ rect: grazeRect({ x: def.at.x - 70, y: def.at.y + 10, w: 140, h: 40 }), count: 1, kind: 'dog', seed: 'hearth-dog' }));
       // The order board by the door.
       const board = art('board', { notes: v.orders.length, ready: v.deliverable.length, night: dark });
       statics.push({ x: BOARD.at.x, y: BOARD.at.y, art: board, board: true });
@@ -516,15 +634,22 @@ export function buildVillageScene(state, atmo, opts = {}) {
     }
     if (def.id === 'market') { statics.push({ x: def.at.x + 92, y: def.at.y + 10, art: art('hay') }); statics.push({ x: def.at.x - 92, y: def.at.y + 12, art: art('crate', { kind: 'barrel' }) }); statics.push({ x: def.at.x - 104, y: def.at.y + 30, art: art('cart') }); }
     if (def.id === 'loom') { statics.push({ x: def.at.x - 90, y: def.at.y + 6, art: art('crate', { kind: 'sack' }) }); statics.push({ x: def.at.x - 100, y: def.at.y + 26, art: art('crate') }); life.push(laundry({ x: def.at.x + 100, y: def.at.y + 30, seed: 'loom' })); }
-    if (def.id === 'reading') { statics.push({ x: def.at.x + 96, y: def.at.y + 26, art: art('bench') }); statics.push({ x: def.at.x - 94, y: def.at.y + 12, art: art('lamp', { lit: dark }) }); addLamp(def.at.x - 94, def.at.y - 10); statics.push({ x: def.at.x - 100, y: def.at.y + 40, art: art('cart', { load: 'books' }) }); statics.push({ x: def.at.x + 40, y: def.at.y + 30, art: art('flowerPatch', { seed: 'rf', n: 7 }), scale: 1.3 }); }
+    // The bench was at +96, which is IN the river (the Reading House stands
+    // 115 units from it). Ada sat on open water at dusk.
+    if (def.id === 'reading') { statics.push({ x: def.at.x - 96, y: def.at.y + 26, art: art('bench'), bench: true }); statics.push({ x: def.at.x - 94, y: def.at.y + 12, art: art('lamp', { lit: dark }) }); addLamp(def.at.x - 94, def.at.y - 10); statics.push({ x: def.at.x - 100, y: def.at.y + 40, art: art('cart', { load: 'books' }) }); statics.push({ x: def.at.x + 40, y: def.at.y + 30, art: art('flowerPatch', { seed: 'rf', n: 7 }), scale: 1.3 }); }
     // The shelf: the made goods waiting to be collected, visible from across the village.
     if (def.good && bv.queue) {
       const sh = pointOf(def, sprite, 'shelf');
       statics.push({ x: sh.x, y: sh.y, art: art('shelf', { count: Math.min(8, bv.queue.ready), good: def.good }) });
     }
-    // A bench for the worker at dusk.
-    const benchAt = def.id === 'reading' ? [def.at.x + 96, def.at.y + 24] : def.id === 'market' ? null : [def.at.x - 80, def.at.y + 28];
-    if (benchAt && def.id !== 'reading') statics.push({ x: benchAt[0], y: benchAt[1] + 2, art: art('bench') });
+    // A bench for the worker at dusk. It is a REFERENCE to the bench object,
+    // not a copy of its coordinates: the end-of-build sweep may move the
+    // bench, and a worker who sits at the coordinates the bench used to have
+    // is a worker sitting on nothing. Ada did exactly that, on the river.
+    const benchRef = def.id === 'reading'
+      ? statics[statics.findLastIndex((o) => o.bench)]
+      : def.id === 'market' ? null : (statics.push({ x: def.at.x - 80, y: def.at.y + 30, art: art('bench'), bench: true }), statics[statics.length - 1]);
+    const benchAt = benchRef ? { get 0() { return benchRef.x; }, get 1() { return benchRef.y - 2; } } : null;
     if (ch?.look) {
       const wp = pointOf(def, sprite, 'worker');
       const w = worker({ x: wp.x, y: wp.y, look: ch.look, state: bv.state, hour, seed: def.id, bench: benchAt, commuteFrom: opts.commute && !night ? [HUB.x, HUB.y] : null });
@@ -551,7 +676,9 @@ export function buildVillageScene(state, atmo, opts = {}) {
       statics.push({ x: x + 6, y: y + h / 2 + 6, art: art('fence', { w: 14 }) });
       statics.push({ x: x + w - 6, y: y + h / 2 + 6, art: art('fence', { w: 14 }) });
       statics.push({ x: x + w - 30, y: y + 44, art: art('hay') });
-      life.push(grazers({ rect: { x: x + 20, y: y + 28, w: w - 44, h: h - 46 }, count: 3, kind: 'sheep', seed: 'pen' }));
+      // The graze rect is trimmed to ground the sheep can actually stand on:
+      // the old one reached into the cottage on the rise above the pen.
+      life.push(grazers({ rect: grazeRect({ x: x + 20, y: y + 28, w: w - 44, h: h - 46 }), count: 3, kind: 'sheep', seed: 'pen' }));
     } else if (def.id === 'orchard') {
       for (let i = 0; i < 8; i += 1) { const col = i % 4, row = Math.floor(i / 4); statics.push({ x: x + 30 + col * 44, y: y + 60 + row * 72, art: art('tree', { kind: 'round', size: 0.8, seed: `orch${i}`, tone: 2 }) }); }
       statics.push({ x: x + w - 26, y: y + h - 10, art: art('crate') });
@@ -700,7 +827,11 @@ export function buildVillageScene(state, atmo, opts = {}) {
     const hearth = BUILDINGS.find((b) => b.id === 'hearth');
     const toward = focus ?? v.tip?.building ?? 'reading';
     const farDef = toward === 'board' ? { at: { x: BOARD.at.x - 40, y: BOARD.at.y + 14 } } : BUILDINGS.find((b) => b.id === toward) ?? BUILDINGS.find((b) => b.id === 'reading');
-    wick = companion({ home: [hearth.at.x - 44, hearth.at.y + 16], far: [farDef.at.x - 56, farDef.at.y + 18], night, seed: toward, start: focus ? 'far' : 'home' });
+    wick = companion({ // Wick sits at the edge of the yard, not against the Hearth's wall: from
+      // there every circuit he walks starts on a path, and he stopped clipping
+      // the front of the house on his way out.
+      home: [hearth.at.x - 18, hearth.at.y + 48], far: [farDef.at.x - 56, farDef.at.y + 18], night, seed: toward, start: focus ? 'far' : 'home',
+      homeNode: 'yard', farNode: BUILDING_NODE[toward] ?? 'reading' });
     life.push(wick);
   }
 
@@ -725,21 +856,18 @@ export function buildVillageScene(state, atmo, opts = {}) {
      renderer actually draws, so this cannot quietly stop working. */
   {
     let moved = 0, dropped = 0;
-    const nearestOwner = (x, y) => {
-      let best = null, bestD = Infinity;
-      for (const d of BUILDINGS) { const dd = (d.at.x - x) ** 2 + (d.at.y - y) ** 2; if (dd < bestD) { bestD = dd; best = d.at; } }
-      for (const sp of HOUSE_SPOTS) { const dd = (sp.x - x) ** 2 + (sp.y - y) ** 2; if (dd < bestD) { bestD = dd; best = sp; } }
-      return bestD < 260 * 260 ? best : null;
-    };
+    // Small nudges first, in a widening ring. The first version mirrored the
+    // prop about the nearest building, which threw things two hundred units
+    // across the map and tore a three-log woodpile in half. A prop that is
+    // four units into a wall wants to move four units, not to the other side
+    // of the house.
+    const RING = [];
+    for (let r = 8; r <= 40; r += 8) for (let a = 0; a < 8; a += 1) RING.push([Math.cos((a * Math.PI) / 4) * r, Math.sin((a * Math.PI) / 4) * r * 0.7]);
     for (let i = statics.length - 1; i >= 0; i -= 1) {
       const st = statics[i];
-      if (st.waterside || !invalidSpot(st.x, st.y)) continue;
-      const owner = nearestOwner(st.x, st.y);
-      const tries = [];
-      if (owner) tries.push([owner.x - (st.x - owner.x), st.y]);
-      tries.push([st.x, st.y + 42], [st.x, st.y - 42], [st.x - 56, st.y], [st.x + 56, st.y]);
-      const ok = tries.find(([tx, ty]) => !invalidSpot(tx, ty));
-      if (ok) { st.x = ok[0]; st.y = ok[1]; moved += 1; } else { statics.splice(i, 1); dropped += 1; }
+      if (st.waterside || !invalidSpot(st.x, st.y, v)) continue;
+      const ok = RING.find(([dx, dy]) => !invalidSpot(st.x + dx, st.y + dy, v));
+      if (ok) { st.x += ok[0]; st.y += ok[1]; moved += 1; } else { statics.splice(i, 1); dropped += 1; }
     }
     if (moved || dropped) scenePlacementFixes = { moved, dropped };
   }
@@ -817,6 +945,7 @@ export function buildVillageScene(state, atmo, opts = {}) {
     hour, atmo, season,
     life, lifeKey,          // so the next rebuild can carry these forward
     statics,                // tools/check-world.mjs validates every anchor
+    village: v,             // …and needs to know what is actually standing
     warm(bucket, tint = null) {
       if (!pending.length) return;
       warmSince += 1;

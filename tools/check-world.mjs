@@ -59,21 +59,55 @@ const VALIDATE = `(async () => {
   const canvas = document.querySelector('#vg-canvas');
   const scene = canvas && canvas.__renderer && canvas.__renderer.scene;
   if (!scene) return JSON.stringify({ error: 'no scene mounted' });
-  const statics = scene.statics || [];
+  const v = scene.village || null;   // ask about the village that is STANDING
   const bad = [];
   let waived = 0;
+
+  // "Is it IN the thing" — no clearance at all. That is a different and much
+  // narrower question than the scatter's "keep away from here": a lamp beside
+  // a door is right, a lamp inside the kitchen is not.
+  const whyProp = (x, y) => t.invalidSpot(x, y, v);
+  const whyPerson = (x, y) => t.cannotStand(x, y, v);
+
+  const statics = scene.statics || [];
   for (const s of statics) {
     if (s.waterside) { waived += 1; continue; }
-    // Clearance a drawn thing needs from each feature. A prop touching the
-    // bank is fine; standing in the water is not, and neither is standing
-    // inside a wall or in the middle of a road.
-    // Water and walls only, with no clearance at all: this asks 'is it IN
-    // the thing' rather than the scatter's much wider 'keep away from here'.
-    // A lamp beside a door is right; a lamp inside the kitchen is not.
-    const why = t.inPond(s.x, s.y, 0) ? 'pond' : t.nearRiver(s.x, s.y, 14) ? 'river' : t.insideBuilding(s.x, s.y) ? 'building' : null;
-    if (why) bad.push({ x: Math.round(s.x), y: Math.round(s.y), why, w: Math.round((s.art && s.art.w) || 0), h: Math.round((s.art && s.art.h) || 0) });
+    let w = whyProp(s.x, s.y);
+    if (w === 'building') w = 'building (' + t.whichBuilding(s.x, s.y, v) + ')';
+    if (w) bad.push({ kind: 'prop', x: Math.round(s.x), y: Math.round(s.y), why: w });
   }
-  return JSON.stringify({ total: statics.length, waived, bad });
+
+  // THE PEOPLE. A gate that only looks at furniture misses the thing a
+  // learner actually watches: a neighbour walking across the pond, a worker
+  // sitting on a bench that was moved out from under her, Wick strolling
+  // through the Hearth's front wall. Run the village forward and look.
+  //
+  // Every actor is seeded, so this is deterministic: the same minute of
+  // village life every time, on every machine.
+  const seen = new Set();
+  const SECONDS = 90;
+  const STEP = 250;
+  for (let ms = 0; ms < SECONDS * 1000; ms += STEP) {
+    scene.update(STEP, ms);
+    for (const actor of scene.life || []) {
+      let objs = [];
+      try { objs = actor.objects(ms) || []; } catch { objs = []; }
+      for (const o of objs) {
+        // Only things that stand on the ground: a bird, a cloud shadow, a
+        // sparkle and a speech bubble are all allowed over the water.
+        if (!o || o.z || !o.art || o.art.h < 14) continue;
+        let w = whyPerson(o.x, o.y);
+        if (!w) continue;
+        if (w === 'building') w = 'building (' + t.whichBuilding(o.x, o.y, v, 10) + ')';
+        const key = actor.kind + '|' + (actor.id || '') + '|' + w;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        bad.push({ kind: actor.kind, id: actor.id || '', x: Math.round(o.x), y: Math.round(o.y), why: w, at: Math.round(ms / 1000) });
+      }
+    }
+  }
+
+  return JSON.stringify({ total: statics.length, actors: (scene.life || []).length, waived, bad });
 })()`;
 
 export async function checkWorld({ log = () => {} } = {}) {
@@ -107,8 +141,12 @@ export async function checkWorld({ log = () => {} } = {}) {
         if (res.error) { problems.push(`${state.name}/${hour}: ${res.error}`); continue; }
         checked += res.total;
         waived += res.waived;
-        for (const o of res.bad) problems.push(`${state.name}/${hour}: something stands in the ${o.why} at (${o.x}, ${o.y})`);
-        log(`  ${state.name.padEnd(6)} ${hour.padEnd(8)} ${String(res.total).padStart(4)} objects, ${res.bad.length} invalid, ${res.waived} waterside`);
+        for (const o of res.bad) {
+          problems.push(o.kind === 'prop'
+            ? `${state.name}/${hour}: a prop stands in the ${o.why} at (${o.x}, ${o.y})`
+            : `${state.name}/${hour}: ${o.kind}${o.id ? ' ' + o.id : ''} is in the ${o.why} at (${o.x}, ${o.y}), ${o.at}s in`);
+        }
+        log(`  ${state.name.padEnd(6)} ${hour.padEnd(8)} ${String(res.total).padStart(4)} props + ${String(res.actors).padStart(2)} actors over 90s, ${res.bad.length} invalid, ${res.waived} waterside`);
       }
     }
   } finally {
@@ -128,7 +166,7 @@ if (process.argv[1]?.endsWith('check-world.mjs')) {
   const verbose = process.argv.includes('-v');
   const { skipped, problems, checked, waived } = await checkWorld({ log: verbose ? console.log : () => {} });
   if (skipped) { console.log('SKIPPED — no Chrome on this machine (set CHROME_PATH to run the world placement gate).'); process.exit(0); }
-  console.log(`\nChecked ${checked} placed objects across ${STATES.length} village states x ${HOURS.length} hours (${waived} waterside by design).`);
+  console.log(`\nChecked ${checked} placed objects and ninety seconds of village life across ${STATES.length} village states x ${HOURS.length} hours (${waived} waterside by design).`);
   if (!problems.length) { console.log('✓ nothing stands in the water, in a wall, or in the middle of a road.\n'); process.exit(0); }
   console.log(`\n✗ ${problems.length} invalid placement(s):\n`);
   for (const p of problems) console.log('  ' + p);

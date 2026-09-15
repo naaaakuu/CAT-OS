@@ -2365,19 +2365,37 @@ console.log('\n22. Colour contrast (tools/check-contrast.mjs — WCAG AA)');
   if (!failures.length) ok(`${lines.length} ink/surface pairings clear WCAG AA in light, dark and the village`);
 }
 
-console.log('\n23. World placement (tools/check-world.mjs — a real browser)');
+console.log('\n23. The map (tools/check-world-data.mjs — pure geometry)');
 {
-  // Static reading cannot answer this: the scene is built by code that needs
-  // a canvas, and the defect the owner actually saw — a tree in the middle of
-  // the river — lived in one scatter whose filter list was shorter than its
-  // neighbours'. So this opens the village for real, four stages of growth by
-  // three hours of the day, and asks the terrain about every object drawn.
-  const { checkWorld } = await mod('tools/check-world.mjs');
-  const { skipped, problems, checked, waived } = await checkWorld();
-  if (skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
-  else {
-    for (const p of problems) bad('world: ' + p);
-    if (!problems.length) ok(`${checked} placed objects across four village states and three hours; none in the water, a wall or the yard (${waived} waterside by design)`);
+  // The DATA, before anything has a chance to repair it. scene.js ends every
+  // build by nudging props that landed somewhere impossible, so a coordinate
+  // that is wrong in the source can be invisible to a runtime check: the
+  // ninth cottage sat in the river for three releases while its sprite was
+  // quietly shoved onto the bank and its hit box, door, lamp and map anchor
+  // stayed in the water. No browser, no excuse, runs every time.
+  const { checkWorldData } = await mod('tools/check-world-data.mjs');
+  const { problems, checked } = await checkWorldData();
+  for (const p of problems) bad('map: ' + p);
+  if (!problems.length) ok(`${checked} map coordinates: every building, cottage, plot, node and path point is on ground a person can stand on`);
+}
+
+console.log('\n23b. The village, running (tools/check-world.mjs — a real browser)');
+{
+  // And then the thing itself: the scene the renderer actually draws, plus
+  // ninety seconds of village life at four stages of growth and three hours
+  // of the day. The art pipeline needs a canvas, so this cannot run in Node.
+  try {
+    const { checkWorld } = await mod('tools/check-world.mjs');
+    const { skipped, problems, checked, waived } = await checkWorld();
+    if (skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
+    else {
+      for (const p of problems) bad('world: ' + p);
+      if (!problems.length) ok(`${checked} placed objects and ninety seconds of life across four village states and three hours; nothing in the water or a wall, nobody walking through one (${waived} waterside by design)`);
+    }
+  } catch (err) {
+    // A browser gate that throws must not take the other twenty-four sections
+    // with it. It is a failure, and it is reported as one.
+    bad('world: the browser gate could not run — ' + String(err && err.message ? err.message : err).slice(0, 140));
   }
 }
 

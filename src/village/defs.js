@@ -266,7 +266,14 @@ export const BUILDINGS = Object.freeze([
   },
   {
     id: 'market', name: 'The Market', kind: 'market', character: 'rafi', art: 'market',
-    at: { x: 600, y: 900 }, hit: { w: 156, h: 100 },
+    at: { x: 652, y: 900 }, hit: { w: 156, h: 100 },
+    /* "hit" is what a learner can TAP — generously sized, including the awning
+       and the crates. "solid" is what nobody may stand inside, and for an open
+       stall on the village's main street that is the counter, not the awning:
+       the road runs past at x=600 and every neighbour who walked to the market
+       was being reported as inside a wall. A building without "solid" uses
+       "hit", because a house is solid all the way out. */
+    solid: { w: 92, h: 34 },
     line: 'Rafi’s stall: more orders on the board, and better prices for everything the village makes.',
     unlock: { cost: { coins: 60 }, standing: std('Deliver 2 orders.', (v) => v.ordersDone >= 2), line: 'Rafi has a cart and wants a stall.' },
     levels: [
@@ -279,6 +286,10 @@ export const BUILDINGS = Object.freeze([
     id: 'road', name: 'The Road Out', kind: 'challenge', character: null, art: null,
     skill: 'Mixed timed challenge', place: 'wilds',
     at: { x: 600, y: 1080 }, hit: { w: 100, h: 70 },
+    /* You walk ON the road out; you cannot be inside it. Without this its
+       hit box claimed the whole southern street and every neighbour heading
+       out of the village was reported as standing in a wall. */
+    solid: { w: 0, h: 0 },
     line: 'Beyond the village: the Gauntlet, mixed and timed, against your own best. It pays in coins.',
     activity: { label: 'Run the Gauntlet', verb: 'Take the road out', route: '#/world/place/wilds', minutes: 8, makes: 'coins', brief: 'Everything at once, fast, paid in coins.' },
     unlock: { cost: { coins: 250 }, standing: std('Earn 12 stars.', (v, s) => s.stars >= 12), line: 'A signpost and a lamp, and the road is open.' },
@@ -329,7 +340,11 @@ export const PLOTS = Object.freeze([
     line: 'Rows of young trees on the rise above the workshop.', after: 'An orchard stands above the Root Workshop.',
   },
   {
-    id: 'farm', name: 'The farm', at: { x: 1060, y: 750 }, rect: { x: 950, y: 540, w: 220, h: 220 },
+    /* The farm is across the water; its rectangle used to start at x=950, which
+       at its south-west corner is inside the river. Fields do not grow in a
+       river, and a plot's corner is a real coordinate: the fence is drawn on
+       it and the 'for sale' sign is anchored to it. */
+    id: 'farm', name: 'The farm', at: { x: 1064, y: 750 }, rect: { x: 968, y: 540, w: 204, h: 220 },
     cost: { coins: 600, ink: 4, cloth: 4 }, standing: std('Deliver 12 orders.', (v) => v.ordersDone >= 12),
     line: 'Across the river: a barn, a cart, chickens, and hay.', after: 'A farm works the land across the river.',
   },
@@ -355,7 +370,14 @@ export function plotById(id) { return PLOT_BY_ID.get(id) ?? null; }
  */
 export const HOUSE_SPOTS = Object.freeze([
   { x: 410, y: 800 }, { x: 1010, y: 460 }, { x: 240, y: 500 }, { x: 700, y: 280 }, { x: 470, y: 980 },
-  { x: 760, y: 985 }, { x: 1010, y: 900 }, { x: 330, y: 1055 }, { x: 900, y: 1060 }, { x: 150, y: 560 },
+  { x: 760, y: 985 }, { x: 1010, y: 900 }, { x: 330, y: 1055 }, { x: 820, y: 1062 }, { x: 150, y: 560 },
+  /* The ninth spot was { x: 900, y: 1060 } — 0.6 units from the river's
+     centre-line, i.e. dead in the water. The cottage sprite was being shoved
+     west at runtime by the placement sweep, but the hit box, the night lamp,
+     the neighbour's door and the map anchor were all derived BEFORE that and
+     stayed in the river: tapping the house you could see did nothing, and
+     tapping open water opened Sunniva's popover. Fixed in the map, where it
+     belongs. */
 ]);
 export const HOUSE = Object.freeze({
   /** House n (1-based) is the n-th neighbour after Mira. */

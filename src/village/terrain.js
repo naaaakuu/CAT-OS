@@ -20,9 +20,22 @@ import { WORLD, PLOTS, BUILDINGS, HOUSE_SPOTS, BOARD } from './defs.js';
 
 /** The river, north to south down the east side, with a bend at the bridge. */
 export const RIVER = smooth([[880, -20], [900, 120], [930, 260], [905, 400], [890, 520], [905, 640], [940, 760], [925, 900], [900, 1040], [920, 1220]]);
+/* How wide the river ACTUALLY is, taken from the same numbers paintTerrain
+   strokes it with (70 sand / 62 / 54 deep water / 42). The invariant used a
+   flat 14, so anything 15 to 27 units out was standing on open water and the
+   gate called it clean: a neighbour's fence, her flower patch and her washing
+   line were all in the river, all "valid". A constant that describes the
+   drawing must come FROM the drawing. */
+export const RIVER_WATER = 27;   // visible water, half-width
+export const RIVER_BANK = 35;    // the sand either side
 export const BRIDGE = { x: 905, y: 640, w: 76 };
 export const POND = { cx: 300, cy: 900, rx: 98, ry: 60 };
-export const JETTY = { x: 372, y: 878, len: 40 };
+/* The jetty's LAND end. It used to stop at x=372, which is inside the pond:
+   the deck ran from 332 to 372 and the water's edge at that y is 391, so it
+   was a raft nineteen units short of the shore, with a path and a graph node
+   that both ended in open water. Kit stood on the pond for a fifth of his
+   day. It now reaches the sand. */
+export const JETTY = { x: 406, y: 878, len: 74 };
 
 /** The yard in front of the Hearth: where every path meets. */
 export const HUB = { x: 600, y: 705 };
@@ -36,20 +49,37 @@ export function inYard(x, y, pad = 0) {
 
 /** Paths: every building to the yard, the road out, the pond, the bridge. */
 export const PATHS = [
-  [[600, 674], [600, 705], [600, 780], [600, 850], [600, 895]],                  // hearth → market
-  [[600, 905], [600, 1000], [598, 1080], [600, 1200]],                           // market → the road out
+  /* The main street runs from the Hearth to the road out in one line, and
+     the Market sits BESIDE it on a short spur. It used to be centred on
+     x=600 with the road going through its counter, so every neighbour on
+     their way south walked through the stall and was drawn behind it. */
+  [[600, 674], [600, 705], [600, 780], [600, 860], [600, 930]],                  // hearth → the crossroad
+  [[600, 930], [600, 1010], [598, 1090], [600, 1200]],                           // the crossroad → the road out
   [[600, 705], [680, 640], [740, 560], [790, 484]],                              // yard → reading house
   [[600, 705], [520, 660], [450, 610], [400, 574]],                              // yard → word garden
-  [[400, 574], [410, 470], [440, 400], [470, 344]],                              // garden → root workshop
-  [[790, 484], [720, 400], [600, 360], [520, 344], [470, 344]],                  // reading → roots (the north lane)
-  [[600, 705], [680, 730], [750, 770], [800, 804]],                              // yard → loom
-  [[800, 804], [850, 730], [880, 680], [905, 640]],                              // loom → bridge
-  [[400, 574], [380, 660], [400, 760], [410, 814]],                              // garden → Mira's cottage
-  [[410, 814], [370, 860], [372, 878]],                                          // Mira → the jetty
-  [[410, 814], [500, 860], [560, 896]],                                          // Mira → the market
+  /* North out of the Word Garden the long way round. Every one of these
+     used to leave the building's door and head straight back over its roof:
+     the node is south of the building, so "go north" is "go through it", and
+     a route is walked exactly as it is drawn. */
+  [[400, 574], [344, 578], [330, 500], [386, 420], [442, 380], [470, 344]],     // garden → root workshop
+  [[790, 484], [722, 480], [694, 404], [600, 360], [520, 344], [470, 344]],      // reading → roots (the north lane)
+  /* Round the Loom, not through it. Both of these had control points inside
+     its walls, and a route is walked exactly as it is drawn: two neighbours
+     went in one side of the weaving shed and out the other. */
+  [[600, 705], [676, 742], [726, 792], [800, 812]],                              // yard → loom
+  // The approach comes in level with the deck and only then turns east: the
+  // old curve cut the corner and forded the river 30 units short of the
+  // bridge, so the path ran through open water.
+  [[800, 812], [866, 782], [872, 706], [868, 650], [905, 640]],                  // loom → bridge
+  [[400, 574], [372, 660], [360, 752], [376, 808], [410, 814]],                  // garden → Mira's cottage
+  [[410, 814], [398, 856], [400, 872]],                                          // Mira → the jetty (the SAND end, not the water)
+  [[410, 814], [500, 862], [556, 900], [600, 930]],                              // Mira → the crossroad
   [[905, 640], [960, 640], [1010, 474]],                                         // bridge → across the water
   [[905, 640], [960, 660], [1010, 700]],                                         // bridge → the farm
   [[600, 705], [660, 690], [690, 676]],                                          // yard → the order board
+  [[600, 930], [626, 922], [648, 916]],                                          // the crossroad → the Market
+  [[600, 935], [522, 1000], [448, 1032], [400, 1040]],                           // the crossroad → the hollow (cottage 8)
+  [[1010, 700], [1044, 790], [1054, 880], [1022, 932]],                          // the farm → the east cottage (6)
 ].map((p) => smooth(p, 5));
 
 /** Catmull-Rom subdivision so a hand-placed polyline flows. */
@@ -97,11 +127,34 @@ export function inPlot(x, y) { return PLOTS.find((p) => x >= p.rect.x && x <= p.
  * this is the different, narrower question a validator has to ask, because a
  * lamp beside a door is right and a lamp inside the kitchen is not.
  */
-export function insideBuilding(x, y) {
-  const inside = (b) => x > b.at.x - b.hit.w / 2 && x < b.at.x + b.hit.w / 2 && y > b.at.y - b.hit.h && y < b.at.y;
-  return BUILDINGS.some(inside)
-    || HOUSE_SPOTS.some((s) => inside({ at: s, hit: { w: 96, h: 76 } }))
-    || inside({ at: BOARD.at, hit: BOARD.hit });
+export function insideBuilding(x, y, v = null, inset = 0) { return !!whichBuilding(x, y, v, inset); }
+
+/** Which building's solid box contains this point, or null. For diagnostics. */
+export function whichBuilding(x, y, v = null, inset = 0) {
+  // `v` is the derived village. WITHOUT it every one of the seven
+  // buildings and all ten cottages count, whether or not they are standing —
+  // so a barrel beside the Market was "inside" the phantom footprint of a
+  // house nobody has built yet, and got shoved forty units into the road.
+  // The order board is a forty-unit sign on two posts, not a wall: it was
+  // claiming a 56x60 box in the middle of the Hearth's yard and tearing the
+  // woodpile in half. It gets the ground its posts actually stand on.
+  /* The WALLS, not the tappable area. `hit` is deliberately generous: it
+     covers the roof that recedes up-right, the eaves and the crates, because
+     a learner aiming a thumb at a building should not have to hit the door.
+     Standing under an overhanging roof is normal; standing in the kitchen is
+     not. Two thirds of the hit box, measured against the drawn front walls. */
+  const inside = (b) => {
+    const s = b.solid ?? { w: b.hit.w * 0.7, h: b.hit.h * 0.6 };
+    const hw = s.w / 2 - inset, hh = s.h - inset;
+    return hw > 0 && hh > 0 && x > b.at.x - hw && x < b.at.x + hw && y > b.at.y - hh && y < b.at.y - inset / 2;
+  };
+  const standing = (id) => !v || (v.builtIds && v.builtIds.has(id));
+  const b = BUILDINGS.find((x2) => standing(x2.id) && inside(x2));
+  if (b) return b.id;
+  const h = HOUSE_SPOTS.findIndex((s, i) => (!v || i <= (v.houses ?? 0)) && inside({ at: s, hit: { w: 96, h: 76 }, solid: { w: 66, h: 46 } }));
+  if (h >= 0) return 'house#' + h;
+  if (inside({ at: { x: BOARD.at.x, y: BOARD.at.y }, hit: { w: 34, h: 10 } })) return 'board';
+  return null;
 }
 
 /**
@@ -146,12 +199,47 @@ export function placeable(x, y, pads) { return whyNotPlaceable(x, y, pads) === n
  * actually drawing. One function, so the gate and the game cannot disagree
  * about what counts.
  */
-export function invalidSpot(x, y) {
+export function invalidSpot(x, y, v = null) {
+  // Decks FIRST: a plank over the river is not the river, and asking about
+  // the water before asking about the bridge reported everybody who crossed
+  // it as standing in it.
+  if (onBridgeDeck(x, y) || onJettyDeck(x, y)) return 'crossing';
   if (inPond(x, y, 0)) return 'pond';
-  if (nearRiver(x, y, 14)) return 'river';
-  if (insideBuilding(x, y)) return 'building';
+  if (nearRiver(x, y, RIVER_WATER)) return 'river';
+  if (insideBuilding(x, y, v)) return 'building';
   if (inYard(x, y, -6)) return 'yard';
   return null;
+}
+
+/**
+ * The same question asked about a PERSON, an animal or a cat.
+ *
+ * A flower may not grow on the cobbles of the yard or on the bridge's deck.
+ * Walking on both is the entire point of having them. What nobody may do is
+ * stand in open water or inside a wall — and that is all this asks.
+ */
+export function cannotStand(x, y, v = null) {
+  if (onBridgeDeck(x, y) || onJettyDeck(x, y)) return null;
+  if (inPond(x, y, 0)) return 'pond';
+  if (nearRiver(x, y, RIVER_WATER)) return 'river';
+  /* Ten units in from the wall. These are oblique sprites drawn on a painted
+     world: a figure walking to her own front door has her shoulder over the
+     wall line for a frame or two and it reads perfectly well. Standing in the
+     middle of somebody's kitchen does not. The margin is the difference
+     between a rule that describes the drawing and a rule that fights it —
+     and it applies to PEOPLE only; a flower bed one unit inside a wall is
+     still a flower bed inside a wall. */
+  if (insideBuilding(x, y, v, 10)) return 'building';
+  return null;
+}
+
+/** The bridge's timber deck, as painted (terrain.js, "The bridge"). */
+export function onBridgeDeck(x, y) {
+  return Math.abs(x - BRIDGE.x) < BRIDGE.w / 2 + 4 && Math.abs(y - BRIDGE.y) < 25;
+}
+/** The jetty's planks, as painted. */
+export function onJettyDeck(x, y) {
+  return x > JETTY.x - JETTY.len && x < JETTY.x && Math.abs(y - JETTY.y) < 12;
 }
 
 /* ------------------------------------------------------------------ */
