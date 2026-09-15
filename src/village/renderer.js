@@ -56,6 +56,7 @@ export class VillageRenderer {
     this.running = false;
     this.lastTs = 0;
     this.interacting = false;
+    this.still = opts.still ?? false;   // see setStill(): reduced motion
     this.onTap = opts.onTap ?? null;
     this.onMove = opts.onMove ?? null;
     this.terrainCaches = new Map();
@@ -268,22 +269,44 @@ export class VillageRenderer {
 
   #raf() { cancelAnimationFrame(this.#rafId); this.#rafId = requestAnimationFrame((ts) => this.#frame(ts)); }
 
+  /**
+   * Stand the world still (the learner asked for less motion).
+   * The village is the one screen that is nothing BUT motion — walkers,
+   * smoke, water glints, weather, a moving light model — and CSS cannot
+   * reach inside a canvas, so `prefers-reduced-motion` had no effect here
+   * at all. Still mode freezes `time` and stops calling scene.update, so
+   * the valley holds one settled frame; the camera still pans, zooms and
+   * tweens, because moving the view is the learner's own doing.
+   */
+  setStill(still) {
+    const next = !!still;
+    if (next === this.still) return;
+    this.still = next;
+    this.lastTs = 0;
+    this.invalidate();
+  }
+
   #frame(ts) {
     if (!this.running || document.visibilityState === 'hidden') return;
     const dt = this.lastTs ? Math.min(50, ts - this.lastTs) : 16;
     this.lastTs = ts;
-    this.time += dt;
+    if (!this.still) this.time += dt;
     if (!this.#dragging && (Math.abs(this.cam.vx) > 0.01 || Math.abs(this.cam.vy) > 0.01)) {
       this.cam.x += this.cam.vx * (dt / 16); this.cam.y += this.cam.vy * (dt / 16);
       this.cam.vx *= Math.pow(0.9, dt / 16); this.cam.vy *= Math.pow(0.9, dt / 16);
       this.clampCamera();
+      this.dirty = true;
     }
-    if (!this.interacting) {
+    if (!this.interacting && !this.still) {
       this.scene.update?.(dt, this.time);
       const light = this.scene.light?.(this.time);
       this.scene.warm?.(quant(this.cam.zoom * this.dpr), light && light.strength > 0 ? hexA(light.tint, Math.min(0.6, light.strength * 0.8)) : null);
+      this.dirty = true;
     }
-    this.draw();
+    // Every camera change already calls invalidate(), and draw() clears the
+    // flag — so in still mode an untouched village costs one rAF callback a
+    // frame and no raster at all, instead of a full repaint at 60fps.
+    if (!this.still || this.dirty) this.draw();
     this.#raf();
   }
 

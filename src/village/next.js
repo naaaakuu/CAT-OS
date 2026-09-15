@@ -52,7 +52,22 @@ export function nextActivity(buildingId, world, opts = {}) {
       const rec = nextVerbal(content.pj, records.sessions, 'pj', `loom:${state.today}`);
       if (!rec) return { href: '#/world/place/loom', label: 'A set at the Loom', sub: 'Jumbles, summaries, the odd one out', minutes: 5, kind: 'new' };
       const it = rec.item;
-      return { href: `#/pj/session/${it.tier ?? it.id}`, label: it.title, sub: `${String(it.tier ?? '').replace('-', ' ')} · about ${Math.max(1, Math.round((it.estimated_time_sec ?? 60) / 60))} min`, minutes: Math.max(1, Math.round((it.estimated_time_sec ?? 60) / 60)), kind: rec.kind, why: rec.why };
+      /* `#/pj/session/<tier>` plays the WHOLE tier in order, not one jumble
+         (para-jumbles/screens/session.js resolves a tier to every item in
+         it). Costing the button from a single item's estimated_time_sec
+         told the learner "about 1 min" before a timed set of nine to twelve
+         — wrong by more than an order of magnitude, on a screen whose whole
+         contract is "the skill, the title, the minutes, one button". A set
+         abandoned halfway records nothing, so the number has to be honest
+         before they tap. */
+      const inSet = it.tier ? content.pj.filter((x) => x.tier === it.tier) : [it];
+      const secs = inSet.reduce((s, x) => s + (x.estimated_time_sec ?? 80), 0);
+      const mins = Math.max(1, Math.round(secs / 60));
+      const tierWord = String(it.tier ?? '').replace('-', ' ');
+      const sub = inSet.length > 1
+        ? `${tierWord} · ${inSet.length} jumbles · about ${mins} min`
+        : `${tierWord} · about ${mins} min`;
+      return { href: `#/pj/session/${it.tier ?? it.id}`, label: it.title, sub, minutes: mins, kind: rec.kind, why: rec.why };
     }
     if (buildingId === 'road') {
       return { href: '#/world/place/wilds', label: 'Run the Gauntlet', sub: 'Everything at once, fast · about 8 min', minutes: 8, kind: 'new' };

@@ -298,8 +298,15 @@ export async function renderPlace(outlet, { storage }, params) {
     const rec = nextVerbal(items, sessions, v.module, `${kind}:${state.today}`);
     const solved = new Set();
     for (const s of sessions.filter((x) => x.module === v.module)) for (const a of s.answers ?? []) if (a.is_correct === true) solved.add(a.item_id ?? a.question_id);
+    /* This screen's own copy two lines down says "Play a whole tier as one
+       timed set" — and the route below does exactly that — so the minutes
+       beside the button have to cost the SET, not the first item in it.
+       Costing one item billed a nine-to-twelve-item timed run as "~1 min". */
+    const inSet = rec ? (rec.item.tier ? items.filter((x) => x.tier === rec.item.tier) : [rec.item]) : [];
+    const setMins = Math.max(1, Math.round(inSet.reduce((s, x) => s + (x.estimated_time_sec ?? 80), 0) / 60));
+    const tierWord = rec ? String(rec.item.tier ?? '').replace('-', ' ') : '';
     head({ pct: v.total ? v.solved / v.total : 0, label: `${v.solved} / ${v.total} solved` },
-      rec ? { href: `#/${prefix}/session/${rec.item.tier ?? rec.item.id}`, label: rec.item.title, sub: `${String(rec.item.tier ?? '').replace('-', ' ')} · ~${Math.max(1, Math.round((rec.item.estimated_time_sec ?? 60) / 60))} min`, gold: rec.kind === 'retry' } : null,
+      rec ? { href: `#/${prefix}/session/${rec.item.tier ?? rec.item.id}`, label: rec.item.title, sub: inSet.length > 1 ? `${tierWord} · ${inSet.length} ${unit} · ~${setMins} min` : `${tierWord} · ~${setMins} min`, gold: rec.kind === 'retry' } : null,
       rec?.why);
     more.innerHTML = section('Eight tiers', 'Each tier teaches one thing and feels different, not just harder. Play a whole tier as one timed set.', `
       <div class="tiles">

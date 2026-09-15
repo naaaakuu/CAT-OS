@@ -28,14 +28,14 @@ import { BUILDINGS, CHARACTERS, HOUSE, WORLD, BOARD, buildingById, good } from '
 import { loadWorld } from '../../world/state.js';
 import { onboardingStep, needsText, costText } from '../state.js';
 import { nextActivity } from '../next.js';
-import { goodEntries, bagEntries, madeEntries } from '../../world/economy.js';
+import { goodEntries, bagEntries, madeEntries, EARN } from '../../world/economy.js';
 import { chips, costChips, coinsHTML, goodIcon, wireCraftTaps, bagText } from '../../world/craft-ui.js';
 import { icon } from '../../world/icons.js';
 import { mountMenu } from '../../world/menu.js';
 import { loadValley, saveValley, valleyName, homecoming, stageLine, OPENING, NAMING, STEP_LINES, builtLine, cleanValleyName, nameSuggestions } from '../../world/companion.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled, setMusicEnabled } from '../../world/audio.js';
-import { motionReduced } from '../../core/engagement/feedback.js';
+import { motionReduced, onFeedbackChange } from '../../core/engagement/feedback.js';
 import { escapeHTML } from '../../core/utils/format.js';
 
 const ICON_SOUND_ON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M17.8 6.5a7.5 7.5 0 0 1 0 11"/></svg>`;
@@ -90,7 +90,10 @@ export async function renderVillage(outlet, { storage }) {
   const commute = !commuted && !focusId && !reduce && (state.atmo.hour === 'morning' || state.atmo.hour === 'dawn');
   try { sessionStorage.setItem('world:commuted', '1'); } catch { /* fine */ }
   let scene = buildVillageScene(state, state.atmo, { focus: focusId, commute });
-  const renderer = new VillageRenderer(canvas, scene, { fit: 'cover', minZoom: 0.55, maxZoom: 2.2, initialZoom: 1.25, onTap: (w) => onTap(w) });
+  const renderer = new VillageRenderer(canvas, scene, { fit: 'cover', minZoom: 0.55, maxZoom: 2.2, initialZoom: 1.25, onTap: (w) => onTap(w), still: motionReduced() });
+  // Settings can change the motion preference while the village is open, and
+  // the canvas is the one surface a stylesheet cannot reach into.
+  const offMotion = onFeedbackChange(() => renderer.setStill(motionReduced()));
   // A close, intimate camera: a building takes a third of a phone's width.
   const homeZoom = () => Math.max(renderer.fitZoom(), renderer.snap(renderer.cssW < 600 ? 1.25 : 1.1));
   const anchorOf = (id) => scene.anchorOf(id) ?? HOME;
@@ -296,6 +299,21 @@ export async function renderVillage(outlet, { storage }) {
       </div>`;
   }
 
+  /* What a session actually pays, in one clause under the button.
+     The goods template ("up to 3 Pages → Books") assumed every learning
+     building makes a raw good. The Road Out makes coins and has no `raw`,
+     so `b.raw?.name ?? 'coins'` rendered "up to 3 coins" for a Gauntlet run
+     that pays 50 at its very worst and roughly four times that for a strong
+     one — a 98% understatement on the only coin-paying activity in the game,
+     shown on a road that costs 250 coins and 12 stars to open. */
+  function rewardLine(b, act) {
+    if (b.raw) {
+      return `→ up to 3 ${escapeHTML(b.raw.name)}${b.good ? ` → ${escapeHTML(b.good.name)}` : ''}`;
+    }
+    if (act?.makes === 'coins') return `→ ${EARN.gauntlet(0, 0).coins}+ coins, by stars`;
+    return '';
+  }
+
   function learnBlock(b, { first = false } = {}) {
     const act = b.def.activity;
     if (!act) return '';
@@ -311,7 +329,7 @@ export async function renderVillage(outlet, { storage }) {
         </span>
       </a>
       <div class="vpop__actions">
-        <a class="vbtn ${b.queue?.ready ? 'vbtn--paper' : ''}" href="${escapeHTML(href)}" data-go="${b.id}">${escapeHTML(act.verb)}<small>→ up to 3 ${escapeHTML(b.raw?.name ?? 'coins')}${b.good ? ` → ${escapeHTML(b.good.name)}` : ''}</small></a>
+        <a class="vbtn ${b.queue?.ready ? 'vbtn--paper' : ''}" href="${escapeHTML(href)}" data-go="${b.id}">${escapeHTML(act.verb)}<small>${rewardLine(b, act)}</small></a>
       </div>`;
   }
 
@@ -924,6 +942,7 @@ export async function renderVillage(outlet, { storage }) {
     window.removeEventListener('pointerdown', onDown, { capture: true });
     document.removeEventListener('visibilitychange', onVis);
     window.removeEventListener('hashchange', onHash);
+    offMotion?.();
   };
   window.addEventListener('hashchange', onHash);
 }

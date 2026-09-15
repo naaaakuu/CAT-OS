@@ -49,7 +49,17 @@ export function applyReadingSize(size) {
 }
 async function saveReadingSize(storage, size) { await storage.put(STORES.SETTINGS, { id: 'reading-size', value: size }); applyReadingSize(size); }
 
-export function applyMotion() { document.documentElement.toggleAttribute('data-reduced-motion', motionReduced()); }
+/* Two attributes, because the stylesheets need two different facts.
+   data-reduced-motion is the RESOLVED answer — "cut the animation" — and
+   base.css keys the universal reset off it. data-motion is the raw choice,
+   which base.css needs separately so that an explicit "Full" can opt out of
+   the prefers-reduced-motion media query; the resolved flag cannot express
+   that, since "Full" and "Auto on a normal system" both resolve to false. */
+export function applyMotion() {
+  const root = document.documentElement;
+  root.toggleAttribute('data-reduced-motion', motionReduced());
+  root.setAttribute('data-motion', feedbackPrefs().motion ?? 'system');
+}
 
 /* ------------------------------------------------------------------ */
 /* The screen                                                          */

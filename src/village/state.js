@@ -95,8 +95,26 @@ export function deriveVillage(s, records, content, now = Date.now()) {
   }
   for (const g of learning.filter((r) => r.kind === 'garden-session')) addUnits(EARN.garden(g.session_type, g.clean === true), T(g));
   for (const r of learning.filter((x) => x.kind === 'lex-round')) addUnits(EARN.round(r.stars ?? 0, r.score?.correct ?? 0, r.flawless === true), T(r));
+  /* The Road Out's level 2 — "Lanterns on the road", 700 coins plus 4 Cloth
+     and 4 Books, whose one promise is "Gauntlet runs pay half again" — had no
+     effect whatsoever. The buildings loop below reads a level's `pay` into
+     `payMul[def.good]`, and the road is a challenge with no `good`, so its
+     1.5 was read and thrown away. It is applied here, where Gauntlet coins
+     are actually summed.
+
+     Only to runs finished AFTER the lanterns went up: coins are derived from
+     the entire record log every time the world loads, so a flat multiplier
+     would silently mint coins for every run the learner had already been
+     paid for the moment they bought the upgrade. */
   let coinsEarned = 0;
-  for (const g of learning.filter((x) => x.kind === 'gauntlet-run')) coinsEarned += EARN.gauntlet(g.stars ?? 0, g.score?.correct ?? 0).coins;
+  const roadDef = BUILDINGS.find((d) => d.id === 'road');
+  const roadLv = levels.get('road') ?? 0;
+  const roadPay = roadDef && roadLv ? (effectsUpTo(roadDef, roadLv).pay ?? 1) : 1;
+  const roadLitAt = roadPay > 1 ? (builtAt.get('road:2') ?? Infinity) : Infinity;
+  for (const g of learning.filter((x) => x.kind === 'gauntlet-run')) {
+    const base = EARN.gauntlet(g.stars ?? 0, g.score?.correct ?? 0).coins;
+    coinsEarned += T(g) >= roadLitAt ? Math.round(base * roadPay) : base;
+  }
   /* Collect records from before the chain (2.0.0) hold raw goods a helper made: they join the queue. */
   for (const c of collects) if (RAW_KEYS.includes(c.good)) { const n = Number(c.amount) || 0; for (let i = 0; i < n; i += 1) arrivals.get(c.good).push(T(c)); }
 

@@ -149,9 +149,32 @@ textarea {
 .screen > :nth-child(4) { animation-delay: 120ms; }
 .screen > :nth-child(n+5) { animation-delay: 150ms; }
 
+/* Motion.
+   Settings offers Auto / Full / Less and shell/settings.js writes the result
+   onto <html>. Until now nothing in any stylesheet read either attribute, so
+   the control was inert in both directions: "Less" left every CSS animation
+   running, and "Full" could not get motion back on a system that asks for
+   less. Both halves are answered here, and nowhere else needs to change —
+   this is the same universal reset the media query already applied.
+
+   data-reduced-motion is the RESOLVED answer (feedback.js motionReduced():
+   "Less", or "Auto" on a system that asks for less), so it covers the
+   reduce case on its own. The media query below stays for the moment before
+   the preference has loaded, and now yields to an explicit "Full". */
+:root[data-reduced-motion] { scroll-behavior: auto; }
+:root[data-reduced-motion] *,
+:root[data-reduced-motion] *::before,
+:root[data-reduced-motion] *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.01ms !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html:not([data-motion="full"]) { scroll-behavior: auto; }
+  :root:not([data-motion="full"]) *,
+  :root:not([data-motion="full"]) *::before,
+  :root:not([data-motion="full"]) *::after {
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;

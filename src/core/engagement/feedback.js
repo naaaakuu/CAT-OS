@@ -129,7 +129,7 @@ export async function setFeedbackPref(storage, key, value) {
   else if (key === 'sfxVolume' || key === 'volume') { state.sfxVolume = Math.max(0, Math.min(1, Number(value) || 0)); configureAudio({ volume: state.sfxVolume }); await put('sound-volume', state.sfxVolume); }
   else if (key === 'music') { state.music = !!value; await put('world:music', state.music); }
   else if (key === 'musicVolume') { state.musicVolume = Math.max(0, Math.min(1, Number(value) || 0)); await put('world:music-volume', state.musicVolume); }
-  else if (key === 'motion') { state.motion = value === 'reduced' ? 'reduced' : value === 'full' ? 'full' : 'system'; await put('motion', state.motion); document.documentElement.toggleAttribute('data-reduced-motion', motionReduced()); }
+  else if (key === 'motion') { state.motion = value === 'reduced' ? 'reduced' : value === 'full' ? 'full' : 'system'; await put('motion', state.motion); document.documentElement.toggleAttribute('data-reduced-motion', motionReduced()); document.documentElement.setAttribute('data-motion', state.motion); }
   emit();
 }
 

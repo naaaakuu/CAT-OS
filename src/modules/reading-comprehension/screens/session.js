@@ -59,14 +59,29 @@ export async function renderSession(outlet, { storage }, params) {
   document.documentElement.setAttribute('data-world', '');
   silenceWorld();
 
+  let before = null;
+  try { before = await loadWorld(storage); } catch { /* facts still show */ }
+
+  /* Night Reading, the Observatory's payload. The gate used to look for a
+     LEARNING record of kind 'world-build' with upgrade_id 'observatory' —
+     a shape 2.1 stopped writing when builds became
+     {kind:'village-build', building, level}. So the test was always false
+     and the deepest purchase in the Reading House (1500 coins, 14 Books,
+     4 Cloth, 4 Ink, 16 passages read well) bought a toggle that did
+     nothing. The derived state already knows: world/state.js sets
+     reading.observatory from the building's level, which is what the
+     Reading House's own screen reads to offer the toggle at all. */
   let night = false;
-  try { const rec = await storage.get(STORES.SETTINGS, 'world:night-reading'); const built = (await storage.getAll(STORES.LEARNING)).some((r) => r.kind === 'world-build' && r.upgrade_id === 'observatory'); night = built && rec?.value === true; } catch { /* day */ }
+  try {
+    if (before?.state?.reading?.observatory) {
+      const rec = await storage.get(STORES.SETTINGS, 'world:night-reading');
+      night = rec?.value === true;
+    }
+  } catch { /* day */ }
   const paceFactor = night ? 0.8 : 1;
   const targetMs = Math.max(60_000, (passage.meta.estimated_time_min ?? 6) * 60_000 * paceFactor);
   const m = passage.meta;
   const stage = STAGE_INFO[m.stage]?.label ?? m.stage ?? '';
-  let before = null;
-  try { before = await loadWorld(storage); } catch { /* facts still show */ }
 
   /* ---------------- BRIEFING ---------------- */
   outlet.innerHTML = `
