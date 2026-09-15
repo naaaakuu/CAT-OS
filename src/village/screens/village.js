@@ -358,7 +358,7 @@ export async function renderVillage(outlet, { storage }) {
       return `
         ${head(portrait(ch), `Level ${b.level} · orders`, b.def.name, `${ch.name}, ${ch.role}`)}
         ${say(escapeHTML(ch.idle[Math.floor(Date.now() / 3600e3) % ch.idle.length]))}
-        <p class="vpop__line">${v.orders.length} orders on the board. ${b.next ? `The next level puts ${b.next.effect?.slots ?? ''} there and pays more.` : 'The board is as big as it gets.'}</p>
+        <p class="vpop__line">${v.orders.length} orders on the board. ${b.next?.effect?.slots ? `The next level makes room for ${b.next.effect.slots}, and pays more.` : b.next ? 'The next level pays more.' : 'The board is as big as it gets.'}</p>
         <div class="vpop__actions">
           <button class="vbtn" data-open="board">${icon('board', { size: 20 })} The order board</button>
           <button class="vbtn vbtn--quiet" data-sheet="${b.id}">Details</button>
@@ -414,14 +414,17 @@ export async function renderVillage(outlet, { storage }) {
 
   function boardPop() {
     const first = v.orders[0];
-    const mira = v.neighbours[0];
+    /* (There was a `${mira && step !== 'done' ? '' : ''}` here — an unfinished
+       line that rendered the empty string on both branches, with `mira` bound
+       only to feed it. The greeting it was reaching for is already covered:
+       `line` below names the neighbour who is waiting, and during onboarding
+       that neighbour is always Mira.) */
     const line = v.deliverable.length ? `${v.deliverable[0].giver.name} is waiting for ${needsText(v.deliverable[0].needs)}.` : first ? `${first.giver.name} needs ${needsText(first.missing)} more ${first.reason}.` : 'Nothing is asked for right now.';
     return `
       ${head(icon('board', { size: 44 }), `${v.orders.length} ${v.orders.length === 1 ? 'order' : 'orders'} · pays coins`, 'The order board', 'Your neighbours, asking', 'vpop__portrait--paper')}
       ${say(escapeHTML(line))}
       <div class="vorders">${v.orders.map((o) => orderRow(o)).join('')}</div>
-      ${!v.builtIds.has('market') && step === 'done' ? `<p class="vpop__line">One order at a time until the Market is built.</p>` : ''}
-      ${mira && step !== 'done' ? '' : ''}`;
+      ${!v.builtIds.has('market') && step === 'done' ? `<p class="vpop__line">One order at a time until the Market is built.</p>` : ''}`;
   }
 
   function orderRow(o) {

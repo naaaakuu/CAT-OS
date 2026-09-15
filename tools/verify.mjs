@@ -2330,7 +2330,10 @@ console.log('\n20. Bank engine dry run (session · set picking · rest · stars 
   const pick = pickSet(pool, sessions, 'sp', 2, (at, n) => isRested(at, n));
   if (pick.map((p) => p.id).join(',') !== 'x-3,x-4') bad(`pickSet: expected x-3,x-4 (unsolved, rested first), got ${pick.map((p) => p.id).join(',')}`);
   const pick2 = pickSet(pool, sessions, 'sp', 4, (at, n) => isRested(at, n));
-  if (pick2.length !== 4 || pick2[2].id !== 'x-2') bad('pickSet: when the pool is short, the most-missed come back for review');
+  // A short pool still fills the set, but the rest period is not broken to do it:
+  // x-2 was missed 60s ago and has NOT rested, so it goes LAST, behind the solved
+  // x-1 (a solved item re-asked is a legitimate timed re-run; a fresh miss is not).
+  if (pick2.length !== 4 || pick2[2].id !== 'x-1' || pick2[3].id !== 'x-2') bad(`pickSet: a short pool reviews the rested before the still-resting, got ${pick2.map((p) => p.id).join(',')}`);
   // The ledgers read bank answers.
   const led = skillLedger([session], []);
   if (!led.get('placement') || led.get('placement').seen !== 2) bad('skillLedger: bank answers count under their skill');

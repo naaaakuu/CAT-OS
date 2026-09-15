@@ -38,5 +38,11 @@ export function isWorldRoute(hash) {
     || hash === '#/garden' || hash.startsWith('#/garden/')
     // A timed run is immersive wherever it lives: a tab bar under a clock
     // is an invitation to leave in the middle of a passage.
-    || hash.startsWith('#/rc/session/') || hash === '#/rc/second-look';
+    //
+    // That was written for Reading Comprehension and never extended, so the
+    // OTHER timed runs kept the Village / Standing / Growth bar on screen
+    // under their own clock — a set at the Loom, the Table, the Bench or the
+    // Terraces is 8 to 13 items played against a timer, and abandoning one
+    // records nothing at all.
+    || /^#\/(rc|pj|ps|ooo|wd|bank)\/session\//.test(hash) || hash === '#/rc/second-look';
 }

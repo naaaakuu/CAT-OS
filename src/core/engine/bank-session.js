@@ -165,8 +165,25 @@ export function pickSet(pool, sessions, moduleKey, size, rested = () => true) {
   const missedRested = pool.filter((x) => miss.has(idOf(x)) && rested(miss.get(idOf(x)).at, miss.get(idOf(x)).n));
   const out = [...fresh, ...missedRested].slice(0, size);
   if (out.length >= Math.min(size, pool.length)) return out;
-  // Everything is solved or resting: hand back what was hardest, for review.
-  const rest = pool.filter((x) => !out.includes(x))
-    .sort((a, b) => (miss.get(idOf(b))?.n ?? 0) - (miss.get(idOf(a))?.n ?? 0));
-  return [...out, ...rest].slice(0, size);
+  /* Everything is solved or resting, and a set still has to be filled.
+     This used to sort the remainder by miss count alone, which put the items
+     the learner had missed MOST at the front — and an item is only in that
+     remainder rather than in `missedRested` above because it has NOT rested
+     yet. So the one rule the rest period exists to enforce was broken exactly
+     where it matters: a six-item bank with a short tier would hand back the
+     item missed sixty seconds ago, first, which teaches the look of that item
+     rather than the method behind it.
+
+     Order now: everything that has rested (hardest first — that part was
+     right), and only then the items still resting, longest-rested first,
+     because showing a solved item again is a legitimate timed re-run and
+     re-asking a fresh miss is not. */
+  const rest = pool.filter((x) => !out.includes(x));
+  const missOf = (x) => miss.get(idOf(x));
+  const stillResting = (x) => { const m = missOf(x); return !!m && !rested(m.at, m.n); };
+  const reviewable = rest.filter((x) => !stillResting(x))
+    .sort((a, b) => (missOf(b)?.n ?? 0) - (missOf(a)?.n ?? 0));
+  const resting = rest.filter(stillResting)
+    .sort((a, b) => String(missOf(a)?.at ?? '').localeCompare(String(missOf(b)?.at ?? '')));
+  return [...out, ...reviewable, ...resting].slice(0, size);
 }

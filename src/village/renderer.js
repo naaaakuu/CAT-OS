@@ -32,6 +32,12 @@ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
  *  be cached at the exact scale and blitted without resampling. */
 const STEP = 0.25;
 const quant = (dz) => Math.max(1, Math.round(dz / STEP) * STEP);
+/** The largest pre-scaled terrain canvas worth allocating, in pixels.
+ *  Safari/iOS refuses a canvas over roughly 16.7 Mpx and returns a blank one
+ *  rather than throwing, so the ground would simply stop being painted. */
+const MAX_TERRAIN_PX = 16e6;
+/** How many baked 1200×1200 ground canvases to keep (about 5.8 MB each). */
+const MAX_TERRAIN_CACHES = 3;
 
 export class VillageRenderer {
   constructor(screen, scene, opts = {}) {
@@ -319,6 +325,16 @@ export class VillageRenderer {
       c.width = this.worldW; c.height = this.worldH;
       c.__painted = false;
       this.terrainCaches.set(key, c);
+      /* terrainKey is season | plots | for-sale | road level, so it changes
+         on a plot purchase, a road raise or a season roll. Nothing ever
+         removed the old canvas, and each is worldW*worldH — 5.8 MB at
+         1200². Keep the few most recent; a Map iterates in insertion order,
+         so the oldest key is the first one out. */
+      while (this.terrainCaches.size > MAX_TERRAIN_CACHES) {
+        const oldest = this.terrainCaches.keys().next().value;
+        if (oldest === key) break;
+        this.terrainCaches.delete(oldest);
+      }
     }
     if (!c.__painted) {
       const ctx = c.getContext('2d', { alpha: false });
@@ -379,7 +395,18 @@ export class VillageRenderer {
     s.fillRect(0, 0, W, H);
     const worldT = () => s.setTransform(dz, 0, 0, dz, ox, oy);
     const tkey = this.scene.terrainKey ?? 'default';
-    if (exact) {
+    /* The fast path pre-scales the WHOLE world to a canvas at `bucket` device
+       pixels per world unit and blits it 1:1. That canvas is 1200*bucket
+       square: fine at the default phone zoom (bucket 2.5 → 3000²), but the
+       village's own maxZoom on a dpr-2 phone reaches bucket 4.5 → 5400², or
+       29.2 megapixels and ~117 MB of backing store, allocated synchronously
+       inside a frame. That is past Safari/iOS's per-canvas area cap, where the
+       allocation fails silently and the ground blits blank. Above the cap the
+       ground goes through the world transform instead — it is soft gradients
+       and blotches, so the difference is invisible, and it costs one
+       drawImage of the 1200² base. */
+    const scaledPx = (this.worldW * bucket) * (this.worldH * bucket);
+    if (exact && scaledPx <= MAX_TERRAIN_PX) {
       s.drawImage(this.#terrainAt(tkey, bucket, tint), Math.round(ox), Math.round(oy));
     } else {
       worldT();
@@ -409,7 +436,16 @@ export class VillageRenderer {
       } else {
         const a = a0.at ? a0.at(exact ? bucket * sc : bucket, !!o.flip, tint) : a0;
         if (inWorld) { s.setTransform(1, 0, 0, 1, 0, 0); inWorld = false; }
-        const dx = ox + (o.x - a.ax * (exact ? 1 : sc)) * dz, dy = oy + (o.y - a.ay * (exact ? 1 : sc) + (o.bob ?? 0)) * dz;
+        /* The anchor offset is ALWAYS in world units scaled by `sc`.
+           art() documents w/h/ax/ay as world units whatever scale the canvas
+           was rasterised at, so `a.ax` does not change when the exact branch
+           asks for `bucket * sc` instead of `bucket` — only the canvas does.
+           The old `(exact ? 1 : sc)` therefore dropped the scale on the path
+           that runs in the entire steady state (the zoom is always snapped
+           except mid-pinch), drawing every non-unit-scale prop off its own
+           anchor by ax*(sc-1) world units: the grass tufts at 1.4–2.0, the
+           bushes at 1.5, the flower patches, the grove tufts at 2.2. */
+        const dx = ox + (o.x - a.ax * sc) * dz, dy = oy + (o.y - a.ay * sc + (o.bob ?? 0)) * dz;
         if (exact && a0.at) s.drawImage(a.canvas, Math.round(dx), Math.round(dy));
         else s.drawImage(a.canvas, dx, dy, a.w * sc * dz, a.h * sc * dz);
       }

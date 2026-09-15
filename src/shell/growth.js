@@ -358,7 +358,15 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
   try {
     const rcSessions = sessions.filter((x) => !x.module && x.passage_id);
     if (rcSessions.length >= 2) {
-      const passages = await loadRCPassages(items.map((i) => i.id)).catch(() => []);
+      /* Only the passages these sessions were read from. deriveDNA looks each
+         one up as `passages.get(s.passage_id)` (core/mentor/dna.js) and never
+         touches the rest, but this asked for every id in the registry — all
+         115 passages, 3.57 MB of JSON, parsed and schema-validated on every
+         open of the screen a learner opens most, and growing with the corpus
+         rather than with anything the learner has done. A reader with a dozen
+         sessions now fetches a dozen files. */
+      const read = [...new Set(rcSessions.map((x) => x.passage_id).filter(Boolean))];
+      const passages = await loadRCPassages(read).catch(() => []);
       const dna = deriveDNA(rcSessions, passages);
       const obs = (dna?.observations ?? []).slice(0, 4);
       if (obs.length) {
