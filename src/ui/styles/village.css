@@ -29,6 +29,25 @@
   --v-ui: var(--g-ui, system-ui, sans-serif);
 }
 
+/* The village is a PLACE, not a document: it keeps its warm painted palette
+   in both themes on purpose, and the hour of the day is what darkens it.
+   That only works if every shared piece dropped into it — a .craft chip, a
+   pixel icon, a badge — reads the village's ink rather than the document
+   theme's. Otherwise the dark theme flips --g-ink to near-white and the coin
+   count disappears into a cream pill, which is exactly what shipped: the
+   number of coins was invisible at night on the game's own HUD.
+
+   Rebinding the game tokens here means the village cannot get this wrong
+   again, for any component, including ones nobody has written yet. */
+.vg, .vhud, #vpop, .vsheet, .vb, .vwick {
+  --g-ink: var(--v-ink);
+  --g-ink-2: var(--v-ink-2);
+  --g-ink-3: var(--v-ink-3);
+  --g-paper: var(--v-paper);
+  --g-paper-2: var(--v-paper-2);
+  --g-paper-3: var(--v-paper-3);
+}
+
 .vg {
   position: fixed; inset: 0;
   background: #4F8E36;
@@ -126,7 +145,7 @@
 .vhudbtn .ico { width: 24px; height: 24px; }
 .vhudbtn svg { width: 20px; height: 20px; }
 .vhudbtn[aria-pressed="false"] { color: var(--v-ink-3); }
-.vhudbtn__badge { position: absolute; right: -6px; top: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: var(--v-red); color: #fff; font: 800 11px/20px var(--v-ui); text-align: center; border: 2px solid #FFF7E4; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.vhudbtn__badge { position: absolute; right: -6px; top: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px; background: #C24A2A; color: #fff; font: 800 11px/20px var(--v-ui); text-align: center; border: 2px solid #FFF7E4; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 .vhudbtn__badge:empty { display: none; }
 .vhudbtn.is-hit { animation: pill-hit 600ms var(--g-spring); }
 .vhud .hud__icon { width: 42px; height: 42px; border-radius: 50%; border: 2.5px solid var(--v-wood); background: linear-gradient(180deg, #FFFBF1, #F3E7CF); color: var(--v-ink); box-shadow: 0 4px 0 #6E4630, 0 8px 16px rgba(20, 40, 20, 0.25), inset 0 1px 0 rgba(255,255,255,0.8); -webkit-backdrop-filter: none; backdrop-filter: none; }

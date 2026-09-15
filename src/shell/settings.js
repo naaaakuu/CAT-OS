@@ -18,6 +18,7 @@ import { initFeedback, feedbackPrefs, setFeedbackPref, cue, motionReduced } from
 import { playSound } from '../core/engagement/audio.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled } from '../world/audio.js';
 import { escapeHTML } from '../core/utils/format.js';
+import { workerStatus, librarySyncProgress, startLibrarySync } from '../core/content-loader/library-sync.js';
 
 /* The three preferences the shell applies at boot live in prefs.js, so the
    boot path never has to load this screen. Re-exported here because that is
@@ -94,6 +95,13 @@ export function renderSettings(outlet, { storage, version }) {
       </div>
 
       <div class="card">
+        <h2>Offline</h2>
+        <p class="row__hint">CAT OS downloads itself so it works on a train, in a basement, on a dead connection. The library arrives in the background, a few files at a time, and picks up where it stopped.</p>
+        ${row('◆', 'Downloaded for offline', 'Checking…', '<button class="btn" id="offline-refresh">Check</button>')}
+        <div class="offline-bar" id="offline-bar" aria-hidden="true"><i style="width:0%"></i></div>
+      </div>
+
+      <div class="card">
         <h2>About</h2>
         ${row('℅', 'CAT OS', `Version ${version} · offline-first · your data stays yours`, '')}
         ${row('⌂', 'The village', 'Home is the village. Learning is its economy.', '<a class="btn" href="#/world">Open</a>')}
@@ -108,6 +116,54 @@ export function renderSettings(outlet, { storage, version }) {
       if (storageHint) storageHint.textContent = `${mb(usage)} MB of ${mb(quota)} MB available`;
     }).catch(() => { if (storageHint) storageHint.textContent = 'Not available on this browser'; });
   } else if (storageHint) storageHint.textContent = 'Not available on this browser';
+
+  /* ---- Offline ----
+     A real number from the worker itself, never a claim. "Offline-ready" is
+     the one promise this app makes that a learner cannot check by looking,
+     so the row says how much is actually on the device, admits it when
+     there is no service worker at all, and the button asks the worker to
+     carry on rather than pretending to start something new. */
+  const offlineHint = [...outlet.querySelectorAll('.row__hint')].find((el) => el.textContent === 'Checking…');
+  const offlineBar = outlet.querySelector('#offline-bar i');
+  const refreshOffline = async () => {
+    let status = null;
+    try { status = await workerStatus(); } catch { status = null; }
+    if (!status) {
+      if (offlineHint) offlineHint.textContent = navigator.onLine === false
+        ? 'Not set up on this device yet — reconnect once and it will download.'
+        : 'Not set up on this device (this browser or this address cannot store it).';
+      if (offlineBar) offlineBar.style.width = '0%';
+      return;
+    }
+    let lib = { done: 0, total: 0 };
+    try { lib = await librarySyncProgress(); } catch { /* nothing yet */ }
+    // The app itself, then the reference content, then the bank library. The
+    // library's total comes from the manifest the page walked; if it has not
+    // walked it yet, fall back to what the worker has actually stored, so the
+    // number is never a guess and never over 100%.
+    const libDone = Math.max(lib.done, status.library?.cached ?? 0);
+    const libTotal = Math.max(lib.total, libDone);
+    const done = status.core.cached + status.shell.cached + status.content.cached + libDone;
+    const total = status.core.total + status.shell.total + status.content.total + libTotal;
+    const pct = total ? Math.min(100, Math.round((done / total) * 100)) : 0;
+    if (offlineBar) offlineBar.style.width = `${pct}%`;
+    if (offlineHint) {
+      offlineHint.textContent = pct >= 100
+        ? `The whole app and library are on this device — ${done} files.`
+        : `${done} of ${total} files (${pct}%). The rest arrives while you play.`;
+    }
+  };
+  outlet.querySelector('#offline-refresh')?.addEventListener('click', async (e) => {
+    const btn = e.currentTarget;               // read BEFORE the first await
+    play('tap');
+    btn.disabled = true;
+    try {
+      navigator.serviceWorker?.controller?.postMessage({ type: 'catos:sync' });
+      startLibrarySync({ delayMs: 0 });
+      await refreshOffline();
+    } finally { btn.disabled = false; }
+  });
+  refreshOffline();
 
   /* ---- Audio ---- */
   const musicVol = outlet.querySelector('#music-volume');

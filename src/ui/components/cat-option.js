@@ -36,7 +36,10 @@ cat-option button {
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  /* --g-raise, not --color-surface. In dark mode the surface ramp put the
+     option BELOW the card it sits in (1.04:1 against it), so the chips read
+     as holes and the card lost its edge. */
+  background: var(--g-raise, var(--color-surface));
   font-size: var(--text-sm);
   line-height: var(--leading-body);
   transition: border-color var(--duration-fast) var(--ease-out),

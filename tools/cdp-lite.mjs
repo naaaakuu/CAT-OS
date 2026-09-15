@@ -115,6 +115,12 @@ export async function launchChrome({ width = 390, height = 844, dpr = 1, port = 
 
   await send('Page.enable');
   await send('Runtime.enable');
+  await send('Network.enable');
+  /* Measure the files on disk, not the last install's cache. A worker that
+     precaches every stylesheet will happily serve yesterday's colours to a
+     gate checking today's, and the gate will report a fix that landed as a
+     fix that did not. */
+  await send('Network.setBypassServiceWorker', { bypass: true });
   await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: dpr, mobile: width < 700 });
 
   return {

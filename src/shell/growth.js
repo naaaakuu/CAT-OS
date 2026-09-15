@@ -148,7 +148,7 @@ export async function renderGrowth(outlet, { storage }) {
               TIERS.map((t, i) => `<i class="${i <= TIERS.findIndex((x) => x.stage === a.tier.stage) ? 'is-on' : ''}"></i>`).join('')
             }<small>${escapeHTML(nextTierName(a.tier))}</small></p>
           </div>
-          <div class="ability__stars" aria-label="${a.stars} of 3">${'★'.repeat(a.stars)}${'☆'.repeat(3 - a.stars)}</div>
+          <div class="ability__stars" aria-label="${a.stars} of 3">${'★'.repeat(a.stars)}<i>${'☆'.repeat(3 - a.stars)}</i></div>
           <div class="ability__bar" aria-hidden="true"><i style="width:${Math.round(a.p * 100)}%"></i></div>
         </article>`).join('')}
     </div>

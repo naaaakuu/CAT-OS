@@ -117,13 +117,28 @@ export async function renderVillage(outlet, { storage }) {
           <button class="vhudbtn" id="vsound" aria-pressed="${musicEnabled()}" aria-label="Music and ambience">${musicEnabled() ? ICON_SOUND_ON : ICON_SOUND_OFF}</button>
         </div>
       </div>`;
-    hud.querySelector('#vsound').addEventListener('click', async (e) => {
+    /* `e.currentTarget` is null after the first `await`: event dispatch is
+       over by then and the browser has cleared it. This handler awaited the
+       write to storage first, so every tap on the village's only sound
+       control threw on the next line — the icon never changed, aria-pressed
+       never changed, and turning sound back ON never restarted the music.
+       The button said "on" over a silent village, forever. Hold the element
+       in a const, and turn the sound on BEFORE the storage round-trip: the
+       learner asked for music, not for a database write. */
+    const soundBtn = hud.querySelector('#vsound');
+    soundBtn.addEventListener('click', async () => {
       const on = !musicEnabled();
-      await setMusicEnabled(on);
-      e.currentTarget.setAttribute('aria-pressed', String(on));
-      e.currentTarget.innerHTML = on ? ICON_SOUND_ON : ICON_SOUND_OFF;
-      if (on) { unlock(); startMusic('world', { hour: state.atmo.hour }); startAmbience('world', state.atmo); }
+      // The button answers the tap at once; the storage write can take its time.
+      soundBtn.setAttribute('aria-pressed', String(on));
+      soundBtn.innerHTML = on ? ICON_SOUND_ON : ICON_SOUND_OFF;
       play('tap');
+      if (on) unlock();                    // the tap IS the gesture the autoplay law wants
+      try {
+        await setMusicEnabled(on);
+      } catch (err) {
+        console.error('[CAT OS] could not remember the sound setting', err);
+      }
+      if (on) { startMusic('world', { hour: state.atmo.hour }); startAmbience('world', state.atmo); }
     });
     hud.querySelector('#vname').addEventListener('click', () => { play('tap'); openPop('hearth'); });
     hud.querySelector('#vbarn').addEventListener('click', () => { play('tap'); openSheet(barnSheet(), 'barn'); });

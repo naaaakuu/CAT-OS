@@ -53,7 +53,11 @@ class CatNav extends HTMLElement {
           border-radius: var(--radius-md);
           margin: var(--space-1) 0;
           text-decoration: none;
-          color: var(--color-ink-3);
+          /* ink-2, not ink-3. The rail is a translucent veil over whatever
+             the screen behind it is painting, so a label here has no
+             reliable ground and needs the margin; at 12px on the dark
+             theme's veil, ink-3 measured 4.1:1. */
+          color: var(--color-ink-2);
           font-size: var(--text-2xs);
           font-weight: var(--weight-semibold);
           transition: color var(--duration-fast) var(--ease-out),
@@ -63,7 +67,7 @@ class CatNav extends HTMLElement {
         @media (hover: hover) { cat-nav a:hover { color: var(--color-ink); } }
         cat-nav a:active { transform: scale(var(--press-scale)); }
         cat-nav a[aria-current="page"] {
-          color: var(--color-accent);
+          color: var(--color-accent-hover);
           background: var(--color-accent-subtle);
         }
         cat-nav .ico {

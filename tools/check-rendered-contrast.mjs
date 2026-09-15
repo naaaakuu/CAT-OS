@@ -95,6 +95,20 @@ window.__ctCollect = function () {
     const r = el.getBoundingClientRect();
     if (r.width < 4 || r.height < 4) continue;
     if (r.bottom < 2 || r.top > vh - 2 || r.right < 2 || r.left > vw - 2) continue;
+    // Something fixed on top of it? A primary action scrolled halfway under
+    // the translucent tab rail is not an unreadable colour choice, it is a
+    // scroll position, and reporting it as a failure is how a gate loses the
+    // reader's trust. Skip anything whose middle is covered by an element
+    // that is neither its ancestor nor its descendant.
+    const mid = document.elementFromPoint(Math.min(vw - 1, Math.max(1, r.left + r.width / 2)), Math.min(vh - 1, Math.max(1, r.top + r.height / 2)));
+    if (mid && mid !== el && !el.contains(mid) && !mid.contains(el)) {
+      // Only a FIXED or STICKY thing counts as an overlay. Anything else at
+      // that point is ordinary layout, and skipping it would quietly shrink
+      // the sweep — a gate that measures less is not a gate that passes.
+      let n = mid, pinned = false;
+      while (n && n !== document.body) { const pos = getComputedStyle(n).position; if (pos === 'fixed' || pos === 'sticky') { pinned = true; break; } n = n.parentElement; }
+      if (pinned) continue;
+    }
     seen.add(el);
     const size = parseFloat(cs.fontSize) || 16;
     const weight = Number(cs.fontWeight) || 400;

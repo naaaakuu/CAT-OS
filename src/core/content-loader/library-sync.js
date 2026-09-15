@@ -1,28 +1,31 @@
 /**
  * library-sync.js — the whole library, offline, without a slow install.
  *
- * The service worker precaches the shell, the registry, the schemas and
- * the reference bundles at install, and caches any other content file
- * the first time it is fetched. That keeps a cold install fast, but it
- * would leave a learner who opened the app once and then went offline
- * with only the passages they had already read.
+ * The service worker installs in stages (see service-worker.js): the core
+ * first, then the rest of the shell and the reference content in the
+ * background. The BANKS — every passage, jumble, summary, odd-one-out,
+ * placement, completion, word-bank and argument file — are not precached at
+ * all, because a couple of thousand files at install is how an offline
+ * promise quietly fails.
  *
- * So, after the first screen has painted and the phone is idle, this
- * walks `content/manifest.json` — every bank file the content engine
- * ships, written by tools/build-manifest.mjs — and fetches the ones the
- * cache does not hold yet, a few at a time. The service worker's fetch
- * handler stores each one. It stops when the tab hides, when the
- * connection is metered (Save-Data), or when the browser goes offline,
- * and resumes from wherever it left off on the next idle open: the cache
- * itself is the checkpoint, so nothing is stored here.
+ * So, after the first screen has painted and the phone is idle, this walks
+ * `content/manifest.json` and fetches what the cache does not hold, a few
+ * files at a time. The worker's fetch handler keeps each one. It stops when
+ * the tab hides, when the connection is metered (Save-Data), or when the
+ * browser goes offline, and resumes from wherever it left off on the next
+ * idle open: THE CACHE IS THE CHECKPOINT, so nothing is stored here.
  *
- * Nothing is shown. Wick does not announce downloads.
+ * It also nudges the worker to carry on with its own staged fill, and
+ * answers "how much of this is actually on the device?" for Settings.
+ *
+ * Nothing is shown while it runs. Wick does not announce downloads.
  */
 
 const MANIFEST = 'content/manifest.json';
-const BATCH = 4;
+const BATCH = 6;
 
 let running = false;
+let lastProgress = { done: 0, total: 0 };
 
 /** Start (or resume) the sync. Safe to call more than once. */
 export function startLibrarySync({ delayMs = 6000 } = {}) {
@@ -43,8 +46,45 @@ function allowed() {
   return true;
 }
 
+/** Ask the worker to keep filling its own staged precache. */
+function nudgeWorker() {
+  try { navigator.serviceWorker?.controller?.postMessage({ type: 'catos:sync' }); } catch { /* no worker */ }
+}
+
+/**
+ * Tell the worker a cached file was not what it claimed to be, so it drops it
+ * and the next read goes to the network. The loader calls this when a content
+ * file fails to parse: a truncated write or a captive-portal page stored under
+ * a passage's URL is exactly the corruption that makes an offline app fail in
+ * a way nobody can explain, and it can only be found by reading the file.
+ */
+export function reportCorrupt(url) {
+  try { navigator.serviceWorker?.controller?.postMessage({ type: 'catos:evict', url: new URL(url, location.href).href }); } catch { /* no worker */ }
+}
+
+/** How much of the bank library is on this device right now. */
+export async function librarySyncProgress() { return lastProgress; }
+
+/**
+ * Everything the worker knows about its own install, for Settings.
+ * Resolves to null if there is no worker (plain HTTP, private mode, a browser
+ * without service workers) — the caller says so rather than guessing.
+ */
+export function workerStatus({ timeoutMs = 2500 } = {}) {
+  return new Promise((resolve) => {
+    const sw = navigator.serviceWorker;
+    if (!sw?.controller) { resolve(null); return; }
+    const done = (v) => { sw.removeEventListener('message', onMsg); clearTimeout(t); resolve(v); };
+    const onMsg = (e) => { if (e.data?.type === 'catos:status') done(e.data); };
+    const t = setTimeout(() => done(null), timeoutMs);
+    sw.addEventListener('message', onMsg);
+    try { sw.controller.postMessage({ type: 'catos:status' }); } catch { done(null); }
+  });
+}
+
 async function sync() {
   if (!allowed()) return;
+  nudgeWorker();
   let manifest;
   try {
     const res = await fetch(MANIFEST);
@@ -52,18 +92,29 @@ async function sync() {
     manifest = await res.json();
   } catch { return; }
   const files = Array.isArray(manifest?.files) ? manifest.files : [];
-  // Which of them are already ours? One cache lookup each; cheap.
-  const missing = [];
-  for (const path of files) {
-    try {
-      const hit = await caches.match(new Request(path));
-      if (!hit) missing.push(path);
-    } catch { missing.push(path); }
-  }
+  if (!files.length) return;
+
+  // Which of them are already ours? `cache.keys()` answers for a whole cache
+  // in one go; asking `caches.match` four hundred times was four hundred
+  // round trips through the worker on every idle open.
+  const have = new Set();
+  try {
+    for (const name of await caches.keys()) {
+      if (!name.startsWith('cat-os-content-v')) continue;
+      const c = await caches.open(name);
+      for (const req of await c.keys()) have.add(new URL(req.url).pathname);
+    }
+  } catch { /* no cache API: fall through and just fetch */ }
+  const base = new URL('.', location.href).pathname;
+  const missing = files.filter((path) => !have.has(base + path) && !have.has('/' + path));
+  lastProgress = { done: files.length - missing.length, total: files.length };
+
   for (let i = 0; i < missing.length; i += BATCH) {
     if (!allowed()) return;
     await Promise.all(missing.slice(i, i + BATCH).map((path) => fetch(path).catch(() => null)));
+    lastProgress = { done: Math.min(files.length, lastProgress.done + BATCH), total: files.length };
     // Breathe between batches so a drag of the valley never stutters.
     await new Promise((r) => setTimeout(r, 120));
   }
+  lastProgress = { done: files.length, total: files.length };
 }

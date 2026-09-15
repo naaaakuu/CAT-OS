@@ -9,25 +9,11 @@
    ============================================================ */
 
 :root {
-  --g-ink: #1F2230;
-  --g-ink-2: #5A5F72;
-  --g-ink-3: #8C91A3;
-  --g-paper: #FBF7EF;
-  --g-paper-2: #F2EBDD;
-  --g-paper-3: #E8DFCC;
-  --g-line: rgba(31, 34, 48, 0.1);
-  --g-accent: #2F6B4F;
-  --g-accent-2: #3E8A62;
-  --g-gold: #E9B949;
-  --g-gold-2: #F6D77A;
-  --g-star: #F4C443;
-  --g-star-off: rgba(31, 34, 48, 0.14);
-  --g-ink-color: #3B7BD6;
-  --g-danger: #B7472F;
-  --g-glass: rgba(251, 247, 239, 0.86);
-  --g-glass-dark: rgba(22, 26, 40, 0.72);
-  --g-shadow: 0 10px 30px rgba(20, 24, 40, 0.18), 0 2px 6px rgba(20, 24, 40, 0.08);
-  --g-shadow-soft: 0 6px 18px rgba(20, 24, 40, 0.12);
+  /* GEOMETRY, TYPE AND MOTION ONLY.
+     Every colour token in the --g-* family is declared once, in world.css,
+     which loads after this file. They used to be declared in both, with
+     different values and different dark blocks, so "what colour is --g-ink"
+     had two answers and the load order decided. */
   --g-radius: 18px;
   --g-radius-lg: 24px;
   --g-display: ui-serif, "New York", "Iowan Old Style", Georgia, "Times New Roman", serif;
@@ -36,25 +22,6 @@
   --g-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-:root[data-theme="dark"], :root:not([data-theme="light"]) { }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --g-paper: #1D2130; --g-paper-2: #262B3D; --g-paper-3: #303650;
-    --g-ink: #EEEAE0; --g-ink-2: #B7BBC9; --g-ink-3: #8C91A3;
-    --g-line: rgba(238, 234, 224, 0.1);
-    --g-glass: rgba(29, 33, 48, 0.86);
-    --g-accent: #74B894; --g-accent-2: #8ACBA8;
-    --g-star-off: rgba(238, 234, 224, 0.16);
-  }
-}
-:root[data-theme="dark"] {
-  --g-paper: #1D2130; --g-paper-2: #262B3D; --g-paper-3: #303650;
-  --g-ink: #EEEAE0; --g-ink-2: #B7BBC9; --g-ink-3: #8C91A3;
-  --g-line: rgba(238, 234, 224, 0.1);
-  --g-glass: rgba(29, 33, 48, 0.86);
-  --g-accent: #74B894; --g-accent-2: #8ACBA8;
-  --g-star-off: rgba(238, 234, 224, 0.16);
-}
 
 /* ---------- Immersive world chrome ---------- */
 :root[data-world] .shell__header, :root[data-world] cat-nav { display: none; }
@@ -242,14 +209,14 @@
 .g-cta {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   width: 100%; padding: 16px 18px; border-radius: var(--g-radius);
-  background: linear-gradient(135deg, var(--g-accent-2), var(--g-accent)); color: #fff;
+  background: linear-gradient(135deg, var(--g-accent-2), var(--g-accent)); color: var(--g-on-accent);
   box-shadow: 0 10px 24px rgba(47,107,79,0.32), inset 0 1px 0 rgba(255,255,255,0.25);
   text-decoration: none; font-weight: 700; font-size: 16px; text-align: left;
   transition: transform 160ms var(--g-ease), box-shadow 160ms var(--g-ease);
 }
 .g-cta:active { transform: scale(0.985); box-shadow: 0 6px 14px rgba(47,107,79,0.3); }
-.g-cta small { display: block; font-weight: 500; font-size: 12px; opacity: 0.85; margin-top: 2px; }
-.g-cta .arrow { font-size: 22px; opacity: 0.9; }
+.g-cta small { display: block; font-weight: 500; font-size: 12px; opacity: 0.92; margin-top: 2px; }
+.g-cta .arrow { font-size: 22px; opacity: 1; }
 .g-cta--gold { background: linear-gradient(135deg, var(--g-gold-2), var(--g-gold)); color: #4A3A10; box-shadow: 0 10px 24px rgba(233,185,73,0.35), inset 0 1px 0 rgba(255,255,255,0.4); }
 .g-cta[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
 
@@ -304,7 +271,7 @@
 .upgrade__name { font-weight: 700; font-size: 14px; margin: 0 0 2px; }
 .upgrade__line { font-size: 12px; color: var(--g-ink-2); margin: 0; }
 .upgrade__btn { flex: none; padding: 9px 14px; border-radius: 999px; background: var(--g-ink); color: var(--g-paper); font-weight: 700; font-size: 13px; min-height: 0; display: inline-flex; align-items: center; gap: 6px; }
-.upgrade__btn:disabled { opacity: 0.4; }
+.upgrade__btn:disabled { opacity: 1; background: var(--g-paper-3); color: var(--g-ink-3); box-shadow: none; }
 .upgrade__btn .ink { display: inline-block; width: 9px; height: 9px; border-radius: 50% 50% 50% 0; background: var(--g-ink-color); transform: rotate(-45deg); }
 .upgrade--built { opacity: 0.7; }
 .upgrade--built .upgrade__btn { background: var(--g-accent); }
@@ -344,7 +311,7 @@
 
 .g-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 18px; border-radius: 14px; background: var(--g-paper-2); color: var(--g-ink); font-weight: 700; font-size: 15px; border: 1px solid var(--g-line); text-decoration: none; transition: transform 140ms var(--g-ease), opacity 140ms; box-shadow: 0 2px 0 rgba(0,0,0,0.04); }
 .g-btn:active { transform: scale(0.97); }
-.g-btn:disabled { opacity: 0.45; }
+.g-btn:disabled { opacity: 1; background: var(--g-paper-3); color: var(--g-ink-3); box-shadow: none; border-color: var(--g-line); }
 .g-btn--primary { background: var(--g-ink); color: var(--g-paper); border-color: var(--g-ink); box-shadow: 0 8px 20px rgba(31,34,48,0.22); }
 .g-btn--accent { background: var(--g-accent); color: #fff; border-color: var(--g-accent); box-shadow: 0 8px 20px rgba(47,107,79,0.28); }
 .g-btn--quiet { background: transparent; border-color: transparent; color: var(--g-ink-2); box-shadow: none; }
@@ -542,7 +509,10 @@
 :root[data-room] .list-item { border-radius: 16px; border: 1px solid var(--g-line); background: var(--g-paper-2); }
 :root[data-room] .screen__eyebrow { color: var(--g-ink-3); }
 :root[data-room] cat-nav { background: var(--g-glass); border-top: 1px solid var(--g-line); }
-:root[data-room] cat-nav a[aria-current="page"] { color: var(--g-accent); background: rgba(47,107,79,0.1); }
+/* The active label reads against a tinted chip, so it needs the deeper end of
+   the accent, not the mid-tone that reads well on paper. */
+:root[data-room] cat-nav a[aria-current="page"] { color: var(--g-accent-deep); background: rgba(47,107,79,0.1); }
+:root[data-room] cat-nav a { color: var(--g-ink-2); }
 
 /* ============================================================
    Answering: what you read in the four seconds after you choose.

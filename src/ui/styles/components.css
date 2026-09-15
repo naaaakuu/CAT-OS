@@ -38,7 +38,14 @@
 }
 .btn:active { transform: scale(var(--press-scale)); }
 .btn:disabled {
-  opacity: var(--opacity-disabled);
+  /* Not 0.45 on the whole control: at that strength the label of a disabled
+     primary button measured 1.59:1, which is not "unavailable", it is
+     "unreadable". Disabled is a flat, quiet, legible surface instead. */
+  opacity: 1;
+  background: var(--color-surface-3);
+  color: var(--color-ink-3);
+  border-color: var(--color-line);
+  box-shadow: none;
   cursor: default;
   transform: none;
 }
@@ -118,7 +125,10 @@
               box-shadow var(--duration-fast) var(--ease-out);
 }
 .segmented__option[aria-pressed="true"] {
-  background: var(--color-surface);
+  /* The chosen option is RAISED out of the track, in both themes. It used to
+     take --color-surface, which in dark is darker than the track, so the
+     selection read as the one option that was switched off. */
+  background: var(--g-raise, var(--color-surface));
   color: var(--color-ink);
   box-shadow: var(--shadow-1);
 }

@@ -1,37 +1,161 @@
 /**
  * service-worker.js — offline caching for CAT OS.
  *
- * Two caches, deliberately separate (decision recorded in STATUS.md):
+ * WHAT CHANGED IN 2.1.2, AND WHY.
  *
- * - SHELL cache: the application code. Bump CACHE_VERSION on every
- *   release that changes any precached file; the old shell cache is
- *   deleted on activate.
- * - CONTENT cache: the registry, the library manifest, the schemas and
- *   the reference bundles (the word lists, the root families, Word DNA)
- *   are precached at install. Versioned independently (CONTENT_VERSION)
- *   so shipping new app code never evicts downloaded content, and new
- *   content never forces an app re-download. The banks — passages,
- *   jumbles, summaries, odd-ones-out, placement, completion, the word
- *   bank and arguments, a couple of thousand files — are NOT precached:
- *   the fetch handler keeps each one the first time it is asked for,
- *   and src/core/content-loader/library-sync.js walks
- *   content/manifest.json in idle time so the whole library is offline
- *   within minutes of the first open, without ever blocking install.
- *   tools/build-precache.mjs rewrites CONTENT_FILES from disk.
+ * The old worker did this at install:
  *
- * Strategy is cache-first (TECH_STACK.md): guaranteed offline startup;
- * users get new versions on the second load after a deploy.
+ *     Promise.all([ shell.addAll(168 files), content.addAll(426 files) ])
+ *
+ * `addAll` is all-or-nothing. One dropped request on patchy mobile data —
+ * one, out of five hundred and ninety-four — and the whole install rejects,
+ * NOTHING is cached, and the learner who thought they had downloaded the app
+ * finds an empty screen on the train. Worse, a CONTENT_VERSION bump deleted
+ * the entire content cache on activate, including the library that
+ * library-sync.js had spent the learner's mobile data fetching, before the
+ * replacement existed.
+ *
+ * This worker installs in stages and can always resume.
+ *
+ *   CORE     the shell, the router, the storage, the village: what the first
+ *            frame needs and nothing else. Cached at install, per file, with
+ *            retries. Install completes if the core is there.
+ *   SHELL    every other screen and module. Filled in the background after
+ *            activate, in small batches.
+ *   CONTENT  the registry, the schemas and the reference bundles. Same.
+ *   BANKS    passages, jumbles, summaries, placement, completion, the word
+ *            bank and arguments — a couple of thousand files — are never
+ *            precached: the fetch handler keeps each one the first time it is
+ *            asked for, and library-sync.js walks content/manifest.json in
+ *            idle time.
+ *
+ * THE CACHE IS THE CHECKPOINT. Nothing tracks which files are done, because
+ * `cache.keys()` already knows. A fill pass asks what is missing and fetches
+ * only that, so an install interrupted at file 300 of 594 resumes at 300 —
+ * whether it was interrupted by a closed tab, a dead connection or a reboot.
+ * Only the failure count and the backoff clock are persisted (in a tiny
+ * cat-os-meta cache, because a worker has no localStorage).
+ *
+ * A VERSION CHANGE NEVER DESTROYS A WORKING LIBRARY. When CONTENT_VERSION
+ * moves, the new cache is filled alongside the old one. Reads try the new
+ * cache, then the old, so a half-filled upgrade still serves every file the
+ * learner already had. The old cache is deleted only once the new one is
+ * provably complete — that is the promotion, and it is the only moment
+ * anything is thrown away. If the upgrade never completes, the learner keeps
+ * the version that works, for as long as it takes.
+ *
+ * NOTHING BROKEN IS EVER KEPT. A response is cached only if it is `ok`; a
+ * 404 page or a captive-portal login screen stored under a passage's URL is
+ * exactly the corruption that makes an offline app fail in ways nobody can
+ * explain. The page can also report a file that parsed as garbage
+ * (`postMessage({type:'catos:evict'})`) and the worker drops it, so the next
+ * read re-fetches it.
+ *
+ * Strategy is otherwise unchanged: cache-first (TECH_STACK.md), guaranteed
+ * offline startup, new versions on the second load after a deploy.
  *
  * All paths are RELATIVE so the worker functions from a GitHub Pages
  * subpath. `self.registration.scope` resolves them correctly.
+ *
+ * tools/build-precache.mjs rewrites CORE_FILES and CONTENT_FILES from disk.
+ * verify.mjs checks that every module the app imports is in one of the lists.
  */
 
-const CACHE_VERSION = 38;
-const CONTENT_VERSION = 14;
+const CACHE_VERSION = 39;
+const CONTENT_VERSION = 15;
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}`;
-const KEEP = [SHELL_CACHE, CONTENT_CACHE];
+const META_CACHE = 'cat-os-meta';
+/* The banks — every passage, jumble, summary, placement, completion, word
+   and argument file — live in their OWN cache, and it carries no version.
+   They are addressed by a stable id and they are the thing the learner
+   actually spent mobile data on; tying them to CONTENT_VERSION would mean
+   that shipping one new schema threw away a library that took ten minutes
+   to download. A corrected file reaches an installed learner through the
+   evict path instead (the reader notices, the worker drops it, the next
+   read heals it), which is the only mechanism that can work for content
+   nobody precaches. */
+const LIBRARY_CACHE = 'cat-os-library';
 
+/* How much is fetched at once, and how hard we try. Twelve is enough to keep
+   a connection busy and few enough that a phone on 3G is not swamped while
+   the learner is reading. */
+const BATCH = 12;
+const TRIES = 3;
+
+/* Stage 1 — the install must get these. Generated by tools/build-precache.mjs
+   from the real import graph: everything a cold open of the village fetches
+   before it can paint. */
+const CORE_FILES = [
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './src/ui/styles/tokens.css',
+  './src/ui/styles/base.css',
+  './src/ui/styles/components.css',
+  './src/ui/styles/game.css',
+  './src/ui/styles/world.css',
+  './src/ui/styles/village.css',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './src/app.js',
+  './src/core/content-loader/library-sync.js',
+  './src/core/content-loader/loader.js',
+  './src/core/content-loader/validator.js',
+  './src/core/engagement/audio.js',
+  './src/core/engagement/feedback.js',
+  './src/core/engagement/stats.js',
+  './src/core/engagement/streaks.js',
+  './src/core/engagement/xp.js',
+  './src/core/engine/garden-session.js',
+  './src/core/learning/journey.js',
+  './src/core/learning/review.js',
+  './src/core/learning/taxonomy.js',
+  './src/core/router/router.js',
+  './src/core/storage/indexeddb-adapter.js',
+  './src/core/storage/storage-adapter.js',
+  './src/core/utils/format.js',
+  './src/modules/language-garden/index.js',
+  './src/modules/language-garden/logic/effort.js',
+  './src/modules/language-garden/logic/groves.js',
+  './src/modules/odd-one-out/index.js',
+  './src/modules/para-jumbles/index.js',
+  './src/modules/para-summary/index.js',
+  './src/modules/reading-comprehension/index.js',
+  './src/modules/verbal-bank/index.js',
+  './src/modules/word-dna/index.js',
+  './src/shell/prefs.js',
+  './src/ui/components/cat-nav.js',
+  './src/ui/components/cat-toast.js',
+  './src/village/art-buildings.js',
+  './src/village/art-figures.js',
+  './src/village/art-nature.js',
+  './src/village/art-things.js',
+  './src/village/art.js',
+  './src/village/brush.js',
+  './src/village/defs.js',
+  './src/village/next.js',
+  './src/village/renderer.js',
+  './src/village/scene.js',
+  './src/village/screens/village.js',
+  './src/village/state.js',
+  './src/village/terrain.js',
+  './src/world/audio.js',
+  './src/world/companion.js',
+  './src/world/craft-ui.js',
+  './src/world/curator.js',
+  './src/world/economy.js',
+  './src/world/engine/palette.js',
+  './src/world/growth.js',
+  './src/world/icons.js',
+  './src/world/index.js',
+  './src/world/lexicon.js',
+  './src/world/menu.js',
+  './src/world/stage.js',
+  './src/world/state.js',
+];
+
+/* Stage 2 — every other screen and module, filled after activate. */
 const SHELL_FILES = [
   './',
   './index.html',
@@ -633,55 +757,312 @@ const CONTENT_FILES = [
   './content/twins/twin-y.json',
 ];
 
-/* Install: precache shell + content, then take over promptly. */
+/* ------------------------------------------------------------------ */
+/* Where a file lives                                                  */
+/* ------------------------------------------------------------------ */
+
+const isContent = (url) => url.includes('/content/');
+
+/** Absolute URL for a './'-relative precache entry, resolved against scope. */
+const abs = (rel) => new URL(rel, self.registration.scope).href;
+
+/* Which content files belong to the versioned precache, and which are library
+   banks that must survive every version bump. Built once, lazily, because
+   `self.registration.scope` is not available while the module is evaluating. */
+let precacheSet = null;
+const isPrecachedContent = (url) => {
+  if (!precacheSet) precacheSet = new Set(CONTENT_FILES.map(abs));
+  return precacheSet.has(url);
+};
+
+/* ------------------------------------------------------------------ */
+/* Install state (a worker has no localStorage; a cache entry will do)  */
+/* ------------------------------------------------------------------ */
+
+const STATE_URL = 'catos-install-state';
+
+async function readState() {
+  try {
+    const c = await caches.open(META_CACHE);
+    const r = await c.match(STATE_URL);
+    if (!r) return {};
+    return await r.json();
+  } catch { return {}; }
+}
+
+async function writeState(patch) {
+  try {
+    const c = await caches.open(META_CACHE);
+    const next = { ...(await readState()), ...patch, at: Date.now() };
+    await c.put(STATE_URL, new Response(JSON.stringify(next), { headers: { 'content-type': 'application/json' } }));
+    return next;
+  } catch { return null; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Filling a cache, resumably                                          */
+/* ------------------------------------------------------------------ */
+
+/** What of `files` this cache does not hold yet. One round trip, not N. */
+async function missingFrom(cache, files) {
+  const have = new Set((await cache.keys()).map((r) => r.url));
+  return files.filter((f) => !have.has(abs(f)));
+}
+
+/**
+ * Fetch one file and keep it — but ONLY if the server actually gave us the
+ * file. A 404 body or a portal redirect cached under a passage's URL is the
+ * corruption that makes "it works offline" a lie.
+ */
+async function fetchAndPut(cache, rel) {
+  const res = await fetch(abs(rel), { cache: 'no-store', credentials: 'same-origin' });
+  if (!res.ok) throw new Error(`${res.status} ${rel}`);
+  if (res.type === 'opaqueredirect' || res.redirected) throw new Error(`redirected ${rel}`);
+  await cache.put(abs(rel), res.clone());
+  return true;
+}
+
+/**
+ * Fill a cache in batches. Returns what is still missing afterwards, so the
+ * caller can decide whether a version is complete. Never throws: a batch that
+ * fails leaves its files missing and the next pass picks them up.
+ */
+async function fill(cacheName, files, { batch = BATCH, signalName = '' } = {}) {
+  const cache = await caches.open(cacheName);
+  let missing = await missingFrom(cache, files);
+  const total = files.length;
+  for (let i = 0; i < missing.length; i += batch) {
+    const slice = missing.slice(i, i + batch);
+    await Promise.all(slice.map(async (rel) => {
+      for (let t = 0; t < TRIES; t += 1) {
+        try { await fetchAndPut(cache, rel); return; } catch {
+          // A short, growing pause: a phone that just lost signal should not
+          // spend its battery hammering a dead radio.
+          await new Promise((r) => setTimeout(r, 150 * (t + 1) * (t + 1)));
+        }
+      }
+    }));
+    if (signalName) {
+      await writeState({ [signalName]: { done: total - (await missingFrom(cache, files)).length, total } });
+    }
+  }
+  missing = await missingFrom(cache, files);
+  return missing;
+}
+
+/* ------------------------------------------------------------------ */
+/* Install: the core, and only the core                                */
+/* ------------------------------------------------------------------ */
+
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    Promise.all([
-      caches.open(SHELL_CACHE).then((c) => c.addAll(SHELL_FILES)),
-      caches.open(CONTENT_CACHE).then((c) => c.addAll(CONTENT_FILES)),
-    ]).then(() => self.skipWaiting())
-  );
+  event.waitUntil((async () => {
+    // Everything the first frame needs. If some of it cannot be fetched the
+    // install still completes — the app works online and the next pass will
+    // try again — because refusing to install leaves the learner with no
+    // worker at all, which is strictly worse.
+    const stillMissing = await fill(SHELL_CACHE, CORE_FILES, { signalName: 'core' });
+    await writeState({ phase: 'core', coreMissing: stillMissing.length, shellVersion: CACHE_VERSION, contentVersion: CONTENT_VERSION });
+    await self.skipWaiting();
+  })());
 });
 
-/* Activate: delete every cache not in KEEP. */
+/* ------------------------------------------------------------------ */
+/* Activate: claim, then fill the rest in the background               */
+/* ------------------------------------------------------------------ */
+
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys()
-      .then((keys) => Promise.all(
-        keys.filter((k) => !KEEP.includes(k)).map((k) => caches.delete(k))
-      ))
-      .then(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    // Old SHELL caches are safe to drop: the shell is code, and this worker
+    // is the code. Old CONTENT caches are NOT — see promoteContent().
+    const keys = await caches.keys();
+    const keep = new Set([SHELL_CACHE, CONTENT_CACHE, META_CACHE, LIBRARY_CACHE]);
+    const staleContent = keys.filter((k) => k.startsWith('cat-os-content-v') && !keep.has(k));
+    await Promise.all(keys
+      .filter((k) => !keep.has(k) && !staleContent.includes(k))
+      .map((k) => caches.delete(k)));
+    // One-time migration for a device installed before 2.1.2: the banks were
+    // living in the versioned content cache, where the next version bump
+    // would have deleted them. Move them somewhere that cannot happen.
+    await adoptLibraryFrom(staleContent.concat(CONTENT_CACHE));
+    await self.clients.claim();
+    // Not awaited inside waitUntil beyond this point: activation must not
+    // wait on six hundred files.
+    fillEverything();
+  })());
 });
 
-/* Fetch: cache-first across both caches. Navigations fall back to the
-   cached shell so the app opens offline even from a deep link. */
+let filling = null;
+
+/**
+ * Bring the shell and the content up to date, then promote the content
+ * version if it is complete. Safe to call at any time and from anywhere;
+ * concurrent calls share one pass.
+ */
+function fillEverything() {
+  if (filling) return filling;
+  filling = (async () => {
+    try {
+      await writeState({ phase: 'shell' });
+      await fill(SHELL_CACHE, SHELL_FILES, { signalName: 'shell' });
+      await writeState({ phase: 'content' });
+      const missing = await fill(CONTENT_CACHE, CONTENT_FILES, { signalName: 'content' });
+      if (missing.length === 0) await promoteContent();
+      await writeState({ phase: missing.length === 0 ? 'ready' : 'incomplete', contentMissing: missing.length });
+    } catch (err) {
+      await writeState({ phase: 'retry', lastError: String(err && err.message ? err.message : err).slice(0, 200) });
+    } finally {
+      filling = null;
+    }
+  })();
+  return filling;
+}
+
+/**
+ * Take every bank file out of a versioned content cache and put it in the
+ * library, which no version bump touches. Runs on activate (for devices
+ * installed before the library cache existed) and again before a promotion,
+ * so nothing a learner downloaded is ever inside the thing being deleted.
+ */
+async function adoptLibraryFrom(names) {
+  const lib = await caches.open(LIBRARY_CACHE);
+  const already = new Set((await lib.keys()).map((r) => r.url));
+  for (const name of names) {
+    let c;
+    try { c = await caches.open(name); } catch { continue; }
+    for (const req of await c.keys()) {
+      if (isPrecachedContent(req.url) || already.has(req.url)) continue;
+      const res = await c.match(req);
+      if (res?.ok) { await lib.put(req, res.clone()); already.add(req.url); }
+    }
+  }
+}
+
+/**
+ * The only moment anything is thrown away. The new content cache is complete
+ * and verified present, and everything the learner downloaded has been moved
+ * to the library, so the previous version is finally redundant. Until this
+ * runs, reads fall back to it and a half-finished upgrade costs nothing.
+ */
+async function promoteContent() {
+  const keys = await caches.keys();
+  const old = keys.filter((k) => k.startsWith('cat-os-content-v') && k !== CONTENT_CACHE);
+  if (!old.length) return;
+  await adoptLibraryFrom(old);
+  await Promise.all(old.map((k) => caches.delete(k)));
+  await writeState({ promotedFrom: old, promotedAt: Date.now() });
+}
+
+/** Every content cache, newest first: the current one, then older ones. */
+async function contentCaches() {
+  const keys = (await caches.keys()).filter((k) => k.startsWith('cat-os-content-v'));
+  const n = (k) => Number(k.slice('cat-os-content-v'.length)) || 0;
+  return keys.sort((a, b) => (a === CONTENT_CACHE ? -1 : b === CONTENT_CACHE ? 1 : n(b) - n(a)));
+}
+
+/* ------------------------------------------------------------------ */
+/* Fetch: cache-first, with the previous content version as a fallback */
+/* ------------------------------------------------------------------ */
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    // 0.17.0: an exact-URL match. `ignoreSearch` forced a linear scan of
-    // every cached entry on every request (hundreds of entries, hundreds of
-    // requests per garden screen — a twenty-second first paint on a cold
-    // profile); nothing in this app fetches with a query string, and a
-    // navigation that misses still falls back to the cached shell below.
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
-      return fetch(request).then((response) => {
-        // New content files (future batches) are cached on first use so
-        // they stay available offline without a shell release.
-        if (response.ok && new URL(request.url).pathname.includes('/content/')) {
-          const copy = response.clone();
-          caches.open(CONTENT_CACHE).then((c) => c.put(request, copy));
-        }
-        return response;
-      }).catch(() => {
-        if (request.mode === 'navigate') {
-          return caches.match('./index.html');
-        }
-        return Response.error();
-      });
-    })
-  );
+  event.respondWith((async () => {
+    // 0.17.0: an exact-URL match. `ignoreSearch` forced a linear scan of every
+    // cached entry on every request; nothing in this app fetches with a query
+    // string, and a navigation that misses still falls back to the shell.
+    const shell = await caches.open(SHELL_CACHE);
+    const hit = await shell.match(request);
+    if (hit) return hit;
+
+    if (isContent(url.pathname)) {
+      // The library first (it holds everything the learner downloaded), then
+      // the current precache version, then every older one still on the
+      // device. The fallback chain is what makes an interrupted upgrade
+      // harmless: a half-filled new version still serves every file.
+      for (const name of [LIBRARY_CACHE, ...(await contentCaches())]) {
+        const c = await caches.open(name);
+        const old = await c.match(request);
+        if (old) return old;
+      }
+    }
+
+    try {
+      const res = await fetch(request);
+      if (res.ok && isContent(url.pathname)) {
+        const copy = res.clone();
+        const into = isPrecachedContent(url.href) ? CONTENT_CACHE : LIBRARY_CACHE;
+        caches.open(into).then((c) => c.put(request, copy)).catch(() => { /* quota */ });
+      }
+      return res;
+    } catch {
+      if (request.mode === 'navigate') {
+        const idx = await shell.match(abs('./index.html')) ?? await caches.match('./index.html');
+        if (idx) return idx;
+      }
+      return Response.error();
+    }
+  })());
+});
+
+/* ------------------------------------------------------------------ */
+/* The page talks to the worker                                        */
+/* ------------------------------------------------------------------ */
+
+self.addEventListener('message', (event) => {
+  const msg = event.data;
+  if (!msg || typeof msg !== 'object') return;
+
+  if (msg.type === 'catos:sync') {
+    // The page is idle and on a good connection: keep going.
+    event.waitUntil(fillEverything());
+    return;
+  }
+
+  if (msg.type === 'catos:status') {
+    event.waitUntil((async () => {
+      const state = await readState();
+      const shell = await caches.open(SHELL_CACHE);
+      const content = await caches.open(CONTENT_CACHE);
+      const library = await caches.open(LIBRARY_CACHE);
+      // Counted as "how many of the files we promised are present", not "how
+      // many entries are in the cache" — the two diverge the moment a bank
+      // file is read, and a progress bar past 100% is a progress bar nobody
+      // believes again.
+      const [coreMissing, shellMissing, contentMissing, libraryKeys] = await Promise.all([
+        missingFrom(shell, CORE_FILES),
+        missingFrom(shell, SHELL_FILES),
+        missingFrom(content, CONTENT_FILES),
+        library.keys(),
+      ]);
+      const reply = {
+        type: 'catos:status',
+        phase: state.phase ?? 'unknown',
+        shellVersion: CACHE_VERSION,
+        contentVersion: CONTENT_VERSION,
+        core: { total: CORE_FILES.length, cached: CORE_FILES.length - coreMissing.length },
+        shell: { total: SHELL_FILES.length, cached: SHELL_FILES.length - shellMissing.length },
+        content: { total: CONTENT_FILES.length, cached: CONTENT_FILES.length - contentMissing.length },
+        library: { cached: libraryKeys.length },
+        lastError: state.lastError ?? null,
+      };
+      if (event.source) event.source.postMessage(reply);
+      for (const client of await self.clients.matchAll()) client.postMessage(reply);
+    })());
+    return;
+  }
+
+  if (msg.type === 'catos:evict' && typeof msg.url === 'string') {
+    // The page read this file and it was not what it claimed to be. Drop it
+    // everywhere so the next read goes to the network.
+    event.waitUntil((async () => {
+      for (const name of await caches.keys()) {
+        if (name === META_CACHE) continue;
+        const c = await caches.open(name);
+        await c.delete(msg.url).catch(() => { /* not there */ });
+      }
+    })());
+  }
 });

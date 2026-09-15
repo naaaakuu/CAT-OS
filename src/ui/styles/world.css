@@ -19,7 +19,7 @@
   --g-ink-3: #655F4F;
   --g-line: rgba(60, 48, 30, 0.13);
   --g-accent: #2E6B4B;
-  --g-accent-2: #47916A;
+  --g-accent-2: #3C7F5A;
   --g-gold: #DFA22C;
   --g-gold-2: #F3CE72;
 
@@ -61,6 +61,25 @@
   --g-edge: rgba(60, 46, 24, 0.1);
   --g-edge-2: rgba(60, 46, 24, 0.14);
   --g-plate-edge: var(--g-edge);
+
+  /* ---- Moved here from game.css (2.1.2): one owner for every colour. ---- */
+  --g-star: #F4C443;
+  --g-star-off: rgba(31, 34, 48, 0.14);
+  --g-ink-color: #3B7BD6;
+  --g-danger: #B7472F;
+  --g-glass: rgba(251, 247, 239, 0.86);
+  --g-glass-dark: rgba(22, 26, 40, 0.72);
+  /* The ink that sits ON the accent. White works on a deep green by day; at
+     night the accent IS the light colour, so white on it is 2:1 and every
+     primary action in the world becomes unreadable. One token, two answers. */
+  --g-on-accent: #FFFFFF;
+  /* The accent at its darkest, for ink on a tinted chip. */
+  --g-accent-deep: #1F4A35;
+  /* A surface that must read as RAISED above the card it sits on: an answer
+     option, the selected chip in a segmented control. On paper that is white
+     over cream; at night it has to go UP the ramp, not down, or the option
+     looks recessed and the card it sits in loses its edge. */
+  --g-raise: #FFFFFF;
   --g-shadow: 0 12px 34px rgba(30, 22, 10, 0.22), 0 2px 6px rgba(30, 22, 10, 0.1);
   --g-shadow-soft: 0 6px 18px rgba(30, 22, 10, 0.14);
 }
@@ -83,6 +102,21 @@
     --g-edge: rgba(240, 234, 220, 0.11);
     --g-edge-2: rgba(240, 234, 220, 0.16);
     --g-plate-edge: var(--g-edge);
+    --g-accent: #74B894;
+    --g-accent-2: #8ACBA8;
+    --g-on-accent: #0C1A14;
+    --g-accent-deep: #A6D6BD;
+    --g-gold: #E9B949;
+    --g-gold-2: #F3CE72;
+    --g-star: #F4C443;
+    --g-star-off: rgba(238, 234, 224, 0.16);
+    --g-ink-color: #7FA9C2;
+    --g-danger: #DE9A8C;
+    --g-glass: rgba(26, 27, 36, 0.88);
+    --g-glass-dark: rgba(10, 12, 22, 0.82);
+    --g-raise: #2E313F;
+    --g-shadow: 0 12px 34px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.35);
+    --g-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.42);
   }
 }
 :root[data-theme="dark"] {
@@ -102,6 +136,21 @@
   --g-edge: rgba(240, 234, 220, 0.11);
   --g-edge-2: rgba(240, 234, 220, 0.16);
   --g-plate-edge: var(--g-edge);
+  --g-accent: #74B894;
+  --g-accent-2: #8ACBA8;
+  --g-on-accent: #0C1A14;
+  --g-accent-deep: #A6D6BD;
+  --g-gold: #E9B949;
+  --g-gold-2: #F3CE72;
+  --g-star: #F4C443;
+  --g-star-off: rgba(238, 234, 224, 0.16);
+  --g-ink-color: #7FA9C2;
+  --g-danger: #DE9A8C;
+  --g-glass: rgba(26, 27, 36, 0.88);
+  --g-glass-dark: rgba(10, 12, 22, 0.82);
+  --g-raise: #2E313F;
+  --g-shadow: 0 12px 34px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.35);
+  --g-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.42);
 }
 
 /* ------------------------------------------------------------------ */
@@ -454,7 +503,7 @@
 .wk__tick {
   position: absolute; top: 5px; right: 6px; width: 18px; height: 18px; border-radius: 50%;
   display: grid; place-items: center; font-size: 11px; font-weight: 800;
-  background: var(--g-accent); color: #fff;
+  background: var(--g-accent); color: var(--g-on-accent);
 }
 .wk.is-ready { border-color: var(--g-gold); box-shadow: 0 0 0 3px rgba(223, 162, 44, 0.2); }
 .wk.is-ready .wk__flag { color: #8A5E05; }
@@ -531,7 +580,7 @@
 .asks { display: flex; flex-direction: column; gap: 9px; }
 .ask { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--g-ink); background: var(--g-paper-2); border: 1px solid var(--g-line); border-radius: 16px; padding: 13px 14px; }
 .ask__tick { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--g-paper-3); flex: none; display: grid; place-items: center; font-size: 12px; font-weight: 800; }
-.ask.is-done .ask__tick { background: var(--g-accent); border-color: var(--g-accent); color: #fff; }
+.ask.is-done .ask__tick { background: var(--g-accent); border-color: var(--g-accent); color: var(--g-on-accent); }
 .ask__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .ask__body b { font-size: 14px; }
 .ask__body > span { font-size: 12px; color: var(--g-ink-2); line-height: 1.35; }
@@ -554,14 +603,52 @@
 /* A run: the place behind, the word in front                          */
 /* ------------------------------------------------------------------ */
 
+/* A run without a stage — a vocabulary round, the Gauntlet — paints its own
+   night and holds the words on lit cards over it. That night is the same at
+   noon and at midnight and in either theme, so the palette INSIDE it is
+   fixed too: rebinding the tokens here is what stops the document theme
+   from reaching in and turning a lit card dark (or, in light mode, leaving
+   near-black question text on navy at 1.14:1, which is what shipped).
+
+   Same device as village.css uses for the village: a region with its own
+   fixed light declares its own palette, once, and every shared component
+   inside it is automatically right. */
+:root:not([data-stage]) .run {
+  --g-paper: #F6EFE1;
+  --g-paper-2: #FBF6EA;
+  --g-paper-3: #E8DCC4;
+  --g-ink: #23212B;
+  --g-ink-2: #5C5646;
+  --g-ink-3: #655F4F;
+  --g-line: rgba(60, 48, 30, 0.13);
+  --g-panel: rgba(255, 251, 242, 0.94);
+  --g-panel-edge: rgba(255, 255, 255, 0.5);
+  --g-track: rgba(60, 46, 24, 0.16);
+  --g-edge: rgba(60, 46, 24, 0.1);
+  --g-edge-2: rgba(60, 46, 24, 0.14);
+  --g-raise: #FFFFFF;
+  --g-accent: #2E6B4B;
+  --g-accent-2: #3C7F5A;
+  --g-accent-deep: #1F4A35;
+  --g-on-accent: #FFFFFF;
+  --color-bg: #F6EFE1;
+  --color-surface: #FFFBF2;
+  --color-surface-2: #F2EBDD;
+  --color-surface-3: #E8DFCC;
+  --color-ink: #23212B;
+  --color-ink-2: #5C5646;
+  --color-ink-3: #585B60;
+  --color-line: rgba(60, 48, 30, 0.16);
+  --color-line-strong: rgba(60, 48, 30, 0.3);
+}
 .run { background: var(--g-night); position: relative; }
 .run__scene { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
 .run__veil { position: fixed; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(10, 16, 38, 0.62), rgba(10, 16, 38, 0.86) 55%, rgba(10, 16, 38, 0.93)); }
 .run > *:not(.run__scene):not(.run__veil) { position: relative; z-index: 2; }
 .run__bar { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0; color: #fff; }
 .run__leave { background: rgba(255, 255, 255, 0.14); color: #fff; }
-.run__place { color: rgba(255, 255, 255, 0.62); }
-.run__count { color: rgba(255, 255, 255, 0.72); }
+.run__place { color: rgba(255, 255, 255, 0.8); }
+.run__count { color: rgba(255, 255, 255, 0.84); }
 .run__what { color: #fff; }
 .run__clock { color: #fff; }
 
@@ -1284,7 +1371,11 @@
 .ability__line { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--g-ink-2); }
 .ability__line b { color: var(--g-ink); font-weight: 700; }
 .ability__line i { font-style: italic; }
+/* Filled stars carry the craft colour; the empty ones are "not yet", which
+   is what --g-ink-3 means everywhere else in the app. Painting them in a
+   decorative amber on paper put them at 1.97:1. */
 .ability__stars { align-self: start; font-size: 13px; letter-spacing: 1px; color: var(--tone); }
+.ability__stars i { font-style: normal; color: var(--g-ink-3); }
 .ability__bar {
   position: absolute; inset: auto 0 0 0; height: 4px;
   background: var(--g-paper-3);
@@ -1416,15 +1507,21 @@
 .setc__body { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .setc__name { font-size: 13.5px; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .setc__n { font-size: 11.5px; color: var(--g-ink-3); font-variant-numeric: tabular-nums; }
-.setc__n i { font-style: normal; opacity: 0.62; }
+/* The denominator, not a whisper. Nested opacity (0.62 inside a card at
+   0.72) took "0/2 words" to 1.9:1 — legible only if you already knew what
+   it said. */
+.setc__n i { font-style: normal; opacity: 1; color: var(--g-ink-3); }
 .setc__near {
   font-size: 11px; font-weight: 800; letter-spacing: 0.04em; color: var(--g-ink-3);
   white-space: nowrap;
 }
-.setc.is-close .setc__near { color: #8A5E05; background: var(--g-gold-2); border-radius: 999px; padding: 3px 9px; }
+.setc.is-close .setc__near { color: #6A4703; background: var(--g-gold-2); border-radius: 999px; padding: 3px 9px; }
 .setc__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--g-edge); }
 .setc__bar i { display: block; height: 100%; background: var(--g-accent); }
-.setc.is-new { opacity: 0.72; }
+/* A set nobody has started is quieter, but its text is not dimmed: the
+   plate and the rail carry the state, and the words stay readable. */
+.setc.is-new .setc__mk { opacity: 0.6; }
+.setc.is-new .setc__name { color: var(--g-ink-2); }
 .setc.is-new .setc__bar i { background: var(--g-ink-3); }
 .setc.is-done { border-color: rgba(46, 107, 75, 0.4); background: rgba(46, 107, 75, 0.07); }
 .setc.is-done .setc__near { color: var(--g-accent); font-size: 14px; }
@@ -1528,3 +1625,30 @@
 @keyframes route-waiting-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 :root[data-reduced-motion] .route-waiting { animation: none; }
 :root[data-reduced-motion] .route-waiting__dot { animation: none; opacity: 0.75; }
+
+/* The offline meter in Settings: a real number from the worker, not a claim. */
+.offline-bar {
+  height: 4px; border-radius: 999px; overflow: hidden;
+  background: var(--g-track); margin: 4px 0 2px;
+}
+.offline-bar i { display: block; height: 100%; background: var(--g-accent); transition: width 500ms var(--g-ease); }
+
+/* ------------------------------------------------------------------ */
+/* Stars                                                               */
+/* ------------------------------------------------------------------ */
+/* A gold star on warm paper is 1.44:1 as flat type — the brand colour and
+   the surface it sits on are both bright, and no gold that still reads as
+   gold gets to 4.5:1. So the glyph is drawn the way a game draws it: a gold
+   fill with a dark edge, which clears the 3:1 a graphical object needs and
+   reads as a star rather than a word. `paint-order` keeps the stroke
+   outside the fill so the shape does not thin. */
+.stars, .run b, .brief b, .result__stars, .vround__stars,
+.place__stars, .g-row__stars, .tile__stars {
+  -webkit-text-stroke: 0.7px rgba(74, 48, 2, 0.9);
+  paint-order: stroke fill;
+}
+.stars .off, .run b .off, .brief b .off, .result__stars .off,
+.vround__stars .off, .place__stars .off, .g-row__stars .off, .tile__stars .off {
+  color: var(--g-star-off);
+  -webkit-text-stroke: 0.7px rgba(74, 48, 2, 0.35);
+}

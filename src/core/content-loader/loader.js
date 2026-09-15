@@ -61,8 +61,24 @@ async function fetchJSON(path) {
   try {
     return await res.json();
   } catch {
-    throw new ContentError(`${path} is not valid JSON.`);
+    /* A content file that is not JSON came from somewhere, and on an
+       offline-first app that somewhere is almost always a bad cache entry: a
+       truncated write, a captive-portal login page, a 404 body stored under a
+       passage's URL. Nothing else in the system can notice this — only the
+       reader can — so tell the worker to drop it. The next read goes to the
+       network and heals it. Failing that, the caller still gets a clear
+       error and its own recovery path. */
+    evict(path);
+    throw new ContentError(`${path} could not be read. It may have been stored incompletely; it will be fetched again.`);
   }
+}
+
+/* Loaded lazily and only on the unhappy path: the loader must not drag the
+   sync module into every boot for a case that almost never happens. */
+function evict(path) {
+  import('./library-sync.js')
+    .then((m) => m.reportCorrupt(path))
+    .catch(() => { /* no worker, nothing to evict */ });
 }
 
 async function loadSchema(name) {

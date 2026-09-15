@@ -264,7 +264,23 @@ export async function renderPlace(outlet, { storage }, params) {
           ${g.items.map((it, i) => { const b = rd.best.get(it.id); return `<a class="g-row ${rec?.item.id === it.id ? 'g-row--next' : ''}" href="#/rc/session/${it.id}"><span class="g-row__num">${i + 1}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(it.title)}</span><span class="g-row__meta">${escapeHTML(it.genre)} · ${it.difficulty} · ~${it.estimated_time_min} min · ${it.question_count} Q${b ? ` · best ${Math.round(b.accuracy * 100)}%${b.flawless ? ' · flawless' : ''}` : ''}</span></span><span class="g-row__stars" aria-label="${b?.stars ?? 0} stars">${starHTML(b?.stars ?? 0)}</span></a>`; }).join('')}
         </div>`).join(''))}
       ${bankBundleList('cr', content.cr, state, 'Arguments', 'Short arguments in the CAT register: find the assumption, weaken the link, name the flaw. Five at a time, unsolved first.')}`;
-    more.querySelector('#night-toggle')?.addEventListener('click', async (e) => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; await storage.put(STORES.SETTINGS, { id: 'world:night-reading', value: on }); e.currentTarget.setAttribute('aria-pressed', String(on)); e.currentTarget.textContent = on ? 'On' : 'Off'; play('tap'); });
+    /* Hold the button in a const. `e.currentTarget` is null after the first
+       await — dispatch is over — so reading it again threw and the toggle
+       never changed its label or its pressed state (village.js had the same
+       bug on the sound button). The control answers first, and the write
+       follows. */
+    const nightBtn = more.querySelector('#night-toggle');
+    nightBtn?.addEventListener('click', async () => {
+      const on = nightBtn.getAttribute('aria-pressed') !== 'true';
+      nightBtn.setAttribute('aria-pressed', String(on));
+      nightBtn.textContent = on ? 'On' : 'Off';
+      play('tap');
+      try {
+        await storage.put(STORES.SETTINGS, { id: 'world:night-reading', value: on });
+      } catch (err) {
+        console.error('[CAT OS] could not remember night reading', err);
+      }
+    });
     return;
   }
 
