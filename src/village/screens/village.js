@@ -687,7 +687,13 @@ export async function renderVillage(outlet, { storage }) {
       state = world.state; v = state.village;
     } catch { return; }
     if (!canvas.isConnected) return;
-    scene = buildVillageScene(state, state.atmo, { focus: focus ?? v.tip?.building ?? null });
+    // Carry the living village across the rebuild: see scene.js's lifeKey.
+    // Without this every collect, every delivery and every craft-ready tick
+    // teleported all the walkers and animals back to their seeded starts.
+    scene = buildVillageScene(state, state.atmo, {
+      focus: focus ?? v.tip?.building ?? null,
+      carryLife: scene?.life, carryLifeKey: scene?.lifeKey,
+    });
     renderer.setScene(scene);
     step = onboardingStep(v, state, valley);
     renderHud(); renderCallouts();

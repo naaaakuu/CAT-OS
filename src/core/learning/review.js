@@ -140,7 +140,15 @@ export function skillLedger(sessions, learning = [], now = Date.now()) {
       const total = r.score?.total ?? 0, correct = r.score?.correct ?? 0;
       for (let i = 0; i < total; i += 1) answer(key, i < correct, r.finished_at);
     } else if (r.kind === 'garden-session') {
-      answer('root', r.clean !== false, r.finished_at);
+      /* Only a graded RETRIEVAL is evidence. A Grow session is an
+         introduction — the learner is meeting the root for the first time,
+         not recalling it — and carries no `clean` verdict at all, so
+         `r.clean !== false` scored every introduction as a correct answer.
+         'root' is the skill that routes a learner to the Rootwood, and
+         weakSkills only flags below 0.8 recent accuracy, so introductions
+         inflating it meant the Rootwood was rarely recommended to the
+         people who most needed it. */
+      if (typeof r.clean === 'boolean') answer('root', r.clean, r.finished_at);
     }
   }
 

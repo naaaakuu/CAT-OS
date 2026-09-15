@@ -22,6 +22,7 @@
 import { loadLexItem, loadTwinItem, loadLoanItem } from '../core/content-loader/loader.js';
 import { rng } from './engine/palette.js';
 import { isRested, passagesForSkill } from '../core/learning/review.js';
+import { RC_TYPE_SKILL } from '../core/learning/taxonomy.js';
 import { wordStatus, REGION_KIND, ROUND_SIZE } from './lexicon.js';
 
 /* ------------------------------------------------------------------ */
@@ -172,7 +173,16 @@ export function nextPassage(content, best, weakness, seed = 'rc') {
   // actually ASK that type — saying so in a line and then handing over a
   // passage that never tests it is advice, not teaching.
   if (weakness?.weakest) {
-    const aimed = passagesForSkill(pool, weakness.weakest, best);
+    /* `weakest` is a question TYPE (readingWeakness buckets answers by
+       `a.type`), but a v5 registry row lists `skills_trained` — SKILL keys.
+       They coincide for the original nine names and differ for the rest, so
+       aiming a type straight at passagesForSkill matched nothing for most of
+       the 27 types: the aiming silently returned an empty list and the pool
+       was left alone, while the Reading House went on telling the learner
+       their answers were "used to choose what you read next". The taxonomy
+       already carries the mapping both the schema and the ledger use. */
+    const key = RC_TYPE_SKILL[weakness.weakest] ?? weakness.weakest;
+    const aimed = passagesForSkill(pool, key, best);
     if (aimed.length) pool = aimed;
   }
   if (pool.length) {

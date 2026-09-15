@@ -717,6 +717,45 @@ export function buildVillageScene(state, atmo, opts = {}) {
       pending.push({ ...st.treeParams, lean: 1 }, { ...st.treeParams, lean: -1 });
     }
   }
+  /* Keep the village alive across a rebuild.
+
+     refresh() rebuilds the whole scene after every collect, deliver, build,
+     plot and house, on visibilitychange, and on the timer that fires the
+     moment a worker finishes crafting — which is to say, precisely while the
+     learner is watching. Every actor here is constructed from a fixed seed
+     (`rng('nb:'+id)`, `rng('graze:'+seed)`), so a rebuild put all of them back
+     exactly where they started: neighbours snapped mid-stride to the same
+     point on their route, sheep and chickens jumped across the pen, chimney
+     smoke and bird flocks vanished, ducks restarted. Identical every time,
+     because the seeds are. The world visibly reset itself as a reward for
+     playing, which is the most amateur thing the village did.
+
+     Their state lives in closure variables (puffs, herd, t, acc) and cannot be
+     copied from outside — so carry the INSTANCES instead. When nothing that
+     determines the cast has changed, the previous actors keep running; the
+     freshly built ones are discarded, which costs a few object literals
+     (art() is lazy and cached, so no raster is repeated).
+
+     The key is the cast itself — the ordered list of kinds — plus the values
+     that decide how many of each there are. Anything that genuinely changes
+     the village changes the key, and then everything is built anew, which is
+     right: a new building should arrive with its smoke. */
+  const lifeKey = [
+    life.map((a) => a?.kind ?? '?').join(','),
+    night ? 'night' : 'day',
+    season,
+    stageWorth,
+    state.meadow?.mastered ?? 0,
+    state.pond?.mastered ?? 0,
+    state.pond?.known ?? 0,
+    v.neighbours.length,
+    [...v.levels].map(([k, n]) => `${k}${n}`).sort().join(''),
+  ].join('|');
+  if (opts.carryLifeKey === lifeKey && Array.isArray(opts.carryLife) && opts.carryLife.length === life.length) {
+    life.length = 0;
+    for (const a of opts.carryLife) life.push(a);
+  }
+
   let warmSince = 0;
 
   /* Rain drops, seeded once. Each drop keeps its column, its phase and its
@@ -734,6 +773,7 @@ export function buildVillageScene(state, atmo, opts = {}) {
     W: WORLD.W, H: WORLD.H,
     backdrop: night ? '#1E3A20' : '#4F8E36',
     hour, atmo, season,
+    life, lifeKey,          // so the next rebuild can carry these forward
     warm(bucket, tint = null) {
       if (!pending.length) return;
       warmSince += 1;
