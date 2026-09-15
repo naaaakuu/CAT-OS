@@ -39,7 +39,17 @@
       <span class="wordmark">CAT&nbsp;OS</span>
     </header>
 
-    <main class="shell__view" id="view" tabindex="-1" aria-live="polite">
+    <!--
+      No aria-live here. It used to be aria-live="polite", which made EVERY
+      DOM change inside the active screen an announcement — and a running
+      <cat-timer> rewrites its text once a second, so a screen reader read the
+      clock aloud on a one-second loop for the whole of a timed passage,
+      talking over the passage itself. Route changes are already announced by
+      the router moving focus here (core/router/router.js), and the pieces
+      that genuinely need to speak carry their own regions: cat-toast's
+      role="status", the result screen, the village notice.
+    -->
+    <main class="shell__view" id="view" tabindex="-1">
       <!-- Router renders the active screen here. -->
       <section class="screen screen--loading">
         <p class="muted">Loading…</p>

@@ -19,7 +19,7 @@ import { registerLanguageGarden } from './modules/language-garden/index.js';
 import { registerBank } from './modules/verbal-bank/index.js';
 import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
-import { syncStage, unmountStage } from './world/stage.js';
+import { syncStage } from './world/stage.js';
 import { silenceWorld } from './world/audio.js';
 import { resetPJIntro, latestByItem as latestPJByItem } from './modules/para-jumbles/logic/store.js';
 import { resetPSIntro, latestByItem as latestPSByItem } from './modules/para-summary/logic/store.js';
@@ -266,7 +266,18 @@ async function boot() {
     if (!inWorld) silenceWorld();
     // Rooms beyond the valley still stand somewhere: the region's own scene
     // is painted behind them (src/world/stage.js).
-    if (inWorld) unmountStage(); else syncStage(storage).catch(() => { /* the room still works */ });
+    //
+    // Immersive chrome and standing somewhere are two different questions.
+    // A timed reading run is immersive (isWorldRoute covers #/rc/session/ so
+    // the tab bar goes away under the clock) but it is NOT the valley: it is
+    // the Reading Room, and it needs data-stage="reading-room" for world.css
+    // to lift the passage onto warm glass. Tying the stage to isWorldRoute
+    // unmounted it there, which left .run on var(--g-night) while the prose
+    // still inherited the light theme's near-black ink — the passage rendered
+    // at 1.14:1 contrast. stageFor() already returns null for the valley, the
+    // rounds and the Rootwood, and syncStage() unmounts on null, so asking it
+    // on every navigation is both correct and sufficient.
+    syncStage(storage).catch(() => { /* the room still works */ });
   };
   applyImmersiveChrome();
   window.addEventListener('hashchange', applyImmersiveChrome);
@@ -307,22 +318,44 @@ async function boot() {
     try {
       const hadController = !!navigator.serviceWorker.controller;
       let refreshing = false;
+
+      /* A new worker must never reload the tab out from under a running
+         clock. The worker calls skipWaiting() on install and claim() on
+         activate, so controllerchange can fire at any moment — including
+         four minutes into a five-minute passage, from the 30-minute timer
+         or from the visibilitychange check that runs every time the learner
+         comes back to the tab. That reload ends the run and records nothing.
+         So: never update while a run is open, and if a controller change
+         lands anyway, hold the reload until the learner leaves the run. */
+      const inRun = () => {
+        const h = location.hash;
+        return /^#\/[a-z-]+\/session\//.test(h) || h.startsWith('#/round/') || h === '#/rc/second-look';
+      };
+      let pendingReload = false;
+      const reloadNow = () => { refreshing = true; window.location.reload(); };
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!hadController || refreshing) return;
-        refreshing = true;
-        window.location.reload();
+        if (inRun()) { pendingReload = true; return; }
+        reloadNow();
+      });
+      window.addEventListener('hashchange', () => {
+        if (pendingReload && !refreshing && !inRun()) reloadNow();
       });
 
       const registration = await navigator.serviceWorker.register('./service-worker.js');
-      registration.update().catch(() => { /* offline, or a host that cannot serve the worker */ });
+      const update = () => {
+        if (inRun()) return;                 // don't even start an install mid-run
+        registration.update().catch(() => { /* offline, or a host that cannot serve the worker */ });
+      };
+      update();
       // The rest of the library — every passage, jumble, summary and bank
       // file the content engine ships — arrives in the background, a few
       // files at a time, once the valley is painted and the phone is idle.
       // The service worker's fetch handler keeps each one for offline use.
       startLibrarySync({ delayMs: 9000 });
-      setInterval(() => registration.update().catch(() => {}), 30 * 60 * 1000);
+      setInterval(update, 30 * 60 * 1000);
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') registration.update().catch(() => { /* offline, or a host that cannot serve the worker */ });
+        if (document.visibilityState === 'visible') update();
       });
     } catch (err) {
       console.warn('[CAT OS] service worker registration failed:', err);

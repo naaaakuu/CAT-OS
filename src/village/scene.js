@@ -719,6 +719,17 @@ export function buildVillageScene(state, atmo, opts = {}) {
   }
   let warmSince = 0;
 
+  /* Rain drops, seeded once. Each drop keeps its column, its phase and its
+     speed for the life of the scene; only its position is a function of time,
+     so the shower FALLS. (It used to reseed the generator every 90 ms and
+     scatter 80 fresh drops, which reads as flickering static, not weather.)
+     Offsets are unit fractions so one table serves any viewport. */
+  const RAIN = (() => {
+    if (atmo.weather !== 'rain') return null;
+    const r = rng('rain:drops');
+    return Array.from({ length: 80 }, () => ({ u: r(), v: r(), sp: 0.78 + r() * 0.44 }));
+  })();
+
   const scene = {
     W: WORLD.W, H: WORLD.H,
     backdrop: night ? '#1E3A20' : '#4F8E36',
@@ -758,11 +769,17 @@ export function buildVillageScene(state, atmo, opts = {}) {
         g.addColorStop(0, hour === 'dawn' ? 'rgba(255,196,120,0.22)' : 'rgba(255,150,90,0.26)'); g.addColorStop(1, 'rgba(120,90,160,0.12)');
         ctx.fillStyle = g; ctx.fillRect(view.x, view.y, view.w, view.h);
       }
-      if (atmo.weather === 'rain') {
+      if (RAIN) {
         ctx.strokeStyle = 'rgba(200,225,245,0.55)'; ctx.lineWidth = 1.2;
         ctx.beginPath();
-        const rr = rng(`rain:${Math.floor(t / 90)}`);
-        for (let i = 0; i < 80; i += 1) { const x = view.x + rr() * view.w, y = view.y + rr() * view.h; ctx.moveTo(x, y); ctx.lineTo(x - 2, y + 9); }
+        const secs = t / 1000;
+        for (let i = 0; i < RAIN.length; i += 1) {
+          const d = RAIN[i];
+          // Down fast, drifting left a little — the same slant the streak is drawn at.
+          const y = view.y + (((d.v + secs * d.sp * 1.35) % 1) * view.h);
+          const x = view.x + ((((d.u - secs * d.sp * 0.3) % 1) + 1) % 1) * view.w;
+          ctx.moveTo(x, y); ctx.lineTo(x - 2, y + 9);
+        }
         ctx.stroke();
       }
       if (atmo.weather === 'fog') { ctx.fillStyle = 'rgba(232,237,242,0.18)'; ctx.fillRect(view.x, view.y, view.w, view.h); }

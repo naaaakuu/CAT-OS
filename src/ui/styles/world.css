@@ -513,8 +513,22 @@
 .run__bar { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0; color: #fff; }
 .run__leave { background: rgba(255, 255, 255, 0.14); color: #fff; }
 .run__place { color: rgba(255, 255, 255, 0.62); }
+.run__count { color: rgba(255, 255, 255, 0.72); }
 .run__what { color: #fff; }
 .run__clock { color: #fff; }
+
+/* Safety net. .run paints a night here, so anything that inherits ink from
+   game.css is near-black on navy. The bar above is handled line by line; the
+   passage is not, because it normally sits on the Reading Room's lit stage.
+   If that stage cannot mount — storage error, a cold offline first paint —
+   the prose must still be readable rather than 1.14:1. Scoped to
+   cat-passage, which only ever renders inside a reading screen, so the
+   world's own rounds (cards on glass) are untouched. */
+:root:not([data-stage]) .run cat-passage { color: var(--g-paper); }
+:root:not([data-stage]) .run cat-passage .p-num,
+:root:not([data-stage]) .run cat-passage .p-fin { color: rgba(246, 239, 225, 0.62); }
+:root:not([data-stage]) .run cat-passage .p-fin::before,
+:root:not([data-stage]) .run cat-passage .p-fin::after { background: rgba(246, 239, 225, 0.24); }
 .run__ring { background: conic-gradient(var(--g-gold) var(--p, 0%), rgba(255, 255, 255, 0.18) 0); }
 .run__ring::after { background: #131C3A; }
 .run__ring.is-over { background: conic-gradient(var(--c-ember) var(--p, 100%), rgba(255, 255, 255, 0.18) 0); }
@@ -727,9 +741,21 @@
 /* The Reading Room's own run frame already paints a night; let the stage
    show through it instead. */
 :root[data-stage="reading-room"] .run { background: transparent; }
+/* …but a CAT passage is five timed minutes of close reading, and the other
+   rooms hold their words in cards while this one lays prose straight onto
+   the stage. At the shared veil the room reads as an illustration BEHIND the
+   sentences — a house, a face and a fence competing with the argument. Here
+   the place stays a warm suggestion at the edges and the column stays paper. */
+:root[data-stage="reading-room"] .roomstage__veil {
+  background: linear-gradient(to bottom,
+    rgba(246, 239, 225, 0.86),
+    rgba(246, 239, 225, 0.93) 30%,
+    rgba(246, 239, 225, 0.96));
+}
 :root[data-stage="reading-room"] .run__bar { color: var(--g-ink); }
 :root[data-stage="reading-room"] .run__leave { background: var(--g-paper-3); color: var(--g-ink-2); }
 :root[data-stage="reading-room"] .run__place { color: var(--g-ink-3); }
+:root[data-stage="reading-room"] .run__count { color: var(--g-ink-2); }
 :root[data-stage="reading-room"] .run__what, :root[data-stage="reading-room"] .run__clock { color: var(--g-ink); }
 :root[data-stage="reading-room"] .run__ring { background: conic-gradient(var(--g-accent) var(--p, 0%), var(--g-paper-3) 0); }
 :root[data-stage="reading-room"] .run__ring::after { background: var(--g-paper); }

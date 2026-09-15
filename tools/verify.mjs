@@ -2351,6 +2351,17 @@ console.log('\n21. Corpus QC (tools/qc-corpus.mjs — hard checks)');
   if (!errors.length) ok(`corpus clean: ${stats.counts.rc} passages / ${stats.questions.rc} questions · ${stats.counts.pj} PJ · ${stats.counts.ps} PS · ${stats.counts.ooo} OOO · ${stats.counts.sp} SP · ${stats.counts.pc} PC · ${stats.questions.wb ?? 0} word-bank items · ${stats.questions.cr ?? 0} arguments · ${stats.distinct_patterns} patterns · ${stats.distinct_traps} trap types in use · ${warnings.length} soft warning(s)`);
 }
 
+
+console.log('\n22. Colour contrast (tools/check-contrast.mjs — WCAG AA)');
+{
+  // The palette is the one thing no screenshot review catches: a caption
+  // colour that fails AA fails it everywhere at once, on the smallest type.
+  const { checkContrast } = await mod('tools/check-contrast.mjs');
+  const { failures, lines } = checkContrast();
+  for (const f of failures) bad(`contrast: ${f}`);
+  if (!failures.length) ok(`${lines.length} ink/surface pairings clear WCAG AA in light, dark and the village`);
+}
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');

@@ -50,11 +50,19 @@
 .vbtn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px 18px; border-radius: 14px; border: 2px solid rgba(60, 40, 20, 0.35);
-  background: linear-gradient(180deg, #7FC27C, #5FA36B); color: #FFFFFF;
+  background: linear-gradient(180deg, #7FC27C, #5FA36B);
+  /* Deep green ink, not white. This is the button that takes the learner INTO
+     learning — the go-and-read CTA, "The order board", "Orders" — and white on
+     this gradient is 2.12:1 at the top stop, the worst contrast in the app on
+     its most important control. Darkening the fill enough for white would cost
+     the Hay Day brightness the village is built on, so the label takes the
+     dark-ink treatment .vbtn--gold already uses: 6.75:1 and 4.72:1 across the
+     two stops, with the fill untouched. */
+  color: #14301B;
   font: 800 15px/1 var(--v-ui); letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;
   box-shadow: 0 5px 0 #3E7A48, 0 8px 16px rgba(30, 40, 20, 0.25), inset 0 2px 0 rgba(255,255,255,0.35);
   cursor: pointer; min-height: 0; transition: transform 90ms ease, box-shadow 90ms ease;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  text-shadow: none;
 }
 .vbtn:active { transform: translateY(4px); box-shadow: 0 1px 0 #3E7A48, 0 3px 8px rgba(30, 40, 20, 0.25), inset 0 2px 0 rgba(255,255,255,0.35); }
 .vbtn--gold { background: linear-gradient(180deg, #FFE07A, #F3C447); color: #4A3A10; box-shadow: 0 5px 0 #B88A12, 0 8px 16px rgba(30, 40, 20, 0.25), inset 0 2px 0 rgba(255,255,255,0.5); text-shadow: none; }
@@ -363,8 +371,21 @@
 @keyframes vspark { 0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; } 100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0); opacity: 0; } }
 
 /* ---------- The opening ---------- */
-.vintro { position: absolute; inset: 0; z-index: 8; background: #0A1230; display: grid; place-items: center; transition: background 2400ms var(--g-ease), opacity 1400ms var(--g-ease); pointer-events: none; }
-.vintro__mark { font-family: var(--v-display); font-size: 42px; letter-spacing: 0.2em; color: rgba(255,255,255,0.95); text-align: center; opacity: 0; transform: translateY(8px); transition: opacity 1100ms var(--g-ease), transform 1100ms var(--g-ease); text-shadow: 0 2px 18px rgba(0,0,0,0.5); }
+/* The arrival. This used to be opaque navy, which hid the village for the
+   ~2s the wordmark holds — the product's strongest asset, covered up at the
+   one moment a new learner is deciding what this is. The renderer has the
+   whole valley painted by the first frames, so the mark now sits on a scrim
+   and the wide establishing shot plays underneath it. Flat rgba, not a
+   gradient: .is-lift transitions this to rgba(10,18,48,0), and a gradient
+   would snap instead of fading. */
+.vintro { position: absolute; inset: 0; z-index: 8; background: rgba(10, 18, 48, 0.58); display: grid; place-items: center; transition: background 2400ms var(--g-ease), opacity 1400ms var(--g-ease); pointer-events: none; }
+/* Solid white over a real shadow: the mark now sits on a translucent scrim
+   with the valley behind it, so it has to hold its own against bright grass.
+   It fades in over 600ms rather than 1100ms — the lift begins 1900ms after
+   it starts, and at the old duration the letters were still climbing through
+   ~0.8 when they were asked to leave, which read as washed out rather than
+   composed. */
+.vintro__mark { font-family: var(--v-display); font-size: 42px; letter-spacing: 0.2em; color: #FFFFFF; text-align: center; opacity: 0; transform: translateY(8px); transition: opacity 600ms var(--g-ease), transform 900ms var(--g-ease); text-shadow: 0 1px 3px rgba(4, 10, 28, 0.62), 0 6px 28px rgba(4, 10, 28, 0.72); }
 .vintro__mark small { display: block; font-family: var(--v-ui); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; margin-top: 8px; opacity: 0.8; }
 .vintro.is-mark .vintro__mark { opacity: 1; transform: none; }
 .vintro.is-lift { background: rgba(10, 18, 48, 0); opacity: 0; }

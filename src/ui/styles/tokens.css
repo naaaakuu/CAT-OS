@@ -26,7 +26,14 @@
   /* Ink — three deliberate levels of hierarchy */
   --color-ink:        #1C1D1F;   /* primary text */
   --color-ink-2:      #5D6167;   /* secondary text */
-  --color-ink-3:      #8A8E94;   /* captions, hints, disabled text */
+  /* Captions, hints, eyebrows, difficulty labels, "3 questions · 6 min".
+     This is always paired with the two SMALLEST sizes in the ramp, which is
+     exactly where AA's 4.5:1 is mandatory — and at the old #8A8E94 it failed
+     on every surface in the system (3.05:1 on the desk, 2.59:1 in a deep
+     well). Darkened to clear 4.5:1 against bg, surface, surface-2 AND
+     surface-3, keeping the original cool-grey hue. tools/check-contrast.mjs
+     holds the line; verify.mjs §22 runs it. */
+  --color-ink-3:      #63666B;   /* captions, hints, disabled text */
 
   /* Lines */
   --color-line:        #E6E4DE;  /* hairline borders */
@@ -330,7 +337,7 @@
     --color-surface-3:  #2D3035;
     --color-ink:        #E9E7E2;
     --color-ink-2:      #A4A7AC;
-    --color-ink-3:      #7B7F85;
+    --color-ink-3:      #93989F;
     --color-line:        #2C2E32;
     --color-line-strong: #3A3D42;
     --color-accent:        #74AC98;
@@ -377,7 +384,7 @@
   --color-surface-3:  #2D3035;
   --color-ink:        #E9E7E2;
   --color-ink-2:      #A4A7AC;
-  --color-ink-3:      #7B7F85;
+  --color-ink-3:      #93989F;
   --color-line:        #2C2E32;
   --color-line-strong: #3A3D42;
   --color-accent:        #74AC98;

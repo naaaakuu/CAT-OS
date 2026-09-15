@@ -13,13 +13,17 @@
  * }
  *
  * Version history: v1 = settings/attempts/sessions; v2 (app 0.6.0) adds
- * the learning store (reflections). v1 files import cleanly — the store
- * loop simply finds no "learning" key and writes nothing there.
+ * the learning store (reflections, and since 1.0 the whole world). A v1
+ * file still imports: it simply does not mention "learning", and a store
+ * the file does not mention is left exactly as it was.
  *
  * Import modes (never silently overwrite — blueprint edge case):
  * - "merge":   incoming records are put() over existing ones by id;
  *              records only on this device are kept.
- * - "replace": every store is cleared first, then filled from the file.
+ * - "replace": each store the file DECLARES is cleared, then filled from
+ *              the file. Stores it does not declare are untouched — the
+ *              alternative is deleting records the backup cannot restore.
+ *              The whole payload is validated before anything is cleared.
  */
 
 import { STORES } from './storage-adapter.js';
@@ -70,15 +74,36 @@ export async function importAll(storage, backup, mode) {
     throw new Error(`Unknown import mode "${mode}".`);
   }
 
-  let written = 0;
+  /* Read and validate the ENTIRE payload before clearing anything. The old
+     loop cleared each store and then wrote whatever the file happened to hold
+     for it, with `?? []` standing in for a missing section — so importing a v1
+     backup in "replace" mode cleared `learning` and refilled it with nothing.
+     That store is where the whole world lives (world/state.js derives the
+     village, the ledger, every garden and lexicon record from it), so the one
+     feature named "you own your data" was the fastest way to lose all of it.
+
+     Two rules now. A store the file does not DECLARE is not this backup's to
+     replace, so it is left untouched; a store it declares but mis-types is a
+     damaged file and nothing is written at all. */
+  const declared = new Map();
   for (const name of Object.values(STORES)) {
-    const records = backup.stores?.[name] ?? [];
+    if (!Object.hasOwn(backup.stores ?? {}, name)) continue;
+    const records = backup.stores[name];
+    if (!Array.isArray(records)) {
+      throw new Error(`This backup is damaged: its "${name}" section is not a list.`);
+    }
+    declared.set(name, records.filter((r) => r && r.id !== undefined));
+  }
+  if (declared.size === 0) {
+    throw new Error('This backup holds no recognisable data.');
+  }
+
+  let written = 0;
+  for (const [name, records] of declared) {
     if (mode === 'replace') await storage.clear(name);
     for (const record of records) {
-      if (record && record.id !== undefined) {
-        await storage.put(name, record);
-        written += 1;
-      }
+      await storage.put(name, record);
+      written += 1;
     }
   }
   return written;
