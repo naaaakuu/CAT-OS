@@ -7,6 +7,7 @@
  */
 
 import { VillageRenderer as WorldRenderer } from '../../village/renderer.js';
+import { paintedAtmo } from '../stage.js';
 import { buildBackdropScene } from '../../village/scene.js';
 
 /**
@@ -21,7 +22,7 @@ export function mountBackdrop(canvas, slug, state, atmo, opts = {}) {
   if (!canvas) return { destroy() {}, renderer: null };
   let renderer = null;
   try {
-    const scene = buildBackdropScene(slug, state, atmo);
+    const scene = buildBackdropScene(slug, state, paintedAtmo(atmo));
     renderer = new WorldRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.4, maxZoom: 8 });
     renderer.lookAt(scene.W / 2, scene.focusY ?? scene.H * 0.55, { animate: false });
     if (opts.still === false) renderer.start(); else renderer.draw();

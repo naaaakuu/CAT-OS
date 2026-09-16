@@ -41,6 +41,17 @@ function solvedSet(sessions, type) {
 }
 
 /** Resolve what to practise: a tier, a bundle, one item, a kind, a band, or `next`. */
+/* WHAT pickSet JUST HAD TO DO TO FILL THE SET.
+   Ordering resting items last is only half the rule: where a tier holds one
+   item — paragraph completion's foundation tier holds exactly one — last is
+   also first, and a learner who missed it a minute ago was handed the
+   identical paragraph with the identical four options. */
+const restReport = (total) => ({
+  total,
+  resting: pickSet.lastResting ?? 0,
+  returnAt: pickSet.lastReturnAt ?? null,
+});
+
 async function resolveSet(type, setParam, storage) {
   /* Say what this set actually is. A bank the learner has finished still
      opens — a timed re-run of something you know is a real exercise — but it
@@ -76,7 +87,7 @@ async function resolveSet(type, setParam, storage) {
     const files = await loadBankFiles(type, chosen.map((r) => r.id));
     const items = chosen.map((r) => files.get(r.id)).filter(Boolean).map((f) => normalizeBankItem(type, f));
     if (!items.length) throw new Error('Those items could not be loaded.');
-    return { setId: `${type}-set:${tier}`, items, region: bank.region, label: setLabel(tier.replace('-', ' ')) };
+    return { setId: `${type}-set:${tier}`, items, region: bank.region, label: setLabel(tier.replace('-', ' ')), rest: restReport(items.length) };
   }
 
   let bundles;
@@ -93,7 +104,7 @@ async function resolveSet(type, setParam, storage) {
   const all = file.items.map((it) => normalizeBankItem(type, file, it.id));
   const items = pickSet(all, sessions, type, bank.setSize, rested);
   const region = type === 'wb' ? (WB_KIND_REGION[file.meta.kind] ?? 'meadow') : bank.region;
-  return { setId: `${type}-set:${pick.id}`, items, region, label: setLabel(file.meta.title), bundle: file.meta };
+  return { setId: `${type}-set:${pick.id}`, items, region, label: setLabel(file.meta.title), bundle: file.meta, rest: restReport(items.length) };
 }
 
 /* ---------------- What is shown above the question ---------------- */
@@ -156,6 +167,18 @@ function bodyHTML(it, revealed = false) {
 
 /* ---------------- The screen ---------------- */
 
+/** "Back in about two hours", in the mentor's register: never a countdown. */
+function whenBack(at) {
+  if (!at) return 'Give it a little while.';
+  const mins = Math.max(1, Math.round((at - Date.now()) / 60000));
+  if (mins <= 1) return 'Back in a moment.';
+  if (mins < 60) return `Back in about ${mins} minutes.`;
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `Back in about ${hours} ${hours === 1 ? 'hour' : 'hours'}.`;
+  const days = Math.round(hours / 24);
+  return `Back ${days === 1 ? 'tomorrow' : `in about ${days} days`}.`;
+}
+
 export async function renderBankSession(outlet, { storage }, params) {
   let resolved;
   try {
@@ -172,6 +195,25 @@ export async function renderBankSession(outlet, { storage }, params) {
   const type = params.type;
   const bank = BANKS[type];
   const back = `#/world/place/${resolved.region}`;
+
+  /* Everything here has just been seen, and re-asking a fresh miss teaches
+     the look of the item rather than the method behind it. Saying so is a
+     better answer than serving it, and a better answer than an error. */
+  if (resolved.rest && resolved.rest.total > 0 && resolved.rest.resting >= resolved.rest.total) {
+    const back2 = `#/world/place/${resolved.region}`;
+    outlet.innerHTML = `
+      <section class="screen">
+        <div class="session-bar"><a href="${back2}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The valley')}</a></div>
+        <h1>These are resting</h1>
+        <div class="card">
+          <p>You have just seen ${resolved.rest.total === 1 ? 'the one item here' : `all ${resolved.rest.total} of these`}. Coming straight back to ${resolved.rest.total === 1 ? 'it' : 'them'} teaches the shape of the question rather than the way through it.</p>
+          <p class="muted">${escapeHTML(whenBack(resolved.rest.returnAt))}</p>
+          <p><a class="btn btn--primary" href="${back2}">Something else at ${escapeHTML(REGION_NAME[resolved.region] ?? 'the valley')}</a></p>
+          <p class="muted"><a href="#/world">Back to the village</a></p>
+        </div>
+      </section>`;
+    return;
+  }
   const session = new BankSession(resolved.items, { module: type, setId: resolved.setId, region: resolved.region });
   // A set abandoned halfway used to record nothing at all. It carries on now,
   // silently — a bank set has no first screen to offer a choice on, so the

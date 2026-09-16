@@ -57,9 +57,19 @@
   --g-track: rgba(60, 46, 24, 0.16);
   /* The plate a drawn thing stands on (Growth's trees, place tiles): sky
      over ground, so a seedling never floats in empty space. */
-  --g-plate: linear-gradient(#EFE7D5 0%, #E5DECA 66%, #CFD9B4 66%, #C2CFA2 100%);
+  --g-plate: linear-gradient(var(--wk-sky-1) 0%, var(--wk-sky-2) 66%, var(--wk-grass-1) 66%, var(--wk-grass-2) 100%);
   --g-edge: rgba(60, 46, 24, 0.1);
   --g-edge-2: rgba(60, 46, 24, 0.14);
+  /* THE LITTLE DIORAMAS. The "What Stands" tiles and the sheets beside
+     them paint a scene — sky over grass, behind a building — and in dark
+     they stayed at full noon while their card went to near-black: six
+     bright rectangles on a dark panel. The village's rule has always been
+     that dark IS night rather than an inversion, so the plate keeps its
+     scene and loses the sun. Four rules shared this gradient by copy; they
+     share it by name now. */
+  --wk-sky-1: #EFE7D5; --wk-sky-2: #E3DCC6; --wk-grass-1: #CFD9B4; --wk-grass-2: #C4D0A6;
+  --wk-ready-1: #FBF0D6; --wk-ready-2: #F3E4BE; --wk-ready-3: #D8DCAE; --wk-ready-4: #CBD49F;
+  --wk-built-1: #EDF2E2; --wk-built-2: #DFE8CC; --wk-built-3: #C6D6A8; --wk-built-4: #B9CC98;
   --g-plate-edge: var(--g-edge);
 
   /* ---- Moved here from game.css (2.1.2): one owner for every colour. ---- */
@@ -101,6 +111,9 @@
     --g-plate: linear-gradient(#232735 0%, #1E2230 66%, #253024 66%, #1F2A1E 100%);
     --g-edge: rgba(240, 234, 220, 0.11);
     --g-edge-2: rgba(240, 234, 220, 0.16);
+    --wk-sky-1: #2A2F42; --wk-sky-2: #232838; --wk-grass-1: #253026; --wk-grass-2: #1F2A21;
+    --wk-ready-1: #3A3423; --wk-ready-2: #2F2A1D; --wk-ready-3: #2A3226; --wk-ready-4: #232B20;
+    --wk-built-1: #253327; --wk-built-2: #1F2C22; --wk-built-3: #23331F; --wk-built-4: #1C2A1A;
     --g-plate-edge: var(--g-edge);
     --g-accent: #74B894;
     --g-accent-2: #8ACBA8;
@@ -135,6 +148,9 @@
   --g-plate: linear-gradient(#232735 0%, #1E2230 66%, #253024 66%, #1F2A1E 100%);
   --g-edge: rgba(240, 234, 220, 0.11);
   --g-edge-2: rgba(240, 234, 220, 0.16);
+  --wk-sky-1: #2A2F42; --wk-sky-2: #232838; --wk-grass-1: #253026; --wk-grass-2: #1F2A21;
+  --wk-ready-1: #3A3423; --wk-ready-2: #2F2A1D; --wk-ready-3: #2A3226; --wk-ready-4: #232B20;
+  --wk-built-1: #253327; --wk-built-2: #1F2C22; --wk-built-3: #23331F; --wk-built-4: #1C2A1A;
   --g-plate-edge: var(--g-edge);
   --g-accent: #74B894;
   --g-accent-2: #8ACBA8;
@@ -491,7 +507,7 @@
 .wk__plate {
   width: 100%; height: 66px; border-radius: 12px; position: relative;
   display: grid; place-items: end center; padding-bottom: 4px;
-  background: linear-gradient(#EFE7D5 0%, #E3DCC6 62%, #CFD9B4 62%, #C4D0A6 100%);
+  background: linear-gradient(var(--wk-sky-1) 0%, var(--wk-sky-2) 62%, var(--wk-grass-1) 62%, var(--wk-grass-2) 100%);
   box-shadow: inset 0 0 0 1px var(--g-edge);
   overflow: hidden;
 }
@@ -508,13 +524,13 @@
 .wk.is-ready { border-color: var(--g-gold); box-shadow: 0 0 0 3px rgba(223, 162, 44, 0.2); }
 .wk.is-ready .wk__flag { color: #8A5E05; }
 .wk.is-ready .wk__bar i { background: var(--g-gold); }
-.wk.is-ready .wk__plate { background: linear-gradient(#FBF0D6 0%, #F3E4BE 62%, #D8DCAE 62%, #CBD49F 100%); }
+.wk.is-ready .wk__plate { background: linear-gradient(var(--wk-ready-1) 0%, var(--wk-ready-2) 62%, var(--wk-ready-3) 62%, var(--wk-ready-4) 100%); }
 .wk.is-waiting .wk__bar i { background: var(--c-amber); }
 .wk.is-locked .wk__plate .ico--art,
 .wk.is-blocked .wk__plate .ico--art { filter: grayscale(0.85) opacity(0.42); }
 .wk.is-blocked { opacity: 0.7; }
 .wk.is-built .wk__flag { color: var(--g-accent); }
-.wk.is-built .wk__plate { background: linear-gradient(#EDF2E2 0%, #DFE8CC 62%, #C6D6A8 62%, #B9CC98 100%); }
+.wk.is-built .wk__plate { background: linear-gradient(var(--wk-built-1) 0%, var(--wk-built-2) 62%, var(--wk-built-3) 62%, var(--wk-built-4) 100%); }
 
 /* The detail sheet: everything the card deliberately did not say. */
 .wksheet { position: fixed; inset: 0; z-index: 42; }
@@ -538,7 +554,7 @@
 .wksheet__plate {
   height: 132px; border-radius: 16px; margin: 4px 0 14px;
   display: grid; place-items: end center; padding-bottom: 10px;
-  background: linear-gradient(#EFE7D5 0%, #E3DCC6 58%, #CFD9B4 58%, #C4D0A6 100%);
+  background: linear-gradient(var(--wk-sky-1) 0%, var(--wk-sky-2) 58%, var(--wk-grass-1) 58%, var(--wk-grass-2) 100%);
   box-shadow: inset 0 0 0 1px var(--g-edge);
   overflow: hidden;
 }
@@ -1313,7 +1329,7 @@
 .paycard__plate {
   width: 100%; height: 54px; border-radius: 10px; overflow: hidden;
   display: grid; place-items: end center; padding-bottom: 3px;
-  background: linear-gradient(#EFE7D5 0%, #E3DCC6 62%, #CFD9B4 62%, #C4D0A6 100%);
+  background: linear-gradient(var(--wk-sky-1) 0%, var(--wk-sky-2) 62%, var(--wk-grass-1) 62%, var(--wk-grass-2) 100%);
   box-shadow: inset 0 0 0 1px var(--g-edge);
 }
 .paycard__plate .ico--art { image-rendering: pixelated; display: block; max-height: 50px; width: auto; }
@@ -1503,7 +1519,7 @@
 .seedling__plate {
   width: 100%; height: 72px; border-radius: 11px; overflow: hidden;
   display: grid; place-items: end center;
-  background: linear-gradient(#EFE7D5 0%, #E5DECA 62%, #CFD9B4 62%, #C2CFA2 100%);
+  background: linear-gradient(var(--wk-sky-1) 0%, var(--wk-sky-2) 62%, var(--wk-grass-1) 62%, var(--wk-grass-2) 100%);
   box-shadow: inset 0 0 0 1px var(--g-edge);
 }
 .seedling__tree { width: 60px; height: 75px; display: block; }
@@ -1732,3 +1748,22 @@
 }
 .result__habit p:last-child { margin: 0; font-size: 14px; line-height: 1.5; }
 .reach__nextseen { margin: 6px 0 0; font-size: 12.5px; color: var(--g-ink-3); }
+
+/* THE IMPORT SHEET.
+   Importing a backup is the one irreversible thing a learner can do in CAT
+   OS, and it used to be a raw browser confirm() whose CANCEL performed a
+   merge. It borrows the app menu's sheet so it looks like the product
+   rather than like the browser, and says what is in the file first. */
+.importsheet__what {
+  list-style: none; margin: 0 0 12px; padding: 10px 14px;
+  background: var(--g-paper-2); border: 1px solid var(--g-line); border-radius: 12px;
+  display: grid; gap: 4px; font-size: 13.5px; color: var(--g-ink-2);
+}
+.importsheet__what b { color: var(--g-ink); font-variant-numeric: tabular-nums; }
+.importsheet__warn {
+  margin: 0 0 12px; padding: 10px 14px; border-radius: 12px;
+  background: var(--g-paper-3); border: 1px solid var(--g-edge);
+  font-size: 13.5px; line-height: 1.5; color: var(--g-ink);
+}
+.importsheet__acts { display: grid; gap: 8px; }
+.importsheet__acts .btn { width: 100%; min-height: 44px; }

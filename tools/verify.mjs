@@ -759,7 +759,7 @@ console.log('\n8. Backup round trip (learning store, 0.6.0)');
     bad('backup: export must include the learning store');
   }
   const b = makeMock();
-  const written = await importAll(b, file, 'merge');
+  const { written } = await importAll(b, file, 'merge');
   if (written !== 2) bad(`backup: expected 2 records imported, got ${written}`);
   const back = await b.getAll(STORES.LEARNING);
   if (back.length !== 1 || back[0].text !== 'check the checkers') {
@@ -769,7 +769,7 @@ console.log('\n8. Backup round trip (learning store, 0.6.0)');
   const v1 = { format: 'cat-os-backup', version: 1, exported_at: new Date().toISOString(),
     stores: { settings: [{ id: 'theme', value: 'light' }], attempts: [], sessions: [] } };
   try {
-    const w1 = await importAll(makeMock(), v1, 'replace');
+    const { written: w1 } = await importAll(makeMock(), v1, 'replace');
     if (w1 !== 1) bad(`backup: v1 import expected 1 record, got ${w1}`);
   } catch (e) {
     bad(`backup: v1 backup no longer imports — ${e.message}`);

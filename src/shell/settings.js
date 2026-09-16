@@ -15,7 +15,8 @@ import { STORES } from '../core/storage/storage-adapter.js';
 // Settings was the only screen breaking the law icons.js states in its
 // own first paragraph: nothing is an emoji, nothing is a glyph from a set.
 import { icon } from '../world/icons.js';
-import { downloadBackup, importAll } from '../core/storage/backup.js';
+import { downloadBackup, importAll, describeBackup } from '../core/storage/backup.js';
+import { openModal, closeModal } from '../ui/modal.js';
 import { toast } from '../ui/components/cat-toast.js';
 import { initFeedback, feedbackPrefs, setFeedbackPref, cue, motionReduced } from '../core/engagement/feedback.js';
 import { playSound } from '../core/engagement/audio.js';
@@ -36,13 +37,29 @@ async function saveReadingSize(storage, size) { await storage.put(STORES.SETTING
 /* The screen                                                          */
 /* ------------------------------------------------------------------ */
 
+/* A store is a technical word. What is in it is not. */
+const STORE_WORD = {
+  settings: 'settings', sessions: 'finished runs', attempts: 'answers',
+  learning: 'things the village remembers',
+};
+
+/* THE DESCRIPTION GETS A LINE OF ITS OWN.
+   The row was a flex with space-between, so the text column took whatever
+   the control left it — and the three-option controls (Auto/Full/Less,
+   S/M/L/XL, System/Light/Dark) left about a hundred and seventy pixels.
+   "The rooms follow your device, or not" wrapped to four lines for six
+   words with "not" alone on the last. The label and the control belong on
+   one line together, because that is the decision; the sentence explaining
+   it belongs underneath, across the whole width.
+
+   Settings has its own row rather than bending the shared .row, which the
+   mentor's "What you learned today" uses with a different structure. */
 const row = (mark, label, hint, control) => `
-  <div class="row">
-    <div class="row__lead">
-      <span class="row__icon" aria-hidden="true">${mark}</span>
-      <div><div class="row__label">${escapeHTML(label)}</div><div class="row__hint">${escapeHTML(hint)}</div></div>
-    </div>
-    ${control}
+  <div class="srow">
+    <span class="srow__icon row__icon" aria-hidden="true">${mark}</span>
+    <div class="srow__label row__label">${escapeHTML(label)}</div>
+    <div class="srow__control">${control}</div>
+    <p class="srow__hint row__hint">${escapeHTML(hint)}</p>
   </div>`;
 /* A screen reader read these three groups out as "music-picker",
    "sfx-picker" and "haptics-picker" — the element id, because that is what
@@ -178,8 +195,8 @@ export function renderSettings(outlet, { storage, version }) {
     const p = feedbackPrefs();
     for (const b of outlet.querySelectorAll('[data-music]')) b.setAttribute('aria-pressed', String((b.dataset.music === 'true') === p.music));
     for (const b of outlet.querySelectorAll('[data-sfx]')) b.setAttribute('aria-pressed', String((b.dataset.sfx === 'true') === p.sfx));
-    musicVol.value = String(Math.round(p.musicVolume * 100)); musicVol.disabled = !p.music; musicVol.closest('.row').style.opacity = p.music ? '' : 'var(--opacity-dim)';
-    sfxVol.value = String(Math.round(p.sfxVolume * 100)); sfxVol.disabled = !p.sfx; sfxVol.closest('.row').style.opacity = p.sfx ? '' : 'var(--opacity-dim)';
+    musicVol.value = String(Math.round(p.musicVolume * 100)); musicVol.disabled = !p.music; musicVol.closest('.srow').style.opacity = p.music ? '' : 'var(--opacity-dim)';
+    sfxVol.value = String(Math.round(p.sfxVolume * 100)); sfxVol.disabled = !p.sfx; sfxVol.closest('.srow').style.opacity = p.sfx ? '' : 'var(--opacity-dim)';
   };
   outlet.querySelector('#music-picker').addEventListener('click', async (e) => {
     const b = e.target.closest('[data-music]');
@@ -259,18 +276,96 @@ export function renderSettings(outlet, { storage, version }) {
     if (!file) return;
     let backup;
     try { backup = JSON.parse(await file.text()); } catch { toast('That file is not valid JSON.', 'error'); return; }
-    // Never silently overwrite: the user chooses.
-    const replace = confirm('Import backup.\n\nOK = replace everything on this device with the backup.\nCancel = merge the backup into what is already here.');
+
+    /* THE ONE IRREVERSIBLE THING IN THE PRODUCT.
+       It used to be a raw browser confirm() whose CANCEL performed a merge:
+       once a file was chosen there was no path that did nothing. Escape,
+       a tap outside, and the button labelled Cancel all wrote to the
+       learner's device. A dismiss affordance wired to a destructive write
+       is the one thing a dialog must never be.
+
+       So: the app's own sheet, defaulting to doing nothing, saying what is
+       in the file before either write — and saying it plainly when the
+       backup is a DIFFERENT valley, because merging two villages fuses
+       them, and nothing said so. */
+    const replace = await askHowToImport(backup);
+    if (replace === null) { toast('Nothing was changed.', 'info', { mute: true }); return; }
     try {
-      const written = await importAll(storage, backup, replace ? 'replace' : 'merge');
+      const { written, kept } = await importAll(storage, backup, replace ? 'replace' : 'merge');
       await initFeedback(storage);
       applyMotion();
-      cue('restore');
-      toast(`Backup imported — ${written} records`, 'info', { mute: true });
       applyTheme(await loadTheme(storage));
       applyReadingSize(await loadReadingSize(storage));
+      // The screen was showing the OLD values: every toggle, every slider and
+      // both pickers are painted from state read at render time, and an
+      // import replaces that state underneath them.
+      syncAudio(); syncFeel();
+      await syncReading(); await syncTheme();
+      cue('restore');
+      toast(kept.length
+        ? `Backup merged — ${written} records. Your village kept its own name.`
+        : `Backup imported — ${written} records`, 'info', { mute: true });
     } catch (err) {
       toast(err.message, 'error');
     }
   });
+
+  /**
+   * @returns {Promise<boolean|null>} true = replace, false = merge,
+   *   null = the learner backed out and nothing at all should be written.
+   */
+  async function askHowToImport(backup) {
+    const d = describeBackup(backup);
+    const here = await loadValleyName();
+    const theirs = d.valley?.name ?? null;
+    const different = !!(here && theirs && here !== theirs);
+    const when = d.exportedAt ? new Date(d.exportedAt).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }) : 'an unknown date';
+    const rows = Object.entries(d.counts).filter(([, n]) => n > 0)
+      .map(([name, n]) => `<li><b>${n}</b> ${escapeHTML(STORE_WORD[name] ?? name)}</li>`).join('');
+
+    return new Promise((resolve) => {
+      const el = document.createElement('div');
+      el.className = 'gmenu is-in';
+      el.innerHTML = `
+        <div class="gmenu__scrim" data-close></div>
+        <nav class="gmenu__card" role="dialog">
+          <div class="gmenu__head">
+            <div>
+              <p class="gmenu__eyebrow">From ${escapeHTML(when)}</p>
+              <h2 class="gmenu__name">${escapeHTML(theirs ? `${theirs}'s backup` : 'A backup')}</h2>
+            </div>
+            <button class="gmenu__close" data-close aria-label="Close">×</button>
+          </div>
+          <ul class="importsheet__what">${rows || '<li>Nothing recognisable</li>'}</ul>
+          ${different ? `<p class="importsheet__warn"><b>This is a different valley.</b> Yours is ${escapeHTML(here)}; the backup is ${escapeHTML(theirs)}. Adding it puts two villages in one place. Your village keeps its own name either way.</p>` : ''}
+          <div class="importsheet__acts">
+            <button class="btn btn--primary" data-do="merge">Add it to this device</button>
+            <button class="btn btn--danger" data-do="replace">Replace everything here</button>
+            <button class="btn btn--quiet" data-close>Do nothing</button>
+          </div>
+        </nav>`;
+      document.body.appendChild(el);
+      const card = el.querySelector('.gmenu__card');
+      let done = false;
+      const finish = (v) => {
+        if (done) return;
+        done = true;
+        closeModal(card);
+        el.remove();
+        resolve(v);
+      };
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) { finish(null); return; }
+        const act = e.target.closest('[data-do]');
+        if (act) finish(act.dataset.do === 'replace');
+      });
+      // Escape, a tap outside, and the quiet button all mean the same thing,
+      // and that thing is nothing.
+      openModal(card, () => finish(null), { label: 'Import a backup' });
+    });
+  }
+
+  async function loadValleyName() {
+    try { const r = await storage.get(STORES.SETTINGS, 'valley'); return r?.value?.name ?? null; } catch { return null; }
+  }
 }

@@ -4,6 +4,81 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 2.1.4 — The screens no gate could see, and the one irreversible thing (2026-09-16)
+
+The audit's adversarial pass returned its verified set after 2.1.3 was
+tagged: 73 findings confirmed, 134 rejected. One critical, ten major. These
+are the ones that survived verification and had not already been taken.
+
+### Two screens nothing could see
+
+Both for the same structural reason: §24 opens ROUTES, and neither of these
+is a route.
+
+- **The Gauntlet's question rendered at 1.14:1, in BOTH themes.**
+  `round.js` wraps its question in `<div class="vround">`, whose
+  `background: var(--g-panel)` is the cream card every round in the product
+  reads on; `wilds.js` wrote the same four classes straight into
+  `.run__body` with no wrapper, so the text inherited `--g-ink` onto
+  `.run`'s permanent night ground. The four answer buttons carry their own
+  cream background and read perfectly — a learner saw four legible options
+  above a blank space, with a three-minute clock running over thirty
+  questions. **1.14:1 → 15.36:1.**
+- **"Re-read the passage" was 2px tall at y=-127.** `justify-content: center`
+  on an overflowing scroll container pushes the overflow out of BOTH ends,
+  and the top end of a scroll container cannot be scrolled back to. From the
+  first question onward, on every phone-height screen, the learner could not
+  re-read the passage they were being questioned on. The centring the design
+  wants was already written per-child as `margin: auto 0`.
+
+**The gate learned to open doors.** A route may now carry an `enter` list —
+in-page steps run after it loads, each a CSS selector or a fragment of the
+control's own words. Three states joined the sweep: the Gauntlet question,
+the RC question, and the RC question after an answer. A step that finds
+nothing is REPORTED, never skipped. It found "Lock it in" — the most-pressed
+button in the product — at 4.27:1 in dark while disabled.
+
+### The one irreversible thing in the product
+
+Importing a backup was a raw browser `confirm()` **whose Cancel performed a
+merge**. Once a file was chosen there was no path that did nothing: Escape, a
+tap outside, and the button labelled Cancel all wrote to the device. A
+dismiss affordance wired to a destructive write is the one thing a dialog
+must never be.
+
+- It is the app's own sheet now, defaulting to nothing, saying what is in the
+  file first — when it was exported, how many records of what kind.
+- **A merge no longer overwrites who this device is.** Importing a friend's
+  backup, or an old one of your own, silently renamed the village and
+  repointed its awakening: two unrelated villages fused with nothing said.
+  The sheet says plainly when the backup is a different valley, and the
+  village keeps its own name.
+- **The Settings screen told the truth afterwards.** Every toggle, slider and
+  picker is painted from state read at render time, and an import replaces
+  that state underneath them; the screen showed the pre-import values until
+  you navigated away and back.
+
+### The rest
+
+- **A resting item was re-served immediately.** Ordering resting items last
+  is only half the rule: where a tier holds one item — paragraph completion's
+  foundation tier holds exactly one — last is also first, and a learner who
+  missed it a minute ago was handed the identical paragraph with the
+  identical four options. The set declines now and says when it comes back.
+- **Six bright rectangles on a dark panel.** The "What Stands" tiles are
+  small dioramas — sky over grass, behind a painted building — and in dark
+  they stayed at full noon. Four rules shared that gradient by copy; they
+  share it by name now, and dark is the same place after sunset. The hero
+  canvases above them had the same fault from the other direction: the stage
+  behind the prose has honoured "dark mode is night" since it was written,
+  and the place heroes asked `state.atmo` instead.
+- **Settings' descriptions were starved by their controls.** The row was a
+  flex with space-between, so the three-option controls left about a hundred
+  and seventy pixels and "The rooms follow your device, or not" wrapped to
+  four lines with "not" alone on the last. The label and the control make one
+  line, because together they are the decision; the sentence explaining it
+  gets the full width underneath.
+
 ## 2.1.3 — Interruption everywhere, a skill that went quiet, the edge of the frame (2026-09-16)
 
 Three items from the 2.1.2 list, chosen because a daily learner meets them

@@ -19,6 +19,9 @@
  */
 
 import { elapsedMs } from './draft-shape.js';
+// review.js owns how long a missed item rests; a screen that declines to
+// re-serve one has to say WHEN it comes back, not merely that it has not.
+import { restFor } from '../learning/review.js';
 
 export const BANK_MARKS_CORRECT = 3;
 export const BANK_MARKS_WRONG = 0;
@@ -215,6 +218,8 @@ export function pickSet(pool, sessions, moduleKey, size, rested = () => true) {
   if (out.length >= Math.min(size, pool.length)) {
     pickSet.lastKind = fresh.length ? (fresh.length >= out.length ? 'new' : 'mixed') : 'review';
     pickSet.lastFresh = fresh.length;
+    pickSet.lastResting = 0;
+    pickSet.lastReturnAt = null;
     return out;
   }
   /* Everything is solved or resting, and a set still has to be filled.
@@ -240,5 +245,16 @@ export function pickSet(pool, sessions, moduleKey, size, rested = () => true) {
   const final = [...out, ...reviewable, ...resting].slice(0, size);
   pickSet.lastKind = fresh.length ? 'mixed' : (resting.length && !reviewable.length ? 'resting' : 'again');
   pickSet.lastFresh = fresh.length;
+  /* HOW MANY OF THESE THE LEARNER HAS NO BUSINESS SEEING YET.
+     Ordering resting items last is only half the rule. Where a tier holds
+     one item — paragraph completion's foundation tier holds exactly one —
+     "last" is also "first", and a learner who missed it sixty seconds ago
+     was handed the identical paragraph with the identical four options,
+     which teaches the look of that item rather than the method behind it.
+     The count and the soonest return let the screen say so instead. */
+  pickSet.lastResting = final.filter(stillResting).length;
+  pickSet.lastReturnAt = final.filter(stillResting)
+    .map((x) => Date.parse(missOf(x)?.at ?? 0) + restFor(missOf(x)?.n ?? 1))
+    .sort((a, b) => a - b)[0] ?? null;
   return final;
 }

@@ -58,6 +58,24 @@ export function stageIsNight() {
   try { return !!globalThis.matchMedia?.('(prefers-color-scheme: dark)')?.matches; } catch { return false; }
 }
 
+/**
+ * The hour to PAINT a valley at, given the hour it actually is.
+ *
+ * The stage behind the prose has honoured "dark mode is night" since it was
+ * written; the hero canvases at the top of every place screen did not, and
+ * asked state.atmo instead. In dark theme at one in the afternoon that put a
+ * fully lit noon meadow directly above a near-black panel, meeting it at a
+ * hard unlit seam — the same contradiction the veil was invented to avoid,
+ * forty pixels higher up the screen.
+ *
+ * @param {object} atmo the real one: { hour, season, weather }
+ */
+export function paintedAtmo(atmo) {
+  if (!stageIsNight()) return atmo;
+  if (atmo?.hour === 'night' || atmo?.hour === 'dusk') return atmo;
+  return { ...atmo, hour: 'night' };
+}
+
 function ensureLayer() {
   if (el?.isConnected) return el;
   el = document.createElement('div');

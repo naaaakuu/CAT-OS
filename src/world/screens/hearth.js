@@ -9,6 +9,7 @@
  */
 
 import { VillageRenderer } from '../../village/renderer.js';
+import { paintedAtmo } from '../stage.js';
 import { buildBackdropScene } from '../../village/scene.js';
 import { regionBySlug, REGIONS } from '../regions.js';
 import { loadWorld } from '../state.js';
@@ -51,7 +52,7 @@ export async function renderHearth(outlet, { storage }) {
   let renderer = null;
   const canvas = outlet.querySelector('#hero');
   if (canvas) {
-    const scene = buildBackdropScene('hearth', state, atmo);
+    const scene = buildBackdropScene('hearth', state, paintedAtmo(atmo));
     renderer = new VillageRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
     renderer.lookAt(scene.W / 2, 300, { animate: false });
     renderer.start();

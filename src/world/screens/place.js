@@ -13,6 +13,7 @@
  */
 
 import { buildGroveScene } from '../../village/grove.js';
+import { paintedAtmo } from '../stage.js';
 import { VillageRenderer } from '../../village/renderer.js';
 import { buildBackdropScene } from '../../village/scene.js';
 import { art } from '../../village/art.js';
@@ -188,7 +189,7 @@ export async function renderPlace(outlet, { storage }, params) {
     const fields = r.fields;
     const unit = region.slug === 'pond' ? 'twins' : 'words';
     const bloomPct = r.total ? r.mastered / r.total : 0;
-    mountHero(buildBackdropScene(region.slug, state, atmo));
+    mountHero(buildBackdropScene(region.slug, state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`★ ${r.stars}`);
 
     // The curator's round is the only action that matters here.
@@ -232,7 +233,7 @@ export async function renderPlace(outlet, { storage }, params) {
   /* ================= The Reading Room ================= */
   if (region.slug === 'reading-room') {
     const rd = state.reading;
-    mountHero(buildBackdropScene('reading-room', state, atmo));
+    mountHero(buildBackdropScene('reading-room', state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`★ ${rd.stars} / ${rd.maxStars}`);
     const weakness = readingWeakness(world.records.sessions);
     const rec = nextPassage(content, rd.best, weakness, `rc:${state.today}`);
@@ -290,7 +291,7 @@ export async function renderPlace(outlet, { storage }, params) {
   /* ================= The Vine Terraces (Word DNA) ================= */
   if (region.slug === 'terraces') {
     const t = state.terraces;
-    mountHero(buildBackdropScene('terraces', state, atmo));
+    mountHero(buildBackdropScene('terraces', state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`✦ ${t.done} / ${t.total}`);
     const wdSessions = world.records.sessions.filter((s) => s.module === 'wd');
     const done = new Set(); for (const s of wdSessions) for (const a of s.answers ?? []) if (a.is_correct === true) done.add(a.item_id ?? a.question_id);
@@ -309,7 +310,7 @@ export async function renderPlace(outlet, { storage }, params) {
   if (region.slug === 'loom' || region.slug === 'table' || region.slug === 'bench') {
     const v = state[region.slug];
     const kind = region.slug;
-    mountHero(buildBackdropScene(kind, state, atmo));
+    mountHero(buildBackdropScene(kind, state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`★ ${v.stars}`);
     const [tiers, items, prefix, unit] = kind === 'loom' ? [PJ_TIERS, content.pj, 'pj', 'jumbles']
       : kind === 'table' ? [PS_TIERS, content.ps, 'ps', 'summaries'] : [OOO_TIERS, content.ooo, 'ooo', 'sets'];

@@ -4461,3 +4461,26 @@ cat-option .body, cat-explanation .verdict + p, .reread__body { font-size: var(-
 
 /* A <summary> is a button that does not look like one, and was 42px tall. */
 summary { min-height: var(--tap-target); display: flex; align-items: center; }
+
+/* SETTINGS' OWN ROW. See the comment above `row` in shell/settings.js: the
+   label and the control make one line because together they are the
+   decision; the sentence that explains it gets the full width underneath,
+   where six words do not wrap to four lines. */
+.srow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--space-3);
+  row-gap: 2px;
+  padding: var(--space-3) 0;
+}
+.srow + .srow { border-top: 1px solid var(--color-line); }
+.srow__icon { grid-column: 1; grid-row: 1; }
+.srow__label { grid-column: 2; grid-row: 1; }
+.srow__control { grid-column: 3; grid-row: 1; justify-self: end; display: flex; align-items: center; }
+.srow__hint { grid-column: 2 / -1; grid-row: 2; margin: 0; }
+/* The slider takes what is left after the label has a whole line, not
+   before: "Music volume" wrapping to two words on two lines to make room
+   for a track nobody reads is the wrong trade. */
+.srow__control .range { width: min(140px, 36vw); }
+.srow__label { text-wrap: pretty; }

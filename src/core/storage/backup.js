@@ -61,7 +61,8 @@ export async function downloadBackup(storage) {
 /**
  * Import a parsed backup object.
  * @param {'merge'|'replace'} mode
- * @returns {number} how many records were written.
+ * @returns {{written: number, kept: string[]}} how many records were written,
+ *   and which identity records a merge declined to overwrite.
  */
 export async function importAll(storage, backup, mode) {
   if (!backup || backup.format !== FORMAT) {
@@ -98,13 +99,44 @@ export async function importAll(storage, backup, mode) {
     throw new Error('This backup holds no recognisable data.');
   }
 
+  /* WHO THIS DEVICE IS IS NOT THE BACKUP'S TO DECIDE.
+     A merge puts incoming records over existing ones by id, which is right
+     for a session and wrong for a valley: importing a friend's backup, or
+     an old one of your own, silently renamed the village and repointed its
+     awakening — two unrelated villages fused into one with nothing said.
+     Replace is a different promise and keeps its own: it is asked for, it
+     says what it will do, and it does all of it. */
+  const IDENTITY = new Set(['valley']);
   let written = 0;
+  const kept = [];
   for (const [name, records] of declared) {
     if (mode === 'replace') await storage.clear(name);
     for (const record of records) {
+      if (mode === 'merge' && name === STORES.SETTINGS && IDENTITY.has(record.id) && await storage.get(name, record.id)) {
+        kept.push(record.id);
+        continue;
+      }
       await storage.put(name, record);
       written += 1;
     }
   }
-  return written;
+  return { written, kept };
+}
+
+/**
+ * What is in a backup file, without writing any of it — so the learner can
+ * be told what they are about to do before they do it.
+ * @returns {{counts: object, total: number, exportedAt: string|null, valley: object|null}}
+ */
+export function describeBackup(backup) {
+  const counts = {};
+  let total = 0;
+  for (const name of Object.values(STORES)) {
+    const rows = backup?.stores?.[name];
+    if (!Array.isArray(rows)) continue;
+    counts[name] = rows.filter((r) => r && r.id !== undefined).length;
+    total += counts[name];
+  }
+  const valley = (backup?.stores?.[STORES.SETTINGS] ?? []).find((r) => r?.id === 'valley')?.value ?? null;
+  return { counts, total, exportedAt: backup?.exported_at ?? null, valley };
 }
