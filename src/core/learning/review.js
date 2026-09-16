@@ -221,7 +221,15 @@ function routeFor(where, state) {
  */
 export function passagesForSkill(items, key, best) {
   if (!key) return [];
-  return items.filter((i) => (i.skills_trained ?? i.question_types ?? []).includes(key))
+  /* 32 of the 115 passages predate skills_trained and carry question_types
+     instead — and four of the nine original type names are not skill keys,
+     so those passages were invisible to skill-aimed selection entirely. The
+     taxonomy already knows the mapping. */
+  const trains = (i) => {
+    if (i.skills_trained?.length) return i.skills_trained;
+    return (i.question_types ?? []).map((t) => RC_TYPE_SKILL[t] ?? t);
+  };
+  return items.filter((i) => trains(i).includes(key))
     .filter((i) => (best?.get(i.id)?.stars ?? 0) < 3);
 }
 

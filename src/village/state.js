@@ -201,9 +201,15 @@ export function deriveVillage(s, records, content, now = Date.now()) {
   for (const o of orders) perSlot.set(o.slot, (perSlot.get(o.slot) ?? 0) + 1);
   const openSlots = builtIds.has('market') ? slots : 1;
   v.orders = [];
+  /* A RUNNING PURSE, NOT THREE INDEPENDENT ONES.
+     Every order used to be scored against the whole barn on its own, so
+     three "Deliver" buttons could light up over a barn that could pay for
+     one of them — and the learner found that out by tapping the second. */
+  let purse = stock;
   for (let k = 0; k < openSlots; k += 1) {
     const o = orderFor(k, perSlot.get(k) ?? 0, { available, level: level.n, payMul, marketMul, givers });
-    const cov = orderCoverage(o, stock);
+    const cov = orderCoverage(o, purse);
+    if (cov.deliverable) purse = subBag(purse, o.needs);
     v.orders.push({ ...o, ...cov, anchor: 'board' });
   }
   v.deliverable = v.orders.filter((o) => o.deliverable);
@@ -233,7 +239,7 @@ export function deriveVillage(s, records, content, now = Date.now()) {
       maxed: built && !nextDef,
       effects: eff, helper, character,
       good: madeGood, raw: def.raw ? good(def.raw) : null,
-      queue: q ? { pending: q.pending, working: q.working, ready: q.ready, done: q.done, collected: q.collected, secs: q.secs, everMade: q.done > 0 } : null,
+      queue: q ? { pending: q.pending, waiting: q.waiting, working: q.working, ready: q.ready, done: q.done, collected: q.collected, secs: q.secs, everMade: q.done > 0 } : null,
       stock: def.good ? stock[def.good] : 0,
       wantedHere: def.good ? (v.wanted[def.good] ?? 0) : 0,
       state: !built ? 'unbuilt' : !q ? 'idle' : q.ready > 0 ? 'ready' : q.working ? 'working' : 'idle',
@@ -333,6 +339,11 @@ export function simulateQueue({ arrivals, helper, collects, secs, firstSecs, now
     if (finish[i] > now) { const dur = i === 0 ? firstSecs : Math.min(secs, finish[i] - (finish[i - 1] ?? finish[i] - secs)); working = { readyAt: finish[i], startedAt: finish[i] - dur, pct: Math.max(0, Math.min(1, 1 - (finish[i] - now) / dur)) }; break; }
   }
   const pending = finish.length - done;
+  /* The item on the bench is not waiting for the bench. The strip showed
+     "3 Pages" under the raw-good icon while one of those three was the one
+     turning in the ring beside it, so a learner counting what was left
+     always counted one too many, and the last one never seemed to start. */
+  const waiting = Math.max(0, pending - (working ? 1 : 0));
   let helperOut = null;
   if (helper?.since) {
     const uncollected = finish.length - collected;
@@ -341,7 +352,7 @@ export function simulateQueue({ arrivals, helper, collects, secs, firstSecs, now
     const nextIn = helper.every - (elapsed % helper.every);
     helperOut = { every: helper.every, cap: helper.cap, since: helper.since, made: helperMade, room, nextIn };
   }
-  return { pending, working, ready, done, collected, secs, helper: helperOut };
+  return { pending, waiting, working, ready, done, collected, secs, helper: helperOut };
 }
 
 /* ------------------------------------------------------------------ */

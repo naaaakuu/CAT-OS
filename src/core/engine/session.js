@@ -81,6 +81,39 @@ export class PracticeSession {
 
   answerFor(qid) { return this.#answers.get(qid) ?? null; }
 
+  /* WHERE THE LEARNER IS, WRITTEN DOWN.
+     A session used to persist nothing at all until the very last click:
+     seven questions answered, the eighth locked in, and a refresh — or a
+     phone backgrounding the tab long enough for the browser to discard it,
+     or a deploy landing mid-read — threw the whole thing away with no word.
+     The learner came back to a passage marked "not read yet", having read
+     it. These two are what core/learning/draft.js writes between answers. */
+  snapshot() {
+    return {
+      id: this.id,
+      passage_id: this.#passage.id,
+      index: this.#index,
+      started_at: this.#startedAt,
+      answers: [...this.#answers],
+    };
+  }
+
+  /** Put them back. Returns false if the draft belongs to another passage or
+   *  holds nothing worth restoring; unknown question ids are dropped, so an
+   *  edited passage can shorten a draft but never break one. */
+  restore(snap) {
+    if (!snap || snap.passage_id !== this.#passage.id) return false;
+    const known = new Set(this.#passage.questions.map((q) => q.id));
+    const answers = (snap.answers ?? []).filter((e) => Array.isArray(e) && known.has(e[0]));
+    if (!answers.length) return false;
+    this.#answers = new Map(answers);
+    this.#index = Math.min(Math.max(0, Number(snap.index) || 0), this.total - 1);
+    if (Number.isFinite(snap.started_at)) this.#startedAt = snap.started_at;
+    if (typeof snap.id === 'string' && snap.id) this.id = snap.id;
+    this.#questionShownAt = this.now();
+    return true;
+  }
+
   /** Finish and produce the persistable records. */
   finish() {
     const finishedAt = this.now();

@@ -214,10 +214,21 @@ function neighbour({ nb, spot, node, haunt, waiting, hour, index }) {
   const startRoute = (from, to) => { route = [from, ...approach(step, NODES[node]), ...routeBetween(node, to).slice(1)]; leg = 0; p = 0; };
   const goBoard = () => { route = [...approach([pos.x, pos.y], NODES[node]), ...routeBetween(node, 'board').slice(1)]; leg = 0; p = 0; mode = 'toBoard'; visible = true; };
   const goHome = (from) => { route = [[pos.x, pos.y], ...routeBetween(from, node).slice(1), ...approach(NODES[node], step).slice(1), door]; leg = 0; p = 0; };
-  if (waiting && !night) { goBoard(); leg = Math.max(0, route.length - 2); p = 0.999; }
+  /* Somebody whose order is ready comes to the board whatever the hour.
+     The board said "Mira is waiting for two Books", the learner tapped
+     Deliver, and the goods flew to an empty patch of grass and a cheer was
+     played on an invisible actor — because every neighbour was indoors. If
+     the village says somebody is there, somebody is there. */
+  if (waiting) { goBoard(); leg = Math.max(0, route.length - 2); p = 0.999; }
   else if (!night && r() > 0.45) { visible = true; mode = 'out'; startRoute(door, haunt); leg = Math.floor(r() * Math.max(1, route.length - 2)); }
   else pause = 4000 + r() * 12000;
-  const boardSpot = [BOARD.at.x - 26 - (index % 3) * 22, BOARD.at.y + 10 + (index % 2) * 8];
+  /* index % 3 for the column and index % 2 for the row means neighbours 0
+     and 6 share a spot exactly, and 0 and 3 stand 22px apart — closer than
+     a person is wide. A single modulus over six distinct spots, spaced by
+     more than a shoulder, puts each of them somewhere of their own. */
+  const FAN = [[-30, 6], [-66, 14], [-102, 22], [-30, 40], [-66, 48], [-102, 56]];
+  const fan = FAN[index % FAN.length];
+  const boardSpot = [BOARD.at.x + fan[0], BOARD.at.y + fan[1]];
   return {
     kind: 'neighbour', id: nb.id,
     update(dt) {

@@ -68,7 +68,7 @@ const CONTENT_VERSION = 15;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '9d579f4738';
+const BUILD_ID = '8809fd5c9c';
 const CONTENT_ID = 'f745ea6466';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -195,6 +195,7 @@ const SHELL_FILES = [
   './src/core/engine/scoring.js',
   './src/core/engine/session.js',
   './src/core/engine/wd-session.js',
+  './src/core/learning/draft.js',
   './src/core/learning/journey.js',
   './src/core/learning/noticing.js',
   './src/core/learning/review.js',

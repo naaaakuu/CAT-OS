@@ -469,3 +469,7 @@
 /* Forty-four square wherever a thumb lands. */
 .vhudbtn { width: 44px; height: 44px; }
 .vpill { min-height: 44px; }
+
+/* A visibly unavailable button still has to answer a tap. Silence reads as
+   broken, not as "not yet". */
+.vbtn[aria-disabled="true"]:active { filter: brightness(0.97); }

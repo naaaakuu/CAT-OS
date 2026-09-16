@@ -24,6 +24,7 @@ import { displayTitle } from '../logic/spoilers.js';
 import { PracticeSession } from '../../../core/engine/session.js';
 import { recordPassageSightings } from '../../../core/engine/garden-gate.js';
 import { saveResults } from '../logic/store.js';
+import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
 import { cue } from '../../../core/engagement/feedback.js';
 import { dayKey } from '../../../core/engagement/streaks.js';
@@ -140,9 +141,34 @@ export async function renderSession(outlet, { storage }, params) {
 
   outlet.querySelector('#begin').addEventListener('click', () => { play('page'); startRun(); });
 
+  /* CARRYING ON. If a run was interrupted, the passage's own first screen
+     says so and offers both roads — the draft is the learner's, not ours,
+     so starting fresh has to be one tap and has to be their choice. */
+  (async () => {
+    const draft = await loadDraft(storage, 'rc', passage.id);
+    const begin = outlet.querySelector('#begin');
+    if (!draft?.answers?.length || !begin?.isConnected) return;
+    const n = draft.answers.length;
+    const at = Math.min((Number(draft.index) || 0) + 1, passage.questions.length);
+    begin.innerHTML = `Carry on<small>You answered ${n} of ${passage.questions.length}; back at question ${at}</small><span class="arrow" aria-hidden="true">→</span>`;
+    const fresh = document.createElement('button');
+    fresh.className = 'btn btn--quiet';
+    fresh.style.marginTop = '10px';
+    fresh.textContent = 'Start this passage again';
+    begin.after(fresh);
+    fresh.addEventListener('click', async () => {
+      await clearDraft(storage, 'rc', passage.id);
+      play('page');
+      startRun();
+    });
+    begin.replaceWith(begin.cloneNode(true));
+    outlet.querySelector('#begin').addEventListener('click', () => { play('page'); startRun(draft); });
+  })();
+
   /* ---------------- READING ---------------- */
-  function startRun() {
+  function startRun(draft = null) {
     const session = new PracticeSession(passage);
+    const resumed = draft ? session.restore(draft) : false;
     const startedAt = Date.now();
     let alive = true;
     let overWarned = false;
@@ -207,6 +233,8 @@ export async function renderSession(outlet, { storage }, params) {
       window.addEventListener('scroll', onScroll, { passive: true });
       update();
     }
+
+    if (resumed) { session.markQuestionShown(); renderQuestions(); window.scrollTo(0, 0); return; }
 
     outlet.querySelector('#to-questions').addEventListener('click', () => {
       session.markQuestionShown();
@@ -301,6 +329,7 @@ export async function renderSession(outlet, { storage }, params) {
         cue(verdict.is_correct ? 'correct' : 'wrong');
         card.reveal = { chosen: selected, correct: verdict.correct };
         revealExplanation(selected, verdict.is_correct);
+        saveDraft(storage, 'rc', passage.id, session.snapshot());
         fill.style.width = `${Math.round(((session.index + 1) / session.total) * 100)}%`;
         syncActions('revealed');
       }
@@ -308,11 +337,15 @@ export async function renderSession(outlet, { storage }, params) {
         session.skip();
         card.reveal = { chosen: null, correct: session.current.correct };
         revealExplanation(null, null);
+        saveDraft(storage, 'rc', passage.id, session.snapshot());
         fill.style.width = `${Math.round(((session.index + 1) / session.total) * 100)}%`;
         syncActions('revealed');
       }
       async function onNext() {
-        if (session.next()) { showQuestion(); window.scrollTo(0, 0); }
+        // Written again on the way forward, not only on the way in: the draft
+        // is taken at answer time, so without this a learner who came back
+        // was handed the question they had just finished.
+        if (session.next()) { saveDraft(storage, 'rc', passage.id, session.snapshot()); showQuestion(); window.scrollTo(0, 0); }
         else { stop(); await finishSession(); window.scrollTo(0, 0); }
       }
       showQuestion();
@@ -322,6 +355,7 @@ export async function renderSession(outlet, { storage }, params) {
     async function finishSession() {
       const results = session.finish();
       if (night) results.session.night_reading = true;
+      await clearDraft(storage, 'rc', passage.id);
       try { await saveResults(storage, results); }
       catch (err) { console.error('[CAT OS]', err); toast('Session finished but could not be saved.', 'error'); }
       recordPassageSightings(storage, passage).catch((err) => console.error('[CAT OS] garden sightings failed:', err));

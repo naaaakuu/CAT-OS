@@ -228,7 +228,9 @@ export async function renderVillage(outlet, { storage }) {
     const where = id === 'board' ? 'The order board'
       : id.startsWith('plot:') ? 'A new plot'
       : id.startsWith('house:') ? 'A new cottage'
-      : (() => { const b = v.buildings.find((x) => x.id === id); return b?.current?.name ?? b?.def?.name ?? ''; })();
+      // def.name is the PLACE; current.name is the level it happens to be
+      // at, so a callout named itself "A second floor".
+      : (v.buildings.find((x) => x.id === id)?.def?.name ?? '');
     const what = `${s.text} ${s.sub ?? ''}`.trim();
     return [where, [what, TONE_SAYS[s.tone]].filter(Boolean).join(', ')].filter(Boolean).join(': ');
   };
@@ -250,7 +252,7 @@ export async function renderVillage(outlet, { storage }) {
          the callout carries both: the count is the headline, the ring is
          the clock underneath it. */
       if (q?.ready > 0) { out.push({ id: b.id, tone: 'good', glyph: b.good.key, text: `×${q.ready}`, ring: q.working ?? null, sub: q.working ? fmtSecs(q.working.readyAt - Date.now()) : '' }); continue; }
-      if (q?.working) { out.push({ id: b.id, tone: 'wait', glyph: b.good.key, ring: q.working, text: `${q.pending}`, sub: fmtSecs(q.working.readyAt - Date.now()) }); continue; }
+      if (q?.working) { out.push({ id: b.id, tone: 'wait', glyph: b.good.key, ring: q.working, text: `${q.waiting ?? q.pending}`, sub: fmtSecs(q.working.readyAt - Date.now()) }); continue; }
       if (b.ready) { out.push({ id: b.id, tone: 'build', glyph: 'hammer', text: 'Raise' }); continue; }
       if (step === 'first-read' && b.id === 'reading') { out.push({ id: b.id, tone: 'learn', glyph: 'page', text: 'Read' }); continue; }
       if (b.good && b.wantedHere > 0 && step === 'done') { out.push({ id: b.id, tone: 'want', glyph: b.raw.key, text: `${b.wantedHere}`, sub: 'wanted' }); continue; }
@@ -429,7 +431,7 @@ export async function renderVillage(outlet, { storage }) {
     const w = q.working;
     return `
       <div class="vqueue" aria-label="What ${escapeHTML(b.character?.name ?? 'the worker')} is making">
-        <span class="vqueue__step ${q.pending ? '' : 'vqueue__step--empty'}">${goodIcon(b.raw.key, { size: 20 })}<b>${q.pending}</b><small>${escapeHTML(q.pending === 1 ? b.raw.one : b.raw.name)}</small></span>
+        <span class="vqueue__step ${q.waiting ?? q.pending ? '' : 'vqueue__step--empty'}">${goodIcon(b.raw.key, { size: 20 })}<b>${q.waiting ?? q.pending}</b><small>${escapeHTML((q.waiting ?? q.pending) === 1 ? b.raw.one : b.raw.name)}</small></span>
         <span class="vqueue__arrow" aria-hidden="true">→</span>
         <span class="vqueue__ring" style="--p:${w ? Math.round(w.pct * 100) : 0}%" data-ring="${b.id}">${goodIcon(b.good.key, { size: 16 })}</span>
         <span class="vqueue__arrow" aria-hidden="true">→</span>
@@ -907,7 +909,9 @@ export async function renderVillage(outlet, { storage }) {
       return;
     }
     try {
-      await storage.put(STORES.LEARNING, { id: `vorder:${o.slot}:${o.n}`, kind: 'village-order', module: 'village', slot: o.slot, n: o.n, needs: o.needs, paid: o.pay, giver: o.giver.name, at: new Date().toISOString() });
+      await storage.put(STORES.LEARNING, { id: `vorder:${o.slot}:${o.n}`, kind: 'village-order', module: 'village', slot: o.slot, n: o.n, // emptyBag() gives every good a zero; the record only needs what was
+      // actually handed over, and addBag/subBag read a missing key as nought.
+      needs: Object.fromEntries(goodEntries(o.needs).map((e) => [e.key, e.amount])), paid: o.pay, giver: o.giver.name, at: new Date().toISOString() });
     } catch (err) { console.error('[CAT OS] deliver failed', err); busy = false; return; }
     closePop(); closeSheet();
     play('quest');

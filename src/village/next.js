@@ -49,6 +49,34 @@ export function nextActivity(buildingId, world, opts = {}) {
       return { href: `#/garden/session/${f.id}`, label: pick?.kind === 'due' ? `Revisit ${f.label}` : `Grow ${f.label}`, sub: `${f.origin} · “${f.meaning}” · ${f.memberCount} words · about 4 min`, minutes: 4, kind: pick?.kind ?? 'new', why: pick?.why };
     }
     if (buildingId === 'loom') {
+      /* THE LOOM HAS FOUR SHELVES AND ITS BUTTON ONLY EVER OPENED ONE.
+         Sentence placement, paragraph completion and the arguments bank —
+         195 items between them — could be reached only by opening the place
+         screen and scrolling past the jumbles. A learner who takes the
+         village's offer, which is the path the whole game is built around,
+         never met any of them. So the Loom's button rotates: a bank with
+         nothing solved in it is offered first, because meeting a kind of
+         question for the first time beats a fourth jumble; after that each
+         takes its turn every third day, and jumbles stay the default. */
+      const SHELVES = [
+        ['sp', 'Sentence placement', 'A paragraph with one sentence taken out. Find the one seat it can take', 5],
+        ['pc', 'Paragraph completion', 'A paragraph that stops one sentence early. Decide what the gap needs', 5],
+        ['cr', 'Arguments', 'Find the assumption, weaken the link, name the flaw', 4],
+      ];
+      const live = SHELVES.filter(([t]) => (content[t] ?? []).length);
+      const dayN = Number(String(state.today ?? '').replace(/\D/g, '').slice(-4)) || 0;
+      const shelf = live.find(([t]) => !(state.banks?.[t]?.solved > 0))
+        ?? (live.length && dayN % 3 === 0 ? live[dayN % live.length] : null);
+      if (shelf) {
+        const [type, label, sub, mins] = shelf;
+        const b = state.banks?.[type];
+        const left = Math.max(0, (b?.total ?? 0) - (b?.solved ?? 0));
+        return {
+          href: `#/bank/session/${type}/next`, label,
+          sub: `${sub} · about ${mins} min${left ? ` · ${left} left` : ''}`,
+          minutes: mins, kind: b?.solved ? 'new' : 'first',
+        };
+      }
       const rec = nextVerbal(content.pj, records.sessions, 'pj', `loom:${state.today}`);
       if (!rec) return { href: '#/world/place/loom', label: 'A set at the Loom', sub: 'Jumbles, summaries, the odd one out', minutes: 5, kind: 'new' };
       const it = rec.item;
