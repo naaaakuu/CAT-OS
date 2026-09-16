@@ -87,6 +87,42 @@ if (LOUD) console.log('\n1. restore() against garbage');
   else ok('a draft survives its passage being shortened, clamped to what is left');
 }
 
+/* ---- 1b. A bank set is up to a quarter of an hour ---- */
+if (LOUD) console.log('\n1b. A bank set carried across an interruption');
+{
+  const { BankSession } = await load('src/core/engine/bank-session.js');
+  const items = [1, 2, 3, 4, 5].map((n) => ({ id: 'i' + n, correct: 'A', options: [], distractors: [], skill: 'placement', patterns: [], kind: 'sp', time_sec: 60 }));
+  const opts = { module: 'sp', setId: 'sp-set:foundation', region: 'loom' };
+
+  const a = new BankSession(items, opts);
+  a.answer('A'); a.next(); a.answer('B'); a.next();
+  const snap = a.snapshot();
+  const b = new BankSession(items, opts);
+  if (!b.restore(snap)) bad('a bank set does not carry across an interruption');
+  if (b.index !== a.index) bad(`the bank set resumed at item ${b.index + 1}, not ${a.index + 1}`);
+  if (b.id !== a.id) bad('the resumed bank set took a new id, so it would be recorded twice');
+  ok('a real set resumes at the same item, with the same answers and the same id');
+
+  /* A set is PICKED fresh every time (pickSet puts unsolved first and rests
+     what was just seen), so half of one run must never land inside another. */
+  if (new BankSession(items, { ...opts, setId: 'pc-set:easy' }).restore(snap)) bad('a draft from one bank restored into another');
+  if (new BankSession([items[4], ...items.slice(0, 4)], opts).restore(snap)) bad('a draft restored into a set holding the same items in a different order');
+  if (new BankSession(items.slice(0, 3), opts).restore(snap)) bad('a draft restored into a shorter set');
+  ok('a different bank, a reshuffled set and a shorter set are all declined');
+
+  const junk = [null, undefined, {}, { set_id: 'sp-set:foundation' },
+    { set_id: 'sp-set:foundation', items: 'x' },
+    { set_id: 'sp-set:foundation', items: ['i1', 'i2', 'i3', 'i4', 'i5'], answers: 'no' },
+    { set_id: 'sp-set:foundation', items: ['i1', 'i2', 'i3', 'i4', 'i5'], answers: [['i1', {}]], index: 1e9 }];
+  for (const j of junk) {
+    const s2 = new BankSession(items, opts);
+    try { s2.restore(j); } catch (err) { bad(`bank restore threw on ${JSON.stringify(j)?.slice(0, 40)}: ${err.message}`); continue; }
+    if (s2.index < 0 || s2.index >= s2.total) bad(`bank restore left index at ${s2.index} of ${s2.total}`);
+    try { s2.finish(); } catch (err) { bad(`bank finish() after a junk restore threw: ${err.message}`); }
+  }
+  ok(`${junk.length} malformed bank drafts: none threw, every index stayed inside the set`);
+}
+
 /* ---- 2. The noticing layer against nonsense ---- */
 if (LOUD) console.log('\n2. noticing() against nonsense');
 {
@@ -153,7 +189,7 @@ if (LOUD) console.log('\n3. The order board never promises what the barn cannot 
   }
 }
 
-export const cases = { drafts: 16, records: 11 };
+export const cases = { drafts: 23, records: 11 };
 export const interruptionProblems = problems;
 
 if (LOUD) {

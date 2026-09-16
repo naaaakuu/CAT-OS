@@ -98,6 +98,42 @@ export class BankSession {
 
   answerFor(id) { return this.#answers.get(id) ?? null; }
 
+  /* WHERE THE LEARNER IS, WRITTEN DOWN.
+     A bank set is five or six items and a Loom tier can be thirteen — up to
+     a quarter of an hour of work that used to be held in a Map inside a
+     closure and written down only on the very last click. The village sends
+     learners to these now, which makes losing one more likely, not less.
+     See core/learning/draft.js; PracticeSession carries the same pair. */
+  snapshot() {
+    return {
+      id: this.id,
+      set_id: this.#setId,
+      items: this.#items.map((i) => i.id),
+      index: this.#index,
+      started_at: this.#startedAt,
+      answers: [...this.#answers],
+    };
+  }
+
+  /** Put them back. Declines unless it is the same set, the same items, in
+   *  the same order — a set is picked fresh each time, and half of one run
+   *  inside another is not a run. */
+  restore(snap) {
+    if (!snap || snap.set_id !== this.#setId) return false;
+    const mine = this.#items.map((i) => i.id);
+    if (!Array.isArray(snap.items) || snap.items.length !== mine.length) return false;
+    if (snap.items.some((id, i) => id !== mine[i])) return false;
+    const known = new Set(mine);
+    const answers = (Array.isArray(snap.answers) ? snap.answers : []).filter((e) => Array.isArray(e) && known.has(e[0]));
+    if (!answers.length) return false;
+    this.#answers = new Map(answers);
+    this.#index = Math.min(Math.max(0, Number(snap.index) || 0), this.total - 1);
+    if (Number.isFinite(snap.started_at)) this.#startedAt = snap.started_at;
+    if (typeof snap.id === 'string' && snap.id) this.id = snap.id;
+    this.#shownAt = this.now();
+    return true;
+  }
+
   finish() {
     const finishedAt = this.now();
     const ordered = this.#items.map((it) => ({

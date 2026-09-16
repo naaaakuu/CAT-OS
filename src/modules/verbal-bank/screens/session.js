@@ -11,6 +11,7 @@
  */
 
 import { listBankItems, loadBankFile, loadBankFiles, normalizeBankItem } from '../../../core/content-loader/loader.js';
+import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
 import { BankSession, pickSet } from '../../../core/engine/bank-session.js';
 import { BANKS, WB_KIND_REGION, TRAP_FAMILY, TRAP_FAMILY_LINE } from '../../../core/learning/taxonomy.js';
 import { isRested } from '../../../core/learning/review.js';
@@ -172,6 +173,13 @@ export async function renderBankSession(outlet, { storage }, params) {
   const bank = BANKS[type];
   const back = `#/world/place/${resolved.region}`;
   const session = new BankSession(resolved.items, { module: type, setId: resolved.setId, region: resolved.region });
+  // A set abandoned halfway used to record nothing at all. It carries on now,
+  // silently — a bank set has no first screen to offer a choice on, so the
+  // kindest thing is simply to be where they left off.
+  try {
+    const draft = await loadDraft(storage, 'bank', resolved.setId);
+    if (draft) session.restore(draft);
+  } catch { /* a draft is a convenience, never a blocker */ }
   const startedAt = Date.now();
 
   function showItem() {
@@ -232,10 +240,12 @@ export async function renderBankSession(outlet, { storage }, params) {
       const verdict = session.answer(selected);
       cue(verdict.is_correct ? 'correct' : 'wrong');
       reveal(selected);
+      saveDraft(storage, 'bank', resolved.setId, session.snapshot());
     }
-    function onSkip() { session.skip(); reveal(null); }
+    function onSkip() { session.skip(); reveal(null); saveDraft(storage, 'bank', resolved.setId, session.snapshot()); }
     async function onNext() {
-      if (session.next()) { showItem(); window.scrollTo(0, 0); } else { await finish(); window.scrollTo(0, 0); }
+      if (session.next()) { saveDraft(storage, 'bank', resolved.setId, session.snapshot()); showItem(); window.scrollTo(0, 0); }
+      else { await finish(); window.scrollTo(0, 0); }
     }
     syncChoosing();
   }
@@ -243,6 +253,7 @@ export async function renderBankSession(outlet, { storage }, params) {
   /* ---------------- The moment ---------------- */
   async function finish() {
     const results = session.finish();
+    await clearDraft(storage, 'bank', resolved.setId);
     try {
       await storage.put(STORES.SESSIONS, results.session);
       for (const a of results.attempts) await storage.put(STORES.ATTEMPTS, a);

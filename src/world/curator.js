@@ -105,10 +105,16 @@ export function typeName(t) { return TYPE_NAMES[t] ?? String(t ?? '').replace(/_
 export function readingWeakness(sessions) {
   const byType = new Map();
   let answered = 0;
+  /* THE SECOND LOOK IS READING. The guard used to be `if (s.module) continue`,
+     which threw away every second-look session — the same passages, the same
+     questions, the same `type` on every answer, chosen precisely because the
+     learner got them wrong the first time. The most diagnostic evidence in
+     the product was the evidence being discarded. What actually has to be
+     excluded is an answer whose `type` is not a reading question type at all,
+     and the taxonomy names all twenty-seven of those. */
   for (const s of sessions) {
-    if (s.module) continue;
     for (const a of (Array.isArray(s?.answers) ? s.answers : []).filter((a) => a && typeof a === 'object')) {
-      if (!a.type || a.is_correct === null) continue;
+      if (!a.type || a.is_correct === null || !(a.type in RC_TYPE_SKILL)) continue;
       answered += 1;
       const e = byType.get(a.type) ?? { n: 0, correct: 0, acc: 0 };
       e.n += 1;
