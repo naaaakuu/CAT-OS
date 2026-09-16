@@ -22,6 +22,7 @@
 import { worldReward } from '../../../world/rewards.js';
 import { loadPJItem, loadPJItems, listPJItems } from '../../../core/content-loader/loader.js';
 import { PJSession } from '../../../core/engine/pj-session.js';
+import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
 import { savePJResults, listPJSessions } from '../logic/store.js';
 import { pjJourneyOrder, tierInfo } from '../logic/tiers.js';
 import { renderTeaching } from '../logic/teach.js';
@@ -74,7 +75,17 @@ export async function renderPJSession(outlet, { storage }, params) {
   }
 
   const session = new PJSession(resolved.items, resolved.setId);
-  const startedAt = Date.now();
+  /* A set abandoned halfway used to record nothing at all. It carries on now.
+     There is no first screen to offer a choice on, so it simply resumes where
+     the learner was, and says so once. */
+  let resumed = false;
+  try {
+    const draft = await loadDraft(storage, 'pj', resolved.setId);
+    resumed = !!draft && session.restore(draft);
+  } catch { /* a draft is a convenience, never a blocker */ }
+  const keep = () => saveDraft(storage, 'pj', resolved.setId, session.snapshot());
+  const startedAt = session.startedAt;
+  if (resumed) toast(`Carried on from jumble ${session.index + 1}, where you left off.`);
 
   /* Per-item behavior the engine wants to know about. */
   let assembledAt = 0;   // when the order last became complete
@@ -199,17 +210,20 @@ export async function renderPJSession(outlet, { storage }, params) {
       if (order.length !== item.sentences.length) return;
       const read_back_ms = assembledAt ? Date.now() - assembledAt : 0;
       const verdict = session.answer(order, { revised, read_back_ms });
+      keep();
       cue(verdict.is_correct ? 'correct' : 'wrong');
       reveal(session.answerFor(item.meta.id));
     }
 
     function onSkip() {
       session.skip();
+      keep();
       reveal(null);
     }
 
     async function onNext() {
       if (session.next()) {
+        keep();
         showItem();
         window.scrollTo(0, 0);
       } else {
@@ -218,7 +232,11 @@ export async function renderPJSession(outlet, { storage }, params) {
       }
     }
 
-    syncSolving();
+    /* Back after an interruption, on an item already locked in: show the
+       verdict and the teaching, not an empty board. */
+    const prior = session.answerFor(item.meta.id);
+    if (prior) reveal(prior.entered ? prior : null);
+    else syncSolving();
   }
 
   /* ---------------- The mentor moment ---------------- */
@@ -228,6 +246,7 @@ export async function renderPJSession(outlet, { storage }, params) {
     // Persist FIRST; nothing is shown until the data is safe.
     try {
       await savePJResults(storage, results);
+      await clearDraft(storage, 'pj', resolved.setId);
     } catch (err) {
       console.error('[CAT OS]', err);
       toast('Set finished but could not be saved.', 'error');

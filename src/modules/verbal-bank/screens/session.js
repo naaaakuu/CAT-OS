@@ -178,9 +178,9 @@ export async function renderBankSession(outlet, { storage }, params) {
   // kindest thing is simply to be where they left off.
   try {
     const draft = await loadDraft(storage, 'bank', resolved.setId);
-    if (draft) session.restore(draft);
+    if (draft && session.restore(draft)) toast(`Carried on from item ${session.index + 1}, where you left off.`);
   } catch { /* a draft is a convenience, never a blocker */ }
-  const startedAt = Date.now();
+  const startedAt = session.startedAt;
 
   function showItem() {
     const it = session.current;
@@ -253,10 +253,12 @@ export async function renderBankSession(outlet, { storage }, params) {
   /* ---------------- The moment ---------------- */
   async function finish() {
     const results = session.finish();
-    await clearDraft(storage, 'bank', resolved.setId);
+    // The draft goes only once the record is safe: if the save fails the
+    // learner comes back to the last item and can press Finish again.
     try {
       await storage.put(STORES.SESSIONS, results.session);
       for (const a of results.attempts) await storage.put(STORES.ATTEMPTS, a);
+      await clearDraft(storage, 'bank', resolved.setId);
     } catch (err) {
       console.error('[CAT OS]', err);
       toast('Set finished but could not be saved.', 'error');

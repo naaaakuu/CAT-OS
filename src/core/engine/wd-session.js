@@ -16,6 +16,8 @@
  * WORD_DNA_BIBLE §5), not one blended score.
  */
 
+import { ms, elapsedMs, sameSet, optionIndex } from './draft-shape.js';
+
 /** Evaluate a chosen option index against a {text, correct}[] option set. */
 export function evaluateChoice(options, chosenIndex) {
   const opt = options?.[chosenIndex];
@@ -73,6 +75,10 @@ export class WDSession {
   get total() { return this.#items.length; }
   get current() { return this.#items[this.#index]; }
   get isLast() { return this.#index === this.total - 1; }
+  /** When the run began. After a restore this is the moment it WOULD have
+   *  begun had the interruption not happened, so the timer and the record
+   *  both count only the time actually spent on the set. */
+  get startedAt() { return this.#startedAt; }
 
   markItemShown() { this.#itemShownAt = this.now(); }
 
@@ -138,6 +144,58 @@ export class WDSession {
   }
 
   answerFor(itemId) { return this.#answers.get(itemId) ?? null; }
+
+  /* WHERE THE LEARNER IS, WRITTEN DOWN.
+     A branch is up to a dozen families, each a Predict and one or two Applies,
+     held in a Map inside a closure and, until now, written down only on the
+     very last tap. See core/learning/draft.js; every engine carries this pair. The
+     draft keeps what the learner DID, never the verdict: restore() marks it
+     again against the item, so a draft cannot claim a mark. */
+  snapshot() {
+    return {
+      id: this.id,
+      set_id: this.#setId,
+      items: this.#items.map((i) => i.meta.id),
+      index: this.#index,
+      elapsed_ms: Math.max(0, this.now() - this.#startedAt),
+      answers: [...this.#answers],
+    };
+  }
+
+  /** Put them back. Declines unless it is the same set, the same items, in
+   *  the same order, with at least one answer worth keeping. */
+  restore(snap) {
+    if (!sameSet(snap, this.#setId, this.#items.map((i) => i.meta.id))) return false;
+    const byId = new Map(this.#items.map((i) => [i.meta.id, i]));
+    const answers = new Map();
+    for (const e of Array.isArray(snap.answers) ? snap.answers : []) {
+      if (!Array.isArray(e) || !byId.has(e[0])) continue;
+      const rec = this.#fromDraft(byId.get(e[0]), e[1]);
+      if (rec) answers.set(e[0], rec);
+    }
+    if (!answers.size) return false;
+    this.#answers = answers;
+    this.#index = Math.min(Math.max(0, Number(snap.index) || 0), this.total - 1);
+    this.#startedAt = this.now() - elapsedMs(snap);
+    if (typeof snap.id === 'string' && snap.id) this.id = snap.id;
+    this.#itemShownAt = this.now();
+    return true;
+  }
+
+  /** One drafted answer, re-marked against the item it belongs to. */
+  #fromDraft(item, raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const rec = this.#blank(item);
+    const p = optionIndex(raw.predict?.chosen_index, item.discovery.predict_options.length);
+    if (p !== null) rec.predict = { chosen_index: p, is_correct: evaluateChoice(item.discovery.predict_options, p).is_correct };
+    const applies = Array.isArray(raw.applies) ? raw.applies : [];
+    item.discovery.applies.forEach((challenge, i) => {
+      const c = optionIndex(applies[i]?.chosen_index, challenge.options.length);
+      if (c !== null) rec.applies[i] = { held_out_word: challenge.held_out_word, chosen_index: c, is_correct: evaluateChoice(challenge.options, c).is_correct };
+    });
+    rec.time_ms = ms(raw.time_ms);
+    return rec;
+  }
 
   /** Finish and produce the persistable records. */
   finish() {

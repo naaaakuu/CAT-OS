@@ -32,6 +32,7 @@
 import { worldReward } from '../../../world/rewards.js';
 import { loadOOOItem, loadOOOItems, listOOOItems } from '../../../core/content-loader/loader.js';
 import { OOOSession } from '../../../core/engine/ooo-session.js';
+import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
 import { saveOOOResults } from '../logic/store.js';
 import { oooJourneyOrder, tierInfo, tierMode } from '../logic/tiers.js';
 import { renderTeaching } from '../logic/teach.js';
@@ -85,7 +86,17 @@ export async function renderOOOSession(outlet, { storage }, params) {
   }
 
   const session = new OOOSession(resolved.items, resolved.setId);
-  const startedAt = Date.now();
+  /* A set abandoned halfway used to record nothing at all. It carries on now.
+     There is no first screen to offer a choice on, so it simply resumes where
+     the learner was, and says so once. */
+  let resumed = false;
+  try {
+    const draft = await loadDraft(storage, 'ooo', resolved.setId);
+    resumed = !!draft && session.restore(draft);
+  } catch { /* a draft is a convenience, never a blocker */ }
+  const keep = () => saveDraft(storage, 'ooo', resolved.setId, session.snapshot());
+  const startedAt = session.startedAt;
+  if (resumed) toast(`Carried on from item ${session.index + 1}, where you left off.`);
 
   /* Per-item behavior the engine wants to know about. */
   let thinkOpened = false;  // the Think coach was consulted
@@ -325,6 +336,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
         revised,
         read_back_ms: choiceAt ? Date.now() - choiceAt : 0,
       });
+      keep();
       cue(verdict.is_correct ? 'correct' : 'wrong');
       reveal(session.answerFor(item.meta.id));
     }
@@ -334,11 +346,13 @@ export async function renderOOOSession(outlet, { storage }, params) {
         built: mode === 'construct' && board.order.length === 4 ? board.order : null,
         think_opened: thinkOpened,
       });
+      keep();
       reveal(null);
     }
 
     async function onNext() {
       if (session.next()) {
+        keep();
         showItem();
         window.scrollTo(0, 0);
       } else {
@@ -347,7 +361,15 @@ export async function renderOOOSession(outlet, { storage }, params) {
       }
     }
 
-    syncSolving();
+    /* Back after an interruption, on an item already locked in: show the
+       verdict and the teaching, not an empty board. */
+    const prior = session.answerFor(item.meta.id);
+    if (prior) {
+      thinkOpened = prior.think_opened;
+      reveal(prior.chosen === null ? null : prior);
+    } else {
+      syncSolving();
+    }
   }
 
   /* ---------------- The mentor moment ---------------- */
@@ -357,6 +379,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
     // Persist FIRST; nothing is shown until the data is safe.
     try {
       await saveOOOResults(storage, results);
+      await clearDraft(storage, 'ooo', resolved.setId);
     } catch (err) {
       console.error('[CAT OS]', err);
       toast('Set finished but could not be saved.', 'error');

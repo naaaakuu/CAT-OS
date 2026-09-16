@@ -21,6 +21,7 @@
 import { worldReward } from '../../../world/rewards.js';
 import { loadWDItem, loadWDItems, listWDItems } from '../../../core/content-loader/loader.js';
 import { WDSession } from '../../../core/engine/wd-session.js';
+import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
 import { saveWDResults } from '../logic/store.js';
 import { wdTreeOrder, branchInfo } from '../logic/tree.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
@@ -102,7 +103,17 @@ export async function renderWDSession(outlet, { storage }, params) {
   }
 
   const session = new WDSession(resolved.items, resolved.setId);
-  const startedAt = Date.now();
+  /* A set abandoned halfway used to record nothing at all. It carries on now.
+     There is no first screen to offer a choice on, so it simply resumes where
+     the learner was, and says so once. */
+  let resumed = false;
+  try {
+    const draft = await loadDraft(storage, 'wd', resolved.setId);
+    resumed = !!draft && session.restore(draft);
+  } catch { /* a draft is a convenience, never a blocker */ }
+  const keep = () => saveDraft(storage, 'wd', resolved.setId, session.snapshot());
+  const startedAt = session.startedAt;
+  if (resumed) toast(`Carried on from family ${session.index + 1}, where you left off.`);
 
   function showItem() {
     const item = session.current;
@@ -189,23 +200,33 @@ export async function renderWDSession(outlet, { storage }, params) {
       actions.querySelector('#skip').addEventListener('click', onSkip);
     }
 
-    function onPredictLock() {
-      if (selected === null) return;
-      const verdict = session.answerPredict(selected);
-      cue(verdict.is_correct ? 'correct' : 'wrong');
+    function paintPredictLocked(chosenIndex) {
       predictSlot.setAttribute('data-locked', '');
       for (const opt of predictSlot.querySelectorAll('cat-option')) {
         const idx = LETTERS.indexOf(opt.getAttribute('letter'));
         opt.setAttribute('disabled', '');
         if (item.discovery.predict_options[idx].correct) opt.setAttribute('state', 'correct');
-        else if (idx === selected) opt.setAttribute('state', 'wrong');
+        else if (idx === chosenIndex) opt.setAttribute('state', 'wrong');
         else opt.setAttribute('state', 'dimmed');
       }
+    }
+
+    function onPredictLock() {
+      if (selected === null) return;
+      const verdict = session.answerPredict(selected);
+      keep();
+      cue(verdict.is_correct ? 'correct' : 'wrong');
+      paintPredictLocked(selected);
       revealUnderstand(verdict.is_correct);
     }
 
     function onSkip() {
       session.skip();
+      keep();
+      paintSkipped();
+    }
+
+    function paintSkipped() {
       predictSlot.innerHTML = '';
       noticeSlot.innerHTML = '';
       teachingSlot.innerHTML = `
@@ -265,6 +286,32 @@ export async function renderWDSession(outlet, { storage }, params) {
       `;
       applySlot.appendChild(block);
       block.scrollIntoView({ block: 'nearest' });
+
+      function paintApplyLocked(chosenIndex, isCorrect) {
+        block.setAttribute('data-locked', '');
+        for (const opt of block.querySelectorAll('cat-option')) {
+          const idx = LETTERS.indexOf(opt.getAttribute('letter'));
+          opt.setAttribute('disabled', '');
+          if (challenge.options[idx].correct) opt.setAttribute('state', 'correct');
+          else if (idx === chosenIndex) opt.setAttribute('state', 'wrong');
+          else opt.setAttribute('state', 'dimmed');
+        }
+        const line = document.createElement('div');
+        line.className = `wdx-verdict ${isCorrect ? 'is-correct' : 'is-wrong'}`;
+        line.textContent = isCorrect
+          ? `That is what "${challenge.held_out_word}" means, applied from the pattern.`
+          : `Close. The pattern actually gives "${challenge.held_out_word}" a slightly different sense here.`;
+        block.appendChild(line);
+      }
+
+      /* Back after an interruption with this challenge already answered. */
+      const done = session.answerFor(item.meta.id)?.applies?.[applyIndex] ?? null;
+      if (done) {
+        paintApplyLocked(done.chosen_index, done.is_correct);
+        showApply(applyIndex + 1);
+        return;
+      }
+
       block.addEventListener('cat-option-select', (e) => {
         if (block.hasAttribute('data-locked')) return;
         appliedSelected = LETTERS.indexOf(e.detail.letter);
@@ -284,21 +331,9 @@ export async function renderWDSession(outlet, { storage }, params) {
       function onApplyLock() {
         if (appliedSelected === null) return;
         const verdict = session.answerApply(applyIndex, appliedSelected);
+        keep();
         cue(verdict.is_correct ? 'correct' : 'wrong');
-        block.setAttribute('data-locked', '');
-        for (const opt of block.querySelectorAll('cat-option')) {
-          const idx = LETTERS.indexOf(opt.getAttribute('letter'));
-          opt.setAttribute('disabled', '');
-          if (challenge.options[idx].correct) opt.setAttribute('state', 'correct');
-          else if (idx === appliedSelected) opt.setAttribute('state', 'wrong');
-          else opt.setAttribute('state', 'dimmed');
-        }
-        const line = document.createElement('div');
-        line.className = `wdx-verdict ${verdict.is_correct ? 'is-correct' : 'is-wrong'}`;
-        line.textContent = verdict.is_correct
-          ? `That is what "${challenge.held_out_word}" means, applied from the pattern.`
-          : `Close. The pattern actually gives "${challenge.held_out_word}" a slightly different sense here.`;
-        block.appendChild(line);
+        paintApplyLocked(appliedSelected, verdict.is_correct);
         showApply(applyIndex + 1);
       }
 
@@ -332,6 +367,7 @@ export async function renderWDSession(outlet, { storage }, params) {
 
     async function onNext() {
       if (session.next()) {
+        keep();
         showItem();
         window.scrollTo(0, 0);
       } else {
@@ -340,7 +376,18 @@ export async function renderWDSession(outlet, { storage }, params) {
       }
     }
 
-    syncPredictActions();
+    /* Back after an interruption: a family whose Predict was locked in picks
+       up at its first unanswered Apply; one set aside shows its teaching. */
+    const prior = session.answerFor(item.meta.id);
+    if (prior?.predict) {
+      selected = prior.predict.chosen_index;
+      paintPredictLocked(selected);
+      revealUnderstand(prior.predict.is_correct);
+    } else if (prior) {
+      paintSkipped();
+    } else {
+      syncPredictActions();
+    }
   }
 
   /* ---------------- The mentor moment ---------------- */
@@ -350,6 +397,7 @@ export async function renderWDSession(outlet, { storage }, params) {
     // Persist FIRST; nothing is shown until the data is safe.
     try {
       await saveWDResults(storage, results);
+      await clearDraft(storage, 'wd', resolved.setId);
     } catch (err) {
       console.error('[CAT OS]', err);
       toast('Set finished but could not be saved.', 'error');

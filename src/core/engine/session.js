@@ -18,6 +18,8 @@ import { RC_TYPE_SKILL } from '../learning/taxonomy.js';
 /* A loaded passage keeps its id at meta.id. finish() has always known
    that; anything else that needs to name the passage has to agree with it,
    or two different passages end up sharing one identity. */
+import { elapsedMs } from './draft-shape.js';
+
 export const passageId = (p) => p?.meta?.id ?? p?.id ?? null;
 
 export class PracticeSession {
@@ -43,6 +45,10 @@ export class PracticeSession {
   get total() { return this.#passage.questions.length; }
   get current() { return this.#passage.questions[this.#index]; }
   get isLast() { return this.#index === this.total - 1; }
+  /** When the run began. After a restore this is the moment it WOULD have
+   *  begun had the interruption not happened, so the timer and the record
+   *  both count only the time actually spent on the set. */
+  get startedAt() { return this.#startedAt; }
 
   /** The reading screen calls this when questions become visible,
    *  so reading time isn't billed to question 1. */
@@ -98,7 +104,7 @@ export class PracticeSession {
       id: this.id,
       passage_id: passageId(this.#passage),
       index: this.#index,
-      started_at: this.#startedAt,
+      elapsed_ms: Math.max(0, this.now() - this.#startedAt),
       answers: [...this.#answers],
     };
   }
@@ -114,7 +120,7 @@ export class PracticeSession {
     if (!answers.length) return false;
     this.#answers = new Map(answers);
     this.#index = Math.min(Math.max(0, Number(snap.index) || 0), this.total - 1);
-    if (Number.isFinite(snap.started_at)) this.#startedAt = snap.started_at;
+    this.#startedAt = this.now() - elapsedMs(snap);
     if (typeof snap.id === 'string' && snap.id) this.id = snap.id;
     this.#questionShownAt = this.now();
     return true;

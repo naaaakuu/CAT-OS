@@ -18,6 +18,8 @@
  * Think coach was opened, and the read back window before locking.
  */
 
+import { ms, elapsedMs, sameSet } from './draft-shape.js';
+
 export const OOO_MARKS_CORRECT = 3;
 export const OOO_MARKS_WRONG = 0; // TITA: no negative marking; re-verified per cycle
 
@@ -94,6 +96,10 @@ export class OOOSession {
   get total() { return this.#items.length; }
   get current() { return this.#items[this.#index]; }
   get isLast() { return this.#index === this.total - 1; }
+  /** When the run began. After a restore this is the moment it WOULD have
+   *  begun had the interruption not happened, so the timer and the record
+   *  both count only the time actually spent on the set. */
+  get startedAt() { return this.#startedAt; }
 
   markItemShown() { this.#itemShownAt = this.now(); }
 
@@ -157,6 +163,63 @@ export class OOOSession {
   }
 
   answerFor(itemId) { return this.#answers.get(itemId) ?? null; }
+
+  /* WHERE THE LEARNER IS, WRITTEN DOWN.
+     A tier is up to six items, each a paragraph BUILT before the odd sentence
+     is named, held in a Map inside a closure and, until now, written down only
+     on the very last tap. See core/learning/draft.js; every engine carries this pair. The
+     draft keeps what the learner DID, never the verdict: restore() marks it
+     again against the item, so a draft cannot claim a mark. */
+  snapshot() {
+    return {
+      id: this.id,
+      set_id: this.#setId,
+      items: this.#items.map((i) => i.meta.id),
+      index: this.#index,
+      elapsed_ms: Math.max(0, this.now() - this.#startedAt),
+      answers: [...this.#answers],
+    };
+  }
+
+  /** Put them back. Declines unless it is the same set, the same items, in
+   *  the same order, with at least one answer worth keeping. */
+  restore(snap) {
+    if (!sameSet(snap, this.#setId, this.#items.map((i) => i.meta.id))) return false;
+    const byId = new Map(this.#items.map((i) => [i.meta.id, i]));
+    const answers = new Map();
+    for (const e of Array.isArray(snap.answers) ? snap.answers : []) {
+      if (!Array.isArray(e) || !byId.has(e[0])) continue;
+      const rec = this.#fromDraft(byId.get(e[0]), e[1]);
+      if (rec) answers.set(e[0], rec);
+    }
+    if (!answers.size) return false;
+    this.#answers = answers;
+    this.#index = Math.min(Math.max(0, Number(snap.index) || 0), this.total - 1);
+    this.#startedAt = this.now() - elapsedMs(snap);
+    if (typeof snap.id === 'string' && snap.id) this.id = snap.id;
+    this.#itemShownAt = this.now();
+    return true;
+  }
+
+  /** One drafted answer, re-marked against the item it belongs to. */
+  #fromDraft(item, raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const chosen = typeof raw.chosen === 'string' && raw.chosen ? raw.chosen : null;
+    const built = Array.isArray(raw.built) && raw.built.every((l) => typeof l === 'string') ? [...raw.built] : null;
+    const build = built && chosen !== null ? evaluateBuild(built, item.core_order) : { links_correct: 0, positions_correct: 0 };
+    return {
+      item_id: item.meta.id,
+      chosen,
+      is_correct: chosen === null ? null : chosen === item.outlier,
+      built,
+      build_links_correct: build.links_correct,
+      build_positions_correct: build.positions_correct,
+      think_opened: raw.think_opened === true,
+      revised: chosen !== null && raw.revised === true,
+      read_back_ms: chosen !== null ? ms(raw.read_back_ms) : 0,
+      time_ms: ms(raw.time_ms),
+    };
+  }
 
   /** Finish and produce the persistable records. */
   finish() {

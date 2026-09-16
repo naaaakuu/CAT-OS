@@ -15,6 +15,12 @@
  * interrupting one then opening another offered to carry on with somebody
  * else's answers.
  *
+ * Since 2.1.3 it also covers the four engines that were left out — Para
+ * Jumbles, Para Summary, Odd One Out and Word DNA — and one rule for all
+ * six: a draft carries time ON TASK, so a set left overnight is recorded as
+ * the minutes spent on it, never as the night. A draft also cannot claim a
+ * mark: restore() re-marks every choice against the item.
+ *
  * Run: node tools/check-interruption.mjs      verify.mjs §29.
  */
 
@@ -29,6 +35,7 @@ const problems = [];
    when somebody runs it directly to see what it is actually checking. */
 const LOUD = process.argv[1]?.endsWith('check-interruption.mjs');
 const bad = (s) => { problems.push(s); if (LOUD) console.log('  ✗ ' + s); };
+let draftCases = 23; // §1 (16) and §1b (7); §1c and §1d count themselves
 const ok = (s) => { if (LOUD) console.log('  · ' + s); };
 
 const passage = {
@@ -123,6 +130,131 @@ if (LOUD) console.log('\n1b. A bank set carried across an interruption');
   ok(`${junk.length} malformed bank drafts: none threw, every index stayed inside the set`);
 }
 
+/* ---- 1c. The four engines that recorded nothing until the last click ---- */
+if (LOUD) console.log('\n1c. Para Jumbles, Para Summary, Odd One Out and Word DNA carried across an interruption');
+{
+  const { PJSession } = await load('src/core/engine/pj-session.js');
+  const { PSSession } = await load('src/core/engine/ps-session.js');
+  const { OOOSession } = await load('src/core/engine/ooo-session.js');
+  const { WDSession } = await load('src/core/engine/wd-session.js');
+  const labels = (n) => 'ABCDE'.slice(0, n).split('').map((l) => ({ label: l, text: 'Sentence ' + l }));
+  const pj = (n) => ({ meta: { id: 'pj-000' + n }, sentences: labels(4), correct_order: ['B', 'A', 'D', 'C'] });
+  const ps = (n) => ({ meta: { id: 'ps-000' + n }, question: { correct: 'C', options: [] } });
+  const ooo = (n) => ({ meta: { id: 'ooo-000' + n }, sentences: labels(5), outlier: 'E', core_order: ['B', 'A', 'D', 'C'] });
+  const wd = (n) => ({ meta: { id: 'wd-000' + n }, discovery: {
+    predict_options: [{ text: 'x', correct: false }, { text: 'y', correct: true }, { text: 'z', correct: false }],
+    applies: [{ held_out_word: 'w', options: [{ correct: true }, { correct: false }, { correct: false }] },
+      { held_out_word: 'v', options: [{ correct: false }, { correct: true }] }],
+  } });
+  const same = (x, y) => JSON.stringify(x) === JSON.stringify(y);
+
+  /* Each engine: the items, a real half-played set, and a draft that LIES —
+     a wrong choice carrying is_correct: true, which restore() must re-mark. */
+  const engines = [
+    { name: 'Para Jumbles', make: (items, id, o) => new PJSession(items, id, o), items: [1, 2, 3].map(pj), id: 'pj-set:foundation', other: 'pj-set:easy',
+      play: (s) => { s.answer(['B', 'A', 'D', 'C']); s.next(); s.answer(['A', 'B', 'C', 'D'], { revised: true, read_back_ms: 900 }); s.next(); },
+      lie: { entered: ['A', 'B', 'C', 'D'], is_correct: true, positions_correct: 4, links_correct: 3 } },
+    { name: 'Para Summary', make: (items, id, o) => new PSSession(items, id, o), items: [1, 2, 3].map(ps), id: 'ps-set:foundation', other: 'ps-set:easy',
+      play: (s) => { s.answer('C', { summary_written: true, summary_text: 'The point.' }); s.next(); s.answer('A', { think_opened: true }); s.next(); },
+      lie: { chosen: 'A', is_correct: true } },
+    { name: 'Odd One Out', make: (items, id, o) => new OOOSession(items, id, o), items: [1, 2, 3].map(ooo), id: 'ooo-set:foundation', other: 'ooo-set:easy',
+      play: (s) => { s.answer('E', { built: ['B', 'A', 'D', 'C'], read_back_ms: 1200 }); s.next(); s.answer('A', { built: ['B', 'E', 'D', 'C'] }); s.next(); },
+      lie: { chosen: 'A', is_correct: true, built: ['B', 'E', 'D', 'C'], build_links_correct: 3 } },
+    { name: 'Word DNA', make: (items, id, o) => new WDSession(items, id, o), items: [1, 2, 3].map(wd), id: 'wd-set:root', other: 'wd-set:prefix',
+      /* Interrupted INSIDE a family: Predict and the first Apply answered, the second not. */
+      play: (s) => { s.answerPredict(1); s.answerApply(0, 0); s.answerApply(1, 1); s.next(); s.answerPredict(0); s.answerApply(0, 2); },
+      lie: { predict: { chosen_index: 0, is_correct: true }, applies: [{ chosen_index: 2, is_correct: true }, { chosen_index: 1, is_correct: true }] } },
+  ];
+
+  for (const e of engines) {
+    const ids = e.items.map((i) => i.meta.id);
+    const first = ids[0];
+
+    /* A real round trip. */
+    const a = e.make(e.items, e.id); e.play(a);
+    const snap = a.snapshot();
+    const b = e.make(e.items, e.id);
+    if (!b.restore(snap)) { bad(e.name + ': a real snapshot did not restore'); continue; }
+    if (b.index !== a.index) bad(e.name + ': resumed at item ' + (b.index + 1) + ', was at ' + (a.index + 1));
+    if (b.id !== a.id) bad(e.name + ': the resumed set took a new id, so it would be recorded twice');
+    for (const id of ids) if (!same(a.answerFor(id), b.answerFor(id))) bad(e.name + ': ' + id + ' restored as ' + JSON.stringify(b.answerFor(id)) + ', was ' + JSON.stringify(a.answerFor(id)));
+    if (!same(a.finish().session.answers, b.finish().session.answers)) bad(e.name + ': the record after a restore differs from the record without one');
+    draftCases += 1;
+
+    /* Declined: another set, the same items reshuffled, a shorter set. */
+    if (e.make(e.items, e.other).restore(snap)) bad(e.name + ': a draft from one set restored into another');
+    if (e.make([e.items[2], e.items[0], e.items[1]], e.id).restore(snap)) bad(e.name + ': a draft restored into the same items in a different order');
+    if (e.make(e.items.slice(0, 2), e.id).restore(snap)) bad(e.name + ': a draft restored into a shorter set');
+    draftCases += 3;
+
+    /* A draft cannot claim a mark. */
+    const liar = e.make(e.items, e.id);
+    if (!liar.restore({ ...snap, index: 1, answers: [[ids[1], e.lie]] })) bad(e.name + ': a draft with one plausible answer was declined');
+    else {
+      const rec = liar.finish().session.answers[1];
+      if (rec.is_correct !== false) bad(e.name + ': a draft claiming is_correct:true on a wrong answer was believed: ' + JSON.stringify(rec));
+      if (rec.links_correct === 3 || rec.build_links_correct === 3) bad(e.name + ': a draft claiming every join was believed');
+    }
+    draftCases += 1;
+
+    /* Garbage. */
+    const junk = [null, undefined, 0, '', [], 'draft', {}, { set_id: e.id }, { set_id: e.id, items: 'x' }, { set_id: e.id, items: ids },
+      { set_id: e.id, items: ids, answers: 'no' },
+      { set_id: e.id, items: ids, answers: [null, 7, ['nope', {}], [first, null], [first, 'x'], [first, 3]] },
+      { set_id: e.id, items: ids, answers: [[first, {}]], index: -4 },
+      { set_id: e.id, items: ids, answers: [[first, {}]], index: 1e9, elapsed_ms: -1e12, id: 42 },
+      { set_id: e.id, items: ids, answers: [[first, {}]], elapsed_ms: 1e15 },
+      { set_id: e.id, items: ids, index: 'two', elapsed_ms: 'long',
+        answers: [[first, { entered: 'BADC', chosen: 7, built: 'x', predict: 'y', applies: 'z', summary_text: 9, time_ms: 'soon', read_back_ms: NaN }]] },
+      { set_id: e.id, items: ids,
+        answers: [[first, { entered: [1, 2], built: [null], predict: { chosen_index: 99 }, applies: [{ chosen_index: -1 }, { chosen_index: 1.5 }, { chosen_index: 0 }] }]] },
+    ];
+    for (const j of junk) {
+      const s = e.make(e.items, e.id);
+      try { s.restore(j); } catch (err) { bad(e.name + ': restore(' + JSON.stringify(j)?.slice(0, 48) + ') threw: ' + err.message); continue; }
+      if (s.index < 0 || s.index >= s.total) bad(e.name + ': restore left index at ' + s.index + ' of ' + s.total);
+      if (typeof s.id !== 'string' || !s.id) bad(e.name + ': restore left the session id as ' + typeof s.id);
+      const ago = Date.now() - s.startedAt;
+      if (!(ago >= 0 && ago <= 864e5 + 1000)) bad(e.name + ': restore put the start ' + Math.round(ago / 36e5) + ' hours ago');
+      try {
+        const r = s.finish();
+        if (!Array.isArray(r.session.answers) || r.session.answers.length !== s.total) bad(e.name + ': finish() after a junk restore produced ' + r.session.answers?.length + ' answers');
+        if (!(r.session.duration_ms >= 0)) bad(e.name + ': duration ' + r.session.duration_ms + ' after a junk restore');
+      } catch (err) { bad(e.name + ': finish() after restore(' + JSON.stringify(j)?.slice(0, 40) + ') threw: ' + err.message); }
+      draftCases += 1;
+    }
+    ok(e.name + ': a real set resumes at the same item with the same answers and id; another set, a reshuffle and a shorter set are declined; a draft cannot claim a mark; ' + junk.length + ' malformed drafts take nothing down');
+  }
+
+  /* ---- 1d. A set interrupted overnight is not an eight-hour set ---- */
+  if (LOUD) console.log('\n1d. Time on task, not wall-clock');
+  {
+    const { PracticeSession } = await load('src/core/engine/session.js');
+    const { BankSession } = await load('src/core/engine/bank-session.js');
+    let t = 0;
+    const now = () => t;
+    const bank = [1, 2, 3].map((n) => ({ id: 'i' + n, correct: 'A', options: [], distractors: [], skill: 'placement', patterns: [], kind: 'sp', time_sec: 60 }));
+    const six = [
+      ['Reading', () => new PracticeSession(passage, { now }), (s) => s.answer('A')],
+      ['Bank', () => new BankSession(bank, { module: 'sp', setId: 'sp-set:x', region: 'loom' }, { now }), (s) => s.answer('A')],
+      ...engines.map((e) => [e.name, () => e.make(e.items, e.id, { now }), (s) => e.play(s)]),
+    ];
+    for (const [name, make, act] of six) {
+      t = 0; const a = make();
+      t = 60_000; act(a);
+      const snap = a.snapshot();
+      t = 8 * 3600_000; const b = make();
+      if (!b.restore(snap)) { bad(name + ': the overnight set could not be restored'); continue; }
+      t += 30_000;
+      const d = b.finish().session.duration_ms;
+      if (d !== 90_000) bad(name + ': a set left overnight after 60 s and finished 30 s after resuming was recorded as ' + Math.round(d / 1000) + ' s, not 90');
+      if (b.startedAt !== t - 90_000) bad(name + ': startedAt after a restore is ' + b.startedAt + ', not ' + (t - 90_000));
+      draftCases += 1;
+    }
+    ok('six engines: a set left overnight is recorded as the time actually spent on it, never the night');
+  }
+}
+
 /* ---- 2. The noticing layer against nonsense ---- */
 if (LOUD) console.log('\n2. noticing() against nonsense');
 {
@@ -189,7 +321,7 @@ if (LOUD) console.log('\n3. The order board never promises what the barn cannot 
   }
 }
 
-export const cases = { drafts: 23, records: 11 };
+export const cases = { drafts: draftCases, records: 11 };
 export const interruptionProblems = problems;
 
 if (LOUD) {

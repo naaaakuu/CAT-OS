@@ -28,6 +28,7 @@
 import { worldReward } from '../../../world/rewards.js';
 import { loadPSItem, loadPSItems, listPSItems } from '../../../core/content-loader/loader.js';
 import { PSSession } from '../../../core/engine/ps-session.js';
+import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
 import { savePSResults, saveOwnSummary } from '../logic/store.js';
 import { psJourneyOrder, tierInfo } from '../logic/tiers.js';
 import { renderTeaching } from '../logic/teach.js';
@@ -81,7 +82,17 @@ export async function renderPSSession(outlet, { storage }, params) {
   }
 
   const session = new PSSession(resolved.items, resolved.setId);
-  const startedAt = Date.now();
+  /* A set abandoned halfway used to record nothing at all. It carries on now.
+     There is no first screen to offer a choice on, so it simply resumes where
+     the learner was, and says so once. */
+  let resumed = false;
+  try {
+    const draft = await loadDraft(storage, 'ps', resolved.setId);
+    resumed = !!draft && session.restore(draft);
+  } catch { /* a draft is a convenience, never a blocker */ }
+  const keep = () => saveDraft(storage, 'ps', resolved.setId, session.snapshot());
+  const startedAt = session.startedAt;
+  if (resumed) toast(`Carried on from paragraph ${session.index + 1}, where you left off.`);
 
   /* Per-item behavior the engine wants to know about. */
   let summaryText = null;   // the learner's own sentence, if written
@@ -319,6 +330,7 @@ export async function renderPSSession(outlet, { storage }, params) {
         summary_text: summaryText,
         think_opened: thinkOpened,
       });
+      keep();
       cue(verdict.is_correct ? 'correct' : 'wrong');
       reveal(session.answerFor(m.id));
     }
@@ -329,11 +341,13 @@ export async function renderPSSession(outlet, { storage }, params) {
         summary_text: summaryText,
         think_opened: thinkOpened,
       });
+      keep();
       reveal(null);
     }
 
     async function onNext() {
       if (session.next()) {
+        keep();
         showItem();
         window.scrollTo(0, 0);
       } else {
@@ -342,7 +356,18 @@ export async function renderPSSession(outlet, { storage }, params) {
       }
     }
 
-    showBuilder();
+    /* Back after an interruption, on an item already locked in: the options
+       with the verdict and the teaching, and the learner's own sentence if
+       they wrote one, not the empty builder. */
+    const prior = session.answerFor(m.id);
+    if (prior) {
+      summaryText = prior.summary_text;
+      thinkOpened = prior.think_opened;
+      showChoosing();
+      reveal(prior.chosen === null ? null : prior);
+    } else {
+      showBuilder();
+    }
   }
 
   /* ---------------- The mentor moment ---------------- */
@@ -352,6 +377,7 @@ export async function renderPSSession(outlet, { storage }, params) {
     // Persist FIRST; nothing is shown until the data is safe.
     try {
       await savePSResults(storage, results);
+      await clearDraft(storage, 'ps', resolved.setId);
     } catch (err) {
       console.error('[CAT OS]', err);
       toast('Set finished but could not be saved.', 'error');

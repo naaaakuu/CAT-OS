@@ -18,6 +18,8 @@
  * the scheme is announced per cycle, and the UI labels marks CAT-style.
  */
 
+import { elapsedMs } from './draft-shape.js';
+
 export const BANK_MARKS_CORRECT = 3;
 export const BANK_MARKS_WRONG = 0;
 
@@ -62,6 +64,10 @@ export class BankSession {
   get total() { return this.#items.length; }
   get current() { return this.#items[this.#index]; }
   get isLast() { return this.#index === this.total - 1; }
+  /** When the run began. After a restore this is the moment it WOULD have
+   *  begun had the interruption not happened, so the timer and the record
+   *  both count only the time actually spent on the set. */
+  get startedAt() { return this.#startedAt; }
   /** The sum of the items' own time targets, in seconds — the pace bar. */
   get targetSec() { return this.#items.reduce((n, it) => n + (it.time_sec ?? 60), 0); }
 
@@ -110,7 +116,7 @@ export class BankSession {
       set_id: this.#setId,
       items: this.#items.map((i) => i.id),
       index: this.#index,
-      started_at: this.#startedAt,
+      elapsed_ms: Math.max(0, this.now() - this.#startedAt),
       answers: [...this.#answers],
     };
   }
@@ -128,7 +134,7 @@ export class BankSession {
     if (!answers.length) return false;
     this.#answers = new Map(answers);
     this.#index = Math.min(Math.max(0, Number(snap.index) || 0), this.total - 1);
-    if (Number.isFinite(snap.started_at)) this.#startedAt = snap.started_at;
+    this.#startedAt = this.now() - elapsedMs(snap);
     if (typeof snap.id === 'string' && snap.id) this.id = snap.id;
     this.#shownAt = this.now();
     return true;

@@ -170,7 +170,7 @@ export async function renderSession(outlet, { storage }, params) {
   function startRun(draft = null) {
     const session = new PracticeSession(passage);
     const resumed = draft ? session.restore(draft) : false;
-    const startedAt = Date.now();
+    const startedAt = session.startedAt; // after a restore: time on task, not wall-clock
     let alive = true;
     let overWarned = false;
 
@@ -356,8 +356,9 @@ export async function renderSession(outlet, { storage }, params) {
     async function finishSession() {
       const results = session.finish();
       if (night) results.session.night_reading = true;
-      await clearDraft(storage, 'rc', passageId(passage));
-      try { await saveResults(storage, results); }
+      // The draft goes only once the record is safe: if the save fails the
+      // learner comes back to the last question and can finish again.
+      try { await saveResults(storage, results); await clearDraft(storage, 'rc', passageId(passage)); }
       catch (err) { console.error('[CAT OS]', err); toast('Session finished but could not be saved.', 'error'); }
       recordPassageSightings(storage, passage).catch((err) => console.error('[CAT OS] garden sightings failed:', err));
 
