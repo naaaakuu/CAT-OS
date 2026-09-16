@@ -115,7 +115,43 @@ export async function renderVillage(outlet, { storage }) {
   const offMotion = onFeedbackChange(() => renderer.setStill(motionReduced()));
   // A close, intimate camera: a building takes a third of a phone's width.
   const homeZoom = () => Math.max(renderer.fitZoom(), renderer.snap(renderer.cssW < 600 ? 1.25 : 1.1));
+
+  /**
+   * Where the village should open: on whatever is asking for the learner.
+   *
+   * The opening camera used to be a constant — the middle of the map at a
+   * fixed zoom — and the callouts are positioned from the buildings, which
+   * are spread over 1200 units. On a phone that framed one of six. The
+   * learner's first sight of their own village was a field.
+   *
+   * So: take the bounding box of the anchors that currently carry a callout,
+   * centre on it, and pull the zoom back far enough to hold it — never below
+   * the renderer's own floor, and never so far out that a village with one
+   * callout looks like a map. The HUD occupies the top ~120px and the
+   * callouts sit ABOVE their anchors, so the box is padded accordingly.
+   */
+  const calloutHome = () => {
+    const ids = new Set(calloutSpec().map((c) => c.id));
+    const pts = scene.anchors.filter((a) => ids.has(a.id));
+    if (!pts.length) return { x: HOME.x, y: HOME.y, zoom: homeZoom() };
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const p of pts) {
+      minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
+      minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y);
+    }
+    // Room for the bubble above its anchor, and for the HUD over the top.
+    const PAD_X = 70, PAD_TOP = 130, PAD_BOTTOM = 60;
+    const w = (maxX - minX) + PAD_X * 2;
+    const h = (maxY - minY) + PAD_TOP + PAD_BOTTOM;
+    const fit = Math.min(renderer.cssW / Math.max(1, w), renderer.cssH / Math.max(1, h));
+    // Never tighter than the home framing, never looser than the fit floor,
+    // and never so loose that the buildings stop reading as buildings.
+    const zoom = Math.max(renderer.fitZoom(), Math.min(homeZoom(), renderer.snap(Math.max(0.62, fit))));
+    return { x: (minX + maxX) / 2, y: (minY + maxY) / 2 + (PAD_TOP - PAD_BOTTOM) / 2 / Math.max(0.2, zoom), zoom };
+  };
   const anchorOf = (id) => scene.anchorOf(id) ?? HOME;
+  /* What the opening framing settled on, so a later settle cannot undo it. */
+  let openingZoom = 0;   // 0 until an opening branch chooses one
 
   /* ================= HUD ================= */
   const hud = outlet.querySelector('#vhud');
@@ -180,7 +216,13 @@ export async function renderVillage(outlet, { storage }) {
       if (!allow(b.id) || b.id === 'hearth') continue;
       if (!b.built) { if (b.standing && b.cost) out.push({ id: b.id, tone: 'build', glyph: 'hammer', text: b.affordable ? 'Build' : `${b.cost.coins}`, sub: b.affordable ? '' : 'coins' }); continue; }
       const q = b.queue;
-      if (q?.ready > 0) { out.push({ id: b.id, tone: 'good', glyph: b.good.key, text: `×${q.ready}` }); continue; }
+      /* READY used to hide WORKING. A building with one finished good on
+         the shelf showed "x1" and nothing else, however many were still
+         being crafted behind it — so the map said a workshop was done when
+         it was halfway through the queue. Both facts are true at once, so
+         the callout carries both: the count is the headline, the ring is
+         the clock underneath it. */
+      if (q?.ready > 0) { out.push({ id: b.id, tone: 'good', glyph: b.good.key, text: `×${q.ready}`, ring: q.working ?? null, sub: q.working ? fmtSecs(q.working.readyAt - Date.now()) : '' }); continue; }
       if (q?.working) { out.push({ id: b.id, tone: 'wait', glyph: b.good.key, ring: q.working, text: `${q.pending}`, sub: fmtSecs(q.working.readyAt - Date.now()) }); continue; }
       if (b.ready) { out.push({ id: b.id, tone: 'build', glyph: 'hammer', text: 'Raise' }); continue; }
       if (step === 'first-read' && b.id === 'reading') { out.push({ id: b.id, tone: 'learn', glyph: 'page', text: 'Read' }); continue; }
@@ -229,8 +271,21 @@ export async function renderVillage(outlet, { storage }) {
         const el = calloutFor.get(a.id);
         if (!el) continue;
         const s = renderer.toScreen(a.x, a.y);
-        const off = s.x < 10 || s.x > renderer.cssW - 10 || s.y < 70 || s.y > renderer.cssH - 40;
-        el.style.transform = `translate(${Math.round(s.x)}px, ${Math.round(s.y)}px) translate(-50%, -100%) scale(${Math.max(0.75, Math.min(1.1, z))})`;
+        /* Hidden only when the BUILDING is outside the view. The bubble
+           itself is slid back inside the frame — it used to be hidden the
+           moment its box touched an edge, which meant a building in plain
+           sight with no callout on it, and five of six gone at once. */
+        const off = s.x < -20 || s.x > renderer.cssW + 20 || s.y < 40 || s.y > renderer.cssH - 10;
+        const scale = Math.max(0.75, Math.min(1.1, z));
+        const w = (el.offsetWidth || 120) * scale;
+        const h = (el.offsetHeight || 40) * scale;
+        const M = 8;
+        const x = Math.max(w / 2 + M, Math.min(renderer.cssW - w / 2 - M, s.x));
+        const y = Math.max(h + 64, Math.min(renderer.cssH - 12, s.y));
+        el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px) translate(-50%, -100%) scale(${scale})`;
+        // The tail keeps pointing at the building, however far the bubble slid.
+        const lean = Math.max(-1, Math.min(1, (s.x - x) / Math.max(1, w / 2)));
+        el.style.setProperty('--lean', String(Math.round(lean * 100) / 100));
         el.classList.toggle('is-off', off);
       }
     }
@@ -803,11 +858,43 @@ export async function renderVillage(outlet, { storage }) {
   }
 
   let busy = false;
+  /**
+   * Is this still true? Ask the RECORDS, not the screen.
+   *
+   * Every one of these actions is guarded by `busy`, which stops a learner
+   * double-tapping a button inside one tab — and does nothing at all about
+   * the same village open in two tabs, or a phone and a laptop, or a tab
+   * left open since this morning. Reproduced end to end: a barn with four
+   * Books, two tabs, one order of three delivered in each. Six Books left the
+   * barn, two of which were never crafted, both orders paid, and `subBag`
+   * floored the negative stock to zero so nothing ever said otherwise. The
+   * same for coins: two builds, one balance, a permanent silent overdraft.
+   *
+   * The village is derived from the log, so re-deriving from the log is the
+   * only honest check, and it costs one IndexedDB read at the moment the
+   * learner has just tapped something.
+   */
+  const stillTrue = async (test) => {
+    try {
+      const { state: fresh } = await loadWorld(storage);
+      return test(fresh.village);
+    } catch (err) {
+      console.error('[CAT OS] could not re-check before writing', err);
+      return false;   // a check that cannot run must not wave the write through
+    }
+  };
+
   async function deliver(orderId) {
     if (busy) return;
     const o = v.orders.find((x) => x.id === orderId);
     if (!o?.deliverable) return;
     busy = true;
+    if (!await stillTrue((fresh) => fresh.orders.find((x) => x.id === orderId)?.deliverable)) {
+      busy = false;
+      notice('That order has already been filled. The board is up to date now.');
+      await refresh({ focus: 'board' });
+      return;
+    }
     try {
       await storage.put(STORES.LEARNING, { id: `vorder:${o.slot}:${o.n}`, kind: 'village-order', module: 'village', slot: o.slot, n: o.n, needs: o.needs, paid: o.pay, giver: o.giver.name, at: new Date().toISOString() });
     } catch (err) { console.error('[CAT OS] deliver failed', err); busy = false; return; }
@@ -829,9 +916,13 @@ export async function renderVillage(outlet, { storage }) {
   async function collect(id) {
     if (busy) return;
     const b = v.buildingById(id);
-    const n = b?.queue?.ready ?? 0;
+    let n = b?.queue?.ready ?? 0;
     if (!n) return;
     busy = true;
+    // The shelf may have been emptied somewhere else; take what is there now.
+    const fresh = await stillTrue((fv) => fv.buildingById(id)?.queue?.ready ?? 0);
+    if (!fresh) { busy = false; await refresh({ focus: id }); return; }
+    n = Math.min(n, fresh);
     try {
       await storage.put(STORES.LEARNING, { id: `vcollect:${id}:${Date.now()}`, kind: 'village-collect', module: 'village', building: id, good: b.good.key, amount: n, at: new Date().toISOString() });
     } catch (err) { console.error('[CAT OS] collect failed', err); busy = false; return; }
@@ -857,6 +948,16 @@ export async function renderVillage(outlet, { storage }) {
     const name = raise ? b.next.name : b.def.name;
     const after = raise ? b.next.after : (b.def.unlock?.line ?? b.def.line);
     busy = true;
+    /* Coins are spent from a balance this screen derived when it LOADED. Two
+       tabs — or one tab left open since this morning — and the same coins buy
+       two things: reproduced, and the resulting overdraft is floored to zero
+       by subBag and is permanent. Re-derive from the record log first. */
+    if (!await stillTrue((fresh) => fresh.buildingById(id)?.ready)) {
+      busy = false;
+      notice('That is already paid for. The village is up to date now.');
+      await refresh({ focus: id });
+      return;
+    }
     try {
       await storage.put(STORES.LEARNING, { id: `vbuild:${id}:${level}`, kind: 'village-build', module: 'village', building: id, level, cost: b.cost, at: new Date().toISOString() });
     } catch (err) { console.error('[CAT OS] build failed', err); busy = false; return; }
@@ -876,6 +977,8 @@ export async function renderVillage(outlet, { storage }) {
     const p = v.plotViews.find((x) => x.id === id);
     if (!p?.ready) return;
     busy = true;
+    // Same coins, same two-tab problem (see build()).
+    if (!await stillTrue((fresh) => fresh.plotViews.find((x) => x.id === id)?.ready)) { busy = false; await refresh(); return; }
     try { await storage.put(STORES.LEARNING, { id: `vplot:${id}`, kind: 'village-plot', module: 'village', plot: id, cost: p.def.cost, at: new Date().toISOString() }); }
     catch (err) { console.error('[CAT OS] plot failed', err); busy = false; return; }
     closePop();
@@ -891,6 +994,8 @@ export async function renderVillage(outlet, { storage }) {
     const h = v.nextHouse;
     if (!h?.ready || h.n !== n) return;
     busy = true;
+    // Same coins, same two-tab problem (see build()).
+    if (!await stillTrue((fresh) => fresh.nextHouse?.ready && fresh.nextHouse.n === n)) { busy = false; await refresh(); return; }
     try { await storage.put(STORES.LEARNING, { id: `vhouse:${n}`, kind: 'village-house', module: 'village', n, cost: h.cost, at: new Date().toISOString() }); }
     catch (err) { console.error('[CAT OS] house failed', err); busy = false; return; }
     closePop();
@@ -958,6 +1063,7 @@ export async function renderVillage(outlet, { storage }) {
     await intro();
   } else if (focusId) {
     const a = anchorOf(focusId);
+    openingZoom = homeZoom();
     renderer.cam.zoom = homeZoom();
     renderer.lookAt(a.x, a.y - 20, { animate: false });
     if (earnedRaw) {
@@ -984,9 +1090,11 @@ export async function renderVillage(outlet, { storage }) {
     else if (step === 'collect') setTimeout(() => wickSays(STEP_LINES.collect), reduce ? 600 : 2600);
     else if (wickRaw) setTimeout(() => wickSays(wickRaw), reduce ? 400 : 2200);
   } else {
-    renderer.cam.zoom = homeZoom();
-    renderer.lookAt(HOME.x, HOME.y + 60, { animate: false });
-    if (!reduce) setTimeout(() => renderer.lookAt(HOME.x, HOME.y, { duration: 1500 }), 200);
+    const home = calloutHome();
+    openingZoom = home.zoom;
+    renderer.cam.zoom = home.zoom;
+    renderer.lookAt(home.x, home.y + 60, { animate: false });
+    if (!reduce) setTimeout(() => renderer.lookAt(home.x, home.y, { duration: 1500 }), 200);
     let stageSaid = null;
     try {
       const key = 'world:stage-seen';
@@ -1003,7 +1111,17 @@ export async function renderVillage(outlet, { storage }) {
     try { const list = JSON.parse(unlockedRaw); if (list.length) setTimeout(() => notice(`<b>${escapeHTML(list[0].name)}</b> can be built now.`, 'unlock'), reduce ? 600 : 3200); } catch { /* silent */ }
   }
   if (step === 'name' && !focusId) setTimeout(() => openSheet(nameSheet(), 'name'), 1200);
-  requestAnimationFrame(() => { const settle = () => { if (renderer.cam.zoom < homeZoom() && step !== 'meet') { renderer.cam.zoom = homeZoom(); renderer.clampCamera(); } }; settle(); requestAnimationFrame(settle); });
+  /* The camera can be nudged by a late layout pass, so it is settled on the
+     next two frames. It used to settle to homeZoom() unconditionally, which
+     quietly undid the opening framing: the village was aimed at the things
+     asking for attention and then yanked back in to 1.25, with five of six
+     callouts outside the viewport again. It settles to whatever the opening
+     actually chose. */
+  requestAnimationFrame(() => {
+    const settle = () => { if (renderer.cam.zoom < openingZoom && step !== 'meet') { renderer.cam.zoom = openingZoom; renderer.clampCamera(); } };
+    settle();
+    requestAnimationFrame(settle);
+  });
 
   /** The first minutes: arrive, see the village, meet Wick, be pointed at Ada. */
   async function intro() {

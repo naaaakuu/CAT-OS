@@ -41,6 +41,18 @@ function solvedSet(sessions, type) {
 
 /** Resolve what to practise: a tier, a bundle, one item, a kind, a band, or `next`. */
 async function resolveSet(type, setParam, storage) {
+  /* Say what this set actually is. A bank the learner has finished still
+     opens — a timed re-run of something you know is a real exercise — but it
+     must not be dressed up as new work. `cr` holds six items, so from the
+     third sitting onward the screen was saying "Item 1 of 5, unsolved first"
+     over five items the learner had already solved, in the same order. */
+  const setLabel = (base) => {
+    const kind = pickSet.lastKind;
+    if (kind === 'again' || kind === 'resting') return `${base} · again, against the clock`;
+    if (kind === 'review') return `${base} · a second look`;
+    return base;
+  };
+
   const bank = BANKS[type];
   if (!bank) throw new Error(`"${type}" is not something the valley practises.`);
   const rows = await listBankItems(type);
@@ -63,7 +75,7 @@ async function resolveSet(type, setParam, storage) {
     const files = await loadBankFiles(type, chosen.map((r) => r.id));
     const items = chosen.map((r) => files.get(r.id)).filter(Boolean).map((f) => normalizeBankItem(type, f));
     if (!items.length) throw new Error('Those items could not be loaded.');
-    return { setId: `${type}-set:${tier}`, items, region: bank.region, label: tier.replace('-', ' ') };
+    return { setId: `${type}-set:${tier}`, items, region: bank.region, label: setLabel(tier.replace('-', ' ')) };
   }
 
   let bundles;
@@ -80,7 +92,7 @@ async function resolveSet(type, setParam, storage) {
   const all = file.items.map((it) => normalizeBankItem(type, file, it.id));
   const items = pickSet(all, sessions, type, bank.setSize, rested);
   const region = type === 'wb' ? (WB_KIND_REGION[file.meta.kind] ?? 'meadow') : bank.region;
-  return { setId: `${type}-set:${pick.id}`, items, region, label: file.meta.title, bundle: file.meta };
+  return { setId: `${type}-set:${pick.id}`, items, region, label: setLabel(file.meta.title), bundle: file.meta };
 }
 
 /* ---------------- What is shown above the question ---------------- */

@@ -138,7 +138,16 @@ function routeBetween(a, b) {
  * idles (and looks up, waves, blinks) when it does not, sits on the bench
  * at dusk, and is indoors at night — the lit window says so.
  */
-function worker({ x, y, look, state, hour, seed, bench: benchAt, commuteFrom }) {
+/**
+ * `state` is the building's headline — unbuilt | idle | working | ready — and
+ * it goes to READY the instant one finished good lands on the shelf, even
+ * though the queue behind it is still crafting. The worker was reading that
+ * enum, so the moment anything was collectable she stopped working: measured
+ * over two minutes at a Reading House with two Pages pending and ten Books on
+ * the shelf, five workers produced 649 frames of idle and wave and not one
+ * frame of work. `working` is the separate fact she actually needs.
+ */
+function worker({ x, y, look, state, working, hour, seed, bench: benchAt, commuteFrom }) {
   const r = rng(`worker:${seed}`);
   let t = r() * 4000, next = 2500 + r() * 3000, face = 1;
   let mode = state === 'working' ? 'work' : 'idle';
@@ -149,14 +158,14 @@ function worker({ x, y, look, state, hour, seed, bench: benchAt, commuteFrom }) 
   let walk = commuteFrom ? { from: commuteFrom, p: 0, dist: Math.hypot(x - commuteFrom[0], y - commuteFrom[1]) } : null;
   let pos = walk ? { x: commuteFrom[0], y: commuteFrom[1] } : { x, y };
   return {
-    kind: 'worker',
+    kind: 'worker', id: seed,
     update(dt) {
       t += dt; next -= dt;
       if (burst > 0) burst -= dt;
       if (walk) { walk.p += (0.03 * dt) / Math.max(1, walk.dist); if (walk.p >= 1) { walk = null; pos = { x, y }; } else { pos = { x: walk.from[0] + (x - walk.from[0]) * walk.p, y: walk.from[1] + (y - walk.from[1]) * walk.p }; face = x >= walk.from[0] ? 1 : -1; } return; }
       if (next <= 0) {
         next = 3000 + r() * 5000;
-        if (state === 'working') mode = r() > 0.15 ? 'work' : 'idle';
+        if (working) mode = r() > 0.15 ? 'work' : 'idle';
         else { face = r() > 0.7 ? -face : face; mode = r() > 0.8 ? 'wave' : 'idle'; }
       }
     },
@@ -164,12 +173,14 @@ function worker({ x, y, look, state, hour, seed, bench: benchAt, commuteFrom }) 
     objects() {
       if (night && !walk) return [];
       const cheering = burst > 0;
-      let pose = cheering ? 'cheer' : walk ? 'walk' : dusk && benchAt ? 'sit' : mode;
+      let pose = cheering ? 'cheer' : walk ? 'walk' : dusk && benchAt ? 'sit' : working && mode === 'idle' && r() > 0.7 ? 'work' : mode;
       const frame = Math.floor(t / (pose === 'walk' ? 170 : pose === 'work' ? 380 : 620)) % 4;
       const bob = cheering ? -Math.abs(Math.sin(t / 160)) * 5 : 0;
       // benchAt[1] is already the seat, two above the bench's own anchor.
       const px = pose === 'sit' ? benchAt[0] : pos.x, py = pose === 'sit' ? benchAt[1] : pos.y;
-      const out = [{ x: px, y: py, art: art('person', { ...look, pose, frame }), flip: face < 0, bob }];
+      // `pose` is carried on the object so the animation is testable from
+      // outside: tools/check-world.mjs and the village-life probe read it.
+      const out = [{ x: px, y: py, pose, art: art('person', { ...look, pose, frame }), flip: face < 0, bob }];
       if (cheering) for (let i = 0; i < 3; i += 1) { const a = burst / 2600; out.push({ x: px + (i - 1) * 14, y: py - 56 - (1 - a) * 24 - i * 4, z: 900, alpha: Math.max(0, a), art: art('icon', { glyph: 'heart', size: 11 }) }); }
       return out;
     },
@@ -652,7 +663,7 @@ export function buildVillageScene(state, atmo, opts = {}) {
     const benchAt = benchRef ? { get 0() { return benchRef.x; }, get 1() { return benchRef.y - 2; } } : null;
     if (ch?.look) {
       const wp = pointOf(def, sprite, 'worker');
-      const w = worker({ x: wp.x, y: wp.y, look: ch.look, state: bv.state, hour, seed: def.id, bench: benchAt, commuteFrom: opts.commute && !night ? [HUB.x, HUB.y] : null });
+      const w = worker({ x: wp.x, y: wp.y, look: ch.look, state: bv.state, working: !!bv.queue?.working, hour, seed: def.id, bench: benchAt, commuteFrom: opts.commute && !night ? [HUB.x, HUB.y] : null });
       workers.set(def.id, w);
       life.push(w);
     }
@@ -910,20 +921,47 @@ export function buildVillageScene(state, atmo, opts = {}) {
      that decide how many of each there are. Anything that genuinely changes
      the village changes the key, and then everything is built anew, which is
      right: a new building should arrive with its smoke. */
+  /* THE CAST, and only the cast.
+     This key decides whether the previous scene's actors are carried across a
+     rebuild — and refresh() rebuilds after every collect, deliver, build,
+     plot and house, which is to say precisely while the learner is watching.
+     It used to include `stageWorth` (which moves by three on EVERY delivered
+     order) and the full per-building level string, so the key changed on
+     every one of those actions and the carry was refused: measured, every
+     walker in the village snapped back to its seeded start mid-stride, a
+     neighbour cheering at the board vanished, and the cat restarted his walk.
+     Only what adds or removes an ACTOR belongs here — a chimney that starts
+     smoking, a dog that arrives at level three, the duck and rabbit counts —
+     so the levels are reduced to those facts and the worth to a coarse
+     bucket. */
   const lifeKey = [
     life.map((a) => a?.kind ?? '?').join(','),
     night ? 'night' : 'day',
     season,
-    stageWorth,
-    state.meadow?.mastered ?? 0,
-    state.pond?.mastered ?? 0,
-    state.pond?.known ?? 0,
+    Math.floor((stageWorth ?? 0) / 60),
+    Math.floor((state.meadow?.mastered ?? 0) / 12),
+    Math.floor((state.pond?.mastered ?? 0) / 12),
+    Math.floor((state.pond?.known ?? 0) / 12),
     v.neighbours.length,
-    [...v.levels].map(([k, n]) => `${k}${n}`).sort().join(''),
+    // Only the levels that change the cast.
+    ['hearth', 'roots'].map((id) => `${id}${Math.min(3, v.levels.get(id) ?? 0)}`).join(''),
   ].join('|');
   if (opts.carryLifeKey === lifeKey && Array.isArray(opts.carryLife) && opts.carryLife.length === life.length) {
     life.length = 0;
     for (const a of opts.carryLife) life.push(a);
+    /* AND re-point the handles. `workers`, `neighbours` and `wick` were
+       filled with the freshly built actors above, and the carry then replaced
+       `life` wholesale — so from the first rebuild onward every handle
+       addressed an object that was never updated and never drawn. Everything
+       that reaches for a character by name went with it: the cheer when a
+       delivery lands, the thank-you, Wick's celebrate and call, Wick's hit box
+       and the anchor his speech bubble is placed at. All of it was being sent
+       to invisible objects. */
+    for (const a of life) {
+      if (a?.kind === 'worker' && a.id) workers.set(a.id, a);
+      else if (a?.kind === 'neighbour' && a.id) neighbours.set(a.id, a);
+      else if (a?.kind === 'companion') wick = a;
+    }
   }
 
   let warmSince = 0;

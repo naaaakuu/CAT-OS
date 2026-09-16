@@ -566,4 +566,15 @@
 /* The verdict is scrolled to when it appears; leave room for the run bar
    above it, and a longer fade under the sticky answer bar. */
 cat-explanation .verdict { scroll-margin-top: 86px; }
-.run__actions { padding-top: 26px; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--g-paper-2) 46%); }
+/* The fade ramp has to clear a WHOLE LINE, not part of one.
+
+   Measured on a real question: the bar occupied y723..802, option D's card
+   ended at y798, and a line of option text is 32px tall against a 26px ramp.
+   So exactly one line was always half-dissolved into the paper — on every
+   question, in every reading session, for every learner. And the scroll
+   container had no room under the bar for the last card to clear it. */
+.run__actions { padding-top: 52px; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--g-paper-2) 62%); }
+.run__body { scroll-padding-bottom: 132px; }
+:root[data-world] .card:has(> .run__actions) { padding-bottom: 4px; }
+/* The last option must be able to scroll clear of the bar. */
+.run__body > *:last-child { margin-bottom: 96px; }

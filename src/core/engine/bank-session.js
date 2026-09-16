@@ -161,10 +161,20 @@ export function pickSet(pool, sessions, moduleKey, size, rested = () => true) {
     }
   }
   const idOf = (x) => x.id ?? x.meta?.id;
+  /* What a set IS matters as much as what is in it. A bank with six items
+     runs dry in two sittings, and from the third onward the screen said
+     "Item 1 of 5, unsolved first" over five items the learner had already
+     solved — the same five, in the same order, presented as new work.
+     `pickSet.lastKind` says which of three things just happened, and the
+     session bar and the shelf row can then be honest about it. */
   const fresh = pool.filter((x) => !solved.has(idOf(x)) && !miss.has(idOf(x)));
   const missedRested = pool.filter((x) => miss.has(idOf(x)) && rested(miss.get(idOf(x)).at, miss.get(idOf(x)).n));
   const out = [...fresh, ...missedRested].slice(0, size);
-  if (out.length >= Math.min(size, pool.length)) return out;
+  if (out.length >= Math.min(size, pool.length)) {
+    pickSet.lastKind = fresh.length ? (fresh.length >= out.length ? 'new' : 'mixed') : 'review';
+    pickSet.lastFresh = fresh.length;
+    return out;
+  }
   /* Everything is solved or resting, and a set still has to be filled.
      This used to sort the remainder by miss count alone, which put the items
      the learner had missed MOST at the front — and an item is only in that
@@ -185,5 +195,8 @@ export function pickSet(pool, sessions, moduleKey, size, rested = () => true) {
     .sort((a, b) => (missOf(b)?.n ?? 0) - (missOf(a)?.n ?? 0));
   const resting = rest.filter(stillResting)
     .sort((a, b) => String(missOf(a)?.at ?? '').localeCompare(String(missOf(b)?.at ?? '')));
-  return [...out, ...reviewable, ...resting].slice(0, size);
+  const final = [...out, ...reviewable, ...resting].slice(0, size);
+  pickSet.lastKind = fresh.length ? 'mixed' : (resting.length && !reviewable.length ? 'resting' : 'again');
+  pickSet.lastFresh = fresh.length;
+  return final;
 }

@@ -174,8 +174,11 @@
   outline: none;
   box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #1E2A16, 0 6px 14px rgba(30, 40, 20, 0.35);
 }
+/* The tail follows the building. A bubble near the edge of the screen slides
+   back into the frame (see placeCallouts), and --lean moves its tail toward
+   the building it belongs to so it still points at something. */
 .vb::after {
-  content: ''; position: absolute; left: 50%; bottom: -10px; width: 13px; height: 13px;
+  content: ''; position: absolute; left: calc(50% + var(--lean, 0) * 38%); bottom: -10px; width: 13px; height: 13px;
   background: inherit; border-right: 2.5px solid var(--v-wood); border-bottom: 2.5px solid var(--v-wood);
   transform: translateX(-50%) rotate(45deg) skew(8deg, 8deg);
 }

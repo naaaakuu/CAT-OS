@@ -165,8 +165,15 @@ textarea {
 :root[data-reduced-motion] *,
 :root[data-reduced-motion] *::before,
 :root[data-reduced-motion] *::after {
+  /* iteration-count as well as duration. Without it an INFINITE animation
+     simply runs 0.01 ms per cycle, forever — thirty-seven of them were still
+     running with Reduce motion on, and the village visibly never settled:
+     four full-screen captures 1.2 s apart were all different. It also parked
+     the callout bubbles mid-keyframe, five pixels above where they belong. */
   animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
   animation-delay: 0ms !important;
+  animation-fill-mode: none !important;
   transition-duration: 0.01ms !important;
 }
 
@@ -176,7 +183,9 @@ textarea {
   :root:not([data-motion="full"]) *::before,
   :root:not([data-motion="full"]) *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     animation-delay: 0ms !important;
+    animation-fill-mode: none !important;
     transition-duration: 0.01ms !important;
   }
 }

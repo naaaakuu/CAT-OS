@@ -139,7 +139,33 @@ export function deriveVillage(s, records, content, now = Date.now()) {
     if (def.good) payMul[def.good] = eff.pay ?? 1;
     if (def.id === 'market') { marketMul = eff.pay ?? 1; slots = eff.slots ?? 3; }
     if (!def.craft) continue;
-    const helper = eff.helper ? { ...eff.helper, since: builtAt.get(`${def.id}:${def.levels.find((l) => l.effect?.helper)?.n ?? lv}`) ?? 0 } : null;
+    /* THE HELPER'S HISTORY, AT THE RATES THAT WERE ACTUALLY IN FORCE.
+       `effectsUpTo` merges the levels, so at level 4 the helper reads
+       {every: 2h, cap: 6} — but `since` was pinned to the build time of
+       level 3, the first level that carries a helper at all. simulateQueue
+       then generated a tick every two hours from the moment the LEVEL-3
+       tower went up, recomputing the whole of the helper's past at a rate
+       that did not exist then. Measured: thirty days of level-3 history and
+       a daily collect, 87 Books in the barn; adding a level-4 record dated
+       one minute ago took it to 180. A learner could double their barn by
+       buying an upgrade.
+       A rate that changes is a list of segments, one per level that changes
+       it, each with the window it actually applied to. */
+    const helperSegs = [];
+    {
+      const withHelper = def.levels.filter((l) => l.effect?.helper && l.n <= lv);
+      for (let i = 0; i < withHelper.length; i += 1) {
+        const from = builtAt.get(`${def.id}:${withHelper[i].n}`) ?? 0;
+        if (!from) continue;
+        const nextLevel = withHelper[i + 1];
+        const to = nextLevel ? (builtAt.get(`${def.id}:${nextLevel.n}`) ?? Infinity) : Infinity;
+        // The merged effect UP TO this level, so a level that only changes the
+        // cap inherits the rate set below it.
+        const e = effectsUpTo(def, withHelper[i].n).helper;
+        if (e?.every > 0) helperSegs.push({ from, to, every: e.every, cap: e.cap });
+      }
+    }
+    const helper = helperSegs.length ? { ...helperSegs[helperSegs.length - 1], segments: helperSegs, since: helperSegs[0].from } : null;
     const q = simulateQueue({
       arrivals: arrivals.get(def.raw) ?? [], helper,
       collects: collects.filter((c) => c.building === def.id && c.good === def.good).map((c) => ({ t: T(c), n: Number(c.amount) || 0 })),
@@ -269,11 +295,19 @@ function effectsUpTo(def, lv) {
 export function simulateQueue({ arrivals, helper, collects, secs, firstSecs, now }) {
   const events = arrivals.map((t) => ({ t, kind: 'raw' }));
   for (const c of collects) events.push({ t: c.t, kind: 'collect', n: c.n });
-  if (helper?.since && helper.every > 0) {
-    // At most a year of ticks, and only up to now.
-    const first = helper.since + helper.every;
-    const maxTicks = Math.min(4000, Math.floor((now - first) / helper.every) + 1);
-    for (let i = 0; i < maxTicks; i += 1) events.push({ t: first + i * helper.every, kind: 'tick' });
+  /* One tick list per segment, each covering only the window in which that
+     rate was in force. `segments` is the honest form; a bare {since, every}
+     is still accepted so nothing that calls this with one breaks. */
+  const segments = helper?.segments ?? (helper?.since && helper.every > 0
+    ? [{ from: helper.since, to: Infinity, every: helper.every, cap: helper.cap }]
+    : []);
+  for (const seg of segments) {
+    if (!(seg.every > 0) || !seg.from) continue;
+    const until = Math.min(now, seg.to);
+    const first = seg.from + seg.every;
+    if (first > until) continue;
+    const maxTicks = Math.min(4000, Math.floor((until - first) / seg.every) + 1);
+    for (let i = 0; i < maxTicks; i += 1) events.push({ t: first + i * seg.every, kind: 'tick', cap: seg.cap });
   }
   events.sort((a, b) => a.t - b.t || (a.kind === 'collect' ? 1 : -1));
   const finish = [];
@@ -283,7 +317,7 @@ export function simulateQueue({ arrivals, helper, collects, secs, firstSecs, now
     if (e.kind === 'collect') { collected = Math.min(finishedBy(e.t), collected + e.n); continue; }
     if (e.kind === 'tick') {
       const pending = finish.length - collected;
-      if (pending >= helper.cap) continue;
+      if (pending >= (e.cap ?? helper.cap)) continue;
       helperMade += 1;
     }
     const start = Math.max(e.t, lastFinish);
