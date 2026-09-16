@@ -166,7 +166,20 @@
 }
 .vb__in { display: inline-flex; align-items: center; gap: 5px; animation: bubble-bob 2.4s ease-in-out infinite; }
 .vb.is-in { opacity: 1; }
-.vb.is-off { opacity: 0; pointer-events: none; }
+/* A callout whose building is off-screen used to be opacity:0, so a pointer
+   user panning the valley could not see that anything out of view wanted
+   them. It pins to the edge of the frame now: smaller, still, and with a
+   pointer (::before) on the side facing its building; placeCallouts sets
+   --ax/--ay (where on the border) and --ang (which way). The tail is for a
+   building in view and is hidden here. */
+.vb.is-edge { opacity: 0.94; }
+.vb.is-edge .vb__in { animation: none; }
+.vb.is-edge::after { display: none; }
+.vb.is-edge::before {
+  content: ''; position: absolute; left: var(--ax, 50%); top: var(--ay, 0px);
+  width: 0; height: 0; border: 9px solid transparent; border-bottom: 13px solid var(--v-wood);
+  transform: translate(-50%, -50%) rotate(var(--ang, 0deg)) translateY(-12px);
+}
 /* These float over painted canvas, so the ring needs its own contrast on both
    the light grass and the night. A dark ring inside a white one reads on
    either. (They are in the tab order now — see renderCallouts.) */

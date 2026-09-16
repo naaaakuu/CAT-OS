@@ -134,7 +134,9 @@ export class VillageRenderer {
   lookAt(x, y, { zoom, animate = true, duration = 700, ease: easeFn } = {}) {
     const from = { x: this.cam.x, y: this.cam.y, zoom: this.cam.zoom };
     const to = { x, y, zoom: zoom === undefined ? this.cam.zoom : this.snap(zoom) };
-    if (!animate) { Object.assign(this.cam, to); this.clampCamera(); this.invalidate(); return Promise.resolve(); }
+    // An instant move supersedes a tween in flight, or the tween would keep
+    // writing its own interpolation over the new position until it ended.
+    if (!animate) { this.cancelTween(); Object.assign(this.cam, to); this.clampCamera(); this.invalidate(); return Promise.resolve(); }
     const start = performance.now();
     const ease = easeFn ?? ((t) => 1 - Math.pow(1 - t, 3));
     // A tween that is superseded (by another move, or a finger) still

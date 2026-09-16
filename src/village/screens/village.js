@@ -286,12 +286,12 @@ export async function renderVillage(outlet, { storage }) {
          collect, deliver, build — and they carried tabindex="-1", so there
          was no keyboard route to any of it: the canvas's own key handler only
          pans. They are real buttons with labels, so simply letting them into
-         the tab order is enough. The one catch is that a callout whose
-         building is off-screen is opacity:0, and focusing something invisible
-         is worse than not reaching it — so focus brings the village to it,
-         which makes tabbing a tour of everything that wants attention. */
+         the tab order is enough. A callout whose building is off-screen is
+         pinned to the edge of the frame (see placeCallouts); focusing one
+         brings the village to its building, which makes tabbing a tour of
+         everything that wants attention. */
       el.addEventListener('focus', () => {
-        if (!el.classList.contains('is-off')) return;
+        if (!el.classList.contains('is-edge')) return;
         const a = scene.anchors.find((n) => n.id === el.dataset.id);
         if (a) renderer.lookAt(a.x, a.y, { duration: motionReduced() ? 0 : 420 });
       });
@@ -305,27 +305,49 @@ export async function renderVillage(outlet, { storage }) {
     const key = `${Math.round(renderer.cam.x)}|${Math.round(renderer.cam.y)}|${z.toFixed(3)}|${renderer.cssW}|${renderer.cssH}`;
     if (key !== calloutKey) {
       calloutKey = key;
+      const pinned = []; // edge pips placed so far, for the de-overlap pass
       for (const a of scene.anchors) {
         const el = calloutFor.get(a.id);
         if (!el) continue;
         const s = renderer.toScreen(a.x, a.y);
-        /* Hidden only when the BUILDING is outside the view. The bubble
-           itself is slid back inside the frame — it used to be hidden the
-           moment its box touched an edge, which meant a building in plain
-           sight with no callout on it, and five of six gone at once. */
+        /* The bubble slides back inside the frame when its box touches an
+           edge — it used to be hidden the moment it did, which meant a
+           building in plain sight with no callout on it. When the BUILDING
+           itself is outside the view the bubble used to go opacity:0, so a
+           pointer user panning the valley had no way of knowing that
+           anything out of view wanted them. It pins to the edge now as a
+           smaller pip with a pointer toward its building; a tap brings the
+           village to it, as focus always did. */
         const off = s.x < -20 || s.x > renderer.cssW + 20 || s.y < 40 || s.y > renderer.cssH - 10;
         const floor = 44 / (el.offsetHeight || 44);
-        const scale = Math.max(floor, Math.min(1.1, z));
-        const w = (el.offsetWidth || 120) * scale;
-        const h = (el.offsetHeight || 40) * scale;
+        const scale = Math.max(floor, off ? Math.min(1.1, z) * 0.85 : Math.min(1.1, z));
+        const w0 = el.offsetWidth || 120, h0 = el.offsetHeight || 40;
+        const w = w0 * scale;
+        const h = h0 * scale;
         const M = 8;
-        const x = Math.max(w / 2 + M, Math.min(renderer.cssW - w / 2 - M, s.x));
-        const y = Math.max(h + 64, Math.min(renderer.cssH - 12, s.y));
+        let x = Math.max(w / 2 + M, Math.min(renderer.cssW - w / 2 - M, s.x));
+        let y = Math.max(h + 64, Math.min(renderer.cssH - 12, s.y));
+        if (off) {
+          // Pips for buildings off the same edge would stack on one spot.
+          for (let guard = 0; guard < 8; guard += 1) {
+            const hit = pinned.find((p) => Math.abs(p.x - x) < (p.w + w) / 2 && Math.abs(p.y - y) < (p.h + h) / 2 + 4);
+            if (!hit) break;
+            y = hit.y + (y + h + 4 <= renderer.cssH - 12 ? (hit.h + h) / 2 + 4 : -((hit.h + h) / 2 + 4));
+          }
+          pinned.push({ x, y, w, h });
+          // The pointer sits on the bubble's border where the line to the
+          // building leaves it, and points along that line.
+          const dx = s.x - x, dy = s.y - (y - h / 2);
+          const t = Math.min((w0 / 2) / Math.max(1e-6, Math.abs(dx / scale)), (h0 / 2) / Math.max(1e-6, Math.abs(dy / scale)));
+          el.style.setProperty('--ax', `${Math.round(w0 / 2 + (dx / scale) * t)}px`);
+          el.style.setProperty('--ay', `${Math.round(h0 / 2 + (dy / scale) * t)}px`);
+          el.style.setProperty('--ang', `${Math.round(Math.atan2(dx, -dy) * 180 / Math.PI)}deg`);
+        }
         el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px) translate(-50%, -100%) scale(${scale})`;
         // The tail keeps pointing at the building, however far the bubble slid.
         const lean = Math.max(-1, Math.min(1, (s.x - x) / Math.max(1, w / 2)));
         el.style.setProperty('--lean', String(Math.round(lean * 100) / 100));
-        el.classList.toggle('is-off', off);
+        el.classList.toggle('is-edge', off);
       }
     }
     // The working rings tick once a second.
