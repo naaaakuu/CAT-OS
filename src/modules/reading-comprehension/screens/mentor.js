@@ -23,6 +23,7 @@
  */
 
 import { loadRCPassage } from '../../../core/content-loader/loader.js';
+import { icon } from '../../../world/icons.js';
 import { latestSessionFor, getReflection, saveReflection } from '../logic/store.js';
 import { findSeedableForPassage, plantSeed } from '../../../core/engine/garden-gate.js';
 import { SEED_LINES } from '../../../core/mentor/garden-voice.js';
@@ -337,12 +338,14 @@ export async function renderMentor(outlet, { storage }, params) {
   /* "What you learned today" is derived, never generic: this passage,
      this session. */
   const learnedRows = [
-    { icon: '¶', label: 'Concept understood', hint: item.meta.theme },
-    ...(skills.length ? [{ icon: '◎', label: 'Reading skills practiced',
+    // Four typographic marks — ¶ ◎ ∎ ✓ — in a product whose icon language
+    // says every icon is painted by the same hand as the village.
+    { icon: icon('scroll', { size: 20 }), label: 'Concept understood', hint: item.meta.theme },
+    ...(skills.length ? [{ icon: icon('page', { size: 20 }), label: 'Reading skills practiced',
       hint: skills.map(skillLabel).join(' · ') }] : []),
-    ...(vocab.length ? [{ icon: '∎', label: `Vocabulary gained · ${vocab.length} words`,
+    ...(vocab.length ? [{ icon: icon('seed', { size: 20 }), label: `Vocabulary gained · ${vocab.length} words`,
       hint: vocab.map((v) => v.word).join(', ') }] : []),
-    ...(last ? [{ icon: '✓', label: 'Thinking patterns exercised',
+    ...(last ? [{ icon: icon('check', { size: 20 }), label: 'Thinking patterns exercised',
       hint: [...new Set(item.questions.map((q) => q.type.replaceAll('_', ' ')))].join(' · ') }] : []),
   ];
 

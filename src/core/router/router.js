@@ -92,12 +92,42 @@ export class Router {
     // Nothing is shown for the first fifth of a second — a fast screen must
     // not flash a spinner — and after that the learner is told the app is
     // working, not left looking at nothing.
-    const waiting = setTimeout(() => { if (mine === this.#nav) showWaiting(); }, 200);
+    /* WAITING MEANS NOTHING HAS BEEN PAINTED YET — not "render() has not
+       returned". They are very different things here. The village's
+       first-run onboarding awaits the learner's own taps inside render(),
+       so its promise does not settle for as long as somebody takes to read
+       Wick's opening; the screen is painted and working the whole time. The
+       dots were sitting on top of it. What the learner is owed is an answer
+       to "is anything there?", and that is a question about the outlet. */
+    const painted = () => this.#outlet.children.length > 0;
+    const watch = setInterval(() => {
+      if (mine !== this.#nav) return;
+      if (painted()) hideWaiting();
+      else showWaiting();
+    }, 150);
+    const waiting = setTimeout(() => { if (mine === this.#nav && !painted()) showWaiting(); }, 200);
+    /* AND A SCREEN THAT NEVER ARRIVES IS NOT A SCREEN THAT IS STILL COMING.
+       On a storage layer that has stopped answering — a locked IndexedDB, a
+       device out of quota, a browser refusing it in a private window — the
+       dots used to mean forever. Three dots forever is the worst of the
+       options: it says "working" and never stops saying it. Twelve seconds
+       is far longer than any screen in the product needs to paint its first
+       element, and short enough that nobody sits through two of them. */
+    const stalled = setTimeout(() => {
+      if (mine !== this.#nav || !this.#outlet.isConnected || painted()) return;
+      clearInterval(watch);
+      hideWaiting();
+      this.#outlet.innerHTML = FAILED;
+      this.#outlet.querySelector('h1')?.focus?.({ preventScroll: true });
+    }, 12000);
     const run = (async () => {
       this.#outlet.innerHTML = '';
       try {
         await matched.render(this.#outlet, params);
+        clearTimeout(stalled);
       } catch (err) {
+        clearInterval(watch);
+        clearTimeout(stalled);
         console.error('[CAT OS] screen failed to render', location.hash, err);
         // Never a blank screen and never a stack trace: one plain sentence
         // and a way back. The details stay in the console for whoever is
@@ -107,7 +137,9 @@ export class Router {
     })();
     this.#inflight = run;
     await run;
+    clearInterval(watch);
     clearTimeout(waiting);
+    clearTimeout(stalled);
     hideWaiting();
     if (this.#inflight === run) this.#inflight = null;
     if (mine !== this.#nav) return;              // superseded while rendering
@@ -138,7 +170,7 @@ const FAILED = `
   <section class="screen">
     <div class="empty">
       <div class="empty__glyph" aria-hidden="true">·</div>
-      <h1>This screen didn't open</h1>
+      <h1 tabindex="-1">This screen didn't open</h1>
       <p>Something it needed didn't arrive. It usually works the second time.</p>
       <p>
         <button class="btn btn--primary" onclick="location.reload()">Try again</button>

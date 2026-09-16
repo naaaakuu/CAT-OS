@@ -232,7 +232,11 @@ export async function renderVillage(outlet, { storage }) {
       // at, so a callout named itself "A second floor".
       : (v.buildings.find((x) => x.id === id)?.def?.name ?? '');
     const what = `${s.text} ${s.sub ?? ''}`.trim();
-    return [where, [what, TONE_SAYS[s.tone]].filter(Boolean).join(', ')].filter(Boolean).join(': ');
+    // "Build, to build" — when the bubble already says the verb, saying it
+    // again in the name is worse than saying nothing.
+    const says = TONE_SAYS[s.tone];
+    const add = says && !says.split(' ').some((w) => w.length > 3 && what.toLowerCase().includes(w)) ? says : '';
+    return [where, [what, add].filter(Boolean).join(', ')].filter(Boolean).join(': ');
   };
   const calloutSpec = () => {
     const out = [];
@@ -252,7 +256,12 @@ export async function renderVillage(outlet, { storage }) {
          the callout carries both: the count is the headline, the ring is
          the clock underneath it. */
       if (q?.ready > 0) { out.push({ id: b.id, tone: 'good', glyph: b.good.key, text: `×${q.ready}`, ring: q.working ?? null, sub: q.working ? fmtSecs(q.working.readyAt - Date.now()) : '' }); continue; }
-      if (q?.working) { out.push({ id: b.id, tone: 'wait', glyph: b.good.key, ring: q.working, text: `${q.waiting ?? q.pending}`, sub: fmtSecs(q.working.readyAt - Date.now()) }); continue; }
+      /* The count used to be the headline and the clock the small print,
+         which read "3 · 0:05" — and once the queue is down to the one on the
+         bench, "0 · 0:05". A bubble whose headline is nought says nothing at
+         all. While something is being made, the clock IS the news; how many
+         are behind it is the small print, and only when there are any. */
+      if (q?.working) { out.push({ id: b.id, tone: 'wait', glyph: b.good.key, ring: q.working, text: fmtSecs(q.working.readyAt - Date.now()), sub: q.waiting > 0 ? `${q.waiting} more` : '' }); continue; }
       if (b.ready) { out.push({ id: b.id, tone: 'build', glyph: 'hammer', text: 'Raise' }); continue; }
       if (step === 'first-read' && b.id === 'reading') { out.push({ id: b.id, tone: 'learn', glyph: 'page', text: 'Read' }); continue; }
       if (b.good && b.wantedHere > 0 && step === 'done') { out.push({ id: b.id, tone: 'want', glyph: b.raw.key, text: `${b.wantedHere}`, sub: 'wanted' }); continue; }

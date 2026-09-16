@@ -29,7 +29,12 @@ class CatQuestionCard extends HTMLElement {
       <style>
         cat-question-card { display: block; }
         cat-question-card .stem {
-          font-size: var(--text-base);
+          /* The reading-size setting says it "scales passages and lessons",
+             and the question a learner has to parse is the harder half of
+             the reading. This stylesheet is injected at runtime, so it lands
+             after components.css and wins — the size has to be right here
+             rather than be overridden from there. */
+          font-size: var(--text-read, var(--text-base));
           font-weight: var(--weight-semibold);
           margin-bottom: var(--space-3);
         }

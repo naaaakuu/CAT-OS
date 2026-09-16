@@ -12,6 +12,9 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
+// Settings was the only screen breaking the law icons.js states in its
+// own first paragraph: nothing is an emoji, nothing is a glyph from a set.
+import { icon } from '../world/icons.js';
 import { downloadBackup, importAll } from '../core/storage/backup.js';
 import { toast } from '../ui/components/cat-toast.js';
 import { initFeedback, feedbackPrefs, setFeedbackPref, cue, motionReduced } from '../core/engagement/feedback.js';
@@ -33,10 +36,10 @@ async function saveReadingSize(storage, size) { await storage.put(STORES.SETTING
 /* The screen                                                          */
 /* ------------------------------------------------------------------ */
 
-const row = (icon, label, hint, control) => `
+const row = (mark, label, hint, control) => `
   <div class="row">
     <div class="row__lead">
-      <span class="row__icon" aria-hidden="true">${icon}</span>
+      <span class="row__icon" aria-hidden="true">${mark}</span>
       <div><div class="row__label">${escapeHTML(label)}</div><div class="row__hint">${escapeHTML(hint)}</div></div>
     </div>
     ${control}
@@ -59,16 +62,16 @@ export function renderSettings(outlet, { storage, version }) {
 
       <div class="card">
         <h2>Audio</h2>
-        ${row('♫', 'Music and ambience', 'The village’s own music, wind, water and birds', onOff('music-picker', 'music', 'Music and ambience'))}
-        ${row('◑', 'Music volume', 'How loud the village plays', slider('music-volume', 'Music volume'))}
-        ${row('♩', 'Sound effects', 'Taps, chimes, deliveries and stars', onOff('sfx-picker', 'sfx', 'Sound effects'))}
-        ${row('◑', 'Effects volume', 'How loud the cues are', slider('sfx-volume', 'Effects volume'))}
+        ${row(icon('music', { size: 20 }), 'Music and ambience', 'The village’s own music, wind, water and birds', onOff('music-picker', 'music', 'Music and ambience'))}
+        ${row(icon('music', { size: 20 }), 'Music volume', 'How loud the village plays', slider('music-volume', 'Music volume'))}
+        ${row(icon('star', { size: 20 }), 'Sound effects', 'Taps, chimes, deliveries and stars', onOff('sfx-picker', 'sfx', 'Sound effects'))}
+        ${row(icon('star', { size: 20 }), 'Effects volume', 'How loud the cues are', slider('sfx-volume', 'Effects volume'))}
       </div>
 
       <div class="card">
         <h2>Feel</h2>
-        ${row('◇', 'Haptics', 'A subtle vibration where your device supports it', onOff('haptics-picker', 'haptics', 'Haptics'))}
-        ${row('≋', 'Reduce motion', 'Shorter animations in the village and the rooms', `
+        ${row(icon('bell', { size: 20 }), 'Haptics', 'A subtle vibration where your device supports it', onOff('haptics-picker', 'haptics', 'Haptics'))}
+        ${row(icon('arrow', { size: 20 }), 'Reduce motion', 'Shorter animations in the village and the rooms', `
           <div class="segmented" id="motion-picker" role="group" aria-label="Motion">
             <button class="segmented__option" data-motion="system" aria-pressed="false">Auto</button>
             <button class="segmented__option" data-motion="full" aria-pressed="false">Full</button>
@@ -78,11 +81,11 @@ export function renderSettings(outlet, { storage, version }) {
 
       <div class="card">
         <h2>Reading</h2>
-        ${row('Aa', 'Reading size', 'Scales passages and lessons only', `
+        ${row(icon('page', { size: 20 }), 'Reading size', 'Scales passages and lessons only', `
           <div class="segmented" id="reading-picker" role="group" aria-label="Reading size">
             ${READING_SIZES.map((s) => `<button class="segmented__option" data-reading-option="${s}" aria-pressed="false">${s.toUpperCase()}</button>`).join('')}
           </div>`)}
-        ${row('◐', 'Theme', 'The rooms follow your device, or not', `
+        ${row(icon('sun', { size: 20 }), 'Theme', 'The rooms follow your device, or not', `
           <div class="segmented" id="theme-picker" role="group" aria-label="Theme">
             ${THEMES.map((t) => `<button class="segmented__option" data-theme-option="${t}" aria-pressed="false">${t[0].toUpperCase() + t.slice(1)}</button>`).join('')}
           </div>`)}
@@ -91,23 +94,23 @@ export function renderSettings(outlet, { storage, version }) {
       <div class="card">
         <h2>Your data</h2>
         <p class="row__hint">Everything lives on this device — the village, every passage you read, every word you keep. Export a backup to keep it safe or move it to another phone.</p>
-        ${row('↓', 'Export all data', 'Saves a .json backup file', '<button class="btn" id="backup-export">Export</button>')}
-        ${row('↑', 'Import a backup', 'Merge or replace — you choose', '<button class="btn" id="backup-import">Import</button>')}
-        ${row('▤', 'Storage used', 'Measuring…', '')}
+        ${row(icon('scroll', { size: 20 }), 'Export all data', 'Saves a .json backup file', '<button class="btn" id="backup-export">Export</button>')}
+        ${row(icon('scroll', { size: 20 }), 'Import a backup', 'Merge or replace — you choose', '<button class="btn" id="backup-import">Import</button>')}
+        ${row(icon('scales', { size: 20 }), 'Storage used', 'Measuring…', '')}
         <input type="file" id="backup-file" accept="application/json" hidden />
       </div>
 
       <div class="card">
         <h2>Offline</h2>
         <p class="row__hint">CAT OS downloads itself so it works on a train, in a basement, on a dead connection. The library arrives in the background, a few files at a time, and picks up where it stopped.</p>
-        ${row('◆', 'Downloaded for offline', 'Checking…', '<button class="btn" id="offline-refresh">Check</button>')}
+        ${row(icon('check', { size: 20 }), 'Downloaded for offline', 'Checking…', '<button class="btn" id="offline-refresh">Check</button>')}
         <div class="offline-bar" id="offline-bar" aria-hidden="true"><i style="width:0%"></i></div>
       </div>
 
       <div class="card">
         <h2>About</h2>
-        ${row('℅', 'CAT OS', `Version ${version} · offline-first · your data stays yours`, '')}
-        ${row('⌂', 'The village', 'Home is the village. Learning is its economy.', '<a class="btn" href="#/world">Open</a>')}
+        ${row(icon('cat', { size: 20 }), 'CAT OS', `Version ${version} · offline-first · your data stays yours`, '')}
+        ${row(icon('house', { size: 20 }), 'The village', 'Home is the village. Learning is its economy.', '<a class="btn" href="#/world">Open</a>')}
       </div>
     </section>`;
 

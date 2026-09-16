@@ -100,8 +100,15 @@
   width: 1.9rem; height: 1.9rem;
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-2);
-  color: var(--color-ink-2);
+  /* A PAINTED ICON NEEDS PAPER UNDER IT.
+     These are village art with the village's own dark outlines, so on a
+     dark surface they vanish — the music note and the arrow were invisible
+     squares in dark mode. The village solves this everywhere it shows an
+     icon by standing it on a small cream plate, and that plate is part of
+     the icon language rather than part of the theme. */
+  background: #FBF6EA;
+  border: 1px solid rgba(43, 36, 56, 0.10);
+  color: #2B2438;
   font-size: var(--text-sm);
 }
 .row__lead { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
@@ -4450,7 +4457,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
    a learner has to parse nor the four options they have to hold in their
    head was one of them. Setting the reading size to XL and watching the
    question stay at 15px is the setting not working. */
-cat-question-card .stem, cat-option .body, cat-explanation .verdict + p, .reread__body { font-size: var(--text-read); }
+cat-option .body, cat-explanation .verdict + p, .reread__body { font-size: var(--text-read); }
 
 /* A <summary> is a button that does not look like one, and was 42px tall. */
 summary { min-height: var(--tap-target); display: flex; align-items: center; }
