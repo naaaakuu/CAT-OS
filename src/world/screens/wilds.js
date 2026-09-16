@@ -218,11 +218,24 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     locked = false; shownAt = Date.now();
     pos.textContent = String(index + 1);
     track.style.width = `${Math.round((index / questions.length) * 100)}%`;
+    /* THE QUESTION NEEDS SOMETHING TO SIT ON.
+       These four classes were written straight into .run__body with no
+       .vround around them, where round.js — the same question, the same
+       classes — wraps them in one. .vround is what carries `background:
+       var(--g-panel)`, and without it the question text inherits --g-ink
+       onto .run's permanent night ground: near-black on navy, 1.14:1, in
+       BOTH themes, because .run declares its own light palette. The four
+       answer buttons carry their own cream background and read perfectly,
+       so a learner saw four legible options above a blank space, with a
+       three-minute clock running over thirty questions. */
     body.innerHTML = `
-      <p class="vround__pos">${q.inContext ? 'In context' : escapeHTML(regionBySlug(q.region)?.name ?? '')}</p>
-      ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${markStem(q)}</p>`}
-      <p class="vround__ask">${escapeHTML(q.ask)}</p>
-      <div class="vround__options ${q.kind === 'twin' ? 'twin__pair' : ''}" id="opts">${q.options.map((o, i) => `<button class="vopt" data-i="${i}"><span class="key" aria-hidden="true">${KEYS[i] ?? ''}</span><span>${escapeHTML(o.text)}</span></button>`).join('')}</div>`;
+      <div class="vround" id="card">
+        <p class="vround__pos">${q.inContext ? 'In context' : escapeHTML(regionBySlug(q.region)?.name ?? '')}</p>
+        ${q.wordShown ? `<h2 class="vround__word">${escapeHTML(q.stem)}</h2>` : `<p class="vround__sentence">${markStem(q)}</p>`}
+        <p class="vround__ask">${escapeHTML(q.ask)}</p>
+        <div class="vround__options ${q.kind === 'twin' ? 'twin__pair' : ''}" id="opts">${q.options.map((o, i) => `<button class="vopt" data-i="${i}"><span class="key" aria-hidden="true">${KEYS[i] ?? ''}</span><span>${escapeHTML(o.text)}</span></button>`).join('')}</div>
+      </div>`;
+    requestAnimationFrame(() => body.querySelector('#card')?.classList.add('is-in'));
     body.querySelector('#opts').addEventListener('click', (e) => {
       const btn = e.target.closest('.vopt'); if (!btn || locked) return;
       locked = true;

@@ -87,7 +87,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --g-paper: #1A1B24; --g-paper-2: #22242F; --g-paper-3: #2E313F;
-    --g-ink: #F0EADC; --g-ink-2: #B4AE9E; --g-ink-3: #9A9484;
+    --g-ink: #F0EADC; --g-ink-2: #B4AE9E; --g-ink-3: #AEA898;
     --g-line: rgba(240, 234, 220, 0.12);
     --g-panel: rgba(26, 27, 36, 0.92);
     --g-panel-edge: rgba(240, 234, 220, 0.14);
@@ -121,7 +121,7 @@
 }
 :root[data-theme="dark"] {
   --g-paper: #1A1B24; --g-paper-2: #22242F; --g-paper-3: #2E313F;
-  --g-ink: #F0EADC; --g-ink-2: #B4AE9E; --g-ink-3: #9A9484;
+  --g-ink: #F0EADC; --g-ink-2: #B4AE9E; --g-ink-3: #AEA898;
   --g-line: rgba(240, 234, 220, 0.12);
   --g-panel: rgba(26, 27, 36, 0.92);
   --g-panel-edge: rgba(240, 234, 220, 0.14);
@@ -672,7 +672,22 @@
 .run__ring.is-over { background: conic-gradient(var(--c-ember) var(--p, 100%), rgba(255, 255, 255, 0.18) 0); }
 .run__track { background: rgba(255, 255, 255, 0.14); }
 .run__track i { background: var(--g-gold); }
-.run__body { display: flex; flex-direction: column; justify-content: center; }
+/* CENTRING A SCROLL CONTAINER PUTS ITS FIRST CHILD OUT OF REACH.
+   `justify-content: center` on an overflowing column pushes the overflow
+   out of BOTH ends, and the top end of a scroll container cannot be scrolled
+   back to — the box exists at a negative offset and no gesture reaches it.
+   On the reading run that was "Re-read the passage": measured at y=-127 and
+   2px tall from the first question onward, on every phone-height screen. The
+   learner could not re-read the passage they were being questioned on.
+
+   Two px, because flex items shrink by default and a fold with nothing but
+   a summary in it has no floor to stop at.
+
+   The centring the design actually wants is already expressed two rules
+   below, per child, as `margin: auto 0` — which centres when there is room
+   and does nothing when there is not. That is the whole fix. */
+.run__body { display: flex; flex-direction: column; justify-content: flex-start; }
+.run__body > * { flex-shrink: 0; }
 
 .brief {
   background: var(--g-panel);

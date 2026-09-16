@@ -64,6 +64,28 @@ export const ROUTES = [
   { hash: '#/world/place/wilds', name: 'place-wilds' },
   { hash: '#/round/meadow', name: 'round-meadow' },
   { hash: '#/nowhere', name: 'not-found' },
+
+  /* NOT EVERY SCREEN IS A ROUTE.
+     This gate measured routes, and 2.1.2 shipped with the Gauntlet's
+     question at 1.14:1 in BOTH themes — near-black prose on a permanent
+     night ground, invisible, while a three-minute clock ran over thirty
+     questions. It is not a route: it is a state two taps inside
+     #/world/place/wilds, and nothing that only opens URLs was ever going
+     to see it. An "enter" list is in-page steps run after the route loads,
+     so a screen behind a tap is measured like any other. */
+  { hash: '#/world/place/wilds', name: 'gauntlet-question', risk: true, enter: [
+    { click: 'gauntlet', wait: 2600 },
+  ] },
+  { hash: '#/rc/session/rc-0001', name: 'rc-question', risk: true, enter: [
+    { click: 'begin', wait: 900 },
+    { click: 'read it', wait: 1100 },
+  ] },
+  { hash: '#/rc/session/rc-0001', name: 'rc-explained', risk: true, enter: [
+    { click: 'begin', wait: 900 },
+    { click: 'read it', wait: 1100 },
+    { sel: 'cat-option button', wait: 400 },
+    { click: 'lock it in', wait: 1100 },
+  ] },
 ];
 
 /* The village screen is a painted game world, not a document: it keeps its
@@ -272,6 +294,41 @@ export async function checkRenderedContrast({
       for (const route of routes) {
         try {
         await b.open(server.url + route.hash, 4200);
+        /* A tap path has to start where it thinks it starts. The light
+           pass answers a question, which writes a draft, and the dark
+           pass then arrives at a passage offering to CARRY ON rather than
+           to begin — correct behaviour, and a path that walks into it is
+           measuring a different screen. Each state begins from a learner
+           with nothing half-finished. */
+        if (route.enter?.length) {
+          await b.evaluate(`(async () => {
+            const s = await import('/src/core/storage/indexeddb-adapter.js');
+            const st = new s.IndexedDBAdapter(); await st.init();
+            for (const r of await st.getAll('settings')) if (String(r.id).startsWith('draft:')) await st.delete('settings', r.id);
+            return 1;
+          })()`).catch(() => {});
+          await b.open(server.url + route.hash, 2500);
+        }
+        /* Walk into the state this route is a door to. A step is either a
+           CSS selector or a fragment of the control's own words, because a
+           class name is what a redesign changes and a label is what a
+           learner reads. A step that finds nothing is REPORTED, never
+           skipped: a gate whose path has rotted must say so rather than
+           quietly measure the screen in front of the door. */
+        let entered = true;
+        for (const step of route.enter ?? []) {
+          const probe = step.sel
+            ? `(() => { const e = document.querySelector(${JSON.stringify(step.sel)}); if (!e) return false; e.click(); return true; })()`
+            : `(() => { const want = ${JSON.stringify(String(step.click).toLowerCase())}; const e = [...document.querySelectorAll('a, button')].find((x) => (x.textContent || '').toLowerCase().includes(want) && !x.disabled); if (!e) return false; e.click(); return true; })()`;
+          if (!await b.evaluate(probe)) {
+            failures.push({ theme, route: route.name, hash: route.hash, sel: '(entering)', ratio: 0, need: 0,
+              text: `cannot reach it: nothing to click matching "${step.sel ?? step.click}"` });
+            entered = false;
+            break;
+          }
+          await new Promise((r) => setTimeout(r, step.wait ?? 800));
+        }
+        if (!entered) continue;
         // Re-inject before every use. The app registers a service worker a few
         // seconds in and reloads once if a new worker takes control, which
         // wipes anything injected — a gate that dies on that is a gate nobody
