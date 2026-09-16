@@ -87,8 +87,11 @@ export function renderResult(outlet, o) {
         <div class="late result__extra">${o.extraHTML ?? ''}</div>
         <div class="result__actions">
           ${(o.actions ?? []).map((a, i) => a.href
-            ? `<a class="g-btn ${a.primary ? 'g-btn--primary' : ''}" href="${a.href}" data-action="${i}">${escapeHTML(a.label)}</a>`
-            : `<button class="g-btn ${a.primary ? 'g-btn--primary' : ''}" data-action="${i}">${escapeHTML(a.label)}</button>`).join('')}
+            // Three buttons of the same weight is three decisions. One
+            // primary, one ordinary, and the third — always "and another way
+            // back" — as a quiet link.
+            ? `<a class="g-btn ${a.primary ? 'g-btn--primary' : a.quiet ? 'g-btn--quiet' : ''}" href="${a.href}" data-action="${i}">${escapeHTML(a.label)}</a>`
+            : `<button class="g-btn ${a.primary ? 'g-btn--primary' : a.quiet ? 'g-btn--quiet' : ''}" data-action="${i}">${escapeHTML(a.label)}</button>`).join('')}
         </div>
       </div>
     </section>`;

@@ -367,7 +367,13 @@
 .result__stars { display: flex; gap: 14px; margin: 0 0 22px; height: 64px; align-items: center; }
 .result__star { width: 56px; height: 56px; opacity: 0; transform: scale(0.3) rotate(-20deg); }
 .result__star.is-on { animation: star-pop 600ms var(--g-spring) forwards; opacity: 1; transform: none; }
-.result__star.is-off { opacity: 0.22; transform: none; }
+/* An unearned star was the same gold star at 22% with its gold glow still
+   on it — on navy that is a smudge, not a shape. An empty star is a shape:
+   the outline is what says "this one is still to come". */
+.result__star.is-off { opacity: 1; transform: none; }
+.result__star.is-off svg { filter: none; }
+.result__star.is-off svg path { fill: none; stroke: currentColor; stroke-width: 1.4; opacity: 0.5; }
+.result__star.is-off svg path + path { display: none; }
 .result__star svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 10px rgba(244,196,67,0.45)); }
 @keyframes star-pop { 0% { opacity: 0; transform: scale(0.3) rotate(-20deg); } 60% { opacity: 1; transform: scale(1.18) rotate(4deg); } 100% { opacity: 1; transform: none; } }
 .result__verdict { font-size: 16px; opacity: 0.92; margin: 0 0 22px; max-width: 34ch; line-height: 1.45; }

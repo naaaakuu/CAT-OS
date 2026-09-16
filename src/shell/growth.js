@@ -36,7 +36,19 @@ import { listLessons, listReflections } from '../core/mentor/records.js';
 import { escapeHTML, formatDate } from '../core/utils/format.js';
 import { loadWorld } from '../world/state.js';
 import { readingWeakness, typeName, weaknessLine } from '../world/curator.js';
-import { art } from '../village/art.js';
+/* THE SAME PLANT THE GARDEN GROWS.
+   Growth painted one round canopy and scaled it, so a track at "Not started"
+   and a track at "Deep" were the same mature tree — and then fitted each one
+   to its own canvas independently, which divided the scale straight back out
+   again and made all four exactly the same height. The comparison the screen
+   exists to make was cancelled by its own fitting.
+
+   cat-plant is the product's existing growth art, and its rule (Guide 6.1)
+   is the one this screen needed all along: every stage ADDS a structure the
+   previous stage did not have, so each is unmistakable in silhouette at
+   thumbnail size. TIERS below already speaks its vocabulary, stage for
+   stage. */
+import '../ui/components/cat-plant.js';
 import { loadValley, valleyName } from '../world/companion.js';
 import { craft } from '../world/economy.js';
 import { collections, closest, tally, GROUPS } from '../world/collections.js';
@@ -122,14 +134,13 @@ export async function renderGrowth(outlet, { storage }) {
             ['pace', 'CAT pace', 'ember', 'Right, and inside the time'],
           ].map(([k, name, cr, line]) => `
             <div class="seedling ability--${cr}">
-              <span class="seedling__plate"><canvas class="seedling__tree" width="120" height="150" aria-hidden="true"></canvas></span>
+              <span class="seedling__plate"><cat-plant class="seedling__tree" stage="seed" seed="reach:${k}" aria-hidden="true"></cat-plant></span>
               <b>${escapeHTML(name)}</b>
               <span>${escapeHTML(line)}</span>
             </div>`).join('')}
         </div>
         <a class="g-cta" href="#/world">Into the valley<span class="arrow" aria-hidden="true">→</span></a>
       </div>`;
-    for (const cv of body.querySelectorAll('.seedling__tree')) paintTree(cv, 'seed', 6);
     return;
   }
 
@@ -163,7 +174,7 @@ export async function renderGrowth(outlet, { storage }) {
       ${abilities.map((a) => `
         <article class="ability ability--${a.craft}" data-key="${a.key}">
           <span class="ability__plate">
-            <canvas class="ability__tree" width="150" height="186" aria-hidden="true" data-stage="${a.tier.stage}"></canvas>
+            <cat-plant class="ability__tree" stage="${a.tier.stage}" seed="reach:${a.key}" aria-hidden="true"></cat-plant>
           </span>
           <div class="ability__body">
             <p class="ability__what">${craftIcon(a.craft, { size: 14 })}${escapeHTML(a.name)}</p>
@@ -204,7 +215,6 @@ export async function renderGrowth(outlet, { storage }) {
       <div id="numbers"></div>
     </details>`;
 
-  for (const cv of body.querySelectorAll('.ability__tree')) paintTree(cv, cv.dataset.stage, 4);
   // The bars fill from nothing on arrival: progress that moves is read as
   // progress; progress already at its mark is read as a printed figure.
   for (const bar of body.querySelectorAll('.ability__bar i')) {
@@ -427,15 +437,3 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
 /* The trees                                                           */
 /* ------------------------------------------------------------------ */
 
-function paintTree(cv, stage) {
-  if (!cv) return;
-  const ctx = cv.getContext('2d');
-  const size = { seed: 0.45, sprout: 0.55, young: 0.7, in_leaf: 0.85, mature: 1, ancient: 1.15 }[stage] ?? 0.8;
-  const s = art('tree', { kind: 'round', size, seed: `reach:${stage}`, tone: stage === 'ancient' ? 1 : 0 }, 3);
-  const z = Math.min(1, (cv.height - 6) / (s.h * 3), (cv.width - 4) / (s.w * 3));
-  const w = s.w * 3 * z, h = s.h * 3 * z;
-  ctx.clearRect(0, 0, cv.width, cv.height);
-  // Bottom-aligned and centred: four trees on one ground line, so their
-  // heights are the comparison the screen is making.
-  ctx.drawImage(s.canvas, Math.round((cv.width - w) / 2), cv.height - h - 4, w, h);
-}

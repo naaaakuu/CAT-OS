@@ -262,7 +262,7 @@ export async function renderRound(outlet, { storage }, params) {
         actions: [
           { label: 'Another round', href: `#/round/${region.slug}`, primary: true },
           { label: `Back to ${region.name}`, href: region.route },
-          { label: 'The valley', href: '#/world' },
+          { label: 'The valley', href: '#/world', quiet: true },
         ],
       });
     }

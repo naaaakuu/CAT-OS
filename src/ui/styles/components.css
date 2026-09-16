@@ -373,8 +373,13 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  margin: 0 calc(-1 * var(--space-2)) var(--space-3);
-  padding: var(--space-2);
+  /* It used to be inset from the column by 8px, so a paragraph scrolling
+     under it passed beside the pill on both sides, unveiled and legible
+     against the header it was supposed to be behind. It reaches the edges
+     of the reading column now, and its padding puts the text back where it
+     was. */
+  margin: 0 calc(-1 * (env(safe-area-inset-right) + var(--space-4))) var(--space-3);
+  padding: var(--space-2) calc(env(safe-area-inset-right) + var(--space-4));
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   background: var(--color-veil);
   -webkit-backdrop-filter: saturate(160%) blur(12px);

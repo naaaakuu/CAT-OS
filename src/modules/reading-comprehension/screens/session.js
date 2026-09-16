@@ -426,7 +426,7 @@ export async function renderSession(outlet, { storage }, params) {
         actions: [
           { label: 'Back to the village', href: '#/world', primary: true },
           { label: 'Understand this passage', href: `#/rc/mentor/${passage.meta.id}` },
-          { label: 'Back to the Reading House', href: '#/world/place/reading-room' },
+          { label: 'Back to the Reading House', href: '#/world/place/reading-room', quiet: true },
         ],
       });
     }
