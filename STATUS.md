@@ -4,7 +4,33 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-16 — 2.1.2, the polish, reliability and systems-hardening pass. Dark mode is a designed theme rather than an inverted light one (78 rendered-contrast failures → 0). The service worker installs in resumable batches and promotes transactionally, so a failed upgrade costs nothing and a content bump no longer deletes a 435-file library. The cold open is 55 modules, not 153. A tree was standing in the river; the map is validated as data now and as a running scene. The ledgers that had been counting for two releases speak to a learner in four places. Nobody had ever pressed Tab. 90+ defects found and fixed, each reproduced in a real browser. Six new gates (§23, §23b, §24, §26, §27, §28). App version 2.1.2._
+_Last updated: 2026-09-16 — 2.1.3, the interruption pass. Every engine now carries a run across a refresh: Para Jumbles, Para Summary, Odd One Out and Word DNA joined the reading run and the banks, a draft cannot claim a mark, and a draft counts time on task, so a set left overnight is no longer recorded as an eight-hour set that failed its pace. A settled skill that goes quiet comes back to the curator once. Callouts for buildings out of view pin to the edge of the frame instead of vanishing. One new gate (§30) drives all of it in a real browser. App version 2.1.3._
+
+_2.1.2 — the polish, reliability and systems-hardening pass. Dark mode is a designed theme rather than an inverted light one (78 rendered-contrast failures → 0). The service worker installs in resumable batches and promotes transactionally, so a failed upgrade costs nothing and a content bump no longer deletes a 435-file library. The cold open is 55 modules, not 153. A tree was standing in the river; the map is validated as data now and as a running scene. The ledgers that had been counting for two releases speak to a learner in four places. Nobody had ever pressed Tab. 90+ defects found and fixed, each reproduced in a real browser. Six new gates (§23, §23b, §24, §26, §27, §28). App version 2.1.2._
+
+## What changed in 2.1.3 (interruption, revisiting, and the edge of the frame)
+
+_Three items from the 2.1.2 list, chosen because a daily learner meets them
+first. Each was reproduced against the running app in a real browser, fixed,
+and re-driven; the tour that proved them is verify §30 now._
+
+| Area | State | Notes |
+|---|---|---|
+| **Interruption, everywhere** | **fixed (2.1.3)** | Para Jumbles, Para Summary, Odd One Out and Word DNA recorded nothing until the last tap; a refresh threw up to a quarter of an hour away. Each answer writes a draft now and the set resumes where it was, saying so once — including inside a Word DNA family, between the Predict and its Applies. A draft carries what the learner did, never the verdict: restore re-marks every choice, so a hand-edited draft cannot claim a mark. Proven in a real Chrome: answer, refresh, resume, finish, and the pre-refresh answer is in the record |
+| **Time on task** | **fixed (2.1.3)** | Every draft, reading and banks included, carried the wall-clock start, so a set resumed the next morning was recorded as an eight-hour set, failed the "in time" check in the economy and cost the learner stars for having been interrupted, and inflated total practice time. Drafts carry elapsed time now: six engines, one rule. A draft is cleared only after the record is saved, so a failed save leaves the way back |
+| **A settled skill that went quiet** | **fixed (2.1.3)** | A mastered-then-abandoned skill was invisible to the curator: not weak, not new, never offered again. The ledger marks a settled skill *due* after a level-scaled interval (3 / 7 / 14 / 30 days) and the curator offers it once, behind anything weak and ahead of anything new. One visit resets its clock |
+| **Off-screen callouts** | **fixed (2.1.3)** | A callout whose building was out of view went `opacity: 0`, so a pointer user panning the valley could not see that anything wanted them. It pins to the edge of the frame now, smaller, with a pointer toward its building; pips off the same edge stack instead of piling up; a tap brings the village to the building. Four of four pinned after a pan to the far corner, all inside the frame, tappable, 44 px, none overlapping |
+
+### Known and not yet addressed
+
+| Item | Why it matters |
+|---|---|
+| Arguments (6 items) and Paragraph Completion (27) still run dry quickly | A daily learner reaches the bottom of Arguments in one sitting. The village now offers them, which makes the shortage arrive sooner |
+| The Mirror Pond and Vine Terraces word-bank shelves have no content | `confusable` and `decode` bundles are authored nowhere, so those two shelves render nothing at all. Nothing breaks; the shelf is simply not there |
+| Five weakness models still disagree | `readingWeakness` is question-type-shaped; `skillLedger` is skill-shaped and spans every module; `patternLedger` is finer than both. The curator reads all three, but one of them should be a view over another rather than three independent counts of the same answers |
+| ~20 button recipes, 20 corner radii, 30 shadow recipes | Four button families across four stylesheets. Each is individually correct; together they are more materials than one product needs |
+| The village scene is rebuilt whole on every craft | 11.4 ms is under a frame, but the static half (terrain, trees, houses) does not change and is rebuilt anyway |
+| The Language Garden and the word rounds still record nothing until the last click | A Grow session and a word round are two to four minutes, which is why they were not on the 2.1.2 list; they are the last two engines without a draft |
 
 ## What changed in 2.1.2 (polish, reliability and systems hardening)
 
@@ -26,7 +52,7 @@ encounters it, it should feel intentional._
 | **Performance** | **fixed (2.1.2)** | Half of the 47 ms village rebuild was `distToPolyline` walking polylines the prop was four hundred units from, with `Math.hypot` inside the loop. Median rebuild **47.8 ms → 11.4 ms**; worst frame in ordinary play 34.5 ms → 20 ms |
 | **Honest failure** | **fixed (2.1.2)** | Every async path has a loading, a success, a failure and a retry. One malformed record no longer bricks the village; a failed registry is no longer mistaken for an empty one; a screen that has painted nothing for twelve seconds says so and offers a way back |
 
-### Known and not yet addressed
+### Known at 2.1.2 — the interruption, skill-decay and callout lines were addressed in 2.1.3; the rest are repeated above
 
 | Item | Why it matters |
 |---|---|

@@ -4,6 +4,74 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 2.1.3 — Interruption everywhere, a skill that went quiet, the edge of the frame (2026-09-16)
+
+Three items from the 2.1.2 list, chosen because a daily learner meets them
+first. Each was reproduced against the running app in a real browser, fixed,
+and re-driven; the browser tour that proved them is verify §30 now.
+
+### Four engines recorded nothing until the last tap
+
+- **Para Jumbles, Para Summary, Odd One Out and Word DNA** held every answer
+  in a Map inside a closure and wrote it down on the very last tap. A tier is
+  six to thirteen items — up to a quarter of an hour — and a refresh, a
+  backgrounded tab or a deploy threw all of it away with no word. Each engine
+  carries the `snapshot()` / `restore()` pair the reading run and the banks
+  got in 2.1.2; each answer writes a draft; the set resumes where it was and
+  says so once. A Word DNA family interrupted between its Predict and its
+  Applies comes back with the Predict locked and the first unanswered Apply
+  waiting.
+- **A draft cannot claim a mark.** It keeps what the learner DID — the order
+  they entered, the option they chose, the sentence they set apart — and
+  `restore()` marks it again against the item. A draft carrying
+  `is_correct: true` on a wrong order restores as wrong, with its joins
+  recounted. Sixty-eight malformed drafts through four engines: nothing
+  thrown, every index inside the set, every `finish()` a record.
+- **A set left overnight was an eight-hour set.** Every draft — reading and
+  banks included — carried the wall-clock start, so a run resumed the next
+  morning was recorded with the night in its `duration_ms`, failed the
+  "in time" check in `world/economy.js` and cost the learner stars for
+  having been interrupted, and inflated total practice time in
+  `engagement/stats.js`. Drafts carry ELAPSED time now
+  (`core/engine/draft-shape.js`, one rule for six engines): sixty seconds
+  before, thirty after, recorded as ninety.
+- **A draft is cleared only after the record is saved.** The reading screen
+  and the banks cleared it first, so a failed save lost both the record and
+  the way back to it. If the save fails now the learner comes back to the
+  last item and can finish again.
+
+### A settled skill that went quiet was never offered again
+
+- The curator picks what is slipping, then what is new. A skill the learner
+  had mastered and then stopped visiting was neither — its last answers were
+  right, and it had been seen — so it never came back. The ledger marks a
+  settled skill **due** after a level-scaled interval (3 / 7 / 14 / 30 days,
+  `REVISIT_DAYS`), and `nextSkill` offers it once, behind anything weak and
+  ahead of anything new. One visit resets its clock, so it never crowds out
+  for long the abilities not yet met. verify §20 checks all three orderings.
+
+### Callouts for buildings out of view were invisible
+
+- A callout whose building had left the frame went `opacity: 0`. Keyboard
+  users could still reach it (focus pans the camera); pointer users panning
+  the valley had no way of knowing that anything out of view wanted them. It
+  pins to the edge of the frame now — smaller, still, with a pointer on the
+  side facing its building — pips off the same edge stack instead of piling
+  up, and a tap brings the village to the building, as focus always did.
+  Four of four pinned after a pan to the far corner, inside the frame,
+  tappable, 44 px, none overlapping.
+- Found on the way: an instant `lookAt` did not cancel a tween in flight,
+  so the opening's settle-to-home kept writing over it until it ended.
+
+### Gates
+
+- **§30 `tools/check-resume.mjs`** drives the four modules and the village
+  in a real Chrome: answer, refresh, resume, finish, read the record back;
+  pan, pin, tap, return.
+- **§29** now covers the four engines, the re-marking rule and the overnight
+  rule for all six.
+- **§20** covers the due skill and its place in the order.
+
 ## 2.1.2 — Polish, reliability and systems hardening (2026-09-16)
 
 A pass over 2.1.1 with one question: what would still feel unfinished,

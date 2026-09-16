@@ -46,7 +46,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '2.1.2'; // keep in step with CHANGELOG.md
+const APP_VERSION = '2.1.3'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 

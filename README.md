@@ -131,7 +131,7 @@ village economy and its derived state, vocabulary rounds), the mentor voice,
 the corpus QC, and a backup round trip. Exit 0 means the repository is
 internally consistent.
 
-Six of the twenty-eight sections drive a **real browser** (any Chrome or Edge
+Seven sections drive a **real browser** (any Chrome or Edge
 on the machine; no Playwright, no npm). They exist because green unit tests
 are not the same as a working screen — `verify.mjs` passed for a whole release
 while the Reading Room rendered its passages at 1.14:1 contrast.
@@ -144,6 +144,7 @@ while the Reading Room rendered its passages at 1.14:1 contrast.
 | §26 `check-hostile-records.mjs` | Puts 25 deliberately broken records through eight derivations |
 | §27 `check-noticing.mjs` | Checks the trap, pattern and skill ledgers actually reach a learner, in register, with a number behind every line |
 | §28 `check-reach.mjs` | Walks every route with a real Tab key in both themes: focus visible, 44×44, named by something other than its own id |
+| §30 `check-resume.mjs` | Answers, refreshes, resumes and finishes a set in Para Jumbles, Para Summary, Odd One Out and Word DNA, and reads the record back; pans the village until its buildings leave the frame and checks their callouts pin to the edge, tappable, and bring the village back |
 
 A release runs the full sweep, which measures all twenty-two routes rather
 than the ten riskiest:

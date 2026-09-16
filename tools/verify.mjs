@@ -2343,7 +2343,21 @@ console.log('\n20. Bank engine dry run (session · set picking · rest · stars 
   if (weakTrapFamilies(trapLedger(many))[0]?.key !== 'scope') bad('weakTrapFamilies: three scope misses name the scope family');
   const pl = patternLedger([{ module: 'rc', finished_at: later, answers: [1, 2, 3, 4].map((i) => ({ question_id: `q${i}`, is_correct: i === 4, patterns: ['inf.vs_speculation'] })) }]);
   if (weakPatterns(pl)[0]?.key !== 'inf.vs_speculation') bad('weakPatterns: a pattern missed three times in four is weak');
-  if (problems.length === 0) ok('bank session, set picking, rest, stars, crafts and the three ledgers behave');
+  // A mastered-then-abandoned skill resurfaces; a recently settled one does
+  // not; a weak one still outranks it. Before this the curator could never
+  // offer a level-4 skill again: not weak, not new, so never on any list.
+  const { nextSkill, dueSkills, REVISIT_DAYS } = await mod('src/core/learning/review.js');
+  const ago = (d) => new Date(Date.now() - d * 86400000).toISOString();
+  const settled = (skill, daysAgo, n = 20) => ({ module: 'sp', finished_at: ago(daysAgo), answers: Array.from({ length: n }, (_, i) => ({ item_id: `${skill}-${i}`, skill, is_correct: true })) });
+  const oldLed = skillLedger([settled('placement', 45)], []);
+  if (!oldLed.get('placement')?.due || oldLed.get('placement').level !== 4) bad('skillLedger: a level-4 skill untouched for 45 days is not marked due');
+  if (nextSkill(oldLed, {})?.kind !== 'due') bad(`nextSkill: a mastered skill 45 days quiet is not offered again (got ${nextSkill(oldLed, {})?.kind})`);
+  if (dueSkills(oldLed)[0]?.revisitDays !== REVISIT_DAYS[4]) bad('dueSkills: a level-4 skill waits the level-4 interval');
+  const freshLed = skillLedger([settled('placement', 5)], []);
+  if (freshLed.get('placement')?.due || nextSkill(freshLed, {})?.kind === 'due') bad('nextSkill: a skill settled 5 days ago is offered as due');
+  const weakToo = skillLedger([settled('placement', 45), { module: 'sp', finished_at: ago(1), answers: [1, 2, 3, 4, 5].map((i) => ({ item_id: `c-${i}`, skill: 'completion', is_correct: i === 1 })) }], []);
+  if (nextSkill(weakToo, {})?.kind !== 'weak') bad(`nextSkill: a due skill outranked a weak one (got ${nextSkill(weakToo, {})?.kind})`);
+  if (problems.length === 0) ok('bank session, set picking, rest, stars, crafts and the three ledgers behave; a settled skill gone quiet comes back once, behind anything weak');
 }
 
 console.log('\n21. Corpus QC (tools/qc-corpus.mjs — hard checks)');
@@ -2532,6 +2546,27 @@ console.log('\n29. What a learner left behind (tools/check-interruption.mjs)');
   const { interruptionProblems, cases } = await mod('tools/check-interruption.mjs');
   for (const p of interruptionProblems) bad('interruption: ' + p);
   if (problems.length === before) ok(`${cases.drafts} malformed drafts and ${cases.records} nonsense record sets: nothing thrown, nothing lost, and no order promised that the barn cannot pay`);
+}
+
+console.log('\n30. What a learner comes back to (tools/check-resume.mjs — a real browser)');
+{
+  const before = problems.length;
+  // §29 proves the ENGINES carry a run across an interruption; this proves
+  // the SCREENS do. It answers an item in each of Para Jumbles, Para Summary,
+  // Odd One Out and Word DNA, reloads the page, checks the screen is where
+  // the learner was (a locked item shows its verdict again; a family
+  // interrupted between Predict and Apply picks up at the Apply), finishes
+  // the set and reads the record out of IndexedDB. Then it pans the village
+  // until its buildings leave the frame and checks their callouts pin to the
+  // edge — tappable, inside the frame, none overlapping — and that a real
+  // tap on one brings the village back. They used to be opacity:0.
+  const { checkResume } = await mod('tools/check-resume.mjs');
+  const r = await checkResume();
+  if (r.skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). Nobody came back.');
+  else {
+    for (const p of r.problems) bad('resume: ' + p);
+    if (problems.length === before) ok(`${r.cases} things a learner comes back to, checked on a real screen: four modules resume after a refresh and record what was answered before it; off-screen callouts pin to the edge and bring the village back`);
+  }
 }
 
 console.log('\n─────────────────────────────────────');
