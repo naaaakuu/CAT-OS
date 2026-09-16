@@ -578,3 +578,9 @@ cat-explanation .verdict { scroll-margin-top: 86px; }
 :root[data-world] .card:has(> .run__actions) { padding-bottom: 4px; }
 /* The last option must be able to scroll clear of the bar. */
 .run__body > *:last-child { margin-bottom: 96px; }
+
+/* The only way out of a passage or a round was 34 square. */
+.run__leave { width: 44px; height: 44px; }
+.run__leave:active { transform: scale(var(--press-scale, 0.97)); }
+.hud__icon, .gmenu__close { min-width: 44px; min-height: 44px; }
+.place__back { min-height: 44px; }

@@ -22,6 +22,7 @@
  */
 
 import { VillageRenderer } from '../renderer.js';
+import { openModal, closeModal } from '../../ui/modal.js';
 import { buildVillageScene } from '../scene.js';
 import { art, artIMG } from '../art.js';
 import { MODULE_BUILDING, BUILDINGS, CHARACTERS, HOUSE, WORLD, BOARD, buildingById, good } from '../defs.js';
@@ -58,7 +59,8 @@ export async function renderVillage(outlet, { storage }) {
   document.documentElement.setAttribute('data-world', '');
   outlet.innerHTML = `
     <section class="vg" aria-label="Your village">
-      <canvas class="vg__canvas" id="vg-canvas" tabindex="0" aria-label="Your village. Drag to look around, tap a building to see who works there."></canvas>
+      <h1 class="sr-only">Your village</h1>
+      <canvas class="vg__canvas" id="vg-canvas" tabindex="0" aria-label="Your village. Drag or use the arrow keys to look around, plus and minus to zoom, and tap a building to see who works there."></canvas>
       <div class="vcallouts" id="vcallouts"></div>
       <div class="vhud" id="vhud"></div>
       <div class="vnotice" id="vnotice" role="status"></div>
@@ -216,6 +218,20 @@ export async function renderVillage(outlet, { storage }) {
   /* ================= Callouts over the world ================= */
   const calloutsEl = outlet.querySelector('#vcallouts');
   const calloutFor = new Map();
+  /* A callout read out as "2 wanted", "x11", "250 coins" — the number and
+     nothing it belonged to, on a screen where six of them are up at once.
+     The id already says which building, plot or house it came from, and the
+     tone already says what tapping it would do. */
+  const TONE_SAYS = { ready: 'ready to deliver', want: 'wanted here', good: 'ready to collect', wait: 'being made', build: 'to build', learn: 'to read' };
+  const calloutName = (s) => {
+    const id = String(s.id);
+    const where = id === 'board' ? 'The order board'
+      : id.startsWith('plot:') ? 'A new plot'
+      : id.startsWith('house:') ? 'A new cottage'
+      : (() => { const b = v.buildings.find((x) => x.id === id); return b?.current?.name ?? b?.def?.name ?? ''; })();
+    const what = `${s.text} ${s.sub ?? ''}`.trim();
+    return [where, [what, TONE_SAYS[s.tone]].filter(Boolean).join(', ')].filter(Boolean).join(': ');
+  };
   const calloutSpec = () => {
     const out = [];
     const allow = (id) => step === 'done' || step === 'name' || (step === 'first-read' && id === 'reading') || (step === 'binding' && id === 'reading') || (step === 'collect' && id === 'reading') || (step === 'deliver' && id === 'board') || (step === 'build' && id === 'garden');
@@ -248,7 +264,7 @@ export async function renderVillage(outlet, { storage }) {
   const renderCallouts = () => {
     const specs = calloutSpec();
     calloutsEl.innerHTML = specs.map((s) => `
-      <button class="vb vb--${s.tone}" data-id="${escapeHTML(s.id)}" aria-label="${escapeHTML(String(s.text))} ${escapeHTML(s.sub ?? '')}">
+      <button class="vb vb--${s.tone}" data-id="${escapeHTML(s.id)}" aria-label="${escapeHTML(calloutName(s))}">
         <span class="vb__in">${s.ring ? `<span class="vb__ring" style="--p:${Math.round(s.ring.pct * 100)}%">${goodIcon(s.glyph, { size: 17 })}</span>` : (s.glyph === 'hammer' || s.glyph === 'check' || s.glyph === 'page') ? icon(s.glyph, { size: 24 }) : goodIcon(s.glyph, { size: 24 })}<b>${escapeHTML(String(s.text))}</b>${s.sub ? `<small>${escapeHTML(s.sub)}</small>` : ''}</span>
       </button>`).join('');
     calloutFor.clear();
@@ -287,7 +303,8 @@ export async function renderVillage(outlet, { storage }) {
            moment its box touched an edge, which meant a building in plain
            sight with no callout on it, and five of six gone at once. */
         const off = s.x < -20 || s.x > renderer.cssW + 20 || s.y < 40 || s.y > renderer.cssH - 10;
-        const scale = Math.max(0.75, Math.min(1.1, z));
+        const floor = 44 / (el.offsetHeight || 44);
+        const scale = Math.max(floor, Math.min(1.1, z));
         const w = (el.offsetWidth || 120) * scale;
         const h = (el.offsetHeight || 40) * scale;
         const M = 8;
@@ -380,49 +397,6 @@ export async function renderVillage(outlet, { storage }) {
   const popEl = outlet.querySelector('#vpop');
   let popOpen = null;
   const portrait = (ch, size = 74) => (ch?.look ? artIMG('person', { ...ch.look, pose: 'idle' }, { size, className: 'vportrait' }) : ch?.id === 'wick' ? artIMG('wick', { pose: 'sit' }, { size, className: 'vportrait' }) : '');
-  /* ---- Modal plumbing, shared by the popovers and the sheets ----
-     Both announced themselves as role="dialog" and then honoured none of the
-     contract: no accessible name (so they were read as an unnamed dialog),
-     focus left behind on whatever opened them, Tab walking straight out into
-     the HUD and the canvas underneath while the scrim kept the pointer in,
-     and no Escape. All four are answered here rather than at six call sites. */
-  let modalSeq = 0;
-  let modalReturn = null;
-  const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
-
-  function openModal(card, close) {
-    if (!card) return;
-    modalReturn = document.activeElement;
-    card.setAttribute('aria-modal', 'true');
-    const name = card.querySelector('.vpop__name, .vsheet__name, .vsign__label, h2, h3');
-    if (name) {
-      if (!name.id) name.id = `vmodal-name-${++modalSeq}`;
-      card.setAttribute('aria-labelledby', name.id);
-    } else {
-      card.setAttribute('aria-label', 'Dialog');
-    }
-    card.setAttribute('tabindex', '-1');
-    const onKey = (e) => {
-      if (e.key === 'Escape') { e.preventDefault(); play('close'); close(); return; }
-      if (e.key !== 'Tab') return;
-      const f = [...card.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
-      if (!f.length) { e.preventDefault(); card.focus({ preventScroll: true }); return; }
-      const first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && (document.activeElement === first || document.activeElement === card)) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    };
-    document.addEventListener('keydown', onKey, true);
-    card.__keys = onKey;
-    requestAnimationFrame(() => { try { card.focus({ preventScroll: true }); } catch { /* fine */ } });
-  }
-
-  function closeModal(card) {
-    if (card?.__keys) { document.removeEventListener('keydown', card.__keys, true); card.__keys = null; }
-    const back = modalReturn;
-    modalReturn = null;
-    if (back && back.isConnected) { try { back.focus({ preventScroll: true }); } catch { /* fine */ } }
-  }
-
   function openPop(id) {
     const html = popHTML(id);
     if (!html) return;

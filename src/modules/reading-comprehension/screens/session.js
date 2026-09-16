@@ -226,9 +226,10 @@ export async function renderSession(outlet, { storage }, params) {
               <summary>Re-read the passage</summary>
               <div class="reread__body"><cat-passage></cat-passage></div>
             </details>
+            <p class="sr-only" id="run-said" role="status" aria-live="polite"></p>
             <div class="card" style="margin-top:12px">
               <cat-question-card></cat-question-card>
-              <div id="explanation-slot"></div>
+              <div id="explanation-slot" tabindex="-1"></div>
               <div class="run__actions" id="actions"></div>
             </div>
           </div>
@@ -251,6 +252,8 @@ export async function renderSession(outlet, { storage }, params) {
       const pos = outlet.querySelector('#q-pos');
       const actions = outlet.querySelector('#actions');
       const explanationSlot = outlet.querySelector('#explanation-slot');
+      const said = outlet.querySelector('#run-said');
+      const say = (line) => { if (said) said.textContent = line; };
       let selected = null;
 
       card.addEventListener('cat-option-select', (e) => { selected = e.detail.letter; card.selected = selected; play('tap'); syncActions('answering'); });
@@ -273,15 +276,22 @@ export async function renderSession(outlet, { storage }, params) {
           actions.querySelector('#next').addEventListener('click', onNext);
         }
       }
-      function revealExplanation(chosen) {
+      function revealExplanation(chosen, verdict) {
         const ex = document.createElement('cat-explanation');
         ex.data = { question: session.current, chosen };
         explanationSlot.innerHTML = '';
         explanationSlot.appendChild(ex);
+        /* Locking an answer in changed four things on screen and said none
+           of them: the option recoloured, the explanation appeared below the
+           fold, the bar moved, and the button became "Next question" — all
+           silently, with focus left on a button that no longer existed, so
+           the next Tab started again from the top of the passage. */
+        say(verdict === null ? 'Set aside. Here is the answer.' : verdict ? 'Correct.' : 'Not this time. Here is why.');
         // The verdict is under four options — off the bottom of a phone.
         // Nothing appearing where nobody is looking has ever taught anyone.
         requestAnimationFrame(() => {
           ex.querySelector('.verdict')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          try { explanationSlot.focus({ preventScroll: true }); } catch { /* fine */ }
         });
       }
       function onSubmit() {
@@ -290,14 +300,14 @@ export async function renderSession(outlet, { storage }, params) {
         play(verdict.is_correct ? 'correct' : 'wrong');
         cue(verdict.is_correct ? 'correct' : 'wrong');
         card.reveal = { chosen: selected, correct: verdict.correct };
-        revealExplanation(selected);
+        revealExplanation(selected, verdict.is_correct);
         fill.style.width = `${Math.round(((session.index + 1) / session.total) * 100)}%`;
         syncActions('revealed');
       }
       function onSkip() {
         session.skip();
         card.reveal = { chosen: null, correct: session.current.correct };
-        revealExplanation(null);
+        revealExplanation(null, null);
         fill.style.width = `${Math.round(((session.index + 1) / session.total) * 100)}%`;
         syncActions('revealed');
       }

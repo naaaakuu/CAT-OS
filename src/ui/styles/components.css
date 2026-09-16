@@ -115,7 +115,8 @@
 }
 .segmented__option {
   padding: var(--space-1) var(--space-3);
-  min-height: calc(var(--tap-target) - 8px);
+  min-height: var(--tap-target);
+  min-width: var(--tap-target);
   border-radius: calc(var(--radius-md) - 2px);
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
@@ -4422,3 +4423,29 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 .bank-takeaway { margin: var(--space-3) 0 0; font-style: italic; color: var(--color-ink-2); }
+
+/* Sixteen of Settings' nineteen controls were under the minimum and not one
+   of them moved when pressed. The 8px subtracted from the tap target above
+   was the whole of the first half. */
+.segmented__option:active { transform: scale(var(--press-scale)); }
+
+/* "Learning Page" and "Review" under a finished passage: 17px tall, no press
+   response, and the only route from the reading list to either of them. */
+.list-item__links a, .row__hint a {
+  display: inline-flex; align-items: center;
+  min-height: var(--tap-target); padding: 0 var(--space-2);
+}
+.list-item__links a:active, .row__hint a:active { transform: scale(var(--press-scale)); }
+
+/* A collection called something long used to clip at 320px. */
+.setc__name { overflow-wrap: anywhere; white-space: normal; }
+
+/* READING SIZE REACHES THE QUESTION.
+   --text-read scaled the passage and ten other rules, and neither the stem
+   a learner has to parse nor the four options they have to hold in their
+   head was one of them. Setting the reading size to XL and watching the
+   question stay at 15px is the setting not working. */
+cat-question-card .stem, cat-option .body, cat-explanation .verdict + p, .reread__body { font-size: var(--text-read); }
+
+/* A <summary> is a button that does not look like one, and was 42px tall. */
+summary { min-height: var(--tap-target); display: flex; align-items: center; }

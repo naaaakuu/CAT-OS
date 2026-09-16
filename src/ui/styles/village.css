@@ -459,3 +459,13 @@
   margin: 3px 0 0; font-size: 10.5px; font-weight: 800;
   letter-spacing: 0.04em; text-transform: uppercase; color: var(--v-ink-3);
 }
+
+/* THE PRIMARY INTERACTION IN THE GAME ANSWERS A PRESS.
+   .vb's transform is rewritten by placeCallouts on every frame, so an
+   :active transform is overwritten before it can paint — the press has to
+   ride on something placeCallouts does not touch. */
+.vb:active { filter: brightness(0.95); box-shadow: 0 2px 0 rgba(110, 70, 48, 0.9), 0 4px 8px rgba(20, 40, 20, 0.28); }
+.vb { transition: filter var(--duration-fast, 120ms) var(--ease-out, ease); min-height: 44px; padding-left: 9px; padding-right: 14px; }
+/* Forty-four square wherever a thumb lands. */
+.vhudbtn { width: 44px; height: 44px; }
+.vpill { min-height: 44px; }

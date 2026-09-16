@@ -7,6 +7,7 @@
  */
 
 import { bagEntries, thing, madeFrom } from './economy.js';
+import { openModal, closeModal } from '../ui/modal.js';
 import { artIMG } from '../village/art.js';
 import { GOODS, COINS, BUILDINGS } from '../village/defs.js';
 
@@ -109,14 +110,13 @@ export function openCraftSheet(key, state) {
     </section>`;
   document.body.appendChild(el);
   requestAnimationFrame(() => el.classList.add('is-in'));
-  const close = () => { el.classList.remove('is-in'); setTimeout(() => el.remove(), 240); };
+  const close = () => { closeModal(el); el.classList.remove('is-in'); setTimeout(() => el.remove(), 240); };
   el.addEventListener('click', (e) => {
     if (e.target.closest('[data-close]')) { close(); return; }
     if (e.target.closest('a')) close();
   });
-  const onKey = (e) => { if (e.key === 'Escape') { close(); window.removeEventListener('keydown', onKey); } };
-  window.addEventListener('keydown', onKey);
-  const drop = () => { el.remove(); window.removeEventListener('hashchange', drop); };
+  openModal(el, close, { label: 'How this is made' });
+  const drop = () => { closeModal(el); el.remove(); window.removeEventListener('hashchange', drop); };
   window.addEventListener('hashchange', drop);
 }
 

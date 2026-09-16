@@ -1,3 +1,4 @@
+import { motionReduced } from './feedback.js';
 /**
  * audio.js — the CAT OS sound language, synthesized live with the Web
  * Audio API. No audio files, nothing to download, cache, or license
@@ -77,7 +78,7 @@ const state = {
 
 function reduced() {
   try {
-    return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    return motionReduced();
   } catch {
     return false;
   }

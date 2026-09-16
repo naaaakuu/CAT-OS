@@ -189,3 +189,27 @@ textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* THE FOCUS RING HAS THE LAST WORD.
+   base.css sets it near the top; eight component classes then set their own
+   :focus-visible box-shadow, which REPLACES it — every passage row, every
+   primary call to action, every Settings toggle. A keyboard user could tab
+   the length of the reading list and watch nothing move. :where() holds the
+   specificity at zero so a component can still style ITSELF on focus, and
+   the ring lands after all of them, so it cannot be cancelled by accident
+   a second time. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  box-shadow: var(--focus-ring) !important;
+  outline: none;
+}
+
+/* #/rc is sixty tab stops deep. One key gets past them. */
+.skip {
+  position: fixed; left: 8px; top: -64px; z-index: 100;
+  padding: 10px 16px; border-radius: 0 0 12px 12px;
+  background: var(--color-surface); color: var(--color-ink);
+  border: 1px solid var(--color-line-strong); border-top: none;
+  font-weight: var(--weight-semibold); text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+.skip:focus { top: 0; }

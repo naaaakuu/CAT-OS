@@ -222,7 +222,10 @@ true;
 
 /* ------------------------------------------------------------------ */
 
-const SEED = `(async () => {
+/* A learner a week in: exported, because check-reach.mjs needs the same
+   village and two gates disagreeing about what "played" means is two gates
+   measuring two different apps. */
+export const SEED = `(async () => {
   const s = await import('/src/core/storage/indexeddb-adapter.js');
   const st = new s.IndexedDBAdapter(); await st.init();
   const iso = (ms) => new Date(Date.now() - ms).toISOString();

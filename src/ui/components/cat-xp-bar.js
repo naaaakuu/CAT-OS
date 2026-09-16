@@ -12,6 +12,7 @@
  */
 
 import { xpTick, playSound } from '../../core/engagement/audio.js';
+import { motionReduced } from '../../core/engagement/feedback.js';
 
 class CatXPBar extends HTMLElement {
   #data = null;
@@ -62,7 +63,7 @@ class CatXPBar extends HTMLElement {
       </style>
       <div class="top">
         <span class="level">Level ${level}</span>
-        ${this.#gained > 0 ? `<span class="gained" aria-live="polite">+<span data-count>0</span> XP</span>` : ''}
+        ${this.#gained > 0 ? `<span class="gained"><span aria-hidden="true">+<span data-count>0</span> XP</span><span class="sr-only">${this.#gained} XP earned</span></span>` : ''}
         <span class="nums">${intoLevel} / ${needed} XP</span>
       </div>
       <div class="track" role="progressbar" aria-valuenow="${intoLevel}"
@@ -97,7 +98,7 @@ class CatXPBar extends HTMLElement {
   }
 
   #countUp(el, target) {
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const reduce = motionReduced();
     if (reduce) {
       el.textContent = String(target);
       if (target > 0) playSound('xp'); // one soft note; no run without motion

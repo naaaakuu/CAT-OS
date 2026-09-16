@@ -457,7 +457,7 @@ class CatPlant extends HTMLElement {
           0%, 100% { opacity: 0.28; }
           50% { opacity: 0.14; }
         }
-        @media (prefers-reduced-motion: reduce) { .pl-gold-veil { animation: none; } }
+        @media (prefers-reduced-motion: reduce) { :root:not([data-motion="full"]) .pl-gold-veil { animation: none; } }
         /* The maturity ramp: green deepens with the plant's age (§12.2). */
         cat-plant[stage="sprout"]  .pl-canopy { --pl-leaf-color: var(--garden-sprout); }
         cat-plant[stage="young"]   .pl-canopy { --pl-leaf-color: var(--garden-young); }

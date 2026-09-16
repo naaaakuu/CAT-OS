@@ -15,6 +15,7 @@
  */
 
 import { play } from '../audio.js';
+import { motionReduced } from '../../core/engagement/feedback.js';
 import { escapeHTML } from '../../core/utils/format.js';
 import { regionBySlug } from '../regions.js';
 import { STAR_WORDS, bagEntries, bagTotal } from '../economy.js';
@@ -49,12 +50,13 @@ export function renderResult(outlet, o) {
   if (unlocked.length) sessionStorage.setItem('world:unlocked', JSON.stringify(unlocked.map((w) => ({ id: w.id, name: w.name }))));
 
   outlet.innerHTML = `
-    <section class="result result--${stars === 3 ? 'gold' : stars ? 'warm' : 'cool'}" aria-live="polite">
+    <section class="result result--${stars === 3 ? 'gold' : stars ? 'warm' : 'cool'}">
       <div class="result__sky" aria-hidden="true"></div>
       <div class="result__sparks" id="result-sparks" aria-hidden="true"></div>
       <div class="result__scroll">
         <p class="result__eyebrow">${escapeHTML(o.eyebrow ?? region?.name ?? '')}</p>
-        <h1 class="result__title">${escapeHTML(o.title ?? 'Complete')}</h1>
+        <h1 class="result__title" tabindex="-1">${escapeHTML(o.title ?? 'Complete')}</h1>
+        <p class="sr-only" role="status">${escapeHTML(o.title ?? 'Complete')}. ${stars} of 3 stars.</p>
         <div class="result__stars" id="result-stars" aria-label="${stars} of 3 stars">
           ${[0, 1, 2].map((i) => `<div class="result__star ${i < stars ? '' : 'is-off'}" data-i="${i}">${STAR_SVG}</div>`).join('')}
         </div>
@@ -91,13 +93,20 @@ export function renderResult(outlet, o) {
       </div>
     </section>`;
 
+  /* The whole scroll used to be one aria-live region: finishing a passage
+     announced six hundred and eighty-two characters in a single breath,
+     before a learner could have looked at any of it. The outcome is one
+     line, said once; everything else is there to be read at their own pace,
+     starting from the heading their focus is now on. */
+  requestAnimationFrame(() => { try { outlet.querySelector('.result__title')?.focus({ preventScroll: true }); } catch { /* fine */ } });
+
   for (const el of outlet.querySelectorAll('[data-action]')) {
     const a = o.actions[Number(el.dataset.action)];
     el.addEventListener('click', (e) => { play('tap'); if (a.onClick) { e.preventDefault(); a.onClick(); } });
   }
 
   /* ---- The reveal ---- */
-  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const reduce = motionReduced();
   const starEls = [...outlet.querySelectorAll('.result__star')];
   if (stars === 0) play('nostar', { delay: 0.3 });
   for (let i = 0; i < stars; i += 1) {

@@ -58,7 +58,7 @@ class CatCelebration extends HTMLElement {
         }
         @keyframes cel-draw { to { stroke-dashoffset: 0; } }
         @media (prefers-reduced-motion: reduce) {
-          cat-celebration .medal path { animation: none; stroke-dashoffset: 0; }
+          :root:not([data-motion="full"]) cat-celebration .medal path { animation: none; stroke-dashoffset: 0; }
         }
         cat-celebration h2 {
           font-family: var(--font-reading);

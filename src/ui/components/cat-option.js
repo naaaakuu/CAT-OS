@@ -121,6 +121,14 @@ class CatOption extends HTMLElement {
     this.#textEl.textContent = this.getAttribute('text') ?? '';
     this.#btn.disabled = this.hasAttribute('disabled');
     this.#btn.setAttribute('aria-pressed', String(state === 'selected'));
+    /* The letter was hidden from assistive tech as decoration, and it is not
+       decoration: an explanation says "B says the opposite", and a learner
+       who cannot hear which option is B cannot follow it. The visible glyph
+       stays hidden — it would be read as a bare letter mid-sentence — and
+       the button carries it in a name that reads as a sentence, together
+       with what happened to it once the answer is in. */
+    const said = { correct: ', the answer', wrong: ', not the answer', picked: ', what you chose' }[state] ?? '';
+    this.#btn.setAttribute('aria-label', `${this.getAttribute('letter') ?? ''}: ${this.getAttribute('text') ?? ''}${said}`);
   }
 }
 

@@ -41,7 +41,7 @@ class CatResultSummary extends HTMLElement {
         }
         @keyframes draw-check { to { stroke-dashoffset: 0; } }
         @media (prefers-reduced-motion: reduce) {
-          cat-result-summary .mark path { animation: none; stroke-dashoffset: 0; }
+          :root:not([data-motion="full"]) cat-result-summary .mark path { animation: none; stroke-dashoffset: 0; }
         }
         cat-result-summary .grid {
           display: grid;

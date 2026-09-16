@@ -84,7 +84,7 @@ function renderNotFound(outlet) {
     <section class="screen">
       <div class="empty">
         <div class="empty__glyph" aria-hidden="true">?</div>
-        <h2>Screen not found</h2>
+        <h1>Screen not found</h1>
         <p>That address doesn't exist. It may be from an older version.</p>
         <a class="btn btn--primary" href="#/world">Back to the village</a>
       </div>

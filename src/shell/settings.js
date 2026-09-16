@@ -41,8 +41,11 @@ const row = (icon, label, hint, control) => `
     </div>
     ${control}
   </div>`;
-const onOff = (id, attr) => `
-  <div class="segmented" id="${id}" role="group" aria-label="${escapeHTML(id)}" data-sfx="off">
+/* A screen reader read these three groups out as "music-picker",
+   "sfx-picker" and "haptics-picker" — the element id, because that is what
+   was passed. */
+const onOff = (id, attr, label) => `
+  <div class="segmented" id="${id}" role="group" aria-label="${escapeHTML(label ?? id)}" data-sfx="off">
     <button class="segmented__option" data-${attr}="true" aria-pressed="false">On</button>
     <button class="segmented__option" data-${attr}="false" aria-pressed="false">Off</button>
   </div>`;
@@ -56,15 +59,15 @@ export function renderSettings(outlet, { storage, version }) {
 
       <div class="card">
         <h2>Audio</h2>
-        ${row('♫', 'Music and ambience', 'The village’s own music, wind, water and birds', onOff('music-picker', 'music'))}
+        ${row('♫', 'Music and ambience', 'The village’s own music, wind, water and birds', onOff('music-picker', 'music', 'Music and ambience'))}
         ${row('◑', 'Music volume', 'How loud the village plays', slider('music-volume', 'Music volume'))}
-        ${row('♩', 'Sound effects', 'Taps, chimes, deliveries and stars', onOff('sfx-picker', 'sfx'))}
+        ${row('♩', 'Sound effects', 'Taps, chimes, deliveries and stars', onOff('sfx-picker', 'sfx', 'Sound effects'))}
         ${row('◑', 'Effects volume', 'How loud the cues are', slider('sfx-volume', 'Effects volume'))}
       </div>
 
       <div class="card">
         <h2>Feel</h2>
-        ${row('◇', 'Haptics', 'A subtle vibration where your device supports it', onOff('haptics-picker', 'haptics'))}
+        ${row('◇', 'Haptics', 'A subtle vibration where your device supports it', onOff('haptics-picker', 'haptics', 'Haptics'))}
         ${row('≋', 'Reduce motion', 'Shorter animations in the village and the rooms', `
           <div class="segmented" id="motion-picker" role="group" aria-label="Motion">
             <button class="segmented__option" data-motion="system" aria-pressed="false">Auto</button>

@@ -138,7 +138,7 @@ const FAILED = `
   <section class="screen">
     <div class="empty">
       <div class="empty__glyph" aria-hidden="true">·</div>
-      <h2>This screen didn't open</h2>
+      <h1>This screen didn't open</h1>
       <p>Something it needed didn't arrive. It usually works the second time.</p>
       <p>
         <button class="btn btn--primary" onclick="location.reload()">Try again</button>

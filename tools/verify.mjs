@@ -2493,6 +2493,31 @@ console.log('\n27. What the ledgers say (tools/check-noticing.mjs)');
   if (problems.length === before) ok(`${patterns} reasoning patterns in the code, ${tagged} passages tagged with theirs; the trap, pattern and skill ledgers each reach a learner`);
 }
 
+console.log('\n28. Pressing Tab (tools/check-reach.mjs)');
+{
+  const before = problems.length;
+  // §22 proves the ink has contrast against whatever is behind it. This
+  // proves you can find the thing at all. It walks every route with a real
+  // Tab key in a real browser and reads the computed style at each stop.
+  // The focus ring it was looking for had existed the whole time — and
+  // eight component classes each set their own :focus-visible box-shadow,
+  // which REPLACES rather than adds, so every passage row, every primary
+  // call to action and every Settings toggle focused invisibly. No static
+  // reading of the cascade can see that: which rule wins depends on the
+  // route and the theme. It also opens the app menu with the Enter key and
+  // checks that a sheet claiming role="dialog" keeps all of that promise.
+  const { checkReach } = await mod('tools/check-reach.mjs');
+  let stops = 0; let skipped = false;
+  for (const theme of ['light', 'dark']) {
+    const r = await checkReach({ theme });
+    if (r.skipped) { skipped = true; break; }
+    stops += r.checked;
+    for (const p of r.problems) bad('reach: ' + p);
+  }
+  if (skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). Nobody pressed Tab.');
+  else if (problems.length === before) ok(`${stops} tab stops walked with a real keyboard across both themes; every one visible, named, and 44x44`);
+}
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');

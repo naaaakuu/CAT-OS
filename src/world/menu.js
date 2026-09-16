@@ -13,6 +13,7 @@
  */
 
 import { play } from './audio.js';
+import { openModal, closeModal } from '../ui/modal.js';
 import { escapeHTML } from '../core/utils/format.js';
 import { loadValley, valleyName } from './companion.js';
 import { icon } from './icons.js';
@@ -59,6 +60,11 @@ export function mountMenu(host, ctx) {
     sheet.classList.remove('is-in');
     btn.setAttribute('aria-expanded', 'false');
     const el = sheet; sheet = null;
+    // Untrap Tab, put focus back on the button that opened it, and take the
+    // Escape listener off — it used to remove itself only when Escape was
+    // the thing that closed the sheet, so tapping the scrim instead left one
+    // behind on window, every time, for the life of the session.
+    closeModal(el.querySelector('.gmenu__card'));
     setTimeout(() => el.remove(), 260);
     play('close');
   };
@@ -72,7 +78,7 @@ export function mountMenu(host, ctx) {
     sheet.className = 'gmenu';
     sheet.innerHTML = `
       <div class="gmenu__scrim" data-close></div>
-      <nav class="gmenu__card" aria-label="Menu">
+      <nav class="gmenu__card">
         <div class="gmenu__head">
           <div>
             <p class="gmenu__eyebrow">Your village</p>
@@ -91,12 +97,11 @@ export function mountMenu(host, ctx) {
       </nav>`;
     document.body.appendChild(sheet);
     requestAnimationFrame(() => sheet.classList.add('is-in'));
+    openModal(sheet.querySelector('.gmenu__card'), close, { label: 'Menu', returnTo: btn });
     sheet.addEventListener('click', (e) => {
       if (e.target.closest('[data-close]')) { close(); return; }
       if (e.target.closest('a')) { play('tap'); close(); }
     });
-    const onKey = (e) => { if (e.key === 'Escape') { close(); window.removeEventListener('keydown', onKey); } };
-    window.addEventListener('keydown', onKey);
   });
 
   return { close };

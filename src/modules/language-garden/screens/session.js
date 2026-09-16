@@ -21,6 +21,7 @@
  */
 
 import { loadLGItem, listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
+import { motionReduced } from '../../../core/engagement/feedback.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { GardenSession, computePlantState, strugglingMembers } from '../../../core/engine/garden-session.js';
 import { listGardenSessions, sessionsForFamily, saveGardenSession, hasSeenGardenGrowth, markGardenGrowthSeen, listGardenSeeds } from '../logic/store.js';
@@ -42,7 +43,7 @@ const LETTERS = ['A', 'B', 'C'];
 /** True when the OS asks for less motion — the growth moment then becomes a
  *  clear still-frame change instead of a tween (Bible §11.5). */
 function prefersReducedMotion() {
-  try { return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false; }
+  try { return motionReduced(); }
   catch { return false; }
 }
 
