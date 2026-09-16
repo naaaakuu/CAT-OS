@@ -99,20 +99,54 @@ function smooth(pts, per = 6) {
   return out;
 }
 
-export function distToPolyline(px, py, pts) {
+/* THE HOTTEST FUNCTION IN THE VILLAGE.
+   The end-of-build placement sweep asks every one of ~284 props whether it
+   is standing in the river, on a path, in a pond or inside a wall, and a
+   profile of the rebuild put HALF of its 47ms in here. Two reasons, both
+   avoidable: Math.hypot is several times slower than the multiply it stands
+   for, and every call walked every segment of a polyline the prop was four
+   hundred units away from.
+
+   So: squared distances in the loop (one sqrt at the end), and a cached
+   bounding box per polyline so a point that cannot possibly be within
+   that limit is rejected by four comparisons. The answer is identical; the
+   sweep is not. */
+const BOXES = new WeakMap();
+function boxOf(pts) {
+  let box = BOXES.get(pts);
+  if (box) return box;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const [x, y] of pts) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+  box = { x0, y0, x1, y1 };
+  BOXES.set(pts, box);
+  return box;
+}
+
+/**
+ * @param {number} limit when given, a point further than this from the
+ *        polyline's bounding box returns Infinity without walking it. Pass
+ *        the pad you were about to compare against; never pass one you were
+ *        not, or a caller reading the number itself gets Infinity.
+ */
+export function distToPolyline(px, py, pts, limit = Infinity) {
+  if (limit !== Infinity) {
+    const b = boxOf(pts);
+    if (px < b.x0 - limit || px > b.x1 + limit || py < b.y0 - limit || py > b.y1 + limit) return Infinity;
+  }
   let best = Infinity;
   for (let i = 0; i < pts.length - 1; i += 1) {
     const [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
     const dx = x2 - x1, dy = y2 - y1;
     const t = Math.max(0, Math.min(1, ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy || 1)));
-    const d = Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
+    const ex = px - (x1 + t * dx), ey = py - (y1 + t * dy);
+    const d = ex * ex + ey * ey;
     if (d < best) best = d;
   }
-  return best;
+  return Math.sqrt(best);
 }
-export function nearPath(x, y, pad = 18) { return PATHS.some((p) => distToPolyline(x, y, p) < pad); }
+export function nearPath(x, y, pad = 18) { return PATHS.some((p) => distToPolyline(x, y, p, pad) < pad); }
 export function inPond(x, y, pad = 0) { return ((x - POND.cx) ** 2) / ((POND.rx + pad) ** 2) + ((y - POND.cy) ** 2) / ((POND.ry + pad) ** 2) <= 1; }
-export function nearRiver(x, y, pad = 40) { return distToPolyline(x, y, RIVER) < pad; }
+export function nearRiver(x, y, pad = 40) { return distToPolyline(x, y, RIVER, pad) < pad; }
 /** Inside a building's footprint (the front wall plus the side that recedes up-right), padded. */
 export function nearBuilding(x, y, pad = 40) {
   const near = (b) => x > b.at.x - b.hit.w / 2 - pad && x < b.at.x + b.hit.w / 2 + pad + 30 && y > b.at.y - b.hit.h - pad - 20 && y < b.at.y + pad + 16;

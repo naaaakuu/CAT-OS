@@ -850,7 +850,20 @@ export async function renderVillage(outlet, { storage }) {
   let leftTimer = setInterval(() => { for (const el of popEl.querySelectorAll('[data-left]')) { const b = v.buildingById(el.dataset.left); if (b?.queue?.working) el.textContent = fmtSecs(b.queue.working.readyAt - Date.now()); } for (const el of popEl.querySelectorAll('[data-ring]')) { const b = v.buildingById(el.dataset.ring); if (b?.queue?.working) { const w = b.queue.working; el.style.setProperty('--p', `${Math.round(Math.max(0, Math.min(1, 1 - (w.readyAt - Date.now()) / (w.readyAt - w.startedAt))) * 100)}%`); } } }, 1000);
 
   /* ================= Actions ================= */
+  /* A CONSTRUCTION OWNS THE SCENE UNTIL IT IS FINISHED.
+     construct() animates by wrapping scene.objects for 2.8 seconds — the
+     scaffold, the builder, the dust. refresh() replaces `scene` wholesale,
+     and scheduleClock fires one the moment any craft finishes anywhere in
+     the village. A learner who raised a building while the Reading House had
+     a Book coming due watched the scaffold blink out of existence and the
+     finished building appear a second and a half early, with no sound. The
+     quiet refresh waits; a refresh somebody asked for by tapping something
+     still goes through, because they are looking at the thing they tapped. */
+  let building = 0;
+  let refreshWanted = null;
+
   async function refresh({ focus = null, quiet = false } = {}) {
+    if (building && quiet) { refreshWanted = { focus, quiet }; return; }
     try {
       world = await loadWorld(storage);
       state = world.state; v = state.village;
@@ -1054,7 +1067,14 @@ export async function renderVillage(outlet, { storage }) {
     };
     for (let i = 0; i < (reduce ? 1 : 6); i += 1) setTimeout(() => play('tick'), 400 + i * 380);
     notice(`<b>${escapeHTML(name)}</b> — ${escapeHTML(afterLine ?? '')}`, null);
-    await wait(total);
+    building += 1;
+    try {
+      await wait(total);
+    } finally {
+      building -= 1;
+      // Whatever finished behind the scaffolding is still true.
+      if (!building && refreshWanted) { const r = refreshWanted; refreshWanted = null; refresh(r); }
+    }
     play('unlock');
     sparkle(renderer.toScreen(site.x, site.y - 50), 16);
   }
