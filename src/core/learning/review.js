@@ -91,6 +91,16 @@ export function isRested(lastMissAt, misses, now = Date.now()) {
   return now - t >= restFor(misses);
 }
 
+/**
+ * How long a SETTLED ability can go untouched before it is worth one more
+ * look — longer the more settled it is, the way a rested item waits longer
+ * after each pass. A skill the learner had mastered and then stopped
+ * visiting used to be invisible to the curator: not weak (its last answers
+ * were right), not new (it had been seen), so it never came back. Indexed
+ * by ledger level 0–4.
+ */
+export const REVISIT_DAYS = Object.freeze([3, 3, 7, 14, 30]);
+
 /* ------------------------------------------------------------------ */
 /* The ledger                                                          */
 /* ------------------------------------------------------------------ */
@@ -173,6 +183,9 @@ export function skillLedger(sessions, learning = [], now = Date.now()) {
         : e.recentAcc >= 0.8 ? 3
           : e.recentAcc >= 0.65 ? 2 : 1;
     e.days = e.lastAt ? Math.floor((now - e.lastAt) / 86400000) : null;
+    // Due: settled, and quiet for longer than its level allows.
+    e.revisitDays = REVISIT_DAYS[e.level] ?? REVISIT_DAYS[REVISIT_DAYS.length - 1];
+    e.due = e.days !== null && e.seen >= 4 && e.recentAcc >= 0.8 && e.days >= e.revisitDays;
   }
   return m;
 }
@@ -195,10 +208,21 @@ export function untouchedSkills(ledger) {
   return SKILLS.filter((s) => !(ledger.get(s.key)?.seen));
 }
 
+/** Settled abilities that have gone quiet past their interval, most overdue
+ *  first — the mastered-then-abandoned, which no other list surfaces. */
+export function dueSkills(ledger, { n = 3 } = {}) {
+  return [...ledger.values()]
+    .filter((e) => e.due)
+    .sort((a, b) => (b.days / b.revisitDays) - (a.days / a.revisitDays) || b.level - a.level)
+    .slice(0, n)
+    .map((e) => ({ ...e, ...(skill(e.key) ?? {}) }));
+}
+
 /**
  * One recommendation, chosen the way a good teacher would: catch what is
- * slipping before meeting anything new, and never send someone to the
- * same bench twice in a row when a weaker one is standing empty.
+ * slipping, then revisit what was settled and has gone quiet, before
+ * meeting anything new — and never send someone to the same bench twice
+ * in a row when a weaker one is standing empty.
  *
  * @returns {{skill, why, route, kind}|null}
  */
@@ -212,6 +236,11 @@ export function nextSkill(ledger, state) {
     const w = weak[0];
     return { skill: w, kind: 'weak', why: `${Math.round(w.recentAcc * 100)}% of your last ${w.recent.length} on ${w.name.toLowerCase()}.`, route: routeFor(w.where, state) };
   }
+  // Settled and gone quiet: not weak, not new, and until now never offered
+  // again. One visit resets its clock, so this never crowds out for long
+  // the abilities the learner has not met yet.
+  const due = dueSkills(ledger)[0];
+  if (due) return { skill: due, kind: 'due', why: `${due.name} was settled, and it has been ${due.days} days. One more look keeps it.`, route: routeFor(due.where, state) };
   const fresh = untouchedSkills(ledger)[0];
   if (fresh) return { skill: { ...fresh, seen: 0, recentAcc: 0 }, kind: 'new', why: `You have not tried ${fresh.name.toLowerCase()} yet.`, route: routeFor(fresh.where, state) };
   return null;
