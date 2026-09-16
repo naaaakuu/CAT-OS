@@ -32,6 +32,9 @@ and re-driven; the tour that proved them is verify §30 now._
 | Five weakness models still disagree | `readingWeakness` is question-type-shaped; `skillLedger` is skill-shaped and spans every module; `patternLedger` is finer than both. The curator reads all three, but one of them should be a view over another rather than three independent counts of the same answers |
 | ~20 button recipes, 20 corner radii, 30 shadow recipes | Four button families across four stylesheets. Each is individually correct; together they are more materials than one product needs |
 | The village scene is rebuilt whole on every craft | 11.4 ms is under a frame, but the static half (terrain, trees, houses) does not change and is rebuilt anyway |
+| Orders already on the board change under the learner | Amount, good and price are recomputed from today's level and today's buildings every time the village derives, so building a Loom can change what the neighbour standing at the board is asking for. Fixing it honestly needs a posted-order record, which is a new record kind |
+| A slow first visit is 30 seconds | 800 KB over 400 kbps is physics, and the app now says so rather than claiming it failed — but the shell could be split so the village paints before the rooms arrive |
+| The Reading House's ground shadow reaches the river | At level 1 the drawn mass is entirely on land; only the 0.1-alpha shadow ellipse touches the water. The placement predicates use the symmetric `def.hit`, not the sprite's real asymmetric mass, so §23 cannot see it |
 | The Language Garden and the word rounds still record nothing until the last click | A Grow session and a word round are two to four minutes, which is why they were not on the 2.1.2 list; they are the last two engines without a draft |
 
 ## What changed in 2.1.2 (polish, reliability and systems hardening)

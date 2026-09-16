@@ -60,6 +60,18 @@ must never be.
 
 ### The rest
 
+- **The boot watchdog accused a slow network of being a broken one.** A flat
+  eight-second deadline is a statement about the network rather than about
+  the app: on a genuine Slow 3G first visit — 400 kbps, 400 ms of round trip,
+  eight hundred kilobytes still arriving — it fired every single time and
+  told the learner their app had failed while it was loading perfectly well
+  behind the message. The clock restarts whenever anything arrives, so what
+  it says now is what it always meant: nothing has arrived for nine seconds.
+  A slow visit is also told, at six seconds, that a slow first visit is a
+  slow first visit and not a hang. Measured on Slow 3G with nothing cached:
+  canvas at 25.5 s, a populated HUD and callouts at 30.1 s, no false failure
+  — against the audit's 35 s and 59 s before the cold-open work.
+
 - **A resting item was re-served immediately.** Ordering resting items last
   is only half the rule: where a tier holds one item — paragraph completion's
   foundation tier holds exactly one — last is also first, and a learner who

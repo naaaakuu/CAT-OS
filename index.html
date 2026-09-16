@@ -52,18 +52,62 @@
     window.addEventListener('unhandledrejection', function (e) {
       window.__catos.errors.push(String((e && e.reason) || e));
     });
-    setTimeout(function () {
-      if (window.__catosBooted) return;
-      var view = document.getElementById('view');
-      if (!view || !view.querySelector('.screen--loading')) return;
-      view.innerHTML = '<section class="screen"><div class="empty">'
-        + '<div class="empty__glyph" aria-hidden="true">·</div>'
-        + '<h2>CAT OS did not finish opening</h2>'
-        + '<p>Part of the app could not be downloaded. Everything you have done is still on this device.</p>'
-        + '<p><button class="btn btn--primary" onclick="location.reload()">Try again</button></p>'
-        + '</div></section>';
-      console.error('[CAT OS] boot watchdog fired', window.__catos.errors);
-    }, 8000);
+    /* A DEADLINE IS NOT THE SAME AS A STALL.
+       This used to be a flat eight seconds, which is a statement about the
+       network rather than about the app: on a genuine Slow 3G first visit —
+       400 kbps, 400 ms of round trip, eight hundred kilobytes still arriving
+       — it fired every single time and told a learner their app had failed
+       while it was loading perfectly well behind the message.
+
+       What it should say is "nothing has arrived for a while", so the clock
+       restarts every time something does. A slow connection keeps resetting
+       it and is never accused of anything; a connection that has actually
+       stopped reaches the same message it always did, and the learner is
+       also told plainly, sooner, that a slow first visit is a slow first
+       visit rather than a hang. */
+    (function () {
+      var QUIET = 9000;      // nothing arrived for this long = a stall
+      var PATIENCE = 6000;   // still going after this long = say so
+      var start = Date.now();
+      var last = start;
+      var said = false;
+      try {
+        new PerformanceObserver(function () { last = Date.now(); })
+          .observe({ type: 'resource', buffered: true });
+      } catch (e) { /* No PerformanceObserver: `last` never moves, so this
+                       falls back to exactly the flat nine-second deadline
+                       it replaced — worse on a slow network, never worse
+                       than the version that shipped. */ }
+
+      var view = function () { return document.getElementById('view'); };
+      var loading = function () {
+        var v = view();
+        return !window.__catosBooted && v && v.querySelector('.screen--loading');
+      };
+      var tick = setInterval(function () {
+        if (window.__catosBooted) { clearInterval(tick); return; }
+        if (!loading()) return;
+        var quiet = Date.now() - last;
+        if (!said && quiet < QUIET && Date.now() - start > PATIENCE) {
+          said = true;
+          var note = document.createElement('p');
+          note.className = 'hint';
+          note.style.textAlign = 'center';
+          note.textContent = 'Still opening. The first visit downloads the whole valley; after that it opens straight from this device.';
+          var host = view().querySelector('.screen--loading') || view();
+          host.appendChild(note);
+        }
+        if (quiet < QUIET) return;
+        clearInterval(tick);
+        view().innerHTML = '<section class="screen"><div class="empty">'
+          + '<div class="empty__glyph" aria-hidden="true">·</div>'
+          + '<h1>CAT OS did not finish opening</h1>'
+          + '<p>Part of the app could not be downloaded. Everything you have done is still on this device.</p>'
+          + '<p><button class="btn btn--primary" onclick="location.reload()">Try again</button></p>'
+          + '</div></section>';
+        console.error('[CAT OS] boot watchdog fired after ' + Math.round(quiet / 1000) + 's of silence', window.__catos.errors);
+      }, 1000);
+    })();
   </script>
 
   <!-- Styles: tokens first (variables), then base, then components -->
