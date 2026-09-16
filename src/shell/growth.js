@@ -29,6 +29,7 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
+import { skillToGrow } from '../core/learning/noticing.js';
 import { loadRCPassages, listRCItems, loadPJItems, loadPSItems, loadOOOItems, loadWDItems } from '../core/content-loader/loader.js';
 import { deriveDNA } from '../core/mentor/dna.js';
 import { listLessons, listReflections } from '../core/mentor/records.js';
@@ -142,6 +143,15 @@ export async function renderGrowth(outlet, { storage }) {
   const strongest = [...abilities].sort((a, b) => b.p - a.p)[0];
 
   body.removeAttribute('aria-busy');
+  /* The four abilities on this screen are deliberately coarse — reading,
+     vocabulary, verbal, pace — and "what would move most" was chosen from
+     them. The skill ledger is finer and is fed by every answer in the app:
+     twenty-six abilities, and it knows which one is actually costing marks.
+     It only speaks when it has seen a skill at least six times, so a new
+     learner still gets the coarse answer, which is the right one for them. */
+  let grow = null;
+  try { grow = skillToGrow(sessions, world?.records?.learning ?? []); } catch (err) { console.error('[CAT OS] noticing failed', err); }
+
   body.innerHTML = `
     <header class="reach__head">
       <p class="reach__eyebrow">Your reach</p>
@@ -170,9 +180,10 @@ export async function renderGrowth(outlet, { storage }) {
 
     <section class="reach__next">
       <p class="reach__nextlabel">What would move most</p>
-      <h2>${escapeHTML(weakest.name)}</h2>
-      <p>${escapeHTML(weakest.advice)}</p>
-      <a class="g-cta" href="${weakest.href}">${escapeHTML(weakest.cta)}<span class="arrow" aria-hidden="true">→</span></a>
+      <h2>${escapeHTML(grow?.name ?? weakest.name)}</h2>
+      <p>${escapeHTML(grow ? grow.line : weakest.advice)}</p>
+      ${grow ? `<p class="reach__nextseen">${grow.seen} questions have asked for it so far.</p>` : ''}
+      <a class="g-cta" href="${grow ? `#/world/place/${grow.where}` : weakest.href}">${escapeHTML(grow ? `Go where ${grow.name.toLowerCase()} is trained` : weakest.cta)}<span class="arrow" aria-hidden="true">→</span></a>
     </section>
 
     <section class="sets">

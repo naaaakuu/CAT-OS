@@ -141,6 +141,18 @@ let bootRegistryPromise = null;
 export function loadBootRegistry() {
   if (!bootRegistryPromise) {
     bootRegistryPromise = fetchJSON('content/boot-index.json')
+      .then((reg) => {
+        // Patterns come back as indices into one shared list (see
+        // tools/build-index.mjs); expand them once, here, so every reader
+        // downstream sees the same rows the full registry would have given it.
+        const names = reg?.patterns;
+        if (Array.isArray(names)) {
+          for (const row of reg.items ?? []) {
+            if (row.p) { row.patterns = row.p.map((i) => names[i]).filter(Boolean); delete row.p; }
+          }
+        }
+        return reg;
+      })
       // An older install may not have the slim file yet; the full one always
       // works, it is just heavier.
       .catch(() => loadRegistry())

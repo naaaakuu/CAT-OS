@@ -21,7 +21,7 @@
 
 import { loadLexItem, loadTwinItem, loadLoanItem } from '../core/content-loader/loader.js';
 import { rng } from './engine/palette.js';
-import { isRested, passagesForSkill } from '../core/learning/review.js';
+import { isRested, passagesForSkill, passagesForPattern, patternLedger, weakPatterns } from '../core/learning/review.js';
 import { RC_TYPE_SKILL } from '../core/learning/taxonomy.js';
 import { wordStatus, REGION_KIND, ROUND_SIZE } from './lexicon.js';
 
@@ -120,9 +120,16 @@ export function readingWeakness(sessions) {
   // A type only counts as weak once it has been met at least three times,
   // so one bad morning never redirects the whole curriculum.
   const ranked = [...byType.entries()].filter(([, e]) => e.n >= 3).sort((a, b) => a[1].acc - b[1].acc);
+  /* And one level finer than the type. A skill is "inference"; a reasoning
+     PATTERN is "inference versus speculation" or "inference from a
+     concession", and every v5 question names the patterns it exercises.
+     patternLedger has been counting them since the content engine shipped
+     and passagesForPattern has been sitting unused beside it. */
+  const pattern = weakPatterns(patternLedger(sessions ?? []), { min: 5, below: 0.65, n: 1 })[0] ?? null;
   return {
     byType,
     answered,
+    pattern,
     weakest: ranked.length && ranked[0][1].acc < 0.7 ? ranked[0][0] : null,
     strongest: ranked.length ? ranked[ranked.length - 1][0] : null,
   };
@@ -184,6 +191,20 @@ export function nextPassage(content, best, weakness, seed = 'rc') {
     const key = RC_TYPE_SKILL[weakness.weakest] ?? weakness.weakest;
     const aimed = passagesForSkill(pool, key, best);
     if (aimed.length) pool = aimed;
+
+    /* ONE LEVEL FINER. A skill is "inference"; a reasoning PATTERN is
+       "inference versus speculation" or "inference from a concession", and
+       the content engine tags every v5 question with the patterns it
+       exercises. `patternLedger` has been counting how the learner does on
+       each of the hundred and fifty-two since the engine shipped, and
+       `passagesForPattern` has been sitting here unused.
+       Narrowing inside the already-aimed pool means this can only ever make
+       the choice sharper, never emptier: if no passage in the pool exercises
+       the pattern, the skill-level aim stands. */
+    if (weakness.pattern) {
+      const finer = passagesForPattern(pool, weakness.pattern.key, best);
+      if (finer.length) pool = finer;
+    }
   }
   if (pool.length) {
     // Easiest-first within the stage keeps the ladder honest.

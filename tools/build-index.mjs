@@ -208,12 +208,22 @@ export const BOOT_FIELDS = Object.freeze([
 ]);
 
 export function bootIndexFrom(index) {
+  /* `patterns` is the single biggest field in the registry — 63 KB of
+     repeated dotted strings — and the curator needs it: aiming at "inference
+     versus speculation" instead of at "inference" is the difference between
+     the content engine's finest aim working and not existing. Stored as
+     indices into one shared list it costs 13 KB, and loader.js expands it
+     back on read so nothing downstream knows the difference. */
+  const patterns = [...new Set((index.items ?? []).flatMap((r) => r.patterns ?? []))].sort();
+  const at = new Map(patterns.map((p, i) => [p, i]));
   return {
     registry_version: index.registry_version,
-    description: 'The boot subset of index.json: only the fields src/world and src/village read. Written by tools/build-index.mjs — do not edit.',
+    description: 'The boot subset of index.json: only the fields src/world and src/village read, with patterns stored as indices into the shared list. Written by tools/build-index.mjs — do not edit.',
+    patterns,
     items: (index.items ?? []).map((r) => {
       const o = {};
       for (const k of BOOT_FIELDS) if (r[k] !== undefined) o[k] = r[k];
+      if (r.patterns?.length) o.p = r.patterns.map((x) => at.get(x)).filter((n) => n !== undefined);
       return o;
     }),
   };

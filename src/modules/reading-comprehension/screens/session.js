@@ -28,6 +28,7 @@ import { STORES } from '../../../core/storage/storage-adapter.js';
 import { cue } from '../../../core/engagement/feedback.js';
 import { dayKey } from '../../../core/engagement/streaks.js';
 import { deriveDNA } from '../../../core/mentor/dna.js';
+import { trapHabit, hitHabit } from '../../../core/learning/noticing.js';
 import { chooseLesson, lessonRecord, pickRecall } from '../../../core/mentor/lesson.js';
 import { saveLesson, listLessons, markRecalled } from '../../../core/mentor/records.js';
 import { LINES } from '../../../core/mentor/voice.js';
@@ -343,6 +344,22 @@ export async function renderSession(outlet, { storage }, params) {
           <details><summary>${lesson.lesson_kind === 'watch' ? 'Why the brain goes there' : 'Worth keeping'}</summary><p style="margin-top:8px">${escapeHTML(lesson.teach.pull)}</p><p>${escapeHTML(lesson.teach.notice)}</p>${lesson.teach.known ? `<p><i>${escapeHTML(lesson.teach.known)}</i></p>` : ''}</details>
           <p style="margin-top:8px;opacity:0.8"><i>${escapeHTML(lesson.closing)}</i></p>
         </div>` : '';
+      /* WHAT THE LEDGER HAS NOTICED.
+         The trap ledger has counted every option this learner has fallen for
+         since the first passage, grouped into the seven families the taxonomy
+         names — and until now it reached nobody. It speaks here, and only
+         here, and only when two things are true at once: a family has caught
+         them four or more times, AND it caught them again in the run they
+         have just finished. A general observation after a clean run is noise;
+         this is the moment it means something. One sentence, never a list. */
+      let habitHTML = '';
+      try {
+        const habit = trapHabit([...prior, s]);
+        if (habit && hitHabit(s.answers, habit)) {
+          habitHTML = `<div class="result__habit"><p class="label">A pattern</p><p>${escapeHTML(habit.sentence)} That was one of them.</p></div>`;
+        }
+      } catch (err) { console.error('[CAT OS] noticing failed', err); }
+
       const reviewHTML = `<div class="result__review">${s.answers.map((a, i) => `<div class="r ${a.is_correct === true ? 'ok' : a.is_correct === false ? 'no' : ''}"><span>Q${i + 1} · ${a.chosen ? `chose ${a.chosen}` : 'set aside'}</span><span>${formatDuration(a.time_ms)}</span></div>`).join('')}</div>`;
 
       cue('mentor');
@@ -361,7 +378,7 @@ export async function renderSession(outlet, { storage }, params) {
         worldLine: line,
         setsDone,
         unlocked,
-        extraHTML: mentorHTML + reviewHTML,
+        extraHTML: mentorHTML + habitHTML + reviewHTML,
         actions: [
           { label: 'Back to the village', href: '#/world', primary: true },
           { label: 'Understand this passage', href: `#/rc/mentor/${passage.meta.id}` },

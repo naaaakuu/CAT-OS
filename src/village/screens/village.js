@@ -24,7 +24,7 @@
 import { VillageRenderer } from '../renderer.js';
 import { buildVillageScene } from '../scene.js';
 import { art, artIMG } from '../art.js';
-import { BUILDINGS, CHARACTERS, HOUSE, WORLD, BOARD, buildingById, good } from '../defs.js';
+import { MODULE_BUILDING, BUILDINGS, CHARACTERS, HOUSE, WORLD, BOARD, buildingById, good } from '../defs.js';
 import { loadWorld } from '../../world/state.js';
 import { onboardingStep, needsText, costText } from '../state.js';
 import { nextActivity } from '../next.js';
@@ -37,12 +37,20 @@ import { STORES } from '../../core/storage/storage-adapter.js';
 import { play, unlock, startMusic, startAmbience, musicEnabled, setMusicEnabled } from '../../world/audio.js';
 import { motionReduced, onFeedbackChange } from '../../core/engagement/feedback.js';
 import { escapeHTML } from '../../core/utils/format.js';
+import { noticing } from '../../core/learning/noticing.js';
+import { SKILLS } from '../../core/learning/review.js';
 
 const ICON_SOUND_ON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M17.8 6.5a7.5 7.5 0 0 1 0 11"/></svg>`;
 const ICON_SOUND_OFF = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>`;
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const HOME = { x: WORLD.home.x, y: WORLD.home.y + 20 };
+/** Which building trains a skill, from the skill's own `where`. */
+const PLACE_BUILDING_ID = Object.freeze({
+  'reading-room': 'reading', meadow: 'garden', pond: 'garden', thicket: 'garden',
+  rootwood: 'roots', terraces: 'roots', loom: 'loom', table: 'loom', bench: 'loom', wilds: 'road',
+});
+const SKILL_MODULE = Object.freeze(Object.fromEntries(SKILLS.map((s) => [s.key, s.module ?? null])));
 const fmtSecs = (ms) => { const s = Math.max(0, Math.ceil(ms / 1000)); return s >= 60 ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` : `0:${String(s).padStart(2, '0')}`; };
 const fmtWait = (ms) => { const m = Math.max(1, Math.round(ms / 60000)); if (m < 60) return `${m} min`; const h = Math.floor(m / 60), r = m % 60; return r ? `${h} h ${r} min` : `${h} h`; };
 
@@ -93,6 +101,9 @@ export async function renderVillage(outlet, { storage }) {
   let state = world.state;
   let v = state.village;
   let step = onboardingStep(v, state, valley);
+  /* Derived once per render, never per popover. */
+  let notice3 = { trap: null, pattern: null, skill: null };
+  try { notice3 = noticing(world.records.sessions ?? [], world.records.learning ?? []); } catch (err) { console.error('[CAT OS] noticing failed', err); }
 
   /* ---- The hand-off from a run or a build ---- */
   const focusSlug = sessionStorage.getItem('world:focus');
@@ -480,11 +491,30 @@ export async function renderVillage(outlet, { storage }) {
           <p class="vlearn__eyebrow">${escapeHTML(b.def.skill ?? 'Challenge')}</p>
           <p class="vlearn__title">${escapeHTML(next?.label ?? act.label)}</p>
           <p class="vlearn__sub">${escapeHTML(next?.sub ?? act.brief ?? '')}</p>
+          ${noticeLineFor(b)}
         </span>
       </a>
       <div class="vpop__actions">
         <a class="vbtn ${b.queue?.ready ? 'vbtn--paper' : ''}" href="${escapeHTML(href)}" data-go="${b.id}">${escapeHTML(act.verb)}<small>${rewardLine(b, act)}</small></a>
       </div>`;
+  }
+
+  /* WHY THIS BUILDING, TODAY.
+     `tipFor` already builds this sentence — "Inference · 0% of your last 4"
+     — and throws it away, because its learning branch is outranked by every
+     village chore and almost never wins. The building's own card is the
+     right place for it anyway: the learner is standing in front of the thing
+     that trains the skill, one tap from starting. One line, only when the
+     ledger has actually seen enough to mean it. */
+  function noticeLineFor(b) {
+    try {
+      const skill = notice3?.skill;
+      if (!skill) return '';
+      const bid = MODULE_BUILDING[SKILL_MODULE[skill.key]] ?? null;
+      const trains = bid ? bid === b.id : (skill.where && PLACE_BUILDING_ID[skill.where] === b.id);
+      if (!trains) return '';
+      return `<p class="vlearn__notice">${escapeHTML(skill.name)} · ${Math.round(skill.acc * 100)}% of the ${skill.seen} it has asked you</p>`;
+    } catch { return ''; }
   }
 
   function popHTML(id) {
@@ -771,7 +801,14 @@ export async function renderVillage(outlet, { storage }) {
     if (hit.kind === 'wick') { openPop('wick'); return; }
     if (hit.kind === 'person') { openPop(`nb:${hit.id}`); return; }
     if (hit.kind === 'board') { lookAt('board'); openPop('board'); return; }
-    if (hit.kind === 'building') { const b = v.buildingById(hit.id); if (b?.queue?.ready > 0 && step !== 'collect') { collect(hit.id); return; } lookAt(hit.id); openPop(hit.id); return; }
+    /* The BUILDING opens the card; the CALLOUT collects. They used to do the
+       same thing — tapping the building collected whenever anything was on
+       the shelf — so on a played village there was no way at all to open a
+       worker's card, read what she does, or see what is queued behind her.
+       The '×12' bubble is the collect affordance and says so; the building
+       is the person who works there. (The onboarding's collect step still
+       collects from the building, because that is the step it is teaching.) */
+    if (hit.kind === 'building') { const b = v.buildingById(hit.id); if (b?.queue?.ready > 0 && step === 'collect') { collect(hit.id); return; } lookAt(hit.id); openPop(hit.id); return; }
     if (hit.kind === 'plot') { openPop(`plot:${hit.id}`); return; }
     if (hit.kind === 'house') { openPop(hit.id); return; }
     if (hit.kind === 'neighbour') { openPop(`nb:${hit.id}`); }

@@ -2477,6 +2477,22 @@ console.log('\n26. Hostile records (tools/check-hostile-records.mjs)');
   if (problems.length === before) ok(`${records} deliberately broken records through ${cases} derivations; the world still derives`);
 }
 
+console.log('\n27. What the ledgers say (tools/check-noticing.mjs)');
+{
+  const before = problems.length;
+  // §20 proves the ledgers COMPUTE, and it passed for two releases while
+  // nothing read them: the seven trap families had authored copy nobody ever
+  // saw, and the hundred and fifty-two reasoning patterns existed only in a
+  // JSON file no runtime code loaded. This is the other half — that a learner
+  // with a real habit gets a real sentence, that a learner without one is
+  // left alone, that every line has a number behind it and is in the mentor's
+  // register, and that the curator's finest aim actually moves the choice.
+  const { checkNoticing } = await mod('tools/check-noticing.mjs');
+  const { problems: np, patterns, tagged } = await checkNoticing();
+  for (const p of np) bad('noticing: ' + p);
+  if (problems.length === before) ok(`${patterns} reasoning patterns in the code, ${tagged} passages tagged with theirs; the trap, pattern and skill ledgers each reach a learner`);
+}
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');
