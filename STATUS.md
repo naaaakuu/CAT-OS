@@ -4,7 +4,39 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-15 — 2.1.1, launch readiness: a defect pass over 2.1.0 driven against the running app. The reading screen was rendering passages at 1.14:1 and is now 13.4:1; backup import in "replace" mode could wipe the village; a service-worker update could end a timed passage; three paid upgrades did nothing; the curator could aim only 10 of 27 question types; the village had no keyboard route. 28 defects fixed, each reproduced and measured. New: tools/check-contrast.mjs, run by verify.mjs §22. App version 2.1.1._
+_Last updated: 2026-09-16 — 2.1.2, the polish, reliability and systems-hardening pass. Dark mode is a designed theme rather than an inverted light one (78 rendered-contrast failures → 0). The service worker installs in resumable batches and promotes transactionally, so a failed upgrade costs nothing and a content bump no longer deletes a 435-file library. The cold open is 55 modules, not 153. A tree was standing in the river; the map is validated as data now and as a running scene. The ledgers that had been counting for two releases speak to a learner in four places. Nobody had ever pressed Tab. 90+ defects found and fixed, each reproduced in a real browser. Six new gates (§23, §23b, §24, §26, §27, §28). App version 2.1.2._
+
+## What changed in 2.1.2 (polish, reliability and systems hardening)
+
+_Not a feature release. Everything below was reproduced against the running
+app in a real browser, fixed, and then re-driven. The standard was: if a user
+encounters it, it should feel intentional._
+
+| Area | State | Notes |
+|---|---|---|
+| **Dark mode** | **fixed (2.1.2)** | Two competing `--g-*` palettes in two stylesheets meant a token's light value and its dark value came from different files. `world.css` owns the palette now and `game.css` keeps geometry and type. Every stage-backed route rebinds both `--g-*` and `--color-*`. **78 rendered-contrast failures → 0** across ten risk routes in both themes |
+| **Contrast, as pixels** | **shipped (2.1.2)** | `tools/check-rendered-contrast.mjs` (§24) opens each route in real Chrome, paints every glyph transparent, screenshots both, and takes the median per-pixel WCAG ratio between the ink and whatever is actually behind it — a card, a gradient, a veil over a painted canvas. It cannot be fooled by a correct token that a later stylesheet overrides |
+| **The offline promise** | **fixed (2.1.2)** | The install was one atomic `addAll` of 594 requests: one dropped request on patchy mobile data and nothing at all was cached. It is staged and resumable now — batches of twelve, the cache itself the checkpoint — and version promotion is transactional, so a half-finished upgrade costs nothing and a known-good library is never deleted before its replacement is safely there. Proven by driving a 15→16 content bump with the network blocked: the 435-file library survived |
+| **The cold open** | **fixed (2.1.2)** | 153 module requests became 55, and an 807 KB registry became a 168 KB boot subset. One optional module failing no longer stops the app; a boot that never finishes says so after eight seconds instead of showing "Loading…" forever |
+| **The map** | **fixed (2.1.2)** | A tree stood in the middle of the river, and so did a bench, a cottage spot, a path and a graph node — because `invalidSpot` thought the river was 28px wide and the renderer paints it 54. Two gates now: §23 validates the DATA in pure Node (628 coordinates), §23b drives four village states across three hours in a real browser and checks 3450 placed objects and ninety seconds of walking |
+| **The living village** | **fixed (2.1.2)** | Every delivery, build and craft teleported every walker back to its seeded start; every character handle pointed at a discarded actor after the first refresh; workers never played their work animation while anything was on the shelf; neighbours walked through walls and across the pond; at night the board said somebody was waiting and nobody was there |
+| **What the ledgers know** | **fixed (2.1.2)** | The trap, pattern and skill ledgers had been derived correctly and read by nothing for two releases. One sentence, in four places, only when there is something true to say: the result screen when a habit has caught this learner four times AND again just now; the building's card; Growth's "what would move most"; and the curator, which aims at the reasoning pattern inside the already-aimed pool. All 152 patterns are mirrored into the code so they can be named offline |
+| **Accessibility** | **fixed (2.1.2)** | The global focus ring was silently cancelled on eight component classes — every passage row, every primary call to action, every Settings toggle. Sixteen of Settings' nineteen controls were under 44×44 and none answered a press. The app menu claimed `role="dialog"` and kept none of it. Answering announced nothing and threw focus to the top; the result screen announced 682 characters at once. §28 walks every route with a real Tab key in both themes |
+| **Interruption** | **fixed (2.1.2)** | A learning session persisted nothing until the very last click; a refresh one tap from the end threw the whole thing away. Each answer writes a draft now and the passage offers to carry on |
+| **Performance** | **fixed (2.1.2)** | Half of the 47 ms village rebuild was `distToPolyline` walking polylines the prop was four hundred units from, with `Math.hypot` inside the loop. Median rebuild **47.8 ms → 11.4 ms**; worst frame in ordinary play 34.5 ms → 20 ms |
+| **Honest failure** | **fixed (2.1.2)** | Every async path has a loading, a success, a failure and a retry. One malformed record no longer bricks the village; a failed registry is no longer mistaken for an empty one; a screen that has painted nothing for twelve seconds says so and offers a way back |
+
+### Known and not yet addressed
+
+| Item | Why it matters |
+|---|---|
+| Arguments (6 items) and Paragraph Completion (27) still run dry quickly | A daily learner reaches the bottom of Arguments in one sitting. The village now offers them, which makes the shortage arrive sooner |
+| The Mirror Pond and Vine Terraces word-bank shelves have no content | `confusable` and `decode` bundles are authored nowhere, so those two shelves render nothing at all. Nothing breaks; the shelf is simply not there |
+| Five weakness models still disagree | `readingWeakness` is RC-only and question-type-shaped; `skillLedger` spans every module. The curator reads both now, but one of them should be a view over the other |
+| The skill ledger has no time decay | A mastered-then-abandoned skill is never resurfaced |
+| ~20 button recipes, 20 corner radii, 30 shadow recipes | Four button families across four stylesheets. Each is individually correct; together they are more materials than one product needs |
+| The village scene is rebuilt whole on every craft | 11.4 ms is under a frame, but the static half (terrain, trees, houses) does not change and is rebuilt anyway |
+| Off-screen callouts are `opacity: 0` | Keyboard users can reach them (focus pans the camera); pointer users still cannot see what is off-screen |
 
 ## What changed in 2.1.1 (launch readiness)
 
@@ -24,7 +56,7 @@ the running app in a headless Chrome and measured after the fix._
 | **Reduced motion on canvas** | **fixed (2.1.1)** | The village is nothing but motion and CSS cannot reach inside a canvas. A still mode freezes time and `scene.update`; the camera still pans. **120 repaints per 2s → 0** |
 | **Contrast, verified** | **shipped (2.1.1)** | `tools/check-contrast.mjs` computes real WCAG ratios over the tokens in both themes plus the village buttons; `verify.mjs` §22 runs it. 28 pairings, all AA |
 
-### Known and not yet addressed
+### Known at 2.1.1 — every line below was addressed in 2.1.2 except where the table above repeats it
 
 | Item | Why it matters |
 |---|---|

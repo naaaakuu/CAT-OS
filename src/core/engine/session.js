@@ -15,6 +15,11 @@
 import { computeScore } from './scoring.js';
 import { RC_TYPE_SKILL } from '../learning/taxonomy.js';
 
+/* A loaded passage keeps its id at meta.id. finish() has always known
+   that; anything else that needs to name the passage has to agree with it,
+   or two different passages end up sharing one identity. */
+export const passageId = (p) => p?.meta?.id ?? p?.id ?? null;
+
 export class PracticeSession {
   #passage;
   #answers;          // qid -> { chosen, is_correct, time_ms }
@@ -91,7 +96,7 @@ export class PracticeSession {
   snapshot() {
     return {
       id: this.id,
-      passage_id: this.#passage.id,
+      passage_id: passageId(this.#passage),
       index: this.#index,
       started_at: this.#startedAt,
       answers: [...this.#answers],
@@ -102,9 +107,10 @@ export class PracticeSession {
    *  holds nothing worth restoring; unknown question ids are dropped, so an
    *  edited passage can shorten a draft but never break one. */
   restore(snap) {
-    if (!snap || snap.passage_id !== this.#passage.id) return false;
+    const mine = passageId(this.#passage);
+    if (!snap || !mine || snap.passage_id !== mine) return false;
     const known = new Set(this.#passage.questions.map((q) => q.id));
-    const answers = (snap.answers ?? []).filter((e) => Array.isArray(e) && known.has(e[0]));
+    const answers = (Array.isArray(snap.answers) ? snap.answers : []).filter((e) => Array.isArray(e) && known.has(e[0]));
     if (!answers.length) return false;
     this.#answers = new Map(answers);
     this.#index = Math.min(Math.max(0, Number(snap.index) || 0), this.total - 1);

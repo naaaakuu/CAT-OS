@@ -28,7 +28,15 @@ const HABIT = 4;
  * The one trap family that keeps catching this learner, if there is one.
  * @returns {{key, n, line, sentence}|null}
  */
+/* Everything here reads the record log, and §26 is the standing rule about
+   the record log: one malformed row must never take a screen down. These are
+   read by the result screen, the village popover and Growth — three places a
+   learner is standing when something they did has just been recorded. */
+const rows = (x) => (Array.isArray(x) ? x.filter((r) => r && typeof r === 'object') : []);
+const answersOf = (s) => (Array.isArray(s?.answers) ? s.answers.filter((a) => a && typeof a === 'object') : []);
+
 export function trapHabit(sessions, { min = HABIT } = {}) {
+  sessions = rows(sessions);
   const led = trapLedger(sessions);
   const [top] = weakTrapFamilies(led, { min, n: 1 });
   if (!top) return null;
@@ -48,6 +56,7 @@ export function trapHabit(sessions, { min = HABIT } = {}) {
  * @param {object[]} answers the answers of the run just finished
  */
 export function hitHabit(answers, habit) {
+  answers = Array.isArray(answers) ? answers.filter((a) => a && typeof a === 'object') : [];
   if (!habit) return false;
   return (answers ?? []).some((a) => a && a.is_correct === false && a.trap && TRAP_FAMILY[a.trap] === habit.key);
 }
@@ -58,6 +67,7 @@ export function hitHabit(answers, habit) {
  * @returns {{key, name, instinct, seen, acc, sentence}|null}
  */
 export function patternToWatch(sessions, { min = 6, below = 0.62 } = {}) {
+  sessions = rows(sessions);
   const [top] = weakPatterns(patternLedger(sessions), { min, below, n: 1 });
   if (!top) return null;
   const def = PATTERNS?.[top.key] ?? null;
@@ -79,6 +89,7 @@ export function patternToWatch(sessions, { min = 6, below = 0.62 } = {}) {
  * @returns {{key, name, line, where, seen, acc, sentence}|null}
  */
 export function skillToGrow(sessions, learning = [], { min = 6, below = 0.7 } = {}) {
+  sessions = rows(sessions);
   const led = skillLedger(sessions, learning);
   let best = null;
   for (const [key, row] of led) {

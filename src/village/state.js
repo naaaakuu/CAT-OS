@@ -72,7 +72,10 @@ export function deriveVillage(s, records, content, now = Date.now()) {
     produced = addBag(produced, bagObj);
     for (const k of RAW_KEYS) for (let i = 0; i < (bagObj[k] ?? 0); i += 1) arrivals.get(k).push(at);
   };
-  const rcById = new Map(content.rc.map((i) => [i.id, i]));
+  // A registry that failed to load is an empty one, not a missing one: the
+  // village still derives from the record log, it just cannot cost a
+  // passage's time target.
+  const rcById = new Map((content?.rc ?? []).map((i) => [i.id, i]));
   for (const x of sessions) {
     const at = T(x);
     if (!x.module) {
@@ -85,7 +88,7 @@ export function deriveVillage(s, records, content, now = Date.now()) {
     if (x.module === 'wd') { addUnits(EARN.wd(x.score?.accuracy === 1 ? 3 : x.score?.accuracy >= 0.75 ? 2 : 1, x.score?.correct ?? 0), at); continue; }
     if (['sp', 'pc', 'wb', 'cr'].includes(x.module)) { const r = verbalStars(x, x.target_sec ?? (x.score?.total ?? 1) * 60); addUnits(EARN.bank(x.module, r.stars, x.score?.correct ?? 0, r.flawless), at); continue; }
     if (['pj', 'ps', 'ooo'].includes(x.module)) {
-      const reg = { pj: content.pj, ps: content.ps, ooo: content.ooo }[x.module] ?? [];
+      const reg = { pj: content?.pj, ps: content?.ps, ooo: content?.ooo }[x.module] ?? [];
       const byId = new Map(reg.map((i) => [i.id, i]));
       const ids = x.item_ids ?? (x.answers ?? []).filter(Boolean).map((a) => a.item_id ?? a.question_id);
       const target = ids.reduce((n, id) => n + (byId.get(id)?.estimated_time_sec ?? 90), 0);

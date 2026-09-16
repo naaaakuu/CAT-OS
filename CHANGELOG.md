@@ -4,6 +4,175 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 2.1.2 — Polish, reliability and systems hardening (2026-09-16)
+
+A pass over 2.1.1 with one question: what would still feel unfinished,
+unreliable or unconsidered to somebody using this every day? No new features.
+Every defect below was reproduced against the running app in a real browser,
+fixed, and then re-driven. Ninety-odd of them.
+
+### Dark mode was an inversion, not a design
+
+- **Two competing `--g-*` palettes.** `game.css` and `world.css` both declared
+  fifteen of the same token names, so a token's light value and its dark value
+  could come from different files — which is why `.g-cta` rendered white on
+  pale mint in dark at 1.84:1. `world.css` owns the colour palette now;
+  `game.css` keeps geometry, type and motion.
+- **The Gauntlet painted near-black text on a night-blue page in LIGHT mode**
+  (1.14:1) while a three-minute timer ran.
+- **665 raw hex literals shipped outside `tokens.css`**, including hardcoded
+  light-paper inks used on the dark glass card.
+- **78 rendered-contrast failures → 0** over ten risk routes in both themes.
+
+### The gate that measures pixels
+
+`tools/check-rendered-contrast.mjs` (verify §24) opens each route in real
+Chrome at real size in a real theme, screenshots it, paints every glyph
+transparent, screenshots again, and takes the median per-pixel WCAG ratio
+between the ink and whatever is actually behind it. Because it never asks the
+DOM what colour something "should" be, it cannot be fooled by a correct token
+a later stylesheet overrides, by a stage mounted when it should not be, or by
+a canvas background CSS cannot describe.
+
+### The offline promise was one throw of the dice
+
+- **One atomic `addAll` of 594 requests.** One dropped request on patchy mobile
+  data and NOTHING was cached — the install was discarded and every retry
+  re-downloaded all 4.4 MB. Batches of twelve now, with the cache itself as the
+  checkpoint, resumable across page lives.
+- **A `CONTENT_VERSION` bump deleted 435 library files** the learner's own
+  mobile data had fetched. Promotion is transactional: nothing known-good is
+  deleted before its replacement is safely present.
+- **No revision in the cache key**, so a corrected content file could never
+  reach an installed learner. Content and shell fingerprints are in the cache
+  names, and `verify.mjs` §25 fails if the shipped files do not hash to the
+  declared `BUILD_ID`.
+- Proven by driving a 15→16 content bump with the network blocked: the
+  half-finished upgrade cost nothing and the 435-file library survived.
+
+### The cold open
+
+- **153 module requests, 2.8 MB.** Route-level `import()` splitting took the
+  critical graph to 55 modules; `tools/module-graph.mjs` holds the budget.
+- **An 807 KB registry** of which the village needs about 10 KB: `content/boot-index.json`
+  is 168 KB, with reasoning patterns stored as indices into one shared list.
+- **One failed static module left "Loading…" forever**, because the error
+  handlers lived inside the graph that failed. `index.html` now carries a
+  non-module watchdog that speaks after eight seconds.
+
+### A tree was standing in the river
+
+- `invalidSpot` believed the river was 28px wide; `paintTerrain` paints it 54.
+  A bench, a cottage spot, the market path node, a jetty that stopped short of
+  the bank, and the mill's water wheel turning in a dry field.
+- Two gates, because one was not enough: **§23** validates the map as DATA in
+  pure Node (628 coordinates: every building, cottage, plot, node and path
+  point), and **§23b** drives four village states across three hours in a real
+  browser and checks 3450 placed objects and ninety seconds of walking. The
+  first version of §23b validated the repaired scene rather than the data, so a
+  spot in the middle of the river passed.
+
+### The village stopped being alive between actions
+
+- Every delivery, build, plot and house **teleported every walker back to its
+  seeded start**, mid-stride and mid-cheer.
+- After the first refresh **every character handle pointed at a discarded
+  actor** — cheers, thanks, Wick's celebrate and call, his hit box and his
+  speech-bubble anchor all addressing invisible objects.
+- **A worker never played its work animation** while anything sat on the shelf.
+- Neighbours walked in straight lines from their doors to the path graph,
+  through buildings and across the pond; they stood inside each other at the
+  order board; and at night the board said somebody was waiting while every
+  one of them was indoors.
+- **A refresh landing inside `construct()`'s 2.8 seconds** discarded the
+  scaffold and popped the finished building in early.
+
+### The ledgers had been counting for two releases and speaking to nobody
+
+The trap ledger, the pattern ledger and the skill ledger were all derived
+correctly, tested by §20, and read by nothing. The seven trap families had
+authored copy nobody ever saw; the 152 reasoning patterns existed only in a
+JSON file no runtime code loaded. `core/learning/noticing.js` answers one
+question for whoever asks — is there a single true thing worth saying right
+now? — and usually there is not. Four places take one sentence from it: the
+result screen (only when a family has caught this learner four or more times
+AND caught them again in the run just finished), the building's card, Growth's
+"what would move most", and the curator, which aims at the reasoning PATTERN
+inside the already-aimed pool. All 152 patterns are mirrored into
+`taxonomy.js` so they can be named offline. **§27** fails if a learner with a
+habit is told nothing, if a clean learner is told something, if a line has no
+number behind it, or if the copy leaves the mentor's register.
+
+### Nobody had pressed Tab
+
+- **The focus ring was silently cancelled on eight component classes** —
+  every passage row, every primary call to action, every Settings toggle. It is
+  reinstated last, at zero specificity through `:where()`.
+- **Sixteen of Settings' nineteen controls were under 44×44** and none of them
+  moved when pressed; so was the village callout, the primary interaction in
+  the whole game, which rendered 33px tall whatever its CSS box said because it
+  was scaled down with the camera.
+- **The app menu announced `role="dialog"` and kept none of it**: no name,
+  focus left on the button, Tab walking out into the world while the scrim held
+  the pointer in, no Escape. `src/ui/modal.js` is the village's solution,
+  lifted, and the menu and the craft sheet use it.
+- **Answering announced nothing** and threw focus to the top of the passage;
+  the result screen announced 682 characters in one breath; the XP counter
+  rewrote its own aria-live region about forty-two times in 700 ms.
+- **Three Settings groups were announced by their element id.** Village
+  callouts were "2 wanted", "×11", "250 coins", naming no building.
+- **§28** (`tools/check-reach.mjs`) walks every route with a real Tab key in
+  both themes, reads the computed style at every stop, and opens the app menu
+  with Enter to check the dialog contract from the inside.
+
+### Interruption and honest failure
+
+- **A learning session persisted nothing until the very last click.** A refresh
+  one tap from the end threw the whole thing away with no warning. Each answer
+  writes a draft; the passage offers to carry on, or to start again.
+- One malformed record bricked the home screen with a raw TypeError (**§26**
+  puts 25 deliberately broken records through eight derivations).
+- A failed content registry was rendered as "you have done nothing yet".
+- **A screen that has painted nothing for twelve seconds** now says so and
+  offers a way back — and the waiting dots are keyed to whether anything has
+  been painted, not to whether `render()` has returned, which had put a
+  spinner on top of the entire first-run onboarding.
+
+### Performance
+
+- **Half of the 47 ms village rebuild was `distToPolyline`**: `Math.hypot`
+  inside the loop, and every call walking every segment of a polyline the prop
+  was four hundred units away from. Squared distances with one `sqrt`, and a
+  cached bounding box per polyline. **47.8 ms → 11.4 ms** median; worst frame in
+  ordinary play 34.5 ms → 20 ms.
+- Two tabs could spend the same coins twice; a level-4 upgrade re-minted its
+  helper's entire history at the faster rate, minting 93 free goods.
+
+### Polish
+
+- Growth showed **four identical full-grown trees**, three of them over tracks
+  labelled "Not started": `paintTree` scaled one canopy by stage and then
+  fitted each tree to its own canvas, dividing the scale straight back out.
+  It uses `cat-plant`, the garden's own six-stage art, where every stage adds
+  a structure the previous one did not have.
+- Progress rails welded to a card's rounded, clipped bottom edge; the mentor's
+  floating header with prose scrolling past it on both sides; decorative
+  artwork directly behind body text on four hub screens; an unearned star
+  rendered as a gold star at 22% with its glow still on; three near-identical
+  buttons at the end of every run; thirteen emoji and typographic glyphs in a
+  product whose icon language forbids them.
+
+### Gates added
+
+| Section | Tool | What it would have caught |
+|---|---|---|
+| §23 | `check-world-data.mjs` | A cottage spot in the river, as data, in pure Node |
+| §23b | `check-world.mjs` | A prop or a person in the water or a wall, in a running browser |
+| §24 | `check-rendered-contrast.mjs` | 1.14:1 on a screen whose tokens are all correct |
+| §26 | `check-hostile-records.mjs` | One malformed record bricking the village |
+| §27 | `check-noticing.mjs` | Ledgers that compute perfectly and reach nobody |
+| §28 | `check-reach.mjs` | A focus ring that exists and never paints |
+
 ## 2.1.1 — Launch readiness (2026-09-15)
 
 A launch-standard audit of 2.1.0 — "what would still feel unfinished, amateur,

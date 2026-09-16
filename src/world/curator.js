@@ -107,7 +107,7 @@ export function readingWeakness(sessions) {
   let answered = 0;
   for (const s of sessions) {
     if (s.module) continue;
-    for (const a of s.answers ?? []) {
+    for (const a of (Array.isArray(s?.answers) ? s.answers : []).filter((a) => a && typeof a === 'object')) {
       if (!a.type || a.is_correct === null) continue;
       answered += 1;
       const e = byType.get(a.type) ?? { n: 0, correct: 0, acc: 0 };
@@ -428,7 +428,7 @@ export function nextVerbal(registry, sessions, moduleKey, seed = 'v', now = Date
   const ordered = [...sessions].sort((a, b) => String(a.finished_at ?? '').localeCompare(String(b.finished_at ?? '')));
   for (const s of ordered) {
     if (s.module !== moduleKey) continue;
-    for (const a of s.answers ?? []) {
+    for (const a of (Array.isArray(s?.answers) ? s.answers : []).filter((a) => a && typeof a === 'object')) {
       const id = a.item_id ?? a.question_id;
       if (a.is_correct !== null) tried.add(id);
       if (a.is_correct === true) solved.add(id);
@@ -535,7 +535,7 @@ export function missedQuestions(sessions, weakness = null, now = Date.now()) {
   const ordered = [...sessions].filter((s) => !s.module && s.finished_at)
     .sort((a, b) => String(a.finished_at).localeCompare(String(b.finished_at)));
   for (const s of ordered) {
-    for (const a of s.answers ?? []) {
+    for (const a of (Array.isArray(s?.answers) ? s.answers : []).filter((a) => a && typeof a === 'object')) {
       if (a.is_correct === null || a.is_correct === undefined) continue;
       const id = a.question_id;
       if (!id) continue;

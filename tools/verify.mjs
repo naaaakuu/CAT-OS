@@ -2518,6 +2518,22 @@ console.log('\n28. Pressing Tab (tools/check-reach.mjs)');
   else if (problems.length === before) ok(`${stops} tab stops walked with a real keyboard across both themes; every one visible, named, and 44x44`);
 }
 
+console.log('\n29. What a learner left behind (tools/check-interruption.mjs)');
+{
+  const before = problems.length;
+  // §26 proves the VILLAGE survives a hostile record log. This is the other
+  // half of the same rule, for the three screens that speak to a learner and
+  // for the draft a learner leaves behind when a run is interrupted — a file
+  // on their own device, possibly written by an older release, possibly
+  // carried through a backup somebody edited by hand. It is not a schema.
+  // It found what it was written to look for on its first run: a loaded
+  // passage keeps its id at meta.id, which finish() had always known and the
+  // draft did not, so all 115 passages shared one draft slot.
+  const { interruptionProblems, cases } = await mod('tools/check-interruption.mjs');
+  for (const p of interruptionProblems) bad('interruption: ' + p);
+  if (problems.length === before) ok(`${cases.drafts} malformed drafts and ${cases.records} nonsense record sets: nothing thrown, nothing lost, and no order promised that the barn cannot pay`);
+}
+
 console.log('\n─────────────────────────────────────');
 if (problems.length === 0) {
   console.log('✓ Repository is internally consistent.\n');

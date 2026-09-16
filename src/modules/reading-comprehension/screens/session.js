@@ -25,6 +25,7 @@ import { PracticeSession } from '../../../core/engine/session.js';
 import { recordPassageSightings } from '../../../core/engine/garden-gate.js';
 import { saveResults } from '../logic/store.js';
 import { saveDraft, loadDraft, clearDraft } from '../../../core/learning/draft.js';
+import { passageId } from '../../../core/engine/session.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
 import { cue } from '../../../core/engagement/feedback.js';
 import { dayKey } from '../../../core/engagement/streaks.js';
@@ -145,7 +146,7 @@ export async function renderSession(outlet, { storage }, params) {
      says so and offers both roads — the draft is the learner's, not ours,
      so starting fresh has to be one tap and has to be their choice. */
   (async () => {
-    const draft = await loadDraft(storage, 'rc', passage.id);
+    const draft = await loadDraft(storage, 'rc', passageId(passage));
     const begin = outlet.querySelector('#begin');
     if (!draft?.answers?.length || !begin?.isConnected) return;
     const n = draft.answers.length;
@@ -157,7 +158,7 @@ export async function renderSession(outlet, { storage }, params) {
     fresh.textContent = 'Start this passage again';
     begin.after(fresh);
     fresh.addEventListener('click', async () => {
-      await clearDraft(storage, 'rc', passage.id);
+      await clearDraft(storage, 'rc', passageId(passage));
       play('page');
       startRun();
     });
@@ -329,7 +330,7 @@ export async function renderSession(outlet, { storage }, params) {
         cue(verdict.is_correct ? 'correct' : 'wrong');
         card.reveal = { chosen: selected, correct: verdict.correct };
         revealExplanation(selected, verdict.is_correct);
-        saveDraft(storage, 'rc', passage.id, session.snapshot());
+        saveDraft(storage, 'rc', passageId(passage), session.snapshot());
         fill.style.width = `${Math.round(((session.index + 1) / session.total) * 100)}%`;
         syncActions('revealed');
       }
@@ -337,7 +338,7 @@ export async function renderSession(outlet, { storage }, params) {
         session.skip();
         card.reveal = { chosen: null, correct: session.current.correct };
         revealExplanation(null, null);
-        saveDraft(storage, 'rc', passage.id, session.snapshot());
+        saveDraft(storage, 'rc', passageId(passage), session.snapshot());
         fill.style.width = `${Math.round(((session.index + 1) / session.total) * 100)}%`;
         syncActions('revealed');
       }
@@ -345,7 +346,7 @@ export async function renderSession(outlet, { storage }, params) {
         // Written again on the way forward, not only on the way in: the draft
         // is taken at answer time, so without this a learner who came back
         // was handed the question they had just finished.
-        if (session.next()) { saveDraft(storage, 'rc', passage.id, session.snapshot()); showQuestion(); window.scrollTo(0, 0); }
+        if (session.next()) { saveDraft(storage, 'rc', passageId(passage), session.snapshot()); showQuestion(); window.scrollTo(0, 0); }
         else { stop(); await finishSession(); window.scrollTo(0, 0); }
       }
       showQuestion();
@@ -355,7 +356,7 @@ export async function renderSession(outlet, { storage }, params) {
     async function finishSession() {
       const results = session.finish();
       if (night) results.session.night_reading = true;
-      await clearDraft(storage, 'rc', passage.id);
+      await clearDraft(storage, 'rc', passageId(passage));
       try { await saveResults(storage, results); }
       catch (err) { console.error('[CAT OS]', err); toast('Session finished but could not be saved.', 'error'); }
       recordPassageSightings(storage, passage).catch((err) => console.error('[CAT OS] garden sightings failed:', err));

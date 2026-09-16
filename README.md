@@ -131,9 +131,35 @@ village economy and its derived state, vocabulary rounds), the mentor voice,
 the corpus QC, and a backup round trip. Exit 0 means the repository is
 internally consistent.
 
+Six of the twenty-eight sections drive a **real browser** (any Chrome or Edge
+on the machine; no Playwright, no npm). They exist because green unit tests
+are not the same as a working screen — `verify.mjs` passed for a whole release
+while the Reading Room rendered its passages at 1.14:1 contrast.
+
+| Section | What it does |
+|---|---|
+| §23 `check-world-data.mjs` | Validates the map as data: 628 coordinates, none in water or a wall |
+| §23b `check-world.mjs` | Drives four village states across three hours: 3450 placed objects, ninety seconds of walking |
+| §24 `check-rendered-contrast.mjs` | Screenshots each route, paints the glyphs transparent, screenshots again, and measures the real ratio between ink and whatever is behind it |
+| §26 `check-hostile-records.mjs` | Puts 25 deliberately broken records through eight derivations |
+| §27 `check-noticing.mjs` | Checks the trap, pattern and skill ledgers actually reach a learner, in register, with a number behind every line |
+| §28 `check-reach.mjs` | Walks every route with a real Tab key in both themes: focus visible, 44×44, named by something other than its own id |
+
+A release runs the full sweep, which measures all twenty-two routes rather
+than the ten riskiest:
+
+```sh
+CATOS_FULL=1 node tools/verify.mjs
+```
+
+If no Chrome is found, those sections print `SKIPPED` loudly and do not
+pretend to have passed.
+
 Other tools: `tools/check-content.mjs <file|dir>` (what content authors run),
 `tools/build-index.mjs`, `tools/build-manifest.mjs`, `tools/build-precache.mjs`,
-`tools/qc-corpus.mjs`, `tools/blind-solve.mjs`, `tools/build-lexicon.mjs`.
+`tools/qc-corpus.mjs`, `tools/blind-solve.mjs`, `tools/build-lexicon.mjs`,
+`tools/module-graph.mjs` (the cold-open budget), and `tools/cdp-lite.mjs`
+(the dependency-free Chrome driver the browser gates share).
 
 ## Repository map
 

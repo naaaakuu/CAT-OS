@@ -25,7 +25,12 @@
 
   /* Ink — three deliberate levels of hierarchy */
   --color-ink:        #1C1D1F;   /* primary text */
-  --color-ink-2:      #5D6167;   /* secondary text */
+  /* Nudged from #5D6167 in 2.1.2. The full 22-route rendered sweep caught
+     it at 4.47:1 on the segmented track in Settings — three hundredths
+     short, on the unselected half of every toggle a learner touches. The
+     ten-route subset the ordinary run measures does not include Settings.
+     Darkening a secondary ink can only raise contrast on light. */
+  --color-ink-2:      #565A60;   /* secondary text */
   /* Captions, hints, eyebrows, difficulty labels, "3 questions · 6 min".
      This is always paired with the two SMALLEST sizes in the ramp, which is
      exactly where AA's 4.5:1 is mandatory — and at the old #8A8E94 it failed

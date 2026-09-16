@@ -103,7 +103,18 @@ const RECENT = 14;
  * @param {Array} learning  stored learning records (rounds, garden walks)
  * @returns {Map<string, object>} key → {seen, correct, acc, recentAcc, level, lastAt, misses}
  */
+/* THE RECORD LOG IS NOT A SCHEMA.
+   Every ledger below reads rows the learner's device wrote, sometimes years
+   and several releases ago, sometimes through a backup file somebody edited.
+   §26 is the standing rule: one malformed row must never take a screen down,
+   and these three feed the result screen, the village popover and Growth —
+   three places a learner is standing when something they just did has been
+   recorded. One shared door, so no ledger can forget it. */
+const sane = (x) => (Array.isArray(x) ? x.filter((r) => r && typeof r === 'object') : []);
+const answersOf = (s) => (Array.isArray(s?.answers) ? s.answers.filter((a) => a && typeof a === 'object') : []);
+
 export function skillLedger(sessions, learning = [], now = Date.now()) {
+  sessions = sane(sessions); learning = sane(learning);
   const m = new Map();
   const touch = (key) => {
     let e = m.get(key);
@@ -125,7 +136,7 @@ export function skillLedger(sessions, learning = [], now = Date.now()) {
   const ordered = [...sessions].sort((a, b) => String(a.finished_at ?? '').localeCompare(String(b.finished_at ?? '')));
   for (const s of ordered) {
     const mod = s.module ?? 'rc';
-    for (const a of (s.answers ?? []).filter(Boolean)) {
+    for (const a of answersOf(s)) {
       if (a.is_correct === null || a.is_correct === undefined) continue;
       // An answer that names its own skill (v5 passages, every bank item)
       // is believed; an older passage question is mapped from its type;
@@ -248,9 +259,9 @@ export function trapLedger(sessions) {
   const traps = new Map();
   const families = new Map();
   let total = 0;
-  const ordered = [...sessions].sort((a, b) => String(a.finished_at ?? '').localeCompare(String(b.finished_at ?? '')));
+  const ordered = sane(sessions).sort((a, b) => String(a.finished_at ?? '').localeCompare(String(b.finished_at ?? '')));
   for (const s of ordered) {
-    for (const a of (s.answers ?? []).filter(Boolean)) {
+    for (const a of answersOf(s)) {
       if (!a.trap || a.is_correct !== false) continue;
       total += 1;
       const t = traps.get(a.trap) ?? { key: a.trap, n: 0, lastAt: 0, recent: 0 };
@@ -266,7 +277,7 @@ export function trapLedger(sessions) {
     }
   }
   // "recent": how many of the last twelve misses were this trap.
-  const lastMisses = ordered.flatMap((s) => (s.answers ?? []).filter((a) => a?.trap && a.is_correct === false).map((a) => a.trap)).slice(-12);
+  const lastMisses = ordered.flatMap((s) => answersOf(s).filter((a) => a.trap && a.is_correct === false).map((a) => a.trap)).slice(-12);
   for (const key of lastMisses) { const t = traps.get(key); if (t) t.recent += 1; }
   return { traps, families, total };
 }
@@ -287,8 +298,8 @@ export function weakTrapFamilies(ledger, { min = 3, n = 2 } = {}) {
  */
 export function patternLedger(sessions) {
   const m = new Map();
-  for (const s of sessions) {
-    for (const a of (s.answers ?? []).filter(Boolean)) {
+  for (const s of sane(sessions)) {
+    for (const a of answersOf(s)) {
       if (a.is_correct === null || a.is_correct === undefined) continue;
       for (const p of a.patterns ?? []) {
         const e = m.get(p) ?? { key: p, seen: 0, correct: 0, acc: 0 };
