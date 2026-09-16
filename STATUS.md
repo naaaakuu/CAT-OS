@@ -32,10 +32,11 @@ encounters it, it should feel intentional._
 |---|---|
 | Arguments (6 items) and Paragraph Completion (27) still run dry quickly | A daily learner reaches the bottom of Arguments in one sitting. The village now offers them, which makes the shortage arrive sooner |
 | The Mirror Pond and Vine Terraces word-bank shelves have no content | `confusable` and `decode` bundles are authored nowhere, so those two shelves render nothing at all. Nothing breaks; the shelf is simply not there |
-| Five weakness models still disagree | `readingWeakness` is RC-only and question-type-shaped; `skillLedger` spans every module. The curator reads both now, but one of them should be a view over the other |
+| Five weakness models still disagree | `readingWeakness` is question-type-shaped (it counts reading questions wherever they were answered, including the second look); `skillLedger` is skill-shaped and spans every module; `patternLedger` is finer than both. The curator reads all three now, but one of them should be a view over another rather than three independent counts of the same answers |
 | The skill ledger has no time decay | A mastered-then-abandoned skill is never resurfaced |
 | ~20 button recipes, 20 corner radii, 30 shadow recipes | Four button families across four stylesheets. Each is individually correct; together they are more materials than one product needs |
 | The village scene is rebuilt whole on every craft | 11.4 ms is under a frame, but the static half (terrain, trees, houses) does not change and is rebuilt anyway |
+| Para Jumbles, Para Summary, Odd One Out and Word DNA still record nothing until the last click | Reading runs and bank sets carry across an interruption now; those four engines each need the same `snapshot()`/`restore()` pair. A Loom tier is the longest single run in the product |
 | Off-screen callouts are `opacity: 0` | Keyboard users can reach them (focus pans the camera); pointer users still cannot see what is off-screen |
 
 ## What changed in 2.1.1 (launch readiness)
