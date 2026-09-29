@@ -2032,16 +2032,12 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     for (const n of ['tap', 'open', 'star1', 'star2', 'star3', 'ink', 'quest', 'grow', 'build', 'correct', 'wrong', 'hurry', 'arrival']) if (!worldAudio.WORLD_SOUND_NAMES.includes(n)) bad(`world audio: missing sound ${n}`);
     if (Math.round(worldAudio.pitch(130.81, 'do', 1)) !== 262) bad('world audio: an octave above the tonic doubles the pitch');
     if (worldAudio.VALLEY_PHRASE.length !== 6) bad('world audio: the Valley Phrase has six notes');
-    {
-      const art = await mod('src/village/art.js');
-      for (const n of ['tree', 'flower', 'building', 'stall', 'lamp', 'koi', 'butterfly', 'bird', 'wick', 'cloud', 'fence', 'well', 'person', 'sheep', 'chicken', 'dog', 'duck', 'hive', 'cart', 'beds']) if (!art.RECIPE_NAMES.includes(n)) bad(`village art: missing recipe ${n}`);
-    }
     const r = palette.ramp('#4E9E4C');
     if (!(r.light !== r.base && r.shade !== r.base && r.dark !== r.shade)) bad('world palette: a ramp must have four distinct tones');
     if (!['spring', 'summer', 'autumn', 'winter'].includes(palette.seasonWord(new Date('2026-09-11')))) bad('world palette: a season for every date');
     if (palette.hourWord(new Date(2026, 8, 11, 22)) !== 'night' || palette.hourWord(new Date(2026, 8, 11, 9)) !== 'morning') bad('world palette: the hour words follow the clock');
     if (palette.weatherWord(new Date(2026, 8, 11)) !== palette.weatherWord(new Date(2026, 8, 11))) bad('world palette: the weather holds all day');
-    if (problems.length === b0) ok(`${worldAudio.WORLD_SOUND_NAMES.length} world sounds, the village's art recipes, ramps and seasons`);
+    if (problems.length === b0) ok(`${worldAudio.WORLD_SOUND_NAMES.length} world sounds, ramps and seasons`);
   }
 
   /* ---- No screen still imports the retired SVG world ---- */
@@ -2150,24 +2146,23 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
     if (problems.length === b0) ok(`${MAP_PLACES.length} pins on the map, three benches in one Quarter, every slug still reachable`);
   }
 
-  /* ---- The village's art: every person, building and good has a recipe ----
-     A recipe only runs where there is a canvas, so under Node we check that
-     the recipes exist and that the drawing code is there; the browser tour
-     is what proves they look like a village. */
+  /* ---- The village's art: one pack, every file on disk ----
+     Every picture in the village is a sprite from the art pack (assets/art/).
+     A name the scene asks for that the pack does not have throws in the
+     browser; a file the manifest names that is not on disk paints nothing.
+     Both are checked here, and every name the scene and the screens use. */
   {
     const b0 = problems.length;
     const art = await mod('src/village/art.js');
-    for (const name of ['wick', 'person', 'building', 'stall', 'tree', 'sheep', 'chicken', 'dog', 'duck', 'koi', 'icon', 'bubble', 'glow', 'scaffold', 'plotSign']) {
-      if (!art.RECIPE_NAMES.includes(name)) bad(`art: no "${name}" recipe`);
+    for (const f of art.SPRITE_FILES) if (!existsSync(join(root, 'assets/art', f))) bad(`art: ${f} is in the manifest but not in assets/art`);
+    const used = new Set();
+    for (const f of ['src/village/scene.js', 'src/village/grove.js', 'src/village/screens/village.js', 'src/world/screens/place.js', 'src/world/icons.js']) {
+      for (const m of readFileSync(join(root, f), 'utf8').matchAll(/\b(?:art|artIMG|artURL|put)\('([a-zA-Z0-9_]+)'/g)) used.add(m[1]);
     }
-    const src = ['art.js', 'art-figures.js', 'art-buildings.js', 'art-things.js', 'art-nature.js'].map((n) => readFileSync(join(root, `src/village/${n}`), 'utf8')).join('\n');
-    for (const [what, re] of [
-      ['a cat that blinks', /if \(blink\)/], ['a lamp he carries at night', /withLamp/], ['a walking pose', /pose === 'walk'/],
-      ['people who work', /pose === 'work'/], ['people who cheer', /cheer/], ['windows that glow at night', /PAL\.glassNight/],
-    ]) if (!re.test(src)) bad(`art: the village is missing ${what}`);
-    const defs = await mod('src/village/defs.js');
-    for (const id of ['ada', 'bo', 'ines', 'nell', 'rafi']) if (!defs.CHARACTERS[id]?.look) bad(`art: ${id} has no look to be drawn with`);
-    if (problems.length === b0) ok(`${art.RECIPE_NAMES.length} art recipes, and every worker has a face`);
+    for (const n of used) if (!art.SPRITE_NAMES.includes(n)) bad(`art: "${n}" is asked for but the pack has no such sprite`);
+    for (const id of ['hearth', 'reading']) try { art.spec('building', { id, level: 9 }); } catch { bad(`art: no ${id} art at its top level`); }
+    for (const id of ['garden', 'roots', 'loom', 'market']) try { art.spec('building', { id }); } catch { bad(`art: the ${id} yard has no face for the interface`); }
+    if (problems.length === b0) ok(`${art.SPRITE_FILES.length} pack sprites on disk; all ${used.size} names the village asks for exist`);
   }
 
   /* ---- Feedback stays short by default ---- */
@@ -2404,7 +2399,7 @@ console.log('\n23b. The village, running (tools/check-world.mjs — a real brows
     if (skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). This section did NOT run.');
     else {
       for (const p of problems) bad('world: ' + p);
-      if (!problems.length) ok(`${checked} placed objects and ninety seconds of life across four village states and three hours; nothing in the water or a wall, nobody walking through one (${waived} waterside by design)`);
+      if (!problems.length) ok(`${checked} placed objects and ninety seconds of life across four village states and three hours; nothing in the water or a wall, nobody walking through one (${waived} ground or yard parts by design)`);
     }
   } catch (err) {
     // A browser gate that throws must not take the other twenty-four sections

@@ -52,6 +52,8 @@ const PLACE_BUILDING_ID = Object.freeze({
   rootwood: 'roots', terraces: 'roots', loom: 'loom', table: 'loom', bench: 'loom', wilds: 'road',
 });
 const SKILL_MODULE = Object.freeze(Object.fromEntries(SKILLS.map((s) => [s.key, s.module ?? null])));
+/** A neighbour's face: the pack has no people, so a person is their initial on a disc. */
+const avatar = (name, size) => `<span class="vavatar" style="--sz:${size}px" aria-hidden="true">${escapeHTML(String(name).replace(/^(the|old)\s+/i, '').charAt(0).toUpperCase())}</span>`;
 const fmtSecs = (ms) => { const s = Math.max(0, Math.ceil(ms / 1000)); return s >= 60 ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` : `0:${String(s).padStart(2, '0')}`; };
 const fmtWait = (ms) => { const m = Math.max(1, Math.round(ms / 60000)); if (m < 60) return `${m} min`; const h = Math.floor(m / 60), r = m % 60; return r ? `${h} h ${r} min` : `${h} h`; };
 
@@ -429,7 +431,7 @@ export async function renderVillage(outlet, { storage }) {
   /* ================= The popover ================= */
   const popEl = outlet.querySelector('#vpop');
   let popOpen = null;
-  const portrait = (ch, size = 74) => (ch?.look ? artIMG('person', { ...ch.look, pose: 'idle' }, { size, className: 'vportrait' }) : ch?.id === 'wick' ? artIMG('wick', { pose: 'sit' }, { size, className: 'vportrait' }) : '');
+  const portrait = (ch, size = 74) => (ch?.id === 'wick' ? artIMG('wick', { pose: 'sit' }, { size, className: 'vportrait' }) : ch?.name ? avatar(ch.name, size) : '');
   function openPop(id) {
     const html = popHTML(id);
     if (!html) return;
@@ -622,7 +624,7 @@ export async function renderVillage(outlet, { storage }) {
     const entries = goodEntries(o.needs);
     return `
       <div class="order ${o.deliverable ? 'is-ready' : ''}" data-order="${o.id}">
-        <span class="order__who">${o.giver.look ? artIMG('person', { ...o.giver.look, pose: 'idle' }, { size: 42 }) : icon('cat', { size: 30 })}</span>
+        <span class="order__who">${o.giver.name ? avatar(o.giver.name, 42) : icon('cat', { size: 30 })}</span>
         <span class="order__body">
           <b>${escapeHTML(o.giver.name)}<small>${escapeHTML(o.giver.role ?? '')}</small></b>
           <span class="order__needs">${entries.map((e) => `<span class="craft craft--${e.key} ${(o.missing[e.key] ?? 0) > 0 ? 'is-short' : 'is-met'}" data-craft="${e.key}">${goodIcon(e.key, { size: 15 })}<b>${Math.min(e.amount, v.stock[e.key] ?? 0)}/${e.amount}</b></span>`).join('')}</span>
@@ -646,7 +648,7 @@ export async function renderVillage(outlet, { storage }) {
     const p = v.plotViews.find((x) => x.id === id);
     if (!p) return '';
     return `
-      ${head(artIMG('plotSign', {}, { size: 56 }), 'Land', p.def.name, 'Room to grow', 'vpop__portrait--paper')}
+      ${head(artIMG('sign', {}, { size: 56 }), 'Land', p.def.name, 'Room to grow', 'vpop__portrait--paper')}
       ${say(escapeHTML(p.def.line))}
       ${costRows(p.def.cost, p.def.standing.line, p.affordable, p.standing)}
       <div class="vpop__actions">${p.ready ? `<button class="vbtn vbtn--gold" data-plot="${p.id}">${icon('hammer', { size: 20 })} Open the land</button>` : `<button class="vbtn vbtn--paper" aria-disabled="true">${p.standing ? `Short ${escapeHTML(bagText(p.missing))}` : 'Not yet'}</button>`}</div>`;
@@ -656,7 +658,7 @@ export async function renderVillage(outlet, { storage }) {
     const h = v.nextHouse;
     if (!h) return '';
     return `
-      ${head(artIMG('person', { ...h.who.look, pose: 'wave' }, { size: 74 }), 'A neighbour', h.name, `${h.who.name}, ${h.who.role}`)}
+      ${head(avatar(h.who.name, 74), 'A neighbour', h.name, `${h.who.name}, ${h.who.role}`)}
       ${say(escapeHTML(h.who.greet))}
       <p class="vpop__line">${escapeHTML(h.line)}</p>
       ${costRows(h.cost, h.standingLine, h.affordable, h.standing)}
@@ -722,7 +724,7 @@ export async function renderVillage(outlet, { storage }) {
     return `
       <button class="vsheet__close" data-close aria-label="Close">×</button>
       <header class="vsheet__head">
-        <span class="vsheet__art">${b.built && b.def.art ? artIMG('building', { id: b.def.art, level: b.level }, { size: 80 }) : b.def.art ? artIMG('scaffold', { stage: 0 }, { size: 80 }) : icon('road', { size: 56 })}</span>
+        <span class="vsheet__art">${b.built && b.def.art ? artIMG('building', { id: b.def.art, level: b.level }, { size: 80 }) : b.def.art ? artIMG('sign', {}, { size: 80 }) : icon('road', { size: 56 })}</span>
         <div>
           <p class="vsheet__eyebrow">${escapeHTML(b.def.skill ?? (b.def.kind === 'home' ? 'Home' : b.def.kind === 'market' ? 'Orders' : 'Challenge'))}${b.built ? ` · level ${b.level}` : ' · not built'}</p>
           <h2 class="vsheet__name">${escapeHTML(b.def.name)}</h2>
@@ -741,7 +743,7 @@ export async function renderVillage(outlet, { storage }) {
     const rows = [...bagEntries(v.stock).filter((e) => e.key === 'coins'), ...v.buildings.filter((b) => b.good && b.built).map((b) => ({ ...b.good, amount: b.stock, maker: b }))];
     return `
       <button class="vsheet__close" data-close aria-label="Close">×</button>
-      <header class="vsheet__head"><span class="vsheet__art">${artIMG('crate', { kind: 'books' }, { size: 60 })}</span><div><p class="vsheet__eyebrow">In the barn</p><h2 class="vsheet__name">Your goods</h2></div></header>
+      <header class="vsheet__head"><span class="vsheet__art">${artIMG('crate', {}, { size: 60 })}</span><div><p class="vsheet__eyebrow">In the barn</p><h2 class="vsheet__name">Your goods</h2></div></header>
       <div class="barn">
         ${rows.map((e) => `
           <button class="barn__row craft" data-craft="${e.key}">
@@ -1066,9 +1068,9 @@ export async function renderVillage(outlet, { storage }) {
   }
 
   /**
-   * Materials arrive, the site is cleared, the frame goes up, the walls
-   * rise under a builder's hammer, dust flies, and the new thing settles
-   * into place. Lightweight, and never longer than three seconds.
+   * Materials arrive — crates, then the fence that marks the site out —
+   * and the new thing settles into place. Lightweight, and never longer
+   * than three seconds.
    */
   async function construct(id, name, afterLine, cost, at = null, { w = 90, wallH = 40, light = false, raise = false } = {}) {
     const a = at ?? anchorOf(String(id).replace(/^plot:|^house:/, '')) ?? HOME;
@@ -1080,20 +1082,18 @@ export async function renderVillage(outlet, { storage }) {
     play('build');
     const total = reduce ? 500 : light ? 1800 : 2800;
     const t0 = performance.now();
-    const puffs = [];
-    const builder = { ...(CHARACTERS.bo.look), hat: 'cap', top: '#B57B48', apron: '#7F5331', prop: 'hammer' };
+    const kit = [['crate', -w / 3, 4], ['crate', w / 3, 0], ['crate', w / 3 - 14, -18, 0.85], ['fence', -w / 4, -wallH, 0.8], ['fence', w / 4, -wallH, 0.8]];
     const prevObjects = scene.objects.bind(scene);
     const hidden = new Set([id]);
     scene.objects = (view, t) => {
       const list = prevObjects(view, t).filter((o) => !(raise && o.building && hidden.has(o.building)));
       const p = Math.min(1, (performance.now() - t0) / total);
-      const stage = p < 0.3 ? 0 : p < 0.66 ? 1 : 2;
       const fade = p > 0.9 ? 1 - (p - 0.9) / 0.1 : 1;
-      list.push({ x: site.x, y: site.y + 2, z: 50, art: art('scaffold', { w, d: Math.round(w * 0.48), wallH, stage }), alpha: fade });
-      if (p > 0.08 && p < 0.95) list.push({ x: site.x + w / 2 + 14, y: site.y + 10, z: 60, art: art('person', { ...builder, pose: 'work', frame: Math.floor(t / 300) % 4 }), flip: true });
-      if (puffs.length < 12 && Math.random() < 0.3 && p < 0.9) puffs.push({ x: site.x + (Math.random() - 0.5) * w, y: site.y + 4, t: 0 });
-      for (const q of puffs) q.t += 16;
-      for (const q of puffs) if (q.t < 1300) list.push({ x: q.x, y: q.y - q.t * 0.02, z: 60, alpha: 0.75 * (1 - q.t / 1300), art: art('dust', { size: 1 + Math.round((q.t / 500) * 2) / 2 }) });
+      kit.forEach(([name, dx, dy, sc = 1], i) => {
+        const since = p - i * 0.12;   // one at a time, each dropping in
+        if (since <= 0) return;
+        list.push({ x: site.x + dx, y: site.y + dy, z: 50, art: art(name), scale: sc, alpha: fade, bob: -Math.max(0, 1 - since * 8) * 24 });
+      });
       return list;
     };
     for (let i = 0; i < (reduce ? 1 : 6); i += 1) setTimeout(() => play('tick'), 400 + i * 380);
@@ -1110,13 +1110,19 @@ export async function renderVillage(outlet, { storage }) {
     sparkle(renderer.toScreen(site.x, site.y - 50), 16);
   }
 
-  /** The new building settles in with a little bounce. */
+  /** The new building (a house, or every prop of a yard) settles in with a little bounce. */
   function popIn(id) {
     if (reduce) return;
-    const obj = scene.objects({ x: -1e9, y: -1e9, w: 3e9, h: 3e9 }, 0).find((o) => o.building === id);
-    if (!obj) return;
+    const objs = scene.objects({ x: -1e9, y: -1e9, w: 3e9, h: 3e9 }, 0).filter((o) => o.building === id);
+    if (!objs.length) return;
+    const base = objs.map((o) => o.scale);
     const t0 = performance.now();
-    const tick = () => { const p = Math.min(1, (performance.now() - t0) / 480); const s = p < 0.5 ? 0.9 + p * 0.3 : 1.05 - (p - 0.5) * 0.1; obj.scale = p >= 1 ? undefined : s; if (p < 1) requestAnimationFrame(tick); };
+    const tick = () => {
+      const p = Math.min(1, (performance.now() - t0) / 480);
+      const k = p < 0.5 ? 0.9 + p * 0.3 : 1.05 - (p - 0.5) * 0.1;
+      objs.forEach((o, i) => { o.scale = p >= 1 ? base[i] : (base[i] ?? 1) * k; });
+      if (p < 1) requestAnimationFrame(tick);
+    };
     requestAnimationFrame(tick);
   }
 

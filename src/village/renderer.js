@@ -25,7 +25,7 @@
  * lights are a handful of gradients, not a light map.
  */
 
-import { pruneArt, art } from './art.js';
+import { pruneArt, art, onArtReady } from './art.js';
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 /** Device pixels per world unit come in quarter steps, so every sprite can
@@ -72,9 +72,12 @@ export class VillageRenderer {
     this.#ro.observe(screen.parentElement ?? screen);
     this.#onVis = () => { if (document.visibilityState === 'visible' && this.running) { this.lastTs = 0; this.#raf(); } };
     document.addEventListener('visibilitychange', this.#onVis);
+    // A sprite image that lands after the first paint repaints its cached
+    // canvases in place; the ground bakes some of them in, so it goes too.
+    this.#offArt = onArtReady(() => { this.invalidateTerrain(); this.#scaled = null; this.invalidate(); });
   }
 
-  #ro; #onVis; #rafId = 0; #pointers = new Map(); #pinch = null; #dragging = false; #dragMoved = false; #lastPointer = null; #lastMove = null;
+  #ro; #onVis; #offArt; #rafId = 0; #pointers = new Map(); #pinch = null; #dragging = false; #dragMoved = false; #lastPointer = null; #lastMove = null;
   #onDown; #onMovePtr; #onUp; #onWheel; #onKey; tween = 0;
 
   get worldW() { return this.scene.W; }
@@ -266,6 +269,7 @@ export class VillageRenderer {
     this.cancelTween();
     this.#ro.disconnect();
     document.removeEventListener('visibilitychange', this.#onVis);
+    this.#offArt?.();
     const el = this.screen;
     el.removeEventListener('pointerdown', this.#onDown);
     el.removeEventListener('pointermove', this.#onMovePtr);

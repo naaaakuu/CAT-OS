@@ -10,56 +10,57 @@
    ============================================================ */
 
 :root {
-  /* Warmer paper, deeper ink: a printed game manual, not a web app. */
-  --g-paper: #F6EFE1;
-  --g-paper-2: #FBF6EA;
-  --g-paper-3: #E8DCC4;
-  --g-ink: #23212B;
-  --g-ink-2: #5C5646;
-  --g-ink-3: #5E5848;
-  --g-line: rgba(60, 48, 30, 0.13);
-  --g-accent: #2E6B4B;
-  --g-accent-2: #3C7F5A;
-  --g-gold: #DFA22C;
-  --g-gold-2: #F3CE72;
+  /* The studio: cream paper, deep fern ink, soft sage wells (2.2 — the
+     art pack's palette). Matte and quiet; the art carries the colour. */
+  --g-paper: #F7F6ED;
+  --g-paper-2: #FCFBF6;
+  --g-paper-3: #E6EADC;
+  --g-ink: #2B3F34;
+  --g-ink-2: #46554B;
+  --g-ink-3: #4E5B51;
+  --g-line: rgba(48, 71, 59, 0.14);
+  --g-accent: #355B48;
+  --g-accent-2: #43684F;
+  --g-gold: #D8AD59;
+  --g-gold-2: #E5C884;
 
   /* The four crafts. One colour each, used everywhere. */
-  --c-amber: #E9A13B;
-  --c-amber-2: #FFD27A;
-  --c-ink: #3B7BD6;
-  --c-ink-2: #8FC0FF;
-  --c-thread: #9C6BC0;
-  --c-thread-2: #D6B4F0;
-  --c-ember: #D2542F;
-  --c-ember-2: #FF9C6B;
+  --c-amber: #D8AD59;
+  --c-amber-2: #E5C884;
+  --c-ink: #557E80;
+  --c-ink-2: #9DBDBE;
+  --c-thread: #8C7596;
+  --c-thread-2: #C7B6CE;
+  --c-ember: #AD664F;
+  --c-ember-2: #C9937F;
 
-  --g-night: #0C1430;
-  --g-night-2: #16234A;
-  --g-panel: rgba(255, 251, 242, 0.94);
-  --g-panel-dark: rgba(18, 24, 44, 0.86);
+  --g-night: #16201B;
+  --g-night-2: #1F2C25;
+  --g-panel: rgba(252, 251, 246, 0.95);
+  --g-panel-dark: rgba(20, 28, 24, 0.88);
   /* The edge on glass panels. A hardcoded white hairline is invisible on
      paper and a bright scratch on night glass, so it is a token. */
-  --g-panel-edge: rgba(255, 255, 255, 0.5);
+  --g-panel-edge: rgba(48, 71, 59, 0.12);
   /* The stage veil (see "The stage" below). Three stops of the same hue,
      because the scene behind it is a painted valley and the type on top
      must read at AA in BOTH themes. Light = warm paper; dark = the same
      valley after sunset. Never hardcode these: the veil is the single
      surface every learning room's prose sits on. */
-  --g-veil-1: rgba(246, 239, 225, 0.68);
-  --g-veil-2: rgba(246, 239, 225, 0.82);
-  --g-veil-3: rgba(246, 239, 225, 0.92);
-  --g-veil-read-1: rgba(249, 244, 233, 0.90);
-  --g-veil-read-2: rgba(249, 244, 233, 0.95);
-  --g-veil-read-3: rgba(249, 244, 233, 0.97);
+  --g-veil-1: rgba(247, 246, 237, 0.68);
+  --g-veil-2: rgba(247, 246, 237, 0.82);
+  --g-veil-3: rgba(247, 246, 237, 0.92);
+  --g-veil-read-1: rgba(250, 249, 242, 0.90);
+  --g-veil-read-2: rgba(250, 249, 242, 0.95);
+  --g-veil-read-3: rgba(250, 249, 242, 0.97);
   /* The neutral "not yet" fill: pip tracks, rails, empty meters. One token,
      because a rail the learner cannot see is a rail that lies about
      progress, and there are a dozen of them. */
-  --g-track: rgba(60, 46, 24, 0.16);
+  --g-track: rgba(48, 71, 59, 0.14);
   /* The plate a drawn thing stands on (Growth's trees, place tiles): sky
      over ground, so a seedling never floats in empty space. */
   --g-plate: linear-gradient(var(--wk-sky-1) 0%, var(--wk-sky-2) 66%, var(--wk-grass-1) 66%, var(--wk-grass-2) 100%);
-  --g-edge: rgba(60, 46, 24, 0.1);
-  --g-edge-2: rgba(60, 46, 24, 0.14);
+  --g-edge: rgba(48, 71, 59, 0.1);
+  --g-edge-2: rgba(48, 71, 59, 0.14);
   /* THE LITTLE DIORAMAS. The "What Stands" tiles and the sheets beside
      them paint a scene — sky over grass, behind a building — and in dark
      they stayed at full noon while their card went to near-black: six
@@ -67,104 +68,106 @@
      that dark IS night rather than an inversion, so the plate keeps its
      scene and loses the sun. Four rules shared this gradient by copy; they
      share it by name now. */
-  --wk-sky-1: #EFE7D5; --wk-sky-2: #E3DCC6; --wk-grass-1: #CFD9B4; --wk-grass-2: #C4D0A6;
-  --wk-ready-1: #FBF0D6; --wk-ready-2: #F3E4BE; --wk-ready-3: #D8DCAE; --wk-ready-4: #CBD49F;
-  --wk-built-1: #EDF2E2; --wk-built-2: #DFE8CC; --wk-built-3: #C6D6A8; --wk-built-4: #B9CC98;
+  --wk-sky-1: #EEF0E4; --wk-sky-2: #E3E8D7; --wk-grass-1: #C9D5B0; --wk-grass-2: #BCCA9F;
+  --wk-ready-1: #F7EBCF; --wk-ready-2: #EFDFB8; --wk-ready-3: #D5DBAE; --wk-ready-4: #C8D19E;
+  --wk-built-1: #EAF0E0; --wk-built-2: #DCE5CC; --wk-built-3: #C3D3A6; --wk-built-4: #B5C896;
   --g-plate-edge: var(--g-edge);
 
   /* ---- Moved here from game.css (2.1.2): one owner for every colour. ---- */
-  --g-star: #F4C443;
-  --g-star-off: rgba(31, 34, 48, 0.14);
-  --g-ink-color: #3B7BD6;
-  --g-danger: #B7472F;
-  --g-glass: rgba(251, 247, 239, 0.86);
-  --g-glass-dark: rgba(22, 26, 40, 0.72);
+  /* Honey, a shade deeper than --g-gold: a star is read as a glyph at
+     13px, and the lighter honey measured 3.9:1 with its edge. */
+  --g-star: #C08C33;
+  --g-star-off: rgba(48, 71, 59, 0.16);
+  --g-ink-color: #557E80;
+  --g-danger: #9A4F3C;
+  --g-glass: rgba(247, 246, 237, 0.9);
+  --g-glass-dark: rgba(20, 28, 24, 0.74);
   /* The ink that sits ON the accent. White works on a deep green by day; at
      night the accent IS the light colour, so white on it is 2:1 and every
      primary action in the world becomes unreadable. One token, two answers. */
   --g-on-accent: #FFFFFF;
   /* The accent at its darkest, for ink on a tinted chip. */
-  --g-accent-deep: #1F4A35;
+  --g-accent-deep: #24402F;
   /* A surface that must read as RAISED above the card it sits on: an answer
      option, the selected chip in a segmented control. On paper that is white
      over cream; at night it has to go UP the ramp, not down, or the option
      looks recessed and the card it sits in loses its edge. */
   --g-raise: #FFFFFF;
-  --g-shadow: 0 12px 34px rgba(30, 22, 10, 0.22), 0 2px 6px rgba(30, 22, 10, 0.1);
-  --g-shadow-soft: 0 6px 18px rgba(30, 22, 10, 0.14);
+  --g-shadow: 0 10px 28px rgba(48, 71, 59, 0.12), 0 1px 3px rgba(48, 71, 59, 0.08);
+  --g-shadow-soft: 0 4px 14px rgba(48, 71, 59, 0.09);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --g-paper: #1A1B24; --g-paper-2: #22242F; --g-paper-3: #2E313F;
-    --g-ink: #F0EADC; --g-ink-2: #B4AE9E; --g-ink-3: #AEA898;
-    --g-line: rgba(240, 234, 220, 0.12);
-    --g-panel: rgba(26, 27, 36, 0.92);
-    --g-panel-edge: rgba(240, 234, 220, 0.14);
-    --g-veil-1: rgba(10, 12, 22, 0.70);
-    --g-veil-2: rgba(10, 12, 22, 0.84);
-    --g-veil-3: rgba(10, 12, 22, 0.92);
-    --g-veil-read-1: rgba(10, 12, 22, 0.86);
-    --g-veil-read-2: rgba(10, 12, 22, 0.92);
-    --g-veil-read-3: rgba(10, 12, 22, 0.95);
-    --g-track: rgba(240, 234, 220, 0.18);
-    --g-plate: linear-gradient(#232735 0%, #1E2230 66%, #253024 66%, #1F2A1E 100%);
-    --g-edge: rgba(240, 234, 220, 0.11);
-    --g-edge-2: rgba(240, 234, 220, 0.16);
-    --wk-sky-1: #2A2F42; --wk-sky-2: #232838; --wk-grass-1: #253026; --wk-grass-2: #1F2A21;
-    --wk-ready-1: #3A3423; --wk-ready-2: #2F2A1D; --wk-ready-3: #2A3226; --wk-ready-4: #232B20;
-    --wk-built-1: #253327; --wk-built-2: #1F2C22; --wk-built-3: #23331F; --wk-built-4: #1C2A1A;
+    --g-paper: #131916; --g-paper-2: #1A221E; --g-paper-3: #28322C;
+    --g-ink: #ECEADF; --g-ink-2: #B5BEAF; --g-ink-3: #A6B0A1;
+    --g-line: rgba(236, 234, 223, 0.11);
+    --g-panel: rgba(26, 34, 30, 0.93);
+    --g-panel-edge: rgba(236, 234, 223, 0.12);
+    --g-veil-1: rgba(12, 17, 14, 0.70);
+    --g-veil-2: rgba(12, 17, 14, 0.84);
+    --g-veil-3: rgba(12, 17, 14, 0.92);
+    --g-veil-read-1: rgba(12, 17, 14, 0.86);
+    --g-veil-read-2: rgba(12, 17, 14, 0.92);
+    --g-veil-read-3: rgba(12, 17, 14, 0.95);
+    --g-track: rgba(236, 234, 223, 0.16);
+    --g-plate: linear-gradient(#1F2823 0%, #1B231F 66%, #22301F 66%, #1C2819 100%);
+    --g-edge: rgba(236, 234, 223, 0.1);
+    --g-edge-2: rgba(236, 234, 223, 0.15);
+    --wk-sky-1: #232D27; --wk-sky-2: #1E2722; --wk-grass-1: #243024; --wk-grass-2: #1E2A1F;
+    --wk-ready-1: #35301F; --wk-ready-2: #2C281B; --wk-ready-3: #283124; --wk-ready-4: #222B1F;
+    --wk-built-1: #22322A; --wk-built-2: #1D2B23; --wk-built-3: #213220; --wk-built-4: #1B2919;
     --g-plate-edge: var(--g-edge);
-    --g-accent: #74B894;
-    --g-accent-2: #8ACBA8;
-    --g-on-accent: #0C1A14;
-    --g-accent-deep: #A6D6BD;
-    --g-gold: #E9B949;
-    --g-gold-2: #F3CE72;
-    --g-star: #F4C443;
-    --g-star-off: rgba(238, 234, 224, 0.16);
-    --g-ink-color: #7FA9C2;
-    --g-danger: #DE9A8C;
-    --g-glass: rgba(26, 27, 36, 0.88);
-    --g-glass-dark: rgba(10, 12, 22, 0.82);
-    --g-raise: #2E313F;
+    --g-accent: #A9C79B;
+    --g-accent-2: #BAD4AD;
+    --g-on-accent: #14231A;
+    --g-accent-deep: #C7DDBC;
+    --g-gold: #D8AD59;
+    --g-gold-2: #E5C884;
+    --g-star: #C08C33;
+    --g-star-off: rgba(236, 234, 223, 0.16);
+    --g-ink-color: #8DB5B6;
+    --g-danger: #E3A08C;
+    --g-glass: rgba(19, 25, 22, 0.9);
+    --g-glass-dark: rgba(10, 14, 12, 0.82);
+    --g-raise: #2F3A33;
     --g-shadow: 0 12px 34px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.35);
     --g-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.42);
   }
 }
 :root[data-theme="dark"] {
-  --g-paper: #1A1B24; --g-paper-2: #22242F; --g-paper-3: #2E313F;
-  --g-ink: #F0EADC; --g-ink-2: #B4AE9E; --g-ink-3: #AEA898;
-  --g-line: rgba(240, 234, 220, 0.12);
-  --g-panel: rgba(26, 27, 36, 0.92);
-  --g-panel-edge: rgba(240, 234, 220, 0.14);
-  --g-veil-1: rgba(10, 12, 22, 0.70);
-  --g-veil-2: rgba(10, 12, 22, 0.84);
-  --g-veil-3: rgba(10, 12, 22, 0.92);
-  --g-veil-read-1: rgba(10, 12, 22, 0.86);
-  --g-veil-read-2: rgba(10, 12, 22, 0.92);
-  --g-veil-read-3: rgba(10, 12, 22, 0.95);
-  --g-track: rgba(240, 234, 220, 0.18);
-  --g-plate: linear-gradient(#232735 0%, #1E2230 66%, #253024 66%, #1F2A1E 100%);
-  --g-edge: rgba(240, 234, 220, 0.11);
-  --g-edge-2: rgba(240, 234, 220, 0.16);
-  --wk-sky-1: #2A2F42; --wk-sky-2: #232838; --wk-grass-1: #253026; --wk-grass-2: #1F2A21;
-  --wk-ready-1: #3A3423; --wk-ready-2: #2F2A1D; --wk-ready-3: #2A3226; --wk-ready-4: #232B20;
-  --wk-built-1: #253327; --wk-built-2: #1F2C22; --wk-built-3: #23331F; --wk-built-4: #1C2A1A;
+  --g-paper: #131916; --g-paper-2: #1A221E; --g-paper-3: #28322C;
+  --g-ink: #ECEADF; --g-ink-2: #B5BEAF; --g-ink-3: #A6B0A1;
+  --g-line: rgba(236, 234, 223, 0.11);
+  --g-panel: rgba(26, 34, 30, 0.93);
+  --g-panel-edge: rgba(236, 234, 223, 0.12);
+  --g-veil-1: rgba(12, 17, 14, 0.70);
+  --g-veil-2: rgba(12, 17, 14, 0.84);
+  --g-veil-3: rgba(12, 17, 14, 0.92);
+  --g-veil-read-1: rgba(12, 17, 14, 0.86);
+  --g-veil-read-2: rgba(12, 17, 14, 0.92);
+  --g-veil-read-3: rgba(12, 17, 14, 0.95);
+  --g-track: rgba(236, 234, 223, 0.16);
+  --g-plate: linear-gradient(#1F2823 0%, #1B231F 66%, #22301F 66%, #1C2819 100%);
+  --g-edge: rgba(236, 234, 223, 0.1);
+  --g-edge-2: rgba(236, 234, 223, 0.15);
+  --wk-sky-1: #232D27; --wk-sky-2: #1E2722; --wk-grass-1: #243024; --wk-grass-2: #1E2A1F;
+  --wk-ready-1: #35301F; --wk-ready-2: #2C281B; --wk-ready-3: #283124; --wk-ready-4: #222B1F;
+  --wk-built-1: #22322A; --wk-built-2: #1D2B23; --wk-built-3: #213220; --wk-built-4: #1B2919;
   --g-plate-edge: var(--g-edge);
-  --g-accent: #74B894;
-  --g-accent-2: #8ACBA8;
-  --g-on-accent: #0C1A14;
-  --g-accent-deep: #A6D6BD;
-  --g-gold: #E9B949;
-  --g-gold-2: #F3CE72;
-  --g-star: #F4C443;
-  --g-star-off: rgba(238, 234, 224, 0.16);
-  --g-ink-color: #7FA9C2;
-  --g-danger: #DE9A8C;
-  --g-glass: rgba(26, 27, 36, 0.88);
-  --g-glass-dark: rgba(10, 12, 22, 0.82);
-  --g-raise: #2E313F;
+  --g-accent: #A9C79B;
+  --g-accent-2: #BAD4AD;
+  --g-on-accent: #14231A;
+  --g-accent-deep: #C7DDBC;
+  --g-gold: #D8AD59;
+  --g-gold-2: #E5C884;
+  --g-star: #C08C33;
+  --g-star-off: rgba(236, 234, 223, 0.16);
+  --g-ink-color: #8DB5B6;
+  --g-danger: #E3A08C;
+  --g-glass: rgba(19, 25, 22, 0.9);
+  --g-glass-dark: rgba(10, 14, 12, 0.82);
+  --g-raise: #2F3A33;
   --g-shadow: 0 12px 34px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.35);
   --g-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.42);
 }
@@ -178,13 +181,12 @@
   font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums;
   color: var(--g-ink); white-space: nowrap;
 }
-/* The craft mark is pixel art (world/icons.js), drawn by the same hand
-   as the valley — never a CSS gem, never an emoji. */
+/* The craft mark is a line icon (world/icons.js) in the ink around it —
+   never a CSS gem, never an emoji. */
 .craft .ico {
   width: 15px; height: 15px; flex: none; display: block;
   image-rendering: pixelated;
 }
-.craft--ember .ico { filter: drop-shadow(0 0 5px rgba(255, 120, 60, 0.55)); }
 .craft--amber  { --cc: var(--c-amber);  --cg: var(--c-amber-2); }
 .craft--ink    { --cc: var(--c-ink);    --cg: var(--c-ink-2); }
 .craft--thread { --cc: var(--c-thread); --cg: var(--c-thread-2); }
@@ -206,7 +208,7 @@
      every frame with it — the one thing that made the map drop frames on
      a phone. See the note on .op. */
   background: var(--g-paper);
-  border: 1px solid rgba(120, 96, 56, 0.16);
+  border: 1px solid var(--g-line);
   box-shadow: var(--g-shadow-soft);
   padding: 7px 14px 7px 8px;
   border-radius: 999px;
@@ -215,25 +217,25 @@
   transition: opacity 600ms var(--g-ease), transform 600ms var(--g-ease);
 }
 .hud__card.is-in { opacity: 1; transform: none; }
-.hud__avatar { background: linear-gradient(150deg, var(--g-gold-2), var(--g-gold)); color: #4A3A10; }
+.hud__avatar { background: var(--g-gold); color: #4A3A10; }
 .hud__stack { gap: 8px; align-items: flex-end; }
 
 .purse {
   display: inline-flex; align-items: center; gap: 12px;
   padding: 8px 13px; border-radius: 999px; text-decoration: none;
   background: var(--g-paper);
-  border: 1px solid rgba(120, 96, 56, 0.16);
+  border: 1px solid var(--g-line);
   box-shadow: var(--g-shadow-soft);
   opacity: 0; transform: translateY(-8px);
   transition: opacity 600ms var(--g-ease), transform 600ms var(--g-ease), box-shadow 300ms;
 }
 .purse.is-in { opacity: 1; transform: none; }
-.purse.is-hit { box-shadow: 0 0 0 4px rgba(233, 161, 59, 0.35), var(--g-shadow-soft); }
+.purse.is-hit { box-shadow: 0 0 0 4px rgba(216, 173, 89, 0.35), var(--g-shadow-soft); }
 .purse--static { opacity: 1; transform: none; }
 .purse .craft { font-size: 12.5px; }
 .hud__icons { display: flex; gap: 8px; opacity: 0; transform: translateY(-8px); transition: opacity 600ms var(--g-ease), transform 600ms var(--g-ease); }
 .hud__icons.is-in { opacity: 1; transform: none; }
-.hud__icon { background: var(--g-panel); border: 1px solid rgba(255, 255, 255, 0.5); }
+.hud__icon { background: var(--g-panel); border: 1px solid var(--g-panel-edge); }
 
 /* ------------------------------------------------------------------ */
 /* Map pins: the valley reads at a glance                              */
@@ -251,11 +253,10 @@
   position: relative;
   width: 30px; height: 30px; border-radius: 50%;
   display: grid; place-items: center;
-  color: #33281A;
-  /* A warm disc, not a dark UI chip: the mark inside it is full-colour
-     pixel art and needs a light ground to sit on, the way a carved sign
-     in the valley would. */
-  background: radial-gradient(circle at 32% 26%, #FFFCF3, #EFE1C4 72%);
+  color: #30473B;
+  /* A cream disc, not a dark UI chip: it stands on painted art in either
+     theme, so its paper and the line mark on it are fixed, like a sign. */
+  background: #F7F6ED;
   box-shadow: 0 0 0 2px var(--pin, #fff), 0 0 0 3px rgba(28, 22, 12, 0.55), 0 3px 10px rgba(0, 0, 0, 0.42);
   /* No backdrop-filter here on purpose: a pin moves with the camera, and a
      blurred backdrop on a moving element is re-rasterised every frame. The
@@ -267,7 +268,7 @@
 .pin__name {
   font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
   color: #FFF6E6; padding: 2px 8px; border-radius: 999px;
-  background: rgba(14, 18, 32, 0.62);
+  background: rgba(14, 21, 17, 0.62);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   white-space: nowrap;
   transition: opacity 240ms var(--g-ease);
@@ -281,13 +282,13 @@
 .pin.is-off .pin__dot { width: 24px; height: 24px; }
 .pin.is-off .pin__dot .ico { width: 15px; height: 15px; }
 
-.pin.is-asking .pin__dot { animation: pin-pulse 2200ms var(--g-ease) infinite; box-shadow: 0 0 0 2px var(--g-gold), 0 0 18px rgba(223, 162, 44, 0.85); }
-.pin.is-asking .pin__name { background: rgba(223, 162, 44, 0.92); color: #2E2205; text-shadow: none; }
+.pin.is-asking .pin__dot { animation: pin-pulse 2200ms var(--g-ease) infinite; box-shadow: 0 0 0 2px var(--g-gold), 0 0 18px rgba(216, 173, 89, 0.85); }
+.pin.is-asking .pin__name { background: rgba(216, 173, 89, 0.92); color: #2E2205; text-shadow: none; }
 .pin.is-ready .pin__dot::after {
-  content: \; position: absolute; top: -5px; right: -5px;
+  content: ""; position: absolute; top: -5px; right: -5px;
   width: 11px; height: 11px; border-radius: 2px; transform: rotate(45deg);
   background: linear-gradient(135deg, var(--g-gold-2), var(--g-gold));
-  box-shadow: 0 0 9px rgba(223, 162, 44, 0.95);
+  box-shadow: 0 0 9px rgba(216, 173, 89, 0.95);
 }
 
 /* The Quarter's card: three doors in one yard. */
@@ -335,7 +336,7 @@
      fourth frame for it (p95 33.3 ms → 16.8 ms when they came off). A warm
      opaque panel reads better over pixel art anyway. */
   background: var(--g-paper);
-  border: 1px solid rgba(120, 96, 56, 0.16);
+  border: 1px solid var(--g-line);
   box-shadow: var(--g-shadow);
   opacity: 0; transform: translateY(16px);
   transition: opacity 600ms var(--g-ease), transform 600ms var(--g-ease);
@@ -348,12 +349,12 @@
 .op--due::before { background: var(--c-amber); }
 .op--start::before { background: var(--c-ink); }
 .op--skill::before { background: linear-gradient(var(--c-thread-2), var(--c-thread)); }
-.op--skill .op__badge { color: #6B4488; }
+.op--skill .op__badge { color: #6E5A78; }
 .op--challenge::before { background: var(--c-ember); }
 .op__mk {
   flex: none; width: 44px; height: 44px; border-radius: 13px;
   display: grid; place-items: center;
-  background: radial-gradient(circle at 32% 26%, #FFFCF3, #EFE1C4 76%);
+  background: var(--g-paper-3);
   box-shadow: inset 0 0 0 1px var(--g-track), 0 1px 2px rgba(0,0,0,0.14);
 }
 .op__mk .ico { width: 30px; height: 30px; image-rendering: pixelated; display: block; }
@@ -361,7 +362,7 @@
 .op__badge { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--g-ink-3); }
 .op--build .op__badge { color: #96650A; }
 .op__title {
-  font-family: var(--g-display); font-size: 17.5px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2;
+  font-family: var(--g-display); font-size: 17.5px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.2;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .op__where { font-size: 11.5px; color: var(--g-ink-3); font-weight: 600; }
@@ -384,7 +385,7 @@
 /* The place card lifted off the map */
 .place-card {
   background: var(--g-paper);
-  border: 1px solid rgba(120, 96, 56, 0.16);
+  border: 1px solid var(--g-line);
   box-shadow: var(--g-shadow);
 }
 .place-card__ready { margin: 10px 0 0; font-size: 12.5px; font-weight: 700; color: #96650A; }
@@ -408,7 +409,7 @@
 .place__hero--short { position: fixed; }
 .place__fade {
   position: absolute; left: 0; right: 0; bottom: 0; height: 62%;
-  background: linear-gradient(to bottom, rgba(12, 20, 48, 0) 0%, rgba(12, 20, 48, 0.35) 45%, rgba(12, 20, 48, 0.75) 100%);
+  background: linear-gradient(to bottom, rgba(14, 21, 17, 0) 0%, rgba(14, 21, 17, 0.35) 45%, rgba(14, 21, 17, 0.75) 100%);
 }
 .place__back { z-index: 6; position: fixed; }
 .place__hero-stat { z-index: 6; position: fixed; }
@@ -420,7 +421,7 @@
   background: var(--g-paper);
   border-radius: 26px 26px 0 0;
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.38);
-  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-top: 1px solid var(--g-panel-edge);
   transition: height 420ms var(--g-ease);
   padding: 0 0 calc(env(safe-area-inset-bottom) + 28px);
   animation: sheet-up 520ms var(--g-ease) both;
@@ -429,7 +430,7 @@
 .sheet.is-open { height: 92dvh; }
 .sheet__grip {
   position: sticky; top: 0; z-index: 3; width: 100%; padding: 20px 0 16px; min-height: 44px; margin-bottom: -22px;
-  background: linear-gradient(var(--g-paper) 70%, rgba(246, 239, 225, 0));
+  background: linear-gradient(var(--g-paper) 70%, rgba(247, 246, 237, 0));
   display: grid; place-items: center; border: 0;
 }
 .sheet__grip i { display: block; width: 42px; height: 4px; border-radius: 4px; background: var(--g-paper-3); }
@@ -465,7 +466,7 @@
 .place--hearth .place__hero { height: 100dvh; }
 .tabs { display: flex; gap: 6px; margin: 16px 0 14px; background: var(--g-paper-3); padding: 4px; border-radius: 999px; }
 .tab { flex: 1; padding: 9px 8px; border-radius: 999px; border: 0; background: transparent; font-weight: 700; font-size: 13px; color: var(--g-ink-2); min-height: 0; }
-.tab.is-on { background: var(--g-paper-2); color: var(--g-ink); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+.tab.is-on { background: var(--g-accent); color: var(--g-on-accent); box-shadow: none; }
 #panel { opacity: 0; transform: translateY(6px); transition: opacity 320ms var(--g-ease), transform 320ms var(--g-ease); }
 #panel.is-in { opacity: 1; transform: none; }
 
@@ -478,16 +479,16 @@
 .purse-row__c { text-align: left; font: inherit; color: inherit; cursor: pointer; }
 .purse-row__c .ico { grid-row: 1 / span 2; width: 22px; height: 22px; image-rendering: pixelated; }
 .purse-row__c:active { transform: scale(0.985); }
-.purse-row__c b { font-family: var(--g-display); font-size: 21px; font-weight: 600; line-height: 1.05; }
+.purse-row__c b { font-family: var(--g-ui); font-size: 21px; font-weight: 600; line-height: 1.05; }
 .purse-row__c span { grid-column: 2; font-size: 12px; font-weight: 700; color: var(--g-ink-2); margin-top: -2px; }
 .purse-row__c small { display: none; }
 
 .stage { margin: 0 0 26px; }
-.stage__name { font-family: var(--g-display); font-size: 20px; font-weight: 600; margin: 0 0 2px; display: flex; justify-content: space-between; align-items: baseline; }
+.stage__name { font-family: var(--g-display); font-size: 20px; font-weight: 400; margin: 0 0 2px; display: flex; justify-content: space-between; align-items: baseline; }
 .stage__name span { font-size: 12px; color: var(--g-ink-3); font-family: var(--g-ui); font-weight: 700; }
 .stage__line { font-size: 12.5px; color: var(--g-ink-2); margin: 0 0 12px; }
 .stage__done { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.built { font-size: 11.5px; font-weight: 700; color: var(--g-accent); background: rgba(46, 107, 75, 0.1); border-radius: 999px; padding: 4px 10px; }
+.built { font-size: 11.5px; font-weight: 700; color: var(--g-accent); background: rgba(53, 91, 72, 0.1); border-radius: 999px; padding: 4px 10px; }
 
 /* ------------------------------------------------------------------ */
 /* The Workshop shelf                                                   */
@@ -512,7 +513,7 @@
   overflow: hidden;
 }
 .wk__plate .ico--art { image-rendering: pixelated; display: block; max-height: 62px; width: auto; }
-.wk__name { font-family: var(--g-display); font-size: 14px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
+.wk__name { font-family: var(--g-display); font-size: 14px; font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; }
 .wk__flag { font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g-ink-3); }
 .wk__bar { width: 70%; height: 3px; border-radius: 2px; background: var(--g-edge-2); overflow: hidden; }
 .wk__bar i { display: block; height: 100%; background: var(--g-ink-3); border-radius: 2px; }
@@ -521,7 +522,7 @@
   display: grid; place-items: center; font-size: 11px; font-weight: 800;
   background: var(--g-accent); color: var(--g-on-accent);
 }
-.wk.is-ready { border-color: var(--g-gold); box-shadow: 0 0 0 3px rgba(223, 162, 44, 0.2); }
+.wk.is-ready { border-color: var(--g-gold); box-shadow: 0 0 0 3px rgba(216, 173, 89, 0.2); }
 .wk.is-ready .wk__flag { color: #8A5E05; }
 .wk.is-ready .wk__bar i { background: var(--g-gold); }
 .wk.is-ready .wk__plate { background: linear-gradient(var(--wk-ready-1) 0%, var(--wk-ready-2) 62%, var(--wk-ready-3) 62%, var(--wk-ready-4) 100%); }
@@ -534,14 +535,14 @@
 
 /* The detail sheet: everything the card deliberately did not say. */
 .wksheet { position: fixed; inset: 0; z-index: 42; }
-.wksheet__scrim { position: absolute; inset: 0; background: rgba(10, 14, 28, 0.5); opacity: 0; transition: opacity 260ms var(--g-ease); }
+.wksheet__scrim { position: absolute; inset: 0; background: rgba(14, 21, 17, 0.5); opacity: 0; transition: opacity 260ms var(--g-ease); }
 .wksheet.is-in .wksheet__scrim { opacity: 1; }
 .wksheet__card {
   position: absolute; left: 0; right: 0; bottom: 0;
   margin: 0 auto; max-width: 460px;
   background: var(--g-paper); border-radius: 24px 24px 0 0;
   padding: 18px 20px calc(env(safe-area-inset-bottom) + 22px);
-  box-shadow: 0 -10px 40px rgba(10, 14, 28, 0.3);
+  box-shadow: 0 -10px 40px rgba(14, 21, 17, 0.3);
   transform: translateY(102%); transition: transform 380ms var(--g-spring);
   max-height: 88vh; overflow-y: auto;
 }
@@ -561,7 +562,7 @@
 .wksheet__plate .ico--art { image-rendering: pixelated; display: block; max-height: 118px; width: auto; }
 .wksheet__where { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; color: var(--g-ink-3); margin: 0 0 2px; text-transform: uppercase; letter-spacing: 0.08em; }
 .wksheet__where .ico { image-rendering: pixelated; }
-.wksheet__name { font-family: var(--g-display); font-size: 24px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.015em; }
+.wksheet__name { font-family: var(--g-display); font-size: 24px; font-weight: 400; margin: 0 0 6px; letter-spacing: -0.015em; }
 .wksheet__line { font-size: 14px; color: var(--g-ink-2); line-height: 1.5; margin: 0 0 16px; }
 .wksheet__rows { display: grid; gap: 10px; margin: 0 0 16px; }
 .wkrow { display: grid; grid-template-columns: 62px 1fr; gap: 10px; align-items: start; font-size: 13px; }
@@ -586,7 +587,7 @@
 }
 .buildveil.is-in .buildveil__card { transform: none; }
 .buildveil__eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.65; font-weight: 800; margin: 0 0 10px; }
-.buildveil__name { font-family: var(--g-display); font-size: 32px; font-weight: 600; margin: 0 0 16px; line-height: 1.08; }
+.buildveil__name { font-family: var(--g-display); font-size: 32px; font-weight: 400; margin: 0 0 16px; line-height: 1.08; }
 .buildveil__cost { display: flex; justify-content: center; gap: 14px; margin: 0 0 18px; }
 .buildveil__cost .craft { color: #fff; opacity: 0.9; font-size: 14px; }
 .buildveil__cost .craft__name { display: inline; font-weight: 600; opacity: 0.75; margin-left: 2px; }
@@ -609,7 +610,7 @@
 .standing p { font-family: var(--g-display); font-size: 17px; line-height: 1.45; margin: 0 0 10px; }
 .figures { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 18px 0; }
 .figure { background: var(--g-paper-2); border: 1px solid var(--g-line); border-radius: 14px; padding: 11px 12px; }
-.figure b { display: block; font-family: var(--g-display); font-size: 22px; font-weight: 600; line-height: 1.1; }
+.figure b { display: block; font-family: var(--g-ui); font-size: 22px; font-weight: 600; line-height: 1.1; }
 .figure span { font-size: 11px; color: var(--g-ink-2); font-weight: 600; }
 .places { display: flex; flex-direction: column; gap: 6px; }
 .places__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; text-decoration: none; color: var(--g-ink); padding: 10px 12px; border-radius: 12px; background: var(--g-paper-2); border: 1px solid var(--g-line); }
@@ -630,42 +631,42 @@
    fixed light declares its own palette, once, and every shared component
    inside it is automatically right. */
 :root:not([data-stage]) .run {
-  --g-paper: #F6EFE1;
-  --g-paper-2: #FBF6EA;
-  --g-paper-3: #E8DCC4;
-  --g-ink: #23212B;
-  --g-ink-2: #5C5646;
-  --g-ink-3: #5E5848;
-  --g-line: rgba(60, 48, 30, 0.13);
-  --g-panel: rgba(255, 251, 242, 0.94);
-  --g-panel-edge: rgba(255, 255, 255, 0.5);
-  --g-track: rgba(60, 46, 24, 0.16);
-  --g-edge: rgba(60, 46, 24, 0.1);
-  --g-edge-2: rgba(60, 46, 24, 0.14);
+  --g-paper: #F7F6ED;
+  --g-paper-2: #FCFBF6;
+  --g-paper-3: #E6EADC;
+  --g-ink: #2B3F34;
+  --g-ink-2: #46554B;
+  --g-ink-3: #4E5B51;
+  --g-line: rgba(48, 71, 59, 0.14);
+  --g-panel: rgba(252, 251, 246, 0.95);
+  --g-panel-edge: rgba(48, 71, 59, 0.12);
+  --g-track: rgba(48, 71, 59, 0.14);
+  --g-edge: rgba(48, 71, 59, 0.1);
+  --g-edge-2: rgba(48, 71, 59, 0.14);
   --g-raise: #FFFFFF;
-  --g-accent: #2E6B4B;
-  --g-accent-2: #3C7F5A;
-  --g-accent-deep: #1F4A35;
+  --g-accent: #355B48;
+  --g-accent-2: #43684F;
+  --g-accent-deep: #24402F;
   --g-on-accent: #FFFFFF;
-  --color-bg: #F6EFE1;
-  --color-surface: #FFFBF2;
-  --color-surface-2: #F2EBDD;
-  --color-surface-3: #E8DFCC;
-  --color-ink: #23212B;
-  --color-ink-2: #5C5646;
-  --color-ink-3: #585B60;
-  --color-line: rgba(60, 48, 30, 0.16);
-  --color-line-strong: rgba(60, 48, 30, 0.3);
+  --color-bg: #F7F6ED;
+  --color-surface: #FCFBF6;
+  --color-surface-2: #EFF1E6;
+  --color-surface-3: #E6EADC;
+  --color-ink: #2B3F34;
+  --color-ink-2: #46554B;
+  --color-ink-3: #4E5B51;
+  --color-line: rgba(48, 71, 59, 0.16);
+  --color-line-strong: rgba(48, 71, 59, 0.3);
 }
 .run { background: var(--g-night); position: relative; }
 .run__scene { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
-.run__veil { position: fixed; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(10, 16, 38, 0.62), rgba(10, 16, 38, 0.86) 55%, rgba(10, 16, 38, 0.93)); }
+.run__veil { position: fixed; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(14, 21, 17, 0.62), rgba(14, 21, 17, 0.86) 55%, rgba(14, 21, 17, 0.93)); }
 .run > *:not(.run__scene):not(.run__veil) { position: relative; z-index: 2; }
 .run__bar { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0; color: #fff; }
 /* The leave control is a white glyph on a translucent chip over a night
    scene; at 0.14 the chip barely darkened the ground under it and the glyph
    measured 4.4:1. A little more chip, not a different colour. */
-.run__leave { background: rgba(10, 16, 38, 0.42); color: #fff; }
+.run__leave { background: rgba(14, 21, 17, 0.42); color: #fff; }
 .run__place { color: rgba(255, 255, 255, 0.8); }
 .run__count { color: rgba(255, 255, 255, 0.84); }
 .run__what { color: #fff; }
@@ -680,11 +681,11 @@
    world's own rounds (cards on glass) are untouched. */
 :root:not([data-stage]) .run cat-passage { color: var(--g-paper); }
 :root:not([data-stage]) .run cat-passage .p-num,
-:root:not([data-stage]) .run cat-passage .p-fin { color: rgba(246, 239, 225, 0.62); }
+:root:not([data-stage]) .run cat-passage .p-fin { color: rgba(247, 246, 237, 0.62); }
 :root:not([data-stage]) .run cat-passage .p-fin::before,
-:root:not([data-stage]) .run cat-passage .p-fin::after { background: rgba(246, 239, 225, 0.24); }
+:root:not([data-stage]) .run cat-passage .p-fin::after { background: rgba(247, 246, 237, 0.24); }
 .run__ring { background: conic-gradient(var(--g-gold) var(--p, 0%), rgba(255, 255, 255, 0.18) 0); }
-.run__ring::after { background: #131C3A; }
+.run__ring::after { background: #1A2520; }
 .run__ring.is-over { background: conic-gradient(var(--c-ember) var(--p, 100%), rgba(255, 255, 255, 0.18) 0); }
 .run__track { background: rgba(255, 255, 255, 0.14); }
 .run__track i { background: var(--g-gold); }
@@ -708,7 +709,7 @@
 .brief {
   background: var(--g-panel);
   -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--g-panel-edge);
   box-shadow: var(--g-shadow);
   transition: opacity 520ms var(--g-ease), transform 520ms var(--g-ease);
 }
@@ -716,14 +717,14 @@
    behind it must never be invisible. */
 .brief.is-veiled { opacity: 0; transform: translateY(14px); }
 .brief.is-veiled.is-in { opacity: 1; transform: none; }
-.brief__fact.is-due { background: rgba(223, 162, 44, 0.16); border-color: rgba(223, 162, 44, 0.5); color: #7A5406; }
-.brief__fact.is-new { background: rgba(46, 107, 75, 0.12); border-color: rgba(46, 107, 75, 0.4); color: var(--g-accent); }
+.brief__fact.is-due { background: rgba(216, 173, 89, 0.16); border-color: rgba(216, 173, 89, 0.5); color: #7A5406; }
+.brief__fact.is-new { background: rgba(53, 91, 72, 0.12); border-color: rgba(53, 91, 72, 0.4); color: var(--g-accent); }
 .brief__fact.is-shaky { background: rgba(210, 84, 47, 0.12); border-color: rgba(210, 84, 47, 0.4); color: #8C3318; }
 
 .vround {
   background: var(--g-panel);
   -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--g-panel-edge);
   border-radius: var(--g-radius-lg);
   box-shadow: var(--g-shadow);
   padding: 18px 18px 16px;
@@ -731,7 +732,7 @@
   transition: opacity 300ms var(--g-ease), transform 300ms var(--g-ease), box-shadow 400ms;
 }
 .vround.is-in { opacity: 1; transform: none; }
-.vround.is-right { box-shadow: 0 0 0 3px rgba(46, 107, 75, 0.4), var(--g-shadow); }
+.vround.is-right { box-shadow: 0 0 0 3px rgba(53, 91, 72, 0.4), var(--g-shadow); }
 .vround.is-wrong { box-shadow: 0 0 0 3px rgba(210, 84, 47, 0.4), var(--g-shadow); }
 .vround__tag { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 6px; text-align: center; }
 .vround__tag.is-due { color: #96650A; }
@@ -752,7 +753,7 @@
 
 .result { padding: 0; justify-content: flex-start; }
 .result__sky { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 70% at 50% -10%, rgba(120, 160, 255, 0.22), transparent 60%); }
-.result--gold .result__sky { background: radial-gradient(120% 70% at 50% -10%, rgba(243, 206, 114, 0.3), transparent 62%); }
+.result--gold .result__sky { background: radial-gradient(120% 70% at 50% -10%, rgba(229, 200, 132, 0.3), transparent 62%); }
 .result--cool .result__sky { background: radial-gradient(120% 70% at 50% -10%, rgba(90, 110, 160, 0.22), transparent 60%); }
 .result__scroll {
   position: relative; z-index: 2; width: 100%; max-width: 520px; margin: 0 auto;
@@ -773,20 +774,20 @@
 }
 .won__craft.is-in { opacity: 1; transform: none; }
 .won__craft i { width: 16px; height: 16px; border-radius: 4px; transform: rotate(45deg); background: linear-gradient(135deg, var(--cg), var(--cc)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5), 0 0 12px var(--cc); }
-.won__craft b { font-family: var(--g-display); font-size: 22px; font-weight: 600; line-height: 1.1; margin-top: 5px; }
+.won__craft b { font-family: var(--g-ui); font-size: 22px; font-weight: 600; line-height: 1.1; margin-top: 5px; }
 .won__craft small { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; font-weight: 700; }
 
 .unlockbar {
   position: relative; width: 100%; max-width: 440px; margin: 0 0 20px; overflow: hidden;
   padding: 16px 18px; border-radius: 20px; text-align: left;
-  background: linear-gradient(135deg, rgba(243, 206, 114, 0.2), rgba(223, 162, 44, 0.1));
-  border: 1px solid rgba(243, 206, 114, 0.45);
+  background: linear-gradient(135deg, rgba(229, 200, 132, 0.2), rgba(216, 173, 89, 0.1));
+  border: 1px solid rgba(229, 200, 132, 0.45);
 }
 .unlockbar__glow { position: absolute; inset: -40%; background: radial-gradient(40% 40% at 30% 20%, rgba(255, 226, 150, 0.35), transparent 70%); animation: glowdrift 6s ease-in-out infinite alternate; }
 @keyframes glowdrift { from { transform: translate(-6%, -4%); } to { transform: translate(8%, 6%); } }
 .unlockbar > *:not(.unlockbar__glow) { position: relative; }
 .unlockbar__eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800; color: var(--g-gold-2); margin: 0 0 5px; }
-.unlockbar__name { font-family: var(--g-display); font-size: 21px; font-weight: 600; margin: 0 0 5px; }
+.unlockbar__name { font-family: var(--g-display); font-size: 21px; font-weight: 400; margin: 0 0 5px; }
 .unlockbar__name span { font-size: 13px; opacity: 0.7; font-family: var(--g-ui); font-weight: 600; }
 .unlockbar__line { font-size: 13px; opacity: 0.85; line-height: 1.45; margin: 0 0 12px; }
 .unlockbar__go { display: inline-flex; padding: 10px 18px; border-radius: 12px; background: var(--g-gold); color: #4A3A10; font-weight: 800; font-size: 14px; text-decoration: none; }
@@ -829,7 +830,7 @@
 .sheet:not(.is-open) .sheet__more { display: none; }
 .sheet:not(.is-open)::after {
   content: ""; display: block; height: 26px;
-  background: linear-gradient(to top, var(--g-paper), rgba(246, 239, 225, 0));
+  background: linear-gradient(to top, var(--g-paper), rgba(247, 246, 237, 0));
   position: sticky; bottom: -1px;
 }
 
@@ -852,7 +853,7 @@
 .place--hearth .place__line { font-size: 14px; margin-bottom: 4px; }
 
 /* The run: let the place show through. */
-.run__veil { background: linear-gradient(to bottom, rgba(10, 16, 38, 0.42), rgba(10, 16, 38, 0.62) 45%, rgba(10, 16, 38, 0.8)); }
+.run__veil { background: linear-gradient(to bottom, rgba(14, 21, 17, 0.42), rgba(14, 21, 17, 0.62) 45%, rgba(14, 21, 17, 0.8)); }
 .vround__feedback { min-height: 34px; }
 
 /* The wordmark sits in the sky, clear of the HUD. */
@@ -949,7 +950,7 @@
 :root[data-stage="reading-room"] .run__track { background: var(--g-paper-3); }
 :root[data-stage="reading-room"] .run__track i { background: var(--g-accent); }
 /* …but the result screen is its own night sky, always. */
-:root[data-stage] .result { background: radial-gradient(120% 80% at 50% 0%, #2B436F 0%, #0A1230 60%); }
+:root[data-stage] .result { background: radial-gradient(120% 80% at 50% 0%, #2C4638 0%, #16201B 60%); }
 
 @media (prefers-reduced-motion: reduce) { .roomstage { transition: none; opacity: 1; } }
 
@@ -959,7 +960,7 @@
 :root[data-stage] .card, :root[data-stage] .moment, :root[data-stage] .list-item { border-radius: var(--g-radius-lg); }
 
 /* The Wilds: the road out, painted behind the records. */
-.place--wilds .place__hero { background: #0A1230; }
+.place--wilds .place__hero { background: #16201B; }
 .place--wilds .place__hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 /* The hero canvas paints the road out in daylight, and the wordmark on top
    of it is white. A shadow is not a ground: "Week 38 · the Gauntlet"
@@ -970,7 +971,7 @@
      height wins — the scrim covered the top strip only, and the wordmark
      underneath it stayed at 1.65:1 over bright grass. */
   content: ""; position: absolute; inset: 0; height: auto; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(8, 14, 34, 0.46), rgba(8, 14, 34, 0.3) 52%, rgba(8, 14, 34, 0.56));
+  background: linear-gradient(to bottom, rgba(12, 20, 16, 0.46), rgba(12, 20, 16, 0.3) 52%, rgba(12, 20, 16, 0.56));
 }
 /* The scene paints a bright bloom on the horizon, exactly where the wordmark
    sits, so an even scrim is not enough: white type measured 1.9:1 over it.
@@ -978,11 +979,11 @@
    the edges. */
 .place--wilds .place__hero > div {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65); z-index: 1;
-  background: radial-gradient(70% 52% at 50% 46%, rgba(8, 14, 34, 0.82), rgba(8, 14, 34, 0.5) 62%, rgba(8, 14, 34, 0) 100%);
+  background: radial-gradient(70% 52% at 50% 46%, rgba(12, 20, 16, 0.82), rgba(12, 20, 16, 0.5) 62%, rgba(12, 20, 16, 0) 100%);
 }
 .place--wilds .place__back { z-index: 2; }
-.brief__fact.is-context { background: rgba(59, 123, 214, 0.13); border-color: rgba(59, 123, 214, 0.42); color: #1E4E96; }
-.vround__sentence mark { background: linear-gradient(transparent 52%, rgba(233, 185, 73, 0.55) 52%); color: inherit; font-weight: 700; padding: 0 1px; }
+.brief__fact.is-context { background: rgba(85, 126, 128, 0.13); border-color: rgba(85, 126, 128, 0.42); color: #2F5558; }
+.vround__sentence mark { background: linear-gradient(transparent 52%, rgba(216, 173, 89, 0.55) 52%); color: inherit; font-weight: 700; padding: 0 1px; }
 
 /* The notice clears the HUD's second row (the sound and settings icons),
    and wraps rather than running off a narrow screen. */
@@ -1071,7 +1072,7 @@
   backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 240, 210, 0.16);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-  color: #F6EFE1;
+  color: #F7F6ED;
   opacity: 0; transform: translateY(14px);
   transition: opacity 420ms var(--g-ease), transform 420ms var(--g-ease);
 }
@@ -1080,7 +1081,7 @@
   display: flex; align-items: center; gap: 8px;
   font-size: 12px; font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase;
-  color: #F2C14E;
+  color: #E5C884;
   margin-bottom: 6px;
 }
 .wickbar__face {
@@ -1100,7 +1101,7 @@
 .wickbar__more {
   display: block; margin-top: 6px;
   font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(246, 239, 225, 0.5);
+  color: rgba(247, 246, 237, 0.5);
   opacity: 0; transition: opacity 500ms var(--g-ease);
 }
 
@@ -1134,7 +1135,7 @@
   border-radius: 10px;
   outline: none;
 }
-.sign__input:focus { border-color: #2E6B4B; box-shadow: 0 0 0 3px rgba(46,107,75,0.25); }
+.sign__input:focus { border-color: #355B48; box-shadow: 0 0 0 3px rgba(53,91,72,0.25); }
 .sign__ideas { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .sign__idea {
   font: inherit; font-size: 13px; font-weight: 600;
@@ -1201,7 +1202,7 @@
 .awaken__eyebrow {
   margin: 0; font-size: 11px; font-weight: 800;
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(246, 239, 225, 0.55);
+  color: rgba(247, 246, 237, 0.55);
 }
 .awaken__named {
   margin: 0 0 4px;
@@ -1222,7 +1223,7 @@
 .gmenu { position: fixed; inset: 0; z-index: 60; }
 .gmenu__scrim {
   position: absolute; inset: 0;
-  background: rgba(12, 16, 30, 0.5);
+  background: rgba(16, 22, 19, 0.5);
   -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
   opacity: 0; transition: opacity 240ms var(--g-ease);
 }
@@ -1231,7 +1232,7 @@
   position: absolute; inset: 0 0 auto 0;
   margin: max(10px, env(safe-area-inset-top)) 10px 0;
   padding: 14px 14px 8px;
-  border-radius: 20px;
+  border-radius: 14px;
   background: var(--g-paper-2);
   box-shadow: var(--g-shadow);
   border: 1px solid var(--g-line);
@@ -1242,7 +1243,7 @@
 .gmenu.is-in .gmenu__card { transform: none; opacity: 1; }
 .gmenu__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
 .gmenu__eyebrow { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g-ink-3); }
-.gmenu__name { margin: 2px 0 0; font-family: var(--font-display, inherit); font-size: 24px; line-height: 1.1; color: var(--g-ink); }
+.gmenu__name { margin: 2px 0 0; font-family: var(--font-display, inherit); font-weight: 400; font-size: 24px; line-height: 1.1; color: var(--g-ink); }
 .gmenu__close {
   flex: none; width: 36px; height: 36px; border-radius: 50%;
   border: 1px solid var(--g-line); background: var(--g-paper);
@@ -1259,7 +1260,7 @@
 .gmenu__glyph {
   width: 36px; height: 36px; border-radius: 11px;
   display: grid; place-items: center;
-  background: radial-gradient(circle at 32% 26%, #FFFCF3, #EFE1C4 76%);
+  background: var(--g-paper-3);
   box-shadow: inset 0 0 0 1px var(--g-edge-2);
 }
 .gmenu__glyph .ico { width: 24px; height: 24px; image-rendering: pixelated; display: block; }
@@ -1270,7 +1271,7 @@
 /* ---- A craft, explained ---- */
 .craftsheet { position: fixed; inset: 0; z-index: 70; }
 .craftsheet__scrim {
-  position: absolute; inset: 0; background: rgba(12, 16, 30, 0.52);
+  position: absolute; inset: 0; background: rgba(16, 22, 19, 0.52);
   opacity: 0; transition: opacity 220ms var(--g-ease);
 }
 .craftsheet.is-in .craftsheet__scrim { opacity: 1; }
@@ -1295,7 +1296,7 @@
 .craftsheet__head { display: grid; grid-template-columns: 46px 1fr auto; align-items: center; gap: 12px; }
 .craftsheet__gem { width: 46px; height: 46px; display: grid; place-items: center; }
 .craftsheet__gem .ico { width: 44px; height: 44px; image-rendering: pixelated; display: block; }
-.craftsheet__name { margin: 0; font-family: var(--font-display, inherit); font-size: 26px; line-height: 1; color: var(--g-ink); }
+.craftsheet__name { margin: 0; font-family: var(--font-display, inherit); font-weight: 400; font-size: 26px; line-height: 1; color: var(--g-ink); }
 .craftsheet__is { margin: 3px 0 0; font-size: 14px; color: var(--g-ink-2); }
 .craftsheet__have { text-align: right; }
 .craftsheet__have b { display: block; font-size: 22px; font-weight: 800; color: var(--g-ink); }
@@ -1355,7 +1356,7 @@
   backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 240, 210, 0.15);
   box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-  color: #F6EFE1;
+  color: #F7F6ED;
   opacity: 0; transform: translateY(10px);
   transition: opacity 420ms var(--g-ease), transform 420ms var(--g-ease);
   pointer-events: auto;
@@ -1397,7 +1398,7 @@
   border-radius: 18px;
   background: var(--g-paper-2);
   border: 1px solid var(--g-line);
-  box-shadow: 0 2px 10px rgba(30, 22, 10, 0.06);
+  box-shadow: 0 2px 10px rgba(40, 56, 46, 0.06);
   overflow: hidden;
 }
 .ability::before {
@@ -1540,13 +1541,13 @@
   backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 240, 210, 0.14);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
-  color: #F6EFE1;
+  color: #F7F6ED;
   opacity: 0; transform: translateY(-8px);
   transition: opacity 420ms var(--g-ease), transform 420ms var(--g-ease);
   pointer-events: auto;
 }
 .placewick.is-in { opacity: 1; transform: none; }
-.placewick canvas { width: 36px; height: 30px; image-rendering: pixelated; }
+.placewick .ico { width: 36px; height: auto; }
 .placewick p { margin: 0; font-size: 13.5px; line-height: 1.35; font-weight: 600; }
 
 /* ------------------------------------------------------------------ */
@@ -1556,7 +1557,7 @@
 .sets { margin: 28px 0 0; }
 .sets__head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-  font-family: var(--g-display); font-size: 22px; font-weight: 600; margin: 0 0 2px; letter-spacing: -0.015em;
+  font-family: var(--g-display); font-size: 22px; font-weight: 400; margin: 0 0 2px; letter-spacing: -0.015em;
 }
 .sets__head b { font-family: var(--g-ui); font-size: 12px; font-weight: 700; color: var(--g-ink-3); }
 .sets__line { font-size: 12.5px; color: var(--g-ink-2); margin: 0 0 14px; }
@@ -1571,7 +1572,7 @@
 .setc:active { transform: scale(0.985); }
 .setc__mk {
   width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center;
-  background: radial-gradient(circle at 32% 26%, #FFFCF3, #EFE1C4 76%);
+  background: var(--g-paper-3);
   box-shadow: inset 0 0 0 1px var(--g-edge-2);
 }
 .setc__mk .ico { image-rendering: pixelated; display: block; }
@@ -1600,7 +1601,7 @@
 .setc.is-new .setc__mk { opacity: 0.6; }
 .setc.is-new .setc__name { color: var(--g-ink-2); }
 .setc.is-new .setc__bar i { background: var(--g-ink-3); }
-.setc.is-done { border-color: rgba(46, 107, 75, 0.4); background: rgba(46, 107, 75, 0.07); }
+.setc.is-done { border-color: rgba(53, 91, 72, 0.4); background: rgba(53, 91, 72, 0.07); }
 .setc.is-done .setc__near { color: var(--g-accent); font-size: 14px; }
 .setc.is-done .setc__bar i { background: var(--g-accent); }
 
@@ -1629,12 +1630,12 @@
 .setsdone {
   margin: 14px auto 0; max-width: 340px;
   padding: 12px 16px; border-radius: 16px;
-  background: rgba(46, 107, 75, 0.16);
-  box-shadow: inset 0 0 0 1px rgba(120, 200, 150, 0.3);
+  background: rgba(53, 91, 72, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(169, 199, 155, 0.3);
 }
 .setsdone__eyebrow {
   margin: 0 0 6px; font-size: 10.5px; font-weight: 800;
-  letter-spacing: 0.14em; text-transform: uppercase; color: #A8E0BE;
+  letter-spacing: 0.14em; text-transform: uppercase; color: #BFD9B2;
 }
 .setsdone__row { margin: 0; display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
 .setsdone__row + .setsdone__row { margin-top: 3px; }
@@ -1647,7 +1648,7 @@
   padding: 12px 14px; border-radius: 14px;
   background: var(--g-paper-2); border: 1px solid var(--g-line);
 }
-.standing__stage b { color: var(--g-ink); font-family: var(--g-display, inherit); font-size: 17px; font-weight: 600; }
+.standing__stage b { color: var(--g-ink); font-family: var(--g-display, inherit); font-size: 17px; font-weight: 400; }
 
 /* The road out: where Beyond has posted it to. */
 .road { display: grid; gap: 6px; margin: 10px 0 12px; }
@@ -1663,10 +1664,10 @@
 .road__stop:not(.is-reached):not(.is-next) { background: transparent; border-style: dashed; }
 .road__stop:not(.is-reached):not(.is-next) .road__mark { opacity: 0.45; }
 .road__stop:not(.is-reached):not(.is-next) .road__body b { color: var(--g-ink-2); font-weight: 600; }
-.road__stop.is-next { border-color: var(--g-gold); box-shadow: 0 0 0 2px rgba(223, 162, 44, 0.16); }
+.road__stop.is-next { border-color: var(--g-gold); box-shadow: 0 0 0 2px rgba(216, 173, 89, 0.16); }
 .road__mark {
   width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
-  background: radial-gradient(circle at 32% 26%, #FFFCF3, #EFE1C4 76%);
+  background: var(--g-paper-3);
   box-shadow: inset 0 0 0 1px var(--g-edge-2);
 }
 .road__mark .ico { image-rendering: pixelated; display: block; }
@@ -1726,7 +1727,7 @@
    outside the fill so the shape does not thin. */
 .stars, .run b, .brief b, .result__stars, .vround__stars,
 .place__stars, .g-row__stars, .tile__stars {
-  -webkit-text-stroke: 0.7px rgba(74, 48, 2, 0.9);
+  -webkit-text-stroke: 1px rgba(62, 40, 2, 0.95);
   paint-order: stroke fill;
 }
 .stars .off, .run b .off, .brief b .off, .result__stars .off,

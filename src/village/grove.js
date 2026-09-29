@@ -2,17 +2,18 @@
  * grove.js — a grove of the Rootwood, in the village's art.
  *
  * The Root Workshop's inside is a wood: one tree per root family, each at
- * the stage the learner has grown it to — a root-stone waiting, a sprout,
- * a young tree, a full crown — standing in rows on the village's ground.
+ * the stage the learner has grown it to — bare ground, a planter, a shrub,
+ * a young birch, a full oak — standing in rows on the village's ground,
+ * every one of them a sprite from the art pack.
  * The tended family takes the front, and can be tapped. The same scene
  * stands behind a Rootwood session, where `grow()` plays the growth
  * moment in place: the tree rises out of the ground into its new stage.
  */
 
 import { rng, LIGHT } from '../world/engine/palette.js';
-import { art, PAL } from './art.js';
+import { art, PAL, PLANT_STAGE } from './art.js';
+import { grassFor } from './terrain.js';
 
-const SIZE = Object.freeze({ open_ground: 0, seed: 0.35, sprout: 0.5, young: 0.7, in_leaf: 0.9, mature: 1.1, ancient: 1.3 });
 
 /**
  * @param {object} grove      { slug, name }
@@ -30,47 +31,37 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
   const rows = [[0.22, 300], [0.5, 292], [0.78, 300], [0.14, 230], [0.36, 222], [0.64, 224], [0.86, 232], [0.28, 168], [0.5, 160], [0.72, 170], [0.4, 120], [0.6, 118]];
   const objects = [];
   let ri = 0;
-  const treeFor = (f, scale = 1) => {
-    if (f.stage === 'open_ground') return art('grassTuft', { seed: `bare:${f.id}` });
-    const size = (SIZE[f.stage] ?? 0.8) * scale;
-    return art('tree', { kind: 'round', size, seed: `fam:${f.id}`, tone: f.landmark ? 2 : f.stage === 'ancient' ? 1 : 0, autumn: season === 'autumn' && f.stage !== 'seed' && f.stage !== 'sprout' });
-  };
+  const stageOf = (f) => PLANT_STAGE[f.stage] ?? PLANT_STAGE.in_leaf;
+  const treeFor = (f) => art(f.landmark && f.stage !== 'open_ground' ? 'tree_pine' : stageOf(f)[0]);
   for (const f of families) {
     let fx, y;
     if (heroId && f.id === heroId) { fx = 0.5; y = 380; } else { [fx, y] = rows[ri % rows.length]; ri += 1; }
     const x = Math.round(fx * W + (r() - 0.5) * 14);
-    objects.push({ id: f.id, family: f, x, y: y + Math.floor(ri / rows.length) * 4, art: treeFor(f), scale: f.stage === 'open_ground' ? 2.2 : 1, hero: f.id === heroId });
+    objects.push({ id: f.id, family: f, x, y: y + Math.floor(ri / rows.length) * 4, art: treeFor(f), scale: stageOf(f)[1], hero: f.id === heroId });
   }
+  // The wood behind: a back row of the pack's trees.
+  const rb = rng(`grove-wood:${grove.slug}`);
+  const wood = Array.from({ length: 9 }, (_, i) => ({ x: 20 + i * 42, y: 70 + rb() * 30, art: art(i % 3 ? 'tree_oak' : 'tree_pine'), scale: 0.8 + Math.round(rb() * 2) / 10 }));
   const lamps = [];
   for (const o of objects) if (o.family.landmark && night) lamps.push({ x: o.x, y: o.y - 30, r: 44, a: 0.4, color: PAL.glow });
   let selected = opts.selected ?? null;
   let t = 0;
-  const fire = night ? Array.from({ length: 14 }, () => ({ x: 20 + r() * (W - 40), y: 80 + r() * 320, phase: r() * 6 })) : [];
   const scene = {
-    W, H, backdrop: night ? '#1E3A20' : '#4F8E36', hour, atmo, focusY: 250,
+    W, H, backdrop: grassFor(season), hour, atmo, focusY: 250,
     get terrainKey() { return `grove|${grove.slug}|${season}|${night}`; },
     terrain(ctx) {
-      const grass = season === 'autumn' ? '#B9B857' : season === 'winter' ? '#C9D3D8' : PAL.grass;
-      ctx.fillStyle = grass; ctx.fillRect(0, 0, W, H);
-      const rr = rng(`grove-ground:${grove.slug}`);
-      for (let i = 0; i < 30; i += 1) { const x = rr() * W, y = rr() * H, rad = 40 + rr() * 90; const g = ctx.createRadialGradient(x, y, 0, x, y, rad); const c = i % 2 ? PAL.grassLight : PAL.grassDark; g.addColorStop(0, hexA(c, 0.45)); g.addColorStop(1, hexA(c, 0)); ctx.fillStyle = g; ctx.fillRect(x - rad, y - rad, rad * 2, rad * 2); }
-      // The wood's shade at the back, and a mossy floor.
-      const g = ctx.createLinearGradient(0, 0, 0, 200); g.addColorStop(0, 'rgba(30,80,30,0.6)'); g.addColorStop(1, 'rgba(30,80,30,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, 200);
-      // A path to the front.
-      ctx.strokeStyle = PAL.path; ctx.lineWidth = 24; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(W / 2 + 10, 150); ctx.quadraticCurveTo(W / 2 - 20, 320, W / 2, H + 10); ctx.stroke();
-      const draw = (name, params, x, y, scale = 1) => { const a = art(name, params); ctx.drawImage(a.canvas, x - a.ax * scale, y - a.ay * scale, a.w * scale, a.h * scale); };
-      for (let i = 0; i < 9; i += 1) draw('tree', { kind: i % 3 ? 'round' : 'pine', size: 1 + rr() * 0.5, seed: `bg${i % 6}`, tone: i % 3 }, 20 + i * 42, 60 + rr() * 30);
-      for (let i = 0; i < 10; i += 1) draw('grassTuft', { seed: `gt${i % 8}` }, rr() * W, 120 + rr() * 380, 1.4);
-      for (let i = 0; i < 5; i += 1) draw('flowerPatch', { seed: `gf${i}`, n: 4 }, rr() * W, 200 + rr() * 300);
-      const g2 = ctx.createLinearGradient(0, H - 160, 0, H); g2.addColorStop(0, 'rgba(12,18,34,0)'); g2.addColorStop(1, 'rgba(12,18,34,0.5)'); ctx.fillStyle = g2; ctx.fillRect(0, H - 160, W, 160);
+      ctx.fillStyle = grassFor(season); ctx.fillRect(0, 0, W, H);
+      // The wood's shade at the back, a worn trail to the front, dusk at the foot.
+      const g = ctx.createLinearGradient(0, 0, 0, 200); g.addColorStop(0, 'rgba(53,91,72,0.55)'); g.addColorStop(1, 'rgba(53,91,72,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, 200);
+      ctx.strokeStyle = hexA(PAL.path, 0.35); ctx.lineWidth = 22; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(W / 2 + 10, 150); ctx.quadraticCurveTo(W / 2 - 20, 320, W / 2, H + 10); ctx.stroke();
+      const g2 = ctx.createLinearGradient(0, H - 160, 0, H); g2.addColorStop(0, 'rgba(20,28,24,0)'); g2.addColorStop(1, 'rgba(20,28,24,0.45)'); ctx.fillStyle = g2; ctx.fillRect(0, H - 160, W, 160);
     },
     update(dt) { t += dt; },
     objects() {
-      const out = objects.map((o) => {
-        const isSel = selected && o.id === selected;
-        return isSel ? [o, { x: o.x, y: 20000, art: art('bubble', { glyph: 'root', tone: 'ready' }), bob: -(o.art.h * o.scale) - 6 + Math.sin(t / 400) * 3 - 20000 + o.y }] : [o];
-      }).flat();
-      if (fire.length) out.push({ x: 0, y: 100000, draw: (ctx) => { for (const q of fire) { const a = 0.3 + 0.7 * Math.max(0, Math.sin(t / 450 + q.phase)); ctx.fillStyle = `rgba(248,241,154,${a})`; ctx.beginPath(); ctx.arc(q.x + Math.sin(t / 900 + q.phase) * 8, q.y + Math.cos(t / 1100 + q.phase) * 6, 1.6, 0, Math.PI * 2); ctx.fill(); } } });
+      const out = [...wood, ...objects];
+      // The tended family: a soft ring on the ground at its foot.
+      const sel = selected && objects.find((o) => o.id === selected);
+      if (sel) out.push({ x: sel.x, y: sel.y - 1e5, draw: (ctx) => { ctx.strokeStyle = hexA(PAL.cream, 0.55 + 0.25 * Math.sin(t / 400)); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.ellipse(sel.x, sel.y + 2, 26, 9, 0, 0, Math.PI * 2); ctx.stroke(); } });
       return out;
     },
     light() { const l = LIGHT[hour] ?? LIGHT.morning; return { tint: hour === 'night' ? '#2E3F86' : l.tint, strength: l.strength * 0.75 }; },
@@ -89,6 +80,7 @@ export function buildGroveScene(grove, families, atmo, opts = {}) {
     select(id) { selected = id; },
     objectsList: objects,
     treeFor,
+    scaleFor: (f) => stageOf(f)[1],
   };
   return scene;
 }

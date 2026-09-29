@@ -198,7 +198,7 @@ function reasonFor(giver, key, r) {
   return pool[Math.floor(r() * pool.length)];
 }
 
-function giverOf(nb) { return nb ? { id: nb.id, name: nb.name, look: nb.look ?? null, role: nb.role ?? '', reasons: nb.reasons ?? null } : null; }
+function giverOf(nb) { return nb ? { id: nb.id, name: nb.name, role: nb.role ?? '', reasons: nb.reasons ?? null } : null; }
 const DEFAULT_GIVERS = Object.freeze([giverOf(NEIGHBOURS[0])]);
 
 /** What an order pays: price per unit × the building's multiplier × the market's, plus a little for a bundle. */

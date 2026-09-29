@@ -4,12 +4,9 @@
  * `check-world.mjs` opens the real village and validates the scene the
  * renderer draws. That is necessary and it is not sufficient: scene.js ends
  * every build by nudging any prop that landed somewhere impossible, so a
- * COORDINATE that is wrong in the source data can be invisible to it. The
- * ninth cottage sat 0.6 units from the river's centre-line for three
- * releases; the sweep shoved its sprite onto dry land and the gate said
- * clean, while the hit box, the door, the night lamp and the map anchor —
- * none of which the sweep touches — stayed in the water. Tapping the house
- * you could see did nothing; tapping open river opened the neighbour.
+ * COORDINATE that is wrong in the source data can be invisible to it: the
+ * sweep moves the sprite, while the hit box, the door and the map anchor —
+ * none of which the sweep touches — stay where the data put them.
  *
  * So this checks the DATA: every building, every cottage spot, the order
  * board, every plot, every path node and every point of every path. It is
@@ -36,7 +33,6 @@ export async function checkWorldData() {
   const wet = (x, y, what) => {
     checked += 1;
     if (t.inPond(x, y, 0)) problems.push(`${what} at (${Math.round(x)}, ${Math.round(y)}) is in the pond`);
-    else if (t.nearRiver(x, y, t.RIVER_WATER)) problems.push(`${what} at (${Math.round(x)}, ${Math.round(y)}) is in the river`);
   };
 
   /* ---- Nothing a learner can tap may be in the water ---- */
@@ -52,12 +48,11 @@ export async function checkWorldData() {
     wet(p.rect.x + p.rect.w, p.rect.y + p.rect.h, `plot ${p.id}'s corner`);
   }
 
-  /* ---- A path may cross the water only on the bridge ---- */
+  /* ---- No path runs through the water or a wall ---- */
   t.PATHS.forEach((path, i) => {
     for (const [x, y] of path) {
       checked += 1;
       if (t.inPond(x, y, 0)) problems.push(`path ${i} runs through the pond at (${Math.round(x)}, ${Math.round(y)})`);
-      else if (t.nearRiver(x, y, t.RIVER_WATER) && !t.onBridgeDeck(x, y)) problems.push(`path ${i} fords the river at (${Math.round(x)}, ${Math.round(y)}) — there is no crossing there`);
       // A route is walked exactly as it is drawn, so a control point inside a
       // building is a person inside a building, every time, forever.
       const b = t.whichBuilding(x, y);
@@ -69,7 +64,6 @@ export async function checkWorldData() {
   for (const [name, [x, y]] of Object.entries(s.NODES ?? {})) {
     checked += 1;
     if (t.inPond(x, y, 0)) problems.push(`the ${name} node is in the pond`);
-    else if (t.nearRiver(x, y, t.RIVER_WATER) && !t.onBridgeDeck(x, y)) problems.push(`the ${name} node is in the river`);
     if (t.insideBuilding(x, y)) problems.push(`the ${name} node is inside ${t.whichBuilding(x, y)}`);
   }
 
@@ -84,14 +78,6 @@ export async function checkWorldData() {
     if (!def || !at) continue;
     checked += 1;
     if (at[1] < def.at.y + 4) problems.push(`the ${node} node (y ${at[1]}) is not south of the ${id}'s base (y ${def.at.y}) — a walker standing there is drawn inside the building`);
-  }
-
-  /* ---- The jetty has to reach the shore ---- */
-  {
-    checked += 1;
-    const landEnd = t.JETTY.x;
-    const onSand = !t.inPond(landEnd, t.JETTY.y, 0);
-    if (!onSand) problems.push(`the jetty's land end (${landEnd}, ${t.JETTY.y}) is still in the pond — it is a raft`);
   }
 
   /* ---- The road out must stay on the map ---- */

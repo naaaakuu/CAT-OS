@@ -17,58 +17,53 @@
 :root {
   /* ==================== COLOR ==================== */
 
-  /* Surfaces — warm paper, never sterile white-on-white */
-  --color-bg:         #F7F6F3;   /* the desk */
-  --color-surface:    #FFFFFF;   /* cards, sheets */
-  --color-surface-2:  #EFEDE8;   /* wells, pressed fills, tracks */
-  --color-surface-3:  #E7E4DD;   /* deeper wells (segmented track) */
+  /* Surfaces — the studio's cream paper and soft sage wells (2.2: the
+     art pack's palette, CAT_OS_ART/MATERIALS/palette.json). Matte: no
+     sterile white, no glass. */
+  --color-bg:         #F7F6ED;   /* the desk — cream paper */
+  --color-surface:    #FCFBF6;   /* cards, sheets */
+  --color-surface-2:  #EFF1E6;   /* wells, pressed fills, tracks — soft sage */
+  --color-surface-3:  #E6EADC;   /* deeper wells (segmented track) */
 
-  /* Ink — three deliberate levels of hierarchy */
-  --color-ink:        #1C1D1F;   /* primary text */
-  /* Nudged from #5D6167 in 2.1.2. The full 22-route rendered sweep caught
-     it at 4.47:1 on the segmented track in Settings — three hundredths
-     short, on the unselected half of every toggle a learner touches. The
-     ten-route subset the ordinary run measures does not include Settings.
-     Darkening a secondary ink can only raise contrast on light. */
-  --color-ink-2:      #565A60;   /* secondary text */
-  /* Captions, hints, eyebrows, difficulty labels, "3 questions · 6 min".
-     This is always paired with the two SMALLEST sizes in the ramp, which is
-     exactly where AA's 4.5:1 is mandatory — and at the old #8A8E94 it failed
-     on every surface in the system (3.05:1 on the desk, 2.59:1 in a deep
-     well). Darkened to clear 4.5:1 against bg, surface, surface-2 AND
-     surface-3, keeping the original cool-grey hue. tools/check-contrast.mjs
-     holds the line; verify.mjs §22 runs it. */
-  --color-ink-3:      #585B60;   /* captions, hints, disabled text */
+  /* Ink — deep fern-grey, three deliberate levels of hierarchy.
+     History that still binds: ink-2 was once 4.47:1 on the segmented track
+     in Settings (2.1.2), and ink-3 once failed AA on every surface. Both are
+     held at 4.5:1 against bg, surface, surface-2 AND surface-3 by
+     tools/check-contrast.mjs; verify.mjs §22 runs it. */
+  --color-ink:        #2B3F34;   /* primary text */
+  --color-ink-2:      #46554B;   /* secondary text */
+  --color-ink-3:      #4E5B51;   /* captions, hints, eyebrows */
 
-  /* Lines */
-  --color-line:        #E6E4DE;  /* hairline borders */
-  --color-line-strong: #D8D5CD;  /* interactive borders */
+  /* Lines — hairlines, the studio's only dividers */
+  --color-line:        #E1E4D6;  /* hairline borders */
+  --color-line-strong: #CDD5C3;  /* interactive borders */
 
-  /* Accent — the study lamp. Actions, active states, nothing else. */
-  --color-accent:        #2F5D4F;
-  --color-accent-hover:  #274F42;
+  /* Accent — deep fern. Actions, active states, nothing else. */
+  --color-accent:        #355B48;
+  --color-accent-hover:  #2A4A3A;
   --color-accent-ink:    #FFFFFF;
-  --color-accent-subtle: #EDF3F0; /* quiet accent fills (active nav, info wells) */
+  --color-accent-subtle: #E6ECDF; /* quiet accent fills (active nav, info wells) */
 
   /* Chrome veil — translucent sticky bars over scrolling text */
-  --color-veil: rgba(247, 246, 243, 0.88);
+  --color-veil: rgba(247, 246, 237, 0.9);
 
-  /* Semantic states — muted, never alarming */
-  --color-success:      #2F5D4F;
-  --color-success-bg:   #E4EEE9;
-  --color-warning:      #8A6116;
-  --color-warning-bg:   #F6EDD8;
-  --color-danger:       #9C3B2E;
-  --color-danger-bg:    #F4E3DF;
+  /* Semantic states — muted, never alarming. Clay, honey and teal from
+     the same palette as the buildings. */
+  --color-success:      #355B48;
+  --color-success-bg:   #E3EADA;
+  --color-warning:      #7E5C1C;
+  --color-warning-bg:   #F5ECD3;
+  --color-danger:       #9A4F3C;
+  --color-danger-bg:    #F4E4DC;
   --color-danger-ink:   #FFFFFF;  /* text on solid danger */
-  --color-info:         #33586E;
-  --color-info-bg:      #E3EDF3;
+  --color-info:         #3D6166;
+  --color-info-bg:      #E1ECEA;
 
   /* Answer feedback (aliases of semantic tokens; M2 names kept) */
   --color-correct-bg:  var(--color-success-bg);
-  --color-correct-ink: #24523F;
+  --color-correct-ink: #2A4A3A;
   --color-wrong-bg:    var(--color-danger-bg);
-  --color-wrong-ink:   #7C2E22;
+  --color-wrong-ink:   #7E3B2C;
 
   /* Language Garden (0.14.0) — a small, separate palette (LANGUAGE_GARDEN_BIBLE
      §12): greens map to maturity, gold is discovery (Key/Reach), amber is the
@@ -248,6 +243,10 @@
      vendor or rot; on iOS the serif resolves to New York. */
   --font-ui:      system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-reading: ui-serif, "New York", Georgia, "Times New Roman", serif;
+  /* Headings: the studio's Georgia, set light (400) and drawn in slightly
+     tight. Georgia ships on every platform the app runs on. */
+  --font-display: Georgia, "Iowan Old Style", ui-serif, "Times New Roman", serif;
+  --weight-display: 400;
 
   /* Scale — chosen sizes, not a blind ratio */
   --text-2xs:  0.75rem;    /* 12 — overlines, tabular captions */
@@ -265,7 +264,7 @@
   --leading-reading: 1.78;
 
   --tracking-tight: -0.01em;  /* serif display */
-  --tracking-wide:   0.06em;  /* overlines/eyebrows */
+  --tracking-wide:   0.14em;  /* overlines/eyebrows — small caps, letter-spaced */
 
   --weight-regular:  400;
   --weight-medium:   500;
@@ -287,19 +286,19 @@
   --para-space: 1.35em;
 
   /* ==================== SHAPE ==================== */
-  --radius-xs: 6px;     /* badges, chips */
-  --radius-sm: 8px;     /* focus rings, inputs */
-  --radius-md: 12px;    /* buttons, options */
-  --radius-lg: 16px;    /* cards, list items */
-  --radius-xl: 20px;    /* hero cards, reflection sheet */
+  --radius-xs: 4px;     /* badges, chips */
+  --radius-sm: 6px;     /* focus rings, inputs, buttons in the studio */
+  --radius-md: 8px;     /* buttons, options */
+  --radius-lg: 12px;    /* cards, list items */
+  --radius-xl: 14px;    /* hero cards, reflection sheet */
   --radius-full: 999px; /* pills, tracks */
 
   /* ==================== ELEVATION ==================== */
   --shadow-0: none;
-  --shadow-1: 0 1px 2px rgba(28, 29, 31, 0.05),
-              0 1px 3px rgba(28, 29, 31, 0.06);     /* resting cards */
-  --shadow-2: 0 2px 6px rgba(28, 29, 31, 0.07),
-              0 8px 24px rgba(28, 29, 31, 0.08);    /* raised: toast, lift */
+  /* Quiet: the studio lifts with a hairline first and a shadow second. */
+  --shadow-1: 0 1px 2px rgba(48, 71, 59, 0.05);      /* resting cards */
+  --shadow-2: 0 2px 6px rgba(48, 71, 59, 0.06),
+              0 12px 28px rgba(48, 71, 59, 0.08);   /* raised: toast, lift */
 
   /* ==================== MOTION ==================== */
   --duration-fast:   120ms;   /* press feedback, state flips */
@@ -336,35 +335,37 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-bg:         #151618;
-    --color-surface:    #1E2023;
-    --color-surface-2:  #26282C;
-    --color-surface-3:  #2D3035;
-    --color-ink:        #E9E7E2;
-    --color-ink-2:      #A4A7AC;
-    --color-ink-3:      #93989F;
-    --color-line:        #2C2E32;
-    --color-line-strong: #3A3D42;
-    --color-accent:        #74AC98;
-    --color-accent-hover:  #86BBA8;
-    --color-accent-ink:    #0F211B;
-    --color-accent-subtle: #22312B;
-    --color-veil: rgba(21, 22, 24, 0.85);
-    --color-success:     #74AC98;
-    --color-success-bg:  #21322B;
-    --color-warning:     #C9A25C;
-    --color-warning-bg:  #332B1B;
-    --color-danger:      #C86B5C;
-    --color-danger-bg:   #38241F;
+    --color-bg:         #131916;
+    --color-surface:    #1A221E;
+    --color-surface-2:  #212A25;
+    --color-surface-3:  #28322C;
+    --color-ink:        #ECEADF;
+    --color-ink-2:      #B5BEAF;
+    --color-ink-3:      #A6B0A1;
+    --color-line:        #29322D;
+    --color-line-strong: #38443D;
+    --color-accent:        #A9C79B;
+    --color-accent-hover:  #BAD4AD;
+    --color-accent-ink:    #14231A;
+    --color-accent-subtle: #213029;
+    --color-veil: rgba(19, 25, 22, 0.86);
+    --color-success:     #A9C79B;
+    --color-success-bg:  #1F2E25;
+    --color-warning:     #D8AD59;
+    --color-warning-bg:  #322A1A;
+    --color-danger:      #D98F77;
+    --color-danger-bg:   #37231D;
     --color-danger-ink:  #1E120F;
-    --color-info:        #7FA9C2;
-    --color-info-bg:     #1F2B33;
-    --color-correct-ink: #9CC8B6;
-    --color-wrong-ink:   #DE9A8C;
-    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
-    --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
+    --color-info:        #8DB5B6;
+    --color-info-bg:     #1B2B2C;
+    --color-correct-ink: #B7D5AA;
+    --color-wrong-ink:   #E3A08C;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.32), 0 12px 28px rgba(0, 0, 0, 0.36);
 
-    /* Night, not inversion (§12.6): deeper, warmer, gold still reads as gold. */
+    /* Night, not inversion (§12.6): the same cream-and-fern studio after
+       dark — deep fern-charcoal paper, lamplit sage for the accent, honey
+       still reads as honey. */
 
     /* ---- Phase V, Stage W1: dark blocks derived from the Night script,
        never from inverting day (§6.6). Night's own tokens are identical
@@ -383,34 +384,33 @@
 }
 
 :root[data-theme="dark"] {
-  --color-bg:         #151618;
-  --color-surface:    #1E2023;
-  --color-surface-2:  #26282C;
-  --color-surface-3:  #2D3035;
-  --color-ink:        #E9E7E2;
-  --color-ink-2:      #A4A7AC;
-  --color-ink-3:      #93989F;
-  --color-line:        #2C2E32;
-  --color-line-strong: #3A3D42;
-  --color-accent:        #74AC98;
-  --color-accent-hover:  #86BBA8;
-  --color-accent-ink:    #0F211B;
-  --color-accent-subtle: #22312B;
-  --color-veil: rgba(21, 22, 24, 0.85);
-  --color-success:     #74AC98;
-  --color-success-bg:  #21322B;
-  --color-warning:     #C9A25C;
-  --color-warning-bg:  #332B1B;
-  --color-danger:      #C86B5C;
-  --color-danger-bg:   #38241F;
+  --color-bg:         #131916;
+  --color-surface:    #1A221E;
+  --color-surface-2:  #212A25;
+  --color-surface-3:  #28322C;
+  --color-ink:        #ECEADF;
+  --color-ink-2:      #B5BEAF;
+  --color-ink-3:      #A6B0A1;
+  --color-line:        #29322D;
+  --color-line-strong: #38443D;
+  --color-accent:        #A9C79B;
+  --color-accent-hover:  #BAD4AD;
+  --color-accent-ink:    #14231A;
+  --color-accent-subtle: #213029;
+  --color-veil: rgba(19, 25, 22, 0.86);
+  --color-success:     #A9C79B;
+  --color-success-bg:  #1F2E25;
+  --color-warning:     #D8AD59;
+  --color-warning-bg:  #322A1A;
+  --color-danger:      #D98F77;
+  --color-danger-bg:   #37231D;
   --color-danger-ink:  #1E120F;
-  --color-info:        #7FA9C2;
-  --color-info-bg:     #1F2B33;
-  --color-correct-ink: #9CC8B6;
-  --color-wrong-ink:   #DE9A8C;
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.45);
-
+  --color-info:        #8DB5B6;
+  --color-info-bg:     #1B2B2C;
+  --color-correct-ink: #B7D5AA;
+  --color-wrong-ink:   #E3A08C;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.32), 0 12px 28px rgba(0, 0, 0, 0.36);
 
   /* ---- Phase V, Stage W1: dark blocks derived from the Night script,
      never from inverting day (§6.6). Night's own tokens are identical

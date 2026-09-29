@@ -53,6 +53,8 @@ export function shellFiles() {
   for (const icon of ['apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'maskable-512.png']) {
     if (fs.existsSync(path.join(ROOT, 'assets/icons', icon))) out.add(`./assets/icons/${icon}`);
   }
+  // The art pack's sprites: every picture in the village is one of these.
+  for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (name.endsWith('.png')) out.add(`./assets/art/${name}`);
   return [...out].sort();
 }
 

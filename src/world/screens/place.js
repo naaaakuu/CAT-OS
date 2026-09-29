@@ -16,7 +16,7 @@ import { buildGroveScene } from '../../village/grove.js';
 import { paintedAtmo } from '../stage.js';
 import { VillageRenderer } from '../../village/renderer.js';
 import { buildBackdropScene } from '../../village/scene.js';
-import { art } from '../../village/art.js';
+import { artIMG } from '../../village/art.js';
 import { atPlace } from '../companion.js';
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
@@ -67,7 +67,7 @@ export async function renderPlace(outlet, { storage }, params) {
       </div>
       <a class="place__back" href="#/world" id="back">← The village</a>
       <div class="place__hero-stat" id="hero-stat"></div>
-      <div class="placewick" id="placewick" hidden><canvas width="36" height="30" aria-hidden="true"></canvas><p></p></div>
+      <div class="placewick" id="placewick" hidden>${artIMG('wick', { pose: 'sit' }, { size: 36 })}<p></p></div>
       <div class="sheet" id="sheet">
         <button class="sheet__grip" id="grip" aria-expanded="false" aria-label="Show everything here"><i aria-hidden="true"></i></button>
         <div class="sheet__top" id="top"></div>
@@ -90,9 +90,6 @@ export async function renderPlace(outlet, { storage }, params) {
     const el = outlet.querySelector('#placewick');
     if (line && !seen && el) {
       sessionStorage.setItem('wick:place', region.slug);
-      const cx = el.querySelector('canvas').getContext('2d');
-      const sp = art('wick', { pose: 'sit' }, 3);
-      cx.drawImage(sp.canvas, 0, 0, sp.canvas.width, sp.canvas.height * 0.62, 1, 1, 34, 24);
       el.querySelector('p').textContent = line;
       el.hidden = false;
       setTimeout(() => el.classList.add('is-in'), 700);

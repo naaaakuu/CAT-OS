@@ -9,12 +9,13 @@
 import { bagEntries, thing, madeFrom } from './economy.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { artIMG } from '../village/art.js';
+import { icon } from './icons.js';
 import { GOODS, COINS, BUILDINGS } from '../village/defs.js';
 
 /** The icon for a bag key (coins or a good). */
 export function goodIcon(key, { size = 16, className = '' } = {}) {
   const t = thing(key);
-  return artIMG('icon', { glyph: t?.glyph ?? 'star', size: 20 }, { size, className });
+  return icon(t?.glyph ?? 'star', { size, className });
 }
 /** Kept for older call sites. */
 export const craftIcon = goodIcon;
@@ -99,8 +100,8 @@ export function openCraftSheet(key, state) {
         </ul>` : `
         <p class="craftsheet__label">Earned by</p>
         <ul class="craftsheet__where">
-          <li><span>${artIMG('icon', { glyph: 'board', size: 20 }, { size: 28 })}<span class="craftsheet__wh"><b>Delivering orders</b><span>Every order on the board pays coins</span></span></span></li>
-          <li><span>${artIMG('icon', { glyph: 'road', size: 20 }, { size: 28 })}<span class="craftsheet__wh"><b>The Gauntlet</b><span>The road out pays in coins</span></span></span></li>
+          <li><span>${icon('board', { size: 28 })}<span class="craftsheet__wh"><b>Delivering orders</b><span>Every order on the board pays coins</span></span></span></li>
+          <li><span>${icon('road', { size: 28 })}<span class="craftsheet__wh"><b>The Gauntlet</b><span>The road out pays in coins</span></span></span></li>
         </ul>`}
       ${wanted.length ? `
         <p class="craftsheet__label">Wanted right now</p>

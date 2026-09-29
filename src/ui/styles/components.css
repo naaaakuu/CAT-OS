@@ -100,31 +100,29 @@
   width: 1.9rem; height: 1.9rem;
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: var(--radius-sm);
-  /* A PAINTED ICON NEEDS PAPER UNDER IT.
-     These are village art with the village's own dark outlines, so on a
-     dark surface they vanish — the music note and the arrow were invisible
-     squares in dark mode. The village solves this everywhere it shows an
-     icon by standing it on a small cream plate, and that plate is part of
-     the icon language rather than part of the theme. */
-  background: #FBF6EA;
-  border: 1px solid rgba(43, 36, 56, 0.10);
-  color: #2B2438;
+  /* A line icon in the ink around it (world/icons.js), on a small sage
+     well — it follows the theme, so it can never vanish into a dark one. */
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  color: var(--color-ink-2);
   font-size: var(--text-sm);
 }
 .row__lead { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
 
 /* ---------- Segmented control ---------- */
+/* The studio's pill: a hairline track, the chosen option filled fern. */
 .segmented {
   display: inline-flex;
-  background: var(--color-surface-3);
-  border-radius: var(--radius-md);
-  padding: 2px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-full);
+  padding: 3px;
 }
 .segmented__option {
   padding: var(--space-1) var(--space-3);
   min-height: var(--tap-target);
   min-width: var(--tap-target);
-  border-radius: calc(var(--radius-md) - 2px);
+  border-radius: var(--radius-full);
   font-size: var(--text-xs);
   font-weight: var(--weight-semibold);
   color: var(--color-ink-2);
@@ -133,12 +131,12 @@
               box-shadow var(--duration-fast) var(--ease-out);
 }
 .segmented__option[aria-pressed="true"] {
-  /* The chosen option is RAISED out of the track, in both themes. It used to
-     take --color-surface, which in dark is darker than the track, so the
-     selection read as the one option that was switched off. */
-  background: var(--g-raise, var(--color-surface));
-  color: var(--color-ink);
-  box-shadow: var(--shadow-1);
+  /* The chosen option is FILLED, in both themes: accent under accent-ink
+     reads as "on" whether the paper is cream or night (it once took
+     --color-surface, which in dark read as the one option switched off). */
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  box-shadow: none;
 }
 
 /* ---------- Range (master sound volume) ---------- */
@@ -194,9 +192,9 @@
 }
 
 .greeting {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin: var(--space-3) 0 var(--space-5);
 }
@@ -255,9 +253,9 @@
 a.list-item:active { transform: scale(var(--press-scale)); }
 
 .list-item__title {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-1);
 }
@@ -546,9 +544,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   .mentor__art [data-draw] { animation: none; stroke-dashoffset: 0; }
 }
 .mentor__title {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin: var(--space-2) 0;
 }
@@ -667,8 +665,8 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   padding-left: var(--space-4);
 }
 .vocab__word {
-  font-family: var(--font-reading);
-  font-weight: var(--weight-bold);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
   font-size: var(--text-base);
   letter-spacing: var(--tracking-tight);
 }
@@ -796,9 +794,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   margin: 0 auto;
 }
 .moment__opening {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   line-height: 1.3;
   text-wrap: balance;
@@ -922,9 +920,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .dna--growth .dna__kind, .dna--strength .dna__kind { color: var(--color-accent); }
 .dna__title {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-2);
 }
@@ -980,9 +978,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   animation: art-draw calc(var(--duration-slower) * 2) var(--ease-out) 120ms forwards;
 }
 .pj-intro__h1, .ps-intro__h1, .ooo-intro__h1 {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin: var(--space-2) 0;
 }
@@ -1003,9 +1001,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .pj-intro__section.is-seen, .ps-intro__section.is-seen, .ooo-intro__section.is-seen { opacity: 1; transform: none; }
 .pj-intro__title, .ps-intro__title, .ooo-intro__title {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-xl);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-4);
 }
@@ -1261,9 +1259,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   margin: 0 0 var(--space-1);
 }
 .ps-mission__title, .ooo-mission__title {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin: 0 0 var(--space-1);
 }
@@ -1531,9 +1529,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .psx__compress-glyph { font-size: var(--text-sm); line-height: 1; }
 .psx__ideal {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-base);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   border-left: 2px solid var(--color-accent);
   padding-left: var(--space-3);
   margin: 0 0 var(--space-3);
@@ -1808,9 +1806,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   animation: art-draw calc(var(--duration-slower) * 2) var(--ease-out) 120ms forwards;
 }
 .wd-intro__h1 {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin: var(--space-2) 0;
 }
@@ -1831,9 +1829,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .wd-intro__section.is-seen { opacity: 1; transform: none; }
 .wd-intro__title {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-xl);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin-bottom: var(--space-4);
 }
@@ -1998,9 +1996,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 }
 .wd-garden-item + .wd-garden-item { border-top: 1px solid var(--color-line); }
 .wd-garden-item__word {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-base);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
 }
 .wd-garden-item__meaning {
@@ -2018,9 +2016,9 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 
 /* ---------- Today's Discovery (Home widget) ---------- */
 .wd-discovery__word {
-  font-family: var(--font-reading);
+  font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-display);
   letter-spacing: var(--tracking-tight);
   margin: 0 0 var(--space-1);
 }
@@ -3943,7 +3941,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .gate-road[data-time="night"] .gate-wood ellipse { fill: #142720; }
 .gate-road[data-time="night"] .gate-road__ground { fill: #142720; }
 .gate-road__body { padding: var(--space-5) 0 var(--space-4); }
-.gate-road__title { font-family: var(--font-reading); font-weight: var(--weight-semibold); }
+.gate-road__title { font-family: var(--font-display); font-weight: var(--weight-display); }
 .gate-road__places { display: flex; flex-direction: column; gap: var(--space-3); }
 .gate-place {
   display: block; padding: var(--space-4) var(--space-5);
@@ -3955,7 +3953,7 @@ a.list-item:active { transform: scale(var(--press-scale)); }
   transition: transform var(--duration-fast) var(--ease-out);
 }
 .gate-place:active { transform: scale(var(--press-scale)); }
-.gate-place__name { display: block; font-family: var(--font-reading); font-size: var(--text-lg); font-weight: var(--weight-semibold); margin-bottom: var(--space-1); }
+.gate-place__name { display: block; font-family: var(--font-display); font-size: var(--text-lg); font-weight: var(--weight-display); margin-bottom: var(--space-1); }
 .gate-place__line { display: block; color: var(--color-ink-2); font-size: var(--text-sm); line-height: var(--leading-body); }
 /* Terraces (0.16.0): green stepped fields under stone lips, vine rows
    combed across them — a cultivated slope, not a rug of sand. */

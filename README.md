@@ -57,23 +57,26 @@ that sits on the shelf outside until you collect it. Only made goods trade.
 
 Every building has levels. A level costs coins (sometimes goods) *and* asks
 for standing — three passages read well before a second floor, twelve items
-solved before the spool sign — so nothing is bought without the learning
+solved before the book table — so nothing is bought without the learning
 that earns it. A building's third level puts its worker to work on their
 own: a Page, a Bloom, a Root or a Thread every three hours, up to three,
 collected with a tap. It asks for real mastery first, and it never replaces
 you; you are the engine, the village handles the repetition.
 
-Land opens outward — the sheep pen by the pond, the orchard, the farm across
-the river, the mill, the square with its well — and neighbours move into
-houses you build for them, walk the paths, and post orders of their own.
-There is no last building.
+Land opens outward — the paddock by the pond, the orchard, the farm past the
+stile, the birch walk, the square — and neighbours move into cottages you
+build for them and post orders of their own. There is no last building.
 
-The village keeps what made the valley before it a place: the real clock,
-with the hour's light on everything and windows and lamps and the moon on
-the pond after dark; the seasons and seeded weather; the river's flow and
-glints; koi for every dozen confusables told apart; ducks, birds, butterflies
-and pollen, fireflies at night, leaves in autumn and petals in spring; trees
-that sway; chimney smoke on days you practised; and the music.
+**The art (2.2).** Every picture in the village comes from one art pack,
+"Cute Nature" (`assets/art/`): the Hearth at five levels, the Reading House
+at four, Wick with five animated clips, oak, birch and pine, and the garden
+props — modelled in 3D and baked to transparent PNGs in the village's own
+oblique projection, so the Canvas2D renderer stays exactly as fast and as
+offline as it was. The Word Garden, the Root Workshop, the Loom and the
+Market are open-air yards built from those props, and each level adds to
+what you can see. Nothing is drawn by hand any more. The real clock still
+puts the hour's light on everything, lamps glow after dusk, and the music
+plays.
 
 ## What the game knows about you
 

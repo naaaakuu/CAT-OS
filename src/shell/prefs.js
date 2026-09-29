@@ -20,7 +20,7 @@ import { feedbackPrefs, motionReduced } from '../core/engagement/feedback.js';
 /* ------------------------------------------------------------------ */
 
 export const THEMES = ['system', 'light', 'dark'];
-const THEME_BG = { light: '#F7F6F3', dark: '#151618' };
+const THEME_BG = { light: '#F7F6ED', dark: '#131916' };
 
 export async function loadTheme(storage) {
   try { const record = await storage.get(STORES.SETTINGS, 'theme'); return THEMES.includes(record?.value) ? record.value : 'system'; } catch { return 'system'; }

@@ -1,12 +1,10 @@
 /**
- * check-world.mjs — nothing stands in the river.
+ * check-world.mjs — nothing stands in the water or inside a wall.
  *
- * The owner opened the village and saw a tree in the middle of the water. It
- * had been there for three releases, because the twenty-four hand-placed
- * trees in scene.js were filtered against buildings, plots and paths but NOT
- * against the pond or the river, while the two hundred and sixty scattered
- * ones were filtered against all five. Every scatter carried its own list of
- * rules, so one of them was simply shorter than the others.
+ * The owner once opened the village and saw a tree in the middle of the
+ * water: the hand-placed trees were filtered against fewer rules than the
+ * scattered ones. Every scatter carried its own list of rules, so one of
+ * them was simply shorter than the others.
  *
  * The rules live in one function now (`terrain.js whyNotPlaceable`). This
  * tool is the half that makes that stick: it builds the REAL scene in a REAL
@@ -16,11 +14,11 @@
  * each: may this stand here?
  *
  * It checks anchors, not a list of coordinates, so it covers props nobody
- * thought to write a test for: lamps, carts, woodpiles, fences, barrels,
- * benches, reeds, stumps, the order board. An object may opt out by carrying
- * `waterside: true` — the reeds on the pond's rim and the stone wall on the
- * river's bank are placed there on purpose — and the tool reports how many
- * did, so an opt-out cannot be used to hide a mistake quietly.
+ * thought to write a test for: lamps, crates, fences, benches, planters, the
+ * order board. Two kinds of object opt out, and the tool reports how many
+ * did, so an opt-out cannot hide a mistake quietly: `ground` (the pond and
+ * the stepping stones ARE the ground) and `part` (a yard's props stand inside
+ * the yard they make up).
  *
  * Run: node tools/check-world.mjs            (every state)
  *      node tools/check-world.mjs -v         (per-state detail)
@@ -34,9 +32,9 @@ import { launchChrome, serveRepo, findChrome } from './cdp-lite.mjs';
    built: plots open, houses arrive, the market puts lamps down the street. */
 const STATES = [
   { name: 'empty', builds: [], plots: [], houses: 0 },
-  { name: 'early', builds: [['garden', 1], ['roots', 1]], plots: ['p1'], houses: 1 },
-  { name: 'busy', builds: [['garden', 2], ['roots', 2], ['loom', 1], ['market', 1], ['reading', 2], ['hearth', 2]], plots: ['p1', 'p2'], houses: 3 },
-  { name: 'full', builds: [['garden', 4], ['roots', 4], ['loom', 4], ['market', 3], ['reading', 4], ['hearth', 4], ['road', 2]], plots: ['p1', 'p2', 'p3', 'p4', 'p5'], houses: 8 },
+  { name: 'early', builds: [['garden', 1], ['roots', 1]], plots: ['pen'], houses: 1 },
+  { name: 'busy', builds: [['garden', 2], ['roots', 2], ['loom', 1], ['market', 1], ['reading', 2], ['hearth', 2]], plots: ['pen', 'orchard'], houses: 3 },
+  { name: 'full', builds: [['garden', 4], ['roots', 4], ['loom', 4], ['market', 3], ['reading', 4], ['hearth', 4], ['road', 2]], plots: ['pen', 'orchard', 'farm', 'mill', 'square'], houses: 8 },
 ];
 const HOURS = ['morning', 'dusk', 'night'];
 
@@ -71,7 +69,7 @@ const VALIDATE = `(async () => {
 
   const statics = scene.statics || [];
   for (const s of statics) {
-    if (s.waterside) { waived += 1; continue; }
+    if (s.ground || s.part) { waived += 1; continue; }
     let w = whyProp(s.x, s.y);
     if (w === 'building') w = 'building (' + t.whichBuilding(s.x, s.y, v) + ')';
     if (w) bad.push({ kind: 'prop', x: Math.round(s.x), y: Math.round(s.y), why: w });
@@ -146,7 +144,7 @@ export async function checkWorld({ log = () => {} } = {}) {
             ? `${state.name}/${hour}: a prop stands in the ${o.why} at (${o.x}, ${o.y})`
             : `${state.name}/${hour}: ${o.kind}${o.id ? ' ' + o.id : ''} is in the ${o.why} at (${o.x}, ${o.y}), ${o.at}s in`);
         }
-        log(`  ${state.name.padEnd(6)} ${hour.padEnd(8)} ${String(res.total).padStart(4)} props + ${String(res.actors).padStart(2)} actors over 90s, ${res.bad.length} invalid, ${res.waived} waterside`);
+        log(`  ${state.name.padEnd(6)} ${hour.padEnd(8)} ${String(res.total).padStart(4)} props + ${String(res.actors).padStart(2)} actors over 90s, ${res.bad.length} invalid, ${res.waived} ground or yard parts`);
       }
     }
   } finally {
@@ -166,7 +164,7 @@ if (process.argv[1]?.endsWith('check-world.mjs')) {
   const verbose = process.argv.includes('-v');
   const { skipped, problems, checked, waived } = await checkWorld({ log: verbose ? console.log : () => {} });
   if (skipped) { console.log('SKIPPED — no Chrome on this machine (set CHROME_PATH to run the world placement gate).'); process.exit(0); }
-  console.log(`\nChecked ${checked} placed objects and ninety seconds of village life across ${STATES.length} village states x ${HOURS.length} hours (${waived} waterside by design).`);
+  console.log(`\nChecked ${checked} placed objects and ninety seconds of village life across ${STATES.length} village states x ${HOURS.length} hours (${waived} ground or yard parts by design).`);
   if (!problems.length) { console.log('✓ nothing stands in the water, in a wall, or in the middle of a road.\n'); process.exit(0); }
   console.log(`\n✗ ${problems.length} invalid placement(s):\n`);
   for (const p of problems) console.log('  ' + p);

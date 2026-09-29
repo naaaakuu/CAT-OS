@@ -4,11 +4,31 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-16 — 2.1.4, the screens no gate could see. The Gauntlet's question had been rendering at 1.14:1 in both themes and "Re-read the passage" sat two pixels tall above the top of a scroll container: neither is a route, and §24 only opened routes, so a route may now carry the taps that reach a state. Importing a backup was a confirm() whose CANCEL performed a merge — it is the app's own sheet now, a merge no longer renames the village, and Settings repaints afterwards. A resting item is declined rather than re-served. App version 2.1.4._
+_Last updated: 2026-09-29 — 2.2.0, one art pack. Every picture in the village is a sprite from the "Cute Nature" pack (`assets/art/`); the hand-drawn canvas art — people, animals, the river, the effects, the glyph icons — is deleted. The Hearth and the Reading House are the pack's houses; the Word Garden, the Root Workshop, the Loom and the Market are open-air yards built from its props; Wick is the pack's cat; the interface follows the pack's studio design. No content changed. App version 2.2.0._
+
+_2.1.4 — the screens no gate could see. The Gauntlet's question had been rendering at 1.14:1 in both themes and "Re-read the passage" sat two pixels tall above the top of a scroll container: neither is a route, and §24 only opened routes, so a route may now carry the taps that reach a state. Importing a backup was a confirm() whose CANCEL performed a merge — it is the app's own sheet now, a merge no longer renames the village, and Settings repaints afterwards. A resting item is declined rather than re-served. App version 2.1.4._
 
 _2.1.3 — the interruption pass. Every engine now carries a run across a refresh: Para Jumbles, Para Summary, Odd One Out and Word DNA joined the reading run and the banks, a draft cannot claim a mark, and a draft counts time on task, so a set left overnight is no longer recorded as an eight-hour set that failed its pace. A settled skill that goes quiet comes back to the curator once. Callouts for buildings out of view pin to the edge of the frame instead of vanishing. One new gate (§30) drives all of it in a real browser. App version 2.1.3._
 
 _2.1.2 — the polish, reliability and systems-hardening pass. Dark mode is a designed theme rather than an inverted light one (78 rendered-contrast failures → 0). The service worker installs in resumable batches and promotes transactionally, so a failed upgrade costs nothing and a content bump no longer deletes a 435-file library. The cold open is 55 modules, not 153. A tree was standing in the river; the map is validated as data now and as a running scene. The ledgers that had been counting for two releases speak to a learner in four places. Nobody had ever pressed Tab. 90+ defects found and fixed, each reproduced in a real browser. Six new gates (§23, §23b, §24, §26, §27, §28). App version 2.1.2._
+
+## What changed in 2.2.0 (the art pack)
+
+| Area | State | Notes |
+|---|---|---|
+| **Village art** | **shipped (2.2.0)** | `art.js` is a sprite bank over the pack's 65 baked PNGs, same synchronous contract; the five canvas-recipe files are deleted |
+| **Buildings** | **shipped (2.2.0)** | Hearth L1–5 and Reading House L1–4 from the pack; four workplaces are yards that grow a prop set per level |
+| **The map** | **shipped (2.2.0)** | No river or bridge; one pond, stepping-stone paths, the pack's trees and props; coordinates unchanged and gated (§23, §23b) |
+| **Life on the map** | **retired (2.2.0)** | The pack has no people or animals: only Wick walks. Neighbours live in the board and popovers |
+| **Interface** | **shipped (2.2.0)** | The pack's studio language and a line-icon set |
+
+### Known and not yet addressed (2.2.0)
+
+| Item | Why it matters |
+|---|---|
+| Daylight bakes only | Night is the renderer's tint over daytime sprites; windows do not light. The pack has no night or seasonal variants |
+| No people or animals on the map | The village is quieter than 2.1; the next art batch should bring villagers and small life |
+| Yards, not houses, for four workplaces | They read as places, but a house per workplace would read more strongly |
 
 ## What changed in 2.1.3 (interruption, revisiting, and the edge of the frame)
 

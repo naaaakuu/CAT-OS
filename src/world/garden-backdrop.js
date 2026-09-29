@@ -59,17 +59,18 @@ export function mountGardenBackdrop(host, { family, allFamilies, allSessions, se
         if (!o) { resolve(); return; }
         o.family = { ...o.family, stage: postState.stage, due: 'none', landmark: !!postState.landmark, vigor: postState.vigor ?? 0 };
         o.art = scene.treeFor(o.family);
+        const full = scene.scaleFor(o.family);
         // The camera leans in as the tree grows, so the moment fills the frame.
         renderer.lookAt(o.x, o.y - 30, { zoom: Math.min(renderer.maxZoom(), renderer.cam.zoom * 1.5), duration: reduce ? 0 : 1500, animate: !reduce });
-        if (reduce) { o.scale = 1; resolve(); return; }
+        if (reduce) { o.scale = full; resolve(); return; }
         const start = performance.now();
         const D = 1500;
         const ease = (t) => { const c4 = (2 * Math.PI) / 3; return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1; };
         const step = (nowT) => {
           const t = Math.min(1, (nowT - start) / D);
-          o.scale = 0.15 + 0.85 * ease(t);
+          o.scale = full * (0.15 + 0.85 * ease(t));
           renderer.invalidate();
-          if (t < 1) requestAnimationFrame(step); else { o.scale = 1; resolve(); }
+          if (t < 1) requestAnimationFrame(step); else { o.scale = full; resolve(); }
         };
         requestAnimationFrame(step);
       });

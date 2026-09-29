@@ -4,6 +4,57 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 2.2.0 — One art pack, and nothing drawn by hand (2026-09-29)
+
+The owner supplied a new art pack ("Cute Nature — study garden") and asked
+for every old graphic to go, the map to be rebuilt from the pack's elements
+only, the UI to follow the pack's design, and the learning content to be
+left exactly as it was. Not one content file changed.
+
+### The village is the pack's
+
+- **`src/village/art.js` is a sprite bank now.** The five files of
+  hand-drawn canvas recipes (`brush.js`, `art-nature.js`, `art-things.js`,
+  `art-buildings.js`, `art-figures.js` — people, animals, buildings, trees,
+  glyphs, effects) are deleted. The pack's daylight bakes live in
+  `assets/art/` (65 PNGs, 2.1 MB, precached) with their manifest in
+  `src/village/sprites.js`. The renderer's contract is unchanged —
+  `art(name, params, scale)` is still synchronous; images decode in the
+  background and a sprite asked for early repaints in place when it lands,
+  and the renderer redraws.
+- **The Hearth (five levels) and the Reading House (four)** are the pack's
+  models. **The Word Garden, the Root Workshop, the Loom and the Market are
+  open-air yards** on trodden ground, built prop by prop from the pack, and
+  every level adds props you can see arrive. Their level names and lines now
+  describe what is drawn; costs, standing, effects and helpers are unchanged.
+- **The map:** no river, no bridge, no jetty. One pond (the pack's), paths
+  of stepping stones, oak, birch and pine, benches, lamps, planters and
+  fences. The land plots became the paddock, the orchard, the farm, the
+  birch walk and the square. Every building, cottage spot and plot keeps its
+  validated coordinates.
+- **Wick** is the pack's cat, with its Idle, Walk, Read, Sleep and Celebrate
+  clips. The pack has no people or animals, so the neighbours, workers,
+  sheep, ducks, koi, birds, butterflies, fireflies, smoke and cloud shadows
+  are gone from the map. The neighbours' orders, names and reasons are
+  unchanged; in the interface a person is their initial on a disc.
+- **The Rootwood** grows through the pack too: bare ground, a planter, a
+  shrub, a birch, an oak, a pine for a landmark.
+
+### The interface follows the pack's studio design
+
+Cream paper, deep fern for what matters, a serif for names, small
+letter-spaced labels, hairlines and quiet shadows; the painted glyph icons
+are replaced by a line-icon set (`src/world/icons.js`).
+
+### Gates
+
+- §23 (map data) and §23b (the running village) no longer know about a
+  river; §23b waives the pond, the stepping stones and a yard's own props
+  (reported, never silent), and seeds real plot ids — it had been seeding
+  `p1`…`p5`, which are not plots, so no open land was ever checked.
+- The art section checks that every file in the manifest is on disk and
+  that every sprite name the village asks for exists in the pack.
+
 ## 2.1.4 — The screens no gate could see, and the one irreversible thing (2026-09-16)
 
 The audit's adversarial pass returned its verified set after 2.1.3 was
