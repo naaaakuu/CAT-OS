@@ -52,6 +52,7 @@ import { SEED } from './check-rendered-contrast.mjs';
    reading list is the longest tab order in it. */
 export const REACH_ROUTES = [
   { hash: '#/world', name: 'the village' },
+  { hash: '#/world/village', name: 'village life' },
   { hash: '#/rc', name: 'the reading list' },
   { hash: '#/settings', name: 'settings' },
   { hash: '#/growth', name: 'growth' },
@@ -217,7 +218,7 @@ export async function checkReach({ theme = 'light', only = null, width = 390, he
       const idn = seen.filter((x) => x.idNamed);
       if (idn.length) problems.push(`${where}: ${idn.length} control(s) announced by their element id, e.g. "${idn[0].label}"`);
 
-      if (route.hash === '#/world') {
+      if (route.hash === '#/world/village') {
         for (const p of await checkSheet(b, tab)) problems.push(`${where}: ${p}`);
       }
     }

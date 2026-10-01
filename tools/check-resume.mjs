@@ -192,7 +192,7 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
     /* ---- The village: callouts for buildings out of view ---- */
     {
       const tag = 'village';
-      await b.open(server.url + '#/world', 900);
+      await b.open(server.url + '#/world/village', 900);
       const alive = await (async () => { for (let i = 0; i < 60; i += 1) { if (await b.evaluate(`!!document.querySelector('#vg-canvas')?.__renderer && document.querySelectorAll('.vb.is-in').length > 0`)) return true; await sleep(200); } return false; })();
       if (!alive) bad(tag + ': the village did not render its callouts');
       // The opening settles the camera toward home over 1.5 s; wait it out.

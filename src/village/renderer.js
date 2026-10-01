@@ -436,11 +436,11 @@ export class VillageRenderer {
       if (o.rot) {
         // The few things that turn (swaying trees) take the slow path.
         if (!inWorld) { worldT(); inWorld = true; }
-        const a = a0.at ? a0.at(bucket, !!o.flip, tint) : a0;
+        const a = a0.at ? a0.at(bucket, !!o.flip, o.emissive ? null : tint) : a0;
         s.save(); s.translate(o.x, o.y); s.rotate(o.rot);
         s.drawImage(a.canvas, -a.ax * sc, -a.ay * sc + (o.bob ?? 0), a.w * sc, a.h * sc); s.restore();
       } else {
-        const a = a0.at ? a0.at(exact ? bucket * sc : bucket, !!o.flip, tint) : a0;
+        const a = a0.at ? a0.at(exact ? bucket * sc : bucket, !!o.flip, o.emissive ? null : tint) : a0;
         if (inWorld) { s.setTransform(1, 0, 0, 1, 0, 0); inWorld = false; }
         /* The anchor offset is ALWAYS in world units scaled by `sc`.
            art() documents w/h/ax/ay as world units whatever scale the canvas

@@ -52,8 +52,8 @@ const PLACE_BUILDING_ID = Object.freeze({
   rootwood: 'roots', terraces: 'roots', loom: 'loom', table: 'loom', bench: 'loom', wilds: 'road',
 });
 const SKILL_MODULE = Object.freeze(Object.fromEntries(SKILLS.map((s) => [s.key, s.module ?? null])));
-/** A neighbour's face: the pack has no people, so a person is their initial on a disc. */
-const avatar = (name, size) => `<span class="vavatar" style="--sz:${size}px" aria-hidden="true">${escapeHTML(String(name).replace(/^(the|old)\s+/i, '').charAt(0).toUpperCase())}</span>`;
+/** A familiar face, shared with the map sprite. */
+const avatar = (name, size) => artIMG('portrait', { id: String(name).replace(/^(the|old)\s+/i, '').toLowerCase() }, { size, className: 'vportrait' });
 const fmtSecs = (ms) => { const s = Math.max(0, Math.ceil(ms / 1000)); return s >= 60 ? `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` : `0:${String(s).padStart(2, '0')}`; };
 const fmtWait = (ms) => { const m = Math.max(1, Math.round(ms / 60000)); if (m < 60) return `${m} min`; const h = Math.floor(m / 60), r = m % 60; return r ? `${h} h ${r} min` : `${h} h`; };
 
@@ -62,6 +62,7 @@ export async function renderVillage(outlet, { storage }) {
   outlet.innerHTML = `
     <section class="vg" aria-label="Your village">
       <h1 class="sr-only">Your village</h1>
+      <a class="cw-return" href="#/world">← Home world</a>
       <canvas class="vg__canvas" id="vg-canvas" tabindex="0" aria-label="Your village. Drag or use the arrow keys to look around, plus and minus to zoom, and tap a building to see who works there."></canvas>
       <div class="vcallouts" id="vcallouts"></div>
       <div class="vhud" id="vhud"></div>
@@ -1252,3 +1253,4 @@ function placeToBuilding(slug) {
 }
 
 export { HOUSE, BOARD, good };
+

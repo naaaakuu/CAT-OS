@@ -26,6 +26,31 @@ exact trap you fell for. The game is simple; the learning is not.
 
 ## The first minutes
 
+The home at `#/world` now opens an original painted woodland map. Eight
+landmarks lead to contextual companion panels: VARC, DILR, Quant, Word
+Garden, Practice, Village life, Daily Challenge and Progress. The cream
+Explore dock provides a keyboard-accessible destination directory on
+phones; the map can be dragged, scrolled, zoomed and recentered.
+
+VARC, vocabulary, verbal practice, the Gauntlet and progress use the existing
+learning routes and stores. DILR, Quant and full CAT mocks are explicitly
+marked unavailable in this VARC build. Today's trail links to an existing
+word round; it does not introduce a separate daily scoring system.
+
+The existing economy, growing village, onboarding, goods and upgrade
+actions remain at `#/world/village`, reached through **Village life**.
+Returning from a learning activity shows a link to collect its rewards
+there. Learning screens are outside this first home-focused art pass.
+
+The two local PNG assets and their generation prompts live in `assets/art/`:
+`home-world-v1.png`, `home-companions-v1.png`, `home-world-prompts.txt`.
+Both images are core offline cache entries. Rebuild the cache lists with
+`node tools/build-precache.mjs` after changing app code or artwork.
+Run `node tools/check-home-world.mjs` for real-browser checks of destinations,
+navigation, camera controls, dialog focus, phone layout and offline reload.
+
+### The growing village introduction
+
 Black; the CAT OS mark; the camera glides down from the whole village to
 your house. A small charcoal cat called **Wick** says four lines. Mira, the
 schoolteacher across the way, needs a Book — Ada binds Books from Pages, and

@@ -68,7 +68,7 @@ const CONTENT_VERSION = 15;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '804b2902fa';
+const BUILD_ID = '2471f579a0';
 const CONTENT_ID = 'f745ea6466';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -103,6 +103,9 @@ const CORE_FILES = [
   './src/ui/styles/game.css',
   './src/ui/styles/world.css',
   './src/ui/styles/village.css',
+  './src/ui/styles/home-world.css',
+  './assets/art/home-world-v1.png',
+  './assets/art/home-companions-v1.png',
   './content/boot-index.json',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
@@ -139,9 +142,12 @@ const CORE_FILES = [
   './src/ui/modal.js',
   './src/village/art.js',
   './src/village/defs.js',
+  './src/village/life.js',
+  './src/village/living-art.js',
   './src/village/next.js',
   './src/village/renderer.js',
   './src/village/scene.js',
+  './src/village/screens/home-world.js',
   './src/village/screens/village.js',
   './src/village/sprites.js',
   './src/village/state.js',
@@ -176,6 +182,8 @@ const SHELL_FILES = [
   './assets/art/hearth_L3.png',
   './assets/art/hearth_L4.png',
   './assets/art/hearth_L5.png',
+  './assets/art/home-companions-v1.png',
+  './assets/art/home-world-v1.png',
   './assets/art/lamp.png',
   './assets/art/pathTile.png',
   './assets/art/planter.png',
@@ -362,15 +370,19 @@ const SHELL_FILES = [
   './src/ui/styles/base.css',
   './src/ui/styles/components.css',
   './src/ui/styles/game.css',
+  './src/ui/styles/home-world.css',
   './src/ui/styles/tokens.css',
   './src/ui/styles/village.css',
   './src/ui/styles/world.css',
   './src/village/art.js',
   './src/village/defs.js',
   './src/village/grove.js',
+  './src/village/life.js',
+  './src/village/living-art.js',
   './src/village/next.js',
   './src/village/renderer.js',
   './src/village/scene.js',
+  './src/village/screens/home-world.js',
   './src/village/screens/village.js',
   './src/village/sprites.js',
   './src/village/state.js',

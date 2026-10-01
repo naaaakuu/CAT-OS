@@ -8,14 +8,14 @@
  * neighbours' cottages, the land that has been opened, the pond, the
  * stepping stones, the trees — and Wick on his rounds.
  *
- * Every picture is a sprite from the art pack (see art.js). Nothing here
- * draws; it only decides what stands where. The only living thing is Wick:
- * the pack has no people or animals, so the neighbours live in the order
- * board and the callouts rather than on the paths.
+ * Baked scenery and cached inhabitants share the renderer. Neighbours take
+ * slow walks, workers tend their yards, and small wildlife lives nearby.
+ * Warm windows and chimney smoke give the houses life after dusk.
  */
 
 import { rng, LIGHT } from '../world/engine/palette.js';
 import { art, PAL, wickFrames } from './art.js';
+import { villageLife, chimneySmoke, windowObject } from './life.js';
 import { WORLD, BUILDINGS, PLOTS, HOUSE_SPOTS, BOARD, PLACE_BUILDING } from './defs.js';
 import { paintTerrain, grassFor, steppingStones, PATHS, POND, POND_SCALE, HUB, placeable, invalidSpot, cannotStand } from './terrain.js';
 
@@ -229,7 +229,9 @@ export function buildVillageScene(state, atmo, opts = {}) {
   const dark = night || hour === 'dusk';
   const statics = [];
   const lamps = [];
-  const life = [];
+  const cast = villageLife(v, { night, dark, weather: atmo.weather });
+  const life = cast.life;
+  const { workers, neighbours } = cast;
   const sprites = new Map();
   const focus = opts.focus ?? null;
   const anchors = [];
@@ -275,7 +277,15 @@ export function buildVillageScene(state, atmo, opts = {}) {
     const top = def.at.y - sprite.ay + (sprite.points?.top ?? 0);
     anchors.push({ id: def.id, x: def.at.x + 10, y: top - 6, built: true });
     hitBoxes.push({ kind: 'building', id: def.id, x0: def.at.x - def.hit.w / 2 - 6, x1: def.at.x + def.hit.w / 2 + (YARDS[def.id] ? 6 : 30), y0: top, y1: def.at.y + 18 });
-    if (dark && !YARDS[def.id]) addLamp(def.at.x, def.at.y - 30, 60, 0.3);
+    if (dark && !YARDS[def.id]) {
+      statics.push(windowObject(def.at.x, def.at.y, sprite, 1, def.art, bv.level));
+      addLamp(def.at.x - 30, def.at.y - 22, 36, 0.18);
+      addLamp(def.at.x + 27, def.at.y - 22, 36, 0.18);
+    }
+    if (sprite.points?.chimney) {
+      const chimney = pointOf(def, sprite, 'chimney');
+      life.push(chimneySmoke('chimney:' + def.id, chimney.x, chimney.y));
+    }
     if (def.id === 'hearth') {
       put('fence', def.at.x - 112, def.at.y - 6, { scale: 0.8 });
       put('bench', def.at.x - 78, def.at.y + 34, { scale: 0.85 });
@@ -349,7 +359,11 @@ export function buildVillageScene(state, atmo, opts = {}) {
     put('bush', spot.x + side * 82, spot.y + 8, { scale: 0.8 });
     put(nb.n % 2 ? 'planter' : 'flowers', spot.x - side * 66, spot.y + 12, { scale: 0.8 });
     if (nb.n % 3 === 0) put('fence', spot.x - side * 80, spot.y - 8, { scale: 0.7 });
-    if (dark) addLamp(spot.x, spot.y - 24, 44, 0.3);
+    if (dark) {
+      statics.push(windowObject(spot.x, spot.y, cot, 0.8));
+      addLamp(spot.x - 24, spot.y - 18, 28, 0.2);
+      addLamp(spot.x + 20, spot.y - 18, 28, 0.2);
+    }
     const top = spot.y - (cot.ay - (cot.points?.top ?? 0)) * 0.8;
     hitBoxes.push({ kind: 'neighbour', id: nb.id, n: nb.n, x0: spot.x - 60, x1: spot.x + 60, y0: top, y1: spot.y + 16 });
   }
@@ -424,6 +438,7 @@ export function buildVillageScene(state, atmo, opts = {}) {
     wick = companion({
       home: [hearth.at.x - 18, hearth.at.y + 48], far: [farDef.at.x - 56, farDef.at.y + 18], night, seed: toward, start: focus ? 'far' : 'home',
       homeNode: 'yard', farNode: BUILDING_NODE[toward] ?? 'reading' });
+    wick.focus = focus;
     life.push(wick);
   }
 
@@ -451,10 +466,26 @@ export function buildVillageScene(state, atmo, opts = {}) {
      every collect, deliver and build — precisely while the learner is
      watching — and a fresh companion starts from his seeded spot. When
      nothing that decides the cast has changed, the previous actor carries on. */
-  const lifeKey = [life.map((a) => a.kind).join(','), night ? 'night' : 'day', focus ?? ''].join('|');
-  if (opts.carryLifeKey === lifeKey && Array.isArray(opts.carryLife) && opts.carryLife.length === life.length) {
-    life.length = 0;
-    for (const a of opts.carryLife) { life.push(a); if (a?.kind === 'companion') wick = a; }
+  const lifeKey = [life.map((a) => a.kind + ':' + (a.id ?? '')).join(','), hour,
+    atmo.weather, [...v.builtIds].sort().join(','), [...v.plots].sort().join(','), v.houses].join('|');
+  if (opts.carryLifeKey === lifeKey && Array.isArray(opts.carryLife)) {
+    const previous = new Map(opts.carryLife.map((a) => [a.kind + ':' + (a.id ?? ''), a]));
+    for (let i = 0; i < life.length; i += 1) {
+      const fresh = life[i], old = previous.get(fresh.kind + ':' + (fresh.id ?? ''));
+      if (old && (fresh.kind !== 'companion' || old.focus === focus)) life[i] = old;
+    }
+  }
+  workers.clear(); neighbours.clear();
+  for (const actor of life) {
+    if (actor.kind === 'companion') wick = actor;
+    if (actor.kind === 'worker') {
+      actor.sync({ working: !!v.buildingById(actor.building)?.queue?.working });
+      workers.set(actor.building, actor);
+    }
+    if (actor.kind === 'neighbour') {
+      actor.sync({ waiting: v.orders.some((o) => o.giver.id === actor.id) });
+      neighbours.set(actor.id, actor);
+    }
   }
 
   /* Rain drops, seeded once: each keeps its column, phase and speed. */
@@ -507,13 +538,18 @@ export function buildVillageScene(state, atmo, opts = {}) {
     anchors,
     // The pack has no people: nobody works at a door or waits at the board,
     // so these stay empty and every caller already asks with `?.`.
-    workers: new Map(),
-    neighbours: new Map(),
+    workers,
+    neighbours,
     get wick() { return wick; },
     sprites,
     hit(x, y) {
       const w = wick.at;
       if (Math.abs(x - w.x) < 20 && y > w.y - 34 && y < w.y + 8) return { kind: 'wick' };
+      for (const actor of [...neighbours.values(), ...workers.values()]) {
+        const p = actor.at;
+        if (actor.visible && Math.abs(x - p.x) < 18 && y > p.y - 45 && y < p.y + 6)
+          return actor.kind === 'neighbour' ? { kind: 'neighbour', id: actor.id } : { kind: 'building', id: actor.building };
+      }
       for (const h of hitBoxes) if (x >= h.x0 && x <= h.x1 && y >= h.y0 && y <= h.y1) return h;
       return null;
     },
@@ -558,7 +594,11 @@ export function buildBackdropScene(slug, state, atmo) {
     .forEach(([name, s], i) => put(name, 24 + i * 52, 110 + (i % 2) * 18, s));
   if (bid === 'road') { put('sign', cx - 30, 250); put('lamp', cx + 56, 256); put('crate', cx + 10, 300, 0.9); }
   else if (YARDS[bid]) for (const [name, dx, dy, scale = 1] of yardParts(bid, level)) put(name, cx + dx, cy + dy, scale);
-  else if (def?.art) put('building', cx, cy, 0.9, { id: def.art, level });
+  else if (def?.art) {
+    const sprite = art('building', { id: def.art, level });
+    put('building', cx, cy, 0.9, { id: def.art, level });
+    if (night) objects.push(windowObject(cx, cy, sprite, 0.9, def.art, level));
+  }
   if (bid === 'hearth') put('wick', cx - 60, cy + 14, WICK_SCALE, { pose: 'sit', frame: 0 });
   put('bush', 40, 276); put('bush', W - 40, 280, 0.9);
   put('flowers', 110, 300, 0.9); put('flowers', W - 104, 304, 0.8);

@@ -121,7 +121,7 @@ export async function checkWorld({ log = () => {} } = {}) {
       try { await b.evaluate(seedFor(state)); } catch { await new Promise((r) => setTimeout(r, 2500)); try { await b.evaluate(seedFor(state)); } catch { problems.push(state.name + ": could not seed"); continue; } }
       for (const hour of HOURS) {
         await b.evaluate(`localStorage.setItem('catos:hour', ${JSON.stringify(hour)})`);
-        await b.open(`${server.url}#/world`, 4000);
+        await b.open(`${server.url}#/world/village`, 4000);
         // Wait for the scene, do not guess at it: on a loaded machine the
         // village can take a few seconds to mount, and a gate that reports
         // 'no scene' on a slow laptop is a gate people learn to ignore.

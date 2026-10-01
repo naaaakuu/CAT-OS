@@ -5,7 +5,7 @@
  * assets/art/): the Hearth at five levels, the Reading House at four, Wick
  * with five animated clips, three trees and the garden props — authored in
  * 3D and baked to transparent PNGs in the village's own oblique projection.
- * Nothing is drawn by hand any more; this file loads those bakes and serves
+ * living-art.js supplies cached inhabitants alongside these bakes. This file serves
  * them through the same synchronous contract the renderer always used:
  *
  *   art(name, params, scale) → { canvas, w, h, ax, ay, scale, points, at }
@@ -18,13 +18,14 @@
  *
  * Names: 'building' {id, level} (the highest baked level at or below the
  * one asked for), 'wick' {pose, frame}, 'glow' {r, color, a} (the only thing
- * still drawn: a lamp's light is light, not a picture), and every still in
+ * for lamps), 'person', 'portrait', the small wildlife, and every still in
  * the pack by its own name — tree_oak, tree_birch, tree_pine, bush, flowers,
  * grass, rock, pond, fence, bench, lamp, sign, books, planter, crate,
  * pathTile.
  */
 
 import { STILLS, CLIPS } from './sprites.js';
+import { livingSpec, LIVING_SPRITE_NAMES } from './living-art.js';
 
 export const SCALE = 2;
 
@@ -101,7 +102,7 @@ const YARD_FACE = Object.freeze({ garden: 'flowers', roots: 'planter', loom: 'cr
 export const PLANT_STAGE = Object.freeze({ open_ground: ['grass', 1.4], seed: ['planter', 0.8], sprout: ['bush', 0.8], young: ['tree_birch', 0.6], in_leaf: ['tree_oak', 0.7], mature: ['tree_oak', 0.85], ancient: ['tree_oak', 1] });
 
 /** Every name art() answers to. */
-export const SPRITE_NAMES = Object.freeze(['building', 'wick', 'glow', ...Object.keys(STILLS).filter((k) => !/_L\d$/.test(k))]);
+export const SPRITE_NAMES = Object.freeze(['building', 'wick', 'glow', ...LIVING_SPRITE_NAMES, ...Object.keys(STILLS).filter((k) => !/_L\d$/.test(k))]);
 /** Every image file the pack ships, for the gates. */
 export const SPRITE_FILES = Object.freeze([...Object.values(STILLS).map((s) => s.file), ...Object.values(CLIPS).flatMap((c) => c.frames.map((f) => f.file))]);
 
@@ -143,7 +144,13 @@ function paint(s) {
   const ctx = s.canvas.getContext('2d');
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, s.canvas.width, s.canvas.height);
-  if (s.draw) { s.draw(ctx); return; }
+  if (s.draw) {
+    if (s.flip) { ctx.translate(s.canvas.width, 0); ctx.scale(-1, 1); }
+    s.draw(ctx);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (s.tint) { ctx.globalCompositeOperation = 'source-atop'; ctx.fillStyle = s.tint; ctx.fillRect(0, 0, s.canvas.width, s.canvas.height); ctx.globalCompositeOperation = 'source-over'; }
+    return;
+  }
   const img = images.get(s.file);
   if (!img?.complete || !img.naturalWidth) { let l = waiting.get(s.file); if (!l) waiting.set(s.file, (l = new Set())); l.add(s); return; }
   ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
@@ -174,6 +181,8 @@ function glowSpec({ r = 40, color = PAL.glow, a = 0.5 }) {
 /** The bare spec of a sprite (no canvas): sizes, anchor and points. */
 export function spec(name, params = {}) {
   if (name === 'glow') return glowSpec(params);
+  const living = livingSpec(name, params);
+  if (living) return living;
   const f = frameOf(name, params);
   const flip = !!params.flip;
   const points = flip ? Object.fromEntries(Object.entries(f.points).map(([k, p]) => [k, Array.isArray(p) ? [f.w - p[0], p[1]] : p])) : f.points;
@@ -229,7 +238,10 @@ export function artIMG(name, params = {}, { size = 24, className = '', alt = '' 
   let s;
   try { s = spec(name, params); } catch { return ''; }
   const k = size / Math.max(s.w, s.h);
+  const src = s.draw ? art(name, params, 3).canvas.toDataURL() : new URL(s.file, BASE).href;
   const flip = params.flip ? ' style="transform:scaleX(-1)"' : '';
-  return `<img class="ico ${className}" src="${new URL(s.file, BASE).href}" width="${Math.round(s.w * k)}" height="${Math.round(s.h * k)}" alt="${alt}"${alt ? '' : ' aria-hidden="true"'} draggable="false"${flip}>`;
+  return `<img class="ico ${className}" src="${src}" width="${Math.round(s.w * k)}" height="${Math.round(s.h * k)}" alt="${alt}"${alt ? '' : ' aria-hidden="true"'} draggable="false"${flip}>`;
 }
+
+
 
