@@ -241,7 +241,7 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     if (isRecord && answers.length) play('unlock', { delay: 1.6 });
     renderResult(outlet, {
       region: 'wilds',
-      eyebrow: `The Gauntlet · ${week}`,
+      eyebrow: `The Gauntlet · Week ${Number(week.slice(-2))}`,
       title: isRecord ? 'A new record' : 'Gauntlet complete',
       result: stars,
       verdict: isRecord ? `${correct} of ${total} in ${formatClock(record.duration_ms)}. Your best run. Toffee keeps it by the fire.` : `${correct} of ${total} in ${formatClock(record.duration_ms)}. Best so far: ${prevBest.score?.correct} in ${formatClock(prevBest.duration_ms)}.`,

@@ -35,12 +35,15 @@ const store = {
 
 export async function renderVillageHome(outlet, ctx) {
   const { storage } = ctx;
+  const arrivedAt = location.hash;
   let world, valley;
   try { [world, valley] = await Promise.all([loadWorld(storage), loadValley(storage)]); } catch (err) {
     outlet.innerHTML = `<section class="cw cw--error"><h1>The village will not open</h1><p>${escapeHTML(err.message)}</p></section>`;
     return;
   }
-  if (!outlet.isConnected) return;
+  // Left while the records loaded: do not start a village (its music, its
+  // greeting, Toffee's hello) underneath whatever screen comes next.
+  if (!outlet.isConnected || location.hash !== arrivedAt) return;
   let state = world.state;
   let pets = state.pets ?? derivePets(state, world.records, world.content, state.now);
   const atmo = state.atmo;
@@ -50,7 +53,8 @@ export async function renderVillageHome(outlet, ctx) {
   outlet.innerHTML = `
     <section class="cw" data-hour="${atmo.hour}" data-weather="${atmo.weather}" data-season="${atmo.season}" aria-label="Your village">
       <h1 class="sr-only">${escapeHTML(name)}: your village</h1>
-      <div class="cw-viewport" tabindex="0" aria-label="The village. Drag or use the arrow keys to look around; Tab to visit a pet or a building.">
+      <p class="sr-only" aria-live="polite" data-said></p>
+      <div class="cw-viewport" tabindex="0" role="group" aria-label="The village. Drag or use the arrow keys to look around; Tab to visit a pet or a building.">
         <div class="cw-map" style="width:${MAP.w}px;height:${MAP.h}px">
           <img class="cw-art" src="${MAP.src}" alt="" draggable="false" decoding="async" fetchpriority="high">
           <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -71,6 +75,7 @@ export async function renderVillageHome(outlet, ctx) {
         </div>
       </header>
       <button class="cw-today" data-open="wishes"></button>
+      <button class="cw-edge" hidden></button>
       <div class="cw-toast" role="status" aria-live="polite"></div>
       <div class="cw-overlay" hidden><div class="cw-scrim" data-close></div><section class="cw-card"></section></div>
     </section>`;
@@ -87,7 +92,7 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- The camera ---------------- */
   const cam = { x: NODES.pc.x, y: NODES.pc.y + 40, z: 1 };
-  let vw = 1, vh = 1, base = 1, tween = null;
+  let vw = 1, vh = 1, base = 1, tween = null, onCamera = () => {};
   const scale = () => base * cam.z;
   const apply = () => {
     const s = scale();
@@ -96,6 +101,7 @@ export async function renderVillageHome(outlet, ctx) {
     cam.y = clamp(cam.y, hh, MAP.h - hh);
     map.style.transform = `translate3d(${(vw / 2 - cam.x * s).toFixed(2)}px,${(vh / 2 - cam.y * s).toFixed(2)}px,0) scale(${s.toFixed(4)})`;
     map.style.setProperty('--inv', (1 / s).toFixed(4));
+    onCamera();
   };
   const layout = () => {
     vw = viewport.clientWidth || window.innerWidth; vh = viewport.clientHeight || window.innerHeight;
@@ -150,7 +156,8 @@ export async function renderVillageHome(outlet, ctx) {
   });
   const endDrag = (e) => {
     ptrs.delete(e.pointerId);
-    if (ptrs.size) return;
+    // A pinch that becomes a one-finger drag carries on from here, not from where the first finger landed.
+    if (ptrs.size) { const [p] = [...ptrs.values()]; drag = { x: p.x, y: p.y, cx: cam.x, cy: cam.y, t: performance.now(), vx: 0, vy: 0 }; return; }
     viewport.classList.remove('is-dragging');
     if (moved && drag && !reduced && Math.hypot(drag.vx, drag.vy) > 0.05) {
       let { vx, vy } = drag, last = performance.now();
@@ -190,7 +197,40 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- Life ---------------- */
   const life = createLife(root, { pets, atmo, reduced, sizes: PET_SIZE });
-  const motion = mountMotion(map, { atmo, reduced });
+  const saidEl = root.querySelector('[data-said]');
+  const announce = (text) => { if (text) saidEl.textContent = String(text).replace(/<[^>]*>/g, ''); };
+  // The moving patches wait for the painting: on a first visit the small
+  // atlas lands long before the 3.8 MB picture, and fragments of trees and
+  // water would float over an empty green.
+  let motion = { setAtmo() {}, destroy() {} };
+  const art = map.querySelector('.cw-art');
+  const mountPainting = () => { if (!disposed) motion = mountMotion(map, { atmo: root.dataset.hour ? { ...atmo, hour: root.dataset.hour } : atmo, reduced }); };
+  if (art.complete && art.naturalWidth) mountPainting(); else art.decode().then(mountPainting, mountPainting);
+
+  /* Whoever needs a visit, when they are off the edge of a phone: a small
+     chip at that edge, pointing, that brings the village round to them. */
+  const edge = root.querySelector('.cw-edge');
+  let edgeFor = null;
+  const placeEdge = () => {
+    const id = openKind ? null : life.thinker();
+    const at = id && life.positionOf(id), s = scale();
+    const sx = at ? vw / 2 + (at.x - cam.x) * s : 0, sy = at ? vh / 2 + (at.y - cam.y) * s : 0;
+    const off = !!at && (sx < 16 || sx > vw - 16 || sy < 70 || sy > vh - 90);
+    if (edge.hidden === off) edge.hidden = !off;
+    if (!off) return;
+    if (edgeFor !== id) {
+      edgeFor = id;
+      const p = PET_BY_ID.get(id);
+      edge.innerHTML = `${petSprite(id, { size: 34 })}${giftIcon(p.gift, 16)}<i aria-hidden="true"></i>`;
+      edge.setAttribute('aria-label', `${p.name} would like a visit. Show ${p.name}.`);
+    }
+    const ex = clamp(sx, 34, vw - 34), ey = clamp(sy, 100, vh - 120);
+    edge.style.left = `${ex}px`; edge.style.top = `${ey}px`;
+    edge.style.setProperty('--turn', `${Math.atan2(sy - ey, sx - ex).toFixed(3)}rad`);
+  };
+  onCamera = placeEdge;
+  const edgeTimer = setInterval(placeEdge, 700);
+  edge.addEventListener('click', () => { if (edgeFor) { play('tap'); reveal(life.positionOf(edgeFor)); edge.hidden = true; } });
 
   /* ---------------- The HUD ---------------- */
   const hud = () => {
@@ -260,7 +300,7 @@ export async function renderVillageHome(outlet, ctx) {
     if (pet) {
       const id = pet.dataset.pet;
       unlock();
-      life.poke(id);
+      announce(`${PET_BY_ID.get(id).name}: ${life.poke(id)}`);
       reveal(life.positionOf(id));
       later(() => openCard('pet', id, pet), reduced ? 0 : 260);
       return;
@@ -303,9 +343,12 @@ export async function renderVillageHome(outlet, ctx) {
       const home = NODES[HOMES[last.pet].node];
       panTo(home.x, home.y, { ms: 0 });
       later(() => {
-        life.poke(last.pet, { happy: true, line: last.doubled ? `${PET_BY_ID.get(pp.supplier).name}'s ${GIFTS[PET_BY_ID.get(pp.supplier).gift].name.toLowerCase()} helped. Double today.` : null });
+        // The toast names the gifts; the pet hops without a bubble of its own,
+        // and says its ring line only once the toast has gone (they shared a spot).
+        life.poke(last.pet, { happy: true, quiet: true });
         toast(`${giftIcon(p.gift, 22)} <b>+${last.gifts} ${last.gifts === 1 ? g.one : g.name}</b> from ${p.name}${last.doubled ? ' · doubled by the ring' : ''}`);
         play('ink');
+        if (last.doubled) later(() => announce(`${p.name}: ${life.poke(last.pet, { happy: true, line: `${PET_BY_ID.get(pp.supplier).name}'s ${GIFTS[PET_BY_ID.get(pp.supplier).gift].name.toLowerCase()} helped. Double today.` })}`), 4600);
       }, reduced ? 50 : 700);
     } else if (focusSlug && petForPlace(focusSlug)) {
       const home = NODES[HOMES[petForPlace(focusSlug)].node];
@@ -319,6 +362,7 @@ export async function renderVillageHome(outlet, ctx) {
       panTo(NODES.f1.x, NODES.f1.y - 60, { ms: 0 });
       for (const [i, line] of LINES.intro.entries()) {
         if (disposed) return;
+        announce(`Toffee: ${line}`);
         await life.sayAndWait('toffee', line, { ms: 5200, tapToSkip: true });
         if (i === 1) panTo(NODES.pc.x, NODES.pc.y, { ms: 1400 });
       }
@@ -329,13 +373,18 @@ export async function renderVillageHome(outlet, ctx) {
     }, reduced ? 100 : 900);
   } else {
     /* ---------------- A letter, after a day or more away ---------------- */
+    /* It waits pinned to the notice board (spec §2.8), in the world rather
+       than over it, until it is read; read, it is gone for the day. */
     const letter = pets.letter;
     if (letter && store.get('catos:letter') !== pets.today) {
-      later(() => {
-        const p = PET_BY_ID.get(letter.pet);
-        toast(`<button class="cw-letter" data-letter>${petSprite(letter.pet, { size: 34 })}<span>A letter from <b>${p.name}</b></span></button>`, 9000);
-        toastEl.querySelector('[data-letter]')?.addEventListener('click', (e) => { store.set('catos:letter', pets.today); toastEl.classList.remove('is-in'); openCard('letter', letter, e.currentTarget); });
-      }, 1400);
+      const p = PET_BY_ID.get(letter.pet);
+      root.querySelector('.cw-spots').insertAdjacentHTML('beforeend', `<button class="cw-envelope" data-letter style="left:${BOARD.x}px;top:${BOARD.y}px;--seal:var(--pet-${letter.pet})" aria-label="A letter from ${p.name}, on the notice board">${envelopeSVG}</button>`);
+      root.querySelector('[data-letter]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        store.set('catos:letter', pets.today);
+        openCard('letter', letter, root.querySelector('.cw-flame'));
+        e.currentTarget.remove();
+      });
     }
   }
 
@@ -356,7 +405,7 @@ export async function renderVillageHome(outlet, ctx) {
     disposed = true;
     window.removeEventListener('hashchange', onHash);
     window.removeEventListener('pointerdown', startSound, { capture: true });
-    clearInterval(tickHour);
+    clearInterval(tickHour); clearInterval(edgeTimer);
     for (const id of timers) clearTimeout(id);
     ro.disconnect(); life.destroy(); motion.destroy();
     if (openKind) closeModal(card);
@@ -402,6 +451,9 @@ function flameSVG(tier) {
   const s = TIER_SCALE[tier] ?? 0.8;
   return `<svg class="cw-flame__svg cw-flame--${tier}" viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(12 22) scale(${s}) translate(-12 -22)"><path d="M12 2.6c2.4 3.3 6.2 6.2 6.2 11a6.2 6.2 0 0 1-12.4 0c0-2.7 1.3-4.5 2.7-6 .2 1.6.9 2.9 2.1 3.5-.5-3.1.3-6 1.4-8.5z" fill="#F2A23C" stroke="#7a4a1e" stroke-width="1.2" stroke-linejoin="round"/><path d="M12 11.4c1.3 1.6 2.6 2.7 2.6 4.6a2.6 2.6 0 0 1-5.2 0c0-1.5.9-2.9 2.6-4.6z" fill="#FFD978"/></g></svg>`;
 }
+/** Where a letter waits: pinned to the middle panel of the painted notice board. */
+const BOARD = { x: 813, y: 757 };
+const envelopeSVG = '<svg viewBox="0 0 40 30" aria-hidden="true"><rect x="1.5" y="3" width="37" height="25" rx="2.5" fill="#FFF6E2" stroke="#7a5a34" stroke-width="1.6"/><path d="M2.5 4.5 20 17.5 37.5 4.5" fill="none" stroke="#7a5a34" stroke-width="1.6" stroke-linejoin="round"/><circle cx="20" cy="17.5" r="4.2" style="fill:var(--seal,#C2643F)" stroke="#5a3a1a" stroke-width="1"/></svg>';
 const bagSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14l-1.2 10.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.5 13.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
 const houseSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.5V20h12V9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 6.5V4h2v4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
 

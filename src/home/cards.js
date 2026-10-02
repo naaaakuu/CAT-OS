@@ -34,6 +34,8 @@ export function renderCard(card, kind, arg, api) {
 }
 
 const close = '<button class="cw-x" data-close aria-label="Close">×</button>';
+/** The rotating third wish: any friend's run can grant it. */
+const ANY_RUN = new Set(['stars', 'friends', 'flawless']);
 const hearts = (n) => `<span class="cw-hearts__row" aria-hidden="true">${[0, 1, 2, 3, 4].map((i) => (i < n ? '<i class="on">♥</i>' : '<i>♡</i>')).join('')}</span>`;
 const moodBar = (p) => `<div class="cw-mood cw-mood--${p.word}"><span class="cw-mood__bar"><i style="width:${p.isNew ? 30 : Math.max(6, Math.round(p.mood * 100))}%"></i></span><b>${MOOD_LABEL[p.word]}</b></div>`;
 
@@ -58,7 +60,7 @@ function petCard(card, id, api) {
     <p class="cw-eyebrow">${esc(def.subject)}</p>
     <h2 class="cw-card__name">${esc(def.name)} <small>the ${esc(def.creature)}</small></h2>
     ${moodBar(p)}
-    <div class="cw-hearts" aria-label="Friendship: ${p.hearts} of 5 hearts">${hearts(p.hearts)}<small>${p.hearts >= 5 ? 'Best friends' : `${p.toNext} more ${p.toNext === 1 ? 'visit' : 'visits'} to the next heart`}</small></div>
+    <div class="cw-hearts"><span class="sr-only">Friendship: ${p.hearts} of 5 hearts.</span>${hearts(p.hearts)}<small>${p.hearts >= 5 ? 'Best friends' : `${p.toNext} more ${p.toNext === 1 ? 'visit' : 'visits'} to the next heart`}</small></div>
     <blockquote class="cw-say">${esc(p.line)}</blockquote>
     ${wish ? `<p class="cw-wishnote">✦ Today's wish: ${esc(wish.text)}</p>` : ''}
     ${next ? `<a class="cw-go" href="${esc(next.href)}" data-go><span><b>${esc(VERB[id])}</b><small>${esc(next.label)}${next.sub ? ` · ${esc(next.sub)}` : ''}</small></span><i aria-hidden="true">→</i></a>` : ''}
@@ -90,14 +92,14 @@ function hearthCard(card, focus, api) {
     <p class="cw-eyebrow">The fire · kept by Toffee</p>
     <h2 class="cw-card__name">${f.days ? `A ${f.days}-day glow` : 'A fresh fire'}</h2>
     <p class="cw-sub">${f.today ? 'You have kept it today.' : f.days ? 'One visit today keeps it glowing.' : 'One visit to any friend lights it.'}${f.kindling ? ` · ${f.kindling} kindling saved: it will cover a missed day.` : ' Seven days in a row earns kindling, which covers a missed day.'}</p>
-    <div class="cw-orbit" aria-label="How each friend is feeling">
+    <div class="cw-orbit" role="group" aria-label="How each friend is feeling">
       <span class="cw-orbit__fire" aria-hidden="true"><i></i>${giftIcon('sparks', 54)}</span>
       ${ring}
     </div>
     <p class="cw-harmony">${esc(HARMONY_LINE(P.harmony, P.festival, needy))}</p>
     <h3 class="cw-h3" id="wishes">Today's wishes</h3>
     <ul class="cw-wishes">
-      ${P.wishes.map((w) => `<li class="${w.done ? 'is-done' : ''}">${petPortrait(w.pet, 34)}<span>${esc(w.text)}</span>${w.done ? '<b aria-label="granted">✓</b>' : `<a href="${esc(nextFor(w.pet, api.world)?.href ?? w.href)}" aria-label="Go: ${esc(w.text)}">Go</a>`}</li>`).join('')}
+      ${P.wishes.map((w) => `<li class="${w.done ? 'is-done' : ''}">${ANY_RUN.has(w.id) ? '<span class="cw-wish__any" aria-hidden="true">✦</span>' : petPortrait(w.pet, 34)}<span>${esc(w.text)}</span>${w.done ? '<b aria-label="granted">✓</b>' : `<a href="${esc(nextFor(w.pet, api.world)?.href ?? w.href)}" aria-label="Go: ${esc(w.text)}">Go</a>`}</li>`).join('')}
     </ul>
     <p class="cw-sub">${P.wishesDone === 3 ? 'All three granted. Every friend gave one extra gift today.' : 'Grant all three and every friend gives one extra gift.'}</p>
     <a class="cw-go" href="#/world/place/wilds" data-go><span><b>Run the Gauntlet with Toffee</b><small>Everything at once, against the clock · about 8 min</small></span><i aria-hidden="true">→</i></a>
@@ -120,7 +122,7 @@ function satchelCard(card, api) {
     <ul class="cw-gifts">
       ${GIFT_KEYS.map((k) => `<li>${giftIcon(k, 30)}<b>${P.stock[k]}</b><span>${esc(GIFTS[k].name)}</span><small>from ${esc(PET_BY_ID.get(GIFTS[k].pet).name)}</small></li>`).join('')}
     </ul>
-    <p class="cw-sub cw-ringline" aria-label="The gift ring">${RING.map((id) => `<span>${giftIcon(PET_BY_ID.get(id).gift, 16)}${esc(PET_BY_ID.get(id).name)}</span>`).join('<i aria-hidden="true">→</i>')}</p>
+    <p class="cw-sub cw-ringline">${RING.map((id) => `<span>${giftIcon(PET_BY_ID.get(id).gift, 16)}${esc(PET_BY_ID.get(id).name)}</span>`).join('<i aria-hidden="true">→</i>')}</p>
     <p class="cw-sub">Each friend works twice as fast while the friend before them is happy. Keep everyone visited and the gifts double all the way round.</p>
     <h3 class="cw-h3">Treasures for the village</h3>
     ${next ? `
@@ -136,7 +138,7 @@ function satchelCard(card, api) {
     btn.disabled = true;
     try {
       await api.refresh();
-      if (!canMake(api.pets, id).ok) { satchelCard(card, api); return; }
+      if (!canMake(api.pets, id).ok) { satchelCard(card, api); card.focus({ preventScroll: true }); return; }
       const at = new Date().toISOString();
       await api.storage.put(STORES.LEARNING, { id: `village-treasure-${id}-${Date.now()}`, kind: 'village-treasure', treasure: id, at });
       await api.refresh();
@@ -172,7 +174,7 @@ function cottageCard(card, api) {
       <p class="cw-name__ideas">${nameSuggestions().map((n) => `<button type="button" data-idea="${esc(n)}">${esc(n)}</button>`).join('')}</p>
     </form>
     <div class="cw-toggles">
-      <button class="cw-toggle" data-music aria-pressed="${musicEnabled()}"><span>Music and birdsong</span><i aria-hidden="true"></i></button>
+      <button class="cw-toggle" data-music aria-pressed="${musicEnabled()}"><span>Music and ambience</span><i aria-hidden="true"></i></button>
       <button class="cw-toggle" data-sfx aria-pressed="${prefs.sfx}"><span>Sound effects</span><i aria-hidden="true"></i></button>
     </div>
     <nav class="cw-rooms" aria-label="The other rooms">
@@ -187,7 +189,7 @@ function cottageCard(card, api) {
     e.preventDefault();
     const clean = cleanValleyName(input.value);
     if (!clean) { input.focus(); return; }
-    try { const v = await saveValley(api.storage, { name: clean }); api.setValley(v); api.play('place'); cottageCard(card, api); api.toast(`Welcome to <b>${esc(clean)}</b>.`); } catch (err) { console.error('[CAT OS] could not save the name', err); }
+    try { const v = await saveValley(api.storage, { name: clean }); api.setValley(v); api.play('place'); cottageCard(card, api); card.querySelector('.cw-name input')?.focus({ preventScroll: true }); api.toast(`Welcome to <b>${esc(clean)}</b>.`); } catch (err) { console.error('[CAT OS] could not save the name', err); }
   });
   const music = card.querySelector('[data-music]'), sfx = card.querySelector('[data-sfx]');
   music.addEventListener('click', async () => {

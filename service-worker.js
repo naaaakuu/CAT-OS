@@ -68,7 +68,7 @@ const CONTENT_VERSION = 15;
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '6450e80170';
+const BUILD_ID = '26c39cbd1e';
 const CONTENT_ID = 'f745ea6466';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
@@ -102,8 +102,15 @@ const CORE_FILES = [
   './src/ui/styles/components.css',
   './src/ui/styles/game.css',
   './src/ui/styles/world.css',
+  './src/ui/styles/home.css',
+  './src/ui/styles/rewards.css',
   './assets/art/home-world-v1.png',
-  './assets/art/home-companions-v1.png',
+  './assets/art/pet-chai.png',
+  './assets/art/pet-ginger.png',
+  './assets/art/pet-mallow.png',
+  './assets/art/pet-matcha.png',
+  './assets/art/pet-mochi.png',
+  './assets/art/pet-toffee.png',
   './content/boot-index.json',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
@@ -153,7 +160,6 @@ const CORE_FILES = [
   './src/world/curator.js',
   './src/world/economy.js',
   './src/world/engine/palette.js',
-  './src/world/growth.js',
   './src/world/index.js',
   './src/world/lexicon.js',
   './src/world/stage.js',
@@ -165,7 +171,6 @@ const SHELL_FILES = [
   './',
   './assets/art/bush.png',
   './assets/art/grass.png',
-  './assets/art/home-companions-v1.png',
   './assets/art/home-motion-v1.png',
   './assets/art/home-world-v1.png',
   './assets/art/pet-chai.png',
@@ -303,7 +308,6 @@ const SHELL_FILES = [
   './src/shell/prefs.js',
   './src/shell/settings.js',
   './src/ui/components/cat-briefing.js',
-  './src/ui/components/cat-celebration.js',
   './src/ui/components/cat-explanation.js',
   './src/ui/components/cat-jumble-board.js',
   './src/ui/components/cat-nav.js',
@@ -332,7 +336,6 @@ const SHELL_FILES = [
   './src/world/curator.js',
   './src/world/economy.js',
   './src/world/engine/palette.js',
-  './src/world/growth.js',
   './src/world/icons.js',
   './src/world/index.js',
   './src/world/lexicon.js',

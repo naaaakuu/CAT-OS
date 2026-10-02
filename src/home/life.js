@@ -244,15 +244,16 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
       lift = Math.abs(Math.sin(ph / 2)) * 7;
       const land = Math.max(0, Math.cos(ph / 2)) ** 6;
       sy = 1 - land * 0.07 + (lift / 7) * 0.03; sx = 1 + land * 0.06;
-    } else {
+    } else if (!reduced) {
       sy = 1 + Math.sin(now / 520 + a.x) * 0.012;
     }
     if (a.state === 'sleep' || a.state === 'doze' || (a.state === 'slump')) frame = FRAME.sleep;
-    if (now < a.reactUntil) { const p = 1 - (a.reactUntil - now) / 700; lift = Math.sin(Math.max(0, p) * Math.PI) * 18; sy = 1 + Math.sin(p * Math.PI) * 0.05; }
+    // With less motion a pet still smiles and talks, but never jumps, breathes or blinks.
+    if (now < a.reactUntil && !reduced) { const p = 1 - (a.reactUntil - now) / 700; lift = Math.sin(Math.max(0, p) * Math.PI) * 18; sy = 1 + Math.sin(p * Math.PI) * 0.05; }
     if (now < a.happyUntil) frame = FRAME.happy;
-    else if (now < a.talkUntil) frame = Math.floor(now / 140) % 2 ? FRAME.talk : FRAME.idle;
+    else if (now < a.talkUntil && !reduced) frame = Math.floor(now / 140) % 2 ? FRAME.talk : FRAME.idle;
     else if (frame === FRAME.idle && now < a.blinkUntil) frame = FRAME.blink;
-    if (frame === FRAME.idle && now > a.blinkAt) { a.blinkUntil = now + 130; a.blinkAt = now + rand(2600, 6200); }
+    if (frame === FRAME.idle && now > a.blinkAt && !reduced) { a.blinkUntil = now + 130; a.blinkAt = now + rand(2600, 6200); }
     if (a.state === 'slump') { sy *= 0.9; sx *= 1.04; }
     if (a.sayUntil && now > a.sayUntil) { a.sayUntil = 0; a.bubble.classList.add('is-out'); setTimeout(() => { if (!a.sayUntil) a.bubble.hidden = true; }, 260); }
     const showThink = a.thinking && !a.sayUntil && a.state !== 'walk';
@@ -439,15 +440,20 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   /* ================= What the screen can ask of it ================= */
   return {
     positionOf: (id) => { const a = byId.get(id); return a ? { x: a.x, y: a.y - 40 } : NODES.pc; },
-    /** A tap: the pet jumps, a heart floats up, and it says something. */
-    poke(id, { happy = false, line = null } = {}) {
-      const a = byId.get(id); if (!a) return;
+    /** A tap: the pet jumps, a heart floats up, and it says something (unless `quiet`). Returns what it said. */
+    poke(id, { happy = false, line = null, quiet = false } = {}) {
+      const a = byId.get(id); if (!a) return '';
       a.reactUntil = now + 700; a.happyUntil = now + (happy ? 2200 : 900);
-      heart(a); if (happy) setTimeout(() => heart(a), 220);
+      if (!reduced) { heart(a); if (happy) setTimeout(() => heart(a), 220); }
       if (a.state === 'sleep' || a.state === 'doze') { a.state = 'idle'; a.until = now + 3000; }
-      say(a, `<span>${line ?? lineFor(id, 'tap', `${now | 0}`)}</span>`, line ? 4200 : 2600);
+      if (quiet) return '';
+      const said = line ?? lineFor(id, 'tap', `${now | 0}`);
+      say(a, `<span>${said}</span>`, line ? 4200 : 2600);
+      return said;
     },
     think(id, on) { const a = byId.get(id); if (a) a.thinking = on; },
+    /** The pet with a thought bubble: whoever needs a visit most. */
+    thinker: () => actors.find((a) => a.thinking)?.id ?? null,
     /** Say a line and resolve when it is gone (or tapped away). */
     sayAndWait(id, line, { ms = 5000, tapToSkip = false } = {}) {
       const a = byId.get(id);

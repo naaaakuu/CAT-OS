@@ -110,6 +110,8 @@
 .pvwin__more, .pvwin__ring, .pvwin__heart, .pvwin__treasure { margin: 8px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--color-ink-2); }
 .pvwin__more { display: flex; flex-direction: column; align-items: flex-start; }
 .pvwin__ring::before { content: "✦ "; color: var(--honey-ink); }
+.pvwin__ring--low { color: var(--color-ink-2); }
+.pvwin__ring--low::before { content: none; }
 /* Rose, pulled toward the ink so it holds AA in either theme. */
 .pvwin__heart span { color: color-mix(in srgb, #D2586F 70%, var(--color-ink)); }
 .pvwin__story { margin: 3px 0 0; font: italic 400 14.5px/1.45 var(--font-display); color: var(--color-ink-2); }

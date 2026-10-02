@@ -40,6 +40,7 @@
  */
 
 import { ATLAS } from './motion-atlas.js';
+import { MAP } from '../pets/paths.js';
 
 /** k, rect (an ellipse fills it) or poly, then what the kind needs. Painting pixels throughout. */
 export const PATCHES = [
@@ -122,8 +123,9 @@ export function maskOf(p, r = rectOf(p)) {
  */
 export function mountMotion(map, { atmo, reduced } = {}) {
   const art = map?.querySelector('.cw-art');
-  // At rest every patch IS the painting, so with less motion there is nothing to add.
-  if (reduced || !art || !ATLAS.at.length) return { setAtmo() {}, destroy() {} };
+  // At rest every patch IS the painting, so with less motion there is nothing
+  // to add; and nothing at all from an atlas cut from another painting.
+  if (reduced || !art || !ATLAS.at.length || ATLAS.painting !== MAP.src) return { setAtmo() {}, destroy() {} };
   const src = `url("${new URL(ATLAS.src, document.baseURI).href}")`;
   const box = document.createElement('div');
   box.className = 'cw-motion';

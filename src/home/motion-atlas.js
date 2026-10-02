@@ -5,6 +5,7 @@
  */
 export const ATLAS = {
   src: './assets/art/home-motion-v1.png', w: 1024, h: 394,
+  painting: './assets/art/home-world-v1.png', paintingHash: 'a0210e2722f5',
   at: [
     [801, 91, 64, 60, 509, 252],
     [636, 166, 36, 46, 244, 338],

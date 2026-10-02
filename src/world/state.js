@@ -20,7 +20,6 @@ import { computeStreamLevel } from '../modules/language-garden/logic/effort.js';
 import { rcStars, verbalStars, titleFor, levelFromCleared } from './economy.js';
 import { derivePets, giftsBetween } from '../pets/economy.js';
 import { listFields, ledgerFromRecords, summarizeLedger, fieldSummary } from './lexicon.js';
-import { deriveGrowth } from './growth.js';
 import { skillLedger, nextSkill, weakSkills } from '../core/learning/review.js';
 import { hourWord, seasonWord, weatherWord } from './engine/palette.js';
 
@@ -308,9 +307,6 @@ export function deriveWorldState(content, records, now = Date.now()) {
   state.skills = skillLedger(sessions, learning, now);
   state.weakSkills = weakSkills(state.skills);
   state.nextSkill = nextSkill(state.skills, state);
-
-  /* ---- How much of the valley exists yet (kept for the collections) ---- */
-  state.growth = deriveGrowth(state);
 
   /* ---- The pets: moods, gifts, the ring, wishes, the fire, treasures (src/pets/economy.js) ---- */
   state.pets = derivePets(state, records, content, now);

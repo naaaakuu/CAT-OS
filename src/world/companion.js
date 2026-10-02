@@ -1,29 +1,15 @@
 /**
- * companion.js — Wick, and the name of the village.
+ * companion.js — the village's name, whether the learner has been welcomed,
+ * and the one line a place says on arrival.
  *
- * Wick is the one character in CAT OS who speaks to the learner. He is a
- * small charcoal cat who keeps the village's lamps, and he has kept them
- * alone for a long time. That is the whole premise of the first minutes:
- * the village is small, Wick is still here, and everything the learner
- * learns builds something.
+ * (2.x kept Wick's whole script here: the opening, the naming, the first
+ * order, coming home, a line for every stage of the village. 3.0's pets
+ * speak for themselves in src/pets/pets.js, and Toffee says the hello.)
  *
- * His voice, held to across every screen:
- *   - short sentences, plainly said, never more than two at a time;
- *   - he notices, he does not congratulate ("Look at that." not "Great job!");
- *   - he never explains a rule, names a metric, or says the word "study";
- *   - he is glad you came back, and he never guilts you for being away.
- *
- * This module owns three things nothing else should duplicate: the
- * village's name (stored in settings, so it travels in backups), whether
- * the learner has been welcomed yet, and the lines Wick says.
+ * The name lives in settings, so it travels in backups.
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-
-export const WICK = Object.freeze({
-  name: 'Wick',
-  what: 'the lamp-keeper',
-});
 
 const KEY = 'valley';
 
@@ -74,77 +60,6 @@ export function cleanValleyName(raw) {
   if (!t) return '';
   return t.replace(/(^|[\s-])(\p{L})/gu, (m, pre, ch) => pre + ch.toLocaleUpperCase());
 }
-
-/* ------------------------------------------------------------------ */
-/* What Wick says                                                      */
-/* ------------------------------------------------------------------ */
-
-/** The opening. One line per tap. */
-export const OPENING = Object.freeze([
-  'Oh. You came.',
-  'I’m Wick. I keep the lamps around here.',
-  'This is your village. A house, a reading house, and Mira across the way.',
-  'Mira needs a Book for the school. Ada binds them. Go and see her.',
-]);
-
-export const NAMING = Object.freeze({
-  ask: 'It should have a name. What do we call it?',
-  after: (name) => `${name}. Good. I’ll remember that.`,
-});
-
-export const FIRST_TASK = Object.freeze({
-  offer: 'She needs Pages, and Pages come from reading. Take your time.',
-  during: 'Take your time. Wrong is fine; wrong is how it sticks.',
-  after: 'Now look up.',
-});
-
-export const DAWN = Object.freeze([
-  'There. That was you.',
-  'Deliver them, and the coins are yours.',
-]);
-
-/**
- * A line for coming home, chosen by what is actually true of the village.
- * Order matters: the most useful thing Wick could say wins.
- * @param {object} state the derived world state (with .village)
- * @param {{awayDays?: number, name?: string}} extra
- */
-export function homecoming(state, { awayDays = 0, name = 'the village' } = {}) {
-  const v = state?.village;
-  const deliverable = v?.deliverable?.length ?? state?.readyWorks?.length ?? 0;
-  const ready = v?.readyThings?.length ?? 0;
-  const collect = v?.collectable?.reduce((n, b) => n + (b.helper?.available ?? 0), 0) ?? 0;
-  const due = (state?.rootwood?.dueCount ?? 0) + (state?.meadow?.due ?? 0) + (state?.pond?.due ?? 0) + (state?.thicket?.due ?? 0);
-  const built = v?.levels?.size ?? state?.builds?.length ?? 0;
-
-  if (deliverable > 0) return deliverable === 1 ? 'An order is ready. Somebody’s waiting on it.' : `${deliverable} orders are ready to go.`;
-  if (ready > 0) return ready === 1 ? 'You’ve got enough for something. Come and see.' : `You’ve got enough for ${ready} of them now.`;
-  if (collect > 0) return `${collect} ${collect === 1 ? 'thing was' : 'things were'} made while you were gone. Go and collect.`;
-  if (awayDays >= 7) return `${awayDays} days. The lamps held. Start anywhere.`;
-  if (awayDays >= 2) return due
-    ? `You’ve been away. ${due} ${due === 1 ? 'word is' : 'words are'} asking to be looked at again.`
-    : 'You’ve been away. The village kept.';
-  if (due >= 12) return 'A few things are slipping. Worth catching them today.';
-  if (built <= 2) return 'Pick anywhere. It all counts toward the same thing.';
-  if (built < 5) return `${name} is starting to look like somewhere.`;
-  return 'Quiet day. Good weather for it.';
-}
-
-/**
- * What Wick says the first time the village reaches a new stage. He does
- * not congratulate and he does not explain — he notices, the way someone
- * who lives somewhere notices it changing.
- */
-const STAGE_LINES = Object.freeze({
-  'A hamlet': 'Two chimneys going this morning. Used to be one.',
-  'A village': 'The market was busy when I came past. That is new.',
-  'A busy village': 'Everybody has work. Nobody had work when you got here.',
-  'A town': 'Somebody put a roof up by the river. Word gets round.',
-  'A market town': 'People come here to trade now. I have stopped counting them.',
-  'A town people travel to': 'Somebody on the road asked me the way here. By name.',
-});
-
-export function stageLine(stageName) { return STAGE_LINES[stageName] ?? null; }
 
 /** A line for a place the learner is standing in, said once on arrival. */
 export function atPlace(slug, state) {

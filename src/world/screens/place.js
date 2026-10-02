@@ -47,11 +47,14 @@ export async function renderPlace(outlet, { storage }, params) {
   if (region.slug === 'wilds') return renderWilds(outlet, { storage });
   document.documentElement.setAttribute('data-world', '');
 
+  const arrivedAt = location.hash;
   let world;
   try { world = await loadWorld(storage); } catch (err) {
     outlet.innerHTML = `<section class="place"><div class="place__body" style="padding-top:60px"><h1 class="place__title">This place will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
     return;
   }
+  // Left while it loaded: no place music under the next screen.
+  if (location.hash !== arrivedAt) return;
   const { state, content } = world;
   const atmo = state.atmo;
   const host = petForPlace(region.slug) ?? 'toffee';
@@ -112,6 +115,15 @@ export async function renderPlace(outlet, { storage }, params) {
   const onDown = () => { unlock(); startMusic(region.slug, { hour: atmo.hour, warmth }); startAmbience(region.slug, atmo); };
   window.addEventListener('pointerdown', onDown, { capture: true, once: true });
   startMusic(region.slug, { hour: atmo.hour, warmth }); startAmbience(region.slug, atmo);
+  // The hero is laid out in pixels for this window: lay it out again when the window changes.
+  const onResize = () => {
+    const h = placeHero(host), pet = outlet.querySelector('.place__pet');
+    outlet.querySelector('.place__hero')?.setAttribute('style', h.style);
+    if (h.door && pet) { pet.style.left = `${h.door.x}px`; pet.style.top = `${h.door.y + 14}px`; }
+  };
+  window.addEventListener('resize', onResize);
+  // Leaving takes both listeners: a keyboard learner's first click elsewhere must not start this place's music.
+  window.addEventListener('hashchange', () => { window.removeEventListener('pointerdown', onDown, { capture: true }); window.removeEventListener('resize', onResize); }, { once: true });
 
   /** The sheet's top: who this place is, how far it has come, and the one
    *  thing the curator says to do now. */
@@ -182,7 +194,7 @@ export async function renderPlace(outlet, { storage }, params) {
       gold: r.due >= 5,
     };
     const note = r.met === 0
-      ? `${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through — the valley brings you twelve at a time, some of them inside a real sentence, and brings back the ones that fade.`
+      ? `${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through — the village brings you twelve at a time, some of them inside a real sentence, and brings back the ones that fade.`
       : `${r.known} of ${r.total.toLocaleString()} ${unit} are in memory, ${r.mastered} of them for good.`;
 
     const groups = [...new Set(fields.map((f) => f.group))];
@@ -223,7 +235,7 @@ export async function renderPlace(outlet, { storage }, params) {
     const cta = rec ? {
       href: `#/rc/session/${rec.item.id}`,
       label: rec.item.title,
-      sub: `${STAGE_INFO[rec.item.stage]?.label ?? rec.item.stage ?? ''} · ${rec.item.genre} · ~${rec.item.estimated_time_min} min · ${rec.item.question_count} questions`,
+      sub: `${STAGE_INFO[rec.item.stage]?.label ?? rec.item.stage ?? ''} · ${String(rec.item.genre ?? '').replace(/[-_]+/g, ' ')} · ~${rec.item.estimated_time_min} min · ${rec.item.question_count} questions`,
       gold: rec.kind === 'retry',
     } : null;
     const note = rec?.why || (weakness.weakest ? `Your answers say ${typeName(weakness.weakest)} is the thing to work on.` : '');
@@ -303,7 +315,7 @@ export async function renderPlace(outlet, { storage }, params) {
        Costing one item billed a nine-to-twelve-item timed run as "~1 min". */
     const inSet = rec ? (rec.item.tier ? items.filter((x) => x.tier === rec.item.tier) : [rec.item]) : [];
     const setMins = Math.max(1, Math.round(inSet.reduce((s, x) => s + (x.estimated_time_sec ?? 80), 0) / 60));
-    const tierWord = rec ? String(rec.item.tier ?? '').replace('-', ' ') : '';
+    const tierWord = rec ? String(rec.item.tier ?? '').replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase()) : '';
     head({ pct: v.total ? v.solved / v.total : 0, label: `${v.solved} / ${v.total} solved` },
       rec ? { href: `#/${prefix}/session/${rec.item.tier ?? rec.item.id}`, label: rec.item.title, sub: inSet.length > 1 ? `${tierWord} · ${inSet.length} ${unit} · ~${setMins} min` : `${tierWord} · ~${setMins} min`, gold: rec.kind === 'retry' } : null,
       rec?.why);

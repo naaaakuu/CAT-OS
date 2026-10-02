@@ -17,24 +17,29 @@
  * Rebake after changing PATCHES; tools/check-village-data.mjs fails until
  * the atlas matches.
  */
-import { writeFileSync, existsSync } from 'node:fs';
+import { writeFileSync, existsSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { serveRepo, launchChrome, REPO_ROOT } from './cdp-lite.mjs';
+import { MAP } from '../src/pets/paths.js';
+
+/** Which painting the patches were cut from: a short hash of its bytes. */
+const paintingHash = createHash('sha1').update(readFileSync(join(REPO_ROOT, MAP.src))).digest('hex').slice(0, 12);
 
 const ATLAS_JS = join(REPO_ROOT, 'src/home/motion-atlas.js');
 const ATLAS_PNG = join(REPO_ROOT, 'assets/art/home-motion-v1.png');
 const WIDTH = 1024, GUTTER = 2;
 
 // motion.js imports the atlas module; give a first bake something to import.
-if (!existsSync(ATLAS_JS)) writeFileSync(ATLAS_JS, "export const ATLAS = { src: '', w: 0, h: 0, at: [] };\n");
+if (!existsSync(ATLAS_JS)) writeFileSync(ATLAS_JS, "export const ATLAS = { src: '', painting: '', paintingHash: '', w: 0, h: 0, at: [] };\n");
 
 const server = await serveRepo();
 const browser = await launchChrome({ width: 400, height: 300 });
 try {
-  await browser.open(`${server.url}assets/art/home-world-v1.png`, 600);
+  await browser.open(`${server.url}${MAP.src.replace('./', '')}`, 600);
   const len = await browser.evaluate(`(async () => {
     const { PATCHES, rectOf, maskOf } = await import('/src/home/motion.js');
-    const img = new Image(); img.src = '/assets/art/home-world-v1.png'; await img.decode();
+    const img = new Image(); img.src = ${JSON.stringify(MAP.src.replace('./', '/'))}; await img.decode();
     const rects = PATCHES.map(rectOf);
     // Shelf-pack, tallest first, ${WIDTH} wide with a ${GUTTER} px clear gutter.
     const order = rects.map((r, i) => i).sort((a, b) => rects[b].h - rects[a].h || a - b);
@@ -82,6 +87,7 @@ try {
  */
 export const ATLAS = {
   src: './assets/art/home-motion-v1.png', w: ${meta.w}, h: ${meta.h},
+  painting: '${MAP.src}', paintingHash: '${paintingHash}',
   at: [
 ${meta.at.map((a) => `    [${a.join(', ')}],`).join('\n')}
   ],

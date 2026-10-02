@@ -12,7 +12,7 @@
  * So it lives here now, and every sheet in the app uses the same one.
  */
 
-const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, summary, [tabindex]:not([tabindex="-1"])';
 let seq = 0;
 /* A stack, not a single slot: a sheet can open a sheet, and the second one
    closing must hand focus back to the first, not to whatever came before

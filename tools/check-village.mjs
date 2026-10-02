@@ -59,9 +59,11 @@ try {
   ok(await ev(`[...document.querySelectorAll('.cw-motion .mo > b')].every((b) => b.getAnimations().some((a) => a.playState === 'running'))`), 'a patch of the living painting is standing still');
   ok(await ev(`document.querySelectorAll('.cw-glow--lamp').length >= 20 && getComputedStyle(document.querySelector('.cw-glow--lamp')).opacity > 0`), 'the lamps should glow faintly by day');
 
-  const p0 = await positions(); await sleep(6000); const p1 = await positions();
-  const moved = JSON.parse(p0).filter((t, i) => t !== JSON.parse(p1)[i]).length;
-  ok(moved >= 1, 'no pet moved in six seconds');
+  // Pets choose at random, and every one may idle for a while: wait for any of them to move, up to twenty seconds.
+  const p0 = JSON.parse(await positions());
+  let moved = 0;
+  for (let t = 0; t < 40 && !moved; t += 1) { await sleep(500); moved = JSON.parse(await positions()).filter((x, i) => x !== p0[i]).length; }
+  ok(moved >= 1, 'no pet moved in twenty seconds');
 
   // A pet's card names the pet and starts its real next activity.
   await ev(`document.querySelector('.pet[data-pet="chai"]').click()`);

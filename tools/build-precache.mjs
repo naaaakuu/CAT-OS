@@ -53,26 +53,33 @@ export function shellFiles() {
   for (const icon of ['apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'maskable-512.png']) {
     if (fs.existsSync(path.join(ROOT, 'assets/icons', icon))) out.add(`./assets/icons/${icon}`);
   }
-  // The art pack's sprites: every picture in the village is one of these.
-  for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (name.endsWith('.png')) out.add(`./assets/art/${name}`);
+  // Every picture the app shows. The companion strip is only the pets' bake
+  // input (tools/bake-pets.mjs): 1.5 MB no screen ever draws.
+  for (const name of fs.readdirSync(path.join(ROOT, 'assets/art')).sort()) if (name.endsWith('.png') && !BAKE_ONLY.has(name)) out.add(`./assets/art/${name}`);
   return [...out].sort();
 }
 
-/** Everything a cold open of the village fetches before it can paint. */
+const BAKE_ONLY = new Set(['home-companions-v1.png']);
+
+/** Every stylesheet index.html links: each one blocks the first paint, so each one is core. */
+export function linkedStylesheets() {
+  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  return [...html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g)].map((m) => m[1]);
+}
+
+/** Everything a cold open of the village fetches before it can paint: the page, its
+ *  stylesheets, its eager modules, the painting and the six pets that live on it. */
 export function coreFiles() {
   const { modules } = eagerGraph('src/app.js');
   const js = [...modules.keys()].sort().map((rel) => `./${rel}`);
+  const pets = fs.readdirSync(path.join(ROOT, 'assets/art')).filter((n) => /^pet-[a-z]+.png$/.test(n)).sort().map((n) => `./assets/art/${n}`);
   return [
     './',
     './index.html',
     './manifest.webmanifest',
-    './src/ui/styles/tokens.css',
-    './src/ui/styles/base.css',
-    './src/ui/styles/components.css',
-    './src/ui/styles/game.css',
-    './src/ui/styles/world.css',
+    ...linkedStylesheets(),
     './assets/art/home-world-v1.png',
-    './assets/art/home-companions-v1.png',
+    ...pets,
     './content/boot-index.json',
     './assets/icons/icon-192.png',
     './assets/icons/icon-512.png',

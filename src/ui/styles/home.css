@@ -299,16 +299,39 @@
 .cw-toast {
   position: absolute; z-index: 12; left: 50%; top: calc(max(12px, env(safe-area-inset-top)) + 60px);
   translate: -50% -14px; opacity: 0; pointer-events: none; transition: opacity 0.3s, translate 0.3s var(--ease-out);
-  max-width: min(92vw, 420px);
+  /* Its own width: left:50% alone gives it half the screen, and "+1 leaf from
+     Matcha" broke into a two-by-two grid. */
+  width: max-content; max-width: min(92vw, 420px);
 }
+.cw:has(.cw-overlay.is-open) .cw-toast { opacity: 0; pointer-events: none; }
 .cw-toast.is-in { opacity: 1; translate: -50% 0; pointer-events: auto; }
 .cw-toast p {
   margin: 0; display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 16px;
   background: var(--color-surface); color: var(--color-ink); font-size: 14px; line-height: 1.35;
   box-shadow: 0 10px 30px rgba(30, 24, 12, 0.28);
 }
-.cw-letter { display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 0; text-align: left; min-height: 44px; }
-.cw-letter .pet-sprite { margin: -6px 0; }
+/* A letter waits pinned to the notice board, and stirs now and then. */
+.cw-envelope {
+  position: absolute; width: 56px; height: 48px; margin: -24px 0 0 -28px; padding: 0; border: 0; border-radius: 10px; background: none;
+  display: grid; place-items: center; filter: drop-shadow(0 3px 3px rgba(40, 28, 12, 0.35)); transform-origin: 50% 0;
+  animation: cw-letter 4.5s ease-in-out infinite;
+}
+.cw-envelope svg { width: 40px; height: 30px; }
+.cw-envelope:focus-visible { outline: 3px solid var(--honey); outline-offset: 2px; }
+@keyframes cw-letter { 0%, 70%, 100% { rotate: 0deg; } 76% { rotate: -6deg; } 84% { rotate: 5deg; } 92% { rotate: -2deg; } }
+
+/* Someone who needs a visit is off the edge of the screen: a chip at that
+   edge, the arrow turned toward them. */
+.cw-edge {
+  position: absolute; z-index: 9; translate: -50% -50%; display: flex; align-items: center; gap: 2px;
+  min-width: 48px; min-height: 48px; padding: 3px 8px 3px 4px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-line-strong) 70%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent); color: var(--color-ink-2);
+  box-shadow: 0 6px 22px rgba(30, 24, 12, 0.24);
+}
+.cw-edge[hidden] { display: none; }
+.cw-edge .pet-sprite { margin: -4px 0 -2px; }
+.cw-edge i { width: 0; height: 0; margin-left: 2px; border: 6px solid transparent; border-left: 9px solid var(--color-ink-2); border-right: 0; rotate: var(--turn, 0rad); }
 
 /* ---------------- Cards ---------------- */
 .cw-overlay { position: absolute; inset: 0; z-index: 30; }
@@ -340,6 +363,12 @@
 .cw-card__pet { position: relative; z-index: 1; margin-bottom: -26px; filter: drop-shadow(0 6px 6px rgba(30, 24, 12, 0.3)); animation: cw-breathe 3.4s ease-in-out infinite; }
 @keyframes cw-breathe { 50% { translate: 0 -3px; } }
 .cw-card--cottage .cw-card__hero { height: 120px; }
+/* A card's painted crop keeps the map's hour: the same multiply wash. */
+.cw-card__hero::before { content: ""; position: absolute; inset: 0; border-radius: inherit; mix-blend-mode: multiply; pointer-events: none; }
+.cw[data-hour="dawn"] .cw-card__hero::before { background: rgba(246, 196, 186, 0.5); }
+.cw[data-hour="dusk"] .cw-card__hero::before { background: rgba(244, 150, 104, 0.62); }
+.cw[data-hour="night"] .cw-card__hero::before { background: rgba(46, 60, 112, 0.8); }
+.cw-wish__any { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--color-surface-3); color: var(--honey-ink); font-size: 18px; }
 .cw-eyebrow { margin: 24px 0 4px; font: 650 11px/1.3 var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ink-3); }
 .cw-card--hearth .cw-eyebrow, .cw-card--satchel .cw-eyebrow { margin-top: 6px; }
 .cw-card__name { margin: 0 0 10px; font: 400 29px/1.1 var(--font-display); letter-spacing: -0.01em; padding-right: 44px; }
@@ -562,3 +591,8 @@ html[data-reduced-motion] .place__pet { animation: none; }
 .cottage__line { margin: -4px 0 16px; color: var(--color-ink-2); font-size: var(--text-sm); }
 :root[data-theme="dark"] .cottage__hero, :root[data-theme="dark"] .tower__hero { filter: brightness(0.65) saturate(0.85); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cottage__hero, :root:not([data-theme="light"]) .tower__hero { filter: brightness(0.65) saturate(0.85); } }
+
+/* A verbal room's bar names its host: "Ginger · Jumble 2 of 12". */
+.session-bar__count { display: inline-flex; align-items: center; gap: 6px; }
+.session-bar__count .pv-host b { font-weight: 600; }
+.session-bar__count .pv-host::after { content: "·"; margin-left: 6px; color: var(--color-ink-3); }

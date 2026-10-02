@@ -1989,57 +1989,36 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
 
 
 /* ------------------------------------------------------------------ */
-/* 17. The companion, the first five minutes, and the map that reads   */
+/* 17. The welcome, the map that reads, and the art   */
 /* ------------------------------------------------------------------ */
 
-console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins · feedback)');
+console.log('\n17. The welcome, the map and the art (companion · pins · art · feedback)');
 {
   const before = problems.length;
   const companion = await mod('src/world/companion.js');
   const regions = await mod('src/world/regions.js');
-  const growth = await mod('src/world/growth.js');
 
-  /* ---- Wick's voice ---- */
+  /* ---- What a place says on arrival ----
+     2.x linted Wick's whole script here. Wick is gone; the pets' own lines
+     are linted by check-pets in §16. What is left of the old voice is the
+     one line a place says when its host has nothing of its own. */
   {
     const b0 = problems.length;
-    const lines = [
-      ...companion.OPENING,
-      companion.NAMING.ask, companion.NAMING.after('Alder Hollow'),
-      companion.FIRST_TASK.offer, companion.FIRST_TASK.during, companion.FIRST_TASK.after,
-      ...companion.DAWN,
-      // Every line he says when the valley becomes something else.
-      ...growth.VALLEY_STAGES.map((st) => companion.stageLine(st.name)).filter(Boolean),
-    ];
-    // The one character who speaks must never sound like a study app.
-    const banned = /\b(study|revise|practice makes|well done|great job|awesome|congratulations|score|XP|streak|level up|unlocked)\b/i;
-    for (const l of lines) {
-      if (typeof l !== 'string' || !l.trim()) bad('companion: an empty line in Wick’s script');
-      else if (banned.test(l)) bad(`companion: Wick says a forbidden word — "${l}"`);
-      else if (l.length > 96) bad(`companion: a line too long to read in one breath — "${l.slice(0, 40)}…"`);
-      else if ((l.match(/!/g) ?? []).length) bad(`companion: Wick does not exclaim — "${l}"`);
-    }
-    if (companion.OPENING.length < 4) bad('companion: the opening is too short to introduce a world');
-    // A valley that changes in silence is a number going up.
-    for (const st of growth.VALLEY_STAGES.slice(1)) {
-      if (!companion.stageLine(st.name)) bad(`companion: the valley becomes "${st.name}" and nobody says anything`);
-    }
-    if (companion.WICK.name !== 'Wick') bad('companion: the companion has been renamed without the docs');
-
-    /* Homecoming answers the state it is given, never nothing. */
-    const empty = { readyWorks: [], rootwood: { dueCount: 0 }, meadow: { due: 0 }, pond: { due: 0 }, thicket: { due: 0 }, builds: [] };
-    if (!companion.homecoming(empty, { awayDays: 0, name: 'Alder Hollow' })) bad('companion: homecoming says nothing on a quiet day');
-    if (!companion.homecoming({ ...empty, readyWorks: [{}, {}] }, {})) bad('companion: homecoming ignores works that are ready');
-    const away = companion.homecoming(empty, { awayDays: 9, name: 'Alder Hollow' });
-    if (!/\b9\b/.test(away)) bad('companion: a long absence is not acknowledged');
-    if (/\b(should|must|need to|don’t forget)\b/i.test(away)) bad('companion: Wick nags about being away');
-
-    /* Every place has a line, so no place is ever silent. */
+    const banned = /(study|revise|practice makes|well done|great job|awesome|congratulations|score|XP|streak|level up|unlocked|wrong|failure|failed|mistake|poor|weak|bad|careless)/i;
+    let n = 0;
     for (const r of regions.REGIONS) {
       if (r.kind !== 'learn' && r.slug !== 'hearth' && r.slug !== 'wilds') continue;
       if (r.inQuarter) continue;
-      if (!companion.atPlace(r.slug, { readyWorks: [] })) bad(`companion: nothing to say at ${r.slug}`);
+      for (const st of [{}, { pets: { nextTreasure: { affordable: true } } }]) {
+        const l = companion.atPlace(r.slug, st);
+        if (!l) { bad(`a place says nothing on arrival: ${r.slug}`); continue; }
+        n += 1;
+        if (banned.test(l)) bad(`a place says a banned word — "${l}"`);
+        if (/!/.test(l)) bad(`a place exclaims — "${l}"`);
+        if (l.length > 96) bad(`a place line is too long to read in one breath — "${l.slice(0, 40)}…"`);
+      }
     }
-    if (problems.length === b0) ok(`Wick speaks ${lines.length} lines, all in register, and has something to say at every place`);
+    if (problems.length === b0) ok(`every place has a line on arrival (${n} checked), all in register`);
   }
 
   /* ---- Naming a valley ---- */
@@ -2111,7 +2090,7 @@ console.log('\n17. Wick, the welcome, and the map (companion · awaken · pins �
     if (problems.length === b0) ok('the answer screen shows a verdict, a reason and one trap; the teardown is one tap away');
   }
 
-  if (problems.length === before) ok('the companion, the welcome, the map and the feedback all hold');
+  if (problems.length === before) ok('the welcome, the map, the art and the feedback all hold');
 }
 
 

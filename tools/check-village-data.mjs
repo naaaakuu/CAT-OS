@@ -39,6 +39,10 @@ for (const a of homeNodes) for (const b of homeNodes) if (a !== b) ok(route(a, b
   PATCHES.forEach((p, i) => { const r = rectOf(p), a = ATLAS.at[i] ?? []; ok(a[0] === r.x && a[1] === r.y && a[2] === r.w && a[3] === r.h, `motion patch ${i} (${p.k}) moved since the bake: run node tools/bake-motion.mjs`); });
   const png = readFileSync(new URL(`../${ATLAS.src.replace('./', '')}`, import.meta.url));
   ok(png.readUInt32BE(16) === ATLAS.w && png.readUInt32BE(20) === ATLAS.h, `${ATLAS.src} is not the ${ATLAS.w}×${ATLAS.h} atlas motion-atlas.js describes`);
+  // Cut from THIS painting: a repainted village under an old atlas would animate pieces of a picture that is gone.
+  const { createHash } = await import('node:crypto');
+  const sha = createHash('sha1').update(readFileSync(new URL(`../${MAP.src.replace('./', '')}`, import.meta.url))).digest('hex').slice(0, 12);
+  ok(ATLAS.painting === MAP.src && ATLAS.paintingHash === sha, `the motion atlas was cut from ${ATLAS.painting} (${ATLAS.paintingHash}), the village paints ${MAP.src} (${sha}): run node tools/bake-motion.mjs`);
 }
 
 if (!process.argv.includes('--graph')) {

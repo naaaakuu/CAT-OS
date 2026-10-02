@@ -45,11 +45,13 @@ export function petBlock(c, { compact = false, lead = '' } = {}) {
 export function giftLines(c) {
   const p = PET_BY_ID.get(c?.pet);
   if (!p || !c.gifts) return '';
-  const n = c.gifts[p.gift] ?? 0;
   const g = GIFTS[p.gift];
-  const word = n === 1 ? cap(g.one) : g.name;
-  // Any other gift moving in the same run can only be the day's wish bonus.
+  // Any other gift moving in the same run can only be the day's wish bonus,
+  // which paid one of every gift, this pet's own included: count it there,
+  // so the pet's line is what the run made (what the village's toast says).
   const others = GIFT_KEYS.filter((k) => k !== p.gift && (c.gifts[k] ?? 0) > 0);
+  const n = Math.max(0, (c.gifts[p.gift] ?? 0) - (others.length ? 1 : 0));
+  const word = n === 1 ? cap(g.one) : g.name;
   if (!n && !others.length) return '';
   const sup = PET_BY_ID.get(supplierOf(p.id));
   const supGift = sup ? GIFTS[sup.gift].name.toLowerCase() : '';
@@ -57,8 +59,9 @@ export function giftLines(c) {
   const tName = t ? t.name.replace(/^(The|A) /, '').replace(/^./, (x) => x.toLowerCase()) : '';
   return `
     <p class="pvwin__line"><span class="sr-only">${n} ${escapeHTML(word)} from ${p.name}.</span><span class="pvwin__chip" data-to="${n}" aria-hidden="true">${giftIcon(p.gift, 26)}<b>+<span data-n>0</span></b></span> <span aria-hidden="true">${escapeHTML(word)} from ${p.name}</span></p>
-    ${others.length ? `<p class="pvwin__more">All three wishes done: one of every gift. <span class="pvwin__minis" aria-hidden="true">${others.map((k) => `<span class="pvwin__chip pvwin__chip--mini" data-to="${c.gifts[k]}">${giftIcon(k, 16)}<b>+<span data-n>0</span></b></span>`).join('')}</span></p>` : ''}
+    ${others.length ? `<p class="pvwin__more">All three wishes done: one of every gift. <span class="pvwin__minis" aria-hidden="true">${[p.gift, ...others].map((k) => `<span class="pvwin__chip pvwin__chip--mini" data-to="${k === p.gift ? 1 : c.gifts[k]}">${giftIcon(k, 16)}<b>+<span data-n>0</span></b></span>`).join('')}</span></p>` : ''}
     ${c.doubled && sup ? `<p class="pvwin__ring">${sup.name}’s ${supGift} ${sup.gift === 'stardust' ? 'was' : 'were'} fresh: double ${g.name.toLowerCase()}.</p>` : ''}
+    ${c.doubled === false && sup ? `<p class="pvwin__ring pvwin__ring--low">${sup.name} ${sup.gift === 'stardust' ? 'has run low on stardust' : `has run low on ${supGift}`}. A visit to ${sup.name} doubles ${p.name}’s ${g.name.toLowerCase()} next time.</p>` : ''}
     ${c.heart ? `<p class="pvwin__heart"><span aria-hidden="true">♥</span> A new heart with ${p.name}.</p>${STORIES[p.id]?.[c.hearts - 1] ? `<p class="pvwin__story"><i>${escapeHTML(STORIES[p.id][c.hearts - 1])}</i></p>` : ''}` : ''}
     ${t ? `<p class="pvwin__treasure">There is enough for the ${escapeHTML(tName)}. <a href="#/world">Make it from your satchel in the village.</a></p>` : ''}`;
 }
