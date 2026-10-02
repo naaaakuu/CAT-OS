@@ -4,6 +4,198 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.0.0 — The pet village (2026-10-02)
+
+The owner found the app too complex:
+- a painted home at `#/world` with a second, older sprite village behind it;
+- three visual languages: the painted home; the 3D-sprite village, places
+  and rounds; and plain studio settings and progress;
+- a home crowded with signs, a dock, a header and zoom buttons;
+- DILR and Quant buildings this app does not have;
+- mascots that never moved;
+- an economy (goods → crafts → orders → coins → buildings) hidden on the
+  second map.
+
+The brief:
+- keep the painted look and the six mascots;
+- make it calmer and cleaner, but alive in every small detail;
+- give each VARC subject a pet that walks, talks and interacts;
+- make the village suffer when any one subject is neglected;
+- build an economy that keeps people coming back ("use all the tricks");
+- make every other screen belong to the game.
+
+The owner approved the design (`docs/superpowers/specs/2026-10-02-pet-village-design.md`)
+and chose the pets' names. Then, on seeing it, said the map still felt like a
+static image, so the painting itself was made to move.
+
+### One village, six pets
+
+- **`#/world` is the painting, full-bleed, with three small things on it:**
+  Toffee's flame and the village name, the satchel and the cottage, and
+  today's wishes. There are no signs, no dock and no zoom buttons. The map
+  pans by drag, wheel and arrow keys, and zooms by pinch or ctrl+wheel.
+  `#/world/village` redirects here.
+- **Six pets, one per subject:**
+  - **Toffee** (flame): CAT pace, the Gauntlet, and the village fire
+  - **Chai** (owl): Reading
+  - **Matcha** (sprout): Vocabulary
+  - **Mochi** (pebble): Para summary and completion
+  - **Ginger** (fox): Para jumbles and placement
+  - **Mallow** (cloud): Odd one out
+
+  Each lives in a building already in the painting.
+- **The pets' life on the map:**
+  - they hop-walk a traced path graph (`src/pets/paths.js`) to the plaza,
+    the benches, the fire, the dock and each other's doors;
+  - they blink, chat in pairs (some of it real gossip about who needs a
+    visit), carry their gift to the next pet in the ring, and walk home to
+    sleep at night;
+  - they react with a hop and hearts when tapped;
+  - how far and how often they wander is their mood.
+- **Five frames per pet** (idle, blink, happy, talk, sleep) were baked from
+  the original art by `tools/bake-pets.mjs`. No new artwork was drawn.
+- **Buildings have jobs.** Tap a pet's home for its card. Your cottage holds
+  sound, your village name and the other rooms. The clock tower is Progress,
+  and its painted face keeps real time.
+
+### The living painting
+
+The things already painted in the village move now. Each is a patch cut out
+of the painting with its edge feathered, so at rest it is pixel-identical to
+what lies beneath it. This was checked patch by patch: the largest
+difference in any channel is 1.
+
+- **Turning:**
+  - the workshop gear and its two wheels turn in their own tilted planes;
+  - the armillary sphere turns;
+  - the telescope pans now and then (more often after dark).
+- **Water:**
+  - the falls at the left edge run, as do the pond's outflow and the stream
+    under the clock-tower bridge;
+  - the pond drifts and six lily pads bob.
+- **Cloth and trees:**
+  - the clock tower's banners wave;
+  - the greenhouse bunting and both awnings stir, and the patio umbrella
+    rocks;
+  - eleven canopies, the plaza tree among them, sway as a gust crosses the
+    map from the west, harder in the rain.
+- **Fire, smoke and light:**
+  - the campfire flickers;
+  - the cottage's painted wisp of smoke rises;
+  - smoke pours continuously from all four chimneys and the teapot steams;
+  - every painted lamp and lantern (25) breathes a warm halo: faint by day,
+    full at dusk and night. Their coordinates were re-read from the
+    painting, and four had been 10 to 15 px off.
+
+The cut-outs are baked into one atlas, `assets/art/home-motion-v1.png`, by
+`tools/bake-motion.mjs`. A CSS mask did the same job, but each masked
+element is its own render pass on every frame. On an Intel HD 520,
+thirty-six of them took the desktop village at dusk from 33 ms to 50 ms a
+frame. With the alpha baked in and the halos on plain alpha instead of a
+blend mode, it holds a 16.7 ms median, phone and desktop. Reduced motion
+mounts none of it.
+
+### An economy where every subject matters
+
+All of it is derived from learning records. The one new record kind is
+`village-treasure`. Existing learners keep their history.
+
+- **Mood.** Each pet has a mood from how recently and how well its subject
+  was practised: glowing, happy, missing you, sleepy, wilting. A pet you have
+  not met yet is never sad.
+- **The gift ring:** Matcha → Chai → Mochi → Ginger → Mallow → Toffee →
+  Matcha. Each pet makes gifts twice as fast while the pet before it is
+  happy, so a neglected subject slows its neighbour. Through harmony, it
+  slows the whole village: the lanterns, the fire, the fireflies and the
+  music all follow it.
+- **Friendship.** Five hearts per pet, each unlocking a line of that pet's
+  story.
+- **Nine treasures, made in order:** plaza lanterns, bunting, flower boxes,
+  firefly jars, the swing, wind chimes, a kite, lily-pad lights and
+  sky-lantern night. Each is drawn on the map. The recipes mix several pets'
+  gifts, and the later ones need all six.
+- **Reasons to come back** (the owner asked for them; THE WORLD A11 records
+  that this overrides the old ban on retention hooks):
+  - three daily wishes aimed at the neediest pet. Granting all three pays an
+    extra gift from every pet;
+  - Toffee's flame, the daily run, protected by kindling;
+  - a letter from the pet who missed you most after a day away;
+  - a thought bubble over whoever needs you;
+  - festival nights when everyone is happy;
+  - a celebrating pet and a toast every time you return from a run.
+
+### Every screen hosted by its pet
+
+- **One palette:** warm cream, village sage, honey and terracotta, plus a
+  forest-night dark theme. `tokens.css`, `world.css` and `game.css` agree.
+- **Every learning route sets `html[data-host]`.** Rooms stand in a soft
+  painted crop of the host's home instead of a canvas scene. The run bars
+  of a reading run, a word round and the Gauntlet carry a host chip.
+- **Place screens** show the host pet standing at its own painted door
+  (`placeHero()` frames the screen on the door and says where it lands).
+  The host greets you.
+- **Results** show:
+  - the pet celebrating the gifts it made;
+  - the ring bonus;
+  - any new heart and its story line;
+  - a treasure that just became affordable.
+
+  Every room's last button is "Back to the village", where the pet hops
+  and a toast names the gifts ("+2 Notes from Mochi · doubled by the ring").
+  Toured in a real browser with one finished run in each of eight rooms.
+- **Progress is the clock tower,** with six pet rows. **Settings is your
+  cottage. Records are kept by Toffee.** The bottom rail is Village ·
+  Progress · Cottage.
+
+### Fixed on the way
+
+- **Dialog focus.** A dialog opened and closed within one frame left focus
+  on a card about to hide. `ui/modal.js` focused it a frame late, after
+  Escape had already handed focus back. This was the flaky "did not give
+  focus back" in check-village.
+- **Pet placement.** A place screen pinned its pet at 44% of the screen
+  height, so Chai stood on the greenhouse roof 190 px below her own door.
+  The pet's breathing also animated the same `translate` that centred it,
+  so it drifted by half its width on every breath.
+- **Hidden text and boxes:**
+  - the place sheet's grip covered its first line;
+  - a new learner's Progress band was 0 px wide;
+  - the Records rows ran 42 px off a phone.
+- **Rooms that skipped the welcome.** The Loom, the Table, the Bench, the
+  Terraces and the banks ended on "Back to the world", which skipped the
+  village and its welcome.
+- **Contrast.** The room intros' small asides sat on the painted stage at
+  4.3:1. They now use the second ink.
+
+### Removed
+
+The canvas village and everything only it used:
+- `src/village/`: the renderer, scene, terrain, life, grove, art bank, the
+  village derivation, and both screens;
+- `village.css`, the old menu (`world/menu.js`) and `home-world.css`;
+- the goods, coins, orders, neighbours and stages in `world/economy.js` and
+  `world/icons.js`;
+- the 2.2 Cute Nature sprites and Wick's frames that nothing referenced (61
+  PNGs). The plant stills `<cat-plant>` uses are kept.
+
+In all, 77 files and about 5,550 lines. The cold open is 51 modules / 538 KB.
+
+### Gates
+
+| Section | What it checks now |
+|---|---|
+| §16 | Derives the pets (`tools/check-pet-economy.mjs`, `tools/check-pets.mjs`) |
+| §17 | Checks the painting and the six sheets |
+| §22 | Reads the village's button colours from `home.css` |
+| §23 | `tools/check-village-data.mjs`: the path graph, sampled against the painting's own pixels. It also fails if the motion atlas is staler than its patches |
+| §23b | `tools/check-village.mjs`: six pets walking, the painting moving (and absent with reduced motion), the lamps lit, cards, focus, a treasure made, night, phone width, offline |
+| §24 | Now walks into the reading result screen; light and dark both clear AA. Its in-page steps wait for their control instead of failing a slow load |
+| §29 | Ran again: the 3.0 rewrite had dropped the two exports verify reads, and the section crashed |
+| §30 | Comes back to the village the way a learner does: one navigation, not a navigate-and-reload whose unseen first render used the greeting up |
+| check-reach | Opens the cottage card instead of the old menu |
+| check-interruption | Checks the satchel |
+| check-hostile-records | Puts broken treasure records through the pets |
+
 ## 2.2.0 — One art pack, and nothing drawn by hand (2026-09-29)
 
 The owner supplied a new art pack ("Cute Nature — study garden") and asked

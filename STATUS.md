@@ -4,13 +4,37 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-09-29 — 2.2.0, one art pack. Every picture in the village is a sprite from the "Cute Nature" pack (`assets/art/`); the hand-drawn canvas art — people, animals, the river, the effects, the glyph icons — is deleted. The Hearth and the Reading House are the pack's houses; the Word Garden, the Root Workshop, the Loom and the Market are open-air yards built from its props; Wick is the pack's cat; the interface follows the pack's studio design. No content changed. App version 2.2.0._
+_Last updated: 2026-10-02 — 3.0.0, the pet village. One painted village replaces the canvas village. Six pets live in it, one per VARC subject (Toffee, Chai, Matcha, Mochi, Ginger, Mallow). Their moods, the gift ring, friendship, nine treasures, daily wishes, Toffee's flame and letters are all derived from learning records; the one new record kind is `village-treasure`. The painting itself moves: 36 pieces of it, cut out pre-feathered. Every other screen is hosted by its pet. The canvas village, its art and its economy are deleted. App version 3.0.0._
+
+_2.2.0 — one art pack. Every picture in the village is a sprite from the "Cute Nature" pack (`assets/art/`); the hand-drawn canvas art — people, animals, the river, the effects, the glyph icons — is deleted. The Hearth and the Reading House are the pack's houses; the Word Garden, the Root Workshop, the Loom and the Market are open-air yards built from its props; Wick is the pack's cat; the interface follows the pack's studio design. No content changed. App version 2.2.0._
 
 _2.1.4 — the screens no gate could see. The Gauntlet's question had been rendering at 1.14:1 in both themes and "Re-read the passage" sat two pixels tall above the top of a scroll container: neither is a route, and §24 only opened routes, so a route may now carry the taps that reach a state. Importing a backup was a confirm() whose CANCEL performed a merge — it is the app's own sheet now, a merge no longer renames the village, and Settings repaints afterwards. A resting item is declined rather than re-served. App version 2.1.4._
 
 _2.1.3 — the interruption pass. Every engine now carries a run across a refresh: Para Jumbles, Para Summary, Odd One Out and Word DNA joined the reading run and the banks, a draft cannot claim a mark, and a draft counts time on task, so a set left overnight is no longer recorded as an eight-hour set that failed its pace. A settled skill that goes quiet comes back to the curator once. Callouts for buildings out of view pin to the edge of the frame instead of vanishing. One new gate (§30) drives all of it in a real browser. App version 2.1.3._
 
 _2.1.2 — the polish, reliability and systems-hardening pass. Dark mode is a designed theme rather than an inverted light one (78 rendered-contrast failures → 0). The service worker installs in resumable batches and promotes transactionally, so a failed upgrade costs nothing and a content bump no longer deletes a 435-file library. The cold open is 55 modules, not 153. A tree was standing in the river; the map is validated as data now and as a running scene. The ledgers that had been counting for two releases speak to a learner in four places. Nobody had ever pressed Tab. 90+ defects found and fixed, each reproduced in a real browser. Six new gates (§23, §23b, §24, §26, §27, §28). App version 2.1.2._
+
+## What changed in 3.0.0 (the pet village)
+
+| Area | State | Notes |
+|---|---|---|
+| **The village** (`#/world`) | **shipped (3.0.0)** | One painting, full-bleed. Drag, wheel and arrow-key pan; pinch and ctrl+wheel zoom. Three pieces of chrome: the flame, the satchel and cottage, and today's wishes. `#/world/village` redirects here |
+| **The living painting** | **shipped (3.0.0)** | 36 patches cut from the painting, pre-feathered in `assets/art/home-motion-v1.png` (`tools/bake-motion.mjs`) and pixel-identical at rest. They turn the gear and wheels, run the water, stir the cloth and sway eleven trees. 25 painted lamps breathe a halo. Chimney smoke and teapot steam. 16.7 ms median frame on an Intel HD 520, phone and desktop |
+| **Six pets** | **shipped (3.0.0)** | Five baked frames each. They walk the traced path graph, blink, chat, carry gifts round the ring, sit by the fire and sleep at night. Mood sets how far they wander. Reduced motion keeps them at home |
+| **The economy** | **shipped (3.0.0)** | Everything is derived on load (`src/pets/economy.js`): mood with a 36 h half-life, the gift ring with doubling, harmony, five hearts with story lines, three daily wishes, the flame with kindling, letters after a day away, festival nights, and nine treasures made in order. Existing learners keep their history: past runs become gifts and friendship |
+| **Hosted screens** | **shipped (3.0.0)** | Every lesson stands in a painted crop of its host's home; reading runs, word rounds and the Gauntlet carry a host chip. Place screens show the host at its own door. Results show the pet, the gifts counted up, the ring bonus, a new heart and a makeable treasure, and every room ends "Back to the village". Progress is the clock tower, Settings the cottage, Records kept by Toffee |
+| **One palette** | **shipped (3.0.0)** | Warm cream, sage, honey and terracotta; forest-night dark theme. `tokens.css`, `world.css` and `game.css` agree. AA in both themes, rendered result screen included |
+| **The canvas village** | **removed (3.0.0)** | `src/village/` (13 files), `village.css`, the old menu and `home-world.css`, the Cute Nature sprites nothing used (61 PNGs), and the goods, coins and orders economy. The plant stills `<cat-plant>` draws are kept |
+
+### Known and not yet addressed (3.0.0)
+
+| Item | Why it matters |
+|---|---|
+| The motion atlas is 600 KB | It loads after the village paints and is invisible until it does, but it is in the precache, so a first install downloads it |
+| Pets idle on a slow device | The life loop clamps each frame to 50 ms, so at a few frames a second the pets move in slow motion. Fine on a phone; a very slow machine sees them dawdle |
+| The Wick voice still lives in `companion.js` | verify §17 still lints it, so it was kept; nothing in the app says those lines any more |
+| Arguments (6 items) and Paragraph Completion (27) still run dry quickly | Unchanged from 2.x; the pets now send learners there sooner |
+| The Mirror Pond and Vine Terraces word-bank shelves have no content | Unchanged from 2.x |
 
 ## What changed in 2.2.0 (the art pack)
 
