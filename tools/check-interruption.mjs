@@ -310,6 +310,10 @@ if (LOUD) console.log('\n3. The satchel never shows more than was earned, and a 
   }
 }
 
+// verify.mjs §29 reads these.
+export const cases = { drafts: draftCases, records: 11 };
+export const interruptionProblems = problems;
+
 if (LOUD) {
   console.log(`\n${problems.length ? '✗ ' + problems.length + ' problem(s)' : '✓ a hostile draft and a hostile record log take nothing down'}\n`);
   process.exit(problems.length ? 1 : 0);

@@ -34,7 +34,7 @@ export function renderCard(card, kind, arg, api) {
 }
 
 const close = '<button class="cw-x" data-close aria-label="Close">×</button>';
-const hearts = (n) => `<span class="cw-hearts__row" aria-hidden="true">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < n ? 'on' : ''}">♥</i>`).join('')}</span>`;
+const hearts = (n) => `<span class="cw-hearts__row" aria-hidden="true">${[0, 1, 2, 3, 4].map((i) => (i < n ? '<i class="on">♥</i>' : '<i>♡</i>')).join('')}</span>`;
 const moodBar = (p) => `<div class="cw-mood cw-mood--${p.word}"><span class="cw-mood__bar"><i style="width:${p.isNew ? 30 : Math.max(6, Math.round(p.mood * 100))}%"></i></span><b>${MOOD_LABEL[p.word]}</b></div>`;
 
 /* ------------------------------------------------------------------ */

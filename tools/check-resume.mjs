@@ -197,7 +197,11 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
       await b.evaluate(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init();
         await st.put('learning', { id: 'resume-lex-1', kind: 'lex-round', region: 'meadow', bundle_id: 'x', stars: 3, flawless: false, score: { correct: 11, total: 12 }, finished_at: new Date(Date.now() - 30000).toISOString() });
         sessionStorage.removeItem('world:toasted'); sessionStorage.setItem('world:focus', 'meadow'); return 1; })()`);
-      await b.open(server.url + '#/world', 900);
+      /* Arrive the way a learner does: one in-app navigation. open() also
+         reloads, and its first, unseen render is the visit that greets them —
+         so the reload that a person never makes found the toast already said. */
+      await b.evaluate(`location.hash = '#/world'; 1`);
+      await settled();
       const shown = await (async () => { for (let i = 0; i < 40; i += 1) { if (await b.evaluate(`!!document.querySelector('.cw-toast.is-in')`)) return true; await sleep(200); } return false; })();
       const text = await b.evaluate(`document.querySelector('.cw-toast')?.textContent ?? ''`);
       if (!shown || !/Matcha/.test(text) || !/\+\d/.test(text)) bad(tag + ': coming back from a word round did not name Matcha and the leaves it made (' + JSON.stringify(text) + ')');
@@ -222,6 +226,6 @@ if (process.argv[1]?.endsWith('check-resume.mjs')) {
   if (r.skipped) { console.log('\n!! SKIPPED — no Chrome found. This gate did NOT run.\n'); process.exit(0); }
   for (const n of r.notes) console.log('  · ' + n);
   for (const p of r.problems) console.log('  ✗ ' + p);
-  console.log(`\n${r.problems.length ? '✗ ' + r.problems.length + ' problem(s)' : '✓ four modules resume after a refresh and record what was answered before it; off-screen callouts pin to the edge and bring the village back'}\n`);
+  console.log(`\n${r.problems.length ? '✗ ' + r.problems.length + ' problem(s)' : '✓ four modules resume after a refresh and record what was answered before it; the village greets a finished run once, with its pet and its gifts'}\n`);
   process.exit(r.problems.length ? 1 : 0);
 }

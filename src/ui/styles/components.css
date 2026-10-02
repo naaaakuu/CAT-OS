@@ -1018,7 +1018,8 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .pj-intro__aside, .ps-intro__aside, .ooo-intro__aside {
   font-size: var(--text-xs) !important;
   font-family: var(--font-ui) !important;
-  color: var(--color-ink-3);
+  /* ink-2: small type straight on the painted stage, not on a card (ink-3 measured 4.3:1) */
+  color: var(--color-ink-2);
   border-left: 2px solid var(--color-line-strong);
   padding-left: var(--space-3);
 }
@@ -1846,7 +1847,8 @@ a.list-item:active { transform: scale(var(--press-scale)); }
 .wd-intro__aside {
   font-size: var(--text-xs) !important;
   font-family: var(--font-ui) !important;
-  color: var(--color-ink-3);
+  /* ink-2: small type straight on the painted stage, not on a card (ink-3 measured 4.3:1) */
+  color: var(--color-ink-2);
   border-left: 2px solid var(--color-line-strong);
   padding-left: var(--space-3);
 }

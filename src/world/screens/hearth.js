@@ -77,7 +77,7 @@ export async function renderHearth(outlet, { storage }) {
         return `<a class="friend friend--${p.word}" href="${def.places[0] === 'hearth' ? '#/world/place/wilds' : `#/world/place/${def.places[0]}`}">
           ${petPortrait(def.id, 44, { mood: p.isNew ? 0.3 : p.mood })}
           <span class="friend__lead"><b>${escapeHTML(def.name)}</b><small>${escapeHTML(def.subject)}</small></span>
-          <span class="friend__side"><span class="friend__hearts" aria-label="${p.hearts} of 5 hearts">${'♥'.repeat(p.hearts)}<i>${'♥'.repeat(5 - p.hearts)}</i></span><small>${MOOD_LABEL[p.word]} · ${giftIcon(def.gift, 14)} ${p.gifts}</small></span>
+          <span class="friend__side"><span class="friend__hearts" aria-label="${p.hearts} of 5 hearts">${'♥'.repeat(p.hearts)}<i>${'♡'.repeat(5 - p.hearts)}</i></span><small>${MOOD_LABEL[p.word]} · ${giftIcon(def.gift, 14)} ${p.gifts}</small></span>
         </a>`;
       }).join('')}
     </div>

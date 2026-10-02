@@ -2458,7 +2458,7 @@ console.log('\n29. What a learner left behind (tools/check-interruption.mjs)');
   // draft did not, so all 115 passages shared one draft slot.
   const { interruptionProblems, cases } = await mod('tools/check-interruption.mjs');
   for (const p of interruptionProblems) bad('interruption: ' + p);
-  if (problems.length === before) ok(`${cases.drafts} malformed drafts and ${cases.records} nonsense record sets: nothing thrown, nothing lost, and no order promised that the barn cannot pay`);
+  if (problems.length === before) ok(`${cases.drafts} malformed drafts and ${cases.records} nonsense record sets: nothing thrown, nothing lost, and the satchel never shows more than was earned`);
 }
 
 console.log('\n30. What a learner comes back to (tools/check-resume.mjs — a real browser)');
@@ -2469,16 +2469,15 @@ console.log('\n30. What a learner comes back to (tools/check-resume.mjs — a re
   // Odd One Out and Word DNA, reloads the page, checks the screen is where
   // the learner was (a locked item shows its verdict again; a family
   // interrupted between Predict and Apply picks up at the Apply), finishes
-  // the set and reads the record out of IndexedDB. Then it pans the village
-  // until its buildings leave the frame and checks their callouts pin to the
-  // edge — tappable, inside the frame, none overlapping — and that a real
-  // tap on one brings the village back. They used to be opacity:0.
+  // the set and reads the record out of IndexedDB. Then it comes back to the
+  // village from a word round: Matcha smiles, the toast names the leaves, and
+  // a second visit does not say it again.
   const { checkResume } = await mod('tools/check-resume.mjs');
   const r = await checkResume();
   if (r.skipped) console.log('  --  SKIPPED: no Chrome on this machine (set CHROME_PATH). Nobody came back.');
   else {
     for (const p of r.problems) bad('resume: ' + p);
-    if (problems.length === before) ok(`${r.cases} things a learner comes back to, checked on a real screen: four modules resume after a refresh and record what was answered before it; off-screen callouts pin to the edge and bring the village back`);
+    if (problems.length === before) ok(`${r.cases} things a learner comes back to, checked on a real screen: four modules resume after a refresh and record what was answered before it; the village greets a finished run once, with its pet and its gifts`);
   }
 }
 

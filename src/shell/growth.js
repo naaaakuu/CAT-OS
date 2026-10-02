@@ -170,7 +170,7 @@ export async function renderGrowth(outlet, { storage }) {
         <article class="ability petrow petrow--${a.pet?.word ?? 'new'}" data-key="${a.key}">
           <a class="petrow__face" href="${a.href}" aria-label="${escapeHTML(a.name)}: ${escapeHTML(a.cta)}">${petPortrait(a.key, 52, { mood: a.pet ? (a.pet.isNew ? 0.3 : a.pet.mood) : null })}</a>
           <div class="ability__body">
-            <p class="ability__what"><b>${escapeHTML(PET_BY_ID.get(a.key).name)}</b> · ${escapeHTML(a.name)}<span class="petrow__hearts" aria-label="${a.pet?.hearts ?? 0} of 5 hearts">${'♥'.repeat(a.pet?.hearts ?? 0)}<i>${'♥'.repeat(5 - (a.pet?.hearts ?? 0))}</i></span></p>
+            <p class="ability__what"><b>${escapeHTML(PET_BY_ID.get(a.key).name)}</b> · ${escapeHTML(a.name)}<span class="petrow__hearts" aria-label="${a.pet?.hearts ?? 0} of 5 hearts">${'♥'.repeat(a.pet?.hearts ?? 0)}<i>${'♡'.repeat(5 - (a.pet?.hearts ?? 0))}</i></span></p>
             <p class="ability__tier">${escapeHTML(a.tier.name)}</p>
             <p class="ability__line">${a.line}</p>
             <p class="ability__pips" aria-label="Stage ${TIERS.findIndex((t) => t.stage === a.tier.stage) + 1} of ${TIERS.length}">${
