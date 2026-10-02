@@ -55,7 +55,7 @@ export async function renderVillageHome(outlet, ctx) {
           <img class="cw-art" src="${MAP.src}" alt="" draggable="false" decoding="async" fetchpriority="high">
           <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="cw-tint" aria-hidden="true"></div>
-          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l) => glow(l, 'lamp')), ...WINDOWS.map((w) => glow(w, 'win'))].join('')}</div>
+          <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}</div>
           <div class="cw-treasures" aria-hidden="true"></div>
           <svg class="cw-clock" aria-hidden="true" style="left:${CLOCK.x - CLOCK.r}px;top:${CLOCK.y - CLOCK.r}px" width="${CLOCK.r * 2}" height="${CLOCK.r * 2}" viewBox="-10 -10 20 20"><line class="cw-clock__h" x1="0" y1="0" x2="0" y2="-4.6"/><line class="cw-clock__m" x1="0" y1="0" x2="0" y2="-6.8"/><circle r=".9"/></svg>
           <canvas class="cw-life" width="${MAP.w / 2}" height="${MAP.h / 2}" aria-hidden="true"></canvas>
@@ -373,8 +373,9 @@ export async function renderVillageHome(outlet, ctx) {
 /* Markup                                                              */
 /* ------------------------------------------------------------------ */
 
-function glow(p, kind) {
-  return `<i class="cw-glow cw-glow--${kind}" style="left:${p.x}px;top:${p.y}px;--r:${p.r}px"></i>`;
+/** A halo over a painted light; each breathes on its own beat. */
+function glow(p, kind, i) {
+  return `<i class="cw-glow cw-glow--${kind}" style="left:${p.x}px;top:${p.y}px;--r:${p.r}px;--bd:-${((i * 1.37) % 5.2).toFixed(2)}s"></i>`;
 }
 
 function spotsHTML() {

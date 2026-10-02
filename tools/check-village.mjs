@@ -54,6 +54,11 @@ try {
   ok(await ev(`!document.querySelector('.cw-location, .cw-dock, .cw-welcome, .vhud')`), 'old home chrome is back on the map');
   ok(await ev(`document.querySelector('.pet[data-pet="ginger"]').dataset.word === 'new' && document.querySelector('.pet[data-pet="chai"]').dataset.word !== 'new'`), 'pet moods do not follow the records');
 
+  // The painting itself moves: the wheel, the water, the banners, the trees.
+  ok(await waitFor(`document.querySelectorAll('.cw-motion .mo').length >= 30 && document.querySelector('.cw-motion').previousElementSibling?.classList.contains('cw-art')`), 'the living painting did not mount just above the painting');
+  ok(await ev(`[...document.querySelectorAll('.cw-motion .mo > b')].every((b) => b.getAnimations().some((a) => a.playState === 'running'))`), 'a patch of the living painting is standing still');
+  ok(await ev(`document.querySelectorAll('.cw-glow--lamp').length >= 20 && getComputedStyle(document.querySelector('.cw-glow--lamp')).opacity > 0`), 'the lamps should glow faintly by day');
+
   const p0 = await positions(); await sleep(6000); const p1 = await positions();
   const moved = JSON.parse(p0).filter((t, i) => t !== JSON.parse(p1)[i]).length;
   ok(moved >= 1, 'no pet moved in six seconds');
@@ -88,7 +93,7 @@ try {
   // Night: the pets go home to sleep.
   await ev(`localStorage.setItem('catos:hour', 'night')`);
   await browser.open(`${server.url}#/world`, 1500);
-  ok(await waitFor(`[...document.querySelectorAll('.pet')].filter((e) => e.dataset.state === 'sleep' || e.dataset.state === 'doze' || e.dataset.state === 'slump').length >= 4`, 15000), 'pets did not go to sleep at night');
+  ok(await waitFor(`[...document.querySelectorAll('.pet')].filter((e) => e.dataset.state === 'sleep' || e.dataset.state === 'doze' || e.dataset.state === 'slump').length >= 4`, 15000), 'pets did not go to sleep at night: ' + await ev(`JSON.stringify([...document.querySelectorAll('.pet')].map((e) => e.dataset.pet + ':' + e.dataset.state + ':' + e.dataset.word))`));
   ok(await ev(`document.querySelector('.cw').dataset.hour === 'night'`), 'the village is not at night');
 
   // Reduced motion: nobody walks.
@@ -97,6 +102,7 @@ try {
   await browser.open(`${server.url}#/world`, 2500);
   const r0 = await positions(); await sleep(4000); const r1 = await positions();
   ok(r0 === r1, 'pets walked with reduced motion on');
+  ok(await ev(`!document.querySelector('.cw-motion')`), 'the painting moved with reduced motion on');
   ok(await ev(`document.documentElement.scrollWidth <= innerWidth`), 'the phone village scrolls sideways');
   ok(await ev(`window.__catos.errors.length === 0`), 'browser errors: ' + await ev(`JSON.stringify(window.__catos.errors)`));
 

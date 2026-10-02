@@ -53,7 +53,9 @@ export function openModal(card, close, opts = {}) {
   };
   document.addEventListener('keydown', onKey, true);
   card.__keys = onKey;
-  requestAnimationFrame(() => { try { card.focus({ preventScroll: true }); } catch { /* fine */ } });
+  // Only if it is still open: an Escape inside that frame has already handed
+  // focus back, and taking it again would strand it on a card about to hide.
+  requestAnimationFrame(() => { if (card.__keys !== onKey) return; try { card.focus({ preventScroll: true }); } catch { /* fine */ } });
 }
 
 /** Take the listener back off and put focus where it was. Always pair it. */

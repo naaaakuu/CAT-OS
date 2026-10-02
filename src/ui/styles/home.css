@@ -41,8 +41,8 @@
 .cw-map { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; contain: layout style; }
 .cw-art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-user-drag: none; }
 .cw-map > * { position: absolute; }
-.cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets { left: 0; top: 0; width: 100%; height: 100%; }
-.cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures { pointer-events: none; }
+.cw-motion, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets { left: 0; top: 0; width: 100%; height: 100%; }
+.cw-motion, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures { pointer-events: none; }
 .cw-life { image-rendering: auto; }
 .cw-pets { pointer-events: none; }
 .cw-map::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 140px rgba(28, 40, 30, 0.35); }
@@ -59,18 +59,80 @@
 .cw[data-weather="rain"][data-hour="night"] .cw-tint { background: rgba(40, 52, 96, 0.84); }
 .cw[data-weather="fog"] .cw-map::before { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(235, 238, 240, 0.4), rgba(235, 238, 240, 0.12) 60%, rgba(235, 238, 240, 0.3)); }
 
+/* Every painted lamp and lantern breathes a warm halo: faint by day, full
+   at dusk and night. The hour sets the element's opacity; the breath is on
+   ::before, so the two multiply instead of fighting. Plain alpha, not a
+   blend mode: forty-six screen-blended halos cost a frame in two on a weak
+   GPU, and warm light over the painting reads the same. */
 .cw-glow {
   position: absolute; width: calc(var(--r) * 2); height: calc(var(--r) * 2); margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
-  border-radius: 50%; mix-blend-mode: screen; opacity: 0; transition: opacity 2s;
-  background: radial-gradient(circle, rgba(255, 222, 150, 0.95) 0 12%, rgba(255, 182, 96, 0.42) 34%, rgba(255, 160, 80, 0) 70%);
+  border-radius: 50%; opacity: 0; transition: opacity 2s;
 }
-.cw-glow--win { background: radial-gradient(circle, rgba(255, 206, 120, 0.9) 0 18%, rgba(255, 160, 70, 0.32) 45%, rgba(255, 150, 60, 0) 72%); }
-.cw[data-hour="dusk"] .cw-glow { opacity: 0.55; }
-.cw[data-hour="night"] .cw-glow { opacity: 1; animation: cw-flicker 4.6s ease-in-out infinite; }
-.cw[data-hour="night"] .cw-glow:nth-child(3n) { animation-delay: -1.7s; }
+.cw-glow::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 226, 160, 0.86) 0 9%, rgba(255, 186, 100, 0.34) 30%, rgba(255, 160, 80, 0.12) 52%, rgba(255, 150, 70, 0) 70%);
+  animation: cw-breath 5.2s ease-in-out var(--bd, 0s) infinite;
+}
+.cw-glow--win::before { background: radial-gradient(circle, rgba(255, 214, 140, 0.78) 0 16%, rgba(255, 170, 80, 0.26) 44%, rgba(255, 150, 60, 0) 72%); animation: none; }
+.cw-glow--lamp { opacity: 0.26; }
+.cw[data-hour="dawn"] .cw-glow--lamp { opacity: 0.5; }
 .cw[data-hour="dawn"] .cw-glow--win { opacity: 0.35; }
+.cw[data-hour="dusk"] .cw-glow--lamp { opacity: 0.8; }
+.cw[data-hour="dusk"] .cw-glow--win { opacity: 0.55; }
+.cw[data-hour="night"] .cw-glow { opacity: 1; }
+.cw[data-hour="night"] .cw-glow--win:nth-child(3n)::before { animation: cw-flicker 4.6s ease-in-out var(--bd, 0s) infinite; }
 .cw.is-festival[data-hour="night"] .cw-glow { filter: saturate(1.3); }
+@keyframes cw-breath { 0%, 100% { opacity: 0.7; scale: 0.9; } 50% { opacity: 1; scale: 1.07; } }
 @keyframes cw-flicker { 0%, 100% { opacity: 1; } 45% { opacity: 0.86; } 52% { opacity: 0.96; } 70% { opacity: 0.9; } }
+
+/* ---------------- The living painting (src/home/motion.js) ----------------
+   Patches cut from the painting itself (pre-feathered in home-motion-v1.png),
+   pixel-identical at rest, moved only by transform, opacity and filter. */
+.cw-motion { pointer-events: none; --wind: 1; }
+.cw-motion[data-weather="rain"] { --wind: 1.7; }
+.mo { position: absolute; }
+.mo > b { position: absolute; inset: 0; background-repeat: no-repeat; will-change: transform; }
+.mo--spin > b { animation: mo-spin var(--t) linear infinite; }
+.mo--flow > b { animation: mo-flow var(--t) linear infinite; }
+.mo--flow > b + b { opacity: 0; animation: mo-flow var(--t) linear calc(var(--t) * -0.5) infinite, mo-fade var(--t) linear calc(var(--t) * -0.5) infinite; }
+.mo--sway > b { animation: mo-sway var(--t) ease-in-out var(--dl) infinite; }
+.mo--flag > b { animation: mo-flag var(--t) ease-in-out var(--dl) infinite; }
+.mo--flap > b { animation: mo-flap var(--t) ease-in-out var(--dl) infinite; }
+.mo--bob > b { animation: mo-bob var(--t) ease-in-out var(--dl) infinite; }
+.mo--flame > b { animation: mo-flame var(--t) linear infinite; }
+.mo--pan > b { animation: mo-pan var(--t) ease-in-out infinite; }
+.cw[data-hour="night"] .mo--pan > b, .cw[data-hour="dusk"] .mo--pan > b { animation-duration: 12s; }
+.mo--turn > b { animation: mo-turn var(--t) ease-in-out infinite alternate; }
+.mo--wobble > b { animation: mo-wobble var(--t) ease-in-out infinite; }
+@keyframes mo-spin { from { transform: scale(var(--sx), var(--sy)) rotate(0turn) scale(var(--ix), var(--iy)); } to { transform: scale(var(--sx), var(--sy)) rotate(1turn) scale(var(--ix), var(--iy)); } }
+@keyframes mo-flow { from { transform: translate(0, 0); } to { transform: translate(var(--dx), var(--dy)); } }
+@keyframes mo-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+@keyframes mo-sway { 0%, 100% { transform: skewX(calc(var(--a) * var(--wind) * -1deg)); } 50% { transform: skewX(calc(var(--a) * var(--wind) * 1deg)); } }
+@keyframes mo-flag {
+  0%, 100% { transform: skewX(calc(var(--wind) * 1.2deg)) scaleX(1); }
+  30% { transform: skewX(calc(var(--wind) * -2deg)) scaleX(0.97); }
+  60% { transform: skewX(calc(var(--wind) * 2.4deg)) scaleX(1.01); }
+  80% { transform: skewX(calc(var(--wind) * -0.8deg)) scaleX(0.985); }
+}
+@keyframes mo-flap {
+  0%, 100% { transform: scaleY(1) skewX(0deg); }
+  35% { transform: scaleY(0.94) skewX(calc(var(--wind) * -1.2deg)); }
+  55% { transform: scaleY(1.03) skewX(calc(var(--wind) * 0.8deg)); }
+  75% { transform: scaleY(0.98) skewX(calc(var(--wind) * -0.4deg)); }
+}
+@keyframes mo-bob { 0%, 100% { transform: translateY(calc(var(--a) * -1px)) rotate(calc(var(--r) * -1deg)); } 50% { transform: translateY(calc(var(--a) * 1px)) rotate(calc(var(--r) * 1deg)); } }
+@keyframes mo-flame {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); filter: brightness(1); }
+  12% { transform: scale(0.96, 1.08) skewX(-3deg); filter: brightness(1.12); }
+  27% { transform: scale(1.04, 0.95) skewX(2deg); filter: brightness(0.96); }
+  41% { transform: scale(0.98, 1.05) skewX(-1deg); filter: brightness(1.08); }
+  58% { transform: scale(1.03, 0.97) skewX(3deg); filter: brightness(1); }
+  73% { transform: scale(0.97, 1.1) skewX(-2deg); filter: brightness(1.15); }
+  88% { transform: scale(1.02, 0.96) skewX(1deg); filter: brightness(0.98); }
+}
+@keyframes mo-pan { 0%, 50%, 100% { transform: rotate(0deg); } 58%, 68% { transform: rotate(-3.5deg); } 77%, 86% { transform: rotate(2deg); } }
+@keyframes mo-turn { from { transform: scaleX(1) rotate(0deg); } to { transform: scaleX(0.86) rotate(4deg); } }
+@keyframes mo-wobble { 0%, 100% { transform: rotate(calc(var(--a) * var(--wind) * -1deg)); } 50% { transform: rotate(calc(var(--a) * var(--wind) * 1deg)); } }
 
 /* Cloud shadows: very soft, very slow, only while the sun is up. */
 .cw-clouds i {

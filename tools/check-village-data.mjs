@@ -29,6 +29,18 @@ const homeNodes = [...Object.values(HOMES), ...Object.values(PLACES)].map((h) =>
 for (const n of [...homeNodes, ...Object.values(SPOTS).flat()]) ok(NODES[n], `a home or spot names missing node ${n}`);
 for (const a of homeNodes) for (const b of homeNodes) if (a !== b) ok(route(a, b).length >= 2, `no walk from ${a} to ${b}`);
 
+// The living painting: the baked atlas must match the patches (a stale bake
+// would show the wrong piece of the painting, so motion.js leaves it still).
+{
+  const { PATCHES, rectOf } = await import('../src/home/motion.js');
+  const { ATLAS } = await import('../src/home/motion-atlas.js');
+  const { readFileSync } = await import('node:fs');
+  ok(ATLAS.at.length === PATCHES.length, `motion atlas has ${ATLAS.at.length} patches, motion.js ${PATCHES.length}: run node tools/bake-motion.mjs`);
+  PATCHES.forEach((p, i) => { const r = rectOf(p), a = ATLAS.at[i] ?? []; ok(a[0] === r.x && a[1] === r.y && a[2] === r.w && a[3] === r.h, `motion patch ${i} (${p.k}) moved since the bake: run node tools/bake-motion.mjs`); });
+  const png = readFileSync(new URL(`../${ATLAS.src.replace('./', '')}`, import.meta.url));
+  ok(png.readUInt32BE(16) === ATLAS.w && png.readUInt32BE(20) === ATLAS.h, `${ATLAS.src} is not the ${ATLAS.w}×${ATLAS.h} atlas motion-atlas.js describes`);
+}
+
 if (!process.argv.includes('--graph')) {
   const { serveRepo, launchChrome } = await import('./cdp-lite.mjs');
   const server = await serveRepo();

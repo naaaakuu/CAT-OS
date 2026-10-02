@@ -18,7 +18,7 @@
  * leaves the pets standing at home, awake, and the canvas still.
  */
 
-import { NODES, HOMES, PLACES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, POND, CLOCK, TREASURE_AT } from '../pets/paths.js';
+import { NODES, HOMES, PLACES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT } from '../pets/paths.js';
 import { SHEETS } from '../pets/sheets.js';
 import { FRAME, giftIcon } from '../pets/sprite.js';
 import { PETS, PET_BY_ID, LINES, gossipLine, lineFor, successorOf } from '../pets/pets.js';
@@ -278,7 +278,16 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   const fireflyCount = () => (dark() ? Math.round(8 + pets.harmony * 22 + (made('fireflies') ? 26 : 0) + (pets.festival ? 12 : 0)) : 0);
   const butterflyCount = () => (!dark() && hour !== 'dawn' && weather !== 'rain' ? 3 + (made('flowers') ? 4 : 0) : 0);
   const made = (id) => pets.treasures.find((t) => t.id === id)?.made;
-  let sparkAcc = 0, smokeAcc = 0, rippleAt = 2000, birdsAt = rand(20e3, 50e3), lanternAcc = 0;
+  // One soft puff per light, drawn once and stamped for every wisp of smoke and steam.
+  const puffOf = (rgb) => {
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const pg = c.getContext('2d'), gr = pg.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, `rgba(${rgb},1)`); gr.addColorStop(0.45, `rgba(${rgb},.55)`); gr.addColorStop(1, `rgba(${rgb},0)`);
+    pg.fillStyle = gr; pg.fillRect(0, 0, 64, 64);
+    return c;
+  };
+  const puffs = { day: puffOf('246,242,234'), dark: puffOf('150,152,166') };
+  let sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(20e3, 50e3), lanternAcc = 0;
   const glints = Array.from({ length: 16 }, (_, i) => { const r = R(`glint${i}`); const t = r() * Math.PI * 2, d = Math.sqrt(r()); return { x: POND.x + Math.cos(t) * POND.rx * d * 0.85, y: POND.y + Math.sin(t) * POND.ry * d * 0.8, p: r() * 6 }; });
   const ensure = (kind, n, make) => { const have = parts.filter((p) => p.kind === kind).length; for (let i = have; i < n; i += 1) parts.push(make(i)); };
   const lilies = (TREASURE_AT.lilylights ?? []);
@@ -288,7 +297,9 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     sparkAcc += dt * (flameRate[pets.flame.tier] ?? 4) * (0.6 + pets.harmony * 0.6);
     while (sparkAcc > 1) { sparkAcc -= 1; parts.push({ kind: 'spark', x: FIRE.x + rand(-12, 12), y: FIRE.y - 10, vx: rand(-10, 10), vy: rand(-62, -34), life: rand(1.1, 2.2), age: 0, r: rand(1.2, 2.6) }); }
     smokeAcc += dt;
-    if (smokeAcc > 0.9) { smokeAcc = 0; for (const c of CHIMNEYS) parts.push({ kind: 'smoke', x: c.x + rand(-2, 2), y: c.y, vx: rand(6, 12), vy: rand(-20, -14), life: rand(3.5, 5), age: 0, r: rand(4, 6) }); }
+    if (smokeAcc > 0.34) { smokeAcc = 0; for (const c of CHIMNEYS) parts.push({ kind: 'smoke', x: c.x + rand(-2, 2), y: c.y, vx: rand(5, 11) * (weather === 'rain' ? 1.8 : 1), vy: rand(-22, -15), life: rand(4.5, 6.5), age: 0, r: rand(5, 7), w: rand(0, 6) }); }
+    steamAcc += dt;
+    if (steamAcc > 0.55) { steamAcc = 0; parts.push({ kind: 'steam', x: TEAPOT.x + rand(-2, 2), y: TEAPOT.y, vx: rand(-2, 4), vy: rand(-11, -7), life: rand(1.8, 2.6), age: 0, r: rand(2, 3), w: rand(0, 6) }); }
     ensure('firefly', fireflyCount(), (i) => { const r = R(`ff${i}${now | 0}`); const anchors = [[620, 540], [940, 540], [330, 520], [1200, 520], [400, 820], [800, 660], [1100, 760], [770, 420]]; const [ax, ay] = anchors[i % anchors.length]; return { kind: 'firefly', ax: ax + (r() - 0.5) * 160, ay: ay + (r() - 0.5) * 90, x: ax, y: ay, t: r() * 100, sp: 0.3 + r() * 0.5 }; });
     ensure('butterfly', butterflyCount(), (i) => { const r = R(`bf${i}${now | 0}`); const anchors = [[300, 470], [460, 700], [1250, 480], [560, 640], [980, 640], [450, 300], [940, 330]]; const [ax, ay] = anchors[i % anchors.length]; return { kind: 'butterfly', ax, ay, x: ax, y: ay, t: r() * 100, c: ['#FFF6E0', '#F7D774', '#A9C8F0', '#F4B6C2'][i % 4] }; });
     if (isAutumn || isSpring) ensure('leaf', weather === 'rain' ? 4 : 9, () => ({ kind: 'leaf', x: rand(0, 1536), y: rand(-200, 900), vx: rand(6, 18), vy: rand(14, 26), rot: rand(0, 6), vr: rand(-1.5, 1.5), sway: rand(0, 6), c: isSpring ? pickOf(['#F6C9D2', '#FBE3E8', '#F2B4C3']) : pickOf(['#D9822B', '#E6A23C', '#C4602D', '#E9C46A']) }));
@@ -326,9 +337,16 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
           g.globalCompositeOperation = 'lighter'; g.fillStyle = `rgba(255,${180 - k * 90 | 0},70,${(1 - k).toFixed(2)})`; g.beginPath(); g.arc(p.x, p.y, p.r * (1 - k * 0.5), 0, 7); g.fill(); g.globalCompositeOperation = 'source-over';
           break;
         case 'smoke':
-          p.x += p.vx * dt; p.y += p.vy * dt; p.r += dt * 4.5;
-          g.fillStyle = `rgba(${dark() ? '150,150,160' : '245,240,230'},${(0.26 * (1 - k)).toFixed(3)})`; g.beginPath(); g.arc(p.x, p.y, p.r, 0, 7); g.fill();
+        case 'steam': {
+          // Rises, slows, spreads and leans with the wind; fades in, then out.
+          p.x += (p.vx + Math.sin(now / 700 + p.w) * 4) * dt; p.y += p.vy * dt; p.vy *= 1 - dt * 0.12;
+          p.r += dt * (p.kind === 'smoke' ? 6 : 3.2);
+          const a = (p.kind === 'smoke' ? (dark() ? 0.3 : 0.5) : (dark() ? 0.3 : 0.55)) * Math.min(1, k / 0.12) * (1 - k);
+          g.globalAlpha = a;
+          g.drawImage(dark() ? puffs.dark : puffs.day, p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
+          g.globalAlpha = 1;
           break;
+        }
         case 'firefly': {
           if (!dark()) { parts.splice(i, 1); break; }
           p.t += dt * p.sp; p.x = p.ax + Math.sin(p.t * 1.3) * 40 + Math.sin(p.t * 0.7) * 30; p.y = p.ay + Math.cos(p.t * 1.1) * 26;

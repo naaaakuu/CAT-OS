@@ -93,22 +93,41 @@ export const SPOTS = Object.freeze({
 
 /* ---- Light, smoke, water, time -------------------------------------- */
 
-/** Painted lamp posts and lanterns: glow at dusk and night. */
+/** Every painted lamp post and lantern (the glass): a faint halo by day, full at dusk and night. */
 export const LAMPS = Object.freeze([
-  { x: 552, y: 352, r: 46 }, { x: 966, y: 352, r: 46 }, { x: 538, y: 500, r: 40 }, { x: 972, y: 500, r: 40 },
-  { x: 488, y: 806, r: 30 }, { x: 727, y: 747, r: 30 }, { x: 890, y: 747, r: 30 }, { x: 1134, y: 798, r: 30 },
-  { x: 1120, y: 186, r: 28 }, { x: 572, y: 176, r: 26 }, { x: 750, y: 176, r: 26 },
+  // the library
+  { x: 112, y: 180, r: 24 }, { x: 274, y: 197, r: 24 }, { x: 365, y: 200, r: 24 }, { x: 436, y: 151, r: 24 },
+  // the workshop
+  { x: 568, y: 173, r: 28 }, { x: 754, y: 178, r: 26 }, { x: 885, y: 172, r: 26 },
+  // the observatory
+  { x: 1118, y: 188, r: 28 }, { x: 1197, y: 168, r: 24 }, { x: 1392, y: 173, r: 22 },
+  // the plaza's four posts
+  { x: 559, y: 368, r: 46 }, { x: 956, y: 368, r: 46 }, { x: 537, y: 505, r: 42 }, { x: 972, y: 505, r: 42 },
+  // greenhouse arch, cottage patio, the dock
+  { x: 455, y: 405, r: 22 }, { x: 478, y: 648, r: 26 }, { x: 492, y: 822, r: 30 },
+  // the notice board
+  { x: 729, y: 750, r: 30 }, { x: 889, y: 750, r: 30 },
+  // the archery cabin
+  { x: 1195, y: 401, r: 24 }, { x: 1314, y: 410, r: 22 },
+  // round the clock tower and its bridge
+  { x: 1257, y: 737, r: 24 }, { x: 1132, y: 692, r: 28 }, { x: 1130, y: 813, r: 30 }, { x: 1447, y: 790, r: 28 },
 ]);
 
 /** Painted windows: warm at dusk, glowing at night. */
 export const WINDOWS = Object.freeze([
-  { x: 166, y: 184, r: 22 }, { x: 236, y: 186, r: 22 }, { x: 400, y: 186, r: 22 }, { x: 322, y: 214, r: 18 },
-  { x: 712, y: 178, r: 16 }, { x: 822, y: 200, r: 26 }, { x: 1230, y: 182, r: 18 }, { x: 1290, y: 182, r: 16 },
-  { x: 166, y: 360, r: 20 }, { x: 250, y: 370, r: 18 }, { x: 330, y: 416, r: 18 }, { x: 1186, y: 404, r: 16 },
-  { x: 1334, y: 400, r: 16 }, { x: 272, y: 700, r: 28 }, { x: 386, y: 690, r: 18 }, { x: 1254, y: 750, r: 16 },
+  { x: 166, y: 184, r: 22 }, { x: 236, y: 190, r: 22 }, { x: 397, y: 186, r: 22 }, { x: 320, y: 212, r: 18 },
+  { x: 177, y: 107, r: 12 }, { x: 374, y: 102, r: 12 },
+  { x: 712, y: 180, r: 16 }, { x: 822, y: 200, r: 26 },
+  { x: 1232, y: 182, r: 18 }, { x: 1290, y: 183, r: 16 }, { x: 1341, y: 182, r: 16 },
+  { x: 166, y: 360, r: 20 }, { x: 250, y: 370, r: 18 }, { x: 330, y: 416, r: 18 }, { x: 1334, y: 400, r: 16 },
+  { x: 272, y: 700, r: 28 }, { x: 386, y: 690, r: 18 }, { x: 283, y: 647, r: 12 }, { x: 200, y: 708, r: 14 },
+  { x: 1366, y: 630, r: 10 }, { x: 1386, y: 708, r: 12 },
 ]);
 
-export const CHIMNEYS = Object.freeze([{ x: 214, y: 560 }, { x: 857, y: 26 }, { x: 1338, y: 288 }]);
+/** Smoke rises from each painted chimney: the cottage, the library, the workshop, the cabin. */
+export const CHIMNEYS = Object.freeze([{ x: 214, y: 562 }, { x: 228, y: 42 }, { x: 860, y: 18 }, { x: 1339, y: 278 }]);
+/** The teapot on the cottage patio steams. */
+export const TEAPOT = Object.freeze({ x: 430, y: 700 });
 export const POND = Object.freeze({ x: 250, y: 900, rx: 300, ry: 110 });
 export const CLOCK = Object.freeze({ x: 1324, y: 634, r: 26 });
 export const FIRE = Object.freeze({ x: 822, y: 878 });
