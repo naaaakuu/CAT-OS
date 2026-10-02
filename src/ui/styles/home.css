@@ -505,7 +505,7 @@ html[data-reduced-motion] .place__pet { animation: none; }
 /* Records (the hearth page) */
 .place--hearth .place__pet { top: auto; bottom: -14px; transform: translateX(-50%); }
 .friends { display: grid; gap: 8px; margin: 0 0 6px; }
-.friend { display: flex; align-items: center; gap: 12px; padding: 9px 12px 9px 9px; border-radius: 16px; background: var(--color-surface); border: 1px solid var(--color-line); text-decoration: none; color: var(--color-ink); min-height: 60px; }
+.friend { min-width: 0; display: flex; align-items: center; gap: 12px; padding: 9px 12px 9px 9px; border-radius: 16px; background: var(--color-surface); border: 1px solid var(--color-line); text-decoration: none; color: var(--color-ink); min-height: 60px; }
 .friend__lead { flex: 1; min-width: 0; }
 .friend__lead b { display: block; font: 400 17px/1.2 var(--font-display); }
 .friend__lead small { display: block; font-size: 12px; color: var(--color-ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
