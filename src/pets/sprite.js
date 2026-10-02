@@ -9,7 +9,7 @@
  */
 
 import { SHEETS } from './sheets.js';
-import { MAP, CROPS } from './paths.js';
+import { MAP, CROPS, HOMES } from './paths.js';
 import { PET_BY_ID } from './pets.js';
 
 export const FRAME = Object.freeze({ idle: 0, blink: 1, happy: 2, talk: 3, sleep: 4 });
@@ -53,17 +53,39 @@ export function giftIcon(kind, size = 20, cls = '') {
  */
 export function backdropStyle(key, { screen = false, focusY = 0.5 } = {}) {
   const c = CROPS[key] ?? CROPS.plaza;
-  if (screen && typeof innerWidth === 'number') {
-    const W = innerWidth || 390, H = innerHeight || 844;
-    const s = Math.max(W / MAP.w, H / MAP.h, 0.6 * Math.min(W / c.w, H / c.h));
-    const ox = Math.min(0, Math.max(W - MAP.w * s, W / 2 - (c.x + c.w / 2) * s));
-    const oy = Math.min(0, Math.max(H - MAP.h * s, H * focusY - (c.y + c.h / 2) * s));
-    return `background-image:url(${MAP.src});background-size:${Math.ceil(MAP.w * s)}px auto;background-position:${Math.round(ox)}px ${Math.round(oy)}px`;
-  }
+  if (screen && typeof innerWidth === 'number') return fitStyle(screenFit(c, { focusY }));
   const size = (MAP.w / c.w) * 100;
   const px = (c.x / (MAP.w - c.w)) * 100;
   const py = (c.y / Math.max(1, MAP.h - c.h)) * 100;
   return `background-image:url(${MAP.src});background-size:${size.toFixed(1)}% auto;background-position:${px.toFixed(1)}% ${py.toFixed(1)}%`;
+}
+
+/**
+ * How the painting sits on this screen to frame crop `c`: its scale and
+ * offset, covering the viewport, never zoomed in less than `zoom`, with the
+ * point `at` (the crop's centre by default) at `focusY` of the height when
+ * the painting's edges allow.
+ */
+function screenFit(c, { focusY = 0.5, zoom = 0, at = null } = {}) {
+  const W = innerWidth || 390, H = innerHeight || 844;
+  const s = Math.max(W / MAP.w, H / MAP.h, 0.6 * Math.min(W / c.w, H / c.h), zoom);
+  const p = at ?? { x: c.x + c.w / 2, y: c.y + c.h / 2 };
+  const ox = Math.min(0, Math.max(W - MAP.w * s, W / 2 - p.x * s));
+  const oy = Math.min(0, Math.max(H - MAP.h * s, H * focusY - p.y * s));
+  return { s, ox, oy };
+}
+const fitStyle = ({ s, ox, oy }) => `background-image:url(${MAP.src});background-size:${Math.ceil(MAP.w * s)}px auto;background-position:${Math.round(ox)}px ${Math.round(oy)}px`;
+
+/**
+ * A place's hero: the host's home filling the screen, and the point on the
+ * screen where its painted door is, so the pet stands at its own door. On a
+ * phone it comes a little closer, so every door clears the sheet below.
+ */
+export function placeHero(id, { focusY = 0.44 } = {}) {
+  const c = CROPS[id] ?? CROPS.plaza, door = HOMES[id]?.door;
+  if (typeof innerWidth !== 'number') return { style: backdropStyle(id), door: null };
+  const f = screenFit(c, { focusY, zoom: innerWidth < 700 ? 1.25 : 0, at: door });
+  return { style: fitStyle(f), door: door ? { x: Math.round(door.x * f.s + f.ox), y: Math.round(door.y * f.s + f.oy) } : null };
 }
 
 /** A full-screen painted backdrop for a pet's home (or 'cottage', 'clock', 'plaza'). */

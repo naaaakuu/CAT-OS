@@ -429,8 +429,10 @@
 @keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 .sheet.is-open { height: 92dvh; }
 .sheet__grip {
-  position: sticky; top: 0; z-index: 3; width: 100%; padding: 20px 0 16px; min-height: 44px; margin-bottom: -22px;
-  background: linear-gradient(var(--g-paper) 70%, rgba(248, 241, 225, 0));
+  /* It overlaps the sheet only by its own clear fringe: any more and the
+     first line of the sheet (the place's eyebrow) sits under paper. */
+  position: sticky; top: 0; z-index: 3; width: 100%; padding: 20px 0 16px; min-height: 44px; margin-bottom: -6px;
+  background: linear-gradient(var(--g-paper) 60%, rgba(248, 241, 225, 0));
   display: grid; place-items: center; border: 0;
 }
 .sheet__grip i { display: block; width: 42px; height: 4px; border-radius: 4px; background: var(--g-paper-3); }

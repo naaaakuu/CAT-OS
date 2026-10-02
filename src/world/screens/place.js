@@ -15,7 +15,7 @@
 
 import { atPlace } from '../companion.js';
 import { petForPlace, PET_BY_ID } from '../../pets/pets.js';
-import { petSprite, petPortrait, backdropStyle, FRAME } from '../../pets/sprite.js';
+import { petSprite, petPortrait, placeHero, FRAME } from '../../pets/sprite.js';
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { starHTML } from './result.js';
@@ -58,11 +58,12 @@ export async function renderPlace(outlet, { storage }, params) {
   const hostDef = PET_BY_ID.get(host);
   const hostState = state.pets?.pets.find((p) => p.id === host);
 
+  const hero = placeHero(host);
   outlet.innerHTML = `
     <section class="place" aria-label="${escapeHTML(region.name)}">
-      <div class="place__hero place__hero--painted" style="${backdropStyle(host, { screen: true, focusY: 0.36 })}">
+      <div class="place__hero place__hero--painted" style="${hero.style}">
         <div class="place__fade" aria-hidden="true"></div>
-        <span class="place__pet place__pet--${host}" aria-hidden="true">${petSprite(host, { size: 118, frame: hostState?.word === 'sleepy' || hostState?.word === 'wilting' ? FRAME.sleep : FRAME.idle })}</span>
+        <span class="place__pet place__pet--${host}" aria-hidden="true"${hero.door ? ` style="left:${hero.door.x}px;top:${hero.door.y + 14}px"` : ''}>${petSprite(host, { size: 118, frame: hostState?.word === 'sleepy' || hostState?.word === 'wilting' ? FRAME.sleep : FRAME.idle })}</span>
       </div>
       <a class="place__back" href="#/world" id="back">← Village</a>
       <div class="place__hero-stat" id="hero-stat"></div>
