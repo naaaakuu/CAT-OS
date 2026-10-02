@@ -23,7 +23,7 @@
 import { listForBoot, listLexItems, loadLexItem, listTwinItems, loadTwinItem, listLoanItems, loadLoanItem, loadContextPack, contextByWord } from '../core/content-loader/loader.js';
 import { STORES } from '../core/storage/storage-adapter.js';
 import { rng } from './engine/palette.js';
-import { roundStars, EARN } from './economy.js';
+import { roundStars } from './economy.js';
 
 export const REGION_KIND = Object.freeze({ meadow: 'lex', pond: 'twin', thicket: 'loan' });
 export const ROUND_SIZE = 12;
@@ -317,7 +317,7 @@ export class LexRound {
       answers: this.#answers, score: { correct, total, accuracy: total ? correct / total : 0, avg_ms: Math.round(avgMs) },
       stars: stars.stars, flawless: stars.flawless,
     };
-    return { record, stars, earned: EARN.round(stars.stars, correct, stars.flawless) };
+    return { record, stars };
   }
   get answers() { return this.#answers; }
 }

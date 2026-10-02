@@ -627,9 +627,8 @@
    from reaching in and turning a lit card dark (or, in light mode, leaving
    near-black question text on navy at 1.14:1, which is what shipped).
 
-   Same device as village.css uses for the village: a region with its own
-   fixed light declares its own palette, once, and every shared component
-   inside it is automatically right. */
+   A region with its own fixed light declares its own palette, once, and
+   every shared component inside it is automatically right. */
 :root:not([data-stage]) .run {
   --g-paper: #F8F1E1;
   --g-paper-2: #FFFAF0;
@@ -1529,26 +1528,27 @@
 .reach__empty h1 { margin: 4px 0 0; font-family: var(--g-display, var(--font-display, inherit)); font-size: 28px; color: var(--g-ink); }
 .reach__empty p { margin: 0 0 8px; max-width: 34ch; font-size: 15px; line-height: 1.5; color: var(--g-ink-2); }
 
-/* Wick at the door of a place: one line, once, then gone. */
+/* The host at the door of a place: one line, once, then gone. A white
+   paper card in the studio's hand, not glass. */
 .placewick {
   position: absolute; z-index: 6;
   left: 12px; right: 12px; top: calc(env(safe-area-inset-top) + 64px);
   display: grid; grid-template-columns: 36px 1fr; align-items: center; gap: 8px;
   padding: 7px 12px 7px 8px;
-  border-radius: 14px;
-  background: var(--g-panel-dark);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
-  backdrop-filter: blur(10px) saturate(140%);
-  border: 1px solid rgba(255, 240, 210, 0.14);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
-  color: #F8F1E1;
+  border-radius: 16px;
+  background: #FFFFFF;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 1px solid #CDD5C3;
+  box-shadow: 0 8px 22px rgba(40, 56, 46, 0.16);
+  color: #2B3F34;
   opacity: 0; transform: translateY(-8px);
   transition: opacity 420ms var(--g-ease), transform 420ms var(--g-ease);
   pointer-events: auto;
 }
 .placewick.is-in { opacity: 1; transform: none; }
 .placewick .ico { width: 36px; height: auto; }
-.placewick p { margin: 0; font-size: 13.5px; line-height: 1.35; font-weight: 600; }
+.placewick p { margin: 0; font-family: var(--g-display); font-size: 15px; line-height: 1.35; font-weight: 500; }
 
 /* ------------------------------------------------------------------ */
 /* Collections — learning as sets you can finish                        */
