@@ -12,15 +12,15 @@
 :root {
   /* The studio: cream paper, deep fern ink, soft sage wells (2.2 — the
      art pack's palette). Matte and quiet; the art carries the colour. */
-  --g-paper: #F7F6ED;
-  --g-paper-2: #FCFBF6;
-  --g-paper-3: #E6EADC;
-  --g-ink: #2B3F34;
-  --g-ink-2: #46554B;
-  --g-ink-3: #4E5B51;
-  --g-line: rgba(48, 71, 59, 0.14);
-  --g-accent: #355B48;
-  --g-accent-2: #43684F;
+  --g-paper: #F8F1E1;
+  --g-paper-2: #FFFAF0;
+  --g-paper-3: #EADFC6;
+  --g-ink: #34443B;
+  --g-ink-2: #4A5649;
+  --g-ink-3: #535D4F;
+  --g-line: rgba(92, 70, 38, 0.14);
+  --g-accent: #536D4E;
+  --g-accent-2: #5F7B58;
   --g-gold: #D8AD59;
   --g-gold-2: #E5C884;
 
@@ -40,27 +40,27 @@
   --g-panel-dark: rgba(20, 28, 24, 0.88);
   /* The edge on glass panels. A hardcoded white hairline is invisible on
      paper and a bright scratch on night glass, so it is a token. */
-  --g-panel-edge: rgba(48, 71, 59, 0.12);
+  --g-panel-edge: rgba(92, 70, 38, 0.12);
   /* The stage veil (see "The stage" below). Three stops of the same hue,
      because the scene behind it is a painted valley and the type on top
      must read at AA in BOTH themes. Light = warm paper; dark = the same
      valley after sunset. Never hardcode these: the veil is the single
      surface every learning room's prose sits on. */
-  --g-veil-1: rgba(247, 246, 237, 0.68);
-  --g-veil-2: rgba(247, 246, 237, 0.82);
-  --g-veil-3: rgba(247, 246, 237, 0.92);
-  --g-veil-read-1: rgba(250, 249, 242, 0.90);
-  --g-veil-read-2: rgba(250, 249, 242, 0.95);
-  --g-veil-read-3: rgba(250, 249, 242, 0.97);
+  --g-veil-1: rgba(248, 241, 225, 0.68);
+  --g-veil-2: rgba(248, 241, 225, 0.82);
+  --g-veil-3: rgba(248, 241, 225, 0.92);
+  --g-veil-read-1: rgba(255, 250, 240, 0.90);
+  --g-veil-read-2: rgba(255, 250, 240, 0.95);
+  --g-veil-read-3: rgba(255, 250, 240, 0.97);
   /* The neutral "not yet" fill: pip tracks, rails, empty meters. One token,
      because a rail the learner cannot see is a rail that lies about
      progress, and there are a dozen of them. */
-  --g-track: rgba(48, 71, 59, 0.14);
+  --g-track: rgba(92, 70, 38, 0.14);
   /* The plate a drawn thing stands on (Growth's trees, place tiles): sky
      over ground, so a seedling never floats in empty space. */
   --g-plate: linear-gradient(var(--wk-sky-1) 0%, var(--wk-sky-2) 66%, var(--wk-grass-1) 66%, var(--wk-grass-2) 100%);
-  --g-edge: rgba(48, 71, 59, 0.1);
-  --g-edge-2: rgba(48, 71, 59, 0.14);
+  --g-edge: rgba(92, 70, 38, 0.1);
+  --g-edge-2: rgba(92, 70, 38, 0.14);
   /* THE LITTLE DIORAMAS. The "What Stands" tiles and the sheets beside
      them paint a scene — sky over grass, behind a building — and in dark
      they stayed at full noon while their card went to near-black: six
@@ -77,39 +77,39 @@
   /* Honey, a shade deeper than --g-gold: a star is read as a glyph at
      13px, and the lighter honey measured 3.9:1 with its edge. */
   --g-star: #C08C33;
-  --g-star-off: rgba(48, 71, 59, 0.16);
+  --g-star-off: rgba(92, 70, 38, 0.16);
   --g-ink-color: #557E80;
   --g-danger: #9A4F3C;
-  --g-glass: rgba(247, 246, 237, 0.9);
+  --g-glass: rgba(248, 241, 225, 0.9);
   --g-glass-dark: rgba(20, 28, 24, 0.74);
   /* The ink that sits ON the accent. White works on a deep green by day; at
      night the accent IS the light colour, so white on it is 2:1 and every
      primary action in the world becomes unreadable. One token, two answers. */
   --g-on-accent: #FFFFFF;
   /* The accent at its darkest, for ink on a tinted chip. */
-  --g-accent-deep: #24402F;
+  --g-accent-deep: #33482F;
   /* A surface that must read as RAISED above the card it sits on: an answer
      option, the selected chip in a segmented control. On paper that is white
      over cream; at night it has to go UP the ramp, not down, or the option
      looks recessed and the card it sits in loses its edge. */
   --g-raise: #FFFFFF;
-  --g-shadow: 0 10px 28px rgba(48, 71, 59, 0.12), 0 1px 3px rgba(48, 71, 59, 0.08);
-  --g-shadow-soft: 0 4px 14px rgba(48, 71, 59, 0.09);
+  --g-shadow: 0 10px 28px rgba(92, 70, 38, 0.12), 0 1px 3px rgba(92, 70, 38, 0.08);
+  --g-shadow-soft: 0 4px 14px rgba(92, 70, 38, 0.09);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --g-paper: #131916; --g-paper-2: #1A221E; --g-paper-3: #28322C;
-    --g-ink: #ECEADF; --g-ink-2: #B5BEAF; --g-ink-3: #A6B0A1;
+    --g-paper: #18211C; --g-paper-2: #212B25; --g-paper-3: #28322C;
+    --g-ink: #F3ECDD; --g-ink-2: #B5BEAF; --g-ink-3: #A6B0A1;
     --g-line: rgba(236, 234, 223, 0.11);
     --g-panel: rgba(26, 34, 30, 0.93);
     --g-panel-edge: rgba(236, 234, 223, 0.12);
-    --g-veil-1: rgba(12, 17, 14, 0.70);
-    --g-veil-2: rgba(12, 17, 14, 0.84);
-    --g-veil-3: rgba(12, 17, 14, 0.92);
-    --g-veil-read-1: rgba(12, 17, 14, 0.86);
-    --g-veil-read-2: rgba(12, 17, 14, 0.92);
-    --g-veil-read-3: rgba(12, 17, 14, 0.95);
+    --g-veil-1: rgba(16, 22, 18, 0.70);
+    --g-veil-2: rgba(16, 22, 18, 0.84);
+    --g-veil-3: rgba(16, 22, 18, 0.92);
+    --g-veil-read-1: rgba(16, 22, 18, 0.86);
+    --g-veil-read-2: rgba(16, 22, 18, 0.92);
+    --g-veil-read-3: rgba(16, 22, 18, 0.95);
     --g-track: rgba(236, 234, 223, 0.16);
     --g-plate: linear-gradient(#1F2823 0%, #1B231F 66%, #22301F 66%, #1C2819 100%);
     --g-edge: rgba(236, 234, 223, 0.1);
@@ -118,8 +118,8 @@
     --wk-ready-1: #35301F; --wk-ready-2: #2C281B; --wk-ready-3: #283124; --wk-ready-4: #222B1F;
     --wk-built-1: #22322A; --wk-built-2: #1D2B23; --wk-built-3: #213220; --wk-built-4: #1B2919;
     --g-plate-edge: var(--g-edge);
-    --g-accent: #A9C79B;
-    --g-accent-2: #BAD4AD;
+    --g-accent: #B7D19F;
+    --g-accent-2: #C8DDB4;
     --g-on-accent: #14231A;
     --g-accent-deep: #C7DDBC;
     --g-gold: #D8AD59;
@@ -136,17 +136,17 @@
   }
 }
 :root[data-theme="dark"] {
-  --g-paper: #131916; --g-paper-2: #1A221E; --g-paper-3: #28322C;
-  --g-ink: #ECEADF; --g-ink-2: #B5BEAF; --g-ink-3: #A6B0A1;
+  --g-paper: #18211C; --g-paper-2: #212B25; --g-paper-3: #28322C;
+  --g-ink: #F3ECDD; --g-ink-2: #B5BEAF; --g-ink-3: #A6B0A1;
   --g-line: rgba(236, 234, 223, 0.11);
   --g-panel: rgba(26, 34, 30, 0.93);
   --g-panel-edge: rgba(236, 234, 223, 0.12);
-  --g-veil-1: rgba(12, 17, 14, 0.70);
-  --g-veil-2: rgba(12, 17, 14, 0.84);
-  --g-veil-3: rgba(12, 17, 14, 0.92);
-  --g-veil-read-1: rgba(12, 17, 14, 0.86);
-  --g-veil-read-2: rgba(12, 17, 14, 0.92);
-  --g-veil-read-3: rgba(12, 17, 14, 0.95);
+  --g-veil-1: rgba(16, 22, 18, 0.70);
+  --g-veil-2: rgba(16, 22, 18, 0.84);
+  --g-veil-3: rgba(16, 22, 18, 0.92);
+  --g-veil-read-1: rgba(16, 22, 18, 0.86);
+  --g-veil-read-2: rgba(16, 22, 18, 0.92);
+  --g-veil-read-3: rgba(16, 22, 18, 0.95);
   --g-track: rgba(236, 234, 223, 0.16);
   --g-plate: linear-gradient(#1F2823 0%, #1B231F 66%, #22301F 66%, #1C2819 100%);
   --g-edge: rgba(236, 234, 223, 0.1);
@@ -155,8 +155,8 @@
   --wk-ready-1: #35301F; --wk-ready-2: #2C281B; --wk-ready-3: #283124; --wk-ready-4: #222B1F;
   --wk-built-1: #22322A; --wk-built-2: #1D2B23; --wk-built-3: #213220; --wk-built-4: #1B2919;
   --g-plate-edge: var(--g-edge);
-  --g-accent: #A9C79B;
-  --g-accent-2: #BAD4AD;
+  --g-accent: #B7D19F;
+  --g-accent-2: #C8DDB4;
   --g-on-accent: #14231A;
   --g-accent-deep: #C7DDBC;
   --g-gold: #D8AD59;
@@ -256,7 +256,7 @@
   color: #30473B;
   /* A cream disc, not a dark UI chip: it stands on painted art in either
      theme, so its paper and the line mark on it are fixed, like a sign. */
-  background: #F7F6ED;
+  background: #F8F1E1;
   box-shadow: 0 0 0 2px var(--pin, #fff), 0 0 0 3px rgba(28, 22, 12, 0.55), 0 3px 10px rgba(0, 0, 0, 0.42);
   /* No backdrop-filter here on purpose: a pin moves with the camera, and a
      blurred backdrop on a moving element is re-rasterised every frame. The
@@ -430,7 +430,7 @@
 .sheet.is-open { height: 92dvh; }
 .sheet__grip {
   position: sticky; top: 0; z-index: 3; width: 100%; padding: 20px 0 16px; min-height: 44px; margin-bottom: -22px;
-  background: linear-gradient(var(--g-paper) 70%, rgba(247, 246, 237, 0));
+  background: linear-gradient(var(--g-paper) 70%, rgba(248, 241, 225, 0));
   display: grid; place-items: center; border: 0;
 }
 .sheet__grip i { display: block; width: 42px; height: 4px; border-radius: 4px; background: var(--g-paper-3); }
@@ -631,32 +631,32 @@
    fixed light declares its own palette, once, and every shared component
    inside it is automatically right. */
 :root:not([data-stage]) .run {
-  --g-paper: #F7F6ED;
-  --g-paper-2: #FCFBF6;
-  --g-paper-3: #E6EADC;
-  --g-ink: #2B3F34;
-  --g-ink-2: #46554B;
-  --g-ink-3: #4E5B51;
-  --g-line: rgba(48, 71, 59, 0.14);
+  --g-paper: #F8F1E1;
+  --g-paper-2: #FFFAF0;
+  --g-paper-3: #EADFC6;
+  --g-ink: #34443B;
+  --g-ink-2: #4A5649;
+  --g-ink-3: #535D4F;
+  --g-line: rgba(92, 70, 38, 0.14);
   --g-panel: rgba(252, 251, 246, 0.95);
-  --g-panel-edge: rgba(48, 71, 59, 0.12);
-  --g-track: rgba(48, 71, 59, 0.14);
-  --g-edge: rgba(48, 71, 59, 0.1);
-  --g-edge-2: rgba(48, 71, 59, 0.14);
+  --g-panel-edge: rgba(92, 70, 38, 0.12);
+  --g-track: rgba(92, 70, 38, 0.14);
+  --g-edge: rgba(92, 70, 38, 0.1);
+  --g-edge-2: rgba(92, 70, 38, 0.14);
   --g-raise: #FFFFFF;
-  --g-accent: #355B48;
-  --g-accent-2: #43684F;
-  --g-accent-deep: #24402F;
+  --g-accent: #536D4E;
+  --g-accent-2: #5F7B58;
+  --g-accent-deep: #33482F;
   --g-on-accent: #FFFFFF;
-  --color-bg: #F7F6ED;
-  --color-surface: #FCFBF6;
-  --color-surface-2: #EFF1E6;
-  --color-surface-3: #E6EADC;
-  --color-ink: #2B3F34;
-  --color-ink-2: #46554B;
-  --color-ink-3: #4E5B51;
-  --color-line: rgba(48, 71, 59, 0.16);
-  --color-line-strong: rgba(48, 71, 59, 0.3);
+  --color-bg: #F8F1E1;
+  --color-surface: #FFFAF0;
+  --color-surface-2: #F2E9D5;
+  --color-surface-3: #EADFC6;
+  --color-ink: #34443B;
+  --color-ink-2: #4A5649;
+  --color-ink-3: #535D4F;
+  --color-line: rgba(92, 70, 38, 0.16);
+  --color-line-strong: rgba(92, 70, 38, 0.3);
 }
 .run { background: var(--g-night); position: relative; }
 .run__scene { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
@@ -681,9 +681,9 @@
    world's own rounds (cards on glass) are untouched. */
 :root:not([data-stage]) .run cat-passage { color: var(--g-paper); }
 :root:not([data-stage]) .run cat-passage .p-num,
-:root:not([data-stage]) .run cat-passage .p-fin { color: rgba(247, 246, 237, 0.62); }
+:root:not([data-stage]) .run cat-passage .p-fin { color: rgba(248, 241, 225, 0.62); }
 :root:not([data-stage]) .run cat-passage .p-fin::before,
-:root:not([data-stage]) .run cat-passage .p-fin::after { background: rgba(247, 246, 237, 0.24); }
+:root:not([data-stage]) .run cat-passage .p-fin::after { background: rgba(248, 241, 225, 0.24); }
 .run__ring { background: conic-gradient(var(--g-gold) var(--p, 0%), rgba(255, 255, 255, 0.18) 0); }
 .run__ring::after { background: #1A2520; }
 .run__ring.is-over { background: conic-gradient(var(--c-ember) var(--p, 100%), rgba(255, 255, 255, 0.18) 0); }
@@ -830,7 +830,7 @@
 .sheet:not(.is-open) .sheet__more { display: none; }
 .sheet:not(.is-open)::after {
   content: ""; display: block; height: 26px;
-  background: linear-gradient(to top, var(--g-paper), rgba(247, 246, 237, 0));
+  background: linear-gradient(to top, var(--g-paper), rgba(248, 241, 225, 0));
   position: sticky; bottom: -1px;
 }
 
@@ -1072,7 +1072,7 @@
   backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 240, 210, 0.16);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-  color: #F7F6ED;
+  color: #F8F1E1;
   opacity: 0; transform: translateY(14px);
   transition: opacity 420ms var(--g-ease), transform 420ms var(--g-ease);
 }
@@ -1101,7 +1101,7 @@
 .wickbar__more {
   display: block; margin-top: 6px;
   font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(247, 246, 237, 0.5);
+  color: rgba(248, 241, 225, 0.5);
   opacity: 0; transition: opacity 500ms var(--g-ease);
 }
 
@@ -1135,7 +1135,7 @@
   border-radius: 10px;
   outline: none;
 }
-.sign__input:focus { border-color: #355B48; box-shadow: 0 0 0 3px rgba(53,91,72,0.25); }
+.sign__input:focus { border-color: #536D4E; box-shadow: 0 0 0 3px rgba(53,91,72,0.25); }
 .sign__ideas { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .sign__idea {
   font: inherit; font-size: 13px; font-weight: 600;
@@ -1202,7 +1202,7 @@
 .awaken__eyebrow {
   margin: 0; font-size: 11px; font-weight: 800;
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(247, 246, 237, 0.55);
+  color: rgba(248, 241, 225, 0.55);
 }
 .awaken__named {
   margin: 0 0 4px;
@@ -1356,7 +1356,7 @@
   backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 240, 210, 0.15);
   box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-  color: #F7F6ED;
+  color: #F8F1E1;
   opacity: 0; transform: translateY(10px);
   transition: opacity 420ms var(--g-ease), transform 420ms var(--g-ease);
   pointer-events: auto;
@@ -1541,7 +1541,7 @@
   backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgba(255, 240, 210, 0.14);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
-  color: #F7F6ED;
+  color: #F8F1E1;
   opacity: 0; transform: translateY(-8px);
   transition: opacity 420ms var(--g-ease), transform 420ms var(--g-ease);
   pointer-events: auto;

@@ -342,7 +342,7 @@
 }
 .vopt:active { transform: scale(0.98); }
 .vopt .key { width: 26px; height: 26px; border-radius: 50%; background: var(--g-paper-3); display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--g-ink-2); flex: none; }
-.vopt.is-correct { background: #E3EADA; border-color: var(--g-accent); color: #24402F; }
+.vopt.is-correct { background: #E3EADA; border-color: var(--g-accent); color: #33482F; }
 .vopt.is-correct .key { background: var(--g-accent); color: #fff; }
 .vopt.is-wrong { background: #F4E4DC; border-color: var(--g-danger); color: #7E3B2C; animation: shake 360ms var(--g-ease); }
 .vopt.is-wrong .key { background: var(--g-danger); color: #fff; }
@@ -482,7 +482,7 @@
 :root[data-world] .lgx-veil .screen__eyebrow { color: rgba(238,234,224,0.6); }
 :root[data-world] .lgx-veil cat-option button { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); color: #EEEAE0; }
 :root[data-world] .lgx-veil cat-option .letter { background: rgba(255,255,255,0.12); color: #EEEAE0; }
-:root[data-world] .lgx-veil cat-option[state="correct"] button { background: rgba(169,199,155,0.25); border-color: #A9C79B; color: #E6F0DF; }
+:root[data-world] .lgx-veil cat-option[state="correct"] button { background: rgba(169,199,155,0.25); border-color: #B7D19F; color: #E6F0DF; }
 :root[data-world] .lgx-veil cat-option[state="picked"] button { border-color: rgba(238,234,224,0.5); }
 :root[data-world] .lgx-veil .btn--primary { background: var(--g-gold); color: #4A3A10; box-shadow: none; }
 :root[data-world] .lgx-veil .lgx-part { background: rgba(255,255,255,0.08); color: #EEEAE0; border-color: rgba(255,255,255,0.14); }

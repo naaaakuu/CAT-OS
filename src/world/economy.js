@@ -92,18 +92,9 @@ export function emptyBag() { const b = {}; for (const k of BAG_KEYS) b[k] = 0; r
 export function bag(partial = {}) { return addBag(emptyBag(), partial); }
 export function addBag(a, b) { const out = emptyBag(); for (const k of BAG_KEYS) out[k] = (a?.[k] ?? 0) + (b?.[k] ?? 0); return out; }
 export function subBag(a, b) { const out = emptyBag(); for (const k of BAG_KEYS) out[k] = Math.max(0, (a?.[k] ?? 0) - (b?.[k] ?? 0)); return out; }
-export function scaleBag(a, k) { const out = emptyBag(); for (const key of BAG_KEYS) out[key] = Math.round((a?.[key] ?? 0) * k); return out; }
 export function bagTotal(b) { return BAG_KEYS.reduce((n, k) => n + (b?.[k] ?? 0), 0); }
 export function goodsTotal(b) { return GOOD_KEYS.reduce((n, k) => n + (b?.[k] ?? 0), 0); }
 export function canAfford(purse, cost) { return BAG_KEYS.every((k) => (purse?.[k] ?? 0) >= (cost?.[k] ?? 0)); }
-export function shortfall(purse, cost) { return subBag(cost, purse); }
-/** The non-zero entries of a bag, coins first, then goods in their order. */
-export function bagEntries(b) {
-  return BAG_KEYS.filter((k) => (b?.[k] ?? 0) > 0).map((k) => ({ ...THING.get(k), amount: b[k] }));
-}
-export function goodEntries(b) { return bagEntries(b).filter((e) => e.key !== 'coins'); }
-export function rawEntries(b) { return bagEntries(b).filter((e) => RAW_KEYS.includes(e.key)); }
-export function madeEntries(b) { return bagEntries(b).filter((e) => MADE_KEYS.includes(e.key)); }
 
 /* ------------------------------------------------------------------ */
 /* Earning — what a finished activity makes                            */
@@ -133,13 +124,6 @@ export const EARN = Object.freeze({
   round: (stars, correct = 0, flawless = false) => bag({ seeds: goodsFor(stars, flawless) }),
   /** A Gauntlet run on the road out: mixed pressure, paid in coins. */
   gauntlet: (stars, correct = 0) => bag({ coins: 50 + 30 * (stars ?? 0) + 4 * correct }),
-});
-
-/** The raw good a place makes, for "what is made here". */
-export const REGION_GOOD = Object.freeze({
-  meadow: 'seeds', pond: 'seeds', thicket: 'seeds', rootwood: 'roots', terraces: 'roots',
-  'reading-room': 'pages', loom: 'thread', table: 'thread', bench: 'thread', quarter: 'thread',
-  wilds: 'coins', hearth: 'coins',
 });
 
 /* ------------------------------------------------------------------ */
@@ -229,13 +213,6 @@ export function orderCoverage(order, stock) {
     missing[k] = n - h;
   }
   return { pct: need ? have / need : 1, missing, deliverable: need > 0 && have >= need };
-}
-
-/** The people who can post orders right now: the neighbours who have a house. */
-export function giversFor(houses) {
-  const out = [];
-  for (let i = 0; i < Math.max(1, houses); i += 1) { const nb = NEIGHBOURS[i]; if (nb) out.push(giverOf(nb)); }
-  return out.length ? out : DEFAULT_GIVERS;
 }
 
 /* ------------------------------------------------------------------ */

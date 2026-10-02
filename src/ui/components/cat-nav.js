@@ -6,23 +6,20 @@
  * listens to hashchange to know which item is active, and navigation
  * itself is plain anchor hashes handled by the Router.
  *
- * 1.3.0: the rail carries the valley's own pixel marks (world/icons.js),
- * not stroke glyphs — the chrome is made of the same pixels as the map.
+ * 3.0: three places in the village — the village itself, the clock tower
+ * (progress) and your cottage (settings) — drawn as small line marks, so
+ * the rail matches the village's own cards instead of an older art pack.
  */
 
-import { icon } from '../../world/icons.js';
-
-// Three places, and no fourth. Settings is administration, and lives
-// behind the valley's ☰ (src/world/menu.js) — never in the thumb rail.
-// `valley` and `cottage` both alias to the same drawn `house` mark
-// (world/icons.js), so the rail shipped two identical roofs side by side and
-// the only way to tell Village from Standing was to read the label. Three
-// places, three marks: the village is a house, your standing is a star (it is
-// counted in stars), what is growing is a sprout.
+const MARKS = {
+  village: '<path d="M3.5 11.5 9 7l5.5 4.5M5.5 10v8.5h7V10" /><path d="M13 9.6 16.5 7l4 3.3v8.2H12.5" /><path d="M8 18.5v-3.5h2v3.5" />',
+  clock: '<path d="M9 21V8.5L12 4l3 4.5V21z" /><circle cx="12" cy="11.5" r="2.4" /><path d="M12 10.3v1.3l.9.6M10.2 21v-3.4h3.6V21" />',
+  cottage: '<path d="M3.5 11 12 4l8.5 7" /><path d="M6 9.5V20h12V9.5" /><path d="M10 20v-5h4v5M16 6.5V4h2v4.2" />',
+};
 const ITEMS = [
-  { path: '/world',    label: 'Village',  mark: 'valley' },
-  { path: '/world/place/hearth', label: 'Standing', mark: 'star' },
-  { path: '/growth',   label: 'Growth',   mark: 'sprout' },
+  { path: '/world', label: 'Village', mark: 'village' },
+  { path: '/growth', label: 'Progress', mark: 'clock' },
+  { path: '/settings', label: 'Cottage', mark: 'cottage' },
 ];
 
 class CatNav extends HTMLElement {
@@ -30,57 +27,28 @@ class CatNav extends HTMLElement {
     this.innerHTML = `
       <style>
         cat-nav {
-          position: fixed;
-          inset: auto 0 0 0;
-          display: flex;
-          justify-content: space-around;
+          position: fixed; inset: auto 0 0 0; z-index: 10;
+          display: flex; justify-content: space-around;
           background: var(--color-veil);
-          -webkit-backdrop-filter: saturate(160%) blur(14px);
-          backdrop-filter: saturate(160%) blur(14px);
+          -webkit-backdrop-filter: saturate(150%) blur(14px); backdrop-filter: saturate(150%) blur(14px);
           border-top: 1px solid var(--color-line);
           padding-bottom: env(safe-area-inset-bottom);
-          z-index: 10;
         }
         cat-nav a {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 2px;
-          min-width: var(--tap-target);
-          height: var(--nav-height);
-          padding: 0 var(--space-4);
-          border-radius: var(--radius-md);
-          margin: var(--space-1) 0;
-          text-decoration: none;
-          /* ink-2, not ink-3. The rail is a translucent veil over whatever
-             the screen behind it is painting, so a label here has no
-             reliable ground and needs the margin; at 12px on the dark
-             theme's veil, ink-3 measured 4.1:1. */
-          color: var(--color-ink-2);
-          font-size: var(--text-2xs);
-          font-weight: var(--weight-semibold);
-          transition: color var(--duration-fast) var(--ease-out),
-                      background-color var(--duration-fast) var(--ease-out),
-                      transform var(--duration-fast) var(--ease-out);
+          display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+          min-width: var(--tap-target); height: var(--nav-height); padding: 0 var(--space-5); margin: var(--space-1) 0;
+          border-radius: 14px; text-decoration: none;
+          color: var(--color-ink-2); font-size: var(--text-2xs); font-weight: var(--weight-semibold);
+          transition: color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
         }
         @media (hover: hover) { cat-nav a:hover { color: var(--color-ink); } }
         cat-nav a:active { transform: scale(var(--press-scale)); }
-        cat-nav a[aria-current="page"] {
-          color: var(--color-accent-hover);
-          background: var(--color-accent-subtle);
-        }
-        cat-nav .ico {
-          width: 1.45rem; height: 1.45rem; display: block;
-          image-rendering: pixelated;
-          filter: saturate(0.5) opacity(0.62);
-          transition: filter var(--duration-fast) var(--ease-out);
-        }
-        cat-nav a[aria-current="page"] .ico { filter: none; }
+        cat-nav a[aria-current="page"] { color: var(--color-accent-hover); background: var(--color-accent-subtle); }
+        cat-nav svg { width: 1.45rem; height: 1.45rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
       </style>
       ${ITEMS.map((i) => `
         <a href="#${i.path}" data-path="${i.path}">
-          ${icon(i.mark, { size: 22 })}
+          <svg viewBox="0 0 24 24" aria-hidden="true">${MARKS[i.mark]}</svg>
           <span>${i.label}</span>
         </a>`).join('')}
     `;

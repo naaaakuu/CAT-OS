@@ -20,37 +20,53 @@
   /* Surfaces — the studio's cream paper and soft sage wells (2.2: the
      art pack's palette, CAT_OS_ART/MATERIALS/palette.json). Matte: no
      sterile white, no glass. */
-  --color-bg:         #F7F6ED;   /* the desk — cream paper */
-  --color-surface:    #FCFBF6;   /* cards, sheets */
-  --color-surface-2:  #EFF1E6;   /* wells, pressed fills, tracks — soft sage */
-  --color-surface-3:  #E6EADC;   /* deeper wells (segmented track) */
+  --color-bg:         #F8F1E1;   /* the desk — the village's warm cream (3.0) */
+  --color-surface:    #FFFAF0;   /* cards, sheets */
+  --color-surface-2:  #F2E9D5;   /* wells, pressed fills, tracks — parchment */
+  --color-surface-3:  #EADFC6;   /* deeper wells (segmented track) */
 
   /* Ink — deep fern-grey, three deliberate levels of hierarchy.
      History that still binds: ink-2 was once 4.47:1 on the segmented track
      in Settings (2.1.2), and ink-3 once failed AA on every surface. Both are
      held at 4.5:1 against bg, surface, surface-2 AND surface-3 by
      tools/check-contrast.mjs; verify.mjs §22 runs it. */
-  --color-ink:        #2B3F34;   /* primary text */
-  --color-ink-2:      #46554B;   /* secondary text */
-  --color-ink-3:      #4E5B51;   /* captions, hints, eyebrows */
+  --color-ink:        #34443B;   /* primary text */
+  --color-ink-2:      #4A5649;   /* secondary text */
+  --color-ink-3:      #535D4F;   /* captions, hints, eyebrows */
 
   /* Lines — hairlines, the studio's only dividers */
-  --color-line:        #E1E4D6;  /* hairline borders */
-  --color-line-strong: #CDD5C3;  /* interactive borders */
+  --color-line:        #E7DCC2;  /* hairline borders */
+  --color-line-strong: #D3C39F;  /* interactive borders */
 
-  /* Accent — deep fern. Actions, active states, nothing else. */
-  --color-accent:        #355B48;
-  --color-accent-hover:  #2A4A3A;
+  /* Accent — the village sage. Actions, active states, nothing else. */
+  --color-accent:        #536D4E;
+  --color-accent-hover:  #425D3E;
   --color-accent-ink:    #FFFFFF;
-  --color-accent-subtle: #E6ECDF; /* quiet accent fills (active nav, info wells) */
+  --color-accent-subtle: #E6EAD3; /* quiet accent fills (active nav, info wells) */
 
   /* Chrome veil — translucent sticky bars over scrolling text */
-  --color-veil: rgba(247, 246, 237, 0.9);
+  --color-veil: rgba(248, 241, 225, 0.9);
+
+  /* The village (3.0): honey, terracotta, rose and sky from the painting,
+     and one colour per pet. Pets' colours are accents — rings, dots,
+     chips — never text on paper. */
+  --honey: #EDBE66;
+  --honey-deep: #A9782A;
+  --terracotta: #C2643F;
+  --rose: #D98B7A;
+  --sky: #8FB3C9;
+  --pet-toffee: #E9963A;
+  --pet-chai: #A9825A;
+  --pet-matcha: #7FA65A;
+  --pet-mochi: #7D8FA8;
+  --pet-ginger: #D2693A;
+  --pet-mallow: #93AED1;
+  --font-hand: Georgia, "Iowan Old Style", ui-serif, serif;
 
   /* Semantic states — muted, never alarming. Clay, honey and teal from
      the same palette as the buildings. */
-  --color-success:      #355B48;
-  --color-success-bg:   #E3EADA;
+  --color-success:      #536D4E;
+  --color-success-bg:   #E4E9D2;
   --color-warning:      #7E5C1C;
   --color-warning-bg:   #F5ECD3;
   --color-danger:       #9A4F3C;
@@ -289,16 +305,16 @@
   --radius-xs: 4px;     /* badges, chips */
   --radius-sm: 6px;     /* focus rings, inputs, buttons in the studio */
   --radius-md: 8px;     /* buttons, options */
-  --radius-lg: 12px;    /* cards, list items */
-  --radius-xl: 14px;    /* hero cards, reflection sheet */
+  --radius-lg: 14px;    /* cards, list items */
+  --radius-xl: 20px;    /* hero cards, reflection sheet */
   --radius-full: 999px; /* pills, tracks */
 
   /* ==================== ELEVATION ==================== */
   --shadow-0: none;
   /* Quiet: the studio lifts with a hairline first and a shadow second. */
-  --shadow-1: 0 1px 2px rgba(48, 71, 59, 0.05);      /* resting cards */
-  --shadow-2: 0 2px 6px rgba(48, 71, 59, 0.06),
-              0 12px 28px rgba(48, 71, 59, 0.08);   /* raised: toast, lift */
+  --shadow-1: 0 1px 2px rgba(92, 70, 38, 0.06);      /* resting cards */
+  --shadow-2: 0 2px 6px rgba(92, 70, 38, 0.07),
+              0 14px 32px rgba(92, 70, 38, 0.10);   /* raised: toast, lift */
 
   /* ==================== MOTION ==================== */
   --duration-fast:   120ms;   /* press feedback, state flips */
@@ -335,21 +351,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-bg:         #131916;
-    --color-surface:    #1A221E;
-    --color-surface-2:  #212A25;
-    --color-surface-3:  #28322C;
-    --color-ink:        #ECEADF;
-    --color-ink-2:      #B5BEAF;
-    --color-ink-3:      #A6B0A1;
-    --color-line:        #29322D;
-    --color-line-strong: #38443D;
-    --color-accent:        #A9C79B;
-    --color-accent-hover:  #BAD4AD;
-    --color-accent-ink:    #14231A;
-    --color-accent-subtle: #213029;
-    --color-veil: rgba(19, 25, 22, 0.86);
-    --color-success:     #A9C79B;
+    --color-bg:         #18211C;
+    --color-surface:    #212B25;
+    --color-surface-2:  #29342D;
+    --color-surface-3:  #313D35;
+    --color-ink:        #F3ECDD;
+    --color-ink-2:      #D2CAB6;
+    --color-ink-3:      #BFB8A5;
+    --color-line:        #2F3B34;
+    --color-line-strong: #3F4C44;
+    --color-accent:        #B7D19F;
+    --color-accent-hover:  #C8DDB4;
+    --color-accent-ink:    #15231A;
+    --color-accent-subtle: #26352B;
+    --color-veil: rgba(24, 33, 28, 0.88);
+    --color-success:     #B7D19F;
     --color-success-bg:  #1F2E25;
     --color-warning:     #D8AD59;
     --color-warning-bg:  #322A1A;
@@ -384,21 +400,21 @@
 }
 
 :root[data-theme="dark"] {
-  --color-bg:         #131916;
-  --color-surface:    #1A221E;
-  --color-surface-2:  #212A25;
-  --color-surface-3:  #28322C;
-  --color-ink:        #ECEADF;
-  --color-ink-2:      #B5BEAF;
-  --color-ink-3:      #A6B0A1;
-  --color-line:        #29322D;
-  --color-line-strong: #38443D;
-  --color-accent:        #A9C79B;
-  --color-accent-hover:  #BAD4AD;
-  --color-accent-ink:    #14231A;
-  --color-accent-subtle: #213029;
-  --color-veil: rgba(19, 25, 22, 0.86);
-  --color-success:     #A9C79B;
+  --color-bg:         #18211C;
+  --color-surface:    #212B25;
+  --color-surface-2:  #29342D;
+  --color-surface-3:  #313D35;
+  --color-ink:        #F3ECDD;
+  --color-ink-2:      #D2CAB6;
+  --color-ink-3:      #BFB8A5;
+  --color-line:        #2F3B34;
+  --color-line-strong: #3F4C44;
+  --color-accent:        #B7D19F;
+  --color-accent-hover:  #C8DDB4;
+  --color-accent-ink:    #15231A;
+  --color-accent-subtle: #26352B;
+  --color-veil: rgba(24, 33, 28, 0.88);
+  --color-success:     #B7D19F;
   --color-success-bg:  #1F2E25;
   --color-warning:     #D8AD59;
   --color-warning-bg:  #322A1A;

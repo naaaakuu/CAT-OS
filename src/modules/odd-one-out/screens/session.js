@@ -427,7 +427,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
       console.error('[CAT OS] ooo mentor derive failed:', err);
     }
 
-    const worldRewardHTML = worldReward(s, resolved.items ?? []).html;
+    const worldRewardHTML = worldReward(s, resolved.items ?? [], { storage }).html;
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">

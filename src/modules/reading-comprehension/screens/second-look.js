@@ -19,10 +19,10 @@
 import { loadRCPassages } from '../../../core/content-loader/loader.js';
 import { STORES } from '../../../core/storage/storage-adapter.js';
 import { missedQuestions, readingWeakness, typeName } from '../../../world/curator.js';
-import { EARN, verbalStars } from '../../../world/economy.js';
+import { verbalStars } from '../../../world/economy.js';
 import { renderResult, formatClock } from '../../../world/screens/result.js';
-import { mountBackdrop } from '../../../world/screens/backdrop.js';
-import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../../../world/state.js';
+import { paintedBackdrop, hostChip } from '../../../pets/sprite.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable } from '../../../world/state.js';
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld, startAmbience } from '../../../world/audio.js';
 import { escapeHTML } from '../../../core/utils/format.js';
@@ -78,21 +78,17 @@ export async function renderSecondLook(outlet, { storage }) {
   const targetSec = items.reduce((n, it) => n + (it.q.estimated_time_sec ?? 80), 0);
 
   outlet.innerHTML = `
-    <section class="run run--reading-room">
-      <canvas class="run__scene" id="run-scene" aria-hidden="true"></canvas>
-      <div class="run__veil" aria-hidden="true"></div>
+    ${paintedBackdrop('chai')}
+    <section class="run run--painted run--reading-room">
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/reading-room" aria-label="Leave">×</a>
-        <div class="run__where"><div class="run__place">The Reading House</div><div class="run__what" id="run-what">The second look</div></div>
+        <div class="run__where"><div class="run__place">${hostChip('chai', 20)}<span>The Reading House</span></div><div class="run__what" id="run-what">The second look</div></div>
         <div class="run__pace" id="pace" hidden><span class="run__clock" id="clock">0:00</span></div>
       </div>
       <div class="run__track" id="track-wrap" hidden><i id="track" style="width:0%"></i></div>
       <div class="run__body" id="body"></div>
     </section>`;
 
-  const backdrop = mountBackdrop(outlet.querySelector('#run-scene'), 'reading-room', before.state, atmo, { still: true });
-  const onHash = () => { backdrop?.destroy(); window.removeEventListener('hashchange', onHash); };
-  window.addEventListener('hashchange', onHash);
   startAmbience('reading-room', atmo);
 
   const body = outlet.querySelector('#body');
@@ -211,15 +207,14 @@ export async function renderSecondLook(outlet, { storage }) {
         answers,
       };
       const res = verbalStars(record, targetSec);
-      const earned = EARN.secondLook(res.stars, correct, res.flawless);
       try { await storage.put(STORES.SESSIONS, record); } catch (err) { console.error('[CAT OS] second look save failed', err); }
 
-      let worldLine = '', unlocked = [], setsDone = [];
+      let change = null, treasure = null, setsDone = [];
       try {
         const records = await loadWorldRecords(storage);
         const after = deriveWorldState(before.content, records);
-        worldLine = worldChangeLine('reading-room', before.state, after);
-        unlocked = newlyBuildable(before.state, after);
+        change = petChangeLine(before.state, after);
+        treasure = newlyAffordable(before.state, after);
         setsDone = newlyFinished(before.state, after, before.content);
       } catch { /* the facts still show */ }
 
@@ -237,13 +232,13 @@ export async function renderSecondLook(outlet, { storage }) {
           { label: 'Settled', value: String(settled), good: settled > 0 },
           { label: 'Time', value: formatClock(record.duration_ms), good: res.inTime && res.accuracy >= 0.5 },
         ],
-        earned,
-        worldLine,
+        pet: 'chai',
+        ...(change?.pet === 'chai' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
+        treasure,
         setsDone,
-        unlocked,
         actions: [
           { label: 'Back to the Reading House', href: '#/world/place/reading-room', primary: true },
-          { label: 'The valley', href: '#/world' },
+          { label: 'Back to the village', href: '#/world' },
         ],
       });
     }

@@ -1,0 +1,500 @@
+/* ============================================================
+   CAT OS — home.css (3.0): the pet village at #/world, and the
+   pet sprite, portrait and gift pieces every screen shares.
+   Colours come from tokens.css; the painting brings the rest.
+   ============================================================ */
+
+/* ---------------- Shared pieces ---------------- */
+.pet-sprite {
+  display: inline-block;
+  width: calc(var(--fw) * var(--size) / 256 * 1px);
+  height: calc(var(--size) * 1px);
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: calc(var(--f) * (var(--fw) + var(--g)) * var(--size) / 256 * -1px) 0;
+  flex: none;
+}
+.pet-portrait { display: inline-grid; place-items: center; border-radius: 50%; padding: 3px; background: conic-gradient(var(--ring, var(--color-line-strong)) calc(var(--mood, 100) * 1%), rgba(92, 70, 38, 0.14) 0); }
+.pet-portrait__disc {
+  width: var(--ps); height: var(--ps); border-radius: 50%; overflow: hidden;
+  display: grid; place-items: end center;
+  background: radial-gradient(circle at 50% 78%, #FFF4DC 0 40%, #F0DDB6 100%);
+}
+.pet-portrait__disc .pet-sprite { margin-bottom: -16%; }
+.gift { display: inline-block; vertical-align: middle; flex: none; }
+
+/* ---------------- The frame ---------------- */
+.cw {
+  position: relative; width: 100%; height: 100svh; overflow: hidden;
+  background: #46573f; color: var(--color-ink);
+  font-family: var(--font-ui);
+  user-select: none; -webkit-user-select: none; touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.cw button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.cw a { color: inherit; }
+.cw :focus-visible { outline: 3px solid var(--honey); outline-offset: 3px; }
+.cw--error { display: grid; place-content: center; padding: 24px; text-align: center; color: #fff9ec; }
+.cw-viewport { position: absolute; inset: 0; overflow: hidden; cursor: grab; outline: none; }
+.cw-viewport:focus-visible { box-shadow: inset 0 0 0 3px var(--honey); }
+.cw-viewport.is-dragging { cursor: grabbing; }
+.cw-map { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; contain: layout style; }
+.cw-art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-user-drag: none; }
+.cw-map > * { position: absolute; }
+.cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets { left: 0; top: 0; width: 100%; height: 100%; }
+.cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures { pointer-events: none; }
+.cw-life { image-rendering: auto; }
+.cw-pets { pointer-events: none; }
+.cw-map::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 140px rgba(28, 40, 30, 0.35); }
+
+/* The light of the hour: a wash over the painting, and the lamps and
+   windows coming up as it darkens. */
+.cw-tint { mix-blend-mode: multiply; background: transparent; transition: background-color 2s; }
+.cw[data-hour="dawn"] .cw-tint { background: rgba(246, 196, 186, 0.5); }
+.cw[data-hour="morning"] .cw-tint { background: rgba(222, 236, 248, 0.32); }
+.cw[data-hour="dusk"] .cw-tint { background: rgba(244, 150, 104, 0.62); }
+.cw[data-hour="dusk"] .cw-map::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(120, 90, 160, 0.22), rgba(255, 170, 110, 0) 55%); mix-blend-mode: multiply; }
+.cw[data-hour="night"] .cw-tint { background: rgba(46, 60, 112, 0.8); }
+.cw[data-weather="rain"] .cw-tint { background-color: rgba(150, 165, 180, 0.42); }
+.cw[data-weather="rain"][data-hour="night"] .cw-tint { background: rgba(40, 52, 96, 0.84); }
+.cw[data-weather="fog"] .cw-map::before { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(235, 238, 240, 0.4), rgba(235, 238, 240, 0.12) 60%, rgba(235, 238, 240, 0.3)); }
+
+.cw-glow {
+  position: absolute; width: calc(var(--r) * 2); height: calc(var(--r) * 2); margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
+  border-radius: 50%; mix-blend-mode: screen; opacity: 0; transition: opacity 2s;
+  background: radial-gradient(circle, rgba(255, 222, 150, 0.95) 0 12%, rgba(255, 182, 96, 0.42) 34%, rgba(255, 160, 80, 0) 70%);
+}
+.cw-glow--win { background: radial-gradient(circle, rgba(255, 206, 120, 0.9) 0 18%, rgba(255, 160, 70, 0.32) 45%, rgba(255, 150, 60, 0) 72%); }
+.cw[data-hour="dusk"] .cw-glow { opacity: 0.55; }
+.cw[data-hour="night"] .cw-glow { opacity: 1; animation: cw-flicker 4.6s ease-in-out infinite; }
+.cw[data-hour="night"] .cw-glow:nth-child(3n) { animation-delay: -1.7s; }
+.cw[data-hour="dawn"] .cw-glow--win { opacity: 0.35; }
+.cw.is-festival[data-hour="night"] .cw-glow { filter: saturate(1.3); }
+@keyframes cw-flicker { 0%, 100% { opacity: 1; } 45% { opacity: 0.86; } 52% { opacity: 0.96; } 70% { opacity: 0.9; } }
+
+/* Cloud shadows: very soft, very slow, only while the sun is up. */
+.cw-clouds i {
+  position: absolute; width: 900px; height: 520px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(24, 38, 30, 0.17), rgba(24, 38, 30, 0));
+  animation: cw-cloud 150s linear infinite; left: -900px;
+}
+.cw-clouds i:nth-child(1) { top: 40px; }
+.cw-clouds i:nth-child(2) { top: 430px; animation-duration: 190s; animation-delay: -95s; width: 1100px; }
+.cw-clouds i:nth-child(3) { top: 700px; animation-duration: 170s; animation-delay: -40s; width: 760px; height: 400px; }
+.cw[data-hour="night"] .cw-clouds, .cw[data-hour="dusk"] .cw-clouds { display: none; }
+@keyframes cw-cloud { to { transform: translateX(2700px); } }
+
+/* The clock tower's hands. */
+.cw-clock { overflow: visible; }
+.cw-clock line { stroke: #2f2a26; stroke-linecap: round; }
+.cw-clock__h { stroke-width: 1.5; }
+.cw-clock__m { stroke-width: 1; }
+.cw-clock circle { fill: #2f2a26; }
+
+/* ---------------- Buildings you can tap ---------------- */
+.cw-spots { z-index: 1; }
+.cw-spot { position: absolute; padding: 0; border: 0; background: none; border-radius: 40%; }
+.cw-spot:focus-visible { outline: 3px solid var(--honey); outline-offset: -6px; }
+.cw-plate {
+  position: absolute; left: 50%; top: 4%; transform: translate(-50%, 0) scale(var(--inv, 1)); transform-origin: 50% 0;
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  padding: 7px 13px; border-radius: 12px; white-space: nowrap; pointer-events: none;
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent); color: var(--color-ink);
+  font: 600 13px/1.2 var(--font-ui); box-shadow: 0 6px 18px rgba(40, 30, 16, 0.22);
+  opacity: 0; transition: opacity 0.18s, translate 0.18s; translate: 0 6px;
+}
+.cw-plate small { font-weight: 450; font-size: 11px; color: var(--color-ink-3); }
+.cw-spot:hover .cw-plate, .cw-spot:focus-visible .cw-plate { opacity: 1; translate: 0 0; }
+
+/* ---------------- The pets ---------------- */
+.pet {
+  position: absolute; left: 0; top: 0; padding: 0; border: 0; background: none; border-radius: 40%;
+  width: calc(var(--size) * 0.8px); height: calc(var(--size) * 1px);
+  margin: calc(var(--size) * -1px) 0 0 calc(var(--size) * -0.4px);
+  pointer-events: auto; --hour-f: brightness(1); --mood-f: saturate(1);
+}
+.pet-body { position: absolute; left: 50%; bottom: 0; width: 0; height: 0; transform-origin: 0 100%; }
+.pet-body .pet-sprite { position: absolute; left: 0; bottom: -2px; translate: -50% 0; filter: var(--mood-f) var(--hour-f); transition: filter 1.4s; cursor: pointer; }
+.pet:focus-visible { outline: none; box-shadow: none; }
+.pet:focus-visible .pet-sprite { filter: drop-shadow(0 0 0 var(--honey)) drop-shadow(0 0 4px var(--honey)) drop-shadow(0 0 6px var(--honey)); }
+.pet-shadow {
+  position: absolute; left: 50%; top: 100%; width: calc(var(--size) * 0.62px); height: calc(var(--size) * 0.14px);
+  margin: calc(var(--size) * -0.07px) 0 0 calc(var(--size) * -0.31px);
+  border-radius: 50%; background: radial-gradient(closest-side, rgba(30, 22, 12, 0.36), rgba(30, 22, 12, 0));
+  pointer-events: none;
+}
+.pet[data-word="glowing"] { --mood-f: drop-shadow(0 0 5px rgba(255, 224, 150, 0.7)); }
+.pet[data-word="missing"] { --mood-f: saturate(0.92); }
+.pet[data-word="sleepy"] { --mood-f: saturate(0.72) brightness(0.96); }
+.pet[data-word="wilting"] { --mood-f: grayscale(0.6) brightness(0.9); }
+.pet--toffee[data-word="wilting"] { --mood-f: saturate(0.8) brightness(0.78) sepia(0.2); }
+.pet--toffee[data-word="sleepy"] { --mood-f: saturate(0.75) brightness(0.92); }
+.cw[data-hour="dusk"] .pet { --hour-f: brightness(0.92) sepia(0.12); }
+.cw[data-hour="night"] .pet { --hour-f: brightness(0.7) saturate(0.82); }
+.cw[data-hour="night"] .pet--toffee { --hour-f: brightness(1.05) drop-shadow(0 0 10px rgba(255, 170, 70, 0.75)); }
+.pet--toffee { --hour-f: drop-shadow(0 0 6px rgba(255, 170, 70, 0.45)); }
+
+/* Sleep: little z's float up, unflipped. */
+.pet[data-state="sleep"]::after, .pet[data-state="doze"]::after, .pet[data-state="slump"]::after {
+  content: "z"; position: absolute; left: calc(50% + var(--size) * 0.18px); bottom: calc(var(--size) * 0.86px);
+  font: italic 700 15px/1 Georgia, serif; color: #fff9ec; text-shadow: 0 1px 3px rgba(30, 30, 50, 0.6);
+  transform: scale(var(--inv, 1)); animation: cw-zz 2.6s ease-in infinite; pointer-events: none;
+}
+@keyframes cw-zz { 0% { opacity: 0; translate: 0 0; } 25% { opacity: 1; } 100% { opacity: 0; translate: 14px -26px; } }
+
+/* Speech, held at a readable size whatever the zoom. */
+.pet-bubble {
+  position: absolute; left: 50%; bottom: calc(var(--size) * 1px + 6px);
+  transform: translateX(-50%) scale(var(--inv, 1)); transform-origin: 50% 100%;
+  max-width: 230px; width: max-content; padding: 8px 12px; border-radius: 14px;
+  background: var(--color-surface); color: var(--color-ink);
+  font: 14px/1.38 var(--font-display); text-align: center;
+  box-shadow: 0 6px 18px rgba(40, 30, 16, 0.24); pointer-events: none; z-index: 2;
+  animation: cw-pop-in 0.22s var(--ease-out);
+}
+.pet-bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; margin-left: -6px; background: inherit; transform: rotate(45deg); border-radius: 2px; }
+.pet-bubble[hidden], .pet-think[hidden] { display: none; }
+.pet-bubble.is-out { opacity: 0; transition: opacity 0.25s; }
+.pet-bubble .gift { margin: -2px 0; }
+.pet-bubble__tap { display: block; margin-top: 3px; font: 600 10px/1 var(--font-ui); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink-3); }
+.pet-bubble__tap:empty { display: none; }
+.pet-bubble.is-pinned { max-width: 270px; font-size: 15px; padding: 11px 15px; }
+.pet-think {
+  position: absolute; left: calc(50% + var(--size) * 0.3px); bottom: calc(var(--size) * 0.98px);
+  width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%;
+  background: var(--color-surface); box-shadow: 0 4px 12px rgba(40, 30, 16, 0.25);
+  transform: scale(var(--inv, 1)); transform-origin: 0 100%; animation: cw-think 2.4s ease-in-out infinite; pointer-events: none;
+}
+.pet-think::before, .pet-think::after { content: ""; position: absolute; border-radius: 50%; background: var(--color-surface); box-shadow: 0 2px 6px rgba(40, 30, 16, 0.2); }
+.pet-think::before { width: 10px; height: 10px; left: -4px; bottom: -6px; }
+.pet-think::after { width: 6px; height: 6px; left: -10px; bottom: -12px; }
+@keyframes cw-think { 0%, 100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+.pet-carry { position: absolute; left: 50%; bottom: calc(var(--size) * 0.9px); translate: -50% 0; animation: cw-bob 0.5s ease-in-out infinite alternate; filter: drop-shadow(0 2px 2px rgba(40, 30, 16, 0.3)); }
+.pet-carry.is-given { animation: cw-give 0.7s ease-in forwards; }
+@keyframes cw-bob { to { translate: -50% -4px; } }
+@keyframes cw-give { to { translate: -50% -40px; opacity: 0; scale: 1.4; } }
+.pet-heart { position: absolute; left: 50%; bottom: calc(var(--size) * 0.8px); font-style: normal; font-size: 18px; color: #E46F86; text-shadow: 0 1px 2px rgba(80, 20, 30, 0.35); pointer-events: none; animation: cw-heart 1.3s ease-out forwards; }
+@keyframes cw-heart { 0% { opacity: 0; translate: 0 0; scale: 0.6; } 15% { opacity: 1; scale: 1.1; } 100% { opacity: 0; translate: var(--dx, 0) -54px; scale: 0.9; } }
+@keyframes cw-pop-in { from { opacity: 0; scale: 0.85; } }
+
+/* ---------------- Treasures on the map ---------------- */
+.cw-treasure { position: absolute; pointer-events: none; z-index: 0; }
+.cw-treasure svg { display: block; overflow: visible; }
+.cw-treasure.is-new { animation: cw-arrive 0.9s var(--ease-out); }
+@keyframes cw-arrive { 0% { opacity: 0; scale: 0.4; } 60% { opacity: 1; scale: 1.08; } 100% { scale: 1; } }
+.cw-treasure--bunting svg { transform-origin: 50% 0; animation: cw-sway 7s ease-in-out infinite; }
+.cw-treasure--lanterns svg { transform-origin: 50% 0; animation: cw-sway 4.4s ease-in-out infinite; }
+.cw-treasure--lanterns:nth-child(2n) svg { animation-delay: -2s; }
+.cw-swing__arm { transform-origin: 35px 0; animation: cw-swing 3.4s ease-in-out infinite; }
+.cw-chimes__arm { transform-origin: 20px 0; animation: cw-sway 3s ease-in-out infinite; }
+.cw-kite__body { animation: cw-kite 5s ease-in-out infinite; transform-origin: 60px 30px; }
+.cw-kite__tail { animation: cw-tail 1.6s ease-in-out infinite alternate; }
+.cw[data-hour="night"] .cw-treasure--kite { display: none; }
+@keyframes cw-sway { 0%, 100% { rotate: -1.6deg; } 50% { rotate: 1.6deg; } }
+@keyframes cw-swing { 0%, 100% { rotate: -7deg; } 50% { rotate: 7deg; } }
+@keyframes cw-kite { 0%, 100% { translate: 0 0; rotate: -4deg; } 50% { translate: 10px -8px; rotate: 5deg; } }
+@keyframes cw-tail { to { transform: skewX(12deg); } }
+.cw-treasure__glow { position: absolute; left: 50%; top: 55%; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; mix-blend-mode: screen; opacity: 0; background: radial-gradient(circle, rgba(255, 200, 120, 0.85), rgba(255, 160, 80, 0) 68%); transition: opacity 2s; }
+.cw-treasure--fireflies .cw-treasure__glow { width: 70px; height: 70px; margin: -35px 0 0 -35px; background: radial-gradient(circle, rgba(220, 255, 140, 0.8), rgba(200, 255, 120, 0) 68%); }
+.cw[data-hour="dusk"] .cw-treasure__glow { opacity: 0.6; }
+.cw[data-hour="night"] .cw-treasure__glow { opacity: 1; }
+
+/* ---------------- The three things on top ---------------- */
+.cw-hud {
+  position: absolute; z-index: 10; left: 0; right: 0; top: 0;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+  padding: max(12px, env(safe-area-inset-top)) 14px 0; pointer-events: none;
+}
+.cw-hud > *, .cw-hud__right > * { pointer-events: auto; }
+.cw-hud__right { display: flex; gap: 9px; }
+.cw-flame, .cw-round, .cw-today {
+  border: 1px solid color-mix(in srgb, var(--color-line-strong) 70%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 93%, transparent); color: var(--color-ink);
+  box-shadow: 0 6px 22px rgba(30, 24, 12, 0.22), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.cw-flame { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 5px 16px 5px 8px; border-radius: 999px; max-width: 62vw; }
+.cw-flame__svg { width: 34px; height: 34px; flex: none; filter: drop-shadow(0 0 6px rgba(255, 170, 60, 0.55)); transform-origin: 50% 90%; animation: cw-candle 2.2s ease-in-out infinite; }
+@keyframes cw-candle { 0%, 100% { scale: 1 1; } 50% { scale: 0.96 1.05; } }
+.cw-flame__n { display: flex; align-items: baseline; gap: 3px; }
+.cw-flame__n b { font: 400 22px/1 var(--font-display); }
+.cw-flame__n small { font-size: 11px; color: var(--color-ink-3); }
+.cw-flame__name { font: 400 15px/1.15 var(--font-display); padding-left: 10px; border-left: 1px solid var(--color-line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cw-flame__svg + .cw-flame__name { border-left: 0; padding-left: 0; }
+.cw-round { position: relative; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; padding: 0; }
+.cw-round svg { width: 23px; height: 23px; color: var(--color-ink-2); }
+.cw-badge { position: absolute; top: 4px; right: 4px; width: 11px; height: 11px; border-radius: 50%; background: var(--honey); box-shadow: 0 0 0 2px var(--color-surface); animation: cw-pulse 1.8s ease-in-out infinite; }
+@keyframes cw-pulse { 50% { scale: 1.3; } }
+.cw-today {
+  position: absolute; z-index: 10; left: 50%; bottom: max(18px, calc(env(safe-area-inset-bottom) + 10px)); translate: -50% 0;
+  display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 8px 18px 8px 14px; border-radius: 999px;
+  font: 600 13.5px/1 var(--font-ui); white-space: nowrap;
+}
+.cw-today__dots { display: flex; gap: 5px; }
+.cw-today__dots i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--c); background: transparent; }
+.cw-today__dots i.is-done { background: var(--c); }
+
+.cw-toast {
+  position: absolute; z-index: 12; left: 50%; top: calc(max(12px, env(safe-area-inset-top)) + 60px);
+  translate: -50% -14px; opacity: 0; pointer-events: none; transition: opacity 0.3s, translate 0.3s var(--ease-out);
+  max-width: min(92vw, 420px);
+}
+.cw-toast.is-in { opacity: 1; translate: -50% 0; pointer-events: auto; }
+.cw-toast p {
+  margin: 0; display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 16px;
+  background: var(--color-surface); color: var(--color-ink); font-size: 14px; line-height: 1.35;
+  box-shadow: 0 10px 30px rgba(30, 24, 12, 0.28);
+}
+.cw-letter { display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 0; text-align: left; min-height: 44px; }
+.cw-letter .pet-sprite { margin: -6px 0; }
+
+/* ---------------- Cards ---------------- */
+.cw-overlay { position: absolute; inset: 0; z-index: 30; }
+.cw-overlay[hidden] { display: none; }
+.cw-scrim { position: absolute; inset: 0; background: rgba(22, 30, 22, 0.32); opacity: 0; transition: opacity 0.25s; }
+.cw-overlay.is-open .cw-scrim { opacity: 1; }
+.cw-card {
+  position: absolute; left: 0; right: 0; bottom: 0; max-height: 84svh; overflow: auto; overscroll-behavior: contain;
+  padding: 18px 20px calc(26px + env(safe-area-inset-bottom)); border-radius: 26px 26px 0 0;
+  background: var(--color-surface); color: var(--color-ink); box-shadow: 0 -12px 40px rgba(30, 24, 12, 0.3);
+  transform: translateY(104%); transition: transform 0.34s var(--ease-out); user-select: text; -webkit-user-select: text; touch-action: pan-y;
+  outline: none; scrollbar-width: thin;
+}
+.cw-card:focus, .cw-card:focus-visible { outline: none; }
+.cw-overlay.is-open .cw-card { transform: none; }
+.cw-card::before { content: ""; display: block; width: 42px; height: 5px; margin: -6px auto 10px; border-radius: 3px; background: var(--color-line-strong); }
+@media (min-width: 900px) {
+  .cw-card { left: auto; right: 20px; top: 78px; bottom: 20px; width: 410px; max-height: none; border-radius: 26px; transform: translateX(calc(100% + 30px)); box-shadow: 0 18px 60px rgba(30, 24, 12, 0.32); }
+  .cw-card::before { display: none; }
+  .cw-scrim { background: rgba(22, 30, 22, 0.12); }
+}
+.cw-x { position: sticky; float: right; top: 2px; margin: -6px -8px -44px 0; z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-line); background: var(--color-surface); font-size: 22px !important; line-height: 1; color: var(--color-ink-2); }
+.cw-card__hero {
+  position: relative; height: 150px; margin: 0 -6px 12px; border-radius: 18px; background-color: #6b7d55; background-repeat: no-repeat;
+  display: flex; align-items: flex-end; justify-content: center; overflow: visible;
+  box-shadow: inset 0 -60px 50px -30px rgba(255, 249, 236, 0.0);
+}
+.cw-card__hero::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(255, 249, 236, 0) 40%, rgba(255, 249, 236, 0.18)); pointer-events: none; }
+.cw-card__pet { position: relative; z-index: 1; margin-bottom: -26px; filter: drop-shadow(0 6px 6px rgba(30, 24, 12, 0.3)); animation: cw-breathe 3.4s ease-in-out infinite; }
+@keyframes cw-breathe { 50% { translate: 0 -3px; } }
+.cw-card--cottage .cw-card__hero { height: 120px; }
+.cw-eyebrow { margin: 24px 0 4px; font: 650 11px/1.3 var(--font-ui); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ink-3); }
+.cw-card--hearth .cw-eyebrow, .cw-card--satchel .cw-eyebrow { margin-top: 6px; }
+.cw-card__name { margin: 0 0 10px; font: 400 29px/1.1 var(--font-display); letter-spacing: -0.01em; padding-right: 44px; }
+.cw-card__name small { font: 400 14px var(--font-display); color: var(--color-ink-3); font-style: italic; }
+.cw-sub { margin: 6px 0 12px; font-size: 13.5px; line-height: 1.5; color: var(--color-ink-2); }
+.cw-h3 { margin: 22px 0 10px; font: 400 19px/1.2 var(--font-display); scroll-margin-top: 16px; }
+.cw-mood { display: flex; align-items: center; gap: 10px; margin: 4px 0 10px; }
+.cw-mood__bar { flex: 1; height: 9px; border-radius: 9px; background: var(--color-surface-2); overflow: hidden; box-shadow: inset 0 1px 2px rgba(60, 40, 20, 0.12); }
+.cw-mood__bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #E9A23B, #9CBF6B); transition: width 0.8s var(--ease-out); }
+.cw-mood--missing .cw-mood__bar i { background: linear-gradient(90deg, #D98B7A, #E2B26B); }
+.cw-mood--sleepy .cw-mood__bar i, .cw-mood--wilting .cw-mood__bar i { background: linear-gradient(90deg, #8A93A6, #B4A88E); }
+.cw-mood--new .cw-mood__bar i { background: repeating-linear-gradient(90deg, var(--sky) 0 8px, color-mix(in srgb, var(--sky) 60%, white) 8px 16px); }
+.cw-mood b { font: 600 13px var(--font-ui); min-width: 92px; text-align: right; }
+.cw-hearts { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 12.5px; color: var(--color-ink-3); }
+.cw-hearts__row { display: flex; gap: 2px; font-size: 17px; letter-spacing: 0; }
+.cw-hearts__row i { font-style: normal; color: var(--color-line-strong); }
+.cw-hearts__row i.on { color: #E46F86; text-shadow: 0 1px 0 rgba(120, 30, 50, 0.2); }
+.cw-say { margin: 0 0 14px; padding: 12px 16px; border-radius: 16px; background: var(--color-surface-2); font: italic 400 16px/1.45 var(--font-display); position: relative; }
+.cw-say::before { content: "“"; position: absolute; left: 8px; top: -8px; font: 40px/1 Georgia, serif; color: var(--color-line-strong); }
+.cw-say--small { font-size: 14.5px; margin-top: 14px; }
+.cw-wishnote { margin: -4px 0 12px; font-size: 13px; color: var(--honey-deep); font-weight: 600; }
+.cw-go {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 14px; padding: 15px 18px; border-radius: 18px;
+  background: var(--color-accent); color: var(--color-accent-ink) !important; text-decoration: none;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--color-accent) 70%, black), 0 8px 20px rgba(40, 60, 30, 0.2);
+  transition: translate 0.12s, box-shadow 0.12s;
+}
+.cw-go:active { translate: 0 2px; box-shadow: 0 1px 0 color-mix(in srgb, var(--color-accent) 70%, black); }
+.cw-go b { display: block; font: 600 16px/1.25 var(--font-ui); }
+.cw-go small { display: block; margin-top: 3px; font-size: 12.5px; line-height: 1.35; opacity: 0.88; }
+.cw-go i { font-style: normal; font-size: 22px; }
+.cw-ring { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; padding: 10px 12px; border-radius: 14px; border: 1px dashed var(--color-line-strong); }
+.cw-ring p { margin: 0; font-size: 13.5px; line-height: 1.4; }
+.cw-ring.is-full { border-style: solid; background: color-mix(in srgb, var(--color-accent-subtle) 70%, transparent); }
+.cw-made { display: flex; align-items: flex-start; gap: 9px; margin: 0 0 10px; font-size: 13px; line-height: 1.45; color: var(--color-ink-2); }
+.cw-more { margin: 8px 0 0; border-top: 1px solid var(--color-line); }
+.cw-more summary { cursor: pointer; padding: 13px 2px; font: 600 14px var(--font-ui); list-style: none; display: flex; justify-content: space-between; min-height: 44px; align-items: center; }
+.cw-more summary::after { content: "+"; font-size: 18px; color: var(--color-ink-3); }
+.cw-more[open] summary::after { content: "–"; }
+.cw-more ul, .cw-more ol { margin: 0 0 10px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.cw-more li a { display: block; padding: 11px 14px; border-radius: 14px; background: var(--color-surface-2); text-decoration: none; min-height: 44px; }
+.cw-more li a b { display: block; font-size: 14px; }
+.cw-more li a small { display: block; margin-top: 2px; font-size: 12.5px; color: var(--color-ink-3); }
+.cw-story ol { counter-reset: s; }
+.cw-story li { position: relative; padding: 8px 10px 8px 34px; font: italic 14.5px/1.45 var(--font-display); counter-increment: s; }
+.cw-story li::before { content: "♥"; position: absolute; left: 10px; top: 9px; font-style: normal; color: #E46F86; font-size: 13px; }
+.cw-story-hint { margin: 12px 0 0; font-size: 12.5px; color: var(--color-ink-3); font-style: italic; }
+
+/* The fire card */
+.cw-orbit { position: relative; width: min(100%, 300px); aspect-ratio: 1; margin: 6px auto 4px; }
+.cw-orbit__fire { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: grid; place-items: center; }
+.cw-orbit__fire i { position: absolute; width: 130px; height: 130px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 196, 100, calc(0.25 + var(--harmony, 0.5) * 0.5)), rgba(255, 160, 70, 0) 68%); animation: cw-flicker 3s ease-in-out infinite; }
+.cw-orbit__fire .gift { position: relative; animation: cw-candle 1.8s ease-in-out infinite; transform-origin: 50% 90%; }
+.cw-orbit__pet { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.cw-orbit__pet .pet-portrait { --mood: var(--m); }
+.cw-orbit__pet small { font-size: 11.5px; font-weight: 600; }
+.cw-orbit__pet--glowing .pet-portrait { --ring: var(--honey); }
+.cw-orbit__pet--happy .pet-portrait { --ring: #8FB56A; }
+.cw-orbit__pet--missing .pet-portrait { --ring: var(--rose); }
+.cw-orbit__pet--sleepy .pet-portrait, .cw-orbit__pet--wilting .pet-portrait { --ring: #8A93A6; }
+.cw-orbit__pet--wilting .pet-sprite { filter: grayscale(0.6); }
+.cw-orbit__pet--new .pet-portrait { --ring: var(--sky); }
+.cw-harmony { text-align: center; margin: 4px 0 6px; font: italic 16px/1.4 var(--font-display); }
+.cw-wishes { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.cw-wishes li { display: flex; align-items: center; gap: 11px; padding: 8px 10px 8px 8px; border-radius: 16px; background: var(--color-surface-2); font-size: 14px; }
+.cw-wishes li > span:not(.pet-portrait) { flex: 1; }
+.cw-wishes li a { padding: 10px 16px; min-height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--color-accent); color: var(--color-accent-ink) !important; text-decoration: none; font-weight: 650; font-size: 13px; }
+.cw-wishes li b { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--honey); color: #3b2a10; }
+.cw-wishes li.is-done > span:not(.pet-portrait) { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--color-ink) 40%, transparent); color: var(--color-ink-3); }
+
+/* The satchel */
+.cw-gifts { margin: 6px 0 10px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cw-gifts li { display: grid; justify-items: center; gap: 2px; padding: 12px 6px 10px; border-radius: 16px; background: var(--color-surface-2); text-align: center; }
+.cw-gifts b { font: 400 22px/1.1 var(--font-display); }
+.cw-gifts span { font-size: 12.5px; font-weight: 600; }
+.cw-gifts small { font-size: 11px; color: var(--color-ink-3); }
+.cw-ringline { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 12px; }
+.cw-ringline span { display: inline-flex; align-items: center; gap: 3px; font-weight: 600; }
+.cw-ringline i { font-style: normal; color: var(--color-ink-3); }
+.cw-treasure-next { padding: 14px; border-radius: 18px; border: 1px solid var(--color-line-strong); background: linear-gradient(180deg, color-mix(in srgb, var(--honey) 14%, var(--color-surface)), var(--color-surface)); }
+.cw-treasure-next__name { margin: 0; font: 400 20px/1.2 var(--font-display); }
+.cw-recipe { margin: 4px 0 12px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.cw-recipe li { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px 5px 6px; border-radius: 999px; background: var(--color-surface-2); font-size: 13px; }
+.cw-recipe li.is-ok { background: color-mix(in srgb, var(--color-accent-subtle) 90%, transparent); }
+.cw-recipe li.is-ok b::after { content: " ✓"; color: var(--color-accent); }
+.cw-make { width: 100%; min-height: 48px; border: 0; border-radius: 14px; background: var(--honey); color: #3b2a10; font: 650 15px var(--font-ui); box-shadow: 0 3px 0 #b88a3a; }
+.cw-make:disabled { background: var(--color-surface-3); color: var(--color-ink-3); box-shadow: none; cursor: default; font-weight: 500; font-size: 13.5px; }
+.cw-treasure-list { margin: 14px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; font-size: 13px; color: var(--color-ink-3); }
+.cw-treasure-list li { display: flex; gap: 8px; align-items: center; }
+.cw-treasure-list li i { font-style: normal; width: 16px; text-align: center; }
+.cw-treasure-list li.is-made { color: var(--color-ink); }
+.cw-treasure-list li.is-made i { color: var(--color-accent); }
+.cw-treasure-list li.is-next { color: var(--honey-deep); font-weight: 600; }
+
+/* The cottage */
+.cw-name { margin: 2px 0 14px; }
+.cw-name label { display: block; margin-bottom: 6px; font-size: 13px; color: var(--color-ink-2); }
+.cw-name__row { display: flex; gap: 8px; }
+.cw-name input { flex: 1; min-width: 0; min-height: 46px; padding: 0 14px; border-radius: 14px; border: 1px solid var(--color-line-strong); background: var(--color-surface); color: var(--color-ink); font: 16px var(--font-display); }
+.cw-name__row button { min-height: 46px; padding: 0 18px; border-radius: 14px; border: 0; background: var(--color-accent); color: var(--color-accent-ink); font-weight: 650; }
+.cw-name__ideas { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+.cw-name__ideas button { min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px dashed var(--color-line-strong); background: none; font: italic 13.5px var(--font-display); color: var(--color-ink-2); }
+.cw-toggles { display: grid; gap: 8px; margin: 0 0 14px; }
+.cw-toggle { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 14px; border-radius: 16px; border: 0; background: var(--color-surface-2); font-size: 14.5px; text-align: left; }
+.cw-toggle i { width: 46px; height: 28px; border-radius: 14px; background: var(--color-line-strong); position: relative; transition: background 0.2s; }
+.cw-toggle i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); transition: translate 0.2s var(--ease-out); }
+.cw-toggle[aria-pressed="true"] i { background: var(--color-accent); }
+.cw-toggle[aria-pressed="true"] i::after { translate: 18px 0; }
+.cw-rooms { display: grid; gap: 8px; margin: 0 0 12px; }
+.cw-rooms a { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 12px 14px; border-radius: 16px; border: 1px solid var(--color-line); text-decoration: none; min-height: 52px; }
+.cw-rooms a b { font-size: 14.5px; }
+.cw-rooms a small { grid-column: 1; font-size: 12.5px; color: var(--color-ink-3); }
+.cw-rooms a i { grid-row: 1 / span 2; grid-column: 2; font-style: normal; color: var(--color-ink-3); }
+
+/* A letter */
+.cw-letter-card { margin: 4px 0 14px; padding: 22px 20px 18px; border-radius: 20px; text-align: center; background: repeating-linear-gradient(180deg, transparent 0 27px, color-mix(in srgb, var(--color-line) 70%, transparent) 27px 28px), var(--color-surface-2); }
+.cw-letter-card .cw-card__pet { display: inline-block; margin: -8px 0 4px; }
+.cw-letter-card .cw-eyebrow { margin-top: 4px; }
+.cw-letter-text { font: italic 18px/1.55 var(--font-display); margin: 6px 0 8px; }
+.cw-letter-sign { margin: 0; font: 15px var(--font-display); color: var(--color-ink-2); }
+
+/* ---------------- Small screens ---------------- */
+@media (max-width: 380px) {
+  .cw-flame__name { display: none; }
+  .cw-card__name { font-size: 26px; }
+}
+
+/* ---------------- Less motion ---------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) .cw *, :root:not([data-motion="full"]) .cw *::before, :root:not([data-motion="full"]) .cw *::after { animation: none !important; transition: none !important; }
+}
+html[data-reduced-motion] .cw *, html[data-reduced-motion] .cw *::before, html[data-reduced-motion] .cw *::after { animation: none !important; transition: none !important; }
+html[data-reduced-motion] .cw-clouds { display: none; }
+
+/* ---------------- Painted backdrops (every other screen) ----------------
+   A soft, warm crop of the host pet's home, under a cream veil, so a
+   lesson always feels like it happens somewhere in the village. */
+.pv-backdrop { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--color-bg); }
+.pv-backdrop > i { position: absolute; inset: -24px; background-repeat: no-repeat; filter: blur(5px) saturate(1.05); opacity: 0.9; }
+.pv-backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--color-bg) 22%, transparent) 0%, color-mix(in srgb, var(--color-bg) 70%, transparent) 46%, color-mix(in srgb, var(--color-bg) 88%, transparent) 100%); }
+.pv-host { display: inline-flex; align-items: center; gap: 8px; font: 600 13px/1 var(--font-ui); color: var(--color-ink-2); }
+.pv-host .pet-portrait { padding: 2px; }
+
+/* The stage behind a learning room (src/world/stage.js): the host pet's
+   home, softened. In dark theme it is the same place after sunset. */
+.roomstage__art { position: absolute; inset: -24px; background-repeat: no-repeat; filter: blur(4px) saturate(1.05); }
+:root[data-theme="dark"] .roomstage__art, :root[data-theme="dark"] .pv-backdrop > i { filter: blur(4px) brightness(0.5) saturate(0.85) hue-rotate(-8deg); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .roomstage__art, :root:not([data-theme="light"]) .pv-backdrop > i { filter: blur(4px) brightness(0.5) saturate(0.85) hue-rotate(-8deg); }
+}
+
+/* A place's hero: the host pet's home from the painting, the pet at its door. */
+.place__hero--painted { background-color: #5d6e4c; background-repeat: no-repeat; }
+.place__hero--painted::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 30, 20, 0.18), rgba(20, 30, 20, 0) 26%); pointer-events: none; }
+.place__pet { position: absolute; left: 50%; top: 44dvh; translate: -50% -100%; z-index: 1; filter: drop-shadow(0 10px 6px rgba(30, 24, 12, 0.35)); animation: cw-breathe 3.6s ease-in-out infinite; pointer-events: none; }
+.place__pet::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 74px; height: 14px; margin-left: -37px; border-radius: 50%; background: radial-gradient(closest-side, rgba(30, 22, 12, 0.4), transparent); z-index: -1; }
+:root[data-theme="dark"] .place__hero--painted { filter: brightness(0.62) saturate(0.85); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .place__hero--painted { filter: brightness(0.62) saturate(0.85); } }
+.placewick .pet-portrait { flex: none; }
+html[data-reduced-motion] .place__pet { animation: none; }
+
+/* Records (the hearth page) */
+.place--hearth .place__pet { top: auto; bottom: -14px; translate: -50% 0; }
+.friends { display: grid; gap: 8px; margin: 0 0 6px; }
+.friend { display: flex; align-items: center; gap: 12px; padding: 9px 12px 9px 9px; border-radius: 16px; background: var(--color-surface); border: 1px solid var(--color-line); text-decoration: none; color: var(--color-ink); min-height: 60px; }
+.friend__lead { flex: 1; min-width: 0; }
+.friend__lead b { display: block; font: 400 17px/1.2 var(--font-display); }
+.friend__lead small { display: block; font-size: 12px; color: var(--color-ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.friend__side { text-align: right; display: grid; gap: 2px; flex: none; max-width: 42%; }
+.friend__side small { font-size: 11.5px; line-height: 1.3; color: var(--color-ink-2); }
+.friend__hearts { color: #E46F86; letter-spacing: 1px; font-size: 13px; }
+.friend__hearts i { font-style: normal; color: var(--color-line-strong); }
+.friend--glowing .pet-portrait { --ring: var(--honey); }
+.friend--happy .pet-portrait { --ring: #8FB56A; }
+.friend--missing .pet-portrait { --ring: var(--rose); }
+.friend--sleepy .pet-portrait, .friend--wilting .pet-portrait { --ring: #8A93A6; }
+.friend--new .pet-portrait { --ring: var(--sky); }
+.treasures-made { margin: 0 0 8px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.treasures-made li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: 14px; background: var(--color-surface-2); color: var(--color-ink-3); }
+.treasures-made li i { font-style: normal; width: 16px; text-align: center; }
+.treasures-made li b { display: block; font-size: 14px; }
+.treasures-made li small { display: block; margin-top: 2px; font-size: 12.5px; }
+.treasures-made li.is-made { color: var(--color-ink); }
+.treasures-made li.is-made i { color: var(--color-accent); }
+.treasures-made li.is-next { color: var(--honey-deep); }
+
+/* The clock tower (Progress): a painted band, then one row per friend. */
+.tower__hero { position: relative; height: 150px; margin: calc(var(--space-4) * -1) calc(var(--space-4) * -1) 16px; border-radius: 0 0 26px 26px; background-color: #6b7d55; background-repeat: no-repeat; box-shadow: inset 0 -40px 40px -24px rgba(20, 30, 20, 0.35); }
+.tower__pet { position: absolute; left: 22px; bottom: -18px; filter: drop-shadow(0 6px 5px rgba(30, 24, 12, 0.35)); }
+.reach__empty .tower__hero { margin-bottom: 20px; }
+.tower__seedlings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0 22px; }
+.tower__seed { display: grid; justify-items: center; gap: 4px; padding: 12px 6px; border-radius: 18px; background: var(--color-surface); border: 1px solid var(--color-line); text-align: center; }
+.tower__seed b { font: 400 16px/1.1 var(--font-display); }
+.tower__seed span { font-size: 11.5px; color: var(--color-ink-3); }
+.reach--pets .ability { grid-template-columns: auto 1fr auto; }
+.reach--pets .ability { --tone-2: color-mix(in srgb, var(--tone) 55%, white); }
+.reach--pets .ability__stars { color: var(--g-star); }
+.petrow__face { display: grid; place-items: center; align-self: start; text-decoration: none; }
+.petrow__face .pet-portrait { --ring: var(--color-line-strong); }
+.petrow--glowing .pet-portrait { --ring: var(--honey); }
+.petrow--happy .pet-portrait { --ring: #8FB56A; }
+.petrow--missing .pet-portrait { --ring: var(--rose); }
+.petrow--sleepy .pet-portrait, .petrow--wilting .pet-portrait { --ring: #8A93A6; }
+.petrow--new .pet-portrait { --ring: var(--sky); }
+.reach--pets .ability__what { text-transform: none; letter-spacing: 0; font-size: 12.5px; font-weight: 600; color: var(--color-ink-3); flex-wrap: wrap; row-gap: 2px; }
+.reach--pets .ability__what b { font: 400 18px/1.1 var(--font-display); color: var(--color-ink); margin-right: 2px; }
+.petrow__hearts { margin-left: auto; padding-left: 8px; font-size: 11px; letter-spacing: 1px; color: #E46F86; }
+.petrow__hearts i { font-style: normal; color: var(--color-line-strong); }
+.petrow[data-key="chai"] { --tone: var(--pet-chai); }
+.petrow[data-key="matcha"] { --tone: var(--pet-matcha); }
+.petrow[data-key="mochi"] { --tone: var(--pet-mochi); }
+.petrow[data-key="ginger"] { --tone: var(--pet-ginger); }
+.petrow[data-key="mallow"] { --tone: var(--pet-mallow); }
+.petrow[data-key="toffee"] { --tone: var(--pet-toffee); }
+
+/* Settings, as your cottage. */
+.screen--cottage .cottage__hero { height: 140px; margin: calc(var(--space-5) * -1) calc(var(--space-4) * -1) 18px; border-radius: 0 0 26px 26px; background-color: #6b7d55; background-repeat: no-repeat; box-shadow: inset 0 -40px 40px -24px rgba(20, 30, 20, 0.3); }
+.cottage__line { margin: -4px 0 16px; color: var(--color-ink-2); font-size: var(--text-sm); }
+:root[data-theme="dark"] .cottage__hero, :root[data-theme="dark"] .tower__hero { filter: brightness(0.65) saturate(0.85); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cottage__hero, :root:not([data-theme="light"]) .tower__hero { filter: brightness(0.65) saturate(0.85); } }

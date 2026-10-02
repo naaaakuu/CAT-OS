@@ -17,8 +17,8 @@ import { GROVES } from '../modules/language-garden/logic/groves.js';
 import { deriveEngagement } from '../core/engagement/stats.js';
 import { dayKey, shiftDay } from '../core/engagement/streaks.js';
 import { computeStreamLevel } from '../modules/language-garden/logic/effort.js';
-import { rcStars, verbalStars, titleFor, levelFromCleared, subBag } from './economy.js';
-import { deriveVillage, newlyReady, villageLine } from '../village/state.js';
+import { rcStars, verbalStars, titleFor, levelFromCleared } from './economy.js';
+import { derivePets, giftsBetween } from '../pets/economy.js';
 import { listFields, ledgerFromRecords, summarizeLedger, fieldSummary } from './lexicon.js';
 import { deriveGrowth } from './growth.js';
 import { skillLedger, nextSkill, weakSkills } from '../core/learning/review.js';
@@ -312,12 +312,10 @@ export function deriveWorldState(content, records, now = Date.now()) {
   /* ---- How much of the valley exists yet (kept for the collections) ---- */
   state.growth = deriveGrowth(state);
 
-  /* ---- The village: what stands, what is in store, what is wanted ---- */
-  state.village = deriveVillage(state, records, content, now);
-  state.purse = state.village.stock;
-  state.stage = state.village.stage;
-  state.builds = [...state.village.levels.keys()];
-  state.reading.observatory = (state.village.levels.get('reading') ?? 0) >= 4;
+  /* ---- The pets: moods, gifts, the ring, wishes, the fire, treasures (src/pets/economy.js) ---- */
+  state.pets = derivePets(state, records, content, now);
+  // Night reading is Chai's lamp: offered once Chai has three hearts.
+  state.reading.observatory = (state.pets.pets.find((p) => p.id === 'chai')?.hearts ?? 0) >= 3;
   state.asking = whoIsAsking(state);
   return state;
 }
@@ -374,18 +372,23 @@ export function starGlyphs(n, max = 3) {
 /* ------------------------------------------------------------------ */
 
 /**
- * One line about what a run did for the village — the reward that can be
- * SEEN: the goods it made, and the order they bring closer.
+ * What a run did for the pets — the reward that can be SEEN: which pet it
+ * was, the gifts it made (doubled when the ring was full), and whether a
+ * heart of friendship was earned.
+ * @returns {{pet, gifts, doubled, heart, hearts} | null}
  */
-export function worldChangeLine(region, before, after) {
-  if (!before?.village || !after?.village) return '';
-  const made = subBag(after.village.produced, before.village.produced);
-  return villageLine(after.village, made);
+export function petChangeLine(before, after) {
+  if (!before?.pets || !after?.pets) return null;
+  const last = after.pets.last;
+  const pet = last?.pet ?? null;
+  const b = before.pets.pets.find((p) => p.id === pet), a = after.pets.pets.find((p) => p.id === pet);
+  return { pet, gifts: giftsBetween(before.pets, after.pets), doubled: !!last?.doubled, heart: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0 };
 }
 
-/** What became buildable, deliverable or openable between two states — the
- *  strongest signal the village can send, so it is announced above all. */
-export function newlyBuildable(before, after) {
-  if (!before?.village || !after?.village) return [];
-  return newlyReady(before.village, after.village).map((t) => ({ id: t.id, name: t.name, line: t.line, kind: t.kind, building: t.building ?? null }));
+/** The next treasure, if this run is what made it affordable. */
+export function newlyAffordable(before, after) {
+  const t = after?.pets?.nextTreasure;
+  if (!t?.affordable) return null;
+  const was = before?.pets?.nextTreasure;
+  return was && was.id === t.id && was.affordable ? null : t;
 }

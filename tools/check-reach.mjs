@@ -30,7 +30,7 @@
  *   HEADINGS           every screen has an h1 to jump to.
  *   SHEETS             a sheet that says role="dialog" keeps Tab inside it,
  *                      answers Escape, and hands focus back to whatever
- *                      opened it. The global app menu — reachable from the
+ *                      opened it. The global cottage card — reachable from the
  *                      header of every world route — did none of the three.
  *
  * Usage:
@@ -52,7 +52,6 @@ import { SEED } from './check-rendered-contrast.mjs';
    reading list is the longest tab order in it. */
 export const REACH_ROUTES = [
   { hash: '#/world', name: 'the village' },
-  { hash: '#/world/village', name: 'village life' },
   { hash: '#/rc', name: 'the reading list' },
   { hash: '#/settings', name: 'settings' },
   { hash: '#/growth', name: 'growth' },
@@ -116,35 +115,36 @@ async function settled(b, tries = 30) {
 }
 
 /* A sheet is a promise: while I am open, I am the only thing here. The
-   village's popovers kept it and the app menu, opened from the header of
+   village's popovers kept it and the cottage card, opened from the header of
    every world route, kept none of it — focus stayed behind on the button,
    Tab walked straight out into the world underneath while the scrim held
    the pointer in, and Escape did nothing. */
+const OPENER = '[data-open="cottage"]', CARD = '.cw-overlay:not([hidden]) .cw-card[aria-modal="true"]';
 async function checkSheet(b, tab) {
   const problems = [];
-  const found = await b.evaluate(`(() => { const el = document.querySelector('#world-menu-btn'); if (!el) return false; el.focus(); return true; })()`);
-  if (!found) return ['the app menu button is not on the village at all'];
+  const found = await b.evaluate(`(() => { const el = document.querySelector('${OPENER}'); if (!el) return false; el.focus(); return true; })()`);
+  if (!found) return ['the cottage button is not on the village at all'];
   for (const type of ['rawKeyDown', 'char', 'keyUp']) {
     await b.send('Input.dispatchKeyEvent', { type, windowsVirtualKeyCode: 13, nativeVirtualKeyCode: 13, key: 'Enter', code: 'Enter', text: '\r' });
   }
   await new Promise((r) => setTimeout(r, 600));
-  if (!await b.evaluate(`!!document.querySelector('.gmenu__card')`)) return ['the app menu button did not open the menu'];
+  if (!await b.evaluate(`!!document.querySelector('${CARD}')`)) return ['the cottage button did not open its card'];
 
-  const inside = await b.evaluate(`!!document.activeElement?.closest('.gmenu__card')`);
-  if (!inside) problems.push('opening the app menu leaves focus behind on the button that opened it');
+  const inside = await b.evaluate(`!!document.activeElement?.closest('${CARD}')`);
+  if (!inside) problems.push('opening the cottage card leaves focus behind on the button that opened it');
 
   let out = 0;
   for (let i = 0; i < 14; i += 1) {
     await tab();
-    if (!await b.evaluate(`!!document.activeElement?.closest('.gmenu__card')`)) out += 1;
+    if (!await b.evaluate(`!!document.activeElement?.closest('${CARD}')`)) out += 1;
   }
-  if (out) problems.push(`Tab leaves the open app menu ${out} time(s) in fourteen presses — into a world the scrim will not let you touch`);
+  if (out) problems.push(`Tab leaves the open cottage card ${out} time(s) in fourteen presses — into a world the scrim will not let you touch`);
 
   await b.send('Input.dispatchKeyEvent', { type: 'rawKeyDown', windowsVirtualKeyCode: 27, nativeVirtualKeyCode: 27, key: 'Escape', code: 'Escape' });
   await b.send('Input.dispatchKeyEvent', { type: 'keyUp', windowsVirtualKeyCode: 27, nativeVirtualKeyCode: 27, key: 'Escape', code: 'Escape' });
   await new Promise((r) => setTimeout(r, 500));
-  if (await b.evaluate(`!!document.querySelector('.gmenu__card')`)) problems.push('Escape does not close the app menu');
-  else if (!await b.evaluate(`document.activeElement?.id === 'world-menu-btn'`)) problems.push('closing the app menu drops focus instead of handing it back to the button that opened it');
+  if (await b.evaluate(`!!document.querySelector('${CARD}')`)) problems.push('Escape does not close the cottage card');
+  else if (!await b.evaluate(`document.activeElement?.matches?.('${OPENER}')`)) problems.push('closing the cottage card drops focus instead of handing it back to the button that opened it');
   return problems;
 }
 
@@ -218,7 +218,7 @@ export async function checkReach({ theme = 'light', only = null, width = 390, he
       const idn = seen.filter((x) => x.idNamed);
       if (idn.length) problems.push(`${where}: ${idn.length} control(s) announced by their element id, e.g. "${idn[0].label}"`);
 
-      if (route.hash === '#/world/village') {
+      if (route.hash === '#/world') {
         for (const p of await checkSheet(b, tab)) problems.push(`${where}: ${p}`);
       }
     }

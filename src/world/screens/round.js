@@ -15,14 +15,14 @@
  *         #/round/:region/:field     one named field (the shelves)
  */
 
-import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../state.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable } from '../state.js';
 import { loadField, loadLedger, pickRound, LexRound, saveRound, TARGET_MS, ROUND_SIZE, listFields, loadContext } from '../lexicon.js';
 import { composeRound } from '../curator.js';
 import { newlyFinished } from '../collections.js';
 import { regionBySlug } from '../regions.js';
 import { play, silenceWorld, startAmbience } from '../audio.js';
 import { renderResult, formatClock } from './result.js';
-import { mountBackdrop } from './backdrop.js';
+import { paintedBackdrop, hostChip } from '../../pets/sprite.js';
 import { escapeHTML } from '../../core/utils/format.js';
 import { toast } from '../../ui/components/cat-toast.js';
 
@@ -86,23 +86,19 @@ export async function renderRound(outlet, { storage }, params) {
   const target = TARGET_MS[region.slug] ?? 7000;
   const atmo = before.state.atmo;
 
-  /* ---- The frame: the place's own scene behind everything ---- */
+  /* ---- The frame: Matcha's greenhouse, painted, behind everything ---- */
   outlet.innerHTML = `
-    <section class="run run--${region.slug}">
-      <canvas class="run__scene" id="run-scene" aria-hidden="true"></canvas>
-      <div class="run__veil" aria-hidden="true"></div>
+    ${paintedBackdrop('matcha')}
+    <section class="run run--painted run--${region.slug}">
       <div class="run__bar">
         <a class="run__leave" href="${region.route}" aria-label="Leave">×</a>
-        <div class="run__where"><div class="run__place">${escapeHTML(region.name)}</div><div class="run__what" id="run-what">${escapeHTML(title)}</div></div>
+        <div class="run__where"><div class="run__place">${hostChip('matcha', 20)}<span>${escapeHTML(region.name)}</span></div><div class="run__what" id="run-what">${escapeHTML(title)}</div></div>
         <div class="run__pace" id="pace" hidden><span class="run__clock" id="clock">0:00</span><div class="run__ring" id="ring" aria-hidden="true"></div></div>
       </div>
       <div class="run__track" id="track-wrap" hidden><i id="track" style="width:0%"></i></div>
       <div class="run__body" id="body"></div>
     </section>`;
 
-  const backdrop = mountBackdrop(outlet.querySelector('#run-scene'), region.slug, before.state, atmo, { still: true });
-  const onHash = () => { backdrop?.destroy(); window.removeEventListener('hashchange', onHash); };
-  window.addEventListener('hashchange', onHash);
   startAmbience(region.slug, atmo);
 
   const body = outlet.querySelector('#body');
@@ -231,8 +227,8 @@ export async function renderRound(outlet, { storage }, params) {
       try { await saveRound(storage, round, result, ledger); } catch (err) { console.error('[CAT OS] round save failed', err); toast('This round finished but could not be saved.', 'error'); }
       let after = null;
       try { const records = await loadWorldRecords(storage); after = deriveWorldState(before.content, records); } catch { /* facts still show */ }
-      const worldLine = after ? worldChangeLine(region.slug, before.state, after) : '';
-      const unlocked = after ? newlyBuildable(before.state, after) : [];
+      const change = after ? petChangeLine(before.state, after) : null;
+      const treasure = after ? newlyAffordable(before.state, after) : null;
       const setsDone = after ? newlyFinished(before.state, after, before.content) : [];
       const misses = round.answers.filter((a) => !a.correct);
       const byId = new Map(round.entries.map((e) => [e.id, e]));
@@ -254,15 +250,15 @@ export async function renderRound(outlet, { storage }, params) {
           { label: 'Per word', value: `${(result.record.score?.avg_ms / 1000).toFixed(1)}s`, good: result.stars.inTime && result.stars.accuracy >= 0.5 },
           { label: 'Time', value: formatClock(result.record.duration_ms) },
         ],
-        earned: result.earned,
-        worldLine,
+        pet: 'matcha',
+        ...(change?.pet === 'matcha' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
+        treasure,
         setsDone,
-        unlocked,
         extraHTML: reviewHTML,
         actions: [
           { label: 'Another round', href: `#/round/${region.slug}`, primary: true },
           { label: `Back to ${region.name}`, href: region.route },
-          { label: 'The valley', href: '#/world', quiet: true },
+          { label: 'Back to the village', href: '#/world', quiet: true },
         ],
       });
     }

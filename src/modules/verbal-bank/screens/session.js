@@ -323,7 +323,7 @@ export async function renderBankSession(outlet, { storage }, params) {
       notice: missedItem?.explanation?.reading_habit ?? '',
     } : { opening: s.score.correct === s.score.total ? 'Nothing here got past you.' : 'Set complete.', title: '', moment: '', pull: '', notice: session.items[0]?.explanation?.reading_habit ?? '' };
 
-    const reward = worldReward(s, session.items);
+    const reward = worldReward(s, session.items, { storage });
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar"><a href="${back}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The valley')}</a></div>

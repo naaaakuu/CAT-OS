@@ -168,7 +168,7 @@ export function atPlace(slug, state) {
     case 'thicket': return 'Words that came from somewhere else, and kept their accent.';
     case 'loom': return 'Sentences in the wrong order. Find the thread.';
     case 'wilds': return 'Nothing new out there. Just everything, fast.';
-    case 'hearth': return (state?.village?.readyThings?.length || state?.readyWorks?.length) ? 'Something’s ready to go up.' : 'Home. Warm enough.';
+    case 'hearth': return state?.pets?.nextTreasure?.affordable ? 'There is enough in the satchel for a treasure.' : 'Home. Warm enough.';
     default: return '';
   }
 }

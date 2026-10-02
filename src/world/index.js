@@ -15,8 +15,7 @@
  *   /round/:region/:field        a vocabulary round (meadow | pond | thicket)
  */
 
-import { renderVillage } from '../village/screens/village.js';
-import { renderHomeWorld } from '../village/screens/home-world.js';
+import { renderVillageHome } from '../home/village.js';
 import { initWorldAudio } from './audio.js';
 
 /* The valley is the screen a cold open lands on, so it is the only one
@@ -28,8 +27,8 @@ export function registerWorld(router, context) {
   initWorldAudio(context.storage).catch(() => { /* defaults */ });
   router
     .register({ path: '/awaken', title: 'Welcome', render: () => { location.replace('#/world'); } })
-    .register({ path: '/world', title: 'Your village', render: (outlet) => renderHomeWorld(outlet, context) })
-    .register({ path: '/world/village', title: 'Village life', render: (outlet) => renderVillage(outlet, context) })
+    .register({ path: '/world', title: 'Your village', render: (outlet) => renderVillageHome(outlet, context) })
+    .register({ path: '/world/village', title: 'Your village', render: () => { location.replace('#/world'); } })
     .register({ path: '/world/place/:slug', title: 'A place', render: (outlet, params) => import('./screens/place.js').then((m) => m.renderPlace(outlet, context, params)) })
     .register({ path: '/round/:region', title: 'A round', render: (outlet, params) => import('./screens/round.js').then((m) => m.renderRound(outlet, context, params)) })
     .register({ path: '/round/:region/:field', title: 'A round', render: (outlet, params) => import('./screens/round.js').then((m) => m.renderRound(outlet, context, params)) });

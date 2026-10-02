@@ -48,11 +48,14 @@ import { readingWeakness, typeName, weaknessLine } from '../world/curator.js';
    previous stage did not have, so each is unmistakable in silhouette at
    thumbnail size. TIERS below already speaks its vocabulary, stage for
    stage. */
-import '../ui/components/cat-plant.js';
+import { PET_BY_ID } from '../pets/pets.js';
+import { petPortrait, petSprite, backdropStyle, FRAME } from '../pets/sprite.js';
 import { loadValley, valleyName } from '../world/companion.js';
 import { craft } from '../world/economy.js';
 import { collections, closest, tally, GROUPS } from '../world/collections.js';
 import { icon, craftIcon } from '../world/icons.js';
+
+const SUBJECT = { chai: 'Reading', matcha: 'Vocabulary', mochi: 'Para summary', ginger: 'Para jumbles', mallow: 'Odd one out', toffee: 'CAT pace' };
 
 /** The six stages a tree can stand at, and what each one is called when
  *  the thing growing is an ability rather than an oak. */
@@ -124,22 +127,14 @@ export async function renderGrowth(outlet, { storage }) {
     body.removeAttribute('aria-busy');
     body.innerHTML = `
       <div class="reach__empty">
-        <h1>Four things grow here</h1>
-        <p>Your reading, your words, your grip on an argument, and your speed under a clock. One session starts all of them.</p>
-        <div class="seedlings">
-          ${[
-            ['reading', 'Reading', 'ink', 'Passages, against the clock'],
-            ['vocab', 'Vocabulary', 'amber', 'Words, roots and word parts'],
-            ['verbal', 'Verbal', 'thread', 'The shape of an argument'],
-            ['pace', 'CAT pace', 'ember', 'Right, and inside the time'],
-          ].map(([k, name, cr, line]) => `
-            <div class="seedling ability--${cr}">
-              <span class="seedling__plate"><cat-plant class="seedling__tree" stage="seed" seed="reach:${k}" aria-hidden="true"></cat-plant></span>
-              <b>${escapeHTML(name)}</b>
-              <span>${escapeHTML(line)}</span>
-            </div>`).join('')}
+        <div class="tower__hero" style="${backdropStyle('clock')}" aria-hidden="true"></div>
+        <h1>Six friends, six subjects</h1>
+        <p>Each friend in the village looks after one part of CAT English. Visit any of them and the clock tower starts keeping time.</p>
+        <div class="tower__seedlings">
+          ${['chai', 'matcha', 'mochi', 'ginger', 'mallow', 'toffee'].map((id) => `
+            <div class="tower__seed">${petPortrait(id, 54)}<b>${escapeHTML(PET_BY_ID.get(id).name)}</b><span>${escapeHTML(SUBJECT[id])}</span></div>`).join('')}
         </div>
-        <a class="g-cta" href="#/world">Into the valley<span class="arrow" aria-hidden="true">→</span></a>
+        <a class="g-cta" href="#/world">Into the village<span class="arrow" aria-hidden="true">→</span></a>
       </div>`;
     return;
   }
@@ -164,20 +159,19 @@ export async function renderGrowth(outlet, { storage }) {
   try { grow = skillToGrow(sessions, world?.records?.learning ?? []); } catch (err) { console.error('[CAT OS] noticing failed', err); }
 
   body.innerHTML = `
+    <div class="tower__hero" style="${backdropStyle('clock')}" aria-hidden="true"><span class="tower__pet">${petSprite('toffee', { size: 64, frame: FRAME.happy })}</span></div>
     <header class="reach__head">
-      <p class="reach__eyebrow">Your reach</p>
+      <p class="reach__eyebrow">The clock tower · how far you have come</p>
       <h1 class="reach__name">${escapeHTML(valleyName(valley))}</h1>
       <p class="reach__line">${headline(strongest, weakest, rcW)}</p>
     </header>
 
-    <div class="reach">
+    <div class="reach reach--pets">
       ${abilities.map((a) => `
-        <article class="ability ability--${a.craft}" data-key="${a.key}">
-          <span class="ability__plate">
-            <cat-plant class="ability__tree" stage="${a.tier.stage}" seed="reach:${a.key}" aria-hidden="true"></cat-plant>
-          </span>
+        <article class="ability petrow petrow--${a.pet?.word ?? 'new'}" data-key="${a.key}">
+          <a class="petrow__face" href="${a.href}" aria-label="${escapeHTML(a.name)}: ${escapeHTML(a.cta)}">${petPortrait(a.key, 52, { mood: a.pet ? (a.pet.isNew ? 0.3 : a.pet.mood) : null })}</a>
           <div class="ability__body">
-            <p class="ability__what">${craftIcon(a.craft, { size: 14 })}${escapeHTML(a.name)}</p>
+            <p class="ability__what"><b>${escapeHTML(PET_BY_ID.get(a.key).name)}</b> · ${escapeHTML(a.name)}<span class="petrow__hearts" aria-label="${a.pet?.hearts ?? 0} of 5 hearts">${'♥'.repeat(a.pet?.hearts ?? 0)}<i>${'♥'.repeat(5 - (a.pet?.hearts ?? 0))}</i></span></p>
             <p class="ability__tier">${escapeHTML(a.tier.name)}</p>
             <p class="ability__line">${a.line}</p>
             <p class="ability__pips" aria-label="Stage ${TIERS.findIndex((t) => t.stage === a.tier.stage) + 1} of ${TIERS.length}">${
@@ -287,50 +281,60 @@ function measure(s, rcW) {
     + s.rootwood.total * 6 + s.terraces.total * 8);
   const vocab = clamp01(vocabHeld / vocabAll);
 
-  /* VERBAL — the three benches of the Quarter. */
-  const vSolved = s.loom.solved + s.table.solved + s.bench.solved;
-  const vAll = Math.max(1, s.loom.total + s.table.total + s.bench.total);
-  const verbal = clamp01(vSolved / vAll);
+  /* THE THREE VERBAL BENCHES — each its own friend now: solved, plus the
+     bank that lives with it (placement with the jumbles, completion with
+     the summaries). */
+  const bench = (v, bank) => clamp01((v.solved + (bank?.solved ?? 0)) / Math.max(1, v.total + (bank?.total ?? 0)));
+  const jumbles = bench(s.loom, s.banks?.sp), summary = bench(s.table, s.banks?.pc), odd = bench(s.bench);
 
-  /* PACE — Embers are only ever struck by a three-star run, so the share of
-     runs that struck one IS the measure of right-and-in-time. */
-  // Every finished run is a chance at an Ember and almost none of them
-  // take it, so the share of runs that did IS the pace measure.
-  const runs = s.reading.read + s.loom.solved + s.table.solved + s.bench.solved
-    + s.rootwood.grownCount + (s.wilds.runs ?? 0);
-  const pace = clamp01((s.earned?.ember ?? 0) / Math.max(24, runs * 0.9));
+  /* PACE — the Gauntlet is everything at once against the clock: its best
+     run, and whether it has become a habit. */
+  const pace = clamp01(((s.wilds.best ?? 0) / 3) * 0.65 + Math.min(1, (s.wilds.runs ?? 0) / 8) * 0.35);
+  const petOf = (id) => s.pets?.pets.find((p) => p.id === id) ?? null;
 
   const weakType = rcW?.weakest ? typeName(rcW.weakest) : null;
 
   return [
     {
-      key: 'reading', name: 'Reading', craft: 'ink', p: reading, tier: tierFor(reading), stars: starsFor(reading),
+      key: 'chai', pet: petOf('chai'), name: 'Reading', craft: 'ink', p: reading, tier: tierFor(reading), stars: starsFor(reading),
       line: `<b>${s.reading.read}</b> of ${s.reading.passages} passages · <b>${s.reading.stars}</b> stars`,
       advice: weakType
         ? `${weakType} questions are the ones getting away. The next passage the curator picks will be heavy on them.`
         : 'More passages, against the clock. Reading is the one ability that only grows by reading.',
-      href: '#/world/place/reading-room', cta: 'To the Reading House',
+      href: '#/world/place/reading-room', cta: 'Read with Chai',
     },
     {
-      key: 'vocab', name: 'Vocabulary', craft: 'amber', p: vocab, tier: tierFor(vocab), stars: starsFor(vocab),
+      key: 'matcha', pet: petOf('matcha'), name: 'Vocabulary', craft: 'amber', p: vocab, tier: tierFor(vocab), stars: starsFor(vocab),
       line: `<b>${s.meadow.mastered + s.pond.mastered + s.thicket.mastered}</b> words held · <b>${s.rootwood.metCount}</b> root families`,
       advice: s.meadow.due + s.pond.due + s.thicket.due > 8
         ? `${s.meadow.due + s.pond.due + s.thicket.due} words are due for another look. Catching them is worth more than meeting new ones.`
         : 'Roots move this fastest: one family opens a dozen words at once.',
       href: s.meadow.due > 6 ? '#/round/meadow' : '#/world/place/rootwood',
-      cta: s.meadow.due > 6 ? 'A round in the Meadow' : 'Into the Rootwood',
+      cta: s.meadow.due > 6 ? 'A word round with Matcha' : 'Root families with Matcha',
     },
     {
-      key: 'verbal', name: 'Verbal', craft: 'thread', p: verbal, tier: tierFor(verbal), stars: starsFor(verbal),
-      line: `<b>${vSolved}</b> of ${vAll} solved at the Quarter`,
-      advice: 'Jumbles, summaries and strangers train the same muscle: seeing the shape of an argument before you agree with it.',
-      href: '#/world/place/loom', cta: 'To the Quarter',
+      key: 'mochi', pet: petOf('mochi'), name: 'Para summary', craft: 'thread', p: summary, tier: tierFor(summary), stars: starsFor(summary),
+      line: `<b>${s.table.solved + (s.banks?.pc?.solved ?? 0)}</b> of ${s.table.total + (s.banks?.pc?.total ?? 0)} summaries and completions`,
+      advice: 'Say the paragraph in one line before you read the options. The gist first, then the choice.',
+      href: '#/world/place/table', cta: 'Find the gist with Mochi',
     },
     {
-      key: 'pace', name: 'CAT pace', craft: 'ember', p: pace, tier: tierFor(pace), stars: starsFor(pace),
-      line: `<b>${s.earned?.ember ?? 0}</b> Embers struck · three stars means right <i>and</i> in time`,
+      key: 'ginger', pet: petOf('ginger'), name: 'Para jumbles', craft: 'thread', p: jumbles, tier: tierFor(jumbles), stars: starsFor(jumbles),
+      line: `<b>${s.loom.solved + (s.banks?.sp?.solved ?? 0)}</b> of ${s.loom.total + (s.banks?.sp?.total ?? 0)} jumbles and placements`,
+      advice: 'Find the opening sentence first, then follow the pronouns and the links. The route shows itself.',
+      href: '#/world/place/loom', cta: 'Map a paragraph with Ginger',
+    },
+    {
+      key: 'mallow', pet: petOf('mallow'), name: 'Odd one out', craft: 'thread', p: odd, tier: tierFor(odd), stars: starsFor(odd),
+      line: `<b>${s.bench.solved}</b> of ${s.bench.total} sets`,
+      advice: 'Build the paragraph the other four sentences make. The one left over is the stranger.',
+      href: '#/world/place/bench', cta: 'Spot the odd one with Mallow',
+    },
+    {
+      key: 'toffee', pet: petOf('toffee'), name: 'CAT pace', craft: 'ember', p: pace, tier: tierFor(pace), stars: starsFor(pace),
+      line: `best Gauntlet <b>${s.wilds.best ?? 0}</b> of 3 stars · <b>${s.wilds.runs ?? 0}</b> runs`,
       advice: 'Accuracy first, then speed. Take a run you could already do well and try to do it inside the pace ring.',
-      href: '#/world/place/wilds', cta: 'To the Wilds',
+      href: '#/world/place/wilds', cta: 'Run the Gauntlet with Toffee',
     },
   ];
 }
@@ -339,7 +343,7 @@ function headline(strongest, weakest, rcW) {
   const bits = [];
   if (strongest.p > 0.05) bits.push(`Your <b>${escapeHTML(strongest.name.toLowerCase())}</b> is the furthest along.`);
   if (weakest.p < strongest.p - 0.05) bits.push(`Your <b>${escapeHTML(weakest.name.toLowerCase())}</b> has the most room.`);
-  if (!bits.length) bits.push('All four are just starting.');
+  if (!bits.length) bits.push('Every friend is just getting to know you.');
   if (rcW?.weakest) bits.push(`Inside reading, it is <b>${escapeHTML(typeName(rcW.weakest))}</b>.`);
   return bits.join(' ');
 }
@@ -383,8 +387,8 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
         ['Root families met', `${s.rootwood.metCount} / ${s.rootwood.total}`],
         ['Word parts climbed', `${s.terraces.done} / ${s.terraces.total}`],
         ['Quarter solved', `${s.loom.solved + s.table.solved + s.bench.solved} / ${s.loom.total + s.table.total + s.bench.total}`],
-        ['Buildings standing', `${s.village.buildings.filter((b) => b.built).length} / ${s.village.buildings.length}`],
-        ['Orders delivered', String(s.village.ordersDone)],
+        ['Treasures made', `${s.pets.treasures.filter((t) => t.made).length} / ${s.pets.treasures.length}`],
+        ['Gifts gathered', String(s.pets.earnedTotal)],
         ['Days practised', String(s.hearth.activeDays)],
         ['Longest run', `${s.hearth.streak.best} days`],
       ].map(([k, v]) => `<div class="nums__row nums__row--plain"><span>${escapeHTML(k)}</span><b>${escapeHTML(v)}</b></div>`).join('')}

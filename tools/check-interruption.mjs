@@ -280,49 +280,35 @@ if (LOUD) console.log('\n2. noticing() against nonsense');
   ok(`${junk.length} nonsense record sets: nothing threw, every sentence is a string`);
 }
 
-/* ---- 3. The derived village against a running purse ---- */
-if (LOUD) console.log('\n3. The order board never promises what the barn cannot pay');
+/* ---- 3. The satchel against a running ledger ---- */
+if (LOUD) console.log('\n3. The satchel never shows more than was earned, and a treasure is paid once');
 {
-  const { deriveVillage } = await load('src/village/state.js');
+  const { derivePets, canMake } = await load('src/pets/economy.js');
   const iso = (d) => new Date(Date.now() - d * 864e5).toISOString();
-  const learning = [
-    { id: 'b1', kind: 'village-build', building: 'garden', level: 1, cost: { coins: 0 }, at: iso(9) },
-    { id: 'b2', kind: 'village-build', building: 'market', level: 1, cost: { coins: 0 }, at: iso(8) },
-    { id: 'c1', kind: 'village-collect', building: 'reading', good: 'books', amount: 1, at: iso(1) },
-  ];
   const sessions = Array.from({ length: 12 }, (_, i) => ({
-    id: 's' + i, passage_id: 'rc-000' + ((i % 6) + 1), finished_at: iso(9 - (i % 9)),
-    stars: 3, score: { correct: 4, total: 4, accuracy: 1 },
+    id: 's' + i, passage_id: 'rc-000' + ((i % 6) + 1), finished_at: iso(9 - (i % 9)), duration_ms: 300000,
+    score: { correct: 4, total: 4, accuracy: 1 },
     answers: [0, 1, 2, 3].map((q) => ({ question_id: 'q' + q, is_correct: true, skill: 'inference', patterns: [] })),
   }));
-  let v;
-  try { v = deriveVillage({}, { learning, sessions }, null, Date.now()); } catch (err) { bad('deriveVillage threw: ' + err.message); }
-  if (v) {
-    const deliverable = (v.orders ?? []).filter((o) => o.deliverable);
-    // Every deliverable order must be payable in sequence from one barn.
-    let purse = { ...v.stock };
-    for (const o of deliverable) {
-      for (const [k, n] of Object.entries(o.needs ?? {})) {
-        if (!n) continue;
-        purse[k] = (purse[k] ?? 0) - n;
-        if (purse[k] < 0) { bad(`${deliverable.length} orders say "Deliver" and the barn runs ${-purse[k]} ${k} short on order ${o.id ?? '?'}`); break; }
-      }
-    }
-    ok(`${(v.orders ?? []).length} orders on the board, ${deliverable.length} deliverable, all payable in sequence from one barn`);
-    // And the queue never counts the thing on the bench as waiting.
-    for (const b of v.buildings ?? []) {
-      const q = b.queue;
-      if (!q) continue;
-      if (q.waiting > q.pending) bad(`${b.id}: waiting ${q.waiting} exceeds pending ${q.pending}`);
-      if (q.working && q.waiting === q.pending && q.pending > 0) bad(`${b.id}: the item on the bench is still counted as waiting`);
-      if (q.waiting < 0) bad(`${b.id}: waiting is ${q.waiting}`);
-    }
-    ok('every queue counts the bench separately from the wait');
+  const content = { rc: Array.from({ length: 6 }, (_, i) => ({ id: 'rc-000' + (i + 1), estimated_time_min: 6 })) };
+  const lex = Array.from({ length: 6 }, (_, i) => ({ id: 'lx' + i, kind: 'lex-round', region: 'meadow', stars: 3, score: { correct: 11, total: 12 }, finished_at: iso(8 - i) }));
+  let pets;
+  try { pets = derivePets({}, { sessions, learning: lex }, content, Date.now()); } catch (err) { bad('derivePets threw: ' + err.message); }
+  if (pets) {
+    const can = canMake(pets, 'lanterns');
+    if (!can.ok) bad('twelve passages and six rounds should afford the lanterns: missing ' + JSON.stringify(can.missing));
+    // Made twice, a day apart: paid once.
+    const made = [...lex, { id: 't1', kind: 'village-treasure', treasure: 'lanterns', at: iso(0.5) }, { id: 't2', kind: 'village-treasure', treasure: 'lanterns', at: iso(0.4) }];
+    const after = derivePets({}, { sessions, learning: made }, content, Date.now());
+    if (after.stock.leaves !== pets.stock.leaves - 2 || after.stock.stories !== pets.stock.stories - 2) bad(`making the lanterns twice must pay once (leaves ${pets.stock.leaves}→${after.stock.leaves}, stories ${pets.stock.stories}→${after.stock.stories})`);
+    if (after.nextTreasure?.id !== 'bunting') bad('after the lanterns, the bunting is next');
+    for (const [k, n] of Object.entries(after.stock)) if (!(n >= 0)) bad(`stock.${k} is ${n}`);
+    // A record for a treasure that could not have been afforded still cannot drive the satchel negative.
+    const greedy = derivePets({}, { sessions: [], learning: [{ id: 'g', kind: 'village-treasure', treasure: 'lanterns', at: iso(1) }] }, content, Date.now());
+    for (const [k, n] of Object.entries(greedy.stock)) if (n < 0) bad(`a treasure with nothing earned left stock.${k} at ${n}`);
+    ok(`${Object.values(pets.stock).reduce((x, y) => x + y, 0)} gifts in the satchel; the lanterns paid once though recorded twice; nothing ever below zero`);
   }
 }
-
-export const cases = { drafts: draftCases, records: 11 };
-export const interruptionProblems = problems;
 
 if (LOUD) {
   console.log(`\n${problems.length ? '✗ ' + problems.length + ' problem(s)' : '✓ a hostile draft and a hostile record log take nothing down'}\n`);

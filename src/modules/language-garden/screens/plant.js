@@ -22,25 +22,22 @@
  * only surface text ever sits on inside the world.
  */
 
-import { loadLGItem, listLGItems, loadLGItems } from '../../../core/content-loader/loader.js';
+import { loadLGItem } from '../../../core/content-loader/loader.js';
 import { listGardenSessions, listGardenSeeds, sessionsForFamily } from '../logic/store.js';
 import { computePlantState } from '../../../core/engine/garden-session.js';
 import { biomeForFamily } from '../logic/biomes.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
-import { mountGardenBackdrop } from '../../../world/garden-backdrop.js';
+import { paintedBackdrop } from '../../../pets/sprite.js';
 import { GARDEN_LINES, SEED_LINES } from '../../../core/mentor/garden-voice.js';
 import { escapeHTML } from '../../../core/utils/format.js';
 import '../../../ui/components/cat-plant.js';
 
 export async function renderPlant(outlet, context, params) {
-  let family, history, seed, allFamilies, allSessions, seeds;
+  let family, history, seed;
   try {
     family = await loadLGItem(params.id);
-    const registry = await listLGItems();
-    const loaded = await loadLGItems(registry.map((i) => i.id));
-    allFamilies = [...loaded.values()];
-    allSessions = await listGardenSessions(context.storage);
-    seeds = await listGardenSeeds(context.storage);
+    const allSessions = await listGardenSessions(context.storage);
+    const seeds = await listGardenSeeds(context.storage);
     history = sessionsForFamily(allSessions, params.id);
     seed = seeds.find((s) => s.family_id === params.id) ?? null;
   } catch (err) {
@@ -86,10 +83,11 @@ export async function renderPlant(outlet, context, params) {
 
   outlet.innerHTML = `
     <section class="screen lg-plant lg-plant--enter" data-time="${atmo.time}">
-      <div class="lg-plant__world" id="lg-plant-world" aria-hidden="true"></div>
+      <div class="lg-plant__world" id="lg-plant-world" aria-hidden="true">${paintedBackdrop('matcha')}</div>
       <button class="lg-plant__close" id="lg-plant-close" aria-label="Back to the wood">×</button>
 
       <div class="lg-plant__veil-wrap">
+        <div class="lg-plant__hero" aria-hidden="true"><cat-plant stage="${state.stage}" due="${state.due ?? 'none'}"${state.landmark ? ' landmark' : ''} name="${escapeHTML(family.root.label)}"></cat-plant></div>
         <div class="lgx-veil lg-plant__veil">
           ${keyHTML}
 
@@ -104,9 +102,6 @@ export async function renderPlant(outlet, context, params) {
     </section>
   `;
 
-  const backdrop = mountGardenBackdrop(outlet.querySelector('#lg-plant-world'), { family, allFamilies, allSessions, seeds, displayState: state });
-  const onHash = () => { backdrop.destroy(); window.removeEventListener('hashchange', onHash); };
-  window.addEventListener('hashchange', onHash);
   outlet.querySelector('#lg-plant-close').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'rootwood'); location.hash = biomeHome; });
   outlet.querySelector('#plant-action')?.addEventListener('click', () => {
     location.hash = `#/garden/session/${family.meta.id}`;

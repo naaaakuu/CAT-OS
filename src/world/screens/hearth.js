@@ -1,77 +1,60 @@
 /**
- * hearth.js (screen) — your standing.
+ * hearth.js (screen) — your records, kept by the fire.
  *
- * The Hearth on the map is where you build and raise; this page, behind
- * the menu, is the honest read on where the learner is: the village's
- * stage, the curator's lines about the learning, the records, and what
- * stands. It is a progression page, not a dashboard: a few figures, in
- * words first.
+ * Toffee keeps the village fire; this page, reached from the cottage, is
+ * the honest read on where the learner is: the curator's lines about the
+ * learning, a few figures in words first, each friend and how they are,
+ * and the treasures the village has made. A progression page, not a
+ * dashboard.
  */
 
-import { VillageRenderer } from '../../village/renderer.js';
-import { paintedAtmo } from '../stage.js';
-import { buildBackdropScene } from '../../village/scene.js';
-import { regionBySlug, REGIONS } from '../regions.js';
+import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
-import { coinsHTML, purseHTML, wireCraftTaps } from '../craft-ui.js';
-import { buildingArt } from '../icons.js';
 import { standing as standingLines, readingWeakness } from '../curator.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
+import { PETS, PET_BY_ID, GIFTS } from '../../pets/pets.js';
+import { petPortrait, giftIcon, backdropStyle, petSprite, FRAME } from '../../pets/sprite.js';
+
+const MOOD_LABEL = { glowing: 'Glowing', happy: 'Happy', missing: 'Missing you', sleepy: 'Sleepy', wilting: 'Wilting', new: 'Waiting to meet you' };
 
 export async function renderHearth(outlet, { storage }) {
   document.documentElement.setAttribute('data-world', '');
 
   let world;
   try { world = await loadWorld(storage); } catch (err) {
-    outlet.innerHTML = `<section class="place"><div class="place__body"><h1 class="place__title">The Hearth will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
+    outlet.innerHTML = `<section class="place"><div class="place__body"><h1 class="place__title">The records will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
     return;
   }
   const { state } = world;
-  const v = state.village;
+  const P = state.pets;
   const atmo = state.atmo;
+  const f = P.flame;
 
   outlet.innerHTML = `
     <section class="place place--hearth">
-      <div class="place__hero place__hero--short">
-        <canvas id="hero" aria-label="The Hearth"></canvas>
-        <a class="place__back" href="#/world" id="back">← The village</a>
-        <div class="place__hero-stat"><span class="purse purse--static">${coinsHTML(v.coins)}${purseHTML(v.stock, { showZero: false })}</span></div>
+      <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle('toffee')}">
+        <a class="place__back" href="#/world" id="back">← Village</a>
+        <span class="place__pet place__pet--toffee" aria-hidden="true">${petSprite('toffee', { size: 92, frame: FRAME.happy })}</span>
       </div>
       <div class="place__body" id="body">
-        <p class="place__eyebrow">Your standing</p>
-        <h1 class="place__title">${escapeHTML(v.stage.name)}</h1>
-        <p class="place__line">${escapeHTML(v.stage.line)} Level ${v.level.n}, ${Math.round(v.level.pct * 100)}% of the way to ${v.level.n + 1}.</p>
+        <p class="place__eyebrow">Records · kept by Toffee</p>
+        <h1 class="place__title">${f.days ? `A ${f.days}-day glow` : 'A fresh fire'}</h1>
+        <p class="place__line">${state.hearth.activeDays} ${state.hearth.activeDays === 1 ? 'day' : 'days'} in the village · best run ${state.hearth.streak.best} · ${f.kindling} kindling saved.</p>
         <div id="panel" class="is-in"></div>
       </div>
     </section>`;
 
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'hearth'); play('close'); });
-
-  /* ---- The hero ---- */
-  let renderer = null;
-  const canvas = outlet.querySelector('#hero');
-  if (canvas) {
-    const scene = buildBackdropScene('hearth', state, paintedAtmo(atmo));
-    renderer = new VillageRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
-    renderer.lookAt(scene.W / 2, 300, { animate: false });
-    renderer.start();
-  }
-  const onHash = () => { renderer?.destroy(); window.removeEventListener('hashchange', onHash); };
-  window.addEventListener('hashchange', onHash);
-  const warmth = Math.min(1, (v.levels.size / 8) * 0.6 + Math.min(1, state.stars / 90) * 0.4);
+  const warmth = Math.min(1, P.harmony * 0.6 + Math.min(1, state.stars / 90) * 0.4);
   const onDown = () => { unlock(); startMusic('hearth', { hour: atmo.hour, warmth }); startAmbience('hearth', atmo); };
   window.addEventListener('pointerdown', onDown, { capture: true, once: true });
   startMusic('hearth', { hour: atmo.hour, warmth }); startAmbience('hearth', atmo);
 
-  const panel = outlet.querySelector('#panel');
-  wireCraftTaps(outlet.querySelector('.place__hero-stat'), () => state);
-
   let weakness = null;
   try { weakness = readingWeakness(world.records.sessions); } catch { /* none */ }
   const lines = standingLines(state, weakness);
-  const built = v.buildings.filter((b) => b.built);
-  panel.innerHTML = `
+  outlet.querySelector('#panel').innerHTML = `
     <div class="standing">
       ${lines.map((l) => `<p>${escapeHTML(l)}</p>`).join('')}
     </div>
@@ -79,28 +62,30 @@ export async function renderHearth(outlet, { storage }) {
       ${[
         ['Passages read', `${state.reading.read}/${state.reading.passages}`],
         ['Stars', String(state.stars)],
-        ['Orders delivered', String(v.ordersDone)],
-        ['Coins earned', String(v.earned.coins)],
+        ['Gifts gathered', String(P.earnedTotal)],
+        ['Treasures made', `${P.treasures.filter((t) => t.made).length}/${P.treasures.length}`],
         ['Root families grown', `${state.rootwood.grownCount}/${state.rootwood.total}`],
         ['Words for good', String(state.meadow.mastered + state.pond.mastered + state.thicket.mastered)],
         ['Verbal items solved', String(state.loom.solved + state.table.solved + state.bench.solved)],
         ['Days in the village', String(state.hearth.activeDays)],
       ].map(([k, val]) => `<div class="figure"><b>${escapeHTML(val)}</b><span>${escapeHTML(k)}</span></div>`).join('')}
     </div>
-    <p class="panel__foot">${state.hearth.streak.current ? `A ${state.hearth.streak.current}-day run, best ${state.hearth.streak.best}.` : 'Practise anywhere today to start a run.'}</p>
-    <h2 class="shelf">What stands</h2>
-    <div class="shelf">
-      ${built.map((b) => `
-        <a class="wk is-built" href="${b.def.place ? `#/world/place/${b.def.place}` : '#/world'}">
-          <span class="wk__plate">${buildingArt(b.id, b.level, 58)}</span>
-          <span class="wk__name">${escapeHTML(b.def.name)}</span>
-          <span class="wk__flag">Level ${b.level}</span>
-        </a>`).join('')}
+    <h2 class="shelf">Your friends</h2>
+    <div class="friends">
+      ${PETS.map((def) => {
+        const p = P.pets.find((x) => x.id === def.id);
+        return `<a class="friend friend--${p.word}" href="${def.places[0] === 'hearth' ? '#/world/place/wilds' : `#/world/place/${def.places[0]}`}">
+          ${petPortrait(def.id, 44, { mood: p.isNew ? 0.3 : p.mood })}
+          <span class="friend__lead"><b>${escapeHTML(def.name)}</b><small>${escapeHTML(def.subject)}</small></span>
+          <span class="friend__side"><span class="friend__hearts" aria-label="${p.hearts} of 5 hearts">${'♥'.repeat(p.hearts)}<i>${'♥'.repeat(5 - p.hearts)}</i></span><small>${MOOD_LABEL[p.word]} · ${giftIcon(def.gift, 14)} ${p.gifts}</small></span>
+        </a>`;
+      }).join('')}
     </div>
-    <div class="places" style="margin-top:18px">
-      ${REGIONS.filter((r) => r.kind === 'learn').map((r) => `<a class="places__row" href="${r.route}"><b>${escapeHTML(r.name)}</b><span>${escapeHTML(r.skill ?? '')}</span></a>`).join('')}
-    </div>
-    <p class="panel__foot"><a href="#/growth">Growth →</a> · <a href="#/settings">Settings, backup and restore →</a></p>`;
+    <h2 class="shelf">Treasures</h2>
+    <ul class="treasures-made">
+      ${P.treasures.map((t) => `<li class="${t.made ? 'is-made' : t.next ? 'is-next' : ''}"><i aria-hidden="true">${t.made ? '✓' : t.next ? '✦' : '·'}</i><span><b>${t.made || t.next ? escapeHTML(t.name) : 'Still to come'}</b>${t.made ? `<small>${escapeHTML(t.appears)}</small>` : t.next ? `<small>${Object.entries(t.recipe).map(([g, n]) => `${giftIcon(g, 13)} ${n}`).join(' ')}</small>` : ''}</span></li>`).join('')}
+    </ul>
+    <p class="panel__foot"><a href="#/growth">The clock tower →</a> · <a href="#/settings">Settings, backup and restore →</a></p>`;
 }
 
-export { regionBySlug };
+export { regionBySlug, PET_BY_ID, GIFTS };

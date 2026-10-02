@@ -294,7 +294,7 @@ export async function renderPJSession(outlet, { storage }, params) {
       console.error('[CAT OS] pj mentor derive failed:', err);
     }
 
-    const worldRewardHTML = worldReward(s, resolved.items ?? []).html;
+    const worldRewardHTML = worldReward(s, resolved.items ?? [], { storage }).html;
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">

@@ -59,6 +59,10 @@ export function hostileRecords() {
     { id: 'l11', kind: 'garden-session', session_type: 'nonsense', clean: 'maybe', at: ISO(1.1e7) },
     { id: 'l12', kind: 'a kind from the future', at: ISO(1.2e7) },
     { id: 'l13', kind: 'village-build', building: 'reading', level: 3 },              // no date at all
+    { id: 'l14', kind: 'village-treasure', treasure: 'kite', at: ISO(1.3e7) },        // out of order
+    { id: 'l15', kind: 'village-treasure', treasure: null, at: 'yesterday' },
+    { id: 'l16', kind: 'village-treasure', treasure: 'lanterns' },                    // no date
+    { id: 'l17', kind: 'village-treasure', treasure: 'lanterns', at: ISO(1.4e7) },    // made twice
   ];
   return { sessions, learning };
 }
@@ -98,11 +102,19 @@ export async function checkHostileRecords() {
   // And the numbers it does produce must not be nonsense the screens will show.
   try {
     const s = deriveWorldState(empty, records, 1789000000000);
-    const v = s.village;
-    if (!Number.isFinite(v?.coins)) problems.push(`coins is ${v?.coins}, which a screen would print`);
-    for (const [k, n] of Object.entries(v?.stock ?? {})) {
-      if (!Number.isFinite(n) || n < 0) problems.push(`stock.${k} is ${n}`);
+    const p = s.pets;
+    if (!p || p.pets?.length !== 6) problems.push('the pets did not derive');
+    for (const [k, n] of Object.entries(p?.stock ?? {})) {
+      if (!Number.isFinite(n) || n < 0) problems.push(`stock.${k} is ${n}, which the satchel would print`);
     }
+    for (const pet of p?.pets ?? []) {
+      if (!Number.isFinite(pet.mood) || pet.mood < 0 || pet.mood > 1) problems.push(`${pet.id}'s mood is ${pet.mood}`);
+      if (!Number.isFinite(pet.gifts) || !Number.isFinite(pet.hearts)) problems.push(`${pet.id} has gifts ${pet.gifts}, hearts ${pet.hearts}`);
+    }
+    if (!Number.isFinite(p?.harmony)) problems.push(`harmony is ${p?.harmony}`);
+    if (!Number.isFinite(p?.flame?.days) || p.flame.days < 0) problems.push(`the flame is ${p?.flame?.days} days`);
+    if (p?.wishes?.length !== 3) problems.push(`there are ${p?.wishes?.length} wishes, not three`);
+    if ((p?.treasures ?? []).filter((t) => t.made).length > 1) problems.push('an out-of-order or repeated treasure record was counted');
     if (!Number.isFinite(s.stars) || s.stars < 0) problems.push(`stars is ${s.stars}`);
   } catch { /* already reported above */ }
 
