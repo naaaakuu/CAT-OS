@@ -1,10 +1,10 @@
 /**
  * <cat-plant> — a plant in the Language Garden and on Growth, as a sprite
- * from the art pack (see village/art.js): bare ground, a planter, a shrub,
- * a young birch, an oak that fills out, a pine for a Landmark. The same
- * stage-to-sprite map the Rootwood grove uses, so a family looks the same
- * everywhere it appears. Presentation only (Rule 7): attributes in, an
- * image out, no business logic, no events.
+ * from the art pack (assets/art/): bare ground, a planter, a shrub,
+ * a young birch, an oak that fills out, a pine for a Landmark. One
+ * stage-to-sprite map, so a family looks the same everywhere it appears.
+ * Presentation only (Rule 7): attributes in, an image out, no business
+ * logic, no events.
  *
  * Attributes:
  *   stage  one of STAGES in core/engine/garden-session.js:
@@ -21,7 +21,11 @@
  * them) and deliberately ignored: the pack's bakes have one form per stage.
  */
 
-import { artURL, PLANT_STAGE } from '../../village/art.js';
+/** A root family's growth stage as [sprite, scale]. */
+const PLANT_STAGE = Object.freeze({ open_ground: ['grass', 1.4], seed: ['planter', 0.8], sprout: ['bush', 0.8], young: ['tree_birch', 0.6], in_leaf: ['tree_oak', 0.7], mature: ['tree_oak', 0.85], ancient: ['tree_oak', 1] });
+
+/** A plant still's image file (assets/art/<name>.png). */
+const artURL = (name) => new URL(`../../../assets/art/${name}.png`, import.meta.url).href;
 
 function escapeText(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

@@ -84,9 +84,6 @@ export function deriveGrowth(s) {
   };
 }
 
-/**
- * One honest line about how far the valley has come, for the map and for
- * the Hearth. Never a percentage — a place, at a stage.
- */
-export { STAGES as VALLEY_STAGES } from '../village/defs.js';
-export { stageFor as valleyStage } from './economy.js';
+/** The valley's stages, by name: Wick has a line for each one after the
+ *  first (companion.js stageLine; verify §17 holds the two together). */
+export const VALLEY_STAGES = Object.freeze(['A camp', 'A hamlet', 'A village', 'A busy village', 'A town', 'A market town', 'A town people travel to'].map((name) => Object.freeze({ name })));

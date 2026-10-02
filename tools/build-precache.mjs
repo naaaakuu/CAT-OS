@@ -71,7 +71,6 @@ export function coreFiles() {
     './src/ui/styles/components.css',
     './src/ui/styles/game.css',
     './src/ui/styles/world.css',
-    './src/ui/styles/village.css',
     './src/ui/styles/home-world.css',
     './assets/art/home-world-v1.png',
     './assets/art/home-companions-v1.png',

@@ -8,10 +8,6 @@
  * Nothing here is an emoji.
  */
 
-import { artIMG } from '../village/art.js';
-import { PLACE_BUILDING, buildingById } from '../village/defs.js';
-import { thing } from './economy.js';
-
 /** Older mark names, mapped to the glyphs below. */
 const GLYPH = Object.freeze({
   tree: 'root', flower: 'bloom', koi: 'bloom', lantern: 'bloom', vine: 'root', workshop: 'thread', cottage: 'house',
@@ -66,34 +62,8 @@ export function icon(kind, { className = '', size = 18, alt = '' } = {}) {
   return `<svg class="ico ico--${g} ${className}" width="${size}" height="${size}" viewBox="0 0 24 24" stroke="currentColor" focusable="false" ${a11y}>${svgBody(g)}</svg>`;
 }
 
-/** The icon for a place: its building's good, or the building itself. */
-export function placeIcon(slug, opts = {}) {
-  const b = buildingById(PLACE_BUILDING[slug] ?? slug);
-  if (b?.raw) return icon(b.raw, opts);
-  if (b?.id === 'hearth') return icon('house', opts);
-  if (b?.id === 'road') return icon('road', opts);
-  if (b?.id === 'market') return icon('board', opts);
-  return icon('star', opts);
-}
+/** A good's or the coins' mark; anything else is a star. */
+const CRAFT_GLYPH = Object.freeze({ pages: 'page', books: 'book', seeds: 'seed', blooms: 'bloom', roots: 'root', ink: 'ink', thread: 'thread', cloth: 'cloth', coins: 'coin' });
 
 /** The icon for a good or coins. */
-export function craftIcon(key, opts = {}) { return icon(thing(key)?.glyph ?? 'star', opts); }
-export const goodIcon = craftIcon;
-
-/** A raw data URL, for CSS backgrounds and canvas draws. A data URL has no
-    currentColor to inherit, so the ink is baked in. */
-export function iconURL(kind, scale = 4) {
-  const g = glyphOf(kind), px = 24 * scale;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${px}" height="${px}" viewBox="0 0 24 24" stroke="#30473B">${svgBody(g)}</svg>`;
-  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-}
-
-/** The picture of a building at a level, sized to a CSS box. */
-export function buildingArt(id, level = 1, box = 64) {
-  const b = buildingById(id);
-  if (!b?.art) return icon('road', { size: Math.round(box * 0.6) });
-  return artIMG('building', { id: b.art, level: Math.max(1, level) }, { size: box, className: 'ico--art' });
-}
-
-/** Kept for older call sites: a work's picture is its building's picture. */
-export function workArt(work, box = 64) { return buildingArt(work?.building ?? work?.id ?? 'hearth', work?.level ?? 1, box); }
+export function craftIcon(key, opts = {}) { return icon(CRAFT_GLYPH[key] ?? 'star', opts); }

@@ -1861,8 +1861,6 @@ console.log('\n16. The world (regions · economy · lexicon rounds · state · a
     const result = round.finish();
     if (result.record.kind !== 'lex-round' || result.record.score.total !== 12) bad('world lexicon: a finished round yields a lex-round record of twelve answers');
     if (result.record.score.correct !== 8) bad(`world lexicon: expected 8 correct in the dry run, got ${result.record.score.correct}`);
-    if (!(result.earned?.seeds > 0)) bad('world lexicon: a finished round earns Seeds');
-    if (result.earned.pages !== 0 || result.earned.thread !== 0 || result.earned.blooms !== 0) bad('world lexicon: a word round makes Seeds only — Blooms are grown, never earned');
     /* The curator composes a round across bundles, due words first. */
     const curator = await mod('src/world/curator.js');
     const fields = await lexicon.listFields('meadow');

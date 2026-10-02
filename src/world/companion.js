@@ -19,7 +19,6 @@
  */
 
 import { STORES } from '../core/storage/storage-adapter.js';
-import { STAGES } from '../village/defs.js';
 
 export const WICK = Object.freeze({
   name: 'Wick',
@@ -104,16 +103,6 @@ export const DAWN = Object.freeze([
   'Deliver them, and the coins are yours.',
 ]);
 
-/** Lines for the first loop, by onboarding step. */
-export const STEP_LINES = Object.freeze({
-  'first-read': 'Ada binds Pages into Books. Pages come from reading. Tap the Reading House.',
-  binding: 'Ada’s binding. Give her a moment.',
-  collect: 'It’s on the shelf. Take it.',
-  deliver: 'Mira’s waiting at the board by the door. Give it to her.',
-  build: 'Coins build things. Bo wants a patch of ground for a garden.',
-  name: 'It should have a name now.',
-});
-
 /**
  * A line for coming home, chosen by what is actually true of the village.
  * Order matters: the most useful thing Wick could say wins.
@@ -172,19 +161,3 @@ export function atPlace(slug, state) {
     default: return '';
   }
 }
-
-/** What Wick says when he sees the thing you built. He notices; he never
- *  congratulates, and he never says the word "unlocked". */
-export function builtLine(name) {
-  const n = String(name ?? '').replace(/^A |^The /, '');
-  const lines = [
-    `The ${n.toLowerCase()}. That wasn’t here yesterday.`,
-    `Look at that. A ${n.toLowerCase()}.`,
-    `So that’s what the ${n.toLowerCase()} looks like.`,
-  ];
-  let h = 0;
-  for (const ch of String(name ?? '')) h = (h + ch.charCodeAt(0)) % 997;
-  return lines[h % lines.length];
-}
-
-export { STAGES };

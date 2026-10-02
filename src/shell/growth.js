@@ -51,7 +51,6 @@ import { readingWeakness, typeName, weaknessLine } from '../world/curator.js';
 import { PET_BY_ID } from '../pets/pets.js';
 import { petPortrait, petSprite, backdropStyle, FRAME } from '../pets/sprite.js';
 import { loadValley, valleyName } from '../world/companion.js';
-import { craft } from '../world/economy.js';
 import { collections, closest, tally, GROUPS } from '../world/collections.js';
 import { icon, craftIcon } from '../world/icons.js';
 

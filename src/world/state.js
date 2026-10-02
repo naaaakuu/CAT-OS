@@ -237,7 +237,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
   };
 
   /* ---- Works that were derived from the old craft economy are gone; the
-          village (village/state.js) derives what stands from its own records. ---- */
+          pets (state.pets, src/pets/economy.js) are what the village shows. ---- */
   const built = { hearthLevel: 1, floors: 1 };
   reading.floors = 1;
   reading.observatory = false;

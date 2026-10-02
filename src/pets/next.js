@@ -5,8 +5,8 @@
  * When the learner taps Chai, the card must say START and mean it: this
  * passage, chosen for you, about five minutes. The curator already decides
  * what the next passage, set or family should be; this asks it on the pet's
- * behalf and turns the answer into a route and two lines. (Moved from
- * village/next.js, where it answered per building.)
+ * behalf and turns the answer into a route and two lines. (It answered per
+ * building in the 2.x canvas village.)
  */
 
 import { nextPassage, nextVerbal, nextFamily, readingWeakness, missedQuestions } from '../world/curator.js';
