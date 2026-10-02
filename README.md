@@ -58,8 +58,9 @@ behind a gate.
 ## The village
 
 **One painting** (`assets/art/home-world-v1.png`, 1536 × 1024) fills the
-screen. You pan by drag, wheel or arrow keys, and zoom by pinch or
-ctrl+wheel.
+screen. You pan by drag, wheel or arrow keys, and zoom by pinch,
+ctrl+wheel or the zoom buttons. Desktop opens with the whole village visible;
+the overview button fits the whole map on a phone as well.
 
 **Three small pieces of chrome sit on it:**
 - Toffee's flame, with the day count and the village name;
@@ -71,16 +72,24 @@ Everything else is in the world:
 - tap the clock tower for Progress;
 - tap your cottage for sound, settings and backup.
 
-**The painting moves.** Thirty-six pieces of the painting are cut out with
+**The painting moves.** Forty-four pieces of the painting are cut out with
 feathered edges and animated in place, so at rest each one is pixel-identical
 to the picture beneath it:
 - the workshop gear and wheels turn;
 - the waterfalls and streams run, and the pond drifts;
 - lily pads bob;
 - banners, bunting and awnings stir;
-- eleven trees sway as a gust crosses the map;
+- eleven trees and eight flower beds sway as a gust crosses the map;
 - the campfire flickers;
 - the telescope pans now and then, and the armillary turns.
+
+Five visible river reaches also have refracted water, downstream foam,
+travelling surface ripples and moving reflections. A cached colour mask
+keeps the water inside the painted banks and behind bridges, rocks and
+lilies. Tap the water to leave a ripple. Small canvases cover only the water,
+update at 30 fps and stop when the tab is hidden. Reduced motion leaves the
+original painting still. Drifting sunlight and cloud shadows give the
+village changing light without moving the camera.
 
 Over that:
 - **Light:** every lamp and lantern breathes a warm halo, faint by day and

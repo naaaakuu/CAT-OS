@@ -23,6 +23,7 @@ import { SHEETS } from '../pets/sheets.js';
 import { FRAME, giftIcon } from '../pets/sprite.js';
 import { PETS, PET_BY_ID, LINES, gossipLine, lineFor, successorOf } from '../pets/pets.js';
 import { rng } from '../world/engine/palette.js';
+import { createWater } from './water.js';
 
 /** Drawn height of each pet, in painting pixels. */
 export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80 });
@@ -41,6 +42,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   const map = root.querySelector('.cw-map');
   const canvas = root.querySelector('.cw-life');
   const g = canvas.getContext('2d');
+  const water = createWater(map, { reduced });
   let pets = petsState;
   let hour = atmo.hour, weather = atmo.weather, season = atmo.season;
   const night = () => hour === 'night';
@@ -127,7 +129,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
       return;
     }
     if (w === 'new') {
-      if (r < 0.15) { const n = freeNode(SPOTS.plaza); if (n) { walkTo(a, n, 'idle'); return; } }
+      if (r < 0.38) { const n = freeNode(SPOTS.plaza); if (n) { walkTo(a, n, 'idle'); return; } }
       a.state = 'idle'; a.until = now + rand(4e3, 8e3);
       if (Math.random() < 0.35) { a.reactUntil = now + 600; say(a, '?', 1600, false); }
       return;
@@ -275,9 +277,9 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   const parts = [];
   const R = (seed) => rng(seed);
   const flameRate = { embers: 2, small: 4, steady: 6, tall: 9, bonfire: 13 };
-  const isAutumn = season === 'autumn', isSpring = season === 'spring', isWinter = season === 'winter';
+  let isAutumn = season === 'autumn', isSpring = season === 'spring', isWinter = season === 'winter';
   const fireflyCount = () => (dark() ? Math.round(8 + pets.harmony * 22 + (made('fireflies') ? 26 : 0) + (pets.festival ? 12 : 0)) : 0);
-  const butterflyCount = () => (!dark() && hour !== 'dawn' && weather !== 'rain' ? 3 + (made('flowers') ? 4 : 0) : 0);
+  const butterflyCount = () => (!dark() && hour !== 'dawn' && weather !== 'rain' ? 6 + (made('flowers') ? 4 : 0) : 0);
   const made = (id) => pets.treasures.find((t) => t.id === id)?.made;
   // One soft puff per light, drawn once and stamped for every wisp of smoke and steam.
   const puffOf = (rgb) => {
@@ -288,7 +290,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     return c;
   };
   const puffs = { day: puffOf('246,242,234'), dark: puffOf('150,152,166') };
-  let sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(20e3, 50e3), lanternAcc = 0;
+  let sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(2500, 6000), lanternAcc = 0;
   const glints = Array.from({ length: 16 }, (_, i) => { const r = R(`glint${i}`); const t = r() * Math.PI * 2, d = Math.sqrt(r()); return { x: POND.x + Math.cos(t) * POND.rx * d * 0.85, y: POND.y + Math.sin(t) * POND.ry * d * 0.8, p: r() * 6 }; });
   const ensure = (kind, n, make) => { const have = parts.filter((p) => p.kind === kind).length; for (let i = have; i < n; i += 1) parts.push(make(i)); };
   const lilies = (TREASURE_AT.lilylights ?? []);
@@ -309,7 +311,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     if (hour === 'afternoon' || hour === 'morning') ensure('mote', 12, (i) => ({ kind: 'mote', x: rand(400, 1150), y: rand(250, 800), t: i * 1.7 }));
     if (now > rippleAt) { rippleAt = now + rand(weather === 'rain' ? 600 : 3500, weather === 'rain' ? 1400 : 8000); const r = R(`rip${now | 0}`); const t = r() * Math.PI * 2, d = Math.sqrt(r()) * 0.8; parts.push({ kind: 'ripple', x: POND.x + Math.cos(t) * POND.rx * d, y: POND.y + Math.sin(t) * POND.ry * d, age: 0, life: 2.6 }); }
     if (!dark() && weather !== 'rain' && now > birdsAt) {
-      birdsAt = now + rand(55e3, 110e3);
+      birdsAt = now + rand(22e3, 42e3);
       const ltr = Math.random() < 0.5, y0 = rand(50, 200), n = 3 + Math.floor(Math.random() * 3);
       for (let i = 0; i < n; i += 1) parts.push({ kind: 'bird', x: ltr ? -40 - i * 26 : 1576 + i * 26, y: y0 + (i % 2) * 14 + i * 4, vx: ltr ? rand(70, 85) : -rand(70, 85), t: Math.random() * 6, age: 0, life: 30 });
     }
@@ -356,7 +358,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
           break;
         }
         case 'butterfly': {
-          if (dark()) { parts.splice(i, 1); break; }
+          if (!butterflyCount()) { parts.splice(i, 1); break; }
           p.t += dt; const px = p.x; p.x = p.ax + Math.sin(p.t * 0.6) * 60 + Math.sin(p.t * 1.7) * 14; p.y = p.ay + Math.cos(p.t * 0.9) * 30 + Math.sin(p.t * 2.3) * 8;
           const flap = Math.abs(Math.sin(p.t * 14)) * 4 + 1, dir = p.x > px ? 1 : -1;
           g.fillStyle = p.c; g.strokeStyle = 'rgba(60,40,30,.6)'; g.lineWidth = 0.8;
@@ -434,11 +436,13 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     }
     for (const a of actors) paintPet(a);
     if (!reduced) air(dt);
+    if (!reduced) water.paint(now, weather);
   };
   raf = requestAnimationFrame(frame);
 
   /* ================= What the screen can ask of it ================= */
   return {
+    ripple: (x, y) => water.ripple(x, y),
     positionOf: (id) => { const a = byId.get(id); return a ? { x: a.x, y: a.y - 40 } : NODES.pc; },
     /** A tap: the pet jumps, a heart floats up, and it says something (unless `quiet`). Returns what it said. */
     poke(id, { happy = false, line = null, quiet = false } = {}) {
@@ -473,8 +477,8 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
       for (const a of actors) { const w = wordOf(a.id); if (w !== a.word) { a.word = w; if (a.state !== 'walk') a.until = now; } }
       setThinkers();
     },
-    setAtmo(at) { hour = at.hour; weather = at.weather; for (const a of actors) if (a.state !== 'walk') a.until = now; },
-    destroy() { destroyed = true; cancelAnimationFrame(raf); clearInterval(clockTimer); },
+    setAtmo(at) { hour = at.hour; weather = at.weather; season = at.season; isAutumn = season === 'autumn'; isSpring = season === 'spring'; isWinter = season === 'winter'; for (const a of actors) if (a.state !== 'walk') a.until = now; },
+    destroy() { destroyed = true; cancelAnimationFrame(raf); clearInterval(clockTimer); water.destroy(); },
   };
 }
 

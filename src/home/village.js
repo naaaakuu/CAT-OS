@@ -59,6 +59,7 @@ export async function renderVillageHome(outlet, ctx) {
           <img class="cw-art" src="${MAP.src}" alt="" draggable="false" decoding="async" fetchpriority="high">
           <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="cw-tint" aria-hidden="true"></div>
+          <div class="cw-sunlight" aria-hidden="true"></div>
           <div class="cw-glows" aria-hidden="true">${[...LAMPS.map((l, i) => glow(l, 'lamp', i)), ...WINDOWS.map((w, i) => glow(w, 'win', i))].join('')}</div>
           <div class="cw-treasures" aria-hidden="true"></div>
           <svg class="cw-clock" aria-hidden="true" style="left:${CLOCK.x - CLOCK.r}px;top:${CLOCK.y - CLOCK.r}px" width="${CLOCK.r * 2}" height="${CLOCK.r * 2}" viewBox="-10 -10 20 20"><line class="cw-clock__h" x1="0" y1="0" x2="0" y2="-4.6"/><line class="cw-clock__m" x1="0" y1="0" x2="0" y2="-6.8"/><circle r=".9"/></svg>
@@ -74,6 +75,11 @@ export async function renderVillageHome(outlet, ctx) {
           <button class="cw-round" data-open="cottage" aria-label="Your cottage: sound, settings and progress">${houseSVG}</button>
         </div>
       </header>
+      <nav class="cw-camera" aria-label="Map view">
+        <button data-camera="out" aria-label="Zoom out" title="Zoom out">−</button>
+        <button data-camera="overview" aria-label="Show the whole village" title="Show the whole village"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/></svg></button>
+        <button data-camera="in" aria-label="Zoom in" title="Zoom in">+</button>
+      </nav>
       <button class="cw-today" data-open="wishes"></button>
       <button class="cw-edge" hidden></button>
       <div class="cw-toast" role="status" aria-live="polite"></div>
@@ -92,20 +98,26 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- The camera ---------------- */
   const cam = { x: NODES.pc.x, y: NODES.pc.y + 40, z: 1 };
-  let vw = 1, vh = 1, base = 1, tween = null, onCamera = () => {};
+  let vw = 1, vh = 1, base = 1, minZoom = 1, laidOut = false, tween = null, onCamera = () => {};
   const scale = () => base * cam.z;
   const apply = () => {
     const s = scale();
     const hw = vw / 2 / s, hh = vh / 2 / s;
-    cam.x = clamp(cam.x, hw, MAP.w - hw);
-    cam.y = clamp(cam.y, hh, MAP.h - hh);
+    cam.x = hw * 2 >= MAP.w ? MAP.w / 2 : clamp(cam.x, hw, MAP.w - hw);
+    cam.y = hh * 2 >= MAP.h ? MAP.h / 2 : clamp(cam.y, hh, MAP.h - hh);
     map.style.transform = `translate3d(${(vw / 2 - cam.x * s).toFixed(2)}px,${(vh / 2 - cam.y * s).toFixed(2)}px,0) scale(${s.toFixed(4)})`;
     map.style.setProperty('--inv', (1 / s).toFixed(4));
+    root.querySelector('[data-camera="out"]').disabled = cam.z <= minZoom + 0.005;
+    root.querySelector('[data-camera="in"]').disabled = cam.z >= 1.895;
     onCamera();
   };
   const layout = () => {
     vw = viewport.clientWidth || window.innerWidth; vh = viewport.clientHeight || window.innerHeight;
     base = Math.max(vw / MAP.w, vh / MAP.h);
+    minZoom = Math.min(vw / MAP.w, vh / MAP.h) / base;
+    if (!laidOut && vw >= 900) cam.z = minZoom;
+    cam.z = clamp(cam.z, minZoom, 1.9);
+    laidOut = true;
     apply();
   };
   const panTo = (x, y, { z = cam.z, ms = 900 } = {}) => {
@@ -127,6 +139,13 @@ export async function renderVillageHome(outlet, ctx) {
     else panTo(p.x + (0.5 - 0.36) * vw / s, p.y, { ms: 600 });
   };
   const ro = new ResizeObserver(layout); ro.observe(viewport); layout();
+  root.querySelector('.cw-camera').addEventListener('click', (e) => {
+    const action = e.target.closest('[data-camera]')?.dataset.camera;
+    if (!action) return;
+    tween = null; fling = null;
+    if (action === 'overview') panTo(MAP.w / 2, MAP.h / 2, { z: minZoom, ms: 650 });
+    else panTo(cam.x, cam.y, { z: clamp(cam.z * (action === 'in' ? 1.22 : 1 / 1.22), minZoom, 1.9), ms: 300 });
+  });
 
   /* Drag, fling, pinch, wheel, keys. A drag never becomes a tap. */
   const ptrs = new Map();
@@ -143,7 +162,7 @@ export async function renderVillageHome(outlet, ctx) {
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (ptrs.size >= 2 && drag.pinch) {
       const [a, b] = [...ptrs.values()];
-      cam.z = clamp(drag.z * Math.hypot(a.x - b.x, a.y - b.y) / drag.pinch, 1, 1.9);
+      cam.z = clamp(drag.z * Math.hypot(a.x - b.x, a.y - b.y) / drag.pinch, minZoom, 1.9);
       moved = true; apply(); return;
     }
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
@@ -176,15 +195,15 @@ export async function renderVillageHome(outlet, ctx) {
   viewport.addEventListener('click', (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
   viewport.addEventListener('wheel', (e) => {
     e.preventDefault(); tween = null;
-    if (e.ctrlKey) { cam.z = clamp(cam.z * (1 - e.deltaY * 0.01), 1, 1.9); apply(); return; }
+    if (e.ctrlKey) { cam.z = clamp(cam.z * (1 - e.deltaY * 0.01), minZoom, 1.9); apply(); return; }
     const s = scale(); cam.x += e.deltaX / s; cam.y += e.deltaY / s; apply();
   }, { passive: false });
   viewport.addEventListener('keydown', (e) => {
     const s = scale(), step = 70 / s;
     const keys = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
     if (keys[e.key] && e.target === viewport) { e.preventDefault(); panTo(cam.x + keys[e.key][0], cam.y + keys[e.key][1], { ms: 220 }); }
-    if ((e.key === '+' || e.key === '=') && e.target === viewport) { cam.z = clamp(cam.z + 0.15, 1, 1.9); apply(); }
-    if (e.key === '-' && e.target === viewport) { cam.z = clamp(cam.z - 0.15, 1, 1.9); apply(); }
+    if ((e.key === '+' || e.key === '=') && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z + 0.15, minZoom, 1.9); apply(); }
+    if (e.key === '-' && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z - 0.15, minZoom, 1.9); apply(); }
   });
   // A focused pet or building that sits off-screen is brought into view.
   viewport.addEventListener('focusin', (e) => {
@@ -197,6 +216,11 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- Life ---------------- */
   const life = createLife(root, { pets, atmo, reduced, sizes: PET_SIZE });
+  viewport.addEventListener('click', (e) => {
+    if (e.target.closest('button')) return;
+    const bounds = map.getBoundingClientRect(), s = scale();
+    life.ripple((e.clientX - bounds.left) / s, (e.clientY - bounds.top) / s);
+  });
   const saidEl = root.querySelector('[data-said]');
   const announce = (text) => { if (text) saidEl.textContent = String(text).replace(/<[^>]*>/g, ''); };
   // The moving patches wait for the painting: on a first visit the small
@@ -397,7 +421,9 @@ export async function renderVillageHome(outlet, ctx) {
   /* ---------------- The hour turns while you sit here ---------------- */
   const tickHour = setInterval(() => {
     const d = new Date(), now = { hour: hourWord(d), season: seasonWord(d), weather: weatherWord(d, seasonWord(d)) };
-    if (now.hour !== root.dataset.hour) { root.dataset.hour = now.hour; life.setAtmo(now); motion.setAtmo(now); }
+    if (now.hour !== root.dataset.hour || now.weather !== root.dataset.weather || now.season !== root.dataset.season) {
+      Object.assign(root.dataset, now); Object.assign(atmo, now); life.setAtmo(now); motion.setAtmo(now);
+    }
   }, 60e3);
 
   /* ---------------- Cleanup ---------------- */

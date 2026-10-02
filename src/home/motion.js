@@ -94,7 +94,15 @@ export const PATCHES = [
     [190, 985, 115, 48, 1080, 9], // the foreground, left
     [905, 980, 105, 50, 1080, 8.4], // the foreground, middle
     [1120, 990, 90, 40, 1080, 7.6], // the foreground, right
-  ].map(([cx, cy, rx, ry, py, t]) => ({ k: 'sway', x: cx - rx, y: cy - ry, w: rx * 2, h: ry * 2, cx, cy: py, a: 1.15, t, tree: true })),
+  ].map(([cx, cy, rx, ry, py, t]) => ({ k: 'sway', x: cx - rx, y: cy - ry, w: rx * 2, h: ry * 2, cx, cy: py, a: 1.9, t, tree: true })),
+
+  // Smaller plants answer the same breeze, on quicker, independent beats.
+  ...[
+    [190, 306, 35, 25, 355, 4.8], [455, 552, 38, 28, 594, 5.1],
+    [597, 564, 34, 24, 595, 4.3], [975, 566, 33, 26, 599, 4.9],
+    [555, 657, 31, 39, 708, 5.6], [472, 735, 32, 29, 772, 4.5],
+    [1208, 538, 35, 29, 580, 5.2], [472, 923, 37, 23, 955, 4.7],
+  ].map(([cx, cy, rx, ry, py, t]) => ({ k: 'sway', x: cx - rx, y: cy - ry, w: rx * 2, h: ry * 2, cx, cy: py, a: 2.6, t, tree: true })),
 ];
 
 /* A gust crosses the map from the west: each tree's phase lags by its x. */

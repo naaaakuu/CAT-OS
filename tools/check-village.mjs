@@ -59,6 +59,30 @@ try {
   ok(await ev(`[...document.querySelectorAll('.cw-motion .mo > b')].every((b) => b.getAnimations().some((a) => a.playState === 'running'))`), 'a patch of the living painting is standing still');
   ok(await ev(`document.querySelectorAll('.cw-glow--lamp').length >= 20 && getComputedStyle(document.querySelector('.cw-glow--lamp')).opacity > 0`), 'the lamps should glow faintly by day');
 
+  // Sample the rendered water twice: every visible reach must actually move.
+  ok(await waitFor(`document.querySelector('.cw-water')?.dataset.ready === 'true'`), 'the water mask did not load');
+  await ev(`window.__waterBefore = [...document.querySelectorAll('.cw-water canvas')].map((c) => c.getContext('2d').getImageData(0, 0, c.width, c.height).data)`);
+  await sleep(700);
+  const water = await ev(`(() => {
+    return [...document.querySelectorAll('.cw-water canvas')].map((c, reach) => {
+      const data = c.getContext('2d').getImageData(0, 0, c.width, c.height).data, before = window.__waterBefore[reach];
+      let changed = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i+3] > 20 && Math.abs(data[i]-before[i]) + Math.abs(data[i+1]-before[i+1]) > 6) changed++;
+      }
+      return changed;
+    });
+  })()`);
+  ok(water.length === 5 && water.every((n) => n > 20), `a river reach is still: ${water}`);
+  ok(await ev(`(() => { const c = document.querySelectorAll('.cw-water canvas')[2]; return c.getContext('2d').getImageData(205, 25, 1, 1).data[3] === 0; })()`), 'water painted over the wooden dock');
+
+  // Whole-map view works even on a phone; zooming returns to exploration.
+  await ev(`document.querySelector('[data-camera="overview"]').click()`); await sleep(850);
+  ok(await ev(`(() => { const r = document.querySelector('.cw-map').getBoundingClientRect(); return r.width <= innerWidth + 1 && r.height <= innerHeight + 1 && r.left >= -1 && r.top >= -1; })()`), 'overview crops part of the village');
+  const wide = await ev(`document.querySelector('.cw-map').getBoundingClientRect().width`);
+  await ev(`document.querySelector('[data-camera="in"]').click()`); await sleep(450);
+  ok(await ev(`document.querySelector('.cw-map').getBoundingClientRect().width`) > wide, 'zoom button did not enlarge the map');
+
   // Pets choose at random, and every one may idle for a while: wait for any of them to move, up to twenty seconds.
   const p0 = JSON.parse(await positions());
   let moved = 0;
@@ -105,6 +129,7 @@ try {
   const r0 = await positions(); await sleep(4000); const r1 = await positions();
   ok(r0 === r1, 'pets walked with reduced motion on');
   ok(await ev(`!document.querySelector('.cw-motion')`), 'the painting moved with reduced motion on');
+  ok(await ev(`!document.querySelector('.cw-water')`), 'water animation mounted with reduced motion on');
   ok(await ev(`document.documentElement.scrollWidth <= innerWidth`), 'the phone village scrolls sideways');
   ok(await ev(`window.__catos.errors.length === 0`), 'browser errors: ' + await ev(`JSON.stringify(window.__catos.errors)`));
 

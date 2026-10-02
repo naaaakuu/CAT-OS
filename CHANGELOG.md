@@ -4,6 +4,23 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.0.1 — A living river (2026-10-03)
+
+- All five visible river reaches flow, with refracted painted water,
+  downstream foam, surface waves and ripples where the learner taps.
+  Cached masks protect the banks, bridges and lilies. Five small canvases
+  share the village clock, cap water updates at 30 fps, and respect reduced
+  motion and tab visibility.
+- Stronger, uneven gusts move eleven trees and eight flower beds. Sunlight
+  shifts, cloud shadows drift, butterflies visit more gardens, birds arrive
+  sooner, and new pets explore the plaza more often.
+- Desktop starts with the whole village visible. Accessible zoom and
+  overview buttons also let phone users see the full map and zoom back in.
+- Weather and season changes now reach the motion layers while the village
+  stays open. Rebuilt the motion atlas and offline cache fingerprints.
+- Browser checks sample successive water frames in each reach, check the
+  dry dock, exercise overview and zoom, and verify reduced motion.
+
 ## 3.0.0 — The pet village (2026-10-02)
 
 The owner found the app too complex:

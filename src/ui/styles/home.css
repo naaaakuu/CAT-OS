@@ -36,16 +36,21 @@
 .cw :focus-visible { outline: 3px solid var(--honey); outline-offset: 3px; }
 .cw--error { display: grid; place-content: center; padding: 24px; text-align: center; color: #fff9ec; }
 .cw-viewport { position: absolute; inset: 0; overflow: hidden; cursor: grab; outline: none; }
+.cw-viewport::before { content: ""; position: absolute; inset: -30px; background: #34483c url('../../../assets/art/home-world-v1.png') center / cover; filter: blur(22px) brightness(0.48) saturate(0.7); pointer-events: none; }
 .cw-viewport:focus-visible { box-shadow: inset 0 0 0 3px var(--honey); }
 .cw-viewport.is-dragging { cursor: grabbing; }
 .cw-map { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; contain: layout style; }
 .cw-art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-user-drag: none; }
 .cw-map > * { position: absolute; }
-.cw-motion, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets { left: 0; top: 0; width: 100%; height: 100%; }
-.cw-motion, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures { pointer-events: none; }
+.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-treasures, .cw-life, .cw-spots, .cw-pets { left: 0; top: 0; width: 100%; height: 100%; }
+.cw-motion, .cw-water, .cw-sunlight, .cw-tint, .cw-glows, .cw-clouds, .cw-life, .cw-treasures { pointer-events: none; }
+.cw-water { image-rendering: auto; }
+.cw-sunlight { background: linear-gradient(118deg, transparent 20%, rgba(255,237,175,.09) 26%, transparent 32%, transparent 47%, rgba(255,237,175,.07) 52%, transparent 59%); transform-origin: 50% 0; animation: cw-sunlight 18s ease-in-out infinite alternate; }
+.cw[data-hour="night"] .cw-sunlight, .cw[data-weather="rain"] .cw-sunlight, .cw[data-weather="fog"] .cw-sunlight { display: none; }
+@keyframes cw-sunlight { from { opacity: .35; transform: skewX(-3deg); } to { opacity: .85; transform: skewX(3deg); } }
 .cw-life { image-rendering: auto; }
 .cw-pets { pointer-events: none; }
-.cw-map::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 140px rgba(28, 40, 30, 0.35); }
+.cw-map::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 95px rgba(28, 40, 30, 0.24); }
 
 /* The light of the hour: a wash over the painting, and the lamps and
    windows coming up as it darkens. */
@@ -107,7 +112,12 @@
 @keyframes mo-spin { from { transform: scale(var(--sx), var(--sy)) rotate(0turn) scale(var(--ix), var(--iy)); } to { transform: scale(var(--sx), var(--sy)) rotate(1turn) scale(var(--ix), var(--iy)); } }
 @keyframes mo-flow { from { transform: translate(0, 0); } to { transform: translate(var(--dx), var(--dy)); } }
 @keyframes mo-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
-@keyframes mo-sway { 0%, 100% { transform: skewX(calc(var(--a) * var(--wind) * -1deg)); } 50% { transform: skewX(calc(var(--a) * var(--wind) * 1deg)); } }
+@keyframes mo-sway {
+  0%, 100% { transform: skewX(calc(var(--a) * var(--wind) * -0.65deg)); }
+  36% { transform: skewX(calc(var(--a) * var(--wind) * 1deg)) translateY(-0.6px); }
+  64% { transform: skewX(calc(var(--a) * var(--wind) * 0.25deg)); }
+  80% { transform: skewX(calc(var(--a) * var(--wind) * 0.55deg)); }
+}
 @keyframes mo-flag {
   0%, 100% { transform: skewX(calc(var(--wind) * 1.2deg)) scaleX(1); }
   30% { transform: skewX(calc(var(--wind) * -2deg)) scaleX(0.97); }
@@ -138,11 +148,11 @@
 .cw-clouds i {
   position: absolute; width: 900px; height: 520px; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(24, 38, 30, 0.17), rgba(24, 38, 30, 0));
-  animation: cw-cloud 150s linear infinite; left: -900px;
+  animation: cw-cloud 85s linear infinite; left: -900px;
 }
-.cw-clouds i:nth-child(1) { top: 40px; }
-.cw-clouds i:nth-child(2) { top: 430px; animation-duration: 190s; animation-delay: -95s; width: 1100px; }
-.cw-clouds i:nth-child(3) { top: 700px; animation-duration: 170s; animation-delay: -40s; width: 760px; height: 400px; }
+.cw-clouds i:nth-child(1) { top: 40px; animation-delay: -24s; }
+.cw-clouds i:nth-child(2) { top: 430px; animation-duration: 110s; animation-delay: -65s; width: 1100px; }
+.cw-clouds i:nth-child(3) { top: 700px; animation-duration: 95s; animation-delay: -40s; width: 760px; height: 400px; }
 .cw[data-hour="night"] .cw-clouds, .cw[data-hour="dusk"] .cw-clouds { display: none; }
 @keyframes cw-cloud { to { transform: translateX(2700px); } }
 
@@ -295,6 +305,14 @@
 .cw-today__dots { display: flex; gap: 5px; }
 .cw-today__dots i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--c); background: transparent; }
 .cw-today__dots i.is-done { background: var(--c); }
+
+/* Camera controls sit together, away from the daily wishes and the pets. */
+.cw-camera { position: absolute; z-index: 10; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, calc(env(safe-area-inset-bottom) + 10px)); display: flex; padding: 4px; gap: 2px; border: 1px solid var(--color-line); border-radius: 18px; background: var(--color-surface); box-shadow: 0 6px 22px rgba(30,24,12,.2); }
+.cw-camera button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 12px; background: transparent; font-size: 24px; }
+.cw-camera button:hover:not(:disabled) { background: var(--color-line); }
+.cw-camera button:disabled { opacity: .4; cursor: default; }
+.cw-camera svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 700px) { .cw-camera { bottom: max(82px, calc(env(safe-area-inset-bottom) + 74px)); right: 12px; } }
 
 .cw-toast {
   position: absolute; z-index: 12; left: 50%; top: calc(max(12px, env(safe-area-inset-top)) + 60px);
