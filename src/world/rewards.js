@@ -128,7 +128,7 @@ export function worldReward(session, items = [], { storage = null } = {}) {
   const html = `
     <div class="world-reward" role="status" id="${key}">
       ${petBlock({ pet }, { compact: true, lead })}
-      <p class="world-reward__line">${p ? `${p.name} takes these home to ${p.home}.` : ''} <a href="#/world">Back to the village</a></p>
+      ${p ? `<p class="world-reward__line">${p.name} takes these home to ${p.home}.</p>` : ''}
     </div>`;
   sessionStorage.setItem('world:focus', region);
   setTimeout(() => { for (let i = 0; i < stars; i += 1) play(`star${i + 1}`, { delay: 0.9 + i * 0.35 }); }, 0);

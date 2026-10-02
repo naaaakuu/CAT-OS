@@ -488,7 +488,7 @@ export async function renderPSSession(outlet, { storage }, params) {
         </article>
 
         <div class="session-actions">
-          <a class="btn btn--primary btn--block" href="#/world/place/table">Back to the world</a>
+          <a class="btn btn--primary btn--block" href="#/world">Back to the village</a>
         </div>
       </section>
     `;

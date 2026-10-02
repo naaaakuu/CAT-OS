@@ -489,7 +489,7 @@ export async function renderOOOSession(outlet, { storage }, params) {
         </article>
 
         <div class="session-actions">
-          <a class="btn btn--primary btn--block" href="#/world/place/bench">Back to the world</a>
+          <a class="btn btn--primary btn--block" href="#/world">Back to the village</a>
         </div>
       </section>
     `;

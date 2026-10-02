@@ -188,7 +188,7 @@ export async function renderBankSession(outlet, { storage }, params) {
       <section class="screen">
         <h1>Can't open this set</h1>
         <div class="card"><p>${escapeHTML(err.message)}</p>
-        <p class="muted"><a href="#/world">Back to the valley</a></p></div>
+        <p class="muted"><a href="#/world">Back to the village</a></p></div>
       </section>`;
     return;
   }
@@ -203,12 +203,12 @@ export async function renderBankSession(outlet, { storage }, params) {
     const back2 = `#/world/place/${resolved.region}`;
     outlet.innerHTML = `
       <section class="screen">
-        <div class="session-bar"><a href="${back2}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The valley')}</a></div>
+        <div class="session-bar"><a href="${back2}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The village')}</a></div>
         <h1>These are resting</h1>
         <div class="card">
           <p>You have just seen ${resolved.rest.total === 1 ? 'the one item here' : `all ${resolved.rest.total} of these`}. Coming straight back to ${resolved.rest.total === 1 ? 'it' : 'them'} teaches the shape of the question rather than the way through it.</p>
           <p class="muted">${escapeHTML(whenBack(resolved.rest.returnAt))}</p>
-          <p><a class="btn btn--primary" href="${back2}">Something else at ${escapeHTML(REGION_NAME[resolved.region] ?? 'the valley')}</a></p>
+          <p><a class="btn btn--primary" href="${back2}">Something else at ${escapeHTML(REGION_NAME[resolved.region] ?? 'the village')}</a></p>
           <p class="muted"><a href="#/world">Back to the village</a></p>
         </div>
       </section>`;
@@ -229,7 +229,7 @@ export async function renderBankSession(outlet, { storage }, params) {
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">
-          <a href="${back}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The valley')}</a>
+          <a href="${back}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The village')}</a>
           <span>Item <b>${session.index + 1}</b> of ${session.total}</span>
           <cat-timer></cat-timer>
         </div>
@@ -326,7 +326,7 @@ export async function renderBankSession(outlet, { storage }, params) {
     const reward = worldReward(s, session.items, { storage });
     outlet.innerHTML = `
       <section class="screen">
-        <div class="session-bar"><a href="${back}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The valley')}</a></div>
+        <div class="session-bar"><a href="${back}">← ${escapeHTML(REGION_NAME[resolved.region] ?? 'The village')}</a></div>
         <article class="moment">
           <p class="screen__eyebrow">${escapeHTML(String(resolved.label ?? '').toLowerCase().startsWith(bank.name.toLowerCase()) ? resolved.label : `${bank.name} · ${resolved.label ?? ''}`)}</p>
           <h1 class="moment__opening">${escapeHTML(lesson.opening)}</h1>
@@ -352,7 +352,7 @@ export async function renderBankSession(outlet, { storage }, params) {
           </details>
         </article>
         <div class="session-actions">
-          <a class="btn btn--primary btn--block" href="${back}">Back to the world</a>
+          <a class="btn btn--primary btn--block" href="#/world">Back to the village</a>
         </div>
       </section>`;
     cue('mentor');
