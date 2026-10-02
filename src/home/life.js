@@ -443,7 +443,8 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     /** A tap: the pet jumps, a heart floats up, and it says something (unless `quiet`). Returns what it said. */
     poke(id, { happy = false, line = null, quiet = false } = {}) {
       const a = byId.get(id); if (!a) return '';
-      a.reactUntil = now + 700; a.happyUntil = now + (happy ? 2200 : 900);
+      // A quiet happy poke is the welcome back: the pet beams for as long as the toast names its gifts.
+      a.reactUntil = now + 700; a.happyUntil = now + (happy ? (quiet ? 4200 : 2200) : 900);
       if (!reduced) { heart(a); if (happy) setTimeout(() => heart(a), 220); }
       if (a.state === 'sleep' || a.state === 'doze') { a.state = 'idle'; a.until = now + 3000; }
       if (quiet) return '';

@@ -312,11 +312,12 @@
 }
 /* A letter waits pinned to the notice board, and stirs now and then. */
 .cw-envelope {
-  position: absolute; width: 56px; height: 48px; margin: -24px 0 0 -28px; padding: 0; border: 0; border-radius: 10px; background: none;
+  /* 48 screen px whatever the zoom: a tap target first, an envelope second. */
+  position: absolute; width: calc(48px * var(--inv, 1)); height: calc(48px * var(--inv, 1)); margin: calc(-24px * var(--inv, 1)) 0 0 calc(-24px * var(--inv, 1)); padding: 0; border: 0; border-radius: 10px; background: none;
   display: grid; place-items: center; filter: drop-shadow(0 3px 3px rgba(40, 28, 12, 0.35)); transform-origin: 50% 0;
   animation: cw-letter 4.5s ease-in-out infinite;
 }
-.cw-envelope svg { width: 40px; height: 30px; }
+.cw-envelope svg { width: 84%; height: auto; }
 .cw-envelope:focus-visible { outline: 3px solid var(--honey); outline-offset: 2px; }
 @keyframes cw-letter { 0%, 70%, 100% { rotate: 0deg; } 76% { rotate: -6deg; } 84% { rotate: 5deg; } 92% { rotate: -2deg; } }
 

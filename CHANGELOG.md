@@ -165,7 +165,39 @@ All of it is derived from learning records. The one new record kind is
   Terraces and the banks ended on "Back to the world", which skipped the
   village and its welcome.
 - **Contrast.** The room intros' small asides sat on the painted stage at
-  4.3:1. They now use the second ink.
+  4.3:1, filled hearts were about 3:1, and honey text was 3.2:1. They now
+  use the second ink, a `--heart` token and a `--honey-ink` token. An empty
+  heart is an outline ♡.
+
+Two adversarial reviews (a code reviewer and a visual critic, both reading
+3.0 against the spec) found more, and it is fixed:
+
+- **The old reward layer.** Four verbal rooms still raised the 1.x "Level 3
+  / Achievement" modal over the result and on into the village. It is gone,
+  with `cat-celebration.js`.
+- **The pet comes first.** The pet's reward strip leads every verbal result
+  instead of sitting under the mentor's essay. It also names a slow ring
+  ("Mochi has run low on notes. A visit to Mochi doubles Ginger's maps next
+  time").
+- **One count.** A wish bonus is counted as the bonus, so the result and
+  the toast agree.
+- **The toast** is one line at its own width and hides behind an open card.
+  The pet's line waits for it to go.
+- **The letter** is an envelope on the painted notice board.
+- **Who needs you, off-screen.** When the pet that needs a visit is off a
+  phone's screen, a chip at that edge points to it.
+- **The leaving guard.** Leaving while the village or a place loads no
+  longer starts it underneath the next screen.
+- **Accessibility:**
+  - `<summary>` is in the dialog's focus trap; Tab had skipped "More with
+    Chai" and the story;
+  - Toffee's hello and the pets' tap lines reach screen readers;
+  - reduced motion also stops breathing, blinking and hops.
+- **The precache.** Core now follows `index.html`'s stylesheets (two were
+  missing) and the six pet sheets. The companion strip, a bake input, is no
+  longer downloaded.
+- **Dead code.** The Wick script, `world/growth.js` and the unread
+  `state.growth` are deleted.
 
 ### Removed
 
@@ -185,7 +217,7 @@ In all, 77 files and about 5,550 lines. The cold open is 51 modules / 538 KB.
 | Section | What it checks now |
 |---|---|
 | §16 | Derives the pets (`tools/check-pet-economy.mjs`, `tools/check-pets.mjs`) |
-| §17 | Checks the painting and the six sheets |
+| §17 | Checks the painting and the six sheets, and that every place has a line in register (Wick's script is gone) |
 | §22 | Reads the village's button colours from `home.css` |
 | §23 | `tools/check-village-data.mjs`: the path graph, sampled against the painting's own pixels. It also fails if the motion atlas is staler than its patches |
 | §23b | `tools/check-village.mjs`: six pets walking, the painting moving (and absent with reduced motion), the lamps lit, cards, focus, a treasure made, night, phone width, offline |

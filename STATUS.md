@@ -32,7 +32,6 @@ _2.1.2 — the polish, reliability and systems-hardening pass. Dark mode is a de
 |---|---|
 | The motion atlas is 600 KB | It loads after the village paints and is invisible until it does, but it is in the precache, so a first install downloads it |
 | Pets idle on a slow device | The life loop clamps each frame to 50 ms, so at a few frames a second the pets move in slow motion. Fine on a phone; a very slow machine sees them dawdle |
-| The Wick voice still lives in `companion.js` | verify §17 still lints it, so it was kept; nothing in the app says those lines any more |
 | Arguments (6 items) and Paragraph Completion (27) still run dry quickly | Unchanged from 2.x; the pets now send learners there sooner |
 | The Mirror Pond and Vine Terraces word-bank shelves have no content | Unchanged from 2.x |
 

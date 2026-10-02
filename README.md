@@ -118,7 +118,8 @@ recomputes on every load, so a backup carries the whole village:
 - **Reasons to come back:**
   - three daily wishes aimed at whoever needs you most;
   - Toffee's flame, your daily run, protected by kindling;
-  - a letter from the pet who missed you after a day away;
+  - a letter, pinned to the notice board, from the pet who missed you
+    after a day away;
   - festival nights when everyone is happy.
 
 **Every other screen belongs to the same place:**
@@ -204,7 +205,7 @@ while the Reading Room rendered its passages at 1.14:1 contrast.
 | Section | What it does |
 |---|---|
 | §16 | Derives the pets: mood decay, ring doubling, harmony, the flame and its kindling, wishes, and treasure stock (`check-pet-economy.mjs`). Also lints the pets' lines: no "!", 96 characters at most, none of the mentor's banned words (`check-pets.mjs`) |
-| §17 | Checks that the painting and the six pet sheets are present |
+| §17 | Checks that the painting and the six pet sheets are present, and that every place has a line in register |
 | §22 `check-contrast.mjs` | Checks the palette and the village's button colours against WCAG AA |
 | §23 `check-village-data.mjs` | Samples the path graph against the painting's own pixels, and checks the motion atlas still matches its patches |
 | §23b `check-village.mjs` | Six pets walking, the painting moving, cards and focus, a treasure made, night, reduced motion, phone width, offline |
