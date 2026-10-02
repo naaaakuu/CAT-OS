@@ -24,14 +24,12 @@ import { loadLGItem, listLGItems, loadLGItems } from '../../../core/content-load
 import { motionReduced } from '../../../core/engagement/feedback.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { GardenSession, computePlantState, strugglingMembers } from '../../../core/engine/garden-session.js';
-import { listGardenSessions, sessionsForFamily, saveGardenSession, hasSeenGardenGrowth, markGardenGrowthSeen, listGardenSeeds } from '../logic/store.js';
+import { listGardenSessions, sessionsForFamily, saveGardenSession, hasSeenGardenGrowth, markGardenGrowthSeen } from '../logic/store.js';
 import { deriveValleyScene, nextReachPoolIndex, memberCheckOffset, isBiomeGrown } from '../logic/scene.js';
 import { biomeForFamily } from '../logic/biomes.js';
 import { atmosphereFor } from '../logic/atmosphere.js';
-import { mountGardenBackdrop } from '../../../world/garden-backdrop.js';
-import { EARN } from '../../../world/economy.js';
-import { chips as craftChips, bagText } from '../../../world/craft-ui.js';
-import { play as playWorld } from '../../../world/audio.js';
+import { paintedBackdrop } from '../../../pets/sprite.js';
+import { petBlock, giftLines, countGifts, petChangeFor, baseGifts } from '../../../world/rewards.js';
 import { GARDEN_LINES, GROWTH_LINES, ATTEMPT_LINES, pick } from '../../../core/mentor/garden-voice.js';
 import { playGardenSound, gardenCue, tonicHzForBiome } from '../logic/audio.js';
 import { escapeHTML } from '../../../core/utils/format.js';
@@ -70,7 +68,7 @@ function markWord(sentence, word) {
 }
 
 export async function renderGardenSession(outlet, context, params) {
-  let family, siblings, history, isFirstEver, allFamilies, allSessions, seeds;
+  let family, siblings, history, isFirstEver, allFamilies, allSessions;
   try {
     family = await loadLGItem(params.id);
     const registry = await listLGItems();
@@ -78,7 +76,6 @@ export async function renderGardenSession(outlet, context, params) {
     allFamilies = [...loaded.values()];
     siblings = allFamilies.filter((f) => f.meta.id !== params.id).map((f) => ({ id: f.meta.id, label: f.root.label, core_meaning: f.root.core_meaning }));
     allSessions = await listGardenSessions(context.storage);
-    seeds = await listGardenSeeds(context.storage);
     history = sessionsForFamily(allSessions, params.id);
     // The very first session of the learner's life in the Garden — the one
     // the Overlook launches directly (§3.1). It alone opens with an arrival.
@@ -106,26 +103,15 @@ export async function renderGardenSession(outlet, context, params) {
   const taught = session.taught;
 
   const atmo = atmosphereFor();
-  // The tended plant's DISPLAY state, before growth: a grow-type session
-  // always shows a seed about to become a sprout (§3.1), regardless of
-  // whether it was open ground or an already-planted seed a moment ago —
-  // the world is showing "this is being tended right now," not the raw
-  // computed stage.
-  const displayState = type === 'grow'
-    ? { stage: 'seed', due: 'none', vigor: 0, landmark: false, nextReviewAt: null }
-    : priorState;
   outlet.innerHTML = `
     <section class="screen lgx" data-beat="" data-time="${atmo.time}">
-      <div class="lgx__world" id="lgx-world" aria-hidden="true"></div>
+      <div class="lgx__world" id="lgx-world" aria-hidden="true">${paintedBackdrop('matcha')}</div>
       <button class="lgx__close" id="lgx-close" aria-label="Leave the garden">×</button>
       <div class="lgx__veil-wrap" id="lgx-veil-wrap">
         <div class="lgx-veil" id="lgx-veil"></div>
       </div>
     </section>
   `;
-  const backdrop = mountGardenBackdrop(outlet.querySelector('#lgx-world'), { family, allFamilies, allSessions, seeds, displayState });
-  const onHashLeave = () => { backdrop.destroy(); window.removeEventListener('hashchange', onHashLeave); };
-  window.addEventListener('hashchange', onHashLeave);
   outlet.querySelector('#lgx-close').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'rootwood'); location.hash = biomeHome; });
   const lgxEl = outlet.querySelector('.lgx');
   const stage = outlet.querySelector('#lgx-veil');
@@ -541,11 +527,10 @@ export async function renderGardenSession(outlet, context, params) {
    *  stage the grove itself won't also show the moment the learner
    *  returns (Bible: growth is earned, honest, never spent twice).
    *
-   *  Part 10.3: "the veil clears completely… the plant grows in the
-   *  scene by extension… the world alone, holding still." The veil (and
-   *  everything it held) fades away; the SAME plant already standing in
-   *  the world — found via [data-tended-plant] — is grown in place, at
-   *  its own real scale, never swapped for a separate floating hero. */
+   *  Part 10.3: "the veil clears completely." The veil (and everything it
+   *  held) fades away over Matcha's greenhouse; the tree rises into its
+   *  new stage, then the line, Matcha with the leaves this walk made, and
+   *  the way back. */
   function growthBeat(line, postState, cue = 'growth', tonic = tonicHz) {
     const reduce = prefersReducedMotion();
     const afterglow = afterglowLine(context, family.meta.id);
@@ -553,38 +538,45 @@ export async function renderGardenSession(outlet, context, params) {
     veilWrap.classList.add('lgx-veil-wrap--cleared');
     stage.innerHTML = '';
 
-    // The world's reward, shown once the tree has come to rest: the Ink
-    // this session earned, and where the valley will look on the way back.
+    // Matcha's reward, shown once the tree has come to rest: the leaves
+    // this walk made, read back from the village so the ring and a new
+    // heart are exactly what the village will show.
     const record = lastRecord;
-    const earned = record ? EARN.garden(record.session_type, record.clean === true) : null;
     sessionStorage.setItem('world:focus', 'rootwood');
-    sessionStorage.setItem('world:changed', 'rootwood');
-    sessionStorage.setItem('world:change-line', `${escapeHTML(family.root.label)} ${postState.stage === 'sprout' ? 'has sprouted' : 'grew'} in the Rootwood`);
-    if (earned) sessionStorage.setItem('world:earned', JSON.stringify(earned));
+    const change = record
+      ? petChangeFor(context.storage, record.id).catch(() => null)
+      : Promise.resolve(null);
 
     const clear = document.createElement('div');
-    clear.className = 'lgx-clear';
+    clear.className = 'lgx-clear lgx-clear--grown';
     clear.innerHTML = `
+      <div class="lgx-grown" aria-hidden="true"><span class="lgx-grow-plant ${reduce ? 'is-grown-still' : 'is-growing'}"><cat-plant stage="${postState.stage}"${postState.landmark ? ' landmark' : ''} name="${escapeHTML(family.root.label)}"></cat-plant></span></div>
       <p class="lgx-clear__line is-veiled" id="lgx-line">${escapeHTML(line)}</p>
-      <p class="lgx-clear__ink is-veiled" id="lgx-ink" aria-label="${earned ? bagText(earned) : ''}">${earned ? craftChips(earned, { sign: '+' }) : ''}</p>
+      <div class="lgx-clear__ink is-veiled" id="lgx-ink">${petBlock({ pet: 'matcha' }, { compact: true })}</div>
       <button class="lgx-clear__back is-veiled" id="lgx-back">Back to the Rootwood</button>
     `;
     lgxEl.appendChild(clear);
 
-    // The line and the button appear only AFTER the motion has come to rest —
-    // never during it (never animate and ask to read at the same time).
+    // The line, the gifts and the button appear only AFTER the motion has
+    // come to rest — never during it (never animate and ask to read at the
+    // same time).
     let rested = false;
-    const reveal = () => {
+    const reveal = async () => {
       if (rested) return;
       rested = true;
       for (const el of clear.querySelectorAll('.is-veiled')) el.classList.remove('is-veiled');
-      playWorld('ink', { delay: 0.15 });
+      const c = await change;
+      const slot = clear.querySelector('[data-gifts]');
+      if (!slot?.isConnected) return;
+      // A walk that could not be saved reads back as no change, and shows none.
+      slot.innerHTML = giftLines(c ?? (record ? { pet: 'matcha', gifts: baseGifts('matcha', record.clean === true ? 2 : 1, false) } : null));
+      countGifts(slot, reduce);
     };
     // The four movements: anticipation → extension → settle → rest. The
-    // tree rises out of the ground in the scene itself (garden-backdrop.js),
-    // the chime and the warm haptic land as growth begins.
+    // tree rises out of the ground (.lgx-grow-plant), the chime and the warm
+    // haptic land as growth begins.
     setTimeout(() => gardenCue(cue, { tonic }), reduce ? 0 : 150);
-    backdrop.grow(postState, { reduce }).then(() => setTimeout(reveal, reduce ? 200 : 380));
+    setTimeout(reveal, reduce ? 200 : 1780);
     markGardenGrowthSeen(context.storage).catch(() => { /* non-fatal */ });
 
     afterglow.then((extra) => {

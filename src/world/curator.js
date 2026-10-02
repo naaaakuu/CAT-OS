@@ -399,7 +399,7 @@ function pickGrowthField(region, fields, seenByBundle, mine, r) {
 
 /** The round's own title and one line, written from what it contains. */
 function roundVoice(region, counts, source) {
-  const place = { meadow: 'the Meadow', pond: 'the Mirror Pond', thicket: 'the Thicket' }[region] ?? 'the valley';
+  const place = { meadow: 'the Meadow', pond: 'the Mirror Pond', thicket: 'the Thicket' }[region] ?? 'the village';
   const Place = place[0].toUpperCase() + place.slice(1);
   const inContext = counts.context
     ? ` ${counts.context === 1 ? 'One of them is' : `${counts.context} of them are`} asked the way CAT asks: inside a real sentence.`
@@ -480,7 +480,7 @@ const TIER_LINES = {
   cat: 'Exam weight. Take the whole minute.',
   'cat-plus': 'Above exam weight.',
   'ninety-nine': 'The percentile rung.',
-  premium: 'The hardest the valley holds.',
+  premium: 'The hardest the village holds.',
 };
 function tierLine(t) { return TIER_LINES[t] ?? ''; }
 

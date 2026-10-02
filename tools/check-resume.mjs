@@ -189,52 +189,28 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
       if (await draft('wd', 'wd-set:root')) bad(tag + ': draft not cleared after finish');
     }
 
-    /* ---- The village: callouts for buildings out of view ---- */
+    /* ---- The village: coming back from a run ----
+       The run just finished is what the village shows first: its pet hops,
+       the gifts it made are named, and the camera is at that pet's home. */
     {
       const tag = 'village';
-      await b.open(server.url + '#/world/village', 900);
-      const alive = await (async () => { for (let i = 0; i < 60; i += 1) { if (await b.evaluate(`!!document.querySelector('#vg-canvas')?.__renderer && document.querySelectorAll('.vb.is-in').length > 0`)) return true; await sleep(200); } return false; })();
-      if (!alive) bad(tag + ': the village did not render its callouts');
-      // The opening settles the camera toward home over 1.5 s; wait it out.
-      for (let i = 0; i < 20 && await b.evaluate(`!!document.querySelector('#vg-canvas').__renderer.tween`); i += 1) await sleep(150);
-      await b.evaluate(`(() => { const r = document.querySelector('#vg-canvas').__renderer; r.lookAt(r.worldW - 40, r.worldH - 40, { animate: false, zoom: r.maxZoom() }); return 1; })()`);
-      await sleep(500);
-      const pips = await b.evaluate(`(() => {
-        const W = window.innerWidth, H = window.innerHeight;
-        return [...document.querySelectorAll('.vb')].map((el) => {
-          const rc = el.getBoundingClientRect(); const cs = getComputedStyle(el);
-          return { id: el.dataset.id, edge: el.classList.contains('is-edge'), x: rc.left, y: rc.top, w: rc.width, h: rc.height, right: rc.right, bottom: rc.bottom,
-            inside: rc.left >= 0 && rc.top >= 0 && rc.right <= W && rc.bottom <= H, opacity: Number(cs.opacity), pe: cs.pointerEvents,
-            ang: el.style.getPropertyValue('--ang'), ax: el.style.getPropertyValue('--ax'), ay: el.style.getPropertyValue('--ay') };
-        });
-      })()`);
-      const edge = pips.filter((p) => p.edge);
-      if (!edge.length) bad(tag + ': after panning to the far corner no callout is pinned to an edge (' + pips.length + ' callouts)');
-      const before = problems.length;
-      for (const p of edge) {
-        if (!p.inside) bad(`${tag}: ${p.id} pip is not inside the frame`);
-        if (!(p.opacity > 0.5)) bad(`${tag}: ${p.id} pip opacity is ${p.opacity}`);
-        if (p.pe === 'none') bad(`${tag}: ${p.id} pip has pointer-events: none`);
-        if (p.h < 43) bad(`${tag}: ${p.id} pip is ${Math.round(p.h)}px tall — under the 44px floor`);
-        if (!p.ang || !p.ax || !p.ay) bad(`${tag}: ${p.id} pip has no pointer toward its building`);
-      }
-      for (let i = 0; i < edge.length; i += 1) for (let j = i + 1; j < edge.length; j += 1) {
-        const a = edge[i], c = edge[j];
-        if (a.x < c.right - 2 && c.x < a.right - 2 && a.y < c.bottom - 2 && c.y < a.bottom - 2) bad(`${tag}: ${a.id} and ${c.id} pips overlap at the edge`);
-      }
-      if (edge.length && problems.length === before) ok(`${tag}: ${edge.length} of ${pips.length} callouts pinned to the edge after a pan to the far corner — inside the frame, visible, tappable, 44px, none overlapping`);
-      if (edge.length) {
-        const target = edge[0];
-        const camBefore = await b.evaluate(`(() => { const r = document.querySelector('#vg-canvas').__renderer; return { x: r.cam.x, y: r.cam.y }; })()`);
-        const cx = target.x + target.w / 2, cy = target.y + target.h / 2;
-        await b.send('Input.dispatchMouseEvent', { type: 'mousePressed', x: cx, y: cy, button: 'left', clickCount: 1 });
-        await b.send('Input.dispatchMouseEvent', { type: 'mouseReleased', x: cx, y: cy, button: 'left', clickCount: 1 });
-        await sleep(900);
-        const after = await b.evaluate(`(() => { const r = document.querySelector('#vg-canvas').__renderer; return { x: r.cam.x, y: r.cam.y, pop: !!document.querySelector('#vpop') }; })()`);
-        const moved = Math.hypot(after.x - camBefore.x, after.y - camBefore.y) > 5;
-        if (!moved && !after.pop) bad(`${tag}: a real tap on the ${target.id} pip neither moved the camera nor opened anything`);
-        else ok(`${tag}: a real tap on the ${target.id} pip brought the village to the building${after.pop ? ' and opened it' : ''}`);
-      }
+      await b.evaluate(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init();
+        await st.put('learning', { id: 'resume-lex-1', kind: 'lex-round', region: 'meadow', bundle_id: 'x', stars: 3, flawless: false, score: { correct: 11, total: 12 }, finished_at: new Date(Date.now() - 30000).toISOString() });
+        sessionStorage.removeItem('world:toasted'); sessionStorage.setItem('world:focus', 'meadow'); return 1; })()`);
+      /* Arrive the way a learner does: one in-app navigation. open() also
+         reloads, and its first, unseen render is the visit that greets them —
+         so the reload that a person never makes found the toast already said. */
+      await b.evaluate(`location.hash = '#/world'; 1`);
+      await settled();
+      const shown = await (async () => { for (let i = 0; i < 40; i += 1) { if (await b.evaluate(`!!document.querySelector('.cw-toast.is-in')`)) return true; await sleep(200); } return false; })();
+      const text = await b.evaluate(`document.querySelector('.cw-toast')?.textContent ?? ''`);
+      if (!shown || !/Matcha/.test(text) || !/\+\d/.test(text)) bad(tag + ': coming back from a word round did not name Matcha and the leaves it made (' + JSON.stringify(text) + ')');
+      else ok(tag + ': back from a word round, the village names Matcha and the gifts: ' + text.trim().slice(0, 60));
+      const happy = await b.evaluate(`getComputedStyle(document.querySelector('.pet[data-pet="matcha"] .pet-sprite')).getPropertyValue('--f').trim()`);
+      if (happy !== '2') bad(tag + ': Matcha is not smiling on the return (frame ' + happy + ')'); else ok(tag + ': Matcha smiles on the return');
+      await b.open(server.url + '#/world', 900);
+      await sleep(1500);
+      if (await b.evaluate(`!!document.querySelector('.cw-toast.is-in')`)) bad(tag + ': the same return was announced twice'); else ok(tag + ': a return is announced once, not on every visit');
     }
   } catch (err) {
     bad('the tour itself failed: ' + (err?.message ?? err));
@@ -250,6 +226,6 @@ if (process.argv[1]?.endsWith('check-resume.mjs')) {
   if (r.skipped) { console.log('\n!! SKIPPED — no Chrome found. This gate did NOT run.\n'); process.exit(0); }
   for (const n of r.notes) console.log('  · ' + n);
   for (const p of r.problems) console.log('  ✗ ' + p);
-  console.log(`\n${r.problems.length ? '✗ ' + r.problems.length + ' problem(s)' : '✓ four modules resume after a refresh and record what was answered before it; off-screen callouts pin to the edge and bring the village back'}\n`);
+  console.log(`\n${r.problems.length ? '✗ ' + r.problems.length + ' problem(s)' : '✓ four modules resume after a refresh and record what was answered before it; the village greets a finished run once, with its pet and its gifts'}\n`);
   process.exit(r.problems.length ? 1 : 0);
 }

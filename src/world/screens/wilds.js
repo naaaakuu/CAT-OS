@@ -4,17 +4,14 @@
  * thirty for everyone all week (seeded by the week), against a three-
  * minute clock — so a run this week is comparable with the last, and the
  * only opponent is your own best. Records are kept per week and all-time,
- * with the split per place once the road is lit.
+ * with the split per place. Toffee keeps the fire and hosts it.
  */
 
 import { regionBySlug } from '../regions.js';
-import { VillageRenderer as WorldRenderer } from '../../village/renderer.js';
-import { buildBackdropScene } from '../../village/scene.js';
-import { WAYMARKS } from '../../village/defs.js';
 import { listFields, loadField, loadLedger, buildQuestion, buildContextQuestion, LexRound, applyAnswer, loadContext } from '../lexicon.js';
-import { roundStars, EARN } from '../economy.js';
-import { loadWorld, loadWorldRecords, deriveWorldState, newlyBuildable, loadWorldContent } from '../state.js';
-import { icon } from '../icons.js';
+import { roundStars } from '../economy.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable, loadWorldContent } from '../state.js';
+import { petSprite, paintedBackdrop, hostChip, backdropStyle, FRAME } from '../../pets/sprite.js';
 import { newlyFinished } from '../collections.js';
 import { rng } from '../engine/palette.js';
 import { STORES } from '../../core/storage/storage-adapter.js';
@@ -80,16 +77,15 @@ export async function renderWilds(outlet, { storage }) {
   const weekBest = best(thisWeek), allBest = best(runs);
   let beforeRecords = { sessions: [], learning: [] };
   try { beforeRecords = await loadWorldRecords(storage); } catch { /* the run still counts */ }
-  let lit = false;
-  try { lit = (await storage.getAll(STORES.LEARNING)).some((r) => r.kind === 'world-build' && (r.work_id ?? r.upgrade_id) === 'wilds-lanterns'); } catch { /* unlit */ }
 
   outlet.innerHTML = `
-    <section class="place place--page place--wilds" aria-label="The Wilds">
-      <div class="place__hero place__hero--short"><canvas id="wilds-hero"></canvas><a class="place__back" href="#/world" id="back">← The village</a>
-        <div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;text-align:center;padding:40px 20px 0"><div><div style="font-family:var(--g-display);font-size:40px;letter-spacing:0.12em;opacity:0.95">THE WILDS</div><div style="font-size:12px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.92;margin-top:6px">Week ${escapeHTML(week.slice(-2))} · the Gauntlet</div></div></div>
+    <section class="place place--page place--gauntlet" aria-label="The Gauntlet">
+      <div class="place__hero place__hero--short place__hero--painted" style="${backdropStyle('toffee')}">
+        <a class="place__back" href="#/world" id="back">← Village</a>
+        <span class="place__pet place__pet--toffee" aria-hidden="true">${petSprite('toffee', { size: 92, frame: FRAME.happy })}</span>
       </div>
       <div class="place__body">
-        <p class="place__eyebrow">${escapeHTML(region.skill)}</p>
+        <p class="place__eyebrow">${escapeHTML(region.skill)} · week ${escapeHTML(week.slice(-2))} · with Toffee</p>
         <h1 class="place__title">The Gauntlet</h1>
         <p class="place__line">${GAUNTLET_SIZE} questions — words from the Meadow, the Pond and the Thicket, and nine asked the way CAT asks them, inside a real sentence. The same ${GAUNTLET_SIZE} all week, in ${GAUNTLET_MS / 60000} minutes. No hints, no second tries. Beat your own best.</p>
         <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score?.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week'}</small><span class="arrow" aria-hidden="true">→</span></button>
@@ -97,60 +93,13 @@ export async function renderWilds(outlet, { storage }) {
           <h2>Records</h2>
           <p class="sub">${allBest ? `All-time best: <b>${allBest.score?.correct}/${GAUNTLET_SIZE}</b> in ${formatClock(allBest.duration_ms)} (${escapeHTML(allBest.week)}).` : 'No runs yet. The first one sets the mark.'}</p>
           <div class="g-list">
-            ${runs.slice(0, 12).map((r) => `<div class="g-row"><span class="g-row__num">${r.score?.correct}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.week)} · ${formatClock(r.duration_ms)}${r === allBest ? ' · best' : ''}</span><span class="g-row__meta">${formatDate(r.finished_at)}${lit && r.splits ? ` · Meadow ${r.splits.meadow ?? 0} · Pond ${r.splits.pond ?? 0} · Thicket ${r.splits.thicket ?? 0}` : ''}</span></span><span class="g-row__stars">${starHTML(r.stars ?? 0)}</span></div>`).join('') || '<div class="g-empty">The road is empty. Take the first run.</div>'}
+            ${runs.slice(0, 12).map((r) => `<div class="g-row"><span class="g-row__num">${r.score?.correct}</span><span class="g-row__lead"><span class="g-row__title">${escapeHTML(r.week)} · ${formatClock(r.duration_ms)}${r === allBest ? ' · best' : ''}</span><span class="g-row__meta">${formatDate(r.finished_at)}${r.splits ? ` · Meadow ${r.splits.meadow ?? 0} · Pond ${r.splits.pond ?? 0} · Thicket ${r.splits.thicket ?? 0}` : ''}</span></span><span class="g-row__stars">${starHTML(r.stars ?? 0)}</span></div>`).join('') || '<div class="g-empty">Toffee is keeping the fire warm for the first one.</div>'}
           </div>
         </div>
-        <div class="place__section" id="road-out"></div>
       </div>
     </section>`;
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', 'wilds'); play('close'); });
 
-  /* ---- How far the road goes. Every waymark built in the Workshop posts
-          it one place further, and the valley stops being the whole of the
-          world. Nothing here is a reward for showing up: each one asked
-          for more three-star passages than the last. ---- */
-  (async () => {
-    const slot = outlet.querySelector('#road-out');
-    if (!slot) return;
-    let st = null;
-    try { st = (await loadWorld(storage)).state; } catch { return; }
-    if (!slot.isConnected) return;
-    // The road is posted one waymark per Gauntlet run at three stars, and lit by the Road Out's second level.
-    const built = Math.min(WAYMARKS.length, (st.wilds?.stars >= 3 ? 1 : 0) + Math.floor((st.wilds?.runs ?? 0) / 3) + Math.max(0, (st.village?.levels?.get('road') ?? 0) - 1));
-    slot.innerHTML = `
-      <h2>The road out</h2>
-      <p class="sub">${built
-        ? `Posted as far as <b>${escapeHTML(WAYMARKS[(built - 1) % WAYMARKS.length].name)}</b>. Nobody from the valley has been further.`
-        : 'It runs to the ridge and stops. Nobody has posted it further.'}</p>
-      <div class="road">
-        ${WAYMARKS.slice(0, Math.max(3, built + 2)).map((w, i) => `
-          <div class="road__stop ${i < built ? 'is-reached' : i === built ? 'is-next' : ''}">
-            <span class="road__mark">${icon(i < built ? 'road' : 'lock', { size: 18 })}</span>
-            <span class="road__body">
-              <b>${escapeHTML(w.name)}</b>
-              <span>${escapeHTML(i <= built ? w.line : 'Further than the road goes.')}</span>
-            </span>
-          </div>`).join('')}
-      </div>
-      <p class="sub">${built < WAYMARKS.length
-        ? `The road posts itself further with every third run, and is lit from the village map.`
-        : 'Every waymark is posted. The road keeps going.'}</p>`;
-  })();
-
-  /* The road out, painted behind the records. */
-  let heroR = null;
-  try {
-    const w = await loadWorld(storage);
-    const canvas = outlet.querySelector('#wilds-hero');
-    if (canvas?.isConnected) {
-      const scene = buildBackdropScene('wilds', w.state, w.state.atmo);
-      heroR = new WorldRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.3, maxZoom: 8 });
-      heroR.lookAt(scene.W / 2, 116, { animate: false });
-      heroR.start();
-      const off = () => { heroR?.destroy(); window.removeEventListener('hashchange', off); };
-      window.addEventListener('hashchange', off);
-    }
-  } catch { /* the records still read */ }
   window.addEventListener('pointerdown', () => { unlock(); startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' }); }, { capture: true, once: true });
   startMusic('wilds', { hour: 'night' }); startAmbience('wilds', { hour: 'night', weather: 'clear', season: 'autumn' });
 
@@ -186,10 +135,11 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
   let index = 0, shownAt = Date.now(), locked = false, alive = true, ended = false;
 
   outlet.innerHTML = `
-    <section class="run">
+    ${paintedBackdrop('toffee')}
+    <section class="run run--painted">
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/wilds" aria-label="Leave">×</a>
-        <div class="run__where"><div class="run__place">The Wilds · Gauntlet</div><div class="run__count"><b id="pos">1</b> of ${questions.length}</div></div>
+        <div class="run__where"><div class="run__place">${hostChip('toffee', 20)}<span>The Gauntlet</span></div><div class="run__count"><b id="pos">1</b> of ${questions.length}</div></div>
         <div class="run__pace"><span class="run__clock" id="clock">3:00</span><div class="run__ring" id="ring" aria-hidden="true"></div></div>
       </div>
       <div class="run__track"><i id="track" style="width:0%"></i></div>
@@ -275,13 +225,13 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       saved = false;
       toast('This run finished but could not be saved.', 'error');
     }
-    const earned = EARN.gauntlet(stars.stars, correct);
-    let unlocked = [], setsDone = [];
+    let change = null, treasure = null, setsDone = [];
     try {
       const content = await loadWorldContent();
       const beforeState = deriveWorldState(content, beforeRecords);
       const afterState = deriveWorldState(content, await loadWorldRecords(storage));
-      unlocked = newlyBuildable(beforeState, afterState);
+      change = petChangeLine(beforeState, afterState);
+      treasure = newlyAffordable(beforeState, afterState);
       setsDone = newlyFinished(beforeState, afterState, before?.content ?? null);
     } catch { /* the run still counts */ }
 
@@ -291,19 +241,21 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
     if (isRecord && answers.length) play('unlock', { delay: 1.6 });
     renderResult(outlet, {
       region: 'wilds',
-      eyebrow: `The Wilds · ${week}`,
+      eyebrow: `The Gauntlet · Week ${Number(week.slice(-2))}`,
       title: isRecord ? 'A new record' : 'Gauntlet complete',
       result: stars,
-      verdict: isRecord ? `${correct} of ${total} in ${formatClock(record.duration_ms)}. Your best run, kept on the road.` : `${correct} of ${total} in ${formatClock(record.duration_ms)}. Best so far: ${prevBest.score?.correct} in ${formatClock(prevBest.duration_ms)}.`,
+      verdict: isRecord ? `${correct} of ${total} in ${formatClock(record.duration_ms)}. Your best run. Toffee keeps it by the fire.` : `${correct} of ${total} in ${formatClock(record.duration_ms)}. Best so far: ${prevBest.score?.correct} in ${formatClock(prevBest.duration_ms)}.`,
       facts: [
         { label: 'Right', value: `${correct}/${total}`, good: correct >= total * 0.75 },
         { label: 'Time', value: formatClock(record.duration_ms), good: record.duration_ms < GAUNTLET_MS },
         { label: 'Per word', value: `${(avgMs / 1000).toFixed(1)}s`, good: avgMs < GAUNTLET_MS / total },
       ],
-      earned,
-      unlocked,
-      worldLine: isRecord ? 'The road out remembers a <b>new best</b>.' : '',
-        setsDone,
+      pet: 'toffee',
+      ...(change?.pet === 'toffee' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
+      // Nothing was kept, so nothing is handed over.
+      ...(saved ? {} : { gifts: {} }),
+      treasure,
+      setsDone,
       extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>`,
       actions: [
         /* It used to navigate and then auto-click #run after 400 ms. Measured,

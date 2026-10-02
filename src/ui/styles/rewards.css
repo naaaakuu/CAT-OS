@@ -1,0 +1,196 @@
+/* ============================================================
+   CAT OS — rewards.css (3.0): every result in the village's own
+   language. The result screen stands in the host pet's home under
+   a warm veil (no more forced night), the pet block shows who the
+   run was for and what it made, and the timed runs sit on the
+   painted backdrop with a small host chip in their bar.
+
+   Selectors here are deliberately more specific than game.css and
+   world.css (`:root …`), and this file loads last, so the older
+   night rules never win. Colours come from tokens.css, which
+   switches them for dark theme; nothing here is a fixed colour on
+   text except inside a fixed light panel.
+   ============================================================ */
+
+/* ---------------- The result: a warm page in the pet's home ---------------- */
+.pv-backdrop.pv-backdrop--result::after {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--color-bg) 70%, transparent) 0%,
+    color-mix(in srgb, var(--color-bg) 82%, transparent) 26%,
+    color-mix(in srgb, var(--color-bg) 92%, transparent) 52%,
+    var(--color-bg) 100%);
+}
+:root .result.result--pv { background: transparent; color: var(--color-ink); }
+:root .result--pv .result__eyebrow { color: var(--color-ink-2); opacity: 1; }
+:root .result--pv .result__title { color: var(--color-ink); font-family: var(--font-display); }
+:root .result--pv .result__star.is-off { color: var(--color-ink-3); }
+:root .result--pv .result__verdict { color: var(--color-ink-2); opacity: 1; }
+:root .result--pv .result__fact {
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  border: 1px solid var(--color-line); box-shadow: 0 2px 8px rgba(92, 70, 38, 0.06);
+}
+:root .result--pv .result__fact b { color: var(--color-ink); }
+:root .result--pv .result__fact span { color: var(--color-ink-3); opacity: 1; }
+:root .result--pv .result__fact.is-good b { color: var(--color-accent); }
+:root .result--pv .result__pet { width: 100%; display: flex; justify-content: center; }
+
+/* The rows modules hand in: mentor, habit, review, misses, sets. */
+:root .result--pv .result__mentor,
+:root .result--pv .result__habit,
+:root .result--pv .setsdone {
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  border: 1px solid var(--color-line); box-shadow: none; color: var(--color-ink);
+}
+:root .result--pv .result__mentor p { color: var(--color-ink-2); opacity: 1; }
+:root .result--pv .result__mentor .opening { color: var(--color-ink); font-family: var(--font-display); }
+:root .result--pv .result__mentor .label,
+:root .result--pv .result__habit .label,
+:root .result--pv .review__head { color: var(--color-ink-3); opacity: 1; }
+:root .result--pv .result__mentor details { color: var(--color-ink-2); opacity: 1; }
+:root .result--pv .result__mentor summary { color: var(--color-accent); }
+:root .result--pv .result__review .r,
+:root .result--pv .review__row { background: color-mix(in srgb, var(--color-surface) 94%, transparent); color: var(--color-ink); }
+:root .result--pv .result__review .r.ok { border-left-color: var(--color-accent); }
+:root .result--pv .result__review .r.no,
+:root .result--pv .review__row { border-left-color: var(--terracotta); }
+:root .result--pv .review__row span { color: var(--color-ink-2); opacity: 1; }
+:root .result--pv .setsdone__eyebrow { color: var(--color-accent); }
+:root .result--pv .setsdone__row b { color: var(--color-ink); }
+:root .result--pv .setsdone__row span { color: var(--color-ink-3); }
+
+/* The ways onward: one sage action, one paper, one quiet link. */
+:root .result--pv .result__actions .g-btn { background: var(--color-surface); border-color: var(--color-line-strong); color: var(--color-ink); }
+:root .result--pv .result__actions .g-btn--primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-accent-ink); }
+:root .result--pv .result__actions .g-btn--quiet { background: transparent; border-color: transparent; color: var(--color-ink-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--color-line-strong); }
+
+/* ---------------- The pet block ---------------- */
+/* A grid, so the pet stands beside its gift line and everything after
+   that line (wishes, ring, heart, treasure) takes the card's full width
+   instead of a narrow column next to the pet. */
+.pvwin {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 12px;
+  width: 100%; max-width: 420px; margin: 0 auto 18px;
+  padding: 12px 16px 12px 8px; border-radius: 20px;
+  background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 8px 22px rgba(92, 70, 38, 0.1);
+  color: var(--color-ink); text-align: left;
+}
+.pvwin__body, .pvwin__gifts { display: contents; }
+.pvwin__lead, .pvwin__line { grid-column: 2; }
+.pvwin__more, .pvwin__ring, .pvwin__heart, .pvwin__story, .pvwin__treasure { grid-column: 1 / -1; padding-left: 8px; }
+.pvwin__pet { grid-column: 1; grid-row: 1; align-self: center; position: relative; isolation: isolate; display: grid; place-items: end center; width: 92px; min-height: 100px; }
+.pvwin__pet::after {
+  content: ""; position: absolute; left: 50%; bottom: 2px; z-index: -1;
+  width: 64%; height: 10px; translate: -50% 0; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(40, 30, 15, 0.3), transparent);
+}
+.pvwin__pet .pet-sprite { transform-origin: 50% 100%; animation: pvwin-hop 0.86s cubic-bezier(0.3, 0.7, 0.4, 1) 0.4s 3 both; }
+/* On the result the block waits to be revealed; the hop waits with it. */
+.result__pet:not(.is-in) .pvwin__pet .pet-sprite { animation: none; }
+@keyframes pvwin-hop {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  16%      { transform: translateY(0) scale(1.07, 0.9); }
+  46%      { transform: translateY(-16px) scale(0.95, 1.06); }
+  76%      { transform: translateY(0) scale(1.06, 0.93); }
+}
+.pvwin__line { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; font: 400 19px/1.25 var(--font-display); color: var(--color-ink); }
+.pvwin__chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 11px 4px 6px; border-radius: 999px;
+  background: var(--color-surface-2); border: 1px solid var(--color-line);
+  opacity: 0; transform: scale(0.8);
+  transition: opacity 360ms var(--g-ease, ease), transform 420ms var(--g-spring, ease);
+}
+.pvwin__chip.is-in { opacity: 1; transform: none; }
+.pvwin__chip b { font: 700 18px/1 var(--font-ui); font-variant-numeric: tabular-nums; color: var(--color-ink); }
+.pvwin__chip--mini { padding: 2px 8px 2px 4px; gap: 3px; }
+.pvwin__chip--mini b { font-size: 13px; }
+.pvwin__minis { display: inline-flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+.pvwin__more, .pvwin__ring, .pvwin__heart, .pvwin__treasure { margin: 8px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--color-ink-2); }
+.pvwin__more { display: flex; flex-direction: column; align-items: flex-start; }
+.pvwin__ring::before { content: "✦ "; color: var(--honey-ink); }
+.pvwin__ring--low { color: var(--color-ink-2); }
+.pvwin__ring--low::before { content: none; }
+/* Rose, pulled toward the ink so it holds AA in either theme. */
+.pvwin__heart span { color: color-mix(in srgb, #D2586F 70%, var(--color-ink)); }
+.pvwin__story { margin: 3px 0 0; font: italic 400 14.5px/1.45 var(--font-display); color: var(--color-ink-2); }
+.pvwin__treasure { margin-left: 8px; padding: 8px 10px; border-radius: 12px; background: var(--color-surface-2); color: var(--color-ink); }
+.pvwin__treasure a { color: var(--color-accent); font-weight: 600; }
+
+/* Compact: the strip inside a room's mentor moment, and the garden. */
+.pvwin--compact { margin: 0; padding: 0; max-width: none; background: none; border: 0; box-shadow: none; column-gap: 10px; }
+.pvwin--compact .pvwin__pet { width: 70px; min-height: 72px; }
+.pvwin--compact .pvwin__line { font-size: 17px; }
+.pvwin--compact .pvwin__chip b { font-size: 16px; }
+.pvwin:has(.pvwin__lead) .pvwin__pet { grid-row: 1 / span 2; }
+.pvwin__lead { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; margin: 0 0 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) .pvwin .pet-sprite { animation: none; }
+  :root:not([data-motion="full"]) .pvwin__chip { transition: none; }
+}
+html[data-reduced-motion] .pvwin .pet-sprite { animation: none; }
+html[data-reduced-motion] .pvwin__chip { transition: none; }
+
+/* ---------------- The strip at the end of a room ---------------- */
+:root .world-reward {
+  display: block; padding: 12px 16px 12px 10px; margin: 16px 0;
+  background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+  border: 1px solid var(--color-line); border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(92, 70, 38, 0.08); color: var(--color-ink);
+}
+:root .world-reward__stars { font-size: 18px; letter-spacing: 2px; color: var(--g-star, #C08C33); -webkit-text-stroke: 1px rgba(62, 40, 2, 0.95); paint-order: stroke fill; }
+:root .world-reward__stars .off { color: var(--g-star-off, rgba(92, 70, 38, 0.16)); -webkit-text-stroke: 0.7px rgba(74, 48, 2, 0.35); }
+:root .world-reward__title { font-weight: 600; font-size: 14px; color: var(--color-ink); margin: 0; }
+:root .world-reward__line { margin: 10px 0 0 6px; padding-top: 9px; border-top: 1px solid var(--color-line); font-size: 12.5px; color: var(--color-ink-2); opacity: 1; }
+:root .world-reward a { color: var(--color-accent); font-weight: 600; }
+
+/* ---------------- Timed runs on the painted backdrop ----------------
+   Rounds, the Gauntlet and the second look keep the lit-card palette
+   world.css binds inside `.run`; the bar becomes one more lit card, so
+   it reads the same in both themes over whatever the painting does. */
+.run.run--painted { background: transparent; }
+.run--painted .run__bar {
+  background: rgba(255, 250, 240, 0.9);
+  -webkit-backdrop-filter: blur(12px) saturate(140%); backdrop-filter: blur(12px) saturate(140%);
+  border-bottom: 1px solid rgba(92, 70, 38, 0.14); color: var(--g-ink);
+}
+.run--painted .run__leave { background: var(--g-paper-3); color: var(--g-ink-2); }
+.run--painted .run__place { color: var(--g-ink-3); }
+.run--painted .run__count { color: var(--g-ink-2); }
+.run--painted .run__what, .run--painted .run__clock { color: var(--g-ink); }
+.run--painted .run__clock.is-over { color: #8A4F12; }
+.run--painted .run__ring { background: conic-gradient(var(--g-accent) var(--p, 0%), var(--g-paper-3) 0); }
+.run--painted .run__ring::after { background: var(--g-paper-2); }
+.run--painted .run__ring.is-over { background: conic-gradient(var(--terracotta) var(--p, 100%), var(--g-paper-3) 0); }
+.run--painted .run__track { background: rgba(92, 70, 38, 0.14); }
+.run--painted .run__track i { background: var(--g-accent); }
+
+/* The host chip next to the place name. */
+.run__bar .run__place:has(.pv-host) { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.run__bar .run__place .pv-host { flex: none; gap: 5px; font-size: 12px; letter-spacing: 0; text-transform: none; color: inherit; }
+.run__bar .run__place .pv-host b { font-weight: 700; color: var(--g-ink-2, var(--color-ink-2)); -webkit-text-stroke: 0; }
+.run__bar .run__place .pv-host + span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.run__bar .run__place .pv-host + span::before { content: "·"; margin-right: 6px; opacity: 0.7; }
+
+/* The Gauntlet's page: Toffee at the fire, like the records page. */
+.place--gauntlet .place__pet { top: auto; bottom: -14px; transform: translateX(-50%); }
+
+/* ---------------- The Language Garden on Matcha's greenhouse ---------------- */
+.lgx-clear.lgx-clear--grown { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.lgx-grown cat-plant { display: block; width: min(56vw, 240px); height: min(32dvh, 270px); }
+.lgx .lgx-clear .lgx-clear__line { margin: 0; color: var(--color-ink); text-shadow: none; max-width: 30ch; }
+.lgx .lgx-clear .lgx-clear__ink { width: 100%; max-width: 380px; }
+.lgx .lgx-clear .pvwin--compact {
+  padding: 10px 14px 10px 6px; border-radius: 18px;
+  background: color-mix(in srgb, var(--color-surface) 95%, transparent); border: 1px solid var(--color-line);
+}
+.lgx .lgx-clear .lgx-clear__hint { margin: 0; color: var(--color-ink-2); opacity: 1; }
+.lgx .lgx-clear .lgx-clear__back {
+  opacity: 1; text-shadow: none; padding: 11px 22px; border-radius: 999px;
+  background: var(--color-accent); color: var(--color-accent-ink); font-weight: 600;
+}
+.lgx .lgx-clear .is-veiled { opacity: 0; }
+.lg-plant__hero { display: flex; justify-content: center; margin: 0 0 10px; pointer-events: none; }
+.lg-plant__hero cat-plant { width: min(60vw, 260px); height: min(36dvh, 300px); }

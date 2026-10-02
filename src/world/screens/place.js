@@ -2,26 +2,23 @@
  * place.js (screen) — inside a place.
  *
  * The frame is the same everywhere and it is a PLACE, not a page: the
- * region's own living pixel scene fills the screen, and a sheet rests
- * over the bottom of it holding the one thing worth doing here, chosen
- * by the curator. Everything else — the shelves, the fields, the tiers —
- * lives under a pull, so nobody has to read a catalogue to practise.
+ * host pet's home, from the village painting, fills the screen with the
+ * pet standing at its door, and a sheet rests over the bottom holding the
+ * one thing worth doing here, chosen by the curator. Everything else — the
+ * shelves, the fields, the tiers — lives under a pull, so nobody has to
+ * read a catalogue to practise.
  *
- *   HERO    the place, alive, at the hour and season it really is
+ *   HERO    the pet's home, and the pet
  *   SHEET   eyebrow · name · progress · ONE action
  *   MORE    the full contents of the place, for the learner who wants it
  */
 
-import { buildGroveScene } from '../../village/grove.js';
-import { paintedAtmo } from '../stage.js';
-import { VillageRenderer } from '../../village/renderer.js';
-import { buildBackdropScene } from '../../village/scene.js';
-import { artIMG } from '../../village/art.js';
 import { atPlace } from '../companion.js';
+import { petForPlace, PET_BY_ID } from '../../pets/pets.js';
+import { petSprite, petPortrait, placeHero, FRAME } from '../../pets/sprite.js';
 import { regionBySlug } from '../regions.js';
 import { loadWorld } from '../state.js';
 import { starHTML } from './result.js';
-import { REGION_GOOD, thing } from '../economy.js';
 import { nextPassage, nextVerbal, nextFamily, readingWeakness, typeName, missedQuestions, secondLookLine } from '../curator.js';
 import { play, unlock, startMusic, startAmbience } from '../audio.js';
 import { escapeHTML } from '../../core/utils/format.js';
@@ -50,24 +47,30 @@ export async function renderPlace(outlet, { storage }, params) {
   if (region.slug === 'wilds') return renderWilds(outlet, { storage });
   document.documentElement.setAttribute('data-world', '');
 
+  const arrivedAt = location.hash;
   let world;
   try { world = await loadWorld(storage); } catch (err) {
     outlet.innerHTML = `<section class="place"><div class="place__body" style="padding-top:60px"><h1 class="place__title">This place will not open</h1><p>${escapeHTML(err.message)}</p></div></section>`;
     return;
   }
+  // Left while it loaded: no place music under the next screen.
+  if (location.hash !== arrivedAt) return;
   const { state, content } = world;
   const atmo = state.atmo;
-  const madeHere = thing(REGION_GOOD[region.slug] ?? 'blooms');
+  const host = petForPlace(region.slug) ?? 'toffee';
+  const hostDef = PET_BY_ID.get(host);
+  const hostState = state.pets?.pets.find((p) => p.id === host);
 
+  const hero = placeHero(host);
   outlet.innerHTML = `
     <section class="place" aria-label="${escapeHTML(region.name)}">
-      <div class="place__hero">
-        <canvas id="hero" aria-label="${escapeHTML(region.name)}"></canvas>
+      <div class="place__hero place__hero--painted" style="${hero.style}">
         <div class="place__fade" aria-hidden="true"></div>
+        <span class="place__pet place__pet--${host}" aria-hidden="true"${hero.door ? ` style="left:${hero.door.x}px;top:${hero.door.y + 14}px"` : ''}>${petSprite(host, { size: 118, frame: hostState?.word === 'sleepy' || hostState?.word === 'wilting' ? FRAME.sleep : FRAME.idle })}</span>
       </div>
-      <a class="place__back" href="#/world" id="back">← The village</a>
+      <a class="place__back" href="#/world" id="back">← Village</a>
       <div class="place__hero-stat" id="hero-stat"></div>
-      <div class="placewick" id="placewick" hidden>${artIMG('wick', { pose: 'sit' }, { size: 36 })}<p></p></div>
+      <div class="placewick" id="placewick" hidden>${petPortrait(host, 38)}<p></p></div>
       <div class="sheet" id="sheet">
         <button class="sheet__grip" id="grip" aria-expanded="false" aria-label="Show everything here"><i aria-hidden="true"></i></button>
         <div class="sheet__top" id="top"></div>
@@ -82,10 +85,10 @@ export async function renderPlace(outlet, { storage }, params) {
   const grip = outlet.querySelector('#grip');
   outlet.querySelector('#back').addEventListener('click', () => { sessionStorage.setItem('world:focus', region.slug); play('close'); });
 
-  /* Wick meets you at the door of every place, once, and says the one thing
-     that is true of it. He never repeats himself in a session. */
+  /* The host meets you at the door, once a session, and says how they are
+     — the same line their card on the map would. */
   {
-    const line = atPlace(region.slug, state);
+    const line = hostState?.line || atPlace(region.slug, state);
     const seen = sessionStorage.getItem('wick:place') === region.slug;
     const el = outlet.querySelector('#placewick');
     if (line && !seen && el) {
@@ -108,28 +111,25 @@ export async function renderPlace(outlet, { storage }, params) {
   grip.addEventListener('click', () => setOpen(!open));
   sheet.addEventListener('scroll', () => { if (!open && sheet.scrollTop > 6) setOpen(true); }, { passive: true });
 
-  let renderer = null;
-  const mountHero = (scene, opts = {}) => {
-    renderer?.destroy();
-    const canvas = outlet.querySelector('#hero');
-    if (!canvas) return null;
-    renderer = new VillageRenderer(canvas, scene, { fit: 'cover', pannable: false, minZoom: 0.5, maxZoom: 6, onTap: opts.onTap });
-    renderer.lookAt(scene.W / 2, scene.focusY ?? scene.H * 0.6, { animate: false });
-    renderer.start();
-    return renderer;
-  };
-  const onHash = () => { renderer?.destroy(); window.removeEventListener('hashchange', onHash); };
-  window.addEventListener('hashchange', onHash);
-  const warmth = Math.min(1, (state.village.levels.size / 8) * 0.6 + Math.min(1, state.stars / 90) * 0.4);
+  const warmth = Math.min(1, (state.pets?.harmony ?? 0.4) * 0.6 + Math.min(1, state.stars / 90) * 0.4);
   const onDown = () => { unlock(); startMusic(region.slug, { hour: atmo.hour, warmth }); startAmbience(region.slug, atmo); };
   window.addEventListener('pointerdown', onDown, { capture: true, once: true });
   startMusic(region.slug, { hour: atmo.hour, warmth }); startAmbience(region.slug, atmo);
+  // The hero is laid out in pixels for this window: lay it out again when the window changes.
+  const onResize = () => {
+    const h = placeHero(host), pet = outlet.querySelector('.place__pet');
+    outlet.querySelector('.place__hero')?.setAttribute('style', h.style);
+    if (h.door && pet) { pet.style.left = `${h.door.x}px`; pet.style.top = `${h.door.y + 14}px`; }
+  };
+  window.addEventListener('resize', onResize);
+  // Leaving takes both listeners: a keyboard learner's first click elsewhere must not start this place's music.
+  window.addEventListener('hashchange', () => { window.removeEventListener('pointerdown', onDown, { capture: true }); window.removeEventListener('resize', onResize); }, { once: true });
 
   /** The sheet's top: who this place is, how far it has come, and the one
    *  thing the curator says to do now. */
   const head = (progress, cta, note) => {
     top.innerHTML = `
-      <p class="place__eyebrow">${escapeHTML(region.skill ?? '')} · makes <span class="craft craft--${madeHere.key}"><i aria-hidden="true"></i>${madeHere.name}</span></p>
+      <p class="place__eyebrow">${escapeHTML(region.skill ?? '')} · with ${escapeHTML(hostDef.name)}</p>
       <h1 class="place__title">${escapeHTML(region.name)}</h1>
       ${progress ? `<div class="place__progress"><div class="bar"><i style="width:${Math.round(progress.pct * 100)}%"></i></div><b>${progress.label}</b></div>` : ''}
       ${cta ? `<a class="g-cta ${cta.gold ? 'g-cta--gold' : ''}" href="${cta.href}" id="cta">${escapeHTML(cta.label)}<small>${escapeHTML(cta.sub ?? '')}</small><span class="arrow" aria-hidden="true">→</span></a>` : ''}
@@ -159,8 +159,6 @@ export async function renderPlace(outlet, { storage }, params) {
     heroStat.innerHTML = pill(`\u2663 ${rw.grownCount} grown`);
     const renderGrove = () => {
       const fams = selected.families;
-      const scene = buildGroveScene(selected, fams, atmo, { selected: f?.id ?? null, heroId: f?.id ?? null });
-      mountHero(scene, { onTap: (w) => { const o = scene.hit(w.x, w.y); if (o?.family) { play('tap'); location.hash = o.family.stage === 'open_ground' || o.family.due !== 'none' ? `#/garden/session/${o.family.id}` : `#/garden/plant/${o.family.id}`; } } });
       head({ pct: rw.total ? rw.metCount / rw.total : 0, label: `${rw.metCount} / ${rw.total} families` }, cta, pick?.why);
       more.innerHTML = section('Six groves', 'Roots that share a field of meaning stand together. Choose a grove to walk.', `
         <div class="g-chiprow">${rw.groves.map((g) => `<button class="g-chip" data-grove="${g.slug}" aria-pressed="${g.slug === selected.slug}">${escapeHTML(g.name.replace('The Grove of ', ''))} ${g.grown ? '✦' : `${g.met}/${g.families.length}`}</button>`).join('')}</div>
@@ -186,7 +184,6 @@ export async function renderPlace(outlet, { storage }, params) {
     const fields = r.fields;
     const unit = region.slug === 'pond' ? 'twins' : 'words';
     const bloomPct = r.total ? r.mastered / r.total : 0;
-    mountHero(buildBackdropScene(region.slug, state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`★ ${r.stars}`);
 
     // The curator's round is the only action that matters here.
@@ -197,7 +194,7 @@ export async function renderPlace(outlet, { storage }, params) {
       gold: r.due >= 5,
     };
     const note = r.met === 0
-      ? `${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through — the valley brings you twelve at a time, some of them inside a real sentence, and brings back the ones that fade.`
+      ? `${r.total.toLocaleString()} ${unit} live here. You will never be shown a list to work through — the village brings you twelve at a time, some of them inside a real sentence, and brings back the ones that fade.`
       : `${r.known} of ${r.total.toLocaleString()} ${unit} are in memory, ${r.mastered} of them for good.`;
 
     const groups = [...new Set(fields.map((f) => f.group))];
@@ -230,7 +227,6 @@ export async function renderPlace(outlet, { storage }, params) {
   /* ================= The Reading Room ================= */
   if (region.slug === 'reading-room') {
     const rd = state.reading;
-    mountHero(buildBackdropScene('reading-room', state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`★ ${rd.stars} / ${rd.maxStars}`);
     const weakness = readingWeakness(world.records.sessions);
     const rec = nextPassage(content, rd.best, weakness, `rc:${state.today}`);
@@ -239,7 +235,7 @@ export async function renderPlace(outlet, { storage }, params) {
     const cta = rec ? {
       href: `#/rc/session/${rec.item.id}`,
       label: rec.item.title,
-      sub: `${STAGE_INFO[rec.item.stage]?.label ?? rec.item.stage ?? ''} · ${rec.item.genre} · ~${rec.item.estimated_time_min} min · ${rec.item.question_count} questions`,
+      sub: `${STAGE_INFO[rec.item.stage]?.label ?? rec.item.stage ?? ''} · ${String(rec.item.genre ?? '').replace(/[-_]+/g, ' ')} · ~${rec.item.estimated_time_min} min · ${rec.item.question_count} questions`,
       gold: rec.kind === 'retry',
     } : null;
     const note = rec?.why || (weakness.weakest ? `Your answers say ${typeName(weakness.weakest)} is the thing to work on.` : '');
@@ -288,7 +284,6 @@ export async function renderPlace(outlet, { storage }, params) {
   /* ================= The Vine Terraces (Word DNA) ================= */
   if (region.slug === 'terraces') {
     const t = state.terraces;
-    mountHero(buildBackdropScene('terraces', state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`✦ ${t.done} / ${t.total}`);
     const wdSessions = world.records.sessions.filter((s) => s.module === 'wd');
     const done = new Set(); for (const s of wdSessions) for (const a of s.answers ?? []) if (a.is_correct === true) done.add(a.item_id ?? a.question_id);
@@ -307,7 +302,6 @@ export async function renderPlace(outlet, { storage }, params) {
   if (region.slug === 'loom' || region.slug === 'table' || region.slug === 'bench') {
     const v = state[region.slug];
     const kind = region.slug;
-    mountHero(buildBackdropScene(kind, state, paintedAtmo(atmo)));
     heroStat.innerHTML = pill(`★ ${v.stars}`);
     const [tiers, items, prefix, unit] = kind === 'loom' ? [PJ_TIERS, content.pj, 'pj', 'jumbles']
       : kind === 'table' ? [PS_TIERS, content.ps, 'ps', 'summaries'] : [OOO_TIERS, content.ooo, 'ooo', 'sets'];
@@ -321,7 +315,7 @@ export async function renderPlace(outlet, { storage }, params) {
        Costing one item billed a nine-to-twelve-item timed run as "~1 min". */
     const inSet = rec ? (rec.item.tier ? items.filter((x) => x.tier === rec.item.tier) : [rec.item]) : [];
     const setMins = Math.max(1, Math.round(inSet.reduce((s, x) => s + (x.estimated_time_sec ?? 80), 0) / 60));
-    const tierWord = rec ? String(rec.item.tier ?? '').replace('-', ' ') : '';
+    const tierWord = rec ? String(rec.item.tier ?? '').replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase()) : '';
     head({ pct: v.total ? v.solved / v.total : 0, label: `${v.solved} / ${v.total} solved` },
       rec ? { href: `#/${prefix}/session/${rec.item.tier ?? rec.item.id}`, label: rec.item.title, sub: inSet.length > 1 ? `${tierWord} · ${inSet.length} ${unit} · ~${setMins} min` : `${tierWord} · ~${setMins} min`, gold: rec.kind === 'retry' } : null,
       rec?.why);

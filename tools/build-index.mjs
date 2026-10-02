@@ -193,8 +193,8 @@ for (const type of TYPE_ORDER) {
  * sources, quality scores, per-question pattern and trap lists and the
  * passage themes are for the browsers, the mentor and the tools.
  *
- * Keep this list in step with what src/world/ and src/village/ actually
- * touch; verify.mjs fails if boot-index.json is stale.
+ * Keep this list in step with what src/world/, src/pets/ and src/home/
+ * actually touch; verify.mjs fails if boot-index.json is stale.
  */
 export const BOOT_FIELDS = Object.freeze([
   'id', 'type', 'status', 'title', 'tier', 'stage',

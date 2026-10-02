@@ -215,11 +215,11 @@ export function collections(s, content) {
   /* ---- The valley itself ---- */
   out.push(set({
     id: 'works', group: 'pace', mark: 'cottage',
-    name: 'Works standing', what: 'built',
-    have: s.village ? s.village.buildings.filter((b) => b.built).length : 0,
-    total: s.village ? s.village.buildings.length : 7, unit: 'buildings',
-    route: '#/world/place/hearth?works=1',
-    line: 'Everything your learning has built', hard: 0.4,
+    name: 'Treasures in the village', what: 'made',
+    have: s.pets ? s.pets.treasures.filter((t) => t.made).length : 0,
+    total: s.pets ? s.pets.treasures.length : 9, unit: 'treasures',
+    route: '#/world',
+    line: 'Lanterns, bunting, a swing: everything your friends made together', hard: 0.4,
   }));
 
   return out;

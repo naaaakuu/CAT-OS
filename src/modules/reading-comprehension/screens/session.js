@@ -10,9 +10,9 @@
  *   ANSWERING one question at a time, the clock still running; lock it
  *             in or set it aside; the explanation appears in place with
  *             a one-tap jump to the evidence paragraph.
- *   RESULT    the star reveal — accuracy first, then pace — the Ink, what
- *             changed in the Reading Room tower, and the mentor's one
- *             lesson kept beneath, with the Learning Page one tap away.
+ *   RESULT    the star reveal — accuracy first, then pace — Chai's
+ *             stories counted up, and the mentor's one lesson kept
+ *             beneath, with the Learning Page one tap away.
  *
  * Everything the old session persisted is still persisted (the session
  * and its attempts, the mentor lesson, the Rootwood sightings); the
@@ -37,9 +37,10 @@ import { LINES } from '../../../core/mentor/voice.js';
 import { STAGE_INFO } from '../../../core/learning/journey.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
-import { rcStars, EARN } from '../../../world/economy.js';
+import { rcStars } from '../../../world/economy.js';
 import { renderResult, formatClock } from '../../../world/screens/result.js';
-import { loadWorld, loadWorldRecords, deriveWorldState, worldChangeLine, newlyBuildable } from '../../../world/state.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable } from '../../../world/state.js';
+import { hostChip } from '../../../pets/sprite.js';
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld } from '../../../world/audio.js';
 import '../../../ui/components/cat-passage.js';
@@ -91,7 +92,7 @@ export async function renderSession(outlet, { storage }, params) {
     <section class="run">
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/reading-room" aria-label="Leave">×</a>
-        <div class="run__where"><div class="run__place">The Reading House${night ? ' · Night Reading' : ''}</div><div class="run__what">${escapeHTML(displayTitle(passage))}</div></div>
+        <div class="run__where"><div class="run__place">${hostChip('chai', 20)}<span>The Reading House${night ? ' · Night Reading' : ''}</span></div><div class="run__what">${escapeHTML(displayTitle(passage))}</div></div>
       </div>
       <div class="run__body">
         <div class="brief">
@@ -177,7 +178,7 @@ export async function renderSession(outlet, { storage }, params) {
     const barHTML = (what) => `
       <div class="run__bar">
         <a class="run__leave" href="#/world/place/reading-room" aria-label="Leave the passage">×</a>
-        <div class="run__where"><div class="run__place">The Reading House</div><div class="run__count" id="what">${what}</div></div>
+        <div class="run__where"><div class="run__place">${hostChip('chai', 20)}<span>The Reading House</span></div><div class="run__count" id="what">${what}</div></div>
         <div class="run__pace"><span class="run__clock" id="clock">${formatClock(targetMs)}</span><div class="run__ring" id="ring" aria-hidden="true"></div></div>
       </div>`;
     const tickClock = () => {
@@ -364,7 +365,6 @@ export async function renderSession(outlet, { storage }, params) {
 
       const { session: s } = results;
       const res = rcStars(s, m.estimated_time_min, paceFactor);
-      const earned = EARN.rc(res.stars, s.score?.correct ?? 0, res.flawless);
 
       // The mentor: DNA from PRIOR sessions, then this session's one lesson.
       let lesson = null, prior = [];
@@ -377,10 +377,8 @@ export async function renderSession(outlet, { storage }, params) {
         await saveLesson(storage, lessonRecord(lesson, s, dayKey(new Date())));
       } catch (err) { console.error('[CAT OS] mentor derive failed:', err); }
 
-      let line = '';
-      let unlocked = [];
-      let setsDone = [];
-      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); line = worldChangeLine('reading-room', before.state, after); unlocked = newlyBuildable(before.state, after); setsDone = newlyFinished(before.state, after, before.content); } } catch { /* fine */ }
+      let change = null, treasure = null, setsDone = [];
+      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); change = petChangeLine(before.state, after); treasure = newlyAffordable(before.state, after); setsDone = newlyFinished(before.state, after, before.content); } } catch { /* fine */ }
 
       const mentorHTML = lesson ? `
         <div class="result__mentor">
@@ -388,7 +386,7 @@ export async function renderSession(outlet, { storage }, params) {
           <p class="opening">${escapeHTML(lesson.opening)}</p>
           <p>${escapeHTML(lesson.teach.moment)}</p>
           <details><summary>${lesson.lesson_kind === 'watch' ? 'Why the brain goes there' : 'Worth keeping'}</summary><p style="margin-top:8px">${escapeHTML(lesson.teach.pull)}</p><p>${escapeHTML(lesson.teach.notice)}</p>${lesson.teach.known ? `<p><i>${escapeHTML(lesson.teach.known)}</i></p>` : ''}</details>
-          <p style="margin-top:8px;opacity:0.8"><i>${escapeHTML(lesson.closing)}</i></p>
+          <p style="margin-top:8px"><i>${escapeHTML(lesson.closing)}</i></p>
         </div>` : '';
       /* WHAT THE LEDGER HAS NOTICED.
          The trap ledger has counted every option this learner has fallen for
@@ -420,10 +418,10 @@ export async function renderSession(outlet, { storage }, params) {
           { label: 'Time', value: formatClock(s.duration_ms), good: res.inTime && res.accuracy >= 0.5 },
           { label: 'Target', value: formatClock(targetMs) },
         ],
-        earned,
-        worldLine: line,
+        pet: 'chai',
+        ...(change?.pet === 'chai' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
+        treasure,
         setsDone,
-        unlocked,
         extraHTML: mentorHTML + habitHTML + reviewHTML,
         actions: [
           { label: 'Back to the village', href: '#/world', primary: true },

@@ -86,6 +86,15 @@ export const ROUTES = [
     { sel: 'cat-option button', wait: 400 },
     { click: 'lock it in', wait: 1100 },
   ] },
+  /* The result every run ends on: the host pet's home behind a warm veil,
+     the pet with its gifts, the mentor. Four questions set aside gets there. */
+  { hash: '#/rc/session/rc-0001', name: 'rc-result', risk: true, enter: [
+    { click: 'begin', wait: 900 },
+    { click: 'read it', wait: 1100 },
+    ...[1, 2, 3].flatMap(() => [{ click: 'set aside', wait: 500 }, { click: 'next question', wait: 700 }]),
+    { click: 'set aside', wait: 500 },
+    { click: 'see the result', wait: 4200 },
+  ] },
 ];
 
 /* The village screen is a painted game world, not a document: it keeps its
@@ -320,7 +329,10 @@ export async function checkRenderedContrast({
           const probe = step.sel
             ? `(() => { const e = document.querySelector(${JSON.stringify(step.sel)}); if (!e) return false; e.click(); return true; })()`
             : `(() => { const want = ${JSON.stringify(String(step.click).toLowerCase())}; const e = [...document.querySelectorAll('a, button')].find((x) => (x.textContent || '').toLowerCase().includes(want) && !x.disabled); if (!e) return false; e.click(); return true; })()`;
-          if (!await b.evaluate(probe)) {
+          // A slow load is not a rotted path: give each control five seconds to appear.
+          let hit = false;
+          for (let t = 0; t < 25 && !(hit = await b.evaluate(probe)); t += 1) await new Promise((r) => setTimeout(r, 200));
+          if (!hit) {
             failures.push({ theme, route: route.name, hash: route.hash, sel: '(entering)', ratio: 0, need: 0,
               text: `cannot reach it: nothing to click matching "${step.sel ?? step.click}"` });
             entered = false;

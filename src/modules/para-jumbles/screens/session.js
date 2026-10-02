@@ -36,9 +36,9 @@ import { dayKey } from '../../../core/engagement/streaks.js';
 import { derivePJDNA } from '../../../core/mentor/pj-dna.js';
 import { choosePJLesson, pjLessonRecord } from '../../../core/mentor/pj-lesson.js';
 import { PJ_LINES } from '../../../core/mentor/pj-voice.js';
-import { celebrate } from '../../../ui/components/cat-celebration.js';
 import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
+import { hostChip } from '../../../pets/sprite.js';
 import '../../../ui/components/cat-jumble-board.js';
 import '../../../ui/components/cat-progress-bar.js';
 import '../../../ui/components/cat-timer.js';
@@ -102,7 +102,7 @@ export async function renderPJSession(outlet, { storage }, params) {
       <section class="screen">
         <div class="session-bar">
           <a href="#/pj">← Journey</a>
-          <span>Jumble <b>${session.index + 1}</b> of ${session.total}</span>
+          <span class="session-bar__count">${hostChip('ginger', 20)} Jumble <b>${session.index + 1}</b> of ${session.total}</span>
           <cat-timer></cat-timer>
         </div>
         <cat-progress-bar max="${session.total}" value="${session.index}"></cat-progress-bar>
@@ -294,13 +294,14 @@ export async function renderPJSession(outlet, { storage }, params) {
       console.error('[CAT OS] pj mentor derive failed:', err);
     }
 
-    const worldRewardHTML = worldReward(s, resolved.items ?? []).html;
+    const worldRewardHTML = worldReward(s, resolved.items ?? [], { storage }).html;
     outlet.innerHTML = `
       <section class="screen">
         <div class="session-bar">
           <a href="#/pj">← Journey</a>
         </div>
 
+        ${worldRewardHTML}
         <article class="moment">
           <p class="screen__eyebrow">Your mentor · Para Jumbles</p>
           ${lesson ? `
@@ -333,7 +334,6 @@ export async function renderPJSession(outlet, { storage }, params) {
           `}
 
           <p class="moment__numbers">${escapeHTML(PJ_LINES.numbersAside(s.score.correct, s.score.total))}</p>
-          ${worldRewardHTML}
 
           <details class="reread moment__details">
             <summary>Set details</summary>
@@ -356,7 +356,7 @@ export async function renderPJSession(outlet, { storage }, params) {
         </article>
 
         <div class="session-actions">
-          <a class="btn btn--primary btn--block" href="#/world/place/loom">Back to the world</a>
+          <a class="btn btn--primary btn--block" href="#/world">Back to the village</a>
         </div>
       </section>
     `;
@@ -369,25 +369,10 @@ export async function renderPJSession(outlet, { storage }, params) {
         bar.gained = engagement.gained;
         bar.data = engagement.after.level;
       }
-      const lines = [];
-      if (engagement.leveledUp) lines.push(`You reached Level ${engagement.after.level.level}.`);
-      for (const u of engagement.unlocks) lines.push(`Achievement — ${u.title}: ${u.description}`);
-      if (engagement.streakRecord) lines.push(`New best streak: ${engagement.after.streaks.best} days.`);
-      if (lines.length) {
-        const reward = engagement.leveledUp ? 'levelup'
-          : engagement.unlocks.length ? 'achievement'
-            : 'streak';
-        const stacked = Number(engagement.leveledUp) + engagement.unlocks.length
-          + Number(engagement.streakRecord) > 1;
-        cue(reward, { delay: 0.2 });
-        if (stacked) playSound('celebrate', { delay: 0.36 });
-        await celebrate({
-          title: engagement.leveledUp ? `Level ${engagement.after.level.level}` : 'Milestone',
-          lines,
-        });
-      } else if (engagement.dailyGoalJustDone) {
-        setTimeout(() => cue('dailyGoal'), 500);
-      }
+      // 3.0: levels, achievements and streak records were the 1.x reward layer.
+      // The pet, its gifts and Toffee's flame are the reward now (THE WORLD
+      // A11); a modal claiming a Level here interrupted the pet's moment.
+      if (engagement.dailyGoalJustDone) setTimeout(() => cue('dailyGoal'), 500);
     }
   }
 

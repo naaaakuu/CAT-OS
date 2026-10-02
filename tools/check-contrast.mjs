@@ -88,34 +88,23 @@ const PAIRS = (t) => [
   ['captions/hints on a card',         t['--color-ink-3'],   t['--color-surface'],   4.5],
   ['captions/hints in a well',         t['--color-ink-3'],   t['--color-surface-2'], 4.5],
   ['captions/hints in a deep well',    t['--color-ink-3'],   t['--color-surface-3'], 4.5],
+  ['a primary action\'s label',        t['--color-accent-ink'], t['--color-accent'], 4.5],
+  ['accent text on a card',            t['--color-accent'],  t['--color-surface'],   4.5],
 ];
 
-/* The village's own palette is a separate system painted over canvas art,
-   so its buttons are checked against their literal fills. */
-const VILLAGE_PAIRS = (css) => {
-  const grab = (sel, prop) => {
-    const rule = css.match(new RegExp(`\\${sel}\\s*\\{([^}]*)\\}`));
-    if (!rule) return null;
-    const m = rule[1].match(new RegExp(`(?:^|;|\\s)${prop}\\s*:\\s*([^;]+)`));
-    return m ? m[1].trim() : null;
-  };
-  const btn = grab('.vbtn', 'color');
-  const bg = grab('.vbtn', 'background');
-  const stops = bg ? [...bg.matchAll(/#[0-9a-fA-F]{6}/g)].map((m) => m[0]) : [];
-  const gold = grab('.vbtn--gold', 'color');
-  const goldBg = grab('.vbtn--gold', 'background');
-  const goldStops = goldBg ? [...goldBg.matchAll(/#[0-9a-fA-F]{6}/g)].map((m) => m[0]) : [];
-  const out = [];
-  stops.forEach((s, i) => out.push([`.vbtn label on gradient stop ${i + 1}`, btn, s, 4.5]));
-  goldStops.forEach((s, i) => out.push([`.vbtn--gold label on gradient stop ${i + 1}`, gold, s, 4.5]));
-  return out;
+/* The village's honey button (making a treasure) is a literal fill in
+   home.css, so its label is read from the rule itself. */
+const VILLAGE_PAIRS = (css, t) => {
+  const rule = css.match(/\.cw-make\s*\{([^}]*)\}/);
+  const color = rule?.[1].match(/(?:^|;|\s)color\s*:\s*(#[0-9a-fA-F]{6})/)?.[1] ?? null;
+  return [['the Make button on honey', color, t['--honey'], 4.5]];
 };
 
 /* ---------------------------------------------------------------- */
 
 function run() {
   const tokensCss = read('src/ui/styles/tokens.css');
-  const villageCss = read('src/ui/styles/village.css');
+  const villageCss = read('src/ui/styles/home.css');
 
   const themes = [
     ['light', tokensFrom(tokensCss, 'root')],
@@ -138,7 +127,7 @@ function run() {
     }
   }
 
-  for (const [label, fgRaw, bgRaw, min] of VILLAGE_PAIRS(villageCss)) {
+  for (const [label, fgRaw, bgRaw, min] of VILLAGE_PAIRS(villageCss, tokensFrom(tokensCss, 'root'))) {
     if (!fgRaw || !bgRaw) { failures.push(`village: ${label} — could not read the rule`); continue; }
     const fg = hexToRgb(fgRaw), bg = hexToRgb(bgRaw);
     if (!fg || !bg) { failures.push(`village: ${label} — unparseable colour`); continue; }

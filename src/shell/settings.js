@@ -27,6 +27,7 @@ import { workerStatus, librarySyncProgress, startLibrarySync } from '../core/con
 /* The three preferences the shell applies at boot live in prefs.js, so the
    boot path never has to load this screen. Re-exported here because that is
    where they used to live. */
+import { backdropStyle } from '../pets/sprite.js';
 import { THEMES, READING_SIZES, loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './prefs.js';
 export { THEMES, READING_SIZES, loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion };
 
@@ -73,9 +74,11 @@ const slider = (id, label) => `<input class="range" id="${id}" type="range" min=
 
 export function renderSettings(outlet, { storage, version }) {
   outlet.innerHTML = `
-    <section class="screen">
-      <p class="screen__eyebrow">Settings</p>
+    <section class="screen screen--cottage">
+      <div class="cottage__hero" style="${backdropStyle('cottage')}" aria-hidden="true"></div>
+      <p class="screen__eyebrow">Your cottage</p>
       <h1>Settings</h1>
+      <p class="cottage__line">How the village sounds and moves, how big the words are, and your backup.</p>
 
       <div class="card">
         <h2>Audio</h2>
@@ -127,7 +130,7 @@ export function renderSettings(outlet, { storage, version }) {
       <div class="card">
         <h2>About</h2>
         ${row(icon('cat', { size: 20 }), 'CAT OS', `Version ${version} · offline-first · your data stays yours`, '')}
-        ${row(icon('house', { size: 20 }), 'The village', 'Home is the village. Learning is its economy.', '<a class="btn" href="#/world">Open</a>')}
+        ${row(icon('house', { size: 20 }), 'The village', 'Six friends, one for each part of CAT English. Learning is what keeps them well.', '<a class="btn" href="#/world">Open</a>')}
       </div>
     </section>`;
 

@@ -12,7 +12,7 @@
  * So it lives here now, and every sheet in the app uses the same one.
  */
 
-const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, summary, [tabindex]:not([tabindex="-1"])';
 let seq = 0;
 /* A stack, not a single slot: a sheet can open a sheet, and the second one
    closing must hand focus back to the first, not to whatever came before
@@ -53,7 +53,9 @@ export function openModal(card, close, opts = {}) {
   };
   document.addEventListener('keydown', onKey, true);
   card.__keys = onKey;
-  requestAnimationFrame(() => { try { card.focus({ preventScroll: true }); } catch { /* fine */ } });
+  // Only if it is still open: an Escape inside that frame has already handed
+  // focus back, and taking it again would strand it on a card about to hide.
+  requestAnimationFrame(() => { if (card.__keys !== onKey) return; try { card.focus({ preventScroll: true }); } catch { /* fine */ } });
 }
 
 /** Take the listener back off and put focus where it was. Always pair it. */
