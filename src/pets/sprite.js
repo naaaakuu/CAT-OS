@@ -19,8 +19,26 @@ export function petSprite(id, { frame = 0, size = 96, cls = '', label = '' } = {
   const s = SHEETS[id];
   if (!s) return '';
   const aria = label ? ` role="img" aria-label="${label}"` : ' aria-hidden="true"';
-  return `<span class="pet-sprite ${cls}" data-pet-sprite="${id}"${aria} style="--fw:${s.w};--g:${s.gutter};--f:${frame};--size:${size};background-image:url(./assets/art/pet-${id}.png)"></span>`;
+  return `<span class="pet-sprite ${cls}" data-pet-sprite="${id}"${aria} style="--fw:${s.w};--sh:${s.h};--g:${s.gutter};--f:${frame};--size:${size};background-image:url(./assets/art/pet-${id}.png)"></span>`;
 }
+
+/**
+ * A pet that can walk: the same frame cut in three, so its two feet step
+ * on their own under the body (home.css .rig). At rest the three pieces
+ * are exactly the one picture; a lifted foot slides up behind the body.
+ */
+export function petRig(id, { frame = 0, size = 96 } = {}) {
+  const s = SHEETS[id];
+  if (!s) return '';
+  const f = s.feet ?? { top: s.h, split: Math.round(s.w / 2) };
+  // The picture goes on each piece's own style: a url() inside a custom
+  // property resolves against the stylesheet that uses it, not the page.
+  const img = `style="background-image:url(./assets/art/pet-${id}.png)"`;
+  return `<span class="pet-sprite rig" data-pet-sprite="${id}" aria-hidden="true" style="--fw:${s.w};--sh:${s.h};--g:${s.gutter};--f:${frame};--size:${size};--ft:${f.top};--fs:${f.split}"><i class="rig__foot rig__foot--l" ${img}></i><i class="rig__foot rig__foot--r" ${img}></i><i class="rig__trunk" ${img}></i></span>`;
+}
+
+/** A pet's own little symbol (the book, the leaf, the flame…). */
+export function petIcon(id, size = 20, cls = '') { return giftIcon(PET_BY_ID.get(id)?.icon, size, cls); }
 
 /** A round portrait: the sprite in a disc, with a ring the mood can colour. */
 export function petPortrait(id, size = 56, { mood = null, frame = 0 } = {}) {
@@ -75,18 +93,6 @@ function screenFit(c, { focusY = 0.5, zoom = 0, at = null } = {}) {
   return { s, ox, oy };
 }
 const fitStyle = ({ s, ox, oy }) => `background-image:url(${MAP.src});background-size:${Math.ceil(MAP.w * s)}px auto;background-position:${Math.round(ox)}px ${Math.round(oy)}px`;
-
-/**
- * A place's hero: the host's home filling the screen, and the point on the
- * screen where its painted door is, so the pet stands at its own door. On a
- * phone it comes a little closer, so every door clears the sheet below.
- */
-export function placeHero(id, { focusY = 0.44 } = {}) {
-  const c = CROPS[id] ?? CROPS.plaza, door = HOMES[id]?.door;
-  if (typeof innerWidth !== 'number') return { style: backdropStyle(id), door: null };
-  const f = screenFit(c, { focusY, zoom: innerWidth < 700 ? 1.25 : 0, at: door });
-  return { style: fitStyle(f), door: door ? { x: Math.round(door.x * f.s + f.ox), y: Math.round(door.y * f.s + f.oy) } : null };
-}
 
 /** A full-screen painted backdrop for a pet's home (or 'cottage', 'clock', 'plaza'). */
 export function paintedBackdrop(key, { cls = '' } = {}) {

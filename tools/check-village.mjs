@@ -1,12 +1,13 @@
 /**
  * check-village.mjs — the pet village, in a real browser.
  *
- * What a learner would notice if it broke: the six pets are there and
- * walking; each pet's card names it and starts its real next activity;
- * the satchel, the fire and the cottage open as proper dialogs and give
- * focus back; a treasure can be made and appears on the map; pets go home
- * to sleep at night and stand still when motion is reduced; the phone
- * layout never scrolls sideways; and the village reopens offline.
+ * What a learner would notice if it broke: the six friends are there and
+ * walking; the big button starts a real activity; each friend's card names
+ * it and starts its real next activity; the friends, today, level, fire and
+ * cottage cards open as proper dialogs and give focus back; the village
+ * level draws its decorations; friends go home to sleep at night and stand
+ * still when motion is reduced; the phone layout never scrolls sideways;
+ * and the village reopens offline.
  *
  *   node tools/check-village.mjs            all of it
  *   node tools/check-village.mjs --quick    no offline leg
@@ -50,8 +51,9 @@ try {
   await browser.open(`${server.url}#/world`, 1500);
   ok(await waitFor(`document.querySelectorAll('.cw .pet').length === 6 && !!document.querySelector('.cw-art')?.naturalWidth`), 'the village did not draw six pets on the painting');
   ok(await ev(`!!document.querySelector('.cw h1')`), 'the village needs a heading');
-  ok(await ev(`['.cw-flame', '[data-open="satchel"]', '[data-open="cottage"]', '.cw-today'].every((s) => document.querySelector(s))`), 'the three pieces of chrome are missing');
-  ok(await ev(`!document.querySelector('.cw-location, .cw-dock, .cw-welcome, .vhud')`), 'old home chrome is back on the map');
+  ok(await ev(`['.cw-chip--fire', '.cw-chip--level', '[data-open="friends"]', '[data-open="cottage"]', '.cw-today', '.cw-play'].every((s) => document.querySelector(s))`), 'the top bar or the big button is missing');
+  ok(await ev(`!document.querySelector('[data-open="satchel"], .cw-location, .cw-welcome, .vhud, .cw-envelope')`), 'old home chrome is back on the map');
+  ok(await ev(`['#/rc/', '#/round/', '#/garden/', '#/pj/', '#/ps/', '#/ooo/', '#/bank/', '#/wd/', '#/world/place/'].some((p) => (document.querySelector('.cw-play').getAttribute('href') ?? '').startsWith(p))`), 'the big button does not start a real activity');
   ok(await ev(`document.querySelector('.pet[data-pet="ginger"]').dataset.word === 'new' && document.querySelector('.pet[data-pet="chai"]').dataset.word !== 'new'`), 'pet moods do not follow the records');
 
   // The painting itself moves: the wheel, the water, the banners, the trees.
@@ -80,8 +82,8 @@ try {
   await ev(`document.querySelector('[data-camera="overview"]').click()`); await sleep(850);
   ok(await ev(`(() => { const r = document.querySelector('.cw-map').getBoundingClientRect(); return r.width <= innerWidth + 1 && r.height <= innerHeight + 1 && r.left >= -1 && r.top >= -1; })()`), 'overview crops part of the village');
   const wide = await ev(`document.querySelector('.cw-map').getBoundingClientRect().width`);
-  await ev(`document.querySelector('[data-camera="in"]').click()`); await sleep(450);
-  ok(await ev(`document.querySelector('.cw-map').getBoundingClientRect().width`) > wide, 'zoom button did not enlarge the map');
+  await ev(`document.querySelector('[data-camera="overview"]').click()`); await sleep(850);
+  ok(await ev(`document.querySelector('.cw-map').getBoundingClientRect().width`) > wide, 'the overview button did not zoom back in');
 
   // Pets choose at random, and every one may idle for a while: wait for any of them to move, up to twenty seconds.
   const p0 = JSON.parse(await positions());
@@ -97,20 +99,19 @@ try {
   await key('Escape', 'Escape', 27);
   ok(await waitFor(`document.querySelector('.cw-overlay').hidden`, 3000), 'Escape did not close the card');
 
-  // The satchel, the fire, the cottage.
-  for (const [open, sel, n] of [['satchel', '.cw-gifts li', 6], ['wishes', '.cw-wishes li', 3], ['cottage', '.cw-toggle', 2]]) {
+  // Who is who, today's three, the village level, the fire, the cottage.
+  for (const [open, sel, n] of [['friends', '.cw-roster li', 6], ['today', '.cw-todo li', 3], ['level', '.cw-road li', 9], ['fire', '.cw-week li', 7], ['cottage', '.cw-toggle', 2]]) {
     await ev(`document.querySelector('[data-open="${open}"]').focus(); document.querySelector('[data-open="${open}"]').click()`);
     ok(await waitFor(`document.querySelectorAll('.cw-card ${sel}').length === ${n}`), `${open} did not open with ${n} × ${sel}`);
     await key('Escape', 'Escape', 27);
     ok(await waitFor(`document.querySelector('.cw-overlay').hidden && document.activeElement?.dataset?.open === '${open}'`, 3000), `${open} did not close and give focus back`);
   }
 
-  // Make the first treasure; it appears on the map.
-  await ev(`document.querySelector('[data-open="satchel"]').click()`);
-  ok(await waitFor(`!!document.querySelector('.cw-card [data-make]:not([disabled])')`), 'the lanterns should be affordable for this learner');
-  await ev(`document.querySelector('.cw-card [data-make]').click()`);
-  ok(await waitFor(`document.querySelectorAll('.cw-treasure--lanterns').length === 4`), 'the lanterns did not appear after making them');
-  ok(await ev(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init(); return (await st.getAll('learning')).filter((r) => r.kind === 'village-treasure').length; })()`) === 1, 'making a treasure must write exactly one record');
+  // The village level draws what it has earned: this learner is past level 2, so the plaza lanterns hang.
+  ok(await ev(`Number(document.querySelector('.cw-lv b')?.textContent) >= 2`), 'this learner should be past village level 2');
+  ok(await waitFor(`document.querySelectorAll('.cw-treasure--lanterns').length === 4`), 'the plaza lanterns are not drawn for a level-2 village');
+  ok(await ev(`document.querySelectorAll('.cw-treasure[data-home]').length >= 1`), "no friend's home shows its hearts");
+  ok(await ev(`document.querySelectorAll('.pet .rig__foot').length === 12`), 'the friends should walk on two feet each');
 
   // The clock tower is progress.
   await ev(`document.querySelector('[data-spot="clock"]').click()`);
@@ -130,6 +131,7 @@ try {
   ok(r0 === r1, 'pets walked with reduced motion on');
   ok(await ev(`!document.querySelector('.cw-motion')`), 'the painting moved with reduced motion on');
   ok(await ev(`!document.querySelector('.cw-water')`), 'water animation mounted with reduced motion on');
+  ok(await ev(`!document.querySelector('.pet .prop')`), 'a friend started a chore with reduced motion on');
   ok(await ev(`document.documentElement.scrollWidth <= innerWidth`), 'the phone village scrolls sideways');
   ok(await ev(`window.__catos.errors.length === 0`), 'browser errors: ' + await ev(`JSON.stringify(window.__catos.errors)`));
 

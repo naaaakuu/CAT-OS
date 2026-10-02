@@ -11,7 +11,7 @@ export function dashboardLine(stats) {
   const { streaks, sessions } = stats;
   if (sessions === 0) return 'A calm place to build a serious reading habit.';
   if (streaks.practicedToday && streaks.current >= 2) {
-    return `Day ${streaks.current} of your streak — done for today.`;
+    return `Day ${streaks.current} of your streak: done for today.`;
   }
   if (streaks.practicedToday) return 'Today is done. Come back tomorrow.';
   if (streaks.current > 0) {
@@ -24,7 +24,7 @@ export function dashboardLine(stats) {
 /** One line on the session result, chosen from that session's score. */
 export function sessionLine(score) {
   if (score.total >= 3 && score.correct === score.total) {
-    return 'A perfect passage. Read the explanations anyway — they consolidate.';
+    return 'A perfect passage. Read the explanations anyway: they consolidate.';
   }
   if (score.accuracy >= 0.75) return 'Strong session. The review is where it sticks.';
   if (score.attempted === 0) return 'A full read-through counts. Answer when ready.';

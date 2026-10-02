@@ -368,7 +368,7 @@ export async function renderMentor(outlet, { storage }, params) {
 
         ${section('What was this actually about?', `
           <details class="mentor__recall">
-            <summary>First, try to say it in your own words — then open</summary>
+            <summary>First, try to say it in your own words: then open</summary>
             <div class="mentor__reveal">
               ${mentor.one_sentence_summary
                 ? `<p class="mentor__one-line">${escapeHTML(mentor.one_sentence_summary)}</p>` : ''}
@@ -511,7 +511,7 @@ export async function renderMentor(outlet, { storage }, params) {
       const record = await saveReflection(storage, item.meta.id, e.detail);
       reflectionEl.reflection = record;
       cue('reflect'); // a warm confirmation — the reflection is kept
-      toast('Kept — it stays on this device.', 'info', { mute: true });
+      toast('Kept: it stays on this device.', 'info', { mute: true });
     } catch (err) {
       console.error('[CAT OS]', err);
       toast('Could not save the reflection.', 'error');

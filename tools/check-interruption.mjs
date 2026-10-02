@@ -280,10 +280,10 @@ if (LOUD) console.log('\n2. noticing() against nonsense');
   ok(`${junk.length} nonsense record sets: nothing threw, every sentence is a string`);
 }
 
-/* ---- 3. The satchel against a running ledger ---- */
-if (LOUD) console.log('\n3. The satchel never shows more than was earned, and a treasure is paid once');
+/* ---- 3. The village's stars against a running ledger ---- */
+if (LOUD) console.log('\n3. The stars never exceed what was earned, and old treasure records change nothing');
 {
-  const { derivePets, canMake } = await load('src/pets/economy.js');
+  const { derivePets, starsFor, levelOf, visitsFrom } = await load('src/pets/economy.js');
   const iso = (d) => new Date(Date.now() - d * 864e5).toISOString();
   const sessions = Array.from({ length: 12 }, (_, i) => ({
     id: 's' + i, passage_id: 'rc-000' + ((i % 6) + 1), finished_at: iso(9 - (i % 9)), duration_ms: 300000,
@@ -295,18 +295,16 @@ if (LOUD) console.log('\n3. The satchel never shows more than was earned, and a 
   let pets;
   try { pets = derivePets({}, { sessions, learning: lex }, content, Date.now()); } catch (err) { bad('derivePets threw: ' + err.message); }
   if (pets) {
-    const can = canMake(pets, 'lanterns');
-    if (!can.ok) bad('twelve passages and six rounds should afford the lanterns: missing ' + JSON.stringify(can.missing));
-    // Made twice, a day apart: paid once.
+    const earned = visitsFrom({ sessions, learning: lex }, content).reduce((n, v) => n + starsFor(v), 0);
+    if (pets.stars < earned || pets.stars > earned + 5 * pets.gifts || pets.gifts > 10) bad(`stars ${pets.stars} do not add up: ${earned} earned + ${pets.gifts} daily gifts`);
+    if (pets.level.level !== levelOf(pets.stars).level) bad('the level must follow the stars');
+    // Records from the retired treasure economy are ignored entirely.
     const made = [...lex, { id: 't1', kind: 'village-treasure', treasure: 'lanterns', at: iso(0.5) }, { id: 't2', kind: 'village-treasure', treasure: 'lanterns', at: iso(0.4) }];
     const after = derivePets({}, { sessions, learning: made }, content, Date.now());
-    if (after.stock.leaves !== pets.stock.leaves - 2 || after.stock.stories !== pets.stock.stories - 2) bad(`making the lanterns twice must pay once (leaves ${pets.stock.leaves}→${after.stock.leaves}, stories ${pets.stock.stories}→${after.stock.stories})`);
-    if (after.nextTreasure?.id !== 'bunting') bad('after the lanterns, the bunting is next');
-    for (const [k, n] of Object.entries(after.stock)) if (!(n >= 0)) bad(`stock.${k} is ${n}`);
-    // A record for a treasure that could not have been afforded still cannot drive the satchel negative.
-    const greedy = derivePets({}, { sessions: [], learning: [{ id: 'g', kind: 'village-treasure', treasure: 'lanterns', at: iso(1) }] }, content, Date.now());
-    for (const [k, n] of Object.entries(greedy.stock)) if (n < 0) bad(`a treasure with nothing earned left stock.${k} at ${n}`);
-    ok(`${Object.values(pets.stock).reduce((x, y) => x + y, 0)} gifts in the satchel; the lanterns paid once though recorded twice; nothing ever below zero`);
+    if (after.stars !== pets.stars || after.level.level !== pets.level.level) bad('an old treasure record changed the stars or the level');
+    const empty = derivePets({}, { sessions: [], learning: [{ id: 'g', kind: 'village-treasure', treasure: 'lanterns', at: iso(1) }] }, content, Date.now());
+    if (empty.stars !== 0 || empty.level.level !== 1) bad('a treasure record with nothing earned must leave a level-1 village with no stars');
+    ok(`${pets.stars} stars (level ${pets.level.level}) from ${earned} earned and ${pets.gifts} daily gifts; old treasure records change nothing`);
   }
 }
 

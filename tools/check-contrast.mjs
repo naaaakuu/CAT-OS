@@ -92,12 +92,16 @@ const PAIRS = (t) => [
   ['accent text on a card',            t['--color-accent'],  t['--color-surface'],   4.5],
 ];
 
-/* The village's honey button (making a treasure) is a literal fill in
+/* The village's big Play button is a literal fill in
    home.css, so its label is read from the rule itself. */
-const VILLAGE_PAIRS = (css, t) => {
-  const rule = css.match(/\.cw-make\s*\{([^}]*)\}/);
-  const color = rule?.[1].match(/(?:^|;|\s)color\s*:\s*(#[0-9a-fA-F]{6})/)?.[1] ?? null;
-  return [['the Make button on honey', color, t['--honey'], 4.5]];
+const VILLAGE_PAIRS = (css) => {
+  // The big Play button: a literal gold gradient, measured at its darker end.
+  const inkOf = (re) => css.match(re)?.[1].match(/(?:^|;|\s)color\s*:\s*(#[0-9a-fA-F]{6})/)?.[1] ?? null;
+  const gold = css.match(/\.cw-play\s*\{[^}]*linear-gradient\([^)]*?(#[0-9a-fA-F]{6})\s*100%\)/)?.[1] ?? null;
+  return [
+    ['the Play button label on gold', inkOf(/\.cw-play\s*\{([^}]*)\}/), gold, 4.5],
+    ['the Play button detail on gold', inkOf(/\.cw-play__text small\s*\{([^}]*)\}/), gold, 4.5],
+  ];
 };
 
 /* ---------------------------------------------------------------- */

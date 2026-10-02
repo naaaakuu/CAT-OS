@@ -22,7 +22,7 @@ import { missedQuestions, readingWeakness, typeName } from '../../../world/curat
 import { verbalStars } from '../../../world/economy.js';
 import { renderResult, formatClock } from '../../../world/screens/result.js';
 import { paintedBackdrop, hostChip } from '../../../pets/sprite.js';
-import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable } from '../../../world/state.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine } from '../../../world/state.js';
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld, startAmbience } from '../../../world/audio.js';
 import { escapeHTML } from '../../../core/utils/format.js';
@@ -98,7 +98,7 @@ export async function renderSecondLook(outlet, { storage }) {
     <div class="brief is-veiled">
       <p class="brief__eyebrow">Reading comprehension</p>
       <h1 class="brief__title">The second look</h1>
-      <p class="brief__line">${items.length} question${items.length === 1 ? '' : 's'} that got away, from ${fromPassages} passage${fromPassages === 1 ? '' : 's'}. The evidence is one tap away — use it. Getting one right settles it for good.</p>
+      <p class="brief__line">${items.length} question${items.length === 1 ? '' : 's'} that got away, from ${fromPassages} passage${fromPassages === 1 ? '' : 's'}. The evidence is one tap away: use it. Getting one right settles it for good.</p>
       <div class="brief__facts">
         <span class="brief__fact">${items.length} questions</span>
         <span class="brief__fact">${Math.round(targetSec / 60)} min target</span>
@@ -177,7 +177,7 @@ export async function renderSecondLook(outlet, { storage }) {
         fb.innerHTML = correct
           ? `<p class="look__why">${escapeHTML(q.explanation?.correct_reasoning ?? '')}</p>
              ${q.explanation?.reading_habit ? `<p class="look__habit">${escapeHTML(q.explanation.reading_habit)}</p>` : ''}`
-          : `${trap ? `<p class="look__trap"><b>${escapeHTML(String(trap.trap_type ?? '').replace(/_/g, ' '))}</b> — ${escapeHTML(trap.why_wrong ?? '')}</p>` : ''}
+          : `${trap ? `<p class="look__trap"><b>${escapeHTML(String(trap.trap_type ?? '').replace(/_/g, ' '))}</b>…${escapeHTML(trap.why_wrong ?? '')}</p>` : ''}
              <p class="look__why">${escapeHTML(q.explanation?.correct_reasoning ?? '')}</p>`;
         const next = body.querySelector('#next');
         next.hidden = false;
@@ -209,12 +209,12 @@ export async function renderSecondLook(outlet, { storage }) {
       const res = verbalStars(record, targetSec);
       try { await storage.put(STORES.SESSIONS, record); } catch (err) { console.error('[CAT OS] second look save failed', err); }
 
-      let change = null, treasure = null, setsDone = [];
+      let change = null, setsDone = [];
       try {
         const records = await loadWorldRecords(storage);
         const after = deriveWorldState(before.content, records);
         change = petChangeLine(before.state, after);
-        treasure = newlyAffordable(before.state, after);
+       
         setsDone = newlyFinished(before.state, after, before.content);
       } catch { /* the facts still show */ }
 
@@ -226,15 +226,14 @@ export async function renderSecondLook(outlet, { storage }) {
         result: res,
         verdict: settled === total
           ? 'Every one of them settled. That is the hour that moves a percentile.'
-          : `${settled} of ${total} settled. The rest come back — that is the point of them.`,
+          : `${settled} of ${total} settled. The rest come back: that is the point of them.`,
         facts: [
           { label: 'Right', value: `${correct}/${total}`, good: res.accuracy >= 0.75 },
           { label: 'Settled', value: String(settled), good: settled > 0 },
           { label: 'Time', value: formatClock(record.duration_ms), good: res.inTime && res.accuracy >= 0.5 },
         ],
         pet: 'chai',
-        ...(change?.pet === 'chai' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
-        treasure,
+        ...(change?.pet === 'chai' ? { change } : {}),
         setsDone,
         actions: [
           { label: 'Back to the Reading House', href: '#/world/place/reading-room', primary: true },
@@ -262,7 +261,7 @@ function frameEmpty(resting = 0, weakness = null) {
   const weak = weakness?.weakest ? typeName(weakness.weakest) : null;
   const title = resting ? 'Resting' : 'Nothing got away';
   const line = resting
-    ? `${resting} question${resting === 1 ? '' : 's'} you missed ${resting === 1 ? 'is' : 'are'} waiting a while before coming back — answering one an hour later only proves you remember the letter. ${weak ? `In the meantime, a passage that asks about ${weak.toLowerCase()} is worth more.` : 'A new passage is worth more.'}`
+    ? `${resting} question${resting === 1 ? '' : 's'} you missed ${resting === 1 ? 'is' : 'are'} waiting a while before coming back: answering one an hour later only proves you remember the letter. ${weak ? `In the meantime, a passage that asks about ${weak.toLowerCase()} is worth more.` : 'A new passage is worth more.'}`
     : 'Every question you have missed, you have since answered right. Read a new passage and the second look will fill again.';
   return `<section class="run"><div class="run__body"><div class="brief">
     <p class="brief__eyebrow">Reading comprehension</p>

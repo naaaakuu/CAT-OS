@@ -77,8 +77,8 @@
   color: var(--color-ink); text-align: left;
 }
 .pvwin__body, .pvwin__gifts { display: contents; }
-.pvwin__lead, .pvwin__line { grid-column: 2; }
-.pvwin__more, .pvwin__ring, .pvwin__heart, .pvwin__story, .pvwin__treasure { grid-column: 1 / -1; padding-left: 8px; }
+.pvwin__lead, .pvwin__line, .pvwin__thanks { grid-column: 2; }
+.pvwin__level, .pvwin__heart, .pvwin__story, .pvwin__today { grid-column: 1 / -1; padding-left: 8px; }
 .pvwin__pet { grid-column: 1; grid-row: 1; align-self: center; position: relative; isolation: isolate; display: grid; place-items: end center; width: 92px; min-height: 100px; }
 .pvwin__pet::after {
   content: ""; position: absolute; left: 50%; bottom: 2px; z-index: -1;
@@ -104,19 +104,17 @@
 }
 .pvwin__chip.is-in { opacity: 1; transform: none; }
 .pvwin__chip b { font: 700 18px/1 var(--font-ui); font-variant-numeric: tabular-nums; color: var(--color-ink); }
-.pvwin__chip--mini { padding: 2px 8px 2px 4px; gap: 3px; }
-.pvwin__chip--mini b { font-size: 13px; }
-.pvwin__minis { display: inline-flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
-.pvwin__more, .pvwin__ring, .pvwin__heart, .pvwin__treasure { margin: 8px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--color-ink-2); }
-.pvwin__more { display: flex; flex-direction: column; align-items: flex-start; }
-.pvwin__ring::before { content: "✦ "; color: var(--honey-ink); }
-.pvwin__ring--low { color: var(--color-ink-2); }
-.pvwin__ring--low::before { content: none; }
+.pvwin__chip .cw-star { width: 22px; height: 22px; }
+.pvwin__thanks { margin: 4px 0 0; font: italic 400 15px/1.4 var(--font-display); color: var(--color-ink-2); }
+.pvwin__level { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; margin: 10px 0 0; font: 650 12.5px/1.3 var(--font-ui); color: var(--color-ink-2); }
+.pvwin__bar { flex: 1 1 80px; height: 10px; border-radius: 6px; background: var(--color-surface-2); overflow: hidden; box-shadow: inset 0 1px 2px rgba(60, 40, 20, 0.15); }
+.pvwin__bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #F4C443, #F2A23C); }
+.pvwin__heart, .pvwin__today { margin: 8px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--color-ink-2); }
+.pvwin__big { font-weight: 700; color: var(--color-ink); }
+.pvwin__today b { color: var(--color-ink); }
 /* Rose, pulled toward the ink so it holds AA in either theme. */
 .pvwin__heart span { color: color-mix(in srgb, #D2586F 70%, var(--color-ink)); }
 .pvwin__story { margin: 3px 0 0; font: italic 400 14.5px/1.45 var(--font-display); color: var(--color-ink-2); }
-.pvwin__treasure { margin-left: 8px; padding: 8px 10px; border-radius: 12px; background: var(--color-surface-2); color: var(--color-ink); }
-.pvwin__treasure a { color: var(--color-accent); font-weight: 600; }
 
 /* Compact: the strip inside a room's mentor moment, and the garden. */
 .pvwin--compact { margin: 0; padding: 0; max-width: none; background: none; border: 0; box-shadow: none; column-gap: 10px; }

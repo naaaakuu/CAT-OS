@@ -1,40 +1,62 @@
 /**
- * economy.js — the pets' economy, derived from records (spec §2).
+ * economy.js — the village's one loop, derived from records.
  *
- * Every finished learning run is a VISIT to the pet who owns that subject.
- * Visits give the pet care (mood, decaying with a 36-hour half-life),
- * friendship (hearts) and gifts. Each pet needs the gift of the pet before
- * it in the ring, and works at double speed while that pet is happy — so a
- * neglected subject is felt by its neighbour, and through harmony by the
- * whole village. Three wishes a day; a day with all three done pays a bonus.
- * Treasures are the one thing stored: a `village-treasure` record per make.
+ *   Help a friend (finish any round)  →  earn stars  →  the village grows.
+ *
+ * Every finished run is a VISIT to the friend who teaches that subject.
+ * A visit earns 1 to 3 stars, plus 1 for a flawless run. Stars add up to
+ * the village level, and each level puts something new on the map. Visits
+ * also grow friendship (five hearts, each a chapter of the friend's story
+ * and a gift for their home) and keep the friend happy (a mood that fades
+ * with a 36-hour half-life, so a subject left alone is a friend missing you).
+ *
+ * Every day the village picks three friends who need you most. Help all
+ * three and the day's gift pays 5 more stars. Toffee keeps the fire: the
+ * days in a row you came, with a spare log for every seventh day that
+ * covers one missed day.
  *
  * Nothing is stored back and nothing reads the clock: `now` is passed in.
  */
 
-import { PETS, supplierOf, successorOf, petForModule, homeHref, GIFT_KEYS, PET_BY_ID, STORIES, LINES, lineFor, ringLine } from './pets.js';
+import { PETS, petForModule, PET_BY_ID, STORIES, lineFor, requestFor } from './pets.js';
 import { rcStars, verbalStars } from '../world/economy.js';
 import { dayKey, shiftDay } from '../core/engagement/streaks.js';
 
 const HALF_LIFE = 36 * 3600e3;
 const NEW_MOOD = 0.3;
 const HEARTS = [0, 3, 8, 16, 28, 45];
-const DUE_PRESSURE = 12;
+export const DAILY_GIFT = 5;
 const freeze = (o) => Object.freeze(o);
-const every = (n) => Object.fromEntries(GIFT_KEYS.map((g) => [g, n]));
 
-/** Spec §2.7, in the order they are made. */
-export const TREASURES = freeze([
-  { id: 'lanterns', name: 'Plaza lanterns', recipe: { leaves: 2, stories: 2 }, appears: 'Paper lanterns glow on the four plaza lamps at dusk and night.' },
-  { id: 'bunting', name: 'Bunting', recipe: { notes: 3, maps: 3, leaves: 2 }, appears: 'Bunting garlands sway across the plaza.' },
-  { id: 'flowers', name: 'Flower boxes', recipe: { leaves: 4, stories: 3, notes: 2 }, appears: 'Flowers bloom along the paths, with butterflies near them.' },
-  { id: 'fireflies', name: 'Firefly jars', recipe: { stardust: 4, sparks: 3, maps: 2 }, appears: 'Jars by the benches, and many more fireflies at night.' },
-  { id: 'swing', name: 'The plaza swing', recipe: { maps: 4, notes: 4, stories: 4, leaves: 3 }, appears: 'A swing under the plaza tree. The pets take turns.' },
-  { id: 'chimes', name: 'Wind chimes', recipe: { stardust: 5, stories: 4, leaves: 4, notes: 3 }, appears: 'Chimes at the observatory that ring when tapped.' },
-  { id: 'kite', name: 'A kite', recipe: every(5), appears: 'A kite with a long tail flies above the village by day.' },
-  { id: 'lilylights', name: 'Lily-pad lights', recipe: every(7), appears: 'Floating lights on the pond at night.' },
-  { id: 'skylanterns', name: 'Sky-lantern night', recipe: every(10), appears: 'On festival nights, lanterns rise from the plaza.' },
-].map((t) => freeze({ ...t, recipe: freeze(t.recipe) })));
+/** Stars needed for each village level; past the last, every level costs 36 more. */
+export const LEVELS = freeze([0, 5, 12, 21, 33, 48, 66, 88, 114, 145]);
+
+/** What each level puts on the map, in order (drawn by src/home/cards.js). */
+export const DECOR = freeze([
+  { id: 'lanterns', level: 2, name: 'Plaza lanterns', appears: 'Paper lanterns glow on the four plaza lamps.' },
+  { id: 'bunting', level: 3, name: 'Bunting', appears: 'Bunting garlands sway across the plaza.' },
+  { id: 'flowers', level: 4, name: 'Flower boxes', appears: 'Flowers bloom along the paths.' },
+  { id: 'fireflies', level: 5, name: 'Firefly jars', appears: 'Jars by the benches, and fireflies at night.' },
+  { id: 'swing', level: 6, name: 'The plaza swing', appears: 'A swing under the plaza tree. Everyone takes turns.' },
+  { id: 'chimes', level: 7, name: 'Wind chimes', appears: 'Chimes ring at the observatory.' },
+  { id: 'kite', level: 8, name: 'A kite', appears: 'A kite with a long tail flies over the village.' },
+  { id: 'lilylights', level: 9, name: 'Lily-pad lights', appears: 'Floating lights on the pond at night.' },
+  { id: 'skylanterns', level: 10, name: 'Sky lanterns', appears: 'Lanterns rise from the plaza on happy nights.' },
+].map(freeze));
+
+/** The level a star total reaches, and how far into the next. */
+export function levelOf(stars) {
+  const s = Math.max(0, Math.floor(Number(stars) || 0));
+  let level = 1;
+  while (level < LEVELS.length && s >= LEVELS[level]) level += 1;
+  let from = LEVELS[level - 1], to = LEVELS[level];
+  if (level >= LEVELS.length) {
+    const top = LEVELS[LEVELS.length - 1];
+    level = LEVELS.length + Math.floor((s - top) / 36);
+    from = top + (level - LEVELS.length) * 36; to = from + 36;
+  }
+  return { level, from, to, into: s - from, need: to - s, pct: (s - from) / (to - from) };
+}
 
 /* ------------------------------------------------------------------ */
 /* Visits                                                              */
@@ -46,8 +68,11 @@ const clampStars = (s) => Math.max(0, Math.min(3, Math.round(s)));
 const BANKS = new Set(['sp', 'pc', 'wb', 'cr']);
 const VERBAL = new Set(['pj', 'ps', 'ooo']);
 
+/** What one run earns: at least a star for finishing, a bonus for flawless. */
+export const starsFor = (v) => Math.max(1, Math.min(3, v.stars)) + (v.flawless ? 1 : 0);
+
 /**
- * Every finished run as a visit, sorted by time (spec §2.1).
+ * Every finished run as a visit, sorted by time.
  * @returns {Array<{pet, at, stars, flawless, correct, id}>}
  */
 export function visitsFrom(records, content) {
@@ -95,7 +120,7 @@ export function visitsFrom(records, content) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Care and mood (spec §2.2)                                          */
+/* Care and mood                                                       */
 /* ------------------------------------------------------------------ */
 
 const weight = (v) => 0.4 + 0.2 * v.stars;
@@ -135,93 +160,58 @@ export function flameTier(days) {
 /* ------------------------------------------------------------------ */
 
 const midnightOf = (key) => { const [y, m, d] = key.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
-const dayNumber = (key) => { const [y, m, d] = key.split('-').map(Number); return Math.round(Date.UTC(y, m - 1, d) / 86400000); };
-/* Ties go to the gentlest door first: a new learner is sent to Chai, as Toffee's hello says, and the Gauntlet comes last. */
-const NEED_ORDER = ['chai', 'matcha', 'mochi', 'ginger', 'mallow', 'toffee'];
-const neediestOf = (moods) => PETS.map((p) => ({ id: p.id, i: NEED_ORDER.indexOf(p.id), mood: moods[p.id] })).sort((a, b) => a.mood - b.mood || a.i - b.i);
-
-/** The three wishes of one day, from the moods at its local midnight (spec §2.6). */
-function wishesFor(key, moods, fading, dayVisits) {
-  const [a, b] = neediestOf(moods);
-  const visited = new Set(dayVisits.map((v) => v.pet));
-  const w = (id, pet, text, done) => ({ id, pet, text, done, href: homeHref(pet) });
-  const nameOf = (id) => PET_BY_ID.get(id).name;
-  const third = [
-    w('stars', a.id, 'Earn three stars in one run', dayVisits.some((v) => v.stars >= 3)),
-    w('friends', a.id, 'Visit three different friends', visited.size >= 3),
-    w('flawless', a.id, 'Have one flawless run', dayVisits.some((v) => v.flawless)),
-  ][((dayNumber(key) % 3) + 3) % 3];
-  return [
-    w('tend', a.id, `Spend time with ${nameOf(a.id)}`, visited.has(a.id)),
-    fading ? w('fading', 'matcha', 'Help Matcha with the fading words', visited.has('matcha'))
-      : w('visit', b.id, `Visit ${nameOf(b.id)}`, visited.has(b.id)),
-    third,
-  ];
-}
+/* Ties go to the gentlest door first: a new learner is sent to Chai, as Toffee's hello says. */
+const NEED_ORDER = ['chai', 'matcha', 'mochi', 'ginger', 'mallow'];
+const neediest = (moods) => NEED_ORDER.map((id, i) => ({ id, i, mood: moods[id] })).sort((a, b) => a.mood - b.mood || a.i - b.i);
 
 /**
- * Everything the village shows, derived (spec §2).
+ * Everything the village shows, derived.
  * @param {object} state    the world state (deriveWorldState), or any partial of it
  * @param {object} records  { sessions, learning }
  * @param {object} content  the content registry (rc estimated times; pj/ps/ooo item times)
  * @param {number} now      ms; visits after it are not counted yet
  */
 export function derivePets(state, records, content, now = Date.now()) {
-  const all = visitsFrom(records, content).filter((v) => v.at <= now);
+  const runs = visitsFrom(records, content).filter((v) => v.at <= now);
   const today = dayKey(now);
+
+  /* Toffee is the fire: the first run of every day is a visit to Toffee too. */
+  const firstOfDay = new Map();
+  for (const v of runs) { const k = dayKey(v.at); if (!firstOfDay.has(k)) firstOfDay.set(k, v); }
   const byPet = new Map(PETS.map((p) => [p.id, []]));
-  for (const v of all) byPet.get(v.pet).push(v);
-  const days = all.map((v) => dayKey(v.at));
-
-  /* ---- Gifts per visit: doubled while the supplier was happy just before ---- */
-  const earned = every(0);
-  let last = null;
-  for (const p of PETS) {
-    const supplierCare = careWalker(byPet.get(supplierOf(p.id)), true);
-    for (const v of byPet.get(p.id)) {
-      const sm = moodOfCare(supplierCare(v.at));
-      const doubled = sm !== null && sm >= 0.5;
-      const gifts = (Math.max(1, Math.min(3, v.stars)) + (v.flawless ? 1 : 0)) * (doubled ? 2 : 1);
-      earned[p.gift] += gifts;
-      if (!last || v.at > last.at || (v.at === last.at && String(v.id) > String(last.id))) last = { pet: p.id, at: v.at, stars: v.stars, flawless: v.flawless, gifts, doubled };
-    }
-  }
-
-  /* ---- Matcha's pressure: the fading words (spec §2.2) ---- */
-  const matchaDue = (num(state?.meadow?.due) ?? 0) + (num(state?.pond?.due) ?? 0) + (num(state?.thicket?.due) ?? 0) + (num(state?.rootwood?.dueCount) ?? 0) * 3;
-  const fading = matchaDue >= DUE_PRESSURE;
+  for (const v of runs) byPet.get(v.pet).push(v);
+  for (const v of firstOfDay.values()) if (v.pet !== 'toffee') byPet.get('toffee').push({ ...v, pet: 'toffee', daily: true });
+  byPet.get('toffee').sort((a, b) => a.at - b.at);
 
   /* ---- Moods now ---- */
   const moodNow = {};
-  const careNow = {};
   for (const p of PETS) {
     const c = careWalker(byPet.get(p.id), false)(now);
-    careNow[p.id] = c ?? 0;
-    moodNow[p.id] = c === null ? NEW_MOOD : moodOfCare(c) * (p.id === 'matcha' && fading ? 0.85 : 1);
+    moodNow[p.id] = c === null ? NEW_MOOD : moodOfCare(c);
   }
   const isNew = (id) => byPet.get(id).length === 0;
 
-  /* ---- Wishes: every active day re-evaluated, today shown ---- */
-  const dayVisits = new Map();
-  all.forEach((v, i) => { if (!dayVisits.has(days[i])) dayVisits.set(days[i], []); dayVisits.get(days[i]).push(v); });
-  const keys = [...new Set([...dayVisits.keys(), today])].sort();
-  const walkers = Object.fromEntries(PETS.map((p) => [p.id, careWalker(byPet.get(p.id), true)]));
-  let bonus = 0, wishes = [];
+  /* ---- Today's three friends, re-evaluated for every active day ---- */
+  const dayRuns = new Map();
+  for (const v of runs) { const k = dayKey(v.at); if (!dayRuns.has(k)) dayRuns.set(k, []); dayRuns.get(k).push(v); }
+  const keys = [...new Set([...dayRuns.keys(), today])].sort();
+  const walkers = Object.fromEntries(NEED_ORDER.map((id) => [id, careWalker(byPet.get(id), true)]));
+  let gifts = 0, picks = [], helped = [];
   for (const key of keys) {
     const midnight = midnightOf(key);
     const moods = {};
-    for (const p of PETS) {
-      const c = walkers[p.id](midnight);
-      moods[p.id] = c === null ? NEW_MOOD : moodOfCare(c) * (key === today && p.id === 'matcha' && fading ? 0.85 : 1);
-    }
-    const ws = wishesFor(key, moods, key === today && fading, dayVisits.get(key) ?? []);
-    if (ws.every((x) => x.done)) bonus += 1;
-    if (key === today) wishes = ws;
+    for (const id of NEED_ORDER) { const c = walkers[id](midnight); moods[id] = c === null ? NEW_MOOD : moodOfCare(c); }
+    const p3 = neediest(moods).slice(0, 3).map((x) => x.id);
+    const seen = [...new Set((dayRuns.get(key) ?? []).map((v) => v.pet))];
+    if (p3.every((id) => seen.includes(id))) gifts += 1;
+    if (key === today) { picks = p3; helped = seen; }
   }
+  const done = picks.map((id) => helped.includes(id));
+  const doneCount = done.filter(Boolean).length;
 
-  /* ---- Toffee's flame: simulated forward over the active days (spec §2.5) ---- */
+  /* ---- Toffee's flame: simulated forward over the active days ---- */
   let run = 0, kindling = 0, prev = null;
-  for (const d of [...dayVisits.keys()].sort()) {
+  for (const d of [...dayRuns.keys()].sort()) {
     let base = run;
     if (prev && shiftDay(prev, 1) === d) run += 1;
     else if (prev && shiftDay(prev, 2) === d && kindling > 0) { kindling -= 1; run += 2; } // the missing day is bridged
@@ -229,90 +219,84 @@ export function derivePets(state, records, content, now = Date.now()) {
     if (Math.floor(run / 7) > Math.floor(base / 7)) kindling = Math.min(2, kindling + 1); // each 7th day of a run
     prev = d;
   }
-  /* Counting back from today (or yesterday): one missing day is bridged with kindling. */
+  /* Counting back from today (or yesterday): one missing day is bridged by a spare log. */
   let flameDays = 0;
   if (prev === today || prev === shiftDay(today, -1)) flameDays = run;
   else if (prev === shiftDay(today, -2) && kindling > 0) { kindling -= 1; flameDays = run + 1; }
-  const flame = { days: flameDays, tier: flameTier(flameDays), kindling, alive: flameDays > 0, today: prev === today };
+  const week = Array.from({ length: 7 }, (_, i) => { const k = shiftDay(today, i - 6); return { key: k, done: dayRuns.has(k) }; });
+  const flame = { days: flameDays, tier: flameTier(flameDays), kindling, alive: flameDays > 0, today: prev === today, week };
 
-  /* ---- Treasures: made in order; a duplicate or an out-of-order record is ignored ---- */
-  const tRecs = arr(records?.learning).filter((r) => r && r.kind === 'village-treasure' && typeof r.treasure === 'string')
-    .map((r) => ({ r, t: Date.parse(r.at) }))
-    .sort((a, b) => (Number.isFinite(a.t) ? a.t : Infinity) - (Number.isFinite(b.t) ? b.t : Infinity) || String(a.r.id).localeCompare(String(b.r.id)));
-  const madeAt = new Map();
-  for (const { r } of tRecs) {
-    const next = TREASURES[madeAt.size];
-    if (next && r.treasure === next.id) madeAt.set(next.id, r.at ?? null);
+  /* ---- Stars and the village level ---- */
+  let earnedAll = 0, last = null;
+  const earnedBy = Object.fromEntries(PETS.map((p) => [p.id, 0]));
+  for (const v of runs) {
+    const e = starsFor(v);
+    earnedAll += e; earnedBy[v.pet] += e;
+    if (!last || v.at > last.at || (v.at === last.at && String(v.id) > String(last.id))) last = { pet: v.pet, at: v.at, stars: v.stars, flawless: v.flawless, earned: e };
   }
-  const spent = every(0);
-  for (const t of TREASURES) if (madeAt.has(t.id)) for (const [g, n] of Object.entries(t.recipe)) spent[g] += n;
-  const stock = {};
-  for (const g of GIFT_KEYS) stock[g] = Math.max(0, earned[g] + bonus - spent[g]);
-  const covers = (recipe) => Object.entries(recipe).every(([g, n]) => stock[g] >= n);
-  const nextIdx = madeAt.size;
-  const treasures = TREASURES.map((t, i) => ({
-    id: t.id, name: t.name, recipe: t.recipe, appears: t.appears,
-    made: madeAt.has(t.id), at: madeAt.get(t.id) ?? null,
-    next: i === nextIdx, affordable: i === nextIdx && covers(t.recipe),
-  }));
+  const stars = earnedAll + gifts * DAILY_GIFT;
+  const level = levelOf(stars);
+  const decor = DECOR.map((d) => ({ ...d, made: level.level >= d.level }));
 
-  /* ---- Each pet ---- */
+  /* ---- Each friend ---- */
   const pets = PETS.map((p) => {
     const list = byPet.get(p.id);
     const fresh = isNew(p.id);
     const mood = moodNow[p.id];
-    const xp = list.reduce((n, v) => n + 1 + v.stars, 0);
+    const xp = list.reduce((n, v) => n + 1 + (v.daily ? 1 : v.stars), 0);
     let hearts = 0;
     while (hearts < 5 && xp >= HEARTS[hearts + 1]) hearts += 1;
-    const sup = supplierOf(p.id);
-    const full = !isNew(sup) && moodNow[sup] >= 0.5;
     const word = moodWord(mood, fresh);
+    const real = list.filter((v) => !v.daily);
     return {
-      id: p.id, name: p.name, mood, word, isNew: fresh, care: careNow[p.id],
-      hearts, xp, toNext: hearts < 5 ? Math.ceil((HEARTS[hearts + 1] - xp) / 3) : 0,
-      gift: p.gift, earned: earned[p.gift], gifts: earned[p.gift] + bonus,
-      full, supplier: sup, successor: successorOf(p.id),
-      lastAt: list.length ? list[list.length - 1].at : null, visits: list.length,
+      id: p.id, name: p.name, mood, word, isNew: fresh,
+      hearts, xp, toNext: hearts < 5 ? Math.max(1, Math.ceil((HEARTS[hearts + 1] - xp) / 3)) : 0,
+      earned: earnedBy[p.id], visits: real.length,
+      lastAt: list.length ? list[list.length - 1].at : null,
       story: hearts ? STORIES[p.id][hearts - 1] : null,
-      line: p.id === 'matcha' && fading && !fresh ? lineFor(p.id, 'fading', today) : lineFor(p.id, word, today),
-      ring: ringLine(p.id, full, today),
+      line: lineFor(p.id, word, today),
+      request: requestFor(p.id, p.id === 'toffee' ? Math.max(0, Math.min(4, flameDays - 1)) : hearts),
+      pick: picks.includes(p.id), helpedToday: helped.includes(p.id),
     };
   });
 
   const moods = pets.map((p) => p.mood);
   const harmony = 0.5 * (moods.reduce((a, b) => a + b, 0) / moods.length) + 0.5 * Math.min(...moods);
-  const neediest = neediestOf(moodNow)[0].id;
+  const needy = neediest(moodNow)[0].id;
+  const play = picks.find((id, i) => !done[i]) ?? needy;
 
-  /* ---- The letter: the pet who missed you most (spec §2.8) ---- */
-  const lastAt = all.length ? all[all.length - 1].at : 0;
+  /* ---- After a day or more away: the friend who missed you most comes to say hello ---- */
+  const lastAt = runs.length ? runs[runs.length - 1].at : 0;
   const awayDays = num(state?.awayDays) ?? (lastAt ? Math.floor((now - lastAt) / 86400000) : 0);
-  const met = neediestOf(moodNow).filter((x) => !isNew(x.id));
-  const letter = awayDays >= 1 && met.length ? { pet: met[0].id, text: LINES.letter[met[0].id] } : null;
+  const met = neediest(moodNow).filter((x) => !isNew(x.id));
+  const welcome = awayDays >= 1 && met.length ? { pet: met[0].id, days: awayDays } : null;
 
   return {
-    pets, harmony, festival: pets.every((p) => !p.isNew && p.mood >= 0.5), neediest,
-    flame, wishes, wishesDone: wishes.filter((w) => w.done).length,
-    stock, earnedTotal: GIFT_KEYS.reduce((n, g) => n + earned[g] + bonus, 0), bonus,
-    treasures, nextTreasure: treasures[nextIdx] ?? null,
-    letter, last, matchaDue, today,
+    pets, harmony, neediest: needy, play,
+    stars, level, decor, nextDecor: decor.find((d) => !d.made) ?? null, gifts,
+    flame, today: { key: today, picks, done, doneCount, gift: picks.length === 3 && doneCount === 3, helped },
+    welcome, awayDays, last,
   };
 }
 
-/** Can the learner make this treasure now? Only the next one, and only with the gifts in stock. */
-export function canMake(pets, id) {
-  const t = TREASURES.find((x) => x.id === id);
-  if (!t || pets?.nextTreasure?.id !== id) return { ok: false, missing: {} };
-  const missing = {};
-  for (const [g, n] of Object.entries(t.recipe)) { const short = n - (pets.stock?.[g] ?? 0); if (short > 0) missing[g] = short; }
-  return { ok: Object.keys(missing).length === 0, missing };
+/** What one run changed, for the result screens and the welcome home. */
+export function changeBetween(before, after) {
+  const pet = after?.last?.pet ?? null;
+  const b = before?.pets?.find((p) => p.id === pet), a = after?.pets?.find((p) => p.id === pet);
+  const madeBefore = new Set((before?.decor ?? []).filter((d) => d.made).map((d) => d.id));
+  const gift = !!after?.today?.gift && !before?.today?.gift;
+  // A run that was never saved leaves `last` where it was: then nothing was earned.
+  const fresh = !!after?.last && !(before?.last && before.last.at === after.last.at && before.last.pet === after.last.pet);
+  return {
+    pet,
+    // The run's own stars; the day's gift, if this run opened it, is said on its own line.
+    earned: fresh ? after.last.earned : 0,
+    heart: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0,
+    levelUp: (after?.level?.level ?? 1) > (before?.level?.level ?? 1), level: after?.level ?? levelOf(0),
+    decor: (after?.decor ?? []).find((d) => d.made && !madeBefore.has(d.id)) ?? null,
+    gift,
+    doneCount: after?.today?.doneCount ?? 0,
+  };
 }
 
-/** The gifts gathered between two derivations, for the result screens. */
-export function giftsBetween(beforePets, afterPets) {
-  const bag = every(0);
-  for (const p of afterPets?.pets ?? []) {
-    const b = beforePets?.pets?.find((x) => x.id === p.id);
-    bag[p.gift] = Math.max(0, p.gifts - (b?.gifts ?? 0));
-  }
-  return bag;
-}
+export { PET_BY_ID };

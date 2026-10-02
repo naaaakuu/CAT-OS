@@ -538,9 +538,9 @@ export async function renderGardenSession(outlet, context, params) {
     veilWrap.classList.add('lgx-veil-wrap--cleared');
     stage.innerHTML = '';
 
-    // Matcha's reward, shown once the tree has come to rest: the leaves
-    // this walk made, read back from the village so the ring and a new
-    // heart are exactly what the village will show.
+    // Matcha's reward, shown once the tree has come to rest: the stars
+    // this walk earned, read back from the village so a new heart and the
+    // level are exactly what the village will show.
     const record = lastRecord;
     sessionStorage.setItem('world:focus', 'rootwood');
     const change = record
@@ -569,7 +569,7 @@ export async function renderGardenSession(outlet, context, params) {
       const slot = clear.querySelector('[data-gifts]');
       if (!slot?.isConnected) return;
       // A walk that could not be saved reads back as no change, and shows none.
-      slot.innerHTML = giftLines(c ?? (record ? { pet: 'matcha', gifts: baseGifts('matcha', record.clean === true ? 2 : 1, false) } : null));
+      slot.innerHTML = giftLines(c?.earned > 0 ? c : (record ? baseGifts('matcha', record.clean === true ? 2 : 1, false) : null));
       countGifts(slot, reduce);
     };
     // The four movements: anticipation → extension → settle → rest. The

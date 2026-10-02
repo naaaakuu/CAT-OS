@@ -1,13 +1,13 @@
 # CAT OS
 
-**A painted village where six small friends get happier as your CAT English gets better.**
+**A painted village where every CAT English question you answer helps one of six small friends.**
 
 CAT OS is an offline-first Progressive Web App for the VARC section of India's
 Common Admission Test. It is not a study app with a game on top. It is one
 painted village, and six pets live in it. Each pet looks after one part of
 CAT English, and each is only as happy as your practice of that part.
-Neglect a subject and you see it: that pet droops, its neighbour slows down,
-and the lanterns dim across the village.
+Leave a subject alone and its friend misses you; help them and the whole
+village comes back to life.
 
 | Pet | What it looks after | Lives in |
 |---|---|---|
@@ -36,107 +36,79 @@ The learning underneath is serious CAT preparation:
 
 The game is simple; the learning is not.
 
+## The game in ten seconds
+
+**Help a friend → earn stars → the village grows.**
+
+The village is losing its words. Each friend has a trouble only learning can
+fix: Chai's pages are going blank, Matcha's word garden is wilting, Mochi's
+notebook lost its notes, Ginger's gears are stuck, Mallow's stars went dim,
+and Toffee keeps the fire that holds it all together. Every round you finish
+with a friend helps them:
+
+- **Stars.** 1 to 3 for accuracy and pace, plus 1 for a flawless round.
+- **The village level.** Stars add up to levels, and every level puts
+  something new on the map: lanterns, bunting, flowers, firefly jars, a
+  swing, chimes, a kite, lily-pad lights, sky lanterns.
+- **Hearts.** Five per friend. Each heart is a chapter of that friend's story
+  and decorates their home (a lantern, flowers, bunting, lit windows, a
+  golden glow).
+- **Today's three.** Every day the three friends who miss you most wear a
+  "!". Help all three and today's gift opens: 5 bonus stars.
+- **Toffee's fire.** Your days in a row. Seven in a row saves a spare log
+  that covers one missed day.
+
 ## The first minutes
 
-The village opens on its plaza. Toffee, at the fire, says hello in three
-short lines. Then Chai's thought bubble lights up: she has a short passage
+The village opens at the campfire. Toffee says hello and tells you what is
+going on in four short lines, then Chai waves from the library and the big
+button at the bottom glows: **Help Chai · Read a passage · 5 min**. One tap
+and you are reading a real CAT passage against the clock.
+
+When you finish, the result screen counts up your stars ("You helped
+Chai!"), Chai thanks you, and the level bar fills. Back in the village Chai
+jumps for joy, her best friend Mochi cheers, and the next friend's "!" is
 waiting.
-
-Tap Chai and her card opens:
-- her mood;
-- her friendship hearts;
-- one line in her voice;
-- one button that starts the real thing: a CAT passage, against the clock.
-
-When you finish, the result screen stands in her library. Chai celebrates
-and counts up the stories she made from your reading. You come back to the
-village, Chai hops, and a toast names what you earned.
-
-You can name the village in your cottage whenever you like. Nothing is
-behind a gate.
 
 ## The village
 
 **One painting** (`assets/art/home-world-v1.png`, 1536 × 1024) fills the
-screen. You pan by drag, wheel or arrow keys, and zoom by pinch,
-ctrl+wheel or the zoom buttons. Desktop opens with the whole village visible;
-the overview button fits the whole map on a phone as well.
+screen. You pan by drag, wheel or arrow keys and zoom by pinch or
+ctrl+wheel; one button toggles the whole-village view.
 
-**Three small pieces of chrome sit on it:**
-- Toffee's flame, with the day count and the village name;
-- the satchel and the cottage;
-- today's wishes.
+**On top of it, only this:**
+- the top bar: Toffee's fire, the village level and its stars, your friends
+  (who is who), your cottage (sound, settings, records);
+- the bottom: today's three friends and their gift, and the big button.
 
-Everything else is in the world:
-- tap a pet or its house for its card;
-- tap the clock tower for Progress;
-- tap your cottage for sound, settings and backup.
+**The friends live there.** Each one walks the painted paths on its own two
+feet with its own gait (Chai waddles, Mochi plods, Ginger trots, Matcha
+bounces, Toffee hops, Mallow floats), does chores round its home with a prop
+in hand, visits its best friend, chats on the plaza, waves when you arrive,
+and goes home to sleep at night. Every line comes with a little voice. Tap a
+friend for their card: what they need, what they noticed about your answers,
+the big Help button, everything you can do with them, and their story.
 
 **The painting moves.** Forty-four pieces of the painting are cut out with
-feathered edges and animated in place, so at rest each one is pixel-identical
-to the picture beneath it:
-- the workshop gear and wheels turn;
-- the waterfalls and streams run, and the pond drifts;
-- lily pads bob;
-- banners, bunting and awnings stir;
-- eleven trees and eight flower beds sway as a gust crosses the map;
-- the campfire flickers;
-- the telescope pans now and then, and the armillary turns.
+feathered edges and animated in place (the workshop gear, waterfalls and
+streams, lily pads, banners, eleven trees and eight flower beds in the wind,
+the campfire, the telescope). Five river reaches flow with refracted water.
+Lamps breathe, chimneys smoke, fireflies come out at night.
 
-Five visible river reaches also have refracted water, downstream foam,
-travelling surface ripples and moving reflections. A cached colour mask
-keeps the water inside the painted banks and behind bridges, rocks and
-lilies. Tap the water to leave a ripple. Small canvases cover only the water,
-update at 30 fps and stop when the tab is hidden. Reduced motion leaves the
-original painting still. Drifting sunlight and cloud shadows give the
-village changing light without moving the camera.
+**Sound is always on**, at full volume, until you turn it off: a composed
+village theme that each friend plays on their own instrument, a quiet focus
+mix while you read against the clock, and reward sounds that quote the
+song's hook.
 
-Over that:
-- **Light:** every lamp and lantern breathes a warm halo, faint by day and
-  full at dusk and night. Smoke rises from four chimneys and the teapot
-  steams.
-- **Sky:** the real clock sets the hour's light, and the clock tower keeps
-  real time. Fireflies come out at night; butterflies, birds, autumn leaves
-  and rain come by day.
-
-**The pets live there.** Each one:
-- hop-walks the painted paths, blinks and chats in pairs;
-- carries its gift next door;
-- sits by the fire;
-- walks home to sleep at night.
-
-How far a pet wanders is its mood.
-
-**The economy is derived from your records** (`src/pets/economy.js`). It
-recomputes on every load, so a backup carries the whole village:
-
-- **Mood.** Each pet's mood comes from how recently and how well you
-  practised its subject (a 36-hour half-life). A pet you have not met yet is
-  waiting, never sad.
-- **The gift ring:** Matcha → Chai → Mochi → Ginger → Mallow → Toffee →
-  Matcha. Each pet makes its gifts twice as fast while the pet before it is
-  happy.
-- **Harmony.** A mean of all six moods, weighted toward the lowest. It sets
-  how many lanterns are lit, the size of the fire, the warmth of the music
-  and the number of fireflies.
-- **Friendship.** Five hearts per pet, each unlocking a line of its story.
-- **Nine treasures, made in order** from the gifts in your satchel:
-  lanterns, bunting, flower boxes, firefly jars, a swing, wind chimes, a
-  kite, lily-pad lights and sky-lantern night. Each one is drawn on the map.
-  A treasure is the only new kind of record (`village-treasure`).
-- **Reasons to come back:**
-  - three daily wishes aimed at whoever needs you most;
-  - Toffee's flame, your daily run, protected by kindling;
-  - a letter, pinned to the notice board, from the pet who missed you
-    after a day away;
-  - festival nights when everyone is happy.
+**Everything is derived from your records** (`src/pets/economy.js`), so a
+backup carries the whole village and nothing can drift from the truth.
 
 **Every other screen belongs to the same place:**
 - A lesson stands in a soft painted crop of its host pet's home. A reading
   run, a word round and the Gauntlet show the host's portrait in their bar.
 - A place screen shows the host at its own door.
-- Results show the pet celebrating, the gifts it made, the ring bonus, any
-  new heart and its story line, and a treasure you can now make.
+- Results show the friend celebrating, "You helped Chai!" with the stars
+  counted up, the level bar, any new heart and its story line, and today's three.
 - Progress is the clock tower and Settings is your cottage. Records are kept
   by Toffee.
 
@@ -162,7 +134,7 @@ passages.
   and validated against a versioned schema at load time.
 - **Local-first.** Progress lives in IndexedDB on your device. The village
   is derived from your records.
-- **Earned, never bought.** Every gift, heart and treasure comes from
+- **Earned, never bought.** Every star, heart and level comes from
   finished learning. Stars are performance (accuracy, then pace) and are
   never spent.
 
@@ -213,13 +185,13 @@ while the Reading Room rendered its passages at 1.14:1 contrast.
 
 | Section | What it does |
 |---|---|
-| §16 | Derives the pets: mood decay, ring doubling, harmony, the flame and its kindling, wishes, and treasure stock (`check-pet-economy.mjs`). Also lints the pets' lines: no "!", 96 characters at most, none of the mentor's banned words (`check-pets.mjs`) |
+| §16 | Derives the friends: stars, village levels and decorations, hearts, mood decay, today's three and the gift, the fire and its spare logs, the welcome (`check-pet-economy.mjs`). Also lints every line a friend can say: 96 characters at most, no em dashes, none of the mentor's banned words (`check-pets.mjs`) |
 | §17 | Checks that the painting and the six pet sheets are present, and that every place has a line in register |
 | §22 `check-contrast.mjs` | Checks the palette and the village's button colours against WCAG AA |
 | §23 `check-village-data.mjs` | Samples the path graph against the painting's own pixels, and checks the motion atlas still matches its patches |
-| §23b `check-village.mjs` | Six pets walking, the painting moving, cards and focus, a treasure made, night, reduced motion, phone width, offline |
+| §23b `check-village.mjs` | Six friends walking on two feet, the painting moving, the big button, five cards and focus, decorations by level, night, reduced motion, phone width, offline |
 | §24 `check-rendered-contrast.mjs` | Screenshots each screen, paints the glyphs transparent, screenshots again, and measures the real ratio between ink and whatever is behind it. This includes the reading result screen |
-| §26 `check-hostile-records.mjs` | Puts deliberately broken records, broken treasures included, through the derivations |
+| §26 `check-hostile-records.mjs` | Puts deliberately broken records through the derivations |
 | §27 `check-noticing.mjs` | Checks that the trap, pattern and skill ledgers reach a learner, in register, with a number behind every line |
 | §28 `check-reach.mjs` | Walks every route and the village cards with a real Tab key in both themes: focus visible, 44 × 44, every control named |
 | §29 `check-interruption.mjs` | Feeds garbage drafts and record logs through six engines and the satchel |
@@ -262,19 +234,19 @@ pretend to have passed.
 | `STATUS.md` / `CHANGELOG.md` | What exists now / what changed, when, and why |
 
 **`src/pets/`:**
-- `pets.js`: the roster, the ring, and the pets' voice and stories.
-- `economy.js`: mood, gifts, harmony, the flame, wishes, treasures and
-  letters, all derived from records.
+- `pets.js`: the roster, best friends, troubles, requests, and the friends' voice and stories.
+- `economy.js`: stars, village levels and decorations, hearts, mood, today's
+  three and the gift, the fire, the welcome, all derived from records.
 - `next.js`: each pet's next activity.
 - `paths.js`: where everything is in the painting.
-- `sprite.js`: pets, gifts and painted backdrops in HTML.
+- `sprite.js`: pets (and the walking rig), icons and painted backdrops in HTML.
 - `sheets.js`: the frame metadata for the baked pet sheets.
 
 **`src/home/`:**
-- `village.js`: the camera, the HUD, the cards and the returns.
-- `life.js`: the pets' behaviour and the ambient canvas.
+- `village.js`: the camera, the top bar, the big button, today's three, celebrations, the welcome.
+- `life.js`: the friends' gaits, chores, greetings and voices, and the ambient canvas.
 - `motion.js` and `motion-atlas.js`: the living painting.
-- `cards.js`: the pet, hearth, satchel, cottage and letter cards.
+- `cards.js`: the friend, fire, level, who-is-who, today and cottage cards, and the decorations on the map.
 
 **`src/world/`:**
 - `state.js`: learning derived from records, with `state.pets`.

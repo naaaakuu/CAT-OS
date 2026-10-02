@@ -1,37 +1,44 @@
 /**
- * audio.js — the world's sound: music, environment, and interaction, all
- * synthesized live with the Web Audio API (no files, no CDN, offline).
+ * audio.js — the village's sound: its theme song, its ambience, its little
+ * event sounds and the friends' voices, all synthesized live with the Web
+ * Audio API (no files, no CDN, offline).
  *
- * Identity: one pentatonic world (do re mi sol la — no fa, no ti, so
- * nothing can ever clash), rooted on a tonic per place. The Valley Phrase
- * (mi–sol–la · sol–la–do′) is the leitmotif: the music generator keeps
- * returning to its shapes, the arrival plays its head, growth its tail.
+ * THE THEME. One sixteen-bar tune in C major at a bouncy shuffle, written
+ * out note by note so it can be hummed: the hook is mi-sol-la, sol-la-do
+ * (the Valley Phrase), answered by a tumble back down; the middle climbs a
+ * four-step sequence to a high E and lands home. It loops for as long as
+ * the app is open, with a different arrangement on each pass (bells and
+ * twinkles on the second, a breakdown on the third) so it never wears.
  *
- * Layers:
- *   MUSIC      a slow generative bed — two soft pads breathing under a
- *              plucked pentatonic line, sparser and lower at night.
- *   AMBIENCE   wind, water, birds by day, crickets at night, rain, per place.
- *   EVENTS     tap, open, star chimes, ink, quests, growth, building, timer.
+ *   LEAD     the melody, in each friend's own instrument: marimba in the
+ *            village, flute in Chai's library, kalimba in Matcha's garden,
+ *            clarinet at Mochi's, pizzicato in Ginger's workshop, bells at
+ *            Mallow's observatory, a twangy banjo at Toffee's fire.
+ *   BAND     a bouncing bass, chord stabs on the off-beats, a soft kick, a
+ *            woodblock and a shaker.
+ *   FOCUS    while a question is on screen: the same song with no melody
+ *            and no drums, so it keeps you company without talking over you.
+ *   NIGHT    slower, music box, no drums.
  *
- * Every layer reads the shell's master Sounds preference; music has its
- * own toggle. Nothing sounds before the first gesture (autoplay law); the
- * world calls unlock() on any pointerdown.
+ * The reward sounds quote the hook, so a star, a heart and a new level all
+ * sound like the village. Music and sound are on, at full volume, until
+ * the learner turns them off. Nothing sounds before the first gesture
+ * (the browser's rule); app.js calls unlock() on the first touch anywhere.
  */
 
 import { feedbackPrefs, setFeedbackPref, onFeedbackChange } from '../core/engagement/feedback.js';
 
 const SEMI = { do: 0, re: 2, mi: 4, sol: 7, la: 9 };
-const DEGREES = ['do', 're', 'mi', 'sol', 'la'];
-const TONIC = { hearth: 130.81, rootwood: 130.81, meadow: 220.0, pond: 146.83, 'reading-room': 164.81, terraces: 196.0, thicket: 196.0, loom: 164.81, table: 164.81, bench: 164.81, wilds: 110.0, world: 130.81 };
 
 export const VALLEY_PHRASE = Object.freeze([['mi', 1], ['sol', 1], ['la', 1], ['sol', 1], ['la', 1], ['do', 2]]);
 
 export function pitch(tonic, degree, octave = 0) { return tonic * 2 ** ((SEMI[degree] + octave * 12) / 12); }
+const hz = (midi) => 440 * 2 ** ((midi - 69) / 12);
 
 const state = {
   ctx: null, master: null, noise: null,
-  music: { on: true, playing: false, region: null, timer: 0, pads: [], gain: null, step: 0, seed: 1 },
-  amb: { nodes: [], gain: null, region: null, timers: [] },
+  music: { on: true, playing: false, region: 'world', hour: 'morning', warmth: 0, gain: null, timer: 0, slot: 0, next: 0 },
+  amb: { nodes: [], gain: null, region: null, timers: [], key: null },
   unlocked: false,
   storage: null,
 };
@@ -52,8 +59,8 @@ function ensure() {
   const ctx = new AC();
   const master = ctx.createGain(); master.gain.value = 1;
   const comp = ctx.createDynamicsCompressor();
-  comp.threshold.value = -18; comp.knee.value = 24; comp.ratio.value = 3; comp.attack.value = 0.008; comp.release.value = 0.25;
-  const warm = ctx.createBiquadFilter(); warm.type = 'lowpass'; warm.frequency.value = 5200; warm.Q.value = 0.5;
+  comp.threshold.value = -14; comp.knee.value = 18; comp.ratio.value = 4; comp.attack.value = 0.006; comp.release.value = 0.22;
+  const warm = ctx.createBiquadFilter(); warm.type = 'lowpass'; warm.frequency.value = 7600; warm.Q.value = 0.4;
   master.connect(comp).connect(warm).connect(ctx.destination);
   const buf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
   const d = buf.getChannelData(0);
@@ -72,19 +79,19 @@ export function unlock() {
     if (!ensure()) return;
     if (state.ctx.state === 'suspended') state.ctx.resume();
     state.unlocked = true;
-    if (state.music.on && state.music.region && !state.music.playing) startMusic(state.music.region, { hour: state.music.hour });
+    if (state.music.on && !state.music.playing) startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
   } catch { /* audio is a bonus */ }
 }
 
 export async function initWorldAudio(storage) {
   state.storage = storage;
   state.music.on = feedbackPrefs().music;
-  // The settings screen changes the preference; the world retunes live.
+  // The settings screen changes the preference; the music retunes live.
   onFeedbackChange((p) => {
     state.music.on = p.music;
     if (!p.music) { stopMusic(); stopAmbience(); return; }
-    if (state.music.playing) { try { state.music.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain()), state.ctx.currentTime, 0.05); state.amb.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain()), state.ctx.currentTime, 0.05); } catch { /* fine */ } }
-    else if (state.music.region && state.unlocked) { startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth }); startAmbience(state.amb.region ?? state.music.region, { hour: state.music.hour }); }
+    if (state.music.playing) { try { state.music.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain() * MUSIC_LEVEL), state.ctx.currentTime, 0.05); state.amb.gain?.gain.setTargetAtTime(Math.max(0.0001, musicGain()), state.ctx.currentTime, 0.05); } catch { /* fine */ } }
+    else if (state.unlocked) startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
   });
 }
 
@@ -92,16 +99,17 @@ export function musicEnabled() { return feedbackPrefs().music; }
 export async function setMusicEnabled(on) {
   state.music.on = !!on;
   try { if (state.storage) await setFeedbackPref(state.storage, 'music', !!on); } catch { /* non-fatal */ }
-  if (!on) { stopMusic(); stopAmbience(); } else if (state.music.region) startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
+  if (!on) { stopMusic(); stopAmbience(); } else startMusic(state.music.region, { hour: state.music.hour, warmth: state.music.warmth });
 }
 
 /* ------------------------------------------------------------------ */
 /* Voices                                                              */
 /* ------------------------------------------------------------------ */
 
-function tone(t, { freq, type = 'sine', peak = 0.05, a = 0.01, hold = 0, d = 0.25, pan = 0, dest = state.master, detune = 0 }) {
+function tone(t, { freq, type = 'sine', peak = 0.05, a = 0.01, hold = 0, d = 0.25, pan = 0, dest = state.master, detune = 0, glide = 0 }) {
   const c = state.ctx;
   const o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(freq, t); if (detune) o.detune.value = detune;
+  if (glide) o.frequency.exponentialRampToValueAtTime(Math.max(20, freq * glide), t + a + hold + d);
   const g = c.createGain();
   g.gain.setValueAtTime(0.0001, t);
   g.gain.exponentialRampToValueAtTime(Math.max(0.0001, peak), t + a);
@@ -121,10 +129,10 @@ function pluck(t, freq, peak = 0.06, pan = 0, dest = state.master) {
 }
 
 /** A soft bell for stars and quests. */
-function bell(t, freq, peak = 0.06, pan = 0) {
-  tone(t, { freq, type: 'sine', peak, a: 0.006, d: 1.4, pan });
-  tone(t, { freq: freq * 2.76, type: 'sine', peak: peak * 0.18, a: 0.004, d: 0.7, pan });
-  tone(t, { freq: freq * 5.4, type: 'sine', peak: peak * 0.06, a: 0.002, d: 0.3, pan });
+function bell(t, freq, peak = 0.06, pan = 0, dest = state.master) {
+  tone(t, { freq, type: 'sine', peak, a: 0.006, d: 1.4, pan, dest });
+  tone(t, { freq: freq * 2.76, type: 'sine', peak: peak * 0.18, a: 0.004, d: 0.7, pan, dest });
+  tone(t, { freq: freq * 5.4, type: 'sine', peak: peak * 0.06, a: 0.002, d: 0.3, pan, dest });
 }
 
 function noiseBurst(t, { peak = 0.03, a = 0.01, d = 0.3, filter = 'bandpass', freq = 1200, q = 1, dest = state.master }) {
@@ -139,29 +147,44 @@ function noiseBurst(t, { peak = 0.03, a = 0.01, d = 0.3, filter = 'bandpass', fr
 /* Events                                                              */
 /* ------------------------------------------------------------------ */
 
+const C5 = 523.25;
 const EVENTS = {
-  tap:      (t, v) => { tone(t, { freq: 620, type: 'triangle', peak: 0.022 * v, a: 0.002, d: 0.06 }); noiseBurst(t, { peak: 0.012 * v, d: 0.05, freq: 2400 }); },
-  open:     (t, v) => { noiseBurst(t, { peak: 0.03 * v, a: 0.05, d: 0.35, filter: 'lowpass', freq: 1800 }); pluck(t + 0.02, pitch(261.63, 'mi'), 0.05 * v); pluck(t + 0.12, pitch(261.63, 'la'), 0.045 * v, 0.2); },
-  close:    (t, v) => { noiseBurst(t, { peak: 0.025 * v, a: 0.02, d: 0.25, filter: 'lowpass', freq: 1200 }); pluck(t, pitch(261.63, 'la'), 0.035 * v); pluck(t + 0.1, pitch(261.63, 'mi'), 0.03 * v, -0.2); },
-  hover:    (t, v) => { tone(t, { freq: 880, type: 'sine', peak: 0.012 * v, a: 0.004, d: 0.08 }); },
-  place:    (t, v) => { pluck(t, pitch(261.63, 'sol'), 0.05 * v); pluck(t + 0.09, pitch(261.63, 'la'), 0.045 * v, 0.15); pluck(t + 0.18, pitch(523.25, 'do'), 0.04 * v, -0.15); },
-  correct:  (t, v) => { pluck(t, pitch(392, 'sol'), 0.05 * v); pluck(t + 0.08, pitch(392, 'do', 1), 0.05 * v, 0.2); },
-  wrong:    (t, v) => { tone(t, { freq: 196, type: 'triangle', peak: 0.03 * v, a: 0.01, d: 0.22 }); tone(t + 0.05, { freq: 174.6, type: 'triangle', peak: 0.025 * v, a: 0.01, d: 0.28 }); },
-  star1:    (t, v) => { bell(t, pitch(523.25, 'mi'), 0.06 * v, -0.2); },
-  star2:    (t, v) => { bell(t, pitch(523.25, 'sol'), 0.06 * v, 0); },
-  star3:    (t, v) => { bell(t, pitch(523.25, 'la'), 0.06 * v, 0.2); bell(t + 0.12, pitch(523.25, 'do', 1), 0.05 * v, 0.3); },
-  nostar:   (t, v) => { tone(t, { freq: 220, type: 'sine', peak: 0.035 * v, a: 0.02, d: 0.6 }); },
-  ink:      (t, v) => { tone(t, { freq: 1760, type: 'sine', peak: 0.03 * v, a: 0.002, d: 0.12 }); tone(t + 0.04, { freq: 2349, type: 'sine', peak: 0.02 * v, a: 0.002, d: 0.14 }); },
-  quest:    (t, v) => { bell(t, pitch(392, 'sol'), 0.05 * v); bell(t + 0.14, pitch(392, 'la'), 0.05 * v); bell(t + 0.28, pitch(392, 'do', 1), 0.06 * v); },
-  grow:     (t, v) => { [['sol', 1], ['la', 1], ['do', 2]].forEach(([d, o], i) => pluck(t + i * 0.16, pitch(130.81, d, o), 0.06 * v, (i - 1) * 0.25)); tone(t + 0.5, { freq: pitch(130.81, 'do', 1), type: 'sine', peak: 0.04 * v, a: 0.2, hold: 0.4, d: 1.2 }); tone(t + 0.5, { freq: pitch(130.81, 'sol', 1), type: 'sine', peak: 0.03 * v, a: 0.2, hold: 0.4, d: 1.2 }); },
-  build:    (t, v) => { noiseBurst(t, { peak: 0.05 * v, a: 0.005, d: 0.2, filter: 'lowpass', freq: 400 }); tone(t, { freq: 98, type: 'sine', peak: 0.05 * v, a: 0.005, d: 0.3 }); [ 'do', 'mi', 'sol', 'la' ].forEach((d, i) => bell(t + 0.25 + i * 0.1, pitch(261.63, d), 0.045 * v, (i - 1.5) * 0.2)); },
-  tick:     (t, v) => { tone(t, { freq: 1200, type: 'sine', peak: 0.012 * v, a: 0.002, d: 0.04 }); },
-  hurry:    (t, v) => { tone(t, { freq: 880, type: 'triangle', peak: 0.02 * v, a: 0.002, d: 0.08 }); tone(t + 0.12, { freq: 880, type: 'triangle', peak: 0.02 * v, a: 0.002, d: 0.08 }); },
-  arrival:  (t, v) => { VALLEY_PHRASE.slice(0, 3).forEach(([d, o], i) => pluck(t + i * 0.22, pitch(130.81, d, o + 1), 0.055 * v, (i - 1) * 0.3)); tone(t, { freq: 130.81, type: 'sine', peak: 0.03 * v, a: 0.6, hold: 0.6, d: 1.6 }); },
-  unlock:   (t, v) => { VALLEY_PHRASE.forEach(([d, o], i) => bell(t + i * 0.18, pitch(261.63, d, o), 0.055 * v, (i % 2 ? 1 : -1) * 0.2)); },
-  levelup:  (t, v) => { ['do', 'mi', 'sol', 'do'].forEach((d, i) => bell(t + i * 0.12, pitch(261.63, d, i === 3 ? 1 : 0), 0.055 * v, (i - 1.5) * 0.2)); },
-  page:     (t, v) => { noiseBurst(t, { peak: 0.028 * v, a: 0.01, d: 0.18, filter: 'highpass', freq: 1500 }); },
-  swoosh:   (t, v) => { noiseBurst(t, { peak: 0.03 * v, a: 0.04, d: 0.28, filter: 'bandpass', freq: 900, q: 0.7 }); },
+  tap:      (t, v) => { tone(t, { freq: 660, type: 'triangle', peak: 0.05 * v, a: 0.002, d: 0.07 }); noiseBurst(t, { peak: 0.025 * v, d: 0.05, freq: 2400 }); },
+  open:     (t, v) => { noiseBurst(t, { peak: 0.05 * v, a: 0.05, d: 0.3, filter: 'lowpass', freq: 1800 }); pluck(t + 0.02, pitch(C5, 'mi'), 0.1 * v); pluck(t + 0.11, pitch(C5, 'la'), 0.09 * v, 0.2); },
+  close:    (t, v) => { noiseBurst(t, { peak: 0.04 * v, a: 0.02, d: 0.22, filter: 'lowpass', freq: 1200 }); pluck(t, pitch(C5, 'la'), 0.07 * v); pluck(t + 0.09, pitch(C5, 'mi'), 0.06 * v, -0.2); },
+  hover:    (t, v) => { tone(t, { freq: 880, type: 'sine', peak: 0.02 * v, a: 0.004, d: 0.08 }); },
+  place:    (t, v) => { pluck(t, pitch(C5, 'sol'), 0.1 * v); pluck(t + 0.09, pitch(C5, 'la'), 0.09 * v, 0.15); pluck(t + 0.18, pitch(C5 * 2, 'do'), 0.08 * v, -0.15); },
+  correct:  (t, v) => { pluck(t, pitch(784, 'do'), 0.1 * v); pluck(t + 0.08, pitch(784, 'mi'), 0.1 * v, 0.2); },
+  wrong:    (t, v) => { tone(t, { freq: 330, type: 'triangle', peak: 0.06 * v, a: 0.01, d: 0.2 }); tone(t + 0.09, { freq: 262, type: 'triangle', peak: 0.06 * v, a: 0.01, d: 0.26 }); },
+  star1:    (t, v) => { bell(t, pitch(C5, 'mi'), 0.13 * v, -0.2); },
+  star2:    (t, v) => { bell(t, pitch(C5, 'sol'), 0.13 * v, 0); },
+  star3:    (t, v) => { bell(t, pitch(C5, 'la'), 0.13 * v, 0.2); bell(t + 0.12, pitch(C5 * 2, 'do'), 0.11 * v, 0.3); },
+  nostar:   (t, v) => { tone(t, { freq: 262, type: 'sine', peak: 0.07 * v, a: 0.02, d: 0.6 }); },
+  ink:      (t, v) => { tone(t, { freq: 1760, type: 'sine', peak: 0.06 * v, a: 0.002, d: 0.12 }); tone(t + 0.04, { freq: 2349, type: 'sine', peak: 0.04 * v, a: 0.002, d: 0.14 }); },
+  coin:     (t, v) => { tone(t, { freq: 1568, type: 'square', peak: 0.025 * v, a: 0.002, d: 0.07 }); tone(t + 0.06, { freq: 2093, type: 'square', peak: 0.025 * v, a: 0.002, d: 0.16 }); },
+  heart:    (t, v) => { [['mi', 0], ['la', 0], ['do', 1]].forEach(([d, o], i) => bell(t + i * 0.1, pitch(C5, d, o), 0.1 * v, (i - 1) * 0.3)); },
+  quest:    (t, v) => { bell(t, pitch(784, 'do'), 0.1 * v); bell(t + 0.14, pitch(784, 're'), 0.1 * v); bell(t + 0.28, pitch(784, 'mi'), 0.12 * v); },
+  grow:     (t, v) => { [['sol', 1], ['la', 1], ['do', 2]].forEach(([d, o], i) => pluck(t + i * 0.16, pitch(130.81, d, o), 0.12 * v, (i - 1) * 0.25)); tone(t + 0.5, { freq: pitch(130.81, 'do', 1), type: 'sine', peak: 0.08 * v, a: 0.2, hold: 0.4, d: 1.2 }); },
+  build:    (t, v) => { noiseBurst(t, { peak: 0.09 * v, a: 0.005, d: 0.2, filter: 'lowpass', freq: 400 }); tone(t, { freq: 98, type: 'sine', peak: 0.1 * v, a: 0.005, d: 0.3 }); ['do', 'mi', 'sol', 'la'].forEach((d, i) => bell(t + 0.25 + i * 0.1, pitch(261.63, d), 0.09 * v, (i - 1.5) * 0.2)); },
+  tick:     (t, v) => { tone(t, { freq: 1200, type: 'sine', peak: 0.025 * v, a: 0.002, d: 0.04 }); },
+  hurry:    (t, v) => { tone(t, { freq: 880, type: 'triangle', peak: 0.04 * v, a: 0.002, d: 0.08 }); tone(t + 0.12, { freq: 880, type: 'triangle', peak: 0.04 * v, a: 0.002, d: 0.08 }); },
+  arrival:  (t, v) => { VALLEY_PHRASE.slice(0, 3).forEach(([d, o], i) => pluck(t + i * 0.2, pitch(261.63, d, o), 0.11 * v, (i - 1) * 0.3)); },
+  /* The hook itself: a star earned, a treasure made, a friend helped. */
+  unlock:   (t, v) => { VALLEY_PHRASE.forEach(([d, o], i) => bell(t + i * 0.15, pitch(261.63, d, o), 0.11 * v, (i % 2 ? 1 : -1) * 0.2)); },
+  /* A new village level: the hook, then a chord that blooms. */
+  levelup:  (t, v) => {
+    VALLEY_PHRASE.forEach(([d, o], i) => bell(t + i * 0.13, pitch(523.25, d, o - 1), 0.11 * v, (i % 2 ? 1 : -1) * 0.25));
+    [261.63, 329.63, 392, 523.25].forEach((f, i) => tone(t + 0.85, { freq: f, type: 'triangle', peak: 0.05 * v, a: 0.02, hold: 0.5, d: 1.1, pan: (i - 1.5) * 0.3 }));
+    noiseBurst(t + 0.85, { peak: 0.04 * v, a: 0.01, d: 0.6, filter: 'highpass', freq: 5000 });
+  },
+  /* The day's gift opening: a shake, a pop, a sparkle shower. */
+  chest:    (t, v) => {
+    for (let i = 0; i < 3; i += 1) noiseBurst(t + i * 0.09, { peak: 0.05 * v, a: 0.004, d: 0.05, filter: 'bandpass', freq: 900 + i * 300, q: 3 });
+    tone(t + 0.32, { freq: 180, type: 'sine', peak: 0.12 * v, a: 0.003, d: 0.15, glide: 2.2 });
+    [784, 988, 1175, 1568, 1319, 1760].forEach((f, i) => tone(t + 0.4 + i * 0.06, { freq: f, type: 'sine', peak: 0.06 * v, a: 0.003, d: 0.3, pan: Math.sin(i) * 0.5 }));
+  },
+  page:     (t, v) => { noiseBurst(t, { peak: 0.05 * v, a: 0.01, d: 0.16, filter: 'highpass', freq: 1500 }); },
+  swoosh:   (t, v) => { noiseBurst(t, { peak: 0.06 * v, a: 0.04, d: 0.26, filter: 'bandpass', freq: 900, q: 0.7 }); },
 };
 
 export const WORLD_SOUND_NAMES = Object.freeze(Object.keys(EVENTS));
@@ -178,86 +201,201 @@ export function play(name, { delay = 0 } = {}) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Music: a generative pentatonic bed                                  */
+/* The friends' voices: a babble of little blips, one pitch per friend */
 /* ------------------------------------------------------------------ */
 
-function seeded(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const VOICE = {
+  toffee: { base: 640, type: 'square', step: 0.058, lp: 2600, peak: 0.028 },
+  chai: { base: 390, type: 'sine', step: 0.074, lp: 1800, peak: 0.07, glide: 0.86 },
+  matcha: { base: 720, type: 'triangle', step: 0.06, lp: 3200, peak: 0.06 },
+  mochi: { base: 250, type: 'triangle', step: 0.085, lp: 1400, peak: 0.08 },
+  ginger: { base: 560, type: 'triangle', step: 0.05, lp: 3000, peak: 0.06 },
+  mallow: { base: 520, type: 'sine', step: 0.07, lp: 2400, peak: 0.065, glide: 1.12 },
+};
+const VOICE_STEPS = [0, 2, 4, 7, 9, 12];
+let voiceUntil = 0;
+
+/** A friend says something: a short babble whose length follows the line. */
+export function voice(petId, text = '', { soft = false } = {}) {
+  try {
+    const v = gain() * (soft ? 0.45 : 1);
+    const V = VOICE[petId];
+    if (!V || v <= 0 || !ensure() || document.visibilityState === 'hidden' || state.ctx.state === 'suspended') return;
+    const c = state.ctx;
+    const t0 = Math.max(c.currentTime + 0.01, soft ? voiceUntil : c.currentTime + 0.01);
+    const letters = String(text).replace(/[^a-z]/gi, '').length;
+    const n = Math.max(2, Math.min(soft ? 5 : 12, Math.ceil(letters / 3)));
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = V.lp; lp.connect(state.master);
+    for (let i = 0; i < n; i += 1) {
+      const t = t0 + i * V.step;
+      const up = i === n - 1 && /\?$/.test(text.trim()) ? 1.25 : 1;
+      const f = V.base * 2 ** (VOICE_STEPS[(i * 7 + letters) % VOICE_STEPS.length] / 24) * up;
+      tone(t, { freq: f, type: V.type, peak: V.peak * v, a: 0.006, d: V.step * 0.85, dest: lp, glide: V.glide ?? 0 });
+    }
+    voiceUntil = t0 + n * V.step;
+    setTimeout(() => { try { lp.disconnect(); } catch { /* gone */ } }, (voiceUntil - c.currentTime + 0.4) * 1000);
+  } catch { /* a voice is a bonus */ }
+}
+
+/* ------------------------------------------------------------------ */
+/* The theme                                                           */
+/* ------------------------------------------------------------------ */
+
+const MUSIC_LEVEL = 0.95;
+/* C major. Notes are MIDI numbers; a bar is eight shuffled eighths. */
+const CHORDS = [
+  [48, [60, 64, 67]], [45, [57, 60, 64]], [41, [57, 60, 65]], [43, [55, 59, 62]],
+  [48, [60, 64, 67]], [45, [57, 60, 64]], [41, [57, 60, 65], 43, [55, 59, 62]], [48, [60, 64, 67]],
+  [41, [57, 60, 65]], [43, [55, 59, 62]], [40, [55, 59, 64]], [45, [57, 60, 64]],
+  [41, [57, 60, 65]], [48, [60, 64, 67]], [38, [57, 62, 65], 43, [55, 59, 62]], [48, [60, 64, 67]],
+];
+/* [bar, slot, note, length in eighths]. The hook is bars 0-1 and 4-5. */
+const MELODY = [
+  [0, 0, 76, 1], [0, 1, 79, 1], [0, 2, 81, 3], [0, 5, 79, 1], [0, 6, 81, 1], [0, 7, 84, 3],
+  [1, 2, 81, 1], [1, 3, 79, 1], [1, 4, 76, 4],
+  [2, 0, 81, 1], [2, 1, 81, 1], [2, 2, 79, 1], [2, 3, 76, 1], [2, 4, 74, 2], [2, 6, 72, 1], [2, 7, 74, 1],
+  [3, 0, 74, 4], [3, 6, 72, 1], [3, 7, 74, 1],
+  [4, 0, 76, 1], [4, 1, 79, 1], [4, 2, 81, 3], [4, 5, 79, 1], [4, 6, 81, 1], [4, 7, 84, 3],
+  [5, 2, 86, 1], [5, 3, 84, 1], [5, 4, 81, 2], [5, 6, 79, 1], [5, 7, 81, 1],
+  [6, 0, 84, 2], [6, 2, 81, 1], [6, 3, 79, 1], [6, 4, 74, 2], [6, 6, 76, 1], [6, 7, 79, 1],
+  [7, 0, 72, 6],
+  [8, 0, 81, 1], [8, 1, 84, 1], [8, 2, 81, 1], [8, 3, 79, 1], [8, 4, 81, 4],
+  [9, 0, 79, 1], [9, 1, 81, 1], [9, 2, 79, 1], [9, 3, 76, 1], [9, 4, 74, 4],
+  [10, 0, 76, 1], [10, 1, 79, 1], [10, 2, 76, 1], [10, 3, 74, 1], [10, 4, 76, 4],
+  [11, 0, 72, 1], [11, 1, 74, 1], [11, 2, 76, 1], [11, 3, 79, 1], [11, 4, 81, 4],
+  [12, 0, 81, 1], [12, 1, 84, 1], [12, 2, 81, 1], [12, 3, 79, 1], [12, 4, 81, 2], [12, 6, 84, 1], [12, 7, 86, 1],
+  [13, 0, 88, 3], [13, 3, 86, 1], [13, 4, 84, 2], [13, 6, 81, 2],
+  [14, 0, 86, 2], [14, 2, 84, 1], [14, 3, 81, 1], [14, 4, 79, 2], [14, 6, 74, 1], [14, 7, 76, 1],
+  [15, 0, 72, 6],
+];
+const AT = new Map();
+for (const [bar, slot, note, len] of MELODY) { const k = bar * 8 + slot; if (!AT.has(k)) AT.set(k, []); AT.get(k).push([note, len]); }
+/* A sparkle answering the melody on the second pass: chord tones up high. */
+const TWINKLE = [3, 7];
+
+/** Which friend's instrument plays the tune in each place. */
+const LEAD_OF = {
+  world: 'marimba', 'reading-room': 'flute', meadow: 'kalimba', pond: 'kalimba', thicket: 'kalimba', rootwood: 'kalimba', terraces: 'kalimba',
+  table: 'clarinet', loom: 'pizzicato', bench: 'bells', wilds: 'banjo', hearth: 'banjo',
+};
+
+function lead(kind, t, f, dur, v, dest) {
+  switch (kind) {
+    case 'flute': {
+      const c = state.ctx, o = c.createOscillator(), g = c.createGain(), vib = c.createOscillator(), vg = c.createGain();
+      o.type = 'sine'; o.frequency.value = f; vib.frequency.value = 5.2; vg.gain.value = f * 0.006; vib.connect(vg).connect(o.frequency);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.1 * v, t + 0.05); g.gain.setValueAtTime(0.1 * v, t + Math.max(0.06, dur * 0.7)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.12);
+      o.connect(g).connect(dest); o.start(t); vib.start(t); o.stop(t + dur + 0.2); vib.stop(t + dur + 0.2);
+      tone(t, { freq: f * 2, type: 'sine', peak: 0.012 * v, a: 0.05, hold: dur * 0.5, d: 0.15, dest });
+      break;
+    }
+    case 'kalimba': pluck(t, f, 0.12 * v, 0, dest); break;
+    case 'clarinet': {
+      const c = state.ctx, o = c.createOscillator(), lp = c.createBiquadFilter(), g = c.createGain();
+      o.type = 'square'; o.frequency.value = f; lp.type = 'lowpass'; lp.frequency.value = Math.min(2400, f * 3); lp.Q.value = 0.7;
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.05 * v, t + 0.03); g.gain.setValueAtTime(0.05 * v, t + Math.max(0.04, dur * 0.75)); g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.08);
+      o.connect(lp).connect(g).connect(dest); o.start(t); o.stop(t + dur + 0.15);
+      break;
+    }
+    case 'pizzicato': tone(t, { freq: f, type: 'triangle', peak: 0.16 * v, a: 0.003, d: 0.2, dest }); tone(t, { freq: f * 2, type: 'sine', peak: 0.03 * v, a: 0.002, d: 0.08, dest }); break;
+    case 'bells': bell(t, f, 0.1 * v, 0, dest); break;
+    case 'musicbox': tone(t, { freq: f * 2, type: 'sine', peak: 0.08 * v, a: 0.003, d: 0.9, dest }); tone(t, { freq: f * 4, type: 'sine', peak: 0.015 * v, a: 0.002, d: 0.3, dest }); break;
+    case 'banjo': {
+      const c = state.ctx, o = c.createOscillator(), bp = c.createBiquadFilter(), g = c.createGain();
+      o.type = 'sawtooth'; o.frequency.setValueAtTime(f * 1.01, t); o.frequency.exponentialRampToValueAtTime(f, t + 0.03);
+      bp.type = 'bandpass'; bp.frequency.value = Math.min(3200, f * 2.5); bp.Q.value = 1.6;
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.14 * v, t + 0.003); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.32);
+      o.connect(bp).connect(g).connect(dest); o.start(t); o.stop(t + 0.36);
+      break;
+    }
+    default: // marimba
+      tone(t, { freq: f, type: 'sine', peak: 0.14 * v, a: 0.003, d: 0.42, dest });
+      tone(t, { freq: f * 3.98, type: 'sine', peak: 0.02 * v, a: 0.002, d: 0.08, dest });
+      tone(t, { freq: f * 2, type: 'triangle', peak: 0.02 * v, a: 0.002, d: 0.12, dest });
+  }
+}
+
+const isNight = (h) => h === 'night' || h === 'dusk';
+const bpmFor = (scene) => (isNight(scene.hour) ? 88 : scene.region === 'focus' ? 100 : 112);
+
+/** Schedule every note of one eighth-note slot at time t. */
+function playSlot(slot, t, eighth, dest) {
+  const m = state.music;
+  const bar = Math.floor(slot / 8) % 16, s = slot % 8, pass = Math.floor(slot / 128);
+  const night = isNight(m.hour), focus = m.region === 'focus';
+  const breakdown = pass % 3 === 2 && bar < 8;
+  const [root, chord, root2, chord2] = CHORDS[bar];
+  const r = s < 4 || root2 === undefined ? root : root2;
+  const ch = s < 4 || chord2 === undefined ? chord : chord2;
+
+  /* bass: root on one, fifth on three, a bounce up the octave */
+  if (s === 0 || s === 4) tone(t, { freq: hz(s === 0 ? r : r + 7), type: 'triangle', peak: focus ? 0.13 : 0.16, a: 0.006, d: eighth * 1.7, dest });
+  if (s === 0 || s === 4) tone(t, { freq: hz(s === 0 ? r : r + 7), type: 'sine', peak: 0.1, a: 0.006, d: eighth * 1.9, dest });
+  if (s === 6 && !night) tone(t, { freq: hz(r + 12), type: 'triangle', peak: 0.07, a: 0.004, d: eighth * 0.8, dest });
+
+  /* chords: stabs on the off-beats by day, a soft held chord at night and in focus */
+  if (night || focus) {
+    if (s === 0 || (s === 4 && root2 !== undefined)) for (const n of ch) tone(t, { freq: hz(n), type: 'sine', peak: 0.028, a: 0.08, hold: eighth * 2.5, d: eighth * 2, dest });
+  } else if (s === 2 || s === 6) {
+    for (const [i, n] of ch.entries()) tone(t + i * 0.004, { freq: hz(n), type: 'triangle', peak: 0.03, a: 0.004, d: eighth * 0.9, dest, pan: (i - 1) * 0.25 });
+  }
+
+  /* drums: soft kick, woodblock, shaker (just the shaker at night and in focus) */
+  if (!night && !focus) {
+    if (s === 0 || s === 4) tone(t, { freq: 120, type: 'sine', peak: 0.2, a: 0.002, d: 0.16, dest, glide: 0.4 });
+    if (s === 2 || s === 6) { noiseBurst(t, { peak: 0.06, a: 0.001, d: 0.05, filter: 'bandpass', freq: 1900, q: 4, dest }); tone(t, { freq: 820, type: 'sine', peak: 0.04, a: 0.001, d: 0.04, dest }); }
+  }
+  noiseBurst(t, { peak: s % 2 ? 0.03 : 0.016, a: 0.002, d: 0.04, filter: 'highpass', freq: 7000, dest });
+
+  /* the tune */
+  if (!focus && !breakdown) {
+    const kind = night ? 'musicbox' : pass % 3 === 1 ? 'bells' : (LEAD_OF[m.region] ?? 'marimba');
+    for (const [note, len] of AT.get(bar * 8 + s) ?? []) lead(kind, t, hz(note), len * eighth * 0.95, 1, dest);
+    if (pass % 3 === 1 && !night && TWINKLE.includes(s)) bell(t, hz(ch[(bar + s) % 3] + 24), 0.025, s === 3 ? -0.4 : 0.4, dest);
+  }
+  if (breakdown && s === 0) for (const n of ch) tone(t, { freq: hz(n + 12), type: 'sine', peak: 0.02, a: 0.1, hold: eighth * 4, d: eighth * 3, dest });
+}
 
 /**
- * Start (or retune) the music for a place. Idempotent: calling it for the
- * place already playing does nothing; a new place crossfades the pads and
- * moves the line to the new tonic.
+ * Start the music, or move it to another place. The song never restarts:
+ * a new place changes the lead instrument (and the hour, the tempo) from
+ * the next note on.
+ * @param {string} region  a place slug, 'world', or 'focus' while a question is on screen
  */
-export function startMusic(region = 'world', { hour = 'morning', warmth = 0 } = {}) {
-  state.music.region = region; state.music.hour = hour;
-  // Warmth is how far the valley has come: 0 on the first morning, 1 for a
-  // grown, built settlement. It never changes the key or the tempo — it
-  // adds a voice and lets the line breathe a little more often, so coming
-  // back after months sounds like a fuller place, not a different one.
-  const warm = Math.max(0, Math.min(1, warmth));
-  state.music.warmth = warm;
-  if (!state.music.on || !state.unlocked) return;
-  if (musicGain() <= 0 || !ensure()) return;
-  if (state.music.playing && state.music.tonic === (TONIC[region] ?? TONIC.world) && state.music.hourPlaying === hour && Math.abs((state.music.warmthPlaying ?? 0) - warm) < 0.2) return;
-  stopMusic(0.9);
+export function startMusic(region = 'world', { hour = state.music.hour ?? 'morning', warmth = 0 } = {}) {
+  const m = state.music;
+  m.region = region; m.hour = hour; m.warmth = Math.max(0, Math.min(1, warmth));
+  if (!m.on || !state.unlocked || musicGain() <= 0 || !ensure()) return;
+  if (m.playing) return;
   const c = state.ctx;
-  const tonic = TONIC[region] ?? TONIC.world;
-  const night = hour === 'night' || hour === 'dusk';
-  const bed = c.createGain(); bed.gain.setValueAtTime(0.0001, c.currentTime); bed.gain.exponentialRampToValueAtTime(Math.max(0.0001, musicGain()), c.currentTime + 2.5);
-  bed.connect(state.master);
-  const pads = [];
-  // Two pads: the tonic and its fifth, each two detuned triangles through a
-  // slowly breathing lowpass. Quiet enough to sit under the environment.
-  const padNotes = night ? [pitch(tonic, 'do', 0), pitch(tonic, 'sol', 0)] : [pitch(tonic, 'do', 0), pitch(tonic, 'sol', 0), pitch(tonic, 'mi', 1)];
-  if (warm >= 0.45) padNotes.push(pitch(tonic, night ? 'mi' : 'la', 1));
-  if (warm >= 0.8) padNotes.push(pitch(tonic, 'do', 1));
-  padNotes.forEach((f, i) => {
-    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 300 + i * 120; lp.Q.value = 0.7;
-    const g = c.createGain(); g.gain.value = (night ? 0.02 : 0.026) / padNotes.length * 1.4;
-    const lfo = c.createOscillator(); lfo.frequency.value = 0.05 + i * 0.017; const lg = c.createGain(); lg.gain.value = 140; lfo.connect(lg).connect(lp.frequency); lfo.start();
-    for (const det of [-6, 6]) { const o = c.createOscillator(); o.type = 'triangle'; o.frequency.value = f; o.detune.value = det; o.connect(lp); o.start(); pads.push(o); }
-    lp.connect(g).connect(bed);
-    pads.push(lfo);
-  });
-  state.music.pads = pads; state.music.gain = bed; state.music.playing = true; state.music.tonic = tonic; state.music.hourPlaying = hour; state.music.warmthPlaying = warm;
-  // The line: a scheduler that places pentatonic plucks on a slow grid,
-  // leaning on the Valley Phrase's shapes; rests are part of the music.
-  const r = seeded((region.length * 7919 + (night ? 13 : 1)) >>> 0);
-  const beat = night ? 0.95 : 0.72;
-  let step = 0;
-  let last = 2; // degree index
-  const lineGain = c.createGain(); lineGain.gain.value = night ? 0.7 : 1; lineGain.connect(bed);
-  const schedule = () => {
-    if (!state.music.playing) return;
-    const t = c.currentTime + 0.1;
-    const bar = step % 16;
-    let deg = null, oct = 1;
-    if (bar === 0 && r() < 0.5) { // sometimes open a bar with the phrase head
-      VALLEY_PHRASE.slice(0, 3).forEach(([d, o], i) => pluck(t + i * beat * 0.5, pitch(tonic, d, o), 0.03, (i - 1) * 0.2, lineGain));
-      step += 2;
-    } else if (r() < (night ? 0.42 : 0.6) + warm * 0.12) {
-      const move = r() < 0.6 ? (r() < 0.5 ? -1 : 1) : (r() < 0.5 ? -2 : 2);
-      last = Math.max(0, Math.min(DEGREES.length - 1, last + move));
-      deg = DEGREES[last]; oct = r() < 0.2 ? 2 : 1;
-      pluck(t, pitch(tonic, deg, oct), 0.028 + r() * 0.012, (r() - 0.5) * 0.6, lineGain);
-      if (r() < 0.15) pluck(t + beat * 0.5, pitch(tonic, DEGREES[Math.max(0, last - 2)], oct), 0.02, 0, lineGain);
+  const bus = c.createGain();
+  bus.gain.setValueAtTime(0.0001, c.currentTime);
+  bus.gain.exponentialRampToValueAtTime(Math.max(0.0001, musicGain() * MUSIC_LEVEL), c.currentTime + 1.2);
+  bus.connect(state.master);
+  m.gain = bus; m.playing = true; m.slot = 0; m.next = c.currentTime + 0.15;
+  const tick = () => {
+    if (!m.playing) return;
+    if (document.visibilityState === 'hidden') { m.next = c.currentTime + 0.2; return; }
+    const eighth = 60 / bpmFor(m) / 2;
+    if (m.next < c.currentTime - 0.3) m.next = c.currentTime + 0.05; // woke from a stall: do not rush to catch up
+    while (m.next < c.currentTime + 0.14) {
+      const swing = m.slot % 2 ? eighth * 0.16 : 0;
+      try { playSlot(m.slot, m.next + swing, eighth, bus); } catch { /* one note is never worth a crash */ }
+      m.slot += 1; m.next += eighth;
     }
-    if (bar === 15 && r() < 0.35) { VALLEY_PHRASE.slice(3).forEach(([d, o], i) => pluck(t + i * beat * 0.5, pitch(tonic, d, o), 0.03, (i - 1) * 0.2, lineGain)); }
-    step += 1;
-    state.music.timer = setTimeout(schedule, beat * 1000 * (r() < 0.25 ? 2 : 1));
   };
-  state.music.timer = setTimeout(schedule, 1200);
+  m.timer = setInterval(tick, 30);
+  tick();
 }
 
 export function stopMusic(fade = 0.6) {
   const m = state.music;
   if (!m.playing) return;
-  clearTimeout(m.timer);
-  const c = state.ctx;
-  const bed = m.gain, pads = m.pads;
-  try { bed.gain.cancelScheduledValues(c.currentTime); bed.gain.setValueAtTime(Math.max(0.0001, bed.gain.value), c.currentTime); bed.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + fade); } catch { /* ignore */ }
-  setTimeout(() => { for (const o of pads) { try { o.stop(); } catch { /* ignore */ } } try { bed.disconnect(); } catch { /* ignore */ } }, fade * 1000 + 50);
-  m.playing = false; m.pads = []; m.gain = null;
+  clearInterval(m.timer);
+  const c = state.ctx, bus = m.gain;
+  try { bus.gain.cancelScheduledValues(c.currentTime); bus.gain.setValueAtTime(Math.max(0.0001, bus.gain.value), c.currentTime); bus.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + fade); } catch { /* ignore */ }
+  setTimeout(() => { try { bus.disconnect(); } catch { /* ignore */ } }, fade * 1000 + 80);
+  m.playing = false; m.gain = null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -265,9 +403,8 @@ export function stopMusic(fade = 0.6) {
 /* ------------------------------------------------------------------ */
 
 /**
- * The environment of a place: wind everywhere (louder in the Wilds and on
- * the tower), water near the pond and river, birds by day, crickets at
- * night, rain or snow-hush by weather.
+ * The environment of a place, under the song: a little wind, water near
+ * the pond, birds by day, crickets at night, rain by weather.
  */
 export function startAmbience(region = 'world', { hour = 'morning', weather = 'clear', season = 'summer' } = {}) {
   if (musicGain() <= 0 || !ensure() || !state.unlocked) { state.amb.region = region; return; }
@@ -279,18 +416,14 @@ export function startAmbience(region = 'world', { hour = 'morning', weather = 'c
   const g = c.createGain(); g.gain.setValueAtTime(0.0001, c.currentTime); g.gain.exponentialRampToValueAtTime(Math.max(0.0001, musicGain()), c.currentTime + 2);
   g.connect(state.master);
   const nodes = [], timers = [];
-  const night = hour === 'night' || hour === 'dusk';
-  const windy = region === 'wilds' || region === 'reading-room' || weather === 'snow';
-  // Wind: pink noise through a slow-breathing lowpass.
-  { const src = c.createBufferSource(); src.buffer = state.noise; src.loop = true; const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 380; const wg = c.createGain(); wg.gain.value = windy ? 0.16 : 0.07; const lfo = c.createOscillator(); lfo.frequency.value = 0.08; const lg = c.createGain(); lg.gain.value = 180; lfo.connect(lg).connect(lp.frequency); lfo.start(); src.connect(lp).connect(wg).connect(g); src.start(); nodes.push(src, lfo); }
-  // Water near the pond, the meadow's stream, the reading room's river bend.
-  if (['pond', 'meadow', 'world', 'hearth'].includes(region)) { const src = c.createBufferSource(); src.buffer = state.noise; src.loop = true; const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = region === 'pond' ? 900 : 1400; bp.Q.value = 0.9; const wg = c.createGain(); wg.gain.value = region === 'pond' ? 0.07 : 0.03; const lfo = c.createOscillator(); lfo.frequency.value = 0.35; const lg = c.createGain(); lg.gain.value = 320; lfo.connect(lg).connect(bp.frequency); lfo.start(); src.connect(bp).connect(wg).connect(g); src.start(); nodes.push(src, lfo); }
-  // Rain: brighter noise plus occasional drips.
-  if (weather === 'rain') { const src = c.createBufferSource(); src.buffer = state.noise; src.loop = true; const hp = c.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 2200; const wg = c.createGain(); wg.gain.value = 0.11; src.connect(hp).connect(wg).connect(g); src.start(); nodes.push(src); const drip = () => { if (state.amb.key !== key) return; tone(c.currentTime, { freq: 1800 + Math.random() * 900, type: 'sine', peak: 0.014, a: 0.002, d: 0.08, pan: Math.random() * 2 - 1, dest: g }); timers.push(setTimeout(drip, 180 + Math.random() * 500)); }; timers.push(setTimeout(drip, 400)); }
-  // Birds by day (not in rain), crickets at night, in the green places.
+  const night = isNight(hour);
+  const windy = region === 'wilds' || weather === 'snow';
+  { const src = c.createBufferSource(); src.buffer = state.noise; src.loop = true; const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 380; const wg = c.createGain(); wg.gain.value = windy ? 0.08 : 0.03; const lfo = c.createOscillator(); lfo.frequency.value = 0.08; const lg = c.createGain(); lg.gain.value = 180; lfo.connect(lg).connect(lp.frequency); lfo.start(); src.connect(lp).connect(wg).connect(g); src.start(); nodes.push(src, lfo); }
+  if (['pond', 'meadow', 'world', 'hearth'].includes(region)) { const src = c.createBufferSource(); src.buffer = state.noise; src.loop = true; const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = region === 'pond' ? 900 : 1400; bp.Q.value = 0.9; const wg = c.createGain(); wg.gain.value = region === 'pond' ? 0.04 : 0.015; const lfo = c.createOscillator(); lfo.frequency.value = 0.35; const lg = c.createGain(); lg.gain.value = 320; lfo.connect(lg).connect(bp.frequency); lfo.start(); src.connect(bp).connect(wg).connect(g); src.start(); nodes.push(src, lfo); }
+  if (weather === 'rain') { const src = c.createBufferSource(); src.buffer = state.noise; src.loop = true; const hp = c.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 2200; const wg = c.createGain(); wg.gain.value = 0.07; src.connect(hp).connect(wg).connect(g); src.start(); nodes.push(src); }
   const green = ['world', 'hearth', 'rootwood', 'meadow', 'pond', 'thicket', 'terraces'].includes(region);
   if (green && !night && weather !== 'rain' && season !== 'winter') {
-    const chirp = () => { if (state.amb.key !== key) return; const base = 2200 + Math.random() * 1400; const n = 2 + Math.floor(Math.random() * 4); const pan = Math.random() * 1.6 - 0.8; for (let i = 0; i < n; i += 1) { const t = c.currentTime + i * (0.07 + Math.random() * 0.06); tone(t, { freq: base * (1 + (Math.random() - 0.5) * 0.18), type: 'sine', peak: 0.012, a: 0.01, d: 0.07, pan, dest: g }); } timers.push(setTimeout(chirp, 2500 + Math.random() * 7000)); };
+    const chirp = () => { if (state.amb.key !== key) return; const base = 2200 + Math.random() * 1400; const n = 2 + Math.floor(Math.random() * 4); const pan = Math.random() * 1.6 - 0.8; for (let i = 0; i < n; i += 1) { const t = c.currentTime + i * (0.07 + Math.random() * 0.06); tone(t, { freq: base * (1 + (Math.random() - 0.5) * 0.18), type: 'sine', peak: 0.014, a: 0.01, d: 0.07, pan, dest: g }); } timers.push(setTimeout(chirp, 3500 + Math.random() * 8000)); };
     timers.push(setTimeout(chirp, 1500 + Math.random() * 3000));
   }
   if (green && night && season !== 'winter') {
@@ -311,5 +444,5 @@ export function stopAmbience(fade = 0.6) {
   a.gain = null; a.nodes = [];
 }
 
-/** Everything off — leaving the world for a session that carries its own sound. */
-export function silenceWorld() { stopMusic(0.5); stopAmbience(0.5); state.music.region = null; }
+/** Leaving the village for a screen with no place of its own: the birds go quiet, the song plays on. */
+export function silenceWorld() { stopAmbience(0.5); }

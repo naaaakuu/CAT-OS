@@ -152,7 +152,7 @@ export const RELIABILITY_LABELS = Object.freeze({
 
 export const PJ_DNA_COPY = Object.freeze({
   traitQuiet: (patternName, cleanSessions) => ({
-    title: `${patternName} — going quiet`,
+    title: `${patternName}going quiet`,
     body: `A pull that used to appear in your solving has not landed once in your last ${cleanSessions} sessions. That is growth you earned.`,
   }),
   trapAffinity: (patternName, count, items) => ({

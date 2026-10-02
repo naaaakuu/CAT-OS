@@ -46,7 +46,7 @@
     "reasoning_patterns": ["disc.question_then_answer", "disc.concession", "disc.demonstrative", "disc.lexical_chain", "struct.question_answer"],
     "quality": {
       "status": "reviewed",
-      "adversarial_review": "The live rival is built out of vocabulary: three of the four sentences use the language of truth and error — correct, misdescribe, correspondence — and the sentence about definitions that survived a century sits most comfortably beside the one that says a definition cannot be false, since both end on the word truth or its cousin. That pairing strands 'that test', which has no test behind it once the sentence naming one has been pushed to the end. A second rival opens on 'Nothing follows from a definition except what was put into it', a flat general truth with no backward reference at its head; it closes with 'the answer is no', and in the first seat there is no question for it to answer. A third rival puts the concession second, binding its 'It' to the definition in the opening sentence; the concession's 'still' then concedes against a claim the paragraph has not yet made.",
+      "adversarial_review": "The live rival is built out of vocabulary: three of the four sentences use the language of truth and error, correct, misdescribe, correspondence, and the sentence about definitions that survived a century sits most comfortably beside the one that says a definition cannot be false, since both end on the word truth or its cousin. That pairing strands 'that test', which has no test behind it once the sentence naming one has been pushed to the end. A second rival opens on 'Nothing follows from a definition except what was put into it', a flat general truth with no backward reference at its head; it closes with 'the answer is no', and in the first seat there is no question for it to answer. A third rival puts the concession second, binding its 'It' to the definition in the opening sentence; the concession's 'still' then concedes against a claim the paragraph has not yet made.",
       "blind_solve": null
     },
     "source": {
@@ -59,7 +59,7 @@
     "date_added": "2026-09-13",
     "batch_id": "batch-pj-003",
     "prompt_version": "content engine v1 (content/taxonomy/AUTHORING.md)",
-    "reviewer_notes": "A cat-tier question-and-answer item whose four sentences deliberately share a vocabulary of truth and falsity, so that surface matching produces a wrong pair. The real spine is a sequence of moves — question, answer, concession, verdict — and each joint is welded by a small word: the answer, still, that test."
+    "reviewer_notes": "A cat-tier question-and-answer item whose four sentences deliberately share a vocabulary of truth and falsity, so that surface matching produces a wrong pair. The real spine is a sequence of moves, question, answer, concession, verdict, and each joint is welded by a small word: the answer, still, that test."
   },
   "sentences": [
     {
@@ -119,7 +119,7 @@
       {
         "order": "DBAC",
         "trap_type": "lexical_decoy",
-        "why_tempting": "The answer ends on what a definition cannot do — misdescribe — and the verdict ends on correspondence, which is the same idea in a longer word. Two sentences that finish on the vocabulary of truth look like a pair, and the concession, which talks about theorems and boundaries, looks like the odd one that can be tucked in anywhere.",
+        "why_tempting": "The answer ends on what a definition cannot do, misdescribe, and the verdict ends on correspondence, which is the same idea in a longer word. Two sentences that finish on the vocabulary of truth look like a pair, and the concession, which talks about theorems and boundaries, looks like the odd one that can be tucked in anywhere.",
         "where_it_breaks": "The verdict says the survivors 'passed that test'. In the third seat no test has been named, because the sentence that names one, the test of what a definition lets you prove, has been moved behind it. Shared vocabulary is a weaker signal than a demonstrative, and here the two disagree."
       },
       {
@@ -132,7 +132,7 @@
         "order": "DCBA",
         "trap_type": "false_pronoun_binding",
         "why_tempting": "The concession opens 'It can still be a bad definition', and there is a definition in the first sentence for 'It' to bind to. Read that way the paragraph seems to move briskly from the student's question to the answer that matters.",
-        "where_it_breaks": "'Still' concedes against something asserted, and the assertion it needs — that a definition cannot be false at all — is in the sentence this order pushes behind it. The paragraph would take back a claim it has not yet made, and would then make it."
+        "where_it_breaks": "'Still' concedes against something asserted, and the assertion it needs, that a definition cannot be false at all, is in the sentence this order pushes behind it. The paragraph would take back a claim it has not yet made, and would then make it."
       }
     ],
     "trap_named": "The trap is a shared vocabulary standing in for a shared joint. This paragraph is about truth, so nearly every sentence in it uses a word from that family, and a solver who follows lexical chains will be pulled towards a pair the argument forbids. Words tell you that sentences belong in the same paragraph; only references, connectives and concessions tell you which sentence stands next to which. Where a lexical chain and a demonstrative disagree, the demonstrative decides.",

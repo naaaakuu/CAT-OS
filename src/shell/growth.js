@@ -116,7 +116,7 @@ export async function renderGrowth(outlet, { storage }) {
     body.innerHTML = `
       <div class="reach__empty">
         <h1>Your growth is still loading</h1>
-        <p>The library did not finish downloading, so this would not be the whole picture. Nothing is lost — it is all on this device.</p>
+        <p>The library did not finish downloading, so this would not be the whole picture. Nothing is lost: it is all on this device.</p>
         <p><button class="btn btn--primary" onclick="location.reload()">Try again</button></p>
       </div>`;
     return;
@@ -386,8 +386,8 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
         ['Root families met', `${s.rootwood.metCount} / ${s.rootwood.total}`],
         ['Word parts climbed', `${s.terraces.done} / ${s.terraces.total}`],
         ['Quarter solved', `${s.loom.solved + s.table.solved + s.bench.solved} / ${s.loom.total + s.table.total + s.bench.total}`],
-        ['Treasures made', `${s.pets.treasures.filter((t) => t.made).length} / ${s.pets.treasures.length}`],
-        ['Gifts gathered', String(s.pets.earnedTotal)],
+        ['Village level', String(s.pets.level.level)],
+        ['Stars earned', String(s.pets.stars)],
         ['Days practised', String(s.hearth.activeDays)],
         ['Longest run', `${s.hearth.streak.best} days`],
       ].map(([k, v]) => `<div class="nums__row nums__row--plain"><span>${escapeHTML(k)}</span><b>${escapeHTML(v)}</b></div>`).join('')}
@@ -422,14 +422,14 @@ async function renderNumbers({ s, rcW, sessions, lessons, reflections, items, st
     out.push(`
       <div class="nums">
         <p class="nums__label">Lessons kept (${lessons.length})</p>
-        ${lessons.slice(0, 6).map((l) => `<p class="nums__obs"><b>${escapeHTML(l.title ?? '')}</b>${l.recall ? ` — ${escapeHTML(l.recall)}` : ''}</p>`).join('')}
+        ${lessons.slice(0, 6).map((l) => `<p class="nums__obs"><b>${escapeHTML(l.title ?? '')}</b>${l.recall ? `${escapeHTML(l.recall)}` : ''}</p>`).join('')}
       </div>`);
   }
   if (reflections.length) {
     out.push(`
       <div class="nums">
         <p class="nums__label">What you said about it</p>
-        ${reflections.slice(0, 4).map((r) => `<p class="nums__obs"><i>${escapeHTML(r.text ?? '')}</i><small> — ${escapeHTML(formatDate(r.updated_at ?? ''))}</small></p>`).join('')}
+        ${reflections.slice(0, 4).map((r) => `<p class="nums__obs"><i>${escapeHTML(r.text ?? '')}</i><small>…${escapeHTML(formatDate(r.updated_at ?? ''))}</small></p>`).join('')}
       </div>`);
   }
 

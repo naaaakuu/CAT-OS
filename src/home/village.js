@@ -1,11 +1,15 @@
 /**
- * village.js (screen) — #/world, the painted village where the six pets live.
+ * village.js (screen) — #/world, the painted village where the six friends live.
  *
- * The painting fills the screen and nothing sits on it but three small
- * things: Toffee's flame (top left), the satchel and the cottage (top
- * right), and today's wishes (bottom). Everything else is IN the world:
- * tap a pet or its house for its card, tap the clock tower for progress,
- * tap your cottage for the menu.
+ * The whole game on one screen, in the order a learner reads it:
+ *
+ *   TOP      Toffee's fire (the days in a row) · the village level and its
+ *            stars · your friends · your cottage (sound, settings)
+ *   THE MAP  the painting, alive: friends walking, doing chores, waving.
+ *            A "!" floats over each of today's three friends.
+ *   BOTTOM   today's three friends and their gift, and ONE big button:
+ *            "Help Chai · Read a short passage · 4 min". One tap and you
+ *            are learning; every round brings the village back to life.
  *
  * The camera is a transform on one 1536×1024 layer, so every coordinate
  * below is a pixel of the painting (src/pets/paths.js), whatever the screen.
@@ -14,19 +18,20 @@
 import { loadWorld, loadWorldRecords, deriveWorldState } from '../world/state.js';
 import { loadValley, saveValley, valleyName } from '../world/companion.js';
 import { derivePets } from '../pets/economy.js';
-import { PETS, PET_BY_ID, LINES, GIFTS, petForPlace } from '../pets/pets.js';
-import { MAP, HOMES, PLACES, NODES, LAMPS, WINDOWS, CLOCK } from '../pets/paths.js';
-import { petSprite, giftIcon } from '../pets/sprite.js';
+import { PETS, PET_BY_ID, LINES, lineFor, petForPlace } from '../pets/pets.js';
+import { MAP, HOMES, PLACES, NODES, LAMPS, WINDOWS, CLOCK, nearestNode } from '../pets/paths.js';
+import { petRig, petPortrait } from '../pets/sprite.js';
+import { nextFor } from '../pets/next.js';
 import { createLife, PET_SIZE } from './life.js';
 import { mountMotion } from './motion.js';
-import { renderCard, treasureLayer } from './cards.js';
+import { renderCard, decorLayer, ACT } from './cards.js';
 import { openModal, closeModal } from '../ui/modal.js';
 import { play, unlock, startMusic, startAmbience } from '../world/audio.js';
 import { motionReduced } from '../core/engagement/feedback.js';
 import { escapeHTML } from '../core/utils/format.js';
 import { hourWord, weatherWord, seasonWord } from '../world/engine/palette.js';
 
-const MOOD_LABEL = { glowing: 'glowing', happy: 'happy', missing: 'missing you', sleepy: 'sleepy', wilting: 'wilting', new: 'waiting to meet you' };
+const MOOD_LABEL = { glowing: 'very happy', happy: 'happy', missing: 'missing you', sleepy: 'sleepy', wilting: 'lonely', new: 'waiting to meet you' };
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const store = {
   get: (k) => { try { return localStorage.getItem(k); } catch { return null; } },
@@ -49,12 +54,13 @@ export async function renderVillageHome(outlet, ctx) {
   const atmo = state.atmo;
   const reduced = motionReduced();
   const name = valleyName(valley);
+  const firstVisit = !valley.awakened_at;
 
   outlet.innerHTML = `
     <section class="cw" data-hour="${atmo.hour}" data-weather="${atmo.weather}" data-season="${atmo.season}" aria-label="Your village">
       <h1 class="sr-only">${escapeHTML(name)}: your village</h1>
       <p class="sr-only" aria-live="polite" data-said></p>
-      <div class="cw-viewport" tabindex="0" role="group" aria-label="The village. Drag or use the arrow keys to look around; Tab to visit a pet or a building.">
+      <div class="cw-viewport" tabindex="0" role="group" aria-label="The village. Drag or use the arrow keys to look around; Tab to visit a friend or a building.">
         <div class="cw-map" style="width:${MAP.w}px;height:${MAP.h}px">
           <img class="cw-art" src="${MAP.src}" alt="" draggable="false" decoding="async" fetchpriority="high">
           <div class="cw-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -69,21 +75,24 @@ export async function renderVillageHome(outlet, ctx) {
         </div>
       </div>
       <header class="cw-hud">
-        <button class="cw-flame" data-open="hearth" aria-label="Toffee's fire: ${pets.flame.days} day glow. ${escapeHTML(name)}."></button>
+        <div class="cw-hud__left">
+          <button class="cw-chip cw-chip--fire" data-open="fire"></button>
+          <button class="cw-chip cw-chip--level" data-open="level"></button>
+        </div>
         <div class="cw-hud__right">
-          <button class="cw-round" data-open="satchel" aria-label="Your satchel: gifts and treasures">${bagSVG}<i class="cw-badge" hidden></i></button>
+          <button class="cw-round" data-open="friends" aria-label="Your six friends: who they are and what they teach">${friendsSVG}</button>
           <button class="cw-round" data-open="cottage" aria-label="Your cottage: sound, settings and progress">${houseSVG}</button>
         </div>
       </header>
-      <nav class="cw-camera" aria-label="Map view">
-        <button data-camera="out" aria-label="Zoom out" title="Zoom out">−</button>
-        <button data-camera="overview" aria-label="Show the whole village" title="Show the whole village"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/></svg></button>
-        <button data-camera="in" aria-label="Zoom in" title="Zoom in">+</button>
-      </nav>
-      <button class="cw-today" data-open="wishes"></button>
+      <div class="cw-dock">
+        <button class="cw-today" data-open="today"></button>
+        <a class="cw-play" data-play href="#/world"></a>
+      </div>
+      <button class="cw-overview" data-camera="overview" aria-label="Show the whole village" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/></svg></button>
       <button class="cw-edge" hidden></button>
       <div class="cw-toast" role="status" aria-live="polite"></div>
       <div class="cw-overlay" hidden><div class="cw-scrim" data-close></div><section class="cw-card"></section></div>
+      <div class="cw-party" hidden></div>
     </section>`;
 
   const root = outlet.querySelector('.cw');
@@ -92,6 +101,7 @@ export async function renderVillageHome(outlet, ctx) {
   const overlay = root.querySelector('.cw-overlay');
   const card = root.querySelector('.cw-card');
   const toastEl = root.querySelector('.cw-toast');
+  const party = root.querySelector('.cw-party');
   let disposed = false;
   const timers = new Set();
   const later = (fn, ms) => { const id = setTimeout(() => { timers.delete(id); if (!disposed) fn(); }, ms); timers.add(id); return id; };
@@ -99,7 +109,9 @@ export async function renderVillageHome(outlet, ctx) {
   /* ---------------- The camera ---------------- */
   const cam = { x: NODES.pc.x, y: NODES.pc.y + 40, z: 1 };
   let vw = 1, vh = 1, base = 1, minZoom = 1, laidOut = false, tween = null, onCamera = () => {};
+  const MAX_Z = 1.7;
   const scale = () => base * cam.z;
+  const overviewBtn = root.querySelector('.cw-overview');
   const apply = () => {
     const s = scale();
     const hw = vw / 2 / s, hh = vh / 2 / s;
@@ -107,8 +119,7 @@ export async function renderVillageHome(outlet, ctx) {
     cam.y = hh * 2 >= MAP.h ? MAP.h / 2 : clamp(cam.y, hh, MAP.h - hh);
     map.style.transform = `translate3d(${(vw / 2 - cam.x * s).toFixed(2)}px,${(vh / 2 - cam.y * s).toFixed(2)}px,0) scale(${s.toFixed(4)})`;
     map.style.setProperty('--inv', (1 / s).toFixed(4));
-    root.querySelector('[data-camera="out"]').disabled = cam.z <= minZoom + 0.005;
-    root.querySelector('[data-camera="in"]').disabled = cam.z >= 1.895;
+    overviewBtn.setAttribute('aria-pressed', String(cam.z <= minZoom + 0.01));
     onCamera();
   };
   const layout = () => {
@@ -116,7 +127,7 @@ export async function renderVillageHome(outlet, ctx) {
     base = Math.max(vw / MAP.w, vh / MAP.h);
     minZoom = Math.min(vw / MAP.w, vh / MAP.h) / base;
     if (!laidOut && vw >= 900) cam.z = minZoom;
-    cam.z = clamp(cam.z, minZoom, 1.9);
+    cam.z = clamp(cam.z, minZoom, MAX_Z);
     laidOut = true;
     apply();
   };
@@ -139,12 +150,11 @@ export async function renderVillageHome(outlet, ctx) {
     else panTo(p.x + (0.5 - 0.36) * vw / s, p.y, { ms: 600 });
   };
   const ro = new ResizeObserver(layout); ro.observe(viewport); layout();
-  root.querySelector('.cw-camera').addEventListener('click', (e) => {
-    const action = e.target.closest('[data-camera]')?.dataset.camera;
-    if (!action) return;
+  overviewBtn.addEventListener('click', () => {
     tween = null; fling = null;
-    if (action === 'overview') panTo(MAP.w / 2, MAP.h / 2, { z: minZoom, ms: 650 });
-    else panTo(cam.x, cam.y, { z: clamp(cam.z * (action === 'in' ? 1.22 : 1 / 1.22), minZoom, 1.9), ms: 300 });
+    play('tap');
+    if (cam.z <= minZoom + 0.01) panTo(NODES.pc.x, NODES.pc.y + 40, { z: Math.max(minZoom, Math.min(1, MAX_Z)), ms: 650 });
+    else panTo(MAP.w / 2, MAP.h / 2, { z: minZoom, ms: 650 });
   });
 
   /* Drag, fling, pinch, wheel, keys. A drag never becomes a tap. */
@@ -162,7 +172,7 @@ export async function renderVillageHome(outlet, ctx) {
     ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (ptrs.size >= 2 && drag.pinch) {
       const [a, b] = [...ptrs.values()];
-      cam.z = clamp(drag.z * Math.hypot(a.x - b.x, a.y - b.y) / drag.pinch, minZoom, 1.9);
+      cam.z = clamp(drag.z * Math.hypot(a.x - b.x, a.y - b.y) / drag.pinch, minZoom, MAX_Z);
       moved = true; apply(); return;
     }
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
@@ -195,17 +205,17 @@ export async function renderVillageHome(outlet, ctx) {
   viewport.addEventListener('click', (e) => { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
   viewport.addEventListener('wheel', (e) => {
     e.preventDefault(); tween = null;
-    if (e.ctrlKey) { cam.z = clamp(cam.z * (1 - e.deltaY * 0.01), minZoom, 1.9); apply(); return; }
+    if (e.ctrlKey) { cam.z = clamp(cam.z * (1 - e.deltaY * 0.01), minZoom, MAX_Z); apply(); return; }
     const s = scale(); cam.x += e.deltaX / s; cam.y += e.deltaY / s; apply();
   }, { passive: false });
   viewport.addEventListener('keydown', (e) => {
     const s = scale(), step = 70 / s;
     const keys = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
     if (keys[e.key] && e.target === viewport) { e.preventDefault(); panTo(cam.x + keys[e.key][0], cam.y + keys[e.key][1], { ms: 220 }); }
-    if ((e.key === '+' || e.key === '=') && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z + 0.15, minZoom, 1.9); apply(); }
-    if (e.key === '-' && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z - 0.15, minZoom, 1.9); apply(); }
+    if ((e.key === '+' || e.key === '=') && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z + 0.15, minZoom, MAX_Z); apply(); }
+    if (e.key === '-' && e.target === viewport) { e.preventDefault(); cam.z = clamp(cam.z - 0.15, minZoom, MAX_Z); apply(); }
   });
-  // A focused pet or building that sits off-screen is brought into view.
+  // A focused friend or building that sits off-screen is brought into view.
   viewport.addEventListener('focusin', (e) => {
     const p = e.target.closest('[data-pet],[data-spot]');
     if (!p) return;
@@ -215,7 +225,9 @@ export async function renderVillageHome(outlet, ctx) {
   });
 
   /* ---------------- Life ---------------- */
-  const life = createLife(root, { pets, atmo, reduced, sizes: PET_SIZE });
+  const life = createLife(root, { pets, atmo, reduced });
+  // For the browser gates: put the camera somewhere, find a friend.
+  root.__village = { look: (x, y, z = cam.z) => panTo(x, y, { z: clamp(z, minZoom, MAX_Z), ms: 0 }), positionOf: (id) => life.positionOf(id) };
   viewport.addEventListener('click', (e) => {
     if (e.target.closest('button')) return;
     const bounds = map.getBoundingClientRect(), s = scale();
@@ -231,24 +243,30 @@ export async function renderVillageHome(outlet, ctx) {
   const mountPainting = () => { if (!disposed) motion = mountMotion(map, { atmo: root.dataset.hour ? { ...atmo, hour: root.dataset.hour } : atmo, reduced }); };
   if (art.complete && art.naturalWidth) mountPainting(); else art.decode().then(mountPainting, mountPainting);
 
-  /* Whoever needs a visit, when they are off the edge of a phone: a small
-     chip at that edge, pointing, that brings the village round to them. */
+  const onScreen = (id, margin = 0) => {
+    const at = life.positionOf(id), s = scale();
+    const sx = vw / 2 + (at.x - cam.x) * s, sy = vh / 2 + (at.y - cam.y) * s;
+    return sx > margin && sx < vw - margin && sy > 60 + margin && sy < vh - 150 - margin;
+  };
+
+  /* Whoever the big button is for, when they are off the edge of a phone:
+     a small chip at that edge, pointing, that brings the village round to them. */
   const edge = root.querySelector('.cw-edge');
   let edgeFor = null;
   const placeEdge = () => {
-    const id = openKind ? null : life.thinker();
+    const id = openKind || firstVisit ? null : pets.play;
     const at = id && life.positionOf(id), s = scale();
     const sx = at ? vw / 2 + (at.x - cam.x) * s : 0, sy = at ? vh / 2 + (at.y - cam.y) * s : 0;
-    const off = !!at && (sx < 16 || sx > vw - 16 || sy < 70 || sy > vh - 90);
+    const off = !!at && (sx < 16 || sx > vw - 16 || sy < 70 || sy > vh - 150);
     if (edge.hidden === off) edge.hidden = !off;
     if (!off) return;
     if (edgeFor !== id) {
       edgeFor = id;
       const p = PET_BY_ID.get(id);
-      edge.innerHTML = `${petSprite(id, { size: 34 })}${giftIcon(p.gift, 16)}<i aria-hidden="true"></i>`;
-      edge.setAttribute('aria-label', `${p.name} would like a visit. Show ${p.name}.`);
+      edge.innerHTML = `${petPortrait(id, 32)}<b>!</b><i aria-hidden="true"></i>`;
+      edge.setAttribute('aria-label', `${p.name} needs your help. Show ${p.name}.`);
     }
-    const ex = clamp(sx, 34, vw - 34), ey = clamp(sy, 100, vh - 120);
+    const ex = clamp(sx, 34, vw - 34), ey = clamp(sy, 110, vh - 170);
     edge.style.left = `${ex}px`; edge.style.top = `${ey}px`;
     edge.style.setProperty('--turn', `${Math.atan2(sy - ey, sx - ex).toFixed(3)}rad`);
   };
@@ -258,25 +276,34 @@ export async function renderVillageHome(outlet, ctx) {
 
   /* ---------------- The HUD ---------------- */
   const hud = () => {
-    const f = pets.flame;
-    const vname = valley?.name ? valleyName(valley) : 'Your village';
-    root.querySelector('.cw-flame').innerHTML = `${flameSVG(f.tier)}${f.days ? `<span class="cw-flame__n"><b>${f.days}</b><small>${f.days === 1 ? 'day' : 'days'}</small></span>` : ''}<span class="cw-flame__name">${escapeHTML(vname)}</span>`;
-    root.querySelector('.cw-flame').setAttribute('aria-label', `${f.days ? `Toffee's fire: a ${f.days}-day glow` : "Toffee's fire: waiting for its first spark"}. ${vname}.`);
-    const done = pets.wishesDone;
-    root.querySelector('.cw-today').innerHTML = `<span class="cw-today__dots">${pets.wishes.map((w) => `<i class="${w.done ? 'is-done' : ''}" style="--c:var(--pet-${w.pet})"></i>`).join('')}</span><span>${done === 3 ? 'All three wishes granted' : `${done} of 3 wishes`}</span>`;
-    root.querySelector('.cw-today').setAttribute('aria-label', `Today's wishes: ${done} of 3 granted. Open the fire.`);
-    root.querySelector('.cw-badge').hidden = !pets.nextTreasure?.affordable;
-    root.querySelector('.cw-treasures').innerHTML = treasureLayer(pets);
+    const f = pets.flame, L = pets.level, T = pets.today;
+    const fire = root.querySelector('.cw-chip--fire');
+    fire.innerHTML = `${flameSVG(f.tier)}<b>${f.days}</b>`;
+    fire.setAttribute('aria-label', f.days ? `Toffee's fire: ${f.days} ${f.days === 1 ? 'day' : 'days'} in a row` : "Toffee's fire: help any friend today to light it");
+    fire.classList.toggle('is-out', !f.today);
+    const lv = root.querySelector('.cw-chip--level');
+    lv.innerHTML = `<span class="cw-lv"><small>Lv</small><b>${L.level}</b></span><span class="cw-lvbar" aria-hidden="true"><i style="width:${Math.round(L.pct * 100)}%"></i></span><span class="cw-starcount">${starSVG}<b>${pets.stars}</b></span>`;
+    lv.setAttribute('aria-label', `Village level ${L.level}. ${pets.stars} stars; ${L.need} more for level ${L.level + 1}.`);
+    const today = root.querySelector('.cw-today');
+    today.innerHTML = `<span class="cw-today__faces">${T.picks.map((id, i) => `<span class="cw-face ${T.done[i] ? 'is-done' : ''}">${petPortrait(id, 30)}${T.done[i] ? '<i aria-hidden="true">✓</i>' : ''}</span>`).join('')}</span><span class="cw-today__gift ${T.gift ? 'is-open' : ''}" aria-hidden="true">${giftSVG}</span><span class="cw-today__text">${T.gift ? 'Today\'s gift is yours!' : `${T.doneCount} of 3 helped`}</span>`;
+    today.setAttribute('aria-label', `Today's three friends: ${T.doneCount} of 3 helped. ${T.gift ? 'Today\'s gift is open.' : 'Help all three for a gift of 5 stars.'}`);
+    const id = pets.play, who = PET_BY_ID.get(id), next = nextFor(id, world, { first: pets.pets.find((p) => p.id === id)?.isNew });
+    const playEl = root.querySelector('.cw-play');
+    playEl.setAttribute('href', next?.href ?? `#/world/place/${who.places[0]}`);
+    playEl.innerHTML = `${petPortrait(id, 44)}<span class="cw-play__text"><b>${T.gift ? 'Keep going: help' : 'Help'} ${who.name}</b><small>${escapeHTML(ACT[id])}${next?.minutes ? ` · ${Math.max(1, Math.round(next.minutes))} min` : ''}</small></span><span class="cw-play__go" aria-hidden="true">${playSVG}</span>`;
+    playEl.setAttribute('aria-label', `Play: help ${who.name}. ${ACT[id]}${next?.label ? `: ${next.label}` : ''}.`);
+    root.querySelector('.cw-treasures').innerHTML = decorLayer(pets);
     for (const p of PETS) {
       const pp = pets.pets.find((x) => x.id === p.id);
       const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
       el.dataset.word = pp.word;
-      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}. Open ${p.name}'s card.`);
+      el.setAttribute('aria-label', `${p.name}, ${MOOD_LABEL[pp.word]}. ${p.subject}.${pp.pick && !pp.helpedToday ? ' Needs your help today.' : ''} Open ${p.name}'s card.`);
     }
-    root.classList.toggle('is-festival', pets.festival);
+    life.setMarks(T.picks.filter((pid, i) => !T.done[i]));
     root.style.setProperty('--harmony', pets.harmony.toFixed(2));
   };
   hud();
+  root.querySelector('.cw-play').addEventListener('click', () => { unlock(); play('open'); });
 
   /* ---------------- Cards ---------------- */
   let openKind = null;
@@ -297,22 +324,23 @@ export async function renderVillageHome(outlet, ctx) {
     hud(); life.update(pets);
   };
   const api = {
-    storage, close, refresh, toast, play,
+    storage, close, refresh, toast, play, reduced,
     get world() { return world; }, get pets() { return pets; }, get valley() { return valley; },
     setValley: (v) => { valley = v; hud(); },
     celebrate: (id) => life.poke(id, { happy: true }),
     open: (kind, arg, trigger) => openCard(kind, arg, trigger),
-    sparkleTreasure: (id) => { const el = root.querySelector(`.cw-treasure[data-t="${id}"]`); el?.classList.add('is-new'); },
+    showPet: (id) => { reveal(life.positionOf(id)); later(() => openCard('pet', id), reduced ? 0 : 260); },
   };
   const openCard = (kind, arg, trigger) => {
     const was = openKind;
     if (was) closeModal(card);
+    if (kind === 'pet' && arg === 'toffee') kind = 'fire';
     openKind = kind;
     card.className = `cw-card cw-card--${kind}`;
     card.scrollTop = 0;
     renderCard(card, kind, arg, api);
     card.scrollTop = 0;
-    requestAnimationFrame(() => { if (kind !== 'hearth' || arg !== 'wishes') card.scrollTop = 0; });
+    requestAnimationFrame(() => { card.scrollTop = 0; });
     overlay.hidden = false;
     requestAnimationFrame(() => overlay.classList.add('is-open'));
     openModal(card, close, { returnTo: trigger ?? null });
@@ -326,7 +354,7 @@ export async function renderVillageHome(outlet, ctx) {
       unlock();
       announce(`${PET_BY_ID.get(id).name}: ${life.poke(id)}`);
       reveal(life.positionOf(id));
-      later(() => openCard('pet', id, pet), reduced ? 0 : 260);
+      later(() => openCard('pet', id, pet), reduced ? 0 : 380);
       return;
     }
     const spot = e.target.closest('[data-spot]');
@@ -334,15 +362,12 @@ export async function renderVillageHome(outlet, ctx) {
       const s = spot.dataset.spot;
       if (s === 'clock') { play('tap'); location.hash = '#/growth'; return; }
       if (s === 'cottage') { openCard('cottage', null, spot); return; }
-      if (s === 'fire' || s === 'toffee') { reveal(NODES.f1); openCard('hearth', null, spot); return; }
+      if (s === 'fire' || s === 'toffee') { reveal(NODES.f1); openCard('fire', null, spot); return; }
       if (PET_BY_ID.has(s)) { life.poke(s); reveal(life.positionOf(s)); openCard('pet', s, spot); }
       return;
     }
     const opener = e.target.closest('[data-open]');
-    if (opener && !card.contains(opener)) {
-      const k = opener.dataset.open;
-      openCard(k === 'wishes' ? 'hearth' : k, k === 'wishes' ? 'wishes' : null, opener);
-    }
+    if (opener && !card.contains(opener)) openCard(opener.dataset.open, null, opener);
   });
 
   /* ---------------- Toasts ---------------- */
@@ -353,26 +378,67 @@ export async function renderVillageHome(outlet, ctx) {
     toast.t = later(() => toastEl.classList.remove('is-in'), ms);
   }
 
+  /* ---------------- Celebrations: a new level, the day's gift ---------------- */
+  const queue = [];
+  let partying = false;
+  const celebrate = (html, sound, onDone) => { queue.push({ html, sound, onDone }); if (!partying) nextParty(); };
+  function nextParty() {
+    const c = queue.shift();
+    if (!c || disposed) { partying = false; return; }
+    partying = true;
+    if (openKind) close();
+    party.innerHTML = `<div class="cw-party__card" aria-labelledby="cw-party-h">${c.html}<button class="cw-party__ok" data-party-ok>Yay!</button></div><div class="cw-party__confetti" aria-hidden="true">${confetti()}</div>`;
+    party.hidden = false;
+    requestAnimationFrame(() => party.classList.add('is-in'));
+    play(c.sound);
+    const box = party.querySelector('.cw-party__card'), ok = party.querySelector('[data-party-ok]');
+    // A real modal: Escape closes it, Tab stays inside, and focus goes back where it was (ui/modal.js).
+    openModal(box, () => ok.click(), { returnTo: document.activeElement instanceof HTMLElement && document.activeElement !== document.body ? document.activeElement : root.querySelector('.cw-play') });
+    later(() => ok.focus({ preventScroll: true }), 60);
+    ok.addEventListener('click', () => {
+      closeModal(box);
+      party.classList.remove('is-in');
+      later(() => { party.hidden = true; party.innerHTML = ''; c.onDone?.(); nextParty(); }, reduced ? 0 : 260);
+    }, { once: true });
+  }
+  const checkParties = () => {
+    const L = pets.level.level, seen = Number(store.get('catos:level-seen'));
+    if (!seen) store.set('catos:level-seen', String(L));
+    else if (L > seen) {
+      store.set('catos:level-seen', String(L));
+      const d = pets.decor.find((x) => x.level === L);
+      celebrate(`<p class="cw-party__eyebrow">The village grew</p><h2 id="cw-party-h">Level ${L}!</h2>${d ? `<p class="cw-party__new">New: <b>${escapeHTML(d.name)}</b></p><p>${escapeHTML(d.appears)}</p>` : '<p>Every friend in the village is cheering.</p>'}`, 'levelup', () => {
+        root.querySelectorAll(`.cw-treasure[data-t="${d?.id}"]`).forEach((el) => el.classList.add('is-new'));
+        for (const p of PETS) later(() => life.poke(p.id, { happy: true, quiet: true }), 100 + Math.random() * 700);
+      });
+    }
+    if (pets.today.gift && store.get('catos:gift-day') !== pets.today.key) {
+      store.set('catos:gift-day', pets.today.key);
+      celebrate(`<p class="cw-party__eyebrow">All three friends helped</p><span class="cw-party__chest" aria-hidden="true">${giftSVG}</span><h2 id="cw-party-h">Today's gift: +5 ${starSVG}</h2><p>Come back tomorrow: three more friends will need you.</p>`, 'chest');
+    }
+  };
+
   /* ---------------- Coming back from a run ---------------- */
+  let welcomed = false;
   {
     const last = pets.last;
     const seen = sessionStorage.getItem('world:toasted');
     const focusSlug = sessionStorage.getItem('world:focus');
     for (const k of ['world:focus', 'world:changed', 'world:change-line', 'world:earned', 'world:unlocked', 'world:pet', 'world:gifts', 'world:heart']) sessionStorage.removeItem(k);
     if (last && Date.now() - last.at < 20 * 60e3 && seen !== String(last.at)) {
+      welcomed = true;
       sessionStorage.setItem('world:toasted', String(last.at));
       const p = PET_BY_ID.get(last.pet);
-      const g = GIFTS[p.gift];
-      const pp = pets.pets.find((x) => x.id === last.pet);
       const home = NODES[HOMES[last.pet].node];
       panTo(home.x, home.y, { ms: 0 });
       later(() => {
-        // The toast names the gifts; the pet hops without a bubble of its own,
-        // and says its ring line only once the toast has gone (they shared a spot).
-        life.poke(last.pet, { happy: true, quiet: true });
-        toast(`${giftIcon(p.gift, 22)} <b>+${last.gifts} ${last.gifts === 1 ? g.one : g.name}</b> from ${p.name}${last.doubled ? ' · doubled by the ring' : ''}`);
-        play('ink');
-        if (last.doubled) later(() => announce(`${p.name}: ${life.poke(last.pet, { happy: true, line: `${PET_BY_ID.get(pp.supplier).name}'s ${GIFTS[PET_BY_ID.get(pp.supplier).gift].name.toLowerCase()} helped. Double today.` })}`), 4600);
+        const line = lineFor(last.pet, 'thanks', String(last.at));
+        announce(`${p.name}: ${life.poke(last.pet, { happy: true, line })}`);
+        toast(`${starSVG} <b>+${last.earned}</b> You helped ${p.name}!`);
+        play('unlock');
+        const bff = PET_BY_ID.get(p.bff);
+        if (bff) later(() => life.poke(bff.id, { happy: true, quiet: true }), 900);
+        later(checkParties, 2600);
       }, reduced ? 50 : 700);
     } else if (focusSlug && petForPlace(focusSlug)) {
       const home = NODES[HOMES[petForPlace(focusSlug)].node];
@@ -380,49 +446,49 @@ export async function renderVillageHome(outlet, ctx) {
     }
   }
 
-  /* ---------------- First visit: Toffee says hello (never blocks render) ---------------- */
-  if (!valley.awakened_at) {
+  /* ---------------- First visit: Toffee tells you what is going on ---------------- */
+  if (firstVisit) {
+    root.classList.add('is-intro');
+    // Saved before the first line: leaving mid-welcome (Enter on the big button) must not replay it every visit.
+    saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }).then((v) => { valley = v; }, () => { /* the hello will repeat once */ });
     later(async () => {
       panTo(NODES.f1.x, NODES.f1.y - 60, { ms: 0 });
       for (const [i, line] of LINES.intro.entries()) {
         if (disposed) return;
         announce(`Toffee: ${line}`);
-        await life.sayAndWait('toffee', line, { ms: 5200, tapToSkip: true });
+        const chai = i === LINES.intro.length - 1;
+        if (chai) { panTo(NODES.lib.x + 60, NODES.lib.y + 40, { ms: 1400 }); root.classList.add('is-pointing'); }
+        await life.sayAndWait(chai ? 'chai' : 'toffee', line, { ms: chai ? 9000 : 7000, tapToSkip: true });
         if (i === 1) panTo(NODES.pc.x, NODES.pc.y, { ms: 1400 });
       }
       if (disposed) return;
-      panTo(NODES.lib.x + 120, NODES.lib.y + 60, { ms: 1400 });
-      life.think('chai', true);
-      try { valley = await saveValley(storage, { awakened_at: new Date().toISOString(), met_at: new Date().toISOString() }); } catch { /* the hello will repeat once */ }
+      root.classList.remove('is-intro');
     }, reduced ? 100 : 900);
-  } else {
-    /* ---------------- A letter, after a day or more away ---------------- */
-    /* It waits pinned to the notice board (spec §2.8), in the world rather
-       than over it, until it is read; read, it is gone for the day. */
-    const letter = pets.letter;
-    if (letter && store.get('catos:letter') !== pets.today) {
-      const p = PET_BY_ID.get(letter.pet);
-      root.querySelector('.cw-spots').insertAdjacentHTML('beforeend', `<button class="cw-envelope" data-letter style="left:${BOARD.x}px;top:${BOARD.y}px;--seal:var(--pet-${letter.pet})" aria-label="A letter from ${p.name}, on the notice board">${envelopeSVG}</button>`);
-      root.querySelector('[data-letter]').addEventListener('click', (e) => {
-        e.stopPropagation();
-        store.set('catos:letter', pets.today);
-        openCard('letter', letter, root.querySelector('.cw-flame'));
-        e.currentTarget.remove();
-      });
-    }
+  } else if (!welcomed) {
+    /* ---------------- Every other arrival: they wave; after a day away, someone comes to meet you ---------------- */
+    later(() => {
+      const w = pets.welcome;
+      if (w && store.get('catos:welcome-day') !== pets.today.key) {
+        store.set('catos:welcome-day', pets.today.key);
+        life.comeSay(w.pet, nearestNode({ x: cam.x, y: cam.y + 60 }), lineFor(w.pet, 'missed', pets.today.key));
+      }
+      life.greet(PETS.map((p) => p.id).filter((id) => onScreen(id) && id !== w?.pet));
+      checkParties();
+    }, reduced ? 50 : 900);
   }
 
-  /* ---------------- Sound: on the first touch, as browsers require ---------------- */
+  /* ---------------- Sound: the song is started on the first touch (app.js) ---------------- */
   const warmth = clamp(pets.harmony, 0, 1);
+  startMusic('world', { hour: atmo.hour, warmth }); startAmbience('world', atmo);
   const startSound = () => { unlock(); startMusic('world', { hour: atmo.hour, warmth }); startAmbience('world', atmo); };
   window.addEventListener('pointerdown', startSound, { capture: true, once: true });
-  startMusic('world', { hour: atmo.hour, warmth }); startAmbience('world', atmo);
 
   /* ---------------- The hour turns while you sit here ---------------- */
   const tickHour = setInterval(() => {
     const d = new Date(), now = { hour: hourWord(d), season: seasonWord(d), weather: weatherWord(d, seasonWord(d)) };
     if (now.hour !== root.dataset.hour || now.weather !== root.dataset.weather || now.season !== root.dataset.season) {
       Object.assign(root.dataset, now); Object.assign(atmo, now); life.setAtmo(now); motion.setAtmo(now);
+      startMusic('world', { hour: now.hour, warmth });
     }
   }, 60e3);
 
@@ -466,21 +532,28 @@ function petHTML(p, pets) {
   const pp = pets.pets.find((x) => x.id === p.id);
   return `<button class="pet pet--${p.id}" data-pet="${p.id}" data-word="${pp.word}" style="--size:${PET_SIZE[p.id]}" aria-label="${p.name}">
     <span class="pet-shadow" aria-hidden="true"></span>
-    <span class="pet-body">${petSprite(p.id, { size: PET_SIZE[p.id] })}</span>
+    <span class="pet-body">${petRig(p.id, { size: PET_SIZE[p.id] })}</span>
     <span class="pet-bubble" aria-hidden="true" hidden></span>
-    <span class="pet-think" aria-hidden="true" hidden>${giftIcon(p.gift, 22)}</span>
+    <span class="pet-mark" aria-hidden="true" hidden>!</span>
   </button>`;
 }
 
-const TIER_SCALE = { embers: 0.55, small: 0.75, steady: 0.9, tall: 1, bonfire: 1.12 };
+function confetti() {
+  const colours = ['#F4C443', '#E9963A', '#8FB56A', '#D97A8A', '#93AED1', '#F6EEDB'];
+  let html = '';
+  for (let i = 0; i < 36; i += 1) html += `<i style="--x:${(Math.random() * 100).toFixed(1)}%;--d:${(Math.random() * 0.6).toFixed(2)}s;--r:${Math.round(Math.random() * 360)}deg;--c:${colours[i % colours.length]};--s:${(0.7 + Math.random() * 0.8).toFixed(2)}"></i>`;
+  return html;
+}
+
+const TIER_SCALE = { embers: 0.62, small: 0.78, steady: 0.9, tall: 1, bonfire: 1.12 };
 function flameSVG(tier) {
   const s = TIER_SCALE[tier] ?? 0.8;
   return `<svg class="cw-flame__svg cw-flame--${tier}" viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(12 22) scale(${s}) translate(-12 -22)"><path d="M12 2.6c2.4 3.3 6.2 6.2 6.2 11a6.2 6.2 0 0 1-12.4 0c0-2.7 1.3-4.5 2.7-6 .2 1.6.9 2.9 2.1 3.5-.5-3.1.3-6 1.4-8.5z" fill="#F2A23C" stroke="#7a4a1e" stroke-width="1.2" stroke-linejoin="round"/><path d="M12 11.4c1.3 1.6 2.6 2.7 2.6 4.6a2.6 2.6 0 0 1-5.2 0c0-1.5.9-2.9 2.6-4.6z" fill="#FFD978"/></g></svg>`;
 }
-/** Where a letter waits: pinned to the middle panel of the painted notice board. */
-const BOARD = { x: 813, y: 757 };
-const envelopeSVG = '<svg viewBox="0 0 40 30" aria-hidden="true"><rect x="1.5" y="3" width="37" height="25" rx="2.5" fill="#FFF6E2" stroke="#7a5a34" stroke-width="1.6"/><path d="M2.5 4.5 20 17.5 37.5 4.5" fill="none" stroke="#7a5a34" stroke-width="1.6" stroke-linejoin="round"/><circle cx="20" cy="17.5" r="4.2" style="fill:var(--seal,#C2643F)" stroke="#5a3a1a" stroke-width="1"/></svg>';
-const bagSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14l-1.2 10.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9.5 13.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+const starSVG = '<svg class="cw-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.5l-6 3.2 1.3-6.6L2.4 9.5l6.7-.8z" fill="#F4C443" stroke="#B88A12" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+const giftSVG = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="13" width="24" height="15" rx="2.5" fill="#D9603A" stroke="#5a2e1a" stroke-width="1.5"/><rect x="2.5" y="9" width="27" height="6" rx="2" fill="#E9A23B" stroke="#5a2e1a" stroke-width="1.5"/><path d="M16 9v19" stroke="#F6EEDB" stroke-width="3"/><path d="M16 9c-3-6-9-5-8-1 1 3 8 1 8 1zm0 0c3-6 9-5 8-1-1 3-8 1-8 1z" fill="#F4C443" stroke="#5a2e1a" stroke-width="1.3" stroke-linejoin="round"/></svg>';
+const playSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
+const friendsSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 19.5c.6-3.4 3-5.4 6-5.4s5.4 2 6 5.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16.5" cy="8" r="2.7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.8 13.2c2.6-.2 4.6 1.6 5.2 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
 const houseSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.5V20h12V9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 6.5V4h2v4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
 
-export { MOOD_LABEL };
+export { MOOD_LABEL, starSVG, giftSVG, flameSVG };

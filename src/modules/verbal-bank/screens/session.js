@@ -321,7 +321,7 @@ export async function renderBankSession(outlet, { storage }, params) {
       opening: top[1] > 1 ? `The same pull worked ${top[1]} times.` : 'One option was built for you, and it worked.',
       title: trapName(top[0]),
       moment: missedD?.seductive_element ? `It felt right because: ${missedD.seductive_element}` : (missedD?.why_wrong ?? ''),
-      pull: family ? `This is a ${family} trap — ${TRAP_FAMILY_LINE[family] ?? ''}.` : '',
+      pull: family ? `This is a ${family} trap…${TRAP_FAMILY_LINE[family] ?? ''}.` : '',
       notice: missedItem?.explanation?.reading_habit ?? '',
     } : { opening: s.score.correct === s.score.total ? 'Nothing here got past you.' : 'Set complete.', title: '', moment: '', pull: '', notice: session.items[0]?.explanation?.reading_habit ?? '' };
 

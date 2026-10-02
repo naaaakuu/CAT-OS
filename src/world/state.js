@@ -18,7 +18,7 @@ import { deriveEngagement } from '../core/engagement/stats.js';
 import { dayKey, shiftDay } from '../core/engagement/streaks.js';
 import { computeStreamLevel } from '../modules/language-garden/logic/effort.js';
 import { rcStars, verbalStars, titleFor, levelFromCleared } from './economy.js';
-import { derivePets, giftsBetween } from '../pets/economy.js';
+import { derivePets, changeBetween } from '../pets/economy.js';
 import { listFields, ledgerFromRecords, summarizeLedger, fieldSummary } from './lexicon.js';
 import { skillLedger, nextSkill, weakSkills } from '../core/learning/review.js';
 import { hourWord, seasonWord, weatherWord } from './engine/palette.js';
@@ -308,7 +308,7 @@ export function deriveWorldState(content, records, now = Date.now()) {
   state.weakSkills = weakSkills(state.skills);
   state.nextSkill = nextSkill(state.skills, state);
 
-  /* ---- The pets: moods, gifts, the ring, wishes, the fire, treasures (src/pets/economy.js) ---- */
+  /* ---- The friends: moods, hearts, stars, the village level, today's three, the fire (src/pets/economy.js) ---- */
   state.pets = derivePets(state, records, content, now);
   // Night reading is Chai's lamp: offered once Chai has three hearts.
   state.reading.observatory = (state.pets.pets.find((p) => p.id === 'chai')?.hearts ?? 0) >= 3;
@@ -368,23 +368,12 @@ export function starGlyphs(n, max = 3) {
 /* ------------------------------------------------------------------ */
 
 /**
- * What a run did for the pets — the reward that can be SEEN: which pet it
- * was, the gifts it made (doubled when the ring was full), and whether a
- * heart of friendship was earned.
- * @returns {{pet, gifts, doubled, heart, hearts} | null}
+ * What a run did for the village, the reward that can be SEEN: which
+ * friend it helped, the stars it earned, a new heart, a new village level
+ * and what it put on the map, and the day's gift.
+ * @returns {ReturnType<typeof changeBetween> | null}
  */
 export function petChangeLine(before, after) {
   if (!before?.pets || !after?.pets) return null;
-  const last = after.pets.last;
-  const pet = last?.pet ?? null;
-  const b = before.pets.pets.find((p) => p.id === pet), a = after.pets.pets.find((p) => p.id === pet);
-  return { pet, gifts: giftsBetween(before.pets, after.pets), doubled: !!last?.doubled, heart: !!(a && b && a.hearts > b.hearts), hearts: a?.hearts ?? 0 };
-}
-
-/** The next treasure, if this run is what made it affordable. */
-export function newlyAffordable(before, after) {
-  const t = after?.pets?.nextTreasure;
-  if (!t?.affordable) return null;
-  const was = before?.pets?.nextTreasure;
-  return was && was.id === t.id && was.affordable ? null : t;
+  return changeBetween(before.pets, after.pets);
 }

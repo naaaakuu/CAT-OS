@@ -37,7 +37,7 @@ export const SKILLS = Object.freeze([
   { key: 'inference', name: 'Inference', group: 'reading', where: 'reading-room', line: 'What follows from the text without being said.' },
   { key: 'author_purpose', name: 'Author’s purpose', group: 'reading', where: 'reading-room', line: 'What the writer is doing, not only saying.' },
   { key: 'tone', name: 'Tone', group: 'reading', where: 'reading-room', line: 'Where the writer stands.' },
-  { key: 'logical_structure', name: 'Structure', group: 'reading', where: 'reading-room', line: 'Claim, support, turn — the shape of it.' },
+  { key: 'logical_structure', name: 'Structure', group: 'reading', where: 'reading-room', line: 'Claim, support, turn: the shape of it.' },
   { key: 'paragraph_function', name: 'Paragraph function', group: 'reading', where: 'reading-room', line: 'What each paragraph is FOR.' },
   { key: 'specific_detail', name: 'Detail', group: 'reading', where: 'reading-room', line: 'Reading once, closely.' },
   { key: 'vocabulary_in_context', name: 'Words in context', group: 'reading', where: 'reading-room', line: 'A common word, used narrowly.' },

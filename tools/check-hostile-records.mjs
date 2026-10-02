@@ -59,10 +59,11 @@ export function hostileRecords() {
     { id: 'l11', kind: 'garden-session', session_type: 'nonsense', clean: 'maybe', at: ISO(1.1e7) },
     { id: 'l12', kind: 'a kind from the future', at: ISO(1.2e7) },
     { id: 'l13', kind: 'village-build', building: 'reading', level: 3 },              // no date at all
-    { id: 'l14', kind: 'village-treasure', treasure: 'kite', at: ISO(1.3e7) },        // out of order
+    // The retired treasure economy: rows a 3.0.0 learner still has, now ignored.
+    { id: 'l14', kind: 'village-treasure', treasure: 'kite', at: ISO(1.3e7) },
     { id: 'l15', kind: 'village-treasure', treasure: null, at: 'yesterday' },
     { id: 'l16', kind: 'village-treasure', treasure: 'lanterns' },                    // no date
-    { id: 'l17', kind: 'village-treasure', treasure: 'lanterns', at: ISO(1.4e7) },    // made twice
+    { id: 'l17', kind: 'village-treasure', treasure: 'lanterns', at: ISO(1.4e7) },
   ];
   return { sessions, learning };
 }
@@ -73,13 +74,17 @@ export async function checkHostileRecords() {
   const { deriveEngagement } = await load('src/core/engagement/stats.js');
   const { totalXP } = await load('src/core/engagement/xp.js');
   const { skillLedger, trapLedger, patternLedger } = await load('src/core/learning/review.js');
+  const { derivePets } = await load('src/pets/economy.js');
 
   const records = hostileRecords();
+  const retired = { sessions: [], learning: records.learning.filter((r) => String(r.kind).startsWith('village-')) };
   // An empty content registry is itself a hostile case: it is what a learner
   // who went offline before the library arrived actually has.
   const empty = { families: [], rc: [], pj: [], ps: [], ooo: [], wd: [], sp: [], pc: [], wb: [], cr: [], fields: { meadow: [], pond: [], thicket: [] } };
 
   const cases = [
+    ['derivePets (no state, no content)', () => derivePets(undefined, records, undefined, 1789000000000)],
+    ['deriveWorldState (only retired village rows)', () => deriveWorldState(empty, retired, 1789000000000)],
     ['deriveWorldState', () => deriveWorldState(empty, records, 1789000000000)],
     ['deriveEngagement', () => deriveEngagement(records.sessions, new Date(1789000000000))],
     ['totalXP', () => totalXP(records.sessions)],
@@ -104,18 +109,20 @@ export async function checkHostileRecords() {
     const s = deriveWorldState(empty, records, 1789000000000);
     const p = s.pets;
     if (!p || p.pets?.length !== 6) problems.push('the pets did not derive');
-    for (const [k, n] of Object.entries(p?.stock ?? {})) {
-      if (!Number.isFinite(n) || n < 0) problems.push(`stock.${k} is ${n}, which the satchel would print`);
-    }
     for (const pet of p?.pets ?? []) {
       if (!Number.isFinite(pet.mood) || pet.mood < 0 || pet.mood > 1) problems.push(`${pet.id}'s mood is ${pet.mood}`);
-      if (!Number.isFinite(pet.gifts) || !Number.isFinite(pet.hearts)) problems.push(`${pet.id} has gifts ${pet.gifts}, hearts ${pet.hearts}`);
+      if (!Number.isInteger(pet.hearts) || pet.hearts < 0 || pet.hearts > 5 || !Number.isFinite(pet.earned) || pet.earned < 0) problems.push(`${pet.id} has hearts ${pet.hearts}, earned ${pet.earned}`);
     }
     if (!Number.isFinite(p?.harmony)) problems.push(`harmony is ${p?.harmony}`);
-    if (!Number.isFinite(p?.flame?.days) || p.flame.days < 0) problems.push(`the flame is ${p?.flame?.days} days`);
-    if (p?.wishes?.length !== 3) problems.push(`there are ${p?.wishes?.length} wishes, not three`);
-    if ((p?.treasures ?? []).filter((t) => t.made).length > 1) problems.push('an out-of-order or repeated treasure record was counted');
+    if (!Number.isFinite(p?.stars) || p.stars < 0) problems.push(`the village has ${p?.stars} stars, which the satchel would print`);
+    if (!Number.isInteger(p?.level?.level) || p.level.level < 1 || !Number.isFinite(p.level.pct)) problems.push(`the village level is ${JSON.stringify(p?.level)}`);
+    if (p?.decor?.length !== 9 || p.decor.some((d) => typeof d.made !== 'boolean')) problems.push('the decor did not derive');
+    if (p?.today?.picks?.length !== 3 || !(p.today.doneCount >= 0 && p.today.doneCount <= 3)) problems.push(`today has ${p?.today?.picks?.length} friends to help, not three`);
+    if (!Number.isFinite(p?.flame?.days) || p.flame.days < 0 || p.flame.week?.length !== 7) problems.push(`the flame is ${p?.flame?.days} days`);
     if (!Number.isFinite(s.stars) || s.stars < 0) problems.push(`stars is ${s.stars}`);
+    // The retired treasure and build rows are ignored entirely: on their own they meet nobody and earn nothing.
+    const old = deriveWorldState(empty, retired, 1789000000000).pets;
+    if (old.stars !== 0 || old.decor.some((d) => d.made) || !old.pets.every((x) => x.isNew)) problems.push('a retired village-* record was counted');
   } catch { /* already reported above */ }
 
   return { problems, cases: cases.length, records: records.sessions.length + records.learning.length };

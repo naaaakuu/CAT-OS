@@ -61,15 +61,15 @@
  * verify.mjs checks that every module the app imports is in one of the lists.
  */
 
-const CACHE_VERSION = 40;
-const CONTENT_VERSION = 15;
+const CACHE_VERSION = 41;
+const CONTENT_VERSION = 16;
 /* Written by tools/build-precache.mjs: a hash of the CONTENT of every file
    in each list. The cache name carries it, so a release that changes a file
    ALWAYS lands in a new cache, whether or not anybody remembered to bump the
    number above. Nothing used to enforce that bump, and an installed learner
    could sit on old code forever with no symptom anybody could see. */
-const BUILD_ID = '0c2d75b5a3';
-const CONTENT_ID = 'f745ea6466';
+const BUILD_ID = '6240d12c9e';
+const CONTENT_ID = '5ef5188aef';
 const SHELL_CACHE = `cat-os-shell-v${CACHE_VERSION}.${BUILD_ID}`;
 const CONTENT_CACHE = `cat-os-content-v${CONTENT_VERSION}.${CONTENT_ID}`;
 const META_CACHE = 'cat-os-meta';

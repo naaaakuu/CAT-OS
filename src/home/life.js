@@ -3,40 +3,79 @@
  *
  * Two halves on one animation frame:
  *
- *   THE PETS   six small state machines. A pet idles at its door, blinks,
- *              hop-walks the painted paths to the plaza, a bench, the fire
- *              or a friend's house, stops to chat, carries its gift to the
- *              next pet in the ring, and goes home to sleep at night. How
- *              far and how often it wanders is its mood: a glowing pet roams
- *              and sparkles, a sleepy one dozes on its step, a wilting one
- *              sits grey by a dark window.
- *   THE AIR    one half-resolution canvas: fire sparks, chimney smoke,
- *              fireflies, butterflies, falling leaves, glints and ripples
- *              on the pond, birds, rain, motes in the afternoon light.
+ *   THE FRIENDS  six small state machines. A friend walks the painted paths
+ *                on its own two feet (an owl waddles, a pebble plods, a fox
+ *                trots, a flame bounces, a cloud floats), does chores round
+ *                its home with a prop in hand (watering, sweeping, reading,
+ *                hammering, sipping tea, raining on the flowers), visits its
+ *                best friend, chats on the plaza, greets you when you arrive
+ *                and goes home to sleep at night.
+ *   THE AIR      one half-resolution canvas: fire sparks, chimney smoke,
+ *                fireflies, butterflies, falling leaves, birds, rain, motes,
+ *                and the little things chores throw up: water drops, dust,
+ *                music notes, letters, sparkles.
  *
  * Everything is in painting pixels (src/pets/paths.js). Reduced motion
- * leaves the pets standing at home, awake, and the canvas still.
+ * leaves the friends standing at home, awake, and the canvas still.
  */
 
-import { NODES, HOMES, PLACES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT } from '../pets/paths.js';
-import { SHEETS } from '../pets/sheets.js';
-import { FRAME, giftIcon } from '../pets/sprite.js';
-import { PETS, PET_BY_ID, LINES, gossipLine, lineFor, successorOf } from '../pets/pets.js';
+import { NODES, HOMES, SPOTS, route, nearestNode, FIRE, CHIMNEYS, TEAPOT, POND, CLOCK, TREASURE_AT } from '../pets/paths.js';
+import { FRAME } from '../pets/sprite.js';
+import { PETS, PET_BY_ID, gossipLine, lineFor } from '../pets/pets.js';
 import { rng } from '../world/engine/palette.js';
+import { voice } from '../world/audio.js';
 import { createWater } from './water.js';
 
 /** Drawn height of each pet, in painting pixels. */
 export const PET_SIZE = Object.freeze({ toffee: 70, chai: 84, matcha: 78, mochi: 78, ginger: 84, mallow: 80 });
 
-const SPEED = { glowing: 46, happy: 40, missing: 30, sleepy: 24, wilting: 20, new: 36 };
+const SPEED = { glowing: 46, happy: 42, missing: 34, sleepy: 26, wilting: 24, new: 38 };
 const AWAKE = new Set(['glowing', 'happy', 'missing', 'new']);
-const CHAT_ICONS = ['♥', '♪', '…', '✿', '☺', '♫'];
+const CHAT_ICONS = ['♥', '♪', '☺', '♫', '✿'];
+const HELLO = ['Hi!', 'Hello!', 'Yay, you came!', 'Hiii!', '♥', 'You are here!'];
 const rand = (a, b) => a + Math.random() * (b - a);
 const pickOf = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+/** How each friend moves: hop height, side-to-side waddle (deg), steps per second, and float for the cloud. */
+const GAIT = {
+  toffee: { hop: 8, waddle: 4, cadence: 2.6, lift: 0.6 },
+  chai: { hop: 2.5, waddle: 8, cadence: 2.2, lift: 0.75 },
+  matcha: { hop: 5, waddle: 5, cadence: 2.5, lift: 0.7 },
+  mochi: { hop: 1.5, waddle: 6.5, cadence: 1.9, lift: 0.6 },
+  ginger: { hop: 4.5, waddle: 3, cadence: 3, lift: 0.75 },
+  mallow: { hop: 0, waddle: 3, cadence: 1.4, lift: 0, float: 5 },
+};
+
+/** Chores round each home: the prop in hand, how long, and what it throws into the air. */
+const CHORES = {
+  toffee: [{ kind: 'dance', ms: [4000, 7000], emit: 'spark', every: 260 }, { kind: 'poke', prop: 'stick', ms: [4500, 7000], emit: 'spark', every: 420 }],
+  chai: [{ kind: 'read', prop: 'book', ms: [6000, 10000], emit: 'letter', every: 900 }, { kind: 'sweep', prop: 'broom', ms: [5000, 8000], emit: 'dust', every: 520 }],
+  matcha: [{ kind: 'water', prop: 'can', ms: [5000, 8000], emit: 'drop', every: 90 }, { kind: 'sing', ms: [4000, 6500], emit: 'note', every: 700 }],
+  mochi: [{ kind: 'tea', prop: 'cup', ms: [6000, 9000], emit: 'steam', every: 500 }, { kind: 'sweep', prop: 'broom', ms: [5000, 8000], emit: 'dust', every: 600 }],
+  ginger: [{ kind: 'hammer', prop: 'hammer', ms: [4500, 7500], emit: 'spark', every: 640 }, { kind: 'sing', ms: [3500, 5500], emit: 'note', every: 650 }],
+  mallow: [{ kind: 'rain', prop: 'raincloud', ms: [5500, 8500], emit: 'drop', every: 110 }, { kind: 'sprinkle', ms: [4000, 6500], emit: 'sparkle', every: 220 }],
+};
+/** Where on the body a chore's particles come from, as a fraction of the pet's size (x toward its facing). */
+const EMIT_AT = {
+  spark: [0, -0.55], stick: [0.74, -0.18], hammer: [0.58, -0.3], letter: [0.1, -0.62], dust: [0.5, -0.02], drop: [0.66, -0.36],
+  note: [0.15, -0.95], steam: [0.42, -0.6], sparkle: [0.3, -0.5], raindrop: [0.5, -0.9],
+};
+/** Chores happen beside the door, on the path, never on the roof. */
+const YARD = { chai: ['lib', 'l1'], matcha: ['green', 'g1'], mochi: ['cabin', 'a1'], ginger: ['shop', 'w1'], mallow: ['obs', 'o1'], toffee: ['f1', 'f2'] };
+
+const PROPS = {
+  can: '<svg viewBox="0 0 40 30"><path d="M8 11h17l-2 15H10z" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 15l11-7 2 3-11 8" fill="#7FA9A0" stroke="#3f3a30" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11c0-6 13-6 13 0" fill="none" stroke="#3f3a30" stroke-width="1.8"/><circle cx="36" cy="9" r="2.4" fill="#5d8a80" stroke="#3f3a30" stroke-width="1.2"/></svg>',
+  broom: '<svg viewBox="0 0 24 50"><path d="M12 1v34" stroke="#8a5a32" stroke-width="3" stroke-linecap="round"/><path d="M5 34h14l4 15H1z" fill="#E2B86A" stroke="#5a3e22" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 38l-2 10M12 38v10M17 38l2 10" stroke="#a57a3a" stroke-width="1"/></svg>',
+  hammer: '<svg viewBox="0 0 30 34"><path d="M5 31L19 11" stroke="#8a5a32" stroke-width="3.4" stroke-linecap="round"/><rect x="11" y="2" width="17" height="10" rx="2" transform="rotate(34 19 7)" fill="#9aa3ad" stroke="#3a3a3a" stroke-width="1.5"/></svg>',
+  cup: '<svg viewBox="0 0 30 22"><ellipse cx="14" cy="18" rx="12" ry="3" fill="#F4EAD5" stroke="#5a4130" stroke-width="1.3"/><path d="M5 6h18l-2 10a3 3 0 0 1-3 2H10a3 3 0 0 1-3-2z" fill="#F6EEDC" stroke="#5a4130" stroke-width="1.4" stroke-linejoin="round"/><path d="M23 8a4 4 0 0 1 0 7" fill="none" stroke="#5a4130" stroke-width="1.4"/><path d="M7 9h14" stroke="#C2643F" stroke-width="1.6"/></svg>',
+  book: '<svg viewBox="0 0 36 24"><path d="M2 5c5-3 11-3 16 0v17c-5-3-11-3-16 0z" fill="#FBF3E0" stroke="#5a4130" stroke-width="1.4" stroke-linejoin="round"/><path d="M34 5c-5-3-11-3-16 0v17c5-3 11-3 16 0z" fill="#FBF3E0" stroke="#5a4130" stroke-width="1.4" stroke-linejoin="round"/><path d="M5 9h9M5 12h9M5 15h7M22 9h9M22 12h9M22 15h7" stroke="#b39a78" stroke-width="1"/><path class="prop__page" d="M18 5c3-2 7-2.6 11-1.6v16.4c-4-1-8-.4-11 1.6z" fill="#fffaf0" stroke="#5a4130" stroke-width="1.2"/></svg>',
+  stick: '<svg viewBox="0 0 40 12"><path d="M2 9L37 3" stroke="#7a4e2a" stroke-width="3" stroke-linecap="round"/><circle cx="37" cy="3" r="2.5" fill="#F2A23C"/></svg>',
+  raincloud: '<svg viewBox="0 0 50 30"><path d="M12 24h26a8 8 0 0 0 0-16 11 11 0 0 0-21-3 9 9 0 0 0-5 19z" fill="#E8EEF6" stroke="#6a7a90" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+};
+
 /**
  * @param {HTMLElement} root  the .cw section
- * @param {{pets, atmo, reduced, sizes}} o
+ * @param {{pets, atmo, reduced}} o
  */
 export function createLife(root, { pets: petsState, atmo, reduced }) {
   const map = root.querySelector('.cw-map');
@@ -49,27 +88,28 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   const dark = () => hour === 'night' || hour === 'dusk';
   let destroyed = false, raf = 0, last = performance.now(), now = 0;
   const reserved = new Set();
+  const parts = [];
 
-  /* ================= The pets ================= */
+  /* ================= The friends ================= */
   const actors = PETS.map((p, i) => {
     const el = root.querySelector(`.pet[data-pet="${p.id}"]`);
     const home = HOMES[p.id].node;
     const n = NODES[home];
-    const a = {
+    return {
       id: p.id, el, body: el.querySelector('.pet-body'), sprite: el.querySelector('.pet-sprite'),
-      bubble: el.querySelector('.pet-bubble'), thinkEl: el.querySelector('.pet-think'),
+      bubble: el.querySelector('.pet-bubble'), markEl: el.querySelector('.pet-mark'), shadow: el.querySelector('.pet-shadow'),
+      gait: GAIT[p.id], size: PET_SIZE[p.id],
       x: n.x + (i % 2 ? 6 : -6), y: n.y, node: home, home, path: [], state: 'idle', until: 400 + i * 700,
       next: null, facing: i % 2 ? -1 : 1, hop: 0, frame: 0, blinkAt: rand(800, 4000), blinkUntil: 0,
-      talkUntil: 0, sayUntil: 0, happyUntil: 0, reactUntil: 0, carry: null, partner: null, target: null,
-      word: 'happy', lastWrite: '', thinking: false, onArrive: null,
+      talkUntil: 0, sayUntil: 0, happyUntil: 0, reactUntil: 0, partner: null, target: null,
+      word: 'happy', lastWrite: '', lastFeet: '', marked: false, chore: null, emitAt: 0, walked: 0,
     };
-    return a;
   });
   const byId = new Map(actors.map((a) => [a.id, a]));
   const wordOf = (id) => pets.pets.find((p) => p.id === id)?.word ?? 'happy';
   for (const a of actors) a.word = wordOf(a.id);
 
-  /** Walk to a node (or a free point near it), then do `next`. */
+  /** Walk to a node (or a point near it), then do `next`. */
   const walkTo = (a, nodeId, next = 'idle', offset = null) => {
     const from = nearestNode({ x: a.x, y: a.y });
     const pts = route(from, nodeId).map((p) => ({ ...p }));
@@ -79,6 +119,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     if (a.target) reserved.delete(a.target);
     a.target = nodeId; reserved.add(nodeId);
     a.path = pts; a.state = 'walk'; a.next = next;
+    endChore(a);
     return true;
   };
   const freeNode = (list) => {
@@ -86,71 +127,84 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     return free.length ? pickOf(free) : null;
   };
 
-  const say = (a, html, ms = 2600, talk = true) => {
+  const say = (a, html, ms = 2600, { talk = true, speak = true, soft = false } = {}) => {
     a.bubble.innerHTML = html;
     a.bubble.hidden = false;
     a.bubble.classList.remove('is-out');
     a.sayUntil = now + ms;
     if (talk) a.talkUntil = now + Math.min(ms - 300, 1800);
-    a.thinkEl.hidden = true;
+    const text = a.bubble.textContent;
+    if (speak && text && !reduced) voice(a.id, text, { soft });
   };
 
-  /** What a free pet does next. The mood decides how far it goes. */
+  /* ---- Chores ---- */
+  const startChore = (a) => {
+    const list = CHORES[a.id];
+    if (!list?.length) return false;
+    const c = pickOf(list);
+    a.chore = { ...c, until: now + rand(c.ms[0], c.ms[1]) };
+    a.state = 'chore'; a.until = a.chore.until; a.emitAt = now + 300;
+    a.facing = Math.random() < 0.5 ? -1 : 1;
+    a.el.dataset.chore = c.kind;
+    if (c.prop) a.body.insertAdjacentHTML('beforeend', `<span class="prop prop--${c.prop}" aria-hidden="true">${PROPS[c.prop]}</span>`);
+    return true;
+  };
+  function endChore(a) {
+    if (!a.chore) return;
+    a.chore = null;
+    delete a.el.dataset.chore;
+    a.body.querySelector('.prop')?.remove();
+  }
+  const goChore = (a) => {
+    const spot = pickOf(YARD[a.id]);
+    if (nearestNode({ x: a.x, y: a.y }) === spot && Math.hypot(NODES[spot].x - a.x, NODES[spot].y - a.y) < 30) return startChore(a);
+    return walkTo(a, spot, 'chore', { x: rand(-16, 16), y: rand(-4, 6) });
+  };
+
+  /** What a free friend does next. The mood decides how far it goes. */
   const decide = (a) => {
     a.partner = null;
+    endChore(a);
     const w = a.word = wordOf(a.id);
-    if (a.carry) { a.carry = null; a.el.querySelector('.pet-carry')?.remove(); }
     if (reduced) { a.state = 'idle'; a.until = now + 1e9; return; }
     if (night() && a.id !== 'toffee') {
       if (a.node !== a.home) walkTo(a, a.home, 'sleep');
       else { a.state = 'sleep'; a.until = now + rand(15e3, 30e3); }
       return;
     }
-    if (a.id === 'toffee') {
-      const r = Math.random();
-      if (night()) { a.state = r < 0.7 ? 'sleep' : 'idle'; a.until = now + rand(8e3, 16e3); return; }
-      if (a.node !== a.home && r < 0.6) { walkTo(a, a.home, 'idle'); return; }
-      if (r < 0.12) { const n = freeNode(SPOTS.fire.filter((x) => x !== a.node)); if (n) { walkTo(a, n, 'idle'); return; } }
-      if (r < 0.2 && w !== 'sleepy' && w !== 'wilting') { const n = freeNode(['kiosk', 'ps', 's2']); if (n) { walkTo(a, n, 'idle'); return; } }
-      a.state = w === 'wilting' || w === 'sleepy' ? 'doze' : 'idle'; a.until = now + rand(4e3, 9e3);
-      return;
-    }
-    if (w === 'wilting') { if (a.node !== a.home) walkTo(a, a.home, 'slump'); else { a.state = 'slump'; a.until = now + 20e3; } return; }
-    if (w === 'sleepy') {
-      if (a.node !== a.home) { walkTo(a, a.home, 'doze'); return; }
-      a.state = Math.random() < 0.6 ? 'doze' : 'idle'; a.until = now + rand(6e3, 14e3); return;
-    }
-    if (a.node !== a.home && Math.random() < 0.35) { walkTo(a, a.home, 'idle'); return; }
     const r = Math.random();
-    if (w === 'missing') {
-      if (r < 0.22) { walkTo(a, 'cottage', 'look'); return; }
-      a.state = 'idle'; a.until = now + rand(5e3, 10e3);
-      if (Math.random() < 0.5) say(a, '…', 2200, false);
+    if (a.id === 'toffee') {
+      if (night()) { a.state = r < 0.6 ? 'sleep' : 'idle'; a.until = now + rand(8e3, 16e3); return; }
+      if (a.node !== a.home && r < 0.5) { walkTo(a, a.home, 'idle'); return; }
+      if (r < 0.4 && startChore(a)) return;
+      if (r < 0.5) { const n = freeNode(SPOTS.fire.filter((x) => x !== a.node)); if (n) { walkTo(a, n, 'idle'); return; } }
+      if (r < 0.6) { const n = freeNode(['kiosk', 'ps', 's2']); if (n) { walkTo(a, n, 'idle'); return; } }
+      a.state = 'idle'; a.until = now + rand(3e3, 7e3);
       return;
     }
-    if (w === 'new') {
-      if (r < 0.38) { const n = freeNode(SPOTS.plaza); if (n) { walkTo(a, n, 'idle'); return; } }
-      a.state = 'idle'; a.until = now + rand(4e3, 8e3);
-      if (Math.random() < 0.35) { a.reactUntil = now + 600; say(a, '?', 1600, false); }
-      return;
+    if (w === 'sleepy' || w === 'wilting') {
+      if (a.node !== a.home && r < 0.7) { walkTo(a, a.home, 'doze'); return; }
+      if (r < 0.3) { goChore(a); return; }
+      a.state = r < 0.75 ? 'doze' : 'idle'; a.until = now + rand(6e3, 12e3); return;
     }
-    // happy and glowing
-    const roam = w === 'glowing' ? 1 : 0.8;
-    if (r < 0.32 * roam) { const n = freeNode(SPOTS.plaza); if (n) { walkTo(a, n, 'idle'); return; } }
-    if (r < 0.44 * roam) { const n = freeNode(SPOTS.visit.filter((x) => x !== a.home)); if (n) { walkTo(a, n, 'idle'); return; } }
-    if (r < 0.52 * roam) { const n = freeNode(SPOTS.bench); if (n) { walkTo(a, n, 'sit'); return; } }
-    if (r < 0.58 * roam && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi')) { if (!reserved.has('dock')) { walkTo(a, 'dock', 'idle'); return; } }
-    if (r < 0.64 * roam) { const n = freeNode(SPOTS.fire); if (n) { walkTo(a, n, 'sit'); return; } }
-    if (r < 0.8 && startChat(a)) return;
-    a.state = 'idle'; a.until = now + rand(w === 'glowing' ? 2500 : 3500, 7000);
+    // Most of a friend's day is spent at home, busy.
+    if (r < 0.42) { goChore(a); return; }
+    if (r < 0.55 && w !== 'missing') { const bff = PET_BY_ID.get(a.id).bff; if (byId.has(bff) && !reserved.has(HOMES[bff].node)) { walkTo(a, HOMES[bff].node, 'visit', { x: (Math.random() < 0.5 ? -1 : 1) * 34, y: 4 }); return; } }
+    if (r < 0.68) { const n = freeNode(SPOTS.plaza); if (n) { walkTo(a, n, 'idle'); return; } }
+    if (r < 0.74) { const n = freeNode(SPOTS.bench); if (n) { walkTo(a, n, 'sit'); return; } }
+    if (r < 0.78 && (a.id === 'matcha' || a.id === 'mallow' || a.id === 'mochi') && !reserved.has('dock')) { walkTo(a, 'dock', 'idle'); return; }
+    if (r < 0.84) { const n = freeNode(SPOTS.fire); if (n) { walkTo(a, n, 'sit'); return; } }
+    if (r < 0.92 && startChat(a)) return;
+    if (a.node !== a.home) { walkTo(a, a.home, 'idle'); return; }
+    a.state = 'idle'; a.until = now + rand(2500, 6000);
   };
 
-  /* ---- Two pets meet on the plaza and talk ---- */
+  /* ---- Two friends meet on the plaza and talk ---- */
   const chats = [];
-  const startChat = (a) => {
-    const others = actors.filter((b) => b !== a && b.id !== 'toffee' && !b.partner && AWAKE.has(b.word) && (b.state === 'idle' || b.state === 'sit') && !night());
-    if (!others.length) return false;
-    const b = pickOf(others);
+  const startChat = (a, b = null) => {
+    const others = actors.filter((x) => x !== a && x.id !== 'toffee' && !x.partner && AWAKE.has(x.word) && (x.state === 'idle' || x.state === 'sit' || x.state === 'chore') && !night());
+    b = b ?? (others.find((x) => x.id === PET_BY_ID.get(a.id).bff) ?? pickOf(others));
+    if (!b) return false;
     const n = freeNode(['pc', 'pn', 'ps', 'pw', 'pe']);
     if (!n) return false;
     a.partner = b; b.partner = a;
@@ -173,38 +227,36 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
         const about = pickOf(pets.pets.filter((p) => p.id !== c.a.id && p.id !== c.b.id));
         if (about) text = gossipLine(about.id, about.word, `${now | 0}`);
       }
-      say(speaker, `<span>${text}</span>`, text.length > 3 ? 3000 : 1700);
-      if (text === '♥') speaker.happyUntil = now + 900;
+      say(speaker, `<span>${text}</span>`, text.length > 3 ? 3000 : 1700, { soft: true });
+      if (text === '♥') { speaker.happyUntil = now + 900; heart(speaker); }
       c.step += 1; c.at = now + (text.length > 3 ? 3200 : 1900);
     }
   };
 
-  /* ---- The ring, made visible: a happy pet carries its gift next door ---- */
-  let nextDelivery = rand(9e3, 16e3);
-  const tryDelivery = () => {
-    if (night() || reduced) return;
-    const keen = actors.filter((a) => a.id !== 'toffee' && (a.word === 'glowing' || a.word === 'happy') && (a.state === 'idle' || a.state === 'sit') && !a.partner);
-    if (!keen.length) return;
-    const a = pickOf(keen);
-    const to = successorOf(a.id);
-    const target = to === 'toffee' ? 'kiosk' : HOMES[to].node;
-    const gift = PET_BY_ID.get(a.id).gift;
-    if (!walkTo(a, target, 'deliver')) return;
-    a.carry = { to, gift };
-    a.el.insertAdjacentHTML('beforeend', `<span class="pet-carry" aria-hidden="true">${giftIcon(gift, 20)}</span>`);
-  };
-
-  /* ---- Each frame, for each pet ---- */
+  /* ---- Each frame, for each friend ---- */
   const stepPet = (a, dt) => {
     if (a.state === 'walk') {
-      let d = SPEED[a.word] * (a.carry ? 1.1 : 1) * dt;
+      let d = SPEED[a.word] * dt;
       while (d > 0 && a.path.length) {
         const t = a.path[0], dx = t.x - a.x, dy = t.y - a.y, dist = Math.hypot(dx, dy);
         if (Math.abs(dx) > 0.5) a.facing = dx > 0 ? 1 : -1;
         if (dist <= d) { a.x = t.x; a.y = t.y; a.path.shift(); d -= dist; } else { a.x += (dx / dist) * d; a.y += (dy / dist) * d; d = 0; }
       }
-      a.hop += dt * 2.3 * Math.PI * 2 * (SPEED[a.word] / 40);
+      const before = Math.floor(a.hop / Math.PI);
+      a.hop += dt * a.gait.cadence * Math.PI * (SPEED[a.word] / 40);
+      // A little puff of dust at each footfall (not for the cloud).
+      if (Math.floor(a.hop / Math.PI) !== before && a.gait.lift && Math.random() < 0.5) emit('dust', a.x + rand(-6, 6), a.y - 1, 0.6);
       if (!a.path.length) arrive(a);
+    } else if (a.state === 'chore') {
+      if (now > a.chore.until) { decide(a); return; }
+      if (now > a.emitAt) {
+        a.emitAt = now + a.chore.every * rand(0.7, 1.3);
+        const k = a.chore.kind === 'rain' ? 'raindrop' : a.chore.emit;
+        const [fx, fy] = EMIT_AT[a.chore.prop] ?? EMIT_AT[k] ?? [0, -0.5];
+        emit(a.chore.emit, a.x + a.facing * fx * a.size + rand(-6, 6), a.y + fy * a.size, 1, a.chore.kind === 'rain' ? a.facing * 0.1 : a.facing);
+        if (a.chore.kind === 'dance' || (a.chore.kind === 'sing' && Math.random() < 0.3)) a.reactUntil = now + 420;
+        if (a.chore.kind === 'dance' && Math.random() < 0.35) a.facing *= -1;
+      }
     } else if (a.state !== 'wait' && now > a.until) {
       decide(a);
     }
@@ -215,18 +267,18 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     reserved.add(a.node);
     a.target = null; a.hop = 0;
     const next = a.next ?? 'idle';
-    if (next === 'deliver' && a.carry) {
-      const to = byId.get(a.carry.to);
-      a.el.querySelector('.pet-carry')?.classList.add('is-given');
-      setTimeout(() => a.el.querySelector('.pet-carry')?.remove(), 700);
-      a.carry = null; a.happyUntil = now + 1200;
-      if (to && Math.hypot(to.x - a.x, to.y - a.y) < 140) { to.happyUntil = now + 1400; to.reactUntil = now + 700; heart(to); }
-      say(a, giftIcon(PET_BY_ID.get(a.id).gift, 18), 1600, false);
-      a.state = 'idle'; a.until = now + 2200;
-      reserved.delete(a.node);
+    if (next === 'chore') { if (!startChore(a)) { a.state = 'idle'; a.until = now + 3000; } return; }
+    if (next === 'visit') {
+      const b = byId.get(PET_BY_ID.get(a.id).bff);
+      a.state = 'idle'; a.until = now + rand(3500, 6000);
+      if (b && Math.hypot(b.x - a.x, b.y - a.y) < 160 && b.state !== 'walk' && b.state !== 'sleep') {
+        a.facing = b.x >= a.x ? 1 : -1; b.facing = -a.facing;
+        say(a, '<span>♥</span>', 1500, { speak: false }); heart(a);
+        setTimeout(() => { if (!destroyed) { b.reactUntil = now + 600; b.happyUntil = now + 1200; heart(b); } }, 500);
+      } else say(a, '<span>…?</span>', 1400, { speak: false });
       return;
     }
-    if (next === 'look') { a.facing = -1; a.state = 'idle'; a.until = now + rand(3e3, 5e3); say(a, '…', 2000, false); return; }
+    if (next === 'greet') { a.state = 'idle'; a.until = now + rand(3000, 5000); return; }
     a.state = next; a.until = now + (next === 'sleep' ? rand(15e3, 30e3) : next === 'sit' ? rand(5e3, 10e3) : next === 'wait' ? 1e9 : rand(2500, 6000));
   };
 
@@ -238,49 +290,74 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     setTimeout(() => h.remove(), 1400);
   };
 
-  /** Paint one pet: position, depth, hop, facing, frame. Writes only on change. */
+  /** Paint one friend: position, depth, gait, facing, frame, feet. Writes only on change. */
   const paintPet = (a) => {
-    let frame = FRAME.idle, lift = 0, sx = 1, sy = 1;
-    if (a.state === 'walk') {
-      const ph = a.hop % (Math.PI * 2);
-      lift = Math.abs(Math.sin(ph / 2)) * 7;
-      const land = Math.max(0, Math.cos(ph / 2)) ** 6;
-      sy = 1 - land * 0.07 + (lift / 7) * 0.03; sx = 1 + land * 0.06;
+    let frame = FRAME.idle, lift = 0, sx = 1, sy = 1, tilt = 0, ll = 0, lr = 0, lx = 0, rx = 0;
+    const G = a.gait;
+    if (a.state === 'walk' && !reduced) {
+      const ph = a.hop % (Math.PI * 2), s = Math.sin(ph);
+      if (G.float) { lift = G.float + Math.sin(now / 260) * 2.5; tilt = a.facing * 4 + s * G.waddle * 0.4; }
+      else {
+        lift = Math.abs(s) * G.hop;
+        const land = Math.max(0, 1 - Math.abs(s) * 4) ** 2;
+        sy = 1 - land * 0.06 + (Math.abs(s)) * 0.02; sx = 1 + land * 0.05;
+        tilt = s * G.waddle + a.facing * 2.5;
+        // The foot in the air rises (into the body, a few painting px) and swings forward; the other pushes back.
+        const up = a.size * 0.045 * G.lift;
+        ll = Math.max(0, s) * up; lr = Math.max(0, -s) * up;
+        lx = Math.cos(ph) * 1.2; rx = -Math.cos(ph) * 1.2;
+      }
     } else if (!reduced) {
-      sy = 1 + Math.sin(now / 520 + a.x) * 0.012;
+      sy = 1 + Math.sin(now / 520 + a.x) * 0.014;
+      if (G.float) lift = 4 + Math.sin(now / 700 + a.x) * 3;
+      if (a.state === 'chore') {
+        const c = a.chore?.kind;
+        if (c === 'sweep') tilt = Math.sin(now / 160) * 6;
+        else if (c === 'hammer') { const p = (now % 640) / 640; tilt = p < 0.2 ? -p * 30 : p < 0.3 ? 6 : 0; sy *= p > 0.2 && p < 0.32 ? 0.95 : 1; }
+        else if (c === 'dance') { tilt = Math.sin(now / 140) * 10; lift = Math.abs(Math.sin(now / 280)) * 7; }
+        else if (c === 'sing' || c === 'sprinkle') tilt = Math.sin(now / 300) * 5;
+        else if (c === 'water' || c === 'rain') tilt = a.facing * 3;
+      }
     }
-    if (a.state === 'sleep' || a.state === 'doze' || (a.state === 'slump')) frame = FRAME.sleep;
-    // With less motion a pet still smiles and talks, but never jumps, breathes or blinks.
-    if (now < a.reactUntil && !reduced) { const p = 1 - (a.reactUntil - now) / 700; lift = Math.sin(Math.max(0, p) * Math.PI) * 18; sy = 1 + Math.sin(p * Math.PI) * 0.05; }
+    if (a.state === 'sleep' || a.state === 'doze') frame = FRAME.sleep;
+    // With less motion a friend still smiles and talks, but never jumps, breathes or blinks.
+    if (now < a.reactUntil && !reduced) { const p = 1 - (a.reactUntil - now) / 700; lift = Math.max(lift, Math.sin(Math.max(0, p) * Math.PI) * 18); sy = 1 + Math.sin(p * Math.PI) * 0.06; sx = 1 - Math.sin(p * Math.PI) * 0.03; }
     if (now < a.happyUntil) frame = FRAME.happy;
     else if (now < a.talkUntil && !reduced) frame = Math.floor(now / 140) % 2 ? FRAME.talk : FRAME.idle;
+    else if (a.state === 'chore' && a.chore?.kind === 'sing') frame = Math.floor(now / 300) % 3 ? FRAME.happy : FRAME.talk;
     else if (frame === FRAME.idle && now < a.blinkUntil) frame = FRAME.blink;
     if (frame === FRAME.idle && now > a.blinkAt && !reduced) { a.blinkUntil = now + 130; a.blinkAt = now + rand(2600, 6200); }
-    if (a.state === 'slump') { sy *= 0.9; sx *= 1.04; }
     if (a.sayUntil && now > a.sayUntil) { a.sayUntil = 0; a.bubble.classList.add('is-out'); setTimeout(() => { if (!a.sayUntil) a.bubble.hidden = true; }, 260); }
-    const showThink = a.thinking && !a.sayUntil && a.state !== 'walk';
-    if (a.thinkEl.hidden === showThink) a.thinkEl.hidden = !showThink;
+    const showMark = a.marked && !a.sayUntil && a.state !== 'sleep';
+    if (a.markEl && a.markEl.hidden === showMark) a.markEl.hidden = !showMark;
     const pos = `translate3d(${a.x.toFixed(1)}px,${a.y.toFixed(1)}px,0)`;
-    const body = `translateY(${(-lift).toFixed(1)}px) scale(${(a.facing * sx).toFixed(3)},${sy.toFixed(3)})`;
+    const body = `translateY(${(-lift).toFixed(1)}px) rotate(${tilt.toFixed(2)}deg) scale(${(a.facing * sx).toFixed(3)},${sy.toFixed(3)})`;
     const key = pos + body + frame + a.state;
-    if (key === a.lastWrite) return;
-    a.lastWrite = key;
-    a.el.style.transform = pos;
-    a.el.style.zIndex = String(Math.round(a.y));
-    a.body.style.transform = body;
-    a.el.querySelector('.pet-shadow').style.transform = `scale(${(1 - lift / 40).toFixed(3)})`;
-    if (a.frame !== frame) { a.frame = frame; a.sprite.style.setProperty('--f', frame); }
-    a.el.dataset.state = a.state;
+    if (key !== a.lastWrite) {
+      a.lastWrite = key;
+      a.el.style.transform = pos;
+      a.el.style.zIndex = String(Math.round(a.y));
+      a.body.style.transform = body;
+      a.shadow.style.transform = `scale(${(1 - lift / 40).toFixed(3)})`;
+      if (a.frame !== frame) { a.frame = frame; a.sprite.style.setProperty('--f', frame); }
+      a.el.dataset.state = a.state;
+    }
+    const feet = `${ll.toFixed(2)},${lr.toFixed(2)},${lx.toFixed(2)},${rx.toFixed(2)}`;
+    if (feet !== a.lastFeet) {
+      a.lastFeet = feet;
+      const st = a.sprite.style;
+      st.setProperty('--ll', ll.toFixed(2)); st.setProperty('--lr', lr.toFixed(2));
+      st.setProperty('--lx', `${lx.toFixed(2)}px`); st.setProperty('--rx', `${rx.toFixed(2)}px`);
+    }
   };
 
   /* ================= The air ================= */
-  const parts = [];
   const R = (seed) => rng(seed);
   const flameRate = { embers: 2, small: 4, steady: 6, tall: 9, bonfire: 13 };
   let isAutumn = season === 'autumn', isSpring = season === 'spring', isWinter = season === 'winter';
-  const fireflyCount = () => (dark() ? Math.round(8 + pets.harmony * 22 + (made('fireflies') ? 26 : 0) + (pets.festival ? 12 : 0)) : 0);
+  const made = (id) => pets.decor?.find((t) => t.id === id)?.made;
+  const fireflyCount = () => (dark() ? Math.round(8 + pets.harmony * 22 + (made('fireflies') ? 26 : 0)) : 0);
   const butterflyCount = () => (!dark() && hour !== 'dawn' && weather !== 'rain' ? 6 + (made('flowers') ? 4 : 0) : 0);
-  const made = (id) => pets.treasures.find((t) => t.id === id)?.made;
   // One soft puff per light, drawn once and stamped for every wisp of smoke and steam.
   const puffOf = (rgb) => {
     const c = document.createElement('canvas'); c.width = c.height = 64;
@@ -289,11 +366,24 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     pg.fillStyle = gr; pg.fillRect(0, 0, 64, 64);
     return c;
   };
-  const puffs = { day: puffOf('246,242,234'), dark: puffOf('150,152,166') };
+  const puffs = { day: puffOf('246,242,234'), dark: puffOf('150,152,166'), dust: puffOf('196,170,120') };
   let sparkAcc = 0, smokeAcc = 0, steamAcc = 0, rippleAt = 2000, birdsAt = rand(2500, 6000), lanternAcc = 0;
   const glints = Array.from({ length: 16 }, (_, i) => { const r = R(`glint${i}`); const t = r() * Math.PI * 2, d = Math.sqrt(r()); return { x: POND.x + Math.cos(t) * POND.rx * d * 0.85, y: POND.y + Math.sin(t) * POND.ry * d * 0.8, p: r() * 6 }; });
   const ensure = (kind, n, make) => { const have = parts.filter((p) => p.kind === kind).length; for (let i = have; i < n; i += 1) parts.push(make(i)); };
   const lilies = (TREASURE_AT.lilylights ?? []);
+  const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
+
+  /** A chore's particle, thrown into the air at painting point (x, y). */
+  function emit(kind, x, y, scale = 1, dir = 1) {
+    if (reduced || parts.length > 420) return;
+    if (kind === 'drop') parts.push({ kind: 'drop', x, y, vx: dir * rand(8, 22), vy: rand(10, 30), life: rand(0.5, 0.8), age: 0 });
+    else if (kind === 'dust') parts.push({ kind: 'dust', x, y, vx: rand(-8, 8), vy: rand(-6, -2), life: rand(0.5, 0.9), age: 0, r: rand(3, 5) * scale });
+    else if (kind === 'spark') parts.push({ kind: 'spark', x, y, vx: rand(-14, 14), vy: rand(-55, -30), life: rand(0.6, 1.2), age: 0, r: rand(1.2, 2.2) });
+    else if (kind === 'note') parts.push({ kind: 'glyph', ch: pickOf(['♪', '♫', '♪']), color: '#5a4130', x, y, vx: rand(-6, 6), vy: rand(-26, -18), life: rand(1.4, 2), age: 0, s: rand(11, 14), w: rand(0, 6) });
+    else if (kind === 'letter') parts.push({ kind: 'glyph', ch: LETTERS[Math.floor(Math.random() * 26)], color: '#7a5a3a', x, y, vx: rand(-5, 5), vy: rand(-20, -12), life: rand(1.6, 2.2), age: 0, s: rand(9, 12), w: rand(0, 6), serif: true });
+    else if (kind === 'steam') parts.push({ kind: 'steam', x, y, vx: rand(-2, 3), vy: rand(-12, -7), life: rand(1.4, 2), age: 0, r: rand(2, 3), w: rand(0, 6) });
+    else if (kind === 'sparkle') parts.push({ kind: 'sparkle', x: x + rand(-14, 14), y: y + rand(-10, 10), life: rand(0.6, 1.1), age: 0, r: rand(2.5, 4.5) });
+  }
 
   const air = (dt) => {
     // spawners
@@ -315,7 +405,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
       const ltr = Math.random() < 0.5, y0 = rand(50, 200), n = 3 + Math.floor(Math.random() * 3);
       for (let i = 0; i < n; i += 1) parts.push({ kind: 'bird', x: ltr ? -40 - i * 26 : 1576 + i * 26, y: y0 + (i % 2) * 14 + i * 4, vx: ltr ? rand(70, 85) : -rand(70, 85), t: Math.random() * 6, age: 0, life: 30 });
     }
-    if (pets.festival && night() && made('skylanterns')) { lanternAcc += dt * 0.5; while (lanternAcc > 1) { lanternAcc -= 1; parts.push({ kind: 'lantern', x: rand(640, 900), y: rand(440, 560), vy: rand(-14, -9), age: 0, life: 40, t: Math.random() * 6 }); } }
+    if (night() && made('skylanterns') && pets.harmony >= 0.5) { lanternAcc += dt * 0.5; while (lanternAcc > 1) { lanternAcc -= 1; parts.push({ kind: 'lantern', x: rand(640, 900), y: rand(440, 560), vy: rand(-14, -9), age: 0, life: 40, t: Math.random() * 6 }); } }
 
     // draw
     g.setTransform(0.5, 0, 0, 0.5, 0, 0);
@@ -348,6 +438,31 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
           g.globalAlpha = a;
           g.drawImage(dark() ? puffs.dark : puffs.day, p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
           g.globalAlpha = 1;
+          break;
+        }
+        case 'dust': {
+          p.x += p.vx * dt; p.y += p.vy * dt; p.r += dt * 9;
+          g.globalAlpha = 0.5 * (1 - k);
+          g.drawImage(puffs.dust, p.x - p.r, p.y - p.r, p.r * 2, p.r * 2);
+          g.globalAlpha = 1;
+          break;
+        }
+        case 'drop':
+          p.vy += 260 * dt; p.x += p.vx * dt; p.y += p.vy * dt;
+          g.strokeStyle = `rgba(150,200,240,${(0.95 * (1 - k * 0.6)).toFixed(2)})`; g.lineWidth = 2; g.lineCap = 'round';
+          g.beginPath(); g.moveTo(p.x, p.y); g.lineTo(p.x - p.vx * 0.02, p.y - p.vy * 0.025); g.stroke();
+          break;
+        case 'glyph': {
+          p.x += (p.vx + Math.sin(now / 400 + p.w) * 10) * dt; p.y += p.vy * dt;
+          g.globalAlpha = Math.min(1, k / 0.15) * (1 - k);
+          g.fillStyle = p.color; g.font = `${p.serif ? 'italic ' : ''}700 ${p.s}px ${p.serif ? 'Georgia, serif' : 'system-ui, sans-serif'}`;
+          g.fillText(p.ch, p.x, p.y);
+          g.globalAlpha = 1;
+          break;
+        }
+        case 'sparkle': {
+          const a = Math.sin(k * Math.PI);
+          g.globalCompositeOperation = 'lighter'; g.fillStyle = `rgba(255,246,200,${a.toFixed(2)})`; star4(p.x, p.y, p.r * (0.5 + a)); g.globalCompositeOperation = 'source-over';
           break;
         }
         case 'firefly': {
@@ -418,11 +533,8 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   const clockTimer = setInterval(setClock, 20e3);
 
   /* ================= The loop ================= */
-  const neediest = () => pets.pets.find((p) => p.id === pets.neediest);
-  const setThinkers = () => { const n = neediest(); for (const a of actors) a.thinking = !!n && a.id === n.id && n.word !== 'glowing' && n.word !== 'happy'; };
-  setThinkers();
   for (const a of actors) { reserved.add(a.node); paintPet(a); }
-  if (reduced) { for (const a of actors) { a.state = a.word === 'sleepy' || a.word === 'wilting' || night() ? 'doze' : 'idle'; a.until = 1e12; paintPet(a); } air(0); }
+  if (reduced) { for (const a of actors) { a.state = night() ? 'doze' : 'idle'; a.until = 1e12; paintPet(a); } air(0); }
 
   const frame = (t) => {
     if (destroyed) return;
@@ -432,7 +544,6 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     if (!reduced) {
       for (const a of actors) stepPet(a, dt);
       runChats();
-      if (now > nextDelivery) { nextDelivery = now + rand(45e3, 90e3); tryDelivery(); }
     }
     for (const a of actors) paintPet(a);
     if (!reduced) air(dt);
@@ -444,10 +555,10 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
   return {
     ripple: (x, y) => water.ripple(x, y),
     positionOf: (id) => { const a = byId.get(id); return a ? { x: a.x, y: a.y - 40 } : NODES.pc; },
-    /** A tap: the pet jumps, a heart floats up, and it says something (unless `quiet`). Returns what it said. */
+    /** A tap: the friend jumps, a heart floats up, and it says something (unless `quiet`). Returns what it said. */
     poke(id, { happy = false, line = null, quiet = false } = {}) {
       const a = byId.get(id); if (!a) return '';
-      // A quiet happy poke is the welcome back: the pet beams for as long as the toast names its gifts.
+      // A quiet happy poke is the welcome back: the friend beams for as long as the toast names its stars.
       a.reactUntil = now + 700; a.happyUntil = now + (happy ? (quiet ? 4200 : 2200) : 900);
       if (!reduced) { heart(a); if (happy) setTimeout(() => heart(a), 220); }
       if (a.state === 'sleep' || a.state === 'doze') { a.state = 'idle'; a.until = now + 3000; }
@@ -456,9 +567,29 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
       say(a, `<span>${said}</span>`, line ? 4200 : 2600);
       return said;
     },
-    think(id, on) { const a = byId.get(id); if (a) a.thinking = on; },
-    /** The pet with a thought bubble: whoever needs a visit most. */
-    thinker: () => actors.find((a) => a.thinking)?.id ?? null,
+    /** The friends you can see wave hello as you arrive, one after another. */
+    greet(ids) {
+      if (reduced) return;
+      ids.forEach((id, i) => setTimeout(() => {
+        const a = byId.get(id);
+        if (!a || destroyed || a.sayUntil) return;
+        a.reactUntil = now + 700; a.happyUntil = now + 1600;
+        if (a.state === 'sleep' || a.state === 'doze') { a.state = 'idle'; a.until = now + 2600; }
+        say(a, `<span>${night() && a.id !== 'toffee' ? 'Oh! Hi!' : pickOf(HELLO)}</span>`, 1900);
+      }, 500 + i * 420));
+    },
+    /** A friend comes to meet you at a node and says something. */
+    comeSay(id, nodeId, line) {
+      const a = byId.get(id);
+      if (!a) return;
+      if (reduced || !walkTo(a, nodeId, 'greet', { x: rand(-20, 20), y: 6 })) { say(a, `<span>${line}</span>`, 5200); return; }
+      const wait = setInterval(() => {
+        if (destroyed) { clearInterval(wait); return; }
+        if (a.state !== 'walk') { clearInterval(wait); a.reactUntil = now + 700; a.happyUntil = now + 2400; heart(a); say(a, `<span>${line}</span>`, 5200); }
+      }, 200);
+    },
+    /** The friends who have a "!" over their heads: today's three, until they are helped. */
+    setMarks(ids) { const set = new Set(ids); for (const a of actors) a.marked = set.has(a.id); },
     /** Say a line and resolve when it is gone (or tapped away). */
     sayAndWait(id, line, { ms = 5000, tapToSkip = false } = {}) {
       const a = byId.get(id);
@@ -474,8 +605,7 @@ export function createLife(root, { pets: petsState, atmo, reduced }) {
     },
     update(next) {
       pets = next;
-      for (const a of actors) { const w = wordOf(a.id); if (w !== a.word) { a.word = w; if (a.state !== 'walk') a.until = now; } }
-      setThinkers();
+      for (const a of actors) { const w = wordOf(a.id); if (w !== a.word) { a.word = w; if (a.state !== 'walk' && a.state !== 'chore') a.until = now; } }
     },
     setAtmo(at) { hour = at.hour; weather = at.weather; season = at.season; isAutumn = season === 'autumn'; isSpring = season === 'spring'; isWinter = season === 'winter'; for (const a of actors) if (a.state !== 'walk') a.until = now; },
     destroy() { destroyed = true; cancelAnimationFrame(raf); clearInterval(clockTimer); water.destroy(); },

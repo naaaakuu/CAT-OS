@@ -19,7 +19,7 @@ export const STAGES = Object.freeze([
  *  place for the journey's voice: inviting, honest, never gatekeeping. */
 export const STAGE_INFO = Object.freeze({
   foundation:   { label: 'Foundation',   description: 'Begin here. Gentle, concrete passages that build the reading habit.' },
-  developing:   { label: 'Developing',   description: 'One clean argument at a time — learn to follow a writer\'s moves.' },
+  developing:   { label: 'Developing',   description: 'One clean argument at a time: learn to follow a writer\'s moves.' },
   intermediate: { label: 'Intermediate', description: 'Real CAT texture: denser claims, finer distinctions.' },
   advanced:     { label: 'Advanced',     description: 'Layered arguments with qualifications worth slowing down for.' },
   elite:        { label: 'Elite',        description: 'The hardest register the exam uses. By now, you are ready for it.' },
@@ -109,6 +109,6 @@ export function recommendNext(items, sessions) {
   if (!weakest) return null;
   return {
     item: weakest.item,
-    reason: 'Your toughest passage so far — worth a second read.',
+    reason: 'Your toughest passage so far: worth a second read.',
   };
 }

@@ -4,6 +4,109 @@
 > Versions here are app releases; they map onto the capability milestones in
 > `PROJECT_ROADMAP.md` (0.x releases build toward Roadmap V1.0).
 
+## 3.1.0: The helping village (2026-10-03)
+
+The owner, playing 3.0.1: it is too complex, nobody knows how anyone relates
+to anyone, there is no reason to play, the village looks like a still picture
+up close, and the music is a drone nobody remembers. The brief: make it
+simple, give it a purpose ("people play when they feel they are helping"),
+make the friends enthusiastic and busy round their homes, make sound always
+on and catchy, remove em dashes and junk, make content easy to find, and make
+people come back every day.
+
+### One loop anyone understands in ten seconds
+
+- **Help a friend → earn stars → the village grows.** Every finished round
+  earns 1 to 3 stars (accuracy, then pace), plus 1 for a perfect run inside the time.
+  Stars add up to a **village level** (Lv 2 at 5 stars, Lv 3 at 12, … Lv 10
+  at 145, then every 36), and each level puts something on the map: plaza
+  lanterns, bunting, flower boxes, firefly jars, a swing, wind chimes, a
+  kite, lily-pad lights, sky lanterns. A level-up gets a celebration.
+- **Retired:** the six gift types, the gift ring and its doubling, the
+  satchel, treasure recipes and the "make" button, harmony text, the
+  letter on the notice board, the three wishes. `village-treasure` records
+  are ignored; everything else is still derived from records, so existing
+  learners keep their history, stars and hearts.
+- **Today's three friends.** Each day the three friends who miss you most
+  wear a "!" on the map and sit in a row of faces at the bottom of the
+  screen. Help all three and today's gift opens: 5 bonus stars.
+- **One big button.** "Help Chai · Read a passage · 5 min ▶" always names
+  who you are helping and what you will do. One tap and you are learning.
+- **Toffee's fire** is the daily streak, with a week strip and spare logs
+  (one saved every 7 days in a row covers a missed day). Toffee's mood and
+  hearts now follow your days, not the Gauntlet alone.
+
+### A purpose, and relations you can see
+
+- **The story in one breath:** the village is losing its words. Chai's pages
+  are going blank, Matcha's word garden is wilting, Mochi's notebook lost
+  its notes, Ginger's gears are stuck, Mallow's stars went dim. Each friend's
+  trouble is told in five chapters, one per heart, and each heart decorates
+  their home on the map (a lantern, flowers, bunting, lit windows, a golden
+  glow).
+- **Who is who:** a card names all six, what each teaches, how they feel,
+  and the three best-friend pairs (Chai and Mochi, Ginger and Mallow, Matcha
+  and Toffee). Best friends visit each other's homes.
+- **Toffee's welcome** says the problem and the purpose in four lines, then
+  points at the big button.
+
+### Friends who are alive and glad to see you
+
+- **They walk on their own feet.** The six sprite sheets were rebaked at
+  384 px (sharp when zoomed) and `tools/bake-pets.mjs` now finds each
+  friend's feet; `petRig` cuts the frame so the two feet step under the
+  body. Each friend has a gait: Chai waddles, Mochi plods, Ginger trots,
+  Matcha bounces, Toffee hops, Mallow floats.
+- **They do chores round their homes** with a prop in hand: Matcha waters
+  the garden, Chai reads and sweeps, Mochi sips tea and sweeps, Ginger
+  hammers, Mallow rains on the flowers from a little cloud, Toffee dances by
+  the fire. Water drops, dust, sparks, music notes and letters fly.
+- **They greet you.** The friends on screen wave as you arrive; after a day
+  away, the one who missed you most walks over to say so; the friend you
+  helped thanks you and their best friend cheers.
+- **They talk, with voices.** Every line plays a little babble in that
+  friend's own pitch. Lines are warm and excited now (the old "no !" rule is
+  lifted; no guilt, no grading).
+- **They notice things** (the "smart friend"): each card types out one line
+  built from your own answers: the question type that trips you up, how many
+  words are fading, last set's score and whether you are ready for harder.
+
+### Sound
+
+- **A real theme song.** A sixteen-bar tune in C major at a bouncy shuffle,
+  written note by note around the Valley Phrase hook, with bass, off-beat
+  chords, soft drums and a shaker. Each pass is arranged differently.
+- Each friend's place plays it on their instrument (flute, kalimba, clarinet,
+  pizzicato, bells, banjo). Timed reading gets a quiet focus mix. Night is a
+  slower music box.
+- **Always on, full volume, everywhere,** from the first touch, until turned
+  off. The song never restarts between screens. Reward sounds (stars, hearts,
+  level-up, today's gift) quote the hook; effects are louder.
+
+### Content you can find
+
+- Place screens are pages now: a painted header with the friend at the
+  door, the one big button, then every passage, tier, field and shelf in the
+  open. Nothing hides behind the old pull handle.
+- Each friend's card lists everything you can do with them.
+
+### Cleaner
+
+- **No em dashes** in anything a learner reads: 124 interface and voice
+  strings and 1,763 content strings (paired dashes became commas, single
+  ones colons or commas).
+- The camera keeps pinch, wheel and keys; the +/− buttons went, one overview
+  toggle stays. The satchel, ring lines, gift tallies and recipe chips are gone.
+
+### Gates
+
+- `check-pets` and `check-pet-economy` test the new roster, voice rules (96
+  characters, no em dashes, no banned words) and economy (stars, levels,
+  decorations, today's three and the gift, the fire, hearts, the welcome,
+  `changeBetween`). `check-village` drives the new screen: the top bar, the
+  big button, five cards, decorations by level, two feet per friend, no chores
+  under reduced motion. Precache and cache versions bumped.
+
 ## 3.0.1 — A living river (2026-10-03)
 
 - All five visible river reaches flow, with refracted painted water,

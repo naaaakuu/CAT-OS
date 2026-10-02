@@ -68,7 +68,7 @@ const XP_LADDER = [C5, D5, E5, G5, A5, C6, D6, E6, G6];
 
 const state = {
   enabled: true, // default ON — mirrors the stored pref
-  volume: 0.7, // master 0..1
+  volume: 1, // master 0..1: full until the learner turns it down
   ctx: null, // lazy AudioContext
   master: null, // GainNode → compressor → lowpass → destination
   noiseBuf: null, // one shared 1s white-noise buffer (tiny, reused)
@@ -182,9 +182,14 @@ function panned(node, pan) {
   }
 }
 
+/* Every sound here was first built at whisper level; the village plays a
+   song now, so the cues stand up beside it. The compressor keeps it clean. */
+const LOUD = 2.2;
+
 /** One pitched voice with a soft ADSR-ish envelope. */
 function tone(t, { freq, type = 'sine', peak = 0.05, a = 0.006, hold = 0, d = 0.14, detune = 0, glideTo = 0, glideT = 0.05, pan = 0 }) {
   const c = state.ctx;
+  peak *= LOUD;
   const o = c.createOscillator();
   o.type = type;
   o.frequency.setValueAtTime(freq, t);
@@ -205,6 +210,7 @@ function tone(t, { freq, type = 'sine', peak = 0.05, a = 0.006, hold = 0, d = 0.
 /** One filtered-noise grain — the click and paper family. */
 function noise(t, { peak = 0.04, a = 0.004, d = 0.05, type = 'bandpass', freq = 1800, q = 0.8, glideTo = 0, pan = 0 }) {
   const c = state.ctx;
+  peak *= LOUD;
   const src = c.createBufferSource();
   src.buffer = state.noiseBuf;
   const f = c.createBiquadFilter();

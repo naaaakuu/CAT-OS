@@ -53,7 +53,7 @@ export const WD_DNA_COPY = Object.freeze({
   }),
   rootRecognitionWatch: (pct, n) => ({
     title: 'The shared piece is still settling in',
-    body: `Across ${n} families so far, the first guess has landed about ${pct} of the time. Before predicting, try saying the shared letters out loud — the pattern is often easier to hear than to see.`,
+    body: `Across ${n} families so far, the first guess has landed about ${pct} of the time. Before predicting, try saying the shared letters out loud: the pattern is often easier to hear than to see.`,
   }),
   transferStrength: (pct, n) => ({
     title: 'You decode words you have never seen',
@@ -87,7 +87,7 @@ export const WD_DNA_COPY = Object.freeze({
 
 export const WD_LINES = Object.freeze({
   numbersAside: (correct, total) =>
-    `${correct} of ${total} understood — the noticing matters more than the count.`,
+    `${correct} of ${total} understood: the noticing matters more than the count.`,
   keepGoing: [
     'One more family will tell us more.',
     'Carry it into the next set.',

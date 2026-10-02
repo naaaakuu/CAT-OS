@@ -191,7 +191,7 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
 
     /* ---- The village: coming back from a run ----
        The run just finished is what the village shows first: its pet hops,
-       the gifts it made are named, and the camera is at that pet's home. */
+       the stars it earned are named, and the camera is at that pet's home. */
     {
       const tag = 'village';
       await b.evaluate(`(async () => { const s = await import('/src/core/storage/indexeddb-adapter.js'); const st = new s.IndexedDBAdapter(); await st.init();
@@ -204,8 +204,8 @@ export async function checkResume({ width = 390, height = 844 } = {}) {
       await settled();
       const shown = await (async () => { for (let i = 0; i < 40; i += 1) { if (await b.evaluate(`!!document.querySelector('.cw-toast.is-in')`)) return true; await sleep(200); } return false; })();
       const text = await b.evaluate(`document.querySelector('.cw-toast')?.textContent ?? ''`);
-      if (!shown || !/Matcha/.test(text) || !/\+\d/.test(text)) bad(tag + ': coming back from a word round did not name Matcha and the leaves it made (' + JSON.stringify(text) + ')');
-      else ok(tag + ': back from a word round, the village names Matcha and the gifts: ' + text.trim().slice(0, 60));
+      if (!shown || !/Matcha/.test(text) || !/\+\d/.test(text)) bad(tag + ': coming back from a word round did not name Matcha and the stars it made (' + JSON.stringify(text) + ')');
+      else ok(tag + ': back from a word round, the village names Matcha and the stars: ' + text.trim().slice(0, 60));
       const happy = await b.evaluate(`getComputedStyle(document.querySelector('.pet[data-pet="matcha"] .pet-sprite')).getPropertyValue('--f').trim()`);
       if (happy !== '2') bad(tag + ': Matcha is not smiling on the return (frame ' + happy + ')'); else ok(tag + ': Matcha smiles on the return');
       await b.open(server.url + '#/world', 900);

@@ -80,7 +80,7 @@ class CatResultSummary extends HTMLElement {
         <div class="stat"><b>${formatDuration(this.#durationMs)}</b><span>Time taken</span></div>
       </div>
       <p class="note">Marks use the widely used +3 / −1 convention; the official
-      scheme is announced per exam cycle — verify against the current notification.</p>
+      scheme is announced per exam cycle: verify against the current notification.</p>
     `;
   }
 }

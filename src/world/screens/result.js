@@ -5,8 +5,8 @@
  *   the star reveal      one star at a time, each with its own chime
  *   the verdict          honest, in the village's voice
  *   the facts            accuracy, pace, time — the CAT numbers
- *   the pet              the host pet hopping, the gifts it made counted
- *                        up, the ring bonus, a new heart, a treasure
+ *   the friend           the host friend hopping, "You helped Chai!" with
+ *                        the stars counted up, the level, a new heart
  *   the ways onward
  *
  * It stands in the host pet's home: the painted crop of the village
@@ -35,10 +35,7 @@ const STAR_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2
  *   result       { stars, flawless, accuracy, inTime }
  *   facts        [{ label, value, good }]
  *   pet          the host pet id (defaults to the region's pet)
- *   gifts        bag of gifts this run made ({ stories: 6 })
- *   doubled      the supplier was happy: the gifts were doubled
- *   heart, hearts  a heart was just earned, and the count now
- *   treasure     the next treasure, if this run made it affordable
+ *   change       what the run did for the village (economy.js changeBetween)
  *   setsDone     collections this run finished
  *   extraHTML    optional html placed under the pet (mentor, review)
  *   actions      [{ label, href, primary, quiet, onClick }]
@@ -65,7 +62,7 @@ export function renderResult(outlet, o) {
         <div class="result__facts">
           ${(o.facts ?? []).map((f) => `<div class="result__fact ${f.good ? 'is-good' : ''}"><b>${escapeHTML(String(f.value))}</b><span>${escapeHTML(f.label)}</span></div>`).join('')}
         </div>
-        <div class="late result__pet">${petBlock({ pet, gifts: o.gifts ?? baseGifts(pet, stars, o.result?.flawless), doubled: o.doubled, heart: o.heart, hearts: o.hearts, treasure: o.treasure })}</div>
+        <div class="late result__pet">${petBlock({ ...(o.change ?? baseGifts(pet, stars, o.result?.flawless)), pet })}</div>
         ${(o.setsDone ?? []).length ? `
         <div class="setsdone late">
           <p class="setsdone__eyebrow">${(o.setsDone ?? []).length === 1 ? 'A set finished' : `${o.setsDone.length} sets finished`}</p>
@@ -114,10 +111,10 @@ export function renderResult(outlet, o) {
   const lates = [...outlet.querySelectorAll('.late')];
   lates.forEach((el, i) => setTimeout(() => el.classList.add('is-in'), base + (reduce ? 0 : i * 220)));
 
-  // The gifts count up, each with a soft chime — the moment the learner
-  // sees that thinking made something for somebody.
+  // The stars count up, each with a bright tick: the moment the learner
+  // sees that thinking helped somebody.
   setTimeout(() => countGifts(outlet.querySelector('.result__pet'), reduce), base + 150);
-  if (o.treasure || o.heart) setTimeout(() => play('unlock'), base + 900);
+  if (o.change?.heart || o.change?.levelUp) setTimeout(() => play(o.change.levelUp ? 'levelup' : 'heart'), base + 2200);
 }
 
 function verdictFor(r) {
@@ -125,8 +122,8 @@ function verdictFor(r) {
   const w = STAR_WORDS[r.stars] ?? '';
   if (r.stars === 3) return r.flawless ? `Flawless. Every answer right, inside the time. ${w}.` : `Accurate and in time. That is CAT pace.`;
   if (r.stars === 2) return r.inTime ? `Accurate, with a few misses. The pace is there.` : `Accurate, but over time. Speed comes with the next pass.`;
-  if (r.stars === 1) return `Completed, with a few that got away. Read the misses once: that is where the marks are.`;
-  return `Not yet. Fewer than half right. Slow down, read the misses, and come back.`;
+  if (r.stars === 1) return `Done, with a few that got away. Read the misses once: that is where the marks are.`;
+  return `Fewer than half right this time, and that is how learning starts. Read the misses below, then try one more.`;
 }
 
 function sparks(el) {
@@ -142,7 +139,7 @@ function sparks(el) {
 }
 
 export function starHTML(n, max = 3) {
-  return `${'★'.repeat(n)}<span class="off">${'★'.repeat(Math.max(0, max - n))}</span>`;
+  return `${'★'.repeat(n)}<span class="off">${'☆'.repeat(Math.max(0, max - n))}</span>`;
 }
 
 export function formatClock(ms) {

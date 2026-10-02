@@ -132,7 +132,7 @@ class CatReflection extends HTMLElement {
       <div class="sheet">
         <h2>A line for your notebook</h2>
         ${showForm ? `
-          <p class="why">Optional — one honest sentence makes the passage yours.
+          <p class="why">Optional: one honest sentence makes the passage yours.
           It stays on this device.</p>
           <div class="prompts" role="group" aria-label="Sentence starters">
             ${REFLECTION_PROMPTS.map((p) => `

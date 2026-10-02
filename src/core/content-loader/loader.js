@@ -91,7 +91,7 @@ async function fetchJSON(path) {
        network and heals it. Failing that, the caller still gets a clear
        error and its own recovery path. */
     evict(path);
-    throw new ContentError('That was stored incompletely. It will be fetched again — try once more in a moment.', [], { kind: 'corrupt', detail: `${path}: not valid JSON` });
+    throw new ContentError('That was stored incompletely. It will be fetched again: try once more in a moment.', [], { kind: 'corrupt', detail: `${path}: not valid JSON` });
   }
 }
 

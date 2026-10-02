@@ -52,7 +52,7 @@ export function chooseLesson({ session, passage, dna, priorSessions = 0 }) {
         pull: pattern.pull,
         notice: pattern.notice,
         known: isKnownPull
-          ? `This is the pull we've been watching — naming it in the moment is exactly how it fades.`
+          ? `This is the pull we've been watching: naming it in the moment is exactly how it fades.`
           : null,
       },
       habit: q.explanation.reading_habit ?? TYPE_ADVICE[q.type] ?? null,
@@ -73,7 +73,7 @@ export function chooseLesson({ session, passage, dna, priorSessions = 0 }) {
       pattern_id: null,
       question_id: q.id,
       teach: {
-        moment: `You set one question aside — ${label.replace(/questions$/, 'question').trim()}. Fair choice under a clock; here is the way in for next time.`,
+        moment: `You set one question aside…${label.replace(/questions$/, 'question').trim()}. Fair choice under a clock; here is the way in for next time.`,
         pull: q.explanation.question_type_note,
         notice: q.explanation.reading_habit ?? TYPE_ADVICE[q.type],
         known: null,

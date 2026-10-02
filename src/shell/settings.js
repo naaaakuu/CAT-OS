@@ -113,9 +113,9 @@ export function renderSettings(outlet, { storage, version }) {
 
       <div class="card">
         <h2>Your data</h2>
-        <p class="row__hint">Everything lives on this device — the village, every passage you read, every word you keep. Export a backup to keep it safe or move it to another phone.</p>
+        <p class="row__hint">Everything lives on this device: the village, every passage you read, every word you keep. Export a backup to keep it safe or move it to another phone.</p>
         ${row(icon('scroll', { size: 20 }), 'Export all data', 'Saves a .json backup file', '<button class="btn" id="backup-export">Export</button>')}
-        ${row(icon('scroll', { size: 20 }), 'Import a backup', 'Merge or replace — you choose', '<button class="btn" id="backup-import">Import</button>')}
+        ${row(icon('scroll', { size: 20 }), 'Import a backup', 'Merge or replace: you choose', '<button class="btn" id="backup-import">Import</button>')}
         ${row(icon('scales', { size: 20 }), 'Storage used', 'Measuring…', '')}
         <input type="file" id="backup-file" accept="application/json" hidden />
       </div>
@@ -156,7 +156,7 @@ export function renderSettings(outlet, { storage, version }) {
     try { status = await workerStatus(); } catch { status = null; }
     if (!status) {
       if (offlineHint) offlineHint.textContent = navigator.onLine === false
-        ? 'Not set up on this device yet — reconnect once and it will download.'
+        ? 'Not set up on this device yet: reconnect once and it will download.'
         : 'Not set up on this device (this browser or this address cannot store it).';
       if (offlineBar) offlineBar.style.width = '0%';
       return;
@@ -175,7 +175,7 @@ export function renderSettings(outlet, { storage, version }) {
     if (offlineBar) offlineBar.style.width = `${pct}%`;
     if (offlineHint) {
       offlineHint.textContent = pct >= 100
-        ? `The whole app and library are on this device — ${done} files.`
+        ? `The whole app and library are on this device…${done} files.`
         : `${done} of ${total} files (${pct}%). The rest arrives while you play.`;
     }
   };
@@ -306,8 +306,8 @@ export function renderSettings(outlet, { storage, version }) {
       await syncReading(); await syncTheme();
       cue('restore');
       toast(kept.length
-        ? `Backup merged — ${written} records. Your village kept its own name.`
-        : `Backup imported — ${written} records`, 'info', { mute: true });
+        ? `Backup merged…${written} records. Your village kept its own name.`
+        : `Backup imported…${written} records`, 'info', { mute: true });
     } catch (err) {
       toast(err.message, 'error');
     }

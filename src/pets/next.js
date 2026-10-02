@@ -9,7 +9,7 @@
  * building in the 2.x canvas village.)
  */
 
-import { nextPassage, nextVerbal, nextFamily, readingWeakness, missedQuestions } from '../world/curator.js';
+import { nextPassage, nextVerbal, nextFamily, readingWeakness, missedQuestions, typeName } from '../world/curator.js';
 import { STAGE_INFO } from '../core/learning/journey.js';
 
 const BANK = {
@@ -104,6 +104,49 @@ export function nextFor(petId, world, opts = {}) {
     if (petId === 'toffee') return { href: '#/world/place/wilds', label: 'Run the Gauntlet', sub: 'Everything at once, fast · about 8 min', minutes: 8, kind: 'new' };
   } catch { /* the pet's place screen is always a fallback */ }
   return null;
+}
+
+/**
+ * What the friend noticed: one sentence built from the learner's own
+ * records, so the friend talks like a tutor who was paying attention.
+ * @param {string} petId
+ * @param {object} world  { content, records, state }
+ * @param {object|null} next  nextFor(petId, world)
+ */
+export function noticeFor(petId, world, next) {
+  try {
+    const { records, state } = world ?? {};
+    const sessions = sessionsOf(records);
+    const mins = next?.minutes ? `about ${Math.max(1, Math.round(next.minutes))} minutes` : 'a few minutes';
+    if (petId === 'toffee') {
+      const f = state?.pets?.flame;
+      if (f?.today) return 'You already kept the fire today! Fancy the Gauntlet? Thirty quick questions, three minutes.';
+      if (f?.days) return `Your fire is ${f.days} ${f.days === 1 ? 'day' : 'days'} strong. Help any friend today and it grows.`;
+      return 'Help any friend today and I will light your very first fire.';
+    }
+    if (petId === 'chai') {
+      if (!state?.reading?.read) return `I picked a short one to start: ${next?.sub ?? mins}.`;
+      if (next?.kind === 'retry' && next.href === '#/rc/second-look') return 'A few questions got away last time. I saved them so we can look again, together.';
+      const w = readingWeakness(sessions);
+      if (w.answered >= 8 && w.weakest) return `I noticed ${typeName(w.weakest)} questions trip you up most. I picked a passage with some.`;
+      return next ? `I picked "${next.label}" for you. ${mins.replace(/^a/, 'A')}.` : 'Every passage is waiting on the shelves.';
+    }
+    if (petId === 'matcha') {
+      const due = (state?.meadow?.due ?? 0) + (state?.pond?.due ?? 0) + (state?.thicket?.due ?? 0);
+      if (due >= 5) return `${due} of your words are starting to fade. Two minutes and they are safe again.`;
+      if ((state?.rootwood?.dueCount ?? 0) > 0) return 'A root family is ready to revisit. Spacing is how roots hold.';
+      if (!(state?.meadow?.met)) return 'Twelve words, picked just for you. Some come inside real CAT sentences.';
+      return `You know ${state.meadow.known + (state.pond?.known ?? 0) + (state.thicket?.known ?? 0)} words now. Let us grow a few more.`;
+    }
+    const mods = { mochi: ['ps', 'pc'], ginger: ['pj', 'sp'], mallow: ['ooo'] }[petId] ?? [];
+    const mine = sessions.filter((s) => mods.includes(s?.module) && s.score?.total).sort((a, b) => String(b.finished_at).localeCompare(String(a.finished_at)));
+    const lastRun = mine[0];
+    if (!lastRun) return `We start gentle: ${next?.label ?? 'the first set'}, ${mins}.`;
+    const { correct = 0, total = 0 } = lastRun.score;
+    if (next?.kind === 'retry') return `Last time you got ${correct} of ${total}. I saved the ones that got away.`;
+    if (total && correct / total >= 0.8) return `Last time you got ${correct} of ${total}. You are ready for something harder!`;
+    return `Last time you got ${correct} of ${total}. This set practises exactly that.`;
+  } catch { return ''; }
 }
 
 /** The "More with {pet}" list: the pet's places and side shelves. */

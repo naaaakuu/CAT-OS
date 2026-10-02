@@ -4,7 +4,9 @@
 > **shipped** (works today) / **building** (in progress) / **designed** (docs only).
 > Update this file with every milestone. Stale status is a bug (Rule 1).
 
-_Last updated: 2026-10-02 — 3.0.0, the pet village. One painted village replaces the canvas village. Six pets live in it, one per VARC subject (Toffee, Chai, Matcha, Mochi, Ginger, Mallow). Their moods, the gift ring, friendship, nine treasures, daily wishes, Toffee's flame and letters are all derived from learning records; the one new record kind is `village-treasure`. The painting itself moves: 36 pieces of it, cut out pre-feathered. Every other screen is hosted by its pet. The canvas village, its art and its economy are deleted. App version 3.0.0._
+_Last updated: 2026-10-03: 3.1.0, the helping village. One loop: help a friend (finish any round), earn 1 to 4 stars, and the village level rises and decorates the map. The gift ring, gift types, satchel, treasure recipes, wishes and letters are retired; today's three friends (a "!" each, a 5-star gift for all three) and Toffee's fire carry the daily rhythm. Each friend has a trouble told in five heart chapters that decorate their home, a best friend, a gait on its own two feet, chores with props, greetings and a voice, and lines built from the learner's own answers. A composed theme plays everywhere, always on. Place screens show all their content. No em dashes in anything a learner reads. App version 3.1.0._
+
+_3.0.0, the pet village. One painted village replaces the canvas village. Six pets live in it, one per VARC subject (Toffee, Chai, Matcha, Mochi, Ginger, Mallow). Their moods, the gift ring, friendship, nine treasures, daily wishes, Toffee's flame and letters are all derived from learning records; the one new record kind is `village-treasure`. The painting itself moves: 36 pieces of it, cut out pre-feathered. Every other screen is hosted by its pet. The canvas village, its art and its economy are deleted. App version 3.0.0._
 
 _2.2.0 — one art pack. Every picture in the village is a sprite from the "Cute Nature" pack (`assets/art/`); the hand-drawn canvas art — people, animals, the river, the effects, the glyph icons — is deleted. The Hearth and the Reading House are the pack's houses; the Word Garden, the Root Workshop, the Loom and the Market are open-air yards built from its props; Wick is the pack's cat; the interface follows the pack's studio design. No content changed. App version 2.2.0._
 
@@ -13,6 +15,17 @@ _2.1.4 — the screens no gate could see. The Gauntlet's question had been rende
 _2.1.3 — the interruption pass. Every engine now carries a run across a refresh: Para Jumbles, Para Summary, Odd One Out and Word DNA joined the reading run and the banks, a draft cannot claim a mark, and a draft counts time on task, so a set left overnight is no longer recorded as an eight-hour set that failed its pace. A settled skill that goes quiet comes back to the curator once. Callouts for buildings out of view pin to the edge of the frame instead of vanishing. One new gate (§30) drives all of it in a real browser. App version 2.1.3._
 
 _2.1.2 — the polish, reliability and systems-hardening pass. Dark mode is a designed theme rather than an inverted light one (78 rendered-contrast failures → 0). The service worker installs in resumable batches and promotes transactionally, so a failed upgrade costs nothing and a content bump no longer deletes a 435-file library. The cold open is 55 modules, not 153. A tree was standing in the river; the map is validated as data now and as a running scene. The ledgers that had been counting for two releases speak to a learner in four places. Nobody had ever pressed Tab. 90+ defects found and fixed, each reproduced in a real browser. Six new gates (§23, §23b, §24, §26, §27, §28). App version 2.1.2._
+
+## What changed in 3.1.0 (the helping village)
+
+| Area | State | Notes |
+|---|---|---|
+| **The loop** | **shipped (3.1.0)** | Stars per round (1 to 3, plus 1 flawless), village levels with nine decorations, hearts with home decorations, today's three and the daily gift, Toffee's fire with spare logs. Derived in `src/pets/economy.js` |
+| **The home screen** | **shipped (3.1.0)** | Top bar (fire, level and stars, friends, cottage), the big Help button, today's faces, level-up and gift celebrations, Toffee's four-line welcome, greetings, the welcome back |
+| **The friends** | **shipped (3.1.0)** | 384 px sheets, feet that step (`petRig`), six gaits, chores with props and particles, best-friend visits, voices, data-driven "noticed" lines |
+| **Sound** | **shipped (3.1.0)** | A composed 16-bar theme with per-place lead instruments and a focus mix, always on from the first touch |
+| **Places** | **shipped (3.1.0)** | Pages, not pull-up sheets: every passage, tier and field visible |
+| **Known** | open | The theme is synthesized and cannot be heard by the gates; a real listen on a phone is the test. The plaza bunting and home bunting share one look |
 
 ## What changed in 3.0.0 (the pet village)
 

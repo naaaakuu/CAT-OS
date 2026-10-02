@@ -19,7 +19,8 @@ import { registerBank } from './modules/verbal-bank/index.js';
 import { startLibrarySync } from './core/content-loader/library-sync.js';
 import { registerWorld, isWorldRoute } from './world/index.js';
 import { syncStage } from './world/stage.js';
-import { silenceWorld } from './world/audio.js';
+import { silenceWorld, unlock as unlockWorldAudio, startMusic } from './world/audio.js';
+import { hourWord } from './world/engine/palette.js';
 import { initFeedback, installGlobalFeedback } from './core/engagement/feedback.js';
 import { loadTheme, applyTheme, loadReadingSize, applyReadingSize, applyMotion } from './shell/prefs.js';
 import './ui/components/cat-nav.js';
@@ -46,7 +47,7 @@ window.addEventListener('unhandledrejection', (e) => {
 /* Storage + theme                                                    */
 /* ------------------------------------------------------------------ */
 
-const APP_VERSION = '3.0.1'; // keep in step with CHANGELOG.md
+const APP_VERSION = '3.1.0'; // keep in step with CHANGELOG.md
 
 const storage = new IndexedDBAdapter();
 
@@ -176,6 +177,28 @@ async function boot() {
   };
   applyImmersiveChrome();
   window.addEventListener('hashchange', applyImmersiveChrome);
+
+  /* The village song plays everywhere, from the first touch, until the
+     learner turns it off. Each place has its own lead instrument; a timed
+     reading set gets the quiet focus mix, so the tune keeps you company
+     without talking over the passage. The song never restarts between
+     screens: startMusic only retunes it. */
+  const sceneFor = (h) => {
+    if (/^#\/(rc|pj|ps|ooo|wd|bank)\/session\//.test(h) || h === '#/rc/second-look') return 'focus';
+    if (h.startsWith('#/round/')) return h.split('/')[2] || 'meadow';
+    if (h.startsWith('#/garden')) return 'rootwood';
+    return h.match(/^#\/world\/place\/([\w-]+)/)?.[1] ?? 'world';
+  };
+  const retune = () => startMusic(sceneFor(location.hash), { hour: hourWord(new Date()) });
+  const firstTouch = () => {
+    window.removeEventListener('pointerdown', firstTouch, true);
+    window.removeEventListener('keydown', firstTouch, true);
+    retune();
+    unlockWorldAudio();
+  };
+  window.addEventListener('pointerdown', firstTouch, true);
+  window.addEventListener('keydown', firstTouch, true);
+  window.addEventListener('hashchange', retune);
 
   /* The stage is a painted canvas, so it cannot follow a CSS variable:
      switching to dark has to repaint the valley at night. Both the

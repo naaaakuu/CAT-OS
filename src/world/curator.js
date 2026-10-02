@@ -239,7 +239,7 @@ function whyNew(item, stage, weakness) {
     const line = weaknessLine(weakness.weakest);
     if (line) return line;
   }
-  const s = { foundation: 'Gentle and concrete — the reading habit first.', developing: 'One clean argument, followed end to end.', intermediate: 'Two ideas in tension. Hold both.', advanced: 'Dense, and it does not repeat itself.', elite: 'CAT at its hardest. Take the time it asks for.' };
+  const s = { foundation: 'Gentle and concrete: the reading habit first.', developing: 'One clean argument, followed end to end.', intermediate: 'Two ideas in tension. Hold both.', advanced: 'Dense, and it does not repeat itself.', elite: 'CAT at its hardest. Take the time it asks for.' };
   return s[item.stage ?? stage] ?? '';
 }
 
@@ -406,7 +406,7 @@ function roundVoice(region, counts, source) {
     : '';
   if (counts.due >= 7) return { title: 'Words that are fading', line: `These were yours once. ${Place} is asking for them back before they go.${inContext}` };
   if (counts.due >= 3) return { title: 'A mixed handful', line: `Some due for review, some you have never met. This is how ${place} keeps what it grows.${inContext}` };
-  if (counts.new >= 6) return { title: source?.name ? `New words${source.groupLabel ? ` · ${source.groupLabel}` : ''}` : 'New words', line: `Words you have not met. Answer from what you know — the misses teach you the rest.${inContext}` };
+  if (counts.new >= 6) return { title: source?.name ? `New words${source.groupLabel ? ` · ${source.groupLabel}` : ''}` : 'New words', line: `Words you have not met. Answer from what you know: the misses teach you the rest.${inContext}` };
   return { title: 'A handful from ' + place, line: `Twelve to work through.${inContext}` };
 }
 
@@ -570,7 +570,7 @@ export function secondLookLine(missed, weakness) {
   const n = missed.length;
   const passages = new Set(missed.map((m) => m.passage_id)).size;
   if (weakness?.weakest) {
-    return `${n} question${n === 1 ? '' : 's'} got away, from ${passages} passage${passages === 1 ? '' : 's'} — several of them about ${typeName(weakness.weakest)}.`;
+    return `${n} question${n === 1 ? '' : 's'} got away, from ${passages} passage${passages === 1 ? '' : 's'}several of them about ${typeName(weakness.weakest)}.`;
   }
   return `${n} question${n === 1 ? '' : 's'} got away, from ${passages} passage${passages === 1 ? '' : 's'}. The traps are the lesson.`;
 }

@@ -15,7 +15,7 @@
  *         #/round/:region/:field     one named field (the shelves)
  */
 
-import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable } from '../state.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine } from '../state.js';
 import { loadField, loadLedger, pickRound, LexRound, saveRound, TARGET_MS, ROUND_SIZE, listFields, loadContext } from '../lexicon.js';
 import { composeRound } from '../curator.js';
 import { newlyFinished } from '../collections.js';
@@ -200,7 +200,7 @@ export async function renderRound(outlet, { storage }, params) {
           // Even a right answer teaches: the meaning is confirmed, briefly.
           fb.innerHTML = combo >= 5
             ? `<b>${combo} in a row.</b>`
-            : q.kind === 'meaning' || q.kind === 'loan' ? '' : `<span class="muted">${escapeHTML(e2.word ?? '')}${e2.meaning ? ` — ${escapeHTML(trim(e2.meaning, 70))}` : ''}</span>`;
+            : q.kind === 'meaning' || q.kind === 'loan' ? '' : `<span class="muted">${escapeHTML(e2.word ?? '')}${e2.meaning ? `${escapeHTML(trim(e2.meaning, 70))}` : ''}</span>`;
         } else {
           play('wrong');
           body.querySelector('#card')?.classList.add('is-wrong');
@@ -208,7 +208,7 @@ export async function renderRound(outlet, { storage }, params) {
           fb.innerHTML = q.kind === 'context'
             ? `Here it means <b>${escapeHTML(trim(q.context?.meaning ?? '', 90))}</b>.`
             : q.kind === 'twin' || q.kind === 'twin-meaning'
-            ? `<b>${escapeHTML(right)}</b> — ${escapeHTML(e2.explanation ?? '')}`
+            ? `<b>${escapeHTML(right)}</b>…${escapeHTML(e2.explanation ?? '')}`
             : q.kind === 'reverse' ? `The word is <b>${escapeHTML(right)}</b>. ${escapeHTML(trim(e2.meaning ?? '', 80))}`
               : `<b>${escapeHTML(e2.word ?? '')}</b>: ${escapeHTML(e2.meaning ?? '')}`;
         }
@@ -228,7 +228,6 @@ export async function renderRound(outlet, { storage }, params) {
       let after = null;
       try { const records = await loadWorldRecords(storage); after = deriveWorldState(before.content, records); } catch { /* facts still show */ }
       const change = after ? petChangeLine(before.state, after) : null;
-      const treasure = after ? newlyAffordable(before.state, after) : null;
       const setsDone = after ? newlyFinished(before.state, after, before.content) : [];
       const misses = round.answers.filter((a) => !a.correct);
       const byId = new Map(round.entries.map((e) => [e.id, e]));
@@ -251,8 +250,7 @@ export async function renderRound(outlet, { storage }, params) {
           { label: 'Time', value: formatClock(result.record.duration_ms) },
         ],
         pet: 'matcha',
-        ...(change?.pet === 'matcha' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
-        treasure,
+        ...(change?.pet === 'matcha' ? { change } : {}),
         setsDone,
         extraHTML: reviewHTML,
         actions: [

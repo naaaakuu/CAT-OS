@@ -39,7 +39,7 @@ import { toast } from '../../../ui/components/cat-toast.js';
 import { escapeHTML, formatDuration } from '../../../core/utils/format.js';
 import { rcStars } from '../../../world/economy.js';
 import { renderResult, formatClock } from '../../../world/screens/result.js';
-import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable } from '../../../world/state.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine } from '../../../world/state.js';
 import { hostChip } from '../../../pets/sprite.js';
 import { newlyFinished } from '../../../world/collections.js';
 import { play, silenceWorld } from '../../../world/audio.js';
@@ -100,7 +100,7 @@ export async function renderSession(outlet, { storage }, params) {
           <h1 class="brief__title">${escapeHTML(displayTitle(passage))}</h1>
           <p class="brief__line">What it argues is for you to find. Read it the way the exam reads it: once, closely, then answer from the text.</p>
           <div class="brief__facts">
-            <span class="brief__fact">${m.word_count ?? '—'} words</span>
+            <span class="brief__fact">${m.word_count ?? ''} words</span>
             <span class="brief__fact">${passage.questions.length} questions</span>
             <span class="brief__fact">${formatClock(targetMs)} target</span>
             <span class="brief__fact">${escapeHTML(m.difficulty ?? '')}</span>
@@ -205,7 +205,7 @@ export async function renderSession(outlet, { storage }, params) {
           <p class="hint" id="min-left" style="margin:0 0 10px;text-align:right"></p>
           <cat-passage></cat-passage>
           <div class="run__actions">
-            <button class="g-btn g-btn--primary" id="to-questions">I've read it — ${session.total} questions</button>
+            <button class="g-btn g-btn--primary" id="to-questions">I've read it…${session.total} questions</button>
           </div>
         </div>
       </section>`;
@@ -377,8 +377,8 @@ export async function renderSession(outlet, { storage }, params) {
         await saveLesson(storage, lessonRecord(lesson, s, dayKey(new Date())));
       } catch (err) { console.error('[CAT OS] mentor derive failed:', err); }
 
-      let change = null, treasure = null, setsDone = [];
-      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); change = petChangeLine(before.state, after); treasure = newlyAffordable(before.state, after); setsDone = newlyFinished(before.state, after, before.content); } } catch { /* fine */ }
+      let change = null, setsDone = [];
+      try { if (before) { const records = await loadWorldRecords(storage); const after = deriveWorldState(before.content, records); change = petChangeLine(before.state, after); setsDone = newlyFinished(before.state, after, before.content); } } catch { /* fine */ }
 
       const mentorHTML = lesson ? `
         <div class="result__mentor">
@@ -419,8 +419,7 @@ export async function renderSession(outlet, { storage }, params) {
           { label: 'Target', value: formatClock(targetMs) },
         ],
         pet: 'chai',
-        ...(change?.pet === 'chai' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
-        treasure,
+        ...(change?.pet === 'chai' ? { change } : {}),
         setsDone,
         extraHTML: mentorHTML + habitHTML + reviewHTML,
         actions: [

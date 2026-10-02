@@ -86,7 +86,7 @@ export class Router {
     }
     if (!matched) return;
 
-    document.title = matched.title ? `${matched.title} — CAT OS` : 'CAT OS';
+    document.title = matched.title ? `${matched.title}CAT OS` : 'CAT OS';
     // A screen that has to read a passage, fifty root families or the whole
     // record log is not instant, and until it resolves the outlet is empty.
     // Nothing is shown for the first fifth of a second — a fast screen must

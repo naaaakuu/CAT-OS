@@ -10,7 +10,7 @@
 import { regionBySlug } from '../regions.js';
 import { listFields, loadField, loadLedger, buildQuestion, buildContextQuestion, LexRound, applyAnswer, loadContext } from '../lexicon.js';
 import { roundStars } from '../economy.js';
-import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, newlyAffordable, loadWorldContent } from '../state.js';
+import { loadWorld, loadWorldRecords, deriveWorldState, petChangeLine, loadWorldContent } from '../state.js';
 import { petSprite, paintedBackdrop, hostChip, backdropStyle, FRAME } from '../../pets/sprite.js';
 import { newlyFinished } from '../collections.js';
 import { rng } from '../engine/palette.js';
@@ -87,7 +87,7 @@ export async function renderWilds(outlet, { storage }) {
       <div class="place__body">
         <p class="place__eyebrow">${escapeHTML(region.skill)} · week ${escapeHTML(week.slice(-2))} · with Toffee</p>
         <h1 class="place__title">The Gauntlet</h1>
-        <p class="place__line">${GAUNTLET_SIZE} questions — words from the Meadow, the Pond and the Thicket, and nine asked the way CAT asks them, inside a real sentence. The same ${GAUNTLET_SIZE} all week, in ${GAUNTLET_MS / 60000} minutes. No hints, no second tries. Beat your own best.</p>
+        <p class="place__line">${GAUNTLET_SIZE} questions: words from the Meadow, the Pond and the Thicket, and nine asked the way CAT asks them, inside a real sentence. The same ${GAUNTLET_SIZE} all week, in ${GAUNTLET_MS / 60000} minutes. No hints, no second tries. Beat your own best.</p>
         <button class="g-cta g-cta--gold" id="run">Run the Gauntlet<small>${thisWeek.length ? `${thisWeek.length} run${thisWeek.length === 1 ? '' : 's'} this week · best ${weekBest.score?.correct}/${GAUNTLET_SIZE} in ${formatClock(weekBest.duration_ms)}` : 'Your first run this week'}</small><span class="arrow" aria-hidden="true">→</span></button>
         <div class="place__section">
           <h2>Records</h2>
@@ -119,7 +119,7 @@ export async function renderWilds(outlet, { storage }) {
     };
     try { [picks, ledger, before] = await Promise.all([composeGauntlet(week), loadLedger(storage), loadWorld(storage)]); }
     catch (err) { console.error('[CAT OS] the Gauntlet could not be composed', err); refuse(err?.message ?? 'This could not be set up just now. Try again in a moment.'); return; }
-    if (picks.length < 10) { refuse('There are not enough words on this device yet. They arrive in the background — try again in a minute.'); return; }
+    if (picks.length < 10) { refuse('There are not enough words on this device yet. They arrive in the background: try again in a minute.'); return; }
     runGauntlet(outlet, storage, { picks, ledger, before, week });
   };
   outlet.querySelector('#run').addEventListener('click', startRun);
@@ -225,13 +225,12 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
       saved = false;
       toast('This run finished but could not be saved.', 'error');
     }
-    let change = null, treasure = null, setsDone = [];
+    let change = null, setsDone = [];
     try {
       const content = await loadWorldContent();
       const beforeState = deriveWorldState(content, beforeRecords);
       const afterState = deriveWorldState(content, await loadWorldRecords(storage));
       change = petChangeLine(beforeState, afterState);
-      treasure = newlyAffordable(beforeState, afterState);
       setsDone = newlyFinished(beforeState, afterState, before?.content ?? null);
     } catch { /* the run still counts */ }
 
@@ -251,10 +250,9 @@ function runGauntlet(outlet, storage, { picks, ledger, before, week }) {
         { label: 'Per word', value: `${(avgMs / 1000).toFixed(1)}s`, good: avgMs < GAUNTLET_MS / total },
       ],
       pet: 'toffee',
-      ...(change?.pet === 'toffee' ? { gifts: change.gifts, doubled: change.doubled, heart: change.heart, hearts: change.hearts } : {}),
+      ...(change?.pet === 'toffee' ? { change } : {}),
       // Nothing was kept, so nothing is handed over.
-      ...(saved ? {} : { gifts: {} }),
-      treasure,
+      ...(saved ? {} : { change: { pet: 'toffee', earned: 0 } }),
       setsDone,
       extraHTML: `<div class="result__facts" style="grid-template-columns:repeat(3,1fr)"><div class="result__fact"><b>${splits.meadow}</b><span>Meadow</span></div><div class="result__fact"><b>${splits.pond}</b><span>Pond</span></div><div class="result__fact"><b>${splits.thicket}</b><span>Thicket</span></div></div>`,
       actions: [
